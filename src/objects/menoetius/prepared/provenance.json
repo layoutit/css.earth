@@ -341,8 +341,8 @@
         },
         {
           "url": "/scenes/menoetius/menoetius-model-surface@2x.webp",
-          "bytes": 59396,
-          "sha256": "1ea5095664ccea7d8317f2a860bd39fbcc13bf34504011f5b09ce1812d866c49",
+          "bytes": 50700,
+          "sha256": "c72bce07fedf78a1340c1964abeec5e96635ba020a39c4a06aa9530563f72c7e",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +418,7 @@
   },
   "lastPreparation": {
     "objectId": "menoetius",
-    "materialSha256": "729006ad4b760242892ef25121ef51b9a6fc52fb44074a8651a6910c86f09980",
+    "materialSha256": "05498e7f9da5d7fd0779cc8a318c0a10e7f21c11bd89629465bca8d58a908f41",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

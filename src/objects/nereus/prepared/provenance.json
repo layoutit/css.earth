@@ -428,8 +428,8 @@
         },
         {
           "url": "/scenes/nereus/nereus-elevation-surface@2x.webp",
-          "bytes": 345500,
-          "sha256": "ed0be9ac090c915c2d001c41b541b3215a11d5008a48d2a8617551dbddbf0d07",
+          "bytes": 316966,
+          "sha256": "33a3fa77f076f11c52771a8ad8e3287d97413f70646519b12238c3579044fff7",
           "verification": "bytes-verified"
         }
       ],
@@ -472,8 +472,8 @@
         },
         {
           "url": "/scenes/nereus/nereus-shape-surface@2x.webp",
-          "bytes": 81956,
-          "sha256": "cd4605ef6e33b13c18e89a2ac4782edd84fafa531e5707056e553ab6f362a250",
+          "bytes": 80332,
+          "sha256": "e268ae3943359f151dd2b30d87450c0f03708429cac709bbbc32e1cadca8019c",
           "verification": "bytes-verified"
         }
       ],
@@ -569,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "nereus",
-    "materialSha256": "c95e92d6c7a2f4c581bb966ff6f31764eec2f60e11c94bb32faf3d013b1aec8c",
+    "materialSha256": "e8fd4d297cb4f5304ea409e00d5d5617a2075642d49b53e45ceb3d992d6959f5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

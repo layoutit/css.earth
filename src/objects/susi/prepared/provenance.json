@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/susi/susi-elevation-surface@2x.webp",
-          "bytes": 314582,
-          "sha256": "bcc18103f7e5972e45794ae96506c6feeeed6a40e24645954b43dc3ca8705e7e",
+          "bytes": 284398,
+          "sha256": "031ced2ab05fe9fc22a40f1496d792a96df76df27b865be421d5d8cfd47546e7",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/susi/susi-shape-surface@2x.webp",
-          "bytes": 67350,
-          "sha256": "c0601d8f2ebf9083ccbf724a4c3a06ca75ee4b806b5faac900fcbe8c04e492fd",
+          "bytes": 63690,
+          "sha256": "a2d945d5ecfa8c41d7caae5b37f4da5964dd729b64ef950b32172bf601f03e3c",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "susi",
-    "materialSha256": "947dd31756dbceab12643e2d581db2e2fa6e46fc90bd17194af418aca7580dc3",
+    "materialSha256": "d3ca4242fd38bfe524781a3e1e49bda6fc72a4bc5355b5f9bde234d2d1a840a0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/betulia/betulia-elevation-surface@2x.webp",
-          "bytes": 406276,
-          "sha256": "af0237ac1cbc856839d2d9918f7ddb5036ad693da496a6a2dcc0d84ed0f28202",
+          "bytes": 347254,
+          "sha256": "5c3e0a519607c9f2e2fd39e6cbb84290a72cf9b72b501d78e7ebff9743230d2c",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/betulia/betulia-shape-surface@2x.webp",
-          "bytes": 76782,
-          "sha256": "72ec2737461d4c04d0d76c871981494977ffb21122197ffebba9fcfa3e379ef5",
+          "bytes": 75396,
+          "sha256": "24250b50bd23393b5411bee51b596ca8a41c90fb4cddaec789973dd317d19dca",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "betulia",
-    "materialSha256": "8b7e05bc8f607601a01bee872b60c1b5d49028b9ddf11e83a90582caa79c07ff",
+    "materialSha256": "34e1f89b0c1c474b767e68ee2ddc54e8e34c3828c9afe93005bcbc03eb59d180",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

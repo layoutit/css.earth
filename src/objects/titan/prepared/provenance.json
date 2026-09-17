@@ -2435,8 +2435,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5317,
-          "sha256": "0e5ec4e4695c508426554b8c0e973481146869e21b414949e59642ca9c2eb0e1",
+          "bytes": 5436,
+          "sha256": "a363dcadea5c1cf05c1006ec80042f0aa4950ed6a73cbe43e6d59b945809514c",
           "verification": "bytes-verified"
         }
       ],
@@ -2635,7 +2635,7 @@
   },
   "lastPreparation": {
     "objectId": "titan",
-    "materialSha256": "1cd3c21f50de3da4a24a7ef0df09d8982fdb3ec621407db80d70c933cee2f340",
+    "materialSha256": "7cc8ec48ccf7b6167917d328407e82b16ed64d62db3252a1c4ed1bdeb74c2ba6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

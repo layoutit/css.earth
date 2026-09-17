@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-surface@2x.webp",
-          "bytes": 413038,
-          "sha256": "e035f7b0fd5c126f82b98e17c4c39798736670a3868a99e0adbab4a13729326e",
+          "bytes": 344562,
+          "sha256": "bf4a778dc81d9ebf78bdfeded211919e23ad97831e484ad9f95ad9ad11e0660e",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
-          "bytes": 81906,
-          "sha256": "a3daa415a38f35e6fc7acdcc4271110b1cb99a56ee1257f5db6649e6a4ee9296",
+          "bytes": 79738,
+          "sha256": "2bd1692eb91daaac17d10f6b25eda9cfb7f59b380aaf4b7060bd456296812b9c",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "metis-9",
-    "materialSha256": "14a169b18d1a969557a335bde8b97a908c7384d1b3259f41f1ada372eec199ed",
+    "materialSha256": "9388102de8994b861e051262ab81271272f25d71cdff7005ce68e3accd505e7d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

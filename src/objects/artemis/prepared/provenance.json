@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/artemis/artemis-elevation-surface@2x.webp",
-          "bytes": 332432,
-          "sha256": "a2563958b9640d36602d273c231136a78dfab0e3adda99b668b785d46d2a14dd",
+          "bytes": 303834,
+          "sha256": "cebfa8d461579b53a88d22f19cc41301df243684d5b5f6c32d77966b073ab6af",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/artemis/artemis-shape-surface@2x.webp",
-          "bytes": 75938,
-          "sha256": "5bf5573f0ab07635368dc7c201070c117a1039e0c1488f2358fdd43ead5fe09e",
+          "bytes": 74384,
+          "sha256": "a7ba71b634a83b0f0fc83d40474cabb0b98a1fad2b52c7a62c48d2f56df33fcb",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "artemis",
-    "materialSha256": "f9885e79e6c88002235a5fff5c867f898c25afa893c3652512c38e015683bd9f",
+    "materialSha256": "b5fe54f527317a7a84f0799ec57f6ee5ba22ebe1917366d74b7e9b82e2c2ee59",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-surface@2x.webp",
-          "bytes": 310722,
-          "sha256": "34f569d42104131e146d02b8dd44c821c123d2490d4cac3b682e36238c6ec8d7",
+          "bytes": 273548,
+          "sha256": "8ee71c3f555d0b9078dbbebe0a9845f36db9238dc70d0a3d507f33f9fd305725",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
-          "bytes": 63648,
-          "sha256": "bc5a612f41d18b0622f1d03d52baf52b3d8761174cd213e1fe2c2d4d6009399e",
+          "bytes": 63774,
+          "sha256": "4c2de629ebb9df73c1dfc28ba7b1ff305c9379d96ab7decf9d2b2763d58bd0b3",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-qw16",
-    "materialSha256": "95b58dae702382c77e2439e59c853d67ed278a69ac922c36a79d06a270e72d6b",
+    "materialSha256": "fe2fa23879131316262d9269908692d9e62d912c5c22638391db6d9caff32071",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

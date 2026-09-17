@@ -46,7 +46,7 @@ import { gzipSync } from 'node:zlib';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
-import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
+import { buildSeamBleedPolygonEdges, computeSolidTrianglePlan, SOLID_TRIANGLE_BLEED, SOLID_TRIANGLE_CANONICAL_SIZE, BASE_TILE } from '@layoutit/polycss';
 import { loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, closestTrianglePoint } from './obj-shape.mts';
 import { createSourceSurfacePainter } from './scientific-raster.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
@@ -142,7 +142,7 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     if (topology.components !== 1 || topology.eulerCharacteristic !== 2) throw new Error('Estimated completion must close one nucleus.');
     completion = { ...completed.report, sourceFit, topology };
   }
-  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config), profile.interiorSlices ? 0 : SOLID_TRIANGLE_BLEED * BASE_TILE);
+  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config));
   const leaves = layout.plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
@@ -433,6 +433,11 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       const denominator = aa * bb - abac * abac;
       const rectWidth = rect.width * scale, rectHeight = rect.height * scale;
       const [n0, n1, n2] = face.vertexNormals;
+      // The leaf clips its rectangle to the triangle it draws, base along the bottom and apex at the top centre, seam overlap included.
+      // A texel is drawn only inside it or within the few texels filtering reads across an edge; texels farther out are not sampled,
+      // and each takes the nearest sampled texel in its row. Distances are in leaf pixels, one texel each at scale 1.
+      const W = geometry.leafWidth, H = geometry.leafHeight, slant = Math.hypot(W / 2, H), marginPixels = UNDRAWN_MARGIN_TEXELS * Math.max(W / rectWidth, H / rectHeight);
+      const undrawn = new Uint8Array(rectWidth * rectHeight);
       for (let py = 0; py < rectHeight; py++) for (let px = 0; px < rectWidth; px++) {
         const x = (px + .5) * geometry.leafWidth / rectWidth, y = (py + .5) * geometry.leafHeight / rectHeight;
         const w = m[3] * x + m[7] * y + m[15];
@@ -441,6 +446,9 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const ap0 = point[0] - a[0], ap1 = point[1] - a[1], ap2 = point[2] - a[2];
         const apab = 0 + ap0 * ab[0] + ap1 * ab[1] + ap2 * ab[2], apac = 0 + ap0 * ac[0] + ap1 * ac[1] + ap2 * ac[2];
         const u = (apab * bb - apac * abac) / denominator, v = (apac * aa - apab * abac) / denominator;
+        // Outward distance past the left edge (0, H)–(W/2, 0) and the right edge (W/2, 0)–(W, H).
+        const beyond = Math.max((H * (W / 2 - x) - (W / 2) * y) / slant, (H * (x - W / 2) - (W / 2) * y) / slant);
+        if (beyond > marginPixels) { undrawn[py * rectWidth + px] = 1; continue; }
         // PolyCSS's native u primitive owns triangle coverage. Fill its entire
         // raster so antialiasing never samples a transparent triangle edge.
         const nx = n0[0] * (1 - u - v) + n1[0] * u + n2[0] * v, ny = n0[1] * (1 - u - v) + n1[1] * u + n2[1] * v, nz = n0[2] * (1 - u - v) + n1[2] * u + n2[2] * v;
@@ -554,6 +562,12 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         }
         flood[offset + 3] = shadow[offset + 3] = 255;
       }
+      fillUndrawnTexels(undrawn, rectWidth, rectHeight, (py, from, to) => {
+        const row = (rect.y * scale + py) * width + rect.x * scale, target = (row + to) * 4, source = (row + from) * 4;
+        flood.copyWithin(target, source, source + 4); shadow.copyWithin(target, source, source + 4);
+        if (scalarSources) scalarSources.copyWithin(target, source, source + 4);
+        if (sampleSources) sampleSources[row + to] = sampleSources[row + from];
+      });
     }
     // Scientific colours retain exact palette values; the numeric source index is preparation-only.
     // Photographs keep full chroma detail through sharp's smart subsampling.
@@ -644,6 +658,26 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   return surfaces;
 }
 
+/** Texels beyond a triangle that are still sampled: bilinear filtering reads one across an edge, and the second keeps a minified
+ * edge from averaging in a copied colour. */
+const UNDRAWN_MARGIN_TEXELS = 2;
+
+/** Give each unsampled texel of a rectangle the nearest sampled texel in its row, the left one on a tie. */
+export function fillUndrawnTexels(undrawn: Uint8Array, width: number, height: number, copy: (row: number, from: number, to: number) => void) {
+  for (let y = 0; y < height; y++) {
+    const row = y * width;
+    let left = -1;
+    for (let x = 0; x < width; x++) {
+      if (!undrawn[row + x]) { left = x; continue; }
+      let right = x + 1;
+      while (right < width && undrawn[row + right]) right++;
+      if (left < 0 && right >= width) throw new Error('A raster atlas row has no sampled texel.');
+      for (let fill = x; fill < right; fill++) copy(y, left >= 0 && (right >= width || fill - left <= right - fill) ? left : right, fill);
+      x = right - 1;
+    }
+  }
+}
+
 /** The atlas pixel step every lens can scale to: a lens prepared at an eighth of the atlas needs rectangles in multiples of eight. */
 function textureQuantum(config: {raster?: unknown}) {
   const raster = config.raster === undefined ? {} : requireRecord(config.raster);
@@ -659,13 +693,24 @@ function textureQuantum(config: {raster?: unknown}) {
  * the top centre. Sizing the height by the apex's distance from the base midpoint keeps each texel within the square root of two of the
  * nominal density even for a thin, sheared face; the base is the edge that needs the fewest texels. The packed atlas, gaps included,
  * holds at most the body's budget of texels per face. */
-/** `seamBleed` overlaps each triangle outward in CSS units to hide hairline cracks; a body with interior slices fills them instead and overlaps nothing. */
-export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number, seamBleed = SOLID_TRIANGLE_BLEED * BASE_TILE) {
+/** Seam repair as PolyCSS prepares a solid mesh: an edge shared with a neighbouring face overlaps it by the default seam bleed, and a
+ * face with no shared edge by the solid-triangle bleed, both in CSS pixels; interior slices fill whatever cracks remain
+ * (tools/prepared-interior-slices.mts). */
+/** Measured on Alphonsina, Ida, Itokawa, Mathilde, Achlys, Amalthea and comet 1P (DPR 2, five poses, both zooms): twelve CSS pixels
+ * closes the cracks at every zoom, leaving at most 24 open crack pixels at maximum zoom against 16,708 without it, and costs no
+ * surface detail (Itokawa's mean surface detail 1.572 without overlap, 1.669 with it). */
+export const RADIAL_SEAM_REPAIR = { sharedEdgeAmount: 12, fallbackAmount: SOLID_TRIANGLE_BLEED } as const;
+
+export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number) {
   if (!Number.isSafeInteger(texelsPerFace) || texelsPerFace < 16 || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
+  const polygons = faces.map(face => ({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }));
+  const seamEdges = buildSeamBleedPolygonEdges(polygons, { tileSize: BASE_TILE, layerElevation: BASE_TILE });
   const triangles = faces.map((face, index) => {
-    const plan = computeSolidTrianglePlan({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }, index,
+    const shared = seamEdges.get(index);
+    const plan = computeSolidTrianglePlan(polygons[index], index,
       // The core planner takes CSS units, including its seam overlap.
-      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed },
+      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1,
+        seamBleed: shared?.size ? RADIAL_SEAM_REPAIR.sharedEdgeAmount : RADIAL_SEAM_REPAIR.fallbackAmount, ...(shared ? { seamEdges: shared } : {}) },
       { primitive: 'corner-bevel', includeColor: false, matrixDecimals: 9 });
     if (!plan) throw new Error(`Radial face ${index} failed PolyCSS triangle preparation.`);
     // The planner's canonical leaf maps its bottom corners and top centre to the overlapped triangle.

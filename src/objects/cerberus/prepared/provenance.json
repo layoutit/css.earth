@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/cerberus/cerberus-elevation-surface@2x.webp",
-          "bytes": 294872,
-          "sha256": "9f9b281cecd8b12e32d98df10d9523ce157c27d2a50a649f31335178e55fa3ea",
+          "bytes": 269156,
+          "sha256": "0522ca927dc06d967b528bbc371213f08f5edc1647fcc594bc76037d256b741b",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/cerberus/cerberus-shape-surface@2x.webp",
-          "bytes": 63732,
-          "sha256": "df5a1283ba5ca8a21b7cc6c8fd8ce5760a19f362d9748d829b95f7704e7a7bf4",
+          "bytes": 61838,
+          "sha256": "38294e21650376aea85a16056b948d790d59565b45aaa79d6427bd25552b85e5",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "cerberus",
-    "materialSha256": "3f2c3b7e1ccfbbf5b6981bcfc0dee2014623ad57cc5f2ab31032d9e4ff126c0d",
+    "materialSha256": "414004f7e169202669a71a6c237aeed3319e7958029f705800408b02755f3530",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

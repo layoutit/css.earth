@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/kalliope/kalliope-elevation-surface@2x.webp",
-          "bytes": 379336,
-          "sha256": "808b1415f46450c01926e2b5bab2162fe7ddcc1c6eaf5a535acb09923d4b69ba",
+          "bytes": 326934,
+          "sha256": "845a3113c8216c604d81652cf1d6572044dd8bfdebb7331946bf353de7addde6",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
-          "bytes": 81588,
-          "sha256": "812db71ac203ebb4a3d31b7a408cc8c471d25053af9eef6ff411873c78aa7a9e",
+          "bytes": 81766,
+          "sha256": "6a044c6ecab8e239297e549529e0d7c587c4b216352fa1a8a54a6451c4d715e3",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "f619539a7d0b2e560c70e9d6982df8a508f13e9bd2a1f33083f9c1a31b190c4c",
+    "materialSha256": "f9aabc0b2a815a5263c0583a417b2180cfd791ede25939fe2275b9bc44420676",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

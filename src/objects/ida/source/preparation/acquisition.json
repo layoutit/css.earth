@@ -209,6 +209,102 @@
       ],
       "path": "features/IDA_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IDA_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/0202561352rcal_ir8.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/0202561352rcal_ir8.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.xml",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/i1352.fit",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/i1352.lbl",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.lbl",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/0202561313rcal_vio.fit",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/0202561313rcal_vio.xml",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.xml",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/i1313.fit",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.fit",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/i1313.lbl",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.lbl",
+      "headers": {
+        "User-Agent": "curl/8.7.1"
+      }
     }
   ]
 }

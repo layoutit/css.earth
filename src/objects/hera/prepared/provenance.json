@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/hera/hera-elevation-surface@2x.webp",
-          "bytes": 309482,
-          "sha256": "b67186468862ec84e6066b428ba9d71d6527cf4e95e418d5ae5be5c349b954be",
+          "bytes": 282724,
+          "sha256": "0535015539495848b05bfce5b23b03f3e7a41da4a5039aae1a7ada226583a053",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/hera/hera-shape-surface@2x.webp",
-          "bytes": 70808,
-          "sha256": "ab92665aaa1844ab2ca2921c7eace47b162a8cf43e53fa4883f6469557eb2ca5",
+          "bytes": 71086,
+          "sha256": "48413d564c2b8cd64a3921038326c99e115ecd6d4d644de57b365f59dc1df053",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hera",
-    "materialSha256": "2ddd06e6c5ae417630f95bd833d59fbc72cb73d8790f3fb9b1595c67f5400a5b",
+    "materialSha256": "2a32dd83e34827ce01c373dc986ccfcf608059e6905c61ae51538ba3b5c92d1a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

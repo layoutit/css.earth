@@ -420,8 +420,8 @@
         },
         {
           "url": "/scenes/apophis/apophis-elevation-surface@2x.webp",
-          "bytes": 445286,
-          "sha256": "ffa9f16b4a7ba6138e8f6603b995c66e9f241d264031bdd8a8a65a434d5950fd",
+          "bytes": 378888,
+          "sha256": "a7710ad2c6b96cf0e32cb311d677120cb224248d074dfe5aa1c188161aa6c227",
           "verification": "bytes-verified"
         }
       ],
@@ -464,8 +464,8 @@
         },
         {
           "url": "/scenes/apophis/apophis-shape-surface@2x.webp",
-          "bytes": 83160,
-          "sha256": "e3d0036ee50575d2a7e506bb149c76e24fe96e7e6f6417343f8f332c8a2ad798",
+          "bytes": 84086,
+          "sha256": "61561f6a480c5ac0a9016c1d730871f9ada7053e3c98bb7e1730b9fa1eeaf559",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +561,7 @@
   },
   "lastPreparation": {
     "objectId": "apophis",
-    "materialSha256": "f6fb02c444a4d94e03677e6aa0ffc15de88e9dd60a27990e4f6bd46ac19f6402",
+    "materialSha256": "cd55864c8360241f526026b8f264c23b92c5e9dc3a17dda54ab3c45cd08b7137",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/silesia/silesia-elevation-surface@2x.webp",
-          "bytes": 314026,
-          "sha256": "d2c190d3c4013e15ddb1e75febab7a30144405bad43e99adf451fe137c756875",
+          "bytes": 286552,
+          "sha256": "55d18e24d4be976ddd6141cc6adfb792d5e324dc28ca05b12b7b4d0399f25344",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/silesia/silesia-shape-surface@2x.webp",
-          "bytes": 71606,
-          "sha256": "62989b31d94ff66ac7620359f1e07a92a4c6fe179873665ae2e8c87a0c6c25d5",
+          "bytes": 70008,
+          "sha256": "1773e4e87f1e437fffd30c29ec2c72af8192544089d1be643a43acc2b8e045ff",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "silesia",
-    "materialSha256": "862f91718d39c3e9bfd7e86d0dd4da32ee5485dbaf3df8acaf7e43f07816e9ce",
+    "materialSha256": "474df8b62cff0b22da0e03036edf41b86ffd0d709dcd637d55f7e6a685368863",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

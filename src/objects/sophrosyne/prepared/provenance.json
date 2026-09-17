@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-elevation-surface@2x.webp",
-          "bytes": 317326,
-          "sha256": "d453f083a3b03a4913581c6e6e529c2a5670148c68157566eefddfde2e4b4930",
+          "bytes": 288606,
+          "sha256": "d5fd1b0fb623648a88808bb681d457b18a6b5629a5afa9357213620b90b1fe0a",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp",
-          "bytes": 73546,
-          "sha256": "0091e20911e1caf90df1c80286f418459bc87cb317db18757ca95b13d52bae91",
+          "bytes": 72866,
+          "sha256": "c2734c5da7bc3f9de7b6c0bb2217b033e5df2e87ab0dca8f8a1a9ed6579be3da",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "sophrosyne",
-    "materialSha256": "7bbb225258e4bc59b5da6943c85347164fbe2b29344ee5c4e703d263171946e2",
+    "materialSha256": "83770e8d498601bcfe7c7cb5db326f9b84b9a58ba412ee25e779728b57dc081b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

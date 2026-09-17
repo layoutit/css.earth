@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/elpis/elpis-elevation-surface@2x.webp",
-          "bytes": 342658,
-          "sha256": "5a29307580c83290f3fce5f2c4084b43bfdea89c2521611bb9ac52472a393edc",
+          "bytes": 313290,
+          "sha256": "b7f49f00c6b5ca8aaecb91ca7a1991bfc03fe1bac229fb1d371965e77824d76a",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/elpis/elpis-shape-surface@2x.webp",
-          "bytes": 74658,
-          "sha256": "89f00bb7b24b30c93d3971666c54e19f3709cfdc574bac934275b8c56caeaea5",
+          "bytes": 74650,
+          "sha256": "bfedece7adcd3ef42c11f0f845f2d3a0cc7aff0b93bd473cc2f2694764c3dd4b",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "elpis",
-    "materialSha256": "c011626d67a60d5be25b667c047235baeabb58cd6b8010952131e015d67a6dd2",
+    "materialSha256": "8f33ba1497c1ca98791dd747b0c788cf98854ec5379461df5629d7d94979b1b7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

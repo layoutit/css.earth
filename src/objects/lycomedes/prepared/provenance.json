@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/lycomedes/lycomedes-elevation-surface@2x.webp",
-          "bytes": 319396,
-          "sha256": "70c0885a3f1264e8ed2061ac05946e868c5dab6b06f9c72fc76e1c16811a0a49",
+          "bytes": 290326,
+          "sha256": "86fb32547709279df231e208d9b8352d20931ddd1955a05ff7b736d9be6ffbc9",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
-          "bytes": 72076,
-          "sha256": "1e2cf3276367a8e704172aec926c2152ca1378a0e94e3418ce69e6d5485c1f82",
+          "bytes": 69812,
+          "sha256": "72e15ca89daa72b0fb50b13084c4f4e32bea2d10c553e7f0828bd685a729d266",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "lycomedes",
-    "materialSha256": "6a39d2731e1abd71e04552bad9f7281da5b65211e701f97500c5ed199d0bc6a3",
+    "materialSha256": "bc10a2edf6190ed4c4157a36ddbe08c6734fb3d64c38cbbca67b41b3e403f580",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

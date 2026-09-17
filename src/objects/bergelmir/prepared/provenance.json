@@ -343,8 +343,8 @@
         },
         {
           "url": "/scenes/bergelmir/bergelmir-model-surface@2x.webp",
-          "bytes": 60674,
-          "sha256": "12efa5d93b5e59674468bb3904bfde3352be29aff1ca04c26fac1e69f9d96530",
+          "bytes": 52396,
+          "sha256": "2f43438388e4b661d4ed808ea9ff404206e08ea560eab23acaf53c4a14707a2b",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "bergelmir",
-    "materialSha256": "b1ba48230eb4d626a1fdf9b6988961931355d503507bf7b21d74779e044cd2cb",
+    "materialSha256": "65195959c8c6a3862ac2b65da125edbfa59b0c16fda6f76995072d1b321105ce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

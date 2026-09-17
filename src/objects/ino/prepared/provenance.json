@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/ino/ino-elevation-surface@2x.webp",
-          "bytes": 353682,
-          "sha256": "dcad846090ce75cac48c93551e8f889ede59dc10e1d4150a128f50a916583695",
+          "bytes": 319148,
+          "sha256": "8d2a9e585f1dfa83c93df8072771d5eae5629afc60c165b28b0c6a111950a173",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/ino/ino-shape-surface@2x.webp",
-          "bytes": 73584,
-          "sha256": "492b1f9fd319b8c61978636afde0c9b60f6ec3a8faac2d588e253b1edf1cc4bd",
+          "bytes": 72340,
+          "sha256": "e5114c1d3151ab034edc2bb3df654435369b75627338c2d22655fc528f71ce5f",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ino",
-    "materialSha256": "6e8e22ac7fcc83696ecd57dc55dea2ebcbc7581fec3a91bb379c4755f2ccd185",
+    "materialSha256": "52fd8826db05270173e039bfeb780bbcb8385e1756c822d894d988ae7464e509",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/philagoria/philagoria-elevation-surface@2x.webp",
-          "bytes": 306364,
-          "sha256": "c8740b0c0c58a2d7fc1dc1a29040aafdb10acf6f35c68a69f25c9cb7adf427fa",
+          "bytes": 272092,
+          "sha256": "67cee29b94b384af85a94dc987288657bc454b61cdc3ec6392e5f0bc7d41fcfc",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
-          "bytes": 68822,
-          "sha256": "85fb4eafc3287135107fd4d8d4f6f07aa1c109b03bb649988d897e17547b51a2",
+          "bytes": 66790,
+          "sha256": "a7b2fe1e9429d00c480688cc057488510362bec4c7cdcaaf0030cc55c2307fcd",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "philagoria",
-    "materialSha256": "2aa5694b818320cf2b6b4b2b7f70643de09fc9e6a89b9404549ab4113cebab69",
+    "materialSha256": "6dc837ee62ea568a282ed39353a5dcdf94258d25966932fdb63cca7b6937a011",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

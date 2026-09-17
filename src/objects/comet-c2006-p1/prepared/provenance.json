@@ -311,8 +311,8 @@
         },
         {
           "url": "/scenes/comet-c2006-p1/comet-c2006-p1-model-surface@2x.webp",
-          "bytes": 56724,
-          "sha256": "9ad3b50ad42ce2f14f053c7f9ad01bca3f779f38db6e87d94c8a7da770d7ac81",
+          "bytes": 48178,
+          "sha256": "5d4f89d3a88fc860196024757a74d34e534d112b8e39b80ad113e46a1bb69f5c",
           "verification": "bytes-verified"
         }
       ],
@@ -358,7 +358,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2006-p1",
-    "materialSha256": "5cf9bd23496fa8f4498d3852a7648864deceb713f11ed099f659d3cd6dde4ade",
+    "materialSha256": "3909ee6d18ab66a50df88843331bc2192c25023cde9c42b031a92812b5670a8c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

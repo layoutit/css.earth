@@ -160,6 +160,8 @@ registerHooks({
 });
 
 original.mkdirSync(traceDirectory, { recursive: true });
+// A worker thread may be terminated before it reads anything; its empty journal is still the record that it ran.
+if (journal) original.writeFileSync(journal, '');
 original.writeFileSync(resolve(traceDirectory, `${recordName}.started`), '');
 process.on('exit', () => {
   const trace: PreparationTrace = { schema: PREPARATION_TRACE_SCHEMA, pid: process.pid, argv: process.argv,

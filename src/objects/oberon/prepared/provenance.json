@@ -1037,8 +1037,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6061,
-          "sha256": "eb1b425453b4c60cb4f63fd2a3eb65626437c69ebb86b97360c2f511688ec8e9",
+          "bytes": 6179,
+          "sha256": "eb39206679f0d3ec28434aadc0ed1df3b5a39f34345ba07683e50b64484492bd",
           "verification": "bytes-verified"
         }
       ],
@@ -1111,7 +1111,7 @@
   },
   "lastPreparation": {
     "objectId": "oberon",
-    "materialSha256": "8084771457edece6b25e9215ce285d4093dd9fb5998e8f429a5d9a4461d30711",
+    "materialSha256": "c86b47f942d467f71f5b3ba2958c51949f73744194e99b1a7830519128275ede",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

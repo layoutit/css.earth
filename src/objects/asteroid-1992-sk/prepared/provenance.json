@@ -421,8 +421,8 @@
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-elevation-surface@2x.webp",
-          "bytes": 346300,
-          "sha256": "bda706635edc974e0a9ec783f3b574bc3a748d7ea8a9d8bd4a458a5fa00cd216",
+          "bytes": 312334,
+          "sha256": "eb83946f85a6392dc5336d285be478d699a53b09d01feea0b70139594c17af56",
           "verification": "bytes-verified"
         }
       ],
@@ -465,8 +465,8 @@
         },
         {
           "url": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
-          "bytes": 81338,
-          "sha256": "f6c82689a7d35da5cf9b19c9162c0ecaec4016953a24f9b0da2b01174b8fdd0f",
+          "bytes": 82504,
+          "sha256": "15eb92b805841095f5b36bcc0d46854f2aca2f7c2db6c7e103f4a1d4c7eb430a",
           "verification": "bytes-verified"
         }
       ],
@@ -562,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1992-sk",
-    "materialSha256": "2fcc7b8a0bc02f5a19ccd09df66cb17cf2c273cb679f4dab5cc149413e133b39",
+    "materialSha256": "dc5d7a4a4222b44f7361ada33fd0d14973dbf5fd05a13fa60baba073c2d73876",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

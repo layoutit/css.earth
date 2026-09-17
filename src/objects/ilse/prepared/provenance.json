@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/ilse/ilse-elevation-surface@2x.webp",
-          "bytes": 308178,
-          "sha256": "d08c2035bd4c57f4fd31e795ef7d10cd72d4562f2e8e1dcfeb655e667f266274",
+          "bytes": 283136,
+          "sha256": "0611c173fa87c7c71ff94c1cac832b890f927728ddf279c72790402a15dd7857",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/ilse/ilse-shape-surface@2x.webp",
-          "bytes": 71950,
-          "sha256": "b43129564d4d9db60472aaedd033e432ef096c4886f268c63a72b28813298a8b",
+          "bytes": 69878,
+          "sha256": "d273d319fbe92e6d0f45f705e6b2fa4df0449bf203e9d47145bd05f3327f7146",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ilse",
-    "materialSha256": "9a2a2261ee221be43545a8f1a83fff391aa73441b420ebfdf9e2ac438ee822e4",
+    "materialSha256": "dff998e8e5398884e069169250707e35b6e64f2d76bdc98f0baba7751b72a27e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

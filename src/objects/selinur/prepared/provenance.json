@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/selinur/selinur-elevation-surface@2x.webp",
-          "bytes": 355854,
-          "sha256": "606b02f98842a325b003cda05c0e5053df54e7d43846e1ae395b8dea97961f7d",
+          "bytes": 322430,
+          "sha256": "e1149f12f7c606fbe55c3ed8be8e3dd1cc030899def3d3fd82b9acbcc17b5c33",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/selinur/selinur-shape-surface@2x.webp",
-          "bytes": 73876,
-          "sha256": "989da091150147dc3309cf0e34f65f016e9dbb1c1caa172ab3df4436dfe5f8d3",
+          "bytes": 72348,
+          "sha256": "a847dc8a1f720fc3ce80ef1c0b74f8456588058b703bebcf0c328980ef898787",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "selinur",
-    "materialSha256": "ad4b5dd075ff42b8eaed536e58e80661f5027519a561915c8e304e80bd6cce4b",
+    "materialSha256": "474c47437a1d31d07fde2bdcba663c5b6d2ea704f6c5ed0ba1231bd2db645989",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

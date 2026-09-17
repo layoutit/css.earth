@@ -334,8 +334,8 @@
         },
         {
           "url": "/scenes/ymir/ymir-model-surface@2x.webp",
-          "bytes": 65988,
-          "sha256": "e91891768bd22cfdff4bdb0f78df7daefc46ed19513a698054190ec109138387",
+          "bytes": 55536,
+          "sha256": "2fd1f29216932df116ec4e244addd630a8b01fe3e81967f18ec08b3166cfd265",
           "verification": "bytes-verified"
         }
       ],
@@ -411,7 +411,7 @@
   },
   "lastPreparation": {
     "objectId": "ymir",
-    "materialSha256": "67388f2dbf26a564ad104a939072a33f68f6a6bd7285c39eb92c1f4bbcb0ef45",
+    "materialSha256": "d881597b89129ffb29268fb45de8692354b23f7f29f23fcda7d4559dd16e976a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

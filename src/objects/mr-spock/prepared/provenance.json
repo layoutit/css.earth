@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/mr-spock/mr-spock-elevation-surface@2x.webp",
-          "bytes": 312448,
-          "sha256": "cc16c00922fe9768e751bb68c71b9c130182a22c85ed123c093b251cc3a24a94",
+          "bytes": 277412,
+          "sha256": "4febc576eb11319489f2e33fe0b9e4a6f8efa9cf05fac2b2adc7c2adb89d3a45",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/mr-spock/mr-spock-shape-surface@2x.webp",
-          "bytes": 67538,
-          "sha256": "ee3e5945bbe16371219981bfc2e42ee54cb5654f0c06cd7b9f9d02212641092a",
+          "bytes": 63524,
+          "sha256": "96d013c58133710c2ba3d318fd46bf300402162b7e67d8462ca72c43fad6aea2",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "mr-spock",
-    "materialSha256": "53de5302fafd079a837f34528773c681d021b5ee556c49a0dacb476ef7df48bb",
+    "materialSha256": "6acd736ad45b2477d916a869361f88269d83fe6aa2cd9acf88dd7db06a16f856",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

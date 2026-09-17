@@ -338,8 +338,8 @@
         },
         {
           "url": "/scenes/thalassa/thalassa-model-surface@2x.webp",
-          "bytes": 51914,
-          "sha256": "f3642f4fafe20d0c2fa98214d7e6de92e5c21b9d947b1d4e6b0492955330b249",
+          "bytes": 47792,
+          "sha256": "77afed59e26f480ab26d188ed30eb305ba32cabbd89b1cbd3f384cacc3a9357e",
           "verification": "bytes-verified"
         }
       ],
@@ -415,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "thalassa",
-    "materialSha256": "9890468556baf5d84dcc78e82da661a720dc8af23ee9d331842a06d626935a2c",
+    "materialSha256": "08ea4af67cfa248a53cf4837054a2baf4ac2620a491fd5a7b9dc5da4cbfea62d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/diomedes/diomedes-elevation-surface@2x.webp",
-          "bytes": 273352,
-          "sha256": "adfa50316b3573bcc4bbf7fad50fa6be5e9cec63e84aea5176678e6f0dfd5a0d",
+          "bytes": 247764,
+          "sha256": "e806bc0d7d5910dfc284936eddfce323e6cabf3e4b69fc73700ddc1b185d2801",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
-          "bytes": 67976,
-          "sha256": "92d86e4732637613491ea25c338adcbe6614333998ef4fc3801ac82b11901de5",
+          "bytes": 65468,
+          "sha256": "9700c04aaae5aa9664695084a42634c3c389581c2641a132e1bf7b88a8e5e125",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "diomedes",
-    "materialSha256": "fe31eb77842d9a0493bc3f87cf16b6f46be8cc73d7726e3bc58eb2a18e2e5802",
+    "materialSha256": "f68da3a697a12abe75a1203fdd1381f121de9db09a90d6f07ff5f912e7e8bf32",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

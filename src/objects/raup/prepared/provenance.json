@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/raup/raup-elevation-surface@2x.webp",
-          "bytes": 299562,
-          "sha256": "ac952dfa5985326447173295da945119cc63da976e6f775119a8888ba9f6df46",
+          "bytes": 271384,
+          "sha256": "f1e4d3487eb241dfdb6b015a65145e8d780aba8e0b8b08ad10564cedb476a1fb",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/raup/raup-shape-surface@2x.webp",
-          "bytes": 64628,
-          "sha256": "40e401ac6a0e4d15c7ee30547fd85fe84042f40ef2c53441dfb8c063d3c35d01",
+          "bytes": 61908,
+          "sha256": "f2f579a087d10945901cb8ed485eba495d87a7c07a227b72e95a122ef3e7b622",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "raup",
-    "materialSha256": "e0e0c4bcfa9a08e0f86834bba1acda6d0e4000b33035ff64a5a28231de9eaf42",
+    "materialSha256": "26dd48ed7b520d3b41c22c5440d98618ee8eaa47b3ffe0c1d3fb5e2aa2b6f5fd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/dejanira/dejanira-elevation-surface@2x.webp",
-          "bytes": 300194,
-          "sha256": "7b5c938b426fd4cec62efa368ea05f76d3eb27356985281f10cb42f5d831fee7",
+          "bytes": 259664,
+          "sha256": "8dfeaceae687a9af2b166dff0e5e068a9e4e5df6a8aaa96390928eca91c75b9c",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/dejanira/dejanira-shape-surface@2x.webp",
-          "bytes": 69908,
-          "sha256": "b5ef2c63e66843e08dc8d9804a10aee70963d916b9783ff5174212b7f0f5937f",
+          "bytes": 65148,
+          "sha256": "a29d79f155345b0eec7d1bbaacae45381c2e925edd9f68b91d0bc5586ff7348d",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dejanira",
-    "materialSha256": "f0e5431204e0e3b23b6cf43013208dbcbfbfa272c9c23c2384026fb2c0414599",
+    "materialSha256": "f4f064b749475f134ea9bcc58057088e8047977701b612b077181e5c53725647",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

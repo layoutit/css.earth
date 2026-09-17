@@ -343,8 +343,8 @@
         },
         {
           "url": "/scenes/hati/hati-model-surface@2x.webp",
-          "bytes": 63120,
-          "sha256": "fb91db931f9d506084ef392a9b7b0401b66b45e46ce1491b527541897098a264",
+          "bytes": 51784,
+          "sha256": "0917f1747b64ff09b7ee8be30937b35a47fb20d56200b3f102dbd6b1d578b7b3",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "hati",
-    "materialSha256": "2bc747e5688a83c8dc7f4d9ac0cd03d41616dc350c4a4cfd88ad7c162e80b970",
+    "materialSha256": "322babc3e90a9ce8fb0df1fdc729b4db86727bc54068b1b485ee4742e674866c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -351,8 +351,8 @@
         },
         {
           "url": "/scenes/styx/styx-model-surface@2x.webp",
-          "bytes": 59486,
-          "sha256": "c29fe895025fa9cd8609af34e0a9454f31bfd1e613d7c9b05ef6aba0172e0583",
+          "bytes": 54556,
+          "sha256": "7ba9916692cb20d9bbecc44010bb3423805f22c38aa3c7f89fd12f5fd5d6ed81",
           "verification": "bytes-verified"
         }
       ],
@@ -428,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "styx",
-    "materialSha256": "54cb922ecbb812ea32bed45ea5e48517cc09b37eb0480b6987635a1dcc414d3d",
+    "materialSha256": "be0adcf676e955f2930257d6d8657c4fe96b845d3f1728ebebd7906c56acdff5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

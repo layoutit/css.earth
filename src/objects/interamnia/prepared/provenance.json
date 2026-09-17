@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/interamnia/interamnia-elevation-surface@2x.webp",
-          "bytes": 376790,
-          "sha256": "58bcc5be67b91f2366cf6f54129821e7550cd1b90735a366a0ab3cfeb973866e",
+          "bytes": 322976,
+          "sha256": "549d1244070e79d187bec834beac6b518a7c80e318baf8f09b0626ee3087d218",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/interamnia/interamnia-shape-surface@2x.webp",
-          "bytes": 80598,
-          "sha256": "abe1c7104b0e3138509d309cf1c9c3d3a2311232db8badb6e2328a04c42d8356",
+          "bytes": 76958,
+          "sha256": "6d6f688bb1272c211c7ce51326bdb5fbc82f4b371293b565b6dbc7eb7da6f20a",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "interamnia",
-    "materialSha256": "10ef2d0e3e5c3c74e474aface4dc83666631049e073a85aa0cc7358e317b970e",
+    "materialSha256": "e3fe44cea146464ced1398bbefd53c2dc976002944249c2c9f9a768351b406a2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

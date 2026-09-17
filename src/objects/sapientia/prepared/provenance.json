@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/sapientia/sapientia-elevation-surface@2x.webp",
-          "bytes": 368802,
-          "sha256": "ac18dc61c7838ff279f38799eec8f17a00a322eae385358f483044de3f7befff",
+          "bytes": 341816,
+          "sha256": "1b939101906f25456586528239dbce9b4aba1f5fccc4a4b86c2e481a073656ab",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/sapientia/sapientia-shape-surface@2x.webp",
-          "bytes": 72996,
-          "sha256": "b05075ee9bb840068f0dd1fe4f107d1022b72d45f36b1c0209b012ce349cda9c",
+          "bytes": 72990,
+          "sha256": "02c6907e661a7238bab49bc45875b463894c4411cf048c4821ac89057867c9ec",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "sapientia",
-    "materialSha256": "338aeef24da9591c329b7007d8722cd08b7b30794359779540db0b1cfc4556fc",
+    "materialSha256": "c9b56001c895a47f8944f2077db5496997773d9d216f592613c1542347b195bf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

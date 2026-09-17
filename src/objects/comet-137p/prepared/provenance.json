@@ -328,8 +328,8 @@
         },
         {
           "url": "/scenes/comet-137p/comet-137p-model-surface@2x.webp",
-          "bytes": 57284,
-          "sha256": "5487eb75580ed49ea046b6decd7160c0db0abe6af540513b48a8725ae5a5616d",
+          "bytes": 49408,
+          "sha256": "bac363d888d61fb44f922d80269dcc5872112995557cfe4e198b28d04ab0d8e1",
           "verification": "bytes-verified"
         }
       ],
@@ -375,7 +375,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-137p",
-    "materialSha256": "72a83f4ded5b4550c0bf7f1ff5ada45fd0d26582c18733d9e0e4722512a5760c",
+    "materialSha256": "a323eeb073291d47e7e42a739f6c831528ea48a669b753f2480fd38904d3975d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

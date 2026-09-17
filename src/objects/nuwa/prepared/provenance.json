@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/nuwa/nuwa-elevation-surface@2x.webp",
-          "bytes": 346972,
-          "sha256": "93a3774aa2e325b6d3737493fe4a387b12c95963caf45b413d2dc2c0e72e29b7",
+          "bytes": 311714,
+          "sha256": "2c2911ca5db4ee808bdeabcd6531d92db7b4e14028cdfc557e05c0a3785247bc",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/nuwa/nuwa-shape-surface@2x.webp",
-          "bytes": 72256,
-          "sha256": "df7931f59c0c1a1905c505b2503808bffa10b32cc689faef0c805337df897a40",
+          "bytes": 69876,
+          "sha256": "3dfda7cb43b5db2e0d28d8ab3fbefb937aef44493c1fb86877cb5d1b988e46f3",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "nuwa",
-    "materialSha256": "12e58e77fcd5deab1989ed0e634dab1ad6c170f50f565ba3547f856a9ca013c5",
+    "materialSha256": "701c6d918389c2ab783474d35d2ba468c8ba9c802d39d7f2c5fa9fb83c4a124b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

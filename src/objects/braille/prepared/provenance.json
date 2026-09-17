@@ -353,8 +353,8 @@
         },
         {
           "url": "/scenes/braille/braille-model-surface@2x.webp",
-          "bytes": 59192,
-          "sha256": "4b36ac6db2a6e4626e141361d22da52419839d1ebf3ae4bbedd48a4b3b4e46d3",
+          "bytes": 48446,
+          "sha256": "e2d6f90da1bbe53f9ac76c866f80b0d34fb74e1d9702d4cacdd2fc60490c9d38",
           "verification": "bytes-verified"
         }
       ],
@@ -430,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "braille",
-    "materialSha256": "c98bdb02d021dc284b89595e4994175f33487f8387265b0e2a187f078b1c66a3",
+    "materialSha256": "7f1b29f7257b577645a34f42e81f6f597e3a5f0af29d774922cf6472eccc3d22",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/hedda/hedda-elevation-surface@2x.webp",
-          "bytes": 324378,
-          "sha256": "d91acddcf9c80d0674a27afe917417234fbb911211f5f37e72853b80a6a13356",
+          "bytes": 291596,
+          "sha256": "13798030c7fbfe8e81179f6edd0ab801235f2808ef568b81c374c12af60e3f23",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/hedda/hedda-shape-surface@2x.webp",
-          "bytes": 71670,
-          "sha256": "bde244353ad3f9d1c947c97fb44bf442cfd9942c29fa3592f05a988ea06a422a",
+          "bytes": 67232,
+          "sha256": "635f2a7139382ddc0d1cc11e5c16d76cedbcc69c9c1dbd0280405a941d80c38c",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hedda",
-    "materialSha256": "3a9dd413b811303f70c75a308778b5891778bff6246ecdf6acfafe4c27e9c0e2",
+    "materialSha256": "34187cc55ad17359d07fe14bb5243fcc5f69bbc99d6df22980e83c1f8118ebb4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

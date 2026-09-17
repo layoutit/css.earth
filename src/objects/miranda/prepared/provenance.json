@@ -1642,8 +1642,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7230,
-          "sha256": "87babd30a15200dc57979371cc1ed79167e5a752f728da74be972f82d4ae684f",
+          "bytes": 7348,
+          "sha256": "02d29e726e5143b60612f8b7412c62bc75f96854df56db1f7a905f0ce3ddab6f",
           "verification": "bytes-verified"
         }
       ],
@@ -1766,7 +1766,7 @@
   },
   "lastPreparation": {
     "objectId": "miranda",
-    "materialSha256": "9fd8d32a64cfaf9d53b6998ea66a184a208fadd08685d8faea609b54842051c7",
+    "materialSha256": "7e9fada60670dabc4cd54e266e2f42fefb368094a709bc95d4e13f8bded3e427",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

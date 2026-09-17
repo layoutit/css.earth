@@ -389,8 +389,8 @@
         },
         {
           "url": "/scenes/caliban/caliban-model-surface@2x.webp",
-          "bytes": 62030,
-          "sha256": "2f70db5e3390b19edc68cdf7dae25059dab875335d79069428c31ef22f93f577",
+          "bytes": 51516,
+          "sha256": "752b362e932efa100cfa2d8cbcf13ad16350b09358ae831c618f538010f83bba",
           "verification": "bytes-verified"
         }
       ],
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "caliban",
-    "materialSha256": "2467eb10a3915240bc1446e4177ccb2b0a765e7bf91fc4a13a3b96d5df5ac63e",
+    "materialSha256": "0eb82491ed658346cc688d44f7a2f8e15d5330cf858417864e12812a02215ed3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

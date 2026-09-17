@@ -1228,8 +1228,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
-          "bytes": 6427818,
-          "sha256": "7243e1086ec6f9218d15a73cb15e1bd526adcc987367353d05bfdb52ac31a492",
+          "bytes": 6149912,
+          "sha256": "c6a5288cdd9f40e089a099a31e9c07e2ab439a91f8fc92654488dc78a0f913ac",
           "verification": "bytes-verified"
         }
       ],
@@ -1286,8 +1286,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
-          "bytes": 14228778,
-          "sha256": "a68f5d2e0584546ea624c1b5b6eb9d9965fd62364a7184b726b9418adabcc194",
+          "bytes": 13829616,
+          "sha256": "e1564037d7cd51b830a8542cde175c379b99ee8f31228be7ea7ffa212a9fc647",
           "verification": "bytes-verified"
         }
       ],
@@ -1344,8 +1344,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-infrared-surface@2x.webp",
-          "bytes": 266198,
-          "sha256": "a14d6387982f5296a85d6f5276920a84d54793d9d9ae326289dce73a1a1388b8",
+          "bytes": 211782,
+          "sha256": "ec2f3b57dc35fc0f6f6f6fbbf23aa5e92483a8dfc7ae18cd7701c738410c637c",
           "verification": "bytes-verified"
         }
       ],
@@ -1402,8 +1402,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-elevation-surface@2x.webp",
-          "bytes": 3028692,
-          "sha256": "991b1ea81d14c1f34bb38a3391b554cfe404d45eb81983cec1c7a76179c52312",
+          "bytes": 1802764,
+          "sha256": "47c32d751ca9be6c9c0b7d54972e5b42873f3c16c955f368b01a0bd503591af5",
           "verification": "bytes-verified"
         }
       ],
@@ -1455,8 +1455,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-surface@2x.webp",
-          "bytes": 20365772,
-          "sha256": "979c0254cb8bfc3df91f1fe6a545487754b3d82ee3346b555561a6e6abdf97a4",
+          "bytes": 11456172,
+          "sha256": "64b4e6b9cc7d38a5657cdd362e31399919c588574b957eae118902d0e59d980c",
           "verification": "bytes-verified"
         }
       ],
@@ -1507,8 +1507,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-surface@2x.webp",
-          "bytes": 193076,
-          "sha256": "db0b44155d5677dbac91fee26d56f8263c1b9dc6dea32922c4ed764e83775114",
+          "bytes": 159296,
+          "sha256": "e9c031a2e4e77071594d72a93228ec923fbcb75055107dbb1ddf7b49e95f3e53",
           "verification": "bytes-verified"
         }
       ],
@@ -1551,8 +1551,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-shape-surface@2x.webp",
-          "bytes": 134504,
-          "sha256": "852f4b3fdcb8aa01e8de27b6a5cdad2b0b2244ef252caae354348d0a8c268618",
+          "bytes": 131012,
+          "sha256": "39a189bb2e434cba724c4cc5c4c3b2c49fadd66b2869ab2ecff68609939b507d",
           "verification": "bytes-verified"
         }
       ],
@@ -1808,7 +1808,7 @@
   },
   "lastPreparation": {
     "objectId": "rhea",
-    "materialSha256": "22dbf7faa0a8e79cde296b053f7083fd25c2c413b905a199d4feca11c891b5d9",
+    "materialSha256": "ff3975aa8b971697755b6218a5e8b117ddedf04cd95ae7faf8677ccc3ace6559",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -396,8 +396,8 @@
         },
         {
           "url": "/scenes/hektor/hektor-elevation-surface@2x.webp",
-          "bytes": 368372,
-          "sha256": "0a22f138dd9687be2a02037d236563ac734b078b836070e7c311ab954c0299bd",
+          "bytes": 314964,
+          "sha256": "5230c7d83b244bed74d6da66c6f191c4a071409015fc62ea33752cb41e975502",
           "verification": "bytes-verified"
         }
       ],
@@ -440,8 +440,8 @@
         },
         {
           "url": "/scenes/hektor/hektor-shape-surface@2x.webp",
-          "bytes": 70582,
-          "sha256": "dd194f092a67cbffcda3ee1a0517450133cded9e62ca50f8909c804d2fe02caa",
+          "bytes": 67776,
+          "sha256": "9c65761394df8d64103e6924928c94443bff28f7c8a7c042dc7170c1bb506cbb",
           "verification": "bytes-verified"
         }
       ],
@@ -537,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "hektor",
-    "materialSha256": "deeda123c611cf2dffa9d9f42d4500da77124bad2e2c99aa81ad19c04add9e60",
+    "materialSha256": "27e85997ab9740e468f012bba2e3910fd49d8faeb5a5f08dc53c9f882d0d5b9d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

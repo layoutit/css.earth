@@ -343,8 +343,8 @@
         },
         {
           "url": "/scenes/thrymr/thrymr-model-surface@2x.webp",
-          "bytes": 62416,
-          "sha256": "5ab5768b4c22020dcd7cbe15d9b7bd283184d71bc3610aed9938c018efffc802",
+          "bytes": 51362,
+          "sha256": "c4078d8bd4db4aa6df61616ebd99e917cf82280bdc92f8ae7a42509dc6f99254",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "thrymr",
-    "materialSha256": "dbb61d468c8577260c3dd5aa84a56a904345a7109913d4c19df07c398c47fa41",
+    "materialSha256": "0267939636069fa859385ea4f758456966f0a6ff4517ed813615d34781237104",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

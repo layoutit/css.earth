@@ -356,8 +356,8 @@
         },
         {
           "url": "/scenes/himalia/himalia-model-surface@2x.webp",
-          "bytes": 62254,
-          "sha256": "7abd95381ffa7b4c2bfb2a4e393e9295bb4cc019d073d448047addf08c2df6eb",
+          "bytes": 51508,
+          "sha256": "bfd91d814ea2ed168b4d5b9e666931b3aa88cdb93cc80631515044ed0bd7dadd",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "himalia",
-    "materialSha256": "797969af4fecdd7852bf4e3fa7f7666810fb488e54c27bf0335cbd537950f092",
+    "materialSha256": "feed663f05365595741026be17a2679f6c11cfe3b685426193cc4e2de29c4d3e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

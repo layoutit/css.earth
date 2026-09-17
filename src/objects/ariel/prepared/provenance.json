@@ -1281,8 +1281,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4418,
-          "sha256": "10973abd5fdcd9ca49d42023958c72bc212bce6fd912d7041f2d7884c5bb7531",
+          "bytes": 4536,
+          "sha256": "c457014741da26cc44fb3a7bd925777527899b3d02fe5b340ffb4cb5cf54e0a2",
           "verification": "bytes-verified"
         }
       ],
@@ -1380,7 +1380,7 @@
   },
   "lastPreparation": {
     "objectId": "ariel",
-    "materialSha256": "81a8ac95703d87acd34dd3502dcd54822953adadb46d2582e92d9e4662e33f15",
+    "materialSha256": "3483918ef666dafccb547e13a328f3e5a3bdb12a28bf991053b73f9b1f9aed48",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

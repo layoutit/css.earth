@@ -421,8 +421,8 @@
         },
         {
           "url": "/scenes/geographos/geographos-elevation-surface@2x.webp",
-          "bytes": 407516,
-          "sha256": "d4b31aaac9d14c656417327bf54fb53fa38837cf8cfe4715ac062a53e70997c2",
+          "bytes": 354398,
+          "sha256": "eda4be7284556f60fe50bf7f291218ccb7f30792e84e544629a55be7789bae03",
           "verification": "bytes-verified"
         }
       ],
@@ -465,8 +465,8 @@
         },
         {
           "url": "/scenes/geographos/geographos-shape-surface@2x.webp",
-          "bytes": 82842,
-          "sha256": "889678f0c635ea747f4f3725ee1802bbcc5fd1efa3c831628cc9ff6baad3e095",
+          "bytes": 79760,
+          "sha256": "09b886ba3152b80e9a67b4abb667e7f73cc948c7e857417035a2df451533ad98",
           "verification": "bytes-verified"
         }
       ],
@@ -562,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "geographos",
-    "materialSha256": "95cb6af0bfb50875a2c514ef09d632bd1dbdd48373115eb3da6ad93bcedc8109",
+    "materialSha256": "eca68c59f2d7dc887e830fdb9bece98c375c006ee9bdbf1a239567fd0e2c3397",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

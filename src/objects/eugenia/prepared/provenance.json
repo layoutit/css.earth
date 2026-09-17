@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/eugenia/eugenia-elevation-surface@2x.webp",
-          "bytes": 372272,
-          "sha256": "742c45a07fb7a2fbb290639dd74ea42b7e429cd69e14e8dde8704adc50dcc165",
+          "bytes": 314234,
+          "sha256": "464e6b5151f036c23f33a639712a28b180c7fe10168996ad45e59b36259e1af7",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/eugenia/eugenia-shape-surface@2x.webp",
-          "bytes": 79284,
-          "sha256": "2729e608ea6f72995ea317257b6a60ce6cec28a745d820f302a2cd6c02567c12",
+          "bytes": 78276,
+          "sha256": "b501fe99bb60d314aea0546014653651db0f028286cbd832d438a72e2a04cde6",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "eugenia",
-    "materialSha256": "5a276f42e969eeb6dfe752b1465091eb697f83a8685533cc9e286013316b01ad",
+    "materialSha256": "fb2926b7cadb11e783cf5a81d69d52216299f720ad74736a273cd717cf4fa6ce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

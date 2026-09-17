@@ -311,8 +311,8 @@
         },
         {
           "url": "/scenes/comet-153p/comet-153p-model-surface@2x.webp",
-          "bytes": 57142,
-          "sha256": "41fa9c33a0c7742e906ea9c37999268cf34d03e0df261507284e6cf70fb22ecc",
+          "bytes": 48672,
+          "sha256": "946ce41b9f1f76578fcf758ca02dff253ea99db1ffce4f67cbfba6a2201b39c5",
           "verification": "bytes-verified"
         }
       ],
@@ -358,7 +358,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-153p",
-    "materialSha256": "97eb69e1e68276091459b9a32f8e513d9974294cbeb1d7cdf3d2dcc959dfd9d6",
+    "materialSha256": "cbcc2f89d025c8f62da48eb6d3db3ef70e86cc9778b75de0d06c14ccbc92eaac",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

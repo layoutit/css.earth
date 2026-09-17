@@ -396,8 +396,8 @@
         },
         {
           "url": "/scenes/angelina/angelina-elevation-surface@2x.webp",
-          "bytes": 369158,
-          "sha256": "cd3f9bf69fcfa31fcc7912852b493ed559eeac13d190fa93f332ee6575a521a3",
+          "bytes": 306020,
+          "sha256": "d211a1fca12ab57fe449bd2b9c26615102d6ecf7252287a3d46bdfca9498f1b5",
           "verification": "bytes-verified"
         }
       ],
@@ -440,8 +440,8 @@
         },
         {
           "url": "/scenes/angelina/angelina-shape-surface@2x.webp",
-          "bytes": 69372,
-          "sha256": "57a384373aa682cefcaa608d16224c901ca7a57f0e1a7451cbe91dce83b6f574",
+          "bytes": 68198,
+          "sha256": "623838b1d172cc8d700c3aab89e29666b59b062ab3429ed42354df1e07f942f1",
           "verification": "bytes-verified"
         }
       ],
@@ -537,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "angelina",
-    "materialSha256": "f5a05ad39ed163ac427e760af5ec781da310cbff39af5ff8457d3e25dab4765b",
+    "materialSha256": "44bf6e6c3779a21a75b8dc571df3f1448b1f4f7d6e43a037d22202123cbfa19f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

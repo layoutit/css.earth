@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/dido/dido-elevation-surface@2x.webp",
-          "bytes": 324888,
-          "sha256": "d8fb7bac4b054c204f78b3c06c11343f2a9967a8d79aeb3997eabc793f937d8c",
+          "bytes": 291116,
+          "sha256": "ec1c74d64b78f8dc9a9cbb90e9643bcc0ad82d6cff7756a72e6de66da76487a2",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/dido/dido-shape-surface@2x.webp",
-          "bytes": 67830,
-          "sha256": "7f8e34ea167e1fde28a49591b3d38a32fbdc92f4089bb16563d7129c5027d059",
+          "bytes": 66070,
+          "sha256": "6eae5ab35945952fe68d5981efad318facf104b7502e2d9e9292fa6e68776bcf",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dido",
-    "materialSha256": "0ef14d214c5dc66cea975e12687dc2ef92329be934231588ff20e5967988d148",
+    "materialSha256": "02d4baa7eee831371a5447e326759775457e3fd448b2befe3e14e6d0d07f1541",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

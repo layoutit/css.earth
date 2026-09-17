@@ -383,8 +383,8 @@
         },
         {
           "url": "/scenes/chariklo/chariklo-model-surface@2x.webp",
-          "bytes": 58738,
-          "sha256": "adcb2dfc41d2aba6ea7e500b5ad287c205299c90f13fe7b066cdbc63d724ac8c",
+          "bytes": 48852,
+          "sha256": "4e556e89ed2a567546026291df774275a4a8eb1ea56aaefc1ed7d2e420edf7cf",
           "verification": "bytes-verified"
         }
       ],
@@ -460,7 +460,7 @@
   },
   "lastPreparation": {
     "objectId": "chariklo",
-    "materialSha256": "80c46b3993382dc63db988e9527960797c18b6d40aee67373fc075735bbaad8a",
+    "materialSha256": "ec611884b52e5c0bb0b1a861446f556a71a8d4594ffab320756640d0b8539698",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

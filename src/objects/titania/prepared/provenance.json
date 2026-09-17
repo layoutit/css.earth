@@ -1562,8 +1562,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6213,
-          "sha256": "b693d60cdd04bea62b06676e4ea6d1b6a898d520a8b69682837f5f648b1a362b",
+          "bytes": 6331,
+          "sha256": "ae4ab71a86cb1f1f9bbb905a23f460c3207f1f873b67901b8a9c548bb4fb1749",
           "verification": "bytes-verified"
         }
       ],
@@ -1686,7 +1686,7 @@
   },
   "lastPreparation": {
     "objectId": "titania",
-    "materialSha256": "de1c75b2822d3cf84376edf409d28e5fc47635ca12650106fc22e0a777ff0d6c",
+    "materialSha256": "f4ef4453521d14429fc61c4ac39917098e3b355a7292c0eb06d381dd1cc6ebbc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

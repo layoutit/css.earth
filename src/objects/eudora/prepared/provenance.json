@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/eudora/eudora-elevation-surface@2x.webp",
-          "bytes": 327250,
-          "sha256": "e90cc02f74b945043d6ed08f62d3f69d3a7baededf3739e6565335c86f4a8b81",
+          "bytes": 287382,
+          "sha256": "fa29c9fc0cb20ef1ad506f69d9500ba8b0fd469f1d94b75450d41abb15e14189",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/eudora/eudora-shape-surface@2x.webp",
-          "bytes": 68704,
-          "sha256": "b04ddb1655f0d09c9c3e0781c39f98209ac1639c21e4a690b502f5d80961631b",
+          "bytes": 65918,
+          "sha256": "07ab7f30bbaa9b4e8d596b14d729dc0548bb1ce904d04f6d61392aeff1c8d289",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "eudora",
-    "materialSha256": "d28753bd58523926de478c9fd2c70b14e33e1bf51b32d9b080ac41083ea9543c",
+    "materialSha256": "6a6628d18b5654939c5379d2e4f4f0534430f8e8e4bafd7f4cab64a73a0abc0c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

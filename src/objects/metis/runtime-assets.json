@@ -2,19 +2,14 @@
   "schema": "cssmetis-runtime-assets@1",
   "assets": [
     {
-      "filename": "metis-lighting.webp",
-      "bytes": 1050836,
-      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
-    },
-    {
       "filename": "metis-normal-shadow@2x.webp",
-      "bytes": 37580,
-      "sha256": "ed7803ed0c2062ef5d177588c796d6639f0ec0cf29a98a7b39ff86a9bdc66925"
+      "bytes": 34976,
+      "sha256": "a717c72be9b135cff2d1c55ad356b590e213ebfa1d5f91fd732b04f92b985f89"
     },
     {
       "filename": "metis-normal-surface@2x.webp",
-      "bytes": 42172,
-      "sha256": "c534e6a848805b5808bd458cc82bf0769367e0bb1d66aac05c30008cc4ebfac7"
+      "bytes": 38452,
+      "sha256": "ed8afa018d5eb04d76cc422e1442ddd2b9cd4ce2121b9bbaa281a32f7520d021"
     },
     {
       "filename": "metis-normal-thumbnail.webp",

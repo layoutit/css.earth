@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/vera/vera-elevation-surface@2x.webp",
-          "bytes": 290528,
-          "sha256": "1dcee65a797386de669a9fc1fb29ba254b14faf804a8d270b5003136dca7a6a3",
+          "bytes": 266004,
+          "sha256": "2eb82920ea5882ac4242ffb72512a1b2035e3932dcd9c6eb16efc1175f1687d0",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/vera/vera-shape-surface@2x.webp",
-          "bytes": 73366,
-          "sha256": "bcab4aaf7faf5d57d791e92b3775d45493c4ca2b6640b7a8f5eef1ee3ce0e355",
+          "bytes": 71348,
+          "sha256": "d313b838f667e814bfa12c22e39c66eef900be0ef13496fa5386e32558ee2eea",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "vera",
-    "materialSha256": "5ee88dc095e1905c94a8c63f46eec5c5453a9dd959a26ec3199359be90877c45",
+    "materialSha256": "3c8115cd44bebcfebfeaecd5249d39f466ee4c7d9a5e3f49a3b843bd7817e3ab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

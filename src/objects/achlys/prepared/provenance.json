@@ -338,8 +338,8 @@
         },
         {
           "url": "/scenes/achlys/achlys-model-surface@2x.webp",
-          "bytes": 58298,
-          "sha256": "612c7dc5f9455173fb3d390e7c688e12faca09da3fd3dfa8f645c86277b9a8d4",
+          "bytes": 48782,
+          "sha256": "33553134b23e25894932b0bd1b3fb6d8870a07a417315b637b89f80aab508505",
           "verification": "bytes-verified"
         }
       ],
@@ -415,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "achlys",
-    "materialSha256": "b2d2b4da796586426fe80b77b933957f29f7c96f9cfdd961a80b86ba2f4eba8c",
+    "materialSha256": "2a3e20e798a61a36fcb3deb95591773fd30f23a3b8df7f77499013eebb5ffbed",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

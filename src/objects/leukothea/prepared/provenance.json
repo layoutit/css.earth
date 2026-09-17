@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/leukothea/leukothea-elevation-surface@2x.webp",
-          "bytes": 364752,
-          "sha256": "0edac105eae20b571bb93ccd175d2ef9c7783cf4bcc4647e6ea0fa79a76b687b",
+          "bytes": 327720,
+          "sha256": "3db3dd64b53f641489c49cf7a0e80dd6aeea50608ebae5aab43aa38cb6d58b8e",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/leukothea/leukothea-shape-surface@2x.webp",
-          "bytes": 73168,
-          "sha256": "eaf797ce538793e5fbf8e41cb7d283ab8493f0c2e26ede902d018a1eddfe1190",
+          "bytes": 71276,
+          "sha256": "af04c8996c93819c310b4072d1f6d767da3ca7288947e4d2ca72064c2b636bf2",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "leukothea",
-    "materialSha256": "331404e047ef770098660d10930a13cfe461ef612713215b8ee033dabfdc02b8",
+    "materialSha256": "3924e3e0259a257e96f527c8c688f9de9d7a281721ff1eb707208ebfd65c5e9a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -354,8 +354,8 @@
         },
         {
           "url": "/scenes/aegaeon/aegaeon-model-surface@2x.webp",
-          "bytes": 56472,
-          "sha256": "c3970cf9d471f493b4686044800f1ade5afb910ef5da4138923768aef6c40d40",
+          "bytes": 47956,
+          "sha256": "cecb91255f81bad65f8b539a9e4672c8a4730a16f2eef809d0833301d9c0da71",
           "verification": "bytes-verified"
         }
       ],
@@ -431,7 +431,7 @@
   },
   "lastPreparation": {
     "objectId": "aegaeon",
-    "materialSha256": "113bfbc8f4bf335f83f505565b33c6115b9052ffc87b363ce87b0ba2528627af",
+    "materialSha256": "b99758435ca96b9da59cfebc6241b1f84294270f9b675803890a6637f0578c5b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

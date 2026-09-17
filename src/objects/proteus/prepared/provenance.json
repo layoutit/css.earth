@@ -1094,8 +1094,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
-          "bytes": 424140,
-          "sha256": "54ffa8e9b2bdb8e776ba73d7dbde81303627cb1a1109c4ba449669ba73797f8a",
+          "bytes": 363224,
+          "sha256": "4031f53a7517958a315156ec230f3dd5b59665dc6fe17bc332813a5fb4feb566",
           "verification": "bytes-verified"
         }
       ],
@@ -1142,8 +1142,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
-          "bytes": 380924,
-          "sha256": "bef64dca81cd5f9b1192db93f64896e6ee48a0b5da25705495d30a7fceefaa06",
+          "bytes": 305298,
+          "sha256": "57d4b11fa683a2b9bb8ae1bfca3ded89c109ac7f0ab46ea57ca9ffe9ba91a2dd",
           "verification": "bytes-verified"
         }
       ],
@@ -1192,8 +1192,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
-          "bytes": 197018,
-          "sha256": "7f3c2101872f79a50708f8bc99148d15f089adfa74785552c348e826a2692ee3",
+          "bytes": 168486,
+          "sha256": "9b18c35623c9d3fc478b26b244f63edef8f5b51701c06fec7d33442a9da696a8",
           "verification": "bytes-verified"
         }
       ],
@@ -1251,8 +1251,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 21254,
-          "sha256": "ab516df419024abe962134b803dfbaed1d4d141ca7155b295e0f6cc75ac1bbde",
+          "bytes": 17592,
+          "sha256": "12902b68e8df44d7741546c4627f15ca08cd157b32d50cf0267b46f15103675f",
           "verification": "bytes-verified"
         }
       ]
@@ -1276,8 +1276,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 6716,
-          "sha256": "5b733852c439afdb0c424a8377fb8dfbe24ef4dd71ce3ae33334cc6b5059e211",
+          "bytes": 6046,
+          "sha256": "9ce5cb6f9fb459c195766add89195932277496ff1a6ba5bbd0330ad35f797cda",
           "verification": "bytes-verified"
         }
       ]
@@ -1314,7 +1314,7 @@
   },
   "lastPreparation": {
     "objectId": "proteus",
-    "materialSha256": "736319235554b9b3a1bad9a09d96573081f4a989465e7f55a26de4bff74c7610",
+    "materialSha256": "850b87fd036de9339617490a1f6b1b4ab6b98d833a29bc632afbd47c67440e6b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

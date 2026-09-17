@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/toro/toro-elevation-surface@2x.webp",
-          "bytes": 322448,
-          "sha256": "da98b0c81285562270d2913ff2df0fe5f31463a3cc408e46ef61c738697c0289",
+          "bytes": 298710,
+          "sha256": "a72220cc489c5fd0b3083a1455665902638e5ff653ba55c2bebc4e5ab2b7d96e",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/toro/toro-shape-surface@2x.webp",
-          "bytes": 74316,
-          "sha256": "0c00a6bfa4f33f0de75741c5f739fc9f8ea0125918aeaf547dfd34a71045f025",
+          "bytes": 72780,
+          "sha256": "7ce711e1a6531ff72c5cd3e8395a1d3c1fdd25ba4b1fa0f79035e2db54d11c72",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "toro",
-    "materialSha256": "be2b931c8ef9b8fa8116ccd323f138e618a6c38d9d38a3d9c1ad493ddbcb7239",
+    "materialSha256": "a126df44eefc589068448bebdaae2d3e21e77bb787d21351740d40386b77771a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

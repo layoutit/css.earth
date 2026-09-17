@@ -731,8 +731,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
-          "bytes": 146562,
-          "sha256": "302320c4026fc5e1897fcb5df6542dcd861f9c7dda6ecc695a262a721930164c",
+          "bytes": 114606,
+          "sha256": "3592a6fda14d5e862874a9d7dc4f91cad4a9a54733f1850525b0e51edebd811b",
           "verification": "bytes-verified"
         }
       ],
@@ -788,8 +788,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
-          "bytes": 618318,
-          "sha256": "f2318a1118e3aa79bace5383ed2bf59d79a963d5383ca9985ae22e54a2aac554",
+          "bytes": 435354,
+          "sha256": "5875f68a94c0438dee84c3271d770830192b3bdb0792afe0401c53f406aac0ae",
           "verification": "bytes-verified"
         }
       ],
@@ -834,8 +834,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
-          "bytes": 948294,
-          "sha256": "8ffe08e67b5b7aecaa83b49b45da568cf590b202e4b5205ebf444587fd4b8291",
+          "bytes": 743874,
+          "sha256": "701d6dbe11041b1cab2d45b7f93741e31cdc4140df6c1256487ab5efa657a6a0",
           "verification": "bytes-verified"
         }
       ],
@@ -881,8 +881,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
-          "bytes": 279014,
-          "sha256": "ec64f552413be4e47067808cb618e4c0a113e5b589f396ec0a3e2906010095a9",
+          "bytes": 252978,
+          "sha256": "7ecda29fe7dea8717f6c1f8a3316b82d453da10cc9e6f04306ac680e55bd578a",
           "verification": "bytes-verified"
         }
       ],
@@ -965,8 +965,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/lorri.webp",
-          "bytes": 22234,
-          "sha256": "bb303a5979a6c1796ef5e7207a6962b6c7a27406d7ec3f28384c63e194ee2a22",
+          "bytes": 2320,
+          "sha256": "60757f8cc3d27b7b362042a4ca4147bb53cec8430e462237c831dc6d1fbbfd68",
           "verification": "bytes-verified"
         }
       ]
@@ -990,8 +990,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mvic.webp",
-          "bytes": 5890,
-          "sha256": "2b440e9c8eabf263e8de1fc651405776caa3c99bcb20aae4b62d3eb9f1fa1f66",
+          "bytes": 1398,
+          "sha256": "c61ffd844b9d04c477fbe8f17dc1837b03f9c031ac08fa715379d85c127a3787",
           "verification": "bytes-verified"
         }
       ]
@@ -1028,7 +1028,7 @@
   },
   "lastPreparation": {
     "objectId": "arrokoth",
-    "materialSha256": "813a21be105c46fc5a0ece299f0e6f9c55e0f0c5e8f502bb35b49f173b03c4f6",
+    "materialSha256": "45e3f6a55be9610d73bb540d6a4f4356e7112ac1030abe4eb9ff7f374c3df639",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

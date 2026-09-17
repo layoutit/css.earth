@@ -346,8 +346,8 @@
         },
         {
           "url": "/scenes/gonggong/gonggong-model-surface@2x.webp",
-          "bytes": 61932,
-          "sha256": "4e8b680c1f9d21e5ed524de98b20412acfa855ff09cb1a28ed78b5dde5c085a3",
+          "bytes": 50346,
+          "sha256": "d3deacc86cad9b011c3b2da7e52fcacf6e0eba5c9dcf6d6c8efcdbb05ca7fd37",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "gonggong",
-    "materialSha256": "37d752111280e83d77e4fa7ba340cd779404f4488c23890c4018944ae7914956",
+    "materialSha256": "3084211a5f0ba516237693bfdc09dec992cddf772686dd5dfaf953bd9e6a5ba4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

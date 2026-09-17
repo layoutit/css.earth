@@ -421,8 +421,8 @@
         },
         {
           "url": "/scenes/bacchus/bacchus-elevation-surface@2x.webp",
-          "bytes": 238496,
-          "sha256": "676f6a55acaa882c648c38eda6f9694f245c8126ef22100783120ba40201817c",
+          "bytes": 212016,
+          "sha256": "86e1c5b5f64ad57310ac75601a8d57d8b8cee8b276949ec1a454fa9970aef0b1",
           "verification": "bytes-verified"
         }
       ],
@@ -465,8 +465,8 @@
         },
         {
           "url": "/scenes/bacchus/bacchus-shape-surface@2x.webp",
-          "bytes": 61578,
-          "sha256": "e1a941f3b0c764924563ff25705947c3be86e5c1006f41f9e474bc403b16ca48",
+          "bytes": 61534,
+          "sha256": "28d499b97f2d7b731573fa88e98e84891f21c33a18ad0b637df15398c2c07fff",
           "verification": "bytes-verified"
         }
       ],
@@ -562,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "bacchus",
-    "materialSha256": "b250541d809f28583367dbdacfd0ad7f4e988afaec804782426e84b1e652c71d",
+    "materialSha256": "e18ff38ce21b76030537158c8183d519d0df02ff8e75ed2e14b0c544876b0ea0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

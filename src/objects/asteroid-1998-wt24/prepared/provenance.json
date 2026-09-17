@@ -423,8 +423,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-surface@2x.webp",
-          "bytes": 403836,
-          "sha256": "94eb4ed719124280e8a836d26767b03d37a7417d31212298871cac6fd6e5b191",
+          "bytes": 329252,
+          "sha256": "a0d8e461ad6988dd6a4a7ba09dedfa503a20fb4acfe70186611b9c7dd64c3110",
           "verification": "bytes-verified"
         }
       ],
@@ -467,8 +467,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-surface@2x.webp",
-          "bytes": 80054,
-          "sha256": "3404fdb350d7a3156b4a05c8f7cf4c15b6339fd73510a748d46b02cc5e240e80",
+          "bytes": 78472,
+          "sha256": "bd03f6b9f1fa402af12f00eb02af66968a4e528490883568131f6242226b56ae",
           "verification": "bytes-verified"
         }
       ],
@@ -564,7 +564,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-wt24",
-    "materialSha256": "e36578ff6caa6bc4850bb28e723e3559133b26d734df27a471757c0b769330d9",
+    "materialSha256": "c27a0eef3ccaa4cec17a8ef7c8bc4544786f893d696f749b960761cdcfecab71",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

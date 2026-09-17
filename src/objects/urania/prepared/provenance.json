@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/urania/urania-elevation-surface@2x.webp",
-          "bytes": 381226,
-          "sha256": "6ee89c3648228324247dfdd9c80c5fbecac0798130ed92ff5539603fed4df491",
+          "bytes": 320470,
+          "sha256": "5cc7f547a93d9358c77134ea032fc5a6a04c557d5380fbfca479daada608b91b",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/urania/urania-shape-surface@2x.webp",
-          "bytes": 83206,
-          "sha256": "c46b968d0d753f3fd6f0a6d46176a3a75d13dc3aaa4613ea9eb98237a960f88e",
+          "bytes": 81588,
+          "sha256": "bfd79dcac0638049e74cff9e3b0ab04a59951c6528e10012c678310dc6013ac3",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "urania",
-    "materialSha256": "ac507aacb5c3b290cb951643a043ad17fdcb98ef2cecd9237156f94cafdd8f01",
+    "materialSha256": "f871284d997e7f481c5cdf6df50d77b0be5324186d8233d34e4d41a7d5da0338",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

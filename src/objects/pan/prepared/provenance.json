@@ -1772,8 +1772,8 @@
         },
         {
           "url": "/scenes/pan/pan-elevation-surface@2x.webp",
-          "bytes": 608272,
-          "sha256": "1d524196eeb402261082741d58f23e44940ee30cfd3d08bf9cf1607eeabb77b9",
+          "bytes": 492882,
+          "sha256": "54803fbb2a87f075afe2d250828ea6379e336dc908860fa0892364fcf3d70c35",
           "verification": "bytes-verified"
         }
       ],
@@ -1832,8 +1832,8 @@
         },
         {
           "url": "/scenes/pan/pan-normal-surface@2x.webp",
-          "bytes": 388558,
-          "sha256": "a6b6adce96156df56c2e7de7ed42a8245feaf355e9be75186a45b2b902c4229a",
+          "bytes": 313412,
+          "sha256": "e0fde74a2b91f426ef7a46df5bd212cebf1a9a5c560bc5de2300fb85cb5ed745",
           "verification": "bytes-verified"
         }
       ],
@@ -1882,8 +1882,8 @@
         },
         {
           "url": "/scenes/pan/pan-filter-color-surface@2x.webp",
-          "bytes": 406994,
-          "sha256": "9ee2b6b935f7fd2f9e262f05d906c1701c1f0a4bbb2fdf635e063743a221719a",
+          "bytes": 321534,
+          "sha256": "535420be0bf8cf6e8964a29e9338b756c5890b369567c488c46277c762d34ac6",
           "verification": "bytes-verified"
         }
       ],
@@ -1941,8 +1941,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 11748,
-          "sha256": "3da2e449d7f4a29a082d546537f9798d0788e8e977c81e86cf716ea51e354d07",
+          "bytes": 9798,
+          "sha256": "c993750449365d75ac6fa3fd0bc5f1f64405a360580913b114758b4c0fb903e7",
           "verification": "bytes-verified"
         }
       ]
@@ -1966,8 +1966,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 7674,
-          "sha256": "c2ee39d88894de2e51fbdd89018c3b746eaa18e909f5c725dd1cacaa404426d0",
+          "bytes": 6842,
+          "sha256": "9e7154e800a2848e662082e79a9012d4a3c273b8bd0a080d3e1eb87e9f8a2b6e",
           "verification": "bytes-verified"
         }
       ]
@@ -2004,7 +2004,7 @@
   },
   "lastPreparation": {
     "objectId": "pan",
-    "materialSha256": "67485ff29df9dc3cfd46f0ae0926837119c9260e79326007dc8382029c943cc3",
+    "materialSha256": "6c0b519cbf9e98fcb9c233e20f4f814759c574dcce2e274c5fec1bf7b9c8ba72",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

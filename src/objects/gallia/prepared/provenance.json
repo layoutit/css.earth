@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/gallia/gallia-elevation-surface@2x.webp",
-          "bytes": 310802,
-          "sha256": "6a0ad0e4799fbb96b48dcf7db6a56727ace87625cddf1ef3d4840b19376530ed",
+          "bytes": 263986,
+          "sha256": "e4e586179ae5f2f64b6fb501fd981de0b5c4323ceb9f445908a2da37f8495599",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/gallia/gallia-shape-surface@2x.webp",
-          "bytes": 71764,
-          "sha256": "ebf1b93e75ff1caf2189da13e1cc68fe325cccc63ae48a1c3140f763f6fecc5e",
+          "bytes": 67516,
+          "sha256": "63710d52bebcfb09589a664dc26fbffb13359b633ad59fb343ed828c45562b56",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "gallia",
-    "materialSha256": "c8e6111fccc05f22318486536bcc3e0e3663a09595c85d8a41a73e37787e11f9",
+    "materialSha256": "5b45580bac485cfe62d4fccc1fb8a1d38d7a8ece22284301135bd3443e118fb0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/hersilia/hersilia-elevation-surface@2x.webp",
-          "bytes": 290908,
-          "sha256": "9da39ad72822483955a7cccbdc4f3d95234dcc6a2a625f3aa5536e4e7c5a5723",
+          "bytes": 264630,
+          "sha256": "a91c93f2deed16d5069d1651fbfd946ba6ab81af8dbd90661b19409cea6c2647",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/hersilia/hersilia-shape-surface@2x.webp",
-          "bytes": 72766,
-          "sha256": "e2d328dad20ce249120f6ae916da242031a4acd2c41a1f462c4a96cf879720fb",
+          "bytes": 72238,
+          "sha256": "c9613d19d92f06a8de21d84a89f1860699e1721a982a232b204e0d2210266324",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hersilia",
-    "materialSha256": "3eaee04f7c489147c52bb6ddb0ae3cebaa0b868ec7577f501a7e97335222f038",
+    "materialSha256": "591bdf00fce0cd9e5383b4ceaf0adb6c817ae1680f95db74b4883893d92b246a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

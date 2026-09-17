@@ -763,8 +763,8 @@
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-elevation-surface@2x.webp",
-          "bytes": 353250,
-          "sha256": "61786d1d39494468ff2d6435ba2936b85d0b36f4f6ff26bd5c348e1989e0e9d3",
+          "bytes": 326732,
+          "sha256": "6b847ec836e5019a3932a2a5f4e71a39143d6a5d982335c9339cbc328d46a373",
           "verification": "bytes-verified"
         }
       ],
@@ -807,8 +807,8 @@
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
-          "bytes": 86550,
-          "sha256": "5b0d57865f43e80f62506db1c522eba9d45cc7411548c5496c385b5034b58507",
+          "bytes": 84606,
+          "sha256": "fda31a47cf56e2fc29241ca528214d4be3d565385ed4726d50ff7e6cb3c0a4f1",
           "verification": "bytes-verified"
         }
       ],
@@ -855,8 +855,8 @@
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
-          "bytes": 550700,
-          "sha256": "f808d3b97085051ec37732ddfd584baf246ee03e2c14c214be3b024caec032a8",
+          "bytes": 430640,
+          "sha256": "decb1a02282e5dd97b7c8b6a229cb5b069080f8009d6b9ab15dc7ba44c29a1f1",
           "verification": "bytes-verified"
         }
       ],
@@ -974,8 +974,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/llorri.webp",
-          "bytes": 17578,
-          "sha256": "c9baa68a698bfc5863d87568a69b734cdab194152a1eaf0ee298ed0743fd674a",
+          "bytes": 17692,
+          "sha256": "b36020501b92b43db3af8ed59bc121fd74e8f66c73c8a8d97fd755e6a3c57d13",
           "verification": "bytes-verified"
         }
       ]
@@ -1012,7 +1012,7 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "88cee5cf993d150f77d6b067cce1002862105fbcbfb7adaae293d2f3964fb53d",
+    "materialSha256": "198e21e8ce5f78e2d47b6878a75d4d4e53adf61df770de5f8dbd8fd88d1f35f1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

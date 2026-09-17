@@ -482,8 +482,8 @@
         },
         {
           "url": "/scenes/hydra/hydra-model-surface@2x.webp",
-          "bytes": 84654,
-          "sha256": "350363f735b7b9b4df991a4b7fc0ad096bfc4c26807d87f9008885a88b0118ca",
+          "bytes": 65506,
+          "sha256": "4f0e0026425fcbb6c8dd55db4160efe6e39eac3178f58d1df3f4ee0c5acb1377",
           "verification": "bytes-verified"
         }
       ],
@@ -533,8 +533,8 @@
         },
         {
           "url": "/scenes/hydra/hydra-monochrome-surface@2x.webp",
-          "bytes": 111514,
-          "sha256": "805aa2608fa2457d89e305c6fd9f4d979d62682ba0c344a8dd19703a83e7cd8c",
+          "bytes": 100262,
+          "sha256": "4c302618f7369e2673300a46f4b0d386a5ff6173ab62239dd66db26be1e89ae4",
           "verification": "bytes-verified"
         }
       ],
@@ -617,8 +617,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 4668,
-          "sha256": "853fe1f64d02ee0345abc27bb733221806861d24d8824498fa4745512320cc90",
+          "bytes": 1256,
+          "sha256": "ac79c7673bd6e03a102f1ff19ba41453176e6f86289d36672df3f3356a22c535",
           "verification": "bytes-verified"
         }
       ]
@@ -630,7 +630,7 @@
   },
   "lastPreparation": {
     "objectId": "hydra",
-    "materialSha256": "2fc25aa11d683a5d195e31e5933d9e0ab1702c446402bf158a441949d4e3b5b6",
+    "materialSha256": "c63418cc44124a2c3388f40b7f1a445d254e0eb3bdbfd97bcbd4e9964415b639",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

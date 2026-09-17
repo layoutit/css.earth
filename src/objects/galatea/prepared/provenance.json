@@ -364,8 +364,8 @@
         },
         {
           "url": "/scenes/galatea/galatea-model-surface@2x.webp",
-          "bytes": 63156,
-          "sha256": "fc287d9ddb9695819781c3172ecc896adf1d77b217eceb4b9f9009e26ffa1495",
+          "bytes": 49808,
+          "sha256": "8714c38692e2c527ed86bfd2af38f7500c16df718adae2410d539a2829f1c918",
           "verification": "bytes-verified"
         }
       ],
@@ -441,7 +441,7 @@
   },
   "lastPreparation": {
     "objectId": "galatea",
-    "materialSha256": "ed67aada9385d068e4607919fc736c3ac3423c81a7437259d9038694b2fb5c19",
+    "materialSha256": "86c5041a5e97a586521b268421ee5e549a0da16a6c755a5d0de1ad6f160679d5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

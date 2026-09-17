@@ -1306,8 +1306,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5260,
-          "sha256": "41964936071450ff5169e2cfe66429dadb8d4e03f084195b9318e2303e1d1f97",
+          "bytes": 5378,
+          "sha256": "3e8353fda5e51c71a56665c65f622a63dfba11d12a55c3e327c04bb0eb8608e6",
           "verification": "bytes-verified"
         }
       ],
@@ -1405,7 +1405,7 @@
   },
   "lastPreparation": {
     "objectId": "triton",
-    "materialSha256": "417cc39dd3850b9d7cd3ef02cc99467c11b6ad42965509d19d470dffa4efa45a",
+    "materialSha256": "bc4c3a6fe88e104061bfa9aa957c28c624b6bfad1f9cf3d0a96e9b0fc84b6dc7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

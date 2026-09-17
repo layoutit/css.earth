@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/abundantia/abundantia-elevation-surface@2x.webp",
-          "bytes": 318900,
-          "sha256": "e754ca714594f772c4a3ce0d9514da8e5d747e89125ad1718ac02b677ec22d3c",
+          "bytes": 286232,
+          "sha256": "2da93b2fb84973c5aa42eec4d61b9da457f9935d5a13d70a969229c6fc1a3fb4",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/abundantia/abundantia-shape-surface@2x.webp",
-          "bytes": 70996,
-          "sha256": "85245008e2f323ef16c370dd224b58f9b57db728ead573afdbb875789c810ae1",
+          "bytes": 68792,
+          "sha256": "6e5b93d5874956c9416dd5a0575b881a39ee6121160e346520cb65b58b82da81",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "abundantia",
-    "materialSha256": "b04ee7b06fecce002b862570658e5ff7a87f14181802db6dff6794b7736dae46",
+    "materialSha256": "aecaa65a96686a3486b913daa8492b5ac01ced670f913675100475bba298f171",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/maja/maja-elevation-surface@2x.webp",
-          "bytes": 321356,
-          "sha256": "ce5a8d1ff30084d3c2b4bb5dff25f46137a79d391dd0bce80a44a068a0b2f9c2",
+          "bytes": 291420,
+          "sha256": "0e36c728f38df6cdf3ef70c308766743c368d2d060af9493bebb3e8be6bdba93",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/maja/maja-shape-surface@2x.webp",
-          "bytes": 69084,
-          "sha256": "cd3f5e448ca21795569c7279b74d6525b6ec98d952adc18c9ac19eb3fbc3c111",
+          "bytes": 67638,
+          "sha256": "1208322e05aabfe9e08403229fa5ffbbaedabe122eabc3a2c381a2d4807a8b89",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "maja",
-    "materialSha256": "cb02335c993b36b54f5dd65d7b24c57ea8a409ac046f7244664166a65a5761b5",
+    "materialSha256": "62a22fa5e0ef325a46c9c0b4595242c9af5ef690f9a973b3e5a0dff53cd60982",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

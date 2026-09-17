@@ -1631,8 +1631,8 @@
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-surface@2x.webp",
-          "bytes": 357750,
-          "sha256": "5800a1725749206a740b046aeefff4b59e72b83cd7ec847d92052b2321489065",
+          "bytes": 306612,
+          "sha256": "48ef30f71bedcbcdb712e3f3627010a6d280f72b76bc23419b19bc3fb6cd94c6",
           "verification": "bytes-verified"
         }
       ],
@@ -1675,8 +1675,8 @@
         },
         {
           "url": "/scenes/sylvia/sylvia-shape-surface@2x.webp",
-          "bytes": 75612,
-          "sha256": "e23103ff05e85f78c0c1cc253bc8d82c1e7c97afa8c8c706d3ec9114c9ab027d",
+          "bytes": 74720,
+          "sha256": "d3aab76a3514595b02308bd12f93c533dd4efb804b0ed4da4627c0efa3199676",
           "verification": "bytes-verified"
         }
       ],
@@ -1735,8 +1735,8 @@
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 369162,
-          "sha256": "e6d7cd4534bd21fd522cf05a42ade9cd72eaeeee2a77da2d54c14eda6cd9ff35",
+          "bytes": 223098,
+          "sha256": "4d88d12a08a463d73fc2868714370f3b443fd7cd7e4eefb9bb310cc1d8dcb046",
           "verification": "bytes-verified"
         }
       ],
@@ -1819,8 +1819,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8530,
-          "sha256": "06f2659507a6d317b875f08d93834b7d883756082280595e3baab5112c9a9c38",
+          "bytes": 8606,
+          "sha256": "cd07012f0c42ff02ad9d487918b30683edb782dc39869659144fff8b8e9a9171",
           "verification": "bytes-verified"
         }
       ]
@@ -1857,7 +1857,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "a5416e3f381299a1b5773d4d41adc0064e718082279d34cf18f8cad6486c971f",
+    "materialSha256": "f31f3569bec42360453bc6101b801b70be37936d69481b3bd6ccc86ea2f6bd04",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

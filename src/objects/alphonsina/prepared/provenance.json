@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "72545de6799c4bcba6628574d0c5d509f8f09cbae2353c260c4e8973ba704bbb"
+    "sha256": "5b3ac9eb0564212b5699f7484f8235f07ec1323449962032e78310f95f4cbd2f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f1627b70e27db00b6903a1a92a62d91f658f481e676cbde3674e50b28a3438f7",
+      "sha256": "d23e43f6aba626ffd3c469111a722a0958c215d9ac71af6d16c639e87215d4a9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -113,7 +113,6 @@
             "longitudeSegments": 180,
             "faceBudget": 800,
             "texelsPerFace": 16384,
-            "interiorSlices": true,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -410,8 +409,8 @@
         },
         {
           "url": "/scenes/alphonsina/alphonsina-elevation-surface@2x.webp",
-          "bytes": 349714,
-          "sha256": "d2fd1d4180a70b4d6b0f3b33f71c7d44bbdf3773d0d0b16892c543ae98bfeed1",
+          "bytes": 309598,
+          "sha256": "dd586aa422988f6449e7da40b847ffca5b48779125cae3f60b392f62c5930724",
           "verification": "bytes-verified"
         }
       ],
@@ -454,8 +453,8 @@
         },
         {
           "url": "/scenes/alphonsina/alphonsina-shape-surface@2x.webp",
-          "bytes": 66922,
-          "sha256": "040a2d3dc5339b7f0d50d5b4efe30a6ebe5e762d271acbd0108984be7e641350",
+          "bytes": 68682,
+          "sha256": "189a49e4cdb325f009abf024350b1e27d92b360ab403539d03a29761164de78d",
           "verification": "bytes-verified"
         }
       ],
@@ -551,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "67317355de84778a514da53fc25df9f9152993e8f519a8c3e788b6d89de22701",
+    "materialSha256": "23b8f0dec9acff97f420b405d4b2793e08bcdcda235ab14fc013b2bb5d358f05",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

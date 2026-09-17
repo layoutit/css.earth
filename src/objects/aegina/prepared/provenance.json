@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/aegina/aegina-elevation-surface@2x.webp",
-          "bytes": 303740,
-          "sha256": "a2af513449bd13cb55b962eea8486428d76880d2f62d22f4ac891166cc1279d3",
+          "bytes": 269028,
+          "sha256": "c5319eb7794a83811cb4dcd2f04590bef82c79d062205a9c73a02536cd31792d",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/aegina/aegina-shape-surface@2x.webp",
-          "bytes": 69978,
-          "sha256": "10a9e56a4cdf66ebedb1d53232188dbbaa7d5caf2c8f2435c933b7e7a84b5eb1",
+          "bytes": 65894,
+          "sha256": "9c0f6ae68633c8c07bffbaf6a3b6ca88cc6fa71d232df866a462958635ca30e9",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "aegina",
-    "materialSha256": "f508722f9173c12b6dad6cf76ae187d6e5842335650e92c946dcf4bb458d26e2",
+    "materialSha256": "70983ef587d888d1a6c443cca6d328bf672168acea9194459d9a5b5d14aec4f2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

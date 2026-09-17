@@ -351,8 +351,8 @@
         },
         {
           "url": "/scenes/portia/portia-model-surface@2x.webp",
-          "bytes": 64888,
-          "sha256": "8371b9ac6a0bc5e96df738cb0d1272db8d8d2676e978a8f9df321cd8937a47c3",
+          "bytes": 51006,
+          "sha256": "51d0d3b54c5d7d0d30275ea6ec2504eea7f9fdeafeaca2a46f8a8e74da20f145",
           "verification": "bytes-verified"
         }
       ],
@@ -428,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "portia",
-    "materialSha256": "1f5b3f712963d763f6f7d96846f77854c53cd7a8ba4858daa52020912f3b3e59",
+    "materialSha256": "93e8dc30c85578de27b5a4a651896e9ffce77f8fd0bdf76030bda51b45a87132",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

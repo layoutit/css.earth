@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/leto/leto-elevation-surface@2x.webp",
-          "bytes": 308306,
-          "sha256": "61832a79364bc83ed360bb01cde3f254ce7b4f6f33facb6081f930010b61fa3f",
+          "bytes": 275208,
+          "sha256": "fad8ea365f9f9afe3ebb012dae2b82acea3497c8bea6e2b95af5894273cdd22d",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/leto/leto-shape-surface@2x.webp",
-          "bytes": 70238,
-          "sha256": "11348fb4fd45d03e9c1ea05576c9acb3134c44aa4ade98b06de0c929551a6fd4",
+          "bytes": 67684,
+          "sha256": "2e5cee6612092886cd79678986ebdc42fcb2e5e2f0eac19218585a04d9743877",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "leto",
-    "materialSha256": "9e170f43f97aadd73da5c2afb48602fb1636e3727e067e9e75c286708c57950b",
+    "materialSha256": "96480abb7b426a857c0d888c26021d2d4256af3db6d7886937deea92719ea0b6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

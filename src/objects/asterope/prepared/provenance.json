@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/asterope/asterope-elevation-surface@2x.webp",
-          "bytes": 303652,
-          "sha256": "5f4d1b2e619a12b18fd2d85dbe90cccfff220d29adf7eb4e253394477756a5b3",
+          "bytes": 274310,
+          "sha256": "22f5ed258a54e1f9b3c3032570de632a3aa6394084596c70421fb3965633a4e8",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/asterope/asterope-shape-surface@2x.webp",
-          "bytes": 75570,
-          "sha256": "f39c5f3195a8a9ec81d541c034c28503740981db727ab2514e6873c2728fba05",
+          "bytes": 75428,
+          "sha256": "9c5e374c9e737e4c48df99914b3162582974bdaddda0b32ea47c415e6978fccd",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asterope",
-    "materialSha256": "a1ba35b4b80c0c8d53ada44b8ed5150afe8de5a8210d5697a8af8643ed8046e1",
+    "materialSha256": "428727c40007e248daa7b48ef844809a7fd3a83c2dd6c20755133a9282c0f5b1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -346,8 +346,8 @@
         },
         {
           "url": "/scenes/patroclus/patroclus-model-surface@2x.webp",
-          "bytes": 60642,
-          "sha256": "f8f4ac5ebcf83f95d007de62aaf8abd7f9e04fb732c19fa521ebd9fb5a2c1739",
+          "bytes": 50066,
+          "sha256": "5b383ac495f57ae35464cd8538b8554dd44b45548b01cb7d6d7843f70c617edd",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "patroclus",
-    "materialSha256": "ea1e8ce7a0a0c5996b75cd9f68b26580a50f99cb73baa7dc75e9e1df07687e27",
+    "materialSha256": "3918c276bc3b12540bda81ef3cd454a4ca98a93465ebb3c266e9e804ea18afce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

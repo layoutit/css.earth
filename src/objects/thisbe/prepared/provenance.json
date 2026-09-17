@@ -396,8 +396,8 @@
         },
         {
           "url": "/scenes/thisbe/thisbe-elevation-surface@2x.webp",
-          "bytes": 372364,
-          "sha256": "dda38753e2067b7724ea8b7b2082f889f52c373ed8d34b2ecd9aa4a9864a395e",
+          "bytes": 314442,
+          "sha256": "fa62465d3c132ce61fb1e2d43191d3b8c3e96108a63bc3fd0e7230f030ac970b",
           "verification": "bytes-verified"
         }
       ],
@@ -440,8 +440,8 @@
         },
         {
           "url": "/scenes/thisbe/thisbe-shape-surface@2x.webp",
-          "bytes": 77844,
-          "sha256": "11819c85f5658a8c428f95a38dd00c2a6a0d8ce769dc9a397ab8264dac1ff0e2",
+          "bytes": 77308,
+          "sha256": "2e2e8b012cbdb940d585a589c059eab75f95022a4e8fdea2a47b8e3a9e64146e",
           "verification": "bytes-verified"
         }
       ],
@@ -537,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "thisbe",
-    "materialSha256": "0ee56177a6bf2031cdfff62d9003ee9feceae2bb1cde54d82b768e4a85045626",
+    "materialSha256": "daf8fea2852b436854c166d47465c6f673965575183fd8549f7471043180dc73",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

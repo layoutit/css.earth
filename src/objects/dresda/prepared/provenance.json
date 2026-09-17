@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/dresda/dresda-elevation-surface@2x.webp",
-          "bytes": 322182,
-          "sha256": "173706b5d2d0cedfb4a382ad74f17ee28d875854d076e4f1be996a1d55e45898",
+          "bytes": 291888,
+          "sha256": "e6d490be1d876310d9dfcb88c2d557e86284b3564b75e6a221a0027878936c41",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/dresda/dresda-shape-surface@2x.webp",
-          "bytes": 72098,
-          "sha256": "ebf1b475b7b38e1e1a1d2b9234427e6032903d6d6b21a8c9331d5237a423ccc9",
+          "bytes": 69954,
+          "sha256": "3a6702bb68fc080c31f299c5b1d50a8e44e8c8ebde8142aae928d772cc7e9821",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dresda",
-    "materialSha256": "762810bcc2130f98dad2116284f7bd75656d24510ab7c77b2be44d89ea941cda",
+    "materialSha256": "9d699161364c9412482c7ce3850a2070ad08b979ba68b3b67f7d55956e02027b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

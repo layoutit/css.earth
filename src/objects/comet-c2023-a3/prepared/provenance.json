@@ -311,8 +311,8 @@
         },
         {
           "url": "/scenes/comet-c2023-a3/comet-c2023-a3-model-surface@2x.webp",
-          "bytes": 58028,
-          "sha256": "3e0ce21b57ab33db71446d034b2d2714390e1993594574a2ec108639dbbddda5",
+          "bytes": 50484,
+          "sha256": "628a9d950b6a99b5d949bbea477851b35cf260b28f5ab64c973d153f27f4ed2f",
           "verification": "bytes-verified"
         }
       ],
@@ -358,7 +358,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2023-a3",
-    "materialSha256": "7bd9b96fc57f80c62437498358132ef21b50a933e6674309f185a1ab238fdfa9",
+    "materialSha256": "4227efd79dbc0753e15dc4f2b41ddb9117351801e8d13e705fdf3070d47f1a4a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

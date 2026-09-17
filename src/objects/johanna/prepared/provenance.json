@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/johanna/johanna-elevation-surface@2x.webp",
-          "bytes": 306058,
-          "sha256": "491c9a4eabbff5337f8679d68bb188e651f45b8c70dcced9440f93fff04b39ba",
+          "bytes": 277122,
+          "sha256": "76265082e0dccb80fb98133caa2446062eecd174137881c76eec9f1a1b291889",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/johanna/johanna-shape-surface@2x.webp",
-          "bytes": 71040,
-          "sha256": "b5454fdfe4415222fa3d670354e8de725809f54cc38a8b18de1d3d7458e00b5b",
+          "bytes": 69102,
+          "sha256": "2dca64486491b215493ee8c9c69402601e8b4a3b0a38d75987fe02d4aae2819b",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "johanna",
-    "materialSha256": "bb69efe9a0e3802cf39ef33e86d7a865d64e034700b4ac72893269371b39cdcf",
+    "materialSha256": "7105bda873ff7ddabe3751521ef5369453a18a7e13ccc3141446104edd329053",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

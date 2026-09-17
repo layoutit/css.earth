@@ -377,8 +377,8 @@
         },
         {
           "url": "/scenes/naiad/naiad-model-surface@2x.webp",
-          "bytes": 59140,
-          "sha256": "17a4f1865df0d68ddc9d7ea905e09c06e27fd605956b41ef25814027285bcef4",
+          "bytes": 55810,
+          "sha256": "9e3e510a67d64d9c0c7720cc2a14cdde0f7653f05fb6e48cc03f3fe6c25d28cc",
           "verification": "bytes-verified"
         }
       ],
@@ -454,7 +454,7 @@
   },
   "lastPreparation": {
     "objectId": "naiad",
-    "materialSha256": "a019dbccee0003ca4face9dd43639dbf38489697f8c8bd7ae365bb0eb5c748f7",
+    "materialSha256": "db62e8cf840dcca5d793bbaeeef6bc80a9cec1278c345e16e50dc14459c7742b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

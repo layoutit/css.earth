@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/iphigenia/iphigenia-elevation-surface@2x.webp",
-          "bytes": 289728,
-          "sha256": "26ee647facc9707ecc2238abc3d5a8dc163fcb9446e15d3d9ec2ab887f541cac",
+          "bytes": 256144,
+          "sha256": "7c1724aa3416d5a42aae1de9012dffeb85704ec8d6b08cf64627d85a1261f4f6",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/iphigenia/iphigenia-shape-surface@2x.webp",
-          "bytes": 73676,
-          "sha256": "c7841f8303a387f778ca5293e1a7aeab13556edb4d93bd47cddd5d934db7ed4b",
+          "bytes": 68916,
+          "sha256": "a5919df53b321449211d77d5cac4928240844fc297c436d7fc9670ae542a3471",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "iphigenia",
-    "materialSha256": "39562df1601fbd423a06ed97c8baea159ba6fe97b6d26fcc67f757a08fe037ff",
+    "materialSha256": "ef1df292f96e8051c5e9da453bf885c7fb4d73dd6fa3c05bf64c4dde2a5d22f7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

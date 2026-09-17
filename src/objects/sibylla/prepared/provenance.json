@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/sibylla/sibylla-elevation-surface@2x.webp",
-          "bytes": 311150,
-          "sha256": "777c0935490469c0b9af6aed91f0bc161e901ffcdf5501fe4864e335820307dc",
+          "bytes": 279098,
+          "sha256": "a305e8503c4c844b0b2c55b1538929a84fdc6481d889a74bbffcbd6cc65a87a0",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/sibylla/sibylla-shape-surface@2x.webp",
-          "bytes": 77636,
-          "sha256": "dda332cabf98b2907df072c2b44eb4479fd8f866a6b543ed06f45de99fe090c0",
+          "bytes": 75674,
+          "sha256": "caca6920b23f22ea9fa4a40baaf2594f79595e54a49cd3dbaffa590c09c5ca63",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "sibylla",
-    "materialSha256": "83feaa5625f8c8362bfd1d745c48064e44524829b890bdd1fce09e57964fa544",
+    "materialSha256": "6ac0170308ba242b362f0dce3514d1aaccb8be6b077d22a6352e3682fee34106",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

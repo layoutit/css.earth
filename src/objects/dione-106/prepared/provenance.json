@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/dione-106/dione-106-elevation-surface@2x.webp",
-          "bytes": 331746,
-          "sha256": "d04ea40d1d6a05f5751eb4bb2b84892f56d488c6558c3306dd1039aa02f0f4e4",
+          "bytes": 297606,
+          "sha256": "429826320dfdd7ebd5cb79b6e288c01e7013ff7444a593b884538cee388ec2d9",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/dione-106/dione-106-shape-surface@2x.webp",
-          "bytes": 77198,
-          "sha256": "eeef3632633b0be9dea46d2523396d32b3ea38ed5ede909b084a696741b4f509",
+          "bytes": 76990,
+          "sha256": "a22b4ef330fc4ea887116e1449790cefc4d61595a1e0943b84f3303134ce972d",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dione-106",
-    "materialSha256": "be11010de56a5aa4f38596388a580a003b230900926e24c185560b479e17b7a5",
+    "materialSha256": "de62a1b03fc4f0b50d8c3996b85d018b1a3e9a39177448d3dbed7462cc404859",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

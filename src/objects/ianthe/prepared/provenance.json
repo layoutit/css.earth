@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/ianthe/ianthe-elevation-surface@2x.webp",
-          "bytes": 318198,
-          "sha256": "cc4e8ad974d1f66563af274babb0b5bbdad388217ebf190561765f11700e8f84",
+          "bytes": 287176,
+          "sha256": "eb48c0293482d866b6f4e9b835295d73d9576a30e4495365ce9bc238665b6dce",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/ianthe/ianthe-shape-surface@2x.webp",
-          "bytes": 70414,
-          "sha256": "ee4edfdb9d88108d81f4c3b806c5513e2b32f1b406ac42a8ca7a6b2bcb14b3b5",
+          "bytes": 68480,
+          "sha256": "43c290fb745765c76f2d6ccc0794d0c5a088fee70b2fc2bae5a82af81008a0f1",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ianthe",
-    "materialSha256": "900fb1f997c11e39c099bad96ac4b76c6fb05772e613bf09b31d97d76c7670fd",
+    "materialSha256": "31e352eab92fc4792bb736d4a554ad2e6f803a03d3cea0a78b0bb3e4898c070c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

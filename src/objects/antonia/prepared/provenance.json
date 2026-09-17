@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/antonia/antonia-elevation-surface@2x.webp",
-          "bytes": 314830,
-          "sha256": "e5d0ad1fba2b7ca69889abd6fd2162095c85e2db001e2b13eeee130ba958be14",
+          "bytes": 287286,
+          "sha256": "3550c2dcb2dc4407521c24a64bfeb85bbffe7fee97ad68fc4ae299825ff63693",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/antonia/antonia-shape-surface@2x.webp",
-          "bytes": 68572,
-          "sha256": "e2b796a3c878dcb0ac33cece5e3244dc8c8831303cbadc02bdbeb220fe8d9eaf",
+          "bytes": 66310,
+          "sha256": "d7550a3dbc717d2a90133835fc54fc1419817a1b018e4635db37eae3be648c26",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "antonia",
-    "materialSha256": "b7e45ed965586d829debec4d732dd15f013e91790ae3ddae1034a8a47b7f5f3c",
+    "materialSha256": "ef83b36f0599e8e46916d2d7abe5c8bd572cc13dc80db9417a4a1412c0a4ef5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

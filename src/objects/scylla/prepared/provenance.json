@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/scylla/scylla-elevation-surface@2x.webp",
-          "bytes": 312942,
-          "sha256": "ac95690044a821931fd079028c9a2cbc5b80ae987947506cb32c94c48ae8ade2",
+          "bytes": 278802,
+          "sha256": "c262be800c9cbfc0a9911fdd7778a83885be145304d84bf6c9ee5a28ce7f8c06",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/scylla/scylla-shape-surface@2x.webp",
-          "bytes": 70852,
-          "sha256": "a0b858db6b18ad77ae663534f2f6d8a70509ef52aa767a95791dffd6425c0e17",
+          "bytes": 67124,
+          "sha256": "9704dcf35b06ddf2b2823394b303299ac1cb606127527e0939ef7c9db96708e8",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "scylla",
-    "materialSha256": "bd4d8673a92ec782586607f6f1c4346294476e537387f38420bc4c4fe6430f10",
+    "materialSha256": "fd1080be0a86451f6632f5b4c6f0436bdc7d921238f83e3c8e49b8bba3845200",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

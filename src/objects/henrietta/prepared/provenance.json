@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/henrietta/henrietta-elevation-surface@2x.webp",
-          "bytes": 306560,
-          "sha256": "c140953e59cec48a7a568195192da71865b4c8edcccedeaf813f3a17eda40917",
+          "bytes": 273200,
+          "sha256": "8bcae8cad218ae296cb76f09603ce63611dce4ea2bc56a4025504198066aa8ca",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/henrietta/henrietta-shape-surface@2x.webp",
-          "bytes": 70922,
-          "sha256": "517da4b97f755531362dd607b37439098c6751bebefdad57a2ae3bb936d69909",
+          "bytes": 68260,
+          "sha256": "f6f32e8d0514ae60f5bc71d38c2d5b778af9707b764e48083d4e8e5f5baf1a1f",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "henrietta",
-    "materialSha256": "eccbf4593460653fe16342706c44e1855af2e131bb682e8911c7aa14af269cc7",
+    "materialSha256": "ddf73202645c797ad8b673af9d6c80823dc4c36eebf5739bef0fd9b30d522866",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

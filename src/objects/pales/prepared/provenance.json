@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/pales/pales-elevation-surface@2x.webp",
-          "bytes": 316692,
-          "sha256": "b4fa2c33f5e11a36626c3d075f94b838321e87a7ca1657ada532a5b5101e9973",
+          "bytes": 290182,
+          "sha256": "b275daecfc25a1eeaaea24a95268ac22592cb57c701e7a6640271625e351582b",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/pales/pales-shape-surface@2x.webp",
-          "bytes": 74116,
-          "sha256": "544c605417db3d7234134cee23e3c7623ad9ca448ea596679b5170b94467cc60",
+          "bytes": 73312,
+          "sha256": "43d8961cacd62437b2bcaaa86bb59d323e259396a274ce5364509b75d3a5c4a7",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "pales",
-    "materialSha256": "a1bfa0138a5d408bbe8a56c1438a7b495b02a31e64c9510e7538d510e6a0f210",
+    "materialSha256": "bb11454fb727ec43894b74ee1622de4b5c186beb0092fb03b3fff2a4f3504faa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

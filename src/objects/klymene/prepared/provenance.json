@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/klymene/klymene-elevation-surface@2x.webp",
-          "bytes": 308160,
-          "sha256": "50c07b3d96e8bd1c08e3703ba1dc0d4c1e8e7dfe589e1e458ec6005f9c5d1b73",
+          "bytes": 274142,
+          "sha256": "aff9eef5c1097585c956777a3b81f52cafdcb5109cadeb12df4fbae015fba493",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/klymene/klymene-shape-surface@2x.webp",
-          "bytes": 67746,
-          "sha256": "f3908cd6a5eda80bc918dceabd3703092e0f310f9ebdae19984781fe02218287",
+          "bytes": 65152,
+          "sha256": "ece138ce5603d6aadd287cf39b98e9823bdb2ed48a5fdf0546ce0f9bc92eb9df",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "klymene",
-    "materialSha256": "31cf405ab17d4e8c5545e4587e5bff0876326efddab0286a9147ee0ec7e02237",
+    "materialSha256": "155ff2a449d7c10337abc8e12336296b0a04fd1304cac74389b2d384004406e4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

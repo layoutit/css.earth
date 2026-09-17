@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/ambrosia/ambrosia-elevation-surface@2x.webp",
-          "bytes": 272972,
-          "sha256": "961f7ea3256cfa3dc3035048021cb77655feb8bf4352a6119e8a2e21bec13bf0",
+          "bytes": 245974,
+          "sha256": "4f193127d8efbb9c4e5423ccf03a0b7f592b8f94c55a3e6c57c624f624dd615d",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/ambrosia/ambrosia-shape-surface@2x.webp",
-          "bytes": 68988,
-          "sha256": "b44dff72c4c139d431bb2b0f0b3e79cf81c0c735b29fb7ce25095baf07889dee",
+          "bytes": 66634,
+          "sha256": "d588374e4dbe15c6d532ae0f7df27633d123760374f0c0fa9dc71e4072d55bc1",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ambrosia",
-    "materialSha256": "ebc2a4616fa20018b6524375dc5de4f867a99df3ca39165955991236a9fb599b",
+    "materialSha256": "c71f0a29a12b7e68b9c1acebd9f90a0d8994a8da5c84b311307b9cd208188269",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1037,8 +1037,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
-          "bytes": 8848352,
-          "sha256": "28ecc531911ca04eac8650a2b8271579e2715f224f0b96f9c823ecf7a16b716c",
+          "bytes": 8604612,
+          "sha256": "0610c3934f6c1edb228e0d5d7288505de143839da84b84f1e18852c5ffe794c1",
           "verification": "bytes-verified"
         }
       ],
@@ -1094,8 +1094,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
-          "bytes": 10178686,
-          "sha256": "15855d56e8b59e33be9631f38068bb6a9434b56251fcf087920020bee86eec30",
+          "bytes": 6216972,
+          "sha256": "08447f206d3e687ccb905bf6a5c191c3e648fcbe79a9bd0d59658d207e008add",
           "verification": "bytes-verified"
         }
       ],
@@ -1146,8 +1146,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-surface@2x.webp",
-          "bytes": 69396,
-          "sha256": "85330a271985baf0842d2949717a8cd4c57807361a8d7927d00cac4e6df48283",
+          "bytes": 56084,
+          "sha256": "6ac3c4041837b6b64004a112862ad3e10fb372cb80c3048f93e82775f8242f65",
           "verification": "bytes-verified"
         }
       ],
@@ -1198,8 +1198,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-surface@2x.webp",
-          "bytes": 70684,
-          "sha256": "c31429c364bb7cb502154b8c5af9c55b492ad179a261071a005a8e2c1d465a1d",
+          "bytes": 56680,
+          "sha256": "ef440ca0bf6cd275034a3af790ead0afd8f9bcd10dcd38e5a23cbc9bd4dcfa11",
           "verification": "bytes-verified"
         }
       ],
@@ -1242,8 +1242,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
-          "bytes": 133586,
-          "sha256": "000412f856790eee25342f2f25f4f0e64d083a6370af77e3b941bf0592421aa1",
+          "bytes": 129790,
+          "sha256": "fd883cbf43b62fc79e35aeb58879400e129341d93881f08b12e51077cac5e6a1",
           "verification": "bytes-verified"
         }
       ],
@@ -1449,7 +1449,7 @@
   },
   "lastPreparation": {
     "objectId": "enceladus",
-    "materialSha256": "db11a736dc5f3c62be6e64711c3b76884884b8d6d636791a5a86b1b1ad946292",
+    "materialSha256": "41484c37ceb72caaf3beace8195ceedc0dd17fc9f7798586e95153f2ccba409e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

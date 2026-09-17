@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/medea/medea-elevation-surface@2x.webp",
-          "bytes": 337108,
-          "sha256": "c0848dff12a708e6ce74979fe501db2eb8a4c322664e2c8f3e61fe31917ec666",
+          "bytes": 298502,
+          "sha256": "23d12480d5761a1d2344967203d741ef153923d1519a12dbe0ab8e6c8242eace",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/medea/medea-shape-surface@2x.webp",
-          "bytes": 73824,
-          "sha256": "126726fa447d13acdba45ad9b9ebcf8ec5be350ffd9a87df65583aba99f4cb6d",
+          "bytes": 72376,
+          "sha256": "e0292c9775af00622bb3c3d158055be2528c89df7e9bcea195edc0b166be8b65",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "medea",
-    "materialSha256": "dad844d31a0267890a40d17ff1b8b3fd004b5622c3dfbe96ea389cc08a71050e",
+    "materialSha256": "6aaff061487c7ddfd59695c9ca12c62e6dec89f3e7d7175841043c970efee45e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

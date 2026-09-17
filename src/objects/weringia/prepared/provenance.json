@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/weringia/weringia-elevation-surface@2x.webp",
-          "bytes": 536638,
-          "sha256": "da57ed958c0c0a672fd32609fdec27c8c3c255302cd8a245981bd47c643664dd",
+          "bytes": 470230,
+          "sha256": "7ab2aff47f41ea0bca51eb7608f0903d069d6102ad4ba5e67d9ddfe853dbd193",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/weringia/weringia-shape-surface@2x.webp",
-          "bytes": 94712,
-          "sha256": "7bc782c7851baea488413216d1ca5f4bc7931202a662bb7844d1c9259ed086f0",
+          "bytes": 90414,
+          "sha256": "11c7c330bb10c2c675f62d8dd35a3375bbcb19a2c2c2067dc1ea0a3a8d00d620",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "weringia",
-    "materialSha256": "e530bc2af2e010a62a79ecbb18fde8614a99b0b9cef1ee9ba2e4897da49fd404",
+    "materialSha256": "cf0bb64b56fb5369eeecce1efaffe1d07d11ea3ad55c7fd8c67be09278c9e03f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

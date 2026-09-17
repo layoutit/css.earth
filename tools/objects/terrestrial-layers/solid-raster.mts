@@ -147,6 +147,8 @@ export function lensTextureGrid(lens:TextureGridLens, raster:SolidRasterGrid) {
 
 /** Surface composition is source-dependent; the projection/packing is shared. */
 interface RasterRadialModel { lensIds: string[]; radial: RadialState; config: {geometry: unknown}; }
+const OBSERVATION_PREVIEW_DIVISOR = 4;
+
 export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config:input, source, radial, radialModels }: {sourceDirectory:string;publicDirectory:string;outputDirectory:string;config:unknown;source:Awaited<ReturnType<typeof createSourceManifest>>;radial?:RadialState|null;radialModels?:readonly RasterRadialModel[]}) {
   const config=parseSolidRasterConfig(input);
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
@@ -199,12 +201,15 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const observation = await loadSurfaceObservation({ sourceDirectory, source, recipe, radial:{...observationRadial,grid:requireTerrainMesh(observationRadial.grid)}, config:{geometry:shape({radius:number,radiusKm:number,radialTerrain:shape({path:text,simplification:shape({method:text,maximumErrorMeters:number})})})(observationConfig.geometry),raster:config.raster} });
     observationRadial.observationSurfaces ??= new Map();
     observationRadial.observationSurfaces.set(recipe.id, observation);
-    const { rgb, missing } = observation.preview(width, height);
+    // The map of a photographed lens only gives its billboard colour and coverage count; the atlas and thumbnail sample the
+    // photographs directly. A quarter of the map's width and height carries both.
+    const previewWidth = Math.max(2, Math.round(width / OBSERVATION_PREVIEW_DIVISOR)), previewHeight = Math.max(1, Math.round(height / OBSERVATION_PREVIEW_DIVISOR));
+    const { rgb, missing } = observation.preview(previewWidth, previewHeight);
     // A palette lens is false colour: its legend strip is emitted beside the surface, like a scientific lens.
     const display = requireRecord(recipe).display, palette = display === undefined ? undefined : requireRecord(display).palette as readonly string[] | undefined;
     const legend = palette ? await emit(`${config.namespace}-${recipe.id}-legend.webp`, sharp(Buffer.concat(Array.from({ length: 256 }, (_, x) => Buffer.from(interpolatePalette(palette, x / 255)))),
       { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: 'lanczos3' })) : null;
-    const surface = await packSurface(recipe.id, rgb, missing, { ...recipe.metadata, ...(legend ? { falseColor: true, legend } : {}), observation: observation.report });
+    const surface = await packSurface(recipe.id, rgb, missing, { ...recipe.metadata, ...(legend ? { falseColor: true, legend } : {}), observation: observation.report }, { width: previewWidth, height: previewHeight });
     const eye = observation.report.camera.positionKm;
     const snapshot = await renderRadialSnapshot({ faces: observationRadial.faces, sampleSurface: observation.samplePoint, size: 96,
       longitudeDegrees: Math.atan2(eye[1], eye[0]) * 180 / Math.PI,
@@ -354,6 +359,8 @@ export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, conf
 
 export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig; radial?: boolean}) {
   await prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial });
+  // A radial body's triangle atlases carry their own baked lighting, and its presentation draws no lighting frames.
+  if (radial) return { surfaces, lighting: null };
   const { pixels, width, height, rows } = lambertAttenuationAtlas(config.lighting);
   const filename = `${config.namespace}-lighting.webp`, url = `${config.publicBase}${filename}`;
   await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(resolve(publicDirectory, filename));

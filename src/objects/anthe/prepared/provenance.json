@@ -338,8 +338,8 @@
         },
         {
           "url": "/scenes/anthe/anthe-model-surface@2x.webp",
-          "bytes": 62588,
-          "sha256": "b2b40be5e8d30c530132e5f43e4d0358052aea5e51cb89549a32cc70a425fedd",
+          "bytes": 50438,
+          "sha256": "377c4569ce57c59180852602d315c21fe986c0e3569165b11eeb3c5402ed716c",
           "verification": "bytes-verified"
         }
       ],
@@ -415,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "anthe",
-    "materialSha256": "af83f1d064f863791fd597da729cf78e4efe272da3b471ad252bfc3fbc1e735a",
+    "materialSha256": "87b66b0a99e2947cce58deab8387deb3ab612773a8087b12b80e141845d56bc7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

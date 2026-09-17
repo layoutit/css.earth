@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/menippe/menippe-elevation-surface@2x.webp",
-          "bytes": 325978,
-          "sha256": "1dc6c1f37ba9ab4eead5500afe786596bf663510bffdd9352216ab884b654c90",
+          "bytes": 296962,
+          "sha256": "8459766e9c904382d062e034323e28ba3d78513906520b2459c71746129600d7",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/menippe/menippe-shape-surface@2x.webp",
-          "bytes": 70460,
-          "sha256": "e6317bc0fed92d6268abf6f5f8b641a14b3dadee1f9db55d5b8ec30ae96dc19a",
+          "bytes": 67522,
+          "sha256": "449532f5dcae490456e81fa5193f53943c5e50cdc1d6f5c8be5e0544113ff303",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "menippe",
-    "materialSha256": "22e8d4bcde0b5ad61b000f8459134305d0c273f242a9088b57ecd5e4297e1571",
+    "materialSha256": "947eb1a30e0e0e4d0e5114e73922e5a2e5a45cf03ca975625045ce10dd0230ff",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1161,8 +1161,8 @@
         },
         {
           "url": "/scenes/comet-19p/comet-19p-usgs-surface@2x.webp",
-          "bytes": 127660,
-          "sha256": "0fa6bbec153cc198ce7b1c8c1ca8874bcab92a1e6f159acd09a59013f0f5a416",
+          "bytes": 103838,
+          "sha256": "f1d63af5c07d204d499c7b57d8569e8f4c4b29c470467995a6ad6f7756af7bc2",
           "verification": "bytes-verified"
         }
       ],
@@ -1215,8 +1215,8 @@
         },
         {
           "url": "/scenes/comet-19p/comet-19p-dlr-surface@2x.webp",
-          "bytes": 207710,
-          "sha256": "13ed69af4c1dcb5de29d2927961a59cd58003f7e38e14e1244b15b3928368d72",
+          "bytes": 167650,
+          "sha256": "b62cd2a46d33ed1caa0a3af4d183207e0a598675de1eafe459695f58bd31bc94",
           "verification": "bytes-verified"
         }
       ],
@@ -1270,8 +1270,8 @@
         },
         {
           "url": "/scenes/comet-19p/comet-19p-height-surface@2x.webp",
-          "bytes": 221124,
-          "sha256": "ff3bc73860bca491640522507f8d3045cf2e9fd6fde82ec821cb2efe0ca41170",
+          "bytes": 169332,
+          "sha256": "7c6b31656096a316d0596a90ff7f8d5c465a61b8af931c01af6896c0e8156786",
           "verification": "bytes-verified"
         }
       ],
@@ -1321,8 +1321,8 @@
         },
         {
           "url": "/scenes/comet-19p/comet-19p-difference-surface@2x.webp",
-          "bytes": 330870,
-          "sha256": "5bdbda9a59e0f68c191fde64ecbe5860595bb178c600f62af3bc32b1bf966770",
+          "bytes": 247822,
+          "sha256": "9b976a7e0852922d2ba364929e7599215d79925a0181d552e55dbf511fe24b71",
           "verification": "bytes-verified"
         }
       ],
@@ -1369,8 +1369,8 @@
         },
         {
           "url": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
-          "bytes": 135864,
-          "sha256": "ae5b8c8e3dd08c53fea491173c176d560d31cf6dfdeb1b848749f9d9b3314503",
+          "bytes": 118438,
+          "sha256": "b516a6dfede11e582dda39ffa5e9ecd470a84c81969cd0190907eb5e03962d55",
           "verification": "bytes-verified"
         }
       ],
@@ -1455,7 +1455,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-19p",
-    "materialSha256": "81dcff25a3d6edb73e13587e99af98cb2811a8bb9b316b872f059d3d51e785e1",
+    "materialSha256": "16bd9f9fd6a2383e2f2b87cee5c05c2870010e14f2e125228911519dde80d481",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

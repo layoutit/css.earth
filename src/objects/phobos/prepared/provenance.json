@@ -843,8 +843,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-normal-surface@2x.webp",
-          "bytes": 7784560,
-          "sha256": "eff594341a0bf77badda8865dc081a1b83295b446c990493a67dad7a3dbdbb7a",
+          "bytes": 7680016,
+          "sha256": "a0ab24e7249bac09bda8b588e00e4ac919dea0734dfba0cb80ea255856a06ccc",
           "verification": "bytes-verified"
         }
       ],
@@ -898,8 +898,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-elevation-surface@2x.webp",
-          "bytes": 1564650,
-          "sha256": "4ed3c15a5960bb5649ea21cf586283e73a4c5c8fa71fd52e2eb5fc32c740a473",
+          "bytes": 1232090,
+          "sha256": "dab8478768f79330411b4df94d27eca4faa9d60ee09bacd89e7756be0a772ea9",
           "verification": "bytes-verified"
         }
       ],
@@ -949,8 +949,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-albedo-surface@2x.webp",
-          "bytes": 2624758,
-          "sha256": "d0ae3b12565b2ee1c2cc24b756f7cfc51cee6648d9db3944e5285f946396a89c",
+          "bytes": 2148036,
+          "sha256": "aed127aefb5f9ad90a2d26fad2a664c9dd94b9d0642ad99add880ae271b4e671",
           "verification": "bytes-verified"
         }
       ],
@@ -1000,8 +1000,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-slope-surface@2x.webp",
-          "bytes": 4317638,
-          "sha256": "7f08e4549565e7e90acc8b901b909fa6cc5bbd6afdfaf5267625773530a4c576",
+          "bytes": 3446130,
+          "sha256": "9a023e7f1ebf1451da8d8588e3b6760698f1e6cf0977017c22faacedad288d07",
           "verification": "bytes-verified"
         }
       ],
@@ -1182,7 +1182,7 @@
   },
   "lastPreparation": {
     "objectId": "phobos",
-    "materialSha256": "67c719904ffe5141df97a5ee8f07d510b1187b835d66c38ea6ac88b4346bdc6e",
+    "materialSha256": "348d9dee8f7e6bc84ff22529273a4ea1f62e5c5fe3c0766aabc7ae7c4b53f3de",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

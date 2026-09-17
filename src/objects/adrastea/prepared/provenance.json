@@ -364,8 +364,8 @@
         },
         {
           "url": "/scenes/adrastea/adrastea-model-surface@2x.webp",
-          "bytes": 56090,
-          "sha256": "56dce43300452821951081b290119af7ad75d221b7f9a8c48d426ffb62aabaf5",
+          "bytes": 49680,
+          "sha256": "70e5a0df06a5b6161c194ac5423a5dcaf45c4871ea53aa4941e6284c9e42eeaf",
           "verification": "bytes-verified"
         }
       ],
@@ -441,7 +441,7 @@
   },
   "lastPreparation": {
     "objectId": "adrastea",
-    "materialSha256": "4b44fe1c368ebe5cbd3f3b0e33b3b6c41f7b52e2d4b9edef2f07424972ad2ab6",
+    "materialSha256": "9d6bb7921cf6cfddd3ba89e368a70e7601f11bb3c2a93dd1bdf32aaaac27d006",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

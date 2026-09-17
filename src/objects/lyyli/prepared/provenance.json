@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/lyyli/lyyli-elevation-surface@2x.webp",
-          "bytes": 304010,
-          "sha256": "a24f7e4f3172a9340407746df3126001d73afbfc367db4d9eb62c474466a814a",
+          "bytes": 273036,
+          "sha256": "c6d294eef96b1fbd0a6b42160aa1036b764f47914dc9c6986839590efdae25d4",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/lyyli/lyyli-shape-surface@2x.webp",
-          "bytes": 68866,
-          "sha256": "184e6b2edf1189354041f26b42a0e7d66096c346e220ffeb32a60384821825d2",
+          "bytes": 65678,
+          "sha256": "e71fe3565c3a576375f0d90e18182776ab7954c4535a2a9668d16e6d9ed392af",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "lyyli",
-    "materialSha256": "688fff3ae9eb05dbeb7f586e2168b00c16a0fc84bf113724eb1578e24fa417c9",
+    "materialSha256": "e186c857e4bbca5718481633a062fdeaa77ae4f9b3467b43285a4a5a10a16b7d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

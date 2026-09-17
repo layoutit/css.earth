@@ -324,8 +324,8 @@
         },
         {
           "url": "/scenes/comet-c1983-h1/comet-c1983-h1-model-surface@2x.webp",
-          "bytes": 59034,
-          "sha256": "63dcd546084c1c3640d17849d4772b00c49693c55e2adabd2667a181f7233793",
+          "bytes": 48632,
+          "sha256": "8c22a01b9764e15b8f813ee9176ec8082e8a1cb9f722b0048dbca15358b6cf31",
           "verification": "bytes-verified"
         }
       ],
@@ -371,7 +371,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1983-h1",
-    "materialSha256": "41965d0a5b18d10169cba7ce2dcebaddd6fbd30fdcbec61afc0be87f3f0a6826",
+    "materialSha256": "b83652c9df252a88169d13af8cb2147dd6b3595029136095ac05bc64364fd8f3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

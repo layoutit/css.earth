@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/laurentia/laurentia-elevation-surface@2x.webp",
-          "bytes": 307592,
-          "sha256": "401a68731c8ffe02f5b465c656974546e1fbcbda306d37c10ce12d5576434c2b",
+          "bytes": 278068,
+          "sha256": "86fd12a300ba88d571c1cba772e2c4a2d620cec058534fa7b809bc0c06186b54",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/laurentia/laurentia-shape-surface@2x.webp",
-          "bytes": 70060,
-          "sha256": "e6030de4190bed8e5232cf88578ecf28aeb557088d9b5e78fba25771d70dfefd",
+          "bytes": 68450,
+          "sha256": "d461a190b15f0a62706d6a399cb3fc3e78f2520d65ffaf1b36da04a102835ecc",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "laurentia",
-    "materialSha256": "7c4de2d0dd7db6c6510d08ca322621eaba6b9c3f3dd0a8ffb3b5180d0305a51a",
+    "materialSha256": "ee5d5f7e021ecd5c2ab8f1982b1135d2d477ab81aac27deb7ecdf9862a04f698",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

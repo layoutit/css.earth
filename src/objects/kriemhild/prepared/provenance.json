@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/kriemhild/kriemhild-elevation-surface@2x.webp",
-          "bytes": 328438,
-          "sha256": "93349b01e708f2c4f31eb3b62283d8ba1391dde6f09653ef46f122924d0941c8",
+          "bytes": 299502,
+          "sha256": "08ba59ffcfd4aa944072b9b6433fe2d67194809b0033452d511e5af2aac9f5b3",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/kriemhild/kriemhild-shape-surface@2x.webp",
-          "bytes": 74444,
-          "sha256": "aa492aaee297c6e0285f19abe7257ff810dcbbc09106852cfa49333c0d7000bc",
+          "bytes": 72626,
+          "sha256": "22f34680f0bf0673a9cdf95dc6785d9f98db8f173343111554d328547a68ed7f",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "kriemhild",
-    "materialSha256": "2224e23b763cbe5e63c26bdb55eff302f12fe4a841022e6a4c05126523456895",
+    "materialSha256": "8130e9c76abc349ab0ca4516814a86880148252becfac41288daf115d953987a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

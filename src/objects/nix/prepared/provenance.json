@@ -482,8 +482,8 @@
         },
         {
           "url": "/scenes/nix/nix-model-surface@2x.webp",
-          "bytes": 85106,
-          "sha256": "af81bd869466c437269433a9733cccdfd2b7a83947e4eeb80e966fca9e89dac6",
+          "bytes": 70616,
+          "sha256": "9261b3b956a24d835e39f9e693590d1b50fb50020e43211f60ccce235b99b732",
           "verification": "bytes-verified"
         }
       ],
@@ -533,8 +533,8 @@
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
-          "bytes": 153344,
-          "sha256": "768a9bd32278aa3e853ba0f3eb7583c889378504f28c7bcdd950d96aebca3e59",
+          "bytes": 137316,
+          "sha256": "3bbe58a8b63f3cd386a5be42fa3f358ad407ff8078cff52ec66d6e5d75a6a085",
           "verification": "bytes-verified"
         }
       ],
@@ -617,8 +617,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/monochrome.webp",
-          "bytes": 7932,
-          "sha256": "30cf1e8ed2b0ba8ac104b951a160f04a4115ad657f51c778e28ae0ac1e3e71ea",
+          "bytes": 1526,
+          "sha256": "708efe356de0f342dd461fb38786bb35e219a2087808da4776925c3e539b7161",
           "verification": "bytes-verified"
         }
       ]
@@ -630,7 +630,7 @@
   },
   "lastPreparation": {
     "objectId": "nix",
-    "materialSha256": "549e5602f1b3d50038d83192cd30600660967ac0809530c13cdfe60139ff2657",
+    "materialSha256": "e2cd8b0501dbf094f25b3ef5f2b1998c8a9faad6874e616d99274bb5bca1e79a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/klotho/klotho-elevation-surface@2x.webp",
-          "bytes": 307140,
-          "sha256": "ee5b7d4b835500185e41c576249b1cedace8837a217b5cb04297c7f3f7458617",
+          "bytes": 280170,
+          "sha256": "e251f2b62d345dcfcae7ea242de337897d3d30f82b43c7b809472a874f261ec3",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/klotho/klotho-shape-surface@2x.webp",
-          "bytes": 74244,
-          "sha256": "7d78f30b619e8e071b624e6ca3e5708f6b037685c9c72d00e91a828e5716a381",
+          "bytes": 72592,
+          "sha256": "eda41d7c8e3316010461b89f977194fb4c55b14159564e412408fa373068eabd",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "klotho",
-    "materialSha256": "4e9dabae1d9f1e9ccb714c3f6b517a22dc901616624620747cfe524ba3b58844",
+    "materialSha256": "c7416be6862be2a4640ea236384282d1a7a3e30bea6ef9689dd76b82e1e20614",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

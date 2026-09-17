@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/ariadne/ariadne-elevation-surface@2x.webp",
-          "bytes": 344452,
-          "sha256": "b904044fdf95884627240ced2088f372f3026ae1ea6c4914d73d65254b93149a",
+          "bytes": 291022,
+          "sha256": "8b51bba028ec72ff8499e1a8bd0d96023380f0f608fda51981bb7be5954dc8ef",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/ariadne/ariadne-shape-surface@2x.webp",
-          "bytes": 80286,
-          "sha256": "023d61125bde53611f2b3868b9968d8f1e1fb90622ed96d58bdf17cc57b4849e",
+          "bytes": 78958,
+          "sha256": "9fd758bd5a056c104b58e6014ede3ee0d2c3b2f1c534e5eb68da4a14709f467a",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ariadne",
-    "materialSha256": "56e799088b7c6f16c2c4dae5c68430b37b856e6718b0aec2a9aeff1a4b21b75f",
+    "materialSha256": "66d3cff921ed83f888980316436467410f132fa3180216f2ab70ff2937f302c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

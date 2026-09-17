@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/lucia/lucia-elevation-surface@2x.webp",
-          "bytes": 347330,
-          "sha256": "e6088ec09027c3ee35d7b38285adcf598d92a62b484966d8f4b58de81225de57",
+          "bytes": 313924,
+          "sha256": "72f4d857db0303751e5dbe22fda0fad8a71e0c5a1ac9faa7aa704dc081e17edc",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/lucia/lucia-shape-surface@2x.webp",
-          "bytes": 72242,
-          "sha256": "7dd92d564868e57efe67db8496d7954c5fae3603a5cb1c2a4646df7c633b15bb",
+          "bytes": 69982,
+          "sha256": "70fe61dd0fdc8c0306c99db9661092f72b28e5bc651fb56f8dfca4a92f15c50a",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lucia",
-    "materialSha256": "e807ec77957d6a74d098766c5320fe8c2018045a021285709ed226857cb72d30",
+    "materialSha256": "24e42677b3667b7985a35b740f0bebf45f26ef43a434af70723a4cdf5d1ee74b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

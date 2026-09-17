@@ -2076,8 +2076,8 @@
         },
         {
           "url": "/scenes/prometheus/prometheus-elevation-surface@2x.webp",
-          "bytes": 490122,
-          "sha256": "06e860a128249f04fa8438e3a7b344f374912fa3f6b8282f5af726d6d73f3033",
+          "bytes": 404678,
+          "sha256": "155f617af065a0547d4f4ae2c6b2ad6abb63b399f47878c4e9ac49f243bdbb81",
           "verification": "bytes-verified"
         }
       ],
@@ -2134,8 +2134,8 @@
         },
         {
           "url": "/scenes/prometheus/prometheus-normal-surface@2x.webp",
-          "bytes": 430122,
-          "sha256": "d9447fba33300e497699ca5332d50b94fb82238240def645ab14ee9a281f82a5",
+          "bytes": 350224,
+          "sha256": "33e1ba5202e19f70a49e37c1fa0c09e4d0b465875b5942940247410d25972b68",
           "verification": "bytes-verified"
         }
       ],
@@ -2190,8 +2190,8 @@
         },
         {
           "url": "/scenes/prometheus/prometheus-filter-color-surface@2x.webp",
-          "bytes": 472560,
-          "sha256": "185fa6c0b85ce68aeb3f0321e98a05d38ac1dc168983ca1a8e9159e319bfdee5",
+          "bytes": 389316,
+          "sha256": "66e398ca74e0aa4302cbd3ce8e824e391964b2030e14f123aac8e1fcda8ec4de",
           "verification": "bytes-verified"
         }
       ],
@@ -2249,8 +2249,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 14470,
-          "sha256": "35c71c7e39ef19c6702baa1ccc776e2acbe962e744645f65678880dd726e56ad",
+          "bytes": 12556,
+          "sha256": "dc5be5f58fb694d9138fe17d5602136e9c7184fbd7422a37153e8635be748929",
           "verification": "bytes-verified"
         }
       ]
@@ -2274,8 +2274,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 11328,
-          "sha256": "efd117aada64f6fc49db23914fd5caa6bcbbb22d187906cf3f942bb5060b7f17",
+          "bytes": 9794,
+          "sha256": "23d1af6862412d94eb4a335cbcdb5b1872d7d74b9e8a09fbcc7d37ab19783b42",
           "verification": "bytes-verified"
         }
       ]
@@ -2312,7 +2312,7 @@
   },
   "lastPreparation": {
     "objectId": "prometheus",
-    "materialSha256": "0b216b9b85886409f580ce1c51bf551a120b615e1c06e4457387381390afc8c6",
+    "materialSha256": "2753af961820c7b8547d09a0f3318d8afd12d007227a13848ff0b2fa306e60bd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

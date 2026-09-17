@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/hestia/hestia-elevation-surface@2x.webp",
-          "bytes": 308570,
-          "sha256": "ddabe9fa8582432cacc53752e920ee06af995494c4e5e296a5d3bdfd3ae7f227",
+          "bytes": 276316,
+          "sha256": "d9bb26fa12ab13ec58ce255d67dbf1f6695869e1209b520bce681a2dc63bb460",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/hestia/hestia-shape-surface@2x.webp",
-          "bytes": 76338,
-          "sha256": "28ea6db82bbb5bc1e4d63783cccbabb7dc80a3142c494d6b23f84533937785d2",
+          "bytes": 74340,
+          "sha256": "b7ac30b54df136f57f0fa4ea809efd4763fe96a185950fed59f251adef1e9f28",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hestia",
-    "materialSha256": "70cf96550f9196d953a94f6abb5013b7944ee18ea0fcabd4f34b034a34513207",
+    "materialSha256": "99d42f1e4b4cdb4e6f580364daf1adba945d6c3defa1c3537ee58e8e8885356d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

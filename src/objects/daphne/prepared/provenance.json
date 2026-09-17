@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/daphne/daphne-elevation-surface@2x.webp",
-          "bytes": 357378,
-          "sha256": "5758add4a6fd9ab792de50db0d4238c028b46224ce067f150e0990989851ab5a",
+          "bytes": 306052,
+          "sha256": "3e5f26caab9282993866b2ca3f92599383934091c03dc784024a4c3eaa266fd2",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/daphne/daphne-shape-surface@2x.webp",
-          "bytes": 83248,
-          "sha256": "c59ec981819c4fd885bd62506156e34eea8c96dfc79d9aad0562c5ec0611b028",
+          "bytes": 80184,
+          "sha256": "fa934bdaccb7ecd3afde8fdd03c9625c4603d2344122413e945c1a123a7ff7d2",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "daphne",
-    "materialSha256": "dcafb04a2277ef0f2c52323003a065f4637f986392418d4d112d9a402bd42983",
+    "materialSha256": "4c4b88bf328ef9dbf6fdb74b96dc89d1302309f57e7a8549b1eaafe2a6b2a609",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

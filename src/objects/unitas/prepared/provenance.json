@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/unitas/unitas-elevation-surface@2x.webp",
-          "bytes": 355162,
-          "sha256": "83455bbb22c2fdafa9a7d2ada3710c7daec38a74c7d5b1f7192bf8cd45169b30",
+          "bytes": 324136,
+          "sha256": "cb33708a6477f6d5ea95b4dbdaf22ea0455ff6b59c3bae8206115304d6043dec",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/unitas/unitas-shape-surface@2x.webp",
-          "bytes": 76022,
-          "sha256": "c4cece39123f05faa265f329b5da08190aad77a4a33c4de099bcc24a4a705d9a",
+          "bytes": 74028,
+          "sha256": "f4c73ec7eb6308b6384f67f0673bdca41ab60bb12fc051f9915f10bf962ec649",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "unitas",
-    "materialSha256": "fca8edd12ac798163c4cc4b99761902a4faf258eb0b69987dfb5a17eecc31c71",
+    "materialSha256": "3fb62cddcf8d6523e84503c5b957f69aed243af6e933e8e01006424736ed5f8b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

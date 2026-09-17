@@ -396,8 +396,8 @@
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-surface@2x.webp",
-          "bytes": 404170,
-          "sha256": "845627a8da2c1251256cf5a4c95dbf9fde0b55005b8aaf3aa2c67a98ca7400a9",
+          "bytes": 338778,
+          "sha256": "fdba4c0043d5fb79637ab935b819e003916393dc6f26799410c7b25981240f30",
           "verification": "bytes-verified"
         }
       ],
@@ -440,8 +440,8 @@
         },
         {
           "url": "/scenes/phaethon/phaethon-shape-surface@2x.webp",
-          "bytes": 76778,
-          "sha256": "09581ff64430009976d9b9dfa300c760606739fd279493e79a98297a29fc9ebf",
+          "bytes": 74210,
+          "sha256": "a99a5d552fdf70942fb9be958ff4b27e7b79dfbbbb12180c8b530366bdb75213",
           "verification": "bytes-verified"
         }
       ],
@@ -537,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "phaethon",
-    "materialSha256": "4808b9b7fd4ef6846387dfc2e5f41712d56f1cc6eede8cc0437e0a6d4c7ce301",
+    "materialSha256": "2c154a586b49529b1c96969df39af086db1ea39fbdc31524c7ebae3f07191a00",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

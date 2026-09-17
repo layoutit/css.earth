@@ -432,8 +432,8 @@
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
-          "bytes": 84138,
-          "sha256": "187c2a0e4c5555462315da26c98a930b4db3c0ba63a8e03206c8a10c474206e7",
+          "bytes": 74638,
+          "sha256": "347da848cc4aafe83b499e1cf6d3e2fd6d1a65adad7a22d4717e03fab303306c",
           "verification": "bytes-verified"
         }
       ],
@@ -491,8 +491,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5070,
-          "sha256": "804c7bead648612b427335a34542e7ad4173893f7fbae97cf46b1f0b2fcbe1f9",
+          "bytes": 1222,
+          "sha256": "79dc6285c91046fe0562684aba6e6697a97cdd3f4c6e46444b392a9c2ac7f029",
           "verification": "bytes-verified"
         }
       ]
@@ -504,7 +504,7 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "809674ed5e39fe066517fa036eade0f9379067292f6d9223f9bdfcd28100ab55",
+    "materialSha256": "d3fe66b792521161ad0dd592ca69b8d15b5ea54bd2b097e3b00f118822798912",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

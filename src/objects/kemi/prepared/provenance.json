@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/kemi/kemi-elevation-surface@2x.webp",
-          "bytes": 321584,
-          "sha256": "0159b99bc5b72fde0c9d68484ba732fdd0f5b422cedb26985d9141689a4288ef",
+          "bytes": 290278,
+          "sha256": "5579c5d399c642468bdaa241b9bd36223886376f72086e802c798f3df0a23df6",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/kemi/kemi-shape-surface@2x.webp",
-          "bytes": 73878,
-          "sha256": "f4f4d84b318e17a82fec8aa4135efa6bce7a6a4dd173ac6d04d45aa3d99225be",
+          "bytes": 70414,
+          "sha256": "3fc79204987b223f010d8540cec118ef8e8e71d6f68c6c8fea1a74251f8fe096",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "kemi",
-    "materialSha256": "4cd2389f502b794fb371e30b6fd64c1a20205696029623d14352480bf6820c22",
+    "materialSha256": "0e6b0d41f970767c7b3b43f8c1e4df03c7d7a738fdc1db01b87508042850c1f4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
