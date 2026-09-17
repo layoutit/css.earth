@@ -2,6 +2,7 @@
 import '../../../site/planet-navigation-marker.css';
 import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-markers.mjs';
 import { markerStyle, type PreparedNavigationMarker } from '../../../src/navigation/marker-presentation.mts';
+import { sidebarThumbnail } from '../../../site/sidebar-thumbnails.mts';
 import { APP_ORIGIN, objectColors } from '../objects.mts';
 
 interface Props { objectId: string }
@@ -17,10 +18,16 @@ const color = colors.get(objectId);
 // The marker tiles live with the app, which is also where the embedded scenes come from.
 const prepared = marker && color ? markerStyle(marker, { color, scale: SCALE }) : null;
 const inner = prepared?.innerStyle.replaceAll('url("/navigation/', `url("${APP_ORIGIN}/navigation/`);
+// A context scene has no body marker; the app shows its prepared sidebar thumbnail instead.
+const thumbnail = prepared ? undefined : sidebarThumbnail(objectId);
 ---
 {prepared
   ? <span class:list={['planet-navigation-marker', objectId, { ringed: prepared.ringed }]} style={prepared.style} aria-hidden="true">
       <i style={inner}></i>
       {prepared.ringed && <b class="planet-navigation-ring" style={prepared.ringStyle}></b>}
     </span>
-  : <span class="planet-navigation-marker catalog-navigation-marker" aria-hidden="true"></span>}
+  : thumbnail
+    ? <span class="planet-navigation-marker context-navigation-thumbnail" aria-hidden="true">
+        <img src={`${APP_ORIGIN}${thumbnail.url2x}`} width="16" height="16" alt="" loading="lazy" decoding="async" />
+      </span>
+    : <span class="planet-navigation-marker catalog-navigation-marker" aria-hidden="true"></span>}
