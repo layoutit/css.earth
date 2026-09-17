@@ -1,7 +1,7 @@
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../../src/renderers/css/navigation/world-camera.js';
 import { requiredElement } from '../browser-types.mts';
 import prepared from './prepared.json' with { type: 'json' };
-import { worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation } from '../../src/renderers/css/dist/navigation.js';
 import { minimapPointRange } from './point-range.mts';
 import { minimapPointCovered } from './point-coverage.mts';
 import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
@@ -110,7 +110,8 @@ export function mountSpaceMinimap(documentTarget: Document) {
         // denser screens. Responsive scaling may require a larger local guard.
         coverageGuard = mapScale > 0 ? Math.SQRT2 / (mapScale * dpr) : Infinity;
       }
-      const cameraToReference = worldRotationFromQuaternion(world.pose.orientationXyzw);
+      // The diagram is drawn in screen axes, +y down.
+      const cameraToReference = cssCameraAxesFromOrientation(world.pose.orientationXyzw);
       const referenceToCamera = transpose(cameraToReference);
       const toFocus = focus.positionM.map((value, axis) => value - world.pose.positionM[axis]);
       const focusEye = rotate(referenceToCamera, toFocus);

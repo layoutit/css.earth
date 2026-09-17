@@ -123,8 +123,8 @@
     {
       "id": "wasp-43-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 282,
-      "expectedSha256": "e9003c64e500e232f30bc50dff10d3b1c3f2746171147019c4ed022d39b20c05",
+      "expectedBytes": 284,
+      "expectedSha256": "f4592cbb18dd707ea3de3daadc6e2ff78c949f66ee62a8753ffba5ed42195a92",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",

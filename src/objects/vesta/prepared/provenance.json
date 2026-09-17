@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c9e1d7653a7663253f36c078bb59dea2fe3ac132e4d23514a71b631d67da024"
+    "sha256": "389d6b8452b851806eb4c91967776fa9c641a2fa1f6efde84690666a27171420"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "7795dde4e615e4e0790ddfabbee9cf81a71958b9d2bb2828a408275c3d1c26c9"
+    "bindingsSha256": "cbb55d477457830e807e8ca8f2c3af230a06dc9cc4421ea9fc29d20ade3b186d"
   },
   "recipes": [
     {
@@ -396,7 +396,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "2e00300733f8a2572e548323aaa05ad8afa6cba2131718cd4cefa3e9a6c47c89",
+      "sha256": "7868bde6f73e0427c7f8ae25d27828fb9b6026ed0512c04d3a7063f5ccb5ab54",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -407,7 +407,6 @@
           "metadata": "metadata_nomenclature_points_VESTA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "vesta-features.json",
         "publicBase": "/scenes/vesta/",
         "target": {
@@ -765,8 +764,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "75f4e502b985c08b6a527b7c6459a3ca268a0bb27ce5da8c518435d647501fa5",
-      "bytes": 152,
+      "sha256": "e2ea16371b7d9ee6018209750ad06f6c7e5e8d4c590ba78d8a2647a7d100c9c8",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1076,7 +1075,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1204,11 +1202,11 @@
   },
   "lastPreparation": {
     "objectId": "vesta",
-    "materialSha256": "d8ee8288d813bec02176a29d4414d869f2a9349833d5e44b4c5fc5be5a51aa90",
+    "materialSha256": "c2bbfbdb68a5bccf9577c754cfa9ad14ce8a4ef1d677aff7b77c6a0dbf485ca2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "7795dde4e615e4e0790ddfabbee9cf81a71958b9d2bb2828a408275c3d1c26c9"
+      "bindingsSha256": "cbb55d477457830e807e8ca8f2c3af230a06dc9cc4421ea9fc29d20ade3b186d"
     }
   }
 }

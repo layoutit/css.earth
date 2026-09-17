@@ -36,7 +36,10 @@ test("Mercury retained leaf mapping stays source-bound and the runtime carries n
   assert.equal(Object.hasOwn(mercuryRuntime, 'heliocentricView'), false, 'the shared universe draws the solar system');
   assert.ok(presentation.assets.startup.every(key => !key.startsWith("sky:") && !key.startsWith("interior:") && !key.includes("directional-sun")));
   assert.ok(presentation.variants.filter(v => v.when.lensId === "interior").every(v => v.required.includes("interior:section")));
-  assert.deepEqual(mercuryScene.worldFrame, mercuryPrepared.worldFrame);
+  // The world-navigation stage replaces the interim presentation map with the body as drawn; everything else is this preparation's.
+  const { presentationToReference: drawn, ...retained } = mercuryScene.worldFrame, { presentationToReference: interim, ...prepared } = mercuryPrepared.worldFrame;
+  assert.deepEqual(retained, prepared);
+  for (const matrix of [drawn, interim]) assert.ok(Math.abs(determinant(matrix) + 1) < 1e-12, 'a map into CSS 3D space reverses handedness');
 });
 
 // Compare the current direct-leaf matrix against its independent authored
@@ -99,6 +102,9 @@ const subtract = (a: readonly number[], b: readonly number[]): Vec3 => [a[0]-b[0
 const scale = (a: readonly number[], factor: number): Vec3 => [a[0]*factor, a[1]*factor, a[2]*factor];
 const normalize = (vector: readonly number[]) => scale(vector, 1 / Math.hypot(...vector));
 const cross = (a: readonly number[], b: readonly number[]): Vec3 => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+function determinant(m: readonly number[]) {
+  return m[0]! * (m[4]! * m[8]! - m[5]! * m[7]!) - m[1]! * (m[3]! * m[8]! - m[5]! * m[6]!) + m[2]! * (m[3]! * m[7]! - m[4]! * m[6]!);
+}
 function nearVector(actual: readonly number[], expected: Vec3, tolerance: number, name: string) {
   const residual = Math.hypot(...subtract(actual, expected));
   assert.ok(residual < tolerance, `${name}: ${residual} exceeds ${tolerance}`);
@@ -128,11 +134,8 @@ test("Venus physical frame resolves real astronomy positions with a 6051.84km bo
   const sunIcrf = normalize(scale(venusM, -1));
   const northIcrf = astronomy.eclipticJ2000ToIcrf([0, 0, 1]);
   nearVector(world.orbitUpReference, northIcrf, 1e-12, "Orbit horizon north");
-  const rightIcrf = scale(normalize(subtract(sunIcrf, scale(northIcrf, dot(sunIcrf, northIcrf)))), -1);
-  const downIcrf = scale(northIcrf, -1), frontIcrf = cross(rightIcrf, downIcrf);
-  for (const [axis, expected] of [[[1, 0, 0], rightIcrf], [[0, 1, 0], downIcrf], [[0, 0, 1], frontIcrf]] as const) {
-    nearVector(multiply(world.presentationToReference, axis), expected, 1e-12, "Frame axis");
-  }
+  // The presentation map is interim here (the world-navigation stage derives it from the body as drawn), but it is always a reflection.
+  assert.ok(Math.abs(determinant(world.presentationToReference) + 1) < 1e-12, 'a map into CSS 3D space reverses handedness');
   assert.notEqual(prepared.starfield.sceneRegistration, mercuryPrepared.starfield.sceneRegistration);
 });
 

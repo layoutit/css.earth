@@ -4,12 +4,12 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { parseDbf } from './dbf.js';
-import { budgetTracePaths, extentPolygon, meshRadiusBand, nodeIndex as nodeIndexForTest, normalizeExtent, projectRadial, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
+import { budgetTracePaths, extentPolygon, meshRadiusBand, nodeIndex as nodeIndexForTest, normalizeExtent, projectRadial, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
 import { parseShpPolylines } from './shp.js';
 
 const root = process.cwd();
 const mercurySource = resolve(root, 'src/objects/mercury/source');
-const axes = { prime: [0, 1, 0] as const, east: [1, 0, 0] as const, north: [0, 0, 1] as const };
+const axes = { prime: [0, 1, 0] as const, east: [1, 0, 0] as const, north: [0, 0, 1] as const, mapLeftEdgeLongitudeDeg: 0 };
 
 test('DBF reader decodes fixed-width records, field descriptors and deletion flags', () => {
   const header = Buffer.alloc(32 + 32 * 2 + 1);
@@ -79,7 +79,8 @@ test('shapefile polylines decode, traces select by class inside the padded exten
 test('the Mercury recipe parses and rejects overlapping or excluded label kinds', async () => {
   const config = JSON.parse(await readFile(resolve(mercurySource, 'preparation/features.json'), 'utf8'));
   const parsed = parseSurfaceFeaturesConfig(config);
-  assert.equal(parsed.mapLeftEdgeLongitudeDeg, 180);
+  // The surface map owns where longitude starts; Mercury's global mosaic begins at 180 degrees.
+  assert.equal(parseSurfaceAxes(JSON.parse(await readFile(resolve(mercurySource, parsed.surfaceMap), 'utf8'))).mapLeftEdgeLongitudeDeg, 180);
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, kinds: { ...config.kinds, region: [...config.kinds.region, 'AA'] } }), /one label kind/u);
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, excludedTypeCodes: { AA: 'no' } }), /must not also be labelled/u);
   assert.throws(() => parseSurfaceFeaturesConfig({ ...config, labelPolicy: { ...config.labelPolicy, limbCosine: 1 } }), /out of range/u);

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "753abf8aa75c205c85ae1c77a8e1419803bbc7bf92b89278395ce939b2ef0846"
+    "sha256": "ddea30a7ec6d0f140486604ba67aacd4572069381fb159235842245f2456c2d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "bb5dcd9ab3d371574a063727e19ad835ce8442adef93bb5b0282ae5a6b91d072"
+    "bindingsSha256": "0d76e3c159a2146cecd3edd2bf51078110e99eee408b83b0b1a500de1e8a82a8"
   },
   "recipes": [
     {
@@ -501,7 +501,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "9b08a7c1432b04421a7146cf83df73007d0a812d8d12cbb5dba8346d88152414",
+      "sha256": "5dfc2b92385511e5c1373f500b29cfec71eb313d70b0ba99c28ce5b3cf2ab36b",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -512,7 +512,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "didymos-features.json",
         "publicBase": "/scenes/didymos/",
         "target": {
@@ -924,8 +923,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "05b03ddd8348fb0c98249dd46fa42334fbdb33c6822cb8323f1cbd37d5c08bd3",
-      "bytes": 154,
+      "sha256": "0094e844aa309c843d3ff4b62f4c4efddd1f27c9a3ddbc472da86f5518ec254a",
+      "bytes": 186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1195,7 +1194,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1323,11 +1321,11 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "66c64a1ad9b0cb8efc13b809285761f2eafc254ee714d2590789648648d6afb4",
+    "materialSha256": "a5f07ad1bd1c70959b3eac3534aec97b18d2c62b9dd49287d6e044f6418f4ab8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "bb5dcd9ab3d371574a063727e19ad835ce8442adef93bb5b0282ae5a6b91d072"
+      "bindingsSha256": "0d76e3c159a2146cecd3edd2bf51078110e99eee408b83b0b1a500de1e8a82a8"
     }
   }
 }

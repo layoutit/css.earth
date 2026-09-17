@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37e621355ca7bcddceefa559fbd125db9960659022892c0e4c7457edc7249826"
+    "sha256": "47983b2af102ec3c19efaa49ddd04fdfe67be743ac9fd6d70a71b37884db82f9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "ea91b42c9b5e7e08b2a8a9134e24fb8e158ec92fbda93bff564c2b962b52c1a2"
+    "bindingsSha256": "3e0f906166a3e309c1c679a2a8e3a924c7ba6767ee8b429710a994a11f1d64f5"
   },
   "recipes": [
     {
@@ -871,7 +871,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "b730d65a323144778eea6b8bad691469c82644094278e8cf22d84f3c1d5d2494",
+      "sha256": "14ad07600992274c8d7dbab8b7d7d67944dd31095064feeb19f32eb9569d8c2c",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -882,7 +882,6 @@
           "metadata": "metadata_nomenclature_points_TETHYS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "tethys-features.json",
         "publicBase": "/scenes/tethys/",
         "target": {
@@ -1746,8 +1745,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "6c2b8a9f7f7b9959adc5b77ec09fd2b22daa182f043bb119bc362e3cc6b2cbd3",
-      "bytes": 153,
+      "sha256": "0539ae434a135593cf9583e8eaaa85c4b5d8025fd5ae3b5574aa96d5e362157d",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2269,7 +2268,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2497,11 +2495,11 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "5cdca2d6999fb75bd56eb7ffd7c9b030a6aa80e002bb4616b2e627f8fc429a28",
+    "materialSha256": "1392c2e31dadc1ca056c5229af613d35308c5b139c1a96d9d85ff50e085c3323",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "ea91b42c9b5e7e08b2a8a9134e24fb8e158ec92fbda93bff564c2b962b52c1a2"
+      "bindingsSha256": "3e0f906166a3e309c1c679a2a8e3a924c7ba6767ee8b429710a994a11f1d64f5"
     }
   }
 }

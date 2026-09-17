@@ -265,8 +265,8 @@
     {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 16246,
-      "expectedSha256": "c830f728039aafebb48ef3eaf4b48869a539592631cc05c13fc7f21edac4b2ef",
+      "expectedBytes": 16234,
+      "expectedSha256": "49ac0e69fdbb39d082ab7d2a3d2e289b4df1931d8e055c551a47b40544725619",
       "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -340,7 +340,7 @@
       "id": "wasp-43b-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "expectedBytes": 285,
-      "expectedSha256": "7b81c8e9236a4280ffdd9a7bcc5cf37e08ccd4a587e1a95a82819a69603a7f02",
+      "expectedSha256": "f502d5f0c775af0f855f9b3102bf601c79f1937a2909da7428471b16c59434c6",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",

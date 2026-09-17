@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50ba00931f0dcda13db30fe1b49477dbf84e4894afd866cdaadadffdf4682e65"
+    "sha256": "fb1b0a8389a252c3cd02f197e84ad58e88a70506c59dcec412fc04295b00e167"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "08d4d5b5f863678e2e427bccafea6fba2c24b588e9b3ad676d3768f55c83b057"
+    "bindingsSha256": "ae8e1149a92a04820dd11ace381d817c67602fab316933f7e2ff126c4cde0b1e"
   },
   "recipes": [
     {
@@ -1016,7 +1016,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "e3b8d6d6c9d3132108b3505292c74a6a41a3af95f0c65503d06d99840ca6d2b3",
+      "sha256": "bc8a0b48502cd5a5bf020cad3dea7f103afdea45c33b153badf7183239d61b10",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1027,7 +1027,6 @@
           "metadata": "metadata_nomenclature_points_PLUTO.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "pluto-features.json",
         "publicBase": "/scenes/pluto/",
         "target": {
@@ -1411,8 +1410,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "3fbd8649a9ae4e41027a8fb1f52cdc0cadd18b61d39f77a3f17147336e146c7f",
-      "bytes": 152,
+      "sha256": "8a14c713df0b84ed59656ba16775028465bcbf7ff3390d169a08204c6fc08078",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2294,7 +2293,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2472,11 +2470,11 @@
   },
   "lastPreparation": {
     "objectId": "pluto",
-    "materialSha256": "0f1494e943a60fe40c28f48c5d652e1b437ba7ad4f8be6fb90bacacd91818cd8",
+    "materialSha256": "61d17ba4c037494c628f2deeb8b9c2fbf930dcf44b7a57d049e51134e2413e12",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "08d4d5b5f863678e2e427bccafea6fba2c24b588e9b3ad676d3768f55c83b057"
+      "bindingsSha256": "ae8e1149a92a04820dd11ace381d817c67602fab316933f7e2ff126c4cde0b1e"
     }
   }
 }

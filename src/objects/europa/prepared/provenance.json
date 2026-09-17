@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4996ae8506e165b8c515b6689984c8ee255b28f66221325c16949f2f2cedac9f"
+    "sha256": "190a0015812e499ffe8bde629fb4b949526da42ba566f51db5b3fd7fe87be7b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b51a54c044f8eda22b7c5966f8f91a4d408bada10744208fa4862210b6173361"
+    "bindingsSha256": "bfc243a1f85959cb2b4ba2dd470e528a53676106416d335ce34b96afa6746f84"
   },
   "recipes": [
     {
@@ -1076,7 +1076,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "5ff95fe1d60c55bb3a7c128b05ec43ad079f18078826ed27290c92fea4d936a9",
+      "sha256": "4e2a03705b9fa117bd9daa9fc5fda9563e4a1d40a757343f641c6fac6bce219e",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1087,7 +1087,6 @@
           "metadata": "metadata_nomenclature_points_EUROPA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "europa-features.json",
         "publicBase": "/scenes/europa/",
         "target": {
@@ -23096,8 +23095,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "8ed6a12599f89c5048c1eb2499e8c6bcd3aa0eefd43213e150818f097ee07691",
-      "bytes": 153,
+      "sha256": "d5e5e253118f000c810d782345862097e9614d5cad1a93cf7115c1617fa0b5f5",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -24439,7 +24438,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -24667,11 +24665,11 @@
   },
   "lastPreparation": {
     "objectId": "europa",
-    "materialSha256": "a0b077408337083a9a41564e2463459ac77a001c11b6bca580fc6e81f362dc3c",
+    "materialSha256": "4363a29e7491650149295e8143bf522ab1e6ef04f9c1ae9a6960c47fabae4f54",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b51a54c044f8eda22b7c5966f8f91a4d408bada10744208fa4862210b6173361"
+      "bindingsSha256": "bfc243a1f85959cb2b4ba2dd470e528a53676106416d335ce34b96afa6746f84"
     }
   }
 }

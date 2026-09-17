@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c29f229943f93bcc43d2a89f31ac4421bfcae4ba9a069f60ec8bf836d782619d"
+    "sha256": "3bcc3fc8a680bc79a56a8a927d626323689941f99163c832852583651e5a6a65"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "56857faf3daca70e0545137d192be72b61221584342e65478de7783309926074"
+    "bindingsSha256": "33429f64c9d2fbf3101bc28a8c63b19631eeb46d59429252d28eda744420a7b0"
   },
   "recipes": [
     {
@@ -404,7 +404,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "cf83a84097c1adaaf528f9c29592e8758df3d4c5b4be9c9ee6354862c56b7563",
+      "sha256": "75d57d07d8088550b0ba84b9f55681ddbf2fe29fd360e65090695cf37107541b",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -415,7 +415,6 @@
           "metadata": "metadata_nomenclature_points_MATHILDE.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "mathilde-features.json",
         "publicBase": "/scenes/mathilde/",
         "target": {
@@ -933,8 +932,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "9f339dacb4f64327dfbf20a49e53eac2a9f087196735fa43369648c80e992155",
-      "bytes": 155,
+      "sha256": "36f43bd3ea3b0dedceada1f503ca5994613cb55ed000fcb5133a373999db22fd",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1174,7 +1173,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1277,11 +1275,11 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "d96c60d7393197afafb135dc941e7fa006ffed1b8fc4c6a751d1e9c4fc274be0",
+    "materialSha256": "eb0cdf139570f2525b0184e0db25f4ea648fcb515ef2ee074581c24fdc6a14d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "56857faf3daca70e0545137d192be72b61221584342e65478de7783309926074"
+      "bindingsSha256": "33429f64c9d2fbf3101bc28a8c63b19631eeb46d59429252d28eda744420a7b0"
     }
   }
 }

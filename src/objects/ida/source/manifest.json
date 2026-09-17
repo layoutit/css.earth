@@ -521,8 +521,8 @@
     {
       "id": "ida-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1111,
-      "expectedSha256": "5c97f6239a9bb0f080ee6d2a514130e8a177c89de30bcc0e9f13626fea968e20",
+      "expectedBytes": 1079,
+      "expectedSha256": "49f85bf7b98243420426344c3d13dc2db8fec7e406e9ba2337b23e5adf9a8179",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -539,8 +539,8 @@
     {
       "id": "ida-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 150,
-      "expectedSha256": "09dd7bb976ffd672491c6a67a0a135b6cb78be58571ffe2926048a63426bd19b",
+      "expectedBytes": 182,
+      "expectedSha256": "bad74d5f1ea1789831d76107434625983cb04cc584916c402cdd56d43140749c",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

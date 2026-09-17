@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "90b6670ac9cedf2dbbd37cafee4302201979a897f637dcecdb69f23b43738ee6"
+    "sha256": "7d917f14cf979c9528413cc6fc83f7163461a59ec6842f5b163e3451a7088d70"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "856803faeb4ccfc32f1ca2e7f90175cf0a7b86ab37ed7ad82eb6ced84e9d9d0d"
+    "bindingsSha256": "ee73b3e95e75ff3113adac10d4448ef8c95a0dbd2cbc3cdb456615f3d9a3282c"
   },
   "recipes": [
     {
@@ -408,7 +408,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "f2bdf5f88e50b1df5c73af5515dd22987c27a0ae7f4cef29098ca41b6f779abf",
+      "sha256": "3cfff761abb3af25442e399417e37f29d378e07f66d3c28cbfd4e14be97b9321",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -419,7 +419,6 @@
           "metadata": "metadata_nomenclature_points_STEINS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "steins-features.json",
         "publicBase": "/scenes/steins/",
         "target": {
@@ -770,8 +769,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "d3f502433696ef6dfb39d4070fc32ebe84d266034f2857e3d0221508152daf8a",
-      "bytes": 153,
+      "sha256": "f955c4a50a3ea62431e26a4daf17f18faf92b02eec6bfc7a521fcd01d608b64f",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1008,7 +1007,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1111,11 +1109,11 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "494feee1c621e467d3b2d7cc7f9ce0c16724d340c354958e3a0a6868d1cd55c4",
+    "materialSha256": "802c7d2f662f2e99d245c03ce02428f5482cc683d2d8cc2dfbd48cd83414d04a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "856803faeb4ccfc32f1ca2e7f90175cf0a7b86ab37ed7ad82eb6ced84e9d9d0d"
+      "bindingsSha256": "ee73b3e95e75ff3113adac10d4448ef8c95a0dbd2cbc3cdb456615f3d9a3282c"
     }
   }
 }

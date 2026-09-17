@@ -1520,8 +1520,8 @@
     {
       "id": "europa-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "8ed6a12599f89c5048c1eb2499e8c6bcd3aa0eefd43213e150818f097ee07691",
+      "expectedBytes": 185,
+      "expectedSha256": "d5e5e253118f000c810d782345862097e9614d5cad1a93cf7115c1617fa0b5f5",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -1848,8 +1848,8 @@
     {
       "id": "europa-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1190,
-      "expectedSha256": "5ff95fe1d60c55bb3a7c128b05ec43ad079f18078826ed27290c92fea4d936a9",
+      "expectedBytes": 1158,
+      "expectedSha256": "4e2a03705b9fa117bd9daa9fc5fda9563e4a1d40a757343f641c6fac6bce219e",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",

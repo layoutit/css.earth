@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "01fbee0fe14fea25f0d3ee2838f393b692813965f2621b6058944795f8f7190e"
+    "sha256": "4676bfeac0e5ad035a13be90f60a67a4508e6a0afcee493d1c80090667d81fb9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5ccca51aedd893f264ffb0ad8d964bbfd15f34b883dd1ee11212a791f4c4c34b"
+    "bindingsSha256": "c829bdc12e6d875ce40ec2c46a219a71eb49c812d43bc341ac272c095df7f322"
   },
   "recipes": [
     {
@@ -476,7 +476,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "a506a4444aefd96a26db378ff62c80c4f35ef86f6ce0234d1519a939bd73c30f",
+      "sha256": "c4eba8cf9661a8275ce0d6754fee100b70bb1c16c9b0d61af6d8e94ac7b9ba2b",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -487,7 +487,6 @@
           "metadata": "metadata_nomenclature_points_DEIMOS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "deimos-features.json",
         "publicBase": "/scenes/deimos/",
         "target": {
@@ -776,8 +775,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
-      "bytes": 153,
+      "sha256": "4425ba76faafd30b12bccb8ecaa34564ed43fe240c4d4cd5ff0e68d3b9d4e354",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1064,7 +1063,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1192,11 +1190,11 @@
   },
   "lastPreparation": {
     "objectId": "deimos",
-    "materialSha256": "460ed83297dc88ca8697858838cefad01c7cd51fc77f681d89dbc145fa64b1de",
+    "materialSha256": "8c26468642d74437649124aa1303e402c65d5e4772f7bf992147fcd9005792a3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5ccca51aedd893f264ffb0ad8d964bbfd15f34b883dd1ee11212a791f4c4c34b"
+      "bindingsSha256": "c829bdc12e6d875ce40ec2c46a219a71eb49c812d43bc341ac272c095df7f322"
     }
   }
 }

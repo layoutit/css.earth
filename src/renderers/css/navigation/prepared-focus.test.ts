@@ -8,7 +8,7 @@ import { worldRotationCss, worldRotationFromQuaternion } from './world-camera-ma
 import type { PreparedNavigationFocus } from './prepared-focus.js';
 
 const frame = Object.freeze({ referenceFrame: 'world', epochJdTt: 1, originM: [3e7, 4e7, 5e7] as const,
-  presentationToReference: [0,-1,0,1,0,0,0,0,1], metersPerUnit: 2, bodyRadiusM: 200 });
+  presentationToReference: [0,1,0,1,0,0,0,0,1], metersPerUnit: 2, bodyRadiusM: 200 });
 const focus: PreparedNavigationFocus = { id: 'catalogue:7', positionM: [1e20, 2e20, -3e20], framingRadiusM: 1e18,
   limits: { minimumDistanceM: 1e13, maximumDistanceM: 1e22 }, upReference: [0, 0, 1], arrivalDistanceM: 4e18 };
 const optics = { focalPixels: 1000, principalOffsetPixels: [-170, 0] as const, framingRadiusPixels: 200 };
