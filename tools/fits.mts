@@ -176,10 +176,18 @@ export function readFitsHdus(bytes: Buffer) {
   return hdus;
 }
 
+/** The sky axes of an image whose extra axes are degenerate, or undefined when an axis past the third holds more than one sample. */
+export function imageExtent(dimensions: readonly number[]) {
+  const extent = dimensions.length > 3 && dimensions.slice(3).every(length => length === 1) ? dimensions.slice(0, 3) : [...dimensions];
+  return extent.length === 2 || extent.length === 3 ? extent : undefined;
+}
+
 /** Bounded, zero-copy sample access, retaining native axis order and NaN missingness. */
 export function fitsImageAccessor(bytes: Buffer, hdu = readFitsHdu(bytes)) {
+  // An image may keep degenerate trailing axes: every ALMA product is NAXIS = 4, one frequency and one Stokes plane over the
+  // sky axes. Those axes hold one sample each, so the sample order is the 2D/3D order and only the declared rank differs.
   if (hdu.header.XTENSION === 'BINTABLE' || ![8, 16, 32, -32, -64].includes(hdu.bitpix) ||
-      ![2, 3].includes(hdu.dimensions.length) || hdu.dimensions.some(n => n < 1))
+      !imageExtent(hdu.dimensions) || hdu.dimensions.some(n => n < 1))
     throw new Error('Unsupported FITS image (requires 2D/3D numeric image, not int64).');
   const stride = Math.abs(hdu.bitpix) / 8;
   return (index: number) => {
