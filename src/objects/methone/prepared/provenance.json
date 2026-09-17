@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f77ac367b1f006280bd0757fb7a82401773337ed882c9a41fa96fa4fe83ac017"
+    "sha256": "5e41c0bb1150657549fab1adbd48ef237513551735ac9b4791a05c02f16aa86a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7e8fde415f6903a5f2a66fb5f51c0875c99287c1c4f0d7d92119bb5843eb45f3",
+      "sha256": "807fa217983cfc9250edcffe79dfa7a289d91c2fe7ab4e1f52e9d3fba4a39372",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -125,10 +125,6 @@
               "method": "source-meshoptimizer"
             },
             "primitive": "u"
-          },
-          "camera": {
-            "initialScenePitchDegrees": -16.51837145672059,
-            "defaultControlYawDegrees": 179.41971541839206
           }
         },
         "celestial": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "methone",
-    "materialSha256": "d9da297e2c02bceec18c76d055fb39ab95373f6937d70b133cf194279b96f8a4",
+    "materialSha256": "ef8ddb5d3649bdd2ae2fff93264f9430ff849b5a5dd1330e56f16f97e4400882",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

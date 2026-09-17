@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 20.414,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/selinur/selinur-shape-surface@2x.webp",
     "polesUrl": "/scenes/selinur/selinur-shape-surface@2x.webp",
     "radialTerrain": {

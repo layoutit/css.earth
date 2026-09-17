@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8471ca1eafa759f079ff3b711a0b0125dfccf27f903fdacdbaca38f950f9da3a"
+    "sha256": "27c1b282d016a1bcd2922361a83613f250f42d9be250431e9384b04260cbf819"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f0023c1c6f94ebcf6be126ac0a150f7f0c2310cbb07556d4edbd79157d3b3bc1",
+      "sha256": "d462d4dfe1a3f145a57c57a661a683f8dc1e626ef66af0bbc8cb79eadb4450f8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.0564,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/yorp/yorp-shape-surface@2x.webp",
           "polesUrl": "/scenes/yorp/yorp-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "yorp",
-    "materialSha256": "fd327d52a5e503c172a7241fd8d268e3865bb0774d2e03aebc3d0ba6a7e496a8",
+    "materialSha256": "654d01762e18961656beb29011a9501219bb6099b1fdba43bbe03f5e38417790",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

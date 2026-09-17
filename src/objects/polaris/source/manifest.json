@@ -129,8 +129,8 @@
     {
       "id": "polaris-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 284,
-      "expectedSha256": "780b15db9bd31a6bdd3ae80ad9f68699d4543a2d2c6111b25548561858224b11",
+      "expectedBytes": 215,
+      "expectedSha256": "0d5e103bab69d3f892d2b4d8dcd6a9f759ba1a9174902996ced05c320c15fc1f",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",

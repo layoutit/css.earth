@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.31,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 90
-    },
     "mapUrl": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
     "polesUrl": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
     "radialTerrain": {

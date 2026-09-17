@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b00f688ab5abfde0abba180c5ab68a6d43bda19ad73e715b96938e98cc627609"
+    "sha256": "74db08fbfd07fbe69453a62f96d4f84942034aa4f75c7a04d5c60608b4c1b2e4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "63d2a9c94e6a551ef1f95a8d7db89332b863e02ef37430c6fed9f17b4134b909",
+      "sha256": "76817643bf68a8d219955f7bbc0248ee1c0493c92f0af42e2844d4aa39436ff7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.01,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-surface@2x.webp",
           "radialTerrain": {
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1996-hw1",
-    "materialSha256": "66fa58fff1b3e83a0957c51389a0c75755bce505a4777eaa372e198cb56fefd3",
+    "materialSha256": "90d92a79e9fe5ac887f3020b56d22d1b53eefa1b7f2d58258b72fc6e3dd88020",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

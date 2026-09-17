@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5b355574271ea5b0a8fa71f337e0c8a9d1206b299ad5ae165822d79f7e144e28"
+    "sha256": "bfaf5ce97e3641fa4404848914e90b0750fe96cfb5c3e8d383c7669b49ba0f11"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ba9125e3b8fdb28a140a4dd469eb70bdfef35e290157d4c9363db613ab60fe78",
+      "sha256": "5d826476676e5575b4b1837b686ba0647557d2d760babb66f018d910460b3585",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 0.327106631018859,
           "camera": {
-            "initialScenePitchDegrees": -15.279032110715352,
-            "defaultControlYawDegrees": 55.71164506727193,
             "framingScale": 0.4672951871697986
           },
           "mapUrl": "/scenes/aegaeon/aegaeon-model-surface@2x.webp",
@@ -433,7 +431,7 @@
   },
   "lastPreparation": {
     "objectId": "aegaeon",
-    "materialSha256": "06a01d062502349c069058fe3fc2d3cd2b69e51d6ef9dc324eae18c59ed8ae31",
+    "materialSha256": "113bfbc8f4bf335f83f505565b33c6115b9052ffc87b363ce87b0ba2528627af",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

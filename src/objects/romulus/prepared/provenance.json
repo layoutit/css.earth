@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "834822e725ba91b07ebabb751a8423b0410bbe49d0f39783fa7115f5102bdb16"
+    "sha256": "f3379281a38cceb2a0c904981f5fa9f3b75cdb7b4d065e6abb192297dfee6cac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6832a8459329dcb3f1d3af7a257d89b6879b30eefecb2f4a5d6890779c5af028",
+      "sha256": "9fce14ab34380c6228b0ff04e55b3a781cc41219aeca5eef48c7c853f06bc535",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 9.787866191310176,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.515732092623642
           },
           "mapUrl": "/scenes/romulus/romulus-model-surface@2x.webp",
@@ -419,7 +417,7 @@
   },
   "lastPreparation": {
     "objectId": "romulus",
-    "materialSha256": "f7bb24cbae22f0b367c38030aed5f8b562dabbf0b50209b03733d7de737bb030",
+    "materialSha256": "cfa75eaeeb32c45c1414cedcae91636332c3fc69735e6368192805bc484129b5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e631b474d6e1dd63415d8b866593180987d68575a7d86a3a40be231b22b68860"
+    "sha256": "2655cc461e12856b64d25816a75f5f6bf3124e24a41c79539132da9d3022f5d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "269954546276403eab8825948df49e9db51b977f63a3b3302370524e56d37c2c",
+      "sha256": "d81343b3b5a5136e6e5aeaf8a39fb777fa6b9f83de8d69263cc0878a2f0e211e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 102,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
           "polesUrl": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "amphitrite",
-    "materialSha256": "e5785f2b38471229d228d9684344d8fbbc69fe2ac815f0bc32b6c6b98d6010ad",
+    "materialSha256": "20a0e81e8bba4c3daee58da85956cf6c29dd1dddccdd6aa994842a44e6f95a28",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

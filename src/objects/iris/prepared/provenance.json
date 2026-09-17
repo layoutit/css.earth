@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8ef1096feaa350428e54ef3454711b7734141f340ad3bbf78ebad9f66fb6656"
+    "sha256": "b61b4c1794924ff0a7d8fb81809bcfd3dca959b3fb39790eca37a03c55a7d40d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "04e8816c1cbaca9205c93d8a76fb1902838022cf6e41473368aa7c2cb75a194b",
+      "sha256": "565e7f2c115288f7a8739a2c9bb052e7ef59a9861bb88bf4ba43c0000464d1db",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 99.5,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/iris/iris-shape-surface@2x.webp",
           "polesUrl": "/scenes/iris/iris-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "iris",
-    "materialSha256": "cc3f4de8e1949a0d2cd0fe01ad46c7c624ead7fcbe4d2f41bb7a708e44b8c435",
+    "materialSha256": "c7a59bc085abde9695af0db29b18a9f971717c57d479bb40a36fe77ce8121a9a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

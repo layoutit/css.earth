@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3fea97b33a873489f74845f1737ae7d797fb3826bbb216cfdf0a42ad915b8325"
+    "sha256": "2b17e3e22ccc00aa89e2018dcaa739c5c81037f366abd91234772c33aece724c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "465f71bcefa90811e111e98defd2f11ff20c449e05735118cdf1fb55ba19aa88",
+      "sha256": "dc3781de07e708bf0cc9f852319cd3fa70b53fb915a494a43070b3466eca2c5c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 50.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/philosophia/philosophia-shape-surface@2x.webp",
           "polesUrl": "/scenes/philosophia/philosophia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "philosophia",
-    "materialSha256": "0ae6ba2d0f445a586352129bc3a06bebb0f7b5d783db422009046004c3c79c09",
+    "materialSha256": "f9546f85ed3a449d5cd27a15e77f33197800be5fb4682e97596127a15dab5e66",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

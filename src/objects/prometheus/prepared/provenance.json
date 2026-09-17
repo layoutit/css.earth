@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfb2965ce77aff650db2978c1ea6054c0c3d9f19d2d5ac959cbb39eb47fd6e12"
+    "sha256": "490afb7fc626a63042e5eebfeb188c65224573fd13926ed923aec564f6cbe4f0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fad631460c25e5f5c4a25be25777fb7645e767274bd4b50d39b691ea8e049d54",
+      "sha256": "70c5eec6f12353d0bf16d018da6576ec2e0cf970bfec10667d769a5e3256685e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -429,10 +429,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 43.1,
-          "camera": {
-            "initialScenePitchDegrees": -1.1307603412295912,
-            "defaultControlYawDegrees": 38.77647803521582
-          },
           "mapUrl": "/scenes/prometheus/prometheus-normal-surface@2x.webp",
           "polesUrl": "/scenes/prometheus/prometheus-normal-poles@2x.webp",
           "radialTerrain": {
@@ -2316,7 +2312,7 @@
   },
   "lastPreparation": {
     "objectId": "prometheus",
-    "materialSha256": "535f7b7218cef742291a41eeffd2a9e235145f58623d7ac1b3e1df2df5c42826",
+    "materialSha256": "0b216b9b85886409f580ce1c51bf551a120b615e1c06e4457387381390afc8c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff708bc7e96970734a49e7877025d7e2509fe155e0477f7f5c1868ec3aa9542f"
+    "sha256": "6d0ccb7fa6b30e16e83ea358f124bc9a5b9d1d43ab1625b69d6c9bfd9166db2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0affcc1fa21e6b07c84ce080888667d913886d338bb5d38c56efc3d50ec04e6a",
+      "sha256": "b8c2a496ae5b22ab931e77322d4d3d35e1070c37a1248cef55ab078240d2cfd3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -486,10 +486,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 111.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/psyche/psyche-shape-surface@2x.webp",
           "polesUrl": "/scenes/psyche/psyche-shape-surface@2x.webp",
           "radialTerrain": {
@@ -2436,7 +2432,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "80a7311b241d2126c7de7db1e042c43b55f77dab9c5ad093c858020284a8286e",
+    "materialSha256": "2faa12968ab75fe2b56ce2af088b8b4502d2dcffea4247fae871f6df5c97d705",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

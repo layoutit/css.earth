@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "33da5a239dce7258c18d3531a92d5bea5b8e9115bddf0fddc2bcc8c56e78e8b6"
+    "sha256": "a852318041086fee79bf3e4ce1a2f997e6beebbe80803679a9507f49ea2b609a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8325b211df4e8943e8e74e44af1f1bc0b6499b7e08f0e3385695e0d26894005b",
+      "sha256": "cf4f836f510e4ed9a2a109b30f8e265adb6fa2bc4f0ecc898c78b2e31f9d4e62",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 70.5,
-          "camera": {
-            "initialScenePitchDegrees": -124.88764044943821,
-            "defaultControlYawDegrees": 270
-          },
           "mapUrl": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
           "polesUrl": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "melpomene",
-    "materialSha256": "a53268855b92a3f194dafd457c37a21a5081df2d38680a34d1158e9f7ebb047b",
+    "materialSha256": "883e9d3039f535f0c186195cce3d8910c61ebed924f615a5190c7857c31bd9e1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "44df47bfd855f8acfcac425c1c142c1f4298b972f56563ec927c6a7c836e1a58"
+    "sha256": "ccc8aa0a593d258faf56c3bbf176e95a8aee457aed73e1d134bad2c5771b66ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a604bbbed06527cae43eb61225ad4c0cffddeab66825ed12bae5df66b4556fc8",
+      "sha256": "8ffee563bee2f7b22f802880dfeb41c24811091657d5e7469c5f0e2e6aa3ec03",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 135,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/eunomia/eunomia-shape-surface@2x.webp",
           "polesUrl": "/scenes/eunomia/eunomia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "eunomia",
-    "materialSha256": "00b1964f3a1fca323bca7c7732aeb0b1126513c7562a3f2b800ec7c50a2aff3f",
+    "materialSha256": "7f6fece7cf3ae9ba25f9c48c939cce34be7bdb2c012ea29b58941b181b708f21",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

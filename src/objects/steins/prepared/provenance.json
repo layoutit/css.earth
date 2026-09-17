@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bfaaa954443fc8c64532b70d5a6d341ded7fe5dfd94446a8018f101583a405bb"
+    "sha256": "67c8e4339c81e3030d298d6e84d5972cd8641a1dcef8c1ea477bbb98a8c306b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "129f73538d9dbdadeacc188dcf3ca777e9611d0760bf0e296786f7909dfcf63a",
+      "sha256": "238248c1a5cba10a18f13f786976e6b027c96708ca8b8f79e28308502b046632",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -162,10 +162,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.58,
-          "camera": {
-            "initialScenePitchDegrees": 10,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
           "polesUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
           "radialTerrain": {
@@ -1109,7 +1105,7 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "802c7d2f662f2e99d245c03ce02428f5482cc683d2d8cc2dfbd48cd83414d04a",
+    "materialSha256": "849f9262852ad3f1dc10df5992c6ace15e0735de02d8c75d09d08aee562e9483",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

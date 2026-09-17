@@ -29,12 +29,10 @@
     },
     {
       "id": "survey-damit-documentation",
-      "subject": "DAMIT documentation",
+      "survey": "survey-damit-documentation",
       "status": "included",
-      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
-        "https://damit.cuni.cz/projects/damit/pages/documentation"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md"
       ],
       "checked": [
         {
@@ -45,12 +43,10 @@
     },
     {
       "id": "survey-hanu-et-al-2017-volumes-and-bulk-densities-of-forty-asteroids-fro",
-      "subject": "Hanuš et al. (2017), Volumes and bulk densities of forty asteroids from ADAM shape modeling",
+      "survey": "survey-hanu-et-al-2017-volumes-and-bulk-densities-of-forty-asteroids-fro",
       "status": "included",
-      "finding": "[Hanuš et al. (2017), Volumes and bulk densities of forty asteroids from ADAM shape modeling](https://ui.adsabs.harvard.edu/abs/2017A%26A...601A.114H) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
-        "https://ui.adsabs.harvard.edu/abs/2017A%26A...601A.114H"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md"
       ],
       "checked": [
         {
@@ -85,12 +81,10 @@
     },
     {
       "id": "survey-hanu-et-al-2017-a-a-601-a114",
-      "subject": "Hanuš et al. (2017), A&A 601, A114",
+      "survey": "survey-hanu-et-al-2017-a-a-601-a114",
       "status": "included",
-      "finding": "[Hanuš et al. (2017), A&A 601, A114](https://arxiv.org/pdf/1702.01996) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md",
-        "https://arxiv.org/pdf/1702.01996"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md"
       ],
       "checked": [
         {
@@ -140,10 +134,8 @@
     },
     {
       "id": "versioned-view-evidence",
-      "subject": "Versioned browser evidence",
+      "survey": "versioned-view-evidence",
       "status": "unresolved",
-      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
-      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asterope/README.md#evidence"
       ],

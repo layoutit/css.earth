@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d1067cb3f0ba251b19cfedc634e62cf496cee163d901d805d52aa64ae388420"
+    "sha256": "f7d83f99819d6534ee80574d2251b4bdc4baff22046d401a321f5fca21762b48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "71118cc74433df88d0fad9ec4df5ea3163cf6273028ea10c9ad214e0d2681504",
+      "sha256": "e09cd6d6bf4f9a0804db8c30c9b998f4d4e0b37102dfc3594f4f35c99c157c01",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -215,10 +215,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 83.5,
-          "camera": {
-            "initialScenePitchDegrees": 1.319689164252455,
-            "defaultControlYawDegrees": -20.79765038440197
-          },
           "mapUrl": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
           "polesUrl": "/scenes/amalthea/amalthea-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1272,7 +1268,7 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "207c221e2c475807e22a600c6cc619bd405562051d6fe52d1de39b25da46437b",
+    "materialSha256": "04ccc1733dc1399223e27445052a34abda8bc0ed29b546790aa3a2cd9e41ac0e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

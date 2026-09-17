@@ -28,10 +28,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery-8",
       "status": "unresolved",
-      "finding": "The selected radar-shape release supplies geometry and spin information, not a registered optical surface map. No optical texture is selected in this package; this does not establish that every image archive was searched.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/asteroid-1950-da/README.md",
         "https://github.com/layoutit/css.earth/blob/f17418b8cd2577f0e9dbbb5039f05df76c22f6ef/src/objects/asteroid-1950-da/source/manifest.json"

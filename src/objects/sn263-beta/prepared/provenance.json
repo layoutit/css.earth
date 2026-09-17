@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81198a65f06c1ba69df1d629ae8ec96abd3f0970116d2ca34a77322ccfe86acf"
+    "sha256": "a8b4576d5e267ae87dded28bc6f2786d2befdeca5d5df4bac9c7ab9b81bce404"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "53b1e04f4e4a7ee081faf980a02b1be6b09b0db982db2ec27bf0f5e869b4116f",
+      "sha256": "fe3e0c4eb0206973f0ad0917a658652b0782bffc5de800400df4001b9274f790",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -56,8 +56,6 @@
           "radius": 230,
           "radiusKm": 0.39455452137070834,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7055028101391106
           },
           "mapUrl": "/scenes/sn263-beta/sn263-beta-shape-surface@2x.webp",
@@ -380,7 +378,7 @@
   },
   "lastPreparation": {
     "objectId": "sn263-beta",
-    "materialSha256": "03c372208ef611b812f72d2ccbf07b4e189ad9b8b4fd3e64b8aca39af57ec790",
+    "materialSha256": "66fad606393f4200fdbd819220cac38a21d33d195b5e75e2acbd9b7d6e1eeb89",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

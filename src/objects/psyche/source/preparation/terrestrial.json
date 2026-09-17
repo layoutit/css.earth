@@ -468,10 +468,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 111.5,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 90
-    },
     "mapUrl": "/scenes/psyche/psyche-shape-surface@2x.webp",
     "polesUrl": "/scenes/psyche/psyche-shape-surface@2x.webp",
     "radialTerrain": {

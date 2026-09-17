@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ac0483052293fb4d19a6187afbe03d53ab456f3d3222de49e40821c9ade1ef6"
+    "sha256": "d6e9ae2ba7a8f1e94c93cbfc317e999cc7bee5812a153d07f46bba70b66d33d2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d87d33e4e03018018ba1277f3b6345ffdd160f67c0627239e457eb6192558886",
+      "sha256": "aed443976bbe8a06802f49c1523e08cf3a0935500ab45818a0ea912bbbb8494c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 45.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lydia/lydia-shape-surface@2x.webp",
           "polesUrl": "/scenes/lydia/lydia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lydia",
-    "materialSha256": "77e407adcb87605990f0810e7259dfb43e74d91061697dbbe12c919948bbdd68",
+    "materialSha256": "08784c2946ba6dc7115383dfe3d29ef2f4825442952db0d0aca34d1dcc31e623",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

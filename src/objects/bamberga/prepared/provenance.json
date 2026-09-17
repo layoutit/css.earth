@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ee19a3b84bfa58122296b99085748c7ccadeaa48c78dae25184b2ef7edbf7b68"
+    "sha256": "222ea22727d5a942c3556bba73b77d6a92ffb26c4f1f7641e0e9cbcc2e78cf80"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2a11654df8cfdf8c6fc1f12167911dbbe2599b1e7219bf03f85acdfd37970332",
+      "sha256": "0d58d1390e06a7b8b4753fbbe4d2c1f45e320d67802663eca57c383df0423996",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 113.5,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bamberga/bamberga-shape-surface@2x.webp",
           "polesUrl": "/scenes/bamberga/bamberga-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "bamberga",
-    "materialSha256": "bb06cf60cd14c2d70d8fb7b732a314c6bb7cec8d9c5c7aa2e205e9a5a634e69e",
+    "materialSha256": "c5a9d58b4572dd851b87afed87e8e92d3c4a6471e437431df4728c3d206c6736",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

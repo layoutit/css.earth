@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f9dc8818664480218e31a954e8e101b2b23e9e0031963d0571972abdd11b9e72"
+    "sha256": "3172f57b7bc8212c0e6d66deb4687120de9375aa37800de175f42f1b11dad16a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4d8f64ec2cb129eaa4a3edd11efbf2c9944bc7732ff3b25965aeda64da22cbbe",
+      "sha256": "2b91afb98e13b4a1cd52446a313bbc73a9807f7cc3a9c513f4ea122507319d8d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -804,10 +804,7 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 135,
-          "camera": {
-            "initialScenePitchDegrees": -2.379353168756961,
-            "defaultControlYawDegrees": -77.24860974008504
-          },
+          "camera": {},
           "mapUrl": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
           "polesUrl": "/scenes/hyperion/hyperion-normal-poles@2x.webp",
           "radialTerrain": {
@@ -4225,7 +4222,7 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "d7adabe598d5342505f9a3610e4626267e6ee5337a01529b11117f80050c328d",
+    "materialSha256": "ef417117830bc84499a4f833c36dc9d43e7914898991e2c846803ee685388e52",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

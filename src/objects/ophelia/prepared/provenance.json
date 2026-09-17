@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f05f27140e1a444ec22e8b640b6c2f6b06619bf455c12909249195904b15eb4d"
+    "sha256": "e2444a6ae6efe58aa355913fe5da7ef6d0575415f31800d9a867893252f8e9aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c3999c7411842b4897e28bedcd960d37dbb80064903d54966534bb0ca90aa9a3",
+      "sha256": "6792b8a7b3377bb43e64a2b44a3a09e1c687866c9b6fb62aeeaebf52db7fa9ac",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -84,10 +84,6 @@
               "method": "source-meshoptimizer"
             },
             "primitive": "u"
-          },
-          "camera": {
-            "initialScenePitchDegrees": -32.21838894216883,
-            "defaultControlYawDegrees": 34.15181793628052
           }
         },
         "celestial": {
@@ -438,7 +434,7 @@
   },
   "lastPreparation": {
     "objectId": "ophelia",
-    "materialSha256": "cf406c2eab86543a332949543e71b23fe76ca2a2bb0791a89002076600ec4e68",
+    "materialSha256": "7687ecae22bcf2ec6d0b11cc1d96cee3e4cd39e6d20f7a5290d2e4006c277a19",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a2fb844a037e9464e40ee412f6bc512fc301e5e5094bae42016fd56618f2b105"
+    "sha256": "2f5d47f7498292b2f9ce8e759b8ae0734a250170e057a21fe990ef16d1cf449e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d8fd1ecd207c3e449946e050290e69459cf5c993861933ca5a13216b65529e6e",
+      "sha256": "d072ddd97e28327488626cdb567d4b55bca05918f52d862303307f46bfe07227",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 149,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/davida/davida-shape-surface@2x.webp",
           "polesUrl": "/scenes/davida/davida-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "davida",
-    "materialSha256": "74d64a46c1d5affd36d3f941ec1358c14c5e5c5885c073494433e7a36f928afe",
+    "materialSha256": "1895458bbf0b405467000c1675a1fd2c8cd6cd0ebc87845e2447584fd74102e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

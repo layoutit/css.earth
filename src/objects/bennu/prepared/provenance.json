@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8491c479440b46b457b8338e239343342a12ce6dac601a5a584c118dceb53da2"
+    "sha256": "eac0b6b590112e902327a43daa64aa6ed90ac065b42b2e681014ec7584c08d9a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4bb4a3717c315de446c56bf3d68a29430efe0451231f37e859efa75d2ceddbe9",
+      "sha256": "6028f9b3011cb4760e49548a9fceddb3a749be7d0116175e0f0d02ad88ad4ecb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -164,10 +164,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.241,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "polesUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "radialTerrain": {
@@ -1258,7 +1254,7 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "f6377746e0292f6212842e18b2ae43222ed611d72b9e58ab362ea107d51b8ae6",
+    "materialSha256": "26fbc073882dd532643ee7121b511c217bdb0cbe9a20992e6b834c7c683f32d6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

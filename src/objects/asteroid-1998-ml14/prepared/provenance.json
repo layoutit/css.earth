@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c40eefc0674025ee15a296cdc2a9b05e94511c48db392422bc2344415fe2dc4f"
+    "sha256": "f04855e4cc16a08b6f424fc92bde6a8c0f933d9e2ec62bf1b4f83a9f539a8e5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0a72f632e119b2429bcfc0b26e5aa2bfc9ebf6ba11606a55849e169138f843d0",
+      "sha256": "559863c772e183a4e6a25727e6483d9b01ca47ad5af638f4b2dd4bd36c0c48c2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-surface@2x.webp",
           "radialTerrain": {
@@ -573,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-ml14",
-    "materialSha256": "965e19a08e7efbe26d4bc1c564226d81ee8dffb7e5936946e40f906de05472a7",
+    "materialSha256": "3a04643e2b34ee12e2200ad543e5bb112cd1b1362a17773bf72739248a634fd5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

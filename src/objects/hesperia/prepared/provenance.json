@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4651717524af9e16e7cda766304f51633b323a0e547fabcc85f0f810deff539d"
+    "sha256": "857c42d2cfeebb9c47c474859225c7591138c673987458397add65b1936006cc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9ca9afc2b846e21e618034634bee5fa9267299059f01aa68ae5864e8349dee20",
+      "sha256": "853d323dba9b7cf8c71a82753c84fd9c1791e65e5efb3d33279b97978baa0e79",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 54.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hesperia/hesperia-shape-surface@2x.webp",
           "polesUrl": "/scenes/hesperia/hesperia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hesperia",
-    "materialSha256": "f2b223e582f88c88f23014606d14b7aa9877f4d43c1b410a9a5ec2ff80786d65",
+    "materialSha256": "075c633e135ae97bb8020233c2d23a0877f36312cbb9b02812254e88d634da75",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

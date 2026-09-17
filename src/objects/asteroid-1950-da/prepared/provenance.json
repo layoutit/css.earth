@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37b3d77a316ad8ba4dfb0d2c8d5ce1c826e314fc5ae1ae10a370e7bb15ec0723"
+    "sha256": "88009c053f452f14b6337c383b29538bfa8f9ec96e6bcbc6922b882b67004830"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5d04d40ebc56e48b703197b733edb64f6769592a7c4f58e75519f85b51c274ec",
+      "sha256": "7b4634c7bd6607a70d1cdeb263f90c468e279c897293a4d24f879b23f3a86893",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.65,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
           "radialTerrain": {
@@ -568,7 +564,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1950-da",
-    "materialSha256": "0898839a7d3193851e6cbda840f23fee9484afca0d688deb0be22e22325af350",
+    "materialSha256": "d11044463f96092a46f5839b67f60c6769db1ac212dcf2ed210c11d6dc9bdc83",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

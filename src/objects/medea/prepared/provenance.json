@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "52b18b2bda6d1dc84c51de03cc937ac670f041a8d9f44bc9eedc01c39d57b439"
+    "sha256": "2f9c40ab3ad6d829f3d3e39608135f87620b95e4a71585e9d775ce01d6fbb682"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6d73dccaa28c12665f981a1b380c1b0eee5d709bf112b6ca2851851e2a2c0940",
+      "sha256": "8a0dac6c2ca5b3300821579ef84d691422759da78796372abd1f1e68ef2b99db",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 76.86,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/medea/medea-shape-surface@2x.webp",
           "polesUrl": "/scenes/medea/medea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "medea",
-    "materialSha256": "64b5d96f643e2a54b66f5f0c9d264e573ef08bf4db9e09862210a84397e3bbb6",
+    "materialSha256": "dad844d31a0267890a40d17ff1b8b3fd004b5622c3dfbe96ea389cc08a71050e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

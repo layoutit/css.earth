@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1ec8d68b7a793cda04c2df32bd4658057512a05739a04f918fdd8251c1712c7"
+    "sha256": "3d5b6935209a39dfbf5f058643cae1c3a8669e7ad723bec7147ca49a718563ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9fa7806e8672a91b271fa976a1ebdc3298448a50d20320ffbe6028879aab3e16",
+      "sha256": "df9b680e54b1cf996cf796897e5cb5c7dcfe83288e5d167f29a1266346e90d03",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -214,10 +214,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 49.3,
-          "camera": {
-            "initialScenePitchDegrees": 1.3844904258175654,
-            "defaultControlYawDegrees": -32.58208818766587
-          },
           "mapUrl": "/scenes/thebe/thebe-normal-surface@2x.webp",
           "polesUrl": "/scenes/thebe/thebe-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1244,7 +1240,7 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "88908d06a1c1d1e44edb953655027a52a5c2b9a014ab9fc06d7c28ea14d7493b",
+    "materialSha256": "c8a9a5ff1f0b7c5c640efd6fdff8427075f400b05180a8dfcdbde7f8d635849a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

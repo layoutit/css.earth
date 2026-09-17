@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f1aed566438836698c7ccb33b54af828b3b34bdf2dc60a831c6249e5669b10fd"
+    "sha256": "bd548dbfb280cb0e7285a9cd0939070d619f6d85e70643e36491cf09a758e2c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f454353b59f1cc18e12abd681388d3ce03b60b4b9043fa92ec51ed860089584b",
+      "sha256": "29ec041ab9a772b38fcf75ee8b62a52620198424ee15125c5be9441c4ab71655",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -106,10 +106,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 81,
-          "camera": {
-            "initialScenePitchDegrees": 41.017848203987,
-            "defaultControlYawDegrees": -69.1448941840709
-          },
           "mapUrl": "/scenes/puck/puck-normal-surface@2x.webp",
           "polesUrl": "/scenes/puck/puck-normal-poles@2x.webp",
           "radialTerrain": {
@@ -508,7 +504,7 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "7a902d3643926eafead347382f60ca81ef80903520a5afd394135b18add3bd18",
+    "materialSha256": "809674ed5e39fe066517fa036eade0f9379067292f6d9223f9bdfcd28100ab55",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

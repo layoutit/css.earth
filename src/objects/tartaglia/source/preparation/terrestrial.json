@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 6.792,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
     "polesUrl": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
     "radialTerrain": {

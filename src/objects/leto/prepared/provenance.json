@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d77c5a4a1c9ecb206f4107476c487f95d6f4aea31249012eed3f01fcb1a95221"
+    "sha256": "2895071dc6fb17b1b7ead97fb66796655bb31e622e15f533e650e868a200dd3a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "15ca39291e4acac8fc4c88c94f449ab4fe8021220fe9dba12dc2399eb8347c17",
+      "sha256": "ecf5b1194e238f1dbca01e396029e8970948a48806c1b1cf2537f3b2ec5f3a53",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 74,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/leto/leto-shape-surface@2x.webp",
           "polesUrl": "/scenes/leto/leto-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "leto",
-    "materialSha256": "ccfa7b469df9425a556815c0d12c668a2ed3f164be3d47245fdc91d7218a9c3b",
+    "materialSha256": "9e170f43f97aadd73da5c2afb48602fb1636e3727e067e9e75c286708c57950b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

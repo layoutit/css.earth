@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29541c3e46ea36128d3598a063e759055c3e1f1d87e863809c08e60e7987f859"
+    "sha256": "c8e0645ecff679e344e4066c2fd4a14cbe9c0b73e6388292adc33310280ae45e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0616563de1110b637b8ba29baa85c1ddeb3040b5899edf2586d54c0e57ed3d17",
+      "sha256": "16cc5a48a55b879825e037f0c9ede601ca31e4970de57a834cdc083bc8226d89",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 83.345,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/juewa/juewa-shape-surface@2x.webp",
           "polesUrl": "/scenes/juewa/juewa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "juewa",
-    "materialSha256": "663b6a030945133dc6cc19acf149e33a8f98ff8f852dedaaee160999ebc428c7",
+    "materialSha256": "43d29ff8fa3e60213b34fefa0d13f10438d1ddf874245d34073ae3c5364e315b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

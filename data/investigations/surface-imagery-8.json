@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "surface-imagery-8",
+  "subject": "Registered surface imagery",
+  "finding": "The selected radar-shape release supplies geometry and spin information, not a registered optical surface map. No optical texture is selected in this package; this does not establish that every image archive was searched.",
+  "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched."
+}

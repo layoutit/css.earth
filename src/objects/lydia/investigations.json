@@ -29,12 +29,10 @@
     },
     {
       "id": "survey-damit-documentation",
-      "subject": "DAMIT documentation",
+      "survey": "survey-damit-documentation",
       "status": "included",
-      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md",
-        "https://damit.cuni.cz/projects/damit/pages/documentation"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md"
       ],
       "checked": [
         {
@@ -45,12 +43,10 @@
     },
     {
       "id": "survey-j-urech-2007-physical-models-of-ten-asteroids-from-an-observers-c",
-      "subject": "J. Ďurech (2007), Physical models of ten asteroids from an observers' collaboration network",
+      "survey": "survey-j-urech-2007-physical-models-of-ten-asteroids-from-an-observers-c",
       "status": "included",
-      "finding": "[J. Ďurech (2007), Physical models of ten asteroids from an observers' collaboration network](https://ui.adsabs.harvard.edu/abs/2007A&A...465..331D/abstract) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md",
-        "https://ui.adsabs.harvard.edu/abs/2007A&A...465..331D/abstract"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md"
       ],
       "checked": [
         {
@@ -61,12 +57,10 @@
     },
     {
       "id": "survey-m-delbo-and-p-tanga-2009-thermal-inertia-of-main-belt-asteroids-s",
-      "subject": "M. Delbo and P. Tanga (2009), Thermal inertia of main belt asteroids smaller than 100 km from IRAS data",
+      "survey": "survey-m-delbo-and-p-tanga-2009-thermal-inertia-of-main-belt-asteroids-s",
       "status": "included",
-      "finding": "[M. Delbo and P. Tanga (2009), Thermal inertia of main belt asteroids smaller than 100 km from IRAS data](https://ui.adsabs.harvard.edu/abs/2009P%26SS...57..259D) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md",
-        "https://ui.adsabs.harvard.edu/abs/2009P%26SS...57..259D"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md"
       ],
       "checked": [
         {
@@ -101,12 +95,10 @@
     },
     {
       "id": "survey-delbo-and-tanga-2009-planetary-and-space-science-57-259-265",
-      "subject": "Delbo and Tanga (2009), Planetary and Space Science 57, 259–265",
+      "survey": "survey-delbo-and-tanga-2009-planetary-and-space-science-57-259-265",
       "status": "included",
-      "finding": "[Delbo and Tanga (2009), Planetary and Space Science 57, 259–265](https://arxiv.org/pdf/0808.0869) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md",
-        "https://arxiv.org/pdf/0808.0869"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md"
       ],
       "checked": [
         {
@@ -117,10 +109,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery",
       "status": "unresolved",
-      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/153"
@@ -157,10 +147,8 @@
     },
     {
       "id": "versioned-view-evidence",
-      "subject": "Versioned browser evidence",
+      "survey": "versioned-view-evidence",
       "status": "unresolved",
-      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
-      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/lydia/README.md#evidence"
       ],

@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 54.205,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/protogeneia/protogeneia-shape-surface@2x.webp",
     "polesUrl": "/scenes/protogeneia/protogeneia-shape-surface@2x.webp",
     "radialTerrain": {

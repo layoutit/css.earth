@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "26765c090e4dc9d01a5054700915a1be4c668a824b8b7b68a2198ff88b38745c"
+    "sha256": "2dea0b342d6bf85f0dd4e1c3227b2129f81ad4f724ac3bcb7af9177ce6f127a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d9e37ed12d7621395a8f512fe9e886f73c26e70d7de49234bae3d908b6d4bc6f",
+      "sha256": "622317058e4f292691fa6d5b286e358686d5104e9395a38e9e737e91737336ff",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 41.605,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/phocaea/phocaea-shape-surface@2x.webp",
           "polesUrl": "/scenes/phocaea/phocaea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "phocaea",
-    "materialSha256": "6e0702d32ad4519158757d0e96d46d9d6b7035b32b10ff704eece4d8ef95d2da",
+    "materialSha256": "2676162932490b16b49052fcb6bbd3dc906c78a87d1c72519e9849c1f5888a2c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

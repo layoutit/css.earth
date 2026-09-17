@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f9a2e38bb7e3c95dbb5249573e827da9a445c1d29fdaa63c0567ed1a6796ab6f"
+    "sha256": "c7b028cd9e619e65ed32f5e3da2d4192e46e721ecb0558dd674ed48873d7d3c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "30db583d35a2e2f22e1fe541204ca2a47e834f0523890e96b1683314b531a1c6",
+      "sha256": "f78222b994a80f0e39a42f298acf2c5108a46a21195c88623cafe56e3ddcf339",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 46.965,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hersilia/hersilia-shape-surface@2x.webp",
           "polesUrl": "/scenes/hersilia/hersilia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hersilia",
-    "materialSha256": "fd633db67920e024c1d1b2b3d7685622319bd216e0e321bd6ff73177f45ccafa",
+    "materialSha256": "3eaee04f7c489147c52bb6ddb0ae3cebaa0b868ec7577f501a7e97335222f038",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

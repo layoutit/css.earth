@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43e9673ae4abd296086f344f7cb0bc091e616379541b43bd6f004df3617c733d"
+    "sha256": "1cca743eb5a7aafae912079c5250cac82afd1c823153e30f00fc752e05beae1b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5214fcbbb802859b5240f0b85b2d5d22521045a2ee0de059407f7fb6b5e8f45b",
+      "sha256": "8083e3cc0f7f444526994e29c2668f1616448fa682ecd0abbccbffedde214bf7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 55.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/harmonia/harmonia-shape-surface@2x.webp",
           "polesUrl": "/scenes/harmonia/harmonia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "harmonia",
-    "materialSha256": "07059bfc77406321be4ddd7f6ea3443f96fbe1ffd885a0f1b8594db4300d4320",
+    "materialSha256": "f2300ff8592a77dac7d6296ac64c84acae94b38761460611e73395c1b7055d5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd240ee3413315686175f0d3c2671338bc8361f4f5ad89a0272afb1fb8e61c6c"
+    "sha256": "893cb0986c2455d4dd178961adde42d99455dba8d34cb45a30808e2a2bca377e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "66950e797682420ea2eb81d7a80e868036715521220e75d9d0c63801b58eccbb",
+      "sha256": "c9b0d751da67f1b52750c2a650676057368f1ab3314807e82cea4aefbd491102",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 73,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/flora/flora-shape-surface@2x.webp",
           "polesUrl": "/scenes/flora/flora-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "flora",
-    "materialSha256": "5d357fe094b20b1c2e4a283926c80b6a4ea57e9b7e8f271b7e8c7649e955fb1c",
+    "materialSha256": "4e5e72d35c9f729b247ca8aff89323fb94a9a2560a3580daed8e32e903ca2ef2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 101,
-    "camera": {
-      "initialScenePitchDegrees": -44.5505617977528,
-      "defaultControlYawDegrees": 90
-    },
     "mapUrl": "/scenes/egeria/egeria-shape-surface@2x.webp",
     "polesUrl": "/scenes/egeria/egeria-shape-surface@2x.webp",
     "radialTerrain": {

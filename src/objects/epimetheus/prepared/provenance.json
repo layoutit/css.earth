@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "994d8de90d29708180d469fb0d4081094421cbe6fe5bff78faf5f211ddaa2032"
+    "sha256": "6cf8e3236c2561523358a7fe8c2bff5d7972d4e888472077bd67a50546e5bf5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fdc19e47b38dd844d2ab5e803df0390fb5bf0b965e915adfe0fbb694728c47c5",
+      "sha256": "0a39e6ae3ff40aed76ffa7cf8520ef26e77982a2df52e146b49f950c6a397cd6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -437,10 +437,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 58.2,
-          "camera": {
-            "initialScenePitchDegrees": 20.59023923165093,
-            "defaultControlYawDegrees": 9.995959973873523
-          },
           "mapUrl": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
           "polesUrl": "/scenes/epimetheus/epimetheus-normal-poles@2x.webp",
           "radialTerrain": {
@@ -2325,7 +2321,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "ec18454e355b5e07597c09c9f9dec8c29949094c222f122bf286df74b90a8b21",
+    "materialSha256": "d1da9c1ad8d57b09556178431467882c28a7077cd71b60e52e8535c4aca6a81a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f927295c725509f246af01a18d554724f17b71aafa9645910e39439d89548347"
+    "sha256": "64d2f426b14581815f794f1f31b036bf01da3669934683b66523ea0abbca4a00"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9e79dabbcf73ed10499c8cbdc781bd7c409d733a840bd99a9c3edd4bb3ae1910",
+      "sha256": "c5659f728c8240787dd9d46479cb06deab170aef95d64df68174f8181105e524",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 39.78509749046438,
-          "camera": {
-            "initialScenePitchDegrees": -66.45467982599725,
-            "defaultControlYawDegrees": 161.69738029762001
-          },
           "mapUrl": "/scenes/cressida/cressida-model-surface@2x.webp",
           "polesUrl": "/scenes/cressida/cressida-model-poles@2x.webp",
           "radialTerrain": {
@@ -419,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "cressida",
-    "materialSha256": "204a8abff41336dcdc349f31c968b917e2b4f652809d94285526a587beb3a0b9",
+    "materialSha256": "5cf6b6175ae1796ef650c37db4f58b6d989f67527650fb86c2aff803bc359229",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

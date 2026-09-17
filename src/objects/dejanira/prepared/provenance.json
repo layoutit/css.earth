@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a6f8ded92a708435a001233f0d788de6c9d97096cefeefa47b6664029419f6e7"
+    "sha256": "cfb77e587653a32ccf799c21178383be9ceaccd46f4cfc3e3142127d3245e107"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "66a11b2b6707d7a3baa3a13b800addd94848f07a4d118fc2c9773fb06ff651cd",
+      "sha256": "653b7f5326732d404964f7555a5012073c1678a9fde6e4166ede578c7782e7b1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 11.235,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/dejanira/dejanira-shape-surface@2x.webp",
           "polesUrl": "/scenes/dejanira/dejanira-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dejanira",
-    "materialSha256": "8e68f522010a6d17a056bee0921f1a266eca28d4cd4ace0181d895fb27a15dc9",
+    "materialSha256": "f0e5431204e0e3b23b6cf43013208dbcbfbfa272c9c23c2384026fb2c0414599",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

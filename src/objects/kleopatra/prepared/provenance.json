@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "68a08470030806cc030cb602145ae668c830d2ba51816c000c21b684d9339af5"
+    "sha256": "0b64b0e828042a620ee303f7dcbd1adad4893b368ad8a7e0d22b3665849ce7d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d317445edb4368d727397f405a86343ac14ef24bc1916fcb038c67227e4fd68e",
+      "sha256": "f8a51cbc90904ef077fdae8b97bfadafdc91b29507393824c82eb386d3512e93",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -56,8 +56,6 @@
           "radius": 110,
           "radiusKm": 59.1,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 90,
             "framingScale": 0.75
           },
           "mapUrl": "/scenes/kleopatra/kleopatra-shape-surface@2x.webp",
@@ -383,7 +381,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "cc4794de690709f6eb31ba3f472aa9bd180c2eaba598442e13861cba92d53748",
+    "materialSha256": "72d52b6449362d66d916de48c25dae109dc830c44143e3a52ed92607f309546c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

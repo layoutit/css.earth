@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7f097f682949e634761beb45452380b909c49fa14822ad5fc79c806c203078ac"
+    "sha256": "91484ac7f5b7820e8042f8ba070c14a18131eced2a326ff301a5463df9b5a32a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2f60a612632cf6057e71896a0f0cd3b0586a1500b1ff968e4667e4279280fb5e",
+      "sha256": "5cbbdfc920b621037aa0971d5c2f151f95226a0f1f7a90194453cab6d34611c1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 58,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/melete/melete-shape-surface@2x.webp",
           "polesUrl": "/scenes/melete/melete-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "melete",
-    "materialSha256": "a7fc79856c2aa6add0d13730f1661cfd22950bb42dcd7a52803b1d6adaeded47",
+    "materialSha256": "242babe83726b21294976f38a8613e5a9db0a63717c1211323ac05bbd701c764",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "113e2445addf1dea5e51c512f55cecd48cdd014510278209b884555575a13f3a"
+    "sha256": "bc7adabf634616ccaae720fea3eb321573ba93e5774d28ddb50ad094f777fd47"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "462b2fb58843b23ed0ab3639fbde027674358bcee6ae602c9c2be9e05101e413",
+      "sha256": "038f9fa759cbdd1b80e3596fd410f5eca576ba033da28272a216855a163caa66",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 0.6402895824937471,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.6097996023749972
           },
           "mapUrl": "/scenes/braille/braille-model-surface@2x.webp",
@@ -432,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "braille",
-    "materialSha256": "2996aa02a28960847ef16de586f883b56fbfddb2b4e77ad28bb958d715bb3291",
+    "materialSha256": "c98bdb02d021dc284b89595e4994175f33487f8387265b0e2a187f078b1c66a3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

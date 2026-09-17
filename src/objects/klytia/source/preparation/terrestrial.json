@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 22.7,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/klytia/klytia-shape-surface@2x.webp",
     "polesUrl": "/scenes/klytia/klytia-shape-surface@2x.webp",
     "radialTerrain": {

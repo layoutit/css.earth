@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3439ac146c1eb55a9c59ca014ed3255f1ec76af42f6cf6c6067a1a7b246f04a2"
+    "sha256": "0ef81f77f786639d9cab888214d8a814a5cb5a83a0c0c507ba0bfae273b45933"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "359f49b39f899eb0d381de7bc2cb2ef8f5f9af0aafaab0d4dc4e6732bf6c8fc0",
+      "sha256": "991a599ae6c6633810000370a61a34594451f2e46e2983f0e720540dc9086384",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 22.3745,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/parysatis/parysatis-shape-surface@2x.webp",
           "polesUrl": "/scenes/parysatis/parysatis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "parysatis",
-    "materialSha256": "73f2376513817b5ab4f29ba172de0f04d1eacfef38fb557ea986dbd7a28c411e",
+    "materialSha256": "d1ae28abdf2a7f988e4a69a1a2859d5a42321482c056b7da678401464891caef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

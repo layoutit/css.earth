@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5ad546e2f75ae5e1cdf7f3a8115b409817c2e03e553797c489447330dcb60611"
+    "sha256": "a5d221c3a15975e9cdf8d9249f82206cb1b604b9c3258e4cb775b491fbdb7f1c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "858561f532494eab1bc580f699aa9e0b21e647accda80be6efcfbe508b836056",
+      "sha256": "5fca4c8eabcfda27163e8f4d7f9eaf8781e496af481a0b05f2892a54adb1b628",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -169,10 +169,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 26.4,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
           "polesUrl": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
           "radialTerrain": {
@@ -1275,7 +1271,7 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "eb0cdf139570f2525b0184e0db25f4ea648fcb515ef2ee074581c24fdc6a14d3",
+    "materialSha256": "1dea7c8c6087007208f9e8f2555705708884376d9ea41ca81eca4652bb6f2368",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

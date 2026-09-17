@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a650d6bb4c439e53ca1af1df58317e302fd1bd44a0f5e19124243b568e41bb4"
+    "sha256": "e1196d3f09a9113994d3ab2194fa65af39df6cc3d632d3cf9cbabdd4a9db6c89"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "31add974fe0067ea9a0e6951071f4cb1cb817babf90c0b6cb4877d3efe012e71",
+      "sha256": "8c152e1c86fc30f24568d9f6c72ba9a5d5185ba3f90fb4c703c6bfc9f0acf81e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 14.5895,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/crimea/crimea-shape-surface@2x.webp",
           "polesUrl": "/scenes/crimea/crimea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "crimea",
-    "materialSha256": "93cd70b797ce87a4b1ecacac2de1ad0d40d59fad005892305790c95f178b1bed",
+    "materialSha256": "3bd9752db2606a3350a40a92b0bb9c8ce65782d44ccd1d6504d0c9a4c391df59",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

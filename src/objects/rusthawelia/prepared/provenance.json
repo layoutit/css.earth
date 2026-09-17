@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d10fcc8af25ad3877e55609994ac9666ec54bf709b6e8b0606ba3bcd388c8b80"
+    "sha256": "27cc2bb78fede11837a7393969b8ea66bbfdbf0e1d8140c338319494a2ee12c3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1210c4ab1f2d2eb1c425829af26d63712bf3532560bc60c6c92e903d40065f50",
+      "sha256": "b68883df2ce06593fda778480a9b6349acabe8d878d28088b8e8551fdd0aa1f4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 33.993,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/rusthawelia/rusthawelia-shape-surface@2x.webp",
           "polesUrl": "/scenes/rusthawelia/rusthawelia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "rusthawelia",
-    "materialSha256": "398390dac972fe06a83f3206df8316a5692c833dadb5a5ff8b81a003ceb8cadb",
+    "materialSha256": "ca59b53b18ea62afe9729cdbd4579bf7bd8c209b5f6725f8c56cf8cf4f5f59d9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

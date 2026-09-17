@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9768399b3ce50956e02657ec6e84d4b3f10a2f73fb95596e97cd430268cc57d3"
+    "sha256": "14267fee2a5fd4a0700c371f3dcc118ea8a97cdf0d9f9fac7adda95d3eb11a5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "67d3ced198350005f37b1ab319cce90171db25cdba874744d716d7f99351a40b",
+      "sha256": "bdae77c888dec3f8e9977ac77439e2ca99b41d8b42edf47036c311afaf769ea5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -207,10 +207,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.165,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
           "polesUrl": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
           "radialTerrain": {
@@ -1961,7 +1957,7 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "ad16abd50232654327fb4dc82f72888ca2a0e4f524823502199ef9de174036ef",
+    "materialSha256": "773f29c17e95fa6922096e93c63fa3916507beeffbb040cc6b1663db5fa5578f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

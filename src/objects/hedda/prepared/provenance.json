@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "60c46e04a3cc16f9e027c0c0ae42bf41ffb5094990e8a36356d85d0c223fbe67"
+    "sha256": "4c6cf2c51ed9481ae37737ded337e9d0933d544f1e822b2a9893f4b90f516c55"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e5e315372678fb1431140c252e08956648c91c706de5809d701cdd8f6ef52eb7",
+      "sha256": "619ef676369e1c757cde82f3c3c1334634162ec7755b4fbb26077919b8b895ac",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 31.955,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hedda/hedda-shape-surface@2x.webp",
           "polesUrl": "/scenes/hedda/hedda-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hedda",
-    "materialSha256": "825048e605034dfad44ece9223076590b121650d431a0c47e018d2bff1719795",
+    "materialSha256": "3a9dd413b811303f70c75a308778b5891778bff6246ecdf6acfafe4c27e9c0e2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

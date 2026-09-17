@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "16cd21c14f3d1b2c0c6e492e5563a531adb40bced1f706dc83f1cb046f9112fc"
+    "sha256": "ad30a93eeafb6084ceffa2744b29d12212ee68f2137f550d5095c09b995be741"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f40d8f7c89610298d24022d60549143f6b8e80d929998a24e85dd97a0e3d6f03",
+      "sha256": "2497f4bdc9be94f65794d0f2649ae98d3852e3d68311a49003074145428a466f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 21,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9064280432115993
           },
           "mapUrl": "/scenes/caliban/caliban-model-surface@2x.webp",
@@ -468,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "caliban",
-    "materialSha256": "55a6e9b1a4df8aabd7309110e8b9510cb3c4e7273a173572835b48828a97f176",
+    "materialSha256": "2467eb10a3915240bc1446e4177ccb2b0a765e7bf91fc4a13a3b96d5df5ac63e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

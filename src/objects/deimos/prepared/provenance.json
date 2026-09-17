@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7624c58a528785283a91c28ccd7093d8a38a965eff977d68eaf9fe6467e8e28a"
+    "sha256": "ad9e0a997130a2e69b56348baf5a6506afaa4ebfd2ce96fb216a7a5504dc0629"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e39bf20ca7f88c82ae4415a47199a43f6cf782c00002a902740f183241919b04",
+      "sha256": "fd449bf44d69f93a8af66ce2ed78484055bff7c007c7f201a099d8c626ad7599",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -191,10 +191,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 6.2,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 45
-          },
           "mapUrl": "/scenes/deimos/deimos-normal-surface@2x.webp",
           "polesUrl": "/scenes/deimos/deimos-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1190,7 +1186,7 @@
   },
   "lastPreparation": {
     "objectId": "deimos",
-    "materialSha256": "8c26468642d74437649124aa1303e402c65d5e4772f7bf992147fcd9005792a3",
+    "materialSha256": "338b842ad102e2e85af5179ab8965ab3cab0175eca1a26e5ffcf7d3814798d80",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

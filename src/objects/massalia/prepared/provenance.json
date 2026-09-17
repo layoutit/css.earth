@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a37916c3ad269d21c2d991082e833972088e8ffa2051a381c4ea1afcaee59ff"
+    "sha256": "bcc203eb86e731a593237e91525d56f9be4c6155ecf23decec7b86c8ebd2b9d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d0f0575ce2a9fcf83e6cad58e4a78f993d2442882810b50dd3f018243c7b3efd",
+      "sha256": "da3b066adbf4032ff2d4f08632f3680e4e134aee02ba17b27636ae4c421b41ff",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 73.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/massalia/massalia-shape-surface@2x.webp",
           "polesUrl": "/scenes/massalia/massalia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "massalia",
-    "materialSha256": "a923ebc4151fa54504e451fc2a266d481a0feb97912d24f4c2cfefcab5b3d1bc",
+    "materialSha256": "34ac09949b7308d5976af1ac7503b28721960e0990fdd6476c8f99023a593cd9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

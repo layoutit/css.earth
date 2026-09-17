@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 35.99999999999999,
-    "camera": {
-      "initialScenePitchDegrees": -20.629248987925266,
-      "defaultControlYawDegrees": 34.09391922506993
-    },
     "mapUrl": "/scenes/rosalind/rosalind-model-surface@2x.webp",
     "polesUrl": "/scenes/rosalind/rosalind-model-poles@2x.webp",
     "radialTerrain": {

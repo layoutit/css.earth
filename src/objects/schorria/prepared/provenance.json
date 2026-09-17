@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f4f65059e067405665945c1b47724675e44af2660c068fbe3251163cd6e47e17"
+    "sha256": "aba00b09b6c152cc8c3311e8141aad3812a07041aef2f458548315e25841e86e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e6e3f823444255df69c0fd852213c1d6f5335563122a0fda2921de49f42205dd",
+      "sha256": "637bb0b69e8b02e87c38d5a9f80be738256465207e5786d75dcb769eed846f9d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.775,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/schorria/schorria-shape-surface@2x.webp",
           "polesUrl": "/scenes/schorria/schorria-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "schorria",
-    "materialSha256": "96f278c054520aa7bb4d84d902d7f61302b15870f35d47c9def7b69c1d2b5674",
+    "materialSha256": "574e2511a69cda08cd7953f5093b86bb005f440c2a1b1b87010b509eac1a0ced",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

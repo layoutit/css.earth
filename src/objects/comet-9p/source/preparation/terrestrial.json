@@ -292,10 +292,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 2.83,
-    "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/comet-9p/comet-9p-constraints-surface@2x.webp",
     "polesUrl": "/scenes/comet-9p/comet-9p-constraints-poles@2x.webp",
     "radialTerrain": {

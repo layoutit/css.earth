@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1561d992ec389bbbbaac2cff90ad72ab42467d6cd29e4f9d5db5f74c0a1f9c5e"
+    "sha256": "32772362f2ed8d65bd5dda40b2083b8dc2e089870088ac99cdb41ec43e6d83c5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e7cd4c674a4a52114764c88b8938759c51fc35a54fa06e8fe116068ff9d0d920",
+      "sha256": "d2b60cebf326d07c4982bf3a33cd714fac89dfc5b9aa5c763ec602b50cee0845",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 166,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/interamnia/interamnia-shape-surface@2x.webp",
           "polesUrl": "/scenes/interamnia/interamnia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "interamnia",
-    "materialSha256": "c0d3fb7ed15869174bb32073a438b828aa56b5e0443f6eed52e054b0905f3422",
+    "materialSha256": "10ef2d0e3e5c3c74e474aface4dc83666631049e073a85aa0cc7358e317b970e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

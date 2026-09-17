@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7a96a472dab6d970f1b126dd0b74db301e9b7a5bee080184affedb184b67fdcd"
+    "sha256": "f7abe543df6e9934fe9de33c6d71b386cdc8fd93a77604f3e8f85b816d498ab8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "df7b40d7dfad5a846c87c1edfe2a8b9bdd0bd3c5f4b32795c08f443af136b084",
+      "sha256": "537b34d41bb3c81dc2c5eacf76828aaafba073ff3e8f352d4a581e3beb198ba0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -411,10 +411,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 137,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/sylvia/sylvia-shape-surface@2x.webp",
           "polesUrl": "/scenes/sylvia/sylvia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -1861,7 +1857,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "dfc887dc876d7e48dc45ae2396ca9aefa607c0743c6606ca8147562a6074d4af",
+    "materialSha256": "a5416e3f381299a1b5773d4d41adc0064e718082279d34cf18f8cad6486c971f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "daf8067b50d7745efeac9561a981cbff2c1e559fa7d4449bc8925933a8fe3261"
+    "sha256": "d9e086e056947e07b686902e609288641a5e326d41769cfade3229b814941aad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1c2cf09ef6e05e2fd5b78ac739e3ee4812e20177a3893255cd0d33fed6a160b1",
+      "sha256": "90977bd46e817194a01c437326b2c01415cfae8c67bbd057ab69c302411d205f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -139,10 +139,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 8.42,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/eros/eros-normal-surface@2x.webp",
           "polesUrl": "/scenes/eros/eros-normal-surface@2x.webp",
           "radialTerrain": {
@@ -1074,7 +1070,7 @@
   },
   "lastPreparation": {
     "objectId": "eros",
-    "materialSha256": "5cfc415274a62068e1812b1f45192c1f609f4ba0bdc13cc1532081742fe9888e",
+    "materialSha256": "536bc800233de785460247eac4ec181a57c76f831260769aaf439d3870f98fe5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

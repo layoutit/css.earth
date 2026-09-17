@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "224c5dc6f39da2522978e9383575a2b343e069b5400876d9506056f198f2dea3"
+    "sha256": "a03d4d2e359f43cc75436732a17e33cb454211fea103bacec39f550f6e80f9c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d30eaa849c6b52f259405c05c14028b8b16b9a89c69c46f743582e0e9a0b66bd",
+      "sha256": "caeebc7f9cf3b32ff431a7a2ee11863ad7c4f998c73d34fdf88373e9dc0bc1e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -249,10 +249,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 764.5,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/rhea/rhea-normal-surface@2x.webp",
           "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1812,7 +1808,7 @@
   },
   "lastPreparation": {
     "objectId": "rhea",
-    "materialSha256": "cdd6dab75e999d02cbd9c0423919b83d757bb633566b440bc806ab0dc926f775",
+    "materialSha256": "22dbf7faa0a8e79cde296b053f7083fd25c2c413b905a199d4feca11c891b5d9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

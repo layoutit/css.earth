@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd063b19ffa5185af370cb2eaf5898ebef409f759d0ffaa5415b7cf64ac4d0d0"
+    "sha256": "dfe8be8501bf53c8e9f815ad932f211c883bccfe81314effbebf680976a8d6e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7f8e70541fd56adc30c9e4ac6948bb4115f09b5ec2363a70a1ff1b85dcdb70e7",
+      "sha256": "5f89daa16a378565e175c679f641ead55644cfcdeb46284c23fdac08ac5c91d0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 54.895,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/euterpe/euterpe-shape-surface@2x.webp",
           "polesUrl": "/scenes/euterpe/euterpe-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "euterpe",
-    "materialSha256": "6531730b1c644e4d21a909b57d9df99e598b46cb69e2c32f7608525f5b16b4e8",
+    "materialSha256": "27bcc2bed6347f5dc4558f8c196089ff8a61cf32bc40cc10365350e5bd9b19e1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

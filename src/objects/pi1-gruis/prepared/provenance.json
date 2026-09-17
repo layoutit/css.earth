@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1aecb89fd42a037e04dfb58ac6545d26c9f6d92fe59e436c46aa99eb03a51f37"
+    "sha256": "a135f6644a8c788a9e4180ca8bd059aab1701ee80ddad7b141c6f9490f969af9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "ad7f55ec5e58cd3f40837a2d7502c852253f7ccb33ec146717ff6f952cb50a88",
+      "sha256": "5f9bd655f787133135f53c9d18eddeebe4de8887a631d04c08b115241d491b73",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pi1-gruis/",
@@ -127,9 +127,7 @@
                 },
                 "consumer": "sphere-photograph"
               },
-              "offLimb": {
-                "rotationDegrees": 0
-              }
+              "offLimb": {}
             }
           }
         ],
@@ -586,8 +584,8 @@
         },
         {
           "url": "/scenes/pi1-gruis/pi1-gruis-context-pionier.webp",
-          "bytes": 43688,
-          "sha256": "75f4bb16ed913440aaf9d484820bf5fbccaca8e6dc73f978b7bd875f747de66a",
+          "bytes": 43624,
+          "sha256": "af3e3cc34b7849db168c0c96670f64b4fe3a22955d1ea42f5f83aef39f2f2351",
           "verification": "bytes-verified"
         },
         {
@@ -598,8 +596,8 @@
         },
         {
           "url": "/scenes/pi1-gruis/pi1-gruis-context-pionier@2x.webp",
-          "bytes": 105800,
-          "sha256": "4f48228a82f37ce87a10e38b4674d61758a2d1c7ef7e45f1e1902c07f2acc697",
+          "bytes": 105802,
+          "sha256": "6cfd66666c1524f40f04a7531e4043a68a05d52cd376ee165a7fda4f5b3c2209",
           "verification": "bytes-verified"
         },
         {
@@ -676,7 +674,7 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "d4b090362bd6c1e5cb26cd0b1ea4b384c9109a6a1806296a81a7ce56b9b97e39",
+    "materialSha256": "b5bff963638e236b11adb1dad5cb7cf1f0d33b9fe96b8c3cc2e3e2f005b88fb2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

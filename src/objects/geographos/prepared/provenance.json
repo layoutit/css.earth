@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9275087f0722ecf0bd7986c74b26d52222cfe781f8258fd323318b6faa9b14a"
+    "sha256": "b45adb05a44ffa3c72331786174e20ebf1bf3c9e77a1051432500b7f2889e93a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6b6cc70dccc90334bab6cbb89301d89a0c0229d023051216684e826200b9cbf1",
+      "sha256": "9e7be03e4556886e3d368bc5c197cdfbd4e8891e5fd161569d6c4ab5c4409592",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.284042,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/geographos/geographos-shape-surface@2x.webp",
           "polesUrl": "/scenes/geographos/geographos-shape-surface@2x.webp",
           "radialTerrain": {
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "geographos",
-    "materialSha256": "337737c50bacfd3dffa23ac3757533b5963f97fcc2e4f328db4784d719b1b77d",
+    "materialSha256": "95cb6af0bfb50875a2c514ef09d632bd1dbdd48373115eb3da6ad93bcedc8109",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

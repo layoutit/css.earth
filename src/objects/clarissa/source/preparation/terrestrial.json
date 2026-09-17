@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 21.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/clarissa/clarissa-shape-surface@2x.webp",
     "polesUrl": "/scenes/clarissa/clarissa-shape-surface@2x.webp",
     "radialTerrain": {
