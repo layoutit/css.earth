@@ -27,6 +27,23 @@ test('a night plan pairs each block with its own dark and splits science from ca
   assert.throws(() => planPionierNight(frames, 'ALF_ORI', window), /no block on ALF_ORI/u);
   assert.throws(() => planPionierNight(frames.filter(frame => frame.dpId !== 'PIONI.2014-09-25T23:52:37.477'), 'PI_GRU', window), /no dark after it/u);
   assert.throws(() => planPionierNight(frames.filter(frame => frame.dpType !== 'FRINGE,LAMP'), 'PI_GRU', window), /No FRINGE,LAMP/u);
+  // 2019 service mode: a calibrator filed as CALIB carries no star name, another programme's science block is not a calibrator,
+  // and the lamp and kappa sets come from the morning before (pndrs's preference) though the next morning's are closer.
+  const at = (time: string, dpType: string, object = dpType, dpCategory = 'CALIB', programme = '60.A-9800(K)', templateStart = time.slice(0, 19)) =>
+    ({ dpId: `PIONI.${time}`, dpType, dpCategory, object, programme, templateStart });
+  const night = [
+    at('2019-08-06T10:48:40.000', 'DARK'), at('2019-08-06T10:49:35.078', 'KAPPA,LAMP', 'KAPPA,LAMP', 'CALIB', '60.A-9800(K)', '2019-08-06T10:49:30'),
+    at('2019-08-06T10:51:40.890', 'FRINGE,LAMP'),
+    at('2019-08-07T00:02:17.262', 'FRINGE,OBJECT', 'FRINGE,OBJECT'), at('2019-08-07T00:06:00.000', 'DARK'),
+    at('2019-08-07T00:14:00.447', 'FRINGE,OBJECT', 'AI_SCO', 'SCIENCE', '0103.D-0999(A)'), at('2019-08-07T00:18:00.000', 'DARK'),
+    at('2019-08-07T01:10:00.000', 'FRINGE,OBJECT', 'RAQR', 'SCIENCE', '0103.D-0255(B)'), at('2019-08-07T01:14:00.000', 'DARK'),
+    at('2019-08-07T10:40:00.000', 'DARK'), at('2019-08-07T10:42:00.000', 'KAPPA,LAMP', 'KAPPA,LAMP', 'CALIB', '60.A-9800(K)', '2019-08-07T10:41:50'),
+    at('2019-08-07T10:45:00.000', 'FRINGE,LAMP'),
+  ];
+  const serviceNight = planPionierNight(night, 'RAQR', { from: '2019-08-07T00:00:00', to: '2019-08-07T12:00:00' });
+  assert.deepEqual(serviceNight.blocks.map(block => [block.object, block.role]), [['FRINGE,OBJECT', 'calibrator'], ['RAQR', 'science']]);
+  assert.equal(serviceNight.spectral, 'PIONI.2019-08-06T10:51:40.890');
+  assert.deepEqual(serviceNight.kappa.frames, ['PIONI.2019-08-06T10:49:35.078']);
 });
 
 /** Pairs our calibrated squared visibilities with the author's for the same exposure: the same baseline vector (either sign)

@@ -8,9 +8,9 @@
  * The frames are the ESO archive's raw table (archive.eso.org/tap_obs, dbo.raw) for the window, or a saved copy of it. Each
  * observing block is a run of FRINGE,OBJECT exposures on one star followed by its own DARK; the KAPPA,OBJECT frames follow a
  * DARK too. planPionierNight reads those associations from dp_type, object and tpl_start, so no frame is chosen by hand:
- * the target's blocks inside the window are science and every other star's are calibrators. The spectral calibration and the
- * kappa matrix follow pndrs's own choice (pndrsBatchFindBestSpecCal): the closest FRINGE,LAMP scan and the closest KAPPA set
- * taken before the first block, from the whole night. Taking the wavelengths from a star's fringe exposure instead left them
+ * the target's blocks inside the window are science; blocks filed as CALIB or in the target's programme are calibrators. The spectral calibration and the
+ * kappa matrix follow pndrs's own choice (pndrsBatchFindBestSpecCal): the FRINGE,LAMP scan and KAPPA set closest to the first
+ * block, preferring by one day those taken before it; the archive is queried from 36 hours before the window to 24 after. Taking the wavelengths from a star's fringe exposure instead left them
  * 0.5 to 0.9 percent longer than the author's file. Public raw files download anonymously from the ESO data portal.
  *
  * The reduction is esorex for darks, the kappa matrix, the spectral calibration and each exposure's raw OIDATA; the transfer
@@ -26,13 +26,14 @@ import { toolchainPath } from './toolchain.mts';
 
 export { rawFrame } from './eso-pipeline.mts';
 
-export interface RawFrame { readonly dpId: string; readonly dpType: string; readonly object: string; readonly templateStart: string }
+export interface RawFrame { readonly dpId: string; readonly dpType: string; readonly dpCategory: string; readonly object: string; readonly programme: string; readonly templateStart: string }
 export interface PionierBlock { readonly object: string; readonly role: 'science' | 'calibrator'; readonly exposures: readonly string[]; readonly dark: string }
 export interface PionierPlan { readonly kappa: { readonly dark: string; readonly frames: readonly string[] }; readonly spectral: string; readonly blocks: readonly PionierBlock[] }
 
-/** The archive's CSV (dp_id, dp_type, object and tpl_start columns) as frames in time order. */
+/** The archive's CSV (dp_id, dp_cat, dp_type, object, prog_id and tpl_start columns) as frames in time order. */
 export function parseRawFrames(csv: string): RawFrame[] {
-  return parseRawTable(csv).map(row => ({ dpId: column(row, 'dp_id'), dpType: column(row, 'dp_type'), object: column(row, 'object'), templateStart: column(row, 'tpl_start') }));
+  return parseRawTable(csv).map(row => ({ dpId: column(row, 'dp_id'), dpType: column(row, 'dp_type'), dpCategory: column(row, 'dp_cat'), object: column(row, 'object'),
+    programme: column(row, 'prog_id'), templateStart: column(row, 'tpl_start') }));
 }
 
 const time = frameTime;
@@ -42,7 +43,11 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
   const darks = frames.filter(frame => frame.dpType === 'DARK');
   const inside = (frame: RawFrame) => (!window.from || frame.dpId >= `PIONI.${window.from}`) && (!window.to || frame.dpId <= `PIONI.${window.to}`);
   const blocks: PionierBlock[] = [];
-  for (const template of [...new Set(frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && inside(frame)).map(frame => frame.templateStart))]) {
+  // A calibrator is a block the archive files as CALIB (2019 service mode names it only "FRINGE,OBJECT") or a block of the
+  // target's own programme (2014 visitor mode filed named calibrators as SCIENCE). Other programmes' science blocks are skipped.
+  const programmes = new Set(frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && frame.object === target && inside(frame)).map(frame => frame.programme));
+  const usable = (frame: RawFrame) => frame.object === target || frame.dpCategory === 'CALIB' || programmes.has(frame.programme);
+  for (const template of [...new Set(frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && inside(frame) && usable(frame)).map(frame => frame.templateStart))]) {
     const exposures = frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && frame.templateStart === template);
     const last = time(exposures.at(-1)!.dpId);
     // A block's dark is the first dark after its last exposure, within the template's own few minutes.
@@ -55,15 +60,20 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
   if (!blocks.some(block => block.role === 'science')) throw new Error(`The window holds no block on ${target}.`);
   if (!blocks.some(block => block.role === 'calibrator')) throw new Error('The window holds no calibrator block.');
   const start = time(blocks[0]!.exposures[0]!);
-  const before = (type: RegExp) => frames.filter(frame => type.test(frame.dpType) && time(frame.dpId) < start);
-  const kappaSets = before(/^KAPPA,/u);
-  if (!kappaSets.length) throw new Error('No kappa-matrix frames precede the first block.');
-  const kappaTemplate = kappaSets.at(-1)!.templateStart, kappaFrames = kappaSets.filter(frame => frame.templateStart === kappaTemplate);
+  // pndrsBatchFindBestSpecCal's score: the time distance in days, plus one day for a calibration taken after the data and minus
+  // one for one taken before. Observatory calibrations come in the morning, so this picks the previous morning's set over the
+  // next morning's, and still finds the next one when none precedes.
+  const best = (type: RegExp) => frames.filter(frame => type.test(frame.dpType))
+    .map(frame => { const days = (time(frame.dpId) - start) / 86400e3; return { frame, score: Math.abs(days) + Math.sign(days) }; })
+    .sort((a, b) => a.score - b.score)[0]?.frame;
+  const kappa = best(/^KAPPA,/u);
+  if (!kappa) throw new Error('No kappa-matrix frames in the night.');
+  const kappaTemplate = kappa.templateStart, kappaFrames = frames.filter(frame => /^KAPPA,/u.test(frame.dpType) && frame.templateStart === kappaTemplate);
   const firstKappa = time(kappaFrames[0]!.dpId);
   const kappaDark = [...darks].reverse().find(frame => time(frame.dpId) < firstKappa && firstKappa - time(frame.dpId) < 2 * 60e3);
   if (!kappaDark) throw new Error('The kappa-matrix frames have no dark just before them.');
-  const lamp = before(/^FRINGE,LAMP$/u).at(-1);
-  if (!lamp) throw new Error('No FRINGE,LAMP spectral calibration precedes the first block.');
+  const lamp = best(/^FRINGE,LAMP$/u);
+  if (!lamp) throw new Error('No FRINGE,LAMP spectral calibration in the night.');
   return { kappa: { dark: kappaDark.dpId, frames: kappaFrames.map(frame => frame.dpId) }, spectral: lamp.dpId, blocks };
 }
 
@@ -118,7 +128,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const target = option('--target'), from = option('--from'), to = option('--to');
   if (!work || !target || !from || !to) throw new TypeError('Usage: calibrate-pionier <work> --target <OBJECT> --from <ISO> --to <ISO> [--frames <csv>] [--raw <dir>] [--pipeline <prefix>] [--calib <dir>] [--yorick <bin>]');
   // The night's calibrations may precede the window by hours: the query starts twelve hours earlier.
-  const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
+  const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'prog_id', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 36 * 3600e3).toISOString().slice(0, 19), new Date(Date.parse(`${to}Z`) + 24 * 3600e3).toISOString().slice(0, 19));
   const plan = planPionierNight(parseRawFrames(csv), target, { from, to });
   await mkdir(work, { recursive: true });
   await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
