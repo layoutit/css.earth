@@ -158,8 +158,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
       let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
       let publishedVolumeVisible: boolean | undefined, publishedScale = '';
-      // The baked sky cube holds the Sun's near stars. As the camera leaves the Sun's neighbourhood the 3D star field takes
-      // over those stars at their catalogue positions, and the cube, which would show them from the wrong place, fades out.
+      // The baked star cube holds the Sun's near stars. As the camera leaves the Sun's neighbourhood the 3D star field takes
+      // over those stars at their catalogue positions; the star cube, which would show them from the wrong place, hands the
+      // background to the plain Milky Way cube, which still holds from another star.
       let starsHandoff = 0;
       const publishBackground = () => {
         const brightness = highContrastSky ? 1 : volumeBrightness;
@@ -175,7 +176,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
           publishedImageAlpha = imageAlpha;
         }
-        const skyAlpha = (alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0) * (1 - starsHandoff);
+        const skyAlpha = alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0;
         if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       };
       const destroy = () => {
@@ -305,7 +306,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               volumeImage.dataset.volumeBrightness = String(volumeBrightness); publishedVolumeBrightness = volumeBrightness;
             }
             publishBackground();
-            skyLayer?.publish(world, viewport, volumeOpacity < 1);
+            skyLayer?.publish(world, viewport, volumeOpacity < 1, 1 - starsHandoff);
             if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.
