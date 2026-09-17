@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b08c6c2992aa4e5551fa075d788e6e22993d040b4d80e6ab61ce3ecf0e869a8"
+    "sha256": "49698654755fe48cf12186255a69cd6c72c1efd1697785cebccccccc80844581"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "28afd396586179c010e7f0761de6d26e4d3574dd59948fb050287fcfdc0e28ba"
+    "bindingsSha256": "ec9d1fe036b891ba89179bc19a23cecfee14ecb9cdeb073b06d3ba7365337873"
   },
   "recipes": [
     {
@@ -387,7 +387,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "a4eaa26f71b3e4d11f0874914e4c0a01438192ab3cd5f512846fbf041fe16ae7",
+      "sha256": "67782cd888a9dd9598f18e5930ee1eb2b66bc8bddc7f9a3c5d5a14947b1063fe",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -398,7 +398,6 @@
           "metadata": "metadata_nomenclature_points_LUTETIA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "lutetia-features.json",
         "publicBase": "/scenes/lutetia/",
         "target": {
@@ -777,8 +776,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
-      "bytes": 154,
+      "sha256": "da809d2bfa984eb93147410d9f6717332c5d552f09706bcada96d6a361eeeead",
+      "bytes": 186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -999,7 +998,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1102,11 +1100,11 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "e42688b5b9f88a910c1b5b53c1b8ebb334f70b0f92d3b513878413a71dc6ef22",
+    "materialSha256": "c7034f23d047c8ee2edd5189d0c8b20ef5d245f54c4e9b264ef7aeac07ed5b4a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "28afd396586179c010e7f0761de6d26e4d3574dd59948fb050287fcfdc0e28ba"
+      "bindingsSha256": "ec9d1fe036b891ba89179bc19a23cecfee14ecb9cdeb073b06d3ba7365337873"
     }
   }
 }

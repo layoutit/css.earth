@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "954e3b9f3aa217af3b9697b3c166729e2ca43ac440ed2f4465f614fd1f7d6018"
+    "sha256": "e54af8bb9bee949e90a8424a3ab7e86befde1308366a9bd4c7a3e90065ad4b86"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5ff0937ddec1bab6d6047bb7995da49e52520b48e865e8b2a4757835a212cca6"
+    "bindingsSha256": "1767ac0eca520a513061f482db4b720b6382bbc4c8db61645aa260a6c7c33fa5"
   },
   "recipes": [
     {
@@ -1015,7 +1015,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c0d0b7cc166e1b353bf5cca3c9d87232b0f82ea5e227eb0728c8b67fd2b58539",
+      "sha256": "4b81fdddedcbbc514c30b53ee1d93765f61bbcea9e64265040d1de850c2dbdb5",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1026,7 +1026,6 @@
           "metadata": "metadata_nomenclature_points_HYPERION.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "hyperion-features.json",
         "publicBase": "/scenes/hyperion/",
         "target": {
@@ -3849,8 +3848,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "41fe1439651fc58d55fbc8b1319d75f554562095f3540bfcb58e270bd2d86233",
-      "bytes": 155,
+      "sha256": "2534937facc9cf6fd34df17034c50d9b224f551da176a485cd675dc130e42be0",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -4124,7 +4123,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -4227,11 +4225,11 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "2333a0dee393fc60ffa3a1acca7ab2a3d00b416cc26db884341cbafb9ba0dd70",
+    "materialSha256": "d7adabe598d5342505f9a3610e4626267e6ee5337a01529b11117f80050c328d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5ff0937ddec1bab6d6047bb7995da49e52520b48e865e8b2a4757835a212cca6"
+      "bindingsSha256": "1767ac0eca520a513061f482db4b720b6382bbc4c8db61645aa260a6c7c33fa5"
     }
   }
 }

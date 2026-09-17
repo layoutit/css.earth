@@ -1,6 +1,6 @@
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
 import type { PreparedVolumeRuntime } from '../volume/types.js';
 function record(v: unknown): Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Invalid point manifest');
@@ -48,7 +48,7 @@ export async function mountGalaxyPoints({host, manifestUrl, cloudUrl, sha256}: {
   return {roots:[root],publish({world,viewport}) {
     const started=performance.now();
     if(world.referenceFrame !== frame.referenceFrame || world.epochJdTt !== frame.epochJdTt) throw new TypeError('Point camera frame mismatch');
-    const local = presentPhysicalPoseInVolume(world.pose,frame), r = worldRotationFromQuaternion(local.orientationXyzw);
+    const local = presentPhysicalPoseInVolume(world.pose,frame), r = cssCameraAxesFromOrientation(local.orientationXyzw);
     const camera=[...local.positionUnits,...local.orientationXyzw,viewport.focalPixels,...viewport.principalOffsetPixels,viewport.widthPixels??0,viewport.heightPixels??0];
     if(camera.length===previousCamera.length && camera.every((value,i)=>value===previousCamera[i]))return;
     previousCamera=camera;

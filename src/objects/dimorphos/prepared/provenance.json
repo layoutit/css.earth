@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7340973f1bd7502625aee39b0d2dd152cd75cae0f89cadafc3181f9c3f9dc7f6"
+    "sha256": "6853cbc5836e239065f6cdf7199afde812858dd1efa2daba6bb361ec416f0d24"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "30cedbe5fb4a43f7c3985b88f0431128636c97e2a4eaf60d965af592c9278ead"
+    "bindingsSha256": "0dce2c5c0fc32bf2ebba03b92180437021685b0940e782226672d3ece8024221"
   },
   "recipes": [
     {
@@ -593,7 +593,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c93be12a666cd7216804b2e6c2c59a3bc1385a1f63ba92f5a22f51bfe7bd48a2",
+      "sha256": "08a35d36d90f933260a95f34aa43c3b72bcd47663b74b8bdd4215ad2b670f8f7",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -604,7 +604,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "dimorphos-features.json",
         "publicBase": "/scenes/dimorphos/",
         "target": {
@@ -1248,8 +1247,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "49a8398207a279568f098d9629215d1b3f33dee77c82ac50669540b4837a704d",
-      "bytes": 156,
+      "sha256": "90817538597c6ec594d451248cd2cf56fc55d48046aa0a1c87d5190ff819721b",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1600,7 +1599,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1754,11 +1752,11 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "1fc968d5cc26d569b422d0c32df34b885f0108dc14f98ca8268c466abe3f2e84",
+    "materialSha256": "670f785c8115f9bb5d4f3b3b170248577ced339b659ed635778beb21677245d1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "30cedbe5fb4a43f7c3985b88f0431128636c97e2a4eaf60d965af592c9278ead"
+      "bindingsSha256": "0dce2c5c0fc32bf2ebba03b92180437021685b0940e782226672d3ece8024221"
     }
   }
 }

@@ -65,7 +65,7 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
 /** The paged lane's own geodetic mapping (the one its city destinations use) becomes the feature sampler. The lane
  * writes `scene.json` before the presentation, so its leaf frames are read from the output directory. */
 export async function pagedEllipsoidSurface({ descriptor, paged, recipe, sourceDirectory, outputDirectory, meshRadiusUnits }: {
-  descriptor: AuthoredObjectDescriptor; paged: Record<string, unknown>; recipe: Pick<SurfaceFeaturesConfig, 'surfaceMap' | 'mapLeftEdgeLongitudeDeg'>;
+  descriptor: AuthoredObjectDescriptor; paged: Record<string, unknown>; recipe: Pick<SurfaceFeaturesConfig, 'surfaceMap'>;
   sourceDirectory: string; outputDirectory: string; meshRadiusUnits: number;
 }): Promise<{ sampler: SurfaceSampler; cast: ReturnType<typeof ellipsoidSurfaceCast> }> {
   const shape = descriptor.recipe.shape;
@@ -75,13 +75,13 @@ export async function pagedEllipsoidSurface({ descriptor, paged, recipe, sourceD
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(sourceDirectory, recipe.surfaceMap), 'utf8')));
   const scene = geographicScene(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
   const { prepareLocationPoint } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/geographic-pages/prepare-location.mts')).href) as typeof import('../geographic-pages/prepare-location.mts');
-  const sampler = renderedEllipsoidSampler(axes, recipe.mapLeftEdgeLongitudeDeg, semiAxes, (longitudeDeg, latitudeDeg) => {
+  const sampler = renderedEllipsoidSampler(axes, axes.mapLeftEdgeLongitudeDeg, semiAxes, (longitudeDeg, latitudeDeg) => {
     // The lane maps signed longitudes; the catalogue keeps positive-east 0–360°.
     const point = prepareLocationPoint(scene, longitudeDeg > 180 ? longitudeDeg - 360 : longitudeDeg, latitudeDeg);
     if (point.length !== 3) throw new TypeError('Paged ellipsoid location is not a mesh point.');
     return [point[0]!, point[1]!, point[2]!];
   });
-  return { sampler, cast: ellipsoidSurfaceCast(sampler, axes, recipe.mapLeftEdgeLongitudeDeg) };
+  return { sampler, cast: ellipsoidSurfaceCast(sampler, axes, axes.mapLeftEdgeLongitudeDeg) };
 }
 
 /** The prepared scene facts the lane's location mapping reads: latitude bands of leaves with their frames. */

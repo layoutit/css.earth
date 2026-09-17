@@ -10,8 +10,10 @@ import type { PreparedWorldCameraFrame, WorldCameraPose } from '../../src/render
 import type { ObjectWorldNavigationListener } from '../../src/renderers/css/runtime/world-navigation-types.ts';
 import type { OverviewSelection } from '../overview-selection.mts';
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
+/** CSS presentation to a right-handed reference: a reflection. */
+const reflection = [1, 0, 0, 0, -1, 0, 0, 0, 1] as const;
 const frame = (originM: PreparedWorldCameraFrame["originM"], bodyRadiusM: number): PreparedWorldCameraFrame => ({ originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1,
-  presentationToReference: rotation, metersPerUnit: 1 });
+  presentationToReference: reflection, metersPerUnit: 1 });
 const au = 149_597_870_700;
 const sun = frame([0, 0, 0], 10), ceres = frame([70 * au, 0, 0], 1);
 const objects = [objectFixture('sun', sun, { classification: 'star', systemName: 'Solar System', distance: testDistance(0) }), objectFixture('ceres', ceres, { systemName: 'Solar System' })];

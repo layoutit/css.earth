@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8892a490632164e5f652d22fe30467d6f4fbcdee61ac7c16758b60f93ec767f"
+    "sha256": "ac58a9ca5305b01728df61a5db71656bb710a062c73d4e8b554cdf5feffcb256"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5b7877629048ab62986955a87b9b86541ef5a5eba3efb6060227aa7f2e93953a"
+    "bindingsSha256": "6f720e011f0ff326308703fa1a4951ad774310e3be41d0666c8edf71529fe49e"
   },
   "recipes": [
     {
@@ -391,7 +391,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "cbe37fdbb767bafcffceb3ecc8c7e1b7d483fe643f06bcc06e4500744011431f",
+      "sha256": "719bcac440d79f29a46b3a8ac3d9b9ccf33e70ba170b398e16a13346391e008c",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -402,7 +402,6 @@
           "metadata": "metadata_nomenclature_points_TRITON.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "triton-features.json",
         "publicBase": "/scenes/triton/",
         "target": {
@@ -708,8 +707,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "d0f3f908574d4e81e0124751c533e1b653c5699d9af4fc28d0417557cb7d7b2c",
-      "bytes": 153,
+      "sha256": "7a96b21c979807295efe23ddc3dd3f6b3f8819484766bfb0c07433ba11d3e6ba",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1329,7 +1328,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1407,11 +1405,11 @@
   },
   "lastPreparation": {
     "objectId": "triton",
-    "materialSha256": "e7d88b10f742318d9233cf47c3b068b819badc8ab45ee7e0023ef4427d4e62bf",
+    "materialSha256": "417cc39dd3850b9d7cd3ef02cc99467c11b6ad42965509d19d470dffa4efa45a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5b7877629048ab62986955a87b9b86541ef5a5eba3efb6060227aa7f2e93953a"
+      "bindingsSha256": "6f720e011f0ff326308703fa1a4951ad774310e3be41d0666c8edf71529fe49e"
     }
   }
 }

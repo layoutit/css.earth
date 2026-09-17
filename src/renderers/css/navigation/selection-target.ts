@@ -1,6 +1,6 @@
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
-import { worldRotationFromQuaternion, rotateWorldPosition } from './world-camera-math.js';
+import { cssCameraAxesFromOrientation, rotateWorldPosition } from './world-camera-math.js';
 import { distanceForSilhouetteRadius } from '../solar-system/heliocentric-geometry.js';
 
 /** Center and frame the body without resetting the current viewing direction or roll. */
@@ -9,7 +9,8 @@ export function createWorldSelectionTarget(from: WorldCameraPose, frame: Prepare
   if (from.referenceFrame !== frame.referenceFrame || from.epochJdTt !== frame.epochJdTt) {
     throw new TypeError('Selection requires a common reference frame and prepared epoch.');
   }
-  const sourceRotation = worldRotationFromQuaternion(from.pose.orientationXyzw);
+  // The principal offset is in CSS pixels, +y down.
+  const sourceRotation = cssCameraAxesFromOrientation(from.pose.orientationXyzw);
   const direction = unit(rotateWorldPosition(sourceRotation,
     [viewport.principalOffsetPixels[0], viewport.principalOffsetPixels[1], viewport.focalPixels]));
   const radius = viewport.framingRadiusPixels;

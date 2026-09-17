@@ -167,7 +167,8 @@ test('galactic breadcrumbs zoom straight out from the current view without panni
     const displacement = rotateWorldPosition(reverse, position(target.pose.positionM.map((value, axis) => value - from.pose.positionM[axis])));
     assert.ok(displacement[2] > 0, 'Zoom moves outward');
     assert.ok(Math.abs(displacement[0] / displacement[2] - 40 / viewport.focalPixels) < 1e-12);
-    assert.ok(Math.abs(displacement[1] / displacement[2] + 20 / viewport.focalPixels) < 1e-12);
+    // The principal offset is in CSS pixels (+y down); the pose's camera axes have +y up.
+    assert.ok(Math.abs(displacement[1] / displacement[2] - 20 / viewport.focalPixels) < 1e-12);
     const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM, durationS: .35 });
     for (const progress of [.1, .3, .5, .8, 1]) {
       const pose = sampleSelectionFlight(flight, flight.durationS * progress);

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "464c04679223957fc7004595a2a76f541f82fe8e873e1b5a7fcb08e929bd0fbc"
+    "sha256": "b41cd212926ead3155e0b33906ea13971c55ac88c247c65196dcb53e35725661"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "0a187fbca1ec8293c91a1cdfb1fcfb7fa571509807e5ae31f2781125d35ed825"
+    "bindingsSha256": "ee3e2d67991596a7de235cebcaf9c24cc777670085fb19ec4d7e31421a8f09d8"
   },
   "recipes": [
     {
@@ -398,7 +398,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "d21cab564d968f0d09ccb139bd6b4f2b24ceabfceebacc20104c52e9dd2a8037",
+      "sha256": "4aa630c57ddb806702bfc568757d9ce46a3535fb9c65b1b433ea56526c1c70d6",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -409,7 +409,6 @@
           "metadata": "metadata_nomenclature_points_ITOKAWA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "itokawa-features.json",
         "publicBase": "/scenes/itokawa/",
         "target": {
@@ -1683,8 +1682,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "20963b041eabf0efcd3a8b7b1ece44e045b7f43f316b3224ff62fe7d4ab73b8e",
-      "bytes": 154,
+      "sha256": "bdac1cc9d50c238e5ef5ee1c467bf00ad7b33bb968191fadf3085a6d00e395e5",
+      "bytes": 186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1885,7 +1884,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1963,11 +1961,11 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "fdde7f5fac4008d13d10166207cef12a31d76602c5871c950fcc158e3cc2883f",
+    "materialSha256": "ad16abd50232654327fb4dc82f72888ca2a0e4f524823502199ef9de174036ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "0a187fbca1ec8293c91a1cdfb1fcfb7fa571509807e5ae31f2781125d35ed825"
+      "bindingsSha256": "ee3e2d67991596a7de235cebcaf9c24cc777670085fb19ec4d7e31421a8f09d8"
     }
   }
 }

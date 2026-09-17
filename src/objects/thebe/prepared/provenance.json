@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9970d8696f7df3192646a02cd2f98a664f6d5f45ee5892467e49dfcad0658bd9"
+    "sha256": "3cdcbe350ba5cd55343a1cdd28ccb680e28e80a50ef36e189cd8a079617b561c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "f618a1e96106fed3ade74cc61bb453dc4b2557174352281d12cc9bfa9f45ecf1"
+    "bindingsSha256": "3b43006cea74afd326cbf1741d6946e9f28557a901245140b4a3a2eca200a402"
   },
   "recipes": [
     {
@@ -397,7 +397,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "4f8a2d2ee66fe2ffaded784f2d8bf7d8982bc75e7153c02ec5a478f063751b98",
+      "sha256": "ef0697f4c13f8206ee0c1bc46e51dd079c3a7ddfa00b6f8235272aa0c70e4103",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -408,7 +408,6 @@
           "metadata": "metadata_nomenclature_points_THEBE.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "thebe-features.json",
         "publicBase": "/scenes/thebe/",
         "target": {
@@ -989,8 +988,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "30de8e5aab82a3f87435c58f0169c39fe3a0e47e31f36621c2c0fbaebe7ef797",
-      "bytes": 152,
+      "sha256": "a062860fed2e6369a6a179fddad5b6ce3a0b55d5eb4885433fd32350e7f2fd26",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1168,7 +1167,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1246,11 +1244,11 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "6af6759e4f59cbddfc108920d8dd75876a5cb875ded3c48dafefc4d93f518894",
+    "materialSha256": "88908d06a1c1d1e44edb953655027a52a5c2b9a014ab9fc06d7c28ea14d7493b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "f618a1e96106fed3ade74cc61bb453dc4b2557174352281d12cc9bfa9f45ecf1"
+      "bindingsSha256": "3b43006cea74afd326cbf1741d6946e9f28557a901245140b4a3a2eca200a402"
     }
   }
 }

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "26dff30e7d27f7810193f18f12067f93f7a543459f19b42b0436daf8e7e37130"
+    "sha256": "bde9d25be0bd23c892975034ee2e0018c152ade105b44c43a2d652b8b2cba9d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c0413615caa39f5e922cfca96da79cf0073a3b9619943396b4addfcf39719342"
+    "bindingsSha256": "86c679ab8897acd8a2c0a86749b8f6c4ff08efeb1de479b53f2f1e52db8f4750"
   },
   "recipes": [
     {
@@ -653,7 +653,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "e14d03d75a1c6845344528ae0146a539a6dd977a1ced11a0a93be27be1fc6cb2",
+      "sha256": "253cf9591af1f89d3ad7c8fb5924dfc1f92547b68afe0189e22569ebdb45a239",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -664,7 +664,6 @@
           "metadata": "metadata_nomenclature_points_VENUS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "venus-features.json",
         "publicBase": "/scenes/venus/",
         "target": {
@@ -1043,8 +1042,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "b8bd0e06537a48cf52ff4a3e46498add6e3501fc7a19529e2064cdd069ad4d81",
-      "bytes": 152,
+      "sha256": "3e8d5ea12eedad07105131d73237cdf8a57358181065269b3b6be3219ce28530",
+      "bytes": 186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1480,7 +1479,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1584,11 +1582,11 @@
   },
   "lastPreparation": {
     "objectId": "venus",
-    "materialSha256": "0c055600c608a25d0e708e5320e48694865c44be0b2cd06b08ad982504154398",
+    "materialSha256": "90886175af499b40c0dd64e2cab9a1fa2e3a76c9052e60372b58210090a102db",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c0413615caa39f5e922cfca96da79cf0073a3b9619943396b4addfcf39719342"
+      "bindingsSha256": "86c679ab8897acd8a2c0a86749b8f6c4ff08efeb1de479b53f2f1e52db8f4750"
     }
   }
 }

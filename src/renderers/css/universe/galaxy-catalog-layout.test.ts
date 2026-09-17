@@ -11,9 +11,10 @@ function candidate(id: string, distanceM: number, detailed = false) {
     x: 0, y: 0, distanceM, labelRect: rect };
 }
 test('projects prepared metre coordinates in the shared observer including translation and the principal point', () => {
-  expect(projectCatalogPosition([10, 20, -100], world, viewport)).toMatchObject({ x: 12, y: 17 });
+  // The identity pose looks down -z with +y up; a point above the axis lands above the principal point on a y-down screen.
+  expect(projectCatalogPosition([10, 20, -100], world, viewport)).toMatchObject({ x: 12, y: -23 });
   const moved = { ...world, pose: { ...world.pose, positionM: [10, 0, 0] as const } };
-  expect(projectCatalogPosition([10, 20, -100], moved, viewport)).toMatchObject({ x: 2, y: 17 });
+  expect(projectCatalogPosition([10, 20, -100], moved, viewport)).toMatchObject({ x: 2, y: -23 });
   expect(projectCatalogPosition([0, 0, 100], world, viewport)).toBeNull();
 });
 test('foreground exclusions beat all catalogue labels; major objects beat minor neighbours and selection wins', () => {
