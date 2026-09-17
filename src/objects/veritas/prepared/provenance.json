@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "91efa1a8465980485ea861c39c5ec18830b49aeb4b850ffcef16204f7edb9191"
+    "sha256": "f7ecbbeb08c0dff5431b770cdf8a26a8777505dcdac8b680fc3aa40c4fa4d103"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5f1e80bad5659b39bc69d463448b89d932dce0bdc56760b84a5bdec320f7cdce",
+      "sha256": "0a56f8a6bf6227d140002723e20a56351b72d5b1d64d8eb7f5f63824f95b0b35",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 59.4015,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/veritas/veritas-shape-surface@2x.webp",
           "polesUrl": "/scenes/veritas/veritas-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "veritas",
-    "materialSha256": "194d1be4da4f9de5e33c8d0cae09d1fecbee5d6b324dd5db20260fa67a8d2ad5",
+    "materialSha256": "6d90e63714c273a9b6f8280aa3eadfc340b9a3c1c09771f7689506b81b7ffd42",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

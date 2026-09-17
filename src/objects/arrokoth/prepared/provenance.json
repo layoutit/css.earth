@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77bf584694dd628a35c48784b593af49939a2965d99f28824cfcf167f4f7ff86"
+    "sha256": "71a4dcfb7e16d44ad5f753cb9db738afc6533bd1224590acde21dfc19403c377"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e4005da258ec82feb05d50946c7f2435c95663f737fd04637a90d1c68140835b",
+      "sha256": "b7b902d2b447788fbad2421452dbee473136dd9b911982bff8f307d4c8caef12",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -175,8 +175,6 @@
           "radius": 230,
           "radiusKm": 9.948,
           "camera": {
-            "initialScenePitchDegrees": 27.475878662587284,
-            "defaultControlYawDegrees": 122.28168102581337,
             "framingScale": 0.5105107661972121
           },
           "mapUrl": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
@@ -1030,7 +1028,7 @@
   },
   "lastPreparation": {
     "objectId": "arrokoth",
-    "materialSha256": "57f6554e5d4345c43e083f9842fbddbbc7163e1a2e6a593cfc6f1733032b6776",
+    "materialSha256": "813a21be105c46fc5a0ece299f0e6f9c55e0f0c5e8f502bb35b49f173b03c4f6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

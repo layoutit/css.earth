@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6627cf119539a6c8c3b6b9c4a8be71343c1e09a8605d4b3377c2c5503fd32f7a"
+    "sha256": "012a490711523c205bfdd7e3714b5fdb1fb59558a0a9094ca13f89819664511a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6af853a7140d62e528cd220f90ea87e1e7753c3079d2c3a9fa028ea67f56d4aa",
+      "sha256": "594596a3395bf706b1e8bb6d8519a3f0217f2be921d0d23126e82036ed71cd71",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 75,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
           "polesUrl": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "939de3f860c5cc9fab964925624299afcfdc4baddc355939eae87c96be9f2fe1",
+    "materialSha256": "f619539a7d0b2e560c70e9d6982df8a508f13e9bd2a1f33083f9c1a31b190c4c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

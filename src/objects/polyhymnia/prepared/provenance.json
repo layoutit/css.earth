@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd860454bba0a2c3991ddf6f33a0662e753952c51ab610ebb9551ad7c871b2f6"
+    "sha256": "b0f80beb69fcf95942745cf174060521e70ddc273fd8f8f986d4c1d76d4695cc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2a956c3c2d75df0a9dab0dcfdce580071aae87d95822ccbefaac016144a89c11",
+      "sha256": "5f2cc807f3d020a8d0ef61c5f920f1723cb2cc7823ea4dda5f7d1a42e75dcfc8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 26.99,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/polyhymnia/polyhymnia-shape-surface@2x.webp",
           "polesUrl": "/scenes/polyhymnia/polyhymnia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "polyhymnia",
-    "materialSha256": "371560190108e5348165a4ed3754a993addfc96423fd53f64764fbdf7837c301",
+    "materialSha256": "8efd2eda61fef8a3f18e9f7d9d13aaca80b433a369344ff30413d75454350b2d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a6e7047c98417db5b5c9babd4b1eec75633c28836cfb3361f99a01c51683f15"
+    "sha256": "cbb0fce0af93c3d71a410668f687f2e267409d80238a0e71110f99cda9cd461d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5a24175e7e9f4a9df935743f0c2e07742a559da498303f409b9b06bda7a75dd2",
+      "sha256": "e30d9daeda81a61500a6356c940963c0b1d7655e740e6c5cc69fb3783f3b7604",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 29.475,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/echo/echo-shape-surface@2x.webp",
           "polesUrl": "/scenes/echo/echo-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "echo",
-    "materialSha256": "03886134f998f04d7978f70987a0987b77b18ffdfdba4fe7e9f663f5e8a88eba",
+    "materialSha256": "b14b28b3f33da4e6f6b19eb8f7263a00adbf809e8746e522d638ccc2a6996a08",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

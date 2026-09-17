@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5db2a75fa6748aaa57d023a3ad578416d37959f4533bd9c25394d122dffdd967"
+    "sha256": "cdfc8ba815fc61af7a10a2a1d94763b9d25052f17c68e96f836ca3c03ef86bf3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "505d671122c4c95557dbfd0ad5cd97faafc286eb2ef6aece8e2f8fb2838ab4d0",
+      "sha256": "7eaf39907a5c0b6387635ed186214e971a61d3bcc758b1637272ece77fb0af5b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 70.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lamberta/lamberta-shape-surface@2x.webp",
           "polesUrl": "/scenes/lamberta/lamberta-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lamberta",
-    "materialSha256": "f167d733fc13dee7bc3e3daaf08a526d323c1c580088b023f17ff1ef584d1c6e",
+    "materialSha256": "b4b18f85928152d2926bda33838f376fe4eb9f119c1ca3fe95d6124f1d0f26d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6543df0f69cdc25dc8961b68c88b979ff746222b04ee064cfff88ff3e0c4d9b9"
+    "sha256": "2fb2387f2e62bd6251aa8c0d3b349155159a6d083248c22348a8ebf32d7696b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7a118173085e530dde860bc1f5d041ef85258d8fc5a3bfd504b9104bf03ca964",
+      "sha256": "5ae8dd21e941858505136381f0833a25e74aac7533b1768ca00057a171af4a38",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -56,8 +56,6 @@
           "radius": 230,
           "radiusKm": 0.14123064709924582,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.68
           },
           "mapUrl": "/scenes/selam/selam-shape-surface@2x.webp",
@@ -351,7 +349,7 @@
   },
   "lastPreparation": {
     "objectId": "selam",
-    "materialSha256": "ba8b70012a55ac34e7d2cd0fd75a9fc63268d8a66725a3d68cb5a24312a5c5c5",
+    "materialSha256": "26bf4502e856fdbc0e6461bfd8543cf697d3e15ebb8f58c05d37b4b8b6723889",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

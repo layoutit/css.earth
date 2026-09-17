@@ -36,8 +36,11 @@ export function prepareCutaway(profile:GeometryProfile, assets:InteriorAssets, p
   bodyTransform:buildPolyMeshTransform({rotation:[0,0,cutaway.rotationDegrees]}),outerBodyLeaves,coreLeaves,sectionLeaves,
   leafCount:outerBodyLeaves.length+coreLeaves.length+sectionLeaves.length,runtimeGeometry:false,runtimeRasterization:false,
   cameraCoupling:'same-retained-scene-and-unbounded-accumulated-matrix3d-camera-as-exterior',
-  presentationOrbit:{schema:profile.output.interiorOrbitSchema,durationMilliseconds:cutaway.controlMaximumDegrees*cutaway.millisecondsPerDegree,
+  // Control pitch past its maximum is a camera above the equator (negative scene pitch): the assist mirrors, tilting the other way.
+  presentationOrbit:{schema:profile.output.interiorOrbitSchema,durationMilliseconds:2*cutaway.controlMaximumDegrees*cutaway.millisecondsPerDegree,
    millisecondsPerControlDegree:cutaway.millisecondsPerDegree,assistStartsAtControlPitchDegrees:cutaway.assistStartDegrees,maximumAssistDegrees:cutaway.assistMaximumDegrees,
-   keyframes:[{transform:'rotateX(0deg)',offset:0},{transform:'rotateX(0deg)',offset:cutaway.assistStartDegrees/cutaway.controlMaximumDegrees},{transform:`rotateX(${cutaway.assistMaximumDegrees}deg)`,offset:1}],
+   keyframes:[{transform:'rotateX(0deg)',offset:0},{transform:'rotateX(0deg)',offset:cutaway.assistStartDegrees/(2*cutaway.controlMaximumDegrees)},
+    {transform:`rotateX(${cutaway.assistMaximumDegrees}deg)`,offset:0.5},{transform:`rotateX(${-cutaway.assistMaximumDegrees}deg)`,offset:0.5},
+    {transform:'rotateX(0deg)',offset:1-cutaway.assistStartDegrees/(2*cutaway.controlMaximumDegrees)},{transform:'rotateX(0deg)',offset:1}],
    model:'presentation-only-pole-on-cutaway-legibility-assist',changesPhysicalAxialTiltClaim:false,runtimeTransformConstruction:false}};
 }

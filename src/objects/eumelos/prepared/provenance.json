@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a23410fa00ab1bec5d573b2b791de5a35898d13918c31965f7f154727ccb09e"
+    "sha256": "fdd4b9bf99328c58c6e138dac8b57e8b21f434d7d73fa33de323c863bf264be3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b7c5a4b29673792063b862585333cbc4361d4e94983cdd5cd5deb5521b878702",
+      "sha256": "a6037e7cdcf701b9358735d510348a0d1677d8fac7d9a5d1171216fc828738fa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 18.848,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.6910527530147513
           },
           "mapUrl": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "eumelos",
-    "materialSha256": "240b10efa527b1cbc030164c64722b5ac746781e9e5c6df06657b7fdda72b074",
+    "materialSha256": "86fc21ea4692fc51b73e97629a814a505489e0a95983718af77abc7347aa54e1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

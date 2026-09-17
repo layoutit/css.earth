@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "16b1c9ae8df812bcf81934506067b5b95237bcb47f5ba5c4bc426312a1a71142"
+    "sha256": "fea228c1974ad76a606fbcb004945a847d6f26b417d752097a9af3b50cd29a65"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b038388b6413c50452b97acdd7747837cc4707e5c0445bed1a379236229886c5",
+      "sha256": "2ca19b015e1afd0691917f562a6c49ceddfe35100631e7851608c2e7ee2e3a1f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 7.2015,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/gryphia/gryphia-shape-surface@2x.webp",
           "polesUrl": "/scenes/gryphia/gryphia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "gryphia",
-    "materialSha256": "2a8f0c699b65d2e687ddc7b97e12b32b50c4cca4238e4e461b6eae4a46f5fead",
+    "materialSha256": "d79d70a3ee56625d37d20eb9e656b4ee4ad3b9529bd989dc0c243405ca6d78cd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c99af29a8ebf69b5e9c802702bf15c02e009b1d8697233a00a0c9465311f08b2"
+    "sha256": "5d786e077382cf846220b28d41784e9a9788d8ecdbf675114b2e371701b86cc7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ad67c9d642f5ba23b4998a6ef1222e1ce4b8e89e87bca0c79d0b590d7eb8ee93",
+      "sha256": "7c355added1c3f0139359edd01c3037a467b2faee6eeddc35c0248b09a0c01c9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 55.74,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/leukothea/leukothea-shape-surface@2x.webp",
           "polesUrl": "/scenes/leukothea/leukothea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "leukothea",
-    "materialSha256": "fc7dc1575bc0eeec39239cc7680d7abf8acfeaf4cbef77d1d812206415d7e839",
+    "materialSha256": "331404e047ef770098660d10930a13cfe461ef612713215b8ee033dabfdc02b8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

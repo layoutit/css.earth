@@ -6,8 +6,9 @@ import { requireBodyFixedSunDirection, requireBodyFixedToIcrf } from "./solar-ge
 // ecliptic north up and the Sun to the left at zero yaw, so a lit body opens on that frame's design pose, and a body with
 // something specific to face opens looking straight at it.
 
-/** The design pose of a lit body: the Sun exactly to the left at 40 degrees of scene pitch, the pose the lit lanes bake their lighting and row banks at. */
-export const LIT_DEFAULT_VIEW = Object.freeze({ initialScenePitchDegrees: 40, defaultControlYawDegrees: 0 });
+/** The design pose of a lit body: the Sun exactly to the left, the camera 40 degrees above the ecliptic plane on its north side
+ * (CSS rotateX tilts the top of the scene away from the viewer for a positive angle, so north-side views are negative). */
+export const LIT_DEFAULT_VIEW = Object.freeze({ initialScenePitchDegrees: -40, defaultControlYawDegrees: 0 });
 
 export interface DefaultCameraAngles { readonly initialScenePitchDegrees: number; readonly defaultControlYawDegrees: number }
 export interface ObserverPoint { readonly observerWestLongitude: number; readonly observerLatitude: number }
@@ -39,6 +40,33 @@ export function observationCentroid(bodyId: string, directions: readonly Vector3
   }
   if (!(Math.hypot(...sum) > 1e-9)) throw new TypeError(`${bodyId}: the observation frames look at no common side.`);
   return sum as unknown as Vector3;
+}
+
+/** The body-fixed directions toward the observer of a terrestrial recipe's default photograph lens: the frames' own
+ * sub-observer points when every frame states one, otherwise the observer positions its prepared surface report solved for each
+ * frame. None when the default lens has no photograph frames. */
+export function photographDirections(bodyId: string, recipe: { raster?: { surfaceObservations?: readonly { id: string }[] }; presentation?: { defaultLens?: string } }, surfacesReport: unknown): Vector3[] | undefined {
+  const defaultLens = recipe.presentation?.defaultLens;
+  const lens = (recipe.raster?.surfaceObservations ?? []).find(entry => entry.id === defaultLens) as { frames?: readonly Record<string, unknown>[] } | undefined;
+  if (!lens?.frames?.length) return undefined;
+  if (lens.frames.every(frame => Number.isFinite(frame.observerWestLongitude) && Number.isFinite(frame.observerLatitude))) {
+    return lens.frames.map(frame => observerPointDirection(bodyId, frame as unknown as ObserverPoint));
+  }
+  const record = (value: unknown, label: string) => {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${bodyId}: ${label} is not a record.`);
+    return value as Record<string, unknown>;
+  };
+  const surfaces = record(surfacesReport, 'the prepared surface report').surfaces;
+  if (!Array.isArray(surfaces)) throw new TypeError(`${bodyId}: the prepared surface report lists no surfaces.`);
+  const observation = surfaces.map(value => record(value, 'a prepared surface')).find(entry => entry.id === defaultLens)?.observation as Record<string, unknown> | undefined;
+  const cameras = (Array.isArray(observation?.frames) ? observation.frames.map(frame => record(frame, 'a report frame').camera) : [observation?.camera]).filter(camera => camera !== undefined);
+  const directions = cameras.map(camera => {
+    const position = Array.isArray(camera) ? camera : record(camera, 'a report camera').positionKm;
+    if (!Array.isArray(position) || position.length !== 3 || !position.every(Number.isFinite)) throw new TypeError(`${bodyId}: a surface report camera position has three finite components.`);
+    return position as unknown as Vector3;
+  });
+  if (!directions.length) throw new TypeError(`${bodyId}: the default photograph lens states no observer, in its frames or its prepared report.`);
+  return directions;
 }
 
 /** The default camera of one object:

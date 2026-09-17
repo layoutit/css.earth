@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f05cb1efd3006c53b198ee5a60a51bb4856ec63e8a7ab31587cbd413223303e5"
+    "sha256": "2c23df24610ba7f39759f5ff8fa49058bfe589e1fc8bfa2979406c262117bc48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "75c38ce2e2dc20877cef940889974e3fc402840c6449e99dd41817a5247a1e48",
+      "sha256": "7044fa7bfc632597669c5c7b840458bb08c98f02622a5a955832244b8d5ad935",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 23.465,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/anahita/anahita-shape-surface@2x.webp",
           "polesUrl": "/scenes/anahita/anahita-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "anahita",
-    "materialSha256": "f7b28d5fb116487e6fe209b2dc9111187cb242f34cac12f7411aab0422772611",
+    "materialSha256": "117b9a619426d999c2bccfe861be6ec4fd1b82f708d062608ba760d46ef94695",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

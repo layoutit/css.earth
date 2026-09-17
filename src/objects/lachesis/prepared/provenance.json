@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dffda49a8d682c63baf152fe5a33a636fb12799a0d304ff74fb850026cbdd320"
+    "sha256": "e22a75aa162c01edbfe20b78bc71e2c9dfedad4d95b389e0cca43dad3174d84b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "26e341ba89702287a3818aed08ed885c304717ac07e8264171dca157b76a20af",
+      "sha256": "d9b544fd2a56d6a57bad99cf795ce2eb5113208d20006ae37493a2af1452ad3d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 78.265,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lachesis/lachesis-shape-surface@2x.webp",
           "polesUrl": "/scenes/lachesis/lachesis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lachesis",
-    "materialSha256": "eebc75710a0351cc370938484630f126c2d63d6d22fc62ae561c32e813632fc9",
+    "materialSha256": "08009565d95c3abcd917497156c91594eb166413b765bb63db3bddeb67874762",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

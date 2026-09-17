@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3323c3e747b47c9d9b2e28754b05db31e2f72157d1d946b09f1c7bd9c349357f"
+    "sha256": "4abd773800e3b8d57eb805c9956979ef55689b4cb07e0d1b724d6ca178d113e1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a9f45c675314497f6ea4d1a27b04139e06b55ac190f6da89dbf760211d5f33a8",
+      "sha256": "f3ac3f579825d3fe96d692968dbf0562a9bb9e812ad94a434101ff6b3f2ecc63",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 59,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/fides/fides-shape-surface@2x.webp",
           "polesUrl": "/scenes/fides/fides-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "fides",
-    "materialSha256": "a3559c67cb329deeabcacd8658eae62ad3925efbe84ecb084e16e43a8afc4bb0",
+    "materialSha256": "4459ec03cd699df5f167803fed126bc30753867128552bdb7a426432870d29bb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

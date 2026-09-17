@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f65fe5bba160099b88b2d8a2717e0137e016b24eec67d0d1facd63d034554ede"
+    "sha256": "e85caa71eeee73c4bee32f47d40a00a7e8f74e2dbfa586fc7bdcb303360d2a9d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "770e4c89216767ff715a95ebf5282e8705b1ecbe47ffac0d3c9b52d2ae47bd89",
+      "sha256": "75009f417e8a5573c0461a76eb86a2bc0d716d99b7a703d4dbe6e6715684c4b0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 8.2105,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/auravictrix/auravictrix-shape-surface@2x.webp",
           "polesUrl": "/scenes/auravictrix/auravictrix-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "auravictrix",
-    "materialSha256": "d711098e027b7447a69875282788a88b0420eee2e6e0e5c0771121aa868e13a3",
+    "materialSha256": "3ed04436e5ba4d615e22533bed032eafbdae687c3029b6f33a5cca6fb48a596a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

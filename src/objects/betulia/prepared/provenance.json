@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87edb6374c9a4d17b67bae2099364ef0e2c13f631781a66162712ccf73723972"
+    "sha256": "3aa18af0fde150a201cdb6877fd62384bed9a5c51ade0613cba496199bb653be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "aea0b592ea9098eebe388f3c2bc066d56b17813c3feba3e35ee1b17704fc7e7a",
+      "sha256": "547c783f2f7fa330e510aa0210f38d1027313356128fe8182b37aa415c728727",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.695,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/betulia/betulia-shape-surface@2x.webp",
           "polesUrl": "/scenes/betulia/betulia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -562,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "betulia",
-    "materialSha256": "9273c32134fb3958936ebdb8bf688b998aae050427107a5281691c49819c5a69",
+    "materialSha256": "8b7e05bc8f607601a01bee872b60c1b5d49028b9ddf11e83a90582caa79c07ff",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

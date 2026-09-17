@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d567a3956b9b9033fa457ca45aa47a6f08ee17ab2f7bec52f8d84d0a14f385e"
+    "sha256": "e6087aaaa34dc83b44a64650cbaea4c7153ded8593378cbb6f720400fd481dd0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3d807b0c759641d80768aa8382eba5d6be8bcf43fceafa8f7a7c6c56fd503c84",
+      "sha256": "767065a7e6b4806c24f4f8eb316c4e4379abc1a099e84dff38c2d10955a9d9f9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 99.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/elektra/elektra-shape-surface@2x.webp",
           "polesUrl": "/scenes/elektra/elektra-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "elektra",
-    "materialSha256": "907ab6ae3e6750ff98e0eeeb0dd479d39b59368bc5dc7e9e1f0eb31c4ac6a684",
+    "materialSha256": "5988cc67175ab66b458bb730295b0f58684bb4ffb0764b82f82ead661c213f1f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a8c7f9e8bc6dd8b6f2cb6962ed58fdc6517541763e87c4833ff8140bb66c17c"
+    "sha256": "9794ef16fe22e083d96cc83df3650a4fbce1cbf162e8c87ab113aa6852811f29"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "57c801bc02201f4372775fd9cdf3fc38a71462440249049f2294171ee852931d",
+      "sha256": "02092df7bc840212b3edfc93d55a7fc4b98f2c61cfb37da2135266534907bed3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 64,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/panopaea/panopaea-shape-surface@2x.webp",
           "polesUrl": "/scenes/panopaea/panopaea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -554,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "panopaea",
-    "materialSha256": "76192e322dcbaa1b0d349b5b9057357b0d151529fbdf11d1a835159acfcbe95c",
+    "materialSha256": "e5d96a0c219f4c2adbf839af488a0e5b3b703a5d1a905f13c89df95a610843b9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

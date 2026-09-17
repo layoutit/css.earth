@@ -4,8 +4,8 @@
     {
       "id": "mercury-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "b39f415cd40463c366ec2e875f0739bc344818a0a39f29235dd5ada6ff5f18ac",
-      "expectedBytes": 276,
+      "expectedSha256": "193267cebfab7b56820e11e191b41096957a52e532d9e6ac2c1e4c3a5d36f634",
+      "expectedBytes": 209,
       "origin": "Repository-authored physical scene recipe; radius from IAU/NASA and checked astronomy body data, pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",

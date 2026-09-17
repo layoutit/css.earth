@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5effa992eac8cd39b673d405b2d157c7f6b85a4cf6a7624a680d4fcd7e63e190"
+    "sha256": "11e6849185b4e52a3418b378a9422ba761a9ed176aaceebe8900c39381f766f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b37a410cb90d291e113fadd1ad814d7d9b63c8956b116b13f71aa4470a445734",
+      "sha256": "f8f280de546b28f6c82ab46e01679cd576b95cc1e4d6e02aff6e2b347e38c5f6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 8.99,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.7297053896332341
           },
           "mapUrl": "/scenes/kemi/kemi-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "kemi",
-    "materialSha256": "41b9c6c048cb91671b6a67b335f7223e138104834a55543000d6a3acfa64c619",
+    "materialSha256": "4cd2389f502b794fb371e30b6fd64c1a20205696029623d14352480bf6820c22",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

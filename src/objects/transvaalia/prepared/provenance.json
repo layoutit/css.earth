@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e5c4177dda37e814ed61609adfd7591c5d352563de5a17d79c6e63b6cd49aeb4"
+    "sha256": "9ad7d8a185e67101c1c036193e1e63ea7998c8a2e34d8a79992f7385d95423c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "32fd2bd6374776d9c125151fe5e65a4b48b497a38c42d634d7e6818f4f5aae89",
+      "sha256": "19cbd2b519ae49f8234085a9cc9a0de90d10f0eb9f6f841d0e0663de95595eb2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 12.729,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/transvaalia/transvaalia-shape-surface@2x.webp",
           "polesUrl": "/scenes/transvaalia/transvaalia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "transvaalia",
-    "materialSha256": "028d424340e9930f7232a87e79bfcc2d3b920caeae0a41e2023eef824594ff53",
+    "materialSha256": "d20fcba1182ee33538a873df59eefb68cda865e669124b0137fce275bd1030fe",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6adbbaa2c27eded41b40e1584371b80cd25a4ca76df5e11f46f934e9d3f70a89"
+    "sha256": "efe5d347aec88cfddcd96cdae10833f976be774c5d1d822d4e1555db9a83a43a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7bda572ac915dd2a8f999e458d9bb9bf723bfcc56e753f3e4b15f0cea627695c",
+      "sha256": "aefbfa2609dc5f099d3b9efbb04b49ae1ac6f5e0029eedd78f7ca8859a3abef3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -61,8 +61,6 @@
           "radius": 230,
           "radiusKm": 0.369,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.75
           },
           "mapUrl": "/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp",
@@ -739,7 +737,7 @@
   },
   "lastPreparation": {
     "objectId": "dinkinesh",
-    "materialSha256": "46f31b608f61796f7e55295084da8e4980d92a90c511fea615e9774eab2725f0",
+    "materialSha256": "f17ee2f8b2c96eafa6a7b4e86db6e8907fecccd27d8267ceaa97012f1874d3ca",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

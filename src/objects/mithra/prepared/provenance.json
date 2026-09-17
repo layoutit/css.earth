@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "52a5d46aa6275813756de02e656c23af6fbe74a0d2a82b2e70b6ffdbd66f8435"
+    "sha256": "c92f092a10d09897f548621af681416d1e294a2257b0e6c56ba9b84d0c05e686"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "75bb55c6b30d89db3a770013bab99cf1e55f249da226416d56ba8b24919f89bb",
+      "sha256": "4c986da61146fcb70a799a4da6219e54dbae51b8c7f5c69728ec984bcf9edd05",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.845,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/mithra/mithra-shape-surface@2x.webp",
           "polesUrl": "/scenes/mithra/mithra-shape-surface@2x.webp",
           "radialTerrain": {
@@ -573,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "mithra",
-    "materialSha256": "b9c2e406797906cf193f22ea9191171ebb05026574c208a6ba70cf9227f52400",
+    "materialSha256": "069d7c72bb9cba1f060035db406c1c7cd08abc30f0ec6edcbe742af82d6eaa44",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

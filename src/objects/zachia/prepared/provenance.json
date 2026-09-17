@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1275ed7c361cb5ee58c2cb76bb65bf911d787e42356b7afe8a683e56770b3c73"
+    "sha256": "6673f00e8d82cd25e488203d71ae75789f7bc7b94047396439ddb51847a3dba1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7dd9bfc6bb0081015e89b8423ee3c29be16c4e737d5906df1581c1e8b0b739f6",
+      "sha256": "44204b03171d2c7b8acd745fe226605f751861b4a3d27c2585c0a8c6d982085a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 8.424,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/zachia/zachia-shape-surface@2x.webp",
           "polesUrl": "/scenes/zachia/zachia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "zachia",
-    "materialSha256": "eadcbef3aca8f831129286912e50c2b8d4d2b9edaf333edc6390058a4421b767",
+    "materialSha256": "ed16d47a40a9e4ba8e5c312be7c24f7f988479789f798e67f2c484e8e6ff0e25",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

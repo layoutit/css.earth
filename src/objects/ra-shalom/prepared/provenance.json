@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "903d20d96585574ccebd5c1ca366c3bcda2b4a39e2be8fdbbd19d9ccd14eb9f7"
+    "sha256": "5f897d4b7d83a683b3e9e57c6c5d9ba1c99ea31825edaa147c0fef6b1decb454"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "598c62ded5631dc6f16f098ff483ae304960012e7a443e7edad4f4508adcd26a",
+      "sha256": "6babb5858083d4f8e37e017ce6b50c2c9adf617f39406c1470cb90516e310a3f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.15,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
           "polesUrl": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
           "radialTerrain": {
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "ra-shalom",
-    "materialSha256": "40141c9fd2a566e44edb27ff317b4ec23c887bd51ec1d11701330073032b3e9e",
+    "materialSha256": "a8229bea7e87fd4c12ae514283372bd11cbdf969cc1d7bc157b19c0119f263ee",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

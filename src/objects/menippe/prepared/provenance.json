@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb27396a063777e312e76be3b2cc5c804c9584d036ae7ca998b4cde69ac2d2da"
+    "sha256": "31b6f90db1b6aabe701aa668f0de4c94bc22e4c3531d7918931d6209f11d4168"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1226769d2eaad7236520b3ef4a4e1dd1edcba973f383759ecbf7522ef9480f7b",
+      "sha256": "e3e19e44119d5719c04abecde597232e38b4c8514adebae31bca68e638e09cc5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 17.65,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/menippe/menippe-shape-surface@2x.webp",
           "polesUrl": "/scenes/menippe/menippe-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "menippe",
-    "materialSha256": "cbffdf5fe613bcd977f303f3a23e8ac3a306b2894ad18b1949bb55327fde2b3d",
+    "materialSha256": "22e8d4bcde0b5ad61b000f8459134305d0c273f242a9088b57ecd5e4297e1571",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

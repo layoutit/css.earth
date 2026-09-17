@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cd4c45130ab6574cf1b8b11d6b5796e72ecae4ac363f1cbbf1edc623aab0db30"
+    "sha256": "a6fe3b077addef0d43c2e273f0aed08095c8fba59e61c2a994d69bf5ad153fbb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dbf82a6d56d50d1210ed865d43f79271afa6dce391acbfbaafad8d1730b2c413",
+      "sha256": "99f50e3d9bc844ffa1e83cdfba84c46888b5414bb394ea40b8916d85699c4215",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 40.317473596635935,
-          "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/belinda/belinda-model-surface@2x.webp",
           "polesUrl": "/scenes/belinda/belinda-model-poles@2x.webp",
           "radialTerrain": {
@@ -466,7 +462,7 @@
   },
   "lastPreparation": {
     "objectId": "belinda",
-    "materialSha256": "179c21acdeedf5b3c780ee890fa0a976d3e3e14c4867d92dafb589b54ab2a2cd",
+    "materialSha256": "5ee3f4ae3ef1026263aa2dd27e5055ed1bdc309f2dba5ec97947f621a2c760f3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "599ff904d1d7e697c31b46a8d369b36581b90f9378a9246e2e13928acab6160d"
+    "sha256": "367ba26e712fa9e323df717105743c8a700915f3fd0f0e39e4aff6c7f247bfa2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7db6b76b86a7daa538508e71b49e6297ad7337accb3e25c26300eb14369acd3c",
+      "sha256": "1a0f42e41a91cd96d97dd95368349947a841173d97edfad46ae67e3481b5c107",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 29.395,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/althaea/althaea-shape-surface@2x.webp",
           "polesUrl": "/scenes/althaea/althaea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "althaea",
-    "materialSha256": "fcdf2400ded4c1366998e942bb95ac91515608bba4b4856d08845dddbfbaeaf9",
+    "materialSha256": "da66b595303c5caf9f7f070f51a66897323b0e4ee7aa7abf7167a989e777a224",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

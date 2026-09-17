@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a6e311a4b5fe30e16e2d789b8c643d5e751297d8c69af5d0698c7f125bb196f"
+    "sha256": "50141106bee9a18f09afa9d689ef97b393c73646f90337b7ea5b9f4291b1771c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c4fe04c596ce9fcb35bf29badc34c78e39f73789ea489d981d5886524edf1a73",
+      "sha256": "02f52198774d03ce61055180e05489358c2d9d12f4faa1e0f862d0617eb6c58f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.2,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-2008-ev5/asteroid-2008-ev5-shape-surface@2x.webp",
           "radialTerrain": {
@@ -577,7 +573,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2008-ev5",
-    "materialSha256": "6b86e78ebec69db9a36071578c24e9c25da626320e81ae12997f7ef4e4a0c155",
+    "materialSha256": "2806a7ab296f58eb07b8438ddc8e0c2da8d6878a79593c0dff264c6d5ce40331",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

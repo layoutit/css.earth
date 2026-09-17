@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c50c5f5587f64e9701e44938bae59550113a33bf28bbcc049312724677cd820d"
+    "sha256": "77d1cc8ade42c8e4e26a11697f26443e2f34907af3da5ab84b4fa1898e291a92"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "83679163dfd24b2c16c1599f92a23c848de01c1cb16355e390ecb1f1508cd4f7",
+      "sha256": "ede49f624a1e32bd5832ea0d47f71904044b8eb3b9509a9e14b446bcaaaf8a97",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -208,10 +208,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 6.1,
-          "camera": {
-            "initialScenePitchDegrees": 30,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
           "polesUrl": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
           "radialTerrain": {
@@ -1593,7 +1589,7 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "5fd5288c4b293eacfecd0061f7c85819bf81bb2bac1245dacd959a618b29dacc",
+    "materialSha256": "07a5177d5dc691e5f03747ea5c20f08aa5f859513a3d25d32983a0d34e7ca1a4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61a3b07a52c861da11f9584b3f360d8797a4b9ba778dfbaa8d7e22bcf3a8297c"
+    "sha256": "31dee5d5fa37b85f62dad691eb495efa3890ebbf89b55b70a6df991399c0cec5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "778861357677afc7c878fde921e2af6dd93af93583fd89ccabd3cf26beddec57",
+      "sha256": "337b717e827f30da7a99069492f767b14977710e08586b02c8f6ee7571bd62d5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 59.4,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.5886314414582466
           },
           "mapUrl": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "diomedes",
-    "materialSha256": "308e6002f8d7d2175230f98b9f3060da4f90129324d5d1affdc9e55859f408e1",
+    "materialSha256": "fe31eb77842d9a0493bc3f87cf16b6f46be8cc73d7726e3bc58eb2a18e2e5802",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

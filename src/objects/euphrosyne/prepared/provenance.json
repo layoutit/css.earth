@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b2830aba8f219d7fea0ab9846708fae91671f93662fa743ca12278b55d24c28f"
+    "sha256": "61c26672869c9e83eeb596b531f112f9e4af2ee17c71a5b4b19f223f295d4268"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "12c71b02998d306d6ca719c86f789802dba40b4bcc2150cbc4c9c3516e89a72c",
+      "sha256": "03a43eea1cde405dc5556559ab04dec4da9a88d595b0a23bf92777aa401017b4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 134,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
           "polesUrl": "/scenes/euphrosyne/euphrosyne-shape-surface@2x.webp",
           "radialTerrain": {
@@ -552,7 +548,7 @@
   },
   "lastPreparation": {
     "objectId": "euphrosyne",
-    "materialSha256": "3dd9f10933ffeeffc3bc7ee3f8f263bebc2a628d401607131cb7a2806671ebab",
+    "materialSha256": "d1a05684405e0c194a167ce1864dc1d06322231160f01a866e954798390aac83",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

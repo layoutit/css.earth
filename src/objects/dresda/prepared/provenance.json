@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37e78376a3080f0c6a788dd2869469bb60fb3dee29341af1744240ffa0b1e8d2"
+    "sha256": "e7991f1e98798c7912e4034007e190a9fa5927f81744a22cf35a3b98d876e185"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5d072117964a23e161937de6304d1cb0d7639e3bbf8f571ea689ea7d41591538",
+      "sha256": "454e65f17126ee78718fd96aeb9063dba5c8fa1a33fac0fa0c5f981713de9f9c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 12.87,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/dresda/dresda-shape-surface@2x.webp",
           "polesUrl": "/scenes/dresda/dresda-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dresda",
-    "materialSha256": "d4022896945b42bbe792574626fc77d9999ad51efb64c0059a0d9bf466930b50",
+    "materialSha256": "762810bcc2130f98dad2116284f7bd75656d24510ab7c77b2be44d89ea941cda",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

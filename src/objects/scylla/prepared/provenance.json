@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c5bf8d5f29d410c9b159dd3b109773a66271697a007b6e692161227714a11feb"
+    "sha256": "f407b838b8364b1a732c2fed2b03d5a8072f2e8b0ba88bc6f2de8622025b803e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "866a7b15b1c9df4eaf20c733b024151b7320309e963c6cf5fbfec1b0f378f458",
+      "sha256": "bda315574113606352d42153c1c3616f580306de1a70ee346ec8ef509adc3479",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 19.605,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/scylla/scylla-shape-surface@2x.webp",
           "polesUrl": "/scenes/scylla/scylla-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "scylla",
-    "materialSha256": "12f570b7349d06011d40989b02c65b9b82c4b725047db5b45d91a0f0de4e4bb9",
+    "materialSha256": "bd4d8673a92ec782586607f6f1c4346294476e537387f38420bc4c4fe6430f10",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

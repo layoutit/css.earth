@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba201ec1b1045e7e33a25ea5763358e86c371f6b06501147eea93835af82d28e"
+    "sha256": "e0a724fb8cd87e511e3c6325bf1a18c0793dd77c52ef8afbe4483adf48d079dc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2fa481e7e477e349e44860ba18be8ca733f133168619ae25bc9f8b7e5f425a53",
+      "sha256": "2925bcdc2bb832ef422f4d7983f4cab434fcb3abeffc4afb1b8d6d6630f79756",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 0.22550434622701193,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7516811540900398
           },
           "mapUrl": "/scenes/squannit/squannit-model-surface@2x.webp",
@@ -414,7 +412,7 @@
   },
   "lastPreparation": {
     "objectId": "squannit",
-    "materialSha256": "7e95a2640806b02fdc8e8fa7e661183b8171096137102e3b74ef5d153d97000c",
+    "materialSha256": "ac7203c01b8e043ef04bfb9d50818d01d116b363f49c48fc8da3016c12d451ab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

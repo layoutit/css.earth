@@ -1,4 +1,7 @@
 import { sha256 } from '../../src/platform/sha256.mts';
+import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
+import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
+import { preparedControlPitch } from '@cssearth/engine';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -22,7 +25,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   if (contextSource) {
     const context = parseWorldContextSource(contextSource);
     if (context.focus.id !== descriptor.id) throw new TypeError('Authored context focus differs.');
-    return { definition, frame: context.frame, systemTransform: null, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
+    return { definition, frame: context.frame, systemTransform: null, defaultCamera: null, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
       sources: pinnedSources, frame: context.frame, model: 'authored-context-focus' } };
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
@@ -52,25 +55,71 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
   const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
-  const camera = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, descriptor.recipe.paging !== undefined);
+  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, descriptor.recipe.paging !== undefined);
+  // The default camera has one owner: this stage derives it and rewrites every prepared value computed from it, so a rule change
+  // re-runs this stage, not the lanes.
+  const cameraModule = await import(pathToFileURL(resolve(projectRoot, 'src/platform/default-camera.mts')).href) as typeof import('../../src/platform/default-camera.mts');
+  const surfacesReport = await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8').then(JSON.parse, () => null);
+  const terrestrial = sources.get('terrestrial');
+  const angles = cameraModule.prepareDefaultCameraAngles(descriptor.id, {
+    observation: terrestrial ? cameraModule.photographDirections(descriptor.id, terrestrial, surfacesReport) : undefined,
+    light: (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun' });
+  // Only a solved lane takes the derived pose; a typed lane keeps the camera its own bakes were made for.
+  const posed = solved ? poseDefaultCamera(oriented, physical, angles) : null;
+  const camera = posed?.camera ?? physical;
   // The sky cube rides the frame for every capability, so it follows the body as drawn.
   const sceneRegistration = matrixCss(transpose(frame.presentationToReference));
   const sky = alreadyPhysical ? { ...oriented.sky, sceneRegistration } : { ...oriented.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
     sceneRegistration, sceneRegistrationModel: 'icrf-in-authored-presentation-frame', sceneRegistrationEpoch: solar.SOLAR_GEOMETRY_EPOCH_LABEL };
-  // An ecliptic lane is drawn in its frame, so its Sun is the physical one. The paged and layered lanes bake their material banks
-  // against a light carried through their typed node angles, and their runtime picks frames against that same light.
-  const localDirection = transform(solved ? bodyToPresentation : authored.bodyToPresentation, bodySun);
+  // The sky cube and the Sun follow the body as drawn, for a solved lane and for a lane that still carries typed node angles.
+  const localDirection = transform(bodyToPresentation, bodySun);
   const sun = oriented.sun ? { ...oriented.sun, localDirection,
     referenceViewDirection: direction.prepareSunReferenceViewDirection({ bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
-  const prepared = preparePhysicalMaterialTracks({ definition: { ...oriented, camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
+  const prepared = preparePhysicalMaterialTracks({ definition: { ...(posed?.definition ?? oriented), camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
-  return { definition: prepared, frame, systemTransform: solved,
+  return { definition: prepared, frame, systemTransform: solved, defaultCamera: posed ? { angles, transform: posed.transform } : null,
     receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id, sources: pinnedSources,
       frame, bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
-      tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits,
-      sourceGeometryConvention: 'ecliptic presentation frame, drawn by solving the outermost mesh node; body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X',
+      tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits, ...(posed ? { defaultCamera: angles } : {}),
+      sourceGeometryConvention: solved
+        ? 'ecliptic presentation frame, drawn by solving the outermost mesh node; body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X'
+        : 'body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X',
       ephemerisSource: 'src/platform/solar-geometry.mts' } };
+}
+
+/** The camera's default pose and everything prepared from it: the control and scene pitch, the yaw, the retained state and
+ * material reference, and the scene transform string the camera and the retained scene node carry. */
+const SCENE_ROTATION = /rotateX\((-?[\d.e+-]+)deg\) rotate\((-?[\d.e+-]+)deg\)/u;
+function poseDefaultCamera(definition: Input, camera: Input, angles: { initialScenePitchDegrees: number; defaultControlYawDegrees: number }) {
+  const pitch = angles.initialScenePitchDegrees, yaw = angles.defaultControlYawDegrees;
+  const control = preparedControlPitch(pitch, camera as { maximumControlPitchDegrees: number; maximumScenePitchDegrees: number });
+  const rotation = `rotateX(${pitch}deg) rotate(${yaw}deg)`;
+  const next: Input = { ...camera, initialScenePitchDegrees: pitch, defaultControlYawDegrees: yaw, defaultControlPitchDegrees: control,
+    ...(camera.state ? { state: { ...camera.state, rotX: control, rotY: yaw } } : {}),
+    ...(camera.materialReferenceControlPitchDegrees !== undefined ? { materialReferenceControlPitchDegrees: control, materialReferenceControlYawDegrees: yaw } : {}),
+    ...(typeof camera.defaultTransform === 'string' ? { defaultTransform: camera.defaultTransform.replace(SCENE_ROTATION, rotation) } : {}) };
+  // The retained scene node carries the same transform the camera starts from.
+  const nodes = definition.tree.nodes.map((node: Input) => String(node.className ?? '').split(/\s+/u).includes('polycss-scene') && SCENE_ROTATION.test(String(node.style ?? ''))
+    ? { ...node, style: String(node.style).replace(SCENE_ROTATION, rotation) } : node);
+  return { camera: next, transform: { pitch, yaw, control, rotation }, definition: { ...definition, tree: { ...definition.tree, nodes } } };
+}
+
+/** Apply the derived default camera to a prepared scene document the lanes wrote alongside the runtime. */
+function poseSceneDocument(scene: Input, camera: Input, sun: Input | null, pose: { pitch: number; yaw: number; control: number; rotation: string }): Input {
+  const document: Input = { ...scene };
+  if (scene.camera && typeof scene.camera === 'object') {
+    const previous = scene.camera, next: Input = { ...previous };
+    for (const key of ['initialScenePitchDegrees', 'defaultScenePitchDegrees'] as const) if (key in previous) next[key] = pose.pitch;
+    for (const key of ['defaultControlPitchDegrees', 'defaultPitchDegrees'] as const) if (key in previous) next[key] = pose.control;
+    if ('defaultControlYawDegrees' in previous) next.defaultControlYawDegrees = pose.yaw;
+    if ('materialReferenceControlPitchDegrees' in previous) Object.assign(next, { materialReferenceControlPitchDegrees: pose.control, materialReferenceControlYawDegrees: pose.yaw });
+    if (previous.state && typeof previous.state === 'object') next.state = { ...previous.state, rotX: previous.state.rotX === previous.initialScenePitchDegrees || previous.state.rotX === previous.defaultScenePitchDegrees ? pose.pitch : pose.control, rotY: pose.yaw };
+    for (const key of ['defaultTransform', 'sceneStyle'] as const) if (typeof previous[key] === 'string') next[key] = previous[key].replace(SCENE_ROTATION, pose.rotation);
+    document.camera = next;
+  }
+  if (sun && scene.sun && typeof scene.sun === 'object') document.sun = { ...scene.sun, localDirection: sun.localDirection, referenceViewDirection: sun.referenceViewDirection };
+  return document;
 }
 
 /** A lens raster that states where its longitudes start must start where the surface map places them, or it draws turned. */
@@ -91,7 +140,7 @@ function assertAtlasOrigins(id: string, raster: Input | undefined, placement: Su
 /** Lanes whose system node carries the ecliptic presentation frame directly. */
 function eclipticLane(sources: ReadonlyMap<string, Input>): boolean {
   return sources.get('shape-model')?.schema === 'cssearth-shape-model@1' || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
-    sources.get('terrestrial')?.kind === 'solid-observation-body';
+    sources.get('terrestrial')?.kind === 'solid-observation-body' || sources.get('paged-ellipsoid')?.schema === 'cssearth-paged-ellipsoid@1';
 }
 
 /** Every prepared copy of the system node's transform (the node itself, counter bindings, physical material tracks) is one value. */
@@ -128,7 +177,14 @@ function matrixCss(m: Matrix3): string {
 
 export async function writeWorldNavigationArtifacts(outputDirectory: string, result: Awaited<ReturnType<typeof prepareWorldNavigationDefinition>>, scene?: Input): Promise<Input | undefined> {
   await mkdir(outputDirectory, { recursive: true });
-  const nextScene = scene ? { ...replaceSystemTransform(scene, result.systemTransform ?? { from: '', to: '' }), worldFrame: result.frame } : undefined;
+  const oriented = scene ? replaceSystemTransform(scene, result.systemTransform ?? { from: '', to: '' }) : undefined;
+  const nextScene = oriented ? { ...(result.defaultCamera ? poseSceneDocument(oriented, result.definition.camera, result.definition.sun ?? null, result.defaultCamera.transform) : oriented), worldFrame: result.frame } : undefined;
+  // A lane's standalone Sun document follows the same pose.
+  const sunPath = resolve(outputDirectory, 'sun.json');
+  if (result.defaultCamera && result.definition.sun) {
+    const sun = await readFile(sunPath, 'utf8').then(JSON.parse, () => null);
+    if (sun && Array.isArray(sun.referenceViewDirection)) await writeFile(sunPath, `${JSON.stringify({ ...sun, localDirection: result.definition.sun.localDirection, referenceViewDirection: result.definition.sun.referenceViewDirection })}\n`);
+  }
   // The scene carries the same frame the descriptor does, so a re-derived frame rewrites it too.
   const outputs = { runtime: result.definition, 'world-navigation': result.receipt, ...(nextScene ? { scene: nextScene } : {}) };
   for (const [name, value] of Object.entries(outputs)) await writeFile(resolve(outputDirectory, `${name}.json`), `${JSON.stringify(value)}\n`);

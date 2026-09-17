@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c5e841ae078dd446246f801ffb6d41673ceb1d330b3788796ce7161acf6085c3"
+    "sha256": "bdab191a4be79c9e9f17c2384f633b1e249129fc9290613ac3c15dcfc14af0dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "20793251bdcfe2a740680642af2fc81b3206572a9ebab35cec48b04911a9b9f4",
+      "sha256": "53e26d5e8ebb9aec1454b9029624ad49afdf7fcef5dbf6203bbefef87d24698f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 48.85,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/eva/eva-shape-surface@2x.webp",
           "polesUrl": "/scenes/eva/eva-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "eva",
-    "materialSha256": "e91386e5d1df741d091a30b59d75ff874ac811e09b54b7029899a8382641c1e5",
+    "materialSha256": "58a96f3df78442cac77faab15c187f23302d0aa10b1af88e32d5cbca662d4c53",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

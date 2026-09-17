@@ -609,8 +609,8 @@
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse.webp",
-          "bytes": 63920,
-          "sha256": "b61d3563930d2b97b6a446c0deec6f68237abd23638cc8f0ba063426b7230bb1",
+          "bytes": 63290,
+          "sha256": "c166478f07e510c688e197d22f19dc0a775eb5a90c57c4f4e762a870fc2c90dc",
           "verification": "bytes-verified"
         },
         {
@@ -621,8 +621,8 @@
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse@2x.webp",
-          "bytes": 153638,
-          "sha256": "40d3823e47ebfa133924d76d883939b51d247b80c33120ef7cd74a5a8cfc32d5",
+          "bytes": 155490,
+          "sha256": "235839a468fcf77d7153810b6e16768cc6b59047cc9c983c53869b9ad659023f",
           "verification": "bytes-verified"
         },
         {
@@ -699,7 +699,7 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "c7d559b6c74f04ec1334c021adcd0a2c54ad316ae97c4b2cd4b9c6c942dfbcf9",
+    "materialSha256": "dc4d0259a76bb73f7fd4f8e2f18ea5d1de2b798ff33c4e412948238ca9ed6d65",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

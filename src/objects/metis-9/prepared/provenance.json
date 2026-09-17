@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e91b359f403adc40f5ef046ed46f26c0909d5d4a6e7c51531417c4317caebf8f"
+    "sha256": "30716fa5fd9897fb78429ab7a62d9e3f31c7b9fce615f331a64786073d1f9e8e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f163d921f143b8af226f2a201f4267939cc56c4ad89ee6388ad48a9a880d982e",
+      "sha256": "0f258a9691b4aa4f1c5677cc598e7908086de094194e69d79018f65a5d974fda",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 86.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
           "polesUrl": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "metis-9",
-    "materialSha256": "8e27c53b3a628ab47d394df2bd78b914515b541758a5d9e57da006535e4bb11f",
+    "materialSha256": "14a169b18d1a969557a335bde8b97a908c7384d1b3259f41f1ada372eec199ed",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

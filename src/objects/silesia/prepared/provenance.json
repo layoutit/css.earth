@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dbf5abbe301f9123eb1674d71cd25ad85d6b362252e08242871cf061c3a68efa"
+    "sha256": "5f6e692ab6cc6fc128fab986fb74417667e95239f7f141ba107cf74bbbda2958"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8933d4ff90fe6bd33b86a6757b7a52d2438d66f75d8f27de23cb3f60a03905b1",
+      "sha256": "88c828b20105dfa786a6cf23cfa8aac63fe36d0a98b39082c15825e7bbcec9b8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 39.6,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/silesia/silesia-shape-surface@2x.webp",
           "polesUrl": "/scenes/silesia/silesia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "silesia",
-    "materialSha256": "4946fbff1baa03e061bf09aeea01b9d181193dde57f6b8a5ae256a3480f7d629",
+    "materialSha256": "862f91718d39c3e9bfd7e86d0dd4da32ee5485dbaf3df8acaf7e43f07816e9ce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

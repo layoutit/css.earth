@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6abc8742be66513354e0b85ed48accb0d2cf0a50b405888dae2d363e04168488"
+    "sha256": "a9b7ccb2165ffd4df81c288513daa32c22c8ceb0d207815879e80bd3710052e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3e778cfc2c17ce1a7bf82e1ba09df5a1e96dc1666e1f415681cb3044982a1225",
+      "sha256": "67d8e8201438fe731a00731d3152c741994da2866d1515ec9f36c7f5bce3fb9a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 22.7,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/klytia/klytia-shape-surface@2x.webp",
           "polesUrl": "/scenes/klytia/klytia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "klytia",
-    "materialSha256": "546032c80ea5859575b8450bfbc3c3e9d826e025a4280c0913d1ad18ba07566f",
+    "materialSha256": "b4c9a0732a763ec1a47bb4493d3021bc501e0ec48c5f5705a90828d055c105ae",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

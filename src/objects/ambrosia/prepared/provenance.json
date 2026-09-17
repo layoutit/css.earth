@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "36bc74046026cd70c50d750643eb1fe4f3157f34fe481a4e6db7fcc3202b533b"
+    "sha256": "df598793c083c8cac5eafe5e9476170be7164c6c15a161e0cfdde34685fa5ca8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "80b137d22d6b7f8efe1e451164733d3fbcb4345eb287e9d233b249c8a86addf3",
+      "sha256": "aa151fd221f426af4b17a31500b878faa1a946c62ecfe313ebb8c3add03aca1a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 18.945,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ambrosia/ambrosia-shape-surface@2x.webp",
           "polesUrl": "/scenes/ambrosia/ambrosia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ambrosia",
-    "materialSha256": "0857178272002194cf2312912fd9eb3228c4990d5564156bbcc084613bde5b6a",
+    "materialSha256": "ebc2a4616fa20018b6524375dc5de4f867a99df3ca39165955991236a9fb599b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

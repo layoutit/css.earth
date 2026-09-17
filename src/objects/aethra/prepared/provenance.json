@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db421cee87080fe9621e10c7f92a9e1483f5982af2d53ba7c8c4aa8566cf63cf"
+    "sha256": "f45bfbb09609f89d3bca6a62a83f2f0c64d45171382136e20e4ad2373a40fd3f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5100990b80d4d2094e1ef369d41134263956579dc0d9ef80cbd05e2aec9ffb01",
+      "sha256": "98a7a77c5acb7bcdbce73c9ad33b12c9be3e3912f6afc47def3b0a612ce56d5b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 22.235,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.6349983720553535
           },
           "mapUrl": "/scenes/aethra/aethra-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "aethra",
-    "materialSha256": "0d19616ee4d4a3318be1610c9cd1dac341f88d2e3d24bfd41dac314bf39cab51",
+    "materialSha256": "0784388f5a4292f414e2d5d7c8d460a8f7dbb750b48d3d8e7756a718bd107617",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

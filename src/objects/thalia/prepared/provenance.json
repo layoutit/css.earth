@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10efa927c0f97c96f850ecd8559923a5e59165dc99fe8e6b87959cc0a12d70cd"
+    "sha256": "55cd2b4eb7065b313f6d40a47bd1be882ef68042a7b69dadbefc863f976f871c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "01a08db9f97b71c043fb931438ebd07d9f804f9aa585ba989af7622913b9451b",
+      "sha256": "def06cc61f97de8286336a35edf97d133d843b9b8a04c75a96aa00429f76ed77",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 57,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/thalia/thalia-shape-surface@2x.webp",
           "polesUrl": "/scenes/thalia/thalia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "thalia",
-    "materialSha256": "6d50b4a3e234e832498ce64599f7dbb60877375ba3a33da239e1830292dda7eb",
+    "materialSha256": "3072f916a98fcd684cd03d35dc6c00a46038ba2a76dfb8c728c385769734923e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

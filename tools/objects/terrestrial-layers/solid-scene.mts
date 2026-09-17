@@ -26,7 +26,7 @@ import { prepareSolidBodySurface } from '../../../src/platform/prepare-solid-bod
 import { preparePerspectiveCamera } from '../../../src/platform/prepare-perspective-camera.mts';
 import { prepareAstrometricSkySceneRegistration } from '../../../src/platform/astrometric-sky-registration.mts';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
-import { observerPointDirection, prepareDefaultCameraAngles, type ObserverPoint } from '../../../src/platform/default-camera.mts';
+import { photographDirections, prepareDefaultCameraAngles } from '../../../src/platform/default-camera.mts';
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
@@ -40,25 +40,9 @@ import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../s
 import { restoreDepthSource } from '../../prepared-depth-partitions.mts';
 import { prepareTerrestrialRings } from './rings.mts';
 
-/** The default lens's photographs, when it has any, are what the camera opens on: the frames' own sub-observer points when every
- * frame states one, otherwise the observer positions the prepared surface report solved for each frame. Otherwise the lit design pose. */
+/** The terrestrial lane's default camera: the shared rule over the default lens's photograph frames. */
 export function solidCameraAngles(config: Pick<SolidSceneConfig, 'namespace' | 'raster' | 'presentation'>, surfacesReport: unknown) {
-  const id = config.namespace;
-  const lens = (config.raster.surfaceObservations ?? []).find(entry => entry.id === config.presentation.defaultLens) as { frames?: readonly Record<string, unknown>[] } | undefined;
-  if (!lens?.frames?.length) return prepareDefaultCameraAngles(id);
-  if (lens.frames.every(frame => Number.isFinite(frame.observerWestLongitude) && Number.isFinite(frame.observerLatitude))) {
-    return prepareDefaultCameraAngles(id, { observation: lens.frames.map(frame => observerPointDirection(id, frame as unknown as ObserverPoint)) });
-  }
-  const surface = requireArray(requireRecord(surfacesReport).surfaces).map(value => requireRecord(value)).find(entry => entry.id === config.presentation.defaultLens);
-  const observation = requireRecord(requireRecord(surface ?? {}).observation ?? {});
-  const cameras = (Array.isArray(observation.frames) ? observation.frames.map(frame => requireRecord(frame).camera) : [observation.camera]).filter(camera => camera !== undefined);
-  const directions = cameras.map(camera => {
-    const position = requireArray(Array.isArray(camera) ? camera : requireRecord(camera).positionKm).map(value => requireFiniteNumber(value));
-    if (position.length !== 3) throw new TypeError(`${id}: a surface report camera position has three components.`);
-    return position as unknown as [number, number, number];
-  });
-  if (!directions.length) throw new TypeError(`${id}: the default photograph lens states no observer, in its frames or its prepared report.`);
-  return prepareDefaultCameraAngles(id, { observation: directions });
+  return prepareDefaultCameraAngles(config.namespace, { observation: photographDirections(config.namespace, config, surfacesReport) });
 }
 
 async function prepareSolidEpochFrame({ config, celestial, surfacesReport }:{config:SolidSceneConfig;celestial:SolidCelestial;surfacesReport:unknown}) {

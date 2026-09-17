@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dae2ad4ce906bc31f5140da261dfb27b3f62f05f653ded8d7e5aef97b596d245"
+    "sha256": "aed02103551bcdbf913548851bd5dfc44308abc334ab3c96441fa0c03b1a4774"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "38853fd80bdbf78992deb462ebccdbb8e367f97964dcfd66ee49e9b77c16824d",
+      "sha256": "8cab2f2587edb564b0d63436eb74d9e7133ddb3062a860f7502c9cc3bc480f87",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 7.3,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9499866370426093
           },
           "mapUrl": "/scenes/tarvos/tarvos-model-surface@2x.webp",
@@ -435,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "tarvos",
-    "materialSha256": "eae8bf9d363549824c11ff8a8b0977a044f8efdd1e64da71d3c38fefb777c8cd",
+    "materialSha256": "664574905b1cabd0b9dbb54b225b4e3be5fca67f8937a6f2c328ba073a64a1a5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

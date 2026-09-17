@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a21312cddd60c837021379e2a57e48c281dcf70ca2e09e2c0c8d9fe049866c2e"
+    "sha256": "8a6a10f2474a6f59f311bc1b1dcfda3d2ba2464907f016dbf347be0ec0264335"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1d1451d466cfdd96e713b5518b49328c4a2c564e7e72ee21ab506458387372a3",
+      "sha256": "8646319b7b895b5ffae56d0335ab0b4cce485827aad3f4343bebd2beb4519875",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 170,
-          "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45
-          },
           "mapUrl": "/scenes/nereid/nereid-model-surface@2x.webp",
           "polesUrl": "/scenes/nereid/nereid-model-poles@2x.webp",
           "radialTerrain": {
@@ -467,7 +463,7 @@
   },
   "lastPreparation": {
     "objectId": "nereid",
-    "materialSha256": "8933015e82258a1b289dae00b63b60e3b7200d0e9c087bc1f814eb9a5a27c15d",
+    "materialSha256": "5ed15c1b4d6600dcc5de942f5a5bed2b49152d72471672f79c8333df96d5d158",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

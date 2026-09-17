@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "300089bca8f1287ec0aad883a89fab6869b9960fdb3d79fe4b0d2545f9a5dcff"
+    "sha256": "71e749e61d4cf3c13a8134cea68250a5e03511021e6a9596748f98ced4496586"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e19d3454946aa294f12b900b0c8f5faaf4c37ca960f25a3aa006183716c57ade",
+      "sha256": "52251198d24ca952aea606c63d334749b35613c971b5fd932e4fa780224dc627",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 25.515,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/kallisto/kallisto-shape-surface@2x.webp",
           "polesUrl": "/scenes/kallisto/kallisto-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "kallisto",
-    "materialSha256": "abe918ef34a207583532635b286aa30f9dd16dbabb0d04e010eadeeb31fe99c0",
+    "materialSha256": "728bf150c85be8dcb6fcd4ac8c60924af4761730c82f718d4b632bfcaeffa2ab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
