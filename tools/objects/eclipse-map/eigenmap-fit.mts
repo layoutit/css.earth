@@ -10,7 +10,7 @@
  * Because the planet turns with the orbit's own synchronous rotation, its spin axis is the orbit normal: the axis tilt of the
  * public ThERESA code (map inclination left at 90 degrees) cannot occur here. */
 import type { HostedOrbit } from '@cssearth/astronomy';
-import { mapBasisCurves } from './phase-curve.mts';
+import { mapBasisCurves, type LightTravel } from './phase-curve.mts';
 import { harmonicOrder, realSphericalHarmonics } from './spherical-harmonics.mts';
 
 export interface MapGrid { readonly width: number; readonly height: number; readonly latitudes: Float64Array; readonly longitudes: Float64Array }
@@ -73,12 +73,12 @@ export function symmetricEigen(matrix: Float64Array, n: number) {
 
 /** Harmonic light curves, their eigencurves and eigenmaps for one observation. */
 export function eigenBasis(lmax: number, grid: MapGrid, orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number },
-  planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>): EigenBasis {
+  planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>, lightTravel: LightTravel = {}): EigenBasis {
   const order = harmonicOrder(lmax), harmonics = realSphericalHarmonics(lmax, grid.latitudes, grid.longitudes);
   const cells = grid.width * grid.height, uniformMap = new Float64Array(cells).fill(1 / Math.PI), visible = new Uint8Array(cells);
   // Intensity of a map with coefficient 1 on Y_lm is Y_lm / pi, the convention in which a uniform map with Y_00 = 1 gives flux 1.
   const intensity = harmonics.map(row => row.map(value => value / Math.PI));
-  const [uniform, ...harmonicCurves] = mapBasisCurves([uniformMap, ...intensity], grid, orbit, host, planetRadiusStellarRadii, timesBmjd, visible);
+  const [uniform, ...harmonicCurves] = mapBasisCurves([uniformMap, ...intensity], grid, orbit, host, planetRadiusStellarRadii, timesBmjd, visible, lightTravel);
   // ThERESA stacks each curve with its negative (2 per harmonic) and takes the right singular vectors of that matrix. The Gram
   // matrix of [+L, -L] is [[G, -G], [-G, G]]; its eigenvectors are exactly those singular vectors.
   const h = order.length, n = 2 * h, gram = new Float64Array(n * n);
