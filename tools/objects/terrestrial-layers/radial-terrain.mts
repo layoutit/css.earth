@@ -46,7 +46,7 @@ import { gzipSync } from 'node:zlib';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
-import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
+import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, BASE_TILE } from '@layoutit/polycss';
 import { loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, closestTrianglePoint } from './obj-shape.mts';
 import { createSourceSurfacePainter } from './scientific-raster.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
@@ -142,7 +142,7 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     if (topology.components !== 1 || topology.eulerCharacteristic !== 2) throw new Error('Estimated completion must close one nucleus.');
     completion = { ...completed.report, sourceFit, topology };
   }
-  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config), profile.interiorSlices ? 0 : SOLID_TRIANGLE_BLEED * BASE_TILE);
+  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config));
   const leaves = layout.plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
@@ -432,15 +432,19 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       const [a, b, c] = face.vertices, ab = sub(b, a), ac = sub(c, a), aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac);
       const denominator = aa * bb - abac * abac;
       const rectWidth = rect.width * scale, rectHeight = rect.height * scale;
+      const [n0, n1, n2] = face.vertexNormals;
       for (let py = 0; py < rectHeight; py++) for (let px = 0; px < rectWidth; px++) {
         const x = (px + .5) * geometry.leafWidth / rectWidth, y = (py + .5) * geometry.leafHeight / rectHeight;
         const w = m[3] * x + m[7] * y + m[15];
-        const css = [(m[0] * x + m[4] * y + m[12]) / w, (m[1] * x + m[5] * y + m[13]) / w, (m[2] * x + m[6] * y + m[14]) / w];
-        const point = [css[1] / BASE_TILE, css[0] / BASE_TILE, css[2] / BASE_TILE];
-        const ap = sub(point, a), u = (dot(ap, ab) * bb - dot(ap, ac) * abac) / denominator, v = (dot(ap, ac) * aa - dot(ap, ab) * abac) / denominator;
+        const point = [(m[1] * x + m[5] * y + m[13]) / w / BASE_TILE, (m[0] * x + m[4] * y + m[12]) / w / BASE_TILE, (m[2] * x + m[6] * y + m[14]) / w / BASE_TILE];
+        // Scalar forms of dot, sub and unit in their exact operation order (dot's reduce starts from 0), so every texel is bit-identical.
+        const ap0 = point[0] - a[0], ap1 = point[1] - a[1], ap2 = point[2] - a[2];
+        const apab = 0 + ap0 * ab[0] + ap1 * ab[1] + ap2 * ab[2], apac = 0 + ap0 * ac[0] + ap1 * ac[1] + ap2 * ac[2];
+        const u = (apab * bb - apac * abac) / denominator, v = (apac * aa - apab * abac) / denominator;
         // PolyCSS's native u primitive owns triangle coverage. Fill its entire
         // raster so antialiasing never samples a transparent triangle edge.
-        const normal = unit(face.vertexNormals[0].map((n, i) => n * (1 - u - v) + face.vertexNormals[1][i] * u + face.vertexNormals[2][i] * v));
+        const nx = n0[0] * (1 - u - v) + n1[0] * u + n2[0] * v, ny = n0[1] * (1 - u - v) + n1[1] * u + n2[1] * v, nz = n0[2] * (1 - u - v) + n1[2] * u + n2[2] * v;
+        const length = Math.hypot(nx, ny, nz), normal = [nx / length, ny / length, nz / length];
         // Fixed-epoch directional illumination is baked in the body's frame.
         const lightIndex = ((rect.y * scale + py) * width + rect.x * scale + px) * 2;
         let light;
@@ -454,7 +458,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
             reusedLightingSamples++;
           }
         }
-        let illumination = light?.shadow ?? (.12 + .88 * Math.max(0, dot(normal, sunDirection)));
+        const sunDot = 0 + normal[0] * sunDirection[0] + normal[1] * sunDirection[1] + normal[2] * sunDirection[2];
+        let illumination = light?.shadow ?? (.12 + .88 * Math.max(0, sunDot));
         const offset = ((rect.y * scale + py) * width + rect.x * scale + px) * 4;
         const clampedPoint = radial.grid?.imageGrid && closestTrianglePoint(point, a, ab, ac).point;
         const sourceMeters = config.geometry.radiusKm * 1000 / config.geometry.radius;
@@ -539,7 +544,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
         const nearestX = Math.floor(lon * info.width) % info.width;
         const nearestY = Math.max(0, Math.min(info.height - 1, Math.floor((.5 - lat / Math.PI) * info.height)));
-        const fillIllumination = neutralShape ? shapeFillIllumination(dot(normal, sunDirection)) : (light ? light.flood : 1);
+        const fillIllumination = neutralShape ? shapeFillIllumination(sunDot) : (light ? light.flood : 1);
         for (let channel = 0; channel < 3; channel++) {
           const top = map[(y0 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y0 * info.width + x1) * 4 + channel] * tx;
           const bottom = map[(y1 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y1 * info.width + x1) * 4 + channel] * tx;
@@ -654,13 +659,13 @@ function textureQuantum(config: {raster?: unknown}) {
  * the top centre. Sizing the height by the apex's distance from the base midpoint keeps each texel within the square root of two of the
  * nominal density even for a thin, sheared face; the base is the edge that needs the fewest texels. The packed atlas, gaps included,
  * holds at most the body's budget of texels per face. */
-/** `seamBleed` overlaps each triangle outward in CSS units to hide hairline cracks; a body with interior slices fills them instead and overlaps nothing. */
-export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number, seamBleed = SOLID_TRIANGLE_BLEED * BASE_TILE) {
+/** Triangles overlap nothing: interior slices fill the hairline cracks between leaves (tools/prepared-interior-slices.mts). */
+export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number) {
   if (!Number.isSafeInteger(texelsPerFace) || texelsPerFace < 16 || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
   const triangles = faces.map((face, index) => {
     const plan = computeSolidTrianglePlan({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }, index,
       // The core planner takes CSS units, including its seam overlap.
-      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed },
+      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed: 0 },
       { primitive: 'corner-bevel', includeColor: false, matrixDecimals: 9 });
     if (!plan) throw new Error(`Radial face ${index} failed PolyCSS triangle preparation.`);
     // The planner's canonical leaf maps its bottom corners and top centre to the overlapped triangle.

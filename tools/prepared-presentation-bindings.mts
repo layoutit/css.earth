@@ -30,13 +30,8 @@ export async function preparePresentationBindings<T extends PresentationSource>(
   const recipe = isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) ? descriptor.properties.recipe : null;
   const shape = recipe && isRecord(recipe.shape) ? recipe.shape : null;
   const ellipsoid = shape?.kind === 'sphere' || shape?.kind === 'ellipsoid';
-  // An irregular body whose recipe asks for interior slices: its leaves overlap nothing and slices of its own mesh fill the cracks.
-  const terrestrial = shape?.kind === 'radial-terrain' && isRecord(recipe) && Array.isArray(recipe.sources)
-    ? recipe.sources.find(source => isRecord(source) && source.id === 'terrestrial') : undefined;
-  const terrestrialRecipe: unknown = isRecord(terrestrial) && typeof terrestrial.path === 'string'
-    ? JSON.parse(await readFile(resolve(root, 'src/objects', definition.id, terrestrial.path), 'utf8')) : null;
-  const sliced = isRecord(terrestrialRecipe) && isRecord(terrestrialRecipe.geometry) && isRecord(terrestrialRecipe.geometry.radialTerrain) &&
-    terrestrialRecipe.geometry.radialTerrain.interiorSlices === true;
+  // Irregular bodies: leaves overlap nothing and slices of their own mesh fill the cracks between them.
+  const sliced = shape?.kind === 'radial-terrain';
   const closed = ellipsoid && !definition.surfaceHit;
   const ratios = shape?.kind === 'ellipsoid' && typeof shape.radiusKm === 'number'
     ? [1, typeof shape.secondaryRadiusKm === 'number' ? shape.secondaryRadiusKm / shape.radiusKm : 1,
