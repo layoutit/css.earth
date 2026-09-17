@@ -138,6 +138,17 @@ export async function calibrateAmber(plan: AmberPlan, rawDirectory: string, work
   return results;
 }
 
+/** Plan and calibrate one AMBER observing window with calibrator diameters stated by name; returns the calibrated files. */
+export async function calibrateAmberWindow(work: string, target: string, from: string, to: string, rawDirectory: string,
+  calibrators: ReadonlyMap<string, { diameterMas: number; errorMas: number }>, { frames: framesCsv, selection = 80 }: { frames?: string; selection?: number } = {}) {
+  const csv = framesCsv ?? await queryRawTable('AMBER', AMBER_COLUMNS, new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
+  const plan = planAmberNight(parseRawTable(csv), target, { from, to });
+  const root = await toolchainPath('amber');
+  await mkdir(work, { recursive: true });
+  await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
+  return { plan, files: await calibrateAmber(plan, rawDirectory, work, resolve(root, 'pipeline'), resolve(root, 'calib/share/esopipes/datastatic/amber-4.4.5'), calibrators, selection) };
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [work, ...rest] = process.argv.slice(2);
   const option = (name: string) => { const index = rest.indexOf(name); return index < 0 ? undefined : rest[index + 1]; };
@@ -148,11 +159,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     return [[name!, { diameterMas: diameter!, errorMas: error! }] as const];
   }));
   if (!work || !target || !from || !to || !calibrators.size) throw new TypeError('Usage: calibrate-amber <work> --target <TARGET> --from <ISO> --to <ISO> --calibrator <TARGET>=<mas>:<error> [--frames <csv>] [--raw <dir>] [--selection 80]');
-  const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawTable('AMBER', AMBER_COLUMNS, new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
-  const plan = planAmberNight(parseRawTable(csv), target, { from, to });
-  const root = await toolchainPath('amber');
-  await mkdir(work, { recursive: true });
-  await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
-  const files = await calibrateAmber(plan, option('--raw') ?? resolve(work, 'raw'), work, resolve(root, 'pipeline'), resolve(root, 'calib/share/esopipes/datastatic/amber-4.4.5'), calibrators, Number(option('--selection') ?? 80));
+  const { files } = await calibrateAmberWindow(work, target, from, to, option('--raw') ?? resolve(work, 'raw'), calibrators,
+    { ...(option('--frames') ? { frames: await readFile(option('--frames')!, 'utf8') } : {}), selection: Number(option('--selection') ?? 80) });
   console.log(files.join('\n'));
 }
