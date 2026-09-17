@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ed8260acff265b2e3b1a2e4f316f3f9bbd4483f7b1cbb6e14bb24bcc2a767eb0"
+    "sha256": "268dd6de369cae02bf50a0067317541c64f6384adc94fee185b0bdb6e7cfffcb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "7bbdf8fa1808a5cfb246316784d8af563fcaad961d6c0e0e215e0e285b78eea8"
+    "bindingsSha256": "cf2651a52cd4f52d2b8a19e87119d68f0e6d8e761a606122ae729f1d8ab8b062"
   },
   "recipes": [
     {
@@ -476,7 +476,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "095a3d6f8e4fa5b3d095c2f07da5d1fec48824177af43a21cfb9a4bd7ac9c715",
+      "sha256": "953dd51ca0337a6f079478442274d3c37c3a4ae98368ddab9bad7f6c97814866",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -487,7 +487,6 @@
           "metadata": "metadata_nomenclature_points_IAPETUS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "iapetus-features.json",
         "publicBase": "/scenes/iapetus/",
         "target": {
@@ -860,8 +859,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "85dd8dc31e2301b1f8d901e22972b5ed3f0f93aa3fa347a0c30368cfd8ed3d8e",
-      "bytes": 154,
+      "sha256": "7e60c18d01a9cbd70ec8e3be34b0453228f1da56c78029cf8f63c0401ecd993c",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1604,7 +1603,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1732,11 +1730,11 @@
   },
   "lastPreparation": {
     "objectId": "iapetus",
-    "materialSha256": "53e0dffd047dfe99906daf624a48a8ba883701fff7cbeea8931b0c8f58a32990",
+    "materialSha256": "caf2c2a309a4405a62c5af7f37e18b01145b79a2b17ccbd2496924551163d5ff",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "7bbdf8fa1808a5cfb246316784d8af563fcaad961d6c0e0e215e0e285b78eea8"
+      "bindingsSha256": "cf2651a52cd4f52d2b8a19e87119d68f0e6d8e761a606122ae729f1d8ab8b062"
     }
   }
 }

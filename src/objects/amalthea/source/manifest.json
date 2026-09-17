@@ -442,8 +442,8 @@
     {
       "id": "amalthea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1157,
-      "expectedSha256": "d67357bb1382bd4e03ebb6cf82a84390d492634dcafc20f331b03a7a776b479a",
+      "expectedBytes": 1125,
+      "expectedSha256": "7c28165f8cee607ed263798df77a92c2f16414e4b3501824b99aa0b6e256cf4d",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -460,8 +460,8 @@
     {
       "id": "amalthea-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
+      "expectedBytes": 187,
+      "expectedSha256": "acc02f8a7259c2b6074f84032d6f93673a3e52c7ef42c80c982af3101e009e49",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

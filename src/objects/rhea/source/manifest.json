@@ -723,8 +723,8 @@
     {
       "id": "rhea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1219,
-      "expectedSha256": "0d60851f07e5662ec9d7ae9ac587e9db984cacfcc7d3e68e25c1f754d96e54d9",
+      "expectedBytes": 1187,
+      "expectedSha256": "0fdb122c1ef06d10cfeacc6cbe23d55bc5e9da378cc9fccb9401f58c6e881e8e",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -741,8 +741,8 @@
     {
       "id": "rhea-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 151,
-      "expectedSha256": "3f6b4ebe26f761e0296aa0d8b0eaca7347713080afffbe76a56db94cb0f5c8cc",
+      "expectedBytes": 183,
+      "expectedSha256": "6536518f815c0ad2e2881eb1a9b8692470cdaf3c90a581227a935fa85e32c450",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

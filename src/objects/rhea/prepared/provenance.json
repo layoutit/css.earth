@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "478cda08af2ba6f124dc5d4b8757b97ca918f64afc1a36cf6efcdfb0d36f6bac"
+    "sha256": "ba78c76ba782e1724ef99f4efbaf4d5bfd107a9602bd60b8d2eb7f09aca44d81"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "4a6921cf55cc9664b2967e6b164f4f351784865275a242988faa9db9b92ce0d2"
+    "bindingsSha256": "56af771f0b1c86b39550b30ee211a0f1aad26c0a63005dc20d584648408a1e3b"
   },
   "recipes": [
     {
@@ -608,7 +608,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "0d60851f07e5662ec9d7ae9ac587e9db984cacfcc7d3e68e25c1f754d96e54d9",
+      "sha256": "0fdb122c1ef06d10cfeacc6cbe23d55bc5e9da378cc9fccb9401f58c6e881e8e",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -619,7 +619,6 @@
           "metadata": "metadata_nomenclature_points_RHEA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "rhea-features.json",
         "publicBase": "/scenes/rhea/",
         "target": {
@@ -1155,8 +1154,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "3f6b4ebe26f761e0296aa0d8b0eaca7347713080afffbe76a56db94cb0f5c8cc",
-      "bytes": 151,
+      "sha256": "6536518f815c0ad2e2881eb1a9b8692470cdaf3c90a581227a935fa85e32c450",
+      "bytes": 183,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1611,7 +1610,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1814,11 +1812,11 @@
   },
   "lastPreparation": {
     "objectId": "rhea",
-    "materialSha256": "dc26d571dd0069f13a5b9b0324e8fd29848c191428490a75e0a1eac09569fc6c",
+    "materialSha256": "cdd6dab75e999d02cbd9c0423919b83d757bb633566b440bc806ab0dc926f775",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "4a6921cf55cc9664b2967e6b164f4f351784865275a242988faa9db9b92ce0d2"
+      "bindingsSha256": "56af771f0b1c86b39550b30ee211a0f1aad26c0a63005dc20d584648408a1e3b"
     }
   }
 }

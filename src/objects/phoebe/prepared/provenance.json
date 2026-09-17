@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6842aa643846aa4b7136c165cd72bd52b1a9873261e78124eb96f3be69fb9750"
+    "sha256": "249177e03e403000ac5ab9218c9554b27510c923ea2198e0edafe28fce5bdeb9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "86ea9a20577658eba605315a9f124f59c7697e7ee4515415f92ac03121d4d044"
+    "bindingsSha256": "4095b9a1ea242f97589fdd46c6358b62f7ae1d3548b5d8d4671c50be5190336d"
   },
   "recipes": [
     {
@@ -849,7 +849,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "42cd0c133a0460f95b0a6cc5e3942b2fcac9af3099e069c6673bc9bc0050de35",
+      "sha256": "efb67d63b431d74e49b4aed9cc7e5b64e689aa6421b163ec623b550a9de76134",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -860,7 +860,6 @@
           "metadata": "metadata_nomenclature_points_PHOEBE.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "phoebe-features.json",
         "publicBase": "/scenes/phoebe/",
         "target": {
@@ -1501,8 +1500,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "cd6e8b9772febaa12eb1fc6fc3314f8166e31b560f0bc0765a9aeebb9b13ec54",
-      "bytes": 153,
+      "sha256": "cac9def5bc8cae522a9269550e49f9b5783570bf3579c51cde53bbdf9e7dc7dc",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1963,7 +1962,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2166,11 +2164,11 @@
   },
   "lastPreparation": {
     "objectId": "phoebe",
-    "materialSha256": "efa0c983f63d850c8abb8bab4fe99bf97b87829c08f73f916b3972562a28f2e7",
+    "materialSha256": "9580e94fd1f6a15bb707abda43f6e939b6dbbecf9a841476cdfa6cbf36fb5803",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "86ea9a20577658eba605315a9f124f59c7697e7ee4515415f92ac03121d4d044"
+      "bindingsSha256": "4095b9a1ea242f97589fdd46c6358b62f7ae1d3548b5d8d4671c50be5190336d"
     }
   }
 }

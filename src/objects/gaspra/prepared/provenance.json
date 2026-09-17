@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7eb3262f432528dd61d77bd896d61f603d097e5b6039f05f30b1b4078977234f"
+    "sha256": "c50c5f5587f64e9701e44938bae59550113a33bf28bbcc049312724677cd820d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "352a301e65f9dd65bfc776a8e928010e7407078a2da08cca5cbaee9b8af651fa"
+    "bindingsSha256": "c9541715c6ec434911e38a4d7d0687b8e7b9390b29ced0affb57a700a2bc8984"
   },
   "recipes": [
     {
@@ -449,7 +449,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "e56d3db7e5b847cc73d83d0652ad5c4d7658b992b79923a37433422a4941f1a7",
+      "sha256": "1ed82e0b3f8da4a864007f335e6e319bb48f06cab62554bfa7f5d418881fedd3",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -460,7 +460,6 @@
           "metadata": "metadata_nomenclature_points_GASPRA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "gaspra-features.json",
         "publicBase": "/scenes/gaspra/",
         "target": {
@@ -1242,8 +1241,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "d7e2f54918ea9f280437edf5ebd10a617c6fd23307f04b1b9670f77b5df71a7d",
-      "bytes": 153,
+      "sha256": "07d4e8873ba3816e9c7d656f4058d4a44e6c9565d03b5bf96f8764a07454e98d",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1492,7 +1491,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1595,11 +1593,11 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "3709f39d5fcf4b4ff4b99f52cb5bf789d25d90b1548a8206484a55f8401ef595",
+    "materialSha256": "5fd5288c4b293eacfecd0061f7c85819bf81bb2bac1245dacd959a618b29dacc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "352a301e65f9dd65bfc776a8e928010e7407078a2da08cca5cbaee9b8af651fa"
+      "bindingsSha256": "c9541715c6ec434911e38a4d7d0687b8e7b9390b29ced0affb57a700a2bc8984"
     }
   }
 }

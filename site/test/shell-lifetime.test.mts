@@ -13,7 +13,7 @@ import type { ObjectWorldNavigation } from '../../src/renderers/css/runtime/worl
 import type { ShellCamera } from '../browser-types.mts';
 const catalogue = parsePreparedGalaxyCatalog(catalogueInput), clusters = parsePreparedClusterCatalog(clustersInput);
 const cameraFrame = (bodyRadiusM = 1000): PreparedWorldCameraFrame => ({ referenceFrame: 'world', epochJdTt: 1,
-  originM: [0,0,0], presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM });
+  originM: [0,0,0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM });
 const worldAt = (range: number): WorldCameraPose => ({ referenceFrame: 'world', epochJdTt: 1,
   pose: { positionM: [0,0,range], orientationXyzw: [0,0,0,1] } });
 type CameraNotifications = Set<(world?: WorldCameraPose) => void>;
