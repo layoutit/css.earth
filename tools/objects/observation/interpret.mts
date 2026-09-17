@@ -31,6 +31,7 @@ import { observationRaster, parseObservationLens, loadNativeObservationPoleSampl
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
+import { loadStellarPhotometricColor } from './stellar-photometric-color.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
@@ -386,6 +387,18 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         return { data, channels: 4, nearest: true, report: { discIntegratedColor: { srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance,
           meaning: 'Whole-disc colour and V geometric albedo from published photometry, uniform over the body; not a resolved surface map.' } } };
+      }
+      case 'stellar-photometric-color': {
+        // A self-luminous photosphere with no image: one colour from the catalogued photometric temperature, no map.
+        const source = await manifest;
+        const { temperature, color, range } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
+          surface.science, surface.source);
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
+        if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar colour belongs to an emissive body.`);
+        return { data, channels: 4, nearest: true, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density),
+          report: { stellarPhotometricColor: { temperature, srgb: color.srgb, linearSrgb: color.linear, srgbAtBounds: range.map(bound => bound.srgb),
+            meaning: 'Planck colour at the catalogued photometric temperature, uniform over the disc; not a resolved photosphere, limb darkening or spectrum.' } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }
