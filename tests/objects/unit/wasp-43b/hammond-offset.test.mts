@@ -46,8 +46,9 @@ test('with Hammond et al.\'s ramp time constant the fit returns their systematic
     .surfaces.find(surface => surface.id === 'miri')!.science.fit;
   const fit = async (path: string, tau: number) => {
     const systematics = recipe.systematics.map(s => s.kind === 'exponential-ramp' ? { kind: 'exponential-ramp' as const, timeConstantsDays: [tau] } : s);
-    // Eclipses as the transit timing shows them: -20.5 s transit plus the 15 s light time across the orbit.
-    const result = fitLightCurveMap(await load(path), { ...recipe, degrees: [2], eigencurves: [6], systematics }, at(-5.5), host, radiusRatio);
+    // The transit as each curve shows it, with light time across the orbit (15 s later at eclipse).
+    const curve = await load(path), shift = measureTransitShift(curve, orbit, host, radiusRatio).shiftSeconds;
+    const result = fitLightCurveMap(curve, { ...recipe, degrees: [2], eigencurves: [6], systematics }, at(shift), host, radiusRatio, { stellarRadiusKm: BODIES['wasp-43'].meanRadiusKm });
     const [trend, ramp, position, width] = result.fit.systematics;
     return { chiSquared: result.fit.chiSquared, offset: meridionalOffset(result.basis, result.fit), ramp: ramp! * 1e6, trend: trend! * 1e6, position: position!, width: width! };
   };

@@ -13,6 +13,8 @@ A hot Jupiter's map reaches this project as a light curve, not as a picture: the
 
 **Conventions.** Latitude and longitude are body-fixed: longitude 0 is the substellar meridian, east is the direction of rotation. The map is in planet-to-star flux per unit intensity, so a uniform map of amplitude C0 gives flux C0 when a full hemisphere shows. `brightnessTemperature` inverts it at one effective wavelength (Rauscher et al. 2018, eq. 8).
 
+**Light time.** Given the host star's radius, the geometry places the planet where it was when the light seen at each time left it. Times stay referenced to the observed transit, as a transit fit reports them, so eclipses are seen 2a sin(i)/c later than an instantaneous geometry predicts: 15 s for WASP-43b, 22 s for WASP-18b, 31 s for HD 189733b. ThERESA models no light time; starry measures it from the barycentre, so a starry t0 comes a sin(i)/c after the transit is seen.
+
 **Spin axis.** The planet spins about the orbit normal, because the geometry is the package's own orbit. The public ThERESA code leaves the map's inclination at 90°, which tilts the axis off the orbit normal for any orbit that is not edge-on (see [WASP-43b's re-runs](../src/objects/wasp-43b/source/reference/theresa-reruns.md)). That tilt cannot occur here.
 
 ## From raw exposures
@@ -61,6 +63,19 @@ It compares that map with the one they deposited:
 
 The paper gives the hot spot at 33.0° E. The raw reduction and this repository's fit reach the deposited map's brightest cell.
 
+## Timing and the ramp on other planets
+
+WASP-43b's offset moved with two choices the data barely constrain: the detector ramp's time constant and the eclipse timing. The same probes on the other maps this repository reproduces, measured 2026-09-17 on the deposited light curves (offset: Hammond et al.'s cos-latitude weighted meridional maximum):
+
+| Planet, data | Eclipse timing | Light time (2a sin i/c) | Ramp time constant |
+| --- | --- | --- | --- |
+| WASP-43b, MIRI phase curve (Bell et al. 2024) | about 0.04° per second | 15 s: with the measured transit, offset +0.15° | 0.10 or 0.27 d fit within χ² 14: 5.45° or 7.45° |
+| HD 189733b, two MIRI eclipses (Lally et al. 2025) | about 0.5 to 1° per second; χ² changes by less than 9 across a 30 s window | 31 s: offset 42.3° without, 26.4° with (22° on the raw reduction) | 5 to 226 min fit within χ² 8: 44° to 40° |
+| WASP-18b, NIRISS eclipse (Coulombe et al. 2023, 8 bins) | at most 2.3° for ±30 s | 22 s: at most 0.5° | curves deposited already detrended |
+
+- **HD 189733b.** Its eclipse-only map is limited by timing. Lally et al.'s ThERESA configuration has no light time, and neither does the reproduction test below. With it, the same fit moves the offset about 16° west, and a 10 s ephemeris error moves it another 5 to 10°. The paper's 33.0° and the deposited map's brightest cell at 37.5° both fall inside that range. Their deposited map's own meridional peak, read from its 15° grid, lies near 29 to 31°.
+- **WASP-18b.** Its map longitude hardly moves with timing, so the timing trap does not apply there. The ramp question lies upstream of the deposited, detrended curves and cannot be tested from them.
+
 ## Checks
 
 - [`spherical-harmonics.test.mts`](../tools/objects/eclipse-map/spherical-harmonics.test.mts): the harmonics are orthonormal on the sphere and match their closed forms at degree 1.
@@ -83,7 +98,7 @@ With positivity dropped, BIC prefers degree 4 with 12 eigencurves and a hot spot
 
 - **Raw reductions are one instrument mode so far.** `reduce-tso.mts` carries settings for MIRI slitless spectroscopy, reproduced on the WASP-43b phase curve and the two HD 189733b eclipses. NIRSpec and NIRISS observations need their own control files and their own comparison with a deposit before a map is fitted from them.
 - **Systematics are the analyst's model.** Baselines and decorrelation vectors enter as linear columns. A nonlinear ramp's time constant is profiled over a grid and refined, on the most flexible candidate, then refined again for the chosen model. A light curve can admit more than one systematics solution. WASP-43b's MIRI curve fits a fast ramp with a steep trend and a slow ramp with a gentle trend, with offsets 2° apart; Hammond et al. (2024) took the slow one ([WASP-43b's README](../src/objects/wasp-43b/README.md)). Different systematics models move the hot spot by more than the statistical uncertainty.
-- **Eclipse timing moves longitude.** The fit takes eclipse times from the package orbit. On WASP-43b's MIRI curve, eclipses assumed 1 s earlier move the offset about 0.04° east. [`transit-timing.mts`](../tools/objects/eclipse-map/transit-timing.mts) measures the transit time in a light curve, so the orbit's timing can be checked. Eclipse light arrives 2a/c after transit light. Fitting codes also differ in their reference: starry delays light from the barycentre, so its t0 comes a sin(i)/c after the transit is seen, while Eureka!'s batman models count from the transit.
+- **Eclipse timing moves longitude.** A map's longitude trades against the eclipse times it assumes, most strongly for eclipse-only data with sharp ingress and egress (next section). An ephemeris propagated to a visit can be off by tens of seconds, so a lens recipe can take the transit time from its own light curve ([`transit-timing.mts`](../tools/objects/eclipse-map/transit-timing.mts)). Where a visit has no transit, the map's longitude is only as good as the ephemeris.
 - **Integration grid.** Occultation is decided per cell centre. At 90 × 180 cells, χ² agrees with the 360 × 720 grid to within 0.2.
 - **Posterior.** Metropolis with a Gaussian proposal and positivity as a hard prior. It reports the statistical spread under one fixed systematics model, like the published intervals it is compared with.
 

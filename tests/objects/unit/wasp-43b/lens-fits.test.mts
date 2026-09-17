@@ -49,12 +49,16 @@ test('the deposited NRS1 and NRS2 temperature maps are single-wavelength convers
   for (let wavelength = 2.9; wavelength <= 5.2; wavelength += 0.005) assert.ok(constant('whitelight', wavelength).spread > 0.01, `white light at ${wavelength} um`);
 });
 
-test('the NIRSpec refit reproduces the in-house fit of the deposited curve and runs about 80 K cooler than the deposit where it converts differently', async () => {
+test('the NIRSpec refit fits the deposited curve with light time and its own transit, and runs about 80 K cooler than the deposit where it converts differently', async () => {
   const { map, table, day, night } = await lens('nirspec-refit');
-  // Measured 2026-09-17: degree 3, 6 eigencurves, chi2 8809.56 over 4202 samples, hot spot -2.31, +7.09 (eigenmap-fit.test.mts).
+  // Measured 2026-09-17: the transit in Challener et al.'s curve comes 17 s before the package ephemeris. With that timing and light
+  // time across the orbit, degree 3 with 6 eigencurves gives chi2 8813.9 over 4202 samples and a hot spot at -2.34, +7.16
+  // (eigenmap-fit.test.mts reproduces ThERESA, which models neither: 8809.6, -2.31, +7.09).
+  near(map.transitShiftSeconds, -17, 1.5, 'transit timing');
   assert.equal(map.fit.basis.lmax, 3); assert.equal(map.fit.fit.ncurves, 6); assert.equal(map.fit.samples, 4202);
-  near(map.fit.fit.chiSquared, 8809.56, 0.05, 'chi2');
-  near(map.fit.hotspot.latitude, -2.31, 0.05, 'hot spot latitude'); near(map.fit.hotspot.longitude, 7.09, 0.05, 'hot spot longitude');
+  near(map.fit.fit.chiSquared, 8813.9, 0.2, 'chi2');
+  near(map.fit.hotspot.latitude, -2.34, 0.05, 'hot spot latitude'); near(map.fit.hotspot.longitude, 7.16, 0.05, 'hot spot longitude');
+  near(meridionalOffset(map.fit.basis, map.fit.fit), 7.8, 0.1, 'meridional offset');
   // Measured: dayside 1580 K, nightside 875 K over the G395H band against BT-Settl 4500 K.
   near(day, 1580, 2, 'dayside'); near(night, 875, 2, 'nightside');
   // The deposit's own flux map through this band conversion, against the deposit's temperatures, on the dayside within 60 degrees.
@@ -68,12 +72,13 @@ test('the NIRSpec refit reproduces the in-house fit of the deposited curve and r
 
 test('the MIRI white-light lens, from this project\'s own reduction, agrees with the published MIRI dayside and nightside', async () => {
   const { map, day, night } = await lens('miri');
-  // Measured 2026-09-17: BIC takes degree 2 with 6 eigencurves (degree 3 with 6 is within 2, same parameter count); the ramp's time
-  // constant refines to 0.1026 d from the 0.08 d grid value.
-  assert.equal(map.fit.basis.lmax, 2); assert.equal(map.fit.fit.ncurves, 6); near(map.fit.rampTimeConstantDays!, 0.1026, 0.002, 'ramp time constant');
-  assert.equal(map.fit.samples, 7883); near(map.fit.fit.chiSquared, 11255.8, 0.5, 'chi2');
+  // Measured 2026-09-17: the transit comes 19.5 s before the package ephemeris; BIC takes degree 2 with 6 eigencurves (degree 3 with 6 is
+  // within 2, same parameter count); the ramp's time constant refines to 0.1048 d from the 0.08 d grid value.
+  near(map.transitShiftSeconds, -19.5, 1, 'transit timing');
+  assert.equal(map.fit.basis.lmax, 2); assert.equal(map.fit.fit.ncurves, 6); near(map.fit.rampTimeConstantDays!, 0.1048, 0.002, 'ramp time constant');
+  assert.equal(map.fit.samples, 7884); near(map.fit.fit.chiSquared, 11250.3, 0.5, 'chi2');
   // Hammond et al. (2024)'s longitudinal offset (meridional, cos-latitude weighted) and the map's own hottest point.
-  near(meridionalOffset(map.fit.basis, map.fit.fit), 6.05, 0.1, 'meridional offset'); near(map.fit.hotspot.longitude, 5.69, 0.1, 'hot spot longitude');
+  near(meridionalOffset(map.fit.basis, map.fit.fit), 6.2, 0.1, 'meridional offset'); near(map.fit.hotspot.longitude, 5.84, 0.1, 'hot spot longitude');
   // Bell et al. (2024): 1524 ± 35 K dayside and 863 ± 23 K nightside over 5-12 um. Measured here over 5-10.5 um: 1527 and 840 K.
   near(day, 1527, 2, 'dayside'); assert.ok(Math.abs(day - 1524) < 35, 'within the published dayside interval');
   near(night, 840, 2, 'nightside'); assert.ok(Math.abs(night - 863) < 23 * 1.1, 'about one published nightside uncertainty below');
@@ -81,7 +86,7 @@ test('the MIRI white-light lens, from this project\'s own reduction, agrees with
 
 test('the three MIRI slices choose their own models and put the hot spot east of noon in each', async () => {
   // Measured 2026-09-17 (degree, eigencurves, ramp days, dayside K, nightside K, meridional offset degrees).
-  const expected = { 'miri-band-1': [2, 4, 0.0881, 1539, 835, 3.4], 'miri-band-2': [2, 4, 0.1116, 1492.5, 837, 7.75], 'miri-band-3': [2, 4, 0.0772, 1565, 913, 8.3] } as const;
+  const expected = { 'miri-band-1': [2, 4, 0.0898, 1539, 835, 3.55], 'miri-band-2': [2, 4, 0.1125, 1492.5, 837, 7.8], 'miri-band-3': [2, 4, 0.0823, 1565, 914, 8.6] } as const;
   for (const [id, [degree, eigencurves, ramp, dayside, nightside, offset]] of Object.entries(expected)) {
     const { map, day, night } = await lens(id);
     assert.equal(map.fit.basis.lmax, degree, id); assert.equal(map.fit.fit.ncurves, eigencurves, id); near(map.fit.rampTimeConstantDays!, ramp, 0.002, `${id} ramp`);
