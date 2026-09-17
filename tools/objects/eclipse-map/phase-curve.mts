@@ -20,35 +20,46 @@ export function mirrorGrid(grid: EmissionGrid, axis: 'longitude' | 'latitude'): 
 /** Relative planet flux at each time (BMJD_TDB): the map summed over the visible, unocculted hemisphere, weighted by the
  * projected area of each cell. Stellar and planetary radii are in units of the star's radius. */
 export function mapPhaseCurve(grid: EmissionGrid, orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number }, planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>) {
+  return mapBasisCurves([grid.values], grid, orbit, host, planetRadiusStellarRadii, timesBmjd)[0]!;
+}
+
+/** The light curve of each basis map over the same cells, in one geometry pass per time: rows [basis][time]. A cell's weight
+ * (projected area, zero when turned away or behind the star) is shared by every basis map, so a degree-5 harmonic basis
+ * costs one pass, not thirty-five. `visible` (optional) receives 1 for every cell that faces the observer at any time. */
+export function mapBasisCurves(basis: readonly ArrayLike<number>[], grid: Pick<EmissionGrid, 'width' | 'height' | 'latitudes' | 'longitudes'>, orbit: HostedOrbit,
+  host: { rightAscensionDegrees: number; declinationDegrees: number }, planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>, visible?: Uint8Array) {
   const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees), cells = grid.width * grid.height;
+  if (basis.some(values => values.length !== cells) || (visible && visible.length !== cells)) throw new RangeError('Every basis map must cover the grid.');
   const cellLatitude = Math.PI / grid.height, cellLongitude = 2 * Math.PI / grid.width, normals = new Float64Array(cells * 3), area = new Float64Array(cells);
   for (let i = 0; i < cells; i++) {
     const lat = grid.latitudes[i]! * Math.PI / 180, lon = grid.longitudes[i]! * Math.PI / 180;
     normals.set([Math.cos(lat) * Math.cos(lon), Math.cos(lat) * Math.sin(lon), Math.sin(lat)], i * 3);
     area[i] = Math.cos(lat) * cellLatitude * cellLongitude;
   }
-  const flux = new Float64Array(timesBmjd.length);
+  const curves = basis.map(() => new Float64Array(timesBmjd.length)), sums = new Float64Array(basis.length);
   for (let t = 0; t < timesBmjd.length; t++) {
     // Unit stellar radius: positions come back in the same units as the radius passed in.
     const state = hostedOrbitStateRelativeKm(orbit, host, 1, timesBmjd[t]! + 2400000.5);
     const m = bodyFixedToIcrf(synchronousRotationElements(state.positionKm, state.velocityKmPerDay, orbit.periodDays));
     const r = state.positionKm, behind = r[0] * z[0] + r[1] * z[1] + r[2] * z[2] < 0;
-    let sum = 0;
+    sums.fill(0);
     for (let i = 0; i < cells; i++) {
       const bx = normals[i * 3]!, by = normals[i * 3 + 1]!, bz = normals[i * 3 + 2]!;
       const nx = m[0]! * bx + m[1]! * by + m[2]! * bz, ny = m[3]! * bx + m[4]! * by + m[5]! * bz, nz = m[6]! * bx + m[7]! * by + m[8]! * bz;
       const mu = nx * z[0] + ny * z[1] + nz * z[2];
       if (mu <= 0) continue;
+      if (visible) visible[i] = 1;
       if (behind) {
         const px = r[0] + planetRadiusStellarRadii * nx, py = r[1] + planetRadiusStellarRadii * ny, pz = r[2] + planetRadiusStellarRadii * nz;
         const sx = px * x[0] + py * x[1] + pz * x[2], sy = px * y[0] + py * y[1] + pz * y[2];
         if (sx * sx + sy * sy < 1) continue;
       }
-      sum += grid.values[i]! * mu * area[i]!;
+      const weight = mu * area[i]!;
+      for (let k = 0; k < basis.length; k++) sums[k] += basis[k]![i]! * weight;
     }
-    flux[t] = sum;
+    for (let k = 0; k < basis.length; k++) curves[k]![t] = sums[k]!;
   }
-  return flux;
+  return curves;
 }
 
 /** Weighted least squares of data = scale * model + offset over the selected samples, with the reduced chi-squared. */
