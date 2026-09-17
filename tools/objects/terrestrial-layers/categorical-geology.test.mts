@@ -14,8 +14,10 @@ const rectangle = (west: number, south: number, east: number, north: number) => 
 const polygon = (category: number|null, rings: number[][][]) => ({category, rings, south: Math.min(...rings.flat().map(point => point[1])), north: Math.max(...rings.flat().map(point => point[1]))});
 const body = async (id: string) => {
   const source = `${root}${id}/source`;
-  const recipe = JSON.parse(await readFile(`${source}/preparation/terrestrial.json`, 'utf8'));
-  const lens = parseGeologyLens(required(requireArray(recipe.raster.scientific).find(value => fixtureRecord(value).id === 'geology')));
+  const recipe = JSON.parse(await readFile(`${source}/preparation/raster.json`, 'utf8'));
+  const surface = fixtureRecord(required(requireArray(recipe.surfaces).find(value => fixtureRecord(value).id === 'geology')));
+  const {kind: _kind, ...science} = fixtureRecord(surface.science);
+  const lens = parseGeologyLens({id: surface.id, ...science});
   return {source, lens, surface: await loadGeologySurface(source, lens)};
 };
 

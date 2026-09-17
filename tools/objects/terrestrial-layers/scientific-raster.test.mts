@@ -131,7 +131,7 @@ test('Lambert atlas is transparent outside the body and carries distinct full-ph
 });
 
 test('capability selection and validity policy are independent of body names', async () => {
-  const config = JSON.parse(await readFile(new URL('../../../src/objects/ceres/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
+  const config = JSON.parse(await readFile(new URL('../../../src/objects/vesta/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const variant = structuredClone(config); variant.namespace = 'test-body'; variant.publicBase = '/scenes/test-body/';
   assert.equal(parseTerrestrialProfile(variant).namespace, 'test-body');
   variant.geometry.radius = 231; assert.throws(() => parseTerrestrialProfile(variant), /Invalid terrestrial/);
