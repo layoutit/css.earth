@@ -6,7 +6,7 @@ import { mountPreparedOrbitLines } from '../../../src/renderers/css/solar-system
 import { mountPreparedCssSky, preparedSkyCameraTransform } from '../../../src/renderers/css/sky/prepared-sky-runtime.js';
 import { loadPreparedCssVolume } from '../../../src/renderers/css/volume/loader.js';
 import { savedWorldCamera } from '../../../src/renderers/css/navigation/saved-world-camera.js';
-import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../../../src/renderers/css/navigation/world-camera-math.js';
+import { cssViewFromOrientation, rotateWorldPosition } from '../../../src/renderers/css/navigation/world-camera-math.js';
 import type { PreparedWorldCameraFrame } from '../../../src/renderers/css/navigation/world-camera.js';
 import type { SharedView } from '../../../src/renderers/css/navigation/view-url.js';
 import { contextMarkerSprite } from '../../../src/navigation/marker-presentation.mts';
@@ -35,7 +35,7 @@ const number = (value: number) => Math.abs(value) < 1e-12 ? '0' : String(value);
 export function addNativeSolarContext(document: Document, frame: PreparedWorldCameraFrame, saved: SharedView, selectedId: string, nativeCamera?: NativeCameraRotation) {
   const viewport = { focalPixels: 1000, widthPixels: 1e9, heightPixels: 1e9, principalOffsetPixels: [0, 0] as const };
   const world = savedWorldCamera(saved, frame, viewport);
-  const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+  const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
   const eye = (position: readonly number[]) => rotateWorldPosition(rotation, [position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
   const stage = document.querySelector<HTMLElement>('.planet-stage')!;
   const worldStage = document.querySelector<HTMLElement>('.planet-world-stage')!;

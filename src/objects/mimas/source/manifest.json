@@ -293,8 +293,8 @@
     {
       "id": "mimas-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1152,
-      "expectedSha256": "bd22fd10cced0cdc89ba4b281b0f8df82a7186fa8fed71660a7a515c1d11e9f7",
+      "expectedBytes": 1120,
+      "expectedSha256": "d998f0a8d9a52e33d5c60f9dfe057fbe63ead3574376faecefa232164c35c8c2",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -311,8 +311,8 @@
     {
       "id": "mimas-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "9597bd1485f74cf558df8674b3f221bc9939775a5be3b8ce042e69ce34814b2c",
+      "expectedBytes": 184,
+      "expectedSha256": "3564f60af78d6387e050953d7fef74c860c6903d660d3513f46f64b526be4729",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

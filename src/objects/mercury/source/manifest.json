@@ -531,8 +531,8 @@
     {
       "id": "mercury-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "b6f9051b9d032fe0dab9d5f5303171052b6390066d43fc7f29aebf83cb829669",
+      "expectedBytes": 188,
+      "expectedSha256": "03e3a362654927fe5ca054df0207da4a56817e51d65c6cb512531855e1052e17",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -599,8 +599,8 @@
     {
       "id": "mercury-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1823,
-      "expectedSha256": "f14b49150c5ee8b43e702f874cfa65c13303aad58a94c8ebd0b0c93e71c1e77f",
+      "expectedBytes": 1789,
+      "expectedSha256": "ba4b752a340702ad06ef767541636dc5cc70d46f494a17527ea36551fd56cf8e",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",

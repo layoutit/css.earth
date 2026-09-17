@@ -13,7 +13,7 @@
       0,
       0,
       0,
-      1,
+      -1,
       0,
       0,
       0,
@@ -21,7 +21,7 @@
     ],
     "metersPerUnit": 2244193.5483870967,
     "bodyRadiusM": 695700000,
-    "orientationSource": "Sun prepared-sky baseline; identity ICRF axes, not an astrometric sky registration",
+    "orientationSource": "Sun prepared-sky baseline: ICRF axes with y reversed, because CSS 3D space is left-handed (y down, z toward the viewer); not an astrometric sky registration",
     "presentationRadiusDerivation": {
       "sourceRadius": 248,
       "polycssTilePixels": 50,
