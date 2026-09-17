@@ -21,7 +21,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, runRecipe } from './eso-pipeline.mts';
+import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, runRecipe } from './eso-pipeline.mts';
 import { toolchainPath } from './toolchain.mts';
 
 export { rawFrame } from './eso-pipeline.mts';
@@ -38,8 +38,12 @@ export function parseRawFrames(csv: string): RawFrame[] {
 
 const time = frameTime;
 
-/** `frames` is the whole night; blocks are taken inside [from, to] (ISO times) when given, calibrations from anywhere before. */
-export function planPionierNight(frames: readonly RawFrame[], target: string, window: { readonly from?: string; readonly to?: string } = {}): PionierPlan {
+/** `frames` is the whole night; blocks are taken inside [from, to] (ISO times) when given, calibrations from anywhere near.
+ * `setupOf` gives a frame's optical and detector setup (disperser and detector windows, from its header); when given, only
+ * calibrator blocks, kappa sets, lamp scans and darks in the science data's setup are used, as pndrs requires. Service-mode
+ * mornings take FREE, GRISM and GRISM+Wollaston sets one after another, and a set in another setup fails in pndrs. */
+export function planPionierNight(frames: readonly RawFrame[], target: string, window: { readonly from?: string; readonly to?: string } = {},
+  setupOf?: (dpId: string) => string | undefined): PionierPlan {
   const darks = frames.filter(frame => frame.dpType === 'DARK');
   const inside = (frame: RawFrame) => (!window.from || frame.dpId >= `PIONI.${window.from}`) && (!window.to || frame.dpId <= `PIONI.${window.to}`);
   const blocks: PionierBlock[] = [];
@@ -47,8 +51,12 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
   // target's own programme (2014 visitor mode filed named calibrators as SCIENCE). Other programmes' science blocks are skipped.
   const programmes = new Set(frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && frame.object === target && inside(frame)).map(frame => frame.programme));
   const usable = (frame: RawFrame) => frame.object === target || frame.dpCategory === 'CALIB' || programmes.has(frame.programme);
+  const scienceFrame = frames.find(frame => frame.dpType === 'FRINGE,OBJECT' && frame.object === target && inside(frame));
+  const scienceSetup = scienceFrame && setupOf?.(scienceFrame.dpId);
+  const sameSetup = (frame: RawFrame) => !setupOf || setupOf(frame.dpId) === scienceSetup;
   for (const template of [...new Set(frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && inside(frame) && usable(frame)).map(frame => frame.templateStart))]) {
     const exposures = frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && frame.templateStart === template);
+    if (!sameSetup(exposures[0]!)) continue;
     const last = time(exposures.at(-1)!.dpId);
     // A block's dark is the first dark after its last exposure, within the template's own few minutes.
     const dark = darks.find(frame => time(frame.dpId) > last && time(frame.dpId) - last < 5 * 60e3);
@@ -63,14 +71,14 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
   // pndrsBatchFindBestSpecCal's score: the time distance in days, plus one day for a calibration taken after the data and minus
   // one for one taken before. Observatory calibrations come in the morning, so this picks the previous morning's set over the
   // next morning's, and still finds the next one when none precedes.
-  const best = (type: RegExp) => frames.filter(frame => type.test(frame.dpType))
+  const best = (type: RegExp) => frames.filter(frame => type.test(frame.dpType) && sameSetup(frames.find(first => first.templateStart === frame.templateStart && type.test(first.dpType))!))
     .map(frame => { const days = (time(frame.dpId) - start) / 86400e3; return { frame, score: Math.abs(days) + Math.sign(days) }; })
     .sort((a, b) => a.score - b.score)[0]?.frame;
   const kappa = best(/^KAPPA,/u);
   if (!kappa) throw new Error('No kappa-matrix frames in the night.');
   const kappaTemplate = kappa.templateStart, kappaFrames = frames.filter(frame => /^KAPPA,/u.test(frame.dpType) && frame.templateStart === kappaTemplate);
   const firstKappa = time(kappaFrames[0]!.dpId);
-  const kappaDark = [...darks].reverse().find(frame => time(frame.dpId) < firstKappa && firstKappa - time(frame.dpId) < 2 * 60e3);
+  const kappaDark = [...darks].reverse().find(frame => time(frame.dpId) < firstKappa && firstKappa - time(frame.dpId) < 2 * 60e3 && sameSetup(frame));
   if (!kappaDark) throw new Error('The kappa-matrix frames have no dark just before them.');
   const lamp = best(/^FRINGE,LAMP$/u);
   if (!lamp) throw new Error('No FRINGE,LAMP spectral calibration in the night.');
@@ -127,9 +135,20 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const option = (name: string) => { const index = rest.indexOf(name); return index < 0 ? undefined : rest[index + 1]; };
   const target = option('--target'), from = option('--from'), to = option('--to');
   if (!work || !target || !from || !to) throw new TypeError('Usage: calibrate-pionier <work> --target <OBJECT> --from <ISO> --to <ISO> [--frames <csv>] [--raw <dir>] [--pipeline <prefix>] [--calib <dir>] [--yorick <bin>]');
-  // The night's calibrations may precede the window by hours: the query starts twelve hours earlier.
   const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'prog_id', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 36 * 3600e3).toISOString().slice(0, 19), new Date(Date.parse(`${to}Z`) + 24 * 3600e3).toISOString().slice(0, 19));
-  const plan = planPionierNight(parseRawFrames(csv), target, { from, to });
+  const frames = parseRawFrames(csv), window = { from, to }, headers = resolve(option('--raw') ?? resolve(work, 'raw'), 'headers');
+  // Setups from archive headers: each candidate block's and calibration set's first frame, and the darks just before kappa sets.
+  const firstOfTemplate = new Map<string, RawFrame>();
+  for (const frame of frames) if (/^(FRINGE,OBJECT|KAPPA,|FRINGE,LAMP)/u.test(frame.dpType) && !firstOfTemplate.has(`${frame.templateStart}/${frame.dpType}`)) firstOfTemplate.set(`${frame.templateStart}/${frame.dpType}`, frame);
+  const firsts = [...firstOfTemplate.values()];
+  const kappaStarts = firsts.filter(frame => frame.dpType.startsWith('KAPPA,')).map(frame => time(frame.dpId));
+  const nearKappa = frames.filter(frame => frame.dpType === 'DARK' && kappaStarts.some(start => start > time(frame.dpId) && start - time(frame.dpId) < 2 * 60e3));
+  const setups = new Map<string, string>();
+  for (const frame of [...firsts, ...nearKappa]) {
+    const header = await archiveHeader(frame.dpId, headers);
+    setups.set(frame.dpId, `${String(header['ESO INS OPTI2 NAME'])}/${String(header['ESO DET SUBWINS'])}`);
+  }
+  const plan = planPionierNight(frames, target, window, dpId => setups.get(dpId));
   await mkdir(work, { recursive: true });
   await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
   const overrides = { ...(option('--pipeline') ? { prefix: option('--pipeline')! } : {}), ...(option('--calib') ? { calib: option('--calib')! } : {}), ...(option('--yorick') ? { yorick: option('--yorick')! } : {}) };
