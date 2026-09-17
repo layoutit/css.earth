@@ -1,0 +1,15 @@
+---
+import Search from '@astrojs/starlight/components/Search.astro';
+import SiteTitle from './SiteTitle.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+---
+<div class="sb-header">
+  <!-- On wide screens this block sits over the sidebar, like Storybook's brand and search; there is no toolbar over the content. -->
+  <div class="sb-brand">
+    <div class="sb-brand-row">
+      <SiteTitle />
+      <div class="sb-brand-tools"><SocialIcons /></div>
+    </div>
+    <Search />
+  </div>
+</div>
