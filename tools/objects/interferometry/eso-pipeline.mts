@@ -49,14 +49,19 @@ export async function rawFrame(dpId: string, directory: string) {
   if (await exists(target)) return target;
   await mkdir(directory, { recursive: true });
   const download = `${target}.download`;
-  // The portal drops long transfers now and then; a whole file is fetched again, up to three times.
+  // The portal drops connections now and then, before or during a transfer; the whole request is repeated up to five times,
+  // waiting 5, 10, 20 and 40 seconds in between. Refusals (a proprietary frame, a missing one) are not repeated.
   for (let attempt = 1; ; attempt++) {
-    const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`);
-    if (response.status === 401) throw new Error(`${dpId} is still proprietary.`);
-    if (!response.ok || !response.body) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
-    try { await pipeline(Readable.fromWeb(response.body as never), createWriteStream(download)); break; } catch (error) {
-      if (attempt === 3) throw error;
+    const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`).catch((error: unknown) => error as Error);
+    if (!(response instanceof Error)) {
+      if (response.status === 401) throw new Error(`${dpId} is still proprietary.`);
+      if (response.status < 500 && (!response.ok || !response.body)) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
     }
+    const failure = response instanceof Error ? response : !response.ok || !response.body ? new Error(`${dpId}: the ESO data portal answered ${response.status}.`)
+      : await pipeline(Readable.fromWeb(response.body as never), createWriteStream(download)).then(() => undefined, (error: unknown) => error as Error);
+    if (!failure) break;
+    if (attempt === 5) throw failure;
+    await new Promise(done => setTimeout(done, 5000 * 2 ** (attempt - 1)));
   }
   // Raw frames arrive Unix-compressed (magic 1f 9d); processed calibration files (M.*) arrive as plain FITS.
   const magic = Buffer.alloc(2), handle = await open(download, 'r');
