@@ -58,6 +58,24 @@
           "pr": 293
         }
       ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "deferred",
+      "finding": "The same screen matched 59 bodies in the Keck archive, 22,641 rows; most are spectrograph and guider frames, but NIRC2 holds adaptive-optics imaging of several asteroids that carry no photograph here (Daphne, Camilla, Amphitrite, Egeria, Ariadne).",
+      "revisitWhen": "A Keck NIRC2 candidate from the screen is taken up.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
     }
   ]
 }
