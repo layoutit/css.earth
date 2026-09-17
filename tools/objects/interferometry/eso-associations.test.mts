@@ -161,9 +161,11 @@ test('GRAVITY calibrated from raw frames with the authors\' calibrator exposures
 });
 
 test('MATISSE calibrated from raw frames reproduces the IN-IN exposure of Drevon et al.\'s Betelgeuse file', async context => {
-  const oursPath = resolve(repository, 'output/calibration/betelgeuse-2020-02-08/calibrate-2020-02-08T00:06:12.142/TARGET_CAL_INT_0002.fits');
+  // The calibrated file of the first MATISSE run: the same recipes, default settings and frames the plan test above selects, run by
+  // hand before the tool existed (its target step also read the JSDC catalogue, which only a calibrator uses).
+  const oursPath = resolve(repository, 'output/calibration-probe/matisse/work/cal-oifits/TARGET_CAL_INT_0002.fits');
   const authorPath = resolve(repository, 'src/objects/betelgeuse/source/observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits');
-  if (!await present(oursPath, authorPath)) { context.skip('run calibrate-matisse.mts MATIS.2020-02-08T00:06:12.142 and restore the Betelgeuse sources to cover this'); return; }
+  if (!await present(oursPath, authorPath)) { context.skip('run calibrate-matisse.mts MATIS.2020-02-08T00:06:12.142 into that path and restore the Betelgeuse sources to cover this'); return; }
   const { ratios, closures } = await compareWithAuthor(oursPath, authorPath);
   for (const { key, median } of closures) context.diagnostic(`closure ${key}: median difference ${median.toFixed(2)} degrees`);
   assert.equal(ratios.length, 6);
