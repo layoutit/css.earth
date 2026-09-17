@@ -19,7 +19,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseCalibrationRecord, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
+import { continuumSelection, parseCalibrationRecord, parseContinuumRanges, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
 import { toolchainPath } from './toolchain.mts';
 
 export interface ImagingPlan {
@@ -28,7 +28,10 @@ export interface ImagingPlan {
   /** Pixel size in arcseconds; about a fifth of the beam keeps the point spread function sampled. */
   readonly cellArcseconds: number;
   readonly imageSize: number;
+  /** The spectral-window selection to image: the pipeline's line-free ranges when the delivery states them. */
   readonly spw: string;
+  /** Phase-only self-calibration tables from the delivery's auxiliary products, applied after the shipped calibration. */
+  readonly selfcalTables?: readonly string[];
 }
 
 const python = (value: string) => `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
@@ -67,7 +70,14 @@ export function restoreScript(options: {
     ...applications.map(application => `${applycalStatement(application, visibilities)}\nsteps.append('applycal ' + ${python(application.intent)})`),
     `split(vis=${python(visibilities)}, outputvis=${python(`${plan.target}.split.ms`)}, field=${python(plan.target)}, spw=${python(plan.spw)}, datacolumn='corrected', keepflags=False)`,
     "steps.append('split')",
-    `tclean(vis=${python(`${plan.target}.split.ms`)}, imagename=${python(imageBase)}, specmode='mfs', deconvolver='hogbom', gridder='standard', ` +
+    // The pipeline self-calibrates the target on itself before imaging; its solutions ship with the delivery.
+    ...((plan.selfcalTables ?? []).length === 0 ? ["steps.append('no self-calibration applied')"] : [
+      `applycal(vis=${python(`${plan.target}.split.ms`)}, gaintable=${pythonList([...plan.selfcalTables!])}, interp=['linearPD'], calwt=False, applymode='calonly', flagbackup=False)`,
+      `steps.append('self-calibration: ' + ${python(String((plan.selfcalTables ?? []).length))} + ' table(s)')`,
+      `split(vis=${python(`${plan.target}.split.ms`)}, outputvis=${python(`${plan.target}.selfcal.ms`)}, datacolumn='corrected', keepflags=False)`,
+      "steps.append('split after self-calibration')",
+    ]),
+    `tclean(vis=${python((plan.selfcalTables ?? []).length === 0 ? `${plan.target}.split.ms` : `${plan.target}.selfcal.ms`)}, imagename=${python(imageBase)}, specmode='mfs', deconvolver='hogbom', gridder='standard', ` +
       `imsize=${plan.imageSize}, cell=${python(`${plan.cellArcseconds}arcsec`)}, weighting='briggs', robust=0.5, niter=5000, ` +
       "threshold='0.5mJy', pbcor=True, interactive=False)",
     "steps.append('tclean')",
@@ -119,18 +129,35 @@ export async function restoreExecution(directory: string, plan: ImagingPlan) {
   run('tar', ['xzf', caltables, '-C', calibration], work);
   const flags = await findOne(unpacked, name => name.endsWith('.ms.flagversions.tgz'), 'flag version archive');
   run('tar', ['xzf', flags, '-C', calibration], work);
+  // The auxiliary products carry the line-free continuum ranges and the self-calibration solutions.
+  const products = resolve(work, 'auxproducts');
+  await mkdir(products, { recursive: true });
+  const auxproducts = await findOne(unpacked, name => name.endsWith('.auxproducts.tgz'), 'auxiliary product archive').catch(() => null);
+  if (auxproducts) run('tar', ['xzf', auxproducts, '-C', products], work);
   const staged = await readdir(calibration);
   const missing = requiredTables(applications).filter(table => !staged.includes(table));
   if (missing.length) throw new Error(`The calibration archive is missing ${missing.length} table(s) the record applies: ${missing[0]}`);
   const versions = await savedFlagVersions(calibration);
   const asdm = await findOne(unpacked, name => /^uid___A002_[0-9A-Za-z_]+$/u.test(name), 'raw ASDM directory', false);
   const visibilities = `${basename(asdm)}.ms`;
-  const script = restoreScript({ asdm, visibilities, applications, flagVersion: pipelineFlagVersion(versions), plan, imageBase: resolve(work, `${plan.target}.restored`) });
+  const continuum = await readFile(resolve(products, 'cont.dat'), 'utf8').then(text => {
+    const ranges = parseContinuumRanges(text).get(plan.target);
+    return ranges?.length ? continuumSelection(ranges) : null;
+  }, () => null);
+  const selfcal = await readdir(products, { withFileTypes: true }).then(entries => {
+    const directory = entries.find(entry => entry.isDirectory() && entry.name.startsWith('sc_workdir_'));
+    if (!directory) return [];
+    return readdir(resolve(products, directory.name), { withFileTypes: true })
+      .then(tables => tables.filter(table => table.isDirectory() && table.name.endsWith('.g')).map(table => resolve(products, directory.name, table.name)).sort());
+  }, () => []);
+  const resolved: ImagingPlan = { ...plan, spw: plan.spw || continuum || '', selfcalTables: plan.selfcalTables ?? selfcal };
+  const script = restoreScript({ asdm, visibilities, applications, flagVersion: pipelineFlagVersion(versions), plan: resolved, imageBase: resolve(work, `${plan.target}.restored`) });
   const scriptPath = resolve(work, 'restore.py');
   await writeFile(scriptPath, script);
   const casa = await toolchainPath('casa');
   run(resolve(casa, 'venv/bin/python'), [scriptPath], calibration);
-  return { script: scriptPath, image: resolve(work, `${plan.target}.restored.fits`), applications: applications.length };
+  return { script: scriptPath, image: resolve(work, `${plan.target}.restored.fits`), applications: applications.length,
+    continuum: resolved.spw, selfcalTables: (resolved.selfcalTables ?? []).length };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -144,5 +171,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     target: argument('target', 'R_Dor'), cellArcseconds: Number(argument('cell', '0.006')),
     imageSize: Number(argument('imsize', '512')), spw: argument('spw', ''),
   });
-  console.log(`Applied ${result.applications} calibration steps; image at ${result.image}`);
+  console.log(`Applied ${result.applications} calibration steps and ${result.selfcalTables} self-calibration table(s).`);
+  console.log(`Imaged ${result.continuum ? `the line-free selection ${result.continuum.slice(0, 60)}...` : 'every channel'}; image at ${result.image}`);
 }

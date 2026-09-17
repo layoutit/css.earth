@@ -40,6 +40,22 @@ test('the restore script performs import, flags, every application, split and im
   assert.ok(script.includes("if not os.path.exists('uid___A002_X1.ms'):"));
 });
 
+test('self-calibration and the line-free selection are used when the delivery carries them', async () => {
+  const applications = parseCalibrationRecord(await record());
+  const base = { asdm: '/raw/x', visibilities: 'x.ms', applications, flagVersion: 'Pipeline_Final', imageBase: '/work/x' };
+  const plain = restoreScript({ ...base, plan: { target: 'R_Dor', cellArcseconds: 0.0055, imageSize: 1024, spw: '' } });
+  assert.ok(plain.includes('no self-calibration applied'));
+  assert.ok(plain.includes("tclean(vis='R_Dor.split.ms'"), 'without self-calibration the split is imaged');
+  const withBoth = restoreScript({ ...base, plan: { target: 'R_Dor', cellArcseconds: 0.0055, imageSize: 1024,
+    spw: '25:455.38~455.65GHz,27:458.55~458.58GHz', selfcalTables: ['/aux/sc/a_p.g', '/aux/sc/b_p.g'] } });
+  assert.ok(withBoth.includes("spw='25:455.38~455.65GHz,27:458.55~458.58GHz'"), 'the split takes the line-free channels');
+  assert.ok(withBoth.includes("applymode='calonly'"), 'self-calibration corrects without flagging what it cannot solve');
+  assert.ok(withBoth.includes("tclean(vis='R_Dor.selfcal.ms'"), 'the self-calibrated data is what gets imaged');
+  // Self-calibration comes after the shipped calibration and before imaging.
+  assert.ok(withBoth.indexOf('/aux/sc/a_p.g') > withBoth.lastIndexOf("intent='"));
+  assert.ok(withBoth.indexOf('/aux/sc/a_p.g') < withBoth.indexOf('tclean('));
+});
+
 test('a run without a saved flag version says so instead of restoring one that is not there', async () => {
   const applications = parseCalibrationRecord(await record());
   const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications, flagVersion: null,
