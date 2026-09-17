@@ -1,4 +1,3 @@
-import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { Loader, LoaderContext } from 'astro/loaders';
@@ -8,6 +7,16 @@ import {
   OBJECTS_DIRECTORY, REPOSITORY, REPOSITORY_URL, formatBytes, groupObjects, isRecord, list, readJson, readObjects, text,
   type ObjectRecord,
 } from './objects.mts';
+
+/** The app that serves embedded scenes: the public site, or a local app server during development. */
+const APP_ORIGIN = appOrigin(process.env.CSSEARTH_APP_ORIGIN);
+
+function appOrigin(value: string | undefined) {
+  if (value === undefined || value === '') return SITE_ORIGIN;
+  const url = new URL(value);
+  if (!['http:', 'https:'].includes(url.protocol) || url.origin !== value.replace(/\/$/u, '')) throw new TypeError(`CSSEARTH_APP_ORIGIN must be a bare http(s) origin: ${value}`);
+  return url.origin;
+}
 
 const NOTE_GROUPS = [
   { status: 'unresolved', label: 'Unresolved' },
@@ -66,7 +75,6 @@ function articleData(object: ObjectRecord, discovery: unknown) {
     .flatMap(fact => { const label = text(fact.label), value = text(fact.value); return label && value ? [{ label, value }] : []; });
   const parsedDiscovery = discovery === undefined ? null : parseObjectDiscovery(discovery);
   const status = parsedDiscovery && !isDiscoveryAnchor({ classification: object.group }) ? discoveryDescription(parsedDiscovery) : null;
-  const image = resolve(REPOSITORY, `public/navigation/${object.id}-context.webp`);
   const sources = list(isRecord(manifest) ? manifest.inputs : null).filter(isRecord);
   return {
     title: object.title,
@@ -76,7 +84,6 @@ function articleData(object: ObjectRecord, discovery: unknown) {
     tableOfContents: false,
     object: {
       id: object.id, group: object.group, groupLabel: object.groupLabel, system: object.system, status, facts,
-      image: existsSync(image) ? `../../../public/navigation/${object.id}-context.webp` : undefined,
       maps: list(isRecord(minimaps) ? minimaps.images : null).length,
       openQuestions: list(isRecord(ledger) ? ledger.entries : null).filter(entry => isRecord(entry) && entry.status === 'unresolved').length,
       sourceFiles: sources.length,
@@ -84,6 +91,8 @@ function articleData(object: ObjectRecord, discovery: unknown) {
       runtimeSize: formatBytes(list(isRecord(runtime) ? runtime.assets : null).filter(isRecord)
         .reduce((sum, asset) => sum + (typeof asset.bytes === 'number' ? asset.bytes : 0), 0)),
       appUrl: object.catalogued ? `${SITE_ORIGIN}/${object.id}/` : undefined,
+      // The viewer is the app's own scene for this object, shown without its shell.
+      sceneUrl: object.catalogued ? `${APP_ORIGIN}/${object.id}/?embed` : undefined,
     },
   };
 }

@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 import { REPOSITORY_URL } from '../objects.mts';
 
@@ -34,7 +33,7 @@ const rows = object ? [
           {object.appUrl && <a class="sb-tool-button" href={object.appUrl}>Open in cssEarth</a>}
         </div>
         <div class="sb-canvas-stage">
-          {object.image ? <Image src={object.image} alt="" width={640} height={640} loading="eager" fetchpriority="high" /> : <p class="sb-canvas-empty">No preview image</p>}
+          {object.sceneUrl ? <iframe class="sb-scene" src={object.sceneUrl} title={`${title} scene`} loading="eager" allow="fullscreen"></iframe> : <p class="sb-canvas-empty">This object has no scene page.</p>}
           <a class="sb-canvas-source" href={`${REPOSITORY_URL}/tree/main/src/objects/${object.id}`}>Show package</a>
         </div>
       </figure>
