@@ -27,7 +27,9 @@ const FRAME_OPTIONAL = ['encoding', 'allowFiniteSigned', 'backgroundMaximum', 'b
 const BANDS = ['red', 'green', 'blue'] as const;
 type Band = typeof BANDS[number];
 // Raw detector frames through different filters and exposures need wide levels: Amalthea's Galileo frames measure 10.3 from their reference.
-const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 16, maximumLevelGain: 16, samplesPerTriangle: 'optional' };
+// A survey night repeats the same view minutes apart, and those repeats are what set the registration stage's noise floor, so they
+// are not redundant frames to be thinned: Themis contributes 30 over six nights.
+const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: 32, maximumLevelGain: 16, samplesPerTriangle: 'optional' };
 
 const diskBlock = shape({ model: text, weight: optional(number), referenceIncidenceDegrees: number, referenceEmissionDegrees: number,
   maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number });
