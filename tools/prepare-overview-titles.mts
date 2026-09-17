@@ -11,9 +11,14 @@ if (sha256(await readFile(fontPath)) !== recipe.sourceSha256) throw new Error('S
 const baseFont = fontkit.openSync(fontPath);
 if (!("getVariation" in baseFont)) throw new TypeError("The pinned overview font must be one font face.");
 const font = baseFont.getVariation({ wght: recipe.weight, opsz: recipe.opticalSize });
-const titles = Object.fromEntries([['solar-system', 'Solar System'], ['milky-way', 'Milky Way'], ['local-group', 'Local Group'], ['nearby-universe', 'Nearby Universe']].map(([id, label]) => {
+const title = (label: string) => {
   const source = createPlanetTitleSource(label, font);
-  return [id, { ...source, ...createPreparedTitleLayout(source) }];
-}));
+  return { ...source, ...createPreparedTitleLayout(source) };
+};
+const titles = Object.fromEntries([['milky-way', 'Milky Way'], ['local-group', 'Local Group'], ['nearby-universe', 'Nearby Universe']].map(([id, label]) => [id, title(label!)]));
+// Every planetary system's overview card, keyed by its star: the Solar System and each placed star's system.
+const { SCENE_OBJECTS } = await import('../site/objects.mts');
+const { allPlanetarySystems } = await import('../site/object-systems.mts');
+const systems = Object.fromEntries(allPlanetarySystems(SCENE_OBJECTS).map(system => [system.id, title(system.name)]));
 await writeFile(new URL('../site/prepared-overview-titles.mjs', import.meta.url),
-  `// Generated with the shared planet title recipe by tools/prepare-overview-titles.mts.\nexport const OVERVIEW_TITLES = ${JSON.stringify(titles)};\n`);
+  `// Generated with the shared planet title recipe by tools/prepare-overview-titles.mts.\nexport const OVERVIEW_TITLES = ${JSON.stringify(titles)};\nexport const SYSTEM_TITLES = ${JSON.stringify(systems)};\n`);

@@ -3,7 +3,7 @@ import { createContextSelectionPolicy } from './context-presentation-policy.js';
 import type { WorldContextPublication } from './world-context-frame.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { parsePreparedOrbitCenters } from './prepared-orbit-centers.js';
-import { createWorldContextPlanner, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context-planner.js';
+import { createSystemFade, createWorldContextPlanner, logarithmicFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context-planner.js';
 export { logarithmicFade } from './world-context-planner.js';
 import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import { screenPicking } from '../navigation/screen-picking.js';
@@ -499,6 +499,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   flightCircle.setAttribute('aria-hidden', 'true');
   root.appendChild(flightCircle);
   const planWorld = createWorldContextPlanner(plan, annotationPriorities);
+  const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const ownClock = opacityClock ?? createOpacityClock(windowTarget);
   const clock = ownClock;
@@ -589,8 +590,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           else if (!hoverIntent || rotationActive || navigationInFlight || !sameCamera(world, viewport)) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
         }
       }
-      const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
-      const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+      const opacity = systemFade.update(world.pose.positionM);
       // Publish the first zero-opacity frame normally to retire picking and
       // annotations. Later frames need only the anchor locator; its siblings
       // keep their prepared DOM without further visibility work.
@@ -771,9 +771,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (cameraChanged || rotationActive || navigationInFlight) settleHover();
       const view = preparedFrame ? null : readView(world, viewport);
       hoverIntent = false;
-      const opacity = preparedFrame?.opacity ?? 1 - logarithmicFade(
-        Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis])),
-        plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+      const opacity = preparedFrame?.opacity ?? systemFade.update(world.pose.positionM);
       const delta = preparedFrame && 'updates' in preparedFrame ? contextFrames.accept(preparedFrame) : null;
       if (!delta) contextFrames.invalidate();
       const frame = delta?.frame ?? (preparedFrame as Exclude<WorldContextPublication, { updates: unknown }> | undefined) ?? planWorld(view!);
@@ -973,7 +971,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           if (entry.orbitTransform !== orbitTransform) {
             entry.orbitRoot.style.transform = orbitTransform; entry.orbitTransform = orbitTransform;
           }
-          entry.orbitBounds = entry.orbit.centerBodyId === plan.focus.id && orbitVisibility > .1
+          entry.orbitBounds = systemFade.isSystemStar(entry.orbit.centerBodyId) && orbitVisibility > .1
             ? projected.orbitBounds : null;
           const navigable = orbitVisibility > 0.1 && !entry.orbitHidden;
           if (!navigationInFlight && !rotationActive && entry.orbitNavigable !== navigable) {

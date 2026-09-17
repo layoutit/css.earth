@@ -74,7 +74,7 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
     back() { if (index) { const entry = entries[--index]; location = new URL(entry.url); windowTarget.dispatchEvent(Object.assign(new Event('popstate'), { state: entry.state })); } },
     forward() { if (index + 1 < entries.length) { const entry = entries[++index]; location = new URL(entry.url); windowTarget.dispatchEvent(Object.assign(new Event('popstate'), { state: entry.state })); } },
   };
-  const object = (id: string, name = id): ObjectEntry => ({ kind: 'scene', id, name, systemName: name, classification: id === 'sun' ? 'star' : 'planet', color: '#000000', distance: testDistance(0), route: `/${id}/`, discovery: { featured: false, imagery: false, illustration: false }, description: name, loadScene: async () => factory(id), worldFrame: null });
+  const object = (id: string, name = id): ObjectEntry => ({ kind: 'scene', id, name, systemName: 'Solar System', classification: id === 'sun' ? 'star' : 'planet', color: '#000000', distance: testDistance(0), route: `/${id}/`, discovery: { featured: false, imagery: false, illustration: false }, description: name, loadScene: async () => factory(id), worldFrame: null });
   const objects = ['mercury', 'venus', 'earth'].map(id => object(id));
   if (withSun) objects.push(object('sun', 'Sun'));
   if (worldFrames) for (const object of objects) Object.assign(object, { worldFrame: worldFrames[object.id] });
@@ -439,7 +439,7 @@ test('entering overview on the current object changes selection without invoking
   assert.equal(source.value, initial);
   assert.equal(h.mounts.length, 1);
   assert.equal(h.router.state().selectedObjectId, null);
-  assert.equal(new URL(h.windowTarget.location.href).searchParams.get('overview'), 'solar-system');
+  assert.equal(new URL(h.windowTarget.location.href).searchParams.get('overview'), 'system');
   h.router.destroy();
 });
 
@@ -807,7 +807,7 @@ test('zooming out after first-click system framing restores the overview at the 
     await drain(h.router.settled);
     assert.equal(h.router.state().activeObjectId, 'sun');
     assert.equal(h.router.state().selectedObjectId, null);
-    assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+    assert.equal(h.windowTarget.location.searchParams.get('overview'), 'system');
     assert.equal(required(h.preparations.at(-1)).preserveView, true);
     assert.deepEqual(required(required(h.mounts.at(-1)).navigation).capture(), zoomedOut);
     assert.equal(h.writes.filter(write => write === 'push').length, 1, 'Automatic deselection replaces history');
@@ -827,7 +827,7 @@ test('a first Sun click frames the Solar System card, and a repeat opens the Sun
   h.shells[0].beginOverviewSelection = () => { overviewPreview = true; };
   await h.router.navigate('sun', { sceneSelection: true });
   assert.equal(h.preparations[0].targetWorldCamera, target);
-  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'system');
   assert.ok(overviewPreview);
   assert.ok(previews.includes(null), 'the system card does not emphasize the Sun marker');
   assert.equal(focuses.length, 0);
@@ -867,7 +867,7 @@ test('clicking the Sun from a galactic overview still frames its Solar System fi
   await h.router.navigate('sun', { sceneSelection: true });
   assert.equal(focuses[0].targetWorldCamera, target);
   assert.equal(h.router.state().overview, true);
-  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'system');
   h.router.destroy();
 });
 
@@ -944,20 +944,20 @@ test('overview breadcrumbs reframe, select the card, and retain separate history
   }, focus: async options => focused.push(options) });
   await h.router.settled;
   h.shells[0].beginOverviewSelection = scope => { previews.push(scope); return () => {}; };
-  assert.equal(clickRoute(h, 'https://example.test/sun/?overview=solar-system').defaultPrevented, true);
-  assert.deepEqual(previews, ['solar-system'], 'The card changes before the flight finishes');
+  assert.equal(clickRoute(h, 'https://example.test/sun/?overview=system').defaultPrevented, true);
+  assert.deepEqual(previews, ['system'], 'The card changes before the flight finishes');
   await h.router.settled;
   assert.equal(h.router.state().overview, true);
-  assert.deepEqual(h.preparations[0].targetWorldCamera, { scope: 'solar-system' });
+  assert.deepEqual(h.preparations[0].targetWorldCamera, { scope: 'system' });
   assert.deepEqual(h.preparations[0].targetFocusPositionM, [1, 2, 3]);
   clickRoute(h, 'https://example.test/sun/?overview=milky-way');
   await h.router.settled;
-  assert.deepEqual(scopes, ['solar-system', 'milky-way']);
+  assert.deepEqual(scopes, ['system', 'milky-way']);
   assert.deepEqual(focused[0].targetWorldCamera, {scope: 'milky-way'});
   assert.equal(h.router.state().selectedObjectId, null);
   assert.equal(h.entries.length, 3, 'Each ancestor is a distinct history destination');
   h.windowTarget.history.back(); await h.router.settled;
-  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'system');
   assert.equal(scopes.length, 2, 'Back restores its saved view without reframing');
   assert.equal(h.maxRendered(), 1);
   assert.deepEqual(h.errors, []);

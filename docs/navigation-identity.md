@@ -28,6 +28,33 @@ selection remain in the catalogue's `unpositionedHosts`, with a source reference
 and exclusion reason. They acquire no position or destination. The reader rejects
 missing hosts, duplicate identities and cycles, including self-hosting.
 
+## Planetary systems
+
+A planetary system is a star and every prepared body whose orbit chain leads
+back to it. The Solar System is the Sun's; WASP-43 and its planet WASP-43b form
+another. [`object-systems.mts`](../site/object-systems.mts) derives systems from
+the prepared world context and the registry, so no list names them. Every
+member shares its star's `systemName`, and the derivation fails otherwise. A
+star without orbiting bodies, such as Betelgeuse, belongs to no system.
+
+![The WASP-43 system overview: the star, WASP-43b and its orbit, with the system's card](images/wasp-43-system-overview.png)
+
+Each system has the same overview, `?overview=system` on its star's route:
+
+- Zooming out of a member past the system's exit distance opens that system's
+  overview, never another's. The Sun's exit is 100 AU; other systems scale it
+  by their prepared framing radius, so WASP-43's is 0.05 AU.
+- Approaching the star opens its card once its disc is 48 px wide and the zoom
+  has passed halfway from the system framing to the close-up.
+- Orbit lines, markers and labels fade with the camera's distance from their
+  own star.
+- Breadcrumbs, the overview card, its results and the Milky Way's Systems list
+  name the object's own system. The Milky Way, Local Group and Nearby Universe
+  are measured from the Sun and stay on its route.
+
+A star or body outside every system keeps its scene until the camera is as far
+from it as the Sun is, then hands off to the galactic scopes.
+
 ## Distances
 
 The navigation preparer publishes the displayed value, its unit and a common

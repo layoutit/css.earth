@@ -72,9 +72,9 @@ distance fading and explicit hidden-orbit settings still apply.
 Selecting a planet or moon keeps its planet and satellite family at normal
 brightness. Unrelated bodies, circles, captions and orbit lines use 25% of their
 normal strength nearby. That dimming eases away between half and twice the
-primary body's solar-orbit radius as the camera pulls back; moons use their
-planet's scale. Hover restores emphasis. The Solar System overview and Sun
-selection retain normal emphasis across the system. These paint multipliers do
+primary body's orbit radius as the camera pulls back; moons use their
+planet's scale. Hover restores emphasis. A planetary system's overview and its
+star's selection retain normal emphasis across the system. These paint multipliers do
 not decide label admission or navigation availability.
 
 ## Verification

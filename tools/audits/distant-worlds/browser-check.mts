@@ -71,12 +71,12 @@ try{
    }
   }
   if(dpr===1&&!defaultsOnly){
-   await page.goto(`${origin}/sun/?overview=solar-system`,{waitUntil:'networkidle'});
+   await page.goto(`${origin}/sun/?overview=system`,{waitUntil:'networkidle'});
    await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
    assert.equal(await page.locator('input[name="asteroidOrbits"]').isChecked(),false);
    const search=page.locator('.planet-sidebar-search');await search.fill('Solar System');
    await page.locator('[data-object-tab="trans-neptunian"]').click();
-   assert.equal(await page.locator('[data-solar-system-results]').evaluate(node=>node.scrollLeft),0,
+   assert.equal(await page.locator('[data-system-results]').evaluate(node=>node.scrollLeft),0,
     'Category overflow must scroll the tab row, not the whole card.');
    const entries=page.locator('.planet-object-results-scroll .planet-object-link:visible');
    assert.equal(await entries.count(),SCENE_OBJECTS.filter(o=>o.classification==='trans-neptunian').length);
