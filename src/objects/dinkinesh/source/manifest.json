@@ -258,8 +258,8 @@
     {
       "id": "dinkinesh-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1071,
-      "expectedSha256": "84049817cdcc133b9a5144f3580170a394994aa3462b109424c1b8f30d604c1b",
+      "expectedBytes": 1039,
+      "expectedSha256": "312370414eb69e74a4b7bc4657906cd4d3b9102d7db0ea2a8a5eebd0044bc225",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -276,8 +276,8 @@
     {
       "id": "dinkinesh-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "c14cbd72f51a57ba5b63df50709eb050dc4259a334c985a2768c5e819aa07ed7",
+      "expectedBytes": 188,
+      "expectedSha256": "03641c6bd9fcf54d622719eb53bc698db7cfe922bc8523e7e90d31b4c9a26dfd",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

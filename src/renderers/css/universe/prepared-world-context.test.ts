@@ -119,7 +119,7 @@ function plan(scale: number) {
   const front = point('mercury', 'Mercury', '#9d9388', [100, 0, 0], 1);
   const hidden = point('venus', 'Venus', '#d6aa69', [0, 0, -20], 1);
   return parsePreparedWorldContext({ schema: 'cssearth-world-context@1',
-    frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1], metersPerUnit: scale, bodyRadiusM: 10 * scale },
+    frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: scale, bodyRadiusM: 10 * scale },
     focus, bodies: [{ ...front, orbit: orbit([100, 0, 0], scale) }, { ...hidden, orbit: orbit([0, 0, -20], scale) }],
     camera: { minimumDistanceM: 12 * scale, maximumDistanceM: 10_000 * scale, framingReferenceZoom: 1, presentation },
     volume: { objectId: 'milky-way', fadeStartDistanceM: 100 * scale, fullDistanceM: 1_000 * scale }, system: { fadeOutStartDistanceM: scale, hiddenDistanceM: 1e30 * scale },
@@ -1536,8 +1536,8 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(mover(label).hidden).toBe(false); expect(mover(label).parentNode!.hidden).toBe(false);
   expect(annotationVisibility(label, 'label')).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(1);
   expect(annotationVisibility(locator, 'indicator')).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(1);
-  expect(billboardCenter(locator)).toEqual([70, -40]);
-  expect(captionPosition(label)).toEqual([52, -28]);
+  expect(billboardCenter(locator)).toEqual([70, 0]);
+  expect(captionPosition(label)).toEqual([52, 12]);
   expect(locator.dataset.objectNavigate).toBe('anchor');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
@@ -1627,9 +1627,10 @@ test('a moon label tries the other side when its first position overlaps the sel
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1);
   const parent = { ...base.bodies[0], name: 'Jupiter', radiusM: 7, positionM: [400, 0, 0], orbit: orbit([400, 0, 0], 1) };
-  const moon = { ...base.bodies[1], name: 'Ganymede', radiusM: .1, positionM: [326, 32, 0],
+  // Below the parent on screen: the identity pose has +y up, so the moon sits at -y.
+  const moon = { ...base.bodies[1], name: 'Ganymede', radiusM: .1, positionM: [326, -32, 0],
     orbit: { ...base.bodies[1].orbit, centerBodyId: parent.id, centerPositionM: parent.positionM,
-      verticesM: [[326,32,0], [400,150,0], [550,0,0], [400,-150,0], [250,0,0], [400,150,0], [550,0,0], [400,-150,0]] } };
+      verticesM: [[326,-32,0], [400,-150,0], [550,0,0], [400,150,0], [250,0,0], [400,-150,0], [550,0,0], [400,150,0]] } };
   const context = parsePreparedWorldContext({ ...base, bodies: [parent, moon] });
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite, venus: sprite} });

@@ -252,7 +252,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
         ...(traces ? [`${text(traces.directory)}/manifest.json`, `${text(traces.directory)}/${text(traces.archive)}`] : [])],
       features.landmarks ? 'Verify the pinned mission geography and coordinates; select region-interior points on the unchanged display mesh using the released categorical surface, or project cited coordinates onto that mesh. Retain source frames, placement limits and mission naming credits.' : 'Verify the pinned Gazetteer archive, decode its attribute table and datum, exclude the declared type codes, anchor each IAU centre point on the prepared body mesh, rank features by diameter and prepare each outline: a rim circle, the published extent, or mapped structural traces selected inside that extent.', {
         label: 'Named features', urls: [prefix + text(features.output)], lensIds: [],
-        interpretation: { kind: 'nomenclature-centre-points', mapLeftEdgeLongitudeDeg: features.mapLeftEdgeLongitudeDeg, excludedTypeCodes: features.excludedTypeCodes },
+        interpretation: { kind: 'nomenclature-centre-points', excludedTypeCodes: features.excludedTypeCodes },
       });
   }
   return { products, unresolved };

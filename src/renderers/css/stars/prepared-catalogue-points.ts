@@ -1,7 +1,7 @@
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { nativeProjectedLength } from '../rendering/native-projection.js';
 
@@ -97,7 +97,7 @@ export function mountPreparedCataloguePoints({ host, before, payload, createElem
     }
     latest = publication;
     const local = presentPhysicalPoseInVolume(world.pose, data.frame);
-    const rotation = transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw));
+    const rotation = cssViewFromOrientation(local.orientationXyzw);
     let visible = 0;
     // Perspective projection, inlined: no object per point, and only
     // changed visibility and transforms are written to the retained nodes.

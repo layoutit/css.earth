@@ -50,7 +50,7 @@ test('one viewport snapshot survives camera mounts and refreshes on layout chang
   const element = () => ({ style: {}, ownerDocument: { defaultView: { getComputedStyle: failRead } }, getBoundingClientRect: failRead });
   const camera = () => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null, viewport,
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
-      presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 },
+      presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
     stage: element(), cameraElement: element(), skyElement: element(), sceneElement: element(),
   } as unknown as Parameters<typeof createPerspectiveDolly>[0]);

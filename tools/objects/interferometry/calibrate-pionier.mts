@@ -19,9 +19,10 @@
  * from the pipeline's bundled JSDC catalogue. The result is one calibrated OIFITS file for the target. */
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, runRecipe } from './eso-pipeline.mts';
+import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, rawFrames, runRecipe } from './eso-pipeline.mts';
+import { findLostFringes, pairVisibilities, removeLostFringes } from './lost-fringes.mts';
 import { toolchainPath } from './toolchain.mts';
 
 export { rawFrame } from './eso-pipeline.mts';
@@ -99,8 +100,12 @@ export async function pipelinePaths(overrides: Partial<{ prefix: string; calib: 
   return { prefix, catalogue: resolve(calib, 'share/esopipes/datastatic/pionier-4.0.4/PI_GCAL_150501_FAINT.fits'), yorick };
 }
 
+/** Every raw frame a plan reads. */
+export const pionierPlanFrames = (plan: PionierPlan) => [plan.kappa.dark, ...plan.kappa.frames, plan.spectral, ...plan.blocks.flatMap(block => [block.dark, ...block.exposures])];
+
 export async function calibratePionier(plan: PionierPlan, rawDirectory: string, work: string, paths: PipelinePaths) {
   await mkdir(rawDirectory, { recursive: true }); await mkdir(work, { recursive: true });
+  await rawFrames(pionierPlanFrames(plan), rawDirectory);
   const eso = esoEnvironment(paths.prefix, resolve(work, 'home'), { PATH: `${paths.yorick}:${resolve(paths.prefix, 'bin')}:${process.env.PATH}`,
     PNDRS_DIR: resolve(paths.prefix, 'lib/pionier-4.0.4/pndrs'), PIONIER_PLUGIN_PATH: resolve(paths.prefix, 'lib/pionier-4.0.4') });
   const env = eso.env as NodeJS.ProcessEnv & { PNDRS_DIR: string };
@@ -130,6 +135,16 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
         [[await raw(exposure), 'FRINGE'], [dark, 'DARK_CALIBRATION'], [kappa, 'KAPPA_MATRIX'], [spectral, 'SPECTRAL_CALIBRATION'], [paths.catalogue, 'JSDC_CAT']]) });
     }
   }
+  // Baselines whose fringes were lost are removed before any averaging (lost-fringes.mts), and recorded beside the products.
+  const lost = findLostFringes(await Promise.all(oidata.map(async entry => ({ id: entry.file, object: plan.blocks[entry.block]!.object, block: entry.block, pairs: pairVisibilities(await readFile(entry.file)) }))));
+  for (const entry of oidata) {
+    const pairs = lost.get(entry.file);
+    if (!pairs) continue;
+    const removed = resolve(dirname(entry.file), 'lost-fringes-removed.fits');
+    await writeFile(removed, removeLostFringes(await readFile(entry.file), pairs).bytes);
+    entry.file = removed;
+  }
+  await writeFile(resolve(work, 'lost-fringes.json'), `${JSON.stringify(Object.fromEntries([...lost].map(([file, pairs]) => [relative(work, dirname(file)), pairs])), null, 2)}\n`);
   // pndrs reads at most 15 files per argument (PNDRS_FILE_LIMIT), and a service-mode night holds more. Whole blocks are
   // grouped up to that limit; each calibrator group gives one transfer-function file, and every science group is calibrated against
   // all of them, so the transfer function is still interpolated across the night.
@@ -162,13 +177,12 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
   return calibratedFiles;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [work, ...rest] = process.argv.slice(2);
-  const option = (name: string) => { const index = rest.indexOf(name); return index < 0 ? undefined : rest[index + 1]; };
-  const target = option('--target'), from = option('--from'), to = option('--to');
-  if (!work || !target || !from || !to) throw new TypeError('Usage: calibrate-pionier <work> --target <OBJECT> --from <ISO> --to <ISO> [--frames <csv>] [--raw <dir>] [--pipeline <prefix>] [--calib <dir>] [--yorick <bin>]');
-  const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'prog_id', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 36 * 3600e3).toISOString().slice(0, 19), new Date(Date.parse(`${to}Z`) + 24 * 3600e3).toISOString().slice(0, 19));
-  const frames = parseRawFrames(csv), window = { from, to }, headers = resolve(option('--raw') ?? resolve(work, 'raw'), 'headers');
+/** Plan and calibrate one observing window: the raw table from 36 hours before to 24 after, each candidate's setup from its archive
+ * header, the plan written beside the products. Returns the calibrated files. */
+export async function calibratePionierWindow(work: string, target: string, from: string, to: string, rawDirectory: string,
+  { frames: framesCsv, overrides = {} }: { frames?: string; overrides?: Partial<{ prefix: string; calib: string; yorick: string }> } = {}) {
+  const csv = framesCsv ?? await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'prog_id', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 36 * 3600e3).toISOString().slice(0, 19), new Date(Date.parse(`${to}Z`) + 24 * 3600e3).toISOString().slice(0, 19));
+  const frames = parseRawFrames(csv), headers = resolve(rawDirectory, 'headers');
   // Setups from archive headers: each candidate block's and calibration set's first frame, and the darks just before kappa sets.
   const firstOfTemplate = new Map<string, RawFrame>();
   for (const frame of frames) if (/^(FRINGE,OBJECT|KAPPA,|FRINGE,LAMP)/u.test(frame.dpType) && !firstOfTemplate.has(`${frame.templateStart}/${frame.dpType}`)) firstOfTemplate.set(`${frame.templateStart}/${frame.dpType}`, frame);
@@ -180,10 +194,18 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const header = await archiveHeader(frame.dpId, headers);
     setups.set(frame.dpId, `${String(header['ESO INS OPTI2 NAME'])}/${String(header['ESO DET SUBWINS'])}`);
   }
-  const plan = planPionierNight(frames, target, window, dpId => setups.get(dpId));
+  const plan = planPionierNight(frames, target, { from, to }, dpId => setups.get(dpId));
   await mkdir(work, { recursive: true });
   await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
+  return { plan, files: await calibratePionier(plan, rawDirectory, work, await pipelinePaths(overrides)) };
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const [work, ...rest] = process.argv.slice(2);
+  const option = (name: string) => { const index = rest.indexOf(name); return index < 0 ? undefined : rest[index + 1]; };
+  const target = option('--target'), from = option('--from'), to = option('--to');
+  if (!work || !target || !from || !to) throw new TypeError('Usage: calibrate-pionier <work> --target <OBJECT> --from <ISO> --to <ISO> [--frames <csv>] [--raw <dir>] [--pipeline <prefix>] [--calib <dir>] [--yorick <bin>]');
   const overrides = { ...(option('--pipeline') ? { prefix: option('--pipeline')! } : {}), ...(option('--calib') ? { calib: option('--calib')! } : {}), ...(option('--yorick') ? { yorick: option('--yorick')! } : {}) };
-  const calibratedFiles = await calibratePionier(plan, option('--raw') ?? resolve(work, 'raw'), work, await pipelinePaths(overrides));
-  console.log(`${calibratedFiles.join(', ')}: ${plan.blocks.filter(block => block.role === 'science').length} science and ${plan.blocks.filter(block => block.role === 'calibrator').length} calibrator blocks.`);
+  const { plan, files } = await calibratePionierWindow(work, target, from, to, option('--raw') ?? resolve(work, 'raw'), { ...(option('--frames') ? { frames: await readFile(option('--frames')!, 'utf8') } : {}), overrides });
+  console.log(`${files.join(', ')}: ${plan.blocks.filter(block => block.role === 'science').length} science and ${plan.blocks.filter(block => block.role === 'calibrator').length} calibrator blocks.`);
 }

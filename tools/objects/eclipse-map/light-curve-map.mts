@@ -7,6 +7,7 @@
  * eq. 8, over a band), so the temperature is the T at which the two agree. Photon counting enters through C_i: a measured count
  * spectrum already carries it, and a filter curve is weighted by lambda. */
 import type { HostedOrbit } from '@cssearth/astronomy';
+import type { LightTravel } from './phase-curve.mts';
 import { continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap, planckRadiance, type EigenBasis, type EigenFit } from './eigenmap-fit.mts';
 
 export interface LightCurve { readonly time: Float64Array; readonly flux: Float64Array; readonly error: Float64Array; readonly columns: ReadonlyMap<string, Float64Array> }
@@ -25,12 +26,14 @@ export interface FitRecipe {
   readonly gridHeight: number;
 }
 
-/** Fits the map, choosing the model by BIC. Linear systematics are columns; an exponential ramp's time constant is profiled over
- * its grid by chi-squared on the simplest candidate (lowest degree, fewest eigencurves) and then held for every candidate. Time-like columns start at the first sample; other columns are centred on their median over the fitted
+/** Fits the map, choosing the model by BIC. Linear systematics are columns; an exponential ramp's time constant is profiled by
+ * chi-squared on the most flexible candidate (highest degree, most eigencurves), over its grid and then refined, and held for every
+ * candidate while the model is chosen; the chosen model's own time constant is then refined the same way. Profiling uses the
+ * unconstrained fit; the candidates and the final map keep positivity. Time-like columns start at the first sample; other columns are centred on their median over the fitted
  * samples. Models within 2 of the lowest BIC are not distinguished by the data, so the one with fewest parameters, then the
  * lowest degree, is taken. */
 export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number },
-  planetRadiusStellarRadii: number) {
+  planetRadiusStellarRadii: number, lightTravel: LightTravel = {}) {
   const n = curve.time.length;
   if (![curve.flux, curve.error].every(values => values.length === n) || [...curve.columns.values()].some(values => values.length !== n)) throw new RangeError('Light-curve columns must share one length.');
   if (!recipe.degrees.length || !recipe.eigencurves.length || [...recipe.degrees, ...recipe.eigencurves].some(v => !Number.isSafeInteger(v) || v < 1)) throw new RangeError('Candidate degrees and eigencurve counts must be positive whole numbers.');
@@ -54,14 +57,35 @@ export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: Ho
   });
   const taus = ramps.length ? ramps[0]!.timeConstantsDays : [null];
   const degrees = [...recipe.degrees].sort((a, b) => a - b), counts = [...recipe.eigencurves].sort((a, b) => a - b);
-  const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time)]));
+  const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time, lightTravel)]));
   const fitWith = (basis: EigenBasis, count: number, tau: number | null) => fitEigenmap(basis, count, flux, error, () => true, { positive: recipe.positive, systematics: columns(tau) });
+  // Profiling the ramp uses the unconstrained linear fit, which is fast; the candidates and the final map keep positivity.
+  const profileChi = (basis: EigenBasis, count: number, tau: number | null) => fitEigenmap(basis, count, flux, error, () => true, { positive: false, systematics: columns(tau) }).chiSquared;
+  // The ramp's time constant trades against the map's longitude (about 1 degree between 0.08 and 0.16 days on WASP-43b's MIRI
+  // curve), so a grid is only a start: the best grid value is refined by golden-section search in log time between its neighbours.
+  const refine = (basis: EigenBasis, count: number, start: number | null) => {
+    if (start === null || taus.length < 2) return start;
+    const sorted = [...taus as number[]].sort((a, b) => a - b), at = sorted.indexOf(start);
+    let low = Math.log(sorted[Math.max(0, at - 1)]!), high = Math.log(sorted[Math.min(sorted.length - 1, at + 1)]!);
+    const chi = (logTau: number) => profileChi(basis, count, Math.exp(logTau)), ratio = (Math.sqrt(5) - 1) / 2;
+    let a = high - ratio * (high - low), b = low + ratio * (high - low), fa = chi(a), fb = chi(b);
+    // Stop at 1% in the time constant: about 0.02 degrees of longitude.
+    while (high - low > 0.01) {
+      if (fa < fb) { high = b; b = a; fb = fa; a = high - ratio * (high - low); fa = chi(a); }
+      else { low = a; a = b; fa = fb; b = low + ratio * (high - low); fb = chi(b); }
+    }
+    const refined = Math.exp((low + high) / 2);
+    return chi(Math.log(refined)) <= profileChi(basis, count, start) ? refined : start;
+  };
+  // The shared time constant comes from the most flexible candidate: a model too simple to fit the planet would bend the ramp to
+  // absorb what it misses.
+  const flexible = bases.get(degrees[degrees.length - 1]!)!, flexibleCount = [...counts].reverse().find(c => c <= flexible.curves.length);
+  if (flexibleCount === undefined) throw new RangeError('No candidate eigencurve count fits the highest degree.');
   let tau: number | null = taus[0]!;
   if (taus.length > 1) {
-    const simplest = bases.get(degrees[0]!)!, count = counts.find(c => c <= simplest.curves.length);
-    if (count === undefined) throw new RangeError('No candidate eigencurve count fits the lowest degree.');
     let lowest = Infinity;
-    for (const candidate of taus) { const chi = fitWith(simplest, count, candidate).chiSquared; if (chi < lowest) { lowest = chi; tau = candidate; } }
+    for (const candidate of taus) { const chi = profileChi(flexible, flexibleCount, candidate); if (chi < lowest) { lowest = chi; tau = candidate; } }
+    tau = refine(flexible, flexibleCount, tau);
   }
   const candidates: { basis: EigenBasis; fit: EigenFit; tau: number | null }[] = [];
   for (const degree of degrees) {
@@ -74,7 +98,12 @@ export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: Ho
   }
   if (!candidates.length) throw new Error('No candidate model fits with positive emission.');
   const lowest = Math.min(...candidates.map(c => c.fit.bic));
-  const chosen = candidates.filter(c => c.fit.bic <= lowest + 2).sort((a, b) => a.fit.parameters - b.fit.parameters || a.basis.lmax - b.basis.lmax || a.fit.bic - b.fit.bic)[0]!;
+  const selected = candidates.filter(c => c.fit.bic <= lowest + 2).sort((a, b) => a.fit.parameters - b.fit.parameters || a.basis.lmax - b.basis.lmax || a.fit.bic - b.fit.bic)[0]!;
+  // The chosen model gets its own time constant, refined from the shared one within the grid's neighbours of the nearest grid value.
+  const nearest = selected.tau === null ? null : (taus as number[]).reduce((best, value) => Math.abs(Math.log(value / selected.tau!)) < Math.abs(Math.log(best / selected.tau!)) ? value : best);
+  const ownTau = selected.tau === null ? null : refine(selected.basis, selected.fit.ncurves, nearest);
+  const ownFit = ownTau === null ? selected.fit : fitWith(selected.basis, selected.fit.ncurves, ownTau);
+  const chosen = ownFit.chiSquared <= selected.fit.chiSquared && (!recipe.positive || ownFit.positive) ? { ...selected, fit: ownFit, tau: ownTau } : selected;
   return { basis: chosen.basis, fit: chosen.fit, rampTimeConstantDays: chosen.tau, samples: keep.length, hotspot: continuousHotspot(chosen.basis, chosen.fit, 0.05),
     candidates: candidates.map(c => ({ degree: c.basis.lmax, eigencurves: c.fit.ncurves, chiSquared: c.fit.chiSquared, bic: c.fit.bic, rampTimeConstantDays: c.tau })) };
 }
@@ -151,4 +180,19 @@ export function hemisphereTemperature(basis: EigenBasis, fit: EigenFit, table: R
     if (mu > 0) flux += intensity[c]! * mu * Math.cos(latitude) * cell;
   }
   return { flux, temperature: table.temperature(flux / Math.PI, planetRadiusStellarRadii, fit.stellarCorrection) };
+}
+
+/** The longitudinal offset as Hammond et al. (2024) define it: the longitude maximising the flux map integrated over latitude with
+ * weight cos(latitude), searched from -90 to +90 degrees in `stepDegrees`, on a 0.5 degree latitude grid. A phase curve's peak
+ * offset is the comparable quantity; the map's own hottest point can sit elsewhere when the map is not symmetric about the equator. */
+export function meridionalOffset(basis: EigenBasis, fit: EigenFit, stepDegrees = 0.05) {
+  const latitudes = Array.from({ length: 360 }, (_, i) => -89.75 + i * 0.5), weights = latitudes.map(latitude => Math.cos(latitude * Math.PI / 180));
+  let best = -Infinity, offset = 0;
+  const count = Math.round(180 / stepDegrees);
+  for (let k = 0; k <= count; k++) {
+    const longitude = -90 + k * stepDegrees, values = evaluateFit(basis, fit, latitudes, latitudes.map(() => longitude));
+    let sum = 0; for (let i = 0; i < latitudes.length; i++) sum += values[i]! * weights[i]!;
+    if (sum > best) { best = sum; offset = longitude; }
+  }
+  return offset;
 }

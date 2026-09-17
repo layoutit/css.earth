@@ -15,7 +15,8 @@ test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its cont
   // Three exposures of the visit, each split into ten segments.
   assert.deepEqual(pinned.segments.map(segment => /_(\d{5})-seg(\d{3})_/u.exec(segment.name)!.slice(1).join('/')), ['00001', '00002', '00003'].flatMap(exposure => Array.from({ length: 10 }, (_, i) => `${exposure}/${String(i + 1).padStart(3, '0')}`)));
   assert.equal(pinned.crdsContext, 'jwst_1535.pmap');
-  assert.match(pinned.oracle.sha256, /^[0-9a-f]{64}$/u);
+  assert.equal(pinned.oracle.kind, 'eureka-light-curve-zip');
+  if (pinned.oracle.kind === 'eureka-light-curve-zip') assert.match(pinned.oracle.sha256, /^[0-9a-f]{64}$/u);
   for (const template of Object.values(pinned.stages)) {
     const text = await readFile(resolve(program, template), 'utf8');
     assert.doesNotMatch(text, /\/Users\//u, `${template} carries no local path`);
@@ -26,6 +27,25 @@ test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its cont
   assert.match(await readFile(resolve(program, pinned.stages.S4slices!), 'utf8'), /^wave_input\s+PROGRAM_DIRECTORY\/slices\.txt/mu);
   // One worker: two Stage 1 processes or a multi-core ramp fit would not fit in memory.
   assert.match(await readFile(resolve(program, pinned.stages.S1), 'utf8'), /^maximum_cores\s+'none'/mu);
+});
+
+test('the HD 189733b MIRI eclipses pin their segments, Lally et al.\'s extraction choices and their deposit files by md5', async () => {
+  for (const [observation, eclipse, files] of [['002', 1, 5], ['011', 2, 4]] as const) {
+    const directory = resolve(import.meta.dirname, `programs/hd-189733b-miri-2021-${observation}`), pinned = await readProgram(directory);
+    assert.equal(pinned.segments.length, 7);
+    assert.ok(pinned.segments.every(segment => segment.name.startsWith(`jw02021${observation}001_04103_00001-seg`)));
+    assert.equal(pinned.segments.reduce((sum, segment) => sum + segment.bytes, 0), 6_379_456_320);
+    assert.equal(pinned.oracle.kind, 'deposit-files');
+    if (pinned.oracle.kind !== 'deposit-files') return;
+    assert.equal(pinned.oracle.files.length, files);
+    assert.match(pinned.oracle.time, new RegExp(`^Eureka_eclipse${eclipse}_8mu_clipped-time\\.txt$`, 'u'));
+    assert.equal(pinned.oracle.map, 'output_E.npy');
+    const s3 = await readFile(resolve(directory, pinned.stages.S3), 'utf8'), s4 = await readFile(resolve(directory, pinned.stages.S4), 'utf8');
+    // A linear background outside a 24-pixel aperture, and the Spitzer 8 um band (Lally et al. 2025, section II.2).
+    assert.match(s3, /^bg_hw\s+12\b/mu); assert.match(s3, /^bg_deg\s+1\b/mu);
+    assert.match(s4, /^wave_min\s+6\.37\b/mu); assert.match(s4, /^wave_max\s+9\.43\b/mu);
+  }
+  await assert.rejects(readProgram(resolve(import.meta.dirname, 'programs/does-not-exist')));
 });
 
 test('rendering a control file sets its directories and keeps every other line', () => {
@@ -78,3 +98,22 @@ test('the WASP-43b MIRI reduction from raw reproduces Bell et al. (2024)\'s Eure
     if (index < 10) assert.ok(result.correlation >= 0.9, `${name}: correlation ${result.correlation}`);
   }
 });
+
+test('the HD 189733b MIRI eclipses reduced from raw reproduce Lally et al. (2025)\'s Eureka! light curves', async context => {
+  for (const observation of ['002', '011']) {
+    const curves = resolve(repository, `output/jwst/hd-189733b-miri-2021-${observation}/light-curves`);
+    if (!await access(resolve(curves, 'author-white.csv')).then(() => true, () => false)) {
+      context.diagnostic(`run node tools/objects/jwst/reduce-tso.mts tools/objects/jwst/programs/hd-189733b-miri-2021-${observation} output/jwst/hd-189733b-miri-2021-${observation} to cover observation ${observation}`);
+      continue;
+    }
+    const read = async (name: string) => parseLightCurve(await readFile(resolve(curves, name), 'utf8'));
+    const result = compareLightCurves(await read('ours-white.csv'), await read('author-white.csv'));
+    context.diagnostic(`observation ${observation}: ${JSON.stringify(result)}`);
+    // Measured 2026-09-17: 17,019 and 17,024 pairs, correlation 0.988 and 0.985, 245 and 249 ppm after the drift. The deposit is
+    // outlier-clipped, so its scatter (330 and 327 ppm) is below ours (352 and 355 ppm).
+    assert.ok(result.paired >= 16_500, `${result.paired} pairs`);
+    assert.ok(result.correlation >= 0.98, `correlation ${result.correlation}`);
+    assert.ok(result.detrendedDifferencePpm <= 300, `detrended difference ${result.detrendedDifferencePpm} ppm`);
+  }
+});
+

@@ -204,8 +204,8 @@
     {
       "id": "deimos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1170,
-      "expectedSha256": "a506a4444aefd96a26db378ff62c80c4f35ef86f6ce0234d1519a939bd73c30f",
+      "expectedBytes": 1138,
+      "expectedSha256": "c4eba8cf9661a8275ce0d6754fee100b70bb1c16c9b0d61af6d8e94ac7b9ba2b",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -222,8 +222,8 @@
     {
       "id": "deimos-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
+      "expectedBytes": 185,
+      "expectedSha256": "4425ba76faafd30b12bccb8ecaa34564ed43fe240c4d4cd5ff0e68d3b9d4e354",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

@@ -5,7 +5,7 @@ import type { PreparedWorldCameraFrame } from './world-camera.js';
 import type { SharedView } from './view-url.js';
 
 const frame: PreparedWorldCameraFrame = { referenceFrame: 'world', epochJdTt: 1,
-  originM: [1e8, -2e7, 3e9], presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 100, bodyRadiusM: 1000 };
+  originM: [1e8, -2e7, 3e9], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 100, bodyRadiusM: 1000 };
 const viewport = { focalPixels: 1000, principalOffsetPixels: [-170,0] as const };
 test('Back resolves translated camera coordinates before its flight, including arbitrary roll', () => {
   const saved: SharedView = { preparedEpochJdTt: 1,

@@ -179,13 +179,14 @@ export function reproducibility(realA: Float64Array, spotlessA: Float64Array, re
   return { correlation: comparison.correlation, residualRmsA: comparison.realRms, residualRmsB: comparison.spotlessRms, pixels: comparison.pixels };
 }
 
-const plane = async (path: string): Promise<ReconstructionPlane> => {
+/** A reconstruction's first plane and pixel scale, as the spot maps read it. */
+export const readReconstructionPlane = async (path: string): Promise<ReconstructionPlane> => {
   const image = readReconstruction(await readFile(path));
   return { width: image.width, height: image.height, values: image.values, pixelMas: image.axes.scale[0] };
 };
 
 export async function compareReconstructions(realPath: string, spotlessPath: string, diameterMas: number, beamMas: number) {
-  const [real, spotless] = await Promise.all([plane(realPath), plane(spotlessPath)]);
+  const [real, spotless] = await Promise.all([readReconstructionPlane(realPath), readReconstructionPlane(spotlessPath)]);
   if (real.width !== spotless.width || real.height !== spotless.height || real.pixelMas !== spotless.pixelMas) throw new TypeError('Reconstruct the spotless file on the real image\'s grid.');
   return compareSpotMaps(spotMap(real, diameterMas, beamMas), spotMap(spotless, diameterMas, beamMas));
 }
@@ -211,7 +212,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       : `Verdict: the real image carries structure beyond the coverage artefacts (ratio ${SPOT_CONTRAST_RATIO} or more); give --chi2 and --halves-correlation (from reproduce) for the full verdict.`);
   } else if (mode === 'reproduce' && first && second && rest.length >= 2 && diameterMas !== undefined && option('--beam-mas') !== undefined) {
     const [thirdPath, fourthPath] = rest as [string, string];
-    const maps = await Promise.all([first, second, thirdPath, fourthPath].map(async path => spotMap(await plane(path), diameterMas, option('--beam-mas')!)));
+    const maps = await Promise.all([first, second, thirdPath, fourthPath].map(async path => spotMap(await readReconstructionPlane(path), diameterMas, option('--beam-mas')!)));
     const result = reproducibility(maps[0]!, maps[1]!, maps[2]!, maps[3]!);
     console.log(`Spots beyond the spotless twins: rms ${(result.residualRmsA * 100).toFixed(2)}% and ${(result.residualRmsB * 100).toFixed(2)}%; correlation between the halves ${result.correlation.toFixed(2)} (limit ${REPRODUCIBILITY_CORRELATION}).`);
   } else {

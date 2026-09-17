@@ -269,8 +269,8 @@
     {
       "id": "pluto-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1212,
-      "expectedSha256": "e3b8d6d6c9d3132108b3505292c74a6a41a3af95f0c65503d06d99840ca6d2b3",
+      "expectedBytes": 1180,
+      "expectedSha256": "bc8a0b48502cd5a5bf020cad3dea7f103afdea45c33b153badf7183239d61b10",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -287,8 +287,8 @@
     {
       "id": "pluto-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "3fbd8649a9ae4e41027a8fb1f52cdc0cadd18b61d39f77a3f17147336e146c7f",
+      "expectedBytes": 184,
+      "expectedSha256": "8a14c713df0b84ed59656ba16775028465bcbf7ff3390d169a08204c6fc08078",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
