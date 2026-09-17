@@ -109,3 +109,18 @@ test('AMBER seasons carry sourced calibrator diameters, and GRAVITY and MATISSE 
   assert.equal(nights !== undefined, true);
   assert.throws(() => parseSeason({ ...base, instrument: 'gravity' }));
 });
+
+test('the π¹ Gruis season from the author file is cast and reproduces the shipped image', async t => {
+  const verdictPath = resolve(repository, 'output/stars/pi1-gruis-author-file/verdict.json');
+  if (!await access(verdictPath).then(() => true, () => false)) return t.skip('run image-star.mts on the season with --calibrated PI_GRU_forImage.fits first');
+  const result = JSON.parse(await readFile(verdictPath, 'utf8')) as {
+    verdict: { cast: boolean; reasons: string[] }; fit: { season: { vis2: number; closurePhase: number } }; spots: { ratio: number }; halves: { correlation: number };
+    comparison: { calibrated: { medianSigma: number }; imageCorrelation: number };
+  };
+  assert.ok(result.verdict.cast, result.verdict.reasons.join('; '));
+  // The fit SQUEEZE reported for the shipped image, from the same file and recipe.
+  assert.deepEqual([result.fit.season.vis2, result.fit.season.closurePhase], [2.45, 1.06]);
+  assert.ok(result.spots.ratio > 5 && result.halves.correlation > 0.9, `ratio ${result.spots.ratio}, halves ${result.halves.correlation}`);
+  assert.equal(result.comparison.calibrated.medianSigma, 0);
+  assert.ok(result.comparison.imageCorrelation > 0.999, `image correlation ${result.comparison.imageCorrelation}`);
+});

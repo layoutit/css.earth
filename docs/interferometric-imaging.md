@@ -43,6 +43,8 @@ The command then:
 
 It writes `verdict.json` and prints "cast" or "not cast, because" with the reasons. Stages are kept: calibration steps are reused while their inputs are unchanged, and a SQUEEZE run is reused only while its data, start image and recipe hash the same.
 
+`--calibrated <oifits>` skips the calibration and runs stages 2 to 7 on given files. On π¹ Gruis's season with the file Paladini et al. imaged from, the command gives the shipped image again (correlation 1.000 after convolution to the 2.10 mas beam), the same fit (2.45 and 1.06), spot ratio 5.38 and halves correlation 0.94: cast. The table below has 5.22 and 0.95 for the same file from hand runs whose spotless twins were drawn differently (their closure phases differ by up to 33 degrees). A twin's halves are the halves of the season's twin.
+
 Error floors raise squared-visibility errors to a fraction of the value and closure-phase errors to a number of degrees, and never lower an error. Raw calibration states the scatter within a block, which misses the calibration error between blocks and nights. The file Paladini et al. imaged π¹ Gruis from carries 5 percent and 2 degrees on every point.
 
 ## Toolchains
