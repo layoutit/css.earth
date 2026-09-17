@@ -1,8 +1,18 @@
 /** Squared visibilities and closure phases an image predicts, and the reduced chi-squared against measured rows. The transform is
  * the optical-interferometry convention: V(u,v) = sum I(x,y) exp(-2 pi i (u alpha + v delta) / lambda) with alpha toward east
  * (decreasing column when east is on the left) and delta toward north (increasing row from the bottom in FITS order). */
+import type { SkyImageAxes } from '../../fits-sky.mts';
+
 export interface ImagePlane { readonly width: number; readonly height: number; readonly values: ArrayLike<number>; readonly pixelMas: number; readonly eastLeft: boolean }
 const MAS_RAD = Math.PI / 180 / 3.6e6;
+
+/** A reconstruction in FITS order as the transform reads it, with east taken from its stated axes. Rows must run north and pixels
+ * must be square, as they are for every reconstruction code this route reads. */
+export function reconstructionPlane(image: { readonly width: number; readonly height: number; readonly values: ArrayLike<number>; readonly axes: SkyImageAxes }): ImagePlane {
+  const { width, height, values, axes } = image;
+  if (!axes.northUp || axes.scale[0] !== axes.scale[1]) throw new TypeError('A reconstruction plane needs rows running north and square pixels.');
+  return { width, height, values, pixelMas: axes.scale[0], eastLeft: !axes.eastRight };
+}
 
 /** Complex visibility of the image at a spatial frequency (u, v) in metres and a wavelength in metres. */
 export function visibility(image: ImagePlane, u: number, v: number, wavelength: number): [number, number] {

@@ -181,9 +181,7 @@ export function reproducibility(realA: Float64Array, spotlessA: Float64Array, re
 
 const plane = async (path: string): Promise<ReconstructionPlane> => {
   const image = readReconstruction(await readFile(path));
-  const pixelMas = Math.abs(Number(image.cards.find(([key]) => key === 'CDELT1')?.[1]));
-  if (!(pixelMas > 0)) throw new Error(`${path} states no pixel scale.`);
-  return { width: image.width, height: image.height, values: image.values, pixelMas };
+  return { width: image.width, height: image.height, values: image.values, pixelMas: image.axes.scale[0] };
 };
 
 export async function compareReconstructions(realPath: string, spotlessPath: string, diameterMas: number, beamMas: number) {
