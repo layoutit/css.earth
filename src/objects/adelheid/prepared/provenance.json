@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a2452a210a486dd7e67bef576530f81204f9afd40d92c8cd16f334d4081bd492"
+    "sha256": "3894ad353567d29412874b5a7c761871571992f90c55471ae5d8d3ae5bf7a723"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8d44781ba83833c2300f89e2fb8d2b7dec6ece18587c8b6763a7fcb818106cad",
+      "sha256": "3a60ac2188fa275d5ec5a0909431ad587239f54eac0383c768583901cb10b30f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 52,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/adelheid/adelheid-shape-surface@2x.webp",
           "polesUrl": "/scenes/adelheid/adelheid-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "adelheid",
-    "materialSha256": "1cb23cb6b368cbcaf0d910aca82af7ac671af53cc8aecd7424600d5874092e87",
+    "materialSha256": "692aaa7c625b5357e9dfdb35cbc9ae929b507da894022cb797d6f8bd7653d08e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

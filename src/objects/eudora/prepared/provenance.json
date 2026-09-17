@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "552968305930eb739ac245302ff972ea8c069b370a6da93b5ad72672793ff956"
+    "sha256": "4924fe340a04cb423513d23d02246e253c8a7384295eb3851c56a6c6f3cfec41"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "013d41785a194b94a4a6e5a9912f0b71e4b634479ed9540f8ec800784a3ce699",
+      "sha256": "5a8207333c1ce4d3639a65add8491014757f6ec3a2beeaba75e2434400bfac9a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 33.9,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/eudora/eudora-shape-surface@2x.webp",
           "polesUrl": "/scenes/eudora/eudora-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "eudora",
-    "materialSha256": "e0f1c0cd9b3c5b1b5a60211d4771d057347c5d2508204614e33620654abdbdba",
+    "materialSha256": "d28753bd58523926de478c9fd2c70b14e33e1bf51b32d9b080ac41083ea9543c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

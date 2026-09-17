@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a7e8ea7e1c81d90b75d048127952dcb9678a9cc6d39662783053919086e0656"
+    "sha256": "ffcb371f69e51789f67e80a49096f6ecdcbd40fb7321655752ee00643b848e2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0a0142a41c7859e8a6225940f8362d9095b0f71f7bfa2b4299b781001b3509bd",
+      "sha256": "f970895d067e07c5f1636d75ba05d7b623df771ec5b0d6bc823e946731b7ffcb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 58,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/victoria/victoria-shape-surface@2x.webp",
           "polesUrl": "/scenes/victoria/victoria-shape-surface@2x.webp",
           "radialTerrain": {
@@ -552,7 +548,7 @@
   },
   "lastPreparation": {
     "objectId": "victoria",
-    "materialSha256": "5dd4ace9dbeda1cf04155877c79275e57c18fa4a417571be2ca1a255e899a990",
+    "materialSha256": "4db304ea22fa7f5708d210579e1280aab57ea5adae2301823448d24caf6b5a1b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

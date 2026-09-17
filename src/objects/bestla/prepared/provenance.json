@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cbe3b3c8deb920da74bb0d79bb3801a76ce32338320f8f2d296c7a6e7a74d901"
+    "sha256": "d0dcd2664fd74e2fec512dcb00bbb622b038d25904780aeda38aab6ae741a06f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7c0d0981d7043098c16b91d41c56528bb018aaf09d25f64b2a7dc7bf083a32dc",
+      "sha256": "a3d336c32623b24a5114ed45e727d7a95df57c670d7787e5cbc6defa1a89ccb4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 3.3,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7734907245854383
           },
           "mapUrl": "/scenes/bestla/bestla-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "bestla",
-    "materialSha256": "b1091abdfdb3b61be23a1ad594633d33bec7f4235bdaa6b6fea9a9150eeacf4a",
+    "materialSha256": "f3f1d268d486fd0fbc5d8e5bf8a8bf4d89bb4ee341707af6279b3b92191a6a99",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

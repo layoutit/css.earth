@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9dff0a5fdd686b9076213905ef28a86056ed81f447534e8bdcb2a7a435eba427"
+    "sha256": "6bfabf8aefc08ddd33731de816d2d23cf94ce131ebf2061a5c97b5ff1f9d2765"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "45ff28e7a5e32cc3dc66da51b8517de3c689751001233160633555b7e6bad5b9",
+      "sha256": "99cb11293fdd1dc9e9521b092d40948d23d128e630f628dba58a36c61c497bb8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 55.305,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/siwa/siwa-shape-surface@2x.webp",
           "polesUrl": "/scenes/siwa/siwa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "siwa",
-    "materialSha256": "f672889866ca94bfd4bece94130f905b567c11eed02e9bb8412860892767ba58",
+    "materialSha256": "87aaab2dbeab4e42fb643cb14e3443ad2a3560c194c97bce3d127d2d7efb89ac",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

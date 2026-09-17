@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf533ac98b561efbb0a96a9dcfae757eab687cf109d30df8f5a54996c56c7419"
+    "sha256": "f019a6e856d5e67f1963ccc42630b694b001eb629a6629ca57fc198622c27fb4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2b9139c22fed7235628fef3abf4a69d1623e655689959ff557cb4bed91e624e4",
+      "sha256": "ed950133fb1db2c415e74824c7310f66e82fd67e57c0bcc0ced4bd3d26cc025b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -349,10 +349,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 12.35,
-          "camera": {
-            "initialScenePitchDegrees": -17.205555034330995,
-            "defaultControlYawDegrees": -154.23912321182834
-          },
           "mapUrl": "/scenes/telesto/telesto-normal-surface@2x.webp",
           "polesUrl": "/scenes/telesto/telesto-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1807,7 +1803,7 @@
   },
   "lastPreparation": {
     "objectId": "telesto",
-    "materialSha256": "d8089ceb84f042e9f7bb83cdca9d602f265d034c94173ea3b1c6672097b3b88f",
+    "materialSha256": "5c7a88600af18a41d859a5abe0bc32fef1bd1cc33c5b4d22e8059311dc228be6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

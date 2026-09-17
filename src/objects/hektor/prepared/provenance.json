@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f782a2b83af63fa015c525faf326a7f230a3003e480d332f1e0fcff58b0088f6"
+    "sha256": "55eb242c2c860c0d337934c85d5ae14422188123bed9f6331b6b9a988af9faa1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c1f125250fc57809b3596367eda6591fa7b900dbd4c7291b64369d98523631a1",
+      "sha256": "cc92f6aee8187672196e8f0ea01df2581f31d18f34459f96fd92f4ac8c44867c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 87.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hektor/hektor-shape-surface@2x.webp",
           "polesUrl": "/scenes/hektor/hektor-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "hektor",
-    "materialSha256": "cb74ac291520eb0be3eba057208e155527f2cfc0158466fb0733247a60d07dc8",
+    "materialSha256": "deeda123c611cf2dffa9d9f42d4500da77124bad2e2c99aa81ad19c04add9e60",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "043b7c3cf7930304116529a49be43d085ace3db137cb27e480987e8b1105d56d"
+    "sha256": "f9ac07079b11be2c1df5ee5fe13b26630bce6347dc6c380d9d809154d3326001"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "92aa69d63d89bcb3b7821077885171de04984004e735276ddb3e328ec8761216",
+      "sha256": "1af76935e7a9a7718408236768d4535e9217f6f9119cd9ebbcca4f94caf02eeb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 9.809,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/rosalinde/rosalinde-shape-surface@2x.webp",
           "polesUrl": "/scenes/rosalinde/rosalinde-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalinde",
-    "materialSha256": "79695dd6c4f4e41dab0b3547a71151cc365412a64f30f88af25703bce51e25ed",
+    "materialSha256": "57088ef12696fb402a61d5fe97a2246c83c69c61311f3e3f234c330e3105fa3a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

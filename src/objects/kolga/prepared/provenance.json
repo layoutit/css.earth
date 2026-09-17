@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a6ed20378f015b7e09886df2d0e3f8e7c9aff190522657861abbd5a8beb9b0f"
+    "sha256": "02bd6dbedf98720ab74d132531ae49c6f7778f13b4b8504f39012a010438a3fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1989e1aaf9c6c7f35ddf9a43fa0424fef5eee1ccc928cb4dc3bdcb92b6dbdc1e",
+      "sha256": "288fd2745c0972937bb5aa89d3995df1c0817f66ec8493f3680d5c13ea83c9d8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 50.465,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/kolga/kolga-shape-surface@2x.webp",
           "polesUrl": "/scenes/kolga/kolga-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "kolga",
-    "materialSha256": "dee54edb085b49f13da9c58be24cc01433c098d272e570af69d82325727bca18",
+    "materialSha256": "6e811873e39a833b34ed09ad0f0b566a7ffc1eed60dc6af2d6e3e5cd472eb477",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

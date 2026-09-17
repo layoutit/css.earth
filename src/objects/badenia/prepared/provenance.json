@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "69586ff7fffdd6b3aa1c909adacc709f5f457420e1f99317f632f112f4501cad"
+    "sha256": "7c08f939f6493c7f6f5af20a68f2f758ddfbed26dd9e69d34d64c5cec8638a31"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "38fabbfc426ab6a86bb455eec2ebc159ceeb642a4ecadd8587f582542aa20f29",
+      "sha256": "631a67cd0872ab24c61a4389a98a0b7e3f0e765f859d80a6222dfaaadd3c175a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 34.865,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/badenia/badenia-shape-surface@2x.webp",
           "polesUrl": "/scenes/badenia/badenia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "badenia",
-    "materialSha256": "283fe1c0a5f495b3587a4cdf884fdc1bdc75668243f4d2cac07144c95aecc923",
+    "materialSha256": "08411f59482743bf4c7e6d46980b160de97f1e8bf6282e474d04da598bf2d901",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

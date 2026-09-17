@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8de82308ea04bf11475c2de22df47c02d97304ce8e1cbae1a97475ce778109c"
+    "sha256": "70693decc2f139adbcec57f34c78ce8d3fddd0178ec9b68eddd979be170f03b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "77d2581328e44827f812b42dc99af963cb4c3d89d77bec63baec6ea778edd697",
+      "sha256": "0ab86d7d27ad22ccea97f4a193078eb46aa29924017462dc0f74a4113b3723de",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 9.6,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.6436658250254509
           },
           "mapUrl": "/scenes/ymir/ymir-model-surface@2x.webp",
@@ -413,7 +411,7 @@
   },
   "lastPreparation": {
     "objectId": "ymir",
-    "materialSha256": "25916e5dc48e9c69a822f104d9cf925f0a7e2bb8c207d5a7ad121a5943a5e12f",
+    "materialSha256": "67388f2dbf26a564ad104a939072a33f68f6a6bd7285c39eb92c1f4bbcb0ef45",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a11f13b8a712ae09bb56be5be485486ff20b155c5bb5084af56f768c5d5732b6"
+    "sha256": "1f7effe581a1d427df1364cb258efec93ee6bce6be681d0fe91455ba996fd569"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bebc6d431b3cc1f7ad51f6937f4bd95fc8423884954eb4c7645a900b5b6f1242",
+      "sha256": "1f924a175f7cc26bbe743bac27ef8693eadbc093b6ea6e223241eaa4e534f7c4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 9.8535,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/mr-spock/mr-spock-shape-surface@2x.webp",
           "polesUrl": "/scenes/mr-spock/mr-spock-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "mr-spock",
-    "materialSha256": "77b0b3cffbff4681c06a1121e62002b92447dd4fe29ccda9f5b2073bc7e6b6d0",
+    "materialSha256": "53de5302fafd079a837f34528773c681d021b5ee556c49a0dacb476ef7df48bb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

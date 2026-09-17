@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf7c63631868852494d2298eb5bf081245102e41020794abba93ca6890596293"
+    "sha256": "d4a2bef8c92c7ecdaeb57d4c0dca9a7eee1846ec60cdd5711c3554849ca0e0f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "25181932ca0f62c11238914361dd2e32d9f237ee4f001998215760c3f25dc7e4",
+      "sha256": "b05137cc6a5b05156a439f843afaad4ed7c3e4d6dd0c1d9b1775d6ab2ff0dc2b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -246,10 +246,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.448,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
           "polesUrl": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
           "radialTerrain": {
@@ -1670,7 +1666,7 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "223a1d97e2155bbc2489c0e5cf548e7e15227bb8b18f5fe6e59840a078f2bc5a",
+    "materialSha256": "23a13ee7da3e52c4e6339e5cd28b00d08bd04ebfb88248c01930d33b1e90d758",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

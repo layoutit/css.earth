@@ -68,7 +68,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   textures.lighting = await prepareSphereLighting({ publicDirectory, publicBase });
   const ringTexture = config.ring ? await prepareRingRaster({ config, publicDirectory, publicBase }) : null;
   const sky = preparePlanetCubicSky({ objectId: id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
-  const cameraOptions = { bodyId: id, displayName: config.displayName, ...config.camera };
+  const cameraOptions = { bodyId: id, displayName: config.displayName };
   const rotation=sources.get('rotation');
   const observedPole = rotation && requireRecord(rotation.value).schema === 'cssearth-observed-pole@1';
   const sunPresentation = { ...prepareSolarSystemSunPresentation(cameraOptions), source: `JPL Kepler orbit and ${observedPole ? 'authored observed pole' : 'arbitrary display orientation'}; arbitrary display phase`,

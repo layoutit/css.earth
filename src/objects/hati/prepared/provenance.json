@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "19877118a4f31092b7d2d85e9f8f69cba00acf78a9d1a8eb535af26e2b260502"
+    "sha256": "c5254c4e879731dc02c6f9fecb1ae4b6d6fe4451790f4762ace0dc3887930d2a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "20d1c59e9754cd4c1122a2c54e4f90b10327d921e9feb87a06d512ba651d50f3",
+      "sha256": "8cf0a7255bc6a53f6e4fb2b2f048fb8b78cfd4f5d80a77d05e658624bef435a6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 2.4,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7915428624043851
           },
           "mapUrl": "/scenes/hati/hati-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "hati",
-    "materialSha256": "87f00fd6c558b3416fab6a886d7e1b34ee01eb613f769a8aa99d6e7c55e0d060",
+    "materialSha256": "2bc747e5688a83c8dc7f4d9ac0cd03d41616dc350c4a4cfd88ad7c162e80b970",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "016c04afa232754a6f7949c11f82ef828d335e71c4f6727a12ea1c288eb14590"
+    "sha256": "f5b94c94dd6de8f8b2fb51ad9ea47c68ed27ee4641513d0f8d54e342c49b4d91"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "873013b307e60b797fd41feb55eef30e8c9ff863697f42ba263b6ec056899fa7",
+      "sha256": "f50fe9021b2893aef0cd53a1d8cb4ead0bba656c297fdb4f8079d35617afdfd0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.5,
-          "camera": {
-            "initialScenePitchDegrees": -15.27870100767149,
-            "defaultControlYawDegrees": 55.70926026083014
-          },
           "mapUrl": "/scenes/anthe/anthe-model-surface@2x.webp",
           "polesUrl": "/scenes/anthe/anthe-model-poles@2x.webp",
           "radialTerrain": {
@@ -419,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "anthe",
-    "materialSha256": "07a03c7b02f97563c5944ac7e243054a874992e15b8515347a765d8f969c1f47",
+    "materialSha256": "af83f1d064f863791fd597da729cf78e4efe272da3b471ad252bfc3fbc1e735a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

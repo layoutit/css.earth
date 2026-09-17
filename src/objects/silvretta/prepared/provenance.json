@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db307c385c152aab739a64e6a0b9a9a3558becee96ef70d26d4058760185064a"
+    "sha256": "2d89e136e157a0b6b1934586a6a96be0e6ab9914478ae52ce66af616a2384aff"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ab1fb8eda27b3ed3392ccaff351ed978913036ba51f22e6916ef915e48106fd0",
+      "sha256": "2d631a491d3416cca3b453b5a2d015b1d94b9c47492efb9f128a209d6349d0d1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 13.1965,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/silvretta/silvretta-shape-surface@2x.webp",
           "polesUrl": "/scenes/silvretta/silvretta-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "silvretta",
-    "materialSha256": "014421e0706c3693fd9d72664ae7623669937896770fbabea388249cada277d9",
+    "materialSha256": "962e9560e3985b12f91d5e137b3d89e36f3252763fb73d0123314bc538e68a6a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

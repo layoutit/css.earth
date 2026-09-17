@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "58006c7940480131d0eac4e0890807048be2ef9cfaa0a94c0395e03817bc62c7"
+    "sha256": "44e28926bdeb14d272c63d712e1cea57e798bc2939405e62b45764e47160a07e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "855e945b27e51239a9a7708c14a408ade96fc5040d9bacd622e3701cdc6e4307",
+      "sha256": "83b5fe85632b0ec6ef42934067790f50dda1ac916b0ba0b8698b7ca1fd8796b0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 6.085,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/augusta/augusta-shape-surface@2x.webp",
           "polesUrl": "/scenes/augusta/augusta-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "augusta",
-    "materialSha256": "9980c00c10198bbf7cab17d28b79d6385d3588e886a1de10a064eca5f79d3215",
+    "materialSha256": "d3caf85a45f18b2524db85773fd4e9d965c30e8a851d4a796d3ccbf49cac7846",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

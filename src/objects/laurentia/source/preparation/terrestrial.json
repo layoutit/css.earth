@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 42.67,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/laurentia/laurentia-shape-surface@2x.webp",
     "polesUrl": "/scenes/laurentia/laurentia-shape-surface@2x.webp",
     "radialTerrain": {

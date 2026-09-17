@@ -173,10 +173,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 6.2,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 45
-    },
     "mapUrl": "/scenes/deimos/deimos-normal-surface@2x.webp",
     "polesUrl": "/scenes/deimos/deimos-normal-poles@2x.webp",
     "radialTerrain": {

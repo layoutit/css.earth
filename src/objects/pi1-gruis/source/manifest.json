@@ -143,8 +143,8 @@
       }
     },
     {
-      "expectedBytes": 5914,
-      "expectedSha256": "ad7f55ec5e58cd3f40837a2d7502c852253f7ccb33ec146717ff6f952cb50a88",
+      "expectedBytes": 5874,
+      "expectedSha256": "5f9bd655f787133135f53c9d18eddeebe4de8887a631d04c08b115241d491b73",
       "id": "pi1-gruis-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the PIONIER reconstruction cast onto the reference sphere by the surface-observation route, polar bands, off-limb plate",
@@ -217,8 +217,8 @@
       ]
     },
     {
-      "expectedBytes": 290,
-      "expectedSha256": "e5c446e42f61ee84ef4628572b2e411ad7ac7060299e63cd48ff5c1a8807ee38",
+      "expectedBytes": 221,
+      "expectedSha256": "8d8aeb3635bf0f5456ee8dd36ff48c551170f766145591219ff83d5eb1782cd5",
       "id": "pi1-gruis-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored scene recipe: fitted radius 219,710,723 km, camera plan so the photographed hemisphere faces the camera",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d218666266b1505c16b88cb93dd039239aa1565a9b5515d79a66266b545a741b"
+    "sha256": "567df712b5b02bcc5ec4bd2842acb7fc5ab4353b5c91b3fb9a1a6cda5464252a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0f4ac37d49a010e7849f552022a94825e15e5e0ccc5a24f3feaea94385dbf29f",
+      "sha256": "a63ffbf9c308ad8054d52b6340d61670c36e554fae9ccdf851468ccfc1a26510",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 74.5,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/parthenope/parthenope-shape-surface@2x.webp",
           "polesUrl": "/scenes/parthenope/parthenope-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "parthenope",
-    "materialSha256": "2bc7d865d2658a9c2db47fe19426e33947620ebb2a7089942a2d6ebe22fad8a6",
+    "materialSha256": "1c244f4ba96c5301a580c61b41b83890d88f891d3d54dca80f98cc1425be5198",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

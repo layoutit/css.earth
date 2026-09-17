@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2c3223b4947d935ab445e49b360bfaabce8534b944cb0c0a7b2fbc3a8a5bd40d"
+    "sha256": "331e2d79cefe017e9428550fac5ae38a734e400bfccc30f89cf658d9089eb97f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "50148d57db8eb5ae158f193d27d2099c85c67e190eae1919e9068a61ab9b42c6",
+      "sha256": "0dc63d89412500a1486ab84c19d0afe0c584aab119425673b05f0ab1373fe8c7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 0.6,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.4875773583294588
           },
           "mapUrl": "/scenes/cerberus/cerberus-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "cerberus",
-    "materialSha256": "57d5041be77799d67d791eb7498545d8224a7961e89ba9b5285b8021de59caeb",
+    "materialSha256": "3f2c3b7e1ccfbbf5b6981bcfc0dee2014623ad57cc5f2ab31032d9e4ff126c0d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

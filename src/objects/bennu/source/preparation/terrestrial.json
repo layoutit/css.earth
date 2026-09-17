@@ -146,10 +146,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.241,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
     "polesUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
     "radialTerrain": {

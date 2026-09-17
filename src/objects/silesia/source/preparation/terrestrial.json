@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 39.6,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/silesia/silesia-shape-surface@2x.webp",
     "polesUrl": "/scenes/silesia/silesia-shape-surface@2x.webp",
     "radialTerrain": {

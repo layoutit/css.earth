@@ -124,7 +124,8 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   assert.equal(Reflect.set(scene, 'systemTransform', oldTransform), true);
   const index = definition.tree.nodes.findIndex(node => node.className?.split(' ').includes('mimas-system'));
   assert.equal(Reflect.set(requireSnapshot(definition.tree.nodes[index], 'Mimas system carrier'), 'style', `transform:${oldTransform}`), true);
-  const result = await refreshSolidSceneEpoch({ config, scene, definition });
+  const surfacesReport = await read('prepared/surfaces.json');
+  const result = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport });
   assert.equal(result.scene.systemTransform, prepareEclipticPresentationFrame('mimas').cssTransform);
   assert.notEqual(result.scene.systemTransform, oldTransform);
   assert.equal(requireSnapshot(result.definition.tree.nodes[index], 'refreshed Mimas system carrier').style, `transform:${result.scene.systemTransform}`);
@@ -136,7 +137,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   assert.equal(result.definition.materials, definition.materials);
   assert.equal(result.definition.surfaceHit, definition.surfaceHit);
   definition.tree.nodes.forEach((node, i) => { if (i !== index) assert.equal(result.definition.tree.nodes[i], node); });
-  assert.deepEqual(await refreshSolidSceneEpoch({ config, ...result }), result, 'refresh is idempotent');
+  assert.deepEqual(await refreshSolidSceneEpoch({ config, ...result, surfacesReport }), result, 'refresh is idempotent');
 });
 
 test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
@@ -148,8 +149,9 @@ test('epoch refresh restores a compiled surface before updating its physical fra
   const definition = requireObjectRuntimeDefinition(await read('prepared/runtime.json'));
   assert.ok(requireSnapshot(definition.depthPartitions?.groups, 'compiled depth groups').length > 1, 'exercise actual compiled source carriers');
   const original = structuredClone(definition);
-  const expected = await refreshSolidSceneEpoch({ config, scene, definition: restoreDepthSource(definition) });
-  const actual = await refreshSolidSceneEpoch({ config, scene, definition });
+  const surfacesReport = await read('prepared/surfaces.json');
+  const expected = await refreshSolidSceneEpoch({ config, scene, definition: restoreDepthSource(definition), surfacesReport });
+  const actual = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport });
   assert.deepEqual(actual, expected);
   assert.deepEqual(definition, original, 'refresh does not mutate the retained prepared bank');
   assert.deepEqual(requireSnapshot(actual.definition.surfaceHit, 'refreshed surface hit').triangles, requireSnapshot(definition.surfaceHit, 'prepared surface hit').triangles);

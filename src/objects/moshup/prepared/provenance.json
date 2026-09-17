@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b04bf60af7cfb4e3aa89bd9d8a907fd2f9b49a3d46e3592836597d636f806f4f"
+    "sha256": "8ed8a9062b34ab3f6facf7c9b0f29b9e3aec2e80ee77a277e3e06fa84f08ae00"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4f375de42685a86677a58aa5dfe87b0d2ac8bfe165d3dc466ce7573403c62abf",
+      "sha256": "8ebf0b60048a9ef9f83ecfa065ee82ea59d633e94531f3978c2bf3fd70212d95",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.6585,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/moshup/moshup-shape-surface@2x.webp",
           "polesUrl": "/scenes/moshup/moshup-shape-surface@2x.webp",
           "radialTerrain": {
@@ -568,7 +564,7 @@
   },
   "lastPreparation": {
     "objectId": "moshup",
-    "materialSha256": "f62bed0d9a1cb6abb676e608940c84ad51871d493f762d9ed1f7193e563dcb6e",
+    "materialSha256": "876fbb276de8c5ce5c5bfdc9540e42516b26dfcbc2dc7bdcb4856b5e8903d8ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

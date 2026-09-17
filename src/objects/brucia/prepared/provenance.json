@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dce1d18be1315dc607d2377c148e6c6f5da40b790733b61036472d818770b66b"
+    "sha256": "c850981f1f1b7bac58a4d7e82b045bbfb58734f9713d3747c1f61923b016ba18"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d5c9499de5f2b1e10aaa984564c742c678a995531dba729e71ff2fcd67378879",
+      "sha256": "0a0f70d2e06c0286c9a5f10b792e67101cea371baadfdc97825561b07377f743",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 18.645,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/brucia/brucia-shape-surface@2x.webp",
           "polesUrl": "/scenes/brucia/brucia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "brucia",
-    "materialSha256": "e15d9ec790586f81bf885a41d9732666de35193016ba48b48db3a660e6cc00e9",
+    "materialSha256": "c0379c4da5b9d666168d00cfa1a2c0d3d9d82759a101acd779b9c8198d635d91",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "226242cb4e642c3090a4e81d11dd5fbdeca84cc7430bc43fbc213c51397b2189"
+    "sha256": "6706217c7e72ca9ef5d58718f44699d441a78a28374b81e39a3cf3d7586f94b2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "72a1100f82a0b0a68d0efc2015c255ad85ef57a193f710ae1a2cc3e62491ac0b",
+      "sha256": "0742385053340a2f5d9b6b140583085ec30033863feeab6f8a3ee153f28a48a3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 317.5,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 1
           },
           "mapUrl": "/scenes/deedee/deedee-model-surface@2x.webp",
@@ -398,7 +396,7 @@
   },
   "lastPreparation": {
     "objectId": "deedee",
-    "materialSha256": "935db8f0f877b342b6390e73a076861267808aa2c0d18be5f6d44ff4464c1097",
+    "materialSha256": "e16130448dec2dd2635fe4271a3253455acdc65eb2ab21195965c391c4d15440",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "802709b1f154dfe1f4a378cc17322ef9d92865cda32c5fb6b790c75bca1301d2"
+    "sha256": "b49dce0df035e7c031778db5504650f7e527bb55a67052d93f0f4d3677288593"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1eae44ef482657a4dad4c29b6a7eb02fd49d2e1c5beb5f481113fd3dd77d8940",
+      "sha256": "b23c3d39c96457ba6eb07952354e1dc869e698e69968271acd99540dba0431eb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 2.5,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9217525993863354
           },
           "mapUrl": "/scenes/bergelmir/bergelmir-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "bergelmir",
-    "materialSha256": "b2129a2af4d2194fd05c571151f768505da34e7c5903d5c5a7f3fa7b10b5173e",
+    "materialSha256": "b1ba48230eb4d626a1fdf9b6988961931355d503507bf7b21d74779e044cd2cb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.65,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
     "polesUrl": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
     "radialTerrain": {

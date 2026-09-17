@@ -305,8 +305,8 @@
     {
       "id": "pluto-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "3ef36d78f7f57a4d65e16ed65317a7fdb84de30306f3087e8f6d750226063bc4",
-      "expectedBytes": 272,
+      "expectedSha256": "03f26565f31a88b5cc73d4f16d4fb1fd6737ef8c689ab26a1d4ee1e48844d1c6",
+      "expectedBytes": 205,
       "origin": "Repository-authored physical scene recipe; mean radius 1188.3 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

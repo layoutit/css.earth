@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a7675eab3f42ba9bad4cf50dc423ad6eaa1f1619ebf36cdde6beca2b227ae25a"
+    "sha256": "022f81ad69046f07b000da639f466a868a61d4eb2053246fca97a5366724f932"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ac02e5749fb40b7553b0d58effeef78b02473e4c369e4b7feb4b1cd6e63c33d5",
+      "sha256": "19887604aa7f65ef85965183f83247c3dc695589c72a5a47bb3eb9b586726e95",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 40.435,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/gallia/gallia-shape-surface@2x.webp",
           "polesUrl": "/scenes/gallia/gallia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "gallia",
-    "materialSha256": "f2f83a3cd9e41870ec80268115274576e56e565e581559499c764cade9f4dee4",
+    "materialSha256": "c8e6111fccc05f22318486536bcc3e0e3663a09595c85d8a41a73e37787e11f9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

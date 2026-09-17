@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8221b7e2fd895893e2cec53624f39c1c3b45a1b0e61260fdcefc4ab0ee3e9796"
+    "sha256": "f3c3f86e2a423e208cc7c900980e3c2d20532a9e4a030882787cab01662aea82"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e200365d0f1bf79db67e051992f042aef0950d64c9a8683c55f39f238da6e980",
+      "sha256": "cc72b3c63e655d21bc481b0b761504b07dee29e8287a7932c4be8f0d41fa3cf6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 101,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/egeria/egeria-shape-surface@2x.webp",
           "polesUrl": "/scenes/egeria/egeria-shape-surface@2x.webp",
           "radialTerrain": {
@@ -552,7 +548,7 @@
   },
   "lastPreparation": {
     "objectId": "egeria",
-    "materialSha256": "ccb31eb2e37ef0c31a5e1b458805f6e1a0ce7710683ddb8c112514b5877c1207",
+    "materialSha256": "b08f35a5f013b40136abcf6df74e8d6f5a7e758d74a091278ec7511806e24dce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

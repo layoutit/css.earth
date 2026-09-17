@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "da5c0593ee590bb8fc58794bf88f2b1e6cde46464ba077ff542eee0d0cd0a5e1"
+    "sha256": "1745fc7cc500c34ffc47822d928e8fff8b975d2725c2c1de21cb457228d376f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e28ae929b05509f0ca7dd0b860c681329b86fadf7d47688f073cfd1552cd0326",
+      "sha256": "c68d40416e1e7f8bc55a39952ae29f5a00fb3a2cf600a0741521bfbeb596ce9e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 20.215215801007133,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.6649742039804978
           },
           "mapUrl": "/scenes/leucus/leucus-model-surface@2x.webp",
@@ -432,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "leucus",
-    "materialSha256": "37b99500ddf7d09f0a9df74cf91c2a23650acc81ce6d567a6f459a4fd4f0070b",
+    "materialSha256": "c6dd1ac8e67702534f4934f06c6cf34952922a73ea78e2613d49f0676b04e505",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

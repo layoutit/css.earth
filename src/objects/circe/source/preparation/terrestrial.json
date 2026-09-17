@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 53.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/circe/circe-shape-surface@2x.webp",
     "polesUrl": "/scenes/circe/circe-shape-surface@2x.webp",
     "radialTerrain": {

@@ -1,10 +1,13 @@
 import { sha256 } from '../../src/platform/sha256.mts';
+import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
+import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
+import { preparedControlPitch } from '@cssearth/engine';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { readAuthoredSources, verifiedSource } from './authored-sources.js';
 import { parseWorldContextSource } from '../../src/preparation/spatial-context.js';
-import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, type SurfaceMapPlacement } from './world-navigation-sources.js';
+import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement } from './world-navigation-sources.js';
 import { preparePhysicalMaterialTracks } from './world-navigation-materials.js';
 import { preparePhysicalWorldFrame, transform, transpose, type Matrix3, type Vector3 } from './world-navigation.js';
 
@@ -22,16 +25,24 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   if (contextSource) {
     const context = parseWorldContextSource(contextSource);
     if (context.focus.id !== descriptor.id) throw new TypeError('Authored context focus differs.');
-    return { definition, frame: context.frame, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
+    return { definition, frame: context.frame, systemTransform: null, defaultCamera: null, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
       sources: pinnedSources, frame: context.frame, model: 'authored-context-focus' } };
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
   const presentation = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-presentation-frame.mts')).href) as Input;
   const direction = await import(pathToFileURL(resolve(projectRoot, 'src/platform/prepare-sun-view-direction.mts')).href) as Input;
   const ecliptic = presentation.prepareEclipticPresentationFrame(descriptor.id);
-  const authored = authoredPresentationBasis(sources, ecliptic.basis.flat() as Matrix3);
-  // The frame and the sun follow the body as drawn, mirror included; material tracks keep the authored mesh rotation.
-  const bodyToPresentation = renderedBodyToPresentation(definition, descriptor.id, await surfacePlacement(objectDirectory, bound, sources.get('features')));
+  const intended = ecliptic.basis.flat() as Matrix3, placement = await surfacePlacement(objectDirectory, bound, sources.get('features'));
+  assertAtlasOrigins(descriptor.id, sources.get('raster'), placement);
+  // The body is drawn in its ecliptic presentation frame: the outermost mesh node is solved through whatever the lane placed below it.
+  const solved = eclipticLane(sources) ? solveSystemTransform(definition, descriptor.id, placement, intended) : null;
+  const oriented = solved ? replaceSystemTransform(definition, solved) : definition;
+  const authored = authoredPresentationBasis(sources, solved?.matrix ?? intended);
+  // The world frame follows the body as drawn; for an ecliptic lane that is the intended frame, to rounding.
+  const bodyToPresentation = renderedBodyToPresentation(oriented, descriptor.id, placement);
+  if (solved && bodyToPresentation.some((value, index) => Math.abs(value - intended[index]!) > 1e-9)) {
+    throw new Error(`${descriptor.id}: the drawn body differs from its ecliptic presentation frame after solving its system transform.`);
+  }
   const bodyToReference = solar.requireBodyFixedToIcrf(descriptor.id) as Matrix3;
   const bodySun = solar.requireBodyFixedSunDirection(descriptor.id) as Vector3;
   const distanceM = solar.requireBodyOrbit(descriptor.id).heliocentricDistanceAu * solar.ASTRONOMICAL_UNIT_KILOMETERS * 1000;
@@ -44,23 +55,100 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
   const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
-  const camera = alreadyPhysical ? definition.camera : physicalCamera(definition.camera, definition.sky.projection, descriptor.recipe.paging !== undefined);
-  // The sky cube and the Sun ride the frame for every capability, so both follow the body as drawn.
+  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, descriptor.recipe.paging !== undefined);
+  // The default camera has one owner: this stage derives it and rewrites every prepared value computed from it, so a rule change
+  // re-runs this stage, not the lanes.
+  const cameraModule = await import(pathToFileURL(resolve(projectRoot, 'src/platform/default-camera.mts')).href) as typeof import('../../src/platform/default-camera.mts');
+  const surfacesReport = await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8').then(JSON.parse, () => null);
+  const terrestrial = sources.get('terrestrial');
+  const angles = cameraModule.prepareDefaultCameraAngles(descriptor.id, {
+    observation: terrestrial ? cameraModule.photographDirections(descriptor.id, terrestrial, surfacesReport) : undefined,
+    light: (STAR_IDS as readonly string[]).includes(descriptor.id) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(descriptor.id) ? 'host' : 'sun' });
+  // Only a solved lane takes the derived pose; a typed lane keeps the camera its own bakes were made for.
+  const posed = solved ? poseDefaultCamera(oriented, physical, angles) : null;
+  const camera = posed?.camera ?? physical;
+  // The sky cube rides the frame for every capability, so it follows the body as drawn.
   const sceneRegistration = matrixCss(transpose(frame.presentationToReference));
-  const sky = alreadyPhysical ? { ...definition.sky, sceneRegistration } : { ...definition.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
+  const sky = alreadyPhysical ? { ...oriented.sky, sceneRegistration } : { ...oriented.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
     sceneRegistration, sceneRegistrationModel: 'icrf-in-authored-presentation-frame', sceneRegistrationEpoch: solar.SOLAR_GEOMETRY_EPOCH_LABEL };
+  // The sky cube and the Sun follow the body as drawn, for a solved lane and for a lane that still carries typed node angles.
   const localDirection = transform(bodyToPresentation, bodySun);
-  const sun = definition.sun ? { ...definition.sun, localDirection,
+  const sun = oriented.sun ? { ...oriented.sun, localDirection,
     referenceViewDirection: direction.prepareSunReferenceViewDirection({ bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
-  const prepared = preparePhysicalMaterialTracks({ definition: { ...definition, camera, sky, sun }, ...authored, sources,
+  const prepared = preparePhysicalMaterialTracks({ definition: { ...(posed?.definition ?? oriented), camera, sky, sun }, ...authored, sources, refreshPhysical: solved !== null,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
-  return { definition: prepared, frame,
+  return { definition: prepared, frame, systemTransform: solved, defaultCamera: posed ? { angles, transform: posed.transform } : null,
     receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id, sources: pinnedSources,
       frame, bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
-      tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits,
-      sourceGeometryConvention: 'body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X',
+      tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits, ...(posed ? { defaultCamera: angles } : {}),
+      sourceGeometryConvention: solved
+        ? 'ecliptic presentation frame, drawn by solving the outermost mesh node; body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X'
+        : 'body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X',
       ephemerisSource: 'src/platform/solar-geometry.mts' } };
+}
+
+/** The camera's default pose and everything prepared from it: the control and scene pitch, the yaw, the retained state and
+ * material reference, and the scene transform string the camera and the retained scene node carry. */
+const SCENE_ROTATION = /rotateX\((-?[\d.e+-]+)deg\) rotate\((-?[\d.e+-]+)deg\)/u;
+function poseDefaultCamera(definition: Input, camera: Input, angles: { initialScenePitchDegrees: number; defaultControlYawDegrees: number }) {
+  const pitch = angles.initialScenePitchDegrees, yaw = angles.defaultControlYawDegrees;
+  const control = preparedControlPitch(pitch, camera as { maximumControlPitchDegrees: number; maximumScenePitchDegrees: number });
+  const rotation = `rotateX(${pitch}deg) rotate(${yaw}deg)`;
+  const next: Input = { ...camera, initialScenePitchDegrees: pitch, defaultControlYawDegrees: yaw, defaultControlPitchDegrees: control,
+    ...(camera.state ? { state: { ...camera.state, rotX: control, rotY: yaw } } : {}),
+    ...(camera.materialReferenceControlPitchDegrees !== undefined ? { materialReferenceControlPitchDegrees: control, materialReferenceControlYawDegrees: yaw } : {}),
+    ...(typeof camera.defaultTransform === 'string' ? { defaultTransform: camera.defaultTransform.replace(SCENE_ROTATION, rotation) } : {}) };
+  // The retained scene node carries the same transform the camera starts from.
+  const nodes = definition.tree.nodes.map((node: Input) => String(node.className ?? '').split(/\s+/u).includes('polycss-scene') && SCENE_ROTATION.test(String(node.style ?? ''))
+    ? { ...node, style: String(node.style).replace(SCENE_ROTATION, rotation) } : node);
+  return { camera: next, transform: { pitch, yaw, control, rotation }, definition: { ...definition, tree: { ...definition.tree, nodes } } };
+}
+
+/** Apply the derived default camera to a prepared scene document the lanes wrote alongside the runtime. */
+function poseSceneDocument(scene: Input, camera: Input, sun: Input | null, pose: { pitch: number; yaw: number; control: number; rotation: string }): Input {
+  const document: Input = { ...scene };
+  if (scene.camera && typeof scene.camera === 'object') {
+    const previous = scene.camera, next: Input = { ...previous };
+    for (const key of ['initialScenePitchDegrees', 'defaultScenePitchDegrees'] as const) if (key in previous) next[key] = pose.pitch;
+    for (const key of ['defaultControlPitchDegrees', 'defaultPitchDegrees'] as const) if (key in previous) next[key] = pose.control;
+    if ('defaultControlYawDegrees' in previous) next.defaultControlYawDegrees = pose.yaw;
+    if ('materialReferenceControlPitchDegrees' in previous) Object.assign(next, { materialReferenceControlPitchDegrees: pose.control, materialReferenceControlYawDegrees: pose.yaw });
+    if (previous.state && typeof previous.state === 'object') next.state = { ...previous.state, rotX: previous.state.rotX === previous.initialScenePitchDegrees || previous.state.rotX === previous.defaultScenePitchDegrees ? pose.pitch : pose.control, rotY: pose.yaw };
+    for (const key of ['defaultTransform', 'sceneStyle'] as const) if (typeof previous[key] === 'string') next[key] = previous[key].replace(SCENE_ROTATION, pose.rotation);
+    document.camera = next;
+  }
+  if (sun && scene.sun && typeof scene.sun === 'object') document.sun = { ...scene.sun, localDirection: sun.localDirection, referenceViewDirection: sun.referenceViewDirection };
+  return document;
+}
+
+/** A lens raster that states where its longitudes start must start where the surface map places them, or it draws turned. */
+function assertAtlasOrigins(id: string, raster: Input | undefined, placement: SurfaceMapPlacement) {
+  const visit = (value: unknown, path: string): void => {
+    if (Array.isArray(value)) { value.forEach((entry, index) => visit(entry, `${path}[${index}]`)); return; }
+    if (!value || typeof value !== 'object') return;
+    for (const [key, entry] of Object.entries(value)) {
+      if (key === 'outputLongitudeOrigin' && (((entry as number) - placement.mapLeftEdgeLongitudeDeg) % 360 + 360) % 360 !== 0) {
+        throw new Error(`${id}: raster ${path}.${key} is ${String(entry)}, but the surface map's left edge is longitude ${placement.mapLeftEdgeLongitudeDeg}.`);
+      }
+      visit(entry, `${path}.${key}`);
+    }
+  };
+  visit(raster, 'raster');
+}
+
+/** Lanes whose system node carries the ecliptic presentation frame directly. */
+function eclipticLane(sources: ReadonlyMap<string, Input>): boolean {
+  return sources.get('shape-model')?.schema === 'cssearth-shape-model@1' || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
+    sources.get('terrestrial')?.kind === 'solid-observation-body' || sources.get('paged-ellipsoid')?.schema === 'cssearth-paged-ellipsoid@1';
+}
+
+/** Every prepared copy of the system node's transform (the node itself, counter bindings, physical material tracks) is one value. */
+function replaceSystemTransform<T>(value: T, solved: { from: string; to: string }): T {
+  if (solved.from === solved.to) return value;
+  const text = JSON.stringify(value), from = JSON.stringify(solved.from).slice(1, -1), to = JSON.stringify(solved.to).slice(1, -1);
+  if (!text.includes(from)) throw new TypeError('The solved system transform has no prepared copy to replace.');
+  return JSON.parse(text.split(from).join(to)) as T;
 }
 
 /** The surface map the feature labels place names with, or PolyCSS's own placement for a body without one. */
@@ -89,7 +177,14 @@ function matrixCss(m: Matrix3): string {
 
 export async function writeWorldNavigationArtifacts(outputDirectory: string, result: Awaited<ReturnType<typeof prepareWorldNavigationDefinition>>, scene?: Input): Promise<Input | undefined> {
   await mkdir(outputDirectory, { recursive: true });
-  const nextScene = scene ? { ...scene, worldFrame: result.frame } : undefined;
+  const oriented = scene ? replaceSystemTransform(scene, result.systemTransform ?? { from: '', to: '' }) : undefined;
+  const nextScene = oriented ? { ...(result.defaultCamera ? poseSceneDocument(oriented, result.definition.camera, result.definition.sun ?? null, result.defaultCamera.transform) : oriented), worldFrame: result.frame } : undefined;
+  // A lane's standalone Sun document follows the same pose.
+  const sunPath = resolve(outputDirectory, 'sun.json');
+  if (result.defaultCamera && result.definition.sun) {
+    const sun = await readFile(sunPath, 'utf8').then(JSON.parse, () => null);
+    if (sun && Array.isArray(sun.referenceViewDirection)) await writeFile(sunPath, `${JSON.stringify({ ...sun, localDirection: result.definition.sun.localDirection, referenceViewDirection: result.definition.sun.referenceViewDirection })}\n`);
+  }
   // The scene carries the same frame the descriptor does, so a re-derived frame rewrites it too.
   const outputs = { runtime: result.definition, 'world-navigation': result.receipt, ...(nextScene ? { scene: nextScene } : {}) };
   for (const [name, value] of Object.entries(outputs)) await writeFile(resolve(outputDirectory, `${name}.json`), `${JSON.stringify(value)}\n`);

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49698654755fe48cf12186255a69cd6c72c1efd1697785cebccccccc80844581"
+    "sha256": "c405c56941250e1f3251cddb0bac268cbcb6bcaf12c763170474fe7fe2bb255c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "40c8bbb118f93df645b4d9c472259d839c674909dc4d636ce094ca597dbbeb20",
+      "sha256": "c635611a2b9fbb77f7b83a9510cfd8cf6d394450995fe6aebb1a5ec7b488c726",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -167,10 +167,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 49,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "polesUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "radialTerrain": {
@@ -1100,7 +1096,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "c7034f23d047c8ee2edd5189d0c8b20ef5d245f54c4e9b264ef7aeac07ed5b4a",
+    "materialSha256": "227b7ded81e0e9d8e326942b8ef2085b56a221f6e7d3d3186000af5c9b9f25f0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

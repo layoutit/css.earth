@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d5973cf139f41cd30c5d64fecd7f82752320f36bd41072adacc96b7b72e8065"
+    "sha256": "9054b240bb42f676d6f3dc6a245ed844fa23774332c0d6fd44cd68776e693feb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "624eeb81f531b9ba5dce498bfd23bed4d8678482dea5f417bd3a2c047362e540",
+      "sha256": "4fef9da72cf23c5a19a963e978ba39b71e7880dd8b8df6f661cfb1cc4aab5996",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 25,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7774396150303584
           },
           "mapUrl": "/scenes/prospero/prospero-model-surface@2x.webp",
@@ -467,7 +465,7 @@
   },
   "lastPreparation": {
     "objectId": "prospero",
-    "materialSha256": "b02ce3a9ad4de8fd07d62b83344c9ab129d38d7631c0b8f7ecf174799aa2a272",
+    "materialSha256": "061ac6fc86b8821964fa5fa702c455ae1fd55ab1045e95a6f0efac65f516ab36",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

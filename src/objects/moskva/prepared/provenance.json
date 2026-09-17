@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fe43ddd5e4a4846542a0fa636c0d63c0db4bd49710be094cffec0a8e0fc16e20"
+    "sha256": "88fe4d903412380dd5631836597606a3f18c594821523dcae1953c5e04667c87"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "799e7974e5678c4b7c178861153d4817f93d1895798526032f60d4e9101511ed",
+      "sha256": "a037ab1ea00dab6b11c8133a0eb405ae38ef8abd477f8463ea543341f9b705e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 15.981,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/moskva/moskva-shape-surface@2x.webp",
           "polesUrl": "/scenes/moskva/moskva-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "moskva",
-    "materialSha256": "8b91f96302b1d460f6c3a7d2f6501fe2690f49ff1ebeccb074baff82c95cb312",
+    "materialSha256": "ed2e24fbe41d7f420e77cb9a37aaeecdcfb025ba2e6f1182922c9e0959fc5425",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

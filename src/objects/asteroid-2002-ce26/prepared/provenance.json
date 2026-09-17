@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff52112e151987032d295d8e7a7d06ecec677405e1b1075beb2732c5f4f10dad"
+    "sha256": "e15a445aa80c3b896dff831268bb247ac6e358af3bf5f9ba139c308862b9931f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "da593321ea05fb384993a2f6de76746fdd9d496544021f32e7c5b3ec0f9fe8b7",
+      "sha256": "519dad57aa83370dfc22aaa50e56301a61cfcf307f8751acde958485a8c8954d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.73,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
           "radialTerrain": {
@@ -571,7 +567,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-ce26",
-    "materialSha256": "5ae2c8d76c0a1634bed2570fa95fa526b56fa586250af83b0b8bf3f741b64f51",
+    "materialSha256": "302cecddbdef76d7354dcd6957f0361c40626c930374675ed26f5e592e2452d4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

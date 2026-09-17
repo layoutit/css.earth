@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dfc492800189061cd9c77a0046c78e07cda546a7b2f7d1d353d6987efcdea017"
+    "sha256": "a622ab502180ed558ac9ba55fd30a5d0a572b414b1641b9723b9fd6f5268dd56"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7e3ead1e8dcb4b028968e74b68dcc1ec2a0300aadbb7186ffc7ae586d8250e5e",
+      "sha256": "372f8b13dfd810b29f457eb6ed5e0c2d0b0fa74e6937796d12647a8e9e4472a9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -56,8 +56,6 @@
           "radius": 230,
           "radiusKm": 0.6952053289772899,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.75
           },
           "mapUrl": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
@@ -540,7 +538,7 @@
   },
   "lastPreparation": {
     "objectId": "dactyl",
-    "materialSha256": "ef4a5d751cd22c104ce2a650c6ce8eb498c6bd6dfa3280f83657d615c6e778d4",
+    "materialSha256": "232032d0dedd83e33d0b29c3a2e4c07b5ba41bcdb6e852ea1ff1b4d5ed36b950",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

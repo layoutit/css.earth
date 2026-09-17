@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1e995549a52bd4c302adae0f56934d93c3da0cc840f3ef83a222030ae2627e11"
+    "sha256": "601064fe3fe490a4997c20851d87f99537c27bbd46389c83b96e3b9b91349e45"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "b90e072c742a4c6f43dacd2bb30f3b3f08315c9ae10fe33b009dc6ca9538e0fe",
+      "sha256": "98783df19374970aff7e117d69da28bc0dec03deb2e9a6305b3df9c4b6d34730",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
@@ -127,9 +127,7 @@
                 },
                 "consumer": "sphere-photograph"
               },
-              "offLimb": {
-                "rotationDegrees": -48
-              }
+              "offLimb": {}
             }
           }
         ],
@@ -611,8 +609,8 @@
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse.webp",
-          "bytes": 63334,
-          "sha256": "5d0ffcbea41c88333cf06c54ac795487fba0d2c06c1d26a9311061cfff0b4815",
+          "bytes": 63290,
+          "sha256": "c166478f07e510c688e197d22f19dc0a775eb5a90c57c4f4e762a870fc2c90dc",
           "verification": "bytes-verified"
         },
         {
@@ -623,8 +621,8 @@
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse@2x.webp",
-          "bytes": 155470,
-          "sha256": "cde851bda093b897d4751fc7058a7acc8d6ef7c399854342793f1dfc8abe3ab5",
+          "bytes": 155490,
+          "sha256": "235839a468fcf77d7153810b6e16768cc6b59047cc9c983c53869b9ad659023f",
           "verification": "bytes-verified"
         },
         {
@@ -701,7 +699,7 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "c8cf8db5c04a1c8fae20101a912481115651eac7e0eb2444a4ba26cd6dc01958",
+    "materialSha256": "a38bad21e544b4b7696dd6f493c3d58aff34f5e56b4976ef36cffd228de8acee",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

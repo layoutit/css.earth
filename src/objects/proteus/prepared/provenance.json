@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8eb71ced5b3b3f757e750bbd547f11b2e5ab96d9c72abe2c15419e5059ac451c"
+    "sha256": "6b75db6cfe00b0656c4fab746af882dd71da0ea1042d5c70f5afd3873780885d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6efccd19d834284f8a259e9f6e0ca6fe2d87b6e56e74d5502773689d755e9214",
+      "sha256": "19675beda599841e90dead741b65c0e5ef904be744b5c1a7b1c6639dbc8b53d1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -293,10 +293,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 208,
-          "camera": {
-            "initialScenePitchDegrees": -10.970382790652298,
-            "defaultControlYawDegrees": 1.6473023715265165
-          },
           "mapUrl": "/scenes/proteus/proteus-normal-surface@2x.webp",
           "polesUrl": "/scenes/proteus/proteus-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1318,7 +1314,7 @@
   },
   "lastPreparation": {
     "objectId": "proteus",
-    "materialSha256": "f87dcded3701d65f6d495e0501af1d594a5f057f191ee4b63ac0044b7c24d68a",
+    "materialSha256": "736319235554b9b3a1bad9a09d96573081f4a989465e7f55a26de4bff74c7610",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

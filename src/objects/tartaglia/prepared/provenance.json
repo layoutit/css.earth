@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e3807748f1f7bf46dc2d46af1c6789959296102ccefca2771e27b47f6705c360"
+    "sha256": "cd9cb982598746fa6152d855287642335e99fdb8551b78bed1251dd023560111"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "88d96707220550f712074300bf52b1e5864b2ef625ff84bcc01e80e737da0684",
+      "sha256": "24920c1d0ca6cd83e19c04f843e4d8ca6d9f8ec2f6e4630f505d53abc9f5533c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 6.792,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
           "polesUrl": "/scenes/tartaglia/tartaglia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "tartaglia",
-    "materialSha256": "dc7ab89dda1c47d6726969e38ed6bc576a24d11644d5b29899a3b805513643f6",
+    "materialSha256": "e6fe3a0ebcc3c751169b3755d28777f7a084f414359d10e80079d41279952b0e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

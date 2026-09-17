@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "39990cf275275da587ba7ead1e4698a40b4c7eb70fd78983f69ce14c80c8e96d"
+    "sha256": "8814c6a3f7beb41b2cfa444c678a24029d1b79873f806b9c4bbf5f6e6d3ffdc7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a4a986fc20d47ce3debced225fd242f44c0ba3d241983d861a0f4c80c53e1aa7",
+      "sha256": "872e1e39ba36c9b2be0585a5a37fd6771d256776d74cfce6ff0eb413bfb81d59",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 45.065,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/vanadis/vanadis-shape-surface@2x.webp",
           "polesUrl": "/scenes/vanadis/vanadis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "vanadis",
-    "materialSha256": "1090f7c476cca122f32e3f66b06831baf0154826b85cbe732992341b9a190109",
+    "materialSha256": "70fc7ac4cb40f44b2c328335cee733f5cb1b1bd0cd33c98425e98150950c629a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

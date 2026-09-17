@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "967ef08b8b2d74c5244eb97c6cd9af00c5dd98dd19e615c8847c8bc0ffccdc56"
+    "sha256": "a0c14f05a8f898257ae3375a23734f475b1d8255240665a584bd58a53f022844"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ea50f328ba6b45abe6091216b68c4555f3cb31574a0359de943a1324ea45d16b",
+      "sha256": "ede40ea0f98490126617a8c6be84a9e53dc76ef0b0096e8d9a75b2b88a80da4a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -419,10 +419,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 40.6,
-          "camera": {
-            "initialScenePitchDegrees": -38.66837682568949,
-            "defaultControlYawDegrees": -163.14088451190412
-          },
           "mapUrl": "/scenes/pandora/pandora-normal-surface@2x.webp",
           "polesUrl": "/scenes/pandora/pandora-normal-poles@2x.webp",
           "radialTerrain": {
@@ -2306,7 +2302,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora",
-    "materialSha256": "5d6080f9ecc51228074bccaa1325681c3bcee93bad709f64ee4adf1cecd34c59",
+    "materialSha256": "dc04d4960d51462d406b1c85c842fa043f7ca23307d67f4167db02859c2df3f7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4dfcb1157dbc398b3c028f975fad16992cec70a0e088db0ecc6e5d9504b05023"
+    "sha256": "f7e36dfecf24fba3ddd12e91f6f5558e506b1de1ff6a44fd3fcc314ddebb6fcf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6996d26a276e98fcc9901584ae1873c923c560a60c21ea8cb0eead6bc33862eb",
+      "sha256": "be6d998b1c4509ac253736346788447882c9d982ece8187e872b34708deac8b7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 35.53,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/iphigenia/iphigenia-shape-surface@2x.webp",
           "polesUrl": "/scenes/iphigenia/iphigenia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "iphigenia",
-    "materialSha256": "d46fb3b7f26ed9ac62112db2b174d8ae69ab0fa9be12681d6dc40042f14c7fe3",
+    "materialSha256": "39562df1601fbd423a06ed97c8baea159ba6fe97b6d26fcc67f757a08fe037ff",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

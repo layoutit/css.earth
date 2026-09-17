@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 50.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/philosophia/philosophia-shape-surface@2x.webp",
     "polesUrl": "/scenes/philosophia/philosophia-shape-surface@2x.webp",
     "radialTerrain": {
