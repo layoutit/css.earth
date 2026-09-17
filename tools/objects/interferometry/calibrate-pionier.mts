@@ -18,29 +18,24 @@
  * 4.0.4 computes the transfer function and then fails to save it ("Data not found: ESO PRO CATG"). Calibrator diameters come
  * from the pipeline's bundled JSDC catalogue. The result is one calibrated OIFITS file for the target. */
 import { spawnSync } from 'node:child_process';
-import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { createWriteStream } from 'node:fs';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { Readable } from 'node:stream';
-import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
+import { column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, runRecipe } from './eso-pipeline.mts';
 import { toolchainPath } from './toolchain.mts';
+
+export { rawFrame } from './eso-pipeline.mts';
 
 export interface RawFrame { readonly dpId: string; readonly dpType: string; readonly object: string; readonly templateStart: string }
 export interface PionierBlock { readonly object: string; readonly role: 'science' | 'calibrator'; readonly exposures: readonly string[]; readonly dark: string }
 export interface PionierPlan { readonly kappa: { readonly dark: string; readonly frames: readonly string[] }; readonly spectral: string; readonly blocks: readonly PionierBlock[] }
 
-/** The archive's CSV (dp_id, dp_type, object and tpl_start columns, quoted fields allowed) as frames in time order. */
+/** The archive's CSV (dp_id, dp_type, object and tpl_start columns) as frames in time order. */
 export function parseRawFrames(csv: string): RawFrame[] {
-  const lines = csv.split('\n').filter(line => line.trim());
-  const split = (line: string) => [...line.matchAll(/("([^"]*)"|[^,]*)(,|$)/gu)].slice(0, -1).map(match => match[2] ?? match[1] ?? '');
-  const header = split(lines[0]!), column = (name: string) => { const index = header.indexOf(name); if (index < 0) throw new TypeError(`The raw frame table lacks ${name}.`); return index; };
-  const [id, type, object, template] = ['dp_id', 'dp_type', 'object', 'tpl_start'].map(column) as [number, number, number, number];
-  return lines.slice(1).map(split).map(cells => ({ dpId: cells[id]!, dpType: cells[type]!, object: cells[object]!, templateStart: cells[template]! }))
-    .sort((a, b) => a.dpId.localeCompare(b.dpId));
+  return parseRawTable(csv).map(row => ({ dpId: column(row, 'dp_id'), dpType: column(row, 'dp_type'), object: column(row, 'object'), templateStart: column(row, 'tpl_start') }));
 }
 
-const time = (dpId: string) => Date.parse(`${dpId.replace(/^PIONI\./u, '')}Z`);
+const time = frameTime;
 
 /** `frames` is the whole night; blocks are taken inside [from, to] (ISO times) when given, calibrations from anywhere before. */
 export function planPionierNight(frames: readonly RawFrame[], target: string, window: { readonly from?: string; readonly to?: string } = {}): PionierPlan {
@@ -72,23 +67,6 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
   return { kappa: { dark: kappaDark.dpId, frames: kappaFrames.map(frame => frame.dpId) }, spectral: lamp.dpId, blocks };
 }
 
-const exists = (path: string) => access(path).then(() => true, () => false);
-
-/** A public raw frame from the ESO data portal, decompressed, unless it is already in the raw directory. */
-export async function rawFrame(dpId: string, directory: string) {
-  const target = resolve(directory, `${dpId}.fits`);
-  if (await exists(target)) return target;
-  await mkdir(directory, { recursive: true });
-  const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`);
-  if (response.status === 401) throw new Error(`${dpId} is still proprietary.`);
-  if (!response.ok || !response.body) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
-  const compressed = `${target}.Z`;
-  await pipeline(Readable.fromWeb(response.body as never), createWriteStream(compressed));
-  const run = spawnSync('gzip', ['-d', '-f', compressed]);
-  if (run.status !== 0) throw new Error(`${dpId}: could not decompress (${String(run.stderr)}).`);
-  return target;
-}
-
 export interface PipelinePaths { readonly prefix: string; readonly catalogue: string; readonly yorick: string }
 
 export async function pipelinePaths(overrides: Partial<{ prefix: string; calib: string; yorick: string }> = {}): Promise<PipelinePaths> {
@@ -100,18 +78,15 @@ export async function pipelinePaths(overrides: Partial<{ prefix: string; calib: 
 
 export async function calibratePionier(plan: PionierPlan, rawDirectory: string, work: string, paths: PipelinePaths) {
   await mkdir(rawDirectory, { recursive: true }); await mkdir(work, { recursive: true });
-  const env = { ...process.env, HOME: resolve(work, 'home'), PATH: `${paths.yorick}:${resolve(paths.prefix, 'bin')}:${process.env.PATH}`, DYLD_LIBRARY_PATH: resolve(paths.prefix, 'lib'),
-    PNDRS_DIR: resolve(paths.prefix, 'lib/pionier-4.0.4/pndrs'), PIONIER_PLUGIN_PATH: resolve(paths.prefix, 'lib/pionier-4.0.4') };
-  await mkdir(env.HOME, { recursive: true });
+  const eso = esoEnvironment(paths.prefix, resolve(work, 'home'), { PATH: `${paths.yorick}:${resolve(paths.prefix, 'bin')}:${process.env.PATH}`,
+    PNDRS_DIR: resolve(paths.prefix, 'lib/pionier-4.0.4/pndrs'), PIONIER_PLUGIN_PATH: resolve(paths.prefix, 'lib/pionier-4.0.4') });
+  const env = eso.env as NodeJS.ProcessEnv & { PNDRS_DIR: string };
   const raw = async (dpId: string) => rawFrame(dpId, rawDirectory);
   const recipe = async (name: string, step: string, sof: readonly (readonly [string, string])[]) => {
-    const directory = resolve(work, step);
-    await mkdir(directory, { recursive: true });
-    await writeFile(resolve(directory, 'in.sof'), sof.map(([file, tag]) => `${file} ${tag}`).join('\n') + '\n');
-    const run = spawnSync('esorex', [`--recipe-dir=${resolve(paths.prefix, 'lib/esopipes-plugins')}`, name, 'in.sof'], { cwd: directory, env, encoding: 'utf8' });
-    await writeFile(resolve(directory, 'log.txt'), `${run.stdout}${run.stderr}`);
-    if (run.status !== 0) throw new Error(`${name} failed for ${step}; see ${resolve(directory, 'log.txt')}.`);
-    return resolve(directory, 'outfile_recipe.fits');
+    const products = await runRecipe(eso, work, step, name, sof);
+    const product = products.find(file => file.endsWith('outfile_recipe.fits'));
+    if (!product) throw new Error(`${name} wrote no product for ${step}.`);
+    return product;
   };
   const pndrs = (script: string, args: readonly string[], log: string) => {
     const run = spawnSync(resolve(paths.yorick, 'yorick'), ['-batch', resolve(env.PNDRS_DIR, script), ...args], { cwd: work, env, encoding: 'utf8' });
@@ -137,21 +112,13 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
   return calibrated;
 }
 
-/** The raw frame table for an interval from the ESO archive, as CSV with the columns parseRawFrames reads. */
-export async function queryRawFrames(from: string, to: string) {
-  const query = `SELECT dp_id, dp_cat, dp_type, object, tpl_start, exposure, ins_mode, release_date, access_estsize FROM dbo.raw WHERE instrument = 'PIONIER' AND exp_start BETWEEN '${from}' AND '${to}' ORDER BY dp_id`;
-  const response = await fetch(`https://archive.eso.org/tap_obs/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=${encodeURIComponent(query)}`);
-  if (!response.ok) throw new Error(`The ESO archive answered ${response.status}.`);
-  return response.text();
-}
-
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [work, ...rest] = process.argv.slice(2);
   const option = (name: string) => { const index = rest.indexOf(name); return index < 0 ? undefined : rest[index + 1]; };
   const target = option('--target'), from = option('--from'), to = option('--to');
   if (!work || !target || !from || !to) throw new TypeError('Usage: calibrate-pionier <work> --target <OBJECT> --from <ISO> --to <ISO> [--frames <csv>] [--raw <dir>] [--pipeline <prefix>] [--calib <dir>] [--yorick <bin>]');
   // The night's calibrations may precede the window by hours: the query starts twelve hours earlier.
-  const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawFrames(new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
+  const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawTable('PIONIER', ['dp_id', 'dp_cat', 'dp_type', 'object', 'tpl_start', 'exposure', 'ins_mode', 'release_date', 'access_estsize'], new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
   const plan = planPionierNight(parseRawFrames(csv), target, { from, to });
   await mkdir(work, { recursive: true });
   await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
