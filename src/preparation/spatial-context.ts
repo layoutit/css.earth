@@ -70,8 +70,11 @@ export interface OrbitalState {
   readonly eccentricity: number;
   readonly trueAnomalyRadians: number;
 }
-/** `none`: a body placed by its astrometry rather than an orbit, such as a star; it is listed with its position and radius only. */
-export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail' | 'none'; readonly classification?: string; }
+/** `none`: a body placed by its astrometry rather than an orbit, such as a star; it is listed with its position and radius only.
+ * `boundTo`: a placed star measured to be bound to another with no measured orbit (a wide binary companion), with the pair's
+ * centre of mass. The pair is one system, framed and aimed at that centre. */
+export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail' | 'none'; readonly classification?: string;
+  readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 }; }
 /** A source-backed coordinate origin with no rendered body, surface or marker. */
 export interface WorldContextOrbitCenter { readonly positionM: Vector3; readonly centerBodyId: string; }
 export interface PreparedWorldContext {
@@ -85,6 +88,8 @@ export interface PreparedWorldContext {
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly systemView?: PreparedSystemView;
     readonly placement?: 'approximate';
+    /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
+    readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
     readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
@@ -167,6 +172,15 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const fact = facts[body.id], state = states[body.id];
     if (!fact || !state || !positive(fact.radiusM, `${body.id} radius`)) throw new TypeError(`Missing physical facts for ${body.id}.`);
     validateState(state, body.id);
+    if (fact.boundTo) {
+      const hostPositionM = fact.boundTo.hostId === source.focus.id ? source.frame.originM : states[fact.boundTo.hostId]?.positionM;
+      const centre = fact.boundTo.centerM;
+      if (!hostPositionM || fact.orbitStyle !== 'none' || fact.boundTo.hostId === body.id) throw new TypeError(`${body.id} must be a placed body bound to another prepared body.`);
+      // The centre of mass lies on the line between the pair: its two distances add up to their separation.
+      const separation = Math.hypot(...hostPositionM.map((value, axis) => value - state.positionM[axis]!));
+      const split = Math.hypot(...hostPositionM.map((value, axis) => value - centre[axis]!)) + Math.hypot(...centre.map((value, axis) => value - state.positionM[axis]!));
+      if (!(separation > 0) || Math.abs(split - separation) > separation * 1e-9) throw new TypeError(`${body.id} centre of mass must lie between it and ${fact.boundTo.hostId}.`);
+    }
     const parent = state.centerBodyId === source.focus.id ? source.frame.originM : centerState(state.centerBodyId)?.positionM;
     if (!parent || state.centerBodyId === body.id || !source.bodies.some(body => body.id === state.centerBodyId) && !orbitCenters[state.centerBodyId] && state.centerBodyId !== source.focus.id ||
         Math.hypot(...parent.map((value, axis) => value - state.centerPositionM[axis]!)) > .001) {
@@ -177,7 +191,8 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       if (ancestors.has(parentId) || !centerState(parentId)) throw new TypeError(`${body.id} orbit parent hierarchy is invalid.`);
       ancestors.add(parentId);
     }
-    if (fact.orbitStyle === 'none') return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM });
+    if (fact.orbitStyle === 'none') return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
+      ...(fact.boundTo ? { boundTo: freeze({ hostId: fact.boundTo.hostId, centerM: copy(fact.boundTo.centerM) }) } : {}) });
     const motion = unit(cross(state.normal, state.perihelionDirection));
     const path = state.eccentricity > 1 ? prepareHyperbolicPath({
       semiMajorAxisUnits: state.semiMajorAxisM, eccentricity: state.eccentricity, trueAnomalyRad: state.trueAnomalyRadians,

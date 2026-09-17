@@ -1,0 +1,251 @@
+{
+  "schema": "csshd-189733b-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "hd-189733b-lally-2025-map",
+      "path": "science/lally-2025/output_E.npy",
+      "expectedBytes": 922286,
+      "expectedSha256": "c50caff258ca8a996c219776750bb7531a7a304d5582253f885f8851a0c31836",
+      "origin": "https://zenodo.org/api/records/15103479/files/output_E.npy/content",
+      "productId": "output_E.npy",
+      "version": "10.5281/zenodo.15103479",
+      "title": "Data Products for Eclipse Mapping with MIRI: 2D Map of HD 189733b from 8 µm JWST MIRI LRS Observations — Eureka! best-fit map",
+      "sourceUrl": "https://zenodo.org/records/15103479",
+      "credit": "M. Lally, R. C. Challener, N. K. Lewis, J. Inglis et al. (2025); JWST MIRI/LRS program GO 2021 (PI B. Kilpatrick) and Spitzer IRAC 8 µm",
+      "displayCredit": "Lally et al. · JWST MIRI",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/15103479",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Original Zenodo file, unchanged, MD5 dfb3f096bef955f228ed7e4d4bda12f0 as Zenodo lists it; read in place (tmap for the lens, time for the visible longitudes).",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "lally-2025-eclipse-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-15103479",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/15103479#/files/output_E.npy"
+          },
+          {
+            "catalogueId": "arxiv-2503-20895",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2503.20895#section-3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733b-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1430,
+      "expectedSha256": "6ac19985b9774d11e3de0c6451769ea7efd8e2e5424b605a7cdbfd3c7578b8f4",
+      "origin": "https://arxiv.org/abs/2503.20895",
+      "credit": "Lally et al. (2025), arXiv:2503.20895",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements and values computed from the deposited map, each with its source",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-189733b-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/hd-189733b/source/manifest.json@52e6e03f6de43f93ced1caea00c88926f07339ac#/inputs/2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733b-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2871,
+      "expectedSha256": "d449a3bab08d4743399b5412c25ec72525be9fcc7c996e180a1652b949b48896",
+      "origin": "Repository-authored raster recipe: the deposited MIRI temperature map on the reference sphere, false colour, observed longitudes only, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "hd-189733b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1786,
+      "expectedSha256": "ec7ddcce636a27f706e04e1338a9ea3fc0352c93fa040841e55be6b530f80fa5",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "hd-189733b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: no directional Sun for a self-luminous map",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "hd-189733b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 105,
+      "expectedSha256": "e085a5031fd2b2f35c05dea1641a36f5869a7235e9973c7653752c808848f771",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "hd-189733b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 294,
+      "expectedSha256": "1b454a8e6fc2a3d35bad0c36480a68c53049846e6702222954b7276b72d27f61",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "eclipse-map-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 67640,
+      "expectedSha256": "5412bdf218d8ecaa735ce408eeaf0755a21acd412c3854ddccab13f888346f67",
+      "origin": "https://zenodo.org/records/15103479",
+      "credit": "Lally et al. (2025)'s deposited MIRI temperature map seen from the host star, in the lens's palette; rendered by tools/objects/source-authoring/hd-189733/author.mts",
+      "license": "Project-authored display derivative of CC BY 4.0 data.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+        "inputs": [
+          "hd-189733b-lally-2025-map",
+          "hd-189733b-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default lens map rendered as a dayside disc; `author.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4680,
+      "expectedSha256": "338f4add862a9ca2decdf87f200d4394f9982040727a5e5faceb0ff5b2f13532",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 557,
+      "expectedSha256": "9970bcd3ea778cddbf2a9b2d86c8be2f51f1494b31069dc46c3cd88987f0785d"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 447,
+      "expectedSha256": "d6bf2ce7771d526b6c0680ff6676a33c3c4292279f3151f9883d7e9c06b1e6c3"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 838,
+      "expectedSha256": "9f9fc325f599aae243cb31ede18de5c21fcd028fe4fefc2b4a3fb7025b193e59"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 6025,
+      "expectedSha256": "e20d41a116f8a164edcaaad432f84e973ac0103b54b72edff0caeccb5fc8e768"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 533042,
+      "expectedSha256": "a5060b3a600b69365ee7106b75de9e826add677501838e875b4e249343926f6a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733b/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+      }
+    }
+  ]
+}

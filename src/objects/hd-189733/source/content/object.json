@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-189733",
+  "displayName": "HD 189733 A",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.75 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2503-20895",
+          "url": "https://arxiv.org/abs/2503.20895",
+          "label": "Lally et al. (2025), Table 1 (stellar radius of the map)",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "19.8 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-189733",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation at the equator",
+        "value": "11.5 days",
+        "source": {
+          "catalogueId": "arxiv-2310-06681",
+          "url": "https://arxiv.org/abs/2310.06681",
+          "label": "Cristo et al. (2024), Table 4",
+          "checked": "2026-09-17",
+          "path": "source/preparation/rotation.json",
+          "locator": "equatorialRotationPeriod"
+        }
+      },
+      {
+        "id": "spin-orbit",
+        "label": "Spin axis to planet's orbit",
+        "value": "About 14°",
+        "source": {
+          "catalogueId": "arxiv-2310-06681",
+          "url": "https://arxiv.org/abs/2310.06681",
+          "label": "Cristo et al. (2024), abstract",
+          "checked": "2026-09-17",
+          "path": "source/preparation/rotation.json",
+          "locator": "trueObliquity"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge fitted here to TESS transits of HD 189733b. The disc itself is unresolved.",
+        "thumbnail": "hd-189733-lens-color.webp",
+        "surface": "hd-189733-surface-color.webp",
+        "poles": "hd-189733-poles-color.webp",
+        "source": {
+          "id": "hd-189733-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum. The edge darkening is fitted to 30 TESS transits (600–1000 nm): the edge is about a third as bright as the centre. The axis is tilted about 14° from the planet's orbit, as measured; the star is spotted, but no map of the spots exists."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Cristo et al. (2024), A&A 682, A28",
+      "href": "https://arxiv.org/abs/2310.06681"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lally et al. (2025), arXiv:2503.20895",
+      "href": "https://arxiv.org/abs/2503.20895"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2503.20895",
+      "credit": "Lally et al. (2025), arXiv:2503.20895"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-189733.json",
+      "credit": "Map paper's stellar radius at the Gaia DR3 distance; Gaia DR3 astrometry; spin axis measured by Cristo et al. (2024)"
+    }
+  }
+}

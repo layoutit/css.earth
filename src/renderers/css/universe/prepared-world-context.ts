@@ -59,6 +59,8 @@ export interface PreparedContextFocus extends PreparedContextPoint {
 }
 export interface PreparedContextBody extends PreparedContextPoint {
   readonly placement?: 'approximate';
+  /** A placed star measured to be bound to another with no measured orbit: its host and the pair's centre of mass. */
+  readonly boundTo?: { readonly hostId: string; readonly centerM: PositionM };
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates: readonly { readonly cameraToReference: readonly number[];
       readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }[] };
@@ -228,11 +230,17 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const renderedIds = new Set(array(input.bodies, 'context bodies').map(value => text(record(value, 'context body').id, 'context body id')));
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextBody>(value => {
-    const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
-    const rawBody = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
+    const fields = ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement', 'boundTo'];
+    const input = record(value, 'context body', fields);
+    const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView);
     if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
-    const body = { ...rawBody, ...(systemView ? { systemView } : {}),
+    // A placed star can name the star it is measured to be bound to, with the pair's centre of mass.
+    const bound = input.boundTo === undefined ? undefined : (() => {
+      const pair = record(input.boundTo, 'bound companion', ['hostId', 'centerM']);
+      return { hostId: text(pair.hostId, 'bound companion host'), centerM: vector(pair.centerM, 'bound companion centre') };
+    })();
+    const body = { ...rawBody, ...(systemView ? { systemView } : {}), ...(bound ? { boundTo: bound } : {}),
       ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
     if (input.orbit === undefined) return Object.freeze(body);
     const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
