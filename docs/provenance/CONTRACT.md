@@ -96,7 +96,13 @@ or reopen condition. A shared record names no single body's files. A test
 refuses a finding repeated across three bodies and a record no longer quoted.
 
 The README links the ledger instead of repeating a source survey. Read the
-ledger before investigating an object, starting from the open-work index
+An entry that is not included names, among its evidence, the source outside this
+repository that it examined: the archive, deposit or paper where the evidence
+that would reopen it appears. That is what makes a decision reopenable rather
+than a sentence nobody can act on. A test records how many decisions still name
+no such source, and that count may only fall.
+
+Read the ledger before investigating an object, starting from the open-work index
 ([`docs/provenance/investigation-index.md`](investigation-index.md)), which
 groups every unresolved and deferred decision by what it waits on. Refresh it
 with `pnpm investigations:index`; a test refuses a stale copy. Reopen an excluded, unresolved or
