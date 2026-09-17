@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "88b772f5701c101a406707300b7fe44112ab383c57794e393bd3d768b0a5ec22"
+    "sha256": "a88dc4a68d5f3ff7ea61c4ba7ce2a6fd22efac3708eca7e09599a03c8b42ff05"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -124,7 +124,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e55bca14ccfb0d591ade9bbd076d06b3e6f402e7f5d5601710d9a16c8959aa1",
+      "sha256": "ca3586c1ca3a930ea681e3f415470b32ad466c599e9312e911d8daf23504f81f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,7 +249,7 @@
                 "meta": "K",
                 "sourceUrl": "https://zenodo.org/records/12627524"
               },
-              "notes": "Brightness temperature fitted to JWST light curves; large-scale patterns only. North and south cannot be told apart by this method."
+              "notes": "Brightness temperature fitted to JWST light curves; large patterns only. The hot spot sits about 7° east of noon and south of the equator; how far south depends on the model, 4° to 16°."
             }
           ]
         },
@@ -350,8 +350,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3e55bca14ccfb0d591ade9bbd076d06b3e6f402e7f5d5601710d9a16c8959aa1",
-      "bytes": 4495,
+      "sha256": "ca3586c1ca3a930ea681e3f415470b32ad466c599e9312e911d8daf23504f81f",
+      "bytes": 4552,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -505,7 +505,7 @@
   },
   "lastPreparation": {
     "objectId": "wasp-43b",
-    "materialSha256": "3e979b09f7651db33c46dcf0a28ed6447c0c2464d6fb824cca146fc6aac018fb",
+    "materialSha256": "a37299243cba409d4066bfc75208a6ae722968789190ef2ff6a1f79ec43de3f8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

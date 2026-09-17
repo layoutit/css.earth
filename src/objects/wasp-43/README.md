@@ -2,7 +2,7 @@
 
 ## Sources
 
-WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](../wasp-43b/README.md). Its package holds the placement, the published size and the record of what was checked for its surface. No image of the star exists, so it is a shape-only star: `discoveryVisibility` keeps it off the map, and its page opens from search or from its planet.
+WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](../wasp-43b/README.md). Its package holds the placement, the published size and the record of what was checked for its surface. No image of the star exists, so it is a shape-only star. Unlike Antares and Polaris it stays on the map, because a body with imagery orbits it: preparation marks its discovery `hostsImagery` ([prepare-catalog.mts](../../../tools/prepare-catalog.mts)) and `discoveryVisibility` keeps a planetary system's star visible. The Milky Way overview lists it under Systems.
 
 **Placement.** The ICRS position, parallax and proper motion are Gaia EDR3 values as SIMBAD gives them; the radial velocity, −3.7 ± 0.7 km/s, is Gaia DR2's. The distance is 1000 / 11.474 mas = 87.15 pc, with no parallax zero-point correction.
 
@@ -14,7 +14,12 @@ WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](..
 
 ## Evidence
 
-EVIDENCE_PLACEHOLDER
+Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43` prepared the package.
+
+- [`source.test.mts`](../../../tests/objects/unit/wasp-43/source.test.mts) verifies the pins, that no observation is acquired, that radius and GM are the table's stellar values, that the distance is the Gaia parallax and that the angular diameter is marked as computed.
+- [`object-discovery.test.mts`](../../../site/test/object-discovery.test.mts) checks that WASP-43 and WASP-43b stay on the map under every discovery setting while Antares and Polaris stay hidden.
+- [`default-view.test.mts`](../../../tests/objects/unit/wasp-43/default-view.test.mts) derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, with the display axis and celestial north up.
+- [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/wasp-43/` with the default camera, no console errors.
 
 ## Known problems
 
