@@ -30,7 +30,7 @@ try {
     };
     navigationFragments(window).prefetch('venus');
     const fragment = await navigationFragments(window).get('venus');
-    if (fragment.querySelector('template[data-object-card], [data-solar-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
+    if (fragment.querySelector('template[data-object-card], [data-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
     const expectedMetadata = headMetadata(new DOMParser().parseFromString(await fetch('/venus/').then(response => response.text()), 'text/html'));
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
@@ -109,7 +109,7 @@ try {
   assert.equal(proof.first.fragmentRequests, 1, 'The destination load reuses the intent-fetched fragment');
   for (const transition of [proof.first, proof.second]) {
     assert.ok(transition.breadcrumbs.includes('/sun/?overview=milky-way'));
-    assert.ok(transition.breadcrumbs.includes('/sun/?overview=solar-system'));
+    assert.ok(transition.breadcrumbs.includes('/sun/?overview=system'));
   }
   assert.ok(proof.second.identities.every(Boolean));
   assert.equal(proof.second.selectedSearch, '');

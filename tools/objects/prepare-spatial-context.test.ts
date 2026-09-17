@@ -160,8 +160,8 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     for (const body of result.bodies) {
       const id = body.id as BodyId, parent = BODIES[id].parent!;
       if (body.orbit === undefined) {
-        // Placed stars and their planets are positioned without a drawn trajectory.
-        assert.ok((STAR_IDS as readonly string[]).includes(id) || (HOSTED_PLANET_IDS as readonly string[]).includes(id), `${id} has no orbit`);
+        // Placed stars are positioned without a drawn trajectory; their planets orbit them below.
+        assert.ok((STAR_IDS as readonly string[]).includes(id), `${id} has no orbit`);
         assert(Math.hypot(...modelPositionM(id).map((value, axis) => value - body.positionM[axis]!)) <= Math.max(.001, Math.hypot(...body.positionM) * Number.EPSILON * 8), `${id} differs from its independent placement`);
         continue;
       }
@@ -173,6 +173,11 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
           Math.max(.001, Math.hypot(...expected) * Number.EPSILON * 4);
       assert(agrees(modelPositionM(id), body.positionM), `${id} differs from its independent ephemeris`);
       assert(agrees(modelPositionM(parent), body.orbit.centerPositionM), `${id} orbit differs from its parent's independent ephemeris`);
+    }
+    // A placed star with an orbiting planet roots its own planetary system.
+    for (const id of HOSTED_PLANET_IDS) {
+      const host = result.bodies.find((body: { id: string }) => body.id === BODIES[id].parent);
+      assert.ok(host.systemView?.memberIds.includes(id), `${host.id} frames its planet ${id}`);
     }
     for (const [id, parentId] of [['moon', 'earth'], ['io', 'jupiter'], ['europa', 'jupiter'], ['ganymede', 'jupiter'], ['callisto', 'jupiter']]) {
       const child = result.bodies.find((body: { id: string }) => body.id === id);

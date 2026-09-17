@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
 import { parsePreparedWorldContext } from './prepared-world-context.js';
-import { createWorldContextPlanner } from './world-context-planner.js';
+import { createSystemFade, createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
 import { createContextSelectionPolicy } from './context-presentation-policy.js';
@@ -393,4 +393,24 @@ test('a placed orbitless body keeps its marker beyond the system fade, like the 
   expect(placed.lineWidth).toBe(anchor.lineWidth);
   expect(placed.indicatorShown).toBe(true);
   expect(placed.labelShown).toBe(true);
+});
+
+test('each planetary system fades with the camera distance from its own star', () => {
+  const fade = createSystemFade(plan);
+  const index = (id: string) => [plan.focus, ...plan.bodies].findIndex(point => point.id === id);
+  const wasp = plan.bodies.find(body => body.id === 'wasp-43')!;
+  expect(fade.isSystemStar('sun')).toBe(true);
+  expect(fade.isSystemStar('wasp-43')).toBe(true);
+  expect(fade.isSystemStar('jupiter')).toBe(false);
+  expect(fade.isSystemStar('betelgeuse')).toBe(false);
+  // Beside WASP-43, 87 pc from the Sun: its planet's orbit shows while the Solar System has retired.
+  expect(fade.update([wasp.positionM[0], wasp.positionM[1], wasp.positionM[2] + 1e11])).toBe(1);
+  expect(fade.of(index('wasp-43b'))).toBe(1);
+  expect(fade.of(index('earth'))).toBe(0);
+  expect(fade.of(index('moon'))).toBe(0);
+  expect(fade.of(index('betelgeuse')), 'a star outside every system is never faded').toBe(1);
+  expect(fade.update([0, 0, 1e11])).toBe(1);
+  expect(fade.of(index('earth'))).toBe(1);
+  expect(fade.of(index('wasp-43b'))).toBe(0);
+  expect(fade.update([0, 0, 1e18]), 'between the stars every system has retired').toBe(0);
 });
