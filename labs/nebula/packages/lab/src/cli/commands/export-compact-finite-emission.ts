@@ -80,8 +80,10 @@ await cp(resolve(root, modelDirectory, 'neutral/slices'), resolve(root, compact,
 // The depth density the envelope was fitted with, carried with the accepted pin so the identity survives.
 const identityPin = record(envelope.priorCloud, 'envelope prior cloud');
 assert.ok(typeof identityPin.path === 'string' && typeof identityPin.sha256 === 'string', 'The envelope must pin its depth density.');
-const priorRecipeBytes = await readFile(resolve(root, identityPin.path));
-assert.equal(sha256(priorRecipeBytes), identityPin.sha256, 'The pinned depth density changed.');
+const identityPath = text(identityPin.path, 'envelope prior path'), identityDigest = text(identityPin.sha256, 'envelope prior digest');
+const priorDirectory = dirname(identityPath);
+const priorRecipeBytes = await readFile(resolve(root, identityPath));
+assert.equal(sha256(priorRecipeBytes), identityDigest, 'The pinned depth density changed.');
 const priorRecipe = await put(`${compact}/prior/volume.json`, priorRecipeBytes);
 const priorGrid = record(parseLabModelJson(priorRecipeBytes.toString()), 'prior recipe').grid;
 const gridPin = record(priorGrid, 'prior grid');
@@ -89,7 +91,7 @@ assert.ok(typeof gridPin.path === 'string', 'The depth density must name its gri
 // Every sibling the recipe pins travels with it: the grid and its own provenance record.
 for (const sibling of [gridPin, record(record(parseLabModelJson(priorRecipeBytes.toString()), 'prior recipe').provenance, 'prior provenance')]) {
   const relative = text(sibling.path, 'prior sibling path');
-  const bytes = await readFile(resolve(root, dirname(identityPin.path), relative));
+  const bytes = await readFile(resolve(root, priorDirectory, relative));
   assert.equal(sha256(bytes), sibling.sha256, `The pinned depth density input changed: ${relative}`);
   await put(`${compact}/prior/${basename(relative)}`, bytes);
 }
@@ -136,7 +138,7 @@ const inputs = {
   appearance: lensInputs[0]!.result.appearance,
   encoding: { format: 'webp', quality: record(model.settings, 'model settings').quality },
   emissionField, envelope: envelopeRecord, neutralSlices, neutralTextures: `${compact}/neutral`,
-  priorCloud: { identityPin: { path: identityPin.path, sha256: identityPin.sha256 }, recipe: priorRecipe },
+  priorCloud: { identityPin: { path: identityPath, sha256: identityDigest }, recipe: priorRecipe },
   stars, lenses,
   limitations: [
     'Delivered replay of an accepted image-fitted finite emission model. No fit, star removal or registration runs from these inputs.',
@@ -157,7 +159,7 @@ const referenced = [
   { name: 'emission-recipe', path: `${objectDirectory}/source/evidence/smc/constrained/emission-envelope-ellipsoid.json` },
   { name: 'lens-recipe', path: `${objectDirectory}/source/evidence/smc/constrained/finite-lenses-ellipsoid.json` },
   { name: 'promotion-recipe', path: recipeArgument },
-  { name: 'depth-density', path: identityPin.path },
+  { name: 'depth-density', path: identityPath },
   { name: 'catalogue-stars', path: starsPath },
   ...lensInputs.map(entry => ({ name: `baseline-${entry.lens.imageId}`, path: `.local/nebula-lab/reconstructions/${entry.finite.sourceResultId}/source/provenance.json` })),
 ];

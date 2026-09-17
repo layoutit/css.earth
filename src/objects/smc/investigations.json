@@ -17,6 +17,10 @@
         {
           "date": "2026-09-17",
           "commit": "101899478bc56f7549cafe9e51d7617cce301a3d"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
         }
       ]
     },
@@ -35,6 +39,10 @@
         {
           "date": "2026-09-17",
           "commit": "101899478bc56f7549cafe9e51d7617cce301a3d"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
         }
       ]
     },
@@ -53,6 +61,10 @@
         {
           "date": "2026-09-17",
           "commit": "101899478bc56f7549cafe9e51d7617cce301a3d"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
         }
       ]
     },
@@ -71,6 +83,10 @@
         {
           "date": "2026-09-17",
           "commit": "101899478bc56f7549cafe9e51d7617cce301a3d"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
         }
       ]
     },
@@ -89,6 +105,10 @@
         {
           "date": "2026-09-17",
           "commit": "101899478bc56f7549cafe9e51d7617cce301a3d"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
         }
       ]
     },
@@ -302,6 +322,22 @@
         {
           "date": "2026-09-17",
           "commit": "f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7"
+        }
+      ]
+    },
+    {
+      "id": "atlas-acceptance",
+      "subject": "Application acceptance of the regenerated atlas delivery",
+      "status": "included",
+      "finding": "Re-inspected in the running application after the delivery became regenerable and atlas-packed. Each lens now decodes one texture at the Earth framing instead of 128, the world camera is unchanged across all five lens switches, all 1,803 stars mount and the shared toggle removes and restores them, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views are unchanged from the slice delivery. The earlier inspection of the pre-relocation slice delivery is preserved beside it.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/4599ea6f2dd745cbd8f864d561d98466b1d634cb/src/objects/smc/evidence/atlas-delivery-2026-09-17/inspection.json",
+        "https://github.com/layoutit/css.earth/blob/4599ea6f2dd745cbd8f864d561d98466b1d634cb/src/objects/smc/evidence/promotion-2026-09-17/inspection.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "4599ea6f2dd745cbd8f864d561d98466b1d634cb"
         }
       ]
     }
