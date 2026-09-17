@@ -139,10 +139,12 @@ function solve(matrix: Float64Array, rhs: Float64Array, n: number) {
  * instrument baseline, ramp or decorrelation vector sampled at the data times, zero outside its visit). With `positive`, every
  * visible cell keeps a positive intensity (C0/pi + sum c_k map_k > 0), solved by a log-barrier Newton method from the uniform map. */
 export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<number>, errors: ArrayLike<number>, use: (index: number) => boolean,
-  { positive = true, systematics = [] as readonly ArrayLike<number>[] } = {}): EigenFit {
+  { positive = true, systematics = [] as readonly ArrayLike<number>[], fixStellarCorrection = false } = {}): EigenFit {
   if (!(ncurves >= 1 && ncurves <= basis.curves.length)) throw new RangeError(`ncurves must be 1..${basis.curves.length}.`);
   if (systematics.some(column => column.length !== data.length)) throw new RangeError('Systematics columns must sample every data point.');
   const p = ncurves + 2 + systematics.length, columns = [...basis.curves.slice(0, ncurves), basis.uniform, null, ...systematics];
+  // `fixStellarCorrection` holds s_corr at 0, as ThERESA does for an already normalized light curve: a stiff prior row pins it,
+  // so the parameter layout and the sampler stay the same, and at exactly 0 it adds nothing to chi-squared.
   const normal = new Float64Array(p * p), rhs = new Float64Array(p);
   let samples = 0, dataSquares = 0;
   const row = new Float64Array(p);
@@ -153,6 +155,7 @@ export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<
     for (let i = 0; i < p; i++) { rhs[i] += w * row[i]! * target; for (let j = 0; j < p; j++) normal[i * p + j] += w * row[i]! * row[j]!; }
     dataSquares += w * target * target; samples++;
   }
+  if (fixStellarCorrection) normal[(ncurves + 1) * p + ncurves + 1] += 1e30;
   const chi2 = (x: Float64Array) => {
     let value = dataSquares;
     for (let i = 0; i < p; i++) { value -= 2 * x[i]! * rhs[i]!; for (let j = 0; j < p; j++) value += x[i]! * normal[i * p + j]! * x[j]!; }
@@ -204,8 +207,8 @@ export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<
   for (let c = 0; c < cells; c++) map[c] = constraint(x, c);
   const chiSquared = chi2(x);
   return { normal: { matrix: normal, rhs, dataSquares }, ncurves, coefficients: x.slice(0, ncurves), uniformAmplitude: x[ncurves]!, stellarCorrection: x[ncurves + 1]!,
-    systematics: x.slice(ncurves + 2), chiSquared, samples, parameters: p,
-    bic: chiSquared + p * Math.log(samples), positive: minimum(x) > 0, map };
+    systematics: x.slice(ncurves + 2), chiSquared, samples, parameters: p - (fixStellarCorrection ? 1 : 0),
+    bic: chiSquared + (p - (fixStellarCorrection ? 1 : 0)) * Math.log(samples), positive: minimum(x) > 0, map };
 }
 
 /** A fitted map evaluated anywhere: intensity C0/pi + sum_k c_k * eigenmap_k at each (latitude, longitude) in degrees. */
