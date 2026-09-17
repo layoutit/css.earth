@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-43b",
+  "entries": [
+    {
+      "id": "challener-2024-nirspec-eclipse-map",
+      "subject": "Challener et al. (2024) JWST NIRSpec white-light eclipse map",
+      "status": "included",
+      "finding": "The deposited white-light brightness-temperature map (48 x 96 cells, 709.8 to 1975.7 K, hottest cell at +5.625, -13.125 degrees) is the Temperature lens. Turned by this package's orbit and synchronous rotation it fits the deposited white-light light curve at reduced chi-squared 2.120 over 4202 samples outside transit; the east-west mirror fits at 16.34 and a uniform planet at 92.75.",
+      "evidence": [
+        "https://zenodo.org/records/12627524",
+        "https://arxiv.org/abs/2406.10207",
+        "https://github.com/layoutit/css.earth/blob/56e2d089d998106659a64de8b643ff7027ec9f09/tests/objects/unit/wasp-43b/eclipse-map.test.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "hammond-2024-miri-eclipse-map",
+      "subject": "Hammond et al. (2024) JWST MIRI/LRS eclipse map",
+      "status": "excluded",
+      "finding": "A second-degree spherical-harmonic dayside map from the MIRI phase curve of the Transiting Exoplanet ERS program 1366. The arXiv HTML names no data deposit or repository for the map, so there is no grid to cast; its hotspot agrees with the NIRSpec map in direction.",
+      "revisitWhen": "The map grid is deposited as data.",
+      "evidence": [
+        "https://arxiv.org/abs/2404.16488"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "bell-2024-miri-products",
+      "subject": "Bell et al. (2024) MIRI phase-curve products and models",
+      "status": "excluded",
+      "finding": "Zenodo 10.5281/zenodo.10525170 (CC BY 4.0, 11.5 MB) holds reduction configurations, light curves, planetary spectra, general circulation model outputs and retrieval posteriors. No two-dimensional observed map; the circulation models are simulations, not observations.",
+      "revisitWhen": "A longitude-latitude map fitted to these light curves is published as data.",
+      "evidence": [
+        "https://zenodo.org/records/10525170",
+        "https://arxiv.org/abs/2401.13027"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "nrs1-nrs2-maps",
+      "subject": "Single-detector NRS1 and NRS2 maps in the same deposit",
+      "status": "excluded",
+      "finding": "The deposit also holds 24 x 48 maps from each NIRSpec detector (2.87-3.72 and 3.82-5.18 microns). The white-light map uses both, has the finer grid and is the one the paper's main results describe; the detector maps agree with it at the 1-sigma level in hotspot position.",
+      "revisitWhen": "A wavelength comparison lens is wanted.",
+      "evidence": [
+        "https://arxiv.org/abs/2406.10207"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "theresa-rerun-hotspot-latitude",
+      "subject": "Hotspot latitude under the authors' mapping code",
+      "status": "unresolved",
+      "finding": "ThERESA at commit 74a8fec on the deposited white-light light curve, transit excluded, 200,000 MCMC samples: degree 3 with 6 eigencurves gives +7.0 and -12.1 degrees (map correlated 0.967 with the deposit). The public code leaves the map's rotation axis in the plane of the sky, 7.8 degrees off the orbit normal (measured in starry); with the axis corrected the same model gives -4.1 degrees (16-84 percent -5.2 to -3.2) at nearly equal chi-squared, and degree 4 with 12 eigencurves gives -16.3 degrees. Longitude (6.9 to 7.2 east) and a southward sign hold in every run; the latitude does not.",
+      "revisitWhen": "The authors' 2024 code or a map fitted with the rotation axis on the orbit normal is published, or new eclipse data constrain the latitude.",
+      "evidence": [
+        "https://github.com/rychallener/ThERESA/tree/74a8fec0462f4583e336bbc44e2f2441b263a49f",
+        "https://arxiv.org/abs/2406.10207",
+        "https://github.com/layoutit/css.earth/blob/56e2d089d998106659a64de8b643ff7027ec9f09/src/objects/wasp-43b/source/reference/theresa-reruns.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "north-south-degeneracy",
+      "subject": "Which side of the star the planet crosses",
+      "status": "unresolved",
+      "finding": "Photometry cannot tell whether the planet crosses north or south of the stellar centre. Challener et al. assume one side (footnote 1), which fixes the map's north; the package's orbit follows the same construction.",
+      "revisitWhen": "A measurement that orients the orbit on the sky, such as the Rossiter-McLaughlin effect combined with a stellar inclination, or astrometry.",
+      "evidence": [
+        "https://arxiv.org/abs/2406.10207"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "orbit-node-position-angle",
+      "subject": "Position angle of the orbit's ascending node",
+      "status": "unresolved",
+      "finding": "Transits measure the inclination but not where the orbit's node lies on the sky; the hosted orbit sets it at position angle 0 as a display convention. It does not change the map, the rotation or the light-curve check, only the orbit's orientation among the stars.",
+      "revisitWhen": "A published sky orientation of the orbit.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/68d0b02ce9240adc8f8a934678e232c01361cc13/packages/astronomy/data/bodies/wasp-43b.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "synchronous-rotation",
+      "subject": "Tidal locking of WASP-43b",
+      "status": "unresolved",
+      "finding": "The rotation record assumes synchronous rotation with the pole on the orbit normal, as both mapping papers assume. It is expected for a 0.81-day orbit but not measured; the light-curve fit is consistent with it.",
+      "revisitWhen": "A measured rotation rate or obliquity for WASP-43b.",
+      "evidence": [
+        "https://arxiv.org/abs/2406.10207"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    },
+    {
+      "id": "transit-ephemeris-check",
+      "subject": "Orbital phase at the scene epoch against independent ephemerides",
+      "status": "included",
+      "finding": "Propagating the Table 1 transit time and period to 2026-09-03 puts mid-transit 21 s from the Kokori et al. (2023) ephemeris and 39 s from Ivshina & Winn (2022), both from the NASA Exoplanet Archive: 0.1 and 0.2 degrees of orbital phase.",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/overview/WASP-43b",
+        "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...62I/abstract"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "68d0b02ce9240adc8f8a934678e232c01361cc13"
+        }
+      ]
+    }
+  ]
+}

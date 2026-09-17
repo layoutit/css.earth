@@ -162,7 +162,8 @@ it('uses the retained motion owner for interruption, replacement and teardown, r
   await expect(f.orbit.flyToPreparedFocus({ ...focus, limits: { minimumDistanceM: 1, maximumDistanceM: 0 } }, frame, optics)).rejects.toThrow('metadata');
   close(f.world().pose.positionM, interrupted.pose.positionM);
   const replacement = f.orbit.flyToPreparedFocus(focus, frame, optics);
-  const final = f.orbit.flyToPreparedFocus({ ...focus, id: 'catalogue:8', positionM: [2e20, -1e20, 3e20] }, frame, optics);
+  // Catalogue ids such as the dwarf galaxy dw1343+58 carry a plus sign.
+  const final = f.orbit.flyToPreparedFocus({ ...focus, id: 'dw1343+58', positionM: [2e20, -1e20, 3e20] }, frame, optics);
   expect(await replacement).toEqual({ completed: false });
   f.orbit.destroy();
   expect(await final).toEqual({ completed: false });

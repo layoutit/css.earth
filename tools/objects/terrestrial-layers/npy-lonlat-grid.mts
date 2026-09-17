@@ -11,29 +11,18 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { parseSpinState, spinOrientation, type SpinState } from './observer-camera.mts';
+import { readNpyHeader } from './npy-pickle.mts';
 
 type Matrix = readonly (readonly [number, number, number])[];
 
 export interface NpyArray { descr: '<f8' | '<i8'; shape: readonly number[]; values: Float64Array; }
 
-const MAGIC = Buffer.from([0x93, 0x4e, 0x55, 0x4d, 0x50, 0x59]);
-
 /** Read a little-endian float64 or int64 C-order .npy array (format versions 1 to 3). */
 export function readNpy(bytes: Buffer): NpyArray {
-  if (bytes.length < 10 || !bytes.subarray(0, 6).equals(MAGIC)) throw new TypeError('Not a NumPy .npy array.');
-  const major = bytes[6];
-  if (![1, 2, 3].includes(major)) throw new TypeError(`Unsupported .npy format version ${major}.`);
-  const headerLength = major === 1 ? bytes.readUInt16LE(8) : bytes.readUInt32LE(8);
-  const dataOffset = (major === 1 ? 10 : 12) + headerLength;
-  if (dataOffset > bytes.length || dataOffset % 16 !== 0) throw new TypeError('Truncated or misaligned .npy header.');
-  const header = bytes.subarray(major === 1 ? 10 : 12, dataOffset).toString(major === 3 ? 'utf8' : 'latin1');
-  const descr = header.match(/'descr':\s*'([^']+)'/)?.[1];
-  const fortran = header.match(/'fortran_order':\s*(True|False)/)?.[1];
-  const shapeText = header.match(/'shape':\s*\(([^)]*)\)/)?.[1];
-  if ((descr !== '<f8' && descr !== '<i8') || fortran !== 'False' || shapeText === undefined) {
+  const { header, descr, fortranOrder, shape, dataOffset } = readNpyHeader(bytes);
+  if ((descr !== '<f8' && descr !== '<i8') || fortranOrder) {
     throw new TypeError(`Only little-endian float64 or int64 C-order .npy arrays are read; header was ${header.trim()}.`);
   }
-  const shape = shapeText.split(',').map(part => part.trim()).filter(Boolean).map(Number);
   const count = shape.reduce((product, n) => product * n, 1);
   if (!shape.length || shape.some(n => !Number.isSafeInteger(n) || n <= 0) || dataOffset + count * 8 !== bytes.length) {
     throw new TypeError('The .npy shape does not match its data length.');

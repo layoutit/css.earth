@@ -5,8 +5,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
 import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
-  systemBarycentreHeliocentricAu, M_PER_AU } from '@cssearth/astronomy';
-import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
+  systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
+import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '../prepare-catalog.mts';
 import { prepareSpatialContext } from './prepare-spatial-context.js';
 
@@ -139,6 +139,12 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     }
     const modelPositionM = (id: BodyId): readonly number[] => {
       const parent = BODIES[id].parent;
+      // A placed star sits at its catalogue astrometry; a planet of another star on its hosted orbit around it.
+      if ((STAR_IDS as readonly string[]).includes(id)) return starStateKm(id as StarId, source.frame.epochJdTt).positionKm.map(value => value * 1000);
+      if ((HOSTED_PLANET_IDS as readonly string[]).includes(id)) {
+        const host = modelPositionM(parent!), relative = hostedPlanetStateRelativeKm(id as HostedPlanetId, source.frame.epochJdTt).positionKm;
+        return host.map((value, axis) => value + relative[axis]! * 1000);
+      }
       if (parent === null) return [0, 0, 0];
       if (sourcePrimaries.has(id)) return sourcePrimaries.get(id)!.map(value => value * 1000);
       if (COMET_IDS.includes(id as CometId)) return cometPositionKm(id as CometId, source.frame.epochJdTt).map(value => value * 1000);
@@ -153,6 +159,12 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     };
     for (const body of result.bodies) {
       const id = body.id as BodyId, parent = BODIES[id].parent!;
+      if (body.orbit === undefined) {
+        // Placed stars and their planets are positioned without a drawn trajectory.
+        assert.ok((STAR_IDS as readonly string[]).includes(id) || (HOSTED_PLANET_IDS as readonly string[]).includes(id), `${id} has no orbit`);
+        assert(Math.hypot(...modelPositionM(id).map((value, axis) => value - body.positionM[axis]!)) <= Math.max(.001, Math.hypot(...body.positionM) * Number.EPSILON * 8), `${id} differs from its independent placement`);
+        continue;
+      }
       assert.equal(body.orbit.centerBodyId, parent);
       // At outer-dwarf coordinates one floating-point step already exceeds a
       // millimetre. Bound the independent conversion by four relative epsilons.

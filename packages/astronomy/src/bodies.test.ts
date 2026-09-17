@@ -6,6 +6,7 @@ import {
   DWARF_PLANET_IDS,
   SMALL_BODY_IDS,
   COMET_IDS,
+  EXOPLANET_IDS,
   PLANET_IDS,
   bodyData,
   moonsOf,
@@ -19,9 +20,9 @@ import { STAR_IDS, type StarId } from './stars.js'
 const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
 describe('the body table', () => {
-  it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets and every placed star', () => {
-    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length)
-    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS] as BodyId[]) {
+  it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star and every exoplanet', () => {
+    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length)
+    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS, ...EXOPLANET_IDS] as BodyId[]) {
       expect(BODIES[id]).toBeDefined()
       expect(BODIES[id].id).toBe(id)
     }
@@ -59,9 +60,10 @@ describe('the body table', () => {
       expect(data.gravitationalParameterKm3PerS2).toBeGreaterThanOrEqual(0)
       // Zero represents an unpublished GM, not a measured massless body.
       if (data.gravitationalParameterKm3PerS2 === 0) continue
-      // A red supergiant is a thousand times less dense than water; only Solar-System bodies take the rock-and-ice bounds.
+      // Stars range from a red supergiant a thousand times less dense than water to a K dwarf denser than it; only planets and
+      // smaller bodies take the rock-and-ice bounds. A star is at least a tenth of the Sun's radius.
       if (STAR_IDS.includes(id as StarId)) {
-        expect(data.meanRadiusKm).toBeGreaterThan(1e8)
+        expect(data.meanRadiusKm).toBeGreaterThan(69570)
         continue
       }
       // Mean density between 0.2 and 8.5 g/cm^3 covers porous Helene and
