@@ -15,7 +15,7 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
-    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 1],
+    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 5],
   ]);
   assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));
@@ -127,12 +127,12 @@ test('image-layer deliveries retain authored documents and every layer in matchi
   const fixture = await mkdtemp(resolve(tmpdir(), 'image-layer-provenance-'));
   try {
     await mkdir(resolve(fixture, 'src/objects'), { recursive: true });
-    for (const id of ['m31', 'm33', 'smc']) await mkdir(resolve(fixture, 'src/objects', id));
-    for (const path of ['tools', 'site', ...['m31', 'm33', 'smc'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
+    for (const id of ['m31', 'm33']) await mkdir(resolve(fixture, 'src/objects', id));
+    for (const path of ['tools', 'site', ...['m31', 'm33'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
       await symlink(resolve(root, path), resolve(fixture, path));
     }
     const entries = await prepareVolumeProvenance({ root: fixture });
-    assert.equal(entries.length, 3);
+    assert.equal(entries.length, 2);
     for (const entry of entries) {
       assert.equal(entry.provenance.sources.filter(source => source.kind === 'authored-document').length, 3);
       const bank = sourceObject(JSON.parse(await readFile(resolve(root, entry.base, 'prepared/image-layers.json'), 'utf8')));

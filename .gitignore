@@ -236,6 +236,8 @@ src/objects/*/source/**/*.bpc
 # Name each object: bodies commit their prepared/provenance.json in the same folder.
 /src/objects/lmc/prepared/presentation.json
 /src/objects/lmc/prepared/provenance.json
+/src/objects/smc/prepared/presentation.json
+/src/objects/smc/prepared/provenance.json
 # Binary kernels in shared SPICE kernel banks are restored by tools/spice/kernel-bank.mts; text kernels are committed.
 src/spice/**/*.bsp
 src/spice/**/*.bc
@@ -255,8 +257,6 @@ src/spice/**/*.bc
 /src/objects/m31/prepared/provenance.json
 /src/objects/m33/prepared/presentation.json
 /src/objects/m33/prepared/provenance.json
-/src/objects/smc/prepared/presentation.json
-/src/objects/smc/prepared/provenance.json
 
 # Reproduced by prepare:galaxy-field from pinned CDS responses.
 /src/objects/nearby-universe/prepared/
@@ -270,7 +270,6 @@ src/spice/**/*.bc
 /src/objects/galaxy-clusters/prepared/runtime-assets.json
 /src/objects/m31/prepared/runtime-assets.json
 /src/objects/m33/prepared/runtime-assets.json
-/src/objects/smc/prepared/runtime-assets.json
 
 # Small expected-output receipt supports offline source recovery.
 !/src/objects/nearby-universe/prepared/

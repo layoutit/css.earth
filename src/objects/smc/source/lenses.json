@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-volume-lens-promotion@1",
+  "id": "smc",
+  "defaultLens": "smc-horalek-wide",
+  "framingRadiusUnits": 7,
+  "settingsReceiptSha256": "de400e47d433c0106302ebb7111c3286e6cacf70aa98733925c66aaa1b951462",
+  "lenses": [
+    {
+      "imageId": "smc-horalek-wide",
+      "resultId": "c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0",
+      "label": "Horálek optical",
+      "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-vista",
+      "resultId": "00942f12a12e81aca610a8046260047ecfd42ce8591b5cabd64014fffd0ea181",
+      "label": "ESO VISTA",
+      "description": "Near-infrared colors from ESO's VISTA VMC survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-smash",
+      "resultId": "77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+      "label": "NOIRLab SMASH",
+      "description": "Visible-light colors from the NOIRLab SMASH DECam survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-dss2",
+      "resultId": "f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75",
+      "label": "DSS2 optical",
+      "description": "Visible-light colors from the ESA/Hubble Digitized Sky Survey 2 image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-allwise-wide",
+      "resultId": "9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484",
+      "label": "NASA AllWISE",
+      "description": "Infrared colors from the NASA/IPAC AllWISE color mosaic served by CDS, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    }
+  ]
+}

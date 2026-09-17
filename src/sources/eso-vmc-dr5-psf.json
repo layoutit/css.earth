@@ -1,0 +1,43 @@
+{
+  "id": "eso-vmc-dr5-psf",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "VISTA Magellanic Clouds survey · DR5.1 PSF photometry",
+  "identifiers": [
+    {
+      "type": "ESO catalogue table",
+      "value": "vmc_dr5_psf_yjks_V3"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/rm/api/v1/public/releaseDescriptions/155",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/smc/vmc/recipe.json",
+      "revision": "101899478bc56f7549cafe9e51d7617cce301a3d",
+      "sha256": "7403284f4cee68aaf7bd7641ebeb984cd28a4f18ebd61769fdef4d26e1a3396c",
+      "locator": "/acquisition"
+    }
+  ],
+  "publisher": "ESO VISTA Magellanic Clouds survey, DR5.1",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO VMC DR5.1 PSF photometry (VISTA Magellanic Clouds survey)",
+      "scope": "Published source",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/vmc/README.md"
+    },
+    {
+      "kind": "limitation",
+      "text": "DR5.1 recalibrated the earlier PSF magnitudes onto CASU 1.5 without supplying individual original offsets; public Ks measurements are used unchanged.",
+      "scope": "Photometric release",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/vmc/README.md"
+    }
+  ]
+}

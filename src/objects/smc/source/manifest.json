@@ -3,29 +3,98 @@
   "pathBase": "repository",
   "inputs": [
     {
-      "id": "optical",
-      "path": "src/objects/smc/source/source.jpg",
+      "id": "smc-horalek-wide",
+      "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
+      "origin": "https://noirlab.edu/public/images/iotw2615a/",
+      "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/",
+      "title": "Small Magellanic Cloud · NOIRLab iotw2615a",
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "displayCredit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
+      "expectedBytes": 7080917,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-iotw2615a",
+            "role": "material",
+            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "smc-horalek-wide",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Petr Horálek",
+            "evidence": "https://noirlab.edu/public/images/iotw2615a/",
+            "reason": "The photograph credits Petr Horálek but does not identify the individual camera or optics."
+          }
+        ]
+      }
+    },
+    {
+      "id": "smc-vista",
+      "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
+      "origin": "https://www.eso.org/public/images/eso1714a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1714a/",
+      "title": "Small Magellanic Cloud · ESO eso1714a",
+      "credit": "ESO/VISTA VMC",
+      "displayCredit": "ESO/VISTA VMC",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
+      "expectedBytes": 8087047,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1714a",
+            "role": "material",
+            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "smc-vista",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1714a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "smc-smash",
+      "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
       "origin": "https://noirlab.edu/public/images/noirlab2030b/",
       "sourceUrl": "https://noirlab.edu/public/images/noirlab2030b/",
-      "title": "Deepest, widest view of the Small Magellanic Cloud from SMASH",
-      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
-      "displayCredit": "NSF's NOIRLab via AstroPix",
-      "acquisition": "publisher-curated AstroPix JPEG derivative. The hash identifies the local JPEG bytes, not a calibrated native scientific array; acquisition details and provider product ID are retained in source/provenance.json.",
-      "expectedSha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
-      "expectedBytes": 4359408,
+      "title": "Small Magellanic Cloud · NOIRLab noirlab2030b",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+      "displayCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University); image processing Travis Rector (University of Alaska Anchorage), Mahdi Zamani and Davide de Martin",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
+      "expectedBytes": 73275848,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "noirlab-noirlab2030b",
             "role": "material",
-            "evidence": "src/objects/smc/source/provenance.json"
+            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/1"
           }
         ]
       },
       "dependencies": [],
-      "lensId": "optical",
-      "license": "CC-BY-4.0; provider terms: https://noirlab.edu/public/copyright/. Retain the complete recorded credit.",
+      "lensId": "smc-smash",
+      "license": "CC-BY-4.0",
       "capture": {
         "attributions": [
           {
@@ -35,53 +104,537 @@
           }
         ]
       }
+    },
+    {
+      "id": "smc-dss2",
+      "path": ".local/nebula-lab/smc-intake/heic0514c.jpg",
+      "origin": "https://esahubble.org/images/heic0514c/",
+      "sourceUrl": "https://esahubble.org/images/heic0514c/",
+      "title": "Small Magellanic Cloud · ESA/Hubble heic0514c",
+      "credit": "ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
+      "displayCredit": "ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "6a6bd606a4cc2bbb8402af6a4fb258bc697263cb36c950a5ed200ec3716d3413",
+      "expectedBytes": 99951551,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-heic0514c",
+            "role": "material",
+            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/2"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "smc-dss2",
+      "license": "CC-BY-4.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Digitized Sky Survey 2 photographic plates",
+            "evidence": "https://esahubble.org/images/heic0514c/",
+            "reason": "The publisher names the Digitized Sky Survey 2 as the plate source without identifying the individual Schmidt telescope and plates behind this composite."
+          }
+        ]
+      }
+    },
+    {
+      "id": "smc-allwise-wide",
+      "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
+      "origin": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
+      "title": "Small Magellanic Cloud · AllWISE colour HiPS, 10° TAN field",
+      "credit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+      "displayCredit": "IPAC/NASA; colour HiPS CDS (CNRS/Unistra)",
+      "acquisition": "Native input identity preserved by the existing Nebula Lab acquisition recipe; the path is repository-relative and may be restored into its ignored cache.",
+      "expectedSha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
+      "expectedBytes": 858260,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cds-allwise-color",
+            "role": "material",
+            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/4"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "smc-allwise-wide",
+      "license": "ODbL-1.0",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "wise",
+            "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
+          }
+        ]
+      }
+    },
+    {
+      "id": "density-prior",
+      "path": "src/objects/smc/source/evidence/smc/full-density/source/provenance.json",
+      "origin": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "sourceUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "title": "SMC simulated stellar-density prior",
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
+      "expectedSha256": "f82fa5ab1aa15f5a6785e12ef229ed241a19bc0028768b792963ba74821f2094",
+      "expectedBytes": 5794,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "garver-magellanic-simulation",
+            "role": "method",
+            "evidence": "src/objects/smc/source/evidence/smc/full-density/source/provenance.json: /source — archive, snapshot and star-family particle selection pins"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "vmc-red-clump",
+      "path": "src/objects/smc/source/evidence/smc/vmc/recipe.json",
+      "origin": "https://doi.org/10.1093/mnras/staa3857",
+      "sourceUrl": "https://doi.org/10.1093/mnras/staa3857",
+      "title": "SMC red-clump distance tracers",
+      "credit": "VMC red-clump stars: Tatton et al. (2021), CDS and ESO VMC DR5.1 PSF photometry",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
+      "expectedSha256": "7403284f4cee68aaf7bd7641ebeb984cd28a4f18ebd61769fdef4d26e1a3396c",
+      "expectedBytes": 817,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "tatton-2021-smc-reddening",
+            "role": "material",
+            "evidence": "src/objects/smc/source/evidence/smc/vmc/recipe.json: /calibration — published reddening and the paper’s standard-candle constants"
+          },
+          {
+            "catalogueId": "eso-vmc-dr5-psf",
+            "role": "material",
+            "evidence": "src/objects/smc/source/evidence/smc/vmc/recipe.json: /acquisition — DR5.1 PSF table, tiles and selection"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "catalogue-stars",
+      "path": "src/objects/smc/source/evidence/smc/stars/source/catalogue.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416",
+      "title": "SMC published massive stars",
+      "credit": "Bonanos et al. (2010), AJ 140, 416; CDS/VizieR J/AJ/140/416",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
+      "expectedSha256": "dd51263f9ae8446c439fb68f46fe4fdef6c156e9bbdaac43903665f982bdaac3",
+      "expectedBytes": 1015,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "bonanos-2010-smc",
+            "role": "material",
+            "evidence": "src/objects/smc/source/evidence/smc/stars/source/catalogue.json: /files — ReadMe, table1.dat, table3.dat and refs.dat byte pins"
+          }
+        ]
+      },
+      "dependencies": []
+    },
+    {
+      "id": "sky-registration",
+      "path": "src/objects/smc/source/evidence/image-candidates.json",
+      "origin": "https://noirlab.edu/public/images/noirlab2030b/",
+      "sourceUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+      "title": "SMC shared sky registration",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University)",
+      "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
+      "expectedSha256": "370201999627e8a3f80649bc82c25cae491005a8fc78739e9d88dcbadb79144f",
+      "expectedBytes": 29958,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030b",
+            "role": "method",
+            "evidence": "src/objects/smc/source/evidence/image-candidates.json: /targets/0/images/*/wcsSource — SMASH supplies the publisher sky anchor every relative registration is matched to"
+          }
+        ]
+      },
+      "dependencies": []
     }
   ],
   "documents": [
     {
-      "id": "recipe",
+      "id": "document-1",
+      "path": "src/objects/smc/source/lens-manifest.json",
+      "expectedSha256": "75efb7066e0df50db398c49d55d2acc81c94a2168ece3f847c89617bf6c9e46f",
+      "expectedBytes": 219453,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-2",
+      "path": "src/objects/smc/source/lens-settings-evidence.json",
+      "expectedSha256": "8eb5e0aba4808fe90244fc7729dfee92cb6df681e3cd34eb8b31baaa6223bace",
+      "expectedBytes": 2497,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-3",
+      "path": "src/objects/smc/source/lenses.json",
+      "expectedSha256": "de47bdd2d852e332efce4f61eeffb0abda2d93b72e5ca3e797ea1870531763cf",
+      "expectedBytes": 4033,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-4",
+      "path": "src/objects/smc/source/presentation.json",
+      "expectedSha256": "46f4a1c157d6d66607f1fb49919fc9c8ccf07ff74396f9736a16482cd4869182",
+      "expectedBytes": 9014,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-5",
+      "path": "src/objects/smc/source/provenance-references.json",
+      "expectedSha256": "11428725c1d742cb932a82ce7b6e8036aceea5a6e7e0a386b8369e672fbbdca5",
+      "expectedBytes": 3452,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-6",
+      "path": "src/objects/smc/source/provenance.json",
+      "expectedSha256": "23ec5aaec69500bce667a2b37bd686fd9e235dbf7b6ecab6fca47428964f4505",
+      "expectedBytes": 1689,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030b",
+            "role": "reference",
+            "evidence": "src/objects/smc/source/provenance.json#/checkedSource"
+          }
+        ]
+      },
+      "origin": "https://noirlab.edu/public/images/noirlab2030b/",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "acquisition": "Retired image-layer source record for the superseded SMASH parametric-slab delivery. Kept as the published identity, coverage and geometry account of that retired lens."
+    },
+    {
+      "id": "document-7",
       "path": "src/objects/smc/source/recipe.json",
       "expectedSha256": "fbe9ee025ef9935b0e037452281ff5acdc0a5e4316372aabb03c07dd41c6fbde",
       "expectedBytes": 2880,
       "sourceBinding": {
         "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Image-layer preparation recipe",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
     },
     {
-      "id": "provenance",
-      "path": "src/objects/smc/source/provenance.json",
-      "expectedSha256": "23ec5aaec69500bce667a2b37bd686fd9e235dbf7b6ecab6fca47428964f4505",
-      "expectedBytes": 1689,
+      "id": "document-8",
+      "path": "src/objects/smc/source/source.jpg",
+      "expectedSha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
+      "expectedBytes": 4359408,
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noirlab2030b",
+            "role": "reference",
+            "evidence": "src/objects/smc/source/provenance.json#/checkedSource"
+          }
+        ]
       },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Published image interpretation and acquisition record",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+      "origin": "https://noirlab.edu/public/images/noirlab2030b/",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "acquisition": "Unchanged publisher-curated AstroPix 3000-pixel JPEG derivative of NOIRLab noirlab2030b, retained from the superseded image-layer delivery and reused as the SMASH lens preview. The pinned bytes identify this derivative, not the publisher master.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "blanco-4m",
+            "evidence": "https://noirlab.edu/public/images/noirlab2030b/ — the publisher page identifies Blanco/DECam SMASH imaging in g, r, i and z."
+          }
+        ]
+      }
     },
     {
-      "id": "presentation",
-      "path": "src/objects/smc/source/presentation.json",
-      "expectedSha256": "0e78797226503ca2e90f1b2a2fedd2f4da23f4e9a923a5161911e3b74121c01e",
-      "expectedBytes": 2407,
+      "id": "document-9",
+      "path": "src/objects/smc/source/evidence/smc/constrained/emission-envelope-ellipsoid.json",
+      "expectedSha256": "43430d8b03e3ab441d8a9bd1ea4dc8821ec513e6cd0e0d5815d11095990d38af",
+      "expectedBytes": 1724,
       "sourceBinding": {
         "kind": "local",
-        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
-      },
-      "kind": "authored-document",
-      "origin": "cssEarth project-authored record",
-      "credit": "cssEarth contributors",
-      "title": "Dataset presentation and prepared-bank bindings",
-      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "document-10",
+      "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
+      "expectedSha256": "2c01258b01ed763bd1b3cacf6bc9429ef43c083ef0460b17845efea55594dbf7",
+      "expectedBytes": 2224,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "document-11",
+      "path": "src/objects/smc/source/evidence/smc/constrained/fit-evidence.json",
+      "expectedSha256": "36aa5b2a390ccc9b32982299145bb1e5fb581f6495323a29e2b1a38aab1e0c65",
+      "expectedBytes": 32306,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "document-12",
+      "path": "src/objects/smc/source/evidence/smc/constrained/fit.json",
+      "expectedSha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe",
+      "expectedBytes": 4922,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "document-13",
+      "path": "src/objects/smc/source/evidence/smc/registration/alignment-report.json",
+      "expectedSha256": "f02d9370c74450cc5143a5d3fcc608635f2714dc7141cbf466a22690d2398001",
+      "expectedBytes": 12990,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "document-14",
+      "path": "src/objects/smc/source/evidence/smc/vmc/density.json",
+      "expectedSha256": "6f216098d6958178966072fe23142b6611c2abfe1c93afa272d2581a0b04b961",
+      "expectedBytes": 626,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
+      }
+    },
+    {
+      "id": "document-15",
+      "path": "src/objects/smc/source/lenses/smc-allwise-wide/catalogue-stars.json",
+      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
+      "expectedBytes": 944497,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-16",
+      "path": "src/objects/smc/source/lenses/smc-allwise-wide/provenance.json",
+      "expectedSha256": "55886781b274695991d1995aa4747481fd2765e06baae699a627da485f75476d",
+      "expectedBytes": 152018,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-17",
+      "path": "src/objects/smc/source/lenses/smc-allwise-wide/result.json",
+      "expectedSha256": "6d10275a217bec54b000dd8a6f8f80c394ad3581fcf3f59082821c9a4b58391a",
+      "expectedBytes": 3997,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-18",
+      "path": "src/objects/smc/source/lenses/smc-allwise-wide/selection.json",
+      "expectedSha256": "ecfdebde4a0536deb7161502bd4591a2cb1f5f71cf59acb35f1cba390dbc9a33",
+      "expectedBytes": 13379,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-19",
+      "path": "src/objects/smc/source/lenses/smc-dss2/catalogue-stars.json",
+      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
+      "expectedBytes": 944497,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-20",
+      "path": "src/objects/smc/source/lenses/smc-dss2/provenance.json",
+      "expectedSha256": "10c3338aac3b4eb232423f42e103d4211e62d10d8be2e91444bff1f5e9c3186c",
+      "expectedBytes": 149993,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-21",
+      "path": "src/objects/smc/source/lenses/smc-dss2/result.json",
+      "expectedSha256": "8206bcdc24c0e00984b88cbc26cbe521f7337d2d06db7000d5b70083b159ea7e",
+      "expectedBytes": 3959,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-22",
+      "path": "src/objects/smc/source/lenses/smc-dss2/selection.json",
+      "expectedSha256": "325275fa2707fe03ba888abb8489e62891fdcca1893e4dbec946134edad9995b",
+      "expectedBytes": 13371,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-23",
+      "path": "src/objects/smc/source/lenses/smc-horalek-wide/catalogue-stars.json",
+      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
+      "expectedBytes": 944497,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-24",
+      "path": "src/objects/smc/source/lenses/smc-horalek-wide/provenance.json",
+      "expectedSha256": "19dfc1425539e55d6c7db0609adf31d42893cee3e0409fdf01629dc378a47d87",
+      "expectedBytes": 152711,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-25",
+      "path": "src/objects/smc/source/lenses/smc-horalek-wide/result.json",
+      "expectedSha256": "44533ce32a8915d69562186954722a3a52e005681ed3ac72b8818d20f2c2c18a",
+      "expectedBytes": 3966,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-26",
+      "path": "src/objects/smc/source/lenses/smc-horalek-wide/selection.json",
+      "expectedSha256": "6f50615fe51b34bdb44a4ae4e132dda94a3dbe52ba91de58f0f25db6074437fd",
+      "expectedBytes": 13385,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-27",
+      "path": "src/objects/smc/source/lenses/smc-smash/catalogue-stars.json",
+      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
+      "expectedBytes": 944497,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-28",
+      "path": "src/objects/smc/source/lenses/smc-smash/provenance.json",
+      "expectedSha256": "20e8db33063171cc3416e37d2b6b982bd7f7c0d2b1f4855ee054e4f11c68a1fa",
+      "expectedBytes": 151549,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-29",
+      "path": "src/objects/smc/source/lenses/smc-smash/result.json",
+      "expectedSha256": "c7c8a7121c7f4b0f4d60c7e69e34ee514611e0cada1c6e5277ac1fc680ba2509",
+      "expectedBytes": 4067,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-30",
+      "path": "src/objects/smc/source/lenses/smc-smash/selection.json",
+      "expectedSha256": "e4db9022775e5530fa83894d5ef6bbb90b77565d25c60c85043cb95bbd73b4ca",
+      "expectedBytes": 13366,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-31",
+      "path": "src/objects/smc/source/lenses/smc-vista/catalogue-stars.json",
+      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
+      "expectedBytes": 944497,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-32",
+      "path": "src/objects/smc/source/lenses/smc-vista/provenance.json",
+      "expectedSha256": "14fabc5af6bc7cb1a7c71e3149e28af8fff3a9672b2874054cb03ecb691a6e93",
+      "expectedBytes": 151299,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-33",
+      "path": "src/objects/smc/source/lenses/smc-vista/result.json",
+      "expectedSha256": "dfd8e55640ca64d306a65058fbc806cd22f79d2c817b2fdf77e91e9e2711ab25",
+      "expectedBytes": 3915,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-34",
+      "path": "src/objects/smc/source/lenses/smc-vista/selection.json",
+      "expectedSha256": "8d43598c3c7ada5e61e2eaa6ecb9faa2e751e9d981db433d34ec2cc144385441",
+      "expectedBytes": 13354,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
     }
   ],
   "generatedIntermediates": []

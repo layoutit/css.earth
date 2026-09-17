@@ -1,0 +1,47 @@
+{
+  "id": "tatton-2021-smc-reddening",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SMC red-clump reddening catalogue · Tatton et al. (2021)",
+  "identifiers": [
+    {
+      "type": "CDS catalogue",
+      "value": "J/MNRAS/504/2983"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staa3857"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staa3857",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
+      "revision": "101899478bc56f7549cafe9e51d7617cce301a3d",
+      "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383",
+      "locator": "/"
+    }
+  ],
+  "publisher": "Tatton et al. (2021), MNRAS 504, 2983; CDS/VizieR",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "VMC red-clump stars: Tatton et al. (2021), MNRAS 504, 2983; CDS/VizieR J/MNRAS/504/2983",
+      "scope": "Published source",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/vmc/README.md"
+    },
+    {
+      "kind": "limitation",
+      "text": "Published individual reddenings paired with public photometry reproduce the paper’s standard-candle distance calculation, not its distance catalogue. Photometric distance estimates are not geometric distances.",
+      "scope": "Derived tracer distances",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/vmc/README.md"
+    }
+  ]
+}
