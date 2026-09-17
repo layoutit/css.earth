@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d26d607fc7a439108020b151f740d8b3278341c57239d4ec4c5e71a87d145a75"
+    "sha256": "ea024498eee2f4ca0b0cec857aba354b8e39c9c50e4a9a34fcd77347222e74e1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "08754b0570a650dcdbbacb34d5564f74d1036faf8542fd456a74d841419ab9b6"
+    "bindingsSha256": "3e121661590912a7de40f27754b60e8a998790ebecd8f215a3a06fd2336e5af0"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "37146cc2667cb783f89e9b480c52a9565c70e4127b00b2df933b8dcc56962df3",
+      "sha256": "94a28caa2bbde98b39b7a398e9cf16fde4fb01c83471da9a77a854418f564a88",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,6 +71,78 @@
                 "width": 721,
                 "height": 361
               }
+            },
+            {
+              "id": "thermal-inertia",
+              "label": "Thermal inertia",
+              "consumer": "thermal-inertia",
+              "path": "thermal/ThermalInertia_BestFitValue.npy",
+              "format": "npy-lonlat-grid",
+              "grid": {
+                "width": 73,
+                "height": 37,
+                "projection": "equirectangular",
+                "longitudePath": "thermal/LongitudeArray.npy",
+                "latitudePath": "thermal/LatitudeArray.npy",
+                "longitudeDirection": "east"
+              },
+              "frameTransfer": {
+                "path": "thermal/alma-body-frame.json",
+                "meshSpinPath": "reference/16_Psyche_param.txt"
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "sourceUnits": "J m-2 K-1 s-1/2",
+              "displayUnits": "tiu",
+              "minimum": 0,
+              "maximum": 600,
+              "colors": [
+                "#0d0887",
+                "#4c02a1",
+                "#7e03a8",
+                "#aa2395",
+                "#cc4778",
+                "#e66c5c",
+                "#f89540",
+                "#fdc527",
+                "#f0f921"
+              ]
+            },
+            {
+              "id": "dielectric-constant",
+              "label": "Dielectric constant",
+              "consumer": "dielectric-constant",
+              "path": "thermal/DielectricConstant_BestFitValue.npy",
+              "format": "npy-lonlat-grid",
+              "grid": {
+                "width": 73,
+                "height": 37,
+                "projection": "equirectangular",
+                "longitudePath": "thermal/LongitudeArray.npy",
+                "latitudePath": "thermal/LatitudeArray.npy",
+                "longitudeDirection": "east"
+              },
+              "frameTransfer": {
+                "path": "thermal/alma-body-frame.json",
+                "meshSpinPath": "reference/16_Psyche_param.txt"
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "sourceUnits": "dimensionless",
+              "displayUnits": "Relative permittivity",
+              "minimum": 0,
+              "maximum": 60,
+              "colors": [
+                "#440154",
+                "#472d7b",
+                "#3b528b",
+                "#2c728e",
+                "#21918c",
+                "#28ae80",
+                "#5ec962",
+                "#addc30",
+                "#fde725"
+              ]
             }
           ],
           "observedColors": [],
@@ -462,7 +534,11 @@
                 "targetFaces": 800,
                 "maximumErrorMeters": 2100,
                 "regularize": true
-              }
+              },
+              "additionalLensIds": [
+                "thermal-inertia",
+                "dielectric-constant"
+              ]
             }
           ]
         },
@@ -477,7 +553,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d38faa30c97eb715bc282459863d9e74ae13c0c27a13677e59d0bb13a900fdb5",
+      "sha256": "67738093ff6f77e0ab5e4eff30cc94d94a17e67086729b3006d6839fc70a7041",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -588,6 +664,60 @@
               "falseColor": false,
               "noData": true,
               "notes": "16 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-04-24 to 2018-05-05, cast onto the ADAM reconstruction from the same survey. The survey's rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+            },
+            {
+              "id": "thermal-inertia",
+              "label": "Thermal inertia",
+              "thumbnail": "/scenes/psyche/psyche-thermal-inertia-thumbnail.webp",
+              "surface": "psyche-thermal-inertia-surface@2x.webp",
+              "poles": "psyche-thermal-inertia-surface@2x.webp",
+              "source": {
+                "id": "psyche-alma-thermal-inertia",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.5281/zenodo.6321315"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Thermal inertia",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "300",
+                  "600"
+                ],
+                "meta": "J m⁻² K⁻¹ s⁻½ · ALMA 1.3 mm, 2019",
+                "sourceUrl": "https://doi.org/10.5281/zenodo.6321315",
+                "image": "/scenes/psyche/psyche-thermal-inertia-legend.webp"
+              },
+              "notes": "How slowly the top centimetres of the surface heat and cool, fitted to ALMA thermal images taken over two-thirds of one rotation on 2019 June 19 (Cambioni et al. 2022). One colour per 5-degree cell at about 30 km resolution; the typical uncertainty is about 130. The authors flag 60 to 120 degrees west in their frame as possibly affected by model artifacts. Placed on the ADAM mesh through the published spin states. The grid marks cells the authors did not map."
+            },
+            {
+              "id": "dielectric-constant",
+              "label": "Dielectric constant",
+              "thumbnail": "/scenes/psyche/psyche-dielectric-constant-thumbnail.webp",
+              "surface": "psyche-dielectric-constant-surface@2x.webp",
+              "poles": "psyche-dielectric-constant-surface@2x.webp",
+              "source": {
+                "id": "psyche-alma-dielectric-constant",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.5281/zenodo.6321315"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Dielectric constant",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "30",
+                  "60"
+                ],
+                "meta": "relative permittivity · ALMA 1.3 mm, 2019",
+                "sourceUrl": "https://doi.org/10.5281/zenodo.6321315",
+                "image": "/scenes/psyche/psyche-dielectric-constant-legend.webp"
+              },
+              "notes": "How strongly the near-surface material responds to an electric field, fitted to the same ALMA thermal images (Cambioni et al. 2022); higher values suggest more metal in the regolith. One colour per 5-degree cell at about 30 km resolution; the typical uncertainty is about 2. The authors flag 60 to 120 degrees west in their frame as possibly affected by model artifacts. Placed on the ADAM mesh through the published spin states. The grid marks cells the authors did not map."
             }
           ]
         },
@@ -693,6 +823,342 @@
         "headers": {
           "Cookie": "CesAM_LAM_opens_the_door=1"
         }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-alma-thermal-inertia",
+      "path": "thermal/ThermalInertia_BestFitValue.npy",
+      "origin": "https://zenodo.org/api/records/6321315/files/ThermalInertia_BestFitValue.npy/content",
+      "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/api/records/6321315"
+      ],
+      "acquisition": "Downloaded unchanged from the Zenodo release; md5 equals the record's checksum. Tracked in the repository.",
+      "redistribution": "CC-BY-4.0 with attribution to the Zenodo release and Cambioni et al. (2022).",
+      "lensId": "thermal-inertia",
+      "label": "Thermal inertia",
+      "falseColor": true,
+      "width": 73,
+      "height": 37,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "frame": "Shepard et al. (2021) body frame, placed on the ADAM mesh through alma-body-frame.json",
+        "coordinateType": "planetocentric",
+        "stepDegrees": 5
+      },
+      "coverage": "Best-fit thermal inertia (J m-2 K-1 s-1/2) per 5-degree node from ALMA 1.3 mm thermal emission imaged on 2019 June 19 at about 30 km resolution; nodes with a reduced chi-squared above 10 or three or fewer observations are NaN and shown as missing. Model values, not a photograph.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cambioni-2022-psyche-alma-maps",
+            "role": "material",
+            "evidence": "https://zenodo.org/api/records/6321315#/files"
+          },
+          {
+            "catalogueId": "cambioni-2022-psyche-surface",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2402.03422#section-2.5"
+          }
+        ]
+      },
+      "sha256": "869ac19ed10168a25d83749d16df095fb8032145f414df914d5168895161f179",
+      "bytes": 21736,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "thermal/ThermalInertia_BestFitValue.npy",
+        "url": "https://zenodo.org/api/records/6321315/files/ThermalInertia_BestFitValue.npy/content"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-alma-longitudes",
+      "path": "thermal/LongitudeArray.npy",
+      "origin": "https://zenodo.org/api/records/6321315/files/LongitudeArray.npy/content",
+      "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/api/records/6321315"
+      ],
+      "acquisition": "Downloaded unchanged from the Zenodo release; md5 equals the record's checksum.",
+      "redistribution": "CC-BY-4.0 with attribution.",
+      "coverage": "Node longitudes, -180 to 180 degrees east in 5-degree steps (73 nodes).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cambioni-2022-psyche-alma-maps",
+            "role": "material",
+            "evidence": "https://zenodo.org/api/records/6321315#/files"
+          },
+          {
+            "catalogueId": "cambioni-2022-psyche-surface",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2402.03422#section-2.5"
+          }
+        ]
+      },
+      "sha256": "0795daf24637ad406a927b4a385a678765d43608999427606b04110387739245",
+      "bytes": 712,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "thermal/LongitudeArray.npy",
+        "url": "https://zenodo.org/api/records/6321315/files/LongitudeArray.npy/content"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-alma-latitudes",
+      "path": "thermal/LatitudeArray.npy",
+      "origin": "https://zenodo.org/api/records/6321315/files/LatitudeArray.npy/content",
+      "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/api/records/6321315"
+      ],
+      "acquisition": "Downloaded unchanged from the Zenodo release; md5 equals the record's checksum.",
+      "redistribution": "CC-BY-4.0 with attribution.",
+      "coverage": "Node latitudes, -90 to 90 degrees in 5-degree steps (37 nodes); array row 0 is -90.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cambioni-2022-psyche-alma-maps",
+            "role": "material",
+            "evidence": "https://zenodo.org/api/records/6321315#/files"
+          },
+          {
+            "catalogueId": "cambioni-2022-psyche-surface",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2402.03422#section-2.5"
+          }
+        ]
+      },
+      "sha256": "72dbcca412048092d3c1b755ce612ed1a6aadc3553129126a0799cf798421b2b",
+      "bytes": 424,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "thermal/LatitudeArray.npy",
+        "url": "https://zenodo.org/api/records/6321315/files/LatitudeArray.npy/content"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "thermal/alma-body-frame.json",
+      "origin": "https://doi.org/10.1029/2021JE007091",
+      "credit": "Spin state: Cambioni, de Kleer & Shepard (2022) equation 2 and Shepard et al. (2021) Table 5; epoch: de Kleer, Cambioni & Shepard (2021)",
+      "license": "Factual numerical parameters; source attribution retained",
+      "purpose": "Transcribed spin state, epoch and time-scale offset that carry ADAM mesh directions into the ALMA grid frame for the thermal-inertia and dielectric-constant lenses.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cambioni-2022-psyche-surface",
+            "role": "method",
+            "evidence": "src/objects/psyche/source/thermal/alma-body-frame.json#/grid"
+          },
+          {
+            "catalogueId": "shepard-2021-psyche-shape",
+            "role": "reference",
+            "evidence": "src/objects/psyche/source/thermal/alma-body-frame.json#/grid/spin/periodHours"
+          },
+          {
+            "catalogueId": "de-kleer-2021-psyche-alma",
+            "role": "reference",
+            "evidence": "src/objects/psyche/source/thermal/alma-body-frame.json#/epoch"
+          }
+        ]
+      },
+      "id": "source-document:thermal/alma-body-frame.json",
+      "kind": "source-document",
+      "title": "Transcribed spin state, epoch and time-scale offset that carry ADAM mesh directions into the ALMA grid frame for the thermal-inertia and dielectric-constant lenses.",
+      "acquisition": "Acquisition not recorded in source manifest.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "0dc4f19e8f3613dbc4ec320ae1c2fa36a48103f9e6a61390aeff141d5553166e",
+      "bytes": 1726,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-spin-record",
+      "path": "reference/16_Psyche_param.txt",
+      "origin": "https://observations.lam.fr/astero/3Dshape/16_Psyche_param.txt",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Rotation record: pole latitude, pole longitude and sidereal period, then the phase epoch and phase. Read longitude-first, established against a published pole.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-spin-record",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@dae54dd62dc07b87326359a427b7ba622c9fa7db#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "dc98dd3e5123d1da9ee5a6d9329ec51385717c02250f62a49a1478735fd50677",
+      "bytes": 43,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "reference/16_Psyche_param.txt",
+        "url": "https://observations.lam.fr/astero/3Dshape/16_Psyche_param.txt",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-adam-shape",
+      "path": "shape/16_Psyche_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release's rotation record describes this frame, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-psyche-psyche-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/psyche/source/manifest.json@dae54dd62dc07b87326359a427b7ba622c9fa7db#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "98ce7aebaebe9eb475dac2e6f38e53f3440f6ef00bffc6cf15f7c3dcfbee0fef",
+      "bytes": 45397,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/16_Psyche_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "psyche-alma-dielectric-constant",
+      "path": "thermal/DielectricConstant_BestFitValue.npy",
+      "origin": "https://zenodo.org/api/records/6321315/files/DielectricConstant_BestFitValue.npy/content",
+      "credit": "Cambioni, de Kleer & Shepard (2022), ALMA maps of (16) Psyche, Zenodo doi:10.5281/zenodo.6321315",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/api/records/6321315"
+      ],
+      "acquisition": "Downloaded unchanged from the Zenodo release; md5 equals the record's checksum. Tracked in the repository.",
+      "redistribution": "CC-BY-4.0 with attribution to the Zenodo release and Cambioni et al. (2022).",
+      "lensId": "dielectric-constant",
+      "label": "Dielectric constant",
+      "falseColor": true,
+      "width": 73,
+      "height": 37,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "frame": "Shepard et al. (2021) body frame, placed on the ADAM mesh through alma-body-frame.json",
+        "coordinateType": "planetocentric",
+        "stepDegrees": 5
+      },
+      "coverage": "Best-fit dielectric constant (dimensionless) per 5-degree node from ALMA 1.3 mm thermal emission imaged on 2019 June 19 at about 30 km resolution; nodes with a reduced chi-squared above 10 or three or fewer observations are NaN and shown as missing. Model values, not a photograph.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cambioni-2022-psyche-alma-maps",
+            "role": "material",
+            "evidence": "https://zenodo.org/api/records/6321315#/files"
+          },
+          {
+            "catalogueId": "cambioni-2022-psyche-surface",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2402.03422#section-2.5"
+          }
+        ]
+      },
+      "sha256": "7c7be079837b29f26f3f464a64904127e442d1230adc7a44687480f4a8068abd",
+      "bytes": 21736,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "thermal/DielectricConstant_BestFitValue.npy",
+        "url": "https://zenodo.org/api/records/6321315/files/DielectricConstant_BestFitValue.npy/content"
       },
       "verificationOperations": []
     },
@@ -1529,60 +1995,6 @@
       "verificationOperations": []
     },
     {
-      "kind": "source-input",
-      "id": "psyche-adam-shape",
-      "path": "shape/16_Psyche_adam.obj",
-      "origin": "https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj",
-      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
-            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-            "missionId": "eso-sphere-asteroid-survey"
-          }
-        ]
-      },
-      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
-      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
-      "projection": {
-        "kind": "body-fixed-cartesian-triangular-mesh",
-        "longitudeDirection": "east",
-        "latitudeType": "planetocentric",
-        "units": "kilometers"
-      },
-      "coverage": "ADAM reconstruction from the same survey. The release's rotation record describes this frame, so the photographic lens is registered to this mesh.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-psyche-psyche-adam-shape",
-            "role": "material",
-            "evidence": "src/objects/psyche/source/manifest.json@dae54dd62dc07b87326359a427b7ba622c9fa7db#/inputs/3"
-          }
-        ]
-      },
-      "sha256": "98ce7aebaebe9eb475dac2e6f38e53f3440f6ef00bffc6cf15f7c3dcfbee0fef",
-      "bytes": 45397,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "restore",
-          "refresh"
-        ],
-        "path": "shape/16_Psyche_adam.obj",
-        "url": "https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj",
-        "headers": {
-          "Cookie": "CesAM_LAM_opens_the_door=1"
-        }
-      },
-      "verificationOperations": []
-    },
-    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -1595,8 +2007,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d38faa30c97eb715bc282459863d9e74ae13c0c27a13677e59d0bb13a900fdb5",
-      "bytes": 9210,
+      "sha256": "67738093ff6f77e0ab5e4eff30cc94d94a17e67086729b3006d6839fc70a7041",
+      "bytes": 12036,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1648,6 +2060,116 @@
       "inputEvidence": [
         {
           "sourceId": "psyche-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "thermal-inertia",
+      "label": "Thermal inertia",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "thermal-inertia"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "psyche-alma-thermal-inertia",
+        "psyche-alma-longitudes",
+        "psyche-alma-latitudes",
+        "source-document:thermal/alma-body-frame.json",
+        "psyche-spin-record",
+        "psyche-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/psyche/psyche-thermal-inertia-thumbnail.webp",
+          "bytes": 1538,
+          "sha256": "acd91966f5aa75e8878d41df0a4cebcc2eb2a795c92924d71af5c0eaa263dd68",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/psyche/psyche-thermal-inertia-legend.webp",
+          "bytes": 252,
+          "sha256": "9517bd1032336a7ed39e866c8de461d1d8d2b959b187066b497b8f1d46c54667",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/psyche/psyche-thermal-inertia-surface@2x.webp",
+          "bytes": 272464,
+          "sha256": "d1ae9c0107c91c79b776812e7bd9ae2e9a0570d06d46c819c598dc9ec7b858ba",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "psyche-adam-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "dielectric-constant",
+      "label": "Dielectric constant",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "dielectric-constant"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "psyche-alma-dielectric-constant",
+        "psyche-alma-longitudes",
+        "psyche-alma-latitudes",
+        "source-document:thermal/alma-body-frame.json",
+        "psyche-spin-record",
+        "psyche-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/psyche/psyche-dielectric-constant-thumbnail.webp",
+          "bytes": 1282,
+          "sha256": "2754bc3724bbb4e3f745de51d420dba70720fab99579a5e94a6b7252a9137194",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/psyche/psyche-dielectric-constant-legend.webp",
+          "bytes": 224,
+          "sha256": "2446b91632f2327cdd693c991b60c83b07fa4f088f8c33f1682f0bf09ef88fde",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/psyche/psyche-dielectric-constant-surface@2x.webp",
+          "bytes": 232812,
+          "sha256": "aa26e5cc87033ee3a35f1cfbc40b7919da21217177372d3e350b0f7453dd6a2d",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "psyche-adam-shape",
           "role": "geometry",
           "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
@@ -1858,6 +2380,56 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:thermal-inertia",
+      "label": "Thermal inertia preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "thermal-inertia"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/thermal-inertia.webp",
+          "bytes": 38350,
+          "sha256": "3d6f56964645808d7e590db6941f1cb37428c7cb2cb00e0900d80a739c031feb",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:dielectric-constant",
+      "label": "Dielectric constant preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "dielectric-constant"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/dielectric-constant.webp",
+          "bytes": 25266,
+          "sha256": "49a0cfd911809081f860fbcd8104b0933e2198ccb9f23e2f6feb765fa1a5718b",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -1866,11 +2438,11 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "ff1dc53d3027e6ea2c0ad2e4a865cf081a30ecf45c65b36e74dc1bd31df65da5",
+    "materialSha256": "58706c451a5b716df0210b40cf48c6acd32430aa8c772f6facaa66e3e57f2792",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "08754b0570a650dcdbbacb34d5564f74d1036faf8542fd456a74d841419ab9b6"
+      "bindingsSha256": "3e121661590912a7de40f27754b60e8a998790ebecd8f215a3a06fd2336e5af0"
     }
   }
 }

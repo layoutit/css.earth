@@ -60,7 +60,11 @@ describe('asteroid positions against JPL Horizons', () => {
       'asteroid-2001-sn263': 250,
       // Dinkinesh: ceil(991.491 km independent endpoint maximum * 1.05).
       // Retained samples and measured errors: src/objects/dinkinesh/evidence/galileo-lucy/orbit-errors.json.
-      dinkinesh: 1042 }
+      dinkinesh: 1042,
+      // 3I/ATLAS: ceil(964.450 km independent endpoint maximum * 1.15); two-body path without its fitted non-gravitational acceleration.
+      'comet-3i': 1110,
+      // 2I/Borisov: ceil(527.705 km independent endpoint maximum * 1.15).
+      'comet-2i': 607 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])

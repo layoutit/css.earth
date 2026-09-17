@@ -31,6 +31,16 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "thermal-inertia",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "dielectric-constant",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -107,7 +117,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0c8386159fdc37834517eb9a34fb9753e4d652ebc4d35884a8cebf5e76d4b4ea"
+        "sha256": "e65b3992391913340930774190e204bd600b62765453b268cd49f0c837bc712f"
       }
     },
     "catalog": {
@@ -128,6 +138,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "361bf530075d54686ac7cc37494f3312097d92f97831fbbc9227883efa83d3c8"
+    "sha256": "f35c9a0a5d110c2ea7cb20f9cc63b564045ca76c8cdda93d631e79f683937755"
   }
 }

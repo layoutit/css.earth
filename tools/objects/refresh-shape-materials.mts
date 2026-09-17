@@ -1,4 +1,5 @@
 /** Repaint existing shape lenses using retained geometry and the shared material preparer. */
+import { alternativeForLens } from './terrestrial-layers/alternative-lenses.mts';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { readAuthoredSources } from './authored-sources.ts';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
@@ -110,7 +111,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   for (const view of views) {
     const old = oldSurfaces.find(surface => surface.id === view.id);
     if (!old) throw new Error('Refresh cannot add a lens.');
-    const alternate = config.geometry.radialTerrainAlternatives?.find(terrain => terrain.lensId === view.id);
+    const alternate = alternativeForLens(config.geometry.radialTerrainAlternatives ?? [], view.id);
     const terrain = requireRecord(alternate ?? config.geometry.radialTerrain), radial = retainedShapeAtlas(scene, view.id);
     const sourceEntry = source.manifest.inputs.find(entry => entry.path === terrain.path && entry.consumers.includes(view.consumer));
     if (!sourceEntry || requireRecord(old.source).sha256 !== sourceEntry.expectedSha256) throw new Error('Retained shape source binding changed.');

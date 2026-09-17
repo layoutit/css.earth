@@ -1,0 +1,1567 @@
+{
+ "schema": "cssearth-oracle-fixture@1",
+ "oracle": "numpy",
+ "generatedBy": "tools/oracles/npy/psyche-alma.py",
+ "tool": {
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+ },
+ "inputs": [
+  {
+   "path": "src/objects/psyche/source/thermal/ThermalInertia_BestFitValue.npy",
+   "sha256": "869ac19ed10168a25d83749d16df095fb8032145f414df914d5168895161f179",
+   "bytes": 21736
+  },
+  {
+   "path": "src/objects/psyche/source/thermal/DielectricConstant_BestFitValue.npy",
+   "sha256": "7c7be079837b29f26f3f464a64904127e442d1230adc7a44687480f4a8068abd",
+   "bytes": 21736
+  },
+  {
+   "path": "src/objects/psyche/source/thermal/LongitudeArray.npy",
+   "sha256": "0795daf24637ad406a927b4a385a678765d43608999427606b04110387739245",
+   "bytes": 712
+  },
+  {
+   "path": "src/objects/psyche/source/thermal/LatitudeArray.npy",
+   "sha256": "72dbcca412048092d3c1b755ce612ed1a6aadc3553129126a0799cf798421b2b",
+   "bytes": 424
+  }
+ ],
+ "cases": {
+  "arrays": {
+   "ThermalInertia_BestFitValue": {
+    "dtype": "<f8",
+    "shape": [
+     37,
+     73
+    ],
+    "missing": 806,
+    "samples": [
+     {
+      "index": 154,
+      "value": 181.0
+     },
+     {
+      "index": 169,
+      "value": 135.0
+     },
+     {
+      "index": 170,
+      "value": 145.5
+     },
+     {
+      "index": 275,
+      "value": 181.0
+     },
+     {
+      "index": 285,
+      "value": 181.0
+     },
+     {
+      "index": 290,
+      "value": 135.0
+     },
+     {
+      "index": 293,
+      "value": 135.0
+     },
+     {
+      "index": 460,
+      "value": 116.0
+     },
+     {
+      "index": 465,
+      "value": 135.0
+     },
+     {
+      "index": 518,
+      "value": 181.0
+     },
+     {
+      "index": 519,
+      "value": 156.0
+     },
+     {
+      "index": 526,
+      "value": 116.0
+     },
+     {
+      "index": 551,
+      "value": 210.0
+     },
+     {
+      "index": 580,
+      "value": 156.0
+     },
+     {
+      "index": 590,
+      "value": 156.0
+     },
+     {
+      "index": 591,
+      "value": 156.0
+     },
+     {
+      "index": 601,
+      "value": 116.0
+     },
+     {
+      "index": 605,
+      "value": 116.0
+     },
+     {
+      "index": 608,
+      "value": 116.0
+     },
+     {
+      "index": 684,
+      "value": 116.0
+     },
+     {
+      "index": 713,
+      "value": 210.0
+     },
+     {
+      "index": 739,
+      "value": 116.0
+     },
+     {
+      "index": 759,
+      "value": 135.0
+     },
+     {
+      "index": 778,
+      "value": 518.0
+     },
+     {
+      "index": 780,
+      "value": 518.0
+     },
+     {
+      "index": 856,
+      "value": 594.0
+     },
+     {
+      "index": 864,
+      "value": 156.0
+     },
+     {
+      "index": 870,
+      "value": 362.5
+     },
+     {
+      "index": 978,
+      "value": 156.0
+     },
+     {
+      "index": 1033,
+      "value": 210.0
+     },
+     {
+      "index": 1037,
+      "value": 442.0
+     },
+     {
+      "index": 1077,
+      "value": 95.5
+     },
+     {
+      "index": 1094,
+      "value": 518.0
+     },
+     {
+      "index": 1119,
+      "value": 210.0
+     },
+     {
+      "index": 1135,
+      "value": 135.0
+     },
+     {
+      "index": 1142,
+      "value": 210.0
+     },
+     {
+      "index": 1323,
+      "value": 156.0
+     },
+     {
+      "index": 1326,
+      "value": 181.0
+     },
+     {
+      "index": 1438,
+      "value": 594.0
+     },
+     {
+      "index": 1482,
+      "value": 135.0
+     },
+     {
+      "index": 1492,
+      "value": 442.0
+     },
+     {
+      "index": 1529,
+      "value": 195.5
+     },
+     {
+      "index": 1544,
+      "value": 168.5
+     },
+     {
+      "index": 1559,
+      "value": 135.0
+     },
+     {
+      "index": 1563,
+      "value": 156.0
+     },
+     {
+      "index": 1581,
+      "value": 442.0
+     },
+     {
+      "index": 1637,
+      "value": 181.0
+     },
+     {
+      "index": 1756,
+      "value": 195.5
+     },
+     {
+      "index": 1761,
+      "value": 145.5
+     },
+     {
+      "index": 1785,
+      "value": 283.0
+     },
+     {
+      "index": 1868,
+      "value": 442.0
+     },
+     {
+      "index": 1874,
+      "value": 442.0
+     },
+     {
+      "index": 2021,
+      "value": 442.0
+     },
+     {
+      "index": 2023,
+      "value": 518.0
+     },
+     {
+      "index": 2050,
+      "value": 210.0
+     },
+     {
+      "index": 2077,
+      "value": 156.0
+     },
+     {
+      "index": 2078,
+      "value": 168.5
+     },
+     {
+      "index": 2112,
+      "value": 210.0
+     },
+     {
+      "index": 2121,
+      "value": 181.0
+     },
+     {
+      "index": 2150,
+      "value": 168.5
+     },
+     {
+      "index": 2166,
+      "value": 442.0
+     },
+     {
+      "index": 2520,
+      "value": 246.5
+     },
+     {
+      "index": 2524,
+      "value": 442.0
+     },
+     {
+      "index": 2548,
+      "value": 442.0
+     }
+    ]
+   },
+   "DielectricConstant_BestFitValue": {
+    "dtype": "<f8",
+    "shape": [
+     37,
+     73
+    ],
+    "missing": 806,
+    "samples": [
+     {
+      "index": 67,
+      "value": 20.5
+     },
+     {
+      "index": 149,
+      "value": 20.5
+     },
+     {
+      "index": 192,
+      "value": 17.5
+     },
+     {
+      "index": 213,
+      "value": 19.5
+     },
+     {
+      "index": 220,
+      "value": 20.5
+     },
+     {
+      "index": 228,
+      "value": 21.5
+     },
+     {
+      "index": 243,
+      "value": 19.5
+     },
+     {
+      "index": 252,
+      "value": 19.5
+     },
+     {
+      "index": 263,
+      "value": 18.5
+     },
+     {
+      "index": 315,
+      "value": 21.5
+     },
+     {
+      "index": 376,
+      "value": 25.5
+     },
+     {
+      "index": 415,
+      "value": 20.0
+     },
+     {
+      "index": 453,
+      "value": 25.5
+     },
+     {
+      "index": 635,
+      "value": 18.0
+     },
+     {
+      "index": 659,
+      "value": 21.5
+     },
+     {
+      "index": 674,
+      "value": 25.5
+     },
+     {
+      "index": 685,
+      "value": 25.5
+     },
+     {
+      "index": 690,
+      "value": 21.5
+     },
+     {
+      "index": 700,
+      "value": 19.5
+     },
+     {
+      "index": 704,
+      "value": 20.5
+     },
+     {
+      "index": 732,
+      "value": 21.5
+     },
+     {
+      "index": 779,
+      "value": 20.0
+     },
+     {
+      "index": 785,
+      "value": 17.5
+     },
+     {
+      "index": 799,
+      "value": 25.5
+     },
+     {
+      "index": 917,
+      "value": 19.5
+     },
+     {
+      "index": 943,
+      "value": 25.5
+     },
+     {
+      "index": 950,
+      "value": 25.5
+     },
+     {
+      "index": 1030,
+      "value": 18.5
+     },
+     {
+      "index": 1043,
+      "value": 17.5
+     },
+     {
+      "index": 1054,
+      "value": 18.5
+     },
+     {
+      "index": 1087,
+      "value": 19.5
+     },
+     {
+      "index": 1117,
+      "value": 18.5
+     },
+     {
+      "index": 1143,
+      "value": 20.5
+     },
+     {
+      "index": 1159,
+      "value": 17.5
+     },
+     {
+      "index": 1201,
+      "value": 19.5
+     },
+     {
+      "index": 1301,
+      "value": 17.5
+     },
+     {
+      "index": 1361,
+      "value": 25.5
+     },
+     {
+      "index": 1362,
+      "value": 23.5
+     },
+     {
+      "index": 1438,
+      "value": 20.5
+     },
+     {
+      "index": 1519,
+      "value": 20.5
+     },
+     {
+      "index": 1521,
+      "value": 20.5
+     },
+     {
+      "index": 1528,
+      "value": 20.5
+     },
+     {
+      "index": 1592,
+      "value": 21.5
+     },
+     {
+      "index": 1617,
+      "value": 55.0
+     },
+     {
+      "index": 1632,
+      "value": 19.5
+     },
+     {
+      "index": 1640,
+      "value": 20.5
+     },
+     {
+      "index": 1655,
+      "value": 21.5
+     },
+     {
+      "index": 1684,
+      "value": 30.0
+     },
+     {
+      "index": 1688,
+      "value": 30.0
+     },
+     {
+      "index": 1695,
+      "value": 55.0
+     },
+     {
+      "index": 1712,
+      "value": 19.5
+     },
+     {
+      "index": 1720,
+      "value": 21.5
+     },
+     {
+      "index": 1761,
+      "value": 55.0
+     },
+     {
+      "index": 1828,
+      "value": 25.5
+     },
+     {
+      "index": 1862,
+      "value": 18.5
+     },
+     {
+      "index": 1866,
+      "value": 19.5
+     },
+     {
+      "index": 2037,
+      "value": 19.0
+     },
+     {
+      "index": 2048,
+      "value": 25.5
+     },
+     {
+      "index": 2071,
+      "value": 7.5
+     },
+     {
+      "index": 2078,
+      "value": 18.5
+     },
+     {
+      "index": 2111,
+      "value": 20.5
+     },
+     {
+      "index": 2121,
+      "value": 25.5
+     },
+     {
+      "index": 2218,
+      "value": 12.0
+     },
+     {
+      "index": 2242,
+      "value": 20.5
+     }
+    ]
+   },
+   "LongitudeArray": {
+    "dtype": "<i8",
+    "shape": [
+     73
+    ],
+    "missing": 0,
+    "samples": [
+     {
+      "index": 0,
+      "value": -180.0
+     },
+     {
+      "index": 1,
+      "value": -175.0
+     },
+     {
+      "index": 2,
+      "value": -170.0
+     },
+     {
+      "index": 3,
+      "value": -165.0
+     },
+     {
+      "index": 4,
+      "value": -160.0
+     },
+     {
+      "index": 5,
+      "value": -155.0
+     },
+     {
+      "index": 6,
+      "value": -150.0
+     },
+     {
+      "index": 8,
+      "value": -140.0
+     },
+     {
+      "index": 9,
+      "value": -135.0
+     },
+     {
+      "index": 10,
+      "value": -130.0
+     },
+     {
+      "index": 11,
+      "value": -125.0
+     },
+     {
+      "index": 12,
+      "value": -120.0
+     },
+     {
+      "index": 13,
+      "value": -115.0
+     },
+     {
+      "index": 14,
+      "value": -110.0
+     },
+     {
+      "index": 15,
+      "value": -105.0
+     },
+     {
+      "index": 16,
+      "value": -100.0
+     },
+     {
+      "index": 17,
+      "value": -95.0
+     },
+     {
+      "index": 18,
+      "value": -90.0
+     },
+     {
+      "index": 19,
+      "value": -85.0
+     },
+     {
+      "index": 20,
+      "value": -80.0
+     },
+     {
+      "index": 21,
+      "value": -75.0
+     },
+     {
+      "index": 23,
+      "value": -65.0
+     },
+     {
+      "index": 24,
+      "value": -60.0
+     },
+     {
+      "index": 25,
+      "value": -55.0
+     },
+     {
+      "index": 26,
+      "value": -50.0
+     },
+     {
+      "index": 27,
+      "value": -45.0
+     },
+     {
+      "index": 28,
+      "value": -40.0
+     },
+     {
+      "index": 29,
+      "value": -35.0
+     },
+     {
+      "index": 30,
+      "value": -30.0
+     },
+     {
+      "index": 32,
+      "value": -20.0
+     },
+     {
+      "index": 34,
+      "value": -10.0
+     },
+     {
+      "index": 35,
+      "value": -5.0
+     },
+     {
+      "index": 36,
+      "value": 0.0
+     },
+     {
+      "index": 37,
+      "value": 5.0
+     },
+     {
+      "index": 38,
+      "value": 10.0
+     },
+     {
+      "index": 39,
+      "value": 15.0
+     },
+     {
+      "index": 40,
+      "value": 20.0
+     },
+     {
+      "index": 41,
+      "value": 25.0
+     },
+     {
+      "index": 42,
+      "value": 30.0
+     },
+     {
+      "index": 43,
+      "value": 35.0
+     },
+     {
+      "index": 45,
+      "value": 45.0
+     },
+     {
+      "index": 46,
+      "value": 50.0
+     },
+     {
+      "index": 47,
+      "value": 55.0
+     },
+     {
+      "index": 48,
+      "value": 60.0
+     },
+     {
+      "index": 50,
+      "value": 70.0
+     },
+     {
+      "index": 52,
+      "value": 80.0
+     },
+     {
+      "index": 53,
+      "value": 85.0
+     },
+     {
+      "index": 54,
+      "value": 90.0
+     },
+     {
+      "index": 55,
+      "value": 95.0
+     },
+     {
+      "index": 56,
+      "value": 100.0
+     },
+     {
+      "index": 57,
+      "value": 105.0
+     },
+     {
+      "index": 58,
+      "value": 110.0
+     },
+     {
+      "index": 60,
+      "value": 120.0
+     },
+     {
+      "index": 61,
+      "value": 125.0
+     },
+     {
+      "index": 62,
+      "value": 130.0
+     },
+     {
+      "index": 63,
+      "value": 135.0
+     },
+     {
+      "index": 64,
+      "value": 140.0
+     },
+     {
+      "index": 65,
+      "value": 145.0
+     },
+     {
+      "index": 66,
+      "value": 150.0
+     },
+     {
+      "index": 67,
+      "value": 155.0
+     },
+     {
+      "index": 68,
+      "value": 160.0
+     },
+     {
+      "index": 69,
+      "value": 165.0
+     },
+     {
+      "index": 71,
+      "value": 175.0
+     },
+     {
+      "index": 72,
+      "value": 180.0
+     }
+    ]
+   },
+   "LatitudeArray": {
+    "dtype": "<i8",
+    "shape": [
+     37
+    ],
+    "missing": 0,
+    "samples": [
+     {
+      "index": 0,
+      "value": -90.0
+     },
+     {
+      "index": 1,
+      "value": -85.0
+     },
+     {
+      "index": 2,
+      "value": -80.0
+     },
+     {
+      "index": 3,
+      "value": -75.0
+     },
+     {
+      "index": 4,
+      "value": -70.0
+     },
+     {
+      "index": 5,
+      "value": -65.0
+     },
+     {
+      "index": 6,
+      "value": -60.0
+     },
+     {
+      "index": 7,
+      "value": -55.0
+     },
+     {
+      "index": 8,
+      "value": -50.0
+     },
+     {
+      "index": 9,
+      "value": -45.0
+     },
+     {
+      "index": 10,
+      "value": -40.0
+     },
+     {
+      "index": 11,
+      "value": -35.0
+     },
+     {
+      "index": 12,
+      "value": -30.0
+     },
+     {
+      "index": 13,
+      "value": -25.0
+     },
+     {
+      "index": 14,
+      "value": -20.0
+     },
+     {
+      "index": 15,
+      "value": -15.0
+     },
+     {
+      "index": 16,
+      "value": -10.0
+     },
+     {
+      "index": 17,
+      "value": -5.0
+     },
+     {
+      "index": 18,
+      "value": 0.0
+     },
+     {
+      "index": 19,
+      "value": 5.0
+     },
+     {
+      "index": 20,
+      "value": 10.0
+     },
+     {
+      "index": 21,
+      "value": 15.0
+     },
+     {
+      "index": 22,
+      "value": 20.0
+     },
+     {
+      "index": 23,
+      "value": 25.0
+     },
+     {
+      "index": 24,
+      "value": 30.0
+     },
+     {
+      "index": 25,
+      "value": 35.0
+     },
+     {
+      "index": 26,
+      "value": 40.0
+     },
+     {
+      "index": 27,
+      "value": 45.0
+     },
+     {
+      "index": 28,
+      "value": 50.0
+     },
+     {
+      "index": 29,
+      "value": 55.0
+     },
+     {
+      "index": 30,
+      "value": 60.0
+     },
+     {
+      "index": 31,
+      "value": 65.0
+     },
+     {
+      "index": 32,
+      "value": 70.0
+     },
+     {
+      "index": 33,
+      "value": 75.0
+     },
+     {
+      "index": 34,
+      "value": 80.0
+     },
+     {
+      "index": 35,
+      "value": 85.0
+     },
+     {
+      "index": 36,
+      "value": 90.0
+     }
+    ]
+   }
+  },
+  "nodes": [
+   {
+    "longitude": -37.037598767700416,
+    "latitude": 71.47062857375661,
+    "row": 32,
+    "value": null
+   },
+   {
+    "longitude": 122.29050059252866,
+    "latitude": -63.02685937010976,
+    "row": 5,
+    "value": 210.0
+   },
+   {
+    "longitude": 258.8522893362222,
+    "latitude": -38.14606102103029,
+    "row": 10,
+    "value": 181.0
+   },
+   {
+    "longitude": -286.01725472471514,
+    "latitude": -44.910306543459086,
+    "row": 9,
+    "value": 518.0
+   },
+   {
+    "longitude": 271.0654985727402,
+    "latitude": 16.139975092609852,
+    "row": 21,
+    "value": 25.0
+   },
+   {
+    "longitude": -150.3882190801357,
+    "latitude": 78.58458455226372,
+    "row": 34,
+    "value": null
+   },
+   {
+    "longitude": -214.2439089960495,
+    "latitude": -5.838185673404408,
+    "row": 17,
+    "value": 195.5
+   },
+   {
+    "longitude": -94.01228897433037,
+    "latitude": -63.720684905043036,
+    "row": 5,
+    "value": 156.0
+   },
+   {
+    "longitude": 7.398921222813657,
+    "latitude": -88.90018939085078,
+    "row": 0,
+    "value": null
+   },
+   {
+    "longitude": -34.38364374565829,
+    "latitude": -19.06633751994368,
+    "row": 14,
+    "value": 181.0
+   },
+   {
+    "longitude": -48.76345935617864,
+    "latitude": 47.96645055115393,
+    "row": 28,
+    "value": 25.0
+   },
+   {
+    "longitude": -286.15320096029893,
+    "latitude": 12.59070150076842,
+    "row": 21,
+    "value": 594.0
+   },
+   {
+    "longitude": 180.56321983118278,
+    "latitude": -69.30365174459757,
+    "row": 4,
+    "value": 135.0
+   },
+   {
+    "longitude": 125.63648340433309,
+    "latitude": 47.07448879965013,
+    "row": 27,
+    "value": 594.0
+   },
+   {
+    "longitude": 241.35355896884764,
+    "latitude": -47.72936243506613,
+    "row": 8,
+    "value": 195.5
+   },
+   {
+    "longitude": 51.88376097339007,
+    "latitude": -49.85534650412804,
+    "row": 8,
+    "value": 283.0
+   },
+   {
+    "longitude": 14.026896722071358,
+    "latitude": 64.72506736837134,
+    "row": 31,
+    "value": null
+   },
+   {
+    "longitude": -338.54218061157286,
+    "latitude": 32.85900959477945,
+    "row": 25,
+    "value": 283.0
+   },
+   {
+    "longitude": -343.3806959405197,
+    "latitude": 73.05242496306434,
+    "row": 33,
+    "value": 362.5
+   },
+   {
+    "longitude": -141.2824342374092,
+    "latitude": -38.139248736173215,
+    "row": 10,
+    "value": 125.5
+   },
+   {
+    "longitude": 192.09967317881282,
+    "latitude": -11.94346760169129,
+    "row": 16,
+    "value": 258.5
+   },
+   {
+    "longitude": 49.04805936469746,
+    "latitude": 71.79507593818298,
+    "row": 32,
+    "value": 442.0
+   },
+   {
+    "longitude": 295.77963811078,
+    "latitude": -17.632456872436627,
+    "row": 14,
+    "value": 283.0
+   },
+   {
+    "longitude": -300.87814443148056,
+    "latitude": 9.686317784318206,
+    "row": 20,
+    "value": 442.0
+   },
+   {
+    "longitude": 278.80635218976926,
+    "latitude": -76.48993110927753,
+    "row": 3,
+    "value": 135.0
+   },
+   {
+    "longitude": 63.150839998253474,
+    "latitude": 77.51847904459551,
+    "row": 34,
+    "value": null
+   },
+   {
+    "longitude": -192.3382803183965,
+    "latitude": 38.43644500560499,
+    "row": 26,
+    "value": 246.5
+   },
+   {
+    "longitude": -125.52435853460635,
+    "latitude": -15.717557873608236,
+    "row": 15,
+    "value": 181.0
+   },
+   {
+    "longitude": -277.60192642541966,
+    "latitude": -79.82931986056245,
+    "row": 2,
+    "value": 156.0
+   },
+   {
+    "longitude": 6.271119012463,
+    "latitude": -75.46073874676313,
+    "row": 3,
+    "value": 156.0
+   },
+   {
+    "longitude": 217.18239330859484,
+    "latitude": -2.2103229332916974,
+    "row": 18,
+    "value": null
+   },
+   {
+    "longitude": -80.80598807082559,
+    "latitude": -66.4975866053163,
+    "row": 5,
+    "value": 116.0
+   },
+   {
+    "longitude": 123.95255675156098,
+    "latitude": -8.007385822929203,
+    "row": 16,
+    "value": 135.0
+   },
+   {
+    "longitude": -304.0692570010882,
+    "latitude": 85.8381585794912,
+    "row": 35,
+    "value": null
+   },
+   {
+    "longitude": -79.54764946189869,
+    "latitude": 33.79687299161444,
+    "row": 25,
+    "value": 181.0
+   },
+   {
+    "longitude": -343.8437916581567,
+    "latitude": 21.751952176471438,
+    "row": 22,
+    "value": 283.0
+   },
+   {
+    "longitude": 99.15979812703155,
+    "latitude": -32.87587531900608,
+    "row": 11,
+    "value": 181.0
+   },
+   {
+    "longitude": 288.5984863158166,
+    "latitude": 77.34791895886207,
+    "row": 33,
+    "value": null
+   },
+   {
+    "longitude": 66.68716552660742,
+    "latitude": -33.216832124207336,
+    "row": 11,
+    "value": 594.0
+   },
+   {
+    "longitude": 4.70058425994484,
+    "latitude": 46.19105211975134,
+    "row": 27,
+    "value": 210.0
+   },
+   {
+    "longitude": 283.4620204025283,
+    "latitude": -10.510178999029087,
+    "row": 16,
+    "value": 156.0
+   },
+   {
+    "longitude": 269.44691959861666,
+    "latitude": 73.5101527386461,
+    "row": 33,
+    "value": null
+   },
+   {
+    "longitude": 162.8852260528974,
+    "latitude": 11.02121390127581,
+    "row": 20,
+    "value": 195.5
+   },
+   {
+    "longitude": 214.4357188043336,
+    "latitude": -37.98970347173955,
+    "row": 10,
+    "value": 116.0
+   },
+   {
+    "longitude": -289.26777620407523,
+    "latitude": -89.77104276122097,
+    "row": 0,
+    "value": null
+   },
+   {
+    "longitude": 9.257018574484883,
+    "latitude": 11.491902441503825,
+    "row": 20,
+    "value": 135.0
+   },
+   {
+    "longitude": -292.26397138575453,
+    "latitude": -40.32133816868044,
+    "row": 10,
+    "value": 518.0
+   },
+   {
+    "longitude": 270.0643548898757,
+    "latitude": -78.74571183038279,
+    "row": 2,
+    "value": null
+   },
+   {
+    "longitude": -262.3969881185755,
+    "latitude": -24.34161795216521,
+    "row": 13,
+    "value": 95.5
+   },
+   {
+    "longitude": -312.8177023945555,
+    "latitude": 41.01625246573402,
+    "row": 26,
+    "value": 594.0
+   },
+   {
+    "longitude": 340.259377497743,
+    "latitude": 10.76642727119709,
+    "row": 20,
+    "value": 442.0
+   },
+   {
+    "longitude": -357.97253770668993,
+    "latitude": -14.744227850648697,
+    "row": 15,
+    "value": 116.0
+   },
+   {
+    "longitude": -251.32421148725007,
+    "latitude": 86.20085427798087,
+    "row": 35,
+    "value": null
+   },
+   {
+    "longitude": -139.95888094380544,
+    "latitude": 62.64084637873833,
+    "row": 31,
+    "value": null
+   },
+   {
+    "longitude": 285.47746061302206,
+    "latitude": -67.26291089727049,
+    "row": 5,
+    "value": 116.0
+   },
+   {
+    "longitude": 267.6592618413598,
+    "latitude": 38.223544910054606,
+    "row": 26,
+    "value": null
+   },
+   {
+    "longitude": -237.10914180016755,
+    "latitude": -38.285837962199345,
+    "row": 10,
+    "value": 181.0
+   },
+   {
+    "longitude": 66.30625718579475,
+    "latitude": 36.441496501264666,
+    "row": 25,
+    "value": 442.0
+   },
+   {
+    "longitude": 110.18508274732622,
+    "latitude": 10.828167533629841,
+    "row": 20,
+    "value": 442.0
+   },
+   {
+    "longitude": -276.56570418566173,
+    "latitude": 60.54120842130353,
+    "row": 30,
+    "value": 594.0
+   },
+   {
+    "longitude": 340.5123662828578,
+    "latitude": -43.94071737428285,
+    "row": 9,
+    "value": 125.5
+   },
+   {
+    "longitude": -157.38564378546297,
+    "latitude": 48.26408666865166,
+    "row": 28,
+    "value": 181.0
+   },
+   {
+    "longitude": 107.05308675338436,
+    "latitude": 37.23551763412769,
+    "row": 25,
+    "value": 594.0
+   },
+   {
+    "longitude": 285.24713460634626,
+    "latitude": 69.48354169192959,
+    "row": 32,
+    "value": null
+   },
+   {
+    "longitude": 54.928654493278664,
+    "latitude": -53.19235042316146,
+    "row": 7,
+    "value": 442.0
+   },
+   {
+    "longitude": 30.185085495314652,
+    "latitude": -35.66632416864723,
+    "row": 11,
+    "value": 116.0
+   },
+   {
+    "longitude": -328.2397341139738,
+    "latitude": 81.16956553131644,
+    "row": 34,
+    "value": 442.0
+   },
+   {
+    "longitude": 50.229304683562184,
+    "latitude": 15.742046731872584,
+    "row": 21,
+    "value": 246.5
+   },
+   {
+    "longitude": 36.731149723396186,
+    "latitude": -41.934319581542205,
+    "row": 10,
+    "value": 135.0
+   },
+   {
+    "longitude": 351.07198957773323,
+    "latitude": 29.271908029850906,
+    "row": 24,
+    "value": 594.0
+   },
+   {
+    "longitude": 318.15103349587105,
+    "latitude": 2.119964852484182,
+    "row": 18,
+    "value": null
+   },
+   {
+    "longitude": -246.22436701419667,
+    "latitude": 47.50528140272926,
+    "row": 28,
+    "value": 594.0
+   },
+   {
+    "longitude": 102.89237920295795,
+    "latitude": 62.57365277446578,
+    "row": 31,
+    "value": null
+   },
+   {
+    "longitude": 79.91043574786843,
+    "latitude": -86.90829440971112,
+    "row": 1,
+    "value": null
+   },
+   {
+    "longitude": -146.725553553762,
+    "latitude": -87.44418811942701,
+    "row": 1,
+    "value": 195.5
+   },
+   {
+    "longitude": -237.4598560671423,
+    "latitude": -34.92608671622611,
+    "row": 11,
+    "value": 156.0
+   },
+   {
+    "longitude": 29.285344480240738,
+    "latitude": 14.631976845203514,
+    "row": 21,
+    "value": 181.0
+   },
+   {
+    "longitude": 246.8162461761158,
+    "latitude": 18.184315322771695,
+    "row": 22,
+    "value": 168.5
+   },
+   {
+    "longitude": 29.773071618661806,
+    "latitude": -63.48417067701473,
+    "row": 5,
+    "value": 283.0
+   },
+   {
+    "longitude": -116.36968494481638,
+    "latitude": -63.340121447671926,
+    "row": 5,
+    "value": 195.5
+   },
+   {
+    "longitude": -352.3722870420137,
+    "latitude": -60.9836990442695,
+    "row": 6,
+    "value": 210.0
+   },
+   {
+    "longitude": -306.208545080721,
+    "latitude": -26.124863592463562,
+    "row": 13,
+    "value": 168.5
+   },
+   {
+    "longitude": 347.3610748890755,
+    "latitude": -54.879524583459926,
+    "row": 7,
+    "value": 181.0
+   },
+   {
+    "longitude": 314.44339713995373,
+    "latitude": -15.459221338104001,
+    "row": 15,
+    "value": null
+   },
+   {
+    "longitude": 333.4308951355136,
+    "latitude": 29.820114291827537,
+    "row": 24,
+    "value": 195.5
+   },
+   {
+    "longitude": -82.2291800402584,
+    "latitude": -24.034169360662453,
+    "row": 13,
+    "value": 181.0
+   },
+   {
+    "longitude": 5.567358817908765,
+    "latitude": -6.199555060989114,
+    "row": 17,
+    "value": 75.0
+   },
+   {
+    "longitude": -138.31402132068206,
+    "latitude": -82.87191101753153,
+    "row": 1,
+    "value": 181.0
+   },
+   {
+    "longitude": -80.61551388889814,
+    "latitude": 17.412325214946073,
+    "row": 21,
+    "value": 75.0
+   },
+   {
+    "longitude": 42.91712271668132,
+    "latitude": 64.60082740701647,
+    "row": 31,
+    "value": null
+   },
+   {
+    "longitude": 80.78009530529081,
+    "latitude": 78.85369544692632,
+    "row": 34,
+    "value": null
+   },
+   {
+    "longitude": 212.0826930952724,
+    "latitude": -3.3906485539905984,
+    "row": 17,
+    "value": null
+   },
+   {
+    "longitude": 308.36348501746073,
+    "latitude": 1.899799620879301,
+    "row": 18,
+    "value": null
+   },
+   {
+    "longitude": 255.84675947686708,
+    "latitude": -18.205542607284983,
+    "row": 14,
+    "value": 442.0
+   },
+   {
+    "longitude": 317.64796777488385,
+    "latitude": -50.88838118131632,
+    "row": 8,
+    "value": 95.5
+   },
+   {
+    "longitude": 333.51560070694404,
+    "latitude": 65.88273816113215,
+    "row": 31,
+    "value": null
+   }
+  ]
+ }
+}

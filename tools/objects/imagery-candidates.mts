@@ -2,6 +2,12 @@
 /** Before wiring or re-registering a photograph lens, find whether a public archive holds finer frames than the body ships.
  *
  *   node tools/objects/imagery-candidates.mts [<object-id> ...] [--minimum-pixels 50] [--json]
+ *   node tools/objects/imagery-candidates.mts --archives <object-id> ... [--json]
+ *
+ * `--archives` searches the observatory archives OPUS does not index, for bodies seen from the ground or from Earth orbit: ALMA,
+ * ESO raw frames, MAST (Hubble, JWST) by the names the body is observed under (its catalogue name and, for a numbered small
+ * body, its JPL SBDB number and designations), and DataCite for data deposits citing the papers its sources and ledger already
+ * cite. Name matches are substrings, so a short name can match unrelated targets; the output names what matched.
  *
  * One public service, read only: the PDS Rings Node's OPUS, which computes surface geometry for the bodies imaged by Voyager,
  * Galileo, Cassini, New Horizons and the other missions it indexes. For every catalogued body OPUS covers, its finest body-centre
@@ -12,6 +18,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord } from '../source-values.mts';
+import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations } from './archive-search.mts';
 
 const OPUS = 'https://opus.pds-rings.seti.org/api';
 const ROOT = resolve(import.meta.dirname, '../..');
@@ -126,6 +133,72 @@ export async function imageryCandidates(ids: readonly string[], { minimumPixels 
   const order: ImageryVerdict[] = ['finer-frames', 'candidate', 'shipped-unknown', 'no-upgrade', 'too-small', 'no-images'];
   results.sort((a, b) => order.indexOf(a.verdict) - order.indexOf(b.verdict) || (b.factor ?? b.pixelsAcross ?? 0) - (a.factor ?? a.pixelsAcross ?? 0));
   return { results, skipped };
+}
+
+/** The names an archive may file a body under: its catalogue name, and for a numbered small body its number (four digits or more;
+ * a shorter one matches too much) and designations from the SBDB full name, "136108 Haumea (2003 EL61)", with and without the space. */
+export function bodyArchiveNames(catalogName: string, sbdbFullName: string | null = null) {
+  const names = [catalogName.normalize('NFKD').replace(/\p{Lm}|[^\p{L}\p{N} -]/gu, '').trim()];
+  const match = sbdbFullName?.match(/^\s*(\d+)\s+([^(]*?)\s*(?:\(([^)]+)\))?\s*$/u);
+  if (match) {
+    if (match[1]!.length >= 4) names.push(match[1]!);
+    if (match[3]) names.push(match[3], match[3].replaceAll(' ', ''));
+  }
+  return [...new Set(names.filter(name => name.length >= 3))];
+}
+
+/** DOIs a body already cites: the catalogue records its manifest binds, and doi.org links in its investigation ledger. */
+export function citedDois(manifest: unknown, records: ReadonlyMap<string, unknown>, ledger: unknown) {
+  const dois = new Set<string>(), entries = requireRecord(manifest);
+  for (const entry of [...requireArray(entries.inputs ?? []), ...requireArray(entries.documents ?? [])].map(value => requireRecord(value))) {
+    const binding = entry.sourceBinding === undefined ? {} : requireRecord(entry.sourceBinding);
+    for (const reference of requireArray(binding.references ?? []).map(value => requireRecord(value))) {
+      const record = records.get(String(reference.catalogueId));
+      if (record === undefined) continue;
+      for (const identifier of requireArray(requireRecord(record).identifiers ?? []).map(value => requireRecord(value))) if (identifier.type === 'DOI') dois.add(String(identifier.value).toLowerCase());
+    }
+  }
+  for (const text of JSON.stringify(ledger ?? {}).matchAll(/https:\/\/doi\.org\/(10\.[^"\s]+)/gu)) dois.add(text[1]!.toLowerCase());
+  return [...dois].sort();
+}
+
+/** Archive leads for named bodies; a deposit the body already cites (or a version of one) is not a lead. */
+export async function archiveCandidates(ids: readonly string[]) {
+  if (!ids.length) throw new TypeError('--archives needs object ids: every body would send hundreds of archive queries.');
+  const objects = resolve(ROOT, 'src/objects'), results = [];
+  for (const id of ids) {
+    const descriptor = requireRecord(JSON.parse(readFileSync(resolve(objects, id, 'object.json'), 'utf8')));
+    const catalogName = String(requireRecord(requireRecord(requireRecord(descriptor.properties).catalog)).name);
+    const recordPath = resolve(ROOT, 'packages/astronomy/data/bodies', `${id}.json`);
+    const acquisition = existsSync(recordPath) ? requireRecord(JSON.parse(readFileSync(recordPath, 'utf8'))).acquisition : undefined;
+    const target = acquisition === undefined || acquisition === null ? undefined : requireRecord(requireRecord(acquisition).heliocentric ?? {}).target;
+    const number = typeof target === 'string' ? target.match(/^(\d+);$/u)?.[1] : undefined;
+    const sbdb = number ? requireRecord(requireRecord(await (await fetchRetrying(`https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=${number}`)).json()).object) : null;
+    const names = bodyArchiveNames(catalogName, sbdb ? String(sbdb.fullname) : null);
+    const manifestPath = resolve(objects, id, 'source/manifest.json'), ledgerPath = resolve(objects, id, 'investigations.json');
+    const manifest = existsSync(manifestPath) ? JSON.parse(readFileSync(manifestPath, 'utf8')) : {};
+    const records = new Map(readdirSync(resolve(ROOT, 'src/sources')).filter(name => name.endsWith('.json'))
+      .map(name => [name.slice(0, -5), JSON.parse(readFileSync(resolve(ROOT, 'src/sources', name), 'utf8')) as unknown] as const));
+    const cited = citedDois(manifest, records, existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : null);
+    const body = { names };
+    const [alma, eso, mast, found] = await Promise.all([almaObservations(body), esoRawObservations(body), mastObservations(body), depositsCiting(cited)]);
+    const known = new Set(cited), deposits = found.filter(deposit => !known.has(deposit.doi.toLowerCase()) && !deposit.versions.some(version => known.has(version)));
+    const archives = { alma, eso, mast, deposits };
+    results.push({ id, names, citedDois: cited, archives, leads: archiveLeads(archives) });
+  }
+  return results;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href && process.argv.includes('--archives')) {
+  const results = await archiveCandidates(process.argv.slice(2).filter(argument => !argument.startsWith('--')));
+  if (process.argv.includes('--json')) { console.log(JSON.stringify(results, null, 2)); process.exit(0); }
+  for (const result of results) {
+    console.log(`${result.id}: searched as ${result.names.map(name => `"${name}"`).join(', ')}; ${result.citedDois.length} cited DOIs checked for deposits`);
+    for (const group of result.archives.alma) console.log(`  ALMA targets matched in ${group.proposal}: ${group.targets.join(', ')}`);
+    for (const lead of result.leads) console.log(`  ${lead}`);
+    if (!result.leads.length) console.log('  no archive leads');
+  }
+  process.exit(0);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
