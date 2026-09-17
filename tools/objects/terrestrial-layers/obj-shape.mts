@@ -285,20 +285,21 @@ export function createShapeSurfaceSampler(mesh: SourceMesh, value: unknown, vali
 
 /** Barycentric weights (u on AB, v on AC) of the Euclidean projection of a point onto a triangle, including its boundary.
  * Scalar and allocation-free: the mesh search runs it for every candidate face. */
-function projectionWeights(px: number, py: number, pz: number, a: readonly number[], ab: readonly number[], ac: readonly number[], weights: { u: number; v: number }) {
-  const apx = px - a[0], apy = py - a[1], apz = pz - a[2];
-  const d1 = ab[0] * apx + ab[1] * apy + ab[2] * apz, d2 = ac[0] * apx + ac[1] * apy + ac[2] * apz;
+function projectionWeights(px: number, py: number, pz: number, a: ArrayLike<number>, ab: ArrayLike<number>, ac: ArrayLike<number>, weights: { u: number; v: number }, at = 0) {
+  const a0 = a[at], a1 = a[at + 1], a2 = a[at + 2], ab0 = ab[at], ab1 = ab[at + 1], ab2 = ab[at + 2], ac0 = ac[at], ac1 = ac[at + 1], ac2 = ac[at + 2];
+  const apx = px - a0, apy = py - a1, apz = pz - a2;
+  const d1 = ab0 * apx + ab1 * apy + ab2 * apz, d2 = ac0 * apx + ac1 * apy + ac2 * apz;
   let u = 0, v = 0;
   if (!(d1 <= 0 && d2 <= 0)) {
-    const bpx = apx - ab[0], bpy = apy - ab[1], bpz = apz - ab[2];
-    const d3 = ab[0] * bpx + ab[1] * bpy + ab[2] * bpz, d4 = ac[0] * bpx + ac[1] * bpy + ac[2] * bpz;
+    const bpx = apx - ab0, bpy = apy - ab1, bpz = apz - ab2;
+    const d3 = ab0 * bpx + ab1 * bpy + ab2 * bpz, d4 = ac0 * bpx + ac1 * bpy + ac2 * bpz;
     if (d3 >= 0 && d4 <= d3) u = 1;
     else {
       const vc = d1 * d4 - d3 * d2;
       if (vc <= 0 && d1 >= 0 && d3 <= 0) u = d1 / (d1 - d3);
       else {
-        const cpx = apx - ac[0], cpy = apy - ac[1], cpz = apz - ac[2];
-        const d5 = ab[0] * cpx + ab[1] * cpy + ab[2] * cpz, d6 = ac[0] * cpx + ac[1] * cpy + ac[2] * cpz;
+        const cpx = apx - ac0, cpy = apy - ac1, cpz = apz - ac2;
+        const d5 = ab0 * cpx + ab1 * cpy + ab2 * cpz, d6 = ac0 * cpx + ac1 * cpy + ac2 * cpz;
         if (d6 >= 0 && d5 <= d6) v = 1;
         else {
           const vb = d5 * d2 - d1 * d6;
@@ -363,34 +364,62 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
     return {min,max,left:build(items.slice(0,half)),right:build(items.slice(half))};
   }
   const root = build(faces);
+  // The tree flattened into typed arrays in depth-first order: each query walks an explicit stack in exactly the order the
+  // recursive walk used, with the same arithmetic, so every hit and closest point is bit-identical and no closure is called per node.
+  const nodes: FaceTree[] = [], leafFaces: SourceFace[] = [];
+  (function flatten(node: FaceTree) { nodes.push(node); if (node.items) leafFaces.push(...node.items); else { flatten(node.left); flatten(node.right); } })(root);
+  const nodeIndex = new Map(nodes.map((node, i) => [node, i]));
+  const boxMin = new Float64Array(nodes.length * 3), boxMax = new Float64Array(nodes.length * 3);
+  const leftChild = new Int32Array(nodes.length), rightChild = new Int32Array(nodes.length), firstFace = new Int32Array(nodes.length), faceCount = new Int32Array(nodes.length);
+  const faceA = new Float64Array(leafFaces.length * 3), faceAB = new Float64Array(leafFaces.length * 3), faceAC = new Float64Array(leafFaces.length * 3), faceIds = new Int32Array(leafFaces.length);
+  let faceCursor = 0;
+  nodes.forEach((node, i) => {
+    for (let axis = 0; axis < 3; axis++) { boxMin[i * 3 + axis] = node.min[axis]; boxMax[i * 3 + axis] = node.max[axis]; }
+    if (node.items) {
+      firstFace[i] = faceCursor; faceCount[i] = node.items.length;
+      for (const face of node.items) {
+        for (let axis = 0; axis < 3; axis++) { faceA[faceCursor * 3 + axis] = face.a[axis]; faceAB[faceCursor * 3 + axis] = face.ab[axis]; faceAC[faceCursor * 3 + axis] = face.ac[axis]; }
+        faceIds[faceCursor++] = face.id;
+      }
+    } else { leftChild[i] = nodeIndex.get(node.left)!; rightChild[i] = nodeIndex.get(node.right)!; }
+  });
+  // A walk holds at most one pending sibling per level; the tree halves at every level.
+  const stack = new Int32Array(nodes.length + 1);
   function intersect(origin: readonly number[], d: readonly number[], maximumDistance = Infinity, requireUnique = false) {
     let nearest=maximumDistance, faceId=-1;
     let farthest = 0;
-    function visit(n: FaceTree) {
+    const o0 = origin[0], o1 = origin[1], o2 = origin[2], d0 = d[0], d1 = d[1], d2 = d[2];
+    const flat0 = Math.abs(d0)<1e-15, flat1 = Math.abs(d1)<1e-15, flat2 = Math.abs(d2)<1e-15;
+    let top = 0;
+    stack[top++] = 0;
+    while (top > 0) {
+      const n = stack[--top], b3 = n * 3;
       let lo=0,hi=requireUnique ? maximumDistance : nearest;
-      for (let i=0;i<3;i++) {
-        if (Math.abs(d[i])<1e-15) { if(n.min[i]>origin[i]||n.max[i]<origin[i])return; continue; }
-        const a=(n.min[i]-origin[i])/d[i],b=(n.max[i]-origin[i])/d[i]; lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b));
-        if(lo>hi)return;
-      }
-      if (!n.items) {visit(n.left);visit(n.right);return;}
-      for (const f of n.items) {
+      if (flat0) { if(boxMin[b3]>o0||boxMax[b3]<o0)continue; }
+      else { const a=(boxMin[b3]-o0)/d0,b=(boxMax[b3]-o0)/d0; lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b)); if(lo>hi)continue; }
+      if (flat1) { if(boxMin[b3+1]>o1||boxMax[b3+1]<o1)continue; }
+      else { const a=(boxMin[b3+1]-o1)/d1,b=(boxMax[b3+1]-o1)/d1; lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b)); if(lo>hi)continue; }
+      if (flat2) { if(boxMin[b3+2]>o2||boxMax[b3+2]<o2)continue; }
+      else { const a=(boxMin[b3+2]-o2)/d2,b=(boxMax[b3+2]-o2)/d2; lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b)); if(lo>hi)continue; }
+      if (faceCount[n] === 0) { stack[top++] = rightChild[n]; stack[top++] = leftChild[n]; continue; }
+      for (let k = firstFace[n], end = k + faceCount[n]; k < end; k++) {
         // Scalar Möller–Trumbore in the order the vector helpers used; every candidate face of every ray passes here.
-        const ab=f.ab, ac=f.ac, fa=f.a;
-        const h0=d[1]*ac[2]-d[2]*ac[1], h1=d[2]*ac[0]-d[0]*ac[2], h2=d[0]*ac[1]-d[1]*ac[0], det=ab[0]*h0+ab[1]*h1+ab[2]*h2;
+        const k3 = k * 3, ab0 = faceAB[k3], ab1 = faceAB[k3 + 1], ab2 = faceAB[k3 + 2], ac0 = faceAC[k3], ac1 = faceAC[k3 + 1], ac2 = faceAC[k3 + 2];
+        const h0=d1*ac2-d2*ac1, h1=d2*ac0-d0*ac2, h2=d0*ac1-d1*ac0, det=ab0*h0+ab1*h1+ab2*h2;
         if(Math.abs(det)<1e-12)continue;
-        const s0=origin[0]-fa[0], s1=origin[1]-fa[1], s2=origin[2]-fa[2], u=(s0*h0+s1*h1+s2*h2)/det;
+        const s0=o0-faceA[k3], s1=o1-faceA[k3+1], s2=o2-faceA[k3+2], u=(s0*h0+s1*h1+s2*h2)/det;
         if(u < -1e-9 || u > 1+1e-9)continue;
-        const q0=s1*ab[2]-s2*ab[1], q1=s2*ab[0]-s0*ab[2], q2=s0*ab[1]-s1*ab[0], v=(d[0]*q0+d[1]*q1+d[2]*q2)/det;
+        const q0=s1*ab2-s2*ab1, q1=s2*ab0-s0*ab2, q2=s0*ab1-s1*ab0, v=(d0*q0+d1*q1+d2*q2)/det;
         if(v < -1e-9 || u+v > 1+1e-9)continue;
-        const t=(ac[0]*q0+ac[1]*q1+ac[2]*q2)/det;
+        const t=(ac0*q0+ac1*q1+ac2*q2)/det;
         if (t > 0 && t < maximumDistance) {
           farthest = Math.max(farthest, t);
-          if (t < nearest) { nearest = t; faceId = f.id; }
+          if (t < nearest) { nearest = t; faceId = faceIds[k]; }
+          // The spread between the farthest and nearest hits only grows, so a ray that has lost uniqueness keeps losing it.
+          if (requireUnique && farthest - nearest > 1e-7) return null;
         }
       }
     }
-    visit(root);
     return faceId<0 || (requireUnique && farthest - nearest > 1e-7) ? null : {radius:nearest,faceId};
   }
   function hit(longitude: number, latitude: number, requireUnique = false) {
@@ -398,6 +427,7 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
     const lon=longitude*Math.PI/180, lat=latitude*Math.PI/180;
     return intersect([0,0,0],[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)], Infinity, requireUnique);
   }
+  const nearStack = new Int32Array(nodes.length + 1);
   function closestPoint(point: readonly number[], maximumDistance = Infinity, requireUnique = true) {
     if (!isArray(point) || point.length !== 3 || !point.every(Number.isFinite) || !(maximumDistance > 0) || typeof requireUnique !== 'boolean') {
       throw new TypeError('Surface projection requires a finite point and positive distance bound.');
@@ -408,18 +438,21 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
     const tieSquared = 1e-12;
     const [px, py, pz] = point, weights = { u: 0, v: 0 };
     const axisGap = (min: number, p: number, max: number) => Math.max(min - p, 0, p - max) ** 2;
-    const boxDistance = (node: FaceTree) => 0 + axisGap(node.min[0], px, node.max[0]) + axisGap(node.min[1], py, node.max[1]) + axisGap(node.min[2], pz, node.max[2]);
-    function visit(node: FaceTree) {
-      if (boxDistance(node) > distanceSquared + tieSquared) return;
-      if (!node.items) {
-        const leftFirst = boxDistance(node.left) <= boxDistance(node.right);
-        visit(leftFirst ? node.left : node.right); visit(leftFirst ? node.right : node.left); return;
+    const boxDistance = (n: number) => 0 + axisGap(boxMin[n * 3], px, boxMax[n * 3]) + axisGap(boxMin[n * 3 + 1], py, boxMax[n * 3 + 1]) + axisGap(boxMin[n * 3 + 2], pz, boxMax[n * 3 + 2]);
+    let top = 0;
+    nearStack[top++] = 0;
+    while (top > 0) {
+      const node = nearStack[--top];
+      if (boxDistance(node) > distanceSquared + tieSquared) continue;
+      if (faceCount[node] === 0) {
+        const left = leftChild[node], right = rightChild[node], leftFirst = boxDistance(left) <= boxDistance(right);
+        nearStack[top++] = leftFirst ? right : left; nearStack[top++] = leftFirst ? left : right; continue;
       }
-      for (const face of node.items) {
+      for (let k = firstFace[node], end = k + faceCount[node]; k < end; k++) {
         // Scalar arithmetic in the order closestTrianglePoint uses, so results are bit-identical without allocating per face.
-        projectionWeights(px, py, pz, face.a, face.ab, face.ac, weights);
-        const { u, v } = weights, { a, ab, ac } = face;
-        const qx = a[0] + u * ab[0] + v * ac[0], qy = a[1] + u * ab[1] + v * ac[1], qz = a[2] + u * ab[2] + v * ac[2];
+        projectionWeights(px, py, pz, faceA, faceAB, faceAC, weights, k * 3);
+        const { u, v } = weights, k3 = k * 3;
+        const qx = faceA[k3] + u * faceAB[k3] + v * faceAC[k3], qy = faceA[k3 + 1] + u * faceAB[k3 + 1] + v * faceAC[k3 + 1], qz = faceA[k3 + 2] + u * faceAB[k3 + 2] + v * faceAC[k3 + 2];
         const dx = px - qx, dy = py - qy, dz = pz - qz, squared = dx * dx + dy * dy + dz * dz;
         if (squared > distanceSquared + tieSquared) continue;
         if (result && Math.abs(squared - distanceSquared) <= tieSquared) {
@@ -427,14 +460,13 @@ function radialShape(vertices: number[][], indices: number[][], { metersPerUnit,
           if (sx * sx + sy * sy + sz * sz > tieSquared) ambiguous = true;
           continue;
         }
-        const projected = { point: [qx, qy, qz], barycentric: [1 - u - v, u, v] };
+        const face = leafFaces[k], projected = { point: [qx, qy, qz], barycentric: [1 - u - v, u, v] };
         const normal = cross(face.ab, face.ac), length = Math.hypot(...normal);
         distanceSquared = squared; ambiguous = false;
         result = { ...projected, faceId: face.id, normal: normal.map(n => n / length),
           radius: Math.hypot(...projected.point), distanceMeters: Math.sqrt(squared) };
       }
     }
-    visit(root);
     // A distance-only geometry audit may accept either equally near point.
     // Material transfer keeps the default unique correspondence requirement.
     return requireUnique && ambiguous ? null : result;

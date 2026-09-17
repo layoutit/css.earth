@@ -433,6 +433,10 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       const denominator = aa * bb - abac * abac;
       const rectWidth = rect.width * scale, rectHeight = rect.height * scale;
       const [n0, n1, n2] = face.vertexNormals;
+      // The leaf clips its rectangle to the triangle, so a texel is drawn only inside it or within the few texels filtering reads
+      // across an edge. Texels farther out are not sampled; each takes the nearest sampled texel in its row.
+      const texelUnits = Math.max(Math.hypot(m[1], m[0], m[2]) * geometry.leafWidth / rectWidth, Math.hypot(m[5], m[4], m[6]) * geometry.leafHeight / rectHeight) / BASE_TILE;
+      const marginUnits = UNDRAWN_MARGIN_TEXELS * texelUnits, undrawn = new Uint8Array(rectWidth * rectHeight);
       for (let py = 0; py < rectHeight; py++) for (let px = 0; px < rectWidth; px++) {
         const x = (px + .5) * geometry.leafWidth / rectWidth, y = (py + .5) * geometry.leafHeight / rectHeight;
         const w = m[3] * x + m[7] * y + m[15];
@@ -441,6 +445,10 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const ap0 = point[0] - a[0], ap1 = point[1] - a[1], ap2 = point[2] - a[2];
         const apab = 0 + ap0 * ab[0] + ap1 * ab[1] + ap2 * ab[2], apac = 0 + ap0 * ac[0] + ap1 * ac[1] + ap2 * ac[2];
         const u = (apab * bb - apac * abac) / denominator, v = (apac * aa - apab * abac) / denominator;
+        if (!(u >= 0 && v >= 0 && u + v <= 1)) {
+          const edge = closestTrianglePoint(point, a, ab, ac).point;
+          if (Math.hypot(point[0] - edge[0], point[1] - edge[1], point[2] - edge[2]) > marginUnits) { undrawn[py * rectWidth + px] = 1; continue; }
+        }
         // PolyCSS's native u primitive owns triangle coverage. Fill its entire
         // raster so antialiasing never samples a transparent triangle edge.
         const nx = n0[0] * (1 - u - v) + n1[0] * u + n2[0] * v, ny = n0[1] * (1 - u - v) + n1[1] * u + n2[1] * v, nz = n0[2] * (1 - u - v) + n1[2] * u + n2[2] * v;
@@ -554,6 +562,12 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         }
         flood[offset + 3] = shadow[offset + 3] = 255;
       }
+      fillUndrawnTexels(undrawn, rectWidth, rectHeight, (py, from, to) => {
+        const row = (rect.y * scale + py) * width + rect.x * scale, target = (row + to) * 4, source = (row + from) * 4;
+        flood.copyWithin(target, source, source + 4); shadow.copyWithin(target, source, source + 4);
+        if (scalarSources) scalarSources.copyWithin(target, source, source + 4);
+        if (sampleSources) sampleSources[row + to] = sampleSources[row + from];
+      });
     }
     // Scientific colours retain exact palette values; the numeric source index is preparation-only.
     // Photographs keep full chroma detail through sharp's smart subsampling.
@@ -642,6 +656,26 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     ...(radial.coverage ? { coverage: radial.coverage } : {}),
     ...(radial.simplification ? { simplification: radial.simplification } : {}) }) + '\n');
   return surfaces;
+}
+
+/** Texels beyond a triangle that are still sampled: bilinear filtering reads one across an edge, and the second keeps a minified
+ * edge from averaging in a copied colour. */
+const UNDRAWN_MARGIN_TEXELS = 2;
+
+/** Give each unsampled texel of a rectangle the nearest sampled texel in its row, the left one on a tie. */
+export function fillUndrawnTexels(undrawn: Uint8Array, width: number, height: number, copy: (row: number, from: number, to: number) => void) {
+  for (let y = 0; y < height; y++) {
+    const row = y * width;
+    let left = -1;
+    for (let x = 0; x < width; x++) {
+      if (!undrawn[row + x]) { left = x; continue; }
+      let right = x + 1;
+      while (right < width && undrawn[row + right]) right++;
+      if (left < 0 && right >= width) throw new Error('A raster atlas row has no sampled texel.');
+      for (let fill = x; fill < right; fill++) copy(y, left >= 0 && (right >= width || fill - left <= right - fill) ? left : right, fill);
+      x = right - 1;
+    }
+  }
 }
 
 /** The atlas pixel step every lens can scale to: a lens prepared at an eighth of the atlas needs rectangles in multiples of eight. */
