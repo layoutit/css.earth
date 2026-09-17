@@ -487,7 +487,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     orbitRoot.style.cssText = 'position:absolute;inset:0;width:0;height:0;pointer-events:none';
     if (placement) orbitRoot.dataset.contextPlacement = placement;
     if (orbit) root.insertBefore(orbitRoot, mover);
-    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: placement !== undefined, capacity: bodyOrbitCapacity(orbits), id: body.id });
+    const piecePool = mountPreparedOrbitLines(orbitRoot, { renderer: orbitRenderer, dashed: placement !== undefined, ...(placement ? { placement } : {}), capacity: bodyOrbitCapacity(orbits), id: body.id });
     const pieces = piecePool.elements;
     // The stage picker owns every pointer hit: these leaves stay inert and only
     // carry keyboard and accessibility state, never pointer or cursor styles.
@@ -544,7 +544,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let selectedId = plan.focus.id;
   let selectedEntry = bodies[0]!;
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
-  const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
+  // Placed bodies stay as galactic locators beyond their system: a star without an orbit, and one whose orbits are candidates.
+  const anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit ||
+    ('placement' in entry.body && entry.body.placement === 'candidate-orbits'));
   let systemRetired = false;
   let depthOrientation: readonly number[] | null = null;
   let depthSelection: string | null = null;
@@ -698,7 +700,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       orbitRenderer = renderer;
       for (const entry of bodies) {
         entry.piecePool.destroy();
-        entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement !== undefined,
+        const placement = entry.orbitRoot.dataset.contextPlacement;
+        entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: placement !== undefined, ...(placement ? { placement } : {}),
           capacity: bodyOrbitCapacity(contextBodyOrbits(entry.body)), id: entry.body.id });
         entry.pieces = entry.piecePool.elements; entry.previousCount = 0;
       }

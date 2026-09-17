@@ -23,7 +23,7 @@ HD 189733 B is a red dwarf 11.4 arcseconds from [HD 189733 A](../hd-189733/READM
 
 The one firm result is the inclination: 293 of the 300 orbits lie within 30° of edge-on, because B moves almost straight away from A on the sky, so the orbit plane runs along our line of sight. The size and shape are open by a factor of ten.
 
-**How they are drawn.** [binary-orbit-family.mts](../../../tools/objects/binary-orbit-family.mts) turns each fitted orbit into a path around HD 189733 A in the scene's frame. Each candidate puts B at its own distance along the line of sight, which is the measurement the pair lacks, so no candidate passes through B's drawn position: B is drawn where it is measured, at A's distance. From Earth's direction the paths all cross B's place on the sky; from any other angle they open into a fan. The world context carries them as a body's `additionalOrbits` ([spatial-context.ts](../../../src/preparation/spatial-context.ts)), drawn dashed and faint, and only once the whole family fits the view, so they never cross the planet's own system.
+**How they are drawn.** [binary-orbit-family.mts](../../../tools/objects/binary-orbit-family.mts) turns each fitted orbit into a path around HD 189733 A in the scene's frame. Each candidate puts B at its own distance along the line of sight, which is the measurement the pair lacks, so no candidate passes through B's drawn position: B is drawn where it is measured, at A's distance. From Earth's direction the paths all cross B's place on the sky; from any other angle they open into a fan. The world context carries them as a body's `additionalOrbits` ([spatial-context.ts](../../../src/preparation/spatial-context.ts)). They are drawn dashed and faint, and all of them appear together once the view has stepped back far enough for the smallest to fit, so they never cross the planet's own system and the family is never represented by its smallest orbits alone. B keeps a placed star's marker and stays on the map beyond its system, as it did before it had any orbit.
 
 **Axis.** No rotation axis or period is measured. The display axis is celestial north at the star, placed in the plane of the sky ([rotation.json](source/preparation/rotation.json)), a convention.
 
@@ -45,7 +45,8 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733-compa
 - [`prepare-spatial-context.test.ts`](../../../tools/objects/prepare-spatial-context.test.ts) checks the prepared context: B is placed by its own astrometry, its candidates all orbit HD 189733 A, and every other body keeps its ephemeris orbit.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the HD 189733 system's members are the planet and B.
 - [`rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/hd-189733-companion/` in headless Chrome, no console errors.
-- [`rendered-candidate-orbits.png`](source/reference/rendered-candidate-orbits.png) is the same page zoomed out to 1,030 au and turned about 50° from the line of sight: the 24 candidate orbits around HD 189733 A, dashed. From the line of sight they overlap on B's measured place; at the planet's scale they are not drawn at all.
+- [`rendered-candidate-orbits.png`](source/reference/rendered-candidate-orbits.png) is the same page zoomed out to 1,314 au and turned about 50° from the line of sight: the candidate orbits around HD 189733 A, dashed. From the line of sight they overlap on B's measured place; at the planet's scale they are not drawn at all.
+- Driven in a real browser from B's disc outwards: the candidates are absent at 106 au, all of them draw from about 600 au to about 1,300 au, and beyond a few thousand au the whole system fades as it does for any star. Zooming back in returns to B's disc, and B keeps its own marker at galactic distances.
 
 ## Known problems
 
@@ -53,7 +54,7 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733-compa
 
 **The orbit's size is open.** The drawn candidates span a factor of ten in size and period. They are a sample of a fit, not a measured orbit, and a rerun of the fit draws a different sample.
 
-**The radial velocities disagree.** Bakos et al. (2006) measured B − A = −0.72 ± 1.02 km/s, which a bound orbit allows; Gaia DR3's rows give +3.99 ± 1.21 km/s, which is faster than A's gravity can hold at this separation. The fit uses neither, only the astrometry both agree with. A fit with the 2006 value gives the same picture (a 140 to 1,400 AU, 90% of orbits edge-on).
+**The radial velocities disagree.** Bakos et al. (2006) measured B − A = −0.72 ± 1.02 km/s, which a bound orbit allows; Gaia DR3's rows give +3.99 ± 1.21 km/s, which is faster than A's gravity can hold at this separation. The fit uses neither, only the astrometry both agree with. A fit with the 2006 value gives the same picture: semi-major axis 134 to 1,217 AU, period 1,556 to 42,454 years, and 295 of its 300 orbits within 30° of edge-on.
 
 **No image, diameter, limb darkening or axis.** At 19.8 pc B's disc would be about 0.1 mas across, and no measurement of any of these exists.
 

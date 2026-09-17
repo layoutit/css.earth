@@ -406,8 +406,8 @@
     },
     {
       "path": "reference/rendered-candidate-orbits.png",
-      "expectedBytes": 502724,
-      "expectedSha256": "283ceb0be32c88d3343cb438de5299d85e3bdf258b001a2651dcf6c2f66832ef",
+      "expectedBytes": 460277,
+      "expectedSha256": "04e55e7d3a537bce37c9e2a43cd38e3f2fe5d566e84af9da593261c2fcd24e93",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733-companion/, zoomed out to 1,030 au and turned about 50 degrees from the line of sight, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17: the 24 candidate orbits around HD 189733 A."
