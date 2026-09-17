@@ -7,10 +7,8 @@ const PHI = (1 + Math.sqrt(5)) / 2;
 export const INTERIOR_SLICE_NORMALS: readonly (readonly [number, number, number])[] =
   [[0, 1, PHI], [0, -1, PHI], [1, PHI, 0], [-1, PHI, 0], [PHI, 0, 1], [PHI, 0, -1]]
     .map(([x, y, z]) => { const l = Math.hypot(x, y, z); return [x / l, y / l, z / l] as const; });
-/** Each slice leaf is a 512 px box scaled down, not a 32 px box scaled up hundreds of times, which Chrome fails to raster. */
+/** The side of each slice leaf's square element, before its transform. */
 const SLICE_LEAF_SIZE = 512;
-/** Measured on Alphonsina: at the exact largest clear shrink Chrome's depth sort still dropped a surface leaf at maximum zoom; 97% of it did not. */
-const CLEARANCE = 0.97;
 
 type Vec = number[];
 const sub = (a: Vec, b: Vec) => a.map((v, i) => v - b[i]);
@@ -88,7 +86,8 @@ function sliceOutline(triangles: readonly Vec[][], normal: Vec) {
   return winding(loop) > 0 ? loop : [...loop].reverse();
 }
 
-/** One fan leaf per outline edge: the edge is the u leaf's base, the body origin its apex. Its box spans the edge and origin ± half the edge. */
+/** One fan leaf per outline edge: a solid rectangle from the edge to the origin ± half the edge. Its corners are the rectangle's own, so the
+ * leaf the clearance test checks is exactly the leaf Chrome draws. */
 function fanMatrices(outline: readonly Vec[], normal: Vec, scale: number) {
   return outline.map((p, i) => {
     const a = p.map(v => v * scale), b = outline[(i + 1) % outline.length].map(v => v * scale), apex = a.map((v, k) => -(v + b[k]) / 2);
@@ -110,15 +109,14 @@ export function interiorSliceLeaves(leafStyles: readonly string[]) {
     let inside = 0.05, outside = 1;
     if (!clear(fanMatrices(outline, [...normal], inside))) throw new Error('Interior slice cannot clear the surface leaves near the body origin.');
     for (let i = 0; i < 14; i++) { const middle = (inside + outside) / 2; if (clear(fanMatrices(outline, [...normal], middle))) inside = middle; else outside = middle; }
-    const shrink = inside * CLEARANCE;
-    slices.push({ normal, matrices: fanMatrices(outline, [...normal], shrink), shrink });
+    slices.push({ normal, matrices: fanMatrices(outline, [...normal], inside), shrink: inside });
   }
   return slices;
 }
 
 /** Cracks between irregular surface leaves open onto the far side of the body. A slice of the body's own mesh, facing the view, fills them
- * with the surface's mean colour. Each slice is shrunk until no leaf box it adds intersects a surface leaf box, which Chrome's depth sort needs,
- * then kept at CLEARANCE of that. The runtime shows the slice whose normal is nearest the view. */
+ * with the surface's mean colour. Each slice is the largest shrink of that section whose leaves intersect no surface leaf box, since Chrome
+ * depth-sorts element boxes. The runtime shows the slice whose normal is nearest the view. */
 export async function withPreparedInteriorSlices<T extends PreparedPresentationDefinition & { assets?: PreparedAssets }>(
   presentation: T, sceneFromBody: readonly number[], resolveAsset: (url: string) => string,
 ): Promise<T> {
@@ -141,8 +139,10 @@ export async function withPreparedInteriorSlices<T extends PreparedPresentationD
     variants.push({ ...variant, writes: [...variant.writes, ...writes] });
   }
   let next = nodes.length;
-  const added = slices.flatMap(slice => slice.matrices.map(m => ({ parent: body, tag: 'u', className: 'prepared-interior-slice', properties: [], attributes: {},
-    style: `transform:matrix3d(${m.join(',')});background:var(--prepared-interior-fill);--polycss-atlas-width:${SLICE_LEAF_SIZE}px;--polycss-atlas-height:${SLICE_LEAF_SIZE}px;backface-visibility:visible;display:none` })));
+  // Solid opaque rectangles, not u triangles: Chrome gives a one-colour layer no raster tiles. Measured on Alphonsina at DPR 2, triangle
+  // slices exhausted the GPU raster budget from zoom 1.75 and Chrome dropped surface tiles; rectangles left 0-3 wrong pixels up to zoom 4.
+  const added = slices.flatMap(slice => slice.matrices.map(m => ({ parent: body, tag: 'div', className: 'prepared-interior-slice', properties: [], attributes: {},
+    style: `position:absolute;left:0;top:0;width:${SLICE_LEAF_SIZE}px;height:${SLICE_LEAF_SIZE}px;transform-origin:0 0;transform:matrix3d(${m.join(',')});background:var(--prepared-interior-fill);backface-visibility:visible;pointer-events:none;display:none` })));
   const bindingSlices = slices.map(slice => ({ normal: [...slice.normal], nodes: slice.matrices.map(() => next++) }));
   return { ...presentation,
     tree: { ...presentation.tree, nodes: [...nodes, ...added] },
