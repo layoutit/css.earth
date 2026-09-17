@@ -81,8 +81,10 @@ test('complete context frames cross a structured-clone boundary without mutating
 test('retired and incompatible frame requests respect prepared identity and measured optics', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   input.anchorOnly = true;
-  // The anchor and every placed orbitless body (Betelgeuse) remain as galactic locators.
-  const locators = [plan.focus, ...plan.bodies].flatMap((body, index) => index === 0 || !('orbit' in body && body.orbit) ? [index] : []);
+  // The anchor and every placed body remain as galactic locators: a star without an orbit (Betelgeuse), and one placed by its
+  // own astrometry whose drawn orbits are candidates (HD 189733 B).
+  const locators = [plan.focus, ...plan.bodies].flatMap((body, index) => index === 0 || !('orbit' in body && body.orbit) ||
+    ('placement' in body && body.placement === 'candidate-orbits') ? [index] : []);
   expect(locators.length).toBeGreaterThan(1);
   expect(calculate(input).projectedBodies.map(body => body.index)).toEqual(locators);
   expect(() => calculate({ ...input, selectedId: 'missing' })).toThrow('unavailable');

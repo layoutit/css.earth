@@ -27,10 +27,10 @@ export interface PreparedOrbitLines {
   stats(): Record<string, number>;
   destroy(): void;
 }
-export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', dashed = false, capacity = 0, id }:
-  { renderer?: OrbitRenderer; dashed?: boolean; capacity?: number; id?: string } = {}): PreparedOrbitLines {
+export function mountPreparedOrbitLines(host: HTMLElement, { renderer = 'bars', dashed = false, placement, capacity = 0, id }:
+  { renderer?: OrbitRenderer; dashed?: boolean; placement?: string; capacity?: number; id?: string } = {}): PreparedOrbitLines {
   // An orbit-less body's root is never inserted; it has nothing to share.
-  return renderer === 'strokes' && host.parentElement ? mountOrbitStrokes(host, dashed, id) : mountOrbitBars(host, capacity);
+  return renderer === 'strokes' && host.parentElement ? mountOrbitStrokes(host, dashed ? placement ?? 'approximate' : undefined, id) : mountOrbitBars(host, capacity);
 }
 
 /** Fixed unit-line instances, bound once; each publication writes only the slots
@@ -85,11 +85,11 @@ function sharedSvg(host: HTMLElement): SVGSVGElement {
  * run of chords per opacity level. `points` is not a CSS property, so a write
  * invalidates layout and paint only, never style. Only a run whose points changed
  * is written. The group carries the orbit id, so the published swatch rules colour
- * it like its marker, and an approximate placement dashes it by stylesheet. */
-function mountOrbitStrokes(host: HTMLElement, dashed: boolean, id?: string): PreparedOrbitLines {
+ * it like its marker, and a qualified placement (approximate, candidate orbits) dashes it by stylesheet. */
+function mountOrbitStrokes(host: HTMLElement, placement: string | undefined, id?: string): PreparedOrbitLines {
   const document = host.ownerDocument, group = document.createElementNS(SVG, 'g');
   if (id) group.dataset.contextOrbit = id;
-  if (dashed) group.dataset.contextPlacement = 'approximate';
+  if (placement) group.dataset.contextPlacement = placement;
   group.style.display = 'none';
   sharedSvg(host).appendChild(group);
   const elements: SVGPolylineElement[] = [];

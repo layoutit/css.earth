@@ -147,7 +147,7 @@
       "id": "relative-radial-velocity",
       "subject": "The pair's relative radial velocity",
       "status": "unresolved",
-      "finding": "Two published values disagree: Bakos et al. (2006) measured -2.38 +/- 0.20 km/s for A and -3.1 +/- 1.0 for B (difference -0.72 +/- 1.02), while Gaia DR3 gives -2.53 +/- 0.12 and +1.46 +/- 1.21 (difference +3.99 +/- 1.21). The escape speed at the projected separation is 2.8 km/s, so the Gaia difference allows no bound orbit at this separation, while the 2006 difference does. The fit uses only the astrometry. A fit with the 2006 value gives the same picture: semi-major axis 140 to 1,420 au, period 1,650 to 53,400 years, and the same edge-on inclinations.",
+      "finding": "Two published values disagree: Bakos et al. (2006) measured -2.38 +/- 0.20 km/s for A and -3.1 +/- 1.0 for B (difference -0.72 +/- 1.02), while Gaia DR3 gives -2.53 +/- 0.12 and +1.46 +/- 1.21 (difference +3.99 +/- 1.21). The escape speed at the projected separation is 2.8 km/s, so the Gaia difference exceeds it: a fit using it keeps only orbits that put the pair farther apart along the line of sight or draw a radial velocity low within its 1.2 km/s error. The drawn fit uses neither value, only the astrometry both agree with. A fit with the 2006 value gives the same picture: semi-major axis 134 to 1,217 au, period 1,556 to 42,454 years, and 295 of 300 orbits within 30 degrees of edge-on.",
       "revisitWhen": "A precise relative radial velocity of the pair is published, or Gaia DR4 revises B's.",
       "evidence": [
         "https://arxiv.org/abs/astro-ph/0602136",
