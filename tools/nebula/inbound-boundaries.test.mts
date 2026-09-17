@@ -173,3 +173,16 @@ test('package import aliases and redirected public exports cannot disguise a lab
     assert.ok(f.check().some(error => error.includes('public export escapes')));
   } finally { f.cleanup(); }
 });
+
+test('source-looking directories are never read as modules and directory entry points remain checked', () => {
+  const f = fixture();
+  try {
+    mkdirSync(resolve(f.root, '.astro'));
+    mkdirSync(resolve(f.root, 'vendor/empty.ts'), { recursive: true });
+    f.write('site/runtime.mts', "import '../vendor/empty.ts';");
+    assert.deepEqual(f.check(), []);
+    f.write('vendor/entry/index.ts', "export * from '@cssearth/nebula-lab/public';");
+    f.write('site/runtime.mts', "import '../vendor/entry';");
+    assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via vendor/entry/index.ts')));
+  } finally { f.cleanup(); }
+});

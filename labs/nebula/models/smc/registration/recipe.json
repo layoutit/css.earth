@@ -1,0 +1,144 @@
+{
+  "targets": [
+    {
+      "images": [
+        {
+          "id": "eso1714a",
+          "wcs": {
+            "referenceDimension": [
+              43223,
+              38236
+            ],
+            "referencePixel": [
+              21611.5,
+              19118
+            ],
+            "referenceValueDeg": [
+              13.7631652021,
+              -72.9640481752
+            ],
+            "scaleDeg": [
+              -0.000136644159443,
+              0.000136644159443
+            ],
+            "rotationDeg": 1.2000000000000006
+          }
+        },
+        {
+          "id": "noirlab2030b",
+          "wcs": {
+            "referenceDimension": [
+              3827,
+              3190
+            ],
+            "referencePixel": [
+              1913.5,
+              1595
+            ],
+            "referenceValueDeg": [
+              13.6618118598,
+              -72.8687942632
+            ],
+            "scaleDeg": [
+              -0.00138788065837,
+              0.00138788065837
+            ],
+            "rotationDeg": 30.12000000000002
+          }
+        },
+        {
+          "id": "heic0514c",
+          "wcs": {
+            "referenceDimension": [
+              13096,
+              13616
+            ],
+            "referencePixel": [
+              6548,
+              6808
+            ],
+            "referenceValueDeg": [
+              14.9156832237,
+              -72.5811750056
+            ],
+            "scaleDeg": [
+              -0.000283074202889,
+              0.000283074202889
+            ],
+            "rotationDeg": -181.79999999999978
+          }
+        },
+        {
+          "id": "ssc2010-02c",
+          "wcs": {
+            "referenceDimension": [
+              11200,
+              6600
+            ],
+            "referencePixel": [
+              5600,
+              3300
+            ],
+            "referenceValueDeg": [
+              21.79583333333333,
+              -73.95883333333333
+            ],
+            "scaleDeg": [
+              -0.0008303571428571429,
+              0.0008333333333333334
+            ],
+            "rotationDeg": -148.4
+          },
+          "wcsStatus": "Approximate publisher webpage footprint converted to TAN solely for diagnostic comparison, not measured WCS. Final homography comes from compact-star patterns independently of this approximation."
+        },
+        {
+          "id": "WISE2010-028",
+          "wcs": {
+            "referenceDimension": [
+              5855,
+              4596
+            ],
+            "referencePixel": [
+              2907,
+              1981
+            ],
+            "referenceValueDeg": [
+              13.1045616,
+              -73.2921265
+            ],
+            "scaleDeg": [
+              -0.000764,
+              0.000764
+            ],
+            "rotationDeg": -24.94
+          },
+          "wcsStatus": "Publisher is SIN; TAN approximation here is diagnostic only and is NOT the actual publisher WCS. Registration discovery and fitted homography use image stars without this approximation. Actual publisher SIN metadata preserved in candidate-intake.json."
+        },
+        {
+          "id": "allwise-wide",
+          "wcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              4000,
+              4000
+            ],
+            "referencePixel": [
+              2000,
+              2000
+            ],
+            "referenceValueDeg": [
+              13.5,
+              -73
+            ],
+            "scaleDeg": [
+              -0.0025063655876378,
+              0.0025063655876378
+            ],
+            "rotationDeg": 0
+          }
+        }
+      ]
+    }
+  ]
+}

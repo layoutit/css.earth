@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
+  "pass": false,
+  "gates": {
+    "uniqueMatches": true,
+    "allFourQuadrants": true,
+    "halfImageHull": true,
+    "median": false,
+    "p90": false,
+    "shiftedControls": false
+  },
+  "source": {
+    "path": ".local/nebula-lab/smc-intake/WISE2010-028.tiff",
+    "sha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
+    "nativeDimensions": [
+      5855,
+      4596
+    ],
+    "channel": "W1 blue channel",
+    "wcs": {
+      "projection": "SIN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        5855,
+        4596
+      ],
+      "referencePixel": [
+        2907,
+        1981
+      ],
+      "referenceValueDeg": [
+        13.1045616,
+        -73.2921265
+      ],
+      "scaleDeg": [
+        -0.0007639999967,
+        0.0007639999967
+      ],
+      "rotationDeg": -24.94
+    }
+  },
+  "catalogue": {
+    "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
+    "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941",
+    "downloadedRows": 13220,
+    "inFieldIsolatedCandidates": 2324
+  },
+  "predeclaredProtocol": {
+    "minUniqueMatches": 100,
+    "minQuadrants": 4,
+    "minHullFraction": 0.5,
+    "maxMedianNativeWisePixels": 0.75,
+    "maxP90NativeWisePixels": 1.5,
+    "maxEachShiftedControlFraction": 0.1,
+    "correspondenceWindowNativeWisePixels": 2.5,
+    "catalogueIsolationPixels": 5,
+    "catalogueMagnitudeRangeW1": [
+      8,
+      11
+    ]
+  },
+  "refitted": false,
+  "allCoordinatesHeldOutFromAnyFit": true,
+  "uniqueMatchedStars": 890,
+  "reservedCheckCount": 297,
+  "detectedStars": 233752,
+  "residualNativeWisePixels": {
+    "median": 1.6100614965452686,
+    "p90": 2.3396444834945394,
+    "max": 2.4984111966417073
+  },
+  "reservedCheckResidualNativeWisePixels": {
+    "median": 1.6821335124057728,
+    "p90": 2.3436702019491094,
+    "max": 2.4984111966417073
+  },
+  "residualArcseconds": {
+    "median": 4.626539992537091,
+    "p90": 6.446030495598029,
+    "max": 6.871630125562226
+  },
+  "matchedSourceHullFraction": 0.9272835787247751,
+  "quadrantMatchCounts": [
+    352,
+    183,
+    187,
+    168
+  ],
+  "shiftedControls": [
+    {
+      "offsetNativePixels": [
+        40,
+        0
+      ],
+      "matchesWithin2_5Pixels": 427
+    },
+    {
+      "offsetNativePixels": [
+        0,
+        40
+      ],
+      "matchesWithin2_5Pixels": 431
+    },
+    {
+      "offsetNativePixels": [
+        100,
+        -70
+      ],
+      "matchesWithin2_5Pixels": 418
+    }
+  ],
+  "wrongTransformControls": {
+    "mirrorX": {
+      "matchesWithin2_5Pixels": 431
+    },
+    "mirrorY": {
+      "matchesWithin2_5Pixels": 422
+    },
+    "rotate90": {
+      "matchesWithin2_5Pixels": 406
+    },
+    "scale09": {
+      "matchesWithin2_5Pixels": 421
+    },
+    "scale11": {
+      "matchesWithin2_5Pixels": 392
+    }
+  },
+  "limitations": [
+    "Catalogue and image originate from the same infrared survey; catalogue positions independently check fixed publisher image WCS.",
+    "Display raster sampling is not native detector angular resolution.",
+    "Centroids use sharp sigma4 Gaussian highpass and blue W1; no image transform is fitted.",
+    "Association uses the unchanged 2.5-pixel window and LMC acceptance thresholds. Wrong-transform counts are reported; shifted controls gate acceptance."
+  ]
+}

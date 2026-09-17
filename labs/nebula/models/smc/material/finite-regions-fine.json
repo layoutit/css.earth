@@ -1,0 +1,8 @@
+{
+  "width": 256,
+  "spacing": [0.2, 0.2, 1],
+  "origin": [0, 0, 0],
+  "maximumRegions": 8192,
+  "iterations": 150,
+  "regularization": 0.01
+}

@@ -259,3 +259,15 @@ test('tone callbacks update a hidden axis without revealing it before rotation',
     expect(meshes[0]!.children.slice(0, 3).map(node => node.style.backgroundImage)).toEqual(Array(3).fill('url("/tone/x.png")'));
   } finally { globalThis.Image = originalImage; }
 });
+
+test('prepared rotated bank normals select the matching retained stack', () => {
+  const data = payload();
+  const normals: VolumeVector[] = [[0, 1, 0], [-1, 0, 0], [0, 0, 1]];
+  const rotated = { ...data, stacks: data.stacks.map((stack, index) => ({ ...stack, normalUnits: normals[index]! })) };
+  const fixture = mount(rotated), count = fixture.document.count;
+  fixture.runtime.publish(publication([0, 1, 0]));
+  expect(fixture.roots[0]!.style.visibility).toBe('visible'); expect(fixture.roots[1]!.style.visibility).toBe('hidden');
+  fixture.runtime.publish(publication([1, 0, 0]));
+  expect(fixture.roots[0]!.style.visibility).toBe('hidden'); expect(fixture.roots[1]!.style.visibility).toBe('visible');
+  expect(fixture.document.count).toBe(count);
+});
