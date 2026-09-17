@@ -8,7 +8,7 @@ import { pathToFileURL } from "node:url";
 import { SCENE_OBJECTS } from "../site/objects.mts";
 import { authoredObject } from './authored-object.mts';
 
-export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>;}
+export interface ObjectCommand {command: string; argumentsList: readonly string[]; cwd?: string; env?: Readonly<Record<string, string | undefined>>; onSpawn?: (pid: number) => void;}
 export interface PreparationCommand extends ObjectCommand {id: string; cwd: string;}
 export interface ObjectCommandOutcome {exitCode: number | null; signal: string | null;}
 export interface PreparationResult {id: string; script: string; status: 'not-started' | 'running' | 'succeeded' | 'failed'; startedAt?: string; exitCode?: number | null; signal?: string | null; error?: string; elapsedMilliseconds?: number;}
@@ -18,8 +18,10 @@ export type PreparationEvent = {phase: 'queue'; objectIds: string[]; concurrency
   | ({phase: 'finish'; elapsedMilliseconds: number} & PreparationResult)
   | {phase: 'complete'; report: PreparationReport};
 export interface PreparationOptions {projectRoot?: string; objectIds?: readonly string[]; concurrency?: number; argumentsList?: readonly string[]; runCommand?: (request: PreparationCommand) => Promise<ObjectCommandOutcome>; onEvent?: (event: PreparationEvent) => void;
-  /** Memory the running objects may reserve together; an object starts only while its peak fits beside theirs. */
-  memoryBudgetBytes?: number; peakMemoryBytes?: (id: string) => Promise<number>;}
+  /** An object starts only while its expected peak, the growth still expected of the running objects and a floor fit in the
+   * memory available now. Growth is each running object's expected peak less its measured resident memory. */
+  memoryAvailableBytes?: () => number; memoryFloorBytes?: number; peakMemoryBytes?: (id: string) => Promise<number>;
+  residentBytes?: (pids: readonly number[]) => ReadonlyMap<number, number>;}
 interface ResolveOptions {projectRoot?: string; accessFile?: typeof access;}
 
 export function planetTestDirectory(id: string, projectRoot = process.cwd()) {
@@ -123,11 +125,10 @@ export function defaultPreparationConcurrency({
 }
 
 const gibibyte = 1024 ** 3;
-/** Reserved memory per preparation, from measured peak resident memory (2026-09-17, 36 GB host): an irregular body without
- * photographs 1.15–1.29 GiB; with photographs 2.1 GiB (Amalthea) to 5.75 GiB (67P). Two of the largest together exceed their
- * reservations by 1.5 GiB, which the floor below absorbs. Other objects run their own pipelines and are reserved as heavy. */
-export const PREPARATION_PEAK_BYTES = { light: 1.5 * gibibyte, heavy: 5 * gibibyte } as const;
-const PREPARATION_MEMORY_FLOOR = 2.5 * gibibyte;
+/** Expected peak resident memory per preparation, measured 2026-09-17 on a 36 GB host: an irregular body without photographs
+ * 1.15–1.29 GiB; with photographs 2.1 GiB (Amalthea) to 5.75 GiB (67P). Other objects run their own pipelines and are expected heavy. */
+export const PREPARATION_PEAK_BYTES = { light: 1.5 * gibibyte, heavy: 6 * gibibyte } as const;
+export const PREPARATION_MEMORY_FLOOR = 2.5 * gibibyte;
 
 export async function preparationPeakBytes(id: string, projectRoot = process.cwd()) {
   if (!await authoredObject(id, projectRoot)) return PREPARATION_PEAK_BYTES.heavy;
@@ -148,14 +149,18 @@ export function availableMemoryBytes() {
   return freemem();
 }
 
-/** What preparation may reserve: the memory available at the start of the queue, less a floor kept for the system. */
-export function defaultPreparationMemoryBudget(available = availableMemoryBytes()) {
-  return Math.max(PREPARATION_PEAK_BYTES.heavy, available - PREPARATION_MEMORY_FLOOR);
+/** Resident memory of running processes, from ps. */
+export function processResidentBytes(pids: readonly number[]): ReadonlyMap<number, number> {
+  if (!pids.length) return new Map();
+  let text = '';
+  try { text = execFileSync('ps', ['-o', 'pid=,rss=', '-p', pids.join(',')], { encoding: 'utf8' }); } catch { return new Map(); }
+  return new Map(text.trim().split('\n').filter(Boolean).map(line => { const [pid, kib] = line.trim().split(/\s+/u).map(Number); return [pid, kib * 1024]; }));
 }
 
-export async function runObjectCommand({ command, argumentsList, cwd, env }: ObjectCommand): Promise<ObjectCommandOutcome> {
+export async function runObjectCommand({ command, argumentsList, cwd, env, onSpawn }: ObjectCommand): Promise<ObjectCommandOutcome> {
   return new Promise<ObjectCommandOutcome>((resolvePromise, reject) => {
     const child = spawn(command, argumentsList, { cwd, env, stdio: "inherit" });
+    if (child.pid !== undefined) onSpawn?.(child.pid);
     child.once("error", reject);
     // close follows process exit and closure of its inherited output streams.
     child.once("close", (exitCode, signal) => resolvePromise({ exitCode, signal }));
@@ -169,8 +174,10 @@ export async function runPreparationObjects({
   argumentsList = [],
   runCommand = runObjectCommand,
   onEvent = printPreparationProgress,
-  memoryBudgetBytes = Infinity,
+  memoryAvailableBytes = () => Infinity,
+  memoryFloorBytes = PREPARATION_MEMORY_FLOOR,
   peakMemoryBytes = async () => 0,
+  residentBytes = processResidentBytes,
 }: PreparationOptions = {}) {
   const knownIds = new Set(SCENE_OBJECTS.map(({ id }) => id));
   if (!isArray(objectIds) || objectIds.some(id => !knownIds.has(id)) ||
@@ -204,14 +211,15 @@ export async function runPreparationObjects({
   // Heavier objects start first, so they run beside light ones instead of queueing together at the end; results keep the requested order.
   const peaks = await Promise.all(commands.map(({ id }) => peakMemoryBytes(id)));
   const order = commands.map((_, index) => index).sort((a, b) => peaks[b] - peaks[a] || a - b);
-  let next = 0, reserved = 0, running = 0, released: (() => void) | null = null;
+  let next = 0, released: (() => void) | null = null;
+  const running = new Map<number, number | undefined>();
   function emit(event: PreparationEvent) {
     try { onEvent(event); }
     catch (cause) { failures.push(new Error("Preparation progress reporting failed.", { cause })); }
   }
   emit({ phase: "queue", objectIds: [...objectIds], concurrency: report.concurrency });
   async function run(index: number) {
-    const request = commands[index], result = report.results[index];
+    const request = { ...commands[index], onSpawn: (pid: number) => { running.set(index, pid); } }, result = report.results[index];
     const commandStart = performance.now();
     result.status = "running";
     result.startedAt = new Date().toISOString();
@@ -236,21 +244,29 @@ export async function runPreparationObjects({
     } finally {
       result.elapsedMilliseconds = performance.now() - commandStart;
       emit({ phase: "finish", ...result, elapsedMilliseconds: result.elapsedMilliseconds });
-      running--; reserved -= peaks[index];
+      running.delete(index);
       released?.();
     }
   }
   // A failure closes the queue but never abandons an already-started object. An object that does not fit waits for one to
   // finish; one that alone exceeds the budget still runs when nothing else does.
   const started: Promise<void>[] = [];
+  const fits = (index: number) => {
+    if (!running.size) return true;
+    const pids = [...running.values()].filter((pid): pid is number => pid !== undefined), resident = residentBytes(pids);
+    let growth = 0;
+    for (const [running_, pid] of running) growth += Math.max(0, peaks[running_] - (pid === undefined ? 0 : resident.get(pid) ?? 0));
+    return memoryAvailableBytes() - growth - peaks[index] >= memoryFloorBytes;
+  };
   while (failures.length === 0 && next < commands.length) {
     const index = order[next];
-    if (running >= report.concurrency || (running > 0 && reserved + peaks[index] > memoryBudgetBytes)) {
-      await new Promise<void>(resolvePromise => { released = resolvePromise; });
+    if (running.size >= report.concurrency || !fits(index)) {
+      // Wake when an object finishes, or re-measure after a moment: running objects release memory as they go.
+      await new Promise<void>(resolvePromise => { released = resolvePromise; setTimeout(resolvePromise, 2000).unref(); });
       released = null;
       continue;
     }
-    next++; running++; reserved += peaks[index];
+    next++; running.set(index, undefined);
     started.push(run(index));
   }
   await Promise.all(started);

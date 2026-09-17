@@ -189,13 +189,13 @@ test("the native command interface retains actual process exits and signals", as
   }), /ENOENT/);
 });
 
-test("objects start heaviest first and only while their memory fits beside the running ones", async () => {
+test("objects start heaviest first and only while their expected growth fits the available memory", async () => {
   const selected = ids.slice(0, 5), peaks = new Map(selected.map((id, i) => [id, i === 3 ? 4 : 1]));
   const gates = new Map(selected.map(id => [id, deferred()])), started: string[] = [];
   let reserved = 0, maximumReserved = 0, launched = deferred();
   const pending = runPreparationObjects({
-    projectRoot: root, objectIds: selected, concurrency: 4, onEvent: quiet, memoryBudgetBytes: 5,
-    peakMemoryBytes: async id => peaks.get(id) ?? 0,
+    projectRoot: root, objectIds: selected, concurrency: 4, onEvent: quiet, memoryAvailableBytes: () => 5, memoryFloorBytes: 0,
+    peakMemoryBytes: async id => peaks.get(id) ?? 0, residentBytes: () => new Map(),
     async runCommand({ id }) {
       started.push(id); reserved += peaks.get(id) ?? 0; maximumReserved = Math.max(maximumReserved, reserved);
       launched.resolve();
