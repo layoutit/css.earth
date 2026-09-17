@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "83397b4e6bdfd83284074a7d05620bbd8781adf9421b70d60c742861bcf2e067"
+    "sha256": "60313f2b382af4baf267302d5f0b3ba336bff1d395b77464cff31af9c9989e85"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "1f7c0e5baff4370e70d429f927ea4b1bfa4040093b3118318c3cb86ec7de58f2"
+    "bindingsSha256": "fa16c098acaa0b83d5edd3919eeca3abcfae83f89fea148350c01c11883ccae6"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "f85b7097932c1677399de6f956b34c2d4c9b4afc4c415da277695499391b9540",
+      "sha256": "e1298c093fd1300bfdeef8f74addbbdbb4b0e7adc4af5d0354e88d53f19773b9",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/wasp-43b/",
@@ -88,71 +88,6 @@
               ],
               "description": "Brightness temperature of the whole planet, fitted to how its light changed over a full JWST orbit. Only large patterns are real.",
               "title": "JWST NIRSpec · eclipse map",
-              "sourceUrl": "https://zenodo.org/records/12627524"
-            }
-          },
-          {
-            "id": "nirspec-refit",
-            "output": "wasp-43b-surface-{id}{suffix}.webp",
-            "thumbnail": "wasp-43b-lens-{id}.webp",
-            "source": "science/challener-2024/wasp-43b.tar",
-            "falseColor": true,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "nirspec-refit",
-              "label": "NIRSpec refit",
-              "format": "eclipse-map-fit",
-              "path": "science/challener-2024/wasp-43b.tar",
-              "consumer": "wasp-43b-nirspec-refit",
-              "sampling": "bilinear",
-              "displaySampling": "bilinear",
-              "outputLongitudeOrigin": 0,
-              "units": "K",
-              "planet": "wasp-43b",
-              "host": "wasp-43",
-              "lightCurve": {
-                "encoding": "tar-text-columns",
-                "time": "wasp-43b/time.txt",
-                "flux": "wasp-43b/flux-whitelight.txt",
-                "error": "wasp-43b/ferr-whitelight.txt"
-              },
-              "fit": {
-                "degrees": [
-                  3
-                ],
-                "eigencurves": [
-                  6
-                ],
-                "positive": true,
-                "transitExclusionPhase": 0.04,
-                "gridHeight": 90,
-                "systematics": [],
-                "transitFromLightCurve": true
-              },
-              "band": {
-                "encoding": "svo-filter",
-                "path": "science/svo-filter-profiles/JWST_NIRSpec.G395H_F290LP.xml"
-              },
-              "star": {
-                "encoding": "svo-model-spectrum",
-                "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml"
-              },
-              "minimum": 700,
-              "maximum": 2000,
-              "colors": [
-                "#0d0887",
-                "#7e03a8",
-                "#cc4778",
-                "#f89540",
-                "#f0f921"
-              ],
-              "labels": [
-                "700",
-                "1350",
-                "2000"
-              ],
-              "description": "Brightness temperature fitted in this project to the same NIRSpec light curve, with the spin axis on the orbit normal. Only large patterns are real.",
-              "title": "JWST NIRSpec · our fit",
               "sourceUrl": "https://zenodo.org/records/12627524"
             }
           },
@@ -258,315 +193,6 @@
               "title": "JWST MIRI · our map from raw data",
               "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
             }
-          },
-          {
-            "id": "miri-band-1",
-            "output": "wasp-43b-surface-{id}{suffix}.webp",
-            "thumbnail": "wasp-43b-lens-{id}.webp",
-            "source": "science/jwst-1366-miri/slice-5.0-6.5um.csv",
-            "falseColor": true,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "miri-band-1",
-              "label": "MIRI 5–6.5 µm",
-              "format": "eclipse-map-fit",
-              "path": "science/jwst-1366-miri/slice-5.0-6.5um.csv",
-              "consumer": "wasp-43b-miri-maps",
-              "sampling": "bilinear",
-              "displaySampling": "bilinear",
-              "outputLongitudeOrigin": 0,
-              "units": "K",
-              "planet": "wasp-43b",
-              "host": "wasp-43",
-              "lightCurve": {
-                "encoding": "csv",
-                "time": "time",
-                "flux": "flux",
-                "error": "err",
-                "mask": "mask",
-                "skipLeading": 780,
-                "columns": [
-                  "centroid_y",
-                  "psf_width_y"
-                ]
-              },
-              "fit": {
-                "degrees": [
-                  2,
-                  3
-                ],
-                "eigencurves": [
-                  4,
-                  5,
-                  6,
-                  7,
-                  8
-                ],
-                "positive": true,
-                "transitExclusionPhase": 0.04,
-                "gridHeight": 90,
-                "systematics": [
-                  {
-                    "kind": "time"
-                  },
-                  {
-                    "kind": "exponential-ramp",
-                    "timeConstantsDays": [
-                      0.005,
-                      0.01,
-                      0.02,
-                      0.04,
-                      0.08,
-                      0.16
-                    ]
-                  },
-                  {
-                    "kind": "column",
-                    "column": "centroid_y"
-                  },
-                  {
-                    "kind": "column",
-                    "column": "psf_width_y"
-                  }
-                ],
-                "transitFromLightCurve": true
-              },
-              "band": {
-                "encoding": "count-spectrum-csv",
-                "path": "science/jwst-1366-miri/stellar-counts.csv",
-                "wavelength": "wavelength_um",
-                "counts": "counts",
-                "minimumMicrons": 5,
-                "maximumMicrons": 6.5
-              },
-              "star": {
-                "encoding": "svo-model-spectrum",
-                "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml"
-              },
-              "minimum": 700,
-              "maximum": 2000,
-              "colors": [
-                "#0d0887",
-                "#7e03a8",
-                "#cc4778",
-                "#f89540",
-                "#f0f921"
-              ],
-              "labels": [
-                "700",
-                "1350",
-                "2000"
-              ],
-              "description": "Brightness temperature over 5.0–6.5 µm, fitted in this project to the JWST MIRI phase curve it reduced from raw exposures. Only large patterns are real.",
-              "title": "JWST MIRI 5–6.5 µm · our map",
-              "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-            }
-          },
-          {
-            "id": "miri-band-2",
-            "output": "wasp-43b-surface-{id}{suffix}.webp",
-            "thumbnail": "wasp-43b-lens-{id}.webp",
-            "source": "science/jwst-1366-miri/slice-6.5-8.5um.csv",
-            "falseColor": true,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "miri-band-2",
-              "label": "MIRI 6.5–8.5 µm",
-              "format": "eclipse-map-fit",
-              "path": "science/jwst-1366-miri/slice-6.5-8.5um.csv",
-              "consumer": "wasp-43b-miri-maps",
-              "sampling": "bilinear",
-              "displaySampling": "bilinear",
-              "outputLongitudeOrigin": 0,
-              "units": "K",
-              "planet": "wasp-43b",
-              "host": "wasp-43",
-              "lightCurve": {
-                "encoding": "csv",
-                "time": "time",
-                "flux": "flux",
-                "error": "err",
-                "mask": "mask",
-                "skipLeading": 780,
-                "columns": [
-                  "centroid_y",
-                  "psf_width_y"
-                ]
-              },
-              "fit": {
-                "degrees": [
-                  2,
-                  3
-                ],
-                "eigencurves": [
-                  4,
-                  5,
-                  6,
-                  7,
-                  8
-                ],
-                "positive": true,
-                "transitExclusionPhase": 0.04,
-                "gridHeight": 90,
-                "systematics": [
-                  {
-                    "kind": "time"
-                  },
-                  {
-                    "kind": "exponential-ramp",
-                    "timeConstantsDays": [
-                      0.005,
-                      0.01,
-                      0.02,
-                      0.04,
-                      0.08,
-                      0.16
-                    ]
-                  },
-                  {
-                    "kind": "column",
-                    "column": "centroid_y"
-                  },
-                  {
-                    "kind": "column",
-                    "column": "psf_width_y"
-                  }
-                ],
-                "transitFromLightCurve": true
-              },
-              "band": {
-                "encoding": "count-spectrum-csv",
-                "path": "science/jwst-1366-miri/stellar-counts.csv",
-                "wavelength": "wavelength_um",
-                "counts": "counts",
-                "minimumMicrons": 6.5,
-                "maximumMicrons": 8.5
-              },
-              "star": {
-                "encoding": "svo-model-spectrum",
-                "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml"
-              },
-              "minimum": 700,
-              "maximum": 2000,
-              "colors": [
-                "#0d0887",
-                "#7e03a8",
-                "#cc4778",
-                "#f89540",
-                "#f0f921"
-              ],
-              "labels": [
-                "700",
-                "1350",
-                "2000"
-              ],
-              "description": "Brightness temperature over 6.5–8.5 µm, fitted in this project to the JWST MIRI phase curve it reduced from raw exposures. Only large patterns are real.",
-              "title": "JWST MIRI 6.5–8.5 µm · our map",
-              "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-            }
-          },
-          {
-            "id": "miri-band-3",
-            "output": "wasp-43b-surface-{id}{suffix}.webp",
-            "thumbnail": "wasp-43b-lens-{id}.webp",
-            "source": "science/jwst-1366-miri/slice-8.5-10.5um.csv",
-            "falseColor": true,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "miri-band-3",
-              "label": "MIRI 8.5–10.5 µm",
-              "format": "eclipse-map-fit",
-              "path": "science/jwst-1366-miri/slice-8.5-10.5um.csv",
-              "consumer": "wasp-43b-miri-maps",
-              "sampling": "bilinear",
-              "displaySampling": "bilinear",
-              "outputLongitudeOrigin": 0,
-              "units": "K",
-              "planet": "wasp-43b",
-              "host": "wasp-43",
-              "lightCurve": {
-                "encoding": "csv",
-                "time": "time",
-                "flux": "flux",
-                "error": "err",
-                "mask": "mask",
-                "skipLeading": 780,
-                "columns": [
-                  "centroid_y",
-                  "psf_width_y"
-                ]
-              },
-              "fit": {
-                "degrees": [
-                  2,
-                  3
-                ],
-                "eigencurves": [
-                  4,
-                  5,
-                  6,
-                  7,
-                  8
-                ],
-                "positive": true,
-                "transitExclusionPhase": 0.04,
-                "gridHeight": 90,
-                "systematics": [
-                  {
-                    "kind": "time"
-                  },
-                  {
-                    "kind": "exponential-ramp",
-                    "timeConstantsDays": [
-                      0.005,
-                      0.01,
-                      0.02,
-                      0.04,
-                      0.08,
-                      0.16
-                    ]
-                  },
-                  {
-                    "kind": "column",
-                    "column": "centroid_y"
-                  },
-                  {
-                    "kind": "column",
-                    "column": "psf_width_y"
-                  }
-                ],
-                "transitFromLightCurve": true
-              },
-              "band": {
-                "encoding": "count-spectrum-csv",
-                "path": "science/jwst-1366-miri/stellar-counts.csv",
-                "wavelength": "wavelength_um",
-                "counts": "counts",
-                "minimumMicrons": 8.5,
-                "maximumMicrons": 10.5
-              },
-              "star": {
-                "encoding": "svo-model-spectrum",
-                "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml"
-              },
-              "minimum": 700,
-              "maximum": 2000,
-              "colors": [
-                "#0d0887",
-                "#7e03a8",
-                "#cc4778",
-                "#f89540",
-                "#f0f921"
-              ],
-              "labels": [
-                "700",
-                "1350",
-                "2000"
-              ],
-              "description": "Brightness temperature over 8.5–10.5 µm, fitted in this project to the JWST MIRI phase curve it reduced from raw exposures. Only large patterns are real.",
-              "title": "JWST MIRI 8.5–10.5 µm · our map",
-              "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-            }
           }
         ],
         "emission": {
@@ -601,7 +227,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "42ae8db672e6b48866abd5083d563e575eeb01b19ba5d8769019e65c652e54c4",
+      "sha256": "bb41416f45cfc8ada942daa36bb93e28afa814d87e15cb17dff67bc110b0f883",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -671,7 +297,7 @@
             {
               "id": "temperature",
               "label": "NIRSpec",
-              "qualification": "Published map · Challener et al. 2024 · JWST NIRSpec 2023 phase curve",
+              "qualification": "Published map · Challener et al. 2024 · JWST NIRSpec 2.9–5.2 µm, 2023",
               "thumbnail": "wasp-43b-lens-temperature.webp",
               "surface": "wasp-43b-surface-temperature.webp",
               "poles": "wasp-43b-poles-temperature.webp",
@@ -729,69 +355,9 @@
               "notes": "Brightness temperature fitted to JWST light curves; large patterns only. The hot spot sits about 7° east of noon and south of the equator; how far south depends on the model, 4° to 16°."
             },
             {
-              "id": "nirspec-refit",
-              "label": "NIRSpec refit",
-              "qualification": "Our fit of the same light curve · spin axis on the orbit normal",
-              "thumbnail": "wasp-43b-lens-nirspec-refit.webp",
-              "surface": "wasp-43b-surface-nirspec-refit.webp",
-              "poles": "wasp-43b-poles-nirspec-refit.webp",
-              "source": {
-                "id": "wasp-43b-challener-2024-deposit",
-                "path": "../manifest.json",
-                "url": "https://zenodo.org/records/12627524"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Brightness temperature",
-                "labels": [
-                  "700",
-                  "1350",
-                  "2000"
-                ],
-                "recipe": {
-                  "palette": [
-                    [
-                      13,
-                      8,
-                      135
-                    ],
-                    [
-                      126,
-                      3,
-                      168
-                    ],
-                    [
-                      204,
-                      71,
-                      120
-                    ],
-                    [
-                      248,
-                      149,
-                      64
-                    ],
-                    [
-                      240,
-                      249,
-                      33
-                    ]
-                  ],
-                  "labels": [
-                    "700",
-                    "1350",
-                    "2000"
-                  ]
-                },
-                "meta": "K",
-                "sourceUrl": "https://zenodo.org/records/12627524"
-              },
-              "notes": "The published light curve refitted here with the same model, the planet spinning about its orbit's axis. Converted with a model spectrum of the star, not a blackbody."
-            },
-            {
               "id": "miri",
               "label": "MIRI",
-              "qualification": "Our map from raw JWST exposures · 5–10.5 µm · 2022 phase curve",
+              "qualification": "Reduced here from raw JWST exposures · MIRI 5–10.5 µm, 2022",
               "thumbnail": "wasp-43b-lens-miri.webp",
               "surface": "wasp-43b-surface-miri.webp",
               "poles": "wasp-43b-poles-miri.webp",
@@ -846,187 +412,7 @@
                 "meta": "K",
                 "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
               },
-              "notes": "Reduced here from the raw MIRI exposures and fitted here. Dayside and nightside averages agree with Bell et al. (2024)."
-            },
-            {
-              "id": "miri-band-1",
-              "label": "MIRI 5–6.5 µm",
-              "qualification": "Our map · shortest MIRI slice",
-              "thumbnail": "wasp-43b-lens-miri-band-1.webp",
-              "surface": "wasp-43b-surface-miri-band-1.webp",
-              "poles": "wasp-43b-poles-miri-band-1.webp",
-              "source": {
-                "id": "wasp-43b-miri-band-1",
-                "path": "../manifest.json",
-                "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Brightness temperature",
-                "labels": [
-                  "700",
-                  "1350",
-                  "2000"
-                ],
-                "recipe": {
-                  "palette": [
-                    [
-                      13,
-                      8,
-                      135
-                    ],
-                    [
-                      126,
-                      3,
-                      168
-                    ],
-                    [
-                      204,
-                      71,
-                      120
-                    ],
-                    [
-                      248,
-                      149,
-                      64
-                    ],
-                    [
-                      240,
-                      249,
-                      33
-                    ]
-                  ],
-                  "labels": [
-                    "700",
-                    "1350",
-                    "2000"
-                  ]
-                },
-                "meta": "K",
-                "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-              },
-              "notes": "The same reduction, light from 5 to 6.5 µm only. Only large patterns are real."
-            },
-            {
-              "id": "miri-band-2",
-              "label": "MIRI 6.5–8.5 µm",
-              "qualification": "Our map · middle MIRI slice",
-              "thumbnail": "wasp-43b-lens-miri-band-2.webp",
-              "surface": "wasp-43b-surface-miri-band-2.webp",
-              "poles": "wasp-43b-poles-miri-band-2.webp",
-              "source": {
-                "id": "wasp-43b-miri-band-2",
-                "path": "../manifest.json",
-                "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Brightness temperature",
-                "labels": [
-                  "700",
-                  "1350",
-                  "2000"
-                ],
-                "recipe": {
-                  "palette": [
-                    [
-                      13,
-                      8,
-                      135
-                    ],
-                    [
-                      126,
-                      3,
-                      168
-                    ],
-                    [
-                      204,
-                      71,
-                      120
-                    ],
-                    [
-                      248,
-                      149,
-                      64
-                    ],
-                    [
-                      240,
-                      249,
-                      33
-                    ]
-                  ],
-                  "labels": [
-                    "700",
-                    "1350",
-                    "2000"
-                  ]
-                },
-                "meta": "K",
-                "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-              },
-              "notes": "The same reduction, light from 6.5 to 8.5 µm only. Only large patterns are real."
-            },
-            {
-              "id": "miri-band-3",
-              "label": "MIRI 8.5–10.5 µm",
-              "qualification": "Our map · longest usable MIRI slice",
-              "thumbnail": "wasp-43b-lens-miri-band-3.webp",
-              "surface": "wasp-43b-surface-miri-band-3.webp",
-              "poles": "wasp-43b-poles-miri-band-3.webp",
-              "source": {
-                "id": "wasp-43b-miri-band-3",
-                "path": "../manifest.json",
-                "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Brightness temperature",
-                "labels": [
-                  "700",
-                  "1350",
-                  "2000"
-                ],
-                "recipe": {
-                  "palette": [
-                    [
-                      13,
-                      8,
-                      135
-                    ],
-                    [
-                      126,
-                      3,
-                      168
-                    ],
-                    [
-                      204,
-                      71,
-                      120
-                    ],
-                    [
-                      248,
-                      149,
-                      64
-                    ],
-                    [
-                      240,
-                      249,
-                      33
-                    ]
-                  ],
-                  "labels": [
-                    "700",
-                    "1350",
-                    "2000"
-                  ]
-                },
-                "meta": "K",
-                "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
-              },
-              "notes": "The same reduction, light from 8.5 to 10.5 µm only. Beyond 10.5 µm the fit breaks down. Only large patterns are real."
+              "notes": "Dayside and nightside agree with Bell et al. (2024). The hot spot sits about 6° east of noon; published analyses of the same data place it up to 7.5° east."
             }
           ]
         },
@@ -1082,7 +468,7 @@
         "https://zenodo.org/records/12627524",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Original Zenodo tar, unchanged; members are read in place (maps.npy for the Temperature lens, the white-light light curve for the NIRSpec refit lens and the geometry test). MD5 bb6e7e7b86475ed9f309bb1d7fa278a9.",
+      "acquisition": "Original Zenodo tar, unchanged; members are read in place (maps.npy for the NIRSpec lens, the white-light light curve for the geometry and fit tests). MD5 bb6e7e7b86475ed9f309bb1d7fa278a9.",
       "redistribution": "CC BY 4.0 with attribution.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1111,77 +497,6 @@
         ],
         "path": "science/challener-2024/wasp-43b.tar",
         "url": "https://zenodo.org/api/records/12627524/files/wasp-43b.tar/content"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "jwst-nirspec-g395h-f290lp-filter",
-      "path": "science/svo-filter-profiles/JWST_NIRSpec.G395H_F290LP.xml",
-      "origin": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/NIRSpec.G395H_F290LP",
-      "productId": "JWST/NIRSpec.G395H_F290LP",
-      "title": "JWST NIRSpec G395H/F290LP transmission (photon counter)",
-      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/fps/index.php?id=JWST/NIRSpec.G395H_F290LP",
-      "credit": "SVO Filter Profile Service (Rodrigo et al. 2012, 2020); throughput from the JWST exposure time calculator",
-      "displayCredit": "SVO Filter Profile Service",
-      "license": "Served openly by the SVO for research use with citation",
-      "licenseEvidence": [
-        "https://svo2.cab.inta-csic.es/theory/fps/index.php?mode=use"
-      ],
-      "acquisition": "Restored through source/preparation/acquisition.json from the SVO Filter Profile Service, unchanged VOTable.",
-      "redistribution": "Not redistributed in git; restored from the SVO.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Pinned SVO filter profile; the service has no catalogue record in this repository yet."
-      },
-      "sha256": "ad7ab5f42e21611745893e150be479a2ab2531c8689a0eb1258428d52a9520d3",
-      "bytes": 62329,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "restore",
-          "refresh"
-        ],
-        "path": "science/svo-filter-profiles/JWST_NIRSpec.G395H_F290LP.xml",
-        "url": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/NIRSpec.G395H_F290LP"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "wasp-43-bt-settl-cifist-4500",
-      "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
-      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=269",
-      "productId": "bt-settl-cifist fid 269",
-      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
-      "title": "BT-Settl CIFIST model spectrum, Teff 4500 K, log g 4.5, [M/H] 0",
-      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
-      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
-      "displayCredit": "BT-Settl · SVO",
-      "license": "Model spectra served openly by the SVO for research use with citation",
-      "licenseEvidence": [
-        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
-      ],
-      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 4500 K, log g 4.5, [M/H] 0 (Challener et al. 2024's stellar parameters), unchanged VOTable.",
-      "redistribution": "Not redistributed in git; restored from the SVO.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
-      },
-      "sha256": "051cd254939481d11d4ac3b9277fb322cba82699968225dfd2051a7982e93323",
-      "bytes": 60684012,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "restore",
-          "refresh"
-        ],
-        "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
-        "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=269"
       },
       "verificationOperations": []
     },
@@ -1241,83 +556,38 @@
     },
     {
       "kind": "source-input",
-      "id": "wasp-43b-miri-band-1",
-      "path": "science/jwst-1366-miri/slice-5.0-6.5um.csv",
-      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
-      "productId": "5.0-6.5 um light curve",
-      "title": "WASP-43b MIRI phase curve, 5.0-6.5 um light curve",
-      "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
-      "credit": "JWST program 1366 (Transiting Exoplanet Community ERS, PIs N. Batalha, J. Bean, K. Stevenson); reduced in this project with Eureka! 1.4 on Bell et al. (2024) settings",
-      "displayCredit": "JWST MIRI · program 1366",
-      "license": "JWST data are public (STScI MAST); reduction by this project",
+      "id": "wasp-43-bt-settl-cifist-4500",
+      "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=269",
+      "productId": "bt-settl-cifist fid 269",
+      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
+      "title": "BT-Settl CIFIST model spectrum, Teff 4500 K, log g 4.5, [M/H] 0",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
+      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
+      "displayCredit": "BT-Settl · SVO",
+      "license": "Model spectra served openly by the SVO for research use with citation",
       "licenseEvidence": [
-        "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
+        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
       ],
-      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-slice-ch00.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
-      "redistribution": "Public JWST data, reduced here.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 4500 K, log g 4.5, [M/H] 0 (Challener et al. 2024's stellar parameters), for the MIRI lens's temperature conversion, unchanged VOTable.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
+        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
       },
-      "sha256": "b6eba2957701a07668fc34076fdc5580fe7074590fa472472eaa2efc7a073e06",
-      "bytes": 1382169,
+      "sha256": "051cd254939481d11d4ac3b9277fb322cba82699968225dfd2051a7982e93323",
+      "bytes": 60684012,
       "dependencies": [],
       "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "wasp-43b-miri-band-2",
-      "path": "science/jwst-1366-miri/slice-6.5-8.5um.csv",
-      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
-      "productId": "6.5-8.5 um light curve",
-      "title": "WASP-43b MIRI phase curve, 6.5-8.5 um light curve",
-      "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
-      "credit": "JWST program 1366 (Transiting Exoplanet Community ERS, PIs N. Batalha, J. Bean, K. Stevenson); reduced in this project with Eureka! 1.4 on Bell et al. (2024) settings",
-      "displayCredit": "JWST MIRI · program 1366",
-      "license": "JWST data are public (STScI MAST); reduction by this project",
-      "licenseEvidence": [
-        "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
-      ],
-      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-slice-ch01.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
-      "redistribution": "Public JWST data, reduced here.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
+        "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=269"
       },
-      "sha256": "323930f3ad2a9454d0c3391b0d5df89b4e9c161c98f4136ad3754050123bbbc1",
-      "bytes": 1382253,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "wasp-43b-miri-band-3",
-      "path": "science/jwst-1366-miri/slice-8.5-10.5um.csv",
-      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
-      "productId": "8.5-10.5 um light curve",
-      "title": "WASP-43b MIRI phase curve, 8.5-10.5 um light curve",
-      "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
-      "credit": "JWST program 1366 (Transiting Exoplanet Community ERS, PIs N. Batalha, J. Bean, K. Stevenson); reduced in this project with Eureka! 1.4 on Bell et al. (2024) settings",
-      "displayCredit": "JWST MIRI · program 1366",
-      "license": "JWST data are public (STScI MAST); reduction by this project",
-      "licenseEvidence": [
-        "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
-      ],
-      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-slice-ch02.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
-      "redistribution": "Public JWST data, reduced here.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
-      },
-      "sha256": "fcd979a1f3520f30b846dbf5605f09696228b4047840f93855a4704f796a235a",
-      "bytes": 1382337,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -1333,8 +603,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "42ae8db672e6b48866abd5083d563e575eeb01b19ba5d8769019e65c652e54c4",
-      "bytes": 12602,
+      "sha256": "bb41416f45cfc8ada942daa36bb93e28afa814d87e15cb17dff67bc110b0f883",
+      "bytes": 6201,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1351,7 +621,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Published map · Challener et al. 2024 · JWST NIRSpec 2023 phase curve"
+        "Published map · Challener et al. 2024 · JWST NIRSpec 2.9–5.2 µm, 2023"
       ],
       "lensIds": [
         "temperature"
@@ -1431,105 +701,15 @@
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "nirspec-refit",
-      "label": "NIRSpec refit",
+      "id": "miri",
+      "label": "MIRI",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "Our fit of the same light curve · spin axis on the orbit normal"
-      ],
-      "lensIds": [
-        "nirspec-refit"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "wasp-43b-challener-2024-deposit",
-        "jwst-nirspec-g395h-f290lp-filter",
-        "wasp-43-bt-settl-cifist-4500"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-nirspec-refit.webp",
-          "bytes": 16054,
-          "sha256": "28ee9d912bd0601ae04df6a5a5516336cdba4ee51ad2a8d37b8c94850ac96aa6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-nirspec-refit@2x.webp",
-          "bytes": 39758,
-          "sha256": "572eec7342cc6470c92efc90a46bd049bf5eaa6bf9e96e8074dd01a007439260",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-lens-nirspec-refit.webp",
-          "bytes": 310,
-          "sha256": "b9990376107fe1e25e6322387eb5aca1e05ef68515b1a13e5456505e3c35046d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-nirspec-refit.webp",
-          "bytes": 26004,
-          "sha256": "c0b5e6cc0e7024cc6b16c6d6ffcf4c7f3bc6b68608be33a55d851eeb7671e94d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-nirspec-refit@2x.webp",
-          "bytes": 54956,
-          "sha256": "bc5ddfc1293b94d59c155097e2998343a4a75b231a2ad727abc06f0bcbbd5da7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-nirspec-refit.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-nirspec-refit.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-nirspec-refit@2x.webp",
-          "bytes": 100,
-          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-nirspec-refit@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "wasp-43b-challener-2024-deposit",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/1/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "miri",
-      "label": "MIRI",
-      "recipe": "raster",
-      "selector": "/surfaces/2",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Our map from raw JWST exposures · 5–10.5 µm · 2022 phase curve"
+        "Reduced here from raw JWST exposures · MIRI 5–10.5 µm, 2022"
       ],
       "lensIds": [
         "miri"
@@ -1605,277 +785,7 @@
         {
           "sourceId": "wasp-43b-miri-white",
           "role": "appearance",
-          "evidence": "Raster source at /surfaces/2/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "miri-band-1",
-      "label": "MIRI 5–6.5 µm",
-      "recipe": "raster",
-      "selector": "/surfaces/3",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Our map · shortest MIRI slice"
-      ],
-      "lensIds": [
-        "miri-band-1"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "wasp-43b-miri-band-1",
-        "wasp-43b-miri-stellar-counts",
-        "wasp-43-bt-settl-cifist-4500"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-1.webp",
-          "bytes": 14266,
-          "sha256": "a0e4299d5fefb33764a911ae92fc77d03d87aee57148cca70026c9d94282f047",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-1@2x.webp",
-          "bytes": 38452,
-          "sha256": "e55bc4a80753483f5fe9d9934e0ea6cdfc37e9f2927728ba1ad5c7f0c36a77fc",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-lens-miri-band-1.webp",
-          "bytes": 262,
-          "sha256": "6cf40b377466df6e907f4f89313d550fa2e6ecf981deb1e2097adb09655b996c",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-1.webp",
-          "bytes": 25638,
-          "sha256": "923b77934f41cc57683dbb59a4dcd7bb322b5cd4d70809167bc0d212eb79a352",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-1@2x.webp",
-          "bytes": 54470,
-          "sha256": "4276f9a500d83c6a56f0f4435f8f9d72f6c1e4db0f86daf2a03875272ca7099a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-miri-band-1.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-miri-band-1.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-miri-band-1@2x.webp",
-          "bytes": 100,
-          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-miri-band-1@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "wasp-43b-miri-band-1",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/3/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "miri-band-2",
-      "label": "MIRI 6.5–8.5 µm",
-      "recipe": "raster",
-      "selector": "/surfaces/4",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Our map · middle MIRI slice"
-      ],
-      "lensIds": [
-        "miri-band-2"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "wasp-43b-miri-band-2",
-        "wasp-43b-miri-stellar-counts",
-        "wasp-43-bt-settl-cifist-4500"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-2.webp",
-          "bytes": 13834,
-          "sha256": "78db17c3ae2f39059795a34ace0e9a51398ff09937d4c8a0e0387e13d4c2944b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-2@2x.webp",
-          "bytes": 37422,
-          "sha256": "9440e408f09ac08df08d306de911ecc8d7c62299f66958e6c82ae05ded913d05",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-lens-miri-band-2.webp",
-          "bytes": 262,
-          "sha256": "5cbd0c6d6933d2ef66a5c3c51471c6610bf35f9c153ba60e35c5bf5ad08d0b13",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-2.webp",
-          "bytes": 25008,
-          "sha256": "ea42ceb9f3d1c5516cb56d1b22374136534258ae46a62170d4035c10c246484d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-2@2x.webp",
-          "bytes": 52868,
-          "sha256": "a8a2f8993caa00031adc3c1e5f8c709d501e1fa25650e38902bcaea28c6a867c",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-miri-band-2.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-miri-band-2.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-miri-band-2@2x.webp",
-          "bytes": 100,
-          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-miri-band-2@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "wasp-43b-miri-band-2",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/4/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "miri-band-3",
-      "label": "MIRI 8.5–10.5 µm",
-      "recipe": "raster",
-      "selector": "/surfaces/5",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [
-        "Our map · longest usable MIRI slice"
-      ],
-      "lensIds": [
-        "miri-band-3"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "wasp-43b-miri-band-3",
-        "wasp-43b-miri-stellar-counts",
-        "wasp-43-bt-settl-cifist-4500"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-3.webp",
-          "bytes": 14186,
-          "sha256": "64a6573399e38698a424ae7de87a897bc3486c32f7275611553709525dc66f16",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-3@2x.webp",
-          "bytes": 38852,
-          "sha256": "28baf715b4498f34a9c2225174d9c108f59d334ea40af20d7c9f245fe5d4c831",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-lens-miri-band-3.webp",
-          "bytes": 284,
-          "sha256": "b2e643089d591d609fa4a2d88b3a5e0702deb24fd870a7e55408325ded49e948",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-3.webp",
-          "bytes": 25522,
-          "sha256": "0d3556a370a1788b3fd47ed0106ccee2783ab11d951608cb1be9f5d2dfcaef07",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-3@2x.webp",
-          "bytes": 53392,
-          "sha256": "fa8ac5b756d094f6eeab14827ec28a48e3360fbe3e9930252424edd7767077c5",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-miri-band-3.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-miri-band-3.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-context-miri-band-3@2x.webp",
-          "bytes": 100,
-          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43b/wasp-43b-limb-miri-band-3@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "wasp-43b-miri-band-3",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/5/source."
+          "evidence": "Raster source at /surfaces/1/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1932,35 +842,10 @@
       ]
     },
     {
-      "id": "preview:nirspec-refit",
-      "label": "NIRSpec refit preview",
-      "recipe": "raster",
-      "selector": "/surfaces/1",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "nirspec-refit"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/nirspec-refit.webp",
-          "bytes": 5308,
-          "sha256": "f383f73695d1e3c072478c0a377ca22bd3e2d0a6d3f9c577a68f7a6c1babc8ac",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
       "id": "preview:miri",
       "label": "MIRI preview",
       "recipe": "raster",
-      "selector": "/surfaces/2",
+      "selector": "/surfaces/1",
       "recipeDependencies": [
         "raster"
       ],
@@ -1980,81 +865,6 @@
           "verification": "bytes-verified"
         }
       ]
-    },
-    {
-      "id": "preview:miri-band-1",
-      "label": "MIRI 5–6.5 µm preview",
-      "recipe": "raster",
-      "selector": "/surfaces/3",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "miri-band-1"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/miri-band-1.webp",
-          "bytes": 4810,
-          "sha256": "88680db5878b60991cc51d12f92f3f12d7ced737f232f8466e68079a0ab3e00f",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:miri-band-2",
-      "label": "MIRI 6.5–8.5 µm preview",
-      "recipe": "raster",
-      "selector": "/surfaces/4",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "miri-band-2"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/miri-band-2.webp",
-          "bytes": 4766,
-          "sha256": "da24fd914a159d16af4fa3b723bc6f0b645c5c282116e68d61b21e176d080847",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:miri-band-3",
-      "label": "MIRI 8.5–10.5 µm preview",
-      "recipe": "raster",
-      "selector": "/surfaces/5",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "miri-band-3"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/miri-band-3.webp",
-          "bytes": 4914,
-          "sha256": "e9889423108af8823961e0aee8e2978870a1f7df8d2b8f9298362841e741ea23",
-          "verification": "bytes-verified"
-        }
-      ]
     }
   ],
   "coverage": {
@@ -2063,11 +873,11 @@
   },
   "lastPreparation": {
     "objectId": "wasp-43b",
-    "materialSha256": "082e21e76887518dc79a3925a38d77c3ff3925e32b764ab1bca7e4c33c8a08e5",
+    "materialSha256": "2cbe55864eb752b616f86f37cc9666b8dae33adbe7d1d96177fa57faa2191599",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "1f7c0e5baff4370e70d429f927ea4b1bfa4040093b3118318c3cb86ec7de58f2"
+      "bindingsSha256": "fa16c098acaa0b83d5edd3919eeca3abcfae83f89fea148350c01c11883ccae6"
     }
   }
 }

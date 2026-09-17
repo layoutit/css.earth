@@ -8,6 +8,7 @@
  * carries one sign. The output scales every baseline to one reference wavelength, so the reconstruction is monochromatic. */
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
+import { readFitsHeader } from '../../fits.mts';
 import { binaryTableHdu, findTable, numbers, primaryHdu, readFitsHdus, tableColumn, text } from './fits-table.mts';
 
 export interface ContinuumRecipe {
@@ -42,13 +43,19 @@ export async function mergeContinuum(paths: readonly string[], recipe: Continuum
   type RawVis2 = { u: number; v: number; wl: number; vis2: number; error: number; file: string; stations: string };
   type RawT3 = { u1: number; v1: number; u2: number; v2: number; wl: number; phi: number; error: number; file: string; stations: readonly string[] };
   const rawVis2: RawVis2[] = [], rawT3: RawT3[] = [];
+  // Each file's observing block (the template start) and array configuration (its stations in index order), from its own header
+  // and OI_ARRAY: an author's files and this repository's calibrations name their files differently.
+  const blocks = new Map<string, string>(), configurations = new Map<string, string>();
   for (const path of [...paths].sort()) {
-    const bytes = await readFile(path), file = basename(path);
+    const bytes = await readFile(path), file = basename(path), templateStart = readFitsHeader(bytes).header['ESO TPL START'];
+    if (typeof templateStart !== 'string') throw new Error(`${file} states no ESO TPL START.`);
+    blocks.set(file, templateStart);
     const wavelengths = findTable(bytes, 'OI_WAVELENGTH'), waveColumn = tableColumn(wavelengths, 'EFF_WAVE');
     const wl = Array.from({ length: wavelengths.rows }, (_, row) => numbers(bytes, wavelengths, row, waveColumn)[0]! * 1e6);
     const array = findTable(bytes, 'OI_ARRAY'), stationName = new Map<number, string>();
     for (let row = 0; row < array.rows; row++) stationName.set(numbers(bytes, array, row, tableColumn(array, 'STA_INDEX'))[0]!, text(bytes, array, row, tableColumn(array, 'STA_NAME')));
     const name = (index: number) => stationName.get(index) ?? String(index);
+    configurations.set(file, [...stationName.keys()].sort((a, b) => a - b).map(name).join(''));
     const vis2 = findTable(bytes, 'OI_VIS2');
     const col = (table: ReturnType<typeof findTable>, key: string) => tableColumn(table, key);
     for (let row = 0; row < vis2.rows; row++) {
@@ -71,7 +78,7 @@ export async function mergeContinuum(paths: readonly string[], recipe: Continuum
       });
     }
   }
-  const block = (file: string) => file.split('_')[0]!, configuration = (file: string) => file.split('_')[2]!;
+  const block = (file: string) => blocks.get(file)!, configuration = (file: string) => configurations.get(file)!;
   const groupKey = (file: string, stations: readonly string[], wl: number) => `${block(file)}|${[...stations].sort().join('-')}|${wl.toFixed(5)}`;
   // ---- squared visibilities: conjugate-symmetric, so every point is folded to u >= 0 before averaging
   const vis2Groups = new Map<string, RawVis2[]>();

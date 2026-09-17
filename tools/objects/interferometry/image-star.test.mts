@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { matchVis2, vis2Agreement } from './author-comparison.mts';
 import { readReconstruction } from './beam-convolve.mts';
 import { discStartImage, fitUniformDisc } from './disc-fit.mts';
-import { parseSeason } from './image-star.mts';
+import { parseSeason, TWIN_SCALES } from './image-star.mts';
 import { readChannelRows } from './oifits-rows.mts';
 import { selectOifits } from './oifits-select.mts';
 import { parseSqueezeFit, squeezeArguments } from './squeeze.mts';
@@ -125,7 +125,8 @@ test('the π¹ Gruis season from the author file is cast and reproduces the ship
   assert.ok(result.verdict.cast, result.verdict.reasons.join('; '));
   // The fit SQUEEZE reported for the shipped image, from the same file and recipe.
   assert.deepEqual([result.fit.season.vis2, result.fit.season.closurePhase], [2.45, 1.06]);
-  assert.ok(result.spots.ratio > 5 && result.halves.correlation > 0.9, `ratio ${result.spots.ratio}, halves ${result.halves.correlation}`);
+  // Against the spottiest twin within 2 percent: measured 2.40 (5.38 against the full-size twin).
+  assert.ok(result.spots.ratio > 2 && result.halves.correlation > 0.9, `ratio ${result.spots.ratio}, halves ${result.halves.correlation}`);
   assert.equal(result.comparison.calibrated.medianSigma, 0);
   assert.ok(result.comparison.imageCorrelation > 0.999, `image correlation ${result.comparison.imageCorrelation}`);
 });
@@ -139,4 +140,30 @@ test('R Aqr\'s 2019 season from raw is not cast because it does not fit its data
   // Measured 71.8 and 71.9 with lost fringes removed and the error minimum applied.
   assert.ok(result.fit.season.vis2 > 30 && result.fit.season.closurePhase > 30, `${result.fit.season.vis2} and ${result.fit.season.closurePhase}`);
   assert.deepEqual(result.comparison, {}, 'no author file is named for this season');
+});
+
+test('the Betelgeuse season averages MATISSE repeats in continuum windows, and twin sizes default to ±2 percent', async () => {
+  const raw = JSON.parse(await readFile(resolve(import.meta.dirname, 'seasons/betelgeuse-matisse-2020-02/season.json'), 'utf8')) as Record<string, unknown>;
+  const season = parseSeason(raw);
+  assert.ok('exposures' in season.data && season.data.exposures.length === 60);
+  assert.deepEqual(season.selection.continuum?.windowsMicrometres, [[3.942, 3.974], [3.992, 3.998]]);
+  assert.deepEqual(season.twinScales, TWIN_SCALES);
+  assert.deepEqual(TWIN_SCALES, [0.98, 0.99, 1, 1.01, 1.02]);
+  const selection = raw.selection as Record<string, unknown>;
+  assert.throws(() => parseSeason({ ...raw, selection: { ...selection, errorFloors: { vis2Relative: 0.05, closureDegrees: 2 } } }), /its own windows/u);
+  assert.deepEqual(parseSeason({ ...raw, check: { twinScales: [0.95, 1, 1.05] } }).twinScales, [0.95, 1, 1.05]);
+  assert.throws(() => parseSeason({ ...raw, check: { twinScales: [0.5] } }), /not near/u);
+});
+
+test('Betelgeuse from the pinned calibrated files merges identically and is not cast against its spottiest twin', async t => {
+  const verdictPath = resolve(repository, 'output/stars/betelgeuse-author-files/verdict.json');
+  if (!await access(verdictPath).then(() => true, () => false)) return t.skip('run image-star.mts on the Betelgeuse season with --calibrated on the pinned files first');
+  const merged = await readFile(resolve(repository, 'output/stars/betelgeuse-author-files/season.fits'));
+  assert.ok(merged.equals(await readFile(resolve(repository, 'src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits'))));
+  const result = JSON.parse(await readFile(verdictPath, 'utf8')) as { verdict: { cast: boolean; reasons: string[] }; spots: { ratio: number; twins: { scale: number; ratio: number }[] }; halves: { correlation: number } };
+  // Measured 1.24 to 2.02 across the five twins; the lens is kept with a label (src/objects/betelgeuse/README.md).
+  assert.equal(result.verdict.cast, false);
+  assert.deepEqual(result.verdict.reasons.map(reason => /spotless/u.test(reason)), [true]);
+  assert.equal(result.spots.twins.length, 5);
+  assert.ok(Math.min(...result.spots.twins.map(twin => twin.ratio)) < 2 && result.halves.correlation > 0.5);
 });

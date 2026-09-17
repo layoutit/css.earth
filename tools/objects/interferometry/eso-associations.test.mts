@@ -4,7 +4,7 @@ import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { GRAVITY_REDUCTION } from './calibrate-gravity.mts';
 import { MATISSE_REDUCTION } from './calibrate-matisse.mts';
-import { parseAssociationTree, reduceAssociation, type InstrumentReduction, type ReductionIo } from './eso-associations.mts';
+import { archiveFrameId, parseAssociationTree, reduceAssociation, stepFiles, type InstrumentReduction, type ReductionIo } from './eso-associations.mts';
 import { parseHeaderCards, type EsoHeader } from './eso-pipeline.mts';
 import { binaryTable, numbers, readFitsHdus, tableColumn, text, type BinaryTable } from './fits-table.mts';
 
@@ -196,4 +196,25 @@ test('archive header text reads through the shared FITS reader, one line per car
   assert.throws(() => parseHeaderCards([`HIERARCH ESO TPL NAME = 'unterminated`, 'END']), /Unterminated/);
   assert.throws(() => parseHeaderCards(lines.slice(0, -1)), /END/);
   assert.throws(() => parseHeaderCards([lines[0]!, lines[0]!, 'END']), /Duplicate/);
+});
+
+test('archive frames are identified by name, so a discarded exposure does not rerun its step; products by size and time', async () => {
+  const { mkdtemp, writeFile, utimes, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const raw = await mkdtemp(resolve(tmpdir(), 'raw-')), product = resolve(raw, 'products', 'OBS_FLATFIELD.fits');
+  await (await import('node:fs/promises')).mkdir(resolve(raw, 'products'));
+  const exposure = resolve(raw, 'MATIS.2020-02-08T00:07:36.150.fits'), master = resolve(raw, 'M.MATISSE.2021-08-18T08:36:11.406.fits');
+  assert.equal(archiveFrameId(exposure, raw), 'MATIS.2020-02-08T00:07:36.150');
+  assert.equal(archiveFrameId(master, raw), 'M.MATISSE.2021-08-18T08:36:11.406');
+  assert.equal(archiveFrameId(product, raw), undefined, 'a product in a subfolder is not an archive frame');
+  assert.equal(archiveFrameId(resolve(raw, 'MATIS.2020-02-08T00:07:36.150.fits.download'), raw), undefined);
+  await writeFile(product, 'flat');
+  const frames = [[exposure, 'TARGET_RAW'], [product, 'OBS_FLATFIELD']] as const;
+  const before = JSON.stringify(await stepFiles(frames, raw));
+  // The exposure was never downloaded (or was discarded): its identity does not need the file.
+  assert.equal(JSON.stringify(await stepFiles(frames, raw)), before);
+  await utimes(product, new Date(), new Date(Date.now() + 60_000));
+  assert.notEqual(JSON.stringify(await stepFiles(frames, raw)), before, 'a rewritten product invalidates the step');
+  await rm(raw, { recursive: true, force: true });
+  assert.deepEqual(MATISSE_REDUCTION.discardRaw, ['TARGET_RAW', 'CALIB_RAW']);
 });

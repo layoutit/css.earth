@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "40106373bbee85d5a3008725f1335ce5968213e83c4ebe83690f672c821c0bac"
+    "sha256": "601064fe3fe490a4997c20851d87f99537c27bbd46389c83b96e3b9b91349e45"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "480ae1e711c11e200db1dd59c3151b8e398a91d0d4592893ccefbbcf68cedff2",
+      "sha256": "98783df19374970aff7e117d69da28bc0dec03deb2e9a6305b3df9c4b6d34730",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
@@ -70,7 +70,7 @@
                 "metadata": {
                   "label": "MATISSE reconstruction",
                   "falseColor": true,
-                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
+                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. The bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
                 },
                 "frames": [
                   {
@@ -163,7 +163,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "272790b9391c94ffcac834cdc61ec29ea1ea2d765e97b41166b94a18fd131f99",
+      "sha256": "e67dffdde53e29f252cbc221ce1612635465982c7dba048f878aec0a398a5721",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,7 +228,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": true,
-              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
+              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Its bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
               "noData": true,
               "legend": {
                 "kind": "scale",
@@ -496,8 +496,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "272790b9391c94ffcac834cdc61ec29ea1ea2d765e97b41166b94a18fd131f99",
-      "bytes": 5378,
+      "sha256": "e67dffdde53e29f252cbc221ce1612635465982c7dba048f878aec0a398a5721",
+      "bytes": 5572,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -699,7 +699,7 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "dc4d0259a76bb73f7fd4f8e2f18ea5d1de2b798ff33c4e412948238ca9ed6d65",
+    "materialSha256": "a38bad21e544b4b7696dd6f493c3d58aff34f5e56b4976ef36cffd228de8acee",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
