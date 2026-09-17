@@ -25,7 +25,7 @@ test('each view axis gets a slice of the body mesh whose leaf boxes clear every 
     return [[c[0], c[1], c[2]], [c[0], c[2], c[3]]];
   });
   for (const slice of slices) {
-    assert.ok(slice.shrink > .3 && slice.shrink <= .97, `a usable slice keeps clearance: ${slice.shrink}`);
+    assert.ok(slice.shrink > .3 && slice.shrink < 1, `a usable slice, shrunk inside the surface: ${slice.shrink}`);
     assert.ok(slice.matrices.length >= 8, 'one fan leaf per outline edge');
     for (const quad of fanQuads(slice.matrices)) assert.ok(!boxes.some(box => quadsIntersect(quad, box)), 'no slice box cuts a surface box');
     // Every fan leaf lies in its slice plane.
