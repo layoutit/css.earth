@@ -157,7 +157,7 @@ export function createPreparedFocusNavigation(options: Options) {
 }
 
 function validatePreparedNavigationFocus(focus: PreparedNavigationFocus): PreparedNavigationFocus {
-  if (!focus || typeof focus.id !== 'string' || !/^[a-z0-9][a-z0-9:._-]{0,127}$/iu.test(focus.id) ||
+  if (!focus || typeof focus.id !== 'string' || !/^[a-z0-9][a-z0-9:._+-]{0,127}$/iu.test(focus.id) ||
     !Number.isFinite(focus.framingRadiusM) || focus.framingRadiusM <= 0 ||
     !Number.isFinite(focus.limits?.minimumDistanceM) || focus.limits.minimumDistanceM <= 0 ||
     !Number.isFinite(focus.limits?.maximumDistanceM) || focus.limits.maximumDistanceM <= focus.limits.minimumDistanceM ||
