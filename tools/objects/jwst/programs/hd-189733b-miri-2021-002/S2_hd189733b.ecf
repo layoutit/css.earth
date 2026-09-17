@@ -1,0 +1,35 @@
+# Eureka! Control File for Stage 2: Data Reduction
+
+# Stage 2 Documentation: https://eurekadocs.readthedocs.io/en/latest/ecf.html#stage-2
+
+suffix                  rateints  # Data file suffix
+
+# Note: different instruments and modes will use different steps by default
+skip_flat_field         False  # Set this to False if you want to compute calibrated stellar spectra.
+skip_photom             True  # Recommended to skip to get better uncertainties out of Stage 3. Set this to False if you want to compute calibrated stellar spectra.
+skip_extract_1d         True
+
+# Diagnostics
+hide_plots              True  # If True, plots will automatically be closed rather than popping up
+
+# Project directory
+topdir                  WORK_DIRECTORY/
+
+# Directories relative to topdir
+inputdir                Stage1
+outputdir               Stage2
+
+# Published Eureka! v1 settings (Bell et al. 2024) absent from the 1.4 template
+skip_bkg_subtract	True
+skip_imprint_subtract	True
+skip_msa_flagging	True
+skip_extract_2d	True
+skip_srctype	False
+skip_master_background	True
+skip_wavecorr	True
+skip_straylight	True
+skip_fringe	True
+skip_pathloss	True
+skip_barshadow	True
+skip_resample	True
+skip_cube_build	True

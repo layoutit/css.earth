@@ -6,17 +6,20 @@
  * A program directory (tools/objects/jwst/programs/<id>) pins the raw segments by name and size, the CRDS context, the
  * Eureka! control files, and an author's deposited light curve to compare with. The run:
  *
- * 1. Takes each segment from --raw when a file of the pinned size is there, and otherwise downloads it from MAST with resume.
+ * 1. Takes each segment from --raw when a file of the pinned size is there, and otherwise downloads it from MAST with resume,
+ *    three at a time: MAST throttles one connection to a fraction of what three reach together.
  * 2. Runs Stage 1 (ramp fitting) and Stage 2 (calibration) on batches of segments, one Python process and one worker at a time,
  *    and refuses to start a batch with less than half the memory free: one MIRI segment's Stage 1 peaks near 17 GB.
  * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 for the white light curve, the channels and, when the
  *    program has them, wider slices with their own bounds.
  * 4. Exports both light curves to CSV (time, flux, err, mask, centroid_y, psf_width_y; flux and err divided by the median flux),
- *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text. The star's median extracted counts
+ *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text. A deposit is either a zip holding
+ *    Eureka! light-curve files (checked by sha256) or individual files (checked by the md5 the archive lists): time, flux and error
+ *    columns with optional decorrelation vectors, and optionally a fitted map, exported as author-map.json. The star's median extracted counts
  *    per detector column (ours-stellar-counts.csv) are the band response an eclipse map's temperature conversion needs.
  *
  * Finished batches and stages are recorded in the work directory and skipped on a rerun. */
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { access, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
@@ -30,7 +33,16 @@ export interface TsoProgram {
   readonly id: string; readonly eventName: string; readonly crdsContext: string; readonly batchSegments: number;
   readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels: string; readonly S4slices?: string };
   readonly segments: readonly Segment[];
-  readonly oracle: { readonly url: string; readonly path: string; readonly bytes: number; readonly sha256: string; readonly lightCurve: string };
+  readonly oracle: EurekaZipOracle | DepositFilesOracle;
+}
+export interface EurekaZipOracle { readonly kind: 'eureka-light-curve-zip'; readonly url: string; readonly path: string; readonly bytes: number; readonly sha256: string; readonly lightCurve: string }
+export interface DepositFile { readonly path: string; readonly url: string; readonly bytes: number; readonly md5: string }
+export interface DepositFilesOracle {
+  readonly kind: 'deposit-files'; readonly files: readonly DepositFile[];
+  /** Deposit paths of the light curve's columns, one value per line (decorrelation vectors: whitespace-separated columns). */
+  readonly time: string; readonly flux: string; readonly err: string; readonly dvectors?: string;
+  /** A ThERESA output (a pickled dict with fmap and tmap), exported as author-map.json. */
+  readonly map?: string;
 }
 
 export async function readProgram(directory: string): Promise<TsoProgram> {
@@ -50,8 +62,25 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
     stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4), S4channels: requireString(stages.S4channels),
       ...(stages.S4slices === undefined ? {} : { S4slices: requireString(stages.S4slices) }) },
     segments,
-    oracle: { url: requireString(oracle.url), path: requireString(oracle.path), bytes: requireFiniteNumber(oracle.bytes), sha256: requireString(oracle.sha256), lightCurve: requireString(oracle.lightCurve) },
+    oracle: parseOracle(oracle),
   };
+}
+
+function parseOracle(oracle: Record<string, unknown>): TsoProgram['oracle'] {
+  if (oracle.kind === 'eureka-light-curve-zip') return { kind: 'eureka-light-curve-zip', url: requireString(oracle.url), path: requireString(oracle.path), bytes: requireFiniteNumber(oracle.bytes), sha256: requireString(oracle.sha256), lightCurve: requireString(oracle.lightCurve) };
+  if (oracle.kind !== 'deposit-files') throw new TypeError(`Unknown oracle kind ${String(oracle.kind)}.`);
+  const files = requireArray(oracle.files).map(value => {
+    const file = requireRecord(value, 'deposit file'), md5 = requireString(file.md5);
+    if (!/^[0-9a-f]{32}$/u.test(md5)) throw new TypeError(`${String(file.path)}: md5 is not 32 hex digits.`);
+    return { path: requireString(file.path), url: requireString(file.url), bytes: requireFiniteNumber(file.bytes), md5 };
+  });
+  const listed = (key: 'time' | 'flux' | 'err' | 'dvectors' | 'map') => {
+    if (oracle[key] === undefined) return undefined;
+    const path = requireString(oracle[key]);
+    if (!files.some(file => file.path === path)) throw new TypeError(`The oracle's ${key} file ${path} is not among its files.`);
+    return path;
+  };
+  return { kind: 'deposit-files', files, time: listed('time')!, flux: listed('flux')!, err: listed('err')!, ...(listed('dvectors') ? { dvectors: listed('dvectors')! } : {}), ...(listed('map') ? { map: listed('map')! } : {}) };
 }
 
 /** A control file with its top, input and output directories set; every other line is kept as written. */
@@ -75,6 +104,8 @@ function freeMemoryPercent() {
   return match ? Number(match[1]) : Number.NaN;
 }
 
+const run = (command: string, args: readonly string[]) => new Promise<number>(done => { spawn(command, args, { stdio: 'inherit' }).on('close', code => done(code ?? 1)); });
+
 async function segmentFile(segment: Segment, raw: string, rawSources: readonly string[]) {
   const target = resolve(raw, segment.name);
   if (await sizeOf(target) === segment.bytes) return target;
@@ -85,11 +116,38 @@ async function segmentFile(segment: Segment, raw: string, rawSources: readonly s
   // MAST drops slow transfers; curl resumes a partial file, and a stalled transfer is abandoned and resumed, five times at most.
   for (let attempt = 1; attempt <= 5 && await sizeOf(target) !== segment.bytes; attempt++) {
     if (await sizeOf(target) > segment.bytes) await rm(target);
-    spawnSync('curl', ['-s', '-L', '-C', '-', '--speed-limit', '10000', '--speed-time', '120', '-o', target, `https://mast.stsci.edu/api/v0.1/Download/file?uri=${segment.uri}`], { stdio: 'inherit' });
+    await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '10000', '--speed-time', '120', '-o', target, `https://mast.stsci.edu/api/v0.1/Download/file?uri=${segment.uri}`]);
   }
   if (await sizeOf(target) !== segment.bytes) throw new Error(`${segment.name} did not download to its pinned ${segment.bytes} bytes.`);
   return target;
 }
+
+/** Every segment in place before Stage 1 starts, three downloads at a time. */
+async function segmentFiles(segments: readonly Segment[], raw: string, rawSources: readonly string[]) {
+  const queue = [...segments];
+  await Promise.all(Array.from({ length: 3 }, async () => { for (let segment = queue.shift(); segment; segment = queue.shift()) await segmentFile(segment, raw, rawSources); }));
+}
+
+const md5File = (path: string) => new Promise<string>((done, fail) => {
+  const hash = createHash('md5');
+  createReadStream(path).on('data', chunk => hash.update(chunk)).on('error', fail).on('end', () => done(hash.digest('hex')));
+});
+
+const TEXT_EXPORTER = `
+import json, sys, numpy as np
+time, flux, err, dvectors, fitted = sys.argv[1:6]
+columns = [np.loadtxt(time), np.loadtxt(flux), np.loadtxt(err)]
+names = ['time', 'flux', 'err', 'mask']
+columns.append(np.zeros_like(columns[0]))
+if dvectors:
+    d = np.atleast_2d(np.loadtxt(dvectors))
+    for k in range(d.shape[1]): columns.append(d[:, k]); names.append(f'd{k + 1}')
+np.savetxt('author-white.csv', np.column_stack(columns), delimiter=',', header=','.join(names), comments='')
+if fitted:
+    output = np.load(fitted, allow_pickle=True).item()
+    json.dump({key: np.asarray(output[key]).tolist() for key in ('fmap', 'tmap', 'fmap_unc', 'tmap_unc') if key in output}, open('author-map.json', 'w'))
+print('author', len(columns[0]), 'integrations', 'with map' if fitted else '')
+`;
 
 const STAGE_RUNNER = `
 import json, resource, sys, time
@@ -180,6 +238,7 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
 
   // Stages 1 and 2, in batches.
   const pending = program.segments.filter(segment => !progress.segments.includes(segment.name));
+  await segmentFiles(pending, raw, rawSources);
   for (let start = 0; start < pending.length; start += program.batchSegments) {
     const batch = pending.slice(start, start + program.batchSegments), name = `batch${String(Object.keys(progress.steps).filter(key => key.startsWith('batch')).length + 1).padStart(2, '0')}`;
     const input = resolve(work, `Uncalibrated_${name}`);
@@ -226,15 +285,27 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_channels'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours-channels.log'));
   if (program.stages.S4slices) await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_slices'), /^S4_.*_LCData\.h5$/u), 'ours-slice'], resolve(work, 'export-ours-slices.log'));
   await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
-  const deposit = resolve(work, 'oracle', program.oracle.path);
-  await mkdir(resolve(work, 'oracle'), { recursive: true });
-  if (!await exists(deposit) || await sha256File(deposit) !== program.oracle.sha256) {
-    const run = spawnSync('curl', ['-s', '-L', '-o', deposit, program.oracle.url], { stdio: 'inherit' });
-    if (run.status !== 0 || await sha256File(deposit) !== program.oracle.sha256) throw new Error(`${program.oracle.path} does not match its pinned sha256.`);
+  const oracle = program.oracle, oracleDirectory = resolve(work, 'oracle');
+  await mkdir(oracleDirectory, { recursive: true });
+  if (oracle.kind === 'eureka-light-curve-zip') {
+    const deposit = resolve(oracleDirectory, oracle.path);
+    if (!await exists(deposit) || await sha256File(deposit) !== oracle.sha256) {
+      const fetched = spawnSync('curl', ['-s', '-L', '-o', deposit, oracle.url], { stdio: 'inherit' });
+      if (fetched.status !== 0 || await sha256File(deposit) !== oracle.sha256) throw new Error(`${oracle.path} does not match its pinned sha256.`);
+    }
+    const unzip = spawnSync('unzip', ['-o', '-q', deposit, oracle.lightCurve, '-d', oracleDirectory]);
+    if (unzip.status !== 0) throw new Error(`Could not extract ${oracle.lightCurve}.`);
+    await python(toolchain, curves, EXPORTER, [resolve(oracleDirectory, oracle.lightCurve), 'author'], resolve(work, 'export-author.log'));
+  } else {
+    for (const file of oracle.files) {
+      const path = resolve(oracleDirectory, file.path);
+      if (await exists(path) && await md5File(path) === file.md5) continue;
+      const fetched = spawnSync('curl', ['-s', '-L', '-o', path, file.url], { stdio: 'inherit' });
+      if (fetched.status !== 0 || await md5File(path) !== file.md5) throw new Error(`${file.path} does not match its listed md5.`);
+    }
+    const at = (name?: string) => (name ? resolve(oracleDirectory, name) : '');
+    await python(toolchain, curves, TEXT_EXPORTER, [at(oracle.time), at(oracle.flux), at(oracle.err), at(oracle.dvectors), at(oracle.map)], resolve(work, 'export-author.log'));
   }
-  const unzip = spawnSync('unzip', ['-o', '-q', deposit, program.oracle.lightCurve, '-d', resolve(work, 'oracle')]);
-  if (unzip.status !== 0) throw new Error(`Could not extract ${program.oracle.lightCurve}.`);
-  await python(toolchain, curves, EXPORTER, [resolve(work, 'oracle', program.oracle.lightCurve), 'author'], resolve(work, 'export-author.log'));
   return curves;
 }
 
