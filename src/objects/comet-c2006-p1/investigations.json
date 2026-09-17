@@ -4,13 +4,11 @@
   "entries": [
     {
       "id": "celestia-native-illustration",
-      "subject": "Celestia native nucleus illustration and catalog scale",
+      "survey": "celestia-native-illustration",
       "status": "excluded",
-      "finding": "Superseded 2026-09-16: the Celestia generic mesh was a shared illustration with no relation to this nucleus, and its catalogue radius was an estimate. The package now shows a smooth ellipsoid at the published effective radius (no published measurement); no mesh from Celestia is retained.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c2006-p1/source/reference/source-record.json",
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c2006-p1/source/shape/model.json",
-        "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c2006-p1/source/shape/model.json"
       ],
       "checked": [
         {
@@ -21,18 +19,14 @@
           "date": "2026-09-16",
           "commit": "694e9130f7bdfb601972026adf3dcc33217d47b7"
         }
-      ],
-      "revisitWhen": "A measured shape model of this nucleus (radar, spacecraft or a convex lightcurve inversion with a stated pole) would replace the ellipsoid."
+      ]
     },
     {
       "id": "measured-shape-archive-route",
-      "subject": "Object-specific measured shape in PDS/Stooke archives",
+      "survey": "measured-shape-archive-route",
       "status": "unresolved",
-      "finding": "The retained catalog intake names the Stooke archive but contains no object-specific mesh search result or inspected reconstruction for this comet. The Celestia illustration is selected; the record does not establish that a measured shape is unavailable.",
-      "revisitWhen": "An object-specific archive product or published numerical shape can be inspected, with coordinates, scale and reuse terms.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c2006-p1/source/reference/source-record.json",
-        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/"
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c2006-p1/source/reference/source-record.json"
       ],
       "checked": [
         {
@@ -59,10 +53,8 @@
     },
     {
       "id": "context-as-surface-texture",
-      "subject": "Cited context observations as a nucleus surface texture",
+      "survey": "context-as-surface-texture",
       "status": "excluded",
-      "finding": "The retained intake did not establish resolved nucleus pixels, camera-to-shape registration or a surface coverage mask for these context observations. They are not used as surface texels. This decision concerns the cited material, not every observation of the comet.",
-      "revisitWhen": "A resolved nucleus image with usable geometry and an independently checked mapping to a source shape becomes available.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-c2006-p1/source/reference/source-record.json",
         "https://ssd.jpl.nasa.gov/sb/great_comets.html"

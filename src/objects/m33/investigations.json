@@ -36,9 +36,8 @@
     },
     {
       "id": "scientific-registration",
-      "subject": "Source fields, coordinate registration and depth evidence",
+      "survey": "scientific-registration",
       "status": "unresolved",
-      "finding": "The retained records identify geometry references but do not preserve exact paper table/section locators, uncertainty and coordinate epoch for every adopted placement or orientation value. Observation dates and an independent crop/sky registration comparison are not recorded. No measured three-dimensional reconstruction is established.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m33/source/provenance.json",
         "https://github.com/layoutit/css.earth/blob/e4dfae5485b0aeeb88485531387366e886f43ef4/src/objects/m33/source/recipe.json"
@@ -48,8 +47,7 @@
           "date": "2026-09-14",
           "commit": "e4dfae5485b0aeeb88485531387366e886f43ef4"
         }
-      ],
-      "revisitWhen": "A qualification task supplies the original metadata or paper fields and an independent registration comparison for these exact inputs."
+      ]
     }
   ]
 }

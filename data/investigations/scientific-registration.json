@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "scientific-registration",
+  "subject": "Source fields, coordinate registration and depth evidence",
+  "finding": "The retained records identify geometry references but do not preserve exact paper table/section locators, uncertainty and coordinate epoch for every adopted placement or orientation value. Observation dates and an independent crop/sky registration comparison are not recorded. No measured three-dimensional reconstruction is established.",
+  "revisitWhen": "A qualification task supplies the original metadata or paper fields and an independent registration comparison for these exact inputs."
+}

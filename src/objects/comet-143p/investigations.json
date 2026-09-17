@@ -37,13 +37,10 @@
     },
     {
       "id": "original-convex-mesh",
-      "subject": "Original light-curve inversion mesh",
+      "survey": "original-convex-mesh",
       "status": "unresolved",
-      "finding": "Retained intake decision: No public original mesh found in the thesis record or its conference abstract. The 162P paper makes the shape available on request. This package uses published numeric constraints only.",
-      "revisitWhen": "The author or an archive releases the original mesh with version, coordinate frame and reuse terms.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-143p/source/reference/source-record.json",
-        "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-143p/source/reference/source-record.json"
       ],
       "checked": [
         {
