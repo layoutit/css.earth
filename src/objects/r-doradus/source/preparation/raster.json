@@ -108,7 +108,8 @@
             ]
           },
           "consumer": "sphere-photograph"
-        }
+        },
+        "offLimb": {}
       }
     },
     {
@@ -124,7 +125,7 @@
     }
   ],
   "emission": {
-    "offLimbSize": 600,
+    "offLimbSize": 1037,
     "limbSize": 512,
     "bodyDiameter": 496,
     "offLimbOutput": "r-doradus-context-{id}{suffix}.webp",
@@ -133,8 +134,8 @@
       "schema": "cssr-doradus-prepared-emission@1",
       "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
       "offLimbContext": {
-        "logicalSize": 600,
-        "source": "the same ALMA continuum image: its light outside the 59.8 mas disc, 30 percent of the flux, on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 125 mas field",
+        "logicalSize": 1037,
+        "source": "the same ALMA continuum image: its light outside the 59.8 mas disc, 31 percent of the flux, on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 125 mas field. Most of it is the restoring beam's spill from the limb: only 4.6 percent of the flux lies more than one beam beyond it.",
         "composition": "sky-plane image registered to the disc, mirrored and turned to the scene's handedness so its north meets the rendered pole",
         "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
         "runtimeAlphaProcessing": false
