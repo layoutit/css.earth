@@ -142,7 +142,7 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     if (topology.components !== 1 || topology.eulerCharacteristic !== 2) throw new Error('Estimated completion must close one nucleus.');
     completion = { ...completed.report, sourceFit, topology };
   }
-  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config));
+  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config), profile.interiorSlices ? 0 : SOLID_TRIANGLE_BLEED * BASE_TILE);
   const leaves = layout.plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
@@ -654,12 +654,13 @@ function textureQuantum(config: {raster?: unknown}) {
  * the top centre. Sizing the height by the apex's distance from the base midpoint keeps each texel within the square root of two of the
  * nominal density even for a thin, sheared face; the base is the edge that needs the fewest texels. The packed atlas, gaps included,
  * holds at most the body's budget of texels per face. */
-export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number) {
+/** `seamBleed` overlaps each triangle outward in CSS units to hide hairline cracks; a body with interior slices fills them instead and overlaps nothing. */
+export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number, seamBleed = SOLID_TRIANGLE_BLEED * BASE_TILE) {
   if (!Number.isSafeInteger(texelsPerFace) || texelsPerFace < 16 || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
   const triangles = faces.map((face, index) => {
     const plan = computeSolidTrianglePlan({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }, index,
       // The core planner takes CSS units, including its seam overlap.
-      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed: SOLID_TRIANGLE_BLEED * BASE_TILE },
+      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed },
       { primitive: 'corner-bevel', includeColor: false, matrixDecimals: 9 });
     if (!plan) throw new Error(`Radial face ${index} failed PolyCSS triangle preparation.`);
     // The planner's canonical leaf maps its bottom corners and top centre to the overlapped triangle.
