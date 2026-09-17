@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa5929b96f10ea860661fbb52b21ea7d7d6043d7adab98712574d8ae1f033308"
+    "sha256": "cbe3b3c8deb920da74bb0d79bb3801a76ce32338320f8f2d296c7a6e7a74d901"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8ff0f357268c65fbcaa9c5460fe08d2bf1fa13eb0603c987a95d78f7a7f41cca",
+      "sha256": "7c0d0981d7043098c16b91d41c56528bb018aaf09d25f64b2a7dc7bf083a32dc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 82.5,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/bestla/bestla-model-surface@2x.webp",
-          "bytes": 56040,
-          "sha256": "502d6d13528fb67f4f07289dcfdec51b3e5f1679ce9c15c6b529afaf9f171f00",
+          "bytes": 62364,
+          "sha256": "ec40c48b3eaf5fea7a7a742fdce91ad30f673088710d27fe95e5ef078874e0c9",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "bestla",
-    "materialSha256": "45fb9e2ec45a72e263ebd93c7385ca520ba0db78b6c95c742f211e2e6dc2a1f9",
+    "materialSha256": "b1091abdfdb3b61be23a1ad594633d33bec7f4235bdaa6b6fea9a9150eeacf4a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "33096c831cc0c99adeafffdb8eff60f89f9de18c3f6be04c7a7a50dded029b5e"
+    "sha256": "b1c8bea2d5ca892342d23b113fa204dd018ea0eb31bf3dd755424947658ea22c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0fad2bfeed3b9dd265b914702c1de87cee564c48477a2b0dc13eb8a18b132129",
+      "sha256": "d5ce28874cf10f8eea67c790186781e76e713df25382a50c36383805d9916cfe",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8832.715607884573,
@@ -341,8 +340,8 @@
         },
         {
           "url": "/scenes/achlys/achlys-model-surface@2x.webp",
-          "bytes": 48438,
-          "sha256": "2380bbf23a3df1f77f276c493a670eb3dab2f88bcc69ddfed58b8ade2655f737",
+          "bytes": 58298,
+          "sha256": "612c7dc5f9455173fb3d390e7c688e12faca09da3fd3dfa8f645c86277b9a8d4",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +417,7 @@
   },
   "lastPreparation": {
     "objectId": "achlys",
-    "materialSha256": "cabb8c78db962db589c82f3298602c4d8e612887f7c4a519d83eb828fae84320",
+    "materialSha256": "7bbbe6d78d2c79b205dc6fa9a781574e47274f694fb6cb668663e7e8a1766e8b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

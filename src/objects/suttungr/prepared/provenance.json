@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1134ac330ec03d4556153728d55fe1e8603e0223c65a42fbb9f69cf68aa713e"
+    "sha256": "3176db4101c29e07ab333ce16ed18ff8b9e2be97b0458e85b786da1ad066fe98"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3069f69df643bec52ff3513eb7ba8d1096c335e89c471a61bd71751ab26b966f",
+      "sha256": "a73bbe28dbc2a1cd8836420ed57c20dacb3d977924fe91cd53628647396d4405",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 87.5,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/suttungr/suttungr-model-surface@2x.webp",
-          "bytes": 55520,
-          "sha256": "bf7fac45877d4e46321d2f36dfe9ae76d6ba8aa502ab3fea1a62a5d326c4fd47",
+          "bytes": 61380,
+          "sha256": "40f81de8698918000cb7c1ce4b1fbefdb25f6e0f963afd06b2a18431dbbd0bcd",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "suttungr",
-    "materialSha256": "729fab5cf2a65f3d4a2b3a401a3c1c76d00fe8bffbc08fe8b36ce893b3abfb4a",
+    "materialSha256": "0d96614f8925c4babf3e9a478f8295c9d2cef970d924fb097e6243aaa26089a8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

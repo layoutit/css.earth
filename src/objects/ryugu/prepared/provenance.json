@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c19c3e19d9ebdae551c9c6a8e6514e574ac8bfd75be6cf5d57473037c1399b3"
+    "sha256": "a85e12134df9d9f6332e781904e4bfc43f60b650de0c00f60002f462c38fc4f4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "db35b8b9ea6b6fd11ba9b0133ca04cf3621d7475e92172c9d12d04e2d4d70d38",
+      "sha256": "25181932ca0f62c11238914361dd2e32d9f237ee4f001998215760c3f25dc7e4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -262,8 +262,7 @@
               "compression": "gzip"
             },
             "faceBudget": 850,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -1154,8 +1153,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
-          "bytes": 999636,
-          "sha256": "2effc8de14b5cc13dfe1a9900d2ed70fed4b9161de0b48e4794ff551b19738bf",
+          "bytes": 1004624,
+          "sha256": "0e5674169e18634c20196102c3a51c2e2b24a0eccea98fe1eb5d2c42a61aac3b",
           "verification": "bytes-verified"
         }
       ],
@@ -1212,8 +1211,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-enhanced-surface@2x.webp",
-          "bytes": 4173682,
-          "sha256": "56aaf58de7e5c04b418695892e88cac9e5bac7662216502067b97613f3096cd6",
+          "bytes": 4234860,
+          "sha256": "da8dd9b465be1bb40d97fe483095ed7885ec1b798db8b42bcfc432379dd73b27",
           "verification": "bytes-verified"
         }
       ],
@@ -1282,8 +1281,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-close-up-surface@2x.webp",
-          "bytes": 1697736,
-          "sha256": "9cb9fe1f827c2bebbb9d7aa107703eb51952d6c1ce9ccb492c70e5992310f952",
+          "bytes": 1782574,
+          "sha256": "b1a83c21579e82e50913c9189df9ea0f3fca07689ac49505b29c0ee301879f4e",
           "verification": "bytes-verified"
         }
       ],
@@ -1337,8 +1336,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-surface@2x.webp",
-          "bytes": 1295984,
-          "sha256": "1ee247140b3f768061042fbaf4ede07849181451c6a29892f32e9aeb827f753f",
+          "bytes": 1307486,
+          "sha256": "e6f3e65bc8ed2e378ac2175313c96fc8c7a943c0c56a77d1a9d9ca44e4ca320e",
           "verification": "bytes-verified"
         }
       ],
@@ -1388,8 +1387,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-thermal-inertia-surface@2x.webp",
-          "bytes": 3326302,
-          "sha256": "60eb713656125ab408815a48a277f771062d30fe16cf54507b0569ae0be2006f",
+          "bytes": 3431978,
+          "sha256": "caad5bc7e6e08dc16366f9de3242ea38d7b8fa8cbf7ba78c5944f3acd566e315",
           "verification": "bytes-verified"
         }
       ],
@@ -1439,8 +1438,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-spectral-slope-surface@2x.webp",
-          "bytes": 3706304,
-          "sha256": "bb80694074dcb4069d14f906ec14043e2344574f4b6175d8ab9bb22f5715968c",
+          "bytes": 3722212,
+          "sha256": "439862137b38d8e34a37d398ecc075ea1c235dc3a80049d7d7d891bc465ed966",
           "verification": "bytes-verified"
         }
       ],
@@ -1472,8 +1471,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5269,
-          "sha256": "76080b6e12740cbd8bba02722d35a3c8e235e1a6ec457ac2c48e1b5cedafdc41",
+          "bytes": 5387,
+          "sha256": "0d786b4bbea3cd61c78e2c91c4aee14a32c04af8f4430b535809690ad7aa0ddf",
           "verification": "bytes-verified"
         }
       ],
@@ -1673,7 +1672,7 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "5637dd8a9254578894ee80cc647c93b6c6578a08d652f503c6c91f048ce1acc4",
+    "materialSha256": "02bcaec9748124ec2eb9530190adcb20ad395974470e776bd04c6efaf0aba838",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

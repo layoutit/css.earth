@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2e35e8421c7c68ad1300ba86473d872565c157fffb505d60830efb3dc4e355af"
+    "sha256": "1535c6bae670b922ed0f316cba99821c7415773fafa62e35c35d4e97a751dfe4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "04ffa6b62cf877657eb495decbd9274520530c37b4b55b0b56db4eb7c8e20495",
+      "sha256": "80e7c964284b314013eb12c5291b915b6c5b6bc93d4b1500bd568fafa0d559d6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -724,8 +724,7 @@
               "expectedFaces": 104192
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 1000,
               "maximumErrorMeters": 50,
@@ -3079,8 +3078,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-model-surface@2x.webp",
-          "bytes": 175838,
-          "sha256": "c3edf6545e061e2443564d1350869a3dee20435591ead1138cbcd2bfb3c332e0",
+          "bytes": 205198,
+          "sha256": "6a9a85fabf8553bd045439351d818f2ee4b26488e4c39af06e8f9fff56c90d7d",
           "verification": "bytes-verified"
         }
       ],
@@ -3147,8 +3146,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-albedo-surface@2x.webp",
-          "bytes": 1091110,
-          "sha256": "5b5a6210faab9ad3dc83cc4c763346731d358efd548e58950cfa20375664ef79",
+          "bytes": 1217120,
+          "sha256": "42f681e2cac7ffbfc2b8d09f0c244b462ac7b1a663e87384c2e105052dc509a9",
           "verification": "bytes-verified"
         }
       ],
@@ -3210,8 +3209,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-slope-surface@2x.webp",
-          "bytes": 482840,
-          "sha256": "d50d96248cdb0c39d41f10f26645a69839c248b0300164c236642facd1fb2b24",
+          "bytes": 469074,
+          "sha256": "66fca681eaf76dbd72c024308165de82e04f3707224438a0d5809ac8cb5690c4",
           "verification": "bytes-verified"
         }
       ],
@@ -3273,8 +3272,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-absorption-surface@2x.webp",
-          "bytes": 1090616,
-          "sha256": "24948ea8f2c2e281b87fa355b57ac352dc9badbb779829a586b9fa680b82fa29",
+          "bytes": 1214278,
+          "sha256": "38e00546b084aa360ee503e0e5793b1bd86783e676b11871dba9dcaae9e567f2",
           "verification": "bytes-verified"
         }
       ],
@@ -3336,8 +3335,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-ice-surface@2x.webp",
-          "bytes": 437456,
-          "sha256": "51a5bccd098bcc3130476ae1f5f812ee0dd5e3a4f2a9f375888e0ffa34efb443",
+          "bytes": 405084,
+          "sha256": "8c0d8a28bf1783c75eea8961566600ffd7d6d5d5b5f8cca0a86affc6b382252c",
           "verification": "bytes-verified"
         }
       ],
@@ -3386,8 +3385,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-regions-surface@2x.webp",
-          "bytes": 49548,
-          "sha256": "94aa45d4d0bae7a63d59a3cc6a0020b7eead3fd84ef846f06a5ee397f1b7c6c8",
+          "bytes": 53076,
+          "sha256": "a55522c8e0bd293d55e33dcef64417a104c9cc1f400f5ea88bfccb760ec6a677",
           "verification": "bytes-verified"
         }
       ],
@@ -3436,8 +3435,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-geology-surface@2x.webp",
-          "bytes": 259986,
-          "sha256": "96e9aecc6881d76a13ef82869879409a6581ccb036c27ee892799a00e31e854b",
+          "bytes": 243360,
+          "sha256": "6f00f008ba959bc7e9fcfae24110f66e8bd812ab28e9c34d8a2613a811e81c33",
           "verification": "bytes-verified"
         }
       ],
@@ -3496,8 +3495,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
-          "bytes": 1612998,
-          "sha256": "2e0292fda85e79bffd83da83a4bac9f947be9899bd1b8c015d4d67f861803db7",
+          "bytes": 1639578,
+          "sha256": "fa8d32a210c69b33c42d66f613d8b334803f329ee826748baab719210dca6919",
           "verification": "bytes-verified"
         }
       ],
@@ -3753,7 +3752,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-67p",
-    "materialSha256": "182def6afe9a2b5bfe12632ea39d57cd1ccae1d807cdaef4b02b2072c5ffc0e6",
+    "materialSha256": "1dbdf51939d9f9712a4ff629ce4b7fc7ade4c7cc54e57235eaab5fe9c8ccfe4a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

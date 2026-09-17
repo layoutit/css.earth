@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7f5a8186f4ccb33068977196f4d599407e98011d135712744273048b71edbe9d"
+    "sha256": "b7d8245bd2cb41f9af629537a80c44a26af4105615994bf3fe4f57cc18dc9a95"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5850898964d57afd95a2bb1987ada6e260a74b0af34eaa470a5774e862e6f98f",
+      "sha256": "02c2bc19bd1aa321854152fa4fd625e8cc810aebdc95a42067e36e76d141f9e1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 60,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/loge/loge-model-surface@2x.webp",
-          "bytes": 56322,
-          "sha256": "3186ddff824188f4bc5e59550472be793a715ee014c42b8ed52826925bf74b5e",
+          "bytes": 62902,
+          "sha256": "88c0fffe7750c12d64ea080efa485062a6f431f8c6ad15481f451815539745fe",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "loge",
-    "materialSha256": "ee76bd5f2a14f762d7a68638b7f7c47483e1b7bc446b3c3ca870af16802f8bf5",
+    "materialSha256": "a428d9f75e2bc0c5c94ac9292cea936b88e4f97ed98efef899b5458145d9369f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

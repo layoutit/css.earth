@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f22961787a74d781387c1cae11f9d7443e87fb22def23c7e7126099d55988628"
+    "sha256": "1958d4c5e05d73eb07e92c85bae3cc04f4b91d04abd712ed0a9dc7ec04cde00f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5b5e9a36724f685c0fc1b5a772672b17c8f96c4cc3ae34e44dabfab429ba6bf2",
+      "sha256": "e3007f15dac77309a09b16611e77d46049c9f6142f743887441f7598f89b0e68",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -225,8 +225,7 @@
               "expectedRecords": 16471
             },
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -1307,8 +1306,8 @@
         },
         {
           "url": "/scenes/ida/ida-normal-surface@2x.webp",
-          "bytes": 1561006,
-          "sha256": "445853d7ae6c5ac3b075738b95fcbbc05a892e959bc8204936260e9f61b38048",
+          "bytes": 1733006,
+          "sha256": "5235f435c22d09bf6a3fbeefb64e8f2dadbc635a254cff3b5725770e7ff4b761",
           "verification": "bytes-verified"
         }
       ],
@@ -1362,8 +1361,8 @@
         },
         {
           "url": "/scenes/ida/ida-elevation-surface@2x.webp",
-          "bytes": 331480,
-          "sha256": "e33a040f19472ad35260f68af3d3d0c6336ed01455301065a669b16589340575",
+          "bytes": 392234,
+          "sha256": "50343f00b26935f89407fa91459402e25d2f1dca414c233c6205cf3a487d7ea9",
           "verification": "bytes-verified"
         }
       ],
@@ -1420,8 +1419,8 @@
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
-          "bytes": 271808,
-          "sha256": "ca8c60f08d7f16417d0f632831925b9a5ab6adf1f185587694ccb59d92d68388",
+          "bytes": 279190,
+          "sha256": "f0ba128550ecb5b7e8c173cc42a955bcd5431b1ba0ed77a07d1e645ca391255b",
           "verification": "bytes-verified"
         }
       ],
@@ -1453,8 +1452,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4266,
-          "sha256": "e3f131ef3109b7bb7ca59a00582c1a099b19f57f99a7945154e8226263b88b04",
+          "bytes": 4384,
+          "sha256": "f9c9c14704b03d9b31a22ccd09f284862abf340f856967824ca0d90624e8213c",
           "verification": "bytes-verified"
         }
       ],
@@ -1578,7 +1577,7 @@
   },
   "lastPreparation": {
     "objectId": "ida",
-    "materialSha256": "91c9f9fee1766a34faa16d5a7edaf1cb74528738cef7f7ac37d49d2eee6fa5ec",
+    "materialSha256": "82d63a4f6a53e6f56168a1c45cad213d2c5a6305186521837e16e49f842baa17",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

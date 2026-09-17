@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e228782dc2ccdf9314d05a9d1b3207e7011cc7c4f1875234c00a7afbc1302ca"
+    "sha256": "0a5dbad8498399da15dc2cf99c5fcc9d2b59932a16f2c0aa6a99f029ff0a2391"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a387bf1837192c532599affe164a3f8b4d3ca5242f3fea16c819d212cf0c6ef3",
+      "sha256": "7bda572ac915dd2a8f999e458d9bb9bf723bfcc56e753f3e4b15f0cea627695c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -76,8 +76,7 @@
               "expectedFaces": 1266
             },
             "faceBudget": 1266,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -97,8 +96,7 @@
                 "expectedFaces": 101512
               },
               "faceBudget": 1200,
-              "tileSize": 64,
-              "atlasColumns": 16,
+              "texelsPerFace": 4096,
               "primitive": "u",
               "simplification": {
                 "method": "source-meshoptimizer",
@@ -565,8 +563,8 @@
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-tempest-shape-surface@2x.webp",
-          "bytes": 46276,
-          "sha256": "6e82dc482d752931f9cca7e2d8dc2de46a4d09f83f7b6ceb95bbcbe4469c45ff",
+          "bytes": 67012,
+          "sha256": "ba0074bb33dd44718ff342822d9fa49661bdeb728fd7d2b1d76d470accbfad95",
           "verification": "bytes-verified"
         }
       ],
@@ -610,8 +608,8 @@
         },
         {
           "url": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
-          "bytes": 40424,
-          "sha256": "a80cfdf3fe449ef06fe6d5aa7328d997845c058e51ded2cc1b68a23ec7e657aa",
+          "bytes": 61772,
+          "sha256": "a3461fa3b1522d03d39b698c0bf67244f3a55bc9e289da0a6f508ec09693378f",
           "verification": "bytes-verified"
         }
       ],
@@ -743,7 +741,7 @@
   },
   "lastPreparation": {
     "objectId": "dinkinesh",
-    "materialSha256": "e45ccedb3284117d8f2c083c34f28c3b354bd2216a9ab7d5269e2a2e75875008",
+    "materialSha256": "18d34a4b9cdb2e949a57917c034bf9d7b89e2c588227dae3d37a96d9d1a506a5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

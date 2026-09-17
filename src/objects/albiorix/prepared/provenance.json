@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8282cc1b1d936469bb0a5a61322a00b33b62b60861360336adf362405a789ef0"
+    "sha256": "1c141b06e3072f6e03926ca57e8d34f594f71c4ea220724a3764407b8f791bfe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9affeb72b9b1d7874d0f528a4a43ce972909799cbae42974a1d2ee0eb50946e5",
+      "sha256": "f81f9b4be8d9a1da38c7b8f46178f74efab34e6c1225e0d0da33121406e42edc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 357.5,
@@ -333,8 +332,8 @@
         },
         {
           "url": "/scenes/albiorix/albiorix-model-surface@2x.webp",
-          "bytes": 55948,
-          "sha256": "0db249ef96fde5e19e354e2415764e51aa02f958866edd6a32c0c7d4a7209850",
+          "bytes": 63420,
+          "sha256": "1b4618a3fd4880310fa44b582b2d86fc552df4979927dd8f34aeaea5c14a24ff",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +409,7 @@
   },
   "lastPreparation": {
     "objectId": "albiorix",
-    "materialSha256": "06a0b743a81cdfa28739d0cf44a095c0d85f3009d9f306f0b78e80b6d5bee732",
+    "materialSha256": "5b03338e0c61095c7966554687e1bc3dd8695117c0c98fd90eddad1f3809e42c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

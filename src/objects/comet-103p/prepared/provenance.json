@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "68e5546caa2c34d382410d0e067b7a7e349bf8b24aa97ec60059ebb7892fb1e9"
+    "sha256": "fa2628771445d16f8bd3e8ed5370f0a1b7b2a8c8c74ed7b857367d0d3844d8f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9884b18f19889d09b2dbe75eb402e422078440d63b5c1963c2f4a29092e270d6",
+      "sha256": "809e8601ef747fb2106f88100435272524facc79ed07d5a2535cf077c1021bb8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -238,8 +238,7 @@
               "expectedFaces": 32040
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -5684,8 +5683,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-model-surface@2x.webp",
-          "bytes": 126788,
-          "sha256": "cefcf7a9d95f5fde97b0f93d56565e3abb911ec075963ed95128aef42f4c6131",
+          "bytes": 149666,
+          "sha256": "c8ed83e7eb2445f723a3e0d834744edd8ebcbf9354a8ab8c55c932e65d9bfab5",
           "verification": "bytes-verified"
         }
       ],
@@ -5738,8 +5737,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-constraints-surface@2x.webp",
-          "bytes": 153770,
-          "sha256": "07a558afc468e1da71fc04fb067debe70aad4f2ff5303543fe4a1394bab4d299",
+          "bytes": 172254,
+          "sha256": "4b13729bbfcb2b63f93edf61c5cb499f4250fad2baf6020668aac4a4901120ce",
           "verification": "bytes-verified"
         }
       ],
@@ -5914,8 +5913,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-temperature-surface@2x.webp",
-          "bytes": 441686,
-          "sha256": "5d57057eff2291fe051a2600d332c7806b700b2d81b9f347fd133f58bb058d06",
+          "bytes": 347332,
+          "sha256": "8e04e1aa70b09e644d76e7f0f91f016b4e852755a58335b42026e0b5a09b932e",
           "verification": "bytes-verified"
         }
       ],
@@ -6085,8 +6084,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-spectral-slope-surface@2x.webp",
-          "bytes": 441918,
-          "sha256": "87e14686fbff5ae5100648c03f36babc89096fa039cbacaea816e9aacf910b72",
+          "bytes": 347412,
+          "sha256": "e5d33bb35e71409bc231acdcf0d0294913e71f23f582a021bbda06e6a5ea71ec",
           "verification": "bytes-verified"
         }
       ],
@@ -6144,8 +6143,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
-          "bytes": 275690,
-          "sha256": "3b92c1607dd090420aea33bfe9e6f6070b9e65959e2834fdd6c8eba519b5ce97",
+          "bytes": 274250,
+          "sha256": "774c5f5d6677efe4ade29369d1e003c8b4f8437b7e629d001faaa3a510347f2c",
           "verification": "bytes-verified"
         }
       ],
@@ -6324,7 +6323,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-103p",
-    "materialSha256": "3ddb65333c785d189033ea6964b402329b788b26d2e0caabd2cfb4ad48856602",
+    "materialSha256": "85dc5c234a049457ed394abe2d894cb42c68cb186e15567a9703b9352d9c4c05",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -161,8 +161,7 @@
         "expectedFaces": 3366134
       },
       "faceBudget": 850,
-      "tileSize": 128,
-      "atlasColumns": 16,
+      "texelsPerFace": 16384,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ebfd79b1c44ae590412dc5c309259decb7bc70305971eec2acc8327695149179"
+    "sha256": "7340973f1bd7502625aee39b0d2dd152cd75cae0f89cadafc3181f9c3f9dc7f6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f8bd8c0fc8685a933ffd43229d7d1b552f41a6a950b8a03fb0157c308cc1c287",
+      "sha256": "684feba5a39fab7b1f953cbcdb1b762e4fcceda988ce6c0ff103ff88e63d2918",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -313,8 +313,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -1346,8 +1345,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-surface@2x.webp",
-          "bytes": 454484,
-          "sha256": "c19c0941aa42da697721d9e4aee0290ed8601b68cd0c53b520d2850d870b1239",
+          "bytes": 471458,
+          "sha256": "399fec9d3f108084259021cfb08abb38dce4f022ac0937eebfa0628593f58bc9",
           "verification": "bytes-verified"
         }
       ],
@@ -1398,8 +1397,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-surface@2x.webp",
-          "bytes": 349196,
-          "sha256": "49a700dff7bf86a76887498f08548872d157697cde70c7a688a8f303f6cda7e5",
+          "bytes": 345112,
+          "sha256": "bc63bcfc59cb2618e56b4edecd7eb9e6d67996156a9bb28a32415fbc72effa1d",
           "verification": "bytes-verified"
         }
       ],
@@ -1450,8 +1449,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-slope-surface@2x.webp",
-          "bytes": 2380766,
-          "sha256": "631da1b8ad9eab19cde87f260b6ac14e0a8364e08f3e8bd7df696af0c54b8f1c",
+          "bytes": 2478208,
+          "sha256": "75bd429f26e66738a962d360abbdd1f84e5be1e0c1739441b98de1369a67c76e",
           "verification": "bytes-verified"
         }
       ],
@@ -1494,8 +1493,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
-          "bytes": 59474,
-          "sha256": "9d563c5ff59af5fd24eb71153fd0a7314cf4890ee4c6bbe1db6ea843869b6f10",
+          "bytes": 78758,
+          "sha256": "d922d80941b7b0061a453496427fcbf9077863521c6aaf90211b06ff41884fd5",
           "verification": "bytes-verified"
         }
       ],
@@ -1546,8 +1545,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-draco-surface@2x.webp",
-          "bytes": 1211894,
-          "sha256": "b58c4d92abdfb6403f4e722d153c14e79a650b6a55e7fab1eb06294e18fe5668",
+          "bytes": 939838,
+          "sha256": "e1bdf5593b227d38d064b918ca539a4b0f3159badf69304e16c40334bdff31bf",
           "verification": "bytes-verified"
         }
       ],
@@ -1579,8 +1578,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7784,
-          "sha256": "5f5dfb1ffa0779056fca5f6eedfb298b563430e1113a9a8277a0837ab86dcd19",
+          "bytes": 7902,
+          "sha256": "44a57ff814d1d135a6d3696e99985849962437c1b924fce0011e3b6853d05d30",
           "verification": "bytes-verified"
         }
       ],
@@ -1755,7 +1754,7 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "e81245af285b8cccba83920a861557e7ad1788e20fa3083b541ea413f8df30c6",
+    "materialSha256": "1fc968d5cc26d569b422d0c32df34b885f0108dc14f98ca8268c466abe3f2e84",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

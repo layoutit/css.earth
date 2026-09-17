@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c05fa5bff55586dfdfa0981441ae3c7727547e85aab7cb37147224420550128"
+    "sha256": "3066e3f6556c46ee2791ffe653b1087c6765c7c0045c9b1784ef750e069daf18"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ee67e871d646f424e7ad7ac587af5b4c291b979e64259f0021f239a671727d9c",
+      "sha256": "a603c2d19ea999d6ffb5932a501d3d0f0bc0996b53e25655a3b7ae30e5886431",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1500,
@@ -356,8 +355,8 @@
         },
         {
           "url": "/scenes/portia/portia-model-surface@2x.webp",
-          "bytes": 56192,
-          "sha256": "84252a62810d7cdb0bf89e974455f881ea10319833cc8ebddc213a958a95ecf3",
+          "bytes": 64888,
+          "sha256": "8371b9ac6a0bc5e96df738cb0d1272db8d8d2676e978a8f9df321cd8937a47c3",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "portia",
-    "materialSha256": "6e305f27dbc6812cafe0e69f1ef2365cc33ce1da5954c3d1beac310cef5dd214",
+    "materialSha256": "a6f31efa1d45a8b5a6dda3d56b3ff2c44b2a91fa8d625f449f5e0e5211f01eae",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

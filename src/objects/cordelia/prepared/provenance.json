@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eab5c14ee91013b90c99fe204d91ff992ef8e1db0041d59790cc1d347374d786"
+    "sha256": "ded069545779259450b6405b8dac450b8dc4d0511a2a10b209945b05eefa0e82"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e6144572cb4f41325e25b1c5a4db2bf961fd85e0fe8ac09fa9251d035b36dfb7",
+      "sha256": "99424c110afb08b108c8fff0e01fe3d3d9c8f3002911fcfceb69ce83cd48e0f1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 450,
@@ -343,8 +342,8 @@
         },
         {
           "url": "/scenes/cordelia/cordelia-model-surface@2x.webp",
-          "bytes": 55576,
-          "sha256": "1e2b630ab42bad3bf6a86ef92d9e69fff2918fd5bf0323dbaf678bda0514eb4b",
+          "bytes": 60742,
+          "sha256": "1db1a6c7124502f47b1caa08781937100f8045398e53a6cffe8042fee1b002f3",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "cordelia",
-    "materialSha256": "1e7a64d034d4ff570616386c5b65c142cac3e593e8be06bf45b8d5cec7793e62",
+    "materialSha256": "443c71852b60ce3d7d690b0504a46c29f66576f7fcc22afefe1bfa9a9a6b2fec",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

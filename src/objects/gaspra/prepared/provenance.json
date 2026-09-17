@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "68a38bd9d7e936944dad039bac264c227b1d42318a2ed7f776777c1e490d0ebc"
+    "sha256": "7eb3262f432528dd61d77bd896d61f603d097e5b6039f05f30b1b4078977234f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "90193a15b4d1339b9ada3687b9247d9d0623b03a0c787c2326500b584f58dea5",
+      "sha256": "83679163dfd24b2c16c1599f92a23c848de01c1cb16355e390ecb1f1508cd4f7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -225,8 +225,7 @@
               "expectedRecords": 16471
             },
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -1325,8 +1324,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
-          "bytes": 708436,
-          "sha256": "aa441403fbd65f7cb2ccd8d4217fa7d5b49111aec5cdde90aab4d5a003ee9a44",
+          "bytes": 703350,
+          "sha256": "ab77f49e5aa7519800d14cfbe82472b571a3d6bc5016a9a7e865116a12f5820e",
           "verification": "bytes-verified"
         }
       ],
@@ -1380,8 +1379,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
-          "bytes": 271942,
-          "sha256": "86ef94c2cd16adc212240f44b3f0c15b943934b20453c593dc96e38430bac270",
+          "bytes": 337794,
+          "sha256": "a74a33d98556edffbd56f2ed1389ffc71eefe2277ff7ea665de1553ac14d3cb2",
           "verification": "bytes-verified"
         }
       ],
@@ -1438,8 +1437,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
-          "bytes": 223214,
-          "sha256": "eb5fe9a6c6057a343f17272971ebab5c742e861e74764273151ffe05a656fff6",
+          "bytes": 232904,
+          "sha256": "a025a05ca0435883d985887051c2b7864b4d80d0ff83eaf5720f7a1cc24e245a",
           "verification": "bytes-verified"
         }
       ],
@@ -1471,8 +1470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7151,
-          "sha256": "d66cdc55bf4de6ce45ef3858165153232e1ca14ce5e1eda81f96397a0e05bc5d",
+          "bytes": 7269,
+          "sha256": "9b13d7d6f978661c1d9bb3d85c1e3121c20ff12ada41b0a4cf91fdf22db32d1f",
           "verification": "bytes-verified"
         }
       ],
@@ -1596,7 +1595,7 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "b1204f7e48f5a8de16469870b5ba6de5c8f491a06a23a373b07af3b24fec40ca",
+    "materialSha256": "3709f39d5fcf4b4ff4b99f52cb5bf789d25d90b1548a8206484a55f8401ef595",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0daf9b1ce6e152c93a4459b6a04ed5bb06ecdfafb966f245608c48de4efa57b"
+    "sha256": "8c0e3344ab67a57b66f6f6071b134599c6debaa9d4fd53fb6ccf4c92567e60d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bdd9705bf96e2be50949b9a921215fe5e48553c324c0491194c61429224087af",
+      "sha256": "d95057561603fdcdf112b5ab863e011215e75b28bc7086a0e6af1ab0ae92ac80",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1500,
@@ -369,8 +368,8 @@
         },
         {
           "url": "/scenes/galatea/galatea-model-surface@2x.webp",
-          "bytes": 54276,
-          "sha256": "452e487907cd7457165cff799566b6139d708b72c9030bebbe78f4eb12fb0cd3",
+          "bytes": 63156,
+          "sha256": "fc287d9ddb9695819781c3172ecc896adf1d77b217eceb4b9f9009e26ffa1495",
           "verification": "bytes-verified"
         }
       ],
@@ -446,7 +445,7 @@
   },
   "lastPreparation": {
     "objectId": "galatea",
-    "materialSha256": "834cce150f18f569a0605e0ecebff55a59fce79117ddc576ba58c63b0007335b",
+    "materialSha256": "9f8fe34ebd4ef547c518e20c4e40d2744c314581569d0517d8e264d0b72361aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

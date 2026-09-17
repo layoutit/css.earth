@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7e32b06f59a379146479e2c802e9cd17fa5c0bfd510a67d9a50b98896069bbd"
+    "sha256": "ff52112e151987032d295d8e7a7d06ecec677405e1b1075beb2732c5f4f10dad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e6b59ef59269429a9bc6db8f1b52822f7e1691cd68e27b20ae5842cc67f6efe7",
+      "sha256": "da593321ea05fb384993a2f6de76746fdd9d496544021f32e7c5b3ec0f9fe8b7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -431,8 +430,8 @@
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-elevation-surface@2x.webp",
-          "bytes": 351038,
-          "sha256": "ace0a02ce77c7b4275dfae29be347d454f90ea54bbe8c4d8d6e4e32e22efba5e",
+          "bytes": 425580,
+          "sha256": "142e40d764907eb317b6e7ba5039d8c2a64567709b52ea9218b342d61b12b5db",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +474,8 @@
         },
         {
           "url": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
-          "bytes": 59966,
-          "sha256": "559b03c460bf001f147cda4032a77171d89ff804f42cf74e5a675b55492a4df9",
+          "bytes": 77504,
+          "sha256": "9e0d47275cd010869ca3c8189161ab8843423e78ff2c49a70f0d858d5aa67ca6",
           "verification": "bytes-verified"
         }
       ],
@@ -572,7 +571,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-ce26",
-    "materialSha256": "228138385d530530945cf0eb4b1d316550d5dcbcf5b07bc00e5f7bad1633f997",
+    "materialSha256": "5ae2c8d76c0a1634bed2570fa95fa526b56fa586250af83b0b8bf3f741b64f51",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

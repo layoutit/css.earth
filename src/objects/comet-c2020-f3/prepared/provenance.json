@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f04cec13c698492c2c2a8e80faab1135bd4307e89616be481f54db1e9a02e40f"
+    "sha256": "b7642010610c0dd73035228a6dfd2a8902cee693d940897ed1e871dc2081275b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "94ed6f6cb9c568fa78e61ffba9bc910ce85ca0931ee4525742fcaab6dd028dd4",
+      "sha256": "043bb9626b42d8098476706f9e8548d45d591f4597708743c5100a1d3958db8a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -314,8 +313,8 @@
         },
         {
           "url": "/scenes/comet-c2020-f3/comet-c2020-f3-model-surface@2x.webp",
-          "bytes": 41054,
-          "sha256": "4e293a52410446aeec18fb1dd73d1ae65af5fc1a80f62bc55af755e9b33c1188",
+          "bytes": 57208,
+          "sha256": "6b00048747af3091d054e9619a9cb24e8ba3f5b3d303ff3d8306d815b0001f57",
           "verification": "bytes-verified"
         }
       ],
@@ -361,7 +360,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2020-f3",
-    "materialSha256": "08243ccfd1a65a894b5fe4c370b1e01fe6e905131bb1ffeef45653037ade9077",
+    "materialSha256": "b7f5fc919cf2668fcfaf69d25fa3937c563ed8e4ac20bad85398dbce5cb985e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

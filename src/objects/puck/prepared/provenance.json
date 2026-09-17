@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "18a3951764de409dfb307ec345f40e42dfbe6bf673e91bd41bcd49a5ccade0d3"
+    "sha256": "ad378b79bca766fcca47fef13195ea215dceb7f287d2e8217fb8f6cef36c0ddc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "047ba9bb7a215d9195495e966ed70b53266e73298e9cc34696548b1d50dd1613",
+      "sha256": "f454353b59f1cc18e12abd681388d3ce03b60b4b9043fa92ec51ed860089584b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -123,8 +123,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1500,
@@ -437,8 +436,8 @@
         },
         {
           "url": "/scenes/puck/puck-normal-surface@2x.webp",
-          "bytes": 72638,
-          "sha256": "d2437789949157ab71b93bc2fe9fb8053718418fadb16c2ef940aaa832a876ea",
+          "bytes": 84138,
+          "sha256": "187c2a0e4c5555462315da26c98a930b4db3c0ba63a8e03206c8a10c474206e7",
           "verification": "bytes-verified"
         }
       ],
@@ -509,7 +508,7 @@
   },
   "lastPreparation": {
     "objectId": "puck",
-    "materialSha256": "9d61a111718ae9c852f90bed0e45d190675933fa4f74547372faf3346354b08f",
+    "materialSha256": "7a902d3643926eafead347382f60ca81ef80903520a5afd394135b18add3bd18",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

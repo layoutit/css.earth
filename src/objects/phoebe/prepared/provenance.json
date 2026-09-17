@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a4f376f28fa0b2e67265e235233dcee5ed9dec6890dba775b2ed9558206fbbe"
+    "sha256": "6842aa643846aa4b7136c165cd72bd52b1a9873261e78124eb96f3be69fb9750"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "caa71862f51b6dcbee9686d8ccda260ff28c3630a18ce7f38e466bc9accc4e2f",
+      "sha256": "abbcc7ca67482df92892b38b3f52cb7f22b5e40de46c00f1b154f6a65145ec98",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -511,8 +511,7 @@
               "expectedFaces": 196608
             },
             "faceBudget": 3500,
-            "tileSize": 128,
-            "atlasColumns": 32,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -1590,8 +1589,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-infrared-surface@2x.webp",
-          "bytes": 293422,
-          "sha256": "cc3f4a0439bcbd5ef9c86392817a1e00ed9fa94b9531756a41e1da06ebffd7e8",
+          "bytes": 323868,
+          "sha256": "a882ef8b8f8ab0aae01c42b278fd04128cb02ba38e77b0c2f13c00ebf0093e5d",
           "verification": "bytes-verified"
         }
       ],
@@ -1649,8 +1648,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
-          "bytes": 6997442,
-          "sha256": "e7c05e093131d0885c8b2a3d68d39e0b31124ff3b64c1e64fc166a901f327d13",
+          "bytes": 7777914,
+          "sha256": "5d2771b2a04b1e96870d2a0a250ef160c104d1058d7fb50617f5f72148e2f9be",
           "verification": "bytes-verified"
         }
       ],
@@ -1703,8 +1702,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-elevation-surface@2x.webp",
-          "bytes": 25764046,
-          "sha256": "83b434713bda50da8d89caccace7a9aaf6a86e4eb14e5c0f527dee3e272d1cb9",
+          "bytes": 28818678,
+          "sha256": "e999647d01d14ea4c71cb5c3838662d936a2d902bba51297c1aeb10f0401ebe6",
           "verification": "bytes-verified"
         }
       ],
@@ -1757,8 +1756,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-maplet-resolution-surface@2x.webp",
-          "bytes": 368656,
-          "sha256": "9ec14c15d1ef5c240fe623068ddab85ba9069d79925cffdd1784f710acaa215c",
+          "bytes": 390798,
+          "sha256": "73dfc28ffc89fa07d02bc4d22f2945e9410edaee0b71823c0bf325dd332edffa",
           "verification": "bytes-verified"
         }
       ],
@@ -1811,8 +1810,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-image-count-surface@2x.webp",
-          "bytes": 2451914,
-          "sha256": "4f70881a6295eebec8ba53d133879d6d04f4b16173f59e697151289d9f382735",
+          "bytes": 2481168,
+          "sha256": "c73fa78812e16a004e473c0b50ac7cc0dc396fc09e5e4075f9c9b507340abee1",
           "verification": "bytes-verified"
         }
       ],
@@ -1863,8 +1862,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-ice-absorption-surface@2x.webp",
-          "bytes": 306326,
-          "sha256": "35d4b6c771c85f84d9e7683dd76b1f21bf135ee08f67db20b155909e5f7133a1",
+          "bytes": 295502,
+          "sha256": "d4e05c2e098721cd204a36ac56697c100e454db4498f8acefb88293c8ac976e4",
           "verification": "bytes-verified"
         }
       ],
@@ -1909,8 +1908,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-iss-surface@2x.webp",
-          "bytes": 1048088,
-          "sha256": "c4ef432e0d4c97cb28b3cf14d954ff52b01d2e81da8a89ec0ffbe5390298cab3",
+          "bytes": 1051990,
+          "sha256": "6707d269ba030d87e9e4a18dfcf85c5c7049d243ce0258045dbf780ebbc684b1",
           "verification": "bytes-verified"
         }
       ],
@@ -1942,8 +1941,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6347,
-          "sha256": "916ebf4e32fc1aca671224b7c1cb7ca54bb35f868d4fa5069159335bd07fbf06",
+          "bytes": 6465,
+          "sha256": "1519f121008ae3c1e2250eb0caf3ef30c0e3c125b154b630d9a1a98aa8510ae6",
           "verification": "bytes-verified"
         }
       ],
@@ -2167,7 +2166,7 @@
   },
   "lastPreparation": {
     "objectId": "phoebe",
-    "materialSha256": "67e237e06a2310f8d97f6a4f210547c3c4c251863b42afee85e5bb757960b85f",
+    "materialSha256": "efa0c983f63d850c8abb8bab4fe99bf97b87829c08f73f916b3972562a28f2e7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

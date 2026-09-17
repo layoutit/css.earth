@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "69a568d9a5d5440e3ba2fb75afb5324f6e6d1237546e53854a3c30a8545a421f"
+    "sha256": "19877118a4f31092b7d2d85e9f8f69cba00acf78a9d1a8eb535af26e2b260502"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4821413131ea717bb81928e4f8f5b07f94ea5a582e925874436659fe971204b5",
+      "sha256": "20d1c59e9754cd4c1122a2c54e4f90b10327d921e9feb87a06d512ba651d50f3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 60,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/hati/hati-model-surface@2x.webp",
-          "bytes": 55314,
-          "sha256": "57388f90d0bb073fa428a1120160b5f212ef8ea6bfffb5469b289f1c315baeed",
+          "bytes": 63120,
+          "sha256": "fb91db931f9d506084ef392a9b7b0401b66b45e46ce1491b527541897098a264",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "hati",
-    "materialSha256": "0405b3be3ec1987f70559138c59f64df0aef87984e45245db86f5f3139d02cf2",
+    "materialSha256": "87f00fd6c558b3416fab6a886d7e1b34ee01eb613f769a8aa99d6e7c55e0d060",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

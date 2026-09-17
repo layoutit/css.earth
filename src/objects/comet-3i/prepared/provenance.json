@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afe679e600593ab2192351db689cae3f3c5c9858f75bbd8349606b5651ebc266"
+    "sha256": "803bd818882baa3877d982f0cda87cad159df7916cfb1f2f3234aeaa9e3d7510"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4f5ddbf4b32490a0b18c9004acf432b26ca6c4b6be4b3d73837a297b6d8aafc8",
+      "sha256": "abd45e125285797b89fc87d14d30b81c976bb23aedd91dd7f029395a382c6fd3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 34.432552986885625,
@@ -347,8 +346,8 @@
         },
         {
           "url": "/scenes/comet-3i/comet-3i-model-surface@2x.webp",
-          "bytes": 52108,
-          "sha256": "5a5e7580a103e89e352449890168633de675605afef00138b4e5c035aa2b5268",
+          "bytes": 62350,
+          "sha256": "ea7ff48b04ac6e86e9867b03db3ed7127983c272baa0935d67576c67c41edd71",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-3i",
-    "materialSha256": "d9bb8aaca3ec62ad60878ffb34549449bd9ec36c20e10045d05cdb689a515f77",
+    "materialSha256": "73a93d39b1fc26a9c8512ec56d734f3154c576e80e7b5cdc835a82b67c806f2d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

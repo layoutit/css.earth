@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c00062d0025ed3a517acb850b8874d70f1ccc5eda0f38716107d3d4d42bb650c"
+    "sha256": "7c456673e08c9b76e83f18cc28cf4c70e65577b9b8dc53bcf0d0fa7af43d7d3c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b3427601b71b418bf39e2bb53e029ab58d1bc831a3ad8890d8d2128f0ea26f85",
+      "sha256": "3a1dc59b12c292fd8f741642c7f529421b56acb70a619fc4419d15c77af26c89",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -120,8 +120,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -419,8 +418,8 @@
         },
         {
           "url": "/scenes/tantalus/tantalus-elevation-surface@2x.webp",
-          "bytes": 400654,
-          "sha256": "2a43cd13d855da14b2be6cafe94a09aede6dace73bd7e1c29609c81bd0008256",
+          "bytes": 467738,
+          "sha256": "7d903c19e42b83d4752f451fedd10d0b675d1b7cf1f23e405bbb07da71501b39",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +462,8 @@
         },
         {
           "url": "/scenes/tantalus/tantalus-shape-surface@2x.webp",
-          "bytes": 63710,
-          "sha256": "ac0ea20ba6dd2da3b196132b3701273d42c9c612d2df0a2a3f5707a0df3d3f35",
+          "bytes": 82070,
+          "sha256": "248b104aacf957b9d6ff2d76dc44c4e36b6eb9bb3774d11ed44791c3d9484f83",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "tantalus",
-    "materialSha256": "e69a74101b21c5d194d5b86ec0be8b51c250549356edc3925e2fa7a1678e1bc4",
+    "materialSha256": "3a29149cc98d726d29c5fbec49d33f26dbc0c2f4028e88d507b6c233d1407c89",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

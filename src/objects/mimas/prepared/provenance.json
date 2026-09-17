@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53c97cee687d7cdf8d3653821c9f8b6b8c189986972f1604beac46de7521ad01"
+    "sha256": "5aedbd8737db9c56e52121d9ddab9a17381f84530f896b828893adf8ecd7d01d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1528d9691fd7c73ea895524bf58fe52bf7ad38b63cb0382bb962216116ead37c",
+      "sha256": "0793f6ed2addc88d7a4dfd9b512b79a18b6e2b6fb8eeb00265f030ba01890053",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -142,8 +142,7 @@
               "expectedFaces": 196608
             },
             "faceBudget": 2000,
-            "tileSize": 256,
-            "atlasColumns": 16,
+            "texelsPerFace": 65536,
             "simplification": {
               "targetFaces": 720,
               "maximumErrorMeters": 4000
@@ -853,8 +852,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
-          "bytes": 6635886,
-          "sha256": "c2e727a8729b5c1580bc63811cf1a05facbcf583a70759aededbb7ac3e08f311",
+          "bytes": 7085140,
+          "sha256": "f6cf49d95a8866e83a2a8c71723b4cb49f4496fa55124dde9959666eccedc6f6",
           "verification": "bytes-verified"
         }
       ],
@@ -911,8 +910,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
-          "bytes": 8189424,
-          "sha256": "ffdee2030ac3cce437040c56bccd6b634ce287b6612770addfb4fdb2bebcf3f8",
+          "bytes": 8201540,
+          "sha256": "c951023397a8f839767c6dfc3171b8a8bb81702951d6afe7b5033b10144780b1",
           "verification": "bytes-verified"
         }
       ],
@@ -968,8 +967,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-elevation-surface@2x.webp",
-          "bytes": 2419150,
-          "sha256": "cd244dd80eb2a96e0d2c2714d7eff15a492306598eb5aa21ff88b5c9bc7763f5",
+          "bytes": 2539812,
+          "sha256": "8051da1ead2d0c7526cbceeeee70a1e7840e329b0c006627b02f0e30ec9fe723",
           "verification": "bytes-verified"
         }
       ],
@@ -1001,8 +1000,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6570,
-          "sha256": "33523eea4d0ffd1b203e6ed2c652c757eb9d5976e62cd01fbd37d00feedda3e2",
+          "bytes": 6688,
+          "sha256": "91d4ee436ae0a3e8357f119f08797e269ccfdc973a3afe819e2c83d89f42b131",
           "verification": "bytes-verified"
         }
       ],
@@ -1126,7 +1125,7 @@
   },
   "lastPreparation": {
     "objectId": "mimas",
-    "materialSha256": "dcecfe166e6ddf419de9a2fc3c8e8681779cd6218f722319ba3f6c0e77b435e8",
+    "materialSha256": "468c36af36d9b87ef6e94df099ccca0ebdf19889df7552f34234f95b3626f89e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

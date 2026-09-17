@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "de3f45faa5fbf2f302e4cad265d7f0469d1a9b480405f86e7bf8422d65d8afe0"
+    "sha256": "b376a619813e32d89c6338c004aadf19d1f00dd94f99071bb0704e7707e43f48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6f4c1af52535cdc933e8a56390030bc3e360db2f8ee83d35f35294b494acb639",
+      "sha256": "2174d176513ac1272452948c25a045a2f3555bc2341ad182ac5817bec9620dc5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 57.49999999999999,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/skoll/skoll-model-surface@2x.webp",
-          "bytes": 56604,
-          "sha256": "15bb95e02fd461f6ea75bea2984f1c17ca553ccb3b85171e9d38e44c30ee00b7",
+          "bytes": 61902,
+          "sha256": "49b33c4fdc1c1c186fe6bfd420c4c05c2b277b9d6e0dd48741d826778d8779a5",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "skoll",
-    "materialSha256": "69105aa8037bbfd6f2d99935e86a8d6bc0c31ba50b4aef438e6f330babb47075",
+    "materialSha256": "dbcd178a8c8518fbda70c3f31a02401aada3f5a3ddf8be404e928f91d5de5d97",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

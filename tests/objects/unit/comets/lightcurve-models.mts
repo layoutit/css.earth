@@ -19,7 +19,6 @@ export function testLightcurveModel(id:string,ab:number,bc:number,radius:number,
   const surfaces=modelSurfaces(await json(`${root}/prepared/surfaces.json`));
   assert.equal(surfaces.surfaces[0].missingPixels,config.raster.width*config.raster.height,'The entire nucleus has no photographic texels');
   assert.equal(surfaces.surfaces[0].appearance,SHAPE_MATERIAL.appearance);
-  assert.equal(surfaces.surfaces[0].layout.tileSize,64);
   assert.deepEqual(config.raster.observations,[]);
   assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true,'Shadows off must not bake directional shading into the grid');
   const points=new Map<string,boolean>(),edges=new Map<string,number>(),sampleErrors:number[]=[];

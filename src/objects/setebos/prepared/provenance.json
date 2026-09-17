@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c04714bce939b75ee5a9a515ee3127387a92a0d5238aae5f06735845bb1d65d3"
+    "sha256": "8ae92e71fedc21b0c93d5fbedbf53fd2e1b8a7562d720b71fa92998d5371daea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "092549639da9e87f2db74cc81337f5646d8a8555e0fc9d9c8d8010aab45162d3",
+      "sha256": "454af8c4c8a64d1ec89d17e542f8087b038cfdb57f399eb819c042a3941db91d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 587.5,
@@ -391,8 +390,8 @@
         },
         {
           "url": "/scenes/setebos/setebos-model-surface@2x.webp",
-          "bytes": 55712,
-          "sha256": "76e802d27385a269d569fdf239cb01e02b3ca5bd0b4a55e1d2c0b5d0991e120c",
+          "bytes": 63630,
+          "sha256": "6dfa5657e0455016355901a6c168dea99add3bfb04fcc8bd43082a57e1cad30b",
           "verification": "bytes-verified"
         }
       ],
@@ -468,7 +467,7 @@
   },
   "lastPreparation": {
     "objectId": "setebos",
-    "materialSha256": "60bf79b4bcce51e0abd736cf7e232f4c29af6e1660e6277214797b571fff3623",
+    "materialSha256": "beac0699b75439e3e913707c605b1689a27ef4a074b1287a57e28219e8752790",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

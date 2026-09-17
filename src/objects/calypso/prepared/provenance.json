@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a1ff15db7743573c477fbac587e965acbd64cc1beeeea3f5a7325d34e4c017d"
+    "sha256": "7c97f3b72d27f2f62b0323c6a38e72090e2ef9eb59a981e405f1651f5a14d2e4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "992b8f78e7320a4ed98e22abe7df3599d026682c874f17ef4e466bde493a277e",
+      "sha256": "c29786bdeb3a0639a36f697e5ca8d5fc7b2514afce23d3d0e9bf67f48a5ec421",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -365,8 +365,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "targetFaces": 600,
               "maximumErrorMeters": 400,
@@ -1580,8 +1579,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-elevation-surface@2x.webp",
-          "bytes": 395062,
-          "sha256": "f00ccd34e415eceb7610b18ed6bfbcc7f9afc92f602058b88ff5807a094b51da",
+          "bytes": 396014,
+          "sha256": "5ddd65800b34cf81dfce85d0c54e7fd4c679c7db81fd4a7824a1416259f0b3ab",
           "verification": "bytes-verified"
         }
       ],
@@ -1636,8 +1635,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-normal-surface@2x.webp",
-          "bytes": 316410,
-          "sha256": "9cbfb1c746bd470441213ffb9967b4403ba05c4512cb7763e7c1b351c049324a",
+          "bytes": 317458,
+          "sha256": "c34de3154ee0bb3187a68ff28b08d8759a7ebfac52f50a3e1ff6541efebbc790",
           "verification": "bytes-verified"
         }
       ],
@@ -1686,8 +1685,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-false-color-surface@2x.webp",
-          "bytes": 326960,
-          "sha256": "5025a5bf7c861da01e100b6410e670e7649dea6695d54ebc56cdf31bd0fc666e",
+          "bytes": 327038,
+          "sha256": "ee636fbf086b9b6e11070ed8598f863c731f6c45241e8d0a329593b967aa46d8",
           "verification": "bytes-verified"
         }
       ],
@@ -1808,7 +1807,7 @@
   },
   "lastPreparation": {
     "objectId": "calypso",
-    "materialSha256": "d9a880396f0d2d7cf358f0c8dfb14d9d7cbec6549824b45f7063584729c2cde3",
+    "materialSha256": "658d5bfbc1a9fc6988f6afed1274ce8029c56ce11409713a94e444bea9fbf997",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

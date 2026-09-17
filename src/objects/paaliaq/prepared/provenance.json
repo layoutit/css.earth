@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f44ec72ecf3306763618d42c5d7c02e647ab38cfc11db1799f1d74c324232c05"
+    "sha256": "36ec05f30919713ea8535d5dc279736d46fdf5d210ee339d0286f323bb29dceb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f94aac25387e338e8d8ba443f11120cd6d19dfb151fe60afaa1129884b5f79d",
+      "sha256": "fc8d62dcd1aecf8af1451f962c55f538bfc05c0fba693f1bd34852743f6c0ffc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 317.5,
@@ -359,8 +358,8 @@
         },
         {
           "url": "/scenes/paaliaq/paaliaq-model-surface@2x.webp",
-          "bytes": 57662,
-          "sha256": "2066e628416884e5ca26af642ea52473b80a408f9438fe4ccb95378421cdb630",
+          "bytes": 63214,
+          "sha256": "9ba0e56c273df7f3530e7e91bf1f164dd48d573effa4e9fac763839b444173bd",
           "verification": "bytes-verified"
         }
       ],
@@ -436,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "paaliaq",
-    "materialSha256": "1ee7c0223a1bc7b4677e6c999e51c8cc21ffd27f4a269fba83f4eadeba175a78",
+    "materialSha256": "d9c1ab909fb7d5e723978ccafec73390555e392495927f7c6dca0f869b553a7c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

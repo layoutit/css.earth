@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "91f6a673223260ff2e6528f72cb52493c45f1689c755a82f450a03a942c9d08d"
+    "sha256": "37e621355ca7bcddceefa559fbd125db9960659022892c0e4c7457edc7249826"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9ecf2b1edaa01ca7203495b81c8dd1a17a56490883eff61563bc0c306c231ac5",
+      "sha256": "52201522dca8668f02a2b2076171b570109bf5c5e47db8f1e3c562892c5c5216",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -491,8 +491,7 @@
               "expectedFaces": 196608
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -1825,8 +1824,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-normal-surface@2x.webp",
-          "bytes": 9768182,
-          "sha256": "ea182dc596c5b516c9f1af31ed07206b753342a9ad12b6f83ebd7b61d976eeca",
+          "bytes": 9271146,
+          "sha256": "ea77c3e790fd9ecdad7b896619fd7cac5f9286d763634e2997ceb0324d7f7d2e",
           "verification": "bytes-verified"
         }
       ],
@@ -1883,8 +1882,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-enhanced-surface@2x.webp",
-          "bytes": 13065564,
-          "sha256": "97bb188f33dfb333c7ac99427bd3833f7659bf679aa8ba8a51a50c65715a6808",
+          "bytes": 12584158,
+          "sha256": "4d0a3b7e8b46938a443f7d3467a63a1b55ff501e3e56b0a8bdd90169e1422d56",
           "verification": "bytes-verified"
         }
       ],
@@ -1954,8 +1953,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-infrared-surface@2x.webp",
-          "bytes": 58586,
-          "sha256": "01d161f1def6fca518f4a37db8f18b5891816de11f38c6f517f60ca3aeafeca0",
+          "bytes": 73816,
+          "sha256": "69c48f662f6fbd75e4a7132e36e1dba28555f1c4d6b3a77a13d143cebd42bdae",
           "verification": "bytes-verified"
         }
       ],
@@ -2016,8 +2015,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-elevation-surface@2x.webp",
-          "bytes": 3480644,
-          "sha256": "708bf83ed3773a589e2f91fa7f80261f29ae686b1b2d5e53bc40b7975e7b3861",
+          "bytes": 3463290,
+          "sha256": "74b5b60bde400253c93e12440dd7eb951522d1e4c36c6d0b3d7b77ccfe1d3cfa",
           "verification": "bytes-verified"
         }
       ],
@@ -2073,8 +2072,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-surface@2x.webp",
-          "bytes": 19324646,
-          "sha256": "9cee634e4a9620ac3df5749aac90d2293085c64035a56f9184319444f99720f0",
+          "bytes": 20400066,
+          "sha256": "485eab139fc2b29ca7764334ad5a72ac70866dd27494426911c7521deaac74b4",
           "verification": "bytes-verified"
         }
       ],
@@ -2125,8 +2124,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-ice-absorption-surface@2x.webp",
-          "bytes": 67856,
-          "sha256": "34597960ea92a99a696e95558b82ffd7fd38d6db40bbe95b7f232ac3436e309b",
+          "bytes": 72542,
+          "sha256": "74d9eb2bddf4c059c0a4581b86c0430e0eb9023c4ecb5a4491f616d95ea6a2bd",
           "verification": "bytes-verified"
         }
       ],
@@ -2169,8 +2168,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-shape-surface@2x.webp",
-          "bytes": 110902,
-          "sha256": "76eabb05f6ff2d57f9dae4f735028fdb211e088cf0b604b7e82d1f03a2503bcb",
+          "bytes": 133398,
+          "sha256": "6f281f1085eb225ae55cfafd1b21ccf2b471dba20eedd80da2760ff3d167cb3e",
           "verification": "bytes-verified"
         }
       ],
@@ -2215,8 +2214,8 @@
         },
         {
           "url": "/scenes/tethys/tethys-iss-surface@2x.webp",
-          "bytes": 1086580,
-          "sha256": "7889ac48405ad427737f5d829cf560256e4d2f592112f20166eb62905c9cdf89",
+          "bytes": 1056950,
+          "sha256": "40b5a829ecd8c9757a1fd731ead9ba209d06443978daf91699942f328a4232ba",
           "verification": "bytes-verified"
         }
       ],
@@ -2248,8 +2247,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6478,
-          "sha256": "9fe1d90d5b9402c67ae5a7dca61a54c8b3ebba6c3ce9adef1e755af413d16276",
+          "bytes": 6596,
+          "sha256": "e54b6225a2f2ec65ec5d9ddb7eca00002e09e00579dc5d9841baec1693006d25",
           "verification": "bytes-verified"
         }
       ],
@@ -2498,7 +2497,7 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "ed87d3799ae5fb8299a535a135f83d103e9ddc4f8366df5474460711ed95900b",
+    "materialSha256": "5cdca2d6999fb75bd56eb7ffd7c9b030a6aa80e002bb4616b2e627f8fc429a28",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

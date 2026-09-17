@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70765448c0b44e9874c665b736683ec9e5b6e80c1d0aa9ceb9eb7e3f50975b8a"
+    "sha256": "43dd106e74efc424bde2cb34907f674d237a63ec11a5f55ddac5b6e5a9aa7ae7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9759c58a6ba345f8b6f9687eccd7c1f307966c54253022353f6eaabb058a64ee",
+      "sha256": "afff10b518a6c638c6ef7849196293c76d63a8732f5f02cb7f057b4d14c33672",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 70,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/bebhionn/bebhionn-model-surface@2x.webp",
-          "bytes": 55124,
-          "sha256": "ca1aefb3cb5c3f410192810dbf5e64bdb3f075319aad64562a103b8e4e3fd78c",
+          "bytes": 62336,
+          "sha256": "a6eeffa3c3feecec45dc3a46c045ac9a42a3efd31e642ffb583db9028211bcb5",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "bebhionn",
-    "materialSha256": "dcfbe5ea793393808aed6c73fd14b771fa30f4e02942241f5ada358e7bd7ae28",
+    "materialSha256": "6e84df288fdbca8d846a6359f15180a38dc567d446d5e4e96b660f2591ab3d25",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7a4792cad62a957e428887a5f9c44e52afa2144ccad9d60ed723d99ded95d75"
+    "sha256": "17cebb9ae90477b0fab4a2ce1ac28125e501ad02d03616b030e6be34ff15a2af"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "67d5adc0dae30fc8f9275941ae769faca5dd2f6a436117c013fefe9d6454584e",
+      "sha256": "b94d05df463fc264a29fded4bef1550505b283430d30958efc9884c09d829fb4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1699.8071436355165,
@@ -351,8 +350,8 @@
         },
         {
           "url": "/scenes/bienor/bienor-model-surface@2x.webp",
-          "bytes": 47584,
-          "sha256": "7e5c33efea8377b880d68649fa69631a431d3f3963bfa1973867dfce4b8f2f70",
+          "bytes": 58508,
+          "sha256": "8613759f5c798c7b3a1519bbfb8e31e98493b19f001718efb4334b162184d161",
           "verification": "bytes-verified"
         }
       ],
@@ -428,7 +427,7 @@
   },
   "lastPreparation": {
     "objectId": "bienor",
-    "materialSha256": "4a0348848397d2a1c482e9018456b10893771e649a4cce47e788528a1ed80ad8",
+    "materialSha256": "b612e61911b671c2d5abd34ee12ce4569e11513c53452f136b9816ce37938366",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

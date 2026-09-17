@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d7c50902c010163e9d956170c3f7a19b58cd106c5d98fc71d15f441cf94ce27"
+    "sha256": "ab1685e3d94126cc0c9ad66ac6ce66e28f95ce3b8b63bf07184e2bcbf130d3c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9fff2932de348a824dae5cc9c9e0be49e55f812690d577c6623ab9794d91bcc0",
+      "sha256": "1c705c49e42b3bfc629898b42f6c721784ce864a479a6cb94a5b4242d1601a0a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 5183.755311464502,
@@ -330,8 +329,8 @@
         },
         {
           "url": "/scenes/huya/huya-model-surface@2x.webp",
-          "bytes": 55374,
-          "sha256": "34eaeadde0559b6a910e5031ae340beb0f29d96a2546acc40f01224951bcd118",
+          "bytes": 61994,
+          "sha256": "3f334bfc239281b1cac7def311d82d2fee3b04b35576e33562ea7be5fa26158c",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +406,7 @@
   },
   "lastPreparation": {
     "objectId": "huya",
-    "materialSha256": "5d2226ca111fb7f8946da1e33e1463f58b1605a3e44908dc944b38ee6f993d99",
+    "materialSha256": "8cfd41ac3a99dd76c340e24e25fecbfc8627448a0409cbd079b432dd6c08f719",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

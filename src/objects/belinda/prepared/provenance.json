@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "39a5c4b819959aae54c8e0fc4144481944961057e29bf06a06989b97d50bc5f7"
+    "sha256": "cd4c45130ab6574cf1b8b11d6b5796e72ecae4ac363f1cbbf1edc623aab0db30"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9220b4cc8f56350df13c6ccdec231aefa8f11d0882a7cf7bf7efb314b575035f",
+      "sha256": "dbf82a6d56d50d1210ed865d43f79271afa6dce391acbfbaafad8d1730b2c413",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 480,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 480,
@@ -390,8 +389,8 @@
         },
         {
           "url": "/scenes/belinda/belinda-model-surface@2x.webp",
-          "bytes": 51842,
-          "sha256": "3f3d247908755f7ffbb7387d541e01b395688225c6016ee4a9502820a75722ac",
+          "bytes": 60568,
+          "sha256": "99a4be6fa67214c4761b961a2c286ed57b65344971ef78797d0b5c7ddf749065",
           "verification": "bytes-verified"
         }
       ],
@@ -467,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "belinda",
-    "materialSha256": "57aaabbd9a27a55fbfb926181cd6512a996ce58e4a60f909a0b0edb12a52f76f",
+    "materialSha256": "179c21acdeedf5b3c780ee890fa0a976d3e3e14c4867d92dafb589b54ab2a2cd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

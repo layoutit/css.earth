@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1f8f82a3390d3035b6154214d767b07d15ab43e1c6812cf42c1cf4a745ffb84"
+    "sha256": "83375ed57fdaa31152a80c5ce95f7c5a5b6c0ae2ed50d4e5515f487ea632a0d1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a642e3c131da68ec29ab9edac291a3602184fe001c8de1c9eea6f1d5c370dbc",
+      "sha256": "d9ac474bebd9c2dbf563a4ebb7271692e883b3ea615e2fbb4d85ab140511b5b6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -117,8 +117,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 38.149339470168925,
@@ -471,8 +470,8 @@
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
-          "bytes": 66408,
-          "sha256": "a2b55c39e41b026444c6d4b4201a262149527cd3d65e0e740f9e5ca91205a928",
+          "bytes": 77532,
+          "sha256": "5e2c0909026c275c99ec7a2eb88f6dff09e37d8d8c5b80e792ef9f2f08c581c9",
           "verification": "bytes-verified"
         }
       ],
@@ -543,7 +542,7 @@
   },
   "lastPreparation": {
     "objectId": "polydeuces",
-    "materialSha256": "75e1c275a4db61fa36ccae32064c707bb13c533e356529890a8ee62b71c0c14d",
+    "materialSha256": "6502adf1d5cad0ffd4c23049e991ec65502cbd32fc7d514c18680400616986ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
