@@ -12,3 +12,17 @@ export function readLabWorkflow(value: unknown): LabWorkflow {
 export function supportsLabAlignment(subject: { density?: unknown; observationAlignment?: unknown } | undefined) {
   return Boolean(subject?.density || subject?.observationAlignment);
 }
+/** Saved material variants retain the processing context of their actual density owner. */
+export function densityReconstructionOwner(subjects: readonly {
+  id: string; sourceSubjectId?: string; density?: { processingPlan?: string };
+}[], id: string | null): string | null {
+  const seen = new Set<string>();
+  while (id && !seen.has(id)) {
+    seen.add(id);
+    const subject = subjects.find(item => item.id === id);
+    if (!subject) return null;
+    if (id.startsWith('reconstruction-')) { id = subject.sourceSubjectId ?? null; continue; }
+    return subject.density?.processingPlan ? subject.id : null;
+  }
+  return null;
+}

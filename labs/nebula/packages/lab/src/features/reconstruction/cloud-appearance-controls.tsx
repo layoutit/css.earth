@@ -13,10 +13,10 @@ const controls = [
     title: 'Small values emphasize fine detail; larger values emphasize broad structures. Radius at 1024px registered image width.' },
 ] as const;
 
-export function CloudAppearanceControls({ value, disabled, onChange }: {
-  value: CloudAppearance; disabled: boolean; onChange(value: CloudAppearance): void;
+export function CloudAppearanceControls({ value, disabled, reason, onChange }: {
+  value: CloudAppearance; disabled: boolean; reason?: string; onChange(value: CloudAppearance): void;
 }) {
-  return <fieldset className="cloud-appearance-controls" disabled={disabled}>
+  return <fieldset className="cloud-appearance-controls" disabled={disabled} title={disabled ? reason : undefined}>
     <legend>Cloud detail</legend>
     {controls.map(control => <div className="cloud-brightness-control" key={control.key}>
       <label htmlFor={`cloud-appearance-${control.key}`}>{control.label}</label>

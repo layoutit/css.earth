@@ -1,5 +1,5 @@
-/** Calibrated survey sky bands -> one asinh display raster and its TAN WCS.
- * The route owns every calibration factor and which acquisition each band may use; a recipe names
+/** Survey sky bands -> one asinh display raster and its TAN WCS.
+ * The route owns every calibration factor, or states that a band has none, and which acquisition each band may use; a recipe names
  * bands, a grid, one background and one peak percentile for every band, and one common display.
  * Each band is divided by its own measured range, the usual survey false-colour practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
@@ -10,6 +10,7 @@ import sharp from 'sharp';
 import { readFitsImage } from '../../fits.mts';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '../color-transfer.mts';
+import { maskSaturatedStars } from './plate-saturation.mts';
 import { binWiseAtlasTile, gridWcs, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, parseTilePins, readWiseAtlasTile,
   WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid, type WiseBand } from './wise-atlas-mosaic.mts';
 
@@ -17,15 +18,20 @@ export const HIPS2FITS = 'https://alasky.cds.unistra.fr/hips-image-services/hips
 const WISE_ATLAS_PIXEL_SR = (1.375 / 206264.80624709636) ** 2;
 const WISE = 'https://wise2.ipac.caltech.edu/docs/release/allsky/expsup/sec2_3f.html';
 const IRAC = 'https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/46/';
+const DSS = 'https://archive.stsci.edu/dss/';
+const HERSCHEL_HIPS = 'https://alasky.cds.unistra.fr/MocServer/query?ID=ESAVO%2FP%2FHERSCHEL%2F';
 
 interface SkyBand {
   readonly label: string;
   /** WISE HiPS carry a separate level per atlas tile (measured), so WISE is mosaicked from the atlas tiles. */
   readonly acquisition: { readonly kind: 'hips2fits'; readonly hips: string } | { readonly kind: 'wise-atlas'; readonly band: WiseBand };
-  /** Multiply a source value (DN or MJy/sr) to get diffuse surface brightness in MJy/sr. */
-  readonly toMJyPerSr: number;
+  /** Multiply a source value (DN or MJy/sr) to get diffuse surface brightness in MJy/sr; null when the
+   * published product has no documented flux calibration, so values stay in relative source units. */
+  readonly toMJyPerSr: number | null;
   readonly calibration: string;
   readonly reference: string;
+  /** Scanned plates saturate; their flat-cored stars and halos are measured and reported as no coverage. */
+  readonly saturates?: true;
 }
 
 /** WISE Explanatory Supplement section II.3.f Table 1 DN-to-Jy factors for 1.375 arcsec atlas pixels, which
@@ -39,6 +45,11 @@ export const SKY_BANDS: Readonly<Record<string, SkyBand>> = Object.freeze({
   IRAC1: irac('Spitzer IRAC 3.6 µm', 1, 0.91),
   IRAC2: irac('Spitzer IRAC 4.5 µm', 2, 0.94),
   IRAC4: irac('Spitzer IRAC 8.0 µm', 4, 0.74),
+  DSS2B: dss('DSS2 blue (SERC-J / POSS-II J)', 'blue'),
+  DSS2R: dss('DSS2 red (AAO-SES / SERC-ER / POSS-II F)', 'red'),
+  PACS100: herschel('Herschel PACS 100 µm', 'PACS100'),
+  PACS160: herschel('Herschel PACS 160 µm', 'PACS160'),
+  SPIRE250: herschel('Herschel SPIRE 250 µm', 'SPIRE-250'),
 });
 function wise(label: string, band: WiseBand, janskyPerDn: number): SkyBand {
   return { label, acquisition: { kind: 'wise-atlas', band }, toMJyPerSr: janskyPerDn / WISE_ATLAS_PIXEL_SR / 1e6, reference: WISE,
@@ -47,6 +58,19 @@ function wise(label: string, band: WiseBand, janskyPerDn: number): SkyBand {
 function irac(label: string, channel: number, factor: number): SkyBand {
   return { label, acquisition: { kind: 'hips2fits', hips: `CDS/P/SPITZER/IRAC${channel}` }, toMJyPerSr: factor, reference: IRAC,
     calibration: `CDS IRAC HiPS MJy/sr x ${factor} infinite-aperture surface-brightness correction (good to 10%).` };
+}
+
+/** Scanned photographic plates: plate density, not flux. The digitized values respond nonlinearly and differ
+ * from plate to plate, so the route claims no calibration and cannot remove plate-to-plate level steps. */
+function dss(label: string, colour: 'blue' | 'red'): SkyBand {
+  return { label, acquisition: { kind: 'hips2fits', hips: `CDS/P/DSS2/${colour}` }, toMJyPerSr: null, reference: DSS, saturates: true,
+    calibration: 'Relative photographic units: CDS HiPS of STScI digitized Schmidt plate scans. Plate response is nonlinear and plate-dependent; no flux calibration, linearization or plate-level matching is applied.' };
+}
+/** ESASky HiPS of the public Herschel Science Archive maps. Neither the HiPS record nor the hips2fits header declares
+ * a brightness unit, and the archive's PACS and SPIRE map products use different units, so no factor is claimed. */
+function herschel(label: string, hips: string): SkyBand {
+  return { label, acquisition: { kind: 'hips2fits', hips: `ESAVO/P/HERSCHEL/${hips}` }, toMJyPerSr: null, reference: `${HERSCHEL_HIPS}${encodeURIComponent(hips)}&get=record&fmt=json`,
+    calibration: 'Relative source units: ESASky HiPS of public Herschel Science Archive maps; the HiPS declares no unit. NaN outside the observed footprint stays missing.' };
 }
 
 type Pin = { readonly path: string; readonly sha256: string };
@@ -58,6 +82,8 @@ export interface SkyBandComposite {
   readonly backgroundPercentile: number;
   readonly peakPercentile: number;
   readonly display: AsinhBandDisplay;
+  /** How the composite reports pixels no band observed: as black bytes, or as an alpha channel a consumer can read. */
+  readonly coverage: 'black' | 'alpha';
 }
 
 const digest = (value: unknown, label: string) => { const text = requireString(value, label); if (!/^[0-9a-f]{64}$/u.test(text)) throw new TypeError(`${label} must be a SHA-256.`); return text; };
@@ -69,8 +95,12 @@ const repositoryPath = (value: unknown) => {
 
 export function parseSkyBandComposite(value: unknown): SkyBandComposite {
   const row = requireRecord(value, 'Sky band composite'), grid = requireRecord(row.grid, 'Sky band grid');
-  if (row.schema !== 'cssearth-sky-band-composite@1' || Object.keys(row).sort().join() !== 'backgroundPercentile,bands,display,grid,peakPercentile,schema')
+  const keys = Object.keys(row).sort().join();
+  if (row.schema !== 'cssearth-sky-band-composite@1' ||
+      (keys !== 'backgroundPercentile,bands,display,grid,peakPercentile,schema' && keys !== 'backgroundPercentile,bands,coverage,display,grid,peakPercentile,schema'))
     throw new TypeError('Unsupported sky band composite.');
+  const coverage = row.coverage === undefined ? 'black' : row.coverage;
+  if (coverage !== 'black' && coverage !== 'alpha') throw new TypeError('Coverage is reported as black bytes or as an alpha channel.');
   const size = (n: unknown) => { const v = requireFiniteNumber(n, 'Grid size'); if (!Number.isSafeInteger(v) || v < 16) throw new TypeError('Invalid grid size.'); return v; };
   const width = size(grid.width), height = size(grid.height), fovDeg = requireFiniteNumber(grid.fovDeg, 'Grid field');
   const center = requireArray(grid.centerIcrsDegrees).map(n => requireFiniteNumber(n, 'Grid centre'));
@@ -93,7 +123,7 @@ export function parseSkyBandComposite(value: unknown): SkyBandComposite {
   const percentile = requireFiniteNumber(row.backgroundPercentile, 'Background percentile');
   const peak = requireFiniteNumber(row.peakPercentile, 'Peak percentile');
   if (!(percentile >= 0 && percentile <= 50 && peak >= 90 && peak <= 100)) throw new TypeError('Background percentile must lie in [0, 50] and peak percentile in [90, 100].');
-  return { schema: row.schema, grid: { width, height, fovDeg, centerIcrsDegrees: [center[0]!, center[1]!] }, bands,
+  return { schema: row.schema, grid: { width, height, fovDeg, centerIcrsDegrees: [center[0]!, center[1]!] }, bands, coverage,
     backgroundPercentile: percentile, peakPercentile: peak, display: asinhBandDisplay(bands.map(band => band.band), row.display) };
 }
 
@@ -166,8 +196,9 @@ async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyB
     }
     if (outside.length) throw new Error(`${input.band}: pinned atlas tiles miss the grid: ${outside.join(', ')}`);
     const matched = matchTileBackgrounds(binned);
-    io.progress?.(`${input.band}: matched ${binned.length} tile levels over ${matched.pairs} overlaps`);
-    return { plane: mosaicTiles(binned, matched.offsets, recipe.grid), acquisition: { kind: 'wise-atlas', tiles: input.tiles, tileCount: pins.tiles.length,
+    io.progress?.(`${input.band}: matched ${matched.tiles.length} tile levels over ${matched.pairs} overlaps`);
+    for (const tile of matched.excluded) io.progress?.(`${input.band}: left out ${tile.coaddId} (${tile.pixels} pixels, all covered by joined tiles)`);
+    return { plane: mosaicTiles(matched.tiles, matched.offsets, recipe.grid), acquisition: { kind: 'wise-atlas', tiles: input.tiles, tileCount: pins.tiles.length, excludedTiles: matched.excluded,
       urlPattern: wiseAtlasUrl('{coadd_id}', route.acquisition.band), reference: WISE_ATLAS_REFERENCE, backgroundMatching: {
         method: 'One additive level per atlas tile, solved by least squares from the median difference in every overlap of at least 200 output pixels, with a zero-mean gauge (Montage mBgModel with constant terms).',
         reference: MONTAGE_BACKGROUND_REFERENCE, overlaps: matched.pairs, solverIterations: matched.sweeps,
@@ -190,9 +221,12 @@ export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
   const values = new Float32Array(count * bandCount), missing = new Uint8Array(count), bands = [];
   for (const [b, input] of recipe.bands.entries()) {
     const route = SKY_BANDS[input.band]!, { plane, acquisition } = await bandPlane(recipe, input, io);
+    // A saturated plate star is not galaxy light and not zero: its flat core and halo become no coverage.
+    const saturation = route.saturates ? maskSaturatedStars(plane, width, height) : undefined;
+    if (saturation) io.progress?.(`${input.band}: masked ${saturation.stars.length} saturated plate stars over ${saturation.maskedPixels} pixels`);
     let missingPixels = 0;
     for (let pixel = 0; pixel < count; pixel++) {
-      if (Number.isFinite(plane[pixel]!)) plane[pixel] = plane[pixel]! * route.toMJyPerSr;
+      if (Number.isFinite(plane[pixel]!)) plane[pixel] = plane[pixel]! * (route.toMJyPerSr ?? 1);
       else { missing[pixel] = 1; missingPixels++; }
     }
     // The survey products carry no absolute zero level: one measured background per band, and one
@@ -201,15 +235,30 @@ export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
     if (!(peak > background)) throw new Error(`${input.band}: no signal between the background and peak percentiles.`);
     for (let pixel = 0; pixel < count; pixel++)
       values[pixel * bandCount + b] = Number.isFinite(plane[pixel]!) ? (plane[pixel]! - background) / (peak - background) : 0;
+    const levels = route.toMJyPerSr === null ? { backgroundSourceUnits: background, peakSourceUnits: peak } : { backgroundMJyPerSr: background, peakMJyPerSr: peak };
     bands.push({ band: input.band, label: route.label, acquisition, toMJyPerSr: route.toMJyPerSr, calibration: route.calibration, reference: route.reference,
-      backgroundMJyPerSr: background, peakMJyPerSr: peak, missingPixels });
-    io.progress?.(`${input.band}: calibrated; background ${background.toFixed(3)} and peak ${peak.toFixed(3)} MJy/sr`);
+      ...levels, missingPixels, ...(saturation ? { saturation: { ...saturation, stars: saturation.stars.length,
+        maskedRadiusPixels: [Math.min(...saturation.stars.map(star => star.maskedRadius), Infinity), Math.max(...saturation.stars.map(star => star.maskedRadius), 0)],
+        brightestStars: saturation.stars.slice(0, 8) } } : {}) });
+    io.progress?.(`${input.band}: ${route.toMJyPerSr === null ? 'relative units' : 'calibrated'}; background ${background.toFixed(3)} and peak ${peak.toFixed(3)} ${route.toMJyPerSr === null ? 'source units' : 'MJy/sr'}`);
   }
-  const rgb = encodeAsinhBands(values, missing, recipe.display);
-  return { width, height, rgb, wcs: gridWcs(recipe.grid), missingPixels: missing.reduce((sum, value) => sum + value, 0),
+  const encoded = encodeAsinhBands(values, missing, recipe.display);
+  const channels = recipe.coverage === 'alpha' ? 4 as const : 3 as const;
+  let rgb = encoded;
+  if (channels === 4) {
+    rgb = Buffer.alloc(count * 4);
+    for (let pixel = 0; pixel < count; pixel++) {
+      rgb.set(encoded.subarray(pixel * 3, pixel * 3 + 3), pixel * 4);
+      rgb[pixel * 4 + 3] = missing[pixel] ? 0 : 255;
+    }
+  }
+  return { width, height, rgb, channels, wcs: gridWcs(recipe.grid), missingPixels: missing.reduce((sum, value) => sum + value, 0),
     evidence: { schema: 'cssearth-sky-band-composite-evidence@1', grid: recipe.grid, wcs: gridWcs(recipe.grid),
       backgroundPercentile: recipe.backgroundPercentile, peakPercentile: recipe.peakPercentile, bands, display: asinhBandEvidence(recipe.display),
-      limits: 'The survey products have no absolute zero level, so each band loses one measured background. Dividing each band by its own range means hue does not show physical band ratios. Missing pixels are black. Rows are reversed once from FITS order into top-down raster order.' } };
+      coverage: recipe.coverage === 'alpha'
+        ? 'Pixels no band observed, including masked saturated plate stars, carry alpha 0. Consumers read that channel as no coverage; their colour bytes are black and must not be read as zero brightness.'
+        : 'Pixels no band observed are black bytes; this composite has no coverage channel.',
+      limits: 'The survey products have no absolute zero level, so each band loses one measured background. Bands without a documented calibration stay in relative source units. Dividing each band by its own range means hue does not show physical band ratios. Missing pixels are black. Rows are reversed once from FITS order into top-down raster order.' } };
 }
 
 /** Read and verify a pinned recipe and every tile list it names. Callers run this before trusting a cached
@@ -239,8 +288,8 @@ export function skyBandCompositeFile(sourceId: string, compositeSha256: string) 
 export async function composeSkyBandPng(recipePin: { readonly path: string; readonly sha256: string }, io: SkyBandIo) {
   const { recipe } = await verifySkyBandRecipe(recipePin, io.input);
   const composed = await composeSkyBands(recipe, io);
-  const bytes = await sharp(composed.rgb, { raw: { width: composed.width, height: composed.height, channels: 3 } })
+  const bytes = await sharp(composed.rgb, { raw: { width: composed.width, height: composed.height, channels: composed.channels } })
     .png({ compressionLevel: 9, adaptiveFiltering: false }).toBuffer();
   return { bytes, sha256: sha256(bytes), width: composed.width, height: composed.height, wcs: composed.wcs, missingPixels: composed.missingPixels,
-    evidence: { ...composed.evidence, recipe: recipePin, output: { sha256: sha256(bytes), bytes: bytes.length, format: 'png', channels: 3, bitDepth: 8 } } };
+    evidence: { ...composed.evidence, recipe: recipePin, output: { sha256: sha256(bytes), bytes: bytes.length, format: 'png', channels: composed.channels, bitDepth: 8 } } };
 }

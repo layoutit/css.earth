@@ -1,4 +1,9 @@
-/** Offline fixed publisher TAN/SIN WCS check against an independently queried catalogue. No fitting. */
+/** Offline fixed publisher TAN/SIN WCS check against an independently queried catalogue. No fitting.
+ * Chance association scales with detection density, so a flat "controls below a tenth of the matches" limit
+ * penalises deeper or sharper rasters that detect more real sources. The control is therefore an excess over
+ * the chance rate measured at the same density: inside the tight radius (the protocol's median limit), the
+ * real matches must exceed the largest chance estimate by the declared margin. The chance estimate is the
+ * larger of the shifted/wrong-transform control counts and the analytic rate for the detected density. */
 import fs from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
@@ -39,6 +44,18 @@ function nearestIndex(points: Point[]) {
     return { index, distance };
   };
 }
+/** Association radius of the excess test, and the factor the real matches must beat the chance rate by. */
+export const CHANCE_RADIUS_PIXELS = .75, CHANCE_EXCESS_MARGIN = 5;
+/** Expected chance matches: one catalogue position matches by chance when any detection lands inside the radius. */
+export function analyticChanceMatches(catalogueCount: number, detections: number, radius: number, width: number, height: number): number {
+  return catalogueCount * (1 - Math.exp(-detections * Math.PI * radius * radius / (width * height)));
+}
+/** The density-aware control: real close matches against the largest chance estimate at the same detection density. */
+export function chanceExcess(closeMatches: number, controlCloseMatches: readonly number[], analytic: number) {
+  const expectation = Math.max(analytic, ...controlCloseMatches, 0);
+  return { closeMatches, expectation, ratio: expectation > 0 ? closeMatches / expectation : Infinity,
+    pass: closeMatches >= CHANCE_EXCESS_MARGIN * expectation && closeMatches >= 100 };
+}
 export async function verifyFixedCatalogue(sourcePath: string, expectedSha256: string, wcs: ImageWcs, cataloguePath: string) {
   validateImageWcs(wcs);
   const source = await fs.readFile(sourcePath), csv = await fs.readFile(cataloguePath);
@@ -66,19 +83,33 @@ export async function verifyFixedCatalogue(sourcePath: string, expectedSha256: s
   const used = new Set<number>(), matches = candidates.filter(p => { if (used.has(p.index)) return false; used.add(p.index); return true; });
   matches.sort((a, b) => a.row.ra - b.row.ra || a.row.dec - b.row.dec);
   const residual = stats(matches.map(p => p.distance)), reserved = matches.filter((_, i) => i % 3 === 0), check = stats(reserved.map(p => p.distance));
-  const controls = [[40, 0], [0, 40], [100, -70]].map(offset => ({ offsetNativePixels: offset, matchesWithin2_5Pixels: isolated.filter(p => nearbyStars([p.point[0] + offset[0]!, p.point[1] + offset[1]!], 2.5).index >= 0).length }));
+  const close = (points: Point[]) => points.filter(point => nearbyStars(point, CHANCE_RADIUS_PIXELS).index >= 0).length;
+  const controls = [[40, 0], [0, 40], [100, -70]].map(offset => {
+    const shifted = isolated.map((p): Point => [p.point[0] + offset[0]!, p.point[1] + offset[1]!]);
+    return { offsetNativePixels: offset, matchesWithin2_5Pixels: shifted.filter(point => nearbyStars(point, 2.5).index >= 0).length, matchesWithinChanceRadius: close(shifted) };
+  });
   const centre: Point = [(width - 1) / 2, (height - 1) / 2];
   const variants: Record<string, [number, number, number, number]> = { mirrorX: [-1, 0, 0, 1], mirrorY: [1, 0, 0, -1], rotate90: [0, -1, 1, 0], scale09: [.9, 0, 0, .9], scale11: [1.1, 0, 0, 1.1] };
-  const wrong = Object.fromEntries(Object.entries(variants).map(([name, m]) => [name, { matchesWithin2_5Pixels: isolated.filter(p => { const x = p.point[0] - centre[0], y = p.point[1] - centre[1]; return nearbyStars([m[0] * x + m[1] * y + centre[0], m[2] * x + m[3] * y + centre[1]], 2.5).index >= 0; }).length }]));
+  const wrong = Object.fromEntries(Object.entries(variants).map(([name, m]) => {
+    const moved = isolated.map((p): Point => { const x = p.point[0] - centre[0], y = p.point[1] - centre[1];
+      return [m[0] * x + m[1] * y + centre[0], m[2] * x + m[3] * y + centre[1]]; });
+    return [name, { matchesWithin2_5Pixels: moved.filter(point => nearbyStars(point, 2.5).index >= 0).length, matchesWithinChanceRadius: close(moved) }];
+  }));
   const quadrants = [0, 0, 0, 0]; for (const p of matches) quadrants[(p.row.point[0] >= width / 2 ? 1 : 0) + (p.row.point[1] >= height / 2 ? 2 : 0)]!++;
   const hull = matches.length >= 3 ? hullArea(matches.map(p => stars[p.index]!)) / (width * height) : 0;
-  const gates = { uniqueMatches: matches.length >= 100, allFourQuadrants: quadrants.every(v => v > 0), halfImageHull: hull >= .5, median: check.median <= .75, p90: check.p90 <= 1.5, shiftedControls: controls.every(c => c.matchesWithin2_5Pixels < matches.length * .1) };
+  const analytic = analyticChanceMatches(isolated.length, stars.length, CHANCE_RADIUS_PIXELS, width, height);
+  const excess = chanceExcess(matches.filter(p => p.distance <= CHANCE_RADIUS_PIXELS).length,
+    [...controls.map(c => c.matchesWithinChanceRadius), ...Object.values(wrong).map(c => c.matchesWithinChanceRadius)], analytic);
+  const gates = { uniqueMatches: matches.length >= 100, allFourQuadrants: quadrants.every(v => v > 0), halfImageHull: hull >= .5, median: check.median <= .75, p90: check.p90 <= 1.5, chanceExcess: excess.pass };
   return { receipt: { schema: 'cssearth-fixed-wcs-catalogue-direction-gate@1', pass: Object.values(gates).every(Boolean), gates,
     source: { path: sourcePath, sha256: hash(source), nativeDimensions: [width, height], channel: 'W1 blue channel', wcs }, catalogue: { path: cataloguePath, sha256: hash(csv), downloadedRows: lines.length, inFieldIsolatedCandidates: isolated.length },
-    predeclaredProtocol: { minUniqueMatches: 100, minQuadrants: 4, minHullFraction: .5, maxMedianNativeWisePixels: .75, maxP90NativeWisePixels: 1.5, maxEachShiftedControlFraction: .1, correspondenceWindowNativeWisePixels: 2.5, catalogueIsolationPixels: 5, catalogueMagnitudeRangeW1: [8, 11] },
+    predeclaredProtocol: { minUniqueMatches: 100, minQuadrants: 4, minHullFraction: .5, maxMedianNativeWisePixels: .75, maxP90NativeWisePixels: 1.5, chanceRadiusNativePixels: CHANCE_RADIUS_PIXELS, minChanceExcessMargin: CHANCE_EXCESS_MARGIN, correspondenceWindowNativeWisePixels: 2.5, catalogueIsolationPixels: 5, catalogueMagnitudeRangeW1: [8, 11] },
+    chanceExcess: { ...excess, analyticExpectedChanceMatches: analytic, detectionDensityPerSquarePixel: stars.length / (width * height),
+      method: 'Inside the chance radius, real matches must exceed the largest chance estimate by the declared margin. The estimate is the larger of every shifted and wrong-transform control count in that same radius and the analytic rate for this detection density, so denser detections raise the bar instead of failing a fixed ratio.' },
     refitted: false, allCoordinatesHeldOutFromAnyFit: true, uniqueMatchedStars: matches.length, reservedCheckCount: reserved.length, detectedStars: stars.length,
     residualNativeWisePixels: residual, reservedCheckResidualNativeWisePixels: check, residualArcseconds: Object.fromEntries(Object.entries(check).map(([key, value]) => [key, value * Math.abs(wcs.scaleDeg[0]) * wcs.referenceDimension[0] / width * 3600])),
     matchedSourceHullFraction: hull, quadrantMatchCounts: quadrants, shiftedControls: controls, wrongTransformControls: wrong,
-    limitations: ['Catalogue and image originate from the same infrared survey; catalogue positions independently check fixed publisher image WCS.', 'Display raster sampling is not native detector angular resolution.', 'Centroids use sharp sigma4 Gaussian highpass and blue W1; no image transform is fitted.', 'Association uses the unchanged 2.5-pixel window and LMC acceptance thresholds. Wrong-transform counts are reported; shifted controls gate acceptance.'] },
+    limitations: ['Catalogue and image originate from the same infrared survey; catalogue positions independently check fixed publisher image WCS.',
+      'The chance control measures association by coincidence at this raster\'s own detection density; it does not bound systematic errors that move real and control matches together.', 'Display raster sampling is not native detector angular resolution.', 'Centroids use sharp sigma4 Gaussian highpass and blue W1; no image transform is fitted.', 'Association uses the unchanged 2.5-pixel window and LMC acceptance thresholds; the chance-excess control gates acceptance.'] },
     matches: matches.map((p, i) => ({ designation: p.row.designation, ra: p.row.ra, dec: p.row.dec, predicted: p.row.point, detected: stars[p.index], residual: p.distance, reserved: i % 3 === 0 })), stars };
 }

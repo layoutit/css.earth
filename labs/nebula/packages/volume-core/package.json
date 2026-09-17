@@ -45,7 +45,9 @@
     "./fields/density-projection": "./src/fields/density-projection.ts",
     "./contracts/prepared-catalogue-stars": "./src/contracts/prepared-catalogue-stars.ts",
     "./coordinates/observation-envelope": "./src/coordinates/observation-envelope.ts",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./coordinates/density-placement": "./src/coordinates/density-placement.ts",
+    "./coordinates/catalogue-position": "./src/coordinates/catalogue-position.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json"

@@ -235,3 +235,36 @@ test('native discovery restores verified completed images without launching remo
     assert.equal(f.calls.length, 1);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
+
+test('a configured preserve treatment keeps every native pixel, runs no inference and refuses a tampered identity', async () => {
+  const f = await fixture(), preserveImplementation = 'labs/nebula/packages/reconstruction/src/star-removal/native.ts';
+  try {
+    await f.write(preserveImplementation, '// synthetic pinned identity treatment\n');
+    const reason = 'Compact 22 micron knots are dust emission, not stars.';
+    await f.json(planPath, { schema: 'cssearth-image-processing-plan@1', catalogue: 'catalogue.json',
+      alignmentReport: { path: 'proof/alignment.json', sha256: hash(await readFile(join(f.root, 'proof/alignment.json'))) },
+      selections: [], treatments: [{ id: request.imageId, stellarTreatment: 'preserve', reason }] });
+    const result = await f.remove({ ...request, action: 'apply' }) as any;
+    assert.equal(result.method, 'preserve');
+    assert.equal(f.calls.length, 0, 'the identity treatment never starts the NOX worker');
+    const token: string = result.applied.resultId, directory = join(f.root, `${cachePath}-applied`, token.split('.')[0]);
+    const saved = JSON.parse(await readFile(join(directory, 'result.json'), 'utf8'));
+    assert.equal(saved.treatment, 'preserve'); assert.equal(saved.reason, reason);
+    assert.equal(saved.applied.counts.removedPixels, 0);
+    const decoded = await sharp(await readFile(join(directory, 'diffuse.png'))).raw().toBuffer();
+    assert.deepEqual(decoded, await sharp(f.sourceBytes).removeAlpha().raw().toBuffer(), 'the preserved diffuse layer is the source itself');
+    assert.ok((await sharp(await readFile(join(directory, 'stars.png'))).raw().toBuffer()).every(byte => byte === 0), 'the star layer is empty');
+    assert.equal((await f.remove.resolveApplied(token, request.imageId, hash(f.overview))).value.layers.length, 2);
+    // A "preserved" result whose layers are not the identity of the source must never restore, even when its own hashes agree.
+    const starless = await sharp({ create: { width: 16, height: 12, channels: 3, background: '#0b1d2e' } }).png().toBuffer();
+    await writeFile(join(directory, 'diffuse.png'), starless);
+    saved.artifactSha256['diffuse.png'] = hash(starless);
+    const tampered = Buffer.from(JSON.stringify(saved));
+    await writeFile(join(directory, 'result.json'), tampered);
+    await assert.rejects(f.remove.resolveApplied(`${token.split('.')[0]}.${hash(tampered)}`, request.imageId, hash(f.overview)), /identity treatment/);
+    // Removing the configured treatment must not silently accept the preserved result as a NOX application.
+    await f.json(planPath, { schema: 'cssearth-image-processing-plan@1', catalogue: 'catalogue.json',
+      alignmentReport: { path: 'proof/alignment.json', sha256: hash(await readFile(join(f.root, 'proof/alignment.json'))) }, selections: [] });
+    await assert.rejects(f.remove.resolveApplied(token, request.imageId, hash(f.overview)), /treatment differs|identity treatment|stale/);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});

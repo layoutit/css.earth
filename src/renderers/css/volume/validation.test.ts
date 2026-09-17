@@ -79,3 +79,12 @@ function transformPoint(rotation: readonly number[], translation: readonly [numb
     translation[1] + dot(rotation, 3, [point[0] * scale, point[1] * scale, point[2] * scale]),
     translation[2] + dot(rotation, 6, [point[0] * scale, point[1] * scale, point[2] * scale])];
 }
+
+test('rotated bank normals must remain an orthonormal basis', () => {
+  const value = valid();
+  const normals = [[0, 1, 0], [-1, 0, 0], [0, 0, 1]];
+  value.stacks.forEach((stack, i) => Object.assign(stack, { normalUnits: normals[i] }));
+  expect(validatePreparedCssVolume(value).stacks[0]!.normalUnits).toEqual([0, 1, 0]);
+  Object.assign(value.stacks[1]!, { normalUnits: [0, 1, 0] }); expect(() => validatePreparedCssVolume(value)).toThrow('orthogonal');
+  Object.assign(value.stacks[1]!, { normalUnits: [0, 2, 0] }); expect(() => validatePreparedCssVolume(value)).toThrow('unit vector');
+});

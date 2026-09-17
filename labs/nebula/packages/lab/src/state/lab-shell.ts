@@ -16,6 +16,7 @@ export interface LabPresentation {
 export interface LabShellState {
   objectId: string; view: 'alignment' | 'reconstruction'; busy: boolean; alignmentAvailable: boolean;
   pose: string; alignment?: AlignmentState; presentation?: LabPresentation;
+  material?: { available: boolean; mode: 'neutral' | 'textured'; loading: boolean };
   originalOverlay?: { available: boolean; enabled: boolean; opacity: number; loading: boolean };
 }
 

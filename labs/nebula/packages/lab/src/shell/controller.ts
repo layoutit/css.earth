@@ -13,7 +13,7 @@ import { createCloudStarControls } from '../features/cloud-controls/cloud-star-c
 import type { ImageLayer } from '../features/legacy-viewer/overlay-variants';
 import { createRemovalStrengthStore, validateRemovalStrength } from '../features/star-removal/removal-strength.ts';
 import { createStarRemovalControls } from '../features/star-removal/star-removal-controls';
-import { supportsLabAlignment } from '../state/lab-workflows.ts';
+import { supportsLabAlignment, densityReconstructionOwner } from '../state/lab-workflows.ts';
 import type { ControlPortals } from '../ui/control-portals';
 import { labPresentation, type AlignmentState, type LabPresentation, type LabShellState } from '../state/lab-shell';
 
@@ -53,6 +53,7 @@ let emissionInspection: 'sources' | 'structure' | 'volume' = 'structure';
 let currentMode: 'photo' | 'density' = 'density';
 let activePose = 'front', alignmentState: AlignmentState | undefined;
 let originalOverlayState: LabShellState['originalOverlay'];
+let materialState: LabShellState['material'];
 let statusState: LabPresentation['status'] = { message: 'Loading…', hidden: false, error: false };
 let layerNote = '', overlayStatusDetail = '';
 function setStatus(message: string, hidden = false, error = false) { statusState = { message, hidden, error }; publishShell(); }
@@ -121,7 +122,7 @@ const visibleObjects = labObjects;
 function objectId(id: string | null) {
   const item = subjects.find(value => value.id === id);
   const source = visibleObjects.some(value => value.id === id) ? id! : item?.sourceSubjectId ?? id ?? '';
-  return visibleObjects.find(value => value.id === source ||
+  return visibleObjects.find(value => value.id === source)?.id ?? visibleObjects.find(value =>
     (value.id === 'lmc-clouds' && source.startsWith('lmc')) ||
     (value.id === 'smc-particles' && source.startsWith('smc')))?.id ?? visibleObjects[0]!.id;
 }
@@ -133,11 +134,11 @@ function publishShell() {
   const cloud = currentTab === 1 && currentMode === 'photo' && !busy && !modePending ? viewer?.getCloudParts() : null;
   options.onShellState({ objectId: objectId(sourceSubject), view: tabNames[currentTab]!, busy,
     alignmentAvailable: !sourceSubject || supportsLabAlignment(item), pose: activePose, alignment: alignmentState,
-    originalOverlay: originalOverlayState,
+    originalOverlay: originalOverlayState, material: materialState,
     presentation: labPresentation({ busy, alignment: currentTab === 0, densityMode: currentMode === 'density',
       densityAvailable: Boolean(item?.density), overlaysAvailable: Boolean(item?.density?.overlays),
       referenceAvailable: Boolean(item?.referenceDistanceUnits), observationInspection: observationInspectionActive(),
-      cloudAvailable: Boolean(cloud), reconstructionImages: currentTab === 1 && objectId(pendingSubject ?? sourceSubject) === 'lmc-clouds',
+      cloudAvailable: Boolean(cloud), reconstructionImages: currentTab === 1 && Boolean(densityReconstructionOwner(subjects, pendingSubject ?? sourceSubject)),
       sourceUrl: density?.sourcePageUrl ?? item?.sourcePageUrl, sourceCredit: density?.credit ?? item?.credit ?? '', status: statusState }) });
 }
 function observationInspectionActive(id = sourceSubject) {
@@ -184,8 +185,8 @@ function updateSubject(id: string) {
   publishShell();
 }
 function refreshReconstructionImages() {
-  const base = objectId(pendingSubject ?? sourceSubject);
-  const visible = currentTab === 1 && base === 'lmc-clouds';
+  const base = densityReconstructionOwner(subjects, pendingSubject ?? sourceSubject);
+  const visible = currentTab === 1 && Boolean(base);
   reconstruction.setContext(visible && viewer ? base : null);
   reconstruction.setBusy(busy);
 }
@@ -448,7 +449,7 @@ async function mountViewer(id: string, mode: 'density' | 'photo') {
     if (disposed || (pendingSubject && state.subjectId !== pendingSubject) ||
         (!pendingSubject && observationInspectionActive() && state.subjectId !== sourceSubject)) return;
     currentMode = state.mode;
-    originalOverlayState = state.originalOverlay;
+    originalOverlayState = state.originalOverlay; materialState = state.material;
     updateSubject(state.subjectId);
     activePose = state.pose;
     setStatus(state.status ?? '', element('viewer').dataset.ready === 'true' && !state.error);
@@ -473,7 +474,7 @@ try {
       registerReconstructionSubject(prepared.subject);
     } catch (error) { reconstructionImageError = error instanceof Error ? error.message : String(error); }
   }
-  const initialSubject = subjects.find(item => item.id === requestedSubject && (item.id.startsWith('lmc') || item.id.startsWith('smc') || item.sourceSubjectId === 'lmc-clouds')) ?? subjects.find(item => item.id === objectId(requestedSubject))!;
+  const initialSubject = subjects.find(item => item.id === requestedSubject) ?? subjects.find(item => item.id === objectId(requestedSubject))!;
   const mountTab = initialSubject.alignmentOnly ? 0 : supportsLabAlignment(initialSubject) ? initialTab : 1;
   selectTab(mountTab);
   updateSubject(initialSubject.id);
@@ -512,6 +513,7 @@ return { destroy, selectView: (view: 'alignment' | 'reconstruction') => selectTa
   chooseImage: changeOverlayChoice, chooseLayer: changeOverlayLayer, setRemovalStrength: changeRemovalStrength,
   showDensityOverlay: (enabled: boolean) => { viewer?.setDensityOverlay(enabled); renderSelectedOverlay(); },
   showImage: changeOverlayVisibility, setImageOpacity: changeOverlayOpacity,
+  setMaterial: (mode: 'neutral' | 'textured') => run(() => viewer!.setMaterial(mode)),
   showOriginal: (enabled: boolean) => run(() => viewer!.setOriginalOverlay(enabled)),
   setOriginalOpacity: (opacity: number) => run(() => viewer!.setOriginalOverlay(originalOverlayState?.enabled ?? false, opacity)),
   setPose: (pose: Parameters<Viewer['setPose']>[0]) => run(() => viewer!.setPose(pose)),

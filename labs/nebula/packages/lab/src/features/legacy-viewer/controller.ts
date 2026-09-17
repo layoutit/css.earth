@@ -1,3 +1,5 @@
+import { materialResources, sharesMaterialGeometry } from './material-resources';
+import { createMaterialSlots, resyncCloudSupport } from './material-slots';
 import { mountOverlayLeaves } from '@cssearth/volume-viewer/scene/image-plane';
 import type { AppliedStarLayers } from '../star-removal/star-removal-types.ts';
 import { parseOverlayVariants, variantsForImage, type ImageLayer, type OverlayVariant } from './overlay-variants';
@@ -26,6 +28,7 @@ export type ViewerMode = 'photo' | 'density';
 export interface LabState {
   subjectId: string; component: Component; axis: Axis; layer: number | null;
   layerCount: number; status: string; pose: CameraPose; mode: ViewerMode; error?: string; distanceUnits?: number;
+  material: { available: boolean; mode: 'neutral' | 'textured'; loading: boolean };
   originalOverlay: { available: boolean; enabled: boolean; opacity: number; loading: boolean };
 }
 
@@ -47,6 +50,9 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   let cloudSurface: { setOpacity(value: number): void } | null = null;
   let starLayer: ReturnType<typeof mountPreparedLmcStars> | null = null, starInfo: CloudStarContext | null = null;
   let originalOverlay: ReturnType<typeof mountReconstructionOverlay> | null = null;
+  const slots = createMaterialSlots();
+  // Tone bindings stay keyed by the mounted bank; a swapped lens maps its own texture paths onto those keys.
+  let bankDirectory = '', boundPaths = new Map<string, string>();
   let originalPending: Promise<void> | null = null, originalEnabled = false, originalOpacity = .5;
   let overlayCatalogue: DensityOverlayCatalogue | null = null, overlayBasePath = '';
   let overlayMeshes: HTMLElement[] = [];
@@ -65,6 +71,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   const densityCameras = new Map<string, ReturnType<typeof retainCamera>>();
   const report = () => onState({ subjectId: subject.id, component, axis, layer, layerCount, status, pose: view.pose, mode: currentMode,
     ...(error ? { error } : {}), distanceUnits: view.values.distance,
+    material: { available: currentMode === 'photo' && Boolean(subject.reconstructionNeutral), mode: slots.mode, loading: slots.loading },
     originalOverlay: { available: currentMode === 'photo' && Boolean(subject.reconstructionOverlay),
       enabled: currentMode === 'photo' && originalEnabled && Boolean(subject.reconstructionOverlay), opacity: originalOpacity, loading: Boolean(originalPending) } });
   const view = createInspectionCamera({ host, backend: inspectionCameraRenderer,
@@ -332,16 +339,77 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   async function applyCloudDensityResources(resources: ToneResource[], filter: CloudDensityFilter, isCurrent = () => true) {
     if (currentMode !== 'photo' || !cloud || !payload || host.dataset.ready !== 'true') throw new Error('Reconstruction is still loading.');
-    const version = loadVersion, valid = validateCloudDensityFilter(filter);
-    await toneResources.apply(resources, payload.resources.map(item => `${subject.directory}/prepared/${item.path}`),
-      () => !disposed && version === loadVersion && isCurrent());
-    if (!disposed && version === loadVersion && isCurrent()) {
+    const version = loadVersion, valid = validateCloudDensityFilter(filter), token = slots.begin('cutoff');
+    const bound = resources.map(item => {
+      const sourcePath = boundPaths.get(item.sourcePath);
+      if (!sourcePath) throw new TypeError('Density resources do not belong to the displayed material bank.');
+      return { ...item, sourcePath };
+    });
+    const current = () => !disposed && version === loadVersion && slots.current(token) && isCurrent();
+    await toneResources.apply(bound, payload.resources.map(item => `${bankDirectory}/prepared/${item.path}`), current);
+    if (!disposed && version === loadVersion && !slots.current(token)) throw new Error('Material changed before the density filter applied; apply it again.');
+    if (current() && slots.finish(token)) {
       cloudFilter = valid; starLayer?.setCloudSupport(cloudFilter, cloud.selection()); publish();
     }
+  }
+  async function setMaterial(mode: 'neutral' | 'textured') {
+    if (mode !== 'neutral' && mode !== 'textured') throw new TypeError('Invalid material mode.');
+    if (!payload || currentMode !== 'photo' || host.dataset.ready !== 'true' || !subject.reconstructionNeutral || payload.schema !== 'cssearth-css-volume@1') throw new Error('No interchangeable material bank.');
+    const token = slots.begin('material'), version = loadVersion, source = payload, directory = subject.directory, mountedDirectory = bankDirectory;
+    report();
+    try {
+      const descriptorPath = mode === 'neutral' ? subject.reconstructionNeutral.descriptor : subject.cloudParts?.descriptor ?? 'object.json';
+      if (!relativePath(descriptorPath)) throw new TypeError('Invalid material descriptor.');
+      const read = async (path: string) => { const response = await fetch(localFile(`${directory}/${path}`)); if (!response.ok) throw new Error('Prepared material unavailable.'); return response.arrayBuffer(); };
+      const descriptor = JSON.parse(new TextDecoder().decode(await read(descriptorPath)));
+      const replacement = await loadPreparedCssVolume(descriptor, { read });
+      const current = () => !disposed && slots.current(token) && version === loadVersion;
+      const resources = materialResources(source, replacement, mountedDirectory, directory, localFile);
+      await toneResources.apply(resources, source.resources.map(item => `${mountedDirectory}/prepared/${item.path}`), current);
+      if (current() && slots.finish(token, mode)) { // Unfiltered slots now: the applied cutoff and star support reset together.
+        host.dataset.material = mode; cloudFilter = resyncCloudSupport(starLayer, cloud);
+        if (cloud) host.dataset.cloudDensityFilter = JSON.stringify(cloudFilter);
+      }
+    } finally { if (slots.finish(token)) report(); }
+  }
+  /** Replace only the prepared material of a saved result that shares the mounted geometry; camera and leaves stay. */
+  async function swapMaterialSubject(next: typeof subject, version: number, token: number) {
+    const source = payload;
+    if (!source || source.schema !== 'cssearth-css-volume@1') throw new TypeError('No retained volume geometry to repaint.');
+    const current = () => !disposed && version === loadVersion && slots.current(token);
+    const read = async (path: string) => {
+      if (!relativePath(path)) throw new TypeError('Invalid prepared material path.');
+      const response = await fetch(localFile(`${next.directory}/${path}`));
+      if (!response.ok) throw new Error(`Missing prepared material: ${path} (${response.status})`);
+      return response.arrayBuffer();
+    };
+    const text = async (path: string) => JSON.parse(new TextDecoder().decode(await read(path)));
+    const replacement = await loadPreparedCssVolume(await text(next.cloudParts?.descriptor ?? 'object.json'), { read });
+    const nextCloud = next.cloudParts ? createCloudInspection(parseCloudCatalogue(await text(next.cloudParts.catalogue), next.id,
+      replacement.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.id)))) : null;
+    if (Boolean(nextCloud) !== Boolean(cloud)) throw new TypeError('Material bank changes the retained contribution scene.');
+    const resources = materialResources(source, replacement, bankDirectory, next.directory, localFile);
+    await toneResources.apply(resources, source.resources.map(item => `${bankDirectory}/prepared/${item.path}`), current);
+    if (!current() || !slots.finish(token, 'textured')) return;
+    subject = next; cloud = nextCloud; cloudBrightness = nativeCloudBrightness(); layer = null;
+    cloudFilter = resyncCloudSupport(starLayer, cloud);
+    boundPaths = new Map(resources.map(item => [item.replacementPath, item.sourcePath]));
+    originalOverlay?.destroy(); originalOverlay = null; originalPending = null;
+    host.dataset.material = slots.mode;
+    if (cloud) {
+      host.dataset.cloudSelection = JSON.stringify(cloud.selection()); host.dataset.cloudBrightness = JSON.stringify(cloudBrightness);
+      host.dataset.cloudDensityFilter = JSON.stringify(cloudFilter); host.dataset.cloudDensityReady = 'true';
+    }
+    status = `${replacement.resources.length} prepared images · material changed on retained geometry`;
+    host.dataset.subject = next.id; host.dataset.ready = 'true'; publish(); report();
+    if (originalEnabled && next.reconstructionOverlay)
+      void setOriginalOverlay(true).catch(failure => { if (current()) { status = 'Original overlay could not load'; error = String(failure); report(); } });
   }
   async function setSubject(id: string, cameraOverride: ReturnType<typeof retainCamera> | null = null, requestedMode?: ViewerMode) {
     const next = subjects.find(item => item.id === id);
     if (!next) throw new TypeError(`Unknown lab subject: ${id}`);
+    const materialOnly = cameraOverride === null && (requestedMode ?? currentMode) === 'photo' && currentMode === 'photo' &&
+      host.dataset.mode === 'photo' && host.dataset.ready === 'true' && Boolean(mounted) && subject.id !== next.id && sharesMaterialGeometry(subject, next);
     rememberDensityCamera();
     if (requestedMode !== undefined) {
       if (requestedMode !== 'photo' && requestedMode !== 'density') throw new TypeError('Unknown viewer mode.');
@@ -350,10 +418,18 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     const retain = currentMode === 'density' ? densityCameras.get(next.density?.directory ?? '') :
       cameraOverride ?? (subject.id !== next.id && subject.comparisonGroup !== undefined && subject.comparisonGroup === next.comparisonGroup ? retainCamera() : null);
     const directory = currentMode === 'density' ? next.density?.directory : next.directory;
-    const version = ++loadVersion;
+    // A swap keeps the shown material state until it commits; a full mount starts from fresh textured slots.
+    const version = ++loadVersion, swapToken = materialOnly ? slots.begin('material') : (slots.reset(), 0);
     view.stop(); status = 'Loading prepared object'; error = undefined;
     host.dataset.ready = 'false';
     report();
+    if (materialOnly) {
+      try { await swapMaterialSubject(next, version, swapToken); return; } catch (failure) {
+        if (disposed || version !== loadVersion) return;
+        // The retained scene was untouched; the ordinary full mount remains the authoritative path.
+        console.warn('Material swap unavailable; remounting the saved result.', failure); slots.reset(); host.dataset.materialSwap = 'remounted';
+      }
+    }
     // Keep the current scene intact until every selected prepared texture has decoded.
     const replaceSubject = () => {
       if (overlayCatalogue && subject.density?.overlays) overlaySessions.set(subject.density.overlays, getOverlayState());
@@ -414,7 +490,8 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       }));
       if (disposed || version !== loadVersion) return;
       replaceSubject();
-      payload = loaded;
+      payload = loaded; bankDirectory = directory;
+      boundPaths = new Map(loaded.resources.map(item => [`${directory}/prepared/${item.path}`, `${directory}/prepared/${item.path}`]));
       cloud = loadedCloud;
       if (cloud) { host.dataset.cloudSelection = JSON.stringify(cloud.selection()); host.dataset.cloudBrightness = JSON.stringify(cloudBrightness); }
       if (cloud) { host.dataset.cloudDensityFilter = JSON.stringify({ cutoff: 0, softness: .25, showRemoved: false }); host.dataset.cloudDensityReady = 'true'; }
@@ -453,7 +530,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   await setSubject(subject.id);
   return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayLayer, getOverlayLayer, installRemovalLayers, setOverlayPlacement, getOverlayState,
-    referenceView, fitCloud, setOriginalOverlay, applyToneResources, applyCloudDensityResources,
+    referenceView, fitCloud, setOriginalOverlay, setMaterial, applyToneResources, applyCloudDensityResources,
     getDensityOverlay: () => densityOverlayEnabled,
     setDensityOverlay(enabled: boolean) {
       if (currentMode !== 'density') return;

@@ -33,7 +33,10 @@ export interface LabSubjectRecord {
   stars?: string;
   /** Fixed original-image plane prepared from this saved result's exact image registration. */
   reconstructionOverlay?: string;
-  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; processingPlan?: string; candidateImageIds?: string[];
+  reconstructionNeutral?: { descriptor: string };
+  /** Saved results sharing this model identity differ only in prepared material banks. */
+  materialGeometry?: string;
+  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; processingPlan?: string; modelPlacement?: { path: string; sha256: string }; candidateImageIds?: string[];
     reconstructionReferenceImageId?: string; starAlignmentReference?: { path: string; sha256: string }; referenceFramingRadiusUnits?: number };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
@@ -74,6 +77,9 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
       throw new TypeError(`Lab subject ${record.id} has invalid reconstruction image metadata.`);
     }
   }
+  if (record.reconstructionNeutral && !relativePath(record.reconstructionNeutral.descriptor)) throw new TypeError('Invalid neutral material descriptor.');
+  if (record.materialGeometry !== undefined && (typeof record.materialGeometry !== 'string' || !/^[a-f0-9]{64}$/.test(record.materialGeometry)))
+    throw new TypeError('Invalid shared material geometry identity.');
   if (record.density?.processingPlan !== undefined && !relativePath(record.density.processingPlan))
     throw new TypeError(`Lab subject ${record.id} has an invalid density processing plan.`);
   const candidateIds = record.density?.candidateImageIds;

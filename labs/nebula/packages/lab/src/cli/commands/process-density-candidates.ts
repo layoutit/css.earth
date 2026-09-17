@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createStarRemover, resolveAppliedRemovalLayers } from '../../server/services/star-removal.ts';
+import { prepareConfiguredDensityPlacements } from '../../server/workflows/density/configured-placement.ts';
 import { bakeDensity } from '../../server/workflows/density/assets.ts';
 import { createReconstructor, reconstructionCatalogue } from '../../server/services/density-reconstruction.ts';
 
@@ -42,12 +43,13 @@ for (const id of imageIds) {
   assert.deepEqual(source.geometry, geometry);
   const gate = record(source.gate); assert.equal(hash(await readFile(text(gate.path))), gate.sha256);
 }
-await bakeDensity(root, text(record(subject.density).directory));
+if (record(subject.density).modelPlacement) await prepareConfiguredDensityPlacements(root, subjectId);
+else await bakeDensity(root, text(record(subject.density).directory));
 const directory = resolve(root, '.local/nebula-lab/density-comparisons', subjectId);
 await mkdir(directory, { recursive: true });
 const receipt = { schema: 'cssearth-density-comparison-receipt@1', recipe: { path, sha256: hash(recipeBytes) },
   subjectId, qualification: 'Projection-only fixed-density research comparison; not qualified 3D emission or application promotion.',
-  results: [] as { imageId: string; removalResultId: string; resultId: string }[] };
+  results: [] as { imageId: string; stellarTreatment: 'nox' | 'preserve'; treatmentReason?: string; removalResultId: string; resultId: string }[] };
 const remove = createStarRemover(root), reconstruct = createReconstructor(root);
 const controller = new AbortController();
 const abort = () => controller.abort(); process.once('SIGINT', abort); process.once('SIGTERM', abort);
@@ -63,15 +65,24 @@ try {
     };
     let removalResultId = candidate.removalResultId;
     if (removalResultId) {
-      await resolveAppliedRemovalLayers(root, removalResultId, imageId, candidate.sourcePreviewSha256);
-      console.log(`${imageId} verified saved native removal`);
-    } else {
+      // The catalogue finds a saved application by source hash alone. One made under a different stellar
+      // treatment, script or model no longer resolves, and this image is then processed again with its own.
+      const resolved = await resolveAppliedRemovalLayers(root, removalResultId, imageId, candidate.sourcePreviewSha256)
+        .then(() => true, (error: unknown) => { console.log(`${imageId} saved native result is not usable: ${error instanceof Error ? error.message : String(error)}`); return false; });
+      if (resolved) console.log(`${imageId} verified saved native removal`);
+      else removalResultId = undefined;
+    }
+    if (removalResultId) { /* The saved application stands. */ } else {
       const removal = await remove({ imageId, action: 'apply' }, controller.signal, progress);
       removalResultId = text(record(record(removal).applied).resultId);
     }
     assert.ok(removalResultId);
     const result = await reconstruct({ action: 'apply', subjectId, imageId, removalResultId, placement: candidate.placement }, controller.signal, progress);
-    receipt.results.push({ imageId, removalResultId, resultId: result.resultId });
+    // The saved native result states which stellar treatment produced the pixels this baseline was painted from.
+    const applied = record(await json(`.local/nebula-lab/star-removal-nox-applied/${removalResultId.split('.')[0]}/result.json`));
+    const preserved = applied.treatment === 'preserve';
+    receipt.results.push({ imageId, stellarTreatment: preserved ? 'preserve' : 'nox',
+      ...(preserved ? { treatmentReason: text(applied.reason) } : {}), removalResultId, resultId: result.resultId });
     const destination = resolve(directory, 'receipt.json');
     await writeFile(destination + '.pending', JSON.stringify(receipt, null, 2) + '\n');
     await rename(destination + '.pending', destination);

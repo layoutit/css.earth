@@ -1,3 +1,4 @@
+import { reconstructionProcessingCapability } from '../../features/reconstruction/reconstruction-capabilities.ts';
 import { runProcessingWorker } from '../workers/run.ts';
 import { implementationPins } from './implementation.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
@@ -15,6 +16,7 @@ import type { LabSubjectRecord } from '../../features/legacy-viewer/controller';
 import type { ReconstructionRequest, ReconstructionCatalogue, PreparedReconstruction, ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
 import { parseCloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
 import { lensSettingsHandler } from '../routes/lens-settings.ts';
+import { discoverFiniteLensBundle } from './finite-lens-bundles.ts';
 
 const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const cache = '.local/nebula-lab/reconstructions';
@@ -54,7 +56,19 @@ export async function readPreparedReconstruction(root: string, resultId: string)
   if (descriptor.id !== result.subject.id || descriptor.type !== 'density-volume' || !token(descriptor.prepared?.sha256))
     throw new TypeError('Saved reconstruction descriptor differs.');
   await pinned(root, `${directory}/${descriptor.prepared.url}`, descriptor.prepared.sha256);
-  return result;
+  const provenancePin = descriptor.properties?.preparation;
+  if (!token(provenancePin?.sha256) || typeof provenancePin.source !== 'string')
+    return { ...result, processing: reconstructionProcessingCapability(undefined) }; // Historical read-only results cannot gain a repaint capability.
+  const provenance = await json(root, `${directory}/${provenancePin.source}`, provenancePin.sha256);
+  const processing = reconstructionProcessingCapability(provenance.method);
+  if (result.finiteMaterial === undefined) return { ...result, processing };
+  const finite = result.finiteMaterial;
+  if (!record(finite) || !token(finite.modelResultId) || !token(finite.sourceResultId) ||
+      !record(provenance.finiteMaterial) || provenance.finiteMaterial.modelResultId !== finite.modelResultId || provenance.finiteMaterial.sourceResultId !== finite.sourceResultId)
+    throw new TypeError('Saved finite material differs from its pinned provenance.');
+  // Every lens of one finite model shares its geometry; the viewer still verifies each retained leaf before swapping.
+  return { ...result, processing, finiteMaterial: { modelResultId: finite.modelResultId, sourceResultId: finite.sourceResultId },
+    subject: { ...result.subject, materialGeometry: finite.modelResultId } };
 }
 export async function resolveReconstructionSubject(root: string, id: string): Promise<LabSubjectRecord | undefined> {
   const match = /^reconstruction-([a-f0-9]{64})$/.exec(id);
@@ -104,6 +118,7 @@ export async function reconstructionCatalogue(root: string, subjectId: string): 
       modified: (await stat(resolve(root, cache, id, 'result.json'))).mtimeMs }); } catch { /* A failed bake is not a completed choice. */ }
   }
   completed.sort((a, b) => b.modified - a.modified);
+  const finite = await discoverFiniteLensBundle(root, subjectId, readPreparedReconstruction);
   const candidates = [], remover = createStarRemover(root);
   for (const image of target.images) {
     if (subject.density?.candidateImageIds && !subject.density.candidateImageIds.includes(image.id)) continue;
@@ -117,13 +132,17 @@ export async function reconstructionCatalogue(root: string, subjectId: string): 
       if (resultId) removal = { sourceSha256: image.sha256, resultId, modified: 0 };
     }
     if (!removal) reason ??= 'Remove stars in Alignment first.';
-    const prepared = completed.find(({ result }) => result.imageId === image.id && result.removalResultId === removal?.resultId)?.result;
+    // A finite model owns the Model view: only its baked lenses are displayable, never an older density repaint.
+    const prepared = finite ? finite.lenses.find(lens => lens.imageId === image.id)?.result :
+      completed.find(({ result }) => result.imageId === image.id && result.removalResultId === removal?.resultId)?.result;
     candidates.push({ imageId: image.id, label: image.label, sourcePageUrl: image.sourcePageUrl, credit: image.credit,
       sourcePreviewSha256: overlay.sha256, removalResultId: removal?.resultId,
       placement: overlay.initialPlacement ?? defaultOverlayPlacement(), placementBasis: overlay.style.transform,
-      ready: !reason, ...(reason ? { reason } : {}), ...(prepared ? { prepared } : {}) });
+      ready: !reason, ...(reason ? { reason } : {}), ...(prepared ? { prepared } : {}),
+      ...(finite && !prepared ? { unavailable: 'No finite lens is baked for this image on the current model.' } : {}) });
   }
-  return { subjectId, overlayCatalogue: subject.density!.overlays!, candidates };
+  return { subjectId, overlayCatalogue: subject.density!.overlays!, candidates,
+    ...(finite ? { finiteModel: { modelResultId: finite.modelResultId, bundle: finite.bundle, ...(finite.skipped.length ? { skipped: finite.skipped } : {}) } } : {}) };
 }
 
 type Runner = (work: ReconstructionWork, signal: AbortSignal, progress: (value: RemovalProgress) => void) => Promise<{
@@ -192,12 +211,13 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       const slicesPath=`${cloudDirectory}/prepared/volume-slices.json`;
       const cloud={descriptor:cloudDescriptor,slices:{path:slicesPath,sha256:hash(await pinned(root,slicesPath))},
         provenance:densityRecipe,
+        ...(subject.density!.modelPlacement ? {modelPlacement:subject.density!.modelPlacement} : {}),
         ...(stars?{starAlignment:{wcs:referenceImage.wcs,
           alignment:{style:referenceOverlay.style,pivotCssPx:referenceOverlay.pivotCssPx,
             placement:referenceOverlay.initialPlacement??defaultOverlayPlacement()},
           provenancePin:referencePin??{path:subject.density!.overlays!,sha256:hash(await pinned(root,subject.density!.overlays!))}}}:{})};
       const pins = Object.fromEntries((await implementationPins(root, ['labs/nebula/packages/lab/src/server/workers/density-reconstruction.ts'])).map(pin => [pin.path, pin.sha256]));
-      const identity = { version: 4, request, stars, cloud, sourceSha256: image.sha256, frame, stellarPrior: densityRecipe,
+      const identity = { version: 5, subject, imagePresentation: { label: image.label, sourcePageUrl: image.sourcePageUrl, credit: image.credit }, request, stars, cloud, sourceSha256: image.sha256, frame, stellarPrior: densityRecipe,
         overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx }, pins };
       const resultId = hash(JSON.stringify(identity)), directory = `${cache}/${resultId}`, temporary = resolve(root, `${directory}.pending`);
       if (await stat(resolve(root, directory, 'result.json')).catch(() => null)) {
