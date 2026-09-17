@@ -130,6 +130,48 @@ export function parseCalibrationRecord(text: string): CalibrationApplication[] {
   return applications;
 }
 
+/** A frequency range the pipeline judged free of lines, in the frame its cont.dat states. */
+export interface ContinuumRange { readonly spectralWindow: number; readonly lowGHz: number; readonly highGHz: number; readonly frame: string }
+
+const RANGE = /^([\d.]+)~([\d.]+)GHz\s+(\w+)$/u;
+
+/** The line-free ranges the pipeline chose, from the `cont.dat` in a delivery's auxiliary products. Imaging every channel as
+ * continuum would fold this star's molecular lines into its photosphere; these are the channels the archive's own continuum
+ * image was made from. */
+export function parseContinuumRanges(text: string): Map<string, ContinuumRange[]> {
+  const byField = new Map<string, ContinuumRange[]>();
+  let field: string | null = null, spectralWindow: number | null = null;
+  for (const [index, line] of text.split('\n').entries()) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const named = /^Field:\s*(.+)$/u.exec(trimmed);
+    if (named) { field = named[1]!.trim(); byField.set(field, byField.get(field) ?? []); spectralWindow = null; continue; }
+    const window = /^SpectralWindow:\s*(\d+)$/u.exec(trimmed);
+    if (window) { spectralWindow = Number(window[1]); continue; }
+    if (/^(NONE|ALL)$/u.test(trimmed)) { spectralWindow = null; continue; }
+    const range = RANGE.exec(trimmed);
+    if (!range) throw new SyntaxError(`Line ${index + 1} of cont.dat is not a frequency range: ${trimmed}`);
+    if (field === null || spectralWindow === null) throw new SyntaxError(`Line ${index + 1} of cont.dat states a range before its field and spectral window.`);
+    const [low, high] = [Number(range[1]), Number(range[2])];
+    if (!(low > 0) || !(high > low)) throw new TypeError(`Line ${index + 1} of cont.dat states no increasing frequency range.`);
+    byField.get(field)!.push({ spectralWindow, lowGHz: low, highGHz: high, frame: range[3]! });
+  }
+  if (!byField.size) throw new TypeError('A cont.dat names at least one field.');
+  return byField;
+}
+
+/** Those ranges as one CASA spectral-window selection: `25:a~bGHz;c~dGHz,27:...`, in spectral-window order. */
+export function continuumSelection(ranges: readonly ContinuumRange[]) {
+  if (!ranges.length) throw new TypeError('A continuum selection needs at least one range.');
+  const frames = new Set(ranges.map(range => range.frame));
+  if (frames.size !== 1) throw new TypeError(`Continuum ranges mix reference frames: ${[...frames].join(', ')}.`);
+  const byWindow = new Map<number, ContinuumRange[]>();
+  for (const range of ranges) byWindow.set(range.spectralWindow, [...(byWindow.get(range.spectralWindow) ?? []), range]);
+  return [...byWindow.entries()].sort((a, b) => a[0] - b[0])
+    .map(([window, windowRanges]) => `${window}:${windowRanges.map(range => `${range.lowGHz}~${range.highGHz}GHz`).join(';')}`)
+    .join(',');
+}
+
 /** The calibration tables the record needs, once each, in first use order. */
 export function requiredTables(applications: readonly CalibrationApplication[]) {
   const seen = new Set<string>();

@@ -51,3 +51,34 @@ test('quoted commas and nested lists survive the split', () => {
   assert.equal(parsed.tables[0]!.interp, 'linear,linear');
   assert.equal(parsed.tables[1]!.calwt, false);
 });
+
+test('the pipeline’s line-free ranges are read, and rendered as one selection per window', async () => {
+  const { parseContinuumRanges, continuumSelection } = await import('./alma-calibration.mts');
+  const ranges = parseContinuumRanges(await readFile(resolve(root, 'tests/fixtures/alma/cont.dat'), 'utf8'));
+  const star = ranges.get('R_Dor');
+  assert.ok(star, 'the delivery names the science target');
+  assert.equal(star!.length, 18);
+  assert.deepEqual([...new Set(star!.map(range => range.spectralWindow))].sort((a, b) => a - b), [25, 27, 29, 31]);
+  assert.ok(star!.every(range => range.frame === 'LSRK'));
+  // Only a fifth of this band is line-free for this star; imaging all of it as continuum would fold its lines in.
+  const width = star!.reduce((total, range) => total + (range.highGHz - range.lowGHz), 0);
+  assert.ok(width > 1.6 && width < 1.8, `line-free width ${width} GHz`);
+  const selection = continuumSelection(star!);
+  assert.ok(selection.startsWith('25:455.38~455.65GHz;'));
+  assert.equal(selection.split(',').length, 4);
+  assert.ok(selection.includes('31:'));
+});
+
+test('a cont.dat this route cannot read is refused rather than imaged blindly', async () => {
+  const { parseContinuumRanges, continuumSelection } = await import('./alma-calibration.mts');
+  assert.throws(() => parseContinuumRanges(''), /names at least one field/u);
+  assert.throws(() => parseContinuumRanges('Field: X\nSpectralWindow: 1\nnot a range\n'), /not a frequency range/u);
+  assert.throws(() => parseContinuumRanges('Field: X\n1.0~2.0GHz LSRK\n'), /before its field and spectral window/u);
+  assert.throws(() => parseContinuumRanges('Field: X\nSpectralWindow: 1\n2.0~1.0GHz LSRK\n'), /no increasing frequency range/u);
+  // A window the pipeline marked as having no line-free channels contributes nothing rather than everything.
+  const none = parseContinuumRanges('Field: X\nSpectralWindow: 1\nNONE\nSpectralWindow: 2\n3.0~4.0GHz LSRK\n');
+  assert.equal(none.get('X')!.length, 1);
+  assert.equal(continuumSelection(none.get('X')!), '2:3~4GHz');
+  assert.throws(() => continuumSelection([]), /at least one range/u);
+  assert.throws(() => continuumSelection([{ spectralWindow: 1, lowGHz: 1, highGHz: 2, frame: 'LSRK' }, { spectralWindow: 1, lowGHz: 3, highGHz: 4, frame: 'TOPO' }]), /mix reference frames/u);
+});
