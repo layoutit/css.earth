@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4dd5de10fef87742f69213424873a30e13bf87eafeabbabcafa6b77c0688b4a5"
+    "sha256": "1a461c8860d4d4347979ad9d16e09ddef1ce23bb23afbbd1528b99e120c506f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "79e5c3eac0d779204387a888c7efd49b245cab6e60cf76ec51e22dd56a3e5945",
+      "sha256": "2203c8a307ed9d51d86584dc6429ae51f7aae47ffdbfdeb37c07e0401bbe0049",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -346,8 +346,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -1439,8 +1438,8 @@
         },
         {
           "url": "/scenes/atlas/atlas-elevation-surface@2x.webp",
-          "bytes": 433402,
-          "sha256": "fc975bce54c55a4ac7a2895807e36a186e4f3c9de1d71c3e46de6ab33674f617",
+          "bytes": 546210,
+          "sha256": "b0c5b521bd0fe6631d672f75496670b201d25f3267a1b48d6e431bd659d44a45",
           "verification": "bytes-verified"
         }
       ],
@@ -1493,8 +1492,8 @@
         },
         {
           "url": "/scenes/atlas/atlas-normal-surface@2x.webp",
-          "bytes": 337480,
-          "sha256": "3094ee140ccaf866b1dd843199fe59a8cc3dbc8373467db4fcf6ee8afec72813",
+          "bytes": 355100,
+          "sha256": "cbdc5994b5733d7cc3a45e106784a75079e508cd38128641b4cd738d35862670",
           "verification": "bytes-verified"
         }
       ],
@@ -1543,8 +1542,8 @@
         },
         {
           "url": "/scenes/atlas/atlas-filter-color-surface@2x.webp",
-          "bytes": 401438,
-          "sha256": "46e655d29a04f9a9721bb20d53f612401ee121fe2c58b70c247f45bf8f0bbdde",
+          "bytes": 393670,
+          "sha256": "508b662d8c6ed83ba967e6c16100605a9c557c2287e824dc1b346b2cce85b401",
           "verification": "bytes-verified"
         }
       ],
@@ -1665,7 +1664,7 @@
   },
   "lastPreparation": {
     "objectId": "atlas",
-    "materialSha256": "22a18cb9574f868c6b6336e0287677fac2d281a421d0b347562abc3a1e26bfac",
+    "materialSha256": "a568ce3d7bc8327914f2bf8d067ea58b7ac93fc8513d8d4de17dfcf45c216de8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

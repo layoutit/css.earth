@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ee21e8100cf86ae97a8bf91e4fe8a4b33379320104b49564fd145827e32eaa2"
+    "sha256": "5e0212892537dc0c17b9e39240ddc3f427cea2b4f545b2ad66c6b7b9804064b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1109f3bea25468b72db3ac5407be63b9f727e7fa8a1f686e389b4c8ad2a2bd79",
+      "sha256": "985d851e7b816e0cd4cbfed1499a35ddc3c5b4eb1250506e8e0abdc64c23c5e9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1000,
@@ -343,8 +342,8 @@
         },
         {
           "url": "/scenes/rosalind/rosalind-model-surface@2x.webp",
-          "bytes": 55832,
-          "sha256": "055b99cbb4c711164c0a60f2dde5a2f8e5c8879d2c482b0ef6f2ef7f1b9bb8a7",
+          "bytes": 61438,
+          "sha256": "9561ed17562463340287e1f7a5be1a4b35842ccb9f1a1a242e782f7b2d3b0cdc",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalind",
-    "materialSha256": "1056e11a4ce4000dca6bc96f861bc352cf61117a838d5cb0278b790616811f8c",
+    "materialSha256": "8afe477903a68ec9507205b07ffbaba5e6d9e81a6ea622a28aaa8d5fec863af6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

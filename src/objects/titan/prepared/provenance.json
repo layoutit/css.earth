@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "290f4ffa3b98ef44743bf66e16855b8a51239d762b7d74fc44b750e241dd3735"
+    "sha256": "2d17d1f73a161b2bc537307d8e02c883c232b2c17afc0567fd053be490c73629"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "cc90f8737c9812cfaf78559f0c3a4f64d274be8ef1f24b9fe67e00d36982c0f3"
+    "bindingsSha256": "fa9e7d2e97be74b5ef0544bb2f9342b48f6294313dfcbb8556157b79d49536e0"
   },
   "recipes": [
     {
@@ -859,7 +859,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c43af9f444375838e7be7d5d50c7986a76acdc31152508e937e51cbf2630192f",
+      "sha256": "0264516ce7c7babafba08b9eff782754a6dc2f8f75609dd7bec69159e09ccc62",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -870,7 +870,6 @@
           "metadata": "metadata_nomenclature_points_TITAN.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "titan-features.json",
         "publicBase": "/scenes/titan/",
         "target": {
@@ -1563,8 +1562,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "30032741c351451501695e88e48dbd885e1881bb1586aa26bef6a82eb088f17f",
-      "bytes": 152,
+      "sha256": "744bfd0772104fce2113cc91c5c2fc985387e0fefd772efd9b9dc24e7a3a4baa",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2458,7 +2457,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2637,11 +2635,11 @@
   },
   "lastPreparation": {
     "objectId": "titan",
-    "materialSha256": "83b367b8d4ae30b88a8e736ef2e53d5b9d983d33c7951f31841c07b1049562cc",
+    "materialSha256": "d96f7ca3c200518bdaf3b32f109bc6828ebfbef0e2dae3d93c0252924aa34b6f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "cc90f8737c9812cfaf78559f0c3a4f64d274be8ef1f24b9fe67e00d36982c0f3"
+      "bindingsSha256": "fa9e7d2e97be74b5ef0544bb2f9342b48f6294313dfcbb8556157b79d49536e0"
     }
   }
 }

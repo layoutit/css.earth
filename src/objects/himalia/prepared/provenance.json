@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fafbb31746b15787fd84594265dc7817528eea6d76134059df179bd3698492b5"
+    "sha256": "427b2563665f7d44fa2fb51c830dc4e3ffbed0c1ae61e4bc1c6581c48a8d60f9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e7b4a66f4bd8755207e09ecbba6616066cbea66b33910966a38055c1171ef839",
+      "sha256": "07ddc3a14736a15d84201a817b508bed4a8d796cb01d01121a6e551af21ccd3c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 2125,
@@ -359,8 +358,8 @@
         },
         {
           "url": "/scenes/himalia/himalia-model-surface@2x.webp",
-          "bytes": 57272,
-          "sha256": "13b5839d0f36561cbe7e7a8a7bd9f767490aba1eb0dd80abb3eadb06f1af3ac1",
+          "bytes": 62254,
+          "sha256": "7abd95381ffa7b4c2bfb2a4e393e9295bb4cc019d073d448047addf08c2df6eb",
           "verification": "bytes-verified"
         }
       ],
@@ -436,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "himalia",
-    "materialSha256": "a9f632b064f7a68ae7aef3b2e703fe7dcd771712bcf90bcac40a450c1945875b",
+    "materialSha256": "5aa31ae54687b4e5bec3b14d7ef8bb0c3c5fe887d80e560eb9d9b9d4dca89140",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

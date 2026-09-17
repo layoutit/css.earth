@@ -432,8 +432,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5211,
-      "expectedSha256": "8e3cf804d5b437f75073a97d9ee588e4027efe96579ec005c03423e725f06d08"
+      "expectedBytes": 5192,
+      "expectedSha256": "3a2d7f7056097d0aa974e34cb11131e137167114e9280189de5e38ed56693a8e"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -496,8 +496,8 @@
     {
       "id": "donaldjohanson-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1110,
-      "expectedSha256": "e051d0ae8c5eca92e27231fbcdfe7d1dc3780ec19898aa74a8be968b9503b624",
+      "expectedBytes": 1078,
+      "expectedSha256": "72d37ca42c7c3402201d5c033b40707c70b776fbc86e398708c99318c16e96e3",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -514,8 +514,8 @@
     {
       "id": "donaldjohanson-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 161,
-      "expectedSha256": "4b235e29f861125fdab3b736f8d727c782bb449da1df0f9df73dfbe4c536bf6a",
+      "expectedBytes": 193,
+      "expectedSha256": "2baf4d4af169d4af154ec6c846c5ece03a52af6f3e29fd288bc9d57bb51c1b75",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

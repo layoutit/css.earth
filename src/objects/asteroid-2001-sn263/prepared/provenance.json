@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1dfdaf0eb705301a16d385cfd8053b7d6aac7a414e4cc5c86f81bd8a889a629c"
+    "sha256": "541b979cbef84cf3c9dec23d4f107aeb6c63ff245077b1cd59eaa5e2564f6d8b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bc46649cf2d534b8bd4f6441b054c64201e96be03570e19a70732b1696a12c99",
+      "sha256": "7a3abe1769acdaaaaf97a9180bb32917c75c4cb3474a15db3ad96ab0346f2893",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 2292
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -309,8 +308,8 @@
         },
         {
           "url": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-surface@2x.webp",
-          "bytes": 30258,
-          "sha256": "8a86b69e9704bf035f30c41641e418f457157f79b2d16f54215f0b00a98548f3",
+          "bytes": 44920,
+          "sha256": "b70c001b6a0b3330c759406348d80028ba6c7cf41fbb114e428a69830f9ea793",
           "verification": "bytes-verified"
         }
       ],
@@ -381,7 +380,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-sn263",
-    "materialSha256": "aad7cf7da43e1f3fdf7e0b6e06e53f27154c249f4884f8913cc8dfda2f99444d",
+    "materialSha256": "8876da1f18b486d8f7b80a0167b6f1f2afbadf8d360d408689a270b8e73e94c0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

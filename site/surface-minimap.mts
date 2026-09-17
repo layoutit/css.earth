@@ -4,7 +4,7 @@ import { parseSurfaceMapConfig } from './surface-map-context.mts';
 import type { SurfaceMapConfig, SurfaceMapReader } from './surface-map-context.mts';
 interface MapElements { config: SurfaceMapConfig | null; rectangles: HTMLElement[]; size: { width: number; height: number } | null; }
 type WheelInput = Pick<WheelEvent, 'deltaY'> & Partial<Pick<WheelEvent, 'deltaX' | 'deltaMode' | 'ctrlKey' | 'preventDefault' | 'stopPropagation'>>;
-import { worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation } from '../src/renderers/css/dist/navigation.js';
 import { directionOnMap, mapDirection, orbitMapCamera } from './surface-minimap-math.mts';
 import { surfaceViewRectangle } from './surface-minimap-rectangle.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
@@ -62,7 +62,7 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       const optics = camera.navigation.optics();
       const view = surfaceMapViewport(state.scene, optics);
       const extent = surfaceViewRectangle({ eye: state.relative.map(x => x / camera!.navigation!.frame.bodyRadiusM) as [number, number, number],
-        rotation: worldRotationFromQuaternion(state.world.pose.orientationXyzw), view, axes: state.axes });
+        rotation: cssCameraAxesFromOrientation(state.world.pose.orientationXyzw), view, axes: state.axes });
       const center = extent.center ?? directionOnMap(state.relative, state.axes);
       map.dataset.centerU = center.u.toFixed(6);
       map.dataset.centerV = center.v.toFixed(6);

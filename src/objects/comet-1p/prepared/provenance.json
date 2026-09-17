@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c0468cd34704fe9976c1b3c9841824a91844852373ec11b16d613ce53bbe0f23"
+    "sha256": "567eefcf37485c1e822dd8b148f55349839360e009a8a11a75c135244e609769"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "89800ed375058067532088b39facb765d814c7f2fcf8d757b834eee9ef089a4b",
+      "sha256": "beca93965d6d7be5f5cce2a9449cb9fb832505c7ae07f2da3040145c4a644ca4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -92,8 +92,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 1000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -398,8 +397,8 @@
         },
         {
           "url": "/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
-          "bytes": 125222,
-          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6",
+          "bytes": 148664,
+          "sha256": "a14483f7275e7f4eef4521504c397861bc99f4e6436db0b4e14058e25ca60901",
           "verification": "bytes-verified"
         }
       ],
@@ -447,8 +446,8 @@
         },
         {
           "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
-          "bytes": 37060,
-          "sha256": "d6f71fd84791c65f1c64b6c365aa6051cea85f8270d0e089f7e017c836672148",
+          "bytes": 54634,
+          "sha256": "c9183746eb366bd373065eb78d9d5dad3b0702aab39739fc3028d6869d2ac11c",
           "verification": "bytes-verified"
         }
       ],
@@ -519,7 +518,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-1p",
-    "materialSha256": "614c01e145897ff4fde76fe60179a91f2b95f005a5c008b63e18d1f0c4f5df24",
+    "materialSha256": "7a6911834d069bdff63a0505dfd4287e720ac983b096c983f1cd0b5c89617606",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

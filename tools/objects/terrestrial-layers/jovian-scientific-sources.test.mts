@@ -12,10 +12,15 @@ import type { PathLike } from 'node:fs';
 
 const planets = fileURLToPath(new URL('../../../src/objects/', import.meta.url));
 const json = async (path: string) => JSON.parse(await readFile(path, 'utf8'));
+const scienceLens = async (source: string, id: string): Promise<Record<string, unknown>> => {
+  const surface = fixtureRecord(required(requireArray((await json(`${source}/preparation/raster.json`)).surfaces).find(value => fixtureRecord(value).id === id)));
+  const {kind: _kind, ...science} = fixtureRecord(surface.science);
+  return {id: surface.id, ...science};
+};
 
 for (const id of ['io', 'ganymede']) test(`${id} independently archived label points anchor both hemispheres of the geology view`, async () => {
   const source = `${planets}${id}/source`;
-  const recipe = await json(`${source}/preparation/terrestrial.json`), lens = parseGeologyLens(required(requireArray(recipe.raster.scientific).find(value=>fixtureRecord(value).id==='geology')));
+  const lens = parseGeologyLens(await scienceLens(source, 'geology'));
   const directory = lens.path.slice(0, lens.path.lastIndexOf('/'));
   const audit = shape({mismatch:number,anchors:array(shape({latitude:number,longitude:number,value:text,record:number}))})(await json(`${source}/${directory}/registration-anchors.json`)), surface = await loadGeologySurface(source, lens);
   assert.ok(audit.anchors.some((point) => point.latitude > 20));
@@ -32,8 +37,7 @@ for (const id of ['io', 'ganymede']) test(`${id} independently archived label po
 });
 
 test('Agenor preserves independently decoded source heights and withholds incomplete interpolation footprints', async () => {
-  const source = `${planets}europa/source`, recipe = await json(`${source}/preparation/terrestrial.json`);
-  const lens = required(requireArray(recipe.raster.scientific).map(value=>fixtureRecord(value)).find(entry=>entry.id==='elevation'));
+  const source = `${planets}europa/source`, lens = await scienceLens(source, 'elevation');
   const anchors = await json(`${source}/science/controlled-dtms/Agenor/value-anchors.json`);
   const bytes = await readFile(`${source}/${anchors.sourcePath}`);
   assert.equal(createHash('sha256').update(bytes).digest('hex'), anchors.sha256);
@@ -43,14 +47,14 @@ test('Agenor preserves independently decoded source heights and withholds incomp
   for (const point of [anchors.anchors[0], anchors.anchors.at(-1)]) assert.equal(display.sample(point.longitudeEastDegrees, point.latitudeDegrees), null);
   assert.equal(display.sample(0, 0), null);
   assert.equal(display.sample(142, 0), null);
-  assert.ok(Number.isFinite(display.sample(Number(fixtureRecord(lens.focus).longitudeDegrees), Number(fixtureRecord(lens.focus).latitudeDegrees))));
+  const focus = fixtureRecord(await json(`${source}/preparation/presentation.json`), 'lensFocus', 'elevation');
+  assert.ok(Number.isFinite(display.sample(Number(focus.longitudeDegrees), Number(focus.latitudeDegrees))));
   assert.equal(lens.valueTransform, undefined, 'No arbitrary offset or global radius conversion');
   assert.equal(lens.additionalGrids, undefined, 'Independent local datums are not combined');
 });
 
 test('duplicated Europa confidence assets remain excluded from the scientific source recipe', async () => {
-  const source = `${planets}europa/source`, recipe = await json(`${source}/preparation/terrestrial.json`);
-  const lens = required(requireArray(recipe.raster.scientific).map(value=>fixtureRecord(value)).find(entry=>entry.id==='elevation'));
+  const source = `${planets}europa/source`, lens = await scienceLens(source, 'elevation');
   const directory = `${source}/science/controlled-dtms/Agenor`;
   const fom = await readFile(`${directory}/Agenor_FOM.tif`), confidence = await readFile(`${directory}/Agenor_ClrConf.tif`);
   assert.deepEqual(fom, confidence, 'Pinned public release duplicates the files');

@@ -609,8 +609,8 @@
     {
       "id": "phoebe-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1225,
-      "expectedSha256": "42cd0c133a0460f95b0a6cc5e3942b2fcac9af3099e069c6673bc9bc0050de35",
+      "expectedBytes": 1193,
+      "expectedSha256": "efb67d63b431d74e49b4aed9cc7e5b64e689aa6421b163ec623b550a9de76134",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -627,8 +627,8 @@
     {
       "id": "phoebe-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "cd6e8b9772febaa12eb1fc6fc3314f8166e31b560f0bc0765a9aeebb9b13ec54",
+      "expectedBytes": 185,
+      "expectedSha256": "cac9def5bc8cae522a9269550e49f9b5783570bf3579c51cde53bbdf9e7dc7dc",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -789,8 +789,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 15256,
-      "expectedSha256": "caa71862f51b6dcbee9686d8ccda260ff28c3630a18ce7f38e466bc9accc4e2f"
+      "expectedBytes": 15237,
+      "expectedSha256": "abbcc7ca67482df92892b38b3f52cb7f22b5e40de46c00f1b154f6a65145ec98"
     },
     {
       "path": "presentation/minimap.json",

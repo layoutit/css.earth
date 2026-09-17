@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8b14373b0d09abeff78138978f726af52f0a1555ca520efa2ccccc70ad141f8"
+    "sha256": "113e2445addf1dea5e51c512f55cecd48cdd014510278209b884555575a13f3a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e4ce3fd905e098e78525985fc4573787b5914b65f9f7db7d778be559acf77ef2",
+      "sha256": "462b2fb58843b23ed0ab3639fbde027674358bcee6ae602c9c2be9e05101e413",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 16.007239562343678,
@@ -356,8 +355,8 @@
         },
         {
           "url": "/scenes/braille/braille-model-surface@2x.webp",
-          "bytes": 49360,
-          "sha256": "832c3a85d6ee6a7d622fb1cfff541ac7c966cb8135898aadcfe70e4e7ff78201",
+          "bytes": 59192,
+          "sha256": "4b36ac6db2a6e4626e141361d22da52419839d1ebf3ae4bbedd48a4b3b4e46d3",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "braille",
-    "materialSha256": "32f7dcff18588ed837ecff42d4659e361e993688fa22c69f83fe4cdf42dc3249",
+    "materialSha256": "2996aa02a28960847ef16de586f883b56fbfddb2b4e77ad28bb958d715bb3291",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

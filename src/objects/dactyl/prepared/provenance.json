@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec91e3e5c2c4148c7abeb894cb3111a0e3d8123517dc5fcb189f51d167dd4a61"
+    "sha256": "dfc492800189061cd9c77a0046c78e07cda546a7b2f7d1d353d6987efcdea017"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e9c55eb095832a9a6f3f1c2e2e1ea000e009cdefced2c60e0bf809702a81086d"
+    "bindingsSha256": "68d5c2a214a56714630ef13efdc8ed6318741d00870adf89a62e0a5956a213c8"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "efe84d223c66807448a4c050ad0466988f196e4855211c2cacd0a3147eb9110a",
+      "sha256": "7e3ead1e8dcb4b028968e74b68dcc1ec2a0300aadbb7186ffc7ae586d8250e5e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 512
             },
             "faceBudget": 512,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -196,7 +195,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "0e98bb5293fca7af9430cada585f2c42ae71d012105044f9985124b0b6937d4a",
+      "sha256": "e659db66474cf90402c7546bc206cdb046f4555b37265aeb765e5e10fb29eb9f",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -207,7 +206,6 @@
           "metadata": "metadata_nomenclature_points_DACTYL.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "dactyl-features.json",
         "publicBase": "/scenes/dactyl/",
         "target": {
@@ -369,8 +367,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "e4cf71e29027f0275c16de63ac1146d120953c0777bc32b22dcefdfe515b61a8",
-      "bytes": 153,
+      "sha256": "52b2d2c09ec3f899a4e02b0dcfab5ba0a54c3dffce297afecb0d847d23d9c5ec",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -435,8 +433,8 @@
         },
         {
           "url": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
-          "bytes": 19352,
-          "sha256": "6feccda9153d1591db14b4ba977af45d4243304d7e562ef58a6a4dc7522ad1bb",
+          "bytes": 29452,
+          "sha256": "0b84e7df6b2b9a4f348f1b570ea9996d67037a0dc1045145b5cc486e5574c2ca",
           "verification": "bytes-verified"
         }
       ],
@@ -490,7 +488,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -543,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "dactyl",
-    "materialSha256": "692e5cf8150db099bf7e20381cf39888100219ae1cbd9999d74e5f64f574bfe0",
+    "materialSha256": "ef4a5d751cd22c104ce2a650c6ce8eb498c6bd6dfa3280f83657d615c6e778d4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "e9c55eb095832a9a6f3f1c2e2e1ea000e009cdefced2c60e0bf809702a81086d"
+      "bindingsSha256": "68d5c2a214a56714630ef13efdc8ed6318741d00870adf89a62e0a5956a213c8"
     }
   }
 }

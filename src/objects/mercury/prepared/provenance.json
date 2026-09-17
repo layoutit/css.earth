@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "503edf19d7928a6e9e477bb5f7af516b3d42889a2d825be2338014938d9af9a7"
+    "sha256": "8a6177a4e410c5b280e4fbf217481b7a035a8356912e063f37d821004a3242c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a36b222b8cb726a7cad4cbd7a347e6c99177b829992fedb25c7b129c75228e11"
+    "bindingsSha256": "f63b8b22978f6e6fb694b7fcd563daea53d9256ddfc6b629e0878232c53cdb95"
   },
   "recipes": [
     {
@@ -661,7 +661,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "f14b49150c5ee8b43e702f874cfa65c13303aad58a94c8ebd0b0c93e71c1e77f",
+      "sha256": "ba4b752a340702ad06ef767541636dc5cc70d46f494a17527ea36551fd56cf8e",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -672,7 +672,6 @@
           "metadata": "metadata_nomenclature_points_MERCURY.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "mercury-features.json",
         "publicBase": "/scenes/mercury/",
         "target": {
@@ -1088,8 +1087,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "b6f9051b9d032fe0dab9d5f5303171052b6390066d43fc7f29aebf83cb829669",
-      "bytes": 154,
+      "sha256": "03e3a362654927fe5ca054df0207da4a56817e51d65c6cb512531855e1052e17",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2015,7 +2014,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2121,11 +2119,11 @@
   },
   "lastPreparation": {
     "objectId": "mercury",
-    "materialSha256": "c1a42a4365798928b19ceaf9cef8346ac8c7d23f8ac40b87cc15bdd87883e80e",
+    "materialSha256": "063d781ee85b94860f5faa974672dd52e031d57bfd3082b532ed800e15bfed54",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a36b222b8cb726a7cad4cbd7a347e6c99177b829992fedb25c7b129c75228e11"
+      "bindingsSha256": "f63b8b22978f6e6fb694b7fcd563daea53d9256ddfc6b629e0878232c53cdb95"
     }
   }
 }

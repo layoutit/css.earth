@@ -1,6 +1,6 @@
 import { presentWorldCamera } from '../navigation/world-camera.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, rotateWorldPosition } from '../navigation/world-camera-math.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import { screenPicking } from '../navigation/screen-picking.js';
@@ -130,7 +130,7 @@ function occludesFocus(world: WorldCameraPose, plan: PreparedWorldContext,
   if (!(Number.isFinite(occluder.radiusM) && occluder.radiusM > 0) ||
       !occluder.positionM.every(Number.isFinite) ||
       (occluder.radiusM === plan.focus.radiusM && occluder.positionM.every((value, axis) => value === plan.focus.positionM[axis]))) return false;
-  const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+  const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
   const toEye = (positionM: readonly [number, number, number]) => rotateWorldPosition(rotation, [
     positionM[0] - world.pose.positionM[0], positionM[1] - world.pose.positionM[1], positionM[2] - world.pose.positionM[2],
   ]);

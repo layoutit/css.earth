@@ -29,7 +29,8 @@ import { createNavigationHistory, bindNavigationLinks } from './navigation-histo
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 import * as applicationWorldContext from './application-world-context.mts';
-import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mts';
+import { watchOverviewSelection } from './overview-selection.mts';
+import { systemById } from './object-systems.mts';
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
 import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mts';
@@ -359,10 +360,10 @@ export function createSceneRouter({
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
-    // The Solar System overview is already the system-level selection for its
-    // central body. Clicking that body drills in instead of fitting it again.
-    const opensOverviewFocus = overview && id === objectId && id === solarSystemFocus(objects)?.id
-      && overviewScopeFromUrl(active?.url ?? windowTarget.location.href) === 'solar-system';
+    // A system overview is already the system-level selection for its star.
+    // Clicking that star drills in instead of fitting it again.
+    const opensOverviewFocus = overview && id === objectId && systemById(objects, id) !== null
+      && overviewScopeFromUrl(active?.url ?? windowTarget.location.href) === 'system';
     const overviewTarget = options.overviewScope
       ? navigation.overviewTarget?.({ scope: options.overviewScope, objectId: id, fromId: objectId, mount: active?.mount })
       : null;
@@ -375,7 +376,7 @@ export function createSceneRouter({
     centeredObjectId = centerTarget && !options.overview ? id : null;
     if (centerTarget) options = { ...options, targetWorldCamera: centerTarget,
       targetFocusPositionM: overviewTarget?.focusPositionM, centerSelection: true };
-    if (centerTarget && options.sceneSelection && id === solarSystemFocus(objects)?.id) {
+    if (centerTarget && options.sceneSelection && systemById(objects, id)) {
       options = { ...options, overview: true };
     }
     const cancelledFlight = pending !== null && !pending.options.centerSelection && !options.centerSelection;
@@ -395,7 +396,7 @@ export function createSceneRouter({
     if (!options.url) {
       url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview'); url.searchParams.delete('focus'); url.searchParams.delete('focusLens');
       url = withDataset(url, null);
-      if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'solar-system');
+      if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'system');
       if (options.feature) url.searchParams.set('feature', options.feature);
     }
     const request: Request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
@@ -408,7 +409,7 @@ export function createSceneRouter({
     });
     // Preview the destination card while the camera approaches its overview.
     if ((options.recenter || options.centerSelection) && options.overview) {
-      const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'solar-system');
+      const restoreSelection = shellOwner?.shell?.beginOverviewSelection?.(options.overviewScope ?? 'system', id);
       if (restoreSelection) request.lifetime.onDispose(restoreSelection);
     } else if (!options.overview) {
       const releaseCard = shellOwner?.shell?.beginCardNavigation?.(object, options.targetWorldCamera);
@@ -712,12 +713,11 @@ export function createSceneRouter({
     active?.mount?.navigation?.setZoomOutCentering?.(enabled);
     shellOwner?.shell?.setOverview?.(enabled);
     worldContextMount?.setOverview?.(enabled);
-    if (stage.dataset) stage.dataset.selection = enabled ? 'solar-system' : objectId;
+    if (stage.dataset) stage.dataset.selection = enabled ? 'system' : objectId;
   }
   function connectOverviewSelection(session: Session) {
     const owner = session.mount?.navigation;
-    const sun = solarSystemFocus(objects);
-    if (!owner || !navigation || !sun?.worldFrame) return;
+    if (!owner || !navigation) return;
     session.lifetime.onDispose(watchOverviewSelection({ navigation: owner, objects, objectId,
       getOverview: () => overview,
       // The pending flight owns the camera; repeat-click bookkeeping must not
@@ -726,18 +726,18 @@ export function createSceneRouter({
       windowTarget,
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
-          // The mounted Sun and its overview share the same camera, detail and
+          // A mounted star and its system overview share the same camera, detail and
           // subscriptions. Change their selection in place in either direction.
           setOverview(next.overview);
           const url = withDataset(new URL(windowTarget.location.href), null);
-          if (next.overview) url.searchParams.set('overview', 'solar-system');
+          if (next.overview) url.searchParams.set('overview', 'system');
           else url.searchParams.delete('overview');
           session.url = url.href;
           historyOwner?.commit(url.href, { history: 'replace' });
           session.viewUrl?.flush();
           return;
         }
-        void navigate(sun.id, { overview: true, history: 'replace', preserveView: true });
+        void navigate(next.objectId, { overview: true, history: 'replace', preserveView: true });
       },
     }));
   }

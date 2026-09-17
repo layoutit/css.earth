@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9474078550b39fa466ba282d47551d0b7977738668aca72c4f7fdf4e1046298a"
+    "sha256": "73824325553f5b10b32e16ffe74510d0a8c384e3c8ac53d403f4e4680aebd6bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f79ac479e38e220e4796ef54f9af21a12d8bd056d78ed22ca3cc96108600dc76",
+      "sha256": "b57d2538403f569a8860a964e9d76af73c6dd635957117084629f53ac9839e66",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 127.49999999999999,
@@ -359,8 +358,8 @@
         },
         {
           "url": "/scenes/erriapus/erriapus-model-surface@2x.webp",
-          "bytes": 53648,
-          "sha256": "c5d4c73ee96168216b6b3e5728da8a16c9cce8c2292551eff0ae18b6c15cc01e",
+          "bytes": 61358,
+          "sha256": "a5978e27081e373402a2f8bf90d081b052ca7713056b062fd37434fa3c2b3f0e",
           "verification": "bytes-verified"
         }
       ],
@@ -436,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "erriapus",
-    "materialSha256": "1d902effdb86635f10eb624b2cd658cab5d535a96df5f91e9a2709ed620e7a7c",
+    "materialSha256": "ed6592c6b7a7fb7f8128edfb0324d12026cbed5a13dc25651f5b4600ce092ce7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

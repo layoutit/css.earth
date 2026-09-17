@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0927fbd9da0eb0ab124ef3343ed017385be7f580d8481639dc24ae6c3371bb15"
+    "sha256": "d4745bb5f6857f980ea70c896d3f6e4accbdfea619b0dacacc589e3d891e8d4b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "aca4b1a72e2385ea16ba36f6df09a7e3f87680b009d77227d1943c463bccfd5d",
+      "sha256": "4c17417d1d30e0d8011b2e59a20e9e03434276bf22b8aaa3d606b96264ec69c4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 2292
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -309,8 +308,8 @@
         },
         {
           "url": "/scenes/sn263-gamma/sn263-gamma-shape-surface@2x.webp",
-          "bytes": 28024,
-          "sha256": "608fb51f0e8f0d464ebfe6afd1fcb3c6b61a91a05512819812c2f2dfa025e5e9",
+          "bytes": 40154,
+          "sha256": "504e9d459d53268b99734d61b86adf35f32fea72b118cfa562600e83a0c5f07b",
           "verification": "bytes-verified"
         }
       ],
@@ -381,7 +380,7 @@
   },
   "lastPreparation": {
     "objectId": "sn263-gamma",
-    "materialSha256": "1f26af7d4065f7e824d00d65b15032da91670973cfa78f3c56f60fa90f6ec4eb",
+    "materialSha256": "4ecd82393f6a4284fe518325a73bd8e6c93c2b9eefb8cb0bbbff6a9102af7d9e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

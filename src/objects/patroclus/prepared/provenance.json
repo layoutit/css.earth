@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9256f2b7a6ac432d8a93c64723bb0e37fead9332951e5027be42acefd13fabe7"
+    "sha256": "8d19c3b87643a41d59c6609a706e15e29f4c56ee104e485f79d3c35833edaa08"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f083667e02a16c910ecf070f578d90b43524b9aeb18d4b5b555c8c31c1e70ffd",
+      "sha256": "1ffae13f8bb72fbb60232a9dc1e403341602d0ef8b7b7ba8c9c309d9b2a26746",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1416.8218063471552,
@@ -349,8 +348,8 @@
         },
         {
           "url": "/scenes/patroclus/patroclus-model-surface@2x.webp",
-          "bytes": 54756,
-          "sha256": "c3c3d1453704acce233544c959810f7a2bc768b54fea7a535eabc21e6e90109e",
+          "bytes": 60642,
+          "sha256": "f8f4ac5ebcf83f95d007de62aaf8abd7f9e04fb732c19fa521ebd9fb5a2c1739",
           "verification": "bytes-verified"
         }
       ],
@@ -426,7 +425,7 @@
   },
   "lastPreparation": {
     "objectId": "patroclus",
-    "materialSha256": "31f545ee0585405d8f0a0fb957f00c9dfddd1bcb337ba5e42d8b4d77c3fad097",
+    "materialSha256": "7bc01d9a16d692f24da2b0503e43bda00a2073d23ac5a8f5f9bbe6ce7f7f8d35",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

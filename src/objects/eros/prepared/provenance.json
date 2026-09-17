@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d58022a80382ce278c5d601a74647378627c0ef3e887e261c45798dd68968b2"
+    "sha256": "d9394ccbaa9d360a68fb0c954c06081a0656049ca5604494608ed861fc1b2052"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "6c08afa835a1b7c2a4c596355c4f6a79fffc71da3465cc80b8fb6226b9726c5e"
+    "bindingsSha256": "f362b1f1eb6dfbc967cdb777feccc2fabe1483d141b0f59b8231b83a6e3ca100"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f5425ad98f8a2d033debde0d30f3c795d7ee68bfe8f8361e9992db7f666b023f",
+      "sha256": "1c2cf09ef6e05e2fd5b78ac739e3ee4812e20177a3893255cd0d33fed6a160b1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -154,8 +154,7 @@
               "expectedFaces": 196608
             },
             "faceBudget": 850,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -366,7 +365,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "3ff3335cfad4cb3e06beec85aabb6215a123609eeb010e1e940630bc4070e25e",
+      "sha256": "367b2472a5a0953c0936be2a3995de249b59576a537f925caf93b61d6bf38640",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -377,7 +376,6 @@
           "metadata": "metadata_nomenclature_points_EROS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "eros-features.json",
         "publicBase": "/scenes/eros/",
         "target": {
@@ -685,8 +683,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "60ada4ee5030f75a1b46489f3ea38c55251306c400a700886db709e16e6f447e",
-      "bytes": 151,
+      "sha256": "6e8c1b50fbc63feb0c6fe2aa403e7a52166e67cb9dbaa645b4498780b1963be4",
+      "bytes": 183,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -795,8 +793,8 @@
         },
         {
           "url": "/scenes/eros/eros-normal-surface@2x.webp",
-          "bytes": 3749508,
-          "sha256": "89bf8f7305a3a51835dcc1d312dd4d24804bf9d04d838896fbfe9f676e4285b1",
+          "bytes": 3823346,
+          "sha256": "0b3267e1b0c26909fdf83fbf21489c44dac5885568600ffb188af4714eb2d4b3",
           "verification": "bytes-verified"
         }
       ],
@@ -863,8 +861,8 @@
         },
         {
           "url": "/scenes/eros/eros-infrared-surface@2x.webp",
-          "bytes": 5190968,
-          "sha256": "90da7b2f956bd6fbf590487389080b93269dabf526feb5a797e6f7fdf1b0e859",
+          "bytes": 5237204,
+          "sha256": "b4c1e99ecfde90716cedba2effd41fec4ef0f933e8faca886a22ed1d984a911a",
           "verification": "bytes-verified"
         }
       ],
@@ -918,8 +916,8 @@
         },
         {
           "url": "/scenes/eros/eros-elevation-surface@2x.webp",
-          "bytes": 922744,
-          "sha256": "deb0f2ed973f54fc0aaf840e703a65d4e6e5e0fee0e62400adcc8d8a9009e329",
+          "bytes": 932612,
+          "sha256": "db239996c4304e30abcbc94baff396226c553da5b2c4cd45b82ec6a84d6011cc",
           "verification": "bytes-verified"
         }
       ],
@@ -951,8 +949,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4569,
-          "sha256": "6d646da237197aa2ab6ff3db1cf2804b71b24c8f0401fb4d06cdc3b2c85b5da2",
+          "bytes": 4687,
+          "sha256": "b9735150e06b274d1e5797b00e3c9070f85fd7824e82227937a4e3c6863ddf70",
           "verification": "bytes-verified"
         }
       ],
@@ -973,7 +971,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1077,11 +1074,11 @@
   },
   "lastPreparation": {
     "objectId": "eros",
-    "materialSha256": "b27c8f1b4898df761ecd8013545a3363a4b1ba820289750d46458360df24b9b2",
+    "materialSha256": "0dfa89cb967e1da988c9fa34c546cc5a75308300fa6395fd146db8a0a7bd37e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "6c08afa835a1b7c2a4c596355c4f6a79fffc71da3465cc80b8fb6226b9726c5e"
+      "bindingsSha256": "f362b1f1eb6dfbc967cdb777feccc2fabe1483d141b0f59b8231b83a6e3ca100"
     }
   }
 }

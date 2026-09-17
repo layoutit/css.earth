@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ee00e698c847adb8a143da99090d208ed491af3efbd31e6faefabf31ba750f1e"
+    "sha256": "79de445918fbaca7b9cadd10fc4f25922356a90406ce244c9a538ad2146f54c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "538732f6c7ff6a9aab50b8f875bdf758d412c68d9bdb052959841f436736ba42",
+      "sha256": "ba2c04384ed89a1fd4d0bab988837273fc328ac5666ca15a8fdc4790ccf53027",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1400,
@@ -356,8 +355,8 @@
         },
         {
           "url": "/scenes/despina/despina-model-surface@2x.webp",
-          "bytes": 49032,
-          "sha256": "3765b7ecee1b03ac9a275d3b193665f590467357621de6d01bbe661b3c8e93d0",
+          "bytes": 58012,
+          "sha256": "118d52e4e1d8beb1df609d4c2dd61636c06cfe7876f35b43fb35e30037555fe8",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "despina",
-    "materialSha256": "0f7b8a2be50d40c79512e9dcf51fa83c97e9a4a70ad2e1e51e9ba79c9875fe51",
+    "materialSha256": "69003d6f8d4e632daebe211a87515003c37dd61444d94bd05a4a81673ec6a30a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d27163e92209205110bb39706f094a868b0c13976a0be0d6e573108141e0603"
+    "sha256": "393f95143239a71a47f51a8670de7522b8e5cc12e34eb63894f82e241efeb33b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "d61100b54ab3d67b84dce2738ee5158c40349f548a53af887ea1187ef81abdfa"
+    "bindingsSha256": "619105078a5f6bf80f87499f745d1453afc2f5a36ea5772be5fc079b191dd290"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4dfe4ba2d4a181d7d34a72e582df5f9a975b7dda6c85728918725c64a13d29d1",
+      "sha256": "4bb4a3717c315de446c56bf3d68a29430efe0451231f37e859efa75d2ceddbe9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -179,8 +179,7 @@
               "expectedFaces": 3366134
             },
             "faceBudget": 850,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -399,7 +398,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "4a0542e5d1aff0f42e631f8e23b71238b49abe15a661d426c8a4e75b4cec0060",
+      "sha256": "93ec56d49f163b3937ec40c90352eb04b72794f2d14ca61ba4d393f59b32e56a",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -410,7 +409,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "bennu-features.json",
         "publicBase": "/scenes/bennu/",
         "target": {
@@ -773,8 +771,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "fb29f3953b009b6ddf6555b7b5c4be8996b07f93311d015ff9c94d8fb04c5ea7",
-      "bytes": 152,
+      "sha256": "23974c4acedb60420e05309c780a7c0a50e5b36e6a0b5ae96f2578bb0e6b21b1",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -883,8 +881,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
-          "bytes": 5785660,
-          "sha256": "120b3a40a9df725de19c6e1dbe4affc337fa08f3ce8cf15d80a5fdea1231e26a",
+          "bytes": 5739270,
+          "sha256": "b98f9ac08c7fb9bc71e624d70e23cec0e1621d865b4158392961891e5ed0345e",
           "verification": "bytes-verified"
         }
       ],
@@ -951,8 +949,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
-          "bytes": 8305220,
-          "sha256": "4eb704e0b0b1851da98769de1ab7a5f9c4a53f521d8bbf47181a41e733470e26",
+          "bytes": 8074634,
+          "sha256": "61e69e8836cd2b9844630809f1d87927ef85bd30a6bc35b6c64b39e38e3b30f6",
           "verification": "bytes-verified"
         }
       ],
@@ -1022,8 +1020,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-spectral-surface@2x.webp",
-          "bytes": 5680926,
-          "sha256": "70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b",
+          "bytes": 5758410,
+          "sha256": "0f3678eb5b0baa3b4fce23455a69304b07ba90cb7f822771be2631ecc612ac2e",
           "verification": "bytes-verified"
         }
       ],
@@ -1077,8 +1075,8 @@
         },
         {
           "url": "/scenes/bennu/bennu-elevation-surface@2x.webp",
-          "bytes": 2846108,
-          "sha256": "f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36",
+          "bytes": 2692836,
+          "sha256": "0fbf97ad512f73393f1de67f8e8d94b6bcc086c008ad157bf7b6d8f7aa2d2e78",
           "verification": "bytes-verified"
         }
       ],
@@ -1110,8 +1108,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5017,
-          "sha256": "83c0baa31bb8b1cd189a73b540924b25674b6091bca794e844b4a5f904772150",
+          "bytes": 5135,
+          "sha256": "c6c44898b4cfe0b7aa92771a3c59e93a942498784291bf99fc5efb82644f3db5",
           "verification": "bytes-verified"
         }
       ],
@@ -1132,7 +1130,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1261,11 +1258,11 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "4bbfdadfbf0c96b3cb386b814d5c6aaca1e4e8f52f3ffab4c2993be31c3b0120",
+    "materialSha256": "3fe771c5e78e9a10abdf4210832a4a060e10e835eb66f473131bd2f978ac0e37",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "d61100b54ab3d67b84dce2738ee5158c40349f548a53af887ea1187ef81abdfa"
+      "bindingsSha256": "619105078a5f6bf80f87499f745d1453afc2f5a36ea5772be5fc079b191dd290"
     }
   }
 }

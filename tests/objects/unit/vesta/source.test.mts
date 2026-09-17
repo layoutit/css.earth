@@ -71,13 +71,11 @@ test('Vesta uses one shared scene and its measured mesh for drawing and hits', a
     assert.equal(leaf.tag, 'u');
     assert.equal(leaf.attributes['data-polycss-texture-leaf-sizing'], 'raster');
     assert.equal(leaf.projectiveTextureLayer, undefined);
-    assert.ok(leaf.style.includes(`--polycss-atlas-width:${terrain.source.tileSize}px`));
-    assert.ok(leaf.style.includes(`--polycss-atlas-height:${terrain.source.tileSize}px`));
+    const [width, height] = ['width', 'height'].map(side => Number(leaf.style.match(new RegExp(`--polycss-atlas-${side}:(\\d+)px`))[1]));
     // Test the browser primitive's actual footprint against source positions.
     // Raster fitting must retain every measured vertex inside the native u.
     const matrix = leaf.style.match(/matrix3d\(([^)]+)\)/)[1].split(',').map(Number);
-    const size = terrain.source.tileSize;
-    const corners = [[size / 2, 0], [0, size], [size, size]].map(([x, y]) =>
+    const corners = [[width / 2, 0], [0, height], [width, height]].map(([x, y]) =>
       [0, 1, 2].map(axis => matrix[axis] * x + matrix[axis + 4] * y + matrix[axis + 12]));
     const sub = (a:readonly number[], b:readonly number[]) => a.map((value: number, axis: number) => value - b[axis]);
     const dot = (a:readonly number[], b:readonly number[]) => a.reduce((sum: number, value: number, axis: number) => sum + value * b[axis], 0);

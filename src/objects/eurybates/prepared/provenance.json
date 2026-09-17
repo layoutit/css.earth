@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "46b67806a483683a2bdaf0f1b6cda5b197fe25f9e707e6d5276803c76b94c4d6"
+    "sha256": "3c621a210415477dbbe1bbe4220a1947b861270c58ae3734124c889c954a8a06"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b631513ca35bcfa047d79aa2e8e5beed6d1ea1bb5a6cd40306646da8b4b0d119",
+      "sha256": "d96c54ace4ccf794d79fac9f4a71f85d3db333e3e13adf5cbe7cae2465ef1c18",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 873.7152488936719,
@@ -356,8 +355,8 @@
         },
         {
           "url": "/scenes/eurybates/eurybates-model-surface@2x.webp",
-          "bytes": 53996,
-          "sha256": "a6bf13f37581a48e580c6ce4efab271af09cfe8b5b3b7c9c71d3748951df368e",
+          "bytes": 62648,
+          "sha256": "5a0bace343333f24966ed96b4144ac7b07a1d81b5261a65f17903873c997fded",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "eurybates",
-    "materialSha256": "020e3f39efe589910b2fb13fdc5d618a3f80e514be6a016d08fa870c0c62a5de",
+    "materialSha256": "d812cb70d26982f79deba1b927c4202d0a6329669c8bd1e0ab2a8d0c4b93f244",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

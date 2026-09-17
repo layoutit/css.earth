@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "836a87a29aa6831c7f291af80fad5db431779c26c3514a1f3b446b689db8a12c"
+    "sha256": "b41cd212926ead3155e0b33906ea13971c55ac88c247c65196dcb53e35725661"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "0a187fbca1ec8293c91a1cdfb1fcfb7fa571509807e5ae31f2781125d35ed825"
+    "bindingsSha256": "ee3e2d67991596a7de235cebcaf9c24cc777670085fb19ec4d7e31421a8f09d8"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c02d7b6395a6207cfd5b71026778ed89f3f4fe08c9ad316e11807b49b4ed9a05",
+      "sha256": "67d3ced198350005f37b1ab319cce90171db25cdba874744d716d7f99351a40b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -222,8 +222,7 @@
               "expectedFaces": 196608
             },
             "faceBudget": 850,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -399,7 +398,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "d21cab564d968f0d09ccb139bd6b4f2b24ceabfceebacc20104c52e9dd2a8037",
+      "sha256": "4aa630c57ddb806702bfc568757d9ce46a3535fb9c65b1b433ea56526c1c70d6",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -410,7 +409,6 @@
           "metadata": "metadata_nomenclature_points_ITOKAWA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "itokawa-features.json",
         "publicBase": "/scenes/itokawa/",
         "target": {
@@ -1684,8 +1682,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "20963b041eabf0efcd3a8b7b1ece44e045b7f43f316b3224ff62fe7d4ab73b8e",
-      "bytes": 154,
+      "sha256": "bdac1cc9d50c238e5ef5ee1c467bf00ad7b33bb968191fadf3085a6d00e395e5",
+      "bytes": 186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1756,8 +1754,8 @@
         },
         {
           "url": "/scenes/itokawa/itokawa-elevation-surface@2x.webp",
-          "bytes": 918790,
-          "sha256": "c9f9fec5995292bdf489d6da4ad09adf804424458c279f24c2302fa5b8d7f6af",
+          "bytes": 927640,
+          "sha256": "38f3b94938f4a6ae5024cce2329350d953023b23d8d1ecd8a367600eb117b812",
           "verification": "bytes-verified"
         }
       ],
@@ -1831,8 +1829,8 @@
         },
         {
           "url": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
-          "bytes": 1756578,
-          "sha256": "d3603a4b8799fb4deb961d12d5f6370cd57d0db5499d642513e9fd1207c22dc7",
+          "bytes": 1712760,
+          "sha256": "39b32fc69b03d99f08f1864d129527e81f2d135b8d3a8de02d6115162f602add",
           "verification": "bytes-verified"
         }
       ],
@@ -1864,8 +1862,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6027,
-          "sha256": "d853fda2162ed524fd7aa1ef15097f677d461a3a5fb64e52689369159cfaa070",
+          "bytes": 6145,
+          "sha256": "1a1cb6626bd12726181597f2585f47d438fc3f290466b40e54eef4b597497ed3",
           "verification": "bytes-verified"
         }
       ],
@@ -1886,7 +1884,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1964,11 +1961,11 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "da440259a8becb6d77971c0220985af02db6b841a606c3e3d9d058beb7845921",
+    "materialSha256": "ad16abd50232654327fb4dc82f72888ca2a0e4f524823502199ef9de174036ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "0a187fbca1ec8293c91a1cdfb1fcfb7fa571509807e5ae31f2781125d35ed825"
+      "bindingsSha256": "ee3e2d67991596a7de235cebcaf9c24cc777670085fb19ec4d7e31421a8f09d8"
     }
   }
 }

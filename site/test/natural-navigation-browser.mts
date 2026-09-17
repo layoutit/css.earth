@@ -85,7 +85,7 @@ async function clickScene(id:string, allowSearch = false) {
 }
 let tracing = false;
 try {
-  await page.goto(`${origin}/sun/?overview=solar-system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbkXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA`);
+  await page.goto(`${origin}/sun/?overview=system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbkXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA`);
   await ready('sun'); await page.waitForTimeout(700);
   await page.evaluate(() => {
     window.__naturalIdentity = [document.querySelector('.prepared-universe'), document.querySelector('.planet-input-surface'), performance.timeOrigin];

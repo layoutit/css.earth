@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7088084fbb6107dfe314b43550f47bb9b55f04a3ac42f0a27d136ca1f1156f2b"
+    "sha256": "967ef08b8b2d74c5244eb97c6cd9af00c5dd98dd19e615c8847c8bc0ffccdc56"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6f9d55a2491c1d0c84087f02bb108ad905190f641ef92772b6cb93d12f61ac42",
+      "sha256": "ea50f328ba6b45abe6091216b68c4555f3cb31574a0359de943a1324ea45d16b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -435,8 +435,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 640,
@@ -2071,8 +2070,8 @@
         },
         {
           "url": "/scenes/pandora/pandora-elevation-surface@2x.webp",
-          "bytes": 480296,
-          "sha256": "08ab99830ba41a39c1673c8c31fb627fb491fa1247dc363148bb17eb09e4de53",
+          "bytes": 484474,
+          "sha256": "92f8b18778430bad320ce3077fb775a3d1513ecf438bd90080db94ce09eaae07",
           "verification": "bytes-verified"
         }
       ],
@@ -2135,8 +2134,8 @@
         },
         {
           "url": "/scenes/pandora/pandora-normal-surface@2x.webp",
-          "bytes": 389974,
-          "sha256": "4101db04fdc439033556f105f83297ac792bcbfcc7d4bbe24db938424785e0f5",
+          "bytes": 397526,
+          "sha256": "a43a90e343d01ad4bbebdd9f2f9f0bc3fc6c0cf31d095e8aa92f6ca272ff463b",
           "verification": "bytes-verified"
         }
       ],
@@ -2185,8 +2184,8 @@
         },
         {
           "url": "/scenes/pandora/pandora-filter-color-surface@2x.webp",
-          "bytes": 323900,
-          "sha256": "506a084fd8d1636826e0384aa2f5919288fbc080730298b2e955e51ee2c2a6af",
+          "bytes": 319562,
+          "sha256": "b7711a4d79fdacec260dd90c87a5e08f64500076fbefb811bdcea0416a2643a7",
           "verification": "bytes-verified"
         }
       ],
@@ -2307,7 +2306,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora",
-    "materialSha256": "3e3baa98bcdbbf4309c80dc325e884fc487590852de97f74bd991734d669354c",
+    "materialSha256": "5d6080f9ecc51228074bccaa1325681c3bcee93bad709f64ee4adf1cecd34c59",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e439fd5ef94a24b52f069890b373605a28da8470f6ae22cb25f1edde562114a"
+    "sha256": "128ed1f9d10d59f693b8ac2c938dc3f0657fbdd76cbc33f5394b107f81785826"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7a80e959803490c56b2b0dbc4ffd589c46986974ac44562fea85a46009d60377",
+      "sha256": "e35a70f83de9ec34ee30b74dc06a7e8b77582233bf8d45a78301c540617863b3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 12437.499999999996,
@@ -364,8 +363,8 @@
         },
         {
           "url": "/scenes/sedna/sedna-model-surface@2x.webp",
-          "bytes": 57260,
-          "sha256": "4af8e92a92224c4e9b46c6cde26016fee3bcab4ae4027be64b0f0521fa6e4f9b",
+          "bytes": 61268,
+          "sha256": "601590cc5dda2c1e6c17278314618da23428d0b614f742a7b49f51c0a92d0996",
           "verification": "bytes-verified"
         }
       ],
@@ -441,7 +440,7 @@
   },
   "lastPreparation": {
     "objectId": "sedna",
-    "materialSha256": "8541602d8381b34417f30a895bb8bac370a17c572be8e244a90bcd6d9afaac96",
+    "materialSha256": "5ea6daec733e2fce82f41c87e483ccb08b5ae0ea460ccc56c4b4ee929b3748d2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

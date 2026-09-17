@@ -420,8 +420,8 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {
-    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "sceneFromBody", "radii", "inset"]);
-    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property", "interior-disc"]), "view binding");
+    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "sceneFromBody", "radii", "inset", "slices"]);
+    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property", "interior-disc", "interior-slices"]), "view binding");
     // The stage itself may carry a published level-of-detail attribute or
     // property; every other binding names a retained node.
     node(binding.target, ["view-attribute", "view-property"].includes(binding.kind));
@@ -432,6 +432,18 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       if (matrix.length !== 16 || [3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1 || radii.length !== 3 || radii.some(value => value <= 0) ||
           !(binding.inset > 0 && binding.inset < 1) || !Number.isFinite(binding.inset) || tree.nodes[binding.target].parent !== tree.scene ||
           plan.camera.projection?.model !== "css-perspective-shared-with-sky") fail("interior disc requires an affine frame inside the perspective scene");
+    } else if (binding.kind === "interior-slices") {
+      const matrix = array(binding.sceneFromBody, "interior slice frame"), slices = array(binding.slices, "interior slices");
+      matrix.forEach(value => finite(value, "interior slice frame"));
+      if (matrix.length !== 16 || [3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1 || !slices.length ||
+          plan.camera.projection?.model !== "css-perspective-shared-with-sky") fail("interior slices require an affine body frame inside the perspective scene");
+      for (const slice of slices) {
+        record(slice, "interior slice", ["normal", "nodes"]);
+        const normal = array(slice.normal, "interior slice normal"), leaves = array(slice.nodes, "interior slice leaves");
+        normal.forEach(value => finite(value, "interior slice normal"));
+        if (normal.length !== 3 || Math.abs(Math.hypot(...normal) - 1) > 1e-6 || !leaves.length) fail("interior slice requires a unit normal and leaves");
+        for (const leaf of leaves) { node(leaf, false); if (tree.nodes[leaf].parent !== binding.target) fail("interior slice leaves must belong to its body"); }
+      }
     } else if (binding.kind === "silhouette-fit") {
       // The overlay fitted to the projected silhouette a perspective camera
       // publishes (see perspective-dolly.mjs), never below a prepared radius.

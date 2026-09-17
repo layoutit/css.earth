@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2eb2c529a84c44f9ff5ac12f5cc77612f597978833337633eb457a19b45a65bf"
+    "sha256": "c09bcf8fd7dbd26e595cbdcf6861bf52ad3a922a88090ba4e8ad233695d59564"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4d364acb61c658bbc7c9992d33054480eaab63d86ce43a1d9b54e6d197e09e80",
+      "sha256": "731fbaa68af7b571ab5cb05343d79fbd0b3f577ccff41b276748b605122f4a8b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 57.49999999999999,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/greip/greip-model-surface@2x.webp",
-          "bytes": 55996,
-          "sha256": "f0fabf4a378a0366ec4c0d098855afde309194162e83ed949489dd97cd9cb3bf",
+          "bytes": 62990,
+          "sha256": "53dfb32e4448baaef505d66cc27fd9753f165ec893f89df60ad7db7ffcb9375b",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "greip",
-    "materialSha256": "50f7dfaa6459ca73cd984d2eff0da4de65b3297a49f8f33f06e1a7cc543b25c8",
+    "materialSha256": "3c5b3272c84b1b841190eccc607196be2644012458c4a1deb58b21c998a0b9b2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

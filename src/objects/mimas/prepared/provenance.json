@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53c97cee687d7cdf8d3653821c9f8b6b8c189986972f1604beac46de7521ad01"
+    "sha256": "86b844a8d0bf767929a873b3dbdf5b393425654db1508062eeab2efb4116d996"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "df91b52f170a945293e33cb74159a73a45b4cb541874bd612ce4569e59f13da8"
+    "bindingsSha256": "6ec3d4d1a191fb9edb73a908df9a1c7ee64c35e0b5a5122bd7d093e4da0a373a"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1528d9691fd7c73ea895524bf58fe52bf7ad38b63cb0382bb962216116ead37c",
+      "sha256": "0793f6ed2addc88d7a4dfd9b512b79a18b6e2b6fb8eeb00265f030ba01890053",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -142,8 +142,7 @@
               "expectedFaces": 196608
             },
             "faceBudget": 2000,
-            "tileSize": 256,
-            "atlasColumns": 16,
+            "texelsPerFace": 65536,
             "simplification": {
               "targetFaces": 720,
               "maximumErrorMeters": 4000
@@ -373,7 +372,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "bd22fd10cced0cdc89ba4b281b0f8df82a7186fa8fed71660a7a515c1d11e9f7",
+      "sha256": "d998f0a8d9a52e33d5c60f9dfe057fbe63ead3574376faecefa232164c35c8c2",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -384,7 +383,6 @@
           "metadata": "metadata_nomenclature_points_MIMAS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "mimas-features.json",
         "publicBase": "/scenes/mimas/",
         "target": {
@@ -778,8 +776,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "9597bd1485f74cf558df8674b3f221bc9939775a5be3b8ce042e69ce34814b2c",
-      "bytes": 152,
+      "sha256": "3564f60af78d6387e050953d7fef74c860c6903d660d3513f46f64b526be4729",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -853,8 +851,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-normal-surface@2x.webp",
-          "bytes": 6635886,
-          "sha256": "c2e727a8729b5c1580bc63811cf1a05facbcf583a70759aededbb7ac3e08f311",
+          "bytes": 7085140,
+          "sha256": "f6cf49d95a8866e83a2a8c71723b4cb49f4496fa55124dde9959666eccedc6f6",
           "verification": "bytes-verified"
         }
       ],
@@ -911,8 +909,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-enhanced-surface@2x.webp",
-          "bytes": 8189424,
-          "sha256": "ffdee2030ac3cce437040c56bccd6b634ce287b6612770addfb4fdb2bebcf3f8",
+          "bytes": 8201540,
+          "sha256": "c951023397a8f839767c6dfc3171b8a8bb81702951d6afe7b5033b10144780b1",
           "verification": "bytes-verified"
         }
       ],
@@ -968,8 +966,8 @@
         },
         {
           "url": "/scenes/mimas/mimas-elevation-surface@2x.webp",
-          "bytes": 2419150,
-          "sha256": "cd244dd80eb2a96e0d2c2714d7eff15a492306598eb5aa21ff88b5c9bc7763f5",
+          "bytes": 2539812,
+          "sha256": "8051da1ead2d0c7526cbceeeee70a1e7840e329b0c006627b02f0e30ec9fe723",
           "verification": "bytes-verified"
         }
       ],
@@ -1001,8 +999,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6570,
-          "sha256": "33523eea4d0ffd1b203e6ed2c652c757eb9d5976e62cd01fbd37d00feedda3e2",
+          "bytes": 6688,
+          "sha256": "91d4ee436ae0a3e8357f119f08797e269ccfdc973a3afe819e2c83d89f42b131",
           "verification": "bytes-verified"
         }
       ],
@@ -1023,7 +1021,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1126,11 +1123,11 @@
   },
   "lastPreparation": {
     "objectId": "mimas",
-    "materialSha256": "dcecfe166e6ddf419de9a2fc3c8e8681779cd6218f722319ba3f6c0e77b435e8",
+    "materialSha256": "559caa9db73642e6a0a3bc7dfa8875361679b1752587f6eb1efc17779e8334a7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "df91b52f170a945293e33cb74159a73a45b4cb541874bd612ce4569e59f13da8"
+      "bindingsSha256": "6ec3d4d1a191fb9edb73a908df9a1c7ee64c35e0b5a5122bd7d093e4da0a373a"
     }
   }
 }

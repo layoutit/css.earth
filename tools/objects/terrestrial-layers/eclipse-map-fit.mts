@@ -1,0 +1,130 @@
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
+import { binAverage, bandTemperatureTable, fitLightCurveMap, temperatureGrid, type LightCurve, type Systematic } from '../eclipse-map/light-curve-map.mts';
+import { measureTransitShift } from '../eclipse-map/transit-timing.mts';
+import { readTarMember } from './tar-member.mts';
+import { array, boolean, number, optional, shape, text } from './source-records.mts';
+
+const inside = (path: string) => { if (!path || path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError('An eclipse-map input must be inside the source directory.'); return path; };
+const systematic = (value: unknown): Systematic => {
+  const { kind } = shape({ kind: text })(value);
+  if (kind === 'time') return { kind };
+  if (kind === 'exponential-ramp') return { kind, timeConstantsDays: shape({ timeConstantsDays: array(number) })(value).timeConstantsDays };
+  if (kind === 'column') return { kind, column: shape({ column: text })(value).column };
+  throw new TypeError(`Unknown systematics kind ${kind}.`);
+};
+const profile = shape({
+  path: text, sampling: text, units: text, planet: text, host: text,
+  lightCurve: shape({ encoding: text }),
+  fit: shape({ degrees: array(number), eigencurves: array(number), positive: boolean, transitExclusionPhase: number, gridHeight: number, systematics: array(systematic), transitFromLightCurve: boolean }),
+  band: shape({ encoding: text, path: text }),
+  star: shape({ encoding: text, path: text }),
+});
+
+/** Whitespace-separated numbers, one per line (a deposit's single-column text files). */
+const numbers = (bytes: Uint8Array) => Float64Array.from(Buffer.from(bytes).toString('utf8').trim().split(/\s+/u), Number);
+
+/** A comma-separated table with a header row, as the JWST reduction exports its light curves and count spectra. */
+export function readCsvColumns(bytes: Uint8Array) {
+  const [header, ...rows] = Buffer.from(bytes).toString('utf8').trim().split(/\r?\n/u);
+  const names = header!.split(',').map(name => name.trim()), columns = new Map(names.map(name => [name, new Float64Array(rows.length)]));
+  rows.forEach((row, r) => {
+    const cells = row.split(',');
+    if (cells.length !== names.length) throw new TypeError(`CSV row ${r + 2} has ${cells.length} cells, not ${names.length}.`);
+    cells.forEach((cell, c) => { columns.get(names[c]!)![r] = Number(cell); });
+  });
+  return columns;
+}
+
+/** The first two columns of every row of an SVO VOTable (Filter Profile Service or theoretical spectra service): wavelength in
+ * angstroms and the second quantity in the table's own units, checked against the declared units. */
+export function readSvoTable(bytes: Uint8Array, expectedUnits: readonly [string, string]) {
+  const xml = Buffer.from(bytes).toString('utf8');
+  const units = [...xml.matchAll(/<FIELD\b([^>]*)>/gu)].slice(0, 2).map(match => /unit="([^"]*)"/u.exec(match[1]!)?.[1] ?? '');
+  if (units.length !== 2) throw new TypeError('The VOTable does not declare two columns.');
+  if (units[0]!.toLowerCase() !== expectedUnits[0].toLowerCase() || units[1]!.toLowerCase() !== expectedUnits[1].toLowerCase()) {
+    throw new TypeError(`The VOTable columns are ${units.join(', ')}, not ${expectedUnits.join(', ')}.`);
+  }
+  const wavelength: number[] = [], values: number[] = [];
+  for (const match of xml.matchAll(/<TR>\s*<TD>([^<]*)<\/TD>\s*<TD>([^<]*)<\/TD>/gu)) { wavelength.push(Number(match[1])); values.push(Number(match[2])); }
+  if (!wavelength.length || [...wavelength, ...values].some(value => !Number.isFinite(value))) throw new TypeError('The VOTable has no finite rows.');
+  return { wavelengthMicrons: Float64Array.from(wavelength, a => a / 1e4), values: Float64Array.from(values) };
+}
+
+/** A map of brightness temperature fitted from a light curve at preparation time: the eigencurve fit on the package's own orbit,
+ * then the band conversion against a stellar model spectrum (see `tools/objects/eclipse-map/light-curve-map.mts`). */
+export async function loadEclipseMapFit(root: string, value: unknown) {
+  const recipe = profile(value);
+  if (recipe.sampling !== 'bilinear') throw new TypeError('An eclipse-map fit samples bilinearly.');
+  if (recipe.units !== 'K') throw new TypeError('An eclipse-map fit is a brightness temperature in K.');
+  const read = async (path: string) => readFile(resolve(root, inside(path)));
+  const source = await read(recipe.path);
+  let curve: LightCurve;
+  if (recipe.lightCurve.encoding === 'tar-text-columns') {
+    const members = shape({ time: text, flux: text, error: text })(recipe.lightCurve);
+    curve = { time: numbers(readTarMember(source, members.time)), flux: numbers(readTarMember(source, members.flux)), error: numbers(readTarMember(source, members.error)), columns: new Map() };
+  } else if (recipe.lightCurve.encoding === 'csv') {
+    const spec = shape({ time: text, flux: text, error: text, mask: text, skipLeading: number, columns: array(text) })(recipe.lightCurve);
+    const table = readCsvColumns(source), column = (name: string) => { const values = table.get(name); if (!values) throw new TypeError(`The light curve has no ${name} column.`); return values; };
+    if (!Number.isSafeInteger(spec.skipLeading) || spec.skipLeading < 0) throw new TypeError('skipLeading must be a whole number of integrations.');
+    // Integrations flagged by the reduction, and the leading ones the recipe drops, are removed before the fit.
+    const mask = column(spec.mask), keep = Array.from(mask.keys()).filter(i => i >= spec.skipLeading && mask[i] === 0);
+    const pick = (values: Float64Array) => Float64Array.from(keep, i => values[i]!);
+    curve = { time: pick(column(spec.time)), flux: pick(column(spec.flux)), error: pick(column(spec.error)), columns: new Map(spec.columns.map(name => [name, pick(column(name))])) };
+  } else throw new TypeError(`Unknown light-curve encoding ${recipe.lightCurve.encoding}.`);
+
+  if (recipe.star.encoding !== 'svo-model-spectrum') throw new TypeError(`Unknown stellar spectrum encoding ${recipe.star.encoding}.`);
+  // Model surface flux, erg s^-1 cm^-2 A^-1, to the disc-averaged intensity in W m^-3 sr^-1: times 1e7, over pi.
+  const model = readSvoTable(await read(recipe.star.path), ['ANGSTROM', 'ERG/CM2/S/A']);
+  // The model is kept over 0.5 to 30 microns: its far-ultraviolet rows print wavelengths too coarsely to increase.
+  const span = Array.from(model.wavelengthMicrons.keys()).filter(i => model.wavelengthMicrons[i]! >= 0.5 && model.wavelengthMicrons[i]! <= 30);
+  const stellar = { wavelengthMicrons: Float64Array.from(span, i => model.wavelengthMicrons[i]!), values: Float64Array.from(span, i => model.values[i]! * 1e7 / Math.PI) };
+  let band;
+  if (recipe.band.encoding === 'svo-filter') {
+    // A filter transmission: counted photons scale with transmission times lambda times the star's intensity.
+    const filter = readSvoTable(await read(recipe.band.path), ['Angstrom', '']);
+    const intensity = binAverage(stellar, filter.wavelengthMicrons), spacing = filter.wavelengthMicrons.map((w, i, all) => ((all[Math.min(all.length - 1, i + 1)]! - all[Math.max(0, i - 1)]!) / 2));
+    band = { wavelengthMicrons: filter.wavelengthMicrons, stellarIntensity: intensity, counts: filter.values.map((t, i) => Math.max(0, t) * filter.wavelengthMicrons[i]! * intensity[i]! * spacing[i]!) };
+  } else if (recipe.band.encoding === 'count-spectrum-csv') {
+    // The star's own extracted counts per detector column: the light curve summed exactly these over its wavelength range.
+    const spec = shape({ wavelength: text, counts: text, minimumMicrons: number, maximumMicrons: number })(recipe.band);
+    const table = readCsvColumns(await read(recipe.band.path)), wavelength = table.get(spec.wavelength), counts = table.get(spec.counts);
+    if (!wavelength || !counts) throw new TypeError('The count spectrum lacks its wavelength or counts column.');
+    const rows = Array.from(wavelength.keys()).filter(i => wavelength[i]! >= spec.minimumMicrons && wavelength[i]! <= spec.maximumMicrons && Number.isFinite(counts[i]!));
+    const centres = Float64Array.from(rows, i => wavelength[i]!);
+    band = { wavelengthMicrons: centres, stellarIntensity: binAverage(stellar, centres), counts: Float64Array.from(rows, i => Math.max(0, counts[i]!)) };
+  } else throw new TypeError(`Unknown band encoding ${recipe.band.encoding}.`);
+
+  const planetId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
+  if (!planetId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
+  const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm;
+  // Eclipse timing moves longitude (about 0.04 degrees per second for WASP-43b, 0.5 for HD 189733b), so a recipe can take the transit
+  // time from its own light curve instead of an ephemeris propagated to the visit; light time across the orbit is always modelled.
+  let orbit = hostedOrbit(planetId), transitShiftSeconds = 0;
+  if (recipe.fit.transitFromLightCurve) {
+    transitShiftSeconds = measureTransitShift(curve, orbit, starAstrometry(hostId), radiusRatio).shiftSeconds;
+    orbit = { ...orbit, transitTimeBmjdTdb: orbit.transitTimeBmjdTdb + transitShiftSeconds / 86400 };
+  }
+  const result = fitLightCurveMap(curve, recipe.fit, orbit, starAstrometry(hostId), radiusRatio, { stellarRadiusKm: BODIES[hostId].meanRadiusKm });
+  // Temperatures are taken on the fit's own grid, the cells positivity was enforced on; a finer grid can dip below zero between them.
+  const table = bandTemperatureTable(band), height = recipe.fit.gridHeight, width = 2 * height;
+  if (!Number.isSafeInteger(height) || height < 2) throw new TypeError('The fit grid needs a whole height of at least 2.');
+  const grid = temperatureGrid(result.basis, result.fit, table, radiusRatio, height);
+  const cell = (x: number, y: number) => { const v = grid.temperatures[y * width + ((x % width) + width) % width]!; return Number.isFinite(v) ? v : null; };
+  const lonStep = 360 / width, latStep = 180 / height;
+  return {
+    width, height, fit: result, band, radiusRatio, orbit, transitShiftSeconds,
+    sample(longitude: number, latitude: number) {
+      if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
+      const px = (((longitude + 180) % 360 + 360) % 360) / lonStep - 0.5, y = Math.max(0, Math.min(height - 1, (latitude + 90) / latStep - 0.5));
+      const x0 = Math.floor(px), y0 = Math.min(height - 2, Math.floor(y)), dx = px - x0, dy = y - y0;
+      const corners = [cell(x0, y0), cell(x0 + 1, y0), cell(x0, y0 + 1), cell(x0 + 1, y0 + 1)];
+      if (corners.some(v => v === null)) return null;
+      const [a, b, c, d] = corners as number[];
+      return a! * (1 - dx) * (1 - dy) + b! * dx * (1 - dy) + c! * (1 - dx) * dy + d! * dx * dy;
+    },
+    report: { format: 'eclipse-map-fit', units: 'K', transitShiftSeconds, degree: result.basis.lmax, eigencurves: result.fit.ncurves, candidates: result.candidates, samples: result.samples, chiSquared: result.fit.chiSquared,
+      bic: result.fit.bic, rampTimeConstantDays: result.rampTimeConstantDays, stellarCorrection: result.fit.stellarCorrection, hotspot: result.hotspot },
+  };
+}

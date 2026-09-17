@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2ae8f404ce1d4aff90ce75ad4e3f1627ee01694e54b0412b76d7da15d9dcc8ae"
+    "sha256": "669c6d78756a16913440a272f0d93c94be9489f5aa27d39167813f4ff0e51206"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1e20d8c950e8781f591c47267b277a1630fddfcc6e50e83bdb1014188e03ec55",
+      "sha256": "feb088b1080a6567ca23515d271254dbba10f40ad5c36cc371d337c3a3e36aa1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 60.28940048945836,
@@ -337,8 +336,8 @@
         },
         {
           "url": "/scenes/annefrank/annefrank-model-surface@2x.webp",
-          "bytes": 48228,
-          "sha256": "bdc6ba4fc1582341c3dd88c47bb098f2d015f4a02c331a9a63050908274da857",
+          "bytes": 59432,
+          "sha256": "c3dd776937f025d1b18ae0137354c5cc2ef3e378c13c285400546d08ef465a12",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "annefrank",
-    "materialSha256": "b5c5abaa30c33e8694be154d972019d216197a0cd57a7fda46d04a2484f039d3",
+    "materialSha256": "bb7306d44af4c3486d96d4fe8bfc1ab16b3e086cac013c596337d5f7c23ef382",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

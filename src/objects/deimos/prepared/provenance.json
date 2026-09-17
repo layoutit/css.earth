@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e11c1fe5c7cfeff937ae71ecc68a35be91ffd0411e436e101aa526aa79f9490e"
+    "sha256": "4676bfeac0e5ad035a13be90f60a67a4508e6a0afcee493d1c80090667d81fb9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5ccca51aedd893f264ffb0ad8d964bbfd15f34b883dd1ee11212a791f4c4c34b"
+    "bindingsSha256": "c829bdc12e6d875ce40ec2c46a219a71eb49c812d43bc341ac272c095df7f322"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7c69d2db9c45012167794b5eb2d4c2a514d539104b76dc5c0b12d9d8fb148aa5",
+      "sha256": "e39bf20ca7f88c82ae4415a47199a43f6cf782c00002a902740f183241919b04",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -209,8 +209,7 @@
             "latitudeSegments": 20,
             "longitudeSegments": 32,
             "faceBudget": 1600,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -477,7 +476,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "a506a4444aefd96a26db378ff62c80c4f35ef86f6ce0234d1519a939bd73c30f",
+      "sha256": "c4eba8cf9661a8275ce0d6754fee100b70bb1c16c9b0d61af6d8e94ac7b9ba2b",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -488,7 +487,6 @@
           "metadata": "metadata_nomenclature_points_DEIMOS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "deimos-features.json",
         "publicBase": "/scenes/deimos/",
         "target": {
@@ -777,8 +775,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
-      "bytes": 153,
+      "sha256": "4425ba76faafd30b12bccb8ecaa34564ed43fe240c4d4cd5ff0e68d3b9d4e354",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -852,8 +850,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-normal-surface@2x.webp",
-          "bytes": 1611872,
-          "sha256": "64882bfe4920d016dd5c918b1d727a03a0d0e0f08ddbc5b6d2becd5864419123",
+          "bytes": 1692430,
+          "sha256": "47a663f85dc108e38aca3e3dbee543458b9e0aafbafe515261c3f52d54d74993",
           "verification": "bytes-verified"
         }
       ],
@@ -908,8 +906,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-elevation-surface@2x.webp",
-          "bytes": 785732,
-          "sha256": "613db32f3dc4761d77932d1466ebd808e9dd7c82e7ac329e4aa7cf569961a4f5",
+          "bytes": 967138,
+          "sha256": "1d62edfe29f9ceb4073a2f67f3e52e8449d89587469b998582971733868d2dbc",
           "verification": "bytes-verified"
         }
       ],
@@ -959,8 +957,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-albedo-surface@2x.webp",
-          "bytes": 1809984,
-          "sha256": "4f0f6883ed631ad3366c5f506a191e0f2b13e58a3f157f51ff12e8fae366c550",
+          "bytes": 1904688,
+          "sha256": "891ae7329338ac719ff83ceef198b08695d1f078d1c7dace465476c37d6726b8",
           "verification": "bytes-verified"
         }
       ],
@@ -1010,8 +1008,8 @@
         },
         {
           "url": "/scenes/deimos/deimos-slope-surface@2x.webp",
-          "bytes": 2377332,
-          "sha256": "489d9c879f4b96f744ee80f4f1ee87ad8454f52c09dff3e3982ee3b94dad3b27",
+          "bytes": 2568920,
+          "sha256": "dc390537788314472764249a617684a6b49556f324988d0a16211ba25c3f4bbf",
           "verification": "bytes-verified"
         }
       ],
@@ -1043,8 +1041,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6168,
-          "sha256": "235601533ad1e9bcd14c2c93026d0a904229da70b22c5e2160a8b149286a6fed",
+          "bytes": 6285,
+          "sha256": "ccb66d4692c81c4ec0c093fad0a770e34109c2b43c6e77d1ae39752c16c76c49",
           "verification": "bytes-verified"
         }
       ],
@@ -1065,7 +1063,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1193,11 +1190,11 @@
   },
   "lastPreparation": {
     "objectId": "deimos",
-    "materialSha256": "1a00e5e245dd865b41f94466f692586adec327b4079d71c533b172d74bc49df4",
+    "materialSha256": "8c26468642d74437649124aa1303e402c65d5e4772f7bf992147fcd9005792a3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5ccca51aedd893f264ffb0ad8d964bbfd15f34b883dd1ee11212a791f4c4c34b"
+      "bindingsSha256": "c829bdc12e6d875ce40ec2c46a219a71eb49c812d43bc341ac272c095df7f322"
     }
   }
 }

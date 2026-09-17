@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4fcca4ec0317c0e1e56cb437684024e54bf561ef5a666b78b65b2b9ab6d9f42f"
+    "sha256": "1cde276133ef256c062fd87f50a93099db9a447846c78f0f098b91ebcca4ef71"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1fe01b92b9e06ac4c33cbe243d5b9cbec4dbd98d69987dc881bfabe62b44ca37",
+      "sha256": "3dc7997ba53d0c56011ef082fa3b5bac06cdbe5c43bb8a230c98b96ed223dd86",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 11374.999999999996,
@@ -361,8 +360,8 @@
         },
         {
           "url": "/scenes/orcus/orcus-model-surface@2x.webp",
-          "bytes": 57208,
-          "sha256": "8a22b20e5613892bf10677f6d5a4663a27874c6db13244d0dc3e093506bc5a61",
+          "bytes": 61216,
+          "sha256": "294fb12b5b5151b9801ea462e772640379d55285718d75d954b7ad5b6ef7e252",
           "verification": "bytes-verified"
         }
       ],
@@ -438,7 +437,7 @@
   },
   "lastPreparation": {
     "objectId": "orcus",
-    "materialSha256": "fda91207e5042a4ed7ec5e51b4763c325ef14d9fd275014abaea95ec6e501b05",
+    "materialSha256": "ef29fff4f22f1722db5f054946433fe62807a5ad33f7d1ff2b62b024108d8df4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

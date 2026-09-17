@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "41c5409354b69ed1bae508e0f3ca1556b1c6c1b39b114d5d64c89e28bda5d2d7"
+    "sha256": "5be34c40ee6f2d5613364fd6d61c9d8d07a004a39c4765de594af3ceb1a1362e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dd4e19bd515704e7d65b7e62b11ab6ab298a7254691926bc0f1431fcb6c86830",
+      "sha256": "822626e9a8cab690f83c98463ac8a018486b6b4e586ceeab0bd0a82e3fc6d009",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 95,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/skathi/skathi-model-surface@2x.webp",
-          "bytes": 56720,
-          "sha256": "3cb31bab0feff39b27c37d62463b3f415982ffdf860ad50afdfe4b82cf7e3f88",
+          "bytes": 62644,
+          "sha256": "90ddf16579eb7f43535f18c7dd35a9613c79ce0bb15e13d953ac95d1f1cb9ca5",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "skathi",
-    "materialSha256": "ecd1ade03c8fdfeba2aa17294a98ad7446710b63f7d5cd020d06557e29bd6576",
+    "materialSha256": "db33001ace2f4db1375a416a40b21e3d9bce8fafb6a0d8e56779b0128cce989d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

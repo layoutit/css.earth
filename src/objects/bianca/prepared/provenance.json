@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c39b807111bad62a8014d1ac1738af19b0e311270b3f66075dd57ba15c78cc3f"
+    "sha256": "4099e62ba48d447d2b54209b6be3b6021b0b0022a0d57da0c104ce32945bb68d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1a580722ac70be1642042f196a57f4de60a0ae38e8d632d216ae3ebb71b44c69",
+      "sha256": "78e9e3b45b33d09b0dd3e05b41a218cedadd16706a5e4d655cbd861275a4e6b1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1000,
@@ -343,8 +342,8 @@
         },
         {
           "url": "/scenes/bianca/bianca-model-surface@2x.webp",
-          "bytes": 55264,
-          "sha256": "f5686fa15ec6eead941600584b0806e799c95eaa3bee3c28cf18cdfbcd368262",
+          "bytes": 61312,
+          "sha256": "0fe64dfa12dfd2dbe39a78d2635c98d6fe04ac227b1e4c088232464c57c7ace4",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "bianca",
-    "materialSha256": "5e3625b16efa7758015bccc8878d415abcdd4f7303b190fda5677f88ca3fe0a7",
+    "materialSha256": "7781b1425cd05b27a24c1fb6dcd60741818519b44ba6e81f79e6fa5b19e847e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

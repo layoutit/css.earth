@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ad44648b3b96c5072782957ac7b52c66addb6273be2236332c83f71f50a92eed"
+    "sha256": "b63658a5efcd815549b608cc433ff5000677ca7e9a24bf037d93b96144abbac1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "0933c45d262682b94e0010335a0875555a6d3ece2ec4bc86c57c3d7186548707"
+    "bindingsSha256": "a55f90d66a3e015a22097f865efa499b5012cc2554e8788a862cc59ccf7111ae"
   },
   "recipes": [
     {
@@ -369,7 +369,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "23e234f835da8bc7877fd8be8c16bcb218afa9cee16abd01ce065bb42767828a",
+      "sha256": "6621ff031a61e771e0db9af9264d853885f93b89f5b9e6dfdd9b56a54e885c3c",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -380,7 +380,6 @@
           "metadata": "metadata_nomenclature_points_CALLISTO.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "callisto-features.json",
         "publicBase": "/scenes/callisto/",
         "target": {
@@ -721,8 +720,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "a3f124900fc2f62dc6d3b76ead7962907ae909c5203e3104950fe56368befde5",
-      "bytes": 155,
+      "sha256": "b6a0020a853ab46efd7907ccefde2f248afa704f80cc7a89119f5ea0656dc027",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1403,7 +1402,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1506,11 +1504,11 @@
   },
   "lastPreparation": {
     "objectId": "callisto",
-    "materialSha256": "2f14184e8c2df9bf5341d4dc56d543c3e601a924c3404f392e82dc9b716df95f",
+    "materialSha256": "3d29082dc7ebf9ba90ad43a2403aba9401ff1c3390808c4436854da69132ce24",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "0933c45d262682b94e0010335a0875555a6d3ece2ec4bc86c57c3d7186548707"
+      "bindingsSha256": "a55f90d66a3e015a22097f865efa499b5012cc2554e8788a862cc59ccf7111ae"
     }
   }
 }

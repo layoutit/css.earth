@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "92e411a65b63bc68d22c250ad0de4d7876d450dd2bf1d5dbf97d7d2c0d51e09b"
+    "sha256": "a21312cddd60c837021379e2a57e48c281dcf70ca2e09e2c0c8d9fe049866c2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a3b88eafbc13d4621ea516ee67e5eb492f074592880dd56ef7984f20e7434afa",
+      "sha256": "1d1451d466cfdd96e713b5518b49328c4a2c564e7e72ee21ab506458387372a3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 4250,
@@ -391,8 +390,8 @@
         },
         {
           "url": "/scenes/nereid/nereid-model-surface@2x.webp",
-          "bytes": 55502,
-          "sha256": "156eb46bff2684452df895863521d4e3a28ecddd2af767e4ec784704e0875bdc",
+          "bytes": 63028,
+          "sha256": "bccdf30ea4090e26241c6475433ea873f30cbe834e779122267ad84640ffc50a",
           "verification": "bytes-verified"
         }
       ],
@@ -468,7 +467,7 @@
   },
   "lastPreparation": {
     "objectId": "nereid",
-    "materialSha256": "9c47be8f0298ce5ff361e662c8d93ac5c67f5925fbc3b584cb05253df947f0f2",
+    "materialSha256": "8933015e82258a1b289dae00b63b60e3b7200d0e9c087bc1f814eb9a5a27c15d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

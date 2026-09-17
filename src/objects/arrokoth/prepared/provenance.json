@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4473a546b10c22bfb7f560497c8ba2977f0fdd2cfd24fde297bc2190405d8492"
+    "sha256": "77bf584694dd628a35c48784b593af49939a2965d99f28824cfcf167f4f7ff86"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "029042584476527697af9cbac677fc09141b9e9c775ad05807d7feb3b8c8f1b4",
+      "sha256": "e4005da258ec82feb05d50946c7f2435c95663f737fd04637a90d1c68140835b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -190,8 +190,7 @@
               "expectedFaces": 40960
             },
             "faceBudget": 2000,
-            "tileSize": 96,
-            "atlasColumns": 16,
+            "texelsPerFace": 9216,
             "simplification": {
               "targetFaces": 1000,
               "maximumErrorMeters": 250,
@@ -734,8 +733,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
-          "bytes": 119308,
-          "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
+          "bytes": 146562,
+          "sha256": "302320c4026fc5e1897fcb5df6542dcd861f9c7dda6ecc695a262a721930164c",
           "verification": "bytes-verified"
         }
       ],
@@ -791,8 +790,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
-          "bytes": 589518,
-          "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
+          "bytes": 618318,
+          "sha256": "f2318a1118e3aa79bace5383ed2bf59d79a963d5383ca9985ae22e54a2aac554",
           "verification": "bytes-verified"
         }
       ],
@@ -837,8 +836,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
-          "bytes": 840062,
-          "sha256": "b7397504b0d221dc587912513c7747b9fcca0468b3f880bebcaf17aa81c9f46d",
+          "bytes": 948294,
+          "sha256": "8ffe08e67b5b7aecaa83b49b45da568cf590b202e4b5205ebf444587fd4b8291",
           "verification": "bytes-verified"
         }
       ],
@@ -884,8 +883,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
-          "bytes": 262076,
-          "sha256": "e3f4c7a0b6516661a5946f0b79cd1feb7ea66d4765faec437b2c645280066456",
+          "bytes": 279014,
+          "sha256": "ec64f552413be4e47067808cb618e4c0a113e5b589f396ec0a3e2906010095a9",
           "verification": "bytes-verified"
         }
       ],
@@ -1031,7 +1030,7 @@
   },
   "lastPreparation": {
     "objectId": "arrokoth",
-    "materialSha256": "ef527b23b5654d034f3f1e8ca9470786549b1594a9546381ebf61537154a6c00",
+    "materialSha256": "57f6554e5d4345c43e083f9842fbddbbc7163e1a2e6a593cfc6f1733032b6776",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

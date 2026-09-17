@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7279e78e3bc851a6f7a438a1b03e5f5659cc3d05691446a471003a79fde529cf"
+    "sha256": "5634d82d68ba4894418182194a009f326f8b9bfe36ca4ad7151a2819b32269c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "f24852c7a8b4532712bc093f5e54a6768f37d751de5f489020f683f41cba47a0"
+    "bindingsSha256": "3cc920edf13422f459fc2ad2549b7b38e86f0bee58ccd879f57bedf2f5726f04"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8e3cf804d5b437f75073a97d9ee588e4027efe96579ec005c03423e725f06d08",
+      "sha256": "3a2d7f7056097d0aa974e34cb11131e137167114e9280189de5e38ed56693a8e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -175,8 +175,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -406,7 +405,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "e051d0ae8c5eca92e27231fbcdfe7d1dc3780ec19898aa74a8be968b9503b624",
+      "sha256": "72d37ca42c7c3402201d5c033b40707c70b776fbc86e398708c99318c16e96e3",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -417,7 +416,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "donaldjohanson-features.json",
         "publicBase": "/scenes/donaldjohanson/",
         "target": {
@@ -695,8 +693,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "4b235e29f861125fdab3b736f8d727c782bb449da1df0f9df73dfbe4c536bf6a",
-      "bytes": 161,
+      "sha256": "2baf4d4af169d4af154ec6c846c5ece03a52af6f3e29fd288bc9d57bb51c1b75",
+      "bytes": 193,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -767,8 +765,8 @@
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-elevation-surface@2x.webp",
-          "bytes": 300128,
-          "sha256": "377757a64a391fdc7116e7f34b875b0c52959cd72b151b28069c8d52447ac4be",
+          "bytes": 353250,
+          "sha256": "61786d1d39494468ff2d6435ba2936b85d0b36f4f6ff26bd5c348e1989e0e9d3",
           "verification": "bytes-verified"
         }
       ],
@@ -811,8 +809,8 @@
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
-          "bytes": 68684,
-          "sha256": "2619eacc158db118907cb153e9ab5c3864254622af66a571b5abb0c26f8e05ee",
+          "bytes": 86550,
+          "sha256": "5b0d57865f43e80f62506db1c522eba9d45cc7411548c5496c385b5034b58507",
           "verification": "bytes-verified"
         }
       ],
@@ -859,8 +857,8 @@
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
-          "bytes": 558832,
-          "sha256": "cbc238d821084a06141816e7fd767cda56f293be51534bcdc0792f352ef3c02f",
+          "bytes": 550700,
+          "sha256": "f808d3b97085051ec37732ddfd584baf246ee03e2c14c214be3b024caec032a8",
           "verification": "bytes-verified"
         }
       ],
@@ -892,8 +890,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 12269,
-          "sha256": "72bc7aea21212c7ac430f0ca81bb59f964bf6c4aa5f26e895f2634452583bf13",
+          "bytes": 12386,
+          "sha256": "c24dcb64412ada19e4b4035a8c7d00559a0bbc3d2e8594bf7faca8cdf4ed425c",
           "verification": "bytes-verified"
         }
       ],
@@ -914,7 +912,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1017,11 +1014,11 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "5be3f18161a41977806bba8ce55da545f15726362df07bd7cd547dd0ec87f530",
+    "materialSha256": "71782744f07166f76c90072720de69716c327cb2bdb2ca57882e396576c2b016",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "f24852c7a8b4532712bc093f5e54a6768f37d751de5f489020f683f41cba47a0"
+      "bindingsSha256": "3cc920edf13422f459fc2ad2549b7b38e86f0bee58ccd879f57bedf2f5726f04"
     }
   }
 }

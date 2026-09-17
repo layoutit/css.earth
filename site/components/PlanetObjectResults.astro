@@ -3,16 +3,20 @@ import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import PlanetObjectResult from "./PlanetObjectResult.astro";
 import PreparedObjectResult from './PreparedObjectResult.astro';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
-import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
-import { solarSystemFocus } from '../overview-selection.mts';
+import { OVERVIEW_TITLES, SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
+import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
+import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
 import { SCENE_OBJECTS } from '../objects.mts';
-import { overviewSourceDocumentation } from '../source-documentation.mts';
+import { overviewSourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
 import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mts";
 
 interface Props { activeObjectId?: string; formId?: string; }
 const { activeObjectId, formId } = Astro.props;
 const searchObjects = PLANET_SEARCH_OBJECTS;
-const systemRoute = solarSystemFocus(SCENE_OBJECTS)!.route;
+// The galactic scopes are measured from the Sun, so their overviews stay on its route.
+const galacticRoute = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!.route;
+const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({ system, star: SCENE_OBJECTS.find(object => object.id === system.id)!,
+  source: systemSourceDocumentation(system) }));
 const defaultCategory = 'planet';
 const types = new Map(OBJECT_CATEGORIES);
 for (const object of searchObjects) if (!types.has(objectCategory(object.classification))) {
@@ -44,8 +48,15 @@ const groups = [...types].map(([type, label]) => ({ type, label,
   aria-labelledby={`object-tab-${defaultCategory}`} tabindex="0"
   style={`--object-category-visible-rows: ${Math.min(8, Number(objectCategoryCount(classifications, 'planet')))}`}>
   <ul class="planet-object-list">
+    {systems.map(({ system, star, source }) => <li data-search-overview={SYSTEM_TITLES[system.id]!.label.toLocaleLowerCase('en')} hidden>
+      <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${system.route}?overview=system`}
+        data-source-subject={`overview:system:${system.id}`} data-source-document={source.href} data-source-label={source.label}>
+        <span class="planet-lens-icon"><PlanetNavigationMarker planetId={star.id} color={star.color} /></span>
+        <span class="planet-object-name planet-lens-label">{system.name}</span>
+      </a>
+    </li>)}
     {Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} hidden>
-      <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${systemRoute}?overview=${scope}`}
+      <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${galacticRoute}?overview=${scope}`}
         data-source-subject={`overview:${scope}`} data-source-document={overviewSourceDocumentation(scope, title.label).href}
         data-source-label={overviewSourceDocumentation(scope, title.label).label}>
         <span class="planet-lens-icon"><ContextNavigationMarker objectId={scope} /></span>

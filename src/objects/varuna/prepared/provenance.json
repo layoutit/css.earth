@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f616c959dfa4902d549e4ce5b9593cb13b8de2cf02dcb9d8fcf6107f7c05fd55"
+    "sha256": "bbd370684913945f3b039b78cfd7f5d0cbd85713024e731cd15f8a74b10d3df8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f4b2b6cffe06244633692a5f36fa5e9c1fbd80cdf6a09cebf0cf7b9fc947ffb3",
+      "sha256": "5f2b33c192687f8038aba4ffe93f162d9057b37e3bd87c9d5fa2f012c6f4b49e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8750.000001696591,
@@ -362,8 +361,8 @@
         },
         {
           "url": "/scenes/varuna/varuna-model-surface@2x.webp",
-          "bytes": 50308,
-          "sha256": "19efe906e2b1c8cf18f15745b61c2ba6405bfee445086938d2c1484fe665b21c",
+          "bytes": 59370,
+          "sha256": "966e8986b3940ee63fb748d3c4e87df98afad3dc9dd6a1062f5ea27a686397e8",
           "verification": "bytes-verified"
         }
       ],
@@ -439,7 +438,7 @@
   },
   "lastPreparation": {
     "objectId": "varuna",
-    "materialSha256": "cb577e1dd825635658ce6c4d611f3baeee96129fb9dd39da16efbfeb922c140c",
+    "materialSha256": "ea7bc5dc961825c65bdc15d7b5317d01350f2142555bfa94afb6d52140de9123",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "226270cfa9f17b9ea8f0ffa96ef81d4b9e5cd461d9a03c6bba45d171e1f86933"
+    "sha256": "22e5aa8d65605df2d9fb12765ec3b6569f2891cd1ff5638b31a318586f15c9a4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ea05bacd392d1d101d935418fa628ec2745375b3a068dc3145789bcb6d12e88a",
+      "sha256": "d317445edb4368d727397f405a86343ac14ef24bc1916fcb038c67227e4fd68e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -73,8 +73,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -312,8 +311,8 @@
         },
         {
           "url": "/scenes/kleopatra/kleopatra-shape-surface@2x.webp",
-          "bytes": 73870,
-          "sha256": "eee9ffa298d6fd2574749a1d2449d5d4cd43de05e004f8f4d6eccea62f77cb1b",
+          "bytes": 87860,
+          "sha256": "40d28e9a8b5e54c24d476444a0d4903419e7c43a6a2c22dd59353166edf0ceda",
           "verification": "bytes-verified"
         }
       ],
@@ -384,7 +383,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "6fea424e9a6c8e1c2383f7ee495180f6c301eda5c0f63cd1587906c2e40db806",
+    "materialSha256": "cc4794de690709f6eb31ba3f472aa9bd180c2eaba598442e13861cba92d53748",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

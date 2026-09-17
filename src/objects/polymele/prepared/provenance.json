@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1eb5c7ed73f6c055c93879348f63d9c255d9fec0285f0989d8911a0e7b38fae"
+    "sha256": "4c4737c262c6b81bbd64c715d6f4f080de99be354a930ba0ce7fce792e067768"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a3f743a3cd497f26e46a883d6cd0a16cc8af677e3a95fa602f2462dbfcb0038a",
+      "sha256": "5b386aee5bef5594a29fef23bbd0d75a35e99a269a32a16f3d1b8f632f766564",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 237.41363434068262,
@@ -343,8 +342,8 @@
         },
         {
           "url": "/scenes/polymele/polymele-model-surface@2x.webp",
-          "bytes": 43844,
-          "sha256": "c78078a9cc51a8e4ca1a8509933b6da44fae7f9718c7a76dc98eef763d688c8d",
+          "bytes": 55614,
+          "sha256": "8835b2e4ef04df26cddb778e64906cc9f91364256942c5e1d51a0c44c23ef875",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "polymele",
-    "materialSha256": "ae7805b223ea93ed67e6cce0f7e046a9c2df8131d50b0f7b862be6d726b4ef25",
+    "materialSha256": "62a5e7f646e04560902c628b6602d804568a12093efba9f92a85d68627186e0c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

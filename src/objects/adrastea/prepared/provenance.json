@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "47e789c9c1a845890475db1e939d64b4141d969701b74219fd1924a8a7be3a0d"
+    "sha256": "2f644ad46d7a86add548c0880f9ca75be644cde8d634d54bf322ff9a491076f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ad3bf7c3b93799bec41954abceecd2e62ec5e735995744fbf2ad9f9bb369eda1",
+      "sha256": "b92667927b516eb019992d9c6340e98f3c8f6b374574bc631a637e075a1f3599",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 160,
@@ -369,8 +368,8 @@
         },
         {
           "url": "/scenes/adrastea/adrastea-model-surface@2x.webp",
-          "bytes": 49466,
-          "sha256": "1afa25a76c7da6c9c2bed59345bcb530a0a0f9ac9b19e6d21c1435da1c911f63",
+          "bytes": 56090,
+          "sha256": "56dce43300452821951081b290119af7ad75d221b7f9a8c48d426ffb62aabaf5",
           "verification": "bytes-verified"
         }
       ],
@@ -446,7 +445,7 @@
   },
   "lastPreparation": {
     "objectId": "adrastea",
-    "materialSha256": "8a5ec604b431e1c948a60eb2a336120534a58c6a7d55d044662593379e4b512d",
+    "materialSha256": "8d1733594fd4e6401075ecd86932f055ca9b2552a4fe02fe1fc641d515d04804",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "56223452982f60c15e38aa16a8181901affd9b70216acab9d53ecfadd06284aa"
+    "sha256": "389d6b8452b851806eb4c91967776fa9c641a2fa1f6efde84690666a27171420"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "7795dde4e615e4e0790ddfabbee9cf81a71958b9d2bb2828a408275c3d1c26c9"
+    "bindingsSha256": "cbb55d477457830e807e8ca8f2c3af230a06dc9cc4421ea9fc29d20ade3b186d"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "34f5341fa2301c11b9d6423c2c1756b591909858c3a14b0ff072152ef6cf6020",
+      "sha256": "b546ab4d1728853b55057b13fdde88eeae5332488fc1084ca2fd359afc41de69",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -165,8 +165,7 @@
             "latitudeSegments": 64,
             "longitudeSegments": 128,
             "faceBudget": 850,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "lightFieldSize": 4,
             "primitive": "u",
             "simplification": {
@@ -397,7 +396,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "2e00300733f8a2572e548323aaa05ad8afa6cba2131718cd4cefa3e9a6c47c89",
+      "sha256": "7868bde6f73e0427c7f8ae25d27828fb9b6026ed0512c04d3a7063f5ccb5ab54",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -408,7 +407,6 @@
           "metadata": "metadata_nomenclature_points_VESTA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "vesta-features.json",
         "publicBase": "/scenes/vesta/",
         "target": {
@@ -766,8 +764,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "75f4e502b985c08b6a527b7c6459a3ca268a0bb27ce5da8c518435d647501fa5",
-      "bytes": 152,
+      "sha256": "e2ea16371b7d9ee6018209750ad06f6c7e5e8d4c590ba78d8a2647a7d100c9c8",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -846,8 +844,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-normal-surface@2x.webp",
-          "bytes": 4293850,
-          "sha256": "88e8e4861d21c6efbc87bd9fde61bf9d8a1f2e1fb4764286bcb13fb6712eacc5",
+          "bytes": 4026058,
+          "sha256": "185062ad407161b965175c36fddbaa5590ba76f2b1003506191250ca249bb297",
           "verification": "bytes-verified"
         }
       ],
@@ -906,8 +904,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-surface-surface@2x.webp",
-          "bytes": 2994634,
-          "sha256": "5413356efef96c61ca5e63d63ad7a7f1fccf5bbf3f961a456ffe69f890d4f308",
+          "bytes": 3167190,
+          "sha256": "63da494bbdafb2d18e2acd108c5d2681fc0d4d0a41e6c026576f9b3a8581f6c4",
           "verification": "bytes-verified"
         }
       ],
@@ -967,8 +965,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-ratios-surface@2x.webp",
-          "bytes": 3378534,
-          "sha256": "59252fe1b12ba4917bad014b5f7d3978fd901eb127db19f618a3daed3ec8e07a",
+          "bytes": 3266400,
+          "sha256": "f322484a33564e9fe0cd7868b96e802e820d76736208e0c25e9d6c3594ed2072",
           "verification": "bytes-verified"
         }
       ],
@@ -1022,8 +1020,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-elevation-surface@2x.webp",
-          "bytes": 1819878,
-          "sha256": "8141ca24ec36d809d035f1e34e709a917e1dbfc5b724cafd39d3a5b0e8bf7d85",
+          "bytes": 1932410,
+          "sha256": "6e30c71b3bed05cfd51848ded56a3b90e8b8182ada9af5f21fcb5a29de0a871f",
           "verification": "bytes-verified"
         }
       ],
@@ -1055,8 +1053,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5743,
-          "sha256": "9f3f33ea3ab842a3ebb21c32b59725be8c67a024304dede95b41f77006e8424d",
+          "bytes": 5862,
+          "sha256": "5a356db7c5b0785f4272b15810d7b45a5361a4f9c76bdbd444371c97375372a6",
           "verification": "bytes-verified"
         }
       ],
@@ -1077,7 +1075,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1205,11 +1202,11 @@
   },
   "lastPreparation": {
     "objectId": "vesta",
-    "materialSha256": "3b62e707e64ae9a92078326f46846fac2787a3f3d11e6241da90858ce16f33e6",
+    "materialSha256": "c2bbfbdb68a5bccf9577c754cfa9ad14ce8a4ef1d677aff7b77c6a0dbf485ca2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "7795dde4e615e4e0790ddfabbee9cf81a71958b9d2bb2828a408275c3d1c26c9"
+      "bindingsSha256": "cbb55d477457830e807e8ca8f2c3af230a06dc9cc4421ea9fc29d20ade3b186d"
     }
   }
 }

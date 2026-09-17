@@ -16,9 +16,9 @@ import {prepareRadialMaterials} from './radial-terrain.mts';
 const valid=[210,30,10],unknown=[136,142,153];
 function radialFixture(){
  const faces=[1,-1].map(sign=>({vertices:[[5,0,0],[5,sign,0],[5,0,1]],normal:[1,0,0],vertexNormals:[[1,0,0],[1,0,0],[1,0,0]]}));
- const plans=faces.map((face,i)=>({face,rect:{x:i*2,y:0},geometry:{leafWidth:2,leafHeight:2},
+ const plans=faces.map((face,i)=>({face,rect:{x:i*2,y:0,width:2,height:2},geometry:{leafWidth:2,leafHeight:2},
   matrix:[(i?-1:1)*BASE_TILE/2,0,0,0,0,0,BASE_TILE/2,0,0,0,1,0,0,5*BASE_TILE,0,1]}));
- return {faces,plans,width:4,height:2,tileSize:2};
+ return {faces,plans,width:4,height:2};
 }
 test('native radial fallback preserves numeric/missing cells through actual lossless flood and shadow encoding',async()=>{
  const root=await mkdtemp(join(tmpdir(),'cssearth-radial-grid-footprint-'));

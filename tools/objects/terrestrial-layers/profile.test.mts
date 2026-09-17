@@ -108,14 +108,14 @@ test('SPICE camera recipes declare their kernels, bodies, instrument and pixel a
  assert.throws(() => parseTerrestrialProfile(mixed), /source-bound/);
  // Limb refinement belongs to the camera formats and keeps its budget within bounds.
  const refined = structuredClone(profile);
- refined.raster.surfaceObservations[0].refinement = { method: 'mesh-limb', maximumCorrectionDegrees: 0.1, maximumResidualPixels: 2, minimumControls: 48, searchPixels: 256, maximumControls: 1500, minimumSharpness: 0.15 };
+ refined.raster.surfaceObservations[0].limbRefinement = { method: 'mesh-limb', maximumCorrectionDegrees: 0.1, maximumResidualPixels: 2, minimumControls: 48, searchPixels: 256, maximumControls: 1500, minimumSharpness: 0.15 };
  assert.doesNotThrow(() => parseTerrestrialProfile(refined));
  for (const alter of [(r: unknown) => fixtureRecord(r)["method"] = 'landmarks', (r: unknown) => fixtureRecord(r)["maximumCorrectionDegrees"] = 5, (r: unknown) => fixtureRecord(r)["maximumResidualPixels"] = 0,
   (r: unknown) => fixtureRecord(r)["minimumControls"] = 8, (r: unknown) => fixtureRecord(r)["searchPixels"] = 1024, (r: unknown) => fixtureRecord(r)["maximumControls"] = 50, (r: unknown) => fixtureRecord(r)["minimumSharpness"] = 1]) {
-  const changed = structuredClone(refined); alter(changed.raster.surfaceObservations[0].refinement);
+  const changed = structuredClone(refined); alter(changed.raster.surfaceObservations[0].limbRefinement);
   assert.throws(() => parseTerrestrialProfile(changed), /limb refinement/);
  }
- const cubeRefined = structuredClone(profile); cubeRefined.raster.surfaceObservations[0] = { ...cube, refinement: refined.raster.surfaceObservations[0].refinement };
+ const cubeRefined = structuredClone(profile); cubeRefined.raster.surfaceObservations[0] = { ...cube, limbRefinement: refined.raster.surfaceObservations[0].limbRefinement };
  assert.throws(() => parseTerrestrialProfile(cubeRefined), /source-bound/);
 });
 

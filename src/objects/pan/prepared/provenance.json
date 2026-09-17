@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "35362e150728fd3d3243f96b37744f7ca435c5ed060542f71e2311956ecd8615"
+    "sha256": "70b9efd5e5a50129eed585ad115642d34401c79e3acbc4128585bbeff4173fe1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a3988cef43e0c54cab86db4ffa723a79172fca7cd105c773ccc964543468222",
+      "sha256": "0132016383d3458e860ab6b41349b556a7887eb057c9c3c1da8a819f83d42839",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -397,8 +397,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -1777,8 +1776,8 @@
         },
         {
           "url": "/scenes/pan/pan-elevation-surface@2x.webp",
-          "bytes": 492720,
-          "sha256": "b213de4e6f3dd8851edb650afc520b013cacb6e8f1ea6a59f69a1ea61d115a16",
+          "bytes": 608272,
+          "sha256": "1d524196eeb402261082741d58f23e44940ee30cfd3d08bf9cf1607eeabb77b9",
           "verification": "bytes-verified"
         }
       ],
@@ -1837,8 +1836,8 @@
         },
         {
           "url": "/scenes/pan/pan-normal-surface@2x.webp",
-          "bytes": 360506,
-          "sha256": "7479dc7c514d43b766a213c9de12a407d3aa050b2ea05109b4fc4d98d545586f",
+          "bytes": 388558,
+          "sha256": "a6b6adce96156df56c2e7de7ed42a8245feaf355e9be75186a45b2b902c4229a",
           "verification": "bytes-verified"
         }
       ],
@@ -1887,8 +1886,8 @@
         },
         {
           "url": "/scenes/pan/pan-filter-color-surface@2x.webp",
-          "bytes": 417148,
-          "sha256": "779aebc5e87336ec99b4cd71aacbd0cea2e00df62d7e0fdbdcd2a3ba52cf164c",
+          "bytes": 406994,
+          "sha256": "9ee2b6b935f7fd2f9e262f05d906c1701c1f0a4bbb2fdf635e063743a221719a",
           "verification": "bytes-verified"
         }
       ],
@@ -2009,7 +2008,7 @@
   },
   "lastPreparation": {
     "objectId": "pan",
-    "materialSha256": "b6dc31c6185c83f940d16cef789593da144edccb732859de51b3ee4aa717fe18",
+    "materialSha256": "750d08a286b7170a65bd22f2183080a73b37426fcc83e6351ca12c70c351b43e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

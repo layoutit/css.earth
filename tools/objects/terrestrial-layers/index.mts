@@ -248,10 +248,6 @@ export function parseTerrestrialProfile(input:unknown) {
     if (lens.textureScale !== undefined) {
       lensTextureGrid(lens, value.raster);
       if (value.geometry.radialModels) throw new TypeError('Texture scaling for radial model families is not supported.');
-      const tile = value.geometry.radialTerrain?.tileSize;
-      if (tile !== undefined && (!Number.isSafeInteger(tile * lens.textureScale) || tile * lens.textureScale < 1)) {
-        throw new TypeError('Scaled radial textures require integral source atlas tiles.');
-      }
     }
   }
   return input as typeof value;
@@ -291,7 +287,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   const models = await loadRadialModels(context);
   const radial = models[0]?.radial ?? null;
   const surfaces = await prepareSolidRasters({ ...context, radial, radialModels: models });
-  const raster = await prepareSolidMaterial({ ...context, surfaces });
+  const raster = await prepareSolidMaterial({ ...context, surfaces, radial: !!radial });
   if (radial) {
     for (const model of models) {
       const terrain=requireRecord(model.config.geometry.radialTerrain);
@@ -302,6 +298,8 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
         : source.manifest.generatedIntermediates.filter(entry => model.lensIds.includes(requireString(requireRecord(requireRecord(entry).recipe).lensId))),
       sunDirection: requireBodyFixedSunDirection(config.namespace), replaceReviewedImages });
     }
+    const unpainted = surfaces.filter(surface => requireRecord(surface.layout).kind !== 'triangle-atlas').map(surface => surface.id);
+    if (unpainted.length) throw new Error(`Radial surfaces without a triangle atlas: ${unpainted.join(', ')}.`);
     await writeFile(resolve(outputDirectory, 'surfaces.json'), JSON.stringify({ objectId: config.namespace, surfaces }) + '\n');
     await writeFile(resolve(outputDirectory, 'material.json'), JSON.stringify(raster) + '\n');
   }

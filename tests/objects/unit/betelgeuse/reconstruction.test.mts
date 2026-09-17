@@ -8,9 +8,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsImage } from '../../../../tools/fits.mts';
 import { readMergedContinuum } from '../../../../tools/objects/interferometry/matisse-continuum.mts';
-import { fitStatistics, visibility } from '../../../../tools/objects/interferometry/image-fit.mts';
+import { fitStatistics, reconstructionPlane, visibility } from '../../../../tools/objects/interferometry/image-fit.mts';
 import { authorBetelgeuse, BEAM_FWHM_MAS } from '../../../../tools/objects/source-authoring/betelgeuse/author.mts';
 import { convolveGaussian, readReconstruction } from '../../../../tools/objects/interferometry/beam-convolve.mts';
 
@@ -20,10 +19,10 @@ const BEAM_IMAGE = resolve(SOURCE, 'observations/betelgeuse-matisse-2020-02-cont
 const VISIBILITIES = resolve(SOURCE, 'observations/betelgeuse-matisse-2020-02-continuum.oifits');
 
 test('the pinned reconstruction fits the pinned visibilities and closure phases', async () => {
-  const fits = readFitsImage(await readFile(IMAGE));
-  assert.equal(fits.bitpix, -64); assert.equal(fits.width, 128); assert.equal(fits.height, 128);
-  assert.ok(Number(fits.header.CDELT1) < 0, 'east is on the left');
-  const image = { width: fits.width, height: fits.height, values: fits.values, pixelMas: Math.abs(Number(fits.header.CDELT1)), eastLeft: true };
+  const fits = readReconstruction(await readFile(IMAGE));
+  assert.equal(fits.width, 128); assert.equal(fits.height, 128);
+  const image = reconstructionPlane(fits);
+  assert.ok(image.eastLeft, 'east is on the left');
   const data = readMergedContinuum(await readFile(VISIBILITIES));
   assert.equal(data.vis2.length, 780); assert.equal(data.t3.length, 520);
   // Zero baseline: a normalised image has unit visibility.
@@ -43,12 +42,12 @@ test('the light outside the photospheric disc is required by the visibilities', 
   // The beam-convolved image keeps 80 percent of its flux inside the 42.45 mas disc. Zeroing everything outside it, or everything
   // beyond a few beams of the limb, breaks the fit to the closure phases: the halo the off-limb plate shows is in the data.
   const beam = readReconstruction(await readFile(BEAM_IMAGE)), data = readMergedContinuum(await readFile(VISIBILITIES));
-  const pixelMas = Math.abs(Number(beam.cards.find(([key]) => key === 'CDELT1')?.[1])), { width, height } = beam;
+  const pixelMas = beam.axes.scale[0], { width, height } = beam;
   let sx = 0, sy = 0, sw = 0;
   for (let i = 0; i < beam.values.length; i++) { const v = beam.values[i]!; if (v > 0) { sx += (i % width) * v; sy += Math.floor(i / width) * v; sw += v; } }
   const cx = sx / sw, cy = sy / sw, discRadius = 42.45 / 2 / pixelMas;
   const within = (limit: number) => { const values = Float64Array.from(beam.values, (v, i) => Math.hypot(i % width - cx, Math.floor(i / width) - cy) <= limit ? v : 0); const total = values.reduce((a, b) => a + b, 0); return { width, height, values: values.map(v => v / total), pixelMas, eastLeft: true }; };
-  const full = fitStatistics({ width, height, values: beam.values, pixelMas, eastLeft: true }, data.wavelengthMetres, data.vis2, data.t3);
+  const full = fitStatistics(reconstructionPlane(beam), data.wavelengthMetres, data.vis2, data.t3);
   const disc = fitStatistics(within(discRadius), data.wavelengthMetres, data.vis2, data.t3);
   const fourBeams = fitStatistics(within(discRadius + 4 * BEAM_FWHM_MAS / pixelMas), data.wavelengthMetres, data.vis2, data.t3);
   assert.ok(disc.reducedChi2T3 > 100 * full.reducedChi2T3, `without the off-limb light the closure phases do not fit: ${disc.reducedChi2T3} against ${full.reducedChi2T3}`);
@@ -60,16 +59,14 @@ test('the light outside the photospheric disc is required by the visibilities', 
 test('the displayed image is the raw reconstruction convolved to the beam, and keeps its flux and centre', async () => {
   const raw = readReconstruction(await readFile(IMAGE)), beam = readReconstruction(await readFile(BEAM_IMAGE));
   assert.equal(beam.width, raw.width); assert.equal(beam.height, raw.height);
-  const pixelMas = Math.abs(Number(raw.cards.find(([key]) => key === 'CDELT1')?.[1]));
-  const expected = convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas);
+  const expected = convolveGaussian(raw, BEAM_FWHM_MAS / raw.axes.scale[0]);
   let maximum = 0, rawFlux = 0, beamFlux = 0;
   for (let i = 0; i < expected.length; i++) { maximum = Math.max(maximum, Math.abs(expected[i]! - beam.values[i]!)); rawFlux += raw.values[i]!; beamFlux += beam.values[i]!; }
   assert.ok(maximum < 1e-15, `the pinned beam image is the convolution of the pinned raw image (max difference ${maximum})`);
   assert.ok(Math.abs(beamFlux - rawFlux) < 1e-4 * rawFlux, 'convolution keeps the flux to the edge truncation');
   // The beam removes the regulariser's grain: the peak over the median inside the disc drops, and the fit to the visibilities is still close.
   const wavelength = readMergedContinuum(await readFile(VISIBILITIES));
-  const image = { width: beam.width, height: beam.height, values: beam.values, pixelMas, eastLeft: true };
-  const fit = fitStatistics(image, wavelength.wavelengthMetres, wavelength.vis2, wavelength.t3);
+  const fit = fitStatistics(reconstructionPlane(beam), wavelength.wavelengthMetres, wavelength.vis2, wavelength.t3);
   assert.ok(fit.reducedChi2Vis2 < 2 && fit.reducedChi2T3 < 2.5, `the beam-convolved image still fits: ${fit.reducedChi2Vis2}, ${fit.reducedChi2T3}`);
 });
 

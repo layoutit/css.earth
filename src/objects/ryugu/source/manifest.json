@@ -466,8 +466,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6385,
-      "expectedSha256": "db35b8b9ea6b6fd11ba9b0133ca04cf3621d7475e92172c9d12d04e2d4d70d38"
+      "expectedBytes": 6366,
+      "expectedSha256": "25181932ca0f62c11238914361dd2e32d9f237ee4f001998215760c3f25dc7e4"
     },
     {
       "path": "presentation/title-mark.json",
@@ -540,8 +540,8 @@
     {
       "id": "ryugu-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1150,
-      "expectedSha256": "65a2fe24d6ac8595591651b64c0cf23b76467352e5b13ef7625c1a57eebf5eae",
+      "expectedBytes": 1118,
+      "expectedSha256": "b37bda5223d6b4f4ebce0c8a076f4b2aff567a338e1b59307647dda9163b6319",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -558,8 +558,8 @@
     {
       "id": "ryugu-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "d9f3627a502321ef4f782957a1826b28f3c3a29ad332c048c63b1453bb47d09d",
+      "expectedBytes": 184,
+      "expectedSha256": "3f19b366469430b6c025f610804eadb79be3d19c548c2a7955c988d2ca2109e6",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

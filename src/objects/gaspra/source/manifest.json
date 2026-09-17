@@ -467,8 +467,8 @@
     {
       "id": "gaspra-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1129,
-      "expectedSha256": "e56d3db7e5b847cc73d83d0652ad5c4d7658b992b79923a37433422a4941f1a7",
+      "expectedBytes": 1097,
+      "expectedSha256": "1ed82e0b3f8da4a864007f335e6e319bb48f06cab62554bfa7f5d418881fedd3",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -485,8 +485,8 @@
     {
       "id": "gaspra-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "d7e2f54918ea9f280437edf5ebd10a617c6fd23307f04b1b9670f77b5df71a7d",
+      "expectedBytes": 185,
+      "expectedSha256": "07d4e8873ba3816e9c7d656f4058d4a44e6c9565d03b5bf96f8764a07454e98d",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -556,8 +556,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6591,
-      "expectedSha256": "90193a15b4d1339b9ada3687b9247d9d0623b03a0c787c2326500b584f58dea5"
+      "expectedBytes": 6572,
+      "expectedSha256": "83679163dfd24b2c16c1599f92a23c848de01c1cb16355e390ecb1f1508cd4f7"
     },
     {
       "path": "presentation/title-mark.json",

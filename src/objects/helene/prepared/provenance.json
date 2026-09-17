@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c440c5f000931136c3739cca1d7919b66654c4fe21b593cb5946aab659a22307"
+    "sha256": "b31090e64d1199472da352ff7ad7bfe233a6ab74475c13a06eb89e080176acc8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "74dcc6ec8a1572984b088092310bd661da87329c81c8a323fc45df12c1fc88fd",
+      "sha256": "836f3ac59b3c7d69be91da9ed14e2c0402023522e1800a3248a7de22d739bd05",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -605,8 +605,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "targetFaces": 800,
               "maximumErrorMeters": 300,
@@ -3059,8 +3058,8 @@
         },
         {
           "url": "/scenes/helene/helene-elevation-surface@2x.webp",
-          "bytes": 626068,
-          "sha256": "c9708ca1ca69a288380a94e919af0fcfa931f97562d2180beb6c633dd96e04e1",
+          "bytes": 613148,
+          "sha256": "ea4071889b8bc040acddb5e5ae6c8decd5b46952a553495cd323b6f80f7a996c",
           "verification": "bytes-verified"
         }
       ],
@@ -3129,8 +3128,8 @@
         },
         {
           "url": "/scenes/helene/helene-normal-surface@2x.webp",
-          "bytes": 499582,
-          "sha256": "6b9d26a4799f0129b47b3dfc21fcb1ab626ea5a20d02543d07ae364dfefc0cc8",
+          "bytes": 521620,
+          "sha256": "75bfd50bc0df58edea6a611c6fabbf5b5ed65c9776ec4dce03ced484d4a6694e",
           "verification": "bytes-verified"
         }
       ],
@@ -3189,8 +3188,8 @@
         },
         {
           "url": "/scenes/helene/helene-false-color-surface@2x.webp",
-          "bytes": 444080,
-          "sha256": "5b79a857c69d12c887d616014add68a3aaa7f98944df9155811ca86cedb1cf53",
+          "bytes": 451546,
+          "sha256": "615855a60909fd4102ba481898701b11eb07b0a39a12ec22db8bb1b7608bc3aa",
           "verification": "bytes-verified"
         }
       ],
@@ -3311,7 +3310,7 @@
   },
   "lastPreparation": {
     "objectId": "helene",
-    "materialSha256": "7b3f164d2f8a04db64fdba8f2f6afa5ce72deb85b6881b11eef5d8dc1fe46edb",
+    "materialSha256": "425e6e94a79ec2562e7a7f9d1f219a7321fe306e5332c7a9a4d949a991fd7f31",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

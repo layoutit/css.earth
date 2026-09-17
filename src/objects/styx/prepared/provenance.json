@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4c442522be0f05c1439396546c0c8b4ad6b70a150d882340f8063a91096ac3eb"
+    "sha256": "3e0e518b277f8dc4c34421296f517eb1fd8faa2759957650be05b878bf99eff9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fad8ff43dc913035c2589f1fef8d3cb47af42e935e2807e4ff126996d26e491a",
+      "sha256": "0d52015aac231c872c200f2069ab53211b91f9f9d70847d3d49371e99a74a180",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,8 +77,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 120,
@@ -356,8 +355,8 @@
         },
         {
           "url": "/scenes/styx/styx-model-surface@2x.webp",
-          "bytes": 50252,
-          "sha256": "2fb5d3a0dfdcc73da8052a16625ec478121ad5a2f1edffcf44b2fb7909f2b344",
+          "bytes": 59486,
+          "sha256": "c29fe895025fa9cd8609af34e0a9454f31bfd1e613d7c9b05ef6aba0172e0583",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "styx",
-    "materialSha256": "a430983c8923cca071ae4c175491237306e98ace9c49871516472cac31d382f9",
+    "materialSha256": "914d0306d19da527c1f289beeb83e7153b779db0e617bab84e741c8b5d7d0266",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

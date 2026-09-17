@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a42f59e6d72664f37751e40d729ddbd55d07edb2dc1735a5347ef09d936fc6f"
+    "sha256": "8eb71ced5b3b3f757e750bbd547f11b2e5ab96d9c72abe2c15419e5059ac451c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e64252f9fe90d86de0a1f33b1764388fd82bcb04412065719b169f7c72ccdafe",
+      "sha256": "6efccd19d834284f8a259e9f6e0ca6fe2d87b6e56e74d5502773689d755e9214",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -310,8 +310,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 1100,
               "maximumErrorMeters": 2000,
@@ -1099,8 +1098,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-elevation-surface@2x.webp",
-          "bytes": 376918,
-          "sha256": "f44442af0337975d7e9d87ae64de2803245d3a183d0f7ce96ccadf845fa50b28",
+          "bytes": 424140,
+          "sha256": "54ffa8e9b2bdb8e776ba73d7dbde81303627cb1a1109c4ba449669ba73797f8a",
           "verification": "bytes-verified"
         }
       ],
@@ -1147,8 +1146,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-normal-surface@2x.webp",
-          "bytes": 356514,
-          "sha256": "b1d8a2a613a0803a335da11783810470fe24ee258d40794e7abaae3fc3cba361",
+          "bytes": 380924,
+          "sha256": "bef64dca81cd5f9b1192db93f64896e6ee48a0b5da25705495d30a7fceefaa06",
           "verification": "bytes-verified"
         }
       ],
@@ -1197,8 +1196,8 @@
         },
         {
           "url": "/scenes/proteus/proteus-filter-color-surface@2x.webp",
-          "bytes": 180866,
-          "sha256": "6806c78f6493f125c074a60eae64c6ff46283f3299d934be662258b75baea9d0",
+          "bytes": 197018,
+          "sha256": "7f3c2101872f79a50708f8bc99148d15f089adfa74785552c348e826a2692ee3",
           "verification": "bytes-verified"
         }
       ],
@@ -1319,7 +1318,7 @@
   },
   "lastPreparation": {
     "objectId": "proteus",
-    "materialSha256": "0278eedf672af8943a49585e9c295aca1c73bcd9c00b4c452d9e4f581b0f21b4",
+    "materialSha256": "f87dcded3701d65f6d495e0501af1d594a5f057f191ee4b63ac0044b7c24d68a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

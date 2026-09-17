@@ -37,6 +37,7 @@ import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
 import { SCENE_OBJECTS } from './objects.mts';
+import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { objectClassificationLabel } from './planet-search-objects.mts';
 import { MOBILE_SHEET_POLICY, MOBILE_VIEWPORT_QUERY, mobileSheetKeyboardInset } from './runtime-policy.mts';
 
@@ -74,7 +75,7 @@ export function mountPlanetShell({
   let selectionPreview: SelectionPreview | null = null;
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
   let cardObjectId = objectId;
-  let overview = false, overviewScope: OverviewScope = 'solar-system', camera: ShellCamera | null = null, unsubscribeOverview: (() => void) | null = null;
+  let overview = false, overviewScope: OverviewScope = 'system', camera: ShellCamera | null = null, unsubscribeOverview: (() => void) | null = null;
   let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
@@ -94,10 +95,11 @@ export function mountPlanetShell({
   function updateOverview(force = false, world = camera?.navigation?.capture()) {
     updateBodyCard(world);
     if (selectionPreview) return;
-    const scope = overview && world ? overviewScopeAtCamera(world, overviewScope) : 'solar-system';
+    const scope = overview && world ? overviewScopeAtCamera(world, overviewScope) : 'system';
     if (!force && scope === overviewScope) return;
     overviewScope = scope;
-    objectBrowser.setOverview(overview, scope);
+    // An overview mounts its system's star, so the card's object names the system.
+    objectBrowser.setOverview(overview, scope, cardObjectId);
     viewReadout.setOverviewScope(scope);
   }
   function own<T extends { destroy(): void }>(controller: T) {
@@ -112,7 +114,7 @@ export function mountPlanetShell({
     sheet = own(createSheetController(documentTarget, windowTarget, lifetime));
     own(createLabelOcclusionController(documentTarget));
     own(createExplorerRailController(documentTarget, windowTarget, {
-      onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
+      onOpenSolarSystem: () => objectBrowser.showSystem(SOLAR_SYSTEM_ID),
     }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => selectionPreview?.restore());
@@ -143,9 +145,9 @@ export function mountPlanetShell({
         updateBodyCard();
       };
     },
-    beginOverviewSelection(scope: OverviewScope = 'solar-system') {
+    beginOverviewSelection(scope: OverviewScope, systemId: string) {
       selectionPreview?.restore();
-      const restoreBrowser = objectBrowser.previewOverview(scope);
+      const restoreBrowser = objectBrowser.previewOverview(scope, systemId);
       const preview = { id: null, restore() {
         if (selectionPreview !== preview) return;
         selectionPreview = null;
@@ -228,7 +230,7 @@ export function mountPlanetShell({
       disposeContent();
       content.apply({ preserveSidebar });
       cardObjectId = content.id;
-      overview = false; overviewScope = 'solar-system';
+      overview = false; overviewScope = 'system';
       preparedFocus = null; focusCard.set(null);
       objectBrowser.setObject(content.name);
       mountContent(content.id, motion, contrast);
@@ -528,7 +530,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const galaxy = browser?.querySelector<HTMLElement>('[data-galactic-overview]');
   const largeScaleCards = [...(browser?.querySelectorAll<HTMLElement>('[data-large-scale-overview]') ?? [])];
   const focusCard = browser?.querySelector<HTMLElement>('[data-prepared-focus-card]');
-  const system = browser?.querySelector<HTMLElement>('[data-solar-system-results]');
+  const system = browser?.querySelector<HTMLElement>('[data-system-results]');
+  const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
       !(trigger instanceof windowTarget.HTMLButtonElement) ||
@@ -618,9 +621,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   let selectedObjectName = "";
   let initialObject = true;
   let overview = false;
-  let overviewScope: OverviewScope = 'solar-system';
+  let overviewScope: OverviewScope = 'system', overviewSystemId = SOLAR_SYSTEM_ID;
   let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
-  const overviewName = () => ({ 'solar-system': 'Solar System', 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
+  const overviewName = () => overviewScope === 'system' ? systemById(SCENE_OBJECTS, overviewSystemId)?.name ?? 'Solar System'
+    : ({ 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
   let visibleObjects = 0;
   let visibleOverviews = 0;
   let visibleDestinations = 0, visibleFeatures = 0;
@@ -664,7 +668,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const sourceFocus = preparedFocus?.id ?? '';
     if (browser.dataset.sourceFocus !== sourceFocus) browser.dataset.sourceFocus = sourceFocus;
     renderSourceLink(documentTarget, preparedFocus ? `focus:${preparedFocus.id}`
-      : overview ? `overview:${overviewScope}` : `object:${selectedObjectName}`, sourceLinks);
+      : overview ? `overview:${overviewScope === 'system' ? `system:${overviewSystemId}` : overviewScope}` : `object:${selectedObjectName}`, sourceLinks);
   };
   const filter = (resetScroll = true) => {
     const searching = browsing && (search.value.trim().length > 0 || browseAll);
@@ -698,6 +702,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     if (focusCard) setPanelHidden(focusCard, !focused);
     if (galaxy) setPanelHidden(galaxy, !galactic);
     if (system) setPanelHidden(system, galactic || Boolean(focused) || Boolean(largeScale));
+    // The results card introduces the system the overview shows; searches and object cards keep the Solar System's.
+    const headerSystemId = overview && overviewScope === 'system' ? overviewSystemId : SOLAR_SYSTEM_ID;
+    for (const header of systemHeaders) header.toggleAttribute('data-system-current', header.dataset.systemHeader === headerSystemId);
     if (focused && preparedFocus) {
       browser.ariaLabel = preparedFocus.name;
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
@@ -886,14 +893,14 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       filteredQuery = null;
       if (open) filter(false);
     },
-    previewOverview(scope: OverviewScope = 'solar-system') {
-      const previous = { selectedObjectName, overview, overviewScope, preparedFocus, browsing };
+    previewOverview(scope: OverviewScope, systemId: string) {
+      const previous = { selectedObjectName, overview, overviewScope, overviewSystemId, preparedFocus, browsing };
       preparedFocus = null;
-      overview = true; overviewScope = scope; browsing = false;
+      overview = true; overviewScope = scope; overviewSystemId = systemId; browsing = false;
       markSelection(); render(false);
       return () => {
         const editing = browsing;
-        ({ selectedObjectName, overview, overviewScope, preparedFocus } = previous);
+        ({ selectedObjectName, overview, overviewScope, overviewSystemId, preparedFocus } = previous);
         browsing = editing || previous.browsing;
         markSelection(); render(browsing);
       };
@@ -910,14 +917,15 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
         markSelection(); render(browsing);
       };
     },
-    showSolarSystem() {
-      overview = true; overviewScope = "solar-system";
+    showSystem(systemId: string) {
+      overview = true; overviewScope = 'system'; overviewSystemId = systemId;
       markSelection(); render(false);
     },
-    setOverview(enabled: boolean, scope: OverviewScope = 'solar-system') {
+    setOverview(enabled: boolean, scope: OverviewScope, systemId: string) {
       const editing = browsing;
       overview = enabled;
       overviewScope = scope;
+      if (enabled) overviewSystemId = systemById(SCENE_OBJECTS, systemId)?.id ?? SOLAR_SYSTEM_ID;
       markSelection();
       if (enabled) { destinations?.bind(null); features?.bind(null); }
       render(editing);

@@ -18,7 +18,7 @@
         "https://zenodo.org/records/12627524",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Original Zenodo tar, unchanged; members are read in place (maps.npy for the lens, the white-light light curve for the geometry test). MD5 bb6e7e7b86475ed9f309bb1d7fa278a9.",
+      "acquisition": "Original Zenodo tar, unchanged; members are read in place (maps.npy for the NIRSpec lens, the white-light light curve for the geometry and fit tests). MD5 bb6e7e7b86475ed9f309bb1d7fa278a9.",
       "redistribution": "CC BY 4.0 with attribution.",
       "consumers": [
         "challener-2024-eclipse-map"
@@ -37,6 +37,115 @@
             "evidence": "https://arxiv.org/abs/2406.10207#section-4"
           }
         ]
+      }
+    },
+    {
+      "id": "wasp-43b-miri-white",
+      "path": "science/jwst-1366-miri/white-5.0-10.5um.csv",
+      "expectedBytes": 1382127,
+      "expectedSha256": "a116e36fe13b7818b5d90155aec445c888d47e54c6103b88160b1a52d6bd442d",
+      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
+      "productId": "5.0-10.5 um white light curve",
+      "title": "WASP-43b MIRI phase curve, 5.0-10.5 um white light curve",
+      "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
+      "credit": "JWST program 1366 (Transiting Exoplanet Community ERS, PIs N. Batalha, J. Bean, K. Stevenson); reduced in this project with Eureka! 1.4 on Bell et al. (2024) settings",
+      "displayCredit": "JWST MIRI · program 1366",
+      "license": "JWST data are public (STScI MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
+      ],
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-white.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
+      "redistribution": "Public JWST data, reduced here.",
+      "consumers": [
+        "wasp-43b-miri-maps"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
+      }
+    },
+    {
+      "id": "wasp-43b-miri-stellar-counts",
+      "path": "science/jwst-1366-miri/stellar-counts.csv",
+      "expectedBytes": 12671,
+      "expectedSha256": "6f3780d764b85027e7a0cce2df65c36ac23f814995182af477c044487e15d5c3",
+      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
+      "productId": "median extracted stellar spectrum",
+      "title": "WASP-43 median optimal-extraction counts per MIRI/LRS detector column",
+      "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
+      "credit": "JWST program 1366 (Transiting Exoplanet Community ERS, PIs N. Batalha, J. Bean, K. Stevenson); reduced in this project with Eureka! 1.4 on Bell et al. (2024) settings",
+      "displayCredit": "JWST MIRI · program 1366",
+      "license": "JWST data are public (STScI MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
+      ],
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/ours-stellar-counts.csv: the 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366, visit 11, from MAST (CRDS context jwst_1535.pmap), Eureka! 1.4 on Bell et al. (2024)'s settings. The run of 2026-09-17 wrote this file byte for byte.",
+      "redistribution": "Public JWST data, reduced here.",
+      "consumers": [
+        "wasp-43b-miri-maps"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
+      }
+    },
+    {
+      "id": "wasp-43b-bell-2024-eureka-v1-white",
+      "path": "science/bell-2024/eureka-v1-white-5.0-10.5um.csv",
+      "expectedBytes": 1382064,
+      "expectedSha256": "67fd55dab3d0f752f9306a8fc798af0f635e0464232836fd9d8085679ad5f02a",
+      "origin": "https://zenodo.org/api/records/10525170/files/WASP43b_MIRI_Data.zip/content",
+      "productId": "WASP43b_MIRI_Data/1_Light_Curves/eureka_v1.h5 (white light)",
+      "version": "10.5281/zenodo.10525170",
+      "title": "Bell et al. (2024) Eureka! v1 white-light curve of the WASP-43b MIRI phase curve, 5-10.5 um",
+      "sourceUrl": "https://zenodo.org/records/10525170",
+      "credit": "T. J. Bell et al. (2024), Nature Astronomy 8, 879; JWST program 1366",
+      "displayCredit": "Bell et al. · JWST MIRI",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/10525170",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/author-white.csv: the deposit's eureka_v1.h5 white light exported in the same columns as this package's own curves (flux and error divided by the median). The run of 2026-09-17 wrote this file byte for byte. This is the light curve Hammond et al. (2024) mapped.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "reconstruction-check"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-10525170",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/10525170#/files/WASP43b_MIRI_Data.zip"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-bt-settl-cifist-4500",
+      "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
+      "expectedBytes": 60684012,
+      "expectedSha256": "051cd254939481d11d4ac3b9277fb322cba82699968225dfd2051a7982e93323",
+      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=269",
+      "productId": "bt-settl-cifist fid 269",
+      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
+      "title": "BT-Settl CIFIST model spectrum, Teff 4500 K, log g 4.5, [M/H] 0",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
+      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
+      "displayCredit": "BT-Settl · SVO",
+      "license": "Model spectra served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 4500 K, log g 4.5, [M/H] 0 (Challener et al. 2024's stellar parameters), for the MIRI lens's temperature conversion, unchanged VOTable.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "wasp-43b-miri-maps"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
       }
     },
     {
@@ -87,8 +196,8 @@
     {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2890,
-      "expectedSha256": "0ca0f1ab9aad643254a5d71c34937a10362e9d5187447fb663df866ffafc73f5",
+      "expectedBytes": 5749,
+      "expectedSha256": "e1298c093fd1300bfdeef8f74addbbdbb4b0e7adc4af5d0354e88d53f19773b9",
       "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -162,7 +271,7 @@
       "id": "wasp-43b-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "expectedBytes": 285,
-      "expectedSha256": "7b81c8e9236a4280ffdd9a7bcc5cf37e08ccd4a587e1a95a82819a69603a7f02",
+      "expectedSha256": "f502d5f0c775af0f855f9b3102bf601c79f1937a2909da7428471b16c59434c6",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -179,34 +288,35 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "emission-disc-context-marker",
+      "id": "nirspec-map-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6347,
-      "expectedSha256": "01ad09db6adde04fc18587a32d82f9135a4b03b1bd48a5b586b6d3ad6ae041ab",
+      "expectedBytes": 59650,
+      "expectedSha256": "aa2eb13c0c569269a67b258c3cef952182732f8618a43db04c50902a5691f326",
       "origin": "https://zenodo.org/records/12627524",
-      "credit": "Flat disc in the lens palette colour at the dayside mean temperature, 1561 K: #e97a54; written by neutralDiscMarker in tools/objects/new-star.mts",
+      "credit": "The Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/wasp-43/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/wasp-43/author.mts",
         "inputs": [
-          "wasp-43b-observational-measurements"
+          "wasp-43b-challener-2024-deposit",
+          "wasp-43b-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/wasp-43/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat disc marker; its colour is a display choice from the lens palette."
+        "reason": "The default lens rendered as the dayside disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4552,
-      "expectedSha256": "ca3586c1ca3a930ea681e3f415470b32ad466c599e9312e911d8daf23504f81f",
+      "expectedBytes": 6201,
+      "expectedSha256": "bb41416f45cfc8ada942daa36bb93e28afa814d87e15cb17dff67bc110b0f883",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -214,8 +324,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 561,
-      "expectedSha256": "963ec4bd031fd484b4cc748d27edd9c594b1e347764692c9775304cacde5fe65"
+      "expectedBytes": 836,
+      "expectedSha256": "992a2e161f2b06d4e78550e3eb617dbae430e9255b61f5f2cf917629d9d0bc4c"
     },
     {
       "path": "preparation/navigation.json",
@@ -236,6 +346,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4515,
       "expectedSha256": "d76b8411b90b087c4cecc7de9a66fda223c7735c25dfb5d7cec09c2fe78d94c1"
+    },
+    {
+      "path": "reference/lens-comparison.png",
+      "expectedBytes": 289073,
+      "expectedSha256": "f5ae7fa8b0b1a2ceeae58445c5105fb81e5f9f216f94b68f31caa8be0db16afb",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence image: the six prepared lens previews (prepared/minimaps) side by side with sharp, labelled, 2026-09-17 after preparation."
+      }
     },
     {
       "path": "reference/rendered-default-view.png",

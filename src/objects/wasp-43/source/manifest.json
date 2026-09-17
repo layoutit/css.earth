@@ -4,8 +4,8 @@
     {
       "id": "wasp-43-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1094,
-      "expectedSha256": "97cf16e7324c54440d3a5cd517b6660fce2cab30cf7e71295417ec4405ed37ba",
+      "expectedBytes": 1151,
+      "expectedSha256": "c9bd413c0b8d83e38af92a0838ad14b0dbb5a6f2efb6a1bc52432cbeae12288d",
       "origin": "https://arxiv.org/abs/2406.10207",
       "credit": "Challener et al. (2024), ApJL 969, L32",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "wasp-43-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1971,
-      "expectedSha256": "cb60f57eca0c6197e2f47f1ad28fc94690c8a1344670ac8004bf3ec29beb48c1",
+      "expectedBytes": 2606,
+      "expectedSha256": "d33e1e19b13e86e48ac1eb616d137add5f29af78d89b55378b2aa60c1f9e975c",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "wasp-43-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1684,
-      "expectedSha256": "84e52b50cf6748e860cfc1d6ffbab8cc33eba26d6e744cdfa95346cdb05536d1",
+      "expectedSha256": "e532cb86ababf24a91425502ba2aca919758564f3c86b4e758f00771210bc28f",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +123,8 @@
     {
       "id": "wasp-43-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 282,
-      "expectedSha256": "e9003c64e500e232f30bc50dff10d3b1c3f2746171147019c4ed022d39b20c05",
+      "expectedBytes": 284,
+      "expectedSha256": "f4592cbb18dd707ea3de3daadc6e2ff78c949f66ee62a8753ffba5ed42195a92",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,156 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "wasp-43-gaia-dr3-source",
+      "path": "photometry/gaia-dr3-source.csv",
+      "expectedBytes": 288,
+      "expectedSha256": "6fb01cc374683897fde7c5e423ec9a423746188e9e19f8b778aff4183b293e28",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; GSP-Phot, Andrae et al. (2023), A&A 674, A27",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP sync, CSV response saved unchanged on 2026-09-16; the ADQL query is recorded in photometry/stellar-color.json",
+      "redistribution": "One catalogue row, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/gaia-dr3-source.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-patel-2022-limb-darkening",
+      "path": "photometry/patel-2022-limb-darkening.tsv",
+      "expectedBytes": 133,
+      "expectedSha256": "5593487c66a24ff5341a2c62728aacb6afe702ac30f8416a4f05f2fbe42ddb33",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "J. A. Patel and N. Espinoza (2022), AJ 163, 228; VizieR J/AJ/163/228 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for table 4, row WASP-43, the juliet-fitted quadratic coefficients and their 68% bounds, with the response's dated comment lines and blank unit line removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "One catalogue row, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-aj-163-228-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/patel-2022-limb-darkening.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1221,
+      "expectedSha256": "2d27e51797b6ff4168ae069cd5df7ff80fe4cca30cb0d765e76ea825fd32206f",
+      "origin": "https://doi.org/10.1051/0004-6361/202243462",
+      "credit": "Gaia DR3 GSP-Phot effective temperature (Andrae et al. 2023); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived Gaia row, its temperature columns and the Planck spectrum applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/stellar-color.json#/temperature"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/2406.10207",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 38912,
+      "expectedSha256": "7913e0bc1734506f6a4d6d3b6ecb44d937b797c36dbd8753bc589a57858a556f",
+      "origin": "https://doi.org/10.3847/1538-3881/ac5f55",
+      "credit": "Photosphere colour from the Gaia DR3 photometric temperature, dimmed toward the limb by the Patel & Espinoza (2022) TESS limb-darkening law; rendered by tools/objects/source-authoring/wasp-43/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/wasp-43/author.mts",
         "inputs": [
-          "wasp-43-observational-measurements"
+          "wasp-43-stellar-color",
+          "wasp-43-gaia-dr3-source",
+          "wasp-43-patel-2022-limb-darkening",
+          "wasp-43-cie-1931-2deg-cmf",
+          "wasp-43-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/wasp-43/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc with its measured limb darkening; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2851,
-      "expectedSha256": "8a3f602e5f769ab1d181edf4c261e8d3c72326a34bb7961ea8f2c78dc0e3afd7",
+      "expectedBytes": 3080,
+      "expectedSha256": "2c88d39e538e8f0daf015345a719bec9677f755ff20f88da04a775fea5a25054",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +294,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 1640,
+      "expectedSha256": "e7103fe132d58a07432ce1c3f8d3b4fcf040d7bbc29d73843054564d102176f4"
     },
     {
       "path": "preparation/navigation.json",
@@ -186,8 +304,8 @@
     },
     {
       "path": "preparation/rotation.json",
-      "expectedBytes": 1023,
-      "expectedSha256": "487907dcbed257a4321f5602089d6fc950da09ff795b6b25a5e248a7a5b46b18"
+      "expectedBytes": 1468,
+      "expectedSha256": "187f04966927156aa685bbae165c64cefdb02d1d429d5045cfcbf25736b81fa1"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -201,11 +319,11 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 122687,
-      "expectedSha256": "ea4c8bf1a8cfbd9cd88bbca568a2495525eba8961cf7005c7f53c1f1651c4ee8",
+      "expectedBytes": 268740,
+      "expectedSha256": "0c8270bb881d5a5207d5e9fe8db37e2a08ea2252a8861fc7f6ebc56add40eed0",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: the branch's dev server at /wasp-43/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+        "reason": "Evidence capture: the branch's dev server at /wasp-43/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation with the limb plate and the orbit-aligned axis."
       }
     }
   ]

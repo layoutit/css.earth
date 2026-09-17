@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a59ae75f2751d404a56e87ad89863f1b44f0b8945e97d5b6f6219e35db95973"
+    "sha256": "da3b6b96aa65b8effd7a268e4335aa52997a2e9a176b5c8738b8e63e24cfbba2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7b9d8ebfcae6e346b11d5086ab9f74e25af55f6d26e46e94013cb0a44c892248",
+      "sha256": "c7ea6ee0455a74a21c9f84d37ccdbcea53f8b5d347edf00c054a88ccc52a2d06",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 7922.332226409829,
@@ -330,8 +329,8 @@
         },
         {
           "url": "/scenes/gkunhomdima/gkunhomdima-model-surface@2x.webp",
-          "bytes": 56174,
-          "sha256": "42e8495a96632291d0cbe2d23dd157aa35ab9fe9ea98d5c0156196ec062cccdc",
+          "bytes": 61150,
+          "sha256": "6e024134b6bd3fd4f98247cd54d83ebf6a3519837dce52a6b3eeaa6abe8dad27",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +406,7 @@
   },
   "lastPreparation": {
     "objectId": "gkunhomdima",
-    "materialSha256": "01dfde8dcfeef8c81baa4f256e773b1b941c2a9771ee25376005c8fb0acc4f3e",
+    "materialSha256": "e5b783410ff1b0644bb9f0b0824005e8b0f3cfa474af1a24213695ed752bdd71",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "11d49e5beaf0b01d3f986db64a306110ab35b4707672beac538eb1035f658838"
+    "sha256": "83d3e81e23e2ba866c1fbbb736965bf4243f4375a23a0656758ccced580b8755"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "ab6c43975b2ff17be05c450fd39f52d6a3e89722e628e8bb99f676eb2ddf6f18"
+    "bindingsSha256": "546cc43b375d9f9f399a7a5456ee8ee188e3dc488372c802f4a90095fa634049"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8cb21c510b637928c6f86743aebe7250dccd121ddd5934b4ac7aba5d1b46edb1",
+      "sha256": "e46e9b4ce216c9334927df5dbe9f4be97fc3f6cf2c094284c413b51972ffd496",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -139,8 +139,7 @@
               "provenanceFlags": "observed-ellipsoid"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 1000,
               "maximumErrorMeters": 55,
@@ -349,14 +348,13 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c90e0a8305626621917a8178e5b5ed60299d827fb878716195a515d138f05228",
+      "sha256": "c8de751bc2fe0541663f27858bcb40c765988684e8e5afef2253af79cb80ff29",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
         "archive": null,
         "members": null,
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "comet-81p-features.json",
         "publicBase": "/scenes/comet-81p/",
         "target": {
@@ -916,8 +914,8 @@
         "kind": "local",
         "reason": "Authored surface-place records with publication references and placement limits."
       },
-      "sha256": "639417c83ce7e5633db6ad3efc825e8ebce675647b014c26a7700b3dfe9ede26",
-      "bytes": 156,
+      "sha256": "0b5ffa7b27d1bc24b335b44525745320b64b74c96d4419c4af8cf5ef68c56d51",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1112,8 +1110,8 @@
         },
         {
           "url": "/scenes/comet-81p/comet-81p-model-surface@2x.webp",
-          "bytes": 186642,
-          "sha256": "f88884c2c902f84a9d01448ea9595a35a3b45e971ec75039618eb7241f3d5c73",
+          "bytes": 184990,
+          "sha256": "1918e4f00d3477c6aaab2594499a8b5392393d7c5bb72e762c81d247c9d53229",
           "verification": "bytes-verified"
         }
       ],
@@ -1173,8 +1171,8 @@
         },
         {
           "url": "/scenes/comet-81p/comet-81p-navcam-surface@2x.webp",
-          "bytes": 263466,
-          "sha256": "53e6d044d7a83dff2c6b653d6792780ebe74bf84351ad8c5cd3c7b11b9cec63a",
+          "bytes": 240266,
+          "sha256": "1828b6d5713c4b1a8497a303a1ce6b9093499f6d4a0178eaab4733579123d905",
           "verification": "bytes-verified"
         }
       ],
@@ -1228,7 +1226,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {}
       },
       "inputs": [
@@ -1286,11 +1283,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-81p",
-    "materialSha256": "7c410c08f3e68bdf1db6f0889902686795edd49741537cc5e12164aef74887ee",
+    "materialSha256": "7383e36a92dfccb3fcba0ec632bb007b0f180301aceaa02291d7cf6827c4a347",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "ab6c43975b2ff17be05c450fd39f52d6a3e89722e628e8bb99f676eb2ddf6f18"
+      "bindingsSha256": "546cc43b375d9f9f399a7a5456ee8ee188e3dc488372c802f4a90095fa634049"
     }
   }
 }

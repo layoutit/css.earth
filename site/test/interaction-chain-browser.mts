@@ -98,7 +98,7 @@ async function overview() {
 }
 let tracing = false;
 try {
-  await page.goto(`${origin}/sun/?overview=solar-system&v=QIZBjIKjn6btvsGPQB0_XT06whyprPsKq7NBQsczQAAAAD_AsoUg3b86v-PhIQDrvVo_2ATC2iqo7QABAAAAAAAAAAA`);
+  await page.goto(`${origin}/sun/?overview=system&v=QIZBjIKjn6btvsGPQB0_XT06whyprPsKq7NBQsczQAAAAD_AsoUg3b86v-PhIQDrvVo_2ATC2iqo7QABAAAAAAAAAAA`);
   await waitReady('sun'); await page.waitForTimeout(1500);
   await page.evaluate(() => window.__cssearthTest.required(window.__cssEarthRecorder,"diagnostic recorder").start());
   await page.evaluate(() => {

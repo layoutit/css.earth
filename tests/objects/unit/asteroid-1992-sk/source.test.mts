@@ -37,7 +37,7 @@ test('1992 SK keeps a closed source-connected mesh within the retained raster bu
  assert.equal(radial.faces.length,800);assert.equal(radial.simplification.sourceFaces,1016);assert.equal(radial.simplification.removedOppositeFaces,0);
  assert.equal(radial.simplification.topology.eulerCharacteristic,2);assert.ok(radial.simplification.estimatedErrorMeters<=9);
  assert.ok(radial.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));
- assert.deepEqual([radial.tileSize,radial.width,radial.height],[128,2048,6400]);
+ assert.ok(radial.plans.reduce((sum,p)=>sum+p.rect.width*p.rect.height,0)<=16384*radial.faces.length);
 });
 
 test('1992 SK qualifies the historical model and starts with Shadows off',async()=>{

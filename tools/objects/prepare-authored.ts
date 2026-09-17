@@ -56,6 +56,7 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
   const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mts')).href);
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
+  await assertDefaultViewsFaceLenses(objectDirectory, prepared.definition as Record<string, unknown>, prepared.frame);
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
   const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href);
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'prepared' });
@@ -73,6 +74,22 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
   const changes = legendLabelChanges(content, JSON.parse(assets) as unknown);
   return { changes, contentPath, refreshed: withDerivedLegendLabels(content, changes),
     summary: changes.map(change => `${change.lensId} ${JSON.stringify(change.authored)} -> ${JSON.stringify(change.derived)}`).join('; ') };
+}
+
+/** A photograph lens states the body point its frame looks at; the default camera must look there too (default-view.mts). The check
+ * reads the final frame, which follows the body as drawn. */
+async function assertDefaultViewsFaceLenses(objectDirectory: string, definition: Record<string, unknown>, frame: unknown): Promise<void> {
+  const { descriptor, sources } = await readAuthoredSources(objectDirectory);
+  const raster = source(sources, 'raster')?.value as { surfaces?: { science?: { kind?: string; lens?: unknown } }[] } | undefined;
+  for (const surface of raster?.surfaces ?? []) {
+    const science = surface.science;
+    if (!science || science.kind !== 'surface-observation') continue;
+    const frames = record(science.lens, 'surface-observation lens').frames;
+    const lensFrame = Array.isArray(frames) && frames.length === 1 ? record(frames[0], 'lens frame') : null;
+    if (!lensFrame || typeof lensFrame.observerWestLongitude !== 'number' || typeof lensFrame.observerLatitude !== 'number') continue;
+    const { assertDefaultViewFacesLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/default-view.mts')).href) as typeof import('./default-view.mts');
+    assertDefaultViewFacesLens(descriptor.id, definition.camera as never, frame as never, { longitudeDegrees: -lensFrame.observerWestLongitude, latitudeDegrees: lensFrame.observerLatitude });
+  }
 }
 
 async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
@@ -188,16 +205,6 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     worldContext = JSON.parse(await readFile(outputPath, 'utf8')) as unknown;
   }
   const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig, assets: raster as unknown as GeometrySceneAssets, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(), outputDirectory });
-  // A photograph lens states the body point its frame looks at; the default camera must look there too (default-view.mts).
-  for (const surface of rasterConfig.surfaces) {
-    const science = surface.science;
-    if (!science || science.kind !== 'surface-observation') continue;
-    const frames = record(science.lens, 'surface-observation lens').frames;
-    const frame = Array.isArray(frames) && frames.length === 1 ? record(frames[0], 'lens frame') : null;
-    if (!frame || typeof frame.observerWestLongitude !== 'number' || typeof frame.observerLatitude !== 'number') continue;
-    const { assertDefaultViewFacesLens } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/default-view.mts')).href) as typeof import('./default-view.mts');
-    assertDefaultViewFacesLens(descriptor.id, scene.camera as never, scene.worldFrame as never, { longitudeDegrees: -frame.observerWestLongitude, latitudeDegrees: frame.observerLatitude });
-  }
   const contentReference = required(sources, 'content');
   const content = await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: relative(sourceDirectory, contentReference.path) } });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.lenses);

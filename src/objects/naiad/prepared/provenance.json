@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6a9e6f297ac439a5a8c192e10d8d745c04cfd31422d7f0e08155c803beb8d44b"
+    "sha256": "6847a77398c0345e13229baf00f6846ec74c6ee5df21ddbc5b7eca91bd786834"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ea851e47871e7c8ff6cc4b3e1b27fd0497f534f671365efb2ae1051bbba09e89",
+      "sha256": "c4d22cc3651a7c0142b15586743076dd3afa3d836f4024e1e3b785b98eb68407",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,8 +77,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 800,
@@ -382,8 +381,8 @@
         },
         {
           "url": "/scenes/naiad/naiad-model-surface@2x.webp",
-          "bytes": 50068,
-          "sha256": "f50f8d765d35a5d8efe7f20f222e162a217df17446802bf9ae33f8eff2ae6398",
+          "bytes": 59140,
+          "sha256": "17a4f1865df0d68ddc9d7ea905e09c06e27fd605956b41ef25814027285bcef4",
           "verification": "bytes-verified"
         }
       ],
@@ -459,7 +458,7 @@
   },
   "lastPreparation": {
     "objectId": "naiad",
-    "materialSha256": "042611a9d6723fb3e16d9fea0ffd85e7c99272bf5e90aee6de4b9634c388e372",
+    "materialSha256": "d37aa56d573a489455b1e146058da37bb5c390cc4177afb159e391e3d18159c7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
