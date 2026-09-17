@@ -1,0 +1,117 @@
+---
+import AdminLayout from './AdminLayout.astro';
+import { INVESTIGATION_STATUSES, REPOSITORY_BLOB, formatBytes, readInventory, readInventoryDetail } from './object-inventory.mts';
+
+export function getStaticPaths() {
+  return readInventory().summaries.map(object => ({ params: { id: object.id } }));
+}
+
+const id = Astro.params.id;
+if (typeof id !== 'string') throw new TypeError('Missing object id.');
+const object = readInventoryDetail(id);
+const packagePath = `src/objects/${object.id}`;
+const ledger = [...object.ledger].sort((a, b) => INVESTIGATION_STATUSES.findIndex(status => status === a.status) -
+  INVESTIGATION_STATUSES.findIndex(status => status === b.status));
+const missingSources = object.sources.filter(source => !source.local);
+---
+<AdminLayout title={object.name} activeId={object.id}>
+  <header class="admin-object-header">
+    <span class="admin-swatch" style={`--dot:${object.swatch ?? object.color}`}></span>
+    <div>
+      <h1 class="admin-title">{object.name}</h1>
+      <p class="admin-subtitle">{[object.classificationLabel, object.systemName, object.distance, object.type].filter(Boolean).join(' · ')}</p>
+    </div>
+    <nav class="admin-actions">
+      {object.route && <a class="admin-button" href={object.route}>Open in app</a>}
+      <a class="admin-button" href={`${REPOSITORY_BLOB}/${packagePath}/README.md`}>README</a>
+      <a class="admin-button" href={`${REPOSITORY_BLOB}/${packagePath}/investigations.json`}>Ledger</a>
+    </nav>
+  </header>
+
+  <section class="admin-chips">
+    {object.discovery && <>
+      <span class:list={['admin-chip', { 'is-good': object.discovery.imagery }]}>{object.discovery.label}</span>
+      <span class:list={['admin-chip', { 'is-warn': !object.discovery.onMap }]}>{object.discovery.onMap ? 'On the map' : 'Off the map'}</span>
+      <span class="admin-chip">{object.discovery.labelled ? 'Labelled by default' : 'Unlabelled by default'}</span>
+      {object.discovery.featured && <span class="admin-chip is-good">Featured</span>}
+    </>}
+    <span class="admin-chip">Provenance: {object.provenance ?? 'none'}</span>
+    <span class="admin-chip"><code>{packagePath}</code></span>
+  </section>
+
+  {object.problems.length > 0 && <section class="admin-section admin-problems">
+    <h2 class="admin-heading">Package problems</h2>
+    <ul>{object.problems.map(problem => <li>{problem}</li>)}</ul>
+  </section>}
+
+  {(object.card || object.introduction || object.description) && <section class="admin-section admin-prose">
+    {object.introduction && <p>{object.introduction}</p>}
+    <p class="admin-muted">Card: {object.card ?? object.description}</p>
+    {object.swatchBasis && <p class="admin-muted">Swatch {object.swatch}: {object.swatchSourceTitle}</p>}
+  </section>}
+
+  <section class="admin-section">
+    <h2 class="admin-heading">Lenses <span class="admin-muted">{object.lenses.length}</span></h2>
+    {object.lenses.length === 0 ? <p class="admin-muted">No prepared lenses.</p> : <div class="admin-lenses">
+      {object.lenses.map((lens, index) => (
+        <figure class="admin-lens">
+          <a href={lens.surfaceUrl ?? lens.thumbnailUrl ?? undefined}>
+            {lens.surfaceUrl ? <img src={lens.surfaceUrl} alt="" loading={index < 4 ? 'eager' : 'lazy'} /> :
+              lens.thumbnailUrl ? <img src={lens.thumbnailUrl} alt="" loading="lazy" /> : <span class="admin-lens-empty">No image</span>}
+          </a>
+          <figcaption>
+            <strong>{lens.label}</strong> <code>{lens.id}</code>
+            <span class="admin-muted">{[lens.falseColor && 'false colour', lens.noData && 'has no-data'].filter(Boolean).join(' · ')}</span>
+            {lens.sourceUrl && <a class="admin-link" href={lens.sourceUrl}>{new URL(lens.sourceUrl).hostname}</a>}
+          </figcaption>
+        </figure>
+      ))}
+    </div>}
+  </section>
+
+  <section class="admin-section">
+    <h2 class="admin-heading">Investigations <span class="admin-muted">{INVESTIGATION_STATUSES.filter(status => object.investigations[status])
+      .map(status => `${object.investigations[status]} ${status}`).join(' · ') || 'none'}</span></h2>
+    {ledger.map(entry => (
+      <details class="admin-entry" open={entry.status === 'unresolved' || entry.status === 'deferred'}>
+        <summary><span class:list={['admin-status', `is-${entry.status}`]}>{entry.status}</span> {entry.subject} <span class="admin-muted">{entry.checked}</span></summary>
+        <p>{entry.finding}</p>
+        {entry.revisitWhen && <p class="admin-muted">Revisit when: {entry.revisitWhen}</p>}
+        {entry.evidence.length > 0 && <ul class="admin-evidence">{entry.evidence.map(link => <li><a class="admin-link" href={link}>{link.replace(/^https:\/\/github\.com\/layoutit\/css\.earth\/blob\/[0-9a-f]+\//u, '')}</a></li>)}</ul>}
+      </details>
+    ))}
+  </section>
+
+  <section class="admin-section">
+    <h2 class="admin-heading">Sources <span class="admin-muted">{object.sources.length} · {formatBytes(object.sourceBytes)}{missingSources.length > 0 && ` · ${missingSources.length} not downloaded here`}</span></h2>
+    {object.sources.length > 0 && <table class="admin-table" data-admin-sortable>
+      <thead><tr>{['Input', 'Credit', 'Captured by', 'Lens', 'Size', 'Local'].map(label => <th><button type="button">{label}</button></th>)}</tr></thead>
+      <tbody>
+        {object.sources.map(source => (
+          <tr>
+            <td data-value={source.id}>{source.origin ? <a class="admin-link" href={source.origin}>{source.id}</a> : source.id}<br /><code class="admin-muted">{source.path}</code></td>
+            <td>{source.credit}{source.license && <div class="admin-muted">{source.license}</div>}</td>
+            <td>{source.machines.join(', ')}{source.observedAt && <div class="admin-muted">{source.observedAt}</div>}</td>
+            <td>{source.lensId}</td>
+            <td class="is-number" data-value={source.bytes}>{formatBytes(source.bytes)}</td>
+            <td class="is-number">{source.local ? '✓' : '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>}
+  </section>
+
+  <section class="admin-section">
+    <details>
+      <summary class="admin-heading">Runtime assets <span class="admin-muted">{object.runtimeAssets.length} · {formatBytes(object.runtimeBytes)}</span></summary>
+      <ul class="admin-tally">{object.runtimeAssets.map(asset => <li><code>{asset.filename}</code><span>{formatBytes(asset.bytes)}</span></li>)}</ul>
+    </details>
+  </section>
+
+  {object.readme && <section class="admin-section">
+    <details>
+      <summary class="admin-heading">README.md</summary>
+      <pre class="admin-readme">{object.readme}</pre>
+    </details>
+  </section>}
+</AdminLayout>
