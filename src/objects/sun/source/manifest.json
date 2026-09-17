@@ -1351,8 +1351,8 @@
       "consumers": [
         "world-context"
       ],
-      "expectedBytes": 3321,
-      "expectedSha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
+      "expectedBytes": 3396,
+      "expectedSha256": "02a2fc7561bf3402bdda66f88d21108bc0fca01308eaf864ad108321039b4195",
       "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
       "sourceBinding": {
         "kind": "local",
@@ -1457,8 +1457,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 11564,
-      "expectedSha256": "aa46441f21942bb8e9212ddbb8f32cafb283bbbdb78646bc4d1f0d82fadbefac",
+      "expectedBytes": 10724,
+      "expectedSha256": "9cf0817c1084c25202535fd603de1bcff07bdef57cc0f927cefd88ebb9d49cc5",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",

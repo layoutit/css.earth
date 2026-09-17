@@ -73,16 +73,6 @@
           "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
           "locator": "/references/2; rotation-period"
         }
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Mean distance from Jupiter",
-        "value": "About 671,000 km"
-      },
-      {
-        "id": "atmosphere-composition",
-        "label": "Atmosphere",
-        "value": "Tenuous oxygen"
       }
     ],
     "moreFacts": [

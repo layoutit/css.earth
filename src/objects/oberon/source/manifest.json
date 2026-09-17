@@ -136,8 +136,8 @@
     {
       "id": "oberon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1128,
-      "expectedSha256": "63b7a0944a67a75b41c0fc5263e85332476217fed92ec85855b95d0308f93405",
+      "expectedBytes": 1094,
+      "expectedSha256": "045ad7252c3e74aaea4020772851feecc5f8ead24ef84e79c88b9ddf34b60b9e",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -154,8 +154,8 @@
     {
       "id": "oberon-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "a7f7b2f1ea4265e5926348deb7ab8bf1a5736d6b1feb76d42ad3e77c0a15e183",
+      "expectedBytes": 187,
+      "expectedSha256": "3d7ce0be38437922bd91628bf55e483deb9a44fa53f101504ab08e1d436a0526",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -333,8 +333,8 @@
     {
       "id": "oberon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7512,
-      "expectedSha256": "21d95851bc3b0cd901e8e42d39ff014c57ea84a1288f9d74fd1200e32f662bf6",
+      "expectedBytes": 7976,
+      "expectedSha256": "b0bc66dbb8ea9da730fd6897409400ae3880383366177fa7abba4a815211ba23",
       "origin": "Repository-authored Oberon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -366,8 +366,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1076,
-      "expectedSha256": "2a61c4a81da8aeaaa4774dd9707b6b3505183452ad55344f7b974196c2d50c2f"
+      "expectedBytes": 2322,
+      "expectedSha256": "dfae092f2fba44d6af417da77f59f69a735c5f5f7f862963c47f67417bddaa78"
     },
     {
       "id": "oberon-surface-feature-notes",

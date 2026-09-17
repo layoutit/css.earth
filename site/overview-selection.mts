@@ -6,28 +6,39 @@ interface SelectionPublication { world: WorldCameraPose; viewport: WorldCameraVi
 export interface OverviewSelection { overview: boolean; objectId: string; }
 import { presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
+import { SOLAR_SYSTEM_ID, systemOfObject } from './object-systems.mts';
+import { systemOverviewDistance } from './system-framing.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
-export const solarSystemFocus = (objects: readonly ObjectEntry[]) => objects.find(object => object.classification === 'star' && object.distance.meters === 0);
+/** The Solar System's star; the root of the galactic overviews. */
+export const solarSystemFocus = (objects: readonly ObjectEntry[]) => objects.find(object => object.id === SOLAR_SYSTEM_ID);
 
 export function selectionAtCamera({ world, viewport, objects, objectId, overview }: SelectionPublication & { objects: readonly ObjectEntry[]; objectId: string; overview: boolean }): OverviewSelection | null {
-  const focus = solarSystemFocus(objects);
-  const sun = focus?.worldFrame;
   const selected = objects.find(object => object.id === objectId)?.worldFrame;
-  if (!sun || !selected) return null;
+  if (!selected) return null;
+  const system = systemOfObject(objects, objectId);
   if (!overview) {
-    // Leaving the object's system opens the Solar System overview. A body placed outside the Solar System, such as a star,
-    // anchors that rule on itself: the camera is already far from the Sun while it looks at the body.
-    const anchorM = distance(selected.originM, sun.originM) >= policy.exitSunDistanceM ? selected.originM : sun.originM;
-    return distance(world.pose.positionM, anchorM) >= policy.exitSunDistanceM
-      ? { overview: true, objectId: focus.id } : null;
+    // Leaving an object's planetary system opens that system's overview, whose star the router mounts.
+    if (system) return distance(world.pose.positionM, system.originM) >= system.exitDistanceM ? { overview: true, objectId: system.id } : null;
+    // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
+    // the Solar System overview then hands the camera to the galactic scopes.
+    const sun = solarSystemFocus(objects)?.worldFrame;
+    if (!sun) return null;
+    return distance(world.pose.positionM, selected.originM) >= Math.max(policy.exitSunDistanceM, distance(selected.originM, sun.originM))
+      ? { overview: true, objectId: SOLAR_SYSTEM_ID } : null;
   }
-  const view = presentWorldCamera(world, sun, viewport);
+  // An overview mounts its system's star; only approaching that star opens its card.
+  if (system?.id !== objectId) return null;
+  const view = presentWorldCamera(world, selected, viewport);
   if (!view.silhouette || !view.centerPixels) return null;
   const radius = view.silhouette.tangentialSemiAxis;
-  return 2 * radius >= policy.enterSunDiameterPixels &&
+  // A compact system frames its star large: a hot Jupiter orbits a few stellar radii out. The card also waits for
+  // the zoom to pass halfway from the system framing to the close-up, the boundary moon systems use.
+  const framing = 'framingRadiusPixels' in viewport && typeof viewport.framingRadiusPixels === 'number' ? viewport.framingRadiusPixels : 0;
+  const withinSystem = !framing || view.distanceM <= systemOverviewDistance(selected.bodyRadiusM, system.radiusM, { focalPixels: viewport.focalPixels, framingRadiusPixels: framing });
+  return withinSystem && 2 * radius >= policy.enterSunDiameterPixels &&
     Math.hypot(...view.centerPixels) <= Math.max(policy.centerRadiusPixels, radius)
-    ? { overview: false, objectId: focus.id } : null;
+    ? { overview: false, objectId } : null;
 }
 
 /** Require a sustained threshold crossing, even while the camera keeps moving. */

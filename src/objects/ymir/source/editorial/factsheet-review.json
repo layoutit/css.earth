@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "ymir",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "142",
+        "Saturn",
+        "Ymir",
+        "619",
+        "SAT456",
+        "ecliptic",
+        "2000-01-01.5",
+        "22955600.",
+        "0.338",
+        "45.3",
+        "167.5",
+        "172.3",
+        "204.5",
+        "1298.6819",
+        "154.5",
+        "267.8",
+        "",
+        "",
+        "",
+        "48"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XIX",
+        "Ymir",
+        "S/2000 S1",
+        "2000",
+        "B. Gladman, J. Kavelaars, J.-M. Petit, H. Scholl, M. Holman, B.G. Marsden, P. Nicholson, J.A. Burns",
+        "IAUC 7512"
+      ]
+    }
+  ]
+}

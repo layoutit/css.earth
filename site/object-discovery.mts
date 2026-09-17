@@ -2,15 +2,18 @@ import { record } from './browser-types.mts';
 import { matchesObjectClassification } from './object-categories.mts';
 import { parseArrivalView, type PreparedArrivalView } from './arrival-view.mts';
 
-export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustration: boolean; arrival?: PreparedArrivalView; orientationReference?: number; }
+export interface ObjectDiscovery { featured: boolean; imagery: boolean; illustration: boolean; arrival?: PreparedArrivalView; orientationReference?: number;
+  /** A star without imagery of its own that a body with imagery orbits: its planetary system is on the map. */
+  hostsImagery?: true; }
 
 export function parseObjectDiscovery(value: unknown): Readonly<ObjectDiscovery> {
-  if (!record(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival', 'orientationReference'].includes(key)) ||
+  if (!record(value) || Object.keys(value).some(key => !['featured', 'imagery', 'illustration', 'arrival', 'orientationReference', 'hostsImagery'].includes(key)) ||
       typeof value.featured !== 'boolean' || typeof value.imagery !== 'boolean' || typeof value.illustration !== 'boolean' ||
       value.illustration && (value.imagery || value.featured)) throw new TypeError('Invalid prepared object discovery.');
   if (value.arrival !== undefined && !value.imagery) throw new TypeError('A photographic arrival requires imagery.');
   if (value.orientationReference !== undefined && (!Number.isInteger(value.orientationReference) || Number(value.orientationReference) < 1)) throw new TypeError('Invalid object orientation reference.');
-  return Object.freeze({ featured: value.featured, imagery: value.imagery, illustration: value.illustration,
+  if (value.hostsImagery !== undefined && (value.hostsImagery !== true || value.imagery)) throw new TypeError('Only a star without imagery of its own is marked as hosting imagery.');
+  return Object.freeze({ ...(value.hostsImagery ? { hostsImagery: true as const } : {}), featured: value.featured, imagery: value.imagery, illustration: value.illustration,
     ...(value.arrival === undefined ? {} : { arrival: parseArrivalView(value.arrival) }),
     ...(value.orientationReference === undefined ? {} : { orientationReference: Number(value.orientationReference) }) });
 }
@@ -31,8 +34,9 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     const illustration = object.discovery.illustration;
     const featured = object.discovery.featured || isDiscoveryAnchor(object);
     const asteroid = object.classification === 'asteroid';
-    // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search.
-    if (object.classification === 'star' && !object.discovery.imagery) { hiddenBodies.push(object.id); hiddenLabels.push(object.id); continue; }
+    // A star with only its shape stays off the map until a surface image can be cast; its page still opens from search. A star
+    // that a body with imagery orbits stays on it: without the star the planet has no system.
+    if (object.classification === 'star' && !object.discovery.imagery && !object.discovery.hostsImagery) { hiddenBodies.push(object.id); hiddenLabels.push(object.id); continue; }
     const highlighted = matchesObjectClassification(object.classification, options.highlighted) && (!illustration || options.illustrations);
     if (highlighted) highlightedBodies.push(object.id);
     if (illustration ? !options.illustrations : asteroid && !featured && !options.asteroids && !highlighted) hiddenBodies.push(object.id);

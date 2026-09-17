@@ -104,7 +104,8 @@ export async function prepareSolarSystemScene({
     starfield: Object.freeze({ ...starfield, cameraContract: "scene-locked-unbounded-accumulated-matrix3d",
       sceneRegistration: registration.cssTransform, sceneRegistrationModel: registration.model,
       sceneRegistrationChain: registration.chain, sceneRegistrationEpoch: registration.epoch }),
-    worldFrame: prepareWorldFrame(bodyId, frame, bodyRadiusUnits, bodyRadiusKilometers),
+    // The mesh is drawn at geometryScale times its source radius; the world frame measures what is drawn.
+    worldFrame: prepareWorldFrame(bodyId, frame, bodyRadiusUnits * geometryScale, bodyRadiusKilometers),
   });
 }
 
@@ -138,11 +139,13 @@ function prepareWorldFrame(bodyId:string, frame:ReturnType<typeof prepareEclipti
   const distanceM = requireBodyOrbit(bodyId).heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS * 1000;
   const multiply = (vector:readonly number[]) => [0, 1, 2].map(row => bodyToIcrf[row * 3] * vector[0] +
     bodyToIcrf[row * 3 + 1] * vector[1] + bodyToIcrf[row * 3 + 2] * vector[2]);
-  const columns = frame.basis.map(multiply);
+  // Interim until the world-navigation stage derives the frame from the body as drawn: the authored rotation composed with
+  // PolyCSS's own X/Y swap, a reflection like every map into CSS 3D space.
+  const columns = frame.basis.map(axis => multiply([axis[1], axis[0], axis[2]]));
   return Object.freeze({ referenceFrame: "sun-icrf", epochJdTt: SOLAR_GEOMETRY_EPOCH_JD_TT,
     originM: Object.freeze(multiply(sun).map(value => -value * distanceM)),
     presentationToReference: Object.freeze([0, 1, 2].flatMap(row => columns.map(column => column[row]))),
-    orbitUpReference: Object.freeze(columns[1].map(value => -value)),
+    orbitUpReference: Object.freeze(multiply(frame.basis[1]).map(value => -value)),
     metersPerUnit: bodyRadiusKilometers * 1000 / bodyRadiusUnits,
     bodyRadiusM: bodyRadiusKilometers * 1000 });
 }

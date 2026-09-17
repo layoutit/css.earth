@@ -121,7 +121,7 @@ try {
   assert.equal(snapshots.galaxyRotated.preparedRequests, snapshots.initial.preparedRequests, 'images are ready before travel');
   assert.ok(await page.evaluate(() => window.__environmentNodes.every(node => node.isConnected)), 'travel retains environment DOM');
   assert.equal(new URL(page.url()).pathname, '/sun/');
-  assert.equal(new URL(page.url()).searchParams.get('overview'), 'solar-system');
+  assert.equal(new URL(page.url()).searchParams.get('overview'), 'system');
   const beforeEmpty = snapshots.galaxyRotated.camera;
   await page.mouse.dblclick(1280, 180);
   await settled(page);

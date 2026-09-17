@@ -723,8 +723,8 @@
     {
       "id": "rhea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1219,
-      "expectedSha256": "0d60851f07e5662ec9d7ae9ac587e9db984cacfcc7d3e68e25c1f754d96e54d9",
+      "expectedBytes": 1187,
+      "expectedSha256": "0fdb122c1ef06d10cfeacc6cbe23d55bc5e9da378cc9fccb9401f58c6e881e8e",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -741,8 +741,8 @@
     {
       "id": "rhea-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 151,
-      "expectedSha256": "3f6b4ebe26f761e0296aa0d8b0eaca7347713080afffbe76a56db94cb0f5c8cc",
+      "expectedBytes": 183,
+      "expectedSha256": "6536518f815c0ad2e2881eb1a9b8692470cdaf3c90a581227a935fa85e32c450",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -780,8 +780,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7625,
-      "expectedSha256": "fff61194e7930df0d220c8f4140bbf0d58b11b5643526804210c23cafc2d33ef"
+      "expectedBytes": 7606,
+      "expectedSha256": "d30eaa849c6b52f259405c05c14028b8b16b9a89c69c46f743582e0e9a0b66bd"
     },
     {
       "path": "preparation/navigation.json",
@@ -795,8 +795,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13861,
-      "expectedSha256": "47a4fc5ba01ba0e3a045080ad6dda268e20412cd170a92e024770de0ad4f785b",
+      "expectedBytes": 14823,
+      "expectedSha256": "7c248cdf0ca61dc556b539ed517aeba0342458470cc762106bbc3abf4815ef0d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -811,8 +811,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1083,
-      "expectedSha256": "46ebcf76787d74d14e96d75473e4d5a5d53e24244e30dbb60c11cf441f0f7457"
+      "expectedBytes": 2329,
+      "expectedSha256": "47782075506fe0a16eaca0ba0d71f4536e2bc4909b6e8b9d4292fe43e95a8df9"
     },
     {
       "path": "science/b2-intake/rhea_128_o.xml",

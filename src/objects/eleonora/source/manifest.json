@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8901,
-      "expectedSha256": "3c91e6b04bd92e5682328acff1fcbad911215f0d3440cdfb0949f81e028dc5ee",
+      "expectedBytes": 8668,
+      "expectedSha256": "aa7510bfdd5acc554df16ad4ae593e7e18f5a16c008149dc4fae320eecabf592",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2878,
-      "expectedSha256": "7be15d16492a51f8ad1719149089cfcde021d6e8eb392c89c02a2fde09e94329"
+      "expectedBytes": 2859,
+      "expectedSha256": "8f1e1882f3f56826b6d6da129ea93f9a47dc1d3d8517c64927a5a1409552df38"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "8ae065a38f8e4a1052ae0d7100844f3a5a5cbe28ccc54bf7168e0f7ebb045716"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6396,
+      "expectedSha256": "dde070e756cd8e3b885deac563fc70ae07aab70a8e455e9b09fbf29662ac20bc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Eleonora: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -8,7 +8,7 @@ import { record } from './browser-types.mts';
 import { parseNavigationDistance } from './navigation-distance.mts';
 import type { NavigationDistance } from './navigation-distance.mts';
 
-export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar';
+export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet';
 export interface ObjectDefinitionInput {
   id: string; name: string; systemName: string; classification: ObjectClassification;
   color: string; distance: NavigationDistance; route: string; description: string;
@@ -33,7 +33,7 @@ const OBJECT_INPUT_KEYS = new Set([
 // Classification vocabulary, not a registry of object identities. Extend this
 // list deliberately when a package introduces a new kind of body.
 export const OBJECT_CLASSIFICATIONS = Object.freeze([
-  "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar",
+  "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet",
 ]);
 
 export function defineObject(input: ObjectDefinitionInput): ObjectEntry {
@@ -112,8 +112,9 @@ function parseWorldFrame(value: unknown): PreparedWorldCameraFrame | null {
     if (Math.abs(dot - Number(row === other)) > 1e-9) throw new TypeError('World frame rotation must be orthonormal.');
   }
   const [a, b, c, d, e, f, g, h, i] = rotation;
-  if (Math.abs(a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g) - 1) > 1e-9) {
-    throw new TypeError('World frame rotation must preserve handedness.');
+  // CSS 3D space is left-handed, so the map from presentation to the reference frame reverses handedness.
+  if (Math.abs(a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g) + 1) > 1e-9) {
+    throw new TypeError('World frame presentation map must reverse handedness.');
   }
   if (value.orbitUpReference !== undefined && (!vector(value.orbitUpReference, 3) ||
       Math.abs(Math.hypot(...value.orbitUpReference) - 1) > 1e-9)) {

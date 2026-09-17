@@ -1,0 +1,330 @@
+{
+  "schema": "csswasp-43-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "wasp-43-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1151,
+      "expectedSha256": "c9bd413c0b8d83e38af92a0838ad14b0dbb5a6f2efb6a1bc52432cbeae12288d",
+      "origin": "https://arxiv.org/abs/2406.10207",
+      "credit": "Challener et al. (2024), ApJL 969, L32",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-43-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2606,
+      "expectedSha256": "d33e1e19b13e86e48ac1eb616d137add5f29af78d89b55378b2aa60c1f9e975c",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "wasp-43-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1684,
+      "expectedSha256": "e532cb86ababf24a91425502ba2aca919758564f3c86b4e758f00771210bc28f",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-43-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "wasp-43-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 102,
+      "expectedSha256": "51fa0ed77f2fd2572f5b561bc52ed43ac7a9e92d5e7807492817e8a960e35b5a",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-43-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 284,
+      "expectedSha256": "f4592cbb18dd707ea3de3daadc6e2ff78c949f66ee62a8753ffba5ed42195a92",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "wasp-43-gaia-dr3-source",
+      "path": "photometry/gaia-dr3-source.csv",
+      "expectedBytes": 288,
+      "expectedSha256": "6fb01cc374683897fde7c5e423ec9a423746188e9e19f8b778aff4183b293e28",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; GSP-Phot, Andrae et al. (2023), A&A 674, A27",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP sync, CSV response saved unchanged on 2026-09-16; the ADQL query is recorded in photometry/stellar-color.json",
+      "redistribution": "One catalogue row, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/gaia-dr3-source.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-patel-2022-limb-darkening",
+      "path": "photometry/patel-2022-limb-darkening.tsv",
+      "expectedBytes": 133,
+      "expectedSha256": "5593487c66a24ff5341a2c62728aacb6afe702ac30f8416a4f05f2fbe42ddb33",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "J. A. Patel and N. Espinoza (2022), AJ 163, 228; VizieR J/AJ/163/228 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for table 4, row WASP-43, the juliet-fitted quadratic coefficients and their 68% bounds, with the response's dated comment lines and blank unit line removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "One catalogue row, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-aj-163-228-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/patel-2022-limb-darkening.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1221,
+      "expectedSha256": "2d27e51797b6ff4168ae069cd5df7ff80fe4cca30cb0d765e76ea825fd32206f",
+      "origin": "https://doi.org/10.1051/0004-6361/202243462",
+      "credit": "Gaia DR3 GSP-Phot effective temperature (Andrae et al. 2023); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived Gaia row, its temperature columns and the Planck spectrum applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/stellar-color.json#/temperature"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 38912,
+      "expectedSha256": "7913e0bc1734506f6a4d6d3b6ecb44d937b797c36dbd8753bc589a57858a556f",
+      "origin": "https://doi.org/10.3847/1538-3881/ac5f55",
+      "credit": "Photosphere colour from the Gaia DR3 photometric temperature, dimmed toward the limb by the Patel & Espinoza (2022) TESS limb-darkening law; rendered by tools/objects/source-authoring/wasp-43/author.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/wasp-43/author.mts",
+        "inputs": [
+          "wasp-43-stellar-color",
+          "wasp-43-gaia-dr3-source",
+          "wasp-43-patel-2022-limb-darkening",
+          "wasp-43-cie-1931-2deg-cmf",
+          "wasp-43-preparation-raster"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/wasp-43/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The colour lens rendered as a disc with its measured limb darkening; `author.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3080,
+      "expectedSha256": "2c88d39e538e8f0daf015345a719bec9677f755ff20f88da04a775fea5a25054",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1640,
+      "expectedSha256": "e7103fe132d58a07432ce1c3f8d3b4fcf040d7bbc29d73843054564d102176f4"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 444,
+      "expectedSha256": "016c703105865cd69990317cf5346076619c75585080296dded9b6f1b46358fd"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1468,
+      "expectedSha256": "187f04966927156aa685bbae165c64cefdb02d1d429d5045cfcbf25736b81fa1"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3807,
+      "expectedSha256": "80a334101e3a7f656be03841e6f56aba8e993432289c7213a29040e15c3a05d6"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 268740,
+      "expectedSha256": "0c8270bb881d5a5207d5e9fe8db37e2a08ea2252a8861fc7f6ebc56add40eed0",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /wasp-43/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation with the limb plate and the orbit-aligned axis."
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "zenodo-10525170",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Products and Models for \"Nightside clouds and disequilibrium chemistry on the hot Jupiter WASP-43b\" (Bell et al. 2024)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.10525170"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/10525170",
+      "label": "Zenodo"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/records/10525170",
+      "checkedOn": "2026-09-17",
+      "locator": "WASP43b_MIRI_Data.zip: 0_ECFs (Eureka! v1 control and fit-parameter files), 1_Light_Curves (eureka_v1, eureka_v2, sparta, teatro), planetary spectra, GCM and retrieval outputs; CC BY 4.0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "T. J. Bell et al. (2024), Nature Astronomy 8, 879; JWST MIRI/LRS phase curve of WASP-43b, Transiting Exoplanet Community ERS program 1366",
+      "scope": "citation",
+      "evidence": "https://zenodo.org/records/10525170"
+    }
+  ],
+  "publisher": "Zenodo"
+}

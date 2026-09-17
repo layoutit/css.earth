@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3254,
-      "expectedSha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
+      "expectedBytes": 3523,
+      "expectedSha256": "7805138f5236c85b7159951e8d8b8de6e392a8b6cde60eb55496dc3075e9ab5e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -123,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2808,
-      "expectedSha256": "9fff2932de348a824dae5cc9c9e0be49e55f812690d577c6623ab9794d91bcc0"
+      "expectedBytes": 2789,
+      "expectedSha256": "1c705c49e42b3bfc629898b42f6c721784ce864a479a6cb94a5b4242d1601a0a"
     },
     {
       "path": "presentation/minimap.json",
@@ -150,6 +150,21 @@
       "path": "reference/huya-rommel-2025.pdf",
       "expectedBytes": 5003145,
       "expectedSha256": "5f9dc9b853085da6b17c2bf3855dbf74e0839803d44e9475f4b753b30477bffe"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3024,
+      "expectedSha256": "66453ee70bfa429eb6d93310706810f75870ea056c76892272044a526824a678",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Huya: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

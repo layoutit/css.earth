@@ -3,8 +3,8 @@ import type { FocusFrame, PhysicalCameraPose, PositionM } from '@cssearth/engine
 import { offAxisFrame, silhouetteEllipse } from '../solar-system/heliocentric-geometry.js';
 import type { SilhouetteEllipse } from '../solar-system/types.js';
 import {
-  rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition,
-  validateWorldRotation, worldQuaternionFromRotation, worldRotationCss, worldRotationFromQuaternion,
+  flipWorldRotationY, referenceRotationFromPresentation, rotateWorldPosition, scaleWorldPosition, transposeWorldRotation, validateWorldPosition,
+  validateWorldReflection, validateWorldRotation, worldQuaternionFromRotation, worldRotationCss, worldRotationFromQuaternion,
 } from './world-camera-math.js';
 import type { WorldRotation } from './world-camera-math.js';
 
@@ -13,6 +13,7 @@ export interface PreparedWorldCameraFrame {
   readonly referenceFrame: string;
   readonly epochJdTt: number;
   readonly originM: PositionM;
+  /** CSS presentation directions to reference directions: a reflection, since CSS 3D space is left-handed. */
   readonly presentationToReference: WorldRotation;
   readonly metersPerUnit: number;
   readonly bodyRadiusM: number;
@@ -22,7 +23,8 @@ export interface PreparedWorldCameraFrame {
 export interface WorldCameraPose {
   readonly referenceFrame: string;
   readonly epochJdTt: number;
-  /** Camera-to-reference orientation, retaining the CSS camera axes (+x right, +y down, +z toward eye). */
+  /** Camera-to-reference orientation of right-handed camera axes (+x right, +y up, +z toward the eye): the CSS camera axes with y
+   * reversed, since CSS 3D space is left-handed and a quaternion carries only proper rotations. */
   readonly pose: PhysicalCameraPose;
 }
 
@@ -79,9 +81,11 @@ export function worldCameraFromPresentation(local: LocalWorldCameraPresentation,
   validateWorldRotation(local.rotation);
   validateWorldPosition(local.bodyCenterUnits);
   const cameraToPresentation = transposeWorldRotation(local.rotation);
+  const [x, y, z] = scaleWorldPosition(rotateWorldPosition(cameraToPresentation, local.bodyCenterUnits), -frame.metersPerUnit);
+  // The focus frame is the presentation's y-up twin: both the position and the camera axes cross into it with y reversed.
   const pose = cameraPoseToReferenceFrame({
-    positionM: scaleWorldPosition(rotateWorldPosition(cameraToPresentation, local.bodyCenterUnits), -frame.metersPerUnit),
-    orientationXyzw: worldQuaternionFromRotation(cameraToPresentation),
+    positionM: [x, -y, z],
+    orientationXyzw: worldQuaternionFromRotation(flipWorldRotationY(cameraToPresentation)),
   }, focus);
   return Object.freeze({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, pose });
 }
@@ -94,8 +98,9 @@ export function presentWorldCamera(world: WorldCameraPose, frame: PreparedWorldC
     throw new TypeError('World camera and object must share a resolved reference frame and prepared epoch.');
   }
   const local = cameraPoseFromReferenceFrame(world.pose, focus);
-  const rotation = transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw));
-  const bodyCenterUnits = scaleWorldPosition(rotateWorldPosition(rotation, local.positionM), -1 / frame.metersPerUnit);
+  const rotation = flipWorldRotationY(transposeWorldRotation(worldRotationFromQuaternion(local.orientationXyzw)));
+  const [px, py, pz] = local.positionM;
+  const bodyCenterUnits = scaleWorldPosition(rotateWorldPosition(rotation, [px, -py, pz]), -1 / frame.metersPerUnit);
   const [x, y, z] = bodyCenterUnits;
   const distanceUnits = Math.hypot(x, y, z), depthUnits = -z;
   const [ox, oy] = viewport.principalOffsetPixels;
@@ -127,8 +132,8 @@ function focusFrame(frame: PreparedWorldCameraFrame): FocusFrame {
       !Number.isFinite(frame.epochJdTt) || !Number.isFinite(frame.metersPerUnit) || frame.metersPerUnit <= 0 ||
       !Number.isFinite(frame.bodyRadiusM) || frame.bodyRadiusM <= 0) throw new TypeError('Prepared world frame metadata is invalid.');
   validateWorldPosition(frame.originM);
-  validateWorldRotation(frame.presentationToReference);
-  return { originM: frame.originM, localToReferenceXyzw: worldQuaternionFromRotation(frame.presentationToReference) };
+  validateWorldReflection(frame.presentationToReference);
+  return { originM: frame.originM, localToReferenceXyzw: worldQuaternionFromRotation(referenceRotationFromPresentation(frame.presentationToReference)) };
 }
 
 function validateViewport(viewport: WorldCameraViewport): void {

@@ -1269,8 +1269,8 @@
     {
       "id": "comet-67p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1060,
-      "expectedSha256": "716410e7330a882ec5da8e68c7a4030065e4ab0137e32cfd0caada91eac7fc80",
+      "expectedBytes": 1028,
+      "expectedSha256": "f82cb3d1b332a74d8ae2bcdf753e1055f45493db331bd06e2159ce31412011b7",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1287,8 +1287,8 @@
     {
       "id": "comet-67p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "2c4d670c40f6c544aba99082892839f03047ee3fec94d3a7dfdc0d0aa332ed09",
+      "expectedBytes": 188,
+      "expectedSha256": "c1809f985fa9a8d801bb3122b3a948bacc53c1072200a86fbe18fe06da05b6e0",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1339,8 +1339,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 17878,
-      "expectedSha256": "49d8109fe21cf07a3634f7b4403500ec0b81cf494f80c2fe870a80181fee396d",
+      "expectedBytes": 19009,
+      "expectedSha256": "aadb2fdb3c96bb15e1a43a8bdf06672dab57681f76efa859606ce0a230554396",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1363,8 +1363,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 20719,
-      "expectedSha256": "04ffa6b62cf877657eb495decbd9274520530c37b4b55b0b56db4eb7c8e20495"
+      "expectedBytes": 20700,
+      "expectedSha256": "80e7c964284b314013eb12c5291b915b6c5b6bc93d4b1500bd568fafa0d559d6"
     },
     {
       "path": "presentation/minimap.json",
@@ -1567,6 +1567,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared landing-sites source record cites this document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4473,
+      "expectedSha256": "bfd38f6f4dff45e66fdbdd7bd874ae93d37d0330d43e1a67840273cff4f8abe0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 67P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

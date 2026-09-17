@@ -198,8 +198,8 @@
     {
       "id": "ariel-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1138,
-      "expectedSha256": "a1a54cf072c5a9c9c29ebadfd71732cbb44c288827bd5a79300c98703e4600a8",
+      "expectedBytes": 1104,
+      "expectedSha256": "db1a314e74729c0dcfe0ea988dabad695075d2f19ede28a7e2aee26af9eda441",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -216,8 +216,8 @@
     {
       "id": "ariel-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "2cf793e4c2668bf456a4aa356ff01d593571943d37a020272c2a68f768c593f8",
+      "expectedBytes": 186,
+      "expectedSha256": "45de784f4080171cffa9306cc6a172cc0d9c6306ae87b2565176080c26fd508b",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -395,8 +395,8 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7296,
-      "expectedSha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
+      "expectedBytes": 7761,
+      "expectedSha256": "4d9ef00cd74a270d2eb3fe411d664128cc29b19bf7e6bb68cf95f628c7efcf68",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -428,8 +428,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1073,
-      "expectedSha256": "e139401178ff9b036c04fb60af3defe9e1cf38f6123516f5e58461cd43bebd3a"
+      "expectedBytes": 2308,
+      "expectedSha256": "f1e41fbaa58389c9d4e4d0ff4fdb42d740c15e0acdfb3e1fc60216712264f69a"
     },
     {
       "id": "ariel-surface-feature-notes",

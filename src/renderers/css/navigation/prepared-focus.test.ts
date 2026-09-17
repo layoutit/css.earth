@@ -8,7 +8,7 @@ import { worldRotationCss, worldRotationFromQuaternion } from './world-camera-ma
 import type { PreparedNavigationFocus } from './prepared-focus.js';
 
 const frame = Object.freeze({ referenceFrame: 'world', epochJdTt: 1, originM: [3e7, 4e7, 5e7] as const,
-  presentationToReference: [0,-1,0,1,0,0,0,0,1], metersPerUnit: 2, bodyRadiusM: 200 });
+  presentationToReference: [0,1,0,1,0,0,0,0,1], metersPerUnit: 2, bodyRadiusM: 200 });
 const focus: PreparedNavigationFocus = { id: 'catalogue:7', positionM: [1e20, 2e20, -3e20], framingRadiusM: 1e18,
   limits: { minimumDistanceM: 1e13, maximumDistanceM: 1e22 }, upReference: [0, 0, 1], arrivalDistanceM: 4e18 };
 const optics = { focalPixels: 1000, principalOffsetPixels: [-170, 0] as const, framingRadiusPixels: 200 };
@@ -162,7 +162,8 @@ it('uses the retained motion owner for interruption, replacement and teardown, r
   await expect(f.orbit.flyToPreparedFocus({ ...focus, limits: { minimumDistanceM: 1, maximumDistanceM: 0 } }, frame, optics)).rejects.toThrow('metadata');
   close(f.world().pose.positionM, interrupted.pose.positionM);
   const replacement = f.orbit.flyToPreparedFocus(focus, frame, optics);
-  const final = f.orbit.flyToPreparedFocus({ ...focus, id: 'catalogue:8', positionM: [2e20, -1e20, 3e20] }, frame, optics);
+  // Catalogue ids such as the dwarf galaxy dw1343+58 carry a plus sign.
+  const final = f.orbit.flyToPreparedFocus({ ...focus, id: 'dw1343+58', positionM: [2e20, -1e20, 3e20] }, frame, optics);
   expect(await replacement).toEqual({ completed: false });
   f.orbit.destroy();
   expect(await final).toEqual({ completed: false });

@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2652,
-      "expectedSha256": "895d0df5e20966b6c3045e25a3fe0d70e4330d65c0de116c6ef141d9c962ad77",
+      "expectedBytes": 3547,
+      "expectedSha256": "e0d1296e85b8784b443212c169b5d120e9febcdf706f9f3000cec6ec2cb02d57",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -132,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2686,
-      "expectedSha256": "e4ce3fd905e098e78525985fc4573787b5914b65f9f7db7d778be559acf77ef2"
+      "expectedBytes": 2667,
+      "expectedSha256": "462b2fb58843b23ed0ab3639fbde027674358bcee6ae602c9c2be9e05101e413"
     },
     {
       "path": "presentation/minimap.json",
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 3490,
       "expectedSha256": "fe25015266871d9c8900a4408d20e5c4ce52f89d7ad3a0ae415fb7fb2a33cf3f"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3901,
+      "expectedSha256": "9687b4da1ba89c9a802e4227c111812ee0134adbc84fcdfa535f88bdea092b86",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Braille: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -6,38 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Moshup"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Radar-derived mesh"
-      },
-      {
         "id": "dimensions",
         "label": "Mesh extents",
-        "value": "0.571 × 0.463 × 0.349 km"
-      },
-      {
-        "id": "scale",
-        "label": "Size evidence",
-        "value": "Original radar model · dimensions in kilometres"
+        "value": "0.571 × 0.463 × 0.349 km",
+        "source": {
+          "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+          "label": "JPL radar shape model of Squannit: kw4b.obj",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-squannit-kw4b",
+          "locator": "/constraints/fullExtentsKm/0; /constraints/fullExtentsKm/1; /constraints/fullExtentsKm/2"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "later-size",
-        "label": "Later size estimate",
-        "value": "2021 photometry favors a larger body · original radar scale shown"
-      },
-      {
-        "id": "orbital-position",
-        "label": "Orbital position",
-        "value": "Published orbit extrapolated beyond observations · current phase approximate"
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

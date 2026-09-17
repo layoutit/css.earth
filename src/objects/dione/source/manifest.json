@@ -913,8 +913,8 @@
     {
       "id": "dione-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1226,
-      "expectedSha256": "17dec8cd07da353b0dbd4b4ed0664462264038a3da6c8e1bd6757d26bc5dee6a",
+      "expectedBytes": 1194,
+      "expectedSha256": "87d4bf361acc1d49ead05d9629c4ea1b58d079fa260760511af0443063f1f0af",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -931,8 +931,8 @@
     {
       "id": "dione-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "604b8ba839009129405750184ca9fbcf99209450c6e5f75bd3ae62aa9dc6a180",
+      "expectedBytes": 184,
+      "expectedSha256": "aaa0e36549e2bc732aece2b631c93b92f37864a1eb50624157d9bf27c86fc20c",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -975,8 +975,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 10804,
-      "expectedSha256": "94fd6def95fa54b08099b87081eb184a33022bf3a2485eed2b0491dcc3468e26"
+      "expectedBytes": 10785,
+      "expectedSha256": "1f3b6d3306861f6b2530b65803a47b544012393240148495c5169868c83c7459"
     },
     {
       "path": "preparation/navigation.json",
@@ -990,8 +990,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 13594,
-      "expectedSha256": "837342aea6582c8597c9d22abd4bd7c7b0f5274dd5c5400a99564db34bf88e88",
+      "expectedBytes": 14065,
+      "expectedSha256": "9f29ac3431d84e07783849655680f79dda5b0d9b3827684e804eae033f7bd883",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1006,8 +1006,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1084,
-      "expectedSha256": "6b5e24ee84b3fb7382dfee9f0160b7e74e2d0eaa47827a52ad1561b64d7da11e"
+      "expectedBytes": 2332,
+      "expectedSha256": "b409457e3f73a32aa71e3847944d33b3b5e98b31bb9a4b5d3eb8f2deee6e51d2"
     },
     {
       "path": "science/b2-intake/dione_128_o.xml",

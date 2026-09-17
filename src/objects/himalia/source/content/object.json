@@ -8,22 +8,41 @@
       {
         "id": "radius",
         "label": "Mean radius estimate",
-        "value": "85 ± 10 km"
+        "value": "85 ± 10 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "JPL Planetary Satellite Physical Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-physical-parameters",
+          "locator": "/references/1; Mean Radius (km) value"
+        }
       },
       {
         "id": "parent",
         "label": "Orbits",
-        "value": "Jupiter"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Approximate prolate ellipsoid"
+        "value": "Jupiter",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; Planet"
+        }
       },
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Charles D. Perrine · 1904"
+        "value": "Charles D. Perrine · 1904",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "label": "JPL Planetary Satellite Discovery Circumstances",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-discovery",
+          "locator": "/references/2; discoverer(s); year discovered"
+        }
       }
     ],
     "moreFacts": []

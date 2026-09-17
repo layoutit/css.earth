@@ -81,15 +81,16 @@ test('retains exactly six prepared images and changes only shared camera present
   runtime.destroy(); runtime.destroy(); runtime.publish(world(), viewport); expect(host.children).toEqual([before]);
 });
 
-test('sky and volume project ICRF directions identically with exactly one PolyCSS reflection', () => {
+test('sky and volume project ICRF directions identically, with CSS y down', () => {
   const frame: PreparedCssVolume['frame'] = { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
   for (const quaternion of [[0, 0, 0, 1], [0, Math.SQRT1_2, 0, Math.SQRT1_2], [.5, .5, .5, .5]] as const) {
     const pose = world([0, 0, 0], quaternion), volume = preparedVolumeCameraTransform({ world: pose, viewport }, frame);
     expect(preparedSkyCameraTransform(pose, viewport)).toBe(`translate3d(17px,-11px,600px) ${worldRotationCss(volume.rotation)}`);
   }
-  // Independent cardinal proof: at identity, CSS [y,x,z] becomes ICRF [x,y,z].
+  // Independent cardinal proof: the identity pose looks down ICRF -z with +x right and +y up, so a prepared vertex written as
+  // CSS [y,x,z] = [2,1,-3] (ICRF [1,2,-3], ahead, right and up) lands at eye [1,-2,-3]: right, and up on a y-down screen.
   const css = preparedSkyCameraTransform(world(), viewport).split('matrix3d(')[1]!.slice(0, -1).split(',').map(Number);
-  expect([css[0]! * 2 + css[4]! * 1, css[1]! * 2 + css[5]! * 1, css[10]! * -3]).toEqual([1, 2, -3]);
+  expect([css[0]! * 2 + css[4]! * 1, css[1]! * 2 + css[5]! * 1, css[10]! * -3]).toEqual([1, -2, -3]);
   expect(() => preparedSkyCameraTransform(world(), { ...viewport, focalPixels: Infinity })).toThrow();
   expect(() => preparedSkyCameraTransform(world([0, 0, 0], [0, 0, 0, 2]), viewport)).toThrow();
 });
@@ -288,7 +289,7 @@ function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement 
   return t * g * volumeValue + (1 - foregroundAlpha) * underlay;
 }
 
-test('baked stars use one six-face cube throughout travel, with no plain-cube handoff', () => {
+test("baked stars paint one cube through the Sun's neighbourhood and hand the background to the plain Milky Way beyond it", () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const nearFaces = fixture().faces.map(face => ({ ...face, texturePath: `sky-near/${face.id}.webp` }));
   const payload: PreparedCssSky = { ...fixture(), nearFaces, stars: { objectId: 'stellar-neighbourhood', cssPixelsPerDegree: 21.8 } };
@@ -297,18 +298,26 @@ test('baked stars use one six-face cube throughout travel, with no plain-cube ha
   expect(() => validatePreparedCssSky(withoutStars, nearResources)).toThrow('come together');
   const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources: nearResources, resolveResource: path => `/prepared/${path}` });
   const root = runtime.root as unknown as FakeElement;
-  expect(root.children).toHaveLength(1);
-  const cube = root.children[0]!, scene = cube.children[0]!.children[0]!;
-  const leaves = [...scene.children], count = document.count;
-  expect(leaves.map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky-near/${id}.webp")`));
-  for (const distance of [1, 100 * 149597870700, 140.3 * 149597870700, 3.085677581491367e15, 1e20]) {
-    runtime.publish(world([0, 0, distance]), viewport);
-    expect(root.children).toEqual([cube]);
-    expect(scene.children).toEqual(leaves);
-    expect(cube.style.opacity ?? '').toBe('');
+  const [plain, stars] = root.children as [FakeElement, FakeElement];
+  const leaves = (cube: FakeElement) => [...cube.children[0]!.children[0]!.children];
+  expect(leaves(plain).map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky/${id}.webp")`));
+  expect(leaves(stars).map(leaf => leaf.style.backgroundImage)).toEqual(bases.map(([id]) => `url("/prepared/sky-near/${id}.webp")`));
+  const count = document.count;
+  // Inside the Sun's neighbourhood the plain cube never enters layout, so its images never load.
+  for (const distance of [1, 100 * 149597870700, 140.3 * 149597870700, 3.085677581491367e15]) {
+    runtime.publish(world([0, 0, distance]), viewport, true, 1);
+    expect(plain.style.display).toBe('none');
+    expect(stars.style.display ?? '').toBe('');
+    expect(stars.style.opacity ?? '').toBe('');
     expect(root.style.visibility).toBe('visible');
   }
-  runtime.publish(world([0, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport);
-  expect(scene.style.transform).toBe(preparedSkyCameraTransform(world([0,0,0], [0,Math.SQRT1_2,0,Math.SQRT1_2]), viewport));
+  runtime.publish(world([0, 0, 1e16]), viewport, true, .25);
+  expect([plain.style.display, stars.style.display ?? '', stars.style.opacity]).toEqual(['', '', '0.25']);
+  // From another star the Sun's neighbour stars would be misplaced; the diffuse Milky Way remains.
+  runtime.publish(world([0, 0, 2.7e18]), viewport, true, 0);
+  expect([plain.style.display, stars.style.display]).toEqual(['', 'none']);
+  runtime.publish(world([0, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport, true, 1);
+  expect([plain.style.display, stars.style.display, stars.style.opacity]).toEqual(['none', '', '']);
+  expect(leaves(stars)[0]!.parentNode!.style.transform).toBe(preparedSkyCameraTransform(world([0,0,0], [0,Math.SQRT1_2,0,Math.SQRT1_2]), viewport));
   expect(document.count).toBe(count);
 });

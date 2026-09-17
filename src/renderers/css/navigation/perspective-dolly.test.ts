@@ -30,7 +30,7 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
     getBoundingClientRect: () => { layoutReads++; return { width, height, x, y: 0, left: x, top: 0 }; } });
   const options = { cameraPlan: { ...scene.camera, sceneScale: .3 }, heliocentric: null,
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
-      presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 },
+      presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
     cameraElement: make(170), skyElement: make(0), stage: make(0), sceneElement: { style: {} } };
   const dolly = createPerspectiveDolly(options as unknown as Parameters<typeof createPerspectiveDolly>[0]);
@@ -96,7 +96,7 @@ it('overview centering preserves the current view and only converges while dolly
     getBoundingClientRect: () => ({ width, height, x: left, y: 0, left, top: 0 }) });
   const dolly = createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0, 0, 0],
-      presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
+      presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
       bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
     cameraElement: make(170), skyElement: make(0), stage: make(0), sceneElement: { style: {} },
   } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
@@ -138,7 +138,7 @@ it('draws the mesh only once it outgrows its proxy, and restores the same scene'
   const element = { style: {} as Record<string, string>, get hidden() { return hidden; },
     set hidden(value: boolean) { hidden = value; visibilityWrites++; } };
   const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [1e8, 0, 0],
-    presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 };
+    presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 };
   const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
     worldContext: { frame: { ...frame, originM }, bodyRadiusUnits: 100, kilometersPerUnit: .001,
       maximumExtentUnits: 1e9 },

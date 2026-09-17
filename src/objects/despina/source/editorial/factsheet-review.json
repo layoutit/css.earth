@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "despina",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "442",
+        "Neptune",
+        "Despina",
+        "805",
+        "NEP097",
+        "Laplace",
+        "2000-01-01.5",
+        "52500.",
+        "0.000",
+        "0.0",
+        "125.1",
+        "0.0",
+        "0.0",
+        "0.334656",
+        "0.000",
+        "0.000",
+        "299.7",
+        "42.7",
+        "0.4",
+        "24"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "columns": [
+        "Planet",
+        "Satellite",
+        "Code",
+        "GM (km 3 /s 2 )",
+        "Mean Radius (km)",
+        "Mean Density (g/cm 3 )"
+      ],
+      "row": [
+        "Neptune",
+        "Despina",
+        "805",
+        "0.11673 0.25263 NEP097",
+        "74.00 10.00 1",
+        "1.0304 2.2689 *"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "V",
+        "Despina",
+        "S/1989 N3",
+        "1989",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

@@ -442,8 +442,8 @@
     {
       "id": "thebe-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1136,
-      "expectedSha256": "4f8a2d2ee66fe2ffaded784f2d8bf7d8982bc75e7153c02ec5a478f063751b98",
+      "expectedBytes": 1104,
+      "expectedSha256": "ef0697f4c13f8206ee0c1bc46e51dd079c3a7ddfa00b6f8235272aa0c70e4103",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -460,8 +460,8 @@
     {
       "id": "thebe-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "30de8e5aab82a3f87435c58f0169c39fe3a0e47e31f36621c2c0fbaebe7ef797",
+      "expectedBytes": 184,
+      "expectedSha256": "a062860fed2e6369a6a179fddad5b6ce3a0b55d5eb4885433fd32350e7f2fd26",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -510,8 +510,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4617,
-      "expectedSha256": "a111a25bb3c6673fb3f4d1b555427d1e216d38366c63e614451490137335cb90",
+      "expectedBytes": 4578,
+      "expectedSha256": "86cca89b59dacd91b323c6b06939645fe7ff922dfa35a7cdd9e1c852af613d67",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -554,8 +554,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7038,
-      "expectedSha256": "79996e13eca2929408b653db8592818f10226625b48153372954bd46391ed9b0"
+      "expectedBytes": 7019,
+      "expectedSha256": "9fa7806e8672a91b271fa976a1ebdc3298448a50d20320ffbe6028879aab3e16"
     },
     {
       "path": "presentation/minimap.json",
@@ -581,8 +581,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1083,
-      "expectedSha256": "06cd7dae5c0e2b480dae147ce75f56fe1a62000c8a4bacffbff41aa356d3c7df"
+      "expectedBytes": 2349,
+      "expectedSha256": "a898ee9aaa7cc68f62569be7114663d48c09159473d1ff1675a0e995233c9c87"
     },
     {
       "id": "thebe-surface-feature-notes",

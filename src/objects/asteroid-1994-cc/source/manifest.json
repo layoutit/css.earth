@@ -151,8 +151,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11793,
-      "expectedSha256": "5ab7681c487072dafc1f277079ea3ce096afb32f3f46f1fec1fbfffe314d3de0",
+      "expectedBytes": 12207,
+      "expectedSha256": "b2f2486add9a8687517b7e5ce0f77c63e93f78599947e634bbf7fae119abd33d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -175,8 +175,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2901,
-      "expectedSha256": "afcc48cb198f818c105a80b0dd40fd51eb0f25eb7118ba7729acc941f71e7eb3"
+      "expectedBytes": 2882,
+      "expectedSha256": "3d33035b8874f8ce4000cb95189658c54f8f2cab687371d6d391497d0b7255e0"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -207,6 +207,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1896,
       "expectedSha256": "70e162a3131b07ff9fa138ffe8cc4bf003b8d00e27b1bce049521da98048e8e0"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2857,
+      "expectedSha256": "7e05aa5445bd16678e1d2f233880c8b517997c34d04d5626dd761f78c773b7f8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 1994 CC: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

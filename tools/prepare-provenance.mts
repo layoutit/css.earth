@@ -80,7 +80,6 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
   await writePreparedSet([...outputs, ...catalogue.outputs]);
   return results.map(result => ({ ...result,
     citedFacts: catalogue.preparedSources.usage.edges.filter(edge => edge.consumerKind === 'object-fact' && edge.objectId === result.id).length,
-    uncitedFacts: catalogue.factsheets.uncited.filter(fact => fact.objectId === result.id).map(fact => fact.factId),
   }));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

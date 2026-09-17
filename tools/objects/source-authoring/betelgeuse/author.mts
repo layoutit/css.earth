@@ -11,6 +11,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '../../interferometry/matisse-continuum.mts';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '../../interferometry/beam-convolve.mts';
+import { skyDisplayRaster } from '../../../fits-sky.mts';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../source-values.mts';
 import sharp from 'sharp';
 import { interpolatePalette } from '../../color-transfer.mts';
@@ -49,7 +50,7 @@ export function uniformDiscTable(radiusKm: number, stepDegrees: number): string 
 
 /** The sky-plane image through the lens's own palette and percentile stretch, transparent off the disc. */
 export async function contextMarker(image: ReturnType<typeof readReconstruction>, palette: readonly string[], percentiles: readonly [number, number], backgroundMaximum: number) {
-  const { width, height } = image, values = image.values;
+  const { width, height } = image, values = skyDisplayRaster(image.values, width, height, image.axes);
   const disc = values.filter(value => value > backgroundMaximum).sort((a, b) => a - b);
   if (!disc.length) throw new Error('The reconstruction has no pixel above the background maximum.');
   const at = (p: number) => disc[Math.min(disc.length - 1, Math.floor(disc.length * p / 100))]!;
@@ -57,8 +58,7 @@ export async function contextMarker(image: ReturnType<typeof readReconstruction>
   if (!(high > low)) throw new Error('The reconstruction has no display range.');
   const rgba = Buffer.alloc(width * height * 4);
   for (let row = 0; row < height; row++) for (let column = 0; column < width; column++) {
-    // FITS rows run south to north and CDELT1 is negative (east left): flip rows so north is up in the PNG.
-    const value = values[(height - 1 - row) * width + column]!;
+    const value = values[row * width + column]!;
     if (!(value > backgroundMaximum)) continue;
     const [r, g, b] = interpolatePalette(palette, (value - low) / (high - low));
     rgba.set([r, g, b, 255], (row * width + column) * 4);
@@ -77,8 +77,7 @@ export async function authorBetelgeuse({ check = false } = {}) {
   if (files.length !== 29) throw new Error(`Expected the 29 pinned February 2020 MATISSE files, found ${files.length}.`);
   const merged = await mergeContinuum(files, CONTINUUM_RECIPE), oifits = mergedOifits(merged, CONTINUUM_RECIPE);
   const raw = readReconstruction(await readFile(resolve(root, RAW_IMAGE_PATH)));
-  const pixelMas = Math.abs(Number(raw.cards.find(([key]) => key === 'CDELT1')?.[1]));
-  if (!(pixelMas > 0)) throw new Error('The reconstruction states no pixel scale.');
+  const pixelMas = raw.axes.scale[0];
   const beam = writeReconstruction(raw, convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas), [['BEAMFWHM', BEAM_FWHM_MAS, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', RAW_IMAGE_PATH.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
   const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
   const lens = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').lens, 'lens');

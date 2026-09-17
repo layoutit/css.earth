@@ -3,7 +3,7 @@ import type { OpacityClock } from '../src/renderers/css/stars/opacity-clock.ts';
 import { admitStableLabels } from '../src/renderers/css/labels/stable-label-layout.ts';
 import prepared from './moon-labels.prepared.json' with { type: 'json' };
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '../src/platform/source-catalog.mts';
-import { worldRotationFromQuaternion, transposeWorldRotation, rotateWorldPosition } from '../src/renderers/css/navigation/world-camera-math.ts';
+import { cssViewFromOrientation, rotateWorldPosition } from '../src/renderers/css/navigation/world-camera-math.ts';
 import { rayHitsSphereBefore } from '../src/renderers/css/solar-system/heliocentric-geometry.ts';
 import type { LabelScreenRect } from '../src/renderers/css/labels/screen-label-layout.ts';
 import type { WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.ts';
@@ -35,7 +35,7 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
   selected: Point, world: WorldCameraPose, viewport: WorldCameraViewport, exclusions: readonly LabelScreenRect[],
   budget = createLabelBudget(viewport.widthPixels ?? 1000, viewport.heightPixels ?? 800, [], exclusions), previous: ReadonlySet<number> = new Set(),
   projectedPoints?: Map<number, { x: number; y: number }>) {
-  const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+  const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
   const eye = (point: readonly number[]) => rotateWorldPosition(rotation, [point[0] - world.pose.positionM[0], point[1] - world.pose.positionM[1], point[2] - world.pose.positionM[2]]);
   const parentEyes = new Map([...parents].map(([id, point]) => [id, eye(point.positionM)]));
   const selectedEye = eye(selected.positionM);

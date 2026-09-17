@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8313,
-      "expectedSha256": "991a82d27d233ac08434ce187dfc09549fc8ba76c8d0b64ce13037d4fe608852",
+      "expectedBytes": 8517,
+      "expectedSha256": "b156c69069fbf1b2200a33c2309e9f010ada65cbdf53ab5bcd5799365aefc627",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -118,8 +118,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2847,
-      "expectedSha256": "6518875ca97c7d050cb9c859d9ee6040a7c0c72c31660a4ce184f57ebe2d52f1"
+      "expectedBytes": 2828,
+      "expectedSha256": "3c205f47a0e842a873291ee3bbbdef3c9722ff177ea921fa0758df718cc15462"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1816,
       "expectedSha256": "1150a946c341b8e168c67533ea677a2edbb88d42fc959b34ab99b9eb269c59d0"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4793,
+      "expectedSha256": "8fae80d0c9241be96f97dc1a51f532919cd455c3ace8f087c7999fb01cb427cb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Palma: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

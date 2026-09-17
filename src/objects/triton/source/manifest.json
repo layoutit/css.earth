@@ -226,8 +226,8 @@
     {
       "id": "triton-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1144,
-      "expectedSha256": "cbe37fdbb767bafcffceb3ecc8c7e1b7d483fe643f06bcc06e4500744011431f",
+      "expectedBytes": 1110,
+      "expectedSha256": "719bcac440d79f29a46b3a8ac3d9b9ccf33e70ba170b398e16a13346391e008c",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -244,8 +244,8 @@
     {
       "id": "triton-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "d0f3f908574d4e81e0124751c533e1b653c5699d9af4fc28d0417557cb7d7b2c",
+      "expectedBytes": 187,
+      "expectedSha256": "7a96b21c979807295efe23ddc3dd3f6b3f8819484766bfb0c07433ba11d3e6ba",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -423,8 +423,8 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 6961,
-      "expectedSha256": "bb876106c486f2c2cd5146e4ecdb342a07f99e69bfd630be081c19d43b81551d",
+      "expectedBytes": 7922,
+      "expectedSha256": "52f2c8073d9e29b359a447c603630b64186666fc8f95ecab9c1fe8b3cf48f41a",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -455,8 +455,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1091,
-      "expectedSha256": "47db49d2191c87ebb67f06389aa0e9162d2ac04e1fb4b933b53267f75d6478c6"
+      "expectedBytes": 2342,
+      "expectedSha256": "8c0773e1f0fbb9d75e901e9c9bcd8c4a98f58b300284f5eea08f7cbdfca75f75"
     },
     {
       "id": "triton-surface-feature-notes",

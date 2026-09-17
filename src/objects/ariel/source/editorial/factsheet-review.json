@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "19.189 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "409",
+        "Uranus",
+        "Ariel",
+        "701",
+        "URA182",
+        "equatorial",
+        "2000-01-01.5",
+        "190929.",
+        "0.001",
+        "9.6",
+        "193.5",
+        "0.0",
+        "0.0",
+        "2.520379",
+        "28.901",
+        "0.000",
+        "",
+        "",
+        "",
+        "45"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "I",
+        "Ariel",
+        "",
+        "1851",
+        "W. Lassell",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

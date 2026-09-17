@@ -55,8 +55,8 @@ test('a deposit counts for a star only when its paper is about it and its images
   assert.equal(readmeInterferometric('J/A+A/699/A22  pi1 Gru SPHERE images\nAbstract:\n  observed with ALMA; the low gravity of AGB stars\n\nDescription:\n    Reduced VLT/SPHERE images (intensity/polarimetry)\n\nFile Summary:\n'), false);
 });
 
-test('the verdict follows the routes that worked: deposit, author calibration, automated calibration, shape only', () => {
-  const level = (calibrationLevel: number, bibcode: string | null = null) => ({ instrument: 'PIONIER', calibrationLevel, dataPi: 'PI', bibcode, granules: 1, firstMjd: 0, lastMjd: 0, sampleUrl: '' });
+test('the verdict follows the routes that worked: deposit, author calibration, raw calibration, automated calibration, shape only', () => {
+  const level = (calibrationLevel: number, bibcode: string | null = null, instrument = 'PIONIER') => ({ instrument, calibrationLevel, dataPi: 'PI', bibcode, granules: 1, firstMjd: 0, lastMjd: 0, sampleUrl: '' });
   const none = new Set<string>();
   assert.equal(candidateVerdict([level(2)], [{ name: 'J/A+A/614/A12', title: 'CE Tau', bibcode: 'x', imageLines: ['fits/*'], aboutStar: true, interferometric: true }], none).route, 'published-image');
   assert.equal(candidateVerdict([level(2)], [{ name: 'J/A+A/671/A96', title: 'ATOMIUM SPHERE', bibcode: 'z', imageLines: ['fits/*'], aboutStar: true, interferometric: false }], none).route, 'automated-calibration', 'a SPHERE image is not a surface');
@@ -66,7 +66,10 @@ test('the verdict follows the routes that worked: deposit, author calibration, a
   assert.equal(candidateVerdict([level(3, '2018AJ....155...30B')], [], new Set(['2018Natur.553..310P'])).route, 'automated-calibration', 'a diameter survey is not an imaging paper');
   assert.equal(candidateVerdict([level(3)], [], none).route, 'automated-calibration', 'level-3 files with no paper');
   assert.equal(candidateVerdict([level(2)], [{ name: 'J/A+A/555/A24', title: 'Antares', bibcode: 'y', imageLines: [], aboutStar: true, interferometric: true }], none).route, 'automated-calibration');
-  assert.equal(candidateVerdict([level(0)], [], none).route, 'shape-only');
+  const raw = candidateVerdict([level(2), level(0, null, 'MATISSE')], [], none);
+  assert.equal(raw.route, 'raw-calibration', 'public raw VLTI frames outrank an automated calibration');
+  assert.match(raw.reason, /MATISSE frames/u);
+  assert.equal(candidateVerdict([level(0, null, 'MIRC-X')], [], none).route, 'shape-only', 'raw frames the tools cannot calibrate');
 });
 
 test('a dropped connection is retried, and the last failure is reported', async () => {

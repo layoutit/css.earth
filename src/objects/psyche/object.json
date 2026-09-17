@@ -31,6 +31,16 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "thermal-inertia",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "dielectric-constant",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -83,15 +93,15 @@
         127358867742.0291
       ],
       "presentationToReference": [
-        -0.6643246195109349,
-        -5.551115123125783e-17,
-        -0.7474441784585997,
-        0.6857666261338019,
-        0.39777715593191365,
-        -0.6095059217922171,
-        0.29731621952512766,
-        -0.9174820620691817,
-        -0.26425315776461034
+        -0.33468306139863707,
+        0.6501844186700474,
+        -0.6820905146177655,
+        0.138263230444702,
+        -0.6821175608765917,
+        -0.718052165410539,
+        0.9321322478703497,
+        0.33462793497026133,
+        -0.13839659539781754
       ],
       "orbitUpReference": [
         5.551115123125783e-17,
@@ -107,7 +117,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0c8386159fdc37834517eb9a34fb9753e4d652ebc4d35884a8cebf5e76d4b4ea"
+        "sha256": "a4b579142021a47d54ef2e79976ed320bb986b291465e73e0fc730aa8369d438"
       }
     },
     "catalog": {
@@ -128,6 +138,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "361bf530075d54686ac7cc37494f3312097d92f97831fbbc9227883efa83d3c8"
+    "sha256": "5ef4ec60de5cb32b62485b321f846c629f25c19163c975c0665a275f3303d0d9"
   }
 }

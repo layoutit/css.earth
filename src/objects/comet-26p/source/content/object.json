@@ -8,7 +8,15 @@
       {
         "id": "diameter",
         "label": "Catalog diameter",
-        "value": "≈2.6 km"
+        "value": "≈2.6 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=26P",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.diameter (km)"
+        }
       },
       {
         "id": "perihelion",

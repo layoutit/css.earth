@@ -35,13 +35,14 @@ test('finite sky origin exactly matches infinite registration for every cardinal
   expect(preparedSkyCameraTransform(world([1e25, -2e25, 3e25]), viewport)).toBe(preparedSkyCameraTransform(world(), viewport));
 });
 
-test('observer displacement rotates in physical ICRF before the one prepared CSS reflection', () => {
+test('observer displacement rotates in physical ICRF, then reaches CSS eye space with y reversed', () => {
   const moved = [1020, -1960, 3060] as const;
-  expect(parse(preparedSkyCameraTransform(world(moved), viewport, parallax)).translation).toEqual([7, -31, 570]);
-  // World-to-eye for +90 degrees about Z is [dy,-dx,dz].
-  expect(parse(preparedSkyCameraTransform(world(moved, [0, 0, Math.SQRT1_2, Math.SQRT1_2]), viewport, parallax)).translation).toEqual([-3, -1, 570]);
-  // World-to-eye for +90 degrees about Y is [-dz,dy,dx].
-  expect(parse(preparedSkyCameraTransform(world(moved, [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport, parallax)).translation).toEqual([47, -31, 590]);
+  // A pose's camera axes are right, up and toward the eye; CSS eye space has y down.
+  expect(parse(preparedSkyCameraTransform(world(moved), viewport, parallax)).translation).toEqual([7, 9, 570]);
+  // World-to-eye for +90 degrees about Z is [dy,-dx,dz], then y reversed.
+  expect(parse(preparedSkyCameraTransform(world(moved, [0, 0, Math.SQRT1_2, Math.SQRT1_2]), viewport, parallax)).translation).toEqual([-3, -21, 570]);
+  // World-to-eye for +90 degrees about Y is [-dz,dy,dx], then y reversed.
+  expect(parse(preparedSkyCameraTransform(world(moved, [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport, parallax)).translation).toEqual([47, 9, 590]);
 });
 
 test('a fixed face feature moves under transverse travel and shrinks when the camera moves away', () => {

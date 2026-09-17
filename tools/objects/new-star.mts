@@ -159,7 +159,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json', sha256: '0'.repeat(64) } },
     catalog: { name, classification: 'star', color: spec.color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
-    worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
+    worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json', sha256: '0'.repeat(64) } });
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@1', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512, latitudeBands: 16, polarTile: 256,
     densities: [1, 2], resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesCombined: false, polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` },
@@ -188,14 +188,19 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     qualification: `Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of ${name} are unmeasured; the axis shown is where celestial north lies on the sky.` });
   put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1', operations: [{ kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: INTER.url }] });
   put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name, bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm,
-    defaultZoom: 1.25, geometryScale: 1.25, initialScenePitchDegrees: 1, defaultControlYawDegrees: 90 });
+    defaultZoom: 1.25, geometryScale: 1.25, initialScenePitchDegrees: 1, defaultControlYawDegrees: -180 });
   put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),
     shape: { kind: 'uniform-disc-sphere', qualification: 'A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp.' } });
   put(`${o}/source/content/object.json`, { schema: 'cssearth-object-content@1', version: 1, id, displayName: name,
-    panel: { facts: [{ id: 'radius', label: 'Radius', value: `${Math.round(radiusKm / SOLAR_RADIUS_KM)} solar radii` }, { id: 'distance', label: 'Distance from the Sun', value: `${Math.round(astrometry.distanceParsecs)} parsecs` },
-      { id: 'rotation-axis', label: 'Rotation axis', value: 'not measured' }], moreFacts: [] },
+    // A published fact names its source: the author replaces each TODO catalogue id with the entry the measurement record cites.
+    panel: { facts: [
+      { id: 'radius', label: 'Radius', value: `${Math.round(radiusKm / SOLAR_RADIUS_KM)} solar radii`,
+        source: { catalogueId: `${TODO}-radius-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'radiusKm; radiusSource' } },
+      { id: 'distance', label: 'Distance from the Sun', value: `${Math.round(astrometry.distanceParsecs)} parsecs`,
+        source: { catalogueId: `${TODO}-distance-source`, url: spec.paper, label: spec.paperCredit, checked: TODO, path: 'source/measurements.json', locator: 'distanceParsecs; distanceSource' } },
+    ], moreFacts: [] },
     lenses: { titleKey: 'lenses', defaultLens: 'shape', controls: [{ id: 'shape', label: 'Shape', qualification: 'A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.',
       thumbnail: `${id}-lens-shape.webp`, surface: `${id}-surface-shape.webp`, poles: `${id}-poles-shape.webp`, source: { id: `${id}-observational-measurements`, path: '../manifest.json', url: spec.paper },
       falseColor: false, notes: `No image of the photosphere is cast here (${TODO}: say why, and point at the ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention.` }] },
@@ -231,14 +236,15 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   return files;
 }
 
-/** A flat disc in the shared neutral gray on a transparent field: the marker of an unresolved, self-luminous surface. */
-export async function neutralDiscMarker(size = 512, fill = 0.9) {
+/** A flat disc in the shared neutral gray on a transparent field: the marker of an unresolved, self-luminous surface. A body whose
+ * marker takes a colour from its data (an emission map's palette at its dayside mean) passes that colour. */
+export async function neutralDiscMarker(size = 512, fill = 0.9, color: readonly [number, number, number] = [128, 128, 128]) {
   const { default: sharp } = await import('sharp');
   const rgba = Buffer.alloc(size * size * 4), c = (size - 1) / 2, radius = size * fill / 2;
   for (let row = 0; row < size; row++) for (let col = 0; col < size; col++) {
     const distance = Math.hypot(col - c, row - c);
     if (distance > radius + 0.5) continue;
-    rgba.set([128, 128, 128, Math.round(255 * Math.max(0, Math.min(1, radius + 0.5 - distance)))], (row * size + col) * 4);
+    rgba.set([...color, Math.round(255 * Math.max(0, Math.min(1, radius + 0.5 - distance)))], (row * size + col) * 4);
   }
   return sharp(rgba, { raw: { width: size, height: size, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
 }

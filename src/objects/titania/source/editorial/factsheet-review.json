@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "19.189 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "411",
+        "Uranus",
+        "Titania",
+        "703",
+        "URA182",
+        "equatorial",
+        "2000-01-01.5",
+        "436298.",
+        "0.002",
+        "184.0",
+        "68.1",
+        "0.1",
+        "29.5",
+        "8.705869",
+        "579.928",
+        "1644.649",
+        "",
+        "",
+        "",
+        "45"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "III",
+        "Titania",
+        "",
+        "1787",
+        "W. Herschel",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

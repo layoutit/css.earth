@@ -58,7 +58,7 @@
       "id": "usgs-gazetteer-dactyl-nomenclature-center-pts",
       "path": "features/DACTYL_nomenclature_center_pts.zip",
       "expectedBytes": 42071,
-      "expectedSha256": "90b788ae7b1212174e6f98bf2fe305040883a0404afbd62c38f186eb63fdee09",
+      "expectedSha256": "f9b0a51bbadab614072090fdb2269015d52d79fac1afda5b2fa7ca5781d657a8",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DACTYL_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -109,8 +109,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2570,
-      "expectedSha256": "7780b90b379757d232c2ee4ea75eecf40fd05e9fc97af6fed44975a9f062fde7",
+      "expectedBytes": 2761,
+      "expectedSha256": "083daaab4f63d0543b6262f82faea145961a0f43a44bb5320fc7a361fa7d7eae",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -143,8 +143,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2045,
-      "expectedSha256": "efe84d223c66807448a4c050ad0466988f196e4855211c2cacd0a3147eb9110a"
+      "expectedBytes": 2026,
+      "expectedSha256": "7e3ead1e8dcb4b028968e74b68dcc1ec2a0300aadbb7186ffc7ae586d8250e5e"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -180,7 +180,7 @@
       "id": "dactyl-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1066,
-      "expectedSha256": "115d0cc3a554d49831e5858129c8a93359c67829d85a0bb26d479b8eb5f93895",
+      "expectedSha256": "09a690c808c7cd7ed7e96f104de757c163d78ccbb632f89d9de4e36f3dbc29b9",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -197,8 +197,8 @@
     {
       "id": "dactyl-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1093,
-      "expectedSha256": "0e98bb5293fca7af9430cada585f2c42ae71d012105044f9985124b0b6937d4a",
+      "expectedBytes": 1061,
+      "expectedSha256": "e659db66474cf90402c7546bc206cdb046f4555b37265aeb765e5e10fb29eb9f",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -215,8 +215,8 @@
     {
       "id": "dactyl-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "e4cf71e29027f0275c16de63ac1146d120953c0777bc32b22dcefdfe515b61a8",
+      "expectedBytes": 185,
+      "expectedSha256": "52b2d2c09ec3f899a4e02b0dcfab5ba0a54c3dffce297afecb0d847d23d9c5ec",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

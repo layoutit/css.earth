@@ -26,7 +26,7 @@ const recipe = () => ({
   motion: [{ id: 'spin', source: 'layers', target: 'body', durationMs: 89000 }, { id: 'ring-drift', source: 'layers', target: 'rings', durationMs: 42000 }],
   paging: { source: 'raster', surface: 'body', maxResidentPages: 512, maxResidentBytes: 134217728, maxConcurrentLoads: 4 },
   destinations: { source: 'world', maxEntries: 34135 },
-  worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [1, 2, 3], presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1], orbitUpReference: [0, 1, 0], metersPerUnit: 24402.58, bodyRadiusM: 6051800 },
+  worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [1, 2, 3], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 1, 0], metersPerUnit: 24402.58, bodyRadiusM: 6051800 },
 });
 
 describe('object descriptor boundary', () => {

@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-jwst-toolchain@1",
+  "purpose": "Eureka! time-series reduction of JWST raw exposures (stages 1-4), on the STScI jwst pipeline, for eclipse mapping from raw data.",
+  "license": "Eureka! MIT; jwst BSD-3-Clause",
+  "micromamba": {
+    "channel": "conda-forge",
+    "packages": [
+      "python=3.11",
+      "pip"
+    ]
+  },
+  "requirements": "requirements.lock",
+  "patches": [
+    {
+      "file": "eureka/S3_data_reduction/bright2flux.py",
+      "reason": "Eureka! 1.4 turns a scalar gain from the control file into DataArray(gain, dims=('y','x')), which raises 'different number of dimensions on data and dims: 0 vs 2' for MIRI.",
+      "find": "    # Convert to electrons\n    gain = xr.DataArray(gain, dims=(\"y\", \"x\"))",
+      "replace": "    # Convert to electrons\n    if np.ndim(gain) == 0:\n        # A constant gain from the ECF applies to every pixel of the window.\n        gain = np.full(data['flux'].shape[1:], float(gain))\n    gain = xr.DataArray(gain, dims=(\"y\", \"x\"))"
+    }
+  ],
+  "crdsServer": "https://jwst-crds.stsci.edu",
+  "memory": "Stage 1 of one MIRI SLITLESSPRISM segment (309 integrations x 64 groups) peaks at 14.5-17 GB with one worker; never run two."
+}

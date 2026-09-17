@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-43b",
+  "card": {
+    "text": "Hot Jupiter whose heat map JWST measured from its eclipses.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2406-10207",
+        "url": "https://arxiv.org/abs/2406.10207",
+        "label": "Challener et al. 2024",
+        "checked": "2026-09-16",
+        "locator": "Abstract",
+        "quote": "We present two-dimensional near-infrared temperature maps of the canonical hot Jupiter WASP-43b"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "WASP-43b is a gas giant that circles its star in 19.5 hours, always showing it the same face. Its dayside peaks near 2,000 K.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2406-10207",
+        "url": "https://arxiv.org/abs/2406.10207",
+        "label": "Challener et al. 2024",
+        "checked": "2026-09-16",
+        "locator": "Section 5",
+        "quote": "a peak dayside temperature ∼ 2000 K"
+      }
+    ]
+  },
+  "datasets": {
+    "temperature": {
+      "title": "JWST NIRSpec map",
+      "detail": "Measured temperature",
+      "summary": "Each part of the planet's heat, fitted to JWST light curves. The hot spot is east of noon; how far south varies by fit."
+    },
+    "miri": {
+      "title": "JWST MIRI map",
+      "detail": "Our map from raw data",
+      "summary": "Mid-infrared heat mapped here from raw JWST frames. Day and night agree with the published values."
+    }
+  }
+}

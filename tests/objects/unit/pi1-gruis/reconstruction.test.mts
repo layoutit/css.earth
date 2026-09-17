@@ -8,9 +8,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsImage } from '../../../../tools/fits.mts';
 import { readChannelRows, fitChannels } from '../../../../tools/objects/interferometry/oifits-rows.mts';
-import { visibility } from '../../../../tools/objects/interferometry/image-fit.mts';
+import { reconstructionPlane, visibility } from '../../../../tools/objects/interferometry/image-fit.mts';
 import { authorPi1Gruis, BEAM_FWHM_MAS } from '../../../../tools/objects/source-authoring/pi1-gruis/author.mts';
 import { convolveGaussian, readReconstruction } from '../../../../tools/objects/interferometry/beam-convolve.mts';
 
@@ -21,11 +20,10 @@ const VISIBILITIES = resolve(SOURCE, 'observations/PI_GRU_forImage.fits');
 const DISC_MAS = 18.17;
 
 test('the pinned reconstruction fits the pinned visibilities and closure phases', async () => {
-  const fits = readFitsImage(await readFile(IMAGE));
-  assert.equal(fits.bitpix, -64); assert.equal(fits.width, 128); assert.equal(fits.height, 128);
-  assert.ok(Number(fits.header.CDELT1) < 0, 'east is on the left');
-  const pixelMas = Math.abs(Number(fits.header.CDELT1));
-  const image = { width: fits.width, height: fits.height, values: fits.values, pixelMas, eastLeft: true };
+  const fits = readReconstruction(await readFile(IMAGE));
+  assert.equal(fits.width, 128); assert.equal(fits.height, 128);
+  const image = reconstructionPlane(fits), pixelMas = image.pixelMas;
+  assert.ok(image.eastLeft, 'east is on the left');
   const rows = readChannelRows(await readFile(VISIBILITIES));
   assert.equal(rows.vis2.length, 909); assert.equal(rows.t3.length, 603);
   const [re, im] = visibility(image, 0, 0, rows.wavelengthsMetres[0]!);
@@ -42,14 +40,14 @@ test('the pinned reconstruction fits the pinned visibilities and closure phases'
 test('the displayed image is the raw reconstruction convolved to the beam, and keeps its flux and centre', async () => {
   const raw = readReconstruction(await readFile(IMAGE)), beam = readReconstruction(await readFile(BEAM_IMAGE));
   assert.equal(beam.width, raw.width); assert.equal(beam.height, raw.height);
-  const pixelMas = Math.abs(Number(raw.cards.find(([key]) => key === 'CDELT1')?.[1]));
+  const pixelMas = raw.axes.scale[0];
   const expected = convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas);
   let maximum = 0, rawFlux = 0, beamFlux = 0;
   for (let i = 0; i < expected.length; i++) { maximum = Math.max(maximum, Math.abs(expected[i]! - beam.values[i]!)); rawFlux += raw.values[i]!; beamFlux += beam.values[i]!; }
   assert.ok(maximum < 1e-15, `the pinned beam image is the convolution of the pinned raw image (max difference ${maximum})`);
   assert.ok(Math.abs(beamFlux - rawFlux) < 1e-4 * rawFlux, 'convolution keeps the flux to the edge truncation');
   const rows = readChannelRows(await readFile(VISIBILITIES));
-  const fit = fitChannels({ width: beam.width, height: beam.height, values: beam.values, pixelMas, eastLeft: true }, rows);
+  const fit = fitChannels(reconstructionPlane(beam), rows);
   // The beam is the data's own resolution, so smoothing to it removes what the longest baselines measured: the beam image fits the
   // closure phases (1.3) but not the squared visibilities (55). It is the display, not the fit; the raw image is what the data constrain.
   assert.ok(fit.reducedChi2T3 < 2, `the beam-convolved image still fits the closure phases: ${fit.reducedChi2T3}`);

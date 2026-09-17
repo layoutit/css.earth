@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10591,
-      "expectedSha256": "1a07853953bda7dd41026c3b2e761cc651f4750a06a6dbccfbc10d6813a92aba",
+      "expectedBytes": 10358,
+      "expectedSha256": "7eff70e061da7ebd649e7aecfd85c2bab0de849ca89eadeff15b6ba3700cab6d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2894,
-      "expectedSha256": "a71a819f71e4ecd5bc838888e7fcca6d46851e43f897bc62051eee067cd15265"
+      "expectedBytes": 2875,
+      "expectedSha256": "0f4ac37d49a010e7849f552022a94825e15e5e0ccc5a24f3feaea94385dbf29f"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "c4ee851b3b5c77cd2dd1caeff5a4af818c3ecaba17b3ff5ed49daf2a0827aa5a"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4763,
+      "expectedSha256": "2226e3a012e16b26c673103619f13bfb9d3e8e2940615a5422fea87523314d19",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Parthenope: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

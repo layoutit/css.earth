@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6621,
-      "expectedSha256": "65d59226be052e357233f67327a0456c4849033bb9fe02c9d3cd5cba37f1ee62",
+      "expectedBytes": 6389,
+      "expectedSha256": "b883c88a2c3d7c22b9ab68ff3ba110f7c1c82062d46e81cd4f4d9872b4254405",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2839,
-      "expectedSha256": "8130e3e251a387c6cfd754b1c4f46045ad23a10ea2ad326872ee3dc3af739a50"
+      "expectedBytes": 2820,
+      "expectedSha256": "caeefa61553f8573d8afcfec49334f750e507c8e1603055f5073135080dc16e6"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 45,
       "expectedSha256": "b5a1ad4c39d2120dadba6d451e1f47d70de429e6e98673d48ba9fa6757ac86c3"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6225,
+      "expectedSha256": "a5e35c0ba9304fd234dd91b6f295e5d7c7afc11cd6e349c19a9ad661fbd94ebc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Juno: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

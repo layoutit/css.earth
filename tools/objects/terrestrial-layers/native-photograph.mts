@@ -37,8 +37,8 @@ export function samplePhotographicTexel(sampler: Awaited<ReturnType<typeof loadN
 }
 
 export interface PhotographicAtlas {
-  width: number; height: number; tileSize: number;
-  plans: readonly {face: PreparedTriangle; rect: {x:number;y:number}; matrix: readonly number[]; geometry: {leafWidth:number;leafHeight:number}}[];
+  width: number; height: number;
+  plans: readonly {face: PreparedTriangle; rect: {x:number;y:number;width:number;height:number}; matrix: readonly number[]; geometry: {leafWidth:number;leafHeight:number}}[];
 }
 
 /** Repaint the existing atlas rectangles and exactly the existing lighting model. */
@@ -47,17 +47,17 @@ export async function prepareNativePhotographicAtlas({radial,sourceDirectory,sou
   publicDirectory:string; publicBase:string; id:string; sunDirection:readonly number[]; mapWidth:number;
 }) {
   const sampler=await loadNativePhotograph(sourceDirectory,source,validity);
-  const {width,height,tileSize}=radial;
-  if (![width,height,tileSize].every(n=>Number.isSafeInteger(n)&&n>0) || width>16383 || height>16383 ||
+  const {width,height}=radial;
+  if (![width,height].every(n=>Number.isSafeInteger(n)&&n>0) || width>16383 || height>16383 ||
     sunDirection.length!==3 || !sunDirection.every(Number.isFinite)) throw new TypeError('Invalid retained photographic atlas.');
   const flood=Buffer.alloc(width*height*4),shadow=Buffer.alloc(width*height*4),color=[0,0,0];
   let missingTexels=0;
   for(const {face,rect,matrix:m,geometry} of radial.plans) {
-    if(face.estimated || m.length!==16 || !m.every(Number.isFinite) || geometry.leafWidth!==tileSize || geometry.leafHeight!==tileSize ||
-      rect.x<0 || rect.y<0 || rect.x+tileSize>width || rect.y+tileSize>height) throw new Error('Native photograph requires unchanged, measured atlas faces.');
+    if(face.estimated || m.length!==16 || !m.every(Number.isFinite) || geometry.leafWidth!==rect.width || geometry.leafHeight!==rect.height ||
+      rect.x<0 || rect.y<0 || rect.x+rect.width>width || rect.y+rect.height>height) throw new Error('Native photograph requires unchanged, measured atlas faces.');
     const [a,b,c]=face.vertices,ab=b.map((v,i)=>v-a[i]),ac=c.map((v,i)=>v-a[i]);
     const aa=ab.reduce((v,n,i)=>v+n*ab[i],0),bb=ac.reduce((v,n,i)=>v+n*ac[i],0),abac=ab.reduce((v,n,i)=>v+n*ac[i],0),denominator=aa*bb-abac*abac;
-    for(let py=0;py<tileSize;py++)for(let px=0;px<tileSize;px++) {
+    for(let py=0;py<rect.height;py++)for(let px=0;px<rect.width;px++) {
       const x=px+.5,y=py+.5,w=m[3]*x+m[7]*y+m[15];
       const cx=(m[0]*x+m[4]*y+m[12])/w,cy=(m[1]*x+m[5]*y+m[13])/w,cz=(m[2]*x+m[6]*y+m[14])/w;
       const ap=[cy/BASE_TILE-a[0],cx/BASE_TILE-a[1],cz/BASE_TILE-a[2]];
@@ -86,6 +86,6 @@ export async function prepareNativePhotographicAtlas({radial,sourceDirectory,sou
     return {url:publicBase+filename,width,height,bytes:bytes.length,sha256:sha256(bytes)};
   };
   const surface=await emit('surface',flood),shadowSurface=await emit('shadow',shadow);
-  return {surface,shadowSurface,polesUrl:surface.url,layout:{kind:'triangle-atlas',width,height,tileSize,faceCount:radial.plans.length},
+  return {surface,shadowSurface,polesUrl:surface.url,layout:{kind:'triangle-atlas',width,height,faceCount:radial.plans.length},
     nativeSampling:{method:'published-grid-bilinear-texel-footprint',...sampling,sourceWidth:sampler.width,sourceHeight:sampler.height,missingTexels,includesAtlasBleed:true}};
 }

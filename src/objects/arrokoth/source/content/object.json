@@ -6,33 +6,33 @@
   "panel": {
     "facts": [
       {
-        "id": "dimensions",
-        "label": "Size",
-        "value": "34.5 × 19.8 × 13.8 km"
-      },
-      {
         "id": "rotation",
         "label": "Rotation",
-        "value": "About 15.9 hours"
+        "value": "About 15.9 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=486958",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.rot_per (h)"
+        }
       },
       {
         "id": "class",
         "label": "Population",
-        "value": "Trans-Neptunian object"
+        "value": "Trans-Neptunian object",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=486958",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "object.orbit_class.name"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate."
-      },
-      {
-        "id": "albedo-coverage",
-        "label": "Albedo coverage",
-        "value": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

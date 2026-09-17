@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8120,
-      "expectedSha256": "249f9c47e06a53afd2e0a229800629bf86527c805e2c1243de8ee38af5b4952e",
+      "expectedBytes": 7886,
+      "expectedSha256": "cc8bc0ac094655fdfae9b0126f285d2460a6911c1ae38e28dde27b9b2405140d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2871,
-      "expectedSha256": "b6b5e3381de89ad77e885045dfd8f4e82634b9a5d28d2ffcefed86c8f43be0b4"
+      "expectedBytes": 2852,
+      "expectedSha256": "2cee561eaa9fa569b34719f61e10a5e43da5eb39d4db49cce1fefbacb7468a7f"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 45,
       "expectedSha256": "a0ffe0e0e7afa2cebe18977e27738d7f6de129924863f0941c087c24fd60e51b"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6471,
+      "expectedSha256": "abfa0c30bb12afe9d50392186b1dad067b1d96d55375fa6476705b256555dc30",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Fortuna: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

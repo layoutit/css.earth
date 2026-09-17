@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9142,
-      "expectedSha256": "fb0db3ef09ea10200983fd75d35ef891778b0167ce5b500d6adef00a8a908efc",
+      "expectedBytes": 8910,
+      "expectedSha256": "6859f1cad9c436fdb9408765a5d93196ba4e55111ab1b0f970b225df6a720fe3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2889,
-      "expectedSha256": "e2b7b60dc2eec1575f92dbd54e1ac7698e40cf55f093a8c05b361c197320d18d"
+      "expectedBytes": 2870,
+      "expectedSha256": "269954546276403eab8825948df49e9db51b977f63a3b3302370524e56d37c2c"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "854bf5c6f6c6ac999ffefa625901286d7f3d761be1abbdc8aacff1cb03215619"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6177,
+      "expectedSha256": "f4b509cc188d87f90b8259e8ba8a087a40d3526fb3bf555ad210a0b464370f07",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Amphitrite: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

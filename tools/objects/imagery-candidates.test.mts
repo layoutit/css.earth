@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { UPGRADE_FACTOR, imageryVerdict, opusImagesUrl, opusTargets, parseOpusFrames, shippedImagery } from './imagery-candidates.mts';
+import { UPGRADE_FACTOR, bodyArchiveNames, citedDois, imageryVerdict, opusImagesUrl, opusTargets, parseOpusFrames, shippedImagery } from './imagery-candidates.mts';
 
 test('OPUS covered bodies are the names of its centre-resolution fields', () => {
   const fields = { data: { 'Surface Geometry Constraints': {
@@ -54,4 +54,18 @@ test('the verdict: too few pixels first, then no lens, then the upgrade factor',
   assert.equal(finer.factor, UPGRADE_FACTOR);
   assert.equal(imageryVerdict({ shippedMeters: null, opusKmPerPixel: null, diameterKm: 50, minimumPixels: 50 }).verdict, 'no-images');
   assert.equal(imageryVerdict({ shippedMeters: null, opusKmPerPixel: 0.01, diameterKm: 3000, minimumPixels: 50, reported: false }).verdict, 'shipped-unknown', 'a body without a surfaces report is not a candidate by absence');
+});
+
+test('a body is searched under its catalogue name and, when numbered, its long number and designations', () => {
+  assert.deepEqual(bodyArchiveNames('Haumea', '136108 Haumea (2003 EL61)'), ['Haumea', '136108', '2003 EL61', '2003EL61']);
+  assert.deepEqual(bodyArchiveNames('Psyche', '16 Psyche (A852 FA)'), ['Psyche', 'A852 FA', 'A852FA'], 'a short number matches too much');
+  assert.deepEqual(bodyArchiveNames('Hiʻiaka'), ['Hiiaka']);
+  assert.deepEqual(bodyArchiveNames('Io'), [], 'a two-letter name is not searched');
+});
+
+test('cited DOIs come from the manifest-bound catalogue records and doi.org links in the ledger', () => {
+  const manifest = { inputs: [{ sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'paper' }, { catalogueId: 'software' }] } }], documents: [{ sourceBinding: { kind: 'local' } }] };
+  const records = new Map<string, unknown>([['paper', { identifiers: [{ type: 'DOI', value: '10.1029/2021JE007091' }, { type: 'arXiv', value: '2402.03422' }] }], ['software', { identifiers: [] }]]);
+  const ledger = { entries: [{ evidence: ['https://doi.org/10.3847/PSJ/ac01ec', 'https://arxiv.org/abs/2105.11372'] }] };
+  assert.deepEqual(citedDois(manifest, records, ledger), ['10.1029/2021je007091', '10.3847/psj/ac01ec']);
 });

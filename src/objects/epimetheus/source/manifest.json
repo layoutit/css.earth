@@ -1196,8 +1196,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5744,
-      "expectedSha256": "c9702ee9f7442328d01da5a7eebad33068fddc79f25bb5373e4dd55917725073",
+      "expectedBytes": 6179,
+      "expectedSha256": "49280c349748cf7bedc1e1694831e80ada4fd943f7e9ba390a614c7b8b562843",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1220,8 +1220,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 14624,
-      "expectedSha256": "3b65809afcb833b229c74b9e641c47e2b19ef92886372fc7d061dc0b450b57e5"
+      "expectedBytes": 14605,
+      "expectedSha256": "fdc19e47b38dd844d2ab5e803df0390fb5bf0b965e915adfe0fbb694728c47c5"
     },
     {
       "path": "presentation/minimap.json",
@@ -1252,8 +1252,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1090,
-      "expectedSha256": "a8bcf723bc79a0f2f96e7185a6b57222eb000bfa3adde5e0315ce4d3c1d21738"
+      "expectedBytes": 2402,
+      "expectedSha256": "b3fb3a704adf68293abbc07a082451ef991d01cf097c39aa38e4689f94420a87"
     },
     {
       "path": "preparation/coverage-registration.json",
@@ -1261,8 +1261,8 @@
         "kind": "local",
         "reason": "Published camera seeds and reproducible independent filter-feature registration on the fixed source shape."
       },
-      "expectedBytes": 2387,
-      "expectedSha256": "b3e8ee5edc9a402087204be610fdbc8845a546273e096e6e22c4aeab3f6d7abe"
+      "expectedBytes": 2370,
+      "expectedSha256": "d70cfc253c791bd295ec27524b2523adf964069d43c17efeb59994f0298658f1"
     },
     {
       "path": "preparation/coverage-registration-seed.json",
@@ -1270,8 +1270,8 @@
         "kind": "local",
         "reason": "Published camera seeds and reproducible independent filter-feature registration on the fixed source shape."
       },
-      "expectedBytes": 2206,
-      "expectedSha256": "b3cbd6560c810602dcf826517c07be3face058d51561c49e1648a0f92a2e50e9"
+      "expectedBytes": 2189,
+      "expectedSha256": "ac1671440cfea19b792a9467736d7dad165e5dc74fc3209566f3d60b494a693d"
     }
   ]
 }

@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-interferometry-toolchains@1",
+  "toolchains": {
+    "squeeze": {
+      "purpose": "Sky-plane image reconstruction from squared visibilities and closure phases (Baron et al.).",
+      "license": "GPL-3.0",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/fabienbaron/squeeze",
+        "commit": "4d34e877606f16be73e7689fcb517d0b72d9d455",
+        "submodules": true
+      },
+      "build": [
+        "cmake -S source -B build",
+        "cmake --build build"
+      ],
+      "executable": "source/bin/squeeze"
+    },
+    "rotir": {
+      "purpose": "Surface reconstruction on a tessellated star (ROTIR.jl on OITOOLS.jl), the method Evans et al. (2024) used for Polaris.",
+      "license": "ROTIR.jl GPL-3.0; OITOOLS.jl LGPL-3.0; Julia MIT",
+      "downloads": [
+        {
+          "path": "julia-1.12.7-macaarch64.tar.gz",
+          "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+          "bytes": 230457194,
+          "sha256": "af8fcedfb25b6b9c8c13d99695c38faa2d59bf0162b3f458c8b8b56f14c96919"
+        }
+      ],
+      "registries": [
+        "General",
+        "https://github.com/emmt/EmmtRegistry"
+      ],
+      "environment": "tools/objects/interferometry/rotir",
+      "packages": {
+        "ROTIR": {
+          "url": "https://github.com/fabienbaron/ROTIR.jl",
+          "commit": "ad308759b741b861b6c19fedd001c323a3a64479"
+        },
+        "OITOOLS": {
+          "url": "https://github.com/fabienbaron/OITOOLS.jl",
+          "commit": "f42d2beaf2760cb4beaeba0e0d0f1674a3c6c66a"
+        }
+      },
+      "executable": "julia-1.12.7/bin/julia"
+    },
+    "pionier": {
+      "purpose": "ESO VLTI/PIONIER data reduction and calibration from raw frames (pndrs through esorex), so a star is not limited to the OiDB's automated calibration.",
+      "license": "PIONIER pipeline GPL-3.0; Yorick BSD",
+      "downloads": [
+        {
+          "path": "yorick-2.2.04-1.fc41.src.rpm",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/fedora/41/src/yorick/yorick-2.2.04-1.fc41.src.rpm",
+          "bytes": 2376245,
+          "sha256": "933607a6dcb02aee5e48afe3fbbfcf65954ef94cb60ebacacfb33d0e9d3dfa0c"
+        },
+        {
+          "path": "pionier-kit-4.0.4-5.tar.gz",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/pionier/pionier-kit-4.0.4-5.tar.gz",
+          "bytes": 138222771,
+          "sha256": "a773bb923517956692263d401902d35debc91f02221fb41f960bef0c27724fe2"
+        }
+      ],
+      "yorickPatches": [
+        "yorick-pie.patch",
+        "graph_int_argc.patch"
+      ],
+      "executable": "pipeline/bin/esorex",
+      "build": "eso-kit",
+      "yorick": true,
+      "kit": "pionier-kit-4.0.4-5.tar.gz"
+    },
+    "amber": {
+      "purpose": "ESO VLTI/AMBER reduction from raw frames (P2VM, SciCal, frame selection, transfer function), for stars observed only with AMBER.",
+      "license": "AMBER pipeline GPL-2.0 (amdlib LGPL-2.1)",
+      "build": "eso-kit",
+      "kit": "amber-kit-4.4.5-16.tar.gz",
+      "downloads": [
+        {
+          "path": "amber-kit-4.4.5-16.tar.gz",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/amber/amber-kit-4.4.5-16.tar.gz",
+          "bytes": 47678236,
+          "sha256": "78ced7453b4da828b532604e1d2a4d0c58cd58a843be9127eef5905602e19c1f"
+        }
+      ],
+      "repair": {
+        "package": "amber-4.4.5",
+        "cppflags": "-include {prefix}/include/cxmessages.h",
+        "calibration": "amber-calib-4.4.5.tar.gz",
+        "calibrationDirectory": "share/esopipes/datastatic/amber-4.4.5",
+        "reason": "Apple clang 17 refuses gipaf.c, which calls cx_assert without including cxmessages.h; install_pipeline stops there before unpacking the calibration files."
+      },
+      "executable": "pipeline/bin/esorex"
+    },
+    "gravity": {
+      "purpose": "ESO VLTI/GRAVITY reduction from raw frames (dark, P2VM, visibilities, transfer function), driven by the archive's calibration association tree.",
+      "license": "GRAVITY pipeline GPL-2.0-or-later",
+      "build": "eso-kit",
+      "kit": "gravity-kit-1.11.0.tar.gz",
+      "downloads": [
+        {
+          "path": "gravity-kit-1.11.0.tar.gz",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/gravity/gravity-kit-1.11.0.tar.gz",
+          "bytes": 205462019,
+          "sha256": "00ac2ad2abb8c4393361064d4576ed7fca8acd0dbbe1a3afb6f7a21cad405d58"
+        }
+      ],
+      "executable": "pipeline/bin/esorex"
+    },
+    "matisse": {
+      "purpose": "ESO VLTI/MATISSE reduction from raw frames (flat, shift and kappa maps, raw estimates, calibrated OIFITS), driven by the archive's calibration association tree.",
+      "license": "MATISSE pipeline GPL-2.0-or-later",
+      "build": "eso-kit",
+      "kit": "matisse-kit-2.5.0.tar.gz",
+      "downloads": [
+        {
+          "path": "matisse-kit-2.5.0.tar.gz",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/matisse/matisse-kit-2.5.0.tar.gz",
+          "bytes": 138702676,
+          "sha256": "fe8101ec2ab21376b0d7615c820c954f56b6793370a84c87eddc4c3e5280a43a"
+        },
+        {
+          "path": "openmp-20.1.8.src.tar.xz",
+          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/openmp-20.1.8.src.tar.xz",
+          "bytes": 1093976,
+          "sha256": "b21c04ee9cbe56e200c5d83823765a443ee6389bbc3f64154c96e94016e6cee9"
+        },
+        {
+          "path": "cmake-20.1.8.src.tar.xz",
+          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/cmake-20.1.8.src.tar.xz",
+          "bytes": 8652,
+          "sha256": "3319203cfd1172bbac50f06fa68e318af84dcb5d65353310c0586354069d6634"
+        }
+      ],
+      "openmp": {
+        "why": "MATISSE 2.5.0 compiles its OpenMP loops out on macOS (#if defined (_OPENMP) && !defined( __APPLE__)), so mat_raw_estimates ran on one core: 759 s for a Betelgeuse LM exposure. With LLVM's OpenMP runtime and the guard removed in these files, 4 threads take 444 to 479 s and peak at 13.3 to 14.6 GB. mat_opd_wvpo.c keeps its guard: threaded, its loops share a status variable and changed the band-edge channel's squared visibility and closure phase. With these files threaded the product equals the single-threaded one except the differential-phase error of that band-edge channel (4.985 um), a bootstrap estimate.",
+        "package": "matisse-2.5.0",
+        "runtime": "openmp-20.1.8.src.tar.xz",
+        "runtimeCmake": "cmake-20.1.8.src.tar.xz",
+        "guard": "#if defined (_OPENMP) && !defined( __APPLE__)",
+        "files": ["hdrl/hdrl_utils.h", "hdrl/catalogue/hdrl_cat_def.h", "matisse/mat_apply_staticcalib.c", "matisse/mat_ext_beams_lib.c", "matisse/mat_shift.c"],
+        "threads": 4
+      },
+      "executable": "pipeline/bin/esorex"
+    }
+  }
+}

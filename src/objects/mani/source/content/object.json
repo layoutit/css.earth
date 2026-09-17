@@ -6,31 +6,32 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Occultation-constrained approximation"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "824 × 824 × 770 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Unresolved; published alternatives include 7.33 and 10.44 hours"
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Trans-Neptunian object"
+        "value": "824 × 824 × 770 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2308.08062",
+          "label": "Research publication · arXiv 2308.08062",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2308-08062",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       }
     ],
     "moreFacts": [
       {
         "id": "uncertainty",
         "label": "Shape interpretation",
-        "value": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger."
+        "value": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger.",
+        "source": {
+          "url": "https://arxiv.org/abs/2308.08062",
+          "label": "Research publication · arXiv 2308.08062",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2308-08062",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       }
     ]
   },

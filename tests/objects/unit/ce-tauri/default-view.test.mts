@@ -39,7 +39,7 @@ test('the display axis stands up on screen, with celestial north up and the Eart
   const earth = view.screen(direction(ra, dec).map(v => -v) as [number, number, number]);
   assert.ok(Math.abs(north.angleDegrees - 90) < 0.1, `celestial north is up: ${north.angleDegrees.toFixed(1)}`);
   assert.ok(earth.towardViewer && Math.abs(earth.angleDegrees - 90) < 0.1, 'the Earth direction points at the viewer');
-  // Measured, not endorsed: on the sky east is 90 degrees counterclockwise of north; the scene shows it clockwise, as for Betelgeuse.
+  // As on the sky seen from Earth, east is 90 degrees counterclockwise of north.
   const eastFromNorth = ((east.angleDegrees - north.angleDegrees) % 360 + 540) % 360 - 180;
-  assert.ok(Math.abs(eastFromNorth + 90) < 0.1, `east is ${eastFromNorth.toFixed(1)} degrees from north on screen`);
+  assert.ok(Math.abs(eastFromNorth - 90) < 0.1, `east is ${eastFromNorth.toFixed(1)} degrees from north on screen`);
 });

@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-2i",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "2I/Borisov",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 0.4
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/comet-2i-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f724577d79709733548dcb2059df504694f19c8bcce1968f4cb546e8e634a46e"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        79089778033.56726,
+        -4241942159720.5557,
+        -5811798607846.599
+      ],
+      "presentationToReference": [
+        0.4145596201302401,
+        0.020957186691206164,
+        0.9097808074934647,
+        0.7905643044869064,
+        0.48685935484198667,
+        -0.37145127415850726,
+        0.45071987068311603,
+        -0.8732289304236515,
+        -0.18526422547961213
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 1.7391304347826086,
+      "bodyRadiusM": 400
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "2I/Borisov",
+      "classification": "interstellar",
+      "color": "#aaaaaa",
+      "distanceAu": 48.099927316612195,
+      "description": "The second interstellar object seen passing through the Solar System, and the first clearly active comet.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "284ae9dd17a9d0a701ce93dc4280bb8e758ba82372a63cd51d22ae1eba3efe96"
+  }
+}

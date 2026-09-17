@@ -15,9 +15,7 @@ export interface OffLimbSource {
   readonly center: readonly [number, number]; readonly discRadiusPx: number;
   readonly backgroundMaximum: number;
 }
-export interface OffLimbDisplay { readonly low: number; readonly high: number; readonly palette: readonly string[]; readonly rotationDegrees: number;
-  /** Flip the image left-right before rotating: for a scene whose handedness is the sky's mirror. */
-  readonly mirror?: boolean; }
+export interface OffLimbDisplay { readonly low: number; readonly high: number; readonly palette: readonly string[]; readonly rotationDegrees: number; }
 
 export function offLimbPlate(source: OffLimbSource, display: OffLimbDisplay, size: number, bodyDiameterPx: number): Uint8Array {
   if (!(size > 0) || !(bodyDiameterPx > 0) || !(source.discRadiusPx > 0) || !(display.high > display.low) || !(display.low > 0)) throw new TypeError('An off-limb plate needs positive sizes and a display stretch.');
@@ -30,7 +28,7 @@ export function offLimbPlate(source: OffLimbSource, display: OffLimbDisplay, siz
     return at(x0, y0) * (1 - fx) * (1 - fy) + at(x0 + 1, y0) * fx * (1 - fy) + at(x0, y0 + 1) * (1 - fx) * fy + at(x0 + 1, y0 + 1) * fx * fy;
   };
   for (let py = 0; py < size; py++) for (let px = 0; px < size; px++) {
-    const sx = (px + 0.5 - size / 2) * (display.mirror ? -1 : 1), sy = py + 0.5 - size / 2;
+    const sx = px + 0.5 - size / 2, sy = py + 0.5 - size / 2;
     // Undo the screen rotation (counterclockwise on a y-down screen), then scale to frame pixels.
     const ix = (sx * cos - sy * sin) * scale + source.center[0], iy = (sx * sin + sy * cos) * scale + source.center[1];
     const value = sample(ix - 0.5, iy - 0.5);

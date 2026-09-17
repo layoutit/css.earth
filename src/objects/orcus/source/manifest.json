@@ -113,8 +113,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3531,
-      "expectedSha256": "1b0ac3904a0d2848d311901073cfcdea8765e8b442de5769451b68991e76b06f",
+      "expectedBytes": 3752,
+      "expectedSha256": "098befec6db655cb98adb076ac75acd67da829abc8ab5b85bdd1de27e7362e8e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -142,8 +142,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2569,
-      "expectedSha256": "1fe01b92b9e06ac4c33cbe243d5b9cbec4dbd98d69987dc881bfabe62b44ca37"
+      "expectedBytes": 2550,
+      "expectedSha256": "3dc7997ba53d0c56011ef082fa3b5bac06cdbe5c43bb8a230c98b96ed223dd86"
     },
     {
       "path": "presentation/minimap.json",
@@ -169,6 +169,21 @@
       "path": "reference/orcus-brown-butler-2018.pdf",
       "expectedBytes": 1598645,
       "expectedSha256": "a939fef5976cf9986bf1d1b4fba067b26f24caa0b9984155211073213d67764d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3010,
+      "expectedSha256": "bcb9d3758e620d3045f1cea14a8be57b4bd6c5a186b4377d3118077e9cc2e75b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Orcus: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

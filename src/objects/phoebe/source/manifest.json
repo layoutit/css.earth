@@ -609,8 +609,8 @@
     {
       "id": "phoebe-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1225,
-      "expectedSha256": "42cd0c133a0460f95b0a6cc5e3942b2fcac9af3099e069c6673bc9bc0050de35",
+      "expectedBytes": 1193,
+      "expectedSha256": "efb67d63b431d74e49b4aed9cc7e5b64e689aa6421b163ec623b550a9de76134",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -627,8 +627,8 @@
     {
       "id": "phoebe-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "cd6e8b9772febaa12eb1fc6fc3314f8166e31b560f0bc0765a9aeebb9b13ec54",
+      "expectedBytes": 185,
+      "expectedSha256": "cac9def5bc8cae522a9269550e49f9b5783570bf3579c51cde53bbdf9e7dc7dc",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -640,6 +640,84 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored map frame."
+      }
+    },
+    {
+      "id": "n1465662798",
+      "path": "observations/N1465662798_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "456243a0a80a1b4b9786cca0555acc4833ae43ccf4a9e65250fa16835edaeb37",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "width": 1024,
+      "height": 1024,
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-n1465662798",
+            "role": "material",
+            "evidence": "src/objects/phoebe/source/manifest.json@2f2fd66326d20b2ab9111bab6e147135d777defb#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n1465662798-label",
+      "path": "observations/N1465662798_2_CALIB.LBL",
+      "expectedBytes": 3777,
+      "expectedSha256": "02da84d06ff45f1aa539a05cb62a482a1adbce49bb4b3a0fd5f99b0243c60f47",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "consumers": [
+        "iss-observation"
+      ],
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-n1465662798-label",
+            "role": "material",
+            "evidence": "src/objects/phoebe/source/manifest.json@2f2fd66326d20b2ab9111bab6e147135d777defb#/inputs/18"
+          }
+        ]
       }
     }
   ],
@@ -677,8 +755,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10970,
-      "expectedSha256": "47a44a0949cc9493a1ce2a1c9761761f7e3ad30491ba331fdd977cca617cd7f1",
+      "expectedBytes": 12266,
+      "expectedSha256": "a9e85d2501a17786d9f2d73dbe35df207429809619ef6162071896e63540a501",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -696,8 +774,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2976,
-      "expectedSha256": "a021bae43f6380815b14480670d601dd6a6c6764d1eedab264fec02ebd653404"
+      "expectedBytes": 3360,
+      "expectedSha256": "d69e6e388e1bade53d7fbb9c60120473e0898c44ff5eec7ba1306f53485a932c"
     },
     {
       "path": "preparation/navigation.json",
@@ -711,8 +789,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 11406,
-      "expectedSha256": "9b44475d33c5649d885865585519f6195fdec0a1f63076167fd39beb5e160b3d"
+      "expectedBytes": 15237,
+      "expectedSha256": "abbcc7ca67482df92892b38b3f52cb7f22b5e40de46c00f1b154f6a65145ec98"
     },
     {
       "path": "presentation/minimap.json",
@@ -743,8 +821,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1085,
-      "expectedSha256": "18382312259d453de290b2017d9d054e0551dcba57c88693b8be1eac2e3bc95a"
+      "expectedBytes": 2350,
+      "expectedSha256": "dbbf783cd5ec7ea1bee8776fe41cbd386c8a778c6af7ef297becba4967319b37"
     },
     {
       "path": "shape/2023/phoebe_128_o.xml",

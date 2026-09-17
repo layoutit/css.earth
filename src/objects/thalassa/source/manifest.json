@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3057,
-      "expectedSha256": "104607836fb5645a760ddff3d5f977ae94d7e97cca620da3a4e1a4e165d7f1c9",
+      "expectedBytes": 3292,
+      "expectedSha256": "97f9d4a0e699d628575665b159b96850f6aab827ed2c5b2374c9219ebc806c6d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -132,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2191,
-      "expectedSha256": "32bbdab638e1479b2abc489101d3cd14d0e55e1defeebd984c19cfb78f4e9d96"
+      "expectedBytes": 2172,
+      "expectedSha256": "a9aa498357b569042f2370d2581276159627f5d3e92b873b297766c89658f981"
     },
     {
       "path": "presentation/minimap.json",
@@ -189,6 +189,15 @@
       "path": "survey/search-resolved.json",
       "expectedBytes": 4871,
       "expectedSha256": "71fabd23cc117a6481a731e42b2bdd160a098ecc841a0f60692d186fb7c02f9a"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1800,
+      "expectedSha256": "c6dd8ef2294ede6850b437837589ae2b477609027e390aa65f28639553c712f1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

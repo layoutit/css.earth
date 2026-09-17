@@ -6,19 +6,30 @@
   "panel": {
     "facts": [
       {
-        "id": "diameter",
-        "label": "Equivalent diameter",
-        "value": "1.16 ± 0.036 km"
-      },
-      {
         "id": "mission",
         "label": "Explored by",
-        "value": "EPOXI"
+        "value": "EPOXI",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000001_001_r.lbl",
+          "label": "Comet 103P · mv10110413 6000001 001 r labelPath",
+          "checked": "2026-09-16",
+          "path": "source/photography/mri/mv10110413_6000001_001_r.lbl",
+          "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-labelpath",
+          "locator": "DATA_SET_ID = \"DIF-C-MRI-3/4-EPOXI-HARTLEY2-V1.0\""
+        }
       },
       {
         "id": "source-epoch",
-        "label": "Shape observations",
-        "value": "4 November 2010"
+        "label": "Encounter photographs",
+        "value": "4 November 2010",
+        "source": {
+          "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000001_001_r.lbl",
+          "label": "Comet 103P · mv10110413 6000001 001 r labelPath",
+          "checked": "2026-09-16",
+          "path": "source/photography/mri/mv10110413_6000001_001_r.lbl",
+          "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-labelpath",
+          "locator": "START_TIME = 2010-11-04T13:59:12.526"
+        }
       }
     ],
     "moreFacts": []

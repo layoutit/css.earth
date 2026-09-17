@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3500,
-      "expectedSha256": "ded4759921cf2b842c89d03713dfcacbaa7e2b00b6229bc8df5808d9ecefcb0a",
+      "expectedBytes": 4196,
+      "expectedSha256": "077cf6894122decf0173bc0f8bf06cbe945fa9867331ae2055dfcc6120f0c840",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -132,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2547,
-      "expectedSha256": "7a80e959803490c56b2b0dbc4ffd589c46986974ac44562fea85a46009d60377"
+      "expectedBytes": 2528,
+      "expectedSha256": "e35a70f83de9ec34ee30b74dc06a7e8b77582233bf8d45a78301c540617863b3"
     },
     {
       "path": "presentation/minimap.json",
@@ -164,6 +164,21 @@
       "path": "reference/sedna-pal-2012.pdf",
       "expectedBytes": 379111,
       "expectedSha256": "762181442ff374c35e500b6d7a916ebe8e9a63d5ba7fee68546c5f00ee535b08"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3173,
+      "expectedSha256": "6eec5f0359a75aad08acdf18d62794b3a9de33f5ea08f5c8cfcce2bd7fee93f2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Sedna: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

@@ -1,4 +1,5 @@
 import { createPreparedInteriorDisc, type PreparedInteriorDisc } from './prepared-interior-disc.js';
+import { createPreparedInteriorSliceSelection, type PreparedInteriorSlices } from './prepared-interior-slices.js';
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
 import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facing.js';
@@ -37,6 +38,7 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "view-property"; property: string; source: "billboard-opacity" | "marker-opacity"; precision: number | null } |
   { kind: "silhouette-fit"; minimumRadius: number; unitScale: number } |
   ({ kind: "interior-disc" } & PreparedInteriorDisc) |
+  ({ kind: "interior-slices" } & PreparedInteriorSlices) |
   ({ kind: "silhouette-step-property"; property: string } & PreparedSilhouetteSteps) |
   { kind: "zoom-property"; property: string } | { kind: "shell-scale"; variable: string; defaultZoom: number } |
   { kind: "counter-rotation"; systemTransform: string | null }
@@ -244,6 +246,10 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   const silhouetteSteps = new Map<PreparedViewBinding, number>();
   const interiorDiscs = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-disc"
     ? [[binding.target, createPreparedInteriorDisc(binding)] as const] : []));
+  const interiorSlices = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-slices"
+    ? [[binding, createPreparedInteriorSliceSelection(binding)] as const] : []));
+  // The slice each binding last showed; publication writes only when the nearest slice changes.
+  const shownSlices = new Map<PreparedViewBinding, number>();
   return {
     publish({ selection, view, resources, plan }: PreparedFramePublication) {
       publishDepth(view.projection);
@@ -268,6 +274,16 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           const visibility = transform ? "visible" : "hidden";
           if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
           if (transform && element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+        } else if (binding.kind === "interior-slices") {
+          const chosen = interiorSlices.get(binding)!(view.projection);
+          if (chosen !== shownSlices.get(binding)) {
+            binding.slices.forEach((slice, index) => {
+              // Hidden slices leave the layer tree: a merely invisible slice still enters Chrome's 3D sort and crosses the shown one at the origin.
+              const display = index === chosen ? "block" : "none";
+              for (const node of slice.nodes) if (nodes[node].style.display !== display) { nodes[node].style.display = display; styleWrites++; }
+            });
+            shownSlices.set(binding, chosen);
+          }
         } else if (binding.kind === "silhouette-fit") {
           // The overlay fitted to the projected silhouette: an ellipse,
           // slightly elongated and shifted outward when off-axis, exactly the

@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9483,
-      "expectedSha256": "ff2138186023dce0af350583a0b83d6dfce567b139fc6a83b834c386517984c3",
+      "expectedBytes": 9249,
+      "expectedSha256": "3b06d5826921574a0d003fd87097f0bd8427b0716c2ab54959e411560e66256c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2882,
-      "expectedSha256": "1ffa939986fdcd42a662895e7979e74b279b3a8668293f597aeeaca90b4762b4"
+      "expectedBytes": 2863,
+      "expectedSha256": "e026c59ab32d2f926bc3828b5afcd558cebc439dc00faf3b623c237fc6929034"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "f4a879b5b7e77a69ab3c68fb2ddc14801148585aeb93239178a278a1d9b6d61d"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5387,
+      "expectedSha256": "719d7667b2e8d61c715550ef133b4b7f7e9de75b26f120dab5856929618aa0d7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 52 Europa: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

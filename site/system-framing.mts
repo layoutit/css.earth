@@ -13,7 +13,7 @@ interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
 import galaxy from '../src/objects/milky-way/object.json' with { type: 'json' };
 import { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
-import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 
 /** Camera framing consumes the prepared orbit bounds, never orbit vertices. */
@@ -48,7 +48,7 @@ export function volumeZoomTarget(from: WorldCameraPose, volume: DensityVolumeFra
   const [ox, oy] = (optics.principalOffsetPixels ?? [0, 0]), focal = optics.focalPixels;
   const ray = [ox / focal, oy / focal, 1];
   const depth = range / Math.hypot(...ray);
-  const offset = rotateWorldPosition(worldRotationFromQuaternion(from.pose.orientationXyzw), tuple(axis => ray[axis] * depth));
+  const offset = rotateWorldPosition(cssCameraAxesFromOrientation(from.pose.orientationXyzw), tuple(axis => ray[axis] * depth));
   const focusPositionM = tuple(axis => from.pose.positionM[axis] - offset[axis]);
   const world = systemViewTarget(from, { ...volume, originM: focusPositionM, bodyRadiusM: 0 }, optics, { candidates: [{
     originM: volume.originM,
@@ -95,8 +95,9 @@ export function systemViewTarget(from: WorldCameraPose, frame: FramingFrame, opt
   if (!(rect.left < 0 && rect.right > 0 && rect.top < 0 && rect.bottom > 0)) {
     throw new TypeError('System framing must leave room around the scene center.');
   }
-  const cameraToReference = worldRotationFromQuaternion(from.pose.orientationXyzw);
-  const referenceToCamera = worldRotationFromQuaternion([-from.pose.orientationXyzw[0], -from.pose.orientationXyzw[1], -from.pose.orientationXyzw[2], from.pose.orientationXyzw[3]]);
+  // Screen offsets and prepared corners meet in CSS camera axes (+y down).
+  const cameraToReference = cssCameraAxesFromOrientation(from.pose.orientationXyzw);
+  const referenceToCamera = cssViewFromOrientation(from.pose.orientationXyzw);
   // Each prepared box encloses the complete system. Project their eight corners
   // at the current angle and use the tightest fit; none dictates a camera turn.
   const depth = Math.min(...view.candidates.map(candidate =>

@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4268,
-      "expectedSha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
+      "expectedBytes": 4859,
+      "expectedSha256": "1789e087372a95787640d9771c4690338f4ffb3757a8772d18651a130afd14bf",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -132,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4212,
-      "expectedSha256": "ad70fadd1a15a701d71adb582909b9fecf0928e6d64aae1f2933d6f7f7a095e3"
+      "expectedBytes": 4193,
+      "expectedSha256": "b9c046c9a63d75120ddb265cdfc579ac9853904489e31ec4c7e98e7f3f71d6c4"
     },
     {
       "path": "presentation/minimap.json",
@@ -149,6 +149,21 @@
       "path": "rings/occultation-2022.json",
       "expectedBytes": 1862,
       "expectedSha256": "4ea83e2dcb08fdefb3f2b13625b711e21fdc1cb7fb40f9f8926b9252d2254d3f"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3833,
+      "expectedSha256": "824ab9bd3a1453c49c4d73e400392ddce53c3f5e82cb0558c2950353e9608e89",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Chariklo: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

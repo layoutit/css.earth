@@ -12,7 +12,10 @@ import type { Vector3, Matrix3 } from "../renderers/css/solar-system/types.ts";
 //     zero yaw the Sun lies exactly to the left and the terminator stands
 //     vertical, up to the Sun's ecliptic latitude as seen from the body.
 // The third axis follows from right-handedness, which keeps CSS +z toward the
-// viewer.
+// viewer. This rotation is the mesh node's authored transform only: CSS 3D space
+// is left-handed and PolyCSS writes world X/Y as CSS Y/X, so the body as drawn is
+// a reflection of it. The world frame is derived from the drawn body
+// (renderedBodyToPresentation in tools/objects/world-navigation-sources.ts).
 
 import {
   requireBodyFixedEclipticNorth,

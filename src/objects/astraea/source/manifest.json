@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9508,
-      "expectedSha256": "c58262023d9b8dd6751a7672b050787c708150ade67c7f08f11754fa252194fd",
+      "expectedBytes": 9716,
+      "expectedSha256": "34b4b11e2ec6b88af2282236a3fc37dbf544d9bd6037231c2c8bc86781ba55e8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -118,8 +118,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2870,
-      "expectedSha256": "ed9c6cdb12bc9d51358700ee25eed541978d7d5d5659ccc229fb0e1cbe8a2990"
+      "expectedBytes": 2851,
+      "expectedSha256": "3971b3bb2bf9a77bed8b374fe4058fe0d2fedca3e2232f51944895ded30b3307"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1800,
       "expectedSha256": "7c174007bed34903131669ac9745109375cfcb77c55a8026286bc174ba0108bb"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5150,
+      "expectedSha256": "d2292bcd5964e9c624c95e91ae4a05edb57fb3e4950913c79ecc0b327cc7ec15",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Astraea: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

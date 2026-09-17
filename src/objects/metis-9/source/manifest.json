@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8660,
-      "expectedSha256": "96b8ad213c2c26b5850947906eaa859fac8f5ce76819aaa8e5fc9bae8b8ec308",
+      "expectedBytes": 8427,
+      "expectedSha256": "4ed3020b7f7aab55d6b26c34c80b6c44bb0d4ceeccabf8986bb992eeb42fd817",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2861,
-      "expectedSha256": "6652dbe3cc913c6f67ca2d029dd4e4b87b482ee3a51a9f3dc4acf791d863f8df"
+      "expectedBytes": 2842,
+      "expectedSha256": "f163d921f143b8af226f2a201f4267939cc56c4ad89ee6388ad48a9a880d982e"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "5dc152f3e52f69996fe0c506fc7a9cccb6f5042426734120255384073d3d77da"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5765,
+      "expectedSha256": "55072793bcf3ebe7b993093473c5d98856e6150fbe830eefe58464cce1dbc506",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 9 Metis: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

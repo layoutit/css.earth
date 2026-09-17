@@ -6,43 +6,33 @@
   "panel": {
     "facts": [
       {
-        "id": "diameter",
-        "label": "Diameter estimate",
-        "value": "8 (+2.25/−1.25) km"
-      },
-      {
         "id": "parent",
         "label": "Orbits",
-        "value": "Saturn"
-      },
-      {
-        "id": "shape",
-        "label": "Minimum equatorial ratio",
-        "value": "1.21:1 · uniform-reflectivity model"
+        "value": "Saturn",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; Planet"
+        }
       },
       {
         "id": "rotation",
         "label": "Tentative rotation period",
-        "value": "38.79 ± 0.25 h · tentative"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "2000"
+        "value": "38.79 ± 0.25 h · tentative",
+        "source": {
+          "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+          "label": "Denk et al. (2018) · Irregular moons",
+          "checked": "2026-09-16",
+          "path": "source/survey/research.json",
+          "catalogueId": "denk-2018-irregular-moons",
+          "locator": "/rotation/hours"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "scale-assumption",
-        "label": "Size assumption",
-        "value": "Geometric albedo 0.06; brightness-based estimate"
-      },
-      {
-        "id": "orientation-limit",
-        "label": "Orientation",
-        "value": "Unknown physical pole and phase; illustrative display"
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

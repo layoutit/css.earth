@@ -48,6 +48,72 @@
       "degreesPerDay": 203.4889538,
       "derivation": "360 / degreesPerDay; synchronous mean sidereal orbital period",
       "siderealPeriodDays": 1.769137799754121
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "3",
+        "Jupiter",
+        "Io",
+        "501",
+        "JUP365",
+        "Laplace",
+        "2000-01-01.5",
+        "421800.",
+        "0.004",
+        "49.1",
+        "330.9",
+        "0.0",
+        "0.0",
+        "1.762732",
+        "1.333",
+        "0.000",
+        "268.1",
+        "64.5",
+        "0.0",
+        "29"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "I",
+        "Io",
+        "",
+        "1610",
+        "Galileo",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

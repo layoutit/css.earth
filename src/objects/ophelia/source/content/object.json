@@ -8,32 +8,41 @@
       {
         "id": "radius",
         "label": "Equivalent radius",
-        "value": "About 21.4 km"
+        "value": "About 21.4 km",
+        "source": {
+          "url": "https://doi.org/10.1006/icar.2001.6596",
+          "label": "Research publication · DOI 10.1006/icar.2001.6596",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1006-icar-2001-6596",
+          "locator": "/referenceRadiusKm"
+        }
       },
       {
         "id": "dimensions",
         "label": "Modeled dimensions",
-        "value": "About 54 × 38 × 38 km"
+        "value": "About 54 × 38 × 38 km",
+        "source": {
+          "url": "https://doi.org/10.1006/icar.2001.6596",
+          "label": "Research publication · DOI 10.1006/icar.2001.6596",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1006-icar-2001-6596",
+          "locator": "/semiAxesKm/0; /semiAxesKm/1"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Uranus",
-        "value": "About 9.0 hours"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from Uranus",
-        "value": "About 53,764 km"
-      },
-      {
-        "id": "mass",
-        "label": "Ring-derived mass",
-        "value": "(3.57 ± 0.32) × 10¹⁶ kg"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Voyager 2 · January 1986"
+        "value": "About 9.0 hours",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; P (days) × 24"
+        }
       }
     ],
     "moreFacts": []

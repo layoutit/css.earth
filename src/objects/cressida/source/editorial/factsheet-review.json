@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "cressida",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "418",
+        "Uranus",
+        "Cressida",
+        "709",
+        "URA184",
+        "Laplace",
+        "2025-01-01.0",
+        "61770.",
+        "0.004",
+        "87.9",
+        "0.5",
+        "1.8",
+        "308.2",
+        "0.4639",
+        "0.6",
+        "1.2",
+        "77.3",
+        "15.2",
+        "180.0",
+        "10"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "IX",
+        "Cressida",
+        "S/1986 U3",
+        "1986",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
+    }
+  ]
+}

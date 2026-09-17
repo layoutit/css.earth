@@ -3,9 +3,11 @@
  *
  *   node tools/objects/star-candidates.mts "<SIMBAD identifier>" [--radius-arcsec 30] [--json]
  *
- * Three public services, read only: SIMBAD for the star and every reference that cites it, the JMMC OiDB for interferometric
+ * Public services, read only: SIMBAD for the star and every reference that cites it, the JMMC OiDB for interferometric
  * granules around its position grouped by instrument, calibration level and data PI, and VizieR for catalogues deposited
- * with those references, whose ReadMe is read for FITS images. The verdict orders the routes that worked for the stars
+ * with those references, whose ReadMe is read for FITS images. `archive-search.mts` adds the leads those three cannot see: the
+ * star's measured diameter (JMMC JMDC), ALMA projects and how many beams they put across the disc, ESO raw frames from
+ * interferometers and adaptive-optics imagers, Hubble and JWST imaging in MAST, and data deposits (DataCite) that cite a paper about the star. The verdict orders the routes that worked for the stars
  * already placed: an author-deposited image (CE Tauri), author-calibrated visibilities at level 3 (π¹ Gruis, Betelgeuse),
  * then automated level-2 calibration alone (Antares: no image converged). An author-calibrated route is not a recommendation until
  * its reconstruction passes the spotless-disc test (Polaris failed it: its disc is about six beams across).
@@ -15,6 +17,8 @@
  * disc for an image. */
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
+import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations, measuredDiameters } from './archive-search.mts';
+export { fetchRetrying } from './archive-search.mts';
 
 const SIMBAD = 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync', OIDB = 'https://tap.jmmc.fr/vollt/tap/sync', VIZIER = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync';
 const quote = (text: string) => `'${text.replaceAll("'", "''")}'`;
@@ -68,21 +72,19 @@ export interface Catalogue { readonly name: string; readonly title: string; read
 
 /** `aboutStarBibcodes` holds the references about this star (`aboutStar`); level-3 files from any other paper are calibrated
  * for something else, typically a diameter survey. */
+const VLTI_CALIBRATORS: ReadonlySet<string> = new Set(['PIONIER', 'AMBER', 'GRAVITY', 'MATISSE']);
+
 export function candidateVerdict(oidb: readonly OidbGroup[], catalogues: readonly Catalogue[], aboutStarBibcodes: ReadonlySet<string>) {
   // Only an interferometric image deposit about this star shows its photosphere; other image deposits of it are context.
   const deposited = catalogues.filter(catalogue => catalogue.imageLines.length && catalogue.aboutStar && catalogue.interferometric);
   if (deposited.length) return { route: 'published-image', reason: `cast the authors' deposited image as published: ${deposited.map(catalogue => catalogue.name).join(', ')}` } as const;
   const authored = oidb.filter(group => group.calibrationLevel >= 3 && group.bibcode !== null && aboutStarBibcodes.has(group.bibcode));
   if (authored.length) return { route: 'author-calibrated', reason: `reconstruct from author-calibrated visibilities (level 3, ${authored.map(group => `${group.instrument} by ${group.dataPi}`).join('; ')}), then run tools/objects/interferometry/spotless-disc.mts on the same sampling before casting it: Polaris's April 2021 image failed that test. Compare with any published figure` } as const;
+  // Level 0 and 1 granules of the VLTI instruments are the ESO archive's public raw frames, which the interferometry tools calibrate.
+  const raw = [...new Set(oidb.filter(group => group.calibrationLevel <= 1 && VLTI_CALIBRATORS.has(group.instrument)).map(group => group.instrument))];
+  if (raw.length) return { route: 'raw-calibration', reason: `calibrate public raw ${raw.join(', ')} frames with tools/objects/interferometry/calibrate-<instrument>.mts, choosing one season observed on the small, medium and large arrays; reconstruct, then run tools/objects/interferometry/spotless-disc.mts (fit, spot ratio, halves) before casting` } as const;
   if (oidb.some(group => group.calibrationLevel >= 2)) return { route: 'automated-calibration', reason: 'only visibilities calibrated automatically (level 2) or for another paper, such as a diameter survey, are public; a reconstruction may not converge (Antares). Keep the package shape-only and record the attempt in its ledger' } as const;
   return { route: 'shape-only', reason: 'no calibrated interferometry and no deposited image: a shape-only package, off the map' } as const;
-}
-
-/** A fetch retried on a dropped connection: one ReadMe lost mid-run would otherwise end a survey of hundreds of references. */
-export async function fetchRetrying(url: string, attempts = 3, fetcher: typeof fetch = fetch): Promise<Response> {
-  for (let attempt = 1; ; attempt++) {
-    try { return await fetcher(url); } catch (error) { if (attempt >= attempts) throw error; }
-  }
 }
 
 async function tap(service: string, query: string): Promise<unknown[][]> {
@@ -99,7 +101,7 @@ export async function starCandidates(identifier: string, radiusArcsec = 30) {
   const [oid, mainId, ra, dec, parallax, spectralType] = star as [number, string, number, number, number | null, string | null];
   const radius = radiusArcsec / 3600, cosDec = Math.max(Math.cos(Number(dec) * Math.PI / 180), 1e-6);
   const oidbRows = await tap(OIDB, `SELECT instrument_name, calib_level, datapi, bib_reference, t_min, access_url, facility_name FROM oidb WHERE s_ra BETWEEN ${ra - radius / cosDec} AND ${ra + radius / cosDec} AND s_dec BETWEEN ${dec - radius} AND ${dec + radius}`);
-  const references = await tap(SIMBAD, `SELECT r.bibcode, h.ref_flag, r.nbobject FROM has_ref h JOIN ref r ON h.oidbibref = r.oidbib WHERE h.oidref = ${oid}`);
+  const references = await tap(SIMBAD, `SELECT r.bibcode, h.ref_flag, r.nbobject, r.doi FROM has_ref h JOIN ref r ON h.oidbibref = r.oidbib WHERE h.oidref = ${oid}`);
   const bibcodes = references.map(([bibcode]) => String(bibcode)), about = new Set(references.filter(([, flag, objects]) => aboutStar(flag, objects)).map(([bibcode]) => String(bibcode)));
   const catalogues: Catalogue[] = [];
   for (let start = 0; start < bibcodes.length; start += 100) {
@@ -110,7 +112,15 @@ export async function starCandidates(identifier: string, radiusArcsec = 30) {
     }
   }
   const oidb = summariseOidb(oidbRows);
-  return { star: { identifier, mainId, rightAscensionDegrees: ra, declinationDegrees: dec, parallaxMas: parallax, spectralType }, references: bibcodes.length, oidb, catalogues, verdict: candidateVerdict(oidb, catalogues, about) };
+  // Beyond the three services above: the disc size, then the archives and deposits that hold what they cannot see.
+  const diameters = await measuredDiameters(ra, dec, radius), position = { position: { ra, dec, radiusDegrees: radius } };
+  const aboutDois = references.filter(([bibcode, , , doi]) => about.has(String(bibcode)) && typeof doi === 'string' && doi).map(([, , , doi]) => String(doi));
+  const [alma, eso, mast, found] = await Promise.all([almaObservations(position, diameters.largestMas), esoRawObservations(position), mastObservations(position), depositsCiting(aboutDois)]);
+  // CDS catalogues (DataCite prefix 10.26093) are the VizieR deposits already read through their ReadMe above.
+  const deposits = found.filter(deposit => !deposit.doi.startsWith('10.26093/'));
+  const archives = { alma, eso, mast, deposits };
+  return { star: { identifier, mainId, rightAscensionDegrees: ra, declinationDegrees: dec, parallaxMas: parallax, spectralType }, references: bibcodes.length, oidb, catalogues,
+    diameters, archives, leads: archiveLeads(archives), verdict: candidateVerdict(oidb, catalogues, about) };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -126,5 +136,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const deposits = result.catalogues.filter(catalogue => catalogue.imageLines.length && catalogue.aboutStar);
   console.log(`\nVizieR: ${result.catalogues.length} catalogues from those references, ${deposits.length} with FITS images of this star:`);
   for (const catalogue of deposits) console.log(`  ${catalogue.name}  ${catalogue.title} (${catalogue.bibcode})${catalogue.interferometric ? '  interferometric' : '  not interferometric: context, not a surface'}\n    ${catalogue.imageLines.join(' | ')}`);
+  const largest = result.diameters.largestMas;
+  console.log(`\nMeasured diameter (JMDC): ${largest === null ? 'none catalogued, so no archive resolution is set against a disc' : `${largest} mas, largest of ${result.diameters.measurements.length} measurements`}`);
+  console.log(`\nArchive leads (ALMA, ESO, MAST, DataCite): ${result.leads.length ? '' : 'none'}`);
+  for (const lead of result.leads) console.log(`  ${lead}`);
   console.log(`\nVerdict: ${result.verdict.route}: ${result.verdict.reason}.`);
 }

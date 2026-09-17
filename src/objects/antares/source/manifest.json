@@ -127,8 +127,8 @@
       ]
     },
     {
-      "expectedBytes": 283,
-      "expectedSha256": "b25cb96af6ea06ee178afe2d1cd816ff3dc801765d985f16dfad92f40981cd97",
+      "expectedBytes": 285,
+      "expectedSha256": "f3f3a5adfc7c594133462f8990915d0a1641eae58a4ba8ae5ba14f28863ca674",
       "id": "antares-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
@@ -172,8 +172,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 2948,
-      "expectedSha256": "9e6739170498c117453ea2067e16bf4ab5a67d43168e2b34df042223c827b53d",
+      "expectedBytes": 3873,
+      "expectedSha256": "15c4654f25e9f63200e1b5b90f0b670fddb917079099cdc8363de0e6cb3e0b5f",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",

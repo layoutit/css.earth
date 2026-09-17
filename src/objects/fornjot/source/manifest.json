@@ -105,8 +105,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3080,
-      "expectedSha256": "52c463ec219a160378b2f9b4acb22ebad5fe3bf72b6eb780b685f97141a421d4",
+      "expectedBytes": 2629,
+      "expectedSha256": "ba8f618a406f83e418c82f2bdf1090371e6b5740360c7b5d2c920f5c9bca5b39",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -134,8 +134,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2354,
-      "expectedSha256": "6773d0c377300ca5c689d8649811a04169b8e8084fc660c3c72fc3cb72ed6207"
+      "expectedBytes": 2335,
+      "expectedSha256": "35f03c889572f93385db1a552f90978c0bdcfea7160c4b5712c4ca325db4a8a3"
     },
     {
       "path": "presentation/minimap.json",
@@ -156,6 +156,15 @@
       "path": "validation/orbit-checks.json",
       "expectedBytes": 25812,
       "expectedSha256": "c727e7b2293d5a4736de284c1db4ff01c9e02452dd1b7cde47b1f73816c1c622"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "expectedBytes": 1408,
+      "expectedSha256": "232107d81768e3864dff60dc71a885694eacec9cde19bc10472f704715958154",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-recorded source review rows for factsheet citations."
+      }
     }
   ],
   "generatedIntermediates": [

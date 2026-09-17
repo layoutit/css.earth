@@ -1,0 +1,379 @@
+{
+ "schema": "cssearth-oracle-fixture@1",
+ "oracle": "astropy",
+ "generatedBy": "tools/oracles/fits/sky-orientation.py",
+ "tool": {
+  "astropy": "8.0.1",
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+ },
+ "inputs": [
+  {
+   "path": "tests/fixtures/fits/sky-orientation.fits",
+   "sha256": "c7c8a01823c44e2ccb848fe2f1516629e4cdc6713fddff884755c38536652594",
+   "bytes": 43200
+  }
+ ],
+ "cases": {
+  "squeeze-reconstruction": {
+   "from": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
+   "derivatives": [
+    -0.7800000000003138,
+    0.0,
+    0.0,
+    0.7799999999992906
+   ],
+   "eastRight": false,
+   "northUp": true,
+   "scale": [
+    0.7800000000003138,
+    0.7799999999992906
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    4.0,
+    5.0,
+    6.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  "hips2fits-tan": {
+   "from": "M8 Spitzer IRAC band from CDS hips2fits (cached by sha256 under .local/nebula-lab/sky-bands/hips2fits)",
+   "derivatives": [
+    -0.0003388930498659904,
+    0.0,
+    0.0,
+    0.00033889304989660475
+   ],
+   "eastRight": false,
+   "northUp": true,
+   "scale": [
+    0.0003388930498659904,
+    0.00033889304989660475
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    4.0,
+    5.0,
+    6.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  "zimpol-cd-tan": {
+   "from": "src/objects/psyche/source/observations/d16Psyche_2018-04-28T07_51_11.013_zpl_science_imaging_cam1.fits",
+   "derivatives": [
+    -1.0083333333287026e-06,
+    0.0,
+    0.0,
+    1.008333333438508e-06
+   ],
+   "eastRight": false,
+   "northUp": true,
+   "scale": [
+    1.0083333333287026e-06,
+    1.008333333438508e-06
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    4.0,
+    5.0,
+    6.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  "linear-east-right": {
+   "derivatives": [
+    0.49999999999954525,
+    0.0,
+    0.0,
+    0.49999999999998934
+   ],
+   "eastRight": true,
+   "northUp": true,
+   "scale": [
+    0.49999999999954525,
+    0.49999999999998934
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    6.0,
+    5.0,
+    4.0,
+    3.0,
+    2.0,
+    1.0
+   ]
+  },
+  "linear-north-down": {
+   "derivatives": [
+    -0.49999999999954525,
+    0.0,
+    0.0,
+    -0.49999999999998934
+   ],
+   "eastRight": false,
+   "northUp": false,
+   "scale": [
+    0.49999999999954525,
+    0.49999999999998934
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ]
+  },
+  "cd-east-right-north-down": {
+   "derivatives": [
+    0.00020000000003879778,
+    0.0,
+    0.0,
+    -0.00029999999996307454
+   ],
+   "eastRight": true,
+   "northUp": false,
+   "scale": [
+    0.00020000000003879778,
+    0.00029999999996307454
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    3.0,
+    2.0,
+    1.0,
+    6.0,
+    5.0,
+    4.0
+   ]
+  },
+  "pc-negative-diagonal": {
+   "derivatives": [
+    -0.000999999999726253,
+    0.0,
+    0.0,
+    0.0009999999999704072
+   ],
+   "eastRight": false,
+   "northUp": true,
+   "scale": [
+    0.000999999999726253,
+    0.0009999999999704072
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    4.0,
+    5.0,
+    6.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  "crota2-half-turn": {
+   "derivatives": [
+    0.0002000000000694237,
+    0.0,
+    0.0,
+    -0.00019999999995687012
+   ],
+   "eastRight": true,
+   "northUp": false,
+   "scale": [
+    0.0002000000000694237,
+    0.00019999999995687012
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    3.0,
+    2.0,
+    1.0,
+    6.0,
+    5.0,
+    4.0
+   ]
+  },
+  "wise-atlas-sin-north": {
+   "derivatives": [
+    -0.0003819444393610794,
+    0.0,
+    0.0,
+    0.00038194443907232635
+   ],
+   "eastRight": false,
+   "northUp": true,
+   "scale": [
+    0.0003819444393610794,
+    0.00038194443907232635
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    4.0,
+    5.0,
+    6.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  "zea-far-south": {
+   "derivatives": [
+    -0.009999999986511816,
+    0.0,
+    0.0,
+    0.00999999999891088
+   ],
+   "eastRight": false,
+   "northUp": true,
+   "scale": [
+    0.009999999986511816,
+    0.00999999999891088
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    4.0,
+    5.0,
+    6.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  "tan-across-ra-zero": {
+   "derivatives": [
+    -9.999999999110456e-05,
+    0.0,
+    0.0,
+    9.999999998601693e-05
+   ],
+   "eastRight": false,
+   "northUp": true,
+   "scale": [
+    9.999999999110456e-05,
+    9.999999998601693e-05
+   ],
+   "values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "display": [
+    4.0,
+    5.0,
+    6.0,
+    1.0,
+    2.0,
+    3.0
+   ]
+  },
+  "crota2-thirty": {
+   "derivatives": [
+    -0.0001732050806901711,
+    -9.999999997529117e-05,
+    -9.999999997720436e-05,
+    0.00017320508075594913
+   ],
+   "refused": true
+  },
+  "cd-small-skew": {
+   "derivatives": [
+    -0.00019999999996507607,
+    0.0,
+    2.0000015867190156e-08,
+    0.0002000000000070935
+   ],
+   "refused": true
+  },
+  "pc-quarter-turn": {
+   "derivatives": [
+    0.0,
+    0.000199999999930459,
+    -0.00019999999996507607,
+    0.0
+   ],
+   "refused": true
+  }
+ }
+}

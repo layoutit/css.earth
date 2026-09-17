@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8313,
-      "expectedSha256": "286a83c0676c860755a5e8b261b87a0c5881bcd0529996e44b80846535207852",
+      "expectedBytes": 8080,
+      "expectedSha256": "8f58b37db9bebbd17308926d3b65aa1cc5185aa4dbc05ac27c4e5dfa5425ae40",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2862,
-      "expectedSha256": "c8a5cdebbf2da1a2474c16aa27c1f7b6b5c6719ab2e50e9c683528f09c80f020"
+      "expectedBytes": 2843,
+      "expectedSha256": "73e184d6a9f1080cc8140fcbefdc929c692b8caf3e0325ef65fd8ce1c2d477a2"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 45,
       "expectedSha256": "d6591b2bea849d2b96f4bf3e0902262c1d94d3c0699ac594a846e18ecfa14e30"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4937,
+      "expectedSha256": "0c383f3a998fcbfef22c46a0de127d998d236bac9c9fe213a3c8c73b0682a53b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Pallas: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -101,8 +101,8 @@
     {
       "id": "callisto-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "a3f124900fc2f62dc6d3b76ead7962907ae909c5203e3104950fe56368befde5",
+      "expectedBytes": 187,
+      "expectedSha256": "b6a0020a853ab46efd7907ccefde2f248afa704f80cc7a89119f5ea0656dc027",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -370,8 +370,8 @@
     {
       "id": "callisto-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1172,
-      "expectedSha256": "23e234f835da8bc7877fd8be8c16bcb218afa9cee16abd01ce065bb42767828a",
+      "expectedBytes": 1140,
+      "expectedSha256": "6621ff031a61e771e0db9af9264d853885f93b89f5b9e6dfdd9b56a54e885c3c",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -549,8 +549,8 @@
     {
       "id": "callisto-object-content",
       "path": "content/object.json",
-      "expectedBytes": 11134,
-      "expectedSha256": "4102e74b658b89d32f3be5ef538d7e219557caa2e3106cf27a1cebcc4f517b06",
+      "expectedBytes": 11055,
+      "expectedSha256": "7d4efccc31cb9cb2e1925bfb774948735be0fd3e3a8b520304abaacecd539719",
       "origin": "Repository-authored Callisto object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -572,8 +572,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1094,
-      "expectedSha256": "b761a24cc68edbeef6157f0413efab632a7be327379bd054c0ee091e4a966781"
+      "expectedBytes": 2348,
+      "expectedSha256": "a626a165c9550a40ffb4fe6567ba42292d7dde6319c1fb44241973b657719707"
     },
     {
       "path": "observations/C0605271600R.LBL",

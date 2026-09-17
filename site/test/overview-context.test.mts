@@ -20,7 +20,7 @@ const camera = (distance: number, plan: Pick<typeof context, 'focus'> = context)
 });
 const frameAt = (originM: PreparedWorldCameraFrame['originM'], bodyRadiusM: number): PreparedWorldCameraFrame => ({
   originM, bodyRadiusM, referenceFrame: 'world', epochJdTt: 1,
-  presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1,
+  presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1,
 });
 
 test('body cards retain overview through small boundary reversals for bodies with and without moons', () => {
@@ -63,11 +63,11 @@ test('body cards switch at the shared camera detail threshold, independent of ca
 
 test('overview follows the prepared galaxy fade and restores correctly at maximum zoom', () => {
   const { fadeStartDistanceM: start, fullDistanceM: full } = context.volume;
-  assert.equal(overviewScopeAtCamera(camera(start)), 'solar-system');
+  assert.equal(overviewScopeAtCamera(camera(start)), 'system');
   assert.equal(overviewScopeAtCamera(camera(full)), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'nearby-universe');
   assert.equal(overviewScopeAtCamera(camera(start * 1.1), 'milky-way'), 'milky-way');
-  assert.equal(overviewScopeAtCamera(camera(start * .99), 'milky-way'), 'solar-system');
+  assert.equal(overviewScopeAtCamera(camera(start * .99), 'milky-way'), 'system');
 });
 
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {
@@ -76,7 +76,7 @@ test('galactic distance is measured from the Sun, independent of selected body a
   const galactic = viewDistance(world, frame, 'milky-way', plan);
   assert.equal(galactic.label, 'Distance from Sun:');
   assert.equal(galactic.meters, 500);
-  const surface = viewDistance(world, frame, 'solar-system', plan);
+  const surface = viewDistance(world, frame, 'system', plan);
   assert.equal(surface.label, 'Altitude:');
   assert.equal(surface.meters, 380);
 });
@@ -88,7 +88,7 @@ test('prepared focus distance follows its catalogue position independently of th
   const value = viewDistance(world, frame, 'milky-way', undefined, focus);
   assert.equal(value.label, 'Distance to Prepared galaxy:');
   assert.ok(Math.abs(value.meters / 1e18 - 1) < 1e-12);
-  assert.equal(viewDistance(world, frame, 'solar-system', undefined, focus).meters, value.meters);
+  assert.equal(viewDistance(world, frame, 'system', undefined, focus).meters, value.meters);
   assert.equal(viewDistance(world, frame, 'milky-way').label, 'Distance from Sun:');
 });
 

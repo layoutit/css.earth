@@ -31,7 +31,7 @@ test('2008 EV5 keeps a closed source-connected mesh within the retained raster b
  assert.equal(radial.faces.length,800);assert.equal(radial.simplification.sourceFaces,3996);assert.equal(radial.simplification.removedOppositeFaces,0);
  assert.equal(radial.simplification.topology.eulerCharacteristic,2);assert.ok(radial.simplification.estimatedErrorMeters<=5);
  assert.ok(radial.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));
- assert.deepEqual([radial.tileSize,radial.width,radial.height],[128,2048,6400]);
+ assert.ok(radial.plans.reduce((sum,p)=>sum+p.rect.width*p.rect.height,0)<=16384*radial.faces.length);
 });
 
 test('2008 EV5 radius colors match independent full-source projections',async()=>{

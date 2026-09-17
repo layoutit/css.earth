@@ -15,8 +15,14 @@
         "shape-model"
       ],
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2407-09641",
+            "role": "reference",
+            "evidence": "Evans et al. (2024), Section III.1: the limb-darkened diameter, the adopted distance and the radius the record transcribes."
+          }
+        ]
       }
     },
     {
@@ -123,8 +129,8 @@
     {
       "id": "polaris-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 282,
-      "expectedSha256": "e6231e12b893523fc8dca5cfada1478b7a0991e1fadf97daf653a3ba0edde0fd",
+      "expectedBytes": 284,
+      "expectedSha256": "780b15db9bd31a6bdd3ae80ad9f68699d4543a2d2c6111b25548561858224b11",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -167,8 +173,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2406,
-      "expectedSha256": "1a1d45686d8b6f140902632a43c5de41c356b5fd20445987a8a774b56a7f8dd2",
+      "expectedBytes": 2950,
+      "expectedSha256": "bee2f60ecd117c800bc58d5172ec55c29e0bdf00f06681e97745ba4435d9980e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

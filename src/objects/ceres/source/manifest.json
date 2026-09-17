@@ -183,8 +183,8 @@
     {
       "id": "ceres-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "f200fc2fab0d64481e1bfa2338f8716d47f3bb54986e536c0e181bd50e027047",
+      "expectedBytes": 184,
+      "expectedSha256": "19f737699beda385a474893d66887ac7f676f3e483e22b6d9a28206952a84f57",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -251,8 +251,8 @@
     {
       "id": "ceres-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1152,
-      "expectedSha256": "ff88ecfc748ec421f40500362a9c4621e1ef7ba2197233ca57a8fea4b5d2079b",
+      "expectedBytes": 1120,
+      "expectedSha256": "de1cd7df66c04340d820b43e07597238868e66c31101bdfebbbc612e2b63ea05",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -430,8 +430,8 @@
     {
       "id": "ceres-object-content",
       "path": "content/object.json",
-      "expectedBytes": 9466,
-      "expectedSha256": "9036c0ac18102201fb334d146b2c8bb7a9c52ee38df6973ed7462a4e0fdcc663",
+      "expectedBytes": 10721,
+      "expectedSha256": "98679e223ad5755a2b116146a15e937409c21e3da591a640c0ee1c4600cf7c30",
       "origin": "Repository-authored Ceres object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -483,6 +483,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5124,
+      "expectedSha256": "8c5b59758d1b94f930dee3c03a2ae6e9cf096763a149c00410b16df9c7e4a4a3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Ceres: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

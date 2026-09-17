@@ -6,36 +6,45 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published occultation model"
-      },
-      {
         "id": "dimensions",
         "label": "Model extents",
-        "value": "1132.2 × 1132.2 × 1022.4 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Unresolved; display orientation is illustrative"
+        "value": "1132.2 × 1132.2 × 1022.4 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2607.06450",
+          "label": "Research publication · arXiv 2607.06450",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2607-06450",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       },
       {
         "id": "class",
         "label": "Population",
-        "value": "Trans-Neptunian object"
+        "value": "Trans-Neptunian object",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=50000",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "object.orbit_class.name"
+        }
       }
     ],
     "moreFacts": [
       {
         "id": "uncertainty",
         "label": "Shape interpretation",
-        "value": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved."
-      },
-      {
-        "id": "rings",
-        "label": "Ring interpretation",
-        "value": "Circular schematic at measured radius. Q1R uses the 76.4 km Gemini chord width; true width varies with azimuth and its dense arc is not reconstructed. Uniform gray and display alpha are illustrative, not measured reflectance or optical depth. Q2R radius 2520 km, typical width 10 km."
+        "value": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved.",
+        "source": {
+          "url": "https://arxiv.org/abs/2607.06450",
+          "label": "Research publication · arXiv 2607.06450",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2607-06450",
+          "locator": "/fullAxesKm/0; /fullAxesKm/2"
+        }
       }
     ]
   },
