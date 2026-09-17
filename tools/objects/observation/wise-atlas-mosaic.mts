@@ -10,11 +10,12 @@ import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { readFitsImage } from '../../fits.mts';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { median, offsetComponents, solveConstantOffsets } from './background-offsets.mts';
 
 export const WISE_ATLAS_BANDS = { W1: { band: 1, magzp: 20.5 }, W2: { band: 2, magzp: 19.5 }, W3: { band: 3, magzp: 18 }, W4: { band: 4, magzp: 13 } } as const;
 export type WiseBand = keyof typeof WISE_ATLAS_BANDS;
 export const WISE_ATLAS_REFERENCE = 'https://wise2.ipac.caltech.edu/docs/release/allsky/expsup/sec4_4f.html';
-export const MONTAGE_BACKGROUND_REFERENCE = 'https://doi.org/10.1504/IJCSE.2009.026999';
+export { MONTAGE_BACKGROUND_REFERENCE } from './background-offsets.mts';
 
 export interface TilePins { readonly schema: 'cssearth-wise-atlas-tiles@1'; readonly band: WiseBand; readonly tiles: readonly { readonly coaddId: string; readonly sha256: string; readonly bytes: number }[] }
 export interface SkyGrid { readonly width: number; readonly height: number; readonly fovDeg: number; readonly centerIcrsDegrees: readonly [number, number] }
@@ -128,14 +129,8 @@ export function binWiseAtlasTile(gzipBytes: Buffer, pins: TilePins, coaddId: str
   return { coaddId, x0: minX, y0: minY, width, height, sum, count };
 }
 
-function median(values: number[]) {
-  values.sort((a, b) => a - b);
-  const middle = values.length >> 1;
-  return values.length % 2 ? values[middle]! : (values[middle - 1]! + values[middle]!) / 2;
-}
-
 /** Montage-style constant offsets: minimize sum over overlaps of n_ij (o_i - o_j - d_ij)^2 with sum o = 0. */
-export function matchTileBackgrounds(tiles: readonly Binned[], minimumOverlap = 200) {
+export function matchTileBackgrounds(tiles: readonly Binned[], minimumOverlap = 200): { tiles: readonly Binned[]; offsets: Float64Array; pairs: number; sweeps: number; medianPairStepBefore: number; medianPairStepAfter: number; excluded: { coaddId: string; pixels: number; reason: string }[] } {
   const pairs: { i: number; j: number; difference: number; pixels: number }[] = [];
   for (let i = 0; i < tiles.length; i++) for (let j = i + 1; j < tiles.length; j++) {
     const a = tiles[i]!, b = tiles[j]!, left = Math.max(a.x0, b.x0), right = Math.min(a.x0 + a.width, b.x0 + b.width);
@@ -148,46 +143,26 @@ export function matchTileBackgrounds(tiles: readonly Binned[], minimumOverlap = 
     }
     if (differences.length >= minimumOverlap) pairs.push({ i, j, pixels: differences.length, difference: median(differences) });
   }
-  const n = tiles.length, degree = new Float64Array(n), rhs = new Float64Array(n);
-  for (const pair of pairs) {
-    degree[pair.i] += pair.pixels; degree[pair.j] += pair.pixels;
-    rhs[pair.i] += pair.pixels * pair.difference; rhs[pair.j] -= pair.pixels * pair.difference;
+  const n = tiles.length;
+  const component = offsetComponents(n, pairs), sizes: number[] = [];
+  for (const label of component) sizes[label!] = (sizes[label!] ?? 0) + 1;
+  if (sizes.length > 1) {
+    // A grid-edge sliver can overlap its neighbours by too few pixels to fix its level. Such a tile is left out
+    // only when every output pixel it covers is also covered by the joined group, so it adds no sky, only an
+    // unconstrained level. Any tile with sky of its own keeps the refusal.
+    const kept = sizes.indexOf(Math.max(...sizes)), covered = new Set<number>();
+    tiles.forEach((tile, t) => { if (component[t] === kept) forEachPixel(tile, pixel => covered.add(pixel)); });
+    const outside = tiles.filter((_, t) => component[t] !== kept);
+    if (outside.some(tile => { let own = false; forEachPixel(tile, pixel => { if (!covered.has(pixel)) own = true; }); return own; }))
+      throw new Error(`WISE atlas tiles form disconnected overlap groups: ${outside.map(tile => tile.coaddId).join(', ')} share no chain of overlaps with ${tiles.find((_, t) => component[t] === kept)!.coaddId}.`);
+    const solved = matchTileBackgrounds(tiles.filter((_, t) => component[t] === kept), minimumOverlap);
+    return { ...solved, excluded: outside.map(tile => { let pixels = 0; forEachPixel(tile, () => pixels++); return { coaddId: tile.coaddId, pixels, reason: 'no qualifying overlap; every covered pixel is also covered by the joined tiles' }; }) };
   }
-  // One zero-mean gauge fixes one free level only if every tile is joined through overlaps. Separate
-  // groups would each keep an unknown level while their own overlap steps look solved.
-  const reached = new Uint8Array(n), queue = n ? [0] : [];
-  if (n) reached[0] = 1;
-  for (let head = 0; head < queue.length; head++) for (const pair of pairs) {
-    const next = pair.i === queue[head] ? pair.j : pair.j === queue[head] ? pair.i : -1;
-    if (next >= 0 && !reached[next]) { reached[next] = 1; queue.push(next); }
-  }
-  if (queue.length !== n) throw new Error(`WISE atlas tiles form disconnected overlap groups: ${tiles.filter((_, t) => !reached[t]).map(tile => tile.coaddId).join(', ')} share no chain of overlaps with ${tiles[0]!.coaddId}.`);
-  // Conjugate gradients on the weighted graph Laplacian. Its null space is the constant vector and the
-  // right-hand side sums to zero, so projecting out the mean fixes the free level (zero-mean gauge).
-  const apply = (v: Float64Array) => {
-    const out = new Float64Array(n);
-    for (let t = 0; t < n; t++) out[t] = degree[t]! * v[t]!;
-    for (const pair of pairs) { out[pair.i] -= pair.pixels * v[pair.j]!; out[pair.j] -= pair.pixels * v[pair.i]!; }
-    return out;
-  };
-  const dot = (a: Float64Array, b: Float64Array) => a.reduce((sum, value, i) => sum + value * b[i]!, 0);
-  const offsets = new Float64Array(n), residualVector = Float64Array.from(rhs), direction = Float64Array.from(rhs);
-  let rr = dot(residualVector, residualVector), sweeps = 0;
-  const tolerance = 1e-20 * Math.max(1, dot(rhs, rhs));
-  for (; sweeps < 10 * n && rr > tolerance; sweeps++) {
-    const ad = apply(direction), step = rr / dot(direction, ad);
-    for (let t = 0; t < n; t++) { offsets[t] += step * direction[t]!; residualVector[t] -= step * ad[t]!; }
-    const next = dot(residualVector, residualVector);
-    for (let t = 0; t < n; t++) direction[t] = residualVector[t]! + next / rr * direction[t]!;
-    rr = next;
-  }
-  const mean = offsets.reduce((sum, value) => sum + value, 0) / Math.max(1, n);
-  for (let t = 0; t < n; t++) offsets[t] -= mean;
-  const residual = (applied: boolean) => {
-    const values = pairs.map(pair => Math.abs(pair.difference - (applied ? offsets[pair.i]! - offsets[pair.j]! : 0)));
-    return values.length ? median(values) : 0;
-  };
-  return { offsets, pairs: pairs.length, sweeps, medianPairStepBefore: residual(false), medianPairStepAfter: residual(true) };
+  return { tiles, ...solveConstantOffsets(n, pairs), excluded: [] as { coaddId: string; pixels: number; reason: string }[] };
+}
+/** A unique key (row * 1e6 + column) for every output cell a tile observed; grids stay below 1e6 columns. */
+function forEachPixel(tile: Binned, visit: (pixel: number) => void) {
+  for (let y = 0; y < tile.height; y++) for (let x = 0; x < tile.width; x++) if (tile.count[y * tile.width + x]) visit((tile.y0 + y) * 1_000_000 + tile.x0 + x);
 }
 
 /** Mean of every tile after subtracting its fitted level; DOM rows; NaN where no tile lands. */

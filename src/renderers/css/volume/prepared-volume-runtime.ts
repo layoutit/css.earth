@@ -111,7 +111,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         for (const node of leaf.nodes) node.style.visibility = shown ? '' : 'hidden';
       }
     }
-    const strengths = axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame));
+    const strengths = axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks);
     for (const [axis, pending] of pendingTextures.entries()) {
       if (strengths[axis]!.weight <= 0) continue;
       for (const [leaf, url] of pending) {
@@ -224,11 +224,14 @@ function cameraView(camera: VolumeLocalCamera): readonly number[] {
     cameraToVolume[2]!, cameraToVolume[5]!, cameraToVolume[8]!];
 }
 
-function axisWeights(camera: VolumeLocalCamera): readonly { weight: number; opticalGain: number }[] {
+function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks']): readonly { weight: number; opticalGain: number }[] {
   const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
   const back: VolumeVector = [matrix[2]!, matrix[5]!, matrix[8]!];
   const length = Math.hypot(...back);
-  const strengths = back.map(value => Math.abs(value) / length);
+  const strengths = AXES.map((axis, index) => {
+    const normal = stacks.find(stack => stack.axis === axis)?.normalUnits;
+    return Math.abs(normal ? normal.reduce((sum, value, i) => sum + value * back[i]!, 0) : back[index]!) / length;
+  });
   const maximum = Math.max(...strengths);
   return strengths.map(value => {
     const t = Math.max(0, Math.min(1, (value - maximum + 0.16) / 0.16));

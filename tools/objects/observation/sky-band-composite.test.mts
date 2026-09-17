@@ -44,7 +44,7 @@ test('hips2fits bands are calibrated by the route, divided by their own measured
   const result = await composeSkyBands(composite, { input: noInput, cache });
   assert.deepEqual(result.wcs, { projection: 'TAN', coordinateFrame: 'ICRS', referenceDimension: [16, 16], referencePixel: [8, 8],
     referenceValueDeg: [ra, dec], scaleDeg: wcs.scaleDeg, rotationDeg: 0 });
-  assert.ok(Math.abs(result.evidence.bands[0]!.backgroundMJyPerSr - 30 * 0.74) < 1e-4 && Math.abs(result.evidence.bands[0]!.peakMJyPerSr - 32 * 0.74) < 1e-4);
+  assert.ok(Math.abs(result.evidence.bands[0]!.backgroundMJyPerSr! - 30 * 0.74) < 1e-4 && Math.abs(result.evidence.bands[0]!.peakMJyPerSr! - 32 * 0.74) < 1e-4);
   // FITS row 0 is the bottom raster row; the top raster row is FITS row 15. IRAC4's knot is its own peak: 1.
   const expected = encodeAsinhBands(new Float32Array([1, 0, 0]), new Uint8Array(1), composite.display);
   assert.deepEqual([...result.rgb.subarray(((height - 1) * width + 3) * 3, ((height - 1) * width + 4) * 3)], [...expected]);
@@ -120,3 +120,25 @@ test('recipe verification reads the recipe and every tile list, and composites a
   assert.equal(skyBandCompositeFile('spitzer-mid-infrared', 'e'.repeat(64)), `spitzer-mid-infrared.${'e'.repeat(64)}.png`);
   assert.throws(() => skyBandCompositeFile('../x', 'e'.repeat(64)), /identity/);
 });
+
+test('uncalibrated plate and Herschel routes keep relative units, two bands take a mean green, and no-coverage NaN stays missing', () => withCache(async (cache, place) => {
+  for (const id of ['DSS2B', 'DSS2R', 'PACS100', 'PACS160', 'SPIRE250']) assert.equal(SKY_BANDS[id]!.toMJyPerSr, null, `${id} claims no flux calibration`);
+  assert.equal((SKY_BANDS.SPIRE250!.acquisition as { hips: string }).hips, 'ESAVO/P/HERSCHEL/SPIRE-250');
+  assert.equal((SKY_BANDS.DSS2B!.acquisition as { hips: string }).hips, 'CDS/P/DSS2/blue');
+  // Plate values: a red knot at (2, 0) and a blue knot at (9, 9); Herschel-like NaN where the survey has no footprint.
+  const red = hips2fits('CDS/P/DSS2/red', (x, row) => 4000 + (x === 2 && row === 0 ? 3000 : 0) + (x === 9 && row === 9 ? 100 : 0));
+  const blue = hips2fits('CDS/P/DSS2/blue', (x, row) => x > 13 ? NaN : 6000 + (x === 9 && row === 9 ? 3000 : 0));
+  const composite = recipe([{ band: 'DSS2R', ...await place(red) }, { band: 'DSS2B', ...await place(blue) }], { minimum: 0, stretch: 1, softening: 8 });
+  const result = await composeSkyBands(composite, { input: noInput, cache });
+  const band = result.evidence.bands[1]!;
+  assert.ok(band.backgroundSourceUnits === 6000 && band.peakSourceUnits === 9000 && band.backgroundMJyPerSr === undefined, JSON.stringify(band));
+  assert.equal(band.missingPixels, 2 * height);
+  assert.equal(result.missingPixels, 2 * height, 'NaN is no coverage, never a zero-valued measurement');
+  const at = (x: number, row: number) => [...result.rgb.subarray(((height - 1 - row) * width + x) * 3, ((height - 1 - row) * width + x + 1) * 3)];
+  assert.deepEqual(at(15, 3), [0, 0, 0]);
+  const [r, g, b] = at(2, 0) as [number, number, number], [r2, g2, b2] = at(9, 9) as [number, number, number];
+  assert.ok(r > g && g > b && b === 0, `red plate knot ${[r, g, b]}`);
+  assert.ok(b2 > g2 && g2 > r2, `blue plate knot ${[r2, g2, b2]}`);
+  assert.deepEqual(at(2, 0), [...encodeAsinhBands(new Float32Array([1, 0]), new Uint8Array(1), composite.display)]);
+  assert.match(JSON.stringify(result.evidence.display), /mean/);
+}));
