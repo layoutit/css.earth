@@ -6,13 +6,10 @@ export const REPOSITORY = resolve(import.meta.dirname, '../..');
 export const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
 export const REPOSITORY_URL = 'https://github.com/layoutit/css.earth';
 
-/** Reading order of the sidebar. A classification the list does not name lands before the wider universe. */
-const GROUPS: readonly { key: string; label: string }[] = [
-  { key: 'star', label: 'The Sun and stars' }, { key: 'planet', label: 'Planets' }, { key: 'dwarf-planet', label: 'Dwarf planets' },
-  { key: 'satellite', label: 'Moons' }, { key: 'trans-neptunian', label: 'Beyond Neptune' }, { key: 'comet', label: 'Comets' },
-  { key: 'asteroid', label: 'Asteroids' }, { key: 'interstellar', label: 'Interstellar visitors' }, { key: 'exoplanet', label: 'Exoplanets' },
-  { key: 'universe', label: 'Galaxies, nebulae and beyond' },
-];
+/** Sidebar order only. Labels are the descriptors' own classification values; packages without a catalog entry are context objects. */
+const ORDER = ['star', 'planet', 'dwarf-planet', 'satellite', 'trans-neptunian', 'comet', 'asteroid', 'interstellar', 'exoplanet', 'context'];
+const classificationLabel = (classification: string) => classification === 'context' ? 'Context objects' :
+  classification[0].toLocaleUpperCase('en') + classification.slice(1).replaceAll('-', ' ');
 const DISTANCE_ORDERED = new Set(['star', 'planet', 'dwarf-planet']);
 
 export interface ObjectRecord {
@@ -41,11 +38,11 @@ export function readObjects(): ObjectRecord[] {
     if (descriptor.id !== entry.name) throw new Error(`src/objects/${entry.name}/object.json names a different id.`);
     const readme = readFileSync(readmePath, 'utf8');
     const catalog = isRecord(descriptor.properties) && isRecord(descriptor.properties.catalog) ? descriptor.properties.catalog : null;
-    const group = text(catalog?.classification) ?? 'universe';
+    const group = text(catalog?.classification) ?? 'context';
     objects.push({
       id: entry.name, readmePath, readme, catalogued: catalog !== null, group,
       title: text(catalog?.name) ?? /^#\s+(.+)$/mu.exec(readme)?.[1]?.trim() ?? entry.name,
-      groupLabel: GROUPS.find(candidate => candidate.key === group)?.label ?? group,
+      groupLabel: classificationLabel(group),
       system: text(catalog?.systemName), distanceAu: typeof catalog?.distanceAu === 'number' ? catalog.distanceAu : null,
     });
   }
@@ -54,8 +51,8 @@ export function readObjects(): ObjectRecord[] {
 }
 
 function groupIndex(group: string) {
-  const index = GROUPS.findIndex(candidate => candidate.key === group);
-  return index === -1 ? GROUPS.length - 1.5 : index;
+  const index = ORDER.indexOf(group);
+  return index === -1 ? ORDER.length - 1.5 : index;
 }
 
 /** Objects grouped for the sidebar and the main page, keeping readObjects order. */

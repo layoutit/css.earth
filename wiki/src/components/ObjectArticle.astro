@@ -5,18 +5,18 @@ import Default from '@astrojs/starlight/components/MarkdownContent.astro';
 const object = Astro.locals.starlightRoute.entry.data.object;
 ---
 <Default>
-  {object && <aside class="object-infobox" aria-label={`${Astro.locals.starlightRoute.entry.data.title} at a glance`}>
+  {object && <aside class="object-infobox" aria-label={`${Astro.locals.starlightRoute.entry.data.title} summary`}>
     {object.image && <Image class="object-infobox-image" src={object.image} alt="" width={260} height={260} />}
     {object.status && <p class="object-infobox-status">{object.status}</p>}
     <table>
       <tbody>
-        <tr><th scope="row">Kind</th><td>{object.groupLabel}</td></tr>
+        <tr><th scope="row">Classification</th><td>{object.groupLabel}</td></tr>
         {object.system && <tr><th scope="row">System</th><td>{object.system}</td></tr>}
         {object.facts.map(fact => <tr><th scope="row">{fact.label}</th><td>{fact.value}</td></tr>)}
-        <tr><th scope="row">Maps</th><td>{object.maps}</td></tr>
-        <tr><th scope="row">Open questions</th><td>{object.openQuestions}</td></tr>
+        <tr><th scope="row">Minimaps</th><td>{object.maps}</td></tr>
+        <tr><th scope="row">Unresolved investigations</th><td>{object.openQuestions}</td></tr>
         <tr><th scope="row">Source files</th><td>{object.sourceFiles} ({object.sourceSize})</td></tr>
-        <tr><th scope="row">In the app</th><td>{object.runtimeSize}</td></tr>
+        <tr><th scope="row">Runtime assets</th><td>{object.runtimeSize}</td></tr>
       </tbody>
     </table>
     {object.appUrl && <a class="object-infobox-link" href={object.appUrl}>Open in cssEarth</a>}

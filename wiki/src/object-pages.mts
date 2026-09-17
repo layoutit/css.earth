@@ -10,10 +10,10 @@ import {
 } from './objects.mts';
 
 const NOTE_GROUPS = [
-  { status: 'unresolved', label: 'Open questions' },
-  { status: 'deferred', label: 'Parked for later' },
-  { status: 'included', label: 'What was used' },
-  { status: 'excluded', label: 'What was ruled out' },
+  { status: 'unresolved', label: 'Unresolved' },
+  { status: 'deferred', label: 'Deferred' },
+  { status: 'included', label: 'Included' },
+  { status: 'excluded', label: 'Excluded' },
 ] as const;
 
 /** One Starlight page per object README, plus the main page. Pages rebuild when a package file changes in dev. */
@@ -39,7 +39,7 @@ async function loadPages(context: LoaderContext) {
     await setPage(context, object.id, object.readmePath, articleData(object, isRecord(discoveries) ? discoveries[object.id] : undefined), articleBody(object));
   }
   await setPage(context, 'index', resolve(OBJECTS_DIRECTORY, 'README.md'), {
-    title: 'Every object in cssEarth', description: `Articles for the ${objects.length} objects in cssEarth.`, tableOfContents: false,
+    title: 'Objects', description: `${objects.length} object packages in src/objects.`, tableOfContents: false,
   }, mainPageBody(objects));
   for (const id of context.store.keys()) if (!ids.has(id)) context.store.delete(id);
 }
@@ -104,7 +104,7 @@ function articleBody(object: ObjectRecord) {
     const lens = list(isRecord(lenses) ? lenses.controls : null).filter(isRecord).find(control => control.id === id);
     return [{ label: text(lens?.label) ?? id, path: `prepared/${path}`, falseColor: lens?.falseColor === true }];
   });
-  if (maps.length) parts.push('## Maps', '<div class="object-maps">',
+  if (maps.length) parts.push('## Minimaps', '<div class="object-maps">',
     ...maps.map(map => `![${prose(map.label)} map](${map.path})\n*${prose(map.label)}${map.falseColor ? ' (false colour)' : ''}*`), '</div>');
 
   // The README is the package's source-and-evidence document; its title is already the page title.
@@ -117,14 +117,14 @@ function articleBody(object: ObjectRecord) {
   const cite = (link: string) => { if (!references.includes(link)) references.push(link); return `[^${references.indexOf(link) + 1}]`; };
   const notes = NOTE_GROUPS.map(group => ({ ...group, entries: entries.filter(entry => entry.status === group.status) })).filter(group => group.entries.length);
   if (notes.length) {
-    parts.push('## Research notes');
+    parts.push('## Investigations');
     for (const group of notes) {
       parts.push(`### ${group.label}`);
       for (const entry of group.entries) {
         const evidence = list(entry.evidence).filter((link): link is string => typeof link === 'string' && /^https?:\/\//u.test(link));
         parts.push(`**${prose(text(entry.subject) ?? text(entry.id) ?? '')}.** ${prose(text(entry.finding) ?? '')}${evidence.map(cite).join('')}`);
         const revisit = text(entry.revisitWhen);
-        if (revisit) parts.push(`*Look again when: ${prose(revisit)}*`);
+        if (revisit) parts.push(`*Revisit when: ${prose(revisit)}*`);
       }
     }
   }
@@ -132,7 +132,7 @@ function articleBody(object: ObjectRecord) {
   const manifest = readJson(resolve(directory, 'source/manifest.json'));
   const credits = new Map<string, { files: number; bytes: number; machines: Set<string> }>();
   for (const input of list(isRecord(manifest) ? manifest.inputs : null).filter(isRecord)) {
-    const credit = text(input.credit) ?? 'No credit recorded', entry = credits.get(credit) ?? { files: 0, bytes: 0, machines: new Set<string>() };
+    const credit = text(input.credit) ?? text(input.id) ?? "", entry = credits.get(credit) ?? { files: 0, bytes: 0, machines: new Set<string>() };
     entry.files += 1;
     entry.bytes += typeof input.expectedBytes === 'number' ? input.expectedBytes : 0;
     for (const item of isRecord(input.capture) ? list(input.capture.attributions).filter(isRecord) : []) {
@@ -150,7 +150,7 @@ function articleBody(object: ObjectRecord) {
 
 function mainPageBody(objects: readonly ObjectRecord[]) {
   return [
-    `cssEarth has ${objects.length} objects. Each article is built from that object's package in \`src/objects\`: its README, research notes, maps and cited facts.`,
+    `${objects.length} object packages in \`src/objects\`. Each page shows the package's README, minimaps, investigations, source manifest and prepared facts.`,
     ...groupObjects(objects).flatMap(group => [`## ${group.label}`, group.objects.map(object => `[${prose(object.title)}](/${object.id}/)`).join(' · ')]),
   ].join('\n\n');
 }
