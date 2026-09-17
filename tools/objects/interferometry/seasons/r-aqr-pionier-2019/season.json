@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-star-season@1",
+  "id": "r-aqr-pionier-2019",
+  "object": "r-aqr",
+  "title": "R Aqr, VLTI/PIONIER, sixteen nights from 10 July to 31 August 2019 (ESO archive raw frames)",
+  "instrument": "pionier",
+  "target": "RAQR",
+  "nights": [
+    { "from": "2019-07-10T14:00:00", "to": "2019-07-11T12:00:00" },
+    { "from": "2019-07-11T14:00:00", "to": "2019-07-12T12:00:00" },
+    { "from": "2019-07-13T14:00:00", "to": "2019-07-14T12:00:00" },
+    { "from": "2019-07-21T14:00:00", "to": "2019-07-22T12:00:00" },
+    { "from": "2019-07-27T14:00:00", "to": "2019-07-28T12:00:00" },
+    { "from": "2019-07-29T14:00:00", "to": "2019-07-30T12:00:00" },
+    { "from": "2019-07-30T14:00:00", "to": "2019-07-31T12:00:00" },
+    { "from": "2019-08-02T14:00:00", "to": "2019-08-03T12:00:00" },
+    { "from": "2019-08-03T14:00:00", "to": "2019-08-04T12:00:00" },
+    { "from": "2019-08-04T14:00:00", "to": "2019-08-05T12:00:00" },
+    { "from": "2019-08-06T14:00:00", "to": "2019-08-07T12:00:00" },
+    { "from": "2019-08-10T14:00:00", "to": "2019-08-11T12:00:00" },
+    { "from": "2019-08-22T14:00:00", "to": "2019-08-23T12:00:00" },
+    { "from": "2019-08-26T14:00:00", "to": "2019-08-27T12:00:00" },
+    { "from": "2019-08-28T14:00:00", "to": "2019-08-29T12:00:00" },
+    { "from": "2019-08-31T14:00:00", "to": "2019-09-01T12:00:00" }
+  ],
+  "referenceDiameter": {
+    "mas": 16.88,
+    "source": "CHARM2 (Richichi et al. 2005, VizieR J/A+A/431/773), K-prime uniform disc 16.88 +- 0.56 mas, reference MPC02"
+  },
+  "selection": {
+    "errorFloors": {
+      "vis2Relative": 0.05,
+      "vis2Minimum": 0.000005,
+      "closureDegrees": 2
+    },
+    "errorFloorsSource": "no author file for this season; the floors of the π¹ Gruis author file (seasons/pi1-gruis-pionier-2014-09)"
+  },
+  "reconstruction": {
+    "code": "squeeze",
+    "pixelMas": 0.4,
+    "width": 128,
+    "entropy": 10,
+    "elements": 3000,
+    "iterations": 3000,
+    "discard": 500,
+    "source": "the π¹ Gruis recipe (seasons/pi1-gruis-pionier-2014-09)"
+  },
+  "check": {
+    "limbDarkening": 0
+  }
+}
