@@ -15,9 +15,9 @@ export function presentOverviewResults(browser: HTMLElement, value: string) {
 export function presentSearchResults(browser: HTMLElement, searching: boolean, category: string) {
   if (searching) browser.setAttribute('data-search-results', '');
   else browser.removeAttribute('data-search-results');
-  const heading = browser.querySelector<HTMLElement>('[data-solar-system-results] > .planet-selected-panel');
-  const tabs = browser.querySelector<HTMLElement>('[data-solar-system-results] > .planet-object-tabs');
-  if (heading) heading.hidden = searching || category === 'nebula';
+  // One header per planetary system; the shell marks the current one.
+  for (const heading of browser.querySelectorAll<HTMLElement>('[data-system-results] > .planet-selected-panel')) heading.hidden = searching || category === 'nebula';
+  const tabs = browser.querySelector<HTMLElement>('[data-system-results] > .planet-object-tabs');
   if (tabs) tabs.hidden = searching;
   const results = requiredElement(browser, '#object-category-results');
   results.setAttribute('role', searching ? 'region' : 'tabpanel');

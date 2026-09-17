@@ -11,7 +11,7 @@ import pixelmatch from 'pixelmatch';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/retained-leaf-pool';
-const overview = '/sun/?overview=solar-system&v=QMY-Wp0Ui2g9eAAAAAAAAAAAwhaDLpsLNZhBQsczQAAAAD_WST4rO1jov9dbC19kads_3S3JdnPBsgABAAAAAAAAAAA';
+const overview = '/sun/?overview=system&v=QMY-Wp0Ui2g9eAAAAAAAAAAAwhaDLpsLNZhBQsczQAAAAD_WST4rO1jov9dbC19kads_3S3JdnPBsgABAAAAAAAAAAA';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const results = [], errors:string[] = [];
@@ -92,7 +92,7 @@ try {
       performance.getEntriesByName('cssEarth:navigation:finished').length > 0, pick.id);
     await page.goBack();
     await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssearthTest.scene().activeObjectId === 'sun' &&
-      new URL(location.href).searchParams.get('overview') === 'solar-system');
+      new URL(location.href).searchParams.get('overview') === 'system');
     await page.waitForTimeout(500);
     const after = await page.evaluate(() => {
       const t = window.__poolProof; t.sampling = false;

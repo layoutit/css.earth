@@ -7,7 +7,7 @@ import { browserObjects } from './browser-objects.mts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = 'output/playwright/flight-registry';
-const start = `${origin}/sun/?overview=solar-system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbKXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA`;
+const start = `${origin}/sun/?overview=system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbKXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA`;
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const results = [], errors: string[] = [];
 await mkdir(output, { recursive: true });

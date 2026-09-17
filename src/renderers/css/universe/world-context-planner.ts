@@ -116,9 +116,51 @@ interface ProjectedBody<Entry> {
   nameable: boolean;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
 }
+/** Each planetary system fades with the camera's distance from its own star: the Sun's
+ * and every placed star with orbiting bodies. The context retires once all of them have. */
+export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bodies' | 'orbitCenters' | 'system'>) {
+  const points = [plan.focus, ...plan.bodies];
+  const byId = new Map(points.map(point => [point.id, point]));
+  const parentOf = (id: string) => {
+    const point = byId.get(id);
+    return point && 'orbit' in point ? point.orbit?.centerBodyId : plan.orbitCenters?.[id]?.centerBodyId;
+  };
+  const rootOf = (id: string) => {
+    for (let current = id, steps = 0; steps <= points.length + Object.keys(plan.orbitCenters ?? {}).length; steps++) {
+      const parent = parentOf(current);
+      if (parent === undefined) return current;
+      current = parent;
+    }
+    throw new TypeError(`${id} has a cyclic orbit chain.`);
+  };
+  const rootIds = points.map(point => rootOf(point.id));
+  const roots = [...new Set([plan.focus.id, ...rootIds.filter((id, index) => id !== points[index]!.id)])];
+  const positions = roots.map(id => byId.get(id)!.positionM);
+  const rootIndex = rootIds.map(id => roots.indexOf(id));
+  const values = new Float64Array(roots.length);
+  return Object.freeze({
+    /** The largest system opacity, after measuring every system from this camera position. */
+    update(positionM: readonly number[]) {
+      let maximum = 0;
+      for (let index = 0; index < roots.length; index++) {
+        const star = positions[index]!;
+        values[index] = 1 - logarithmicFade(Math.hypot(positionM[0]! - star[0], positionM[1]! - star[1], positionM[2]! - star[2]),
+          plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+        maximum = Math.max(maximum, values[index]!);
+      }
+      return maximum;
+    },
+    /** The opacity of the system the indexed context point belongs to; a star outside every system is never faded. */
+    of(pointIndex: number) { const root = rootIndex[pointIndex]!; return root < 0 ? 1 : values[root]!; },
+    /** A system's star: the focus or a placed star that bodies orbit. */
+    isSystemStar(id: string) { return roots.includes(id); },
+  });
+}
+
 export function createWorldContextPlanner(plan: PreparedWorldContext, annotationPriorities: Readonly<Record<string, number>> = {}) {
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
+  const systemFade = createSystemFade(plan);
   const prepared = points.map(body => {
     const orbit = 'orbit' in body ? body.orbit ?? null : null;
     // Prepared detail levels are decoded once; each frame only selects one.
@@ -152,8 +194,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
     if (!selectedEntry) throw new TypeError('Selected context body is unavailable.');
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
-    const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
-    const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+    const opacity = systemFade.update(world.pose.positionM);
     const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
@@ -210,6 +251,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       for (const entry of publishingBodies) {
         const { body } = entry;
         const isSelected = !overview && body.id === selectedId;
+        const systemOpacity = systemFade.of(entry.index);
         // Category visibility never removes the object the user is inspecting.
         if (entry.bodyHidden && !isSelected) {
           // A hidden body's changing depth has no consumer. Keeping its
@@ -237,7 +279,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const hovered = entry.hovered, highlighted = entry.highlighted === true;
         // Satellites keep the complete, uniform path from the shared policy,
         // including selection previews and hover during navigation.
-        const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
+        const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const fullOrbit = satellite || hovered;
         const inactiveMoon = satellite && !hovered && !activeSystems.has(entry.parent!.id);
         let skipped = !hovered && entry.orbitHidden;
@@ -247,7 +289,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const bounds = fullOrbit ? entry.orbit?.lod?.bounds : entry.orbit?.bounds;
         const boundsEye = bounds ? toEye(bounds.centerM) : null;
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
-        if (entry.orbit && opacity > 0 && orbitOpacity > 0 &&
+        if (entry.orbit && systemOpacity > 0 && orbitOpacity > 0 &&
             (!bounds || orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
           const projector = createPreparedRingProjector({ toEye, project, hidden: occlusion.hidden,
             mayOcclude: occlusion.mayOcclude,
@@ -281,14 +323,14 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const proxyOpacity = highlighted ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
-          (isLocator ? 1 : opacity * (isSelected || flightDestination ? 1 : proxyOpacity));
-        const orbitVisibility = skipped ? 0 : appearance.opacity * orbitOpacity * opacity;
+          (isLocator ? 1 : systemOpacity * (isSelected || flightDestination ? 1 : proxyOpacity));
+        const orbitVisibility = skipped ? 0 : appearance.opacity * orbitOpacity * systemOpacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
-        const circle = (flightDestination ? opacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
+        const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
           isLocator && overview || bodyLod.markerOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN)) &&
           (!entry.indicatorHidden || hovered || isSelected);
-        const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
+        const primary = !entry.orbit || systemFade.isSystemStar(entry.orbit.centerBodyId);
         const priority = (isAnchor ? 1000 : isLocator ? 500 : 0) + (primary ? 100 : 0) + body.radiusM / plan.focus.radiusM;
         const projected = (prepared[entry.index]!.projected ??= { entry, x: 0, y: 0, depth: 0, diameter: 0, markerOpacity: 0, circle: false, visible: false,
           annotationVisible: false, hovered: false, inFrame: false, priority: 0, nameable: false, lineWidth: 0, orbitVisibility: 0, segments: [] }) as ProjectedBody<Entry>;
@@ -305,14 +347,14 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       for (const projected of projectedBodies) {
         const { entry, x, y, diameter, markerOpacity, annotationVisible, hovered, priority, circle } = projected;
         const { body, labelSize: size } = entry;
-        const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
+        const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
         const highlighted = entry.highlighted === true;
         const targeted = hovered || highlighted || body.id === emphasizedId;
         const localExtent = entry.parent ? Math.hypot(...body.positionM.map((value, axis) => value - entry.parent!.positionM[axis]!)) * focal /
           Math.max(1, -frame.eye(entry.parent)[2]) : Infinity;
         const inContext = !satellite || activeSystems.has(entry.parent!.id);
-        const foregroundSystem = selectedId !== plan.focus.id && !overview;
+        const foregroundSystem = !systemFade.isSystemStar(selectedId) && !overview;
         const unrelatedMinor = !satellite && body.id !== plan.focus.id && foregroundSystem && (annotationPriorities[body.id] ?? 2) < 2;
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         // The destination stays named through the whole flight, across its preview fade.

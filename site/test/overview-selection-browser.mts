@@ -147,7 +147,7 @@ try {
       labels.map(label => label.replace('»', '').trim())), ['Nearby Universe', 'Local Group', 'Milky Way']);
     assert.equal(await galaxy.getByRole('region', { name: 'Planetary systems', exact: true }).isVisible(), true);
     assert.equal(await galaxy.locator('.planet-factsheet-section').isVisible(), false);
-    assert.equal(await page.locator('[data-solar-system-results] .planet-factsheet-section').count(), 0);
+    assert.equal(await page.locator('[data-system-results] .planet-factsheet-section').count(), 0);
     assert.equal(await page.locator('[data-object-type-group="asteroid"]').count(), 0);
     const disabled = galaxy.locator('.planet-object-link[aria-disabled="true"]');
     assert.equal(await disabled.count(), 4);

@@ -4,6 +4,7 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyCardViewAtCamera } from '../overview-context.mts';
+import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
@@ -31,7 +32,9 @@ for (const savedValue of [
   const from = required(savedWorldCamera(required(saved), sun, optics));
   const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   const cameraMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => from, () => optics) };
-  for (const [id] of SYSTEM_VIEWS) {
+  // These views look across the Solar System. Another star's system lies light-years off their axis, so a
+  // straight arrival at a fixed angle cannot keep it in front; its flight is checked in the browser.
+  for (const [id] of [...SYSTEM_VIEWS].filter(([id]) => systemOfObject(SCENE_OBJECTS, id)?.id === SOLAR_SYSTEM_ID)) {
     const frame = required(required(SCENE_OBJECTS.find(object => object.id === id)).worldFrame);
     const to = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: cameraMount }));
     const flight = createSelectionFlight({ from: from.pose, to: to.pose, focusPositionM: frame.originM, durationS: .35 });
@@ -191,7 +194,7 @@ test('a Solar System breadcrumb always restores the system framing from a Sun cl
   const closeup = createWorldSelectionTarget(world, sun, optics);
   const camera = { sharedView: unusedSharedView, navigation: { ...mount.navigation, capture: () => closeup } };
   assert.equal(navigation.systemTarget({ objectId: 'sun', fromId: 'sun', mount: camera }), null);
-  const target = required(navigation.overviewTarget({ scope: 'solar-system', objectId: 'sun', fromId: 'sun', mount: camera }));
+  const target = required(navigation.overviewTarget({ scope: 'system', objectId: 'sun', fromId: 'sun', mount: camera }));
   assert.ok(target.world);
   assert.equal(bodyCardViewAtCamera(target.world, sun, optics, 'sun'), 'overview');
 });

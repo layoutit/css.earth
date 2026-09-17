@@ -103,7 +103,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   form.toggleAttribute('data-search-submitted', searching);
   browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
   const galaxy = browser.querySelector<HTMLElement>('[data-galactic-overview]');
-  const system = browser.querySelector<HTMLElement>('[data-solar-system-results]');
+  const system = browser.querySelector<HTMLElement>('[data-system-results]');
   if (galaxy) galaxy.hidden = true;
   for (const card of browser.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) card.hidden = true;
   if (system) system.hidden = !searching && !!focusCard;
@@ -159,7 +159,9 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     requiredElement<HTMLElement>(browser, '.planet-object-empty').hidden = items.some(item => !item.hidden) || detailCount + overviewCount > 0;
   }
   browser.dataset.sourceFocus = focusCard?.dataset.preparedFocusId ?? '';
-  renderSourceLink(document, focusCard ? `focus:${focusCard.dataset.preparedFocusId}` : `overview:${url.searchParams.get('overview') ?? ''}`);
+  const overview = url.searchParams.get('overview') ?? '';
+  // A system overview is hosted by the route's star, so its credits follow that system.
+  renderSourceLink(document, focusCard ? `focus:${focusCard.dataset.preparedFocusId}` : `overview:${overview === 'system' ? `system:${objectId}` : overview}`);
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 

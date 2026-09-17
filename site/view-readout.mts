@@ -108,7 +108,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   const events = new AbortController();
   let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, disposed = false, flying = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
-  let overviewScope: OverviewScope = 'solar-system';
+  let overviewScope: OverviewScope = 'system';
   let preparedFocus: PreparedFocus | null = null;
   const write = (element: HTMLElement, value: string) => { if (element.textContent !== value) element.textContent = value; };
   function render() {

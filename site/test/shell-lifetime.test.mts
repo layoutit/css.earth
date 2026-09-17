@@ -407,10 +407,10 @@ test('camera scale keeps the overview, while search shows only results and dismi
   const galaxy = new Element(), system = new Element(), introduction = new Element();
   system.selectors.set('.planet-introduction', introduction);
   browser.selectors.set('[data-galactic-overview]', galaxy);
-  browser.selectors.set('[data-solar-system-results]', system);
+  browser.selectors.set('[data-system-results]', system);
   const categoryTabs = new Element();
-  browser.selectors.set('[data-solar-system-results] > .planet-selected-panel', introduction);
-  browser.selectors.set('[data-solar-system-results] > .planet-object-tabs', categoryTabs);
+  browser.selectors.set('[data-system-results] > .planet-selected-panel', introduction);
+  browser.selectors.set('[data-system-results] > .planet-object-tabs', categoryTabs);
   const items = ['planet', 'satellite'].map(type => {
     const item = new Element();
     item.dataset = { objectName: type === 'planet' ? 'earth' : 'moon', objectSystemName: 'solar system',
@@ -482,7 +482,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   const f = fixture(), browser = f.selectors.element('.planet-object-browser'), drawer = f.selectors.element('.planet-drawer-content');
   const galaxy = new Element(), system = new Element(), card = new Element();
   browser.selectors.set('[data-galactic-overview]', galaxy);
-  browser.selectors.set('[data-solar-system-results]', system);
+  browser.selectors.set('[data-system-results]', system);
   browser.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
   const names = ['name','aliases','status','distance','uncertainty','membership','association','basis','reference'];
   for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
@@ -568,7 +568,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   assert.equal(card.requireSelector('[data-focus-name]').textContent, cluster.name);
   search.dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
   assert.equal(search.value, '   ', 'Dismissing search retains the user query');
-  const restoreOverview = shell.beginOverviewSelection('solar-system');
+  const restoreOverview = shell.beginOverviewSelection('system', 'sun');
   assert.equal(card.hidden, true); assert.equal(system.hidden, false);
   restoreOverview();
   assert.equal(card.hidden, false); assert.equal(galaxy.hidden, true);
@@ -597,7 +597,7 @@ test('clearing search keeps the current object or overview card and permits anot
   item.dataset = { objectName: 'moon', objectSystemName: 'solar system',
     objectClassification: 'satellite', objectClassificationName: 'moon' };
   browser.selectors.set('[data-galactic-overview]', galaxy);
-  browser.selectors.set('[data-solar-system-results]', system);
+  browser.selectors.set('[data-system-results]', system);
   browser.selectors.set('.planet-object-item', [item]);
   const shell = f.mount(), search = f.selectors.element('.planet-sidebar-search');
   shell.setObject({ id: 'earth', name: 'Earth', apply() {}, dispose() {} });
@@ -614,13 +614,13 @@ test('clearing search keeps the current object or overview card and permits anot
     if (scope !== 'object') {
       assert.equal(galaxy.hidden, scope !== 'milky-way');
       assert.equal(system.hidden, scope === 'milky-way');
-      if (scope === 'solar-system') assert.equal(item.hidden, false);
+      if (scope === 'system') assert.equal(item.hidden, false);
     }
   };
   checkClear('object');
   checkClear('object', '   ');
   shell.setOverview(true);
-  checkClear('solar-system');
+  checkClear('system');
   const world = worldAt(context.volume.fullDistanceM);
   const before = structuredClone(world);
   shell.setCamera(shellCamera(() => world, new Set(), { immediate: true }));
@@ -685,8 +685,8 @@ test('category pills toggle shared results without camera navigation or opening 
   browser.selectors.set('.planet-object-item', items);
   const system = new Element(), introduction = new Element();
   system.selectors.set('.planet-introduction', introduction);
-  browser.selectors.set('[data-solar-system-results]', system);
-  browser.selectors.set('[data-solar-system-results] > .planet-selected-panel', introduction);
+  browser.selectors.set('[data-system-results]', system);
+  browser.selectors.set('[data-system-results] > .planet-selected-panel', introduction);
   const search = f.selectors.element('.planet-sidebar-search');
   const shell = f.mount();
   shell.setObject({ id: 'earth', name: 'Earth', apply() {}, dispose() {} });
@@ -762,11 +762,11 @@ test('changing Illustration models refreshes an open category without erasing it
 test('the overview preview changes immediately and survives a same-scene commit', () => {
   const f = fixture(), shell = f.mount(), search = f.selectors.element('.planet-sidebar-search');
   shell.setObject({ id: 'sun', name: 'Sun', apply() {}, dispose() {} });
-  const cancel = shell.beginOverviewSelection();
+  const cancel = shell.beginOverviewSelection('system', 'sun');
   assert.equal(search.value, '');
   cancel();
   assert.equal(search.value, '');
-  const restore = shell.beginOverviewSelection();
+  const restore = shell.beginOverviewSelection('system', 'sun');
   shell.setOverview(true);
   restore();
   assert.equal(search.value, '');
@@ -783,7 +783,7 @@ test('an empty search survives dismissal, overview resets, and object commits', 
   search.value = ''; search.dispatchEvent(new Event('input'));
   search.dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
   assert.equal(search.value, '', 'Escape does not insert the overview name');
-  const restore = shell.beginOverviewSelection();
+  const restore = shell.beginOverviewSelection('system', 'sun');
   assert.equal(search.value, '', 'Empty-scene selection leaves search empty');
   shell.setOverview(true); restore();
   assert.equal(search.value, '');
@@ -792,7 +792,7 @@ test('an empty search survives dismissal, overview resets, and object commits', 
   assert.equal(search.value, '', 'An object commit cannot auto-search Jupiter');
   assert.equal(f.selectors.element('.planet-information-panel').hidden, false);
   search.value = 'mars'; search.dispatchEvent(new Event('input'));
-  const cancel = shell.beginOverviewSelection();
+  const cancel = shell.beginOverviewSelection('system', 'sun');
   search.value = 'venus'; search.dispatchEvent(new Event('input'));
   cancel();
   assert.equal(search.value, 'venus', 'Cancelling a card preview cannot overwrite a newer query');
