@@ -27,7 +27,7 @@
       "id": "hammond-2024-miri-eclipse-map",
       "subject": "Hammond et al. (2024) JWST MIRI/LRS eclipse map",
       "status": "excluded",
-      "finding": "A second-degree spherical-harmonic dayside map from the MIRI phase curve of the Transiting Exoplanet ERS program 1366. The arXiv HTML names no data deposit or repository for the map, so there is no grid to cast. Its longitudinal offset, 7.5 +/- 0.5 degrees east (eigenmapping; 7.75 +/- 0.36 with starry), differs from this package's MIRI lens (6.05 degrees) because the light curve admits two systematics solutions: a fast ramp (0.10 d) with a steep trend and a slow ramp (0.27 d) with a gentle trend. Their Table 1 (ramp 3.7 +/- 0.3 per day and 1319 +/- 66 ppm, trend -240 +/- 60 ppm/day) is the slow solution. On the curve they mapped (Bell et al.'s Eureka! v1 white light, pinned in this package), this repository's fit with their time constant returns ramp 1275 ppm, trend -279 ppm/day, position 0.0120, width -0.0423 and offset 7.45 degrees; the fast ramp gives 5.45 degrees and trend -926 ppm/day, and fits better by chi-squared 14.2 (about 9.5 after their 1.2225 error scaling). This project's reduction shows the same pair, 6.1 and 7.95 degrees. Timing is not the cause: their t0 with Bell et al.'s fitted period (0.81347406 d; the paper prints 0.813474) and starry's barycentric light delay (7.4 s) places the transit 20.6 s before the package ephemeris, where both curves show it (20.5 and 19.5 s). Why their fit chose the slow ramp is not recoverable from the paper; every degree 2 and 3 eigencurve model and a Gaussian stand-in for their pixel prior still prefer the fast ramp here.",
+      "finding": "A second-degree spherical-harmonic dayside map from the MIRI phase curve of the Transiting Exoplanet ERS program 1366. The arXiv HTML names no data deposit or repository for the map, so there is no grid to cast. Its longitudinal offset, 7.5 +/- 0.5 degrees east (eigenmapping; 7.75 +/- 0.36 with starry), differs from this package's MIRI lens (6.2 degrees, with light time and the transit time measured in the curve) because the light curve admits two systematics solutions: a fast ramp (0.10 d) with a steep trend and a slow ramp (0.27 d) with a gentle trend. Their Table 1 (ramp 3.7 +/- 0.3 per day and 1319 +/- 66 ppm, trend -240 +/- 60 ppm/day) is the slow solution. On the curve they mapped (Bell et al.'s Eureka! v1 white light, pinned in this package), this repository's fit with their time constant returns ramp 1275 ppm, trend -279 ppm/day, position 0.0120, width -0.0423 and offset 7.45 degrees; the fast ramp gives 5.45 degrees and trend -926 ppm/day, and fits better by chi-squared 14.2 (about 9.5 after their 1.2225 error scaling). This project's reduction shows the same pair, 6.1 and 7.95 degrees. Timing is not the cause: their t0 with Bell et al.'s fitted period (0.81347406 d; the paper prints 0.813474) and starry's barycentric light delay (7.4 s) places the transit 20.6 s before the package ephemeris, where both curves show it (20.5 and 19.5 s). Why their fit chose the slow ramp is not recoverable from the paper; every degree 2 and 3 eigencurve model and a Gaussian stand-in for their pixel prior still prefer the fast ramp here.",
       "revisitWhen": "The map grid is deposited as data, or Hammond et al.'s fitting code or priors are published.",
       "evidence": [
         "https://arxiv.org/abs/2404.16488",
@@ -51,6 +51,10 @@
         {
           "date": "2026-09-17",
           "commit": "ddd048cf9417df1b4d9755414744530f4a037d37"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "64baadf1b720ba1e8cb0e941b26b20fb5730a5c5"
         }
       ]
     },
@@ -215,15 +219,20 @@
       "id": "nirspec-refit-lens",
       "subject": "NIRSpec refit lens: this project's fit of the deposited white-light curve",
       "status": "included",
-      "finding": "The NIRSpec refit lens fits the deposited white-light curve at preparation time with the paper's model (degree 3, 6 eigencurves, positive), the spin axis on the orbit normal: chi-squared 8809.56 over 4202 samples, hot spot -2.31, +7.09 degrees. Converted over the SVO G395H/F290LP transmission, photon weighted, against BT-Settl CIFIST 4500 K, log g 4.5: dayside 1580 K, nightside 875 K.",
+      "finding": "The NIRSpec refit lens fits the deposited white-light curve at preparation time with the paper's model (degree 3, 6 eigencurves, positive), the spin axis on the orbit normal, light time across the orbit, and the transit time measured in the curve (17 s before the package ephemeris): chi-squared 8813.9 over 4202 samples, hot spot -2.34, +7.16 degrees, meridional offset 7.8. Without light time and timing it reproduces ThERESA's corrected-axis fit (8809.6, -2.31, +7.09). Converted over the SVO G395H/F290LP transmission, photon weighted, against BT-Settl CIFIST 4500 K, log g 4.5: dayside 1580 K, nightside 875 K.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/tests/objects/unit/wasp-43b/lens-fits.test.mts",
-        "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/src/objects/wasp-43b/source/preparation/raster.json"
+        "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/src/objects/wasp-43b/source/preparation/raster.json",
+        "https://github.com/layoutit/css.earth/blob/64baadf1b720ba1e8cb0e941b26b20fb5730a5c5/tests/objects/unit/wasp-43b/lens-fits.test.mts"
       ],
       "checked": [
         {
           "date": "2026-09-17",
           "commit": "188586d727a9d34acc136b05e53cc027228a755b"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "64baadf1b720ba1e8cb0e941b26b20fb5730a5c5"
         }
       ]
     },
@@ -231,14 +240,15 @@
       "id": "raw-miri-reduction-lenses",
       "subject": "MIRI lenses from this project's reduction of the raw program 1366 exposures",
       "status": "included",
-      "finding": "The 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366 (1-2 December 2022), reduced by tools/objects/jwst/reduce-tso.mts with Bell et al. (2024)'s settings, give the pinned light curves; the tool's white-light export is byte-identical to the pinned file (sha256 a116e36f), and bell-2024-miri-products records its agreement with the deposited curve. Fitted at preparation time with BIC model choice: 5-10.5 micrometres degree 2 with 6 eigencurves, ramp 0.103 d, dayside 1527 K and nightside 840 K against Bell et al.'s 1524 +/- 35 and 863 +/- 23 K (5-12 micrometres); longitudinal offset 6.05 degrees east (see hammond-2024-miri-eclipse-map: the difference from Hammond et al.'s 7.5 is their slow-ramp systematics solution). Slices 5-6.5, 6.5-8.5 and 8.5-10.5 micrometres choose degree 2 with 4 eigencurves: dayside 1539, 1493, 1565 K; nightside 835, 837, 913 K; offsets 3.4, 7.75, 8.3 degrees east. At 4 eigencurves every slice puts the hottest latitude near +10 degrees, a property of the basis, so the slices do not locate latitude. Band weights are the star's own median extracted counts per detector column. The first release (commit 188586d727a9d34acc136b05e53cc027228a755b) stopped the ramp time constant at its 0.08 d grid value and reported the hottest point, 5.3 degrees, as the comparison with Hammond et al.",
+      "finding": "The 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366 (1-2 December 2022), reduced by tools/objects/jwst/reduce-tso.mts with Bell et al. (2024)'s settings, give the pinned light curves; the tool's white-light export is byte-identical to the pinned file (sha256 a116e36f), and bell-2024-miri-products records its agreement with the deposited curve. Fitted at preparation time with BIC model choice: 5-10.5 micrometres degree 2 with 6 eigencurves, ramp 0.105 d, transit 19.5 s before the package ephemeris, dayside 1527 K and nightside 840 K against Bell et al.'s 1524 +/- 35 and 863 +/- 23 K (5-12 micrometres); longitudinal offset 6.2 degrees east (see hammond-2024-miri-eclipse-map: the difference from Hammond et al.'s 7.5 is their slow-ramp systematics solution). Slices 5-6.5, 6.5-8.5 and 8.5-10.5 micrometres choose degree 2 with 4 eigencurves: dayside 1539, 1493, 1565 K; nightside 835, 837, 914 K; offsets 3.55, 7.8, 8.6 degrees east. At 4 eigencurves every slice puts the hottest latitude near +10 degrees, a property of the basis, so the slices do not locate latitude. Band weights are the star's own median extracted counts per detector column. The first release (commit 188586d727a9d34acc136b05e53cc027228a755b) stopped the ramp time constant at its 0.08 d grid value and reported the hottest point, 5.3 degrees, as the comparison with Hammond et al. From commit 64baadf1b720ba1e8cb0e941b26b20fb5730a5c5 every fit models light time across the orbit (15 s at eclipse) and takes the transit time from its own light curve.",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
         "https://arxiv.org/abs/2401.13027",
         "https://arxiv.org/abs/2404.16488",
         "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/tests/objects/unit/wasp-43b/lens-fits.test.mts",
         "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/src/objects/wasp-43b/README.md",
-        "https://github.com/layoutit/css.earth/blob/51cdc1896358c496b7fe567ba1f995e96edbedbc/tests/objects/unit/wasp-43b/lens-fits.test.mts"
+        "https://github.com/layoutit/css.earth/blob/51cdc1896358c496b7fe567ba1f995e96edbedbc/tests/objects/unit/wasp-43b/lens-fits.test.mts",
+        "https://github.com/layoutit/css.earth/blob/64baadf1b720ba1e8cb0e941b26b20fb5730a5c5/docs/eclipse-mapping.md"
       ],
       "checked": [
         {
@@ -248,6 +258,10 @@
         {
           "date": "2026-09-17",
           "commit": "51cdc1896358c496b7fe567ba1f995e96edbedbc"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "64baadf1b720ba1e8cb0e941b26b20fb5730a5c5"
         }
       ]
     }
