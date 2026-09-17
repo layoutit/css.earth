@@ -36,6 +36,14 @@ With positivity dropped, BIC prefers degree 4 with 12 eigencurves and a hot spot
 ## Limits
 
 - **Light curves only.** The fit starts from a reduced light curve. Reducing raw JWST data is a separate stage that is not built yet.
-- **Systematics are the analyst's model.** Baselines and decorrelation vectors enter as linear columns. A nonlinear ramp time constant has to be profiled by the caller. Different systematics models move the hot spot by more than the statistical uncertainty.
+- **Systematics are the analyst's model.** Baselines and decorrelation vectors enter as linear columns. A nonlinear ramp's time constant is profiled over a grid, on the simplest candidate model. Different systematics models move the hot spot by more than the statistical uncertainty.
 - **Integration grid.** Occultation is decided per cell centre. At 90 × 180 cells, χ² agrees with the 360 × 720 grid to within 0.2.
 - **Posterior.** Metropolis with a Gaussian proposal and positivity as a hard prior. It reports the statistical spread under one fixed systematics model, like the published intervals it is compared with.
+
+## Maps as lenses
+
+A planet package can fit its map during preparation instead of shipping a map file. The `eclipse-map-fit` format ([eclipse-map-fit.mts](../tools/objects/terrestrial-layers/eclipse-map-fit.mts)) reads a light curve pinned in the package, calls `fitLightCurveMap` ([light-curve-map.mts](../tools/objects/eclipse-map/light-curve-map.mts)) and paints the temperature map like any scientific lens. The recipe names the light curve, the systematics, the candidate models, the band and the stellar spectrum.
+
+- **Model choice.** Every candidate degree and eigencurve count is fitted. The lowest BIC wins, except that models within 2 of it count as equal, and then the one with fewest parameters, then the lowest degree, is taken. A recipe that lists one model fixes it.
+- **Band temperature.** A light curve adds up the star's counts over its band. So the temperature is the one at which the count-weighted planet-to-star intensity, Σ C_i·B(λ_i, T)/I_i ÷ Σ C_i, equals π·value·(1 + s_corr)/rp². C_i can be the star's own extracted counts per detector column, or a filter transmission times wavelength times the stellar intensity. I_i is a model stellar spectrum averaged over each sample's extent. The inversion is tabulated in 0.25 K steps. With one sample and a blackbody star it reduces to `brightnessTemperature`.
+- **Checks.** [`light-curve-map.test.mts`](../tools/objects/eclipse-map/light-curve-map.test.mts) tests the reduction to one wavelength, a band with an uneven star and uneven counts, bin averages, and an injected map under a ramp and a drift. [WASP-43b's lens test](../tests/objects/unit/wasp-43b/lens-fits.test.mts) runs its shipped recipes. It compares the MIRI dayside and nightside with Bell et al. (2024): 1,527 K against 1,524 ± 35 K, and 833 K against 863 ± 23 K.
