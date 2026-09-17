@@ -13,12 +13,8 @@ export default defineConfig({
     description: 'Pages built from the object packages in src/objects.',
     social: [{ icon: 'github', label: 'GitHub', href: REPOSITORY_URL }],
     editLink: { baseUrl: `${REPOSITORY_URL}/edit/main/` },
-    head: [
-      { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' } },
-      { tag: 'link', attrs: { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800;6..12,900&display=swap' } },
-    ],
     // Storybook's layout on Starlight: brand and search above the tree, a toolbar above the page, canvas and args blocks per object.
-    customCss: ['./src/wiki.css'],
+    customCss: ['../site/site.css', './src/wiki.css'],
     components: {
       Header: './src/components/Header.astro',
       PageTitle: './src/components/PageTitle.astro',
