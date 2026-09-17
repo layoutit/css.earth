@@ -108,7 +108,8 @@
           "positive": true,
           "transitExclusionPhase": 0.04,
           "gridHeight": 90,
-          "systematics": []
+          "systematics": [],
+          "transitFromLightCurve": true
         },
         "band": {
           "encoding": "svo-filter",
@@ -206,7 +207,8 @@
               "kind": "column",
               "column": "psf_width_y"
             }
-          ]
+          ],
+          "transitFromLightCurve": true
         },
         "band": {
           "encoding": "count-spectrum-csv",
@@ -308,7 +310,8 @@
               "kind": "column",
               "column": "psf_width_y"
             }
-          ]
+          ],
+          "transitFromLightCurve": true
         },
         "band": {
           "encoding": "count-spectrum-csv",
@@ -410,7 +413,8 @@
               "kind": "column",
               "column": "psf_width_y"
             }
-          ]
+          ],
+          "transitFromLightCurve": true
         },
         "band": {
           "encoding": "count-spectrum-csv",
@@ -512,7 +516,8 @@
               "kind": "column",
               "column": "psf_width_y"
             }
-          ]
+          ],
+          "transitFromLightCurve": true
         },
         "band": {
           "encoding": "count-spectrum-csv",

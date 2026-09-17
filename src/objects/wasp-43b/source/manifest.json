@@ -166,6 +166,39 @@
       }
     },
     {
+      "id": "wasp-43b-bell-2024-eureka-v1-white",
+      "path": "science/bell-2024/eureka-v1-white-5.0-10.5um.csv",
+      "expectedBytes": 1382064,
+      "expectedSha256": "67fd55dab3d0f752f9306a8fc798af0f635e0464232836fd9d8085679ad5f02a",
+      "origin": "https://zenodo.org/api/records/10525170/files/WASP43b_MIRI_Data.zip/content",
+      "productId": "WASP43b_MIRI_Data/1_Light_Curves/eureka_v1.h5 (white light)",
+      "version": "10.5281/zenodo.10525170",
+      "title": "Bell et al. (2024) Eureka! v1 white-light curve of the WASP-43b MIRI phase curve, 5-10.5 um",
+      "sourceUrl": "https://zenodo.org/records/10525170",
+      "credit": "T. J. Bell et al. (2024), Nature Astronomy 8, 879; JWST program 1366",
+      "displayCredit": "Bell et al. · JWST MIRI",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/10525170",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/wasp-43b-miri-1366 as light-curves/author-white.csv: the deposit's eureka_v1.h5 white light exported in the same columns as this package's own curves (flux and error divided by the median). The run of 2026-09-17 wrote this file byte for byte. This is the light curve Hammond et al. (2024) mapped.",
+      "redistribution": "CC BY 4.0 with attribution.",
+      "consumers": [
+        "reconstruction-check"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-10525170",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/10525170#/files/WASP43b_MIRI_Data.zip"
+          }
+        ]
+      }
+    },
+    {
       "id": "wasp-43-bt-settl-cifist-4500",
       "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
       "expectedBytes": 60684012,
@@ -265,8 +298,8 @@
     {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 16234,
-      "expectedSha256": "49ac0e69fdbb39d082ab7d2a3d2e289b4df1931d8e055c551a47b40544725619",
+      "expectedBytes": 16439,
+      "expectedSha256": "f85b7097932c1677399de6f956b34c2d4c9b4afc4c415da277695499391b9540",
       "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -417,8 +450,8 @@
     },
     {
       "path": "reference/lens-comparison.png",
-      "expectedBytes": 720793,
-      "expectedSha256": "3e5451215804162ef4f2d74fec869fdf453584d2391a9e635f7badc41e498e39",
+      "expectedBytes": 736512,
+      "expectedSha256": "a0656ccc100a3a9a032764df6a564e5866c4c98baadd655768d71ad5aef46518",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence image: the six prepared lens previews (prepared/minimaps) side by side with sharp, labelled, 2026-09-17 after preparation."

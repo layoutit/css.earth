@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { binAverage, bandTemperatureTable, fitLightCurveMap, temperatureGrid, type LightCurve, type Systematic } from '../eclipse-map/light-curve-map.mts';
+import { measureTransitShift } from '../eclipse-map/transit-timing.mts';
 import { readTarMember } from './tar-member.mts';
 import { array, boolean, number, optional, shape, text } from './source-records.mts';
 
@@ -16,7 +17,7 @@ const systematic = (value: unknown): Systematic => {
 const profile = shape({
   path: text, sampling: text, units: text, planet: text, host: text,
   lightCurve: shape({ encoding: text }),
-  fit: shape({ degrees: array(number), eigencurves: array(number), positive: boolean, transitExclusionPhase: number, gridHeight: number, systematics: array(systematic) }),
+  fit: shape({ degrees: array(number), eigencurves: array(number), positive: boolean, transitExclusionPhase: number, gridHeight: number, systematics: array(systematic), transitFromLightCurve: boolean }),
   band: shape({ encoding: text, path: text }),
   star: shape({ encoding: text, path: text }),
 });
@@ -98,7 +99,14 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
   const planetId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
   if (!planetId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
   const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm;
-  const result = fitLightCurveMap(curve, recipe.fit, hostedOrbit(planetId), starAstrometry(hostId), radiusRatio);
+  // Eclipse timing moves longitude (about 0.04 degrees per second for WASP-43b, 0.5 for HD 189733b), so a recipe can take the transit
+  // time from its own light curve instead of an ephemeris propagated to the visit; light time across the orbit is always modelled.
+  let orbit = hostedOrbit(planetId), transitShiftSeconds = 0;
+  if (recipe.fit.transitFromLightCurve) {
+    transitShiftSeconds = measureTransitShift(curve, orbit, starAstrometry(hostId), radiusRatio).shiftSeconds;
+    orbit = { ...orbit, transitTimeBmjdTdb: orbit.transitTimeBmjdTdb + transitShiftSeconds / 86400 };
+  }
+  const result = fitLightCurveMap(curve, recipe.fit, orbit, starAstrometry(hostId), radiusRatio, { stellarRadiusKm: BODIES[hostId].meanRadiusKm });
   // Temperatures are taken on the fit's own grid, the cells positivity was enforced on; a finer grid can dip below zero between them.
   const table = bandTemperatureTable(band), height = recipe.fit.gridHeight, width = 2 * height;
   if (!Number.isSafeInteger(height) || height < 2) throw new TypeError('The fit grid needs a whole height of at least 2.');
@@ -106,7 +114,7 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
   const cell = (x: number, y: number) => { const v = grid.temperatures[y * width + ((x % width) + width) % width]!; return Number.isFinite(v) ? v : null; };
   const lonStep = 360 / width, latStep = 180 / height;
   return {
-    width, height, fit: result, band, radiusRatio,
+    width, height, fit: result, band, radiusRatio, orbit, transitShiftSeconds,
     sample(longitude: number, latitude: number) {
       if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
       const px = (((longitude + 180) % 360 + 360) % 360) / lonStep - 0.5, y = Math.max(0, Math.min(height - 1, (latitude + 90) / latStep - 0.5));
@@ -116,7 +124,7 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
       const [a, b, c, d] = corners as number[];
       return a! * (1 - dx) * (1 - dy) + b! * dx * (1 - dy) + c! * (1 - dx) * dy + d! * dx * dy;
     },
-    report: { format: 'eclipse-map-fit', units: 'K', degree: result.basis.lmax, eigencurves: result.fit.ncurves, candidates: result.candidates, samples: result.samples, chiSquared: result.fit.chiSquared,
+    report: { format: 'eclipse-map-fit', units: 'K', transitShiftSeconds, degree: result.basis.lmax, eigencurves: result.fit.ncurves, candidates: result.candidates, samples: result.samples, chiSquared: result.fit.chiSquared,
       bic: result.fit.bic, rampTimeConstantDays: result.rampTimeConstantDays, stellarCorrection: result.fit.stellarCorrection, hotspot: result.hotspot },
   };
 }
