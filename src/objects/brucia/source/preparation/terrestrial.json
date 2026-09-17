@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 18.645,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/brucia/brucia-shape-surface@2x.webp",
     "polesUrl": "/scenes/brucia/brucia-shape-surface@2x.webp",
     "radialTerrain": {

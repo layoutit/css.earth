@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 74,
-    "camera": {
-      "initialScenePitchDegrees": -15.834758237369623,
-      "defaultControlYawDegrees": -56.312767345784216
-    },
     "mapUrl": "/scenes/despina/despina-model-surface@2x.webp",
     "polesUrl": "/scenes/despina/despina-model-poles@2x.webp",
     "radialTerrain": {

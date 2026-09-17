@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 135,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 180
-    },
     "mapUrl": "/scenes/eunomia/eunomia-shape-surface@2x.webp",
     "polesUrl": "/scenes/eunomia/eunomia-shape-surface@2x.webp",
     "radialTerrain": {

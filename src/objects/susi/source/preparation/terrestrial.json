@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 10.91,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/susi/susi-shape-surface@2x.webp",
     "polesUrl": "/scenes/susi/susi-shape-surface@2x.webp",
     "radialTerrain": {

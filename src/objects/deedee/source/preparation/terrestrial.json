@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 317.5,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": -45,
       "framingScale": 1
     },
     "mapUrl": "/scenes/deedee/deedee-model-surface@2x.webp",

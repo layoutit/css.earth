@@ -12,5 +12,5 @@ export interface TrackballMetrics {
   tumbleOnly?: boolean;
 }
 export interface PitchCalibration {
-  defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number;
+  defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number; maximumScenePitchDegrees: number;
 }

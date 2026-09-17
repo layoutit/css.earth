@@ -190,10 +190,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 6.1,
-    "camera": {
-      "initialScenePitchDegrees": 30,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
     "polesUrl": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
     "radialTerrain": {

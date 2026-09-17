@@ -110,7 +110,7 @@ export const parseGeologyGrid = shape({...polygonGridFields,attributePath:text,p
 export const parseGeologyLens = shape({format:text,path:text,grid:parseGeologyGrid,overlapPolicy:text,sampling:text,categories:array(parseCategory),
   relief:optional(requireRecord),valueTransform:optional(parseTransform)});
 export const parseScientificFocus = shape({longitudeDegrees:number,latitudeDegrees:number,zoom:number});
-export const scientificCameraFields = {minimumZoom:number,maximumZoom:number,initialScenePitchDegrees:number,maximumControlPitchDegrees:number,defaultControlPitchDegrees:number};
+export const scientificCameraFields = {minimumZoom:number,maximumZoom:number,initialScenePitchDegrees:number,maximumControlPitchDegrees:number,defaultControlPitchDegrees:number,maximumScenePitchDegrees:number};
 export const parseScientificCamera = shape(scientificCameraFields);
 export const parseScienceGrid = shape({...dimensions,noData:optional(nullable(number)),specialValueMagnitude:optional(number),referenceRadiusMeters:number,coordinates:optional(text),
   projection:optional(text),poleLatitude:optional(number),centerLongitude:number,longitudeRange:optional(array(number)),wrapLongitude:optional(boolean),

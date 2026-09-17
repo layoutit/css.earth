@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 216.5,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 90
-    },
     "mapUrl": "/scenes/hygiea/hygiea-shape-surface@2x.webp",
     "polesUrl": "/scenes/hygiea/hygiea-shape-surface@2x.webp",
     "radialTerrain": {

@@ -188,7 +188,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     qualification: `Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of ${name} are unmeasured; the axis shown is where celestial north lies on the sky.` });
   put(`${o}/source/preparation/acquisition.json`, { schema: 'cssearth-acquisition-plan@1', operations: [{ kind: 'download', groups: ['restore', 'refresh'], path: 'presentation/InterVariable.ttf', url: INTER.url }] });
   put(`${o}/source/presentation/solar-system.json`, { schema: 'cssearth-solar-system-preparation@1', bodyId: id, displayName: name, bodyRadiusUnits: BODY_RADIUS_UNITS, bodyRadiusKilometers: radiusKm,
-    defaultZoom: 1.25, geometryScale: 1.25, initialScenePitchDegrees: 1, defaultControlYawDegrees: -180 });
+    defaultZoom: 1.25, geometryScale: 1.25 });
   put(`${o}/source/measurements.json`, { schema: 'cssearth-uniform-disc-star@1', id, angularDiameterMas: Math.round(angularDiameterMas * 100) / 100,
     angularDiameterSource: `${TODO}: the published angular diameter and its source; this value is the record's radius at its distance.`, distanceParsecs: astrometry.distanceParsecs,
     distanceSource: requireString(requireRecord(star.sources).distance), radiusKm, radiusSource: String(body.physicalNotes ?? TODO),

@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 31.955,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/hedda/hedda-shape-surface@2x.webp",
     "polesUrl": "/scenes/hedda/hedda-shape-surface@2x.webp",
     "radialTerrain": {

@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 4.6315,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/virtanen/virtanen-shape-surface@2x.webp",
     "polesUrl": "/scenes/virtanen/virtanen-shape-surface@2x.webp",
     "radialTerrain": {

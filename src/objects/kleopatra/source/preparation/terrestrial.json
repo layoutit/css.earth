@@ -38,8 +38,6 @@
     "radius": 110,
     "radiusKm": 59.1,
     "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 90,
       "framingScale": 0.75
     },
     "mapUrl": "/scenes/kleopatra/kleopatra-shape-surface@2x.webp",

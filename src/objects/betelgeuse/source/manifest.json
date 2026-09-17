@@ -1124,8 +1124,8 @@
     {
       "id": "betelgeuse-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6254,
-      "expectedSha256": "5bad0af0e09a857843554314ca99b6c75328a51fbdbe462901f0e6557bc9149c",
+      "expectedBytes": 6212,
+      "expectedSha256": "480ae1e711c11e200db1dd59c3151b8e398a91d0d4592893ccefbbcf68cedff2",
       "origin": "Repository-authored raster recipe: the MATISSE reconstruction cast onto the reference sphere by the surface-observation route, polar bands, transparent off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1198,8 +1198,8 @@
     {
       "id": "betelgeuse-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 291,
-      "expectedSha256": "f97df2761175b0321085308ffce0059b420dd5cfad2047721f2884e328621c66",
+      "expectedBytes": 222,
+      "expectedSha256": "fdf5c196325567f49fd6a0b8b37b7e307178f43a8514a0a3b037ebc4f383f251",
       "origin": "Repository-authored scene recipe: Joyce et al. (2020) radius 531,514,800 km, camera plan (defaultZoom 1.25, initial pitch 10, yaw 180 so the photographed hemisphere faces the camera)",
       "sourceBinding": {
         "kind": "local",

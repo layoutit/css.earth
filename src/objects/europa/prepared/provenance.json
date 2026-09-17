@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "190a0015812e499ffe8bde629fb4b949526da42ba566f51db5b3fd7fe87be7b6"
+    "sha256": "a27abd5bb398a221295b0fe1da8175990589cd54abd5068a00c7820a2755e445"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -24416,8 +24416,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6353,
-          "sha256": "c66acc5dd316331f3c705e3367745bef785fa280247cf2083726b964fc681081",
+          "bytes": 6472,
+          "sha256": "1798111a0963430979095e7ee374e294f7f90e6f47338ef81015b9967499b8db",
           "verification": "bytes-verified"
         }
       ],
@@ -24665,7 +24665,7 @@
   },
   "lastPreparation": {
     "objectId": "europa",
-    "materialSha256": "4363a29e7491650149295e8143bf522ab1e6ef04f9c1ae9a6960c47fabae4f54",
+    "materialSha256": "f832a02bdf74cccdf5ecb4f1f6fea6663c7f0c6f5927b0caadd57eb39ab34720",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 26.41,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/lucia/lucia-shape-surface@2x.webp",
     "polesUrl": "/scenes/lucia/lucia-shape-surface@2x.webp",
     "radialTerrain": {

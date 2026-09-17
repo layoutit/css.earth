@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 70.5,
-    "camera": {
-      "initialScenePitchDegrees": -124.88764044943821,
-      "defaultControlYawDegrees": 270
-    },
     "mapUrl": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
     "polesUrl": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
     "radialTerrain": {

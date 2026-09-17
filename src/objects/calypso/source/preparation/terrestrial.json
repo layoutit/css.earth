@@ -331,10 +331,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 10.7,
-    "camera": {
-      "initialScenePitchDegrees": -17.02336965221037,
-      "defaultControlYawDegrees": 177.30850885896365
-    },
     "mapUrl": "/scenes/calypso/calypso-normal-surface@2x.webp",
     "polesUrl": "/scenes/calypso/calypso-normal-poles@2x.webp",
     "radialTerrain": {

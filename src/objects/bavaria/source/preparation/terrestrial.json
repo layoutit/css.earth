@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 27.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/bavaria/bavaria-shape-surface@2x.webp",
     "polesUrl": "/scenes/bavaria/bavaria-shape-surface@2x.webp",
     "radialTerrain": {
