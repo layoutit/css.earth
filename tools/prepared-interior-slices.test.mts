@@ -13,7 +13,7 @@ function irregularBody() {
   return faces.map(face => { const vertices = face.map(p => p.map(v => v * radius(p))); return { vertices, normal: [0, 0, 1], vertexNormals: vertices.map(() => [0, 0, 1]) }; });
 }
 const faces = irregularBody();
-const styles = rasterAtlasLayout(faces as never, 256, 1, 0).plans.map(({ geometry: g }) =>
+const styles = rasterAtlasLayout(faces as never, 256, 1).plans.map(({ geometry: g }) =>
   `transform:matrix3d(${g.matrix});--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px`);
 
 test('each view axis gets a slice of the body mesh whose leaf boxes clear every surface leaf box', () => {
@@ -33,6 +33,14 @@ test('each view axis gets a slice of the body mesh whose leaf boxes clear every 
   }
 });
 
-test('a surface whose leaves do not enclose the origin has no slice', () => {
-  assert.throws(() => interiorSliceLeaves(styles.slice(0, styles.length / 2)), /one surface loop around the body origin/);
+test('a surface that encloses neither the origin nor its centroid has no slice', () => {
+  assert.throws(() => interiorSliceLeaves(styles.slice(0, styles.length / 2)), /inside the surface|one surface loop around its centre/);
+});
+
+test('a body whose origin lies outside it is sliced through its centroid', () => {
+  const offset = rasterAtlasLayout(faces.map(face => ({ ...face, vertices: face.vertices.map(p => [p[0] + 400, p[1], p[2]]) })) as never, 256, 1).plans.map(({ geometry: g }) =>
+    `transform:matrix3d(${g.matrix});--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px`);
+  const slices = interiorSliceLeaves(offset);
+  assert.equal(slices.length, INTERIOR_SLICE_NORMALS.length);
+  for (const slice of slices) for (const m of slice.matrices) assert.ok(Math.abs(slice.normal[0] * m[12] + slice.normal[1] * m[13] + slice.normal[2] * m[14]) > 1, 'the slice plane no longer passes through the origin');
 });

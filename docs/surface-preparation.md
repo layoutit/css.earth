@@ -425,8 +425,8 @@ at a time and supplies the same interpretation to the globe and sidebar map.
 Spherical and ellipsoidal objects share one retained interior disc. Irregular
 body meshes cannot use it: the disc's inner ellipsoid is limited by the nearest
 leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks outside it
-stay open. An irregular body whose recipe sets `interiorSlices` instead gets
-slices of its own mesh (`tools/prepared-interior-slices.mts`):
+stay open. Every irregular (radial) body instead gets slices of its own mesh
+(`tools/prepared-interior-slices.mts`):
 
 - Each slice is the loop where a plane through the body origin cuts the leaves,
   for six plane normals (the icosahedron axes). It is drawn as a fan of solid
@@ -440,6 +440,12 @@ slices of its own mesh (`tools/prepared-interior-slices.mts`):
   in front of the slice; with an 8 GB budget the same view was correct.
 - The body's leaves overlap nothing (`seamBleed` 0). The runtime shows the slice
   whose normal is nearest the view and gives the others `display: none`.
+- A body with alternative surface models shows one model's leaves at a time
+  through a display variable. Leaves sharing a display declaration are one
+  model; each model gets its own slices in a container with that declaration.
+- Under depth partitions, the slices get a paint carrier of their own, ordered
+  before every partition. A visible surface leaf is the first surface its sight
+  line meets, so a slice inside the body can never belong in front of it.
 
 Measured on Alphonsina (elevation lens, pixelmatch against main, threshold 0.1,
 five poses): 0.34–0.57% at default zoom, mostly at the limb where the overlap no
