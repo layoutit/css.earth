@@ -27,6 +27,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
   }));
   const observed = new Set<string>();
   const photographed = new Set<string>();
+  const sourceColors = new Set<string>();
   for (const recipe of recipes) {
     if (!isRecord(recipe)) throw new TypeError('Invalid discovery recipe.');
     const raster = isRecord(recipe.raster) ? recipe.raster : recipe;
@@ -36,6 +37,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
       if (!Array.isArray(entries)) throw new TypeError(`Invalid discovery ${key}.`);
       for (const entry of entries) {
         if (!isRecord(entry) || typeof entry.id !== 'string') throw new TypeError('Invalid observation lens.');
+        if (key === 'surfaces' && isRecord(entry.science) && entry.science.kind === 'stellar-photometric-color' && exposed.has(entry.id)) sourceColors.add(entry.id);
         if (isRecord(entry.metadata) && entry.metadata.modeled === true ||
             isRecord(entry.science) && ['neutral-shape', 'disc-integrated-color', 'stellar-photometric-color'].includes(String(entry.science.kind)) || key === 'surfaces' && policy.illustrationLenses.includes(entry.id)) continue;
         if (exposed.has(entry.id)) {
@@ -53,6 +55,8 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
       rotation: preparedDefaultViewRotation(camera) });
   }
   return { imagery, illustration, featured: !illustration && (policy.featured || imagery), ...(arrival ? { arrival } : {}),
+    // A star's colour lens from its spectrum or catalogued temperature is measured, though not an image of its surface.
+    ...(!imagery && sourceColors.size ? { sourceColor: true as const } : {}),
     // An orientation reference outranks classification in universe annotations (the Sun, then Earth).
     ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
 }

@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-189733b",
+  "displayName": "HD 189733b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.14 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-2503-20895",
+          "url": "https://arxiv.org/abs/2503.20895",
+          "label": "Lally et al. (2025), Table 1",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "2.2 days",
+        "source": {
+          "catalogueId": "arxiv-2503-20895",
+          "url": "https://arxiv.org/abs/2503.20895",
+          "label": "Lally et al. (2025), Table 1",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance-from-star",
+        "label": "Distance from its star",
+        "value": "0.031 AU",
+        "source": {
+          "catalogueId": "arxiv-2503-20895",
+          "url": "https://arxiv.org/abs/2503.20895",
+          "label": "Lally et al. (2025) deposited configuration",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisKm; semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "hottest",
+        "label": "Hottest point at 8 µm",
+        "value": "About 1,330 K, east of noon",
+        "source": {
+          "catalogueId": "zenodo-15103479",
+          "url": "https://zenodo.org/records/15103479",
+          "label": "Lally et al. (2025) deposited map",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "temperature"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "temperature",
+    "controls": [
+      {
+        "id": "temperature",
+        "label": "MIRI",
+        "qualification": "Published map · Lally et al. 2025 · JWST MIRI 8 µm eclipses, 2022–2023, with Spitzer",
+        "thumbnail": "hd-189733b-lens-temperature.webp",
+        "surface": "hd-189733b-surface-temperature.webp",
+        "poles": "hd-189733b-poles-temperature.webp",
+        "source": {
+          "id": "hd-189733b-lally-2025-map",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/15103479"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "950",
+            "1150",
+            "1350"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "950",
+              "1150",
+              "1350"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/15103479"
+        },
+        "notes": "Brightness temperature fitted to eclipses; large patterns only, and blank where the data never looked. The hot spot sits 33° east of noon, 22° to 36° across the models the paper compares. Eclipse maps depend on timing: a few seconds' error moves it by degrees."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lally et al. (2025), arXiv:2503.20895",
+      "href": "https://arxiv.org/abs/2503.20895"
+    },
+    {
+      "label": "Data",
+      "role": "dataset",
+      "description": "Map and ThERESA configuration, Zenodo",
+      "href": "https://zenodo.org/records/15103479"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2503.20895",
+      "credit": "Lally et al. (2025), arXiv:2503.20895"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-189733b.json",
+      "credit": "Radius and orbit from the map's ThERESA configuration around HD 189733 A; assumed synchronous rotation"
+    }
+  }
+}

@@ -18,8 +18,14 @@ export function selectionAtCamera({ world, viewport, objects, objectId, overview
   if (!selected) return null;
   const system = systemOfObject(objects, objectId);
   if (!overview) {
-    // Leaving an object's planetary system opens that system's overview, whose star the router mounts.
-    if (system) return distance(world.pose.positionM, system.originM) >= system.exitDistanceM ? { overview: true, objectId: system.id } : null;
+    // Leaving an object's planetary system opens that system's overview, whose star the router mounts. A member that already
+    // lies outside that framing, such as a wide binary companion hundreds of au out, keeps its own scene until the camera has
+    // left it too; otherwise its page would open in the overview.
+    if (system) {
+      const outside = distance(selected.originM, system.originM);
+      const exit = outside >= system.exitDistanceM ? outside + system.exitDistanceM : system.exitDistanceM;
+      return distance(world.pose.positionM, system.originM) >= exit ? { overview: true, objectId: system.id } : null;
+    }
     // A star or body outside every system keeps its scene until the camera is as far from it as the Sun is;
     // the Solar System overview then hands the camera to the galactic scopes.
     const sun = solarSystemFocus(objects)?.worldFrame;

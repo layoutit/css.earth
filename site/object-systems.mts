@@ -21,9 +21,11 @@ type Plan = Pick<PreparedWorldContext, 'focus' | 'bodies' | 'orbitCenters'>;
 export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'name' | 'systemName' | 'classification' | 'route'> & { readonly worldFrame?: { readonly originM: PositionM } | null })[],
   plan: Plan = context, radii: ReadonlyMap<string, number> = plan === context ? SYSTEM_FRAMING_RADII : systemFramingRadii(plan)): readonly PlanetarySystem[] {
   const registry = new Map(objects.map(object => [object.id, object]));
+  // A star measured to be bound to another with no measured orbit belongs to its host's system: the pair is one system.
   const parents = new Map<string, string>([
     ...Object.entries(plan.orbitCenters ?? {}).map(([id, center]) => [id, center.centerBodyId] as const),
-    ...plan.bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),
+    ...plan.bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const]
+      : body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []),
   ]);
   const rootOf = (id: string) => {
     const seen = new Set<string>();
