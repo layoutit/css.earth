@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { mapBasisCurves } from './phase-curve.mts';
 import { realSphericalHarmonics } from './spherical-harmonics.mts';
-import { brightnessTemperature, continuousHotspot, eigenBasis, equalAngleGrid, fitEigenmap, percentiles, sampleEigenmap, seededRandom, symmetricEigen } from './eigenmap-fit.mts';
+import { bandBrightnessTemperature, brightnessTemperature, planckRadiance, continuousHotspot, eigenBasis, equalAngleGrid, fitEigenmap, percentiles, sampleEigenmap, seededRandom, symmetricEigen } from './eigenmap-fit.mts';
 
 test('Jacobi eigenvectors diagonalize a symmetric matrix and come strongest first', () => {
   const random = seededRandom(7), n = 6, m = new Float64Array(n * n);
@@ -51,4 +51,18 @@ test('brightness temperature inverts the Planck ratio: a planet as bright per ar
   const rp = 0.16, flux = rp ** 2 / Math.PI;
   assert.ok(Math.abs(brightnessTemperature(flux, 4.5, rp, 4400) - 4400) < 1e-6);
   assert.ok(brightnessTemperature(flux / 10, 4.5, rp, 4400) < 4400);
+});
+
+test('band brightness temperature agrees with the single-wavelength formula for a narrow band and weights a wide one', () => {
+  const rp = 0.1, flux = 2e-3 / Math.PI;
+  const narrow = { wavelengthMicrons: [4.4999, 4.5, 4.5001], response: [1, 1, 1] };
+  const single = brightnessTemperature(flux, 4.5, rp, 4500), banded = bandBrightnessTemperature(flux, narrow, rp, { stellarTemperatureK: 4500 });
+  assert.ok(Math.abs(banded - single) < 1e-3, `${banded} vs ${single}`);
+  // A planet at the star's temperature reads that temperature over any band, with the star as blackbody or as a sampled spectrum.
+  const wide = { wavelengthMicrons: Array.from({ length: 56 }, (_, i) => 5 + 0.1 * i), response: Array.from({ length: 56 }, (_, i) => 0.5 + 0.5 * Math.sin(i / 9)) };
+  const same = rp ** 2 / Math.PI;
+  assert.ok(Math.abs(bandBrightnessTemperature(same, wide, rp, { stellarTemperatureK: 4500 }) - 4500) < 1e-3);
+  const sampled = { stellarIntensity: wide.wavelengthMicrons.map(w => planckRadiance(w, 4500)) };
+  assert.ok(Math.abs(bandBrightnessTemperature(same, wide, rp, sampled) - 4500) < 1e-3);
+  assert.ok(Number.isNaN(bandBrightnessTemperature(-1, wide, rp, { stellarTemperatureK: 4500 })));
 });
