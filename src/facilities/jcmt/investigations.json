@@ -4,11 +4,12 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "CADC archive access for the James Clerk Maxwell Telescope",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "CADC holds JCMT data and answered anonymously on 2026-09-17 (200). Submillimetre single-dish data resolve no stellar surface; the interest is dust and envelopes.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "The JCMT Science Archive at CADC is the single point of access, and public data can be searched and downloaded without a CADC login; CADC's TAP service answered anonymously on 2026-09-17. Submillimetre single-dish data resolve no stellar surface.",
+      "revisitWhen": "A body in this repository needs submillimetre single-dish data.",
       "evidence": [
+        "https://www.eaobservatory.org/jcmt/science/archive/",
         "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
@@ -24,10 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "The proprietary period is one year from the end of the semester in which data were taken. No reuse licence is published; observations after March 2025 must carry the East Asian Observatory acknowledgement and the programme identifier.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities"
+        "https://www.eaobservatory.org/jcmt/data-access/",
+        "https://www.eaobservatory.org/jcmt/observing/acknowledgement/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +42,14 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: Starlink/ORAC-DR.",
+      "finding": "Reduction uses the Starlink suite, distributed as source and binaries; most of it is under the GNU General Public License, the remainder under the old Starlink Licence. ORAC-DR is distributed by Starlink under the GPL.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities"
+        "https://starlink.eao.hawaii.edu/",
+        "https://www.eaobservatory.org/jcmt/data-reduction/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

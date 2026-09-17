@@ -4,12 +4,13 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "CASDA archive access for ASKAP",
-      "status": "deferred",
-      "finding": "CASDA's TAP service answered anonymously on 2026-09-17 (capabilities 200). Centimetre-wave survey data; no stellar-surface use identified.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "subject": "Archive access and query interface",
+      "status": "excluded",
+      "finding": "CASDA's TAP service answered anonymously on 2026-09-17, but downloading images, spectra or visibilities requires an OPAL, CSIRO or Data Central account. Centimetre-wave survey data; no use identified here.",
+      "revisitWhen": "CASDA allows anonymous downloads, or an ASKAP dataset is needed badly enough to register.",
       "evidence": [
         "https://casda.csiro.au/casda_vo_tools/tap/capabilities",
+        "https://research.csiro.au/casda/casda-user-guide/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -24,10 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "Survey science data carry no proprietary period, guest science may carry up to 12 months, and targets of opportunity are released at once. A CC BY 4.0 licence is reported for CASDA data but could not be read on a reachable page, so it is unverified; the CASDA and observatory acknowledgement sentences are required.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://casda.csiro.au/casda_vo_tools/tap/capabilities"
+        "https://www.atnf.csiro.au/resources/observing/data-policies/",
+        "https://research.csiro.au/casda/casda-user-guide/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +42,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: ASKAPsoft products.",
+      "finding": "ASKAPsoft processes ASKAP data and is published under a GPLv3 licence with a CSIRO disclaimer.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://casda.csiro.au/casda_vo_tools/tap/capabilities"
+        "https://research.csiro.au/dap/licences/gplv3-licence-with-csiro-disclaimer/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

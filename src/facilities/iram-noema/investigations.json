@@ -4,12 +4,12 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "IRAM archive access for NOEMA and the 30-metre telescope",
-      "status": "deferred",
-      "finding": "No open query endpoint answered on 2026-09-17: the TAP path tried returned 403 and the documentation page 404. IRAM's archive may need another route or an account.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "subject": "Archive access and query interface",
+      "status": "excluded",
+      "finding": "IRAM's archive is browsable through its data management system, but archival data are requested by e-mail and every request is contingent on IRAM's approval; only calibrated Large Programme data are directly available. No TAP endpoint answered on 2026-09-17.",
+      "revisitWhen": "IRAM opens its archive to direct download, or a NOEMA dataset justifies a request to the institute.",
       "evidence": [
-        "https://www.iram-institute.org/",
+        "https://iram-institute.org/science-portal/data-archive/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -24,10 +24,11 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "Normal projects carry a three-year proprietary period and Large Programmes 18 months, counted from the end of the last semester of observations. No reuse licence is published; users must cite the standard IRAM reference and the observing team or programme, and IRAM states it does not support reduction of retrieved data.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://www.iram-institute.org/"
+        "https://iram-institute.org/science-portal/proposals/data-policy/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +40,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: GILDAS.",
+      "finding": "GILDAS is IRAM's reduction collection, distributed as source and binaries, with no licence file found on any of its pages.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://www.iram-institute.org/"
+        "https://www.iram.fr/IRAMFR/GILDAS/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

@@ -4,12 +4,12 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Radar data from Arecibo",
-      "status": "deferred",
-      "finding": "Arecibo collapsed in 2020; its asteroid radar products reach this repository through NASA's PDS Small Bodies Node (API 200 on 2026-09-17), not an observatory archive. No live archive endpoint was probed.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "subject": "Archive access and query interface",
+      "status": "included",
+      "finding": "Arecibo collapsed in 2020. Its asteroid radar survives as Planetary Data System bundles: Doppler spectra of 167 asteroids observed from December 2017 to December 2019, plus its contributions to the radar detection and shape-model compilations. NASA states that the wider planetary radar archive is held by NSSDCA, and about three petabytes of telescope data moved to a Texas supercomputing centre with no public access date.",
       "evidence": [
-        "https://pds.nasa.gov/api/search/1/products?limit=1",
+        "https://sbn.psi.edu/pds/resource/cwradar_arecibo.html",
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast.radar.arecibo.doppler_spectra_of_asteroids_v1.1/document/bundle_description.txt",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -23,11 +23,12 @@
     {
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
-      "status": "deferred",
-      "finding": "PDS data carry no restrictions on use; the specific product licences were not re-checked here.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "status": "included",
+      "finding": "Planetary Data System data are in the public domain and are expected to be cited; the Arecibo bundle asks that its own paper be cited.",
       "evidence": [
-        "https://pds.nasa.gov/api/search/1/products?limit=1"
+        "https://search-pdsppi.igpp.ucla.edu/faq.jsp",
+        "https://sbn.psi.edu/pds/resource/cwradar_arecibo.html",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +40,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
-      "status": "deferred",
-      "finding": "Radar shape models are delivered as finished products; no reduction software is run here.",
-      "revisitWhen": "Raw data from this facility are reduced here.",
+      "subject": "Reduction software",
+      "status": "excluded",
+      "finding": "Only finished spectra are distributed; the bundle ships example Python that documents the format rather than a reduction package, and no raw Arecibo radar bundle exists.",
+      "revisitWhen": "Raw Arecibo radar data or its processing code are published.",
       "evidence": [
-        "https://pds.nasa.gov/api/search/1/products?limit=1"
+        "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast.radar.arecibo.doppler_spectra_of_asteroids_v1.1/document/bundle_description.txt",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

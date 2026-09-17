@@ -4,12 +4,13 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Archive access for the Swope 1-metre telescope",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "No open archive endpoint was found or probed for Las Campanas' Swope telescope; its data reach this repository through published images and papers.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "The telescope has no general public archive. Its data appear dataset by dataset: raw frames from the DART campaign are archived in the Planetary Data System, and the Carnegie Supernova Project publishes science-ready photometry.",
+      "revisitWhen": "A body in this repository needs Swope photometry.",
       "evidence": [
-        "https://www.lco.cl/",
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-dart_teleobs:data_lcoswoperaw-v1.0/SUPPORT/dataset.shtml",
+        "https://csp.obs.carnegiescience.edu/news-items/csp-dr3-photometry-released",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -24,10 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "No Swope-specific licence, proprietary period or credit was found; Las Campanas publishes attribution wording only for Magellan. The frames held in the Planetary Data System carry its public-domain and citation terms.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://www.lco.cl/"
+        "https://www.lco.cl/data-attribution/",
+        "https://search-pdsppi.igpp.ucla.edu/faq.jsp",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +42,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined.",
+      "finding": "No image-reduction pipeline is published for Swope data; the Carnegie Supernova Project publishes SNooPy, a light-curve fitter rather than a reduction package.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://www.lco.cl/"
+        "https://csp.obs.carnegiescience.edu/news-items/snoopy-released",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

@@ -4,13 +4,13 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Gemini Observatory archive access",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "The Gemini archive refused this project's requests on 2026-09-17 (403 to both its JSON search and its search form, with and without a browser user agent). CADC mirrors Gemini data and answered anonymously (200), so Gemini data are reachable through CADC.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "Gemini's own archive refused this project on 2026-09-17 (403 to its JSON search and its search form, with and without a browser user agent), and it offers a REST interface rather than TAP. Its public data are also at CADC, which answered anonymously, so Gemini data are reachable through CADC's TAP service.",
+      "revisitWhen": "A body in this repository needs Gemini data; then query CADC rather than the Gemini archive.",
       "evidence": [
-        "https://archive.gemini.edu/searchform",
-        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
+        "https://archive.gemini.edu/help/index.html",
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/gemini/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -25,11 +25,11 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined: Gemini's proprietary period and licence.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "Science data usually carry a 12-month proprietary period, reduced from 18 months in 2016A, with metadata and most calibrations public at once; non-proprietary data need no login to download. No reuse licence is published. The NSF NOIRLab acknowledgement wording could not be read: gemini.edu and noirlab.edu refuse this project's requests.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://archive.gemini.edu/searchform",
-        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities"
+        "https://archive.gemini.edu/help/index.html",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -41,13 +41,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: DRAGONS, Gemini's reduction package.",
+      "finding": "DRAGONS is Gemini's reduction platform, distributed as a conda package and on GitHub under the BSD 3-clause licence.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://archive.gemini.edu/searchform",
-        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities"
+        "https://github.com/GeminiDRSoftware/DRAGONS",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

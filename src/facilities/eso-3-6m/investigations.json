@@ -4,10 +4,10 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "ESO archive access for the ESO 3.6-metre telescope",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "The ESO archive holds this telescope's data. Its TAP service answered anonymously on 2026-09-17 (capabilities 200), and the same service, the calselector trees, the header service and the data portal already drive this repository's VLTI calibrations. Raw frames outside their proprietary period download without an account.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "The ESO archive serves this telescope. Its TAP service answered anonymously on 2026-09-17, and ESO states that without authenticating any user can download public files, raw or reduced; proprietary files need a User Portal login. The same services (TAP, calselector trees, header service, data portal) already drive this repository's VLTI calibrations.",
+      "revisitWhen": "A body or star in this repository needs data from this telescope.",
       "evidence": [
         "https://archive.eso.org/tap_obs/capabilities",
         "https://archive.eso.org/cms/eso-data-access-policy.html",
@@ -25,11 +25,11 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Public ESO archive data are distributed under CC BY 4.0, and a cast body credits ESO with the programme identifier of its frames. The proprietary period for this telescope's programmes was not checked.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "ESO archive data are proprietary for typically one year, set by programme type rather than by telescope, and public survey raw data carry none. Public data are distributed under CC BY 4.0 (\"All data in the ESO archive retain ESO's copyright, and are distributed according to the terms of the Creative Commons Attribution 4.0 International license\"), and a paper or cast body credits ESO with the programme identifier, or the archive DOI for processed data.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://archive.eso.org/tap_obs/capabilities",
-        "https://archive.eso.org/cms/eso-data-access-policy.html"
+        "https://archive.eso.org/cms/eso-data-access-policy.html",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -41,13 +41,14 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "The ESO pipelines for this telescope's instruments are public kits; only the VLTI kits (PIONIER, AMBER, GRAVITY, MATISSE) are pinned and built here.",
+      "finding": "HARPS 3.6.0 and NIRPS 3.6.0 are active ESO pipelines, distributed as kits; HARPS pipeline products since 2003 are published through the archive. No licence statement is published on ESO's pipeline pages; the only licence text found on an ESO server is a GPL-2-or-later header in a Common Pipeline Library source file.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://archive.eso.org/tap_obs/capabilities",
-        "https://archive.eso.org/cms/eso-data-access-policy.html"
+        "https://www.eso.org/sci/software/pipe_aem_table.html",
+        "https://ftp.eso.org/pub/dfs/pipelines/instruments/harps/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

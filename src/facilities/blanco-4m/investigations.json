@@ -4,13 +4,13 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "NOIRLab archive access for the Víctor M. Blanco 4-metre telescope",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "NOIRLab's Astro Data Archive holds Blanco data, including DECam. Its search API answered anonymously on 2026-09-17 (200); it is a REST service, not TAP.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "NOIRLab's Astro Data Archive holds Blanco data under the telescope code ct4m and needs no account for public data. It publishes Simple Image Access rather than TAP; NOIRLab's separate Astro Data Lab does offer a TAP service for catalogues.",
+      "revisitWhen": "A body in this repository needs Blanco or DECam data.",
       "evidence": [
-        "https://astroarchive.noirlab.edu/api/adv_search/core_file_fields/",
-        "https://astroarchive.noirlab.edu/",
+        "https://astroarchive.noirlab.edu/faq/",
+        "https://astroarchive.noirlab.edu/about/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -25,11 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined: NOIRLab's proprietary period and data licence.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "The proprietary period is usually 18 months, after which data are publicly accessible without an account. No reuse licence is published; the archive asks that its services be acknowledged. NOIRLab's own facility acknowledgement pages refuse this project's requests, so their wording is unverified.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://astroarchive.noirlab.edu/api/adv_search/core_file_fields/",
-        "https://astroarchive.noirlab.edu/"
+        "https://astroarchive.noirlab.edu/faq/",
+        "https://astroarchive.noirlab.edu/about/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -41,13 +42,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: the DECam community pipeline.",
+      "finding": "DECam data are processed by NOIRLab's DECam Community Pipeline, documented in its public document library. No source distribution or licence is published for it.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://astroarchive.noirlab.edu/api/adv_search/core_file_fields/",
-        "https://astroarchive.noirlab.edu/"
+        "https://nsf-noirlab.gitlab.io/csdc/csdc-mso-docs/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
