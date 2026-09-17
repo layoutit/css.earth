@@ -272,7 +272,7 @@
     {
       "id": "document-1",
       "path": "src/objects/smc/source/lens-manifest.json",
-      "expectedSha256": "75efb7066e0df50db398c49d55d2acc81c94a2168ece3f847c89617bf6c9e46f",
+      "expectedSha256": "e6306b1389840a14e85bb596d54f0f64e7dcc9e11945814a59f5f4d464289290",
       "expectedBytes": 219453,
       "sourceBinding": {
         "kind": "local",
@@ -282,7 +282,7 @@
     {
       "id": "document-2",
       "path": "src/objects/smc/source/lens-settings-evidence.json",
-      "expectedSha256": "8eb5e0aba4808fe90244fc7729dfee92cb6df681e3cd34eb8b31baaa6223bace",
+      "expectedSha256": "a0d1bae24d960bdd98e91deaa48cfcd4c1e83cfca461fe1c531c6e2442885e9f",
       "expectedBytes": 2497,
       "sourceBinding": {
         "kind": "local",
@@ -292,7 +292,7 @@
     {
       "id": "document-3",
       "path": "src/objects/smc/source/lenses.json",
-      "expectedSha256": "de47bdd2d852e332efce4f61eeffb0abda2d93b72e5ca3e797ea1870531763cf",
+      "expectedSha256": "29316234cc7b336293a9c3e8590c2b014b22e48bb22d780f8f8ea48c8eff4dab",
       "expectedBytes": 4033,
       "sourceBinding": {
         "kind": "local",
@@ -302,7 +302,7 @@
     {
       "id": "document-4",
       "path": "src/objects/smc/source/presentation.json",
-      "expectedSha256": "46f4a1c157d6d66607f1fb49919fc9c8ccf07ff74396f9736a16482cd4869182",
+      "expectedSha256": "ffc546abe904e1023b65f189bdb7d867853a0423fe2e264c53dda71712d3ec81",
       "expectedBytes": 9014,
       "sourceBinding": {
         "kind": "local",
@@ -312,7 +312,7 @@
     {
       "id": "document-5",
       "path": "src/objects/smc/source/provenance-references.json",
-      "expectedSha256": "11428725c1d742cb932a82ce7b6e8036aceea5a6e7e0a386b8369e672fbbdca5",
+      "expectedSha256": "7e9111d1105f9639a319211173c88d3abfff17e8f45292c7fd811031565ad77f",
       "expectedBytes": 3452,
       "sourceBinding": {
         "kind": "local",
@@ -389,7 +389,7 @@
     {
       "id": "document-10",
       "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
-      "expectedSha256": "2c01258b01ed763bd1b3cacf6bc9429ef43c083ef0460b17845efea55594dbf7",
+      "expectedSha256": "f9d891bb54805746101d363270f474b9ca1a3b758a886f238d44e351e6804da2",
       "expectedBytes": 2224,
       "sourceBinding": {
         "kind": "local",
@@ -439,8 +439,8 @@
     {
       "id": "document-15",
       "path": "src/objects/smc/source/lenses/smc-allwise-wide/catalogue-stars.json",
-      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
-      "expectedBytes": 944497,
+      "expectedSha256": "4db17260d150a8dd8cabd28d3675bdd5bf89cd9b300b9142d9f59ee376bb9b3c",
+      "expectedBytes": 944942,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -449,8 +449,8 @@
     {
       "id": "document-16",
       "path": "src/objects/smc/source/lenses/smc-allwise-wide/provenance.json",
-      "expectedSha256": "55886781b274695991d1995aa4747481fd2765e06baae699a627da485f75476d",
-      "expectedBytes": 152018,
+      "expectedSha256": "7355f18fb9f30a04c10b769a402263530fdf09d20bae65dd85f7b741de3b8dc1",
+      "expectedBytes": 152589,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -459,7 +459,7 @@
     {
       "id": "document-17",
       "path": "src/objects/smc/source/lenses/smc-allwise-wide/result.json",
-      "expectedSha256": "6d10275a217bec54b000dd8a6f8f80c394ad3581fcf3f59082821c9a4b58391a",
+      "expectedSha256": "9580bafc85eaba85fbcb1c71064884b458e1dcc5d6b49f36d3df77038236c391",
       "expectedBytes": 3997,
       "sourceBinding": {
         "kind": "local",
@@ -469,7 +469,7 @@
     {
       "id": "document-18",
       "path": "src/objects/smc/source/lenses/smc-allwise-wide/selection.json",
-      "expectedSha256": "ecfdebde4a0536deb7161502bd4591a2cb1f5f71cf59acb35f1cba390dbc9a33",
+      "expectedSha256": "14b2f0ddbf1c1838545d8d8be67c32bc5562a8d850fa64d334d10170b722470e",
       "expectedBytes": 13379,
       "sourceBinding": {
         "kind": "local",
@@ -479,8 +479,8 @@
     {
       "id": "document-19",
       "path": "src/objects/smc/source/lenses/smc-dss2/catalogue-stars.json",
-      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
-      "expectedBytes": 944497,
+      "expectedSha256": "4db17260d150a8dd8cabd28d3675bdd5bf89cd9b300b9142d9f59ee376bb9b3c",
+      "expectedBytes": 944942,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -489,8 +489,8 @@
     {
       "id": "document-20",
       "path": "src/objects/smc/source/lenses/smc-dss2/provenance.json",
-      "expectedSha256": "10c3338aac3b4eb232423f42e103d4211e62d10d8be2e91444bff1f5e9c3186c",
-      "expectedBytes": 149993,
+      "expectedSha256": "050fc3113a948cf0a34964b41ef77c870e25a388c0288cb1dd5a21bb1be88995",
+      "expectedBytes": 150564,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -499,7 +499,7 @@
     {
       "id": "document-21",
       "path": "src/objects/smc/source/lenses/smc-dss2/result.json",
-      "expectedSha256": "8206bcdc24c0e00984b88cbc26cbe521f7337d2d06db7000d5b70083b159ea7e",
+      "expectedSha256": "5ab69fe097a08adf9fe82c30f138236dd1c4518006009b101ad3a6cca249b80e",
       "expectedBytes": 3959,
       "sourceBinding": {
         "kind": "local",
@@ -509,7 +509,7 @@
     {
       "id": "document-22",
       "path": "src/objects/smc/source/lenses/smc-dss2/selection.json",
-      "expectedSha256": "325275fa2707fe03ba888abb8489e62891fdcca1893e4dbec946134edad9995b",
+      "expectedSha256": "28bd1cbb90937dba0d32c084336a574ace8f4ed5be752259e5c2943d2874d800",
       "expectedBytes": 13371,
       "sourceBinding": {
         "kind": "local",
@@ -519,8 +519,8 @@
     {
       "id": "document-23",
       "path": "src/objects/smc/source/lenses/smc-horalek-wide/catalogue-stars.json",
-      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
-      "expectedBytes": 944497,
+      "expectedSha256": "4db17260d150a8dd8cabd28d3675bdd5bf89cd9b300b9142d9f59ee376bb9b3c",
+      "expectedBytes": 944942,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -529,8 +529,8 @@
     {
       "id": "document-24",
       "path": "src/objects/smc/source/lenses/smc-horalek-wide/provenance.json",
-      "expectedSha256": "19dfc1425539e55d6c7db0609adf31d42893cee3e0409fdf01629dc378a47d87",
-      "expectedBytes": 152711,
+      "expectedSha256": "a160ee251e99d32e006a22a5c58c2d81be069fa3a7eb04376d8eb727876ee3d6",
+      "expectedBytes": 153282,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -539,7 +539,7 @@
     {
       "id": "document-25",
       "path": "src/objects/smc/source/lenses/smc-horalek-wide/result.json",
-      "expectedSha256": "44533ce32a8915d69562186954722a3a52e005681ed3ac72b8818d20f2c2c18a",
+      "expectedSha256": "74d53608420a85a1980426a562f1ccc2a081b771f024135d566425e439e02aec",
       "expectedBytes": 3966,
       "sourceBinding": {
         "kind": "local",
@@ -549,7 +549,7 @@
     {
       "id": "document-26",
       "path": "src/objects/smc/source/lenses/smc-horalek-wide/selection.json",
-      "expectedSha256": "6f50615fe51b34bdb44a4ae4e132dda94a3dbe52ba91de58f0f25db6074437fd",
+      "expectedSha256": "83f7ea39bfe300669922a1d6ae6740084242ac77cc6c1e56debd71d0b8d72580",
       "expectedBytes": 13385,
       "sourceBinding": {
         "kind": "local",
@@ -559,8 +559,8 @@
     {
       "id": "document-27",
       "path": "src/objects/smc/source/lenses/smc-smash/catalogue-stars.json",
-      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
-      "expectedBytes": 944497,
+      "expectedSha256": "4db17260d150a8dd8cabd28d3675bdd5bf89cd9b300b9142d9f59ee376bb9b3c",
+      "expectedBytes": 944942,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -569,8 +569,8 @@
     {
       "id": "document-28",
       "path": "src/objects/smc/source/lenses/smc-smash/provenance.json",
-      "expectedSha256": "20e8db33063171cc3416e37d2b6b982bd7f7c0d2b1f4855ee054e4f11c68a1fa",
-      "expectedBytes": 151549,
+      "expectedSha256": "07e2ecd64b6b463b007d4db48c238f4d5032a07c4601bc978dc7150ad77c13e5",
+      "expectedBytes": 152120,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -579,7 +579,7 @@
     {
       "id": "document-29",
       "path": "src/objects/smc/source/lenses/smc-smash/result.json",
-      "expectedSha256": "c7c8a7121c7f4b0f4d60c7e69e34ee514611e0cada1c6e5277ac1fc680ba2509",
+      "expectedSha256": "c0bdb545181b5a30cee1b93ac447cf28d0a4317ddb9894fb23a51d6f2e472df1",
       "expectedBytes": 4067,
       "sourceBinding": {
         "kind": "local",
@@ -589,7 +589,7 @@
     {
       "id": "document-30",
       "path": "src/objects/smc/source/lenses/smc-smash/selection.json",
-      "expectedSha256": "e4db9022775e5530fa83894d5ef6bbb90b77565d25c60c85043cb95bbd73b4ca",
+      "expectedSha256": "9f7d0f430242b311c2f54d4fca007de648e85fae75fff77e27f8c33279ac2ca6",
       "expectedBytes": 13366,
       "sourceBinding": {
         "kind": "local",
@@ -599,8 +599,8 @@
     {
       "id": "document-31",
       "path": "src/objects/smc/source/lenses/smc-vista/catalogue-stars.json",
-      "expectedSha256": "47d0c491768bb625c22f47a5e4d3d5669bdcb28708133745faf9e37670abd034",
-      "expectedBytes": 944497,
+      "expectedSha256": "4db17260d150a8dd8cabd28d3675bdd5bf89cd9b300b9142d9f59ee376bb9b3c",
+      "expectedBytes": 944942,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -609,8 +609,8 @@
     {
       "id": "document-32",
       "path": "src/objects/smc/source/lenses/smc-vista/provenance.json",
-      "expectedSha256": "14fabc5af6bc7cb1a7c71e3149e28af8fff3a9672b2874054cb03ecb691a6e93",
-      "expectedBytes": 151299,
+      "expectedSha256": "64b337b148bbf02f110d8aab1d51299d3e9d8d2e5ade78d5b40179a2ee7c4add",
+      "expectedBytes": 151870,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -619,7 +619,7 @@
     {
       "id": "document-33",
       "path": "src/objects/smc/source/lenses/smc-vista/result.json",
-      "expectedSha256": "dfd8e55640ca64d306a65058fbc806cd22f79d2c817b2fdf77e91e9e2711ab25",
+      "expectedSha256": "a63b1c926febaa7fb6827438afd2dd859f31848e397221b441641f8cdf7d7bd1",
       "expectedBytes": 3915,
       "sourceBinding": {
         "kind": "local",
@@ -629,7 +629,7 @@
     {
       "id": "document-34",
       "path": "src/objects/smc/source/lenses/smc-vista/selection.json",
-      "expectedSha256": "8d43598c3c7ada5e61e2eaa6ecb9faa2e751e9d981db433d34ec2cc144385441",
+      "expectedSha256": "70a5c0982d8cc3ccfa2d038821413a540af949281928a6f57e64ea8091e0bc2e",
       "expectedBytes": 13354,
       "sourceBinding": {
         "kind": "local",

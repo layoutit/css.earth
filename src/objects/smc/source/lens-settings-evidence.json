@@ -1,13 +1,13 @@
 {
-  "receiptSha256": "de400e47d433c0106302ebb7111c3286e6cacf70aa98733925c66aaa1b951462",
-  "capturedAt": "2026-09-17T15:04:00.000Z",
+  "receiptSha256": "8b36e90c6a97f2f8bc0ba0b74447408a81b293f4beacfdbc9fc2e83b6e6b16a8",
+  "capturedAt": "2026-09-17T19:40:00.000Z",
   "source": "labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json",
-  "modelResultId": "075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26",
+  "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
   "receipt": "SHA-256 of this file's `lenses` array serialized with two-space indentation and a trailing newline.",
   "lenses": [
     {
       "imageId": "smc-horalek-wide",
-      "resultId": "c0029fef54732e9bd29d943adb0f02738ba814576829b1b222e3b48bca6e7be0",
+      "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,
@@ -19,7 +19,7 @@
     },
     {
       "imageId": "smc-vista",
-      "resultId": "00942f12a12e81aca610a8046260047ecfd42ce8591b5cabd64014fffd0ea181",
+      "resultId": "47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,
@@ -31,7 +31,7 @@
     },
     {
       "imageId": "smc-smash",
-      "resultId": "77f94fd6e98e8d80bc3321f7a8022ad1f15c3d0badbcd8905d8e3e031b915a86",
+      "resultId": "47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,
@@ -43,7 +43,7 @@
     },
     {
       "imageId": "smc-dss2",
-      "resultId": "f0468b11d5b3ff2a27eac207a09326e542f79a34ff284e5b6113727303fefb75",
+      "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,
@@ -55,7 +55,7 @@
     },
     {
       "imageId": "smc-allwise-wide",
-      "resultId": "9161b4695854c7c863a72d4375e50b195a7b5776a553e9bb0a7eb091227ad484",
+      "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
       "appearance": {
         "saturation": 1,
         "detailStrength": 0,

@@ -1,7 +1,7 @@
 {
   "settings": {
     "imageId": "smc-vista",
-    "resultId": "00942f12a12e81aca610a8046260047ecfd42ce8591b5cabd64014fffd0ea181",
+    "resultId": "47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
     "label": "ESO VISTA",
     "description": "Near-infrared colors from ESO's VISTA VMC survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
     "enabledIds": [
@@ -26,7 +26,7 @@
   },
   "sourceParts": {
     "schema": "cssearth-cloud-parts@1",
-    "id": "reconstruction-00942f12a12e81aca610a8046260047ecfd42ce8591b5cabd64014fffd0ea181",
+    "id": "reconstruction-47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
     "parts": [
       {
         "id": "all-light",
