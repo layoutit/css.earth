@@ -52,15 +52,16 @@ export async function rawFrame(dpId: string, directory: string) {
   await mkdir(directory, { recursive: true });
   // Private temporary names, so two calls for the same frame (a prefetch and a step) never write one file.
   const partial = `${target}.${process.pid}-${++downloads}`, download = `${partial}.download`;
-  // The portal drops connections now and then, before or during a transfer; the whole request is repeated up to five times,
-  // waiting 5, 10, 20 and 40 seconds in between. Refusals (a proprietary frame, a missing one) are not repeated.
+  // The portal drops connections now and then, before or during a transfer, and for minutes at a time it answers 401 to public
+  // frames it serves before and after (on 17 September 2026, a Betelgeuse exposure public since 2021 and a PIONIER frame it had
+  // served that morning). The whole request is repeated up to five times, waiting 5, 10, 20 and 40 seconds in between. Other
+  // refusals (a missing frame) are not repeated.
   for (let attempt = 1; ; attempt++) {
     const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`).catch((error: unknown) => error as Error);
-    if (!(response instanceof Error)) {
-      if (response.status === 401) throw new Error(`${dpId} is still proprietary.`);
-      if (response.status < 500 && (!response.ok || !response.body)) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
-    }
-    const failure = response instanceof Error ? response : !response.ok || !response.body ? new Error(`${dpId}: the ESO data portal answered ${response.status}.`)
+    if (!(response instanceof Error) && response.status !== 401 && response.status < 500 && (!response.ok || !response.body)) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
+    const failure = response instanceof Error ? response
+      : response.status === 401 ? new Error(`${dpId}: the ESO data portal refused it (401) five times; a frame still in its proprietary period is refused so too.`)
+      : !response.ok || !response.body ? new Error(`${dpId}: the ESO data portal answered ${response.status}.`)
       : await pipeline(Readable.fromWeb(response.body as never), createWriteStream(download)).then(() => undefined, (error: unknown) => error as Error);
     if (!failure) break;
     if (attempt === 5) throw failure;
