@@ -1,117 +1,181 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import AdminLayout from './AdminLayout.astro';
-import { INVESTIGATION_STATUSES, REPOSITORY_BLOB, formatBytes, readInventory, readInventoryDetail } from './object-inventory.mts';
+import { LEDGER_GROUPS, REPOSITORY_BLOB, STATUS_LABELS, formatBytes, plural, readInventory, readInventoryDetail } from './object-inventory.mts';
 
 export function getStaticPaths() {
-  return readInventory().summaries.map(object => ({ params: { id: object.id } }));
+  return readInventory().groups.flatMap(group => group.objects).map(object => ({ params: { id: object.id } }));
 }
 
 const id = Astro.params.id;
 if (typeof id !== 'string') throw new TypeError('Missing object id.');
 const object = readInventoryDetail(id);
+const { groups } = readInventory();
+const group = groups.find(candidate => candidate.key === object.group);
+const siblings = group?.objects ?? [];
+const position = siblings.findIndex(candidate => candidate.id === object.id);
+const previous = position > 0 ? siblings[position - 1] : undefined, next = siblings[position + 1];
 const packagePath = `src/objects/${object.id}`;
-const ledger = [...object.ledger].sort((a, b) => INVESTIGATION_STATUSES.findIndex(status => status === a.status) -
-  INVESTIGATION_STATUSES.findIndex(status => status === b.status));
-const missingSources = object.sources.filter(source => !source.local);
+
+// Each README is the body's source-and-evidence document; Astro renders it as the article body.
+const readmes = import.meta.glob('../../src/objects/*/README.md');
+const loadReadme = readmes[`../../src/objects/${object.id}/README.md`];
+const readme: unknown = loadReadme ? await loadReadme() : null;
+const ReadmeContent = readme && typeof readme === 'object' && 'Content' in readme && typeof readme.Content === 'function' ? readme.Content : null;
+const headingList: unknown = readme && typeof readme === 'object' && 'getHeadings' in readme && typeof readme.getHeadings === 'function' ? readme.getHeadings() : [];
+const readmeHeadings = (Array.isArray(headingList) ? headingList : []).filter((heading): heading is MarkdownHeading =>
+  typeof heading === 'object' && heading !== null && typeof heading.depth === 'number' && typeof heading.slug === 'string' && typeof heading.text === 'string');
+
+const statusSentence = {
+  imaged: `${object.name} is shown from real imagery${object.maps.length ? `, with ${plural(object.maps.length, 'surface map')}` : ''}.`,
+  shape: `${object.name} is known only by its shape; cssEarth has no image of its surface.`,
+  illustration: `${object.name} is shown as an illustration, not from data of this body.`,
+  view: `${object.name} is a view of the wider universe rather than a single body.`,
+}[object.status];
+const ledgerGroups = LEDGER_GROUPS.map(entry => ({ ...entry, id: `notes-${entry.status}`, entries: object.ledger.filter(note => note.status === entry.status) }))
+  .filter(entry => entry.entries.length > 0);
+const sourceBytes = object.credits.reduce((sum, credit) => sum + credit.bytes, 0);
+const sourceFiles = object.credits.reduce((sum, credit) => sum + credit.files, 0);
+const references = [...new Set(object.ledger.flatMap(note => note.evidence))];
+const referenceNumber = (link: string) => references.indexOf(link) + 1;
+// Ledger findings write links as Markdown; show them as links rather than bracket text.
+const linkParts = (value: string) => value.split(/(\[[^\]]+\]\(https?:\/\/[^)\s]+\))/u).map(part => {
+  const link = /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/u.exec(part);
+  return link ? { text: link[1], href: link[2] } : { text: part, href: null };
+});
+const shortLink = (link: string) => link.replace(/^https:\/\/github\.com\/layoutit\/css\.earth\/blob\/[0-9a-f]+\//u, '').replace(/^https?:\/\/(www\.)?/u, '');
+
+interface ContentsEntry { id: string; text: string; children: { id: string; text: string }[]; }
+const readmeContents: ContentsEntry[] = [];
+for (const heading of readmeHeadings) {
+  if (heading.depth === 2) readmeContents.push({ id: heading.slug, text: heading.text, children: [] });
+  else if (heading.depth === 3) readmeContents.at(-1)?.children.push({ id: heading.slug, text: heading.text });
+}
+const contents: ContentsEntry[] = [
+  ...object.maps.length ? [{ id: 'maps', text: 'Maps', children: [] }] : [],
+  ...readmeContents,
+  ...ledgerGroups.length ? [{ id: 'research-notes', text: 'Research notes', children: ledgerGroups.map(entry => ({ id: entry.id, text: entry.label })) }] : [],
+  ...object.credits.length ? [{ id: 'data-sources', text: 'Data sources', children: [] }] : [],
+  ...references.length ? [{ id: 'references', text: 'References', children: [] }] : [],
+];
 ---
-<AdminLayout title={object.name} activeId={object.id}>
-  <header class="admin-object-header">
-    <span class="admin-swatch" style={`--dot:${object.swatch ?? object.color}`}></span>
-    <div>
-      <h1 class="admin-title">{object.name}</h1>
-      <p class="admin-subtitle">{[object.classificationLabel, object.systemName, object.distance, object.type].filter(Boolean).join(' · ')}</p>
-    </div>
-    <nav class="admin-actions">
-      {object.route && <a class="admin-button" href={object.route}>Open in app</a>}
-      <a class="admin-button" href={`${REPOSITORY_BLOB}/${packagePath}/README.md`}>README</a>
-      <a class="admin-button" href={`${REPOSITORY_BLOB}/${packagePath}/investigations.json`}>Ledger</a>
-    </nav>
-  </header>
-
-  <section class="admin-chips">
-    {object.discovery && <>
-      <span class:list={['admin-chip', { 'is-good': object.discovery.imagery }]}>{object.discovery.label}</span>
-      <span class:list={['admin-chip', { 'is-warn': !object.discovery.onMap }]}>{object.discovery.onMap ? 'On the map' : 'Off the map'}</span>
-      <span class="admin-chip">{object.discovery.labelled ? 'Labelled by default' : 'Unlabelled by default'}</span>
-      {object.discovery.featured && <span class="admin-chip is-good">Featured</span>}
-    </>}
-    <span class="admin-chip">Provenance: {object.provenance ?? 'none'}</span>
-    <span class="admin-chip"><code>{packagePath}</code></span>
-  </section>
-
-  {object.problems.length > 0 && <section class="admin-section admin-problems">
-    <h2 class="admin-heading">Package problems</h2>
-    <ul>{object.problems.map(problem => <li>{problem}</li>)}</ul>
-  </section>}
-
-  {(object.card || object.introduction || object.description) && <section class="admin-section admin-prose">
-    {object.introduction && <p>{object.introduction}</p>}
-    <p class="admin-muted">Card: {object.card ?? object.description}</p>
-    {object.swatchBasis && <p class="admin-muted">Swatch {object.swatch}: {object.swatchSourceTitle}</p>}
-  </section>}
-
-  <section class="admin-section">
-    <h2 class="admin-heading">Lenses <span class="admin-muted">{object.lenses.length}</span></h2>
-    {object.lenses.length === 0 ? <p class="admin-muted">No prepared lenses.</p> : <div class="admin-lenses">
-      {object.lenses.map((lens, index) => (
-        <figure class="admin-lens">
-          <a href={lens.surfaceUrl ?? lens.thumbnailUrl ?? undefined}>
-            {lens.surfaceUrl ? <img src={lens.surfaceUrl} alt="" loading={index < 4 ? 'eager' : 'lazy'} /> :
-              lens.thumbnailUrl ? <img src={lens.thumbnailUrl} alt="" loading="lazy" /> : <span class="admin-lens-empty">No image</span>}
-          </a>
-          <figcaption>
-            <strong>{lens.label}</strong> <code>{lens.id}</code>
-            <span class="admin-muted">{[lens.falseColor && 'false colour', lens.noData && 'has no-data'].filter(Boolean).join(' · ')}</span>
-            {lens.sourceUrl && <a class="admin-link" href={lens.sourceUrl}>{new URL(lens.sourceUrl).hostname}</a>}
-          </figcaption>
-        </figure>
-      ))}
-    </div>}
-  </section>
-
-  <section class="admin-section">
-    <h2 class="admin-heading">Investigations <span class="admin-muted">{INVESTIGATION_STATUSES.filter(status => object.investigations[status])
-      .map(status => `${object.investigations[status]} ${status}`).join(' · ') || 'none'}</span></h2>
-    {ledger.map(entry => (
-      <details class="admin-entry" open={entry.status === 'unresolved' || entry.status === 'deferred'}>
-        <summary><span class:list={['admin-status', `is-${entry.status}`]}>{entry.status}</span> {entry.subject} <span class="admin-muted">{entry.checked}</span></summary>
-        <p>{entry.finding}</p>
-        {entry.revisitWhen && <p class="admin-muted">Revisit when: {entry.revisitWhen}</p>}
-        {entry.evidence.length > 0 && <ul class="admin-evidence">{entry.evidence.map(link => <li><a class="admin-link" href={link}>{link.replace(/^https:\/\/github\.com\/layoutit\/css\.earth\/blob\/[0-9a-f]+\//u, '')}</a></li>)}</ul>}
-      </details>
-    ))}
-  </section>
-
-  <section class="admin-section">
-    <h2 class="admin-heading">Sources <span class="admin-muted">{object.sources.length} · {formatBytes(object.sourceBytes)}{missingSources.length > 0 && ` · ${missingSources.length} not downloaded here`}</span></h2>
-    {object.sources.length > 0 && <table class="admin-table" data-admin-sortable>
-      <thead><tr>{['Input', 'Credit', 'Captured by', 'Lens', 'Size', 'Local'].map(label => <th><button type="button">{label}</button></th>)}</tr></thead>
-      <tbody>
-        {object.sources.map(source => (
-          <tr>
-            <td data-value={source.id}>{source.origin ? <a class="admin-link" href={source.origin}>{source.id}</a> : source.id}<br /><code class="admin-muted">{source.path}</code></td>
-            <td>{source.credit}{source.license && <div class="admin-muted">{source.license}</div>}</td>
-            <td>{source.machines.join(', ')}{source.observedAt && <div class="admin-muted">{source.observedAt}</div>}</td>
-            <td>{source.lensId}</td>
-            <td class="is-number" data-value={source.bytes}>{formatBytes(source.bytes)}</td>
-            <td class="is-number">{source.local ? '✓' : '—'}</td>
-          </tr>
+<AdminLayout title={object.name}>
+  <div class="wiki-page">
+    <nav class="wiki-toc" aria-label="Contents" data-wiki-toc>
+      <p class="wiki-toc-title">Contents</p>
+      <ul>
+        <li><a href="#top">(Top)</a></li>
+        {contents.map(entry => (
+          <li><a href={`#${entry.id}`}>{entry.text}</a>
+            {entry.children.length > 0 && <ul>{entry.children.map(child => <li><a href={`#${child.id}`}>{child.text}</a></li>)}</ul>}
+          </li>
         ))}
-      </tbody>
-    </table>}
-  </section>
+      </ul>
+    </nav>
 
-  <section class="admin-section">
-    <details>
-      <summary class="admin-heading">Runtime assets <span class="admin-muted">{object.runtimeAssets.length} · {formatBytes(object.runtimeBytes)}</span></summary>
-      <ul class="admin-tally">{object.runtimeAssets.map(asset => <li><code>{asset.filename}</code><span>{formatBytes(asset.bytes)}</span></li>)}</ul>
-    </details>
-  </section>
+    <article class="wiki-article" id="top">
+      <header class="wiki-article-header">
+        <h1 class="wiki-title">{object.name}</h1>
+        <div class="wiki-tabs">
+          <span class="wiki-tab is-current">Article</span>
+          {object.route && <a class="wiki-tab" href={object.route}>View in cssEarth</a>}
+          <a class="wiki-tab" href={`${REPOSITORY_BLOB}/${packagePath}/README.md`}>Edit README</a>
+          <a class="wiki-tab" href={`${REPOSITORY_BLOB}/${packagePath}/investigations.json`}>Ledger</a>
+        </div>
+      </header>
+      <p class="wiki-tagline">From cssEarth objects · <a href={`/admin/#${object.group}`}>{object.kind}</a></p>
 
-  {object.readme && <section class="admin-section">
-    <details>
-      <summary class="admin-heading">README.md</summary>
-      <pre class="admin-readme">{object.readme}</pre>
-    </details>
-  </section>}
+      <aside class="wiki-infobox">
+        <p class="wiki-infobox-title">{object.name}</p>
+        <div class="wiki-infobox-image">
+          {object.image ? <img src={object.image} alt={object.name} /> : <span class="wiki-dot" style={`--dot:${object.color}`}></span>}
+        </div>
+        <p class="wiki-infobox-caption">{STATUS_LABELS[object.status]}{object.hiddenFromMap && ', hidden from the map'}</p>
+        <table>
+          <tbody>
+            <tr><th scope="row">Category</th><td><a href={`/admin/#${object.group}`}>{object.kind}</a></td></tr>
+            {object.systemName && <tr><th scope="row">System</th><td>{object.systemName}</td></tr>}
+            {object.facts.map(fact => <tr><th scope="row">{fact.label}</th><td>{fact.value}</td></tr>)}
+            <tr class="wiki-infobox-section"><th colspan="2">In cssEarth</th></tr>
+            <tr><th scope="row">Maps</th><td>{object.maps.length}</td></tr>
+            <tr><th scope="row">Open questions</th><td>{object.openQuestions}</td></tr>
+            <tr><th scope="row">Source files</th><td>{sourceFiles} ({formatBytes(sourceBytes)})</td></tr>
+            <tr><th scope="row">Runtime files</th><td>{object.runtimeAssets} ({formatBytes(object.runtimeBytes)})</td></tr>
+            <tr><th scope="row">Package</th><td><code>{object.type}</code></td></tr>
+          </tbody>
+        </table>
+      </aside>
+
+      {object.problems.length > 0 && <div class="wiki-notice">
+        <strong>This package needs attention.</strong>
+        <ul>{object.problems.map(problem => <li>{problem}</li>)}</ul>
+      </div>}
+
+      <div class="wiki-lead-block">
+        {object.introduction && <p>{object.introduction}</p>}
+        {object.card && object.card !== object.introduction && <p>{object.card}</p>}
+        <p>{statusSentence}{object.hiddenFromMap && ' It stays off the map until it has an image, but search still finds it.'}</p>
+      </div>
+
+      {object.maps.length > 0 && <section>
+        <h2 id="maps">Maps</h2>
+        <div class="wiki-gallery">
+          {object.maps.map(map => (
+            <figure>
+              <img src={map.url} alt={`${map.label} map of ${object.name}`} loading="lazy" decoding="async" />
+              <figcaption>{map.label}{map.falseColor && ' (false colour)'}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>}
+
+      {ReadmeContent && <div class="wiki-readme" data-wiki-readme data-base={`${REPOSITORY_BLOB}/${packagePath}/`}><ReadmeContent /></div>}
+
+      {ledgerGroups.length > 0 && <section>
+        <h2 id="research-notes">Research notes</h2>
+        {ledgerGroups.map(entry => (
+          <>
+            <h3 id={entry.id}>{entry.label}</h3>
+            {entry.entries.map(note => (
+              <div class="wiki-note">
+                <p><strong>{note.subject}.</strong> {linkParts(note.finding).map(part => part.href ? <a href={part.href}>{part.text}</a> : part.text)}
+                  {note.evidence.map(link => <sup class="wiki-ref"><a href={`#ref-${referenceNumber(link)}`}>[{referenceNumber(link)}]</a></sup>)}</p>
+                {note.revisitWhen && <p class="wiki-note-revisit">Look again when: {linkParts(note.revisitWhen).map(part => part.href ? <a href={part.href}>{part.text}</a> : part.text)}</p>}
+              </div>
+            ))}
+          </>
+        ))}
+      </section>}
+
+      {object.credits.length > 0 && <section>
+        <h2 id="data-sources">Data sources</h2>
+        <p>{plural(sourceFiles, 'source file')}, {formatBytes(sourceBytes)} in total.</p>
+        <ul>
+          {object.credits.map(credit => (
+            <li><strong>{credit.credit}</strong>: {[credit.machines.length ? credit.machines.join(', ') : null, plural(credit.files, 'file'), formatBytes(credit.bytes)].filter(Boolean).join(', ')}</li>
+          ))}
+        </ul>
+      </section>}
+
+      {references.length > 0 && <section>
+        <h2 id="references">References</h2>
+        <ol class="wiki-references">{references.map((link, index) => <li id={`ref-${index + 1}`}><a href={link}>{shortLink(link)}</a></li>)}</ol>
+      </section>}
+
+      <footer class="wiki-footer">
+        <div class="wiki-categories">
+          <span>Categories:</span>
+          <a href={`/admin/#${object.group}`}>{object.kind}</a>
+          <span>{STATUS_LABELS[object.status]}</span>
+          {object.hiddenFromMap && <span>Hidden from the map</span>}
+          {object.openQuestions > 0 && <span>With open questions</span>}
+        </div>
+        <nav class="wiki-pager" aria-label={`More ${object.kind.toLocaleLowerCase('en')}`}>
+          {previous ? <a href={`/admin/${previous.id}/`}>← {previous.name}</a> : <span></span>}
+          {next && <a href={`/admin/${next.id}/`}>{next.name} →</a>}
+        </nav>
+        <p>Built from <code>{packagePath}</code> · provenance {object.provenance ?? 'none'}</p>
+      </footer>
+    </article>
+  </div>
 </AdminLayout>

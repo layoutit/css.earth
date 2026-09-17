@@ -1,60 +1,89 @@
-const STORAGE_KEY = 'cssearth-admin-filters';
+const STORAGE_KEY = 'cssearth-admin-status';
 
-/** Filters the sidebar list and any overview rows by the same data attributes. Filters are a per-tab convenience. */
-export function mountAdminFilters(root: Document) {
-  const controls = [...root.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-admin-filter]')];
-  const count = root.querySelector<HTMLElement>('[data-admin-count]');
-  const saved = readSaved();
-  for (const control of controls) {
-    const value = saved[control.dataset.adminFilter ?? ''];
-    if (typeof value === 'string') control.value = value;
-    control.addEventListener('input', apply);
-  }
+export function mountAdmin(root: Document) {
+  mountSearch(root);
+  mountCategoryFilters(root);
+  mountContents(root);
+  mountReadmeLinks(root);
+}
+
+/** Choosing a name from the header search opens its article; on the main page typing also narrows the lists. */
+function mountSearch(root: Document) {
+  const form = root.querySelector<HTMLFormElement>('[data-wiki-search]');
+  const input = form?.querySelector('input');
+  if (!form || !input) return;
+  const options = [...root.querySelectorAll<HTMLOptionElement>('#wiki-objects option')];
+  const find = (value: string) => {
+    const query = value.trim().toLocaleLowerCase('en');
+    return options.find(option => option.value.toLocaleLowerCase('en') === query) ??
+      options.find(option => option.value.toLocaleLowerCase('en').startsWith(query));
+  };
+  const open = () => { const id = find(input.value)?.dataset.id; if (id) root.defaultView?.location.assign(`/admin/${id}/`); };
+  form.addEventListener('submit', event => { event.preventDefault(); open(); });
+  input.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); open(); } });
+  input.addEventListener('input', event => {
+    if (!(event instanceof InputEvent) || event.inputType === 'insertReplacementText') open();
+    root.dispatchEvent(new CustomEvent('admin-query', { detail: input.value }));
+  });
+}
+
+function mountCategoryFilters(root: Document) {
+  const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-admin-status]')];
+  if (!buttons.length) return;
+  let status = '', query = '';
+  try { status = sessionStorage.getItem(STORAGE_KEY) ?? ''; } catch { /* storage is optional */ }
+  if (!buttons.some(button => button.dataset.adminStatus === status)) status = '';
+  for (const button of buttons) button.addEventListener('click', () => { status = button.dataset.adminStatus ?? ''; apply(); });
+  root.addEventListener('admin-query', event => { query = event instanceof CustomEvent && typeof event.detail === 'string' ? event.detail : ''; apply(); });
   apply();
-  root.querySelector('.admin-list-link.is-active')?.scrollIntoView({ block: 'center' });
-  mountSorting(root);
 
   function apply() {
-    const filters = Object.fromEntries(controls.map(control => [control.dataset.adminFilter ?? '', control.value]));
-    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(filters)); } catch { /* storage is optional */ }
-    const query = (filters.query ?? '').trim().toLocaleLowerCase('en');
-    const matches = (element: HTMLElement) => (!query || (element.dataset.search ?? '').includes(query)) &&
-      (!filters.classification || element.dataset.classification === filters.classification) &&
-      (!filters.status || (element.dataset.status ?? '').split(' ').includes(filters.status));
-    let visible = 0;
-    for (const item of root.querySelectorAll<HTMLElement>('[data-admin-object]')) {
-      const shown = matches(item);
-      item.hidden = !shown;
-      if (shown && item.closest('[data-admin-list]')) visible += 1;
+    try { sessionStorage.setItem(STORAGE_KEY, status); } catch { /* storage is optional */ }
+    for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.adminStatus === status));
+    const words = query.trim().toLocaleLowerCase('en');
+    let shown = 0;
+    for (const group of root.querySelectorAll<HTMLElement>('[data-admin-group]')) {
+      let visible = 0;
+      for (const block of group.querySelectorAll<HTMLElement>('[data-admin-block]')) {
+        let inBlock = 0;
+        for (const item of block.querySelectorAll<HTMLElement>('[data-admin-card]')) {
+          const match = (!words || (item.dataset.name ?? '').includes(words)) && (!status || (item.dataset.tags ?? '').split(' ').includes(status));
+          item.hidden = !match;
+          if (match) inBlock += 1;
+        }
+        block.hidden = inBlock === 0;
+        visible += inBlock;
+      }
+      group.hidden = visible === 0;
+      const count = group.querySelector('[data-admin-group-count]');
+      if (count) count.textContent = String(visible);
+      shown += visible;
     }
-    if (count) count.textContent = String(visible);
+    const empty = root.querySelector<HTMLElement>('[data-admin-empty]');
+    if (empty) empty.hidden = shown > 0;
   }
 }
 
-function readSaved(): Record<string, unknown> {
-  try {
-    const value: unknown = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? '{}');
-    return typeof value === 'object' && value !== null && !Array.isArray(value) ? Object.fromEntries(Object.entries(value)) : {};
-  } catch { return {}; }
+/** Marks the section being read in the contents sidebar. */
+function mountContents(root: Document) {
+  const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-wiki-toc] a')];
+  const targets = links.map(link => root.getElementById(decodeURIComponent(link.hash.slice(1)))).filter(target => target !== null);
+  if (!targets.length) return;
+  const update = () => {
+    const current = targets.filter(target => target.getBoundingClientRect().top < 120).at(-1) ?? targets[0];
+    for (const link of links) link.classList.toggle('is-current', link.hash === `#${current?.id}`);
+  };
+  root.addEventListener('scroll', update, { passive: true });
+  update();
 }
 
-function mountSorting(root: Document) {
-  for (const table of root.querySelectorAll<HTMLTableElement>('[data-admin-sortable]')) {
-    const body = table.tBodies[0];
-    if (!body) continue;
-    table.querySelectorAll<HTMLButtonElement>('thead button').forEach((button, column) => {
-      button.addEventListener('click', () => {
-        const descending = button.dataset.sort !== 'descending';
-        table.querySelectorAll<HTMLButtonElement>('thead button').forEach(other => { delete other.dataset.sort; });
-        button.dataset.sort = descending ? 'descending' : 'ascending';
-        const key = (row: HTMLTableRowElement) => row.cells[column]?.dataset.value ?? row.cells[column]?.textContent ?? '';
-        const rows = [...body.rows].sort((a, b) => {
-          const left = key(a), right = key(b), numeric = Number(left) - Number(right);
-          const order = Number.isNaN(numeric) ? left.localeCompare(right, 'en') : numeric;
-          return descending ? -order : order;
-        });
-        body.append(...rows);
-      });
-    });
+/** README links are written relative to the package; send them to the repository. */
+function mountReadmeLinks(root: Document) {
+  const readme = root.querySelector<HTMLElement>('[data-wiki-readme]');
+  const base = readme?.dataset.base;
+  if (!readme || !base) return;
+  for (const link of readme.querySelectorAll<HTMLAnchorElement>('a[href]')) {
+    const href = link.getAttribute('href') ?? '';
+    if (!/^(?:[a-z]+:|#|\/)/iu.test(href)) link.href = new URL(href, base).href;
   }
 }

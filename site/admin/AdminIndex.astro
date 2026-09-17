@@ -1,73 +1,64 @@
 ---
 import AdminLayout from './AdminLayout.astro';
-import { INVESTIGATION_STATUSES, formatBytes, readInventory, statusTags } from './object-inventory.mts';
+import { STATUS_LABELS, plural, readInventory } from './object-inventory.mts';
 
-const { summaries } = readInventory();
-const catalogued = summaries.filter(object => object.discovery);
-const tally = (values: string[]) => [...values.reduce((map, value) => map.set(value, (map.get(value) ?? 0) + 1), new Map<string, number>())]
-  .sort((a, b) => b[1] - a[1]);
-const totals = [
-  ['Packages', summaries.length],
-  ['With imagery', catalogued.filter(object => object.discovery?.imagery).length],
-  ['Anchors', catalogued.filter(object => object.discovery?.anchor).length],
-  ['Shape only', catalogued.filter(object => object.discovery && !object.discovery.anchor && !object.discovery.imagery && !object.discovery.illustration).length],
-  ['Illustrations', catalogued.filter(object => object.discovery?.illustration).length],
-  ['Off the map', catalogued.filter(object => object.discovery && !object.discovery.onMap).length],
-  ['Lenses', summaries.reduce((sum, object) => sum + object.lensCount, 0)],
-  ['Sources', summaries.reduce((sum, object) => sum + object.sourceCount, 0)],
-  ['Runtime assets', formatBytes(summaries.reduce((sum, object) => sum + object.runtimeBytes, 0))],
-] as const;
-const investigations = INVESTIGATION_STATUSES.map(status => [status, summaries.reduce((sum, object) => sum + object.investigations[status], 0)] as const);
+const { groups, folders } = readInventory();
+const objects = groups.flatMap(group => group.objects);
+const total = (status: keyof typeof STATUS_LABELS) => objects.filter(object => object.status === status).length;
+const filters = [
+  { value: '', label: 'All', count: objects.length },
+  { value: 'imaged', label: 'Imaged', count: total('imaged') },
+  { value: 'shape', label: 'Shape only', count: total('shape') },
+  { value: 'illustration', label: 'Illustrations', count: total('illustration') },
+  { value: 'questions', label: 'With open questions', count: objects.filter(object => object.openQuestions > 0).length },
+  { value: 'problems', label: 'Needing attention', count: objects.filter(object => object.problems.length > 0).length },
+].filter(filter => filter.value === '' || filter.count > 0);
+// Long categories read like an index: one heading per initial.
+const byInitial = (list: typeof objects) => [...list.reduce((map, object) => {
+  const initial = /^[a-z]/iu.test(object.name) ? object.name[0].toLocaleUpperCase('en') : '#';
+  return map.set(initial, [...map.get(initial) ?? [], object]);
+}, new Map<string, typeof objects>())];
 ---
-<AdminLayout title="Objects">
-  <header class="admin-page-header">
-    <h1 class="admin-title">Everything in src/objects</h1>
-    <p class="admin-subtitle">Read from the packages on disk on every change. Map visibility uses the default settings.</p>
-  </header>
-  <section class="admin-stats">
-    {totals.map(([label, value]) => <div class="admin-stat"><span class="admin-stat-value">{value}</span><span class="admin-stat-label">{label}</span></div>)}
-  </section>
-  <section class="admin-breakdown">
-    <div>
-      <h2 class="admin-heading">Kinds</h2>
-      <ul class="admin-tally">{tally(summaries.map(object => object.classificationLabel)).map(([label, value]) => <li><span>{label}</span><span>{value}</span></li>)}</ul>
-    </div>
-    <div>
-      <h2 class="admin-heading">Package types</h2>
-      <ul class="admin-tally">{tally(summaries.map(object => object.type)).map(([label, value]) => <li><span>{label}</span><span>{value}</span></li>)}</ul>
-    </div>
-    <div>
-      <h2 class="admin-heading">Investigations</h2>
-      <ul class="admin-tally">{investigations.map(([label, value]) => <li><span class:list={['admin-status', `is-${label}`]}>{label}</span><span>{value}</span></li>)}</ul>
-    </div>
-    <div>
-      <h2 class="admin-heading">Provenance</h2>
-      <ul class="admin-tally">{tally(summaries.map(object => object.provenance ?? 'none')).map(([label, value]) => <li><span>{label}</span><span>{value}</span></li>)}</ul>
-    </div>
-  </section>
-  <table class="admin-table" data-admin-sortable>
-    <thead>
-      <tr>
-        {['Name', 'Kind', 'System', 'Status', 'Lenses', 'Included', 'Unresolved', 'Deferred', 'Excluded', 'Sources', 'Local', 'Runtime', 'Problems']
-          .map(label => <th><button type="button">{label}</button></th>)}
-      </tr>
-    </thead>
-    <tbody>
-      {summaries.map(object => (
-        <tr data-admin-object data-search={`${object.name} ${object.id} ${object.systemName}`.toLocaleLowerCase('en')}
-          data-classification={object.classification} data-status={statusTags(object)}>
-          <td data-value={object.name}><a href={`/admin/${object.id}/`}><span class="admin-dot" style={`--dot:${object.color}`}></span>{object.name}</a></td>
-          <td>{object.classificationLabel}</td>
-          <td>{object.systemName}</td>
-          <td>{object.discovery ? <>{object.discovery.label}{!object.discovery.onMap && <span class="admin-flag">off map</span>}</> : object.type}</td>
-          <td class="is-number">{object.lensCount}</td>
-          {INVESTIGATION_STATUSES.map(status => <td class="is-number">{object.investigations[status] || ''}</td>)}
-          <td class="is-number">{object.sourceCount}</td>
-          <td class="is-number" data-value={object.sourceCount - object.localSourceCount}>{object.localSourceCount < object.sourceCount ? `${object.localSourceCount}/${object.sourceCount}` : '✓'}</td>
-          <td class="is-number" data-value={object.runtimeBytes}>{formatBytes(object.runtimeBytes)}</td>
-          <td class="is-number">{object.problems.length || ''}</td>
-        </tr>
+<AdminLayout title="Main page">
+  <div class="wiki-main">
+    <h1 class="wiki-title">Every object in cssEarth</h1>
+    <p class="wiki-lead">
+      cssEarth has {plural(objects.length, 'object')}. {total('imaged')} are shown from real imagery, {total('shape')} are known only by
+      their shape, {total('illustration')} are illustrations, and {plural(total('view'), 'is a view', 'are views')} of the wider universe.
+      Each article below is built from that object's package in <code>src/objects</code>.
+    </p>
+
+    <nav class="wiki-contents-inline" aria-label="Categories">
+      {groups.map(group => <a href={`#${group.key}`}>{group.label} <span>{group.objects.length}</span></a>)}
+    </nav>
+
+    <div class="wiki-filters" role="group" aria-label="Show">
+      {filters.map((filter, index) => (
+        <button type="button" data-admin-status={filter.value} aria-pressed={index === 0 ? 'true' : 'false'}>{filter.label} <span>{filter.count}</span></button>
       ))}
-    </tbody>
-  </table>
+    </div>
+
+    {groups.map(group => (
+      <section class="wiki-category" id={group.key} data-admin-group>
+        <h2>{group.label} <span data-admin-group-count>{group.objects.length}</span></h2>
+        {(group.objects.length > 30 ? byInitial(group.objects) : [['', group.objects] as const]).map(([initial, members]) => (
+          <div class="wiki-category-block" data-admin-block>
+            {initial && <h3>{initial}</h3>}
+            <ul>
+              {members.map(object => (
+                <li data-admin-card data-name={`${object.name} ${object.id}`.toLocaleLowerCase('en')}
+                  data-tags={[object.status, object.openQuestions > 0 && 'questions', object.problems.length > 0 && 'problems'].filter(Boolean).join(' ')}>
+                  <a href={`/admin/${object.id}/`}>{object.name}</a>
+                  {object.status !== 'imaged' && object.status !== 'view' && <span class="wiki-mark">{STATUS_LABELS[object.status].toLocaleLowerCase('en')}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+    ))}
+
+    <p class="wiki-empty" data-admin-empty hidden>No object matches.</p>
+    {folders.length > 0 && <p class="wiki-footnote">Folders with notes but no object yet: {folders.join(', ')}.</p>}
+  </div>
 </AdminLayout>
