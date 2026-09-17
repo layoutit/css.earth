@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import { contextBodyOrbits, type PreparedWorldContext, type PreparedContextOrbit } from './prepared-world-context.js';
+import type { PreparedWorldContext, PreparedContextBody, PreparedContextOrbit } from './prepared-world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation, rotateWorldPosition } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
@@ -166,7 +166,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
   const prepared = points.map(body => {
     // A body draws its orbit, or the candidate orbits its measurements allow, each with its own detail levels and scratch
     // projection. Prepared detail levels are decoded once; each frame only selects one per orbit.
-    const drawn = contextBodyOrbits(body).map(orbit => ({ orbit,
+    // Type-only imports keep this module free of a cycle with the context that mounts it, so its constants stay defined.
+    const orbits = 'orbit' in body && (body as PreparedContextBody).orbit
+      ? [(body as PreparedContextBody).orbit!, ...((body as PreparedContextBody).additionalOrbits ?? [])] : [];
+    const drawn = orbits.map(orbit => ({ orbit,
       levels: [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
         ...(orbit.lod?.levels ?? []).map(level => ({ vertices: level.vertexIndices.map(index => orbit.verticesM[index]!),
           trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))],
