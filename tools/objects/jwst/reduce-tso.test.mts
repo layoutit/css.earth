@@ -21,6 +21,9 @@ test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its cont
     assert.doesNotMatch(text, /\/Users\//u, `${template} carries no local path`);
     assert.match(text, /^topdir\s+WORK_DIRECTORY\//mu);
   }
+  // The slices WASP-43b's lenses fit: bounds from the program's own file, over the range the maps hold up in.
+  assert.equal(await readFile(resolve(program, 'slices.txt'), 'utf8'), '5.0 6.5\n6.5 8.5\n8.5 10.5\n');
+  assert.match(await readFile(resolve(program, pinned.stages.S4slices!), 'utf8'), /^wave_input\s+PROGRAM_DIRECTORY\/slices\.txt/mu);
   // One worker: two Stage 1 processes or a multi-core ramp fit would not fit in memory.
   assert.match(await readFile(resolve(program, pinned.stages.S1), 'utf8'), /^maximum_cores\s+'none'/mu);
 });
