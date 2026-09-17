@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** One command from a star's public raw interferometry to a verdict on its surface image.
  *
- *   node tools/objects/interferometry/image-star.mts <season directory> <work directory> [--raw <directory>]
+ *   node tools/objects/interferometry/image-star.mts <season directory> <work directory> [--raw <directory>] [--calibrated <oifits> ...]
  *
  * A season (tools/objects/interferometry/seasons/<id>/season.json) pins what an image is made from: the instrument, the target's
  * archive name, the observing windows or exposures, a reference diameter with its source, the selection, the reconstruction recipe,
@@ -13,8 +13,8 @@
  * 2. Select. Every calibrated file concatenated (oifits-concat.mts), then the season's wavelength windows and error floors
  *    (oifits-select.mts).
  * 3. Size. A uniform disc fitted around the reference diameter (disc-fit.mts): the start image, the spotless twins' size and the beam.
- * 4. Twins. The two interleaved halves of the data, and a spotless limb-darkened disc on the sampling and errors of the whole
- *    season and of each half (spotless-disc.mts).
+ * 4. Twins. The two interleaved halves of the data, a spotless limb-darkened disc on the season's sampling and errors
+ *    (spotless-disc.mts), and the same two halves of that disc.
  * 5. Reconstruct. SQUEEZE with the season's recipe on the season, its halves and their three spotless twins: six runs, one at a time.
  * 6. Check. The fit SQUEEZE reports, the spot ratio against the spotless twin, and the correlation of the halves once each half's
  *    twin is subtracted, combined by reconstructionVerdict into cast or not cast with the reasons.
@@ -24,7 +24,7 @@
  * Nights calibrate into <work>/nights/<date>. The result is verdict.json in the work directory. */
 import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { imageCorrelation, matchVis2, vis2Agreement } from './author-comparison.mts';
@@ -103,19 +103,19 @@ const repository = resolve(import.meta.dirname, '../../..');
 
 interface Progress { calibrated: Record<string, string[]>; runs: Record<string, SqueezeFit & { seconds: number; inputs: string }> }
 
-export async function imageStar(seasonDirectory: string, work: string, rawDirectory: string) {
+export async function imageStar(seasonDirectory: string, work: string, rawDirectory: string, { calibrated }: { calibrated?: readonly string[] } = {}) {
   const season = parseSeason(JSON.parse(await readFile(resolve(seasonDirectory, 'season.json'), 'utf8')) as unknown);
   await mkdir(work, { recursive: true });
   const progressPath = resolve(work, 'progress.json');
   const progress = await readFile(progressPath, 'utf8').then(text => JSON.parse(text) as Progress, () => ({ calibrated: {}, runs: {} }) as Progress);
   const save = () => writeFile(progressPath, `${JSON.stringify(progress, null, 2)}\n`);
 
-  // 1. Calibrate.
+  // 1. Calibrate, unless calibrated files are given (an author's, to check stages 2 to 7 on their own).
   const seasonData = season.data;
   const units = 'exposures' in seasonData
     ? seasonData.exposures.map(exposure => ({ key: exposure.science, exposure }))
     : seasonData.nights.map(night => ({ key: night.from.slice(0, 10), night }));
-  for (const unit of units) {
+  for (const unit of calibrated ? [] : units) {
     if (progress.calibrated[unit.key]?.length) continue;
     const directory = resolve(work, 'nights', unit.key.replaceAll(':', '-'));
     const data = season.data;
@@ -130,7 +130,8 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
   }
 
   // 2. Select.
-  const merged = concatenateOifits(await Promise.all(Object.values(progress.calibrated).flat().map(path => readFile(path))));
+  const calibratedFiles = calibrated ?? Object.values(progress.calibrated).flat();
+  const merged = concatenateOifits(await Promise.all(calibratedFiles.map(path => readFile(path))));
   const selected = selectOifits(merged.bytes, { windowsMetres: season.selection.windowsMetres, ...(season.selection.errorFloors ? { errorFloors: season.selection.errorFloors } : {}) });
   const seasonFile = resolve(work, 'season.fits');
   await writeFile(seasonFile, selected.bytes);
@@ -140,9 +141,10 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
   await writeFile(resolve(work, 'start.fits'), discStartImage(disc.diameterMas, season.recipe.pixelMas, season.recipe.width));
 
   // 4. Twins.
-  const inputs: Record<string, Buffer> = { season: selected.bytes };
-  for (const half of ['even', 'odd'] as const) inputs[half] = selectOifits(selected.bytes, { half }).bytes;
-  for (const name of ['season', 'even', 'odd']) inputs[`${name}-spotless`] = simulateSpotlessDisc(inputs[name]!, { diameterMas: disc.diameterMas, limbDarkening: season.limbDarkening }).bytes;
+  // Each half's twin is that half of the season's twin, so a point carries the same noise draw in both.
+  const spotless = simulateSpotlessDisc(selected.bytes, { diameterMas: disc.diameterMas, limbDarkening: season.limbDarkening }).bytes;
+  const inputs: Record<string, Buffer> = { season: selected.bytes, 'season-spotless': spotless };
+  for (const half of ['even', 'odd'] as const) { inputs[half] = selectOifits(selected.bytes, { half }).bytes; inputs[`${half}-spotless`] = selectOifits(spotless, { half }).bytes; }
   for (const [name, bytes] of Object.entries(inputs)) await writeFile(resolve(work, `${name}.fits`), bytes);
 
   // 5. Reconstruct, one run at a time.
@@ -172,7 +174,7 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
   }
 
   const result = {
-    season: season.id, object: season.object, calibratedFiles: Object.values(progress.calibrated).flat().length,
+    season: season.id, object: season.object, calibratedFiles: calibratedFiles.length, ...(calibrated ? { calibratedFrom: calibrated.map(path => relative(repository, path)) } : {}),
     points: { vis2: rows.vis2.length, closurePhases: rows.t3.length, raisedErrors: selected.raisedErrors },
     disc, fit: progress.runs, spots, halves, verdict, comparison,
   };
@@ -182,9 +184,9 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [seasonDirectory, work, ...rest] = process.argv.slice(2);
-  const rawIndex = rest.indexOf('--raw');
-  if (!seasonDirectory || !work) throw new TypeError('Usage: image-star <season directory> <work directory> [--raw <directory>]');
-  const result = await imageStar(resolve(seasonDirectory), resolve(work), resolve(rawIndex < 0 ? resolve(work, 'raw') : rest[rawIndex + 1]!));
+  const rawIndex = rest.indexOf('--raw'), calibrated = rest.flatMap((flag, index) => flag === '--calibrated' ? [resolve(rest[index + 1]!)] : []);
+  if (!seasonDirectory || !work) throw new TypeError('Usage: image-star <season directory> <work directory> [--raw <directory>] [--calibrated <oifits> ...]');
+  const result = await imageStar(resolve(seasonDirectory), resolve(work), resolve(rawIndex < 0 ? resolve(work, 'raw') : rest[rawIndex + 1]!), calibrated.length ? { calibrated } : {});
   console.log(result.verdict.cast ? `${result.season}: cast.` : `${result.season}: not cast, because ${result.verdict.reasons.join('; ')}.`);
   console.log(JSON.stringify({ disc: result.disc, fit: result.fit.season, spotRatio: result.spots.ratio, halves: result.halves.correlation, comparison: result.comparison }, null, 2));
 }
