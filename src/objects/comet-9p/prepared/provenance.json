@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b530eebb9d817e9af93266327168115502cddf4b69e5595f54abdacb38e18f60"
+    "sha256": "c1d65fcd552f80f89a2ea3699e71f38f260e268d6c408e6b83d3686dc82c3f9f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c4c5bfb55f0c05ac402ef8c56652a3b43fb9be332dd687e91db2b9aab89be1a3"
+    "bindingsSha256": "67d0d5c42b716381587ab03d025c4cc822ac2ca60175b162b18f0686ab93ea0f"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6470236700f8626fff7e597d1e37ec405b216f95522684749b32ce4e0a78fc4e",
+      "sha256": "eb6d9b6b402910c6594483a001a473b2b95300a61bd0a5db1cb45bb1f656922f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -325,8 +325,7 @@
               "expectedFaces": 32040
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -379,7 +378,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "74223d189642117fdb9d4a5b2096beaf4b1a460cb92d35e8fbaff9fa171f3154",
+      "sha256": "87ca0fba6f42bcdd8afab6047be7378516e2cbfc7de5a60467a7376cbe47434e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -388,19 +387,43 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Equivalent diameter",
-              "value": "5.66 ± 0.20 km"
-            },
-            {
               "id": "mission",
               "label": "Explored by",
-              "value": "Deep Impact · Stardust-NExT"
+              "value": "Deep Impact · Stardust-NExT",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
+                "label": "Tempel 1 shape model: tempel1_2012_plan.tab",
+                "checked": "2026-09-16",
+                "path": "source/reference/dataset.cat",
+                "catalogueId": "pds-tempel1-shape-2012",
+                "locator": "\"as derived from Deep Impact and Stardust NEXT images\""
+              }
             },
             {
               "id": "source-epoch",
-              "label": "Shape observations",
-              "value": "2005 and 2011"
+              "label": "Deep Impact encounter",
+              "value": "4 July 2005",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000632_001_r.lbl",
+                "label": "Comet 9P · iv05070405 9000632 001 r labelPath",
+                "checked": "2026-09-16",
+                "path": "source/photography/deep-impact/iv05070405_9000632_001_r.lbl",
+                "catalogueId": "source-comet-9p-iv05070405-9000632-001-r-labelpath",
+                "locator": "START_TIME = 2005-07-04T05:38:59.424"
+              }
+            },
+            {
+              "id": "encounter",
+              "label": "Stardust-NExT encounter",
+              "value": "15 February 2011",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30036te02_rr.lbl",
+                "label": "Comet 9P · n30036te02 rr labelPath",
+                "checked": "2026-09-16",
+                "path": "source/photography/next/n30036te02_rr.lbl",
+                "catalogueId": "source-comet-9p-n30036te02-rr-labelpath",
+                "locator": "START_TIME = 2011-02-15"
+              }
             }
           ],
           "moreFacts": []
@@ -675,14 +698,13 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "d028de321807bb901a0e1eb871b7218b973aaa7ad8782ca9245c38c6a433919a",
+      "sha256": "d2f4fe19e4f2fbc891855b4ea392aa632b095aa0a79b6d372be18b816f7c8ddf",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
         "archive": null,
         "members": null,
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "comet-9p-features.json",
         "publicBase": "/scenes/comet-9p/",
         "target": {
@@ -5321,8 +5343,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "74223d189642117fdb9d4a5b2096beaf4b1a460cb92d35e8fbaff9fa171f3154",
-      "bytes": 9856,
+      "sha256": "87ca0fba6f42bcdd8afab6047be7378516e2cbfc7de5a60467a7376cbe47434e",
+      "bytes": 11232,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -5361,8 +5383,8 @@
         "kind": "local",
         "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
       },
-      "sha256": "2aa34bfdd57c0f7f4d720f78982c0a141634cb0c2b2f2a5e1700836c7a2c2301",
-      "bytes": 155,
+      "sha256": "33bf563bcc804c2db463284b58faedf00f33d5d038416d096c81da70e9bf7d0d",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -5436,8 +5458,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-model-surface@2x.webp",
-          "bytes": 123566,
-          "sha256": "7a466f80ad638e5fd036afcd4ac728a40c484023bc7330a4ffd4e79cb7f59e1c",
+          "bytes": 154108,
+          "sha256": "bfe630d8191ad226d8521651fdce607ce85a7b4b52680b4462cfcf7d2cbbd5eb",
           "verification": "bytes-verified"
         }
       ],
@@ -5490,8 +5512,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-constraints-surface@2x.webp",
-          "bytes": 137110,
-          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb",
+          "bytes": 169022,
+          "sha256": "23044f977d2ee3a8030296a132062871d7406b408509e442f61d3a78bb0e47ca",
           "verification": "bytes-verified"
         }
       ],
@@ -5632,8 +5654,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-temperature-surface@2x.webp",
-          "bytes": 364910,
-          "sha256": "f0bbff270c044ed4a30a070b0e84c3005c3f525a5ff03e8ff35bb81e54150121",
+          "bytes": 306736,
+          "sha256": "cabf568c62597d7d2664afd0f164187ebacec3b9a5ecdd1469cda2257e198e55",
           "verification": "bytes-verified"
         }
       ],
@@ -5769,8 +5791,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-spectral-slope-surface@2x.webp",
-          "bytes": 365060,
-          "sha256": "5b2ee61ebeae0ccb11df9e8306b96b9595a847ef1a2c1db683ae3e24ca4f9d7e",
+          "bytes": 306864,
+          "sha256": "f8615e6288cfe44f995fa447f1f8d714c45ed1a441a09eac5d169db1392c3b35",
           "verification": "bytes-verified"
         }
       ],
@@ -5837,8 +5859,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-deep-impact-surface@2x.webp",
-          "bytes": 216926,
-          "sha256": "ce22099b4b2bce6ba56c53b8d596a8669d5a31347cfb5a2356bb4b5c9041ace5",
+          "bytes": 235088,
+          "sha256": "d6194da7c1e6df2a973d5b2b9653e04ce196ed7a9defe1efc7f821dae38f3d9d",
           "verification": "bytes-verified"
         }
       ],
@@ -5899,8 +5921,8 @@
         },
         {
           "url": "/scenes/comet-9p/comet-9p-next-surface@2x.webp",
-          "bytes": 285560,
-          "sha256": "9356088811031230c652e681be1a3e2c1b7cde1a31f20b8a46a09d9f1c66d618",
+          "bytes": 289442,
+          "sha256": "526a2c95a3bdcf4485ea2488bc45677ee2e92f8549ca4418890be29233ff05a5",
           "verification": "bytes-verified"
         }
       ],
@@ -5932,8 +5954,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5223,
-          "sha256": "13c6373adabed30d7b86cf639a1a854d285675250bde904637295162f566e2b1",
+          "bytes": 6326,
+          "sha256": "313c8f7e7eab615523193432909d243fea23294afac1a3660753c6400b422386",
           "verification": "bytes-verified"
         }
       ],
@@ -5954,7 +5976,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {}
       },
       "inputs": [
@@ -6104,11 +6125,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-9p",
-    "materialSha256": "d8f392c0270ad877a5cbbd3e9218e067a7c0e3119edb6f65994758c548790ac1",
+    "materialSha256": "7661fd871b889b245d1612b1ed84f9fa971153ba96affec9ecdc32bb842825b3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c4c5bfb55f0c05ac402ef8c56652a3b43fb9be332dd687e91db2b9aab89be1a3"
+      "bindingsSha256": "67d0d5c42b716381587ab03d025c4cc822ac2ca60175b162b18f0686ab93ea0f"
     }
   }
 }

@@ -1,0 +1,221 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-43b",
+  "displayName": "WASP-43b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.03 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-2406-10207",
+          "url": "https://arxiv.org/abs/2406.10207",
+          "label": "Challener et al. (2024), Table 1",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "19.5 hours",
+        "source": {
+          "catalogueId": "arxiv-2406-10207",
+          "url": "https://arxiv.org/abs/2406.10207",
+          "label": "Challener et al. (2024), Table 1",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance-from-star",
+        "label": "Distance from its star",
+        "value": "0.015 AU",
+        "source": {
+          "catalogueId": "arxiv-2406-10207",
+          "url": "https://arxiv.org/abs/2406.10207",
+          "label": "Challener et al. (2024), Table 1",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisKm; semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "hottest",
+        "label": "Hottest point",
+        "value": "About 2,000 K, just east of noon",
+        "source": {
+          "catalogueId": "zenodo-12627524",
+          "url": "https://zenodo.org/records/12627524",
+          "label": "Challener et al. (2024) deposited map",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "locator": "temperature"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "temperature",
+    "controls": [
+      {
+        "id": "temperature",
+        "label": "NIRSpec",
+        "qualification": "Published map · Challener et al. 2024 · JWST NIRSpec 2.9–5.2 µm, 2023",
+        "thumbnail": "wasp-43b-lens-temperature.webp",
+        "surface": "wasp-43b-surface-temperature.webp",
+        "poles": "wasp-43b-poles-temperature.webp",
+        "source": {
+          "id": "wasp-43b-challener-2024-deposit",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/12627524"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "700",
+            "1350",
+            "2000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "700",
+              "1350",
+              "2000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/12627524"
+        },
+        "notes": "Brightness temperature fitted to JWST light curves; large patterns only. The hot spot sits about 7° east of noon and south of the equator; how far south depends on the model, 4° to 16°."
+      },
+      {
+        "id": "miri",
+        "label": "MIRI",
+        "qualification": "Reduced here from raw JWST exposures · MIRI 5–10.5 µm, 2022",
+        "thumbnail": "wasp-43b-lens-miri.webp",
+        "surface": "wasp-43b-surface-miri.webp",
+        "poles": "wasp-43b-poles-miri.webp",
+        "source": {
+          "id": "wasp-43b-miri-white",
+          "path": "../manifest.json",
+          "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "700",
+            "1350",
+            "2000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "700",
+              "1350",
+              "2000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
+        },
+        "notes": "Dayside and nightside agree with Bell et al. (2024). The hot spot sits about 6° east of noon; published analyses of the same data place it up to 7.5° east."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Challener et al. (2024), ApJL 969, L32",
+      "href": "https://arxiv.org/abs/2406.10207"
+    },
+    {
+      "label": "Data",
+      "role": "dataset",
+      "description": "Maps and light curves, Zenodo",
+      "href": "https://zenodo.org/records/12627524"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2406.10207",
+      "credit": "Challener et al. (2024), ApJL 969, L32"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-43b.json",
+      "credit": "Transit-fitted radius and orbit around WASP-43; assumed synchronous rotation"
+    }
+  }
+}

@@ -258,8 +258,8 @@
     {
       "id": "mars-object-content",
       "path": "content/object.json",
-      "expectedSha256": "6fd63aac032545b77aefa9005667483f465b3e6c5363b6fb023054d942d8007a",
-      "expectedBytes": 14006,
+      "expectedSha256": "8a6fce4bbfbf89eae188618e42674be4e65ce7c0ce7b1e2b35ec805218123e95",
+      "expectedBytes": 13694,
       "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -452,8 +452,8 @@
     {
       "id": "mars-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1299,
-      "expectedSha256": "945f147e0b32b66861c9bdb643b9c15bfca032e49893286b4ae746e7f8c00ff1",
+      "expectedBytes": 1265,
+      "expectedSha256": "63517838c7d331f0d607729429f1900b841d704489dff3ecad38493c12451397",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -470,8 +470,8 @@
     {
       "id": "mars-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 151,
-      "expectedSha256": "395ac1d7241546d565cf84ca7b7a103454faaf9cea88270afb940057ab3029c3",
+      "expectedBytes": 185,
+      "expectedSha256": "1ddacfc53e5a5eef26ee98270502ac5ac628cb1a3c3b3349f89a52a0552dc079",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

@@ -1432,8 +1432,8 @@
     {
       "id": "miranda-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1167,
-      "expectedSha256": "07c55d3158c4a9cb0270d29ebb8e88e534c5c40b272c09fbcab6009b65f7489f",
+      "expectedBytes": 1133,
+      "expectedSha256": "6250b77efb266e10b59bc0e0bcd9ea71c2bbe9431c6ea7d0affb72158c5568bb",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1450,8 +1450,8 @@
     {
       "id": "miranda-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "6c31c6d7afd537b7e6e13475b1268b018ac9e6698013c0d48e23a3ef0bb0cfc3",
+      "expectedBytes": 188,
+      "expectedSha256": "9f27edddd46d4579044bc75438c6ae304e8b9b33f269f93f0f25ae0cfc91d399",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -1629,8 +1629,8 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14315,
-      "expectedSha256": "f2d6770e839b64b516a60904a1a74b36cf85c7da4b789078a57acfd13e7dd291",
+      "expectedBytes": 14780,
+      "expectedSha256": "66426cbd8bfe0ad85a822e56875006e80477442e028a91ba2a7359af88c383d5",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1663,8 +1663,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1076,
-      "expectedSha256": "743047fa1d0f2f78dc53450faf349ffaddfa004b8a683f7325c20888a6d970ea"
+      "expectedBytes": 2317,
+      "expectedSha256": "1e2ef8e8ef816eb4cfc7b6c50d9cba54740061ac74867252d8a9797f6c8b6d97"
     },
     {
       "path": "preparation/geology-conversion.json",

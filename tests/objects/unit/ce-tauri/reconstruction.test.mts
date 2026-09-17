@@ -11,6 +11,7 @@ import { resolve } from 'node:path';
 import { readReconstruction } from '../../../../tools/objects/interferometry/beam-convolve.mts';
 import { concatenateOifits } from '../../../../tools/objects/interferometry/oifits-concat.mts';
 import { fitChannels, readChannelRows } from '../../../../tools/objects/interferometry/oifits-rows.mts';
+import { reconstructionPlane } from '../../../../tools/objects/interferometry/image-fit.mts';
 
 const SOURCE = resolve(import.meta.dirname, '../../../../src/objects/ce-tauri/source');
 const OIFITS = resolve(SOURCE, 'observations/oifits');
@@ -21,15 +22,14 @@ const nights = async (prefix: string) => {
 };
 const image = async (name: string) => {
   const fits = readReconstruction(await readFile(resolve(SOURCE, `observations/${name}.fit`)));
-  const pixelMas = Math.abs(Number(fits.cards.find(([key]) => key === 'CDELT1')?.[1]));
-  return { fits, pixelMas };
+  return { fits, pixelMas: fits.axes.scale[0] };
 };
 
 test('the published images are 32 by 32 pixels of 0.5 mas, east left, with unit flux', async () => {
   for (const name of ['nov_avg', 'dec_avg']) {
     const { fits, pixelMas } = await image(name);
     assert.equal(fits.width, 32); assert.equal(fits.height, 32); assert.equal(pixelMas, 0.5);
-    assert.ok(Number(fits.cards.find(([key]) => key === 'CDELT1')?.[1]) < 0, `${name}: east is on the left`);
+    assert.ok(reconstructionPlane(fits).eastLeft, `${name}: east is on the left`);
     const total = fits.values.reduce((sum, value) => sum + value, 0);
     assert.ok(Math.abs(total - 1) < 1e-6, `${name}: flux sums to one (${total})`);
   }
@@ -39,12 +39,12 @@ test('each published image fits its own epoch of the public visibilities, and on
   const november = await nights('PIONI.2016-11'), december = await nights('PIONI.2016-12-23');
   assert.equal(november.vis2.length, 276); assert.equal(december.vis2.length, 144);
   const nov = await image('nov_avg'), dec = await image('dec_avg');
-  const plane = (fits: typeof nov.fits, values: ArrayLike<number> = fits.values, eastLeft = true) => ({ width: fits.width, height: fits.height, values, pixelMas: 0.5, eastLeft });
+  const plane = (fits: typeof nov.fits, values: ArrayLike<number> = fits.values, mirror = false) => { const read = reconstructionPlane({ ...fits, values }); return { ...read, eastLeft: read.eastLeft !== mirror }; };
   const novFit = fitChannels(plane(nov.fits), november), decFit = fitChannels(plane(dec.fits), december);
   assert.ok(novFit.reducedChi2Vis2 < 20 && novFit.reducedChi2T3 < 40, `November: ${novFit.reducedChi2Vis2}, ${novFit.reducedChi2T3}`);
   assert.ok(decFit.reducedChi2Vis2 < 16 && decFit.reducedChi2T3 < 3.5, `December: ${decFit.reducedChi2Vis2}, ${decFit.reducedChi2T3}`);
   // Mirrored east-west, or turned by 180 degrees, the same image fits the closure phases several times worse.
-  const mirrored = fitChannels(plane(nov.fits, nov.fits.values, false), november);
+  const mirrored = fitChannels(plane(nov.fits, nov.fits.values, true), november);
   const turned = fitChannels(plane(nov.fits, Float64Array.from(nov.fits.values).reverse()), november);
   assert.ok(mirrored.reducedChi2T3 > 4 * novFit.reducedChi2T3, `mirrored: ${mirrored.reducedChi2T3}`);
   assert.ok(turned.reducedChi2T3 > 4 * novFit.reducedChi2T3, `turned: ${turned.reducedChi2T3}`);

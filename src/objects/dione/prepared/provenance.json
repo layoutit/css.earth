@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b2be9ee1705c9b5c05dac6bcffa2aac1a3d5101ff513c403977befeb0d3d1c7"
+    "sha256": "f865aed0a999bd7ab6a08be15b61771c1d7905f8d5dfb8c08fa37f1d113651fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "43b3e496941074b0c9da4edde30581aa75d0f91572c84cd2d3c3de01df9479aa"
+    "bindingsSha256": "edf2dce3cda8f196f47dabf1a972f6da9fa3db49bc3f41a522712e0d967fbfa6"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "94fd6def95fa54b08099b87081eb184a33022bf3a2485eed2b0491dcc3468e26",
+      "sha256": "1f3b6d3306861f6b2530b65803a47b544012393240148495c5169868c83c7459",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -375,8 +375,7 @@
               "expectedFaces": 196608
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -397,7 +396,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "837342aea6582c8597c9d22abd4bd7c7b0f5274dd5c5400a99564db34bf88e88",
+      "sha256": "9f29ac3431d84e07783849655680f79dda5b0d9b3827684e804eae033f7bd883",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -451,22 +450,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "2.74 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "2.74 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 377,400 km"
+              "value": "2.74 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Giovanni Cassini · 1684"
+              "value": "Giovanni Cassini · 1684",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -701,7 +706,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "17dec8cd07da353b0dbd4b4ed0664462264038a3da6c8e1bd6757d26bc5dee6a",
+      "sha256": "87d4bf361acc1d49ead05d9629c4ea1b58d079fa260760511af0443063f1f0af",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -712,7 +717,6 @@
           "metadata": "metadata_nomenclature_points_DIONE.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "dione-features.json",
         "publicBase": "/scenes/dione/",
         "target": {
@@ -1413,8 +1417,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "837342aea6582c8597c9d22abd4bd7c7b0f5274dd5c5400a99564db34bf88e88",
-      "bytes": 13594,
+      "sha256": "9f29ac3431d84e07783849655680f79dda5b0d9b3827684e804eae033f7bd883",
+      "bytes": 14065,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1486,8 +1490,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "604b8ba839009129405750184ca9fbcf99209450c6e5f75bd3ae62aa9dc6a180",
-      "bytes": 152,
+      "sha256": "aaa0e36549e2bc732aece2b631c93b92f37864a1eb50624157d9bf27c86fc20c",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1564,8 +1568,8 @@
         },
         {
           "url": "/scenes/dione/dione-normal-surface@2x.webp",
-          "bytes": 12038078,
-          "sha256": "f6729f8681603d812304e23cf1ee63c072e9dc4eb243824da18b4a7da48f3f76",
+          "bytes": 11699498,
+          "sha256": "7a9f7c4c32cfc9f2e2d76ce3e0b43a3731784dd92ba36173e9375b978ec3de9b",
           "verification": "bytes-verified"
         }
       ],
@@ -1622,8 +1626,8 @@
         },
         {
           "url": "/scenes/dione/dione-enhanced-surface@2x.webp",
-          "bytes": 11353038,
-          "sha256": "8ef948d87ecbbb2a1008336fe0fef175cca4bf72f2c7f53b8d293db51283a4db",
+          "bytes": 11367324,
+          "sha256": "0a9c44d31d73b6876215c3dec93c935e4f222d3fad31df916c5604dc10eec7fe",
           "verification": "bytes-verified"
         }
       ],
@@ -1679,8 +1683,8 @@
         },
         {
           "url": "/scenes/dione/dione-infrared-surface@2x.webp",
-          "bytes": 293986,
-          "sha256": "e4791d7fb224e216eaccf4d5e495712c6e1f49bbef24ae2c85a5ef3be8d047ee",
+          "bytes": 325280,
+          "sha256": "ff1addb2519369e23b7bb5acfeb7109949cc1305c9560ca9d8eff637215a9355",
           "verification": "bytes-verified"
         }
       ],
@@ -1741,8 +1745,8 @@
         },
         {
           "url": "/scenes/dione/dione-elevation-surface@2x.webp",
-          "bytes": 3711216,
-          "sha256": "2e3b5af78c3547a7c5d48e653cb2fac2fb0269758be7251c1319e9fada5a61e8",
+          "bytes": 3570348,
+          "sha256": "24c307e8ff1ca108aa3271a94d2031c80347841092b967f78cb54b782cd708bf",
           "verification": "bytes-verified"
         }
       ],
@@ -1798,8 +1802,8 @@
         },
         {
           "url": "/scenes/dione/dione-relative-albedo-surface@2x.webp",
-          "bytes": 24244394,
-          "sha256": "3e114305b06e862b66b5b9c480defa263dd040d74ac3cacffba6b71abd973b32",
+          "bytes": 25614552,
+          "sha256": "2db312f955e9b8c5a9d6eeb9548378b217436e7bc84a59d1fd58692a157be3ee",
           "verification": "bytes-verified"
         }
       ],
@@ -1850,8 +1854,8 @@
         },
         {
           "url": "/scenes/dione/dione-ice-absorption-surface@2x.webp",
-          "bytes": 198478,
-          "sha256": "94f684e773ac46c667e29b528acba20fd27dde98adbb9f6f0868b61d4124f0b0",
+          "bytes": 217396,
+          "sha256": "86d4475fa48d859f0ff566af3f60c2635d30dc276855fc920c8234af84345dd0",
           "verification": "bytes-verified"
         }
       ],
@@ -1894,8 +1898,8 @@
         },
         {
           "url": "/scenes/dione/dione-shape-surface@2x.webp",
-          "bytes": 110020,
-          "sha256": "016faa1b30ab4561fc0f20ff568b5faf37934fe355d9bbdfdbc2a2a9669eea18",
+          "bytes": 133976,
+          "sha256": "ac7258996ddf2e54cd31986ac0392c9a50490e5798cf98dc85f73c02071dc9fd",
           "verification": "bytes-verified"
         }
       ],
@@ -1927,8 +1931,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5440,
-          "sha256": "49b1e8865d5b4bea20744e889f970346ae685267faedbffa4df41131b50c517f",
+          "bytes": 5935,
+          "sha256": "7396a7f5e406485a713f407b26ef835dd9fbb888a7f1678b0c181042cede9e46",
           "verification": "bytes-verified"
         }
       ],
@@ -1949,7 +1953,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2152,11 +2155,11 @@
   },
   "lastPreparation": {
     "objectId": "dione",
-    "materialSha256": "0dd2a8a0a94c864efc6bb8219034b1c7b96b004f69cf1e8abe68a1208bc21669",
+    "materialSha256": "bdbc5cae1340c201ad17266395443c6f55a084e99f7d60002a88cd0c45a7a3db",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "43b3e496941074b0c9da4edde30581aa75d0f91572c84cd2d3c3de01df9479aa"
+      "bindingsSha256": "edf2dce3cda8f196f47dabf1a972f6da9fa3db49bc3f41a522712e0d967fbfa6"
     }
   }
 }

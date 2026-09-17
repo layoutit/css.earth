@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6752,
-      "expectedSha256": "5818479ec1c70728221013cc628029a4315cc798a2028691ecc940823899ec12",
+      "expectedBytes": 6962,
+      "expectedSha256": "64cc3b81d3a41ab130bb3ff748f3d971e8240d3fdd58e4ab28c4b4aa4062537b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -118,8 +118,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2847,
-      "expectedSha256": "df55dd94d1dcd5a5a0e49b3948a5191cf943e493f6db6c7fe3b4bb89adca9f9a"
+      "expectedBytes": 2828,
+      "expectedSha256": "5f2eef3f1e5a96106ec609808b912e92ab8af0e8453d7ceab9a01e9e5346b6c6"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1827,
       "expectedSha256": "8a9b1dd5b6c4c8377370f3afbace291a4a1bd1312c2418070eaa35c1ad9a852b"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4078,
+      "expectedSha256": "779763e62104094dd45a9395aa4cbaf91527aba440ff97ebb13a0590b428f6b0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Thule: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

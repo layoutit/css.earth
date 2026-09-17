@@ -43,6 +43,8 @@ export async function readAuthoredRotation(directory: string, reference: { path:
     return { poleRightAscensionRad: ra * rad, poleDeclinationRad: dec * rad,
       primeMeridianRad: ((w % 360 + 360) % 360) * rad, spinRateRadPerDay: rate * rad };
   }
+  if (source.schema === 'cssearth-synchronous-rotation@1') return synchronousRotation(directory, source, epochJdTt);
+  if (source.schema === 'cssearth-orbit-aligned-pole@1') return orbitAlignedPole(directory, source, epochJdTt);
   const observed = source.schema === 'cssearth-observed-pole@1';
   const rightAscension = requireFiniteNumber(source.rightAscensionDegrees), declination = requireFiniteNumber(source.declinationDegrees), meridian = requireFiniteNumber(source.displayMeridianDegrees);
   const periodHours = observed ? requireFiniteNumber(source.periodHours) : 0;
@@ -56,4 +58,59 @@ export async function readAuthoredRotation(directory: string, reference: { path:
     poleDeclinationRad: declination * rad,
     primeMeridianRad: meridian * rad,
     spinRateRadPerDay: observed ? 2 * Math.PI * 24 / periodHours : 0 };
+}
+
+/** A planet on a hosted orbit that keeps one face toward its star: the pole is the orbit normal (prograde spin), longitude 0 is
+ * the sub-host point at the epoch, and the spin rate is the orbital rate. Everything follows from the planet's hosted orbit
+ * record; the source only states the assumption and its qualification. */
+async function synchronousRotation(directory: string, source: Record<string, unknown>, epochJdTt: number): Promise<RotationElements> {
+  const { id } = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'Object descriptor');
+  if (typeof id !== 'string' || typeof source.source !== 'string' || !source.source.trim() || typeof source.qualification !== 'string' || !source.qualification.trim() ||
+      typeof source.coordinateSystem !== 'string' || !source.coordinateSystem.trim()) throw new TypeError('Invalid synchronous rotation source.');
+  const { HOSTED_PLANET_IDS, hostedOrbit, hostedPlanetStateRelativeKm } = await import('@cssearth/astronomy');
+  if (!(HOSTED_PLANET_IDS as readonly string[]).includes(id)) throw new TypeError(`Synchronous rotation needs a hosted orbit: ${id}.`);
+  const planet = id as (typeof HOSTED_PLANET_IDS)[number], { positionKm: r, velocityKmPerDay: v, hostId } = hostedPlanetStateRelativeKm(planet, epochJdTt);
+  if (source.host !== hostId) throw new TypeError(`Synchronous rotation host ${String(source.host)} is not the orbit's host ${hostId}.`);
+  return synchronousRotationElements(r, v, hostedOrbit(planet).periodDays);
+}
+
+/** IAU-style elements for a body whose +X faces the centre it orbits and whose +Z is its orbit normal. W is measured from the
+ * ascending node of the body equator on the ICRF equator, as `bodyFixedToIcrf` expects. */
+export function synchronousRotationElements(positionKm: readonly number[], velocityKmPerDay: readonly number[], periodDays: number): RotationElements {
+  const unit = (v: readonly number[]) => { const n = Math.hypot(...v); if (!(n > 0)) throw new RangeError('Direction has no magnitude.'); return v.map(c => c / n); };
+  const cross = (a: readonly number[], b: readonly number[]) => [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
+  const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
+  const pole = unit(cross(positionKm, velocityKmPerDay)), toHost = unit(positionKm.map(c => -c));
+  const node = unit([-pole[1]!, pole[0]!, 0]);
+  const w = Math.atan2(dot(pole, cross(node, toHost)), dot(node, toHost));
+  return { poleRightAscensionRad: Math.atan2(pole[1]!, pole[0]!), poleDeclinationRad: Math.asin(Math.max(-1, Math.min(1, pole[2]!))),
+    primeMeridianRad: (w + 2 * Math.PI) % (2 * Math.PI), spinRateRadPerDay: 2 * Math.PI / periodDays };
+}
+
+/** A star whose spin axis is measured to lie along a transiting planet's orbit normal (a Rossiter-McLaughlin sky-projected obliquity
+ * consistent with zero): the pole is that orbit's normal, with no spin, because no rotation period is measured; longitude 0 faces the
+ * Sun at the epoch, a display phase. The orbit is the one owner of the direction; the source cites the measurement. */
+async function orbitAlignedPole(directory: string, source: Record<string, unknown>, epochJdTt: number): Promise<RotationElements> {
+  const { id } = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'Object descriptor');
+  const obliquity = requireRecord(source.projectedObliquity, 'projectedObliquity');
+  const degrees = requireFiniteNumber(obliquity.degrees), uncertainty = requireFiniteNumber(obliquity.uncertaintyDegrees);
+  if (typeof id !== 'string' || typeof source.planet !== 'string' || source.phase !== 'arbitrary-display-phase' ||
+      typeof source.source !== 'string' || !source.source.trim() || typeof source.qualification !== 'string' || !source.qualification.trim() ||
+      typeof source.coordinateSystem !== 'string' || !source.coordinateSystem.trim() || typeof obliquity.source !== 'string' || !obliquity.source.trim()) {
+    throw new TypeError('Invalid orbit-aligned pole source.');
+  }
+  // Aligned means consistent with zero: the measurement must allow it within twice its uncertainty.
+  if (!(uncertainty > 0) || Math.abs(degrees) > 2 * uncertainty) throw new TypeError(`A projected obliquity of ${degrees} ± ${uncertainty} degrees is not aligned.`);
+  const { HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, starStateKm } = await import('@cssearth/astronomy');
+  if (!(HOSTED_PLANET_IDS as readonly string[]).includes(source.planet)) throw new TypeError(`An orbit-aligned pole needs a hosted planet: ${source.planet}.`);
+  const { positionKm: r, velocityKmPerDay: v, hostId } = hostedPlanetStateRelativeKm(source.planet as (typeof HOSTED_PLANET_IDS)[number], epochJdTt);
+  if (hostId !== id) throw new TypeError(`${source.planet} orbits ${hostId}, not ${id}.`);
+  const star = starStateKm(id as Parameters<typeof starStateKm>[0], epochJdTt).positionKm, toSun = star.map(c => -c);
+  // +Z on the orbit normal (prograde), +X toward the Sun: W from the ascending node of the equator on the ICRF equator.
+  const unit = (x: readonly number[]) => { const n = Math.hypot(...x); return x.map(c => c / n); };
+  const pole = unit([r[1]! * v[2]! - r[2]! * v[1]!, r[2]! * v[0]! - r[0]! * v[2]!, r[0]! * v[1]! - r[1]! * v[0]!]), sun = unit(toSun);
+  const node = unit([-pole[1]!, pole[0]!, 0]), cross = [node[1]! * sun[2]! - node[2]! * sun[1]!, node[2]! * sun[0]! - node[0]! * sun[2]!, node[0]! * sun[1]! - node[1]! * sun[0]!];
+  const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
+  return { poleRightAscensionRad: Math.atan2(pole[1]!, pole[0]!), poleDeclinationRad: Math.asin(Math.max(-1, Math.min(1, pole[2]!))),
+    primeMeridianRad: (Math.atan2(dot(pole, cross), dot(node, sun)) + 2 * Math.PI) % (2 * Math.PI), spinRateRadPerDay: 0 };
 }

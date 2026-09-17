@@ -392,8 +392,8 @@
     {
       "id": "steins-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1125,
-      "expectedSha256": "f2bdf5f88e50b1df5c73af5515dd22987c27a0ae7f4cef29098ca41b6f779abf",
+      "expectedBytes": 1093,
+      "expectedSha256": "3cfff761abb3af25442e399417e37f29d378e07f66d3c28cbfd4e14be97b9321",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -410,8 +410,8 @@
     {
       "id": "steins-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "d3f502433696ef6dfb39d4070fc32ebe84d266034f2857e3d0221508152daf8a",
+      "expectedBytes": 185,
+      "expectedSha256": "f955c4a50a3ea62431e26a4daf17f18faf92b02eec6bfc7a521fcd01d608b64f",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -457,8 +457,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10227,
-      "expectedSha256": "75df04b1626556d38de0228283f6701badfd2a9319affa6f524f303d396253e2",
+      "expectedBytes": 10453,
+      "expectedSha256": "bccae6cc1a939c271c04b0434d1b94154508afe676a434d0882cdaf990760121",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -481,8 +481,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4855,
-      "expectedSha256": "061b4c17d1a064df5ce576e00c334d5c97c60307eb6f4eccaec91ed322c702f3"
+      "expectedBytes": 4836,
+      "expectedSha256": "129f73538d9dbdadeacc188dcf3ca777e9611d0760bf0e296786f7909dfcf63a"
     },
     {
       "path": "presentation/title-mark.json",
@@ -580,6 +580,21 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4168,
+      "expectedSha256": "bb9ced7ef19b5eb594d763695fb7b7f15749edfb172c4e667cb899c0e5ef7fae",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Steins: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
       }
     }
   ]

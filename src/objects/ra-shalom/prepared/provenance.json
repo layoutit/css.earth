@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8fff0d078ded534d84a45ddaeaaf2ad01447488caaf8ba65a81df3e5af0eac35"
+    "sha256": "903d20d96585574ccebd5c1ca366c3bcda2b4a39e2be8fdbbd19d9ccd14eb9f7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "71c2fba631dff1538371dea5537d451040e0a2ca9e4c05b7623892326295a52c",
+      "sha256": "598c62ded5631dc6f16f098ff483ae304960012e7a443e7edad4f4508adcd26a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -140,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2f4e4260ccf4d426bc8b9bd6956183c73e680b4697fd5be695f493cf18fa24e1",
+      "sha256": "426cf8e0649811e5dcc7f10e2478107507f5427e6dcf5f2d36a986d3c5f8156c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -207,7 +206,15 @@
             {
               "id": "rotation-period",
               "label": "Model rotation period",
-              "value": "19.793 ± 0.001 hours (model)"
+              "value": "19.793 ± 0.001 hours (model)",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/2100_RaShalom/shepard.etal.2008.rashalom.pdf",
+                "label": "Ra Shalom · ra shalom research rashalom",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-ra-shalom-ra-shalom-research-rashalom",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -373,8 +380,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2f4e4260ccf4d426bc8b9bd6956183c73e680b4697fd5be695f493cf18fa24e1",
-      "bytes": 11383,
+      "sha256": "426cf8e0649811e5dcc7f10e2478107507f5427e6dcf5f2d36a986d3c5f8156c",
+      "bytes": 11782,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -418,8 +425,8 @@
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-elevation-surface@2x.webp",
-          "bytes": 413586,
-          "sha256": "b780582b6d2ebf3fcebb86e5e978115e8c16af47f6f00c40370e50cefb03586b",
+          "bytes": 456482,
+          "sha256": "4ad1ad38c75bd0e01ce778d3b271ec074048f07e41f90458cace24852c71657c",
           "verification": "bytes-verified"
         }
       ],
@@ -462,8 +469,8 @@
         },
         {
           "url": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
-          "bytes": 64402,
-          "sha256": "f533696027baa057fc5d3bfbc2e10a7702fd41dc71cb3765357960415e9f3ffa",
+          "bytes": 81768,
+          "sha256": "13722084172e862cf8c5422d76a84d25fdad0a08871f6f0c0ed1dbf3e4e9f2df",
           "verification": "bytes-verified"
         }
       ],
@@ -495,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8321,
-          "sha256": "2a5717051ab92a4669f21d3f6e3d9d24c1a71a519c79be9c72b9ecc756f8082e",
+          "bytes": 8629,
+          "sha256": "f034df4669b4f9d5c86e3b67d34ad409a3291ebd5866a7ef39cd22cb5508a219",
           "verification": "bytes-verified"
         }
       ],
@@ -559,7 +566,7 @@
   },
   "lastPreparation": {
     "objectId": "ra-shalom",
-    "materialSha256": "6666e62d5dc05b2a6b6082ef2fa80ed12ca0de3cfc38b872eacce1a40699f6a8",
+    "materialSha256": "40141c9fd2a566e44edb27ff317b4ec23c887bd51ec1d11701330073032b3e9e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

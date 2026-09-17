@@ -406,8 +406,8 @@
     {
       "id": "lutetia-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1163,
-      "expectedSha256": "a4eaa26f71b3e4d11f0874914e4c0a01438192ab3cd5f512846fbf041fe16ae7",
+      "expectedBytes": 1131,
+      "expectedSha256": "67782cd888a9dd9598f18e5930ee1eb2b66bc8bddc7f9a3c5d5a14947b1063fe",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -424,8 +424,8 @@
     {
       "id": "lutetia-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
+      "expectedBytes": 186,
+      "expectedSha256": "da809d2bfa984eb93147410d9f6717332c5d552f09706bcada96d6a361eeeead",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -530,8 +530,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9764,
-      "expectedSha256": "ec1541b8a1b0cc462fbbcf3f8106ad4a7cde153a60b21914d4065f5d65058c15",
+      "expectedBytes": 9412,
+      "expectedSha256": "e17d3cdf156fe36153e55e06780afd61fde6e5cd74ae9015f26a8f3fdda377fb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -554,8 +554,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5176,
-      "expectedSha256": "8b8067366179ab05c93720b4d482a640d10cd7b75f165134ced01849fcec98ba"
+      "expectedBytes": 5157,
+      "expectedSha256": "40c8bbb118f93df645b4d9c472259d839c674909dc4d636ce094ca597dbbeb20"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -664,6 +664,21 @@
       "origin": "https://doi.org/10.1016/j.icarus.2015.11.023",
       "credit": "Published Hapke parameters: Hasselmann et al. (2016), doi:10.1016/j.icarus.2015.11.023. Selection and transcription: cssEarth.",
       "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6805,
+      "expectedSha256": "c74413b363edf07ac903341f4576ad3a88506bd59000701cdcf71181766a5bec",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Lutetia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

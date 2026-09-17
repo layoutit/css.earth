@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d8aa16b4d67706e540cbf41606801e7abaf56f53c62166f87d48cc09558f256b"
+    "sha256": "5b355574271ea5b0a8fa71f337e0c8a9d1206b299ad5ae165822d79f7e144e28"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e3de40fafe1a70b7a73e6015d8a1ff4991e05c3536b6ec6f403aa413d722a517",
+      "sha256": "ba9125e3b8fdb28a140a4dd469eb70bdfef35e290157d4c9363db613ab60fe78",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8.177665775471475,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c3506a2ea179a13e509d2c1236468f177d8ccdf9314632136dc799f22ebd9fb3",
+      "sha256": "73612dc552967fed4553803ca3a5574fe0217218fcb9c849ca639b0e4872a43e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,32 +113,41 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "0.33 ± 0.06 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Measured dimensions",
-              "value": "1.4 × 0.5 × 0.4 km"
+              "value": "0.33 ± 0.06 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1912.09192",
+                "label": "Research publication · arXiv 1912.09192",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1912-09192",
+                "locator": "/referenceRadiusKm"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Distance from Saturn",
-              "value": "About 167,500 km"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbit around Saturn",
-              "value": "About 19.3 hours"
+              "value": "About 167,500 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery images",
-              "value": "Cassini imaging team · 2008"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Analytic ellipsoid approximating measured axes, not the detailed shape solution"
+              "value": "Cassini imaging team · 2008",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/1; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -304,8 +312,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c3506a2ea179a13e509d2c1236468f177d8ccdf9314632136dc799f22ebd9fb3",
-      "bytes": 2826,
+      "sha256": "73612dc552967fed4553803ca3a5574fe0217218fcb9c849ca639b0e4872a43e",
+      "bytes": 3446,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,8 +356,8 @@
         },
         {
           "url": "/scenes/aegaeon/aegaeon-model-surface@2x.webp",
-          "bytes": 47964,
-          "sha256": "7fb842d74ddc19a298d13029f58bd334bf4a3c12bdfaad178352540082426295",
+          "bytes": 56472,
+          "sha256": "c3970cf9d471f493b4686044800f1ade5afb910ef5da4138923768aef6c40d40",
           "verification": "bytes-verified"
         }
       ],
@@ -386,8 +394,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6413,
-          "sha256": "cc3b4b8c62d900af7dc04fc35350eadc8093b91e24fb4ab640ad60f761ad17c9",
+          "bytes": 6892,
+          "sha256": "2932b5d58211bdecc0016d793a25d177375dd6d6af817dd1868b8a4508e1148b",
           "verification": "bytes-verified"
         }
       ],
@@ -425,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "aegaeon",
-    "materialSha256": "b02deeefec6e5c8c549125ba92f80f423a1757899e98fba937af9d3a2ea0bd34",
+    "materialSha256": "06a01d062502349c069058fe3fc2d3cd2b69e51d6ef9dc324eae18c59ed8ae31",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

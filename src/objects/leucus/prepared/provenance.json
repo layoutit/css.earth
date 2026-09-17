@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0cde017d26e4d8f7652debcd621e0a372c95badaac6312b9a4c7bad0ffc2d265"
+    "sha256": "da5c0593ee590bb8fc58794bf88f2b1e6cde46464ba077ff542eee0d0cd0a5e1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cbacabeb94f2ed0dda7894be2e68df4f487cf92e0cee8be0a7913edd3c881efa",
+      "sha256": "e28ae929b05509f0ca7dd0b860c681329b86fadf7d47688f073cfd1552cd0326",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 505.38039502517836,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0b09598023876fd4f8b77c7c8f9f54c26585402a7e5aa621fe7a2f805ed228af",
+      "sha256": "591b1cabd71c95aac91bf525ed86442868dd92343d6a305e91bd8571dca5d0d7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +111,43 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Full approximation dimensions",
-              "value": "60.8 × 39.1 × 27.8 km"
+              "value": "60.8 × 39.1 × 27.8 km",
+              "source": {
+                "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+                "label": "Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-psj-abb942",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "445.683 ± 0.007 h"
+              "value": "445.683 ± 0.007 h",
+              "source": {
+                "url": "https://elib.dlr.de/139387/1/Mottola_2020_Planet._Sci._J._1_73.pdf",
+                "label": "Convex Shape and Rotation Model of Lucy Target (11351) Leucus from Lightcurves and Occultations",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-psj-abb942",
+                "locator": "/spin/periodHours"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Jupiter Trojan"
+              "value": "Jupiter Trojan",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=11351",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -293,8 +311,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0b09598023876fd4f8b77c7c8f9f54c26585402a7e5aa621fe7a2f805ed228af",
-      "bytes": 2675,
+      "sha256": "591b1cabd71c95aac91bf525ed86442868dd92343d6a305e91bd8571dca5d0d7",
+      "bytes": 3779,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -337,8 +355,8 @@
         },
         {
           "url": "/scenes/leucus/leucus-model-surface@2x.webp",
-          "bytes": 47842,
-          "sha256": "8fc5b50dc871de86ff9338b37e11232f28434f9d17f16d5c9c348204776d6628",
+          "bytes": 58256,
+          "sha256": "9d1a79ec7006d1155078332e9714fb0c0d9c721146a03dd3ff5739b7db1e54f1",
           "verification": "bytes-verified"
         }
       ],
@@ -375,8 +393,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4846,
-          "sha256": "650dd716433153a40cab5555eb6819d05d283e02bbecd7ad9464315f26a08948",
+          "bytes": 5721,
+          "sha256": "56f8890f6fa06a80b5a76e1254d12adc24f39d03584255c0e72381f447719cce",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "leucus",
-    "materialSha256": "f5eeeebb11fc3196445bc9efa45c601eaff1f5c07a0e0b33ff9a5c4894d2391c",
+    "materialSha256": "37b99500ddf7d09f0a9df74cf91c2a23650acc81ce6d567a6f459a4fd4f0070b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87dd5058015854e928daa198a48f174aafee0905a9c5ad6accbabf912e890436"
+    "sha256": "64017c19e51a6e43376075cab89cd3798e8762934fe93db68e9b855287fae317"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "05752d85d34e0ef695603f5fab3574ad95aa8bd1b3dddc449ac50ce645e92ae6",
+      "sha256": "ee5644dce81e0fdb89dd4b42448b3d558f6768e9e864be7709086892c1e17682",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 4587.18867530189,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "456c37685a4977b842c58295be74cdfe429a682dfea2a7e2d6615efb2998ec55",
+      "sha256": "dc641b88f63fb6f7ec7fa22a700d68dcc528afbf030150e8664a1d51d96205e4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,38 +111,46 @@
         "panel": {
           "facts": [
             {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Haumea"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
-            },
-            {
               "id": "dimensions",
               "label": "Full model dimensions",
-              "value": "480 × 360 × 286 km"
+              "value": "480 × 360 × 286 km",
+              "source": {
+                "url": "https://www.nature.com/articles/s41467-025-65749-1",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-hiiaka-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+              }
             },
             {
               "id": "scale",
               "label": "Size evidence",
-              "value": "370 ± 20 km · reported volume-equivalent diameter"
+              "value": "370 ± 20 km · reported volume-equivalent diameter",
+              "source": {
+                "url": "https://www.nature.com/articles/s41467-025-65749-1",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-hiiaka-model-surface",
+                "locator": "/constraints/reportedVolumeEquivalentDiameterKm/value"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation interpretation",
-              "value": "9.68 ± 0.02 h"
+              "value": "9.68 ± 0.02 h",
+              "source": {
+                "url": "https://www.nature.com/articles/s41467-025-65749-1",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-hiiaka-model-surface",
+                "locator": "/spin/periodHours"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "label": "Orbital position",
-              "value": "Retained JPL solution from older observations; limited phase accuracy.",
-              "id": "orbital-position"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -304,8 +311,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "456c37685a4977b842c58295be74cdfe429a682dfea2a7e2d6615efb2998ec55",
-      "bytes": 2897,
+      "sha256": "dc641b88f63fb6f7ec7fa22a700d68dcc528afbf030150e8664a1d51d96205e4",
+      "bytes": 3549,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,8 +355,8 @@
         },
         {
           "url": "/scenes/hiiaka/hiiaka-model-surface@2x.webp",
-          "bytes": 50996,
-          "sha256": "56f2b3de723f746906e426735eafa3b49b9a5ca809ce01139d0fbd4a4f41c24a",
+          "bytes": 59170,
+          "sha256": "13fa3a8231cff736321ad30ee429ec18ad896209d47a41a377be652eed7d39e0",
           "verification": "bytes-verified"
         }
       ],
@@ -386,8 +393,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5110,
-          "sha256": "0a410da3fde5fd23a7bc484ee7ca9dd23ca5f452812e0eb71a890710a6e55f63",
+          "bytes": 5626,
+          "sha256": "be3fa5baa86db374f8a487fdff2a6fd91b297133e6027004b1cd251a55f66fb5",
           "verification": "bytes-verified"
         }
       ],
@@ -425,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "hiiaka",
-    "materialSha256": "8904a6456158264b4fbce265e33b3c47fb6be1f5f4b186933c58a02e731a7c83",
+    "materialSha256": "efee51e15ba402c4427294871c21215e73340e442dafe10bd140607befae0ea7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

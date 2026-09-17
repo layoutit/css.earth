@@ -18,7 +18,7 @@ const output = process.env.OUTPUT ?? 'output/playwright/replacement-flight';
 const buildDirectory = process.env.BUILD_DIR ?? 'dist';
 const pairs = array(value=>{const pair=array(text)(value);assert.equal(pair.length,2);return [pair[0],pair[1]] as const;})(process.env.PAIRS ? JSON.parse(process.env.PAIRS) : [['jupiter', 'europa'], ['pluto', 'charon'], ['saturn', 'daphnis']]);
 const dprs = process.env.DPR ? [Number(process.env.DPR)] : [1, 2];
-const start = '/sun/?overview=solar-system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbkXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA';
+const start = '/sun/?overview=system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbkXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_EXECUTABLE ?? '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary' });
 const report:ReplacementReport = { browser: browser.version(), origin, results: [], errors: [] };

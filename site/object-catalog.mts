@@ -10,7 +10,7 @@ export type CatalogEntry = ObjectEntry & { order?: number; context?: CatalogCont
 function classification(value: unknown): ObjectClassification {
   switch (value) {
     case 'star': case 'planet': case 'satellite': case 'dwarf-planet':
-    case 'asteroid': case 'comet': case 'trans-neptunian': case 'interstellar': return value;
+    case 'asteroid': case 'comet': case 'trans-neptunian': case 'interstellar': case 'exoplanet': return value;
     default: throw new TypeError('Invalid catalogue classification.');
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a0a7704fa776cf1fd456897655f0b50c7a3c46488ed3d429f148b35d438517e"
+    "sha256": "72e2cbe9bbc26dbdb69cacbaf3814bcafc158e8571b4d86ce3f6bf2c16b647d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "54d5c34e64b0d55a45da560d0e52bdaba1042c6d612a0db0f6db79ab344003dd",
+      "sha256": "182d6182d3cac1d5e0a2d949d8d2d9d5a875ad94a53f3b3dfe9be00de43238aa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 10474.999999999996,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
+      "sha256": "41ece38c3667912dccfc03687f7db3191dc908c2f8573996f78aa11ffa73b6f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +111,20 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published size model; shape unresolved"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "838 × 838 × 838 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "About 5.494 days (131.86 hours); 2025 photometry supports synchronous rotation with Actaea."
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Hot classical trans-Neptunian object"
+              "value": "838 × 838 × 838 km",
+              "source": {
+                "url": "https://doi.org/10.5194/epsc-dps2025-905",
+                "label": "Research publication · DOI 10.5194/epsc-dps2025-905",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-5194-epsc-dps2025-905",
+                "locator": "/fullAxesKm/0"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -297,8 +283,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
-      "bytes": 3528,
+      "sha256": "41ece38c3667912dccfc03687f7db3191dc908c2f8573996f78aa11ffa73b6f5",
+      "bytes": 3135,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -341,8 +327,8 @@
         },
         {
           "url": "/scenes/salacia/salacia-model-surface@2x.webp",
-          "bytes": 57054,
-          "sha256": "9a3256be66c9df8da73034a3a61237ef576e0d5a1a3d2052d133165ce6a0c5f0",
+          "bytes": 62902,
+          "sha256": "8573041e8c3d3c02701838d830c2a6d6cbf337517340ab1ad06115fbaaebaaf7",
           "verification": "bytes-verified"
         }
       ],
@@ -379,8 +365,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7293,
-          "sha256": "a78656c0b4feb78047eaf1af6a740e786da4d8b6b32db2af70c418366d605dd5",
+          "bytes": 6990,
+          "sha256": "012836daaa6f470eeaa192803769f1d36a6e1d08f013f599064dcaa25573d52e",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +404,7 @@
   },
   "lastPreparation": {
     "objectId": "salacia",
-    "materialSha256": "89e3ce5d89c044d0577901db7240401ea6632fd3bb36826f0b496891ae34efb9",
+    "materialSha256": "9d2f31df9ba9201ea0a722a153f0e788c4798aa20e1d5e0aa8a6214444587c92",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

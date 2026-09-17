@@ -6,38 +6,46 @@
   "panel": {
     "facts": [
       {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Haumea"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Approximate model"
-      },
-      {
         "id": "dimensions",
         "label": "Full model dimensions",
-        "value": "480 × 360 × 286 km"
+        "value": "480 × 360 × 286 km",
+        "source": {
+          "url": "https://www.nature.com/articles/s41467-025-65749-1",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-hiiaka-model-surface",
+          "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1; /constraints/semiAxesKm/2"
+        }
       },
       {
         "id": "scale",
         "label": "Size evidence",
-        "value": "370 ± 20 km · reported volume-equivalent diameter"
+        "value": "370 ± 20 km · reported volume-equivalent diameter",
+        "source": {
+          "url": "https://www.nature.com/articles/s41467-025-65749-1",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-hiiaka-model-surface",
+          "locator": "/constraints/reportedVolumeEquivalentDiameterKm/value"
+        }
       },
       {
         "id": "rotation",
         "label": "Rotation interpretation",
-        "value": "9.68 ± 0.02 h"
+        "value": "9.68 ± 0.02 h",
+        "source": {
+          "url": "https://www.nature.com/articles/s41467-025-65749-1",
+          "label": "Shape model",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-hiiaka-model-surface",
+          "locator": "/spin/periodHours"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "label": "Orbital position",
-        "value": "Retained JPL solution from older observations; limited phase accuracy.",
-        "id": "orbital-position"
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

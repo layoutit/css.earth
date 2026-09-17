@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "996e2effe433648c66515a61b813780fe241098b87a09cf0fe1f9426852c8ea1"
+    "sha256": "fe2f1b9069ee11636bf65c5bfb243b5624257d53c8e0e55f2b30e590916cb978"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "33132a16f378ccffc6deadae76601db78057adbac2e47497fc06ceedf6f4a79e",
+      "sha256": "cb4964474ebab65166405a85b4fe4f60bcba1e29624f48dd6bd82fb63781d420",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -134,7 +133,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
+      "sha256": "eecd685e6328a45490968ddaef27b1de625d0c85a375081ec8635710e5219b2a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -145,12 +144,28 @@
             {
               "id": "dimensions",
               "label": "Model length",
-              "value": "≈9.2 km"
+              "value": "≈9.2 km",
+              "source": {
+                "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+                "label": "Research publication · DOI 10.1016/j.icarus.2005.01.012",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "doi-10-1016-j-icarus-2005-01-012",
+                "locator": "/semiaxesKm/0"
+              }
             },
             {
               "id": "rotation",
               "label": "Dominant period",
-              "value": "≈11.1 hours"
+              "value": "≈11.1 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2P",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -276,8 +291,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "21e9c1ce0e5a23958699f4747dc0461825abe9d0cb6f4be73582300df20d658f",
-      "bytes": 2512,
+      "sha256": "eecd685e6328a45490968ddaef27b1de625d0c85a375081ec8635710e5219b2a",
+      "bytes": 3199,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -315,8 +330,8 @@
         },
         {
           "url": "/scenes/comet-2p/comet-2p-model-surface@2x.webp",
-          "bytes": 45122,
-          "sha256": "fc860f900204a17ed62660d7f3994f99224966a3cc16e5117276946fbd0ec184",
+          "bytes": 57412,
+          "sha256": "eb9f8d6d737353460a22ffa28279b33264bac7f18bf170481c280ccfdffc7301",
           "verification": "bytes-verified"
         }
       ],
@@ -348,8 +363,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3390,
-          "sha256": "120aa9696e5e5f63b61d46061d887f7cd8dc9b4465446d4cba04cde7ed06186d",
+          "bytes": 3895,
+          "sha256": "98dfe0827b5fce759bb90116a9d96268b6bdef8551c72eb04c9c97962a331578",
           "verification": "bytes-verified"
         }
       ],
@@ -362,7 +377,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-2p",
-    "materialSha256": "8196f9c694f804840832e8ee7a30e935720b98db7ae5e5b29629c24e14bc867f",
+    "materialSha256": "7ab2a0915b711297c0422286540d9d8a8d2da65a237140cc6d400d180d663e89",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,0 +1,207 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/wasp-43b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "wasp-43b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswasp-43b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature",
+      "output": "wasp-43b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-43b-lens-{id}.webp",
+      "source": "science/challener-2024/wasp-43b.tar",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Temperature",
+        "format": "npy-dictionary-map",
+        "path": "science/challener-2024/wasp-43b.tar",
+        "member": "wasp-43b/maps.npy",
+        "consumer": "challener-2024-eclipse-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "values": [
+          "whitelight",
+          "tmap"
+        ],
+        "latitudes": [
+          "whitelight",
+          "lat"
+        ],
+        "longitudes": [
+          "whitelight",
+          "lon"
+        ],
+        "minimum": 700,
+        "maximum": 2000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "700",
+          "1350",
+          "2000"
+        ],
+        "description": "Brightness temperature of the whole planet, fitted to how its light changed over a full JWST orbit. Only large patterns are real.",
+        "title": "JWST NIRSpec · eclipse map",
+        "sourceUrl": "https://zenodo.org/records/12627524"
+      }
+    },
+    {
+      "id": "miri",
+      "output": "wasp-43b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-43b-lens-{id}.webp",
+      "source": "science/jwst-1366-miri/white-5.0-10.5um.csv",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "miri",
+        "label": "MIRI",
+        "format": "eclipse-map-fit",
+        "path": "science/jwst-1366-miri/white-5.0-10.5um.csv",
+        "consumer": "wasp-43b-miri-maps",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "planet": "wasp-43b",
+        "host": "wasp-43",
+        "lightCurve": {
+          "encoding": "csv",
+          "time": "time",
+          "flux": "flux",
+          "error": "err",
+          "mask": "mask",
+          "skipLeading": 780,
+          "columns": [
+            "centroid_y",
+            "psf_width_y"
+          ]
+        },
+        "fit": {
+          "degrees": [
+            2,
+            3
+          ],
+          "eigencurves": [
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "positive": true,
+          "transitExclusionPhase": 0.04,
+          "gridHeight": 90,
+          "systematics": [
+            {
+              "kind": "time"
+            },
+            {
+              "kind": "exponential-ramp",
+              "timeConstantsDays": [
+                0.005,
+                0.01,
+                0.02,
+                0.04,
+                0.08,
+                0.16
+              ]
+            },
+            {
+              "kind": "column",
+              "column": "centroid_y"
+            },
+            {
+              "kind": "column",
+              "column": "psf_width_y"
+            }
+          ],
+          "transitFromLightCurve": true
+        },
+        "band": {
+          "encoding": "count-spectrum-csv",
+          "path": "science/jwst-1366-miri/stellar-counts.csv",
+          "wavelength": "wavelength_um",
+          "counts": "counts",
+          "minimumMicrons": 5.0,
+          "maximumMicrons": 10.5
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml"
+        },
+        "minimum": 700,
+        "maximum": 2000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "700",
+          "1350",
+          "2000"
+        ],
+        "description": "Brightness temperature over 5.0–10.5 µm, fitted in this project to the JWST MIRI phase curve it reduced from raw exposures. Only large patterns are real.",
+        "title": "JWST MIRI · our map from raw data",
+        "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "wasp-43b-context-{id}{suffix}.webp",
+    "limbOutput": "wasp-43b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csswasp-43b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

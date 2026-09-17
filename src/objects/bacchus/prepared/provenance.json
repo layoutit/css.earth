@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10f67caa1c6d9ec9b543ee21950fee91442ceacfa3211a868a6deac042faa4f6"
+    "sha256": "9d6be6799ab11b27b9d73c930b900641c619bc4606afa1e7b4fae5c900d67a63"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "86b9def5cafc1faca410a4e4bc54648672f78f6260e9e36211348611b27acb57",
+      "sha256": "b7533ba100f7350e9d56e39f6e9cbda20b10340d34f844be9083e2817947c791",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 508,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -140,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d5f0b681b7b5797d1139e480658fbecb665fd5c9c980f69bc5e2a66462249a90",
+      "sha256": "46f622fe249c5b6226fec0e6ed8822d0f1da5619c641f124ebac43d008d886df",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,7 +167,15 @@
             {
               "id": "radius",
               "label": "Model equivalent radius",
-              "value": "0.315 km"
+              "value": "0.315 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
+                "label": "Bacchus · bacchus research bacchus",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-bacchus-bacchus-research-bacchus",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -199,7 +206,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "15.0 ± 0.2 hours"
+              "value": "15.0 ± 0.2 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
+                "label": "Bacchus · bacchus research bacchus",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-bacchus-bacchus-research-bacchus",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -365,8 +380,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d5f0b681b7b5797d1139e480658fbecb665fd5c9c980f69bc5e2a66462249a90",
-      "bytes": 10593,
+      "sha256": "46f622fe249c5b6226fec0e6ed8822d0f1da5619c641f124ebac43d008d886df",
+      "bytes": 11338,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -410,8 +425,8 @@
         },
         {
           "url": "/scenes/bacchus/bacchus-elevation-surface@2x.webp",
-          "bytes": 193626,
-          "sha256": "3299b57881d334649dd584e7cf168a759395337126163476c82b52cbd48a8fb4",
+          "bytes": 238496,
+          "sha256": "676f6a55acaa882c648c38eda6f9694f245c8126ef22100783120ba40201817c",
           "verification": "bytes-verified"
         }
       ],
@@ -454,8 +469,8 @@
         },
         {
           "url": "/scenes/bacchus/bacchus-shape-surface@2x.webp",
-          "bytes": 47704,
-          "sha256": "7bb245d512ca729073a36f0ec08b5bb383013495a2146ea4638214fa8ab952de",
+          "bytes": 61578,
+          "sha256": "e1a941f3b0c764924563ff25705947c3be86e5c1006f41f9e474bc403b16ca48",
           "verification": "bytes-verified"
         }
       ],
@@ -487,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7357,
-          "sha256": "fa037fe7b2b176ce9a5e13bc2e0a9f607df9820b72dbaf2c6ed5482f173f5896",
+          "bytes": 7920,
+          "sha256": "cff4d07d5308166179c5d535ec1acd0e95ab28fa92fbe04c0e05b360bb2c452c",
           "verification": "bytes-verified"
         }
       ],
@@ -551,7 +566,7 @@
   },
   "lastPreparation": {
     "objectId": "bacchus",
-    "materialSha256": "cb56ae01a5f2ab4c03fe9f2ee26858ae01ddfe1c1edbcd018b2d1e1007d22029",
+    "materialSha256": "b9e47cca823a5a34dbe329c9136d33303d852dd60e11d62f65b6bcb0278ab421",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

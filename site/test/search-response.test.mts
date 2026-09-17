@@ -21,7 +21,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
   <form class="planet-sidebar-search-card" data-search-object="saturn"><input class="planet-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="planet-sheet-handle" type="checkbox">
   <nav class="planet-object-browser" hidden>
-    <div data-galactic-overview hidden>Milky Way</div><div data-solar-system-results><section class="planet-selected-panel">Solar System introduction</section>
+    <div data-galactic-overview hidden>Milky Way</div><div data-system-results><section class="planet-selected-panel">Solar System introduction</section>
     <div class="planet-object-tabs">${['all', 'planet', 'satellite', 'nebula'].map(category => `<button data-object-tab="${category}"><span class="planet-object-tab-count"></span></button>`).join('')}</div>
     <div id="object-category-results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li><li class="planet-object-chunk"><ul class="planet-object-chunk-list">
     ${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}
@@ -79,7 +79,7 @@ test('search is a flat list across categories, including queries that name an ov
   for (const query of ['t', 'Milky Way']) {
     const document = parseHTML(await renderSearchResponse(html, new URL(`/saturn/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
     assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
-    assert.equal(document.querySelector<HTMLElement>('[data-solar-system-results] > .planet-selected-panel')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('[data-system-results] > .planet-selected-panel')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.planet-object-tabs')?.hidden, true);
     assert.equal(document.querySelector('.planet-object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
@@ -133,7 +133,7 @@ test('queries stay text, are bounded, and cannot become executable attributes or
 });
 
 test('Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function', () => {
-  const result = searchRoute(new Request(`${origin}/saturn/?q=titan&category=satellite&v=view&overview=solar-system`));
+  const result = searchRoute(new Request(`${origin}/saturn/?q=titan&category=satellite&v=view&overview=system`));
   assert.equal(result?.pathname, '/.netlify/functions/search');
   assert.equal(result?.searchParams.get('object'), 'saturn');
   assert.equal(result?.searchParams.get('category'), 'satellite');

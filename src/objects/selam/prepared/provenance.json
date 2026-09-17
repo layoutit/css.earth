@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f3a48de8fef9e35c98afab46fddea3d7502413d66d93ca3ef9e47ab3b39a13ef"
+    "sha256": "6543df0f69cdc25dc8961b68c88b979ff746222b04ee064cfff88ff3e0c4d9b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "599d697fa0ad279c0c512cb5fdbc5672567673951be96d2657c9309094855f17",
+      "sha256": "7a118173085e530dde860bc1f5d041ef85258d8fc5a3bfd504b9104bf03ca964",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 1024
             },
             "faceBudget": 1024,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -93,7 +92,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e84dd4f6ef65247b459f5fb1e4e9b49ebfb7b48f53a702321e1e2960df77c284",
+      "sha256": "de1f44439a6c2a188464687b4960a1bcafa11e5ab6c777162da0e339d37c6838",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -104,17 +103,28 @@
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Dinkinesh"
+              "value": "Dinkinesh",
+              "source": {
+                "url": "https://doi.org/10.1038/s41586-024-07378-0",
+                "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+                "checked": "2026-09-16",
+                "path": "source/orbit/published-parameters.json",
+                "catalogueId": "doi-10-1038-s41586-024-07378-0",
+                "locator": "centerBodyId: dinkinesh"
+              }
             },
             {
               "id": "size",
               "label": "Size",
-              "value": "About 520 m end to end"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Spacecraft images"
+              "value": "About 520 m end to end",
+              "source": {
+                "url": "https://doi.org/10.1038/s41586-024-07378-0",
+                "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "doi-10-1038-s41586-024-07378-0",
+                "locator": "lobes semiaxesKm: 2 × (0.12 + 0.14) km along the long axes"
+              }
             }
           ],
           "moreFacts": []
@@ -230,8 +240,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e84dd4f6ef65247b459f5fb1e4e9b49ebfb7b48f53a702321e1e2960df77c284",
-      "bytes": 2324,
+      "sha256": "de1f44439a6c2a188464687b4960a1bcafa11e5ab6c777162da0e339d37c6838",
+      "bytes": 2977,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -269,8 +279,8 @@
         },
         {
           "url": "/scenes/selam/selam-shape-surface@2x.webp",
-          "bytes": 37532,
-          "sha256": "2c50fee2496aee540de4c05c9e31546c05e57864c2c658c19deeda8acb9b7351",
+          "bytes": 55874,
+          "sha256": "88cf8afeb615d6ed1b5f73a19079e14b2e7ea66f881a1dd680509b88f5e8a8f1",
           "verification": "bytes-verified"
         }
       ],
@@ -302,8 +312,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4869,
-          "sha256": "78e5f250770018db46a1fa263277a7f965068542818e617bb2bfb99da4839703",
+          "bytes": 5384,
+          "sha256": "924f82339ab3cd31af8ce94d1798920fe2aab8f513dbbcbd71f2c00d7918fdae",
           "verification": "bytes-verified"
         }
       ],
@@ -341,7 +351,7 @@
   },
   "lastPreparation": {
     "objectId": "selam",
-    "materialSha256": "922462c2e3288f5892d7dcb202b815bba5d20bb5af4a748d250c7b8d3539166c",
+    "materialSha256": "ba8b70012a55ac34e7d2cd0fd75a9fc63268d8a66725a3d68cb5a24312a5c5c5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

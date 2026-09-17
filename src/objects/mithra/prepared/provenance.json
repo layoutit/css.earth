@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ac6314ef2f2741e0b80c3ea0c5fe289b70af6badef0a7b94b4dc084ebf913477"
+    "sha256": "52a5d46aa6275813756de02e656c23af6fbe74a0d2a82b2e70b6ffdbd66f8435"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "53effe014ecc8e2a78d090b3980efbb64a6dcf39c3408e3088fa59a7e3c97b0c",
+      "sha256": "75bb55c6b30d89db3a770013bab99cf1e55f249da226416d56ba8b24919f89bb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -140,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6075f7da5b32e7b58dba1d1919b396c99af952599093eaed82e42e3f34d5a34d",
+      "sha256": "8833d26cfc1d36c8a30b828d724558e0fac5823c2cc586aa951fbeb352bf3b66",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,7 +167,15 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.845 ± 0.025 km"
+              "value": "0.845 ± 0.025 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf",
+                "label": "Mithra · mithra research mithra",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-mithra-mithra-research-mithra",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -380,8 +387,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6075f7da5b32e7b58dba1d1919b396c99af952599093eaed82e42e3f34d5a34d",
-      "bytes": 8920,
+      "sha256": "8833d26cfc1d36c8a30b828d724558e0fac5823c2cc586aa951fbeb352bf3b66",
+      "bytes": 9299,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -425,8 +432,8 @@
         },
         {
           "url": "/scenes/mithra/mithra-elevation-surface@2x.webp",
-          "bytes": 425398,
-          "sha256": "ae9c144a0228777ae9aa9a2e425d30dab8098042fb0ad4a2b4635a88fb03c57c",
+          "bytes": 461074,
+          "sha256": "abbfe0b01e4f3ad3a93841e680d6dac05ddf173bbce986b02c88aba16c96fe83",
           "verification": "bytes-verified"
         }
       ],
@@ -469,8 +476,8 @@
         },
         {
           "url": "/scenes/mithra/mithra-shape-surface@2x.webp",
-          "bytes": 76448,
-          "sha256": "94125120bd5a29a89741d520d496d5c8d033d84e33d45b6ccfeeea824285824b",
+          "bytes": 91722,
+          "sha256": "a87e290f70d1931258e1983356e721a0acd371fa35550c6e9737c20c1a7add67",
           "verification": "bytes-verified"
         }
       ],
@@ -502,8 +509,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6122,
-          "sha256": "5a0250d20494e85480166ff07fa4912bc126f804d4b6c932f6508495cf1f6dd3",
+          "bytes": 6410,
+          "sha256": "5a36674677a5d8c97baf042f080efbfa1ff794c29c8d8a78e4fd77e2be0f7f1e",
           "verification": "bytes-verified"
         }
       ],
@@ -566,7 +573,7 @@
   },
   "lastPreparation": {
     "objectId": "mithra",
-    "materialSha256": "e9fec0957d6cb35845ce399e70825343da8fbb3966b44ee7fe32b563300bec72",
+    "materialSha256": "b9c2e406797906cf193f22ea9191171ebb05026574c208a6ba70cf9227f52400",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

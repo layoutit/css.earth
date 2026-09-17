@@ -1758,8 +1758,8 @@
     {
       "id": "titan-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1275,
-      "expectedSha256": "c43af9f444375838e7be7d5d50c7986a76acdc31152508e937e51cbf2630192f",
+      "expectedBytes": 1243,
+      "expectedSha256": "0264516ce7c7babafba08b9eff782754a6dc2f8f75609dd7bec69159e09ccc62",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1776,8 +1776,8 @@
     {
       "id": "titan-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "30032741c351451501695e88e48dbd885e1881bb1586aa26bef6a82eb088f17f",
+      "expectedBytes": 184,
+      "expectedSha256": "744bfd0772104fce2113cc91c5c2fc985387e0fefd772efd9b9dc24e7a3a4baa",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -1955,8 +1955,8 @@
     {
       "id": "titan-object-content",
       "path": "content/object.json",
-      "expectedBytes": 15022,
-      "expectedSha256": "db41ebbbcecf990967174f765d977ce34fece396fba39f040977460ebe6203d3",
+      "expectedBytes": 14944,
+      "expectedSha256": "059144a377c96a0da8579ee08c2e340c3d10b7b8b6b7acef1ed9957a77cf5c73",
       "origin": "Repository-authored Titan object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2002,8 +2002,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1087,
-      "expectedSha256": "ac7aa2fd6d80d4e2368427a1e035a1f4eb9d107689db48c6f948f456759edce4"
+      "expectedBytes": 2337,
+      "expectedSha256": "6c1a2f3e7ff28fcbb660e1545da19a973ebf06c818191e2ff3a1fcc3e2d1fea0"
     },
     {
       "path": "science/b2-intake/titan_topo_corlies.zip",

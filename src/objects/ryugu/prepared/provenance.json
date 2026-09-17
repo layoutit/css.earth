@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b5a43cf7acb6bc71b2262c02fa7ae43a7bc158e37d216bb8e174b73763b56905"
+    "sha256": "cf7c63631868852494d2298eb5bf081245102e41020794abba93ca6890596293"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e9c11d13964edc5cf885ad3a8b0e0608842b7b5446c2799c857171c87bfb4914"
+    "bindingsSha256": "79757114f7040cfd72b9c763d1a90254efb6eb27ba69902f567c54197bbf32a5"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "db35b8b9ea6b6fd11ba9b0133ca04cf3621d7475e92172c9d12d04e2d4d70d38",
+      "sha256": "25181932ca0f62c11238914361dd2e32d9f237ee4f001998215760c3f25dc7e4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -262,8 +262,7 @@
               "compression": "gzip"
             },
             "faceBudget": 850,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -284,7 +283,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e8149c2a9e998a608c33ac1fd07df201fadec97c5a99c07da2cdc65f5c184505",
+      "sha256": "7baf5119816cc696e4a437bad9682f19cf297007badf729bee0fee1c6d6ff0bc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -310,19 +309,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "448 m"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "1.19 AU"
+              "value": "1.19 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.a (au)"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "1.30 years"
+              "value": "1.30 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=162173",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
@@ -536,7 +546,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "65a2fe24d6ac8595591651b64c0cf23b76467352e5b13ef7625c1a57eebf5eae",
+      "sha256": "b37bda5223d6b4f4ebce0c8a076f4b2aff567a338e1b59307647dda9163b6319",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -547,7 +557,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "ryugu-features.json",
         "publicBase": "/scenes/ryugu/",
         "target": {
@@ -948,8 +957,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e8149c2a9e998a608c33ac1fd07df201fadec97c5a99c07da2cdc65f5c184505",
-      "bytes": 12007,
+      "sha256": "7baf5119816cc696e4a437bad9682f19cf297007badf729bee0fee1c6d6ff0bc",
+      "bytes": 12597,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1031,8 +1040,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "d9f3627a502321ef4f782957a1826b28f3c3a29ad332c048c63b1453bb47d09d",
-      "bytes": 152,
+      "sha256": "3f19b366469430b6c025f610804eadb79be3d19c548c2a7955c988d2ca2109e6",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1143,8 +1152,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
-          "bytes": 999636,
-          "sha256": "2effc8de14b5cc13dfe1a9900d2ed70fed4b9161de0b48e4794ff551b19738bf",
+          "bytes": 1004624,
+          "sha256": "0e5674169e18634c20196102c3a51c2e2b24a0eccea98fe1eb5d2c42a61aac3b",
           "verification": "bytes-verified"
         }
       ],
@@ -1201,8 +1210,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-enhanced-surface@2x.webp",
-          "bytes": 4173682,
-          "sha256": "56aaf58de7e5c04b418695892e88cac9e5bac7662216502067b97613f3096cd6",
+          "bytes": 4234860,
+          "sha256": "da8dd9b465be1bb40d97fe483095ed7885ec1b798db8b42bcfc432379dd73b27",
           "verification": "bytes-verified"
         }
       ],
@@ -1271,8 +1280,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-close-up-surface@2x.webp",
-          "bytes": 1697736,
-          "sha256": "9cb9fe1f827c2bebbb9d7aa107703eb51952d6c1ce9ccb492c70e5992310f952",
+          "bytes": 1782574,
+          "sha256": "b1a83c21579e82e50913c9189df9ea0f3fca07689ac49505b29c0ee301879f4e",
           "verification": "bytes-verified"
         }
       ],
@@ -1326,8 +1335,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-surface@2x.webp",
-          "bytes": 1295984,
-          "sha256": "1ee247140b3f768061042fbaf4ede07849181451c6a29892f32e9aeb827f753f",
+          "bytes": 1307486,
+          "sha256": "e6f3e65bc8ed2e378ac2175313c96fc8c7a943c0c56a77d1a9d9ca44e4ca320e",
           "verification": "bytes-verified"
         }
       ],
@@ -1377,8 +1386,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-thermal-inertia-surface@2x.webp",
-          "bytes": 3326302,
-          "sha256": "60eb713656125ab408815a48a277f771062d30fe16cf54507b0569ae0be2006f",
+          "bytes": 3431978,
+          "sha256": "caad5bc7e6e08dc16366f9de3242ea38d7b8fa8cbf7ba78c5944f3acd566e315",
           "verification": "bytes-verified"
         }
       ],
@@ -1428,8 +1437,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-spectral-slope-surface@2x.webp",
-          "bytes": 3706304,
-          "sha256": "bb80694074dcb4069d14f906ec14043e2344574f4b6175d8ab9bb22f5715968c",
+          "bytes": 3722212,
+          "sha256": "439862137b38d8e34a37d398ecc075ea1c235dc3a80049d7d7d891bc465ed966",
           "verification": "bytes-verified"
         }
       ],
@@ -1461,8 +1470,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4817,
-          "sha256": "6f0d75b66dff0e9a10ad53e8c5ed2aea28c5599b57345292503dc5e29998041b",
+          "bytes": 5387,
+          "sha256": "0d786b4bbea3cd61c78e2c91c4aee14a32c04af8f4430b535809690ad7aa0ddf",
           "verification": "bytes-verified"
         }
       ],
@@ -1483,7 +1492,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1662,11 +1670,11 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "215c33b37bad12b9f06f9704d8c9e52bd4fb08cd3e43bb5fde88caf6700b340b",
+    "materialSha256": "223a1d97e2155bbc2489c0e5cf548e7e15227bb8b18f5fe6e59840a078f2bc5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "e9c11d13964edc5cf885ad3a8b0e0608842b7b5446c2799c857171c87bfb4914"
+      "bindingsSha256": "79757114f7040cfd72b9c763d1a90254efb6eb27ba69902f567c54197bbf32a5"
     }
   }
 }

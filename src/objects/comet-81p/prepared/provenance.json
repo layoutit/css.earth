@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "faa0522f55ddcb1e4abeb3ebd94dbb93b29dc6aec714dea163081065fbd472ed"
+    "sha256": "83d3e81e23e2ba866c1fbbb736965bf4243f4375a23a0656758ccced580b8755"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "ab6c43975b2ff17be05c450fd39f52d6a3e89722e628e8bb99f676eb2ddf6f18"
+    "bindingsSha256": "546cc43b375d9f9f399a7a5456ee8ee188e3dc488372c802f4a90095fa634049"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8cb21c510b637928c6f86743aebe7250dccd121ddd5934b4ac7aba5d1b46edb1",
+      "sha256": "e46e9b4ce216c9334927df5dbe9f4be97fc3f6cf2c094284c413b51972ffd496",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -139,8 +139,7 @@
               "provenanceFlags": "observed-ellipsoid"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 1000,
               "maximumErrorMeters": 55,
@@ -193,7 +192,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "978799852f7a293c01778d5e3ec46935415100053a03d81c13a0023677d2eac2",
+      "sha256": "af4a98c3e0da6b731e3c4176b876a1ffbea2dff1e708193ebae71eafabfd5501",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -204,17 +203,41 @@
             {
               "id": "scale",
               "label": "Fitted ellipsoid",
-              "value": "5.2 × 4.0 × 2.7 km"
+              "value": "5.2 × 4.0 × 2.7 km",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+                "label": "Comet 81P · pds shape",
+                "checked": "2026-09-16",
+                "path": "source/shape/wild2_cart_full.lbl",
+                "catalogueId": "source-comet-81p-pds-shape",
+                "locator": "best-fitting triaxial ellipsoid radii (1.350 x 2.002 x 2.607 km) × 2"
+              }
             },
             {
               "id": "mission",
               "label": "Explored by",
-              "value": "Stardust"
+              "value": "Stardust",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
+                "label": "Comet 81P · pds shape",
+                "checked": "2026-09-16",
+                "path": "source/shape/wild2_cart_full.lbl",
+                "catalogueId": "source-comet-81p-pds-shape",
+                "locator": "\"derived from the Stardust NavCam data\""
+              }
             },
             {
               "id": "flyby",
               "label": "Flyby",
-              "value": "2 January 2004"
+              "value": "2 January 2004",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-3-rdr-wild2-v3.0/data/encounter/2004/01_02/n2073we02_rr.lbl",
+                "label": "Comet 81P · n2073we02 rr labelPath",
+                "checked": "2026-09-16",
+                "path": "source/photography/navcam/n2073we02_rr.lbl",
+                "catalogueId": "source-comet-81p-n2073we02-rr-labelpath",
+                "locator": "START_TIME = 2004-01-02T19:21:28.437"
+              }
             }
           ],
           "moreFacts": []
@@ -325,14 +348,13 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c90e0a8305626621917a8178e5b5ed60299d827fb878716195a515d138f05228",
+      "sha256": "c8de751bc2fe0541663f27858bcb40c765988684e8e5afef2253af79cb80ff29",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
         "archive": null,
         "members": null,
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "comet-81p-features.json",
         "publicBase": "/scenes/comet-81p/",
         "target": {
@@ -852,8 +874,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "978799852f7a293c01778d5e3ec46935415100053a03d81c13a0023677d2eac2",
-      "bytes": 3745,
+      "sha256": "af4a98c3e0da6b731e3c4176b876a1ffbea2dff1e708193ebae71eafabfd5501",
+      "bytes": 5032,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -892,8 +914,8 @@
         "kind": "local",
         "reason": "Authored surface-place records with publication references and placement limits."
       },
-      "sha256": "639417c83ce7e5633db6ad3efc825e8ebce675647b014c26a7700b3dfe9ede26",
-      "bytes": 156,
+      "sha256": "0b5ffa7b27d1bc24b335b44525745320b64b74c96d4419c4af8cf5ef68c56d51",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1088,8 +1110,8 @@
         },
         {
           "url": "/scenes/comet-81p/comet-81p-model-surface@2x.webp",
-          "bytes": 186642,
-          "sha256": "f88884c2c902f84a9d01448ea9595a35a3b45e971ec75039618eb7241f3d5c73",
+          "bytes": 184990,
+          "sha256": "1918e4f00d3477c6aaab2594499a8b5392393d7c5bb72e762c81d247c9d53229",
           "verification": "bytes-verified"
         }
       ],
@@ -1149,8 +1171,8 @@
         },
         {
           "url": "/scenes/comet-81p/comet-81p-navcam-surface@2x.webp",
-          "bytes": 263466,
-          "sha256": "53e6d044d7a83dff2c6b653d6792780ebe74bf84351ad8c5cd3c7b11b9cec63a",
+          "bytes": 240266,
+          "sha256": "1828b6d5713c4b1a8497a303a1ce6b9093499f6d4a0178eaab4733579123d905",
           "verification": "bytes-verified"
         }
       ],
@@ -1182,8 +1204,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3735,
-          "sha256": "1172ca92cdeaae5e313c6e2386c6dae1a7d46dbf42b61b4be42983a43892bbad",
+          "bytes": 4749,
+          "sha256": "f5c49388917fb4e31164d778547cb2f8cda6605abf5e913ab11ad32433d7f67d",
           "verification": "bytes-verified"
         }
       ],
@@ -1204,7 +1226,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {}
       },
       "inputs": [
@@ -1262,11 +1283,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-81p",
-    "materialSha256": "889254f59c14ae83d94479ae11683f372595d06f15248a003137ffdfef912b35",
+    "materialSha256": "7383e36a92dfccb3fcba0ec632bb007b0f180301aceaa02291d7cf6827c4a347",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "ab6c43975b2ff17be05c450fd39f52d6a3e89722e628e8bb99f676eb2ddf6f18"
+      "bindingsSha256": "546cc43b375d9f9f399a7a5456ee8ee188e3dc488372c802f4a90095fa634049"
     }
   }
 }

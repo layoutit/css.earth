@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c06f0134a4de0ae8f4efb620317805e4d38d39220e05f189247ba22024b003a"
+    "sha256": "f49edbcb43b946d49a8d764e869388640cf735a35619b76703cdbc9b952a8977"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "fcb440db08a7b72b4507a64037c0890b3c83674ab63ef26313c80ad15162b078"
+    "bindingsSha256": "490ac558c7521671a1b7e40287d855e691743573920cfcb5ade8c962a6853d85"
   },
   "recipes": [
     {
@@ -189,7 +189,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
+      "sha256": "4d9ef00cd74a270d2eb3fe411d664128cc29b19bf7e6bb68cf95f628c7efcf68",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -226,22 +226,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 2.52 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 2.52 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Uranus",
-              "value": "About 190,900 km"
+              "value": "About 2.52 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Lassell · 1851"
+              "value": "William Lassell · 1851",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -394,7 +400,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "a1a54cf072c5a9c9c29ebadfd71732cbb44c288827bd5a79300c98703e4600a8",
+      "sha256": "db1a314e74729c0dcfe0ea988dabad695075d2f19ede28a7e2aee26af9eda441",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -405,7 +411,6 @@
           "metadata": "metadata_nomenclature_points_ARIEL.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "ariel-features.json",
         "publicBase": "/scenes/ariel/",
         "target": {
@@ -606,8 +611,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "2df3fb3e51250139729ce3fd116b36eb8f72cb2af311b98789a3408e4f1ed3bf",
-      "bytes": 7296,
+      "sha256": "4d9ef00cd74a270d2eb3fe411d664128cc29b19bf7e6bb68cf95f628c7efcf68",
+      "bytes": 7761,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -679,8 +684,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "2cf793e4c2668bf456a4aa356ff01d593571943d37a020272c2a68f768c593f8",
-      "bytes": 152,
+      "sha256": "45de784f4080171cffa9306cc6a172cc0d9c6306ae87b2565176080c26fd508b",
+      "bytes": 186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1276,8 +1281,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4047,
-          "sha256": "a469b8e35a29e34aadea97a0a04ffe16a1622066bd1f8c8ce6bda86f04ae6e91",
+          "bytes": 4418,
+          "sha256": "10973abd5fdcd9ca49d42023958c72bc212bce6fd912d7041f2d7884c5bb7531",
           "verification": "bytes-verified"
         }
       ],
@@ -1298,7 +1303,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1376,11 +1380,11 @@
   },
   "lastPreparation": {
     "objectId": "ariel",
-    "materialSha256": "a7a2b9d2ef484ea39f4541eebf6009f240431b31fe19f4eca6e54cafb51258fd",
+    "materialSha256": "81a8ac95703d87acd34dd3502dcd54822953adadb46d2582e92d9e4662e33f15",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "fcb440db08a7b72b4507a64037c0890b3c83674ab63ef26313c80ad15162b078"
+      "bindingsSha256": "490ac558c7521671a1b7e40287d855e691743573920cfcb5ade8c962a6853d85"
     }
   }
 }

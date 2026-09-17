@@ -6,46 +6,32 @@
   "panel": {
     "facts": [
       {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "Sun"
-      },
-      {
         "id": "diameter",
         "label": "Estimated diameter",
-        "value": "2.5 ± 0.3 km"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Radar and light curves"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation period",
-        "value": "3.4256 hours"
+        "value": "2.5 ± 0.3 km",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+          "label": "Asteroid 2001 Sn263 · radar shape",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-asteroid-2001-sn263-radar-shape",
+          "locator": "/radiusKm"
+        }
       }
     ],
     "moreFacts": [
       {
-        "id": "shape-epoch",
-        "label": "Observations",
-        "value": "January–March 2008"
-      },
-      {
         "id": "shape-scale",
         "label": "Model extents",
-        "value": "2.754 × 2.720 × 2.857 km"
-      },
-      {
-        "id": "phase",
-        "label": "Orientation",
-        "value": "Measured pole · illustrative spin phase"
-      },
-      {
-        "id": "orbit-limit",
-        "label": "Position",
-        "value": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations."
+        "value": "2.754 × 2.720 × 2.857 km",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+          "label": "Asteroid 2001 Sn263 · radar shape",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-asteroid-2001-sn263-radar-shape",
+          "locator": "/extentsKm/0; /extentsKm/1; /extentsKm/2"
+        }
       }
     ]
   },

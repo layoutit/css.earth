@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "78843b3f04a048fe68e1c4113d5b8b5b34285e06891279a86c6c149436608dd2"
+    "sha256": "eb54781dc8310e3b6af12286a8f41146bc6db5a9751d0c0fc0960e885039e734"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0f4dfe2894fbc734f54b79f3377cd2bcb8425d1bd07ef07c7ff3d6a2c4ba4f0a",
+      "sha256": "5aa83d548e5311e8a070e10dafed518950959ce2a681abfd875a2b329dcd8274",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8103.363816496898,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
+      "sha256": "350800ab4efa22fca87b543301eaaaeeb916c3d25d5bbb74b9281203a4ce531a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +111,45 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published triaxial example model"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "778 × 706 × 496 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Unresolved; photometric aliases and synchronous rotation remain alternatives"
+              "value": "778 × 706 × 496 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "Trans-Neptunian object",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=174567",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape."
+              "value": "One published allowable triaxial model, with semiaxes 389, 353 and 248 km. The line-of-sight depth is unconstrained; these best-fit values illustrate a solution rather than a uniquely measured body shape.",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             }
           ]
         },
@@ -297,8 +310,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f953c1e5a336e0e3a5380a688346e5e919a019d047ea1df6ea1da94b78d788b6",
-      "bytes": 3477,
+      "sha256": "350800ab4efa22fca87b543301eaaaeeb916c3d25d5bbb74b9281203a4ce531a",
+      "bytes": 4203,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -341,8 +354,8 @@
         },
         {
           "url": "/scenes/varda/varda-model-surface@2x.webp",
-          "bytes": 49844,
-          "sha256": "aab83d0fe89bd5c2283d521f50c6486cc985a171ca1eef213b6607a18f7788c5",
+          "bytes": 58180,
+          "sha256": "6abcdf69fbc3b25eaaa4ecdab9a85c07c2d4ef41fae1b57ba57d4effde5f974d",
           "verification": "bytes-verified"
         }
       ],
@@ -379,8 +392,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5499,
-          "sha256": "539d9ec019234e7e5f9bb66518f26b3e44dd6f3573c5b026b7a7ec8d87bab78b",
+          "bytes": 6040,
+          "sha256": "700502ae5bfe8a49c7842720e1ac989755fd3db773d36b5ec2ade95f9eee679c",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +431,7 @@
   },
   "lastPreparation": {
     "objectId": "varda",
-    "materialSha256": "666700048eb666a29b6bc251cbfb2868aaa634528c517596f7de13cb08ec309a",
+    "materialSha256": "347fb357dd3f7ff1a72b2b4b770a30b553d1b381848465c9f1f9d2c878fb0c44",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

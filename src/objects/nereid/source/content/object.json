@@ -8,34 +8,69 @@
       {
         "id": "radius",
         "label": "Mean radius estimate",
-        "value": "170 ± 25 km"
+        "value": "170 ± 25 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "JPL Planetary Satellite Physical Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-physical-parameters",
+          "locator": "/references/1; Mean Radius (km) value"
+        }
       },
       {
         "id": "parent",
         "label": "Orbits",
-        "value": "Neptune"
-      },
-      {
-        "id": "shape",
-        "label": "Shape interpretation",
-        "value": "Approximate ellipsoid · long/short ≈ 1.3"
+        "value": "Neptune",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; Planet"
+        }
       },
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Gerard Kuiper · 1949"
+        "value": "Gerard Kuiper · 1949",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "label": "JPL Planetary Satellite Discovery Circumstances",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-discovery",
+          "locator": "/references/2; discoverer(s); year discovered"
+        }
       }
     ],
     "moreFacts": [
       {
         "id": "rotation",
         "label": "Rotation period",
-        "value": "11.594 ± 0.017 hours"
+        "value": "11.594 ± 0.017 hours",
+        "source": {
+          "url": "https://doi.org/10.1093/mnras/stw081",
+          "label": "Research publication · DOI 10.1093/mnras/stw081",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1093-mnras-stw081",
+          "locator": "/rotationPeriodHours"
+        }
       },
       {
         "id": "shape-axes",
         "label": "Model semiaxes",
-        "value": "194 × 171 × 148 km · derived approximation"
+        "value": "194 × 171 × 148 km · derived approximation",
+        "source": {
+          "url": "https://doi.org/10.1093/mnras/stw081",
+          "label": "Research publication · DOI 10.1093/mnras/stw081",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1093-mnras-stw081",
+          "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+        }
       }
     ]
   },

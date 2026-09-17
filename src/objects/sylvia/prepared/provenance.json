@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "65fb59aeb13abbc66fc25ec4dd771a9df05f1294ed9ccfcb7f0d60c78cdf56a0"
+    "sha256": "42b4d3d4931c12f54a58b2b0aa4bd8f9425a6c9de2a3dd0b16ab56185a9ff599"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dbb44c095c7041ddd725283b8c89d4e287538cf5abab786092de66278888be7c",
+      "sha256": "df7b40d7dfad5a846c87c1edfe2a8b9bdd0bd3c5f4b32795c08f443af136b084",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -428,8 +428,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -451,8 +450,7 @@
               "latitudeSegments": 90,
               "longitudeSegments": 180,
               "faceBudget": 800,
-              "tileSize": 128,
-              "atlasColumns": 16,
+              "texelsPerFace": 16384,
               "primitive": "u",
               "simplification": {
                 "method": "source-meshoptimizer",
@@ -474,7 +472,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
+      "sha256": "0bb8bbd1a26dece43731bfbf4eef42bbf64d46799071fd006c8c5d9668b8fc87",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -500,11 +498,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "137 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "3.493 AU (mean)",
@@ -529,11 +522,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "5.18364 hours"
             }
           ],
           "moreFacts": []
@@ -1602,8 +1590,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "28759cd57f5dc46682e2e9abaa1ab427d11dc0b3e0655a31001b76ea3a1ce0d1",
-      "bytes": 8971,
+      "sha256": "0bb8bbd1a26dece43731bfbf4eef42bbf64d46799071fd006c8c5d9668b8fc87",
+      "bytes": 8740,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1647,8 +1635,8 @@
         },
         {
           "url": "/scenes/sylvia/sylvia-elevation-surface@2x.webp",
-          "bytes": 291540,
-          "sha256": "b618699e4c7cd8d2184193ff1180ed42701e70b7d9d9cd5d47d540945bbbe2e4",
+          "bytes": 357750,
+          "sha256": "5800a1725749206a740b046aeefff4b59e72b83cd7ec847d92052b2321489065",
           "verification": "bytes-verified"
         }
       ],
@@ -1691,8 +1679,8 @@
         },
         {
           "url": "/scenes/sylvia/sylvia-shape-surface@2x.webp",
-          "bytes": 57726,
-          "sha256": "59de7434f40b45568c1a495d99bf2e54fcabdd66971924a981f5cec695316c34",
+          "bytes": 75612,
+          "sha256": "e23103ff05e85f78c0c1cc253bc8d82c1e7c97afa8c8c706d3ec9114c9ab027d",
           "verification": "bytes-verified"
         }
       ],
@@ -1751,8 +1739,8 @@
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 360804,
-          "sha256": "26b85bcb445655c3cbbc5cd0f4fa2559454f4a27bffa9c80f8a09745f0c9af07",
+          "bytes": 369162,
+          "sha256": "e6d7cd4534bd21fd522cf05a42ade9cd72eaeeee2a77da2d54c14eda6cd9ff35",
           "verification": "bytes-verified"
         }
       ],
@@ -1784,8 +1772,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5580,
-          "sha256": "cfd0ee75a49006be0f94494d000ff942a87d097a192c53d185ce7abfcc986fcb",
+          "bytes": 5437,
+          "sha256": "4209e5ffe0e0e789d8658df08473cb9552140c8ced6b376e900a92d6e374821f",
           "verification": "bytes-verified"
         }
       ],
@@ -1873,7 +1861,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "406f275f7f5cb2f620003621b1d67bf73bd2289a11f286f8c33a9bb3ca2ee122",
+    "materialSha256": "dfc887dc876d7e48dc45ae2396ca9aefa607c0743c6606ca8147562a6074d4af",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

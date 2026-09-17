@@ -6,46 +6,32 @@
   "panel": {
     "facts": [
       {
-        "id": "parent",
-        "label": "Orbits",
-        "value": "2001 SN263 Alpha"
-      },
-      {
         "id": "diameter",
         "label": "Estimated diameter",
-        "value": "0.77 ± 0.12 km"
-      },
-      {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Radar"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation period",
-        "value": "13.43 hours"
+        "value": "0.77 ± 0.12 km",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
+          "label": "Sn263 Beta · radar shape",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-sn263-beta-radar-shape",
+          "locator": "/extentsKm/0"
+        }
       }
     ],
     "moreFacts": [
       {
-        "id": "shape-epoch",
-        "label": "Observations",
-        "value": "January–March 2008"
-      },
-      {
         "id": "shape-scale",
         "label": "Model extents",
-        "value": "0.766 × 1.038 × 0.656 km"
-      },
-      {
-        "id": "phase",
-        "label": "Orientation",
-        "value": "Assumed pole · illustrative spin phase"
-      },
-      {
-        "id": "orbit-limit",
-        "label": "Position",
-        "value": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured."
+        "value": "0.766 × 1.038 × 0.656 km",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
+          "label": "Sn263 Beta · radar shape",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-sn263-beta-radar-shape",
+          "locator": "/extentsKm/0; /extentsKm/1; /extentsKm/2"
+        }
       }
     ]
   },

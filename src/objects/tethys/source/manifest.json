@@ -1380,8 +1380,8 @@
     {
       "id": "tethys-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1233,
-      "expectedSha256": "b730d65a323144778eea6b8bad691469c82644094278e8cf22d84f3c1d5d2494",
+      "expectedBytes": 1201,
+      "expectedSha256": "14ad07600992274c8d7dbab8b7d7d67944dd31095064feeb19f32eb9569d8c2c",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1398,8 +1398,8 @@
     {
       "id": "tethys-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "6c2b8a9f7f7b9959adc5b77ec09fd2b22daa182f043bb119bc362e3cc6b2cbd3",
+      "expectedBytes": 185,
+      "expectedSha256": "0539ae434a135593cf9583e8eaaa85c4b5d8025fd5ae3b5574aa96d5e362157d",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -1520,8 +1520,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 14899,
-      "expectedSha256": "9ecf2b1edaa01ca7203495b81c8dd1a17a56490883eff61563bc0c306c231ac5"
+      "expectedBytes": 14880,
+      "expectedSha256": "52201522dca8668f02a2b2076171b570109bf5c5e47db8f1e3c562892c5c5216"
     },
     {
       "path": "preparation/navigation.json",
@@ -1535,8 +1535,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 15628,
-      "expectedSha256": "fc339b019f9d0ba23313fc81712687a56bb3937b2fe09efc89388e94adeaecfc",
+      "expectedBytes": 16589,
+      "expectedSha256": "53ec6282d61e9533ef495172f1246572b3685c148804b909c1da744f3af0c066",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1551,8 +1551,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1086,
-      "expectedSha256": "fa3c920f3b9d68eabc74fb1c1f048021f7e79e3f705e7c1e47b698127e01698f"
+      "expectedBytes": 2336,
+      "expectedSha256": "b6350609c6f29713bf205f1868110019ada855a3ee4ba6b4efd695ee653e7c48"
     },
     {
       "path": "science/b2-intake/tethys_128_o.xml",

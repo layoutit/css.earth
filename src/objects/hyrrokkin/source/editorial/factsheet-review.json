@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "hyrrokkin",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "163",
+        "Saturn",
+        "Hyrrokkin",
+        "644",
+        "SAT456",
+        "ecliptic",
+        "2000-01-01.5",
+        "18340900.",
+        "0.336",
+        "264.8",
+        "214.8",
+        "149.9",
+        "40.2",
+        "927.4569",
+        "296.4",
+        "418.0",
+        "",
+        "",
+        "",
+        "48"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XLIV",
+        "Hyrrokkin",
+        "S/2004 S19",
+        "2004",
+        "S. Sheppard, D.C. Jewitt, J. Kleyna",
+        "IAUC 8727"
+      ]
+    }
+  ]
+}

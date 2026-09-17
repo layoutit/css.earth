@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "644800929d11b2952e8b74901ee93cd65af3cb893f1c71f649cf88f60e3730f4"
+    "sha256": "77bf584694dd628a35c48784b593af49939a2965d99f28824cfcf167f4f7ff86"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "029042584476527697af9cbac677fc09141b9e9c775ad05807d7feb3b8c8f1b4",
+      "sha256": "e4005da258ec82feb05d50946c7f2435c95663f737fd04637a90d1c68140835b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -190,8 +190,7 @@
               "expectedFaces": 40960
             },
             "faceBudget": 2000,
-            "tileSize": 96,
-            "atlasColumns": 16,
+            "texelsPerFace": 9216,
             "simplification": {
               "targetFaces": 1000,
               "maximumErrorMeters": 250,
@@ -211,7 +210,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
+      "sha256": "11b3468898c01da5670e40d1883166806f9b8dc8fe2bd150105284a06d273e04",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -220,33 +219,33 @@
         "panel": {
           "facts": [
             {
-              "id": "dimensions",
-              "label": "Size",
-              "value": "34.5 × 19.8 × 13.8 km"
-            },
-            {
               "id": "rotation",
               "label": "Rotation",
-              "value": "About 15.9 hours"
+              "value": "About 15.9 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=486958",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "Trans-Neptunian object",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=486958",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate."
-            },
-            {
-              "id": "albedo-coverage",
-              "label": "Albedo coverage",
-              "value": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -690,8 +689,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
-      "bytes": 6118,
+      "sha256": "11b3468898c01da5670e40d1883166806f9b8dc8fe2bd150105284a06d273e04",
+      "bytes": 5972,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -734,8 +733,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
-          "bytes": 119308,
-          "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
+          "bytes": 146562,
+          "sha256": "302320c4026fc5e1897fcb5df6542dcd861f9c7dda6ecc695a262a721930164c",
           "verification": "bytes-verified"
         }
       ],
@@ -791,8 +790,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
-          "bytes": 589518,
-          "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
+          "bytes": 618318,
+          "sha256": "f2318a1118e3aa79bace5383ed2bf59d79a963d5383ca9985ae22e54a2aac554",
           "verification": "bytes-verified"
         }
       ],
@@ -837,8 +836,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-lorri-surface@2x.webp",
-          "bytes": 840062,
-          "sha256": "b7397504b0d221dc587912513c7747b9fcca0468b3f880bebcaf17aa81c9f46d",
+          "bytes": 948294,
+          "sha256": "8ffe08e67b5b7aecaa83b49b45da568cf590b202e4b5205ebf444587fd4b8291",
           "verification": "bytes-verified"
         }
       ],
@@ -884,8 +883,8 @@
         },
         {
           "url": "/scenes/arrokoth/arrokoth-mvic-surface@2x.webp",
-          "bytes": 262076,
-          "sha256": "e3f4c7a0b6516661a5946f0b79cd1feb7ea66d4765faec437b2c645280066456",
+          "bytes": 279014,
+          "sha256": "ec64f552413be4e47067808cb618e4c0a113e5b589f396ec0a3e2906010095a9",
           "verification": "bytes-verified"
         }
       ],
@@ -917,8 +916,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5132,
-          "sha256": "141045eb51b0de943a2ae23c38c732c2dba542d0b16816bb6ae5692367a763e4",
+          "bytes": 4941,
+          "sha256": "265db933b11c7681b00997075735bb41f4f6ff858dacf50f9ee1b514fbf6a243",
           "verification": "bytes-verified"
         }
       ],
@@ -1031,7 +1030,7 @@
   },
   "lastPreparation": {
     "objectId": "arrokoth",
-    "materialSha256": "0c6da15cb619329ea40fd185ee1927dda58c94874f63cfb801051b898134910c",
+    "materialSha256": "57f6554e5d4345c43e083f9842fbddbbc7163e1a2e6a593cfc6f1733032b6776",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

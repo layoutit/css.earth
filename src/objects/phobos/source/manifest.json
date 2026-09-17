@@ -198,8 +198,8 @@
     {
       "id": "phobos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1170,
-      "expectedSha256": "b4fb52c28b1245b21503a18b63a4feda442193616310d99855c92c82118cbb8a",
+      "expectedBytes": 1138,
+      "expectedSha256": "855ea859f85f7ddc42c07bce69995ee58ecbca9733cad447577bd75cb90b070b",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -216,8 +216,8 @@
     {
       "id": "phobos-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "96dea3504ca2046445cb280056c5f4d6a4afa1e2af10c6db783ce59acbbb3b30",
+      "expectedBytes": 185,
+      "expectedSha256": "e27eec483e315034b0b4cf8bbd166f2db2c651bc5552d42f2aa8f4ecdc115656",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -263,8 +263,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10627,
-      "expectedSha256": "fa49539f8a8f7554147a1f418450d60485986842a1a029138542338fd9abe8dc",
+      "expectedBytes": 10613,
+      "expectedSha256": "65e813fd59e09bde95a1ee1e8412866e53022dd3393b66fa1836156f50b816e7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -282,8 +282,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5876,
-      "expectedSha256": "34cf6c8909b35890b4fc83185786f2e41776cd2e9d200260dbc870518a329765"
+      "expectedBytes": 5857,
+      "expectedSha256": "22c6550fbc70744cd9f4481e4b42f8f3e160fa0b4456b33af943aa5027fbe376"
     },
     {
       "path": "presentation/minimap.json",
@@ -304,8 +304,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1084,
-      "expectedSha256": "1a9a57bdcf869489c29463406b296496251b53a67bfc4c9183f165ebae34a147"
+      "expectedBytes": 2317,
+      "expectedSha256": "ef125cb6c20f7386764bc3df90ac75cc1f231b60a0035f46f06c0987c98e2a6d"
     },
     {
       "id": "phobos-surface-feature-notes",

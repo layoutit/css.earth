@@ -41,6 +41,72 @@
       "values": {
         "distance-from-sun": "5.203 AU"
       }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "5",
+        "Jupiter",
+        "Ganymede",
+        "503",
+        "JUP365",
+        "Laplace",
+        "2000-01-01.5",
+        "1070400.",
+        "0.001",
+        "198.3",
+        "324.8",
+        "0.2",
+        "58.5",
+        "7.155588",
+        "68.301",
+        "137.812",
+        "268.2",
+        "64.6",
+        "0.1",
+        "29"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "III",
+        "Ganymede",
+        "",
+        "1610",
+        "Galileo",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

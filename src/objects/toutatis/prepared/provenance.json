@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e20ca0c71b9071b5a1b05d09faa5fed57267998004eb29c75f2875ab208a88df"
+    "sha256": "296159df5613c7c7163e5b015211fa9be643917a7ea81399c1b49c77fcad6ddf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9fda270f0816598525d738139ad53a2c66984b89bc4d54e3bc88bf9f90a1ff3d",
+      "sha256": "dbd9e1e076ce0ef688a3275b75a52a687a68677e9efffd4bf5116d82b1d82698",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -119,8 +119,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -141,7 +140,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "524b89db516481169fa83af4a6204b6a6e5a9dbde2fdaa92c8c956098549607b",
+      "sha256": "3fb61a0c4129a033dd0612041dafab6ef559b4582c376a6528cb8e38ff5df39d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -165,28 +164,7 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "facts": [
-            {
-              "id": "radius",
-              "label": "Equivalent radius",
-              "value": "1.224 km (model)"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.543 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "4.06 years"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Tumbling periods",
-              "value": "5.4 / 7.4 days"
-            }
-          ],
+          "facts": [],
           "moreFacts": [
             {
               "id": "geometric-albedo",
@@ -377,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "524b89db516481169fa83af4a6204b6a6e5a9dbde2fdaa92c8c956098549607b",
-      "bytes": 9199,
+      "sha256": "3fb61a0c4129a033dd0612041dafab6ef559b4582c376a6528cb8e38ff5df39d",
+      "bytes": 8724,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -422,8 +400,8 @@
         },
         {
           "url": "/scenes/toutatis/toutatis-elevation-surface@2x.webp",
-          "bytes": 380870,
-          "sha256": "a361add1d3e60980d97304625925ab0146278f90ec40ce73234acdac67b59014",
+          "bytes": 421460,
+          "sha256": "dff4dfdaee42a3872bf1110aab8cdab586dde5493d490b476a91f81c0a8ecdc0",
           "verification": "bytes-verified"
         }
       ],
@@ -466,8 +444,8 @@
         },
         {
           "url": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
-          "bytes": 73254,
-          "sha256": "33450a04b5a8baf229e8c381346fe1277f2787de22e9391558912da867a36d72",
+          "bytes": 90200,
+          "sha256": "2a48b6dc6dba30ab0a86ae337d88db3d878eecbc940efd6a611c5e275d6a2633",
           "verification": "bytes-verified"
         }
       ],
@@ -499,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5923,
-          "sha256": "a3d68fd4a08c7b983cc2d31c9006aa094f3ad9a7907c9188237aa69ffc1c61dc",
+          "bytes": 5629,
+          "sha256": "ab12f5eec4614ea120064e8b50ff87fe7630e9c94c1d4243e49ef15123055168",
           "verification": "bytes-verified"
         }
       ],
@@ -563,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "toutatis",
-    "materialSha256": "12a4a6d43f2e75ed7b19c3162d07bbe2d04aaee83c214a5b712e051ce320a246",
+    "materialSha256": "41a214de102a741568d109ea254d87f0e5f761ca323c4b22cb2ef0b19b2241a5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

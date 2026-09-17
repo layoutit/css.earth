@@ -8,32 +8,28 @@
       {
         "id": "radius",
         "label": "Volume-equivalent radius",
-        "value": "18.3 km (released shape model)"
-      },
-      {
-        "id": "dimensions",
-        "label": "Model dimensions",
-        "value": "48.4 × 33.8 × 31.4 km"
+        "value": "18.3 km (released shape model)",
+        "source": {
+          "url": "https://doi.org/10.6084/m9.figshare.12779948.v1",
+          "label": "Published archive · DOI 10.6084/m9.figshare.12779948.v1",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-6084-m9-figshare-12779948-v1",
+          "locator": "/referenceRadiusKm"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Pluto–Charon",
-        "value": "About 24.9 days"
-      },
-      {
-        "id": "distance-from-parent",
-        "label": "Distance from system barycenter",
-        "value": "About 48,694 km"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "About 43.9 hours (not synchronous)"
-      },
-      {
-        "id": "discovery",
-        "label": "Discovery",
-        "value": "Hubble Space Telescope · 2005"
+        "value": "About 24.9 days",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-16",
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/0; P (days)"
+        }
       }
     ],
     "moreFacts": []

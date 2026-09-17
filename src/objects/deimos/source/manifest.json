@@ -204,8 +204,8 @@
     {
       "id": "deimos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1170,
-      "expectedSha256": "a506a4444aefd96a26db378ff62c80c4f35ef86f6ce0234d1519a939bd73c30f",
+      "expectedBytes": 1138,
+      "expectedSha256": "c4eba8cf9661a8275ce0d6754fee100b70bb1c16c9b0d61af6d8e94ac7b9ba2b",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -222,8 +222,8 @@
     {
       "id": "deimos-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "8faeb7e748cac8fda155b3cc657fe7d6b8e176f9a81d12a5ff978c6ae649fffc",
+      "expectedBytes": 185,
+      "expectedSha256": "4425ba76faafd30b12bccb8ecaa34564ed43fe240c4d4cd5ff0e68d3b9d4e354",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -269,8 +269,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10929,
-      "expectedSha256": "65e73bc536959a970373b090a033abc18102e79bd431c8d97bdea223403d39e1",
+      "expectedBytes": 11399,
+      "expectedSha256": "f84855d2df8856e95b04c2ce72a19581598208562e18998d75ae355cb33b1ffc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -288,8 +288,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5799,
-      "expectedSha256": "7c69d2db9c45012167794b5eb2d4c2a514d539104b76dc5c0b12d9d8fb148aa5"
+      "expectedBytes": 5780,
+      "expectedSha256": "e39bf20ca7f88c82ae4415a47199a43f6cf782c00002a902740f183241919b04"
     },
     {
       "path": "presentation/minimap.json",
@@ -310,8 +310,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1082,
-      "expectedSha256": "13d39cfb648abe035f79e4bb5d004978e05925c0ea62f7cb22680c0496c33ee2"
+      "expectedBytes": 2315,
+      "expectedSha256": "ade7ed150d2b41da1d43228583bda90537d2e26ed85ed5c6fb08f662beaad1a7"
     },
     {
       "id": "deimos-surface-feature-notes",

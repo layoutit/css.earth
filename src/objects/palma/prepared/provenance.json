@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "92b617c9568c778cdf574296e37b06475f047f4df6fcc9bdbf9ea8176bf6430d"
+    "sha256": "4e575450d778c2746fcc59b100ed6f8d41eeba3f37934fdd6cff4e8d87330e4f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6518875ca97c7d050cb9c859d9ee6040a7c0c72c31660a4ce184f57ebe2d52f1",
+      "sha256": "3c205f47a0e842a873291ee3bbbdef3c9722ff177ea921fa0758df718cc15462",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "991a82d27d233ac08434ce187dfc09549fc8ba76c8d0b64ce13037d4fe608852",
+      "sha256": "b156c69069fbf1b2200a33c2309e9f010ada65cbdf53ab5bcd5799365aefc627",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "93.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "8.58189 hours"
+              "value": "8.58189 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/298",
+                "label": "DAMIT model 298",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "991a82d27d233ac08434ce187dfc09549fc8ba76c8d0b64ce13037d4fe608852",
-      "bytes": 8313,
+      "sha256": "b156c69069fbf1b2200a33c2309e9f010ada65cbdf53ab5bcd5799365aefc627",
+      "bytes": 8517,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/palma/palma-elevation-surface@2x.webp",
-          "bytes": 372782,
-          "sha256": "b2683e0cbab798be9516ec549a0b06a7be4d655b99bd10d159d9d53f7002c964",
+          "bytes": 398466,
+          "sha256": "c438ee22d2ee319e78a1937e4331bf69a5cb9257b3b3a94f06aca337f0e5de18",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/palma/palma-shape-surface@2x.webp",
-          "bytes": 65790,
-          "sha256": "91348bf83486ca2060104dc4a4a2d56d40db508f555979747e383bea7dd62d79",
+          "bytes": 70152,
+          "sha256": "98f3ac358c65c67cc74812124610d0435b99a4413c07cc3d957f8c41e8a9ecef",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6041,
-          "sha256": "38393c6e96ff330b7b1b5f5d576f59b4a5eb30fd2f2eaf4593128e82dd716d9a",
+          "bytes": 6198,
+          "sha256": "f52bed80f9ccb202bd50613e589f3ba928f806e2b875d206730c38055f483552",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "palma",
-    "materialSha256": "5ee7c47b66c898a109a3e6c2d65b7daf2d7bbefd4d07d27bce7d64dd3ff84ce0",
+    "materialSha256": "e19db0a22c01414076bcf47a7ecade5b92a1ca2d59226e40fc988a6b5b1d04db",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9cb63203b8bc11a879858bcdb6451f5f85029251c2d8bd7eb65a4fc2bfdae8fb"
+    "sha256": "64995f194e581a3598b659ca6772bbe5db88d8574f7e21bd663f450c3fb88517"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1426e8787b6062d5c33bbf770b93a5ec97f5f56577742f43b9cc2f48896f9c0b",
+      "sha256": "6d6c0967b5ec748480351a2dbfac6e8e439cf6d1f815e569ab4b96e33dd6e5d8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "74ce18cfd12aedf29346922a45179a44596cf7e1aea44a1d9ad328a406e5a248",
+      "sha256": "9afae7aa30aca534b3d256275c0f99b0047fc57963e1c05ed2a46f7007eb0845",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "43.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "27.0703 hours"
+              "value": "27.0703 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3088",
+                "label": "DAMIT model 3088",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "74ce18cfd12aedf29346922a45179a44596cf7e1aea44a1d9ad328a406e5a248",
-      "bytes": 8230,
+      "sha256": "9afae7aa30aca534b3d256275c0f99b0047fc57963e1c05ed2a46f7007eb0845",
+      "bytes": 8436,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/hekate/hekate-elevation-surface@2x.webp",
-          "bytes": 344402,
-          "sha256": "10afa919ef057968c1e88b53568bcf2766ce8697cc02703c35cd46e1686a05a5",
+          "bytes": 388510,
+          "sha256": "ef604228f20533caa38ea1c5037df465b6a01f2ad17eaf20335e65be400065f5",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/hekate/hekate-shape-surface@2x.webp",
-          "bytes": 65936,
-          "sha256": "303ac589aff517a6f6888e19d0432bb454ad0a2e3c6ad82ba7b06969a0c3c0f3",
+          "bytes": 75448,
+          "sha256": "5504b7da9f4587d75dc335631cbcda107bbadcfb3a2b3002b76f8086cae11210",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5944,
-          "sha256": "276186088a9b2a560536dee83f83f30441810d96439a118289b4b9383f68bc28",
+          "bytes": 6103,
+          "sha256": "082aaf4b395c52e8b24bc4c22968b3b91a5aec3b4f1f66c9beaa2c561bee39a6",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "hekate",
-    "materialSha256": "c38037d092ac6289752a47a1b4dbf5ec494822d1d2d5f612073f6ae3f6ddd452",
+    "materialSha256": "4ea64be75d20c32ad76ffe7c07804d47ca8ee81f63658817f3b22fedd6d2a14f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ce1cf39b5abec97c6e6e7d4acd7cfed780f55b70af66544d45b9159f60aa8c9"
+    "sha256": "ab1685e3d94126cc0c9ad66ac6ce66e28f95ce3b8b63bf07184e2bcbf130d3c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9fff2932de348a824dae5cc9c9e0be49e55f812690d577c6623ab9794d91bcc0",
+      "sha256": "1c705c49e42b3bfc629898b42f6c721784ce864a479a6cb94a5b4242d1601a0a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 5183.755311464502,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
+      "sha256": "7805138f5236c85b7159951e8d8b8de6e392a8b6cde60eb55496dc3075e9ab5e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +111,32 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation-constrained oblate model"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "436 × 436 × 375 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "6.725 hours; no qualified phase"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Plutino (3:2 resonance with Neptune)"
+              "value": "436 × 436 × 375 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2501.09739",
+                "label": "Research publication · arXiv 2501.09739",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2501-09739",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions."
+              "value": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions.",
+              "source": {
+                "url": "https://arxiv.org/abs/2501.09739",
+                "label": "Research publication · arXiv 2501.09739",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2501-09739",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ]
         },
@@ -285,8 +285,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bf3b79353070b8fea98b705db024307a6748f416b8d2f4fe86feef5f76a19a24",
-      "bytes": 3254,
+      "sha256": "7805138f5236c85b7159951e8d8b8de6e392a8b6cde60eb55496dc3075e9ab5e",
+      "bytes": 3523,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -329,8 +329,8 @@
         },
         {
           "url": "/scenes/huya/huya-model-surface@2x.webp",
-          "bytes": 55374,
-          "sha256": "34eaeadde0559b6a910e5031ae340beb0f29d96a2546acc40f01224951bcd118",
+          "bytes": 61994,
+          "sha256": "3f334bfc239281b1cac7def311d82d2fee3b04b35576e33562ea7be5fa26158c",
           "verification": "bytes-verified"
         }
       ],
@@ -367,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3941,
-          "sha256": "001da3de9727719dd57c72b02856028773c394e81930471461c9f0f7b6c8a441",
+          "bytes": 4160,
+          "sha256": "e6085cf7a53a8f7b206a497282bba9f579fddb4ad7a523544182ed9535991938",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +406,7 @@
   },
   "lastPreparation": {
     "objectId": "huya",
-    "materialSha256": "70e9cd59125c6b35b0a0dda4c384a6492a5e7539417bd094b932116ef935d13c",
+    "materialSha256": "8cfd41ac3a99dd76c340e24e25fecbfc8627448a0409cbd079b432dd6c08f719",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2908611ea7b15129ce5cb0a6fcf75d2dc1ef5234eb3bcbefaecbec9e7fe7214f"
+    "sha256": "3bcc3fc8a680bc79a56a8a927d626323689941f99163c832852583651e5a6a65"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "56857faf3daca70e0545137d192be72b61221584342e65478de7783309926074"
+    "bindingsSha256": "33429f64c9d2fbf3101bc28a8c63b19631eeb46d59429252d28eda744420a7b0"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e95b14e1aaf27b458dbbba32902bcde3302ec0858e53833a5e8a0a75e59c4e45",
+      "sha256": "858561f532494eab1bc580f699aa9e0b21e647accda80be6efcfbe508b836056",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -193,8 +193,7 @@
             "latitudeSegments": 36,
             "longitudeSegments": 72,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "meshoptimizer",
@@ -216,8 +215,7 @@
                 "expectedFaces": 5040
               },
               "faceBudget": 800,
-              "tileSize": 128,
-              "atlasColumns": 16,
+              "texelsPerFace": 16384,
               "primitive": "u",
               "simplification": {
                 "method": "source-meshoptimizer",
@@ -240,7 +238,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "10e192b36427399d0bf735fd2ff542aeefb03bb5c1903af0988f521ddf9c111a",
+      "sha256": "b48c55f753bde7a69af5277d3ab8b49aa124bf0fb0b14da592e51a551673fb95",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -277,21 +275,6 @@
                 "catalogueId": "jpl-small-body-database",
                 "locator": "Target physical data: RAD (km)"
               }
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "2.647 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "4.31 years"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "17.4 days · pole unresolved"
             }
           ],
           "moreFacts": [
@@ -421,7 +404,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "cf83a84097c1adaaf528f9c29592e8758df3d4c5b4be9c9ee6354862c56b7563",
+      "sha256": "75d57d07d8088550b0ba84b9f55681ddbf2fe29fd360e65090695cf37107541b",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -432,7 +415,6 @@
           "metadata": "metadata_nomenclature_points_MATHILDE.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "mathilde-features.json",
         "publicBase": "/scenes/mathilde/",
         "target": {
@@ -877,8 +859,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "10e192b36427399d0bf735fd2ff542aeefb03bb5c1903af0988f521ddf9c111a",
-      "bytes": 10557,
+      "sha256": "b48c55f753bde7a69af5277d3ab8b49aa124bf0fb0b14da592e51a551673fb95",
+      "bytes": 10188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -950,8 +932,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "9f339dacb4f64327dfbf20a49e53eac2a9f087196735fa43369648c80e992155",
-      "bytes": 155,
+      "sha256": "36f43bd3ea3b0dedceada1f503ca5994613cb55ed000fcb5133a373999db22fd",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1030,8 +1012,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
-          "bytes": 717042,
-          "sha256": "2188b2e86e1b3ca0b4e8c5044aa01eb45e5fc1e9cafc99eb31dc2cca5aed181f",
+          "bytes": 750624,
+          "sha256": "e1cc536e288bbe293c861eb32849860159812b0298daa5553684aa0c88402e9e",
           "verification": "bytes-verified"
         }
       ],
@@ -1086,8 +1068,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-surface@2x.webp",
-          "bytes": 517788,
-          "sha256": "5e4bf08d0e4630afc04f3e88f23f370d3ccc53c9fdb4bfcb4874b15ba7719332",
+          "bytes": 532728,
+          "sha256": "ae14800f7a76224d33699ce6285e3578a3642d59be371c9e2fb3bfd0437d8fc8",
           "verification": "bytes-verified"
         }
       ],
@@ -1136,8 +1118,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
-          "bytes": 347054,
-          "sha256": "07b0c53301e720476c4be6b3c4a19ef19083405cbae0950218ef3468804fda6b",
+          "bytes": 349802,
+          "sha256": "cb3f08ce99370cf88d5674ca9ae5bf04a3837d9794e9829e9a8bf7bb47d4199f",
           "verification": "bytes-verified"
         }
       ],
@@ -1169,8 +1151,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6513,
-          "sha256": "e4c041c5e700f5335601df1349d0e284937c04d367a5daed336303710d953a99",
+          "bytes": 6394,
+          "sha256": "01dda9e7596e1172e25ba19895c5919c07f8652d2e9dbe7f68495e790e97afaf",
           "verification": "bytes-verified"
         }
       ],
@@ -1191,7 +1173,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1294,11 +1275,11 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "ba55dc0c8fe0634ba29f7c3f76be227ff51df1e3a33815362758dc92a5dea506",
+    "materialSha256": "eb0cdf139570f2525b0184e0db25f4ea648fcb515ef2ee074581c24fdc6a14d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "56857faf3daca70e0545137d192be72b61221584342e65478de7783309926074"
+      "bindingsSha256": "33429f64c9d2fbf3101bc28a8c63b19631eeb46d59429252d28eda744420a7b0"
     }
   }
 }

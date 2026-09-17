@@ -553,8 +553,8 @@
     {
       "id": "iapetus-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1189,
-      "expectedSha256": "095a3d6f8e4fa5b3d095c2f07da5d1fec48824177af43a21cfb9a4bd7ac9c715",
+      "expectedBytes": 1155,
+      "expectedSha256": "953dd51ca0337a6f079478442274d3c37c3a4ae98368ddab9bad7f6c97814866",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -571,8 +571,8 @@
     {
       "id": "iapetus-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "85dd8dc31e2301b1f8d901e22972b5ed3f0f93aa3fa347a0c30368cfd8ed3d8e",
+      "expectedBytes": 188,
+      "expectedSha256": "7e60c18d01a9cbd70ec8e3be34b0453228f1da56c78029cf8f63c0401ecd993c",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -750,8 +750,8 @@
     {
       "id": "iapetus-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12417,
-      "expectedSha256": "926612a2ffc16eb0b0f5ebeef0c4265267a5ee79ad929bd3990da3a46c017ab1",
+      "expectedBytes": 12882,
+      "expectedSha256": "64800464bfa30a2aa9542aea6fc31b58f93cfd586f6c560ffeece411676b6d8d",
       "origin": "Repository-authored Iapetus object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -777,8 +777,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1089,
-      "expectedSha256": "371db3b124a84b59b1118ce6c643609cf87c2c65fd476cdda11bf3a4977edcee"
+      "expectedBytes": 2352,
+      "expectedSha256": "27adfdd57ef9603fd69b32d32a05d744dab63b7bd384dbe512077a33f312be18"
     },
     {
       "path": "cassini-ice/evidence/download-receipts.json",

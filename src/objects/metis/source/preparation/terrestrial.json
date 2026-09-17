@@ -188,8 +188,7 @@
         "longitudeDirection": "west-positive"
       },
       "faceBudget": 2000,
-      "tileSize": 32,
-      "atlasColumns": 16,
+      "texelsPerFace": 1024,
       "simplification": {
         "targetFaces": 480,
         "maximumErrorMeters": 500,

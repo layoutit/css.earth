@@ -8,22 +8,41 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "764 solar radii"
+        "value": "764 solar radii",
+        "source": {
+          "url": "https://arxiv.org/abs/2006.09837",
+          "label": "Joyce et al. (2020)",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2006-09837",
+          "locator": "radiusKm; radiusSource"
+        }
       },
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "168 parsecs"
+        "value": "168 parsecs",
+        "source": {
+          "url": "https://arxiv.org/abs/2006.09837",
+          "label": "Joyce et al. (2020)",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2006-09837",
+          "locator": "distanceParsecs; distanceSource"
+        }
       },
       {
         "id": "angular-diameter",
         "label": "Angular diameter (4 µm)",
-        "value": "42.45 milliarcseconds"
-      },
-      {
-        "id": "rotation-period",
-        "label": "Rotation period (P / sin i)",
-        "value": "36 years"
+        "value": "42.45 milliarcseconds",
+        "source": {
+          "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+          "label": "Uniform-disc fit to the February 2020 VLTI/MATISSE continuum data",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
+          "locator": "angularDiameterMas; angularDiameterSource"
+        }
       }
     ],
     "moreFacts": []
@@ -43,7 +62,7 @@
           "path": "../manifest.json"
         },
         "falseColor": true,
-        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
+        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Its bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
         "noData": true,
         "legend": {
           "kind": "scale",

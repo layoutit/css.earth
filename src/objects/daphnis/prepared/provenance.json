@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fc3555e94dc4047d179df05eeb1acb80289f2470fea4ac259a5527fc498d9b2b"
+    "sha256": "7cbd18efaab9e866fce7d03075c91d4ec531b6789a46209fa01ad835c823448e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7dcaee707a97d36bca4f5fe6c6ce5d1bcf8a2c1faee51dd1e523b49ea09426d0",
+      "sha256": "00818e0ea114d2a329dedb9db5cd9871e53639fd1f9e0bc1139000aea4ec84f1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -316,8 +316,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "targetFaces": 400,
               "maximumErrorMeters": 200,
@@ -336,7 +335,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "62841d0d2ec141ef161afc525dd9794caa3b70fd5cfefe4812390e4ffb37fd1f",
+      "sha256": "038e8498771c2a32b468e0d1c601f38d1197cff9b453cc3e02e60d8aca00d9d7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -344,11 +343,6 @@
         "displayName": "Daphnis",
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "3.8 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "System solar semimajor axis",
@@ -365,22 +359,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "14.3 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 136,505 km"
+              "value": "14.3 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Cassini imaging team · 2005"
+              "value": "Cassini imaging team · 2005",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/2; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -1172,8 +1172,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "62841d0d2ec141ef161afc525dd9794caa3b70fd5cfefe4812390e4ffb37fd1f",
-      "bytes": 4922,
+      "sha256": "038e8498771c2a32b468e0d1c601f38d1197cff9b453cc3e02e60d8aca00d9d7",
+      "bytes": 5297,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1217,8 +1217,8 @@
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-surface@2x.webp",
-          "bytes": 267548,
-          "sha256": "b6a819ab54e43a39431d3e04d0eb2060fd02229d8382a0c00c050f88f5914993",
+          "bytes": 270546,
+          "sha256": "7a97ae9e0c20ef0e931812e38cb7b13c5551cf16d4d03918718ac1650ec25c6c",
           "verification": "bytes-verified"
         }
       ],
@@ -1267,8 +1267,8 @@
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
-          "bytes": 184148,
-          "sha256": "b50f2dd87b3491689ef0f2f1933d90a5372e301f236fc04f7059e1fa22c816ec",
+          "bytes": 193276,
+          "sha256": "b67235fa8883f17d91bc01233cd81c34ff8de07af3d1c20039e93d6f0c4caa93",
           "verification": "bytes-verified"
         }
       ],
@@ -1317,8 +1317,8 @@
         },
         {
           "url": "/scenes/daphnis/daphnis-filter-color-surface@2x.webp",
-          "bytes": 179644,
-          "sha256": "9955e0ae98ca5a98ee01c49a19597dbb9b672dd9c37b63c562d98d7064573be4",
+          "bytes": 188686,
+          "sha256": "f6cb0c06b7d4bcaa3ec1b083fdeb1fd871eabeb29bacf76ee2f650efe6bf014f",
           "verification": "bytes-verified"
         }
       ],
@@ -1350,8 +1350,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5738,
-          "sha256": "48639e1f69f8bf6f19f8bd01a32f71a7cb18f50f4a98a11729c27baa45b87eb2",
+          "bytes": 6063,
+          "sha256": "5e6b35ebd89cbcfeb6c4c98d2f36fff25be87ad65b40c3df9fa5e128847ed7ae",
           "verification": "bytes-verified"
         }
       ],
@@ -1439,7 +1439,7 @@
   },
   "lastPreparation": {
     "objectId": "daphnis",
-    "materialSha256": "a26dbe6c776a6cc8a26eeb833f510680a835b9063515db9d6d92ee6fb0d27413",
+    "materialSha256": "1d72ff6b4e2c16e7c9cea399b10c9c3dc492befa7c5dbe509020d897df7cac50",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

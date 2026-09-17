@@ -12,7 +12,7 @@ const replacementId = targetId === 'mars' ? 'mercury' : 'mars';
 const output = `output/playwright/flight-activation-${targetId}-dpr-${process.env.DPR ?? 1}`;
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({headless:true, ...(process.env.CHROME_EXECUTABLE ? {executablePath:process.env.CHROME_EXECUTABLE} : {channel:'chrome'})});
-const start = `${origin}/sun/?overview=solar-system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbkXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA`;
+const start = `${origin}/sun/?overview=system&v=QMbBjrZTdiHH30GM5sCQv8l4wiAhrbgbkXxBQsczQAAAAD_Kd0sE6289P8zJjb7eDje_4KrSDNFvFQABAAAAAAAAAAA`;
 type ActivationSample = {count:number;ready:boolean};
 declare global { interface Window {
   __activationTarget:string; __activationSelector:string; __activationSamples:ActivationSample[]; __activationFrame:number;

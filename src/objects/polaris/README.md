@@ -19,9 +19,9 @@ Polaris is the North Star, a supergiant Cepheid in Ursa Minor. Its package holds
 
   | Star | Spot contrast ratio | Correlation with the spotless image |
   |---|---|---|
-  | π¹ Gruis | 5.22 | 0.07 |
-  | Betelgeuse | 2.90 | −0.02 |
-  | Polaris, April 2021 | 1.05 | 0.58 |
+  | π¹ Gruis | 5.22 | 0.10 |
+  | Betelgeuse | 2.73 | 0.02 |
+  | Polaris, April 2021 | 1.05 | 0.57 |
 
   [`source/reference/spotless-disc-comparison.png`](source/reference/spotless-disc-comparison.png) shows the Polaris maps side by side.
 
@@ -33,7 +33,7 @@ Polaris is the North Star, a supergiant Cepheid in Ursa Minor. Its package holds
 
 ## Known problems
 
-**No image of the surface.** The authors' merged CHARA/MIRC-X file of 2 to 4 April 2021 is public, and SQUEEZE fits it well. But the disc is about six interferometric beams across, and the same recipe run on a spotless disc sampled the same way draws the same dark spots east and west of centre, at the same contrast. What differs between the two images is a faint brightening to the north, the direction of the bright spot the paper reports, too weak to show as a surface. The paper's own SURFING and ROTIR maps carry the same warning and are not deposited as data.
+**No image of the surface.** The authors' merged CHARA/MIRC-X file of 2 to 4 April 2021 is public, and SQUEEZE fits it well. But the disc is about six interferometric beams across, and the same recipe run on a spotless disc sampled the same way draws the same dark spots east and west of centre, at the same contrast. What differs between the two images is a faint brightening to the north, the direction of the bright spot the paper reports, too weak to show as a surface. The paper's own SURFING and ROTIR maps carry the same warning and are not deposited as data. Reconstructing on a sphere with the public ROTIR code, as the authors did, does no better: no fixed surface fits the closure phases better than reduced chi-squared 5.58, its spots are only 1.53 times a spotless disc's, and the two interleaved halves of the data give spots that barely agree (correlation 0.28). [Interferometric imaging](../../../docs/interferometric-imaging.md) describes both checks.
 
 **The asymmetry is real.** A disc does not fit the closure phases (reduced chi-squared 18.9), and the faint companion Polaris Ab does not explain them: adding it makes the fit worse. The star is lopsided in some way this coverage cannot draw.
 

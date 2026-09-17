@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a64a12b2edd80ba3bf06e0923698627479f87da4ffc8593115a775f28058502"
+    "sha256": "2f1027d4049874484f83e2b5ed639fc25c16e50e586dafff8e1e7538d09433ba"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "05b5b8a805c91d3ef5a54ee003e1d8a83035a1f4c6ecb92e372d42b2b55bfd6e",
+      "sha256": "5f78cffea01e0432c0fa4feadfda4710270ac6a086c150928ba8bcfab7e7dd20",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1522ae8061a917357a38c3a33a9c351c7acd6dcad021373a9795f7fa829b1f64",
+      "sha256": "3b43367e3c8c2a633c4b50bb03c3923622ac34338b4103a2d9585d10dcfe4568",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "104.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "4.775377 hours"
+              "value": "4.775377 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1836",
+                "label": "DAMIT model 1836",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1522ae8061a917357a38c3a33a9c351c7acd6dcad021373a9795f7fa829b1f64",
-      "bytes": 8667,
+      "sha256": "3b43367e3c8c2a633c4b50bb03c3923622ac34338b4103a2d9585d10dcfe4568",
+      "bytes": 8872,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/diotima/diotima-elevation-surface@2x.webp",
-          "bytes": 301826,
-          "sha256": "b5a76ab40f0a363aadd6dae789a0e34cffd29e4e3a34ae6d710d7277c3616581",
+          "bytes": 379464,
+          "sha256": "9c2cf25d317364e088811520e7665256f62c8f74645294ec4903b02df06d4408",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/diotima/diotima-shape-surface@2x.webp",
-          "bytes": 57350,
-          "sha256": "71bffc7149c3ffbb9dabbc0c22cc532583a79968dd954723689d6435250222cb",
+          "bytes": 78914,
+          "sha256": "270ef8e5cb3a3c065910682b76bd39dd09c8e94bde174e12cb73e125812e08b5",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6367,
-          "sha256": "2f9219e148f78778f671ecbac73daf8a33a5eee31fddbb35ee1af62a2a67e4bd",
+          "bytes": 6525,
+          "sha256": "3f62692eecd086ac22a7038e84920a02b2c3861bc5d618c5e7a2ca3ded5c6e48",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "diotima",
-    "materialSha256": "4077fdc209e2a1e278e51984e3e04671c3913620f6059ed08dd01d18980b1e16",
+    "materialSha256": "4da4ea5eb8fec490b6216cea7d209233c7ad8fe9a377986b06c9711d85c65633",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

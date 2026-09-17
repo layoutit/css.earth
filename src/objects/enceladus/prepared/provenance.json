@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "89ee1a7498519f618600af715fa5059b949f8953fe9056132aaad423c2a2cad1"
+    "sha256": "ed3dbe0911602742981400f3c0d49bbc98b7fa4f34f684aae67b829b79621058"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "8d604abe78a5e0fe301488dc6d2e4b1373c54317d57482f5272d3f05d22f70c2"
+    "bindingsSha256": "babfe8e7b98a728005bb0d659984041db5dfc9965fd2dd65970079bf7690cca9"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ddf536639e479c33d63435df7b03f868bf7dc79768f7d078c74de1940fb0916b",
+      "sha256": "b94fc235b40856e8733be8245274adf7e911c5a97d4c43b13e94a6da5d792719",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -239,8 +239,7 @@
               "expectedFaces": 786432
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -261,7 +260,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e81d2e9f0032fe21cf4316a56ced13c49c900fc7dff914e8549f0a6ff5abf0ad",
+      "sha256": "0b9d2f9b46fda06e9b1b2de6757488c0306921f0c256f76e6574f3dabc624310",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -298,22 +297,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "32.9 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "32.9 hours · synchronous"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 238,000 km"
-            },
-            {
-              "id": "atmosphere-composition",
-              "label": "Gaseous envelope",
-              "value": "A tenuous plume of water vapor and other gases"
+              "value": "32.9 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             }
           ],
           "moreFacts": [
@@ -535,7 +527,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c363ef21603ad9114928376bae4d0390766c05c202881098d3166a52017107fe",
+      "sha256": "441e2c51f0dba574a394cd1aea44a04d8082055038b855897369297146dcc511",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -546,7 +538,6 @@
           "metadata": "metadata_nomenclature_points_ENCELADUS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "enceladus-features.json",
         "publicBase": "/scenes/enceladus/",
         "target": {
@@ -892,8 +883,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e81d2e9f0032fe21cf4316a56ced13c49c900fc7dff914e8549f0a6ff5abf0ad",
-      "bytes": 14681,
+      "sha256": "0b9d2f9b46fda06e9b1b2de6757488c0306921f0c256f76e6574f3dabc624310",
+      "bytes": 14614,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -965,8 +956,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "02505cf90f3299d9da02f513681d1dc5ca2d1458d3ac48edbc8fea6ae861de65",
-      "bytes": 156,
+      "sha256": "25199a65668fe0b541dd7c0197865ae9bb23b2e6a4b417a8a1906a64016b7ebb",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1050,8 +1041,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
-          "bytes": 9033580,
-          "sha256": "03b9058083f3096d4c5a0acdb2659bf2d3154ce26ce5a450e3e4de4e4d399a92",
+          "bytes": 8848352,
+          "sha256": "28ecc531911ca04eac8650a2b8271579e2715f224f0b96f9c823ecf7a16b716c",
           "verification": "bytes-verified"
         }
       ],
@@ -1107,8 +1098,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
-          "bytes": 10574576,
-          "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900",
+          "bytes": 10178686,
+          "sha256": "15855d56e8b59e33be9631f38068bb6a9434b56251fcf087920020bee86eec30",
           "verification": "bytes-verified"
         }
       ],
@@ -1159,8 +1150,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-surface@2x.webp",
-          "bytes": 67618,
-          "sha256": "530427bb129a342b15aaa01415a6d3106c64a389bcd125101d2a74d1c3bd3717",
+          "bytes": 69396,
+          "sha256": "85330a271985baf0842d2949717a8cd4c57807361a8d7927d00cac4e6df48283",
           "verification": "bytes-verified"
         }
       ],
@@ -1211,8 +1202,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-surface@2x.webp",
-          "bytes": 68880,
-          "sha256": "db9135d4a85f658a52b89c269b1eb624d262b12248bbc3b526aa60c826f188d6",
+          "bytes": 70684,
+          "sha256": "c31429c364bb7cb502154b8c5af9c55b492ad179a261071a005a8e2c1d465a1d",
           "verification": "bytes-verified"
         }
       ],
@@ -1255,8 +1246,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
-          "bytes": 116628,
-          "sha256": "8975f412edadf5a90d9830344fd04404491c1fc9be089412278bf82a60d901f3",
+          "bytes": 133586,
+          "sha256": "000412f856790eee25342f2f25f4f0e64d083a6370af77e3b941bf0592421aa1",
           "verification": "bytes-verified"
         }
       ],
@@ -1288,8 +1279,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7911,
-          "sha256": "a03c75d75bdf482c1afdfdb0bc890b05f3810f8eb7425a5027d42cf22ee4ad65",
+          "bytes": 8003,
+          "sha256": "a6944089405f6aa7e22ad97e1470951b68ee538fbb36df5f5377888ddcc46273",
           "verification": "bytes-verified"
         }
       ],
@@ -1310,7 +1301,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1463,11 +1453,11 @@
   },
   "lastPreparation": {
     "objectId": "enceladus",
-    "materialSha256": "ab8f89c929a8f848cd03b4f781700a1ded2d3340227f3425f4762c92718764f1",
+    "materialSha256": "67c978244e8563f4b5c930c4f09ab486f609be3b5379094f4a4d4fb837c8d4fd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "8d604abe78a5e0fe301488dc6d2e4b1373c54317d57482f5272d3f05d22f70c2"
+      "bindingsSha256": "babfe8e7b98a728005bb0d659984041db5dfc9965fd2dd65970079bf7690cca9"
     }
   }
 }

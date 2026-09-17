@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9c30ee2c989fde2e630d31835624bdf70a321826894e360e141e0511edc6c5f1"
+    "sha256": "8ea5101649c29127b8e772f215bc478e4d42f1ac27e3d2885f7757dab5eb336f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "fcb94b46edfea0a8d9badcceffdb40ea7104069951791f56df8063b06dad7c2f"
+    "bindingsSha256": "d57826826929cd8d26f2ffa6279e5f2e35f1e5a3e39756f6fa7dbddafb3d48be"
   },
   "recipes": [
     {
@@ -460,7 +460,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "00397c61e69ff869c90eca04b6d5aeb98e0e806075126de6ec2752579056d01b",
+      "sha256": "9e2e3c63ce14cfee74b348c910dc8b7cd4901c1bd75d77633093ea091722edff",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -536,16 +536,6 @@
                 "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
                 "locator": "/references/2; rotation-period"
               }
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 422,000 km"
-            },
-            {
-              "id": "atmosphere-composition",
-              "label": "Atmosphere",
-              "value": "Thin sulfur dioxide"
             }
           ],
           "moreFacts": [
@@ -887,7 +877,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf",
+      "sha256": "21927345b6204d7414b49f365c46ff33e6ccfdf175fc2219adb387782038c8fc",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -898,7 +888,6 @@
           "metadata": "metadata_nomenclature_points_IO.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "io-features.json",
         "publicBase": "/scenes/io/",
         "target": {
@@ -1584,8 +1573,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "00397c61e69ff869c90eca04b6d5aeb98e0e806075126de6ec2752579056d01b",
-      "bytes": 14237,
+      "sha256": "9e2e3c63ce14cfee74b348c910dc8b7cd4901c1bd75d77633093ea091722edff",
+      "bytes": 13972,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1663,8 +1652,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "2bc17bb8b5b0e11c048f22d0e630fa19596b4c1501c7d72f56bf31cb11d299a4",
-      "bytes": 149,
+      "sha256": "57b9261689b479463ea12838d5639c51da7ebf870db2ba8d9194854fdc8780b9",
+      "bytes": 181,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2453,8 +2442,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4302,
-          "sha256": "947f10fc361e5798b6469520777e311b6ec75ab0a0b09cb980a6ff4fe80ada2d",
+          "bytes": 4125,
+          "sha256": "7e2363095fb2f831eda007a0affe98a81468cf91557e412e9dec38aaea901aed",
           "verification": "bytes-verified"
         }
       ],
@@ -2475,7 +2464,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2628,11 +2616,11 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "a2cc21c1e53e2cd0a36c32ec6455af17888d3fdb6fc8ac1acb0dd5f59110a8e8",
+    "materialSha256": "40df3db06a5b34f39e6fc75ba4b040fa43fefcbf719d5f7d9fec3ad1a7bb9c2c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "fcb94b46edfea0a8d9badcceffdb40ea7104069951791f56df8063b06dad7c2f"
+      "bindingsSha256": "d57826826929cd8d26f2ffa6279e5f2e35f1e5a3e39756f6fa7dbddafb3d48be"
     }
   }
 }

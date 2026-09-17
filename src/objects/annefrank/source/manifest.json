@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2324,
-      "expectedSha256": "11c025d0378fbf45f5c29b380c047a80d15d2633c46e59fc735aa41d5fe3e060",
+      "expectedBytes": 2752,
+      "expectedSha256": "c9f038063c0bffb231554e83994d1482ddf63e3668161c6978a84ec383d73302",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -132,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2675,
-      "expectedSha256": "1e20d8c950e8781f591c47267b277a1630fddfcc6e50e83bdb1014188e03ec55"
+      "expectedBytes": 2656,
+      "expectedSha256": "feb088b1080a6567ca23515d271254dbba10f40ad5c36cc371d337c3a3e36aa1"
     },
     {
       "path": "presentation/minimap.json",
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4326,
       "expectedSha256": "51ca5d4bfb62fac6d6e1709e941863b40e471cbb1dbe38fe41f018e1e1d5639b"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3641,
+      "expectedSha256": "88131927862241f2be2fb0dcc581a3a6657acc82c3a5e83d67e439ad3746fa74",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Annefrank: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

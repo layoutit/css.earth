@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a928bc5934526aa4c77ad5f9c5672721281544fe0c974cf8a3a20ff1771a360"
+    "sha256": "0f88e503dfb9ad55544705c53b7f06b1b958b3315808c2bf7ba6ff601b999c5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "defa08427a342b75a9d3f8054f524b28cee7edf9947b8a5e1a8a8ed315a5f5bd",
+      "sha256": "0c231f693b1d958c72df43fdf712a4a9ad16227dea44d0ba95e6ae1bf72402e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -134,7 +133,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f62b4686ed9474a1797acf181d8d911d8a4cadd17a74cf51bff90f80c79be102",
+      "sha256": "f7b84dc403ccaac777f79d8482057f90315ceb4a1486b212a3b315ef11a713d8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -145,12 +144,28 @@
             {
               "id": "radius",
               "label": "Thermal radius",
-              "value": "≈4.0 km"
+              "value": "≈4.0 km",
+              "source": {
+                "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+                "label": "Comet 137P · shape parameters",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "source-comet-137p-shape-parameters",
+                "locator": "/thermalRadiusKm"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "7.79 hours"
+              "value": "7.79 hours",
+              "source": {
+                "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+                "label": "Comet 137P · shape parameters",
+                "checked": "2026-09-16",
+                "path": "source/shape/model.json",
+                "catalogueId": "source-comet-137p-shape-parameters",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -276,8 +291,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f62b4686ed9474a1797acf181d8d911d8a4cadd17a74cf51bff90f80c79be102",
-      "bytes": 2606,
+      "sha256": "f7b84dc403ccaac777f79d8482057f90315ceb4a1486b212a3b315ef11a713d8",
+      "bytes": 3304,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -315,8 +330,8 @@
         },
         {
           "url": "/scenes/comet-137p/comet-137p-model-surface@2x.webp",
-          "bytes": 40796,
-          "sha256": "5e23f6cfff604d61f855b186067215362344e96d19303c1e5db41448f3c1b216",
+          "bytes": 57284,
+          "sha256": "5487eb75580ed49ea046b6decd7160c0db0abe6af540513b48a8725ae5a5616d",
           "verification": "bytes-verified"
         }
       ],
@@ -348,8 +363,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8873,
-          "sha256": "ac89effddf98ed9a4aadc5e92b64a6081d1190963db59f2ce3c03887f70e51b9",
+          "bytes": 9389,
+          "sha256": "1b8960d904c7cc7e3b9945445fb42780f1bb235ffbfb073cd915bdfdd5e9c8e9",
           "verification": "bytes-verified"
         }
       ],
@@ -362,7 +377,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-137p",
-    "materialSha256": "85efd09f82b06a8c0846ac46e240dc36c3c29197b634f388e89a80a3bf5cda55",
+    "materialSha256": "39ee2b9c5c223ae601785ad4d58c48ffb524adc08c0ff27ede9e0bd1cb8ad4dd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

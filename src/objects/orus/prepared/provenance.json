@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dea3071a8184db842f9f82484552bba7a7dd8a0cbffa1ee4f6f5a2dc1a557d90"
+    "sha256": "8f373f8ceb1c37545b752128080d39e7b822b00214cdfc0476d4b55b761b369c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0948d4990a56dcfc6c5c97094b04ca9919811eca61088a949bd946871446415f",
+      "sha256": "4d8770101a480237afb24dbb240f030d862669664d70425c820cb4b3197b090d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 764.6881738859925,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c5f1d7b1519f9570606ec62180cf6a2a5990e48d9c0aa48bcc1f67bc51bde2e7",
+      "sha256": "fd02c2f6b9b4276d3fe1fd486a6542fea58034539f4adaa1d26b77d25d88336d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,24 +111,43 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Full approximation dimensions",
-              "value": "70.7 × 63 × 51.4 km"
+              "value": "70.7 × 63 × 51.4 km",
+              "source": {
+                "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+                "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-psj-acaf79",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "13.486190 ± 0.000017 h"
+              "value": "13.486190 ± 0.000017 h",
+              "source": {
+                "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+                "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-3847-psj-acaf79",
+                "locator": "/spin/periodHours"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Jupiter Trojan"
+              "value": "Jupiter Trojan",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=21900",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
           "moreFacts": []
@@ -293,8 +311,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c5f1d7b1519f9570606ec62180cf6a2a5990e48d9c0aa48bcc1f67bc51bde2e7",
-      "bytes": 2777,
+      "sha256": "fd02c2f6b9b4276d3fe1fd486a6542fea58034539f4adaa1d26b77d25d88336d",
+      "bytes": 3935,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -337,8 +355,8 @@
         },
         {
           "url": "/scenes/orus/orus-model-surface@2x.webp",
-          "bytes": 55618,
-          "sha256": "507ee9c55c6d92b332a8fe208218fa99751d57eb692a000cb6dc30fc19ef6f22",
+          "bytes": 61588,
+          "sha256": "80fd283a053f74cce7ddf26f1c9a578793586dea66ebc2512605ab7030150824",
           "verification": "bytes-verified"
         }
       ],
@@ -375,8 +393,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3985,
-          "sha256": "56f2e2680118b67e0edbe47523a3a7baf37e72c9b3054df8592f8b570481ee81",
+          "bytes": 4914,
+          "sha256": "e50cd96744894448a2d585808bb7619920e3a8d85c973fe67b73898d297854e5",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "orus",
-    "materialSha256": "de2f04025d7b42a74948949353c914fe5572f42df9f0ac5bd64a2dded662688b",
+    "materialSha256": "087b019bc88cdacca661ce9261d709cf8b540d73a7efc1fbf587d76844909a04",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

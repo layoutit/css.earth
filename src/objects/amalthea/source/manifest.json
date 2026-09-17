@@ -442,8 +442,8 @@
     {
       "id": "amalthea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1157,
-      "expectedSha256": "d67357bb1382bd4e03ebb6cf82a84390d492634dcafc20f331b03a7a776b479a",
+      "expectedBytes": 1125,
+      "expectedSha256": "7c28165f8cee607ed263798df77a92c2f16414e4b3501824b99aa0b6e256cf4d",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -460,8 +460,8 @@
     {
       "id": "amalthea-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
+      "expectedBytes": 187,
+      "expectedSha256": "acc02f8a7259c2b6074f84032d6f93673a3e52c7ef42c80c982af3101e009e49",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -510,8 +510,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5123,
-      "expectedSha256": "58a890c0bc287d9a424a24628d8ecb1f88dc00d8a4c687fea040a6910ddb88a1",
+      "expectedBytes": 5605,
+      "expectedSha256": "3c4b7d7d9cd947af54d97cc3facf73cf22245d58aaa75eb6effd2088dd613d9c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -554,8 +554,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7101,
-      "expectedSha256": "d2bbfd179bc2de99a4244abae90c53e1bc9550abb108ddda43d0466e9cb3fa30"
+      "expectedBytes": 7082,
+      "expectedSha256": "71118cc74433df88d0fad9ec4df5ea3163cf6273028ea10c9ad214e0d2681504"
     },
     {
       "path": "presentation/minimap.json",
@@ -586,8 +586,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1089,
-      "expectedSha256": "cac7d991a2ef6c5ece98f64dc2dfe9e60b0a72a72ddb61b3b2801789f09c92b6"
+      "expectedBytes": 2343,
+      "expectedSha256": "6fe8cfa58f569fcc28ec5fb96dcc64093393ddb25753087304fb277739f8cbe6"
     },
     {
       "id": "amalthea-surface-feature-notes",

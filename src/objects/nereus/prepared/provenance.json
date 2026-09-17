@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7ac20fe47005621de9321c41c1a577696f71a671da95f83e90f2747a6fcaf9ee"
+    "sha256": "765429bcbd673e2f44fd7a3a512f098c23c4661c1a65b094536e2c8e2cb1f6fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2b972ec0482472e97edaa8998d301e3e3fcc73be5f9e897a8987862947edfdc7",
+      "sha256": "106792a875d71fe5553bc7101b71cde050f1733d5033b606859d1fdfc6b7d9eb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -140,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "54d65799cd39a785a78faacebbc8a709f9fcc62439f8f071efb59c2c342e64f2",
+      "sha256": "774095e5b700f1500e3dd3aa5eb9e6774368a3cbe8e810b61e0a3213f32555ea",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -207,7 +206,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "15.16 ± 0.04 hours"
+              "value": "15.16 ± 0.04 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
+                "label": "Nereus · nereus research nereus",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-nereus-nereus-research-nereus",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -380,8 +387,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "54d65799cd39a785a78faacebbc8a709f9fcc62439f8f071efb59c2c342e64f2",
-      "bytes": 9127,
+      "sha256": "774095e5b700f1500e3dd3aa5eb9e6774368a3cbe8e810b61e0a3213f32555ea",
+      "bytes": 9507,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -425,8 +432,8 @@
         },
         {
           "url": "/scenes/nereus/nereus-elevation-surface@2x.webp",
-          "bytes": 285002,
-          "sha256": "0db9bef8b0002b0ecb90a4d0b9b338dabe077cb4bd5edc3029452fa1f71c96e1",
+          "bytes": 345500,
+          "sha256": "ed0be9ac090c915c2d001c41b541b3215a11d5008a48d2a8617551dbddbf0d07",
           "verification": "bytes-verified"
         }
       ],
@@ -469,8 +476,8 @@
         },
         {
           "url": "/scenes/nereus/nereus-shape-surface@2x.webp",
-          "bytes": 63536,
-          "sha256": "fb86c4072caba5e75d529989c4f76df64254bb02a777c48f03269bfe768a428e",
+          "bytes": 81956,
+          "sha256": "cd4605ef6e33b13c18e89a2ac4782edd84fafa531e5707056e553ab6f362a250",
           "verification": "bytes-verified"
         }
       ],
@@ -502,8 +509,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6351,
-          "sha256": "f06df10abd998bee5b4968283440520ca7c119c9e60e9bb2e5b2cd503a62be08",
+          "bytes": 6640,
+          "sha256": "c52f37b78253c60087c7b27effca37fa96743758c41a237039034bf9da1cd71c",
           "verification": "bytes-verified"
         }
       ],
@@ -566,7 +573,7 @@
   },
   "lastPreparation": {
     "objectId": "nereus",
-    "materialSha256": "25a731ba8009c783c83557d655cde79db70a13d72b42c327e3ef7d9105af7bfd",
+    "materialSha256": "35f9f8bb9ef38c4e9bcc4ba9a09b37f12c71211f7c441ea31f462c7ffe5607b5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

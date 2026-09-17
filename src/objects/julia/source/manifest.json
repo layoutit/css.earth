@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7003,
-      "expectedSha256": "4cea2011fc4ce8db9adddbe7a114a90a926a381e10a77862b1b8cb8a83b7b07f",
+      "expectedBytes": 6771,
+      "expectedSha256": "e6abb400c7f0d9752e85c57bffbd792bacd15055ead465b2c45afabf578894bb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2845,
-      "expectedSha256": "34b31ea345bc491cb6feecab52e2565fdf510634675ab606a9fb3055d428e667"
+      "expectedBytes": 2826,
+      "expectedSha256": "6e7f03879596b472cebd7082d17b80c67a7931edcf394f75ef64aa3cc1485da1"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 41,
       "expectedSha256": "c6ec5a7ad206a337c25efa1b05dcd23b2580542fb884a305b2f86583ded0f343"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5348,
+      "expectedSha256": "c045af5d1a555cf4190e5cc6da1f42072ef2d59903983058e10f947c04add6fc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Julia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

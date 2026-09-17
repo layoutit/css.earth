@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8bbc0dcb7369a2dc62f2c6059865e5e84cc627823c50d1fa64a1b6d97213e517"
+    "sha256": "b63658a5efcd815549b608cc433ff5000677ca7e9a24bf037d93b96144abbac1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "0933c45d262682b94e0010335a0875555a6d3ece2ec4bc86c57c3d7186548707"
+    "bindingsSha256": "a55f90d66a3e015a22097f865efa499b5012cc2554e8788a862cc59ccf7111ae"
   },
   "recipes": [
     {
@@ -156,7 +156,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4102e74b658b89d32f3be5ef538d7e219557caa2e3106cf27a1cebcc4f517b06",
+      "sha256": "7d4efccc31cb9cb2e1925bfb774948735be0fd3e3a8b520304abaacecd539719",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -210,22 +210,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "16.69 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "16.69 days · synchronous"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 1,883,000 km"
-            },
-            {
-              "id": "atmosphere-composition",
-              "label": "Atmosphere",
-              "value": "Very thin carbon dioxide, oxygen and hydrogen exosphere"
+              "value": "16.69 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             }
           ],
           "moreFacts": [
@@ -376,7 +369,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "23e234f835da8bc7877fd8be8c16bcb218afa9cee16abd01ce065bb42767828a",
+      "sha256": "6621ff031a61e771e0db9af9264d853885f93b89f5b9e6dfdd9b56a54e885c3c",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -387,7 +380,6 @@
           "metadata": "metadata_nomenclature_points_CALLISTO.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "callisto-features.json",
         "publicBase": "/scenes/callisto/",
         "target": {
@@ -649,8 +641,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "4102e74b658b89d32f3be5ef538d7e219557caa2e3106cf27a1cebcc4f517b06",
-      "bytes": 11134,
+      "sha256": "7d4efccc31cb9cb2e1925bfb774948735be0fd3e3a8b520304abaacecd539719",
+      "bytes": 11055,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -728,8 +720,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "a3f124900fc2f62dc6d3b76ead7962907ae909c5203e3104950fe56368befde5",
-      "bytes": 155,
+      "sha256": "b6a0020a853ab46efd7907ccefde2f248afa704f80cc7a89119f5ea0656dc027",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1388,8 +1380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6439,
-          "sha256": "f5f80158722d2556d00a20590efccfabc438d17375c0dcc1da7bebbb4bce0578",
+          "bytes": 6401,
+          "sha256": "2453ddf96fa3cbb8fd495854a70d8fdee77ed035b9a1eae4dd1f11068822621e",
           "verification": "bytes-verified"
         }
       ],
@@ -1410,7 +1402,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1513,11 +1504,11 @@
   },
   "lastPreparation": {
     "objectId": "callisto",
-    "materialSha256": "173eac8635786c3cb193397a08afbe566ef2f8cec49ded0698082663116381bc",
+    "materialSha256": "3d29082dc7ebf9ba90ad43a2403aba9401ff1c3390808c4436854da69132ce24",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "0933c45d262682b94e0010335a0875555a6d3ece2ec4bc86c57c3d7186548707"
+      "bindingsSha256": "a55f90d66a3e015a22097f865efa499b5012cc2554e8788a862cc59ccf7111ae"
     }
   }
 }

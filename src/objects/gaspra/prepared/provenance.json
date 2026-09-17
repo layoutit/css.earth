@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "16dee15f594c002423f99a4dbf00b76cc6876b74d3743cd26fb4c9cda39d9bd2"
+    "sha256": "c50c5f5587f64e9701e44938bae59550113a33bf28bbcc049312724677cd820d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "352a301e65f9dd65bfc776a8e928010e7407078a2da08cca5cbaee9b8af651fa"
+    "bindingsSha256": "c9541715c6ec434911e38a4d7d0687b8e7b9390b29ced0affb57a700a2bc8984"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "90193a15b4d1339b9ada3687b9247d9d0623b03a0c787c2326500b584f58dea5",
+      "sha256": "83679163dfd24b2c16c1599f92a23c848de01c1cb16355e390ecb1f1508cd4f7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -225,8 +225,7 @@
               "expectedRecords": 16471
             },
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -247,7 +246,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "200826b43945ab958f7e12b24faac5e643b42fa7ee9f3b5b31665aa325641ff5",
+      "sha256": "425868d8de95a6b26ea688c336b47d7927570bd92b974b568b5d88c53f3b2c3b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -275,22 +274,41 @@
             {
               "id": "radius",
               "label": "Mean radius",
-              "value": "6.1 km"
+              "value": "6.1 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.diameter (km) / 2"
+              }
             },
             {
               "id": "distance-from-sun",
               "label": "Solar semimajor axis",
-              "value": "2.210 AU"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbital period",
-              "value": "3.28 years"
+              "value": "2.210 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.a (au)"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "7.04 hours"
+              "value": "7.04 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=951",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": [
@@ -431,7 +449,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "e56d3db7e5b847cc73d83d0652ad5c4d7658b992b79923a37433422a4941f1a7",
+      "sha256": "1ed82e0b3f8da4a864007f335e6e319bb48f06cab62554bfa7f5d418881fedd3",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -442,7 +460,6 @@
           "metadata": "metadata_nomenclature_points_GASPRA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "gaspra-features.json",
         "publicBase": "/scenes/gaspra/",
         "target": {
@@ -1151,8 +1168,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "200826b43945ab958f7e12b24faac5e643b42fa7ee9f3b5b31665aa325641ff5",
-      "bytes": 10278,
+      "sha256": "425868d8de95a6b26ea688c336b47d7927570bd92b974b568b5d88c53f3b2c3b",
+      "bytes": 11176,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1224,8 +1241,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "d7e2f54918ea9f280437edf5ebd10a617c6fd23307f04b1b9670f77b5df71a7d",
-      "bytes": 153,
+      "sha256": "07d4e8873ba3816e9c7d656f4058d4a44e6c9565d03b5bf96f8764a07454e98d",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1306,8 +1323,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
-          "bytes": 708436,
-          "sha256": "aa441403fbd65f7cb2ccd8d4217fa7d5b49111aec5cdde90aab4d5a003ee9a44",
+          "bytes": 703350,
+          "sha256": "ab77f49e5aa7519800d14cfbe82472b571a3d6bc5016a9a7e865116a12f5820e",
           "verification": "bytes-verified"
         }
       ],
@@ -1361,8 +1378,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
-          "bytes": 271942,
-          "sha256": "86ef94c2cd16adc212240f44b3f0c15b943934b20453c593dc96e38430bac270",
+          "bytes": 337794,
+          "sha256": "a74a33d98556edffbd56f2ed1389ffc71eefe2277ff7ea665de1553ac14d3cb2",
           "verification": "bytes-verified"
         }
       ],
@@ -1419,8 +1436,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
-          "bytes": 223214,
-          "sha256": "eb5fe9a6c6057a343f17272971ebab5c742e861e74764273151ffe05a656fff6",
+          "bytes": 232904,
+          "sha256": "a025a05ca0435883d985887051c2b7864b4d80d0ff83eaf5720f7a1cc24e245a",
           "verification": "bytes-verified"
         }
       ],
@@ -1452,8 +1469,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6482,
-          "sha256": "1d699c3bed02f3891f3f169ce71db91b169b85b7f2481179fb44d4db20c9c42f",
+          "bytes": 7269,
+          "sha256": "9b13d7d6f978661c1d9bb3d85c1e3121c20ff12ada41b0a4cf91fdf22db32d1f",
           "verification": "bytes-verified"
         }
       ],
@@ -1474,7 +1491,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1577,11 +1593,11 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "635bc327c8c9a84dc8b83c1ebc1dfdfe0fbd8459a0b5b7782ab2b9028b2d1c1d",
+    "materialSha256": "5fd5288c4b293eacfecd0061f7c85819bf81bb2bac1245dacd959a618b29dacc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "352a301e65f9dd65bfc776a8e928010e7407078a2da08cca5cbaee9b8af651fa"
+      "bindingsSha256": "c9541715c6ec434911e38a4d7d0687b8e7b9390b29ced0affb57a700a2bc8984"
     }
   }
 }

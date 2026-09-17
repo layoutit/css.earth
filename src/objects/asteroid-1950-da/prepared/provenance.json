@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2308c15ba553e5a6473158b3d23a971fdfc91bfadac5ee71313a51cb224ce48"
+    "sha256": "c5dc9d991405a099576d057a2175b156fdc377708d93128c7acf04b68ddf9cbb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4217a26438fee5b8f75b97ed66e0eab1c1017b81fe159b9adacfa7693ea4ab28",
+      "sha256": "5d04d40ebc56e48b703197b733edb64f6769592a7c4f58e75519f85b51c274ec",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -114,8 +114,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -428,8 +427,8 @@
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-elevation-surface@2x.webp",
-          "bytes": 329432,
-          "sha256": "d11a7b270b4246f282be9cb8878e48a0e26b09e7dc6dfe3dcd1e0d7ed17886d3",
+          "bytes": 403100,
+          "sha256": "86e3497d96f8a95d3bf72c4e802f7de8e054a71a38fcf4a82479dd1318fb3dd3",
           "verification": "bytes-verified"
         }
       ],
@@ -472,8 +471,8 @@
         },
         {
           "url": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
-          "bytes": 60016,
-          "sha256": "ebb7ef9fd178a22c01b5b2ce2193803c80fa245b4a557bf50bb8a583099fbcfb",
+          "bytes": 78928,
+          "sha256": "20d5d9515fb38fdbf67bfef380a7b8ff7dfef924a182f6e08981aec783fd3b3c",
           "verification": "bytes-verified"
         }
       ],
@@ -569,7 +568,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1950-da",
-    "materialSha256": "cc92b9e4e4f95aefba36a16a2d5909140ebbea59101327b3cb562828d6ccd840",
+    "materialSha256": "0898839a7d3193851e6cbda840f23fee9484afca0d688deb0be22e22325af350",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -2,9 +2,9 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, basename } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { readAuthoredSources } from './authored-sources.js';
+import { readAuthoredSources, verifiedSource } from './authored-sources.js';
 import { parseWorldContextSource } from '../../src/preparation/spatial-context.js';
-import { authoredPresentationBasis } from './world-navigation-sources.js';
+import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, type SurfaceMapPlacement } from './world-navigation-sources.js';
 import { preparePhysicalMaterialTracks } from './world-navigation-materials.js';
 import { preparePhysicalWorldFrame, transform, transpose, type Matrix3, type Vector3 } from './world-navigation.js';
 
@@ -30,6 +30,8 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const direction = await import(pathToFileURL(resolve(projectRoot, 'src/platform/prepare-sun-view-direction.mts')).href) as Input;
   const ecliptic = presentation.prepareEclipticPresentationFrame(descriptor.id);
   const authored = authoredPresentationBasis(sources, ecliptic.basis.flat() as Matrix3);
+  // The frame and the sun follow the body as drawn, mirror included; material tracks keep the authored mesh rotation.
+  const bodyToPresentation = renderedBodyToPresentation(definition, descriptor.id, await surfacePlacement(objectDirectory, bound, sources.get('features')));
   const bodyToReference = solar.requireBodyFixedToIcrf(descriptor.id) as Matrix3;
   const bodySun = solar.requireBodyFixedSunDirection(descriptor.id) as Vector3;
   const distanceM = solar.requireBodyOrbit(descriptor.id).heliocentricDistanceAu * solar.ASTRONOMICAL_UNIT_KILOMETERS * 1000;
@@ -38,26 +40,35 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const renderedRadiusUnits = authored.sourceRadiusUnits * authored.tilePixels * definition.camera.sceneScale;
   const eclipticUp = transform(bodyToReference, solar.requireBodyFixedEclipticNorth(descriptor.id));
   const frame = preparePhysicalWorldFrame({ referenceFrame: 'sun-icrf', epochJdTt: solar.SOLAR_GEOMETRY_EPOCH_JD_TT,
-    originM, bodyToReference, bodyToPresentation: authored.bodyToPresentation, orbitUpReference: eclipticUp,
+    originM, bodyToReference, bodyToPresentation, orbitUpReference: eclipticUp,
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
   const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
   const camera = alreadyPhysical ? definition.camera : physicalCamera(definition.camera, definition.sky.projection, descriptor.recipe.paging !== undefined);
-  const sky = alreadyPhysical ? definition.sky : { ...definition.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
-    sceneRegistration: matrixCss(transpose(frame.presentationToReference)),
-    sceneRegistrationModel: 'icrf-in-authored-presentation-frame', sceneRegistrationEpoch: solar.SOLAR_GEOMETRY_EPOCH_LABEL };
-  const localDirection = transform(authored.bodyToPresentation, bodySun);
-  const sun = alreadyPhysical ? definition.sun : definition.sun ? { ...definition.sun, localDirection,
+  // The sky cube and the Sun ride the frame for every capability, so both follow the body as drawn.
+  const sceneRegistration = matrixCss(transpose(frame.presentationToReference));
+  const sky = alreadyPhysical ? { ...definition.sky, sceneRegistration } : { ...definition.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
+    sceneRegistration, sceneRegistrationModel: 'icrf-in-authored-presentation-frame', sceneRegistrationEpoch: solar.SOLAR_GEOMETRY_EPOCH_LABEL };
+  const localDirection = transform(bodyToPresentation, bodySun);
+  const sun = definition.sun ? { ...definition.sun, localDirection,
     referenceViewDirection: direction.prepareSunReferenceViewDirection({ bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
   const prepared = preparePhysicalMaterialTracks({ definition: { ...definition, camera, sky, sun }, ...authored, sources,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
   return { definition: prepared, frame,
     receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id, sources: pinnedSources,
-      frame, bodyToPresentation: authored.bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
+      frame, bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
       tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits,
-      sourceGeometryConvention: 'PolyCSS authored mesh axes; world raster X/Y transport is shared with the retained source geometry',
+      sourceGeometryConvention: 'body as drawn: retained node chain at the first spin keyframe, then the surface map axes and left edge the feature labels use; PolyCSS writes world X/Y as CSS Y/X',
       ephemerisSource: 'src/platform/solar-geometry.mts' } };
+}
+
+/** The surface map the feature labels place names with, or PolyCSS's own placement for a body without one. */
+async function surfacePlacement(objectDirectory: string, bound: Awaited<ReturnType<typeof readAuthoredSources>>, features: Input | undefined): Promise<SurfaceMapPlacement> {
+  if (!features) return POLYCSS_SURFACE_PLACEMENT;
+  if (typeof features.surfaceMap !== 'string') throw new TypeError('Surface features name their surface map.');
+  const map = (await verifiedSource(objectDirectory, bound.manifest, { id: 'surface-map', path: `source/${features.surfaceMap}` })).value as Input;
+  return { prime: map.prime, east: map.east, north: map.north, mapLeftEdgeLongitudeDeg: map.mapLeftEdgeLongitudeDeg };
 }
 
 function physicalCamera(camera: Input, projection: Input, paged: boolean): Input {
@@ -79,7 +90,8 @@ function matrixCss(m: Matrix3): string {
 export async function writeWorldNavigationArtifacts(outputDirectory: string, result: Awaited<ReturnType<typeof prepareWorldNavigationDefinition>>, scene?: Input): Promise<Input | undefined> {
   await mkdir(outputDirectory, { recursive: true });
   const nextScene = scene ? { ...scene, worldFrame: result.frame } : undefined;
-  const outputs = { runtime: result.definition, 'world-navigation': result.receipt };
+  // The scene carries the same frame the descriptor does, so a re-derived frame rewrites it too.
+  const outputs = { runtime: result.definition, 'world-navigation': result.receipt, ...(nextScene ? { scene: nextScene } : {}) };
   for (const [name, value] of Object.entries(outputs)) await writeFile(resolve(outputDirectory, `${name}.json`), `${JSON.stringify(value)}\n`);
   return nextScene;
 }

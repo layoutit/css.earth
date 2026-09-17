@@ -804,8 +804,7 @@
       "latitudeSegments": 24,
       "longitudeSegments": 40,
       "faceBudget": 2000,
-      "tileSize": 128,
-      "atlasColumns": 16,
+      "texelsPerFace": 16384,
       "simplification": {
         "method": "source-meshoptimizer",
         "targetFaces": 1200,

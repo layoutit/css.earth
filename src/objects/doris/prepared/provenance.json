@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8a22eb8d222eaf2c224c2baa3c21400c72cce66cec9d0a67d1ea467bc1bf2802"
+    "sha256": "013ea2df569c011608d6e36e3fd83ccd5ad921962f66f344eb52ca42a10c9a9c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "83642a61748ea7407dae7f54c28d23b8daddcf8884e4e216ce6f5f503ef57efe",
+      "sha256": "ad0ce6cd6ff9e32f7cfc6f78b9bf92d13e34101251058bdd421abfb3bb080981",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "548804f97a20e0c483bfaff35f45b6c76032a50d758b19f78bd44dacac3098cd",
+      "sha256": "79f4b2e8ec34dca2a5ea831b2ea94d91c0b4246149cbc21c73da36fe1f52e8ab",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "105 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "11.8901 hours"
+              "value": "11.8901 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845",
+                "label": "DAMIT model 1845",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "548804f97a20e0c483bfaff35f45b6c76032a50d758b19f78bd44dacac3098cd",
-      "bytes": 7458,
+      "sha256": "79f4b2e8ec34dca2a5ea831b2ea94d91c0b4246149cbc21c73da36fe1f52e8ab",
+      "bytes": 7665,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/doris/doris-elevation-surface@2x.webp",
-          "bytes": 313680,
-          "sha256": "ae3223fce187c8525fc2a5d28cdbd558432aba35c2a23dc0795fc33b4c852f04",
+          "bytes": 371816,
+          "sha256": "a1de7d320607e94b7bc59c64edea9505ace1c7fbbaf2cbdc93090dd2a9c1a189",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/doris/doris-shape-surface@2x.webp",
-          "bytes": 58006,
-          "sha256": "9388c1574270908688d24295b72e28a3a04bbdd5e2fe61f3a090182412258f63",
+          "bytes": 78278,
+          "sha256": "40f648f08078f3d4670856d2e271f9a9c4205bc0fc00be6fe8dc28ceaaadf35c",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5186,
-          "sha256": "4003e08d06534320c75700d331f3bd61644e2aeada7fde5df36bfb6730e59df5",
+          "bytes": 5346,
+          "sha256": "52de0080b92a71bbb1d9cb5472343c364b78bfb2f77fb43a12f47108c7dceaad",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "doris",
-    "materialSha256": "5aa51b4c3c6b3e10236c864584d28889fd1c358f5861443ab31b53f452ada026",
+    "materialSha256": "260c437bdcbb76b5d71d8756e65d5dff0d5bf627817a2f4f01e4ccf5cecea686",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

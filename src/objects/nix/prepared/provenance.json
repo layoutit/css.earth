@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3bf65a9b44c58518dedb68674552ffe4afaae8fe82c642eee33ed73a96241da3"
+    "sha256": "629b245f05005acda92c5c161c8b803823fbc34585c06c2ca1e18459cdb06432"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8ad2cf992350f9ad73710f8c98e528ad74de5ffe7dae88a033eb9efaa5c542be",
+      "sha256": "0dba05e245fc5c4997d52b7a090135f3683f713954e6200244c627607c6b8c83",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -121,8 +121,7 @@
               "expectedFaces": 80000
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -142,7 +141,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
+      "sha256": "f19f2ea7ddbc364fc1c0ed6ee1443987abe74378ee5ea84999c662bd4f67e441",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -153,32 +152,28 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "18.3 km (released shape model)"
-            },
-            {
-              "id": "dimensions",
-              "label": "Model dimensions",
-              "value": "48.4 × 33.8 × 31.4 km"
+              "value": "18.3 km (released shape model)",
+              "source": {
+                "url": "https://doi.org/10.6084/m9.figshare.12779948.v1",
+                "label": "Published archive · DOI 10.6084/m9.figshare.12779948.v1",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-6084-m9-figshare-12779948-v1",
+                "locator": "/referenceRadiusKm"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 24.9 days"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from system barycenter",
-              "value": "About 48,694 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 43.9 hours (not synchronous)"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Hubble Space Telescope · 2005"
+              "value": "About 24.9 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days)"
+              }
             }
           ],
           "moreFacts": []
@@ -447,8 +442,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "81a1333d0647405ea05f99c24b6bc8a4bdceb8d759a871b5ce859de83109a83c",
-      "bytes": 3770,
+      "sha256": "f19f2ea7ddbc364fc1c0ed6ee1443987abe74378ee5ea84999c662bd4f67e441",
+      "bytes": 3959,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -491,8 +486,8 @@
         },
         {
           "url": "/scenes/nix/nix-model-surface@2x.webp",
-          "bytes": 73950,
-          "sha256": "ca35a6ea514c2cde36091f4e29990720b80050b1241b278fe697c487d5639c41",
+          "bytes": 85106,
+          "sha256": "af81bd869466c437269433a9733cccdfd2b7a83947e4eeb80e966fca9e89dac6",
           "verification": "bytes-verified"
         }
       ],
@@ -542,8 +537,8 @@
         },
         {
           "url": "/scenes/nix/nix-monochrome-surface@2x.webp",
-          "bytes": 131312,
-          "sha256": "7e67c58b1ee00c5d94dbe4abc3dc79e29eec4f362f176a8ddca058c3f8b25dec",
+          "bytes": 153344,
+          "sha256": "768a9bd32278aa3e853ba0f3eb7583c889378504f28c7bcdd950d96aebca3e59",
           "verification": "bytes-verified"
         }
       ],
@@ -575,8 +570,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3044,
-          "sha256": "c7ec867c8ea70a98b8f0a5bc4c75dc665388b436af5116a831e5eb3af630b20e",
+          "bytes": 3227,
+          "sha256": "de893c538a563a33142bb0a138db01bbbe9c00240ea044d343826988b68349b4",
           "verification": "bytes-verified"
         }
       ],
@@ -639,7 +634,7 @@
   },
   "lastPreparation": {
     "objectId": "nix",
-    "materialSha256": "96703f2a3b8e69f5b6137ea3ce36e3c6f0d0fb61c0ee9568e94aef002de6cfc7",
+    "materialSha256": "199689a413972f70f846b9e1ebd46f3a411291bc6d2946180f56409128802f8d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

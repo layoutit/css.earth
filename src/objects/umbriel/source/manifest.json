@@ -136,8 +136,8 @@
     {
       "id": "umbriel-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1135,
-      "expectedSha256": "b0c1e58544c9c8e165641b9129f82fdba4bf5a83ec3456a425024c46d90f28e3",
+      "expectedBytes": 1101,
+      "expectedSha256": "02873b3abee000973ae23b7905210269c43110a55e9ddbfa8703c9c2102e36bb",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -154,8 +154,8 @@
     {
       "id": "umbriel-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "8681d65321dceaef734f4ca6f53126f8c273af81b5a3abff3c62c5729b093bff",
+      "expectedBytes": 188,
+      "expectedSha256": "94ccd8b5546a6c2efbec8dceee47c33061a509358208f7af6c5788ad229a67b5",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -333,8 +333,8 @@
     {
       "id": "umbriel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7279,
-      "expectedSha256": "c958f6fa1205f46ee4e32c2c357493160f6d753cf051c8e8be9db3d4e1050dae",
+      "expectedBytes": 7744,
+      "expectedSha256": "caa7c939cf033c1deba5d8acee3a12c670e0ba7032ba7c79a1dff3b583ce2a72",
       "origin": "Repository-authored Umbriel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -366,8 +366,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1077,
-      "expectedSha256": "94c057c3c693d2b2e11113b52f8df53ef4f01d2e42d2d9efce51ff5198d91cc5"
+      "expectedBytes": 2323,
+      "expectedSha256": "7fa39d457f98f2eeea06df7563394e9cc85fe9589e6a5cce7a454c2bd6a20018"
     },
     {
       "id": "umbriel-surface-feature-notes",

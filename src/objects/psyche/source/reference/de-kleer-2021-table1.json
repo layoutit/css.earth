@@ -1,0 +1,146 @@
+{
+ "schema": "cssearth-transcribed-table@1",
+ "source": "de Kleer, Cambioni & Shepard (2021), The Surface of (16) Psyche from Thermal Emission and Polarization Mapping, PSJ 2, 149, Table 1, arXiv:2105.11372",
+ "columns": {
+  "image": "image number",
+  "startUtc": "start time, UT on 2019 June 19",
+  "endUtc": "end time, UT",
+  "subObserverLongitudeDegrees": "sub-observer longitude at the midpoint from the Shepard et al. model, light-time corrected"
+ },
+ "note": "Sub-observer latitude is -14 deg for every image (table note b).",
+ "subObserverLatitudeDegrees": -14,
+ "rows": [
+  {
+   "image": 1,
+   "startUtc": "06:33:12",
+   "endUtc": "06:37:46",
+   "subObserverLongitudeDegrees": 200
+  },
+  {
+   "image": 2,
+   "startUtc": "06:38:11",
+   "endUtc": "06:42:47",
+   "subObserverLongitudeDegrees": 193
+  },
+  {
+   "image": 3,
+   "startUtc": "06:43:41",
+   "endUtc": "06:48:52",
+   "subObserverLongitudeDegrees": 185
+  },
+  {
+   "image": 4,
+   "startUtc": "06:49:17",
+   "endUtc": "06:54:41",
+   "subObserverLongitudeDegrees": 176
+  },
+  {
+   "image": 5,
+   "startUtc": "06:54:43",
+   "endUtc": "07:00:35",
+   "subObserverLongitudeDegrees": 168
+  },
+  {
+   "image": 6,
+   "startUtc": "07:00:59",
+   "endUtc": "07:06:23",
+   "subObserverLongitudeDegrees": 160
+  },
+  {
+   "image": 7,
+   "startUtc": "07:17:05",
+   "endUtc": "07:21:38",
+   "subObserverLongitudeDegrees": 137
+  },
+  {
+   "image": 8,
+   "startUtc": "07:22:03",
+   "endUtc": "07:25:36",
+   "subObserverLongitudeDegrees": 131
+  },
+  {
+   "image": 9,
+   "startUtc": "07:25:45",
+   "endUtc": "07:31:26",
+   "subObserverLongitudeDegrees": 124
+  },
+  {
+   "image": 10,
+   "startUtc": "07:31:50",
+   "endUtc": "07:35:23",
+   "subObserverLongitudeDegrees": 117
+  },
+  {
+   "image": 11,
+   "startUtc": "07:35:48",
+   "endUtc": "07:40:13",
+   "subObserverLongitudeDegrees": 111
+  },
+  {
+   "image": 12,
+   "startUtc": "08:02:30",
+   "endUtc": "08:07:43",
+   "subObserverLongitudeDegrees": 72
+  },
+  {
+   "image": 13,
+   "startUtc": "08:08:08",
+   "endUtc": "08:13:35",
+   "subObserverLongitudeDegrees": 64
+  },
+  {
+   "image": 14,
+   "startUtc": "08:13:37",
+   "endUtc": "08:19:32",
+   "subObserverLongitudeDegrees": 55
+  },
+  {
+   "image": 15,
+   "startUtc": "08:19:58",
+   "endUtc": "08:25:28",
+   "subObserverLongitudeDegrees": 47
+  },
+  {
+   "image": 16,
+   "startUtc": "08:25:55",
+   "endUtc": "08:31:05",
+   "subObserverLongitudeDegrees": 38
+  },
+  {
+   "image": 17,
+   "startUtc": "08:31:31",
+   "endUtc": "08:36:22",
+   "subObserverLongitudeDegrees": 31
+  },
+  {
+   "image": 18,
+   "startUtc": "08:47:05",
+   "endUtc": "08:51:42",
+   "subObserverLongitudeDegrees": 9
+  },
+  {
+   "image": 19,
+   "startUtc": "08:52:08",
+   "endUtc": "08:56:28",
+   "subObserverLongitudeDegrees": 2
+  },
+  {
+   "image": 20,
+   "startUtc": "08:57:24",
+   "endUtc": "09:02:37",
+   "subObserverLongitudeDegrees": 353
+  },
+  {
+   "image": 21,
+   "startUtc": "09:03:03",
+   "endUtc": "09:06:38",
+   "subObserverLongitudeDegrees": 346
+  },
+  {
+   "image": 22,
+   "startUtc": "09:07:36",
+   "endUtc": "09:11:13",
+   "subObserverLongitudeDegrees": 340
+  }
+ ]
+}

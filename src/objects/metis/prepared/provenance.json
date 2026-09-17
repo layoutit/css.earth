@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f2625c478b767cb788088363edb319629ae5c003e5ba2b06d2cd7b998ea8d3e2"
+    "sha256": "2ea41a25277269da43ce253b0fbbbf6179034f8b7bf3499c39ffe258062161b0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a98acd40fd61e1f31448623d70dc69869d72a76fe49bd1b6d8d69f1f9014ba50",
+      "sha256": "55e0f729631957ebf1a597de985af67ac1399f907203ba6ac3f2cddab326edda",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -206,8 +206,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 32,
-            "atlasColumns": 16,
+            "texelsPerFace": 1024,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 500,
@@ -227,7 +226,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a841375fece714d1ed75cd44900cdef60d135d85767287bb30b4aa6fced20992",
+      "sha256": "58deccb5e66502ce13927eaa5a6cbed5dde713a2b953e326e00573a73c789a63",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -264,7 +263,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "7.075 hours"
+              "value": "7.075 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/3; P (days) × 24"
+              }
             },
             {
               "id": "rotation-period",
@@ -278,16 +285,6 @@
                 "catalogueId": "nasa-metis",
                 "locator": "/references/2; rotation-period"
               }
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 127,980 km"
-            },
-            {
-              "id": "dimensions",
-              "label": "Dimensions",
-              "value": "60 × 40 × 34 km"
             },
             {
               "id": "discovery",
@@ -923,8 +920,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a841375fece714d1ed75cd44900cdef60d135d85767287bb30b4aa6fced20992",
-      "bytes": 4271,
+      "sha256": "58deccb5e66502ce13927eaa5a6cbed5dde713a2b953e326e00573a73c789a63",
+      "bytes": 4381,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -972,8 +969,8 @@
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 32556,
-          "sha256": "254d4abb6e2e029bb1e98f1b9c03ade012bc6064f6d61176e3e769563b1f780f",
+          "bytes": 42172,
+          "sha256": "c534e6a848805b5808bd458cc82bf0769367e0bb1d66aac05c30008cc4ebfac7",
           "verification": "bytes-verified"
         }
       ],
@@ -1005,8 +1002,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5437,
-          "sha256": "e429b1ac101f5d264bd252f6a27dd6d603c8fb740b3fded03ceb8b8c7bf4da52",
+          "bytes": 5544,
+          "sha256": "c6b61c8bc3b4001b4832a821ede6358156d244b98845059a4ddc88661fad8d80",
           "verification": "bytes-verified"
         }
       ],
@@ -1044,7 +1041,7 @@
   },
   "lastPreparation": {
     "objectId": "metis",
-    "materialSha256": "aef5cc2a7b9192f3c0c2b29ab036fabae511777c488b7d72676c212c991eb759",
+    "materialSha256": "d36232f85c2c7d4ceeff2d59bc6ced3349cdac4fb121b1d9b287805519be8432",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

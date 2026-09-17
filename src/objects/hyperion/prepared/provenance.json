@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f9940b3335bc57481576d23c8201c00fd06b0911def0d81f667d722fb1d66a56"
+    "sha256": "e54af8bb9bee949e90a8424a3ab7e86befde1308366a9bd4c7a3e90065ad4b86"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5ff0937ddec1bab6d6047bb7995da49e52520b48e865e8b2a4757835a212cca6"
+    "bindingsSha256": "1767ac0eca520a513061f482db4b720b6382bbc4c8db61645aa260a6c7c33fa5"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "07c69722d525d92bb574643254090cff6d893aa803c147030511eb53c1c4ad6b",
+      "sha256": "4d8f64ec2cb129eaa4a3edd11efbf2c9944bc7732ff3b25965aeda64da22cbbe",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -822,8 +822,7 @@
             "latitudeSegments": 24,
             "longitudeSegments": 40,
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1200,
@@ -843,7 +842,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
+      "sha256": "4d4b94687eda210fe24d408b410ca380e1c94e23edb5dc602fc521f107e7ffc2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -880,22 +879,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 21.3 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Chaotic tumbling"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 1.5 million km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "William Lassell and William and George Bond · 1848"
+              "value": "About 21.3 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             }
           ],
           "moreFacts": [
@@ -1023,7 +1015,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c0d0b7cc166e1b353bf5cca3c9d87232b0f82ea5e227eb0728c8b67fd2b58539",
+      "sha256": "4b81fdddedcbbc514c30b53ee1d93765f61bbcea9e64265040d1de850c2dbdb5",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1034,7 +1026,6 @@
           "metadata": "metadata_nomenclature_points_HYPERION.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "hyperion-features.json",
         "publicBase": "/scenes/hyperion/",
         "target": {
@@ -3780,8 +3771,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b84cbae0511783baaff74267584b320493806eedb796edff257333b33077c34f",
-      "bytes": 5875,
+      "sha256": "4d4b94687eda210fe24d408b410ca380e1c94e23edb5dc602fc521f107e7ffc2",
+      "bytes": 5822,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3857,8 +3848,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "41fe1439651fc58d55fbc8b1319d75f554562095f3540bfcb58e270bd2d86233",
-      "bytes": 155,
+      "sha256": "2534937facc9cf6fd34df17034c50d9b224f551da176a485cd675dc130e42be0",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3929,8 +3920,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-elevation-surface@2x.webp",
-          "bytes": 893420,
-          "sha256": "cc35d6a02b7c8fe555f3549e44a981c679e41af930d37cca00e31f9f7ea58051",
+          "bytes": 889040,
+          "sha256": "412adfdb5c8d4e47117082c4542a327e4dc1dfa6e3051ee7d8cb11571595531e",
           "verification": "bytes-verified"
         }
       ],
@@ -3995,8 +3986,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
-          "bytes": 1222302,
-          "sha256": "2516d46cd7f61cd9f969409f2d6f893dd7ea7a7f7ef6ccda059e7c0ce716afa2",
+          "bytes": 1242288,
+          "sha256": "edf8474383520ea791c0abc0a7748b1974d2807c4064ada076f49e40895b70b3",
           "verification": "bytes-verified"
         }
       ],
@@ -4077,8 +4068,8 @@
         },
         {
           "url": "/scenes/hyperion/hyperion-filter-color-surface@2x.webp",
-          "bytes": 837090,
-          "sha256": "8910bac7d7aaf43b57cf1e6a7b55e2d9cf773ac93265df5b34cfd549dce5c0f7",
+          "bytes": 924226,
+          "sha256": "b07995991e725b5ddf67c70b0d583988606bb20473aac884b0030163a367b4f9",
           "verification": "bytes-verified"
         }
       ],
@@ -4110,8 +4101,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6040,
-          "sha256": "cd016a52bcd5227e0754328f9944c4bb0e166328ed4d04025db31e52d1172c8a",
+          "bytes": 6145,
+          "sha256": "17c7d76b43770992d0c0da235cb6751dda6e3ecfa6cbaab6f5326db71b6d56d3",
           "verification": "bytes-verified"
         }
       ],
@@ -4132,7 +4123,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -4235,11 +4225,11 @@
   },
   "lastPreparation": {
     "objectId": "hyperion",
-    "materialSha256": "0dec2b3f6cbdfd9cd34046ee36f269ce5f03372cd8010a02526514fd6f05e58a",
+    "materialSha256": "d7adabe598d5342505f9a3610e4626267e6ee5337a01529b11117f80050c328d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5ff0937ddec1bab6d6047bb7995da49e52520b48e865e8b2a4757835a212cca6"
+      "bindingsSha256": "1767ac0eca520a513061f482db4b720b6382bbc4c8db61645aa260a6c7c33fa5"
     }
   }
 }

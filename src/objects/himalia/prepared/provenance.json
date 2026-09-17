@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a73dc748d5ac3b5cc0fa89b832179800a3bfe9068bd979f10e7846f1a0f31744"
+    "sha256": "427b2563665f7d44fa2fb51c830dc4e3ffbed0c1ae61e4bc1c6581c48a8d60f9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e7b4a66f4bd8755207e09ecbba6616066cbea66b33910966a38055c1171ef839",
+      "sha256": "07ddc3a14736a15d84201a817b508bed4a8d796cb01d01121a6e551af21ccd3c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 2125,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f112a6fe39fe13d083be8f83100e215e916e4f99bf9e326eeecc0f01096af661",
+      "sha256": "3b464cbaadd7e24dcd4e7a2d848623bed0b81732262dcc118895772d49e3acc4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,22 +113,41 @@
             {
               "id": "radius",
               "label": "Mean radius estimate",
-              "value": "85 ± 10 km"
+              "value": "85 ± 10 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "JPL Planetary Satellite Physical Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/1; Mean Radius (km) value"
+              }
             },
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Jupiter"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Approximate prolate ellipsoid"
+              "value": "Jupiter",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Charles D. Perrine · 1904"
+              "value": "Charles D. Perrine · 1904",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/2; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -296,8 +314,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f112a6fe39fe13d083be8f83100e215e916e4f99bf9e326eeecc0f01096af661",
-      "bytes": 2544,
+      "sha256": "3b464cbaadd7e24dcd4e7a2d848623bed0b81732262dcc118895772d49e3acc4",
+      "bytes": 3524,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,8 +358,8 @@
         },
         {
           "url": "/scenes/himalia/himalia-model-surface@2x.webp",
-          "bytes": 57272,
-          "sha256": "13b5839d0f36561cbe7e7a8a7bd9f767490aba1eb0dd80abb3eadb06f1af3ac1",
+          "bytes": 62254,
+          "sha256": "7abd95381ffa7b4c2bfb2a4e393e9295bb4cc019d073d448047addf08c2df6eb",
           "verification": "bytes-verified"
         }
       ],
@@ -378,8 +396,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4994,
-          "sha256": "7ccbe653f51e6a45301e933f1dc8cd8f817759007588a74bdeb2ec9ec73f7a3f",
+          "bytes": 5745,
+          "sha256": "fdcb05a2618e983f06c7deb746e5112c4149b9e58078f8cfd39c9dfd822cafac",
           "verification": "bytes-verified"
         }
       ],
@@ -417,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "himalia",
-    "materialSha256": "3022b8eda4ec4a8cb0c640b68db7b8109ae139d626b418d1de8d963e3f540f81",
+    "materialSha256": "5aa31ae54687b4e5bec3b14d7ef8bb0c3c5fe887d80e560eb9d9b9d4dca89140",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

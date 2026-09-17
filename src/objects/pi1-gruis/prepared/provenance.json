@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "93c6c737eff0ea97bd00fb19c9c1e838f271663e1f36762f02d1825af1733ca9"
+    "sha256": "eba7737dea4f84d2cfbe0a57e9f81ad8b4dc10e19a304e842082f22abe5ac6ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
+    "bindingsSha256": "3344d56a871caaba8c91b4ad74cb92f520712f2a523c7c0f9659a1ef5707ff75"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "fb7f28747c741998c26b6cd163931a0d7b90ea0e0a54d4b26e5e8cf030d61f81",
+      "sha256": "ad7f55ec5e58cd3f40837a2d7502c852253f7ccb33ec146717ff6f952cb50a88",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pi1-gruis/",
@@ -111,6 +111,7 @@
                   "maximumGain": 1
                 },
                 "display": {
+                  "basis": "authored",
                   "percentiles": [
                     1,
                     99.5
@@ -127,8 +128,7 @@
                 "consumer": "sphere-photograph"
               },
               "offLimb": {
-                "rotationDegrees": 0,
-                "mirror": true
+                "rotationDegrees": 0
               }
             }
           }
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4c6c317ac9bcda9ab2979a97741968f235d547e775d1285f6b24f799eb04be50",
+      "sha256": "594c5d60b483fbba2ae7aa90b0a56c8cde7018527b752bb455e8c6a304ffd4cd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,22 +176,41 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "316 solar radii"
+              "value": "316 solar radii",
+              "source": {
+                "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+                "label": "Fitted diameter at the Gaia distance",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
+                "locator": "radiusKm; radiusSource"
+              }
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "162 parsecs"
+              "value": "162 parsecs",
+              "source": {
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
+                "label": "SIMBAD: Gaia DR3 parallax",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "simbad-pi1-gru",
+                "locator": "distanceParsecs; distanceSource"
+              }
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (1.65 µm)",
-              "value": "18.17 milliarcseconds"
-            },
-            {
-              "id": "rotation-axis",
-              "label": "Rotation axis",
-              "value": "not measured"
+              "value": "18.17 milliarcseconds",
+              "source": {
+                "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
+                "label": "Uniform-disc fit to the September 2014 VLTI/PIONIER visibilities",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-pi1-gruis-pionier-2014-09-for-image",
+                "locator": "angularDiameterMas; angularDiameterSource"
+              }
             }
           ],
           "moreFacts": []
@@ -454,8 +473,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4c6c317ac9bcda9ab2979a97741968f235d547e775d1285f6b24f799eb04be50",
-      "bytes": 4254,
+      "sha256": "594c5d60b483fbba2ae7aa90b0a56c8cde7018527b752bb455e8c6a304ffd4cd",
+      "bytes": 5369,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -512,6 +531,7 @@
             "maximumGain": 1
           },
           "display": {
+            "basis": "authored",
             "percentiles": [
               1,
               99.5
@@ -536,20 +556,20 @@
       "outputs": [
         {
           "url": "/scenes/pi1-gruis/pi1-gruis-surface-pionier.webp",
-          "bytes": 22586,
-          "sha256": "6ca19cf33073577f323d679cd42c6187d26fcaf73b16a3b882d3d7bd76d706da",
+          "bytes": 22690,
+          "sha256": "a2aa03068d1805635865d0ae90d47b38423e1f045572c3885676951324d3d94a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pi1-gruis/pi1-gruis-surface-pionier@2x.webp",
-          "bytes": 48764,
-          "sha256": "6f090e8d7d3d9b4efea065ca08174ca1dba7374e68b8a7828450aa43610727fd",
+          "bytes": 49486,
+          "sha256": "87cdf97ad8c906855e5d2c6c2abb731d6532380f0d6b1f0a6c8c0abf36d9d545",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pi1-gruis/pi1-gruis-lens-pionier.webp",
-          "bytes": 468,
-          "sha256": "10aea70dd53ce9c5d4a0390462f86cb69f364275980bcaa75d985ef02d8de91c",
+          "bytes": 506,
+          "sha256": "0be4022eb336da910ad659b42bbf8d0cfaec8a671607de7a975b52975780be46",
           "verification": "bytes-verified"
         },
         {
@@ -566,8 +586,8 @@
         },
         {
           "url": "/scenes/pi1-gruis/pi1-gruis-context-pionier.webp",
-          "bytes": 44670,
-          "sha256": "ae882e30590a5c432037221e74d475f280649d25204a0ffbefb8a3cf505a8d99",
+          "bytes": 43688,
+          "sha256": "75f4bb16ed913440aaf9d484820bf5fbccaca8e6dc73f978b7bd875f747de66a",
           "verification": "bytes-verified"
         },
         {
@@ -578,8 +598,8 @@
         },
         {
           "url": "/scenes/pi1-gruis/pi1-gruis-context-pionier@2x.webp",
-          "bytes": 109220,
-          "sha256": "14ef32696dbfdbf1c769bec3fc710662c756717ada739efc5a446c61b00ad1b9",
+          "bytes": 105800,
+          "sha256": "4f48228a82f37ce87a10e38b4674d61758a2d1c7ef7e45f1e1902c07f2acc697",
           "verification": "bytes-verified"
         },
         {
@@ -617,8 +637,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4840,
-          "sha256": "d973fbca3e83914b1d53e93aab19ff26bde8840c51f515e7ad47715496a67763",
+          "bytes": 5726,
+          "sha256": "9b8b53c692af419dabbb457e8c8402a35aac7bb57bf5b86b71ef2ee317bb367a",
           "verification": "bytes-verified"
         }
       ],
@@ -643,8 +663,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/pionier.webp",
-          "bytes": 8988,
-          "sha256": "0e0f321bec38cf4213151182f882d04fa66968335b3315a81c8347f0847919cf",
+          "bytes": 9090,
+          "sha256": "4a88d092361754dbc797e96977e9530bb4f5bb0d1716012b82a2ac0f6c634486",
           "verification": "bytes-verified"
         }
       ]
@@ -656,11 +676,11 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "bba43569b2556a4d78b8335c5e16aebe7da7f830f5a36543777e3e12ade3655e",
+    "materialSha256": "d4b090362bd6c1e5cb26cd0b1ea4b384c9109a6a1806296a81a7ce56b9b97e39",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "da9265a799639139624d34f913e1f12dc209047745b61de57361973d53e88abf"
+      "bindingsSha256": "3344d56a871caaba8c91b4ad74cb92f520712f2a523c7c0f9659a1ef5707ff75"
     }
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c4c3e9ba130822fd3490f636e9e5a482d34e900d9b443741e04293b01187999b"
+    "sha256": "984d250718001baa2d11f092fe16ad1613fd0b932aed0922b9e693069ef15746"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "93ec1d5d2a33aa0be83ec67d1fec65d17e8997155a86b3f95dd1899b20dd0de8",
+      "sha256": "f877a92119ac724704daee78cf921d861cda0fa4a044dc4884ed9899da7e6eeb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 100,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6eb8acab34343099109017c6b001855a7b2bcad8d26643c75fc49bd08a3156c9",
+      "sha256": "5adfd740ce0ace85bdba86e920c3b0a07939e5b5edba0bf786c25e2767272db8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -111,34 +110,43 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Equivalent radius",
-              "value": "About 4.75 km (2025 fit)"
-            },
-            {
               "id": "dimensions",
               "label": "Approximate dimensions",
-              "value": "14.5 × 8.2 × 7.2 km"
+              "value": "14.5 × 8.2 × 7.2 km",
+              "source": {
+                "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+                "label": "Kerberos · measured ellipsoid",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-kerberos-measured-ellipsoid",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto–Charon",
-              "value": "About 32.17 days"
+              "value": "About 32.17 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days)"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Distance from system barycenter",
-              "value": "About 58,300 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation at 2015 flyby",
-              "value": "About 5.31 days; uncertain pole"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Hubble Space Telescope · 2011"
+              "value": "About 58,300 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; a (km)"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +311,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6eb8acab34343099109017c6b001855a7b2bcad8d26643c75fc49bd08a3156c9",
-      "bytes": 3139,
+      "sha256": "5adfd740ce0ace85bdba86e920c3b0a07939e5b5edba0bf786c25e2767272db8",
+      "bytes": 3843,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -347,8 +355,8 @@
         },
         {
           "url": "/scenes/kerberos/kerberos-model-surface@2x.webp",
-          "bytes": 49180,
-          "sha256": "e4a99e6f5d917642326b8a2799ecd497503d4c18d2aa0c12c95bfb61473103e9",
+          "bytes": 60366,
+          "sha256": "290ad53ece1a1b71a8e581decf7a83e7015f057a889033d11e525e2ca84ceb9d",
           "verification": "bytes-verified"
         }
       ],
@@ -385,8 +393,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6231,
-          "sha256": "ccac734770bb643c1570035c1e8b4bc27fe20b2bd57468e5b1ccf8287b6beb53",
+          "bytes": 6794,
+          "sha256": "6f56837d81ff4c9243acfad1ad818f6e061996089e10a44c9b841c4f4de0048a",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "kerberos",
-    "materialSha256": "9dc19c244cba21c30e65c82f45cd80c5218d0b97e68f01e3cf8ae08b66eacc55",
+    "materialSha256": "972362d94d466907fbf6affbf84ee920ecf47c6ec53d9a2f849885e555bb7526",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

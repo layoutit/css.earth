@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<association category="SCI_SINGLE" certified="true" complete="false"
+    mode="Raw2Raw" type="main">
+    <mainFiles>
+        <file category="SINGLE_SCI_RAW" name="GRAVI.2018-01-27T05:30:10.657"/>
+        <file category="SINGLE_SKY_RAW" name="GRAVI.2018-01-27T05:36:13.672"/>
+        <file category="SINGLE_SCI_RAW" name="GRAVI.2018-01-27T05:42:19.687"/>
+    </mainFiles>
+    <messages>
+        <message text="Missing EOP_PARAM for GRAVI.2018-01-27T05:30:10.657_tpl: requested 1, found 0"/>
+    </messages>
+    <associatedFiles>
+        <association category="DISP_MODEL" certified="true"
+            complete="true" match="N/A" type="main">
+            <mainFiles>
+                <file category="DISP_MODEL" name="M.GRAVITY.2020-06-10T12:25:24.786"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="DIAMETER_CAT" certified="true"
+            complete="true" match="N/A" type="main">
+            <mainFiles>
+                <file category="DIAMETER_CAT" name="M.GRAVITY.2017-03-29T11:53:36.950"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="STATIC_PARAM" certified="true"
+            complete="true" match="N/A" type="main">
+            <mainFiles>
+                <file category="STATIC_PARAM" name="M.GRAVITY.2020-06-10T12:25:39.386"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="DIODE_POSITION" certified="true"
+            complete="true" match="N/A" type="main">
+            <mainFiles>
+                <file category="DIODE_POSITION" name="M.GRAVITY.2020-06-10T12:25:23.506"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="STD_SINGLE" certified="true"
+            complete="true" match="calib_plan" type="main">
+            <mainFiles>
+                <file category="SINGLE_CAL_RAW" name="GRAVI.2018-01-27T05:57:43.726"/>
+                <file category="SINGLE_SKY_RAW" name="GRAVI.2018-01-27T06:03:22.741"/>
+                <file category="SINGLE_CAL_RAW" name="GRAVI.2018-01-27T06:09:01.755"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles>
+                <association category="DISP_MODEL" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="DISP_MODEL" name="M.GRAVITY.2020-06-10T12:25:24.786"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="DIAMETER_CAT" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="DIAMETER_CAT" name="M.GRAVITY.2017-03-29T11:53:36.950"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="STATIC_PARAM" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="STATIC_PARAM" name="M.GRAVITY.2020-06-10T12:25:39.386"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="DIODE_POSITION" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="DIODE_POSITION" name="M.GRAVITY.2020-06-10T12:25:23.506"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="DARK" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="DARK_RAW" name="GRAVI.2018-01-27T10:35:32.430"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="DARK" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="DARK_RAW" name="GRAVI.2018-01-28T10:26:40.374"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="P2VM" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:28:16.378"/>
+                        <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:28:55.380"/>
+                        <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:29:34.382"/>
+                        <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:30:16.383"/>
+                        <file category="WAVESC_RAW" name="GRAVI.2018-01-28T10:31:07.385"/>
+                        <file category="WAVE_RAW" name="GRAVI.2018-01-28T10:35:49.397"/>
+                        <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:39:34.406"/>
+                        <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:42:58.415"/>
+                        <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:46:22.424"/>
+                        <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:49:49.433"/>
+                        <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:53:13.441"/>
+                        <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:56:37.450"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles>
+                        <association category="WAVE_PARAM"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="WAVE_PARAM" name="M.GRAVITY.2020-06-10T12:25:42.416"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="DARK" certified="true"
+                            complete="true" match="calib_plan" type="main">
+                            <mainFiles>
+                                <file category="DARK_RAW" name="GRAVI.2018-01-28T10:26:40.374"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                    </associatedFiles>
+                </association>
+            </associatedFiles>
+        </association>
+        <association category="DARK" certified="true" complete="true"
+            match="calib_plan" type="main">
+            <mainFiles>
+                <file category="DARK_RAW" name="GRAVI.2018-01-27T10:33:32.425"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="DARK" certified="true" complete="true"
+            match="calib_plan" type="main">
+            <mainFiles>
+                <file category="DARK_RAW" name="GRAVI.2018-01-28T10:26:40.374"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="P2VM" certified="true" complete="true"
+            match="calib_plan" type="main">
+            <mainFiles>
+                <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:28:16.378"/>
+                <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:28:55.380"/>
+                <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:29:34.382"/>
+                <file category="FLAT_RAW" name="GRAVI.2018-01-28T10:30:16.383"/>
+                <file category="WAVESC_RAW" name="GRAVI.2018-01-28T10:31:07.385"/>
+                <file category="WAVE_RAW" name="GRAVI.2018-01-28T10:35:49.397"/>
+                <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:39:34.406"/>
+                <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:42:58.415"/>
+                <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:46:22.424"/>
+                <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:49:49.433"/>
+                <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:53:13.441"/>
+                <file category="P2VM_RAW" name="GRAVI.2018-01-28T10:56:37.450"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles>
+                <association category="WAVE_PARAM" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="WAVE_PARAM" name="M.GRAVITY.2020-06-10T12:25:42.416"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="DARK" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="DARK_RAW" name="GRAVI.2018-01-28T10:26:40.374"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+            </associatedFiles>
+        </association>
+    </associatedFiles>
+</association>

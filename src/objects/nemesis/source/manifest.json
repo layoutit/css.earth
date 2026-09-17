@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9584,
-      "expectedSha256": "c1cfef491abe6457d7f2bf12a6dfdda293ea065d134c215ebb83fd681ec5bc85",
+      "expectedBytes": 9471,
+      "expectedSha256": "8aa486c4a65c4c06c7a4f12a3640abed06a9b4906b4c5d93ca7c73c9120a4812",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2868,
-      "expectedSha256": "974809a507be5cd35e3658bf0d9baffdbeadc0edb69850455bf1a54a00681f88"
+      "expectedBytes": 2849,
+      "expectedSha256": "4bde6d8085f7fed8d595e6af3b73a6f2554f89190b547614deebde17248d7c20"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "237b83ad9032f428594d6fa2ddc313597df7b809cb73f364901a8a9abe11e8cd"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4576,
+      "expectedSha256": "e6007f5f6486725fd7bc6977b655e4f40a9d4e149b7dd3e141913f6ce47c5f36",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Nemesis: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

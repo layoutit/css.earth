@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10593,
-      "expectedSha256": "d5f0b681b7b5797d1139e480658fbecb665fd5c9c980f69bc5e2a66462249a90",
+      "expectedBytes": 11338,
+      "expectedSha256": "46f622fe249c5b6226fec0e6ed8822d0f1da5619c641f124ebac43d008d886df",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2923,
-      "expectedSha256": "86b9def5cafc1faca410a4e4bc54648672f78f6260e9e36211348611b27acb57"
+      "expectedBytes": 2904,
+      "expectedSha256": "b7533ba100f7350e9d56e39f6e9cbda20b10340d34f844be9083e2817947c791"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -206,6 +206,21 @@
       "purpose": "Bounded source alternatives and scientific limitations.",
       "expectedBytes": 1754,
       "expectedSha256": "2a785e5aec19294cda2df0da87a0da4911e95fef4e337ee5b706e95e17b75f61"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4641,
+      "expectedSha256": "405f78985a7ce320bfc24b77fd9747910e8001b2ee24b62c6f73be5dcebb1c13",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Bacchus: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

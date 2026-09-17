@@ -133,7 +133,8 @@ rotational phase. Keep these questions separate in the qualification evidence.
 Establish sample/line order, pixel origin, aspect ratio, flips and units, then
 inspect one native-pixel projection before fitting or baking. Read the product
 with this repository's own readers: [`tools/fits.mts`](../../../tools/fits.mts)
-for FITS and [`tools/spice/`](../../../tools/spice) for kernels. Both are
+for FITS, [`tools/fits-sky.mts`](../../../tools/fits-sky.mts) for which way a sky
+image faces, and [`tools/spice/`](../../../tools/spice) for kernels. Both are
 self-contained and run under plain Node, without installed packages or a
 prepared checkout, so an unbuilt worktree is not a reason to write a scratch
 decoder in another language. A scratch reader is untested, it can invert an
@@ -276,7 +277,8 @@ close-ups and image delivery size before accepting the larger texture.
 For an authored object, `node tools/prepare-object.mts <id>` runs the whole preparation chain in order for that object only and
 names the step that failed; resume with `--from <step>`. A placed star starts with
 `node tools/objects/star-candidates.mts "<SIMBAD identifier>"` and `node tools/objects/new-star.mts <id>`. Before imagery work on
-a moon or small body, `node tools/objects/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships; see the
+a moon or small body, `node tools/objects/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships, and
+`--archives <id> ...` searches ALMA, ESO, MAST and DataCite deposits for bodies seen from the ground or Earth orbit; see the
 [implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.
 
 Generate the assets actually consumed by each selected view—surface and pole

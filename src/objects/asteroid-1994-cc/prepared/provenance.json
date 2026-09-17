@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "caf737f7785ec72b11007fa6432be78c9de674daf7d0ddfec7d60a0635da319b"
+    "sha256": "668eb5c1773d05f6ef1b785054a6f7884b2d5de7195b946b7f7b576e0248c4ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "afcc48cb198f818c105a80b0dd40fd51eb0f25eb7118ba7729acc941f71e7eb3",
+      "sha256": "3d33035b8874f8ce4000cb95189658c54f8f2cab687371d6d391497d0b7255e0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -114,8 +114,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -136,7 +135,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5ab7681c487072dafc1f277079ea3ce096afb32f3f46f1fec1fbfffe314d3de0",
+      "sha256": "b2f2486add9a8687517b7e5ce0f77c63e93f78599947e634bbf7fae119abd33d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,7 +163,15 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.31 km"
+              "value": "0.31 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/1994CC/brozovic.etal.2011.1994cc.pdf",
+                "label": "Asteroid 1994 Cc · asteroid 1994 cc research cc1994",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1994-cc-asteroid-1994-cc-research-cc1994",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -375,8 +382,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5ab7681c487072dafc1f277079ea3ce096afb32f3f46f1fec1fbfffe314d3de0",
-      "bytes": 11793,
+      "sha256": "b2f2486add9a8687517b7e5ce0f77c63e93f78599947e634bbf7fae119abd33d",
+      "bytes": 12207,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -420,8 +427,8 @@
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-elevation-surface@2x.webp",
-          "bytes": 450112,
-          "sha256": "548e772fe603a1d90c1f68b81cdb235acd21db190cfeea17b42aefd8ed78af7c",
+          "bytes": 519868,
+          "sha256": "7bb55c39cb25e337d8cafc135cc7c5d91902a85f552f71cf79ab881bbd3e1cf3",
           "verification": "bytes-verified"
         }
       ],
@@ -464,8 +471,8 @@
         },
         {
           "url": "/scenes/asteroid-1994-cc/asteroid-1994-cc-shape-surface@2x.webp",
-          "bytes": 61604,
-          "sha256": "df57b97e63f755f519afec29d66c16201456b6933d06d1cf04fa95633ca8ac59",
+          "bytes": 80284,
+          "sha256": "c9c451e95d71c1ae8555c968f2743299d0836cf13c7b1216d76e501e5429a9ef",
           "verification": "bytes-verified"
         }
       ],
@@ -497,8 +504,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9275,
-          "sha256": "5734202f7df41072bec869486ca970ed7179c7352125d2ecd4f13cc29f7cfc3a",
+          "bytes": 9598,
+          "sha256": "a8aa38cdb9d1ca31ea98be8d6eefddc16405e0a5b290110ad8e05358da24e07f",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +568,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1994-cc",
-    "materialSha256": "83772106006f5fbae194a6f5b6f4111f4fc20731b9b8981ac5f72d55d35dc0ce",
+    "materialSha256": "09d8b714be1206aea78f1655b0ef4050e79110fe9e65627953f8fd13433d3e52",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

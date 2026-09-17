@@ -46,7 +46,8 @@ test('projects the Sun anchor and arbitrary points through the same canonical ob
     const transform = preparedVolumeCameraTransform({ world, viewport }, frame, 50);
     const local = pose;
     const cameraToVolume = matrixFromQuaternion(local.orientationXyzw);
-    const view = [cameraToVolume[0]!, cameraToVolume[3]!, cameraToVolume[6]!, cameraToVolume[1]!, cameraToVolume[4]!, cameraToVolume[7]!, cameraToVolume[2]!, cameraToVolume[5]!, cameraToVolume[8]!];
+    // The pose's camera axes are right, up and toward the eye; CSS eye space reverses up.
+    const view = [cameraToVolume[0]!, cameraToVolume[3]!, cameraToVolume[6]!, -cameraToVolume[1]!, -cameraToVolume[4]!, -cameraToVolume[7]!, cameraToVolume[2]!, cameraToVolume[5]!, cameraToVolume[8]!];
     for (const point of points) {
       const source = [point[1], point[0], point[2]] as const;
       const expected = [

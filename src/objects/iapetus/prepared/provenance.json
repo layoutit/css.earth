@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "025d64ce46e78bd9d6a8f695cd91b2ecd71d80f83f2796857b1bb3a8bf945492"
+    "sha256": "268dd6de369cae02bf50a0067317541c64f6384adc94fee185b0bdb6e7cfffcb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "7bbdf8fa1808a5cfb246316784d8af563fcaad961d6c0e0e215e0e285b78eea8"
+    "bindingsSha256": "cf2651a52cd4f52d2b8a19e87119d68f0e6d8e761a606122ae729f1d8ab8b062"
   },
   "recipes": [
     {
@@ -219,7 +219,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "926612a2ffc16eb0b0f5ebeef0c4265267a5ee79ad929bd3990da3a46c017ab1",
+      "sha256": "64800464bfa30a2aa9542aea6fc31b58f93cfd586f6c560ffeece411676b6d8d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -273,22 +273,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 79 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 79 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 3,561,000 km"
+              "value": "About 79 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Giovanni Cassini · 1671"
+              "value": "Giovanni Cassini · 1671",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -470,7 +476,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "095a3d6f8e4fa5b3d095c2f07da5d1fec48824177af43a21cfb9a4bd7ac9c715",
+      "sha256": "953dd51ca0337a6f079478442274d3c37c3a4ae98368ddab9bad7f6c97814866",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -481,7 +487,6 @@
           "metadata": "metadata_nomenclature_points_IAPETUS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "iapetus-features.json",
         "publicBase": "/scenes/iapetus/",
         "target": {
@@ -781,8 +786,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "926612a2ffc16eb0b0f5ebeef0c4265267a5ee79ad929bd3990da3a46c017ab1",
-      "bytes": 12417,
+      "sha256": "64800464bfa30a2aa9542aea6fc31b58f93cfd586f6c560ffeece411676b6d8d",
+      "bytes": 12882,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -854,8 +859,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "85dd8dc31e2301b1f8d901e22972b5ed3f0f93aa3fa347a0c30368cfd8ed3d8e",
-      "bytes": 154,
+      "sha256": "7e60c18d01a9cbd70ec8e3be34b0453228f1da56c78029cf8f63c0401ecd993c",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1576,8 +1581,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6660,
-          "sha256": "099189bbca590d1f04a06b4a9e889122fe68aaf84febe20fd010db06be17100b",
+          "bytes": 7031,
+          "sha256": "8293d9ba7f8a69bcfb342abe0cddf61b95c6f8976df4ce34c807caa19c6de0b1",
           "verification": "bytes-verified"
         }
       ],
@@ -1598,7 +1603,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1726,11 +1730,11 @@
   },
   "lastPreparation": {
     "objectId": "iapetus",
-    "materialSha256": "38c7ee39023ca25ca633e8f8a6d8eba00321e539bcab0ca2620f9707f21b2db5",
+    "materialSha256": "caf2c2a309a4405a62c5af7f37e18b01145b79a2b17ccbd2496924551163d5ff",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "7bbdf8fa1808a5cfb246316784d8af563fcaad961d6c0e0e215e0e285b78eea8"
+      "bindingsSha256": "cf2651a52cd4f52d2b8a19e87119d68f0e6d8e761a606122ae729f1d8ab8b062"
     }
   }
 }

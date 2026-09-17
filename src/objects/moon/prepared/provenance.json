@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "03243844cd25d97879e622ef05bab0fe36b89076d287606ccd71cd805c680920"
+    "sha256": "e43e0b20dcc4387368f0be8fb6e69e48c6051db75a82dd750610f8cdd516df48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "4fc7b8d14b8eb565947da955806e2013780fa5aa8ebf455b41c3bf37114f9299"
+    "bindingsSha256": "b9b0b256ee13853868f318fb33e08f6f163a782a2439b1bff71d8e304299d521"
   },
   "recipes": [
     {
@@ -635,7 +635,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
+      "sha256": "94ca75cbc042ee9c586f63fd4e7cc8dc4df269fb3e4fc9f12ceaf62f34416f83",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -663,7 +663,15 @@
             {
               "id": "distance-from-earth",
               "label": "Mean distance from Earth",
-              "value": "384,400 km"
+              "value": "384,400 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+                "label": "source-moon-prepared-moon-facts",
+                "checked": "2026-09-16",
+                "path": "source/orbit/moon.json",
+                "catalogueId": "source-moon-prepared-moon-facts",
+                "locator": "/meanOrbitRadiusKm"
+              }
             },
             {
               "id": "radius",
@@ -681,7 +689,15 @@
             {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "27.322 days"
+              "value": "27.322 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "rotation-period",
@@ -699,12 +715,28 @@
             {
               "id": "orbital-inclination",
               "label": "Inclination to ecliptic",
-              "value": "5.16°"
+              "value": "5.16°",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+                "label": "source-moon-prepared-moon-facts",
+                "checked": "2026-09-16",
+                "path": "source/orbit/moon.json",
+                "catalogueId": "source-moon-prepared-moon-facts",
+                "locator": "/inclinationDegrees"
+              }
             },
             {
               "id": "orbital-eccentricity",
               "label": "Orbital eccentricity",
-              "value": "0.0554"
+              "value": "0.0554",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+                "label": "source-moon-prepared-moon-facts",
+                "checked": "2026-09-16",
+                "path": "source/orbit/moon.json",
+                "catalogueId": "source-moon-prepared-moon-facts",
+                "locator": "/eccentricity"
+              }
             },
             {
               "id": "density",
@@ -1758,7 +1790,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "59fd79640b484ce809a31d4d42c670a5ab5665cf4d16a7cc726cabcf3c1f2f01",
+      "sha256": "a4b98df89e6482faf79da809d09d33bdcfec581cf334ad87685d808295b6a7a0",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1769,7 +1801,6 @@
           "metadata": "metadata_nomenclature_points_MOON.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "moon-features.json",
         "publicBase": "/scenes/moon/",
         "target": {
@@ -2183,8 +2214,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "e6d6e652399d47041fb525af4ff914c90be1027bb674efcc4e25c90e16ee1563",
-      "bytes": 34459,
+      "sha256": "94ca75cbc042ee9c586f63fd4e7cc8dc4df269fb3e4fc9f12ceaf62f34416f83",
+      "bytes": 35627,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2256,8 +2287,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
-      "bytes": 151,
+      "sha256": "8cb169b7cafdc2e1dc397a406bf246f1a66a03a4b31036829cd14fe65456a5ad",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3333,8 +3364,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5542,
-          "sha256": "df4c211edc6657f5c54149cb2d30152d800e9b5dc7436b515c1bf90bf5453397",
+          "bytes": 6531,
+          "sha256": "be974fb224e3b3be3e0de7d8833f4344a2f40a14ae17d3776d48bba4f604df20",
           "verification": "bytes-verified"
         }
       ],
@@ -3355,7 +3386,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -3586,11 +3616,11 @@
   },
   "lastPreparation": {
     "objectId": "moon",
-    "materialSha256": "8c7b1b17ac3822a5e3d679d8a30d3fcc8c850a6baa4f8f4cb27e7c8f4ca13af4",
+    "materialSha256": "02f89ff283173d55eebd50f63090a5e0a5139811fce2ba8add6a44518176c769",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "4fc7b8d14b8eb565947da955806e2013780fa5aa8ebf455b41c3bf37114f9299"
+      "bindingsSha256": "b9b0b256ee13853868f318fb33e08f6f163a782a2439b1bff71d8e304299d521"
     }
   }
 }

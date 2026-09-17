@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "292570b4cf38f2d2d5bf1e1b49e72e7514c706a1f72e1043ae13a6aa78ed425d"
+    "sha256": "1d1813239daa03b135ebc41ac510c12c011778356524b94563741d15ea439196"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "df55dd94d1dcd5a5a0e49b3948a5191cf943e493f6db6c7fe3b4bb89adca9f9a",
+      "sha256": "5f2eef3f1e5a96106ec609808b912e92ab8af0e8453d7ceab9a01e9e5346b6c6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5818479ec1c70728221013cc628029a4315cc798a2028691ecc940823899ec12",
+      "sha256": "64cc3b81d3a41ab130bb3ff748f3d971e8240d3fdd58e4ab28c4b4aa4062537b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "58 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "23.8964 hours"
+              "value": "23.8964 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16313",
+                "label": "DAMIT model 16313",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5818479ec1c70728221013cc628029a4315cc798a2028691ecc940823899ec12",
-      "bytes": 6752,
+      "sha256": "64cc3b81d3a41ab130bb3ff748f3d971e8240d3fdd58e4ab28c4b4aa4062537b",
+      "bytes": 6962,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/thule/thule-elevation-surface@2x.webp",
-          "bytes": 344876,
-          "sha256": "96f0a1a587a12c13dbefd792ac5c4621444f391463d5337a6a6489a56fa7687b",
+          "bytes": 373838,
+          "sha256": "911518f29613632673f659206c3fa4d49a526bd62979792e3bf2d125681b11d0",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/thule/thule-shape-surface@2x.webp",
-          "bytes": 57602,
-          "sha256": "816e7551263756bcce9c8642036976f493617f7391e1ef461223d9105e9d5e83",
+          "bytes": 75614,
+          "sha256": "ef6e7ed69f74d11402cc14858692cf429ef7ad2bff55984a198a42dfd0538354",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4480,
-          "sha256": "9d7efdc5b3c42fe4a758a080e196852e0150fed5a25d814b0e4070195f43c6d4",
+          "bytes": 4643,
+          "sha256": "0368e206292fcf975b75541f74dc6b1aea1212cde51aed4c8faacb586f444f17",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "thule",
-    "materialSha256": "39295ef853999d6add7e92afd26850a045b2bd70651266bd7674ff2b1480d719",
+    "materialSha256": "384dafe2c259f7085bb16a2c512d8cb22b9309d0b6d02bf5c8362560f6070761",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

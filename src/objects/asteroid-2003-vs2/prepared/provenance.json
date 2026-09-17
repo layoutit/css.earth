@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3d32f132ceb82228d279483ab11d566a962c35cdbc0f1385f2dcf33ab355dd9d"
+    "sha256": "3a758e90fcff5a7a9eb3b5b6b43aa1e5e2253a09c81c80d916bcc1904e539400"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "15e6e0471bf5f55f6186b6e5afcc2285fd53ca611426efece24086a8aeb97f9d",
+      "sha256": "1c91fd10499c5ee7e30aa76c2780e058b5b62505057a838caff07606b1aa4433",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 6552.373952536454,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "42982019fd8f1d9f36cdc50b10032813e2218834b0e4b88cead0bf8ec6efcbdf",
+      "sha256": "dd879752ab5860d2d6aaf219bf895ef77eebbc87deb153f092cc95af96ad8031",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +111,32 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Occultation and light-curve shape"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "678 × 470 × 452 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "7.41753 ±0.00001 hours; arbitrary phase"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Plutino (3:2 resonance with Neptune)"
+              "value": "678 × 470 × 452 km",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202141842",
+                "label": "Research publication · DOI 10.1051/0004-6361/202141842",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202141842",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain."
+              "value": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain.",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202141842",
+                "label": "Research publication · DOI 10.1051/0004-6361/202141842",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202141842",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             }
           ]
         },
@@ -285,8 +285,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "42982019fd8f1d9f36cdc50b10032813e2218834b0e4b88cead0bf8ec6efcbdf",
-      "bytes": 3376,
+      "sha256": "dd879752ab5860d2d6aaf219bf895ef77eebbc87deb153f092cc95af96ad8031",
+      "bytes": 3751,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -329,8 +329,8 @@
         },
         {
           "url": "/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-surface@2x.webp",
-          "bytes": 55368,
-          "sha256": "754427bd2f6830c3de98754af8928ddc0a1d2e074beb32d8b33e0809b959c377",
+          "bytes": 63456,
+          "sha256": "49eaa57c9f0d69faa4a2a034b166a73f81337353850b0a232cf90fd2feea53b4",
           "verification": "bytes-verified"
         }
       ],
@@ -367,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6286,
-          "sha256": "f9a7fef7674400f929a05ce07ce04a4f109d3b60a2e84d4b23e99b0ef55dabc5",
+          "bytes": 6611,
+          "sha256": "89ba85a2294c20434812a74fbd40d02959aa57dfdc7e2c0a5bc9d785c0049f78",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +406,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2003-vs2",
-    "materialSha256": "c9184adb679d5cf70e1c06fe6b20077528595f97022e1f3a329dc77a9a833840",
+    "materialSha256": "0584373178fb43812a50035f56372258f972318e9fb34b146ac03a55d941b34b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

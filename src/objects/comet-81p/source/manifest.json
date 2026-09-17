@@ -517,8 +517,8 @@
     {
       "id": "comet-81p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1128,
-      "expectedSha256": "c90e0a8305626621917a8178e5b5ed60299d827fb878716195a515d138f05228",
+      "expectedBytes": 1096,
+      "expectedSha256": "c8de751bc2fe0541663f27858bcb40c765988684e8e5afef2253af79cb80ff29",
       "origin": "Authored surface-place records with publication references and placement limits.",
       "credit": "cssEarth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
@@ -535,8 +535,8 @@
     {
       "id": "comet-81p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "639417c83ce7e5633db6ad3efc825e8ebce675647b014c26a7700b3dfe9ede26",
+      "expectedBytes": 188,
+      "expectedSha256": "0b5ffa7b27d1bc24b335b44525745320b64b74c96d4419c4af8cf5ef68c56d51",
       "origin": "Authored surface-place records with publication references and placement limits.",
       "credit": "cssEarth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
@@ -695,8 +695,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3745,
-      "expectedSha256": "978799852f7a293c01778d5e3ec46935415100053a03d81c13a0023677d2eac2",
+      "expectedBytes": 5032,
+      "expectedSha256": "af4a98c3e0da6b731e3c4176b876a1ffbea2dff1e708193ebae71eafabfd5501",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -719,8 +719,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5247,
-      "expectedSha256": "8cb21c510b637928c6f86743aebe7250dccd121ddd5934b4ac7aba5d1b46edb1"
+      "expectedBytes": 5228,
+      "expectedSha256": "e46e9b4ce216c9334927df5dbe9f4be97fc3f6cf2c094284c413b51972ffd496"
     },
     {
       "path": "presentation/minimap.json",
@@ -771,6 +771,21 @@
       "path": "reference/stereo-frame.json",
       "expectedBytes": 1159,
       "expectedSha256": "780fb4c8245cda9d8da709ebdd8489d9e27989f11dcf7b5c3ae9eb26768b90a6"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4180,
+      "expectedSha256": "4af0d405eee347c1135b6eeae450cb45e2f79c3a4d0e6f63c3b662fd58f4af5a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 81P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

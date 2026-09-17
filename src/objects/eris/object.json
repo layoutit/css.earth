@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7f7bf6a1e63975d1059f379f4312796424debf5c15aa7262552d5ffb0dcd1142"
+    "sha256": "cc622ade83fb26b8c5cad568b690768102d58b13f17a350acf71d3732d55bef4"
   },
   "properties": {
     "preparation": {
@@ -81,7 +81,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "lighting"
             }
@@ -105,12 +105,12 @@
         -9528992307.044983
       ],
       "presentationToReference": [
-        0.9063394138186308,
-        0,
-        -0.4225504312610516,
-        0.38768244100161164,
-        0.3977771559319137,
-        0.8315501543248909,
+        -0.38768244100161176,
+        -0.3977771559319137,
+        -0.8315501543248909,
+        -0.9063394138186308,
+        2.4356826039297786e-17,
+        0.4225504312610517,
         0.16808090878482468,
         -0.9174820620691818,
         0.3605211143377728
@@ -129,14 +129,14 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bc1dc315ce4c97cd6a281172869506edca1650b2342bcadcf60eb97105df82fe"
+        "sha256": "a3f017f55cc2a6d22e914d84fe61d396b413514fa1879c7d81e51f1d69df2e7d"
       }
     },
     "catalog": {
       "illustrationLenses": [],
       "name": "Eris",
       "classification": "dwarf-planet",
-      "color": "#ddd6cf",
+      "color": "#fffaea",
       "distanceAu": 67.78,
       "description": "Bright, icy dwarf planet far beyond Neptune.",
       "systemName": "Solar System",

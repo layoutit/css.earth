@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11383,
-      "expectedSha256": "2f4e4260ccf4d426bc8b9bd6956183c73e680b4697fd5be695f493cf18fa24e1",
+      "expectedBytes": 11782,
+      "expectedSha256": "426cf8e0649811e5dcc7f10e2478107507f5427e6dcf5f2d36a986d3c5f8156c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2944,
-      "expectedSha256": "71c2fba631dff1538371dea5537d451040e0a2ca9e4c05b7623892326295a52c"
+      "expectedBytes": 2925,
+      "expectedSha256": "598c62ded5631dc6f16f098ff483ae304960012e7a443e7edad4f4508adcd26a"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -227,6 +227,21 @@
       "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart.",
       "expectedBytes": 176,
       "expectedSha256": "f3d2554e5ec688a2b3969355141f88f8bb3e6d8c5717e09c054607a96063a086"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5971,
+      "expectedSha256": "cb47cc079f12b5ef2bd59d73026ac781695dd63c5ae42ac4f392151183e38d9a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Ra-Shalom: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

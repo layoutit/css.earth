@@ -441,8 +441,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6118,
-      "expectedSha256": "9668cd5af7067a590fe26e8ede1c67224f539b8b5cecbad254e0671468ee6330",
+      "expectedBytes": 5972,
+      "expectedSha256": "11b3468898c01da5670e40d1883166806f9b8dc8fe2bd150105284a06d273e04",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -470,8 +470,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5989,
-      "expectedSha256": "029042584476527697af9cbac677fc09141b9e9c775ad05807d7feb3b8c8f1b4"
+      "expectedBytes": 5970,
+      "expectedSha256": "e4005da258ec82feb05d50946c7f2435c95663f737fd04637a90d1c68140835b"
     },
     {
       "path": "presentation/minimap.json",
@@ -535,6 +535,21 @@
       "path": "science/albedo_arrokoth4_fp36h2_masked1.png",
       "expectedBytes": 200809,
       "expectedSha256": "2b3a1a007c44c91572aba3d433267718340a7e5d322a05ed797ba0e8856eda0f"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3253,
+      "expectedSha256": "1602ff08113817c90faf5594fda5596c5f2aa7724e6c76d0e2443a91ff2a6463",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Arrokoth: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

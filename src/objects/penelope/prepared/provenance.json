@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cce83b1dd23f47df4eed3e33217251bd279baddd67b89a50f0c07160e091911a"
+    "sha256": "5aa3003ac10e40775c0671ecc4e078d988a6adb1f9f78a895b410882c400dd0c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fd8127745c7ab5500d5451063e491aafeff15c8734006e8d2a084eec53903701",
+      "sha256": "a9f84025b7ec475c98fba9e22d59021bab2ad17be61e3a0289171aac871530ad",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
+      "sha256": "be4d91ee9cb8ea83ae53ff59dc83cae6c20b06640ae6faba0a274ce58af9d7f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "42.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.747455 hours"
+              "value": "3.747455 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/180",
+                "label": "DAMIT model 180",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fea2848685a91a50a04ff7ae8b027fef239d9f8da0333725f072591b4de9377a",
-      "bytes": 9383,
+      "sha256": "be4d91ee9cb8ea83ae53ff59dc83cae6c20b06640ae6faba0a274ce58af9d7f5",
+      "bytes": 9587,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/penelope/penelope-elevation-surface@2x.webp",
-          "bytes": 312508,
-          "sha256": "3f0842cad0dc3cfd178dd7cebe86e8b7e9c88f06975f6c43fe5e895648509aaa",
+          "bytes": 363984,
+          "sha256": "84e938cf4579f63ddd06a92b20dc8119e50f8ae4edeaa8770cd54ebe748044c7",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/penelope/penelope-shape-surface@2x.webp",
-          "bytes": 58858,
-          "sha256": "fe0593795d926130489301dd0e9cd8ce8d395c83647a0c081a3114e369e1f6c4",
+          "bytes": 72538,
+          "sha256": "eb5f3c71ee03419a766798ebbbe01af0f08847df924429e00a7db29fc6b02fdf",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7073,
-          "sha256": "92409ac885ba46e27c4d243852b6d9d4e3bb2fc2b2503a04b00e572e8327207e",
+          "bytes": 7230,
+          "sha256": "95e899bc67c48319617f5d5b6ae5a677ba503db8ac455695dba55d5819443eb1",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "penelope",
-    "materialSha256": "813e30c6dbbb6ddfbbb0837438190bf2abf17f4a07dae62fbdd7af08347b55b8",
+    "materialSha256": "d9edee91b85d090d49f36947239679ffa2ba8301a15633b4be7d69bf44ebf3ea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "wasp-43",
+  "source": "Assumed synchronous rotation, as Challener et al. (2024) and Hammond et al. (2024) assume for their maps: a hot Jupiter on a 0.81-day orbit is expected to be tidally locked. Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/wasp-43b.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements. North is the orbit-normal side as the hosted orbit constructs it; photometry cannot tell it from south."
+}

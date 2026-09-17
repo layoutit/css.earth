@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3fc64cbd97446c50063513d0d67c0de1518dfc41720307a832ecd4225f4ee3a5"
+    "sha256": "a55edfa35b21690d400cfc943f2f91ca26d194e501d868e00a4c999af0dec9c0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7dc59e1957633a13c37139d6542d9e574ab7c9130a747cf9b8de43a3b5061cfe",
+      "sha256": "13185acbd31750d28cad6e4dcd42c5381cd415df4ac9e2fa15fcaeb0789d3c9b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7841a175b612274b2ae55d269f44638c0d4e8c1b02901d022600862cc6904c13",
+      "sha256": "a812ea30db67e288c8f2914a5ecdcb1b8b2d8dc44de03a3280ab0ce31db1fc05",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "2.55 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "3.603957 hours"
+              "value": "3.603957 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4394",
+                "label": "DAMIT model 4394",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7841a175b612274b2ae55d269f44638c0d4e8c1b02901d022600862cc6904c13",
-      "bytes": 9322,
+      "sha256": "a812ea30db67e288c8f2914a5ecdcb1b8b2d8dc44de03a3280ab0ce31db1fc05",
+      "bytes": 9528,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/phaethon/phaethon-elevation-surface@2x.webp",
-          "bytes": 339952,
-          "sha256": "caf2915fb199a34eb703be5b07da18c9b3aa453c278ea414574ce9e38fe4dd94",
+          "bytes": 404170,
+          "sha256": "845627a8da2c1251256cf5a4c95dbf9fde0b55005b8aaf3aa2c67a98ca7400a9",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/phaethon/phaethon-shape-surface@2x.webp",
-          "bytes": 62148,
-          "sha256": "7d87e1e2ab72fc60212801b966273f18899873aa5f618189dd468e90e0e83a05",
+          "bytes": 76778,
+          "sha256": "09581ff64430009976d9b9dfa300c760606739fd279493e79a98297a29fc9ebf",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7007,
-          "sha256": "9c0c7635a598d8f8bafe46eacdee8d9c7dbf3dfbbfb3e98c9527c1d2cb22c3c6",
+          "bytes": 7166,
+          "sha256": "3f1d9a31d2fd9a376f30484feb1db9cf07bd469b1b45885a929de35f689440b5",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "phaethon",
-    "materialSha256": "53ec20b259b38110962854c2c9e3f62930669f207c8c2a28a1ae16fbaf8c5b40",
+    "materialSha256": "9eaa86bbcd912a676d131c4ff214b79234cf1c9eff8f59682c074175be522af6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

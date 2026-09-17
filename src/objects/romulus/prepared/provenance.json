@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "299a87fb3d2a27d9850db4524f97c7bb54403f384b002017c482a386522d6d06"
+    "sha256": "834822e725ba91b07ebabb751a8423b0410bbe49d0f39783fa7115f5102bdb16"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "606e232a040405336a0932c0f981374a29541171a55d710bb16aa47500ffc9bf",
+      "sha256": "6832a8459329dcb3f1d3af7a257d89b6879b30eefecb2f4a5d6890779c5af028",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 244.6966547827544,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4b04a1313185d8dd6b09c12e55e13c8f998e7e4ffcd4341ccaf4d2c9de01815f",
+      "sha256": "9873eea8331d77d5395a1fe4298d2077bec2a788d847ba77488f6a18ce929e80",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +111,33 @@
         "panel": {
           "facts": [
             {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Sylvia"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate model"
-            },
-            {
               "id": "dimensions",
               "label": "Full model dimensions",
-              "value": "38 × 14.1 × 14.1 km"
+              "value": "38 × 14.1 × 14.1 km",
+              "source": {
+                "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-romulus-model-surface",
+                "locator": "/constraints/semiAxesKm/0; /constraints/semiAxesKm/1"
+              }
             },
             {
               "id": "scale",
               "label": "Size evidence",
-              "value": "23.1 ± 0.7 km · projected area-equivalent diameter"
+              "value": "23.1 ± 0.7 km · projected area-equivalent diameter",
+              "source": {
+                "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-romulus-model-surface",
+                "locator": "/constraints/projectedDiameterKm/value"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "orbital-position",
-              "label": "Orbital position",
-              "value": "Orbit from published model · current phase approximate"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -299,8 +298,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4b04a1313185d8dd6b09c12e55e13c8f998e7e4ffcd4341ccaf4d2c9de01815f",
-      "bytes": 2809,
+      "sha256": "9873eea8331d77d5395a1fe4298d2077bec2a788d847ba77488f6a18ce929e80",
+      "bytes": 3164,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -343,8 +342,8 @@
         },
         {
           "url": "/scenes/romulus/romulus-model-surface@2x.webp",
-          "bytes": 51692,
-          "sha256": "8fe8f2d650ef4dc1ad40c39a22314aa82ed2d79ce9ff0e076c745bc23aed124d",
+          "bytes": 61462,
+          "sha256": "4c9be19a8412e6aecf0f36eb59eb091242e539ab2154d282fca151d09ef0d348",
           "verification": "bytes-verified"
         }
       ],
@@ -381,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5173,
-          "sha256": "fb227c52c8e7e79b4b9f0a72160bfd87fc50b65fe31dcc69077f63864e252410",
+          "bytes": 5483,
+          "sha256": "28870d1514b0f89f5a088e67b59c63e8cdade51c442dd578f56303bb846700d3",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "romulus",
-    "materialSha256": "a8955e79479fc3b02cadc9962a423725600fc2af0d5994aea156f5b164b8705a",
+    "materialSha256": "f7bb24cbae22f0b367c38030aed5f8b562dabbf0b50209b03733d7de737bb030",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

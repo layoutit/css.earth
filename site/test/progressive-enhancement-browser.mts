@@ -131,6 +131,9 @@ try {
   await session.send('Emulation.setScriptExecutionDisabled', { value: false });
   cases.push('Prepared focus keeps native information tabs, arrow keys, context visibility and catalogue-star selection with script execution disabled');
   await focused.close();
+  // M31 is an image-layer bank, not a volume lens bank; dw1343+58 carries a plus sign in its catalogue id.
+  for (const id of ['m_031', 'dw1343+58']) assert.equal((await fetch(`${origin}/sun/?focus=${encodeURIComponent(id)}`)).status, 200, `Direct focus load: ${id}`);
+  cases.push('Direct focus loads serve an image-layer galaxy and a catalogue id with a plus sign');
 
   const failed = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const failure = await failed.newPage();

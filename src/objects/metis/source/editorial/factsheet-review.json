@@ -45,6 +45,72 @@
     {
       "url": "https://science.nasa.gov/jupiter/jupiter-moons/metis/",
       "interpretation": "NASA dates discovery imagery to March 1979; the 1980 announcement is distinct. Rotation period is unknown, with synchronous rotation considered likely."
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "10",
+        "Jupiter",
+        "Metis",
+        "516",
+        "JUP365",
+        "Laplace",
+        "2000-01-01.5",
+        "128000.",
+        "0.000",
+        "0.0",
+        "166.0",
+        "0.0",
+        "0.0",
+        "0.294779",
+        "0.000",
+        "0.000",
+        "268.1",
+        "64.5",
+        "0.0",
+        "29"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "XVI",
+        "Metis",
+        "S/1979 J3",
+        "1979",
+        "Voyager Science Team",
+        "IAU WGPSN"
+      ]
     }
   ]
 }

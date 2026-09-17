@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "abe904f588670feb7f26e78f5f7d43bffe81f903769e35017f392b2d12f99271"
+    "sha256": "79de445918fbaca7b9cadd10fc4f25922356a90406ce244c9a538ad2146f54c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "538732f6c7ff6a9aab50b8f875bdf758d412c68d9bdb052959841f436736ba42",
+      "sha256": "ba2c04384ed89a1fd4d0bab988837273fc328ac5666ca15a8fdc4790ccf53027",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1400,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5c85152ec0c96551489720940011a3e26e6cbd6ffa05d14bbae68cfc2adfb100",
+      "sha256": "01358d75e927cd403d17b8dff9923968e739e12f4f5442b6f585c3a6bbb829c2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,32 +112,41 @@
             {
               "id": "radius",
               "label": "Reference radius",
-              "value": "74 km"
+              "value": "74 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "JPL Planetary Satellite Physical Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/1; Mean Radius (km) value"
+              }
             },
             {
               "id": "dimensions",
               "label": "Dimensions",
-              "value": "About 180 × 148 × 128 km"
+              "value": "About 180 × 148 × 128 km",
+              "source": {
+                "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+                "label": "Research publication · DOI 10.1016/S0019-1035(03)00002-2",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "About 8.03 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Neptune",
-              "value": "About 52,526 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous model"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 science team · July 1989"
+              "value": "About 8.03 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +311,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5c85152ec0c96551489720940011a3e26e6cbd6ffa05d14bbae68cfc2adfb100",
-      "bytes": 3033,
+      "sha256": "01358d75e927cd403d17b8dff9923968e739e12f4f5442b6f585c3a6bbb829c2",
+      "bytes": 3767,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -347,8 +355,8 @@
         },
         {
           "url": "/scenes/despina/despina-model-surface@2x.webp",
-          "bytes": 49032,
-          "sha256": "3765b7ecee1b03ac9a275d3b193665f590467357621de6d01bbe661b3c8e93d0",
+          "bytes": 58012,
+          "sha256": "118d52e4e1d8beb1df609d4c2dd61636c06cfe7876f35b43fb35e30037555fe8",
           "verification": "bytes-verified"
         }
       ],
@@ -385,8 +393,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5931,
-          "sha256": "a5ecd38d24ab99b93ab7962634103a045e35a78301005cc941a1ce8b2458ecf8",
+          "bytes": 6524,
+          "sha256": "9bb2dd978e3b19594dabcfa94fa58fdb0270c4b7d42f5b0dfe8df2e0450cd1b2",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "despina",
-    "materialSha256": "197daead7141ff90a97b48d3826b0062b3c00469cfa8234ed49b21d527c66d82",
+    "materialSha256": "69003d6f8d4e632daebe211a87515003c37dd61444d94bd05a4a81673ec6a30a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

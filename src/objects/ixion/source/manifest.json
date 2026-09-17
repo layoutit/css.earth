@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3272,
-      "expectedSha256": "6b20d9ac6826b7611c0e2a78d604ca95b338df9d0954ccd1135a43799baf4d9f",
+      "expectedBytes": 2788,
+      "expectedSha256": "8a774eca0332f69022df5a3b6546e421af573d4bf4f4b3b987e095f497270d3d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -123,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2711,
-      "expectedSha256": "fdf337162562a84bf37d0389ce2c00c7695caed1724505a3031c4606d1cf87a2"
+      "expectedBytes": 2692,
+      "expectedSha256": "463a4a52f28c3a02cb22b1803642b344e870cdfdd43151f72e8f94a5cf43e69d"
     },
     {
       "path": "presentation/minimap.json",
@@ -150,6 +150,21 @@
       "path": "reference/ixion-kilic-2026.pdf",
       "expectedBytes": 6578792,
       "expectedSha256": "7169924fc5b849b6d6009e4bb712b0b44820631d8eecbd29a1c3162ba1acbee4"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 2723,
+      "expectedSha256": "2af6ff29ac6202c394c32f8d667176d800dab693c48ae08d195a5dd488ffa1cb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Ixion: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

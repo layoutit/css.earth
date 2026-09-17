@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7458,
-      "expectedSha256": "548804f97a20e0c483bfaff35f45b6c76032a50d758b19f78bd44dacac3098cd",
+      "expectedBytes": 7665,
+      "expectedSha256": "79f4b2e8ec34dca2a5ea831b2ea94d91c0b4246149cbc21c73da36fe1f52e8ab",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -118,8 +118,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2860,
-      "expectedSha256": "83642a61748ea7407dae7f54c28d23b8daddcf8884e4e216ce6f5f503ef57efe"
+      "expectedBytes": 2841,
+      "expectedSha256": "ad0ce6cd6ff9e32f7cfc6f78b9bf92d13e34101251058bdd421abfb3bb080981"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1809,
       "expectedSha256": "bdecbaa7379e51a9110c2704f6b7b46409b2acef415eff18b0adb5e7b9ca039c"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4832,
+      "expectedSha256": "f95bc26dd10644cd648d138c408dda39359b63d39baa541dd791c5c130b8b621",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Doris: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

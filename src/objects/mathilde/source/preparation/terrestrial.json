@@ -175,8 +175,7 @@
       "latitudeSegments": 36,
       "longitudeSegments": 72,
       "faceBudget": 800,
-      "tileSize": 128,
-      "atlasColumns": 16,
+      "texelsPerFace": 16384,
       "primitive": "u",
       "simplification": {
         "method": "meshoptimizer",
@@ -198,8 +197,7 @@
           "expectedFaces": 5040
         },
         "faceBudget": 800,
-        "tileSize": 128,
-        "atlasColumns": 16,
+        "texelsPerFace": 16384,
         "primitive": "u",
         "simplification": {
           "method": "source-meshoptimizer",

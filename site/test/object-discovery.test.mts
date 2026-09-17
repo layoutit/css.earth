@@ -101,6 +101,18 @@ test('a star with only its shape stays off the map, whatever the settings', () =
   }
 });
 
+test('a shape-only star that a body with imagery orbits stays on the map with its planet', () => {
+  assert.equal(requireSceneObject('wasp-43').discovery.imagery, false);
+  assert.equal(requireSceneObject('wasp-43').discovery.hostsImagery, true);
+  assert.equal(requireSceneObject('wasp-43b').discovery.imagery, true);
+  for (const id of ['antares', 'polaris']) assert.equal(requireSceneObject(id).discovery.hostsImagery, undefined, id);
+  for (const options of [defaults, { illustrations: true, asteroids: true, asteroidLabels: true, highlighted: 'star' }]) {
+    const scene = discoveryVisibility(SCENE_OBJECTS, options);
+    for (const id of ['wasp-43', 'wasp-43b']) assert.ok(!scene.hiddenBodies.includes(id) && !scene.hiddenLabels.includes(id), id);
+  }
+  assert.throws(() => parseObjectDiscovery({ featured: true, imagery: true, illustration: false, hostsImagery: true }), /without imagery of its own/u);
+});
+
 test('category browsing and asteroid settings cannot bypass Illustration models', () => {
   const browse = discoveryVisibility(SCENE_OBJECTS, { illustrations: false, asteroids: true, asteroidLabels: true, highlighted: 'asteroid' });
   assert.equal(browse.hiddenBodies.includes('annefrank'), true);

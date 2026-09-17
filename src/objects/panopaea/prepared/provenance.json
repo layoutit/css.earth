@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9fdfec10f332a175ab656fb87e415476478cef084dc9dfe02bfb0e8494e5285"
+    "sha256": "3a8c7f9e8bc6dd8b6f2cb6962ed58fdc6517541763e87c4833ff8140bb66c17c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bd6f1f429114ba775591fba0448a7d78c82c3d5ed344c40083fb761f739487af",
+      "sha256": "57c801bc02201f4372775fd9cdf3fc38a71462440249049f2294171ee852931d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
+      "sha256": "ba24fed188c881f5cd630239e0b31960537120f8b07641998a34d72f17c3ca4d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -205,7 +204,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "15.8044 hours"
+              "value": "15.8044 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+                "label": "DAMIT model 6171",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -361,8 +368,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8097adc03198ab17a7eac248633b2ff9e933c1e7fa1e5c2fb34f64628413c49b",
-      "bytes": 11488,
+      "sha256": "ba24fed188c881f5cd630239e0b31960537120f8b07641998a34d72f17c3ca4d",
+      "bytes": 11813,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -406,8 +413,8 @@
         },
         {
           "url": "/scenes/panopaea/panopaea-elevation-surface@2x.webp",
-          "bytes": 333320,
-          "sha256": "fc640ac9bc715d7d6df80fc983886d2d552c64ec4c7f6d6bd0acd49cdbf91aaa",
+          "bytes": 398240,
+          "sha256": "01caf1476d89263199f681359c4cec4eea233642c50440316953959da0f7f9d9",
           "verification": "bytes-verified"
         }
       ],
@@ -450,8 +457,8 @@
         },
         {
           "url": "/scenes/panopaea/panopaea-shape-surface@2x.webp",
-          "bytes": 61090,
-          "sha256": "803b4f1c2d5a5de799a0a45a3e40bd946c999329ce8b8fad91ea2b2f2d03bf47",
+          "bytes": 78486,
+          "sha256": "89e898b80d43884308dadb2afd5999f6062e5f4bf729b11e55169a341ebd9fe8",
           "verification": "bytes-verified"
         }
       ],
@@ -483,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9089,
-          "sha256": "0ff8afdbbb2e859c8495680c1e447ea127e079152ff40c7530583b251a3a2ef4",
+          "bytes": 9323,
+          "sha256": "295367e682199901f19a2210448a42deac30ba52f093be47ce3a3b4ade2ccaf1",
           "verification": "bytes-verified"
         }
       ],
@@ -547,7 +554,7 @@
   },
   "lastPreparation": {
     "objectId": "panopaea",
-    "materialSha256": "4a42e65d5a9e8f1f98608e71c6d2a13d915b18a869ea8c2a698583acfae463e3",
+    "materialSha256": "76192e322dcbaa1b0d349b5b9057357b0d151529fbdf11d1a835159acfcbe95c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

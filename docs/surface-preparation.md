@@ -159,8 +159,10 @@ identifies the cubes and processing behind this illustration.
 
 FITS decoding happens during preparation, never in the browser. The shared
 [reader](../tools/fits.mts) preserves native pixel/axis order and physical numeric
-values. Product adapters still own units, quality masks, camera registration,
-spectral selection, missing-data policies and display transforms.
+values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
+Product adapters still own units, quality masks, camera registration,
+spectral selection, missing-data policies and display transforms. Sky images do not
+own their orientation: [fits-sky.mts](../tools/fits-sky.mts) reads it from the WCS.
 
 | Input | Supported contract and owner |
 | --- | --- |
@@ -168,6 +170,9 @@ spectral selection, missing-data policies and display transforms.
 | Multi-HDU observations | Encounter, LORRI/L'LORRI and MVIC adapters require their exact instrument layout, units and quality conventions. Named HDUs do not imply a camera model. |
 | Spectral and geometry cubes | LEISA uses bounded sample access without expanding a whole cube. PDS4 geometry labels must agree with FITS axes, element types and offsets; label special constants remain authoritative. |
 | Fixed facet tables | Only the declared `1J + 5E` BINTABLE profiles, with their mesh identity and centroid checks. Column scaling (`TSCAL`/`TZERO`) and null (`TNULL`) declarations are rejected, not ignored. |
+| OIFITS and ESO pipeline tables | [fits-table.mts](../tools/objects/interferometry/fits-table.mts) reads `D E I J K L B A` and complex `C M` columns, returns an integer column's `TNULL` as `NaN` and refuses to read or write a column scaled by `TSCAL`/`TZERO`. |
+| ESO headers | HIERARCH keywords keep their namespace (`ESO DET NAME`, MATISSE's `PRO DISP COEF0`). Raw primaries reach 2,480 cards, so a header may span 256 records. Lower-case exponents are read as Astropy reads them. The archive's header service text is read one card per line. |
+| Sky images | A celestial image states RA along columns and Dec along rows, unprojected (SQUEEZE) or with one zenithal projection, through `CDELT`, `CD`, `PC` or `CROTA2`. The display raster puts north on the first row and east on the first column. Rotated, skewed or axis-swapped images, other projections, a `LONPOLE` other than 180 and a reference point on a pole are refused, since a flip cannot display them. |
 | Nebula Lab transport | Uses the shared image reader, then reverses rows once for top-down arrays. Missing/nonfinite pixels and float32 overflow are rejected; metadata cannot override structural fields. |
 | Pallas SPHERE metadata | ESO `HIERARCH` names and scalar values are decoded without stripping cards. The four released LAM Deconv frames have exact Astropy comparisons for all 777 extended keywords and all 65,536 pixels per frame. Decoding alone does not qualify a camera or a registration; Kleopatra's `zimpol` lens adds that separately, by computing the camera from the release's own spin record and an ephemeris rather than from the frames' inherited world-coordinate solution, which describes an uncropped frame and not the product. |
 | MUSE acquisition | The existing [Python converter](../tools/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
@@ -288,7 +293,19 @@ records the camera settings and remaining views. These three illustrations are
 historical processing examples, not new browser checks.
 
 For mesh surfaces, preparation samples each retained triangle into its own
-raster tile and emits a native PolyCSS `u` triangle with prepared CSS addresses.
+raster rectangle and emits a native PolyCSS `u` triangle with prepared CSS addresses.
+As in PolyCSS raster sizing, the rectangle is sized by the triangle: one leaf pixel
+is one atlas texel, and every triangle of a body has the same texel density. The
+recipe's `texelsPerFace` sets the body's budget: its face count times that value.
+The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
+top-centre shape. A fixed square per triangle would give large and thin triangles
+several times fewer texels per metre than small ones, at the same bytes.
+
+![Main's fixed squares, the raster atlas and their pixelmatch difference for Enceladus, Hyperion and Alphonsina](images/raster-atlas-pixelmatch.webp)
+
+Same pose before and after the change (main, raster atlas, pixelmatch at threshold 0.1). Every face gets
+texels at one density, but where the source map is smoother than the old texels the screen does not
+change: the largest difference across all lenses of these three bodies was 0.45%, along a coverage edge.
 Ordinary mapped imagery is sampled from the lossless surface map at this step.
 For banded surfaces, [projective-surface-raster.mjs](../src/platform/projective-surface-raster.mts)
 packs latitude bands and gutters; poles have separate prepared tiles.
@@ -411,7 +428,29 @@ at a time and supplies the same interpretation to the globe and sidebar map.
 ## Internal fill for globe seams
 
 Spherical and ellipsoidal objects share one retained interior disc. Irregular
-body meshes are excluded. The common presentation compiler measures the actual
+body meshes cannot use it: the disc's inner ellipsoid is limited by the nearest
+leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks outside it
+stay open. An irregular body whose recipe sets `interiorSlices` instead gets
+slices of its own mesh (`tools/prepared-interior-slices.mts`):
+
+- Each slice is the loop where a plane through the body origin cuts the leaves,
+  for six plane normals (the icosahedron axes). It is drawn as a fan of solid
+  rectangles, one per outline edge, reaching from the edge to the origin.
+- Chrome depth-sorts element boxes, not what is drawn in them, so each slice is
+  the largest shrink of its loop whose rectangles cut no surface leaf box. With
+  every surface indent caught by that test, the rectangles stay inside the body.
+- The leaves are solid one-colour rectangles because Chrome gives such layers no
+  raster tiles. Triangle slice leaves (corner-shaped `u`) at DPR 2 exhausted the
+  GPU raster budget from zoom 1.75, and Chrome dropped tiles of surface leaves
+  in front of the slice; with an 8 GB budget the same view was correct.
+- The body's leaves overlap nothing (`seamBleed` 0). The runtime shows the slice
+  whose normal is nearest the view and gives the others `display: none`.
+
+Measured on Alphonsina (elevation lens, pixelmatch against main, threshold 0.1,
+five poses): 0.34–0.57% at default zoom, mostly at the limb where the overlap no
+longer blurs the outline, and 0.002–0.036% at maximum zoom.
+
+The disc for globes works as follows. The common presentation compiler measures the actual
 surface leaf planes in the body's frame and fits an inner ellipsoid behind
 them. It reserves two raster pixels around the 512px disc for antialiasing.
 Every point on the camera-facing disc stays inside those prepared bounds as the

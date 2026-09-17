@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0ae026cbca3b350189101bbce93be955dffc83db687b5ca25390128c46d147ab"
+    "sha256": "b6a4eb0364fdfaef6310a5b63b2370cdf32213deed5db5fcefedbccc6cfebfea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b9f3ecad17e47b2f6ee44e3802ecc8e69e207799f1369c2d2b74f136ec57a87d"
+    "bindingsSha256": "e224c6a4b446c7164a651f629b7179d12c123b07f8da76833ee7e57ecc3cf2bb"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "367e465e11cab17ca24edac66edbf5a6e97ee06514c87fff328025afe8e437b2",
+      "sha256": "6d740286b2295e2cc1c79b4d722173fc495f3bc5191dc856ccb1ef5884060ad3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -92,8 +92,7 @@
               "expectedFaces": 4096
             },
             "faceBudget": 1000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -150,8 +149,7 @@
                 "expectedFaces": 4096
               },
               "faceBudget": 1000,
-              "tileSize": 64,
-              "atlasColumns": 16,
+              "texelsPerFace": 4096,
               "simplification": {
                 "method": "source-meshoptimizer",
                 "targetFaces": 1000,
@@ -213,7 +211,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
+      "sha256": "9d3d06bfe7a8a1b277c165762c7a65198697222ecfe4efd1c967295c6458a7cc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,14 +220,17 @@
         "panel": {
           "facts": [
             {
-              "id": "period",
-              "label": "Orbital period",
-              "value": "About 13.5 years"
-            },
-            {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "About 11.4 hours"
+              "value": "About 11.4 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
+                "label": "Comet 8P · arecibo model",
+                "checked": "2026-09-16",
+                "path": "source/shape/arecibo.json",
+                "catalogueId": "source-comet-8p-arecibo-model",
+                "locator": "/synodicPeriodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -338,14 +339,13 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "aa1ae823d931b7340cc3151355b2daa2170e235093c5aea59df20023d92a8db4",
+      "sha256": "9e74b2c2ef8ba475083e034d16ff8f6d4940c0ade98c83d1c89dea42d7e631a8",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
         "archive": null,
         "members": null,
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "comet-8p-features.json",
         "publicBase": "/scenes/comet-8p/",
         "target": {
@@ -526,8 +526,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ce5629aee40cb9ecaff001ef7744db9d2ad24db9276e72f3010b60e9d3dce909",
-      "bytes": 3364,
+      "sha256": "9d3d06bfe7a8a1b277c165762c7a65198697222ecfe4efd1c967295c6458a7cc",
+      "bytes": 3599,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -566,8 +566,8 @@
         "kind": "local",
         "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
       },
-      "sha256": "c44248203014bbbaacb4b926763a747f4dc0fce5536d672bbeef191671ba4bac",
-      "bytes": 155,
+      "sha256": "fba7ce7f6ad59239f656a8072a0a26f80867923e7b2ecc6be2971858639e3af1",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -636,8 +636,8 @@
         },
         {
           "url": "/scenes/comet-8p/comet-8p-model-surface@2x.webp",
-          "bytes": 105472,
-          "sha256": "578704d0981e7648e4ed30581dedab06d2ff32e89f1f751a057dc3fa6b19c0a4",
+          "bytes": 134966,
+          "sha256": "49b416a8c6dd62be73ac42da6f6d50256f6bf3bc1787133bb55d4caaead9159c",
           "verification": "bytes-verified"
         }
       ],
@@ -690,8 +690,8 @@
         },
         {
           "url": "/scenes/comet-8p/comet-8p-arecibo-surface@2x.webp",
-          "bytes": 109186,
-          "sha256": "63f03008ebbfcd2d767e3ea6bc7779970897a084bcaa89388f493e2ac0bc2930",
+          "bytes": 141800,
+          "sha256": "7d9b86245ce591087a36bf0fde88879d8c38baece0ecd726bb05c8732b196d23",
           "verification": "bytes-verified"
         }
       ],
@@ -728,8 +728,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3266,
-          "sha256": "a106a84606174c20186ea334e30ddc3ea16329a63335630f4aa9412acd73540e",
+          "bytes": 3454,
+          "sha256": "8203a8f7a781bce20cac8a055a6dd9af25ec787c5ecef29a54abfdc3a700f09a",
           "verification": "bytes-verified"
         }
       ],
@@ -750,7 +750,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {}
       },
       "inputs": [
@@ -775,11 +774,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-8p",
-    "materialSha256": "bfe8810a2aa9b8d2eaeccd9a31909a0f69ee7d0e0fffafbfa31a6d8f3a87b0f8",
+    "materialSha256": "b7fa0d5f6c6f8fbc6a7f6f18b2dff63f47b022498117489dd553bf65e641dd2c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b9f3ecad17e47b2f6ee44e3802ecc8e69e207799f1369c2d2b74f136ec57a87d"
+      "bindingsSha256": "e224c6a4b446c7164a651f629b7179d12c123b07f8da76833ee7e57ecc3cf2bb"
     }
   }
 }

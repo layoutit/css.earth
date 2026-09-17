@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f444d5783da310713b574118fc773b91a3ddb3dcb17d8a62f0278d4017cab9e7"
+    "sha256": "da3b6b96aa65b8effd7a268e4335aa52997a2e9a176b5c8738b8e63e24cfbba2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7b9d8ebfcae6e346b11d5086ab9f74e25af55f6d26e46e94013cb0a44c892248",
+      "sha256": "c7ea6ee0455a74a21c9f84d37ccdbcea53f8b5d347edf00c054a88ccc52a2d06",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 7922.332226409829,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "624d6d64f37ccda93a9de2202c50e538508f38a7858f8a48f9a2d17359a19f35",
+      "sha256": "7726afb7bfe602cae7911854a36cfb9b5afb5712e0e3730e09d06fe9d17b205e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,31 +111,32 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published occultation model"
-            },
-            {
               "id": "dimensions",
               "label": "Model extents",
-              "value": "658 × 658 × 588 km"
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "Unresolved; display orientation is illustrative"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "658 × 658 × 588 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "uncertainty",
               "label": "Shape interpretation",
-              "value": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model."
+              "value": "Published Maclaurin model with semiaxes 329, 329, 294 km. The satellite orbit is assumed equatorial. The source also permits a slightly triaxial fit; this smooth shape is a constrained model.",
+              "source": {
+                "url": "https://arxiv.org/abs/2605.28636",
+                "label": "Research publication · arXiv 2605.28636",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2605-28636",
+                "locator": "/fullAxesKm/0; /fullAxesKm/2"
+              }
             }
           ]
         },
@@ -285,8 +285,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "624d6d64f37ccda93a9de2202c50e538508f38a7858f8a48f9a2d17359a19f35",
-      "bytes": 3076,
+      "sha256": "7726afb7bfe602cae7911854a36cfb9b5afb5712e0e3730e09d06fe9d17b205e",
+      "bytes": 3352,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -329,8 +329,8 @@
         },
         {
           "url": "/scenes/gkunhomdima/gkunhomdima-model-surface@2x.webp",
-          "bytes": 56174,
-          "sha256": "42e8495a96632291d0cbe2d23dd157aa35ab9fe9ea98d5c0156196ec062cccdc",
+          "bytes": 61150,
+          "sha256": "6e024134b6bd3fd4f98247cd54d83ebf6a3519837dce52a6b3eeaa6abe8dad27",
           "verification": "bytes-verified"
         }
       ],
@@ -367,8 +367,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8311,
-          "sha256": "dad469bcccf08b79fe970b39f1e86dcd75af1fb10c0a969df5f7769efddaf687",
+          "bytes": 8537,
+          "sha256": "22491b1502c9823868cd860dc741eb625fd1ca9fe80fd43d142c2a539d26edb1",
           "verification": "bytes-verified"
         }
       ],
@@ -406,7 +406,7 @@
   },
   "lastPreparation": {
     "objectId": "gkunhomdima",
-    "materialSha256": "fc8aaaeb5b3219c1a235de595cad14e2e28d0497f9c1f0ecb4e0d5f7bf63880c",
+    "materialSha256": "e5b783410ff1b0644bb9f0b0824005e8b0f3cfa474af1a24213695ed752bdd71",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

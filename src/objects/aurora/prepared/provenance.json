@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "28e8c9b39c8f349a39220a27571260d3c8f042b4fc59cd5b2808e0d643859cb1"
+    "sha256": "08a3a8cfc2eaca5594129f531e5cb0d0ef41903bbc5cc9bfafc2c2a739d43a3a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fe635e912de8d2eea152120384a12eb633a4e31f2f16dc58767352fe16f61129",
+      "sha256": "4ed5828f70473e5af7add337906a993dc8d120bd34b2c565df24bf9710d85edd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c6dc081b51298308fbe3393eef62a80e47ff5afaee72fa95c3e33f72a6032abc",
+      "sha256": "54274a896a77d918029e7295a4894c040a6f8bbc813ccf26c26327c1bdce7135",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "99 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "7.226189 hours"
+              "value": "7.226189 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1830",
+                "label": "DAMIT model 1830",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c6dc081b51298308fbe3393eef62a80e47ff5afaee72fa95c3e33f72a6032abc",
-      "bytes": 8028,
+      "sha256": "54274a896a77d918029e7295a4894c040a6f8bbc813ccf26c26327c1bdce7135",
+      "bytes": 8236,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/aurora/aurora-elevation-surface@2x.webp",
-          "bytes": 293982,
-          "sha256": "c451f6861aff845f42a25bca2588eb4161792e664c6a525c1a17909edbcb2d7f",
+          "bytes": 361786,
+          "sha256": "b3370b58b604c4759de1aa180fd56c359f8da52a4fc0303759264449c88dda75",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/aurora/aurora-shape-surface@2x.webp",
-          "bytes": 59592,
-          "sha256": "44e09757a3e5936c53ec737a438ce591e9d3ae1f0cb245351c8eb330f21f1a4c",
+          "bytes": 79390,
+          "sha256": "9c72be79a0524ff83c3753d8acd57a953689cd6d48770a57ac76a63c5a4fa414",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5744,
-          "sha256": "80bf2bfbb0900b294148f3d8b5cf40a9a2ce14731317732dffcfa2ba77736843",
+          "bytes": 5905,
+          "sha256": "90c8e8b3de822305d3acaee67b96f3a0596200bfd7f540f7f3468b6c0efd3409",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "aurora",
-    "materialSha256": "8c332d79364136cbaa5d336e79f2683084ccd8e1715703d4221883a167c785f3",
+    "materialSha256": "541e714e910c556bea563217938ff90e0523f5ed15c3cbb9db7c9cd40d79b2e3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

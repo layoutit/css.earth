@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e895ef9f6a2e6b9cdcc181d6b05740dd311e8e4109d605c45ec7be568fcc53f"
+    "sha256": "36ec05f30919713ea8535d5dc279736d46fdf5d210ee339d0286f323bb29dceb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f94aac25387e338e8d8ba443f11120cd6d19dfb151fe60afaa1129884b5f79d",
+      "sha256": "fc8d62dcd1aecf8af1451f962c55f538bfc05c0fba693f1bd34852743f6c0ffc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 317.5,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dddcb73eb01be7111807ecc37b8a911a5ad364e6bc517c8cc30268c2d66da153",
+      "sha256": "c0bc1b11ec91c9482462cc5dc1c40d34eb6cdae4b5dea21916335919b3f8dc47",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,41 +113,44 @@
             {
               "id": "diameter",
               "label": "Diameter estimate",
-              "value": "25 (+7/−4) km"
+              "value": "25 (+7/−4) km",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/scale/adoptedReferenceRadiusKm"
+              }
             },
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.05:1 · uniform-reflectivity model"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "rotation",
               "label": "Observed rotation period",
-              "value": "18.79 ± 0.09 h"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2000"
+              "value": "18.79 ± 0.09 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +314,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dddcb73eb01be7111807ecc37b8a911a5ad364e6bc517c8cc30268c2d66da153",
-      "bytes": 3070,
+      "sha256": "c0bc1b11ec91c9482462cc5dc1c40d34eb6cdae4b5dea21916335919b3f8dc47",
+      "bytes": 3608,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -356,8 +358,8 @@
         },
         {
           "url": "/scenes/paaliaq/paaliaq-model-surface@2x.webp",
-          "bytes": 57662,
-          "sha256": "2066e628416884e5ca26af642ea52473b80a408f9438fe4ccb95378421cdb630",
+          "bytes": 63214,
+          "sha256": "9ba0e56c273df7f3530e7e91bf1f164dd48d573effa4e9fac763839b444173bd",
           "verification": "bytes-verified"
         }
       ],
@@ -394,8 +396,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6358,
-          "sha256": "9e9dac0b1af4b9cdac07010f538bafdd2a16308908735938baa8aba1c6ba2c0c",
+          "bytes": 6804,
+          "sha256": "85e4d903f9ec0c1e163cb9543960cf71d673c76cc8300553e7c5180f8056a94e",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "paaliaq",
-    "materialSha256": "28d5e93eaaacababbe90a4e3142cb02bad6895630024ac9afab50a9c4a7a3640",
+    "materialSha256": "d9c1ab909fb7d5e723978ccafec73390555e392495927f7c6dca0f869b553a7c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

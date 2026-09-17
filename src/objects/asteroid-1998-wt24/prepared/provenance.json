@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f695cfd39040bc47660c224e13b022bab92d90dc1d3df1c9e699725f96bda91"
+    "sha256": "e74457c087a31cd21abfdf56fc7355eecc2cea1670d36562cf228070db3a2697"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "713560129f744160bb8b9d4d32430814335c3483ad42e53900168d01fad86574",
+      "sha256": "109e24b57e1fe50a2fa72b85cbcdb9433a67a9c058bd84e77101c47c7ddc2b6b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -114,8 +114,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -136,7 +135,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fbbc96f5af122f3de08118b7b38f1849d1254e17c75cef949e19150c679bdb41",
+      "sha256": "511654d2094ad6758ee7c159a032e5115175965f1d3f76b183cda827c3b9c287",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,7 +163,15 @@
             {
               "id": "radius",
               "label": "Volume-equivalent radius",
-              "value": "0.2075 km"
+              "value": "0.2075 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/1998WT24/busch.etal.2008.1998wt24.pdf",
+                "label": "Asteroid 1998 Wt24 · asteroid 1998 wt24 research wt24",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1998-wt24-asteroid-1998-wt24-research-wt24",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -375,8 +382,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fbbc96f5af122f3de08118b7b38f1849d1254e17c75cef949e19150c679bdb41",
-      "bytes": 10244,
+      "sha256": "511654d2094ad6758ee7c159a032e5115175965f1d3f76b183cda827c3b9c287",
+      "bytes": 10663,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -420,8 +427,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-elevation-surface@2x.webp",
-          "bytes": 347114,
-          "sha256": "594efba3688ea0348707a69117cc2fbc4642362998cf2772f7a391ce498973e3",
+          "bytes": 403836,
+          "sha256": "94eb4ed719124280e8a836d26767b03d37a7417d31212298871cac6fd6e5b191",
           "verification": "bytes-verified"
         }
       ],
@@ -464,8 +471,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-surface@2x.webp",
-          "bytes": 63306,
-          "sha256": "709e1d76ba708d649dec5c582501e5315cdfb1953a1e17f0e2e5b0aa068acc59",
+          "bytes": 80054,
+          "sha256": "3404fdb350d7a3156b4a05c8f7cf4c15b6339fd73510a748d46b02cc5e240e80",
           "verification": "bytes-verified"
         }
       ],
@@ -497,8 +504,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7718,
-          "sha256": "c355a493197b1536bd4b559b52b276e250400061db4add72cda15ad4d1925df5",
+          "bytes": 8046,
+          "sha256": "a5282b2f16be76fb5a8766afe7890c1fc9acaaa4e3e76d652ab3940786532871",
           "verification": "bytes-verified"
         }
       ],
@@ -561,7 +568,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-wt24",
-    "materialSha256": "650560cbbf40e9dad7e83a2e6d1a9456444ff3968e9c91c08a580400be85b3c6",
+    "materialSha256": "46faf0323ba67b7db32a8b5c5f62d6cdbd81b56561a2b15c7b08ebc5bc7593d5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

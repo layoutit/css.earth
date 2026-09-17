@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcc2fdcae98220bc3786886c8b72ec29a37f69dbcb19f3d5ce7581409e3199b7"
+    "sha256": "357835db0a62133613aa73462a722d4e1c50e9c969a7143a64e67c16f4488968"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "63a843996404f241752f4e567c5a1ceae9b722635f36ebc860ca8904f766a049",
+      "sha256": "63d2a9c94e6a551ef1f95a8d7db89332b863e02ef37430c6fed9f17b4134b909",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -140,7 +139,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "153946d696e8266e77bb437c0656fc196ffcaf6ece665b50e3e0fb31242c50e1",
+      "sha256": "1a06962c286c2f85b52aa038e988c00d009e602bcdcd9d846c6ce88a8763ff08",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -168,7 +167,15 @@
             {
               "id": "radius",
               "label": "Model equivalent radius",
-              "value": "1.01 km"
+              "value": "1.01 km",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+                "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+                "locator": "/diameterKm"
+              }
             },
             {
               "id": "distance-from-sun",
@@ -199,7 +206,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "8.76243 ± 0.00004 hours"
+              "value": "8.76243 ± 0.00004 hours",
+              "source": {
+                "url": "https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf",
+                "label": "Asteroid 1996 Hw1 · asteroid 1996 hw1 research 1996hw1",
+                "checked": "2026-09-16",
+                "path": "source/reference/model-properties.json",
+                "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+                "locator": "/periodHours"
+              }
             }
           ],
           "moreFacts": []
@@ -365,8 +380,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "153946d696e8266e77bb437c0656fc196ffcaf6ece665b50e3e0fb31242c50e1",
-      "bytes": 9952,
+      "sha256": "1a06962c286c2f85b52aa038e988c00d009e602bcdcd9d846c6ce88a8763ff08",
+      "bytes": 10775,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -410,8 +425,8 @@
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-surface@2x.webp",
-          "bytes": 362878,
-          "sha256": "f4b7bcf01bfcc1aed14573c063e93f0bfc3da7c53eea0788891e14ad70f74850",
+          "bytes": 419880,
+          "sha256": "724105c9a6020e789d6ba71356a7536f95a595dc845b01b31b1824a5a72971f7",
           "verification": "bytes-verified"
         }
       ],
@@ -454,8 +469,8 @@
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-surface@2x.webp",
-          "bytes": 72574,
-          "sha256": "9450eb5117dd192f4289770d6d7e290680c6d626dcf718154e195f93e8fdc489",
+          "bytes": 90150,
+          "sha256": "c93ebbba8aa86e1acda0662cba4c0e0d6c4638821d05082e79ac3fffcb529551",
           "verification": "bytes-verified"
         }
       ],
@@ -487,8 +502,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6670,
-          "sha256": "aed54a02270eb4519e86e704325db6dbd697c517d2c1dc8ecba3cd74f6379976",
+          "bytes": 7311,
+          "sha256": "86af28d21d7f12734a7adedc70548ba88202e1c5edce2ba6a2ae6dfef1f19092",
           "verification": "bytes-verified"
         }
       ],
@@ -551,7 +566,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1996-hw1",
-    "materialSha256": "57b5f6c30191f2e54b1f3dc05e1e4806ffd800c81ef1736790f78e49cfe1d81c",
+    "materialSha256": "66fa58fff1b3e83a0957c51389a0c75755bce505a4777eaa372e198cb56fefd3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

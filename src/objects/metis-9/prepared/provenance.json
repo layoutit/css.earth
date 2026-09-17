@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09de3b564371e66e3a8865c2990a79e01ec19b55a20b30b9e5b619f8f85d8d32"
+    "sha256": "e91b359f403adc40f5ef046ed46f26c0909d5d4a6e7c51531417c4317caebf8f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6652dbe3cc913c6f67ca2d029dd4e4b87b482ee3a51a9f3dc4acf791d863f8df",
+      "sha256": "f163d921f143b8af226f2a201f4267939cc56c4ad89ee6388ad48a9a880d982e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -114,8 +114,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -136,7 +135,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "96b8ad213c2c26b5850947906eaa859fac8f5ce76819aaa8e5fc9bae8b8ec308",
+      "sha256": "4ed3020b7f7aab55d6b26c34c80b6c44bb0d4ceeccabf8986bb992eeb42fd817",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -162,11 +161,6 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Volume-equivalent radius",
-              "value": "86.5 km"
-            },
-            {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
               "value": "2.387 AU (mean)",
@@ -191,11 +185,6 @@
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "5.079176 hours"
             }
           ],
           "moreFacts": []
@@ -364,8 +353,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "96b8ad213c2c26b5850947906eaa859fac8f5ce76819aaa8e5fc9bae8b8ec308",
-      "bytes": 8660,
+      "sha256": "4ed3020b7f7aab55d6b26c34c80b6c44bb0d4ceeccabf8986bb992eeb42fd817",
+      "bytes": 8427,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -409,8 +398,8 @@
         },
         {
           "url": "/scenes/metis-9/metis-9-elevation-surface@2x.webp",
-          "bytes": 344396,
-          "sha256": "772efcb054ff9aee4ff72bb1fef8f893f611ab056b614b1555c3d23d0460cd9c",
+          "bytes": 413038,
+          "sha256": "e035f7b0fd5c126f82b98e17c4c39798736670a3868a99e0adbab4a13729326e",
           "verification": "bytes-verified"
         }
       ],
@@ -453,8 +442,8 @@
         },
         {
           "url": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
-          "bytes": 64368,
-          "sha256": "94badb4790afcb7ec3f04d29856261eecaa5ccc608b4ee6b5af8f031ec6e7dfc",
+          "bytes": 81906,
+          "sha256": "a3daa415a38f35e6fc7acdcc4271110b1cb99a56ee1257f5db6649e6a4ee9296",
           "verification": "bytes-verified"
         }
       ],
@@ -486,8 +475,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6363,
-          "sha256": "4fa097d0f515b6df92d008ce3b77a28dc71733e8cc0ae2ef87c964def7a25590",
+          "bytes": 6218,
+          "sha256": "36696dfc5a9eed681797e61802199fe5d76c1aa796e6040100f1949d45a410ad",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "metis-9",
-    "materialSha256": "d98ea8de7d9fa67b6d4d3659a65d028e74ad8f94ee7f9939f7b75813f2250708",
+    "materialSha256": "8e27c53b3a628ab47d394df2bd78b914515b541758a5d9e57da006535e4bb11f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -107,6 +107,89 @@
           "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
         }
       ]
+    },
+    {
+      "id": "alma-thermal-maps",
+      "subject": "Cambioni et al. (2022) ALMA thermal-inertia and dielectric-constant maps",
+      "status": "included",
+      "finding": "The Zenodo release (doi:10.5281/zenodo.6321315, CC BY 4.0) gives both properties per 5-degree node, 73 x 37, fitted to ALMA 1.3 mm images of 2019 June 19 at about 30 km resolution; 1,895 of 2,701 nodes are mapped. They ship as the Thermal inertia and Dielectric constant lenses on the ADAM mesh, one colour per node, with dropped nodes as the missing-data grid. Median uncertainties are 134 for thermal inertia and 1.9 for the dielectric constant.",
+      "evidence": [
+        "https://doi.org/10.5281/zenodo.6321315",
+        "https://arxiv.org/abs/2402.03422",
+        "https://github.com/layoutit/css.earth/blob/07d9e777e5afa9908f19aff5c2cd195ffefe2163/src/objects/psyche/source/preparation/terrestrial.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "07d9e777e5afa9908f19aff5c2cd195ffefe2163"
+        }
+      ]
+    },
+    {
+      "id": "alma-map-frame-placement",
+      "subject": "Placing maps from the Shepard et al. (2021) body frame on the ADAM mesh",
+      "status": "included",
+      "finding": "Mesh directions are carried into the map frame through Cambioni et al. (2022) equation 2 (TDB) and the LAM parameter file (UTC) at the ALMA midpoint. The map frame's state reproduces all 22 sub-observer longitudes of de Kleer et al. (2021) Table 1 to a mean of 0.04 deg and scatter 0.33 deg (1.68 deg if read in UTC). By shape alone, the release altitude map against the ADAM mesh peaks 1 deg from the placement at correlation 0.821; mirrored longitude peaks at 0.455, flipped latitude at 0.485, both at 0.618.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/07d9e777e5afa9908f19aff5c2cd195ffefe2163/tests/objects/unit/psyche/alma-frame.test.mts",
+        "https://github.com/layoutit/css.earth/blob/07d9e777e5afa9908f19aff5c2cd195ffefe2163/src/objects/psyche/source/thermal/alma-body-frame.json",
+        "https://arxiv.org/abs/2105.11372"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "07d9e777e5afa9908f19aff5c2cd195ffefe2163"
+        }
+      ]
+    },
+    {
+      "id": "alma-artifact-longitudes",
+      "subject": "Longitudes 60 to 120 degrees west flagged by the authors",
+      "status": "unresolved",
+      "finding": "Cambioni et al. (2022) hatch this band because it was seen at high emission angles in under a third of the ALMA images and may contain unmapped topography. The nodes are drawn like the rest and the lens notes name the band; no separate mask is published.",
+      "revisitWhen": "A release masks or revises the band, or new thermal observations cover it at lower emission angles.",
+      "evidence": [
+        "https://arxiv.org/abs/2402.03422"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "07d9e777e5afa9908f19aff5c2cd195ffefe2163"
+        }
+      ]
+    },
+    {
+      "id": "lam-spin-time-scale",
+      "subject": "Time scale of the LAM spin parameter file",
+      "status": "unresolved",
+      "finding": "The file does not state UTC or TDB. It is read in UTC, as for the SPHERE photograph lens; a TDB reading moves the mesh prime meridian 1.65 deg in map longitude. The shape-only registration peaks 1 deg from the UTC placement and 3 deg from the TDB one, at correlations 0.821 and 0.822, too flat to decide on a 5-degree grid.",
+      "revisitWhen": "LAM or Vernazza et al. state the time scale of the phase epoch.",
+      "evidence": [
+        "https://observations.lam.fr/astero/3Dshape/16_Psyche_param.txt",
+        "https://github.com/layoutit/css.earth/blob/07d9e777e5afa9908f19aff5c2cd195ffefe2163/tests/objects/unit/psyche/alma-frame.test.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "07d9e777e5afa9908f19aff5c2cd195ffefe2163"
+        }
+      ]
+    },
+    {
+      "id": "alma-brightness-temperature-and-uncertainty-maps",
+      "subject": "The release's brightness-temperature, residual and uncertainty maps",
+      "status": "excluded",
+      "finding": "The time-averaged brightness temperature depends on the 2019 viewing and illumination geometry rather than a surface property, and the residual and goodness-of-fit maps describe the fit. The uncertainty maps are summarised in the README instead of drawn as lenses.",
+      "revisitWhen": "The app gains a way to show a map's uncertainty alongside its values.",
+      "evidence": [
+        "https://doi.org/10.5281/zenodo.6321315"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-16",
+          "commit": "07d9e777e5afa9908f19aff5c2cd195ffefe2163"
+        }
+      ]
     }
   ]
 }

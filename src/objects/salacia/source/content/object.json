@@ -6,33 +6,20 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published size model; shape unresolved"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "838 × 838 × 838 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "About 5.494 days (131.86 hours); 2025 photometry supports synchronous rotation with Actaea."
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Hot classical trans-Neptunian object"
+        "value": "838 × 838 × 838 km",
+        "source": {
+          "url": "https://doi.org/10.5194/epsc-dps2025-905",
+          "label": "Research publication · DOI 10.5194/epsc-dps2025-905",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-5194-epsc-dps2025-905",
+          "locator": "/fullAxesKm/0"
+        }
       }
     ],
-    "moreFacts": [
-      {
-        "id": "uncertainty",
-        "label": "Shape interpretation",
-        "value": "Size-constrained spherical illustration at the primary-only 838 ±44 km ALMA/NEATM estimate. This value is from a 2025 conference abstract; no resolved three-axis shape is provided."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",

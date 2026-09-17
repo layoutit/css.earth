@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f184c61c60952ae1197734c60cbaf766e0511d07865a748a0a79d3a80d921dfd"
+    "sha256": "510ebbcada7dc4233f99be42eee751eecb099ada14fd2b66e9177e8148a1ceee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ad70fadd1a15a701d71adb582909b9fecf0928e6d64aae1f2933d6f7f7a095e3",
+      "sha256": "b9c046c9a63d75120ddb265cdfc579ac9853904489e31ec4c7e98e7f3f71d6c4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 3110.831008996753,
@@ -126,7 +125,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
+      "sha256": "1789e087372a95787640d9771c4690338f4ffb3757a8772d18651a130afd14bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -135,43 +134,46 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Approximate ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Full approximation dimensions",
-              "value": "287.6 × 270.4 × 198.2 km"
+              "value": "287.6 × 270.4 × 198.2 km",
+              "source": {
+                "url": "https://doi.org/10.1051/0004-6361/202141543",
+                "label": "Research publication · DOI 10.1051/0004-6361/202141543",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1051-0004-6361-202141543",
+                "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "7.004 ± 0.036 h (photometric period)"
+              "value": "7.004 ± 0.036 h (photometric period)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=10199",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             },
             {
               "id": "class",
               "label": "Population",
-              "value": "Centaur"
+              "value": "Centaur",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=10199",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "object.orbit_class.name"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "inner-ring",
-              "label": "C1R radius / width",
-              "value": "385.9 km / 7.04 km"
-            },
-            {
-              "id": "outer-ring",
-              "label": "C2R radius / width",
-              "value": "400.3 km / 1.009 km"
-            },
-            {
-              "id": "ring-epoch",
-              "label": "Ring measurement",
-              "value": "JWST, 18 October 2022, first contact"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -339,8 +341,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9af454bf25063184e29f52182b36bee777ba42afc281a5e3754ae695ab2c1442",
-      "bytes": 4268,
+      "sha256": "1789e087372a95787640d9771c4690338f4ffb3757a8772d18651a130afd14bf",
+      "bytes": 4859,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -383,8 +385,8 @@
         },
         {
           "url": "/scenes/chariklo/chariklo-model-surface@2x.webp",
-          "bytes": 52652,
-          "sha256": "5099a3bddbb7e701fa6e5b5b0881733d3f5c426dd8660ae5fe4d3603aa6f72c8",
+          "bytes": 58738,
+          "sha256": "adcb2dfc41d2aba6ea7e500b5ad287c205299c90f13fe7b066cdbc63d724ac8c",
           "verification": "bytes-verified"
         }
       ],
@@ -421,8 +423,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5814,
-          "sha256": "cd9a33c120239e793a83794fb8cf6a640034f0b980d5e083fd4a0cd4b6205356",
+          "bytes": 6313,
+          "sha256": "36148bf29499270f3352dacf2633405711b695026cb4b2d143772df5c37b4a5e",
           "verification": "bytes-verified"
         }
       ],
@@ -460,7 +462,7 @@
   },
   "lastPreparation": {
     "objectId": "chariklo",
-    "materialSha256": "680e0236096b532bc07da841a5adde9a68116cc3158ec1387a1f71f37cef3e04",
+    "materialSha256": "137063f586982db1daa7806f00be78473e7288de87e7a597f37f8cdf3b0f9769",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

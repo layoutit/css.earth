@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "614c69d6cd2baac2f7cf8f4245a04ccc367e93646f0c04e88f9f5a41c6f2c485"
+    "sha256": "1e995549a52bd4c302adae0f56934d93c3da0cc840f3ef83a222030ae2627e11"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "589b94286ec097b5027f9ece6afb13ee0d0969915639c7c8d02722e19dfc6d90"
+    "bindingsSha256": "c622efc8936e54402a035c5fd67598349bf465ed08d02600f6fa9cb1ac48bb68"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "f2c4dee10709cdd5d454389a700332f5aa1b3a1686c3483927f3c1dc35b10c23",
+      "sha256": "b90e072c742a4c6f43dacd2bb30f3b3f08315c9ae10fe33b009dc6ca9538e0fe",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
@@ -70,7 +70,7 @@
                 "metadata": {
                   "label": "MATISSE reconstruction",
                   "falseColor": true,
-                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
+                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 780 squared visibilities and 520 closure phases measured by VLT/MATISSE on 8 and 19 February 2020 in the 3.94-4.00 micrometre pseudo-continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius. The camera is computed: the rotation pole lies in the plane of the sky at the ALMA position angle, the display meridian is the sub-Earth point at the epoch, and the pixel scale is the reconstruction's. Nothing finer than the beam is shown: the raw reconstruction carries sub-beam texture the visibilities never constrained. The bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits the data equally well, so which side of the star is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale from dark red to white, not colour or temperature. The far hemisphere is unobserved."
                 },
                 "frames": [
                   {
@@ -111,6 +111,7 @@
                   "maximumGain": 1
                 },
                 "display": {
+                  "basis": "authored",
                   "percentiles": [
                     1,
                     99.5
@@ -127,8 +128,7 @@
                 "consumer": "sphere-photograph"
               },
               "offLimb": {
-                "rotationDegrees": -1.6,
-                "mirror": true
+                "rotationDegrees": -48
               }
             }
           }
@@ -165,7 +165,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d36d90e198669154908790b29c3c15de7e90302fabf68be7d1d7847cbd11a8b6",
+      "sha256": "e67dffdde53e29f252cbc221ce1612635465982c7dba048f878aec0a398a5721",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -176,22 +176,41 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "764 solar radii"
+              "value": "764 solar radii",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.09837",
+                "label": "Joyce et al. (2020)",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2006-09837",
+                "locator": "radiusKm; radiusSource"
+              }
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "168 parsecs"
+              "value": "168 parsecs",
+              "source": {
+                "url": "https://arxiv.org/abs/2006.09837",
+                "label": "Joyce et al. (2020)",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2006-09837",
+                "locator": "distanceParsecs; distanceSource"
+              }
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (4 µm)",
-              "value": "42.45 milliarcseconds"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period (P / sin i)",
-              "value": "36 years"
+              "value": "42.45 milliarcseconds",
+              "source": {
+                "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+                "label": "Uniform-disc fit to the February 2020 VLTI/MATISSE continuum data",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
+                "locator": "angularDiameterMas; angularDiameterSource"
+              }
             }
           ],
           "moreFacts": []
@@ -211,7 +230,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": true,
-              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
+              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Its bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
               "noData": true,
               "legend": {
                 "kind": "scale",
@@ -479,8 +498,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d36d90e198669154908790b29c3c15de7e90302fabf68be7d1d7847cbd11a8b6",
-      "bytes": 4446,
+      "sha256": "e67dffdde53e29f252cbc221ce1612635465982c7dba048f878aec0a398a5721",
+      "bytes": 5572,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -537,6 +556,7 @@
             "maximumGain": 1
           },
           "display": {
+            "basis": "authored",
             "percentiles": [
               1,
               99.5
@@ -561,20 +581,20 @@
       "outputs": [
         {
           "url": "/scenes/betelgeuse/betelgeuse-surface-matisse.webp",
-          "bytes": 24680,
-          "sha256": "7f29e76c2d5dadd3ed7380eb4378168c0e4fc0df5df65ffd27dfdc661d54411b",
+          "bytes": 24972,
+          "sha256": "3eb37a66c1ecc573693be2387547da4a2fbbce0acfbf752adb8d2476dcde230d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-surface-matisse@2x.webp",
-          "bytes": 55044,
-          "sha256": "f0d60898ed615d9ea9056baf7d79d353c7e12f0550b451a9f4c67d337c133e46",
+          "bytes": 55478,
+          "sha256": "25408fca4a1378963da43ea0688c223818c649b56c2a14ec3fb39eb996119603",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
-          "bytes": 472,
-          "sha256": "b47918e8004fd5e0190f88f12db7b5cd145cc9c2333ad85639e49a1a4ceee368",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
           "verification": "bytes-verified"
         },
         {
@@ -591,8 +611,8 @@
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse.webp",
-          "bytes": 64168,
-          "sha256": "893d3f534e826e1aef517b5390bf0f9eae8870ca2a519a176673bb8e27656275",
+          "bytes": 63334,
+          "sha256": "5d0ffcbea41c88333cf06c54ac795487fba0d2c06c1d26a9311061cfff0b4815",
           "verification": "bytes-verified"
         },
         {
@@ -603,8 +623,8 @@
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse@2x.webp",
-          "bytes": 153962,
-          "sha256": "f8bc2de77a277e4bb3cebc370591b7ef22c58066dc2df54e48121393b43054ef",
+          "bytes": 155470,
+          "sha256": "cde851bda093b897d4751fc7058a7acc8d6ef7c399854342793f1dfc8abe3ab5",
           "verification": "bytes-verified"
         },
         {
@@ -642,8 +662,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7796,
-          "sha256": "80d163a5f963e92e25af7cf8327e740c1b3248b56fdd96187184a6805942f0b5",
+          "bytes": 8499,
+          "sha256": "d46b7e8183763640513eae5a728b505fe6d3b875a2aa2280861338f4a514d1b3",
           "verification": "bytes-verified"
         }
       ],
@@ -668,8 +688,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/matisse.webp",
-          "bytes": 9744,
-          "sha256": "1bd08ae31a8ce2e311ec4885af73971781b9d4087e0b83a55b1028e9160106ed",
+          "bytes": 9878,
+          "sha256": "2fa84be7a54c3104fd98dda4887d730c9499d3b33fa7d2390d9fdd12bf87d14e",
           "verification": "bytes-verified"
         }
       ]
@@ -681,11 +701,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "51f1dbb5f9641024aa53d8bb97723a60701e3f3ec0cd8caff229aee4d6cdc765",
+    "materialSha256": "c8cf8db5c04a1c8fae20101a912481115651eac7e0eb2444a4ba26cd6dc01958",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "589b94286ec097b5027f9ece6afb13ee0d0969915639c7c8d02722e19dfc6d90"
+      "bindingsSha256": "c622efc8936e54402a035c5fd67598349bf465ed08d02600f6fa9cb1ac48bb68"
     }
   }
 }

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5227469c19b720f4cb7746f1ef9f37ed66d1f361f53cea43315107d416c2fcc1"
+    "sha256": "3c6be2d6099cfbf1912f261b667442710cd28f5771899b12cd2bc8845a8eef76"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a7d7b8b760d22901b452d19314138081bf98d9b9a21691c6b384e573dcd35992"
+    "bindingsSha256": "4550fb6fc31674785742a0ffa30705066c2b82d35e747652126a779365f25082"
   },
   "recipes": [
     {
@@ -324,7 +324,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f2d6770e839b64b516a60904a1a74b36cf85c7da4b789078a57acfd13e7dd291",
+      "sha256": "66426cbd8bfe0ad85a822e56875006e80477442e028a91ba2a7359af88c383d5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -361,22 +361,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 1.41 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 1.41 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Uranus",
-              "value": "About 129,900 km"
+              "value": "About 1.41 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Gerard Kuiper · 1948"
+              "value": "Gerard Kuiper · 1948",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -660,7 +666,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "07c55d3158c4a9cb0270d29ebb8e88e534c5c40b272c09fbcab6009b65f7489f",
+      "sha256": "6250b77efb266e10b59bc0e0bcd9ea71c2bbe9431c6ea7d0affb72158c5568bb",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -671,7 +677,6 @@
           "metadata": "metadata_nomenclature_points_MIRANDA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "miranda-features.json",
         "publicBase": "/scenes/miranda/",
         "target": {
@@ -905,8 +910,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "f2d6770e839b64b516a60904a1a74b36cf85c7da4b789078a57acfd13e7dd291",
-      "bytes": 14315,
+      "sha256": "66426cbd8bfe0ad85a822e56875006e80477442e028a91ba2a7359af88c383d5",
+      "bytes": 14780,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -978,8 +983,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "6c31c6d7afd537b7e6e13475b1268b018ac9e6698013c0d48e23a3ef0bb0cfc3",
-      "bytes": 154,
+      "sha256": "9f27edddd46d4579044bc75438c6ae304e8b9b33f269f93f0f25ae0cfc91d399",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1637,8 +1642,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6859,
-          "sha256": "3d196559476ee7da01947ee8199805143a2d5ef73fb21377cec564130db3a2f4",
+          "bytes": 7230,
+          "sha256": "87babd30a15200dc57979371cc1ed79167e5a752f728da74be972f82d4ae684f",
           "verification": "bytes-verified"
         }
       ],
@@ -1659,7 +1664,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1762,11 +1766,11 @@
   },
   "lastPreparation": {
     "objectId": "miranda",
-    "materialSha256": "f2d2ef7be61863e38a068328af814fb0b733c5405c28b1e0368ee7aee7ea624b",
+    "materialSha256": "9fd8d32a64cfaf9d53b6998ea66a184a208fadd08685d8faea609b54842051c7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a7d7b8b760d22901b452d19314138081bf98d9b9a21691c6b384e573dcd35992"
+      "bindingsSha256": "4550fb6fc31674785742a0ffa30705066c2b82d35e747652126a779365f25082"
     }
   }
 }

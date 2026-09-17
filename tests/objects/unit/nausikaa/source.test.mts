@@ -20,6 +20,6 @@ test('Nausikaa preserves calibrated original coordinates and the paired spin mod
 });
 test('Nausikaa keeps closed source connectivity at 800 native raster leaves',async()=>{
  const config=await read('preparation/terrestrial.json'),source=await createSourceManifest({planetId:'nausikaa',planetName:'Nausikaa',sourceRoot:root}),r=requireClosedTerrain(await loadRadialTerrain({config,sourceDirectory:root,source}));
- assert.equal(r.faces.length,800);assert.equal(r.simplification.sourceFaces,2024);assert.equal(r.simplification.removedOppositeFaces,0);assert.equal(r.simplification.topology.eulerCharacteristic,2);assert.ok(r.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));assert.deepEqual([r.tileSize,r.width,r.height],[128,2048,6400]);
+ assert.equal(r.faces.length,800);assert.equal(r.simplification.sourceFaces,2024);assert.equal(r.simplification.removedOppositeFaces,0);assert.equal(r.simplification.topology.eulerCharacteristic,2);assert.ok(r.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));assert.ok(r.plans.reduce((sum,p)=>sum+p.rect.width*p.rect.height,0)<=16384*r.faces.length);
  assert.ok(r.simplification.estimatedErrorMeters<=400);
 });

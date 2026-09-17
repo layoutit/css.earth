@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "comet-1p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dc104068f21a08f2554708bf97ad5a373696ac1f831850380afafef49db3a386"
+    "sha256": "567eefcf37485c1e822dd8b148f55349839360e009a8a11a75c135244e609769"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "89800ed375058067532088b39facb765d814c7f2fcf8d757b834eee9ef089a4b",
+      "sha256": "beca93965d6d7be5f5cce2a9449cb9fb832505c7ae07f2da3040145c4a644ca4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -92,8 +92,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 1000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -147,7 +146,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "99eb2fdbe056e0dc7b3e9e8ede37886c493edf4440acd2df2de86a3cb10a7214",
+      "sha256": "0663e022c6786d986e3d4aff62bdddfb494dbc47e936f38966a60443f5f1278b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -156,19 +155,17 @@
         "panel": {
           "facts": [
             {
-              "id": "giotto-approach",
-              "label": "Giotto closest approach",
-              "value": "596 km"
-            },
-            {
-              "id": "vega-approach",
-              "label": "Vega 2 closest approach",
-              "value": "8,032 km"
-            },
-            {
-              "id": "uncertainty",
-              "label": "Shape uncertainty",
-              "value": "About 0.5–1 km"
+              "id": "mission",
+              "label": "Shape from",
+              "value": "Giotto and Vega",
+              "source": {
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+                "label": "Comet 1P · stooke halley",
+                "checked": "2026-09-16",
+                "path": "source/shape/1682q1halley.xml",
+                "catalogueId": "source-comet-1p-stooke-halley",
+                "locator": "Investigation_Area names: Giotto Mission; Vega Mission - Vega 1; Vega Mission - Vega 2"
+              }
             }
           ],
           "moreFacts": []
@@ -303,7 +300,7 @@
       "sha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
       "bytes": 26573,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -332,7 +329,7 @@
       "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -356,10 +353,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "99eb2fdbe056e0dc7b3e9e8ede37886c493edf4440acd2df2de86a3cb10a7214",
-      "bytes": 3788,
+      "sha256": "0663e022c6786d986e3d4aff62bdddfb494dbc47e936f38966a60443f5f1278b",
+      "bytes": 3988,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -396,13 +393,13 @@
           "url": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
           "bytes": 2416,
           "sha256": "87505842ef01f312fbeee474ebc4d5274a923023c2a7673d6b451c26dab0363b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
-          "bytes": 125222,
-          "sha256": "600eca0c4295947aab5108a0cf1b8fc99e2d6f03c18e055f2d649d79f78b1ac6",
-          "verification": "asset-manifest-pin"
+          "bytes": 148664,
+          "sha256": "a14483f7275e7f4eef4521504c397861bc99f4e6436db0b4e14058e25ca60901",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -445,13 +442,13 @@
           "url": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
-          "bytes": 37060,
-          "sha256": "d6f71fd84791c65f1c64b6c365aa6051cea85f8270d0e089f7e017c836672148",
-          "verification": "asset-manifest-pin"
+          "bytes": 54634,
+          "sha256": "c9183746eb366bd373065eb78d9d5dad3b0702aab39739fc3028d6869d2ac11c",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -482,8 +479,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4457,
-          "sha256": "d7e4b5b460ee973e8c62fb209ccd8677e9c8121f3d60b24593a858a789bdf70e",
+          "bytes": 4654,
+          "sha256": "efc4eeb96c9a520b8ce4a7af70663319b9962bda019af797424beff4a332c192",
           "verification": "bytes-verified"
         }
       ],
@@ -521,11 +518,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-1p",
-    "materialSha256": "05ed8e35a6b7ec903cd7bdcf9ac27eccbef0e7735367c6d8bc0dc5fbb0af104c",
+    "materialSha256": "7a6911834d069bdff63a0505dfd4287e720ac983b096c983f1cd0b5c89617606",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "246703a142478fe202671b21a02643240025ee173e2be3b57a0e56e926b45c69"
     }
   }
 }

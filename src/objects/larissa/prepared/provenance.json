@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "08c36e9d67d6958c2f3c12c0a83a71aadb750938aff8ecbc66f29a6d77299d1a"
+    "sha256": "539819f5a628dd4e7c5feab13910a7d42d523d7307872669585a733badf47939"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "08d92acd410be5336a16cf6b31c110b0abf930bab938103aeffc08e07c5844df",
+      "sha256": "c8509f5db505c1b549efffb980658144598c966a6b1f281da613a5cbc4d2c9e2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -166,8 +166,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 600,
               "maximumErrorMeters": 1800,
@@ -187,7 +186,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7ac5c06d45895a6e590e8ff439b151ff2894357a5d6f9c440c99cff90f5a0441",
+      "sha256": "9d576df65e0b9e7e073710e2a6b43486b073697004f33f46be0d96b0d126b314",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -224,22 +223,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "13.32 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
+              "value": "13.32 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Neptune",
-              "value": "About 73,500 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Reitsema, Hubbard, Lebofsky and Tholen · 1981"
+              "value": "About 73,500 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             }
           ],
           "moreFacts": []
@@ -478,8 +483,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7ac5c06d45895a6e590e8ff439b151ff2894357a5d6f9c440c99cff90f5a0441",
-      "bytes": 4632,
+      "sha256": "9d576df65e0b9e7e073710e2a6b43486b073697004f33f46be0d96b0d126b314",
+      "bytes": 5074,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -523,8 +528,8 @@
         },
         {
           "url": "/scenes/larissa/larissa-elevation-surface@2x.webp",
-          "bytes": 157004,
-          "sha256": "1bd870e8c77fa3a06102eff4bf3f17a190b1895e805c2b6abaea494330fced01",
+          "bytes": 200866,
+          "sha256": "eb4c96726529329f829712b8bcf0d5337ab1da9f43fc839b2528e55fa129be66",
           "verification": "bytes-verified"
         }
       ],
@@ -569,8 +574,8 @@
         },
         {
           "url": "/scenes/larissa/larissa-normal-surface@2x.webp",
-          "bytes": 104952,
-          "sha256": "f5b4e96144d7b0b9a50e53d9e9d00f365454cf10eb287a9a67e9bd93589d9dde",
+          "bytes": 115094,
+          "sha256": "bbf8d95be6b11b177e5583ba657287193aaa62f786bd6a0d4832b7271fdacef4",
           "verification": "bytes-verified"
         }
       ],
@@ -602,8 +607,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6334,
-          "sha256": "085d14c9026f933947e3549883e9dacaafd9cd7948aca9a7a674d1312eeb4399",
+          "bytes": 6682,
+          "sha256": "eea7457de2008c482a4cd378dbc8c86dde505dc2e0a99f69150f08db6d0002ce",
           "verification": "bytes-verified"
         }
       ],
@@ -666,7 +671,7 @@
   },
   "lastPreparation": {
     "objectId": "larissa",
-    "materialSha256": "b7332f88e918717b8dfe5ee4f947bf733f1de2cd2d431d793c0a90f7d87f434b",
+    "materialSha256": "f35cf18afa84c1a635aac675934174ec52c11f9a17883e9d9ca7c24aaa6e1baf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

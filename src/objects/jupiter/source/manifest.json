@@ -490,8 +490,8 @@
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 15280,
-      "expectedSha256": "6b8204b248fbc9b100f1b83067673e5cddc3ba5841662c3cd8c398251a262f01",
+      "expectedBytes": 14940,
+      "expectedSha256": "2c908b05e2d97123dc4be94c1775fc079e410cb97f6849cfc21a83d80ddf56fe",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",

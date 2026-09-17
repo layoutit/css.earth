@@ -168,8 +168,8 @@
     {
       "id": "ganymede-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "1b91f014b73e4bdccb005166cccafe56179fd32de486ae7795d120b021d3868d",
+      "expectedBytes": 189,
+      "expectedSha256": "213c3755aebd880b38acea124fc382efba1cb65ace7ad4ff0dd077c173693876",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -626,8 +626,8 @@
     {
       "id": "ganymede-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1197,
-      "expectedSha256": "0b14c40775ff55e03f351957f2a0ad0b3be4757eac37fe29175ee12b1cdbf281",
+      "expectedBytes": 1163,
+      "expectedSha256": "ef8db9880fad391feb11463e1e7f5a0e20d79a7567a32f85850e67dd61d50154",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -805,8 +805,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 21414,
-      "expectedSha256": "2c69f0fd87e359510a76b34924af243702eb1bfdfccfc1e8cfa0668d067164f5",
+      "expectedBytes": 21377,
+      "expectedSha256": "75ee8a4a1d19c8aebd84ad7a645cc628c39c11cdb8559c16c8b7a8f30c213e38",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -993,8 +993,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1094,
-      "expectedSha256": "90cac5506bfd3b67134d3f09eaa0a6ff3e5a5323a195f0bbe5619c59f161806e"
+      "expectedBytes": 2348,
+      "expectedSha256": "f058d12830f361e850686508a73b90d5a3d12ed776e571eb736d61f594e0b3e9"
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-dbf",

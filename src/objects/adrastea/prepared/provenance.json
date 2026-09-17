@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4107d28281960f98367a48f59aff2db7dfb9556e81433a012ffa36f14a98e117"
+    "sha256": "2f644ad46d7a86add548c0880f9ca75be644cde8d634d54bf322ff9a491076f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ad3bf7c3b93799bec41954abceecd2e62ec5e735995744fbf2ad9f9bb369eda1",
+      "sha256": "b92667927b516eb019992d9c6340e98f3c8f6b374574bc631a637e075a1f3599",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 160,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ce8b6af07b0e8ee7d3d98a11ffe3a6b2a4e65a7ba9e85d5153be09b5c522b27b",
+      "sha256": "ead9aa9dcfd5b62bff6f81b2607250cb2241026178a00a406c2f78dc668015a2",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -126,27 +125,41 @@
             {
               "id": "dimensions",
               "label": "Dimensions",
-              "value": "About 20 × 16 × 14 km"
+              "value": "About 20 × 16 × 14 km",
+              "source": {
+                "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+                "label": "NAIF generic planetary constants kernel · pck00011.tpc",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "naif-pck00011",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "About 7.16 hours"
+              "value": "About 7.16 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Jupiter",
-              "value": "About 129,000 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Assumed synchronous; poorly constrained"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "David Jewitt and G. Edward Danielson · 1979"
+              "value": "About 129,000 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; a (km)"
+              }
             }
           ],
           "moreFacts": []
@@ -311,8 +324,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ce8b6af07b0e8ee7d3d98a11ffe3a6b2a4e65a7ba9e85d5153be09b5c522b27b",
-      "bytes": 3391,
+      "sha256": "ead9aa9dcfd5b62bff6f81b2607250cb2241026178a00a406c2f78dc668015a2",
+      "bytes": 4209,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -355,8 +368,8 @@
         },
         {
           "url": "/scenes/adrastea/adrastea-model-surface@2x.webp",
-          "bytes": 49466,
-          "sha256": "1afa25a76c7da6c9c2bed59345bcb530a0a0f9ac9b19e6d21c1435da1c911f63",
+          "bytes": 56090,
+          "sha256": "56dce43300452821951081b290119af7ad75d221b7f9a8c48d426ffb62aabaf5",
           "verification": "bytes-verified"
         }
       ],
@@ -393,8 +406,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7186,
-          "sha256": "512178433c00a0e8ecc32fb63d14a29a5dbbcad61f762f92e396fed31abdb0a3",
+          "bytes": 7819,
+          "sha256": "c699fa57652bc2e9fb297d6fcb9bee642a09bc39956905d34f73d44e7244c04b",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +445,7 @@
   },
   "lastPreparation": {
     "objectId": "adrastea",
-    "materialSha256": "2ab45c8b950950aafc6ce24261dfaea28c9e7c6493146c375430a8a792aa5f89",
+    "materialSha256": "8d1733594fd4e6401075ecd86932f055ca9b2552a4fe02fe1fc641d515d04804",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

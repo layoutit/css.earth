@@ -103,8 +103,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2638,
-      "expectedSha256": "8149a3c5935fa3edbafc17c2895c9396d354fe045cbf958e1333345afe65937f",
+      "expectedBytes": 3132,
+      "expectedSha256": "35a34b36f10a3a3bfedbef5dfabaa9c5e854ca935775de71569be9ded308df15",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -132,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2592,
-      "expectedSha256": "a3f743a3cd497f26e46a883d6cd0a16cc8af677e3a95fa602f2462dbfcb0038a"
+      "expectedBytes": 2573,
+      "expectedSha256": "5b386aee5bef5594a29fef23bbd0d75a35e99a269a32a16f3d1b8f632f766564"
     },
     {
       "path": "presentation/minimap.json",
@@ -144,6 +144,21 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4052,
       "expectedSha256": "198a8bf6b679f8044da6075d6321275b663355a7594b0040379f3897dd74c626"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3551,
+      "expectedSha256": "12410a0c1c98ad8bcf7b19d357a35686caa8c473cd1c5985a38fc56aac23f996",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Polymele: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

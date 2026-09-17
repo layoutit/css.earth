@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8c7190c8ed5c85333f4a9e4600e9882227045f6a720ed50880531c6d498ac356"
+    "sha256": "ac58a9ca5305b01728df61a5db71656bb710a062c73d4e8b554cdf5feffcb256"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5b7877629048ab62986955a87b9b86541ef5a5eba3efb6060227aa7f2e93953a"
+    "bindingsSha256": "6f720e011f0ff326308703fa1a4951ad774310e3be41d0666c8edf71529fe49e"
   },
   "recipes": [
     {
@@ -198,7 +198,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bb876106c486f2c2cd5146e4ecdb342a07f99e69bfd630be081c19d43b81551d",
+      "sha256": "52f2c8073d9e29b359a447c603630b64186666fc8f95ecab9c1fe8b3cf48f41a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -252,22 +252,41 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Neptune",
-              "value": "5.88 days · retrograde"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "5.88 days (synchronous)"
+              "value": "5.88 days · retrograde",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Neptune",
-              "value": "About 354,800 km"
+              "value": "About 354,800 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Lassell · 1846"
+              "value": "William Lassell · 1846",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -372,7 +391,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "cbe37fdbb767bafcffceb3ecc8c7e1b7d483fe643f06bcc06e4500744011431f",
+      "sha256": "719bcac440d79f29a46b3a8ac3d9b9ccf33e70ba170b398e16a13346391e008c",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -383,7 +402,6 @@
           "metadata": "metadata_nomenclature_points_TRITON.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "triton-features.json",
         "publicBase": "/scenes/triton/",
         "target": {
@@ -616,8 +634,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "bb876106c486f2c2cd5146e4ecdb342a07f99e69bfd630be081c19d43b81551d",
-      "bytes": 6961,
+      "sha256": "52f2c8073d9e29b359a447c603630b64186666fc8f95ecab9c1fe8b3cf48f41a",
+      "bytes": 7922,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -689,8 +707,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "d0f3f908574d4e81e0124751c533e1b653c5699d9af4fc28d0417557cb7d7b2c",
-      "bytes": 153,
+      "sha256": "7a96b21c979807295efe23ddc3dd3f6b3f8819484766bfb0c07433ba11d3e6ba",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1288,8 +1306,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4528,
-          "sha256": "66c6cdc261e9f271a7d44cbcd729c42797a8b08a5e0b6f83282377151beb791b",
+          "bytes": 5260,
+          "sha256": "41964936071450ff5169e2cfe66429dadb8d4e03f084195b9318e2303e1d1f97",
           "verification": "bytes-verified"
         }
       ],
@@ -1310,7 +1328,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1388,11 +1405,11 @@
   },
   "lastPreparation": {
     "objectId": "triton",
-    "materialSha256": "4a51d4221eba9aa9d5e8848924143beec2005aa7e3a9c6bee8810e855384b988",
+    "materialSha256": "417cc39dd3850b9d7cd3ef02cc99467c11b6ad42965509d19d470dffa4efa45a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5b7877629048ab62986955a87b9b86541ef5a5eba3efb6060227aa7f2e93953a"
+      "bindingsSha256": "6f720e011f0ff326308703fa1a4951ad774310e3be41d0666c8edf71529fe49e"
     }
   }
 }

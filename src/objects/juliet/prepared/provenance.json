@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0b8158b144234a7185e7db0f5175c105cfbd32d04ef3ad6f683c2a6d58a87f5"
+    "sha256": "7078a745923cd5c30b41d730bbf966f26d1e9c58b9d2adef42914c55b35a3b4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a6fc69602f6ac158978092012dce2cb72f29579e571f70b6700d92cb34012e74",
+      "sha256": "f73c57ad03f8e570ec3450e89184c65c7ceb3bcee9affc2b2accabe89133af3e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,8 +77,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1200,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aaeed0d22e8424818bb134c25ec63f7d34a27b5d51a765a5aa118e96c3f93d77",
+      "sha256": "fde41d86661c5701373fabcdce599f3cd8c837b7324ce00e7bc609625a13a5bd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,32 +112,41 @@
             {
               "id": "radius",
               "label": "Equivalent radius",
-              "value": "About 46.8 km"
+              "value": "About 46.8 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/referenceRadiusKm"
+              }
             },
             {
               "id": "dimensions",
               "label": "Modeled dimensions",
-              "value": "About 150 × 74 × 74 km"
+              "value": "About 150 × 74 × 74 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.2001.6596",
+                "label": "Research publication · DOI 10.1006/icar.2001.6596",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-2001-6596",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
             },
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 11.8 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 64,358 km"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Prolate spheroid; third axis assumed"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 · January 3, 1986"
+              "value": "About 11.8 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -309,8 +317,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aaeed0d22e8424818bb134c25ec63f7d34a27b5d51a765a5aa118e96c3f93d77",
-      "bytes": 3076,
+      "sha256": "fde41d86661c5701373fabcdce599f3cd8c837b7324ce00e7bc609625a13a5bd",
+      "bytes": 3739,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -353,8 +361,8 @@
         },
         {
           "url": "/scenes/juliet/juliet-model-surface@2x.webp",
-          "bytes": 50050,
-          "sha256": "3b4fc6043c707e2404ccfdd9c28c9f26b9583da55c03a01e1cf07c99ce5035bd",
+          "bytes": 60040,
+          "sha256": "8e84586499f9fd8eda4a2858c13fdd83fb5b354671d3100536af1462b252688f",
           "verification": "bytes-verified"
         }
       ],
@@ -391,8 +399,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3880,
-          "sha256": "c9dc221501dce472060967c82f2b8a2d883aefb6d3779639c562335d61ae0d2e",
+          "bytes": 4402,
+          "sha256": "50795c9bbfbbdb9f997950aa0d359e0b7638fb520c10a7036f0f6a05abad04fd",
           "verification": "bytes-verified"
         }
       ],
@@ -430,7 +438,7 @@
   },
   "lastPreparation": {
     "objectId": "juliet",
-    "materialSha256": "0255a3b44aa0ed6b6a84620f45d028aa9f63c24b1a221055e8bc9303cf2fd4f1",
+    "materialSha256": "c699e95dd4d7feca2774e8de2cd4cfdb21567bdbe9039ca0297cf79d32dc553b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

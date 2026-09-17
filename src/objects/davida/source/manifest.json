@@ -139,8 +139,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8627,
-      "expectedSha256": "bc2b9f8bbe36b149d71bc70c5af55cfeaff8f6a5947ca8bdc8cb52779e585f3b",
+      "expectedBytes": 8395,
+      "expectedSha256": "92d5a03b87d90113dd0976257f8db5044ad2ff6fe50fae802840100270993bb3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -163,8 +163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2859,
-      "expectedSha256": "2e9e6bd4957c040b524eb46cd6db2d2f44912a989ccdde45e99c4741f33a5748"
+      "expectedBytes": 2840,
+      "expectedSha256": "d8fd1ecd207c3e449946e050290e69459cf5c993861933ca5a13216b65529e6e"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -200,6 +200,21 @@
       "path": "reference/release-parameters.txt",
       "expectedBytes": 40,
       "expectedSha256": "dd18dedcb8f8b2ff3127c811a8b3a3603b7a0cdff4392293216f55496876e7cb"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6321,
+      "expectedSha256": "32c2bd7fe2acd55ec0132760b7215120b0aa63e6a5c5c988d6f23378a09096f6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Davida: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -93,6 +93,7 @@
             "maximumGain": 1
           },
           "display": {
+            "basis": "authored",
             "percentiles": [
               1,
               99.5
@@ -109,8 +110,7 @@
           "consumer": "photograph-pionier-2016-11"
         },
         "offLimb": {
-          "rotationDegrees": 0,
-          "mirror": true
+          "rotationDegrees": 0
         }
       }
     },
@@ -183,6 +183,7 @@
             "maximumGain": 1
           },
           "display": {
+            "basis": "authored",
             "percentiles": [
               1,
               99.5
@@ -199,8 +200,7 @@
           "consumer": "photograph-pionier-2016-12"
         },
         "offLimb": {
-          "rotationDegrees": 0,
-          "mirror": true
+          "rotationDegrees": 0
         }
       }
     }

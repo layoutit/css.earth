@@ -10,6 +10,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { observerCamera, type BodyOrientation } from '../../../../tools/objects/terrestrial-layers/observer-camera.mts';
 import { readFitsImage } from '../../../../tools/fits.mts';
+import { skyImageAxes } from '../../../../tools/fits-sky.mts';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../../tools/source-values.mts';
 
 const BODY = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse');
@@ -42,7 +43,7 @@ test('the lens recipe states the camera the pinned astrometry and pole imply', a
   const orientation: BodyOrientation = { rotation: () => [x, y, z] as unknown as ReturnType<BodyOrientation['rotation']>, phaseDegrees: () => 0 };
   const framePath = requireString(frame.path);
   const image = readFitsImage(await readFile(resolve(BODY, framePath.startsWith('observations') ? `source/${framePath}` : framePath)));
-  const pixelAngleMicroradians = Math.abs(requireFiniteNumber(image.header.CDELT1)) * MAS_RAD * 1e6;
+  const pixelAngleMicroradians = skyImageAxes(image.header).scale[0] * MAS_RAD * 1e6;
   const rangeAu = requireFiniteNumber(star.distanceParsecs) * PARSEC_AU;
   const camera = observerCamera({ epochJd: 2458887.0087, targetRightAscensionDegrees: ra, targetDeclinationDegrees: dec,
     // The Sun lies within a thousandth of a degree of the observer as seen from 168 parsecs: the antipode of the star's direction.
@@ -64,7 +65,7 @@ test('the lens recipe states the camera the pinned astrometry and pole imply', a
   assert.ok(Math.abs(centroid[0] - center[0]) < 0.01 && Math.abs(centroid[1] - center[1]) < 0.01, `centre: recipe ${center}, centroid ${centroid}`);
 
   // The disc the reconstruction shows is the measured angular diameter: half its flux within the 42.45 mas disc's radius.
-  const diameterPixels = requireFiniteNumber(measurements.angularDiameterMas) / Math.abs(requireFiniteNumber(image.header.CDELT1));
+  const diameterPixels = requireFiniteNumber(measurements.angularDiameterMas) / skyImageAxes(image.header).scale[0];
   let inside = 0;
   for (let row = 0; row < height; row++) for (let col = 0; col < width; col++) {
     if (Math.hypot(col - centroid[0], height - 1 - row - centroid[1]) <= diameterPixels / 2) inside += values[row * width + col];

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "13e082a0d7d5eafd934588e10842de0a2876c0884692df208f192da9fe96a3d4"
+    "sha256": "2c0920950ca7818c8958f170f40c39349d0ea7083310b264dcd08a07bdfd5da9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "db4f93beb4abe63682613b7751b2f3540413ead1990d409d1dc76c8f413cfc8a",
+      "sha256": "e786aeb1e4a1aef8d23975f5b310cd37d1d281f3d573c651883e467b9df68d7d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -134,7 +133,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4623a12132c8d127033c49c77225cfa9b0ebf342d22ddd2677762fa6cf4a3a83",
+      "sha256": "13a3a294d553409574983ae5e146141a7a942d236830e545057ebcbb635eba83",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -145,7 +144,15 @@
             {
               "id": "diameter",
               "label": "Catalog diameter",
-              "value": "≈9.2 km"
+              "value": "≈9.2 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1983%20H1",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.diameter (km)"
+              }
             },
             {
               "id": "perihelion",
@@ -280,8 +287,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4623a12132c8d127033c49c77225cfa9b0ebf342d22ddd2677762fa6cf4a3a83",
-      "bytes": 3506,
+      "sha256": "13a3a294d553409574983ae5e146141a7a942d236830e545057ebcbb635eba83",
+      "bytes": 3849,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -319,8 +326,8 @@
         },
         {
           "url": "/scenes/comet-c1983-h1/comet-c1983-h1-model-surface@2x.webp",
-          "bytes": 41574,
-          "sha256": "a53e8ca6be5f44663453fc03177cc14ab5bb1903630c082e60158412fd1b1d71",
+          "bytes": 59034,
+          "sha256": "63dcd546084c1c3640d17849d4772b00c49693c55e2adabd2667a181f7233793",
           "verification": "bytes-verified"
         }
       ],
@@ -352,8 +359,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8527,
-          "sha256": "21ce3f2ed3a497a3190864beb66e51e5a0dfc8b3ce0718f4def4039c35301329",
+          "bytes": 8779,
+          "sha256": "bfce9958995e161e9829c2b91c1adcc3a990a81abd4c178ec8e878760db6a7f2",
           "verification": "bytes-verified"
         }
       ],
@@ -366,7 +373,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1983-h1",
-    "materialSha256": "004bdbaaa6871c570da0ec8fc102e71bf5b00c78d0aaba0582217a22d0470aaf",
+    "materialSha256": "ccb245b151ead38489d41648417ff12d3af0cdb390ac993a735982a9ecf59d7f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

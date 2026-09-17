@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ab578f903cc9b9af7600d2d84a7b2ec36620b7a9a7bc0f19e07237757990bdfb"
+    "sha256": "e8de82308ea04bf11475c2de22df47c02d97304ce8e1cbae1a97475ce778109c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6428899f62df4d722a6599ed73040377da60b00f2c1402c9d8352d51490a2c2b",
+      "sha256": "77d2581328e44827f812b42dc99af963cb4c3d89d77bec63baec6ea778edd697",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 288,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bdea0ccc480e9e451e2b49182c91e07eb1dbdc9c4597612e005e3b100173c528",
+      "sha256": "526c6c92d9161350a3ee09ef092c5d170a5a6580dc5c3a5729c843ab9650fe52",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,31 +113,31 @@
             {
               "id": "diameter",
               "label": "Mean diameter estimate",
-              "value": "19 (+5/−3) km"
+              "value": "19 (+5/−3) km",
+              "source": {
+                "url": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-ymir-model-surface",
+                "locator": "/meanRadiusKm"
+              }
             },
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Approximate triangular model"
-            },
-            {
-              "id": "rotation",
-              "label": "Sidereal rotation",
-              "value": "11.92220 hours"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Gladman, Kavelaars and colleagues · 2000"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -293,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bdea0ccc480e9e451e2b49182c91e07eb1dbdc9c4597612e005e3b100173c528",
-      "bytes": 2465,
+      "sha256": "526c6c92d9161350a3ee09ef092c5d170a5a6580dc5c3a5729c843ab9650fe52",
+      "bytes": 2741,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -337,8 +336,8 @@
         },
         {
           "url": "/scenes/ymir/ymir-model-surface@2x.webp",
-          "bytes": 69360,
-          "sha256": "c61a070d5ee3688c35e39dca25ed436cc1dec2dd5bad00b8e2397014f9b3dbd3",
+          "bytes": 65988,
+          "sha256": "e91891768bd22cfdff4bdb0f78df7daefc46ed19513a698054190ec109138387",
           "verification": "bytes-verified"
         }
       ],
@@ -375,8 +374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 2967,
-          "sha256": "7e7ae20280ffba53c5c9f880b3ff332bb9cb027d4402b638ad7ed87ed2265f14",
+          "bytes": 3198,
+          "sha256": "7f23c84406ed328b50b27de0dfe83c1f4ad64f937b09efe3aa16131b1701363a",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "ymir",
-    "materialSha256": "f8873ac817b9df75f6838ec99f6b98fdd8a3870877e6c92048d6df7d0d2fc47a",
+    "materialSha256": "25916e5dc48e9c69a822f104d9cf925f0a7e2bb8c207d5a7ad121a5943a5e12f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

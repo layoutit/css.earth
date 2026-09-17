@@ -53,6 +53,78 @@
           "width": 721,
           "height": 361
         }
+      },
+      {
+        "id": "thermal-inertia",
+        "label": "Thermal inertia",
+        "consumer": "thermal-inertia",
+        "path": "thermal/ThermalInertia_BestFitValue.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 73,
+          "height": 37,
+          "projection": "equirectangular",
+          "longitudePath": "thermal/LongitudeArray.npy",
+          "latitudePath": "thermal/LatitudeArray.npy",
+          "longitudeDirection": "east"
+        },
+        "frameTransfer": {
+          "path": "thermal/alma-body-frame.json",
+          "meshSpinPath": "reference/16_Psyche_param.txt"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "J m-2 K-1 s-1/2",
+        "displayUnits": "tiu",
+        "minimum": 0,
+        "maximum": 600,
+        "colors": [
+          "#0d0887",
+          "#4c02a1",
+          "#7e03a8",
+          "#aa2395",
+          "#cc4778",
+          "#e66c5c",
+          "#f89540",
+          "#fdc527",
+          "#f0f921"
+        ]
+      },
+      {
+        "id": "dielectric-constant",
+        "label": "Dielectric constant",
+        "consumer": "dielectric-constant",
+        "path": "thermal/DielectricConstant_BestFitValue.npy",
+        "format": "npy-lonlat-grid",
+        "grid": {
+          "width": 73,
+          "height": 37,
+          "projection": "equirectangular",
+          "longitudePath": "thermal/LongitudeArray.npy",
+          "latitudePath": "thermal/LatitudeArray.npy",
+          "longitudeDirection": "east"
+        },
+        "frameTransfer": {
+          "path": "thermal/alma-body-frame.json",
+          "meshSpinPath": "reference/16_Psyche_param.txt"
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "sourceUnits": "dimensionless",
+        "displayUnits": "Relative permittivity",
+        "minimum": 0,
+        "maximum": 60,
+        "colors": [
+          "#440154",
+          "#472d7b",
+          "#3b528b",
+          "#2c728e",
+          "#21918c",
+          "#28ae80",
+          "#5ec962",
+          "#addc30",
+          "#fde725"
+        ]
       }
     ],
     "observedColors": [],
@@ -413,8 +485,7 @@
       "latitudeSegments": 90,
       "longitudeSegments": 180,
       "faceBudget": 800,
-      "tileSize": 128,
-      "atlasColumns": 16,
+      "texelsPerFace": 16384,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
@@ -436,15 +507,18 @@
         "latitudeSegments": 90,
         "longitudeSegments": 180,
         "faceBudget": 800,
-        "tileSize": 128,
-        "atlasColumns": 16,
+        "texelsPerFace": 16384,
         "primitive": "u",
         "simplification": {
           "method": "source-meshoptimizer",
           "targetFaces": 800,
           "maximumErrorMeters": 2100,
           "regularize": true
-        }
+        },
+        "additionalLensIds": [
+          "thermal-inertia",
+          "dielectric-constant"
+        ]
       }
     ]
   },

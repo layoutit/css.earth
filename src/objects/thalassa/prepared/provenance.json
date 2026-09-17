@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "183c8c7505fea5e02634ac04848ed9cb2f799106f439945cd55c58dbe08bbe08"
+    "sha256": "b27f0a9f357b035dbaa03628f74aff1fb88b3602ba39851522cc7baf59a0b7e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "32bbdab638e1479b2abc489101d3cd14d0e55e1defeebd984c19cfb78f4e9d96",
+      "sha256": "a9aa498357b569042f2370d2581276159627f5d3e92b873b297766c89658f981",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 800,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "104607836fb5645a760ddff3d5f977ae94d7e97cca620da3a4e1a4e165d7f1c9",
+      "sha256": "97f9d4a0e699d628575665b159b96850f6aab827ed2c5b2374c9219ebc806c6d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,32 +112,28 @@
             {
               "id": "radius",
               "label": "Reference radius",
-              "value": "40 km"
+              "value": "40 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "JPL Planetary Satellite Physical Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/1; Mean Radius (km) value"
+              }
             },
             {
               "id": "dimensions",
               "label": "Dimensions",
-              "value": "About 108 × 100 × 52 km"
-            },
-            {
-              "id": "orbital-period",
-              "label": "Orbit around Neptune",
-              "value": "About 7.48 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Neptune",
-              "value": "About 50,074 km"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous reference model"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · August 1989"
+              "value": "About 108 × 100 × 52 km",
+              "source": {
+                "url": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+                "label": "Research publication · DOI 10.1016/S0019-1035(03)00002-2",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +298,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "104607836fb5645a760ddff3d5f977ae94d7e97cca620da3a4e1a4e165d7f1c9",
-      "bytes": 3057,
+      "sha256": "97f9d4a0e699d628575665b159b96850f6aab827ed2c5b2374c9219ebc806c6d",
+      "bytes": 3292,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -347,8 +342,8 @@
         },
         {
           "url": "/scenes/thalassa/thalassa-model-surface@2x.webp",
-          "bytes": 45126,
-          "sha256": "ecb4f801a198c7efc0d6444f4b84643919a443c312e0f763502ecbc066d28986",
+          "bytes": 51914,
+          "sha256": "f3642f4fafe20d0c2fa98214d7e6de92e5c21b9d947b1d4e6b0492955330b249",
           "verification": "bytes-verified"
         }
       ],
@@ -385,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6930,
-          "sha256": "16a0c1bfc1a4ab0e56070e552a666eadf574462c9a5f8c2277ebec4c99fa7767",
+          "bytes": 7159,
+          "sha256": "96d00d4e241c361578d90ee4ea6a16085f260c367c5d17b910fdfe4048c2f802",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "thalassa",
-    "materialSha256": "35a1c32d73078300969d51df8768f2883726b3343a8e190ce9e918c0ade3978d",
+    "materialSha256": "d248b41bb15b47986c52bbac413a12c761b7455d3b77bcbb929ac7a524c4017c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

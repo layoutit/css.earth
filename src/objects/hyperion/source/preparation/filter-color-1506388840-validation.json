@@ -13,8 +13,7 @@
     "latitudeSegments": 24,
     "longitudeSegments": 40,
     "faceBudget": 2000,
-    "tileSize": 128,
-    "atlasColumns": 16,
+    "texelsPerFace": 16384,
     "simplification": {
       "targetFaces": 1200,
       "maximumErrorMeters": 3000

@@ -1520,8 +1520,8 @@
     {
       "id": "europa-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "8ed6a12599f89c5048c1eb2499e8c6bcd3aa0eefd43213e150818f097ee07691",
+      "expectedBytes": 185,
+      "expectedSha256": "d5e5e253118f000c810d782345862097e9614d5cad1a93cf7115c1617fa0b5f5",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -1848,8 +1848,8 @@
     {
       "id": "europa-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1190,
-      "expectedSha256": "5ff95fe1d60c55bb3a7c128b05ec43ad079f18078826ed27290c92fea4d936a9",
+      "expectedBytes": 1158,
+      "expectedSha256": "4e2a03705b9fa117bd9daa9fc5fda9563e4a1d40a757343f641c6fac6bce219e",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -2027,8 +2027,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 20612,
-      "expectedSha256": "7829ad211d2f36338f465492a1065473b6f5b29d2d796586e04bc4d289eb5b60",
+      "expectedBytes": 20352,
+      "expectedSha256": "8f4898752aed967d3e2a8d496d7484f085f8bb43c9d15d413425f0302c558be7",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -20593,8 +20593,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1418,
-      "expectedSha256": "d1cd1a95dc286994f9541c09b8d5eaf611650126bcbbcc944d8489cd9734346c"
+      "expectedBytes": 2664,
+      "expectedSha256": "4965f62821ebc7bbb397a3a2c417bd282e54a1e4380f02f961824a289aec6d00"
     },
     {
       "id": "usgs-europa-yelland-ridges-yelland-ridges-tif",

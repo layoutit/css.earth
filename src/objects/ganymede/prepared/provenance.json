@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ae8d0ec486ceba4d6839eab25296c76b4d094f314209762c3f4bfd2a96731ab2"
+    "sha256": "22e2b8f02fc9f480562ae1b609d04640b55d307c41bb7d2c1b87882f6c2632e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "7b5491c35254be6e8bd8fc07557c43fd15e1560977c3cc658bacf625db5d3eb3"
+    "bindingsSha256": "60663422c6fde834b7b99535bd678311494f312a5615f0fd7486d870f693d020"
   },
   "recipes": [
     {
@@ -511,7 +511,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2c69f0fd87e359510a76b34924af243702eb1bfdfccfc1e8cfa0668d067164f5",
+      "sha256": "75ee8a4a1d19c8aebd84ad7a645cc628c39c11cdb8559c16c8b7a8f30c213e38",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -565,22 +565,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "7.16 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "7.16 days · synchronous"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 1,070,000 km"
-            },
-            {
-              "id": "atmosphere-composition",
-              "label": "Atmosphere",
-              "value": "Tenuous oxygen"
+              "value": "7.16 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             }
           ],
           "moreFacts": [
@@ -1035,7 +1028,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "0b14c40775ff55e03f351957f2a0ad0b3be4757eac37fe29175ee12b1cdbf281",
+      "sha256": "ef8db9880fad391feb11463e1e7f5a0e20d79a7567a32f85850e67dd61d50154",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1046,7 +1039,6 @@
           "metadata": "metadata_nomenclature_points_GANYMEDE.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "ganymede-features.json",
         "publicBase": "/scenes/ganymede/",
         "target": {
@@ -1691,8 +1683,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "2c69f0fd87e359510a76b34924af243702eb1bfdfccfc1e8cfa0668d067164f5",
-      "bytes": 21414,
+      "sha256": "75ee8a4a1d19c8aebd84ad7a645cc628c39c11cdb8559c16c8b7a8f30c213e38",
+      "bytes": 21377,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1770,8 +1762,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "1b91f014b73e4bdccb005166cccafe56179fd32de486ae7795d120b021d3868d",
-      "bytes": 155,
+      "sha256": "213c3755aebd880b38acea124fc382efba1cb65ace7ad4ff0dd077c173693876",
+      "bytes": 189,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2620,8 +2612,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8335,
-          "sha256": "45b3568af54c1fd2d7e1e8765f9c459d31399900d244d29e0780a118ee7fc7c5",
+          "bytes": 8339,
+          "sha256": "807fac4da98e2d64aafbc699eeee79c643493c2f35123814702841c7e836f139",
           "verification": "bytes-verified"
         }
       ],
@@ -2642,7 +2634,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2820,11 +2811,11 @@
   },
   "lastPreparation": {
     "objectId": "ganymede",
-    "materialSha256": "533c4d227b67efead118bae9b642caa7162b197b2ed8785e90375a7657333980",
+    "materialSha256": "2f5bd52239c517819b1ca55c6fb8a643ddbb7a1b0b1ad495318387e988ed812d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "7b5491c35254be6e8bd8fc07557c43fd15e1560977c3cc658bacf625db5d3eb3"
+      "bindingsSha256": "60663422c6fde834b7b99535bd678311494f312a5615f0fd7486d870f693d020"
     }
   }
 }

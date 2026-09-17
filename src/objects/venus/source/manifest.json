@@ -387,8 +387,8 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "f0e8575fa97bfdb037498192d20d36ecd4de6fb69090b14a57f7781a9154f16d",
-      "expectedBytes": 16293,
+      "expectedSha256": "616fd65fab4e00c2ac696bae6115ed2a788b5d547ec9d5ef5dcebf6492791b12",
+      "expectedBytes": 15811,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -542,8 +542,8 @@
     {
       "id": "venus-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "b8bd0e06537a48cf52ff4a3e46498add6e3501fc7a19529e2064cdd069ad4d81",
+      "expectedBytes": 186,
+      "expectedSha256": "3e8d5ea12eedad07105131d73237cdf8a57358181065269b3b6be3219ce28530",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -610,8 +610,8 @@
     {
       "id": "venus-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1216,
-      "expectedSha256": "e14d03d75a1c6845344528ae0146a539a6dd977a1ced11a0a93be27be1fc6cb2",
+      "expectedBytes": 1182,
+      "expectedSha256": "253cf9591af1f89d3ad7c8fb5924dfc1f92547b68afe0189e22569ebdb45a239",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",

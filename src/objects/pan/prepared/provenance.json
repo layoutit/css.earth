@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8422ba90d9b16c86e28b86d9da918bae98c77640be0964de11c95cb75e04c4ff"
+    "sha256": "70b9efd5e5a50129eed585ad115642d34401c79e3acbc4128585bbeff4173fe1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a3988cef43e0c54cab86db4ffa723a79172fca7cd105c773ccc964543468222",
+      "sha256": "0132016383d3458e860ab6b41349b556a7887eb057c9c3c1da8a819f83d42839",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -397,8 +397,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -417,7 +416,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cce06a8f589d65fe6c7f6867f8fe41ce2d007a47a230b44c25479319543c59fd",
+      "sha256": "731eaae6339ec14a6757675b452cb675c05bab98917a8dfee6225b13313fb4dc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -454,17 +453,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 13.8 hours"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Saturn",
-              "value": "About 134,000 km"
+              "value": "About 13.8 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Mark Showalter · 1990"
+              "value": "Mark Showalter · 1990",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -1721,8 +1731,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cce06a8f589d65fe6c7f6867f8fe41ce2d007a47a230b44c25479319543c59fd",
-      "bytes": 4923,
+      "sha256": "731eaae6339ec14a6757675b452cb675c05bab98917a8dfee6225b13313fb4dc",
+      "bytes": 5529,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1766,8 +1776,8 @@
         },
         {
           "url": "/scenes/pan/pan-elevation-surface@2x.webp",
-          "bytes": 492720,
-          "sha256": "b213de4e6f3dd8851edb650afc520b013cacb6e8f1ea6a59f69a1ea61d115a16",
+          "bytes": 608272,
+          "sha256": "1d524196eeb402261082741d58f23e44940ee30cfd3d08bf9cf1607eeabb77b9",
           "verification": "bytes-verified"
         }
       ],
@@ -1826,8 +1836,8 @@
         },
         {
           "url": "/scenes/pan/pan-normal-surface@2x.webp",
-          "bytes": 360506,
-          "sha256": "7479dc7c514d43b766a213c9de12a407d3aa050b2ea05109b4fc4d98d545586f",
+          "bytes": 388558,
+          "sha256": "a6b6adce96156df56c2e7de7ed42a8245feaf355e9be75186a45b2b902c4229a",
           "verification": "bytes-verified"
         }
       ],
@@ -1876,8 +1886,8 @@
         },
         {
           "url": "/scenes/pan/pan-filter-color-surface@2x.webp",
-          "bytes": 417148,
-          "sha256": "779aebc5e87336ec99b4cd71aacbd0cea2e00df62d7e0fdbdcd2a3ba52cf164c",
+          "bytes": 406994,
+          "sha256": "9ee2b6b935f7fd2f9e262f05d906c1701c1f0a4bbb2fdf635e063743a221719a",
           "verification": "bytes-verified"
         }
       ],
@@ -1909,8 +1919,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3891,
-          "sha256": "841068124a7d06ea727a2d1907eeda9d546199ffff90432453db058083931e91",
+          "bytes": 4359,
+          "sha256": "c988c4e9fa05b99f5d3029dc074cfaf8367cd1e841dc95540b4baf602464bb99",
           "verification": "bytes-verified"
         }
       ],
@@ -1998,7 +2008,7 @@
   },
   "lastPreparation": {
     "objectId": "pan",
-    "materialSha256": "ee2f54712d7d467a79e9d4e4ea4bc17cffc17eca358d9e18bb5b114d8e3323f7",
+    "materialSha256": "750d08a286b7170a65bd22f2183080a73b37426fcc83e6351ca12c70c351b43e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ca61fdcbdc987a94479649b18827683f8729923e148cce1ba82ce0bb4546172"
+    "sha256": "3cdcbe350ba5cd55343a1cdd28ccb680e28e80a50ef36e189cd8a079617b561c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "f618a1e96106fed3ade74cc61bb453dc4b2557174352281d12cc9bfa9f45ecf1"
+    "bindingsSha256": "3b43006cea74afd326cbf1741d6946e9f28557a901245140b4a3a2eca200a402"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "79996e13eca2929408b653db8592818f10226625b48153372954bd46391ed9b0",
+      "sha256": "9fa7806e8672a91b271fa976a1ebdc3298448a50d20320ffbe6028879aab3e16",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -231,8 +231,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 700,
               "maximumErrorMeters": 1200,
@@ -252,7 +251,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a111a25bb3c6673fb3f4d1b555427d1e216d38366c63e614451490137335cb90",
+      "sha256": "86cca89b59dacd91b323c6b06939645fe7ff922dfa35a7cdd9e1c852af613d67",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -289,22 +288,15 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "16.2 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Jupiter",
-              "value": "About 222,000 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Stephen Synnott · Voyager 1 · 1979"
+              "value": "16.2 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             }
           ],
           "moreFacts": []
@@ -405,7 +397,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "4f8a2d2ee66fe2ffaded784f2d8bf7d8982bc75e7153c02ec5a478f063751b98",
+      "sha256": "ef0697f4c13f8206ee0c1bc46e51dd079c3a7ddfa00b6f8235272aa0c70e4103",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -416,7 +408,6 @@
           "metadata": "metadata_nomenclature_points_THEBE.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "thebe-features.json",
         "publicBase": "/scenes/thebe/",
         "target": {
@@ -924,8 +915,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a111a25bb3c6673fb3f4d1b555427d1e216d38366c63e614451490137335cb90",
-      "bytes": 4617,
+      "sha256": "86cca89b59dacd91b323c6b06939645fe7ff922dfa35a7cdd9e1c852af613d67",
+      "bytes": 4578,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -997,8 +988,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "30de8e5aab82a3f87435c58f0169c39fe3a0e47e31f36621c2c0fbaebe7ef797",
-      "bytes": 152,
+      "sha256": "a062860fed2e6369a6a179fddad5b6ce3a0b55d5eb4885433fd32350e7f2fd26",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1069,8 +1060,8 @@
         },
         {
           "url": "/scenes/thebe/thebe-elevation-surface@2x.webp",
-          "bytes": 176304,
-          "sha256": "a327d2569e5d653ac24bb304f51cb195d314bfe5394862cfb9836b8310056166",
+          "bytes": 222810,
+          "sha256": "a5d00af75622e7ff47a39f885830a252cf6ceb5ad205f0edf0c14a44dbb376e2",
           "verification": "bytes-verified"
         }
       ],
@@ -1121,8 +1112,8 @@
         },
         {
           "url": "/scenes/thebe/thebe-normal-surface@2x.webp",
-          "bytes": 110596,
-          "sha256": "9e5f8de3e122ede0ec1035008e9284484569d4a1865d837e1f57e08b589502ea",
+          "bytes": 130856,
+          "sha256": "24f528bd8a293363f89eb330279bbbea5f793658eb9e473c6421351e2825f2f9",
           "verification": "bytes-verified"
         }
       ],
@@ -1154,8 +1145,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4716,
-          "sha256": "a0b6df1617f04bffb0ea5ee9a88ce96b93b00069f8ab05beb6175c343d3f2b25",
+          "bytes": 4835,
+          "sha256": "344ec3df863bf1c8d14a6cd1080cae571c588422b2d5f9ad9f0f7c7da247dc49",
           "verification": "bytes-verified"
         }
       ],
@@ -1176,7 +1167,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1254,11 +1244,11 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "21c2041d00b001a4b48c1b3f5d3535109f7b05fae8060dac3482dbf56c000adb",
+    "materialSha256": "88908d06a1c1d1e44edb953655027a52a5c2b9a014ab9fc06d7c28ea14d7493b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "f618a1e96106fed3ade74cc61bb453dc4b2557174352281d12cc9bfa9f45ecf1"
+      "bindingsSha256": "3b43006cea74afd326cbf1741d6946e9f28557a901245140b4a3a2eca200a402"
     }
   }
 }

@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9322,
-      "expectedSha256": "7841a175b612274b2ae55d269f44638c0d4e8c1b02901d022600862cc6904c13",
+      "expectedBytes": 9528,
+      "expectedSha256": "a812ea30db67e288c8f2914a5ecdcb1b8b2d8dc44de03a3280ab0ce31db1fc05",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -118,8 +118,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2872,
-      "expectedSha256": "7dc59e1957633a13c37139d6542d9e574ab7c9130a747cf9b8de43a3b5061cfe"
+      "expectedBytes": 2853,
+      "expectedSha256": "13185acbd31750d28cad6e4dcd42c5381cd415df4ac9e2fa15fcaeb0789d3c9b"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1819,
       "expectedSha256": "dc487b33df5ea639cc8429a854f8176eb5ff8074719731fd19624df7ed411ab7"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6072,
+      "expectedSha256": "bc90e537eb7914163bea470fdbff80a65a9332ef1afd824beaa47919b0e30e03",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Phaethon: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

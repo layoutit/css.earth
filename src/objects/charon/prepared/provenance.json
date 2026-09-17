@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a033565a7ca8de215bab013ff07bdcc7890fa40a29fdd4141c8c809d62bc222"
+    "sha256": "ee09995b9bb201bf825534552daec4438d330b92a7009a3000903aec7d1f4497"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "76c10e6c2b18c14cd2544af77bf7d3de8981b4f767517691ac030f83dd879b65"
+    "bindingsSha256": "a7e63cd78005e90cee3f3ef3a4c5994dc812d0d886ba7bd67fb7d6be8afe841f"
   },
   "recipes": [
     {
@@ -366,7 +366,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f8219e86cf8924d36b3b7e5a7b7e747b240356bde0d1e16af4bcdc18d056f102",
+      "sha256": "3acd0748cd93b5175123b489ad027e2aa4ebd58f9e8d508302200e86516ba75f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -403,22 +403,41 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Pluto",
-              "value": "6.387 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "6.387 days (synchronous)"
+              "value": "6.387 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Pluto",
-              "value": "About 19,600 km"
+              "value": "About 19,600 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "James Christy · 1978"
+              "value": "James Christy · 1978",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -766,7 +785,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "06c6682fae014a5860652e8b45d46532dc0dcd5ce82db30e6109350bf11175ba",
+      "sha256": "662140dd6bd8c85324d7b09d0e1ad7232ee2dafcf8affa4a0c28210cc2573e30",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -777,7 +796,6 @@
           "metadata": "metadata_nomenclature_points_CHARON.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "charon-features.json",
         "publicBase": "/scenes/charon/",
         "target": {
@@ -1229,8 +1247,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "f8219e86cf8924d36b3b7e5a7b7e747b240356bde0d1e16af4bcdc18d056f102",
-      "bytes": 15759,
+      "sha256": "3acd0748cd93b5175123b489ad027e2aa4ebd58f9e8d508302200e86516ba75f",
+      "bytes": 16719,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1302,8 +1320,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "d8712c5634f5b486dd8afdb44f234205d0e0819de974220ae2fed4d93d2cb61b",
-      "bytes": 153,
+      "sha256": "1acefde243e6ba0451a5504d27165acd141c3ba99f9e77fb44ebc0dd5e1653f5",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2174,8 +2192,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6300,
-          "sha256": "3c1f666c043234cff2eb3dbcedda5f9aac15864bccd3fef200591c0d820b37af",
+          "bytes": 7031,
+          "sha256": "cfae5aef5a72191c9322a7216d014b3585d98d7a9525756a9f9f29bf25fb4e31",
           "verification": "bytes-verified"
         }
       ],
@@ -2196,7 +2214,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -2375,11 +2392,11 @@
   },
   "lastPreparation": {
     "objectId": "charon",
-    "materialSha256": "695eebfeb1cc198711c568d09ca723897d1780e3d350eebbeb341707145806e9",
+    "materialSha256": "4288057581c30320ff718a6b73a4bdab9f2421899fe6c9b345aab36a09bfd702",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "76c10e6c2b18c14cd2544af77bf7d3de8981b4f767517691ac030f83dd879b65"
+      "bindingsSha256": "a7e63cd78005e90cee3f3ef3a4c5994dc812d0d886ba7bd67fb7d6be8afe841f"
     }
   }
 }

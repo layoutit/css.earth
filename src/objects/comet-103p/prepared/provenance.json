@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f914a8b805139be9780f5e2fb7ea1e3808968afa7bdeb99c73105536d1fcace9"
+    "sha256": "158f961f083758ad9334d37389d4418207414e0f1febb5b13cab7bb8179211c9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c15a054cda002a3aa44b74d8277347e803785b5dd50fd00e4f8a1907dbe52e9d"
+    "bindingsSha256": "6dfe2c68d0ba32816eab294e8d490c4fe6bd92cf9a4dc36cc0be34861bdb5694"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9884b18f19889d09b2dbe75eb402e422078440d63b5c1963c2f4a29092e270d6",
+      "sha256": "809e8601ef747fb2106f88100435272524facc79ed07d5a2535cf077c1021bb8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -238,8 +238,7 @@
               "expectedFaces": 32040
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 1000,
@@ -292,7 +291,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f5ef1ced48bfb6d55c7f3c02e2614380bbad4523704075d2ebf14e331672fedb",
+      "sha256": "fc3d62b984b5b88bed7698c0f3ccb187a686248ac3da14381819daa5765f743f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -301,19 +300,30 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Equivalent diameter",
-              "value": "1.16 ± 0.036 km"
-            },
-            {
               "id": "mission",
               "label": "Explored by",
-              "value": "EPOXI"
+              "value": "EPOXI",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000001_001_r.lbl",
+                "label": "Comet 103P · mv10110413 6000001 001 r labelPath",
+                "checked": "2026-09-16",
+                "path": "source/photography/mri/mv10110413_6000001_001_r.lbl",
+                "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-labelpath",
+                "locator": "DATA_SET_ID = \"DIF-C-MRI-3/4-EPOXI-HARTLEY2-V1.0\""
+              }
             },
             {
               "id": "source-epoch",
-              "label": "Shape observations",
-              "value": "4 November 2010"
+              "label": "Encounter photographs",
+              "value": "4 November 2010",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000001_001_r.lbl",
+                "label": "Comet 103P · mv10110413 6000001 001 r labelPath",
+                "checked": "2026-09-16",
+                "path": "source/photography/mri/mv10110413_6000001_001_r.lbl",
+                "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-labelpath",
+                "locator": "START_TIME = 2010-11-04T13:59:12.526"
+              }
             }
           ],
           "moreFacts": []
@@ -555,14 +565,13 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "cc55131be459b1b5a46be89e88c5f09a09d8ecfa665a6c5efb1a1b32faab4f51",
+      "sha256": "c3940f29f09c718eddbb26b759e9adc03fce9b8a9c924508bf3618417713d563",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
         "archive": null,
         "members": null,
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "comet-103p-features.json",
         "publicBase": "/scenes/comet-103p/",
         "target": {
@@ -5563,8 +5572,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f5ef1ced48bfb6d55c7f3c02e2614380bbad4523704075d2ebf14e331672fedb",
-      "bytes": 8657,
+      "sha256": "fc3d62b984b5b88bed7698c0f3ccb187a686248ac3da14381819daa5765f743f",
+      "bytes": 9536,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -5603,8 +5612,8 @@
         "kind": "local",
         "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
       },
-      "sha256": "e31a107a6ef7a5ecbebdfada3e1131d2dcbf41716520d9822792db5718ba0a3c",
-      "bytes": 157,
+      "sha256": "58c30f0a02a32ec0a3e6b98a645895b0fd7046cc5f345f3660fb54bc873c5e0e",
+      "bytes": 189,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -5673,8 +5682,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-model-surface@2x.webp",
-          "bytes": 126788,
-          "sha256": "cefcf7a9d95f5fde97b0f93d56565e3abb911ec075963ed95128aef42f4c6131",
+          "bytes": 149666,
+          "sha256": "c8ed83e7eb2445f723a3e0d834744edd8ebcbf9354a8ab8c55c932e65d9bfab5",
           "verification": "bytes-verified"
         }
       ],
@@ -5727,8 +5736,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-constraints-surface@2x.webp",
-          "bytes": 153770,
-          "sha256": "07a558afc468e1da71fc04fb067debe70aad4f2ff5303543fe4a1394bab4d299",
+          "bytes": 172254,
+          "sha256": "4b13729bbfcb2b63f93edf61c5cb499f4250fad2baf6020668aac4a4901120ce",
           "verification": "bytes-verified"
         }
       ],
@@ -5903,8 +5912,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-temperature-surface@2x.webp",
-          "bytes": 441686,
-          "sha256": "5d57057eff2291fe051a2600d332c7806b700b2d81b9f347fd133f58bb058d06",
+          "bytes": 347332,
+          "sha256": "8e04e1aa70b09e644d76e7f0f91f016b4e852755a58335b42026e0b5a09b932e",
           "verification": "bytes-verified"
         }
       ],
@@ -6074,8 +6083,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-spectral-slope-surface@2x.webp",
-          "bytes": 441918,
-          "sha256": "87e14686fbff5ae5100648c03f36babc89096fa039cbacaea816e9aacf910b72",
+          "bytes": 347412,
+          "sha256": "e5d33bb35e71409bc231acdcf0d0294913e71f23f582a021bbda06e6a5ea71ec",
           "verification": "bytes-verified"
         }
       ],
@@ -6133,8 +6142,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
-          "bytes": 275690,
-          "sha256": "3b92c1607dd090420aea33bfe9e6f6070b9e65959e2834fdd6c8eba519b5ce97",
+          "bytes": 274250,
+          "sha256": "774c5f5d6677efe4ade29369d1e003c8b4f8437b7e629d001faaa3a510347f2c",
           "verification": "bytes-verified"
         }
       ],
@@ -6166,8 +6175,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5547,
-          "sha256": "b9bdb74b3335681b21c250d3c45322417fa17bb4411c593d971330c64d7050d3",
+          "bytes": 6288,
+          "sha256": "5cc70ebcb2c36004ce50ca7c55b17fbd3df98ba92b57244db59dd923ac631080",
           "verification": "bytes-verified"
         }
       ],
@@ -6188,7 +6197,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {}
       },
       "inputs": [
@@ -6313,11 +6321,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-103p",
-    "materialSha256": "db16221deb108bf53c8a2699d6f4819acd485929a65988e1cc7e6cb3da7fa531",
+    "materialSha256": "390451c206544c3d0472d26b9ed5cd1de4281cb6aaceaefa74428e3174ab24fe",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c15a054cda002a3aa44b74d8277347e803785b5dd50fd00e4f8a1907dbe52e9d"
+      "bindingsSha256": "6dfe2c68d0ba32816eab294e8d490c4fe6bd92cf9a4dc36cc0be34861bdb5694"
     }
   }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0aca2e818b2dc33ab4aeba19f81678b52f37b71f0f32a5c61934c0246694bd5f"
+    "sha256": "f927295c725509f246af01a18d554724f17b71aafa9645910e39439d89548347"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "39a03af2bf4e73275dbbcd6f79864f75cbcbb6d00712c4fa2d09a95efce061f0",
+      "sha256": "9e79dabbcf73ed10499c8cbdc781bd7c409d733a840bd99a9c3edd4bb3ae1910",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1000,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a6f5511ea4de500b8413964deadc8911d651051e8ba916f138b431a488af13f4",
+      "sha256": "ebbefd651c7348cc7f79d962279fff9200d8cc7cf82fd12e167efc6e64e36269",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,32 +112,28 @@
             {
               "id": "radius",
               "label": "Projected radius",
-              "value": "41 ± 2 km"
+              "value": "41 ± 2 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/projectedRadiusKm/value"
+              }
             },
             {
               "id": "dimensions",
               "label": "Model dimensions",
-              "value": "92 × 74 × 74 km"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 61,767 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Prolate model; third axis assumed"
-            },
-            {
-              "id": "mass",
-              "label": "Mass from ring dynamics",
-              "value": "(1.84 ± 0.21) × 10¹⁷ kg"
+              "value": "92 × 74 × 74 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1"
+              }
             }
           ],
           "moreFacts": []
@@ -303,8 +298,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a6f5511ea4de500b8413964deadc8911d651051e8ba916f138b431a488af13f4",
-      "bytes": 2887,
+      "sha256": "ebbefd651c7348cc7f79d962279fff9200d8cc7cf82fd12e167efc6e64e36269",
+      "bytes": 3013,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -347,8 +342,8 @@
         },
         {
           "url": "/scenes/cressida/cressida-model-surface@2x.webp",
-          "bytes": 56856,
-          "sha256": "addb3f1e736c0d7935556b7665944df54f19b762c0070e43a8640a6617fd1862",
+          "bytes": 63326,
+          "sha256": "003b9f47d5e44b6204665eea1c8491afe898c5877bc580cf3dec846c8b72999e",
           "verification": "bytes-verified"
         }
       ],
@@ -385,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6892,
-          "sha256": "9b1f881d91ecb7c618b99228e85f1e7c0eb54b4eaa3103da2dcc3771c15e218a",
+          "bytes": 7012,
+          "sha256": "27eba0d1c78f89558d2d4c343b3fb0b57abe13352573f587d5d1f7d7b5b47044",
           "verification": "bytes-verified"
         }
       ],
@@ -424,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "cressida",
-    "materialSha256": "966ec80aa72792dd0c63f8ec49aa10d35fcf429addea6e2841bfd653a7014378",
+    "materialSha256": "204a8abff41336dcdc349f31c968b917e2b4f652809d94285526a587beb3a0b9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

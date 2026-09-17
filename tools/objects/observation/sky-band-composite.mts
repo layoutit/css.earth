@@ -8,6 +8,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { readFitsImage } from '../../fits.mts';
+import { skyDisplayRaster, skyImageAxes } from '../../fits-sky.mts';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '../color-transfer.mts';
 import { maskSaturatedStars } from './plate-saturation.mts';
@@ -178,8 +179,7 @@ async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyB
   if ('sha256' in input && route.acquisition.kind === 'hips2fits') {
     const hips = route.acquisition.hips, image = readFitsImage(await hips2fitsBytes(recipe.grid, input, hips, io.cache), { maxDecodedBytes: 1024 ** 3 });
     checkHips2fits(image.header, image.cards, hips, recipe.grid);
-    const plane = new Float32Array(width * height);
-    for (let fitsRow = 0; fitsRow < height; fitsRow++) plane.set(image.values.subarray(fitsRow * width, (fitsRow + 1) * width), (height - 1 - fitsRow) * width);
+    const plane = skyDisplayRaster(Float32Array.from(image.values), width, height, skyImageAxes(image.header));
     return { plane, acquisition: { kind: 'hips2fits', hips, url: skyBandUrl(recipe.grid, hips), sha256: input.sha256, bytes: input.bytes,
       limits: 'CDS hips2fits interpolates HiPS pixels by an undocumented method.' } };
   }

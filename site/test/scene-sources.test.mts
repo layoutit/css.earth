@@ -5,7 +5,8 @@ import { globSync, readFileSync } from 'node:fs';
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog, isPreparedCluster } from '@cssearth/catalog';
 import galaxies from '../../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
-import { focusSourceDocumentation, overviewSourceDocumentation, sourceDocumentation } from '../source-documentation.mts';
+import { focusSourceDocumentation, overviewSourceDocumentation, sourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
+import { systemById } from '../object-systems.mts';
 const catalogues = [
   { id: 'galaxies', data: parsePreparedGalaxyCatalog(galaxies) },
   { id: 'clusters', data: parsePreparedClusterCatalog(clusters) },
@@ -23,7 +24,7 @@ test('every scene links its own existing README at the build revision', () => {
 });
 
 test('overview and catalogue selections link their actual documentation owner', () => {
-  assert.match(overviewSourceDocumentation('solar-system', 'Solar System').href, /\/sun\/README\.md$/u);
+  assert.match(systemSourceDocumentation(systemById(SCENE_OBJECTS, 'sun')!).href, /\/sun\/README\.md$/u);
   for (const scope of ['milky-way', 'local-group', 'nearby-universe']) {
     assert.ok(overviewSourceDocumentation(scope, scope).href.endsWith(`/src/objects/${scope}/README.md`));
   }
@@ -44,12 +45,12 @@ test('documentation preparation rejects missing owners and paths outside object 
 
 test('the footer prepares compact provider credits without changing the README destination', () => {
   assert.equal(sourceDocumentation('bennu', 'Bennu').label, 'Sources: NASA, CSA, USGS, JPL');
-  assert.equal(sourceDocumentation('saturn', 'Saturn').label, 'Sources: NASA, ESA, STScI, OpenSpace, JPL');
+  assert.equal(sourceDocumentation('saturn', 'Saturn').label, 'Sources: NASA, ESA, STScI, JPL');
   assert.equal(overviewSourceDocumentation('milky-way', 'Milky Way').label, 'Sources: NASA SVS, OpenSpace');
 });
 
 test('the Solar System overview credits its bodies rather than inheriting only the Sun’s maps', () => {
-  const overview = overviewSourceDocumentation('solar-system', 'Solar System');
+  const overview = systemSourceDocumentation(systemById(SCENE_OBJECTS, 'sun')!);
   const sun = sourceDocumentation('sun', 'Sun');
   assert.equal(overview.href, sun.href);
   assert.notEqual(overview.label, sun.label);

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8b6e3155a4bbcdf40e38298b210f87b749bf357fda6eb8c6c8648c2e5d2ac20"
+    "sha256": "9ccf9301eae0f8c5305347e9aa513be4f60eb2d4f1b4363fb51d3818951fe79e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "1a726a4afd2f8e74de252deaa00b58acb693a40fd2a2deeff1f6b8a5d991a44d"
+    "bindingsSha256": "096f0f0e01e4c491bf847b449c7371c835600e8cbf88dde9c2e772563704f295"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "34cf6c8909b35890b4fc83185786f2e41776cd2e9d200260dbc870518a329765",
+      "sha256": "22c6550fbc70744cd9f4481e4b42f8f3e160fa0b4456b33af943aa5027fbe376",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -215,8 +215,7 @@
             "latitudeSegments": 20,
             "longitudeSegments": 32,
             "faceBudget": 1600,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -237,7 +236,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fa49539f8a8f7554147a1f418450d60485986842a1a029138542338fd9abe8dc",
+      "sha256": "65e813fd59e09bde95a1ee1e8412866e53022dd3393b66fa1836156f50b816e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -272,24 +271,17 @@
               }
             },
             {
-              "id": "orbital-period",
-              "label": "Orbit around Mars",
-              "value": "7 hours 39 minutes"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "7 hours 39 minutes (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Mars",
-              "value": "About 9,376 km"
-            },
-            {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Asaph Hall · 1877"
+              "value": "Asaph Hall · 1877",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -475,7 +467,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "b4fb52c28b1245b21503a18b63a4feda442193616310d99855c92c82118cbb8a",
+      "sha256": "855ea859f85f7ddc42c07bce69995ee58ecbca9733cad447577bd75cb90b070b",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -486,7 +478,6 @@
           "metadata": "metadata_nomenclature_points_PHOBOS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "phobos-features.json",
         "publicBase": "/scenes/phobos/",
         "target": {
@@ -697,8 +688,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fa49539f8a8f7554147a1f418450d60485986842a1a029138542338fd9abe8dc",
-      "bytes": 10627,
+      "sha256": "65e813fd59e09bde95a1ee1e8412866e53022dd3393b66fa1836156f50b816e7",
+      "bytes": 10613,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -770,8 +761,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "96dea3504ca2046445cb280056c5f4d6a4afa1e2af10c6db783ce59acbbb3b30",
-      "bytes": 153,
+      "sha256": "e27eec483e315034b0b4cf8bbd166f2db2c651bc5552d42f2aa8f4ecdc115656",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -856,8 +847,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-normal-surface@2x.webp",
-          "bytes": 7669388,
-          "sha256": "9c2934bc09e9fa83c86bf452215d3aac58ff5bade55d14e1e535014cc3c5b97e",
+          "bytes": 7784560,
+          "sha256": "eff594341a0bf77badda8865dc081a1b83295b446c990493a67dad7a3dbdbb7a",
           "verification": "bytes-verified"
         }
       ],
@@ -911,8 +902,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-elevation-surface@2x.webp",
-          "bytes": 1434432,
-          "sha256": "474a121e601cbc39988a7a76e351ca17e060ffab157eb239965f2ad5251464ed",
+          "bytes": 1564650,
+          "sha256": "4ed3c15a5960bb5649ea21cf586283e73a4c5c8fa71fd52e2eb5fc32c740a473",
           "verification": "bytes-verified"
         }
       ],
@@ -962,8 +953,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-albedo-surface@2x.webp",
-          "bytes": 2460704,
-          "sha256": "d33bb32fc9a10d308e4a7cf015d6cda46d5823cbd675a0f97f6408f71c8e39ea",
+          "bytes": 2624758,
+          "sha256": "d0ae3b12565b2ee1c2cc24b756f7cfc51cee6648d9db3944e5285f946396a89c",
           "verification": "bytes-verified"
         }
       ],
@@ -1013,8 +1004,8 @@
         },
         {
           "url": "/scenes/phobos/phobos-slope-surface@2x.webp",
-          "bytes": 3997560,
-          "sha256": "3cd1197cce3ae8d0057be96bc9e1c358d24dfc7ec9f4422e78eff8c921c47fed",
+          "bytes": 4317638,
+          "sha256": "7f08e4549565e7e90acc8b901b909fa6cc5bbd6afdfaf5267625773530a4c576",
           "verification": "bytes-verified"
         }
       ],
@@ -1046,8 +1037,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5838,
-          "sha256": "b07e28a5dec9e0f94728e307a2996878c259a276ddded02d5f752a50daff60f4",
+          "bytes": 5983,
+          "sha256": "4ec7a252cdfce2497e2098f2374df28d541430709d1867de26b164635688f0ce",
           "verification": "bytes-verified"
         }
       ],
@@ -1068,7 +1059,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1196,11 +1186,11 @@
   },
   "lastPreparation": {
     "objectId": "phobos",
-    "materialSha256": "40d54283d4b8f7d21dc6ff5e58567aef90442b8e65e5e5d6163701a9986e46c3",
+    "materialSha256": "2032c06862fc79be773eeafca9d0da727f0b83734b58955a46da806b17dbc2e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "1a726a4afd2f8e74de252deaa00b58acb693a40fd2a2deeff1f6b8a5d991a44d"
+      "bindingsSha256": "096f0f0e01e4c491bf847b449c7371c835600e8cbf88dde9c2e772563704f295"
     }
   }
 }

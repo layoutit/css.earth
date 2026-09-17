@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c963747458fbe4839fc486303171490a0f8a6bdca70556aa39d9feadf92d8c1b"
+    "sha256": "e2e6d257288477038f91f9373d6473448c32fb4e26003b55c5995afe155eef2f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "03aeae3e30429bb9934327ff12e07708de2248cb696bffda684ee106f4b066ab",
+      "sha256": "2c3bd3fcddefebbda44c09b66c6fabd467ec8c6deae0f26c4369743a58a7857a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "94d16d96f49c2585343de8f914470ae436d008175c407c245f7e92a05948c516",
+      "sha256": "91ec04c7eea3e2d525400f34e72b589909ac0e51af7b8be29fa0d346df3394e5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "30.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "14.03086 hours"
+              "value": "14.03086 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1832",
+                "label": "DAMIT model 1832",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "94d16d96f49c2585343de8f914470ae436d008175c407c245f7e92a05948c516",
-      "bytes": 9375,
+      "sha256": "91ec04c7eea3e2d525400f34e72b589909ac0e51af7b8be29fa0d346df3394e5",
+      "bytes": 9581,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/sappho/sappho-elevation-surface@2x.webp",
-          "bytes": 266666,
-          "sha256": "32b14af3c312a09d74bd7054f2473e9b74a16f4625f6f4086555568bb7697ff4",
+          "bytes": 335578,
+          "sha256": "7442fde7c54efd2245b961784ab90dac06071e30ca0830c947dc79935b1bf435",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/sappho/sappho-shape-surface@2x.webp",
-          "bytes": 60230,
-          "sha256": "456b1f768eadc4a3d980ae30999ca52424f15f1da7d554ad9a1c2166823c05f3",
+          "bytes": 81828,
+          "sha256": "60318cbcda1508f27fca3ffcc0c1fea5b9def1ed296132b87ff920dbf1a79afc",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7089,
-          "sha256": "92e4a098e8616635925b738745ac0f01685092b43ec1d9bd8901eb5b8161cd76",
+          "bytes": 7248,
+          "sha256": "6eb0133a756ac5bd30b33c7edb404998990b9a50d942d759032a921bf1e24663",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "sappho",
-    "materialSha256": "225796eb8c115f2aac7014459c750997147f7a3eba8c7000e0022758c6597ee9",
+    "materialSha256": "b66054dd4387e63347fdf02ad7c11cd6e49ae9709a6c293ddef4929f1cd8f527",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

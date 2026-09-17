@@ -4,7 +4,7 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { OpacityClock } from '../stars/opacity-clock.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
@@ -146,14 +146,13 @@ function admit(entry: Entry, opacity: number, publication: EnvironmentLabelPubli
 
 function projectAnchor(entry: Entry, world: WorldCameraPose, viewport: WorldCameraViewport, viewportHeight: number): readonly [number, number] | null {
   const camera = presentPhysicalPoseInVolume(world.pose, entry.frame);
-  const rotation = worldRotationFromQuaternion(camera.orientationXyzw);
-  const [qx, qy, qz, qw] = camera.orientationXyzw;
+  const rotation = cssCameraAxesFromOrientation(camera.orientationXyzw);
   const distance = Math.hypot(...camera.positionUnits), radius = frameRadius(entry.frame);
   const offset = Math.min(.75 * radius, distance * viewportHeight / (2 * viewport.focalPixels) * .78) * (entry.kind === 'volume' ? -1 : 1);
   // Volume labels use camera-down; shell labels retain their camera-up anchor.
-  const dx = -2 * (qx * qy - qw * qz) * offset - camera.positionUnits[0];
-  const dy = -(1 - 2 * (qx * qx + qz * qz)) * offset - camera.positionUnits[1];
-  const dz = -2 * (qy * qz + qw * qx) * offset - camera.positionUnits[2];
+  const dx = -rotation[1] * offset - camera.positionUnits[0];
+  const dy = -rotation[4] * offset - camera.positionUnits[1];
+  const dz = -rotation[7] * offset - camera.positionUnits[2];
   const eyeX = rotation[0] * dx + rotation[3] * dy + rotation[6] * dz;
   const eyeY = rotation[1] * dx + rotation[4] * dy + rotation[7] * dz;
   const eyeZ = rotation[2] * dx + rotation[5] * dy + rotation[8] * dz;

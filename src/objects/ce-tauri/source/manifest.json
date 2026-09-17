@@ -780,8 +780,8 @@
       }
     },
     {
-      "expectedBytes": 9745,
-      "expectedSha256": "71a914af6a1cc09c911c77af0044c66a85de9948327dea48922be4d3ca38045b",
+      "expectedBytes": 9759,
+      "expectedSha256": "67a7d748e82f909a27fb1ac689407f84fe68ef8892f3cbb44dda3abce06b92a3",
       "id": "ce-tauri-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: two published PIONIER reconstructions cast onto the reference sphere by the surface-observation route, polar bands, off-limb plates",
@@ -854,8 +854,8 @@
       ]
     },
     {
-      "expectedBytes": 285,
-      "expectedSha256": "66d7767e95cd601670499d51a5764304eb4a7f29758d36ea7782352f939f5d1d",
+      "expectedBytes": 287,
+      "expectedSha256": "1a58e5e247493c39f480bcbc08a46815de54f7a8c7e1d65e77f1abd73ba4d99e",
       "id": "ce-tauri-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
@@ -899,8 +899,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 6510,
-      "expectedSha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
+      "expectedBytes": 7522,
+      "expectedSha256": "a5d71d9cae1d813d1edbd79f102e874d2fa261b677b2ec1535394fc53b2b5cee",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",

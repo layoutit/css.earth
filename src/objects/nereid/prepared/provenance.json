@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "05209164a381794afc877ea86227b798cc640cb6418a4c323602ac6b797ff150"
+    "sha256": "a21312cddd60c837021379e2a57e48c281dcf70ca2e09e2c0c8d9fe049866c2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a3b88eafbc13d4621ea516ee67e5eb492f074592880dd56ef7984f20e7434afa",
+      "sha256": "1d1451d466cfdd96e713b5518b49328c4a2c564e7e72ee21ab506458387372a3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 4250,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "255acedd67e9494e8ba99bf364126f19f0a466f8bd8e1dba7b6cf1fed50a2e55",
+      "sha256": "928e6dac0a0b134f4b2660c7501b4e7bfb500206fb04e12f0ea582d740ae611d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,34 +112,69 @@
             {
               "id": "radius",
               "label": "Mean radius estimate",
-              "value": "170 ± 25 km"
+              "value": "170 ± 25 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "JPL Planetary Satellite Physical Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/1; Mean Radius (km) value"
+              }
             },
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Neptune"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Approximate ellipsoid · long/short ≈ 1.3"
+              "value": "Neptune",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Gerard Kuiper · 1949"
+              "value": "Gerard Kuiper · 1949",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/2; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
             {
               "id": "rotation",
               "label": "Rotation period",
-              "value": "11.594 ± 0.017 hours"
+              "value": "11.594 ± 0.017 hours",
+              "source": {
+                "url": "https://doi.org/10.1093/mnras/stw081",
+                "label": "Research publication · DOI 10.1093/mnras/stw081",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1093-mnras-stw081",
+                "locator": "/rotationPeriodHours"
+              }
             },
             {
               "id": "shape-axes",
               "label": "Model semiaxes",
-              "value": "194 × 171 × 148 km · derived approximation"
+              "value": "194 × 171 × 148 km · derived approximation",
+              "source": {
+                "url": "https://doi.org/10.1093/mnras/stw081",
+                "label": "Research publication · DOI 10.1093/mnras/stw081",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1093-mnras-stw081",
+                "locator": "/semiAxesKm/0; /semiAxesKm/1; /semiAxesKm/2"
+              }
             }
           ]
         },
@@ -312,8 +346,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "255acedd67e9494e8ba99bf364126f19f0a466f8bd8e1dba7b6cf1fed50a2e55",
-      "bytes": 2931,
+      "sha256": "928e6dac0a0b134f4b2660c7501b4e7bfb500206fb04e12f0ea582d740ae611d",
+      "bytes": 4594,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -356,8 +390,8 @@
         },
         {
           "url": "/scenes/nereid/nereid-model-surface@2x.webp",
-          "bytes": 55502,
-          "sha256": "156eb46bff2684452df895863521d4e3a28ecddd2af767e4ec784704e0875bdc",
+          "bytes": 63028,
+          "sha256": "bccdf30ea4090e26241c6475433ea873f30cbe834e779122267ad84640ffc50a",
           "verification": "bytes-verified"
         }
       ],
@@ -394,8 +428,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4883,
-          "sha256": "350558fb662984ce3d821e10bf306ebb2abd0e304a54dc85f4a71595720b3e14",
+          "bytes": 6135,
+          "sha256": "111bd494380fac05ab11e7dab0a5f1134c82e5514e98514af4a3bdfe4ae6ad50",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +467,7 @@
   },
   "lastPreparation": {
     "objectId": "nereid",
-    "materialSha256": "636423f8064c7a7a0e0d35e372c75ff23f6aac94452408843a88cb62732073f9",
+    "materialSha256": "8933015e82258a1b289dae00b63b60e3b7200d0e9c087bc1f814eb9a5a27c15d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

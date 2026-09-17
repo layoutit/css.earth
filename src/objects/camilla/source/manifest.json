@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8927,
-      "expectedSha256": "13b9bb0e21276197059106d2fdacb4a3096adacf9fd8a04c6e5dc56c98791b12",
+      "expectedBytes": 9134,
+      "expectedSha256": "6aaf23cc35a1bef8aa19b986cc18e3057b625de29838d60a5273773d53985f1e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -118,8 +118,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2875,
-      "expectedSha256": "d13896807d24e667a3c04e71bff28b852a5511efc1e9b0f708f214db6e5a1c5f"
+      "expectedBytes": 2856,
+      "expectedSha256": "3731ba6f1f25436148d7fbdaa8f78cf3a0463a7e44f815f85da93c2dadf072d4"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1798,
       "expectedSha256": "f83abef74a1b4489e96242d845cdeee497074644804e6f605b6272d9e1e026b2"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 6688,
+      "expectedSha256": "a50dd42752f95e7c12b8a33ab9a58cdb31206b703baea0c2e123289052a3959c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Camilla: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

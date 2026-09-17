@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7d77ce7dfb7edab26995688c9af852450ffcdc6c0d0e48f2213073fdba3ff20"
+    "sha256": "77fcff745125cc5499e54c5da5e1bf5f461ab7b6ce203df5065d92df93c68dd1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0e08bdb63df3a3faa0ff1dc3d53305ace24c05847f2f86ab037aa8e36e1a4034",
+      "sha256": "0532e35f8c6c9730e24cebf5beb18238b105ecb8e3c2f0d8a49a1a02acd9b6fc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d21804db1ca8239a4b72ee838163f8b35d24721b11642234111bedb30633fa7f",
+      "sha256": "61208b4635780f92cc08517e93d41471e1a44391504ab16e5d3e8a36e7dd4e92",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "94.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "9.404937 hours"
+              "value": "9.404937 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1814",
+                "label": "DAMIT model 1814",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d21804db1ca8239a4b72ee838163f8b35d24721b11642234111bedb30633fa7f",
-      "bytes": 9193,
+      "sha256": "61208b4635780f92cc08517e93d41471e1a44391504ab16e5d3e8a36e7dd4e92",
+      "bytes": 9399,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/herculina/herculina-elevation-surface@2x.webp",
-          "bytes": 280504,
-          "sha256": "9073a63770d47ad61c5c306d8bc44d0bacd71be6aa6e216f921f7e9dbe4a5517",
+          "bytes": 341238,
+          "sha256": "715db0e904c302210cad6076c11d05843da4cdbb741daf70d29d5a04d289a50c",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/herculina/herculina-shape-surface@2x.webp",
-          "bytes": 58438,
-          "sha256": "7039c791f570820f63cf5df11e43cc1a22e77e88944a676b3e583793d080c040",
+          "bytes": 75026,
+          "sha256": "b173ea35e43a08fc909ef4535faf104594b1cd4ab1bc6c89b0bde944ed13c0ea",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6868,
-          "sha256": "0a0b23876a6391e92a000277149d22fe3548ee7145c5af133bae28e2bc421b3d",
+          "bytes": 7027,
+          "sha256": "1f840b03b11c12bfcefb081aba1e575ee7555ee31b9f6f276216891e4b6fcb00",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "herculina",
-    "materialSha256": "45057529dd8a51801fbfa831cafc89a0d6461aa5b9ce25cce49c7e842f4a07ea",
+    "materialSha256": "367c7a26c3f53b5fc4f262fcbe6aba452be1d5bac05b98972abacefbe9ffc5b1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

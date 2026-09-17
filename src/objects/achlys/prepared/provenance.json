@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dd0c1728a7f1dcd8309770d726040b059574ca397be66767449fc43070c7eb4c"
+    "sha256": "b1c8bea2d5ca892342d23b113fa204dd018ea0eb31bf3dd755424947658ea22c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0fad2bfeed3b9dd265b914702c1de87cee564c48477a2b0dc13eb8a18b132129",
+      "sha256": "d5ce28874cf10f8eea67c790186781e76e713df25382a50c36383805d9916cfe",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8832.715607884573,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d242abfb201675c5ebffd0675a42b5ab4ff0018d418ad7b9df545cc0acb82259",
+      "sha256": "a9d8f2ddc2fba27001fac8120b1c55909d68f6b5276004d659064530ea432905",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,33 +111,33 @@
         "panel": {
           "facts": [
             {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Published Jacobi ellipsoid"
-            },
-            {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "940 × 766 × 490 km"
+              "value": "940 × 766 × 490 km",
+              "source": {
+                "url": "https://arxiv.org/abs/1705.10895",
+                "label": "Research publication · arXiv 1705.10895",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1705-10895",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
             },
             {
               "id": "rotation",
               "label": "Rotation",
-              "value": "About 6.75 hours in the adopted shape interpretation; display phase is illustrative"
-            },
-            {
-              "id": "class",
-              "label": "Population",
-              "value": "Trans-Neptunian object"
+              "value": "About 6.75 hours in the adopted shape interpretation; display phase is illustrative",
+              "source": {
+                "url": "https://arxiv.org/abs/1705.10895",
+                "label": "Research publication · arXiv 1705.10895",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-1705-10895",
+                "locator": "/numericEvidence/periodModelHours"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "uncertainty",
-              "label": "Shape interpretation",
-              "value": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain."
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -297,8 +296,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d242abfb201675c5ebffd0675a42b5ab4ff0018d418ad7b9df545cc0acb82259",
-      "bytes": 3516,
+      "sha256": "a9d8f2ddc2fba27001fac8120b1c55909d68f6b5276004d659064530ea432905",
+      "bytes": 3621,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -341,8 +340,8 @@
         },
         {
           "url": "/scenes/achlys/achlys-model-surface@2x.webp",
-          "bytes": 48438,
-          "sha256": "2380bbf23a3df1f77f276c493a670eb3dab2f88bcc69ddfed58b8ade2655f737",
+          "bytes": 58298,
+          "sha256": "612c7dc5f9455173fb3d390e7c688e12faca09da3fd3dfa8f645c86277b9a8d4",
           "verification": "bytes-verified"
         }
       ],
@@ -379,8 +378,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4763,
-          "sha256": "66fe39a266b6d40eb930b5e015e6c9b40a43675c25c8e8019fba572bcaabc72f",
+          "bytes": 4823,
+          "sha256": "97feb7d26a9421e3c667cdcafac0c8743eee1092b5c57c50bfc2af9b1ab1019a",
           "verification": "bytes-verified"
         }
       ],
@@ -418,7 +417,7 @@
   },
   "lastPreparation": {
     "objectId": "achlys",
-    "materialSha256": "cfdc55b2fbaa9c3b36e3a2e98d55f24108d9a42ca7c55e980458ce45c7b5d2b2",
+    "materialSha256": "7bbbe6d78d2c79b205dc6fa9a781574e47274f694fb6cb668663e7e8a1766e8b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

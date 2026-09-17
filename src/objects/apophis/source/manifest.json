@@ -119,8 +119,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9248,
-      "expectedSha256": "617798065d3b011599bb11c41461f83016de79946830f5039606483ac38d0795",
+      "expectedBytes": 10036,
+      "expectedSha256": "43577d64e6eac24140089c7e572dc610a2224923e8e6677e6ffb9fd20349717a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -143,8 +143,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2798,
-      "expectedSha256": "0a295936521547ba1a1ca907825b35adaa1069e6eda614bb46c7298aaa19e7bb"
+      "expectedBytes": 2779,
+      "expectedSha256": "8d6b5e146f563bc23dd372b4d4412e1db001eaa9ebda9fc1f0db8e0e1cbb6109"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -205,6 +205,21 @@
       "path": "reference/ref.txt",
       "expectedBytes": 1384,
       "expectedSha256": "3aa2f959debad375f817d7c474f11725a743736563227cf8e945d6eb27d648e0"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5090,
+      "expectedSha256": "3d6c7a129041791ef5029c4093bd7e4fa49e2fdca179cffb3163c2523ce928f6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Apophis: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5167cecaa52d8dd519edca75e0938d1574dd5545d2c04645f0e8e25196f05ed3"
+    "sha256": "5e0212892537dc0c17b9e39240ddc3f427cea2b4f545b2ad66c6b7b9804064b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1109f3bea25468b72db3ac5407be63b9f727e7fa8a1f686e389b4c8ad2a2bd79",
+      "sha256": "985d851e7b816e0cd4cbfed1499a35ddc3c5b4eb1250506e8e0abdc64c23c5e9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1000,
@@ -102,7 +101,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "88462a1d7ffc4547948bc53cc3cb95d8930cf2663089f0a87893246a1c131834",
+      "sha256": "b404d895d3404fecc7a052b2b51bdf38d2895265fcc7bb24aebd63a5778955de",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -113,27 +112,28 @@
             {
               "id": "radius",
               "label": "Projected radius",
-              "value": "36 ± 6 km"
+              "value": "36 ± 6 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0"
+              }
             },
             {
               "id": "dimensions",
               "label": "Model dimensions",
-              "value": "72 × 72 × 72 km"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Distance from Uranus",
-              "value": "About 69,927 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Voyager 2 imaging team · 1986"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Sphere consistent with measured outline"
+              "value": "72 × 72 × 72 km",
+              "source": {
+                "url": "https://arxiv.org/abs/2401.04634",
+                "label": "Research publication · arXiv 2401.04634",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "arxiv-2401-04634",
+                "locator": "/semiAxesKm/0"
+              }
             }
           ],
           "moreFacts": []
@@ -298,8 +298,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "88462a1d7ffc4547948bc53cc3cb95d8930cf2663089f0a87893246a1c131834",
-      "bytes": 2762,
+      "sha256": "b404d895d3404fecc7a052b2b51bdf38d2895265fcc7bb24aebd63a5778955de",
+      "bytes": 2987,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -342,8 +342,8 @@
         },
         {
           "url": "/scenes/rosalind/rosalind-model-surface@2x.webp",
-          "bytes": 55832,
-          "sha256": "055b99cbb4c711164c0a60f2dde5a2f8e5c8879d2c482b0ef6f2ef7f1b9bb8a7",
+          "bytes": 61438,
+          "sha256": "9561ed17562463340287e1f7a5be1a4b35842ccb9f1a1a242e782f7b2d3b0cdc",
           "verification": "bytes-verified"
         }
       ],
@@ -380,8 +380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5816,
-          "sha256": "5a916dc398103097942accd6bfc2a01eb0ff3cf0c0cfe0c916c3f45cf701ab0f",
+          "bytes": 5991,
+          "sha256": "b77466a861530625b48b1565ebeae4a4a1efa70eb8a430a0dafce5139e2efbe4",
           "verification": "bytes-verified"
         }
       ],
@@ -419,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalind",
-    "materialSha256": "0f7cc22057d2d86c0bea39a9b21f36d2ffda5ba0affa0e6697570092e303c283",
+    "materialSha256": "8afe477903a68ec9507205b07ffbaba5e6d9e81a6ea622a28aaa8d5fec863af6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

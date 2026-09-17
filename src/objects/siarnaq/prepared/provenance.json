@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8c5aba9077db1616c08ce42f602382c54a234a122a510f0f0b60b76581d0ad6b"
+    "sha256": "7d09a0054460708aeef05e93010ecac5d81d66e435575de3ca729d317dcdb842"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ba4df739161bccb64a0f48b7b306a024cdbda36c71df351beea466fd4f7a53ac",
+      "sha256": "27cd66403f43c75cd79343ba38ef138825132ac07c99997c18af34e8a85e85ae",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 585,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3c4e439e3926774db04d33f1deefbeee4a5adbf4b8c91e7da54fd95b637c73de",
+      "sha256": "d449ae13229451c11788bacc62dbe1db1a2fb57ef610523dbbcdbe4a941a0783",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -114,31 +113,31 @@
             {
               "id": "diameter",
               "label": "Mean diameter estimate",
-              "value": "39 ± 6 km"
+              "value": "39 ± 6 km",
+              "source": {
+                "url": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+                "label": "Shape model",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-siarnaq-model-surface",
+                "locator": "/meanRadiusKm"
+              }
             },
             {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Shape interpretation",
-              "value": "Approximate triangular model"
-            },
-            {
-              "id": "rotation",
-              "label": "Sidereal rotation",
-              "value": "10.18785 hours"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Gladman, Kavelaars and colleagues · 2000"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -293,8 +292,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3c4e439e3926774db04d33f1deefbeee4a5adbf4b8c91e7da54fd95b637c73de",
-      "bytes": 2490,
+      "sha256": "d449ae13229451c11788bacc62dbe1db1a2fb57ef610523dbbcdbe4a941a0783",
+      "bytes": 2772,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -337,8 +336,8 @@
         },
         {
           "url": "/scenes/siarnaq/siarnaq-model-surface@2x.webp",
-          "bytes": 55214,
-          "sha256": "475231fd4b70be3b8ed8d0d8050941db662416587884f32f0da74320dec3f009",
+          "bytes": 59876,
+          "sha256": "2d02608d3e0f5ec4d6c443de3a5a7df65ae0adb2a8c1c49efbc5e5fbc2467a38",
           "verification": "bytes-verified"
         }
       ],
@@ -375,8 +374,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6046,
-          "sha256": "4a3cdc163b523f94f4d8f25d56438ce9bb9bd68c2ed1fa844a5f5bbe6ac7e7e2",
+          "bytes": 6283,
+          "sha256": "76eafd21bc58ead3c8c580231054636df3e536ce8e25256f7e6569fa0242e081",
           "verification": "bytes-verified"
         }
       ],
@@ -414,7 +413,7 @@
   },
   "lastPreparation": {
     "objectId": "siarnaq",
-    "materialSha256": "4354b1c0c4da705e44b6c5ba1264a3e88e476e686b875615cf2f54109cf7a272",
+    "materialSha256": "c422caf33bb42e49ff6bd97d85019c868b1e9205008bee158913b9d7b5ac9887",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

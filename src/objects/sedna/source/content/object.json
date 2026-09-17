@@ -6,31 +6,45 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published size model; shape unresolved"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "995 × 995 × 995 km"
+        "value": "995 × 995 × 995 km",
+        "source": {
+          "url": "https://arxiv.org/abs/1204.0899",
+          "label": "Research publication · arXiv 1204.0899",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-1204-0899",
+          "locator": "/fullAxesKm/0"
+        }
       },
       {
         "id": "rotation",
         "label": "Rotation",
-        "value": "About 10.3 hours from photometry; aliases and a possible doubled shape period remain unresolved."
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Detached trans-Neptunian object"
+        "value": "About 10.3 hours from photometry; aliases and a possible doubled shape period remain unresolved.",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=90377",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "path": "source/reference/sbdb.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "phys_par.rot_per (h)"
+        }
       }
     ],
     "moreFacts": [
       {
         "id": "uncertainty",
         "label": "Shape interpretation",
-        "value": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented."
+        "value": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented.",
+        "source": {
+          "url": "https://arxiv.org/abs/1204.0899",
+          "label": "Research publication · arXiv 1204.0899",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-1204-0899",
+          "locator": "/fullAxesKm/0"
+        }
       }
     ]
   },

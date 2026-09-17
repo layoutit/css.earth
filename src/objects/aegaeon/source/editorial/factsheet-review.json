@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "aegaeon",
+  "checked": "2026-09-16",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+      "columns": [
+        "ID",
+        "Planet",
+        "Satellite",
+        "Code",
+        "Ephemeris",
+        "Frame",
+        "Epoch (TDB)",
+        "a (km)",
+        "e",
+        "&omega; (deg)",
+        "M (deg)",
+        "i (deg)",
+        "node (deg)",
+        "P (days)",
+        "P apsis (yr)",
+        "P node (yr)",
+        "R.A. (deg)",
+        "Dec. (deg)",
+        "Tilt (deg)",
+        "Ref."
+      ],
+      "row": [
+        "141",
+        "Saturn",
+        "Aegaeon",
+        "653",
+        "SAT415",
+        "Laplace",
+        "2000-01-01.5",
+        "167500.",
+        "0.000",
+        "0.0",
+        "4.4",
+        "0.0",
+        "0.0",
+        "0.808115",
+        "0.000",
+        "0.000",
+        "40.6",
+        "83.5",
+        "0.0",
+        "17"
+      ]
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "columns": [
+        "IAU number",
+        "IAU name",
+        "provisional designation",
+        "year discovered",
+        "discoverer(s)/spacecraft mission",
+        "references"
+      ],
+      "row": [
+        "LIII",
+        "Aegaeon",
+        "S/2008 S1",
+        "2008",
+        "Cassini Imaging Science Team",
+        "IAUC 9023"
+      ]
+    }
+  ]
+}

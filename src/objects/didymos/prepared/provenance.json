@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a3e5aaa66cd6368d73acd0fc19fd63f4abfa7ae150a2bac643fbf542f26c5daa"
+    "sha256": "ddea30a7ec6d0f140486604ba67aacd4572069381fb159235842245f2456c2d6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "bb5dcd9ab3d371574a063727e19ad835ce8442adef93bb5b0282ae5a6b91d072"
+    "bindingsSha256": "0d76e3c159a2146cecd3edd2bf51078110e99eee408b83b0b1a500de1e8a82a8"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4c0c1679fc81fcd64f12112b6d8ec92868179c67e51065068653a0680d2a2618",
+      "sha256": "e2c97bc1a5796105ebd2e3792a1f88a54e422c518c17e21667d6fe861863f86f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -265,8 +265,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -287,7 +286,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
+      "sha256": "9779b23a72c70831c700befbc9d163e49e45618e19423452a7c7b82ccb42f2d1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -296,24 +295,30 @@
         "panel": {
           "facts": [
             {
-              "id": "radius",
-              "label": "Reference radius",
-              "value": "365 m"
-            },
-            {
-              "id": "distance-from-sun",
-              "label": "Solar semimajor axis",
-              "value": "1.643 AU"
-            },
-            {
               "id": "orbital-period",
               "label": "Orbital period",
-              "value": "2.11 years"
+              "value": "2.11 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.per (d) / 365.25"
+              }
             },
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "2.26 hours"
+              "value": "2.26 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=65803",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-16",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "phys_par.rot_per (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -496,7 +501,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "9b08a7c1432b04421a7146cf83df73007d0a812d8d12cbb5dba8346d88152414",
+      "sha256": "5dfc2b92385511e5c1373f500b29cfec71eb313d70b0ba99c28ce5b3cf2ab36b",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -507,7 +512,6 @@
           "metadata": null
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "didymos-features.json",
         "publicBase": "/scenes/didymos/",
         "target": {
@@ -842,8 +846,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3cbc598be550188bfc0cc2c4ba3bbdfa239293b414f9383fbe950323956daf50",
-      "bytes": 11426,
+      "sha256": "9779b23a72c70831c700befbc9d163e49e45618e19423452a7c7b82ccb42f2d1",
+      "bytes": 11887,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -919,8 +923,8 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "05b03ddd8348fb0c98249dd46fa42334fbdb33c6822cb8323f1cbd37d5c08bd3",
-      "bytes": 154,
+      "sha256": "0094e844aa309c843d3ff4b62f4c4efddd1f27c9a3ddbc472da86f5518ec254a",
+      "bytes": 186,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -991,8 +995,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
-          "bytes": 266414,
-          "sha256": "8e9557aa0ad081585ab38030268ddffa34ccaec7088d55a5f506c8f08bd5a7c6",
+          "bytes": 318892,
+          "sha256": "68869d96118df1e0fb9348eed0fd11945f01ec4030808877befa9ee9bcd281da",
           "verification": "bytes-verified"
         }
       ],
@@ -1043,8 +1047,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
-          "bytes": 220476,
-          "sha256": "cb356d725517464cba58633a62e9937d879bb38be31aca73ccc5430b70d9fdd6",
+          "bytes": 239354,
+          "sha256": "78594cf9f239155a50735b31df85aa2725e4fe333dafb49a13c224a0e412ae47",
           "verification": "bytes-verified"
         }
       ],
@@ -1087,8 +1091,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-shape-surface@2x.webp",
-          "bytes": 57982,
-          "sha256": "7ca6f6770b6039981566eddeab676bdd685b37206397a408906b2dd5f376ac0c",
+          "bytes": 77828,
+          "sha256": "9ba8ad2028f276d46aecf4aebc6ab50cc111c00c612996b78e92eaf17b519617",
           "verification": "bytes-verified"
         }
       ],
@@ -1135,8 +1139,8 @@
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
-          "bytes": 298822,
-          "sha256": "939082591625fa4a9fae9c45559da26f188d0b3fa7774edf7f82e8016d590885",
+          "bytes": 286432,
+          "sha256": "ef3623ad47c1c57aff5d53cc44b6569eff7c9bde898966907b26d4f35e910f86",
           "verification": "bytes-verified"
         }
       ],
@@ -1168,8 +1172,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5876,
-          "sha256": "512b8743b5d307a67e9aafd2c20c300d39353470b4cb2bcf7f507441ddd2140e",
+          "bytes": 6360,
+          "sha256": "c6adaa64e493232b51934060e3cc1c93fd1d016d64e48f1b860d6d77c8ee5e02",
           "verification": "bytes-verified"
         }
       ],
@@ -1190,7 +1194,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1318,11 +1321,11 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "b6c953728cb676d56e90d764efede2394bfc48d3cf69892981379293f25086fb",
+    "materialSha256": "a5f07ad1bd1c70959b3eac3534aec97b18d2c62b9dd49287d6e044f6418f4ab8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "bb5dcd9ab3d371574a063727e19ad835ce8442adef93bb5b0282ae5a6b91d072"
+      "bindingsSha256": "0d76e3c159a2146cecd3edd2bf51078110e99eee408b83b0b1a500de1e8a82a8"
     }
   }
 }

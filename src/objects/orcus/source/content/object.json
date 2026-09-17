@@ -6,31 +6,32 @@
   "panel": {
     "facts": [
       {
-        "id": "shape",
-        "label": "Shape evidence",
-        "value": "Published size model; shape unresolved"
-      },
-      {
         "id": "dimensions",
         "label": "Display model extents",
-        "value": "910 × 910 × 910 km"
-      },
-      {
-        "id": "rotation",
-        "label": "Rotation",
-        "value": "Possibly synchronized with Vanth’s roughly 9.54-day orbit; no qualified sidereal spin is installed."
-      },
-      {
-        "id": "class",
-        "label": "Population",
-        "value": "Resonant trans-Neptunian object (plutino)"
+        "value": "910 × 910 × 910 km",
+        "source": {
+          "url": "https://arxiv.org/abs/1801.07221",
+          "label": "Research publication · arXiv 1801.07221",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-1801-07221",
+          "locator": "/fullAxesKm/0"
+        }
       }
     ],
     "moreFacts": [
       {
         "id": "uncertainty",
         "label": "Shape interpretation",
-        "value": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes."
+        "value": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes.",
+        "source": {
+          "url": "https://arxiv.org/abs/1801.07221",
+          "label": "Research publication · arXiv 1801.07221",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-1801-07221",
+          "locator": "/fullAxesKm/0; /diameterUncertaintyKm/plus; /diameterUncertaintyKm/minus"
+        }
       }
     ]
   },

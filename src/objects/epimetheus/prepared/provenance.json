@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a330ccd3c6325d5eb7caa27034f6a9307831c6de82f9724d0dd884c5e6b86978"
+    "sha256": "d8bdded721c1cc12dfc5dcf76b6e37671f89b27f252bed47ef038e30b2fbe7bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3b65809afcb833b229c74b9e641c47e2b19ef92886372fc7d061dc0b450b57e5",
+      "sha256": "fdc19e47b38dd844d2ab5e803df0390fb5bf0b965e915adfe0fbb694728c47c5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -453,8 +453,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 720,
@@ -473,7 +472,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c9702ee9f7442328d01da5a7eebad33068fddc79f25bb5373e4dd55917725073",
+      "sha256": "49280c349748cf7bedc1e1694831e80ada4fd943f7e9ba390a614c7b8b562843",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -510,22 +509,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "About 16.7 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
+              "value": "About 16.7 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 151,400 km"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "Richard Walker · 1966; identified separately in 1978"
+              "value": "About 151,400 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             }
           ],
           "moreFacts": [
@@ -2038,8 +2043,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c9702ee9f7442328d01da5a7eebad33068fddc79f25bb5373e4dd55917725073",
-      "bytes": 5744,
+      "sha256": "49280c349748cf7bedc1e1694831e80ada4fd943f7e9ba390a614c7b8b562843",
+      "bytes": 6179,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2084,8 +2089,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-elevation-surface@2x.webp",
-          "bytes": 580750,
-          "sha256": "dd83b5b242be43bf85e454fb57329660dfdf90a260478e7a152ba561aa4a6947",
+          "bytes": 587232,
+          "sha256": "a701be776a4b084d43da0acaa6eea502448e7e078865467a55d9973b0e417967",
           "verification": "bytes-verified"
         }
       ],
@@ -2142,8 +2147,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
-          "bytes": 743552,
-          "sha256": "40f9cff45c9601cc15fac523d74547eeaf0d9f3dc86b4a836856d92c46a5b37a",
+          "bytes": 730526,
+          "sha256": "0f8eb7812b26142c5c0601f1da08131fad2b657bd3ff1a7722f27489ae73f9d1",
           "verification": "bytes-verified"
         }
       ],
@@ -2198,8 +2203,8 @@
         },
         {
           "url": "/scenes/epimetheus/epimetheus-filter-color-surface@2x.webp",
-          "bytes": 462866,
-          "sha256": "fbfaa1e2b61c917cf8655edac2e0117b7aff4958a96a3f10dcbc6e447d584338",
+          "bytes": 449438,
+          "sha256": "6f8bcc16b86cf8dbeb224f2c906af06751f62f081d664303cbf67f83261797ce",
           "verification": "bytes-verified"
         }
       ],
@@ -2231,8 +2236,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7481,
-          "sha256": "eb48fca7e8c08cfd7f4783aa5570762ba95e76ad9163b83dd1f2c9c0a794f4b4",
+          "bytes": 7822,
+          "sha256": "38d4d37a9ad5d056122dfff4ed59067ed20bebf6b122ce4861ed2c1c1fc13dec",
           "verification": "bytes-verified"
         }
       ],
@@ -2320,7 +2325,7 @@
   },
   "lastPreparation": {
     "objectId": "epimetheus",
-    "materialSha256": "cde64e13e30ba24e925be41b38f0d63f5928cc80c8b7eb25b04cdcc890bdcd6b",
+    "materialSha256": "ec18454e355b5e07597c09c9f9dec8c29949094c222f122bf286df74b90a8b21",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -96,7 +96,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     if (sha256(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
   }
   const objects: SourceUsageObject[] = [];
-  const factsheets = { facts: 0, cited: 0, uncited: [] as { objectId: string; factId: string }[] };
+  const factsheets = { facts: 0 };
   for (const object of SCENE_OBJECTS) {
     const base = `src/objects/${object.id}`;
     const descriptor = explorationRecord(await json(`${base}/object.json`));
@@ -119,10 +119,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     const published = explorationRecord(await json(`${base}/prepared/content.json`));
     if (published.objectId !== object.id || JSON.stringify(parseFactsheet(published)) !== JSON.stringify(panel)) throw new Error(`Stale factsheet for ${object.id}; run pnpm prepare:factsheets -- ${object.id}.`);
     metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
-    for (const fact of [...panel.facts, ...panel.moreFacts]) {
-      factsheets.facts++;
-      if (fact.source) factsheets.cited++; else factsheets.uncited.push({ objectId: object.id, factId: fact.id });
-    }
+    factsheets.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
     const page = explorationRecord(await json(`${base}/prepared/page.json`));
     if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id || page.sceneSha256 !== explorationRecord(descriptor.prepared).sha256) throw new Error(`Stale prepared controls for ${object.id}.`);
@@ -173,5 +170,5 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const { prepared, factsheets } = await prepareMachines();
   console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.machines.length} machines and ${prepared.graph.datasets.length} dataset destinations.`);
-  console.log(`Factsheets: ${factsheets.cited}/${factsheets.facts} facts have individual citations; ${factsheets.uncited.length} do not.`);
+  console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "928f1860442715e0b5f4c129bc5c0a4690148bfafcd976bba23385539b2ecaa1"
+    "sha256": "79f8d37ddf1a9c597160878eb2940e9fd350ae4bac13e08d71359d76aa5029e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a7016045408c593b7ea5c773f5f03e70767769509014fb95c5abb7e1d96fc1d8",
+      "sha256": "6f60a283f54fcf4e7b4f21abcfc1e6eba80ca89a80d63fb7f3d1194f88f874e2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -134,7 +133,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6688084f9eca52a4b6278c5e5d9cf2859623745a1a35fe25e0044b904c93548c",
+      "sha256": "71f56a70b95b957890d586dd81973fce960b13201ebb3fe97d76a7ffdf74d6e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,11 +141,6 @@
         "displayName": "Tsuchinshan–ATLAS",
         "panel": {
           "facts": [
-            {
-              "id": "diameter",
-              "label": "Catalog diameter",
-              "value": "≈12 km"
-            },
             {
               "id": "perihelion",
               "label": "Closest to Sun",
@@ -280,8 +274,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6688084f9eca52a4b6278c5e5d9cf2859623745a1a35fe25e0044b904c93548c",
-      "bytes": 3518,
+      "sha256": "71f56a70b95b957890d586dd81973fce960b13201ebb3fe97d76a7ffdf74d6e7",
+      "bytes": 3410,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -319,8 +313,8 @@
         },
         {
           "url": "/scenes/comet-c2023-a3/comet-c2023-a3-model-surface@2x.webp",
-          "bytes": 41914,
-          "sha256": "614483d0fab326895f84aaa034c82556d24e5a82c80677fde6cac401dd331d8b",
+          "bytes": 58028,
+          "sha256": "3e0ce21b57ab33db71446d034b2d2714390e1993594574a2ec108639dbbddda5",
           "verification": "bytes-verified"
         }
       ],
@@ -352,8 +346,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9265,
-          "sha256": "52fa85b1290b8f9f5f514353a1144266882cef578c5eebcf7dc4fffdef774164",
+          "bytes": 9201,
+          "sha256": "e47db4e66a696a45e7d9259c370be9ccc68490bfc95c65f836ec709333be31fa",
           "verification": "bytes-verified"
         }
       ],
@@ -366,7 +360,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c2023-a3",
-    "materialSha256": "e38520585e36d24a44cc13fce440f064b9888e6777e3c6459d65f36c4d6d2a11",
+    "materialSha256": "d63a025139257e81123fded7fd7a90529aee403445438b8d471c0f31e827bdb9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

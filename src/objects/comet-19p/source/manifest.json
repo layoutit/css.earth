@@ -311,8 +311,8 @@
     {
       "id": "comet-19p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1062,
-      "expectedSha256": "7ac6fe2ffaad5b11157eed3232f451c7f9b19bc0110851d507bd3c2234e20de1",
+      "expectedBytes": 1030,
+      "expectedSha256": "1be3a0174b6625ccf6c7ee618873bf8a1a437faee931da5f5365f447a24a73cc",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -329,8 +329,8 @@
     {
       "id": "comet-19p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "7c3d92c8f600faa16a501fab68162fb473f92ed528199e427825ef1d0bbf4059",
+      "expectedBytes": 188,
+      "expectedSha256": "9c4601492154e811207a667619c3e455249e62e6a9bf0db49c79a58db7d93918",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -439,8 +439,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7383,
-      "expectedSha256": "6ee36b9bf343b9a3f8708dea662a5c408f05436f8008b492dc2334ac0b256edb",
+      "expectedBytes": 7663,
+      "expectedSha256": "5e4352e5083cb07169646e8472ab20d0ff6431a62f2b85e89f135b74dc752ae6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -463,8 +463,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9636,
-      "expectedSha256": "9a9bb61fdadf33af8d3819cce78750137f494f88c7f327865a39dcbee2f67817"
+      "expectedBytes": 9596,
+      "expectedSha256": "59d49ae8f7cdc08076410b839d7f9c1385e0ec73ca92a0b1208bcae5b96fffa8"
     },
     {
       "path": "presentation/minimap.json",
@@ -525,6 +525,21 @@
       "path": "reference/usgsdem.lbl",
       "expectedBytes": 10640,
       "expectedSha256": "ca91ad8342a3de5b90139a4c8896cb0706ceae3e36faffd5f9b3a1ff2b0d81fd"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3953,
+      "expectedSha256": "b8ff56a5e4769be9b1f9ae130c23e3dbf8e72a0ba03ef24e4819e5559098f2fb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for 19P: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

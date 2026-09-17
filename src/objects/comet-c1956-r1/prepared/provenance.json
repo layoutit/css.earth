@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e3325b18e0b38c1887c7a0b79b394865c48584e82ee3dfc0bdaa5d82a020ffd0"
+    "sha256": "8f96118a54de202c89a4686443d4ae7e7fb6f0b385ffcec7fcda6cc05adeb491"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "35c6c73f4bff66c41e6ea216a1d3a9e89c9a76ead0b1ac2abed5ba65c9786e83",
+      "sha256": "bd7938eab139993c3ebc48b02f813a09b4836c3772e0388af5a3ed815a36c0ca",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -134,7 +133,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f9af1eced8a89d58d491e4b0f6fb8845a85fe9398cc0554435c6dd47e11658d7",
+      "sha256": "82992c48e2f99c178427fa5031177af057d48db16d6c3814b71b9664cf0273e8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,11 +141,6 @@
         "displayName": "Arend–Roland",
         "panel": {
           "facts": [
-            {
-              "id": "diameter",
-              "label": "Catalog diameter",
-              "value": "≈3.2 km"
-            },
             {
               "id": "perihelion",
               "label": "Closest to Sun",
@@ -280,8 +274,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f9af1eced8a89d58d491e4b0f6fb8845a85fe9398cc0554435c6dd47e11658d7",
-      "bytes": 3440,
+      "sha256": "82992c48e2f99c178427fa5031177af057d48db16d6c3814b71b9664cf0273e8",
+      "bytes": 3331,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -319,8 +313,8 @@
         },
         {
           "url": "/scenes/comet-c1956-r1/comet-c1956-r1-model-surface@2x.webp",
-          "bytes": 41926,
-          "sha256": "67bca0944855f2ae06b78ac110014d7b342f02808395d2348368bdc0649522c5",
+          "bytes": 57030,
+          "sha256": "d94330467795838ccb9937f6e8404423a6c5dbdd39e77e46cb11fbc5ec97bf28",
           "verification": "bytes-verified"
         }
       ],
@@ -352,8 +346,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7668,
-          "sha256": "d8d9232e10d43f88b55ba25b5f66aa4ebe24a7ace53e78c06558834f8e1230e1",
+          "bytes": 7603,
+          "sha256": "718c8709f46afa24407918457a7d8bc6576df07d5ae86d2ea2fc043ec336262f",
           "verification": "bytes-verified"
         }
       ],
@@ -366,7 +360,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1956-r1",
-    "materialSha256": "1d823649820eb61539a94747a6cdba697482096498971b2b53742eadd013f8f3",
+    "materialSha256": "6330ba9af3e028791a922d21d311adf3f99a84ac1d7a10cb3a8f944783917646",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

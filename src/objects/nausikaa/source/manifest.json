@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10310,
-      "expectedSha256": "bf070885715b3dbe2ae86204e9af9688b325003ee0334e19fdab1d697db8be95",
+      "expectedBytes": 10518,
+      "expectedSha256": "a540e4ba4e8abd37c925332455dc0f6720593f672f814978c043a77c88eec810",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -118,8 +118,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2886,
-      "expectedSha256": "1d1248e2148d608520e9416df08b271cb5302231a8859b917e59af2b2ad6e6f6"
+      "expectedBytes": 2867,
+      "expectedSha256": "455e6a89f8a77856f749869fc4178c1b548076d6d0919c0ec30256854cc2502a"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -164,6 +164,21 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1811,
       "expectedSha256": "1781679e6892ed2b7ca4cfc92c8158ba55c9b197b3992e73f6f3f879306c180a"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4688,
+      "expectedSha256": "b1cc3a341c179c33b1b755f629f1feab6bc97be79686351051eefc0edf9aac48",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Nausikaa: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

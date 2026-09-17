@@ -8,17 +8,28 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "46 solar radii"
+        "value": "46 solar radii",
+        "source": {
+          "url": "https://arxiv.org/abs/2407.09641",
+          "label": "Evans et al. (2024) diameter at their adopted distance",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2407-09641",
+          "locator": "radiusKm; radiusSource"
+        }
       },
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "137 parsecs"
-      },
-      {
-        "id": "rotation-axis",
-        "label": "Rotation axis",
-        "value": "not measured"
+        "value": "137 parsecs",
+        "source": {
+          "url": "https://arxiv.org/abs/2407.09641",
+          "label": "Evans et al. (2024), adopted distance",
+          "checked": "2026-09-16",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2407-09641",
+          "locator": "distanceParsecs; distanceSource"
+        }
       }
     ],
     "moreFacts": []

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "668df3442d682545680faccf10f0481ed631b3cd7f6cc997ac57f1131ccfdbb1"
+    "sha256": "b65ed426402901691f0809f42ec801b6ef00713bc08c8c8f00763bdeb201c02e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1904314e60802b457a5ba95635c609fe5a50a36b7e453e245028336b397375e6",
+      "sha256": "ba0ff05e7175840944ebdb00aaecd840b6b938a55090cf2fb0cb121d059a51d6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "fd9a05695fef72dae674b278199b5dbea459eb1079683198e6b66ca191d65988",
+      "sha256": "7bafe105b2f18972b429744a81952a89a6df3e0ea25ddf11ad9302ccb67c601d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "19.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "10.31304 hours"
+              "value": "10.31304 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1849",
+                "label": "DAMIT model 1849",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "fd9a05695fef72dae674b278199b5dbea459eb1079683198e6b66ca191d65988",
-      "bytes": 9778,
+      "sha256": "7bafe105b2f18972b429744a81952a89a6df3e0ea25ddf11ad9302ccb67c601d",
+      "bytes": 9984,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/ganymed/ganymed-elevation-surface@2x.webp",
-          "bytes": 257922,
-          "sha256": "aab6eecfe8f72c41cff47c9179e2c8e5c9fec87d354e67bc4237f0334ff58924",
+          "bytes": 319508,
+          "sha256": "a4174f00f8b63a2d939755649395cd1016cbd071ea3d69986b7d65413c267c3f",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/ganymed/ganymed-shape-surface@2x.webp",
-          "bytes": 56212,
-          "sha256": "49048ba37c396015851a924d7cdf618e185f5d24b62e1d3f76977fb9f9d8ca45",
+          "bytes": 77416,
+          "sha256": "0830b7b9597013c0aee977429e855723b2a87b1a6f347ebf8d04067d7737dc2b",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7481,
-          "sha256": "24e88b51673d37b2d161d37e51afe0dae02a82102ccdacde0f62115bb126af1a",
+          "bytes": 7640,
+          "sha256": "2b7e1a03bdaf738c88ae3126a5bc5cb743e3fab395a5dc8755941588b19af799",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "ganymed",
-    "materialSha256": "9e781571e250b537244bf60301f10e0ac85c36507554a1c67c705bfaa40f2916",
+    "materialSha256": "74826719aa54d98b28a2043767ef8c8b6fae3caf9be8770a50a387bf5fd0b239",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

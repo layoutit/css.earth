@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "97cfb9db31dbb4e0a8f83699757e80757d64822d6c77bb93e1d53209cbb2647f"
+    "sha256": "db7d7a3fab2406ecc5080ab282414d38d860d8f8f21d792b09671dd7c2c45041"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "9877eb5a9a214491892d8e9ad88994decf9ff894489f8fb824a592b7e97f4ae0"
+    "bindingsSha256": "6bfedff4f1a7881d5f50f4af1cfd6fb1ed5c17ed372557d9461e9159d3b3d419"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "71a914af6a1cc09c911c77af0044c66a85de9948327dea48922be4d3ca38045b",
+      "sha256": "67a7d748e82f909a27fb1ac689407f84fe68ef8892f3cbb44dda3abce06b92a3",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ce-tauri/",
@@ -111,6 +111,7 @@
                   "maximumGain": 1
                 },
                 "display": {
+                  "basis": "authored",
                   "percentiles": [
                     1,
                     99.5
@@ -127,8 +128,7 @@
                 "consumer": "photograph-pionier-2016-11"
               },
               "offLimb": {
-                "rotationDegrees": 0,
-                "mirror": true
+                "rotationDegrees": 0
               }
             }
           },
@@ -201,6 +201,7 @@
                   "maximumGain": 1
                 },
                 "display": {
+                  "basis": "authored",
                   "percentiles": [
                     1,
                     99.5
@@ -217,8 +218,7 @@
                 "consumer": "photograph-pionier-2016-12"
               },
               "offLimb": {
-                "rotationDegrees": 0,
-                "mirror": true
+                "rotationDegrees": 0
               }
             }
           }
@@ -255,7 +255,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
+      "sha256": "a5d71d9cae1d813d1edbd79f102e874d2fa261b677b2ec1535394fc53b2b5cee",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -266,22 +266,41 @@
             {
               "id": "radius",
               "label": "Radius",
-              "value": "720 solar radii"
+              "value": "720 solar radii",
+              "source": {
+                "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
+                "label": "Montargès et al. (2018) diameter at the Gaia distance",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-ce-tauri-cds-dec-avg",
+                "locator": "radiusKm; radiusSource"
+              }
             },
             {
               "id": "distance",
               "label": "Distance from the Sun",
-              "value": "658 parsecs"
+              "value": "658 parsecs",
+              "source": {
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau",
+                "label": "SIMBAD: Gaia DR3 parallax",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "simbad-ce-tau",
+                "locator": "distanceParsecs; distanceSource"
+              }
             },
             {
               "id": "angular-diameter",
               "label": "Angular diameter (1.62 µm)",
-              "value": "10.18 milliarcseconds"
-            },
-            {
-              "id": "rotation-axis",
-              "label": "Rotation axis",
-              "value": "not measured"
+              "value": "10.18 milliarcseconds",
+              "source": {
+                "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
+                "label": "Montargès et al. (2018), VLTI/PIONIER December 2016 limb-darkened diameter",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "source-ce-tauri-cds-dec-avg",
+                "locator": "angularDiameterMas; angularDiameterSource"
+              }
             }
           ],
           "moreFacts": []
@@ -620,8 +639,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5ecbd6910d86e4b6559256488eca5a6670fb876430ef45b337888e6e32dedc7b",
-      "bytes": 6510,
+      "sha256": "a5d71d9cae1d813d1edbd79f102e874d2fa261b677b2ec1535394fc53b2b5cee",
+      "bytes": 7522,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -678,6 +697,7 @@
             "maximumGain": 1
           },
           "display": {
+            "basis": "authored",
             "percentiles": [
               1,
               99.5
@@ -701,20 +721,20 @@
       "outputs": [
         {
           "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-11.webp",
-          "bytes": 23800,
-          "sha256": "a0e868ce413eb21174119b80cb10c26543b0a9b6fae807b4fd0e2529a7f27a8d",
+          "bytes": 24022,
+          "sha256": "896069949625c786532f8fe568b95c1b0fc2f7ee9e91a96c088692f91aaf307b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-11@2x.webp",
-          "bytes": 50534,
-          "sha256": "3dcafd09349640f10f400117def3090a08e4f398b08f527f5657be689e0e2eb4",
+          "bytes": 50792,
+          "sha256": "9f0f37fdb77f19f972020a00f2a72449351489d641f53fc83b5559c030f73ca4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-lens-pionier-2016-11.webp",
-          "bytes": 592,
-          "sha256": "842aacf5ef2b6ed7c12fda933ebdd1151dc42e908fdd9c333184770c7e053224",
+          "bytes": 384,
+          "sha256": "ee656e8275e054467e227a44ec063003184ce2070f7b8e6aee8f4a9137c873a5",
           "verification": "bytes-verified"
         },
         {
@@ -731,8 +751,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-11.webp",
-          "bytes": 25132,
-          "sha256": "2fe6ad08733d3da40d31581ce4332b1148733c6f1a093f8d39a1bf6406d120c7",
+          "bytes": 25120,
+          "sha256": "491fe96ffb0c5f736daffcf18ba8bcaf880e045b21ad341b1dc6ca8c7393b9fd",
           "verification": "bytes-verified"
         },
         {
@@ -743,8 +763,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-11@2x.webp",
-          "bytes": 53888,
-          "sha256": "702d4462e32dfb724ffe8e5db2b00c62089724a0cfaa64233bed65bccc6a67cc",
+          "bytes": 53708,
+          "sha256": "9d7993bb9b54995a512bf371208ae16e8c4da056343b8a18c2f478d0a501a4f4",
           "verification": "bytes-verified"
         },
         {
@@ -812,6 +832,7 @@
             "maximumGain": 1
           },
           "display": {
+            "basis": "authored",
             "percentiles": [
               1,
               99.5
@@ -835,20 +856,20 @@
       "outputs": [
         {
           "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-12.webp",
-          "bytes": 24084,
-          "sha256": "5de8cffc9dfd1c2fb06b08793ec7dee9a58fcde537a1b3617657734bfdd0573c",
+          "bytes": 24204,
+          "sha256": "b6852ad196739cc340d32353e853106a6f6420b283973f1ad8fd27932d2c4afb",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-12@2x.webp",
-          "bytes": 51966,
-          "sha256": "cf7fcdf2c9ff307fd0c91f798030966075a5dbc3847dab3255f742fcec913081",
+          "bytes": 52414,
+          "sha256": "83df69dae80a98212fc06bce77e9295e352c6565a4c61c9b1c4ac7e7061aa32c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-lens-pionier-2016-12.webp",
-          "bytes": 560,
-          "sha256": "b6a57f0c9b39cb97458f7164ea2422be58610a7b9d92b670dec4fe8449d7ab8b",
+          "bytes": 432,
+          "sha256": "91f790a71bd852f6e968203f2d1f2066e74dbcf002f892a473986589c84ebbeb",
           "verification": "bytes-verified"
         },
         {
@@ -865,8 +886,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-12.webp",
-          "bytes": 27760,
-          "sha256": "2caa40a016812da6f7915c1780dd6db0f419f2ee134d538cab45d98bf7942989",
+          "bytes": 27682,
+          "sha256": "a6b689ac611351e902607d04afc847d4dd54957862bdbcf4ecf4e944adb6becf",
           "verification": "bytes-verified"
         },
         {
@@ -877,8 +898,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-context-pionier-2016-12@2x.webp",
-          "bytes": 59786,
-          "sha256": "61949f3c947e2e120c6eec5314f68ea088bfa17ca2a3cadebd7bcc269c32c308",
+          "bytes": 59204,
+          "sha256": "09f21faf433cb0ab831ce9e198e4a52f89cc7c159902b7eb541449a2503eaeb7",
           "verification": "bytes-verified"
         },
         {
@@ -916,8 +937,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5038,
-          "sha256": "13cb4e0019d60447e499b529c157201fca8a9fd457e8170b913df919cdcd2ac6",
+          "bytes": 5821,
+          "sha256": "ef94502e000909b4b873583e878116b36f6c2ef088c3e11e43619091add37177",
           "verification": "bytes-verified"
         }
       ],
@@ -942,8 +963,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/pionier-2016-11.webp",
-          "bytes": 9468,
-          "sha256": "29c6a7920a577eb0b7514933cfb8fbbeeb8e7aab70f44aeca63c61553813834c",
+          "bytes": 9608,
+          "sha256": "01512668213a555c9aec69d4fc294df039070be30aae14aeb97d0d205acb268b",
           "verification": "bytes-verified"
         }
       ]
@@ -967,8 +988,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/pionier-2016-12.webp",
-          "bytes": 9804,
-          "sha256": "447d690472909e0a4f3d471025f2511b0385882e6c89158924188af62afc28af",
+          "bytes": 9930,
+          "sha256": "3482a2229805b63048cd1b4cabc481764265bf690e6be3274a0f0b83e358f738",
           "verification": "bytes-verified"
         }
       ]
@@ -980,11 +1001,11 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "1dd55363869a5c0e49fa3985493f32153fb17b1f90187ed43c31066717cdff66",
+    "materialSha256": "c9f36a3da5ce592303c4390cf74df456c2ac7127a79b8709934fc6dc17f2d9ae",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "9877eb5a9a214491892d8e9ad88994decf9ff894489f8fb824a592b7e97f4ae0"
+      "bindingsSha256": "6bfedff4f1a7881d5f50f4af1cfd6fb1ed5c17ed372557d9461e9159d3b3d419"
     }
   }
 }

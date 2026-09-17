@@ -1,11 +1,13 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { preparePhysicalWorldFrame, transform, multiply, transpose, type Matrix3 } from './world-navigation.js';
-import { chain } from './world-navigation-sources.js';
+import { chain, POLYCSS_SURFACE_PLACEMENT } from './world-navigation-sources.js';
 
 const identity: Matrix3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+/** PolyCSS's own surface placement: body +x along CSS +y, body +y along CSS +x. */
+const swap: Matrix3 = [0, 1, 0, 1, 0, 0, 0, 0, 1];
 const physical = { referenceFrame: 'test-inertial', epochJdTt: 2461286.5, originM: [100, 200, -300] as const,
-  bodyToReference: identity, bodyToPresentation: identity, orbitUpReference: [0, 0, 1] as const,
+  bodyToReference: identity, bodyToPresentation: swap, orbitUpReference: [0, 0, 1] as const,
   renderedRadiusUnits: 253, physicalRadiusM: 6378137 };
 
 describe('authored physical frame preparation', () => {
@@ -16,7 +18,7 @@ describe('authored physical frame preparation', () => {
     assert.notEqual(frame.metersPerUnit, 6378137 / 230);
   });
   it('composes the authored body and inertial axes instead of assuming identity or ecliptic presentation', () => {
-    const bodyToPresentation = chain('rotateZ(60deg)', 'rotateY(-23.4deg)', 'rotateZ(-128deg)');
+    const bodyToPresentation = multiply(chain('rotateZ(60deg)', 'rotateY(-23.4deg)', 'rotateZ(-128deg)'), swap);
     const bodyToReference = chain('rotateX(17deg)', 'rotateZ(31deg)');
     const frame = preparePhysicalWorldFrame({ ...physical, bodyToPresentation, bodyToReference });
     for (const axis of [[1, 0, 0], [0, 1, 0], [0, 0, 1]] as const) {
@@ -25,8 +27,9 @@ describe('authored physical frame preparation', () => {
     }
     assert.notDeepEqual(frame.presentationToReference, identity);
   });
-  it('rejects reflected, scaled, translated and undefined frame inputs', () => {
-    assert.throws(() => preparePhysicalWorldFrame({ ...physical, bodyToPresentation: [0, 1, 0, 1, 0, 0, 0, 0, 1] }), /handedness/);
+  it('rejects proper, scaled, translated and undefined frame inputs: a body drawn in CSS 3D space is a reflection', () => {
+    assert.deepEqual([POLYCSS_SURFACE_PLACEMENT.prime, POLYCSS_SURFACE_PLACEMENT.east], [[0, 1, 0], [1, 0, 0]]);
+    assert.throws(() => preparePhysicalWorldFrame({ ...physical, bodyToPresentation: identity }), /handedness/);
     assert.throws(() => preparePhysicalWorldFrame({ ...physical, bodyToPresentation: [2, 0, 0, 0, 1, 0, 0, 0, 1] }), /orthonormal/);
     assert.throws(() => chain('translate3d(1px,0px,0px)'), /Unsupported/);
     assert.throws(() => preparePhysicalWorldFrame({ ...physical, renderedRadiusUnits: 0 }), /radii/);

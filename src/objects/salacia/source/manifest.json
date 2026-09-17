@@ -94,8 +94,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3528,
-      "expectedSha256": "dd356217d3890b8af97357089806be71abbf03fc5334e0ce6a36134ce88e18a4",
+      "expectedBytes": 3135,
+      "expectedSha256": "41ece38c3667912dccfc03687f7db3191dc908c2f8573996f78aa11ffa73b6f5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -123,8 +123,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2559,
-      "expectedSha256": "54d5c34e64b0d55a45da560d0e52bdaba1042c6d612a0db0f6db79ab344003dd"
+      "expectedBytes": 2540,
+      "expectedSha256": "182d6182d3cac1d5e0a2d949d8d2d9d5a875ad94a53f3b3dfe9be00de43238aa"
     },
     {
       "path": "presentation/minimap.json",
@@ -145,6 +145,21 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6646,
       "expectedSha256": "5cd83487c6ebb5740836d51c42a33cbc11eda8c7dab66d667ce73a9af1a2b270"
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 3076,
+      "expectedSha256": "eb56bfa172b7f1efa3a9e7a6ba118d01c59e6dbd2715e0a53e075e7fe3fe8c57",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Salacia: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

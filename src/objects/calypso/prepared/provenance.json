@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a000e9f32c81fe5674ebca081d3c527b46fc53d215d89a47cf34ad624977a5f1"
+    "sha256": "7c97f3b72d27f2f62b0323c6a38e72090e2ef9eb59a981e405f1651f5a14d2e4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "992b8f78e7320a4ed98e22abe7df3599d026682c874f17ef4e466bde493a277e",
+      "sha256": "c29786bdeb3a0639a36f697e5ca8d5fc7b2514afce23d3d0e9bf67f48a5ec421",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -365,8 +365,7 @@
               "indexBase": 0
             },
             "faceBudget": 2000,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "simplification": {
               "targetFaces": 600,
               "maximumErrorMeters": 400,
@@ -385,7 +384,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b5fb5b15d5d8e505760cb066f6aa0c6d929f0f490db47fee42c6a657fd948a7b",
+      "sha256": "93ca08a5862387733d97335a8e08f5635700a51edc82c014faec4f33f83112cb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -393,11 +392,6 @@
         "displayName": "Calypso",
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Mean radius",
-              "value": "10.7 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "System solar semimajor axis",
@@ -414,22 +408,41 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Saturn",
-              "value": "45.3 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
+              "value": "45.3 hours",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; P (days) × 24"
+              }
             },
             {
               "id": "distance-from-parent",
               "label": "Mean distance from Saturn",
-              "value": "About 295,000 km"
+              "value": "About 295,000 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/1; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Pascu, Seidelmann, Baum and Currie · 1980"
+              "value": "Pascu, Seidelmann, Baum and Currie · 1980",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/2; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": []
@@ -1521,8 +1534,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b5fb5b15d5d8e505760cb066f6aa0c6d929f0f490db47fee42c6a657fd948a7b",
-      "bytes": 5368,
+      "sha256": "93ca08a5862387733d97335a8e08f5635700a51edc82c014faec4f33f83112cb",
+      "bytes": 6232,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1566,8 +1579,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-elevation-surface@2x.webp",
-          "bytes": 395062,
-          "sha256": "f00ccd34e415eceb7610b18ed6bfbcc7f9afc92f602058b88ff5807a094b51da",
+          "bytes": 396014,
+          "sha256": "5ddd65800b34cf81dfce85d0c54e7fd4c679c7db81fd4a7824a1416259f0b3ab",
           "verification": "bytes-verified"
         }
       ],
@@ -1622,8 +1635,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-normal-surface@2x.webp",
-          "bytes": 316410,
-          "sha256": "9cbfb1c746bd470441213ffb9967b4403ba05c4512cb7763e7c1b351c049324a",
+          "bytes": 317458,
+          "sha256": "c34de3154ee0bb3187a68ff28b08d8759a7ebfac52f50a3e1ff6541efebbc790",
           "verification": "bytes-verified"
         }
       ],
@@ -1672,8 +1685,8 @@
         },
         {
           "url": "/scenes/calypso/calypso-false-color-surface@2x.webp",
-          "bytes": 326960,
-          "sha256": "5025a5bf7c861da01e100b6410e670e7649dea6695d54ebc56cdf31bd0fc666e",
+          "bytes": 327038,
+          "sha256": "ee636fbf086b9b6e11070ed8598f863c731f6c45241e8d0a329593b967aa46d8",
           "verification": "bytes-verified"
         }
       ],
@@ -1705,8 +1718,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6164,
-          "sha256": "65a0b2d03ca567f2c70a97dc84ad329072bca84ae188bcdd2488b47a8a71aece",
+          "bytes": 6843,
+          "sha256": "bccdab73dbd638c92545446bccb4368e099b4050bd57375f29d91a328104f841",
           "verification": "bytes-verified"
         }
       ],
@@ -1794,7 +1807,7 @@
   },
   "lastPreparation": {
     "objectId": "calypso",
-    "materialSha256": "ae1c7d2879fc5c200a5e9d6e2db1f587b3831bf0a6f73ad91fc181c19e2497e4",
+    "materialSha256": "658d5bfbc1a9fc6988f6afed1274ce8029c56ce11409713a94e444bea9fbf997",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

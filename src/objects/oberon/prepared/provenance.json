@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "181f99e3ed0abe7fc315b6dc167898e47fca0fd876169b879f598bfa55935d91"
+    "sha256": "1843255448cc7a0ee35a6e9a2fc3423cf3b53ad23e61da69139be5dd13e38b4d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "2d8c539516ab853352b179f75b70eed4258dd88160f2ec56c49fcbad06762bab"
+    "bindingsSha256": "10f534c719a800a20736aafe82630b8ce3e59c941166496d75ed3d6a8b979648"
   },
   "recipes": [
     {
@@ -129,7 +129,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "21d95851bc3b0cd901e8e42d39ff014c57ea84a1288f9d74fd1200e32f662bf6",
+      "sha256": "b0bc66dbb8ea9da730fd6897409400ae3880383366177fa7abba4a815211ba23",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,22 +166,28 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Uranus",
-              "value": "About 13.46 days"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "About 13.46 days (synchronous)"
-            },
-            {
-              "id": "distance-from-parent",
-              "label": "Mean distance from Uranus",
-              "value": "About 583,500 km"
+              "value": "About 13.46 days",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "William Herschel · 1787"
+              "value": "William Herschel · 1787",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -284,7 +290,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "63b7a0944a67a75b41c0fc5263e85332476217fed92ec85855b95d0308f93405",
+      "sha256": "045ad7252c3e74aaea4020772851feecc5f8ead24ef84e79c88b9ddf34b60b9e",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -295,7 +301,6 @@
           "metadata": "metadata_nomenclature_points_OBERON.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "oberon-features.json",
         "publicBase": "/scenes/oberon/",
         "target": {
@@ -424,8 +429,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "21d95851bc3b0cd901e8e42d39ff014c57ea84a1288f9d74fd1200e32f662bf6",
-      "bytes": 7512,
+      "sha256": "b0bc66dbb8ea9da730fd6897409400ae3880383366177fa7abba4a815211ba23",
+      "bytes": 7976,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -497,8 +502,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "a7f7b2f1ea4265e5926348deb7ab8bf1a5736d6b1feb76d42ad3e77c0a15e183",
-      "bytes": 153,
+      "sha256": "3d7ce0be38437922bd91628bf55e483deb9a44fa53f101504ab08e1d436a0526",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1032,8 +1037,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5691,
-          "sha256": "b09c709cdd17ae5f86323203dc3a0dbe56d05ad1e0712c2b3e2dc143f7fd9768",
+          "bytes": 6061,
+          "sha256": "eb1b425453b4c60cb4f63fd2a3eb65626437c69ebb86b97360c2f511688ec8e9",
           "verification": "bytes-verified"
         }
       ],
@@ -1054,7 +1059,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1107,11 +1111,11 @@
   },
   "lastPreparation": {
     "objectId": "oberon",
-    "materialSha256": "679aa138ce65dd06bdf16ca0e180f724b0e8c928d5e2ab3020e4b3d3fabef066",
+    "materialSha256": "8084771457edece6b25e9215ce285d4093dd9fb5998e8f429a5d9a4461d30711",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "2d8c539516ab853352b179f75b70eed4258dd88160f2ec56c49fcbad06762bab"
+      "bindingsSha256": "10f534c719a800a20736aafe82630b8ce3e59c941166496d75ed3d6a8b979648"
     }
   }
 }

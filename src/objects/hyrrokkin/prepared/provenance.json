@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43f2190ae68560ca0e95f7ec048e753654e361ab02e94445bae0f3a21b2187bf"
+    "sha256": "309a75cbcaf894118c218f337761e460a02d4d6b5fec833f509ba406200679ca"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b2460809711e5756c08adb7343afe9dd0acd86bd1d4a7903e001b458e6872ede",
+      "sha256": "cedd824b4446818d8f214fd4f7a41c15a9fa2de5b7483e03c91bc93c80919fce",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 95,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2dc9fcbf625219085fde6a60147c67b168512b504150adcb3e5e50c82a0d8074",
+      "sha256": "111b8a2842f483aff947e41ec03971656e3fcf9cf3c6704477da38c61080fd91",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,43 +111,33 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Diameter estimate",
-              "value": "8 (+2.25/−1.25) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.27:1 · uniform-reflectivity model"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             },
             {
               "id": "rotation",
               "label": "Observed rotation period",
-              "value": "12.76 ± 0.03 h"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2004"
+              "value": "12.76 ± 0.03 h",
+              "source": {
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+                "label": "Denk et al. (2018) · Irregular moons",
+                "checked": "2026-09-16",
+                "path": "source/survey/research.json",
+                "catalogueId": "denk-2018-irregular-moons",
+                "locator": "/rotation/hours"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +301,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2dc9fcbf625219085fde6a60147c67b168512b504150adcb3e5e50c82a0d8074",
-      "bytes": 3091,
+      "sha256": "111b8a2842f483aff947e41ec03971656e3fcf9cf3c6704477da38c61080fd91",
+      "bytes": 3130,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -356,8 +345,8 @@
         },
         {
           "url": "/scenes/hyrrokkin/hyrrokkin-model-surface@2x.webp",
-          "bytes": 56720,
-          "sha256": "3cb31bab0feff39b27c37d62463b3f415982ffdf860ad50afdfe4b82cf7e3f88",
+          "bytes": 62644,
+          "sha256": "90ddf16579eb7f43535f18c7dd35a9613c79ce0bb15e13d953ac95d1f1cb9ca5",
           "verification": "bytes-verified"
         }
       ],
@@ -394,8 +383,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4689,
-          "sha256": "cc3c4690861b9be60025038886de42b4194ef8342dc33904e27f870cb76fb91d",
+          "bytes": 4771,
+          "sha256": "ebdb82d61845fcb476daf08fe4613ee9e7f5db02080e4f0d803b720383c0e7be",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "hyrrokkin",
-    "materialSha256": "83cf2710bdbad6e9b315c52dbed99382d831c39f92a35ffe5fca16ceee6ed9e1",
+    "materialSha256": "af23c1859882aeda354c5262c6728c6e5898053912730be5d347f35026baed9d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

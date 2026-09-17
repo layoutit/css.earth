@@ -15,7 +15,7 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../..
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ["shape"];
+const LENS_IDS = ["color"];
 
 objectRuntimePackageTests(runtimeDefinition);
 
@@ -43,7 +43,7 @@ test("Eris is prepared by the generic raster lane with the source-radius sphere,
   assert.equal(assets.lighting.frameCount, 256);
   assert.deepEqual(Object.keys(assets.surfaces), LENS_IDS);
   assert.deepEqual(lenses.controls.map(({ id }) => id), LENS_IDS);
-  assert.equal(lenses.defaultLens, "shape");
+  assert.equal(lenses.defaultLens, "color");
   assert.deepEqual(controls.settings.controls.map(control => control.name), ["shadows"]);
   // The composite material is a separate silhouette-fitted root, never a plane inside the scene.
   assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("eris-material-composite")));

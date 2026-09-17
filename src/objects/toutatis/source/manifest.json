@@ -110,8 +110,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9199,
-      "expectedSha256": "524b89db516481169fa83af4a6204b6a6e5a9dbde2fdaa92c8c956098549607b",
+      "expectedBytes": 8724,
+      "expectedSha256": "3fb61a0c4129a033dd0612041dafab6ef559b4582c376a6528cb8e38ff5df39d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -134,8 +134,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3029,
-      "expectedSha256": "9fda270f0816598525d738139ad53a2c66984b89bc4d54e3bc88bf9f90a1ff3d"
+      "expectedBytes": 3010,
+      "expectedSha256": "dbd9e1e076ce0ef688a3275b75a52a687a68677e9efffd4bf5116d82b1d82698"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -169,6 +169,21 @@
       "expectedBytes": 5876,
       "expectedSha256": "280a10bae7683be9dd246ccc3bbf70bae3bbc0087c5d2ed9cfe11ab24a260951",
       "purpose": "Pinned JPL SBDB physical record retaining the NEOWISE geometric albedo value, uncertainty and reference for factsheet interpretation."
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 4980,
+      "expectedSha256": "718b10f70459e4f1c3149ad7c001440113992f7b67b956b4c1b99adf51f45fa8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Toutatis: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

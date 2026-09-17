@@ -16,6 +16,7 @@ import { loadSurfaceObservation, type SurfaceObservation } from '../surface-obse
 import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-terrain.mts';
 import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
+import { skyDisplayRaster } from '../../fits-sky.mts';
 import { offLimbPlate } from './off-limb-plate.mts';
 import { readObservation } from '../terrestrial-layers/solid-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';
@@ -31,6 +32,7 @@ import { observationRaster, parseObservationLens, loadNativeObservationPoleSampl
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
+import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
@@ -69,7 +71,7 @@ interface SurfaceObservationScience {
   shape: { path: string; format: string; grid: Record<string, unknown>; radiusKm: number; rows: number; columns: number; flatFaceErrorMeters: number };
   lens: Record<string, unknown> & { frames: readonly unknown[] };
   /** The frame's light outside the silhouette becomes the emission off-limb plate, rotated so image-up meets its screen direction at the default camera. */
-  offLimb?: { rotationDegrees: number; mirror: boolean };
+  offLimb?: { rotationDegrees: number };
 }
 /** `science.shape` is the reference sphere table and its sampling; `science.lens` is one surface-observation lens without its id. */
 function parseSurfaceObservationScience(value: Record<string, unknown>): SurfaceObservationScience {
@@ -85,24 +87,9 @@ function parseSurfaceObservationScience(value: Record<string, unknown>): Surface
   const sagitta = parsed.radiusKm * 1000 * (1 - Math.cos(Math.hypot(180 / parsed.rows, 360 / parsed.columns) / 2 * Math.PI / 180));
   if (!(parsed.flatFaceErrorMeters >= sagitta)) throw new TypeError(`A surface-observation shape must declare at least its flat-face error of ${sagitta.toExponential(3)} m.`);
   if (lens.id !== undefined || !Array.isArray(lens.frames)) throw new TypeError('A surface-observation lens takes its id from the surface and lists its frames.');
-  const offLimb = value.offLimb === undefined ? undefined : { rotationDegrees: requireFiniteNumber(requireRecord(value.offLimb, 'surface-observation offLimb').rotationDegrees), mirror: requireRecord(value.offLimb).mirror === true };
-  if (offLimb && Object.keys(requireRecord(value.offLimb)).some(key => !['rotationDegrees', 'mirror'].includes(key))) throw new TypeError('A surface-observation offLimb block declares only rotationDegrees and mirror.');
+  const offLimb = value.offLimb === undefined ? undefined : { rotationDegrees: requireFiniteNumber(requireRecord(value.offLimb, 'surface-observation offLimb').rotationDegrees) };
+  if (offLimb && Object.keys(requireRecord(value.offLimb)).some(key => key !== 'rotationDegrees')) throw new TypeError('A surface-observation offLimb block declares only rotationDegrees.');
   return { shape: parsed, lens: lens as SurfaceObservationScience['lens'], ...(offLimb ? { offLimb } : {}) };
-}
-/** Lay the east-positive preview on the band-projected sphere the way a planet atlas is laid: east longitude grows with the
- * mesh column, and body longitude 0 sits a quarter turn along the mesh (mesh +x), where the runtime places the sub-observer
- * meridian of an observed-pole record (measured through the leaf under the sub-Earth point, 2026-09-16). Column x shows
- * longitude (x + 1/2) * 360 / width - 90. */
-function rendererLongitudes({ rgb, missing }: { rgb: Buffer; missing: Uint8Array }, width: number, height: number) {
-  const outRgb = Buffer.alloc(rgb.length), outMissing = new Uint8Array(missing.length);
-  for (let x = 0; x < width; x++) {
-    const source = ((x - width / 4) % width + width) % width;
-    for (let y = 0; y < height; y++) {
-      const from = y * width + source, to = y * width + x;
-      outRgb.set(rgb.subarray(from * 3, from * 3 + 3), to * 3); outMissing[to] = missing[from]!;
-    }
-  }
-  return { rgb: outRgb, missing: outMissing };
 }
 const transparentPlates = (offLimb: number, limb: number) => ({
   offLimb: { data: new Uint8Array(offLimb * offLimb * 4), size: offLimb, lossless: true }, limb: { data: new Uint8Array(limb * limb * 4), size: limb, lossless: true } });
@@ -303,7 +290,9 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         let raster = science.get(surface.id);
         if (!raster) { raster = loadScienceSurface(sourceDirectory, parsed); science.set(surface.id, raster); }
         const { rgb, missing } = paintScienceSurface(await raster, parsed, width, height);
-        return rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest');
+        const painted = rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest');
+        // A self-luminous body (a thermal emission map) owes the emissive presentation its plates; nothing lies beyond its limb.
+        return recipe.emission ? { ...painted, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : painted;
       }
       case 'terrestrial-mosaic': {
         const plan = shape({ format: text, consumer: text })(surface.science);
@@ -339,7 +328,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const plan = parseSurfaceObservationScience(surface.science);
         if (!plan.lens.frames.some(frame => requireRecord(frame).path === surface.source)) throw new TypeError(`${objectId}/${surface.id}: the surface source must be one of the lens frames.`);
         const observation = await surfaceObservation(surface, plan, height);
-        const { rgb, missing } = rendererLongitudes(observation.preview(width, height), width, height);
+        // East longitude grows with the column from 0 at the left edge, as the mesh places a planet atlas.
+        const { rgb, missing } = observation.preview(width, height);
         if (!recipe.emission) return { ...rgb3(rgb, missing, width, height, false), report: observation.report };
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
         if (!plan.offLimb) return { ...rgb3(rgb, missing, width, height, false), report: observation.report, plates };
@@ -348,9 +338,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const frame = requireRecord(plan.lens.frames[0]);
         if (frame.encoding !== 'fits-oi-reconstruction') throw new TypeError(`${objectId}/${surface.id}: the off-limb plate reads fits-oi-reconstruction frames only.`);
         const image = readReconstruction(await readFile(resolve(sourceDirectory, requireString(frame.path))));
-        // FITS rows run south to north; the camera route and the frame's centre use top-down rows.
-        const topDown = new Float64Array(image.values.length);
-        for (let row = 0; row < image.height; row++) topDown.set(image.values.subarray((image.height - 1 - row) * image.width, (image.height - row) * image.width), row * image.width);
+        // The camera route and the frame's centre use the sky as seen: north on the first row, east on the first column.
+        const topDown = skyDisplayRaster(image.values, image.width, image.height, image.axes);
         const center = requireRecord(frame).center as readonly [number, number];
         const discRadiusPx = plan.shape.radiusKm / requireFiniteNumber(frame.rangeKm) / (requireFiniteNumber(frame.pixelAngleMicroradians) * 1e-6);
         const displayRange = requireRecord(observation.report.display), palette = requireRecord(plan.lens.display).palette;
@@ -358,12 +347,12 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const plateSize = recipe.emission.offLimbSize * density;
         const offLimb = offLimbPlate({ width: image.width, height: image.height, values: topDown, center: [requireFiniteNumber(center[0]), requireFiniteNumber(center[1])], discRadiusPx,
           backgroundMaximum: requireFiniteNumber(frame.backgroundMaximum) },
-          { low: requireFiniteNumber(displayRange.low), high: requireFiniteNumber(displayRange.high), palette: palette.map(value => requireString(value)), rotationDegrees: plan.offLimb.rotationDegrees, mirror: plan.offLimb.mirror },
+          { low: requireFiniteNumber(displayRange.low), high: requireFiniteNumber(displayRange.high), palette: palette.map(value => requireString(value)), rotationDegrees: plan.offLimb.rotationDegrees },
           plateSize, recipe.emission.bodyDiameter * density);
         let outside = 0, total = 0;
         for (let i = 0; i < topDown.length; i++) { const v = topDown[i]!; total += v; if (Math.hypot(i % image.width - center[0], Math.floor(i / image.width) - center[1]) > discRadiusPx) outside += v; }
         return { ...rgb3(rgb, missing, width, height, false), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
-          report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees: plan.offLimb.rotationDegrees, mirror: plan.offLimb.mirror, fluxFractionOutsideDisc: outside / total,
+          report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees: plan.offLimb.rotationDegrees, fluxFractionOutsideDisc: outside / total,
             meaning: 'The frame\'s light outside the silhouette on the lens display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
       }
       case 'neutral-shape': {
@@ -384,6 +373,23 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         return { data, channels: 4, nearest: true, report: { discIntegratedColor: { srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance,
           meaning: 'Whole-disc colour and V geometric albedo from published photometry, uniform over the body; not a resolved surface map.' } } };
+      }
+      case 'stellar-photometric-color': {
+        // A self-luminous photosphere with no image: one colour from the catalogued photometric temperature, no map.
+        const source = await manifest;
+        const { temperature, color, range, limbDarkening } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
+          surface.science, surface.source);
+        const data = Buffer.alloc(width * height * 4);
+        for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
+        if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar colour belongs to an emissive body.`);
+        const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
+        // A measured limb-darkening law darkens the disc through the limb plate, which the runtime fits edge to edge to the outline.
+        if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);
+        return { data, channels: 4, nearest: true, plates,
+          report: { stellarPhotometricColor: { temperature, srgb: color.srgb, linearSrgb: color.linear, srgbAtBounds: range.map(bound => bound.srgb),
+            ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2 } } : {}),
+            meaning: limbDarkening ? 'Planck colour at the catalogued photometric temperature, dimmed toward the limb by the limb-darkening law measured from transits; not a resolved photosphere or spectrum.'
+              : 'Planck colour at the catalogued photometric temperature, uniform over the disc; not a resolved photosphere, limb darkening or spectrum.' } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }

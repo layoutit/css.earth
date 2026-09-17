@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2dd1bc43769cb6d7ed29b067b9b20eed15235df00f8e2cf6e0b67f89e6feada8"
+    "sha256": "87c53834c530ba0fd37a3d2ecbe5a93151202f5b0be2fc3ef5f738fdcfcfdbe6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d967133e5bec5977d078d3750f18b634f55044d9deddb1662fc7702fc8454222",
+      "sha256": "ea5c576801557cb34afa2a325cb83fbec2b3a2a869a66af0d8d0114b4b807655",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -120,8 +120,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -419,8 +418,8 @@
         },
         {
           "url": "/scenes/reinmuthia/reinmuthia-elevation-surface@2x.webp",
-          "bytes": 303804,
-          "sha256": "4c11a810d9569f0cb0e1d7b7c3000d910430b06377a305a6cc347f6ce23a2baf",
+          "bytes": 323574,
+          "sha256": "eab76913268732caf962e45a789f7ab78057e863b3c61a4b89f078747cc1f536",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +462,8 @@
         },
         {
           "url": "/scenes/reinmuthia/reinmuthia-shape-surface@2x.webp",
-          "bytes": 64840,
-          "sha256": "727eaa01aac0e4274313b4ddb86ce40aef9fdf0ebb8e2fa36e34ae380573421d",
+          "bytes": 68562,
+          "sha256": "0319b068d1534509aad36a6280664a9b3e38b4b04376e596d05b37596f4e656b",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "reinmuthia",
-    "materialSha256": "32112b486c0d5052af551fad7be827195f98e66f99c9507ed842fb42366f2195",
+    "materialSha256": "b3dc01075587f9cef7116b427ec9eab64aeb6bcda4c5d3b0ef75f6c01c647316",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

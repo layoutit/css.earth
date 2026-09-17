@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f4539bf9f00e0d824b652079e5cbb1bf578c68fbe4122ae39a864c3de4662970"
+    "sha256": "9dcf6b159cfd9fb02482005ffd0b77b62d251a7d24f4a814a717e524ee34d757"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fe33600e9ca025836204608d4f7ded4c7d279cf3f6d9ad28b570253a51eac676",
+      "sha256": "afbe9d72d193967b93a87269f625e3390ea503af8fb4b571333412f7bedb8281",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -72,8 +72,7 @@
               "expectedFaces": 2048
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "method": "source-meshoptimizer",
               "targetFaces": 800,
@@ -134,7 +133,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6465d91050941a0788b18bf4a196a8d691ea1143bc3d7143633452301c6a0c14",
+      "sha256": "3714e052d8083587833f9961add6f7ab2eac1fb15d6de4b79462773dee063631",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,11 +141,6 @@
         "displayName": "Kohoutek",
         "panel": {
           "facts": [
-            {
-              "id": "diameter",
-              "label": "Catalog diameter",
-              "value": "≈4.2 km"
-            },
             {
               "id": "perihelion",
               "label": "Closest to Sun",
@@ -280,8 +274,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6465d91050941a0788b18bf4a196a8d691ea1143bc3d7143633452301c6a0c14",
-      "bytes": 3347,
+      "sha256": "3714e052d8083587833f9961add6f7ab2eac1fb15d6de4b79462773dee063631",
+      "bytes": 3238,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -319,8 +313,8 @@
         },
         {
           "url": "/scenes/comet-c1973-e1/comet-c1973-e1-model-surface@2x.webp",
-          "bytes": 41702,
-          "sha256": "22fe43a778767de7a891ad30a952114a141e98a7df011a1482547526f310ad12",
+          "bytes": 56746,
+          "sha256": "90b1857d47048884d49986f4c05b1fbd07460cc80e4a76c0c51b99b171243c35",
           "verification": "bytes-verified"
         }
       ],
@@ -352,8 +346,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5357,
-          "sha256": "52bf5765aa75ae585a39ec15962b22a51c14ba87fac4e28f0dfae6c4f7c0146e",
+          "bytes": 5292,
+          "sha256": "9d8d8128f07d6903a34901f1b7fff24d6f5fecc5e2d7b0e41b84cc3bfcf18e13",
           "verification": "bytes-verified"
         }
       ],
@@ -366,7 +360,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1973-e1",
-    "materialSha256": "fc92370501bc21758cf8362adcbf42475987ba0e09c4aa256a1977e557710a05",
+    "materialSha256": "66cc7fe2d7b764170a060369518c590936762a2f0f6c3288108f5159834dd46e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

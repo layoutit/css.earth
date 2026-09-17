@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c4ce9f3cb20baeb520b3ddf6a625989c0a0a750ac87d7783e36e36a48f884614"
+    "sha256": "10ff1c5a6b2cc19f262c6ada6e7f24c54d0d47e4b59d91943eedee32fdbba32e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "39740ff27aac1c17c2a5b6567b9f319763fee52fa31b7d5bac90def03313978d",
+      "sha256": "a6f98269c1571f99ebdc67e49e50f1368a83faccb13df1bdcaa06875577ac577",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f4a69732b9ed41c976f86b385330eb4150fe6c6e15a575c9c150564fe04841e1",
+      "sha256": "3ae5482453113e572ada9cb6497ae529bc9a5a9d669fbfc746b1e0be23f6d66c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "156.5 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "6.081435 hours"
+              "value": "6.081435 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1843",
+                "label": "DAMIT model 1843",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f4a69732b9ed41c976f86b385330eb4150fe6c6e15a575c9c150564fe04841e1",
-      "bytes": 8395,
+      "sha256": "3ae5482453113e572ada9cb6497ae529bc9a5a9d669fbfc746b1e0be23f6d66c",
+      "bytes": 8600,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/cybele/cybele-elevation-surface@2x.webp",
-          "bytes": 288026,
-          "sha256": "87f147ebd3d32edde732a017bf90e70d4ca144295f9bc0adba8b882682fe817c",
+          "bytes": 352106,
+          "sha256": "f75c6588a22ec3e81ed745b50ad866b30f490238405dbb3442f6bd368f84e793",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/cybele/cybele-shape-surface@2x.webp",
-          "bytes": 55386,
-          "sha256": "1af90f7458723e863dcbe666ca2fe94332f7aa865533437cacbda94984230127",
+          "bytes": 79038,
+          "sha256": "bc11443c78345828d8fc8a6e5cafee56c0ebdfe4c7868c70a1b506d80e409915",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6107,
-          "sha256": "2f373fc423db953975cea151a02768fe1ff9f412e9379705c487896d47649518",
+          "bytes": 6265,
+          "sha256": "c32002539c018664eb3ed73186e25697e7334f4f0dd1340bb1d2ed23f04e5238",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "cybele",
-    "materialSha256": "7d412711e68eb00195746cc90d9affbb32100801020209f7c9055026e4fb565b",
+    "materialSha256": "4054bba0e228d6a9b3712c3c372bd3c8117917f8debf1d4f22e3301c03805d8e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

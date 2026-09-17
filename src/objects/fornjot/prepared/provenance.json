@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "23de0ac391b03b878eb65d62e1ccf737489865616bf612eee50397534e25dbeb"
+    "sha256": "ec17df94567cc8b8a8e1236088a812ca9085f1da5766f4f96c354fa02a4bda37"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6773d0c377300ca5c689d8649811a04169b8e8084fc660c3c72fc3cb72ed6207",
+      "sha256": "35f03c889572f93385db1a552f90978c0bdcfea7160c4b5712c4ca325db4a8a3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 72.5,
@@ -103,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "52c463ec219a160378b2f9b4acb22ebad5fe3bf72b6eb780b685f97141a421d4",
+      "sha256": "ba8f618a406f83e418c82f2bdf1090371e6b5740360c7b5d2c920f5c9bca5b39",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -112,43 +111,20 @@
         "panel": {
           "facts": [
             {
-              "id": "diameter",
-              "label": "Diameter estimate",
-              "value": "6 (+1.5/−1) km"
-            },
-            {
               "id": "parent",
               "label": "Orbits",
-              "value": "Saturn"
-            },
-            {
-              "id": "shape",
-              "label": "Minimum equatorial ratio",
-              "value": "1.11:1 · uniform-reflectivity model"
-            },
-            {
-              "id": "rotation",
-              "label": "Tentative rotation period",
-              "value": "7 or 9.5 h · tentative"
-            },
-            {
-              "id": "discovery",
-              "label": "Discovery",
-              "value": "2004"
+              "value": "Saturn",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/0; Planet"
+              }
             }
           ],
-          "moreFacts": [
-            {
-              "id": "scale-assumption",
-              "label": "Size assumption",
-              "value": "Geometric albedo 0.06; brightness-based estimate"
-            },
-            {
-              "id": "orientation-limit",
-              "label": "Orientation",
-              "value": "Unknown physical pole and phase; illustrative display"
-            }
-          ]
+          "moreFacts": []
         },
         "lenses": {
           "titleKey": "lenses",
@@ -312,8 +288,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "52c463ec219a160378b2f9b4acb22ebad5fe3bf72b6eb780b685f97141a421d4",
-      "bytes": 3080,
+      "sha256": "ba8f618a406f83e418c82f2bdf1090371e6b5740360c7b5d2c920f5c9bca5b39",
+      "bytes": 2629,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -356,8 +332,8 @@
         },
         {
           "url": "/scenes/fornjot/fornjot-model-surface@2x.webp",
-          "bytes": 57180,
-          "sha256": "ae7d38952bbe5e839b7eaf47fc17dd82ce1ea6a42b170e107d612e444bfe5d35",
+          "bytes": 63464,
+          "sha256": "4e3accae24a6853a65fcf3e22aa64a17cea9f85864bfc8cca34df85c488d55e7",
           "verification": "bytes-verified"
         }
       ],
@@ -394,8 +370,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4620,
-          "sha256": "2bdd82567898b9d1d06ad47f1f73e584c26e98617f5494fdc5925dae1576fcd8",
+          "bytes": 4347,
+          "sha256": "9438c13bb5dd9f3965d21c00be0e3ad3ed6411629a10a8aafd3c6180daabe5e8",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +409,7 @@
   },
   "lastPreparation": {
     "objectId": "fornjot",
-    "materialSha256": "325d06919752c2f5eca056d92a91ee46d127a83ee8ec52473563b4976a33e727",
+    "materialSha256": "6d12c1ef9d56a704a83c86f9dd7363be0b64192daa30dc1f27d4851c2ffeb1ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

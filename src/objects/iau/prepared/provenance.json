@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6452eab7df82055a2e3c51e1fae75d4173fc1f72d53bb94b2b1018da1e069a51"
+    "sha256": "c40cd4d0a1de4143e50e45959842345dd2c4f6de3fa1f2d7e2b8234cf3b752de"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6564b9fbc996867a81824a560f87df0d66bb18651edfcb19785cb74a7fc8e016",
+      "sha256": "3ff6245063b4fa517033e51f6637fadda46afcc420119188169bc401b817fcd8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -120,8 +120,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -419,8 +418,8 @@
         },
         {
           "url": "/scenes/iau/iau-elevation-surface@2x.webp",
-          "bytes": 275110,
-          "sha256": "73df795ca062c331dfe6b25cedc10b4ff4ac7fb7b860df33671e0fdf9af11302",
+          "bytes": 298358,
+          "sha256": "5b692933c1b3f2193cb9583d5c5b9aa5bea2049242bff60ca66e8e9525b98468",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +462,8 @@
         },
         {
           "url": "/scenes/iau/iau-shape-surface@2x.webp",
-          "bytes": 72064,
-          "sha256": "c6ec2f832864a652c4573f825f313817b8e2d9039fca7d069b44e71cdf7c2b21",
+          "bytes": 66384,
+          "sha256": "8cd45189e3ff6383174bf68d9a5b2dba5fa2606b1ca2e3380900a8f6d6f98b06",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "iau",
-    "materialSha256": "96e7d696b42bd4df582bf4e4f9221f4a6d6335ef6b055eab77eb741cf00cc129",
+    "materialSha256": "33de47741364455d69aaa805282258a223f9ce05c2b1fa795ac5c8ee22862b93",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

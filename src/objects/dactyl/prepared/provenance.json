@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dactyl",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fed8e4582ed614b42184c2134fd825ab25d930d008880c7208621f8615e10633"
+    "sha256": "dfc492800189061cd9c77a0046c78e07cda546a7b2f7d1d353d6987efcdea017"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e9c55eb095832a9a6f3f1c2e2e1ea000e009cdefced2c60e0bf809702a81086d"
+    "bindingsSha256": "68d5c2a214a56714630ef13efdc8ed6318741d00870adf89a62e0a5956a213c8"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "efe84d223c66807448a4c050ad0466988f196e4855211c2cacd0a3147eb9110a",
+      "sha256": "7e3ead1e8dcb4b028968e74b68dcc1ec2a0300aadbb7186ffc7ae586d8250e5e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 512
             },
             "faceBudget": 512,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -93,7 +92,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7780b90b379757d232c2ee4ea75eecf40fd05e9fc97af6fed44975a9f062fde7",
+      "sha256": "083daaab4f63d0543b6262f82faea145961a0f43a44bb5320fc7a361fa7d7eae",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -102,19 +101,17 @@
         "panel": {
           "facts": [
             {
-              "id": "parent",
-              "label": "Orbits",
-              "value": "Ida"
-            },
-            {
               "id": "size",
               "label": "Size",
-              "value": "1.6 × 1.4 × 1.2 km"
-            },
-            {
-              "id": "shape",
-              "label": "Shape evidence",
-              "value": "Spacecraft images"
+              "value": "1.6 × 1.4 × 1.2 km",
+              "source": {
+                "url": "https://doi.org/10.1006/icar.1996.0045",
+                "label": "Research publication · DOI 10.1006/icar.1996.0045",
+                "checked": "2026-09-16",
+                "path": "source/measurements.json",
+                "catalogueId": "doi-10-1006-icar-1996-0045",
+                "locator": "/shapeParameters/semiaxesKm/0; /radiusKm; /shapeParameters/semiaxesKm/2"
+              }
             }
           ],
           "moreFacts": []
@@ -198,7 +195,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "0e98bb5293fca7af9430cada585f2c42ae71d012105044f9985124b0b6937d4a",
+      "sha256": "e659db66474cf90402c7546bc206cdb046f4555b37265aeb765e5e10fb29eb9f",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -209,7 +206,6 @@
           "metadata": "metadata_nomenclature_points_DACTYL.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "dactyl-features.json",
         "publicBase": "/scenes/dactyl/",
         "target": {
@@ -277,7 +273,7 @@
       "sha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4",
       "bytes": 163,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -294,10 +290,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7780b90b379757d232c2ee4ea75eecf40fd05e9fc97af6fed44975a9f062fde7",
-      "bytes": 2570,
+      "sha256": "083daaab4f63d0543b6262f82faea145961a0f43a44bb5320fc7a361fa7d7eae",
+      "bytes": 2761,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -316,10 +312,10 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "115d0cc3a554d49831e5858129c8a93359c67829d85a0bb26d479b8eb5f93895",
+      "sha256": "09a690c808c7cd7ed7e96f104de757c163d78ccbb632f89d9de4e36f3dbc29b9",
       "bytes": 1066,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -342,10 +338,10 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "90b788ae7b1212174e6f98bf2fe305040883a0404afbd62c38f186eb63fdee09",
+      "sha256": "f9b0a51bbadab614072090fdb2269015d52d79fac1afda5b2fa7ca5781d657a8",
       "bytes": 42071,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -371,10 +367,10 @@
       "kind": "source-document",
       "title": "presentation/surface-map.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "e4cf71e29027f0275c16de63ac1146d120953c0777bc32b22dcefdfe515b61a8",
-      "bytes": 153,
+      "sha256": "52b2d2c09ec3f899a4e02b0dcfab5ba0a54c3dffce297afecb0d847d23d9c5ec",
+      "bytes": 185,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -401,7 +397,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -433,13 +429,13 @@
           "url": "/scenes/dactyl/dactyl-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dactyl/dactyl-shape-surface@2x.webp",
-          "bytes": 19352,
-          "sha256": "6feccda9153d1591db14b4ba977af45d4243304d7e562ef58a6a4dc7522ad1bb",
-          "verification": "asset-manifest-pin"
+          "bytes": 29452,
+          "sha256": "0b84e7df6b2b9a4f348f1b570ea9996d67037a0dc1045145b5cc486e5574c2ca",
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -470,8 +466,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4788,
-          "sha256": "a5881dddc297c498885f0fafd2339acfc7db39a816bd6736a1eac45cabd1df7f",
+          "bytes": 4976,
+          "sha256": "5df59dde5f1527e335bc20d10eb88dc287c63fa16b3d5db883b9cf21bab4a809",
           "verification": "bytes-verified"
         }
       ],
@@ -492,7 +488,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -507,8 +502,8 @@
         {
           "url": "/scenes/dactyl/dactyl-features.json",
           "bytes": 2490,
-          "sha256": "68041afcde9f9de7ed21bea04cb90cd5e0d9eafaec75ece9b287965141183e66",
-          "verification": "asset-manifest-pin"
+          "sha256": "4663b7aa532d4ed47f0dd7473c7c6ac945c04cfa89c8c8415874487381ba3647",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -545,11 +540,11 @@
   },
   "lastPreparation": {
     "objectId": "dactyl",
-    "materialSha256": "2674ea7fca282dc142aa402172750a6d1d0700a76d73e82267e28198ab77a167",
+    "materialSha256": "ef4a5d751cd22c104ce2a650c6ce8eb498c6bd6dfa3280f83657d615c6e778d4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
-      "sha256": "e776a665bb7f562eec7af56dc895b31b4e117d0f03ab66a577bbce3790b8733c",
-      "bindingsSha256": "c6bbbf421f0d347c32b08523435e5ab6679e0dd88f9c01d575c0e135ef156c5a"
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "68d5c2a214a56714630ef13efdc8ed6318741d00870adf89a62e0a5956a213c8"
     }
   }
 }

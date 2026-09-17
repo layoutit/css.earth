@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a719c966c6e15b133bf5c200963dc7f3a501b36f393339c7505dd1482274639"
+    "sha256": "e2424aca5cc97aca6f6e639ef1f6e8d20d4cd8688b5c402f22bd4259095ae9fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8f779c0f3d74b1f86a60bebda2b27f6dbc90f616e0302ede83b1869771100878",
+      "sha256": "cb36380cdc8fd88d3bad40aa72f0ceb1d4b626f863b1000266f7c7ef38729b5d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -138,7 +137,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a20527e4ba3ddc97ecef09c333ea1ef52f03d8eb01ba17e3111b09d9358dd25f",
+      "sha256": "90e3a8afcfe30e2ab8f591160c824647d3921edd8a5b540a0d41b1fb91949ea0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -163,11 +162,6 @@
         },
         "panel": {
           "facts": [
-            {
-              "id": "radius",
-              "label": "Model volume-equivalent radius",
-              "value": "109 km"
-            },
             {
               "id": "distance-from-sun",
               "label": "Distance from Sun",
@@ -197,7 +191,15 @@
             {
               "id": "rotation-period",
               "label": "Rotation period",
-              "value": "6.041319 hours"
+              "value": "6.041319 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5926",
+                "label": "DAMIT model 5926",
+                "checked": "2026-09-16",
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "fields.Period (h)"
+              }
             }
           ],
           "moreFacts": []
@@ -353,8 +355,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a20527e4ba3ddc97ecef09c333ea1ef52f03d8eb01ba17e3111b09d9358dd25f",
-      "bytes": 7974,
+      "sha256": "90e3a8afcfe30e2ab8f591160c824647d3921edd8a5b540a0d41b1fb91949ea0",
+      "bytes": 8181,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -398,8 +400,8 @@
         },
         {
           "url": "/scenes/thisbe/thisbe-elevation-surface@2x.webp",
-          "bytes": 301382,
-          "sha256": "60f2038f68e1fb9341824fd193c2fb97cc653c1336f364e2f377bd66a3bd84e2",
+          "bytes": 372364,
+          "sha256": "dda38753e2067b7724ea8b7b2082f889f52c373ed8d34b2ecd9aa4a9864a395e",
           "verification": "bytes-verified"
         }
       ],
@@ -442,8 +444,8 @@
         },
         {
           "url": "/scenes/thisbe/thisbe-shape-surface@2x.webp",
-          "bytes": 60262,
-          "sha256": "b0484826bb2dc7423c99c580030cd0470fa348898d04798650b67614ba708dea",
+          "bytes": 77844,
+          "sha256": "11819c85f5658a8c428f95a38dd00c2a6a0d8ce769dc9a397ab8264dac1ff0e2",
           "verification": "bytes-verified"
         }
       ],
@@ -475,8 +477,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5689,
-          "sha256": "1df93e06470fdf30698ef64d665b0925f9029936213fa2517585539a24b94125",
+          "bytes": 5849,
+          "sha256": "2727d8e59db5a70c9f6013948ee5636f19d96126a5904a73835d9d335e438c7a",
           "verification": "bytes-verified"
         }
       ],
@@ -539,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "thisbe",
-    "materialSha256": "cfba5d68c1fb46746ffa0b8ebdd216e1ccac3fa2f6e8854e128a0704a6161b5f",
+    "materialSha256": "1bbf05d6a7d23d1d63892fb976e181300bbe46e43439b000a4ddd1f58b8aba75",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -521,8 +521,8 @@
     {
       "id": "ida-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1111,
-      "expectedSha256": "5c97f6239a9bb0f080ee6d2a514130e8a177c89de30bcc0e9f13626fea968e20",
+      "expectedBytes": 1079,
+      "expectedSha256": "49f85bf7b98243420426344c3d13dc2db8fec7e406e9ba2337b23e5adf9a8179",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -539,8 +539,8 @@
     {
       "id": "ida-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 150,
-      "expectedSha256": "09dd7bb976ffd672491c6a67a0a135b6cb78be58571ffe2926048a63426bd19b",
+      "expectedBytes": 182,
+      "expectedSha256": "bad74d5f1ea1789831d76107434625983cb04cc584916c402cdd56d43140749c",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -586,8 +586,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8309,
-      "expectedSha256": "e1fa0fac61ba4d636cbdbe6b00852a40211192fce11948267a1dda3a353b8aaa",
+      "expectedBytes": 8074,
+      "expectedSha256": "46c8b7db71e43756d5d95601a71cf71d47e967cf8412513cfc1caaad6594c81d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -610,8 +610,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6561,
-      "expectedSha256": "5b5e9a36724f685c0fc1b5a772672b17c8f96c4cc3ae34e44dabfab429ba6bf2"
+      "expectedBytes": 6542,
+      "expectedSha256": "e3007f15dac77309a09b16611e77d46049c9f6142f743887441f7598f89b0e68"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -726,6 +726,21 @@
       "origin": "https://doi.org/10.1006/icar.1996.0036",
       "credit": "Published Hapke parameters: Helfenstein et al. (1996), doi:10.1006/icar.1996.0036. Selection and transcription: cssEarth.",
       "acquisition": "Parameter values transcribed from the cited publication into a project document; no data file was downloaded."
+    },
+    {
+      "path": "reference/sbdb.json",
+      "expectedBytes": 5569,
+      "expectedSha256": "865d4e33528a1cd321ee472a87244c87b076d47cb1e0d680366b87dc8730561f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "reference",
+            "evidence": "JPL SBDB API response for Ida: physical parameters, orbit elements and discovery circumstances."
+          }
+        ]
+      }
     }
   ]
 }

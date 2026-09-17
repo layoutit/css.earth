@@ -8,13 +8,14 @@ import type { Fact } from './objects/content/types.js';
 import { orderFacts } from '../site/fact-order.mts';
 import { hasErrorCode } from './source-values.mts';
 
-/** The same citation checks apply to full preparation, facts-only edits and Sources. */
+/** The same citation checks apply to full preparation, facts-only edits and Sources: every fact names its source. */
 export function parseFactsheet(panel: unknown) {
   const value = sourceObject(panel);
   const fact = (raw: unknown): Fact => {
     const row = sourceObject(raw, ['id', 'label', 'value', 'source']);
     const result: Fact = { id: sourceId(row.id), label: sourceText(row.label), value: sourceText(row.value) };
-    if (row.source !== undefined) {
+    if (row.source === undefined) throw new TypeError(`${result.id}: a published fact names its source.`);
+    {
       const source = sourceObject(row.source, ['catalogueId', 'url', 'label', 'checked', 'path', 'locator']);
       const path = source.path === undefined ? undefined : sourcePath(source.path);
       if (path && !path.startsWith('source/')) throw new TypeError('Fact evidence must be inside the body source directory.');

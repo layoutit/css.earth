@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "97a8d9e86d66414a017d845bb81c08fabc0b9f8affdc3abbcccb595b8af6387a"
+    "sha256": "b36a1ff03393bcca89ba9132c7f26bb2155594a1260accb99de3cf6c7d4cbb5b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a1172e3b7b90ac4adf3b5e0cd562b6b4897c7e46e2c14e1d4a510fd8f08c0d57"
+    "bindingsSha256": "f0a6b507ce4c79db282b26ac66636da5730482df8f3664a2ab8f09f362a84e8e"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d2bbfd179bc2de99a4244abae90c53e1bc9550abb108ddda43d0466e9cb3fa30",
+      "sha256": "71118cc74433df88d0fad9ec4df5ea3163cf6273028ea10c9ad214e0d2681504",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -232,8 +232,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 800,
               "maximumErrorMeters": 1500,
@@ -253,7 +252,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "58a890c0bc287d9a424a24628d8ecb1f88dc00d8a4c687fea040a6910ddb88a1",
+      "sha256": "3c4b7d7d9cd947af54d97cc3facf73cf22245d58aaa75eb6effd2088dd613d9c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -288,24 +287,30 @@
               }
             },
             {
-              "id": "orbital-period",
-              "label": "Orbit around Jupiter",
-              "value": "11.96 hours"
-            },
-            {
-              "id": "rotation-period",
-              "label": "Rotation period",
-              "value": "Synchronous with its orbit"
-            },
-            {
               "id": "distance-from-parent",
               "label": "Mean distance from Jupiter",
-              "value": "About 181,400 km"
+              "value": "About 181,400 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; a (km)"
+              }
             },
             {
               "id": "discovery",
               "label": "Discovery",
-              "value": "Edward Emerson Barnard · 1892"
+              "value": "Edward Emerson Barnard · 1892",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+                "label": "JPL Planetary Satellite Discovery Circumstances",
+                "checked": "2026-09-16",
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-discovery",
+                "locator": "/references/3; discoverer(s); year discovered"
+              }
             }
           ],
           "moreFacts": [
@@ -420,7 +425,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "d67357bb1382bd4e03ebb6cf82a84390d492634dcafc20f331b03a7a776b479a",
+      "sha256": "7c28165f8cee607ed263798df77a92c2f16414e4b3501824b99aa0b6e256cf4d",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -431,7 +436,6 @@
           "metadata": "metadata_nomenclature_points_AMALTHEA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "amalthea-features.json",
         "publicBase": "/scenes/amalthea/",
         "target": {
@@ -939,8 +943,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "58a890c0bc287d9a424a24628d8ecb1f88dc00d8a4c687fea040a6910ddb88a1",
-      "bytes": 5123,
+      "sha256": "3c4b7d7d9cd947af54d97cc3facf73cf22245d58aaa75eb6effd2088dd613d9c",
+      "bytes": 5605,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1012,8 +1016,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
-      "bytes": 155,
+      "sha256": "acc02f8a7259c2b6074f84032d6f93673a3e52c7ef42c80c982af3101e009e49",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1084,8 +1088,8 @@
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-surface@2x.webp",
-          "bytes": 235688,
-          "sha256": "3628a7e922a59e4ad06bddce33da7c5177431d76e095c250fadae50d9ae57d18",
+          "bytes": 287662,
+          "sha256": "2956f223f50590799b459fd9dba336dc9eb66839559dfe44686bc85950ee26f8",
           "verification": "bytes-verified"
         }
       ],
@@ -1136,8 +1140,8 @@
         },
         {
           "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
-          "bytes": 139474,
-          "sha256": "0f611eea774fb82f4be126c1469808b499053cdba96dbfeb46a3335a65cc396a",
+          "bytes": 157474,
+          "sha256": "f264e92081e13bf418a8c6fc5eab804608e8f518bbca4319c45ae21e646f2093",
           "verification": "bytes-verified"
         }
       ],
@@ -1169,8 +1173,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6942,
-          "sha256": "502df7ffea15952e974df83e6e3b8f6d06f44ad38369656feaf54b8ff68195fe",
+          "bytes": 7447,
+          "sha256": "9dab9dd92627f93028993cc7d609dad8d043d742ca4e43c62fc297960276e344",
           "verification": "bytes-verified"
         }
       ],
@@ -1191,7 +1195,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1269,11 +1272,11 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "57d24fa38f207ff085ba4adef34e52ff45772ca262eee0f6206ce7a2966c68e9",
+    "materialSha256": "207c221e2c475807e22a600c6cc619bd405562051d6fe52d1de39b25da46437b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a1172e3b7b90ac4adf3b5e0cd562b6b4897c7e46e2c14e1d4a510fd8f08c0d57"
+      "bindingsSha256": "f0a6b507ce4c79db282b26ac66636da5730482df8f3664a2ab8f09f362a84e8e"
     }
   }
 }
