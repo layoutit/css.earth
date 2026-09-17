@@ -12,7 +12,7 @@ Approximate orbital placement. The 1993 encounter did not determine a unique orb
 
 The shared missing-imagery grid covers the surface. The body uses the existing generic object adapter, one shared world camera and retained PolyCSS geometry. The selector detail is **Galileo**.
 
-## Scientific sources
+## Sources
 
 [Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
 
