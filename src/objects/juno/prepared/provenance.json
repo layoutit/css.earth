@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0b20e331a4bcce4cf2df2fa110149db8de666807f9b730c8acfee4f5d914323"
+    "sha256": "b3d5e6f972eb8d2ad8938aad4da1e69f75ff4e5f273b6e886a25395b499caf7f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "1c8d3ba5b3fc1b949831720a1a72a59dbfcb6d91e5b0ce2c57cefd499ed6e67c"
+    "bindingsSha256": "9780c9cf99067cf1fbff033eb1acbf2271440e8e6caa5c51dc6a88b8151bab6e"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6bf9c568d8df5a5ac720e475bb42213316de878225e9c6036c2c3c63347a36a5",
+      "sha256": "b21785b5b4c6a7a6edcd2a6662a6124e683a00373bd89cd5cb9ee9a27f4b907e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,6 +81,528 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "zimpol",
+              "format": "controlled-shape-camera",
+              "consumer": "sphere-photograph",
+              "metadata": {
+                "label": "SPHERE photograph",
+                "falseColor": false,
+                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over three nights, 2018-11-08 to 2018-11-12, cast onto the released MPCD shape the body already selects. The camera's pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 4,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1,
+                  99.5
+                ]
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20181108-054530",
+                  "path": "observations/d3Juno_2018-11-08T05_45_30.038_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1974,
+                  "observerWestLongitude": 296.1615,
+                  "sunLatitude": -31.0569,
+                  "sunWestLongitude": 310.2976,
+                  "rangeKm": 156039192.2,
+                  "northAzimuthDegrees": 319.028,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.287,
+                    125.375
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-054606",
+                  "path": "observations/d3Juno_2018-11-08T05_46_06.071_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1973,
+                  "observerWestLongitude": 296.6613,
+                  "sunLatitude": -31.057,
+                  "sunWestLongitude": 310.7973,
+                  "rangeKm": 156039082.4,
+                  "northAzimuthDegrees": 319.028,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.666,
+                    126.222
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-054641",
+                  "path": "observations/d3Juno_2018-11-08T05_46_41.281_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1972,
+                  "observerWestLongitude": 297.1498,
+                  "sunLatitude": -31.0571,
+                  "sunWestLongitude": 311.2856,
+                  "rangeKm": 156038975.1,
+                  "northAzimuthDegrees": 319.028,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.09,
+                    126.252
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-054715",
+                  "path": "observations/d3Juno_2018-11-08T05_47_15.153_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1971,
+                  "observerWestLongitude": 297.6196,
+                  "sunLatitude": -31.0573,
+                  "sunWestLongitude": 311.7553,
+                  "rangeKm": 156038871.9,
+                  "northAzimuthDegrees": 319.028,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.093,
+                    125.381
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-054749",
+                  "path": "observations/d3Juno_2018-11-08T05_47_49.356_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.197,
+                  "observerWestLongitude": 298.094,
+                  "sunLatitude": -31.0574,
+                  "sunWestLongitude": 312.2296,
+                  "rangeKm": 156038767.8,
+                  "northAzimuthDegrees": 319.028,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.232,
+                    125.33
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-075713",
+                  "path": "observations/d3Juno_2018-11-08T07_57_13.556_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1761,
+                  "observerWestLongitude": 45.7913,
+                  "sunLatitude": -31.0869,
+                  "sunWestLongitude": 59.9012,
+                  "rangeKm": 156016157.3,
+                  "northAzimuthDegrees": 319.0261,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.499,
+                    125.776
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-075748",
+                  "path": "observations/d3Juno_2018-11-08T07_57_48.585_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.176,
+                  "observerWestLongitude": 46.2772,
+                  "sunLatitude": -31.087,
+                  "sunWestLongitude": 60.387,
+                  "rangeKm": 156016059.7,
+                  "northAzimuthDegrees": 319.0261,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.435,
+                    124.643
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-075822",
+                  "path": "observations/d3Juno_2018-11-08T07_58_22.011_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1759,
+                  "observerWestLongitude": 46.7408,
+                  "sunLatitude": -31.0871,
+                  "sunWestLongitude": 60.8505,
+                  "rangeKm": 156015966.6,
+                  "northAzimuthDegrees": 319.026,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.287,
+                    124.451
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-075855",
+                  "path": "observations/d3Juno_2018-11-08T07_58_55.769_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1758,
+                  "observerWestLongitude": 47.2091,
+                  "sunLatitude": -31.0873,
+                  "sunWestLongitude": 61.3187,
+                  "rangeKm": 156015872.5,
+                  "northAzimuthDegrees": 319.026,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.012,
+                    124.339
+                  ]
+                },
+                {
+                  "id": "zimpol-20181108-075930",
+                  "path": "observations/d3Juno_2018-11-08T07_59_30.012_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -30.1757,
+                  "observerWestLongitude": 47.6841,
+                  "sunLatitude": -31.0874,
+                  "sunWestLongitude": 61.7935,
+                  "rangeKm": 156015777.2,
+                  "northAzimuthDegrees": 319.026,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.93,
+                    124.581
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-020502",
+                  "path": "observations/d3Juno_2018-11-11T02_05_02.876_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5592,
+                  "observerWestLongitude": 108.042,
+                  "sunLatitude": -31.9888,
+                  "sunWestLongitude": 121.3623,
+                  "rangeKm": 155417937.3,
+                  "northAzimuthDegrees": 318.9698,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.949,
+                    127.184
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-020536",
+                  "path": "observations/d3Juno_2018-11-11T02_05_36.978_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5591,
+                  "observerWestLongitude": 108.515,
+                  "sunLatitude": -31.9889,
+                  "sunWestLongitude": 121.8352,
+                  "rangeKm": 155417858.4,
+                  "northAzimuthDegrees": 318.9698,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.888,
+                    127.896
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-020610",
+                  "path": "observations/d3Juno_2018-11-11T02_06_10.363_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.559,
+                  "observerWestLongitude": 108.9781,
+                  "sunLatitude": -31.9891,
+                  "sunWestLongitude": 122.2982,
+                  "rangeKm": 155417781.3,
+                  "northAzimuthDegrees": 318.9698,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.206,
+                    126.986
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-020644",
+                  "path": "observations/d3Juno_2018-11-11T02_06_44.991_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5589,
+                  "observerWestLongitude": 109.4584,
+                  "sunLatitude": -31.9892,
+                  "sunWestLongitude": 122.7784,
+                  "rangeKm": 155417701.3,
+                  "northAzimuthDegrees": 318.9698,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.387,
+                    127.956
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-020718",
+                  "path": "observations/d3Juno_2018-11-11T02_07_18.393_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5589,
+                  "observerWestLongitude": 109.9217,
+                  "sunLatitude": -31.9893,
+                  "sunWestLongitude": 123.2416,
+                  "rangeKm": 155417624.2,
+                  "northAzimuthDegrees": 318.9698,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.866,
+                    127.039
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-035944",
+                  "path": "observations/d3Juno_2018-11-11T03_59_44.734_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5408,
+                  "observerWestLongitude": 203.5014,
+                  "sunLatitude": -32.0148,
+                  "sunWestLongitude": 216.7972,
+                  "rangeKm": 155402695.1,
+                  "northAzimuthDegrees": 318.9674,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.955,
+                    128.97
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-040019",
+                  "path": "observations/d3Juno_2018-11-11T04_00_19.986_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5407,
+                  "observerWestLongitude": 203.9904,
+                  "sunLatitude": -32.015,
+                  "sunWestLongitude": 217.286,
+                  "rangeKm": 155402620.8,
+                  "northAzimuthDegrees": 318.9673,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.465,
+                    129.775
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-040053",
+                  "path": "observations/d3Juno_2018-11-11T04_00_53.626_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5406,
+                  "observerWestLongitude": 204.457,
+                  "sunLatitude": -32.0151,
+                  "sunWestLongitude": 217.7525,
+                  "rangeKm": 155402550,
+                  "northAzimuthDegrees": 318.9673,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.013,
+                    128.506
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-040127",
+                  "path": "observations/d3Juno_2018-11-11T04_01_27.221_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5406,
+                  "observerWestLongitude": 204.923,
+                  "sunLatitude": -32.0152,
+                  "sunWestLongitude": 218.2184,
+                  "rangeKm": 155402479.2,
+                  "northAzimuthDegrees": 318.9673,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128,
+                    129.473
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-040159",
+                  "path": "observations/d3Juno_2018-11-11T04_01_59.734_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5405,
+                  "observerWestLongitude": 205.374,
+                  "sunLatitude": -32.0154,
+                  "sunWestLongitude": 218.6693,
+                  "rangeKm": 155402410.8,
+                  "northAzimuthDegrees": 318.9673,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.013,
+                    128.105
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-042604",
+                  "path": "observations/d3Juno_2018-11-11T04_26_04.611_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5366,
+                  "observerWestLongitude": 225.4162,
+                  "sunLatitude": -32.0208,
+                  "sunWestLongitude": 238.7063,
+                  "rangeKm": 155399407,
+                  "northAzimuthDegrees": 318.9668,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.047,
+                    127.479
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-042639",
+                  "path": "observations/d3Juno_2018-11-11T04_26_39.500_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5365,
+                  "observerWestLongitude": 225.9002,
+                  "sunLatitude": -32.0209,
+                  "sunWestLongitude": 239.1901,
+                  "rangeKm": 155399335.3,
+                  "northAzimuthDegrees": 318.9667,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.244,
+                    126.997
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-042713",
+                  "path": "observations/d3Juno_2018-11-11T04_27_13.188_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5364,
+                  "observerWestLongitude": 226.3675,
+                  "sunLatitude": -32.0211,
+                  "sunWestLongitude": 239.6573,
+                  "rangeKm": 155399266.2,
+                  "northAzimuthDegrees": 318.9667,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.111,
+                    126.904
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-042748",
+                  "path": "observations/d3Juno_2018-11-11T04_27_48.737_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5363,
+                  "observerWestLongitude": 226.8605,
+                  "sunLatitude": -32.0212,
+                  "sunWestLongitude": 240.1502,
+                  "rangeKm": 155399193.2,
+                  "northAzimuthDegrees": 318.9667,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.903,
+                    126.903
+                  ]
+                },
+                {
+                  "id": "zimpol-20181111-042821",
+                  "path": "observations/d3Juno_2018-11-11T04_28_21.173_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.5362,
+                  "observerWestLongitude": 227.3105,
+                  "sunLatitude": -32.0213,
+                  "sunWestLongitude": 240.6001,
+                  "rangeKm": 155399126.7,
+                  "northAzimuthDegrees": 318.9667,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.279,
+                    126.773
+                  ]
+                },
+                {
+                  "id": "zimpol-20181112-045138",
+                  "path": "observations/d3Juno_2018-11-12T04_51_38.104_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.3097,
+                  "observerWestLongitude": 5.1498,
+                  "sunLatitude": -32.353,
+                  "sunWestLongitude": 18.1299,
+                  "rangeKm": 155244266,
+                  "northAzimuthDegrees": 318.9378,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.027,
+                    126.615
+                  ]
+                },
+                {
+                  "id": "zimpol-20181112-045213",
+                  "path": "observations/d3Juno_2018-11-12T04_52_13.984_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.3096,
+                  "observerWestLongitude": 5.6475,
+                  "sunLatitude": -32.3532,
+                  "sunWestLongitude": 18.6275,
+                  "rangeKm": 155244208.1,
+                  "northAzimuthDegrees": 318.9378,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.214,
+                    126.596
+                  ]
+                },
+                {
+                  "id": "zimpol-20181112-045248",
+                  "path": "observations/d3Juno_2018-11-12T04_52_48.946_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.3095,
+                  "observerWestLongitude": 6.1325,
+                  "sunLatitude": -32.3533,
+                  "sunWestLongitude": 19.1123,
+                  "rangeKm": 155244151.9,
+                  "northAzimuthDegrees": 318.9378,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.925,
+                    126.488
+                  ]
+                },
+                {
+                  "id": "zimpol-20181112-045324",
+                  "path": "observations/d3Juno_2018-11-12T04_53_24.065_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.3094,
+                  "observerWestLongitude": 6.6196,
+                  "sunLatitude": -32.3534,
+                  "sunWestLongitude": 19.5993,
+                  "rangeKm": 155244095.4,
+                  "northAzimuthDegrees": 318.9377,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.936,
+                    126.243
+                  ]
+                },
+                {
+                  "id": "zimpol-20181112-045356",
+                  "path": "observations/d3Juno_2018-11-12T04_53_56.086_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -29.3094,
+                  "observerWestLongitude": 7.0638,
+                  "sunLatitude": -32.3536,
+                  "sunWestLongitude": 20.0434,
+                  "rangeKm": 155244043.9,
+                  "northAzimuthDegrees": 318.9377,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.067,
+                    126.491
+                  ]
+                }
+              ]
+            }
           ]
         },
         "lighting": {
@@ -131,7 +653,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b883c88a2c3d7c22b9ab68ff3ba110f7c1c82062d46e81cd4f4d9872b4254405",
+      "sha256": "e0eaa42c7302123082cd4f8e90320492c37914a5feec98803d830950161681c4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,6 +750,20 @@
                 "image": "/scenes/juno/juno-elevation-legend.webp"
               },
               "notes": "Source shape · radial height"
+            },
+            {
+              "id": "zimpol",
+              "label": "SPHERE photograph",
+              "thumbnail": "/scenes/juno/juno-zimpol-thumbnail.webp",
+              "surface": "juno-zimpol-surface@2x.webp",
+              "poles": "juno-zimpol-surface@2x.webp",
+              "source": {
+                "id": "juno-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true,
+              "notes": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over three nights, 2018-11-08 to 2018-11-12, cast onto the released MPCD shape. Pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -337,6 +873,1566 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108054530",
+      "path": "observations/d3Juno_2018-11-08T05_45_30.038_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_45_30.038_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108054530",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "d752c25b17a08914ab9490a1d362eb6d22c1e8ab845f219cccc0526dcfcdf9a1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T05_45_30.038_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_45_30.038_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108054606",
+      "path": "observations/d3Juno_2018-11-08T05_46_06.071_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_46_06.071_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108054606",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      },
+      "sha256": "380d588be897bc049c458789aa1dfde2dafe08596af31a6bdcbccec280bb3e42",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T05_46_06.071_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_46_06.071_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108054641",
+      "path": "observations/d3Juno_2018-11-08T05_46_41.281_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_46_41.281_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108054641",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+          }
+        ]
+      },
+      "sha256": "4c6a5d0fb3027fbc72a04d053453bd4fed99a40bd486f1d89dd6edc2e32a1fbf",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T05_46_41.281_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_46_41.281_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108054715",
+      "path": "observations/d3Juno_2018-11-08T05_47_15.153_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_47_15.153_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108054715",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "4cef6a5870313275391e5a3f307ecae244b9d32b98132d5680c42b06a5212fe1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T05_47_15.153_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_47_15.153_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108054749",
+      "path": "observations/d3Juno_2018-11-08T05_47_49.356_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_47_49.356_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108054749",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+          }
+        ]
+      },
+      "sha256": "e47d0eeffd386812411c3a1028a1a740fd78f1e84282f72d8632e82d2bf8e8f0",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T05_47_49.356_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T05_47_49.356_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108075713",
+      "path": "observations/d3Juno_2018-11-08T07_57_13.556_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_57_13.556_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108075713",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+          }
+        ]
+      },
+      "sha256": "438021a5c1691bf29080d42c0aa76f1895040e6033d5e559cc80e29c307a179e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T07_57_13.556_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_57_13.556_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108075748",
+      "path": "observations/d3Juno_2018-11-08T07_57_48.585_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_57_48.585_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108075748",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+          }
+        ]
+      },
+      "sha256": "083d23ae8392d282552d8918b57587dfd241da61ca6fe80ab26c5002c69f8a43",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T07_57_48.585_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_57_48.585_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108075822",
+      "path": "observations/d3Juno_2018-11-08T07_58_22.011_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_58_22.011_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108075822",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "26d1d969f69eb6c3a318099a64c0a254daf7925e78ba435dba416e1c76dab234",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T07_58_22.011_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_58_22.011_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108075855",
+      "path": "observations/d3Juno_2018-11-08T07_58_55.769_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_58_55.769_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108075855",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+          }
+        ]
+      },
+      "sha256": "4ec11cf3be2835d425077bbe1c146134dc6ed69542b1d698d4016a95ee531249",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T07_58_55.769_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_58_55.769_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181108075930",
+      "path": "observations/d3Juno_2018-11-08T07_59_30.012_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_59_30.012_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181108075930",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+          }
+        ]
+      },
+      "sha256": "43922b76a92573980893b68498fbb861eca098e4787242d4736fcebb6708f9ff",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-08T07_59_30.012_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-08T07_59_30.012_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111020502",
+      "path": "observations/d3Juno_2018-11-11T02_05_02.876_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_05_02.876_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111020502",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+          }
+        ]
+      },
+      "sha256": "255eed0f75797d3cb910898fc50139ed05081dd78010d6d64770776172626794",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T02_05_02.876_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_05_02.876_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111020536",
+      "path": "observations/d3Juno_2018-11-11T02_05_36.978_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_05_36.978_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111020536",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+          }
+        ]
+      },
+      "sha256": "e48fbd61c6cf2d387032d3fd6bde6fdb6bf59d9977b64c710ca7164f98c840bf",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T02_05_36.978_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_05_36.978_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111020610",
+      "path": "observations/d3Juno_2018-11-11T02_06_10.363_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_06_10.363_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111020610",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+          }
+        ]
+      },
+      "sha256": "586be071338747363ffcecbb781aafdbecaf9adbe52b4a3f0ffae2db1f81fd45",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T02_06_10.363_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_06_10.363_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111020644",
+      "path": "observations/d3Juno_2018-11-11T02_06_44.991_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_06_44.991_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111020644",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+          }
+        ]
+      },
+      "sha256": "b7e109e1ffd56ccaedc98eb82f7077cd63f327b924e16814778ec17ee7652311",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T02_06_44.991_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_06_44.991_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111020718",
+      "path": "observations/d3Juno_2018-11-11T02_07_18.393_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_07_18.393_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111020718",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+          }
+        ]
+      },
+      "sha256": "14f430c4407d8879e34b97bb0f7c13236b5183ae3f185c7cb580161828de939b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T02_07_18.393_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T02_07_18.393_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111035944",
+      "path": "observations/d3Juno_2018-11-11T03_59_44.734_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T03_59_44.734_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111035944",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+          }
+        ]
+      },
+      "sha256": "906a51969a8fdf756a6acfa5ee7c1c5529957e95581353be66d4543b5979e08f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T03_59_44.734_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T03_59_44.734_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111040019",
+      "path": "observations/d3Juno_2018-11-11T04_00_19.986_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_00_19.986_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111040019",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "b3904777ef0fd60ec4acfe885c03102f0967e1f175e0d27981e344cfff776e38",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_00_19.986_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_00_19.986_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111040053",
+      "path": "observations/d3Juno_2018-11-11T04_00_53.626_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_00_53.626_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111040053",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+          }
+        ]
+      },
+      "sha256": "e914da8080a37cbe7204202f748e8b73fc2baab53e97111839f7e679fb3d73cb",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_00_53.626_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_00_53.626_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111040127",
+      "path": "observations/d3Juno_2018-11-11T04_01_27.221_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_01_27.221_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111040127",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+          }
+        ]
+      },
+      "sha256": "e09ed1bd5b5a1c827149a84a8b4e7b91f83b4009ce8b8388ad6061ab8dcb89e7",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_01_27.221_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_01_27.221_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111040159",
+      "path": "observations/d3Juno_2018-11-11T04_01_59.734_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_01_59.734_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111040159",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+          }
+        ]
+      },
+      "sha256": "d30f44221d7a87adaaa8f243e32a51063c0472c424e7cb492d451e0be603d0c4",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_01_59.734_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_01_59.734_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111042604",
+      "path": "observations/d3Juno_2018-11-11T04_26_04.611_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_26_04.611_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111042604",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+          }
+        ]
+      },
+      "sha256": "6c390fdace0dc320b8172b9faa130775611dd88f8f4191ed38269fb7195fa6e1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_26_04.611_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_26_04.611_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111042639",
+      "path": "observations/d3Juno_2018-11-11T04_26_39.500_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_26_39.500_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111042639",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+          }
+        ]
+      },
+      "sha256": "b28d4d64a57256a3621d91412748d75aa1363498f6bc69f63903b3561c802013",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_26_39.500_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_26_39.500_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111042713",
+      "path": "observations/d3Juno_2018-11-11T04_27_13.188_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_27_13.188_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111042713",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/26"
+          }
+        ]
+      },
+      "sha256": "b13bcfc1d96efe26633cff9779ae96eb45f96039931bdb581032dace05b69f7c",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_27_13.188_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_27_13.188_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111042748",
+      "path": "observations/d3Juno_2018-11-11T04_27_48.737_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_27_48.737_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111042748",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+          }
+        ]
+      },
+      "sha256": "57b671dbb46337d204e0232187db54459817f22bd29a0e867ebfb52564c794d6",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_27_48.737_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_27_48.737_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181111042821",
+      "path": "observations/d3Juno_2018-11-11T04_28_21.173_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_28_21.173_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181111042821",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+          }
+        ]
+      },
+      "sha256": "1b296c2170aaf2c32cb7fdcd3598a76d9ae07e0557efec1275aec7de1faa4cbd",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-11T04_28_21.173_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-11T04_28_21.173_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181112045138",
+      "path": "observations/d3Juno_2018-11-12T04_51_38.104_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_51_38.104_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181112045138",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/29"
+          }
+        ]
+      },
+      "sha256": "e393fddfb68338d1775806a42ea565c03ced978d78938bcebf16aa1ece349649",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-12T04_51_38.104_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_51_38.104_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181112045213",
+      "path": "observations/d3Juno_2018-11-12T04_52_13.984_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_52_13.984_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181112045213",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/30"
+          }
+        ]
+      },
+      "sha256": "3c4eae4f52d99a687d4c3645a0d2fc4eae04790ca5fc3766e006dd076f498f5b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-12T04_52_13.984_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_52_13.984_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181112045248",
+      "path": "observations/d3Juno_2018-11-12T04_52_48.946_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_52_48.946_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181112045248",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/31"
+          }
+        ]
+      },
+      "sha256": "cf26f7c72bef2169aec238c212f670a6379a58068919ce694b2b28132125a2cb",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-12T04_52_48.946_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_52_48.946_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181112045324",
+      "path": "observations/d3Juno_2018-11-12T04_53_24.065_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_53_24.065_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181112045324",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/32"
+          }
+        ]
+      },
+      "sha256": "88645b93871091000721b851d1f6eb50f15ee3f4d4a38b36f9efaa70c113949f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-12T04_53_24.065_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_53_24.065_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "juno-sphere-20181112045356",
+      "path": "observations/d3Juno_2018-11-12T04_53_56.086_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_53_56.086_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-sphere-20181112045356",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/33"
+          }
+        ]
+      },
+      "sha256": "b25a09e93a817f1c28ee36e0c5aa7e2565aea475689476f17076dad1bafbd2dc",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d3Juno_2018-11-12T04_53_56.086_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/3Juno/Deconv/d3Juno_2018-11-12T04_53_56.086_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -349,8 +2445,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b883c88a2c3d7c22b9ab68ff3ba110f7c1c82062d46e81cd4f4d9872b4254405",
-      "bytes": 6389,
+      "sha256": "e0eaa42c7302123082cd4f8e90320492c37914a5feec98803d830950161681c4",
+      "bytes": 7383,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -453,6 +2549,80 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "zimpol",
+      "label": "SPHERE photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "zimpol"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "juno-sphere-20181108054530",
+        "juno-sphere-20181108054606",
+        "juno-sphere-20181108054641",
+        "juno-sphere-20181108054715",
+        "juno-sphere-20181108054749",
+        "juno-sphere-20181108075713",
+        "juno-sphere-20181108075748",
+        "juno-sphere-20181108075822",
+        "juno-sphere-20181108075855",
+        "juno-sphere-20181108075930",
+        "juno-sphere-20181111020502",
+        "juno-sphere-20181111020536",
+        "juno-sphere-20181111020610",
+        "juno-sphere-20181111020644",
+        "juno-sphere-20181111020718",
+        "juno-sphere-20181111035944",
+        "juno-sphere-20181111040019",
+        "juno-sphere-20181111040053",
+        "juno-sphere-20181111040127",
+        "juno-sphere-20181111040159",
+        "juno-sphere-20181111042604",
+        "juno-sphere-20181111042639",
+        "juno-sphere-20181111042713",
+        "juno-sphere-20181111042748",
+        "juno-sphere-20181111042821",
+        "juno-sphere-20181112045138",
+        "juno-sphere-20181112045213",
+        "juno-sphere-20181112045248",
+        "juno-sphere-20181112045324",
+        "juno-sphere-20181112045356",
+        "juno-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/juno/juno-zimpol-thumbnail.webp",
+          "bytes": 2146,
+          "sha256": "3423cc258c43f5e8be3d4b57c103780c313cee16e2d4ecd2e47b66dd9192b399",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/juno/juno-zimpol-surface@2x.webp",
+          "bytes": 258754,
+          "sha256": "fa10dd009f3e09e4748b8fd76bcedb82081a378f7b9d136f6b11834ca70b6224",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "juno-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -504,6 +2674,31 @@
       ]
     },
     {
+      "id": "preview:zimpol",
+      "label": "SPHERE photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "zimpol"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/zimpol.webp",
+          "bytes": 12828,
+          "sha256": "790e9940a768308168ece2343db81aa4fdb59d124f06e3de6ded17ebc300f03d",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -535,11 +2730,11 @@
   },
   "lastPreparation": {
     "objectId": "juno",
-    "materialSha256": "2f3e4907bcb803c752e3b7a388d338579abd062ec9148ca04b75e634b6593ae8",
+    "materialSha256": "b4ab12caf92db9f398e9d9748ac08e4baa106335f452fff6270010d3923a49f8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "1c8d3ba5b3fc1b949831720a1a72a59dbfcb6d91e5b0ce2c57cefd499ed6e67c"
+      "bindingsSha256": "9780c9cf99067cf1fbff033eb1acbf2271440e8e6caa5c51dc6a88b8151bab6e"
     }
   }
 }
