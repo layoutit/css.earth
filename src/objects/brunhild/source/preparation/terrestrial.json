@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 24.11,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/brunhild/brunhild-shape-surface@2x.webp",
     "polesUrl": "/scenes/brunhild/brunhild-shape-surface@2x.webp",
     "radialTerrain": {

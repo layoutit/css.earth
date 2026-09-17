@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 35.53,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/iphigenia/iphigenia-shape-surface@2x.webp",
     "polesUrl": "/scenes/iphigenia/iphigenia-shape-surface@2x.webp",
     "radialTerrain": {

@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 13.66,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
     "polesUrl": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
     "radialTerrain": {

@@ -28,7 +28,7 @@ for (const id of ids) {
   const input = requireRecord(JSON.parse(await readFile(resolve(output, 'scene.json'), 'utf8')));
   const scene={...input,bodyLeaves:requireArray(input.bodyLeaves),systemTransform:requireString(input.systemTransform),sky:validatePreparedCubicSky(input.sky),sun:validateDirectionalSunPlan(input.sun)};
   const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(output, 'runtime.json'), 'utf8')));
-  const next = await refreshSolidSceneEpoch({ config, scene, definition });
+  const next = await refreshSolidSceneEpoch({ config, scene, definition, surfacesReport: JSON.parse(await readFile(resolve(output, 'surfaces.json'), 'utf8')) });
   for (const [name, value] of Object.entries({ scene: next.scene, runtime: next.definition, sky: next.scene.sky, sun: next.scene.sun })) {
     await writeFile(resolve(output, `${name}.json`), `${JSON.stringify(value)}\n`);
   }

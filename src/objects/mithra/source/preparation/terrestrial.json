@@ -83,10 +83,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.845,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/mithra/mithra-shape-surface@2x.webp",
     "polesUrl": "/scenes/mithra/mithra-shape-surface@2x.webp",
     "radialTerrain": {

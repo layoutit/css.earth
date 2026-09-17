@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 13.042,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/china/china-shape-surface@2x.webp",
     "polesUrl": "/scenes/china/china-shape-surface@2x.webp",
     "radialTerrain": {

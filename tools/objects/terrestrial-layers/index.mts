@@ -28,7 +28,7 @@ import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mts';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mts';
 import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid, lensTextureGrid } from './solid-raster.mts';
-import { prepareSolidScene, prepareSolidPresentation } from './solid-scene.mts';
+import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles } from './solid-scene.mts';
 import { prepareRadialMaterials } from './radial-terrain.mts';
 import { loadRadialModels, combineRadialModels, radialTerrainForLens } from './radial-models.mts';
 import { validateRadialTableProfile } from './pds-radial-table.mts';
@@ -255,14 +255,14 @@ export function parseTerrestrialProfile(input:unknown) {
 
 export async function prepareTerrestrialCelestial({ outputDirectory, config }:TerrestrialContext) {
   const sky = preparePlanetCubicSky({ objectId: config.namespace, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
-  const sun = prepareTerrestrialSun({ config });
+  const sun = prepareTerrestrialSun({ config, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')) });
   await Promise.all([writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(sky)}\n`),
     writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(sun)}\n`)]);
   return { sky, sun };
 }
 
 /** Body-owned qualification distinguishes solved orientations from display axes. */
-export function prepareTerrestrialSun({ config }:{config:SolidConfig}) {
+export function prepareTerrestrialSun({ config, surfacesReport }:{config:SolidConfig;surfacesReport:unknown}) {
   const frame = prepareEclipticPresentationFrame(config.namespace), sceneDirection = frame.sunDirection;
   const presentation = { ...DIRECTIONAL_SUN_PRESENTATION_STANDARD,
     source: config.celestial.sunSource, sourcePath: 'src/platform/solar-geometry.mts',
@@ -271,7 +271,7 @@ export function prepareTerrestrialSun({ config }:{config:SolidConfig}) {
       (config.celestial.qualification ? ` ${config.celestial.qualification}` : '')),
     bodyFixedDirection: requireBodyFixedSunDirection(config.namespace), presentationFrame: frame.model,
     localDirection: sceneDirection,
-    referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: config.namespace, ...config.geometry.camera, sceneDirection }),
+    referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: config.namespace, ...solidCameraAngles(config, surfacesReport), sceneDirection }),
   };
   return preparePlanetDirectionalSun({ presentation });
 }

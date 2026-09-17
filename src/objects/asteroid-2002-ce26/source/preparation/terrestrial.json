@@ -83,10 +83,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 1.73,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
     "polesUrl": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
     "radialTerrain": {

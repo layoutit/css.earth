@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 57.745,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/xanthippe/xanthippe-shape-surface@2x.webp",
     "polesUrl": "/scenes/xanthippe/xanthippe-shape-surface@2x.webp",
     "radialTerrain": {
