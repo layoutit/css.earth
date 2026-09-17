@@ -33,6 +33,394 @@
       "headers": {
         "Cookie": "CesAM_LAM_opens_the_door=1"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/release-parameters.txt",
+      "url": "https://observations.lam.fr/astero/3Dshape/9_Metis_param",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%279%3B%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&TLIST_TYPE=%27JD%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27309%27&TLIST=2458277.781089213%2C2458277.783917384%2C2458277.786755451%2C2458277.789567674%2C2458277.792382500%2C2458277.813680197%2C2458277.816509051%2C2458277.819358114%2C2458277.822181956%2C2458277.824996760%2C2458281.675854398%2C2458281.678681366%2C2458281.681525602%2C2458281.684342477%2C2458281.687164144%2C2458286.625866852%2C2458286.628694259%2C2458286.631539618%2C2458286.634367905%2C2458286.637190209%2C2458309.652588819%2C2458309.655410336%2C2458309.658249236%2C2458309.661072211%2C2458309.663887963%2C2458309.697301678%2C2458309.700134514%2C2458309.702974537%2C2458309.705796354%2C2458309.708589375&QUANTITIES=%271%2C13%2C20%2C43%27&ANG_FORMAT=%27DEG%27"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%279%3B%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&TLIST_TYPE=%27JD%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&REF_PLANE=%27FRAME%27&VEC_TABLE=%271%27&TLIST=2458277.771439882%2C2458277.774268096%2C2458277.777106205%2C2458277.779918469%2C2458277.782733337%2C2458277.804031347%2C2458277.806860243%2C2458277.809709347%2C2458277.812533231%2C2458277.815348076%2C2458281.666252936%2C2458281.669079930%2C2458281.671924193%2C2458281.674741095%2C2458281.677562788%2C2458286.616291330%2C2458286.619118742%2C2458286.621964106%2C2458286.624792398%2C2458286.627614706%2C2458309.642634147%2C2458309.645455569%2C2458309.648294374%2C2458309.651117254%2C2458309.653932912%2C2458309.687345500%2C2458309.690178240%2C2458309.693018166%2C2458309.695839888%2C2458309.698632814&OUT_UNITS=%27AU-D%27"
     }
   ]
 }
