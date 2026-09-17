@@ -26,6 +26,7 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733` prep
 - [`source.test.mts`](../../../tests/objects/unit/hd-189733/source.test.mts) verifies the pins and acquisitions, that radius and GM are the map paper's stellar values, that placement is the archived Gaia row, and that the TESS fit returns the coefficients above from 30 transits with the map's radius ratio within 0.001.
 - [`authored-rotation.test.mts`](../../../tools/objects/authored-rotation.test.mts) checks that λ −1.00° and i★ 71.87° with Cristo et al.'s own orbit inclination (85.508°) give ψ 13.68°, and that an aligned axis falls on the orbit normal. The source test checks that the prepared pole is 13.9° from HD 189733b's orbit normal.
 - [`object-discovery.test.mts`](../../../site/test/object-discovery.test.mts) checks that the three HD 189733 bodies stay on the map under every discovery setting while Antares and Polaris stay hidden.
+- [`rendered-default-view.png`](source/reference/rendered-default-view.png) and [`rendered-system-view.png`](source/reference/rendered-system-view.png) are the branch's dev server at `/hd-189733/` and `?overview=system` in headless Chrome, no console errors: the limb plate fitted to the sphere, and the planet's orbit around the star.
 
 ## Known problems
 

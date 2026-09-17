@@ -79,7 +79,7 @@
           {
             "catalogueId": "source-hd-189733b-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/hd-189733b/source/manifest.json@0000000000000000000000000000000000000000#/inputs/2"
+            "evidence": "src/objects/hd-189733b/source/manifest.json@52e6e03f6de43f93ced1caea00c88926f07339ac#/inputs/2"
           }
         ]
       }
@@ -237,6 +237,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 6025,
       "expectedSha256": "e20d41a116f8a164edcaaad432f84e973ac0103b54b72edff0caeccb5fc8e768"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 533042,
+      "expectedSha256": "a5060b3a600b69365ee7106b75de9e826add677501838e875b4e249343926f6a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733b/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+      }
     }
   ]
 }

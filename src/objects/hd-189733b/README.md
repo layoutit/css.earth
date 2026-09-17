@@ -31,6 +31,7 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733b` pre
 - [`npy-pickle.test.mts`](../../../tools/objects/terrestrial-layers/npy-pickle.test.mts) checks the stated grid layout, ThERESA's visible-longitude rule including its wrapping, and that a kept cell is drawn whole.
 - [`hd-189733b-raw-map.test.mts`](../../../tools/objects/eclipse-map/hd-189733b-raw-map.test.mts) (from an earlier change) fits a map to the two MIRI eclipses this project reduced from raw exposures and matches the deposited map's dayside with correlation 0.94; it runs where the reduction's outputs are present.
 - [`source.test.mts`](../../../tests/objects/unit/hd-189733b/source.test.mts) verifies the pins, the lens recipe and that the prepared body frame's +X points at the host star at the scene epoch.
+- [`rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/hd-189733b/` in headless Chrome, no console errors: the dayside faces the camera with the hot spot east of centre, and the lens preview leaves the unobserved strip blank.
 
 ## Known problems
 
