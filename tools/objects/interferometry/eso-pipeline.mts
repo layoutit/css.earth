@@ -5,7 +5,7 @@
  * the columns it needs (tpl_start, dp_type, dp_cat, object or target...) and the saved CSV of a test fixture is the same text
  * the archive returns. */
 import { spawnSync } from 'node:child_process';
-import { access, mkdir, readdir, writeFile } from 'node:fs/promises';
+import { access, mkdir, open, readdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
@@ -48,13 +48,24 @@ export async function rawFrame(dpId: string, directory: string) {
   const target = resolve(directory, `${dpId}.fits`);
   if (await exists(target)) return target;
   await mkdir(directory, { recursive: true });
-  const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`);
-  if (response.status === 401) throw new Error(`${dpId} is still proprietary.`);
-  if (!response.ok || !response.body) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
-  const compressed = `${target}.Z`;
-  await pipeline(Readable.fromWeb(response.body as never), createWriteStream(compressed));
-  const run = spawnSync('gzip', ['-d', '-f', compressed]);
-  if (run.status !== 0) throw new Error(`${dpId}: could not decompress (${String(run.stderr)}).`);
+  const download = `${target}.download`;
+  // The portal drops long transfers now and then; a whole file is fetched again, up to three times.
+  for (let attempt = 1; ; attempt++) {
+    const response = await fetch(`https://dataportal.eso.org/dataPortal/file/${dpId}`);
+    if (response.status === 401) throw new Error(`${dpId} is still proprietary.`);
+    if (!response.ok || !response.body) throw new Error(`${dpId}: the ESO data portal answered ${response.status}.`);
+    try { await pipeline(Readable.fromWeb(response.body as never), createWriteStream(download)); break; } catch (error) {
+      if (attempt === 3) throw error;
+    }
+  }
+  // Raw frames arrive Unix-compressed (magic 1f 9d); processed calibration files (M.*) arrive as plain FITS.
+  const magic = Buffer.alloc(2), handle = await open(download, 'r');
+  await handle.read(magic, 0, 2, 0); await handle.close();
+  if (magic[0] === 0x1f && (magic[1] === 0x9d || magic[1] === 0x8b)) {
+    await rename(download, `${target}.Z`);
+    const run = spawnSync('gzip', ['-d', '-f', `${target}.Z`]);
+    if (run.status !== 0) throw new Error(`${dpId}: could not decompress (${String(run.stderr)}).`);
+  } else await rename(download, target);
   return target;
 }
 
@@ -78,4 +89,57 @@ export async function runRecipe(pipelineSetup: EsoPipeline, work: string, step: 
   await writeFile(resolve(directory, 'log.txt'), `${run.stdout}${run.stderr}`);
   if (run.status !== 0) throw new Error(`${recipe} failed for ${step}; see ${resolve(directory, 'log.txt')}.`);
   return (await readdir(directory)).filter(name => name.endsWith('.fits')).sort().map(name => resolve(directory, name));
+}
+
+export type EsoHeader = Readonly<Record<string, string | number | boolean>>;
+
+/** Header cards (80-column lines) as keywords, HIERARCH ones included, as "ESO DET2 SEQ1 DIT" style keys. */
+export function parseHeaderCards(cards: Iterable<string>): EsoHeader {
+  const header: Record<string, string | number | boolean> = {};
+  for (const card of cards) {
+    if (card.startsWith('END') && !card.slice(3).trim()) break;
+    const match = /^(?:HIERARCH\s+)?([A-Z0-9_ -]+?)\s*=\s*('(?:[^']|'')*'|[^/]*)/u.exec(card);
+    if (!match) continue;
+    const raw = match[2]!.trim();
+    header[match[1]!.trim()] = raw.startsWith("'") ? raw.slice(1, raw.lastIndexOf("'")).replace(/''/gu, "'").trim() : raw === 'T' ? true : raw === 'F' ? false : Number.isFinite(Number(raw)) && raw !== '' ? Number(raw) : raw;
+  }
+  return header;
+}
+
+/** A FITS file's primary header. */
+export async function esoHeader(path: string) {
+  const handle = await open(path, 'r'), cards: string[] = [];
+  try {
+    const block = Buffer.alloc(2880);
+    for (let offset = 0; ; offset += 2880) {
+      const { bytesRead } = await handle.read(block, 0, 2880, offset);
+      if (bytesRead < 2880) break;
+      for (let i = 0; i < 2880; i += 80) cards.push(block.toString('latin1', i, i + 80));
+      if (cards.some(card => card.startsWith('END') && !card.slice(3).trim())) break;
+    }
+  } finally { await handle.close(); }
+  return parseHeaderCards(cards);
+}
+
+const HTML_ENTITIES: Readonly<Record<string, string>> = { amp: '&', lt: '<', gt: '>', quot: '"', '#x27': "'", '#39': "'" };
+
+/** A raw frame's primary header from the archive's header service, so frames can be chosen before any is downloaded. The page
+ * text is kept in the directory, and read from there when present. */
+export async function archiveHeader(dpId: string, directory: string) {
+  if (!/^[A-Z]+\.\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3}$/u.test(dpId)) throw new TypeError(`${dpId} is not a raw frame id.`);
+  const cached = resolve(directory, `${dpId}.header.txt`), read = (text: string) => {
+    const header = parseHeaderCards(text.split('\n'));
+    if (!('ESO DPR TYPE' in header)) throw new Error(`${dpId}: the archive header has no DPR TYPE.`);
+    return header;
+  };
+  if (await exists(cached)) return read(await readFile(cached, 'utf8'));
+  // The service refuses a percent-encoded id.
+  const response = await fetch(`https://archive.eso.org/hdr?DpId=${dpId}`);
+  if (!response.ok) throw new Error(`${dpId}: the ESO header service answered ${response.status}.`);
+  const pre = /<pre>([\s\S]*?)<\/pre>/u.exec(await response.text());
+  if (!pre) throw new Error(`${dpId}: the ESO header service returned no header.`);
+  const text = pre[1]!.replace(/&(amp|lt|gt|quot|#x27|#39);/gu, (_, name: string) => HTML_ENTITIES[name]!), header = read(text);
+  await mkdir(directory, { recursive: true });
+  await writeFile(cached, text);
+  return header;
 }

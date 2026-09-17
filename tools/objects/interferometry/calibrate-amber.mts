@@ -16,7 +16,7 @@
  * phases and differential visibilities come from the first run (the selector leaves closure phases identical). Finally the
  * wavelengths are calibrated on the science star's CO lines (co-wavelength.mts), which the pipeline's lamp-based table misses by
  * about 2 nm near 2.3 um. */
-import { readFile, rename, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureCoShift, MINIMUM_CO_CORRELATION } from './co-wavelength.mts';
@@ -151,7 +151,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const csv = option('--frames') ? await readFile(option('--frames')!, 'utf8') : await queryRawTable('AMBER', AMBER_COLUMNS, new Date(Date.parse(`${from}Z`) - 12 * 3600e3).toISOString().slice(0, 19), to);
   const plan = planAmberNight(parseRawTable(csv), target, { from, to });
   const root = await toolchainPath('amber');
-  await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`).catch(async () => { const { mkdir } = await import('node:fs/promises'); await mkdir(work, { recursive: true }); await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`); });
+  await mkdir(work, { recursive: true });
+  await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
   const files = await calibrateAmber(plan, option('--raw') ?? resolve(work, 'raw'), work, resolve(root, 'pipeline'), resolve(root, 'calib/share/esopipes/datastatic/amber-4.4.5'), calibrators, Number(option('--selection') ?? 80));
   console.log(files.join('\n'));
 }

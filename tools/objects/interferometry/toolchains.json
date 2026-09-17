@@ -91,6 +91,36 @@
         "reason": "Apple clang 17 refuses gipaf.c, which calls cx_assert without including cxmessages.h; install_pipeline stops there before unpacking the calibration files."
       },
       "executable": "pipeline/bin/esorex"
+    },
+    "gravity": {
+      "purpose": "ESO VLTI/GRAVITY reduction from raw frames (dark, P2VM, visibilities, transfer function), driven by the archive's calibration association tree.",
+      "license": "GRAVITY pipeline GPL-2.0-or-later",
+      "build": "eso-kit",
+      "kit": "gravity-kit-1.11.0.tar.gz",
+      "downloads": [
+        {
+          "path": "gravity-kit-1.11.0.tar.gz",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/gravity/gravity-kit-1.11.0.tar.gz",
+          "bytes": 205462019,
+          "sha256": "00ac2ad2abb8c4393361064d4576ed7fca8acd0dbbe1a3afb6f7a21cad405d58"
+        }
+      ],
+      "executable": "pipeline/bin/esorex"
+    },
+    "matisse": {
+      "purpose": "ESO VLTI/MATISSE reduction from raw frames (flat, shift and kappa maps, raw estimates, calibrated OIFITS), driven by the archive's calibration association tree.",
+      "license": "MATISSE pipeline GPL-2.0-or-later",
+      "build": "eso-kit",
+      "kit": "matisse-kit-2.5.0.tar.gz",
+      "downloads": [
+        {
+          "path": "matisse-kit-2.5.0.tar.gz",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/matisse/matisse-kit-2.5.0.tar.gz",
+          "bytes": 138702676,
+          "sha256": "fe8101ec2ab21376b0d7615c820c954f56b6793370a84c87eddc4c3e5280a43a"
+        }
+      ],
+      "executable": "pipeline/bin/esorex"
     }
   }
 }
