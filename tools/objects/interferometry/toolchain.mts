@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Install and locate the pinned interferometry toolchains of toolchains.json under output/toolchains/<id> (ignored by git).
  *
- *   node tools/objects/interferometry/toolchain.mts install <squeeze|rotir|pionier> [--cache <dir> ...]
+ *   node tools/objects/interferometry/toolchain.mts install <squeeze|rotir|pionier|amber|gravity|matisse> [--cache <dir> ...]
  *   node tools/objects/interferometry/toolchain.mts verify <id>
  *
  * Downloads are verified by size and sha256; a file already present in a --cache directory with the same hash is linked
@@ -138,5 +138,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const caches = rest.flatMap((value, index) => rest[index - 1] === '--cache' ? [resolve(value)] : []);
   if (mode === 'install' && id) console.log(`${id} installed at ${await installToolchain(id, caches)}`);
   else if (mode === 'verify' && id) console.log(`${id} installed at ${await toolchainPath(id)}`);
-  else throw new TypeError('Usage: toolchain install <squeeze|rotir|pionier> [--cache <dir> ...] | verify <id>');
+  else throw new TypeError('Usage: toolchain install <squeeze|rotir|pionier|amber|gravity|matisse> [--cache <dir> ...] | verify <id>');
 }
