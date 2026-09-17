@@ -2,19 +2,14 @@
   "schema": "csspuck-runtime-assets@1",
   "assets": [
     {
-      "filename": "puck-lighting.webp",
-      "bytes": 1050836,
-      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
-    },
-    {
       "filename": "puck-normal-shadow@2x.webp",
-      "bytes": 85182,
-      "sha256": "cbde99870ae7caf0131ad9d67453cd051dec9df487b655655a1c7a03f64fecba"
+      "bytes": 76256,
+      "sha256": "b81e3412f66c4f4ad86a4041e38bc837bef29fe2537381c7207bbb16fe49b097"
     },
     {
       "filename": "puck-normal-surface@2x.webp",
-      "bytes": 84138,
-      "sha256": "187c2a0e4c5555462315da26c98a930b4db3c0ba63a8e03206c8a10c474206e7"
+      "bytes": 74638,
+      "sha256": "347da848cc4aafe83b499e1cf6d3e2fd6d1a65adad7a22d4717e03fab303306c"
     },
     {
       "filename": "puck-normal-thumbnail.webp",

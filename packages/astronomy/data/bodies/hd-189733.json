@@ -1,0 +1,29 @@
+{
+  "id": "hd-189733",
+  "classification": "star",
+  "order": 907,
+  "physical": {
+    "name": "HD 189733 A",
+    "horizonsCode": null,
+    "meanRadiusKm": 523166.4,
+    "gravitationalParameterKm3PerS2": 107109254173.1909,
+    "parent": null
+  },
+  "physicalNotes": "Radius: 0.752 solar radii at 695700 km per solar radius, the stellar radius Lally et al. (2025, arXiv:2503.20895, Table 1) fix for their HD 189733b eclipse map. GM from the stellar mass in their deposited ThERESA configuration, 0.8070777248865484 solar masses (Table 1: 0.807 +/- 0.005), times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the presentation frame puts the star's pole up; the pole is the spin axis Cristo et al. (2024) measured relative to HD 189733b's orbit.",
+  "star": {
+    "rightAscensionDegrees": 300.1821218062407,
+    "declinationDegrees": 22.709741105168273,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 19.775801965002984,
+    "properMotionRaMasPerYear": -3.208339784864691,
+    "properMotionDecMasPerYear": -250.32333085817578,
+    "radialVelocityKmPerS": -2.531722,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "Gaia DR3 source 1827242816201846144 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-189733/source/photometry/gaia-dr3-source.csv",
+      "distance": "Gaia DR3 parallax 50.567 +/- 0.016 mas (same row): 1000/50.567 = 19.776 pc, no zero-point correction",
+      "properMotion": "Gaia DR3 (same row): -3.208, -250.323 mas/yr",
+      "radialVelocity": "Gaia DR3 (same row): -2.53 +/- 0.12 km/s"
+    }
+  }
+}

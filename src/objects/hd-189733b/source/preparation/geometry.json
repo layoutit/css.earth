@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "hd-189733b",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/hd-189733b/hd-189733b-surface-temperature.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/hd-189733b/hd-189733b-poles-temperature.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#c6427c"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 1
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csshd-189733b-prepared-runtime-scene@1",
+    "materialSchema": "csshd-189733b-prepared-emission@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 36525,
+      "sourceProjection": "Challener et al. (2024) white-light brightness-temperature map, a 48 by 96 grid of pixel centres, sampled bilinearly onto the reference sphere",
+      "polarPreparation": "the same map sampled on the polar tiles",
+      "axialTiltNote": "the object's synchronous rotation record puts the pole on the orbit normal and longitude 0 toward the host star; this profile's tilt and period are not used for the frame, and no spin is animated"
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { readAuthoredRotation } from './authored-rotation.mts';
+import { obliquitySpinAxis, readAuthoredRotation } from './authored-rotation.mts';
 
 test('a measured meridian advances from its source epoch, including retrograde spin', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-rotation-'));
@@ -58,4 +58,14 @@ test('a synchronous rotation faces +X at the centre it orbits, +Z along the orbi
     }
     assert.ok(Math.abs(elements.spinRateRadPerDay - 2 * Math.PI / 0.8134741) < 1e-12);
   }
+});
+
+test('a spin axis measured against an orbit reproduces the published true obliquity and lies on the orbit normal when aligned', () => {
+  // Cristo et al. (2024, A&A 682, A28), HD 189733: lambda -1.00, i* 71.87 degrees with their orbit's i 85.508 give psi 13.6 +/- 6.9.
+  assert.ok(Math.abs(obliquitySpinAxis(85.508, 71.87, -1).trueObliquityDegrees - 13.68) < 0.01);
+  const aligned = obliquitySpinAxis(85.71, 85.71, 0), rad = Math.PI / 180;
+  assert.ok(aligned.trueObliquityDegrees < 1e-6);
+  [0, Math.sin(85.71 * rad), Math.cos(85.71 * rad)].forEach((value, axis) => assert.ok(Math.abs(aligned.spin[axis]! - value) < 1e-12));
+  // The true obliquity does not depend on the sign of lambda.
+  assert.equal(obliquitySpinAxis(85.71, 71.87, 1).trueObliquityDegrees, obliquitySpinAxis(85.71, 71.87, -1).trueObliquityDegrees);
 });

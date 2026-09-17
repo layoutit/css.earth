@@ -1,0 +1,170 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-189733b",
+  "entries": [
+    {
+      "id": "lally-2025-miri-eclipse-map",
+      "subject": "Lally et al. (2025) JWST MIRI + Spitzer 8 micron eclipse map (Eureka! reduction)",
+      "status": "included",
+      "finding": "output_E.npy in Zenodo 10.5281/zenodo.15103479 (MD5 dfb3f096bef955f228ed7e4d4bda12f0 as listed) holds fmap, tmap (12 x 24 cells), their uncertainties and the fitted times, fluxes and model. The paper's headline map is the Eureka! reduction, 2 eigenmaps at degree 5, hot spot 33.0 +0.7/-0.9 deg east. Hottest cell 1334.9 K at 37.5 E, 7.5 N; area-weighted dayside mean 1142 K. Turned by the package orbit and rotation it fits the 27,630 deposited MIRI samples with chi-squared 43,415, against 44,125 for a uniform planet and 45,783 for its east-west mirror.",
+      "evidence": [
+        "https://zenodo.org/records/15103479",
+        "https://arxiv.org/abs/2503.20895"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "theresa-visible-longitudes",
+      "subject": "Which longitudes the map shows",
+      "status": "included",
+      "finding": "ThERESA (commit 74a8fec, utils.vislon and theresa.py) shows only cells overlapping the sub-observer longitude range widened by 90 degrees, and the authors' plotting script crops to it. From the times saved in output_E.npy and the configuration's t0 and period the range is -109.85 to 179.65 deg (the upper limit is ThERESA's wrapping of the Spitzer phase curve's limb); four columns, -180 to -120 deg, are not drawn.",
+      "evidence": [
+        "https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/lib/utils.py",
+        "https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/theresa.py"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "sparta-reduction-map",
+      "subject": "The deposit's SPARTA-reduction map (output_S.npy)",
+      "status": "excluded",
+      "finding": "The same fit on the SPARTA reduction of the MIRI data. It duplicates the Eureka! map's data and method; the paper leads with the Eureka! map.",
+      "revisitWhen": "The SPARTA and Eureka! maps are found to differ in a way the lens should show.",
+      "evidence": [
+        "https://zenodo.org/records/15103479"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "raw-miri-map",
+      "subject": "This project's map from the raw MIRI exposures",
+      "status": "excluded",
+      "finding": "tools/objects/eclipse-map/hd-189733b-raw-map.test.mts fits the two MIRI eclipses reduced from raw (JWST program 2021) and matches the deposited dayside with correlation 0.94, hot spot 41 E 7 N. It uses MIRI only, without the Spitzer data that break the ramp-map degeneracy, so it is a check, not a lens.",
+      "revisitWhen": "A raw reduction adds the Spitzer data, or the program's remaining observations are mapped.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=2021",
+        "https://mast.stsci.edu/search/ui/#/jwst",
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/tools/objects/eclipse-map/hd-189733b-raw-map.test.mts",
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/docs/eclipse-mapping.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "spitzer-eclipse-maps",
+      "subject": "Earlier Spitzer 8 micron eclipse maps of HD 189733b",
+      "status": "excluded",
+      "finding": "Lally et al. (2025) compare their map with earlier Spitzer eclipse maps and include the same Spitzer eclipses in their fit. Those maps were not searched for as data files in this change; the JWST map is shown as the most constrained.",
+      "revisitWhen": "An earlier map is found deposited as a data file and is worth comparing on the planet.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20895"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "eclipse-timing-sensitivity",
+      "subject": "How far the hot spot moves with eclipse timing and light travel time",
+      "status": "unresolved",
+      "finding": "Measured in docs/eclipse-mapping.md: the eclipse-only map moves about 0.5-1 deg per second of timing; adding the 31 s of light travel time across the orbit, which ThERESA does not model, moves the offset from 42.3 to 26.4 deg in this project's fit. The paper's 33.0 deg lies inside that range. The map is shown as deposited.",
+      "revisitWhen": "A map of HD 189733b fitted with light travel time is published.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20895",
+        "https://zenodo.org/records/15103479",
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/docs/eclipse-mapping.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "transit-time-scale",
+      "subject": "Time scale of the configuration's transit time",
+      "status": "unresolved",
+      "finding": "Lally et al. (2025) Table 1 labels t0 59838.6863112 UTC; the scene uses it as TDB, 69 s later, 0.04 percent of an orbit. The map is shown as fitted, so this changes only the planet's displayed phase.",
+      "revisitWhen": "The deposit or paper states the scale of the light-curve times.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20895"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "north-south-degeneracy",
+      "subject": "Which side of the star the planet crosses",
+      "status": "unresolved",
+      "finding": "An eclipse light curve cannot tell whether the planet crosses north or south of the star's centre; the orbit's construction fixes the map's north.",
+      "revisitWhen": "The orbit's sky orientation is measured.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20895"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "synchronous-rotation",
+      "subject": "Tidal locking of HD 189733b",
+      "status": "unresolved",
+      "finding": "Assumed, as in the paper's configuration (rotation period equal to the orbital period); not measured.",
+      "revisitWhen": "A rotation period of HD 189733b is measured.",
+      "evidence": [
+        "https://zenodo.org/records/15103479"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    },
+    {
+      "id": "navigation-marker",
+      "subject": "Distant marker for HD 189733b",
+      "status": "included",
+      "finding": "The deposited temperature map seen from the host star in the lens palette, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/src/objects/hd-189733b/source/presentation/context.png"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
+        }
+      ]
+    }
+  ]
+}

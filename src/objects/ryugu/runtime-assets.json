@@ -3,13 +3,13 @@
   "assets": [
     {
       "filename": "ryugu-close-up-shadow@2x.webp",
-      "bytes": 813826,
-      "sha256": "ae2c2814b15585814dc0b59fde54da3a3ff0ec902f9f59705e08de3cf3024949"
+      "bytes": 799934,
+      "sha256": "c40a0344656371bab56242ac8f8f2a440a68fb0ab7a13889b98a66de2cad78fe"
     },
     {
       "filename": "ryugu-close-up-surface@2x.webp",
-      "bytes": 1782574,
-      "sha256": "b1a83c21579e82e50913c9189df9ea0f3fca07689ac49505b29c0ee301879f4e"
+      "bytes": 1726058,
+      "sha256": "0fbe277735c9ea3b83a9ac318b382acf7d8e649d09596b939702286b759074de"
     },
     {
       "filename": "ryugu-close-up-thumbnail.webp",
@@ -23,13 +23,13 @@
     },
     {
       "filename": "ryugu-elevation-shadow@2x.webp",
-      "bytes": 1148960,
-      "sha256": "cce04f1117619056836b5fb3e80ed722bbbb81955c060d6574d9c7ce257d55ab"
+      "bytes": 875160,
+      "sha256": "eb00c3e0d7bfe14ecbd19ac6f5e893d101e961e4d536c1d31303f5ad502138f9"
     },
     {
       "filename": "ryugu-elevation-surface@2x.webp",
-      "bytes": 1307486,
-      "sha256": "e6f3e65bc8ed2e378ac2175313c96fc8c7a943c0c56a77d1a9d9ca44e4ca320e"
+      "bytes": 1019642,
+      "sha256": "b423dd2b015aa30203e888addadb645bc337fc323c146705854ed0bbfdc60f2a"
     },
     {
       "filename": "ryugu-elevation-thumbnail.webp",
@@ -38,13 +38,13 @@
     },
     {
       "filename": "ryugu-enhanced-shadow@2x.webp",
-      "bytes": 1694404,
-      "sha256": "8461aef485d09ee2185f3acb665337a8157d7a28ca2e47e68b908c4faac48080"
+      "bytes": 1646802,
+      "sha256": "f152385555ba8c579a80f01c812b0bb94514796568358a9ac4ab87170764f79d"
     },
     {
       "filename": "ryugu-enhanced-surface@2x.webp",
-      "bytes": 4234860,
-      "sha256": "da8dd9b465be1bb40d97fe483095ed7885ec1b798db8b42bcfc432379dd73b27"
+      "bytes": 4152684,
+      "sha256": "ca59f918bdeea02e5a7a5e310660e37ccd927a9961e6b32c7f6ee85223167580"
     },
     {
       "filename": "ryugu-enhanced-thumbnail.webp",
@@ -57,19 +57,14 @@
       "sha256": "319496b54c4be250996b275606daf810d2f0368e034f3ea48a2db73249679c3a"
     },
     {
-      "filename": "ryugu-lighting.webp",
-      "bytes": 1050836,
-      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
-    },
-    {
       "filename": "ryugu-normal-shadow@2x.webp",
-      "bytes": 445852,
-      "sha256": "a6da07742fb3fcff38442acdc8eb2aefb4c33e400ad1ecb082ffd31c5f845e2d"
+      "bytes": 430956,
+      "sha256": "54bf2aa37867e9a73df55248d4233025f1d6ff131a6ca4d09f2e2cffbb064e3a"
     },
     {
       "filename": "ryugu-normal-surface@2x.webp",
-      "bytes": 1004624,
-      "sha256": "0e5674169e18634c20196102c3a51c2e2b24a0eccea98fe1eb5d2c42a61aac3b"
+      "bytes": 973070,
+      "sha256": "ed6c493b166d7218f6b9d730af0f897bf87499016f7fd2fbc94afc33d67c4720"
     },
     {
       "filename": "ryugu-normal-thumbnail.webp",
@@ -83,13 +78,13 @@
     },
     {
       "filename": "ryugu-spectral-slope-shadow@2x.webp",
-      "bytes": 1489540,
-      "sha256": "ad498fd6fc9b20246d3f2bd4ba1b614e7405ece4dc6571705c7639aaf460bcc3"
+      "bytes": 1008584,
+      "sha256": "04dc7b236bc4d29b42406079829ad373e34085c440fdc908941bf7422e471b6a"
     },
     {
       "filename": "ryugu-spectral-slope-surface@2x.webp",
-      "bytes": 3722212,
-      "sha256": "439862137b38d8e34a37d398ecc075ea1c235dc3a80049d7d7d891bc465ed966"
+      "bytes": 2410266,
+      "sha256": "78b0da7c699d8b049196c6c5adb661f80f7201ed870658982d8ab6df004cc0b9"
     },
     {
       "filename": "ryugu-spectral-slope-thumbnail.webp",
@@ -103,13 +98,13 @@
     },
     {
       "filename": "ryugu-thermal-inertia-shadow@2x.webp",
-      "bytes": 1632720,
-      "sha256": "96bd52e239e20239fe83b35f501842faaeaa9e53729f0574072aa97b559555d8"
+      "bytes": 1094904,
+      "sha256": "77a257a76659e4beb97daf9faf2bbf1364dbebedd64d8e2f1260e0250a868202"
     },
     {
       "filename": "ryugu-thermal-inertia-surface@2x.webp",
-      "bytes": 3431978,
-      "sha256": "caad5bc7e6e08dc16366f9de3242ea38d7b8fa8cbf7ba78c5944f3acd566e315"
+      "bytes": 2101824,
+      "sha256": "5f38ab7e363925383e58a5322cf2d1ab015138fb97e72080ea31dee28105b8fb"
     },
     {
       "filename": "ryugu-thermal-inertia-thumbnail.webp",

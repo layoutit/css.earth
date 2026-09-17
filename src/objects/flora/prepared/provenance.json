@@ -1,0 +1,545 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "flora",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "893cb0986c2455d4dd178961adde42d99455dba8d34cb45a30808e2a2bca377e"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "c18ced1f51b07b376b3c5356943ce652d45abab51d0a2a46dec7a725d86e11a9"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "c9b0d751da67f1b52750c2a650676057368f1ab3314807e82cea4aefbd491102",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "flora",
+        "displayName": "Flora",
+        "publicBase": "/scenes/flora/",
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/8_Flora_mpcd.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 4002,
+                "expectedFaces": 8000
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -73
+              },
+              "minimum": -20,
+              "maximum": 10,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 73000,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 73,
+          "mapUrl": "/scenes/flora/flora-shape-surface@2x.webp",
+          "polesUrl": "/scenes/flora/flora-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/8_Flora_mpcd.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 4002,
+              "expectedFaces": 8000
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "texelsPerFace": 16384,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1300,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+        },
+        "presentation": {
+          "defaultLens": "shape"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "f5e13a08a6e77534def6b73887ad785cf56eb000154dc3bb2b5d75cd72447867",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "flora",
+        "displayName": "Flora",
+        "title": {
+          "label": "Flora",
+          "viewBox": "0 0 58.7042 35",
+          "width": 58.7042,
+          "height": 35,
+          "path": "M0 29L0 8.63L13.13 8.63L13.13 11.29L3.05 11.29L3.05 17.5L12.32 17.5L12.32 20.14L3.05 20.14L3.05 29ZM18.51 8.63L18.51 29L15.6 29L15.6 8.63ZM28.09 29.33Q26.03 29.33 24.45 28.36Q22.88 27.4 22.01 25.68Q21.13 23.97 21.13 21.71Q21.13 19.46 22.01 17.73Q22.88 16.01 24.45 15.04Q26.03 14.07 28.09 14.07Q30.2 14.07 31.76 15.04Q33.31 16.01 34.19 17.73Q35.06 19.46 35.06 21.71Q35.06 23.97 34.19 25.68Q33.31 27.4 31.76 28.36Q30.2 29.33 28.09 29.33ZM28.09 26.81Q29.38 26.81 30.27 26.17Q31.17 25.53 31.65 24.38Q32.12 23.23 32.12 21.73Q32.12 20.18 31.65 19.03Q31.17 17.88 30.27 17.24Q29.38 16.59 28.09 16.59Q26.83 16.59 25.94 17.23Q25.04 17.87 24.57 19.03Q24.1 20.18 24.1 21.73Q24.1 23.24 24.57 24.39Q25.04 25.53 25.95 26.17Q26.85 26.81 28.09 26.81ZM37.68 29L37.68 14.37L40.5 14.37L40.5 16.75L40.57 16.75Q40.97 15.53 41.87 14.86Q42.77 14.18 44.15 14.18Q44.47 14.18 44.75 14.21Q45.04 14.23 45.25 14.26L45.25 17Q45.07 16.94 44.64 16.89Q44.21 16.85 43.71 16.85Q42.85 16.85 42.14 17.23Q41.43 17.61 41.01 18.38Q40.6 19.16 40.6 20.3L40.6 29ZM51.46 29.26Q50.02 29.26 48.87 28.75Q47.73 28.25 47.06 27.26Q46.4 26.28 46.4 24.83Q46.4 23.59 46.88 22.78Q47.36 21.97 48.18 21.51Q49 21.04 50.03 20.8Q51.06 20.56 52.16 20.44Q53.51 20.26 54.32 20.16Q55.12 20.06 55.47 19.83Q55.82 19.59 55.82 19.07L55.82 18.96Q55.82 18.21 55.48 17.67Q55.14 17.13 54.49 16.81Q53.84 16.49 52.89 16.49Q51.96 16.49 51.25 16.8Q50.54 17.11 50.13 17.63Q49.72 18.14 49.61 18.76L46.77 18.6Q46.96 17.23 47.77 16.22Q48.57 15.22 49.9 14.67Q51.23 14.11 52.91 14.11Q54.17 14.11 55.22 14.42Q56.28 14.73 57.06 15.36Q57.84 15.98 58.27 16.9Q58.7 17.82 58.7 19.05L58.7 29L55.85 29L55.85 26.95L55.78 26.95Q55.48 27.52 54.94 28.06Q54.4 28.59 53.55 28.92Q52.7 29.26 51.46 29.26ZM52.07 26.91Q53.33 26.91 54.17 26.45Q55.01 25.99 55.42 25.23Q55.83 24.46 55.83 23.57L55.83 21.82Q55.68 21.96 55.31 22.06Q54.94 22.16 54.44 22.26Q53.93 22.36 53.39 22.44Q52.84 22.53 52.32 22.6Q51.51 22.71 50.82 22.96Q50.13 23.22 49.71 23.67Q49.3 24.13 49.3 24.88Q49.3 25.53 49.64 25.98Q49.98 26.43 50.6 26.67Q51.23 26.91 52.07 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "facts": [
+            {
+              "id": "distance-from-sun",
+              "label": "Distance from Sun",
+              "value": "2.202 AU (mean)",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "3.27 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-16",
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "thumbnail": "/scenes/flora/flora-shape-thumbnail.webp",
+              "surface": "flora-shape-surface@2x.webp",
+              "poles": "flora-shape-surface@2x.webp",
+              "source": {
+                "id": "flora-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "notes": "VLT/SPHERE shape model Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+              "noData": true
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "thumbnail": "/scenes/flora/flora-elevation-thumbnail.webp",
+              "surface": "flora-elevation-surface@2x.webp",
+              "poles": "flora-elevation-surface@2x.webp",
+              "source": {
+                "id": "flora-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "-5",
+                  "10"
+                ],
+                "meta": "km · 73 km reference sphere",
+                "sourceUrl": "https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj",
+                "image": "/scenes/flora/flora-elevation-legend.webp"
+              },
+              "notes": "Source shape · radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "VLT/SPHERE survey and physical properties",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Released MPCD shape model",
+            "href": "https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Observed pole and period; arbitrary display phase",
+            "href": "https://doi.org/10.1051/0004-6361/202141781"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.1051/0004-6361/202141781",
+            "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/flora.json",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "flora-shape",
+      "path": "shape/8_Flora_mpcd.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj",
+      "credit": "P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific model from the authors’ release accompanying CC-BY-4.0 research; retain source credit and citations.",
+      "acquisition": "Restore the unmodified OBJ through source/preparation/acquisition.json; the public-site cookie is recorded there.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 73000
+      },
+      "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-shape",
+            "role": "material",
+            "evidence": "src/planets/flora/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
+      "sha256": "e023ac4feda25e06599505cccb6c442ccb258b0d01d6d9b921717eab44c7d21f",
+      "bytes": 480379,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/8_Flora_mpcd.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "f5e13a08a6e77534def6b73887ad785cf56eb000154dc3bb2b5d75cd72447867",
+      "bytes": 6914,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "flora-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/flora/flora-elevation-thumbnail.webp",
+          "bytes": 6162,
+          "sha256": "6177ec8ccefb65120562f6c98944ef78a55be5548468145f0eec3abc29a81dd4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/flora/flora-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/flora/flora-elevation-surface@2x.webp",
+          "bytes": 330174,
+          "sha256": "3ca532c0c1a5ff5d6b9397423b583b985bb13b7be021e58978468e9ab2d61905",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "flora-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "flora-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/flora/flora-shape-thumbnail.webp",
+          "bytes": 44,
+          "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/flora/flora-shape-surface@2x.webp",
+          "bytes": 79978,
+          "sha256": "c3f069933b77a617cc0bd5c46198df795e8df9624f46c65f3f641094ec8fc079",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "flora-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4733,
+          "sha256": "995aa52b4aecd30d2a213765a7a5927eaa0a2d5062c282a6ee25c3c960fcd0bf",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 14280,
+          "sha256": "3fed3ba49b07a8f8a6e371dcf16fafdcbceb96361834dfba8e976f376d9c4a18",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "flora",
+    "materialSha256": "60ce51abcd814bb9982a3d03b75b2f0a328ea439fbd968be2b69dee485417170",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "c18ced1f51b07b376b3c5356943ce652d45abab51d0a2a46dec7a725d86e11a9"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/r-doradus/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "r-doradus-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssr-doradus-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "alma",
+      "source": "observations/r-doradus-alma-338ghz-0p625mas.fits",
+      "falseColor": true,
+      "output": "r-doradus-surface-{id}{suffix}.webp",
+      "thumbnail": "r-doradus-lens-{id}.webp",
+      "science": {
+        "kind": "surface-observation",
+        "shape": {
+          "path": "shape/uniform-disc.tab",
+          "format": "pds-radius-table",
+          "grid": {
+            "metersPerUnit": 1000,
+            "expectedVertices": 2522,
+            "expectedFaces": 5040,
+            "stepDegrees": 5,
+            "longitudeDirection": "east-positive"
+          },
+          "radiusKm": 244291444,
+          "rows": 36,
+          "columns": 72,
+          "flatFaceErrorMeters": 464948873
+        },
+        "lens": {
+          "format": "controlled-shape-camera",
+          "metadata": {
+            "label": "ALMA continuum",
+            "falseColor": true,
+            "coverage": "One image of the photosphere made by the ALMA pipeline from band 7 visibilities taken on 18 July 2023, in the 331-345 GHz continuum, with a 20.7 by 16.8 milliarcsecond restoring beam, cast onto a sphere of the published radius. The camera is computed: the display axis is celestial north at the star, the image is north up and east left as its own world coordinates state, and the observer looks along the line of sight, so the sphere carries the Earth-facing hemisphere and nothing else. Nothing finer than the beam is shown."
+          },
+          "frames": [
+            {
+              "id": "alma-2023-07-338ghz",
+              "path": "observations/r-doradus-alma-338ghz-0p625mas.fits",
+              "encoding": "fits-oi-reconstruction",
+              "backgroundMaximum": 0.0029,
+              "observerLatitude": 0,
+              "observerWestLongitude": 0,
+              "sunLatitude": 0,
+              "sunWestLongitude": 0,
+              "rangeKm": 1685241715724394.8,
+              "northAzimuthDegrees": 0,
+              "pixelAngleMicroradians": 0.0030300855069346,
+              "center": [
+                103.244,
+                103.497
+              ],
+              "reconstruction": {
+                "startTime": "2023-07-18T14:40:59",
+                "filter": "band 7 continuum, 331.2, 333.0, 342.1 and 345.1 GHz spectral windows",
+                "visibilitiesPath": "observations/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits"
+              }
+            }
+          ],
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 5.1 million kilometres at the disc centre from 55 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "basis": "authored",
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "consumer": "sphere-photograph"
+        },
+        "offLimb": {}
+      }
+    },
+    {
+      "id": "shape",
+      "output": "r-doradus-surface-{id}{suffix}.webp",
+      "thumbnail": "r-doradus-lens-{id}.webp",
+      "source": "measurements.json",
+      "falseColor": false,
+      "science": {
+        "kind": "neutral-shape",
+        "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 1037,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "r-doradus-context-{id}{suffix}.webp",
+    "limbOutput": "r-doradus-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssr-doradus-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 1037,
+        "source": "the same ALMA continuum image: its light outside the 59.8 mas disc, 31 percent of the flux, on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 125 mas field. Most of it is the restoring beam's spill from the limb: only 4.6 percent of the flux lies more than one beam beyond it.",
+        "composition": "sky-plane image registered to the disc, mirrored and turned to the scene's handedness so its north meets the rendered pole",
+        "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "r-doradus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "R Doradus",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "alma",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 244291444
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/r-doradus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "19311362f5461b460362372e84d43ea8cd3977d195e80a858567cda452a69df5"
+      }
+    },
+    "catalog": {
+      "name": "R Doradus",
+      "classification": "star",
+      "color": "#ff7a3c",
+      "distanceAu": 11265291.9,
+      "description": "A red giant measured at 57 milliarcseconds: wider, its observers concluded, than any star but the Sun.",
+      "systemName": "Dorado",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        280380991952094900,
+        737676328923829500,
+        -1489071460843889200
+      ],
+      "presentationToReference": [
+        0.16637525530510322,
+        -0.3139097640282741,
+        0.934761966743339,
+        0.4377297006961755,
+        -0.8259374332605985,
+        -0.35527463386418534,
+        -0.8835790760031602,
+        -0.46828198383731096,
+        0.000007924271070257074
+      ],
+      "orbitUpReference": [
+        0.3139097640282741,
+        0.8259374332605985,
+        0.46828198383731096
+      ],
+      "metersPerUnit": 788036916.1290323,
+      "bodyRadiusM": 244291444000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "803f19c11483b593fe2e4d8951811004eb7ee56626512a75b8b256dcbeb10e53"
+  }
+}

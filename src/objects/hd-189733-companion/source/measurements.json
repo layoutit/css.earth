@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-189733-companion",
+  "angularDiameterMas": 0.11,
+  "angularDiameterSource": "Computed here from the radius and distance: 2 x 155,836.8 km at 19.776 pc = 0.105 mas. No diameter of HD 189733 B is measured.",
+  "distanceParsecs": 19.775801965002984,
+  "distanceSource": "HD 189733 A's Gaia DR3 distance, 1000/50.567 mas = 19.776 pc: the pair moves together, and B's own parallax, 50.629 +/- 0.014 mas, would put it 5,000 au nearer than A, 20 times their projected separation.",
+  "projectedSeparationArcsec": 11.44,
+  "projectedSeparationAu": 226.3,
+  "projectedSeparationSource": "Computed here from the two Gaia DR3 positions at epoch 2016.0 (photometry/gaia-dr3-source.csv in each package): 10.31 arcsec west and 4.95 arcsec south of HD 189733 A, 11.44 arcsec at position angle 244 degrees, 226 au at 19.776 pc. The separation along the line of sight is not measured, so the true distance between the stars is at least this.",
+  "radiusKm": 155836.8,
+  "radiusSource": "0.224 solar radii (155,836.8 km at 695,700 km per solar radius) from the TESS Input Catalog v8.2 (photometry/tic-8.2.tsv; Stassun et al. 2019, AJ 158, 138), which derives the radius of a cool dwarf from its Ks magnitude and distance (Mann et al. 2015). A model value, not a measured diameter.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the catalogue radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."
+  }
+}

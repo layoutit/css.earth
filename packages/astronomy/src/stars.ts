@@ -17,7 +17,10 @@ export interface StarAstrometry {
   /** Which direction the prepared presentation frame puts up: the J2000 ecliptic north pole by default, or the star's own
    * display axis (its rotation record's +z) so the camera orbit lies in the star's equator and reaches its sub-Earth point. */
   readonly presentationUp?: 'display-axis'
-  readonly sources: { readonly position: string; readonly distance: string; readonly properMotion: string; readonly radialVelocity: string }
+  /** A star measured to be gravitationally bound to another, with no measured orbit: a wide binary companion. The pair is one
+   * system centred on its centre of mass; `sources.binary` states the measurement that binds them. */
+  readonly boundTo?: string
+  readonly sources: { readonly position: string; readonly distance: string; readonly properMotion: string; readonly radialVelocity: string; readonly binary?: string }
 }
 export type StarId = keyof typeof STAR_ASTROMETRY
 export const STAR_IDS: readonly StarId[] = Object.keys(STAR_ASTROMETRY) as StarId[]

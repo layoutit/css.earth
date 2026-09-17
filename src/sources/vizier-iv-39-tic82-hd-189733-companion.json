@@ -1,0 +1,49 @@
+{
+  "id": "vizier-iv-39-tic82-hd-189733-companion",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TESS Input Catalog v8.2 row for HD 189733 B (TIC 256364937)",
+  "identifiers": [
+    {
+      "type": "VizieR catalogue",
+      "value": "IV/39/tic82"
+    },
+    {
+      "type": "TIC",
+      "value": "256364937"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab3467"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/IV/39",
+      "label": "VizieR IV/39"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab3467",
+      "label": "Stassun et al. (2019), AJ 158, 138"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=IV/39/tic82&TIC=256364937&-out=TIC,GAIA,Rad,e_Rad,Mass,e_Mass,Teff,Kmag,LClass&-out.meta=hu",
+      "checkedOn": "2026-09-17",
+      "locator": "TIC 256364937 (Gaia DR3 1827242816176111360): Rad 0.224 solar radii, Mass 0.193 solar masses, Teff 3213 K, Ks 9.323, DWARF"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "K. G. Stassun et al. (2019), AJ 158, 138, the TESS Input Catalog and Candidate Target List; VizieR catalogue IV/39 (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-3881/ab3467"
+    }
+  ],
+  "publisher": "CDS"
+}
