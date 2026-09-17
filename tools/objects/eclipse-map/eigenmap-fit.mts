@@ -91,11 +91,13 @@ export function eigenBasis(lmax: number, grid: MapGrid, orbit: HostedOrbit, host
     }
   }
   const { values, vectors } = symmetricEigen(gram, n);
+  // Rank is at most the number of harmonics; round-off eigenvalues below this relative floor carry no curve.
+  const floor = Math.max(...values) * 1e-12;
   const curves: Float64Array[] = [], maps: Float64Array[] = [], eigenvalues: number[] = [], harmonicCoefficients: Float64Array[] = [];
   for (let k = 0; k < n; k++) {
     // A curve with no weight on the difference of a +/- pair is identically zero (the symmetric half of the spectrum).
     const coefficients = Float64Array.from({ length: h }, (_, i) => vectors[k]![2 * i]! - vectors[k]![2 * i + 1]!);
-    if (coefficients.every(value => Math.abs(value) < 1e-9) || !(values[k]! > 1e-30)) continue;
+    if (coefficients.every(value => Math.abs(value) < 1e-9) || !(values[k]! > floor)) continue;
     const curve = new Float64Array(timesBmjd.length), map = new Float64Array(cells);
     for (let i = 0; i < h; i++) {
       const weight = vectors[k]![2 * i]!, antiweight = vectors[k]![2 * i + 1]!;
@@ -111,6 +113,8 @@ export interface EigenFit {
   /** Weighted normal equations of the linear model (parameters c_1..c_n, C0, s_corr): chi2(x) = x'Ax - 2b'x + dataSquares. */
   readonly normal: { readonly matrix: Float64Array; readonly rhs: Float64Array; readonly dataSquares: number };
   readonly ncurves: number; readonly coefficients: Float64Array; readonly uniformAmplitude: number; readonly stellarCorrection: number;
+  /** Coefficients of the systematics columns, in the order given. */
+  readonly systematics: Float64Array;
   readonly chiSquared: number; readonly samples: number; readonly parameters: number; readonly bic: number; readonly positive: boolean;
   /** Planet-to-star flux per unit intensity on the grid (the ThERESA fmap units). */
   readonly map: Float64Array;
@@ -131,12 +135,14 @@ function solve(matrix: Float64Array, rhs: Float64Array, n: number) {
   return x;
 }
 
-/** Fit the first `ncurves` eigencurves. Parameters: c_1..c_n, C0, s_corr. With `positive`, every visible cell keeps a positive
- * intensity (C0/pi + sum c_k map_k > 0), solved by a log-barrier Newton method from the uniform map. */
+/** Fit the first `ncurves` eigencurves. Parameters: c_1..c_n, C0, s_corr, then one coefficient per `systematics` column (an
+ * instrument baseline, ramp or decorrelation vector sampled at the data times, zero outside its visit). With `positive`, every
+ * visible cell keeps a positive intensity (C0/pi + sum c_k map_k > 0), solved by a log-barrier Newton method from the uniform map. */
 export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<number>, errors: ArrayLike<number>, use: (index: number) => boolean,
-  { positive = true } = {}): EigenFit {
+  { positive = true, systematics = [] as readonly ArrayLike<number>[] } = {}): EigenFit {
   if (!(ncurves >= 1 && ncurves <= basis.curves.length)) throw new RangeError(`ncurves must be 1..${basis.curves.length}.`);
-  const p = ncurves + 2, columns = [...basis.curves.slice(0, ncurves), basis.uniform, null];
+  if (systematics.some(column => column.length !== data.length)) throw new RangeError('Systematics columns must sample every data point.');
+  const p = ncurves + 2 + systematics.length, columns = [...basis.curves.slice(0, ncurves), basis.uniform, null, ...systematics];
   const normal = new Float64Array(p * p), rhs = new Float64Array(p);
   let samples = 0, dataSquares = 0;
   const row = new Float64Array(p);
@@ -160,9 +166,12 @@ export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<
   if (positive && !(minimum(x) > 0)) {
     // Feasible start: the best uniform planet (coefficients zero), then barrier Newton steps with a growing weight.
     x = new Float64Array(p);
-    const reduced = new Float64Array([normal[ncurves * p + ncurves]!, normal[ncurves * p + ncurves + 1]!, normal[(ncurves + 1) * p + ncurves]!, normal[(ncurves + 1) * p + ncurves + 1]!]);
-    const start = solve(reduced, new Float64Array([rhs[ncurves]!, rhs[ncurves + 1]!]), 2);
-    x[ncurves] = Math.max(start[0]!, 1e-6); x[ncurves + 1] = start[1]!;
+    // Best uniform planet with the systematics free: solve the sub-system without the eigencurve coefficients.
+    const free = Array.from({ length: p - ncurves }, (_, i) => ncurves + i), q = free.length, reduced = new Float64Array(q * q);
+    free.forEach((a, i) => free.forEach((b, j) => { reduced[i * q + j] = normal[a * p + b]!; }));
+    const start = solve(reduced, Float64Array.from(free, a => rhs[a]!), q);
+    free.forEach((a, i) => { x[a] = start[i]!; });
+    x[ncurves] = Math.max(x[ncurves]!, 1e-6);
     const a = visibleCells.map(c => { const r = new Float64Array(p); r[ncurves] = 1 / Math.PI; for (let k = 0; k < ncurves; k++) r[k] = basis.maps[k]![c]!; return r; });
     const objective = (candidate: Float64Array, weight: number) => {
       let barrier = 0;
@@ -194,7 +203,8 @@ export function fitEigenmap(basis: EigenBasis, ncurves: number, data: ArrayLike<
   const map = new Float64Array(cells);
   for (let c = 0; c < cells; c++) map[c] = constraint(x, c);
   const chiSquared = chi2(x);
-  return { normal: { matrix: normal, rhs, dataSquares }, ncurves, coefficients: x.slice(0, ncurves), uniformAmplitude: x[ncurves]!, stellarCorrection: x[ncurves + 1]!, chiSquared, samples, parameters: p,
+  return { normal: { matrix: normal, rhs, dataSquares }, ncurves, coefficients: x.slice(0, ncurves), uniformAmplitude: x[ncurves]!, stellarCorrection: x[ncurves + 1]!,
+    systematics: x.slice(ncurves + 2), chiSquared, samples, parameters: p,
     bic: chiSquared + p * Math.log(samples), positive: minimum(x) > 0, map };
 }
 
@@ -268,7 +278,7 @@ export function sampleEigenmap(basis: EigenBasis, fit: EigenFit, { steps = 20000
   const visible = Array.from(basis.visible.keys()).filter(c => basis.visible[c]);
   const feasible = (x: Float64Array) => { for (const c of visible) { let v = x[n]! / Math.PI; for (let k = 0; k < n; k++) v += x[k]! * basis.maps[k]![c]!; if (!(v > 0)) return false; } return true; };
   const random = seededRandom(seed), scale = 2.38 / Math.sqrt(p);
-  let x = Float64Array.from([...fit.coefficients, fit.uniformAmplitude, fit.stellarCorrection]), current = chi2(x), accepted = 0;
+  let x = Float64Array.from([...fit.coefficients, fit.uniformAmplitude, fit.stellarCorrection, ...fit.systematics]), current = chi2(x), accepted = 0;
   const samples: Float64Array[] = [], interval = Math.max(1, Math.floor((steps - burn) / keep)), chains: number[] = [];
   const z = new Float64Array(p), proposal = new Float64Array(p);
   for (let step = 0; step < steps; step++) {
