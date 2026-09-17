@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "askap",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "CASDA archive access for ASKAP",
+      "status": "deferred",
+      "finding": "CASDA's TAP service answered anonymously on 2026-09-17 (capabilities 200). Centimetre-wave survey data; no stellar-surface use identified.",
+      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "evidence": [
+        "https://casda.csiro.au/casda_vo_tools/tap/capabilities",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Not examined.",
+      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "evidence": [
+        "https://casda.csiro.au/casda_vo_tools/tap/capabilities"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software for this facility",
+      "status": "deferred",
+      "finding": "Not examined: ASKAPsoft products.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://casda.csiro.au/casda_vo_tools/tap/capabilities"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

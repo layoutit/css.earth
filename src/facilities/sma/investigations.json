@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "sma",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Submillimeter Array archive access",
+      "status": "deferred",
+      "finding": "The SMA archive answered on 2026-09-17 (200, after a redirect). Its own web interface, not TAP.",
+      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "evidence": [
+        "https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Not examined.",
+      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "evidence": [
+        "https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software for this facility",
+      "status": "deferred",
+      "finding": "Not examined: CASA and MIR.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

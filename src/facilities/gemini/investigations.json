@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "gemini",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Gemini Observatory archive access",
+      "status": "deferred",
+      "finding": "The Gemini archive refused this project's requests on 2026-09-17 (403 to both its JSON search and its search form, with and without a browser user agent). CADC mirrors Gemini data and answered anonymously (200), so Gemini data are reachable through CADC.",
+      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "evidence": [
+        "https://archive.gemini.edu/searchform",
+        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Not examined: Gemini's proprietary period and licence.",
+      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "evidence": [
+        "https://archive.gemini.edu/searchform",
+        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software for this facility",
+      "status": "deferred",
+      "finding": "Not examined: DRAGONS, Gemini's reduction package.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://archive.gemini.edu/searchform",
+        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}
