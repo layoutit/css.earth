@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "surface-imagery-6",
+  "subject": "Registered surface imagery",
+  "finding": "The selected release supplies a shape model and spin metadata, not a registered optical reflectance texture. Thermal diameters are disk-integrated quantities and cannot supply a thermal or regolith map.",
+  "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched."
+}

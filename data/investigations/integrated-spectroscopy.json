@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "integrated-spectroscopy",
+  "subject": "Cassini small-moon spectra and integrated photometry",
+  "finding": "The examined small-inner-satellite spectra and photometric analyses inform interpretation but are disk-integrated. They do not support painting a spatial composition texture onto this moon.",
+  "evidence": [
+    "https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn",
+    "https://doi.org/10.3847/1538-3881/ab659d"
+  ],
+  "revisitWhen": "A spatially resolved, calibrated spectrum or mapped product is tied to this moon’s surface coordinates."
+}

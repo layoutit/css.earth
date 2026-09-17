@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "celestia-native-illustration",
+  "subject": "Celestia native nucleus illustration and catalog scale",
+  "finding": "Superseded 2026-09-16: the Celestia generic mesh was a shared illustration with no relation to this nucleus, and its catalogue radius was an estimate. The package now shows a smooth ellipsoid at the published effective radius (no published measurement); no mesh from Celestia is retained.",
+  "evidence": [
+    "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+  ],
+  "revisitWhen": "A measured shape model of this nucleus (radar, spacecraft or a convex lightcurve inversion with a stated pole) would replace the ellipsoid."
+}

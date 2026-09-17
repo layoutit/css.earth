@@ -21,12 +21,10 @@
     },
     {
       "id": "uranus-flagship-2023-summary",
-      "subject": "2023 Uranian irregular-satellites physical summary and occultation prospects",
+      "survey": "uranus-flagship-2023-summary",
       "status": "included",
-      "finding": "The inspected 2023 physical summary supplies comparison context for the selected light-curve and size interpretation. Its predicted occultation prospects are not measured silhouettes or terrain.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/caliban/README.md",
-        "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/caliban/README.md"
       ],
       "checked": [
         {
