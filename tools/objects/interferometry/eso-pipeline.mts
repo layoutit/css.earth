@@ -10,6 +10,7 @@ import { createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
+import { esoHierarchy, fitsCardValue, MAX_HEADER_RECORDS, readFitsHeader, type FitsHeader } from '../../fits.mts';
 
 export type RawRow = Readonly<Record<string, string>>;
 
@@ -98,32 +99,42 @@ export async function runRecipe(pipelineSetup: EsoPipeline, work: string, step: 
 
 export type EsoHeader = Readonly<Record<string, string | number | boolean>>;
 
-/** Header cards (80-column lines) as keywords, HIERARCH ones included, as "ESO DET2 SEQ1 DIT" style keys. */
+/** Header card lines as keywords, with HIERARCH ones as "ESO DET2 SEQ1 DIT" style keys, each value read by tools/fits.mts. The archive's
+ * header service prints cards without their trailing blanks and widens long HIERARCH cards past 80 columns, so each line is read on
+ * its own rather than as an 80-column record. */
 export function parseHeaderCards(cards: Iterable<string>): EsoHeader {
   const header: Record<string, string | number | boolean> = {};
-  for (const card of cards) {
-    if (card.startsWith('END') && !card.slice(3).trim()) break;
-    const match = /^(?:HIERARCH\s+)?([A-Z0-9_ -]+?)\s*=\s*('(?:[^']|'')*'|[^/]*)/u.exec(card);
-    if (!match) continue;
-    const raw = match[2]!.trim();
-    header[match[1]!.trim()] = raw.startsWith("'") ? raw.slice(1, raw.lastIndexOf("'")).replace(/''/gu, "'").trim() : raw === 'T' ? true : raw === 'F' ? false : Number.isFinite(Number(raw)) && raw !== '' ? Number(raw) : raw;
+  for (const line of cards) {
+    const card = line.padEnd(80), key = card.slice(0, 8).trim();
+    if (!/^[\x20-\x7e]+$/u.test(card)) throw new Error('Invalid FITS header characters.');
+    if (key === 'END' && !card.slice(3).trim()) return header;
+    if (key === 'CONTINUE') throw new Error('Unsupported FITS CONTINUE convention in header text.');
+    if (key !== 'HIERARCH' && card[8] !== '=') continue;
+    const name = key === 'HIERARCH' ? esoHierarchy(card).key : key;
+    if (Object.hasOwn(header, name)) throw new Error(`Duplicate FITS field: ${name}`);
+    const value = fitsCardValue(card);
+    if (value !== undefined) header[name] = value;
   }
-  return header;
+  throw new Error('A FITS header has no END card.');
 }
 
-/** A FITS file's primary header. */
+/** Keywords with a value; a card with an empty value field states none. */
+const stated = (header: FitsHeader): EsoHeader => Object.fromEntries(Object.entries(header).filter((entry): entry is [string, string | number | boolean] => entry[1] !== undefined));
+
+/** A FITS file's primary header, read record by record up to its END card. */
 export async function esoHeader(path: string) {
-  const handle = await open(path, 'r'), cards: string[] = [];
+  const handle = await open(path, 'r'), blocks: Buffer[] = [];
   try {
-    const block = Buffer.alloc(2880);
-    for (let offset = 0; ; offset += 2880) {
-      const { bytesRead } = await handle.read(block, 0, 2880, offset);
+    for (let offset = 0; offset < MAX_HEADER_RECORDS * 2880; offset += 2880) {
+      const block = Buffer.alloc(2880), { bytesRead } = await handle.read(block, 0, 2880, offset);
       if (bytesRead < 2880) break;
-      for (let i = 0; i < 2880; i += 80) cards.push(block.toString('latin1', i, i + 80));
-      if (cards.some(card => card.startsWith('END') && !card.slice(3).trim())) break;
+      blocks.push(block);
+      let end = false;
+      for (let i = 0; i < 2880 && !end; i += 80) end = block.toString('latin1', i, i + 8) === 'END     ' && !block.toString('latin1', i + 8, i + 80).trim();
+      if (end) break;
     }
   } finally { await handle.close(); }
-  return parseHeaderCards(cards);
+  return stated(readFitsHeader(Buffer.concat(blocks)).header);
 }
 
 const HTML_ENTITIES: Readonly<Record<string, string>> = { amp: '&', lt: '<', gt: '>', quot: '"', '#x27': "'", '#39': "'" };

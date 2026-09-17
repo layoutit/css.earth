@@ -133,7 +133,8 @@ rotational phase. Keep these questions separate in the qualification evidence.
 Establish sample/line order, pixel origin, aspect ratio, flips and units, then
 inspect one native-pixel projection before fitting or baking. Read the product
 with this repository's own readers: [`tools/fits.mts`](../../../tools/fits.mts)
-for FITS and [`tools/spice/`](../../../tools/spice) for kernels. Both are
+for FITS, [`tools/fits-sky.mts`](../../../tools/fits-sky.mts) for which way a sky
+image faces, and [`tools/spice/`](../../../tools/spice) for kernels. Both are
 self-contained and run under plain Node, without installed packages or a
 prepared checkout, so an unbuilt worktree is not a reason to write a scratch
 decoder in another language. A scratch reader is untested, it can invert an
