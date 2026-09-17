@@ -299,3 +299,38 @@ export function percentiles(values: readonly number[]) {
   const sorted = [...values].sort((a, b) => a - b), at = (q: number) => { const i = q * (sorted.length - 1), lo = Math.floor(i), hi = Math.ceil(i); return sorted[lo]! + (sorted[hi]! - sorted[lo]!) * (i - lo); };
   return { median: at(0.5), low: at(0.16), high: at(0.84) };
 }
+
+const PLANCK = 6.62607015e-34, LIGHT = 299792458, BOLTZMANN = 1.380649e-23;
+/** Planck spectral radiance per wavelength, W m^-3 sr^-1, at a wavelength in microns. */
+export function planckRadiance(wavelengthMicrons: number, temperatureK: number) {
+  const wavelength = wavelengthMicrons * 1e-6;
+  return 2 * PLANCK * LIGHT ** 2 / (wavelength ** 5 * Math.expm1(PLANCK * LIGHT / (wavelength * BOLTZMANN * temperatureK)));
+}
+
+export interface Band { readonly wavelengthMicrons: ArrayLike<number>; readonly response: ArrayLike<number> }
+
+/** Brightness temperature over a band: the temperature whose Planck emission, weighted by the band response, matches the planet's
+ * intensity. A map value is planet-to-star flux per unit intensity, so the planet-to-star intensity ratio is pi * value / rp^2 (as in
+ * Rauscher et al. 2018, eq. 8); the star's band intensity is its spectrum on the band's wavelengths (`stellarIntensity`, any
+ * consistent units, e.g. a PHOENIX surface intensity) or a blackbody at `stellarTemperatureK`. Solved by bisection. */
+export function bandBrightnessTemperature(flux: number, band: Band, planetRadiusStellarRadii: number,
+  star: { readonly stellarTemperatureK: number } | { readonly stellarIntensity: ArrayLike<number> }, stellarCorrection = 0) {
+  const n = band.wavelengthMicrons.length;
+  if (n < 2 || band.response.length !== n) throw new RangeError('A band needs matching wavelengths and responses.');
+  const integrate = (value: (i: number) => number) => {
+    let sum = 0;
+    for (let i = 1; i < n; i++) sum += 0.5 * (value(i) * band.response[i]! + value(i - 1) * band.response[i - 1]!) * (band.wavelengthMicrons[i]! - band.wavelengthMicrons[i - 1]!);
+    return sum;
+  };
+  const stellar = 'stellarTemperatureK' in star ? integrate(i => planckRadiance(band.wavelengthMicrons[i]!, star.stellarTemperatureK))
+    : integrate(i => star.stellarIntensity[i]!);
+  const target = Math.PI * flux * (1 + stellarCorrection) / planetRadiusStellarRadii ** 2 * stellar;
+  if (!(target > 0)) return NaN;
+  let low = 10, high = 50000;
+  for (let iteration = 0; iteration < 100; iteration++) {
+    const middle = Math.sqrt(low * high);
+    if (integrate(i => planckRadiance(band.wavelengthMicrons[i]!, middle)) < target) low = middle; else high = middle;
+    if (high / low < 1 + 1e-10) break;
+  }
+  return Math.sqrt(low * high);
+}
