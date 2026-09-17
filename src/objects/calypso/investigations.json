@@ -56,10 +56,8 @@
     },
     {
       "id": "legacy-voyager-stooke-maps",
-      "subject": "Legacy Voyager/Stooke maps and shaded-relief illustrations",
+      "survey": "legacy-voyager-stooke-maps",
       "status": "excluded",
-      "finding": "The retained source review did not select these as observed maps: they lack the combination of Cassini detail and measured camera registration used by this package. Shaded-relief drawings are not observational textures.",
-      "revisitWhen": "A registered observational map supplies useful independent coverage or detail on this source frame.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md"
       ],
@@ -72,14 +70,10 @@
     },
     {
       "id": "integrated-spectroscopy",
-      "subject": "Cassini small-moon spectra and integrated photometry",
+      "survey": "integrated-spectroscopy",
       "status": "excluded",
-      "finding": "The examined small-inner-satellite spectra and photometric analyses inform interpretation but are disk-integrated. They do not support painting a spatial composition texture onto this moon.",
-      "revisitWhen": "A spatially resolved, calibrated spectrum or mapped product is tied to this moon’s surface coordinates.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md",
-        "https://www.usgs.gov/publications/cassini-spectra-and-photometry-025-51-mm-small-inner-satellites-saturn",
-        "https://doi.org/10.3847/1538-3881/ab659d"
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/calypso/README.md"
       ],
       "checked": [
         {

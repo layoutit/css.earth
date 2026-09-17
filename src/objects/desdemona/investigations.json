@@ -41,15 +41,13 @@
     },
     {
       "id": "keck-near-infrared-photometry",
-      "subject": "Keck near-infrared photometry",
+      "survey": "keck-near-infrared-photometry",
       "status": "excluded",
-      "finding": "2023 primary study, integrated photometry rather than a spatial spectral map. Excluded as a spatial surface lens.",
-      "revisitWhen": "A spatially resolved Desdemona measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/desdemona/README.md",
-        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/desdemona/source/manifest.json",
-        "https://www.sciencedirect.com/science/article/pii/S0019103522004237"
+        "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/desdemona/source/manifest.json"
       ],
+      "revisitWhen": "A spatially resolved Desdemona measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
       "checked": [
         {
           "date": "2026-09-13",
@@ -59,14 +57,13 @@
     },
     {
       "id": "jwst-hst-system-images",
-      "subject": "JWST/HST system images",
+      "survey": "jwst-hst-system-images",
       "status": "unresolved",
-      "finding": "Unresolved moon detections do not establish cartographic coverage. No texture is derived from them.",
-      "revisitWhen": "A spatially resolved Desdemona measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/desdemona/README.md",
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/desdemona/source/manifest.json"
       ],
+      "revisitWhen": "A spatially resolved Desdemona measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
       "checked": [
         {
           "date": "2026-09-13",
@@ -76,14 +73,13 @@
     },
     {
       "id": "dem-geology-composition-maps",
-      "subject": "DEM/geology/composition maps",
+      "survey": "dem-geology-composition-maps",
       "status": "unresolved",
-      "finding": "No qualified spatial product was located in the inspected mission releases and cited studies. This is the survey outcome, not a claim that no other data exist.",
-      "revisitWhen": "A Desdemona source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/desdemona/README.md",
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/desdemona/source/manifest.json"
       ],
+      "revisitWhen": "A Desdemona source release provides the missing downloadable mapped data, projection, measured quantity and coverage for direct comparison with the selected inputs.",
       "checked": [
         {
           "date": "2026-09-13",

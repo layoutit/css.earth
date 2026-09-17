@@ -87,8 +87,19 @@ the stated use, not that every scientific claim is qualified. Ledger coverage
 counts objects with records, not objects with complete imagery or an exhaustive
 source search.
 
+Reasoning that three or more bodies reach the same way belongs in one shared
+record under `data/investigations`, and an entry names it in `survey` instead of
+repeating the paragraph. The record holds the subject, finding, the evidence
+every body leans on and the reopen condition; the entry still states this body's
+status, its own evidence and when it was checked, and may override the subject
+or reopen condition. A shared record names no single body's files. A test
+refuses a finding repeated across three bodies and a record no longer quoted.
+
 The README links the ledger instead of repeating a source survey. Read the
-ledger before investigating an object. Reopen an excluded, unresolved or
+ledger before investigating an object, starting from the open-work index
+([`docs/provenance/investigation-index.md`](investigation-index.md)), which
+groups every unresolved and deferred decision by what it waits on. Refresh it
+with `pnpm investigations:index`; a test refuses a stale copy. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node tools/report-investigations.mts` lists every open entry across objects.
 Use `--summary` for catalogue coverage and `--classification` to select an
