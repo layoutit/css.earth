@@ -82,7 +82,7 @@ Single nights are not used for the third condition. π¹ Gruis's first night alo
 
 Each calibration tool is compared with an author's published file for the same observation. The comparison tests run whenever the reduction output is present.
 
-**PIONIER, π¹ Gruis, 25 September 2014.** One science block and two calibrator blocks against Paladini et al. (2018): 18 channel points, median squared-visibility ratio 0.990, range 0.954 to 0.998, largest difference 0.84 sigma. The planner takes the spectral calibration pndrs itself chooses, the closest `FRINGE,LAMP` scan before the first block, and the wavelengths match the author's to 0.012 percent. Taking them from a star's fringe exposure left them 0.5 to 0.9 percent long.
+**PIONIER, π¹ Gruis, 25 September 2014.** One science block and two calibrator blocks against Paladini et al. (2018): 18 channel points, median squared-visibility ratio 0.991, range 0.969 to 1.004, largest difference 0.58 sigma. Each baseline is paired with the author's nearest one: taking the first within a metre paired some with a neighbouring exposure and gave 0.954 to 0.998 and 0.84 sigma. The planner takes the spectral calibration pndrs itself chooses, the closest `FRINGE,LAMP` scan before the first block, and the wavelengths match the author's to 0.012 percent. Taking them from a star's fringe exposure left them 0.5 to 0.9 percent long.
 
 **AMBER, R Dor, 7 December 2013.** One science block with the Canopus block before it (6.93 ± 0.15 mas, the diameter the paper adopts) against Ohnaka et al. (2019), file DATASET34:
 
