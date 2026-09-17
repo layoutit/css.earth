@@ -79,7 +79,9 @@ The result remains **reviewable research, not qualified application material**. 
 
 The finite detail components still sample the **simulation** along their observer rays, because that is where conditional local depth modes exist. The envelope and the detail components therefore carry different depth hypotheses, and the model records both pins. The generic `limitations` line inherited by the model receipt still reads "the stellar simulation's depth distribution"; for this model the envelope's pinned cloud is the ellipsoid, as `source/envelope.json` and `densityProjection` show.
 
-**Result.** Model `075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26`.
+**Result.** Model `ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be`, re-derived on 2026-09-17 from the same recipe after the envelope samplers, observer-ray conversion and prior loader moved to the owners a delivery replay may import. The pre-relocation identity was `075ce045c9369e4260c04473e100adad31703c7fef6e6b834fe895687c6b8b26`; both are the same fit.
+
+The re-derivation is byte-identical wherever the implementation pins do not enter it: `source/emission-field.json`, `source/envelope.json`, all 342 neutral textures and every registered, aligned, original and target raster match exactly, `source/cloud-parts.json` matches after substituting the result id, and `neutral/volume-slices.json` differs only in its embedded provenance. Every fit metric is identical to the last digit. Re-baking the nine lenses, the star layer and the promotion reproduced all 1,360 delivered texture digests, all five volumes' stacks and frames, and all 1,803 star points unchanged; only provenance blocks differ. New lens ids are `1d614d36…` (Horálek), `47b2b88e…` (VISTA), `47706bfc…` (SMASH), `84eeda58…` (DSS2), `f3985f79…` (AllWISE), and the four lab-only composites are `bb925b11…`, `8f611a71…`, `22c56a5c…` and `ba41e4e4…`.
 
 - 476 finite components from 480 iterations; 8 of them (1.68%, 0.35% of projected light) found no prior support and keep the authored finite depth.
 - Total front-projection relative squared error 0.006282 (the simulation envelope had 0.0063). Detail-only relative squared error 0.0726; projection RMSE 0.01264 after fitting against 0.04694 before.
@@ -87,9 +89,9 @@ The finite detail components still sample the **simulation** along their observe
 - 342 baked quads (109 x, 105 y, 128 z) at about 0.15 kpc; 272 survive transparent cropping into the compiled bank. Every one of the 342 material textures reproduces the newly fitted neutral alpha exactly.
 - Fit width 384 × 380 px over tangent bounds −6.935…5.018 × −6.350…5.482 kpc at the 62.44 kpc observer distance.
 
-**Lenses.** `finite-lenses-ellipsoid.json` bakes the same nine lenses onto this model, with the same exclusions and the same recorded reasons. `.local/nebula-lab/finite-lenses-075ce045….json` indexes their result ids.
+**Lenses.** `finite-lenses-ellipsoid.json` bakes the same nine lenses onto this model, with the same exclusions and the same recorded reasons. `.local/nebula-lab/finite-lenses-ed2688a0….json` indexes their result ids.
 
-**Stars.** `prepare-smc-stars labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json` writes `../stars/prepared/stars-ellipsoid.json` (1,803 Bonanos et al. 2010 massive stars) and the model-owned index `.local/nebula-lab/finite-stars-075ce045….json`. Depths sample the joint emission and **the ellipsoid** density, so the same measured rays land a median 0.48 kpc from their positions in the simulation-envelope model. Tangent positions are identical by construction.
+**Stars.** `prepare-smc-stars labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json` writes `../stars/prepared/stars-ellipsoid.json` (1,803 Bonanos et al. 2010 massive stars) and the model-owned index `.local/nebula-lab/finite-stars-ed2688a0….json`. Depths sample the joint emission and **the ellipsoid** density, so the same measured rays land a median 0.48 kpc from their positions in the simulation-envelope model. Tangent positions are identical by construction.
 
 **Application promotion.** This model's five publisher-image lenses are the shipped SMC object; see [the object's source-and-evidence README](../../../../../src/objects/smc/README.md) for the promotion recipe, the delivered bank and the app inspection record. The four FITS survey-band composites stay lab-only for the defects recorded in [candidate intake](../README-candidates.md#survey-band-composites).
 
