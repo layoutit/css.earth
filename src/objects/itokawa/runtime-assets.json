@@ -3,13 +3,13 @@
   "assets": [
     {
       "filename": "itokawa-amica-shadow@2x.webp",
-      "bytes": 1199386,
-      "sha256": "7ddc5e75789f7b2dc989b41cf853d216a2e488d6f374f48b3c0a7fbb702449a6"
+      "bytes": 891268,
+      "sha256": "7d573a857076d81905ceaa8e88182793c72b08f85fdf378fbc750b6e4e78f2a5"
     },
     {
       "filename": "itokawa-amica-surface@2x.webp",
-      "bytes": 1712760,
-      "sha256": "39b32fc69b03d99f08f1864d129527e81f2d135b8d3a8de02d6115162f602add"
+      "bytes": 1282756,
+      "sha256": "b9a1b53e5b95dbc939790c64ff5c3e48517789095750647f1dcea637529fb421"
     },
     {
       "filename": "itokawa-amica-thumbnail.webp",
@@ -23,13 +23,13 @@
     },
     {
       "filename": "itokawa-elevation-shadow@2x.webp",
-      "bytes": 849116,
-      "sha256": "984a3e0510aca75fb08b796e2f9342594043ef2a597aae41ebbe5318998ac201"
+      "bytes": 655808,
+      "sha256": "e7027252beba596f07049e7d9902669aced2732376ad68964a71b0a3316bedc4"
     },
     {
       "filename": "itokawa-elevation-surface@2x.webp",
-      "bytes": 927640,
-      "sha256": "38f3b94938f4a6ae5024cce2329350d953023b23d8d1ecd8a367600eb117b812"
+      "bytes": 762806,
+      "sha256": "ef9641f932282d3d58f8961797ef6a6b0f56427f89042c01eaff6504fcef09fd"
     },
     {
       "filename": "itokawa-elevation-thumbnail.webp",
@@ -40,11 +40,6 @@
       "filename": "itokawa-features.json",
       "bytes": 12072,
       "sha256": "7a9b5acc16b6c2e3c72f097b7d53b7bebcda54602e0d8dfbe13ded0f32e8fbd5"
-    },
-    {
-      "filename": "itokawa-lighting.webp",
-      "bytes": 1050836,
-      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     }
   ]
 }

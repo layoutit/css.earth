@@ -211,7 +211,7 @@ export async function runPreparationObjects({
   // Heavier objects start first, so they run beside light ones instead of queueing together at the end; results keep the requested order.
   const peaks = await Promise.all(commands.map(({ id }) => peakMemoryBytes(id)));
   const order = commands.map((_, index) => index).sort((a, b) => peaks[b] - peaks[a] || a - b);
-  let next = 0, released: (() => void) | null = null;
+  let released: (() => void) | null = null;
   const running = new Map<number, number | undefined>();
   function emit(event: PreparationEvent) {
     try { onEvent(event); }
@@ -258,15 +258,17 @@ export async function runPreparationObjects({
     for (const [running_, pid] of running) growth += Math.max(0, peaks[running_] - (pid === undefined ? 0 : resident.get(pid) ?? 0));
     return memoryAvailableBytes() - growth - peaks[index] >= memoryFloorBytes;
   };
-  while (failures.length === 0 && next < commands.length) {
-    const index = order[next];
-    if (running.size >= report.concurrency || !fits(index)) {
+  const queued = new Set(order);
+  while (failures.length === 0 && queued.size) {
+    // The heaviest object that fits starts first; a lighter one behind it starts rather than waiting for memory it does not need.
+    const index = running.size >= report.concurrency ? undefined : [...queued].find(candidate => fits(candidate));
+    if (index === undefined) {
       // Wake when an object finishes, or re-measure after a moment: running objects release memory as they go.
       await new Promise<void>(resolvePromise => { released = resolvePromise; setTimeout(resolvePromise, 2000).unref(); });
       released = null;
       continue;
     }
-    next++; running.set(index, undefined);
+    queued.delete(index); running.set(index, undefined);
     started.push(run(index));
   }
   await Promise.all(started);

@@ -1,0 +1,131 @@
+PDS_VERSION_ID                 = PDS3                                         
+                                                                              
+PRODUCT_ID                     = "IGSSI-I1313-199509"                         
+PRODUCT_NAME                   = "Galileo SSI Image I1313 (Ida/Dactyl)"       
+PRODUCT_CREATION_TIME          = 1995-09-22                                   
+                                                                              
+/* File Format and Length */                                                  
+RECORD_TYPE                    = FIXED_LENGTH                                 
+RECORD_BYTES                   = 2880                                         
+FILE_RECORDS                   = 224                                          
+                                                                              
+/* Pointers to Data Objects */                                                
+^HEADER                        = ("I1313.FIT",1)                              
+^IMAGE                         = ("I1313.FIT",2)                              
+                                                                              
+/* Description/Catalog Keywords */                                            
+DATA_SET_ID                    = "GO-A-SSI-2-REDR-IDA/GASPRA-V1.0"            
+INSTRUMENT_HOST_NAME           = "GALILEO ORBITER"                            
+INSTRUMENT_NAME                = SOLID_STATE_IMAGING_SYSTEM                   
+                                                                              
+/* Time tags and observation descriptors */                                   
+SPACECRAFT_CLOCK_START_COUNT   = "02025613.13"                                
+SPACECRAFT_CLOCK_STOP_COUNT    = "UNK"                                        
+START_TIME                     = 1993-08-28T16:38:00.723Z                     
+STOP_TIME                      = 1993-08-28T16:38:00.923Z                     
+IMAGE_ID                       = EJU0080                                      
+ORBIT_NUMBER                   = 17481                                        
+OBSERVATION_ID                 = "IDUS6COLOR01111IDA6"                        
+TARGET_NAME                    = "IDA"                                        
+TIME_FROM_CLOSEST_APPROACH     = "-000T00:13:59Z"                             
+SATELLITE_TIME_FROM_CLST_APR   = UNK                                          
+NOTE                           = "NOT APPLICABLE"                             
+                                                                              
+/* Camera and spacecraft state parameters */                                  
+FILTER_NAME                    = "VIOLET"                                     
+FILTER_NUMBER                  = 3                                            
+EXPOSURE_DURATION              = 200.00                                       
+GAIN_MODE_ID                   = "40K"                                        
+FRAME_DURATION                 = 8.667                                        
+LIGHT_FLOOD_STATE_FLAG         = "OFF"                                        
+EXPOSURE_TYPE                  = "NORMAL"                                     
+BLEMISH_PROTECTION_FLAG        = "OFF"                                        
+INVERTED_CLOCK_STATE_FLAG      = "NON-INVERTED"                               
+ENCODING_TYPE                  = "RATE CONTROL"                               
+ENTROPY                        = 1.782                                        
+MEAN_TRUNCATED_BITS            = 0.009                                        
+MEAN_TRUNCATED_SAMPLES         = 0.000                                        
+TELEMETRY_FORMAT_ID            = "IM4"                                        
+OBSTRUCTION_ID                 = "NOT POSSIBLE"                               
+                                                                              
+/* Viewing Geometry */                                                        
+/* Note: These viewing geometry parameters are best estimates */              
+/* at the time this picture label was generated. */                           
+POSITIVE_LONGITUDE_DIRECTION   = WEST                                         
+                                                                              
+/* Spacecraft position */                                                     
+TARGET_CENTER_DISTANCE         = 1.072055e+04                                 
+CENTRAL_BODY_DISTANCE          = 1.072056e+04                                 
+SUB_SPACECRAFT_LATITUDE        = 2.884                                        
+SUB_SPACECRAFT_LONGITUDE       = 131.758                                      
+                                                                              
+/* Camera pointing direction */                                               
+TWIST_ANGLE                    = 68.477                                       
+CONE_ANGLE                     = 145.883                                      
+RIGHT_ASCENSION                = 194.539                                      
+DECLINATION                    = 8.216                                        
+SUB_SPACECRAFT_LINE            = 203.252                                      
+SUB_SPACECRAFT_LINE_SAMPLE     = 548.489                                      
+NORTH_AZIMUTH                  = 119.455                                      
+SUB_SPACECRAFT_AZIMUTH         = 45.023                                       
+SMEAR_AZIMUTH                  = 0.000                                        
+SMEAR_MAGNITUDE                = UNK                                          
+HORIZONTAL_PIXEL_SCALE         = 1.078830e+02                                 
+VERTICAL_PIXEL_SCALE           = 1.079750e+02                                 
+SLANT_DISTANCE                 = 1.062910e+04                                 
+CENTER_LATITUDE                = -19.874                                      
+CENTER_LONGITUDE               = 326.708                                      
+CENTER_RING_RADIUS             = 0.000000e+00                                 
+                                                                              
+/* Lighting geometry */                                                       
+SOLAR_DISTANCE                 = 4.411040e+08                                 
+SUB_SOLAR_LATITUDE             = 26.223                                       
+SUB_SOLAR_LONGITUDE            = 118.239                                      
+SUB_SOLAR_AZIMUTH              = 147.175                                      
+INCIDENCE_ANGLE                = 12.979                                       
+EMISSION_ANGLE                 = 34.017                                       
+PHASE_ANGLE                    = 26.667                                       
+LOCAL_HOUR_ANGLE               = UNK                                          
+                                                                              
+/* Target radii */                                                            
+A_AXIS_RADIUS                  = 2.800000e+01                                 
+B_AXIS_RADIUS                  = 1.200000e+01                                 
+C_AXIS_RADIUS                  = 1.050000e+01                                 
+                                                                              
+/* Processing parameters */                                                   
+MEAN_RADIANCE                  = "N/A"                                        
+MEAN_REFLECTANCE               = "N/A"                                        
+REFLECTANCE_SCALING_FACTOR     = "N/A"                                        
+RADIANCE_SCALING_FACTOR        = "N/A"                                        
+UNEVEN_BIT_WEIGHT_CORR_FLAG    = "N/A"                                        
+DARK_CURRENT_FILE_NAME         = "N/A"                                        
+SLOPE_FILE_NAME                = "N/A"                                        
+BLEMISH_FILE_NAME              = "N/A"                                        
+SHUTTER_OFFSET_FILE_NAME       = "N/A"                                        
+EDR_TAPE_ID                    = "N/A"                                        
+EDR_FILE_NUMBER                = "N/A"                                        
+DATA_TYPE                      = MSB_INTEGER                                  
+SOURCE_PRODUCT_ID = {"GLL940520.BSP","GLL940520.BSP","N/A","CKEJ03DI_PREDICT_I
+NTERP.BC","SSI_MINI_E.EJ03DI"}                                                
+PROCESSING_HISTORY_TEXT        = "VICAR programs run: CATLABEL,BADLABEL,COPY."
+PRODUCT_TYPE                   = "REDR"                                       
+                                                                              
+/* FITS Image Header Object */                                                
+OBJECT                         = HEADER                                       
+INTERCHANGE_FORMAT             = ASCII                                        
+HEADER_TYPE                    = FITS                                         
+BYTES                          = 2880                                         
+RECORDS                        = 1                                            
+DESCRIPTION                    = "FITS Version 3.1 Header"                    
+END_OBJECT                                                                    
+                                                                              
+                                                                              
+                                                                              
+/* Image Object */                                                            
+OBJECT                         = IMAGE                                        
+LINES                          = 800                                          
+LINE_SAMPLES                   = 800                                          
+SAMPLE_BITS                    = 8                                            
+SAMPLE_TYPE                    = MSB_UNSIGNED_INTEGER                         
+END_OBJECT                                                                    
+END                                                                           

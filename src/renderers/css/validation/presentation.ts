@@ -56,8 +56,8 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
 }
 export function requireViewBindings(value: unknown, tree: PreparedTree, camera: CameraPlan): asserts value is readonly PreparedViewBinding[] {
   for (const input of array(value, 'view bindings')) {
-    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'variable', 'defaultZoom', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'sceneFromBody', 'radii', 'inset', 'slices']);
-    const kind = choice(binding.kind, ['zoom-property', 'shell-scale', 'counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property', 'interior-disc', 'interior-slices'], 'view binding');
+    const binding = record(input, 'view binding', ['kind', 'target', 'property', 'variable', 'defaultZoom', 'systemTransform', 'source', 'precision', 'minimumRadius', 'unitScale', 'hysteresis', 'levels', 'sceneFromBody', 'radii', 'inset']);
+    const kind = choice(binding.kind, ['zoom-property', 'shell-scale', 'counter-rotation', 'view-attribute', 'view-property', 'silhouette-fit', 'silhouette-step-property', 'interior-disc'], 'view binding');
     const target = nodeReference(binding.target, tree, kind === 'view-attribute' || kind === 'view-property');
     if ([tree.camera, tree.scene].includes(target) && kind !== 'view-attribute') fail('view binding cannot duplicate camera publisher');
     if (kind === 'interior-disc') {
@@ -66,17 +66,6 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
       if (matrix.length !== 16 || [3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1 || radii.length !== 3 ||
           !(finite(binding.inset, 'interior disc inset') > 0 && Number(binding.inset) < 1) ||
           tree.nodes[target].parent !== tree.scene || camera.projection?.model !== 'css-perspective-shared-with-sky') fail('interior disc requires an affine frame inside the perspective scene');
-    } else if (kind === 'interior-slices') {
-      const matrix = array(binding.sceneFromBody, 'interior slice frame').map(value => finite(value, 'interior slice frame'));
-      const slices = array(binding.slices, 'interior slices');
-      if (matrix.length !== 16 || [3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1 || !slices.length ||
-          camera.projection?.model !== 'css-perspective-shared-with-sky') fail('interior slices require an affine body frame inside the perspective scene');
-      for (const input of slices) {
-        const slice = record(input, 'interior slice', ['normal', 'nodes']);
-        const normal = array(slice.normal, 'interior slice normal').map(value => finite(value, 'interior slice normal'));
-        const leaves = array(slice.nodes, 'interior slice leaves').map(value => nodeReference(value, tree, false));
-        if (normal.length !== 3 || Math.abs(Math.hypot(...normal) - 1) > 1e-6 || !leaves.length || leaves.some(leaf => tree.nodes[leaf].parent !== target)) fail('interior slice requires a unit normal and leaves of its body');
-      }
     } else if (kind === 'silhouette-fit') {
       if (finite(binding.minimumRadius, 'silhouette floor') < 0 || !(positive(binding.unitScale, 'silhouette scale') > 0) || camera.projection?.model !== 'css-perspective-shared-with-sky') fail('silhouette fit requires perspective camera and scale');
     } else if (kind === 'silhouette-step-property') {

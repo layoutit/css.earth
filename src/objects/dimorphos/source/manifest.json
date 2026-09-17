@@ -966,8 +966,8 @@
     {
       "id": "dimorphos-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1428,
-      "expectedSha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
+      "expectedBytes": 1429,
+      "expectedSha256": "c39b21c81cfaf9c4944be4bd04edb145ff3d6fd6af623a3de0d3148fbd14a34a",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

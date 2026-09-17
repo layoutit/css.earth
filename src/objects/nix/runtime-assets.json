@@ -2,19 +2,14 @@
   "schema": "cssnix-runtime-assets@1",
   "assets": [
     {
-      "filename": "nix-lighting.webp",
-      "bytes": 1050836,
-      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
-    },
-    {
       "filename": "nix-model-shadow@2x.webp",
-      "bytes": 77440,
-      "sha256": "fb0f6c5b0b0b2be527ab8bbc3a1e171fb4326c7d53ac33e51c6d236475e45349"
+      "bytes": 67228,
+      "sha256": "19005466257c3420e7b3bcd0d1341822137b7df059fa95fc74ccc87897f56c53"
     },
     {
       "filename": "nix-model-surface@2x.webp",
-      "bytes": 85106,
-      "sha256": "af81bd869466c437269433a9733cccdfd2b7a83947e4eeb80e966fca9e89dac6"
+      "bytes": 70616,
+      "sha256": "9261b3b956a24d835e39f9e693590d1b50fb50020e43211f60ccce235b99b732"
     },
     {
       "filename": "nix-model-thumbnail.webp",
@@ -23,8 +18,8 @@
     },
     {
       "filename": "nix-monochrome-surface@2x.webp",
-      "bytes": 153344,
-      "sha256": "768a9bd32278aa3e853ba0f3eb7583c889378504f28c7bcdd950d96aebca3e59"
+      "bytes": 137316,
+      "sha256": "3bbe58a8b63f3cd386a5be42fa3f358ad407ff8078cff52ec66d6e5d75a6a085"
     },
     {
       "filename": "nix-monochrome-thumbnail.webp",

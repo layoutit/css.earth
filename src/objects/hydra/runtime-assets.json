@@ -2,19 +2,14 @@
   "schema": "csshydra-runtime-assets@1",
   "assets": [
     {
-      "filename": "hydra-lighting.webp",
-      "bytes": 1050836,
-      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
-    },
-    {
       "filename": "hydra-model-shadow@2x.webp",
-      "bytes": 73586,
-      "sha256": "a531fa7d6a3fa9997ae900949b024c4dd153ed95452dfe3a6531fcbc9f95809f"
+      "bytes": 65564,
+      "sha256": "36579c67146db096b14f6b881d93225cfd035926b3d709e55936bd120746874c"
     },
     {
       "filename": "hydra-model-surface@2x.webp",
-      "bytes": 84654,
-      "sha256": "350363f735b7b9b4df991a4b7fc0ad096bfc4c26807d87f9008885a88b0118ca"
+      "bytes": 65506,
+      "sha256": "4f0e0026425fcbb6c8dd55db4160efe6e39eac3178f58d1df3f4ee0c5acb1377"
     },
     {
       "filename": "hydra-model-thumbnail.webp",
@@ -23,8 +18,8 @@
     },
     {
       "filename": "hydra-monochrome-surface@2x.webp",
-      "bytes": 111514,
-      "sha256": "805aa2608fa2457d89e305c6fd9f4d979d62682ba0c344a8dd19703a83e7cd8c"
+      "bytes": 100262,
+      "sha256": "4c302618f7369e2673300a46f4b0d386a5ff6173ab62239dd66db26be1e89ae4"
     },
     {
       "filename": "hydra-monochrome-thumbnail.webp",

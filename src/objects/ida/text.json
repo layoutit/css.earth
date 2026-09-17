@@ -52,6 +52,11 @@
       "detail": "Galileo SSI",
       "summary": "Two overlapping green-filter photographs, with the sunlight and shadows of the flyby."
     },
+    "filter-color": {
+      "title": "Galileo false color",
+      "detail": "Galileo SSI",
+      "summary": "Three filter photographs from one pointing, 0.89 µm, green and violet, in false color. Photographed shadows remain."
+    },
     "elevation": {
       "title": "Shape-derived radial height",
       "detail": "PDS",
