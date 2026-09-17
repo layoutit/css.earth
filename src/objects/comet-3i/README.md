@@ -13,7 +13,9 @@ No shape model, pole or rotation period has been published. The display shape is
 
 ## Evidence
 
-Evidence for this version is recorded in the pull request that adds the body.
+- The prepared ellipsoid has **480 native `u` raster triangles**, reduced by meshoptimizer from the 5° analytical grid.
+- The two-body path differs from the retained Horizons vectors by **964.45 km** and **872.87 km** 30 days either side of the scene epoch; `packages/astronomy/src/asteroids.test.ts` bounds it at 1,110 km.
+- The [default view](evidence/default-view.webp) was captured in headless Chromium 148.0.7778.96 at 1440 × 900 with no page errors; the factsheet shows the display extents and the rotation limit.
 
 ## Known problems
 
