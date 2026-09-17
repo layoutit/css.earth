@@ -6,7 +6,7 @@ import { prepareArtworkRefresh } from './refresh.mts';
 import { requireArray, requireRecord } from '../source-values.mts';
 
 const root = resolve(import.meta.dirname, '../..');
-const library = await readFile(resolve(root, 'site/source/machines/render-library.json'));
+const library = await readFile(resolve(root, 'site/source/facilities/render-library.json'));
 const change = (edit: (entry: Record<string, unknown>) => void) => {
   const value = requireRecord(JSON.parse(library.toString()));
   const entry = requireArray(value.entries).map(value => requireRecord(value)).find(entry => entry.id === 'cassini');
@@ -23,7 +23,7 @@ test('artwork-only refresh rejects attribution edits', async () => {
   await assert.rejects(prepareArtworkRefresh(root, library, after, new Map()), /source attribution changed/);
 });
 test('artwork refresh rejects damaged candidate image bytes', async () => {
-  await assert.rejects(prepareArtworkRefresh(root, library, library, new Map([['public/shell/machine-renders/cassini.webp', Buffer.from('invalid image')]])), /artwork size/);
+  await assert.rejects(prepareArtworkRefresh(root, library, library, new Map([['public/shell/facility-renders/cassini.webp', Buffer.from('invalid image')]])), /artwork size/);
 });
 test('artwork refresh rejects an unbound previous library', async () => {
   await assert.rejects(prepareArtworkRefresh(root, Buffer.concat([library, Buffer.from(' ')]), library, new Map()), /does not match the prepared graph/);

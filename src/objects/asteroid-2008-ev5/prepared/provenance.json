@@ -323,20 +323,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
             "missionId": "goldstone-solar-system-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "vlba",
+            "kind": "facility",
+            "facilityId": "vlba",
             "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
           }
         ]

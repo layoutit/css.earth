@@ -258,18 +258,18 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "alma",
+            "kind": "facility",
+            "facilityId": "alma",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           },
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           },
           {
-            "kind": "machine",
-            "machineId": "herschel",
+            "kind": "facility",
+            "facilityId": "herschel",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           }
         ]

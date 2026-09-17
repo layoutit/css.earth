@@ -766,8 +766,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "magellan",
+            "kind": "facility",
+            "facilityId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }
@@ -813,8 +813,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "magellan",
+            "kind": "facility",
+            "facilityId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }

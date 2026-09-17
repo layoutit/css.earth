@@ -631,8 +631,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
             "missionId": "hayabusa2"
           }
@@ -684,8 +684,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
             "missionId": "hayabusa2"
           }
@@ -732,8 +732,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://doi.org/10.7910/DVN/WW3IH0",
             "missionId": "hayabusa2"
           }
@@ -794,8 +794,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
             "missionId": "hayabusa2"
           }
@@ -853,8 +853,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
             "missionId": "hayabusa2"
           }
@@ -912,8 +912,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa2",
+            "kind": "facility",
+            "facilityId": "hayabusa2",
             "evidence": "https://jlpeda.jaxa.jp/en/product/archive/detail_02/",
             "missionId": "hayabusa2"
           }

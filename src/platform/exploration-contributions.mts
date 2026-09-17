@@ -17,21 +17,21 @@ export interface ContributionGraph {
   readonly edges: readonly ContributionEdge[]; readonly datasets: readonly DatasetView[];
   readonly byObject: Readonly<Record<string, readonly number[]>>;
   readonly byMission: Readonly<Record<string, readonly number[]>>;
-  readonly byMachine: Readonly<Record<string, readonly number[]>>;
+  readonly byFacility: Readonly<Record<string, readonly number[]>>;
 }
 export interface ContributionObject { readonly id: string; readonly name: string; readonly route: string; readonly controls: readonly { readonly id: string; readonly label: string }[]; readonly provenance: ProvenanceDocument; }
 export const datasetKey = (objectId: string, lensId: string) => `${objectId}/${lensId}`;
 export function contributionIndexes(edges: readonly ContributionEdge[]) {
-  const byObject: Record<string, number[]> = Object.create(null), byMission: Record<string, number[]> = Object.create(null), byMachine: Record<string, number[]> = Object.create(null);
+  const byObject: Record<string, number[]> = Object.create(null), byMission: Record<string, number[]> = Object.create(null), byFacility: Record<string, number[]> = Object.create(null);
   const add = (index: Record<string, number[]>, id: string, value: number) => { (index[id] ??= []).push(value); };
   edges.forEach((edge, index) => {
     add(byObject, edge.objectId, index);
     const a = edge.attribution;
     if (a.kind !== 'unresolved' && a.missionId !== undefined) add(byMission, a.missionId, index);
-    if (a.kind === 'machine') add(byMachine, a.machineId, index);
+    if (a.kind === 'facility') add(byFacility, a.facilityId, index);
   });
   const freeze = (index: Record<string, number[]>) => Object.freeze(Object.fromEntries(Object.entries(index).map(([id, edges]) => [id, Object.freeze(edges)])));
-  return { byObject: freeze(byObject), byMission: freeze(byMission), byMachine: freeze(byMachine) };
+  return { byObject: freeze(byObject), byMission: freeze(byMission), byFacility: freeze(byFacility) };
 }
 /** The only compiler of capture-to-dataset links; runtime never walks source lineage. */
 export function compileContributions(objects: readonly ContributionObject[], catalog: ExplorationCatalog): ContributionGraph {
@@ -64,7 +64,7 @@ export function compileContributions(objects: readonly ContributionObject[], cat
   return Object.freeze({ edges: Object.freeze(edges), datasets: Object.freeze(datasets), ...contributionIndexes(edges) });
 }
 export function parseContributionGraph(input: unknown, catalog: ExplorationCatalog): ContributionGraph {
-  const graph = explorationRecord(input, ['edges', 'datasets', 'byObject', 'byMission', 'byMachine']);
+  const graph = explorationRecord(input, ['edges', 'datasets', 'byObject', 'byMission', 'byFacility']);
   const datasets = explorationArray(graph.datasets, raw => {
     const view = explorationRecord(raw, ['objectId', 'objectName', 'lensId', 'label', 'href']);
     const objectId = explorationId(view.objectId), lensId = explorationId(view.lensId), href = parseDatasetDestination(view.href, objectId, lensId);
@@ -87,7 +87,7 @@ export function parseContributionGraph(input: unknown, catalog: ExplorationCatal
   });
   if (new Set(edges.map(edge => JSON.stringify(edge))).size !== edges.length) throw new TypeError('Duplicate contribution edge.');
   const indexes = contributionIndexes(edges);
-  for (const key of ['byObject', 'byMission', 'byMachine'] as const) {
+  for (const key of ['byObject', 'byMission', 'byFacility'] as const) {
     if (JSON.stringify(graph[key]) !== JSON.stringify(indexes[key])) throw new TypeError(`Inconsistent contribution index: ${key}.`);
   }
   const used = new Set(edges.flatMap(edge => edge.lensIds.map(id => datasetKey(edge.objectId, id))));

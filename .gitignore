@@ -170,7 +170,7 @@ src/objects/*/source/**/*.bpc
 
 # Combined catalogues and navigation are rebuilt from individual body records.
 /site/prepared-sources.json
-/site/prepared-machines.json
+/site/prepared-facilities.json
 /site/prepared-object-catalog.mts
 /site/prepared-object-discovery.json
 /site/prepared-context-objects.mts

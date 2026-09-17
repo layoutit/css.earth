@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-machine-render-library@3",
+  "schema": "cssearth-facility-render-library@3",
   "background": "#0d0d0d",
   "format": "webp",
   "quality": 90,
@@ -14,7 +14,7 @@
   },
   "normalBuildPolicy": "Reuse the committed images. Rendering and acquisition are explicit maintenance operations only.",
   "renderer": {
-    "name": "Neutral inward-facing machine thumbnails v3",
+    "name": "Neutral inward-facing facility thumbnails v3",
     "renderer": "Three.js 0.180.0",
     "preparationOnly": true,
     "masterSize": [
@@ -82,7 +82,7 @@
       "rollDegrees": 0
     },
     "orientation": {
-      "poses": "tools/machine-renders/poses.mts",
+      "poses": "tools/facility-renders/poses.mts",
       "inwardDirection": [
         -0.8,
         -0.45,
@@ -93,18 +93,18 @@
     "browser": "153.0.8010.37",
     "sharp": "0.35.3",
     "implementation": {
-      "tools/prepare-machine-renders.mts": "03b81a86c1825b7139de72e60316a0f943cccd3d104e6c26517f0219ec4e5604",
-      "tools/machine-renders/render.mts": "36a4e5921698c939e27c6a1070238e7878a55a561e38620baefa45807fe46ffb",
-      "tools/machine-renders/poses.mts": "f5dc1d2f52d0dfcf690b614129cf3ce83c62079ba462610e658942aa3b6d4b41",
-      "tools/machine-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",
-      "tools/machine-renders/refresh.mts": "5d05ffb602abb1802928d11bb1dc68a3ed13b6360fa7818dea447124912946b1"
+      "tools/prepare-facility-renders.mts": "03b81a86c1825b7139de72e60316a0f943cccd3d104e6c26517f0219ec4e5604",
+      "tools/facility-renders/render.mts": "36a4e5921698c939e27c6a1070238e7878a55a561e38620baefa45807fe46ffb",
+      "tools/facility-renders/poses.mts": "f5dc1d2f52d0dfcf690b614129cf3ce83c62079ba462610e658942aa3b6d4b41",
+      "tools/facility-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",
+      "tools/facility-renders/refresh.mts": "5d05ffb602abb1802928d11bb1dc68a3ed13b6360fa7818dea447124912946b1"
     }
   },
   "entries": [
     {
       "id": "alma",
       "path": "images/alma.webp",
-      "url": "/shell/machine-renders/alma.webp",
+      "url": "/shell/facility-renders/alma.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -121,7 +121,7 @@
           {
             "catalogueId": "artwork-photo-alma",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/3"
+            "evidence": "site/source/facilities/photograph-records.json#/3"
           }
         ]
       },
@@ -140,7 +140,7 @@
     {
       "id": "arecibo-305m",
       "path": "images/arecibo-305m.webp",
-      "url": "/shell/machine-renders/arecibo-305m.webp",
+      "url": "/shell/facility-renders/arecibo-305m.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -157,7 +157,7 @@
           {
             "catalogueId": "artwork-photo-arecibo-305m",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/0"
+            "evidence": "site/source/facilities/photograph-records.json#/0"
           }
         ]
       },
@@ -176,7 +176,7 @@
     {
       "id": "cassini",
       "path": "images/cassini.webp",
-      "url": "/shell/machine-renders/cassini.webp",
+      "url": "/shell/facility-renders/cassini.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -228,7 +228,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 25686,
         "omissions": [
@@ -284,7 +284,7 @@
     {
       "id": "dawn",
       "path": "images/dawn.webp",
-      "url": "/shell/machine-renders/dawn.webp",
+      "url": "/shell/facility-renders/dawn.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -336,7 +336,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 32096,
         "omissions": [],
@@ -382,7 +382,7 @@
     {
       "id": "galileo",
       "path": "images/galileo.webp",
-      "url": "/shell/machine-renders/galileo.webp",
+      "url": "/shell/facility-renders/galileo.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -490,7 +490,7 @@
         "height": 271
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 16721,
         "omissions": [],
@@ -536,7 +536,7 @@
     {
       "id": "goldstone-dss14",
       "path": "images/goldstone-dss14.webp",
-      "url": "/shell/machine-renders/goldstone-dss14.webp",
+      "url": "/shell/facility-renders/goldstone-dss14.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -553,7 +553,7 @@
           {
             "catalogueId": "artwork-photo-goldstone-dss14",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/1"
+            "evidence": "site/source/facilities/photograph-records.json#/1"
           }
         ]
       },
@@ -572,7 +572,7 @@
     {
       "id": "grail",
       "path": "images/grail.webp",
-      "url": "/shell/machine-renders/grail.webp",
+      "url": "/shell/facility-renders/grail.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -674,7 +674,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 6952,
         "omissions": [],
@@ -720,7 +720,7 @@
     {
       "id": "hayabusa",
       "path": "images/hayabusa.webp",
-      "url": "/shell/machine-renders/hayabusa.webp",
+      "url": "/shell/facility-renders/hayabusa.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -762,7 +762,7 @@
     {
       "id": "hayabusa2",
       "path": "images/hayabusa2.webp",
-      "url": "/shell/machine-renders/hayabusa2.webp",
+      "url": "/shell/facility-renders/hayabusa2.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -804,7 +804,7 @@
     {
       "id": "herschel",
       "path": "images/herschel.webp",
-      "url": "/shell/machine-renders/herschel.webp",
+      "url": "/shell/facility-renders/herschel.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -821,7 +821,7 @@
           {
             "catalogueId": "artwork-photo-herschel",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/7"
+            "evidence": "site/source/facilities/photograph-records.json#/7"
           }
         ]
       },
@@ -840,7 +840,7 @@
     {
       "id": "hubble",
       "path": "images/hubble.webp",
-      "url": "/shell/machine-renders/hubble.webp",
+      "url": "/shell/facility-renders/hubble.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -893,7 +893,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 7672,
         "omissions": [],
@@ -939,7 +939,7 @@
     {
       "id": "irtf",
       "path": "images/irtf.webp",
-      "url": "/shell/machine-renders/irtf.webp",
+      "url": "/shell/facility-renders/irtf.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -956,7 +956,7 @@
           {
             "catalogueId": "artwork-photo-irtf",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/4"
+            "evidence": "site/source/facilities/photograph-records.json#/4"
           }
         ]
       },
@@ -975,7 +975,7 @@
     {
       "id": "juno",
       "path": "images/juno.webp",
-      "url": "/shell/machine-renders/juno.webp",
+      "url": "/shell/facility-renders/juno.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1027,7 +1027,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 17124,
         "omissions": [],
@@ -1073,7 +1073,7 @@
     {
       "id": "lro",
       "path": "images/lro.webp",
-      "url": "/shell/machine-renders/lro.webp",
+      "url": "/shell/facility-renders/lro.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1125,7 +1125,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 8142,
         "omissions": [],
@@ -1171,7 +1171,7 @@
     {
       "id": "magellan",
       "path": "images/magellan.webp",
-      "url": "/shell/machine-renders/magellan.webp",
+      "url": "/shell/facility-renders/magellan.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1223,7 +1223,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 7364,
         "omissions": [],
@@ -1269,7 +1269,7 @@
     {
       "id": "mars-global-surveyor",
       "path": "images/mars-global-surveyor.webp",
-      "url": "/shell/machine-renders/mars-global-surveyor.webp",
+      "url": "/shell/facility-renders/mars-global-surveyor.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1321,7 +1321,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 6194,
         "omissions": [],
@@ -1367,7 +1367,7 @@
     {
       "id": "messenger",
       "path": "images/messenger.webp",
-      "url": "/shell/machine-renders/messenger.webp",
+      "url": "/shell/facility-renders/messenger.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1419,7 +1419,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 11572,
         "omissions": [],
@@ -1465,7 +1465,7 @@
     {
       "id": "mro",
       "path": "images/mro.webp",
-      "url": "/shell/machine-renders/mro.webp",
+      "url": "/shell/facility-renders/mro.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1517,7 +1517,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 124062,
         "omissions": [],
@@ -1563,7 +1563,7 @@
     {
       "id": "near-shoemaker",
       "path": "images/near-shoemaker.webp",
-      "url": "/shell/machine-renders/near-shoemaker.webp",
+      "url": "/shell/facility-renders/near-shoemaker.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1615,7 +1615,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 9312,
         "omissions": [],
@@ -1661,7 +1661,7 @@
     {
       "id": "new-horizons",
       "path": "images/new-horizons.webp",
-      "url": "/shell/machine-renders/new-horizons.webp",
+      "url": "/shell/facility-renders/new-horizons.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1713,7 +1713,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 8280,
         "omissions": [],
@@ -1759,7 +1759,7 @@
     {
       "id": "odyssey",
       "path": "images/odyssey.webp",
-      "url": "/shell/machine-renders/odyssey.webp",
+      "url": "/shell/facility-renders/odyssey.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1811,7 +1811,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 8642,
         "omissions": [],
@@ -1857,7 +1857,7 @@
     {
       "id": "osiris-rex",
       "path": "images/osiris-rex.webp",
-      "url": "/shell/machine-renders/osiris-rex.webp",
+      "url": "/shell/facility-renders/osiris-rex.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -1909,7 +1909,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 184407,
         "omissions": [],
@@ -1955,7 +1955,7 @@
     {
       "id": "rosetta",
       "path": "images/rosetta.webp",
-      "url": "/shell/machine-renders/rosetta.webp",
+      "url": "/shell/facility-renders/rosetta.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2063,7 +2063,7 @@
         "height": 214
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 17665,
         "omissions": [],
@@ -2109,7 +2109,7 @@
     {
       "id": "sdo",
       "path": "images/sdo.webp",
-      "url": "/shell/machine-renders/sdo.webp",
+      "url": "/shell/facility-renders/sdo.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2161,7 +2161,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 272770,
         "omissions": [],
@@ -2207,7 +2207,7 @@
     {
       "id": "spitzer",
       "path": "images/spitzer.webp",
-      "url": "/shell/machine-renders/spitzer.webp",
+      "url": "/shell/facility-renders/spitzer.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2224,7 +2224,7 @@
           {
             "catalogueId": "artwork-photo-spitzer",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/6"
+            "evidence": "site/source/facilities/photograph-records.json#/6"
           }
         ]
       },
@@ -2243,7 +2243,7 @@
     {
       "id": "suomi-npp",
       "path": "images/suomi-npp.webp",
-      "url": "/shell/machine-renders/suomi-npp.webp",
+      "url": "/shell/facility-renders/suomi-npp.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2295,7 +2295,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 4024,
         "omissions": [],
@@ -2341,7 +2341,7 @@
     {
       "id": "terra",
       "path": "images/terra.webp",
-      "url": "/shell/machine-renders/terra.webp",
+      "url": "/shell/facility-renders/terra.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2393,7 +2393,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 117120,
         "omissions": [],
@@ -2439,7 +2439,7 @@
     {
       "id": "viking",
       "path": "images/viking.webp",
-      "url": "/shell/machine-renders/viking.webp",
+      "url": "/shell/facility-renders/viking.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2481,7 +2481,7 @@
     {
       "id": "vlba",
       "path": "images/vlba.webp",
-      "url": "/shell/machine-renders/vlba.webp",
+      "url": "/shell/facility-renders/vlba.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2498,7 +2498,7 @@
           {
             "catalogueId": "artwork-photo-vlba",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/5"
+            "evidence": "site/source/facilities/photograph-records.json#/5"
           }
         ]
       },
@@ -2517,7 +2517,7 @@
     {
       "id": "vlt-ut3",
       "path": "images/vlt-ut3.webp",
-      "url": "/shell/machine-renders/vlt-ut3.webp",
+      "url": "/shell/facility-renders/vlt-ut3.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2534,7 +2534,7 @@
           {
             "catalogueId": "artwork-photo-vlt-ut3",
             "role": "artwork",
-            "evidence": "site/source/machines/photograph-records.json#/2"
+            "evidence": "site/source/facilities/photograph-records.json#/2"
           }
         ]
       },
@@ -2553,7 +2553,7 @@
     {
       "id": "voyager-1",
       "path": "images/voyager-1.webp",
-      "url": "/shell/machine-renders/voyager-1.webp",
+      "url": "/shell/facility-renders/voyager-1.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2614,7 +2614,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 20378,
         "omissions": [],
@@ -2660,7 +2660,7 @@
     {
       "id": "voyager-2",
       "path": "images/voyager-2.webp",
-      "url": "/shell/machine-renders/voyager-2.webp",
+      "url": "/shell/facility-renders/voyager-2.webp",
       "width": 592,
       "height": 296,
       "displayWidth": 296,
@@ -2721,7 +2721,7 @@
         "height": 272
       },
       "processing": {
-        "recipe": "tools/machine-renders/render.mts#recipe",
+        "recipe": "tools/facility-renders/render.mts#recipe",
         "sourceMaterials": "unchanged",
         "triangles": 20378,
         "omissions": [],

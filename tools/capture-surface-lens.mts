@@ -94,8 +94,8 @@ try{for(const dpr of [1,2]){
   const response=await page.goto(`${baseUrl}/${body}/`);assert.ok(response?.ok());
   await page.waitForFunction(id=>window.__cssEarth?.error||window.__cssEarth?.object(id)?.ready,body,{timeout:45000});
   await page.evaluate(()=>{if(window.__cssearthTest.scene().error)throw new Error(window.__cssearthTest.scene().error??'Scene failed');});
-  const machines=page.getByRole('button',{name:'Machines',exact:true});
-  if(await machines.getAttribute('aria-pressed')==='true')await machines.click();
+  const facilities=page.getByRole('button',{name:'Machines',exact:true});
+  if(await facilities.getAttribute('aria-pressed')==='true')await facilities.click();
   const settings=page.getByRole('button',{name:'Settings',exact:true});await settings.click();
   for(const name of ['motion','shadows']){
    const input=page.locator(`input[name="${name}"]`);if(await input.count()&&await input.isChecked())await page.locator('label').filter({has:input}).click();

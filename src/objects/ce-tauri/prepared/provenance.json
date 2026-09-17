@@ -496,8 +496,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "Averaged reconstructed image for the November 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
             "missionId": "eso-vlti-pionier-ce-tauri"
           }
@@ -586,8 +586,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "Averaged reconstructed image for the December 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
             "missionId": "eso-vlti-pionier-ce-tauri"
           }

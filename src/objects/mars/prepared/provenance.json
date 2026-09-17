@@ -704,8 +704,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "mars-global-surveyor",
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
             "evidence": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
             "missionId": "mars-global-surveyor"
           }
@@ -758,8 +758,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "odyssey",
+            "kind": "facility",
+            "facilityId": "odyssey",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
             "missionId": "odyssey"
           }

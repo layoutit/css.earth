@@ -1,5 +1,5 @@
 import { SOURCES, SOURCE_CATALOGUE } from './sources-catalog.mts';
-import input from './prepared-machines.json' with { type: 'json' };
+import input from './prepared-facilities.json' with { type: 'json' };
 import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
 
 // This module is an Astro/build owner. Only each body's prepared cards become

@@ -563,20 +563,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "cassini"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-1",
+            "kind": "facility",
+            "facilityId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
             "missionId": "voyager-2"
           }
@@ -634,8 +634,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
             "missionId": "cassini"
           }
@@ -695,8 +695,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
             "missionId": "cassini"
           }
@@ -749,8 +749,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
             "missionId": "cassini"
           }

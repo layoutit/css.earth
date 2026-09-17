@@ -323,8 +323,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Magri et al. (2011), Icarus 214, 210–227; Arecibo radar, optical lightcurves and NASA/JPL shape archive",
             "missionId": "arecibo-planetary-radar"
           }

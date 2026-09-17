@@ -304,8 +304,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -356,8 +356,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL",
             "missionId": "cassini"
           }

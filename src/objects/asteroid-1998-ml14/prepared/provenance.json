@@ -324,14 +324,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
             "missionId": "goldstone-solar-system-radar"
           }

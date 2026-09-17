@@ -886,8 +886,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
             "missionId": "new-horizons"
           }
@@ -927,8 +927,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "The preserved credit for this input reads: NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
             "missionId": "new-horizons"
           }
@@ -1051,8 +1051,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
             "missionId": "new-horizons"
           }
@@ -1155,8 +1155,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "science/leisa/preparation.json",
             "missionId": "new-horizons"
           }
@@ -1212,8 +1212,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "science/leisa/preparation.json",
             "missionId": "new-horizons"
           }

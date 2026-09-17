@@ -29,8 +29,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vista",
+            "kind": "facility",
+            "facilityId": "vista",
             "evidence": "https://www.eso.org/public/images/eso1205a/"
           }
         ]
@@ -63,8 +63,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "mpg-eso-2-2m",
+            "kind": "facility",
+            "facilityId": "mpg-eso-2-2m",
             "evidence": "https://www.eso.org/public/images/eso0907a/"
           }
         ]
@@ -97,8 +97,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "eso-3-6m",
+            "kind": "facility",
+            "facilityId": "eso-3-6m",
             "evidence": "https://www.eso.org/public/images/helix/"
           }
         ]
@@ -133,8 +133,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "aro-12m-original",
+            "kind": "facility",
+            "facilityId": "aro-12m-original",
             "evidence": "https://doi.org/10.1088/0004-637X/778/1/16 — Zeigler et al. (2013) abstract: HCO+ J=1–0 at 89 GHz mapped with the Arizona Radio Observatory 12 m telescope; https://experts.arizona.edu/en/publications/the-helix-nebula-viewed-in-hcosupsup-large-scale-mapping-of-the-j/"
           }
         ]
@@ -198,9 +198,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing facility."
           }
         ]
       }

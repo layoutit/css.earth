@@ -873,8 +873,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png",
             "missionId": "hubble"
           }
@@ -920,8 +920,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "juno",
+            "kind": "facility",
+            "facilityId": "juno",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
             "missionId": "juno"
           }
@@ -968,8 +968,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "juno",
+            "kind": "facility",
+            "facilityId": "juno",
             "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
             "missionId": "juno"
           }
@@ -1016,8 +1016,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "juno",
+            "kind": "facility",
+            "facilityId": "juno",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg",
             "missionId": "juno"
           }
@@ -1064,8 +1064,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "juno",
+            "kind": "facility",
+            "facilityId": "juno",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg",
             "missionId": "juno"
           }
@@ -1109,8 +1109,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1153,8 +1153,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
             "missionId": "hubble"
           }

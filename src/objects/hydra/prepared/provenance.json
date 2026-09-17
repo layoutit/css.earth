@@ -335,8 +335,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://ndownloader.figshare.com/files/24176603",
             "missionId": "new-horizons"
           }
@@ -388,8 +388,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029916/lor_0299165548_0x630_sci.fit",
             "missionId": "new-horizons"
           }

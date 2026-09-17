@@ -342,8 +342,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "The image is reconstructed from the 29 calibrated MATISSE files pinned below; see reference/squeeze-command.txt for the build and command.",
             "missionId": "eso-vlti-matisse-betelgeuse"
           }

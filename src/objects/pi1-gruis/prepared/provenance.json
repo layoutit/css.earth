@@ -342,8 +342,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "The image is reconstructed from the calibrated PIONIER file pinned below; see reference/squeeze-command.txt for the build and command.",
             "missionId": "eso-vlti-pionier-pi1-gruis"
           }
@@ -424,8 +424,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "Calibrated PIONIER OIFITS, the image-ready file of the Nature paper: nights 2014-09-25, 26, 29 and 30, three H-band channels.",
             "missionId": "eso-vlti-pionier-pi1-gruis"
           }

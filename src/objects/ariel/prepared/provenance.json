@@ -496,8 +496,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download",
             "missionId": "voyager-2"
           }
@@ -567,8 +567,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/55639bf1-6c1c-4824-8634-d4a4500fb095/download",
             "missionId": "voyager-2"
           }

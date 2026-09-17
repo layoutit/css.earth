@@ -992,8 +992,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
             "missionId": "hubble"
           }
@@ -1035,8 +1035,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
             "missionId": "hubble"
           }
@@ -1078,8 +1078,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
             "missionId": "hubble"
           }

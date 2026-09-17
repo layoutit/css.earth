@@ -319,14 +319,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }

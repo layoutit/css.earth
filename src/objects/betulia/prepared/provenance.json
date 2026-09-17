@@ -319,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Magri et al. (2007), Icarus 186, 152–177; Arecibo and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           }

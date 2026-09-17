@@ -1893,8 +1893,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "lro",
+            "kind": "facility",
+            "facilityId": "lro",
             "evidence": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG",
             "missionId": "lro"
           }
@@ -2046,8 +2046,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "lro",
+            "kind": "facility",
+            "facilityId": "lro",
             "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml",
             "missionId": "lro"
           }

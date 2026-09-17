@@ -26,12 +26,12 @@ import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 export const explorationCompilerClosure = [
-  'tools/prepare-machines.mts', 'tools/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
+  'tools/prepare-facilities.mts', 'tools/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
   'site/prepared-focus-object.mts', 'site/navigation-distance.mts', 'tools/prepare-navigation-destinations.mts',
   'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
-  'site/source/machines/catalog.json', 'site/source/machines/render-library.json', 'site/source/machines/emblem-library.json',
+  'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
   'site/source/agency-logos.json', 'tools/read-source-catalogue.mts',
   'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
   'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
@@ -45,7 +45,7 @@ export const explorationCompilerClosure = [
 
 interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
-export async function prepareMachines({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport }: Options = {}) {
+export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport }: Options = {}) {
   const closure: Record<string, string> = {};
   const input = async (path: string) => {
     const bytes = await readFile(resolve(root, path)); closure[path] = sha256(bytes); return bytes;
@@ -54,8 +54,8 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));
   const sourceCatalog = await readSourceCatalog(root, input), sources = sourceResolver(sourceCatalog);
-  const catalog = parseExplorationCatalog(await json('site/source/machines/catalog.json'), agencies, sources);
-  const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/machines/catalog.json', sources);
+  const catalog = parseExplorationCatalog(await json('site/source/facilities/catalog.json'), agencies, sources);
+  const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/facilities/catalog.json', sources);
   const inventory: SourceInventoryEntry[] = [];
   for (const path of explorationCompilerClosure.filter(path => path.startsWith('src/objects/') && path.endsWith('/provenance.json'))) {
     const owner = explorationRecord(await json(path)), display = explorationRecord(owner.catalogueDisplay);
@@ -68,7 +68,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   }
   async function artwork(file: string, emblem: boolean) {
     const library = explorationRecord(await json(file));
-    if (library.schema !== (emblem ? 'cssearth-machine-emblems@3' : 'cssearth-machine-render-library@3')) throw new TypeError('Unsupported artwork library.');
+    if (library.schema !== (emblem ? 'cssearth-facility-emblems@3' : 'cssearth-facility-render-library@3')) throw new TypeError('Unsupported artwork library.');
     const entries = explorationArray(library.entries, explorationRecord).map((image, index) => {
       const source = explorationRecord(image.source);
       const binding = parseSourceBinding(image.sourceBinding, sources), id = explorationText(image.id);
@@ -89,8 +89,8 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
     }
     return entries;
   }
-  const images: readonly ExplorationImage[] = await artwork('site/source/machines/render-library.json', false);
-  const emblems: readonly ExplorationImage[] = await artwork('site/source/machines/emblem-library.json', true);
+  const images: readonly ExplorationImage[] = await artwork('site/source/facilities/render-library.json', false);
+  const emblems: readonly ExplorationImage[] = await artwork('site/source/facilities/emblem-library.json', true);
   for (const agency of Object.values(agencies)) if (agency.src) {
     const bytes = await input(`public${agency.src}`);
     if (sha256(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
@@ -160,7 +160,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
   const payload = { schema: 'cssearth-prepared-exploration@3', catalog, agencies, images, emblems,
     sourceCatalogSha256:preparedSources.catalogSha256,graph: compileContributions(objects, catalog) };
   const prepared = parsePreparedExploration(payload,sources);
-  const output = { path: resolve(root, 'site/prepared-machines.json'), text: JSON.stringify(payload, null, 2) + '\n' };
+  const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
   const outputs = [...volumes.flatMap(volume => volume.outputs),sourcesOutput,output];
   if (publish) await writePreparedSet(outputs);
@@ -168,7 +168,7 @@ export async function prepareMachines({ root = resolve(import.meta.dirname, '..'
 
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const { prepared, factsheets } = await prepareMachines();
-  console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.machines.length} machines and ${prepared.graph.datasets.length} dataset destinations.`);
+  const { prepared, factsheets } = await prepareFacilities();
+  console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
   console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
 }

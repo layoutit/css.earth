@@ -1169,20 +1169,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-1",
+            "kind": "facility",
+            "facilityId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
             "missionId": "voyager-2"
           }
@@ -1243,8 +1243,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0368639400/s0368639400.json",
             "missionId": "galileo"
           }
@@ -1307,8 +1307,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0368639413/s0368639413.json",
             "missionId": "galileo"
           }
@@ -1371,8 +1371,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0368639426/s0368639426.json",
             "missionId": "galileo"
           }
@@ -1435,8 +1435,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374667300/s0374667300.json",
             "missionId": "galileo"
           }
@@ -1499,8 +1499,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374682500/s0374682500.json",
             "missionId": "galileo"
           }
@@ -1563,8 +1563,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374682513/s0374682513.json",
             "missionId": "galileo"
           }
@@ -1627,8 +1627,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374682526/s0374682526.json",
             "missionId": "galileo"
           }
@@ -1691,8 +1691,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685101_00/s0374685101_00.json",
             "missionId": "galileo"
           }
@@ -1755,8 +1755,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685113/s0374685113.json",
             "missionId": "galileo"
           }
@@ -1819,8 +1819,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685126/s0374685126.json",
             "missionId": "galileo"
           }
@@ -1883,8 +1883,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685140_39/s0374685140_39.json",
             "missionId": "galileo"
           }
@@ -1947,8 +1947,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685413/s0374685413.json",
             "missionId": "galileo"
           }
@@ -2011,8 +2011,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685427_26/s0374685427_26.json",
             "missionId": "galileo"
           }
@@ -2075,8 +2075,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685439/s0374685439.json",
             "missionId": "galileo"
           }
@@ -2139,8 +2139,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0374685452/s0374685452.json",
             "missionId": "galileo"
           }
@@ -2203,8 +2203,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713700_01/s0383713700_01.json",
             "missionId": "galileo"
           }
@@ -2267,8 +2267,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713713/s0383713713.json",
             "missionId": "galileo"
           }
@@ -2331,8 +2331,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713726/s0383713726.json",
             "missionId": "galileo"
           }
@@ -2395,8 +2395,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713739/s0383713739.json",
             "missionId": "galileo"
           }
@@ -2459,8 +2459,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713752/s0383713752.json",
             "missionId": "galileo"
           }
@@ -2523,8 +2523,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383713765/s0383713765.json",
             "missionId": "galileo"
           }
@@ -2587,8 +2587,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383715500/s0383715500.json",
             "missionId": "galileo"
           }
@@ -2651,8 +2651,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383715504/s0383715504.json",
             "missionId": "galileo"
           }
@@ -2715,8 +2715,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717500/s0383717500.json",
             "missionId": "galileo"
           }
@@ -2779,8 +2779,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717513/s0383717513.json",
             "missionId": "galileo"
           }
@@ -2843,8 +2843,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717526/s0383717526.json",
             "missionId": "galileo"
           }
@@ -2907,8 +2907,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383717539/s0383717539.json",
             "missionId": "galileo"
           }
@@ -2971,8 +2971,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718300/s0383718300.json",
             "missionId": "galileo"
           }
@@ -3035,8 +3035,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718304/s0383718304.json",
             "missionId": "galileo"
           }
@@ -3099,8 +3099,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718307/s0383718307.json",
             "missionId": "galileo"
           }
@@ -3163,8 +3163,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718311_12/s0383718311_12.json",
             "missionId": "galileo"
           }
@@ -3227,8 +3227,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718314/s0383718314.json",
             "missionId": "galileo"
           }
@@ -3291,8 +3291,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718318/s0383718318.json",
             "missionId": "galileo"
           }
@@ -3355,8 +3355,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718600/s0383718600.json",
             "missionId": "galileo"
           }
@@ -3419,8 +3419,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718613/s0383718613.json",
             "missionId": "galileo"
           }
@@ -3483,8 +3483,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718626/s0383718626.json",
             "missionId": "galileo"
           }
@@ -3547,8 +3547,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718639/s0383718639.json",
             "missionId": "galileo"
           }
@@ -3611,8 +3611,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0383718652/s0383718652.json",
             "missionId": "galileo"
           }
@@ -3675,8 +3675,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389778842/s0389778842.json",
             "missionId": "galileo"
           }
@@ -3739,8 +3739,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389779271_70/s0389779271_70.json",
             "missionId": "galileo"
           }
@@ -3803,8 +3803,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389779707/s0389779707.json",
             "missionId": "galileo"
           }
@@ -3867,8 +3867,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389780135/s0389780135.json",
             "missionId": "galileo"
           }
@@ -3931,8 +3931,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0389780563/s0389780563.json",
             "missionId": "galileo"
           }
@@ -3995,8 +3995,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619200/s0420619200.json",
             "missionId": "galileo"
           }
@@ -4059,8 +4059,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619213/s0420619213.json",
             "missionId": "galileo"
           }
@@ -4123,8 +4123,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619226/s0420619226.json",
             "missionId": "galileo"
           }
@@ -4187,8 +4187,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619239/s0420619239.json",
             "missionId": "galileo"
           }
@@ -4251,8 +4251,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619252/s0420619252.json",
             "missionId": "galileo"
           }
@@ -4315,8 +4315,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619265/s0420619265.json",
             "missionId": "galileo"
           }
@@ -4379,8 +4379,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619278/s0420619278.json",
             "missionId": "galileo"
           }
@@ -4443,8 +4443,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619300/s0420619300.json",
             "missionId": "galileo"
           }
@@ -4507,8 +4507,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619313/s0420619313.json",
             "missionId": "galileo"
           }
@@ -4571,8 +4571,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420619326/s0420619326.json",
             "missionId": "galileo"
           }
@@ -4635,8 +4635,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626700/s0420626700.json",
             "missionId": "galileo"
           }
@@ -4699,8 +4699,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626713/s0420626713.json",
             "missionId": "galileo"
           }
@@ -4763,8 +4763,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626726/s0420626726.json",
             "missionId": "galileo"
           }
@@ -4827,8 +4827,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626739/s0420626739.json",
             "missionId": "galileo"
           }
@@ -4891,8 +4891,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626752/s0420626752.json",
             "missionId": "galileo"
           }
@@ -4955,8 +4955,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626765/s0420626765.json",
             "missionId": "galileo"
           }
@@ -5019,8 +5019,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626778/s0420626778.json",
             "missionId": "galileo"
           }
@@ -5083,8 +5083,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0420626800/s0420626800.json",
             "missionId": "galileo"
           }
@@ -5147,8 +5147,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426267200_01/s0426267200_01.json",
             "missionId": "galileo"
           }
@@ -5211,8 +5211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271901_00/s0426271901_00.json",
             "missionId": "galileo"
           }
@@ -5275,8 +5275,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271914_13/s0426271914_13.json",
             "missionId": "galileo"
           }
@@ -5339,8 +5339,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271927_26/s0426271927_26.json",
             "missionId": "galileo"
           }
@@ -5403,8 +5403,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271940_39/s0426271940_39.json",
             "missionId": "galileo"
           }
@@ -5467,8 +5467,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426271953_52/s0426271953_52.json",
             "missionId": "galileo"
           }
@@ -5531,8 +5531,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272379_78/s0426272379_78.json",
             "missionId": "galileo"
           }
@@ -5595,8 +5595,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272401_00/s0426272401_00.json",
             "missionId": "galileo"
           }
@@ -5659,8 +5659,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272405_04/s0426272405_04.json",
             "missionId": "galileo"
           }
@@ -5723,8 +5723,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272408_07/s0426272408_07.json",
             "missionId": "galileo"
           }
@@ -5787,8 +5787,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272412_11/s0426272412_11.json",
             "missionId": "galileo"
           }
@@ -5851,8 +5851,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272415_14/s0426272415_14.json",
             "missionId": "galileo"
           }
@@ -5915,8 +5915,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272419_18/s0426272419_18.json",
             "missionId": "galileo"
           }
@@ -5979,8 +5979,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272422_21/s0426272422_21.json",
             "missionId": "galileo"
           }
@@ -6043,8 +6043,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272426_25/s0426272426_25.json",
             "missionId": "galileo"
           }
@@ -6107,8 +6107,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272600/s0426272600.json",
             "missionId": "galileo"
           }
@@ -6171,8 +6171,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272604/s0426272604.json",
             "missionId": "galileo"
           }
@@ -6235,8 +6235,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272607/s0426272607.json",
             "missionId": "galileo"
           }
@@ -6299,8 +6299,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272611/s0426272611.json",
             "missionId": "galileo"
           }
@@ -6363,8 +6363,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272614/s0426272614.json",
             "missionId": "galileo"
           }
@@ -6427,8 +6427,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272618/s0426272618.json",
             "missionId": "galileo"
           }
@@ -6491,8 +6491,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272621/s0426272621.json",
             "missionId": "galileo"
           }
@@ -6555,8 +6555,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272625/s0426272625.json",
             "missionId": "galileo"
           }
@@ -6619,8 +6619,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272628/s0426272628.json",
             "missionId": "galileo"
           }
@@ -6683,8 +6683,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272632/s0426272632.json",
             "missionId": "galileo"
           }
@@ -6747,8 +6747,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272635/s0426272635.json",
             "missionId": "galileo"
           }
@@ -6811,8 +6811,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272639/s0426272639.json",
             "missionId": "galileo"
           }
@@ -6875,8 +6875,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272642/s0426272642.json",
             "missionId": "galileo"
           }
@@ -6939,8 +6939,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272646/s0426272646.json",
             "missionId": "galileo"
           }
@@ -7003,8 +7003,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272649/s0426272649.json",
             "missionId": "galileo"
           }
@@ -7067,8 +7067,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272653/s0426272653.json",
             "missionId": "galileo"
           }
@@ -7131,8 +7131,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272656/s0426272656.json",
             "missionId": "galileo"
           }
@@ -7195,8 +7195,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272660_61/s0426272660_61.json",
             "missionId": "galileo"
           }
@@ -7259,8 +7259,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272811/s0426272811.json",
             "missionId": "galileo"
           }
@@ -7323,8 +7323,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272814/s0426272814.json",
             "missionId": "galileo"
           }
@@ -7387,8 +7387,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272818/s0426272818.json",
             "missionId": "galileo"
           }
@@ -7451,8 +7451,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272821/s0426272821.json",
             "missionId": "galileo"
           }
@@ -7515,8 +7515,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272825/s0426272825.json",
             "missionId": "galileo"
           }
@@ -7579,8 +7579,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272828/s0426272828.json",
             "missionId": "galileo"
           }
@@ -7643,8 +7643,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272832/s0426272832.json",
             "missionId": "galileo"
           }
@@ -7707,8 +7707,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272835/s0426272835.json",
             "missionId": "galileo"
           }
@@ -7771,8 +7771,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272839/s0426272839.json",
             "missionId": "galileo"
           }
@@ -7835,8 +7835,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272842/s0426272842.json",
             "missionId": "galileo"
           }
@@ -7899,8 +7899,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272846_47/s0426272846_47.json",
             "missionId": "galileo"
           }
@@ -7963,8 +7963,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272849/s0426272849.json",
             "missionId": "galileo"
           }
@@ -8027,8 +8027,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272853/s0426272853.json",
             "missionId": "galileo"
           }
@@ -8091,8 +8091,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426272856/s0426272856.json",
             "missionId": "galileo"
           }
@@ -8155,8 +8155,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273800/s0426273800.json",
             "missionId": "galileo"
           }
@@ -8219,8 +8219,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273813/s0426273813.json",
             "missionId": "galileo"
           }
@@ -8283,8 +8283,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273826/s0426273826.json",
             "missionId": "galileo"
           }
@@ -8347,8 +8347,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426273839/s0426273839.json",
             "missionId": "galileo"
           }
@@ -8411,8 +8411,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948639/s0440948639.json",
             "missionId": "galileo"
           }
@@ -8475,8 +8475,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948652/s0440948652.json",
             "missionId": "galileo"
           }
@@ -8539,8 +8539,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948665/s0440948665.json",
             "missionId": "galileo"
           }
@@ -8603,8 +8603,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948678/s0440948678.json",
             "missionId": "galileo"
           }
@@ -8667,8 +8667,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948700/s0440948700.json",
             "missionId": "galileo"
           }
@@ -8731,8 +8731,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948778/s0440948778.json",
             "missionId": "galileo"
           }
@@ -8795,8 +8795,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948800/s0440948800.json",
             "missionId": "galileo"
           }
@@ -8859,8 +8859,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948813_14/s0440948813_14.json",
             "missionId": "galileo"
           }
@@ -8923,8 +8923,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948826_27/s0440948826_27.json",
             "missionId": "galileo"
           }
@@ -8987,8 +8987,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948839/s0440948839.json",
             "missionId": "galileo"
           }
@@ -9051,8 +9051,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440948852/s0440948852.json",
             "missionId": "galileo"
           }
@@ -9115,8 +9115,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949842/s0440949842.json",
             "missionId": "galileo"
           }
@@ -9179,8 +9179,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949846/s0440949846.json",
             "missionId": "galileo"
           }
@@ -9243,8 +9243,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949849/s0440949849.json",
             "missionId": "galileo"
           }
@@ -9307,8 +9307,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949853/s0440949853.json",
             "missionId": "galileo"
           }
@@ -9371,8 +9371,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949877/s0440949877.json",
             "missionId": "galileo"
           }
@@ -9435,8 +9435,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949881/s0440949881.json",
             "missionId": "galileo"
           }
@@ -9499,8 +9499,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949884/s0440949884.json",
             "missionId": "galileo"
           }
@@ -9563,8 +9563,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440949888/s0440949888.json",
             "missionId": "galileo"
           }
@@ -9627,8 +9627,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953578/s0440953578.json",
             "missionId": "galileo"
           }
@@ -9691,8 +9691,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953600/s0440953600.json",
             "missionId": "galileo"
           }
@@ -9755,8 +9755,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953613/s0440953613.json",
             "missionId": "galileo"
           }
@@ -9819,8 +9819,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953627_26/s0440953627_26.json",
             "missionId": "galileo"
           }
@@ -9883,8 +9883,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953640_39/s0440953640_39.json",
             "missionId": "galileo"
           }
@@ -9947,8 +9947,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953653_52/s0440953653_52.json",
             "missionId": "galileo"
           }
@@ -10011,8 +10011,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953666_65/s0440953666_65.json",
             "missionId": "galileo"
           }
@@ -10075,8 +10075,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953679_78/s0440953679_78.json",
             "missionId": "galileo"
           }
@@ -10139,8 +10139,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440953701_00/s0440953701_00.json",
             "missionId": "galileo"
           }
@@ -10203,8 +10203,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955165/s0440955165.json",
             "missionId": "galileo"
           }
@@ -10267,8 +10267,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955178/s0440955178.json",
             "missionId": "galileo"
           }
@@ -10331,8 +10331,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955200/s0440955200.json",
             "missionId": "galileo"
           }
@@ -10395,8 +10395,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955213/s0440955213.json",
             "missionId": "galileo"
           }
@@ -10459,8 +10459,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955226/s0440955226.json",
             "missionId": "galileo"
           }
@@ -10523,8 +10523,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955239/s0440955239.json",
             "missionId": "galileo"
           }
@@ -10587,8 +10587,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955252_53/s0440955252_53.json",
             "missionId": "galileo"
           }
@@ -10651,8 +10651,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955265/s0440955265.json",
             "missionId": "galileo"
           }
@@ -10715,8 +10715,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955278/s0440955278.json",
             "missionId": "galileo"
           }
@@ -10779,8 +10779,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440955300/s0440955300.json",
             "missionId": "galileo"
           }
@@ -10843,8 +10843,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961800_01_02/s0449961800_01_02.json",
             "missionId": "galileo"
           }
@@ -10907,8 +10907,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961813_14/s0449961813_14.json",
             "missionId": "galileo"
           }
@@ -10971,8 +10971,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961826_27_28/s0449961826_27_28.json",
             "missionId": "galileo"
           }
@@ -11035,8 +11035,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961839_40/s0449961839_40.json",
             "missionId": "galileo"
           }
@@ -11099,8 +11099,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961852_53_54/s0449961852_53_54.json",
             "missionId": "galileo"
           }
@@ -11163,8 +11163,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961865_66/s0449961865_66.json",
             "missionId": "galileo"
           }
@@ -11227,8 +11227,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961878_79/s0449961878_79.json",
             "missionId": "galileo"
           }
@@ -11291,8 +11291,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961900_01/s0449961900_01.json",
             "missionId": "galileo"
           }
@@ -11355,8 +11355,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449961914_13/s0449961914_13.json",
             "missionId": "galileo"
           }
@@ -11419,8 +11419,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967442/s0449967442.json",
             "missionId": "galileo"
           }
@@ -11483,8 +11483,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967446/s0449967446.json",
             "missionId": "galileo"
           }
@@ -11547,8 +11547,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967449_50/s0449967449_50.json",
             "missionId": "galileo"
           }
@@ -11611,8 +11611,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967454_53/s0449967454_53.json",
             "missionId": "galileo"
           }
@@ -11675,8 +11675,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967484/s0449967484.json",
             "missionId": "galileo"
           }
@@ -11739,8 +11739,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967488/s0449967488.json",
             "missionId": "galileo"
           }
@@ -11803,8 +11803,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967501_00/s0449967501_00.json",
             "missionId": "galileo"
           }
@@ -11867,8 +11867,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967505_04/s0449967505_04.json",
             "missionId": "galileo"
           }
@@ -11931,8 +11931,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967535_36/s0449967535_36.json",
             "missionId": "galileo"
           }
@@ -11995,8 +11995,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967539_40/s0449967539_40.json",
             "missionId": "galileo"
           }
@@ -12059,8 +12059,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967542_43/s0449967542_43.json",
             "missionId": "galileo"
           }
@@ -12123,8 +12123,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967547_46/s0449967547_46.json",
             "missionId": "galileo"
           }
@@ -12187,8 +12187,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967577/s0449967577.json",
             "missionId": "galileo"
           }
@@ -12251,8 +12251,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967582_81/s0449967582_81.json",
             "missionId": "galileo"
           }
@@ -12315,8 +12315,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967585_84/s0449967585_84.json",
             "missionId": "galileo"
           }
@@ -12379,8 +12379,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967589_88/s0449967589_88.json",
             "missionId": "galileo"
           }
@@ -12443,8 +12443,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967752_53_54/s0449967752_53_54.json",
             "missionId": "galileo"
           }
@@ -12507,8 +12507,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967765_66_67/s0449967765_66_67.json",
             "missionId": "galileo"
           }
@@ -12571,8 +12571,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449967778_79_80/s0449967778_79_80.json",
             "missionId": "galileo"
           }
@@ -12635,8 +12635,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449968453_52/s0449968453_52.json",
             "missionId": "galileo"
           }
@@ -12699,8 +12699,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449968465_66/s0449968465_66.json",
             "missionId": "galileo"
           }
@@ -12763,8 +12763,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449968478_79_80/s0449968478_79_80.json",
             "missionId": "galileo"
           }
@@ -12827,8 +12827,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974200/s0449974200.json",
             "missionId": "galileo"
           }
@@ -12891,8 +12891,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974213_14/s0449974213_14.json",
             "missionId": "galileo"
           }
@@ -12955,8 +12955,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974226/s0449974226.json",
             "missionId": "galileo"
           }
@@ -13019,8 +13019,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974239/s0449974239.json",
             "missionId": "galileo"
           }
@@ -13083,8 +13083,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974252_53/s0449974252_53.json",
             "missionId": "galileo"
           }
@@ -13147,8 +13147,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974265_66_67/s0449974265_66_67.json",
             "missionId": "galileo"
           }
@@ -13211,8 +13211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974278_79/s0449974278_79.json",
             "missionId": "galileo"
           }
@@ -13275,8 +13275,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974300_01/s0449974300_01.json",
             "missionId": "galileo"
           }
@@ -13339,8 +13339,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974313_14/s0449974313_14.json",
             "missionId": "galileo"
           }
@@ -13403,8 +13403,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974326/s0449974326.json",
             "missionId": "galileo"
           }
@@ -13467,8 +13467,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974339/s0449974339.json",
             "missionId": "galileo"
           }
@@ -13531,8 +13531,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974352/s0449974352.json",
             "missionId": "galileo"
           }
@@ -13595,8 +13595,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974365_66_67/s0449974365_66_67.json",
             "missionId": "galileo"
           }
@@ -13659,8 +13659,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974378_79/s0449974378_79.json",
             "missionId": "galileo"
           }
@@ -13723,8 +13723,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974400_01/s0449974400_01.json",
             "missionId": "galileo"
           }
@@ -13787,8 +13787,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974413/s0449974413.json",
             "missionId": "galileo"
           }
@@ -13851,8 +13851,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974427_26_28_29/s0449974427_26_28_29.json",
             "missionId": "galileo"
           }
@@ -13915,8 +13915,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0449974439_40/s0449974439_40.json",
             "missionId": "galileo"
           }
@@ -13979,8 +13979,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664152_53/s0466664152_53.json",
             "missionId": "galileo"
           }
@@ -14043,8 +14043,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664165_66/s0466664165_66.json",
             "missionId": "galileo"
           }
@@ -14107,8 +14107,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664178_79/s0466664178_79.json",
             "missionId": "galileo"
           }
@@ -14171,8 +14171,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664200_01/s0466664200_01.json",
             "missionId": "galileo"
           }
@@ -14235,8 +14235,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664213_14/s0466664213_14.json",
             "missionId": "galileo"
           }
@@ -14299,8 +14299,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664226_27/s0466664226_27.json",
             "missionId": "galileo"
           }
@@ -14363,8 +14363,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664239_40_41/s0466664239_40_41.json",
             "missionId": "galileo"
           }
@@ -14427,8 +14427,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664252_53_54/s0466664252_53_54.json",
             "missionId": "galileo"
           }
@@ -14491,8 +14491,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664265_66_67/s0466664265_66_67.json",
             "missionId": "galileo"
           }
@@ -14555,8 +14555,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664278_79/s0466664278_79.json",
             "missionId": "galileo"
           }
@@ -14619,8 +14619,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664300_01_02/s0466664300_01_02.json",
             "missionId": "galileo"
           }
@@ -14683,8 +14683,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664313_14/s0466664313_14.json",
             "missionId": "galileo"
           }
@@ -14747,8 +14747,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664326_27/s0466664326_27.json",
             "missionId": "galileo"
           }
@@ -14811,8 +14811,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664339_40/s0466664339_40.json",
             "missionId": "galileo"
           }
@@ -14875,8 +14875,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664352/s0466664352.json",
             "missionId": "galileo"
           }
@@ -14939,8 +14939,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664365_66/s0466664365_66.json",
             "missionId": "galileo"
           }
@@ -15003,8 +15003,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664378_79/s0466664378_79.json",
             "missionId": "galileo"
           }
@@ -15067,8 +15067,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664400_01/s0466664400_01.json",
             "missionId": "galileo"
           }
@@ -15131,8 +15131,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664413_14_15/s0466664413_14_15.json",
             "missionId": "galileo"
           }
@@ -15195,8 +15195,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664552/s0466664552.json",
             "missionId": "galileo"
           }
@@ -15259,8 +15259,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664565/s0466664565.json",
             "missionId": "galileo"
           }
@@ -15323,8 +15323,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664578/s0466664578.json",
             "missionId": "galileo"
           }
@@ -15387,8 +15387,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664600/s0466664600.json",
             "missionId": "galileo"
           }
@@ -15451,8 +15451,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664613/s0466664613.json",
             "missionId": "galileo"
           }
@@ -15515,8 +15515,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664626/s0466664626.json",
             "missionId": "galileo"
           }
@@ -15579,8 +15579,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664639/s0466664639.json",
             "missionId": "galileo"
           }
@@ -15643,8 +15643,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664652/s0466664652.json",
             "missionId": "galileo"
           }
@@ -15707,8 +15707,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466664665/s0466664665.json",
             "missionId": "galileo"
           }
@@ -15771,8 +15771,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669339/s0466669339.json",
             "missionId": "galileo"
           }
@@ -15835,8 +15835,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669352/s0466669352.json",
             "missionId": "galileo"
           }
@@ -15899,8 +15899,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669500/s0466669500.json",
             "missionId": "galileo"
           }
@@ -15963,8 +15963,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669513/s0466669513.json",
             "missionId": "galileo"
           }
@@ -16027,8 +16027,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669526/s0466669526.json",
             "missionId": "galileo"
           }
@@ -16091,8 +16091,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669539/s0466669539.json",
             "missionId": "galileo"
           }
@@ -16155,8 +16155,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669552/s0466669552.json",
             "missionId": "galileo"
           }
@@ -16219,8 +16219,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669565/s0466669565.json",
             "missionId": "galileo"
           }
@@ -16283,8 +16283,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669578/s0466669578.json",
             "missionId": "galileo"
           }
@@ -16347,8 +16347,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669626/s0466669626.json",
             "missionId": "galileo"
           }
@@ -16411,8 +16411,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669639/s0466669639.json",
             "missionId": "galileo"
           }
@@ -16475,8 +16475,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669652/s0466669652.json",
             "missionId": "galileo"
           }
@@ -16539,8 +16539,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669765/s0466669765.json",
             "missionId": "galileo"
           }
@@ -16603,8 +16603,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669778/s0466669778.json",
             "missionId": "galileo"
           }
@@ -16667,8 +16667,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669800/s0466669800.json",
             "missionId": "galileo"
           }
@@ -16731,8 +16731,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669926/s0466669926.json",
             "missionId": "galileo"
           }
@@ -16795,8 +16795,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466669939/s0466669939.json",
             "missionId": "galileo"
           }
@@ -16859,8 +16859,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676678_79/s0466676678_79.json",
             "missionId": "galileo"
           }
@@ -16923,8 +16923,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676700_01/s0466676700_01.json",
             "missionId": "galileo"
           }
@@ -16987,8 +16987,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676713/s0466676713.json",
             "missionId": "galileo"
           }
@@ -17051,8 +17051,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676726/s0466676726.json",
             "missionId": "galileo"
           }
@@ -17115,8 +17115,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676739/s0466676739.json",
             "missionId": "galileo"
           }
@@ -17179,8 +17179,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676752_53/s0466676752_53.json",
             "missionId": "galileo"
           }
@@ -17243,8 +17243,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676765/s0466676765.json",
             "missionId": "galileo"
           }
@@ -17307,8 +17307,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676778_79/s0466676778_79.json",
             "missionId": "galileo"
           }
@@ -17371,8 +17371,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676800_01/s0466676800_01.json",
             "missionId": "galileo"
           }
@@ -17435,8 +17435,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676813/s0466676813.json",
             "missionId": "galileo"
           }
@@ -17499,8 +17499,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676826_27/s0466676826_27.json",
             "missionId": "galileo"
           }
@@ -17563,8 +17563,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676839_40/s0466676839_40.json",
             "missionId": "galileo"
           }
@@ -17627,8 +17627,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676852_53/s0466676852_53.json",
             "missionId": "galileo"
           }
@@ -17691,8 +17691,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676865/s0466676865.json",
             "missionId": "galileo"
           }
@@ -17755,8 +17755,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676879_78_80/s0466676879_78_80.json",
             "missionId": "galileo"
           }
@@ -17819,8 +17819,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676900_01/s0466676900_01.json",
             "missionId": "galileo"
           }
@@ -17883,8 +17883,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466676913_14/s0466676913_14.json",
             "missionId": "galileo"
           }
@@ -17947,8 +17947,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466677052/s0466677052.json",
             "missionId": "galileo"
           }
@@ -18011,8 +18011,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884301_00/s0484884301_00.json",
             "missionId": "galileo"
           }
@@ -18075,8 +18075,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884313/s0484884313.json",
             "missionId": "galileo"
           }
@@ -18139,8 +18139,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884500/s0484884500.json",
             "missionId": "galileo"
           }
@@ -18203,8 +18203,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884513_14/s0484884513_14.json",
             "missionId": "galileo"
           }
@@ -18267,8 +18267,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884700_01/s0484884700_01.json",
             "missionId": "galileo"
           }
@@ -18331,8 +18331,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884713/s0484884713.json",
             "missionId": "galileo"
           }
@@ -18395,8 +18395,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888243_42/s0484888243_42.json",
             "missionId": "galileo"
           }
@@ -18459,8 +18459,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888700_01/s0484888700_01.json",
             "missionId": "galileo"
           }
@@ -18523,8 +18523,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888713_14/s0484888713_14.json",
             "missionId": "galileo"
           }
@@ -18587,8 +18587,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888727_26/s0484888727_26.json",
             "missionId": "galileo"
           }
@@ -18651,8 +18651,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888740_39/s0484888740_39.json",
             "missionId": "galileo"
           }
@@ -18715,8 +18715,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889800/s0484889800.json",
             "missionId": "galileo"
           }
@@ -18779,8 +18779,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889804/s0484889804.json",
             "missionId": "galileo"
           }
@@ -18843,8 +18843,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889807/s0484889807.json",
             "missionId": "galileo"
           }
@@ -18907,8 +18907,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889811/s0484889811.json",
             "missionId": "galileo"
           }
@@ -18971,8 +18971,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889814/s0484889814.json",
             "missionId": "galileo"
           }
@@ -19035,8 +19035,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889818/s0484889818.json",
             "missionId": "galileo"
           }
@@ -19099,8 +19099,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889821/s0484889821.json",
             "missionId": "galileo"
           }
@@ -19163,8 +19163,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889825/s0484889825.json",
             "missionId": "galileo"
           }
@@ -19227,8 +19227,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889828/s0484889828.json",
             "missionId": "galileo"
           }
@@ -19291,8 +19291,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889832/s0484889832.json",
             "missionId": "galileo"
           }
@@ -19355,8 +19355,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889835_36/s0484889835_36.json",
             "missionId": "galileo"
           }
@@ -19419,8 +19419,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889839/s0484889839.json",
             "missionId": "galileo"
           }
@@ -19483,8 +19483,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889842/s0484889842.json",
             "missionId": "galileo"
           }
@@ -19547,8 +19547,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889846/s0484889846.json",
             "missionId": "galileo"
           }
@@ -19611,8 +19611,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889849/s0484889849.json",
             "missionId": "galileo"
           }
@@ -19675,8 +19675,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889918/s0484889918.json",
             "missionId": "galileo"
           }
@@ -19739,8 +19739,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484889921/s0484889921.json",
             "missionId": "galileo"
           }
@@ -19803,8 +19803,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527275700/s0527275700.json",
             "missionId": "galileo"
           }
@@ -19867,8 +19867,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527275900/s0527275900.json",
             "missionId": "galileo"
           }
@@ -19931,8 +19931,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836239/s0532836239.json",
             "missionId": "galileo"
           }
@@ -19995,8 +19995,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836252/s0532836252.json",
             "missionId": "galileo"
           }
@@ -20059,8 +20059,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836800/s0532836800.json",
             "missionId": "galileo"
           }
@@ -20123,8 +20123,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836813/s0532836813.json",
             "missionId": "galileo"
           }
@@ -20187,8 +20187,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836826_27/s0532836826_27.json",
             "missionId": "galileo"
           }
@@ -20251,8 +20251,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532836839/s0532836839.json",
             "missionId": "galileo"
           }
@@ -20315,8 +20315,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532837665_66/s0532837665_66.json",
             "missionId": "galileo"
           }
@@ -20379,8 +20379,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532837678_79/s0532837678_79.json",
             "missionId": "galileo"
           }
@@ -20443,8 +20443,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0532837700_01/s0532837700_01.json",
             "missionId": "galileo"
           }
@@ -20508,8 +20508,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670100/s0466670100.json",
             "missionId": "galileo"
           }
@@ -20573,8 +20573,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670113/s0466670113.json",
             "missionId": "galileo"
           }
@@ -20638,8 +20638,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670126/s0466670126.json",
             "missionId": "galileo"
           }
@@ -20703,8 +20703,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670139/s0466670139.json",
             "missionId": "galileo"
           }
@@ -20768,8 +20768,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670152/s0466670152.json",
             "missionId": "galileo"
           }
@@ -20833,8 +20833,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670165/s0466670165.json",
             "missionId": "galileo"
           }
@@ -20898,8 +20898,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670178/s0466670178.json",
             "missionId": "galileo"
           }
@@ -20963,8 +20963,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670200/s0466670200.json",
             "missionId": "galileo"
           }
@@ -21028,8 +21028,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670213/s0466670213.json",
             "missionId": "galileo"
           }
@@ -21093,8 +21093,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670352/s0466670352.json",
             "missionId": "galileo"
           }
@@ -21158,8 +21158,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670513/s0466670513.json",
             "missionId": "galileo"
           }
@@ -21223,8 +21223,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670526/s0466670526.json",
             "missionId": "galileo"
           }
@@ -21288,8 +21288,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670539/s0466670539.json",
             "missionId": "galileo"
           }
@@ -21353,8 +21353,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670552/s0466670552.json",
             "missionId": "galileo"
           }
@@ -21418,8 +21418,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670700/s0466670700.json",
             "missionId": "galileo"
           }
@@ -21483,8 +21483,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670713/s0466670713.json",
             "missionId": "galileo"
           }
@@ -21548,8 +21548,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670726/s0466670726.json",
             "missionId": "galileo"
           }
@@ -21613,8 +21613,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670739/s0466670739.json",
             "missionId": "galileo"
           }
@@ -21678,8 +21678,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466670752/s0466670752.json",
             "missionId": "galileo"
           }
@@ -21743,8 +21743,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0466677065/s0466677065.json",
             "missionId": "galileo"
           }
@@ -21808,8 +21808,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484884727_26/s0484884727_26.json",
             "missionId": "galileo"
           }
@@ -21873,8 +21873,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888200/s0484888200.json",
             "missionId": "galileo"
           }
@@ -21938,8 +21938,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888204/s0484888204.json",
             "missionId": "galileo"
           }
@@ -22003,8 +22003,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888207/s0484888207.json",
             "missionId": "galileo"
           }
@@ -22068,8 +22068,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888211/s0484888211.json",
             "missionId": "galileo"
           }
@@ -22133,8 +22133,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888246/s0484888246.json",
             "missionId": "galileo"
           }
@@ -22198,8 +22198,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888249/s0484888249.json",
             "missionId": "galileo"
           }
@@ -22263,8 +22263,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0484888253/s0484888253.json",
             "missionId": "galileo"
           }
@@ -22328,8 +22328,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527272700/s0527272700.json",
             "missionId": "galileo"
           }
@@ -22393,8 +22393,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527272713/s0527272713.json",
             "missionId": "galileo"
           }
@@ -22458,8 +22458,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0527272726/s0527272726.json",
             "missionId": "galileo"
           }
@@ -22512,8 +22512,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
             "missionId": "galileo"
           }
@@ -22606,8 +22606,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "The preserved credit for this input reads: USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
             "missionId": "galileo"
           }
@@ -22738,8 +22738,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://doi.org/10.17189/4sz4-5024",
             "missionId": "galileo"
           }

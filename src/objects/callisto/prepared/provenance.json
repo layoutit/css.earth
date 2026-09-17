@@ -461,20 +461,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
             "missionId": "galileo"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-1",
+            "kind": "facility",
+            "facilityId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
             "missionId": "voyager-2"
           }
@@ -544,8 +544,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/",
             "missionId": "galileo"
           }
@@ -604,8 +604,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://doi.org/10.17189/4sq6-x165",
             "missionId": "galileo"
           }

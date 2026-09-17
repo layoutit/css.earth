@@ -29,8 +29,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "mpg-eso-2-2m",
+            "kind": "facility",
+            "facilityId": "mpg-eso-2-2m",
             "evidence": "https://www.eso.org/public/images/eso0936a/"
           }
         ]
@@ -63,8 +63,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vista",
+            "kind": "facility",
+            "facilityId": "vista",
             "evidence": "https://www.eso.org/public/images/eso1101d/"
           }
         ]
@@ -97,8 +97,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/"
           }
         ]
@@ -194,9 +194,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing facility."
           }
         ]
       }

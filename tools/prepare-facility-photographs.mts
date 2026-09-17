@@ -5,14 +5,14 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from './source-values.mts';
 
 /**
- * Prepares the published photographs that stand in for ground machines, which
+ * Prepares the published photographs that stand in for ground facilities, which
  * have no 3D model to render. Acquisition and preparation are explicit
  * maintenance operations; normal builds reuse the committed WebP files.
  */
 const root = path.resolve(import.meta.dirname, '..');
-const records = path.join(root, 'site/source/machines/photograph-records.json');
-const output = path.join(root, 'public/shell/machine-renders');
-const cache = process.env.CSSEARTH_PHOTO_CACHE ?? path.join(root, 'output/machine-photos');
+const records = path.join(root, 'site/source/facilities/photograph-records.json');
+const output = path.join(root, 'public/shell/facility-renders');
+const cache = process.env.CSSEARTH_PHOTO_CACHE ?? path.join(root, 'output/facility-photos');
 const WIDTH = 592, HEIGHT = 296, BACKGROUND = '#0d0d0d';
 
 interface Pinned {
@@ -56,23 +56,23 @@ for (const entry of pinned) {
   const check = await sharp(webp).metadata();
   if (check.width !== WIDTH || check.height !== HEIGHT) throw new Error(`Prepared photograph is the wrong size: ${entry.id}`);
   await fs.writeFile(path.join(output, `${entry.id}.webp`), webp);
-  entries.push({ id: entry.id, path: `images/${entry.id}.webp`, url: `/shell/machine-renders/${entry.id}.webp`,
+  entries.push({ id: entry.id, path: `images/${entry.id}.webp`, url: `/shell/facility-renders/${entry.id}.webp`,
     width: WIDTH, height: HEIGHT, displayWidth: WIDTH / 2, displayHeight: HEIGHT / 2,
     composition: { scale: 1, offsetXCssPixels: 0 }, bytes: webp.length, sha256: sha256(webp),
     sourceBinding: { kind: 'catalogued', references: [{ catalogueId: `artwork-photo-${entry.id}`, role: 'artwork',
-      evidence: `site/source/machines/photograph-records.json#/${pinned.indexOf(entry)}` }] },
+      evidence: `site/source/facilities/photograph-records.json#/${pinned.indexOf(entry)}` }] },
     source: { id: entry.id, url: entry.url, sourcePage: entry.sourcePage, credit: entry.credit,
       license: entry.license, sha256: entry.sha256, bytes: entry.bytes, kind: 'published-photograph',
       preparation: `Centre-cover to ${WIDTH}x${HEIGHT} without upscaling, flatten onto sidebar ${BACKGROUND}, encode WebP quality 90.` } });
   console.log(entry.id, webp.length, 'bytes');
 }
 if (entries.length !== pinned.length) throw new Error('Expected one prepared photograph per pinned record.');
-// Photographs live in the one machine render library, so `imageId` resolves the
-// same way whether a machine was rendered from a model or photographed.
-const libraryPath = path.join(root, 'site/source/machines/render-library.json');
+// Photographs live in the one facility render library, so `imageId` resolves the
+// same way whether a facility was rendered from a model or photographed.
+const libraryPath = path.join(root, 'site/source/facilities/render-library.json');
 const library = JSON.parse(await fs.readFile(libraryPath, 'utf8')) as { entries: { id: string }[] };
 const prepared = new Map(entries.map(entry => [entry.id, entry]));
 library.entries = [...library.entries.filter(entry => !prepared.has(entry.id)), ...entries]
   .sort((a, b) => a.id.localeCompare(b.id));
 await fs.writeFile(libraryPath, JSON.stringify(library, null, 2) + '\n');
-console.log(`Library now holds ${library.entries.length} machine images.`);
+console.log(`Library now holds ${library.entries.length} facility images.`);

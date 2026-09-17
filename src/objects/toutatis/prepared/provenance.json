@@ -292,14 +292,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
             "missionId": "goldstone-solar-system-radar"
           }

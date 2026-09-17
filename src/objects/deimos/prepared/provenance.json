@@ -575,8 +575,8 @@
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
           },
           {
-            "kind": "machine",
-            "machineId": "mro",
+            "kind": "facility",
+            "facilityId": "mro",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg",
             "missionId": "mro"
           }

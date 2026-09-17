@@ -39,8 +39,8 @@ export interface PreparedSurfaceFeature {
   readonly credit: string;
   /** A source-backed caption note (a Wikipedia lead summary or a site's quoted source sentence) with its page and credit. */
   readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null;
-  /** The machines-catalogue id of the spacecraft at a site, when catalogued. */
-  readonly machineId: string | null;
+  /** The facilities-catalogue id of the spacecraft at a site, when catalogued. */
+  readonly facilityId: string | null;
   /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
   readonly minimumZoomShare: number;
   /** Found by search and labelled when selected, never by default. */

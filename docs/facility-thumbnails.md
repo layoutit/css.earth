@@ -1,8 +1,8 @@
-# Machine thumbnails
+# Facility thumbnails
 
 ## Sources and appearance
 
-[The artwork library](../site/source/machines/render-library.json) pins the original
+[The artwork library](../site/source/facilities/render-library.json) pins the original
 models, textures, credits and prepared image hashes. The 21 model thumbnails use
 the same fixed camera and neutral white studio lights with the source materials unchanged. These
 are illustrations, not reconstructed mission illumination. Eight published
@@ -16,7 +16,7 @@ the sidebar crop without discarding dark spacecraft parts as background.
 ## Inward-facing poses
 
 Each model has an authored 3D pose in
-[`tools/machine-renders/poses.mts`](../tools/machine-renders/poses.mts). Its record
+[`tools/facility-renders/poses.mts`](../tools/facility-renders/poses.mts). Its record
 identifies the prominent dish or camera opening, a mission reference, the
 matching source-model hash and the feature's approximate facing axis.
 The model rotates before capture so that axis projects down-left from the
@@ -38,11 +38,11 @@ New source models require another pose review.
 
 ## Regeneration
 
-Run `pnpm prepare:machine-renders` for candidates, or append `--write` to replace
+Run `pnpm prepare:facility-renders` for candidates, or append `--write` to replace
 the model images and library together after inspection. `--only=cassini` limits
 the selection. `--cache=<directory>` reuses verified downloads;
 `--output=<directory>` selects the review directory. Both default to
-`output/machine-lighting-preview`. Normal builds reuse the committed images.
+`output/facility-lighting-preview`. Normal builds reuse the committed images.
 `--inspect-axes --only=<id>` renders six source-axis views for identifying
 instrument faces. `--inspect-rolls --only=<id>` compares four model rotations
 around the inward facing axis with lighting fixed. Inspection modes cannot
@@ -53,11 +53,11 @@ It verifies every source hash and byte count before use. The output includes
 before images, PNG masters, candidate WebPs, a candidate library and a report of
 materials, geometry counts, camera/model poses and omitted components. Inspect each
 image for incomplete geometry, unreadable materials and clipping before writing.
-Writing refreshes the machine/source graphs in the same transaction. This narrow
+Writing refreshes the facility/source graphs in the same transaction. This narrow
 refresh preserves attribution and checks every unrelated source pin; it refuses
 changed source records or artwork membership. It does not reacquire nebula preview
 images or rebake other datasets. The artwork test in
-`site/test/dataset-machines.test.mts` verifies the resulting image identities.
+`site/test/dataset-facilities.test.mts` verifies the resulting image identities.
 
 ## Model-specific preparation and limits
 
@@ -72,7 +72,7 @@ transforms and material values. Both Voyagers use the same reviewed 3D pose,
 with the dish aimed inward and every boom retained.
 
 The fixed lighting recipe is in
-[`tools/machine-renders/render.mts`](../tools/machine-renders/render.mts).
+[`tools/facility-renders/render.mts`](../tools/facility-renders/render.mts).
 The library records preparation code hashes and browser/package versions.
 Rerenders on another GPU or browser may differ at antialiased edges; the
 committed WebP hashes identify the actual published images.
