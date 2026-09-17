@@ -82,14 +82,17 @@ if (child.status !== 0) throw new Error(String(child.stderr));
   assert.deepEqual(files.get('data/child.txt')?.accesses, ['read']);
 });
 
-test('worker threads and file watching are marked as unrecorded', async () => {
-  const { unsupported } = await traced(`
+test('a worker thread records its own reads, and file watching is marked as unrecorded', async () => {
+  const { files, records, unsupported } = await traced(`
 import { Worker } from 'node:worker_threads';
-import { watch } from 'node:fs';
-await new Promise(resolve => new Worker('0', { eval: true }).once('exit', resolve));
+import { watch, writeFileSync } from 'node:fs';
+writeFileSync('worker.mts', "import { readFileSync } from 'node:fs'; readFileSync('data/worker.txt');");
+await new Promise(resolve => new Worker(new URL('./worker.mts', import.meta.url)).once('exit', resolve));
 watch('.').close();
-`);
-  assert.deepEqual(unsupported, ['fs.watch', 'worker thread']);
+`, { 'data/worker.txt': 'thread' });
+  assert.equal(records.length, 2);
+  assert.deepEqual(files.get('data/worker.txt')?.accesses, ['read']);
+  assert.deepEqual(unsupported, ['fs.watch']);
 });
 
 test('the trace keeps each owner view of an object descriptor as first read', async () => {
