@@ -1,28 +1,89 @@
-:root { --sl-content-width: 58rem; }
+/* Starlight on the app's shell tokens from site/site.css. The site is dark only. */
+:root,
+:root[data-theme='light'] {
+  color-scheme: dark;
+  --sl-content-width: 58rem;
+  --sl-font: var(--shell-ui-font);
+  --sl-color-white: var(--shell-text);
+  --sl-color-gray-1: var(--shell-text);
+  --sl-color-gray-2: var(--shell-text-secondary);
+  --sl-color-gray-3: var(--shell-text-muted);
+  --sl-color-gray-4: var(--shell-text-muted);
+  --sl-color-gray-5: var(--shell-surface-hover);
+  --sl-color-gray-6: var(--shell-surface);
+  --sl-color-gray-7: var(--shell-surface);
+  --sl-color-black: var(--shell-background);
+  --sl-color-accent-low: var(--shell-selection);
+  --sl-color-accent: var(--shell-focus);
+  --sl-color-accent-high: var(--shell-text);
+  --sl-color-text: var(--shell-text-secondary);
+  --sl-color-text-accent: var(--shell-text);
+  --sl-color-text-invert: var(--shell-text);
+  --sl-color-bg: var(--shell-background);
+  --sl-color-bg-nav: var(--shell-background);
+  --sl-color-bg-sidebar: var(--shell-background);
+  --sl-color-bg-inline-code: var(--shell-surface-hover);
+  --sl-color-bg-accent: var(--shell-selection);
+  --sl-color-hairline-light: var(--shell-border);
+  --sl-color-hairline: var(--shell-divider-muted);
+  --sl-color-hairline-shade: var(--shell-background);
+  --sl-color-backdrop-overlay: rgb(0 0 0 / 66%);
+  --explorer-wordmark-size: 26px;
+}
+
+/* site.css locks the page for the 3D viewport; documents scroll. */
+html,
+body {
+  height: auto;
+  overflow: visible;
+}
+
+.wiki-site-title { display: inline-flex; gap: .6rem; align-items: baseline; }
+.wiki-site-title-label { color: var(--shell-text-muted); font: var(--shell-font-section-heading); }
+
+site-search button[data-open-modal] {
+  border: 0;
+  border-radius: 999px;
+  background: var(--shell-surface);
+  color: var(--shell-text-muted);
+}
+site-search button[data-open-modal]:hover { background: var(--shell-surface-hover); color: var(--shell-text); }
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--shell-text);
+  text-decoration: underline;
+  text-decoration-color: var(--shell-text-muted);
+}
+.sl-markdown-content a:not(:where(.not-content *)):hover { text-decoration-color: var(--shell-text); }
+
+.sidebar-content a[aria-current='page'] { background: var(--shell-selection); color: var(--shell-text); }
 
 .object-infobox {
   float: right;
   clear: right;
   width: 17rem;
   margin: 0 0 1.5rem 2rem;
-  padding: .75rem;
-  font-size: var(--sl-text-sm);
-  background: var(--sl-color-gray-6);
-  border: 1px solid var(--sl-color-hairline);
-  border-radius: .5rem;
+  padding: 12px 16px 16px;
+  font: var(--shell-font-small);
+  color: var(--shell-text-secondary);
+  background: var(--shell-surface);
+  border-radius: var(--explorer-card-radius, 12px);
 }
 
 .sl-markdown-content .object-infobox > :not(:first-child) { margin-top: .5rem; }
 .object-infobox-image { display: block; width: 100%; height: auto; margin-inline: auto; }
-.object-infobox-status { color: var(--sl-color-gray-2); text-align: center; }
-.sl-markdown-content .object-infobox table { display: table; width: 100%; font-size: var(--sl-text-xs); }
-.sl-markdown-content .object-infobox th, .sl-markdown-content .object-infobox td { padding: .3rem .4rem; vertical-align: top; border-bottom: 1px solid var(--sl-color-hairline); }
-.sl-markdown-content .object-infobox th { width: 45%; text-align: left; background: none; }
-.object-infobox-link { display: block; text-align: center; font-weight: 600; }
+.object-infobox-status { color: var(--shell-text-muted); text-align: center; }
+.sl-markdown-content .object-infobox table { display: table; width: 100%; font: var(--shell-font-metadata); }
+.sl-markdown-content .object-infobox th,
+.sl-markdown-content .object-infobox td { padding: 5px 0; vertical-align: top; border: 0; border-bottom: 1px solid var(--shell-divider-muted); }
+.sl-markdown-content .object-infobox th { width: 45%; padding-right: 8px; color: var(--shell-text-muted); font-weight: 400; text-align: left; background: none; }
+.sl-markdown-content .object-infobox td { color: var(--shell-text); }
+.sl-markdown-content .object-infobox .object-infobox-link { display: block; color: var(--shell-text); text-align: center; }
 
 .sl-markdown-content .object-maps { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 1rem; }
-.sl-markdown-content .object-maps > p { margin: 0; font-size: var(--sl-text-sm); color: var(--sl-color-gray-2); }
-.sl-markdown-content .object-maps img { display: block; width: 100%; aspect-ratio: 2; object-fit: cover; border-radius: .25rem; }
+.sl-markdown-content .object-maps > p { margin: 0; color: var(--shell-text-muted); font: var(--shell-font-caption); }
+.sl-markdown-content .object-maps em { font-style: normal; }
+.sl-markdown-content .object-maps img { display: block; width: 100%; aspect-ratio: 2; object-fit: cover; margin-bottom: 6px; }
 
 @media (max-width: 50rem) {
   .object-infobox { float: none; width: auto; margin: 0 0 1.5rem; }

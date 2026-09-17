@@ -13,8 +13,13 @@ export default defineConfig({
     description: 'Pages built from the object packages in src/objects.',
     social: [{ icon: 'github', label: 'GitHub', href: REPOSITORY_URL }],
     editLink: { baseUrl: `${REPOSITORY_URL}/edit/main/` },
-    customCss: ['./src/wiki.css'],
-    components: { MarkdownContent: './src/components/ObjectArticle.astro' },
+    // The app's own stylesheet and tokens; wiki.css maps Starlight onto them.
+    customCss: ['../site/site.css', './src/wiki.css'],
+    components: {
+      MarkdownContent: './src/components/ObjectArticle.astro',
+      SiteTitle: './src/components/SiteTitle.astro',
+      ThemeSelect: './src/components/ThemeSelect.astro',
+    },
     sidebar: [
       { label: 'All objects', link: '/' },
       ...groups.map(group => ({

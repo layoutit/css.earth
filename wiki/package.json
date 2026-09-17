@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1 --port 4281",
     "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1 --port 4281",
     "check": "astro check"
   },
   "dependencies": {
