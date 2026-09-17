@@ -23,7 +23,8 @@ type MockFactory = { navigation: MockPreparation };
 type PrepareOptions = Omit<Partial<Parameters<ReturnType<typeof createPreparedWorldNavigation>['prepare']>[0]>, 'toFactory'> & { toFactory?: MockFactory | Promise<MockFactory> };
 type MockNavigation = Omit<ObjectWorldNavigation, 'frame'> & { frame: Mutable<PreparedWorldCameraFrame>; activePreparedFocus: PreparedNavigationFocus | null };
 const lifecycle = { ready: Promise.resolve(), sharedView: unusedSharedView, pause() {}, resume() {}, destroy() {} } satisfies Omit<ObjectSceneLifecycle, 'navigation'>;
-const identity = [1,0,0,0,1,0,0,0,1] as const;
+/** CSS presentation to a right-handed reference: a reflection. */
+const identity = [1,0,0,0,-1,0,0,0,1] as const;
 function fixtureFactory(arrival?: PreparedArrivalView) {
   const frames: Mutable<PreparedWorldCameraFrame>[] = [0, 1].map(index => ({ referenceFrame: 'world', epochJdTt: 1,
     originM: [index * 1e8, 0, 0], presentationToReference: identity, metersPerUnit: 1, bodyRadiusM: 1000,
@@ -87,7 +88,7 @@ const photographicArrival: PreparedArrivalView = { defaultLens: 'photo', lensIds
 test('scene selection and cross-object flight use the prepared photographic face', async () => {
   const f = fixtureFactory(photographicArrival), frame = f.factory.navigation.frame, optics = f.navigation.optics();
   const target = required(f.service.systemTarget({ objectId: '1', fromId: '0', mount: { ...lifecycle, navigation: f.navigation } }));
-  assert.deepEqual(presentWorldCamera(target, frame, optics).rotation, photographicArrival.rotation);
+  presentWorldCamera(target, frame, optics).rotation.forEach((value, index) => assert.ok(Math.abs(value - photographicArrival.rotation[index]) < 1e-12));
   const handoff = await drainFrames(f, { task: f.start() });
   const mount = f.mounted();
   handoff.mountOptions.onNavigationReady?.(mount.navigation);

@@ -13,8 +13,8 @@
  * projection; the mirrored mapping fits worse.
  *
  * Cells the observer never saw, and cells beyond the maximum emission angle, are NaN: the image map reads them as no data. The
- * lens recipe must state `outputLongitudeOrigin: -90`, the same quarter turn `rendererLongitudes` gives a camera-cast lens, so
- * both kinds of lens put body longitude 0 in the same raster column. */
+ * lens recipe states `outputLongitudeOrigin: 0`: east longitude grows from 0 at the left edge, as the mesh places every atlas, so
+ * this lens and a camera-cast lens put body longitude 0 in the same raster column. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

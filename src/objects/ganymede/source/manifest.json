@@ -168,8 +168,8 @@
     {
       "id": "ganymede-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "1b91f014b73e4bdccb005166cccafe56179fd32de486ae7795d120b021d3868d",
+      "expectedBytes": 189,
+      "expectedSha256": "213c3755aebd880b38acea124fc382efba1cb65ace7ad4ff0dd077c173693876",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -626,8 +626,8 @@
     {
       "id": "ganymede-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1197,
-      "expectedSha256": "0b14c40775ff55e03f351957f2a0ad0b3be4757eac37fe29175ee12b1cdbf281",
+      "expectedBytes": 1163,
+      "expectedSha256": "ef8db9880fad391feb11463e1e7f5a0e20d79a7567a32f85850e67dd61d50154",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",

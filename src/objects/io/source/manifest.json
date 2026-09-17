@@ -170,8 +170,8 @@
     {
       "id": "io-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 149,
-      "expectedSha256": "2bc17bb8b5b0e11c048f22d0e630fa19596b4c1501c7d72f56bf31cb11d299a4",
+      "expectedBytes": 181,
+      "expectedSha256": "57b9261689b479463ea12838d5639c51da7ebf870db2ba8d9194854fdc8780b9",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -916,8 +916,8 @@
     {
       "id": "io-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1177,
-      "expectedSha256": "773f25e55fd348ab4193cabd51fbada8b6a52d6092586ac65116debe011cfbcf",
+      "expectedBytes": 1145,
+      "expectedSha256": "21927345b6204d7414b49f365c46ff33e6ccfdf175fc2219adb387782038c8fc",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",

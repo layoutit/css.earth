@@ -60,11 +60,11 @@ test('the written map is the image map the scientific lens reads, with body long
     grid: { width, height, longitudeOrigin: 0, rowOrder: 'north-to-south' } });
   assert.equal(decoded.sample(5, 0), map[17 * width + 1], 'body longitude 5, latitude 0 reads the written cell');
   assert.equal(decoded.sample(180, 0), null, 'the far side is no data');
-  // rendererLongitudes documents column x of a camera-cast lens as longitude (x + 1/2) * 360 / width - 90; the scientific painter
-  // with outputLongitudeOrigin -90 asks for the same longitude at every column.
+  // A camera-cast lens puts longitude (x + 1/2) * 360 / width in column x, as the mesh places every atlas; the scientific painter
+  // with outputLongitudeOrigin 0 asks for the same longitude at every column.
   const asked: number[] = [];
   paintScienceSurface({ sample: (longitude: number, latitude: number) => { if (latitude > 0 && latitude < 5) asked.push(longitude); return 1; } } as never,
-    { minimum: 0, maximum: 2, colors: ['#000000', '#ffffff'], outputLongitudeOrigin: -90 }, width, height);
+    { minimum: 0, maximum: 2, colors: ['#000000', '#ffffff'], outputLongitudeOrigin: 0 }, width, height);
   assert.equal(asked.length, width);
-  asked.forEach((longitude, x) => assert.ok(Math.abs(longitude - (-90 + (x + 0.5) * 360 / width)) < 1e-9, `column ${x} asks ${longitude}`));
+  asked.forEach((longitude, x) => assert.ok(Math.abs(longitude - (x + 0.5) * 360 / width) < 1e-9, `column ${x} asks ${longitude}`));
 });

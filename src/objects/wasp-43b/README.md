@@ -87,7 +87,6 @@ Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43b` prepa
 - **The nightside is weakly measured.** Below about 700 K the palette saturates. Some nightside cells come out far colder than the hemisphere average, because few eigencurves constrain them.
 - **Assumptions of the frame.** Tidal locking and a pole on the orbit normal are assumed. The direction of the orbit's ascending node on the sky is not measured by transits; it is set at position angle 0 as a display convention. The orbit is circular, and the orbit's phase ignores the up to 8.3 minutes of barycentric light-time (0.7 percent of an orbit), as the star placement does.
 - **The planet is a sphere.** Its tidal and rotational flattening are not modelled.
-- **A quarter-turn atlas offset.** The planet route puts body longitude 0 a quarter turn along the mesh, so the atlas is painted from longitude −90°. The panel's map preview therefore shows the substellar point a quarter of the way across, not at the edge.
 - **Other maps of the same planet are not shown.** See the [investigation ledger](investigations.json) for the MIRI map of Hammond et al. (2024), the Bell et al. (2024) products and the two single-detector NIRSpec maps.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

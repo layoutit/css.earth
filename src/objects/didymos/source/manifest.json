@@ -393,8 +393,8 @@
     {
       "id": "didymos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1105,
-      "expectedSha256": "9b08a7c1432b04421a7146cf83df73007d0a812d8d12cbb5dba8346d88152414",
+      "expectedBytes": 1073,
+      "expectedSha256": "5dfc2b92385511e5c1373f500b29cfec71eb313d70b0ba99c28ce5b3cf2ab36b",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -411,8 +411,8 @@
     {
       "id": "didymos-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "05b03ddd8348fb0c98249dd46fa42334fbdb33c6822cb8323f1cbd37d5c08bd3",
+      "expectedBytes": 186,
+      "expectedSha256": "0094e844aa309c843d3ff4b62f4c4efddd1f27c9a3ddbc472da86f5518ec254a",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

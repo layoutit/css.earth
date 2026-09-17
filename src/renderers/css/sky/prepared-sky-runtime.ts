@@ -1,5 +1,5 @@
 import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
-import { transposeWorldRotation, worldRotationCss, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
@@ -90,7 +90,7 @@ function preparedSkyCameraPose(world: WorldCameraPose, viewport: WorldCameraView
       world.pose.orientationXyzw.length !== 4 || !world.pose.orientationXyzw.every(Number.isFinite) || Math.abs(Math.hypot(...world.pose.orientationXyzw) - 1) > 1e-9) {
     throw new TypeError('Prepared sky observer or projection is invalid.');
   }
-  const view = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+  const view = cssViewFromOrientation(world.pose.orientationXyzw);
   // Prepared PolyCSS vertices are [ICRF y, ICRF x, ICRF z]. This is the same
   // single renderer reflection as the shared volume camera.
   const rotation = [view[1], view[0], view[2], view[4], view[3], view[5], view[7], view[6], view[8]];

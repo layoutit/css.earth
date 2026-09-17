@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { prepareWorldNavigationDefinition } from './prepare-world-navigation.js';
-import { rotation, transform } from './world-navigation.js';
+import { multiply, reflection } from './world-navigation.js';
 import { chain } from './world-navigation-sources.js';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -49,7 +49,7 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
   const metadata = (frame: object) => Object.fromEntries(Object.entries(frame)
     .filter(([key]) => !['originM', 'presentationToReference', 'orbitUpReference'].includes(key)));
   assert.deepEqual(metadata(first.frame), metadata(expectedFrame));
-  assert.doesNotThrow(() => rotation(first.frame.presentationToReference));
+  assert.doesNotThrow(() => reflection(first.frame.presentationToReference));
   assert.equal(first.definition.tree, definition.tree);
   assert.equal(first.definition.assets, definition.assets);
   assert.equal(first.definition.controls, definition.controls);
@@ -71,25 +71,27 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
     const transforms: string[] = [];
     const retainedTransform = (node: typeof nodes[number]): string => node.properties.map((propertyIndex: number) => definition.tree.properties[propertyIndex])
       .find((entry: { name: string }) => entry.name === 'transform')?.value ?? (node.style ?? '').match(/(?:^|;)transform:([^;]+)/u)?.[1] ?? '';
-    const physicalSource = descriptor.properties.recipe.sources.find((source: { id: string }) => source.id === 'solar-system');
-    if (physicalSource) {
-      // The physical observation capability anchors Sun, orbit and sky to its
-      // prepared system. Its local surface/cutaway spin is a visual longitude
-      // phase, not a second inertial reference frame. It must preserve the pole.
-      assert.equal(requireRecord(await read(resolve(directory, physicalSource.path))).schema, 'cssearth-solar-system-preparation@1');
-      const pole = transform(chain(retainedTransform(nodes[index])), [0, 0, 1]);
-      pole.forEach((value, axis) => assert.ok(Math.abs(value - Number(axis === 2)) < 1e-12));
-      index = nodes[index].parent;
-    }
+    // A spin is drawn at its first keyframe, the prepared epoch; the feature labels place names on the body so turned.
+    const spins = new Map((definition.motion ?? []).map((motion: { target: number; keyframes: { offset: number; transform?: string }[] }) =>
+      [motion.target, motion.keyframes.find(frame => frame.offset === 0)?.transform]));
     while (index !== definition.tree.scene) {
       const node = nodes[index];
       assert.ok(node, 'Surface chain escaped the retained scene.');
-      transforms.unshift(retainedTransform(node));
+      transforms.unshift(spins.get(index) ?? retainedTransform(node));
       index = node.parent;
     }
-    const rendered = chain(...transforms), authored = first.receipt.bodyToPresentation;
+    // On the surface node PolyCSS writes world X/Y as CSS Y/X; a surface map may also count longitude from another edge.
+    const features = descriptor.properties.recipe.sources.find((source: { id: string }) => source.id === 'features');
+    const map = features ? requireRecord(await read(resolve(directory, 'source', String(requireRecord(await read(resolve(directory, features.path))).surfaceMap)))) : null;
+    const edge = (map ? requireFiniteNumber(map.mapLeftEdgeLongitudeDeg) : 0) * Math.PI / 180;
+    const [prime, east] = map ? [requireArray(map.prime).map(Number), requireArray(map.east).map(Number)] : [[0, 1, 0], [1, 0, 0]];
+    const north = map ? requireArray(map.north).map(Number) : [0, 0, 1];
+    const x = [0, 1, 2].map(axis => Math.cos(edge) * prime[axis]! - Math.sin(edge) * east[axis]!), y = [0, 1, 2].map(axis => Math.sin(edge) * prime[axis]! + Math.cos(edge) * east[axis]!);
+    const drawn = multiply(chain(...transforms), [x[0]!, y[0]!, north[0]!, x[1]!, y[1]!, north[1]!, x[2]!, y[2]!, north[2]!]);
+    const authored = first.receipt.bodyToPresentation;
     assert.ok(authored);
-    rendered.forEach((value, axis) => assert.ok(Math.abs(value - authored[axis]) < 1e-12, `${descriptor.id} surface axis ${axis} differs.`));
+    assert.doesNotThrow(() => reflection(authored));
+    drawn.forEach((value, axis) => assert.ok(Math.abs(value - authored[axis]) < 1e-12, `${descriptor.id} drawn surface axis ${axis} differs.`));
   }
 });
 

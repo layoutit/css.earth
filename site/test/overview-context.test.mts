@@ -20,7 +20,7 @@ const camera = (distance: number, plan: Pick<typeof context, 'focus'> = context)
 });
 const frameAt = (originM: PreparedWorldCameraFrame['originM'], bodyRadiusM: number): PreparedWorldCameraFrame => ({
   originM, bodyRadiusM, referenceFrame: 'world', epochJdTt: 1,
-  presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1,
+  presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1,
 });
 
 test('body cards retain overview through small boundary reversals for bodies with and without moons', () => {
