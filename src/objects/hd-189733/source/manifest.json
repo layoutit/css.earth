@@ -1,0 +1,436 @@
+{
+  "schema": "csshd-189733-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "hd-189733-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1356,
+      "expectedSha256": "2cb34733b8527b8a37d10f647afc7ef84c9889e0000e700ba2eb88135424ab3f",
+      "origin": "https://arxiv.org/abs/2503.20895",
+      "credit": "Lally et al. (2025), arXiv:2503.20895; Gaia DR3; Boyajian et al. (2015)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements and values computed from them, each with its source",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-189733-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/hd-189733/source/manifest.json@52e6e03f6de43f93ced1caea00c88926f07339ac#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2637,
+      "expectedSha256": "bbfc1d00c5ffe7630fecd2d6fa7fa0b5b1771570bf6791281e33c9de281dd073",
+      "origin": "Repository-authored raster recipe: the star's measured colour on the reference sphere, transparent off-limb plate, limb plate from its fitted limb darkening",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "hd-189733-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1698,
+      "expectedSha256": "4b821adc2811fbe082e5c495ef1976ed794bf3400e3910352c6bc7b53af92f3a",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "hd-189733-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "hd-189733-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 104,
+      "expectedSha256": "101d660e03d3f234967c9d04ed7668ef5275a62db45e42e8f64d617766be204e",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "hd-189733-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 290,
+      "expectedSha256": "cf2603d1e1040e1cc06333f04310b89ccdceb7a293ffa4e5510e4d0a6c395b3b",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "hd-189733-gaia-dr3-source",
+      "path": "photometry/gaia-dr3-source.csv",
+      "expectedBytes": 338,
+      "expectedSha256": "e41d96af2c79c357137cb326548f8d12b719510ce04cbe2f825edf1c075ee113",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP sync, CSV response saved unchanged on 2026-09-17; the ADQL query is in source/preparation/acquisition.json",
+      "redistribution": "One catalogue row, unchanged, with acknowledgement",
+      "consumers": [
+        "placement"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-hd-189733",
+            "role": "material",
+            "evidence": "src/objects/hd-189733/source/photometry/gaia-dr3-source.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-gaia-dr3-xp-sampled",
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "expectedBytes": 10243,
+      "expectedSha256": "1af2a36da52c92d3bffb857646e7cdfcc6caa50933692cddef80f2ce6e938c9a",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816201846144&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia DataLink XP_SAMPLED CSV for the source, saved unchanged on 2026-09-17; restored through source/preparation/acquisition.json",
+      "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-hd-189733",
+            "role": "material",
+            "evidence": "src/objects/hd-189733/source/photometry/gaia-dr3-xp-sampled.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1144,
+      "expectedSha256": "7fcf4824e022a748064948d0cec2aba5378774d43df4a195db117fa825ca33ff",
+      "origin": "https://doi.org/10.1051/0004-6361/202243880",
+      "credit": "Gaia DR3 XP sampled spectrum (Montegriffo et al. 2023); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived Gaia spectrum, its sampling and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-hd-189733",
+            "role": "material",
+            "evidence": "src/objects/hd-189733/source/photometry/stellar-color.json#/sampledSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-tess-sector-41",
+      "path": "photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+      "expectedBytes": 1944000,
+      "expectedSha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+      "productId": "tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 189733 (TIC 256364928), sector 41",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-hd-189733",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-tess-sector-54",
+      "path": "photometry/tess/tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
+      "expectedBytes": 1918080,
+      "expectedSha256": "5d0423dae1340eea6a8ebaafa5dede4ce3d551d94b43a1a1b5f9ddc9f1e5c963",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
+      "productId": "tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 189733 (TIC 256364928), sector 54",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-hd-189733",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022190063128-s0054-0000000256364928-0227-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-tess-sector-81",
+      "path": "photometry/tess/tess2024196212429-s0081-0000000256364928-0276-s_lc.fits",
+      "expectedBytes": 1946880,
+      "expectedSha256": "52923df5f5ca44f4eabb69db62385d44da6bb1f63e73c136b847fe3fa5451c77",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000256364928-0276-s_lc.fits",
+      "productId": "tess2024196212429-s0081-0000000256364928-0276-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 189733 (TIC 256364928), sector 81",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-hd-189733",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000256364928-0276-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-189733-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "stellar-color-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 43008,
+      "expectedSha256": "44b59d3f1eb4f74d40ed2a71190a8ee46bca168f301bffe580629b895bbb658f",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "Photosphere colour from the Gaia DR3 XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b; rendered by tools/objects/source-authoring/hd-189733/author.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+        "inputs": [
+          "hd-189733-stellar-color",
+          "hd-189733-gaia-dr3-xp-sampled",
+          "hd-189733-cie-1931-2deg-cmf",
+          "hd-189733-preparation-raster",
+          "hd-189733-tess-sector-41",
+          "hd-189733-tess-sector-54",
+          "hd-189733-tess-sector-81"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The colour lens rendered as a disc with its fitted limb darkening; `author.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3787,
+      "expectedSha256": "c501afb3c25d889bc3f1b1844a1339480466329a8368a5621d1b8d1d072acb7d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 2237,
+      "expectedSha256": "1ab80eb510b20f5b1bda9b361583e02bb77bbd62ad6a3d63e57858bd41fbeb41"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 446,
+      "expectedSha256": "7b3aa00690a624ca13895a51e156998854bf8bc60656f89fcfa77565d2bf3925"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 2510,
+      "expectedSha256": "97968f96008ffa24a8c22a18d6e4f141b5310f92eb723bd852fe60cb4c84fe94"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5569,
+      "expectedSha256": "d41ec0ee494cdad389244bf1503326644be7dd10b47518ea4b7e76ccbb2dc2b4"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 440026,
+      "expectedSha256": "1c912b46575f9e964f59719bf0d324f3e56200e0b158ab812e775e6c1cb9358d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+      }
+    },
+    {
+      "path": "reference/rendered-system-view.png",
+      "expectedBytes": 450019,
+      "expectedSha256": "e41172f0f513c60411d951852dc713c838ec6caec0eb955f2d5b5ab8d6187cc0",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733/?overview=system, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation."
+      }
+    }
+  ]
+}

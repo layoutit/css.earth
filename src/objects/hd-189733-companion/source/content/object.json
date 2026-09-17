@@ -1,0 +1,103 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-189733-companion",
+  "displayName": "HD 189733 B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.22 solar radii",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/IV/39",
+          "label": "TESS Input Catalog v8.2",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "separation",
+        "label": "Distance from HD 189733 A",
+        "value": "At least 226 AU",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-189733-companion",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 position",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "projectedSeparationAu; projectedSeparationSource"
+        }
+      },
+      {
+        "id": "orbit",
+        "label": "Orbit around HD 189733 A",
+        "value": "Not measured; a fit allows 1,500 to 21,000 years",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ab8389",
+          "url": "https://doi.org/10.3847/1538-4357/ab8389",
+          "label": "Fitted here with LOFTI (Pearce et al. 2020)",
+          "checked": "2026-09-17",
+          "path": "source/reference/lofti-candidate-orbits.txt",
+          "locator": "the 300 accepted orbits"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
+        "thumbnail": "hd-189733-companion-lens-color.webp",
+        "surface": "hd-189733-companion-surface-color.webp",
+        "poles": "hd-189733-companion-poles-color.webp",
+        "source": {
+          "id": "hd-189733-companion-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of this red dwarf. It sits 11 arcseconds from HD 189733 A, 226 AU across the sky; how far it lies in front or behind is not measured, so it is placed at A's distance."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Data",
+      "role": "facts",
+      "description": "Gaia DR3 1827242816176111360",
+      "href": "https://gea.esac.esa.int/archive/"
+    },
+    {
+      "label": "Method",
+      "role": "facts",
+      "description": "LOFTI, Pearce et al. (2020), ApJ 894, 115",
+      "href": "https://doi.org/10.3847/1538-4357/ab8389"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/1538-3881/ab3467",
+      "credit": "TESS Input Catalog v8.2 (Stassun et al. 2019)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-189733-companion.json",
+      "credit": "Catalogue radius at HD 189733 A's distance; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

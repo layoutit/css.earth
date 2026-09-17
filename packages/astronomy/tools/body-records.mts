@@ -76,6 +76,7 @@ export async function readBodyRecords(root = packageRoot) {
   for (const record of records) {
     if (record.physical.parent !== null && !ids.has(record.physical.parent)) throw new TypeError(`Missing astronomy parent: ${record.id}.`);
     if (record.hostedOrbit !== undefined && records.find(parent => parent.id === record.physical.parent)?.star === undefined) throw new TypeError(`A hosted orbit's parent must be a placed star: ${record.id}.`);
+    if (record.star?.boundTo !== undefined && records.find(host => host.id === record.star!.boundTo)?.star === undefined) throw new TypeError(`A bound star's companion must be a placed star: ${record.id}.`);
   }
   return records.sort(order);
 }

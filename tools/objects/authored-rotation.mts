@@ -45,6 +45,7 @@ export async function readAuthoredRotation(directory: string, reference: { path:
   }
   if (source.schema === 'cssearth-synchronous-rotation@1') return synchronousRotation(directory, source, epochJdTt);
   if (source.schema === 'cssearth-orbit-aligned-pole@1') return orbitAlignedPole(directory, source, epochJdTt);
+  if (source.schema === 'cssearth-measured-obliquity-pole@1') return measuredObliquityPole(directory, source, epochJdTt);
   const observed = source.schema === 'cssearth-observed-pole@1';
   const rightAscension = requireFiniteNumber(source.rightAscensionDegrees), declination = requireFiniteNumber(source.declinationDegrees), meridian = requireFiniteNumber(source.displayMeridianDegrees);
   const periodHours = observed ? requireFiniteNumber(source.periodHours) : 0;
@@ -101,16 +102,60 @@ async function orbitAlignedPole(directory: string, source: Record<string, unknow
   }
   // Aligned means consistent with zero: the measurement must allow it within twice its uncertainty.
   if (!(uncertainty > 0) || Math.abs(degrees) > 2 * uncertainty) throw new TypeError(`A projected obliquity of ${degrees} ± ${uncertainty} degrees is not aligned.`);
-  const { HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, starStateKm } = await import('@cssearth/astronomy');
+  const { HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm } = await import('@cssearth/astronomy');
   if (!(HOSTED_PLANET_IDS as readonly string[]).includes(source.planet)) throw new TypeError(`An orbit-aligned pole needs a hosted planet: ${source.planet}.`);
   const { positionKm: r, velocityKmPerDay: v, hostId } = hostedPlanetStateRelativeKm(source.planet as (typeof HOSTED_PLANET_IDS)[number], epochJdTt);
   if (hostId !== id) throw new TypeError(`${source.planet} orbits ${hostId}, not ${id}.`);
+  // +Z on the orbit normal (prograde).
+  return sunFacingElements(id, [r[1]! * v[2]! - r[2]! * v[1]!, r[2]! * v[0]! - r[0]! * v[2]!, r[0]! * v[1]! - r[1]! * v[0]!], epochJdTt, 0);
+}
+
+/** A star pole along `pole` (ICRF), +X toward the Sun at the epoch: W from the ascending node of the equator on the ICRF equator. */
+async function sunFacingElements(id: string, poleDirection: readonly number[], epochJdTt: number, spinRateRadPerDay: number): Promise<RotationElements> {
+  const { starStateKm } = await import('@cssearth/astronomy');
   const star = starStateKm(id as Parameters<typeof starStateKm>[0], epochJdTt).positionKm, toSun = star.map(c => -c);
-  // +Z on the orbit normal (prograde), +X toward the Sun: W from the ascending node of the equator on the ICRF equator.
   const unit = (x: readonly number[]) => { const n = Math.hypot(...x); return x.map(c => c / n); };
-  const pole = unit([r[1]! * v[2]! - r[2]! * v[1]!, r[2]! * v[0]! - r[0]! * v[2]!, r[0]! * v[1]! - r[1]! * v[0]!]), sun = unit(toSun);
+  const pole = unit(poleDirection), sun = unit(toSun);
   const node = unit([-pole[1]!, pole[0]!, 0]), cross = [node[1]! * sun[2]! - node[2]! * sun[1]!, node[2]! * sun[0]! - node[0]! * sun[2]!, node[0]! * sun[1]! - node[1]! * sun[0]!];
   const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
   return { poleRightAscensionRad: Math.atan2(pole[1]!, pole[0]!), poleDeclinationRad: Math.asin(Math.max(-1, Math.min(1, pole[2]!))),
-    primeMeridianRad: (Math.atan2(dot(pole, cross), dot(node, sun)) + 2 * Math.PI) % (2 * Math.PI), spinRateRadPerDay: 0 };
+    primeMeridianRad: (Math.atan2(dot(pole, cross), dot(node, sun)) + 2 * Math.PI) % (2 * Math.PI), spinRateRadPerDay };
+}
+
+/** The spin axis of a star in the frame of its transiting planet's orbit, seen from the observer (+Z toward us, +Y the sky-projected
+ * orbit normal): the orbit normal is (0, sin i, cos i) and the spin axis (sin i* sin lambda, sin i* cos lambda, cos i*), with lambda
+ * the sky-projected angle between them and i* the spin axis's inclination to the line of sight. The true obliquity follows from
+ * cos psi = cos i* cos i + sin i* sin i cos lambda. */
+export function obliquitySpinAxis(orbitInclinationDegrees: number, stellarInclinationDegrees: number, projectedObliquityDegrees: number) {
+  const rad = Math.PI / 180, i = orbitInclinationDegrees * rad, star = stellarInclinationDegrees * rad, lambda = projectedObliquityDegrees * rad;
+  const spin = [Math.sin(star) * Math.sin(lambda), Math.sin(star) * Math.cos(lambda), Math.cos(star)] as const;
+  const trueObliquityDegrees = Math.acos(Math.max(-1, Math.min(1, Math.cos(star) * Math.cos(i) + Math.sin(star) * Math.sin(i) * Math.cos(lambda)))) / rad;
+  return { spin, trueObliquityDegrees };
+}
+
+/** A star whose spin axis is measured in three dimensions against a transiting planet's orbit (projected obliquity lambda, stellar
+ * inclination i*) and whose equatorial rotation period is measured: the pole is built in the planet's sky frame and spins at the
+ * equatorial rate; longitude 0 faces the Sun at the epoch, a display phase. The published true obliquity must follow from the
+ * record's lambda, i* and the orbit's inclination within its stated uncertainty, so the conventions are checked, not assumed. */
+async function measuredObliquityPole(directory: string, source: Record<string, unknown>, epochJdTt: number): Promise<RotationElements> {
+  const { id } = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'Object descriptor');
+  const measured = (key: string) => { const entry = requireRecord(source[key], key);
+    if (typeof entry.source !== 'string' || !entry.source.trim()) throw new TypeError(`${key} names its source.`); return entry; };
+  const lambda = requireFiniteNumber(measured('projectedObliquity').degrees), inclination = requireFiniteNumber(measured('stellarInclination').degrees);
+  const psi = measured('trueObliquity'), psiDegrees = requireFiniteNumber(psi.degrees), psiUncertainty = requireFiniteNumber(psi.uncertaintyDegrees);
+  const periodDays = requireFiniteNumber(measured('equatorialRotationPeriod').days);
+  if (typeof id !== 'string' || typeof source.planet !== 'string' || source.phase !== 'arbitrary-display-phase' || !(periodDays > 0) || !(psiUncertainty > 0) ||
+      !(inclination >= 0 && inclination <= 180) || typeof source.source !== 'string' || !source.source.trim() || typeof source.qualification !== 'string' || !source.qualification.trim() ||
+      typeof source.coordinateSystem !== 'string' || !source.coordinateSystem.trim()) throw new TypeError('Invalid measured obliquity pole source.');
+  const { HOSTED_PLANET_IDS, hostedOrbit, hostSkyFrame, starAstrometry, BODIES } = await import('@cssearth/astronomy');
+  if (!(HOSTED_PLANET_IDS as readonly string[]).includes(source.planet)) throw new TypeError(`A measured obliquity needs a hosted planet: ${source.planet}.`);
+  const planet = source.planet as (typeof HOSTED_PLANET_IDS)[number], orbit = hostedOrbit(planet);
+  if (BODIES[planet].parent !== id) throw new TypeError(`${planet} orbits ${BODIES[planet].parent}, not ${id}.`);
+  const { spin, trueObliquityDegrees } = obliquitySpinAxis(orbit.inclinationDegrees, inclination, lambda);
+  if (Math.abs(trueObliquityDegrees - psiDegrees) > psiUncertainty) {
+    throw new TypeError(`lambda ${lambda}, i* ${inclination} and the orbit's i ${orbit.inclinationDegrees} give psi ${trueObliquityDegrees.toFixed(2)}, not ${psiDegrees} +/- ${psiUncertainty} degrees.`);
+  }
+  const frame = hostSkyFrame(starAstrometry(id as Parameters<typeof starAstrometry>[0]), orbit.ascendingNodePositionAngleDegrees);
+  const pole = [0, 1, 2].map(axis => spin[0] * frame.x[axis]! + spin[1] * frame.y[axis]! + spin[2] * frame.z[axis]!);
+  return sunFacingElements(id, pole, epochJdTt, 2 * Math.PI / periodDays);
 }

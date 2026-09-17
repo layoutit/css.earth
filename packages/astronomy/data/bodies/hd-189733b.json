@@ -1,0 +1,27 @@
+{
+  "id": "hd-189733b",
+  "classification": "exoplanet",
+  "order": 908,
+  "physical": {
+    "name": "HD 189733b",
+    "horizonsCode": null,
+    "meanRadiusKm": 81254.5430832,
+    "gravitationalParameterKm3PerS2": 145688558.12196806,
+    "parent": "hd-189733"
+  },
+  "physicalNotes": "Radius: 0.116795376 solar radii, the planet radius in Lally et al. (2025)'s deposited ThERESA configuration (Zenodo 15103479, hd189-eureka-spitzer+MIRI-share.cfg; Table 1: 0.11680 +/- 0.00014, from Agol et al. 2010), at 695700 km per solar radius. A sphere: tidal and rotational flattening are not modelled. GM from the planet mass in the same configuration, 0.0010977762 solar masses (Table 1: 0.00110, from Southworth 2010), times the JPL solar GM.",
+  "hostedOrbit": {
+    "periodDays": 2.21857567,
+    "semiMajorAxisStellarRadii": 8.86287385036163,
+    "inclinationDegrees": 85.71,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 59838.6863112,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Lally et al. (2025) deposited configuration: porb 2.21857567 d (Table 1: 2.218575, from Agol et al. 2010)",
+      "shape": "Lally et al. (2025) deposited configuration: semi-major axis 0.030994811518716577 au over their 0.752 solar-radius star = 8.863 stellar radii; inclination 85.71 degrees (Table 1, from Agol et al. 2010); eccentricity 0",
+      "phase": "Lally et al. (2025) deposited configuration: t0 59838.6863112, the transit time their map was fitted with. Table 1 labels it UTC; it is used here on the TDB scale of the scene, 69 s later, 0.04 percent of an orbit.",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north), as in the configuration (Omega 0)."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "hd-189733-companion",
+  "classification": "star",
+  "order": 909,
+  "physical": {
+    "name": "HD 189733 B",
+    "horizonsCode": null,
+    "meanRadiusKm": 155836.8,
+    "gravitationalParameterKm3PerS2": 25613500928.0943,
+    "parent": null
+  },
+  "physicalNotes": "Radius: 0.224 solar radii and mass 0.193 solar masses from the TESS Input Catalog v8.2 (TIC 256364937; Stassun et al. 2019, AJ 158, 138), which derives both for cool dwarfs from the Ks magnitude and distance (Mann et al. 2015, 2019). Model-dependent values, not measurements of this star's disc. presentationUp: no axis is measured, so the display axis is celestial north at the star.",
+  "star": {
+    "rightAscensionDegrees": 300.1790158599167,
+    "declinationDegrees": 22.708365170697956,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 19.775801965002984,
+    "properMotionRaMasPerYear": -12.193028920065139,
+    "properMotionDecMasPerYear": -253.99335006117343,
+    "radialVelocityKmPerS": -2.531722,
+    "presentationUp": "display-axis",
+    "boundTo": "hd-189733",
+    "sources": {
+      "position": "Gaia DR3 source 1827242816176111360 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-189733-companion/source/photometry/gaia-dr3-source.csv: 11.44 arcsec from HD 189733 A at position angle 244 degrees, 226 au in projection",
+      "distance": "HD 189733 A's Gaia DR3 distance, 19.776 pc. B's own parallax, 50.629 +/- 0.014 mas (19.752 pc), differs from A's by 0.06 mas; taken literally it would put B 5,000 au nearer than A, 20 times its projected separation, although the pair moves together. The depth between them is not measured.",
+      "properMotion": "Gaia DR3 (same row): -12.193, -253.993 mas/yr",
+      "radialVelocity": "HD 189733 A's Gaia DR3 value, -2.53 km/s: B's own, 1.5 +/- 1.2 km/s, is too uncertain to separate the pair",
+      "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HD 189733 A and B in their Gaia EDR3 wide-binary catalogue with a chance-alignment probability of 1.3e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the companion is placed by its own astrometry and carries no orbit."
+    }
+  }
+}

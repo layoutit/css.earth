@@ -8,12 +8,15 @@ const cross = (a: readonly number[], b: readonly number[]) => [a[1]! * b[2]! - a
 const hostRadiusKm = BODIES['wasp-43'].meanRadiusKm
 
 describe('hosted orbits', () => {
-  it('compiles WASP-43b as the one exoplanet, hosted by the placed star WASP-43', () => {
-    expect(EXOPLANET_IDS).toEqual(['wasp-43b'])
-    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b'])
+  it('compiles each exoplanet hosted by its placed star', () => {
+    expect(EXOPLANET_IDS).toEqual(['hd-189733b', 'wasp-43b'])
+    // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
+    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b'])
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
-    // Rp/R* 0.15883 of the host's 0.665 solar radii.
+    expect(BODIES['hd-189733b'].parent).toBe('hd-189733')
+    // Rp/R* 0.15883 of WASP-43's 0.665 solar radii, 0.155313 of HD 189733 A's 0.752.
     expect(BODIES['wasp-43b'].meanRadiusKm / hostRadiusKm).toBeCloseTo(0.15883, 6)
+    expect(BODIES['hd-189733b'].meanRadiusKm / BODIES['hd-189733'].meanRadiusKm).toBeCloseTo(0.155313, 6)
   })
   it('builds a right-handed observer frame with the node on the sky and +Z toward the observer', () => {
     const star = starAstrometry('wasp-43'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)

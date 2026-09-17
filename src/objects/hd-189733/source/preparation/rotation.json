@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-measured-obliquity-pole@1",
+  "planet": "hd-189733b",
+  "projectedObliquity": {
+    "degrees": -1.0,
+    "source": "Cristo et al. (2024), A&A 682, A28 (arXiv:2310.06681), Table 4, model M1: lambda = -1.00 +0.22/-0.23 degrees, from the Rossiter-McLaughlin effect of HD 189733b in ESPRESSO spectra."
+  },
+  "stellarInclination": {
+    "degrees": 71.87,
+    "source": "Cristo et al. (2024), Table 4, model M1: i* = 71.87 +5.55/-6.91 degrees (the abstract prints the two bounds the other way round). Differential rotation makes the spectral distortion depend on stellar latitude, which breaks the symmetry that otherwise hides the tilt along the line of sight; the paper calls that detection tentative (93.4 percent confidence for rotation periods within the photometric literature values)."
+  },
+  "trueObliquity": {
+    "degrees": 13.6,
+    "uncertaintyDegrees": 6.9,
+    "source": "Cristo et al. (2024), abstract: psi = 13.6 +/- 6.9 degrees."
+  },
+  "equatorialRotationPeriod": {
+    "days": 11.454,
+    "source": "Cristo et al. (2024), Table 4, model M1: equatorial period 11.454 +0.092/-0.088 days; with differential rotation alpha 0.29 +0.13/-0.12 the poles turn in 14.9 +/- 2.0 days."
+  },
+  "phase": "arbitrary-display-phase",
+  "source": "The star's spin axis measured in three dimensions against HD 189733b's orbit (Cristo et al. 2024): the pole is built in the planet's sky frame from lambda and i*, with the orbit from packages/astronomy/data/bodies/hd-189733b.json, and the star turns once every equatorial period. The record's lambda, i* and the orbit's 85.71 degree inclination give psi 13.9 degrees, inside the published 13.6 +/- 6.9 degrees.",
+  "coordinateSystem": "ICRF/J2000. +Z is the measured spin axis (prograde); +X faces the Sun at the scene epoch, so grid longitude 0 faces Earth; east longitude. The whole disc turns at the equatorial rate.",
+  "qualification": "The tilt along the line of sight rests on a tentative detection of differential rotation; without it only the sky-projected angle, 1 degree, is measured. The axis's position angle on the sky is not measured: it is placed relative to the planet's orbit, whose orientation on the sky is a display convention (ascending node at position angle 0). The sign convention of lambda is not checked against the paper's; at 1 degree it moves the pole by 1 degree. i* and 180 - i* give different psi and the paper reports the first. Differential rotation is not drawn, and the uniform disc shows no rotation."
+}

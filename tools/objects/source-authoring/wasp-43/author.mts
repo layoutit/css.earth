@@ -44,11 +44,12 @@ function disc(shade: (x: number, y: number) => readonly [number, number, number]
   return sharp(rgba, { raw: { width: MARKER_SIZE, height: MARKER_SIZE, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
 }
 
-export async function starMarker() {
-  const source = resolve(objects, 'wasp-43/source'), science = await firstSurfaceScience('wasp-43');
+/** A placed star's marker: its colour lens, dimmed toward the limb where a limb-darkening law is measured, a uniform disc where not. */
+export async function starMarker(id = 'wasp-43', { requireLimbDarkening = true } = {}) {
+  const source = resolve(objects, id, 'source'), science = await firstSurfaceScience(id);
   const { color, limbDarkening } = await loadStellarPhotometricColor(path => readFile(resolve(source, path)), science, 'photometry/stellar-color.json');
-  if (!limbDarkening) throw new Error('WASP-43 has no limb-darkening record.');
-  const { u1, u2 } = limbDarkening.coefficients;
+  if (!limbDarkening && requireLimbDarkening) throw new Error(`${id} has no limb-darkening record.`);
+  const { u1, u2 } = limbDarkening?.coefficients ?? { u1: 0, u2: 0 };
   // Intensity scales every linear channel; the colour's chromaticity stays.
   return disc((x, y) => {
     const ratio = Math.max(0, quadraticIntensity(Math.sqrt(Math.max(0, 1 - x * x - y * y)), u1, u2));
@@ -56,8 +57,9 @@ export async function starMarker() {
   });
 }
 
-export async function planetMarker() {
-  const source = resolve(objects, 'wasp-43b/source'), science = await firstSurfaceScience('wasp-43b');
+/** A hosted planet's marker: its default lens map seen from the host star. */
+export async function planetMarker(id = 'wasp-43b') {
+  const source = resolve(objects, id, 'source'), science = await firstSurfaceScience(id);
   const map = await loadNpyDictionaryMap(source, science);
   const palette = { minimum: Number(science.minimum), maximum: Number(science.maximum), colors: science.colors as string[] };
   return disc((x, y) => {
