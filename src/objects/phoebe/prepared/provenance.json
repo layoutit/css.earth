@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3be2b17a6adf0e70054f7c3f20b686be07d0121b9b46c62a6a6199ddc88f2c23"
+    "sha256": "4a4f376f28fa0b2e67265e235233dcee5ed9dec6890dba775b2ed9558206fbbe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c6d10cbb5ef67bd9254b0e626334b4f73861b078f2c1a01a5a9b7248a4447d64"
+    "bindingsSha256": "86ea9a20577658eba605315a9f124f59c7697e7ee4515415f92ac03121d4d044"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9b44475d33c5649d885865585519f6195fdec0a1f63076167fd39beb5e160b3d",
+      "sha256": "caa71862f51b6dcbee9686d8ccda260ff28c3630a18ce7f38e466bc9accc4e2f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -378,7 +378,109 @@
               }
             }
           ],
-          "observedColors": []
+          "observedColors": [],
+          "surfaceObservations": [
+            {
+              "id": "iss",
+              "format": "spice-camera",
+              "consumer": "iss-observation",
+              "filter": "CL1,CL2",
+              "frames": [
+                {
+                  "id": "n1465662798",
+                  "path": "observations/N1465662798_2_CALIB.IMG",
+                  "labelPath": "observations/N1465662798_2_CALIB.LBL",
+                  "startTime": "2004-06-11T16:09:12.021Z"
+                }
+              ],
+              "spice": {
+                "kernelSet": "cassini",
+                "kernels": [
+                  "lsk/naif0012.tls",
+                  "pck/pck00011.tpc",
+                  "sclk/cas00172.tsc",
+                  "fk/cas_v43.tf",
+                  "ik/cas_iss_v10.ti",
+                  "spk/041014R_SCPSE_01066_04199.bsp",
+                  "ck/04161_04164ra.bc"
+                ],
+                "observer": -82,
+                "target": 609,
+                "bodyFrame": "IAU_PHOEBE",
+                "instrument": -82360,
+                "clock": {
+                  "start": "SPACECRAFT_CLOCK_START_COUNT",
+                  "stop": "SPACECRAFT_CLOCK_STOP_COUNT",
+                  "spacecraft": -82
+                },
+                "aberration": "LT+S",
+                "pixels": {
+                  "focalLength": {
+                    "key": "FOCAL_LENGTH",
+                    "unit": "mm"
+                  },
+                  "pixelPitch": {
+                    "key": "PIXEL_SIZE",
+                    "unit": "micrometre"
+                  },
+                  "center": "CCD_CENTER",
+                  "boresight": "BORESIGHT",
+                  "samples": "PIXEL_SAMPLES",
+                  "lines": "PIXEL_LINES",
+                  "frame": "FOV_FRAME",
+                  "origin": 1,
+                  "column": "-X",
+                  "row": "-Y"
+                },
+                "image": {
+                  "format": "vicar-pds3",
+                  "quantity": "I/F",
+                  "header": {
+                    "INSTRUMENT_ID": "ISSNA",
+                    "TARGET_NAME": "PHOEBE",
+                    "INSTRUMENT_MODE_ID": "FULL"
+                  }
+                }
+              },
+              "limbRefinement": {
+                "method": "mesh-limb",
+                "maximumCorrectionDegrees": 0.2,
+                "maximumResidualPixels": 2.5,
+                "minimumControls": 24,
+                "searchPixels": 400,
+                "maximumControls": 1500
+              },
+              "refinement": {
+                "by": "relief"
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "maximumEmissionDegrees": 75,
+                "visibilityToleranceMeters": 0.5,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must lie within two diagonal pixel footprints of the closest source-mesh point; a footprint is the pixel range times the camera pixel angle, stretched by the emission angle, about 0.66 km across the diagonal at nadir from 78,000 km. Emission is limited to 75 degrees. The closest point must lie within 1.07 km of the displayed mesh, its simplification error, and be visible from the refined camera in the full mesh."
+              },
+              "photometry": {
+                "model": "lommel-seeliger",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 80,
+                "maximumEmissionDegrees": 75,
+                "maximumGain": 3
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1.2,
+                  99.4
+                ]
+              },
+              "metadata": {
+                "label": "ISS photograph",
+                "falseColor": false,
+                "coverage": "One Cassini narrow-angle clear-filter photograph from the approach of 11 June 2004 at 0.47 km per pixel and 86 degrees phase, projected onto the 2023 SPC shape through a camera derived from Cassini SPICE kernels and refined to the limb. Only the sunlit half of the disc is used. Grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo."
+              }
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -431,7 +533,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2a3509e472ed71679fde285521aab0343e0269d9b95805b6331e2756290336f7",
+      "sha256": "a9e85d2501a17786d9f2d73dbe35df207429809619ef6162071896e63540a501",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -500,6 +602,7 @@
           "defaultLens": "normal",
           "labels": {
             "normal": "Relative albedo",
+            "iss": "ISS photograph",
             "elevation": "Radial height",
             "maplet-resolution": "Maplet resolution",
             "image-count": "Image count",
@@ -533,6 +636,38 @@
                 "image": "/scenes/phoebe/phoebe-normal-legend.webp"
               },
               "notes": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
+            },
+            {
+              "id": "iss",
+              "label": "ISS photograph",
+              "thumbnail": "/scenes/phoebe/phoebe-iss-thumbnail.webp",
+              "surface": "phoebe-iss-surface@2x.webp",
+              "poles": "phoebe-iss-poles@2x.webp",
+              "source": {
+                "id": "n1465662798",
+                "path": "../manifest.json",
+                "url": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798"
+              },
+              "falseColor": false,
+              "facts": [
+                {
+                  "id": "observed",
+                  "label": "Observed",
+                  "value": "11 June 2004, 16:09 UTC"
+                },
+                {
+                  "id": "footprint",
+                  "label": "Pixel footprint",
+                  "value": "0.47 km from 78,000 km"
+                },
+                {
+                  "id": "filter",
+                  "label": "Camera filter",
+                  "value": "CL1 and CL2 · clear"
+                }
+              ],
+              "notes": "One Cassini narrow-angle photograph from the June 2004 approach, projected onto the shape model through a camera derived from Cassini SPICE kernels and refined to the limb. Only the sunlit half of the disc is used, so grid marks surface the camera did not see or that lay in shadow. Brightness is disk-normalized with an empirical Lommel-Seeliger law; it is not measured albedo.",
+              "noData": true
             },
             {
               "id": "elevation",
@@ -1184,6 +1319,104 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "n1465662798",
+      "path": "observations/N1465662798_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "width": 1024,
+      "height": 1024,
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-n1465662798",
+            "role": "material",
+            "evidence": "src/objects/phoebe/source/manifest.json@2f2fd66326d20b2ab9111bab6e147135d777defb#/inputs/17"
+          }
+        ]
+      },
+      "sha256": "456243a0a80a1b4b9786cca0555acc4833ae43ccf4a9e65250fa16835edaeb37",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/N1465662798_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "n1465662798-label",
+      "path": "observations/N1465662798_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission scientific data; retain the source and calibration credits.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "redistribution": "Retain NASA/JPL-Caltech/SSI and PDS RMS attribution.",
+      "acquisition": "Download the pinned CISSCAL-calibrated I/F image and its PDS3 label from the PDS RMS archive.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "machine",
+            "machineId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-n1465662798-label",
+            "role": "material",
+            "evidence": "src/objects/phoebe/source/manifest.json@2f2fd66326d20b2ab9111bab6e147135d777defb#/inputs/18"
+          }
+        ]
+      },
+      "sha256": "02da84d06ff45f1aa539a05cb62a482a1adbce49bb4b3a0fd5f99b0243c60f47",
+      "bytes": 3777,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/N1465662798_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -1196,8 +1429,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2a3509e472ed71679fde285521aab0343e0269d9b95805b6331e2756290336f7",
-      "bytes": 10927,
+      "sha256": "a9e85d2501a17786d9f2d73dbe35df207429809619ef6162071896e63540a501",
+      "bytes": 12266,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1645,6 +1878,52 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "iss",
+      "label": "ISS photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "iss"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "n1465662798",
+        "n1465662798-label",
+        "phoebe-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phoebe/phoebe-iss-thumbnail.webp",
+          "bytes": 2496,
+          "sha256": "dcab6ab060fcd972ee6a5319118aa37b98af6aa4a616a7f2a54fa08e562f0acd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-iss-surface@2x.webp",
+          "bytes": 1048088,
+          "sha256": "c4ef432e0d4c97cb28b3cf14d954ff52b01d2e81da8a89ec0ffbe5390298cab3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "phoebe-2023-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -1727,6 +2006,31 @@
           "url": "object:prepared/minimaps/infrared.webp",
           "bytes": 4620,
           "sha256": "d07efbb43425449c66ac81ecc59d8ad462a595475093238624c4c85e50d355c3",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:iss",
+      "label": "ISS photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "iss"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/iss.webp",
+          "bytes": 11464,
+          "sha256": "3ab3287b91e7b06f65963b26720fcce502a6806564d36cb3d621c928d3de8a40",
           "verification": "bytes-verified"
         }
       ]
@@ -1863,11 +2167,11 @@
   },
   "lastPreparation": {
     "objectId": "phoebe",
-    "materialSha256": "c0de233740fdf971fdaa7b3337bf46ad724343140624c1a52ed7152d79b3e2b9",
+    "materialSha256": "67e237e06a2310f8d97f6a4f210547c3c4c251863b42afee85e5bb757960b85f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c6d10cbb5ef67bd9254b0e626334b4f73861b078f2c1a01a5a9b7248a4447d64"
+      "bindingsSha256": "86ea9a20577658eba605315a9f124f59c7697e7ee4515415f92ac03121d4d044"
     }
   }
 }

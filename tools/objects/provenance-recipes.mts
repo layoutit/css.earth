@@ -1,3 +1,4 @@
+import { alternativeForLens } from './terrestrial-layers/alternative-lenses.mts';
 import {record, records, maybeRecord, text, texts, optionalText, numbers, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
 import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.mts';
 // Dependency bindings for the shared preparers. These follow acquisition paths
@@ -128,7 +129,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     // Mesh geometry changes the final sampled surface as well as its silhouette.
     if (geometry.radialTerrain) {
       for (const product of products) {
-        const model = records(geometry.radialTerrainAlternatives ?? []).find(model => model.lensId === product.id)
+        const model = alternativeForLens(records(geometry.radialTerrainAlternatives ?? []), product.id)
           ?? geometry.radialTerrain;
         const modelPaths = paths(model);
         product.inputPaths = [...new Set([...product.inputPaths, ...modelPaths])];

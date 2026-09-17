@@ -265,6 +265,42 @@
       ],
       "path": "reference/horizons-sphere-heliocentric.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2716%3B%27&OBJ_DATA=%27NO%27&MAKE_EPHEM=%27YES%27&TLIST_TYPE=%27JD%27&EPHEM_TYPE=%27VECTORS%27&CENTER=%27500%4010%27&REF_PLANE=%27FRAME%27&VEC_TABLE=%271%27&TLIST=2458232.849873150%2C2458232.852832731%2C2458232.855802417%2C2458232.858749220%2C2458232.861695710%2C2458236.808179103%2C2458236.811130784%2C2458236.814094016%2C2458236.817041924%2C2458236.819977077%2C2458242.726438186%2C2458242.729399262%2C2458242.732346321%2C2458242.735286551%2C2458242.738225056%2C2458243.552615919&OUT_UNITS=%27AU-D%27"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "thermal/ThermalInertia_BestFitValue.npy",
+      "url": "https://zenodo.org/api/records/6321315/files/ThermalInertia_BestFitValue.npy/content"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "thermal/DielectricConstant_BestFitValue.npy",
+      "url": "https://zenodo.org/api/records/6321315/files/DielectricConstant_BestFitValue.npy/content"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "thermal/LongitudeArray.npy",
+      "url": "https://zenodo.org/api/records/6321315/files/LongitudeArray.npy/content"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "thermal/LatitudeArray.npy",
+      "url": "https://zenodo.org/api/records/6321315/files/LatitudeArray.npy/content"
     }
   ]
 }

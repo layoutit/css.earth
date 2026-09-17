@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "82cd8b64caf8ae926db339bf1405f616699e87a878b826fe5ff886b0b9790089"
+    "sha256": "0deba92c582ab239ae677af4b6f8216b383ad18dd2926e884d4bc2df851486e9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -396,14 +396,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
+      "sha256": "5e4352e5083cb07169646e8472ab20d0ff6431a62f2b85e89f135b74dc752ae6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-19p",
         "displayName": "Borrelly",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "encounter",
+              "label": "Spacecraft",
+              "value": "Deep Space 1",
+              "source": {
+                "url": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.tab",
+                "label": "Comet 19P · usgs dem",
+                "checked": "2026-09-16",
+                "path": "source/reference/dem-dataset.cat",
+                "catalogueId": "source-comet-19p-usgs-dem",
+                "locator": "DATA_SET_DESC: \"the Deep Space 1 encounter\""
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -988,8 +1002,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "115dd0111fb868046bbd52b43177143272d7c18ffda5b03bd6b64a30f0bc0892",
-      "bytes": 7158,
+      "sha256": "5e4352e5083cb07169646e8472ab20d0ff6431a62f2b85e89f135b74dc752ae6",
+      "bytes": 7663,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1393,8 +1407,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4593,
-          "sha256": "5736a8203f6aaeac7ed8bc6cb717c5787c6f08440a2597a7b09e8954e0d84172",
+          "bytes": 4958,
+          "sha256": "ee7fca10c208716e29bca9f2ec6e005cfab6ac2de771d9a3f4c90ed8fa8163d4",
           "verification": "bytes-verified"
         }
       ],
@@ -1447,7 +1461,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-19p",
-    "materialSha256": "3b651a8db72416bb8a9e3677c51bdba52b080afcd3e18819a2235bdb35ee8da1",
+    "materialSha256": "c84a2c9a5f78271eb15ba66a520cb6fa280600e8440d00e2e2581c6a7cac530a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

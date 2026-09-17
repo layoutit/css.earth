@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "302f60c1bc4c862d788b6cdb885664902b117bd1913639caa0057d963642b4cb"
+    "sha256": "c0468cd34704fe9976c1b3c9841824a91844852373ec11b16d613ce53bbe0f23"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -147,14 +147,28 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d773579ea627c6849acdad2d1c93db580a8a904dfea5bf2c68f61d73debf26a1",
+      "sha256": "0663e022c6786d986e3d4aff62bdddfb494dbc47e936f38966a60443f5f1278b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
         "id": "comet-1p",
         "displayName": "Halley",
         "panel": {
-          "facts": [],
+          "facts": [
+            {
+              "id": "mission",
+              "label": "Shape from",
+              "value": "Giotto and Vega",
+              "source": {
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+                "label": "Comet 1P · stooke halley",
+                "checked": "2026-09-16",
+                "path": "source/shape/1682q1halley.xml",
+                "catalogueId": "source-comet-1p-stooke-halley",
+                "locator": "Investigation_Area names: Giotto Mission; Vega Mission - Vega 1; Vega Mission - Vega 2"
+              }
+            }
+          ],
           "moreFacts": []
         },
         "lenses": {
@@ -340,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d773579ea627c6849acdad2d1c93db580a8a904dfea5bf2c68f61d73debf26a1",
-      "bytes": 3424,
+      "sha256": "0663e022c6786d986e3d4aff62bdddfb494dbc47e936f38966a60443f5f1278b",
+      "bytes": 3988,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,8 +480,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4230,
-          "sha256": "c38ab0d7756208141052f03a46929b2d65ca4cd150942022fd1a21f17f40f575",
+          "bytes": 4654,
+          "sha256": "efc4eeb96c9a520b8ce4a7af70663319b9962bda019af797424beff4a332c192",
           "verification": "bytes-verified"
         }
       ],
@@ -505,7 +519,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-1p",
-    "materialSha256": "d1bd1e1f37035403575cbf7eee01261add5fc8e9454569f01c8eed41f4c17960",
+    "materialSha256": "614c01e145897ff4fde76fe60179a91f2b95f005a5c008b63e18d1f0c4f5df24",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

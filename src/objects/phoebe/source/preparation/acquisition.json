@@ -78,14 +78,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "cassini-ice/native/N1465671822_1_ir.cub",
-      "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "cassini-ice/raw/v1465671822_1.qub",
       "url": "https://vims.univ-nantes.fr/cube/1465671822_1.qub"
     },
@@ -96,6 +88,24 @@
       ],
       "path": "features/PHOEBE_nomenclature_center_pts.zip",
       "url": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOEBE_nomenclature_center_pts.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/N1465662798_2_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/N1465662798_2_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL"
     }
   ]
 }
