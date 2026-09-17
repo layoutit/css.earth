@@ -1,22 +1,12 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import type { Loader, LoaderContext } from 'astro/loaders';
-import { discoveryDescription, isDiscoveryAnchor, parseObjectDiscovery } from '../../site/object-discovery.mts';
 import { SITE_ORIGIN } from '../../site/seo.mts';
+import { discoveryDescription, isDiscoveryAnchor, parseObjectDiscovery } from '../../site/object-discovery.mts';
 import {
-  OBJECTS_DIRECTORY, REPOSITORY, REPOSITORY_URL, formatBytes, isRecord, list, readJson, readObjects, systemGroups, text,
+  APP_ORIGIN, OBJECTS_DIRECTORY, REPOSITORY, REPOSITORY_URL, formatBytes, isRecord, list, readJson, readObjects, systemGroups, text,
   type ObjectRecord, type SystemEntry,
 } from './objects.mts';
-
-/** The app that serves embedded scenes: the public site, or a local app server during development. */
-const APP_ORIGIN = appOrigin(process.env.CSSEARTH_APP_ORIGIN);
-
-function appOrigin(value: string | undefined) {
-  if (value === undefined || value === '') return SITE_ORIGIN;
-  const url = new URL(value);
-  if (!['http:', 'https:'].includes(url.protocol) || url.origin !== value.replace(/\/$/u, '')) throw new TypeError(`CSSEARTH_APP_ORIGIN must be a bare http(s) origin: ${value}`);
-  return url.origin;
-}
 
 const NOTE_GROUPS = [
   { status: 'unresolved', label: 'Unresolved' },

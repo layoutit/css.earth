@@ -1,0 +1,34 @@
+---
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+import ObjectMarker from './ObjectMarker.astro';
+import SidebarEntry from './SidebarEntry.astro';
+import { readObjects, systemGroups, type SystemEntry } from '../objects.mts';
+
+// The tree the sidebar draws: systems, their classifications, each body and what orbits it.
+const systems = systemGroups(readObjects());
+const current = Astro.locals.starlightRoute.id;
+const count = (entries: readonly SystemEntry[]): number => entries.reduce((total, entry) => total + 1 + count(entry.satellites), 0);
+const holds = (entries: readonly SystemEntry[]): boolean => entries.some(entry => entry.object.id === current || holds(entry.satellites));
+---
+<ul class="wiki-tree top-level">
+  <li><a class="wiki-row wiki-index" href="/" aria-current={current === 'index' ? 'page' : undefined}>All objects</a></li>
+  {systems.map(system => <li>
+    <details open={system.star?.id === current || system.groups.some(group => holds(group.entries))}>
+      <summary><span class="wiki-tree-root">{system.label} ({system.groups.reduce((total, group) => total + count(group.entries), 0)})</span></summary>
+      <ul>
+        {system.star && <li>
+          <a class="wiki-row" href={`/${system.star.id}/`} aria-current={system.star.id === current ? 'page' : undefined}>
+            <ObjectMarker objectId={system.star.id} />{system.star.title}
+          </a>
+        </li>}
+        {system.groups.map(group => <li>
+          <details open={holds(group.entries)}>
+            <summary><span class="wiki-tree-group">{group.label} ({count(group.entries)})</span></summary>
+            <ul>{group.entries.map(entry => <li><SidebarEntry entry={entry} current={current} /></li>)}</ul>
+          </details>
+        </li>)}
+      </ul>
+    </details>
+  </li>)}
+</ul>
+<div class="md:sl-hidden"><MobileMenuFooter /></div>
