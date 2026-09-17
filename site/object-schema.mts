@@ -112,8 +112,9 @@ function parseWorldFrame(value: unknown): PreparedWorldCameraFrame | null {
     if (Math.abs(dot - Number(row === other)) > 1e-9) throw new TypeError('World frame rotation must be orthonormal.');
   }
   const [a, b, c, d, e, f, g, h, i] = rotation;
-  if (Math.abs(a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g) - 1) > 1e-9) {
-    throw new TypeError('World frame rotation must preserve handedness.');
+  // CSS 3D space is left-handed, so the map from presentation to the reference frame reverses handedness.
+  if (Math.abs(a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g) + 1) > 1e-9) {
+    throw new TypeError('World frame presentation map must reverse handedness.');
   }
   if (value.orbitUpReference !== undefined && (!vector(value.orbitUpReference, 3) ||
       Math.abs(Math.hypot(...value.orbitUpReference) - 1) > 1e-9)) {

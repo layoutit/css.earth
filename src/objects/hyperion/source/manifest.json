@@ -2482,8 +2482,8 @@
     {
       "id": "hyperion-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1177,
-      "expectedSha256": "c0d0b7cc166e1b353bf5cca3c9d87232b0f82ea5e227eb0728c8b67fd2b58539",
+      "expectedBytes": 1145,
+      "expectedSha256": "4b81fdddedcbbc514c30b53ee1d93765f61bbcea9e64265040d1de850c2dbdb5",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -2500,8 +2500,8 @@
     {
       "id": "hyperion-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "41fe1439651fc58d55fbc8b1319d75f554562095f3540bfcb58e270bd2d86233",
+      "expectedBytes": 187,
+      "expectedSha256": "2534937facc9cf6fd34df17034c50d9b224f551da176a485cd675dc130e42be0",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

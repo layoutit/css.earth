@@ -93,6 +93,7 @@
             "maximumGain": 1
           },
           "display": {
+            "basis": "authored",
             "percentiles": [
               1,
               99.5
@@ -109,8 +110,7 @@
           "consumer": "sphere-photograph"
         },
         "offLimb": {
-          "rotationDegrees": -1.6,
-          "mirror": true
+          "rotationDegrees": -48
         }
       }
     }

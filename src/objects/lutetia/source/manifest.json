@@ -406,8 +406,8 @@
     {
       "id": "lutetia-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1163,
-      "expectedSha256": "a4eaa26f71b3e4d11f0874914e4c0a01438192ab3cd5f512846fbf041fe16ae7",
+      "expectedBytes": 1131,
+      "expectedSha256": "67782cd888a9dd9598f18e5930ee1eb2b66bc8bddc7f9a3c5d5a14947b1063fe",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -424,8 +424,8 @@
     {
       "id": "lutetia-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 154,
-      "expectedSha256": "f508382e29ce3a5c5f70723acc78f74488ac01491c005469b370bb423c97386d",
+      "expectedBytes": 186,
+      "expectedSha256": "da809d2bfa984eb93147410d9f6717332c5d552f09706bcada96d6a361eeeead",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

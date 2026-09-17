@@ -2,7 +2,7 @@ import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssCameraAxesFromOrientation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { admitStableLabels } from '../labels/stable-label-layout.js';
@@ -23,7 +23,7 @@ export interface ProjectedGalaxy {
 
 /** Only the observer projection is runtime work; every astronomical position is prepared. */
 export function projectCatalogPosition(positionM: readonly number[], world: WorldCameraPose, viewport: WorldCameraViewport) {
-  const rotation = worldRotationFromQuaternion(world.pose.orientationXyzw);
+  const rotation = cssCameraAxesFromOrientation(world.pose.orientationXyzw);
   const dx = positionM[0] - world.pose.positionM[0];
   const dy = positionM[1] - world.pose.positionM[1];
   const dz = positionM[2] - world.pose.positionM[2];

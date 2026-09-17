@@ -27,7 +27,7 @@ for (const [fromId, toId] of [['mercury', 'venus'], ['venus', 'mercury']]) {
 
 test.each([-1, 1])('a departure above or below the orbital plane (%s) approaches the screen center without rotation', sign => {
   const frame = parsePreparedWorldCameraFrame({ referenceFrame: 'test', epochJdTt: 1,
-    originM: [0,0,0], presentationToReference: [1,0,0,0,1,0,0,0,1],
+    originM: [0,0,0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1],
     metersPerUnit: 1, bodyRadiusM: 1, orbitUpReference: [0,-1,0] })!;
   const from = { referenceFrame: 'test', epochJdTt: 1,
     pose: { positionM: [10, sign * 100, 1000] as const, orientationXyzw: [0,0,0,1] as const } };
@@ -48,9 +48,9 @@ test.each([-1, 1])('a departure above or below the orbital plane (%s) approaches
 });
 
 test('invalid epoch, reflected frame, and non-unit prepared horizon fail at their boundaries', () => {
-  const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0], presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 1 };
+  const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 1 };
   expect(() => parsePreparedWorldCameraFrame({ ...frame, orbitUpReference: [0,2,0] })).toThrow('unit');
-  expect(() => parsePreparedWorldCameraFrame({ ...frame, presentationToReference: [-1,0,0,0,1,0,0,0,1] })).toThrow('handedness');
+  expect(() => parsePreparedWorldCameraFrame({ ...frame, presentationToReference: [1,0,0,0,1,0,0,0,1] })).toThrow('handedness');
   const valid = parsePreparedWorldCameraFrame(frame)!;
   expect(() => createWorldSelectionTarget({ referenceFrame: 'test', epochJdTt: 2,
     pose: { positionM: [0,0,10], orientationXyzw: [0,0,0,1] } }, valid, viewport)).toThrow('epoch');

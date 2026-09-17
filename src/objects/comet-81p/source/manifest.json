@@ -517,8 +517,8 @@
     {
       "id": "comet-81p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1128,
-      "expectedSha256": "c90e0a8305626621917a8178e5b5ed60299d827fb878716195a515d138f05228",
+      "expectedBytes": 1096,
+      "expectedSha256": "c8de751bc2fe0541663f27858bcb40c765988684e8e5afef2253af79cb80ff29",
       "origin": "Authored surface-place records with publication references and placement limits.",
       "credit": "cssEarth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",
@@ -535,8 +535,8 @@
     {
       "id": "comet-81p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "639417c83ce7e5633db6ad3efc825e8ebce675647b014c26a7700b3dfe9ede26",
+      "expectedBytes": 188,
+      "expectedSha256": "0b5ffa7b27d1bc24b335b44525745320b64b74c96d4419c4af8cf5ef68c56d51",
       "origin": "Authored surface-place records with publication references and placement limits.",
       "credit": "cssEarth contributors; Stardust science team",
       "license": "MIT (project measurements and factual compilation)",

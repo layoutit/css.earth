@@ -46,7 +46,9 @@ export interface SurfaceFeatureTracesConfig {
   readonly radiusM: number; readonly classField: string; readonly classes: Readonly<Record<string, string>>;
   readonly paddingDeg: number; readonly insideFraction: number; readonly maximumTraces: number; readonly minimumLengthShare: number; readonly maximumVertices: number;
 }
-export interface SurfaceFeatureAxes { readonly prime: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number]; }
+/** Where a surface map places latitude and longitude on its mesh node: the prime, east and north axes, with longitude counted
+ * east from the map's left edge (texture u = 0). The surface map is the only owner of both. */
+export interface SurfaceFeatureAxes { readonly prime: readonly [number, number, number]; readonly east: readonly [number, number, number]; readonly north: readonly [number, number, number]; readonly mapLeftEdgeLongitudeDeg: number; }
 export interface SurfaceFeaturePolicy { readonly minimumZoomShare: number; readonly minimumDiameterPixels: number; readonly alwaysVisibleCount: number; readonly maximumVisible: number; readonly limbCosine: number; }
 export interface SurfaceFeaturesConfig {
   readonly schema: typeof SURFACE_FEATURES_CONFIG_SCHEMA;
@@ -55,7 +57,7 @@ export interface SurfaceFeaturesConfig {
   /** Some small-body exports ship no .prj; their datum then comes from the FGDC metadata (`semiaxis`, `horizdn`). The newest
    * asteroid exports ship neither: the datum is then the authored radius and the pin manifest carries the licence evidence. */
   readonly members: { readonly attributes: string; readonly projection: string | null; readonly metadata: string | null } | null;
-  readonly surfaceMap: string; readonly mapLeftEdgeLongitudeDeg: number;
+  readonly surfaceMap: string;
   readonly output: string; readonly publicBase: string;
   readonly target: { readonly className: string; readonly withoutClassName: string | null };
   readonly lensIds: readonly string[];
@@ -187,7 +189,7 @@ export function parseSurfaceFeaturesConfig(value: unknown): SurfaceFeaturesConfi
     schema: SURFACE_FEATURES_CONFIG_SCHEMA,
     directory: relativePath(input.directory, 'features recipe directory'), archive: input.archive === null ? null : relativePath(input.archive, 'features recipe archive'),
     members: members === null ? null : { attributes: relativePath(members.attributes, 'members.attributes'), projection: members.projection === null ? null : relativePath(members.projection, 'members.projection'), metadata: members.metadata === null ? null : relativePath(members.metadata, 'members.metadata') },
-    surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'), mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'features recipe mapLeftEdgeLongitudeDeg'),
+    surfaceMap: relativePath(input.surfaceMap, 'features recipe surfaceMap'),
     output, publicBase, target: { className: text(target.className, 'target.className'), withoutClassName: target.withoutClassName === undefined ? null : text(target.withoutClassName, 'target.withoutClassName') },
     lensIds: Object.freeze([...lensIds as string[]]), kinds: Object.freeze(kinds), excludedTypeCodes: Object.freeze({ ...excluded as Record<string, string> }), labelPolicy: Object.freeze(policy),
     outline: Object.freeze(outline), ...(traces ? { traces } : {}), ...(input.notes === undefined ? {} : { notes: relativePath(input.notes, 'features recipe notes') }), ...(input.naturalEarth === undefined ? {} : { naturalEarth: parseNaturalEarthConfig(input.naturalEarth) }), ...(input.sites === undefined ? {} : { sites: parseSitesRecipe(input.sites) }), ...(input.landmarks === undefined ? {} : { landmarks: parseLandmarksRecipe(input.landmarks) }),
@@ -240,7 +242,8 @@ export function parseSurfaceFeaturesSourceManifest(value: unknown): SurfaceFeatu
 
 export function parseSurfaceAxes(value: unknown): SurfaceFeatureAxes {
   const input = record(value, 'surface map');
-  const axes = { prime: axis(input.prime, 'surface map prime'), east: axis(input.east, 'surface map east'), north: axis(input.north, 'surface map north') };
+  const axes = { prime: axis(input.prime, 'surface map prime'), east: axis(input.east, 'surface map east'), north: axis(input.north, 'surface map north'),
+    mapLeftEdgeLongitudeDeg: finite(input.mapLeftEdgeLongitudeDeg, 'surface map mapLeftEdgeLongitudeDeg') };
   const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!;
   if (Math.abs(dot(axes.prime, axes.east)) > 1e-9 || Math.abs(dot(axes.prime, axes.north)) > 1e-9 || Math.abs(dot(axes.east, axes.north)) > 1e-9) throw new TypeError('Surface map axes must be orthogonal.');
   return Object.freeze(axes);
@@ -551,7 +554,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   if (!(context.meshRadiusUnits > 0) || !Number.isFinite(context.meshRadiusUnits)) throw new TypeError('Surface features need the prepared mesh radius.');
   const scale = context.meshRadiusUnits / context.radiusKm;
   const features: PreparedSurfaceFeature[] = [];
-  const landmarks = config.landmarks ? await prepareLandmarks(JSON.parse(await readFile(resolve(directory, config.landmarks.document), 'utf8')), context, axes, config.mapLeftEdgeLongitudeDeg) : null;
+  const landmarks = config.landmarks ? await prepareLandmarks(JSON.parse(await readFile(resolve(directory, config.landmarks.document), 'utf8')), context, axes, axes.mapLeftEdgeLongitudeDeg) : null;
   if (landmarks) for (const feature of landmarks.features) {
     features.push(feature); zoomShareById.set(feature.id, feature.minimumZoomShare); priorityById.set(feature.id, config.landmarks!.priority ?? 10);
   }
@@ -594,7 +597,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     }
     const approved = /^(\d{4})\/(\d{2})\/(\d{2})/u.exec(row.approvaldt!);
     if (!approved) throw new TypeError(`Gazetteer approval date is missing for ${row.name}.`);
-    const direction = surfaceDirection(longitudeDeg, latitudeDeg, axes, config.mapLeftEdgeLongitudeDeg);
+    const direction = surfaceDirection(longitudeDeg, latitudeDeg, axes, axes.mapLeftEdgeLongitudeDeg);
     const radiusUnits = diameterKm / 2 * scale;
     // Some exports leave the extent empty or degenerate: those features fall back to their diameter circle.
     const hasExtent = [row.min_lon, row.max_lon, row.min_lat, row.max_lat].every(value => value !== '') && Object.values(extentInput).every(Number.isFinite) && extentInput.maxLat >= extentInput.minLat && (extentInput.maxLon !== extentInput.minLon || extentInput.maxLat !== extentInput.minLat);
@@ -612,20 +615,20 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       const rim = rimVectors(direction, axes.north, context.meshRadiusUnits, radiusUnits), lift = anchorRadius / context.meshRadiusUnits;
       outline = cast ? { kind: 'circle', center: scaled(rim.center, lift), east: scaled(rim.east, lift), north: scaled(rim.north, lift) } : rim;
     } else {
-      const box = extentPolygon(extent, axes, config.mapLeftEdgeLongitudeDeg, context.meshRadiusUnits, config.outline.pieces);
+      const box = extentPolygon(extent, axes, axes.mapLeftEdgeLongitudeDeg, context.meshRadiusUnits, config.outline.pieces);
       outline = cast ? { kind: 'box', points: box.points.map(point => onSurface(scaled(point, 1 / context.meshRadiusUnits))) } : box;
     }
     const riverPaths = pathsById.get(id);
     if (riverPaths) {
       // The runtime draws a trace with one chord per retained piece, so a path budget of one vertex per piece fills the pool exactly.
-      const paths = budgetTracePaths(riverPaths, config.outline.pieces).map(path => path.map(([lon, lat]) => onSurface(surfaceDirection(lon, lat, axes, config.mapLeftEdgeLongitudeDeg))));
+      const paths = budgetTracePaths(riverPaths, config.outline.pieces).map(path => path.map(([lon, lat]) => onSurface(surfaceDirection(lon, lat, axes, axes.mapLeftEdgeLongitudeDeg))));
       outline = { kind: 'trace', paths };
     }
     if (extent && loadedTraces && config.traces && Object.hasOwn(config.traces.classes, code)) {
       const selected = selectTraces(loadedTraces.traces, config.traces.classes[code]!, extent, config.traces);
       if (selected.length) {
         const paths = budgetTracePaths(selected.flatMap(trace => trace.parts), config.traces.maximumVertices)
-          .map(path => path.map(([lon, lat]) => onSurface(surfaceDirection(lon, lat, axes, config.mapLeftEdgeLongitudeDeg))));
+          .map(path => path.map(([lon, lat]) => onSurface(surfaceDirection(lon, lat, axes, axes.mapLeftEdgeLongitudeDeg))));
         outline = { kind: 'trace', paths };
         traceStats.matched++; traceStats.byCode[code] = (traceStats.byCode[code] ?? 0) + 1;
       } else traceStats.unmatched.push(row.name!);
@@ -680,7 +683,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
     outline: config.outline,
   };
   const descriptor = { schema: 'cssearth-prepared-features@1', objectId: context.objectId, ...plan.catalog, source: manifest.source, sourcePage: manifest.sourcePage,
-    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: config.mapLeftEdgeLongitudeDeg, excluded, skipped, assumed: catalog.assumed, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) };
+    license: manifest.license, snapshotDate: manifest.snapshotDate, mapLeftEdgeLongitudeDeg: axes.mapLeftEdgeLongitudeDeg, excluded, skipped, assumed: catalog.assumed, duplicates: catalog.duplicates, ...(catalog.traces ? { traces: catalog.traces } : {}) };
   await writeFile(resolve(context.outputDirectory, 'features.json'), `${JSON.stringify(descriptor)}\n`);
   return { plan, descriptor, catalog };
 }

@@ -198,8 +198,8 @@
     {
       "id": "ariel-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1138,
-      "expectedSha256": "a1a54cf072c5a9c9c29ebadfd71732cbb44c288827bd5a79300c98703e4600a8",
+      "expectedBytes": 1104,
+      "expectedSha256": "db1a314e74729c0dcfe0ea988dabad695075d2f19ede28a7e2aee26af9eda441",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -216,8 +216,8 @@
     {
       "id": "ariel-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "2cf793e4c2668bf456a4aa356ff01d593571943d37a020272c2a68f768c593f8",
+      "expectedBytes": 186,
+      "expectedSha256": "45de784f4080171cffa9306cc6a172cc0d9c6306ae87b2565176080c26fd508b",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

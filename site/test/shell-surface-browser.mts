@@ -38,7 +38,7 @@ try {
     const next = () => new Promise(requestAnimationFrame);
     const pause = (ms: number) => new Promise(resolve=>setTimeout(resolve,ms));
     const map = window.__cssearthTest.html('[data-surface-minimap]'), body = window.__cssearthTest.html('.surface');
-    const config: SurfaceMapConfig = {surfaceSelector: '.surface', prime:[0,0,1], east:[1,0,0], north:[0,1,0]};
+    const config: SurfaceMapConfig = {surfaceSelector: '.surface', prime:[0,0,1], east:[1,0,0], north:[0,1,0], mapLeftEdgeLongitudeDeg:0};
     window.__cssearthTest.htmlElement(map).dataset.surfaceMinimap = JSON.stringify(config);
     const spin = body.animate([{transform:'rotateZ(0deg)'},{transform:'rotateZ(90deg)'}],{duration:1000,fill:'both'});
     spin.pause(); spin.currentTime = 0;
@@ -46,7 +46,7 @@ try {
     const shared = new Set<() => void>(), navigation = new Set<() => void>();
     const optics: ObjectWorldNavigation['optics'] = () => ({focalPixels:1000,principalOffsetPixels:[0,0],visibleRect:{left:-500,right:500,top:-500,bottom:500},framingRadiusPixels:400,detailHandoffDiameterPixels:320});
     const camera: ShellCamera = {
-      navigation: { frame: {referenceFrame:'sun-icrf',epochJdTt:2461286.5,metersPerUnit:1e6,originM:[0,0,0],bodyRadiusM:1e6,presentationToReference:[1,0,0,0,1,0,0,0,1]},
+      navigation: { frame: {referenceFrame:'sun-icrf',epochJdTt:2461286.5,metersPerUnit:1e6,originM:[0,0,0],bodyRadiusM:1e6,presentationToReference:[1,0,0,0,-1,0,0,0,1]},
         capture:()=>world, optics, preparedFocus:()=>null, setPreparedFocus(){}, async flyToPreparedFocus(){throw new Error('Surface fixture does not navigate to prepared focus.');},
         subscribe(fn){const publish = () => fn(world,optics());navigation.add(publish);return()=>navigation.delete(publish);}, apply(value){world=value;publish();} },
       sharedView: {capture:()=>null,restore(){throw new Error('Surface fixture does not restore URL state.');},subscribe(fn){shared.add(fn);return()=>shared.delete(fn);}},
