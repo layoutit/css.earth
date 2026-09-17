@@ -134,33 +134,44 @@
 .prepared-world-context .context-orbit-strokes g[data-context-selected="true"] polyline {
   stroke-width: 2px;
 }
-.prepared-world-context .context-orbit-strokes g[data-context-placement="approximate"] polyline {
+.prepared-world-context .context-orbit-strokes g[data-context-placement] polyline {
   stroke-dasharray: 5 5;
+}
+
+/* Candidate orbits are many paths for one body: they stay thin and faint, so the measured position reads first. */
+.prepared-world-context .context-orbit-strokes g[data-context-placement="candidate-orbits"] polyline {
+  stroke-width: 1px;
+  opacity: .5;
 }
 .prepared-world-context .context-orbit[data-context-selected="true"] s:not([data-context-body]) {
   height: 1.5px;
   margin-top: -.75px;
 }
 
-/* Approximate placements keep the standard one-pixel ring and a dashed orbit.
+/* Approximate placements and candidate orbits keep the standard one-pixel ring and dashed paths.
    Selection never thickens them or swaps in the locator corners. */
-.prepared-world-context [data-context-body][data-context-placement="approximate"][data-context-selected="true"]::before {
+.prepared-world-context [data-context-body][data-context-placement][data-context-selected="true"]::before {
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px currentColor;
   background-image: none !important;
 }
-.prepared-world-context .context-orbit-strokes g[data-context-placement="approximate"][data-context-selected="true"] polyline {
+.prepared-world-context .context-orbit-strokes g[data-context-placement][data-context-selected="true"] polyline {
   stroke-width: 1.5px;
 }
-.prepared-world-context .context-orbit[data-context-placement="approximate"][data-context-selected="true"] s:not([data-context-body]) {
+.prepared-world-context .context-orbit[data-context-placement][data-context-selected="true"] s:not([data-context-body]) {
   height: 1px;
   margin-top: -.5px;
 }
 
 /* Alternate the paint on retained chords. Fractional unit-bar widths can
    round back to solid strokes before the browser scales their projection. */
-.prepared-world-context .context-orbit[data-context-placement="approximate"] s:nth-child(even) {
+.prepared-world-context .context-orbit[data-context-placement] s:nth-child(even) {
   background: transparent;
+}
+
+/* The bar renderer has no stroke opacity: candidate chords fade through the paint owner. */
+.prepared-world-context .context-orbit[data-context-placement="candidate-orbits"] {
+  opacity: .5;
 }
 
 

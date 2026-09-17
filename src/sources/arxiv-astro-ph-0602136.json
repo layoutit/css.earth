@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-astro-ph-0602136",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bakos et al. (2006): A Stellar Companion in the HD 189733 System with a Known Transiting Extrasolar Planet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0602136"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/503671"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0602136",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2006ApJ...641L..57B",
+      "label": "ApJL 641, L57 (2006)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0602136",
+      "checkedOn": "2026-09-17",
+      "locator": "Abstract and sections 2.2-3: mid-M companion at a projected 216 au; radial velocities -2.38 +/- 0.20 (A) and -3.1 +/- 1.0 km/s (B); differential proper motion -1 +/- 5, -21.2 +/- 5 mas/yr; period about 3200 years if the orbit is circular and seen face on; 'it is premature to derive specific orbital parameters'"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters 641, L57",
+  "creators": [
+    "G. Á. Bakos",
+    "A. Pál",
+    "D. W. Latham",
+    "et al."
+  ],
+  "publicationDate": "2006"
+}

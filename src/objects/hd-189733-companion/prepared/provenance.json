@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "adf076cc092425ba4934f9a7bbdbc661573016d7e11b84bc89d24048ed7df05f"
+    "sha256": "3ccf094f69fdac3ea730c4094d66d5714192dd0d4a06f13c9c4bfcb03aef82f3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -87,7 +87,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "994e24945d75b7fbaf380c94ef48353c4ff96c2fcac4d3d1d9c44183c2951ea9",
+      "sha256": "6b108df1048f516bae06e96be16128c5eee616aab983969971242d1f460b4117",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -119,6 +119,19 @@
                 "checked": "2026-09-17",
                 "path": "source/measurements.json",
                 "locator": "projectedSeparationAu; projectedSeparationSource"
+              }
+            },
+            {
+              "id": "orbit",
+              "label": "Orbit around HD 189733 A",
+              "value": "Not measured; 1,500 to 21,000 years in the fit",
+              "source": {
+                "catalogueId": "doi-10-3847-1538-4357-ab8389",
+                "url": "https://doi.org/10.3847/1538-4357/ab8389",
+                "label": "Fitted here with LOFTI (Pearce et al. 2020)",
+                "checked": "2026-09-17",
+                "path": "source/orbits/orbit-family.json",
+                "locator": "method; the fitted orbits are orbits/lofti-astrometry-only.txt"
               }
             }
           ],
@@ -156,6 +169,12 @@
             "role": "facts",
             "description": "Gaia DR3 1827242816176111360",
             "href": "https://gea.esac.esa.int/archive/"
+          },
+          {
+            "label": "Method",
+            "role": "facts",
+            "description": "LOFTI, Pearce et al. (2020), ApJ 894, 115",
+            "href": "https://doi.org/10.3847/1538-4357/ab8389"
           }
         ],
         "provenance": {
@@ -248,8 +267,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "994e24945d75b7fbaf380c94ef48353c4ff96c2fcac4d3d1d9c44183c2951ea9",
-      "bytes": 2747,
+      "sha256": "6b108df1048f516bae06e96be16128c5eee616aab983969971242d1f460b4117",
+      "bytes": 3471,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -365,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7310,
-          "sha256": "fd463d9ef3229ad3edca12f674557259ec325bd130777e5a0bbf6bdfbbd10b8e",
+          "bytes": 7857,
+          "sha256": "5bb32b00a6c3d9344ca890644fdf97be0d8ef03525e69addb32a7d43f9670efe",
           "verification": "bytes-verified"
         }
       ],
@@ -404,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "hd-189733-companion",
-    "materialSha256": "3c80e1396dfb6861adb0629f597b120cd80028dfdac6b5285bbae3998494ddb9",
+    "materialSha256": "c4cc99499f943422b7c448b537dde41e32bea7f15e961fdb5ee0b4c26b690a02",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

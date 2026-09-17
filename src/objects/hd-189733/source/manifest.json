@@ -425,8 +425,8 @@
     },
     {
       "path": "reference/rendered-system-view.png",
-      "expectedBytes": 450920,
-      "expectedSha256": "8a811b6369718ba39b4f5db5ff87fe02dadbd02c9209a464e3ad14863e650508",
+      "expectedBytes": 450019,
+      "expectedSha256": "e41172f0f513c60411d951852dc713c838ec6caec0eb955f2d5b5ab8d6187cc0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733/?overview=system, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation."

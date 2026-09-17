@@ -1,0 +1,57 @@
+{
+  "id": "doi-10-3847-1538-4357-ab8389",
+  "kind": "software",
+  "identityLevel": "work",
+  "title": "LOFTI: Orbital Parameter Determination for Wide Stellar Binary Systems in the Age of Gaia (Pearce et al. 2020)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ab8389"
+    },
+    {
+      "type": "arXiv",
+      "value": "2003.11106"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ab8389",
+      "label": "ApJ 894, 115 (2020)"
+    },
+    {
+      "role": "original",
+      "url": "https://github.com/logan-pearce/lofti_gaia",
+      "label": "lofti_gaia"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2003.11106",
+      "checkedOn": "2026-09-17",
+      "locator": "Sections 2-3: orbits drawn from the standard priors, scaled and rotated onto the measured separation and position angle, accepted against the relative proper motion and, where available, radial velocity"
+    },
+    {
+      "url": "https://pypi.org/project/lofti-gaia/",
+      "checkedOn": "2026-09-17",
+      "locator": "lofti_gaia 2.0.8, the version run here"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "L. A. Pearce, A. L. Kraus, T. J. Dupuy, A. W. Mann et al. (2020), ApJ 894, 115",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-4357/ab8389"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 894, 115",
+  "creators": [
+    "L. A. Pearce",
+    "A. L. Kraus",
+    "T. J. Dupuy",
+    "A. W. Mann"
+  ],
+  "publicationDate": "2020"
+}

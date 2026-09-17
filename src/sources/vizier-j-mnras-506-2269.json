@@ -1,0 +1,45 @@
+{
+  "id": "vizier-j-mnras-506-2269",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "El-Badry et al. (2021) Gaia EDR3 wide-binary catalogue: the HD 189733 pair",
+  "identifiers": [
+    {
+      "type": "VizieR catalogue",
+      "value": "J/MNRAS/506/2269"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab323"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/506/2269",
+      "label": "VizieR J/MNRAS/506/2269"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab323",
+      "label": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/MNRAS/506/2269&-c=300.18212%20+22.70974&-c.rs=20&-out.all",
+      "checkedOn": "2026-09-17",
+      "locator": "Gaia sources 1827242816201846144 and 1827242816176111360: projected separation 226.28 au, chance-alignment probability R = 1.33e-4, main-sequence pair"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "K. El-Badry, H.-W. Rix and T. M. Heintz (2021), MNRAS 506, 2269; VizieR catalogue J/MNRAS/506/2269 (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1093/mnras/stab323"
+    }
+  ],
+  "publisher": "CDS"
+}

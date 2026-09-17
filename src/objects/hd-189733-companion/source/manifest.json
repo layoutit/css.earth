@@ -277,6 +277,35 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-189733-companion-orbit-family",
+      "path": "orbits/orbit-family.json",
+      "expectedBytes": 1335,
+      "expectedSha256": "b74a281974f6175f698ee9ab5cb17121691240d6bf5a28f14988816126143fa3",
+      "origin": "https://doi.org/10.3847/1538-4357/ab8389",
+      "credit": "Method record; LOFTI (L. Pearce et al. 2020, ApJ 894, 115)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the fitted results file, the masses, the epoch and the radial velocities left out",
+      "redistribution": "Method record only",
+      "consumers": [
+        "world-context"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-3847-1538-4357-ab8389",
+            "role": "method",
+            "evidence": "https://doi.org/10.3847/1538-4357/ab8389"
+          },
+          {
+            "catalogueId": "gaia-dr3-hd-189733-companion",
+            "role": "material",
+            "evidence": "src/objects/hd-189733-companion/source/photometry/gaia-dr3-source.csv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -305,13 +334,37 @@
         "kind": "local",
         "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
+    },
+    {
+      "id": "hd-189733-companion-lofti-orbits",
+      "path": "orbits/lofti-astrometry-only.txt",
+      "expectedBytes": 80746,
+      "expectedSha256": "6b35021bc1776890778a85bcf212cc13adef66abe9d21d8eb7f32d94c2daf18d",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "Fitted in this project with LOFTI (L. Pearce et al. 2020, ApJ 894, 115) from the Gaia DR3 astrometry of both stars",
+      "license": "Project-authored fit of public catalogue data.",
+      "consumers": [
+        "world-context"
+      ],
+      "recipe": {
+        "generator": "tools/objects/binary-orbits/lofti-fit.py",
+        "inputs": [
+          "hd-189733-companion-gaia-dr3-source",
+          "hd-189733-companion-orbit-family"
+        ]
+      },
+      "generator": "tools/objects/binary-orbits/lofti-fit.py",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Accepted orbits from this project's LOFTI run; rerunning draws a different sample of the same fit."
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2747,
-      "expectedSha256": "994e24945d75b7fbaf380c94ef48353c4ff96c2fcac4d3d1d9c44183c2951ea9",
+      "expectedBytes": 3471,
+      "expectedSha256": "6b108df1048f516bae06e96be16128c5eee616aab983969971242d1f460b4117",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -344,11 +397,20 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 369885,
-      "expectedSha256": "71fd4bcda9e4a0507f5aef5d5c147e6dd3032d68b665a9860e445844e47486d5",
+      "expectedBytes": 371167,
+      "expectedSha256": "b815032288d3dd0c6655295f0537cc213805471bbaddfb07ca77563517f6916d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733-companion/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+      }
+    },
+    {
+      "path": "reference/rendered-candidate-orbits.png",
+      "expectedBytes": 502724,
+      "expectedSha256": "283ceb0be32c88d3343cb438de5299d85e3bdf258b001a2651dcf6c2f66832ef",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733-companion/, zoomed out to 1,030 au and turned about 50 degrees from the line of sight, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17: the 24 candidate orbits around HD 189733 A."
       }
     }
   ]

@@ -109,6 +109,71 @@
           "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
+    },
+    {
+      "id": "published-orbit",
+      "subject": "A published orbit of HD 189733 A and B",
+      "status": "excluded",
+      "finding": "None. Bakos et al. (2006) report a differential proper motion of -1 +/- 5, -21.2 +/- 5 mas/yr, consistent with a clockwise orbit roughly in the plane of the sky and a period near 3200 years if the true separation equals the projected one, and state that it is premature to derive specific orbital parameters. Gaia DR3 measures the relative motion 300 times more precisely and gives -8.98, -3.67 mas/yr, almost along the separation rather than across it, so that tentative orbit is superseded. No Gaia-era orbit of this pair was found.",
+      "revisitWhen": "An orbit of HD 189733 AB is published.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0602136",
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "lofti-candidate-orbits",
+      "subject": "Candidate orbits fitted here with LOFTI",
+      "status": "included",
+      "finding": "lofti_gaia 2.0.8 (Pearce et al. 2020, ApJ 894, 115) on both stars' Gaia DR3 rows with masses 0.807 and 0.193 solar masses: 300 accepted orbits. Semi-major axis 132 to 771 au (median 238), period 1,500 to 21,000 years (median 3,700), eccentricity 0.10 to 0.99 (median 0.53), inclination to the sky 73.7 to 89.1 degrees, with 293 of 300 within 30 degrees of edge-on. The first 24 are drawn around HD 189733 A. A rerun draws a different sample of the same fit.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/ab8389",
+        "https://github.com/layoutit/css.earth/blob/0000000000000000000000000000000000000000/tools/objects/binary-orbits/lofti-fit.py"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "relative-radial-velocity",
+      "subject": "The pair's relative radial velocity",
+      "status": "unresolved",
+      "finding": "Two published values disagree: Bakos et al. (2006) measured -2.38 +/- 0.20 km/s for A and -3.1 +/- 1.0 for B (difference -0.72 +/- 1.02), while Gaia DR3 gives -2.53 +/- 0.12 and +1.46 +/- 1.21 (difference +3.99 +/- 1.21). The escape speed at the projected separation is 2.8 km/s, so the Gaia difference allows no bound orbit at this separation, while the 2006 difference does. The fit uses only the astrometry. A fit with the 2006 value gives the same picture: semi-major axis 140 to 1,420 au, period 1,650 to 53,400 years, and the same edge-on inclinations.",
+      "revisitWhen": "A precise relative radial velocity of the pair is published, or Gaia DR4 revises B's.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0602136",
+        "https://gea.esac.esa.int/archive/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "system-membership",
+      "subject": "Whether HD 189733 B belongs to the HD 189733 system",
+      "status": "included",
+      "finding": "El-Badry et al. (2021, MNRAS 506, 2269) list the pair in their Gaia wide-binary catalogue with a chance-alignment probability of 1.3e-4 and a projected separation of 226 au. The package draws the candidate orbits around HD 189733 A, which puts B in the system's orbit chain, so it shares the system's breadcrumb and card. Its candidates frame nothing: the system view still frames the planet's orbit.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/506/2269"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
     }
   ]
 }

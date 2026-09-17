@@ -86,6 +86,10 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "orbit-family",
+          "path": "source/orbits/orbit-family.json"
         }
       ],
       "emission": {
