@@ -32,6 +32,7 @@ export const MATISSE_REDUCTION: InstrumentReduction = {
     EST_KAPPA: { recipe: 'mat_est_kappa', inputs: { ...MAPS, EST_FLAT: ['OBS_FLATFIELD'], EST_SHIFT: ['SHIFT_MAP'] }, products: ['KAPPA_MATRIX'] },
   },
   calibrator: { association: 'CALIB_RAW', keys: SETUP },
+  discardRaw: ['TARGET_RAW', 'CALIB_RAW'],
   calibrate: { recipe: 'mat_cal_oifits', science: 'TARGET_RAW_INT', calibrator: 'CALIB_RAW_INT', product: 'TARGET_CAL_INT', file: /TARGET_CAL_INT_\d{4}\.fits$/u },
 };
 
