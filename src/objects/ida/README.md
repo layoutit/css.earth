@@ -6,6 +6,7 @@
 | --- | --- |
 | SSI reflectance | Galileo green-filter [0202561278](source/observations/0202561278rcal_gre.xml) and [0202560500](source/observations/0202560500rcal_gre.xml), 28 August 1993, 111–170 m/pixel. I/F normalized to 25° incidence and phase with a published Hapke model; fixed display stretch, no fitted gain. |
 | Monochrome and shape | [Thomas PDS release](https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/), [Thomas et al. 1996](https://doi.org/10.1006/icar.1996.0033). The processed mosaic has broader coverage and finer contributing imagery than the I/F pair. |
+| SSI false colour | One Galileo pointing on 28 August 1993: [0202561352](source/observations/0202561352rcal_ir8.xml) 0.89 µm as red, [0202561278](source/observations/0202561278rcal_gre.xml) green as green and [0202561313](source/observations/0202561313rcal_vio.xml) violet as blue, the three exposures within 43 seconds. Calibrated I/F with the original illumination, displayed 0–0.11 in every filter; no albedo recovery and no fitted gain. |
 | Elevation | Shape radius minus 16 km, false color from −13 to +16 km; not gravitational height. |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/IDA/target) Ida centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -22,6 +23,12 @@ Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes
 [The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
+
+### Band alignment
+
+The false-colour lens composes three archived frames through their catalog cameras; preparation refits nothing. Each band is measured against the green reference 202561278 on separated control patches, half of them held out of the fit. Violet 202561313 lands at 0.37 px RMS over 17 held-out patches, worst 0.58 px; 0.89 µm 202561352 at 0.71 px RMS, worst 1.01 px. The 0.89 µm frame was chosen over the 0.76 µm one of the same set because it carries fewer dropped scan lines, and the archive-edge inset is 2 px, which the worst measured patch stays inside. ISIS fill and withheld values are read as missing at the SSI loader, so they neither enter the composite nor the alignment. Only the recorded strip of each frame covers Ida: equal-area samples over the retained triangles put the composed lens on 17.2% of the surface, and the grid marks the rest. The numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+[Rendered false colour](evidence/filter-color/false-color-views.webp) at DPR 2, 2026-09-17: a close view of the covered strip, the whole body at the default distance, and a zoom into the dropped scan lines the archive left in the 0.89 µm frame. The colour it separates is mild — on the prepared minimap the red-minus-blue difference over covered pixels runs from −11 to 46 of 255 with a median of 0 — which is what these three filters record on Ida, not a display fault.
 
 ### Registration
 

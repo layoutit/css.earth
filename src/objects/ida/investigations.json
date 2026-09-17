@@ -106,17 +106,22 @@
     {
       "id": "ssi-multiband-color",
       "subject": "Domingue SSI multiband color sets",
-      "status": "deferred",
-      "finding": "The examined release contains I/F images in seven filters and identified color sets. Only the green pair is currently qualified; no ready global color mosaic or registration for every band is established.",
-      "revisitWhen": "Select a source-supported band composition, bind each band’s camera and quality mask, and pass independent registration checks against the selected mesh.",
+      "status": "included",
+      "finding": "A false-color lens now composes one Galileo pointing from 1993-08-28 as red 0.89 µm (202561352), green (202561278) and blue violet (202561313), taken within 43 seconds of each other. Band alignment against 202561278 measured 0.37 px RMS for violet and 0.71 px RMS for 0.89 µm, worst patch 1.01 px, which justified reducing the archive-edge inset to 2 px; the 0.89 µm frame replaced 0.76 µm because it has fewer dropped scan lines. ISIS fill and withheld pixels are read as missing at the SSI loader, not as data. Only the recorded strip of each frame covers Ida, so the composed lens reaches 17.2% of the mesh; the display range 0–0.11 I/F comes from the measured p99.5 of the three bands. The remaining filters of the release are still unqualified.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ida/README.md",
+        "https://github.com/layoutit/css.earth/blob/80536db25a314c433af3fb648716c9c5a74ba1b7/src/objects/ida/README.md",
+        "https://github.com/layoutit/css.earth/blob/80536db25a314c433af3fb648716c9c5a74ba1b7/src/objects/ida/source/preparation/terrestrial.json",
+        "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/",
         "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-A-SSI-3-IDA-CALIMAGES-V1.0"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "80536db25a314c433af3fb648716c9c5a74ba1b7"
         }
       ]
     },
