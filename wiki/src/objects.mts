@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
+import { SITE_ORIGIN } from '../../site/seo.mts';
 
 /** Reads the checked-in object packages. The wiki prepares nothing and copies no facts out of them. */
 export const REPOSITORY = resolve(import.meta.dirname, '../..');
@@ -66,18 +67,35 @@ export function groupObjects(objects: readonly ObjectRecord[]) {
   return [...groups.values()];
 }
 
-/** Each object's orbit centre, from the prepared world context. The wiki derives nothing; it reads what preparation wrote. */
-function orbitParents(): Map<string, string> {
+/** The app that serves embedded scenes: the public site, or a local app server during development. */
+export const APP_ORIGIN = appOrigin(process.env.CSSEARTH_APP_ORIGIN);
+
+function appOrigin(value: string | undefined) {
+  if (value === undefined || value === '') return SITE_ORIGIN;
+  const url = new URL(value);
+  if (!['http:', 'https:'].includes(url.protocol) || url.origin !== value.replace(/\/$/u, '')) throw new TypeError(`CSSEARTH_APP_ORIGIN must be a bare http(s) origin: ${value}`);
+  return url.origin;
+}
+
+/** The prepared world context: the wiki derives nothing from it, it reads the orbits and colours preparation wrote. */
+function worldContext() {
   const context = readJson(resolve(OBJECTS_DIRECTORY, 'sun/prepared/world-context.json'));
   if (!isRecord(context)) throw new Error('src/objects/sun/prepared/world-context.json is missing. Run pnpm prepare:world-context.');
-  const parents = new Map<string, string>();
-  for (const body of list(context.bodies).filter(isRecord)) {
-    const id = text(body.id), center = isRecord(body.orbit) ? text(body.orbit.centerBodyId) : null;
-    if (id && center) parents.set(id, center);
+  const parents = new Map<string, string>(), colors = new Map<string, string>();
+  for (const body of [...list(context.bodies), context.focus].filter(isRecord)) {
+    const id = text(body.id);
+    if (!id) continue;
+    const center = isRecord(body.orbit) ? text(body.orbit.centerBodyId) : null;
+    if (center) parents.set(id, center);
+    const color = text(body.color);
+    if (color) colors.set(id, color);
   }
   if (!parents.size) throw new Error('The prepared world context lists no orbits.');
-  return parents;
+  return { parents, colors };
 }
+
+/** Each object's prepared marker colour, for the shell's navigation markers. */
+export const objectColors = (): ReadonlyMap<string, string> => worldContext().colors;
 
 /** One object and the satellites that orbit it. */
 export interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }
@@ -86,7 +104,7 @@ export interface SystemGroup { id: string; label: string; star: ObjectRecord | n
 
 /** Objects nested by planetary system: the star, its bodies by classification, and each body's satellites under it. */
 export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
-  const parents = orbitParents(), byId = new Map(objects.map(object => [object.id, object]));
+  const { parents } = worldContext(), byId = new Map(objects.map(object => [object.id, object]));
   const rootOf = (id: string) => {
     const seen = new Set<string>();
     for (let current = id; ; current = parents.get(current)!) {

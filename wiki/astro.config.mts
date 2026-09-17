@@ -6,9 +6,9 @@ import { REPOSITORY_URL, readObjects, systemGroups, type SystemEntry } from './s
 const systems = systemGroups(readObjects());
 const count = (entries: readonly SystemEntry[]): number => entries.reduce((total, entry) => total + 1 + count(entry.satellites), 0);
 type SidebarItem = { label: string; link: string } | { label: string; collapsed: boolean; items: SidebarItem[] };
+// Starlight keeps this tree for its own route data; src/components/Sidebar.astro draws the same tree with the app's markers.
 const item = (entry: SystemEntry): SidebarItem =>
   entry.satellites.length
-    // A body with satellites opens like a Storybook component: its own page first, then what orbits it.
     ? { label: entry.object.title, collapsed: true, items: [{ label: 'Overview', link: `/${entry.object.id}/` }, ...entry.satellites.map(item)] }
     : { label: entry.object.title, link: `/${entry.object.id}/` };
 
@@ -26,6 +26,7 @@ export default defineConfig({
       Header: './src/components/Header.astro',
       PageTitle: './src/components/PageTitle.astro',
       MarkdownContent: './src/components/ObjectArticle.astro',
+      Sidebar: './src/components/Sidebar.astro',
       SiteTitle: './src/components/SiteTitle.astro',
       ThemeProvider: './src/components/ThemeProvider.astro',
       ThemeSelect: './src/components/ThemeSelect.astro',
