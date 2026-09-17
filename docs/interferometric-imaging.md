@@ -42,6 +42,7 @@ Measured on 2026-09-16 with the pinned recipes and the spotless simulations the 
 | Polaris, SQUEEZE, April 2021 | 1.76 and 2.28 | 1.05 | −0.13 | not cast |
 | Polaris, ROTIR sphere, April 2021 | 1.45 and 5.58 | 1.53 | 0.28 | not cast |
 | R Dor, SQUEEZE, AMBER continuum | 1.74 and 2.99 | 1.31 | 0.36 | not cast |
+| R Aqr, SQUEEZE, PIONIER 2019 from raw, 16 nights, 5% and 2° error floors | 58 and 63 | 15.6 | 0.27 (without floors) | not cast |
 
 Single nights are not used for the third condition. π¹ Gruis's first night alone fails the spotless check (ratio 0.99) and its second passes (4.09); each Polaris night alone correlates 0.92 or 0.93 with its spotless twin. Alternate exposures keep nearly the same coverage in both halves, which is why each half's own spotless twin must be subtracted before the halves are compared.
 
@@ -82,5 +83,9 @@ The closure phases differ by a median of −1.1 degrees, and no wavelength lag r
 **Automatic calibrator choice can be several percent off.** The tree pairs a science exposure with one calibrator exposure. For R Car it gave squared visibilities 4.5 percent below the authors', who chose other exposures of the same star. `--calibrator` reproduces an author's choice; the default is kept, and a new star's calibration should be checked against its calibrators' spread.
 
 **MATISSE at very low visibility.** Where Betelgeuse's squared visibility is below 0.03, MATISSE 2.5.0 and the authors' 1.5.1 differ by up to 0.005, several times the stated errors. Reconstructions from these baselines inherit that difference.
+
+**Service-mode PIONIER nights.** From 2019 the observatory takes lamp and kappa sets the morning after, in three setups one after another (FREE, GRISM and GRISM with the Wollaston), and files calibrator stars as CALIB with no name. `calibrate-pionier.mts` scores lamp and kappa sets as pndrs does (the previous morning preferred by a day), reads each candidate's disperser and detector windows from its archive header and keeps only the science data's setup, and takes calibrators from CALIB blocks or the target's own programme, never another programme's science target. pndrs reads at most 15 files per argument, so nights are calibrated in groups of blocks within that limit, against every transfer-function file of the night.
+
+**A calibrated season is not always one image.** R Aqr's 2019 PIONIER season calibrates consistently: squared visibilities on the shortest baselines agree night to night within 4 percent, and using only calibrators observed within an hour changes nothing. Yet no SQUEEZE reconstruction fits it. With π¹ Gruis's 5 percent and 2 degree error floors the reduced chi-squared is 58 and 63; 20 000 iterations reach the same values as 3 000, a 102 mas field gives 83 and 105, and the three weeks from 21 July give 899 and 401. The spotless twin fits at about 2. The cause is not identified; a Mira changing over seven weeks is the likeliest, not verified.
 
 **Only public frames.** Raw frames still in their proprietary period answer 401 and are refused. Public ESO archive data are distributed under [CC BY 4.0](https://archive.eso.org/cms/eso-data-access-policy.html): a star cast from our own calibration credits ESO and the programme identifier of its frames, and derived files keep the ESO headers the pipelines copy into them.
