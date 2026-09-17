@@ -1,27 +1,27 @@
 {
   "schema": "cssearth-object-provenance@3",
-  "objectId": "comet-3i",
+  "objectId": "comet-2i",
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afe679e600593ab2192351db689cae3f3c5c9858f75bbd8349606b5651ebc266"
+    "sha256": "2de9932fd12c3ef2110c55c7664744b553140cb857b2f1468eb30722dd574a7f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "9cb00b64330358564cc6ad104cf040683c7607e177524c45d2c1e9e7e33768fa"
+    "bindingsSha256": "50af032961ec3db47a873e265d3cb74aeb370b8459181dab4d1457ad2a608e03"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4f5ddbf4b32490a0b18c9004acf432b26ca6c4b6be4b3d73837a297b6d8aafc8",
+      "sha256": "e2e826f23d7da3eaa8da30be2d8c79de0960444672dd70f8ab244ccafae94dd6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
-        "namespace": "comet-3i",
-        "displayName": "3I/ATLAS",
-        "publicBase": "/scenes/comet-3i/",
+        "namespace": "comet-2i",
+        "displayName": "2I/Borisov",
+        "publicBase": "/scenes/comet-2i/",
         "raster": {
           "width": 512,
           "height": 256,
@@ -42,7 +42,7 @@
               "metadata": {
                 "label": "Shape model",
                 "modeled": true,
-                "coverage": "Hubble photometry gives an effective radius of 1.3 ± 0.2 km, assuming V-band geometric albedo 0.04, and brightness changes of at least 0.8 mag imply a sky-plane axis ratio of 2:1 or more. No shape model, pole or period was published. This display is a prolate ellipsoid at exactly the minimum 2:1 ratio, sized so the geometric mean of its largest and smallest cross-sections equals π × (1.3 km)²: full axes 4.37 × 2.19 × 2.19 km. A longer body, another albedo or a different shape would change it. Arbitrary display pole and meridian. No rotation pole or phase has been measured. The grid marks unmapped terrain."
+                "coverage": "No image resolves the nucleus. Hubble limits its radius to at most 0.5 km at assumed geometric albedo 0.04, and its non-gravitational acceleration requires at least 0.2 km at assumed density 500 kg/m³ (Jewitt et al. 2020). Hui et al. (2020) estimate it is most likely at most 0.4 km. The display is a 0.4 km sphere: an estimate inside those bounds, not a measured size or shape. Pole RA 205°, Dec 52° (obliquity 30°), fitted to coma anisotropy by Kim et al. (2020); the prime meridian and spin phase are arbitrary and the period is not determined. The grid marks unmapped terrain."
               }
             }
           ],
@@ -63,14 +63,14 @@
         },
         "geometry": {
           "radius": 230,
-          "radiusKm": 1.3773021194754251,
+          "radiusKm": 0.4,
           "camera": {
             "initialScenePitchDegrees": 20,
             "defaultControlYawDegrees": -45,
-            "framingScale": 0.6299606209927663
+            "framingScale": 1
           },
-          "mapUrl": "/scenes/comet-3i/comet-3i-model-surface@2x.webp",
-          "polesUrl": "/scenes/comet-3i/comet-3i-model-poles@2x.webp",
+          "mapUrl": "/scenes/comet-2i/comet-2i-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-2i/comet-2i-model-poles@2x.webp",
           "radialTerrain": {
             "path": "shape/ellipsoid.tab",
             "format": "pds-radius-table",
@@ -86,14 +86,14 @@
             "atlasColumns": 16,
             "simplification": {
               "targetFaces": 480,
-              "maximumErrorMeters": 34.432552986885625,
+              "maximumErrorMeters": 10,
               "method": "source-meshoptimizer"
             },
             "primitive": "u"
           }
         },
         "celestial": {
-          "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Arbitrary display pole and meridian. No rotation pole or phase has been measured."
+          "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Pole RA 205°, Dec 52° (obliquity 30°), fitted to coma anisotropy by Kim et al. (2020); the prime meridian and spin phase are arbitrary and the period is not determined."
         },
         "presentation": {
           "defaultLens": "model"
@@ -103,38 +103,25 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e88ac187eb3ead9647d7c5d0c610a9d81bda3144716786bab405ebfd8de48703",
+      "sha256": "a53342a4bb00e42e76b2ad250d119ec417b6cba20e41cd56e5208286eb116f07",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
-        "id": "comet-3i",
-        "displayName": "3I/ATLAS",
+        "id": "comet-2i",
+        "displayName": "2I/Borisov",
         "panel": {
           "facts": [
             {
               "id": "dimensions",
               "label": "Display model extents",
-              "value": "4.37 × 2.19 × 2.19 km",
+              "value": "800 × 800 × 800 m",
               "source": {
-                "url": "https://doi.org/10.3847/2041-8213/ae471c",
-                "label": "Research publication · DOI 10.3847/2041-8213/ae471c",
+                "url": "https://doi.org/10.3847/1538-3881/ab9df8",
+                "label": "Research publication · DOI 10.3847/1538-3881/ab9df8",
                 "checked": "2026-09-16",
                 "path": "source/measurements.json",
-                "catalogueId": "doi-10-3847-2041-8213-ae471c",
+                "catalogueId": "doi-10-3847-1538-3881-ab9df8",
                 "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
-              }
-            },
-            {
-              "id": "rotation",
-              "label": "Rotation",
-              "value": "At least about 1 hour; not determined",
-              "source": {
-                "url": "https://doi.org/10.3847/2041-8213/ae471c",
-                "label": "Research publication · DOI 10.3847/2041-8213/ae471c",
-                "checked": "2026-09-16",
-                "path": "source/measurements.json",
-                "catalogueId": "doi-10-3847-2041-8213-ae471c",
-                "locator": "/periodText"
               }
             }
           ],
@@ -150,13 +137,13 @@
             {
               "id": "model",
               "label": "Shape model",
-              "thumbnail": "/scenes/comet-3i/comet-3i-model-thumbnail.webp",
-              "surface": "comet-3i-model-surface@2x.webp",
-              "poles": "comet-3i-model-poles@2x.webp",
+              "thumbnail": "/scenes/comet-2i/comet-2i-model-thumbnail.webp",
+              "surface": "comet-2i-model-surface@2x.webp",
+              "poles": "comet-2i-model-poles@2x.webp",
               "source": {
                 "id": "published-shape",
                 "path": "../manifest.json",
-                "url": "https://doi.org/10.3847/2041-8213/ae471c"
+                "url": "https://doi.org/10.3847/1538-3881/ab9df8"
               },
               "notes": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo. Arbitrary display pole and meridian. The object tumbles; this static view does not reconstruct its 2017 attitude or claim a current spin phase. The grid marks unmapped terrain.",
               "noData": true
@@ -179,32 +166,32 @@
           {
             "label": "Shape source",
             "role": "surface",
-            "description": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)",
-            "href": "https://doi.org/10.3847/2041-8213/ae471c"
+            "description": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration",
+            "href": "https://doi.org/10.3847/1538-3881/ab9df8"
           },
           {
             "label": "Scientific source",
             "role": "facts",
             "description": "Published observations and interpretation",
-            "href": "https://arxiv.org/abs/2601.21569"
+            "href": "https://doi.org/10.3847/2041-8213/ab621b"
           },
           {
             "label": "Scientific source",
             "role": "facts",
             "description": "Published observations and interpretation",
-            "href": "https://arxiv.org/abs/2508.02934"
+            "href": "https://doi.org/10.3847/2041-8213/ab9228"
           },
           {
             "label": "Scientific source",
             "role": "facts",
             "description": "Published observations and interpretation",
-            "href": "https://science.nasa.gov/solar-system/comets/3i-atlas/"
+            "href": "https://science.nasa.gov/solar-system/comets/2i-borisov/"
           },
           {
             "label": "Scientific source",
             "role": "facts",
             "description": "Published observations and interpretation",
-            "href": "https://science.nasa.gov/solar-system/what-we-knowand-dont-knowabout-comet-3i/"
+            "href": "https://science.nasa.gov/solar-system/what-we-knowand-dont-knowabout-comet-2i/"
           }
         ],
         "provenance": {
@@ -212,12 +199,12 @@
             "path": "../presentation/title-mark.json"
           },
           "editorial": {
-            "url": "https://doi.org/10.3847/2041-8213/ae471c",
-            "credit": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)"
+            "url": "https://doi.org/10.3847/1538-3881/ab9df8",
+            "credit": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration"
           },
           "physical": {
             "path": "../measurements.json",
-            "credit": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)"
+            "credit": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration"
           }
         }
       }
@@ -240,7 +227,7 @@
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 1377.3021194754251
+        "referenceRadiusMeters": 400
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/interstellar/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
@@ -259,17 +246,17 @@
       "kind": "source-input",
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "origin": "https://doi.org/10.3847/2041-8213/ae471c",
-      "credit": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)",
+      "origin": "https://doi.org/10.3847/1538-3881/ab9df8",
+      "credit": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration",
       "license": "MIT numeric extraction of published scientific facts",
       "licenseEvidence": [
-        "https://doi.org/10.3847/2041-8213/ae471c"
+        "https://doi.org/10.3847/1538-3881/ab9df8"
       ],
-      "coverage": "Hubble photometry gives an effective radius of 1.3 ± 0.2 km, assuming V-band geometric albedo 0.04, and brightness changes of at least 0.8 mag imply a sky-plane axis ratio of 2:1 or more. No shape model, pole or period was published. This display is a prolate ellipsoid at exactly the minimum 2:1 ratio, sized so the geometric mean of its largest and smallest cross-sections equals π × (1.3 km)²: full axes 4.37 × 2.19 × 2.19 km. A longer body, another albedo or a different shape would change it. Arbitrary display pole and meridian. No rotation pole or phase has been measured. The grid marks unmapped terrain.",
+      "coverage": "No image resolves the nucleus. Hubble limits its radius to at most 0.5 km at assumed geometric albedo 0.04, and its non-gravitational acceleration requires at least 0.2 km at assumed density 500 kg/m³ (Jewitt et al. 2020). Hui et al. (2020) estimate it is most likely at most 0.4 km. The display is a 0.4 km sphere: an estimate inside those bounds, not a measured size or shape. Pole RA 205°, Dec 52° (obliquity 30°), fitted to coma anisotropy by Kim et al. (2020); the prime meridian and spin phase are arbitrary and the period is not determined. The grid marks unmapped terrain.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 1377.3021194754251
+        "referenceRadiusMeters": 400
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/interstellar/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
@@ -277,13 +264,13 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "doi-10-3847-2041-8213-ae471c",
+            "catalogueId": "doi-10-3847-1538-3881-ab9df8",
             "role": "method",
-            "evidence": "src/objects/comet-3i/source/manifest.json#/inputs/1"
+            "evidence": "src/objects/comet-2i/source/manifest.json#/inputs/1"
           }
         ]
       },
-      "sha256": "5ce9202b128d16c4847e83c46572be5f02fdd62b0ddb7ca5e939d6a98c4a45da",
+      "sha256": "9f2321ed664b3bfd33b2429f1769f45344ce8ea7a65f5ff9f2fc4aa96087a65c",
       "bytes": 59703,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -303,8 +290,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e88ac187eb3ead9647d7c5d0c610a9d81bda3144716786bab405ebfd8de48703",
-      "bytes": 3969,
+      "sha256": "a53342a4bb00e42e76b2ad250d119ec417b6cba20e41cd56e5208286eb116f07",
+      "bytes": 3519,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -340,15 +327,15 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/comet-3i/comet-3i-model-thumbnail.webp",
+          "url": "/scenes/comet-2i/comet-2i-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/comet-3i/comet-3i-model-surface@2x.webp",
-          "bytes": 52108,
-          "sha256": "5a5e7580a103e89e352449890168633de675605afef00138b4e5c035aa2b5268",
+          "url": "/scenes/comet-2i/comet-2i-model-surface@2x.webp",
+          "bytes": 56686,
+          "sha256": "1a4a6fc7896b7696a3865dbfa89013d4dd3db43a7f4c3614f2ad3f6b54301840",
           "verification": "bytes-verified"
         }
       ],
@@ -385,8 +372,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5193,
-          "sha256": "40dbdc1915557012688d2ab89516df9a4a4dcf2bbe4701ec42fb440b53054855",
+          "bytes": 6195,
+          "sha256": "a8ad6e142cdc076fb29a543949d872ea4494d734442b8f3edb3d8d77d3c96058",
           "verification": "bytes-verified"
         }
       ],
@@ -423,12 +410,12 @@
     "unresolved": []
   },
   "lastPreparation": {
-    "objectId": "comet-3i",
-    "materialSha256": "d9bb8aaca3ec62ad60878ffb34549449bd9ec36c20e10045d05cdb689a515f77",
+    "objectId": "comet-2i",
+    "materialSha256": "5a8c4e27acebf64f23de00637881302a25eb8ee98f08ecc3c728b1f231a82933",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "9cb00b64330358564cc6ad104cf040683c7607e177524c45d2c1e9e7e33768fa"
+      "bindingsSha256": "50af032961ec3db47a873e265d3cb74aeb370b8459181dab4d1457ad2a608e03"
     }
   }
 }
