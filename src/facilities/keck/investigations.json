@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "keck",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "The Keck Observatory Archive serves both telescopes and answered anonymously on 2026-09-17: anyone may search and download data past their proprietary period without an account, and its TAP service is public-data only, with ADQL not fully implemented.",
+      "revisitWhen": "A body or star in this repository needs Keck data.",
+      "evidence": [
+        "https://koa.ipac.caltech.edu/UserGuide/access.html",
+        "https://koa.ipac.caltech.edu/TAP/capabilities",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "The default proprietary period was 18 months through 2022B; from 2023A it is 12 months for NASA Keck programmes and 18 for other partners, and principal investigators may set other periods per programme and night. No reuse licence is published; the archive asks for its own acknowledgement sentence and for crediting the original investigators.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://koa.ipac.caltech.edu/UserGuide/access.html",
+        "https://koa.ipac.caltech.edu/acknowledge.html",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "There is no single Keck pipeline: the archive names a reduction package per instrument and asks that it be cited. PypeIt (BSD 3-clause) covers DEIMOS, KCWI, MOSFIRE and NIRES; the KCWI and KPF pipelines are separate repositories.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://koa.ipac.caltech.edu/acknowledge.html",
+        "https://github.com/pypeit/PypeIt",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "deferred",
+      "finding": "The same screen matched 59 bodies in the Keck archive, 22,641 rows; most are spectrograph and guider frames, but NIRC2 holds adaptive-optics imaging of several asteroids that carry no photograph here (Daphne, Camilla, Amphitrite, Egeria, Ariadne).",
+      "revisitWhen": "A Keck NIRC2 candidate from the screen is taken up.",
+      "evidence": [
+        "https://koa.ipac.caltech.edu/TAP/capabilities",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

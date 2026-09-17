@@ -197,10 +197,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 83.5,
-    "camera": {
-      "initialScenePitchDegrees": 1.319689164252455,
-      "defaultControlYawDegrees": -20.79765038440197
-    },
     "mapUrl": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
     "polesUrl": "/scenes/amalthea/amalthea-normal-poles@2x.webp",
     "radialTerrain": {

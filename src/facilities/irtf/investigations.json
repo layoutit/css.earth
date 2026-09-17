@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "irtf",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "IRSA hosts the NASA Infrared Telescope Facility Archive (SpeX from 2016B, iSHELL from 2017A, TEXES from 2000B), and earlier semesters sit in a separate IRTF Legacy Archive. IRSA's TAP service answered an anonymous query on 2026-09-17 listing five IRTF tables, so the collection is queryable by TAP even though IRTF's own pages describe only a web form.",
+      "revisitWhen": "A body or star in this repository needs infrared spectra from IRTF.",
+      "evidence": [
+        "https://irsa.ipac.caltech.edu/Missions/irtf.html",
+        "https://irsa.ipac.caltech.edu/docs/program_interface/TAP.html",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "The proprietary period is 18 months for semester 2024B and earlier and 12 months from 2025A; IRSA's IRTF page still states 18 months, so the two disagree for recent semesters. No reuse licence is published: IRTF asks for a contract acknowledgement and IRSA for its own sentence, and legacy data are provided as is.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://irtfweb.ifa.hawaii.edu/observing/computer/data_release_policy.php",
+        "https://irtfweb.ifa.hawaii.edu/research/acknowledge.php",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "Spextool, an IDL package, reduces SpeX data and is downloaded from the instrument page with no licence stated; users are asked to cite its paper, and a Python port is in beta to remove the IDL dependency.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://irtfweb.ifa.hawaii.edu/~spex/observer/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "deferred",
+      "finding": "The same screen matched 37 bodies in IRSA's IRTF archive, 17,660 rows, almost all spectra and guider frames: composition rather than appearance.",
+      "revisitWhen": "A body needs infrared spectra rather than imagery.",
+      "evidence": [
+        "https://irsa.ipac.caltech.edu/TAP/capabilities",
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

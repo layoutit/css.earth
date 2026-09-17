@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 21.09,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/abundantia/abundantia-shape-surface@2x.webp",
     "polesUrl": "/scenes/abundantia/abundantia-shape-surface@2x.webp",
     "radialTerrain": {

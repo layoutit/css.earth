@@ -38,8 +38,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "herschel",
+            "kind": "facility",
+            "facilityId": "herschel",
             "evidence": "The preserved credit for this input reads: Pál et al. (2012), Herschel/PACS thermophysical analysis; Gaudi et al. (2005), rotational photometry."
           }
         ]
@@ -132,8 +132,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2528,
-      "expectedSha256": "e35a70f83de9ec34ee30b74dc06a7e8b77582233bf8d45a78301c540617863b3"
+      "expectedBytes": 2451,
+      "expectedSha256": "f9847727389034617532514a759bb9df3826b5a38a776169123652b40c3a8a9f"
     },
     {
       "path": "presentation/minimap.json",

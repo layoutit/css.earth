@@ -6,7 +6,7 @@
       "id": "selected-shape-and-spin",
       "subject": "DAMIT 1845: selected shape and spin",
       "status": "included",
-      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1845.txt. Model 1845, version 2017-09-21, pole (298°, 59°), period 11.8901 h match the retained metadata. The archive diameter field is 210 ±23 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1845.txt. Model 1845, version 2017-09-21, pole (298\u00b0, 59\u00b0), period 11.8901 h match the retained metadata. The archive diameter field is 210 \u00b123 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/doris/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845",
@@ -28,10 +28,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery-2",
       "status": "unresolved",
-      "finding": "Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not source surface maps; no albedo, photographic color, regolith or composition is inferred.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/doris/README.md"
       ],
@@ -46,7 +44,7 @@
       "id": "damit-alternatives",
       "subject": "Other DAMIT shape solutions",
       "status": "unresolved",
-      "finding": "The live DAMIT export lists these other models for this target: 936: pole (297°, 61°), 11.8901 h, version 2016-01-04. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "finding": "The live DAMIT export lists these other models for this target: 936: pole (297\u00b0, 61\u00b0), 11.8901 h, version 2016-01-04. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/936"
@@ -63,17 +61,21 @@
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "unresolved",
-      "finding": "The survey holds 10 deconvolved ZIMPOL frames (camera 1) for this body; the cross-frame registration test could not be run on them in this pass.",
-      "revisitWhen": "Frames and a pinned Horizons table for this body, to run the cross-frame registration test.",
+      "finding": "Measured on all 10 deconvolved frames with the release's rotation record, read latitude-first because 293.5116 degrees cannot be a latitude, cast onto the released mesh. Only the five frames of 2017-11-29 score, and they agree closely with each other, leaving a 0.61-degree floor, but they sit 3.58 degrees from the model, just outside the gate. Five frames from one night are a single rotational phase, so that offset cannot be separated from a phase error, and no lens ships. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
+      "revisitWhen": "Frames from a second night whose outline scores, to separate a constant pole offset from a rotational phase error.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/48Doris/Deconv/",
-        "https://observations.lam.fr/astero/3Dshape/",
-        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+        "https://observations.lam.fr/astero/3Dshape/48_Doris_param.txt",
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
         }
       ]
     }

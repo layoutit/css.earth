@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 83.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/io-85/io-85-shape-surface@2x.webp",
     "polesUrl": "/scenes/io-85/io-85-shape-surface@2x.webp",
     "radialTerrain": {

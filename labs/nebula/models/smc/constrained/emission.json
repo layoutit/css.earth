@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-simulation-guided-reconstruction@1",
+  "baselineId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333",
+  "width": 384,
+  "longestAxisSlabs": 128,
+  "samplesPerSlab": 4,
+  "exposureGain": 1,
+  "backgroundSpread": 0.5,
+  "controls": {
+    "detail": 1,
+    "faint": 0.6,
+    "depth": 1
+  },
+  "depth": {
+    "depthSamples": 256,
+    "maximumModes": 1,
+    "modeRelativeThreshold": 0.25,
+    "minimumSigmaZ": 330,
+    "maximumSigmaZ": 3300,
+    "featureThicknessRatio": 0.85,
+    "supportSigma": 4
+  },
+  "exclusions": [
+    {
+      "x": 0.294,
+      "y": 0.456,
+      "rx": 0.04,
+      "ry": 0.04,
+      "reason": "Authored exclusion of foreground globular cluster identified in registered optical image; not SMC gas."
+    }
+  ],
+  "depthInterpretation": "Authored dominant conditional ray-mode hypothesis. Select the strongest prior mode per image component and assign its complete projected weight there. Not a recovered gas depth; no duplicated secondary-mode feature or artificial bridge."
+}

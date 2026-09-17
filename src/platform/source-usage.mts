@@ -7,7 +7,7 @@ import { datasetDestination, parseDatasetDestination } from './dataset-destinati
 export type SourceUseKind = 'product-input' | 'method' | 'citation' | 'shared-context' | 'artwork';
 export interface SourceUse {
   readonly catalogueId: string; readonly kind: SourceUseKind;
-  readonly consumerKind: 'object-product' | 'object-fact' | 'spatial-measurement' | 'mission' | 'machine' | 'shared-context' | 'artwork';
+  readonly consumerKind: 'object-product' | 'object-fact' | 'spatial-measurement' | 'mission' | 'facility' | 'shared-context' | 'artwork';
   readonly consumerId: string; readonly consumerLabel: string;
   readonly ownerPath: string; readonly locator: string; readonly evidence: string;
   readonly objectId?: string; readonly productId?: string; readonly localSourceId?: string;
@@ -84,7 +84,7 @@ export function parseSourceUsage(raw: unknown, sources: SourceResolver): SourceU
     const edge = sourceObject(raw,['catalogueId','kind','consumerKind','consumerId','consumerLabel','ownerPath','locator','evidence','objectId','productId','localSourceId','citationUrl','lensIds','limitations','credit','license','redistribution']);
     const catalogueId = sourceId(edge.catalogueId), kind = sourceEnum(edge.kind,['product-input','method','citation','shared-context','artwork']);
     if (!Object.hasOwn(sources,catalogueId) || sources[catalogueId].id !== catalogueId) throw new TypeError('Usage must name a canonical source.');
-    const consumerKind = sourceEnum(edge.consumerKind,['object-product','object-fact','spatial-measurement','mission','machine','shared-context','artwork']);
+    const consumerKind = sourceEnum(edge.consumerKind,['object-product','object-fact','spatial-measurement','mission','facility','shared-context','artwork']);
     const lensIds = sourceArray(edge.lensIds,sourceId); sourceUnique(lensIds,'usage lens');
     const objectId = edge.objectId === undefined ? undefined : consumerKind === 'spatial-measurement' ? sourceText(edge.objectId) : sourceId(edge.objectId);
     if (consumerKind === 'spatial-measurement' && objectId && !/^[A-Za-z0-9][A-Za-z0-9_.+-]*$/u.test(objectId)) throw new TypeError('Invalid spatial object id.');
@@ -94,7 +94,7 @@ export function parseSourceUsage(raw: unknown, sources: SourceResolver): SourceU
     } else if (consumerKind === 'object-fact' || consumerKind === 'spatial-measurement') {
       if (!objectId || kind !== 'citation' || edge.citationUrl === undefined || edge.productId !== undefined || edge.localSourceId !== undefined || lensIds.length) throw new TypeError('A factsheet citation cannot become an observation or product input.');
     } else if (objectId || edge.productId !== undefined || edge.localSourceId !== undefined || lensIds.length ||
-      (consumerKind === 'mission' || consumerKind === 'machine' ? kind !== 'citation' : kind !== consumerKind)) throw new TypeError('Metadata citation cannot become an object observation.');
+      (consumerKind === 'mission' || consumerKind === 'facility' ? kind !== 'citation' : kind !== consumerKind)) throw new TypeError('Metadata citation cannot become an object observation.');
     if (consumerKind !== 'object-fact' && consumerKind !== 'spatial-measurement' && edge.citationUrl !== undefined) throw new TypeError('Unexpected factsheet citation URL.');
     return Object.freeze({catalogueId,kind,consumerKind,consumerId:sourceText(edge.consumerId),consumerLabel:sourceText(edge.consumerLabel),
       ownerPath:sourcePath(edge.ownerPath),locator:sourceText(edge.locator),evidence:sourceText(edge.evidence),lensIds,

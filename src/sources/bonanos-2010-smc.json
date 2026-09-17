@@ -1,0 +1,47 @@
+{
+  "id": "bonanos-2010-smc",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SMC massive-star catalogue · Bonanos et al. (2010)",
+  "identifiers": [
+    {
+      "type": "CDS catalogue",
+      "value": "J/AJ/140/416"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/140/2/416"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/smc/stars/source/catalogue.json",
+      "revision": "101899478bc56f7549cafe9e51d7617cce301a3d",
+      "sha256": "dd51263f9ae8446c439fb68f46fe4fdef6c156e9bbdaac43903665f982bdaac3",
+      "locator": "/catalogue"
+    }
+  ],
+  "publisher": "Bonanos et al. (2010), AJ 140, 416; CDS/VizieR",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bonanos et al. (2010), AJ 140, 416; CDS/VizieR J/AJ/140/416",
+      "scope": "Published source",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/stars/source/catalogue.json#/catalogue"
+    },
+    {
+      "kind": "limitation",
+      "text": "An incomplete compilation of massive SMC stars with literature spectral types, not every SMC star. Published angular positions and Johnson V are measured; individual distances are not.",
+      "scope": "Selected star sample",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/stars/README.md"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-nebula-reconstruction@1",
+  "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
+  "imageId": "smc-dss2",
+  "removalResultId": "ad309b7f4ea79cdd896cee7e47995b7d6b3cde5ddad3e24bec7b973438f13c4e.529c4dd529d9e1c89d9e9607851eae250ecd069ca352025f2e6113a2bea6b753",
+  "placement": {
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "rotationX": 0,
+    "rotationY": 0,
+    "rotationZ": 0,
+    "scale": 1
+  },
+  "appearance": {
+    "saturation": 1,
+    "detailStrength": 0,
+    "detailScale": 24,
+    "brightness": 1,
+    "gamma": 1
+  },
+  "subject": {
+    "id": "reconstruction-84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
+    "name": "DSS2 · optical · reconstruction · finite material",
+    "directory": ".local/nebula-lab/reconstructions/84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
+    "sourcePageUrl": "https://esahubble.org/images/heic0514c/",
+    "credit": "ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
+    "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc-constrained",
+    "density": {
+      "directory": ".local/nebula-lab/smc-constrained/simulation-volume",
+      "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
+      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+      "credit": "Garver et al. (2026) simulation prior; Tatton et al. (2021) / ESO VMC red-clump constraints.",
+      "overlays": "labs/nebula/models/smc/candidates/overlays.json",
+      "candidateImageIds": [
+        "smc-vista",
+        "smc-smash",
+        "smc-dss2",
+        "smc-wise",
+        "smc-allwise-wide",
+        "smc-herschel-spitzer",
+        "smc-herschel-gas",
+        "smc-horalek-wide",
+        "smc-irida-optical"
+      ],
+      "processingPlan": "labs/nebula/models/smc/processing-plan.json",
+      "referenceFramingRadiusUnits": 7
+    },
+    "menuLabel": "SMC · constrained simulation",
+    "workflow": "density",
+    "referenceDistanceUnits": 62.440000000000005,
+    "referenceEastLeft": true,
+    "imagePath": ".local/nebula-lab/reconstructions/84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a/source/target.png",
+    "comparisonGroup": "smc-constrained-observation",
+    "comparisonImages": [],
+    "reconstructionOverlay": ".local/nebula-lab/reconstructions/84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a/source/original-overlay.json",
+    "cloudParts": {
+      "descriptor": "inspection-object.json",
+      "catalogue": "source/cloud-parts.json"
+    },
+    "reconstructionImage": {
+      "group": "smc-constrained",
+      "label": "DSS2 · optical · finite material",
+      "note": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry."
+    },
+    "reconstructionNeutral": {
+      "descriptor": "neutral-object.json"
+    },
+    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
+  },
+  "finiteMaterial": {
+    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
+    "sourceResultId": "a280d527b56c9ad28aeaf58182b5360aa5eb7a80a4f0e0ebb95c0d37aada0031"
+  },
+  "processing": {
+    "densityPreview": false,
+    "modelLabel": "Simulation-guided finite material",
+    "reason": "This saved model cannot be refitted by the density material Preview. Its finite geometry and image colors were prepared together. Refitting requires its recorded offline recipe; shared compiler controls are not connected yet."
+  }
+}

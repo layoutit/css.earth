@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 38.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/thetis/thetis-shape-surface@2x.webp",
     "polesUrl": "/scenes/thetis/thetis-shape-surface@2x.webp",
     "radialTerrain": {

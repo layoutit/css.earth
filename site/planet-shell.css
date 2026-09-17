@@ -597,7 +597,7 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 .planet-lens-details-lead { color: var(--shell-text); font-weight: 500; }
 /* Mission and spacecraft names title their cards at the shell's panel heading size,
    outranking the shared tab-panel text scale. */
-.planet-card-tabpanel .planet-machine .planet-lens-details-title { font: var(--shell-font-panel-heading); }
+.planet-card-tabpanel .planet-facility .planet-lens-details-title { font: var(--shell-font-panel-heading); }
 
 .planet-introduction {
   width: 100%;

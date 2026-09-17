@@ -45,13 +45,13 @@ async function readBody(projectRoot: string, object: { id: string; name: string 
 /** The introduction, one dataset summary and the credits shown beside it; the shell shows one dataset at a time. */
 function compositionGroups(body: BodyText, exploration: ReturnType<typeof parsePreparedExploration>) {
   return body.context.lenses.map(lens => {
-    const { missions, machines, notes } = datasetContributors(body.id, lens.id, exploration.graph, exploration.catalog);
+    const { missions, facilities, notes } = datasetContributors(body.id, lens.id, exploration.graph, exploration.catalog);
     return [
       { source: 'introduction', text: body.text.introduction.text },
       { source: `datasets.${lens.id}.summary`, text: body.text.datasets[lens.id]?.summary ?? '' },
       ...missions.map(mission => ({ source: `mission:${mission.id}`, text: mission.description.value })),
       ...notes.map(note => ({ source: `note:${note.label}`, text: note.reason })),
-      ...machines.map(machine => ({ source: `machine:${machine.id}`, text: machine.description.value })),
+      ...facilities.map(facility => ({ source: `facility:${facility.id}`, text: facility.description.value })),
     ];
   });
 }
@@ -79,11 +79,11 @@ export async function prepareText({ ids = [] as readonly string[], check = false
     ...catalogueTextWarnings(bodies.map(body => ({ text: body.text, name: body.context.name })))];
   let composition = 'checked';
   try {
-    const exploration = parsePreparedExploration(await readJson(resolve(projectRoot, 'site/prepared-machines.json')), sourceResolver(sourceCatalog));
+    const exploration = parsePreparedExploration(await readJson(resolve(projectRoot, 'site/prepared-facilities.json')), sourceResolver(sourceCatalog));
     const found = bodies.flatMap(body => compositionGroups(body, exploration).flatMap(blocks => compositionWarnings(body.id, blocks)));
     warnings.push(...new Map(found.map(finding => [JSON.stringify(finding), finding])).values());
   } catch (error) {
-    composition = hasErrorCode(error, 'ENOENT') ? 'skipped: run pnpm prepare:machines first' : `skipped: ${error instanceof Error ? error.message : String(error)}`;
+    composition = hasErrorCode(error, 'ENOENT') ? 'skipped: run pnpm prepare:facilities first' : `skipped: ${error instanceof Error ? error.message : String(error)}`;
   }
   const selected = bodies.filter(body => !ids.length || ids.includes(body.id));
   const planned = await Promise.all(selected.map(async body => outputs(body, requireRecord(await readJson(resolve(body.directory, 'object.json'))))));

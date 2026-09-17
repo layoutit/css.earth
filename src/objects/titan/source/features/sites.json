@@ -8,7 +8,7 @@
       "name": "Huygens landing site",
       "kind": "lander",
       "date": "2005-01-14",
-      "machineId": "huygens",
+      "facilityId": "huygens",
       "latitudeDeg": -10.3,
       "longitudeDegEast": 167.7,
       "coordinateNote": "Converted from west longitude (360 - 192.3). Titan IAU longitudes are positive west, so 192.3 W is the native value. Latitude as stated: not stated.",

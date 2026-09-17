@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 19.5,
     "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": -45,
       "framingScale": 0.7826781959680614
     },
     "mapUrl": "/scenes/siarnaq/siarnaq-model-surface@2x.webp",

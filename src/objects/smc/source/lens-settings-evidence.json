@@ -1,0 +1,69 @@
+{
+  "receiptSha256": "8b36e90c6a97f2f8bc0ba0b74447408a81b293f4beacfdbc9fc2e83b6e6b16a8",
+  "capturedAt": "2026-09-17T19:40:00.000Z",
+  "source": "labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json",
+  "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
+  "receipt": "SHA-256 of this file's `lenses` array serialized with two-space indentation and a trailing newline.",
+  "lenses": [
+    {
+      "imageId": "smc-horalek-wide",
+      "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model."
+    },
+    {
+      "imageId": "smc-vista",
+      "resultId": "47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model."
+    },
+    {
+      "imageId": "smc-smash",
+      "resultId": "47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model."
+    },
+    {
+      "imageId": "smc-dss2",
+      "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model."
+    },
+    {
+      "imageId": "smc-allwise-wide",
+      "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "Baked finite-lens result appearance; no browser-saved personal appearance exists for this model."
+    }
+  ]
+}

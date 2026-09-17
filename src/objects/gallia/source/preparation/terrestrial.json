@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 40.435,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/gallia/gallia-shape-surface@2x.webp",
     "polesUrl": "/scenes/gallia/gallia-shape-surface@2x.webp",
     "radialTerrain": {

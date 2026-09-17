@@ -56,9 +56,8 @@
     },
     {
       "id": "horizons-position",
-      "subject": "JPL Horizons elements and independent vectors",
+      "survey": "horizons-position",
       "status": "included",
-      "finding": "Retained Horizons elements, cross-checked against independent vectors, give the heliocentric geometric position at the fixed 2026-09-03 epoch; the fixed-epoch two-body orbit does not simulate long-term perturbations.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2002-tx300/README.md#L10",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/asteroid-2002-tx300/README.md#L28"

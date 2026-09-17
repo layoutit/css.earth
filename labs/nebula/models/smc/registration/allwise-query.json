@@ -1,0 +1,11 @@
+{
+  "endpoint": "https://irsa.ipac.caltech.edu/TAP/sync",
+  "parameters": {
+    "REQUEST": "doQuery",
+    "LANG": "ADQL",
+    "FORMAT": "csv",
+    "QUERY": "SELECT TOP 200000 designation,ra,dec,w1mpro,w1snr,cc_flags,ext_flg FROM allwise_p3as_psd WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',13.5,-73,8)) AND w1mpro BETWEEN 8 AND 11 AND w1snr>30 AND ext_flg=0 AND cc_flags LIKE '0%'",
+    "MAXREC": "200000"
+  },
+  "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+TOP+200000+designation%2Cra%2Cdec%2Cw1mpro%2Cw1snr%2Ccc_flags%2Cext_flg+FROM+allwise_p3as_psd+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C13.5%2C-73%2C8%29%29+AND+w1mpro+BETWEEN+8+AND+11+AND+w1snr%3E30+AND+ext_flg%3D0+AND+cc_flags+LIKE+%270%25%27&MAXREC=200000"
+}

@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 20.082988502465085,
-    "camera": {
-      "initialScenePitchDegrees": -77.11428877332963,
-      "defaultControlYawDegrees": 124.12619496243376
-    },
     "mapUrl": "/scenes/cordelia/cordelia-model-surface@2x.webp",
     "polesUrl": "/scenes/cordelia/cordelia-model-poles@2x.webp",
     "radialTerrain": {

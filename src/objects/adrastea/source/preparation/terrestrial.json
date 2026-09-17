@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 8.2,
-    "camera": {
-      "initialScenePitchDegrees": -21.896362143852418,
-      "defaultControlYawDegrees": -119.4965884361338
-    },
     "mapUrl": "/scenes/adrastea/adrastea-model-surface@2x.webp",
     "polesUrl": "/scenes/adrastea/adrastea-model-poles@2x.webp",
     "radialTerrain": {

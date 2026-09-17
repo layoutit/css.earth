@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 4.75,
-    "camera": {
-      "initialScenePitchDegrees": -34.78421319927436,
-      "defaultControlYawDegrees": -39.63050597025636
-    },
     "mapUrl": "/scenes/kerberos/kerberos-model-surface@2x.webp",
     "polesUrl": "/scenes/kerberos/kerberos-model-poles@2x.webp",
     "radialTerrain": {

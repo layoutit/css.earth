@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "lofar",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "excluded",
+      "finding": "The LOFAR Long Term Archive allows anonymous metadata queries, but downloading even public data requires a registered account, and data must be staged first. The archive itself has no TAP service; ASTRON runs a separate virtual-observatory TAP service for LoTSS survey catalogues and images.",
+      "revisitWhen": "The Long Term Archive allows anonymous downloads, or a LOFAR dataset is needed badly enough to register.",
+      "evidence": [
+        "https://lta.lofar.eu/",
+        "https://vo.astron.nl/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Data typically remain proprietary for one year, after which they can be staged and downloaded. No reuse licence could be read; papers must state that they are based on data obtained with the LOFAR telescope and cite its instrument paper.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://science.astron.nl/telescopes/lofar/access-to-lofar-data/lofar-data-archive/",
+        "https://science.astron.nl/telescopes/lofar/lofar-policies/data-policies/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "LINC is the initial calibration pipeline, with no licence stated; its calibration engine DP3 is published under GPL-3.0.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://github.com/lofar-astron/DP3",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

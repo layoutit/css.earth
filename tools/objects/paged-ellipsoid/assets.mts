@@ -17,6 +17,8 @@ interface MaterialFrameInput {size: number; scenePitchDegrees: number; role: str
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
+import type { EllipsoidAttitude } from './attitude.mts';
+import { LIT_DEFAULT_VIEW } from '../../../src/platform/default-camera.mts';
 import { readCoraltempAnomaly } from "./sst-anomaly.mts";
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mts";
@@ -27,11 +29,11 @@ import { readMantleTomography, tomographyLegend } from "./tomography.mts";
 import { applyDisplayGamma } from "./display-tone.mts";
 
 
-export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames }: {config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]}) {
+export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames, attitude }: {attitude?: EllipsoidAttitude; config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]}) {
 const { bakeSurfaceRaster, surfacePageUrls } = raster;
 const requireMaterialPreparation=()=>{
-  if(!atmosphere||!atmosphereModel)throw new Error('Paged ellipsoid material preparation requires an atmosphere model.');
-  return {atmosphere,atmosphereModel};
+  if(!atmosphere||!atmosphereModel||!attitude)throw new Error('Paged ellipsoid material preparation requires an atmosphere model and the body attitude.');
+  return {atmosphere,atmosphereModel,attitude};
 };
 const PUBLIC_ROOT = publicDirectory;
 const surfaceOutputRoot = publicDirectory;
@@ -295,7 +297,8 @@ async function prepareMaterialBanks() {
   if (!Number.isInteger(columns) || !Number.isInteger(shardCount)) {
     throw new Error("Paged ellipsoid material shards require a square frame layout.");
   }
-  const defaultFrame = Math.round((65 - 40) / 65 * (frameCount - 1));
+  const {attitude: bodyAttitude}=requireMaterialPreparation();
+  const defaultFrame = Math.round((bodyAttitude.sunView(LIT_DEFAULT_VIEW.initialScenePitchDegrees)[2] + 1) / 2 * (frameCount - 1));
   for (const role of ["lighting", "atmosphere"]) {
     for (const density of [1, 2]) {
       const suffix = density === 2 ? "@2x" : "";
@@ -304,9 +307,10 @@ async function prepareMaterialBanks() {
       const stride = size + gutter * 2;
       const defaultRgba = renderMaterialFrame({
         size,
-        scenePitchDegrees: 40,
+        scenePitchDegrees: LIT_DEFAULT_VIEW.initialScenePitchDegrees,
         role,
         atmosphereModel,
+        ...(role === "lighting" ? { phaseFrame: defaultFrame } : {}),
       });
       await sharp(defaultRgba, {
         raw: { width: size, height: size, channels: 4 },
@@ -357,7 +361,7 @@ async function prepareMaterialBanks() {
 
 async function prepareShadowlessMaterial(size: number, suffix: string) {
   const {atmosphereModel}=requireMaterialPreparation();
-  const pixels = renderMaterialFrame({size, scenePitchDegrees: 40, role: 'lighting',
+  const pixels = renderMaterialFrame({size, scenePitchDegrees: LIT_DEFAULT_VIEW.initialScenePitchDegrees, role: 'lighting',
     atmosphereModel, shadowless: true});
   await sharp(pixels, {raw: {width: size, height: size, channels: 4}})
     .webp({lossless: true}).toFile(output(`${config.namespace}-lighting-shadowless${suffix}.webp`));
@@ -378,30 +382,20 @@ function renderMaterialFrame({
   const center = (size - 1) / 2;
   const rgba = Buffer.alloc(size * size * 4);
   const overlay = shadowless ? config.material.shadowlessOverlay : undefined;
-  const radians = Math.PI / 180;
-  const screenToObject = (vector: readonly number[]) => rotateZ(
-    rotateX(
-      rotateZ(
-        rotateY(vector, scenePitchDegrees * radians),
-        -config.geometry.PRESENTATION_NODE_DEGREES * radians,
-      ),
-      -config.geometry.OBLIQUITY_DEGREES * radians,
-    ),
-    -config.geometry.MESH_ROTATION_Z * radians,
-  );
+  const {attitude: bodyAttitude}=requireMaterialPreparation();
+  // Every lighting frame is drawn on the default pose's plane; the runtime turns it by the Sun's screen angle. Frame i puts the
+  // Sun at view z = -1 + 2i/(count - 1) on the default Sun's screen azimuth, so the frame the runtime selects is the real Sun.
+  const planePitch = LIT_DEFAULT_VIEW.initialScenePitchDegrees;
+  const screenToObject = (vector: readonly number[]) => bodyAttitude.screenToObject(vector, planePitch);
   const right = normalizeVector(screenToObject([0, 1, 0]));
   const down = normalizeVector(screenToObject([1, 0, 0]));
   const view = normalizeVector(screenToObject([0, 0, 1]));
-  const worldLight = normalizeVector(config.material.worldLight);
+  const sunView = bodyAttitude.sunView(planePitch), azimuth = Math.hypot(sunView[0], sunView[1]);
+  const frameZ = phaseFrame === undefined ? sunView[2] : -1 + 2 * phaseFrame / (config.material.frameCount - 1);
+  const across = Math.sqrt(Math.max(0, 1 - frameZ ** 2));
   const objectLight = shadowless
     ? view
-    : normalizeVector(rotateZ(
-      rotateX(
-        rotateZ(worldLight, -config.geometry.PRESENTATION_NODE_DEGREES * radians),
-        -config.geometry.OBLIQUITY_DEGREES * radians,
-      ),
-      -config.geometry.MESH_ROTATION_Z * radians,
-    ));
+    : normalizeVector(bodyAttitude.viewToObject([sunView[0] / azimuth * across, sunView[1] / azimuth * across, frameZ], planePitch));
   const solarTint = config.material.solarTint;
   const maximumTint = textureTintFactors(
     Math.PI,
@@ -639,14 +633,7 @@ async function prepareInteriorOuterPoles() {
 function prepareObjectLightingMap({ data, width, height, channels }: RasterInfo & {data: Buffer}) {
   const output = Buffer.from(data);
   const radians = Math.PI / 180;
-  const worldLight = normalizeVector(config.material.worldLight);
-  const objectLight = normalizeVector(rotateZ(
-    rotateX(
-      rotateZ(worldLight, -config.geometry.PRESENTATION_NODE_DEGREES * radians),
-      -config.geometry.OBLIQUITY_DEGREES * radians,
-    ),
-    -config.geometry.MESH_ROTATION_Z * radians,
-  ));
+  const objectLight = normalizeVector(requireMaterialPreparation().attitude.objectLight);
   for (let y = 0; y < height; y += 1) {
     const latitude = Math.PI / 2 - (y + 0.5) / height * Math.PI;
     const latitudeRadius = Math.cos(latitude);

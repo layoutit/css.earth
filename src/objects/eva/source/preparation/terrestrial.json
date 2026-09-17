@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 48.85,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/eva/eva-shape-surface@2x.webp",
     "polesUrl": "/scenes/eva/eva-shape-surface@2x.webp",
     "radialTerrain": {

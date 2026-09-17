@@ -171,10 +171,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 21.5,
-    "camera": {
-      "initialScenePitchDegrees": 0.29002072570775195,
-      "defaultControlYawDegrees": -53.626653154336815
-    },
     "mapUrl": "/scenes/metis/metis-normal-surface@2x.webp",
     "polesUrl": "/scenes/metis/metis-normal-poles@2x.webp",
     "radialTerrain": {

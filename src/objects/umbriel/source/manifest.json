@@ -46,8 +46,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/c98739ae-8739-4065-85a3-8096a5500104/download"
           }
@@ -199,8 +199,8 @@
     {
       "id": "umbriel-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 308,
-      "expectedSha256": "e78a350aececb430fa3c9be9f212f292e7b17eec8796622bbe95d9370d1c1026",
+      "expectedBytes": 208,
+      "expectedSha256": "6f68bd691be1f84c3f0aef0c01203dca5e79fea321b1d676eb1ec6843cd147e3",
       "origin": "Repository-authored Umbriel solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

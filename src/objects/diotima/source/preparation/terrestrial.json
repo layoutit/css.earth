@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 104.5,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 90
-    },
     "mapUrl": "/scenes/diotima/diotima-shape-surface@2x.webp",
     "polesUrl": "/scenes/diotima/diotima-shape-surface@2x.webp",
     "radialTerrain": {
