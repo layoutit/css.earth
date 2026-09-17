@@ -18,6 +18,6 @@ export const modelConfig = shape({
   raster: shape({ width: number, height: number, observations: array(requireRecord) }),
 });
 export const modelSurfaces = shape({ surfaces: array(shape({
-  missingPixels: number, appearance: text, layout: shape({ faceCount: number, tileSize: number }),
+  missingPixels: number, appearance: text, layout: shape({ faceCount: number }),
 })) });
 export const modelSettings = shape({ settings: shape({ controls: array(shape({ name: text, checked: boolean })) }) });

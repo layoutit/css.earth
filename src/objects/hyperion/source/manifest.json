@@ -2389,8 +2389,8 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 164069,
-      "expectedSha256": "d301bf8c4ee50910ef1267cb0395b7099e0b40895d69affbd0de333e7ba3ae15"
+      "expectedBytes": 188003,
+      "expectedSha256": "2cf501822184f5c7224e9ed2c3c442bb228af6a94d8833efd943ca3175749bc0"
     }
   ],
   "documents": [
@@ -2425,8 +2425,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 28623,
-      "expectedSha256": "ea40009a47b507fd77fc33cb062abdbacadacd7e9c5932030db9fbcc672ef8a0"
+      "expectedBytes": 28604,
+      "expectedSha256": "4d8f64ec2cb129eaa4a3edd11efbf2c9944bc7732ff3b25965aeda64da22cbbe"
     },
     {
       "path": "presentation/minimap.json",
@@ -2540,8 +2540,8 @@
     },
     {
       "path": "preparation/filter-color-registration.json",
-      "expectedBytes": 3892,
-      "expectedSha256": "6103a5aa38f9c2ae9227c0a810e645c1040bdaa36489be1c06848fa202f32399",
+      "expectedBytes": 3875,
+      "expectedSha256": "9cc81e06d18de2ed2718372ed0c3b99e151767172c88b069a6795e961068b7ad",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored controlled-image registration job or measured source-pixel fit and validation evidence; original photographs and published control cameras remain pinned separately."
@@ -2549,8 +2549,8 @@
     },
     {
       "path": "preparation/filter-color-validation.json",
-      "expectedBytes": 3966,
-      "expectedSha256": "93e3c15650d9b5e7437a60354f2952a2406d1a08e2f8fbc9025d510fb64438fc",
+      "expectedBytes": 3949,
+      "expectedSha256": "4652f2a545708599dfcf0c0300123444fc4cfb2446103881f292ad96ef9eba40",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored controlled-image registration job or measured source-pixel fit and validation evidence; original photographs and published control cameras remain pinned separately."
@@ -2558,8 +2558,8 @@
     },
     {
       "path": "preparation/filter-color-validation-aligned.json",
-      "expectedBytes": 4119,
-      "expectedSha256": "4896446391b4c3ca0dcec24b6429d1f4f5da761bc354d90cd29d3680147c1370",
+      "expectedBytes": 4102,
+      "expectedSha256": "6db07f51eb6c34283f4854829cac3b05aea95d6c15a4e38ba73d65c5dcf60a50",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored controlled-image registration job or measured source-pixel fit and validation evidence; original photographs and published control cameras remain pinned separately."
@@ -2567,8 +2567,8 @@
     },
     {
       "path": "preparation/clear-camera-registration.json",
-      "expectedBytes": 2313,
-      "expectedSha256": "cc90970cef3608e931266d65ae1f3082590e03feb6b67973588fb41d6927170b",
+      "expectedBytes": 2296,
+      "expectedSha256": "f628f17a615de15c5e383ffc828bf66f056ded6a947247cd2e963a2a552f324c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored controlled-image registration job or measured source-pixel fit and validation evidence; original photographs and published control cameras remain pinned separately."
@@ -2616,8 +2616,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 4313,
-      "expectedSha256": "8377c5a20e9da1285b0dc9e9a213e5534d07100f6ed313e0db0b0b5bf9a8357d"
+      "expectedBytes": 4296,
+      "expectedSha256": "0bfa72daa4b194ae6b0cf426103e1671b83ac2fe2a842207647fb9be8a320db9"
     },
     {
       "path": "preparation/filter-color-1506388518-validation.json",
@@ -2625,8 +2625,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 4071,
-      "expectedSha256": "02ebc70ad2ab9074c2c91e83d70ee809682c459f2e6a791e7a4c19213da3cd61"
+      "expectedBytes": 4054,
+      "expectedSha256": "0fe438d839ff4e25dcc8fa3beceb665bec5fa7f64cdf52ba67006e63a9ee8bd3"
     },
     {
       "path": "preparation/filter-color-1506388840-clear-registration.json",
@@ -2634,8 +2634,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 2503,
-      "expectedSha256": "3cb01da4dfab660ed2987097691ee1f5a0150233eff4d5e4b1a304af57a0d5d3"
+      "expectedBytes": 2486,
+      "expectedSha256": "068257ca0305085ea0673c9f0910b823d9775605082fc1da1363d7a8f66f3d67"
     },
     {
       "path": "preparation/filter-color-1506388840-registration.json",
@@ -2643,8 +2643,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 4444,
-      "expectedSha256": "ea6697164ea4b8ade8d0fae9395c7afedf26dba818516f56127bbdf9596c727d"
+      "expectedBytes": 4427,
+      "expectedSha256": "6143fb64e75bf36bc79be6ec11529e5edea5a97d291800a1dd89ac54ab7af606"
     },
     {
       "path": "preparation/filter-color-1506388840-validation.json",
@@ -2652,8 +2652,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 4103,
-      "expectedSha256": "6a419794d52a35629ff5171829ee9bb011a86957885b579ca7e9b70e712a33b4"
+      "expectedBytes": 4086,
+      "expectedSha256": "aba4f5d7d0aa4785d1c8054856013c2fccd5127f3b7e8466e33cd3c3ec4ce87f"
     },
     {
       "path": "preparation/filter-color-1506389178-clear-registration.json",
@@ -2661,8 +2661,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 2505,
-      "expectedSha256": "cb44505e15f5c23d09fd370191ba80b42c09fed92365f7ad8c3bb47b8a47fc2b"
+      "expectedBytes": 2488,
+      "expectedSha256": "0051fabd4dc7f58206943981292ca3bd0cb62ea29f216b7ed284c955db1350b1"
     },
     {
       "path": "preparation/filter-color-1506389178-registration.json",
@@ -2670,8 +2670,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 4390,
-      "expectedSha256": "11e85c2411b86095a7b7473ac8ab8b50848b385971b03899b0f668765b47500b"
+      "expectedBytes": 4373,
+      "expectedSha256": "06ba249a6bc8564785b824733169d04584af73abae0a287e4c02ed61bafa5e0e"
     },
     {
       "path": "preparation/filter-color-1506389178-validation.json",
@@ -2679,8 +2679,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 4113,
-      "expectedSha256": "16129eb83d09d0bc8f8e0eb575923ef989b1dda226128a7fdd24a67289d2a0a7"
+      "expectedBytes": 4096,
+      "expectedSha256": "0d1323808e4a43660e9b09ee232ad08503911ce1f9a945540f8d4d05c1828d14"
     },
     {
       "path": "preparation/filter-color-1506389543-clear-registration.json",
@@ -2688,8 +2688,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 2468,
-      "expectedSha256": "77f5f98b82ba62804592336d70f86189434f1001e2f1d1c3d37bd7a55f0147d0"
+      "expectedBytes": 2451,
+      "expectedSha256": "338f2e941d0cee53304a21960d3789ccccdac899b85b69f3ca45189738d97b79"
     },
     {
       "path": "preparation/filter-color-1506389543-registration.json",
@@ -2697,8 +2697,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 4420,
-      "expectedSha256": "ad09d5ff3d10b814c3f3b63e86b006aa2bc5d8bf928d4947a1cf90a75c6cc990"
+      "expectedBytes": 4403,
+      "expectedSha256": "e8adc6e9c8a1b9fea58bef97e2449ab65c1e133e1548524cb1e5d63c38770db5"
     },
     {
       "path": "preparation/filter-color-1506389543-validation.json",
@@ -2706,8 +2706,8 @@
         "kind": "local",
         "reason": "Controlled-camera feature registration job or full measured correspondence evidence for the complete Hyperion filter sequence."
       },
-      "expectedBytes": 3980,
-      "expectedSha256": "739ec480a66e0436f93092e239a2ed6dc5c7f198016800c98d77ddca3115c842"
+      "expectedBytes": 3963,
+      "expectedSha256": "af9f44d587ec42179f69baee84afed81ecc0ec06cea6b21d3e453ec62cf677ee"
     },
     {
       "path": "validation/filter-color-1506388518-independent.json",

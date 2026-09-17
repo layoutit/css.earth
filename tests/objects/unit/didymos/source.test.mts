@@ -36,5 +36,5 @@ test('Didymos native raster surface preserves closed source connectivity within 
  assert.equal(radial.simplification.sourceFaces,49152);assert.equal(radial.simplification.removedOppositeFaces,0);
  assert.ok(radial.simplification.estimatedErrorMeters<=8);assert.equal(radial.simplification.topology.eulerCharacteristic,2);
  assert.ok(radial.leaves.every(leaf=>leaf.tag==='u'&&leaf.attributes['data-polycss-texture-leaf-sizing']==='raster'));
- assert.equal(radial.tileSize,128);assert.equal(radial.width,2048);assert.equal(radial.height,6400);
+ assert.ok(radial.plans.reduce((sum,p)=>sum+p.rect.width*p.rect.height,0)<=16384*radial.faces.length);
 });

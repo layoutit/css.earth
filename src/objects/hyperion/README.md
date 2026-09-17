@@ -134,10 +134,6 @@ The release is credited to Thomas, Joseph and Ansty (2018), DOI [10.26033/ewy3-j
 
 The shared meshoptimizer path simplifies the released connectivity before texture baking, targeting 1,200 leaves within the 2,000-leaf ceiling. Native PolyCSS raster triangles carry prepared texels and normal-interpolated directional lighting. A spherical detached lighting overlay is not used on this irregular silhouette.
 
-Each leaf gets a 256-pixel tile in a square 8960 × 8960 atlas (35 columns). With 128-pixel tiles a texel covered about 160 m of the 249,014 km² surface while the photographs reach 100 m per pixel, so the atlas discarded source detail; 256-pixel tiles bring a texel to about 80 m. The five lens atlases grew from 4.36 to 11.32 MB in total, and each decodes to about 306 MiB. The leaf count is unchanged.
-
-![The same four leaves of the Monochrome lens with 128-pixel tiles (left) and 256-pixel tiles (right)](evidence/tile-256-comparison.png)
-
 The navigation image comes from the same prepared shape and Monochrome map. The dedicated Surface Lens preview is a small map, not the HD atlas.
 
 ## Source survey

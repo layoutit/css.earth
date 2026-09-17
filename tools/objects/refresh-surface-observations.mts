@@ -50,9 +50,9 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   if (!radial) throw new Error('Observation refresh requires source terrain.');
   const retained = retainedPhotographicAtlas(requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8'))));
   // Reuse the full preparer's source mesh and exact plans. A geometry change needs a full preparation.
-  if (retained.width !== radial.width || retained.height !== radial.height || retained.tileSize !== radial.tileSize ||
+  if (retained.width !== radial.width || retained.height !== radial.height ||
       retained.plans.length !== radial.plans.length || retained.plans.some((plan, i) =>
-        plan.rect.x !== radial.plans[i].rect.x || plan.rect.y !== radial.plans[i].rect.y ||
+        plan.rect.x !== radial.plans[i].rect.x || plan.rect.y !== radial.plans[i].rect.y || plan.rect.width !== radial.plans[i].rect.width || plan.rect.height !== radial.plans[i].rect.height ||
         plan.matrix.some((value, j) => value !== radial.plans[i].matrix[j]))) throw new Error('Retained atlas geometry differs from the source recipe.');
   await mkdir(stage, { recursive: true });
   const rasterConfig = { ...config, raster: { ...config.raster, observations: [], scientific: [], shapeViews: [], observedColors: [], surfaceObservations: selected } };

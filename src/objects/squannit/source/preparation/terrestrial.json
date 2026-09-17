@@ -62,8 +62,7 @@
         "expectedFaces": 2292
       },
       "faceBudget": 2000,
-      "tileSize": 64,
-      "atlasColumns": 16,
+      "texelsPerFace": 4096,
       "simplification": {
         "targetFaces": 800,
         "maximumErrorMeters": 4,
