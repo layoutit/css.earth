@@ -115,8 +115,8 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
   const units = 'exposures' in seasonData
     ? seasonData.exposures.map(exposure => ({ key: exposure.science, exposure }))
     : seasonData.nights.map(night => ({ key: night.from.slice(0, 10), night }));
+  // Always run: each calibration reuses its own finished pipeline steps, and its last steps depend on all of them.
   for (const unit of calibrated ? [] : units) {
-    if (progress.calibrated[unit.key]?.length) continue;
     const directory = resolve(work, 'nights', unit.key.replaceAll(':', '-'));
     const data = season.data;
     let files: string[];
