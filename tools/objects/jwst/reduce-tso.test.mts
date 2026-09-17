@@ -67,8 +67,11 @@ test('the WASP-43b MIRI reduction from raw reproduces Bell et al. (2024)\'s Eure
   assert.ok(white.scatterPpm.ours <= white.scatterPpm.author * 1.05, `scatter ${white.scatterPpm.ours} against ${white.scatterPpm.author} ppm`);
   const channels = (await readdir(curves)).filter(name => /^ours-ch\d{2}\.csv$/u.test(name)).sort();
   assert.equal(channels.length, 14);
-  for (const name of channels) {
+  // Channels are 0.5 um wide from 5 um. Below 10 um correlations measured 0.927 to 0.994. The four channels from 10 um fall to
+  // 0.870-0.931 and are reported without a bound; Hammond et al. (2024) excluded the three above 10.5 um for shadowing.
+  for (const [index, name] of channels.entries()) {
     const result = compareLightCurves(await read(name), await read(name.replace('ours', 'author')));
     context.diagnostic(`${name}: correlation ${result.correlation.toFixed(3)}, detrended ${result.detrendedDifferencePpm.toFixed(0)} ppm`);
+    if (index < 10) assert.ok(result.correlation >= 0.9, `${name}: correlation ${result.correlation}`);
   }
 });
