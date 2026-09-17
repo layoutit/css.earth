@@ -65,6 +65,7 @@
       "finding": "The same screen matched 37 bodies in IRSA's IRTF archive, 17,660 rows, almost all spectra and guider frames: composition rather than appearance.",
       "revisitWhen": "A body needs infrared spectra rather than imagery.",
       "evidence": [
+        "https://irsa.ipac.caltech.edu/TAP/capabilities",
         "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
       ],

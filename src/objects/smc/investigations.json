@@ -235,6 +235,7 @@
       "status": "excluded",
       "finding": "The previous SMC object distributed one SMASH image through 32 normalized parametric slabs with an authored 25 kpc thickness and no observational depth constraint. Its prepared bank and 96 layer images are removed; its source record, recipe and publisher photograph are retained as documents, and that photograph is now the SMASH lens preview.",
       "evidence": [
+        "https://noirlab.edu/public/images/noirlab2030b/",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/src/objects/smc/source/provenance.json",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/src/objects/smc/source/recipe.json"
       ],
@@ -252,6 +253,8 @@
       "status": "excluded",
       "finding": "DSS2 blue/red plates, AllWISE W2/W1, AllWISE W4/W3/W1 and Herschel SPIRE 250 µm pass the registration gate and have baked lenses in the lab, but each carries an uncorrected defect: a smooth W2 background gradient toward the south-east, W3 Galactic cirrus and scattered light, SPIRE covering only about 26% of the rectified field, and uncorrected DSS2 plate-to-plate steps. They stay lab-only rather than shipping a known artefact as SMC structure.",
       "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=ESAVO%2FP%2FHERSCHEL%2FSPIRE-250&get=record&fmt=json",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fblue&get=record&fmt=json",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/README-candidates.md",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
       ],
@@ -269,6 +272,9 @@
       "status": "excluded",
       "finding": "The WISE press image and the Irida amateur mosaic fail the unchanged alignment threshold and serve as wrong-scale negative controls. Standalone Spitzer is archived with a failed star-pattern fit. The Herschel + Spitzer and Herschel/Planck/IRAS companions carry publisher astrometry only, with no independent registration gate.",
       "evidence": [
+        "https://wise.ssl.berkeley.edu/gallery_SMC.html",
+        "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic.htm",
+        "https://irsa.ipac.caltech.edu/data/SPITZER/SAGE-SMC/overview.html",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/registration/alignment-report.json",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/registration/wise-press-sin-negative.json",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/README.md"
@@ -313,6 +319,8 @@
       "status": "unresolved",
       "finding": "No part of this delivery measures the SMC’s three-dimensional gas or dust. A single optical image cannot constrain depth; the envelope is a fitted shape hypothesis over photometric red-clump distance estimates that have not been deconvolved into geometric depth, and the model records materialGatePassed: false. Front-image agreement and an inspected side view are not evidence of recovered structure.",
       "evidence": [
+        "https://doi.org/10.1093/mnras/staa3857",
+        "https://doi.org/10.5061/dryad.1vhhmgr82",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/constrained/EMISSION-METHOD.md",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/vmc/STRUCTURE-LIMITS.md"
       ],
@@ -330,6 +338,7 @@
       "status": "unresolved",
       "finding": "The pinned intake omitted unmatched entries at the right-ascension wrap; 476 published rows have negative RA. The fit footprint normalizes those angles and their missing matches are part of its retention mask, so the omission is inside the fitted region rather than silently dropped. Revising the intake is a separate versioned source correction and was not made here.",
       "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/504/2983",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/constrained/README.md",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/vmc/README.md"
       ],
@@ -347,6 +356,7 @@
       "status": "unresolved",
       "finding": "This ledger records the fields, shapes and catalogues this round examined. It is not an exhaustive survey of available SMC imagery, distance tracers or published structure models, and no systematic archive sweep was performed.",
       "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?RA=13.5&DEC=-73&SR=2&get=record&fmt=json",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/README-candidates.md",
         "https://github.com/layoutit/css.earth/blob/d806053ffce2cbf2967aeaf960a1fca634ffd27e/labs/nebula/models/smc/widefield-intake.json"
       ],
