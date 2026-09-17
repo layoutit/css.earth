@@ -21,7 +21,7 @@ export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEv
 
 import cwebpPath from "cwebp-bin";
 import { SCENE_OBJECTS } from "../site/objects.mts";
-import { defaultPreparationConcurrency, defaultPreparationMemoryBudget, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "./run-implemented-planets.mts";
+import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "./run-implemented-planets.mts";
 import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
 import { authoredObject } from './authored-object.mts';
@@ -88,7 +88,7 @@ export async function runCachedPreparationObjects({ projectRoot = process.cwd(),
     } else pending.push(id);
   }
   const report = await schedule({ projectRoot: root, objectIds: pending, concurrency, onEvent,
-    memoryBudgetBytes: defaultPreparationMemoryBudget(), peakMemoryBytes: id => preparationPeakBytes(id, root),
+    memoryAvailableBytes: availableMemoryBytes, peakMemoryBytes: id => preparationPeakBytes(id, root),
     runCommand: async request => {
       const receiptPath = `${cacheRoot}/${request.id}.json`;
       const traces = resolve(root, cacheRoot, "traces", `${request.id}-${randomUUID()}`);
