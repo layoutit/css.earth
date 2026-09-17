@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 35.895,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/maja/maja-shape-surface@2x.webp",
     "polesUrl": "/scenes/maja/maja-shape-surface@2x.webp",
     "radialTerrain": {

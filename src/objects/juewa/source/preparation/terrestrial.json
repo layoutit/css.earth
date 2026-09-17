@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 83.345,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/juewa/juewa-shape-surface@2x.webp",
     "polesUrl": "/scenes/juewa/juewa-shape-surface@2x.webp",
     "radialTerrain": {

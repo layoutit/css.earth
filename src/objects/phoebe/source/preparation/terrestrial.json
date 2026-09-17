@@ -478,10 +478,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 106.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 45
-    },
     "mapUrl": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
     "polesUrl": "/scenes/phoebe/phoebe-normal-poles@2x.webp",
     "radialTerrain": {

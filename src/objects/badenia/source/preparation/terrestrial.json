@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 34.865,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/badenia/badenia-shape-surface@2x.webp",
     "polesUrl": "/scenes/badenia/badenia-shape-surface@2x.webp",
     "radialTerrain": {

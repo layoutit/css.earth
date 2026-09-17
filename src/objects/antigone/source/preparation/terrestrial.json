@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 63.0,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/antigone/antigone-shape-surface@2x.webp",
     "polesUrl": "/scenes/antigone/antigone-shape-surface@2x.webp",
     "radialTerrain": {

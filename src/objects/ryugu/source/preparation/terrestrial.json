@@ -228,10 +228,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.448,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
     "polesUrl": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
     "radialTerrain": {

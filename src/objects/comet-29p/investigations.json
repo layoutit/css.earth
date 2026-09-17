@@ -26,13 +26,10 @@
     },
     {
       "id": "measured-shape-archive-route",
-      "subject": "Object-specific measured shape in PDS/Stooke archives",
+      "survey": "measured-shape-archive-route",
       "status": "unresolved",
-      "finding": "The retained catalog intake names the Stooke archive but contains no object-specific mesh search result or inspected reconstruction for this comet. The Celestia illustration is selected; the record does not establish that a measured shape is unavailable.",
-      "revisitWhen": "An object-specific archive product or published numerical shape can be inspected, with coordinates, scale and reuse terms.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-29p/source/reference/source-record.json",
-        "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/"
+        "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-29p/source/reference/source-record.json"
       ],
       "checked": [
         {
@@ -59,10 +56,8 @@
     },
     {
       "id": "context-as-surface-texture",
-      "subject": "Cited context observations as a nucleus surface texture",
+      "survey": "context-as-surface-texture",
       "status": "excluded",
-      "finding": "The retained intake did not establish resolved nucleus pixels, camera-to-shape registration or a surface coverage mask for these context observations. They are not used as surface texels. This decision concerns the cited material, not every observation of the comet.",
-      "revisitWhen": "A resolved nucleus image with usable geometry and an independently checked mapping to a source shape becomes available.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/8475dd92009350873cd597f1c651c7ddec221a58/src/objects/comet-29p/source/reference/source-record.json",
         "https://science.nasa.gov/missions/webb/nasas-webb-reveals-unusual-jets-of-volatile-gas-from-icy-centaur-29p/"

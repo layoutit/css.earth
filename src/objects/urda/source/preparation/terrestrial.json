@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 22.0,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/urda/urda-shape-surface@2x.webp",
     "polesUrl": "/scenes/urda/urda-shape-surface@2x.webp",
     "radialTerrain": {

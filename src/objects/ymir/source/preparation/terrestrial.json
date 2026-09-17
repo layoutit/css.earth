@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 9.6,
     "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": -45,
       "framingScale": 0.6436658250254509
     },
     "mapUrl": "/scenes/ymir/ymir-model-surface@2x.webp",

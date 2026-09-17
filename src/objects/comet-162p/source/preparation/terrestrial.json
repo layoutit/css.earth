@@ -39,8 +39,6 @@
     "radius": 230,
     "radiusKm": 7.03,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": 0,
       "framingScale": 0.85
     },
     "mapUrl": "/scenes/comet-162p/comet-162p-model-surface@2x.webp",

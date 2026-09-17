@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 38.86,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/una/una-shape-surface@2x.webp",
     "polesUrl": "/scenes/una/una-shape-surface@2x.webp",
     "radialTerrain": {

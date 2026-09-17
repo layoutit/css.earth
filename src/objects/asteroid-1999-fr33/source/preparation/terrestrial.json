@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 2.877,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
     "polesUrl": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
     "radialTerrain": {

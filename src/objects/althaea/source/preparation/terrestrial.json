@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 29.395,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/althaea/althaea-shape-surface@2x.webp",
     "polesUrl": "/scenes/althaea/althaea-shape-surface@2x.webp",
     "radialTerrain": {

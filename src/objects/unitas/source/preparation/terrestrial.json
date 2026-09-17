@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 24.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/unitas/unitas-shape-surface@2x.webp",
     "polesUrl": "/scenes/unitas/unitas-shape-surface@2x.webp",
     "radialTerrain": {

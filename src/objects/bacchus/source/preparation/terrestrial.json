@@ -83,10 +83,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.315,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/bacchus/bacchus-shape-surface@2x.webp",
     "polesUrl": "/scenes/bacchus/bacchus-shape-surface@2x.webp",
     "radialTerrain": {

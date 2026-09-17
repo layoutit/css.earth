@@ -1,3 +1,4 @@
+import { prepareEllipsoidAttitude } from './attitude.mts';
 import { readAuthoredSources } from '../authored-sources.ts';
 import {requireObjectControls} from '../../../site/scene-contract.mts';
 import type {AuthoredObjectDescriptor} from '@cssearth/objects';
@@ -61,8 +62,13 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   requireFiniteNumber(interiorSource[config.interiorRadiusKey], config.interiorRadiusKey);
   if (interiorSource.tomographyPath && sources.get('mantle-tomography')?.reference.path !== `source/${interiorSource.tomographyPath}`)
     throw new Error('Mantle tomography must bind its authored recipe for reproducible provenance.');
-  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, citySource, noise: paging ? { poolSize: config.geographic.noise.poolSize } : null, atmosphereModel, atmosphere, raster });
-  const rasterAssets = await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster });
+  // The body sits in its ecliptic presentation frame; the surface map the feature labels use says where its longitudes start.
+  const features = sources.get('features')?.value as { surfaceMap?: unknown } | undefined;
+  const surfaceMap = typeof features?.surfaceMap === 'string' ? await json(resolve(sourceDirectory, features.surfaceMap)) as { mapLeftEdgeLongitudeDeg?: unknown } : null;
+  const attitude = prepareEllipsoidAttitude(descriptor.id, { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z,
+    mapLeftEdgeLongitudeDeg: surfaceMap ? requireFiniteNumber(surfaceMap.mapLeftEdgeLongitudeDeg, 'surface map left edge') : 0 });
+  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, citySource, noise: paging ? { poolSize: config.geographic.noise.poolSize } : null, atmosphereModel, atmosphere, raster, attitude });
+  const rasterAssets = await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude });
   const context = { sourceDirectory, publicDirectory, config, scene };
   let noise: Awaited<ReturnType<typeof prepareVectorOverlay>> | undefined;
   let catalog: Awaited<ReturnType<typeof preparePlaces>> | undefined;
