@@ -4,8 +4,8 @@ import type { Loader, LoaderContext } from 'astro/loaders';
 import { discoveryDescription, isDiscoveryAnchor, parseObjectDiscovery } from '../../site/object-discovery.mts';
 import { SITE_ORIGIN } from '../../site/seo.mts';
 import {
-  OBJECTS_DIRECTORY, REPOSITORY, REPOSITORY_URL, formatBytes, groupObjects, isRecord, list, readJson, readObjects, text,
-  type ObjectRecord,
+  OBJECTS_DIRECTORY, REPOSITORY, REPOSITORY_URL, formatBytes, isRecord, list, readJson, readObjects, systemGroups, text,
+  type ObjectRecord, type SystemEntry,
 } from './objects.mts';
 
 /** The app that serves embedded scenes: the public site, or a local app server during development. */
@@ -160,8 +160,14 @@ function articleBody(object: ObjectRecord) {
 }
 
 function mainPageBody(objects: readonly ObjectRecord[]) {
+  const link = (object: ObjectRecord) => `[${prose(object.title)}](/${object.id}/)`;
+  const entry = (item: SystemEntry): string => item.satellites.length ? `${link(item.object)} (${item.satellites.map(entry).join(' · ')})` : link(item.object);
   return [
-    `${objects.length} object packages in \`src/objects\`. Each page shows the package's README, minimaps, investigations, source manifest and prepared facts.`,
-    ...groupObjects(objects).flatMap(group => [`## ${group.label}`, group.objects.map(object => `[${prose(object.title)}](/${object.id}/)`).join(' · ')]),
+    `${objects.length} object packages in \`src/objects\`, nested by planetary system. Each page shows the package's README, minimaps, investigations, source manifest and prepared facts.`,
+    ...systemGroups(objects).flatMap(system => [
+      `## ${prose(system.label)}`,
+      ...(system.star ? [link(system.star)] : []),
+      ...system.groups.flatMap(group => [`### ${prose(group.label)}`, group.entries.map(entry).join(' · ')]),
+    ]),
   ].join('\n\n');
 }

@@ -66,6 +66,75 @@ export function groupObjects(objects: readonly ObjectRecord[]) {
   return [...groups.values()];
 }
 
+/** Each object's orbit centre, from the prepared world context. The wiki derives nothing; it reads what preparation wrote. */
+function orbitParents(): Map<string, string> {
+  const context = readJson(resolve(OBJECTS_DIRECTORY, 'sun/prepared/world-context.json'));
+  if (!isRecord(context)) throw new Error('src/objects/sun/prepared/world-context.json is missing. Run pnpm prepare:world-context.');
+  const parents = new Map<string, string>();
+  for (const body of list(context.bodies).filter(isRecord)) {
+    const id = text(body.id), center = isRecord(body.orbit) ? text(body.orbit.centerBodyId) : null;
+    if (id && center) parents.set(id, center);
+  }
+  if (!parents.size) throw new Error('The prepared world context lists no orbits.');
+  return parents;
+}
+
+/** One object and the satellites that orbit it. */
+export interface SystemEntry { object: ObjectRecord; satellites: SystemEntry[] }
+/** One star's system: the star itself, then its members grouped by classification. */
+export interface SystemGroup { id: string; label: string; star: ObjectRecord | null; groups: { label: string; entries: SystemEntry[] }[] }
+
+/** Objects nested by planetary system: the star, its bodies by classification, and each body's satellites under it. */
+export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
+  const parents = orbitParents(), byId = new Map(objects.map(object => [object.id, object]));
+  const rootOf = (id: string) => {
+    const seen = new Set<string>();
+    for (let current = id; ; current = parents.get(current)!) {
+      if (seen.has(current)) throw new TypeError(`${id} has a cyclic orbit chain.`);
+      seen.add(current);
+      if (!parents.has(current)) return current;
+    }
+  };
+  const entries = new Map(objects.map(object => [object.id, { object, satellites: [] as SystemEntry[] }]));
+  const hosted = new Set<string>();
+  // A satellite hangs under the object it orbits; every other object hangs under the star its orbit chain reaches.
+  for (const object of objects) {
+    const parent = parents.get(object.id);
+    if (object.group !== 'satellite' || parent === undefined) continue;
+    const host = entries.get(parent);
+    if (!host) continue;
+    host.satellites.push(entries.get(object.id)!);
+    hosted.add(object.id);
+  }
+  const systems = new Map<string, SystemGroup>();
+  const outside: ObjectRecord[] = [];
+  for (const object of objects) {
+    if (hosted.has(object.id)) continue;
+    const root = parents.has(object.id) ? rootOf(object.id) : object.id;
+    const star = byId.get(root);
+    if (!star || star.group !== 'star' || (root === object.id && !objects.some(member => member.id !== root && parents.has(member.id) && rootOf(member.id) === root))) {
+      outside.push(object);
+      continue;
+    }
+    const system = systems.get(root) ?? { id: root, label: star.system ?? star.title, star: null, groups: [] };
+    systems.set(root, system);
+    if (object.id === root) system.star = object;
+    else system.groups.push({ label: object.groupLabel, entries: [entries.get(object.id)!] });
+  }
+  // Merge each system's per-object rows into one group per classification, keeping readObjects order.
+  for (const system of systems.values()) {
+    const groups = new Map<string, { label: string; entries: SystemEntry[] }>();
+    for (const group of system.groups) {
+      const merged = groups.get(group.label) ?? { label: group.label, entries: [] };
+      merged.entries.push(...group.entries);
+      groups.set(group.label, merged);
+    }
+    system.groups = [...groups.values()];
+  }
+  const rest = groupObjects(outside).map(group => ({ label: group.label, entries: group.objects.map(object => entries.get(object.id)!) }));
+  return [...systems.values(), ...(rest.length ? [{ id: 'outside', label: 'Outside the systems', star: null, groups: rest }] : [])];
+}
+
 export function formatBytes(bytes: number) {
   if (bytes < 1024) return `${bytes} B`;
   const units = ['KB', 'MB', 'GB'];
