@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6b75db6cfe00b0656c4fab746af882dd71da0ea1042d5c70f5afd3873780885d"
+    "sha256": "97c2d5e1bf495c4cf307337dcf1374407b3aea9c10d48044612436a61617dccd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -554,8 +554,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG",
             "missionId": "voyager-2"
           }
@@ -601,8 +601,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL",
             "missionId": "voyager-2"
           }
@@ -655,8 +655,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG",
             "missionId": "voyager-2"
           }
@@ -702,8 +702,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL",
             "missionId": "voyager-2"
           }
@@ -749,8 +749,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG",
             "missionId": "voyager-2"
           }
@@ -803,8 +803,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL",
             "missionId": "voyager-2"
           }
@@ -850,8 +850,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG",
             "missionId": "voyager-2"
           }
@@ -904,8 +904,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL",
             "missionId": "voyager-2"
           }
@@ -951,8 +951,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG",
             "missionId": "voyager-2"
           }
@@ -1005,8 +1005,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL",
             "missionId": "voyager-2"
           }

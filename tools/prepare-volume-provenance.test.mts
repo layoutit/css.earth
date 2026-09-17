@@ -22,7 +22,7 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const sourceFiles = await readdir(resolve(root, 'src/sources'));
   const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: await Promise.all(sourceFiles.filter(path => path.endsWith('.json')).map(async path => JSON.parse(await readFile(resolve(root, 'src/sources', path), 'utf8')))) }));
   const agencies = parseAgencies(JSON.parse(await readFile(resolve(root, 'site/source/agency-logos.json'), 'utf8')));
-  const catalog = parseExplorationCatalog(JSON.parse(await readFile(resolve(root, 'site/source/machines/catalog.json'), 'utf8')), agencies, sources);
+  const catalog = parseExplorationCatalog(JSON.parse(await readFile(resolve(root, 'site/source/facilities/catalog.json'), 'utf8')), agencies, sources);
   const usage = compileSourceUsage(entries, sources), graph = compileContributions(entries, catalog);
   for (const entry of entries) {
     assert.equal(entry.provenance.basis, 'recovered');
@@ -67,13 +67,13 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const lmc = entries.find(entry => entry.id === 'lmc');
   assert.ok(lmc);
   for (const product of lmc.provenance.products) for (const id of ['density-prior', 'catalogue-stars', 'sky-registration']) assert.ok(product.inputs.includes(id));
-  const hubble = graph.edges.filter(edge => edge.objectId === 'm2-9' && edge.attribution.kind === 'machine');
-  assert.ok(hubble.some(edge => edge.attribution.kind === 'machine' && edge.attribution.machineId === 'hubble'));
+  const hubble = graph.edges.filter(edge => edge.objectId === 'm2-9' && edge.attribution.kind === 'facility');
+  assert.ok(hubble.some(edge => edge.attribution.kind === 'facility' && edge.attribution.facilityId === 'hubble'));
   const captures = entries.flatMap(entry => entry.provenance.sources.flatMap(source => source.lensId ? (source.capture?.attributions ?? []).map(attribution => ({ objectId: entry.id, lensId: source.lensId, attribution })) : []));
   const legacyCaptures = captures.filter(capture => ['helix', 'lmc', 'm2-9', 'm42'].includes(capture.objectId));
   assert.equal(legacyCaptures.length, 9);
   assert.deepEqual(legacyCaptures.filter(capture => capture.attribution.kind === 'unresolved').map(capture => `${capture.objectId}/${capture.lensId}`), ['lmc/horalek-widefield']);
-  assert.deepEqual([...new Set(legacyCaptures.flatMap(capture => capture.attribution.kind === 'machine' ? [capture.attribution.machineId] : []))].sort(), ['eso-3-6m', 'hubble', 'mpg-eso-2-2m', 'vista', 'vst', 'wise']);
+  assert.deepEqual([...new Set(legacyCaptures.flatMap(capture => capture.attribution.kind === 'facility' ? [capture.attribution.facilityId] : []))].sort(), ['eso-3-6m', 'hubble', 'mpg-eso-2-2m', 'vista', 'vst', 'wise']);
   const newEntries = entries.filter(entry => ['m1', 'm45', 'm8'].includes(entry.id));
   const newLenses = newEntries.flatMap(entry => entry.controls.map(control => `${entry.id}/${control.id}`)).sort();
   assert.equal(newLenses.length, 14);
@@ -82,22 +82,22 @@ test('all installed volume lenses retain real source-to-product edges', async ()
     'All fourteen added observations name their actual known observing equipment.');
   assert.deepEqual(newCaptures.map(capture => [
     `${capture.objectId}/${capture.lensId}`, capture.attribution.kind,
-    capture.attribution.kind === 'machine' ? capture.attribution.machineId : null,
+    capture.attribution.kind === 'facility' ? capture.attribution.facilityId : null,
   ]).sort((left, right) => String(left[0]).localeCompare(String(right[0]))), [
-    ['m1/chandra-xray', 'machine', 'chandra'],
-    ['m1/hubble-optical', 'machine', 'hubble'],
-    ['m1/spitzer-infrared', 'machine', 'spitzer'],
-    ['m1/vla-radio', 'machine', 'vla'],
-    ['m1/webb-components', 'machine', 'webb'],
-    ['m1/webb-infrared', 'machine', 'webb'],
-    ['m45/noirlab-optical', 'machine', 'wiyn-0-9m'],
-    ['m45/optical-composite', 'machine', 'niittee-sharpstar-61edph-iii'],
-    ['m45/spitzer-irac', 'machine', 'spitzer'],
-    ['m45/spitzer-irac-mips', 'machine', 'spitzer'],
-    ['m45/wise-four-band', 'machine', 'wise'],
-    ['m8/eso-optical', 'machine', 'mpg-eso-2-2m'],
-    ['m8/eso-vista', 'machine', 'vista'],
-    ['m8/spitzer-mid-infrared', 'machine', 'spitzer'],
+    ['m1/chandra-xray', 'facility', 'chandra'],
+    ['m1/hubble-optical', 'facility', 'hubble'],
+    ['m1/spitzer-infrared', 'facility', 'spitzer'],
+    ['m1/vla-radio', 'facility', 'vla'],
+    ['m1/webb-components', 'facility', 'webb'],
+    ['m1/webb-infrared', 'facility', 'webb'],
+    ['m45/noirlab-optical', 'facility', 'wiyn-0-9m'],
+    ['m45/optical-composite', 'facility', 'niittee-sharpstar-61edph-iii'],
+    ['m45/spitzer-irac', 'facility', 'spitzer'],
+    ['m45/spitzer-irac-mips', 'facility', 'spitzer'],
+    ['m45/wise-four-band', 'facility', 'wise'],
+    ['m8/eso-optical', 'facility', 'mpg-eso-2-2m'],
+    ['m8/eso-vista', 'facility', 'vista'],
+    ['m8/spitzer-mid-infrared', 'facility', 'spitzer'],
   ]);
 });
 

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1f21ec6d863c25c2f7b39e0845bd114184cd8b34c56a7c58d6abe45a08aef063"
+    "sha256": "67c8e4339c81e3030d298d6e84d5972cd8641a1dcef8c1ea477bbb98a8c306b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -487,8 +487,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
             "missionId": "rosetta"
           }

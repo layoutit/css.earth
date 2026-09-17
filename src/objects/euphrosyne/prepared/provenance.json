@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61c26672869c9e83eeb596b531f112f9e4af2ee17c71a5b4b19f223f295d4268"
+    "sha256": "d0ba99f67f34ff1244779f15f9112672b9aa72efe05648b4939eef507fed4e1b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -302,8 +302,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }

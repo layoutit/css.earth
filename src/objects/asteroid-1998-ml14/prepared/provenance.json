@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a805d3cef38d4bdd03d8e6c2a0f4b22c35b4e047396917929514a633e78f788"
+    "sha256": "f04855e4cc16a08b6f424fc92bde6a8c0f933d9e2ec62bf1b4f83a9f539a8e5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -320,14 +320,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
             "missionId": "goldstone-solar-system-radar"
           }

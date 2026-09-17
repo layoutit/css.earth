@@ -157,8 +157,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "terra",
+            "kind": "facility",
+            "facilityId": "terra",
             "missionId": "terra",
             "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg"
           }
@@ -196,8 +196,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "terra",
+            "kind": "facility",
+            "facilityId": "terra",
             "missionId": "terra",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
           }
@@ -260,8 +260,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "suomi-npp",
+            "kind": "facility",
+            "facilityId": "suomi-npp",
             "missionId": "suomi-npp",
             "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
           }

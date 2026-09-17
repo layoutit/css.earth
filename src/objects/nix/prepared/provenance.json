@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b0a85fe699c2d119d861bf5bdba80b5f25876c02d56917a45c51a23808e5736"
+    "sha256": "97762924b616767e396303be42b029d4126bea69e8c2962b23a289bd66df6d22"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -331,8 +331,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://ndownloader.figshare.com/files/24176543",
             "missionId": "new-horizons"
           }
@@ -384,8 +384,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029917/lor_0299174134_0x636_sci.fit",
             "missionId": "new-horizons"
           }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "601064fe3fe490a4997c20851d87f99537c27bbd46389c83b96e3b9b91349e45"
+    "sha256": "6c0708f3df2ce3f5c66fb2cd1c1cba475d234fbee296cfba1928efd9faf03b68"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -340,8 +340,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "The image is reconstructed from the 29 calibrated MATISSE files pinned below; see reference/squeeze-command.txt for the build and command.",
             "missionId": "eso-vlti-matisse-betelgeuse"
           }

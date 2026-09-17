@@ -148,8 +148,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "mars-global-surveyor",
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
             "missionId": "mars-global-surveyor",
             "evidence": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
           }
@@ -186,8 +186,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "odyssey",
+            "kind": "facility",
+            "facilityId": "odyssey",
             "missionId": "odyssey",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
           }
@@ -555,8 +555,8 @@
     {
       "id": "mars-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 19986,
-      "expectedSha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
+      "expectedBytes": 20002,
+      "expectedSha256": "491a324ef342e576e40dc91882418cac617b5bc7db6ea20ee7c53d5360a08782",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

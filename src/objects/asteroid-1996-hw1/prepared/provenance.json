@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8b03af706def72552a3af4bb463fea7bc10a1af6bbfac09f22688b3de2a64221"
+    "sha256": "74db08fbfd07fbe69453a62f96d4f84942034aa4f75c7a04d5c60608b4c1b2e4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -319,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Magri et al. (2011), Icarus 214, 210–227; Arecibo radar, optical lightcurves and NASA/JPL shape archive",
             "missionId": "arecibo-planetary-radar"
           }

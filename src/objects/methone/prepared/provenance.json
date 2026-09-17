@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b01a51ff05aa386c0d68c20b60d2a33a407dd693f1fce94dc412e84d4710ebb"
+    "sha256": "5e41c0bb1150657549fab1adbd48ef237513551735ac9b4791a05c02f16aa86a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -296,8 +296,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -343,8 +343,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.LBL",
             "missionId": "cassini"
           }

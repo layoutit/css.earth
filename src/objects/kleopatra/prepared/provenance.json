@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1011eeb65a1cd4db289d2262c01c56b24dfce93e77e4e98aed7b170bed394154"
+    "sha256": "0b64b0e828042a620ee303f7dcbd1adad4893b368ad8a7e0d22b3665849ce7d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -211,8 +211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }

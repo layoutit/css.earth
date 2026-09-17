@@ -48,7 +48,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `pnpm prepare:text` publishes `prepared/text.json` |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
-| `site/prepared-sources.json` and `site/prepared-machines.json` | Ignored source usage and mission attribution outputs; prepare together |
+| `site/prepared-sources.json` and `site/prepared-facilities.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/objects/README.md) | Shared installation, controls, commands and contribution workflow |
@@ -81,6 +81,15 @@ entry says what was examined, its status (`included`, `excluded`, `unresolved`
 or `deferred`), the finding, evidence links and the commit it was checked at.
 An entry that is not included names what would reopen it in `revisitWhen`.
 Link repository evidence at a commit or pull request; a branch link moves.
+
+A facility keeps the same ledger in `src/facilities/<facility id>/investigations.json`,
+with `facilityId` in place of `objectId`: a telescope's archive, data policy and
+reduction software, and what was run from it. Every facility ledger answers the
+sweep first, one entry each for `archive-access`, `data-policy` and
+`reduction-software`, so facilities compare side by side. Use the facility
+catalogue's id when the facility has a page record; a facility without one keeps
+its ledger all the same. `node tools/report-investigations.mts --facilities` counts
+the catalogue's ground facilities that have ledgers and lists the open decisions.
 
 Give distinct source decisions their own entries. `included` means selected for
 the stated use, not that every scientific claim is qualified. Ledger coverage

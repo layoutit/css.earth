@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "cfht",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "CADC serves CFHT data and answered anonymously on 2026-09-17 through its TAP service (argus, sync and async endpoints). Public files need no credentials; proprietary access is granted by CADC group membership per run.",
+      "revisitWhen": "A body or star in this repository needs CFHT data.",
+      "evidence": [
+        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "The proprietary period is typically 13 months after the end of the semester. No reuse licence is published; CADC asks for its own acknowledgement sentence and directs users to CFHT's acknowledgement page.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/credits.html",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "CFHT detrends with Elixir and CADC stacks with MegaPipe. Both run as services rather than distributed packages: no download or licence is published, and users are asked to cite the MegaPipe paper.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/megapipe/docs/intro.html",
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/megapipe/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "deferred",
+      "finding": "The same screen matched 118 bodies across CADC's Gemini and CFHT collections, 59,021 rows, largest instruments NIRI (37543), GNIRS (6171), ESPaDOnS (5604). The counts are archive-wide, not per telescope.",
+      "revisitWhen": "A Gemini or CFHT candidate from the screen is taken up.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

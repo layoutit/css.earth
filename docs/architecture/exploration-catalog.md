@@ -1,29 +1,33 @@
-# Missions, machines and dataset attribution
+# Missions, facilities and dataset attribution
 
 `OBJECTS` owns navigable scenes. `MISSIONS` owns individual missions.
-`MACHINES` owns the physical instruments credited with observing. A machine can
-serve more than one mission, and a mission can operate several machines. The
-mission's participant list owns that relationship; reverse participation is
-derived.
+`FACILITIES` owns what is credited with observing: spacecraft, landers, rovers and
+ground telescopes. Facility is the term astronomy uses in its own records (the
+[Facilities line of AAS journal articles](https://journals.aas.org/facility-keywords/) lists telescopes and spacecraft alike, each
+with its instruments); the instruments a facility carries, such as MATISSE on the
+VLTI, are not separate records. A facility can serve more than one mission, and a
+mission can operate several facilities. The mission's participant list owns that
+relationship; reverse participation is derived. The page keeps its reader label,
+Machines; the repository names are facility and facilities.
 
-A machine is whatever a dataset credits as its observer, in orbit or on the
+A facility is whatever a dataset credits as its observer, in orbit or on the
 ground. A cited `setting` of `space` or `ground` separates the two halves, and
-validation keeps them apart: a ground machine is `commissioned`, `retired` and
-sited at geodetic coordinates but never launched, while a space machine is
+validation keeps them apart: a ground facility is `commissioned`, `retired` and
+sited at geodetic coordinates but never launched, while a space facility is
 launched but never sited. Arecibo's radar shape of an asteroid is the same
 contribution edge as an orbiter's imagery, so it is the same kind of record.
 
 The catalogues live in
-[`site/source/machines/catalog.json`](../../site/source/machines/catalog.json)
-under `cssearth-machine-catalog@4`. They do not add scene loaders, routes or
-camera owners. Mission and machine IDs are scoped to their domains: the
+[`site/source/facilities/catalog.json`](../../site/source/facilities/catalog.json)
+under `cssearth-facility-catalog@4`. They do not add scene loaders, routes or
+camera owners. Mission and facility IDs are scoped to their domains: the
 spacecraft Juno does not refer to the independently registered asteroid Juno,
 whose own shape is credited to a ground telescope.
 
 ## Authoring and validation
 
 [`exploration-catalog.mts`](../../src/platform/exploration-catalog.mts) validates
-unknown input and returns immutable records. Names, descriptions, machine kinds, settings,
+unknown input and returns immutable records. Names, descriptions, facility kinds, settings,
 agencies, dates and status claims carry citations to the
 [Sources catalogue](../sources-catalogue.md), with a checked date and a field or
 section locator. Participation requires its own citations. Agency records use the existing
@@ -35,33 +39,33 @@ that establish an end before a start. An active status must include its `asOf`
 date and cannot contradict a known earlier end. The card displays the claim's
 date instead of describing it as live status.
 
-A machine carries a `band` only where its own cited source states one. Most
+A facility carries a `band` only where its own cited source states one. Most
 spacecraft carry several instruments across the spectrum, so no single band is
 true of them and none is invented. A body's contributor cards collapse into one
 tabbed card only when every contributor has a distinct band; otherwise they stay
 separate cards, which is the ordinary case for spacecraft.
 
-Separately operated machines get separate records. Instruments,
-containers and return capsules are not automatically machine records. Routine
+Separately operated facilities get separate records. Instruments,
+containers and return capsules are not automatically facility records. Routine
 extensions, encounters and manoeuvres do not automatically create new missions;
 use the source's distinction. Coverage is limited to the records in the catalogue.
 
 Artwork references use `imageId` and `emblemId`. The approved
-[render library](../../site/source/machines/render-library.json) and
-[emblem library](../../site/source/machines/emblem-library.json) own the asset
-bytes and credits. A machine with no 3D model carries a published photograph
+[render library](../../site/source/facilities/render-library.json) and
+[emblem library](../../site/source/facilities/emblem-library.json) own the asset
+bytes and credits. A facility with no 3D model carries a published photograph
 instead, pinned in
-[`photograph-records.json`](../../site/source/machines/photograph-records.json)
+[`photograph-records.json`](../../site/source/facilities/photograph-records.json)
 and prepared by
-[`prepare-machine-photographs.mts`](../../tools/prepare-machine-photographs.mts)
+[`prepare-facility-photographs.mts`](../../tools/prepare-facility-photographs.mts)
 into the same library, where `source.kind` tells a photograph from a render.
 
 Artwork preparation is an explicit maintenance operation; normal builds reuse the
-committed files. `pnpm prepare:machine-photographs` re-acquires each pinned
+committed files. `pnpm prepare:facility-photographs` re-acquires each pinned
 photograph and prepares it to the library's frame.
-`pnpm prepare:machine-renders` clears the flat sidebar background out of the
+`pnpm prepare:facility-renders` clears the flat sidebar background out of the
 approved renders to alpha, flood-filling only from the frame edges and refusing
-any change to artwork RGB, then records where each machine sits so a card can
+any change to artwork RGB, then records where each facility sits so a card can
 crop to it rather than to the empty frame around it.
 
 Approved artwork is public domain or CC BY, with one recorded exception: the
@@ -89,8 +93,8 @@ Source manifests use one of three explicit capture forms:
   "capture": {
     "attributions": [
       {
-        "kind": "machine",
-        "machineId": "osiris-rex",
+        "kind": "facility",
+        "facilityId": "osiris-rex",
         "missionId": "osiris-rex",
         "evidence": "The specific pinned source label or archive reference."
       }
@@ -121,12 +125,12 @@ existing exclusions for schematic interiors, illustrative models, modeled noise
 and schematic morphology. Empty attribution stays empty; names, publishers,
 mission targets and aliases are not association rules.
 
-[`prepare-machines.mts`](../../tools/prepare-machines.mts) compiles the Sources
+[`prepare-facilities.mts`](../../tools/prepare-facilities.mts) compiles the Sources
 and Missions catalogues with their validated records, graphs and dependency hashes.
 The hashes cover source records, every body manifest/provenance/page/descriptor,
 registry and compiler owners, and approved artwork bytes. The common
 [site entry point](../../site/exploration-catalog.mts) verifies these pins and
-exposes `MISSIONS` and `MACHINES`. A stale catalogue fails the build. Astro
+exposes `MISSIONS` and `FACILITIES`. A stale catalogue fails the build. Astro
 renders the current body's cards and relevant vehicle details; the browser does
 not receive the complete graph or walk source provenance.
 

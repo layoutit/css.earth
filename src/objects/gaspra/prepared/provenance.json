@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77d1cc8ade42c8e4e26a11697f26443e2f34907af3da5ab84b4fa1898e291a92"
+    "sha256": "eae57f6cf64f0ef2ee471a7750b5c1641d9e13f6d0e2660d500676084c85f1d4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -529,8 +529,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
             "missionId": "galileo"
           }
@@ -585,8 +585,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
             "missionId": "galileo"
           }
@@ -629,8 +629,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "The preserved credit for this input reads: NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
             "missionId": "galileo"
           }

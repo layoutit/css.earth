@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "76cf61a2e9eb98e35d711ec77d73500682633b4aaed426d7e177de03f69ce876"
+    "sha256": "5b693d81e028830512c2a256756878f1469457dd217e7660807d07e00e6000f8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -319,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }

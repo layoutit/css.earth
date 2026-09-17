@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SCENE_OBJECTS } from '../site/objects.mts';
-import { INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, INVESTIGATION_STATUSES, evidenceLink, parseInvestigationLedger, readInvestigationLedgers } from './investigation-ledger.mts';
+import { FACILITY_SWEEP, INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, INVESTIGATION_STATUSES, evidenceLink, parseFacilityLedger, parseInvestigationLedger, readFacilityLedgers, readInvestigationLedgers } from './investigation-ledger.mts';
 import { readInvestigationSurveys } from './investigation-survey.mts';
 import { INVESTIGATION_INDEX_FILE, formatInvestigationIndex, investigationReport, watchedSource } from './report-investigations.mts';
 import { fixtureRecord } from './test-values.mts';
@@ -76,6 +76,31 @@ test('a ledger entry states its decision, pinned evidence and what would reopen 
     change(ledger);
     assert.throws(() => parseInvestigationLedger(ledger, 'fixture'), TypeError, `Refuses ${label}.`);
   }
+});
+
+test('a facility ledger answers the sweep first and names its own facility', () => {
+  const entry = (id: string) => ({ id, subject: `Facility ${id}`, status: 'deferred', finding: 'Not examined.', revisitWhen: 'The facility is swept.',
+    evidence: ['https://example.org/facility'], checked: [{ date: '2026-09-17', commit: commit('c') }] });
+  const ledger = () => ({ schema: INVESTIGATION_LEDGER_SCHEMA, facilityId: 'fixture-telescope', entries: [...FACILITY_SWEEP.map(entry), entry('instrument-from-raw')] });
+  assert.equal(parseFacilityLedger(ledger(), 'fixture-telescope').entries.length, 4);
+  assert.throws(() => parseFacilityLedger(ledger(), 'another-telescope'), /expects facilityId/);
+  const withoutPolicy = ledger(); withoutPolicy.entries = withoutPolicy.entries.filter(item => item.id !== 'data-policy');
+  assert.throws(() => parseFacilityLedger(withoutPolicy, 'fixture-telescope'), /facility sweep first: data-policy/);
+  assert.throws(() => parseFacilityLedger({ ...ledger(), objectId: 'fixture-telescope' }, 'fixture-telescope'), /unknown field objectId/);
+});
+
+test('every facility ledger parses, and a catalogued facility keeps its catalogue id', async () => {
+  const [ledgers, catalogue] = await Promise.all([readFacilityLedgers(root), readFile(resolve(root, 'site/source/facilities/catalog.json'), 'utf8')]);
+  const ids = new Set((JSON.parse(catalogue) as { facilities: { id: string }[] }).facilities.map(facility => facility.id));
+  assert.ok(ledgers.some(ledger => ledger.facilityId === 'vlti') && ledgers.some(ledger => ledger.facilityId === 'alma'));
+  // A facility no dataset on the page credits keeps a ledger without a catalogue record.
+  assert.deepEqual(ledgers.map(ledger => ledger.facilityId).filter(id => !ids.has(id)).sort(),
+    ['askap', 'chara', 'gemini', 'iram-noema', 'jcmt', 'keck', 'lofar', 'sma', 'subaru']);
+  // Every catalogued ground facility is swept.
+  const ground = new Set((JSON.parse(catalogue) as { facilities: { id: string; setting: { value: string } }[] }).facilities
+    .filter(facility => facility.setting.value === 'ground').map(facility => facility.id));
+  const recorded = new Set(ledgers.map(ledger => ledger.facilityId));
+  assert.deepEqual([...ground].filter(id => !recorded.has(id)), []);
 });
 
 test('a finding many bodies share lives in one shared record, and every record is shared', async () => {

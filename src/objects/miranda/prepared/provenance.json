@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9d9d021007895d7a44930fe16b311898cca3266e4014b78e4a979831c4daeff6"
+    "sha256": "60ad9c3e193e4e0e710db218d02a50bde7bf2b80268b1c0202dc0c10881148de"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -763,8 +763,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download",
             "missionId": "voyager-2"
           }
@@ -834,8 +834,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download",
             "missionId": "voyager-2"
           }

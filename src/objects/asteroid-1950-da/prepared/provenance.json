@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "60b05729cc308a651881bb8f714f70135c161d32483cb93766328adab26f61ba"
+    "sha256": "88009c053f452f14b6337c383b29538bfa8f9ec96e6bcbc6922b882b67004830"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -315,14 +315,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }

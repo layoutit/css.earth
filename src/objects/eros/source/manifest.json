@@ -27,8 +27,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "near-shoemaker",
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
           }
@@ -73,8 +73,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "near-shoemaker",
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
           }
@@ -119,8 +119,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "near-shoemaker",
+            "kind": "facility",
+            "facilityId": "near-shoemaker",
             "missionId": "near-shoemaker",
             "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
           }
@@ -324,8 +324,8 @@
     {
       "id": "eros-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1771,
-      "expectedSha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
+      "expectedBytes": 1772,
+      "expectedSha256": "06caf91e611c4ab5e5110af22327ec204349deb521a7f3dc538c768bae13e796",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

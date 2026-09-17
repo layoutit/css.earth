@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5dc5b69ceb7d3ff6bd07aad2a3eb986f2f302a0586df8b81a76417fea383147c"
+    "sha256": "eb5ffa91cbcad28221d568929d58bb592e018a2a3dd6933c83efe0bf5e6eac67"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -315,8 +315,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Hudson and Ostro (1994), Science 263, 940–943; Hudson, Ostro and Harris (1997), Icarus 130, 165–176; Arecibo and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5f897d4b7d83a683b3e9e57c6c5d9ba1c99ea31825edaa147c0fef6b1decb454"
+    "sha256": "ae1825d4d41d4fbaebd11849d547f9bb31ee319d2d197a469eef5f4d6006fdd8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -319,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           }

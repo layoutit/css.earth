@@ -60,7 +60,7 @@ To update only the default lighting in an already-neutral checkout:
 ```sh
 node tools/objects/refresh-shape-lighting.mts stage --all
 node tools/objects/refresh-shape-lighting.mts publish --all
-node tools/prepare-machines.mts
+node tools/prepare-facilities.mts
 ```
 
 Staging prepares replacement atlases without changing the served assets.
@@ -75,7 +75,7 @@ For a complete material refresh, run:
 
 ```sh
 node tools/objects/refresh-shape-materials.mts --all --resume
-node tools/prepare-machines.mts
+node tools/prepare-facilities.mts
 ```
 
 The refresh retains each lens's triangles, atlas addresses, camera, and other
