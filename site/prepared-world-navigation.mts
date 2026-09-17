@@ -20,14 +20,17 @@ interface FlightPace {speed: number;}
 interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
-import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
+/** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
+const AIMED_AT_CENTER_PIXELS = 2;
+
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
 export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document,
-  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS}) {
+  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, systemCenters = SYSTEM_CENTERS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS; systemCenters?: typeof SYSTEM_CENTERS}) {
   const frames = new Map(objects.map(object => [object.id, object.worldFrame]));
   const arrivals = new Map(objects.map(object => [object.id, object.discovery?.arrival]));
   function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {
@@ -76,6 +79,21 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       }
       return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
         (owner?.frame ?? frames.get(fromId))!.originM);
+    },
+    /** Turn onto a bound pair's centre of mass, keeping the distance: a binary's overview is centred on the pair, not on the
+     * star the scene mounts. Null when the system has no companion, or when the camera already looks at that centre. */
+    systemCenterTarget({ objectId, mount }: TargetRequest) {
+      const pair = systemCenters.get(objectId), frame = frames.get(objectId), owner = mount?.navigation;
+      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
+      if (!pair || !frame || !from || !optics) return null;
+      const centerFrame = { ...frame, originM: pair.centerM };
+      const projection = presentWorldCamera(from, centerFrame, optics);
+      const [ox, oy] = optics.principalOffsetPixels ?? [0, 0];
+      // Closer than the stars are to each other, the pair is not a pair on screen: the star the scene mounts stays the subject.
+      if (projection.distanceM < pair.separationM) return null;
+      if (!projection.centerPixels || Math.hypot(projection.centerPixels[0] - ox, projection.centerPixels[1] - oy) <= AIMED_AT_CENTER_PIXELS) return null;
+      return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: projection.distanceUnits }, centerFrame, optics),
+        focusPositionM: pair.centerM };
     },
     systemTarget({ objectId, fromId, mount, force = false }: TargetRequest) {
       const owner = mount?.navigation, frame = frames.get(objectId);

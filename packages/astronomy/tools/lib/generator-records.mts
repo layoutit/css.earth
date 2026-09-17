@@ -5,7 +5,9 @@ export interface ElementRecord { query: string; elements: KeplerianElements }
 export interface VectorFixture { query: string; rows: VectorRow[] }
 export interface StarRecord { rightAscensionDegrees: number; declinationDegrees: number; positionEpochJulianYear: number; distanceParsecs: number;
   properMotionRaMasPerYear: number; properMotionDecMasPerYear: number; radialVelocityKmPerS: number;
-  sources: { position: string; distance: string; properMotion: string; radialVelocity: string } }
+  /** The star this one is measured to be bound to, with no measured orbit: a wide binary companion. */
+  boundTo?: string;
+  sources: { position: string; distance: string; properMotion: string; radialVelocity: string; binary?: string } }
 
 export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: 0;
   transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; sources: { period: string; shape: string; phase: string; orientation: string } }
@@ -57,7 +59,11 @@ export function readStarRecord(value: unknown): StarRecord {
     properMotionRaMasPerYear: numberValue(record.properMotionRaMasPerYear), properMotionDecMasPerYear: numberValue(record.properMotionDecMasPerYear),
     radialVelocityKmPerS: numberValue(record.radialVelocityKmPerS),
     ...(record.presentationUp === undefined ? {} : { presentationUp: record.presentationUp === 'display-axis' ? 'display-axis' as const : (() => { throw new TypeError('Star presentationUp must be display-axis when stated.'); })() }),
-    sources: { position: stringValue(sources.position), distance: stringValue(sources.distance), properMotion: stringValue(sources.properMotion), radialVelocity: stringValue(sources.radialVelocity) } };
+    ...(record.boundTo === undefined ? {} : { boundTo: stringValue(record.boundTo) }),
+    sources: { position: stringValue(sources.position), distance: stringValue(sources.distance), properMotion: stringValue(sources.properMotion), radialVelocity: stringValue(sources.radialVelocity),
+      ...(sources.binary === undefined ? {} : { binary: stringValue(sources.binary) }) } };
+  // A bound companion states the measurement that binds it; nothing else may claim one.
+  if ((star.boundTo === undefined) !== (star.sources.binary === undefined)) throw new TypeError('A bound star names its companion and the measurement that binds it.');
   if (star.rightAscensionDegrees < 0 || star.rightAscensionDegrees >= 360 || Math.abs(star.declinationDegrees) > 90 || !(star.distanceParsecs > 0) ||
       Object.values(star.sources).some(text => !text.trim())) throw new TypeError('Invalid star astrometry.');
   return star;
