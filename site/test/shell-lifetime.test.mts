@@ -817,7 +817,7 @@ test('choosing the current body from search shows its card without editing the q
 test('a Milky Way breadcrumb previews its own card and preserves the search query', () => {
   const f = fixture(), shell = f.mount(), search = f.selectors.element('.planet-sidebar-search');
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
-  const cancel = shell.beginOverviewSelection('milky-way');
+  const cancel = shell.beginOverviewSelection('milky-way', 'sun');
   assert.equal(f.documentTarget.documentElement.dataset.selection, 'milky-way');
   assert.equal(search.value, 'moon');
   cancel();
