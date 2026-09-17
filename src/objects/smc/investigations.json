@@ -197,19 +197,24 @@
     {
       "id": "delivery-reproducibility",
       "subject": "Reproducing the delivered bank from a clean checkout",
-      "status": "unresolved",
-      "finding": "The prepared bank and its 1,360 slice textures are committed and byte-verified, but reproducing them needs the ignored local reconstruction caches. Unlike the LMC, this object ships no compact bake inputs and no atlas delivery, so a clean checkout can verify the delivery but cannot regenerate it, and the runtime loads 272 slice images per lens instead of three axis atlases.",
+      "status": "included",
+      "finding": "Resolved. The delivery is regenerated from its own checked-in inputs: 9.3 MB of compact replay inputs (fitted emission field, envelope gain map, neutral alpha bank, the VMC ellipsoid density grid, and per lens the registered colour raster with an alpha-only coverage mask) plus numbered records of the laboratory inputs behind them. `prepare:nebulae --if-missing` rebuilds the bank and its axis atlases, and `prepared/**` is no longer tracked. Verified with the ignored laboratory caches moved aside: all 1,360 regenerated slice textures are byte-identical to the promotion output, every lens is value-identical in label, stars, brightness, frame, provenance and leaf geometry, and the committed descriptor pin matches the regenerated bank. This replaces the earlier finding that a clean checkout could verify the bank but not regenerate it, and that the runtime loaded 272 slice images per lens; it now loads three axis atlases.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/src/objects/lmc/source/compact-delivery.json",
-        "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/src/objects/smc/source/lens-manifest.json"
+        "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/src/objects/smc/source/compact/inputs.json",
+        "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/src/objects/smc/source/compact-delivery.json",
+        "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/tools/nebula/application/finite-emission-object.ts",
+        "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/labs/nebula/packages/volume-bake/src/compact-inputs/finite-emission.ts"
       ],
       "checked": [
         {
           "date": "2026-09-17",
           "commit": "101899478bc56f7549cafe9e51d7617cce301a3d"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7"
         }
-      ],
-      "revisitWhen": "Compact material inputs and an atlas delivery recipe are exported for this object, as the LMC already has."
+      ]
     },
     {
       "id": "measured-depth",
@@ -275,9 +280,30 @@
         {
           "date": "2026-09-17",
           "commit": "101899478bc56f7549cafe9e51d7617cce301a3d"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7"
         }
       ],
       "revisitWhen": "The initial-focus payload resolves its host chain, or host validation moves off the single-object fragment."
+    },
+    {
+      "id": "model-relocation",
+      "subject": "Owner relocation and the re-derived model identity",
+      "status": "included",
+      "finding": "Replaying the delivery may not import the laboratory or the fitting methods, so the envelope samplers, the observer-ray conversion, the depth-prior contract and the pinned-density loader moved to volume-core and volume-bake. Those paths are hashed into the model identity, so the accepted fit was re-derived rather than re-labelled: model `ed2688a0…` replaces `075ce045…`. Nothing else changed. The emission field, the envelope, all 342 neutral textures and every registered raster are byte-identical, every fit metric matches to the last digit, and re-baking the nine lenses, the star layer and the promotion reproduced all 1,360 texture digests, all five stacks and frames and all 1,803 star points unchanged.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/labs/nebula/models/smc/constrained/EMISSION-METHOD.md",
+        "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/labs/nebula/packages/volume-core/src/fields/simulation-envelope.ts",
+        "https://github.com/layoutit/css.earth/blob/f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7/labs/nebula/packages/volume-bake/src/compact-inputs/simulation-prior.ts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "f98ef68c4ca0bb9edb53d83d319bfbbe2fe1f8d7"
+        }
+      ]
     }
   ]
 }

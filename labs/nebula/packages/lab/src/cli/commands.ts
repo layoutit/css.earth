@@ -1,5 +1,6 @@
 /** Explicit compatibility commands; no basename search or hidden discovery. */
 export const labCommands: Record<string, string> = {
+  "export-compact-finite-emission": "labs/nebula/packages/lab/src/cli/commands/export-compact-finite-emission.ts",
   "bake-finite-lenses": "labs/nebula/packages/lab/src/cli/commands/bake-finite-lenses.ts",
   "simulation-guided-reconstruction": "labs/nebula/packages/lab/src/cli/commands/simulation-guided-reconstruction.ts",
   "finite-density-material": "labs/nebula/packages/lab/src/cli/commands/finite-density-material.ts",
