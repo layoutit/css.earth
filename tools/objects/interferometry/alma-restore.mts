@@ -19,19 +19,17 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { continuumSelection, parseCalibrationRecord, parseContinuumRanges, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
+import { parseCalibrationRecord, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
+import { pipelineImaging, type PipelineImaging } from './alma-imaging.mts';
+import { parseSelfCalibration, type SelfCalibration } from './alma-selfcal.mts';
 import { toolchainPath } from './toolchain.mts';
 
 export interface ImagingPlan {
   /** The field to image, as the measurement set names it. */
   readonly target: string;
-  /** Pixel size in arcseconds; about a fifth of the beam keeps the point spread function sampled. */
-  readonly cellArcseconds: number;
-  readonly imageSize: number;
-  /** The spectral-window selection to image: the pipeline's line-free ranges when the delivery states them. */
-  readonly spw: string;
-  /** Phase-only self-calibration tables from the delivery's auxiliary products, applied after the shipped calibration. */
-  readonly selfcalTables?: readonly string[];
+  /** The science spectral windows to split, by id. Which channels of them are imaged is the pipeline's own selection, applied
+   * at imaging time: splitting on it would renumber nothing but would discard the channels a later comparison may want. */
+  readonly scienceWindows: string;
 }
 
 const python = (value: string) => `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
@@ -44,7 +42,7 @@ export function applycalStatement(application: CalibrationApplication, visibilit
     `spw=${python(application.spw)}, antenna=${python(application.antenna)}, ` +
     `gaintable=${pythonList(tables.map(table => table.gaintable))}, gainfield=${pythonList(tables.map(table => table.gainfield))}, ` +
     `spwmap=[${tables.map(table => `[${table.spwmap.join(', ')}]`).join(', ')}], interp=${pythonList(tables.map(table => table.interp))}, ` +
-    `calwt=[${tables.map(table => (table.calwt ? 'True' : 'False')).join(', ')}], flagbackup=False)`;
+    `calwt=[${tables.map(table => (table.calwt ? 'True' : 'False')).join(', ')}], applymode='calflagstrict', flagbackup=False)`;
 }
 
 /** The CASA script for one restore: import, flags, calibration, split, image. Written out rather than hidden in a task, so the
@@ -52,8 +50,11 @@ export function applycalStatement(application: CalibrationApplication, visibilit
 export function restoreScript(options: {
   readonly asdm: string; readonly visibilities: string; readonly applications: readonly CalibrationApplication[];
   readonly flagVersion: string | null; readonly plan: ImagingPlan; readonly imageBase: string;
+  readonly imaging: PipelineImaging; readonly selfcal: SelfCalibration | null; readonly tableDirectory?: string;
 }) {
-  const { asdm, visibilities, applications, flagVersion, plan, imageBase } = options;
+  const { asdm, visibilities, applications, flagVersion, plan, imageBase, imaging, selfcal } = options;
+  const targets = `${plan.target}.targets.ms`;
+  const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
     'import os, sys, json',
     'from casatasks import importasdm, flagmanager, applycal, split, tclean, exportfits, casalog',
@@ -61,25 +62,31 @@ export function restoreScript(options: {
     'steps = []',
     `if not os.path.exists(${python(visibilities)}):`,
     // ocorr_mode 'ca' is what the pipeline imports with: cross-correlations and auto-correlations.
-    `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='Antenna Station Receiver Source CalAtmosphere CalWVR CorrelatorMode SBSummary', bdfflags=True, lazy=False, process_caldevice=False)`,
+    // hifa_restoredata's own defaults, so the measurement set carries the metadata the pipeline's did.
+    `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=False)`,
     "    steps.append('importasdm')",
     ...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
       `flagmanager(vis=${python(visibilities)}, mode='restore', versionname=${python(flagVersion)})`,
       "steps.append('flags restored')",
     ]),
     ...applications.map(application => `${applycalStatement(application, visibilities)}\nsteps.append('applycal ' + ${python(application.intent)})`),
-    `split(vis=${python(visibilities)}, outputvis=${python(`${plan.target}.split.ms`)}, field=${python(plan.target)}, spw=${python(plan.spw)}, datacolumn='corrected', keepflags=False)`,
-    "steps.append('split')",
-    // The pipeline self-calibrates the target on itself before imaging; its solutions ship with the delivery.
-    ...((plan.selfcalTables ?? []).length === 0 ? ["steps.append('no self-calibration applied')"] : [
-      `applycal(vis=${python(`${plan.target}.split.ms`)}, gaintable=${pythonList([...plan.selfcalTables!])}, interp=['linearPD'], calwt=False, applymode='calonly', flagbackup=False)`,
-      `steps.append('self-calibration: ' + ${python(String((plan.selfcalTables ?? []).length))} + ' table(s)')`,
-      `split(vis=${python(`${plan.target}.split.ms`)}, outputvis=${python(`${plan.target}.selfcal.ms`)}, datacolumn='corrected', keepflags=False)`,
-      "steps.append('split after self-calibration')",
+    // Every science channel, science target only, and the spectral windows keep their numbers: the self-calibration maps are
+    // indexed by absolute window id, so renumbering them here would misapply the solutions without failing.
+    `split(vis=${python(visibilities)}, outputvis=${python(targets)}, field=${python(plan.target)}, spw=${python(plan.scienceWindows)}, intent='OBSERVE_TARGET#ON_SOURCE', datacolumn='corrected', keepflags=True, reindex=False)`,
+    "steps.append('split targets')",
+    ...(selfcal === null || !selfcal.succeeded ? ["steps.append('no self-calibration applied')"] : [
+      `applycal(vis=${python(targets)}, field=${python(plan.target)}, gaintable=${pythonList(selfcal.tables.map(table => resolveTable(table)))}, ` +
+        `interp=${pythonList([...selfcal.interpolation])}, spwmap=[${selfcal.spectralWindowMaps.map(map => `[${map.join(', ')}]`).join(', ')}], ` +
+        `calwt=False, applymode=${python(selfcal.applyMode)}, flagbackup=False)`,
+      `steps.append('self-calibration at ' + ${python(selfcal.solutionInterval)})`,
     ]),
-    `tclean(vis=${python((plan.selfcalTables ?? []).length === 0 ? `${plan.target}.split.ms` : `${plan.target}.selfcal.ms`)}, imagename=${python(imageBase)}, specmode='mfs', deconvolver='hogbom', gridder='standard', ` +
-      `imsize=${plan.imageSize}, cell=${python(`${plan.cellArcseconds}arcsec`)}, weighting='briggs', robust=0.5, niter=5000, ` +
-      "threshold='0.5mJy', pbcor=True, interactive=False)",
+    // The imaging the pipeline itself performed, from the command log it shipped.
+    `tclean(vis=${python(targets)}, imagename=${python(imageBase)}, field=${python(plan.target)}, spw=${python(imaging.spw)}, ` +
+      `${imaging.scan === null ? '' : `scan=${python(imaging.scan)}, `}${imaging.intent === null ? '' : `intent=${python(imaging.intent)}, `}` +
+      `datacolumn='corrected', specmode='mfs', deconvolver=${python(imaging.deconvolver)}${imaging.terms > 1 ? `, nterms=${imaging.terms}` : ''}, ` +
+      `gridder='standard', imsize=[${imaging.imageSize[0]}, ${imaging.imageSize[1]}], cell=${python(imaging.cell)}, ` +
+      `weighting=${python(imaging.weighting)}, robust=${imaging.robust}, niter=100000, threshold=${python(imaging.threshold)}, ` +
+      "restoringbeam='common', pbcor=True, interactive=False)",
     "steps.append('tclean')",
     `exportfits(imagename=${python(`${imageBase}.image.pbcor`)}, fitsimage=${python(`${imageBase}.fits`)}, overwrite=True, dropdeg=False)`,
     "steps.append('exportfits')",
@@ -129,35 +136,42 @@ export async function restoreExecution(directory: string, plan: ImagingPlan) {
   run('tar', ['xzf', caltables, '-C', calibration], work);
   const flags = await findOne(unpacked, name => name.endsWith('.ms.flagversions.tgz'), 'flag version archive');
   run('tar', ['xzf', flags, '-C', calibration], work);
-  // The auxiliary products carry the line-free continuum ranges and the self-calibration solutions.
+  // The auxiliary products carry the self-calibration solutions and the record that says how to apply them.
   const products = resolve(work, 'auxproducts');
   await mkdir(products, { recursive: true });
-  const auxproducts = await findOne(unpacked, name => name.endsWith('.auxproducts.tgz'), 'auxiliary product archive').catch(() => null);
-  if (auxproducts) run('tar', ['xzf', auxproducts, '-C', products], work);
+  const auxproducts = await findOne(unpacked, name => name.endsWith('.auxproducts.tgz'), 'auxiliary product archive');
+  run('tar', ['xzf', auxproducts, '-C', products], work);
   const staged = await readdir(calibration);
   const missing = requiredTables(applications).filter(table => !staged.includes(table));
   if (missing.length) throw new Error(`The calibration archive is missing ${missing.length} table(s) the record applies: ${missing[0]}`);
   const versions = await savedFlagVersions(calibration);
+  const flagVersion = pipelineFlagVersion(versions);
+  // The pipeline's flags are half of what restoring means; running without them would calibrate data it had thrown away.
+  if (flagVersion === null) throw new Error(`The delivery saved no flag version this route recognises (found ${versions.join(', ') || 'none'}).`);
   const asdm = await findOne(unpacked, name => /^uid___A002_[0-9A-Za-z_]+$/u.test(name), 'raw ASDM directory', false);
   const visibilities = `${basename(asdm)}.ms`;
-  const continuum = await readFile(resolve(products, 'cont.dat'), 'utf8').then(text => {
-    const ranges = parseContinuumRanges(text).get(plan.target);
-    return ranges?.length ? continuumSelection(ranges) : null;
-  }, () => null);
-  const selfcal = await readdir(products, { withFileTypes: true }).then(entries => {
-    const directory = entries.find(entry => entry.isDirectory() && entry.name.startsWith('sc_workdir_'));
-    if (!directory) return [];
-    return readdir(resolve(products, directory.name), { withFileTypes: true })
-      .then(tables => tables.filter(table => table.isDirectory() && table.name.endsWith('.g')).map(table => resolve(products, directory.name, table.name)).sort());
-  }, () => []);
-  const resolved: ImagingPlan = { ...plan, spw: plan.spw || continuum || '', selfcalTables: plan.selfcalTables ?? selfcal };
-  const script = restoreScript({ asdm, visibilities, applications, flagVersion: pipelineFlagVersion(versions), plan: resolved, imageBase: resolve(work, `${plan.target}.restored`) });
+
+  const log = await findOne(unpacked, name => name.endsWith('.casa_commands.log'), 'pipeline command log');
+  const imaging = pipelineImaging(await readFile(log, 'utf8'), plan.target);
+  const selfcalRecord = await readdir(products, { withFileTypes: true })
+    .then(entries => entries.find(entry => entry.isFile() && entry.name.endsWith('.selfcal.json'))?.name ?? null);
+  const selfcal = selfcalRecord ? parseSelfCalibration(JSON.parse(await readFile(resolve(products, selfcalRecord), 'utf8'))) : null;
+  const workdir = (await readdir(products, { withFileTypes: true })).find(entry => entry.isDirectory() && entry.name.startsWith('sc_workdir'));
+  if (selfcal?.succeeded && !workdir) throw new Error('The delivery self-calibrated but ships no table directory.');
+  if (selfcal?.succeeded) {
+    const tables = await readdir(resolve(products, workdir!.name));
+    const absent = selfcal.tables.filter(table => !tables.includes(table));
+    if (absent.length) throw new Error(`The self-calibration record names ${absent.length} table(s) the delivery does not carry: ${absent[0]}`);
+  }
+
+  const script = restoreScript({ asdm, visibilities, applications, flagVersion, plan, imaging, selfcal,
+    tableDirectory: workdir ? resolve(products, workdir.name) : undefined, imageBase: resolve(work, `${plan.target}.restored`) });
   const scriptPath = resolve(work, 'restore.py');
   await writeFile(scriptPath, script);
   const casa = await toolchainPath('casa');
   run(resolve(casa, 'venv/bin/python'), [scriptPath], calibration);
   return { script: scriptPath, image: resolve(work, `${plan.target}.restored.fits`), applications: applications.length,
-    continuum: resolved.spw, selfcalTables: (resolved.selfcalTables ?? []).length };
+    imaging, selfcal, flagVersion };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -167,10 +181,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const index = process.argv.indexOf(`--${name}`);
     return index > 0 ? process.argv[index + 1] ?? fallback : fallback;
   };
-  const result = await restoreExecution(directory, {
-    target: argument('target', 'R_Dor'), cellArcseconds: Number(argument('cell', '0.006')),
-    imageSize: Number(argument('imsize', '512')), spw: argument('spw', ''),
-  });
-  console.log(`Applied ${result.applications} calibration steps and ${result.selfcalTables} self-calibration table(s).`);
-  console.log(`Imaged ${result.continuum ? `the line-free selection ${result.continuum.slice(0, 60)}...` : 'every channel'}; image at ${result.image}`);
+  const result = await restoreExecution(directory, { target: argument('target', 'R_Dor'), scienceWindows: argument('spw', '25,27,29,31') });
+  console.log(`Restored flags ${result.flagVersion} and applied ${result.applications} calibration steps.`);
+  console.log(result.selfcal?.succeeded
+    ? `Self-calibrated at ${result.selfcal.solutionInterval} with ${result.selfcal.tables.length} table(s), ${result.selfcal.applyMode}.`
+    : 'No self-calibration in this delivery.');
+  console.log(`Imaged with ${result.imaging.deconvolver}${result.imaging.terms > 1 ? ` (${result.imaging.terms} terms)` : ''} at ${result.imaging.cell}; image at ${result.image}`);
 }

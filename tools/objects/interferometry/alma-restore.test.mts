@@ -4,10 +4,16 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseCalibrationRecord } from './alma-calibration.mts';
+import { pipelineImaging } from './alma-imaging.mts';
+import { parseSelfCalibration } from './alma-selfcal.mts';
 import { applycalStatement, pipelineFlagVersion, restoreScript } from './alma-restore.mts';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const record = () => readFile(resolve(root, 'tests/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt'), 'utf8');
+const fixture = (name: string) => readFile(resolve(root, 'tests/fixtures/alma', name), 'utf8');
+const imaging = async () => pipelineImaging(await fixture('casa_commands.tclean.log'), 'R_Dor');
+const selfcal = async () => parseSelfCalibration(JSON.parse(await fixture('selfcal.json')));
+const plan = { target: 'R_Dor', scienceWindows: '25,27,29,31' };
 
 test('an applycal statement restates the record, table for table', async () => {
   const [phase] = parseCalibrationRecord(await record());
@@ -22,46 +28,63 @@ test('an applycal statement restates the record, table for table', async () => {
   assert.ok(applycalStatement(injected, 'x.ms').includes("field='it\\'s'"));
 });
 
-test('the restore script performs import, flags, every application, split and imaging, in that order', async () => {
-  const applications = parseCalibrationRecord(await record());
-  const script = restoreScript({ asdm: '/raw/uid___A002_X1', visibilities: 'uid___A002_X1.ms', applications,
-    flagVersion: 'Pipeline_Final', plan: { target: 'R_Dor', cellArcseconds: 0.006, imageSize: 512, spw: '' }, imageBase: '/work/R_Dor.restored' });
-  const order = ['importasdm(', "mode='restore'", ...applications.map(a => `intent='${a.intent}'`), 'split(', 'tclean(', 'exportfits('];
+test('the restore script performs import, flags, every application, the targets split and imaging, in that order', async () => {
+  const script = restoreScript({ asdm: '/raw/uid___A002_X1', visibilities: 'uid___A002_X1.ms', applications: parseCalibrationRecord(await record()),
+    flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/R_Dor.restored' });
+  const order = ['importasdm(', "mode='restore'", 'PHASE', 'TARGET,CHECK', 'BANDPASS,AMPLITUDE', 'split(', 'tclean(', 'exportfits('];
   let cursor = -1;
   for (const marker of order) {
     const at = script.indexOf(marker, cursor + 1);
     assert.ok(at > cursor, `${marker} comes after what precedes it`);
     cursor = at;
   }
-  assert.ok(script.includes("ocorr_mode='ca'"), 'the ASDM is imported the way the pipeline imports it');
-  assert.ok(script.includes("datacolumn='corrected'"), 'the split takes the calibrated column');
-  assert.ok(script.includes("cell='0.006arcsec'") && script.includes('imsize=512'));
-  // An import that already ran is not repeated: the measurement set is the expensive product.
-  assert.ok(script.includes("if not os.path.exists('uid___A002_X1.ms'):"));
+  // The import takes hifa_restoredata's own arguments, not the manual calibration script's.
+  assert.ok(script.includes("ocorr_mode='ca'") && script.includes('bdfflags=True') && script.includes('lazy=False'));
+  assert.ok(script.includes('CalPointing') && !script.includes('CorrelatorMode'));
+  // The calibration is applied the way the pipeline applied it, which the calapply record does not state.
+  assert.equal(script.match(/applymode='calflagstrict'/gu)?.length, 3);
+  // The split keeps the window numbering, because the self-calibration maps are indexed by absolute window id.
+  assert.ok(script.includes('reindex=False') && script.includes("spw='25,27,29,31'"));
+  assert.ok(script.includes("intent='OBSERVE_TARGET#ON_SOURCE'"));
+  assert.ok(script.includes("if not os.path.exists('uid___A002_X1.ms'):"), 'an import that already ran is not repeated');
 });
 
-test('self-calibration and the line-free selection are used when the delivery carries them', async () => {
-  const applications = parseCalibrationRecord(await record());
-  const base = { asdm: '/raw/x', visibilities: 'x.ms', applications, flagVersion: 'Pipeline_Final', imageBase: '/work/x' };
-  const plain = restoreScript({ ...base, plan: { target: 'R_Dor', cellArcseconds: 0.0055, imageSize: 1024, spw: '' } });
-  assert.ok(plain.includes('no self-calibration applied'));
-  assert.ok(plain.includes("tclean(vis='R_Dor.split.ms'"), 'without self-calibration the split is imaged');
-  const withBoth = restoreScript({ ...base, plan: { target: 'R_Dor', cellArcseconds: 0.0055, imageSize: 1024,
-    spw: '25:455.38~455.65GHz,27:458.55~458.58GHz', selfcalTables: ['/aux/sc/a_p.g', '/aux/sc/b_p.g'] } });
-  assert.ok(withBoth.includes("spw='25:455.38~455.65GHz,27:458.55~458.58GHz'"), 'the split takes the line-free channels');
-  assert.ok(withBoth.includes("applymode='calonly'"), 'self-calibration corrects without flagging what it cannot solve');
-  assert.ok(withBoth.includes("tclean(vis='R_Dor.selfcal.ms'"), 'the self-calibrated data is what gets imaged');
-  // Self-calibration comes after the shipped calibration and before imaging.
-  assert.ok(withBoth.indexOf('/aux/sc/a_p.g') > withBoth.lastIndexOf("intent='"));
-  assert.ok(withBoth.indexOf('/aux/sc/a_p.g') < withBoth.indexOf('tclean('));
+test('imaging follows the pipeline\u2019s own call rather than a plausible guess', async () => {
+  const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
+    flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x' });
+  assert.ok(script.includes("deconvolver='mtmfs', nterms=2"), 'this delivery used mtmfs, whatever the general rule says');
+  assert.ok(script.includes("cell='0.0055arcsec'") && script.includes('imsize=[3200, 3200]'));
+  assert.ok(script.includes("threshold='0.000949Jy'") && script.includes("weighting='briggs', robust=0.5"));
+  assert.ok(script.includes("scan='9,11,13,15,22,24,26,30,33,37'"), 'the scan selection is one string, not the first of ten');
+  // The channels imaged are the pipeline's frame-converted ranges, never cont.dat's LSRK numbers.
+  assert.ok(script.includes('455.3506751226~455.6221594976GHz'));
+  assert.ok(!script.includes('455.38~455.65GHz'));
 });
 
-test('a run without a saved flag version says so instead of restoring one that is not there', async () => {
-  const applications = parseCalibrationRecord(await record());
-  const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications, flagVersion: null,
-    plan: { target: 'R_Dor', cellArcseconds: 0.006, imageSize: 512, spw: '' }, imageBase: '/work/x' });
-  assert.ok(!script.includes("mode='restore'"));
-  assert.ok(script.includes('no flag version restored'));
+test('self-calibration is applied as its record states, with the map that spreads one solution over every window', async () => {
+  const solutions = await selfcal();
+  const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
+    flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: solutions, tableDirectory: '/aux/sc', imageBase: '/work/x' });
+  assert.ok(script.includes("applymode='calflag'"), 'the record says calflag; calonly would let unsolved data through unflagged');
+  assert.ok(script.includes("interp=['linearPD', 'linearPD']"));
+  assert.ok(script.includes('/aux/sc/Target_R_Dor_'), 'the tables are addressed where the delivery put them');
+  assert.ok(script.includes('calwt=False'));
+  // The second table's map is 32 entries of one window; the first table needs none.
+  assert.ok(/spwmap=\[\[\], \[25, 25, /u.test(script));
+  assert.ok(script.includes("split(vis='x.ms', outputvis='R_Dor.targets.ms'"));
+  assert.ok(script.indexOf('/aux/sc/Target_R_Dor_') > script.indexOf("outputvis='R_Dor.targets.ms'"));
+  assert.ok(script.indexOf('/aux/sc/Target_R_Dor_') < script.indexOf('tclean('));
+  assert.ok(script.includes("tclean(vis='R_Dor.targets.ms'"));
+});
+
+test('a delivery whose self-calibration did not succeed is imaged without it', async () => {
+  const solutions = { ...(await selfcal()), succeeded: false };
+  const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
+    flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: solutions, imageBase: '/work/x' });
+  assert.ok(script.includes('no self-calibration applied'));
+  // The shipped calibration still carries its own spectral-window maps; it is the self-calibration tables that are absent.
+  assert.ok(!script.includes('Target_R_Dor_'));
+  assert.ok(script.includes("tclean(vis='R_Dor.targets.ms'"), 'the targets split is still what gets imaged');
   assert.equal(pipelineFlagVersion([]), null);
   assert.equal(pipelineFlagVersion(['Original', 'Pipeline_Final']), 'Pipeline_Final');
   assert.equal(pipelineFlagVersion(['Original', 'statwt_1']), 'statwt_1');
