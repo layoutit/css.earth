@@ -1,25 +1,52 @@
 ---
 import { Image } from 'astro:assets';
 import Default from '@astrojs/starlight/components/MarkdownContent.astro';
+import { REPOSITORY_URL } from '../objects.mts';
 
-const object = Astro.locals.starlightRoute.entry.data.object;
+const { title, description, editUrl, object } = Astro.locals.starlightRoute.entry.data;
+const rows = object ? [
+  { name: 'Classification', value: object.groupLabel },
+  ...(object.system ? [{ name: 'System', value: object.system }] : []),
+  ...object.facts.map(fact => ({ name: fact.label, value: fact.value })),
+  { name: 'Minimaps', value: String(object.maps) },
+  { name: 'Unresolved investigations', value: String(object.openQuestions) },
+  { name: 'Source files', value: `${object.sourceFiles} (${object.sourceSize})` },
+  { name: 'Runtime assets', value: object.runtimeSize },
+] : [];
 ---
 <Default>
-  {object && <aside class="object-infobox" aria-label={`${Astro.locals.starlightRoute.entry.data.title} summary`}>
-    {object.image && <Image class="object-infobox-image" src={object.image} alt="" width={260} height={260} />}
-    {object.status && <p class="object-infobox-status">{object.status}</p>}
-    <table>
-      <tbody>
-        <tr><th scope="row">Classification</th><td>{object.groupLabel}</td></tr>
-        {object.system && <tr><th scope="row">System</th><td>{object.system}</td></tr>}
-        {object.facts.map(fact => <tr><th scope="row">{fact.label}</th><td>{fact.value}</td></tr>)}
-        <tr><th scope="row">Minimaps</th><td>{object.maps}</td></tr>
-        <tr><th scope="row">Unresolved investigations</th><td>{object.openQuestions}</td></tr>
-        <tr><th scope="row">Source files</th><td>{object.sourceFiles} ({object.sourceSize})</td></tr>
-        <tr><th scope="row">Runtime assets</th><td>{object.runtimeSize}</td></tr>
-      </tbody>
-    </table>
-    {object.appUrl && <a class="object-infobox-link" href={object.appUrl}>Open in cssEarth</a>}
-  </aside>}
-  <slot />
+  {object ? <div class="sb-viewer">
+    <article class="sb-readme">
+      <header class="sb-readme-head not-content">
+        <div>
+          <h1 id="_top">{title}</h1>
+          {description && <p class="sb-subtitle">{description}</p>}
+        </div>
+        {typeof editUrl === 'string' && <a class="sb-tool-button" href={editUrl}>Edit README</a>}
+      </header>
+      <slot />
+    </article>
+    {/* Storybook's canvas mode after the docs: the preview above an addon panel. */}
+    <section class="sb-object not-content" aria-label={`${title} viewer`}>
+      <figure class="sb-canvas">
+        <div class="sb-canvas-bar">
+          <span class="sb-badge">{object.status ?? object.groupLabel}</span>
+          {object.appUrl && <a class="sb-tool-button" href={object.appUrl}>Open in cssEarth</a>}
+        </div>
+        <div class="sb-canvas-stage">
+          {object.image ? <Image src={object.image} alt="" width={640} height={640} loading="eager" fetchpriority="high" /> : <p class="sb-canvas-empty">No preview image</p>}
+          <a class="sb-canvas-source" href={`${REPOSITORY_URL}/tree/main/src/objects/${object.id}`}>Show package</a>
+        </div>
+      </figure>
+      <div class="sb-panel">
+        <div class="sb-panel-tabs"><span class="sb-panel-tab">Facts <span class="sb-count">{rows.length}</span></span></div>
+        <div class="sb-panel-body">
+          <table class="sb-args">
+            <thead><tr><th scope="col">Name</th><th scope="col">Value</th></tr></thead>
+            <tbody>{rows.map(row => <tr><th scope="row">{row.name}</th><td>{row.value}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div> : <slot />}
 </Default>

@@ -72,6 +72,8 @@ function articleData(object: ObjectRecord, discovery: unknown) {
     title: object.title,
     description: text(isRecord(card) && isRecord(card.card) ? card.card.text : null) ?? undefined,
     editUrl: `${REPOSITORY_URL}/edit/main/src/objects/${object.id}/README.md`,
+    // The object viewer fills the viewport; the README scrolls in its own pane.
+    tableOfContents: false,
     object: {
       id: object.id, group: object.group, groupLabel: object.groupLabel, system: object.system, status, facts,
       image: existsSync(image) ? `../../../public/navigation/${object.id}-context.webp` : undefined,
