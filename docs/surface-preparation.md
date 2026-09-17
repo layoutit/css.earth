@@ -423,7 +423,29 @@ at a time and supplies the same interpretation to the globe and sidebar map.
 ## Internal fill for globe seams
 
 Spherical and ellipsoidal objects share one retained interior disc. Irregular
-body meshes are excluded. The common presentation compiler measures the actual
+body meshes cannot use it: the disc's inner ellipsoid is limited by the nearest
+leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks outside it
+stay open. An irregular body whose recipe sets `interiorSlices` instead gets
+slices of its own mesh (`tools/prepared-interior-slices.mts`):
+
+- Each slice is the loop where a plane through the body origin cuts the leaves,
+  for six plane normals (the icosahedron axes). It is drawn as a fan of solid
+  rectangles, one per outline edge, reaching from the edge to the origin.
+- Chrome depth-sorts element boxes, not what is drawn in them, so each slice is
+  the largest shrink of its loop whose rectangles cut no surface leaf box. With
+  every surface indent caught by that test, the rectangles stay inside the body.
+- The leaves are solid one-colour rectangles because Chrome gives such layers no
+  raster tiles. Triangle slice leaves (corner-shaped `u`) at DPR 2 exhausted the
+  GPU raster budget from zoom 1.75, and Chrome dropped tiles of surface leaves
+  in front of the slice; with an 8 GB budget the same view was correct.
+- The body's leaves overlap nothing (`seamBleed` 0). The runtime shows the slice
+  whose normal is nearest the view and gives the others `display: none`.
+
+Measured on Alphonsina (elevation lens, pixelmatch against main, threshold 0.1,
+five poses): 0.34–0.57% at default zoom, mostly at the limb where the overlap no
+longer blurs the outline, and 0.002–0.036% at maximum zoom.
+
+The disc for globes works as follows. The common presentation compiler measures the actual
 surface leaf planes in the body's frame and fits an inner ellipsoid behind
 them. It reserves two raster pixels around the 512px disc for antialiasing.
 Every point on the camera-facing disc stays inside those prepared bounds as the

@@ -24,6 +24,10 @@ Independent 8192 area-stratified samples in each direction measured nearest-tria
 
 Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
 
+Its surface leaves overlap nothing; slices of its own mesh fill the cracks between them ([method and limits](../../../docs/surface-preparation.md#internal-fill-for-globe-seams)). Against main (elevation lens, pixelmatch, threshold 0.1, five poses): 0.34–0.57% at default zoom, mostly at the limb, and 0.002–0.036% at maximum zoom.
+
+![Main, interior slices and their pixelmatch difference at yaw 60° default zoom and at yaw 60° and 220° maximum zoom](evidence/interior-slices-pixelmatch.webp)
+
 ## Known problems
 
 Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not source surface maps; no albedo, photographic color, regolith or composition is inferred. Elevation shows the radius of the original model minus a 29 km sphere, on a -10 to 20 km legend.
