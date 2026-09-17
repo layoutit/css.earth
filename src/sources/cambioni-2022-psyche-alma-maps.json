@@ -1,0 +1,53 @@
+{
+  "id": "cambioni-2022-psyche-alma-maps",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Maps of thermal inertia, dielectric constant and brightness temperature of asteroid (16) Psyche derived from ALMA data",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.6321315"
+    }
+  ],
+  "creators": [
+    "Saverio Cambioni",
+    "Katherine de Kleer",
+    "Michael Shepard"
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2022-03-04",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.5281/zenodo.6321315",
+      "label": "Numerical data release"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1029/2021JE007091",
+      "label": "Methods and interpretation"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/6321315",
+      "checkedOn": "2026-09-16",
+      "locator": "metadata, CC-BY-4.0 license and per-file md5 checksums"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Saverio Cambioni, Katherine de Kleer and Michael Shepard (2022), maps derived from ALMA observations of (16) Psyche.",
+      "scope": "Numerical maps",
+      "evidence": "https://doi.org/10.5281/zenodo.6321315"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; cite Cambioni et al. (2022), doi:10.1029/2021JE007091.",
+      "scope": "Numerical maps",
+      "evidence": "https://zenodo.org/api/records/6321315"
+    }
+  ]
+}
