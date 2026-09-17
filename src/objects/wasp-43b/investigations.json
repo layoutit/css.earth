@@ -294,6 +294,21 @@
           "commit": "bdd83f655d4ec3ec48fba4d5371b7f9be3947b91"
         }
       ]
+    },
+    {
+      "id": "navigation-marker",
+      "subject": "Distant marker for WASP-43b",
+      "status": "included",
+      "finding": "The marker is the Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; it replaced the scaffold's flat disc in the palette colour of the dayside mean. It is one fixed image, so it shows the dayside at every orbital phase.",
+      "evidence": [
+        "https://zenodo.org/records/12627524"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
+        }
+      ]
     }
   ]
 }
