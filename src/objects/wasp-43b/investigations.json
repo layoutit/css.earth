@@ -94,7 +94,7 @@
       "subject": "Single-detector NRS1 and NRS2 maps in the same deposit",
       "status": "excluded",
       "finding": "The deposit also holds 24 x 48 maps from each NIRSpec detector (2.87-3.72 and 3.82-5.18 microns). The white-light map uses both, has the finer grid and is the one the paper's main results describe; the detector maps agree with it at the 1-sigma level in hotspot position. Their temperature maps are single-wavelength conversions against a blackbody star (see deposit-temperature-conversion).",
-      "revisitWhen": "A NIRSpec wavelength comparison lens is wanted; the MIRI slices already compare wavelengths.",
+      "revisitWhen": "A NIRSpec wavelength comparison is wanted as more than a note; see miri-wavelength-slices for why MIRI slices were not kept.",
       "evidence": [
         "https://arxiv.org/abs/2406.10207"
       ],
@@ -106,6 +106,10 @@
         {
           "date": "2026-09-17",
           "commit": "188586d727a9d34acc136b05e53cc027228a755b"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "bdd83f655d4ec3ec48fba4d5371b7f9be3947b91"
         }
       ]
     },
@@ -217,13 +221,12 @@
     },
     {
       "id": "nirspec-refit-lens",
-      "subject": "NIRSpec refit lens: this project's fit of the deposited white-light curve",
-      "status": "included",
-      "finding": "The NIRSpec refit lens fits the deposited white-light curve at preparation time with the paper's model (degree 3, 6 eigencurves, positive), the spin axis on the orbit normal, light time across the orbit, and the transit time measured in the curve (17 s before the package ephemeris): chi-squared 8813.9 over 4202 samples, hot spot -2.34, +7.16 degrees, meridional offset 7.8. Without light time and timing it reproduces ThERESA's corrected-axis fit (8809.6, -2.31, +7.09). Converted over the SVO G395H/F290LP transmission, photon weighted, against BT-Settl CIFIST 4500 K, log g 4.5: dayside 1580 K, nightside 875 K.",
+      "subject": "NIRSpec refit as a lens: this project's fit of the deposited white-light curve",
+      "status": "excluded",
+      "finding": "This project's fit of Challener et al.'s white-light curve (degree 3, 6 eigencurves, spin axis on the orbit normal, light time and the measured transit) gave chi-squared 8813.9 over 4202 samples, hot spot -2.34, +7.16 degrees, dayside 1580 K and nightside 875 K. It was a lens from 2026-09-17 and was removed the same day: it reads the same data as the NIRSpec lens, and its differences (spin axis, stellar spectrum, timing) are analysis choices recorded in the README and in theresa-rerun-hotspot-latitude rather than a new measurement. The fit stays checked by eigenmap-fit.test.mts.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/tests/objects/unit/wasp-43b/lens-fits.test.mts",
-        "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/src/objects/wasp-43b/source/preparation/raster.json",
-        "https://github.com/layoutit/css.earth/blob/64baadf1b720ba1e8cb0e941b26b20fb5730a5c5/tests/objects/unit/wasp-43b/lens-fits.test.mts"
+        "https://github.com/layoutit/css.earth/blob/bdd83f655d4ec3ec48fba4d5371b7f9be3947b91/src/objects/wasp-43b/README.md",
+        "https://github.com/layoutit/css.earth/blob/bdd83f655d4ec3ec48fba4d5371b7f9be3947b91/tests/objects/unit/wasp-43b/eigenmap-fit.test.mts"
       ],
       "checked": [
         {
@@ -233,14 +236,19 @@
         {
           "date": "2026-09-17",
           "commit": "64baadf1b720ba1e8cb0e941b26b20fb5730a5c5"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "bdd83f655d4ec3ec48fba4d5371b7f9be3947b91"
         }
-      ]
+      ],
+      "revisitWhen": "A published NIRSpec map made with the spin axis on the orbit normal, or a decision to show analysis variants as lenses."
     },
     {
       "id": "raw-miri-reduction-lenses",
-      "subject": "MIRI lenses from this project's reduction of the raw program 1366 exposures",
+      "subject": "MIRI lens from this project's reduction of the raw program 1366 exposures",
       "status": "included",
-      "finding": "The 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366 (1-2 December 2022), reduced by tools/objects/jwst/reduce-tso.mts with Bell et al. (2024)'s settings, give the pinned light curves; the tool's white-light export is byte-identical to the pinned file (sha256 a116e36f), and bell-2024-miri-products records its agreement with the deposited curve. Fitted at preparation time with BIC model choice: 5-10.5 micrometres degree 2 with 6 eigencurves, ramp 0.105 d, transit 19.5 s before the package ephemeris, dayside 1527 K and nightside 840 K against Bell et al.'s 1524 +/- 35 and 863 +/- 23 K (5-12 micrometres); longitudinal offset 6.2 degrees east (see hammond-2024-miri-eclipse-map: the difference from Hammond et al.'s 7.5 is their slow-ramp systematics solution). Slices 5-6.5, 6.5-8.5 and 8.5-10.5 micrometres choose degree 2 with 4 eigencurves: dayside 1539, 1493, 1565 K; nightside 835, 837, 914 K; offsets 3.55, 7.8, 8.6 degrees east. At 4 eigencurves every slice puts the hottest latitude near +10 degrees, a property of the basis, so the slices do not locate latitude. Band weights are the star's own median extracted counts per detector column. The first release (commit 188586d727a9d34acc136b05e53cc027228a755b) stopped the ramp time constant at its 0.08 d grid value and reported the hottest point, 5.3 degrees, as the comparison with Hammond et al. From commit 64baadf1b720ba1e8cb0e941b26b20fb5730a5c5 every fit models light time across the orbit (15 s at eclipse) and takes the transit time from its own light curve.",
+      "finding": "The 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366 (1-2 December 2022), reduced by tools/objects/jwst/reduce-tso.mts with Bell et al. (2024)'s settings, give the pinned light curves; the tool's white-light export is byte-identical to the pinned file (sha256 a116e36f), and bell-2024-miri-products records its agreement with the deposited curve. Fitted at preparation time with BIC model choice: 5-10.5 micrometres degree 2 with 6 eigencurves, ramp 0.105 d, transit 19.5 s before the package ephemeris, dayside 1527 K and nightside 840 K against Bell et al.'s 1524 +/- 35 and 863 +/- 23 K (5-12 micrometres); longitudinal offset 6.2 degrees east (see hammond-2024-miri-eclipse-map: the difference from Hammond et al.'s 7.5 is their slow-ramp systematics solution). Band weights are the star's own median extracted counts per detector column. The first release (commit 188586d727a9d34acc136b05e53cc027228a755b) stopped the ramp time constant at its 0.08 d grid value and reported the hottest point, 5.3 degrees, as the comparison with Hammond et al. From commit 64baadf1b720ba1e8cb0e941b26b20fb5730a5c5 every fit models light time across the orbit (15 s at eclipse) and takes the transit time from its own light curve.",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
         "https://arxiv.org/abs/2401.13027",
@@ -262,6 +270,43 @@
         {
           "date": "2026-09-17",
           "commit": "64baadf1b720ba1e8cb0e941b26b20fb5730a5c5"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "bdd83f655d4ec3ec48fba4d5371b7f9be3947b91"
+        }
+      ]
+    },
+    {
+      "id": "miri-wavelength-slices",
+      "subject": "MIRI wavelength slices (5-6.5, 6.5-8.5, 8.5-10.5 micrometres) as lenses",
+      "status": "excluded",
+      "finding": "Three maps fitted to Stage 4 light curves of the same MIRI observation in wide wavelength bins were lenses from 2026-09-17 and were removed the same day. BIC chose degree 2 with 4 eigencurves in each; dayside 1539, 1493 and 1565 K, nightside 835, 837 and 914 K, offsets 3.55, 7.8 and 8.6 degrees east. On a 700-2000 K display these differences are not visible, the offset spread is within what the ramp choice alone moves (about 2 degrees), and at 4 eigencurves every slice put the hottest latitude near +10 degrees, a property of the basis. Wavelength dependence is better described by Bell et al. (2024)'s published dayside and nightside spectra than by near-identical maps.",
+      "revisitWhen": "A published wavelength-resolved map, or slices that differ by more than the analysis uncertainty.",
+      "evidence": [
+        "https://arxiv.org/abs/2401.13027",
+        "https://zenodo.org/records/10525170",
+        "https://github.com/layoutit/css.earth/blob/bdd83f655d4ec3ec48fba4d5371b7f9be3947b91/src/objects/wasp-43b/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "bdd83f655d4ec3ec48fba4d5371b7f9be3947b91"
+        }
+      ]
+    },
+    {
+      "id": "navigation-marker",
+      "subject": "Distant marker for WASP-43b",
+      "status": "included",
+      "finding": "The marker is the Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; it replaced the scaffold's flat disc in the palette colour of the dayside mean. It is one fixed image, so it shows the dayside at every orbital phase.",
+      "evidence": [
+        "https://zenodo.org/records/12627524"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1613af45edc3c34cef4fcdae748f0311d00a6746"
         }
       ]
     }

@@ -6,7 +6,8 @@
  *
  * Downloads are verified by size and sha256; a file already present in a --cache directory with the same hash is linked
  * instead of downloaded again. Git sources are checked out at their pinned commit, the Julia environment is instantiated from
- * the checked-in Project.toml and Manifest.toml, and the PIONIER pipeline is built from ESO's Yorick source package and kit.
+ * the checked-in Project.toml and Manifest.toml, the PIONIER pipeline is built from ESO's Yorick source package and kit, and on
+ * macOS the MATISSE pipeline is rebuilt with LLVM's OpenMP runtime.
  * An installed toolchain records the sha256 of its descriptor; `verify` and `toolchainPath` refuse one built from another.
  * Verified archives are deleted after the build: toolchains are large and the data they reduce are larger. */
 import { createHash } from 'node:crypto';
@@ -102,6 +103,7 @@ export async function installToolchain(id: string, caches: readonly string[] = [
       const archive = requireString(repair.calibration), top = archive.replace(/\.tar\.gz$/u, '');
       run('tar', ['-xzf', resolve(kit, archive), '--strip-components=2', '-C', calibration, `${top}/cal`], { cwd: kit });
     }
+    if (entry.openmp !== undefined && process.platform === 'darwin') await threadMatisse(requireRecord(entry.openmp, `${id} openmp`), files, kit, resolve(root, 'pipeline'), build);
     // The kit's build tree is not needed at run time; Yorick's relocatable install is.
     await rm(kit, { recursive: true, force: true });
   } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit".`);
@@ -109,6 +111,35 @@ export async function installToolchain(id: string, caches: readonly string[] = [
   await rm(downloads, { recursive: true, force: true });
   await writeFile(resolve(root, 'installed.json'), `${JSON.stringify({ id, descriptorSha256: digest }, null, 2)}\n`);
   return root;
+}
+
+/** LLVM's OpenMP runtime built into the pipeline prefix, and one kit package rebuilt against it with the named files' macOS
+ * guard removed. The ESO kits leave OpenMP out on macOS; Linux builds with GCC keep it. */
+async function threadMatisse(openmp: Record<string, unknown>, files: readonly string[], kit: string, prefix: string, build: string) {
+  const runtime = resolve(build, 'openmp'), cmake = resolve(build, 'cmake');
+  await rm(runtime, { recursive: true, force: true }); await rm(cmake, { recursive: true, force: true });
+  for (const [name, target] of [[requireString(openmp.runtime), runtime], [requireString(openmp.runtimeCmake), cmake]] as const) {
+    await mkdir(target, { recursive: true });
+    run('tar', ['-xJf', files.find(file => file.endsWith(name))!, '--strip-components=1', '-C', target], { cwd: build });
+  }
+  // LLVM's standalone runtime build finds its shared CMake modules in a sibling directory named cmake.
+  run('cmake', ['-S', runtime, '-B', resolve(build, 'openmp-build'), '-DCMAKE_BUILD_TYPE=Release', `-DCMAKE_INSTALL_PREFIX=${prefix}`, '-DOPENMP_STANDALONE_BUILD=ON',
+    '-DLIBOMP_OMPD_SUPPORT=OFF', '-DOPENMP_ENABLE_LIBOMPTARGET=OFF', '-DLIBOMP_INSTALL_ALIASES=OFF'], { cwd: build });
+  run('cmake', ['--build', resolve(build, 'openmp-build'), '--parallel', '4'], { cwd: build });
+  run('cmake', ['--install', resolve(build, 'openmp-build')], { cwd: build });
+  const packageName = requireString(openmp.package), source = resolve(kit, packageName), guard = requireString(openmp.guard);
+  if (!await exists(source)) run('tar', ['-xzf', `${packageName}.tar.gz`], { cwd: kit });
+  for (const file of requireArray(openmp.files).map(value => requireString(value))) {
+    const path = resolve(source, file), text = await readFile(path, 'utf8');
+    if (!text.includes(guard)) throw new Error(`${file} no longer has the macOS OpenMP guard; review the kit before threading it.`);
+    await writeFile(path, text.replaceAll(guard, '#if defined (_OPENMP)'));
+  }
+  const env = { FFTWDIR: prefix, ERFADIR: prefix, GSLDIR: prefix, CFITSIODIR: prefix, CPLDIR: prefix, WCSDIR: prefix,
+    // LLVM installs libomp as @rpath/libomp.dylib; the rpath lets configure's test programs and the recipes find it.
+    CPPFLAGS: `-Xpreprocessor -fopenmp -I${resolve(prefix, 'include')}`, LIBS: `-L${resolve(prefix, 'lib')} -lomp`, LDFLAGS: `-Wl,-rpath,${resolve(prefix, 'lib')}` };
+  run('./configure', [`--prefix=${prefix}`], { cwd: source, env });
+  run('make', ['-j4'], { cwd: source, env });
+  run('make', ['install'], { cwd: source, env });
 }
 
 /** Yorick from ESO's source package with its two patches, built without X11; the PIONIER pipeline (pndrs) runs on it. Returns

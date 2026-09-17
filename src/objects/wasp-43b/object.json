@@ -33,27 +33,7 @@
               "material": "emission"
             },
             {
-              "id": "nirspec-refit",
-              "source": "content",
-              "material": "emission"
-            },
-            {
               "id": "miri",
-              "source": "content",
-              "material": "emission"
-            },
-            {
-              "id": "miri-band-1",
-              "source": "content",
-              "material": "emission"
-            },
-            {
-              "id": "miri-band-2",
-              "source": "content",
-              "material": "emission"
-            },
-            {
-              "id": "miri-band-3",
               "source": "content",
               "material": "emission"
             }
@@ -125,7 +105,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e10403e8a6490e8139401143ab79d128696a6df3af29225a12bb898a86c4f0f1"
+        "sha256": "f7330063596ce62d3b6dec61e54e398910fc1e149b2eac9865a18caccbaa7b31"
       }
     },
     "catalog": {
@@ -171,6 +151,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f319886660464fc703cb8c9cdd5d096ec82452d1311f8dc7159bfac7f669d3d0"
+    "sha256": "f4a11c8b421516d2646b0f51faa5e1ea84902f34bc26c0a24ff12b2f1db123de"
   }
 }

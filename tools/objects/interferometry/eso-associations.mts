@@ -16,7 +16,8 @@
 import { access, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { archiveHeader, esoEnvironment, esoHeader, frameTime, rawFrame, runRecipe, type EsoHeader, type EsoPipeline } from './eso-pipeline.mts';
-import { toolchainPath } from './toolchain.mts';
+import { requireFiniteNumber, requireRecord } from '../../source-values.mts';
+import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 
 export interface AssociationFile { readonly category: string; readonly name: string }
 export interface Association {
@@ -91,6 +92,8 @@ export interface InstrumentReduction {
   readonly steps: Readonly<Record<string, AssociationStep>>;
   /** The calibrator association under the science one, and the keywords its exposure must share with the science exposure. */
   readonly calibrator: { readonly association: string; readonly keys: readonly string[] };
+  /** Raw categories each read by one step only, deleted once that step's products exist (a MATISSE exposure is 1.7 GB). */
+  readonly discardRaw?: readonly string[];
   /** The recipe that calibrates the science products with the calibrator products. */
   readonly calibrate: {
     readonly recipe: string; readonly options?: readonly string[];
@@ -232,11 +235,14 @@ export async function reduceAssociation(reduction: InstrumentReduction, tree: As
 }
 
 /** Run a recipe unless the step directory already records a run with the same recipe, options and input files, each file
- * identified by path, size and modification time so a rerun upstream step invalidates what read its products. The recipe's
+ * identified by path, size and modification time so a rerun upstream step invalidates what read its products. An archive frame
+ * in the raw directory is identified by its name, which fixes its content: it is downloaded only when the step must run, and a
+ * discarded one is not fetched again for a step already done. The recipe's
  * products in the kept categories are returned; everything else it wrote is deleted. */
-async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe: string, frames: Frames, options: readonly string[], categories: readonly string[]) {
-  const files = await Promise.all(frames.map(async ([path, tag]) => { const { size, mtimeMs } = await stat(path); return [path, tag, size, mtimeMs] as const; }));
-  const record = resolve(work, name, 'products.json'), inputs = JSON.stringify({ recipe, options, files, categories });
+async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe: string, frames: Frames, options: readonly string[], categories: readonly string[],
+  raw: { readonly directory: string; readonly discard: readonly string[] }) {
+  const archiveId = (path: string) => archiveFrameId(path, raw.directory);
+  const record = resolve(work, name, 'products.json'), inputs = JSON.stringify({ recipe, options, files: await stepFiles(frames, raw.directory), categories });
   if (await exists(record)) {
     const previous = JSON.parse(await readFile(record, 'utf8')) as unknown;
     if (typeof previous === 'object' && previous && 'inputs' in previous && 'products' in previous && previous.inputs === inputs && Array.isArray(previous.products)
@@ -245,6 +251,7 @@ async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe
       if ((await Promise.all(products.map(product => exists(product.path)))).every(Boolean)) return products;
     }
   }
+  for (const [path] of frames) { const id = archiveId(path); if (id) await rawFrame(id, raw.directory); }
   const kept: Product[] = [];
   for (const path of await runRecipe(pipeline, work, name, recipe, frames, options)) {
     const category = (await esoHeader(path))['ESO PRO CATG'];
@@ -252,7 +259,24 @@ async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe
     else await rm(path);
   }
   await writeFile(record, JSON.stringify({ inputs, products: kept }, null, 2) + '\n');
+  for (const [path, tag] of frames) if (archiveId(path) && raw.discard.includes(tag)) await rm(path, { force: true });
   return kept;
+}
+
+const ARCHIVE_FRAME = /^((?:M\.)?[A-Z]+\.\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3})\.fits$/u;
+
+/** The archive id of a frame directly in the raw directory, or undefined for any other file. */
+export function archiveFrameId(path: string, rawDirectory: string) {
+  if (!path.startsWith(`${rawDirectory}/`)) return undefined;
+  return ARCHIVE_FRAME.exec(path.slice(rawDirectory.length + 1))?.[1];
+}
+
+/** How a step's inputs are identified for reuse: archive frames by name, everything else by size and modification time. */
+export async function stepFiles(frames: Frames, rawDirectory: string) {
+  return Promise.all(frames.map(async ([path, tag]) => {
+    if (archiveFrameId(path, rawDirectory)) return [path, tag, 'archive'] as const;
+    const { size, mtimeMs } = await stat(path); return [path, tag, size, mtimeMs] as const;
+  }));
 }
 
 /** Calibrate one science frame with an installed toolchain: fetch the tree, reduce it, and write calibrated.json beside the work. */
@@ -261,19 +285,23 @@ export async function calibrateFromAssociations(reduction: InstrumentReduction, 
   const calibrationRoot = resolve(root, 'calib/share/esopipes/datastatic');
   const kits = (await readdir(calibrationRoot)).filter(name => name.startsWith(`${reduction.toolchain}-`));
   if (kits.length !== 1) throw new Error(`${kits.length} ${reduction.toolchain} calibration directories in ${calibrationRoot}.`);
-  const pipeline = esoEnvironment(resolve(root, 'pipeline'), resolve(work, 'home'));
+  // A toolchain built with OpenMP runs the thread count its descriptor measured; libomp would otherwise start one per core, and
+  // MATISSE's memory grows with them.
+  const openmp = (await toolchainDescriptor(reduction.toolchain)).entry.openmp;
+  const threads = openmp === undefined ? 1 : requireFiniteNumber(requireRecord(openmp, `${reduction.toolchain} openmp`).threads);
+  const pipeline = esoEnvironment(resolve(root, 'pipeline'), resolve(work, 'home'), { OMP_NUM_THREADS: String(threads) });
   const tree = await associationTree(dpId, work);
   const calibration = resolve(calibrationRoot, kits[0]!);
   const calibrators = await Promise.all(calibratorIds.map(async id => ({ dpId: id, tree: await associationTree(id, work) })));
   const result = await reduceAssociation(reduction, tree, dpId, {
     header: name => archiveHeader(name, resolve(rawDirectory, 'headers')),
-    frame: name => rawFrame(name, rawDirectory),
+    frame: async name => resolve(rawDirectory, `${name}.fits`),
     kitFrame: async pattern => {
       const matches = (await readdir(calibration)).filter(name => pattern.test(name));
       if (matches.length !== 1) throw new Error(`${matches.length} kit files match ${pattern}.`);
       return resolve(calibration, matches[0]!);
     },
-    run: (step, recipe, frames, options, categories) => runStep(pipeline, work, step, recipe, frames, options, categories),
+    run: (step, recipe, frames, options, categories) => runStep(pipeline, work, step, recipe, frames, options, categories, { directory: rawDirectory, discard: reduction.discardRaw ?? [] }),
   }, calibrators);
   await writeFile(resolve(work, 'calibrated.json'), JSON.stringify(result, null, 2) + '\n');
   return result;

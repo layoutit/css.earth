@@ -118,8 +118,29 @@
           "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/matisse/matisse-kit-2.5.0.tar.gz",
           "bytes": 138702676,
           "sha256": "fe8101ec2ab21376b0d7615c820c954f56b6793370a84c87eddc4c3e5280a43a"
+        },
+        {
+          "path": "openmp-20.1.8.src.tar.xz",
+          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/openmp-20.1.8.src.tar.xz",
+          "bytes": 1093976,
+          "sha256": "b21c04ee9cbe56e200c5d83823765a443ee6389bbc3f64154c96e94016e6cee9"
+        },
+        {
+          "path": "cmake-20.1.8.src.tar.xz",
+          "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/cmake-20.1.8.src.tar.xz",
+          "bytes": 8652,
+          "sha256": "3319203cfd1172bbac50f06fa68e318af84dcb5d65353310c0586354069d6634"
         }
       ],
+      "openmp": {
+        "why": "MATISSE 2.5.0 compiles its OpenMP loops out on macOS (#if defined (_OPENMP) && !defined( __APPLE__)), so mat_raw_estimates ran on one core: 759 s for a Betelgeuse LM exposure. With LLVM's OpenMP runtime and the guard removed in these files, 4 threads take 444 to 479 s and peak at 13.3 to 14.6 GB. mat_opd_wvpo.c keeps its guard: threaded, its loops share a status variable and changed the band-edge channel's squared visibility and closure phase. With these files threaded the product equals the single-threaded one except the differential-phase error of that band-edge channel (4.985 um), a bootstrap estimate.",
+        "package": "matisse-2.5.0",
+        "runtime": "openmp-20.1.8.src.tar.xz",
+        "runtimeCmake": "cmake-20.1.8.src.tar.xz",
+        "guard": "#if defined (_OPENMP) && !defined( __APPLE__)",
+        "files": ["hdrl/hdrl_utils.h", "hdrl/catalogue/hdrl_cat_def.h", "matisse/mat_apply_staticcalib.c", "matisse/mat_ext_beams_lib.c", "matisse/mat_shift.c"],
+        "threads": 4
+      },
       "executable": "pipeline/bin/esorex"
     }
   }
