@@ -1589,8 +1589,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-infrared-surface@2x.webp",
-          "bytes": 326992,
-          "sha256": "526ed58b00d2d33e358a8bb22622cf7f80cca91dd1f2e4aec1096f1b8c8e79e1",
+          "bytes": 323868,
+          "sha256": "a882ef8b8f8ab0aae01c42b278fd04128cb02ba38e77b0c2f13c00ebf0093e5d",
           "verification": "bytes-verified"
         }
       ],
@@ -1648,8 +1648,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
-          "bytes": 7892190,
-          "sha256": "4dc7ba04a5e4ecb729bfabdbb90eec9f269a93b43c839252a06ffb1c051ed551",
+          "bytes": 7777914,
+          "sha256": "5d2771b2a04b1e96870d2a0a250ef160c104d1058d7fb50617f5f72148e2f9be",
           "verification": "bytes-verified"
         }
       ],
@@ -1702,8 +1702,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-elevation-surface@2x.webp",
-          "bytes": 29160830,
-          "sha256": "99cde638c95325fd26d1886a85dc822099ce6b1417a369338202400b78f0f370",
+          "bytes": 28818678,
+          "sha256": "e999647d01d14ea4c71cb5c3838662d936a2d902bba51297c1aeb10f0401ebe6",
           "verification": "bytes-verified"
         }
       ],
@@ -1756,8 +1756,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-maplet-resolution-surface@2x.webp",
-          "bytes": 396862,
-          "sha256": "bf9df10e7478f2902d91ac095597bb32a5f01bd7494109a714ae8d40e1c581a7",
+          "bytes": 390798,
+          "sha256": "73dfc28ffc89fa07d02bc4d22f2945e9410edaee0b71823c0bf325dd332edffa",
           "verification": "bytes-verified"
         }
       ],
@@ -1810,8 +1810,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-image-count-surface@2x.webp",
-          "bytes": 2509610,
-          "sha256": "b197a491e8676529c16edc401d1590141489950e6971c9aaa2f3d8465d1c6580",
+          "bytes": 2481168,
+          "sha256": "c73fa78812e16a004e473c0b50ac7cc0dc396fc09e5e4075f9c9b507340abee1",
           "verification": "bytes-verified"
         }
       ],
@@ -1862,8 +1862,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-ice-absorption-surface@2x.webp",
-          "bytes": 298506,
-          "sha256": "7dcbcda8c40a7be61cf3b5735d7a9e35b4f64951f8687cd4bbc3ef1f7cb954e8",
+          "bytes": 295502,
+          "sha256": "d4e05c2e098721cd204a36ac56697c100e454db4498f8acefb88293c8ac976e4",
           "verification": "bytes-verified"
         }
       ],
@@ -1908,8 +1908,8 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-iss-surface@2x.webp",
-          "bytes": 1058234,
-          "sha256": "cd41f7e4e6148a3b5aa1bad2f3f02c559fa3520aa1c9d40ca4a078adec98dd3d",
+          "bytes": 1051990,
+          "sha256": "6707d269ba030d87e9e4a18dfcf85c5c7049d243ce0258045dbf780ebbc684b1",
           "verification": "bytes-verified"
         }
       ],
@@ -2166,7 +2166,7 @@
   },
   "lastPreparation": {
     "objectId": "phoebe",
-    "materialSha256": "cf071462b8b23c5ad5ecad3589db04ad2361966275dfc3dc0412aa507cbde060",
+    "materialSha256": "efa0c983f63d850c8abb8bab4fe99bf97b87829c08f73f916b3972562a28f2e7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

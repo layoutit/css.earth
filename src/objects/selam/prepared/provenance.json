@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afc93efd50c41e89db2188d38588526d548cf5931b251c7ef03f045e441a5cee"
+    "sha256": "6543df0f69cdc25dc8961b68c88b979ff746222b04ee064cfff88ff3e0c4d9b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "599d697fa0ad279c0c512cb5fdbc5672567673951be96d2657c9309094855f17",
+      "sha256": "7a118173085e530dde860bc1f5d041ef85258d8fc5a3bfd504b9104bf03ca964",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 1024
             },
             "faceBudget": 1024,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -280,8 +279,8 @@
         },
         {
           "url": "/scenes/selam/selam-shape-surface@2x.webp",
-          "bytes": 37532,
-          "sha256": "2c50fee2496aee540de4c05c9e31546c05e57864c2c658c19deeda8acb9b7351",
+          "bytes": 55874,
+          "sha256": "88cf8afeb615d6ed1b5f73a19079e14b2e7ea66f881a1dd680509b88f5e8a8f1",
           "verification": "bytes-verified"
         }
       ],
@@ -352,7 +351,7 @@
   },
   "lastPreparation": {
     "objectId": "selam",
-    "materialSha256": "c912cc90e6441040ee88806220017e6a1ae8fa8cd1099b45628230f1af5d513d",
+    "materialSha256": "ba8b70012a55ac34e7d2cd0fd75a9fc63268d8a66725a3d68cb5a24312a5c5c5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

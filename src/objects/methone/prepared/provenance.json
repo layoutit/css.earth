@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4f82b74f9fd0fc72037e4153da427e2b951900c84b4f224dfa0fe9a92cccd34b"
+    "sha256": "59dabfa492ee31410a641a64bbe7bdbeecc5e3dae68221482fca7425dcab11cf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c38dddf26b7f4483757c6d9b8f3fb1027f688a405727f8859c13c893a5cccba2",
+      "sha256": "7e8fde415f6903a5f2a66fb5f51c0875c99287c1c4f0d7d92119bb5843eb45f3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -118,8 +118,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 35,
@@ -468,8 +467,8 @@
         },
         {
           "url": "/scenes/methone/methone-normal-surface@2x.webp",
-          "bytes": 67410,
-          "sha256": "6c88bfbec2d2484995e900bf605b03f0273ce35b16f618fa575549b49bacbd77",
+          "bytes": 79084,
+          "sha256": "df006ad13adefb7ea833533fba7cc54cb552d96349b22565c62c186c50666ca9",
           "verification": "bytes-verified"
         }
       ],
@@ -540,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "methone",
-    "materialSha256": "da75ee071a25a0977955ca7c69c09e1a578aafc39ce3f5b700b7dfa6f9b773f2",
+    "materialSha256": "d9da297e2c02bceec18c76d055fb39ab95373f6937d70b133cf194279b96f8a4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

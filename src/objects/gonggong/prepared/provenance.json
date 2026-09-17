@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8bb408156a65f441f41bd670f64c040d0d9c456821a9f361d7d293b3605ca4c8"
+    "sha256": "a609cc964f9093702923d52ccc38593f9e2faa5fceef7bec99229138b0cdc448"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8477d709c84b5ffe80e2d4189f59cc585230a90b7a66f5fa9dea58bdf19b9717",
+      "sha256": "4b7e0c2dd3a2a98eac44569cfa454ae757d0bb7d0e0db298a664f9ff259c7840",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 15374.999999999995,
@@ -349,8 +348,8 @@
         },
         {
           "url": "/scenes/gonggong/gonggong-model-surface@2x.webp",
-          "bytes": 57282,
-          "sha256": "fadf1c55e665cfdb85c9f8ba8915cffc9519fb2d5b2f5339d87ce51ac9695b36",
+          "bytes": 61932,
+          "sha256": "4e8b680c1f9d21e5ed524de98b20412acfa855ff09cb1a28ed78b5dde5c085a3",
           "verification": "bytes-verified"
         }
       ],
@@ -426,7 +425,7 @@
   },
   "lastPreparation": {
     "objectId": "gonggong",
-    "materialSha256": "09a723e66505720bfa49164e971301dafa0481a48055d94b9679bb4737b621f2",
+    "materialSha256": "bded0e8d797a0625ecfcd91648ea3be14bfa7774ed1032fd13060a61dd125d78",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

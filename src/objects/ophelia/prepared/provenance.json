@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81dbf925426ac3efc73711b293b93a567aef94aacca178bc14711a1a3121f2ae"
+    "sha256": "f05f27140e1a444ec22e8b640b6c2f6b06619bf455c12909249195904b15eb4d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "75ba190459039c4469fb388df3dce7ced8118e9e3c1eb58b0b25dabbe647d4be",
+      "sha256": "c3999c7411842b4897e28bedcd960d37dbb80064903d54966534bb0ca90aa9a3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -77,8 +77,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 500,
@@ -362,8 +361,8 @@
         },
         {
           "url": "/scenes/ophelia/ophelia-model-surface@2x.webp",
-          "bytes": 49918,
-          "sha256": "4fa75b2304ef407d2a688641c7834bf541b521a972d186cb49b4788b6f2a2142",
+          "bytes": 59864,
+          "sha256": "1ad81ef250a6badc08c11c190c9f6f09e6a7be6762b6940e1a2910af87537d4b",
           "verification": "bytes-verified"
         }
       ],
@@ -439,7 +438,7 @@
   },
   "lastPreparation": {
     "objectId": "ophelia",
-    "materialSha256": "9276d57d384c8481a495e52cfe67cfb84e385633e0433af658f05d25ee20865d",
+    "materialSha256": "cf406c2eab86543a332949543e71b23fe76ca2a2bb0791a89002076600ec4e68",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

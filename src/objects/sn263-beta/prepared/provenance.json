@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ae73c33b8072110647e4b74e2e31ec7588b9a105d5a9af1299743615a097499"
+    "sha256": "fb2efde9dde522136d0db01104b0b238051868b4a6c209e6cedc864e7cc64d9d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b350a29cc198ff31bc78f422b81b0531e2700aaaa0ab8aa9b1c553913658793d",
+      "sha256": "53b1e04f4e4a7ee081faf980a02b1be6b09b0db982db2ec27bf0f5e869b4116f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -71,8 +71,7 @@
               "expectedFaces": 2292
             },
             "faceBudget": 800,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -309,8 +308,8 @@
         },
         {
           "url": "/scenes/sn263-beta/sn263-beta-shape-surface@2x.webp",
-          "bytes": 29720,
-          "sha256": "a56952eaece059fa2e6c3740163b48df740d5bf71945954501ca3c1aac611bce",
+          "bytes": 43256,
+          "sha256": "9c95cf5e26329288a0f162b0cd5a82737650f0a859d3fb33452e3b18ae32833d",
           "verification": "bytes-verified"
         }
       ],
@@ -381,7 +380,7 @@
   },
   "lastPreparation": {
     "objectId": "sn263-beta",
-    "materialSha256": "9190119a19aa3be8209bf58687b9234e64dddfbd465c6ff458ecb29b865b2c9a",
+    "materialSha256": "03c372208ef611b812f72d2ccbf07b4e189ad9b8b4fd3e64b8aca39af57ec790",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

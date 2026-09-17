@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f3bdd281c93c44805a38b766d6469c1ccafe23816aefc254721e72dbef61214"
+    "sha256": "9970d8696f7df3192646a02cd2f98a664f6d5f45ee5892467e49dfcad0658bd9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "79996e13eca2929408b653db8592818f10226625b48153372954bd46391ed9b0",
+      "sha256": "9fa7806e8672a91b271fa976a1ebdc3298448a50d20320ffbe6028879aab3e16",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -231,8 +231,7 @@
               "longitudeDirection": "west-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 700,
               "maximumErrorMeters": 1200,
@@ -1062,8 +1061,8 @@
         },
         {
           "url": "/scenes/thebe/thebe-elevation-surface@2x.webp",
-          "bytes": 176304,
-          "sha256": "a327d2569e5d653ac24bb304f51cb195d314bfe5394862cfb9836b8310056166",
+          "bytes": 222810,
+          "sha256": "a5d00af75622e7ff47a39f885830a252cf6ceb5ad205f0edf0c14a44dbb376e2",
           "verification": "bytes-verified"
         }
       ],
@@ -1114,8 +1113,8 @@
         },
         {
           "url": "/scenes/thebe/thebe-normal-surface@2x.webp",
-          "bytes": 110596,
-          "sha256": "9e5f8de3e122ede0ec1035008e9284484569d4a1865d837e1f57e08b589502ea",
+          "bytes": 130856,
+          "sha256": "24f528bd8a293363f89eb330279bbbea5f793658eb9e473c6421351e2825f2f9",
           "verification": "bytes-verified"
         }
       ],
@@ -1147,8 +1146,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4718,
-          "sha256": "0b9a4e0181ff7d246118ec84ed6a3c75feb36b1d12a9731f4815a0aa66b1b4d0",
+          "bytes": 4835,
+          "sha256": "344ec3df863bf1c8d14a6cd1080cae571c588422b2d5f9ad9f0f7c7da247dc49",
           "verification": "bytes-verified"
         }
       ],
@@ -1247,7 +1246,7 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "d7117cd926647c36fe51b6d1ca61b110ce524e8dd5a0b747f3717928c773d914",
+    "materialSha256": "6af6759e4f59cbddfc108920d8dd75876a5cb875ded3c48dafefc4d93f518894",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

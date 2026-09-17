@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f179b0ad2920527a070324221a9552d617567c1c1c29f785ac055f5989b0a63c"
+    "sha256": "da5c0593ee590bb8fc58794bf88f2b1e6cde46464ba077ff542eee0d0cd0a5e1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cbacabeb94f2ed0dda7894be2e68df4f487cf92e0cee8be0a7913edd3c881efa",
+      "sha256": "e28ae929b05509f0ca7dd0b860c681329b86fadf7d47688f073cfd1552cd0326",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 505.38039502517836,
@@ -356,8 +355,8 @@
         },
         {
           "url": "/scenes/leucus/leucus-model-surface@2x.webp",
-          "bytes": 47842,
-          "sha256": "8fc5b50dc871de86ff9338b37e11232f28434f9d17f16d5c9c348204776d6628",
+          "bytes": 58256,
+          "sha256": "9d1a79ec7006d1155078332e9714fb0c0d9c721146a03dd3ff5739b7db1e54f1",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +432,7 @@
   },
   "lastPreparation": {
     "objectId": "leucus",
-    "materialSha256": "18cca4942552a78c83cbc0babf26a603fa6f03c5123b2eff5266b32f4274317d",
+    "materialSha256": "37b99500ddf7d09f0a9df74cf91c2a23650acc81ce6d567a6f459a4fd4f0070b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

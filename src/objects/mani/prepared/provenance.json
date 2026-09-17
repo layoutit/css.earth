@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9c241a73bd0de6e2b32a2635a9e30f4b1ce8d4227868c511957c9f3db44ac6bf"
+    "sha256": "008dcbf8432427d842830be20ff61a4fd2fe38ca3fcd19872b49d0fb4a6483d5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "de76e5a86f806793c2a903e1a78bca47230f22941b8b2bfb6920d86e0b7a029c",
+      "sha256": "cc6f2fc665037a7e3127313cc88ad2bc23af3af12cb2ae67cc81123239c18de5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 10069.897791541332,
@@ -336,8 +335,8 @@
         },
         {
           "url": "/scenes/mani/mani-model-surface@2x.webp",
-          "bytes": 55502,
-          "sha256": "678e88a62540eb0ab976fb223291359dd3c3c0010af106b9bd10caeda2d87cd3",
+          "bytes": 62810,
+          "sha256": "44b11931e901b41f7027f7a1ab5de4565ce882bf137139680e10651a97f0d174",
           "verification": "bytes-verified"
         }
       ],
@@ -413,7 +412,7 @@
   },
   "lastPreparation": {
     "objectId": "mani",
-    "materialSha256": "9406204cd90b9f852d2e41d100b48f0bb1579d8d743e2e3c3322ec64065f245d",
+    "materialSha256": "c89fe316180a6c69b71a3042f2ec39d2079a616ac0636b1468d3dfb11a323c42",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

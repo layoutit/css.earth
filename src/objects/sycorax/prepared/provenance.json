@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "39ca90f7efa9598097083ef4c5a65fcea8766064c396b1a11c5a8c4729e799af"
+    "sha256": "a82d88a890e79ffe62bdaf9a5e5d8ee3d1f249f3ae4bb308c51d73a06758895b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e5023f8066145527ef39072187b99557a806a45b679d2efd9cf05cf59147e130",
+      "sha256": "f861633afd8f87e6b892cb74d826539b8cc354c4728379f7262cad0b07a6d00f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 1962.5,
@@ -392,8 +391,8 @@
         },
         {
           "url": "/scenes/sycorax/sycorax-model-surface@2x.webp",
-          "bytes": 56556,
-          "sha256": "2b76092f42976541ccb5f59e2922cf0fa67ca8ff375c1e2bf744d581dd6604d9",
+          "bytes": 61428,
+          "sha256": "b50f7b7b6ff6bf730811f5415c0f2ca281081b454fe2522b279d84e6b6b0faa7",
           "verification": "bytes-verified"
         }
       ],
@@ -469,7 +468,7 @@
   },
   "lastPreparation": {
     "objectId": "sycorax",
-    "materialSha256": "385418afee68a6d6a39a52cec4ec3cf601626f0b9931018ed871ddc07ed7b700",
+    "materialSha256": "67e13c6db9a29f7fd62b3b53af0c25a7971e6535720529520aac639f32467780",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

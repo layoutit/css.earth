@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ec614fd93a400ce409841528f4cbadded5bdce58fa992a275fc8a277f8c9db7"
+    "sha256": "017a6a0ea785ae56281fdaab782085ac6e0c20b03e8be02973c162dc2d840a72"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "caabc104d667787777ec5b3c7c5255bd4d76dcebf15b7830769ea5ef162756d1",
+      "sha256": "a9c5cd71f7ecac1403093d79841429348bf6c3e068d68f26540a6dcf13814515",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 0.7795335650243075,
@@ -322,8 +321,8 @@
         },
         {
           "url": "/scenes/oumuamua/oumuamua-model-surface@2x.webp",
-          "bytes": 33918,
-          "sha256": "d9f697a43cac2561a70400c087eab01fc72c7ad8afdee8ece7c890b70ac57f08",
+          "bytes": 43766,
+          "sha256": "cf1af6ef20e19930a63f64a35c15d53013e7338c37415dccdbbc03392a93c378",
           "verification": "bytes-verified"
         }
       ],
@@ -399,7 +398,7 @@
   },
   "lastPreparation": {
     "objectId": "oumuamua",
-    "materialSha256": "7b39d2ff11159336705a865595f6ba3083e4ab4fd86edf90edca847bc91d038d",
+    "materialSha256": "6a207968528d2f3edd47b948060ccb29a93454927cd413197a48f19c74f1e8fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

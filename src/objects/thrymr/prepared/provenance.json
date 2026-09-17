@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "542adeea419b406b71ff260bbb2748b00cb6264f80a6920cf6e8764f57d4614f"
+    "sha256": "254a6f1f774806366c5f1aece8490d3da8c6b67d97b88bd2f18f950fbe3dce36"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8416e10b8a065f95f994cea2068406a34b8ebda1b5223241fac3a43008e2a77d",
+      "sha256": "968c490518c4ac89185d1bc94cf6534e2fbb7938025dc44323ba2fa3fb62a967",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 95,
@@ -346,8 +345,8 @@
         },
         {
           "url": "/scenes/thrymr/thrymr-model-surface@2x.webp",
-          "bytes": 55890,
-          "sha256": "2b775299cca1d8a9d4d21c24b51279f984fad26b7427be0fcfc7b50cdf43cfb8",
+          "bytes": 62416,
+          "sha256": "5ab5768b4c22020dcd7cbe15d9b7bd283184d71bc3610aed9938c018efffc802",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +422,7 @@
   },
   "lastPreparation": {
     "objectId": "thrymr",
-    "materialSha256": "4cc40992219466bfad505c349219be53873fb75b239ae5ec991237926ac6cdba",
+    "materialSha256": "b0046615b962c4b8e64e44c920a828fa0ab2c82f6a17327d4aa239d34ce70795",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

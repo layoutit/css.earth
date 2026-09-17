@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bdcf5104d5e2ae336da0b356bb9ad06b9004a02567d4f2d1cf90ee7bbfe07f95"
+    "sha256": "b27f0a9f357b035dbaa03628f74aff1fb88b3602ba39851522cc7baf59a0b7e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "32bbdab638e1479b2abc489101d3cd14d0e55e1defeebd984c19cfb78f4e9d96",
+      "sha256": "a9aa498357b569042f2370d2581276159627f5d3e92b873b297766c89658f981",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,8 +81,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 800,
@@ -343,8 +342,8 @@
         },
         {
           "url": "/scenes/thalassa/thalassa-model-surface@2x.webp",
-          "bytes": 45126,
-          "sha256": "ecb4f801a198c7efc0d6444f4b84643919a443c312e0f763502ecbc066d28986",
+          "bytes": 51914,
+          "sha256": "f3642f4fafe20d0c2fa98214d7e6de92e5c21b9d947b1d4e6b0492955330b249",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +419,7 @@
   },
   "lastPreparation": {
     "objectId": "thalassa",
-    "materialSha256": "cab6235b9e97eb2109b634f4215f30ef7348810d6142c3b7a35c54868daa1689",
+    "materialSha256": "d248b41bb15b47986c52bbac413a12c761b7455d3b77bcbb929ac7a524c4017c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

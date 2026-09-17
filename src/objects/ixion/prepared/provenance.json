@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8000cd55da2433a87090e511b2b054e6231af20ab81eb52f247ac97691727fb"
+    "sha256": "c955ef6df275c123ba6ea69ae228741197676e78f43964d8c03db43c419222a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fdf337162562a84bf37d0389ce2c00c7695caed1724505a3031c4606d1cf87a2",
+      "sha256": "463a4a52f28c3a02cb22b1803642b344e870cdfdd43151f72e8f94a5cf43e69d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8833.226733522177,
@@ -316,8 +315,8 @@
         },
         {
           "url": "/scenes/ixion/ixion-model-surface@2x.webp",
-          "bytes": 57110,
-          "sha256": "1c16afd58d15919a1b444f2e924c451f66f816d71a4d038c32cb95a06eca6026",
+          "bytes": 62518,
+          "sha256": "eae293df6e8781a171483375a468605897c22018730ce8f6e1fb09d03e241643",
           "verification": "bytes-verified"
         }
       ],
@@ -393,7 +392,7 @@
   },
   "lastPreparation": {
     "objectId": "ixion",
-    "materialSha256": "e3da57f30f3f94ecd289e64778797b8acf7eb1b95b6075fe9f9bb62dc577377e",
+    "materialSha256": "1266b87d2ed01855a535e7dcd8a2a20b5e36c6aa7262447851bb6f5699b33843",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

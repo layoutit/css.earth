@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d75b212a359adff5e274f2483b5905e4e0d6487425776f0643677765d9817f9"
+    "sha256": "eb54781dc8310e3b6af12286a8f41146bc6db5a9751d0c0fc0960e885039e734"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0f4dfe2894fbc734f54b79f3377cd2bcb8425d1bd07ef07c7ff3d6a2c4ba4f0a",
+      "sha256": "5aa83d548e5311e8a070e10dafed518950959ce2a681abfd875a2b329dcd8274",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 8103.363816496898,
@@ -355,8 +354,8 @@
         },
         {
           "url": "/scenes/varda/varda-model-surface@2x.webp",
-          "bytes": 49844,
-          "sha256": "aab83d0fe89bd5c2283d521f50c6486cc985a171ca1eef213b6607a18f7788c5",
+          "bytes": 58180,
+          "sha256": "6abcdf69fbc3b25eaaa4ecdab9a85c07c2d4ef41fae1b57ba57d4effde5f974d",
           "verification": "bytes-verified"
         }
       ],
@@ -432,7 +431,7 @@
   },
   "lastPreparation": {
     "objectId": "varda",
-    "materialSha256": "0b7542921919bbbbf5aae13dbd3571eb3a4a998b71bc83670474c9117b6d92aa",
+    "materialSha256": "347fb357dd3f7ff1a72b2b4b770a30b553d1b381848465c9f1f9d2c878fb0c44",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

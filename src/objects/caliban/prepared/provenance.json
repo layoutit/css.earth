@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "89b95e76a88455fa916b6765c7110a4ce24e01da5e2c247a33194cc881bdf393"
+    "sha256": "9ae43b9d64f1653b5d3beb2ffb8da266d3fd879184d22375476d003844828dcd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d12631a58390676c4548e8d7406a51dcdf24e874a12847afca7ab2aff6f3096a",
+      "sha256": "f40d8f7c89610298d24022d60549143f6b8e80d929998a24e85dd97a0e3d6f03",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 525,
@@ -392,8 +391,8 @@
         },
         {
           "url": "/scenes/caliban/caliban-model-surface@2x.webp",
-          "bytes": 56776,
-          "sha256": "bad403e7cbd2f6458f2ad5a0f8ecc2f4293ba5aaa53732a7b520669589206c8c",
+          "bytes": 62030,
+          "sha256": "2f70db5e3390b19edc68cdf7dae25059dab875335d79069428c31ef22f93f577",
           "verification": "bytes-verified"
         }
       ],
@@ -469,7 +468,7 @@
   },
   "lastPreparation": {
     "objectId": "caliban",
-    "materialSha256": "5d7782bcdae3b43a3c606d2eb4ee3f6ba66148d2872c691b8087564d44982cc2",
+    "materialSha256": "55a6e9b1a4df8aabd7309110e8b9510cb3c4e7273a173572835b48828a97f176",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

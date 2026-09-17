@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3161e98980d2dd3f2d491e7abaed788477f9d67c48e54a05e157a7ea2176d3f0"
+    "sha256": "cf26c63432f16491639de66681567b30dcf9b50868c144c78833f9c44a69a27c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c4824572f628361e8b6ba834e227b60262408533103c39408940026e19e2ba46",
+      "sha256": "c6654b0265bf7a6dd7d0434f5701c49adec7490de13550770a271922318eb98e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,8 +82,7 @@
               "longitudeDirection": "east-positive"
             },
             "faceBudget": 2000,
-            "tileSize": 64,
-            "atlasColumns": 16,
+            "texelsPerFace": 4096,
             "simplification": {
               "targetFaces": 480,
               "maximumErrorMeters": 210,
@@ -333,8 +332,8 @@
         },
         {
           "url": "/scenes/kiviuq/kiviuq-model-surface@2x.webp",
-          "bytes": 51444,
-          "sha256": "6eb40102d8e65e6f857e97e92886c089b90b2471dd6df22eb10f52ea225f8c41",
+          "bytes": 61006,
+          "sha256": "e82e1ed53ef1d3c315d909e6c14e58a76419ee2f9e24f6b161a6b4bfb196ca92",
           "verification": "bytes-verified"
         }
       ],
@@ -410,7 +409,7 @@
   },
   "lastPreparation": {
     "objectId": "kiviuq",
-    "materialSha256": "ad8c14cde069d527e2e47a880d2db7e5e0e52e6a2682ff6215ae39fde9a4bdc2",
+    "materialSha256": "73e88e2381e8ad1edd3460d6426f57fed3cc777e129345286764d00e542c2e01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e4bad7ac527e4f343b3ea29fffdb70bbc582a510b66d9eaebd76d9eb1e9443d3"
+    "sha256": "90b6670ac9cedf2dbbd37cafee4302201979a897f637dcecdb69f23b43738ee6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "061b4c17d1a064df5ce576e00c334d5c97c60307eb6f4eccaec91ed322c702f3",
+      "sha256": "129f73538d9dbdadeacc188dcf3ca777e9611d0760bf0e296786f7909dfcf63a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -179,8 +179,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -851,8 +850,8 @@
         },
         {
           "url": "/scenes/steins/steins-normal-surface@2x.webp",
-          "bytes": 549196,
-          "sha256": "57e0d02efc28bdcff47299bd63b29b776a12a90bc98cef36f498bfee9c083c1a",
+          "bytes": 596248,
+          "sha256": "264a5cfd8c22a0a386d9ac14a1d569b221638199db14c5ec334b01269444de09",
           "verification": "bytes-verified"
         }
       ],
@@ -906,8 +905,8 @@
         },
         {
           "url": "/scenes/steins/steins-elevation-surface@2x.webp",
-          "bytes": 326066,
-          "sha256": "ad844e537f006d2ad48935b7be2ca29f89fd1eb5bc24ac22b2fb21ef7b458f09",
+          "bytes": 402290,
+          "sha256": "d49b7fe7f41c8275372a8d1a9c3fa92e42e4f813e8e2821be9277a8d85fe9fe6",
           "verification": "bytes-verified"
         }
       ],
@@ -954,8 +953,8 @@
         },
         {
           "url": "/scenes/steins/steins-osiris-surface@2x.webp",
-          "bytes": 284776,
-          "sha256": "ea0a346a4333fc7aa2e2d4dd9e5a59fbbf4d2bdd36bfa379eeb09c9f88149db6",
+          "bytes": 299260,
+          "sha256": "fe4d2e53958dea2b251d617a6432fd091061505fc938be4c90700866036b3cd9",
           "verification": "bytes-verified"
         }
       ],
@@ -987,8 +986,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6275,
-          "sha256": "6132c863b305bebcbbf7e406a3ec7ab8d265f4fe11d2fb342d23b2fcf85079d7",
+          "bytes": 6393,
+          "sha256": "914abc909027301667c7f901e46b145335b10eada8ffdd535d134bd8a0eb809e",
           "verification": "bytes-verified"
         }
       ],
@@ -1112,7 +1111,7 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "7aa1310c74cd0ad7f0c62791f583b931312400cb257b8baeb882a7d827e914e3",
+    "materialSha256": "494feee1c621e467d3b2d7cc7f9ce0c16724d340c354958e3a0a6868d1cd55c4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
