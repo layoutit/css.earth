@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf7c63631868852494d2298eb5bf081245102e41020794abba93ca6890596293"
+    "sha256": "4f5642149958bc0df7e7d3b3f112e7226f90734b520f431ff96a09da08e98ce8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1092,8 +1092,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "8e7cb7fc9b9912414263cb5bb6095f0693ec4a671c8f7ece0f787627f5e0b641",
-      "bytes": 1789,
+      "sha256": "43e4385349a320ea5173863dace09c86ca7e0e60353e071146684bc29dc6681a",
+      "bytes": 1790,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1670,7 +1670,7 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "223a1d97e2155bbc2489c0e5cf548e7e15227bb8b18f5fe6e59840a078f2bc5a",
+    "materialSha256": "4428f76243ecc857b8b3ef9be19037df4d0e4d5937fbd052a4b3274913230237",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

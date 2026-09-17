@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2d17d1f73a161b2bc537307d8e02c883c232b2c17afc0567fd053be490c73629"
+    "sha256": "6185cf2117c56261cdb2d6d489684dcbc606a1b6921bbd84743b86b219d1f30b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1614,8 +1614,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "9f2dd6d9f490b4c8b775ad1764699d27cd6899e65065cc93604f8a187d59d27f",
-      "bytes": 1395,
+      "sha256": "fa1aefa8460f0366285951c998c72354f17c33d2eeaa30dd0357c70de4846d92",
+      "bytes": 1396,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2635,7 +2635,7 @@
   },
   "lastPreparation": {
     "objectId": "titan",
-    "materialSha256": "d96f7ca3c200518bdaf3b32f109bc6828ebfbef0e2dae3d93c0252924aa34b6f",
+    "materialSha256": "1cd3c21f50de3da4a24a7ef0df09d8982fdb3ec621407db80d70c933cee2f340",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

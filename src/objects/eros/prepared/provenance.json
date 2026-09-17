@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d9394ccbaa9d360a68fb0c954c06081a0656049ca5604494608ed861fc1b2052"
+    "sha256": "daf8067b50d7745efeac9561a981cbff2c1e559fa7d4449bc8925933a8fe3261"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -735,8 +735,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "e91a00f6e8313ec4c2dfbe9841584f47c5299479d7c66c03f16a5bdf511f6ab9",
-      "bytes": 1771,
+      "sha256": "06caf91e611c4ab5e5110af22327ec204349deb521a7f3dc538c768bae13e796",
+      "bytes": 1772,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1074,7 +1074,7 @@
   },
   "lastPreparation": {
     "objectId": "eros",
-    "materialSha256": "0dfa89cb967e1da988c9fa34c546cc5a75308300fa6395fd146db8a0a7bd37e6",
+    "materialSha256": "5cfc415274a62068e1812b1f45192c1f609f4ba0bdc13cc1532081742fe9888e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

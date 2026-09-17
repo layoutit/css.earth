@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "393f95143239a71a47f51a8670de7522b8e5cc12e34eb63894f82e241efeb33b"
+    "sha256": "8491c479440b46b457b8338e239343342a12ce6dac601a5a584c118dceb53da2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -823,8 +823,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
-      "bytes": 1863,
+      "sha256": "62c5010feeff32bf6b8f57287e869946bf15752ef680a5702c24bd529ebfa386",
+      "bytes": 1864,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1258,7 +1258,7 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "3fe771c5e78e9a10abdf4210832a4a060e10e835eb66f473131bd2f978ac0e37",
+    "materialSha256": "f6377746e0292f6212842e18b2ae43222ed611d72b9e58ab362ea107d51b8ae6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
