@@ -11,7 +11,7 @@ import type { OverviewScope } from './overview-context.mts';
 type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
 interface ViewReadout { setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
-import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
+import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { minimapCamera } from './surface-minimap-rectangle.mts';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';
@@ -54,7 +54,7 @@ export function viewScale(metersPerPixel: number, maxWidth = 80) {
   return { label: `${labelNumber.format(value)} ${unit}`, pixels: maxWidth, measurePixels };
 }
 
-export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }: { eyeM: PositionM; radiusM: number; rotation: WorldRotation; view: MapViewport; focalPixels: number; axes?: SurfaceAxes }) {
+export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes, mapLeftEdgeLongitudeDeg = 0 }: { eyeM: PositionM; radiusM: number; rotation: WorldRotation; view: MapViewport; focalPixels: number; axes?: SurfaceAxes; mapLeftEdgeLongitudeDeg?: number }) {
   const camera = minimapCamera({ eye: [eyeM[0] / radiusM, eyeM[1] / radiusM, eyeM[2] / radiusM], rotation, view, axes: axes ?? referenceAxes });
   const pick = (x: number) => {
     const point = camera.pickEllipsoid({ x, y: .5 }, Ellipsoid.UNIT_SPHERE);
@@ -78,7 +78,8 @@ export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }
     altitudeM: Math.max(0, Math.hypot(...eyeM) - radiusM),
     coordinates: center && axes ? {
       latitude: Math.asin(Math.max(-1, Math.min(1, center.z / Math.hypot(center.x, center.y, center.z)))) * 180 / Math.PI,
-      longitude: Math.atan2(center.y, center.x) * 180 / Math.PI,
+      // The axes count longitude from the map's left edge, as the feature labels do.
+      longitude: ((Math.atan2(center.y, center.x) * 180 / Math.PI + mapLeftEdgeLongitudeDeg) % 360 + 540) % 360 - 180,
     } : null,
     scale: viewScale(metersPerPixel), scaleTitle,
   };
@@ -127,8 +128,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
     const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : measureView({
       eyeM: [world.pose.positionM[0] - navigation.frame.originM[0], world.pose.positionM[1] - navigation.frame.originM[1], world.pose.positionM[2] - navigation.frame.originM[2]],
-      radiusM: navigation.frame.bodyRadiusM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw),
-      view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes,
+      radiusM: navigation.frame.bodyRadiusM, rotation: cssCameraAxesFromOrientation(world.pose.orientationXyzw),
+      view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes, mapLeftEdgeLongitudeDeg: surface?.mapLeftEdgeLongitudeDeg,
     });
     const distance = viewDistance(world, navigation.frame, overviewScope, undefined, preparedFocus);
     write(altitude, formatViewDistance(distance.meters));

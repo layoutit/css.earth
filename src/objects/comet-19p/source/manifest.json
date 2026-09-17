@@ -311,8 +311,8 @@
     {
       "id": "comet-19p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1062,
-      "expectedSha256": "7ac6fe2ffaad5b11157eed3232f451c7f9b19bc0110851d507bd3c2234e20de1",
+      "expectedBytes": 1030,
+      "expectedSha256": "1be3a0174b6625ccf6c7ee618873bf8a1a437faee931da5f5365f447a24a73cc",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -329,8 +329,8 @@
     {
       "id": "comet-19p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "7c3d92c8f600faa16a501fab68162fb473f92ed528199e427825ef1d0bbf4059",
+      "expectedBytes": 188,
+      "expectedSha256": "9c4601492154e811207a667619c3e455249e62e6a9bf0db49c79a58db7d93918",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",

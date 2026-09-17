@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { parseLandmarks, prepareLandmarks } from './landmarks.js';
 import type { SurfaceFeaturePreparationContext } from './index.js';
 
-const axes = { prime: [0, 1, 0] as const, east: [1, 0, 0] as const, north: [0, 0, 1] as const };
+const axes = { prime: [0, 1, 0] as const, east: [1, 0, 0] as const, north: [0, 0, 1] as const, mapLeftEdgeLongitudeDeg: 0 };
 const entry = { id: '80000000', name: 'Test region', kind: 'region', type: 'Mission region', minimumZoomShare: 0.4,
   description: 'A region with published coordinates.', qualification: 'Approximate representative location.',
   reference: { title: 'Mission map', url: 'https://example.org/mission-map', credit: 'Mission science team' } };

@@ -3,9 +3,11 @@ import assert from 'node:assert/strict';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
 import { card, imageFixture } from '../../../tests/fixtures/fits/helpers.mts';
 
-/** A deconvolved ZIMPOL frame as the survey ships it: one double-precision image HDU that names its instrument. */
+/** The survey's sky axes, copied from the first pinned Psyche frame: RA---TAN/DEC--TAN with east toward the first column and north toward the last row. */
+const SKY = [card('CTYPE1', "'RA---TAN'"), card('CTYPE2', "'DEC--TAN'"), card('CD1_1', '-1.00833333333333E-06'), card('CD1_2', '0.'), card('CD2_1', '0.'), card('CD2_2', '1.00833333333333E-06'), card('CRVAL1', '231.219611'), card('CRVAL2', '-14.24997'), card('CUNIT1', "'deg     '"), card('CUNIT2', "'deg     '")];
+/** A deconvolved ZIMPOL frame as the survey ships it: one double-precision image HDU that names its instrument and states its sky axes. */
 const zimpol = (values: readonly number[] = [0.5, 1.5, 2.5, 3.5], extra: readonly string[] = [card('INSTRUME', "'SPHERE  '")]) =>
-  imageFixture(-64, values, extra);
+  imageFixture(-64, values, [...extra, ...SKY]);
 
 test('a deconvolved ZIMPOL frame decodes through its own header', () => {
   const image = decodeCalibratedCamera(zimpol(), 'fits-zimpol-intensity');

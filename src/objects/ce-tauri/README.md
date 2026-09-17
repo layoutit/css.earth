@@ -29,7 +29,7 @@ CE Tauri (119 Tau) is a red supergiant in Taurus and the fourth star placed here
 
 **The axis is a convention.** Where the pole really points is unknown.
 
-**The scene's sky is mirrored.** As for the other stars, the sphere, the display axis and the halo plate agree with one another, and all three are the sky view mirrored.
+**The default camera shows the sky as seen.** As for the other stars, it faces Earth with celestial north up and east on the left; the sphere, the display axis and the halo plate agree with the sky view. Measured with `tools/objects/default-view.mts` and pinned by the default-view test.
 
 **The sky is the Sun's.** The star field behind CE Tauri is the shared cube baked from the Sun's position.
 
