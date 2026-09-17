@@ -77,7 +77,7 @@ test('the delivered scientific atlas samples source geometry, not the lossy flat
     const face = {vertices:[[5,0,0],[5,1,0],[5,0,1]],normal:[1,0,0],vertexNormals:[[1,0,0],[1,0,0],[1,0,0]]};
     // Atlas pixel (0,0) transports to (5,1/4,1/4) m on this retained face.
     const matrix=[BASE_TILE/2,0,0,0,0,0,BASE_TILE/2,0,0,0,1,0,0,5*BASE_TILE,0,1];
-    const radial={faces:[face],width:2,height:2,tileSize:2,plans:[{face,rect:{x:0,y:0},geometry:{leafWidth:2,leafHeight:2},matrix}],scientificSurfaces:new Map([['elevation',createShapeSurfaceSampler(mesh,lens)]])};
+    const radial={faces:[face],width:2,height:2,plans:[{face,rect:{x:0,y:0,width:2,height:2},geometry:{leafWidth:2,leafHeight:2},matrix}],scientificSurfaces:new Map([['elevation',createShapeSurfaceSampler(mesh,lens)]])};
     // Deliberately absent: a direct source atlas must not decode its preview.
     const surfaces:RadialMaterialSurface[]=[{id:'elevation',map:{url:'/scenes/test-body/preview.webp'},surfaceSampling:{...lens.surfaceSampling}}];
     await prepareRadialMaterials({radial,surfaces,config:{namespace:'test-body',publicBase:'/scenes/test-body/',geometry:{radiusKm:.001,radius:1,radialTerrain:{}},raster:{width:2,scientific:[lens],surfaceQuality:100}},source:await fixtureSource(root,[{path:'source.obj',consumers:['shape']}]),publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});

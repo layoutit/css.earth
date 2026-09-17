@@ -69,8 +69,8 @@ test('neutral bake matches the general texture bake over varying smooth normals'
     const normal = (x: number, y: number, z: number) => [x, y, z].map(n => n / Math.hypot(x, y, z));
     const face = { vertices: [[0, 0, 1], [1, 0, 1], [0, 1, 1]], normal: [0, 0, 1],
       vertexNormals: [normal(-.6, .2, 1), normal(.7, -.1, 1), normal(.1, .8, 1)] };
-    const radial = { width: 32, height: 32, tileSize: 32, faces: [face],
-      plans: [{ face, rect: { x: 0, y: 0 }, geometry: { leafWidth: 32, leafHeight: 32 },
+    const radial = { width: 32, height: 32, faces: [face],
+      plans: [{ face, rect: { x: 0, y: 0, width: 32, height: 32 }, geometry: { leafWidth: 32, leafHeight: 32 },
         matrix: [0, 50 / 32, 0, 0, 50 / 32, 0, 0, 0, 0, 0, 1, 0, 0, 0, 50, 1] }] };
     await sharp({ create: { width: 64, height: 32, channels: 3, background: '#808080' } }).webp({ lossless: true }).toFile(join(root, 'gray.webp'));
     const source = await fixtureSource(root, [{ path: 'gray.webp', consumers: ['shape'] }]);

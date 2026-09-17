@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import { rasterAtlasLayout, validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
 const root = new URL('../../../../src/objects/comet-19p/', import.meta.url);
 const json = async (path: string|URL) => JSON.parse((await readFile(new URL(path, root))).toString('utf8'));
@@ -36,11 +36,13 @@ test('every added face is gridded in all datasets and has no MICAS source code',
     const terrain = await json(`prepared/terrain${lens==='dlr'?'-dlr':''}.json`);
     const {data,info} = await sharp(new URL(`../../../../public/scenes/comet-19p/comet-19p-${lens}-surface@2x.webp`, import.meta.url).pathname).removeAlpha().raw().toBuffer({resolveWithObject:true});
     assert.equal(info.width, terrain.width); assert.equal(info.height, terrain.height);
+    const layout = rasterAtlasLayout(terrain.faces, terrain.source.texelsPerFace, 1);
+    assert.equal(layout.width, terrain.width); assert.equal(layout.height, terrain.height);
     for (let i=0;i<terrain.faces.length;i++) {
-      const tile=terrain.source.tileSize, columns=terrain.source.atlasColumns;
-      for (let y=0;y<tile;y++) for (let x=0;x<tile;x++) {
-        const pixel=(Math.floor(i/columns)*tile+y)*info.width+i%columns*tile+x;
-        if (!terrain.faces[i].estimated) continue;
+      if (!terrain.faces[i].estimated) continue;
+      const {rect} = layout.plans[i];
+      for (let y=0;y<rect.height;y++) for (let x=0;x<rect.width;x++) {
+        const pixel=(rect.y+y)*info.width+rect.x+x;
         const rgb=[...data.subarray(pixel*3,pixel*3+3)];
         assert.ok(rgb.every(n=>n>=76 && n<=122) && Math.max(...rgb)-Math.min(...rgb)<=10, `${lens}: estimated face ${i} must contain neutral grid, never source imagery or science colors.`);
         if (lens==='micas') withheld++;

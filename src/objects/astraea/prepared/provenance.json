@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fad86db082f699c3bcc7558769e746bf250e05f869b0f828ceef971c691bf8f4"
+    "sha256": "1f41b251bc6d1d0f3a35cbf6995290680cd11a24b1b2cfa68babe96f75017d06"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ed9c6cdb12bc9d51358700ee25eed541978d7d5d5659ccc229fb0e1cbe8a2990",
+      "sha256": "3971b3bb2bf9a77bed8b374fe4058fe0d2fedca3e2232f51944895ded30b3307",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -116,8 +116,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -401,8 +400,8 @@
         },
         {
           "url": "/scenes/astraea/astraea-elevation-surface@2x.webp",
-          "bytes": 298554,
-          "sha256": "6942ee38a11813bbd90e42a2be3c4f86ac8b8e182eddeda3ff7c1eb6c62ded34",
+          "bytes": 363914,
+          "sha256": "bcfb7279eaa9a2d6bca79857642c2e1861006baafe3fd8d74db3914d9261fe1c",
           "verification": "bytes-verified"
         }
       ],
@@ -445,8 +444,8 @@
         },
         {
           "url": "/scenes/astraea/astraea-shape-surface@2x.webp",
-          "bytes": 59192,
-          "sha256": "5311506a98ac42031e9a0b764cbdb4dc385858cd79becf4c6d27bce7e8c5f153",
+          "bytes": 80274,
+          "sha256": "8511c2b624a6414534c4bc36f68eecf508ca4486cf542748f9dd2c1d191c7bfa",
           "verification": "bytes-verified"
         }
       ],
@@ -542,7 +541,7 @@
   },
   "lastPreparation": {
     "objectId": "astraea",
-    "materialSha256": "11e171770545074d217bd697f113fdca61539b288ed8e1c5df2ee3a8f180a2fd",
+    "materialSha256": "9a806db6a4915ca5b4260b0b86b9d89de90cc3ad96d7ec425ccbba05f27de801",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

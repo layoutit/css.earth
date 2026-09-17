@@ -71,7 +71,7 @@ const unit = (a: readonly number[]) => a.map(v => v / Math.hypot(...a));
 
 /** A sampled, source-owned radial model. No ellipsoid is inferred from the map. */
 export async function loadRadialTerrain({config,sourceDirectory,source}: {
-  config: {namespace: string; geometry: {radius: number; radiusKm: number; radialTerrain?: unknown}};
+  config: {namespace: string; geometry: {radius: number; radiusKm: number; radialTerrain?: unknown}; raster?: unknown};
   sourceDirectory: string; source: Awaited<ReturnType<typeof createSourceManifest>>;
 }) {
   if (!config.geometry.radialTerrain) return null;
@@ -142,29 +142,11 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     if (topology.components !== 1 || topology.eulerCharacteristic !== 2) throw new Error('Estimated completion must close one nucleus.');
     completion = { ...completed.report, sourceFit, topology };
   }
-  const tileSize = profile.tileSize, columns = profile.atlasColumns;
-  if (![tileSize, columns].every(value => Number.isInteger(value) && value > 0) || tileSize > 512 || columns > 64) throw new TypeError('Invalid radial texture layout.');
-  const width = columns * tileSize, height = Math.ceil(faces.length / columns) * tileSize;
-  const plans = faces.map((face, index) => {
-    const rect = { x: index % columns * tileSize, y: Math.floor(index / columns) * tileSize, width: tileSize, height: tileSize };
-    const plan = computeSolidTrianglePlan({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }, index,
-      // The core planner takes CSS units, including its seam overlap. Scale
-      // that overlap with the source coordinates, as with tile/elevation.
-      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed: SOLID_TRIANGLE_BLEED * BASE_TILE },
-      { primitive: 'corner-bevel', includeColor: false, matrixDecimals: 9 });
-    if (!plan) throw new Error(`Radial face ${index} failed PolyCSS triangle preparation.`);
-    // The same raster sizing transport used by Mario: the u leaf matches its
-    // prepared texel cell, and the inverse basis scale preserves the geometry.
-    const matrix = plan.transformText.slice(9, -1).split(',').map(Number);
-    for (const component of [0, 1, 2, 4, 5, 6]) matrix[component] *= SOLID_TRIANGLE_CANONICAL_SIZE / tileSize;
-    const geometry = { matrix: matrix.join(','), leafWidth: tileSize, leafHeight: tileSize,
-      backgroundPosition: [-rect.x, -rect.y], backgroundSize: [width, height] };
-    return { face, rect, geometry, matrix };
-  });
-  const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
+  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config));
+  const leaves = layout.plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
-  return { grid, faces, plans, leaves, width, height, tileSize, ...(completion ? { completion } : {}),
+  return { grid, faces, ...layout, leaves, ...(completion ? { completion } : {}),
     ...(grid.coverage ? { coverage: grid.coverage } : {}),
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };
 }
@@ -363,7 +345,7 @@ async function replaceReviewedImage(sourceDirectory: string, path: string, bytes
  */
 export async function prepareRadialMaterials({ radial, surfaces, config, source, sourceDirectory, publicDirectory, outputDirectory, sunDirection,
   artifactId = null, snapshotEntries = source.manifest.generatedIntermediates, replaceReviewedImages = false }: {
-    radial: Pick<RadialState,'width'|'height'|'tileSize'|'faces'|'observationSurfaces'|'completion'|'coverage'|'simplification'> & {scientificSurfaces?:ReadonlyMap<string,{samplePoint?:(point:readonly number[])=>SourceSurfaceSample|null;report?:unknown}>;grid?:RadialState['grid'];plans:readonly {face:PreparedTriangle;rect:{x:number;y:number};matrix:readonly number[];geometry:{leafWidth:number;leafHeight:number}}[]}; surfaces: RadialMaterialSurface[]; config: RadialMaterialConfig;
+    radial: Pick<RadialState,'width'|'height'|'faces'|'observationSurfaces'|'completion'|'coverage'|'simplification'> & {scientificSurfaces?:ReadonlyMap<string,{samplePoint?:(point:readonly number[])=>SourceSurfaceSample|null;report?:unknown}>;grid?:RadialState['grid'];plans:readonly {face:PreparedTriangle;rect:{x:number;y:number;width:number;height:number};matrix:readonly number[];geometry:{leafWidth:number;leafHeight:number}}[]}; surfaces: RadialMaterialSurface[]; config: RadialMaterialConfig;
     source: Pick<Awaited<ReturnType<typeof createSourceManifest>>, 'manifest' | 'assertBytes'>;
     sourceDirectory?: string; publicDirectory: string; outputDirectory: string; sunDirection: readonly number[]; artifactId?: string | null;
     snapshotEntries?: Awaited<ReturnType<typeof createSourceManifest>>['manifest']['generatedIntermediates'];
@@ -372,7 +354,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   }) {
   if (artifactId !== null && !/^[a-z][a-z0-9-]*$/.test(artifactId)) throw new TypeError('Invalid surface model artifact id.');
   const suffix = artifactId ? `-${artifactId}` : '';
-  const { width: canonicalWidth, height: canonicalHeight, tileSize: canonicalTileSize } = radial;
+  const { width: canonicalWidth, height: canonicalHeight } = radial;
   const lightingRecipe = config.geometry.radialTerrain.sourceLighting;
   const lighting = lightingRecipe ? createSourceMeshLighting(requireTerrainMesh(radial.grid ?? (()=>{throw new TypeError("Source lighting requires the original mesh.");})()), lightingRecipe,
     config.geometry.radiusKm * 1000 / config.geometry.radius, sunDirection) : null;
@@ -392,7 +374,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw }), encoding);
       surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw }), encoding);
       surface.polesUrl = surface.surface.url;
-      surface.layout = { kind: 'triangle-atlas', width: canonicalWidth, height: canonicalHeight, tileSize: canonicalTileSize, faceCount: radial.faces.length };
+      surface.layout = { kind: 'triangle-atlas', width: canonicalWidth, height: canonicalHeight, faceCount: radial.faces.length };
       continue;
     }
     const photograph=config.raster.observations?.find(observation=>observation.id===surface.id);
@@ -410,8 +392,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     // The retained CSS background size stays canonical. Only prepared image
     // pixels and atlas rectangles scale; each normalized UV keeps its owner.
     const scale = surface.textureScale ?? 1;
-    const width = canonicalWidth * scale, height = canonicalHeight * scale, tileSize = canonicalTileSize * scale;
-    if (![1,.5,.25,.125].includes(scale) || ![width,height,tileSize].every(n=>Number.isSafeInteger(n) && n>0)) {
+    const width = canonicalWidth * scale, height = canonicalHeight * scale;
+    if (![1,.5,.25,.125].includes(scale) || ![width,height].every(n=>Number.isSafeInteger(n) && n>0)) {
       throw new TypeError('Scaled radial atlas dimensions must remain integral.');
     }
     const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4);
@@ -449,8 +431,9 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     for (const { face, rect, geometry, matrix: m } of radial.plans) {
       const [a, b, c] = face.vertices, ab = sub(b, a), ac = sub(c, a), aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac);
       const denominator = aa * bb - abac * abac;
-      for (let py = 0; py < tileSize; py++) for (let px = 0; px < tileSize; px++) {
-        const x = (px + .5) * geometry.leafWidth / tileSize, y = (py + .5) * geometry.leafHeight / tileSize;
+      const rectWidth = rect.width * scale, rectHeight = rect.height * scale;
+      for (let py = 0; py < rectHeight; py++) for (let px = 0; px < rectWidth; px++) {
+        const x = (px + .5) * geometry.leafWidth / rectWidth, y = (py + .5) * geometry.leafHeight / rectHeight;
         const w = m[3] * x + m[7] * y + m[15];
         const css = [(m[0] * x + m[4] * y + m[12]) / w, (m[1] * x + m[5] * y + m[13]) / w, (m[2] * x + m[6] * y + m[14]) / w];
         const point = [css[1] / BASE_TILE, css[0] / BASE_TILE, css[2] / BASE_TILE];
@@ -576,7 +559,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     if (observation?.retainsIllumination) delete surface.shadowSurface;
     else surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;
-    surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
+    surface.layout = { kind: 'triangle-atlas', width, height, faceCount: radial.faces.length };
     if (config.geometry.radialTerrain.thumbnail && !observation && !sourceSurface) {
       const snapshot = await renderRadialSnapshot({ ...parseRadialSnapshot(config.geometry.radialTerrain.thumbnail), faces: radial.faces,
         map: resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1))) });
@@ -654,4 +637,71 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     ...(radial.coverage ? { coverage: radial.coverage } : {}),
     ...(radial.simplification ? { simplification: radial.simplification } : {}) }) + '\n');
   return surfaces;
+}
+
+/** The atlas pixel step every lens can scale to: a lens prepared at an eighth of the atlas needs rectangles in multiples of eight. */
+function textureQuantum(config: {raster?: unknown}) {
+  const raster = config.raster === undefined ? {} : requireRecord(config.raster);
+  const scales = [...requireArray(raster.observations ?? []), ...requireArray(raster.scientific ?? [])]
+    .flatMap(lens => requireRecord(lens).textureScale === undefined ? [] : [requireFiniteNumber(requireRecord(lens).textureScale)]);
+  const quantum = Math.max(1, ...scales.map(scale => 1 / scale));
+  if (!Number.isSafeInteger(quantum)) throw new TypeError('Texture scales must divide the atlas into whole pixels.');
+  return quantum;
+}
+
+/** Raster sizing, as PolyCSS sizes a textured polygon: each face gets its own rectangle, sized by the face, so every face has the same
+ * texel density and one leaf pixel is one atlas texel. The u leaf draws its triangle with the base along the bottom edge and the apex at
+ * the top centre. Sizing the height by the apex's distance from the base midpoint keeps each texel within the square root of two of the
+ * nominal density even for a thin, sheared face; the base is the edge that needs the fewest texels. The packed atlas, gaps included,
+ * holds at most the body's budget of texels per face. */
+export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number) {
+  if (!Number.isSafeInteger(texelsPerFace) || texelsPerFace < 16 || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
+  const triangles = faces.map((face, index) => {
+    const plan = computeSolidTrianglePlan({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }, index,
+      // The core planner takes CSS units, including its seam overlap.
+      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed: SOLID_TRIANGLE_BLEED * BASE_TILE },
+      { primitive: 'corner-bevel', includeColor: false, matrixDecimals: 9 });
+    if (!plan) throw new Error(`Radial face ${index} failed PolyCSS triangle preparation.`);
+    // The planner's canonical leaf maps its bottom corners and top centre to the overlapped triangle.
+    const m = plan.transformText.slice(9, -1).split(',').map(Number), size = SOLID_TRIANGLE_CANONICAL_SIZE;
+    const at = (x: number, y: number) => [0, 1, 2].map(i => m[i] * x + m[4 + i] * y + m[12 + i]);
+    const corners = [at(0, size), at(size, size), at(size / 2, 0)];
+    let best: { base: number; length: number; rise: number } | undefined;
+    for (let base = 0; base < 3; base++) {
+      const a = corners[base], b = corners[(base + 1) % 3], c = corners[(base + 2) % 3];
+      const length = Math.hypot(...sub(b, a)), rise = Math.hypot(...sub(c, a.map((v, i) => (v + b[i]) / 2)));
+      if (!best || length * rise < best.length * best.rise) best = { base, length, rise };
+    }
+    return { face, corners, normal: [m[8], m[9], m[10]], ...best! };
+  });
+  const budget = texelsPerFace * faces.length, step = (n: number) => Math.max(2, Math.ceil(n / quantum)) * quantum;
+  // Shelf packing, tallest rows first, on a near-square page.
+  const pack = (density: number) => {
+    const sizes = triangles.map(t => [step(t.length / density), step(t.rise / density)]);
+    const area = sizes.reduce((sum, [w, h]) => sum + w * h, 0);
+    const width = Math.max(...sizes.map(([w]) => w), Math.ceil(Math.sqrt(area) / quantum) * quantum);
+    const order = sizes.map((_, i) => i).sort((a, b) => sizes[b][1] - sizes[a][1] || a - b), rects: { x: number; y: number; width: number; height: number }[] = [];
+    let x = 0, y = 0, row = 0;
+    for (const i of order) {
+      const [w, h] = sizes[i];
+      if (x + w > width) { x = 0; y += row; row = 0; }
+      rects[i] = { x, y, width: w, height: h }; x += w; row = Math.max(row, h);
+    }
+    return { rects, width, height: y + row };
+  };
+  // The finest density whose packed page fits the budget.
+  let fine = 0, coarse = Math.max(...triangles.map(t => Math.max(t.length, t.rise)));
+  const fits = (density: number) => { const page = pack(density); return page.width * page.height <= budget; };
+  while (!fits(coarse)) coarse *= 2;
+  for (let i = 0; i < 40; i++) { const middle = (fine + coarse) / 2; if (middle > 0 && fits(middle)) coarse = middle; else fine = middle; }
+  const { rects, width, height } = pack(coarse);
+  if (width > 16383 || height > 16383) throw new Error(`Radial atlas ${width}x${height} exceeds WebP dimensions.`);
+  const plans = triangles.map((t, index) => {
+    const rect = rects[index], a = t.corners[t.base], b = t.corners[(t.base + 1) % 3], c = t.corners[(t.base + 2) % 3];
+    const apex = sub(c, a.map((v, i) => (v + b[i]) / 2));
+    const matrix = [...sub(b, a).map(v => v / rect.width), 0, ...apex.map(v => -v / rect.height), 0, ...t.normal, 0, ...a.map((v, i) => v + apex[i]), 1];
+    const geometry = { matrix: matrix.join(','), leafWidth: rect.width, leafHeight: rect.height, backgroundPosition: [-rect.x, -rect.y], backgroundSize: [width, height] };
+    return { face: t.face, rect, geometry, matrix };
+  });
+  return { plans, width, height };
 }

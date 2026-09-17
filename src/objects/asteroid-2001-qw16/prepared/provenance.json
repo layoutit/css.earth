@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d4fe0d3c1856d663f10d26c50fce3d0afc1dbdd1d3320a321e6c3b414d7e277a"
+    "sha256": "5f5510edd5f1fcb6ba5beccb82256e2246c081b5266bd2b98e7ff83cd7012034"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "17d40edc402b666ad514def6a5f84663cf268c49b93eb8e9d77f6b619736311e",
+      "sha256": "8008173906f1c07ee6753eb86526124daff514eb107225c56b8602e10e6d83c9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -120,8 +120,7 @@
             "latitudeSegments": 90,
             "longitudeSegments": 180,
             "faceBudget": 800,
-            "tileSize": 128,
-            "atlasColumns": 16,
+            "texelsPerFace": 16384,
             "primitive": "u",
             "simplification": {
               "method": "source-meshoptimizer",
@@ -419,8 +418,8 @@
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-elevation-surface@2x.webp",
-          "bytes": 301596,
-          "sha256": "01546108e94f89bf0b88c2aca11ef21b10dfe19b1b2556e58d4c700a295d816b",
+          "bytes": 310722,
+          "sha256": "34f569d42104131e146d02b8dd44c821c123d2490d4cac3b682e36238c6ec8d7",
           "verification": "bytes-verified"
         }
       ],
@@ -463,8 +462,8 @@
         },
         {
           "url": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
-          "bytes": 68076,
-          "sha256": "aeae0c11b08353aa44c5e2cd117ace5a9dc02d90fdb7702c65581e6868b15a61",
+          "bytes": 63648,
+          "sha256": "bc5a612f41d18b0622f1d03d52baf52b3d8761174cd213e1fe2c2d4d6009399e",
           "verification": "bytes-verified"
         }
       ],
@@ -560,7 +559,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-qw16",
-    "materialSha256": "a93c7f20ef1076b7358c78fd6d0e00c520a07526a754965691652778c2742e7a",
+    "materialSha256": "c24ef325078a29a55af8c4628e78694b7fbe101cb5d136a443f60f1a6cdc13f0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
