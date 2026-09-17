@@ -18,7 +18,7 @@
  * 4.0.4 computes the transfer function and then fails to save it ("Data not found: ESO PRO CATG"). Calibrator diameters come
  * from the pipeline's bundled JSDC catalogue. The result is one calibrated OIFITS file for the target. */
 import { spawnSync } from 'node:child_process';
-import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { archiveHeader, column, esoEnvironment, frameTime, parseRawTable, queryRawTable, rawFrame, runRecipe } from './eso-pipeline.mts';
@@ -100,7 +100,10 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
     PNDRS_DIR: resolve(paths.prefix, 'lib/pionier-4.0.4/pndrs'), PIONIER_PLUGIN_PATH: resolve(paths.prefix, 'lib/pionier-4.0.4') });
   const env = eso.env as NodeJS.ProcessEnv & { PNDRS_DIR: string };
   const raw = async (dpId: string) => rawFrame(dpId, rawDirectory);
+  // A step whose set of frames and product are already on disk is not run again, so an interrupted night resumes where it stopped.
   const recipe = async (name: string, step: string, sof: readonly (readonly [string, string])[]) => {
+    const done = resolve(work, step, 'outfile_recipe.fits'), sofText = sof.map(([file, tag]) => `${file} ${tag}`).join('\n') + '\n';
+    if (await readFile(resolve(work, step, 'in.sof'), 'utf8').then(text => text === sofText, () => false) && await access(done).then(() => true, () => false)) return done;
     const products = await runRecipe(eso, work, step, name, sof);
     const product = products.find(file => file.endsWith('outfile_recipe.fits'));
     if (!product) throw new Error(`${name} wrote no product for ${step}.`);
