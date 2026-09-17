@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<association category="TARGET_RAW" certified="true" complete="true"
+    mode="Raw2Raw" type="main">
+    <mainFiles>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:06:12.142"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:07:36.150"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:09:00.803"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:10:25.122"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:12:31.480"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:13:49.424"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:15:08.587"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:16:25.902"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:17:50.855"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:19:07.298"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:20:22.601"/>
+        <file category="TARGET_RAW" name="MATIS.2020-02-08T00:21:43.908"/>
+    </mainFiles>
+    <messages/>
+    <associatedFiles>
+        <association category="BADPIX" certified="true" complete="true"
+            match="N/A" type="main">
+            <mainFiles>
+                <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="SKY_RAW" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="SKY_RAW" name="MATIS.2020-02-08T00:04:29.650"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="SKY_RAW" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="SKY_RAW" name="MATIS.2020-02-08T00:03:39.926"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:10:25.396"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:13:49.401"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:16:25.406"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:17:49.407"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:12:31.399"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:06:13.389"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:07:37.391"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:19:07.410"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:15:07.403"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="TARGET_RAW_RMNREC" certified="false"
+            complete="true" match="N/A" type="auxiliary">
+            <mainFiles>
+                <file category="TARGET_RAW_RMNREC" name="MATIS.2020-02-08T00:09:01.394"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="NONLINEARITY" certified="true"
+            complete="true" match="N/A" type="main">
+            <mainFiles>
+                <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles/>
+        </association>
+        <association category="CALIB_RAW" certified="true"
+            complete="true" match="calib_plan" type="main">
+            <mainFiles>
+                <file category="SKY_RAW" name="MATIS.2020-02-08T00:27:14.348"/>
+                <file category="SKY_RAW" name="MATIS.2020-02-08T00:28:03.793"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:30:08.078"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:31:33.394"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:32:58.256"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:34:22.637"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:36:32.683"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:37:50.277"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:39:07.544"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:40:25.844"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:41:50.279"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:43:08.433"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:44:24.618"/>
+                <file category="CALIB_RAW" name="MATIS.2020-02-08T00:45:42.926"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles>
+                <association category="SKY_RAW" certified="false"
+                    complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="SKY_RAW" name="MATIS.2020-02-08T00:28:03.793"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="SKY_RAW" certified="false"
+                    complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="SKY_RAW" name="MATIS.2020-02-08T00:27:14.348"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="BADPIX" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:37:49.440"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:39:07.442"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:40:25.444"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:34:22.435"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:41:49.447"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:32:58.432"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:45:40.453"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:31:34.430"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:36:31.438"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:44:25.451"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:43:07.449"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="CALIB_RAW_RMNREC"
+                    certified="false" complete="true" match="N/A" type="auxiliary">
+                    <mainFiles>
+                        <file category="CALIB_RAW_RMNREC" name="MATIS.2020-02-08T00:30:07.428"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="NONLINEARITY" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="JSDC_CAT" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="JSDC_CAT" name="M.MATISSE.2023-07-26T12:11:51.926"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="EST_FLAT" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="OBSDARK" name="MATIS.2020-02-08T10:15:53.136"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles>
+                        <association category="BADPIX" certified="true"
+                            complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="FLATFIELD"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="FLATFIELD" name="M.MATISSE.2021-08-18T08:36:14.150"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="NONLINEARITY"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                    </associatedFiles>
+                </association>
+                <association category="EST_KAPPA" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:33:50.157"/>
+                        <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:34:21.378"/>
+                        <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:34:52.696"/>
+                        <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:35:24.277"/>
+                        <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:36:24.442"/>
+                        <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:36:55.625"/>
+                        <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:37:26.927"/>
+                        <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:37:58.493"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles>
+                        <association category="BADPIX" certified="true"
+                            complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="NONLINEARITY"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="EST_FLAT"
+                            certified="true" complete="true"
+                            match="calib_plan" type="main">
+                            <mainFiles>
+                                <file category="OBSDARK" name="MATIS.2020-02-10T13:24:51.412"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles>
+                                <association category="BADPIX"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="FLATFIELD"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="FLATFIELD" name="M.MATISSE.2021-08-18T08:36:14.150"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="NONLINEARITY"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                            </associatedFiles>
+                        </association>
+                        <association category="EST_SHIFT"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="DISTOR_HOTDARK" name="MATIS.2020-02-18T15:03:23.314"/>
+                                <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:14:26.625"/>
+                                <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:24:41.807"/>
+                                <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:35:01.062"/>
+                                <file category="SPECTRA_HOTDARK" name="MATIS.2020-02-18T15:45:27.285"/>
+                                <file category="SPECTRA_IMAGES" name="MATIS.2020-02-18T15:56:35.393"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles>
+                                <association category="BADPIX"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="NONLINEARITY"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="EST_FLAT"
+                                    certified="true" complete="true"
+                                    match="calib_plan" type="main">
+                                    <mainFiles>
+                                    <file category="OBSDARK" name="MATIS.2020-02-18T14:05:04.815"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles>
+                                    <association category="BADPIX"
+                                    certified="true"
+                                    complete="true" match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                    </association>
+                                    <association
+                                    category="FLATFIELD"
+                                    certified="true"
+                                    complete="true" match="N/A" type="main">
+                                    <mainFiles>
+                                    <file
+                                    category="FLATFIELD" name="M.MATISSE.2020-03-04T07:35:18.680"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                    </association>
+                                    <association
+                                    category="NONLINEARITY"
+                                    certified="true"
+                                    complete="true" match="N/A" type="main">
+                                    <mainFiles>
+                                    <file
+                                    category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                    </association>
+                                    </associatedFiles>
+                                </association>
+                            </associatedFiles>
+                        </association>
+                    </associatedFiles>
+                </association>
+                <association category="EST_SHIFT" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="DISTOR_HOTDARK" name="MATIS.2020-02-18T15:03:23.314"/>
+                        <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:14:26.625"/>
+                        <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:24:41.807"/>
+                        <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:35:01.062"/>
+                        <file category="SPECTRA_HOTDARK" name="MATIS.2020-02-18T15:45:27.285"/>
+                        <file category="SPECTRA_IMAGES" name="MATIS.2020-02-18T15:56:35.393"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles>
+                        <association category="BADPIX" certified="true"
+                            complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="NONLINEARITY"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="EST_FLAT"
+                            certified="true" complete="true"
+                            match="calib_plan" type="main">
+                            <mainFiles>
+                                <file category="OBSDARK" name="MATIS.2020-02-18T14:05:04.815"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles>
+                                <association category="BADPIX"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="FLATFIELD"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="FLATFIELD" name="M.MATISSE.2020-03-04T07:35:18.680"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="NONLINEARITY"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                            </associatedFiles>
+                        </association>
+                    </associatedFiles>
+                </association>
+            </associatedFiles>
+        </association>
+        <association category="EST_FLAT" certified="true"
+            complete="true" match="calib_plan" type="main">
+            <mainFiles>
+                <file category="OBSDARK" name="MATIS.2020-02-08T10:15:53.136"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles>
+                <association category="BADPIX" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="FLATFIELD" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="FLATFIELD" name="M.MATISSE.2021-08-18T08:36:14.150"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="NONLINEARITY" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+            </associatedFiles>
+        </association>
+        <association category="EST_KAPPA" certified="true"
+            complete="true" match="calib_plan" type="main">
+            <mainFiles>
+                <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:33:50.157"/>
+                <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:34:21.378"/>
+                <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:34:52.696"/>
+                <file category="KAPPA_HOTDARK" name="MATIS.2020-02-10T13:35:24.277"/>
+                <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:36:24.442"/>
+                <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:36:55.625"/>
+                <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:37:26.927"/>
+                <file category="KAPPA_SRC" name="MATIS.2020-02-10T13:37:58.493"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles>
+                <association category="BADPIX" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="NONLINEARITY" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="EST_FLAT" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="OBSDARK" name="MATIS.2020-02-10T13:24:51.412"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles>
+                        <association category="BADPIX" certified="true"
+                            complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="BADPIX" name="M.MATISSE.2021-08-18T08:36:11.406"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="FLATFIELD"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="FLATFIELD" name="M.MATISSE.2021-08-18T08:36:14.150"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="NONLINEARITY"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="NONLINEARITY" name="M.MATISSE.2021-08-18T08:36:17.383"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                    </associatedFiles>
+                </association>
+                <association category="EST_SHIFT" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="DISTOR_HOTDARK" name="MATIS.2020-02-18T15:03:23.314"/>
+                        <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:14:26.625"/>
+                        <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:24:41.807"/>
+                        <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:35:01.062"/>
+                        <file category="SPECTRA_HOTDARK" name="MATIS.2020-02-18T15:45:27.285"/>
+                        <file category="SPECTRA_IMAGES" name="MATIS.2020-02-18T15:56:35.393"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles>
+                        <association category="BADPIX" certified="true"
+                            complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="NONLINEARITY"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="EST_FLAT"
+                            certified="true" complete="true"
+                            match="calib_plan" type="main">
+                            <mainFiles>
+                                <file category="OBSDARK" name="MATIS.2020-02-18T14:05:04.815"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles>
+                                <association category="BADPIX"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="FLATFIELD"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="FLATFIELD" name="M.MATISSE.2020-03-04T07:35:18.680"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                                <association category="NONLINEARITY"
+                                    certified="true" complete="true"
+                                    match="N/A" type="main">
+                                    <mainFiles>
+                                    <file category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                                    </mainFiles>
+                                    <messages/>
+                                    <associatedFiles/>
+                                </association>
+                            </associatedFiles>
+                        </association>
+                    </associatedFiles>
+                </association>
+            </associatedFiles>
+        </association>
+        <association category="EST_SHIFT" certified="true"
+            complete="true" match="N/A" type="main">
+            <mainFiles>
+                <file category="DISTOR_HOTDARK" name="MATIS.2020-02-18T15:03:23.314"/>
+                <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:14:26.625"/>
+                <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:24:41.807"/>
+                <file category="DISTOR_IMAGES" name="MATIS.2020-02-18T15:35:01.062"/>
+                <file category="SPECTRA_HOTDARK" name="MATIS.2020-02-18T15:45:27.285"/>
+                <file category="SPECTRA_IMAGES" name="MATIS.2020-02-18T15:56:35.393"/>
+            </mainFiles>
+            <messages/>
+            <associatedFiles>
+                <association category="BADPIX" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="NONLINEARITY" certified="true"
+                    complete="true" match="N/A" type="main">
+                    <mainFiles>
+                        <file category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles/>
+                </association>
+                <association category="EST_FLAT" certified="true"
+                    complete="true" match="calib_plan" type="main">
+                    <mainFiles>
+                        <file category="OBSDARK" name="MATIS.2020-02-18T14:05:04.815"/>
+                    </mainFiles>
+                    <messages/>
+                    <associatedFiles>
+                        <association category="BADPIX" certified="true"
+                            complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="BADPIX" name="M.MATISSE.2020-03-04T07:34:28.550"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="FLATFIELD"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="FLATFIELD" name="M.MATISSE.2020-03-04T07:35:18.680"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                        <association category="NONLINEARITY"
+                            certified="true" complete="true" match="N/A" type="main">
+                            <mainFiles>
+                                <file category="NONLINEARITY" name="M.MATISSE.2020-03-04T07:37:08.053"/>
+                            </mainFiles>
+                            <messages/>
+                            <associatedFiles/>
+                        </association>
+                    </associatedFiles>
+                </association>
+            </associatedFiles>
+        </association>
+    </associatedFiles>
+</association>
