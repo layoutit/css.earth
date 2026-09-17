@@ -56,7 +56,7 @@ export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: Ho
   const degrees = [...recipe.degrees].sort((a, b) => a - b), counts = [...recipe.eigencurves].sort((a, b) => a - b);
   const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time)]));
   const fitWith = (basis: EigenBasis, count: number, tau: number | null) => fitEigenmap(basis, count, flux, error, () => true, { positive: recipe.positive, systematics: columns(tau) });
-  let tau = taus[0]!;
+  let tau: number | null = taus[0]!;
   if (taus.length > 1) {
     const simplest = bases.get(degrees[0]!)!, count = counts.find(c => c <= simplest.curves.length);
     if (count === undefined) throw new RangeError('No candidate eigencurve count fits the lowest degree.');
