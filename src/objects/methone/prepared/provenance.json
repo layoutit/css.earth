@@ -467,8 +467,8 @@
         },
         {
           "url": "/scenes/methone/methone-normal-surface@2x.webp",
-          "bytes": 79084,
-          "sha256": "df006ad13adefb7ea833533fba7cc54cb552d96349b22565c62c186c50666ca9",
+          "bytes": 67936,
+          "sha256": "3f0ea03ace55a748ee7ab4d8fb36b4869966b1b005c3ddbbfb65ed11e24ec366",
           "verification": "bytes-verified"
         }
       ],
@@ -526,8 +526,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 4862,
-          "sha256": "9c64832655a908a0734e1d924cbf27d2c314733ec050038a104f25fafb8d628b",
+          "bytes": 1216,
+          "sha256": "b90acc063498d0ed8511431e28f3e46dbfb3a53ffa0ceb7bbaf29303f6a19b3b",
           "verification": "bytes-verified"
         }
       ]
@@ -539,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "methone",
-    "materialSha256": "d9da297e2c02bceec18c76d055fb39ab95373f6937d70b133cf194279b96f8a4",
+    "materialSha256": "2b3e38403400efd55a070ae818d4056cf3270eb6d65769742999f79c9be98b4d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

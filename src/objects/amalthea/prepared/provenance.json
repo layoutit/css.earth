@@ -1088,8 +1088,8 @@
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-surface@2x.webp",
-          "bytes": 287662,
-          "sha256": "2956f223f50590799b459fd9dba336dc9eb66839559dfe44686bc85950ee26f8",
+          "bytes": 263380,
+          "sha256": "7ae121146fadbd907848dd5d78454cb2488c6423779e50ad93239a05171ee197",
           "verification": "bytes-verified"
         }
       ],
@@ -1140,8 +1140,8 @@
         },
         {
           "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
-          "bytes": 157474,
-          "sha256": "f264e92081e13bf418a8c6fc5eab804608e8f518bbca4319c45ae21e646f2093",
+          "bytes": 139784,
+          "sha256": "5b61ababdcf596a2c0a0de6722a2532f9a8eae9cd0256290b49e5ba6684782e7",
           "verification": "bytes-verified"
         }
       ],
@@ -1234,8 +1234,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 14428,
-          "sha256": "5a9a923205461520f15a17a5fc4a3452bfeb175bea3b964ce6abf7f1b20c8d78",
+          "bytes": 5762,
+          "sha256": "9b4f6e34d520763cc959d64101339f1f8b1d42c1e8978f0b580a9698522f4a81",
           "verification": "bytes-verified"
         }
       ]
@@ -1272,7 +1272,7 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "207c221e2c475807e22a600c6cc619bd405562051d6fe52d1de39b25da46437b",
+    "materialSha256": "10acd2164df4a314445da8f1deaa1bc2f45a653fa7262582d74e75144d957087",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

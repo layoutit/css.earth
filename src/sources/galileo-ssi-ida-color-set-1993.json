@@ -1,0 +1,39 @@
+{
+  "id": "galileo-ssi-ida-color-set-1993",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Galileo SSI calibrated I/F images of Ida and their raw detector frames: the 28 August 1993 five-filter set",
+  "identifiers": [],
+  "creators": [
+    "D. L. Domingue"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/",
+      "label": "Calibrated SSI images of Ida"
+    },
+    {
+      "role": "original",
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/",
+      "label": "Raw SSI frames and bad-data blocks"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/",
+      "checkedOn": "2026-09-17",
+      "locator": "0202561278rcal_gre, 0202561313rcal_vio, 0202561326rcal_ir7, 0202561339rcal_ir9 and 0202561352rcal_ir8: start times 16:37:43.324 to 16:38:26.723 UTC, 10,407 to 10,931 km"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL/Galileo SSI; I/F calibration by D. L. Domingue; camera controls from P. C. Thomas and colleagues.",
+      "scope": "Calibrated images and raw frames",
+      "evidence": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/"
+    }
+  ]
+}

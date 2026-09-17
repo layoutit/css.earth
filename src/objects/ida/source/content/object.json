@@ -110,6 +110,32 @@
         "noData": true
       },
       {
+        "id": "filter-color",
+        "label": "False color",
+        "thumbnail": "/scenes/ida/ida-filter-color-thumbnail.webp",
+        "surface": "ida-filter-color-surface@2x.webp",
+        "poles": "ida-filter-color-surface@2x.webp",
+        "source": {
+          "id": "ida-0202561352rcal_ir8-fit",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "facts": [
+          {
+            "id": "filters",
+            "label": "Filters",
+            "value": "0.89 µm, green, violet"
+          },
+          {
+            "id": "image-scale",
+            "label": "Image scale",
+            "value": "106–111 m/pixel"
+          }
+        ],
+        "notes": "Galileo photographed Ida through near-infrared, green and violet filters within 43 seconds. Shown as red, green and blue, the colour differences are real but stronger than the eye would see. Only the recorded strip of these frames covers Ida; the grid marks the rest.",
+        "noData": true
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "thumbnail": "/scenes/ida/ida-elevation-thumbnail.webp",

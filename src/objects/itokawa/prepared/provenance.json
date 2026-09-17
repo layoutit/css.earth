@@ -1754,8 +1754,8 @@
         },
         {
           "url": "/scenes/itokawa/itokawa-elevation-surface@2x.webp",
-          "bytes": 927640,
-          "sha256": "38f3b94938f4a6ae5024cce2329350d953023b23d8d1ecd8a367600eb117b812",
+          "bytes": 781408,
+          "sha256": "bf5a14de9709d4f61467d7ea71ad637e34acdd6f582a73148909075df99c8f39",
           "verification": "bytes-verified"
         }
       ],
@@ -1829,8 +1829,8 @@
         },
         {
           "url": "/scenes/itokawa/itokawa-amica-surface@2x.webp",
-          "bytes": 1712760,
-          "sha256": "39b32fc69b03d99f08f1864d129527e81f2d135b8d3a8de02d6115162f602add",
+          "bytes": 1312708,
+          "sha256": "613678c72875386e681c5ff6550ef3ba69aa86b72fb157b09937b1e4ebf608b6",
           "verification": "bytes-verified"
         }
       ],
@@ -1923,8 +1923,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/amica.webp",
-          "bytes": 50708,
-          "sha256": "c13ec11a4cd794cc73ace7e86a4bb7a636544a0d9dbc38e260da7305ce401330",
+          "bytes": 50860,
+          "sha256": "d8dfa95c9f845c738532b255f54fb4653d8a3520750ea7a60a19b8e871c54720",
           "verification": "bytes-verified"
         }
       ]
@@ -1961,7 +1961,7 @@
   },
   "lastPreparation": {
     "objectId": "itokawa",
-    "materialSha256": "ad16abd50232654327fb4dc82f72888ca2a0e4f524823502199ef9de174036ef",
+    "materialSha256": "b9c95819ade472011ba18f51403412cfbdec989703c9cf360add9efa012eb566",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

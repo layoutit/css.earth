@@ -1068,8 +1068,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-surface@2x.webp",
-          "bytes": 532728,
-          "sha256": "ae14800f7a76224d33699ce6285e3578a3642d59be371c9e2fb3bfd0437d8fc8",
+          "bytes": 396388,
+          "sha256": "4dd8281e514f327ec95ff6c1c0d8d12b70627bde42a54122d8fe7bbe3182271d",
           "verification": "bytes-verified"
         }
       ],
@@ -1118,8 +1118,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
-          "bytes": 349802,
-          "sha256": "cb3f08ce99370cf88d5674ca9ae5bf04a3837d9794e9829e9a8bf7bb47d4199f",
+          "bytes": 293354,
+          "sha256": "afea527229bb5fb490f6d5186245e02a78b07e1c9f589661e836f75a4abd9b53",
           "verification": "bytes-verified"
         }
       ],
@@ -1237,8 +1237,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/near-msi.webp",
-          "bytes": 10424,
-          "sha256": "84a241225f1ec535787dc9f3509520a8fb3fecd533a1b0de3e1e8c870ac0e623",
+          "bytes": 10312,
+          "sha256": "8c5496cde0c19fd8950636ebb62625477e4a1e405f3e44c5c3f06a28c80a6fe6",
           "verification": "bytes-verified"
         }
       ]
@@ -1275,7 +1275,7 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "eb0cdf139570f2525b0184e0db25f4ea648fcb515ef2ee074581c24fdc6a14d3",
+    "materialSha256": "679986ec4506395b85dcba23f8c0196e23bc61341b6a22efb30573927d7da326",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

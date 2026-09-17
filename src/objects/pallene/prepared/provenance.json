@@ -479,8 +479,8 @@
         },
         {
           "url": "/scenes/pallene/pallene-normal-surface@2x.webp",
-          "bytes": 75032,
-          "sha256": "b87667fa56939e0cba3ca41e72767536589db2147ca965f4d4d2b499e33fb9d9",
+          "bytes": 66078,
+          "sha256": "d4e97f228c7dee8c23fd5aca221135f94b72b3e1730a4bb13ec4e68403c6f380",
           "verification": "bytes-verified"
         }
       ],
@@ -538,8 +538,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 4222,
-          "sha256": "24955ff6cd275ca41c9ca9fb8cce98d1dbba633339fa3c8fc0cdbf7fe149fdef",
+          "bytes": 1268,
+          "sha256": "bbc92cc8c3874a5a204caffe461b468323bb7c26197392d7cea2105711335ba4",
           "verification": "bytes-verified"
         }
       ]
@@ -551,7 +551,7 @@
   },
   "lastPreparation": {
     "objectId": "pallene",
-    "materialSha256": "25d1b79ea70d444ba89bfa7ba0faf3521471f2839feacba7997dce3136e56ce5",
+    "materialSha256": "4a8865dac503dc87abff8a2f51a8d61f60b6891c2b6215a732bbf6e7cf9fb67e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

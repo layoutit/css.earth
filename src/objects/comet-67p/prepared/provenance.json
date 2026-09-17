@@ -3077,8 +3077,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-model-surface@2x.webp",
-          "bytes": 205198,
-          "sha256": "6a9a85fabf8553bd045439351d818f2ee4b26488e4c39af06e8f9fff56c90d7d",
+          "bytes": 175936,
+          "sha256": "9d94dfc06939ca38527c49581b4b8560ffab97633dafb8ab5087e3d2ae52f0a5",
           "verification": "bytes-verified"
         }
       ],
@@ -3145,8 +3145,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-albedo-surface@2x.webp",
-          "bytes": 1217120,
-          "sha256": "42f681e2cac7ffbfc2b8d09f0c244b462ac7b1a663e87384c2e105052dc509a9",
+          "bytes": 1045724,
+          "sha256": "e22f692b2a415d5da74d14031c2e31fe5611ed1ca9d931ce18506997bd24398c",
           "verification": "bytes-verified"
         }
       ],
@@ -3208,8 +3208,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-slope-surface@2x.webp",
-          "bytes": 469074,
-          "sha256": "66fca681eaf76dbd72c024308165de82e04f3707224438a0d5809ac8cb5690c4",
+          "bytes": 376422,
+          "sha256": "559aae556c2101cdadf15d7537072afa8e998263a4df31ba27c7fcd8539a4c68",
           "verification": "bytes-verified"
         }
       ],
@@ -3271,8 +3271,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-absorption-surface@2x.webp",
-          "bytes": 1214278,
-          "sha256": "38e00546b084aa360ee503e0e5793b1bd86783e676b11871dba9dcaae9e567f2",
+          "bytes": 1040224,
+          "sha256": "77234952b55ea2ebf2bb653942ff29aadf6816d71af6fa886541cb17f00e63ec",
           "verification": "bytes-verified"
         }
       ],
@@ -3334,8 +3334,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-ice-surface@2x.webp",
-          "bytes": 405084,
-          "sha256": "8c0d8a28bf1783c75eea8961566600ffd7d6d5d5b5f8cca0a86affc6b382252c",
+          "bytes": 329972,
+          "sha256": "1beabb3e06103d9cd4f5b7d28ccc7078452848dbf4b92ddbd60ec9cc04cb9ea9",
           "verification": "bytes-verified"
         }
       ],
@@ -3384,8 +3384,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-regions-surface@2x.webp",
-          "bytes": 53076,
-          "sha256": "a55522c8e0bd293d55e33dcef64417a104c9cc1f400f5ea88bfccb760ec6a677",
+          "bytes": 35726,
+          "sha256": "ff242b8d2501de0fd7252bfffbb8cd822f0b214f00d6441491918662d0bd1d96",
           "verification": "bytes-verified"
         }
       ],
@@ -3434,8 +3434,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-geology-surface@2x.webp",
-          "bytes": 243360,
-          "sha256": "6f00f008ba959bc7e9fcfae24110f66e8bd812ab28e9c34d8a2613a811e81c33",
+          "bytes": 184204,
+          "sha256": "65cf0ef86e6adfa6d76486bbf6de861190aff3bd1cea7cf463c80715ce27bcef",
           "verification": "bytes-verified"
         }
       ],
@@ -3494,8 +3494,8 @@
         },
         {
           "url": "/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
-          "bytes": 1639578,
-          "sha256": "fa8d32a210c69b33c42d66f613d8b334803f329ee826748baab719210dca6919",
+          "bytes": 1258922,
+          "sha256": "9bbeb213db66c22bf8aa113c60781457caa7248e26d1710906cbf29cff32c4de",
           "verification": "bytes-verified"
         }
       ],
@@ -3587,8 +3587,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/osiris.webp",
-          "bytes": 59316,
-          "sha256": "3036a8532d0a48c3e8ece799eea51e7dbd70a53ccc1818fccd9f5bf16ad1b438",
+          "bytes": 5148,
+          "sha256": "7aaa9eb28a39565e05ad1e6385fe2e9352432d84b60d766fadbfb5b740f5c64f",
           "verification": "bytes-verified"
         }
       ]
@@ -3750,7 +3750,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-67p",
-    "materialSha256": "25b231e9296ec7dd63df76fd1601df20e79f1ea6e89b7363649f79a0df940e13",
+    "materialSha256": "38e308eead0b1c2784c8fd9812891bb739e3d234fd4a69d9bee283e3790a6ccd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

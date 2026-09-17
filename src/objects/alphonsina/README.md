@@ -24,9 +24,8 @@ Independent 8192 area-stratified samples in each direction measured nearest-tria
 
 Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
 
-Its surface leaves overlap nothing; slices of its own mesh fill the cracks between them ([method and limits](../../../docs/surface-preparation.md#internal-fill-for-globe-seams)). Against main (elevation lens, pixelmatch, threshold 0.1, five poses): 0.34–0.57% at default zoom, mostly at the limb, and 0.002–0.036% at maximum zoom.
+Its surface leaves overlap each shared edge by 12 CSS pixels, which closes the cracks between them ([method and limits](../../../docs/surface-preparation.md#seam-repair-and-the-globe-interior-disc)). Measured over five poses at DPR 2: 11,147 open crack pixels at default zoom and 115 at maximum zoom, against 54,476 and 6,542 with no overlap.
 
-![Main, interior slices and their pixelmatch difference at yaw 60° default zoom and at yaw 60° and 220° maximum zoom](evidence/interior-slices-pixelmatch.webp)
 
 ## Known problems
 

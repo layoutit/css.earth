@@ -528,8 +528,8 @@
         },
         {
           "url": "/scenes/larissa/larissa-elevation-surface@2x.webp",
-          "bytes": 200866,
-          "sha256": "eb4c96726529329f829712b8bcf0d5337ab1da9f43fc839b2528e55fa129be66",
+          "bytes": 175550,
+          "sha256": "e0925f8e94c7fa0b5b5b637c7f07475286127e6fc064f307cc2efff3b7ed40be",
           "verification": "bytes-verified"
         }
       ],
@@ -574,8 +574,8 @@
         },
         {
           "url": "/scenes/larissa/larissa-normal-surface@2x.webp",
-          "bytes": 115094,
-          "sha256": "bbf8d95be6b11b177e5583ba657287193aaa62f786bd6a0d4832b7271fdacef4",
+          "bytes": 98124,
+          "sha256": "1120904ae6de7600970c4c91c0c301189c8c07233b285f00ad982cf20253770c",
           "verification": "bytes-verified"
         }
       ],
@@ -633,8 +633,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 8054,
-          "sha256": "9f746a3edd5a61fe67923278518aeb87710cf876f735933df3d6acb53d1a3836",
+          "bytes": 3266,
+          "sha256": "a3cb3909bad2282cac4a08b683c072139e4753f7817d34dc28fc4a1cf55e7cc8",
           "verification": "bytes-verified"
         }
       ]
@@ -671,7 +671,7 @@
   },
   "lastPreparation": {
     "objectId": "larissa",
-    "materialSha256": "f35cf18afa84c1a635aac675934174ec52c11f9a17883e9d9ca7c24aaa6e1baf",
+    "materialSha256": "7f7250ca1c660aa16aef3a417d5a78a7240f320f5fe2633d5901c524a8689c04",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
