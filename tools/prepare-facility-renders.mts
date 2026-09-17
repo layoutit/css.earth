@@ -9,12 +9,12 @@ import { chromium } from 'playwright';
 import sharp from 'sharp';
 import { Quaternion, Vector3, MathUtils } from 'three';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from './source-values.mts';
-import type { RenderRequest, renderMachine, recipe } from './machine-renders/render.mts';
+import type { RenderRequest, renderFacility, recipe } from './facility-renders/render.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
-import { prepareArtworkRefresh } from './machine-renders/refresh.mts';
-import { getMachinePose, inwardDirection } from './machine-renders/poses.mts';
+import { prepareArtworkRefresh } from './facility-renders/refresh.mts';
+import { getFacilityPose, inwardDirection } from './facility-renders/poses.mts';
 
-declare global { interface Window { MachineRender: { renderMachine: typeof renderMachine; recipe: typeof recipe }; } }
+declare global { interface Window { FacilityRender: { renderFacility: typeof renderFacility; recipe: typeof recipe }; } }
 
 const root = resolve(import.meta.dirname, '..');
 const args = process.argv.slice(2), write = args.includes('--write');
@@ -23,10 +23,10 @@ const inspectRolls = args.includes('--inspect-rolls');
 if ((inspectAxes || inspectRolls) && write) throw new Error('Pose review cannot publish artwork');
 if (inspectAxes && inspectRolls) throw new Error('Choose source axes or inward-facing rolls');
 const option = (name: string, fallback: string) => args.find(value => value.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
-const output = resolve(root, option('output', 'output/machine-lighting-preview'));
+const output = resolve(root, option('output', 'output/facility-lighting-preview'));
 const cache = resolve(root, option('cache', relative(root, output)));
 const only = option('only', '').split(',').filter(Boolean);
-const libraryPath = resolve(root, 'site/source/machines/render-library.json');
+const libraryPath = resolve(root, 'site/source/facilities/render-library.json');
 const libraryBefore = await readFile(libraryPath);
 const library = requireRecord(JSON.parse(libraryBefore.toString('utf8')));
 const entries = requireArray(library.entries).map(value => requireRecord(value));
@@ -63,7 +63,7 @@ for (const file of files.values()) if (file.path.endsWith('.usdz')) {
     await writeFile(destination, execFileSync('unzip', ['-p', source, image]));
   }
 }
-const bundle = await build({ entryPoints: [resolve(root, 'tools/machine-renders/render.mts')], bundle: true, format: 'iife', globalName: 'MachineRender', write: false, platform: 'browser' });
+const bundle = await build({ entryPoints: [resolve(root, 'tools/facility-renders/render.mts')], bundle: true, format: 'iife', globalName: 'FacilityRender', write: false, platform: 'browser' });
 const script = bundle.outputFiles[0].contents;
 const require = createRequire(import.meta.url), dracoRoot = resolve(dirname(require.resolve('three')), '../examples/jsm/libs/draco/gltf');
 const allowedModels = new Set([...files.keys()]);
@@ -93,24 +93,24 @@ try {
     if (direction.length !== 3) throw new Error('Invalid camera direction');
     const usda = requireString(model.path).endsWith('.usdz');
     const request: RenderRequest = { id, url: origin + '/' + requireString(model.path).replace(/\.usdz$/, '.usda'), direction: [direction[0], direction[1], direction[2]], rollDegrees: 0, usda,
-      ...(!inspectAxes ? { pose: getMachinePose(id, requireString(model.sha256)) } : {}) };
+      ...(!inspectAxes ? { pose: getFacilityPose(id, requireString(model.sha256)) } : {}) };
     if (inspectAxes) {
       for (const [axis, vector] of Object.entries({ xp: [1, 0, 0], xn: [-1, 0, 0], yp: [0, 1, 0], yn: [0, -1, 0], zp: [0, 0, 1], zn: [0, 0, -1] })) {
         const [x, y, z] = vector;
         const direction: [number, number, number] = usda ? [x, y, z] : [x, -z, y];
         await page.goto(origin);
-        const result = await page.evaluate(request => window.MachineRender.renderMachine(request), { ...request, direction, rollDegrees: 0 });
+        const result = await page.evaluate(request => window.FacilityRender.renderFacility(request), { ...request, direction, rollDegrees: 0 });
         await writeFile(resolve(output, `rendered/${id}-${axis}.png`), Buffer.from(result.png.replace(/^data:image\/png;base64,/, ''), 'base64'));
       }
       console.log(`${id}: six source-axis views`);
       continue;
     }
     if (inspectRolls) {
-      const pose = getMachinePose(id, requireString(model.sha256));
+      const pose = getFacilityPose(id, requireString(model.sha256));
       for (const degrees of [0, 90, 180, 270]) {
         const q = new Quaternion().setFromAxisAngle(new Vector3(...inwardDirection).normalize(), MathUtils.degToRad(degrees)).multiply(new Quaternion(...pose.modelQuaternion));
         await page.goto(origin);
-        const result = await page.evaluate(request => window.MachineRender.renderMachine(request), { ...request, pose: { ...pose, modelQuaternion: q.toArray() } });
+        const result = await page.evaluate(request => window.FacilityRender.renderFacility(request), { ...request, pose: { ...pose, modelQuaternion: q.toArray() } });
         await writeFile(resolve(output, `rendered/${id}-roll-${degrees}.png`), Buffer.from(result.png.replace(/^data:image\/png;base64,/, ''), 'base64'));
       }
       console.log(`${id}: four rolls around the facing direction`);
@@ -119,8 +119,8 @@ try {
     await page.goto(origin); // Release the previous model, decoded textures and WebGL context.
     const errors: string[] = []; const error = (e: Error) => errors.push(e.message); page.on('pageerror', error);
     const result = await page.evaluate(async request => {
-      if (!('MachineRender' in window)) throw new Error('Renderer not loaded');
-      return await window.MachineRender.renderMachine(request);
+      if (!('FacilityRender' in window)) throw new Error('Renderer not loaded');
+      return await window.FacilityRender.renderFacility(request);
     }, request);
     page.off('pageerror', error); if (errors.length) throw new Error(errors.join('\n'));
     const png = Buffer.from(result.png.replace(/^data:image\/png;base64,/, ''), 'base64');
@@ -136,13 +136,13 @@ try {
     await writeFile(resolve(output, `rendered/${id}.webp`), webp);
     entry.bytes = webp.length; entry.sha256 = sha256(webp); entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
     entry.composition = { scale: 1, offsetXCssPixels: 0 };
-    entry.processing = { recipe: 'tools/machine-renders/render.mts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, omissions: result.report.omissions, camera: result.report.camera, pose: result.report.pose };
+    entry.processing = { recipe: 'tools/facility-renders/render.mts#recipe', sourceMaterials: 'unchanged', triangles: result.report.triangles, omissions: result.report.omissions, camera: result.report.camera, pose: result.report.pose };
     reports.push({ ...result.report, bytes: webp.length, sha256: entry.sha256, subject: entry.subject });
     console.log(`${id}: ${result.report.triangles} triangles; ${webp.length} bytes; ${result.report.omissions.reduce((n, v) => n + v.triangles, 0)} omitted`);
   }
   if (!inspectAxes && !inspectRolls) {
-    library.renderer = { ...await page.evaluate(() => { if (!('MachineRender' in window)) throw new Error('Renderer not loaded'); return window.MachineRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp,
-      implementation: Object.fromEntries(await Promise.all(['tools/prepare-machine-renders.mts', 'tools/machine-renders/render.mts', 'tools/machine-renders/poses.mts', 'tools/machine-renders/voyager.mts', 'tools/machine-renders/refresh.mts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
+    library.renderer = { ...await page.evaluate(() => { if (!('FacilityRender' in window)) throw new Error('Renderer not loaded'); return window.FacilityRender.recipe; }), browser: browser.version(), sharp: sharp.versions.sharp,
+      implementation: Object.fromEntries(await Promise.all(['tools/prepare-facility-renders.mts', 'tools/facility-renders/render.mts', 'tools/facility-renders/poses.mts', 'tools/facility-renders/voyager.mts', 'tools/facility-renders/refresh.mts'].map(async file => [file, sha256(await readFile(resolve(root, file)))]))) };
     library.composition = { background: 'transparent for model renders', displaySize: [296, 148], preserveAspectRatio: true, fitPolicy: 'Center retained source geometry; alpha bounds with 6px padding supply sidebar crop.' };
     await writeFile(resolve(output, 'render-report.json'), JSON.stringify(reports, null, 2) + '\n');
     await writeFile(resolve(output, 'render-library.candidate.json'), JSON.stringify(library, null, 2) + '\n');

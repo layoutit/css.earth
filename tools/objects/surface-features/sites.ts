@@ -16,13 +16,13 @@ export const SITE_PRIORITY_KM = 20;
 
 export interface SiteSource { readonly title: string; readonly url: string; readonly publisher: string; readonly rights: string; readonly rightsUrl: string; }
 export interface SurfaceSite {
-  readonly id: string; readonly name: string; readonly kind: SiteKind; readonly date: string; readonly machineId: string | null;
+  readonly id: string; readonly name: string; readonly kind: SiteKind; readonly date: string; readonly facilityId: string | null;
   readonly latitudeDeg: number; readonly longitudeDegEast: number; readonly coordinateNote: string; readonly precisionNote: string | null;
   readonly naming: { readonly name: string; readonly authority: string; readonly gazetteerFeatureId: number | null } | null;
   readonly source: SiteSource; readonly quote: string;
 }
 export interface SurfaceTraverse {
-  readonly id: string; readonly name: string; readonly machineId: string | null; readonly date: string; readonly source: SiteSource;
+  readonly id: string; readonly name: string; readonly facilityId: string | null; readonly date: string; readonly source: SiteSource;
   readonly path: { readonly file: string; readonly format: 'places-csv' | 'lroc-shapefile-zip'; readonly latitudeColumn?: string; readonly longitudeColumn?: string; readonly member?: string };
 }
 export interface SurfaceSites { readonly schema: typeof SURFACE_SITES_SCHEMA; readonly source: string; readonly retrievedAt: string; readonly sites: readonly SurfaceSite[]; readonly traverses: readonly SurfaceTraverse[]; }
@@ -30,7 +30,7 @@ export interface SiteRow {
   readonly id: string; readonly name: string; readonly type: string; readonly code: string; readonly kind: 'point' | 'linear'; readonly priority: number;
   readonly centerLon: number; readonly centerLat: number; readonly extent: { minLon: number; maxLon: number; minLat: number; maxLat: number } | null;
   readonly paths: readonly (readonly (readonly [number, number])[])[] | null; readonly origin: string; readonly credit: string; readonly approved: string; readonly link: string;
-  readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null; readonly machineId: string | null;
+  readonly note: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string } | null; readonly facilityId: string | null;
 }
 
 const text = (value: unknown, label: string): string => { if (typeof value !== 'string' || !value.trim()) throw new TypeError(`${label} must be a non-empty string.`); return value; };
@@ -59,7 +59,7 @@ export function parseSurfaceSites(value: unknown): SurfaceSites {
     const namingInput = site.naming === null || site.naming === undefined ? null : record(site.naming, `${label}.naming`);
     const naming = namingInput ? Object.freeze({ name: text(namingInput.name, `${label}.naming.name`), authority: text(namingInput.authority, `${label}.naming.authority`),
       gazetteerFeatureId: namingInput.gazetteerFeatureId === undefined || namingInput.gazetteerFeatureId === null ? null : finite(namingInput.gazetteerFeatureId, `${label}.naming.gazetteerFeatureId`) }) : null;
-    return Object.freeze({ id, name: text(site.name, `${label}.name`), kind: kind as SiteKind, date: date(site.date, `${label}.date`), machineId: optionalText(site.machineId, `${label}.machineId`),
+    return Object.freeze({ id, name: text(site.name, `${label}.name`), kind: kind as SiteKind, date: date(site.date, `${label}.date`), facilityId: optionalText(site.facilityId, `${label}.facilityId`),
       latitudeDeg, longitudeDegEast, coordinateNote: text(site.coordinateNote, `${label}.coordinateNote`), precisionNote: optionalText(site.precisionNote, `${label}.precisionNote`),
       naming, source: parseSource(site.source, `${label}.source`), quote: text(site.quote, `${label}.quote`) });
   });
@@ -68,7 +68,7 @@ export function parseSurfaceSites(value: unknown): SurfaceSites {
     const id = text(traverse.id, `${label}.id`); if (!/^[a-z0-9][a-z0-9-]*$/u.test(id) || ids.has(id)) throw new TypeError(`${label}.id must be a unique kebab id.`); ids.add(id);
     const format = text(path.format, `${label}.path.format`);
     if (format !== 'places-csv' && format !== 'lroc-shapefile-zip') throw new TypeError(`${label}.path.format is unknown.`);
-    return Object.freeze({ id, name: text(traverse.name, `${label}.name`), machineId: optionalText(traverse.machineId, `${label}.machineId`), date: date(traverse.date, `${label}.date`), source: parseSource(traverse.source, `${label}.source`),
+    return Object.freeze({ id, name: text(traverse.name, `${label}.name`), facilityId: optionalText(traverse.facilityId, `${label}.facilityId`), date: date(traverse.date, `${label}.date`), source: parseSource(traverse.source, `${label}.source`),
       path: Object.freeze({ file: relativePath(path.file, `${label}.path.file`), format: format as 'places-csv' | 'lroc-shapefile-zip',
         ...(path.latitudeColumn === undefined ? {} : { latitudeColumn: text(path.latitudeColumn, `${label}.path.latitudeColumn`) }),
         ...(path.longitudeColumn === undefined ? {} : { longitudeColumn: text(path.longitudeColumn, `${label}.path.longitudeColumn`) }),
@@ -125,11 +125,11 @@ export function loadSiteRows(sourceDirectory: string, directory: string, sites: 
     title: site.source.title, url: site.source.url, credit: '' });
   sites.sites.forEach((site, index) => {
     const kind = SITE_KINDS[site.kind];
-    const who = site.machineId ? site.name : site.name;
+    const who = site.facilityId ? site.name : site.name;
     const origin = `${kind.type} of ${who.replace(/ (impact|landing|lander|touchdown)( site)?$/iu, '')}, ${spokenDate(site.date)}${site.naming ? `; ${site.naming.authority.startsWith('IAU') ? 'IAU name' : 'informal name'} ${site.naming.name}` : ''}.`;
     rows.push({ id: String(idBase + index), name: site.name, type: kind.type, code: kind.code, kind: 'point', priority: SITE_PRIORITY_KM,
       centerLon: site.longitudeDegEast, centerLat: site.latitudeDeg, extent: null, paths: null, origin, credit: `${site.source.publisher}, ${site.date.slice(0, 4)}`,
-      approved: site.date.length === 10 ? site.date : `${site.date}-01-01`.slice(0, 10), link: site.source.url, note: noteFor(site), machineId: site.machineId });
+      approved: site.date.length === 10 ? site.date : `${site.date}-01-01`.slice(0, 10), link: site.source.url, note: noteFor(site), facilityId: site.facilityId });
   });
   sites.traverses.forEach((traverse, index) => {
     const file = resolve(sourceDirectory, directory, traverse.path.file);
@@ -143,7 +143,7 @@ export function loadSiteRows(sourceDirectory: string, directory: string, sites: 
     rows.push({ id: String(idBase + 1000 + index), name: traverse.name, type: 'Traverse', code: 'RT', kind: 'linear', priority: SITE_PRIORITY_KM,
       centerLon: start[0], centerLat: start[1], extent, paths, origin: `Traverse of ${traverse.name.replace(/ traverse.*$/iu, '')}, from ${spokenDate(traverse.date)}.`,
       credit: `${traverse.source.publisher}, ${traverse.date.slice(0, 4)}`, approved: traverse.date.length === 10 ? traverse.date : `${traverse.date}-01-01`.slice(0, 10), link: traverse.source.url,
-      note: { text: clip(`Path from ${traverse.source.title}.`), title: traverse.source.title, url: traverse.source.url, credit: '' }, machineId: traverse.machineId });
+      note: { text: clip(`Path from ${traverse.source.title}.`), title: traverse.source.title, url: traverse.source.url, credit: '' }, facilityId: traverse.facilityId });
   });
   return rows;
 }

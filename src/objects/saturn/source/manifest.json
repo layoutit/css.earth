@@ -18,8 +18,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif"
           }
@@ -57,8 +57,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
           }
@@ -234,8 +234,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
           }
@@ -268,8 +268,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
           }
@@ -302,8 +302,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
           }
@@ -336,8 +336,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
           }
@@ -612,8 +612,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB"
           }
@@ -647,8 +647,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL"
           }

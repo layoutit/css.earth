@@ -12,11 +12,11 @@ import { readSourceCatalog } from '../read-source-catalogue.mts';
  * input must still match; this does not reacquire or rebake celestial datasets. */
 export async function prepareArtworkRefresh(root: string, before: Buffer, after: Buffer, images: ReadonlyMap<string, Buffer>) {
 
-  const libraryPath = 'site/source/machines/render-library.json';
+  const libraryPath = 'site/source/facilities/render-library.json';
   const previous = requireRecord(JSON.parse(before.toString())), next = requireRecord(JSON.parse(after.toString()));
-  const machines = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-machines.json'), 'utf8')));
+  const facilities = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-facilities.json'), 'utf8')));
   const sources = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-sources.json'), 'utf8')));
-  const validatedSources = parsePreparedSources(sources), validatedMachines = parsePreparedExploration(machines, validatedSources.sources);
+  const validatedSources = parsePreparedSources(sources), validatedFacilities = parsePreparedExploration(facilities, validatedSources.sources);
   assert.equal(sha256(before), validatedSources.closure[libraryPath], 'Previous artwork library does not match the prepared graph');
   assert.equal(sourceCatalogDigest(await readSourceCatalog(root)), validatedSources.catalogSha256, 'Source records changed; full preparation required');
   const previousEntries = requireArray(previous.entries).map(value => requireRecord(value));
@@ -47,8 +47,8 @@ export async function prepareArtworkRefresh(root: string, before: Buffer, after:
   }
   const closure: Record<string, string> = { ...validatedSources.closure, [libraryPath]: sha256(after) };
   for (const image of prepared) closure['public' + image.src] = image.sha256;
-  machines.images = prepared; sources.closure = closure;
-  parsePreparedExploration(machines, validatedSources.sources); parsePreparedSources(sources);
-  return [{ path: resolve(root, 'site/prepared-machines.json'), text: JSON.stringify(machines, null, 2) + '\n' },
+  facilities.images = prepared; sources.closure = closure;
+  parsePreparedExploration(facilities, validatedSources.sources); parsePreparedSources(sources);
+  return [{ path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(facilities, null, 2) + '\n' },
     { path: resolve(root, 'site/prepared-sources.json'), text: JSON.stringify(sources, null, 2) + '\n' }];
 }

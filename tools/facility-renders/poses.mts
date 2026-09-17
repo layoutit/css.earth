@@ -1,7 +1,7 @@
 import { Quaternion, Vector3 } from 'three';
 
 export type Vector = [number, number, number];
-export interface MachinePose {
+export interface FacilityPose {
   sourceSha256: string;
   facingFeature: string;
   sourceAxis: Vector;
@@ -15,7 +15,7 @@ export const inwardDirection: Vector = [-0.8, -0.45, 0.45];
 /** Authored illustration poses, visually matched to pinned models and mission diagrams.
  * Source axes identify a visible dish or optical opening, not calibrated flight frames.
  * Quaternions rotate the source model before lighting; no image rotation follows capture. */
-export const machinePoses: Record<string, MachinePose> = {
+export const facilityPoses: Record<string, FacilityPose> = {
   'cassini': {
     sourceSha256: 'f8bc110e23821021e99b88634843449cc8e98d86d0d8561c612c1cf0404e64e7',
     facingFeature: "Radar / high-gain dish", sourceAxis: [0, 1, 0],
@@ -144,13 +144,13 @@ export const machinePoses: Record<string, MachinePose> = {
   },
 };
 
-export function getMachinePose(id: string, sourceSha256: string): MachinePose {
-  const pose = machinePoses[id];
-  if (!pose || pose.sourceSha256 !== sourceSha256) throw new Error(`Unreviewed machine pose or source: ${id}`);
+export function getFacilityPose(id: string, sourceSha256: string): FacilityPose {
+  const pose = facilityPoses[id];
+  if (!pose || pose.sourceSha256 !== sourceSha256) throw new Error(`Unreviewed facility pose or source: ${id}`);
   const q = new Quaternion(...pose.modelQuaternion);
   const aim = new Vector3(...pose.sourceAxis).normalize().applyQuaternion(q);
   if (Math.abs(q.length() - 1) > 1e-8 || aim.distanceTo(new Vector3(...inwardDirection).normalize()) > 1e-8) {
-    throw new Error(`Invalid inward machine pose: ${id}`);
+    throw new Error(`Invalid inward facility pose: ${id}`);
   }
   return pose;
 }

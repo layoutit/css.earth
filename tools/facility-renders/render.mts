@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { loadVoyager } from './voyager.mts';
-import { inwardDirection, type MachinePose } from './poses.mts';
+import { inwardDirection, type FacilityPose } from './poses.mts';
 
 export interface RenderRequest {
   id: string;
@@ -11,12 +11,12 @@ export interface RenderRequest {
   direction: [number, number, number];
   rollDegrees: number;
   usda: boolean;
-  pose?: MachinePose;
+  pose?: FacilityPose;
 }
 
 /** Illustration lights, in camera coordinates. Never mission-specific illumination. */
 export const recipe = {
-  name: 'Neutral inward-facing machine thumbnails v3', renderer: 'Three.js 0.180.0', preparationOnly: true,
+  name: 'Neutral inward-facing facility thumbnails v3', renderer: 'Three.js 0.180.0', preparationOnly: true,
   masterSize: [1200, 600], outputSize: [592, 296],
   materials: 'Original source materials and textures; no artistic overrides.',
   toneMapping: 'ACESFilmic', exposure: 1,
@@ -29,7 +29,7 @@ export const recipe = {
   lightColor: '#ffffff', shadowMapSize: 2048,
   framing: 'Centered orthographic; fit retained geometry within 88% width / 86% height.',
   camera: { position: [0, 0, 10], up: [0, 1, 0], rollDegrees: 0 },
-  orientation: { poses: 'tools/machine-renders/poses.mts', inwardDirection, policy: 'Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude.' },
+  orientation: { poses: 'tools/facility-renders/poses.mts', inwardDirection, policy: 'Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude.' },
 };
 
 /** Connected components welded by position, used only for reviewed source-specific omissions. */
@@ -61,7 +61,7 @@ export function components(geometry: T.BufferGeometry) {
   return { ids, find, parts };
 }
 
-export async function renderMachine(request: RenderRequest) {
+export async function renderFacility(request: RenderRequest) {
   const renderer = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
   renderer.setPixelRatio(1); renderer.setSize(1200, 600); renderer.setClearColor(0, 0);
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;

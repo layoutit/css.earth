@@ -9,7 +9,7 @@ export function parseExplorationImage(raw: unknown): ExplorationImage {
   const image = explorationRecord(raw, ['id', 'src', 'width', 'height', 'bytes', 'sha256', 'kind', 'sourceUrl', 'credit', 'subject']);
   const number = (input: unknown) => { if (typeof input !== 'number' || !Number.isSafeInteger(input) || input <= 0) throw new TypeError('Invalid artwork dimensions/bytes.'); return input; };
   const src = explorationText(image.src), sha256 = explorationText(image.sha256);
-  if (!/^\/shell\/machine-(renders|emblems)\/[a-z0-9-]+\.(webp|png)$/.test(src) || !/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Invalid artwork identity.');
+  if (!/^\/shell\/facility-(renders|emblems)\/[a-z0-9-]+\.(webp|png)$/.test(src) || !/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Invalid artwork identity.');
   // Where the subject sits inside a composited render, so the card can show it
   // instead of the flat background it was rendered on.
   const subject = image.subject === undefined ? undefined : (() => {
@@ -32,7 +32,7 @@ export function parsePreparedExploration(input: unknown, sources: SourceResolver
     return Object.freeze(Object.fromEntries(images.map(image => [image.id, image])));
   };
   const images = assets(value.images), emblems = assets(value.emblems);
-  for (const entity of [...catalog.machines, ...catalog.missions]) if (entity.imageId && !Object.hasOwn(images, entity.imageId)) throw new TypeError('Unknown exploration image.');
+  for (const entity of [...catalog.facilities, ...catalog.missions]) if (entity.imageId && !Object.hasOwn(images, entity.imageId)) throw new TypeError('Unknown exploration image.');
   for (const mission of catalog.missions) if (mission.emblemId && !Object.hasOwn(emblems, mission.emblemId)) throw new TypeError('Unknown mission emblem.');
   // The sources catalogue owns the input closure; this catalogue binds to it by the catalogue digest.
   return Object.freeze({ sourceCatalogSha256: sourceDigest(value.sourceCatalogSha256), catalog, agencies, images, emblems, graph: parseContributionGraph(value.graph, catalog) });

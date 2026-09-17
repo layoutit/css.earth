@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-machine-emblems@3",
+  "schema": "cssearth-facility-emblems@3",
   "normalBuildPolicy": "Reuse committed PNGs; preparation and acquisition are explicit maintenance only.",
   "entries": [
     {
       "id": "messenger",
-      "src": "/shell/machine-emblems/messenger.png",
+      "src": "/shell/facility-emblems/messenger.png",
       "width": 288,
       "height": 288,
       "bytes": 114715,
@@ -46,7 +46,7 @@
     },
     {
       "id": "dawn",
-      "src": "/shell/machine-emblems/dawn.png",
+      "src": "/shell/facility-emblems/dawn.png",
       "width": 288,
       "height": 288,
       "bytes": 172837,
@@ -88,7 +88,7 @@
     },
     {
       "id": "galileo",
-      "src": "/shell/machine-emblems/galileo.png",
+      "src": "/shell/facility-emblems/galileo.png",
       "width": 288,
       "height": 288,
       "bytes": 84024,
@@ -130,7 +130,7 @@
     },
     {
       "id": "juno",
-      "src": "/shell/machine-emblems/juno.png",
+      "src": "/shell/facility-emblems/juno.png",
       "width": 288,
       "height": 288,
       "bytes": 21831,
@@ -174,7 +174,7 @@
     },
     {
       "id": "new-horizons",
-      "src": "/shell/machine-emblems/new-horizons.png",
+      "src": "/shell/facility-emblems/new-horizons.png",
       "width": 288,
       "height": 288,
       "bytes": 158395,
@@ -216,7 +216,7 @@
     },
     {
       "id": "sdo",
-      "src": "/shell/machine-emblems/sdo.png",
+      "src": "/shell/facility-emblems/sdo.png",
       "width": 288,
       "height": 288,
       "bytes": 124647,
@@ -258,7 +258,7 @@
     },
     {
       "id": "voyager-1",
-      "src": "/shell/machine-emblems/voyager-1.png",
+      "src": "/shell/facility-emblems/voyager-1.png",
       "width": 288,
       "height": 288,
       "bytes": 43452,
@@ -300,7 +300,7 @@
     },
     {
       "id": "voyager-2",
-      "src": "/shell/machine-emblems/voyager-2.png",
+      "src": "/shell/facility-emblems/voyager-2.png",
       "width": 288,
       "height": 288,
       "bytes": 43452,
@@ -342,7 +342,7 @@
     },
     {
       "id": "lro",
-      "src": "/shell/machine-emblems/lro.png",
+      "src": "/shell/facility-emblems/lro.png",
       "width": 288,
       "height": 288,
       "bytes": 123377,
@@ -385,7 +385,7 @@
     },
     {
       "id": "grail",
-      "src": "/shell/machine-emblems/grail.png",
+      "src": "/shell/facility-emblems/grail.png",
       "width": 288,
       "height": 288,
       "bytes": 80312,
@@ -428,7 +428,7 @@
     },
     {
       "id": "viking",
-      "src": "/shell/machine-emblems/viking.png",
+      "src": "/shell/facility-emblems/viking.png",
       "width": 288,
       "height": 288,
       "bytes": 150681,
@@ -471,7 +471,7 @@
     },
     {
       "id": "mro",
-      "src": "/shell/machine-emblems/mro.png",
+      "src": "/shell/facility-emblems/mro.png",
       "width": 288,
       "height": 288,
       "bytes": 54128,
@@ -513,7 +513,7 @@
     },
     {
       "id": "osiris-rex",
-      "src": "/shell/machine-emblems/osiris-rex.png",
+      "src": "/shell/facility-emblems/osiris-rex.png",
       "width": 288,
       "height": 288,
       "bytes": 80651,
@@ -555,7 +555,7 @@
     },
     {
       "id": "terra",
-      "src": "/shell/machine-emblems/terra.png",
+      "src": "/shell/facility-emblems/terra.png",
       "width": 288,
       "height": 288,
       "bytes": 112836,
@@ -598,7 +598,7 @@
     },
     {
       "id": "cassini",
-      "src": "/shell/machine-emblems/cassini.png",
+      "src": "/shell/facility-emblems/cassini.png",
       "width": 288,
       "height": 288,
       "bytes": 126628,
@@ -643,7 +643,7 @@
     },
     {
       "id": "magellan",
-      "src": "/shell/machine-emblems/magellan.png",
+      "src": "/shell/facility-emblems/magellan.png",
       "width": 288,
       "height": 288,
       "bytes": 59106,
@@ -687,7 +687,7 @@
     },
     {
       "id": "odyssey",
-      "src": "/shell/machine-emblems/odyssey.png",
+      "src": "/shell/facility-emblems/odyssey.png",
       "width": 288,
       "height": 288,
       "bytes": 81390,
@@ -731,7 +731,7 @@
     },
     {
       "id": "near-shoemaker",
-      "src": "/shell/machine-emblems/near-shoemaker.png",
+      "src": "/shell/facility-emblems/near-shoemaker.png",
       "width": 288,
       "height": 288,
       "bytes": 98803,
@@ -775,7 +775,7 @@
     },
     {
       "id": "mars-global-surveyor",
-      "src": "/shell/machine-emblems/mars-global-surveyor.png",
+      "src": "/shell/facility-emblems/mars-global-surveyor.png",
       "width": 288,
       "height": 288,
       "bytes": 96861,
@@ -819,7 +819,7 @@
     },
     {
       "id": "suomi-npp",
-      "src": "/shell/machine-emblems/suomi-npp.png",
+      "src": "/shell/facility-emblems/suomi-npp.png",
       "width": 288,
       "height": 288,
       "bytes": 113711,
@@ -863,7 +863,7 @@
     },
     {
       "id": "hubble",
-      "src": "/shell/machine-emblems/hubble.png",
+      "src": "/shell/facility-emblems/hubble.png",
       "width": 288,
       "height": 288,
       "bytes": 58343,
@@ -908,7 +908,7 @@
     },
     {
       "id": "hayabusa",
-      "src": "/shell/machine-emblems/hayabusa.png",
+      "src": "/shell/facility-emblems/hayabusa.png",
       "width": 288,
       "height": 288,
       "bytes": 104923,
@@ -951,7 +951,7 @@
     },
     {
       "id": "hayabusa2",
-      "src": "/shell/machine-emblems/hayabusa2.png",
+      "src": "/shell/facility-emblems/hayabusa2.png",
       "width": 288,
       "height": 288,
       "bytes": 78493,
@@ -995,7 +995,7 @@
     },
     {
       "id": "rosetta",
-      "src": "/shell/machine-emblems/rosetta.png",
+      "src": "/shell/facility-emblems/rosetta.png",
       "width": 288,
       "height": 288,
       "bytes": 54550,

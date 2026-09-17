@@ -81,10 +81,10 @@ try {
           wordmarkSlot: box(".explorer-shell-wordmark"),
           search: box(".planet-sidebar-search-card"), toolbar: box(".planet-search-toolbar"),
           categories: box(".planet-search-categories"), categoriesShown: shown(".planet-search-categories"),
-          brand: box(".explorer-brand-row"), machineAction: box(".planet-machine-action"),
+          brand: box(".explorer-brand-row"), facilityAction: box(".planet-facility-action"),
           categoryCount: document.querySelectorAll(".planet-search-category").length,
           githubShown: shown(".planet-header-link"), github: box(".planet-header-link"),
-          settings: box(".planet-settings-action"), machine: box(".planet-machine-toggle"),
+          settings: box(".planet-settings-action"), facility: box(".planet-facility-toggle"),
           clearShown: shown(".planet-sidebar-search-clear"),
           card: box(".planet-information-panel"),
           // The sheet declares its snap heights; the controller reads the same values.
@@ -132,11 +132,11 @@ try {
           assert.equal(result.githubShown, false, "the version link carries GitHub on phones");
           assert.ok(result.settings.left >= result.search.right,
             "Settings ends the header row, clear of the search field");
-          assert.ok(result.machineAction.left >= result.search.right
-            && result.machineAction.right <= result.settings.left,
+          assert.ok(result.facilityAction.left >= result.search.right
+            && result.facilityAction.right <= result.settings.left,
             "Spacecraft sits between the search field and Settings");
           assert.ok(Math.abs(result.settings.height - result.search.height) < 1
-            && Math.abs(result.machineAction.height - result.search.height) < 1,
+            && Math.abs(result.facilityAction.height - result.search.height) < 1,
             "both header buttons match the search field's height");
           assert.ok(result.brand.right <= result.search.left, "the wordmark heads the row");
         } else {

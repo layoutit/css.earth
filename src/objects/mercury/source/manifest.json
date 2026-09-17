@@ -50,8 +50,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "messenger",
+            "kind": "facility",
+            "facilityId": "messenger",
             "missionId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
           }
@@ -99,8 +99,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "messenger",
+            "kind": "facility",
+            "facilityId": "messenger",
             "missionId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
           }
@@ -145,8 +145,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "messenger",
+            "kind": "facility",
+            "facilityId": "messenger",
             "missionId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png"
           }

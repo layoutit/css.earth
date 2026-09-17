@@ -29,8 +29,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vista",
+            "kind": "facility",
+            "facilityId": "vista",
             "evidence": "https://www.eso.org/public/images/eso1914a/"
           }
         ]
@@ -98,8 +98,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "wise",
+            "kind": "facility",
+            "facilityId": "wise",
             "evidence": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html"
           }
         ]
@@ -156,13 +156,13 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "swope-1m",
+            "kind": "facility",
+            "facilityId": "swope-1m",
             "evidence": "https://arxiv.org/abs/0905.1328 — section 2.3.2: table 3 UBVI columns are MCPS; https://arxiv.org/abs/astro-ph/0407006 section 2: Swope 1 m and Great Circle Camera. Preparation consumes B and V, not OGLE or infrared photometry."
           },
           {
-            "kind": "machine",
-            "machineId": "curtis-schmidt",
+            "kind": "facility",
+            "facilityId": "curtis-schmidt",
             "evidence": "https://arxiv.org/abs/astro-ph/0407006 PDF page 4 / Table 2: MCPS replaces bright-star photometry with Massey where available; https://arxiv.org/abs/astro-ph/0110531 section 2.1: Curtis Schmidt at CTIO. The joined Bonanos rows do not identify individual replacement measurements."
           },
           {
@@ -399,8 +399,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "blanco-4m",
+            "kind": "facility",
+            "facilityId": "blanco-4m",
             "evidence": "https://noirlab.edu/public/images/noirlab2030a/ — publisher-curated mirror https://www.astropix.org/image/noirlab/noirlab2030a identifies Blanco-4m/DECam in g, r, i and z; this historical image is retained as a source document."
           }
         ]

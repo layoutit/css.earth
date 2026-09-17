@@ -1,6 +1,6 @@
 {
-  "schema": "cssearth-machine-catalog@4",
-  "machines": [
+  "schema": "cssearth-facility-catalog@4",
+  "facilities": [
     {
       "id": "messenger",
       "name": {
@@ -3390,7 +3390,7 @@
       },
       "participants": [
         {
-          "machineId": "messenger",
+          "facilityId": "messenger",
           "role": "orbiter",
           "citations": [
             {
@@ -3456,7 +3456,7 @@
       },
       "participants": [
         {
-          "machineId": "cassini",
+          "facilityId": "cassini",
           "role": "orbiter",
           "citations": [
             {
@@ -3466,7 +3466,7 @@
           ]
         },
         {
-          "machineId": "huygens",
+          "facilityId": "huygens",
           "role": "probe",
           "citations": [
             {
@@ -3530,7 +3530,7 @@
       },
       "participants": [
         {
-          "machineId": "dawn",
+          "facilityId": "dawn",
           "role": "orbiter",
           "citations": [
             {
@@ -3594,7 +3594,7 @@
       },
       "participants": [
         {
-          "machineId": "galileo",
+          "facilityId": "galileo",
           "role": "orbiter",
           "citations": [
             {
@@ -3604,7 +3604,7 @@
           ]
         },
         {
-          "machineId": "galileo-probe",
+          "facilityId": "galileo-probe",
           "role": "probe",
           "citations": [
             {
@@ -3669,7 +3669,7 @@
       },
       "participants": [
         {
-          "machineId": "hubble",
+          "facilityId": "hubble",
           "role": "observatory",
           "citations": [
             {
@@ -3736,7 +3736,7 @@
       },
       "participants": [
         {
-          "machineId": "juno",
+          "facilityId": "juno",
           "role": "orbiter",
           "citations": [
             {
@@ -3803,7 +3803,7 @@
       },
       "participants": [
         {
-          "machineId": "new-horizons",
+          "facilityId": "new-horizons",
           "role": "flyby",
           "citations": [
             {
@@ -3879,7 +3879,7 @@
       },
       "participants": [
         {
-          "machineId": "sdo",
+          "facilityId": "sdo",
           "role": "observatory",
           "citations": [
             {
@@ -3946,7 +3946,7 @@
       },
       "participants": [
         {
-          "machineId": "voyager-1",
+          "facilityId": "voyager-1",
           "role": "flyby",
           "citations": [
             {
@@ -4013,7 +4013,7 @@
       },
       "participants": [
         {
-          "machineId": "voyager-2",
+          "facilityId": "voyager-2",
           "role": "flyby",
           "citations": [
             {
@@ -4089,7 +4089,7 @@
       },
       "participants": [
         {
-          "machineId": "lro",
+          "facilityId": "lro",
           "role": "orbiter",
           "citations": [
             {
@@ -4165,7 +4165,7 @@
       },
       "participants": [
         {
-          "machineId": "mro",
+          "facilityId": "mro",
           "role": "orbiter",
           "citations": [
             {
@@ -4241,7 +4241,7 @@
       },
       "participants": [
         {
-          "machineId": "odyssey",
+          "facilityId": "odyssey",
           "role": "orbiter",
           "citations": [
             {
@@ -4308,7 +4308,7 @@
       },
       "participants": [
         {
-          "machineId": "near-shoemaker",
+          "facilityId": "near-shoemaker",
           "role": "orbiter",
           "citations": [
             {
@@ -4372,7 +4372,7 @@
       },
       "participants": [
         {
-          "machineId": "osiris-rex",
+          "facilityId": "osiris-rex",
           "role": "sample-return",
           "citations": [
             {
@@ -4436,7 +4436,7 @@
       },
       "participants": [
         {
-          "machineId": "hayabusa2",
+          "facilityId": "hayabusa2",
           "role": "sample-return",
           "citations": [
             {
@@ -4446,7 +4446,7 @@
           ]
         },
         {
-          "machineId": "minerva-ii-1a",
+          "facilityId": "minerva-ii-1a",
           "role": "rover",
           "citations": [
             {
@@ -4456,7 +4456,7 @@
           ]
         },
         {
-          "machineId": "minerva-ii-1b",
+          "facilityId": "minerva-ii-1b",
           "role": "rover",
           "citations": [
             {
@@ -4466,7 +4466,7 @@
           ]
         },
         {
-          "machineId": "minerva-ii-2",
+          "facilityId": "minerva-ii-2",
           "role": "rover",
           "citations": [
             {
@@ -4476,7 +4476,7 @@
           ]
         },
         {
-          "machineId": "mascot",
+          "facilityId": "mascot",
           "role": "lander",
           "citations": [
             {
@@ -4543,7 +4543,7 @@
       },
       "participants": [
         {
-          "machineId": "hayabusa",
+          "facilityId": "hayabusa",
           "role": "sample-return",
           "citations": [
             {
@@ -4553,7 +4553,7 @@
           ]
         },
         {
-          "machineId": "minerva",
+          "facilityId": "minerva",
           "role": "rover",
           "citations": [
             {
@@ -4617,7 +4617,7 @@
       },
       "participants": [
         {
-          "machineId": "rosetta",
+          "facilityId": "rosetta",
           "role": "orbiter",
           "citations": [
             {
@@ -4627,7 +4627,7 @@
           ]
         },
         {
-          "machineId": "philae",
+          "facilityId": "philae",
           "role": "lander",
           "citations": [
             {
@@ -4691,7 +4691,7 @@
       },
       "participants": [
         {
-          "machineId": "terra",
+          "facilityId": "terra",
           "role": "observatory",
           "citations": [
             {
@@ -4759,7 +4759,7 @@
       },
       "participants": [
         {
-          "machineId": "suomi-npp",
+          "facilityId": "suomi-npp",
           "role": "observatory",
           "citations": [
             {
@@ -4826,7 +4826,7 @@
       },
       "participants": [
         {
-          "machineId": "magellan",
+          "facilityId": "magellan",
           "role": "orbiter",
           "citations": [
             {
@@ -4899,7 +4899,7 @@
       },
       "participants": [
         {
-          "machineId": "mars-global-surveyor",
+          "facilityId": "mars-global-surveyor",
           "role": "orbiter",
           "citations": [
             {
@@ -4963,7 +4963,7 @@
       },
       "participants": [
         {
-          "machineId": "viking-1-orbiter",
+          "facilityId": "viking-1-orbiter",
           "role": "orbiter",
           "citations": [
             {
@@ -4973,7 +4973,7 @@
           ]
         },
         {
-          "machineId": "viking-1-lander",
+          "facilityId": "viking-1-lander",
           "role": "lander",
           "citations": [
             {
@@ -5035,7 +5035,7 @@
       },
       "participants": [
         {
-          "machineId": "viking-2-orbiter",
+          "facilityId": "viking-2-orbiter",
           "role": "orbiter",
           "citations": [
             {
@@ -5045,7 +5045,7 @@
           ]
         },
         {
-          "machineId": "viking-2-lander",
+          "facilityId": "viking-2-lander",
           "role": "lander",
           "citations": [
             {
@@ -5107,7 +5107,7 @@
       },
       "participants": [
         {
-          "machineId": "grail-a",
+          "facilityId": "grail-a",
           "role": "orbiter",
           "citations": [
             {
@@ -5117,7 +5117,7 @@
           ]
         },
         {
-          "machineId": "grail-b",
+          "facilityId": "grail-b",
           "role": "orbiter",
           "citations": [
             {
@@ -5181,7 +5181,7 @@
       },
       "participants": [
         {
-          "machineId": "osiris-rex",
+          "facilityId": "osiris-rex",
           "role": "probe",
           "citations": [
             {
@@ -5243,7 +5243,7 @@
       },
       "participants": [
         {
-          "machineId": "arecibo-305m",
+          "facilityId": "arecibo-305m",
           "role": "radar-telescope",
           "citations": [
             {
@@ -5327,7 +5327,7 @@
       },
       "participants": [
         {
-          "machineId": "goldstone-dss14",
+          "facilityId": "goldstone-dss14",
           "role": "radar-telescope",
           "citations": [
             {
@@ -5390,7 +5390,7 @@
       },
       "participants": [
         {
-          "machineId": "vlt-ut3",
+          "facilityId": "vlt-ut3",
           "role": "optical-telescope",
           "citations": [
             {
@@ -5465,7 +5465,7 @@
       },
       "participants": [
         {
-          "machineId": "vlt-ut3",
+          "facilityId": "vlt-ut3",
           "role": "optical-telescope",
           "citations": [
             {
@@ -5519,7 +5519,7 @@
       },
       "participants": [
         {
-          "machineId": "vlti",
+          "facilityId": "vlti",
           "role": "optical-telescope",
           "citations": [
             {
@@ -5593,7 +5593,7 @@
       },
       "participants": [
         {
-          "machineId": "vlti",
+          "facilityId": "vlti",
           "role": "optical-telescope",
           "citations": [
             {
@@ -5667,7 +5667,7 @@
       },
       "participants": [
         {
-          "machineId": "vlti",
+          "facilityId": "vlti",
           "role": "optical-telescope",
           "citations": [
             {

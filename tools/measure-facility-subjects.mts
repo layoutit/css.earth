@@ -10,7 +10,7 @@ import { requireRecord, requireArray, requireString } from './source-values.mts'
  * artwork and are never rewritten; only the measurement is stored.
  */
 const root = path.resolve(import.meta.dirname, '..');
-const libraryPath = path.join(root, 'site/source/machines/render-library.json');
+const libraryPath = path.join(root, 'site/source/facilities/render-library.json');
 const library = requireRecord(JSON.parse(await fs.readFile(libraryPath, 'utf8')));
 const background = requireString(library.background);
 const rgb = [1, 3, 5].map(index => Number.parseInt(background.slice(index, index + 2), 16));
