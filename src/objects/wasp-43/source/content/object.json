@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "wasp-43-lens-shape.webp",
-        "surface": "wasp-43-surface-shape.webp",
-        "poles": "wasp-43-poles-shape.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "One photosphere colour from Gaia's photometric temperature through a Planck spectrum, painted uniformly; the disc itself is unresolved.",
+        "thumbnail": "wasp-43-lens-color.webp",
+        "surface": "wasp-43-surface-color.webp",
+        "poles": "wasp-43-poles-color.webp",
         "source": {
-          "id": "wasp-43-observational-measurements",
+          "id": "wasp-43-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/2406.10207"
+          "url": "https://doi.org/10.1051/0004-6361/202243462"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere exists: at 87 parsecs the star's disc spans 0.07 milliarcseconds (see investigations.json). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of a 4,416 K blackbody, Gaia DR3's photometric temperature for WASP-43, against the sRGB white point. No image of the photosphere exists: at 87 parsecs its disc spans 0.07 milliarcseconds (see investigations.json). The display axis is celestial north, a convention."
       }
     ]
   },
