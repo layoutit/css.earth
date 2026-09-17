@@ -69,6 +69,28 @@
       "build": "eso-kit",
       "yorick": true,
       "kit": "pionier-kit-4.0.4-5.tar.gz"
+    },
+    "amber": {
+      "purpose": "ESO VLTI/AMBER reduction from raw frames (P2VM, SciCal, frame selection, transfer function), for stars observed only with AMBER.",
+      "license": "AMBER pipeline GPL-2.0 (amdlib LGPL-2.1)",
+      "build": "eso-kit",
+      "kit": "amber-kit-4.4.5-16.tar.gz",
+      "downloads": [
+        {
+          "path": "amber-kit-4.4.5-16.tar.gz",
+          "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/amber/amber-kit-4.4.5-16.tar.gz",
+          "bytes": 47678236,
+          "sha256": "78ced7453b4da828b532604e1d2a4d0c58cd58a843be9127eef5905602e19c1f"
+        }
+      ],
+      "repair": {
+        "package": "amber-4.4.5",
+        "cppflags": "-include {prefix}/include/cxmessages.h",
+        "calibration": "amber-calib-4.4.5.tar.gz",
+        "calibrationDirectory": "share/esopipes/datastatic/amber-4.4.5",
+        "reason": "Apple clang 17 refuses gipaf.c, which calls cx_assert without including cxmessages.h; install_pipeline stops there before unpacking the calibration files."
+      },
+      "executable": "pipeline/bin/esorex"
     }
   }
 }
