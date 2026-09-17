@@ -1,0 +1,80 @@
+import type { Vector3 } from "../renderers/css/solar-system/types.ts";
+import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mts";
+import { requireBodyFixedSunDirection, requireBodyFixedToIcrf } from "./solar-geometry.mts";
+
+// Where every prepared object's camera opens. Nothing here is authored per object: the ecliptic presentation frame puts
+// ecliptic north up and the Sun to the left at zero yaw, so a lit body opens on that frame's design pose, and a body with
+// something specific to face opens looking straight at it.
+
+/** The design pose of a lit body: the Sun exactly to the left at 40 degrees of scene pitch, the pose the lit lanes bake their lighting and row banks at. */
+export const LIT_DEFAULT_VIEW = Object.freeze({ initialScenePitchDegrees: 40, defaultControlYawDegrees: 0 });
+
+export interface DefaultCameraAngles { readonly initialScenePitchDegrees: number; readonly defaultControlYawDegrees: number }
+export interface ObserverPoint { readonly observerWestLongitude: number; readonly observerLatitude: number }
+
+/** The yaw and scene pitch that put `target`, a body-fixed direction, at the centre of the default view. The scene matrix is
+ * CSS rotateX(pitch) · rotateY(yaw) applied to presentation directions, and the viewer lies along CSS +z. */
+export function prepareFacingCameraAngles(bodyId: string, target: Vector3): DefaultCameraAngles {
+  const length = Math.hypot(...target);
+  if (!(length > 0) || !target.every(Number.isFinite)) throw new TypeError(`${bodyId}: a default camera target needs a direction.`);
+  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(target.map(value => value / length) as unknown as Vector3);
+  return Object.freeze({ defaultControlYawDegrees: Math.atan2(-x, z) * 180 / Math.PI, initialScenePitchDegrees: Math.atan2(y, Math.hypot(x, z)) * 180 / Math.PI });
+}
+
+/** The body-fixed direction toward an observer stated as a sub-observer point (west-positive longitude, as archives state it). */
+export function observerPointDirection(bodyId: string, { observerWestLongitude, observerLatitude }: ObserverPoint): Vector3 {
+  if (!Number.isFinite(observerWestLongitude) || !(Math.abs(observerLatitude) <= 90)) throw new TypeError(`${bodyId}: an observation frame has no sub-observer point.`);
+  const longitude = -observerWestLongitude * Math.PI / 180, latitude = observerLatitude * Math.PI / 180;
+  return [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)] as unknown as Vector3;
+}
+
+/** The body-fixed direction a set of observation frames looks at together: the mean of their directions toward the observer. */
+export function observationCentroid(bodyId: string, directions: readonly Vector3[]): Vector3 {
+  if (!directions.length) throw new TypeError(`${bodyId}: an observation target needs at least one frame.`);
+  const sum = [0, 0, 0];
+  for (const direction of directions) {
+    const length = Math.hypot(...direction);
+    if (!(length > 0) || !direction.every(Number.isFinite)) throw new TypeError(`${bodyId}: an observation frame has no observer direction.`);
+    for (let axis = 0; axis < 3; axis++) sum[axis]! += direction[axis]! / length;
+  }
+  if (!(Math.hypot(...sum) > 1e-9)) throw new TypeError(`${bodyId}: the observation frames look at no common side.`);
+  return sum as unknown as Vector3;
+}
+
+/** The default camera of one object:
+ * - an observation lens: its frames' common direction toward the observer;
+ * - a planet of another star: its substellar point, where its synchronous rotation record puts longitude 0 facing the host
+ *   star that lights the map;
+ * - a placed star: the direction of the Sun, where Earth observes it from;
+ * - any other body: the lit design pose. */
+export function prepareDefaultCameraAngles(bodyId: string, { observation, light = 'sun' }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host' } = {}): DefaultCameraAngles {
+  if (observation?.length) return prepareFacingCameraAngles(bodyId, observationCentroid(bodyId, observation));
+  if (light === 'host') return prepareFacingCameraAngles(bodyId, [1, 0, 0] as unknown as Vector3);
+  if (light === 'self') return prepareFacingCameraAngles(bodyId, requireBodyFixedSunDirection(bodyId) as unknown as Vector3);
+  return LIT_DEFAULT_VIEW;
+}
+
+/** Default camera angles are derived here; a recipe that still states them is stale and would silently disagree. */
+export function refuseAuthoredCameraAngles(source: object) {
+  for (const key of ["initialScenePitchDegrees", "defaultControlYawDegrees"]) {
+    if (Object.hasOwn(source, key)) throw new TypeError(`${key} is derived at preparation (src/platform/default-camera.mts), not authored.`);
+  }
+}
+
+/** Counterclockwise screen angle (from screen-right, y up) at which celestial north on the sky, as Earth sees the body, lies in
+ * the default view. Earth's line of sight is taken along the Sun direction, as the scene places Earth. A sky-plane image
+ * turned by this angle minus 90 degrees keeps its north where the scene's sky has it. */
+export function prepareSkyNorthScreenAngleDegrees(bodyId: string, angles: DefaultCameraAngles): number {
+  const B = requireBodyFixedToIcrf(bodyId), sun = requireBodyFixedSunDirection(bodyId);
+  const toIcrf = (v: readonly number[]) => [0, 1, 2].map(row => B[3 * row]! * v[0]! + B[3 * row + 1]! * v[1]! + B[3 * row + 2]! * v[2]!);
+  const toBody = (v: readonly number[]) => [0, 1, 2].map(column => B[column]! * v[0]! + B[3 + column]! * v[1]! + B[6 + column]! * v[2]!);
+  const sight = toIcrf(sun).map(value => -value), along = sight[2]!;
+  const north = [0 - along * sight[0]!, 0 - along * sight[1]!, 1 - along * sight[2]!], length = Math.hypot(...north);
+  if (!(length > 1e-9)) throw new TypeError(`${bodyId}: celestial north has no direction on a sky seen along the pole.`);
+  const [x, y, z] = prepareEclipticPresentationFrame(bodyId).toPresentation(toBody(north.map(value => value / length)) as unknown as Vector3);
+  const yaw = angles.defaultControlYawDegrees * Math.PI / 180, pitch = angles.initialScenePitchDegrees * Math.PI / 180;
+  // rotateY(yaw), then rotateX(pitch), as the scene matrix applies them.
+  const yawedX = Math.cos(yaw) * x! + Math.sin(yaw) * z!, yawedZ = -Math.sin(yaw) * x! + Math.cos(yaw) * z!;
+  const eyeY = Math.cos(pitch) * y! - Math.sin(pitch) * yawedZ;
+  return Math.atan2(-eyeY, yawedX) * 180 / Math.PI;
+}

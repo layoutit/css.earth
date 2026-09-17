@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 5.2015,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
     "polesUrl": "/scenes/asteroid-2001-qw16/asteroid-2001-qw16-shape-surface@2x.webp",
     "radialTerrain": {

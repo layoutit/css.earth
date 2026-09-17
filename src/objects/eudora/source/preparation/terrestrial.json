@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 33.9,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/eudora/eudora-shape-surface@2x.webp",
     "polesUrl": "/scenes/eudora/eudora-shape-surface@2x.webp",
     "radialTerrain": {

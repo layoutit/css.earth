@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 54.895,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/euterpe/euterpe-shape-surface@2x.webp",
     "polesUrl": "/scenes/euterpe/euterpe-shape-surface@2x.webp",
     "radialTerrain": {

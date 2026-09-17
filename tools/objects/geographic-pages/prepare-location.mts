@@ -1,3 +1,4 @@
+import { preparedControlPitch } from "@cssearth/engine";
 import { polarGeographicUv } from "./wmts-polar-geometry.mts";
 import { prepareCityPageGeometry,cityGeographicFrame } from "./page-geometry.mts";
 
@@ -92,9 +93,9 @@ export function prepareLocationCamera(scene: GeographicScene, point: readonly nu
     roll = degrees(Math.atan2(-northX, -northY));
   }
   return {
-    controlPitch: camera.defaultControlPitchDegrees +
-      (1 - pitch / camera.initialScenePitchDegrees) *
-      (camera.maximumControlPitchDegrees - camera.defaultControlPitchDegrees),
+    // The recipe states the default pose on the control-to-scene scale; its steepest scene pitch follows from it.
+    controlPitch: preparedControlPitch(pitch, { maximumControlPitchDegrees: camera.maximumControlPitchDegrees,
+      maximumScenePitchDegrees: camera.initialScenePitchDegrees * camera.maximumControlPitchDegrees / (camera.maximumControlPitchDegrees - camera.defaultControlPitchDegrees) }),
     controlYaw: yaw, zoom,
     ...(northUp ? { controlRoll: roll } : {}),
   };

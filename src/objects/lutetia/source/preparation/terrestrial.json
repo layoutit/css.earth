@@ -149,10 +149,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 49,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
     "polesUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
     "radialTerrain": {

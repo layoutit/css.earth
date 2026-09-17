@@ -82,10 +82,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 2.23,
-    "camera": {
-      "initialScenePitchDegrees": 32.6683395142105,
-      "defaultControlYawDegrees": 32.26189091132878
-    },
     "mapUrl": "/scenes/pallene/pallene-normal-surface@2x.webp",
     "polesUrl": "/scenes/pallene/pallene-normal-poles@2x.webp",
     "radialTerrain": {

@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 9.809,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/rosalinde/rosalinde-shape-surface@2x.webp",
     "polesUrl": "/scenes/rosalinde/rosalinde-shape-surface@2x.webp",
     "radialTerrain": {

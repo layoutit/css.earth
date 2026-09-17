@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 55.27,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/atalante/atalante-shape-surface@2x.webp",
     "polesUrl": "/scenes/atalante/atalante-shape-surface@2x.webp",
     "radialTerrain": {

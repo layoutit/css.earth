@@ -87,10 +87,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 18.11455731342771,
-    "camera": {
-      "initialScenePitchDegrees": 60,
-      "defaultControlYawDegrees": 10
-    },
     "mapUrl": "/scenes/hydra/hydra-model-surface@2x.webp",
     "polesUrl": "/scenes/hydra/hydra-model-poles@2x.webp",
     "radialTerrain": {

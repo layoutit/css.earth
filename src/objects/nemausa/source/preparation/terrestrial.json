@@ -79,10 +79,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 75,
-    "camera": {
-      "initialScenePitchDegrees": 46.741573033707866,
-      "defaultControlYawDegrees": 270
-    },
     "mapUrl": "/scenes/nemausa/nemausa-shape-surface@2x.webp",
     "polesUrl": "/scenes/nemausa/nemausa-shape-surface@2x.webp",
     "radialTerrain": {

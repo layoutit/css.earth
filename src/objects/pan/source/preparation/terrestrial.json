@@ -363,10 +363,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 14,
-    "camera": {
-      "initialScenePitchDegrees": -41.533608209627445,
-      "defaultControlYawDegrees": -102.67841453243041
-    },
     "mapUrl": "/scenes/pan/pan-normal-surface@2x.webp",
     "polesUrl": "/scenes/pan/pan-normal-poles@2x.webp",
     "radialTerrain": {

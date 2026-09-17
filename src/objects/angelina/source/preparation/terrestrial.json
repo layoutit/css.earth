@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 26,
-    "camera": {
-      "initialScenePitchDegrees": -44.5505617977528,
-      "defaultControlYawDegrees": 270
-    },
     "mapUrl": "/scenes/angelina/angelina-shape-surface@2x.webp",
     "polesUrl": "/scenes/angelina/angelina-shape-surface@2x.webp",
     "radialTerrain": {

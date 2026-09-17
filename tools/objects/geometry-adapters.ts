@@ -23,7 +23,6 @@ export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> 
         return scene.prepareStarCentredScene({ bodyId: input.bodyId,
           bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,
           defaultZoom: requireFiniteNumber(input.defaultZoom), geometryScale: optionalNumber(input.geometryScale),
-          initialScenePitchDegrees: optionalNumber(input.initialScenePitchDegrees), defaultControlYawDegrees: optionalNumber(input.defaultControlYawDegrees),
           starfield, star: { model: requireString(star.model), systemTransform: requireString(star.systemTransform), axialTiltDegrees: requireFiniteNumber(star.axialTiltDegrees) },
           context: input.worldContext });
       }
@@ -35,8 +34,7 @@ export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> 
       return scene.prepareSolarSystemScene({ bodyId: input.bodyId as BodyId,
         bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,
         defaultZoom: requireFiniteNumber(input.defaultZoom), geometryScale: optionalNumber(input.geometryScale),
-        initialScenePitchDegrees: optionalNumber(input.initialScenePitchDegrees), defaultControlYawDegrees: optionalNumber(input.defaultControlYawDegrees),
-        starfield });
+        starfield, light: (STAR_IDS as readonly string[]).includes(input.bodyId) ? 'self' : (HOSTED_PLANET_IDS as readonly string[]).includes(input.bodyId) ? 'host' : 'sun' });
     },
     bodyFixedSunDirection(id) { const direction = geometry.requireBodyFixedSunDirection(id); return [direction[0], direction[1], direction[2]]; },
     sunReferenceViewDirection(source) { return scene.prepareSolarSystemSunPresentation(source).referenceViewDirection; },

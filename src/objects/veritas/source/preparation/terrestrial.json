@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 59.4015,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/veritas/veritas-shape-surface@2x.webp",
     "polesUrl": "/scenes/veritas/veritas-shape-surface@2x.webp",
     "radialTerrain": {

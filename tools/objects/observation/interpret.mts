@@ -1,3 +1,4 @@
+import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees } from '../../../src/platform/default-camera.mts';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
 // keeps `readObservation`, `loadScienceSurface`/`paintScienceSurface`, the mosaic and observed-colour
@@ -70,8 +71,8 @@ interface Rgb { rgb: Uint8Array; missing: Uint8Array; report?: Record<string, un
 interface SurfaceObservationScience {
   shape: { path: string; format: string; grid: Record<string, unknown>; radiusKm: number; rows: number; columns: number; flatFaceErrorMeters: number };
   lens: Record<string, unknown> & { frames: readonly unknown[] };
-  /** The frame's light outside the silhouette becomes the emission off-limb plate, rotated so image-up meets its screen direction at the default camera. */
-  offLimb?: { rotationDegrees: number };
+  /** The frame's light outside the silhouette becomes the emission off-limb plate; its turn is derived from the default camera. */
+  offLimb?: Record<string, never>;
 }
 /** `science.shape` is the reference sphere table and its sampling; `science.lens` is one surface-observation lens without its id. */
 function parseSurfaceObservationScience(value: Record<string, unknown>): SurfaceObservationScience {
@@ -87,8 +88,8 @@ function parseSurfaceObservationScience(value: Record<string, unknown>): Surface
   const sagitta = parsed.radiusKm * 1000 * (1 - Math.cos(Math.hypot(180 / parsed.rows, 360 / parsed.columns) / 2 * Math.PI / 180));
   if (!(parsed.flatFaceErrorMeters >= sagitta)) throw new TypeError(`A surface-observation shape must declare at least its flat-face error of ${sagitta.toExponential(3)} m.`);
   if (lens.id !== undefined || !Array.isArray(lens.frames)) throw new TypeError('A surface-observation lens takes its id from the surface and lists its frames.');
-  const offLimb = value.offLimb === undefined ? undefined : { rotationDegrees: requireFiniteNumber(requireRecord(value.offLimb, 'surface-observation offLimb').rotationDegrees) };
-  if (offLimb && Object.keys(requireRecord(value.offLimb)).some(key => key !== 'rotationDegrees')) throw new TypeError('A surface-observation offLimb block declares only rotationDegrees.');
+  const offLimb = value.offLimb === undefined ? undefined : requireRecord(value.offLimb, 'surface-observation offLimb') as Record<string, never>;
+  if (offLimb && Object.keys(offLimb).length) throw new TypeError('A surface-observation offLimb block is empty: its turn is derived from the default camera, not authored.');
   return { shape: parsed, lens: lens as SurfaceObservationScience['lens'], ...(offLimb ? { offLimb } : {}) };
 }
 const transparentPlates = (offLimb: number, limb: number) => ({
@@ -345,14 +346,16 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const displayRange = requireRecord(observation.report.display), palette = requireRecord(plan.lens.display).palette;
         if (!Array.isArray(palette)) throw new TypeError(`${objectId}/${surface.id}: the off-limb plate needs the lens palette.`);
         const plateSize = recipe.emission.offLimbSize * density;
+        // Image-up is celestial north; turn it to where the default view (a self-luminous body faces Earth) shows north.
+        const rotationDegrees = prepareSkyNorthScreenAngleDegrees(objectId, prepareDefaultCameraAngles(objectId, { light: 'self' })) - 90;
         const offLimb = offLimbPlate({ width: image.width, height: image.height, values: topDown, center: [requireFiniteNumber(center[0]), requireFiniteNumber(center[1])], discRadiusPx,
           backgroundMaximum: requireFiniteNumber(frame.backgroundMaximum) },
-          { low: requireFiniteNumber(displayRange.low), high: requireFiniteNumber(displayRange.high), palette: palette.map(value => requireString(value)), rotationDegrees: plan.offLimb.rotationDegrees },
+          { low: requireFiniteNumber(displayRange.low), high: requireFiniteNumber(displayRange.high), palette: palette.map(value => requireString(value)), rotationDegrees },
           plateSize, recipe.emission.bodyDiameter * density);
         let outside = 0, total = 0;
         for (let i = 0; i < topDown.length; i++) { const v = topDown[i]!; total += v; if (Math.hypot(i % image.width - center[0], Math.floor(i / image.width) - center[1]) > discRadiusPx) outside += v; }
         return { ...rgb3(rgb, missing, width, height, false), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
-          report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees: plan.offLimb.rotationDegrees, fluxFractionOutsideDisc: outside / total,
+          report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees, fluxFractionOutsideDisc: outside / total,
             meaning: 'The frame\'s light outside the silhouette on the lens display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
       }
       case 'neutral-shape': {

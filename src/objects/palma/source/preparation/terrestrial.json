@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 93.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/palma/palma-shape-surface@2x.webp",
     "polesUrl": "/scenes/palma/palma-shape-surface@2x.webp",
     "radialTerrain": {
