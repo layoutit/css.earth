@@ -89,7 +89,27 @@ export async function readPreparationTraces(directory: string): Promise<Preparat
   const traces: PreparationTraces = { files: new Map(), commands: [], catalogImporters: new Set(), unsupported: new Set() };
   const names = new Set(await readdir(directory));
   for (const name of names) {
-    if (name.endsWith('.started') && !names.has(name.replace(/\.started$/u, '.json'))) traces.unsupported.add(`process ${name.replace(/\.started$/u, '')} left no preparation record`);
+    const record = name.replace(/\.started$/u, '');
+    if (name.endsWith('.started') && !names.has(`${record}.json`) && !names.has(`${record}.jsonl`)) traces.unsupported.add(`process ${record} left no preparation record`);
+    // A worker thread terminated before its exit handler leaves only the journal it wrote as it ran.
+    if (name.endsWith('.jsonl') && !names.has(name.replace(/\.jsonl$/u, '.json'))) {
+      const journaled = new Set<string>();
+      for (const line of (await readFile(resolve(directory, name), 'utf8')).split('\n').filter(Boolean)) {
+        const entry: unknown = JSON.parse(line);
+        assert.ok(isRecord(entry), `Invalid preparation journal line in ${name}`);
+        if (typeof entry.path === 'string' && typeof entry.access === 'string' && isRecord(entry.first)) {
+          const file = traces.files.get(entry.path) ?? { accesses: new Set<PreparationAccess>(), first: [] };
+          if (!journaled.has(entry.path)) { journaled.add(entry.path); file.first.push(entry.first as TracedState); }
+          file.accesses.add(entry.access as PreparationAccess);
+          traces.files.set(entry.path, file);
+        } else if (isRecord(entry.command) && typeof entry.command.command === 'string' && isArray(entry.command.args) && typeof entry.command.cwd === 'string') {
+          traces.commands.push({ command: entry.command.command, args: entry.command.args.map(String), cwd: entry.command.cwd, shell: entry.command.shell === true });
+        } else if (typeof entry.importer === 'string') traces.catalogImporters.add(entry.importer);
+        else if (typeof entry.unsupported === 'string') traces.unsupported.add(entry.unsupported);
+        else assert.fail(`Invalid preparation journal line in ${name}`);
+      }
+      continue;
+    }
     if (!name.endsWith('.json')) continue;
     const trace: unknown = JSON.parse(await readFile(resolve(directory, name), 'utf8'));
     assert.ok(isRecord(trace) && trace.schema === PREPARATION_TRACE_SCHEMA && isRecord(trace.files) && isArray(trace.commands) &&
