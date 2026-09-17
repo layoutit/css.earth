@@ -39,12 +39,13 @@
       "id": "bell-2024-miri-products",
       "subject": "Bell et al. (2024) MIRI phase-curve products and models",
       "status": "excluded",
-      "finding": "Zenodo 10.5281/zenodo.10525170 (CC BY 4.0, 11.5 MB) holds reduction configurations, light curves, planetary spectra, general circulation model outputs and retrieval posteriors. No two-dimensional observed map; the circulation models are simulations, not observations. A trial fit of the deposited Eureka! v1 white-light curve (5-10.5 micrometres, first 780 integrations and the transit dropped) with this repository's eigencurve fit and the same systematics terms (linear trend, exponential ramp, spatial position and width) prefers degree 2 with 6 eigencurves by BIC. It puts the meridionally averaged hotspot 5.0 degrees east (4.5 to 5.25), against Hammond et al. (2024)'s 7.5 +/- 0.5; changing the systematics model moves it between 3.1 and 5.3. The difference is not resolved, and the trial is not a published map.",
+      "finding": "Zenodo 10.5281/zenodo.10525170 (CC BY 4.0, 11.5 MB) holds reduction configurations, light curves, planetary spectra, general circulation model outputs and retrieval posteriors. No two-dimensional observed map; the circulation models are simulations, not observations. A trial fit of the deposited Eureka! v1 white-light curve (5-10.5 micrometres, first 780 integrations and the transit dropped) with this repository's eigencurve fit and the same systematics terms (linear trend, exponential ramp, spatial position and width) prefers degree 2 with 6 eigencurves by BIC. It puts the meridionally averaged hotspot 5.0 degrees east (4.5 to 5.25), against Hammond et al. (2024)'s 7.5 +/- 0.5; changing the systematics model moves it between 3.1 and 5.3. The difference is not resolved, and the trial is not a published map. This repository's raw reduction of the same 30 MIRI segments (tools/objects/jwst/reduce-tso.mts, their settings in Eureka! 1.4) reproduces the deposited white light curve at correlation 0.990 over 9,194 integrations, 172 ppm apart once a 2,221 ppm per day drift is removed, with lower scatter (342 against 373 ppm).",
       "revisitWhen": "A longitude-latitude map fitted to these light curves is published as data.",
       "evidence": [
         "https://zenodo.org/records/10525170",
         "https://arxiv.org/abs/2401.13027",
-        "https://github.com/layoutit/css.earth/blob/447361aa8969af631117744c683c849450cf7c12/docs/eclipse-mapping.md"
+        "https://github.com/layoutit/css.earth/blob/447361aa8969af631117744c683c849450cf7c12/docs/eclipse-mapping.md",
+        "https://github.com/layoutit/css.earth/blob/4df0303a7a2ba017877f57722b527a26036d30fd/docs/eclipse-mapping.md"
       ],
       "checked": [
         {
@@ -54,6 +55,10 @@
         {
           "date": "2026-09-17",
           "commit": "447361aa8969af631117744c683c849450cf7c12"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "4df0303a7a2ba017877f57722b527a26036d30fd"
         }
       ]
     },
