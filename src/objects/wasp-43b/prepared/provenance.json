@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "387472d932cd680fb405f53fa5eab1d3e46503adaa40fcc08c9961fe8f8fe88f"
+    "sha256": "8716c59f398920a2e858a4cae81dbfe5d1362bb703a976a97f019ac4fb028fa7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1543,32 +1543,32 @@
       "outputs": [
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri.webp",
-          "bytes": 15276,
-          "sha256": "cadaeb49da627af6ac6a681b2ea6aa1e26f64a100cfd0ae3124e851845b59745",
+          "bytes": 15402,
+          "sha256": "6371716d3f0e2d11858e01eec3d5adf75398b0e3abbf27ecb0195ed66ff4f2ee",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri@2x.webp",
-          "bytes": 39076,
-          "sha256": "8b3fd9b77d0ee4a40906774dd3c76c1f5af074abe44f1c073f2c26f6eb9867db",
+          "bytes": 39232,
+          "sha256": "62257b0737589e1522840b8754e4758803561649a255d73dde3233287cbf9178",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-lens-miri.webp",
-          "bytes": 302,
-          "sha256": "ccf2579b9a11b5a2c684a7ac67ef83536131b98ff1d6fe7e53211e5473f81df9",
+          "bytes": 308,
+          "sha256": "890e6dc058c5db27a591be0d71568962486130364be8acfa62118d849c323559",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri.webp",
-          "bytes": 20054,
-          "sha256": "fd74e783b8f8bcb81437a040879583843555720f8a53fcac3dc118efa31cab67",
+          "bytes": 19938,
+          "sha256": "1a3c572ef7a1cea71c54508097f3ceda876c0421063ca3427914e54c72050e57",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri@2x.webp",
-          "bytes": 44350,
-          "sha256": "67e5d02dc65020ea80648e368393349c2d5359fc7d8babc26331ddc10a83d6cc",
+          "bytes": 44076,
+          "sha256": "95ad70f0b18f810ef6659dafa0ecac4de4d4886412a64548b6360f5edea5d30b",
           "verification": "bytes-verified"
         },
         {
@@ -1633,32 +1633,32 @@
       "outputs": [
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-1.webp",
-          "bytes": 14584,
-          "sha256": "8524d2e0e601c36a769f1f0fef7c259d4caf33a2cd9e3fef4637eee2f827e94f",
+          "bytes": 14570,
+          "sha256": "0b0246fc16fd18445c6b0e818be5156601f18e2de50554a423bc6e68f01be176",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-1@2x.webp",
-          "bytes": 38066,
-          "sha256": "cb47ba1f01de01881d5945fda1e24ebcd21a8b259bcb9d7b0b3ea7e91ce65cf8",
+          "bytes": 38116,
+          "sha256": "f618b91c1012e525bcb99f4b5b68cbdab119cdf80f91a62b03eef313faeb6304",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-lens-miri-band-1.webp",
           "bytes": 288,
-          "sha256": "291f6d95da44189084f548a50fec9c531c97f087aca2aea62582be3aba76ed5b",
+          "sha256": "95e0ae1366f78a0e26ab52229ea0c35f9c1e2364b68346bd39a6a28be6e8e4fb",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-1.webp",
-          "bytes": 24262,
-          "sha256": "d468959f4d735d18dc59c292ba4b62768e9a2ee3121ae9e7a6914c37b2beeddd",
+          "bytes": 24144,
+          "sha256": "684d4e45db6cbbb14463345c402fac1e03ec47e96650498c01380757ad1e9d5f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-1@2x.webp",
-          "bytes": 50450,
-          "sha256": "e09f5bfd4d2094a4588920404a304b16015c8d1de4edef7a36ebdaa312a2aa32",
+          "bytes": 50490,
+          "sha256": "e6a9d428a26b59d1563323b98ddb81a77c15081c3ab75fd735c2b58d175d86fb",
           "verification": "bytes-verified"
         },
         {
@@ -1723,32 +1723,32 @@
       "outputs": [
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-2.webp",
-          "bytes": 14392,
-          "sha256": "ca54b6f6b8f03970c7c8a605fe576cd88b82e3625e4beac227f988df96c3276b",
+          "bytes": 14594,
+          "sha256": "707c505b807b630d556771db315a42e3b4de747208806e392f380376a39ba8f4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-2@2x.webp",
-          "bytes": 36778,
-          "sha256": "41b69d2ae3515c474f805fcd5ce3d148d90164a185db12002525c0d762726524",
+          "bytes": 36800,
+          "sha256": "fa3c2a82276fbd2ba64a1034578d2eb0ccd72c2ffb44affbd18417d3c5f07a7d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-lens-miri-band-2.webp",
-          "bytes": 260,
-          "sha256": "912102d0c84b119c854925033545261402506d9009a0f600f3cc308ba89fce31",
+          "bytes": 268,
+          "sha256": "25ab94177ad423a802bde2a71f1d361b6464e3ab297a4a8eb542ab71289f8368",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-2.webp",
-          "bytes": 23328,
-          "sha256": "b787be77ea44ed2417952fe19f10e8cb3900c663fc027b4ee8c6a8330b7e919c",
+          "bytes": 23550,
+          "sha256": "89220693a6a54efc014d26a7818824661856356b6a4b05cc42444115e179dcce",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-2@2x.webp",
-          "bytes": 48738,
-          "sha256": "80a5a8cb03c5139395469bce662d2cf65f040238cb24b52e1e6f6a3a6bc20ef0",
+          "bytes": 49158,
+          "sha256": "b2195ba28f6ca0b167e98d9a891e2fbfacbe38c23bf5f1f49c390998dea092f5",
           "verification": "bytes-verified"
         },
         {
@@ -1813,32 +1813,32 @@
       "outputs": [
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-3.webp",
-          "bytes": 14570,
-          "sha256": "8e987acc3e98bafb6444e1e93682c62886c04fa282c10a42d0afcce85ec30064",
+          "bytes": 14774,
+          "sha256": "af70afa820ee1e2dc657cecbeef9dadd6a3ea84d77b7bf29442da0b8b9601d83",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-surface-miri-band-3@2x.webp",
-          "bytes": 38262,
-          "sha256": "55432458cdd1f297726b44ce1b7528bf6c9812334c39260269e73b1c48868bf3",
+          "bytes": 38198,
+          "sha256": "d044e46b6a1ff13f7b42a2b9d95857818da89b863fb1f547260d13ab9daa180d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-lens-miri-band-3.webp",
-          "bytes": 282,
-          "sha256": "bee5c69db61f0adea8a8673023058cf3ffc0dade5cdb1eb6c068a580fcd23f72",
+          "bytes": 276,
+          "sha256": "1733698e74abfaca6b484b459589b36e57e44acb0ddd550e6a497bf6f1240c5b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-3.webp",
-          "bytes": 23826,
-          "sha256": "3eb4511e320ad8dd90c6ba078666616fa7be85dfbcfb0c586b2f71c6861ed7dc",
+          "bytes": 23610,
+          "sha256": "2264c91b055db887e24736efc8bffbf13f4ab838cf2879ca3c7c66b9b013b7b7",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/wasp-43b/wasp-43b-poles-miri-band-3@2x.webp",
-          "bytes": 50088,
-          "sha256": "0615e12d903d9d05608f3d86ad4236d7beacb96e1d18a45a7c09efd957824744",
+          "bytes": 49860,
+          "sha256": "a2d3e040682cf148dfb6a9fc29979e796944e5c0b0eb775e98988e0eafa70aab",
           "verification": "bytes-verified"
         },
         {
@@ -1970,8 +1970,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/miri.webp",
-          "bytes": 4738,
-          "sha256": "48920af204e61039057ed4e7112064cf3776063a0ab8aad376a5de25f6fe8978",
+          "bytes": 4816,
+          "sha256": "643a62344a2c92b650ebedacb215ecf68ad542b872f75857ac7648c02ebdd612",
           "verification": "bytes-verified"
         }
       ]
@@ -1995,8 +1995,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/miri-band-1.webp",
-          "bytes": 4688,
-          "sha256": "0dd923423f4a6498074fd73ee6964e019d1b08acd8ae797b2c3dab8f3a54a46a",
+          "bytes": 4652,
+          "sha256": "ffde5b693187b6c0fffeb36fdb92feb83e05d91ac91ebe86db6cb9da4998e245",
           "verification": "bytes-verified"
         }
       ]
@@ -2020,8 +2020,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/miri-band-2.webp",
-          "bytes": 4646,
-          "sha256": "1e2cdab91bf542db37608f597b7b5c32fd847a1885de760311d97a76fca5c1e6",
+          "bytes": 4550,
+          "sha256": "6d8d54a5b913b6ae1b17c4d03f7d8b1ee92c0d0151dfc21fe70996df6a5c47d5",
           "verification": "bytes-verified"
         }
       ]
@@ -2045,8 +2045,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/miri-band-3.webp",
-          "bytes": 4820,
-          "sha256": "5c0ffb597a463728bb5a7b4697b6c002b474155a4b5d1ea3c311b6615933cfb5",
+          "bytes": 4754,
+          "sha256": "d7bb608addf6942b533fcd9b35a0b0a626f3a68f162913b6f71be9f33d54c065",
           "verification": "bytes-verified"
         }
       ]
@@ -2058,7 +2058,7 @@
   },
   "lastPreparation": {
     "objectId": "wasp-43b",
-    "materialSha256": "1bc71c7cc76daf3d785dbeb5120077c62cf8c2b1b45bbdf941ae9cbf4af1e9ac",
+    "materialSha256": "b0df39ac36ce7107f1f9f855bd8f8b5ce05aa50988a767a1a4d5074962b8d43e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

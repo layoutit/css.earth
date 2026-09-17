@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { planckRadiance } from '../../../../tools/objects/eclipse-map/eigenmap-fit.mts';
-import { bandTemperatureTable, hemisphereTemperature } from '../../../../tools/objects/eclipse-map/light-curve-map.mts';
+import { bandTemperatureTable, hemisphereTemperature, meridionalOffset } from '../../../../tools/objects/eclipse-map/light-curve-map.mts';
 import { loadEclipseMapFit } from '../../../../tools/objects/terrestrial-layers/eclipse-map-fit.mts';
 import { readTarMember } from '../../../../tools/objects/terrestrial-layers/tar-member.mts';
 import { readNpyObject } from '../../../../tools/objects/terrestrial-layers/npy-pickle.mts';
@@ -68,22 +68,24 @@ test('the NIRSpec refit reproduces the in-house fit of the deposited curve and r
 
 test('the MIRI white-light lens, from this project\'s own reduction, agrees with the published MIRI dayside and nightside', async () => {
   const { map, day, night } = await lens('miri');
-  // Measured 2026-09-17: BIC takes degree 2 with 6 eigencurves (degree 3 with 6 is 0.5 lower, same parameter count), ramp 0.08 d.
-  assert.equal(map.fit.basis.lmax, 2); assert.equal(map.fit.fit.ncurves, 6); assert.equal(map.fit.rampTimeConstantDays, 0.08);
-  assert.equal(map.fit.samples, 7883); near(map.fit.fit.chiSquared, 11258.4, 0.5, 'chi2');
-  near(map.fit.hotspot.longitude, 5.3, 0.2, 'hot spot longitude');
-  // Bell et al. (2024): 1524 ± 35 K dayside and 863 ± 23 K nightside over 5-12 um. Measured here over 5-10.5 um: 1527 and 833 K.
+  // Measured 2026-09-17: BIC takes degree 2 with 6 eigencurves (degree 3 with 6 is within 2, same parameter count); the ramp's time
+  // constant refines to 0.1026 d from the 0.08 d grid value.
+  assert.equal(map.fit.basis.lmax, 2); assert.equal(map.fit.fit.ncurves, 6); near(map.fit.rampTimeConstantDays!, 0.1026, 0.002, 'ramp time constant');
+  assert.equal(map.fit.samples, 7883); near(map.fit.fit.chiSquared, 11255.8, 0.5, 'chi2');
+  // Hammond et al. (2024)'s longitudinal offset (meridional, cos-latitude weighted) and the map's own hottest point.
+  near(meridionalOffset(map.fit.basis, map.fit.fit), 6.05, 0.1, 'meridional offset'); near(map.fit.hotspot.longitude, 5.69, 0.1, 'hot spot longitude');
+  // Bell et al. (2024): 1524 ± 35 K dayside and 863 ± 23 K nightside over 5-12 um. Measured here over 5-10.5 um: 1527 and 840 K.
   near(day, 1527, 2, 'dayside'); assert.ok(Math.abs(day - 1524) < 35, 'within the published dayside interval');
-  near(night, 833, 2, 'nightside'); assert.ok(Math.abs(night - 863) < 2 * 23, 'within twice the published nightside uncertainty');
+  near(night, 840, 2, 'nightside'); assert.ok(Math.abs(night - 863) < 23 * 1.1, 'about one published nightside uncertainty below');
 });
 
 test('the three MIRI slices choose their own models and put the hot spot east of noon in each', async () => {
-  // Measured 2026-09-17 (degree, eigencurves, ramp days, dayside K, nightside K, hot spot longitude).
-  const expected = { 'miri-band-1': [2, 4, 0.08, 1539, 831, 2.9], 'miri-band-2': [2, 4, 0.16, 1493, 847, 8.4], 'miri-band-3': [2, 4, 0.08, 1565, 914, 8.2] } as const;
-  for (const [id, [degree, eigencurves, ramp, dayside, nightside, longitude]] of Object.entries(expected)) {
+  // Measured 2026-09-17 (degree, eigencurves, ramp days, dayside K, nightside K, meridional offset degrees).
+  const expected = { 'miri-band-1': [2, 4, 0.0881, 1539, 835, 3.4], 'miri-band-2': [2, 4, 0.1116, 1492.5, 837, 7.75], 'miri-band-3': [2, 4, 0.0772, 1565, 913, 8.3] } as const;
+  for (const [id, [degree, eigencurves, ramp, dayside, nightside, offset]] of Object.entries(expected)) {
     const { map, day, night } = await lens(id);
-    assert.equal(map.fit.basis.lmax, degree, id); assert.equal(map.fit.fit.ncurves, eigencurves, id); assert.equal(map.fit.rampTimeConstantDays, ramp, id);
-    near(day, dayside, 2, `${id} dayside`); near(night, nightside, 2, `${id} nightside`); near(map.fit.hotspot.longitude, longitude, 0.2, `${id} hot spot longitude`);
+    assert.equal(map.fit.basis.lmax, degree, id); assert.equal(map.fit.fit.ncurves, eigencurves, id); near(map.fit.rampTimeConstantDays!, ramp, 0.002, `${id} ramp`);
+    near(day, dayside, 2, `${id} dayside`); near(night, nightside, 2, `${id} nightside`); near(meridionalOffset(map.fit.basis, map.fit.fit), offset, 0.1, `${id} meridional offset`);
     assert.ok(map.fit.hotspot.longitude > 0, `${id} hot spot east of noon`);
   }
 });
