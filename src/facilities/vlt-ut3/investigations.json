@@ -75,6 +75,24 @@
           "pr": 293
         }
       ]
+    },
+    {
+      "id": "survey-data-release",
+      "subject": "The SPHERE asteroid survey's own deconvolved release",
+      "status": "included",
+      "finding": "The ESO archive is not the only anonymous route to this telescope's asteroid imaging. The survey team publishes its own release at https://observations.lam.fr/astero/: shape models, rotation records and, under Data/<body>/Deconv/, deconvolved ZIMPOL frames for 42 bodies, reachable with the site's ordinary public cookie. That release, not an ESO query, is where every SPHERE photograph in this repository comes from, Themis included. The name screen of the ESO archive does not see it: Themis is absent from the screen's candidates altogether, although its disc spans about 134 mas and 30 deconvolved frames were waiting, which would have ranked it near the top. Its own limits predicted this, since matching is by target name. A candidate for a SPHERE surface is therefore checked against both routes.",
+      "evidence": [
+        "https://observations.lam.fr/astero/",
+        "https://observations.lam.fr/astero/Data/",
+        "https://github.com/layoutit/css.earth/blob/39e1052341253664212b7f168692700471069f40/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/blob/39e1052341253664212b7f168692700471069f40/src/objects/themis/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "39e1052341253664212b7f168692700471069f40"
+        }
+      ]
     }
   ]
 }
