@@ -129,3 +129,14 @@ test('the π¹ Gruis season from the author file is cast and reproduces the ship
   assert.equal(result.comparison.calibrated.medianSigma, 0);
   assert.ok(result.comparison.imageCorrelation > 0.999, `image correlation ${result.comparison.imageCorrelation}`);
 });
+
+test('R Aqr\'s 2019 season from raw is not cast because it does not fit its data', async t => {
+  const verdictPath = resolve(repository, 'output/stars/r-aqr-pionier-2019/verdict.json');
+  if (!await access(verdictPath).then(() => true, () => false)) return t.skip('run image-star.mts on the R Aqr season first');
+  const result = JSON.parse(await readFile(verdictPath, 'utf8')) as { verdict: { cast: boolean; reasons: string[] }; fit: { season: { vis2: number; closurePhase: number } }; comparison: Record<string, unknown> };
+  assert.equal(result.verdict.cast, false);
+  assert.match(result.verdict.reasons[0]!, /does not fit its data/u);
+  // Measured 71.8 and 71.9 with lost fringes removed and the error minimum applied.
+  assert.ok(result.fit.season.vis2 > 30 && result.fit.season.closurePhase > 30, `${result.fit.season.vis2} and ${result.fit.season.closurePhase}`);
+  assert.deepEqual(result.comparison, {}, 'no author file is named for this season');
+});
