@@ -157,7 +157,8 @@ function mainPageBody(objects: readonly ObjectRecord[]) {
     ...systemGroups(objects).flatMap(system => [
       `## ${prose(system.label)}`,
       ...(system.star ? [link(system.star)] : []),
-      ...system.groups.flatMap(group => [`### ${prose(group.label)}`, group.entries.map(entry).join(' · ')]),
+      ...(system.groups.length === 1 && !system.star ? [system.groups[0]!.entries.map(entry).join(' · ')]
+        : system.groups.flatMap(group => [`### ${prose(group.label)}`, group.entries.map(entry).join(' · ')])),
     ]),
   ].join('\n\n');
 }

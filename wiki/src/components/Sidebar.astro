@@ -16,6 +16,10 @@ const holds = (entries: readonly SystemEntry[]): boolean => entries.some(entry =
     <details open={system.star?.id === current || system.groups.some(group => holds(group.entries))}>
       <summary><span class="wiki-tree-root">{system.label} ({system.groups.reduce((total, group) => total + count(group.entries), 0)})</span></summary>
       <ul>
+        {/* A group of one classification, like the stars or the nebulae, needs no second level. */}
+        {system.groups.length === 1 && !system.star
+          ? system.groups[0]!.entries.map(entry => <li><SidebarEntry entry={entry} current={current} /></li>)
+          : <>
         {system.star && <li>
           <a class="wiki-row" href={`/${system.star.id}/`} aria-current={system.star.id === current ? 'page' : undefined}>
             <ObjectMarker objectId={system.star.id} />{system.star.title}
@@ -27,6 +31,7 @@ const holds = (entries: readonly SystemEntry[]): boolean => entries.some(entry =
             <ul>{group.entries.map(entry => <li><SidebarEntry entry={entry} current={current} /></li>)}</ul>
           </details>
         </li>)}
+          </>}
       </ul>
     </details>
   </li>)}

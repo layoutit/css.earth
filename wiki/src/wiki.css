@@ -66,10 +66,10 @@ body { font: var(--shell-font-content); color: var(--shell-text-secondary); }
 /* One header bar over all three panes. */
 .sb-header { display: flex; align-items: center; gap: 1rem; height: 100%; }
 /* The same brand row as the app's shell header: wordmark at --explorer-wordmark-size, label on its baseline. */
-.wiki-brand-row { display: flex; align-items: baseline; justify-content: flex-start; flex: none; gap: 8px; color: var(--shell-text); }
+.wiki-brand-row { display: flex; align-items: baseline; justify-content: flex-start; flex: none; gap: 2px; color: var(--shell-text); }
 .wiki-brand-wordmark { display: block; flex: 0 0 auto; width: max-content; margin: 0; }
 .wiki-brand-wordmark .maps-brand-button { display: block; }
-.wiki-brand-label { color: var(--shell-text-muted); font: var(--shell-font-metadata); }
+.wiki-brand-label { color: var(--shell-text-muted); font: var(--shell-font-panel-heading); }
 .sb-header-tools { display: flex; align-items: center; gap: 0.75rem; margin-inline-start: auto; }
 .sb-header-tools a:not(.sb-tool-button) { color: var(--shell-text-muted); }
 .sb-header-tools a:not(.sb-tool-button):hover { color: var(--shell-text); }
@@ -78,7 +78,8 @@ site-search { flex: 1; min-width: 0; }
 site-search button[data-open-modal] { color: var(--shell-text-muted); }
 
 @media (min-width: 50rem) {
-  :root { --sl-nav-height: 3.25rem; }
+  /* The app's own header band: a 48 px row with the shell's padding around it. */
+  :root { --sl-nav-height: 4.5rem; }
 
   /* The app puts its wordmark 12 px from the edge. */
   .page > .header { padding: 0 12px; background: var(--shell-background); border-bottom: 1px solid var(--sb-border); }

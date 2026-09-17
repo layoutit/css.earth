@@ -16,8 +16,8 @@ export default defineConfig({
   server: { host: '127.0.0.1', port: 4281 },
   vite: { server: { fs: { allow: ['..'] } } },
   integrations: [starlight({
-    title: 'cssEarth wiki',
-    description: 'Pages built from the object packages in src/objects.',
+    title: 'css.earth/docs',
+    description: 'Documentation pages built from the object packages in src/objects.',
     social: [{ icon: 'github', label: 'GitHub', href: REPOSITORY_URL }],
     editLink: { baseUrl: `${REPOSITORY_URL}/edit/main/` },
     // Storybook's layout on Starlight: brand and search above the tree, a toolbar above the page, canvas and args blocks per object.

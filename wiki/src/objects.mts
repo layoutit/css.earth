@@ -7,10 +7,33 @@ export const REPOSITORY = resolve(import.meta.dirname, '../..');
 export const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
 export const REPOSITORY_URL = 'https://github.com/layoutit/css.earth';
 
-/** Sidebar order only. Labels are the descriptors' own classification values; packages without a catalog entry are context objects. */
-const ORDER = ['star', 'planet', 'dwarf-planet', 'satellite', 'trans-neptunian', 'comet', 'asteroid', 'interstellar', 'exoplanet', 'context'];
-const classificationLabel = (classification: string) => classification === 'context' ? 'Context objects' :
+/** Sidebar order only. Labels are the descriptors' own classification values, or the prepared catalogue each package belongs to. */
+const ORDER = ['star', 'planet', 'dwarf-planet', 'satellite', 'trans-neptunian', 'comet', 'asteroid', 'interstellar', 'exoplanet', 'nebula', 'galaxy', 'context'];
+const LABELS: Record<string, string> = { context: 'Context scenes' };
+/** Top-level groups read as the app's own plurals. */
+const GROUP_LABELS: Record<string, string> = { star: 'Stars', nebula: 'Nebulae', galaxy: 'Galaxies', context: 'Context scenes' };
+const classificationLabel = (classification: string) => LABELS[classification] ??
   classification[0].toLocaleUpperCase('en') + classification.slice(1).replaceAll('-', ' ');
+
+/** The Local Group catalogue names the packages it details; each nebula package carries its own classified record. */
+function catalogueClassifications(): Map<string, string> {
+  const classifications = new Map<string, string>();
+  const galaxies = readJson(resolve(OBJECTS_DIRECTORY, 'local-group/prepared/catalogue.json'));
+  for (const object of list(isRecord(galaxies) ? galaxies.objects : null).filter(isRecord)) {
+    const id = text(object.detailedObjectId);
+    if (id) classifications.set(id, 'galaxy');
+  }
+  for (const entry of readdirSync(OBJECTS_DIRECTORY, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const nebulae = readJson(resolve(OBJECTS_DIRECTORY, entry.name, 'source/nebula.json'));
+    if (!isRecord(nebulae) || nebulae.schema !== 'cssearth-nebula-catalog@1') continue;
+    for (const object of list(nebulae.objects).filter(isRecord)) {
+      const id = text(object.detailedObjectId);
+      if (id && object.kind === 'nebula') classifications.set(id, 'nebula');
+    }
+  }
+  return classifications;
+}
 const DISTANCE_ORDERED = new Set(['star', 'planet', 'dwarf-planet']);
 
 export interface ObjectRecord {
@@ -30,7 +53,7 @@ export function readJson(path: string): unknown {
 
 /** Every package with both a descriptor and a README, in sidebar order. */
 export function readObjects(): ObjectRecord[] {
-  const objects: ObjectRecord[] = [];
+  const objects: ObjectRecord[] = [], catalogued = catalogueClassifications();
   for (const entry of readdirSync(OBJECTS_DIRECTORY, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
     const directory = resolve(OBJECTS_DIRECTORY, entry.name), readmePath = resolve(directory, 'README.md');
@@ -39,7 +62,7 @@ export function readObjects(): ObjectRecord[] {
     if (descriptor.id !== entry.name) throw new Error(`src/objects/${entry.name}/object.json names a different id.`);
     const readme = readFileSync(readmePath, 'utf8');
     const catalog = isRecord(descriptor.properties) && isRecord(descriptor.properties.catalog) ? descriptor.properties.catalog : null;
-    const group = text(catalog?.classification) ?? 'context';
+    const group = text(catalog?.classification) ?? catalogued.get(entry.name) ?? 'context';
     objects.push({
       id: entry.name, readmePath, readme, catalogued: catalog !== null, group,
       title: text(catalog?.name) ?? /^#\s+(.+)$/mu.exec(readme)?.[1]?.trim() ?? entry.name,
@@ -149,8 +172,13 @@ export function systemGroups(objects: readonly ObjectRecord[]): SystemGroup[] {
     }
     system.groups = [...groups.values()];
   }
-  const rest = groupObjects(outside).map(group => ({ label: group.label, entries: group.objects.map(object => entries.get(object.id)!) }));
-  return [...systems.values(), ...(rest.length ? [{ id: 'outside', label: 'Outside the systems', star: null, groups: rest }] : [])];
+  // Objects that belong to no planetary system keep their own classification as a top-level group.
+  const rest = groupObjects(outside).map(group => {
+    const id = group.objects[0]!.group;
+    return { id, label: GROUP_LABELS[id] ?? group.label, star: null,
+      groups: [{ label: group.label, entries: group.objects.map(object => entries.get(object.id)!) }] };
+  });
+  return [...systems.values(), ...rest];
 }
 
 export function formatBytes(bytes: number) {
