@@ -24,7 +24,8 @@ export function sampleTrianglePoints(faces: Pick<PreparedTriangle, "vertices">[]
  * outside the authored budget rather than inventing a calibration. */
 export function fitObservationLevels(samples: ObservationSample[][], policy: ObservationLevelPolicy) {
   const count = samples.length;
-  if (count < 2 || count > 16 || samples.some(s => s.length !== samples[0].length)) throw new Error('Invalid observation overlap samples.');
+  // The bound matches the controlled-camera frame cap; the fit compares every pair, so its cost grows with the square of the count.
+  if (count < 2 || count > 32 || samples.some(s => s.length !== samples[0].length)) throw new Error('Invalid observation overlap samples.');
   const pairs: OverlapPair[] = [], weights = new Map<OverlapPair, number>();
   for (let a = 0; a < count; a++) for (let b = a + 1; b < count; b++) {
     const ratios = [];
