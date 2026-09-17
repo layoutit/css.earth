@@ -41,7 +41,7 @@
           {
             "catalogueId": "source-hd-189733-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/hd-189733/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/hd-189733/source/manifest.json@52e6e03f6de43f93ced1caea00c88926f07339ac#/inputs/1"
           }
         ]
       }
@@ -413,6 +413,24 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 5569,
       "expectedSha256": "d41ec0ee494cdad389244bf1503326644be7dd10b47518ea4b7e76ccbb2dc2b4"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 440026,
+      "expectedSha256": "1c912b46575f9e964f59719bf0d324f3e56200e0b158ab812e775e6c1cb9358d",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+      }
+    },
+    {
+      "path": "reference/rendered-system-view.png",
+      "expectedBytes": 450920,
+      "expectedSha256": "8a811b6369718ba39b4f5db5ff87fe02dadbd02c9209a464e3ad14863e650508",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733/?overview=system, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation."
+      }
     }
   ]
 }

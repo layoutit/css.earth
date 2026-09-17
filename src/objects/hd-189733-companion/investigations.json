@@ -13,7 +13,7 @@
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
     },
@@ -29,7 +29,7 @@
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
     },
@@ -44,7 +44,7 @@
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
     },
@@ -59,7 +59,7 @@
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
     },
@@ -75,7 +75,7 @@
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
     },
@@ -85,13 +85,13 @@
       "status": "included",
       "finding": "User rule of 2026-09-17: a star whose colour comes from its own measurements stays on the map. Preparation marks B's discovery sourceColor and discoveryVisibility keeps it visible.",
       "evidence": [
-        "site/object-discovery.mts",
-        "tools/prepare-object-discovery.mts"
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/site/object-discovery.mts",
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/tools/prepare-object-discovery.mts"
       ],
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
     },
@@ -101,12 +101,12 @@
       "status": "included",
       "finding": "A uniform disc in the spectrum colour, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
-        "src/objects/hd-189733-companion/source/presentation/context.png"
+        "https://github.com/layoutit/css.earth/blob/52e6e03f6de43f93ced1caea00c88926f07339ac/src/objects/hd-189733-companion/source/presentation/context.png"
       ],
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "52e6e03f6de43f93ced1caea00c88926f07339ac"
         }
       ]
     }

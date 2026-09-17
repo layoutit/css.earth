@@ -41,7 +41,7 @@
           {
             "catalogueId": "source-hd-189733-companion-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/hd-189733-companion/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/hd-189733-companion/source/manifest.json@52e6e03f6de43f93ced1caea00c88926f07339ac#/inputs/1"
           }
         ]
       }
@@ -341,6 +341,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 6004,
       "expectedSha256": "b7c67f14cd2a0a7829a2ce71e94cc7da33df4388909753a6fec11b9ea6be6f6d"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 369885,
+      "expectedSha256": "71fd4bcda9e4a0507f5aef5d5c147e6dd3032d68b665a9860e445844e47486d5",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /hd-189733-companion/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
+      }
     }
   ]
 }

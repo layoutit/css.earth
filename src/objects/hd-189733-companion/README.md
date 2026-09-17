@@ -23,6 +23,7 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733-compa
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) reads the pinned XP spectrum and checks the colour 255, 201, 123.
 - [`source.test.mts`](../../../tests/objects/unit/hd-189733-companion/source.test.mts) verifies the pins and acquisitions, that radius and GM are the catalogue's, that the distance is A's, and that the prepared world positions of A and B are 11.44 arcsec apart as seen from the Sun.
 - [`object-discovery.test.mts`](../../../site/test/object-discovery.test.mts) checks that B is marked `sourceColor` and stays on the map, while Antares and Polaris stay hidden.
+- [`rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/hd-189733-companion/` in headless Chrome, no console errors.
 
 ## Known problems
 
