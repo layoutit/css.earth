@@ -40,6 +40,8 @@ Dayside and nightside are brightness temperatures of the flux each hemisphere sh
 
 **Lenses not shown.** A refit of Challener et al.'s NIRSpec curve and three MIRI wavelength slices (5–6.5, 6.5–8.5, 8.5–10.5 µm) were lenses for a while and were removed as duplicates of the same data; see the [investigation ledger](investigations.json).
 
+**Navigation marker.** From a distance the planet is drawn as its NIRSpec map seen from the host star: an orthographic dayside disc centred on the substellar point, north up and east to the right, in the lens's palette and range, rendered by [author.mts](../../../tools/objects/source-authoring/wasp-43/author.mts) (`--check` recomputes it). The marker is one fixed image, so it shows the dayside whatever the planet's phase, as Solar System markers show one photograph.
+
 **Orbit and rotation.** The planet orbits its placed host star on a circular orbit built from the transit fit ([hostedOrbits.ts](../../../packages/astronomy/src/hostedOrbits.ts)). The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked, as the paper does. The pole is the orbit normal and longitude 0 faces the star at every instant; east is the direction of rotation. The default camera looks at the substellar point with the pole up.
 
 ## Evidence
