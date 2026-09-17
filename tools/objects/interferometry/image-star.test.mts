@@ -44,7 +44,7 @@ test('the π¹ Gruis season parses, and malformed seasons fail', async () => {
   assert.equal(season.data.instrument, 'pionier');
   assert.equal('nights' in season.data && season.data.nights.length, 2);
   assert.equal(season.referenceDiameterMas, 18.17);
-  assert.deepEqual(season.selection.errorFloors, { vis2Relative: 0.05, closureDegrees: 2 });
+  assert.deepEqual(season.selection.errorFloors, { vis2Relative: 0.05, vis2Minimum: 5e-6, closureDegrees: 2 });
   assert.throws(() => parseSeason({ ...raw, schema: 'cssearth-star-season@0' }), /schema/u);
   assert.throws(() => parseSeason({ ...raw, instrument: 'sphere' }), /No calibration/u);
   assert.throws(() => parseSeason({ ...raw, nights: [{ from: '2014-09-26T12:00:00', to: '2014-09-25T14:00:00' }] }), /ordered window/u);
@@ -68,13 +68,17 @@ test('the disc fit on the author file lands on the package diameter, and the sta
 
 test('error floors raise only the errors below them', async () => {
   const bytes = await readFile(authorFile), before = readChannelRows(bytes);
-  // The author file already carries 5% and 2 degrees, so the same floors leave it as it is.
-  const same = selectOifits(bytes, { errorFloors: { vis2Relative: 0.05, closureDegrees: 2 } });
+  // The author file already carries these floors, so the same floors leave it as it is.
+  const same = selectOifits(bytes, { errorFloors: { vis2Relative: 0.05, vis2Minimum: 5e-6, closureDegrees: 2 } });
   assert.ok(same.raisedErrors < before.vis2.length / 100, `${same.raisedErrors} raised`);
   const higher = selectOifits(bytes, { errorFloors: { vis2Relative: 0.1, closureDegrees: 5 } }), after = readChannelRows(higher.bytes);
   assert.ok(after.vis2.every(row => row.error >= 0.1 * Math.abs(row.vis2) - 1e-12));
   assert.ok(after.t3.every(row => row.errorDegrees >= 5 - 1e-9));
+  const minimum = readChannelRows(selectOifits(bytes, { errorFloors: { vis2Relative: 0, vis2Minimum: 1e-4, closureDegrees: 0 } }).bytes);
+  assert.ok(minimum.vis2.every(row => row.error >= 1e-4 - 1e-12));
+  assert.ok(minimum.vis2.some((row, index) => row.error === before.vis2[index]!.error && row.error > 1e-4), 'larger errors are kept');
   assert.throws(() => selectOifits(bytes, { errorFloors: { vis2Relative: 5, closureDegrees: 2 } }));
+  assert.throws(() => selectOifits(bytes, { errorFloors: { vis2Relative: 0.05, vis2Minimum: -1, closureDegrees: 2 } }));
 });
 
 test('the π¹ Gruis season from raw matches the author file and image, and is cast', async t => {
