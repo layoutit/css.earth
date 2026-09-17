@@ -130,14 +130,14 @@
       "status": "unresolved",
       "finding": "Run through image-star.mts with --calibrated on the 29 pinned files, the season merges byte-identically to the pinned continuum OIFITS and SQUEEZE fits it at reduced chi-squared 0.31 and 1.20; its patches come back from two interleaved halves (correlation 0.57, limit 0.5). Spotless twins at 0.98 to 1.02 times the fitted 43.08 mas leave patch maps at 0.49 to 0.81 of the image's strength (spot ratios 2.02 to 1.24, limit 2); the twin of 42.45 mas this lens was first checked with gave 2.73. On one half of the data, twins between 42.0 and 44.3 mas range from rms 0.03 to 0.14 against the image's 0.13, and 10 000 iterations, four chains or half-size pixels did not make a spotty twin clean. π¹ Gruis's twins stay clean over the same relative range. The lens is kept by the user's decision and its notes say the patches are not confirmed.",
       "evidence": [
-        "COMMIT_DOCS",
-        "COMMIT_TOOL",
-        "COMMIT_SEASON"
+        "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/docs/interferometric-imaging.md#measured-checks",
+        "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/tools/objects/interferometry/image-star.mts",
+        "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
       ],
       "checked": [
         {
           "date": "2026-09-17",
-          "commit": "COMMIT"
+          "commit": "03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7"
         }
       ],
       "revisitWhen": "A reconstruction of these or more data (the public 25 February 2020 night, another recipe or another code) whose spotless twins stay clean across ±2 percent in size, or a published spotless-disc test of the MATISSE images."
