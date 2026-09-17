@@ -11,7 +11,7 @@
  * Verified archives are deleted after the build: toolchains are large and the data they reduce are larger. */
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { access, copyFile, link, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { access, copyFile, link, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { resolve } from 'node:path';
 import { Readable } from 'node:stream';
@@ -74,31 +74,38 @@ export async function installToolchain(id: string, caches: readonly string[] = [
     const registries = requireArray(entry.registries).map(value => requireString(value));
     const script = `using Pkg; for r in ${JSON.stringify(registries)}; startswith(r, "http") ? Pkg.Registry.add(url=r) : Pkg.Registry.add(r); end; Pkg.instantiate(); using ROTIR`;
     run(resolve(root, requireString(entry.executable)), [`--project=${resolve(repository, requireString(entry.environment))}`, '-e', script], { cwd: root, env: { JULIA_DEPOT_PATH: resolve(root, 'depot') } });
-  } else if (id === 'pionier') {
-    const build = resolve(root, 'build');
+  } else if (entry.build === 'eso-kit') {
+    // An ESO instrument kit (PIONIER, GRAVITY, MATISSE, AMBER): its own install_pipeline builds CPL, esorex and the recipes.
+    const build = resolve(root, 'build'), kitArchive = requireString(entry.kit);
     await mkdir(build, { recursive: true });
-    run('bsdtar', ['-xf', files[0]!], { cwd: build });
-    run('tar', ['-xzf', 'yorick-y_2_2_04.tar.gz'], { cwd: build });
-    const yorick = resolve(build, 'yorick-y_2_2_04');
-    for (const patch of requireArray(entry.yorickPatches).map(value => requireString(value))) run('patch', ['-p0', '-N', '-i', resolve(build, patch)], { cwd: yorick });
-    // No X11 here: Yorick's graphics are not needed by the pipeline.
-    run('make', ['NO_XLIB=yes', 'Y_HOME=relocate', 'config'], { cwd: yorick });
-    run('make', ['NO_XLIB=yes'], { cwd: yorick });
-    run('make', ['NO_XLIB=yes', 'install'], { cwd: yorick });
-    run('tar', ['-xzf', files[1]!], { cwd: build });
-    const kit = resolve(build, (await readdir(build)).find(name => name.startsWith('pionier-kit-') && !name.endsWith('.tar.gz'))!);
+    const path = entry.yorick === true ? `${await buildYorick(entry, files, build)}:${process.env.PATH}` : process.env.PATH;
+    run('tar', ['-xzf', files.find(file => file.endsWith(kitArchive))!], { cwd: build });
+    const kit = resolve(build, kitArchive.replace(/\.tar\.gz$/u, ''));
     await mkdir(resolve(root, 'home'), { recursive: true });
     // ESO's installer asks for confirmation only when a target directory is missing, and it refuses to ask without a terminal:
     // both directories exist before it runs.
     await mkdir(resolve(root, 'pipeline'), { recursive: true }); await mkdir(resolve(root, 'calib'), { recursive: true });
-    run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, answers: '', env: { HOME: resolve(root, 'home'), PATH: `${resolve(yorick, 'relocate/bin')}:${process.env.PATH}` } });
+    run('./install_pipeline', [resolve(root, 'pipeline'), resolve(root, 'calib')], { cwd: kit, answers: '', env: { HOME: resolve(root, 'home'), PATH: path } });
     // The kit's build tree is not needed at run time; Yorick's relocatable install is.
     await rm(kit, { recursive: true, force: true });
-  } else throw new TypeError(`No installer for toolchain ${id}.`);
+  } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit".`);
   // The archives were verified and unpacked; the disk is kept for data. A reinstall fetches or links them again.
   await rm(downloads, { recursive: true, force: true });
   await writeFile(resolve(root, 'installed.json'), `${JSON.stringify({ id, descriptorSha256: digest }, null, 2)}\n`);
   return root;
+}
+
+/** Yorick from ESO's source package with its two patches, built without X11; the PIONIER pipeline (pndrs) runs on it. Returns
+ * the directory holding the yorick executable. */
+async function buildYorick(entry: Record<string, unknown>, files: readonly string[], build: string) {
+  run('bsdtar', ['-xf', files.find(file => file.endsWith('.src.rpm'))!], { cwd: build });
+  run('tar', ['-xzf', 'yorick-y_2_2_04.tar.gz'], { cwd: build });
+  const yorick = resolve(build, 'yorick-y_2_2_04');
+  for (const patch of requireArray(entry.yorickPatches).map(value => requireString(value))) run('patch', ['-p0', '-N', '-i', resolve(build, patch)], { cwd: yorick });
+  run('make', ['NO_XLIB=yes', 'Y_HOME=relocate', 'config'], { cwd: yorick });
+  run('make', ['NO_XLIB=yes'], { cwd: yorick });
+  run('make', ['NO_XLIB=yes', 'install'], { cwd: yorick });
+  return resolve(yorick, 'relocate/bin');
 }
 
 /** The installed toolchain's root, refusing a missing install or one built from a different descriptor. */
