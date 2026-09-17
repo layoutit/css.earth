@@ -288,26 +288,27 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "emission-disc-context-marker",
+      "id": "nirspec-map-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6347,
-      "expectedSha256": "01ad09db6adde04fc18587a32d82f9135a4b03b1bd48a5b586b6d3ad6ae041ab",
+      "expectedBytes": 59650,
+      "expectedSha256": "aa2eb13c0c569269a67b258c3cef952182732f8618a43db04c50902a5691f326",
       "origin": "https://zenodo.org/records/12627524",
-      "credit": "Flat disc in the lens palette colour at the dayside mean temperature, 1561 K: #e97a54; written by neutralDiscMarker in tools/objects/new-star.mts",
+      "credit": "The Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/wasp-43/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/wasp-43/author.mts",
         "inputs": [
-          "wasp-43b-observational-measurements"
+          "wasp-43b-challener-2024-deposit",
+          "wasp-43b-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/wasp-43/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat disc marker; its colour is a display choice from the lens palette."
+        "reason": "The default lens rendered as the dayside disc; `author.mts --check` recomputes it."
       }
     }
   ],
