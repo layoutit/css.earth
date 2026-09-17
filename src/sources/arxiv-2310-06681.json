@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2310-06681",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cristo et al. (2024): An ESPRESSO view of the HD 189733 system. Broadband transmission spectrum, differential rotation, and system architecture",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2310.06681"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346366"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2310.06681",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202346366",
+      "label": "A&A 682, A28 (2024)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/html/2310.06681",
+      "checkedOn": "2026-09-17",
+      "locator": "Table 4, model M1: lambda -1.00 +0.22/-0.23 degrees, i* 71.87 +5.55/-6.91 degrees, equatorial period 11.454 +0.092/-0.088 days, alpha 0.29; abstract: psi 13.6 +/- 6.9 degrees, polar period 14.9 +/- 2 days, differential rotation detected tentatively (93.4 percent confidence)"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 682, A28",
+  "creators": [
+    "E. Cristo",
+    "E. Esparza Borges",
+    "N. C. Santos",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

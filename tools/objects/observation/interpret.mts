@@ -375,9 +375,9 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           meaning: 'Whole-disc colour and V geometric albedo from published photometry, uniform over the body; not a resolved surface map.' } } };
       }
       case 'stellar-photometric-color': {
-        // A self-luminous photosphere with no image: one colour from the catalogued photometric temperature, no map.
+        // A self-luminous photosphere with no image: one colour from its measured spectrum or catalogued photometric temperature, no map.
         const source = await manifest;
-        const { temperature, color, range, limbDarkening } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
+        const { temperature, spectrum, color, range, limbDarkening } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
           surface.science, surface.source);
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
@@ -386,10 +386,11 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         // A measured limb-darkening law darkens the disc through the limb plate, which the runtime fits edge to edge to the outline.
         if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);
         return { data, channels: 4, nearest: true, plates,
-          report: { stellarPhotometricColor: { temperature, srgb: color.srgb, linearSrgb: color.linear, srgbAtBounds: range.map(bound => bound.srgb),
-            ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2 } } : {}),
-            meaning: limbDarkening ? 'Planck colour at the catalogued photometric temperature, dimmed toward the limb by the limb-darkening law measured from transits; not a resolved photosphere or spectrum.'
-              : 'Planck colour at the catalogued photometric temperature, uniform over the disc; not a resolved photosphere, limb darkening or spectrum.' } } };
+          report: { stellarPhotometricColor: { ...(temperature ? { temperature } : { spectrum }), srgb: color.srgb, linearSrgb: color.linear, srgbAtBounds: range.map(bound => bound.srgb),
+            ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2,
+              ...('fit' in limbDarkening && limbDarkening.fit ? { fit: { all: limbDarkening.fit.all, sectors: limbDarkening.fit.sectors } } : {}) } } : {}),
+            meaning: `${temperature ? 'Planck colour at the catalogued photometric temperature' : 'Colour of the measured Gaia XP spectrum'}${limbDarkening
+              ? ', dimmed toward the limb by the limb-darkening law measured from transits; not a resolved photosphere.' : ', uniform over the disc; not a resolved photosphere or limb darkening.'}` } } };
       }
       default: throw new TypeError(`${objectId}/${surface.id}: unknown science kind ${kind}.`);
     }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readNpyHeader, readNpyObject, type NpyArray, type NpyValue } from './npy-pickle.mts';
-import { decodeNpyDictionaryMap } from './npy-dictionary-map.mts';
+import { decodeNpyDictionaryMap, theresaVisibleLongitudes } from './npy-dictionary-map.mts';
 import { readTarMember } from './tar-member.mts';
 
 /** The byte program numpy.save writes for a dictionary of float64 arrays, protocol 3, so the reader is tested on what it claims
@@ -77,4 +77,26 @@ test('samples a regular pixel-centre map read from a tar member, and refuses an 
   assert.equal(decodeNpyDictionaryMap(readTarMember(archive, 'deposit/maps.npy'), { ...recipe, sampling: 'nearest' }).sample(-150, -60), 1000 - 157.5 - 675);
   const shuffled = { ...arrays, lon: { ...arrays.lon, values: [...arrays.lon.values].reverse() } };
   assert.throws(() => decodeNpyDictionaryMap(pickledDictionary(shuffled), recipe), /not a regular south-to-north, west-to-east/u);
+});
+
+test('a map saved without its grid arrays states the pixel-centre grid, and shows only the longitudes its observations saw', () => {
+  const arrays = grid(8, 4, (lon, lat) => 1000 + lon + 10 * lat);
+  const bytes = pickledDictionary({ tmap: arrays.tmap });
+  const recipe = { path: 'x', sampling: 'bilinear', units: 'K', values: ['tmap'], gridLayout: 'pixel-centres' };
+  assert.equal(decodeNpyDictionaryMap(bytes, recipe).sample(-157.5, -67.5), 1000 - 157.5 - 675);
+  assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, gridLayout: undefined }), /states gridLayout pixel-centres/u);
+  assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, latitudes: ['lat'] }), /names both/u);
+  // Around an eclipse (phase 0.45 to 0.55) the sub-observer longitude runs from +18 to -18 degrees; each limb adds 90.
+  const range = theresaVisibleLongitudes([0.45, 0.5, 0.55], 0, 1);
+  assert.ok(Math.abs(range[0] + 108) < 1e-9 && Math.abs(range[1] - 108) < 1e-9);
+  // ThERESA wraps each limb before taking the extremes, so a limb past 180 degrees reads as the far west.
+  assert.deepEqual(theresaVisibleLongitudes([0.2], 0, 1).map(v => Math.round(v * 1e9) / 1e9), [18, -162]);
+  const visible = decodeNpyDictionaryMap(bytes, { ...recipe, visibleLongitudes: { times: ['t'], planet: 'p' } }, range);
+  // Cells of 45 degrees: the one centred at -112.5 reaches -90 and is kept; the one centred at -157.5 ends at -135 and is not.
+  assert.equal(visible.sample(-157.5, 0), null);
+  assert.equal(visible.sample(-112.5, -67.5), 1000 - 112.5 - 675);
+  // A kept cell is drawn whole: beside a hidden column its own value fills the missing corners.
+  assert.equal(visible.sample(-130, -67.5), 1000 - 112.5 - 675);
+  assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, visibleLongitudes: { times: ['t'], planet: 'p' } }), /computed from the recipe/u);
+  assert.equal(visible.report.shownColumns, 6);
 });

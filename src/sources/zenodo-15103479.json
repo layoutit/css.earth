@@ -1,0 +1,36 @@
+{
+  "id": "zenodo-15103479",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Data Products for Eclipse Mapping with MIRI: 2D Map of HD 189733b from 8 µm JWST MIRI LRS Observations (Lally et al. 2025)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.15103479"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/15103479",
+      "label": "Zenodo"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/15103479",
+      "checkedOn": "2026-09-17",
+      "locator": "output_E.npy (md5 dfb3f096bef955f228ed7e4d4bda12f0): the Eureka!-reduced best-fit map (fmap, tmap, their uncertainties, and the fitted times, fluxes and model); hd189-eureka-spitzer+MIRI-share.cfg, its ThERESA configuration; CC BY 4.0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. Lally, R. C. Challener, N. K. Lewis, J. Inglis et al.; JWST MIRI/LRS eclipses of HD 189733b, program GO 2021 (PI B. Kilpatrick), and Spitzer IRAC 8 µm eclipses",
+      "scope": "citation",
+      "evidence": "https://zenodo.org/records/15103479"
+    }
+  ],
+  "publisher": "Zenodo"
+}
