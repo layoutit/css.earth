@@ -1,0 +1,67 @@
+---
+import '../site.css';
+import './admin.css';
+import { readInventory, statusTags } from './object-inventory.mts';
+
+interface Props { title: string; activeId?: string; }
+const { title, activeId } = Astro.props;
+const { summaries, folders } = readInventory();
+const classifications = [...new Map(summaries.map(object => [object.classification, object.classificationLabel]))].sort((a, b) => a[1].localeCompare(b[1], 'en'));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <title>{title} · cssEarth admin</title>
+  </head>
+  <body class="admin">
+    <aside class="admin-sidebar">
+      <header class="admin-sidebar-header">
+        <a class="admin-home" href="/admin/">Objects</a>
+        <span class="admin-count" data-admin-count>{summaries.length}</span>
+      </header>
+      <div class="admin-filters">
+        <input class="admin-input" type="search" placeholder="Search name, id, system" data-admin-filter="query" aria-label="Search objects" />
+        <div class="admin-filter-row">
+          <select class="admin-input" data-admin-filter="classification" aria-label="Classification">
+            <option value="">All kinds</option>
+            {classifications.map(([value, label]) => <option value={value}>{label}</option>)}
+          </select>
+          <select class="admin-input" data-admin-filter="status" aria-label="Status">
+            <option value="">Any status</option>
+            <option value="imagery">Imagery</option>
+            <option value="anchor">Anchor</option>
+            <option value="shape">Shape only</option>
+            <option value="illustration">Illustration</option>
+            <option value="off-map">Off the map</option>
+            <option value="featured">Featured</option>
+            <option value="unresolved">Unresolved investigations</option>
+            <option value="problems">Package problems</option>
+            <option value="missing-sources">Sources not downloaded</option>
+          </select>
+        </div>
+      </div>
+      <ul class="admin-list" data-admin-list>
+        {summaries.map(object => (
+          <li data-admin-object data-id={object.id} data-search={`${object.name} ${object.id} ${object.systemName}`.toLocaleLowerCase('en')}
+            data-classification={object.classification} data-status={statusTags(object)}>
+            <a class:list={['admin-list-link', { 'is-active': object.id === activeId }]} href={`/admin/${object.id}/`} aria-current={object.id === activeId ? 'page' : undefined}>
+              <span class="admin-dot" style={`--dot:${object.color}`}></span>
+              <span class="admin-list-name">{object.name}</span>
+              <span class="admin-list-meta">{object.discovery?.label === 'Imagery' || object.discovery?.anchor ? object.lensCount : object.discovery?.label ?? object.type}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      {folders.length > 0 && <p class="admin-folders">Folders without object.json: {folders.map(folder => folder.id).join(', ')}</p>}
+    </aside>
+    <main class="admin-main"><slot /></main>
+    <script>
+      import { mountAdminFilters } from './admin-client.mts';
+      mountAdminFilters(document);
+    </script>
+  </body>
+</html>

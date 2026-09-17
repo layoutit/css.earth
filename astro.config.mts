@@ -33,6 +33,13 @@ export default defineConfig({
       updateConfig({ vite: { define: { __CSSEARTH_CONTEXT_AVAILABILITY__: JSON.stringify(availability) } } });
       if (failures.length) logger.warn(`Some 3D views are unavailable in this installation:\n${failures.join('\n')}\nPrepare their packages and restart the server to enable them.`);
     },
+  } }, { name: 'objects-admin', hooks: {
+    // A local census of src/objects. It never enters a build.
+    'astro:config:setup': ({ command, injectRoute }) => {
+      if (command !== 'dev') return;
+      injectRoute({ pattern: '/admin', entrypoint: './site/admin/AdminIndex.astro' });
+      injectRoute({ pattern: '/admin/[id]', entrypoint: './site/admin/AdminObject.astro' });
+    },
   } }],
   vite: {
     plugins: [searchServer(), wmtsLocalMirror({objectId:"earth"}), performanceSourceMaps()],
