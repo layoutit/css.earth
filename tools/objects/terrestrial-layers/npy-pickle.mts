@@ -18,17 +18,18 @@ type Pending = { kind: 'pending-array' };
 type Mark = { readonly mark: true };
 type Item = NpyValue | Global | Dtype | Pending | Mark | Item[] | Map<string, Item>;
 
-/** Parse the `.npy` header: it must describe one pickled object (dtype `|O`, shape `()`). */
+/** Parse a `.npy` header (format versions 1 to 3) for any array or pickled object it describes. */
 export function readNpyHeader(bytes: Uint8Array) {
   const buffer = Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   if (buffer.length < 10 || !buffer.subarray(0, 6).equals(MAGIC)) throw new TypeError('Not a NumPy .npy file.');
-  const major = buffer[6]!, headerLength = major === 1 ? buffer.readUInt16LE(8) : major === 2 || major === 3 ? buffer.readUInt32LE(8) : -1;
-  const start = major === 1 ? 10 : 12;
-  if (headerLength < 0 || start + headerLength > buffer.length) throw new TypeError(`Unsupported .npy version ${major}.`);
-  const header = buffer.subarray(start, start + headerLength).toString('latin1');
+  const major = buffer[6]!;
+  if (![1, 2, 3].includes(major)) throw new TypeError(`Unsupported .npy format version ${major}.`);
+  const start = major === 1 ? 10 : 12, headerLength = major === 1 ? buffer.readUInt16LE(8) : buffer.readUInt32LE(8), dataOffset = start + headerLength;
+  if (dataOffset > buffer.length || dataOffset % 16 !== 0) throw new TypeError('Truncated or misaligned .npy header.');
+  const header = buffer.subarray(start, dataOffset).toString(major === 3 ? 'utf8' : 'latin1');
   const descr = /'descr':\s*'([^']*)'/u.exec(header)?.[1], fortran = /'fortran_order':\s*(True|False)/u.exec(header)?.[1], shape = /'shape':\s*\(([^)]*)\)/u.exec(header)?.[1];
-  if (descr === undefined || fortran === undefined || shape === undefined) throw new TypeError('Malformed .npy header.');
-  return { version: major, descr, fortranOrder: fortran === 'True', shape: shape.split(',').map(value => value.trim()).filter(Boolean).map(Number), dataOffset: start + headerLength };
+  if (descr === undefined || fortran === undefined || shape === undefined) throw new TypeError(`Malformed .npy header: ${header.trim()}.`);
+  return { version: major, header, descr, fortranOrder: fortran === 'True', shape: shape.split(',').map(value => value.trim()).filter(Boolean).map(Number), dataOffset };
 }
 
 /** Read a pickled-object `.npy` file into plain values: dictionaries become objects, float64 arrays become Float64Array. */
