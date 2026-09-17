@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ce971355305b6dcaf0bbbbe164252768a8d6b322baa0371790583e995e1d656d"
+    "sha256": "ed888fb3787ef38f63574f19b8cc317e9e3fc6678689d9e0b6cbf544c5ce963e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e1c8b571d63bce2ed7043b9223229a3318c752040e28b438c36b3f851d6e17c9",
+      "sha256": "53e761cef2c6cfcfeaf2696865ff082dc46540b4fb88b7a05d665dbd580f165d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 44,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/urania/urania-shape-surface@2x.webp",
           "polesUrl": "/scenes/urania/urania-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "urania",
-    "materialSha256": "5201d82614afa8d914ce3570f12803eeee70ff0ea6928d20a98fa465be87ca60",
+    "materialSha256": "ac507aacb5c3b290cb951643a043ad17fdcb98ef2cecd9237156f94cafdd8f01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

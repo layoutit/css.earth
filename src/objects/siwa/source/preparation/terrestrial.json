@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 55.305,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/siwa/siwa-shape-surface@2x.webp",
     "polesUrl": "/scenes/siwa/siwa-shape-surface@2x.webp",
     "radialTerrain": {

@@ -4,11 +4,17 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SCENE_OBJECTS } from '../site/objects.mts';
-import { INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, parseInvestigationLedger, readInvestigationLedgers } from './investigation-ledger.mts';
+import { INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, INVESTIGATION_STATUSES, evidenceLink, parseInvestigationLedger, readInvestigationLedgers } from './investigation-ledger.mts';
+import { readInvestigationSurveys } from './investigation-survey.mts';
+import { INVESTIGATION_INDEX_FILE, formatInvestigationIndex, investigationReport, watchedSource } from './report-investigations.mts';
 import { fixtureRecord } from './test-values.mts';
 import { readCatalog } from './prepare-catalog.mts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+/** A finding this many bodies reach the same way is shared reasoning, and belongs in one record under data/investigations. */
+const SHARED_FINDING_BODIES = 3;
+/** Open decisions that still name no source outside this repository. It is a backlog: it may only go down. */
+const UNSOURCED_DECISIONS = 645;
 // The source survey a body README used to carry: list items led by a bold decision such as Included, Excluded or Selected.
 const SURVEY_ITEM = /^\s*[-*] \*\*(?:Included|Excluded|Unresolved|Deferred|Selected|Superseded|Not selected|Older interpretation|Literature)\b/m;
 // This is deliberately limited to an explicit README section title. Bodies may still use
@@ -70,4 +76,40 @@ test('a ledger entry states its decision, pinned evidence and what would reopen 
     change(ledger);
     assert.throws(() => parseInvestigationLedger(ledger, 'fixture'), TypeError, `Refuses ${label}.`);
   }
+});
+
+test('a finding many bodies share lives in one shared record, and every record is shared', async () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  const [ledgers, surveys] = await Promise.all([readInvestigationLedgers(root), readInvestigationSurveys(root, evidenceLink)]);
+  const copies = new Map<string, Set<string>>(), quoted = new Map<string, Set<string>>();
+  for (const ledger of ledgers) for (const entry of ledger.entries) {
+    if (entry.survey) quoted.set(entry.survey, new Set([...(quoted.get(entry.survey) ?? []), ledger.objectId]));
+    else copies.set(entry.finding, new Set([...(copies.get(entry.finding) ?? []), ledger.objectId]));
+  }
+  // Repeating the same reasoning per body buried the body-specific findings among the copies.
+  const repeated = [...copies].filter(([, objects]) => objects.size >= SHARED_FINDING_BODIES)
+    .map(([finding, objects]) => `${objects.size} bodies: ${finding.slice(0, 60)}`);
+  assert.deepEqual(repeated, [], 'a finding repeated across bodies belongs in data/investigations');
+  const orphans = [...surveys.keys()].filter(id => (quoted.get(id)?.size ?? 0) < SHARED_FINDING_BODIES);
+  assert.deepEqual(orphans, [], 'every shared record is quoted by the bodies that share it');
+});
+
+test('the committed open-work index matches the ledgers', async () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
+  const report = investigationReport(objects, ledgers, { statuses: [...INVESTIGATION_STATUSES], summary: false, json: false, index: true, write: false });
+  const committed = await readFile(resolve(root, INVESTIGATION_INDEX_FILE), 'utf8');
+  assert.equal(committed, formatInvestigationIndex(report), `${INVESTIGATION_INDEX_FILE} is stale; run pnpm investigations:index`);
+});
+
+test('an open decision names where the reopening evidence would appear, and the backlog only shrinks', async () => {
+  const root = fileURLToPath(new URL('../', import.meta.url));
+  const ledgers = await readInvestigationLedgers(root);
+  const open = ledgers.flatMap(ledger => ledger.entries.filter(entry => entry.status !== 'included'));
+  // A decision reopens when new evidence appears at the source it examined, so an entry without one says nowhere to look.
+  const unsourced = open.filter(entry => watchedSource(entry.evidence) === null);
+  assert.ok(unsourced.length <= UNSOURCED_DECISIONS,
+    `${unsourced.length} decisions name no external source; the recorded backlog is ${UNSOURCED_DECISIONS}. Give the new one its archive, deposit or paper.`);
+  assert.equal(unsourced.length, UNSOURCED_DECISIONS,
+    `${UNSOURCED_DECISIONS - unsourced.length} decisions gained a source; lower UNSOURCED_DECISIONS to ${unsourced.length}.`);
 });

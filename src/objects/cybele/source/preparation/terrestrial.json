@@ -80,10 +80,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 156.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/cybele/cybele-shape-surface@2x.webp",
     "polesUrl": "/scenes/cybele/cybele-shape-surface@2x.webp",
     "radialTerrain": {

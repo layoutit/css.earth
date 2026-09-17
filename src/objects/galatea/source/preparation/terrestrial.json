@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 88,
-    "camera": {
-      "initialScenePitchDegrees": 8.513619952467314,
-      "defaultControlYawDegrees": -134.03387974954427
-    },
     "mapUrl": "/scenes/galatea/galatea-model-surface@2x.webp",
     "polesUrl": "/scenes/galatea/galatea-model-poles@2x.webp",
     "radialTerrain": {

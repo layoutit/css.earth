@@ -87,10 +87,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 18.265603887767426,
-    "camera": {
-      "initialScenePitchDegrees": 30,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/nix/nix-model-surface@2x.webp",
     "polesUrl": "/scenes/nix/nix-model-poles@2x.webp",
     "radialTerrain": {

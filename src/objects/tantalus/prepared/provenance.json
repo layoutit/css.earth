@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c456673e08c9b76e83f18cc28cf4c70e65577b9b8dc53bcf0d0fa7af43d7d3c"
+    "sha256": "5245504ab07179fa07f7545197322d1bd68cfb5aee3a00076cb85e5bd991c249"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a1dc59b12c292fd8f741642c7f529421b56acb70a619fc4419d15c77af26c89",
+      "sha256": "5dcacdbf88294de1a19ef69da409fb826aefe84636d6d86cdf89dc719ab7a8c4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.725,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/tantalus/tantalus-shape-surface@2x.webp",
           "polesUrl": "/scenes/tantalus/tantalus-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "tantalus",
-    "materialSha256": "3a29149cc98d726d29c5fbec49d33f26dbc0c2f4028e88d507b6c233d1407c89",
+    "materialSha256": "596a5a377a3539c0037c69232282da5770d85650d8504beaa580151f5fdeb734",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

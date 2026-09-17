@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f644ad46d7a86add548c0880f9ca75be644cde8d634d54bf322ff9a491076f1"
+    "sha256": "3e4eb7acd1da4b0d6730ed41b7a2d7235684b4c353ff37fcc7b1c7af704fcca1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b92667927b516eb019992d9c6340e98f3c8f6b374574bc631a637e075a1f3599",
+      "sha256": "51f9406ce43b90327726ca4be5420f129a6602d0d3075ad9e0da8a0ea4d72780",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 8.2,
-          "camera": {
-            "initialScenePitchDegrees": -21.896362143852418,
-            "defaultControlYawDegrees": -119.4965884361338
-          },
           "mapUrl": "/scenes/adrastea/adrastea-model-surface@2x.webp",
           "polesUrl": "/scenes/adrastea/adrastea-model-poles@2x.webp",
           "radialTerrain": {
@@ -445,7 +441,7 @@
   },
   "lastPreparation": {
     "objectId": "adrastea",
-    "materialSha256": "8d1733594fd4e6401075ecd86932f055ca9b2552a4fe02fe1fc641d515d04804",
+    "materialSha256": "4b44fe1c368ebe5cbd3f3b0e33b3b6c41f7b52e2d4b9edef2f07424972ad2ab6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

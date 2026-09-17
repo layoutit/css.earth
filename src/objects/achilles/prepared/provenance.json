@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bd2c6963d7d9f8f00aed4d6c19767927f4056192f628d0b4aca51efa44ea35b2"
+    "sha256": "f42d4c114ca8fe6496311d571b13f52bea10413344074930c21045316d10d3be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ca56456b100deac0cf948b7686190ef6857d1b9bd3257f58e27fcddbf4facb40",
+      "sha256": "9382ac85497e7bb203e2644c5e9bf029058db73397c415f2204a119207c1cbde",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 65.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/achilles/achilles-shape-surface@2x.webp",
           "polesUrl": "/scenes/achilles/achilles-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "achilles",
-    "materialSha256": "02fdf8893c2b58507e3bb9a59266bff3075c7710c657dca8b441f2a2c9489890",
+    "materialSha256": "07e5c8979cf4fcf46c166b42afbb1f79640bcdd943680d86709596f23d513232",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b65ed426402901691f0809f42ec801b6ef00713bc08c8c8f00763bdeb201c02e"
+    "sha256": "3973d013918ea5839fe190c4d576cddbe82e2424249c6f357651e91a6d5724fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ba0ff05e7175840944ebdb00aaecd840b6b938a55090cf2fb0cb121d059a51d6",
+      "sha256": "03c5a1e205a7c672f0d61509fa811f63a37fbd3a04cd9c71134915e1b85efa74",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 19.5,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/ganymed/ganymed-shape-surface@2x.webp",
           "polesUrl": "/scenes/ganymed/ganymed-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "ganymed",
-    "materialSha256": "74826719aa54d98b28a2043767ef8c8b6fae3caf9be8770a50a387bf5fd0b239",
+    "materialSha256": "98ca4cc586e5ed9de870d565e0ed3cc133ccfddf7fed1309b4a7aaf1bfe87f5c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

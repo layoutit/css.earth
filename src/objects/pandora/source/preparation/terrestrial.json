@@ -401,10 +401,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 40.6,
-    "camera": {
-      "initialScenePitchDegrees": -38.66837682568949,
-      "defaultControlYawDegrees": -163.14088451190412
-    },
     "mapUrl": "/scenes/pandora/pandora-normal-surface@2x.webp",
     "polesUrl": "/scenes/pandora/pandora-normal-poles@2x.webp",
     "radialTerrain": {

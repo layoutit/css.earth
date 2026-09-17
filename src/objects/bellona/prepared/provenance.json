@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f38c46963e0d680c7d4d1c25ec4b0844c631b5c5a3b2c4c627b34d27d5e3a3c5"
+    "sha256": "8d26f08eed75c88d6208978fe835fd55fb1236dbfb2f82e91bc240537531aa61"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6f3ec46e4933c639ee719e6f4cf27f8f28217cb6136265f71033a4bbd3cbe14e",
+      "sha256": "ccc5f29cbee1653a71c8bbf91688e99b2414bc1a42e319fa0cc2d87d2acc64a1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 66.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bellona/bellona-shape-surface@2x.webp",
           "polesUrl": "/scenes/bellona/bellona-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "bellona",
-    "materialSha256": "5ee1259640428474ead6dfc0156debfad98d674f4c3abb5fd30fb59528c97be2",
+    "materialSha256": "34c994ccec3be3eb7d0e14c3e92184335f7d7888f6fddd0e9567e8fb81427c45",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bbb8641701e72d43cc3ef7f8b1488aa5157f86bb3d77d6c19f210f52af7b2c24"
+    "sha256": "1315128c2c5847b9d02ac4330fc74a6baebc947d6ac0a41d39af00c42f5bc37b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8511c3747d0e7696cd4ea23a738b656d3e661342b71cae861a4966281bd18b0e",
+      "sha256": "56621554380cbc47d6e910149503b7053e478390945f1df81cf36447900bedd8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.265,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/golevka/golevka-shape-surface@2x.webp",
           "polesUrl": "/scenes/golevka/golevka-shape-surface@2x.webp",
           "radialTerrain": {
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "golevka",
-    "materialSha256": "c1ff1f6b656a36c94bfe7ba0cacbd1d634aae3a30b974dd93c4b882c2a9cadbd",
+    "materialSha256": "077322af14dc6d399513998f67c252f5e7c1e0af2b5445a70d78121fd51d6200",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

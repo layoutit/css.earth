@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 52.0,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/isis/isis-shape-surface@2x.webp",
     "polesUrl": "/scenes/isis/isis-shape-surface@2x.webp",
     "radialTerrain": {

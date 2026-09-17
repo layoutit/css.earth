@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9ccf9301eae0f8c5305347e9aa513be4f60eb2d4f1b4363fb51d3818951fe79e"
+    "sha256": "70d263c9d1349e1fa70c06d8852576faa48f84a78e9ab73a3fbd7b5e162fcf9b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "22c6550fbc70744cd9f4481e4b42f8f3e160fa0b4456b33af943aa5027fbe376",
+      "sha256": "96c40c7ca97223cbd30a5867804affc5228b302f062a6cdd8542572c2a5f1bc2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -197,10 +197,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 11.08,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 45
-          },
           "mapUrl": "/scenes/phobos/phobos-normal-surface@2x.webp",
           "polesUrl": "/scenes/phobos/phobos-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1186,7 +1182,7 @@
   },
   "lastPreparation": {
     "objectId": "phobos",
-    "materialSha256": "2032c06862fc79be773eeafca9d0da727f0b83734b58955a46da806b17dbc2e6",
+    "materialSha256": "67c719904ffe5141df97a5ee8f07d510b1187b835d66c38ea6ac88b4346bdc6e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

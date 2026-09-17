@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0061ba6bb09bea7a04c757ab7c83a3dddeac857bdea2c8d829b026fd3c4e8a9c"
+    "sha256": "8891a4ee554f851b611538a90c01c160d34906fc900c94428fe409bb615c15a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4bde6d8085f7fed8d595e6af3b73a6f2554f89190b547614deebde17248d7c20",
+      "sha256": "7948aef7c0703764ac36d133ab32dc6ad13509e27e8d3a50fbac9b096782a7b8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 81.5,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/nemesis/nemesis-shape-surface@2x.webp",
           "polesUrl": "/scenes/nemesis/nemesis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -552,7 +548,7 @@
   },
   "lastPreparation": {
     "objectId": "nemesis",
-    "materialSha256": "872a97caed4d2f5990f40764741c278370ad1269cbaccb198f35ccdcfa9cac63",
+    "materialSha256": "c312e0f3228b46775460ae47d05eddf1d2d4c0421e2838d5e256651e111fbc3f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

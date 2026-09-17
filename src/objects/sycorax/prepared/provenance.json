@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a82d88a890e79ffe62bdaf9a5e5d8ee3d1f249f3ae4bb308c51d73a06758895b"
+    "sha256": "7ad22a016339d55435b11158c5ada7e326e571e72a2e46a8b007b3b0d7e22e67"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f861633afd8f87e6b892cb74d826539b8cc354c4728379f7262cad0b07a6d00f",
+      "sha256": "a1e1cee63212e178e1ce860f4865a1fc5e0ed8b0f0c3d37cbebdf31c536c9bb5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 78.5,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9289663867799363
           },
           "mapUrl": "/scenes/sycorax/sycorax-model-surface@2x.webp",
@@ -468,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "sycorax",
-    "materialSha256": "67e13c6db9a29f7fd62b3b53af0c25a7971e6535720529520aac639f32467780",
+    "materialSha256": "0e9594d886d1aec6f2e916603df47ab4839a7473e6ba80687005b2b95f77a931",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

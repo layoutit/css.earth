@@ -571,10 +571,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 18,
-    "camera": {
-      "initialScenePitchDegrees": 25.367593169417198,
-      "defaultControlYawDegrees": 23.309717513978427
-    },
     "mapUrl": "/scenes/helene/helene-normal-surface@2x.webp",
     "polesUrl": "/scenes/helene/helene-normal-poles@2x.webp",
     "radialTerrain": {

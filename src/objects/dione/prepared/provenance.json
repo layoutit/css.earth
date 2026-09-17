@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f865aed0a999bd7ab6a08be15b61771c1d7905f8d5dfb8c08fa37f1d113651fc"
+    "sha256": "6dc1d283886c4a62e1bbb0677424dc60283d876ba717f4a00dfb8382691b1c52"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f3b6d3306861f6b2530b65803a47b544012393240148495c5169868c83c7459",
+      "sha256": "8e48728dbbf657a611a5fb65f64fcb70b5afa9c994551ae166ba122443426d92",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -360,10 +360,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 562.5,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/dione/dione-normal-surface@2x.webp",
           "polesUrl": "/scenes/dione/dione-normal-poles@2x.webp",
           "radialTerrain": {
@@ -2155,7 +2151,7 @@
   },
   "lastPreparation": {
     "objectId": "dione",
-    "materialSha256": "bdbc5cae1340c201ad17266395443c6f55a084e99f7d60002a88cd0c45a7a3db",
+    "materialSha256": "b7ff7fd1e705d7bc41f406b6cd93ad81d8fd6012fe4b250c4d88e2a0d40b7078",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

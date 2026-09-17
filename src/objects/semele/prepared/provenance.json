@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bac8847321afae71e6975206ce5fe822af031c2c40f0f1d00f0bd31ad640460b"
+    "sha256": "1bb8b2331999278268739a499ef93185ad9ecf7a09017dcd202387ff80e7ded3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "16d1c8daccd9ed1949aade83dfd6ffa0b515343242c13bb0e37462b76f5bc672",
+      "sha256": "ad4173a7eec8f5d5372f40d681521a08c4b2daa3eb2915cbbf627c96c03f18c6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 58.66,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/semele/semele-shape-surface@2x.webp",
           "polesUrl": "/scenes/semele/semele-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "semele",
-    "materialSha256": "05e5c2740d375b7d8339f37fe5fd2a82d9520048bd01c737693f9bee6c3c7119",
+    "materialSha256": "999892218e5a8224206f99af35ec9bdaacf872d253a539b3e9cea1fc95921cd8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

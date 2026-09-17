@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "296159df5613c7c7163e5b015211fa9be643917a7ea81399c1b49c77fcad6ddf"
+    "sha256": "4e4546b62489540ea54d31fca61be7bd9e2a54495c15c9dd94e6b8482f23f581"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dbd9e1e076ce0ef688a3275b75a52a687a68677e9efffd4bf5116d82b1d82698",
+      "sha256": "ebdf705e3116157bf9dc1192ffe8f9b2ec3742d20bd0f96c4b19aa3473e31074",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,8 +102,6 @@
           "radius": 230,
           "radiusKm": 1.224,
           "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 240,
             "framingScale": 0.8
           },
           "mapUrl": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
@@ -541,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "toutatis",
-    "materialSha256": "41a214de102a741568d109ea254d87f0e5f761ca323c4b22cb2ef0b19b2241a5",
+    "materialSha256": "4f2a4925819cbfdb3151d9be482195bd6747b11b634b3848c1c7f492ea091013",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

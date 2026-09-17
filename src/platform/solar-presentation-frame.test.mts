@@ -22,7 +22,7 @@ const BODIES = [
   "neptune",
 ];
 
-test("the presentation frame is a proper rotation for every body", () => {
+test("the presentation frame maps the body's right-handed axes into left-handed CSS space", () => {
   for (const bodyId of BODIES) {
     const frame = prepareEclipticPresentationFrame(bodyId);
     const [x, y, z] = frame.basis;
@@ -32,12 +32,15 @@ test("the presentation frame is a proper rotation for every body", () => {
     assert.ok(Math.abs(dot(x, y)) < 1e-12, bodyId);
     assert.ok(Math.abs(dot(y, z)) < 1e-12, bodyId);
     assert.ok(Math.abs(dot(z, x)) < 1e-12, bodyId);
-    // Right-handed: x cross y is z, so CSS +z stays toward the viewer.
+    // CSS y runs down, so physical right x physical up (-y) points toward the viewer (+z): a reflection.
     const handed = cross(x, y);
     for (let axis = 0; axis < 3; axis += 1) {
-      assert.ok(Math.abs(handed[axis] - z[axis]) < 1e-12, bodyId);
+      assert.ok(Math.abs(handed[axis] + z[axis]) < 1e-12, bodyId);
     }
-    assert.match(frame.cssTransform, /^matrix3d\((?:[^,]+,){15}1\)$/u);
+    // The node transform for PolyCSS's own placement (world X/Y as CSS Y/X) is a proper rotation.
+    const m = frame.cssTransform.slice(9, -1).split(",").map(Number);
+    const determinant = m[0] * (m[5] * m[10] - m[9] * m[6]) - m[4] * (m[1] * m[10] - m[9] * m[2]) + m[8] * (m[1] * m[6] - m[5] * m[2]);
+    assert.ok(Math.abs(determinant - 1) < 1e-12, bodyId);
   }
 });
 

@@ -419,10 +419,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 58.2,
-    "camera": {
-      "initialScenePitchDegrees": 20.59023923165093,
-      "defaultControlYawDegrees": 9.995959973873523
-    },
     "mapUrl": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
     "polesUrl": "/scenes/epimetheus/epimetheus-normal-poles@2x.webp",
     "radialTerrain": {

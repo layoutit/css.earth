@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "765429bcbd673e2f44fd7a3a512f098c23c4661c1a65b094536e2c8e2cb1f6fb"
+    "sha256": "2219c46f99f9c1e3b57194046ce1922f374529869d2e24d181f2665cfef10fdd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "106792a875d71fe5553bc7101b71cde050f1733d5033b606859d1fdfc6b7d9eb",
+      "sha256": "03d1d7d7c612a08adb795abda403ded22bb8e9e59c8b6e00818f336f8a1d1272",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.165,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/nereus/nereus-shape-surface@2x.webp",
           "polesUrl": "/scenes/nereus/nereus-shape-surface@2x.webp",
           "radialTerrain": {
@@ -573,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "nereus",
-    "materialSha256": "35f9f8bb9ef38c4e9bcc4ba9a09b37f12c71211f7c441ea31f462c7ffe5607b5",
+    "materialSha256": "c95e92d6c7a2f4c581bb966ff6f31764eec2f60e11c94bb32faf3d013b1aec8c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

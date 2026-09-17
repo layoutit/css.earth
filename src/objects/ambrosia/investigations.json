@@ -29,12 +29,10 @@
     },
     {
       "id": "survey-damit-documentation",
-      "subject": "DAMIT documentation",
+      "survey": "survey-damit-documentation",
       "status": "included",
-      "finding": "[DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md",
-        "https://damit.cuni.cz/projects/damit/pages/documentation"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md"
       ],
       "checked": [
         {
@@ -45,12 +43,10 @@
     },
     {
       "id": "survey-hanu-et-al-2013-asteroids-physical-models-from-combined-dense-and",
-      "subject": "Hanuš et al. (2013), Asteroids' physical models from combined dense and sparse photometry and scaling of the YORP effect by the observed obliquity distribution",
+      "survey": "survey-hanu-et-al-2013-asteroids-physical-models-from-combined-dense-and",
       "status": "included",
-      "finding": "[Hanuš et al. (2013), Asteroids' physical models from combined dense and sparse photometry and scaling of the YORP effect by the observed obliquity distribution](https://ui.adsabs.harvard.edu/abs/2013A%26A...551A..67H) — original model publication record.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md",
-        "https://ui.adsabs.harvard.edu/abs/2013A%26A...551A..67H"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md"
       ],
       "checked": [
         {
@@ -84,12 +80,10 @@
     },
     {
       "id": "survey-hanu-et-al-2013-a-a-551-a67",
-      "subject": "Hanuš et al. (2013), A&A 551, A67",
+      "survey": "survey-hanu-et-al-2013-a-a-551-a67",
       "status": "included",
-      "finding": "[Hanuš et al. (2013), A&A 551, A67](https://arxiv.org/pdf/1301.6943) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md",
-        "https://arxiv.org/pdf/1301.6943"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md"
       ],
       "checked": [
         {
@@ -100,12 +94,10 @@
     },
     {
       "id": "survey-usui-et-al-2011-pasj-63-1117-1138",
-      "subject": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "survey": "survey-usui-et-al-2011-pasj-63-1117-1138",
       "status": "included",
-      "finding": "[Usui et al. (2011), PASJ 63, 1117–1138](https://arxiv.org/pdf/1106.1948) — retained primary publication; see the body-specific selection and calibration above.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md",
-        "https://arxiv.org/pdf/1106.1948"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md"
       ],
       "checked": [
         {
@@ -116,10 +108,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery",
       "status": "unresolved",
-      "finding": "The release supplies no registered surface imagery; the grid marks that gap.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/549"
@@ -156,10 +146,8 @@
     },
     {
       "id": "versioned-view-evidence",
-      "subject": "Versioned browser evidence",
+      "survey": "versioned-view-evidence",
       "status": "unresolved",
-      "finding": "The README records two browser cases before final integration, with an asset comparison to the integrated files, but no tested code revision for those cases. This is an evidence limitation, not proof of a current rendering defect.",
-      "revisitWhen": "A focused browser check identifies the tested revision, relevant served asset pins and capture settings, or the original report can be reliably bound to that revision and its dependencies.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ambrosia/README.md#evidence"
       ],

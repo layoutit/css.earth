@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc29eab15fc86bcb12d6d807d12545aa95ef8bb54ffa714f24f460b439bb2c28"
+    "sha256": "4ffe1fd347214416ad8a1a86f8c17bb3ca04bce2e1c486c71b60fccfb9e237d5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cdc03e7e821f27d228c3074bfdef51ff0d6d222ff7f62ce7b18ccec7229b5177",
+      "sha256": "f3fc50f78b60a4b55e6eed303879e98677462ced0c29715256a0e7a51945a72e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 18.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/oenone/oenone-shape-surface@2x.webp",
           "polesUrl": "/scenes/oenone/oenone-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "oenone",
-    "materialSha256": "97504b597331ccbda800682e19c401f81676d1d5f38aff4f2a5a6fce6e564f25",
+    "materialSha256": "e37430f05ba2dc5d7e8acb8af3c29254d1236a899324598d68773e41429156f7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

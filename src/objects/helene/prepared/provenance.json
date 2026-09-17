@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b31090e64d1199472da352ff7ad7bfe233a6ab74475c13a06eb89e080176acc8"
+    "sha256": "c02fbf11064d0349b2a2ba60179aeae207d30ad842a775cd98d7da12a0627343"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "836f3ac59b3c7d69be91da9ed14e2c0402023522e1800a3248a7de22d739bd05",
+      "sha256": "ac72797e04549cecbf017ec13e7572c2647568b62d5870580289614751d920e0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -589,10 +589,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 18,
-          "camera": {
-            "initialScenePitchDegrees": 25.367593169417198,
-            "defaultControlYawDegrees": 23.309717513978427
-          },
           "mapUrl": "/scenes/helene/helene-normal-surface@2x.webp",
           "polesUrl": "/scenes/helene/helene-normal-poles@2x.webp",
           "radialTerrain": {
@@ -3310,7 +3306,7 @@
   },
   "lastPreparation": {
     "objectId": "helene",
-    "materialSha256": "425e6e94a79ec2562e7a7f9d1f219a7321fe306e5332c7a9a4d949a991fd7f31",
+    "materialSha256": "5a015e8e3eaf14700fddb7b1bb19bcb92525f550ac02600ae63331fdc9f25b60",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

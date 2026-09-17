@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8c0e3344ab67a57b66f6f6071b134599c6debaa9d4fd53fb6ccf4c92567e60d7"
+    "sha256": "8051073a926fa47bc7795a494eb5b0be715fa3c4aaee19c3a2c7ba1dab0cd854"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d95057561603fdcdf112b5ab863e011215e75b28bc7086a0e6af1ab0ae92ac80",
+      "sha256": "98bc9060dc52cece056986c00bdb0aa6e02a28d1e6b4354a7b8843b55c7a81b5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 88,
-          "camera": {
-            "initialScenePitchDegrees": 8.513619952467314,
-            "defaultControlYawDegrees": -134.03387974954427
-          },
           "mapUrl": "/scenes/galatea/galatea-model-surface@2x.webp",
           "polesUrl": "/scenes/galatea/galatea-model-poles@2x.webp",
           "radialTerrain": {
@@ -445,7 +441,7 @@
   },
   "lastPreparation": {
     "objectId": "galatea",
-    "materialSha256": "9f8fe34ebd4ef547c518e20c4e40d2744c314581569d0517d8e264d0b72361aa",
+    "materialSha256": "ed67aada9385d068e4607919fc736c3ac3423c81a7437259d9038694b2fb5c19",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

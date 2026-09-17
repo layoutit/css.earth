@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 52.12,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/ianthe/ianthe-shape-surface@2x.webp",
     "polesUrl": "/scenes/ianthe/ianthe-shape-surface@2x.webp",
     "radialTerrain": {

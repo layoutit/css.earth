@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dc3ee0f4c0ea7ddc3b245ae3b3d6deb9a0b3443bf3cd94f95937c8459ed118f5"
+    "sha256": "de4737151aa270e5d21436bcc8dbff15d6bb095b405f367cce4c16033a956f2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4ff14cb7d1637e389b1b379a94a0f02a362942a7944ce6870c665e262c4c2471",
+      "sha256": "5a2a9c8a62a2a80e062e0b9076744df29b9198ac42fe0bc6777add97987c846f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 97.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/hebe/hebe-shape-surface@2x.webp",
           "polesUrl": "/scenes/hebe/hebe-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "hebe",
-    "materialSha256": "b59afffae759a98ecb83e830ca93cad77bec0fb4418b60595380c6bc9cdf2efc",
+    "materialSha256": "08b5cd43ab4dd06220155cc0fd3197dcf574f7cf1fa1325c17bae5957437eb1a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

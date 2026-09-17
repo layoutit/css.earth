@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 39.31,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/erato/erato-shape-surface@2x.webp",
     "polesUrl": "/scenes/erato/erato-shape-surface@2x.webp",
     "radialTerrain": {

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "484cf497aaa611043c21807bc3d394c92d66ff2f0076267f9b74abe71091eed0"
+    "sha256": "560e73d33bacf4b5c51d8d687f11f5ef781004a320218f067803aff5cf4b1cd7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "caeefa61553f8573d8afcfec49334f750e507c8e1603055f5073135080dc16e6",
+      "sha256": "6bf9c568d8df5a5ac720e475bb42213316de878225e9c6036c2c3c63347a36a5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 127,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/juno/juno-shape-surface@2x.webp",
           "polesUrl": "/scenes/juno/juno-shape-surface@2x.webp",
           "radialTerrain": {
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "juno",
-    "materialSha256": "7abcffbee4af477a6ed1d83fb9bbb86e8894955ac4fc3d11241e4b885ccbdba6",
+    "materialSha256": "6b51720834c91549cdd9e2f13817a4974aada5a4f7313396b46437656fccf878",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

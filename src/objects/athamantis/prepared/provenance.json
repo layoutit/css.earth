@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4675f2914a8ff0a7eb116f293b7353471a3ffe0709b2d48a70ffe11bb8f2debe"
+    "sha256": "6218b4ca07cc0ab94db409520f6810a6d3b1dbb0d55b4fbbda759305c4df6b7d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2f22785e38d441e9fca403e27fc27775838a273b430fafc5e14da163f497b403",
+      "sha256": "4ea7df351a00e46b8397873ceee2e314a6b9f82e81bc2f24e44b27c8b296d5ec",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 57.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/athamantis/athamantis-shape-surface@2x.webp",
           "polesUrl": "/scenes/athamantis/athamantis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "athamantis",
-    "materialSha256": "f63930a51158d6077b41bea22efe793f56cfa651885a41c0ee6c26cb11a5bbfd",
+    "materialSha256": "2c76b491e556583059b0df5ae7109749f6b33320b5a7179170d3dfec2134278c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

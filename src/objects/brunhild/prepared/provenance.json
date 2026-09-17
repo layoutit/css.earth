@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10ec5e0ce604ee75991cdb594f4c3bdf70d6d87178c9f7581db1016c85f5b439"
+    "sha256": "073aee0de8dcbac5daccf874b47dbc0b9cb7eecbd5710168c5a607b86946adb6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "387299fe36ed7ea943119f2bb7849ae86c42d3d832e8743a2db435f882c13905",
+      "sha256": "f6f03ecbee5cacde5bb8e4beae928b9ef965f24f2a063d069a5b34afdf02a784",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 24.11,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/brunhild/brunhild-shape-surface@2x.webp",
           "polesUrl": "/scenes/brunhild/brunhild-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "brunhild",
-    "materialSha256": "15bb4bad0972a102249bcb6443fceda8a913bd6dbed810237e8e74b9058a6466",
+    "materialSha256": "9a1bc20262821af74e4af2e942db8a1211cc36b632d2b40582dc513f10d232ce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

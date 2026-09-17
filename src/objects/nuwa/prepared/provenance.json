@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0ce78e65b033b64df9fbae1cee723f1df27116acd4d1b2b04d3510dedf3f9adb"
+    "sha256": "ff07f4b7aa188807fb12608ad14cc07c2d15888b54d06fcae7bff7a65ab8f2ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "edf51f9e25f37640d7242c6422788f533bc39130d89a1ae18b025e1553729566",
+      "sha256": "ac16fc411d32001a7bb05d2705de8a0f4c02761780ba34ffe3f3044ed940fb61",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 69.825,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/nuwa/nuwa-shape-surface@2x.webp",
           "polesUrl": "/scenes/nuwa/nuwa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "nuwa",
-    "materialSha256": "2ae0a0a4f0a6b277e6fd006daa9819d529ae4e946f13449dc0b87aa1fed1d13e",
+    "materialSha256": "12e58e77fcd5deab1989ed0e634dab1ad6c170f50f565ba3547f856a9ca013c5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

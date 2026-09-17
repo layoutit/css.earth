@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1205f420fe54701aa7dc488bae5f858efe6a5de91848c7d0b64c11d3ceb547f5"
+    "sha256": "e1f008935a6db3a3da60f072eedad500e1c59e56b6d33ea8bdb3e91089b3270d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "359698ae2bf3a2363cba2021cd2f0b82cf0f0c7b42154dc9689c89ddf76e4173",
+      "sha256": "974ff7079931685c44eb4f5e396801aff6e04f7fc4cd06bdedb8ec0771c1e449",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 40.035,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/vindobona/vindobona-shape-surface@2x.webp",
           "polesUrl": "/scenes/vindobona/vindobona-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "vindobona",
-    "materialSha256": "6144bada5f541414bebecdad2f0c518d68ce4dc331aea783849982eeba00c215",
+    "materialSha256": "c4fe0c6244e224a3f9f600c2977b4822ea306f27917f9f7f3681d1030de16225",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

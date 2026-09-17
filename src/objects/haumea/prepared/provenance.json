@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "51feb2a68e7cbb6f7f4bd2cbce8d4aac8d3a8d2b2de1e227978ca640fd413596"
+    "sha256": "cd36c5a75b07530073b98379c673efffe5ffbb52b1f98d0b270aa5b138a65833"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "shape-model",
       "path": "source/preparation/shape-model.json",
-      "sha256": "7d9213689053c50c553bf8bf65e8a231b5dd89185d086ff746f32318a8173cfd",
+      "sha256": "bd4d886e4c01566739caafa6a48023aac64f735abb223f104200a0dcb80981ee",
       "parameters": {
         "schema": "cssearth-shape-model@1",
         "displayName": "Haumea",
@@ -47,8 +47,6 @@
           }
         },
         "camera": {
-          "initialScenePitchDegrees": 40,
-          "defaultControlYawDegrees": -50,
           "maximumHeightShare": 0.4
         }
       }
@@ -452,7 +450,7 @@
   },
   "lastPreparation": {
     "objectId": "haumea",
-    "materialSha256": "13b1bb03a6a11d79c35974584ced23680d8c46735f8ab138c92d3602e9e39c6f",
+    "materialSha256": "d19d4ddf3c9e6ee00b8932bddc91d7ae581a39f6cd35d81705979ffbe9e2bc9d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

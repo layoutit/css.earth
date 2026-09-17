@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "442c536093911fc4c8bad272aeee03c0f57c5bc8f58c7a0e5afd46a5710e6732"
+    "sha256": "d33dc439c45d58d2adc699779e7d845acc2ac1c173afb4b9fba127c9b1d5bab9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "edbfc6a05e0a6c7a805ac63df76583f076b7ea790593d7f55e2a062f8e810054",
+      "sha256": "050a50d7e4e5f29f6d50f52d307801c235ad0f2db9ec14063e126791f84cf1eb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
           "radialTerrain": {
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1992-sk",
-    "materialSha256": "0eaee1ce529c1ea2e7bf541ca99f9293414bbc40348f7e8c0c8ff11f6bf80ff1",
+    "materialSha256": "2fcc7b8a0bc02f5a19ccd09df66cb17cf2c273cb679f4dab5cc149413e133b39",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

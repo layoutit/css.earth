@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7078a745923cd5c30b41d730bbf966f26d1e9c58b9d2adef42914c55b35a3b4e"
+    "sha256": "b189604037799308b51fd5386a067baafeb9e2b16fbbb644cef6faeb2b9c3a2e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f73c57ad03f8e570ec3450e89184c65c7ceb3bcee9affc2b2accabe89133af3e",
+      "sha256": "fab558179b884c3a0746ec41e5521008a7b940b39c5c9004f61ba4dbf9412b07",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -84,10 +84,6 @@
               "method": "source-meshoptimizer"
             },
             "primitive": "u"
-          },
-          "camera": {
-            "initialScenePitchDegrees": -3.8906101477333435,
-            "defaultControlYawDegrees": 175.67927445318497
           }
         },
         "celestial": {
@@ -438,7 +434,7 @@
   },
   "lastPreparation": {
     "objectId": "juliet",
-    "materialSha256": "c699e95dd4d7feca2774e8de2cd4cfdb21567bdbe9039ca0297cf79d32dc553b",
+    "materialSha256": "e3bc9afabd29167f9b55fd5b5cf1f570bc1992da5d1a32b38ef08793ad274bf7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

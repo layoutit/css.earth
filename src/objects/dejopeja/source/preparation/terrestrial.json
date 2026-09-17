@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 46.5,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/dejopeja/dejopeja-shape-surface@2x.webp",
     "polesUrl": "/scenes/dejopeja/dejopeja-shape-surface@2x.webp",
     "radialTerrain": {

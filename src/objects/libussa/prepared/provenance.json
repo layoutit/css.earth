@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43386d8bcb2f94d77ce1d7c724291492210dc9b60db05554d88999a731572f37"
+    "sha256": "387dea3086946690c6f26ab38e82d7dbe6a6f52597225e96d72a8bd24f94c5a3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "252053ae4141aa307546ab8d384c3784b6e2af46fd1009f55d64330217a39668",
+      "sha256": "9ebf1d8f877904190747a403bbc7d3a11a7657c2bf35a40642a7f29c2f2e3c95",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 28.785,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/libussa/libussa-shape-surface@2x.webp",
           "polesUrl": "/scenes/libussa/libussa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "libussa",
-    "materialSha256": "e35fb17ccb373572190c359421e3c29325c5a5aca0bab7cf399d03c3493e3401",
+    "materialSha256": "557d9fa0f6fba999bb4e81a725fb780ed7779cf7f9394859a6432033331bfb80",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

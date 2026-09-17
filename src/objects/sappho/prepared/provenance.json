@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e2e6d257288477038f91f9373d6473448c32fb4e26003b55c5995afe155eef2f"
+    "sha256": "0c42e603b75e3fd1241686c3291e06b00036cbb67573d43c79d32ca761460302"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2c3bd3fcddefebbda44c09b66c6fabd467ec8c6deae0f26c4369743a58a7857a",
+      "sha256": "3812d24f25e5fc1808893431a7ffefbfbbb09dbc2bef5988e9a3e573febd1c96",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 30.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/sappho/sappho-shape-surface@2x.webp",
           "polesUrl": "/scenes/sappho/sappho-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "sappho",
-    "materialSha256": "b66054dd4387e63347fdf02ad7c11cd6e49ae9709a6c293ddef4929f1cd8f527",
+    "materialSha256": "76044d0930430e661858b6baf196844824c32d629e2ece3a67aa6955e70653e7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

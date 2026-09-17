@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "327cdecdf71f8cb46778e9db3e9b720588f3fd93def8b69549672be68a6a0672"
+    "sha256": "e06b9ea4bc02ddb687db0a57ca948c62ebb4877d3e59ea2785dd79e2d1abd037"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0b123f61df6576767e7efa6949bd32948f46cc4da7d40a09a7bdc39eedb4382b",
+      "sha256": "0fc67f68c9bf9d182ce5bf5b626ba8fd3191e1046e4e7559dd1ddafa1452595b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 55,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bettina/bettina-shape-surface@2x.webp",
           "polesUrl": "/scenes/bettina/bettina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "bettina",
-    "materialSha256": "6d1522ecfcf8a8ec7e6994ac1554d7b96da64027515c98d922290dc9b352c27b",
+    "materialSha256": "97fabac0344acbd7678d70c981c92903aa8f16294d6e871be814ba245c5da4ae",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

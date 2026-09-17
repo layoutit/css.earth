@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "64995f194e581a3598b659ca6772bbe5db88d8574f7e21bd663f450c3fb88517"
+    "sha256": "679a2930ecd447e1ddae499b9a5b197d027b202d33b773d5d5698a52fc7d87ac"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6d6c0967b5ec748480351a2dbfac6e8e439cf6d1f815e569ab4b96e33dd6e5d8",
+      "sha256": "98e39c63fe5ab88ea42a87b247c4cb87503f2bb343763c4de9ff9317fc49e71a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 43.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hekate/hekate-shape-surface@2x.webp",
           "polesUrl": "/scenes/hekate/hekate-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "hekate",
-    "materialSha256": "4ea64be75d20c32ad76ffe7c07804d47ca8ee81f63658817f3b22fedd6d2a14f",
+    "materialSha256": "e4e3c3a19165938e54b1b58e06a9b980179f98a2f8d62b2a741585bf0764b455",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -342,10 +342,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 562.5,
-    "camera": {
-      "initialScenePitchDegrees": 40,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/dione/dione-normal-surface@2x.webp",
     "polesUrl": "/scenes/dione/dione-normal-poles@2x.webp",
     "radialTerrain": {

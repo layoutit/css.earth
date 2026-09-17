@@ -1,3 +1,4 @@
+import { preparedControlPitch } from "@cssearth/engine";
 import { polarGeographicUv } from "./wmts-polar-geometry.mts";
 import { prepareCityPageGeometry,cityGeographicFrame } from "./page-geometry.mts";
 
@@ -65,17 +66,8 @@ export function prepareLocationPoint(scene: GeographicScene, longitude: number, 
 }
 
 export function prepareLocationCamera(scene: GeographicScene, point: readonly number[], zoom: number, { body, camera, northUp = false }: { body: BodyAttitude; camera: CameraPolicy; northUp?: boolean }) {
-  const rotateZ = (p: readonly number[], angle: number) => {
-    const c = Math.cos(radians(angle)), s = Math.sin(radians(angle));
-    return [c * p[0] - s * p[1], s * p[0] + c * p[1], p[2]];
-  };
-  const toScene = (point: readonly number[]) => {
-    let [x, y, z] = rotateZ(point, -body.meshRotationDegrees);
-    const tilt = radians(-body.obliquityDegrees);
-    [x, z] = [Math.cos(tilt) * x + Math.sin(tilt) * z, -Math.sin(tilt) * x + Math.cos(tilt) * z];
-    [x, y, z] = rotateZ([x, y, z], -body.presentationNodeDegrees);
-    return [x, y, z];
-  };
+  const m = body.bodyMatrix;
+  const toScene = (point: readonly number[]) => [0, 1, 2].map(row => m[3 * row]! * point[0]! + m[3 * row + 1]! * point[1]! + m[3 * row + 2]! * point[2]!);
   const [x, y, z] = toScene(point);
   const pitch = degrees(Math.atan2(y, Math.hypot(x, z)));
   const yaw = degrees(Math.atan2(-x, z));
@@ -92,9 +84,9 @@ export function prepareLocationCamera(scene: GeographicScene, point: readonly nu
     roll = degrees(Math.atan2(-northX, -northY));
   }
   return {
-    controlPitch: camera.defaultControlPitchDegrees +
-      (1 - pitch / camera.initialScenePitchDegrees) *
-      (camera.maximumControlPitchDegrees - camera.defaultControlPitchDegrees),
+    // The recipe states the default pose on the control-to-scene scale; its steepest scene pitch follows from it.
+    controlPitch: preparedControlPitch(pitch, { maximumControlPitchDegrees: camera.maximumControlPitchDegrees,
+      maximumScenePitchDegrees: camera.initialScenePitchDegrees * camera.maximumControlPitchDegrees / (camera.maximumControlPitchDegrees - camera.defaultControlPitchDegrees) }),
     controlYaw: yaw, zoom,
     ...(northUp ? { controlRoll: roll } : {}),
   };

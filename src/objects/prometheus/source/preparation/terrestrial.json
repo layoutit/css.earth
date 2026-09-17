@@ -411,10 +411,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 43.1,
-    "camera": {
-      "initialScenePitchDegrees": -1.1307603412295912,
-      "defaultControlYawDegrees": 38.77647803521582
-    },
     "mapUrl": "/scenes/prometheus/prometheus-normal-surface@2x.webp",
     "polesUrl": "/scenes/prometheus/prometheus-normal-poles@2x.webp",
     "radialTerrain": {

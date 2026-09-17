@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0cdb2a1d288ce9d330e01f285406483e6bb6d6b8e5492404e5eb62cf7a094d8"
+    "sha256": "2d2f2c905f32734fcd01edaf6a942a8bb801e16936ae2acfcaadc0b048cabd21"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e24a3dccbcf63f05f0ee9042269577c07847bae55c747b413de5e9a5e78af6bb",
+      "sha256": "807210388be3cf021343372306b8e4eed55d513b95f158628d3b4a0a1f51c9dc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 77,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lucina/lucina-shape-surface@2x.webp",
           "polesUrl": "/scenes/lucina/lucina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lucina",
-    "materialSha256": "4e947e23f673f6b4334457a0bc98dcf8be472f205bf01525c6af9079fe073908",
+    "materialSha256": "121c6068a8b150b1a03c11de56a99007842b1a5f8487750131740fcb945fc977",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

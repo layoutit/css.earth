@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "39580d2595fd23187fdc1922314d4893190efea088fd660563e45d7c70c3f5f1"
+    "sha256": "1ecc28ef43e2a0754d52088c8f64bb77a79892accf51cd6af50c09b610480528"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "32f9703c468a660d14dcbda5a1602b4fa79b032896d1fe051a98622c06e344f0",
+      "sha256": "c97859acac3a5f216135e9c9c89e82c3b020dbbb5afe80aa54cff1aca1e6b717",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 43.725,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/proserpina/proserpina-shape-surface@2x.webp",
           "polesUrl": "/scenes/proserpina/proserpina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "proserpina",
-    "materialSha256": "6d43ff8c3ce2e8ad2c7738f4966a638f4b814401663c7cf9dca381f170d89151",
+    "materialSha256": "ab1dbc350ab43a71f38b4f36fe5f4914e7cc8f796a5dfba27705f503865c4ce8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

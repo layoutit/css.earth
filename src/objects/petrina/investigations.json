@@ -44,12 +44,10 @@
     },
     {
       "id": "survey-damit-documentation",
-      "subject": "DAMIT documentation",
+      "survey": "survey-damit-documentation-3",
       "status": "included",
-      "finding": "[DAMIT documentation](https://damit.cuni.cz/pages/documentation) — units, frame, spin definitions and archive license.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md",
-        "https://damit.cuni.cz/pages/documentation"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md"
       ],
       "checked": [
         {
@@ -60,13 +58,10 @@
     },
     {
       "id": "survey-acua-primary-catalog",
-      "subject": "AcuA primary catalog",
+      "survey": "survey-acua-primary-catalog",
       "status": "included",
-      "finding": "[AcuA primary catalog](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) and [Usui et al. (2011)](https://arxiv.org/abs/1106.1948) — thermal diameter, field meanings and limitations.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md",
-        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
-        "https://arxiv.org/abs/1106.1948"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md"
       ],
       "checked": [
         {
@@ -77,12 +72,10 @@
     },
     {
       "id": "survey-hanu-et-al-2018",
-      "subject": "Hanuš et al. (2018)",
+      "survey": "survey-hanu-et-al-2018-2",
       "status": "included",
-      "finding": "[Hanuš et al. (2018)](https://arxiv.org/abs/1803.06116) — survey of accepted shape-aware size fits; included for Dike, Ducrosa and Petrina.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md",
-        "https://arxiv.org/abs/1803.06116"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md"
       ],
       "checked": [
         {
@@ -93,12 +86,10 @@
     },
     {
       "id": "survey-hanu-et-al-2016-new-and-updated-convex-shape-models-of-asteroids-",
-      "subject": "Hanuš et al. (2016), New and updated convex shape models of asteroids based on optical data from a large collaboration network",
+      "survey": "survey-hanu-et-al-2016-new-and-updated-convex-shape-models-of-asteroids--2",
       "status": "included",
-      "finding": "[Hanuš et al. (2016), New and updated convex shape models of asteroids based on optical data from a large collaboration network](https://ui.adsabs.harvard.edu/abs/2016A%26A...586A.108H)",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md",
-        "https://ui.adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md"
       ],
       "checked": [
         {
@@ -109,10 +100,8 @@
     },
     {
       "id": "surface-imagery",
-      "subject": "Registered surface imagery",
+      "survey": "surface-imagery-6",
       "status": "unresolved",
-      "finding": "The selected release supplies a shape model and spin metadata, not a registered optical reflectance texture. Thermal diameters are disk-integrated quantities and cannot supply a thermal or regolith map.",
-      "revisitWhen": "A released, reusable surface observation or mapped product with registration to this body’s selected source model; the existing grid alone does not imply that every archive was searched.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/petrina/README.md"
       ],

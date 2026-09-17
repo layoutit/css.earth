@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0273b997fb4eb132e27b7b7aff85c764223653d946dc403af6a27846206f41df"
+    "sha256": "d7233f9bbf5c02911badf66136b56d4871a9b3af8d66b27cb0138fcc0c3416de"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "49d7b7f4e54994dcfa8c7b5a0f7a122f0b60af83351bc29c59613b63d7d7b3df",
+      "sha256": "f64ae6dd827f78b1c0c2b19d5d38e1fb720cb5c127ea87442a2b934efc9089d3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 51.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/sapientia/sapientia-shape-surface@2x.webp",
           "polesUrl": "/scenes/sapientia/sapientia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "sapientia",
-    "materialSha256": "e86ba00f9e54596370565047c4dbf38f1a799bc2f1a82f2f71ec1819e5a3d6a2",
+    "materialSha256": "338aeef24da9591c329b7007d8722cd08b7b30794359779540db0b1cfc4556fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

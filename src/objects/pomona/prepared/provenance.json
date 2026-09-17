@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "395a9f199ac5b3ab90a2178803ea8f2c7fe06c47a425a2d2bac539e0f20c3c90"
+    "sha256": "8b1d50de3fa1d1d94f681d182fff99ddc2321b0acf20a7ad612fc747d93299b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "806a4552422c9876d1f01fcf3991ebf6fa6df1c8a96f52413b5eb83e16f78c3d",
+      "sha256": "017dd6ac3ea7cbedc99b60dbae48a5dd9c83f5368dc27628dc0cbf866e0bc7e3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 44.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/pomona/pomona-shape-surface@2x.webp",
           "polesUrl": "/scenes/pomona/pomona-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "pomona",
-    "materialSha256": "db7761a2f1f701d0c1bb371dc4bfc0f8de8f6573a092c99c054939d2756a6541",
+    "materialSha256": "9701cc170267c2e320bca6f6272a80b04205dc7301a64e6d1d85242f70b1d556",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

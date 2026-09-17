@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 16.13,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/weringia/weringia-shape-surface@2x.webp",
     "polesUrl": "/scenes/weringia/weringia-shape-surface@2x.webp",
     "radialTerrain": {

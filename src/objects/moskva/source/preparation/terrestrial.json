@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 15.981,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/moskva/moskva-shape-surface@2x.webp",
     "polesUrl": "/scenes/moskva/moskva-shape-surface@2x.webp",
     "radialTerrain": {

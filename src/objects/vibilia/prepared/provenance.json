@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e5fcb24007653d6571ba6376ef26062bf47c74bc485abc7915656e5af9ba14ed"
+    "sha256": "2f800a802697d62ea6685e1440aeb38685257b3a15d36fe6f7529cae1f707c75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7d38cbb5536a8e1614393794346e9dcc54933eb94178cc3e2a4f46318ca1f551",
+      "sha256": "76dcec65f80823346d6a44b948c24205cad490e4c1c8a5309b47c6dbe603068e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 71.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/vibilia/vibilia-shape-surface@2x.webp",
           "polesUrl": "/scenes/vibilia/vibilia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "vibilia",
-    "materialSha256": "b3f8b2f2208c1c9d48f494f89f72303fea002b9965e294e46e783c545080779c",
+    "materialSha256": "1a00865e2c74dc2599ce2866fbd07762ee3aaf833896ef788752a69c5817c99b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

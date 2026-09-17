@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5229ac710b3fc777515c7aec7913e5ddb2eb852f6620d402a05f260749a26408"
+    "sha256": "a546444a791f0736f9932f18cec5f9ed3d0f5b96d94b54a464b7cbdfa5aaf225"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "74a3bbfa08a4a66a1e660f7215433e60d3b0f6d07d8c41590b9cd1f9050e5313",
+      "sha256": "c2dfa549e10e8bc20e0b61a94a501346f9ce01cacd5da6f88db1a825d8a1575d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 66.715,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/dido/dido-shape-surface@2x.webp",
           "polesUrl": "/scenes/dido/dido-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dido",
-    "materialSha256": "49a8b03795a68dd735201b8aeac6285f77da2496fac73606b8df457dc5aab507",
+    "materialSha256": "0ef14d214c5dc66cea975e12687dc2ef92329be934231588ff20e5967988d148",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

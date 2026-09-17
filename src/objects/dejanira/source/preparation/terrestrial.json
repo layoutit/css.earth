@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 11.235,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/dejanira/dejanira-shape-surface@2x.webp",
     "polesUrl": "/scenes/dejanira/dejanira-shape-surface@2x.webp",
     "radialTerrain": {

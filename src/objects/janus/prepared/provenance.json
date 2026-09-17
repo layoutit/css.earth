@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1ae473be3c9ad307928424298b311fe65e6c994476731fc6729c8bda0e865343"
+    "sha256": "6f1935c507f60bd2a6637670f53afd40a5f20eb6d870a07cb51a3c7f977c4ee2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dbd6fc3123de1fcf6bf0cde03a9284a2267e81acffd6ccace79932e5702929e3",
+      "sha256": "0b7a9111c03cd968112181a7f774de979cdc6b331a6e109949c3e1294888b47d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -359,10 +359,7 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 89.2,
-          "camera": {
-            "initialScenePitchDegrees": -4.101307568565351,
-            "defaultControlYawDegrees": 77.38429330056044
-          },
+          "camera": {},
           "mapUrl": "/scenes/janus/janus-normal-surface@2x.webp",
           "polesUrl": "/scenes/janus/janus-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1835,7 +1832,7 @@
   },
   "lastPreparation": {
     "objectId": "janus",
-    "materialSha256": "7f652accfbf84c15213209972abd4b5b7bea3b0dd4789a63be1aa84be2e3ca53",
+    "materialSha256": "8c1957ade4e8b708ad94e9b832f83cb1f1aae9d78628bc9d3cba68737b9b814f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
