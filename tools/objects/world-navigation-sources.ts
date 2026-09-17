@@ -1,5 +1,5 @@
 import { buildPolyMeshTransform } from '@layoutit/polycss';
-import { multiply, reflection, rotation, type Matrix3 } from './world-navigation.js';
+import { multiply, reflection, rotation, type Matrix3 } from './world-navigation.ts';
 
 type Input = Record<string, any>;
 const IDENTITY: Matrix3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
@@ -32,19 +32,19 @@ export function authoredPresentationBasis(sources: ReadonlyMap<string, Input>, s
   }
   if (paged?.schema === 'cssearth-paged-ellipsoid@1') {
     const p = paged.geometry;
-    return checked(chain(mesh([0, 0, p.PRESENTATION_NODE_DEGREES]), mesh([p.OBLIQUITY_DEGREES, 0, 0]), mesh([0, 0, p.MESH_ROTATION_Z])), p.EQUATORIAL_RADIUS, p.TILE_SIZE);
+    return checked(multiply(systemMatrix, chain(mesh([0, 0, p.MESH_ROTATION_Z]))), p.EQUATORIAL_RADIUS, p.TILE_SIZE);
   }
   throw new TypeError('Authored capability has no physical presentation basis. Supply numerical frame preparation for this capability.');
 }
 
-function mesh(rotation: readonly number[]): string {
-  if (!Array.isArray(rotation) || rotation.length !== 3 || rotation.some(value => !Number.isFinite(value))) throw new TypeError('Authored mesh rotation must be finite.');
-  return buildPolyMeshTransform({ rotation: [...rotation] as [number, number, number] }) ?? '';
-}
 function authoredTransform(value: Input): string {
   if (value?.kind === 'literal' && typeof value.value === 'string') return value.value;
   if (value?.kind === 'mesh-sequence' && Array.isArray(value.rotations)) return value.rotations.map(mesh).join(' ');
   throw new TypeError('Unsupported authored presentation transform.');
+}
+function mesh(rotation: readonly number[]): string {
+  if (!Array.isArray(rotation) || rotation.length !== 3 || rotation.some(value => !Number.isFinite(value))) throw new TypeError('Authored mesh rotation must be finite.');
+  return buildPolyMeshTransform({ rotation: [...rotation] as [number, number, number] }) ?? '';
 }
 function checked(bodyToPresentation: Matrix3, sourceRadiusUnits: number, tilePixels: number): AuthoredPresentationBasis {
   rotation(bodyToPresentation);
@@ -105,6 +105,23 @@ function surfacePlacementMatrix(id: string, placement: SurfaceMapPlacement): Mat
   return [x[0]!, y[0]!, north[0]!, x[1]!, y[1]!, north[1]!, x[2]!, y[2]!, north[2]!];
 }
 
+/** The system node rotation (row-major, CSS coordinates) that draws a body in `intended` when the chain below that node is
+ * `innerTransforms` (outermost first, spins at their first keyframe) over the surface map's placement. A lane that bakes
+ * images through its node angles calls this before it builds its tree; the world-navigation stage re-solves the drawn tree
+ * and refuses any difference. */
+export function solveSystemMatrix(id: string, intended: Matrix3, innerTransforms: readonly string[], placement: SurfaceMapPlacement): Matrix3 {
+  reflection(intended);
+  const matrix = multiply(intended, transposeMatrix(multiply(chain(...innerTransforms), surfacePlacementMatrix(id, placement))));
+  rotation(matrix);
+  return matrix;
+}
+
+/** A row-major rotation as the CSS `matrix3d` a node carries. */
+export function matrix3dText(matrix: Matrix3): string {
+  const text = (value: number) => Math.abs(value) < 1e-15 ? '0' : String(value);
+  return `matrix3d(${[matrix[0], matrix[3], matrix[6], 0, matrix[1], matrix[4], matrix[7], 0, matrix[2], matrix[5], matrix[8], 0, 0, 0, 0, 1].map(text).join(',')})`;
+}
+
 export interface SolvedSystemTransform { readonly from: string; readonly to: string; readonly matrix: Matrix3 }
 /** The transform of the body's outermost mesh node (the scene's child on the drawn chain) that draws the body in `intended`, a
  * body-fixed to presentation reflection. Everything below that node (spin phase, polar carriers, the surface map's placement and
@@ -115,11 +132,7 @@ export function solveSystemTransform(definition: Input, id: string, placement: S
   const from = transforms[0];
   if (!from || transforms.length < 2) throw new TypeError(`${id}: the drawn chain has no system node above its surface.`);
   const system = chain(from);
-  const inner = multiply(chain(...transforms.slice(1)), surfacePlacementMatrix(id, placement));
-  const matrix = multiply(intended, transposeMatrix(inner));
-  rotation(matrix);
-  const text = (value: number) => Math.abs(value) < 1e-15 ? '0' : String(value);
-  const to = `matrix3d(${[matrix[0], matrix[3], matrix[6], 0, matrix[1], matrix[4], matrix[7], 0, matrix[2], matrix[5], matrix[8], 0, 0, 0, 0, 1].map(text).join(',')})`;
+  const matrix = solveSystemMatrix(id, intended, transforms.slice(1), placement), to = matrix3dText(matrix);
   // An unchanged node keeps its exact prepared text, so a body already drawn in its frame republishes byte for byte.
   const same = system.every((value, index) => Math.abs(value - matrix[index]!) < 1e-12);
   return { from, to: same ? from : to, matrix: same ? system : matrix };

@@ -4,8 +4,8 @@
     {
       "id": "mars-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "d35d136c52c84f11d4492c00c7f62535903f1732713028288e70a01397687674",
-      "expectedBytes": 271,
+      "expectedSha256": "47a97a8be2879223763aa53bbef1ff644a2c212151e5430bad0ec0f7f38ff7c6",
+      "expectedBytes": 204,
       "origin": "Repository-authored physical scene recipe; equatorial radius 3396.19 km from the JPL physical parameters pinned in editorial/factsheet-review.json and the USGS Viking MDIM product; pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
