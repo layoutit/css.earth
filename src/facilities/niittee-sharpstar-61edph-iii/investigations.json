@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "niittee-sharpstar-61edph-iii",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "included",
+      "finding": "A privately owned telescope with no archive: its images reach this repository by its owner's publication and permission.",
+      "evidence": [
+        "https://www.astrobin.com/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "included",
+      "finding": "Each image is used on the terms its owner states; no archive policy applies.",
+      "evidence": [
+        "https://www.astrobin.com/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "included",
+      "finding": "No reduction software is run here; the owner delivers finished images.",
+      "evidence": [
+        "https://www.astrobin.com/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "alma",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "ALMA science archive: ObsCore TAP, DataLink and file downloads",
+      "status": "included",
+      "finding": "Public ALMA data can be queried and downloaded anonymously. DataLink lists each member OUS's product tarball and the files inside it, each downloadable on its own: R Dor's 2023 band-7 continuum image (2022.1.01071.S, uid://A001/X35f5/Xaea) is a 33 MB FITS file inside a 77 GB product tarball, beside 464 GB of raw ASDM.",
+      "evidence": [
+        "https://almascience.eso.org/alma-data/alma-data-b",
+        "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "ALMA proprietary period and anonymous access",
+      "status": "included",
+      "finding": "ALMA data are proprietary for 12 months, after which access and download are anonymous.",
+      "evidence": [
+        "https://almascience.eso.org/alma-data/alma-data-b"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "CASA and the ALMA imaging pipeline",
+      "status": "deferred",
+      "finding": "CASA processes ALMA data and is distributed by NRAO under GPL v3 or later; its size and macOS support were not checked. Re-imaging from raw data does not fit on this machine (R Dor band 7 alone is 464 GB of raw measurement sets), so the first route is the archive's own continuum images, which the pipeline already produced.",
+      "revisitWhen": "The archive continuum images are inspected and show surface structure worth re-imaging, or a calibrated measurement set becomes downloadable on its own.",
+      "evidence": [
+        "https://casa.nrao.edu/",
+        "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
+        }
+      ]
+    },
+    {
+      "id": "stellar-surfaces",
+      "subject": "Public long-baseline ALMA data on resolved giant stars",
+      "status": "unresolved",
+      "finding": "ObsCore lists public data at 30 mas resolution or finer on Betelgeuse (9.7 mas, 2022.A.00026.S, July 2023), R Dor (14.9 mas, 2022.1.01071.S, July and August 2023, the months Vlemmings et al. 2024 report; the paper's data statement not checked) and Mira (14.5 mas, 2022.1.00817.S and 2022.1.01071.S). Nothing downloaded yet; the archive images stack several dates and are not self-calibrated, and a spotless check for images rather than visibilities does not exist.",
+      "revisitWhen": "The archive continuum images of R Dor, Betelgeuse and Mira are downloaded and inspected.",
+      "evidence": [
+        "https://almascience.eso.org/tap",
+        "https://www.nature.com/articles/s41586-024-07836-9"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
+        }
+      ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "deferred",
+      "finding": "The same screen matched 26 bodies in the ALMA archive, 17,934 rows, mostly bands 3, 6 and 7. Pallas and Juno are the strongest unphotographed candidates anywhere in the screen, at roughly 20 and 10 beams across.",
+      "revisitWhen": "Pallas, Juno or another ALMA candidate is taken up.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

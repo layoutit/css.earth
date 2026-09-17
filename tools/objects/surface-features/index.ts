@@ -96,8 +96,8 @@ export interface PreparedSurfaceFeature {
   readonly credit: string;
   /** A source-backed note for the caption (a Wikipedia lead summary, or the quoted source sentence of a site) with its page and credit. */
   readonly note?: { readonly text: string; readonly title: string; readonly url: string; readonly credit: string };
-  /** The machines-catalogue id of the spacecraft at a site, when catalogued. */
-  readonly machineId?: string;
+  /** The facilities-catalogue id of the spacecraft at a site, when catalogued. */
+  readonly facilityId?: string;
   /** Discovery tier: the share of the zoom range (0 whole body, 1 closest) from which this name competes for a label. */
   readonly minimumZoomShare: number;
   /** Found by search and labelled when selected, never by default. */
@@ -523,11 +523,11 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       min_lon: row.extent ? String(row.extent.minLon) : '', max_lon: row.extent ? String(row.extent.maxLon) : '', min_lat: row.extent ? String(row.extent.minLat) : '', max_lat: row.extent ? String(row.extent.maxLat) : '',
       quad_code: row.layer, link: `${row.link}#feature-${row.id}` } as Readonly<Record<string, string>>;
   }) } : archive === null || config.members === null ? { fields: [], rows: [] as Readonly<Record<string, string | undefined>>[] } : parseDbf(unzipMember(archive, config.members.attributes));
-  const creditById = new Map<string, string>(), siteNoteById = new Map<string, NonNullable<PreparedSurfaceFeature['note']>>(), machineById = new Map<string, string>();
+  const creditById = new Map<string, string>(), siteNoteById = new Map<string, NonNullable<PreparedSurfaceFeature['note']>>(), facilityById = new Map<string, string>();
   const siteDocument = config.sites ? parseSurfaceSites(JSON.parse(await readFile(resolve(directory, config.sites.document), 'utf8'))) : null;
   const siteRows: SiteRow[] = siteDocument ? loadSiteRows(context.sourceDirectory, config.directory, siteDocument) : [];
   const rows: Readonly<Record<string, string | undefined>>[] = [...table.rows, ...siteRows.map(row => {
-    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, SITE_ZOOM_SHARE); creditById.set(row.id, row.credit); if (row.paths) pathsById.set(row.id, row.paths); if (row.note) siteNoteById.set(row.id, row.note); if (row.machineId) machineById.set(row.id, row.machineId);
+    priorityById.set(row.id, row.priority); zoomShareById.set(row.id, SITE_ZOOM_SHARE); creditById.set(row.id, row.credit); if (row.paths) pathsById.set(row.id, row.paths); if (row.note) siteNoteById.set(row.id, row.note); if (row.facilityId) facilityById.set(row.id, row.facilityId);
     return { name: row.name, clean_name: row.name, approvaldt: `${row.approved.replaceAll('-', '/')} 00:00:00`, origin: row.origin, diameter: '0', center_lon: String(row.centerLon), center_lat: String(row.centerLat),
       type: row.type, code: row.code, approval: approvalLabel, min_lon: row.extent ? String(row.extent.minLon) : '', max_lon: row.extent ? String(row.extent.maxLon) : '', min_lat: row.extent ? String(row.extent.minLat) : '', max_lat: row.extent ? String(row.extent.maxLat) : '',
       quad_code: 'sites', link: `${row.link}#feature-${row.id}` };
@@ -642,7 +642,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
       origin: row.origin!, approved: `${approved[1]}-${approved[2]}-${approved[3]}`, quad: row.quad_code!, link: row.link!.replace(/^http:\/\//u, 'https://').replace(/#feature-\d+$/u, ''),
       credit: creditById.get(id) ?? (naturalEarth ? 'Natural Earth' : `IAU name, ${approved[1]}`),
       ...(siteNoteById.has(id) ? { note: siteNoteById.get(id)! } : noteById.has(id) ? { note: { text: noteById.get(id)!.extract, title: noteById.get(id)!.title, url: noteById.get(id)!.url, credit: 'Wikipedia, CC BY-SA 4.0' } } : {}),
-      ...(machineById.has(id) ? { machineId: machineById.get(id)! } : {}),
+      ...(facilityById.has(id) ? { facilityId: facilityById.get(id)! } : {}),
       minimumZoomShare: 0,
       ...(searchOnlyIds.has(id) ? { searchOnly: true as const } : {}),
     };

@@ -64,8 +64,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vista",
+            "kind": "facility",
+            "facilityId": "vista",
             "evidence": "https://www.eso.org/public/images/eso1714a/"
           }
         ]
@@ -98,8 +98,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "blanco-4m",
+            "kind": "facility",
+            "facilityId": "blanco-4m",
             "evidence": "https://noirlab.edu/public/images/noirlab2030b/"
           }
         ]
@@ -167,8 +167,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "wise",
+            "kind": "facility",
+            "facilityId": "wise",
             "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
           }
         ]
@@ -322,7 +322,7 @@
     {
       "id": "document-6",
       "path": "src/objects/smc/source/provenance-references.json",
-      "expectedSha256": "7e9111d1105f9639a319211173c88d3abfff17e8f45292c7fd811031565ad77f",
+      "expectedSha256": "50c67e77bf2320d2a47082261c0f95381189638b1be82aa6f41c1d4d090920c7",
       "expectedBytes": 3452,
       "sourceBinding": {
         "kind": "local",
@@ -379,8 +379,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "blanco-4m",
+            "kind": "facility",
+            "facilityId": "blanco-4m",
             "evidence": "https://noirlab.edu/public/images/noirlab2030b/ — the publisher page identifies Blanco/DECam SMASH imaging in g, r, i and z."
           }
         ]

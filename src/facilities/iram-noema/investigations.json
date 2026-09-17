@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "iram-noema",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "excluded",
+      "finding": "IRAM's archive is browsable through its data management system, but archival data are requested by e-mail and every request is contingent on IRAM's approval; only calibrated Large Programme data are directly available. No TAP endpoint answered on 2026-09-17.",
+      "revisitWhen": "IRAM opens its archive to direct download, or a NOEMA dataset justifies a request to the institute.",
+      "evidence": [
+        "https://iram-institute.org/science-portal/data-archive/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Normal projects carry a three-year proprietary period and Large Programmes 18 months, counted from the end of the last semester of observations. No reuse licence is published; users must cite the standard IRAM reference and the observing team or programme, and IRAM states it does not support reduction of retrieved data.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://iram-institute.org/science-portal/proposals/data-policy/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "GILDAS is IRAM's reduction collection, distributed as source and binaries, with no licence file found on any of its pages.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://www.iram.fr/IRAMFR/GILDAS/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

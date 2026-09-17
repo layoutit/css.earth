@@ -13,7 +13,7 @@ const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-cat
   links: [{ role: 'landing', url: 'https://example.org/image', label: 'Image' }],
   evidence: [{ url: 'https://example.org/image', checkedOn: '2026-09-13', locator: 'Image credit' }],
 }] }));
-const catalog = parseExplorationCatalog({ schema: 'cssearth-machine-catalog@4', missions: [], machines: [] }, parseAgencies({}), sources);
+const catalog = parseExplorationCatalog({ schema: 'cssearth-facility-catalog@4', missions: [], facilities: [] }, parseAgencies({}), sources);
 const pin = 'a'.repeat(64);
 const provenance = (objectId: string): ProvenanceDocument => ({
   schema: 'cssearth-object-provenance@3', objectId, basis: 'recovered',

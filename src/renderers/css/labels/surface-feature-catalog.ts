@@ -103,7 +103,7 @@ export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: Prepare
     return Object.freeze({ id, name, kind: kind as SurfaceFeatureKind, type: text(feature.type, 'feature type'), code: text(feature.code, 'feature code'),
       diameterKm, longitudeDeg: finite(feature.longitudeDeg, 'feature longitude'), latitudeDeg: finite(feature.latitudeDeg, 'feature latitude'),
       anchorUnits, normal, radiusUnits, outline, searchNames, searchContext, origin: text(feature.origin, 'feature origin'), approved: text(feature.approved, 'feature approval'),
-      quad: text(feature.quad, 'feature quad'), link, credit: text(feature.credit, 'feature credit'), note: parseNote(feature.note), machineId: feature.machineId === undefined ? null : text(feature.machineId, 'feature machine'), minimumZoomShare: zoomShare(feature.minimumZoomShare), searchOnly: feature.searchOnly === true });
+      quad: text(feature.quad, 'feature quad'), link, credit: text(feature.credit, 'feature credit'), note: parseNote(feature.note), facilityId: feature.facilityId === undefined ? null : text(feature.facilityId, 'feature facility'), minimumZoomShare: zoomShare(feature.minimumZoomShare), searchOnly: feature.searchOnly === true });
   });
   return Object.freeze({ schema: 'cssearth-prepared-surface-features@1', objectId, source: text(catalog.source, 'catalogue source'),
     snapshotDate: text(catalog.snapshotDate, 'catalogue snapshot'), sourcePage: text(catalog.sourcePage, 'catalogue page'),

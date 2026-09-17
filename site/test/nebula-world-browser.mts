@@ -257,7 +257,7 @@ try {
         ? source.sourceBinding.references.filter(reference => reference.role === 'material').map(reference => reference.catalogueId) : []))];
       assert.ok(sourceIds.length > 0, `${id}/${lens.id}: identify the original image source.`);
       for (const sourceId of sourceIds) assert.equal(await sourceContext.locator(`[data-source="${sourceId}"]`).first().isVisible(), true);
-      assert.ok(await sourceContext.locator('[data-machine], [data-mission], [data-unresolved]').count() > 0, 'Capture attribution must be explicit.');
+      assert.ok(await sourceContext.locator('[data-facility], [data-mission], [data-unresolved]').count() > 0, 'Capture attribution must be explicit.');
       await card.getByRole('tab', { name: 'Factsheet', exact: true }).click();
       const factsBank = card.locator(`[data-focus-facts-bank="${id}"]`);
       await factsBank.waitFor({ state: 'visible' });

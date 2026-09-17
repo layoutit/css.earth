@@ -1,6 +1,10 @@
 /** An object's investigation ledger: every source, route, lens or frame examined for it, what was decided, the evidence and what
  * would reopen the decision. It lives beside the body README, outside `source/`, so recording an investigation never changes
- * preparation inputs. */
+ * preparation inputs.
+ *
+ * A facility keeps the same ledger in src/facilities/<facility id>/investigations.json: what was examined about a telescope's
+ * archive, data policy and reduction software, and what was run from it. Every facility ledger answers the same three sweep
+ * entries (FACILITY_SWEEP), so facilities compare side by side. */
 import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode } from './source-values.mts';
@@ -19,6 +23,10 @@ export interface InvestigationEntry {
   evidence: string[]; checked: InvestigationCheck[];
 }
 export interface InvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; objectId: string; entries: InvestigationEntry[] }
+export interface FacilityInvestigationLedger { schema: typeof INVESTIGATION_LEDGER_SCHEMA; facilityId: string; entries: InvestigationEntry[] }
+
+/** The questions every facility ledger answers first. */
+export const FACILITY_SWEEP = ['archive-access', 'data-policy', 'reduction-software'] as const;
 
 const IDENTIFIER = /^[a-z0-9][a-z0-9-]*$/;
 const COMMIT = /^[0-9a-f]{40}$/;
@@ -66,11 +74,24 @@ function check(value: unknown, context: string): InvestigationCheck {
 /** Validate one ledger against the object package that owns it. */
 export function parseInvestigationLedger(value: unknown, objectId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): InvestigationLedger {
   const context = `${objectId} investigation ledger`, raw = record(value, ['schema', 'objectId', 'entries'], [], context);
-  if (raw.schema !== INVESTIGATION_LEDGER_SCHEMA) fail(context, `expects schema ${INVESTIGATION_LEDGER_SCHEMA}`);
   if (raw.objectId !== objectId) fail(context, `expects objectId ${objectId}`);
+  return { schema: INVESTIGATION_LEDGER_SCHEMA, objectId, entries: parseEntries(raw, context, surveys) };
+}
+
+/** Validate one facility ledger: the object ledger's entries, led by the sweep entries every facility answers. */
+export function parseFacilityLedger(value: unknown, facilityId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): FacilityInvestigationLedger {
+  const context = `${facilityId} facility ledger`, raw = record(value, ['schema', 'facilityId', 'entries'], [], context);
+  if (raw.facilityId !== facilityId) fail(context, `expects facilityId ${facilityId}`);
+  const entries = parseEntries(raw, context, surveys), missing = FACILITY_SWEEP.filter(id => !entries.some(entry => entry.id === id));
+  if (missing.length) fail(context, `answers the facility sweep first: ${missing.join(', ')}`);
+  return { schema: INVESTIGATION_LEDGER_SCHEMA, facilityId, entries };
+}
+
+function parseEntries(raw: Record<string, unknown>, context: string, surveys: ReadonlyMap<string, InvestigationSurvey>): InvestigationEntry[] {
+  if (raw.schema !== INVESTIGATION_LEDGER_SCHEMA) fail(context, `expects schema ${INVESTIGATION_LEDGER_SCHEMA}`);
   if (!Array.isArray(raw.entries) || !raw.entries.length) fail(context, 'expects at least one entry');
   const ids = new Set<string>();
-  const entries = raw.entries.map((value: unknown, index): InvestigationEntry => {
+  return raw.entries.map((value: unknown, index): InvestigationEntry => {
     const where = `${context} entry ${index + 1}`;
     const entry = record(value, ['id', 'status', 'checked'], ['subject', 'finding', 'evidence', 'revisitWhen', 'survey'], where);
     // A shared record supplies the finding it is quoted for, and its subject, evidence and revisit condition unless this body
@@ -97,7 +118,6 @@ export function parseInvestigationLedger(value: unknown, objectId: string, surve
       evidence: [...(survey ? survey.evidence : []), ...links.map((link: unknown, k) => evidenceLink(link, `${where} evidence ${k + 1}`))],
       checked: (entry.checked as unknown[]).map((item: unknown, k) => check(item, `${where} check ${k + 1}`)) };
   });
-  return { schema: INVESTIGATION_LEDGER_SCHEMA, objectId, entries };
 }
 
 /** Every ledger under src/objects, in object order. A ledger belongs to an object package that has a descriptor. */
@@ -112,5 +132,16 @@ export async function readInvestigationLedgers(root: string) {
     await access(resolve(objects, objectId, 'object.json'));
     ledgers.push(parseInvestigationLedger(JSON.parse(text), objectId, surveys));
   }
+  return ledgers;
+}
+
+/** Every facility ledger under src/facilities, in id order. */
+export async function readFacilityLedgers(root: string) {
+  const facilities = resolve(root, 'src/facilities'), ledgers: FacilityInvestigationLedger[] = [];
+  const surveys = await readInvestigationSurveys(root, evidenceLink);
+  let directories: string[];
+  try { directories = (await readdir(facilities, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort(); }
+  catch (error) { if (hasErrorCode(error, 'ENOENT')) return ledgers; throw error; }
+  for (const facilityId of directories) ledgers.push(parseFacilityLedger(JSON.parse(await readFile(resolve(facilities, facilityId, INVESTIGATION_LEDGER_FILE), 'utf8')), facilityId, surveys));
   return ledgers;
 }
