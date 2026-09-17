@@ -66,6 +66,7 @@
       "finding": "The same screen matched 118 bodies across CADC's Gemini and CFHT collections, 59,021 rows, largest instruments NIRI (37543), GNIRS (6171), ESPaDOnS (5604). The counts are archive-wide, not per telescope.",
       "revisitWhen": "A Gemini or CFHT candidate from the screen is taken up.",
       "evidence": [
+        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
         "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
