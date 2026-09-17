@@ -1,0 +1,188 @@
+{
+  "objectId": "smc",
+  "base": "http://127.0.0.1:4210",
+  "browser": "148.0.7778.96",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "revision": "0dba0f46ad47eff2267799349084b8485d819229",
+  "dirtyFiles": [
+    "M src/objects/m1/object.json",
+    " M src/objects/m8/object.json",
+    " M src/objects/nearby-universe/object.json",
+    " M src/objects/nearby-universe/prepared/manifest.json",
+    " M src/objects/nearby-universe/runtime-assets.json",
+    " M src/objects/nearby-universe/source/manifest.json",
+    "?? .vscode/",
+    "?? MOLTRONX_REVIEW.md",
+    "?? src/objects/bianca/source/shape/pck00011.tpc",
+    "?? src/objects/cressida/source/shape/pck00011.tpc",
+    "?? src/objects/desdemona/source/shape/pck00011.tpc",
+    "?? src/objects/rosalind/source/shape/pck00011.tpc",
+    "?? src/planets/"
+  ],
+  "inputPins": [
+    {
+      "path": "src/objects/smc/prepared/lenses.json",
+      "bytes": 5825147,
+      "sha256": "560403477633ebcb5317292ca6ba06a0b93ff25d88211458b2cb47b86b2039ee"
+    },
+    {
+      "path": "src/objects/smc/prepared/provenance.json",
+      "bytes": 70105,
+      "sha256": "dee5a79a050aed01897890e5abe6f80eed08340fda9d840611d7a052f572397d"
+    },
+    {
+      "path": "src/objects/smc/prepared/presentation.json",
+      "bytes": 8145,
+      "sha256": "fc6e20b0e9a08c2889f4a9076742e2311ef92af34b4b586ea62e2f33ec1bf23a"
+    }
+  ],
+  "navigation": "label fly-to from the shared sun scene",
+  "lenses": [
+    {
+      "id": "smc-horalek-wide",
+      "label": "Horálek optical",
+      "textures": 1,
+      "cameraRetained": true,
+      "sourceIds": [
+        "noirlab-iotw2615a"
+      ]
+    },
+    {
+      "id": "smc-vista",
+      "label": "ESO VISTA",
+      "textures": 1,
+      "cameraRetained": true,
+      "sourceIds": [
+        "eso-eso1714a"
+      ]
+    },
+    {
+      "id": "smc-smash",
+      "label": "NOIRLab SMASH",
+      "textures": 1,
+      "cameraRetained": true,
+      "sourceIds": [
+        "noirlab-noirlab2030b"
+      ]
+    },
+    {
+      "id": "smc-dss2",
+      "label": "DSS2 optical",
+      "textures": 1,
+      "cameraRetained": true,
+      "sourceIds": [
+        "esahubble-heic0514c"
+      ]
+    },
+    {
+      "id": "smc-allwise-wide",
+      "label": "NASA AllWISE",
+      "textures": 1,
+      "cameraRetained": true,
+      "sourceIds": [
+        "cds-allwise-color"
+      ]
+    }
+  ],
+  "stars": {
+    "total": 1803,
+    "visibleWithStarsOn": 1803,
+    "rootDisplayOn": "block",
+    "rootDisplayOff": "none"
+  },
+  "captures": [
+    {
+      "name": "lens-smc-horalek-wide",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/lens-smc-horalek-wide.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-horalek-wide&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth",
+      "lens": "smc-horalek-wide",
+      "textures": 1
+    },
+    {
+      "name": "lens-smc-vista",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/lens-smc-vista.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-vista&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth",
+      "lens": "smc-vista",
+      "textures": 1
+    },
+    {
+      "name": "lens-smc-smash",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/lens-smc-smash.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-smash&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth",
+      "lens": "smc-smash",
+      "textures": 1
+    },
+    {
+      "name": "lens-smc-dss2",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/lens-smc-dss2.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-dss2&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth",
+      "lens": "smc-dss2",
+      "textures": 1
+    },
+    {
+      "name": "lens-smc-allwise-wide",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/lens-smc-allwise-wide.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-allwise-wide&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth",
+      "lens": "smc-allwise-wide",
+      "textures": 1
+    },
+    {
+      "name": "view-earth",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/view-earth.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-horalek-wide&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth (0°)",
+      "lens": "smc-horalek-wide",
+      "textures": 1
+    },
+    {
+      "name": "view-oblique",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/view-oblique.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-horalek-wide&v=QIZDrjH1fNr3hsBQYk3S8an8w5P8x_-oJqhBQsczQAAAAD_CsM1C-tBSP9Kwq86O0l8_4PkiKuvNTAABAAAAAAAAAAA",
+      "view": "oblique (34°)",
+      "lens": "smc-horalek-wide",
+      "textures": 1
+    },
+    {
+      "name": "view-side-plus",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/view-side-plus.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-horalek-wide&v=QIZDur0AybNuMEBwYk3S8an8w7TsErBXFhZBQsczQAAAAD_foF7TvdCdP-AvQ1W-5t4_1U4b3AE15gABAAAAAAAAAAA",
+      "view": "exact +90° side",
+      "lens": "smc-horalek-wide",
+      "textures": 2
+    },
+    {
+      "name": "view-side-minus",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/view-side-minus.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-horalek-wide&v=QAbDur0AybNuMEBgYk3S8an8w7TsErBXFhhBQsczQAAAAD_VThvcASpSv9-gXtO93HC_4C9DVb7dcAABAAAAAAAAAAA",
+      "view": "exact −90° side",
+      "lens": "smc-horalek-wide",
+      "textures": 2
+    },
+    {
+      "name": "stars-on",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/stars-on.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-horalek-wide&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth, stars on",
+      "lens": "smc-horalek-wide"
+    },
+    {
+      "name": "stars-off",
+      "path": "src/objects/smc/evidence/merged-2026-09-17/stars-off.png",
+      "url": "http://127.0.0.1:4210/sun/?focus=smc&focusLens=smc-horalek-wide&v=QIbAWLw30tK3osBQYk3S8an8Q6CEwT6dyE9BQsczQAAAAL-3eZQ_gi_OP79LSSTK-Q4_4voMTQ117wABAAAAAAAAAAA",
+      "view": "earth, stars off",
+      "lens": "smc-horalek-wide"
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "result": "passed"
+}
