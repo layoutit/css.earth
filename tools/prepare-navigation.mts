@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { encodeWebp } from './webp-cache.mts';
 import { constants } from "node:fs";
 import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -226,7 +225,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
       const pixels = Math.min(descriptor.context?.pixels ?? 1536, info.width, info.height);
       const png = await renderMarker(descriptor, { sourcePath, tileSize: pixels });
       const filename = `${descriptor.planetId}-context.webp`;
-      await writeFile(resolve(outputRoot, filename), await encodeWebp(sharp(png), { quality: 85, alphaQuality: 100, effort: 6 }));
+      await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(outputRoot, filename));
       results[index] = { url: `/navigation/${filename}`, pixels };
     }
   }));
@@ -245,7 +244,7 @@ export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors 
         ? resolve(projectRoot, 'src/objects', descriptor.planetId, 'source', descriptor.source.path)
         : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
       const tile = await renderMarker(descriptor, { sourcePath, tileSize });
-      await writeFile(resolve(outputRoot, `body-${descriptor.planetId}${density === 2 ? '@2x' : ''}.webp`), await encodeWebp(sharp(tile), { lossless: true, effort: 6 }));
+      await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.planetId}${density === 2 ? '@2x' : ''}.webp`));
     }
   }
 }
