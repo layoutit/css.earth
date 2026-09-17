@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "296159df5613c7c7163e5b015211fa9be643917a7ea81399c1b49c77fcad6ddf"
+    "sha256": "5126fe602afe8681dfcb4f51f72cf13942cb3a5ecc383e12d265076924f41a01"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dbd9e1e076ce0ef688a3275b75a52a687a68677e9efffd4bf5116d82b1d82698",
+      "sha256": "ebdf705e3116157bf9dc1192ffe8f9b2ec3742d20bd0f96c4b19aa3473e31074",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,8 +102,6 @@
           "radius": 230,
           "radiusKm": 1.224,
           "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 240,
             "framingScale": 0.8
           },
           "mapUrl": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
@@ -292,14 +290,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -541,7 +539,7 @@
   },
   "lastPreparation": {
     "objectId": "toutatis",
-    "materialSha256": "d2e53d43174c8be4918b50a87752f64a9da928f7a4e8a1ca00e7720ae01d1277",
+    "materialSha256": "c7348a907c4aa751b063cf38c161704c59becdb7223f7d54908c3727d1200672",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

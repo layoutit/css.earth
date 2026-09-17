@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d3553a847e09d9fd42489aea9489b5ae966f33effcf2f36cf29aa920df30af3"
+    "sha256": "6b57416151f5937867c295a87b113289723662bff721d68178739fd7b849038b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a63ed0ba871ea8010cda6385e9c953fb8e1197ae0d8a4b7ef4f3dd27813c38f0",
+      "sha256": "83f1f49a7125da5c2bca547c5698ca27116b2fd7d4f2b0399f64eb292d6d45ee",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 42.185,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/virginia/virginia-shape-surface@2x.webp",
           "polesUrl": "/scenes/virginia/virginia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "virginia",
-    "materialSha256": "8c0986355231dca5bd18d97bd28c8081105110ed60f111ae859f9ede0f6f1c8d",
+    "materialSha256": "845d5045f10f8ba74d182ab8328b3d9d59f6de201da098a10934a4aa6dba9580",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

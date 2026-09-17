@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "52a5d46aa6275813756de02e656c23af6fbe74a0d2a82b2e70b6ffdbd66f8435"
+    "sha256": "b4f212755a4ffdb7e616255fc475c439e88a8f20cda21ead2bcbccdcd0790cd6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "75bb55c6b30d89db3a770013bab99cf1e55f249da226416d56ba8b24919f89bb",
+      "sha256": "4c986da61146fcb70a799a4da6219e54dbae51b8c7f5c69728ec984bcf9edd05",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.845,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/mithra/mithra-shape-surface@2x.webp",
           "polesUrl": "/scenes/mithra/mithra-shape-surface@2x.webp",
           "radialTerrain": {
@@ -324,14 +320,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -573,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "mithra",
-    "materialSha256": "b76578d109194afde1e0ea6565ceef64440837559cecf3254c862cb94fc42a83",
+    "materialSha256": "fe5560113df891690db3781541d77943b146559188f6689c5dab05cedc37b4e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

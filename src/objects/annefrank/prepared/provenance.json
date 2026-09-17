@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "669c6d78756a16913440a272f0d93c94be9489f5aa27d39167813f4ff0e51206"
+    "sha256": "b89dd3d7a14f3c2eb90509f00721b97b7a0d4fd8c6b9749f301c1d360925422b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "feb088b1080a6567ca23515d271254dbba10f40ad5c36cc371d337c3a3e36aa1",
+      "sha256": "d89b3675c394e7b08dbbbf0abf35aadd1c1f032f3da35e422d49855b9709a291",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 2.4115760195783342,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7307806119934347
           },
           "mapUrl": "/scenes/annefrank/annefrank-model-surface@2x.webp",
@@ -413,7 +411,7 @@
   },
   "lastPreparation": {
     "objectId": "annefrank",
-    "materialSha256": "48b94b79c3fe0b9a29edba2dc8a255b172377001332c2051fd4d02fd46719df5",
+    "materialSha256": "6a00075ff17c3b757aaa3b691330acd5ec7afd20dd1f333134d3a7d1287b7f84",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

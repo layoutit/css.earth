@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6a864829f4246edce5ede4eda5c4df0912897f8c2e2f1200e9b3e1b0f8d18d1d"
+    "sha256": "529657589c209b76997501022c9a32db6e00c9b50cbb7b590c114f649c9abe81"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8a917a7944cddde2b12f96e28c2da2c691515424ad75abe750e157ced3563a75",
+      "sha256": "efa1d438394150ecd5cc32e5a8a192bb321aa370d19ca29748a542c5166191e3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 11.945,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/antonia/antonia-shape-surface@2x.webp",
           "polesUrl": "/scenes/antonia/antonia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "antonia",
-    "materialSha256": "ae6ad06e59dfe9bb9a44c591e7ab1a312096926dd3cb9e837e03a40d986610d8",
+    "materialSha256": "ef83b36f0599e8e46916d2d7abe5c8bd572cc13dc80db9417a4a1412c0a4ef5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -3,14 +3,16 @@ import type {Guard, Infer} from '../material-composition/data-schema.mts';
 import type {PagedAssetConfiguration} from './asset-contract.mts';
 import type {PagedRasterConfiguration} from './surface-raster.mts';
 import type {PagedGeometryParameters} from './scene-contract.mts';
-import {camera} from '../camera-source.mts';
+import {DERIVED_CAMERA_ANGLE_FIELDS, recipeCamera} from '../camera-source.mts';
+import {preparedControlPitch} from '@cssearth/engine';
+import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';
 import {parsePageRecipe} from '../geographic-pages/source-records.mts';
 
 const geometry: Guard<PagedGeometryParameters> = object({BODY_LATITUDE_SEGMENTS: number, BODY_LONGITUDE_SEGMENTS: number, EQUATORIAL_RADIUS: number,
   TILE_SIZE: number, SEAM_BLEED: number, PLANET_SEAM_BLEED: number, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE: number,
   SURFACE_OVERLAP: number, POLAR_CAP_BAND_SPAN: number, POLAR_SURFACE_OVERLAP: number, POLAR_INNER_OVERLAP: number, POLAR_INNER_INSET: number,
-  OBLIQUITY_DEGREES: number, PRESENTATION_NODE_DEGREES: number, MESH_ROTATION_Z: number, CAMERA_ZOOM: number, CAMERA_SCENE_PITCH_DEGREES: number,
-  CAMERA_MINIMUM_CONTROL_PITCH_DEGREES: number, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES: number, CAMERA_DEFAULT_CONTROL_PITCH_DEGREES: number,
+  MESH_ROTATION_Z: number, CAMERA_ZOOM: number,
+  CAMERA_MINIMUM_CONTROL_PITCH_DEGREES: number, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES: number,
   CAMERA_MILLISECONDS_PER_CONTROL_DEGREE: number, INTERIOR_LATITUDE_SEGMENTS: number, INTERIOR_LONGITUDE_SEGMENTS: number, rotationSeconds: number,
   interiorCutaway: object({centerLongitudeDegrees: number, widthDegrees: number})});
 const relief = object({referenceRadiusMeters: number, heightToMeters: optional(number), lightDirection: array(number), ambient: number});
@@ -27,10 +29,10 @@ const scientific = union(
   object({kind: literal('black-marble-radiance'), member: string, year: number, product: string, band: string, units: string, archiveBytes: number, archiveSha256: string,
     grid: object({width: number, height: number, cellDegrees: number, bounds: tuple(number, number, number, number)}),
     display: object({missing: tuple(number, number, number), softening: number, maximum: number}), legend: object({image: string})}));
-const assetConfiguration: Guard<PagedAssetConfiguration & PagedRasterConfiguration> = object({namespace: string, publicBase: string, sceneBodyKey: string,
-  interiorRadiusKey: string, interiorSchema: string, interiorPath: string, equatorialRadiusKm: number, polarRadiusKm: number, geometry, camera,
+const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfiguration, 'camera'> & {camera: Infer<typeof recipeCamera>}> = object({namespace: string, publicBase: string, sceneBodyKey: string,
+  interiorRadiusKey: string, interiorSchema: string, interiorPath: string, equatorialRadiusKm: number, polarRadiusKm: number, geometry, camera: recipeCamera,
   atlas: object({pageSize: number, density: number, gutter: number, sourceWidth: number}),
-  material: object({tileSize: number, presentationSize: number, framesPerShard: number, frameCount: number, discRadius: number, worldLight: tuple(number, number, number), solarTint: string,
+  material: object({tileSize: number, presentationSize: number, framesPerShard: number, frameCount: number, discRadius: number, solarTint: string,
     shadowlessOverlay: optional(object({color: tuple(colorByte, colorByte, colorByte), opacity})),
     illumination: object({frameCount: number, minimumLightViewZ: number, maximumLightViewZ: number, baseLightAzimuthDegrees: number})}),
   atmosphere: object({sourcePath: string, responsePath: string, sourceId: string, maximumOpacityKey: string}),
@@ -41,13 +43,25 @@ const assetConfiguration: Guard<PagedAssetConfiguration & PagedRasterConfigurati
 const profile = object({textureLevels: optional(object({widths:array(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string, cityPath: string,
   destinations: object({searchLabel: string, descriptionSuffix: string, statuses: object({detail: string, overview: string})}),
   geographic: object({pages: record, noise: object({poolSize: number})})});
+/** Orientation, light and default camera angles are derived at preparation; a recipe that states them is stale. */
+const DERIVED_RECIPE_FIELDS = {geometry: ['OBLIQUITY_DEGREES', 'PRESENTATION_NODE_DEGREES', 'CAMERA_SCENE_PITCH_DEGREES', 'CAMERA_DEFAULT_CONTROL_PITCH_DEGREES'],
+  material: ['worldLight'], camera: DERIVED_CAMERA_ANGLE_FIELDS} as const;
 export function parsePagedProfile(value: unknown) {
-  const assets = parse(value, assetConfiguration, 'paged ellipsoid assets');
+  for (const [block, keys] of Object.entries(DERIVED_RECIPE_FIELDS)) {
+    const section = record(value) ? value[block] : undefined;
+    const stated = record(section) ? keys.filter(key => Object.hasOwn(section, key)) : [];
+    if (stated.length) throw new TypeError(`Paged ellipsoid ${block} states ${stated.join(', ')}, which preparation derives.`);
+  }
+  const parsed = parse(value, assetConfiguration, 'paged ellipsoid assets');
+  const controlPitch = preparedControlPitch(LIT_DEFAULT_VIEW.initialScenePitchDegrees, parsed.camera);
+  const assets = {...parsed, camera: {...parsed.camera, ...LIT_DEFAULT_VIEW, defaultControlPitchDegrees: controlPitch,
+    materialReferenceControlPitchDegrees: controlPitch, materialReferenceControlYawDegrees: LIT_DEFAULT_VIEW.defaultControlYawDegrees}};
   const metadata = parse(value, profile, 'paged ellipsoid profile');
   // The geographic operator owns the complete page schema. Its decoder preserves
   // all source fields; the profile retains their original JSON values as well.
   const pages = parsePageRecipe(metadata.geographic.pages);
-  return Object.assign({}, assets, metadata, {geographic: {...metadata.geographic, pages}});
+  // The profile guard returns the recipe object itself, so the derived camera goes last.
+  return Object.assign({}, assets, metadata, {geographic: {...metadata.geographic, pages}, camera: assets.camera});
 }
 export const isPagedEllipsoidRecipe = (value: unknown): boolean => record(value) && value.schema === 'cssearth-paged-ellipsoid@1';
 const lens = object({id: string, maximumZoom: number, view: optional(string), surfaceBankId: optional(string), surfaceUrl: optional(string),

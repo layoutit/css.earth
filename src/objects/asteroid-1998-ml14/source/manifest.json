@@ -9,14 +9,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "missionId": "arecibo-planetary-radar",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "missionId": "goldstone-solar-system-radar",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL"
           }
@@ -87,14 +87,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "missionId": "arecibo-planetary-radar",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "missionId": "goldstone-solar-system-radar",
             "evidence": "The preserved credit for this input reads: Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL"
           }
@@ -200,8 +200,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3292,
-      "expectedSha256": "0a72f632e119b2429bcfc0b26e5aa2bfc9ebf6ba11606a55849e169138f843d0"
+      "expectedBytes": 3195,
+      "expectedSha256": "559863c772e183a4e6a25727e6483d9b01ca47ad5af638f4b2dd4bd36c0c48c2"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

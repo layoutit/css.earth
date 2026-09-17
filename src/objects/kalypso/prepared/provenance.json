@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "238b91df37dd891909220d03ef1198f9851e5f5ed8d4962f80fefb13f6b89e05"
+    "sha256": "fb899dd9847c39237484738c34a6190919a2f1a8ecd095455e3003108b67d996"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6e1746c72279f5f22af978f8a8a1fecc50a566941c49e0fae4b91f96e04fab6c",
+      "sha256": "d23ae0f2ca8cd932d805f3ec402b99a65e14804543fae41cf0864aad42609682",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 50.95,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/kalypso/kalypso-shape-surface@2x.webp",
           "polesUrl": "/scenes/kalypso/kalypso-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "kalypso",
-    "materialSha256": "f4b8c74ee56ec0bf841054686c74457063aa87c1a0a4da74e8b99f4025582af9",
+    "materialSha256": "96477c41f349b16ff611bd2aa019950ae5aaf550c0781fa1fb2d4e9889cb00d0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4a7e8ea7e1c81d90b75d048127952dcb9678a9cc6d39662783053919086e0656"
+    "sha256": "a321cbfc7cd2206fdb8dce7c4894e32431ab0825eb1777adf3300fc8a9ee9c9c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0a0142a41c7859e8a6225940f8362d9095b0f71f7bfa2b4299b781001b3509bd",
+      "sha256": "f970895d067e07c5f1636d75ba05d7b623df771ec5b0d6bc823e946731b7ffcb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 58,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/victoria/victoria-shape-surface@2x.webp",
           "polesUrl": "/scenes/victoria/victoria-shape-surface@2x.webp",
           "radialTerrain": {
@@ -306,8 +302,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -552,7 +548,7 @@
   },
   "lastPreparation": {
     "objectId": "victoria",
-    "materialSha256": "984209f7f3202abf194a63a0d709fff4e4f6353725d02a6790890612c4e3f745",
+    "materialSha256": "e5e323838067ffb4c078a75c6065dc2e0b9a33246c7f88b873a93d74ebc3111d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

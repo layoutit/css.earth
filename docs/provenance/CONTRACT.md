@@ -48,7 +48,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `pnpm prepare:text` publishes `prepared/text.json` |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
-| `site/prepared-sources.json` and `site/prepared-machines.json` | Ignored source usage and mission attribution outputs; prepare together |
+| `site/prepared-sources.json` and `site/prepared-facilities.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
 | Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/objects/README.md) | Shared installation, controls, commands and contribution workflow |
@@ -82,13 +82,39 @@ or `deferred`), the finding, evidence links and the commit it was checked at.
 An entry that is not included names what would reopen it in `revisitWhen`.
 Link repository evidence at a commit or pull request; a branch link moves.
 
+A facility keeps the same ledger in `src/facilities/<facility id>/investigations.json`,
+with `facilityId` in place of `objectId`: a telescope's archive, data policy and
+reduction software, and what was run from it. Every facility ledger answers the
+sweep first, one entry each for `archive-access`, `data-policy` and
+`reduction-software`, so facilities compare side by side. Use the facility
+catalogue's id when the facility has a page record; a facility without one keeps
+its ledger all the same. `node tools/report-investigations.mts --facilities` counts
+the catalogue's ground facilities that have ledgers and lists the open decisions.
+
 Give distinct source decisions their own entries. `included` means selected for
 the stated use, not that every scientific claim is qualified. Ledger coverage
 counts objects with records, not objects with complete imagery or an exhaustive
 source search.
 
+Reasoning that three or more bodies reach the same way belongs in one shared
+record under `data/investigations`, and an entry names it in `survey` instead of
+repeating the paragraph. The record holds the subject, finding, the evidence
+every body leans on and the reopen condition; the entry still states this body's
+status, its own evidence and when it was checked, and may override the subject
+or reopen condition. A shared record names no single body's files. A test
+refuses a finding repeated across three bodies and a record no longer quoted.
+
 The README links the ledger instead of repeating a source survey. Read the
-ledger before investigating an object. Reopen an excluded, unresolved or
+An entry that is not included names, among its evidence, the source outside this
+repository that it examined: the archive, deposit or paper where the evidence
+that would reopen it appears. That is what makes a decision reopenable rather
+than a sentence nobody can act on. A test records how many decisions still name
+no such source, and that count may only fall.
+
+Read the ledger before investigating an object, starting from the open-work index
+([`docs/provenance/investigation-index.md`](investigation-index.md)), which
+groups every unresolved and deferred decision by what it waits on. Refresh it
+with `pnpm investigations:index`; a test refuses a stale copy. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
 `node tools/report-investigations.mts` lists every open entry across objects.
 Use `--summary` for catalogue coverage and `--classification` to select an

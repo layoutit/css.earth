@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c5dc9d991405a099576d057a2175b156fdc377708d93128c7acf04b68ddf9cbb"
+    "sha256": "88009c053f452f14b6337c383b29538bfa8f9ec96e6bcbc6922b882b67004830"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5d04d40ebc56e48b703197b733edb64f6769592a7c4f58e75519f85b51c274ec",
+      "sha256": "7b4634c7bd6607a70d1cdeb263f90c468e279c897293a4d24f879b23f3a86893",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.65,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1950-da/asteroid-1950-da-shape-surface@2x.webp",
           "radialTerrain": {
@@ -319,14 +315,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -568,7 +564,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1950-da",
-    "materialSha256": "6cc589d4391bd0844d1218963b9e71bdc5c27b19d4c85e707304917d15234d61",
+    "materialSha256": "ace61890e1159e8d71d8aae3d8c83c997b545b833103b47d1609932d8308f3fa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

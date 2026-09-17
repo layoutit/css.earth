@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec03928ef1fa03f61202b2ee6e498b798cd79b19e246803f92ec166ee7fbe376"
+    "sha256": "88847ac77f5ee9f399a465f4974c1d964b1844e180af6fd83f2a6e4ea13eac1a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d8c82d5ac257991c7ed6b3a41e543626844bcf8816f19e399744a1e0312f598e",
+      "sha256": "cf69b598fb95a4e018813cc6d1581bcf35696ae86972c070023b5e91c4cc6798",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 41.995,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.7162336606149706
           },
           "mapUrl": "/scenes/ajax/ajax-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "ajax",
-    "materialSha256": "105a032b2825333ea1cb37f6f19c35acbb4e55f47b2ae8d57a3bb0f802d92da2",
+    "materialSha256": "238508b55af7d0e7f65f5775e9ec6bf03c7d0f90bb1bf9763c311ee6eec1b1ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

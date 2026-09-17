@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50849317f8f30ff49da75d47ff5e1fb99be549b1bef831c01e9ac263965a6844"
+    "sha256": "27b0cc7e00f4e31f4cd5a5f9de1e1e6195bf6f081b1d826bb7e485c04cc5d209"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "80e7c964284b314013eb12c5291b915b6c5b6bc93d4b1500bd568fafa0d559d6",
+      "sha256": "18fa98d68649768e460ee40b309b79a5bf0e81a2012ea73b08f0335f38c57a12",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -709,10 +709,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.65,
-          "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/comet-67p/comet-67p-model-surface@2x.webp",
           "polesUrl": "/scenes/comet-67p/comet-67p-model-poles@2x.webp",
           "radialTerrain": {
@@ -1516,8 +1512,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -1791,8 +1787,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -1886,8 +1882,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -1981,8 +1977,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -3007,8 +3003,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "82872a1dc96d6d97fcd9ffef2c480ef39feafb4a50db2fc19d3a4db852d3999b",
-      "bytes": 3139,
+      "sha256": "798271a08d700552ec826c7225da3edbe3dc12d1a77850730decbbcdcf746448",
+      "bytes": 3141,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3750,7 +3746,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-67p",
-    "materialSha256": "2b12da67d7f887a9bb065b48fe90a4996b9e94b3c93538a8b4960f255187c234",
+    "materialSha256": "ee2d0bfda3110954a2bbf7646f926a6419e2fe52131e32a0ca63157109d2ef32",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

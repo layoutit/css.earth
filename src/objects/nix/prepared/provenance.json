@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "629b245f05005acda92c5c161c8b803823fbc34585c06c2ca1e18459cdb06432"
+    "sha256": "97762924b616767e396303be42b029d4126bea69e8c2962b23a289bd66df6d22"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0dba05e245fc5c4997d52b7a090135f3683f713954e6200244c627607c6b8c83",
+      "sha256": "fe27badbf99396a68ae50101799c482dcf96ca975b1cfb8aea95fe116048daff",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,10 +105,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 18.265603887767426,
-          "camera": {
-            "initialScenePitchDegrees": 30,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/nix/nix-model-surface@2x.webp",
           "polesUrl": "/scenes/nix/nix-model-poles@2x.webp",
           "radialTerrain": {
@@ -335,8 +331,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://ndownloader.figshare.com/files/24176543",
             "missionId": "new-horizons"
           }
@@ -388,8 +384,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029917/lor_0299174134_0x636_sci.fit",
             "missionId": "new-horizons"
           }
@@ -634,7 +630,7 @@
   },
   "lastPreparation": {
     "objectId": "nix",
-    "materialSha256": "71bc6ebfdb8f54b7e10893d6bba973fc50e7a522961cc6c04aaf83a92240317d",
+    "materialSha256": "e2cd8b0501dbf094f25b3ef5f2b1998c8a9faad6874e616d99274bb5bca1e79a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

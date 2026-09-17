@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "510ebbcada7dc4233f99be42eee751eecb099ada14fd2b66e9177e8148a1ceee"
+    "sha256": "7fec16fd1ea28b1b0ed464853816f5212005b1026ace301d4ede5ca86244ea12"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b9c046c9a63d75120ddb265cdfc579ac9853904489e31ec4c7e98e7f3f71d6c4",
+      "sha256": "2c9404136ac7f36678975fa46c20de42113d043751785f3408cd528ec5da36af",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 124.43324035987013,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.3104586908576878
           },
           "mapUrl": "/scenes/chariklo/chariklo-model-surface@2x.webp",
@@ -462,7 +460,7 @@
   },
   "lastPreparation": {
     "objectId": "chariklo",
-    "materialSha256": "234d460f80d41e147bd33da45d0003c1c681fd42f314d7878820ade39bef258f",
+    "materialSha256": "ec611884b52e5c0bb0b1a861446f556a71a8d4594ffab320756640d0b8539698",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

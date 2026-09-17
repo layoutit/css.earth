@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 41.615,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/hera/hera-shape-surface@2x.webp",
     "polesUrl": "/scenes/hera/hera-shape-surface@2x.webp",
     "radialTerrain": {

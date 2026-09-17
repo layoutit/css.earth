@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bfbc038b0d17ef4de3579f7d0cabc8b364576d6f1526d5407192a7c02bdcdf3f"
+    "sha256": "8ce53ae614aecd26312b0ba156c0d1935af6efaf94c5284bca8a64c8e1e6316a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6e17ff727c4111b38adf780cdd4f8fa9bc7562f4fc6397362e560255d3480b91",
+      "sha256": "84e84704573a27d16861ef6d7c65fca5fe775955376ba60b501f99f4c9b83150",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 18.815,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.7636087336472297
           },
           "mapUrl": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "demodokus",
-    "materialSha256": "77671ecba9129b591d3e89d4b254eeb3a37e69cd6fee9145371c8dba60d6047e",
+    "materialSha256": "da8c6d2487640b8455863bbb741b754cddafbce6fe2f362b5e17214a78f18517",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

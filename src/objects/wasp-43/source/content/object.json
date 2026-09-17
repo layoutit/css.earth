@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "One photosphere colour from Gaia's photometric temperature through a Planck spectrum, painted uniformly; the disc itself is unresolved.",
+        "qualification": "Colour from Gaia's photometric temperature; darkening toward the edge measured from TESS transits of WASP-43b. The disc itself is unresolved.",
         "thumbnail": "wasp-43-lens-color.webp",
         "surface": "wasp-43-surface-color.webp",
         "poles": "wasp-43-poles-color.webp",
@@ -51,7 +51,7 @@
           "url": "https://doi.org/10.1051/0004-6361/202243462"
         },
         "falseColor": false,
-        "notes": "The colour of a 4,416 K blackbody, Gaia DR3's photometric temperature for WASP-43, against the sRGB white point. No image of the photosphere exists: at 87 parsecs its disc spans 0.07 milliarcseconds (see investigations.json). The display axis is celestial north, a convention."
+        "notes": "The colour of a 4,416 K blackbody, Gaia DR3's photometric temperature. The darkening toward the edge is Patel & Espinoza (2022)'s fit to TESS transits (600–1000 nm): the edge is 45% as bright as the centre, anywhere from about 25 to 80% within their uncertainty. The star is magnetically active (Esposito et al. 2017), so it has spots, but no map of them exists. Its axis follows the planet's orbit, as measured."
       }
     ]
   },

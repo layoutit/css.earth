@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ed3dbe0911602742981400f3c0d49bbc98b7fa4f34f684aae67b829b79621058"
+    "sha256": "99454142aef1dfdcb3ee99746083fd1d61bc4114cb36152fc07350fe02d7b3ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b94fc235b40856e8733be8245274adf7e911c5a97d4c43b13e94a6da5d792719",
+      "sha256": "f234c2398fa159db29f7e38a3dd7fe3fa6861746cf3241b5bd5422cb4fb859f1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -223,10 +223,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 252.3,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
           "polesUrl": "/scenes/enceladus/enceladus-normal-poles@2x.webp",
           "radialTerrain": {
@@ -620,8 +616,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
             "missionId": "cassini"
           }
@@ -737,8 +733,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
             "missionId": "cassini"
           }
@@ -1453,7 +1449,7 @@
   },
   "lastPreparation": {
     "objectId": "enceladus",
-    "materialSha256": "f992abcb33f1d3b21053be2899c450ec80d73ab940391b41b85d719290e35bdd",
+    "materialSha256": "41484c37ceb72caaf3beace8195ceedc0dd17fc9f7798586e95153f2ccba409e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

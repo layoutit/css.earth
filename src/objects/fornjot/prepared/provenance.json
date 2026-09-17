@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec17df94567cc8b8a8e1236088a812ca9085f1da5766f4f96c354fa02a4bda37"
+    "sha256": "69930530098f1ab20f4dc9b888c0fe5f2f4e83a3aa95b0de1c61d75c3a765bda"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "35f03c889572f93385db1a552f90978c0bdcfea7160c4b5712c4ca325db4a8a3",
+      "sha256": "7319e323e98c93b66be635c4fb9791111a3b9249a0e5472b006f6006cf648d9c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 2.9,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9327917166201857
           },
           "mapUrl": "/scenes/fornjot/fornjot-model-surface@2x.webp",
@@ -409,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "fornjot",
-    "materialSha256": "74d31339d324b7c343e96a049fec3f50809a817031b4285b42aa21e23bfd727c",
+    "materialSha256": "a0801b6b79c1701e89c9f2f98dfa24c729481cc2e7c7752ffd2b954f96b81794",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

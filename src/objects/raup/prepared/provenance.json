@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0f03d8766a798c4998b33f7ffd6d3d8466d5892121c899eb9ecb430e1c45a14"
+    "sha256": "353e904a180616bef597832504973c658b3ad82dbfcc0efbb39e599774133e2a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a58ea10d9f2327487b835640da9c6514aea21fa59e40a2d89cad01128ea5c79c",
+      "sha256": "afd13efd9c49249941464fcf92de679cafdef191e54238e518a14921a85fe6aa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.4195,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/raup/raup-shape-surface@2x.webp",
           "polesUrl": "/scenes/raup/raup-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "raup",
-    "materialSha256": "c83e209023b7d5d9073f4d3580c48148adb5a87dfce45ceb17f141919f6e2581",
+    "materialSha256": "26dd48ed7b520d3b41c22c5440d98618ee8eaa47b3ffe0c1d3fb5e2aa2b6f5fd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

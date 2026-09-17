@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "22e5aa8d65605df2d9fb12765ec3b6569f2891cd1ff5638b31a318586f15c9a4"
+    "sha256": "0b64b0e828042a620ee303f7dcbd1adad4893b368ad8a7e0d22b3665849ce7d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d317445edb4368d727397f405a86343ac14ef24bc1916fcb038c67227e4fd68e",
+      "sha256": "f8a51cbc90904ef077fdae8b97bfadafdc91b29507393824c82eb386d3512e93",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -56,8 +56,6 @@
           "radius": 110,
           "radiusKm": 59.1,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 90,
             "framingScale": 0.75
           },
           "mapUrl": "/scenes/kleopatra/kleopatra-shape-surface@2x.webp",
@@ -213,8 +211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: F. Marchis, L. Jorda, P. Vernazza et al.; ESO/VLT/SPHERE; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -383,7 +381,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "210654eaa57c852014740d2140a4dded8f0dc9d3849620499a594e4459a4bdd3",
+    "materialSha256": "fba69b67987cd87807aef6ac0589294f6705acbcdc08095a0c50265f0dcad0ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4099e62ba48d447d2b54209b6be3b6021b0b0022a0d57da0c104ce32945bb68d"
+    "sha256": "609a44180cdd9c6beec99debc65abc73c1d4a2ff2901608893b143bc22a343d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "78e9e3b45b33d09b0dd3e05b41a218cedadd16706a5e4d655cbd861275a4e6b1",
+      "sha256": "7a91be602fb958ee856c59054c0fc1ac908409c7be2b2f09f01879fc401e6cbd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 25.67646409198381,
-          "camera": {
-            "initialScenePitchDegrees": -49.391450719383705,
-            "defaultControlYawDegrees": 37.40433823305438
-          },
           "mapUrl": "/scenes/bianca/bianca-model-surface@2x.webp",
           "polesUrl": "/scenes/bianca/bianca-model-poles@2x.webp",
           "radialTerrain": {
@@ -419,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "bianca",
-    "materialSha256": "218c36daad2c09caf9857582921b8689500fd31b010049bd0ad2027e753c60e8",
+    "materialSha256": "51f28fab15ad825ece233178a7fc8a754743a142cc15b33e79dd5b849ccf1f1f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

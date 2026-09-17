@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5e0212892537dc0c17b9e39240ddc3f427cea2b4f545b2ad66c6b7b9804064b4"
+    "sha256": "af4e96a43e46753434b27751058f9e63b5ff7c7088510ddc476581ebc22dd614"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "985d851e7b816e0cd4cbfed1499a35ddc3c5b4eb1250506e8e0abdc64c23c5e9",
+      "sha256": "ba77f0a4d169bdfd28721b2a593118fd72f04bc146aeee821ef2e665ff937e5f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 35.99999999999999,
-          "camera": {
-            "initialScenePitchDegrees": -20.629248987925266,
-            "defaultControlYawDegrees": 34.09391922506993
-          },
           "mapUrl": "/scenes/rosalind/rosalind-model-surface@2x.webp",
           "polesUrl": "/scenes/rosalind/rosalind-model-poles@2x.webp",
           "radialTerrain": {
@@ -419,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalind",
-    "materialSha256": "dffd986805b8b27e840d937de78e171348678c5ecc0369906ab40a450614aa1b",
+    "materialSha256": "e61e7ff491f1540bb9306b1deb25107a5c94de8d1a82faaa7e68e9aa8c208628",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

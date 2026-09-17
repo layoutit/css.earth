@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ff52112e151987032d295d8e7a7d06ecec677405e1b1075beb2732c5f4f10dad"
+    "sha256": "2edff5d14b670a5b14899179918c81deb9b359439fad3922249bc0e25a51fca3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "da593321ea05fb384993a2f6de76746fdd9d496544021f32e7c5b3ec0f9fe8b7",
+      "sha256": "519dad57aa83370dfc22aaa50e56301a61cfcf307f8751acde958485a8c8954d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.73,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-2002-ce26/asteroid-2002-ce26-shape-surface@2x.webp",
           "radialTerrain": {
@@ -323,14 +319,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "irtf",
+            "kind": "facility",
+            "facilityId": "irtf",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2006), Icarus 184, 198–210; Arecibo radar, NASA IRTF and NASA/JPL"
           }
         ]
@@ -571,7 +567,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-ce26",
-    "materialSha256": "f9bc3759bc23d058543a45f1f452c4de132d3bc8093b8a51fe105f0680cb0938",
+    "materialSha256": "5346e02d4e04f41412b063f56773fbb4051619e2d216293d4fc312424ac7817c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

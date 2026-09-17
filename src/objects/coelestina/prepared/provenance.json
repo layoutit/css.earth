@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fab2bd0e4e8df0c1cf5da166d24eaab8c8e8f0ec6a3590e48f9dc519bc633041"
+    "sha256": "70f0e2d01d5979fe2e8af742a80880f651d6f99d43e12f02edb5815a526004a7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "30754f3573a662d3ab9661d58d1b2952ed795e9b7e40d8c99775875debe9738e",
+      "sha256": "9a501f99be2b4f496abb81ee38b50ca75f78c50275fc38806199b3dc81c38eeb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 19.755,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/coelestina/coelestina-shape-surface@2x.webp",
           "polesUrl": "/scenes/coelestina/coelestina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "coelestina",
-    "materialSha256": "1f81c121a7e9098b2abe2d9b52ac4a30d49689358e51504d7b399293316b6732",
+    "materialSha256": "3d8db76373523689d468bb9f9d74fdf8293c86c7dd31016f965e4fa30554510b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

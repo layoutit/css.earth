@@ -4,8 +4,8 @@
     {
       "id": "mercury-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "b39f415cd40463c366ec2e875f0739bc344818a0a39f29235dd5ada6ff5f18ac",
-      "expectedBytes": 276,
+      "expectedSha256": "193267cebfab7b56820e11e191b41096957a52e532d9e6ac2c1e4c3a5d36f634",
+      "expectedBytes": 209,
       "origin": "Repository-authored physical scene recipe; radius from IAU/NASA and checked astronomy body data, pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
@@ -50,8 +50,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "messenger",
+            "kind": "facility",
+            "facilityId": "messenger",
             "missionId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
           }
@@ -99,8 +99,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "messenger",
+            "kind": "facility",
+            "facilityId": "messenger",
             "missionId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
           }
@@ -145,8 +145,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "messenger",
+            "kind": "facility",
+            "facilityId": "messenger",
             "missionId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_Messenger_USGS_DEM_665m_v2_HillshadeColor/1.0.0/default/default028mm/3/${y}/${x}.png"
           }
@@ -681,8 +681,8 @@
     {
       "id": "mercury-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1647,
-      "expectedSha256": "4568f15244d6886ab3f1c11c39ee64f05f8c5ec7ab91a3971e6af34bf0b82858",
+      "expectedBytes": 1648,
+      "expectedSha256": "b9a809dbe52117450d9522c8700c1cfb20e1843e28a5d0a34f37b9dd03b84593",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

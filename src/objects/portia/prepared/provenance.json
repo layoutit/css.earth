@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3066e3f6556c46ee2791ffe653b1087c6765c7c0045c9b1784ef750e069daf18"
+    "sha256": "a23862a787eb0e0e8b872ed3c99fe4e145efe9f71cee8b5136d87a0db39bc2b5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a603c2d19ea999d6ffb5932a501d3d0f0bc0996b53e25655a3b7ae30e5886431",
+      "sha256": "1081bc2d25752e0090833e41fdbb9a9d46fbec92bf63c3ecc1f747b4c628ee67",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 67.64856167757256,
-          "camera": {
-            "initialScenePitchDegrees": -52.61763627169879,
-            "defaultControlYawDegrees": 172.19048792195954
-          },
           "mapUrl": "/scenes/portia/portia-model-surface@2x.webp",
           "polesUrl": "/scenes/portia/portia-model-poles@2x.webp",
           "radialTerrain": {
@@ -432,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "portia",
-    "materialSha256": "4b65b4677900f35d6c1f99a5140b956ed9d629faee522299bb56583b2b05ca54",
+    "materialSha256": "93e8dc30c85578de27b5a4a651896e9ffce77f8fd0bdf76030bda51b45a87132",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

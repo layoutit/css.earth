@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "edd92ebd2bda3d38708de64cc33282a624c9fa65c5e8919678ff81793425d661"
+    "sha256": "bba962cb168ad4edd691cc6b08fb611b81c8d712375c134cec74f571b46acd8d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1ebd017bb1115f9b964fb50e1b1456f6cf5bf8784637db2bbf43202632763a97",
+      "sha256": "bb066064f317ca54a3e6875044420cab573fd040f404e588b2347773771ae179",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 18.515,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ilse/ilse-shape-surface@2x.webp",
           "polesUrl": "/scenes/ilse/ilse-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ilse",
-    "materialSha256": "c824fcd5f7ccfc7aaed37f56e7d12b3261ac3c40d3085f1ecb833c9bb35c7849",
+    "materialSha256": "dff998e8e5398884e069169250707e35b6e64f2d76bdc98f0baba7751b72a27e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

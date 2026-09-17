@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc85b4d35948841ce63c0e5e9f7d71bee573ccd6b976709af12c61b690d28f2f"
+    "sha256": "cfc21b3232f633028ad7b4822243154e1d605d0781ac0032101e891fd9dc557a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fed500fe092b2b51bf8526189e3c6c1df8defb53cc86316fbdb8d70fa797a5ec",
+      "sha256": "4276f20f128417093d032ca0a101b0aa4a62241d82e470769e3421ee0453cba5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 38.86,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/una/una-shape-surface@2x.webp",
           "polesUrl": "/scenes/una/una-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "una",
-    "materialSha256": "99763f78788afff1b536637b8e35b3e92cec04bfd130b0efc67c279f47602e08",
+    "materialSha256": "8da2651bb6efb1fef9a31c87d1a559c7302154959c7d2bbe4c93864da6837df7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

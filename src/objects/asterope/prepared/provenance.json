@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "494f2ea4b62354de6b351ca5ac7dc2aba5fa7903c85f07f07ae0f0b046aa7e0e"
+    "sha256": "e0e78feca58908d9cff5f7ea997fb3422c9e4b20281bd85f1ed79093c6a908bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2cce5089ee0fa6a06dfade851b64c3089ad6097a6bd9a4bee03ad17d54b76577",
+      "sha256": "b8cd8161204cfe82b7fb2dc6e08ec515b9f31ada9e3c775b530f240f0dd5306f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 53.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asterope/asterope-shape-surface@2x.webp",
           "polesUrl": "/scenes/asterope/asterope-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asterope",
-    "materialSha256": "f58a2b73e1970f130791068016dd0f03cb2205f30b987f728e0c217cb80ad08d",
+    "materialSha256": "428727c40007e248daa7b48ef844809a7fd3a83c2dd6c20755133a9282c0f5b1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

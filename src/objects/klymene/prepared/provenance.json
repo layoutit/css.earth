@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ce12a7984e7e969396d0a020b30b0a3ae911235bdbae6c736e7ab5856261891"
+    "sha256": "830c7ef39dda0ad72b90766f8b72d0b13fe6d178e8ec1f0aff06bcd1bcaa5659"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "82cedb7db8baef7e9a92474603bc07abc479a05be21b9d6e6684cdb1acc3515c",
+      "sha256": "7f5de958f5cb2e883947df7ca9e6c947a7c5f32250115e4b145158e28e80f162",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 63.25,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/klymene/klymene-shape-surface@2x.webp",
           "polesUrl": "/scenes/klymene/klymene-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "klymene",
-    "materialSha256": "0335619c4faf8918bb9f785977fe6165be52d81e23abdf780db0b130872996fc",
+    "materialSha256": "155ff2a449d7c10337abc8e12336296b0a04fd1304cac74389b2d384004406e4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

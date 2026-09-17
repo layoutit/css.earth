@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "73824325553f5b10b32e16ffe74510d0a8c384e3c8ac53d403f4e4680aebd6bf"
+    "sha256": "1d4504b4a6b37032b7c55d7ea278dd2e483bd3a5b0d5dd89511a55bfbb33c41b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b57d2538403f569a8860a964e9d76af73c6dd635957117084629f53ac9839e66",
+      "sha256": "2eb4f536d532eea368393c53f3682f95d769e59c11ff3cc5d87c9a42d0aa5f6d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 5.1,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.759769814513571
           },
           "mapUrl": "/scenes/erriapus/erriapus-model-surface@2x.webp",
@@ -435,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "erriapus",
-    "materialSha256": "d9cbbab465a24a9770366ba41ec1e70e1b3e8049a769a06a2fe80c6886716993",
+    "materialSha256": "21e7f3f5ce545d5e277dcf9548f14a1efdff669c0a5f44847c0a413400a1df1a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

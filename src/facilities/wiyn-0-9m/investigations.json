@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "wiyn-0-9m",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "NOIRLab's Astro Data Archive holds this telescope's data under the code kp09m (HDI, an earlier CCD imager and Mosaic frames) and needs no account for public data. Simple Image Access, not TAP.",
+      "revisitWhen": "A body in this repository needs WIYN 0.9-metre data.",
+      "evidence": [
+        "https://astroarchive.noirlab.edu/about/",
+        "https://astroarchive.noirlab.edu/faq/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "The NOIRLab archive policy applies: usually 18 months, then public without an account. The telescope's own pages state no data policy, licence or acknowledgement wording.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://astroarchive.noirlab.edu/faq/",
+        "https://www.wiyn.org/0.9m/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "No official reduction package is published for its instruments by the observatory or NOIRLab.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://www.wiyn.org/0.9m/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

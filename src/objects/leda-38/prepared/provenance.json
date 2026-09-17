@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0b866fde8d18f28ebfdac9fab75772c5cb696ab9dabd9dce2b07980d0038f575"
+    "sha256": "6c3d50f137a239de8b86e1e8808a9f7e96e3347d55896a9cbc2716633fb1a139"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "95f1c45ad92645054c12e3b432f35d7ef4b3b19e1dbf705820319ad7017bb7dc",
+      "sha256": "8c491a6746908c3278f991dc68bc4224757219526f5207e3452895da8e22be00",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 57.11,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/leda-38/leda-38-shape-surface@2x.webp",
           "polesUrl": "/scenes/leda-38/leda-38-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "leda-38",
-    "materialSha256": "adc0be6b73e163588c81a6f857f5a394702594dd6d8222cbe4e9cec43911857c",
+    "materialSha256": "e5ab8e91c4c1f3395be95a023c73402d156c2367dc6a47859b70f8094624359a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

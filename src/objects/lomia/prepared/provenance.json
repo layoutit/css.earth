@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6fe9948161bf4508d494a0896d631420239563824ed9bd08d993543b0a793f91"
+    "sha256": "ad3ff83f5cc02d09d77649891556a47e2be71c731cf3869f0cd45e53802d0d98"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bfcb17f02e0b60264a5a99c3bbd4c0a63b9244899bc08bfecefb2f054edcb94a",
+      "sha256": "4731f00baa41f146dda3949482790d829a82b730f5fd6b78a6c24c6430b59be4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 72.46,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lomia/lomia-shape-surface@2x.webp",
           "polesUrl": "/scenes/lomia/lomia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lomia",
-    "materialSha256": "231aec898897f8b6c3b4012189c55b6e7c2ffcb88d13c72b820822860bd38b7c",
+    "materialSha256": "4c9f1639cf94d484c8c0f80e26f48ad217ff01377d6c0b0ba25e69c6f553d898",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

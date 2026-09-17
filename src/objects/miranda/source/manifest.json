@@ -46,8 +46,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download"
           }
@@ -108,8 +108,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download"
           }
@@ -1495,8 +1495,8 @@
     {
       "id": "miranda-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 309,
-      "expectedSha256": "cd912cd52e1befd4e90e7f3482d4666aac101637d1c272a992fddd5711695ab8",
+      "expectedBytes": 208,
+      "expectedSha256": "b4efcc19f171b03717ddbe01c09977d089f2905a7ee6e71879dfa0d0c9f8d230",
       "origin": "Repository-authored Miranda solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

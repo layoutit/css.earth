@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "397f83d552695d0f2fc41664e39144bd5c8bffc91fd3f38a557f14689d0b41d7"
+    "sha256": "2723c012540e199431336c6283be9db386313300a236e33e5cea7dcb8d98b2f8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d118f06043a73eb6aa08295d58b0772f6967accbb8c7dbe10712d34184c4ae07",
+      "sha256": "1cb0fdb8e466e0fc3b733c69fe23e5b668f41815362764ec9584feff3291be6a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 84.18,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/freia/freia-shape-surface@2x.webp",
           "polesUrl": "/scenes/freia/freia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "freia",
-    "materialSha256": "194460afb1d86d9c8d205055e5cffd3fc7c8192bfb9f876b7548886325d93027",
+    "materialSha256": "af6fd6ebe1ad72d0f41f509d05e26d3a053ee6b569d92ff230f865d003b0c5af",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

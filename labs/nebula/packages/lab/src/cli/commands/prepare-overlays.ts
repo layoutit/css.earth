@@ -1,7 +1,7 @@
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Prepare WCS-positioned photographic inspection planes; no nebula extraction or image fitting. */
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
@@ -10,6 +10,8 @@ import { overlayCorners, type ImageWcs, type OverlayFrame } from '@cssearth/volu
 import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement } from '@cssearth/volume-core/coordinates/overlay-placement';
 import { transferOverlayAlignment } from '@cssearth/volume-core/coordinates/overlay-alignment';
 import { registeredOverlayCorners, type ImageRegistration } from '@cssearth/volume-core/coordinates/overlay-registration';
+import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
+import { composeSkyBandSource, verifySkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 
 interface InputImage {
   id: string; label: string; path: string; sha256: string; url?: string;
@@ -19,12 +21,34 @@ interface InputImage {
   registrationNote: string; maxPixels?: number; legacyPlacementBasis?: string; useSavedAlignment?: boolean;
   /** Pinned publisher TIFFs can contain individual compressed strips larger than libtiff's default allocation limit. */
   allowLargeTiff?: boolean;
+  /** Composed from a pinned survey band recipe instead of downloaded; `path` is then its hash-named composite and `wcs` its grid. */
+  skyBands?: { path: string; sha256: string };
 }
 interface Recipe {
   schema: 'cssearth-nebula-overlay-recipe@1'; maxPixels: number;
   targets: { directory: string; referenceObject: string; images: InputImage[]; alignment?: { path: string; sha256: string } }[];
 }
+async function skyBandBytes(input: InputImage) {
+  if (!input.skyBands || input.url || !input.wcs || !/^[0-9a-f]{64}$/.test(input.skyBands.sha256)) throw new TypeError(`A sky band image names its recipe and grid WCS, not a URL: ${input.id}`);
+  const source = { id: input.id, width: input.wcs.referenceDimension[0], height: input.wcs.referenceDimension[1], wcs: input.wcs, skyBands: input.skyBands };
+  // Always verify the recipe and grid first, so a warm composite cache cannot hide a changed or missing recipe.
+  await verifySkyBandSource(source);
+  if (basename(input.path) !== skyBandCompositeFile(input.id, input.sha256)) throw new TypeError(`A sky band composite is cached under its own hash: ${input.id}`);
+  let bytes = await readFile(input.path).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+  if (!bytes) {
+    console.log(`OVERLAY_COMPOSE ${input.id}`);
+    const composed = await composeSkyBandSource(source);
+    if (composed.sha256 !== input.sha256) throw new Error(`Composed sky band raster ${composed.sha256} differs from its pin: ${input.id}`);
+    await mkdir(dirname(input.path), { recursive: true });
+    await writeFile(`${input.path}.sky-bands.json`, JSON.stringify(composed.evidence, null, 2) + '\n');
+    await writeFile(`${input.path}.part`, composed.bytes); await rename(`${input.path}.part`, input.path);
+    bytes = composed.bytes;
+  }
+  if (sha256(bytes) !== input.sha256) throw new Error(`Changed sky band composite: ${input.path}`);
+  return bytes;
+}
 async function inputBytes(input: InputImage) {
+  if (input.skyBands) return skyBandBytes(input);
   let bytes = await readFile(input.path).catch(() => null);
   if ((!bytes || sha256(bytes) !== input.sha256) && input.url) {
     const response = await fetch(input.url, { signal: AbortSignal.timeout(60000) });

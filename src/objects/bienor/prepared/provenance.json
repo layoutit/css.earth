@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "17cebb9ae90477b0fab4a2ce1ac28125e501ad02d03616b030e6be34ff15a2af"
+    "sha256": "8d5f6277f26b81adbce4c96850581104b84c5152c8754e0b8ec559eecb3ba5dc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b94d05df463fc264a29fded4bef1550505b283430d30958efc9884c09d829fb4",
+      "sha256": "79e9af13abfa3778bd55151fe8aa16585f4b3b928cf9709473192e6ff010fd3e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 67.99228574542066,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.5353723287040997
           },
           "mapUrl": "/scenes/bienor/bienor-model-surface@2x.webp",
@@ -427,7 +425,7 @@
   },
   "lastPreparation": {
     "objectId": "bienor",
-    "materialSha256": "7491f2f252784ca80f2670022dd6a6e4105594a52c694a3c563b9310a2e7420d",
+    "materialSha256": "b6dbf3256d68968c80655c26c4c37809f14ffe46381324a2d8c93906c0c22100",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

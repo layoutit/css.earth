@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f3e8a6ede9df0e0a1b98d41cf360080004d360f3f48c7b867f9f1ef77779f147"
+    "sha256": "5edf1096cda6e0fe1fb68c67b9a041d41ac4683b134712e109e96ecf27a5e66f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8d0d885e1c3688b802bcabf429bfb30972eebdc351edb468aa0c318e12526379",
+      "sha256": "fb24b67829ba80bb566839ca7cd672ce535f2573f192bd1cc4e8854dc9f56bdf",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 26.41,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lucia/lucia-shape-surface@2x.webp",
           "polesUrl": "/scenes/lucia/lucia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lucia",
-    "materialSha256": "0ca388869c525b4d063caa38390665c0f635789817c767daabb46207d42081a1",
+    "materialSha256": "24e42677b3667b7985a35b740f0bebf45f26ef43a434af70723a4cdf5d1ee74b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

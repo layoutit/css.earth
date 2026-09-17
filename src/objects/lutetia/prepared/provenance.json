@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49698654755fe48cf12186255a69cd6c72c1efd1697785cebccccccc80844581"
+    "sha256": "7b558161e3d345dc23d1995041c1364a780898e3e00256da7be1ac73c2e57c3f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "40c8bbb118f93df645b4d9c472259d839c674909dc4d636ce094ca597dbbeb20",
+      "sha256": "c635611a2b9fbb77f7b83a9510cfd8cf6d394450995fe6aebb1a5ec7b488c726",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -167,10 +167,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 49,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "polesUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
           "radialTerrain": {
@@ -465,8 +461,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
             "missionId": "rosetta"
           }
@@ -1100,7 +1096,7 @@
   },
   "lastPreparation": {
     "objectId": "lutetia",
-    "materialSha256": "88da933cf115c4713f89f07b5c971a7a0c1c7c21442c1e01e4e3f6724dc64444",
+    "materialSha256": "8de2b43f520eca1cedd1172280ed58a9953acc1fafb8aa44fd672ea7a32fc1dc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

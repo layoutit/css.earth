@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14cfbdd9de368edc3a98c2cdb6826d8e634d6d623d37fe8041464a7601ac7d0a"
+    "sha256": "a5f5165b295101c546f8ede0e8a8c883997de052df069ed6e3972960be4bf896"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "300108ebe18db0835665c0192b8ed00e79cdd9b6eb8da8b40e5de8fc929ca667",
+      "sha256": "54046a38c3fb1409cd9248ec99b4ba33f8a0223690bb923694501e90433aa16b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 29.3,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/alkmene/alkmene-shape-surface@2x.webp",
           "polesUrl": "/scenes/alkmene/alkmene-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "alkmene",
-    "materialSha256": "4a96041f590487fd77e22c7cd51f7e8dbd37f19a52b9d209acde9c3dbd4a8f1e",
+    "materialSha256": "6b680291c34ec40cba5d8b3fe8393b32e7cddfc95aa944073268fc7c7261da85",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

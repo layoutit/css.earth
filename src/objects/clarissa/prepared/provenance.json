@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4b85f14a491a59cae3c5a878fc0b16d68443d57bf5074e2dfb0998f2c3eda374"
+    "sha256": "e6e5616847570f5882326ab24d26da9260431e2c9eadcd094412f190a2647732"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1f0e793324359c1c97f40be9f5b0c45c6187e8e995ac59de40f9be5ae90364ee",
+      "sha256": "d4676e8f70248470f51ef0a0a08f5351ac3ea9f2e0bc2dab4f77fa1113a204d8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 21.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/clarissa/clarissa-shape-surface@2x.webp",
           "polesUrl": "/scenes/clarissa/clarissa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "clarissa",
-    "materialSha256": "1033291c9948d5bf99418d1e9e8036ee6ace6becf6793505d475d82a35ada275",
+    "materialSha256": "d7790462f915b284e5ee56da46b9d43e765ab1d9a268d3c745ec451cdcdda092",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

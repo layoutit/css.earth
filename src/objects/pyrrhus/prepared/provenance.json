@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ae44b17fcf37a99520e442059341625898f1c302922a6a57b542fbb014b158d8"
+    "sha256": "e14afc0f9b5a0d2f255b77d67e4c12c00e92aad76b950823a2c7fee21359a257"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b468052f4d89e5ea418dddcc01f114957ee204eb414842e5ae45b23462b3cb09",
+      "sha256": "00a2cad56309ae5699ca101215feace1afb784a1a520f4b9ff1c3bbe7fbb1a67",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 24.178,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.7184721145910395
           },
           "mapUrl": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "pyrrhus",
-    "materialSha256": "8ba467fb716015761d1f84e61c305aaed9c42d6ce9b4b9d31fde04763c4fffb5",
+    "materialSha256": "59b606d30eb704f3bd68d0041bbdec96cc50fe9db3292cfa19a98a776fe74164",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "765429bcbd673e2f44fd7a3a512f098c23c4661c1a65b094536e2c8e2cb1f6fb"
+    "sha256": "ec32da6be53d4d395abe0fe1a003066c2abc7f275ed3981386bfad4e8f149d3c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "106792a875d71fe5553bc7101b71cde050f1733d5033b606859d1fdfc6b7d9eb",
+      "sha256": "03d1d7d7c612a08adb795abda403ded22bb8e9e59c8b6e00818f336f8a1d1272",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.165,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/nereus/nereus-shape-surface@2x.webp",
           "polesUrl": "/scenes/nereus/nereus-shape-surface@2x.webp",
           "radialTerrain": {
@@ -324,14 +320,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -573,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "nereus",
-    "materialSha256": "85abb0d3be91253241278aab866635035308bbf28644969e30f8774a752e3c72",
+    "materialSha256": "e8fd4d297cb4f5304ea409e00d5d5617a2075642d49b53e45ceb3d992d6959f5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

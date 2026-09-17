@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 1.75,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/toro/toro-shape-surface@2x.webp",
     "polesUrl": "/scenes/toro/toro-shape-surface@2x.webp",
     "radialTerrain": {

@@ -12,7 +12,7 @@ Approximate orbital placement. The 3.11 km separation and 52.67-hour period are 
 
 The shared missing-imagery grid covers the surface. The body uses the existing generic object adapter, one shared world camera and retained PolyCSS geometry. The selector detail is **Lucy**.
 
-## Scientific sources
+## Sources
 
 [Investigation ledger](investigations.json): recorded source decisions, evidence and conditions for revisiting them.
 

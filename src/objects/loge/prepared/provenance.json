@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7d8245bd2cb41f9af629537a80c44a26af4105615994bf3fe4f57cc18dc9a95"
+    "sha256": "9b2db7140a710c5060d4bdb1e2a31613e18a71fe888b1e40f7088a57db1e8b97"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "02c2bc19bd1aa321854152fa4fd625e8cc810aebdc95a42067e36e76d141f9e1",
+      "sha256": "cb84c4c71e530f6f3c748c885f57ceb78730f2a0b390e6371c192402dff3c819",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 2.4,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9741917344424781
           },
           "mapUrl": "/scenes/loge/loge-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "loge",
-    "materialSha256": "9c8c6e4fd07c59ee24fc0e4d63656625e1723b57b1766303e0fdd0d29b5a0685",
+    "materialSha256": "128665d30d44384af5b417d3991eb2f3f0f231434e31c64fd39bed8483ae7af1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

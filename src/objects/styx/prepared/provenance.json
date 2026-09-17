@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e0e518b277f8dc4c34421296f517eb1fd8faa2759957650be05b878bf99eff9"
+    "sha256": "573e91fa80f34dd9e60d6dfcf1d73f976218cd07d7f0f45eb8e90000b12cfee1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0d52015aac231c872c200f2069ab53211b91f9f9d70847d3d49371e99a74a180",
+      "sha256": "1db506dafc1bc48d3956f22145d4f0e1a8b9203422963fcfd56c09ffc00cb3f3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -84,10 +84,6 @@
               "method": "source-meshoptimizer"
             },
             "primitive": "u"
-          },
-          "camera": {
-            "initialScenePitchDegrees": -50.78267466670684,
-            "defaultControlYawDegrees": -48.51920414619491
           }
         },
         "celestial": {
@@ -432,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "styx",
-    "materialSha256": "1ef40cf319bffbf0c9211f816e77598e70345c941b15db9bd8994733eaff00a3",
+    "materialSha256": "be0adcf676e955f2930257d6d8657c4fe96b845d3f1728ebebd7906c56acdff5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

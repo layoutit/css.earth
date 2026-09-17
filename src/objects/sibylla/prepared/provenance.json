@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d08c6ceacbe94a1dafbd4f7961c972f1a88ef5a177271217a5a4600aeca6fbdc"
+    "sha256": "9e40d6016e85c0729faf4b5b4016f1478f8806ab4f54c705aa16fbc2740bc50d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9c24b2cc2252d177f6991a843cb6d12609db93dedaa3cb13f6a223889505f336",
+      "sha256": "6d7b5ab41d52ab028a15d6c21299453801e2d2375128c614c5371bcdf3e2bc04",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 73.24,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/sibylla/sibylla-shape-surface@2x.webp",
           "polesUrl": "/scenes/sibylla/sibylla-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "sibylla",
-    "materialSha256": "0390f146c0f92b8f61825382775df6c61902e5698af78936f240905c2f8594e4",
+    "materialSha256": "6ac0170308ba242b362f0dce3514d1aaccb8be6b077d22a6352e3682fee34106",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

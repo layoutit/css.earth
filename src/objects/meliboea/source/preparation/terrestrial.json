@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 71.885,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/meliboea/meliboea-shape-surface@2x.webp",
     "polesUrl": "/scenes/meliboea/meliboea-shape-surface@2x.webp",
     "radialTerrain": {

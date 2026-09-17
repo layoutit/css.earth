@@ -15,14 +15,14 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
-    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 1],
+    ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 5],
   ]);
   assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));
   const sourceFiles = await readdir(resolve(root, 'src/sources'));
   const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records: await Promise.all(sourceFiles.filter(path => path.endsWith('.json')).map(async path => JSON.parse(await readFile(resolve(root, 'src/sources', path), 'utf8')))) }));
   const agencies = parseAgencies(JSON.parse(await readFile(resolve(root, 'site/source/agency-logos.json'), 'utf8')));
-  const catalog = parseExplorationCatalog(JSON.parse(await readFile(resolve(root, 'site/source/machines/catalog.json'), 'utf8')), agencies, sources);
+  const catalog = parseExplorationCatalog(JSON.parse(await readFile(resolve(root, 'site/source/facilities/catalog.json'), 'utf8')), agencies, sources);
   const usage = compileSourceUsage(entries, sources), graph = compileContributions(entries, catalog);
   for (const entry of entries) {
     assert.equal(entry.provenance.basis, 'recovered');
@@ -67,13 +67,13 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const lmc = entries.find(entry => entry.id === 'lmc');
   assert.ok(lmc);
   for (const product of lmc.provenance.products) for (const id of ['density-prior', 'catalogue-stars', 'sky-registration']) assert.ok(product.inputs.includes(id));
-  const hubble = graph.edges.filter(edge => edge.objectId === 'm2-9' && edge.attribution.kind === 'machine');
-  assert.ok(hubble.some(edge => edge.attribution.kind === 'machine' && edge.attribution.machineId === 'hubble'));
+  const hubble = graph.edges.filter(edge => edge.objectId === 'm2-9' && edge.attribution.kind === 'facility');
+  assert.ok(hubble.some(edge => edge.attribution.kind === 'facility' && edge.attribution.facilityId === 'hubble'));
   const captures = entries.flatMap(entry => entry.provenance.sources.flatMap(source => source.lensId ? (source.capture?.attributions ?? []).map(attribution => ({ objectId: entry.id, lensId: source.lensId, attribution })) : []));
   const legacyCaptures = captures.filter(capture => ['helix', 'lmc', 'm2-9', 'm42'].includes(capture.objectId));
   assert.equal(legacyCaptures.length, 9);
   assert.deepEqual(legacyCaptures.filter(capture => capture.attribution.kind === 'unresolved').map(capture => `${capture.objectId}/${capture.lensId}`), ['lmc/horalek-widefield']);
-  assert.deepEqual([...new Set(legacyCaptures.flatMap(capture => capture.attribution.kind === 'machine' ? [capture.attribution.machineId] : []))].sort(), ['eso-3-6m', 'hubble', 'mpg-eso-2-2m', 'vista', 'vst', 'wise']);
+  assert.deepEqual([...new Set(legacyCaptures.flatMap(capture => capture.attribution.kind === 'facility' ? [capture.attribution.facilityId] : []))].sort(), ['eso-3-6m', 'hubble', 'mpg-eso-2-2m', 'vista', 'vst', 'wise']);
   const newEntries = entries.filter(entry => ['m1', 'm45', 'm8'].includes(entry.id));
   const newLenses = newEntries.flatMap(entry => entry.controls.map(control => `${entry.id}/${control.id}`)).sort();
   assert.equal(newLenses.length, 14);
@@ -82,22 +82,22 @@ test('all installed volume lenses retain real source-to-product edges', async ()
     'All fourteen added observations name their actual known observing equipment.');
   assert.deepEqual(newCaptures.map(capture => [
     `${capture.objectId}/${capture.lensId}`, capture.attribution.kind,
-    capture.attribution.kind === 'machine' ? capture.attribution.machineId : null,
+    capture.attribution.kind === 'facility' ? capture.attribution.facilityId : null,
   ]).sort((left, right) => String(left[0]).localeCompare(String(right[0]))), [
-    ['m1/chandra-xray', 'machine', 'chandra'],
-    ['m1/hubble-optical', 'machine', 'hubble'],
-    ['m1/spitzer-infrared', 'machine', 'spitzer'],
-    ['m1/vla-radio', 'machine', 'vla'],
-    ['m1/webb-components', 'machine', 'webb'],
-    ['m1/webb-infrared', 'machine', 'webb'],
-    ['m45/noirlab-optical', 'machine', 'wiyn-0-9m'],
-    ['m45/optical-composite', 'machine', 'niittee-sharpstar-61edph-iii'],
-    ['m45/spitzer-irac', 'machine', 'spitzer'],
-    ['m45/spitzer-irac-mips', 'machine', 'spitzer'],
-    ['m45/wise-four-band', 'machine', 'wise'],
-    ['m8/eso-optical', 'machine', 'mpg-eso-2-2m'],
-    ['m8/eso-vista', 'machine', 'vista'],
-    ['m8/spitzer-mid-infrared', 'machine', 'spitzer'],
+    ['m1/chandra-xray', 'facility', 'chandra'],
+    ['m1/hubble-optical', 'facility', 'hubble'],
+    ['m1/spitzer-infrared', 'facility', 'spitzer'],
+    ['m1/vla-radio', 'facility', 'vla'],
+    ['m1/webb-components', 'facility', 'webb'],
+    ['m1/webb-infrared', 'facility', 'webb'],
+    ['m45/noirlab-optical', 'facility', 'wiyn-0-9m'],
+    ['m45/optical-composite', 'facility', 'niittee-sharpstar-61edph-iii'],
+    ['m45/spitzer-irac', 'facility', 'spitzer'],
+    ['m45/spitzer-irac-mips', 'facility', 'spitzer'],
+    ['m45/wise-four-band', 'facility', 'wise'],
+    ['m8/eso-optical', 'facility', 'mpg-eso-2-2m'],
+    ['m8/eso-vista', 'facility', 'vista'],
+    ['m8/spitzer-mid-infrared', 'facility', 'spitzer'],
   ]);
 });
 
@@ -127,12 +127,12 @@ test('image-layer deliveries retain authored documents and every layer in matchi
   const fixture = await mkdtemp(resolve(tmpdir(), 'image-layer-provenance-'));
   try {
     await mkdir(resolve(fixture, 'src/objects'), { recursive: true });
-    for (const id of ['m31', 'm33', 'smc']) await mkdir(resolve(fixture, 'src/objects', id));
-    for (const path of ['tools', 'site', ...['m31', 'm33', 'smc'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
+    for (const id of ['m31', 'm33']) await mkdir(resolve(fixture, 'src/objects', id));
+    for (const path of ['tools', 'site', ...['m31', 'm33'].flatMap(id => ['source', 'prepared', 'object.json'].map(name => `src/objects/${id}/${name}`))]) {
       await symlink(resolve(root, path), resolve(fixture, path));
     }
     const entries = await prepareVolumeProvenance({ root: fixture });
-    assert.equal(entries.length, 3);
+    assert.equal(entries.length, 2);
     for (const entry of entries) {
       assert.equal(entry.provenance.sources.filter(source => source.kind === 'authored-document').length, 3);
       const bank = sourceObject(JSON.parse(await readFile(resolve(root, entry.base, 'prepared/image-layers.json'), 'utf8')));

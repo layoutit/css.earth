@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dc04ed75ed8cd527eba61208926f97706c7eb9c2e19305234c81f2cdc3ad4c17"
+    "sha256": "e9711cf7bc9ea5c79d03c3c8e7ac7561f3247a278a39debddcf1260c237b9e75"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9c779533a7dade7d76b148153c4965bbb853ba7d4ddd45c77dd343788b193ae8",
+      "sha256": "87ac928647eafd86ac66e6b4f0eddd33ead17c589a2fde95be5403fbc499d696",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 27.325,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/byblis/byblis-shape-surface@2x.webp",
           "polesUrl": "/scenes/byblis/byblis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "byblis",
-    "materialSha256": "2e2a17072df87578764eedd75f45ff0777860fca9bf16cf9636d3ef544e09e9a",
+    "materialSha256": "243a826878fb980be5af64a70c6239ba4dc643ac9d075930d7fe0010ecd1b436",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

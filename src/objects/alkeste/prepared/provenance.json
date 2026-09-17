@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37ff7700f336f2678e89d46830e11b9aa45342b441def4c9fca40685179a8a08"
+    "sha256": "bafd739120188f3aa33b2598b3fe0ed8de02eb16a7c6338efd333b75d88aa911"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6ca153f2e82457538eebb8ec035e5932ad8b6bc6537b2cf85c75ed834028a5d1",
+      "sha256": "07997ff0a7f6b0dc6a08ec1199df134f24bf8df231351c309267971121229dcc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 40.695,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/alkeste/alkeste-shape-surface@2x.webp",
           "polesUrl": "/scenes/alkeste/alkeste-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "alkeste",
-    "materialSha256": "9dc8aa3b367c4562be9fa133be5af521a969e1d158edfa56805babfb1f75305e",
+    "materialSha256": "66881085e0ab6c4e404c5608f66ab56f85209a8c705bd498b7d66a07d03faf54",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3cdcbe350ba5cd55343a1cdd28ccb680e28e80a50ef36e189cd8a079617b561c"
+    "sha256": "3d5b6935209a39dfbf5f058643cae1c3a8669e7ad723bec7147ca49a718563ce"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9fa7806e8672a91b271fa976a1ebdc3298448a50d20320ffbe6028879aab3e16",
+      "sha256": "df9b680e54b1cf996cf796897e5cb5c7dcfe83288e5d167f29a1266346e90d03",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -214,10 +214,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 49.3,
-          "camera": {
-            "initialScenePitchDegrees": 1.3844904258175654,
-            "defaultControlYawDegrees": -32.58208818766587
-          },
           "mapUrl": "/scenes/thebe/thebe-normal-surface@2x.webp",
           "polesUrl": "/scenes/thebe/thebe-normal-poles@2x.webp",
           "radialTerrain": {
@@ -521,8 +517,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401759200R.IMG",
             "missionId": "galileo"
           }
@@ -568,8 +564,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401759200R.LBL",
             "missionId": "galileo"
           }
@@ -622,8 +618,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401787200R.IMG",
             "missionId": "galileo"
           }
@@ -669,8 +665,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401787200R.LBL",
             "missionId": "galileo"
           }
@@ -723,8 +719,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420691700R.IMG",
             "missionId": "galileo"
           }
@@ -770,8 +766,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420691700R.LBL",
             "missionId": "galileo"
           }
@@ -824,8 +820,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.IMG",
             "missionId": "galileo"
           }
@@ -871,8 +867,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.LBL",
             "missionId": "galileo"
           }
@@ -1244,7 +1240,7 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "f8ccaa6c8798636d3962fa2dc53e43d0b2ea597c4b6752de694631f28d4b10d3",
+    "materialSha256": "8e31c857c2c61c4a28d727a854e31f23eb30a071b79b4b28a444e3b0cf286cf1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

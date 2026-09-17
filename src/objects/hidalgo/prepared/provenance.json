@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2861dbe1f473b7edecf78b9c91cdfe5bab6e50f6a8946766a6a9bf7de43e69d2"
+    "sha256": "1e81c1944c5b00078cd1ae711c14654b06ea0ebfbb35e3840c2e13d0f63d1ae0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d9b3626fb6a07992aba7fba2b7b14f96a52ef27b9dc7c314dbac37511f31c1ff",
+      "sha256": "633a05975a6afcf1672fb733e8e677ca11c1a218c552b03cd1b3b365946cce1e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 30.7,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hidalgo/hidalgo-shape-surface@2x.webp",
           "polesUrl": "/scenes/hidalgo/hidalgo-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hidalgo",
-    "materialSha256": "8f68c4f37dc62a9171c983b1e17f1b32ea587b607b7daedcc7b1f84fa67d998f",
+    "materialSha256": "2fd4e0b82f3afdc296d8d13c9af7a49d886d0669c9d541902253177ea41b7f90",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

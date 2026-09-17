@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1966323e0dd007b755e8534a4fb8faed2a44d3501d980884440a6b1a21c393b9"
+    "sha256": "93d505687fb08a92723b44c1cf9eaeba7b8d4f96e7c434f07796c69716e240f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3d17db261d7f6a8e90ec9eeca404e6f1822353cf5949afc6870999e254ab8bc0",
+      "sha256": "36ce547b373310bbf74959d035e5be114c7cd28a0f8db20f43236516828a1495",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 74.01,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/pales/pales-shape-surface@2x.webp",
           "polesUrl": "/scenes/pales/pales-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "pales",
-    "materialSha256": "0b744664d8eb7168cd28719730cd633b15ec6231e79a6d0e105df828e11315b1",
+    "materialSha256": "bb11454fb727ec43894b74ee1622de4b5c186beb0092fb03b3fff2a4f3504faa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb6ab37b2ba6978b3855169e90dacc495225cce192821397130fc933757d918f"
+    "sha256": "83bad91ecbe6c38948e6b3f8a7036d77e237dfc9187637ae08b195b822a10319"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "15e45cca33c65725018fd9d2c98767e02ed3eac9cf2fa1085f956b86bdba92ce",
+      "sha256": "dfd8a8602294a1a641d8fc6477c24884443a0d6445aabc58b619093bf9f731f5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 46.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/feronia/feronia-shape-surface@2x.webp",
           "polesUrl": "/scenes/feronia/feronia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "feronia",
-    "materialSha256": "7b693397fe2a476c34fb9d66279826d8c8c90942f30d8738b154fcb18474cce0",
+    "materialSha256": "b9bb431a8aa627682f128ec6361963e0db38c6ccca8d8a88c9c676b7c5f70157",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

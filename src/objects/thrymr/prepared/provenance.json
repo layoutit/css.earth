@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "254a6f1f774806366c5f1aece8490d3da8c6b67d97b88bd2f18f950fbe3dce36"
+    "sha256": "4cb3e4225616a78e499d9feae253ff4f855f0455f310f3cd764e10b7e335639b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "968c490518c4ac89185d1bc94cf6534e2fbb7938025dc44323ba2fa3fb62a967",
+      "sha256": "bd3fa2cb799cba2e8ebe9e2a054e150ccfc2f3b91f7dbdb944aa7f779dea3c14",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 3.8,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8806630055922403
           },
           "mapUrl": "/scenes/thrymr/thrymr-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "thrymr",
-    "materialSha256": "7f784927bc0dbaa6fb7271d3f9fdda177336ad1fc3afa15869291cf749a3f355",
+    "materialSha256": "0267939636069fa859385ea4f758456966f0a6ff4517ed813615d34781237104",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

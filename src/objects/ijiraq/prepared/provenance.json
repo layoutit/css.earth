@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1a434d43f683f5ae05bd66b3d5cfc7ac6bde1923268f18386aad3e2c08271849"
+    "sha256": "ba93503975908b9ef10482f775fd16ea7bb66983ff64f2ab5cd630847fd80793"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d8f52ad91b5517bfde6b24800320143b661c76677e67fd3743680f450d86598f",
+      "sha256": "07846d95e458a92ed1ab42f464e4af8c0cc4a3727f6e9fa9048599ce96cf27cd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 6.4,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9499866370426093
           },
           "mapUrl": "/scenes/ijiraq/ijiraq-model-surface@2x.webp",
@@ -435,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "ijiraq",
-    "materialSha256": "6951084ccdabc9a2b11d2f001f9ab5be302b12f1d430b9462624a608e4863d97",
+    "materialSha256": "a538a84fa387df32435eb47f38bfdaf6656d364ea2c680f67afda19dae23cd98",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

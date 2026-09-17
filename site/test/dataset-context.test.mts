@@ -7,7 +7,7 @@ import { parsePreparedExploration } from '../../src/platform/prepared-exploratio
 
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 const prepared = parsePreparedSources(await read('../prepared-sources.json'));
-const exploration = parsePreparedExploration(await read('../prepared-machines.json'), prepared.sources);
+const exploration = parsePreparedExploration(await read('../prepared-facilities.json'), prepared.sources);
 const context = (objectId: string, lensId: string) => datasetContributors(objectId, lensId, exploration.graph, exploration.catalog);
 
 test('Mars elevation and thermal infrared select their own missions', () => {
@@ -29,5 +29,5 @@ test('unresolved capture attribution names the credited group without guessing a
 });
 
 test('an unknown dataset does not inherit another dataset’s contributors', () => {
-  assert.deepEqual(context('earth', 'missing-dataset'), { missions: [], machines: [], notes: [] });
+  assert.deepEqual(context('earth', 'missing-dataset'), { missions: [], facilities: [], notes: [] });
 });

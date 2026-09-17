@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa442a57d98cfd629a790a57e8e0fb6734af35444c7d3116a731f8ea3ae508ce"
+    "sha256": "4f76aa7251e58402b80d6c25ced84ac7d66936051e605734c3f850ec45e13d9b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "47a2f9ac369cb43d9c9bd9ab8918958228a9e326faf8d28b46e0ce2db2550d24",
+      "sha256": "2f32716f252713f26db9d6013cca73ccd219d47a8344570c4f9ebab3f8750c8a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 80,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/minerva/minerva-shape-surface@2x.webp",
           "polesUrl": "/scenes/minerva/minerva-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "minerva",
-    "materialSha256": "d612715f70ef239d8f754c3ec76b49c57b269233183aefec76108862e324305d",
+    "materialSha256": "17b426af8d25ae2df72443e49f6a98fa1b598591fc2922cbd155cb91b8087454",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

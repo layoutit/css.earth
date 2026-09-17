@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "128ed1f9d10d59f693b8ac2c938dc3f0657fbdd76cbc33f5394b107f81785826"
+    "sha256": "1b0ee1d921380e803c8d9d6763de31662f4d40359bac9260c9bcc6696098ec36"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e35a70f83de9ec34ee30b74dc06a7e8b77582233bf8d45a78301c540617863b3",
+      "sha256": "f9847727389034617532514a759bb9df3826b5a38a776169123652b40c3a8a9f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 497.49999999999983,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9999999999999997
           },
           "mapUrl": "/scenes/sedna/sedna-model-surface@2x.webp",
@@ -271,8 +269,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "herschel",
+            "kind": "facility",
+            "facilityId": "herschel",
             "evidence": "The preserved credit for this input reads: Pál et al. (2012), Herschel/PACS thermophysical analysis; Gaudi et al. (2005), rotational photometry."
           }
         ]
@@ -440,7 +438,7 @@
   },
   "lastPreparation": {
     "objectId": "sedna",
-    "materialSha256": "1757b312ad51a675fa1be6b46a7113e664887cce870112efe3caa56268e18fa5",
+    "materialSha256": "e544e1f0663f0dbbcdf4ce8737ca48b43697bb18be4edcb43d26717e2a3ed170",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

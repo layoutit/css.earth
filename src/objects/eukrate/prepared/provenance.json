@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "94d5b5a278e6b435e60fc40907d9b8b3a45e168bbaf345bd041b0f3ea9cd0d33"
+    "sha256": "72f106051eca9e76ef268c3cb7a7e8de9a78802680cac0e022216d07e6e44e9f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0ae31907565fd4b955477ec3e041945cdc87ec98e07fed0895a4eb02ced5597a",
+      "sha256": "eeca808cb42e59203963db6895084f6405a015cc61d75cc689015a0c0cd02e86",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 75.12,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/eukrate/eukrate-shape-surface@2x.webp",
           "polesUrl": "/scenes/eukrate/eukrate-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "eukrate",
-    "materialSha256": "680e7d50569bc01c640a43b1c59e7d4a777b2f0095f806ac213303bbbe25d601",
+    "materialSha256": "492ba70b4596de67bddf6cad527683591b37a60289ae006504d7c73012e7c7eb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

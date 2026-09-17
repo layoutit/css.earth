@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6eaab2401982195543d0df8a9dffe9ef9fbed471f5517cd0d5d55d48ba54e56f"
+    "sha256": "1636e3a9755cf46a85124949007c32a8267cae493fc053fae9fd5ff5e180da7c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fed41e05ba25de8d1476e26d28d58d36a1bd6035b27e405c81d630dacfc50f3c",
+      "sha256": "955ad6c52ddabc9a235d9d9345c1e3c2358000fd413b0881d405ffdda26b8940",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 92.915,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bertha/bertha-shape-surface@2x.webp",
           "polesUrl": "/scenes/bertha/bertha-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "bertha",
-    "materialSha256": "5bea8089105545fb4cdf68418a21dbb15ae4f2382ebd19914751eb047bd709e3",
+    "materialSha256": "77996250a0d047b23baca9df888bb3aaf543933d45f52d9b6b28e1cbb9cad522",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

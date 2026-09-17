@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "127fbe7984ad96e364a4db4a048dbf08b2d635644e9ab2a56d4993baf52da7ee"
+    "sha256": "1f8b44df5322188bf12847493e216b7764d894402fae02b0b566cff619d4ad0d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e41a8e97d1c63f16e0e0b5ff814ab8aac1e29d1284f38b39dc0716ba22791d59",
+      "sha256": "5a80f6273731def180995f793808aa8d850a1d9a5d1d88744f188d7a9ed02f18",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 20.414,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/selinur/selinur-shape-surface@2x.webp",
           "polesUrl": "/scenes/selinur/selinur-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "selinur",
-    "materialSha256": "7f54405ab342b844b878bea4e8f6880d8164434d89717b755f6c18769f29bab2",
+    "materialSha256": "474c47437a1d31d07fde2bdcba663c5b6d2ea704f6c5ed0ba1231bd2db645989",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

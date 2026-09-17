@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "393f95143239a71a47f51a8670de7522b8e5cc12e34eb63894f82e241efeb33b"
+    "sha256": "eac0b6b590112e902327a43daa64aa6ed90ac065b42b2e681014ec7584c08d9a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4bb4a3717c315de446c56bf3d68a29430efe0451231f37e859efa75d2ceddbe9",
+      "sha256": "6028f9b3011cb4760e49548a9fceddb3a749be7d0116175e0f0d02ad88ad4ecb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -164,10 +164,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.241,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "polesUrl": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "radialTerrain": {
@@ -484,8 +480,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
             "missionId": "osiris-rex"
           }
@@ -537,8 +533,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
             "missionId": "osiris-rex"
           }
@@ -593,8 +589,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif",
             "missionId": "osiris-rex"
           }
@@ -649,8 +645,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "osiris-rex",
+            "kind": "facility",
+            "facilityId": "osiris-rex",
             "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A.",
             "missionId": "osiris-rex"
           }
@@ -823,8 +819,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "593a9885578080b1e8512aa67688dd1839c2b2e6a4e5a523c0fa28e9b50d05db",
-      "bytes": 1863,
+      "sha256": "62c5010feeff32bf6b8f57287e869946bf15752ef680a5702c24bd529ebfa386",
+      "bytes": 1864,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1258,7 +1254,7 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "5826bc1d278362f2b0899646f8ce70e0093bf8824394de35b5ad5d93606eae60",
+    "materialSha256": "33b4a32f1e07c9cc1e74063ba9566115e1c7e3b34a3fedd5bf3a1f0f3c193588",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

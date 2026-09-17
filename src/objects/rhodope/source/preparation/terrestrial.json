@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 26.63,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/rhodope/rhodope-shape-surface@2x.webp",
     "polesUrl": "/scenes/rhodope/rhodope-shape-surface@2x.webp",
     "radialTerrain": {

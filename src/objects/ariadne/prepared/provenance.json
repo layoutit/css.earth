@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "72f2b58746345d72f322b7c834ea93915d72abdeec535248873e8064ee4ba943"
+    "sha256": "3d82ccc90e5cdc5c1411d4679e8c62dd891972929f1051ce4dcced14bf86d127"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "330d6a629fe10cce42e13d3f526ec5521d12a84f466a4da777712d00ca8e52af",
+      "sha256": "752843b32074870512b7e8a0795e6bc254875dbf201091dd232b3fe2c0a677f3",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 30,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ariadne/ariadne-shape-surface@2x.webp",
           "polesUrl": "/scenes/ariadne/ariadne-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ariadne",
-    "materialSha256": "aa201ddda5f65fba92b32a91b1f6b6a65b00f93802f3e622365b150a67aa9773",
+    "materialSha256": "66d3cff921ed83f888980316436467410f132fa3180216f2ab70ff2937f302c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

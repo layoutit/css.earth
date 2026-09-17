@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e74457c087a31cd21abfdf56fc7355eecc2cea1670d36562cf228070db3a2697"
+    "sha256": "c4a1c2aa4ced52d2ca075e19650d3c72b31a0b4e3cb44ea1097301346c07d444"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "109e24b57e1fe50a2fa72b85cbcdb9433a67a9c058bd84e77101c47c7ddc2b6b",
+      "sha256": "8a4ebb8f3afb2aba7ac47dd51201b9f531b87d3de94051d5c854c1870f0e729a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.2075,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1998-wt24/asteroid-1998-wt24-shape-surface@2x.webp",
           "radialTerrain": {
@@ -319,14 +315,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Busch et al. (2008), Icarus 195, 614–621; Arecibo, Goldstone and NASA/JPL",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -568,7 +564,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-wt24",
-    "materialSha256": "3078d4ae49f74f3a0362c43088932b4c8f99e5d23f2b89de89176a371ba67413",
+    "materialSha256": "c27a0eef3ccaa4cec17a8ef7c8bc4544786f893d696f749b960761cdcfecab71",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "877484f2e6d00e2972ac24c52ddba566eed60ee097a5d0a80ce1edb1b96b1000"
+    "sha256": "4fbcc0df65bfc3dc279259b321f728f3e5e5178ae5e5eb79f8d6d41dfe6247e7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9985f0d1d8fccdb71ff17005b06f762d1c5820cad33c658319110b871b65aeee",
+      "sha256": "8c38e9c88a7f93ca78fea1dac7ee59120cb5f1514e58cdba416b0e514e79717d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 16.145,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/stephania/stephania-shape-surface@2x.webp",
           "polesUrl": "/scenes/stephania/stephania-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "stephania",
-    "materialSha256": "cb382e35de91a8cb4f8ec5e0c3d8a0f28ad650762b6db79df49852970d5a564c",
+    "materialSha256": "dd013aa895db38d877a75fa00a3345c209eee6ed6b20a31e1de686cacd7a27f3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

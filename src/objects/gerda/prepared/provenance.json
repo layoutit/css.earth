@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "60d6f75098ff228784c0e7c45155b20faf3766c3796680f6b15183ac6edcf6eb"
+    "sha256": "39d08744ce0abd61fee224186edc24611c2c78d171db2ba014cd23b63a6e40ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "33aa115bd7c9957db267a74b5e9bc5bfefb8dabd3e5bf1c2a24e1ab8207cc570",
+      "sha256": "7915bdddcf5a86fa7a3c58d3ea679d0eb974c32406331bf570e884109efc605d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 42.705,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/gerda/gerda-shape-surface@2x.webp",
           "polesUrl": "/scenes/gerda/gerda-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "gerda",
-    "materialSha256": "aa0f2b296f1ebe0f199a17ed29e5d7aecc66d640cf702c4d726af0d9edcf1033",
+    "materialSha256": "110ca995528db5c27ed465fafab45c58e09d9a700b4efbfa6d22d4e56767e581",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,0 +1,120 @@
+{
+  "schema": "cssearth-star-season@1",
+  "id": "betelgeuse-matisse-2020-02",
+  "object": "betelgeuse",
+  "title": "Betelgeuse, VLTI/MATISSE LM band, five blocks on 8 and 19 February 2020 (ESO programme data imaged by Drevon et al. 2024)",
+  "instrument": "matisse",
+  "target": "ALF ORI",
+  "exposures": [
+    { "science": "MATIS.2020-02-08T00:06:12.142" },
+    { "science": "MATIS.2020-02-08T00:07:36.150" },
+    { "science": "MATIS.2020-02-08T00:09:00.803" },
+    { "science": "MATIS.2020-02-08T00:10:25.122" },
+    { "science": "MATIS.2020-02-08T00:12:31.480" },
+    { "science": "MATIS.2020-02-08T00:13:49.424" },
+    { "science": "MATIS.2020-02-08T00:15:08.587" },
+    { "science": "MATIS.2020-02-08T00:16:25.902" },
+    { "science": "MATIS.2020-02-08T00:17:50.855" },
+    { "science": "MATIS.2020-02-08T00:19:07.298" },
+    { "science": "MATIS.2020-02-08T00:20:22.601" },
+    { "science": "MATIS.2020-02-08T00:21:43.908" },
+    { "science": "MATIS.2020-02-08T00:53:28.002" },
+    { "science": "MATIS.2020-02-08T00:54:53.063" },
+    { "science": "MATIS.2020-02-08T00:56:20.651" },
+    { "science": "MATIS.2020-02-08T00:57:45.112" },
+    { "science": "MATIS.2020-02-08T00:59:56.015" },
+    { "science": "MATIS.2020-02-08T01:01:12.366" },
+    { "science": "MATIS.2020-02-08T01:02:29.610" },
+    { "science": "MATIS.2020-02-08T01:03:45.695" },
+    { "science": "MATIS.2020-02-08T01:05:09.250" },
+    { "science": "MATIS.2020-02-08T01:06:25.253" },
+    { "science": "MATIS.2020-02-08T01:07:39.533" },
+    { "science": "MATIS.2020-02-08T01:08:58.829" },
+    { "science": "MATIS.2020-02-08T01:41:16.908" },
+    { "science": "MATIS.2020-02-08T01:42:41.956" },
+    { "science": "MATIS.2020-02-08T01:44:07.062" },
+    { "science": "MATIS.2020-02-08T01:45:30.069" },
+    { "science": "MATIS.2020-02-08T01:47:40.013" },
+    { "science": "MATIS.2020-02-08T01:48:54.430" },
+    { "science": "MATIS.2020-02-08T01:50:09.435" },
+    { "science": "MATIS.2020-02-08T01:51:25.889" },
+    { "science": "MATIS.2020-02-08T01:52:51.883" },
+    { "science": "MATIS.2020-02-08T01:54:07.457" },
+    { "science": "MATIS.2020-02-08T01:55:25.654" },
+    { "science": "MATIS.2020-02-08T01:56:46.840" },
+    { "science": "MATIS.2020-02-19T00:51:20.250" },
+    { "science": "MATIS.2020-02-19T00:52:58.958" },
+    { "science": "MATIS.2020-02-19T00:54:35.922" },
+    { "science": "MATIS.2020-02-19T00:56:14.976" },
+    { "science": "MATIS.2020-02-19T00:58:37.233" },
+    { "science": "MATIS.2020-02-19T01:00:07.731" },
+    { "science": "MATIS.2020-02-19T01:01:37.498" },
+    { "science": "MATIS.2020-02-19T01:03:05.681" },
+    { "science": "MATIS.2020-02-19T01:04:40.100" },
+    { "science": "MATIS.2020-02-19T01:06:09.383" },
+    { "science": "MATIS.2020-02-19T01:07:35.505" },
+    { "science": "MATIS.2020-02-19T01:09:04.781" },
+    { "science": "MATIS.2020-02-19T01:43:55.192" },
+    { "science": "MATIS.2020-02-19T01:45:22.713" },
+    { "science": "MATIS.2020-02-19T01:46:49.799" },
+    { "science": "MATIS.2020-02-19T01:48:16.896" },
+    { "science": "MATIS.2020-02-19T01:50:27.542" },
+    { "science": "MATIS.2020-02-19T01:51:43.755" },
+    { "science": "MATIS.2020-02-19T01:53:01.102" },
+    { "science": "MATIS.2020-02-19T01:54:19.364" },
+    { "science": "MATIS.2020-02-19T01:55:44.085" },
+    { "science": "MATIS.2020-02-19T01:57:00.049" },
+    { "science": "MATIS.2020-02-19T01:58:16.168" },
+    { "science": "MATIS.2020-02-19T01:59:35.466" }
+  ],
+  "exposuresSource": "every MATISSE-LM science exposure of the five alf Ori templates (00:01:49, 00:50:19 and 01:38:08 on 8 February, 00:45:22 and 01:37:15 on 19 February) in the ESO raw table; calibrators from each exposure's archive association tree",
+  "referenceDiameter": {
+    "mas": 42.45,
+    "source": "src/objects/betelgeuse/source/measurements.json angularDiameterMas"
+  },
+  "selection": {
+    "continuum": {
+      "windowsMicrometres": [
+        [
+          3.942,
+          3.974
+        ],
+        [
+          3.992,
+          3.998
+        ]
+      ],
+      "referenceWavelengthMetres": 0.00000397,
+      "referenceBandMetres": 6e-8,
+      "vis2MultiplicativeFloor": 0.12,
+      "vis2AdditiveFloor": 0.000565,
+      "closurePhaseFloorDegrees": 2,
+      "outputMjd": 58895,
+      "outputDateObs": "2020-02-08",
+      "target": {
+        "name": "alf Ori",
+        "rightAscensionDegrees": 88.7929,
+        "declinationDegrees": 7.4071,
+        "spectralType": "M2Iab"
+      }
+    },
+    "continuumSource": "CONTINUUM_RECIPE in tools/objects/source-authoring/betelgeuse/author.mts, the recipe of the shipped image"
+  },
+  "reconstruction": {
+    "code": "squeeze",
+    "pixelMas": 0.78,
+    "width": 128,
+    "entropy": 10,
+    "elements": 3000,
+    "iterations": 3000,
+    "discard": 500,
+    "source": "src/objects/betelgeuse/source/reference/squeeze-command.txt"
+  },
+  "check": {
+    "limbDarkening": 0
+  },
+  "oracles": {
+    "calibrated": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
+    "image": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits"
+  }
+}

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f1f4f168556ade72cd3cab0791f8dabf0de415ac8d3d36ac97a39e4ebb6e6de6"
+    "sha256": "8b1ce3bb5da50d230184d04edc198553f28e7b34130d9eac75e2cc0c1d888b4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4a12783e28d5602e28aed31718b7acab25485a9891594053474e4dabc77fdc26",
+      "sha256": "c2fef198513f3b9ee08d6ef564d0cb87ac82f85d36918d737fee14a6e8ed35d8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -379,10 +379,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 16,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ida/ida-normal-surface@2x.webp",
           "polesUrl": "/scenes/ida/ida-normal-surface@2x.webp",
           "radialTerrain": {
@@ -716,8 +712,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit",
             "missionId": "galileo"
           }
@@ -774,8 +770,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
             "missionId": "galileo"
           }
@@ -818,8 +814,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "evidence": "The preserved credit for this input reads: NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
             "missionId": "galileo"
           }
@@ -2158,7 +2154,7 @@
   },
   "lastPreparation": {
     "objectId": "ida",
-    "materialSha256": "c47d0ae9616862971f25122afc6bdca35c918a0519323525f10b13f3c5d045e4",
+    "materialSha256": "ef7c3451a0c8a0f5a7744fba81c7173b9b4baf1b9b97d090eca63884abd69a01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

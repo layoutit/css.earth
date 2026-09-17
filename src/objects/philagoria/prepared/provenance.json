@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afdc7b08c94673d4d5edf0c007ca6f0c59694fff8ac3f1d7312aae2b9f7be7c4"
+    "sha256": "905fb2225735a32de312a8d6ab997855b8cf5c9db553818a944ea4b236c026fd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "99ddaf7f0d55a9c9cea7bf71cb172647b3fb3155750e67c5a1905b38494b8cbd",
+      "sha256": "5768c7cffde03ddcdeb4c402c583752153e53788ee6341fbb0debaf6668c056e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 13.66,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
           "polesUrl": "/scenes/philagoria/philagoria-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "philagoria",
-    "materialSha256": "bc5b79ff95bf5a9a6a3918cbd2f29a2b9eef79a82f5f39c1b411f2a62354b331",
+    "materialSha256": "6dc837ee62ea568a282ed39353a5dcdf94258d25966932fdb63cca7b6937a011",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

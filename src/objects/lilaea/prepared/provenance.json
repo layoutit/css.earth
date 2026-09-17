@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "825931eb16ddd0830bdc6a84860dc01c43926ed6355da5026c5fbb6c00ac41b4"
+    "sha256": "ccc9855ff9b03c59ccd76e436abfcd0a2f8f2e6eb3d4aebab75d767371a36007"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c84afebb5e4019d90e48c2bacc0e11cc05d75622ed9617f7504ce82cc6e47490",
+      "sha256": "494ffa0c930393e31b9e0591561de70de3e4e2e91e8933d29a3fdea8d3eb270c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 38.155,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/lilaea/lilaea-shape-surface@2x.webp",
           "polesUrl": "/scenes/lilaea/lilaea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lilaea",
-    "materialSha256": "756d00ddb8585828827088433519e3b6f8a9a97aa33a496d31238378e9fbc69c",
+    "materialSha256": "6cb9cb5059d723f7de222bf620af548f4cd4dd4167f551800a70919ecc56a87f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

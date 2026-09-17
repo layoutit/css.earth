@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ab10ba8d87ff4c93d2033e874906b640f9a2fe43ad29dc0fb377d9fc39a9d42"
+    "sha256": "824a47cec949387c6a6223d2e5023f9c02d0d97df4978b0a543531878540a625"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "27524623aeeecd38bb86e2c7d0d88d63a9af7191400fa0724f1f3d702f5c4ed1",
+      "sha256": "9a38ae82231dc828fcd5bd11f2255847ab5742b700f4b53d24d4eecd6fd2d981",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 22.57,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/kriemhild/kriemhild-shape-surface@2x.webp",
           "polesUrl": "/scenes/kriemhild/kriemhild-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "kriemhild",
-    "materialSha256": "6c29ca8d3548024bae79ea957928f879d961fb42238d028203b18fe020fbad1c",
+    "materialSha256": "8130e9c76abc349ab0ca4516814a86880148252becfac41288daf115d953987a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

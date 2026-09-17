@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "235879964fc47c6dbb35a6b5739db9a618c38e1ad20a7b9693ac71d259e71bd1"
+    "sha256": "87a367a3bac74bed251cc24def48e350c4d4c3ca86e1c0dd60adae710b6d0eef"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b01a355a2a5ba363eab71ed28a5964b7ca52736d50e239b6f77c6134715aa2f7",
+      "sha256": "581d277f3d29cc58f833707a9c8454c6f7fb00ee7bc617a2d0bbb73e72ebdd1f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 32,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/penthesilea/penthesilea-shape-surface@2x.webp",
           "polesUrl": "/scenes/penthesilea/penthesilea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "penthesilea",
-    "materialSha256": "9c0a9558b0a2a1264d2e171170ebcf0bf54aba5d6f07525613cb1e0c72d6ac54",
+    "materialSha256": "93fc255a3ec80345b7860206ef628798b091f6b09067b2721ec3b748adf808aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

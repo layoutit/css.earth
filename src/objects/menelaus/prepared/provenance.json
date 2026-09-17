@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d9d72128ebae12fbdf572c1a5d9cf59f602c20e399bcc54c08ed5de067c9c68"
+    "sha256": "bbee1e9a846a232682d0a608d1309f61ada34d240d032bcff2a3cd21d6dcec90"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5fa877466719695e4a205f1a9558bf6203c6fa1705e0a3d5f2810ee7fbb0db29",
+      "sha256": "e46f666ecfa60fe1cd1c04dd86b85e1975856a2a2a5fcfc42ce02fadea4c07d8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 21.358,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.5451141704821482
           },
           "mapUrl": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "menelaus",
-    "materialSha256": "6cba02703fd808245e9beb38071c63fadef3684a28c87405236c1e1f1b2b93a3",
+    "materialSha256": "cdf7d9dc9483ca78251e0be89f6160a3b559c35428657cf036dc64b279273720",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

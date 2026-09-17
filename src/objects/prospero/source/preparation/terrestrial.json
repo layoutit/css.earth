@@ -47,8 +47,6 @@
     "radius": 230,
     "radiusKm": 25,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": -45,
       "framingScale": 0.7774396150303584
     },
     "mapUrl": "/scenes/prospero/prospero-model-surface@2x.webp",

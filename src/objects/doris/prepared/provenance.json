@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "013ea2df569c011608d6e36e3fd83ccd5ad921962f66f344eb52ca42a10c9a9c"
+    "sha256": "29d93a92c5981f9cffc0461276a0a2de76f419de755455c91d3a62de75209287"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ad0ce6cd6ff9e32f7cfc6f78b9bf92d13e34101251058bdd421abfb3bb080981",
+      "sha256": "91b6deb40f7800e0b7c9e7cd14f6577b4a5684f8a9e829054f0562f25d0d5ae4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 105,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/doris/doris-shape-surface@2x.webp",
           "polesUrl": "/scenes/doris/doris-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "doris",
-    "materialSha256": "03c27f2552cf46bcec45c5c2772a147994a418e667b33eda88c876ddb5968d5b",
+    "materialSha256": "8226e12d065e41f5fb35b9cac3071b99d80b7444dcb98c1592135afa6c35871b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "903d20d96585574ccebd5c1ca366c3bcda2b4a39e2be8fdbbd19d9ccd14eb9f7"
+    "sha256": "ae1825d4d41d4fbaebd11849d547f9bb31ee319d2d197a469eef5f4d6006fdd8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "598c62ded5631dc6f16f098ff483ae304960012e7a443e7edad4f4508adcd26a",
+      "sha256": "6babb5858083d4f8e37e017ce6b50c2c9adf617f39406c1470cb90516e310a3f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.15,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
           "polesUrl": "/scenes/ra-shalom/ra-shalom-shape-surface@2x.webp",
           "radialTerrain": {
@@ -323,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy",
             "missionId": "arecibo-planetary-radar"
           }
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "ra-shalom",
-    "materialSha256": "8d2346259d05b7f129335494f53ae2c9a074e07c0967a39f021a06916ed578c8",
+    "materialSha256": "e6cd4c304b3a7946ae0ea24b1eb117946355455dbb7ffc4743b41cd8dddfd9c7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

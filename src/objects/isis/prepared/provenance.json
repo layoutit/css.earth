@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "80a111897f38fb218b708ae4d15bb325c3238f40f802f2d801136aab32d28d69"
+    "sha256": "d02b91ff19f32f240147158c3a0d6aed1adf5d2a20c0a118bf10c3ac7cac1e66"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "64439efee7d6d07dd146850565d9fd0e6e45cf17c09467826da32ec4b2705b7d",
+      "sha256": "bdd7d47882109fea1d30afec2eea1d52d6ffabdff19a41740a88e396dd07ea6b",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 52,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/isis/isis-shape-surface@2x.webp",
           "polesUrl": "/scenes/isis/isis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "isis",
-    "materialSha256": "158e833ab631f932c9e0a3fd7c6ab57767b0d816a8eb8c8602450ce167a72b8f",
+    "materialSha256": "0bda32d367b6669df12ed7fa5d78785215768f9fc57553bfa11e77cebb2b3a8b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

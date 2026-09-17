@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "235da1e2f3a17c75dba7cb8e6078af1fb565439021f1043012658fd41bf79552"
+    "sha256": "b3b3083860085a3be4eca17a238b16f7204a17b1b65b3aeceeca04462d0755d9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "80dab11dae00c98149cd8d24923cfda426d968e5ec9e2c8f2f57172a09dd8c0c",
+      "sha256": "df14588d999e68fc7090de77349f3df2fc1c6963719643124dade794411716de",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 60.31,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hestia/hestia-shape-surface@2x.webp",
           "polesUrl": "/scenes/hestia/hestia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hestia",
-    "materialSha256": "6810733a7122b6089e4b1c7027b3aedef3bc061474a949e4555a3265dba8ca90",
+    "materialSha256": "99d42f1e4b4cdb4e6f580364daf1adba945d6c3defa1c3537ee58e8e8885356d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

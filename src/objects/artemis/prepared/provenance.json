@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77fc8432509dd6dc46246adee84b4d44f9f6458901730311d9db312702e28daa"
+    "sha256": "eeec9e32c3c0803a05b57e411cb136ac08352b1898f535cf96cb6a9181047590"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d4002a54284b7a6c128083c1777b4d9de168730b67a6092cf84f0696ad7864fc",
+      "sha256": "4b26d944da93cd229725ff5fc9bbaacd58409594e23a62e5f06187593abeed00",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 61.765,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/artemis/artemis-shape-surface@2x.webp",
           "polesUrl": "/scenes/artemis/artemis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "artemis",
-    "materialSha256": "9c425a8f2e30a0dbbdd6b4ebaee40553a7fb5f86a603f664949b7d27c2ad1199",
+    "materialSha256": "b5fe54f527317a7a84f0799ec57f6ee5ba22ebe1917366d74b7e9b82e2c2ee59",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

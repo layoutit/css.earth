@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "72767d86971860220c67d285caaff7658c23962c817cc948f65696b841630ab3"
+    "sha256": "fd5552ef690af780d0d608fc88464d45ee3ed0f09249e498f2204faf57af98d4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7e8ce49eae46074715bb78763190e85611245c622f6f27fd790f96623c2d5a2a",
+      "sha256": "17de1018eafb25e16b6c7389fefdd7a184b88a9bd5b49f376f7fa0c571e0ae28",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 36.44,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/vera/vera-shape-surface@2x.webp",
           "polesUrl": "/scenes/vera/vera-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "vera",
-    "materialSha256": "d1ab3e11b7d4a1e862606604efac1ec75d875aa9a100f3e39cbc0f9bc8e13009",
+    "materialSha256": "3c8115cd44bebcfebfeaecd5249d39f466ee4c7d9a5e3f49a3b843bd7817e3ab",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

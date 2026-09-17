@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "59dabfa492ee31410a641a64bbe7bdbeecc5e3dae68221482fca7425dcab11cf"
+    "sha256": "5e41c0bb1150657549fab1adbd48ef237513551735ac9b4791a05c02f16aa86a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7e8fde415f6903a5f2a66fb5f51c0875c99287c1c4f0d7d92119bb5843eb45f3",
+      "sha256": "807fa217983cfc9250edcffe79dfa7a289d91c2fe7ab4e1f52e9d3fba4a39372",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -125,10 +125,6 @@
               "method": "source-meshoptimizer"
             },
             "primitive": "u"
-          },
-          "camera": {
-            "initialScenePitchDegrees": -16.51837145672059,
-            "defaultControlYawDegrees": 179.41971541839206
           }
         },
         "celestial": {
@@ -300,8 +296,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -347,8 +343,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "methone",
-    "materialSha256": "e350192f830cb8407facc61d173393f25a532340e388ccb0a58401eaf25de531",
+    "materialSha256": "397dbef07b55d28896dbb228bee05e097a8f1b51970887b6f0c29585181a4ece",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

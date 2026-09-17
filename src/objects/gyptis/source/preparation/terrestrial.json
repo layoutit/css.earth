@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 83.015,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
     "polesUrl": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
     "radialTerrain": {

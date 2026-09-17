@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43103a2b50f79cc73864525b73fef6565926f58e4097c5d54cf8e34d04cea976"
+    "sha256": "5b3ac9eb0564212b5699f7484f8235f07ec1323449962032e78310f95f4cbd2f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "19f56bbabc32aa39305162a67b952fbd5dda2cc26de964add2d2845aa01b25d9",
+      "sha256": "d23e43f6aba626ffd3c469111a722a0958c215d9ac71af6d16c639e87215d4a9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 29,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/alphonsina/alphonsina-shape-surface@2x.webp",
           "polesUrl": "/scenes/alphonsina/alphonsina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -554,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "alphonsina",
-    "materialSha256": "81fedd0df3f13c0704aa8fb7ee578f224a5f7ffba2e54ccc9aa8c512bde573cf",
+    "materialSha256": "23b8f0dec9acff97f420b405d4b2793e08bcdcda235ab14fc013b2bb5d358f05",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

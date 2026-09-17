@@ -38,7 +38,19 @@ export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'b
   return radii;
 }
 
+/** Each bound pair's centre of mass and the separation of its stars: what the camera aims at once it is far enough out to
+ * see both. The system keeps its star's framing, which is the planet orbits around it. */
+export function systemCenters(plan: Pick<PreparedWorldContext, 'bodies' | 'focus'>) {
+  const hosts = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
+  return new Map(plan.bodies.flatMap(body => {
+    const host = body.boundTo ? hosts.get(body.boundTo.hostId) : undefined;
+    return host && body.boundTo ? [[body.boundTo.hostId, { centerM: body.boundTo.centerM as PositionM,
+      separationM: Math.hypot(...body.positionM.map((value, axis) => value - host.positionM[axis]!)) }] as const] : [];
+  }));
+}
+
 export const SYSTEM_FRAMING_RADII = systemFramingRadii(context);
+export const SYSTEM_CENTERS = systemCenters(context);
 export const SYSTEM_VIEWS = new Map([context.focus, ...context.bodies].filter(body => body.systemView).map(body => [body.id, body.systemView]));
 export const GALACTIC_VOLUME = parseDensityVolumeFrame(galaxy.properties.volume);
 

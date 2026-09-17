@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e11cc6618b7f23b47629309f014a580ab877e3becdbfff12b0d0aff40eeac0c9"
+    "sha256": "059018f88e93d14c1d2c0e5c932e2bf38557465222fd7ed175d49bf91a95746b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fb4710df2a6171fd72a584da8578165904a8229ccd1d0b8d323daf325693e76d",
+      "sha256": "0a469315b4e41e99bbffcda1f01edac7762d6781e0f1465c4c3161885f1ccb3f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 3.7,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.5417359824601038
           },
           "mapUrl": "/scenes/ivar/ivar-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "ivar",
-    "materialSha256": "f06b44a863416bb738127cf4fadfab85a31e83080265838a527e33773c7a1e0e",
+    "materialSha256": "d47871b889a7680b691d857ecdd7f8445e3a0866c04787c60a2435ad649dacbb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

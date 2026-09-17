@@ -20,8 +20,15 @@ temperature, through the `stellar-photometric-color` science kind
 ([stellar-photometric-color.mts](../tools/objects/observation/stellar-photometric-color.mts)).
 A Planck spectrum at that temperature is integrated with the CIE 1931 observer and
 converted to sRGB with its D65 white, scaled so the brightest channel is full. The
-disc is self-luminous: the colour carries no brightness, limb darkening or spectral
-lines. WASP-43 uses it with its Gaia DR3 GSP-Phot temperature.
+disc is self-luminous: the colour carries no brightness or spectral lines. WASP-43
+uses it with its Gaia DR3 GSP-Phot temperature. Where Gaia DR3 published the star's
+BP/RP sampled spectrum, the record names that spectrum instead (`spectrum:
+gaia-xp-sampled`) and the measured flux replaces the Planck model: HD 189733 A and B.
+A limb-darkening law measured from a transiting planet draws a limb plate, either read
+from a published table (WASP-43) or fitted to pinned TESS light curves
+([transit-limb-darkening.mts](../tools/objects/eclipse-map/transit-limb-darkening.mts),
+HD 189733 A). A star with such a colour stays on the map even without imagery
+(discovery `sourceColor`).
 
 Photographic, observed-color, and scientific lenses retain their own pixels.
 Their missing-data grid continues to mark rejected or unavailable samples.
@@ -60,7 +67,7 @@ To update only the default lighting in an already-neutral checkout:
 ```sh
 node tools/objects/refresh-shape-lighting.mts stage --all
 node tools/objects/refresh-shape-lighting.mts publish --all
-node tools/prepare-machines.mts
+node tools/prepare-facilities.mts
 ```
 
 Staging prepares replacement atlases without changing the served assets.
@@ -75,7 +82,7 @@ For a complete material refresh, run:
 
 ```sh
 node tools/objects/refresh-shape-materials.mts --all --resume
-node tools/prepare-machines.mts
+node tools/prepare-facilities.mts
 ```
 
 The refresh retains each lens's triangles, atlas addresses, camera, and other

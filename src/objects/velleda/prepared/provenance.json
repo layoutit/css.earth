@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e34604d3d20cb0e9f33c3a151bac9cb7ccb5e947a38458d8dc230341db3786bf"
+    "sha256": "ddd3eb359693e707a2d37fd576c035f9ebd1932ef929695bc773ae48cd0717e8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9bd4e5e36b57dfbd11f2c072c9317f798cc52846e73fef4c1b863b9c275546f9",
+      "sha256": "643e54c0a7a0d1e646486326b69a097f5b490b1b82124c3c278c98373e797250",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 21.97,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/velleda/velleda-shape-surface@2x.webp",
           "polesUrl": "/scenes/velleda/velleda-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "velleda",
-    "materialSha256": "83b17b0b7208dc20e3adbcb4e063ecb1e39e003725e122193ad6bc55e503e2f5",
+    "materialSha256": "8d66d3298b5b8b259b2eb546d0dcb3b96cc4388fb136373ad433d68349f834c0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

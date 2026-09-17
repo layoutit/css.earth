@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "hd-189733",
+  "source": "Assumed synchronous rotation, as Lally et al. (2025) assume for their map (rotation period equal to the orbital period in their ThERESA configuration): a hot Jupiter on a 2.2-day orbit is expected to be tidally locked. Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/hd-189733b.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements. North is the orbit-normal side as the hosted orbit constructs it; photometry cannot tell it from south."
+}

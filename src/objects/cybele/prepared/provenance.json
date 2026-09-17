@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "10ff1c5a6b2cc19f262c6ada6e7f24c54d0d47e4b59d91943eedee32fdbba32e"
+    "sha256": "20f2fd881b64a4e4306886c42828312d14ee706a7108532d79f70d46d5a52c86"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a6f98269c1571f99ebdc67e49e50f1368a83faccb13df1bdcaa06875577ac577",
+      "sha256": "37dc26ed9cbdb0f626e4a676f24b4b6d483be903d8d188bae1dd7c5339f88ad6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 156.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/cybele/cybele-shape-surface@2x.webp",
           "polesUrl": "/scenes/cybele/cybele-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "cybele",
-    "materialSha256": "68f532e69acd1662093c897b87eaa6f4f1530b28d26de548ce087f23f45cf0de",
+    "materialSha256": "aaa6c93bb6469aa68bb45a8f068f832dc7cdd5be383e1d42b1b18766fc8a49db",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

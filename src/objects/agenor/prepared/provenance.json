@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "087bc5c3c78053a250f03f04b3a2925b42e6f7cda5f9c970c6f8f5836c61efe4"
+    "sha256": "9009d8cb448a893faa39772a103f03bb1c6a1bed8f534cc27a3900af6ca7523c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "53373f9d822401e0bc37a903d6590124b14f15a77442fa7693db34aeb7f33f2b",
+      "sha256": "05ecd79f74970a46e4f5144fe02d8b890f5822a1ae8b85ac5239d53e0ce5cadd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 25.3995,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.6887930001256856
           },
           "mapUrl": "/scenes/agenor/agenor-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "agenor",
-    "materialSha256": "3af582d52036a9ad097fde3b585bd6ebdce1237ce584784ec0139c29855f776e",
+    "materialSha256": "c3dd5ef1a5ccbff7d69b420dcfb2ec676ac3f6628cac48ba187be4ca4216c1c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

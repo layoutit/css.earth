@@ -23,7 +23,7 @@ export function shape<const T extends Record<string, Decoder<unknown>>>(fields: 
 }
 export const parseAddress = shape({ level: number, x: number, y: number });
 export const parseBounds = shape({ west: number, east: number, south: number, north: number });
-export const parseBodyAttitude = shape({ meshRotationDegrees: number, obliquityDegrees: number, presentationNodeDegrees: number });
+export const parseBodyAttitude = (value: unknown) => { const attitude = shape({ bodyMatrix: array(number) })(value); if (attitude.bodyMatrix.length !== 9) throw new TypeError('A body attitude is a 3 x 3 matrix.'); return attitude; };
 export const parseGeographicScene = shape({ body: shape({ bands: array(shape({ latitudeIndex: number, leaves: array(shape({
   style: text, geographicFrameMatrix: optional(text), leafWidth: number })) })) }) });
 export const worldCoverEntryFields = { tile: text, etag: text, sourceBytes: number, lastModified: optional(text), extractedSha256: optional(text) };

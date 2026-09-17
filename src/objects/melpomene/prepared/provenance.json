@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e24b45041fce89c8c6c0a6ba953b01640fd5b13ecde9931e1331fc442a105670"
+    "sha256": "a852318041086fee79bf3e4ce1a2f997e6beebbe80803679a9507f49ea2b609a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8325b211df4e8943e8e74e44af1f1bc0b6499b7e08f0e3385695e0d26894005b",
+      "sha256": "cf4f836f510e4ed9a2a109b30f8e265adb6fa2bc4f0ecc898c78b2e31f9d4e62",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 70.5,
-          "camera": {
-            "initialScenePitchDegrees": -124.88764044943821,
-            "defaultControlYawDegrees": 270
-          },
           "mapUrl": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
           "polesUrl": "/scenes/melpomene/melpomene-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "melpomene",
-    "materialSha256": "63643f241be2325a56850b8893493379966cb46f21acaab8123aea1fb6e5fdfc",
+    "materialSha256": "56d2d8e64f8c091fb418b888e5c4313a7afafaec28bcfea7651196c8fa5c9b2b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

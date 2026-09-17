@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f7bd94f3267cef29c2f33701d1165706042f6fd6e2922149987304359fe15213"
+    "sha256": "778c05f304a429732564a8e6181793b2f66be61c4acffe1142586af9551a7343"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2005d3c7fa95648280b10aaf8a5a62a087b221c7aa3703752a1c6f865e5ab0f1",
+      "sha256": "fe78798a4e381ca9f81ac52c1ae9cd636a338a7024c7d953f83e6fbb60614e08",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 3.5,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7878483715626404
           },
           "mapUrl": "/scenes/mundilfari/mundilfari-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "mundilfari",
-    "materialSha256": "0a1bcdade36a825da846590f30a5c2ba3f358590d37371c2e0e0ea0ef38b3345",
+    "materialSha256": "70e83a00dfcf4169b2a7b2fa273bc54873942d1355776fda89e586b5e5060318",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

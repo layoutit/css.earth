@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca379c8bc9d038037a5e6d96d0f8e8933ae3f0d72de3c33b03b0d75d58ec6418"
+    "sha256": "8a38ab01292ca11db753a2f2df71bbe26b55f32ed91ae3bbcbfec9950a31437a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "58b3a4198cd0dbc6e61576b890d04aff24d53bfa3ea640904137e1a58080b2e3",
+      "sha256": "a03c52bc437d77b3563eb004d97ae27bcd8bf837db52bd8e5488ab2f3e0b7b8d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 15.868,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.7947237720829105
           },
           "mapUrl": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "lycomedes",
-    "materialSha256": "39d600ea00ba68deab8cc370174d67dcea4f278a3d4083d0a58f849d8b50c441",
+    "materialSha256": "bc10a2edf6190ed4c4157a36ddbe08c6734fb3d64c38cbbca67b41b3e403f580",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

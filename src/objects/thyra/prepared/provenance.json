@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b2cccfdade6396c399345e1c4862458a9182a6cc010dd0ffdeea1ce2a74fbbc4"
+    "sha256": "253f95d1eda057a96742140e8c51a5745953023c729b92542f61cfc3892bfb1a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2bae1e846fa46ef5bdd03a831bfebc7e545dfb0fdd09185ae9358f66ce7c8df6",
+      "sha256": "23bf0388d05abb947237a64850bc9d2218473e14485545fbd669c8405dd558e0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 46,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/thyra/thyra-shape-surface@2x.webp",
           "polesUrl": "/scenes/thyra/thyra-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "thyra",
-    "materialSha256": "3090647b7a249a53bbc69b8567819d97d3eb4dfcefb5ca859f904668effe974f",
+    "materialSha256": "043e92c7da56f772d7b237c104afb8cdf13c42491bb75ea745402afa065784dd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

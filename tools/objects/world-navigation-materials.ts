@@ -6,16 +6,18 @@ const identity=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
 
 /** Add only numerical projection metadata. The accepted affine material,
  * its atlas addresses, resources and retained tree remain the same objects. */
-export function preparePhysicalMaterialTracks({definition,bodyToPresentation,sourceRadiusUnits,tilePixels,physicalShape,sources}:AuthoredPresentationBasis & {
+export function preparePhysicalMaterialTracks({definition,bodyToPresentation,sourceRadiusUnits,tilePixels,physicalShape,sources,refreshPhysical=false}:AuthoredPresentationBasis & {
   definition:Data;physicalShape:{equatorialRadiusM:number;polarRadiusM:number};sources:ReadonlyMap<string,Data>;
+  /** The physical projection is derived from the solved system node, so a re-prepared body replaces the one it carried. */
+  refreshPhysical?:boolean;
 }):Data {
   const tree=definition.tree,body=matrix4(bodyToPresentation);
   const equatorialRadius=sourceRadiusUnits*tilePixels;
   const polarRadius=equatorialRadius*physicalShape.polarRadiusM/physicalShape.equatorialRadiusM;
   if(![equatorialRadius,polarRadius].every(value=>Number.isFinite(value)&&value>0))throw new TypeError('Physical material needs positive authored radii.');
   const materials=definition.materials.map((track:Data)=>{
-    const rotation=track.rotation;
-    if(!rotation || rotation.kind==='ellipsoid' || rotation.physical)return track;
+    const {physical:carried,...rotation}=track.rotation??{};
+    if(!track.rotation || rotation.kind==='ellipsoid' || (carried&&!refreshPhysical))return track;
     const chain:number[]=[];let cursor=track.target;
     while(cursor!==tree.scene){
       if(cursor===-1&&definition.viewBindings.some((binding:Data)=>binding.kind==='silhouette-fit'&&chain.includes(binding.target)))return track;

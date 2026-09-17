@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7973f2f2824a73768efef5f449570870fc42085d83baa265e5738d860ecc1115"
+    "sha256": "098dccdaae5084f3e2b8dd462df48b40f56ff359ec8c3965fd16f15246ab4b49"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "357c175bb48b71a0b7758a66a2a15624e9f18f81ba9a5ad274a32de5b0795f64",
+      "sha256": "e62e6ed91abd6e7f55f00c1e76581fe455790bde9745e777d43d9bb984fb49ba",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 4.6315,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/virtanen/virtanen-shape-surface@2x.webp",
           "polesUrl": "/scenes/virtanen/virtanen-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "virtanen",
-    "materialSha256": "0bc961ba27f02875dba17067908862fbd4fbc97515061e766e6387e9ab326b46",
+    "materialSha256": "91e3b3281311f0e836197a5d63725c355474b368456b7af339265c3e507e4e82",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

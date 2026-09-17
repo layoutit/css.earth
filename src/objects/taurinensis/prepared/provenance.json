@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "98b658d0594bc0e59d946d7fd0ffc8608bbc306633c57d30b55c9107c1e6fa5e"
+    "sha256": "b4ff86d36f12dd49d34548690cf1ce73574f68bac759e7c690600e96ca5ad5fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4093da019af2aa1a815f1f391d0046ba61165de97e7da082ad227aa608ef7fe1",
+      "sha256": "32b67455fb4d8a1415e821eb4334f34a84aa477aad79fc3f9e0a404ea828dda0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 10.435,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.6110117459714505
           },
           "mapUrl": "/scenes/taurinensis/taurinensis-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "taurinensis",
-    "materialSha256": "3c06ffb7ad334ad41d1d910276a034b5afcf64aa396be8a8bcd6831367539843",
+    "materialSha256": "32df8aa0145f5d4f8e8b3c70e073a85435264606c055e02eb68aac6c1ae4c740",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

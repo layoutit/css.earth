@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eb54781dc8310e3b6af12286a8f41146bc6db5a9751d0c0fc0960e885039e734"
+    "sha256": "ea393a7a605febc7ae591b9b2bd0335da3adde2e285bff3119736784f316a9cf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5aa83d548e5311e8a070e10dafed518950959ce2a681abfd875a2b329dcd8274",
+      "sha256": "8dfce61f0fbf002b6b0e04a077b40e6922d382c694cdb8f5a9e267aa5050e397",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 324.1345526598759,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8332507780459535
           },
           "mapUrl": "/scenes/varda/varda-model-surface@2x.webp",
@@ -431,7 +429,7 @@
   },
   "lastPreparation": {
     "objectId": "varda",
-    "materialSha256": "cad9cd28dae56b9d646ea6ab07d75d6522328ff6bc530597d7997567e6cd89dd",
+    "materialSha256": "9e88f7cff96c0b56111826ac06a804986a9c75d93676d479e1f679bceb2fc311",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

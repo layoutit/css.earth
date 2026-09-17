@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cfdfcaff5bb0157dd65ab457212075fc9d5bbd4091ddfcee28b2114b6d94a7bb"
+    "sha256": "2eb91f65abf685027de2a10b005be6e517b2a9c3067e9488631038c9954977a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d20deb62818b3d2f0c0cb5ff0be6560159f2e7e1847f1a67d68707a678daaf38",
+      "sha256": "e55757f865089084f9f1efd4049c3fa9303f723d6cc7c1ace8d581a59989a342",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 46.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/dejopeja/dejopeja-shape-surface@2x.webp",
           "polesUrl": "/scenes/dejopeja/dejopeja-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dejopeja",
-    "materialSha256": "0c72ea4b1c5462136102e96f18da3f64b5b9be042ce160cc67f20ac67105e527",
+    "materialSha256": "381289e2284089132a7c71dbf95bc2842feb1f75bf1eaa4829cdbc3391f5663b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

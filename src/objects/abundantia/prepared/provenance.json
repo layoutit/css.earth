@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8fdb0f64d2acef148166b2e24e3c6906d6356b031480f7716ba001759e432656"
+    "sha256": "5a08b78d4d03249834cf0a162437f77057cca4f18dd5559a0e3ac89230f76a4a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d21fb910a00bfbfb3089b4e484384af3a4363e5dd931cc8b563136d8d3ba3a5f",
+      "sha256": "6697fd1372a1d8745c47711a3cd3c92ef01183c106ac04115cd2df8a1dbd7688",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 21.09,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/abundantia/abundantia-shape-surface@2x.webp",
           "polesUrl": "/scenes/abundantia/abundantia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "abundantia",
-    "materialSha256": "ba83b0062daaf7f1c99ea7098d2124eb276a69ac45e6ad0a7e224f059a2c3d76",
+    "materialSha256": "aecaa65a96686a3486b913daa8492b5ac01ced670f913675100475bba298f171",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

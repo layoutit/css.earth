@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "99ffb56fa68badb62ce3c3c4e882358fd1d9857438a638ff70772619d11ef3c7"
+    "sha256": "f2ecbf4c4efe57c76af7624d66b33526f53d3b0a9d5898c586e5a077e9d74e39"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3067f23ecc888b3f51bd8307ec9b66b5e54f84402abab9fa23d1a33a75461bee",
+      "sha256": "45d728efc09e0a150e0d3fb4010dd4caa3896e22f96064414fc48886c6c9f925",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 42.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/felicitas/felicitas-shape-surface@2x.webp",
           "polesUrl": "/scenes/felicitas/felicitas-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "felicitas",
-    "materialSha256": "d95f395d37587e24dbdf1925a302a8798c14f9e7ac7084c0d036ba3a0fc65019",
+    "materialSha256": "e4bd146bf149fc08b4c12198e40bd6e6f17c7d12e50a66665cae113cf36c9299",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

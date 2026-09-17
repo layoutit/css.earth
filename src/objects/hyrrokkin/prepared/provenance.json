@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "309a75cbcaf894118c218f337761e460a02d4d6b5fec833f509ba406200679ca"
+    "sha256": "9cfa498e1f2c2f00288cfb55d6a4421d5083b5f1225b3673560d9a4ffeaa0992"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cedd824b4446818d8f214fd4f7a41c15a9fa2de5b7483e03c91bc93c80919fce",
+      "sha256": "868cb2f483c41d0721277cfd1876511d106653ae93201dc2fd9f23aaf232d596",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 3.8,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8527024667968499
           },
           "mapUrl": "/scenes/hyrrokkin/hyrrokkin-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "hyrrokkin",
-    "materialSha256": "82c2f4623b9d38988712f5b83550ca61263999f2a71d923b3d6e05ffc29f9752",
+    "materialSha256": "2a185301b7d010c63f925c4b474082f1d16660aaa5c8fe5e89b55ff99d945d70",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

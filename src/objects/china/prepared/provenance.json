@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1c9f82549a79ae1a7e6d274677f9da3d03915539eae642e3e850b01604fedd2"
+    "sha256": "76ac2352e29e3fe502850532122c23fcc64b539d077fab8126c7e21b85dfec0c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4511a4b4b1e12209912fab2e205f6ce93b6b9544f246aaa24bb7992099c4aa2d",
+      "sha256": "332b275c756a6cb33c2d678a5e448ab4da95221cb7710c85b0a3d430f228718c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 13.042,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/china/china-shape-surface@2x.webp",
           "polesUrl": "/scenes/china/china-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "china",
-    "materialSha256": "68fcd5932ef88059db62ea7030836e87fde1be1e7620031a6d0b0a39224358ed",
+    "materialSha256": "5d7bed63c450ee4e40b2c228c221cb5bbede78e51c0323a78932056e6fd1f040",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

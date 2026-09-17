@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7e82feb05b689822f3e90e2e346b6c76d94e57d4a521c5a05aea0cfbbaeb01dd"
+    "sha256": "2b5b2f1ec040918f2589c4456df290175e36f0faec5bae66e4bfda1457ad0342"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "bd62afe194a68e58f4623ba63bcce0ecf364f2521ecd0cde543199494022c833",
+      "sha256": "6c49d97f54fcdf20d60d079c5aa1cfdfc1f7351a936b21392537a76e6b8de71c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 93.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/daphne/daphne-shape-surface@2x.webp",
           "polesUrl": "/scenes/daphne/daphne-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "daphne",
-    "materialSha256": "801694c61aae2c5b9ea0fa8e3b3b5f9882cdeacc6041cee8e313b17b67161242",
+    "materialSha256": "4c4b88bf328ef9dbf6fdb74b96dc89d1302309f57e7a8549b1eaafe2a6b2a609",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

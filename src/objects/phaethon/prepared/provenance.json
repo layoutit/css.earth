@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a55edfa35b21690d400cfc943f2f91ca26d194e501d868e00a4c999af0dec9c0"
+    "sha256": "470cd28151dbec0093337a4dd6dedf494eb9c9732ecf8b30b1bc096d1867bf90"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "13185acbd31750d28cad6e4dcd42c5381cd415df4ac9e2fa15fcaeb0789d3c9b",
+      "sha256": "b71ed52a526afb4948e94d7aef82d9bc8de73282882d60da9d8e283fa78853c6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.55,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/phaethon/phaethon-shape-surface@2x.webp",
           "polesUrl": "/scenes/phaethon/phaethon-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "phaethon",
-    "materialSha256": "d4be1e5aa1d7dafcf00f64a271e6442a9c80d9b70c624576eb555976e08d1411",
+    "materialSha256": "2c154a586b49529b1c96969df39af086db1ea39fbdc31524c7ebae3f07191a00",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

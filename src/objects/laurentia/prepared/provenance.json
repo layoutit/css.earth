@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fe9882f4cfb169e0adfe4290298ba9c8216a157e74fcaaa998a89aaaf39fa00f"
+    "sha256": "6927510705bad1fd809e6eff6c6521acb2f19451db5022cf4cd90bfbdad7a87e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dcebd92652a2fb3bd872b386dcca80f98b7ed70b7cfe5231090681569926a979",
+      "sha256": "0c36e16a70a348e16028f830f42e6f3f9df0a6166c34705a285ed3a3b12b7f91",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 42.67,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/laurentia/laurentia-shape-surface@2x.webp",
           "polesUrl": "/scenes/laurentia/laurentia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "laurentia",
-    "materialSha256": "db59fb4780106a245f94046c9af088e4ae93fc1e28e9654ef3f99faebd363fcc",
+    "materialSha256": "ee5d5f7e021ecd5c2ab8f1982b1135d2d477ab81aac27deb7ecdf9862a04f698",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

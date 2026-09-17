@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ab1685e3d94126cc0c9ad66ac6ce66e28f95ce3b8b63bf07184e2bcbf130d3c0"
+    "sha256": "1dfedae84dc46a28c1b36a63fe64042fe67d77edfa16e13557dbbdd5e7b89b24"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1c705c49e42b3bfc629898b42f6c721784ce864a479a6cb94a5b4242d1601a0a",
+      "sha256": "211e9807083ade7602194065ac8746b159ac898ee593a813441c3d9e12c955c8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 207.35021245858007,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9509296604383402
           },
           "mapUrl": "/scenes/huya/huya-model-surface@2x.webp",
@@ -406,7 +404,7 @@
   },
   "lastPreparation": {
     "objectId": "huya",
-    "materialSha256": "e4599507938029676623e76d4792143a812ebb0f7c1dc07291dddc6379ecc7f5",
+    "materialSha256": "15aaf48578d336657a065f15df79375ac02b2d984384b1373812878f71777e45",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a3e95179a8226b55647d990be0f8f9d8fc02bf7db484bfaaa5de8ddc52b7ad1d"
+    "sha256": "e80f2cccf15c9500fc312de0e424ac8eecefc4a2ea1ae2df9a55fda24549e180"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8125640b93bc2fafaf27907eca6805a0b03c4afdb62fb78e2d2ab33d1016d6ed",
+      "sha256": "9669f2ac0b61abf41e87ec0c2e23f7853c6c5769de8cbb4333ef7a3aa31e83d0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 54.205,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/protogeneia/protogeneia-shape-surface@2x.webp",
           "polesUrl": "/scenes/protogeneia/protogeneia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "protogeneia",
-    "materialSha256": "7c8dbd154c1b98a4fe0ca745ac62dd6e139a13feed3580e130c6a38596023d47",
+    "materialSha256": "9bda58b7ab5989365fae62e0244f3552afc16f321e592b67371bc8f8caf579bc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

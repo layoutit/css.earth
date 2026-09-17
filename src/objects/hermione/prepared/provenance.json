@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09ad3d1fa84114d2afb8804ce1daade2f4c701a8ce1edb0a164e44567eae59db"
+    "sha256": "e39f670780b1db991e009847c72ca0942f3091dd80e3b988f64bc18517ce73c9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4a70eb3c93b9a1ace9da69a5a0ede7c048f1520ddf6ed73d4c3079ac53ba821f",
+      "sha256": "c409c52cd022d1ee76235ad0e233722b0d71d58e0198afd783bbcfd7b321b92e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 100,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/hermione/hermione-shape-surface@2x.webp",
           "polesUrl": "/scenes/hermione/hermione-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "hermione",
-    "materialSha256": "64652385a6acd051f436871b8edf731378c757b5aa22963fcd8eee20a961bacb",
+    "materialSha256": "feec0e1108b9928d380424f7b242410101a78bb884d5dbcf6f88cfc139b410e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

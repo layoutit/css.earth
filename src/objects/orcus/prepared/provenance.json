@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1cde276133ef256c062fd87f50a93099db9a447846c78f0f098b91ebcca4ef71"
+    "sha256": "3fa570148dc0b838b1167793b0eb0e6aa1051a5867b67ee7c93c5d01e25798a7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3dc7997ba53d0c56011ef082fa3b5bac06cdbe5c43bb8a230c98b96ed223dd86",
+      "sha256": "ea1251bc413e848cf33d2f764b1dba9aa1a3ece8a3c41a3f31cd7267f77361b4",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 454.99999999999983,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9999999999999997
           },
           "mapUrl": "/scenes/orcus/orcus-model-surface@2x.webp",
@@ -258,18 +256,18 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "alma",
+            "kind": "facility",
+            "facilityId": "alma",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           },
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           },
           {
-            "kind": "machine",
-            "machineId": "herschel",
+            "kind": "facility",
+            "facilityId": "herschel",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           }
         ]
@@ -437,7 +435,7 @@
   },
   "lastPreparation": {
     "objectId": "orcus",
-    "materialSha256": "918e42f2c91c08c6c5bfa7451f2f24ab016efb66e159edf7233864dea3daeca8",
+    "materialSha256": "de76e4599193ddf0ea13f730e4ea86a87f3a313d509b304727728ae7fcc79e6a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

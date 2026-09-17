@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ffaa4c0df6a7384c08f3aeb906ad16cf9786b634cc5f7f52e9e59c72c71924a0"
+    "sha256": "2240579d29b0c80580ba1b7dd0b904fad2e3545eecde61766ada4b4c2a910429"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "24155e4211d0f2f12a885b51a984fdc906ac822c9539a1bedceb6d67ee6a9481",
+      "sha256": "e19362438145a602ac3f431beea645b7196e8d71233459d6db4515c73d74db12",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 32.01203974041056,
-          "camera": {
-            "initialScenePitchDegrees": 13.20425004069436,
-            "defaultControlYawDegrees": 38.206828107774825
-          },
           "mapUrl": "/scenes/desdemona/desdemona-model-surface@2x.webp",
           "polesUrl": "/scenes/desdemona/desdemona-model-poles@2x.webp",
           "radialTerrain": {
@@ -419,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "desdemona",
-    "materialSha256": "ad9583557483a5bc009ac9efd0a32342088f7a8e1531f8140a862125f5725e02",
+    "materialSha256": "9b98c82300ecbf34cfdc9c2cce0730b899f43347a15a01d7e5b7531584027edc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

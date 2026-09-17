@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b6f4f7441a860bbbff79c892f56a42eeee8519ed9cc44977546963896e828e3"
+    "sha256": "d07b49337e7e6c1290013c51bef532d10e09f60e40a13150a55c7043b14d7a23"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "103570e3bad463a89f89a9720811808c860ca22c1fdeadcd1cdbbb558eaa0700",
+      "sha256": "9c8e9499a1d817350951872709ac3804957bb6e60071c20abf7fc90534a8e759",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 1.75,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/toro/toro-shape-surface@2x.webp",
           "polesUrl": "/scenes/toro/toro-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "toro",
-    "materialSha256": "f434f33f3522c74d22988c77f187780fceadee9287321b6a333f96bab081db53",
+    "materialSha256": "a126df44eefc589068448bebdaae2d3e21e77bb787d21351740d40386b77771a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

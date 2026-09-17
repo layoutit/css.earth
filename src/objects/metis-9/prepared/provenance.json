@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e91b359f403adc40f5ef046ed46f26c0909d5d4a6e7c51531417c4317caebf8f"
+    "sha256": "c9af8d38784adb5efffc503c90db9a264d4e3094168c5ab866fac62f6be8573a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f163d921f143b8af226f2a201f4267939cc56c4ad89ee6388ad48a9a880d982e",
+      "sha256": "0f258a9691b4aa4f1c5677cc598e7908086de094194e69d79018f65a5d974fda",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 86.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 90
-          },
           "mapUrl": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
           "polesUrl": "/scenes/metis-9/metis-9-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "metis-9",
-    "materialSha256": "713f1dba3b21a70f79d86fb3b479073974dbcd6e8c307f7567a8a0b3e76bc167",
+    "materialSha256": "9388102de8994b861e051262ab81271272f25d71cdff7005ce68e3accd505e7d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

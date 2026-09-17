@@ -90,17 +90,32 @@ tests when introducing a new representation.
 
 ## Photographic arrivals
 
-Selecting a body with a prepared photograph uses the package's default camera
-angle, so visitors arrive at its intended viewing side. Catalogue preparation
-stores that angle for exposed, non-modeled `observations` and
+Selecting a body with a prepared photograph uses the body's default camera
+angle, so visitors arrive facing the photographed side. Preparation derives
+that angle ([`src/platform/default-camera.mts`](../src/platform/default-camera.mts));
+no package states it. A body whose default lens has observation frames opens
+on the mean of their sub-observer points. A placed star or a planet shown by
+its own emission opens facing the Sun, where Earth observes it from. Every
+other body opens on the ecliptic presentation frame's design pose: ecliptic
+north up, the Sun exactly to the left, the camera 40 degrees above the ecliptic
+plane on its north side. Catalogue
+preparation stores the angle for exposed, non-modeled `observations` and
 `surfaceObservations` lenses. The shared flight approaches this pose; it does
 not analyze coverage in the browser or create missing imagery.
 
 Saved-view links and explicit camera targets keep their requested pose.
 System overviews and non-photographic datasets retain the existing viewing
 direction. Dragging and zooming an already selected body remain unrestricted.
-The package owns the default angle; this policy does not claim to optimize
-coverage separately for every photograph.
+The derived angle faces the photographs' common side; it does not claim to
+optimize coverage separately for every photograph.
+
+The world-navigation stage owns the default camera: it derives the pose and
+rewrites every prepared value computed from it (camera angles and state, the
+scene transform, the Sun's reference view direction). Changing the rule or a
+body's inputs needs only `node tools/prepare-object-json.mts --keep-bindings`,
+which re-runs that stage for every object in seconds. Earth, Saturn, Jupiter,
+Neptune and Uranus bake their lighting banks at the rule's pitch, so changing
+that pitch also re-bakes those five.
 
 ## Stable priority
 

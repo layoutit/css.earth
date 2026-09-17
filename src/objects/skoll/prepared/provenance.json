@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b376a619813e32d89c6338c004aadf19d1f00dd94f99071bb0704e7707e43f48"
+    "sha256": "2c329817f02f2a3719d4df5ee43f44106d03a730b0f27e8884a05ef3dce72616"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2174d176513ac1272452948c25a045a2f3555bc2341ad182ac5817bec9620dc5",
+      "sha256": "db813a1c97b6af56e294b2ba02883d7331ba78decfa084086c41b8407c513d9a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 2.3,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9163543217739637
           },
           "mapUrl": "/scenes/skoll/skoll-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "skoll",
-    "materialSha256": "12b345f3555d74253737ef6eb6387cb1a39ba93b05e799061a5ef85e9778605e",
+    "materialSha256": "e020d84f3afd7a6c89c2ef913dc64531c9a48c2dce68c98d74ae47ac5aff153b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

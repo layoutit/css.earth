@@ -46,10 +46,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 0.5,
-    "camera": {
-      "initialScenePitchDegrees": -15.27870100767149,
-      "defaultControlYawDegrees": 55.70926026083014
-    },
     "mapUrl": "/scenes/anthe/anthe-model-surface@2x.webp",
     "polesUrl": "/scenes/anthe/anthe-model-poles@2x.webp",
     "radialTerrain": {

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c28840de9f33cedead63d01ccffcd765b2214bfb1d7cacf6a8205f27e4801992"
+    "sha256": "bad56a3a010c33e72c16bff8f5ab2be17446f46f6a3e0645641e0d9086af62f3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c22e752d09c93e60da6bef443291a76519c62e7eb12c03f835fe4d5276d56230",
+      "sha256": "c637bfa9cf08ab735f7367bfe8e273577ac806d89059a2832d184675e4af4e8a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 43.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/eurykleia/eurykleia-shape-surface@2x.webp",
           "polesUrl": "/scenes/eurykleia/eurykleia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "eurykleia",
-    "materialSha256": "ffded2e50d8c70c19164a7c4feed9f0414cf2c026517eeb2ed84822999bb5c85",
+    "materialSha256": "c2913a5414b6b6e7a3ff43004379b6491b693c7cec3cc9545a9140933abca2d8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

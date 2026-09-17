@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b27f0a9f357b035dbaa03628f74aff1fb88b3602ba39851522cc7baf59a0b7e0"
+    "sha256": "6b71b233a4da93a30557950ac2778d686143c7759260c69aa1a920229a205af2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a9aa498357b569042f2370d2581276159627f5d3e92b873b297766c89658f981",
+      "sha256": "397b10ee62d8df089feaf62e78fde073627b2ddfa254aa9753f0b78bee6752d9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 40,
-          "camera": {
-            "initialScenePitchDegrees": 7.8863261706119285,
-            "defaultControlYawDegrees": -123.49616775538027
-          },
           "mapUrl": "/scenes/thalassa/thalassa-model-surface@2x.webp",
           "polesUrl": "/scenes/thalassa/thalassa-model-poles@2x.webp",
           "radialTerrain": {
@@ -419,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "thalassa",
-    "materialSha256": "f992e75f4f50609d8183cae698fe670276c9a7cadfa4e28da9681d73b21b440a",
+    "materialSha256": "08ea4af67cfa248a53cf4837054a2baf4ac2620a491fd5a7b9dc5da4cbfea62d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

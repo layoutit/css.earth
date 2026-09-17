@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "08a3a8cfc2eaca5594129f531e5cb0d0ef41903bbc5cc9bfafc2c2a739d43a3a"
+    "sha256": "6ed40d88dc7b002d22eafbd5565f7d48ec98ceb759f37dbf6bd55bf1f2ed149c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4ed5828f70473e5af7add337906a993dc8d120bd34b2c565df24bf9710d85edd",
+      "sha256": "57fb3255a5012ae7b259ae6554ab8a37227e9993617754a2469a100efbaef2cd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 99,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/aurora/aurora-shape-surface@2x.webp",
           "polesUrl": "/scenes/aurora/aurora-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "aurora",
-    "materialSha256": "7430f759ba63b4a18ecc9fa110a3a7a6abc19180605c62dd714f3427722dfe5b",
+    "materialSha256": "0d4a617e01524d6ba426f1a071bd2b7b4a373944822a0da37a3a2ab019888758",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

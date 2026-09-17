@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3a758e90fcff5a7a9eb3b5b6b43aa1e5e2253a09c81c80d916bcc1904e539400"
+    "sha256": "9c08966dd228a00c40ccfbeabdeb327ca523fbe25e550ace4898c9adbbc77032"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1c91fd10499c5ee7e30aa76c2780e058b5b62505057a838caff07606b1aa4433",
+      "sha256": "c5dfcbd001286b78f0da24d78e2d5c1342461586a179143bf24bc6b4ccf2e841",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 262.0949581014582,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7731414693258354
           },
           "mapUrl": "/scenes/asteroid-2003-vs2/asteroid-2003-vs2-model-surface@2x.webp",
@@ -406,7 +404,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2003-vs2",
-    "materialSha256": "de6afbffd6aee6ff5a80eaaa896b1cb2a6dd45a9d841d17db156df1c3ae2be8c",
+    "materialSha256": "2165c56e413d8b303028591d9f6a8621d914091793596a5dd82d51339cb9ee63",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

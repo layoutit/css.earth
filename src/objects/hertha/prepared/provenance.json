@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9e1a3cfed480fb04c7cd1e3ecc6090162e0109c7a43cb3b7b5bac0b3df736855"
+    "sha256": "5bf0d282781cc88dd1435f38dea4c2f5957ea7f00961a6da077ce29f591a0743"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4a16998d06a8aeafd89325ba039a68426bc7614c58d503be41addd412c322b1d",
+      "sha256": "a4bf3fa4f86ce19e0e96f8801e6ddf7d53c07ce79712a66210b152f16c203e50",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 39.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hertha/hertha-shape-surface@2x.webp",
           "polesUrl": "/scenes/hertha/hertha-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hertha",
-    "materialSha256": "40234d548566210a045c22139f8fd21558a9a8faaaf7f87fcd0180f3c1da5ae6",
+    "materialSha256": "85b5f0ee24fa33dc0365964034b635ca0b66c296aa3943a22f9762bcd41aab25",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

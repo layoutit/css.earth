@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c621a210415477dbbe1bbe4220a1947b861270c58ae3734124c889c954a8a06"
+    "sha256": "11330c058a201d662b202c5960489c84ca4bc0d5df2a71968b21dcb059dd6402"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d96c54ace4ccf794d79fac9f4a71f85d3db333e3e13adf5cbe7cae2465ef1c18",
+      "sha256": "108aa7f8f6cd2868bb0426266f4249185641149c527b8559422a81d1a8099ee7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 34.948609955746875,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9018996117612097
           },
           "mapUrl": "/scenes/eurybates/eurybates-model-surface@2x.webp",
@@ -432,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "eurybates",
-    "materialSha256": "7634f663c01ad9132b1b562a7084fc926cb904fd1414d9fe28df2a003dab1a11",
+    "materialSha256": "6c4906c3c1af78bb9765c205b60d67c1a1a82bc0e8dd99812ef1609a4c82c263",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "63d540bcf2e24d9781909aeec1185a6b0fdf8943d6c8c3787eab49401b6da5f4"
+    "sha256": "f388f6ef8df4d08e70284ffa96e4b8478921d328b00ff69589614c432e18c79d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b94c0df20bd3cc54a77a357374092b3b31d6aac80474d780de34815a09ffee2c",
+      "sha256": "277c941918c1cc9096e160d3a84c545d51be9af7e2cea93ee99c01ceb5dc8402",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 23.89,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/piazzia/piazzia-shape-surface@2x.webp",
           "polesUrl": "/scenes/piazzia/piazzia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "piazzia",
-    "materialSha256": "caf9c55cb7b9122905d7100c0ad35bdbe701ddf4398eb74aad31baca2a5dd535",
+    "materialSha256": "c2b29030d2fde984fcdffa4761a37f11c72b44ca589931d9a13d3f35a36dcd69",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

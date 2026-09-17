@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e4781941e1cc9326135492660bb40b6adcd7b9d1e0709f2a02704ab3c8ec4299"
+    "sha256": "2b9316128ab8b517b26b13c2579829797439acee72f1e3377d874c08e6e7f91b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9cd658e0363c95455ffe928478e14b39d7da62f4ea7eb6f904a8f3fb138fd60a",
+      "sha256": "49ade8eed789ecb9f3db2910eb0d70cad39739e307c71d25e604741ee5601bfa",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 88.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/loreley/loreley-shape-surface@2x.webp",
           "polesUrl": "/scenes/loreley/loreley-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "loreley",
-    "materialSha256": "276674698873ff9a8dec556d9b6b8d7ad1cf40a66afd5d8ca0843370d37d97b2",
+    "materialSha256": "061ce148d9ee206dbdae0f14bd13c4994fae080e3a411db01bac4cc58425205d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -29,7 +29,7 @@ function fixture({ mobile = false } = {}) {
     settings: { selector: '.planet-settings-action', node: new Button() },
     settingsPanel: { selector: '.planet-settings-panel', node: new Element() },
     aside: { selector: '.planet-sidebar', node: new Element() },
-    machineToggle: { selector: '.planet-machine-toggle', node: new Button() },
+    facilityToggle: { selector: '.planet-facility-toggle', node: new Button() },
   };
   documentTarget.querySelector = (selector: string) =>
     Object.values(nodes).find((entry) => entry.selector === selector)?.node ?? null;
@@ -52,7 +52,7 @@ function fixture({ mobile = false } = {}) {
   const elements = { about: nodes.about.node, explore: nodes.explore.node, panel: nodes.panel.node,
     drawer: nodes.drawer.node, search: nodes.search.node, searchInput: nodes.searchInput.node,
     settings: nodes.settings.node, settingsPanel: nodes.settingsPanel.node, aside: nodes.aside.node,
-    machineToggle: nodes.machineToggle.node };
+    facilityToggle: nodes.facilityToggle.node };
   const escape = () => {
     const event = new Event("keydown", { cancelable: true });
     Object.defineProperty(event, "key", { value: "Escape" });

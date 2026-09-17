@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "952dd5ba27381a7db23a94f2005cf8cab22ff523719c051a928347841735e72c"
+    "sha256": "29cc09be5336dedb27e43a9ae91d3eeef77beaa0d571ae35900e72f7c350644c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7b74ac9aa9aae560cb74d51a3f1a751b3f27839846c955a58ad68b5dd4604348",
+      "sha256": "9ef7cd92d80e8c5572a8bac9b47d3d508b19bda46280b3149e6650ec213273fc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 73.525,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/aglaja/aglaja-shape-surface@2x.webp",
           "polesUrl": "/scenes/aglaja/aglaja-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "aglaja",
-    "materialSha256": "9a777e7d80f9f948166755f28c80755d01e5421e35dbfedc443e1dcffe4ec010",
+    "materialSha256": "c7e1363383098b808ea699d70a26276eaf25533a291fba09487cb74a3b188a87",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

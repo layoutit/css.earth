@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1fbb426c3939de74bb87cb2f39c6083748f5e6a459f505a558119fc8d979725"
+    "sha256": "648edf02c8634d9dfec1ce6eaf0cd1ab445c6ad5c6badb46fdc83e85d24984a6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9b304b7317f5eadcadd451aa1669539c6e98b995204937ebd707f4b35dfa392e",
+      "sha256": "56e2ca499887968e7e0071b20d806c10ce5de3c5f2a3ab44eb382417268f523a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -57,8 +57,6 @@
           "radius": 230,
           "radiusKm": 37,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.85
           },
           "mapUrl": "/scenes/comet-c1995-o1/comet-c1995-o1-model-surface@2x.webp",
@@ -373,7 +371,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1995-o1",
-    "materialSha256": "74b85201e5e535124ce5c28ffb4eda18be5a4ea1023c147b3e0b8a507ae39a16",
+    "materialSha256": "e6bb2cf28dbd87a44f41db6322a044b1aeb6a96aa940e47e413fc70409f95480",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

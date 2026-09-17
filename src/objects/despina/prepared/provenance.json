@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79de445918fbaca7b9cadd10fc4f25922356a90406ce244c9a538ad2146f54c2"
+    "sha256": "1d526fad08f56591cadcee8c3e8cc7882af5ea48f88487f2c26745d5d79c27f5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ba2c04384ed89a1fd4d0bab988837273fc328ac5666ca15a8fdc4790ccf53027",
+      "sha256": "16b0827709a73418ceccb9700d8290d9c0bfc89ba1d069555a54b599b5f57042",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 74,
-          "camera": {
-            "initialScenePitchDegrees": -15.834758237369623,
-            "defaultControlYawDegrees": -56.312767345784216
-          },
           "mapUrl": "/scenes/despina/despina-model-surface@2x.webp",
           "polesUrl": "/scenes/despina/despina-model-poles@2x.webp",
           "radialTerrain": {
@@ -432,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "despina",
-    "materialSha256": "6de0d1c56edd54303a5a10142337b8a8df097f3d633d5c14ec1b166a291b713c",
+    "materialSha256": "b0651569a9415b2b295e30209d83772cab934a003ce88087ba1d6db6217e1789",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

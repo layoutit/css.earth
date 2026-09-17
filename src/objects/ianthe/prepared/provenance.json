@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "afe5d9ceeb9c846a9ac4be187fdf54ff4aaac224cd6c04afc4264390029c17ef"
+    "sha256": "8f7cdc4385f7961e0e20e3cff1ea4d4ffdf44071450b7388763e9b172088b643"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dc3f9bfafbc1dc115da2fb4a08269781364b5c3c7e847302d2d1efbf770ac5d0",
+      "sha256": "9a912b8fdf3eda38927aac310071196d22f94b1d4d92e1fa627bf2dddbc185bd",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 52.12,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ianthe/ianthe-shape-surface@2x.webp",
           "polesUrl": "/scenes/ianthe/ianthe-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ianthe",
-    "materialSha256": "f3161ebbfdbc494b2b1b12d255d44f18324d16dcb9e24b10256004b5f6c3ae1b",
+    "materialSha256": "31e352eab92fc4792bb736d4a554ad2e6f803a03d3cea0a78b0bb3e4898c070c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,0 +1,31 @@
+{
+  "id": "simbad-hd-189733",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for HD 189733",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+189733",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+189733",
+      "checkedOn": "2026-09-17",
+      "locator": "Basic data: object type BY Draconis variable, spectral type K2V (2003AJ....126.2048G)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HD+189733"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

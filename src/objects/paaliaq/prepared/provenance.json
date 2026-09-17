@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "36ec05f30919713ea8535d5dc279736d46fdf5d210ee339d0286f323bb29dceb"
+    "sha256": "3f9fe6ccf8e0f0054e40f697d50fbd6c0ba3a0d44609d46a86d1a07985131c94"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "fc8d62dcd1aecf8af1451f962c55f538bfc05c0fba693f1bd34852743f6c0ffc",
+      "sha256": "50337efa73227f8c0800fbeb60356c988c63672a93e0a808634158ede1667288",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 12.7,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9679965302998604
           },
           "mapUrl": "/scenes/paaliaq/paaliaq-model-surface@2x.webp",
@@ -435,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "paaliaq",
-    "materialSha256": "3e33738ddd21543afc468f95e4e158ebfa1a85161fe985594e58ca3c9f7e74be",
+    "materialSha256": "53d30743ef3aed82fb908f234db85dba600dc3ab55663f0f1e049fda542dbb6a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

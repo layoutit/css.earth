@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a82d88a890e79ffe62bdaf9a5e5d8ee3d1f249f3ae4bb308c51d73a06758895b"
+    "sha256": "5f5047b3d1ecadfe39637996a46b04a894ed33eea8e684096a819f5727177cea"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f861633afd8f87e6b892cb74d826539b8cc354c4728379f7262cad0b07a6d00f",
+      "sha256": "a1e1cee63212e178e1ce860f4865a1fc5e0ed8b0f0c3d37cbebdf31c536c9bb5",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 78.5,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9289663867799363
           },
           "mapUrl": "/scenes/sycorax/sycorax-model-surface@2x.webp",
@@ -240,13 +238,13 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
           },
           {
-            "kind": "machine",
-            "machineId": "herschel",
+            "kind": "facility",
+            "facilityId": "herschel",
             "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
           }
         ]
@@ -294,13 +292,13 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
           },
           {
-            "kind": "machine",
-            "machineId": "herschel",
+            "kind": "facility",
+            "facilityId": "herschel",
             "evidence": "The preserved credit for this input reads: Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
           }
         ]
@@ -468,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "sycorax",
-    "materialSha256": "b6da5cdf33b44e4ccb695eda8e9e00f65c92ae70cf9bd65268044b98b51be9cc",
+    "materialSha256": "6eefadde6dc85513385c09a4be533889a4ddfe3755d465aa771ab3450100d72f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

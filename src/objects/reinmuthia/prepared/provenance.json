@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87c53834c530ba0fd37a3d2ecbe5a93151202f5b0be2fc3ef5f738fdcfcfdbe6"
+    "sha256": "3006d6eb4c0ce07e112e3d974aab25d213d690c00329968379e0816f004037a6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ea5c576801557cb34afa2a325cb83fbec2b3a2a869a66af0d8d0114b4b807655",
+      "sha256": "1cd00ad03145c7a23f7e4af939046422d874de7c200cb2bb1fb0a880e91608ad",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 12.19,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/reinmuthia/reinmuthia-shape-surface@2x.webp",
           "polesUrl": "/scenes/reinmuthia/reinmuthia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "reinmuthia",
-    "materialSha256": "cebc89c3a307e51db7a4bc73a4e22dea34387a8514335d455a0592316710745f",
+    "materialSha256": "e97ee27362b3e2a7a83633a108b066e96a68ac85a7418985ec2023b3291f60f6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

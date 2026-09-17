@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "054edcde05b353817f117f076a8b57823cb598c029844a4256da6729112017ba"
+    "sha256": "2f1b9599de515d0e286bce8b9ab4121213ba71f4f5959bbe33e39a1f8853dad8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "455e6a89f8a77856f749869fc4178c1b548076d6d0919c0ec30256854cc2502a",
+      "sha256": "21c78aed98a1f4382ab1b357cf1b90bc9821be6d922fb8e98de9c983c0026d35",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 47,
-          "camera": {
-            "initialScenePitchDegrees": -124.88764044943821,
-            "defaultControlYawDegrees": 270
-          },
           "mapUrl": "/scenes/nausikaa/nausikaa-shape-surface@2x.webp",
           "polesUrl": "/scenes/nausikaa/nausikaa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "nausikaa",
-    "materialSha256": "9196ab37453f88fb86f84ee4c1fb8668cf344d8aa9c9b63962bb1a145d182234",
+    "materialSha256": "939118e1a6d321995e8a47e977951479ad38fbecc7b704cc330e2589aa722f05",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

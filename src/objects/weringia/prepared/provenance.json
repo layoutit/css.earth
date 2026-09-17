@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5917654bd030372dd4e81e75c66c8152318529023c352d84a088a063efddc718"
+    "sha256": "fba93a74044a5d4dc644655e8030881bc05fd048cf32538b2e7534e840a67f54"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "93bef49fd4542a7291f71fa526ce2570c798a1df25a0079665a46f65a298d8db",
+      "sha256": "eaebf8d53ee1a72394c4409e01a6cc039b564de356bda3b33baec315c526a701",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 16.13,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/weringia/weringia-shape-surface@2x.webp",
           "polesUrl": "/scenes/weringia/weringia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "weringia",
-    "materialSha256": "97a39f1a57ecf762ee6a5213c4c2df676e637946c60f3d6454935185cfd91a33",
+    "materialSha256": "cf0bb64b56fb5369eeecce1efaffe1d07d11ea3ad55c7fd8c67be09278c9e03f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

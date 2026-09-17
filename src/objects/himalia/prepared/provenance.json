@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "427b2563665f7d44fa2fb51c830dc4e3ffbed0c1ae61e4bc1c6581c48a8d60f9"
+    "sha256": "86bb2dc3b35170a5058c8584f4ad0894c95f5e8494efc764afae4ad0622a5fd1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "07ddc3a14736a15d84201a817b508bed4a8d796cb01d01121a6e551af21ccd3c",
+      "sha256": "335d89abd2ec1282d37e58728faef524c217705a3d8c43ed0fde355d4846bb2f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 85,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8617738760127535
           },
           "mapUrl": "/scenes/himalia/himalia-model-surface@2x.webp",
@@ -435,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "himalia",
-    "materialSha256": "b4c9b8d12ea4a13911034fdda137e2690d34a4ad9e4c658d0f959304d5752fbc",
+    "materialSha256": "feed663f05365595741026be17a2679f6c11cfe3b685426193cc4e2de29c4d3e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

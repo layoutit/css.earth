@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4676bfeac0e5ad035a13be90f60a67a4508e6a0afcee493d1c80090667d81fb9"
+    "sha256": "ad9e0a997130a2e69b56348baf5a6506afaa4ebfd2ce96fb216a7a5504dc0629"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e39bf20ca7f88c82ae4415a47199a43f6cf782c00002a902740f183241919b04",
+      "sha256": "fd449bf44d69f93a8af66ce2ed78484055bff7c007c7f201a099d8c626ad7599",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -191,10 +191,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 6.2,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 45
-          },
           "mapUrl": "/scenes/deimos/deimos-normal-surface@2x.webp",
           "polesUrl": "/scenes/deimos/deimos-normal-poles@2x.webp",
           "radialTerrain": {
@@ -575,8 +571,8 @@
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
           },
           {
-            "kind": "machine",
-            "machineId": "mro",
+            "kind": "facility",
+            "facilityId": "mro",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg",
             "missionId": "mro"
           }
@@ -1190,7 +1186,7 @@
   },
   "lastPreparation": {
     "objectId": "deimos",
-    "materialSha256": "31dc6a433e8526b90032f3f09a6a86cd906d28b23955faff247d59fbf28c0a4a",
+    "materialSha256": "d228e829be9afee712f08626d8b5a20112833c6138ed7cd77de76bc17ee8b82e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

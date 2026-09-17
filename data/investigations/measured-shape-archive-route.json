@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-investigation-survey@1",
+  "id": "measured-shape-archive-route",
+  "subject": "Object-specific measured shape in PDS/Stooke archives",
+  "finding": "The retained catalog intake names the Stooke archive but contains no object-specific mesh search result or inspected reconstruction for this comet. The Celestia illustration is selected; the record does not establish that a measured shape is unavailable.",
+  "evidence": [
+    "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/"
+  ],
+  "revisitWhen": "An object-specific archive product or published numerical shape can be inspected, with coordinates, scale and reuse terms."
+}

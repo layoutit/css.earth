@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "451c265fec4e166a1ef945d1fded9dd89f51830003e32b16ed0338f65df633ad"
+    "sha256": "10778e138aeb03cf89ebe63893b50c69a8e410bea5c0787b0dde05143ebba6df"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7103a06f3244f30e4d0bb2f64818844339d42a71500a833c31ed662641a8010f",
+      "sha256": "225b3abbb8900dc2ee390cad01803466f54df2fe468405a5ba704a3840fcbfe1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 71.985,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hypatia/hypatia-shape-surface@2x.webp",
           "polesUrl": "/scenes/hypatia/hypatia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hypatia",
-    "materialSha256": "7795f2c5c02001264f2e00fd89bae8e8ce1752ecb027390b9054e87cdc9d1d1c",
+    "materialSha256": "bec8b25487197889f07643dc120c6a1a66771cb715ffb5baf3c31474a11400dc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

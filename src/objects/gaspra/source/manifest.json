@@ -27,8 +27,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab"
           }
@@ -76,8 +76,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "missionId": "galileo",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit"
           }
@@ -102,8 +102,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "galileo",
+            "kind": "facility",
+            "facilityId": "galileo",
             "missionId": "galileo",
             "evidence": "The preserved credit for this input reads: NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)"
           }
@@ -556,8 +556,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6572,
-      "expectedSha256": "83679163dfd24b2c16c1599f92a23c848de01c1cb16355e390ecb1f1508cd4f7"
+      "expectedBytes": 6475,
+      "expectedSha256": "ede49f624a1e32bd5832ea0d47f71904044b8eb3b9509a9e14b446bcaaaf8a97"
     },
     {
       "path": "presentation/title-mark.json",

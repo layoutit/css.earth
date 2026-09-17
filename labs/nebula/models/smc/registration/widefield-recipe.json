@@ -1,0 +1,100 @@
+{
+  "targets": [
+    {
+      "images": [
+        {
+          "id": "noirlab2030b",
+          "wcs": {
+            "referenceDimension": [
+              3827,
+              3190
+            ],
+            "referencePixel": [
+              1913.5,
+              1595
+            ],
+            "referenceValueDeg": [
+              13.6618118598,
+              -72.8687942632
+            ],
+            "scaleDeg": [
+              -0.00138788065837,
+              0.00138788065837
+            ],
+            "rotationDeg": 30.12000000000002
+          }
+        },
+        {
+          "id": "horalek",
+          "wcs": {
+            "referenceDimension": [
+              6069,
+              4045
+            ],
+            "referencePixel": [
+              3035,
+              2023
+            ],
+            "referenceValueDeg": [
+              13.2954600823,
+              -72.7962247167
+            ],
+            "scaleDeg": [
+              -0.00152895324209255,
+              0.0015290753239204
+            ],
+            "rotationDeg": 133.5337627021,
+            "projection": "TAN",
+            "coordinateFrame": "ICRS"
+          }
+        },
+        {
+          "id": "irida",
+          "wcs": {
+            "referenceDimension": [
+              4000,
+              3067
+            ],
+            "referencePixel": [
+              2000,
+              1533.5
+            ],
+            "referenceValueDeg": [
+              13.9208333333,
+              -72.66
+            ],
+            "scaleDeg": [
+              -0.0006374999999999999,
+              0.0006358004564721225
+            ],
+            "rotationDeg": -178,
+            "projection": "TAN",
+            "coordinateFrame": "ICRS"
+          }
+        },
+        {
+          "id": "eso1714a",
+          "wcs": {
+            "referenceDimension": [
+              43223,
+              38236
+            ],
+            "referencePixel": [
+              21611.5,
+              19118
+            ],
+            "referenceValueDeg": [
+              13.7631652021,
+              -72.9640481752
+            ],
+            "scaleDeg": [
+              -0.000136644159443,
+              0.000136644159443
+            ],
+            "rotationDeg": 1.2000000000000006
+          }
+        }
+      ]
+    }
+  ]
+}

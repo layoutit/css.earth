@@ -5,7 +5,9 @@ import {requireObjectRuntimeDefinition} from './object-runtime-contract.mts';
 import {requireRecord,requireString,isRecord,hasErrorCode} from './source-values.mts';
 import type {CheckedObjectRuntimeDefinition} from './object-runtime-contract.mts';
 import type {RecompiledPresentation} from './prepared-depth-partitions.mts';
-type BindingOptions=Parameters<typeof preparePresentationBindings>[2];
+/** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation
+ * bindings (depth partitions, interior fill), which depend on neither. */
+type BindingOptions=Parameters<typeof preparePresentationBindings>[2] & {keepBindings?: boolean};
 import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -51,7 +53,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
-  definition = await preparePresentationBindings(definition, projectRoot, options);
+  if (!options?.keepBindings) definition = await preparePresentationBindings(definition, projectRoot, options);
   const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });
@@ -131,6 +133,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const ids = process.argv.slice(2);
-  for (const result of await prepareObjectJson(ids.length ? ids : null)) console.log(JSON.stringify(result));
+  // --keep-bindings: a default camera or world frame change, which needs no browser or image work.
+  const args = process.argv.slice(2), ids = args.filter(arg => arg !== '--keep-bindings');
+  for (const result of await prepareObjectJson(ids.length ? ids : null, { keepBindings: args.includes('--keep-bindings') })) console.log(JSON.stringify(result));
 }

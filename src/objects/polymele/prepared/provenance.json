@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4c4737c262c6b81bbd64c715d6f4f080de99be354a930ba0ce7fce792e067768"
+    "sha256": "2702698b5dafaca4e43cb4f271ecb5d7e9ffd6a670f8bf496c0c64f47caa4d46"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5b386aee5bef5594a29fef23bbd0d75a35e99a269a32a16f3d1b8f632f766564",
+      "sha256": "9822a6dbccf5d1e3c8c68b8565ff6fc2c39e2a1da780f17f6a36fde328360703",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 9.496545373627304,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7034478054538744
           },
           "mapUrl": "/scenes/polymele/polymele-model-surface@2x.webp",
@@ -419,7 +417,7 @@
   },
   "lastPreparation": {
     "objectId": "polymele",
-    "materialSha256": "2b388203cbf7d00ee73685161f132c85461941d6afe007c0313717fb2aa7a730",
+    "materialSha256": "c594274157eccb7fb5943d8c4d27503b7d425f2467d26cf87382564ac415c6ea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

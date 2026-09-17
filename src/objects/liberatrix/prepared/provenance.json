@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b2b5e596ec771581b77e690242c0cc929a2853b90394fdf3d4aea25d106630a6"
+    "sha256": "65fe1752ef5a694889309cb8a2673a461e29f3dfba7b5b69ea929d8fec5f2430"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "aab1b33c8275514d507ebe3cf8306d72ee4f971779315d8099e0b57441a1ed3d",
+      "sha256": "10baf017ea321f199fb34e879e4201d41c30ac5b3691bbdc40cbc989052c36ce",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 25.55,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/liberatrix/liberatrix-shape-surface@2x.webp",
           "polesUrl": "/scenes/liberatrix/liberatrix-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "liberatrix",
-    "materialSha256": "221c51f78dd7a9cbf4f93a5eee9271b79e3524ce389718c613fe699c744d9325",
+    "materialSha256": "355c0e9a8f723746221a67b50cf075ddf4f71e3b14ecd5a52ef9837fbb9690f7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

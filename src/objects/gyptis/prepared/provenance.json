@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "08342e631436c8077ea9e42a2269affc47a7a3777e85906e5dd53cc2fa907669"
+    "sha256": "f5527989dd57d27ca767af1457e97b818106a301e0459ed091301cebd231c6be"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9154b9fe45bf44604c236c2296f88200e88284b5a8d9cf8463bbabd4ec6f9a13",
+      "sha256": "e013ece494adb646d08857355dac589e0f0412b02cc8562579855675d83e469f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 83.015,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
           "polesUrl": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "gyptis",
-    "materialSha256": "95e913df3427246f6336405b4897397b6774307aacdd903e8bb1219a219314c4",
+    "materialSha256": "8ce4c507014983f90b85d66fba7e232d27fb944862e96de7d80c9fd08ad00b93",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

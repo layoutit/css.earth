@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dc7ddaccd88e99ef63c8a215bde67cd5d9c0bb80bfceb0181f30acc737320049"
+    "sha256": "41f6bd7fc1ad82329f007f9cec30ac7333d0f47f32cd189acf94fdf5d0524f9b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "9c642701e71fb08e981a266fca52394d469131bacda07479a165a8e6c5dd641f",
+      "sha256": "c8a9c0b9aa45312b7cf5223a1a3b2ec7ddd250af512dc1e57d3ec67ade8c3b90",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 46.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ausonia/ausonia-shape-surface@2x.webp",
           "polesUrl": "/scenes/ausonia/ausonia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ausonia",
-    "materialSha256": "4ee869132f3f17aa1e3a56c3a6ae6378650b0932d2b9beb05ae1beafb2f62333",
+    "materialSha256": "794d4363671f8a790fdb9c3ba4613e9bf21092e5927af38ca236620e2d68163e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

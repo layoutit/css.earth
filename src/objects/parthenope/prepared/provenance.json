@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d218666266b1505c16b88cb93dd039239aa1565a9b5515d79a66266b545a741b"
+    "sha256": "2d741379c89eb619392049deb30bc996ab081f57b7da338efc4359aaf09172e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0f4ac37d49a010e7849f552022a94825e15e5e0ccc5a24f3feaea94385dbf29f",
+      "sha256": "a63ffbf9c308ad8054d52b6340d61670c36e554fae9ccdf851468ccfc1a26510",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 74.5,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/parthenope/parthenope-shape-surface@2x.webp",
           "polesUrl": "/scenes/parthenope/parthenope-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "parthenope",
-    "materialSha256": "e0961828f2e9dff29c641e90591354b99cd1cf7246a053a984ccea15a0136c7a",
+    "materialSha256": "52b770d995b353e77866bc44af9f03253f028d4738c1d3c8e45264b26a86967e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

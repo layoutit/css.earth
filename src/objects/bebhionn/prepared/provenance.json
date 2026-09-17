@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43dd106e74efc424bde2cb34907f674d237a63ec11a5f55ddac5b6e5a9aa7ae7"
+    "sha256": "49d78821769f91bfed69191031e5d5f3b3b40bae28cf76c7ce63d5cecbcbe3c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "afff10b518a6c638c6ef7849196293c76d63a8732f5f02cb7f057b4d14c33672",
+      "sha256": "eea81014f54399e7381c2f865a26a673c110602db7aa7213e760b76d37adcbad",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 2.8,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7952809719532622
           },
           "mapUrl": "/scenes/bebhionn/bebhionn-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "bebhionn",
-    "materialSha256": "3416fb9d1498e19943f457ef92976e949bc40703ad46cd312deeb909afded4d2",
+    "materialSha256": "43ef10e2c5dd3fcfc42ad5513cbb0045f1a3db47db44caf364d046442350d8e2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

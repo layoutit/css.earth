@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f4ab3d3313efe566e1a373d005259ff39a996fb72cd3b3b6d3bbbe37ee9a9816"
+    "sha256": "a483382bd52304c9f83c20a742fe3e5e670e3509397cc7b5e505190f44f526cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "77beadd72295892fb171c4283ad8000ae579d59eeef7fa63882a7b9556c6e77c",
+      "sha256": "d80c3cc751ac6353f44cd7a2becabac445b4b3bdb991043e0fb20b8cc53397e0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 35.46,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/cyrene/cyrene-shape-surface@2x.webp",
           "polesUrl": "/scenes/cyrene/cyrene-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "cyrene",
-    "materialSha256": "07ecafca48d96a215453cb92ae065d737c4ba70135a26a598b72288f0f3227a6",
+    "materialSha256": "1469c8b18b05224dc4e060526c087359bd8769e6e1da7f227f2d732f5f4d88fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

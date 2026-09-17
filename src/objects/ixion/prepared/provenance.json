@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c955ef6df275c123ba6ea69ae228741197676e78f43964d8c03db43c419222a0"
+    "sha256": "a602aba550937744c8bee9245cd493bac8850a2bca28fcba4b574cf87207ed6f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "463a4a52f28c3a02cb22b1803642b344e870cdfdd43151f72e8f94a5cf43e69d",
+      "sha256": "f6535d4fb7086d1d8ceea2ac9ed97f62c1861a9d4d806e5d3f7010445e8e0e76",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 353.3290693408871,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9722334195720849
           },
           "mapUrl": "/scenes/ixion/ixion-model-surface@2x.webp",
@@ -392,7 +390,7 @@
   },
   "lastPreparation": {
     "objectId": "ixion",
-    "materialSha256": "e237897ec616985050954f814476bcf775c3584a053e25976523ed912f68f0f5",
+    "materialSha256": "8c454d83c42b33d44ae59005c4e5e2bc3f6a4c516a525c4e4650c6f43dec3874",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

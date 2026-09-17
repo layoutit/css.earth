@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77ed2b32de1614d5c0cec41feb4aa9d4a89011cc732cf42e7dd121768931440d"
+    "sha256": "faf39e207101c2a480e6e730739dbf2f0530266dd74ff2f84cb7d68a440c85e8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4e006f74078c301cf2b49d01b76e6eee0cf466198be434996137ab94fb0f3e06",
+      "sha256": "f3d8ba14c3b9e1100c9b31444160279432083930774be4487d1f1e3938c5ca67",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 26.63,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/rhodope/rhodope-shape-surface@2x.webp",
           "polesUrl": "/scenes/rhodope/rhodope-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "rhodope",
-    "materialSha256": "71230db3f00b0aba60b75a59ec64adcdef59f2b5a0fa204ba10265db313bfada",
+    "materialSha256": "09f442efca2495eab002020abaaa5e0913572edc84de0b3747f7e373cca5ffe2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

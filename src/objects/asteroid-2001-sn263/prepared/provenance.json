@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "541b979cbef84cf3c9dec23d4f107aeb6c63ff245077b1cd59eaa5e2564f6d8b"
+    "sha256": "33875ffb1019fb6c0e96239ece6ddfeb869727f0109794adb088cf7989b0b538"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7a3abe1769acdaaaaf97a9180bb32917c75c4cb3474a15db3ad96ab0346f2893",
+      "sha256": "e7106747aa9210fa7e740a6a3b22e2759c80ca6fb8baa6e62b0f30ce4b5cf635",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -56,8 +56,6 @@
           "radius": 230,
           "radiusKm": 1.2482944893607866,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8295302664304641
           },
           "mapUrl": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-surface@2x.webp",
@@ -213,8 +211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
             "missionId": "arecibo-planetary-radar"
           }
@@ -380,7 +378,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2001-sn263",
-    "materialSha256": "080e6ac2064eb114c25e5936e534b8e2029499bddc92cb6559a30bbba2ddeebe",
+    "materialSha256": "777a8a8ff23356c9b72a00f868313bd314c50759a50171e43512773351fdde18",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

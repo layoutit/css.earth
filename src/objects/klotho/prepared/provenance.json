@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1afddaa2731e0cb1fe3f1102cbeb5f5f4aaf8246daecce6433eac5e09f7dbaa9"
+    "sha256": "e5200846be4aed46b5a050fdd3152b24715c8d847b558da0a46afa516d2f6a8c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dc07d0a0fdf0abaf82b0547518ac6a04405a15da13d011d9afaf311935e9b4f3",
+      "sha256": "c9904958bc17e776f0d11a31a07212c27b09723786288264ef361290d9e5bf11",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 42.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/klotho/klotho-shape-surface@2x.webp",
           "polesUrl": "/scenes/klotho/klotho-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "klotho",
-    "materialSha256": "641e2504e73b06ec77d4ada493dcc3bfbbae7c8b21200656e2f56ec0e135d623",
+    "materialSha256": "c7416be6862be2a4640ea236384282d1a7a3e30bea6ef9689dd76b82e1e20614",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

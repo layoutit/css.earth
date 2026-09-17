@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "442c536093911fc4c8bad272aeee03c0f57c5bc8f58c7a0e5afd46a5710e6732"
+    "sha256": "b90c987f499d79aeb1acd5ea3a035165f67c9e1debcb4d6a0c6f92e6a816760e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "edbfc6a05e0a6c7a805ac63df76583f076b7ea790593d7f55e2a062f8e810054",
+      "sha256": "050a50d7e4e5f29f6d50f52d307801c235ad0f2db9ec14063e126791f84cf1eb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1992-sk/asteroid-1992-sk-shape-surface@2x.webp",
           "radialTerrain": {
@@ -323,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1992-sk",
-    "materialSha256": "e1628801f93520cef3cab5c70fdcf5c03024508a3d342aab07040cd219dafd35",
+    "materialSha256": "dc5d7a4a4222b44f7361ada33fd0d14973dbf5fd05a13fa60baba073c2d73876",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

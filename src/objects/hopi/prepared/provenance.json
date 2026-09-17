@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d2ecbada4fc8d5a7e542e21040463efc081cd8655f9cd5c066eec3d4ae5e3a68"
+    "sha256": "f415be5bd83b1d889e6c2f9525f05e15258b989d2193e2a6eba6f1ebc0886b27"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "93096b91e04dd1b3b6e16dee64855f53ded152080253fe2cdf16dd62be6e2fd0",
+      "sha256": "b9e7e0ab24d6bfe795aa5e67563fade273da65c7d3c59629780919df503b89d2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 9.6335,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hopi/hopi-shape-surface@2x.webp",
           "polesUrl": "/scenes/hopi/hopi-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hopi",
-    "materialSha256": "7ae1d77773250c00caf1df43ad07c5f08031e7ab4620ca3433639d5151f26ed5",
+    "materialSha256": "0a599732413c6ce6fa4a410bd3627893d06c8cd12861e0af2e5b0db641416d9c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

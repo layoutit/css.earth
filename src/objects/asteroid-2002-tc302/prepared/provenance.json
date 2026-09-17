@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4cfa390e7523b3973aeccff93dc05682aa25faabe1aabe4f44be49592c7bb37a"
+    "sha256": "f4324085094c9dc812feba08963f8f5ece85f1741dba0420507655e0285c06a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8d90525cdf7824ea3e409e5a443b09dad6bf88c239209c0179151e257d4337ea",
+      "sha256": "8d587b455a699ba30d9e688f97c494d564414a7868dc9b521880496815a48680",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 256.86505029826975,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9457476078728635
           },
           "mapUrl": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-surface@2x.webp",
@@ -405,7 +403,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-tc302",
-    "materialSha256": "b61850e5a86963d60e9d76ddb6ff67e71617b51e6eb56c3cc06b1ad6fb43e2d3",
+    "materialSha256": "86c20d94ee7dd7ef46d17b1d900535cd5ffe2bd53fcfd492c7b4e8db68dab248",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

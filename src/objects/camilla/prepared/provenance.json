@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "089c91b18f5fbe283d148028950eed8f594a928b186414b10bef8e3d28f7af0a"
+    "sha256": "62691efb1598d2cdd3b2fecdd115cdbf91e03fee6dd5db42eae865986af16110"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3731ba6f1f25436148d7fbdaa8f78cf3a0463a7e44f815f85da93c2dadf072d4",
+      "sha256": "ac42eced62c0268dbde545e37dfb7d564e1de223b3143251e0cdae52c6cc8be8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 130,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/camilla/camilla-shape-surface@2x.webp",
           "polesUrl": "/scenes/camilla/camilla-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "camilla",
-    "materialSha256": "100d409e60fdf6d65b04437dfba5f63b8ec955c7aa56db46f2ff0b246ec400f6",
+    "materialSha256": "0a5339414dd497734644cd2e6f9f65ee84a08b3dba444d9eb7294e6582d147d1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "925b43441f54e82acab62f5a3f92ab9365ef156cd8a017154f89f623fef5e0a0"
+    "sha256": "3fdf387bd27ff44d2d33c8c6d9ff28f6a30be4914c373f7f0b66ef1b3ba2b6cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d219be11ac657440eb6bde07ea649b0515e8fac8a0462fb7d01f106644892202",
+      "sha256": "24717f7793528dfc7794e80e34909bace45ca70d8ff6985265c62a7010e06145",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 13.035,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/aschera/aschera-shape-surface@2x.webp",
           "polesUrl": "/scenes/aschera/aschera-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "aschera",
-    "materialSha256": "919dd54a60aefa20822f6e47f9d1c1a65e24d35dd8ce40acedd7391ada0be01c",
+    "materialSha256": "1560ad042c51074d4f15c3a143a4ddf85fb434058fdd3d496d45f215785f2829",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

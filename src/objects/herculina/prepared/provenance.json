@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77fcff745125cc5499e54c5da5e1bf5f461ab7b6ce203df5065d92df93c68dd1"
+    "sha256": "e7e32472b205329ca060169e32d437aee6aa935ffbb88aa61f4111f5ee5c5f64"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "0532e35f8c6c9730e24cebf5beb18238b105ecb8e3c2f0d8a49a1a02acd9b6fc",
+      "sha256": "5de0ba7c093ee60bd0b0315a5a2d311b6b90c21ecdd895f76c32610d63b2f436",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 94.5,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/herculina/herculina-shape-surface@2x.webp",
           "polesUrl": "/scenes/herculina/herculina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "herculina",
-    "materialSha256": "8106d8c33b25b6fe628fe56c264604ac76eaaf2f491f1b1a64aea20de65d24b1",
+    "materialSha256": "ba925290e37aa31ba105337a3e25fa6db42e712aafa532d0e7f7f98899f6036a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

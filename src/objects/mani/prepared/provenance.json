@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "008dcbf8432427d842830be20ff61a4fd2fe38ca3fcd19872b49d0fb4a6483d5"
+    "sha256": "66fa411a86183f6af057a5e063617547a3b7a291106f07142ab23699a74ab524"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cc6f2fc665037a7e3127313cc88ad2bc23af3af12cb2ae67cc81123239c18de5",
+      "sha256": "e0af0bec6c36a9a4186e729637fe3e4f95dff81a987e1ccf2be18f579fc531e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 402.7959116616533,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.9776599797612944
           },
           "mapUrl": "/scenes/mani/mani-model-surface@2x.webp",
@@ -412,7 +410,7 @@
   },
   "lastPreparation": {
     "objectId": "mani",
-    "materialSha256": "04ae224d570785257b33e07e2baba7394c4aa39056ce52763b32c5c07ce63ea0",
+    "materialSha256": "803be24ff20eb35865323358f21351ad0df2afc1b852c9479dee42e22d3a8ccc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

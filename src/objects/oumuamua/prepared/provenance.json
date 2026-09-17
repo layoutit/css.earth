@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "017a6a0ea785ae56281fdaab782085ac6e0c20b03e8be02973c162dc2d840a72"
+    "sha256": "51c7d0b6c54dc5d887e6d1a400bda7e6010b765afafd8de154985456de8a73bc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a9c5cd71f7ecac1403093d79841429348bf6c3e068d68f26540a6dcf13814515",
+      "sha256": "21e8b0da9277c5d12e5da2f083b4ed69bd38fee16d270a779fd2976c3d4267ba",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 0.0311813426009723,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.5422842191473444
           },
           "mapUrl": "/scenes/oumuamua/oumuamua-model-surface@2x.webp",
@@ -398,7 +396,7 @@
   },
   "lastPreparation": {
     "objectId": "oumuamua",
-    "materialSha256": "668d7fdb148adcf53f87d8930326e8af825682de11e9ab86b5d7b398beb78368",
+    "materialSha256": "4b70f12747b1deb4a05c1bc31ec9b7756b7eec1fddd6833b6cd7b0e9bf5713f5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

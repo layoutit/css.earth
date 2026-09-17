@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5aa3003ac10e40775c0671ecc4e078d988a6adb1f9f78a895b410882c400dd0c"
+    "sha256": "d9ed2554f3edd197ba29f7b81c840edfdb85b94c57b12c8c617107cf01b8349a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a9f84025b7ec475c98fba9e22d59021bab2ad17be61e3a0289171aac871530ad",
+      "sha256": "0b9928a9926e196adf169973d911f1de07493b30bc3a9dc6155be6bc69f14189",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 42.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/penelope/penelope-shape-surface@2x.webp",
           "polesUrl": "/scenes/penelope/penelope-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "penelope",
-    "materialSha256": "50365bbc3a40582f6c86f74d56e86eaf4ca3ef1ab93f445e6fb409d553b92eca",
+    "materialSha256": "7d708ceee7b515fa8e7750402c3490eefdd4fbd457f95f2e17c5a9e958245b97",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

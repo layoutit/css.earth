@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "47983b2af102ec3c19efaa49ddd04fdfe67be743ac9fd6d70a71b37884db82f9"
+    "sha256": "2fd4d4d7d0b696bd142e26e4030377ac553397e6aa4ceed05d08f08062625578"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "52201522dca8668f02a2b2076171b570109bf5c5e47db8f1e3c562892c5c5216",
+      "sha256": "77fcd93ab17e8b90ca742337426ab3d4d81995778ece6e42e770b4f3c244ec9a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -476,10 +476,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 536.3,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/tethys/tethys-normal-surface@2x.webp",
           "polesUrl": "/scenes/tethys/tethys-normal-poles@2x.webp",
           "radialTerrain": {
@@ -961,8 +957,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif",
             "missionId": "cassini"
           }
@@ -1063,8 +1059,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg",
             "missionId": "cassini"
           }
@@ -1124,8 +1120,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1",
             "missionId": "cassini"
           }
@@ -1178,8 +1174,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif",
             "missionId": "cassini"
           }
@@ -1240,8 +1236,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npradius_g.tif",
             "missionId": "cassini"
           }
@@ -1302,8 +1298,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spradius_g.tif",
             "missionId": "cassini"
           }
@@ -1342,8 +1338,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
             "missionId": "cassini"
           }
@@ -1399,8 +1395,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
             "missionId": "cassini"
           }
@@ -1456,8 +1452,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
             "missionId": "cassini"
           }
@@ -1537,8 +1533,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1",
             "missionId": "cassini"
           }
@@ -1579,8 +1575,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -1627,8 +1623,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -2495,7 +2491,7 @@
   },
   "lastPreparation": {
     "objectId": "tethys",
-    "materialSha256": "3ffdd7344337d33f578717802e9a03d0aedb8296cf162a6282ce054250791f9c",
+    "materialSha256": "a72a8003fc2434a4e7be115880d7b43c081a834d832a83e2af4501b2e3631c9f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

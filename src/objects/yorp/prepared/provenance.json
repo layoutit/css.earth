@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8e7c9e290e651f76d683244cf7c746f4297f6f6ccb79fa4b26acb34165a607fc"
+    "sha256": "27c1b282d016a1bcd2922361a83613f250f42d9be250431e9384b04260cbf819"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f0023c1c6f94ebcf6be126ac0a150f7f0c2310cbb07556d4edbd79157d3b3bc1",
+      "sha256": "d462d4dfe1a3f145a57c57a661a683f8dc1e626ef66af0bbc8cb79eadb4450f8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.0564,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/yorp/yorp-shape-surface@2x.webp",
           "polesUrl": "/scenes/yorp/yorp-shape-surface@2x.webp",
           "radialTerrain": {
@@ -310,14 +306,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "yorp",
-    "materialSha256": "d72d2c6a82ba397b67d7d5790c83df24b815dcb320f58b17a859f47de2a42f9e",
+    "materialSha256": "8d598f6ac32a053c548759a1d950c9f963b327a7ece5c5e03768c3705412ea9d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

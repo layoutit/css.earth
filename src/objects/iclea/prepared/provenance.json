@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9f5283efc40ad7dd0e4f92a844ee0837cb83b1bc62b30f42b019c356ebd4a49"
+    "sha256": "58c65aac51af15b8e7b005c293e48eb965dbd3435994adc7e5e564949cfcaac5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c326bc67ae12672ccc42058160354beee5da11423aecfe3048dc13ecf1dc9ea1",
+      "sha256": "1a5909752716f5bb18182ebb01829f82b21e447d4b4c4acbeb335c3d7d8173ae",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 43,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/iclea/iclea-shape-surface@2x.webp",
           "polesUrl": "/scenes/iclea/iclea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "iclea",
-    "materialSha256": "163ecea02bbeb827ecb5a987c99b12268f2a50cc056a83e0e80812400d33ff88",
+    "materialSha256": "06cc64c3d1aea0f6046fc5afcff8aa6256bb727a64267ea02bf6cfc908aae39f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

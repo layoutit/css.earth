@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8731bf16283624a870ec919f20d428f251ef304beb8b69a7cbe05e386a2fcfe2"
+    "sha256": "0d555fa47fc8e1b08e5fd63d7f552a80ee0de62ce49068037d16173c057f181f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -704,8 +704,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "mars-global-surveyor",
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
             "evidence": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
             "missionId": "mars-global-surveyor"
           }
@@ -758,8 +758,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "odyssey",
+            "kind": "facility",
+            "facilityId": "odyssey",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fmars%2Fmars_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=THEMIS&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=4096&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
             "missionId": "odyssey"
           }
@@ -1029,8 +1029,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "a14285fa6b38fd1dd403119fee66b3d285eac41851e5ca57972df6285dd1921c",
-      "bytes": 19986,
+      "sha256": "491a324ef342e576e40dc91882418cac617b5bc7db6ea20ee7c53d5360a08782",
+      "bytes": 20002,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1587,7 +1587,7 @@
   },
   "lastPreparation": {
     "objectId": "mars",
-    "materialSha256": "486dccd91fd15c28ddb6f08c609209fc7e407f360af983041f03b11faba60b81",
+    "materialSha256": "0f7df8876786ad793271e2b80abd9990fcd91c1e5b022967c3098a20c2982bce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

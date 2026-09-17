@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2d17d1f73a161b2bc537307d8e02c883c232b2c17afc0567fd053be490c73629"
+    "sha256": "2b74312a38b86fd79f5fba154ba954a965030d4c23bd05051a1718f68e87340e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -965,8 +965,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f",
             "missionId": "cassini"
           }
@@ -1021,8 +1021,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
             "missionId": "cassini"
           }
@@ -1058,8 +1058,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
             "missionId": "cassini"
           }
@@ -1121,8 +1121,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
             "missionId": "cassini"
           }
@@ -1184,8 +1184,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
             "missionId": "cassini"
           }
@@ -1247,8 +1247,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
             "missionId": "cassini"
           }
@@ -1310,8 +1310,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
             "missionId": "cassini"
           }
@@ -1373,8 +1373,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
             "missionId": "cassini"
           }
@@ -1614,8 +1614,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "9f2dd6d9f490b4c8b775ad1764699d27cd6899e65065cc93604f8a187d59d27f",
-      "bytes": 1395,
+      "sha256": "fa1aefa8460f0366285951c998c72354f17c33d2eeaa30dd0357c70de4846d92",
+      "bytes": 1396,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2635,7 +2635,7 @@
   },
   "lastPreparation": {
     "objectId": "titan",
-    "materialSha256": "3aeaff56b3e2f99c1aba1c811ec50401c6d9dfafe4652b7d2b8fc0699ad287da",
+    "materialSha256": "7cc8ec48ccf7b6167917d328407e82b16ed64d62db3252a1c4ed1bdeb74c2ba6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

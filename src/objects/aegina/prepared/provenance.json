@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "02810a86ba8a11f7188a4388542f600862bee07c0df4a9141554238c288c49b2"
+    "sha256": "af8694038040c9d169ba7243b199edb6e54103153f4b2c9eb0567a696510eec4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1116e4588e4e8ddc7e21a3f73ded5b007880911ac44a3494372144d985815673",
+      "sha256": "7d90315f35b0368c877574f511efafbf3265a7912bf04e1b2e75ec48602c4475",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 50.085,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/aegina/aegina-shape-surface@2x.webp",
           "polesUrl": "/scenes/aegina/aegina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "aegina",
-    "materialSha256": "52290cb5c938a024e6073f240557416d7c00692d5365c97020e10a27aa286567",
+    "materialSha256": "70983ef587d888d1a6c443cca6d328bf672168acea9194459d9a5b5d14aec4f2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

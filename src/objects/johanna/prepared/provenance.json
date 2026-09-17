@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3b3d53e3abb869361f437aad5cd7188b5be08bd376b8ada5a124ad48047bba45"
+    "sha256": "abd11ad81c00340842c106bb60f60487c5902b48a94882adbd0f5ac02192db64"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8db75e47cdf21939a5acfca601deb75bc50d4ddb0ba28a9fe31cf7c89c0ac122",
+      "sha256": "eccd9bc448ae0fb9679b9124bdf5a4c19a4befbdbce44f5be5d74fcc0ad189d8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 57.095,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/johanna/johanna-shape-surface@2x.webp",
           "polesUrl": "/scenes/johanna/johanna-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "johanna",
-    "materialSha256": "f1da4a55d66904b2f6b33351f0e89ee1daeceb56e9f54e42f38abec2789d72cf",
+    "materialSha256": "7105bda873ff7ddabe3751521ef5369453a18a7e13ccc3141446104edd329053",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

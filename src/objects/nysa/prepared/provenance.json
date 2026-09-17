@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a492ff27c505701afdd37e443ad7001c08bbd32090f22ab5e6e452b0e909e7ce"
+    "sha256": "fa659711689265d1dc298c91193ab1f82c53546a63b27c256ea97c47f93c65fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b7ed1dd4aebe8386884b71c6c655055bf02825dfcbd612b54d8da27ed3d79626",
+      "sha256": "e327fbae7127bdfdf5852ab8989e4e7d2b40d2d5d300d4ea0a2e5599e356d4b2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 37.5,
-          "camera": {
-            "initialScenePitchDegrees": 46.741573033707866,
-            "defaultControlYawDegrees": 270
-          },
           "mapUrl": "/scenes/nysa/nysa-shape-surface@2x.webp",
           "polesUrl": "/scenes/nysa/nysa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "nysa",
-    "materialSha256": "d466ac7348f626c950867560a4faaa31b3417b649d20ea0839f80aaeb0426145",
+    "materialSha256": "f3be1ff8c84505d8d3b824682a0ef744d4140a648bd057dcc4cd52c7cf3d56fe",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

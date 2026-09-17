@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4705c41c6f6a95c535e4a0f0c573d9eaa8a035205baa2610d5e85f56e6b25366"
+    "sha256": "c807be8d4786195ca010710414d4db334d34df23ee3adedf89f53c301675515d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "46bb408f778ecb289f41812beedb0fd0bc0f2a0d7a4a8b4a22c740ba95fd31b5",
+      "sha256": "01a81b6fe4456013a1832fe98db232ca7ce6a5eb688e7a315c182b9c304dd9b7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 71.885,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/meliboea/meliboea-shape-surface@2x.webp",
           "polesUrl": "/scenes/meliboea/meliboea-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "meliboea",
-    "materialSha256": "f1e66a71b785a5fee413a11b810c41ea22dc1e7ca1f6d0afe7ab21a44607e80a",
+    "materialSha256": "4cd7f95b7ed12e73a51b82b14165645f494ef74880e1b41e3778b78669ead918",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "549b91f1736846afef7cda7f81363f3aec2638b98a0c7eb1177b099de7bf1dbd"
+    "sha256": "38a097469650b6a706cfff24d9ceabb4f0d928c4771c1fb0ae39cf692622d12b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b000afaa7a59b090ff99e32aef8aa12fba7233ebd7e89b2bc5f2d476e721bfa3",
+      "sha256": "a14d9f6621915c0a989d98c4f9bd822f9a09fd7ca53bda0827a94dcb24c5d9ae",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 40.43,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/niobe/niobe-shape-surface@2x.webp",
           "polesUrl": "/scenes/niobe/niobe-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "niobe",
-    "materialSha256": "336b8942eae7ec407a00d2fe437fe10d53c894785246c1b6ae045032fc756b72",
+    "materialSha256": "d92a0b5ce37ab46d63cd6a9e120f51bffa062f81807ba11876055ea574fbb56b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

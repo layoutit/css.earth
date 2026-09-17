@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d1813239daa03b135ebc41ac510c12c011778356524b94563741d15ea439196"
+    "sha256": "7226726279d9ec962d1f45741a2b17e277b444ee1265c94528ab38355c28015a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5f2eef3f1e5a96106ec609808b912e92ab8af0e8453d7ceab9a01e9e5346b6c6",
+      "sha256": "db81ffe084ca60edd4f9823496426fbdb92266c3550615536c6656151278f8c6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,10 +98,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 58,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/thule/thule-shape-surface@2x.webp",
           "polesUrl": "/scenes/thule/thule-shape-surface@2x.webp",
           "radialTerrain": {
@@ -541,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "thule",
-    "materialSha256": "2ad0aa68c98fce50cdf05a142f2ade2d1011dac8fdcad4146813ffa46cf5ecf0",
+    "materialSha256": "5c53626d89cbd1f885adebfc9e0c467c21fd1fd1887e0738d1c60be1045b6677",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

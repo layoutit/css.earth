@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "71dd0c60a01528c58a3aaa5d2a20bf626aa8a1dc9978032cee205a50bea4968b"
+    "sha256": "7bc05cb5886a92e0726b8180f92d7be5ad978c8347ff7043e69ce883e0d4788b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "dc2e9a7b04cbe3ef55dbb7774db85466c2dc83abdd1479c9da8367ad2d055cd3",
+      "sha256": "5d590b32432c671389fdc02394dbf5c7f9fac1fd1328dcabf1f8bc6d21b8f49d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.877,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
           "polesUrl": "/scenes/asteroid-1999-fr33/asteroid-1999-fr33-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1999-fr33",
-    "materialSha256": "295260f25f92127383ae4c9cdcbbe42cd26bd36bb6b67e62001f0e9d82ff76c3",
+    "materialSha256": "6d93940b58c55b303244f01986832b4c3da2f19561cd199585aa90cd90be53c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

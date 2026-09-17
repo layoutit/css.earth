@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3176db4101c29e07ab333ce16ed18ff8b9e2be97b0458e85b786da1ad066fe98"
+    "sha256": "2197a893a04fb1eaa288700a897b53648a99f736a182bef28e4bca0a178759bc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a73bbe28dbc2a1cd8836420ed57c20dacb3d977924fe91cd53628647396d4405",
+      "sha256": "1943d188638f5530e9f527361dfa7e78ccbbf24dafc74cb5e663f65481316c11",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 3.5,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8955269536090855
           },
           "mapUrl": "/scenes/suttungr/suttungr-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "suttungr",
-    "materialSha256": "26427de53e818c65124a7f3f59a2327f48b38f433b76ff180f525f9d0fbf5c96",
+    "materialSha256": "27af9d70538951ca3ad92f3b67a591e99ddc6945d3796684e7902b82b978e08b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

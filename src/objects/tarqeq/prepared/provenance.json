@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6dd01619470889436be800ce8a1af1e5bd1c853f3b4497818d21d0ca022f4944"
+    "sha256": "4b2a4b97b1f0238545f97cbc162fccfe2731ac15191f8dcd3cc2cf767220ff10"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "cf781454c50293a49de7a62fdb01c53affa3beea05f3b30af37dd3c294083812",
+      "sha256": "6a24424e3eea312dc4cdb144da7062811f642836f57046c5dd2297d098ad2f60",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 3,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.831031295823124
           },
           "mapUrl": "/scenes/tarqeq/tarqeq-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "tarqeq",
-    "materialSha256": "0a1bfdd6034da8be1558333d9f80f378ae5fb3aff93d136a0ec87fc8aaca0652",
+    "materialSha256": "ef7cb6fbdf83647a59d0180ef4cab3652b41151e79de486413621725e3b4d719",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

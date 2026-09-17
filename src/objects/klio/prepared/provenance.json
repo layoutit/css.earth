@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcf65342329d983e806f90d4ce75cd082a22581d921c0b08eabc186d752c567c"
+    "sha256": "a88b80515d503cf7f376661668518183683460e302066426192579ba15837493"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3039fce4752e0d72d963fb5b8d53bb3a00d00a0c589bef2f78c044f8397fd36a",
+      "sha256": "5ecdb1c374ab0a105f01364ab46cf42e99cddb684c11bff317c8a9d5b40b753c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 39.16,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/klio/klio-shape-surface@2x.webp",
           "polesUrl": "/scenes/klio/klio-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "klio",
-    "materialSha256": "785c42728a708fe47aaee65e6e3c49d795c88a11797fbb018c8737991fb1c669",
+    "materialSha256": "c547ab2a7cf9846bc1288188c75ab9c599ec30d1f4068ddb58c88cf2986d70cd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

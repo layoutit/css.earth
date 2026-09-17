@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "49e4a099334a2e6bb962b0135a9d84fb190b3dfda16c8b0c40865452085dc11e"
+    "sha256": "92ad526b49c51478c756aabcd71a03c55b6cd72bd6692e68b8f83ac06a46290e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "52aff91fd409f6a86abc85e14a9af327af5d5fbb381e58c1504c92159915c12a",
+      "sha256": "e6475eb0ced30a8d40b2f1543ac84fbbbbb38dbd052fc65bb5ffe5c719b0b888",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 3.293,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/educatio/educatio-shape-surface@2x.webp",
           "polesUrl": "/scenes/educatio/educatio-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "educatio",
-    "materialSha256": "1f19e99391436c4e458123a7c6ad908971479670d56f8a596f6fc9eed68d036d",
+    "materialSha256": "be312ddf2ffc9e4129ddf30db750c52f7c2db03c3b009bbb00e24bf354c27aa0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9522e06abe97eb6de0d8b4fcc42b1ebafa833a6d75d946a73c9b8a88ab1a2da2"
+    "sha256": "9b9ca9e04308010dcda27e532a9bb20dbecd16578535976961e06b636e7cdfec"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "21ceb248f8543a7a3d45e4ec4dd2ac0ec91d550211512937d64837ecb0fa24f9",
+      "sha256": "540a15b4025c9bd7a5e0adedbceaa39f307e4e775433ea1d00eee40b733353bb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 33.835,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/clementina/clementina-shape-surface@2x.webp",
           "polesUrl": "/scenes/clementina/clementina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "clementina",
-    "materialSha256": "7e573c5f3e7c0a9c2fddf0e746953ca474b24dd14fafeac8f521897530e849ca",
+    "materialSha256": "d7cbdc71ef994344edcd112c8e87b140d26ba3c35ae09472b822d8260d82c110",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

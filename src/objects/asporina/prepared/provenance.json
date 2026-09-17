@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "794cdda4d54ffbe55792dd086b0df2673c5b787e3ca5b016818b6e6ee62e1102"
+    "sha256": "0b4a207f532baa224b88ed4b4fa942918eda1e3b15c83e660008701a8b952415"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "14e31bd3f318ba60650ccedb7d5f2f6d418ff8a4068a849fb05a2d622a01dc8c",
+      "sha256": "8f66842811222ab4a9b26766c0a5bfc6b2c741b4d87a9bc13aa69e51e41317b2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 29.965,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/asporina/asporina-shape-surface@2x.webp",
           "polesUrl": "/scenes/asporina/asporina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asporina",
-    "materialSha256": "f62111b4b68e1386217aaf86f526e9f5607f24b00bdf999e13c46734d9d45186",
+    "materialSha256": "f764cc4d03916e4f50595ba035a6380d99f082acbba28b6605c1da1f91726534",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

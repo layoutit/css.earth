@@ -70,6 +70,9 @@ test('a reconstruction is cast only when it fits its data, beats the spotless di
   // phase; spot ratio; correlation of the spots beyond the spotless twins between interleaved halves).
   assert.equal(reconstructionVerdict({ vis2: 2.45, closurePhase: 1.06 }, { ratio: 5.22 }, { correlation: 0.95 }).cast, true);
   assert.equal(reconstructionVerdict({ vis2: 0.35, closurePhase: 1.12 }, { ratio: 2.73 }, { correlation: 0.79 }).cast, true);
+  // Betelgeuse through image-star against the spottiest twin within 2 percent: its lens is kept with a label, not by this verdict.
+  const betelgeuse = reconstructionVerdict({ vis2: 0.31, closurePhase: 1.2 }, { ratio: 1.24 }, { correlation: 0.57 });
+  assert.equal(betelgeuse.cast, false); assert.equal(betelgeuse.reasons.length, 1); assert.match(betelgeuse.reasons[0]!, /spotless/u);
   const flat = reconstructionVerdict({ vis2: 1.76, closurePhase: 2.28 }, { ratio: 1.05 }, { correlation: -0.13 });
   assert.equal(flat.reasons.length, 2); assert.match(flat.reasons.join(), /halves/u);
   const sphere = reconstructionVerdict({ vis2: 1.45, closurePhase: 5.58 }, { ratio: 1.53 }, { correlation: 0.28 });

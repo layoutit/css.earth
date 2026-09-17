@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e43e0b20dcc4387368f0be8fb6e69e48c6051db75a82dd750610f8cdd516df48"
+    "sha256": "d32d0c4ae5f96c4b26e636d3d90905d1f9b61ee17fd21f5a7e6ba99e0ba87865"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1893,8 +1893,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "lro",
+            "kind": "facility",
+            "facilityId": "lro",
             "evidence": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG",
             "missionId": "lro"
           }
@@ -2046,8 +2046,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "lro",
+            "kind": "facility",
+            "facilityId": "lro",
             "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml",
             "missionId": "lro"
           }
@@ -2339,8 +2339,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "9c85d21238be3cbf1186a964d9eff8718dff93f934dbfdb7aa71076d19b39cc2",
-      "bytes": 115231,
+      "sha256": "d1cccc85a33bf459376d5f3f62e4624d33fbe2683680f474e44d775cb3c63333",
+      "bytes": 115313,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3616,7 +3616,7 @@
   },
   "lastPreparation": {
     "objectId": "moon",
-    "materialSha256": "02f89ff283173d55eebd50f63090a5e0a5139811fce2ba8add6a44518176c769",
+    "materialSha256": "1235d4da5446e34811aa96e7ef16985e080c0d3e12b5eed3c50888fb61c12f30",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

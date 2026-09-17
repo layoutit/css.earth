@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 10.705,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/medusa/medusa-shape-surface@2x.webp",
     "polesUrl": "/scenes/medusa/medusa-shape-surface@2x.webp",
     "radialTerrain": {

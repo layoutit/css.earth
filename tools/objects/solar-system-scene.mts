@@ -2,12 +2,15 @@ import type {BodyId} from '@cssearth/astronomy';
 import type {PreparedCubicSkyPlan} from '../../src/platform/cubic-sky-contract.mts';
 import {requireFiniteNumber} from '../source-values.mts';
 import { parsePreparedWorldContext } from '../../src/renderers/css/dist/index.js';
-interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees?:number;defaultControlYawDegrees?:number;}
-interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'> {bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan;}
+interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;}
+interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'initialScenePitchDegrees'|'defaultControlYawDegrees'> {bodyId:BodyId;bodyRadiusKilometers:number;starfield:PreparedCubicSkyPlan;
+  /** What lights the body's map: the Sun, the body itself (a placed star) or its host star (a planet of another star). */
+  light?:'sun'|'self'|'host';}
 // Shared preparation of the physical camera and its sky/body reference frame.
 // Geometry stays in the existing preparers; object facts enter through config.
 import { buildPolyCameraSceneTransform } from "@layoutit/polycss";
 import { prepareEclipticPresentationFrame } from "../../src/platform/solar-presentation-frame.mts";
+import { LIT_DEFAULT_VIEW, prepareDefaultCameraAngles, refuseAuthoredCameraAngles } from "../../src/platform/default-camera.mts";
 import { prepareAstrometricSkySceneRegistration } from "../../src/platform/astrometric-sky-registration.mts";
 import { prepareSunReferenceViewDirection } from "../../src/platform/prepare-sun-view-direction.mts";
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from "../../src/platform/directional-sun-contract.mts";
@@ -27,7 +30,7 @@ const RESPONSIVE_FIT = Object.freeze({
 
 export function prepareSolarSystemCamera({
   bodyRadiusUnits, defaultZoom, skyProjection, geometryScale = 1,
-  initialScenePitchDegrees = 40, defaultControlYawDegrees = 0,
+  initialScenePitchDegrees, defaultControlYawDegrees,
 }:SolarCameraOptions) {
   if (!(bodyRadiusUnits > 0) || !Number.isFinite(bodyRadiusUnits) ||
       !(defaultZoom > 0) || !Number.isFinite(defaultZoom) ||
@@ -68,9 +71,9 @@ export function prepareSolarSystemCamera({
 
 // The clean-room Sun raster is already generic. This supplies its observed
 // phase/orientation using exactly the frame shared by scene and sky preparation.
-export function prepareSolarSystemSunPresentation({
-  bodyId, displayName, initialScenePitchDegrees = 40, defaultControlYawDegrees = 0,
-}:{bodyId:string;displayName:string;initialScenePitchDegrees?:number;defaultControlYawDegrees?:number}) {
+export function prepareSolarSystemSunPresentation(source:{bodyId:string;displayName:string}) {
+  refuseAuthoredCameraAngles(source);
+  const { bodyId, displayName } = source;
   if (typeof displayName !== "string" || !displayName.trim()) throw new TypeError("Sun presentation needs the observer's display name.");
   const frame = prepareEclipticPresentationFrame(bodyId);
   return Object.freeze({
@@ -83,15 +86,15 @@ export function prepareSolarSystemSunPresentation({
     bodyFixedDirection: requireBodyFixedSunDirection(bodyId),
     presentationFrame: frame.model, localDirection: frame.sunDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId,
-      initialScenePitchDegrees, defaultControlYawDegrees, sceneDirection: frame.sunDirection }),
+      ...prepareDefaultCameraAngles(bodyId), sceneDirection: frame.sunDirection }),
   });
 }
 
-export async function prepareSolarSystemScene({
-  bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, geometryScale = 1,
-  initialScenePitchDegrees = 40, defaultControlYawDegrees = 0,
-}:SolarSceneOptions) {
+export async function prepareSolarSystemScene(options:SolarSceneOptions) {
+  refuseAuthoredCameraAngles(options);
+  const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, geometryScale = 1, light = 'sun' } = options;
   const frame = prepareEclipticPresentationFrame(bodyId);
+  const { initialScenePitchDegrees, defaultControlYawDegrees } = prepareDefaultCameraAngles(bodyId, { light });
   const registration = prepareAstrometricSkySceneRegistration(bodyId);
   if(!starfield.projection)throw new TypeError("Physical sky requires its prepared projection.");
   const camera = prepareSolarSystemCamera({ bodyRadiusUnits, defaultZoom, geometryScale,
@@ -112,11 +115,12 @@ export async function prepareSolarSystemScene({
 /** A star at the origin of the heliocentric frame: no ephemeris pole, Sun direction, orbit or planetary system.
  * The presentation axis is authored (`star`) and the camera, sky registration and world frame come from the authored
  * world context, exactly as the retired static lane merged them; nothing here claims an ephemeris-derived frame. */
-export function prepareStarCentredScene({
-  bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, star, context, geometryScale = 1,
-  initialScenePitchDegrees = 40, defaultControlYawDegrees = 0,
-}:Omit<SolarSceneOptions,'starfield'|'bodyId'> & {bodyId:string;starfield:PreparedCubicSkyPlan;
+export function prepareStarCentredScene(options:Omit<SolarSceneOptions,'starfield'|'bodyId'|'light'> & {bodyId:string;starfield:PreparedCubicSkyPlan;
   star:{model:string;systemTransform:string;axialTiltDegrees:number};context:unknown}) {
+  refuseAuthoredCameraAngles(options);
+  const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, star, context, geometryScale = 1 } = options;
+  // No ephemeris places the scene's own star relative to a light or an observer, so it opens on the design pose.
+  const { initialScenePitchDegrees, defaultControlYawDegrees } = LIT_DEFAULT_VIEW;
   const checked = parsePreparedWorldContext(context);
   if (checked.focus.id !== bodyId || checked.frame.bodyRadiusM !== bodyRadiusKilometers * 1000) throw new TypeError("Star-centred scene context identity differs.");
   if (!starfield.projection) throw new TypeError("Physical sky requires its prepared projection.");
@@ -149,3 +153,4 @@ function prepareWorldFrame(bodyId:string, frame:ReturnType<typeof prepareEclipti
     metersPerUnit: bodyRadiusKilometers * 1000 / bodyRadiusUnits,
     bodyRadiusM: bodyRadiusKilometers * 1000 });
 }
+

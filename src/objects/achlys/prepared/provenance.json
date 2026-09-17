@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1c8bea2d5ca892342d23b113fa204dd018ea0eb31bf3dd755424947658ea22c"
+    "sha256": "53bfdf3e29d06d49eabe32eabe235e91ebe13dd4e6cad53ebb931ad02c10db82"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d5ce28874cf10f8eea67c790186781e76e713df25382a50c36383805d9916cfe",
+      "sha256": "f50c7923407de8515c311f747d82b17bc04c7cd14df27b71a64c9cda8a8e8053",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 353.30862431538293,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7517204772667722
           },
           "mapUrl": "/scenes/achlys/achlys-model-surface@2x.webp",
@@ -417,7 +415,7 @@
   },
   "lastPreparation": {
     "objectId": "achlys",
-    "materialSha256": "f4a5800f4765e65ac4f11f336425c3052301e7adf3c2d1723ac29df133962527",
+    "materialSha256": "2a3e20e798a61a36fcb3deb95591773fd30f23a3b8df7f77499013eebb5ffbed",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

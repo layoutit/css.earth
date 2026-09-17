@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "84fbd83f02f40aac861b2451a207ab90568ce6addd87cf8c688a3651541f949c"
+    "sha256": "4baf21d61c90da7cf125b70179e9ee799679c19172164303137e2e11aa9fa10e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4761f83f54e6c51cf1dddbf9f96a4d68361a3ccf412f355a66ee8c226e3e57e8",
+      "sha256": "b683fc8fc9a2a3b534f65c98bdf79a0a0773b48c7adbebe2434c2859646e8c16",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 57.745,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/xanthippe/xanthippe-shape-surface@2x.webp",
           "polesUrl": "/scenes/xanthippe/xanthippe-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "xanthippe",
-    "materialSha256": "85044e4539eadae94091200ba94465f52ed7cf69ba030be9ba853808b3e4f4e9",
+    "materialSha256": "b6f3928489f991a072ef52b7b27cfe895f334cec4382c31a9b8d28043bb906d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

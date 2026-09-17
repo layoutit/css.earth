@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e22f71afd342a30342678ca9b46ac55dca6f2dbe9abacfc035d212888547aae4"
+    "sha256": "53fc34ee2746c17493363ecdec759b2655dc49ae1e71ae2c12f9dd2f28523f2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "e50a4221c4d9593043d671ddbf6e7ee0c41dbfca998399a03eb952e8a5f9a2ba",
+      "sha256": "4e75757c11b738616a1a4fa1db8ed09ad1f0af7bf3df3747c105fd807b7a9d11",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 71.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/alexandra/alexandra-shape-surface@2x.webp",
           "polesUrl": "/scenes/alexandra/alexandra-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "alexandra",
-    "materialSha256": "193ac94c8e3d55f1a2e5eaa29953480f3ae9de9feddfc4c3f8ee93b39b66d6f7",
+    "materialSha256": "0aa88d91d0570b49ecddb614bb227d23890b55e95757ff849f84ca2aefe7b686",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1,0 +1,49 @@
+{
+  "count": 225000,
+  "sourceMassSolar": 1061619427.8001785,
+  "particleMassSolar": 4718.3085680007935,
+  "maxCenteredImportErrorKpc": 1.9073486328125e-06,
+  "radiiAboutCoordinateMedian": [
+    {
+      "massFraction": 0.5,
+      "radiusKpc": 4.250358238151971
+    },
+    {
+      "massFraction": 0.9,
+      "radiusKpc": 8.948941018343675
+    },
+    {
+      "massFraction": 0.95,
+      "radiusKpc": 10.757785487350342
+    },
+    {
+      "massFraction": 0.99,
+      "radiusKpc": 13.23853196299692
+    },
+    {
+      "massFraction": 1,
+      "radiusKpc": 46.63612235955614
+    }
+  ],
+  "smashImage": {
+    "nominalFullFieldDegrees": [
+      5.31141927958199,
+      4.4273393002003
+    ],
+    "tangentSpanAt62_44Kpc": [
+      5.792446309153915,
+      4.827243852306704
+    ]
+  },
+  "note": "Full image footprint is not galaxy diameter. Radial quantiles describe simulated stellar mass, not observed gas/dust/luminosity. Original physical units; excludes authored 1.427 scale.",
+  "source": {
+    "dataset": "https://datadryad.org/dataset/doi:10.5061/dryad.1vhhmgr82",
+    "snapshot": "run34681lsmcgabestModelA_HR.00440",
+    "sha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+    "elapsedMyr": 2200,
+    "positionUnit": "kpc",
+    "massUnitSolar": 232000,
+    "selection": "star-family indices [1860000,2085000)"
+  },
+  "method": "Read every selected big-endian XYZ/mass record directly; subtract the coordinate-wise median from the import receipt; sort Euclidean radii. Equal particle masses make count fractions mass fractions. Compare all centered coordinates with stored float32 import. Image full-field spans from pinned WCS dimensions \u00d7 absolute scale, converted by 2D tan(theta/2) at D=62.44 kpc; not a galaxy diameter."
+}

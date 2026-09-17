@@ -19,10 +19,10 @@ test('the catalogue restores the newest completed placement, independent of hash
   }
   try {
     const source = 'c'.repeat(64), removal = 'd'.repeat(64), overlay = 'labs/nebula/models/lmc/candidates';
-    await save('labs/nebula/packages/lab/src/state/subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json` } }]);
+    await save('labs/nebula/packages/lab/src/state/subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json`, processingPlan: 'processing/plan.json' } }]);
     await save('catalogue.json', { targets: [{ directory: overlay, images: [{ id: request.imageId, label: 'Test', sha256: source }] }] });
     const alignmentSha = await save('alignment.json', { pass: false });
-    await save('labs/nebula/models/lmc/star-separation/plan.json', { catalogue: 'catalogue.json', alignmentReport: { path: 'alignment.json', sha256: alignmentSha } });
+    await save('processing/plan.json', { catalogue: 'catalogue.json', alignmentReport: { path: 'alignment.json', sha256: alignmentSha } });
     await save(`${overlay}/overlays.json`, { overlays: [{ id: request.imageId, style: { transform: '' } }] });
     const removalPath = `.local/nebula-lab/star-removal-nox-applied/${removal}`;
     await save(`${removalPath}/request.json`, { source: { sha256: source } });
@@ -41,6 +41,8 @@ test('the catalogue restores the newest completed placement, independent of hash
     const candidate = (await reconstructionCatalogue(root, request.subjectId)).candidates[0]!;
     assert.equal(candidate.prepared?.resultId, newest);
     assert.equal(candidate.prepared?.placement.scale, 2);
+    await save('labs/nebula/packages/lab/src/state/subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json` } }]);
+    await assert.rejects(reconstructionCatalogue(root, request.subjectId), /no configured density processing plan/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 test('reconstruction requires an explicit operation, a completed removal identity and finite alignment', () => {

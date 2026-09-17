@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "249177e03e403000ac5ab9218c9554b27510c923ea2198e0edafe28fce5bdeb9"
+    "sha256": "caaf3023dc4dc42f656a9cf1780e05ef4e677980b53d5104c35e24ec3482e8fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "abbcc7ca67482df92892b38b3f52cb7f22b5e40de46c00f1b154f6a65145ec98",
+      "sha256": "39e326e4fa7487fc57b8c1d21c0c89a4f7b7a40f92617187925c97037f94a270",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -496,10 +496,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 106.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 45
-          },
           "mapUrl": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
           "polesUrl": "/scenes/phoebe/phoebe-normal-poles@2x.webp",
           "radialTerrain": {
@@ -939,8 +935,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1",
             "missionId": "cassini"
           }
@@ -1039,8 +1035,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub",
             "missionId": "cassini"
           }
@@ -1103,8 +1099,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub",
             "missionId": "cassini"
           }
@@ -1167,8 +1163,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub",
             "missionId": "cassini"
           }
@@ -1231,8 +1227,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub",
             "missionId": "cassini"
           }
@@ -1292,8 +1288,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1",
             "missionId": "cassini"
           }
@@ -1334,8 +1330,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG",
             "missionId": "cassini"
           }
@@ -1382,8 +1378,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL",
             "missionId": "cassini"
           }
@@ -2164,7 +2160,7 @@
   },
   "lastPreparation": {
     "objectId": "phoebe",
-    "materialSha256": "67b2b9ea1dd6ec231cad2219afe8784cd2ef6e688264c89536d47ef17d8c9f96",
+    "materialSha256": "3a9b6fe89958383cfd9e360232178e736199aa9bd4a106ff5d98f5495d3dae8b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

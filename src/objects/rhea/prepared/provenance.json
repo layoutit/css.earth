@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ba78c76ba782e1724ef99f4efbaf4d5bfd107a9602bd60b8d2eb7f09aca44d81"
+    "sha256": "a03d4d2e359f43cc75436732a17e33cb454211fea103bacec39f550f6e80f9c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d30eaa849c6b52f259405c05c14028b8b16b9a89c69c46f743582e0e9a0b66bd",
+      "sha256": "caeebc7f9cf3b32ff431a7a2ee11863ad7c4f998c73d34fdf88373e9dc0bc1e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -249,10 +249,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 764.5,
-          "camera": {
-            "initialScenePitchDegrees": 40,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/rhea/rhea-normal-surface@2x.webp",
           "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp",
           "radialTerrain": {
@@ -698,20 +694,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
             "missionId": "cassini"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-1",
+            "kind": "facility",
+            "facilityId": "voyager-1",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
             "missionId": "voyager-1"
           },
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
             "missionId": "voyager-2"
           }
@@ -811,8 +807,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18438.jpg",
             "missionId": "cassini"
           }
@@ -851,8 +847,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
             "missionId": "cassini"
           }
@@ -931,8 +927,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif",
             "missionId": "cassini"
           }
@@ -971,8 +967,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "evidence": "The preserved credit for this input reads: Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
             "missionId": "cassini"
           }
@@ -1812,7 +1808,7 @@
   },
   "lastPreparation": {
     "objectId": "rhea",
-    "materialSha256": "ae51adf7d448ce155781c6bb7e81789402b32ad4f984d215c6ef50139a4241f5",
+    "materialSha256": "ff3975aa8b971697755b6218a5e8b117ddedf04cd95ae7faf8677ccc3ace6559",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

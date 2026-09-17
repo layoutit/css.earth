@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fb01f551a2c0d6be30ec2d9fe331c5e38b96494ca0c08e904f0a62636155b37d"
+    "sha256": "3c0bda35c926a54b510e41c38dc402b808f304cd74d4c0844833dc886549459f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "615f0b55706a0c9e7ac8548699367d61618ed5e7526f1d6bde9e1a68d52a0643",
+      "sha256": "27ab4b9af8502faea0b4f1d18d9f1925cd6261a8753fa32e15a035ee793a3b85",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 36.07,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/erigone/erigone-shape-surface@2x.webp",
           "polesUrl": "/scenes/erigone/erigone-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "erigone",
-    "materialSha256": "2fc729fdba40ee9dd7b01e40d3976f297f954b75a0de01d28d3c7f5b7f49acc9",
+    "materialSha256": "d56ad4a8b6cf48b488edf60e453d055a2012266e162d1d6b6e252da00ea96de3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

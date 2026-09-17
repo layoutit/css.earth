@@ -46,8 +46,8 @@
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
           },
           {
-            "kind": "machine",
-            "machineId": "mro",
+            "kind": "facility",
+            "facilityId": "mro",
             "missionId": "mro",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg"
           }
@@ -288,8 +288,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5780,
-      "expectedSha256": "e39bf20ca7f88c82ae4415a47199a43f6cf782c00002a902740f183241919b04"
+      "expectedBytes": 5682,
+      "expectedSha256": "fd449bf44d69f93a8af66ce2ed78484055bff7c007c7f201a099d8c626ad7599"
     },
     {
       "path": "presentation/minimap.json",

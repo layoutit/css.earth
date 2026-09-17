@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "234937acd576d04fa3e9c371d6af440f0ba375cce356391053cb1ec032a4fb6b"
+    "sha256": "a2c801ce8e5bb9a25040b9d2041421f1ad7cb3288ae1a3ed4af7d07909cf34e0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3a24e5640770bddc10d5b218c50bf95c8424f3e0ca88d149f33d0549c40424b9",
+      "sha256": "5c8d3d2cfb237f78192b3a150f41f18c2b6e41d2d7fd03360abf9d930fa5a30c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 35.895,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/maja/maja-shape-surface@2x.webp",
           "polesUrl": "/scenes/maja/maja-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "maja",
-    "materialSha256": "458cc22979d6e582d830da7cdfd7d4eda97f2d518fc54b736a86d94a1520e190",
+    "materialSha256": "62a22fa5e0ef325a46c9c0b4595242c9af5ef690f9a973b3e5a0dff53cd60982",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

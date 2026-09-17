@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 92.915,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/bertha/bertha-shape-surface@2x.webp",
     "polesUrl": "/scenes/bertha/bertha-shape-surface@2x.webp",
     "radialTerrain": {

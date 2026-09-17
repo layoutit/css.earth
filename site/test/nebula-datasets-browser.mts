@@ -54,7 +54,7 @@ try {
         ? source.sourceBinding.references.filter(ref => ref.role === 'material').map(ref => ref.catalogueId) : []);
       assert.ok(sourceIds.length > 0, 'Every lens identifies its own original image');
       for (const id of sourceIds) assert.equal(await context.locator(`[data-source="${id}"]`).first().isVisible(), true, `${objectId}/${lensId}: ${id}`);
-      assert.ok(await context.locator('[data-machine], [data-mission], [data-unresolved]').count() > 0, 'Capture attribution remains explicit');
+      assert.ok(await context.locator('[data-facility], [data-mission], [data-unresolved]').count() > 0, 'Capture attribution remains explicit');
       assert.equal(documents, count, 'Switching datasets keeps the document');
       assert.equal(await stage?.evaluate(node => node.isConnected), true, 'Switching datasets retains the stage');
       assert.deepEqual(await page.locator('.planet-stage .polycss-camera > .polycss-scene').evaluateAll(nodes => nodes.map(node => getComputedStyle(node).transform)), camera,

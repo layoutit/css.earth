@@ -29,8 +29,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "wiyn-0-9m",
+            "kind": "facility",
+            "facilityId": "wiyn-0-9m",
             "evidence": "https://noirlab.edu/public/images/noao-m45/ — NOIRLab-curated mirror https://www.astropix.org/image/noirlab/noao-m45 identifies Mosaic on the WIYN 0.9-metre telescope"
           }
         ],
@@ -71,8 +71,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "https://science.nasa.gov/photojournal/pink-pleiades/"
           }
         ]
@@ -105,8 +105,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/"
           }
         ]
@@ -139,8 +139,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "wise",
+            "kind": "facility",
+            "facilityId": "wise",
             "evidence": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
           }
         ]
@@ -173,8 +173,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "niittee-sharpstar-61edph-iii",
+            "kind": "facility",
+            "facilityId": "niittee-sharpstar-61edph-iii",
             "evidence": "https://commons.wikimedia.org/wiki/File:Plejades.jpg — author’s Equipment Used: Sharpstar 61EDPH III, ZWO ASI071MC Pro; Tõrva, Estonia"
           }
         ]
@@ -236,8 +236,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hipparcos",
+            "kind": "facility",
+            "facilityId": "hipparcos",
             "evidence": "https://www.esa.int/Science_Exploration/Space_Science/Hipparcos_overview — main instrument and star mapper produced Hipparcos and Tycho; stellar-sources.json pins both catalogue extracts. Tycho-2 proper motions also combine historical catalogues."
           }
         ]
@@ -301,9 +301,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing facility."
           }
         ]
       }

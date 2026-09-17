@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5be34c40ee6f2d5613364fd6d61c9d8d07a004a39c4765de594af3ceb1a1362e"
+    "sha256": "95c4968ea0fc772d5fd7c2be71aaef51f670042fa2f665b2f03a6eec3a3a9641"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "822626e9a8cab690f83c98463ac8a018486b6b4e586ceeab0bd0a82e3fc6d009",
+      "sha256": "dc3eb4ac8387c32683deef7763c598c5459df3d3ec663069ee0b882cd573408e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 3.8,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8527024667968499
           },
           "mapUrl": "/scenes/skathi/skathi-model-surface@2x.webp",
@@ -422,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "skathi",
-    "materialSha256": "6b91836b56ef8f72860840ac779ccdd81b66956e58a2563805870e9ba2ad2996",
+    "materialSha256": "0293614721b46abf6e05575b44882a0acd4cc6da7d5341cf1fc6fdf087baec9c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

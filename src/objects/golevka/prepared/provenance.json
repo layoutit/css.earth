@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bbb8641701e72d43cc3ef7f8b1488aa5157f86bb3d77d6c19f210f52af7b2c24"
+    "sha256": "bca08fa65896a3c421198762952e4d775f549848f2c55a2d40161086a6e8c50f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8511c3747d0e7696cd4ea23a738b656d3e661342b71cae861a4966281bd18b0e",
+      "sha256": "56621554380cbc47d6e910149503b7053e478390945f1df81cf36447900bedd8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 0.265,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/golevka/golevka-shape-surface@2x.webp",
           "polesUrl": "/scenes/golevka/golevka-shape-surface@2x.webp",
           "radialTerrain": {
@@ -323,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL",
             "missionId": "goldstone-solar-system-radar"
           }
@@ -566,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "golevka",
-    "materialSha256": "19e13d959d0567cc984fbda866471960e57dc8cff6fcc7a4fd490ae0090d648e",
+    "materialSha256": "9b6becbca294fb481c1583688809bb4a9918e51f24ad8db9f907886cb904a75a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

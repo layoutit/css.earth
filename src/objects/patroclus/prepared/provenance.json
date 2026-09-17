@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d19c3b87643a41d59c6609a706e15e29f4c56ee104e485f79d3c35833edaa08"
+    "sha256": "3d2a530394a0f4e2307f268da619cf6215a01c3422bd33412132edf986f592c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1ffae13f8bb72fbb60232a9dc1e403341602d0ef8b7b7ba8c9c309d9b2a26746",
+      "sha256": "a28dab94d6e80200e22a3d4096dcb4a4bef8f9f1e063fac7fb716aeb603bbce7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 56.672872253886204,
           "camera": {
-            "initialScenePitchDegrees": 20,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.8924861772265544
           },
           "mapUrl": "/scenes/patroclus/patroclus-model-surface@2x.webp",
@@ -425,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "patroclus",
-    "materialSha256": "370dda81f40860bc53a2c9bc21ef59929a56b6fc8be5cb38118fb53e471b6876",
+    "materialSha256": "3918c276bc3b12540bda81ef3cd454a4ca98a93465ebb3c266e9e804ea18afce",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

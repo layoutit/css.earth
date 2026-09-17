@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e098a036c685363995d40ae3de9e638808e72a8e8d4c457b263333a80c8b5fde"
+    "sha256": "76cc3d9a50dda46a690bbd725fb8fae6c82884000e65ea43bf84576905fe68a4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "1bb4b580a548585cf779a94d441f129a7da6fc8f8cbedc3b7367fdbae8870ba2",
+      "sha256": "dfa10024d6c3399378fccce853569de67a97997330d6882145d0b291fafac103",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 22.1,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/petrina/petrina-shape-surface@2x.webp",
           "polesUrl": "/scenes/petrina/petrina-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "petrina",
-    "materialSha256": "3cf8d0973bbb3ecb5ef38997a5b84128028b0bbe345c0ae6bc42683208aab3a5",
+    "materialSha256": "af02862879ac092042bf34f66c0076e82e96f5b7e4fb8ce8dca384fc9b0605b6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

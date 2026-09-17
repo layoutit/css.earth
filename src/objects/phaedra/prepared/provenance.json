@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d17d5bec16b26467d5dba221cb9354e75ee7f0dbd4bd1eecbf56e0363820a1ff"
+    "sha256": "ee32ce7e7fe9748bc37eeb504b13948bc449eff65560c82e10e1c8fcdff9c9f8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5c5d901e559a00af8af56db23fc297cbe644b1a67e8a2f6f66c9793a3d11d289",
+      "sha256": "28c32876630a04caeddd9be29aa43da6a431d8e1b2f135212337311df50dc971",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 32.04,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/phaedra/phaedra-shape-surface@2x.webp",
           "polesUrl": "/scenes/phaedra/phaedra-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "phaedra",
-    "materialSha256": "dcf0da1703fde1cb6c06e5d4873b0d3a8d34fc736f75258af3a734169d675004",
+    "materialSha256": "eb10456bac53f9717eacc59dd2b6b7c9a6d0772348fde884f820ed391b74e707",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

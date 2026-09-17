@@ -48,8 +48,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
           }
@@ -122,8 +122,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
           }
@@ -169,8 +169,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
           }
@@ -192,8 +192,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS"
           }
@@ -243,8 +243,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS"
           }
@@ -294,8 +294,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS"
           }
@@ -345,8 +345,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS"
           }
@@ -396,8 +396,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS"
           }
@@ -447,8 +447,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cassini",
+            "kind": "facility",
+            "facilityId": "cassini",
             "missionId": "cassini",
             "evidence": "The preserved credit for this input reads: Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS"
           }
@@ -1821,8 +1821,8 @@
     {
       "id": "titan-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 272,
-      "expectedSha256": "ec1575f70725357e6fcc5a559b501faf6d8d441e4716a97a6e70d469dcb1a69d",
+      "expectedBytes": 205,
+      "expectedSha256": "2d89825603b4425101831e20ee229e3604dbd92e5cdb75accc23bdcc581214aa",
       "origin": "Repository-authored Titan solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2129,8 +2129,8 @@
     {
       "id": "titan-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1395,
-      "expectedSha256": "9f2dd6d9f490b4c8b775ad1764699d27cd6899e65065cc93604f8a187d59d27f",
+      "expectedBytes": 1396,
+      "expectedSha256": "fa1aefa8460f0366285951c998c72354f17c33d2eeaa30dd0357c70de4846d92",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",

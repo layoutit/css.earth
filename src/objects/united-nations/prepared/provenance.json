@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9cc9fc2d4f4065d949579fef618fc839a2a11c38bec301cdd9896273907eff21"
+    "sha256": "6999ea51990737cf9aec1f4324f5b38bfeb3222ae9d4b342927834c0adf8d0e2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f5fab0800b132410898a7b5a1b185166036d8a8ffbe83e90f4d911fe2ec7f06d",
+      "sha256": "d1d1a228f7f3dfcda562ba178b1369a9ebe3bc9dabcbb9b13a7b605133d42a92",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 5.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/united-nations/united-nations-shape-surface@2x.webp",
           "polesUrl": "/scenes/united-nations/united-nations-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "united-nations",
-    "materialSha256": "c520d623336f1745b7f8bb1ee4e061fc2f52b1bbbb17bbd02e808c67633e6ff2",
+    "materialSha256": "126160713f38ef1e915cbf280dc09e680e1459be41b96bab87343a63f8a24902",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

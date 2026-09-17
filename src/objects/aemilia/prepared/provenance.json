@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca9db450a4180f090107574348b32525ecff173c58572d3f65b41b60534b27ea"
+    "sha256": "dc1798edd25fbf42ab6da937da7349e88e1e714847dee7e8bea15dc49bda7a51"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4c5a65d3bb43509770ce3d6a23590416c2027c34d29a48138210a30e3786b55c",
+      "sha256": "7bc9176e1fc7abde0b42ba882e87f42dcfa32a27e97e9141e182c18d9fa260e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -101,10 +101,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 67.5,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/aemilia/aemilia-shape-surface@2x.webp",
           "polesUrl": "/scenes/aemilia/aemilia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -557,7 +553,7 @@
   },
   "lastPreparation": {
     "objectId": "aemilia",
-    "materialSha256": "efdab51db492f27330a99f36989053d06473d9d16c58ff36d832bd6c975e58b4",
+    "materialSha256": "215f6c70d70737a4ad81f171d9e526d02e8fe5a6cf365fa0484596a1d02153aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

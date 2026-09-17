@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ae11d8dc3f1c21e8e9266e732e34c8a933e459850554006a068b3fa124d8aa4f"
+    "sha256": "985bca89120c75b99006189d6594f981947418110f1bb42028816e2dcb5fcec4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6457e7c422c5c52a8bc126cd144d5d95aa58b5e4a6a463c681a611954ff17e33",
+      "sha256": "f8c500fff3b8bb6fda8a4775fffbeb35098a08db8312c28fda912385d53bd918",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 13.9375,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/tulipa/tulipa-shape-surface@2x.webp",
           "polesUrl": "/scenes/tulipa/tulipa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "tulipa",
-    "materialSha256": "e8cee273e54d04430335bd17c19895fbad1190d911910a5b7687ca7cdb7c1782",
+    "materialSha256": "7c6a2813407a5cb54c7e2f1b3959044d1f12a7096dcbf288c6dfa97b2710ad54",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

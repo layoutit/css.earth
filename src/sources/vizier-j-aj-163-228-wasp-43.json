@@ -1,0 +1,49 @@
+{
+  "id": "vizier-j-aj-163-228-wasp-43",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Patel & Espinoza (2022) empirical TESS limb-darkening coefficients, table 4 row for WASP-43",
+  "identifiers": [
+    {
+      "type": "VizieR catalogue",
+      "value": "J/AJ/163/228"
+    },
+    {
+      "type": "DOI",
+      "value": "10.26093/cds/vizier.51630228"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac5f55"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/163/228",
+      "label": "VizieR J/AJ/163/228"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac5f55",
+      "label": "Patel & Espinoza (2022), AJ 163, 228"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/AJ/163/228/table4&Name=WASP-43&-out=Name,u1-j,u1-j-p,u1-j-n,u2-j,u2-j-p,u2-j-n&-out.meta=hu",
+      "checkedOn": "2026-09-17",
+      "locator": "table4 row WASP-43: quadratic-law coefficients fitted to TESS transits with juliet, u1 0.55 (+0.22 -0.31), u2 0.00 (+0.46 -0.30)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. A. Patel and N. Espinoza (2022), AJ 163, 228; VizieR catalogue J/AJ/163/228 (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-3881/ac5f55"
+    }
+  ],
+  "publisher": "CDS"
+}

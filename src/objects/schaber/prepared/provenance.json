@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ee5039bb600201bb8ea12692c8ec1adc1fe3cfed80cf41c34286df90c54ffbf4"
+    "sha256": "9dd2f610a8193e7aa77d1c2e72f93225f2aa28dd2f334fdd0c44ba1eadb2a102"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "7988ae7bd7c834c501b0a237516113437ddbf0dbea886f7d3b75ee6bddcdf47a",
+      "sha256": "2b32a0c503d25d9423dfbbbbca1ac696f40ffb0436b7e265d4af26869f44f4a1",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 13.269,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/schaber/schaber-shape-surface@2x.webp",
           "polesUrl": "/scenes/schaber/schaber-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "schaber",
-    "materialSha256": "4da81465135c684fac54993d364ebc616f49f85d032f0c17eb6fc1417e5e2ced",
+    "materialSha256": "5a5d03b3f7a917fb617dfeb0096bdd4846cf1ae2836b3090f175bb46d8f77f10",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "01c3e8069da7a8cbe21cf65a98a603c21447cfc9166a207dce91e9bf70993b1a"
+    "sha256": "23b1c8d08564682588a4c8ed183a4ad9362f842e9f579978feb775a0f98c600d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "155723a375840e0832e8a5b799aa4f33b8efc7791a04b2a9dd5fbdfcdf52dc27",
+      "sha256": "b0be43916d944ffea1ed9b012b30c3d9f3f4291de3fe9605145f53e733ed530e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 17.05,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/ducrosa/ducrosa-shape-surface@2x.webp",
           "polesUrl": "/scenes/ducrosa/ducrosa-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ducrosa",
-    "materialSha256": "538bd126d0bf5862cf954be5a196edca848ff0fadd3aaeca67cf55302ab52deb",
+    "materialSha256": "15a03be9eca152f31b89fb3de262c71632119957ffb3f6dfd5821994641d816c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

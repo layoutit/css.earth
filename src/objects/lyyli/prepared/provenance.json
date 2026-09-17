@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dedf900cecd999451e34a84d919c8000a5cf73581d5da1b8ee633368db4b7c91"
+    "sha256": "7cab8d9728fd2e30a8c3b3d204dd082c34e1b2a3f4b3817c60d1665f48cbeeb2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "74469af3e759f2def71b1cd4d5fa0a2a07c0a1f57fc3385845197a982b110db7",
+      "sha256": "bed46f883016d261ca67ea28b6199f2fd252780d80fda9ca15a949abbfc937dc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 13.56,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.6787133818114748
           },
           "mapUrl": "/scenes/lyyli/lyyli-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "lyyli",
-    "materialSha256": "114b3bcd1ae9e850d6dc7ed75952a7e3179b56c9efb1cc66489c964f2ed784b9",
+    "materialSha256": "e186c857e4bbca5718481633a062fdeaa77ae4f9b3467b43285a4a5a10a16b7d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6627cf119539a6c8c3b6b9c4a8be71343c1e09a8605d4b3377c2c5503fd32f7a"
+    "sha256": "0b617d66db7975603d832be75b7a4d6e209a839e9a1ab580206f5b014993fb73"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "6af853a7140d62e528cd220f90ea87e1e7753c3079d2c3a9fa028ea67f56d4aa",
+      "sha256": "594596a3395bf706b1e8bb6d8519a3f0217f2be921d0d23126e82036ed71cd71",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -97,10 +97,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 75,
-          "camera": {
-            "initialScenePitchDegrees": -44.5505617977528,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
           "polesUrl": "/scenes/kalliope/kalliope-shape-surface@2x.webp",
           "radialTerrain": {
@@ -293,8 +289,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlt-ut3",
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
             "evidence": "The preserved credit for this input reads: P. Vernazza et al. (2021), ESO/VLT/SPHERE large programme 199.C-0074; LAM asteroid survey",
             "missionId": "eso-sphere-asteroid-survey"
           }
@@ -539,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "d007ad60142af0cb9be383cd9836a9ad5e912f16cb8b48963b2e69311710f380",
+    "materialSha256": "f9aabc0b2a815a5263c0583a417b2180cfd791ede25939fe2275b9bc44420676",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

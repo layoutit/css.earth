@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1e5e73d29c0615d51fe8ce4020d8419168ccc4f54fb5a22ccd167189dca62f9"
+    "sha256": "6f086aefdccdb37a9b3668a2bee5244e2b562723775980a763b58ce4ec8f1910"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "960dd27ddb2067521ce0834611ddee39324974bdad843c6b216036f889d846ca",
+      "sha256": "9db3721cba81cfff6b1166afac8f17a111ab8c977b19e62ed3e27e2f39138471",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 82,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/laetitia/laetitia-shape-surface@2x.webp",
           "polesUrl": "/scenes/laetitia/laetitia-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "laetitia",
-    "materialSha256": "aa6d1550b85c0302e33e9990365d087f9125bd3b37e0168e88d56015435e05e0",
+    "materialSha256": "d0f7fcc9b8c3bbb0cf54dfe942e9038cc08f127f7be13b4ddf8b4acb2e045262",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

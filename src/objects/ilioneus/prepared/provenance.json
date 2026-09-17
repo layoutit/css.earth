@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "780b37a0869961c95966952f576d394c41cb504892bc770c5fee0da386546d9b"
+    "sha256": "7dc74d216420c1de19a128dda3bbb3aa7ff30d357079cfb60291371fe2ac57fb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5c389ed720ca963fda4bc6a908b1294c253cbfa2f530f85f82ac7df878fb7cb7",
+      "sha256": "657ad2a0a7b066fd3cb3660a5bcca0d8cf532001967bfb1f9d6d54392299328e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -103,8 +103,6 @@
           "radius": 230,
           "radiusKm": 30.3555,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0,
             "framingScale": 0.7674319210533601
           },
           "mapUrl": "/scenes/ilioneus/ilioneus-shape-surface@2x.webp",
@@ -560,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "ilioneus",
-    "materialSha256": "12c6d97fc7f241c9280f61de457a4e84450bcdb6e8c354b9c78f7861cacde7f6",
+    "materialSha256": "ea585d95d307a3e21c932b3c8a48b5755b70d3e85acccab7186e91440a414f3a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

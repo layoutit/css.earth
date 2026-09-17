@@ -84,10 +84,6 @@
   "geometry": {
     "radius": 230,
     "radiusKm": 73.24,
-    "camera": {
-      "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
-    },
     "mapUrl": "/scenes/sibylla/sibylla-shape-surface@2x.webp",
     "polesUrl": "/scenes/sibylla/sibylla-shape-surface@2x.webp",
     "radialTerrain": {

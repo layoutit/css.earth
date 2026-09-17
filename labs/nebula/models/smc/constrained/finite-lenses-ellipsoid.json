@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-finite-lens-recipe@1",
+  "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
+  "alignmentReport": {
+    "path": "labs/nebula/models/smc/registration/alignment-report.json",
+    "sha256": "f02d9370c74450cc5143a5d3fcc608635f2714dc7141cbf466a22690d2398001"
+  },
+  "sources": [
+    {
+      "imageId": "smc-vista",
+      "sourceResultId": "1f80d4736aa5c70518e67239776d4306b1bfab086712c2e962415178d3a8a770"
+    },
+    {
+      "imageId": "smc-smash",
+      "sourceResultId": "a1e5a1d4ee16dfa3bb1861fa4b069642bb8840e86928158afcc0ff4b4aa10032"
+    },
+    {
+      "imageId": "smc-dss2",
+      "sourceResultId": "a280d527b56c9ad28aeaf58182b5360aa5eb7a80a4f0e0ebb95c0d37aada0031"
+    },
+    {
+      "imageId": "smc-allwise-wide",
+      "sourceResultId": "298c402ba303bd906466d0279b4d9b7ee2d15718eb3679ee1b0aa5af8a4ef6cb"
+    },
+    {
+      "imageId": "smc-horalek-wide",
+      "sourceResultId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333"
+    },
+    {
+      "imageId": "smc-dss2-fits",
+      "sourceResultId": "22c714c9ab4bc2d4375109c3f19eddf34f22dd8b3eb4388167d6bc151ac84bc0"
+    },
+    {
+      "imageId": "smc-wise-stellar",
+      "sourceResultId": "c310f4c230860a4a030d1f26e4551da23c8028315ed6254bb0961dee9fc94d63"
+    },
+    {
+      "imageId": "smc-wise-starforming",
+      "sourceResultId": "d5920356ae4b603ffff93366a9443a9bdcbe008ed303721368711c998e345cce"
+    },
+    {
+      "imageId": "smc-herschel-dust",
+      "sourceResultId": "a227754d020a8045ae55c4697d76a173ad3be0cd1f0f63f6155df0601726030d"
+    }
+  ],
+  "excluded": [
+    {
+      "imageId": "smc-wise",
+      "reason": "Wrong-scale negative control fails unchanged alignment threshold."
+    },
+    {
+      "imageId": "smc-irida",
+      "reason": "Wrong-scale negative control fails unchanged alignment threshold."
+    },
+    {
+      "imageId": "smc-spitzer",
+      "reason": "Archived; registration not qualified."
+    },
+    {
+      "imageId": "smc-herschel-spitzer",
+      "reason": "Publisher WCS only; no independent registration gate."
+    },
+    {
+      "imageId": "smc-herschel-gas",
+      "reason": "Same-grid publisher astrometry only; no independent registration gate."
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f13f0d6feb60099bc8621252efe3f47ac055d391e71ffdef749e18d4145c5e5e"
+    "sha256": "25e1dc3ebdf9474a214a325141d6885806740873f8ada997e614f00ff352f505"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "250827378c83d86a943fbd0e3c4ded839655879e18f72f63d12b1ee2fe55580d",
+      "sha256": "78aebec656e837533f16a9cb8c8845ef8e96dc5731893304dbfedfe75d7ee922",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 13.27,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/anna/anna-shape-surface@2x.webp",
           "polesUrl": "/scenes/anna/anna-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "anna",
-    "materialSha256": "390ba70245b7a0e2ecba5ffea5c8aa11a092d909954e3cb5cce2eef4c6d258a2",
+    "materialSha256": "c5294bd58ec7f1c40374d05437de91e2c8f32284ecf2863b9a266e65ef4b168f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

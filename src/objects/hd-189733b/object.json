@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-189733b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 189733b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 81254.5430832
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/hd-189733b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "61e56bdc7390eba69600d31d7fce0203625ff34cb2609605c481eacebe5b7304"
+      }
+    },
+    "catalog": {
+      "name": "HD 189733b",
+      "classification": "exoplanet",
+      "color": "#c6427c",
+      "distanceAu": 17976692.3,
+      "description": "Hot Jupiter whose dayside heat map JWST measured from its eclipses.",
+      "systemName": "HD 189733 system",
+      "order": 908,
+      "context": {
+        "order": 905
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        283003601448338270,
+        -486598257827539500,
+        235574707235524400
+      ],
+      "presentationToReference": [
+        0.5271399168256775,
+        -0.8273173463507698,
+        -0.19408636355019385,
+        -0.7575765267844305,
+        -0.5609919730022995,
+        0.3337151664102579,
+        0.384969237932405,
+        0.028879311870394313,
+        0.922477463785233
+      ],
+      "orbitUpReference": [
+        0.8273173463507698,
+        0.5609919730022995,
+        -0.028879311870394313
+      ],
+      "metersPerUnit": 262111.42930064513,
+      "bodyRadiusM": 81254543.0832
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "6d4f5ce43c4157a75078a6dcd459c0bc590fda529d1985c0d21e1c48a04895ae"
+  }
+}

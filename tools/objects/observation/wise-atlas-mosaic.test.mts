@@ -61,4 +61,12 @@ test('tiles in overlap groups that share no chain of overlaps are refused, not s
   const joined = [...tiles, flat('0004p000_ac51', 10, 105), { ...flat('0005p000_ac51', 90, 1010), width: 30, sum: new Float64Array(300).fill(1010), count: new Uint32Array(300).fill(1) }];
   joined[4] = { ...joined[4]!, width: 95, sum: new Float64Array(950).fill(105), count: new Uint32Array(950).fill(1) };
   assert.equal(matchTileBackgrounds(joined, 20).offsets.length, 6);
+  // A grid-edge sliver with too little overlap is left out only when joined tiles already cover all its pixels.
+  const sliver = { coaddId: '0006p000_ac51', x0: 5, y0: 2, width: 3, height: 3, sum: new Float64Array(9).fill(5000), count: new Uint32Array(9).fill(1) };
+  const withSliver = matchTileBackgrounds([...joined, sliver], 20);
+  assert.deepEqual(withSliver.excluded.map(tile => [tile.coaddId, tile.pixels]), [['0006p000_ac51', 9]]);
+  assert.equal(withSliver.tiles.length, 6);
+  assert.equal(withSliver.offsets.length, 6);
+  const ownSky = { ...sliver, x0: 400 };
+  assert.throws(() => matchTileBackgrounds([...joined, ownSky], 20), /disconnected overlap groups: 0006p000_ac51/);
 });

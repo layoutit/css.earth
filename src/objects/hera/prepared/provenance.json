@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bedbcb3e16dcbcb4942499930f6a62b361cd6190044e4443f9b2bdbe219fcb26"
+    "sha256": "4289d23c100bed08145a0ed3e26c19a7f14d46ac44a1c44288cf10747117c84b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "84554f20dd356a98e1f8c25ea6e4ea4a578712d90227eb396d514c41876c0be7",
+      "sha256": "ad19d53b129d7019546a7e78ec65954078f3472d6fae7efc31aab71113626cb9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 41.615,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/hera/hera-shape-surface@2x.webp",
           "polesUrl": "/scenes/hera/hera-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hera",
-    "materialSha256": "0d907a3738e02e1f175d3ed18781b3a8c32b6e02e06a21137f03c60b44663e40",
+    "materialSha256": "2a32dd83e34827ce01c373dc986ccfcf608059e6905c61ae51538ba3b5c92d1a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

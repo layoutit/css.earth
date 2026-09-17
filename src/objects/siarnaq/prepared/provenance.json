@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d09a0054460708aeef05e93010ecac5d81d66e435575de3ca729d317dcdb842"
+    "sha256": "a3f23089513bd8e4bf8a82e88ea25d4511deebffdb6d5193c20d3de0efac7d7c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "27cd66403f43c75cd79343ba38ef138825132ac07c99997c18af34e8a85e85ae",
+      "sha256": "87489a0a2d9ab5e8489364f1076a47db3288c5be060d8ce1ead4ba7e6aed56fb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,8 +65,6 @@
           "radius": 230,
           "radiusKm": 19.5,
           "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": -45,
             "framingScale": 0.7826781959680614
           },
           "mapUrl": "/scenes/siarnaq/siarnaq-model-surface@2x.webp",
@@ -413,7 +411,7 @@
   },
   "lastPreparation": {
     "objectId": "siarnaq",
-    "materialSha256": "40006bbdff306c9586db45a3fe9c38a16706feb034b951ec8fdb2a9f49ad37c6",
+    "materialSha256": "6f5f0479d8d6d70a2b164f011bc5379984f94d937f750e0d1134b46fa00285bd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

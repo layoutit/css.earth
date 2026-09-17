@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7d917f14cf979c9528413cc6fc83f7163461a59ec6842f5b163e3451a7088d70"
+    "sha256": "67c8e4339c81e3030d298d6e84d5972cd8641a1dcef8c1ea477bbb98a8c306b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "129f73538d9dbdadeacc188dcf3ca777e9611d0760bf0e296786f7909dfcf63a",
+      "sha256": "238248c1a5cba10a18f13f786976e6b027c96708ca8b8f79e28308502b046632",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -162,10 +162,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 2.58,
-          "camera": {
-            "initialScenePitchDegrees": 10,
-            "defaultControlYawDegrees": 180
-          },
           "mapUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
           "polesUrl": "/scenes/steins/steins-osiris-surface@2x.webp",
           "radialTerrain": {
@@ -491,8 +487,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
             "missionId": "rosetta"
           }
@@ -1109,7 +1105,7 @@
   },
   "lastPreparation": {
     "objectId": "steins",
-    "materialSha256": "d9eb95b93165e5a3664c830f1871c38ba11693734541f6227eda919e7fa8e90f",
+    "materialSha256": "b5f513ee5399aad0a2e5fb714d85e8ea0b2db0c61daef38b67624d19c34dd5d9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

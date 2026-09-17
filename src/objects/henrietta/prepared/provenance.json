@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b901703f88fe0f528a12c0878a47cc0f681c85fe433d69b9d2d353d0e41a9739"
+    "sha256": "9831dec044920d3c77c1670787f732d3dc9aeb15ff59b6295bb02b6a606c388b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "21c95b4ea574a37883cf96b3cc6177ef387eb104c7e00e7c3eb9e0767ab4df6e",
+      "sha256": "f81eb90aa94728a9d5da18ca1146fed564022de570c143de11e8190a791ce480",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -102,10 +102,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 53.785,
-          "camera": {
-            "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
-          },
           "mapUrl": "/scenes/henrietta/henrietta-shape-surface@2x.webp",
           "polesUrl": "/scenes/henrietta/henrietta-shape-surface@2x.webp",
           "radialTerrain": {
@@ -559,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "henrietta",
-    "materialSha256": "72f725488474364841853135d149243a2921e19442122161cc212e388d37f6cd",
+    "materialSha256": "ddf73202645c797ad8b673af9d6c80823dc4c36eebf5739bef0fd9b30d522866",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "984d250718001baa2d11f092fe16ad1613fd0b932aed0922b9e693069ef15746"
+    "sha256": "b12a8a40ab3b3ece8060b2cadb9bf907ed8d5245b593ef50388877768c3283d9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f877a92119ac724704daee78cf921d861cda0fa4a044dc4884ed9899da7e6eeb",
+      "sha256": "cc2b2318fdb61306a5706ad33525b0403e7ee0370a49d6276e3b29ac40bc665d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -64,10 +64,6 @@
         "geometry": {
           "radius": 230,
           "radiusKm": 4.75,
-          "camera": {
-            "initialScenePitchDegrees": -34.78421319927436,
-            "defaultControlYawDegrees": -39.63050597025636
-          },
           "mapUrl": "/scenes/kerberos/kerberos-model-surface@2x.webp",
           "polesUrl": "/scenes/kerberos/kerberos-model-poles@2x.webp",
           "radialTerrain": {
@@ -432,7 +428,7 @@
   },
   "lastPreparation": {
     "objectId": "kerberos",
-    "materialSha256": "5f5d362ac3fa7a082245265e5a3bd20f690308253602a43218e3390b9831d35d",
+    "materialSha256": "62e321c9713d36209061246032fb2a71a2f7fbc9b56ec177f315a6c8d13ca02d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
