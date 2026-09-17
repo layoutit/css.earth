@@ -16,6 +16,7 @@ import { loadSurfaceObservation, type SurfaceObservation } from '../surface-obse
 import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-terrain.mts';
 import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
+import { skyDisplayRaster } from '../../fits-sky.mts';
 import { offLimbPlate } from './off-limb-plate.mts';
 import { readObservation } from '../terrestrial-layers/solid-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';
@@ -351,9 +352,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const frame = requireRecord(plan.lens.frames[0]);
         if (frame.encoding !== 'fits-oi-reconstruction') throw new TypeError(`${objectId}/${surface.id}: the off-limb plate reads fits-oi-reconstruction frames only.`);
         const image = readReconstruction(await readFile(resolve(sourceDirectory, requireString(frame.path))));
-        // FITS rows run south to north; the camera route and the frame's centre use top-down rows.
-        const topDown = new Float64Array(image.values.length);
-        for (let row = 0; row < image.height; row++) topDown.set(image.values.subarray((image.height - 1 - row) * image.width, (image.height - row) * image.width), row * image.width);
+        // The camera route and the frame's centre use the sky as seen: north on the first row, east on the first column.
+        const topDown = skyDisplayRaster(image.values, image.width, image.height, image.axes);
         const center = requireRecord(frame).center as readonly [number, number];
         const discRadiusPx = plan.shape.radiusKm / requireFiniteNumber(frame.rangeKm) / (requireFiniteNumber(frame.pixelAngleMicroradians) * 1e-6);
         const displayRange = requireRecord(observation.report.display), palette = requireRecord(plan.lens.display).palette;

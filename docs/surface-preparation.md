@@ -159,8 +159,10 @@ identifies the cubes and processing behind this illustration.
 
 FITS decoding happens during preparation, never in the browser. The shared
 [reader](../tools/fits.mts) preserves native pixel/axis order and physical numeric
-values. Product adapters still own units, quality masks, camera registration,
-spectral selection, missing-data policies and display transforms.
+values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
+Product adapters still own units, quality masks, camera registration,
+spectral selection, missing-data policies and display transforms. Sky images do not
+own their orientation: [fits-sky.mts](../tools/fits-sky.mts) reads it from the WCS.
 
 | Input | Supported contract and owner |
 | --- | --- |
@@ -168,6 +170,9 @@ spectral selection, missing-data policies and display transforms.
 | Multi-HDU observations | Encounter, LORRI/L'LORRI and MVIC adapters require their exact instrument layout, units and quality conventions. Named HDUs do not imply a camera model. |
 | Spectral and geometry cubes | LEISA uses bounded sample access without expanding a whole cube. PDS4 geometry labels must agree with FITS axes, element types and offsets; label special constants remain authoritative. |
 | Fixed facet tables | Only the declared `1J + 5E` BINTABLE profiles, with their mesh identity and centroid checks. Column scaling (`TSCAL`/`TZERO`) and null (`TNULL`) declarations are rejected, not ignored. |
+| OIFITS and ESO pipeline tables | [fits-table.mts](../tools/objects/interferometry/fits-table.mts) reads `D E I J K L B A` and complex `C M` columns, returns an integer column's `TNULL` as `NaN` and refuses to read or write a column scaled by `TSCAL`/`TZERO`. |
+| ESO headers | HIERARCH keywords keep their namespace (`ESO DET NAME`, MATISSE's `PRO DISP COEF0`). Raw primaries reach 2,480 cards, so a header may span 256 records. Lower-case exponents are read as Astropy reads them. The archive's header service text is read one card per line. |
+| Sky images | A celestial image states RA along columns and Dec along rows, unprojected (SQUEEZE) or with one zenithal projection, through `CDELT`, `CD`, `PC` or `CROTA2`. The display raster puts north on the first row and east on the first column. Rotated, skewed or axis-swapped images, other projections, a `LONPOLE` other than 180 and a reference point on a pole are refused, since a flip cannot display them. |
 | Nebula Lab transport | Uses the shared image reader, then reverses rows once for top-down arrays. Missing/nonfinite pixels and float32 overflow are rejected; metadata cannot override structural fields. |
 | Pallas SPHERE metadata | ESO `HIERARCH` names and scalar values are decoded without stripping cards. The four released LAM Deconv frames have exact Astropy comparisons for all 777 extended keywords and all 65,536 pixels per frame. Decoding alone does not qualify a camera or a registration; Kleopatra's `zimpol` lens adds that separately, by computing the camera from the release's own spin record and an ephemeris rather than from the frames' inherited world-coordinate solution, which describes an uncropped frame and not the product. |
 | MUSE acquisition | The existing [Python converter](../tools/objects/acquisition/muse-spectral-maps.py) remains an exact six-card, 180×90 float64 product reader. Its complete header allowlist rejects scaling and additional conventions; it is not a general FITS reader. |
