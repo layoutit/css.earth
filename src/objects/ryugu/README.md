@@ -31,6 +31,8 @@ The thermal map contains 2,550,811 valid grid samples; their unweighted arithmet
 
 The spectral source has 102,934 samples at −1 and 5,281 at +1. The TIFF does not identify these endpoints as NoData, so the mask is an explicit conservative display exclusion, not a recovered detector-quality flag. Other polar distortions and anomalies remain. We retain the published values; we do not reconstruct the spectral-slope formula from RGB quicklooks. The provider’s legend establishes µm⁻¹; its prose wavelength summary differs from its b–x band naming.
 
+## Evidence
+
 ### Checks for this change
 
 Prepared on `ebd16155a` plus this branch’s Ryugu recipes and geographic-reader change. Source verification passed for all 37 pinned entries. The package check passed with six lenses and 790 native PolyCSS `u` raster faces. Camera, runtime tree and surface-hit data match the base exactly. All 38 existing non-feature runtime assets match their base SHA-256; the daily USGS feature export was refreshed because the old ZIP pin no longer downloads, retaining 14 displayed places. The 35 KB native export is now checked in so a later upstream refresh cannot break this snapshot.
@@ -43,7 +45,7 @@ The new geographic-reader fixture checks north/south and east/west cell order, n
 
 **Browser qualification is pending.** The existing server at port 4278 returns HTTP 500 because main requires missing Helix prepared lenses. No nebula reconstruction, extra server or headed browser was started. Earlier Ryugu browser evidence below applies only to the older three views. Close zoom, polar/coverage boundaries, all lighting states and mobile interaction still need inspection for the new lenses before this PR is ready to merge.
 
-## Earlier evidence
+### Earlier evidence
 
 The photographic atlas now samples each pinned original grid directly with a 2 × 2 texel footprint. It retains the source frame, coverage policy and fixed-epoch lighting. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) explains the sampling and encoding controls.
 

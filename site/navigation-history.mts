@@ -18,7 +18,7 @@ const navigationFeature = (event: Event): string | undefined => 'detail' in even
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 
 /** Preserve exact departed views while object selections create history entries. */
-export function createNavigationHistory({ windowTarget, objects, capture, navigate, onError = () => {} }: { windowTarget: Window; objects: readonly ObjectEntry[]; capture(): string | null; navigate: Navigate; onError?(error: unknown): void }) {
+export function createNavigationHistory({ windowTarget, objects, capture, navigate, embedded = false, onError = () => {} }: { windowTarget: Window; objects: readonly ObjectEntry[]; capture(): string | null; navigate: Navigate; embedded?: boolean; onError?(error: unknown): void }) {
   const snapshots = new Map<string, string>();
   const prefix = crypto.randomUUID();
   let serial = 0, entry = `${prefix}-${++serial}`, disposed = false;
@@ -56,7 +56,9 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
       entry = history === 'pop' ? targetEntry! : history === 'push' ? `${prefix}-${++serial}` : entry;
       const value = new URL(url, windowTarget.location.href), path = value.pathname + value.search + value.hash;
       snapshots.set(entry, path);
-      windowTarget.history[history === 'push' ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
+      // An embedded scene shares the host page's session history, so it never adds entries of its own.
+      const push = history === 'push' && !embedded;
+      windowTarget.history[push ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
     },
     destroy() { if (!disposed) { disposed = true; windowTarget.removeEventListener('popstate', onPopState); } },
   });
