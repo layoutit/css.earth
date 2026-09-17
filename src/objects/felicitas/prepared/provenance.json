@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/felicitas/felicitas-elevation-surface@2x.webp",
-          "bytes": 363936,
-          "sha256": "a72b1dfb00314074fc52797086ade21dc60c7eed03adb44a63c8da7cdf3fb946",
+          "bytes": 331174,
+          "sha256": "ac73f228120de52cc2cb94d34f50d1efa4b15ba1b43e7d90408dfc8546f803d8",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/felicitas/felicitas-shape-surface@2x.webp",
-          "bytes": 75438,
-          "sha256": "5a8c7490f7368f21511b9dd50e7f2482512195ecb73858c1b44b451bf70a3957",
+          "bytes": 72998,
+          "sha256": "e4342a213d9bd1f96d57b7607dd897a5ba2a8d1f4f429b19c937172d0ecc6069",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "felicitas",
-    "materialSha256": "24df33cb4976aac8ba610843382777db4fa0e590aa0fe1e32dfb26b1bb2ee7e9",
+    "materialSha256": "e4bd146bf149fc08b4c12198e40bd6e6f17c7d12e50a66665cae113cf36c9299",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

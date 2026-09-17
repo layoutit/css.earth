@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b851550f357d4fcaac40c051c482200b6ee9e9c2e1cafc581a6658cabc9ae6ce"
+    "sha256": "33355d52befa39e44100a50b49952d9856cb8b4932b9ca09895beadac5244f1d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1295,8 +1295,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "609602bd18bbf589de8d86c3a374a6f0f5bfe73a86bb790053ccfbc4223ad0a2",
-      "bytes": 1428,
+      "sha256": "c39b21c81cfaf9c4944be4bd04edb145ff3d6fd6af623a3de0d3148fbd14a34a",
+      "bytes": 1429,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1340,8 +1340,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-surface@2x.webp",
-          "bytes": 471458,
-          "sha256": "399fec9d3f108084259021cfb08abb38dce4f022ac0937eebfa0628593f58bc9",
+          "bytes": 382966,
+          "sha256": "aaf3850371fbf69ec7be1c320c24520ce266daf69b93dd5bfa9d3e4f15982a32",
           "verification": "bytes-verified"
         }
       ],
@@ -1392,8 +1392,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-surface@2x.webp",
-          "bytes": 345112,
-          "sha256": "bc63bcfc59cb2618e56b4edecd7eb9e6d67996156a9bb28a32415fbc72effa1d",
+          "bytes": 265060,
+          "sha256": "b18d4cd6b5e268657ed2435bca38067f9fdcc436e99713dd84c46a8b0de007a8",
           "verification": "bytes-verified"
         }
       ],
@@ -1444,8 +1444,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-slope-surface@2x.webp",
-          "bytes": 2478208,
-          "sha256": "75bd429f26e66738a962d360abbdd1f84e5be1e0c1739441b98de1369a67c76e",
+          "bytes": 2026170,
+          "sha256": "137f5d12b0d7eaf82def78618254b4eda5a830b735707371f77832575663865b",
           "verification": "bytes-verified"
         }
       ],
@@ -1488,8 +1488,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
-          "bytes": 78758,
-          "sha256": "d922d80941b7b0061a453496427fcbf9077863521c6aaf90211b06ff41884fd5",
+          "bytes": 76292,
+          "sha256": "81b31e0d8f4ebde5015be8ce11fb643b42eaeb161205c0b76a0a4b6a09c0877b",
           "verification": "bytes-verified"
         }
       ],
@@ -1540,8 +1540,8 @@
         },
         {
           "url": "/scenes/dimorphos/dimorphos-draco-surface@2x.webp",
-          "bytes": 939838,
-          "sha256": "e1bdf5593b227d38d064b918ca539a4b0f3159badf69304e16c40334bdff31bf",
+          "bytes": 706022,
+          "sha256": "d098a3d85c6db6118e49b9eb2e1c0c20e08261ddbae5dbd836eb5d42438b73f0",
           "verification": "bytes-verified"
         }
       ],
@@ -1660,8 +1660,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/draco.webp",
-          "bytes": 21180,
-          "sha256": "bff90251372a84c2a8f706e2e7e239bc9e5d06b30951df0a770e8a094ce8f8c3",
+          "bytes": 20986,
+          "sha256": "65434c48897762cb5450bf80c746cc156d707e64b70cfa8c8b6257717ff17d67",
           "verification": "bytes-verified"
         }
       ]
@@ -1748,7 +1748,7 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "0faedb23b063e0f5ad28d189672260a2f2810283e031ebae9d913ab002acc77d",
+    "materialSha256": "241b67302289bb415b194210ff17d51af292ec36df3c5a93012982597d014359",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/julia/julia-elevation-surface@2x.webp",
-          "bytes": 374980,
-          "sha256": "0bd39c48f411bd0b85080bee43b42741563ba75c8666d1ec779969615c198c75",
+          "bytes": 313734,
+          "sha256": "3888dd434edccd08fce223f542fc5438783d8cf0fea567f454e76d16aeb143dd",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/julia/julia-shape-surface@2x.webp",
-          "bytes": 77234,
-          "sha256": "36f423cba4c5db03fb7a0bf81afc58ed3670a3c7a1eafafdc9a6d1d444845539",
+          "bytes": 75120,
+          "sha256": "3324cd19196e738814a17b119b8b205431eabd632795770df34cae5c49b9e57d",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "julia",
-    "materialSha256": "70540d3936fb9427d0d106501607635ed78c8e6757e0ecd5b3b8a600c6d5724a",
+    "materialSha256": "5cebdda0e8a62da4581be3dd39bd717e996024183e1b91f8c144eb2d53369ef0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

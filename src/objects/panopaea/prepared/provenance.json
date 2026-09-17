@@ -409,8 +409,8 @@
         },
         {
           "url": "/scenes/panopaea/panopaea-elevation-surface@2x.webp",
-          "bytes": 398240,
-          "sha256": "01caf1476d89263199f681359c4cec4eea233642c50440316953959da0f7f9d9",
+          "bytes": 325610,
+          "sha256": "d57130dc44d6c9a9a26c2c430d27ae953742a24769a639c95c87228f1846ba91",
           "verification": "bytes-verified"
         }
       ],
@@ -453,8 +453,8 @@
         },
         {
           "url": "/scenes/panopaea/panopaea-shape-surface@2x.webp",
-          "bytes": 78486,
-          "sha256": "89e898b80d43884308dadb2afd5999f6062e5f4bf729b11e55169a341ebd9fe8",
+          "bytes": 75802,
+          "sha256": "8a59f0a9a8df1c50770a1ac09c2a37b01a61bfc457c334655746c2eebb82a7de",
           "verification": "bytes-verified"
         }
       ],
@@ -550,7 +550,7 @@
   },
   "lastPreparation": {
     "objectId": "panopaea",
-    "materialSha256": "e5d96a0c219f4c2adbf839af488a0e5b3b703a5d1a905f13c89df95a610843b9",
+    "materialSha256": "5c4a6947bcbfd5bba3c913d53be5b560b2b5a9632602d8adadd7df7b70381338",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

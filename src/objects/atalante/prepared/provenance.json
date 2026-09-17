@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/atalante/atalante-elevation-surface@2x.webp",
-          "bytes": 359402,
-          "sha256": "f37fcc9713f626d032f02a9f55374a0741595593778502706a0b49a0a6014938",
+          "bytes": 322836,
+          "sha256": "48588c799e92f90598c30a161ef69cffa4e6ba24701f8d6d4ee1bcffa2c038d4",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/atalante/atalante-shape-surface@2x.webp",
-          "bytes": 75916,
-          "sha256": "9ae86eb6cb4c71f82eb547dc1d345c2f230384149231ebf1863c61b086a496b0",
+          "bytes": 73064,
+          "sha256": "85d43479ff9f80771670f544dfab4a1025f8e7f8004a2eb72c677a56ad791274",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "atalante",
-    "materialSha256": "c6e6681338d16152ea694bcf9fd8f248351a781ce219cb41dc331f6a5cbf825f",
+    "materialSha256": "ed90c0d8587ea7f2a7d7d0de65a11d21ff423206bd4dea56cf4b13a0548bb2b7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

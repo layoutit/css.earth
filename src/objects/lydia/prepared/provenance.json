@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/lydia/lydia-elevation-surface@2x.webp",
-          "bytes": 315560,
-          "sha256": "5289ca7a25d431aa66bb0aa9c2cfa46804a1727397d8e1456eda3a9b5a82f20a",
+          "bytes": 283924,
+          "sha256": "d372bf4fa4ed305036d493e4c3342533543ad3f458c3d3166168067da527866f",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/lydia/lydia-shape-surface@2x.webp",
-          "bytes": 73874,
-          "sha256": "bfe31d11c935e72a786c4eebb3257ffcd6cff8c49abd820b6ff991fca3d65a28",
+          "bytes": 72232,
+          "sha256": "3d62ec9b5b4497052c1d232ced5ddb8f9c406234a6756dff467d5999da3b948a",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lydia",
-    "materialSha256": "08784c2946ba6dc7115383dfe3d29ef2f4825442952db0d0aca34d1dcc31e623",
+    "materialSha256": "e5e24c2cdad4b0b51b17061e4b64404dda3cb8f13069cf69a7459645924f07d2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

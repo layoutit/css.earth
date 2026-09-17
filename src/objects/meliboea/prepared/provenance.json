@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/meliboea/meliboea-elevation-surface@2x.webp",
-          "bytes": 310162,
-          "sha256": "42dfc0764316475f582579fd0ada97630474ad9353716d810433a49ee3bc14d5",
+          "bytes": 280662,
+          "sha256": "55f49a3042c407ecd9899d47430379bd4bc8cf858f03ed5614838cef39e28e3b",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/meliboea/meliboea-shape-surface@2x.webp",
-          "bytes": 75208,
-          "sha256": "c6bc44ac1bfc18a5df40ce3d42a319a259f73e24aca086c1f2115a7e1dee2fbb",
+          "bytes": 74496,
+          "sha256": "2688d61c93b9b5e6ca68e5e92d0676ac6782f25a541207d92c0c30daee6ecffa",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "meliboea",
-    "materialSha256": "3ba015ba40943c58d26deeeedb670bf8cda34068eb29658c27577dfa7d1d3246",
+    "materialSha256": "4cd7f95b7ed12e73a51b82b14165645f494ef74880e1b41e3778b78669ead918",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

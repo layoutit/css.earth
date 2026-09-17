@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/anahita/anahita-elevation-surface@2x.webp",
-          "bytes": 336162,
-          "sha256": "8a8dca6445497458cef81eef0ff06e869b4ad154c2696fb76f2e04b712ad5b2b",
+          "bytes": 298674,
+          "sha256": "9f917f00ab9485dc603e5c50941a5e692b688e2bbb692e4fc15a945c5683735f",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/anahita/anahita-shape-surface@2x.webp",
-          "bytes": 68356,
-          "sha256": "0d0f566be636ec9f7daedc51694d24e2d7384bac18b92dce01ccd8959d5fd035",
+          "bytes": 66792,
+          "sha256": "f80764671bd36fcc936f82bfcb1b96f70ef8681a086d58c105b9621b42eed8ce",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "anahita",
-    "materialSha256": "117b9a619426d999c2bccfe861be6ec4fd1b82f708d062608ba760d46ef94695",
+    "materialSha256": "5afd4e5d6631270d8ab4b00f494ee5bcb2845acbe7567f13712b6a4bc96c7a62",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

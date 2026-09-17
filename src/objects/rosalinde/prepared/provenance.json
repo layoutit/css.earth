@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/rosalinde/rosalinde-elevation-surface@2x.webp",
-          "bytes": 333410,
-          "sha256": "00e2b3f6e58399ddc32dd8b30b33aac96d4eee4361962cc29300be67a3d3ad1f",
+          "bytes": 305650,
+          "sha256": "1de696841d5a3a4561413db2687223389e6eacd53c6e4d46c0d6b6bc2d0ec37c",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/rosalinde/rosalinde-shape-surface@2x.webp",
-          "bytes": 74844,
-          "sha256": "f15b7db22732d031203df1db9becd4af66624145f59148612207aa1eec7faf67",
+          "bytes": 72274,
+          "sha256": "3509e233304d0d959995ec895af7d19c2db21c6afc6d8898c93121d6f92176b8",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "rosalinde",
-    "materialSha256": "57088ef12696fb402a61d5fe97a2246c83c69c61311f3e3f234c330e3105fa3a",
+    "materialSha256": "9cf1ea248960a8567652965d9bc597f1242a486f65fd357b2f1d5210443d369d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

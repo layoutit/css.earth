@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/veritas/veritas-elevation-surface@2x.webp",
-          "bytes": 356484,
-          "sha256": "56b8573576313aea4c5b3a372253ab40a87ef47d4fbc78589e509a6258a850f3",
+          "bytes": 319542,
+          "sha256": "16558a9fbb190a16a38e59e40d3f7d4a6f8b53ad69a439ec3b7226accc5cb79e",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/veritas/veritas-shape-surface@2x.webp",
-          "bytes": 75700,
-          "sha256": "f605b844cb5394f7a4f43adc381398b74ab92a2546f634dd02cb1908cffa9cab",
+          "bytes": 71602,
+          "sha256": "acee37b71c2ec949b756823802f2a3b8da3847ebc5d35b7ac713e9fbe152c96f",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "veritas",
-    "materialSha256": "6d90e63714c273a9b6f8280aa3eadfc340b9a3c1c09771f7689506b81b7ffd42",
+    "materialSha256": "ecc1edec8c8aeecd577cac7a4f6297899f51e225fb886fe45507f83117d911bf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

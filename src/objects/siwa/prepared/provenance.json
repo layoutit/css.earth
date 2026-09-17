@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/siwa/siwa-elevation-surface@2x.webp",
-          "bytes": 319918,
-          "sha256": "fe9b5828b558d88f57a65b26746213488eb1414117120d82c595ba723670b1b6",
+          "bytes": 292268,
+          "sha256": "104dddd8675805789869a2f5f08d4f09ddba0c5af773ec4ad8cee5a1b4b72761",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/siwa/siwa-shape-surface@2x.webp",
-          "bytes": 78682,
-          "sha256": "698593a97c1c2c859143c95395fe41072a2f75723875f3969958ed081b32b88e",
+          "bytes": 77770,
+          "sha256": "2b49bdcbd62f7e03d0738f90d325be0f2e7f563534e8ed717ef5af3ba3a6d1d9",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "siwa",
-    "materialSha256": "87aaab2dbeab4e42fb643cb14e3443ad2a3560c194c97bce3d127d2d7efb89ac",
+    "materialSha256": "586122b4228c8bc2f5aae445cfa58eebbb6c7ada6c40363e44a24c605b08b1ea",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

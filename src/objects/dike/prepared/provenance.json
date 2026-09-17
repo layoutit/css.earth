@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/dike/dike-elevation-surface@2x.webp",
-          "bytes": 374030,
-          "sha256": "9df030bce30f68d2e6055221ca472a8a50e147cee5d40e6756be2c88b6307dd9",
+          "bytes": 338164,
+          "sha256": "27dbe6e96bc91b9418bb77414ec8037453887cd1cce6e82140e83ff02ca8b878",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/dike/dike-shape-surface@2x.webp",
-          "bytes": 75652,
-          "sha256": "9ab96e8d796eaf18119400f87aeb059f28772f97c7aed4ce3ac74cca79176166",
+          "bytes": 74178,
+          "sha256": "6ce33f53273cc516170dead49e06e93bc455b119d142b9aec5dfb47336295bad",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "dike",
-    "materialSha256": "c3c4cad8fbf1b258973e9ec9ff076b80175237c954fb55111b71add46dc51b4e",
+    "materialSha256": "d82030721837b7dd4d87af9e81bdaef7e6ab312545e6a27f0d93a24213117989",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

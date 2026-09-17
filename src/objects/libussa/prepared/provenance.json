@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/libussa/libussa-elevation-surface@2x.webp",
-          "bytes": 271072,
-          "sha256": "bb0ed4415ee18261979e9a4546c988b88700e52b86cfb6cd6ffb40e27e400919",
+          "bytes": 247630,
+          "sha256": "b759c6cea21cb204994de6c114b3b247d212124f321daa27b9812d45ed880947",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/libussa/libussa-shape-surface@2x.webp",
-          "bytes": 70538,
-          "sha256": "f587d3a7255c20732f8c0b4ef611b8e9e8c36d63bad5ff735b7f64e762799bc2",
+          "bytes": 70432,
+          "sha256": "2e9ff6569017d6bd6ba09ab30508d836eb92aa925d70907fff80ee931b5395c4",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "libussa",
-    "materialSha256": "557d9fa0f6fba999bb4e81a725fb780ed7779cf7f9394859a6432033331bfb80",
+    "materialSha256": "d699f46574437e0b29f3dd41821a3a55700a8915b86187444cf46aef588668f0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

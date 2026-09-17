@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/hidalgo/hidalgo-elevation-surface@2x.webp",
-          "bytes": 340340,
-          "sha256": "e62ebaeca8b65a6c034b513f94a0b36aff10db5ca758fc95a56837cee57948bc",
+          "bytes": 308540,
+          "sha256": "ebc99ee45b8ba98b45e21a888cf13139f7325d9244bc4ef1b8ba3db0ece33ae9",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/hidalgo/hidalgo-shape-surface@2x.webp",
-          "bytes": 70874,
-          "sha256": "76b9169b9b5628a5a968598a602729fb84f13d0329e7eeea96b3a8b356adea4b",
+          "bytes": 69596,
+          "sha256": "848afe8acc5044c31083281e5e4919f138f2506efc9752ff09e60db25ab3abf7",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "hidalgo",
-    "materialSha256": "a82de9c0a90f240ec2f8383fa4ebee96cf4a9ea33bbdbb4959b563a9892b778e",
+    "materialSha256": "2fd4e0b82f3afdc296d8d13c9af7a49d886d0669c9d541902253177ea41b7f90",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

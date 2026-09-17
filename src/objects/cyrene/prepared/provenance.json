@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/cyrene/cyrene-elevation-surface@2x.webp",
-          "bytes": 369460,
-          "sha256": "38fb0ac1c825d9c60d2496432f6b30ac0d69e39745e543124182d366a20b7cd1",
+          "bytes": 323066,
+          "sha256": "218cc26515e0159da9e0cebf355260a998c7506f9c779a3954b5625371eac823",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/cyrene/cyrene-shape-surface@2x.webp",
-          "bytes": 78942,
-          "sha256": "93fd64b882b0aee16c0a87ce440f4415b3fd1986fb50c59be9e1b1a49c888627",
+          "bytes": 76450,
+          "sha256": "bdeec4840a7be542af05f6a3f696674ebb4daf850a2279951fc78d9a1ef1936e",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "cyrene",
-    "materialSha256": "391393f954d0761dab10f716c1ac862fc3dc10b533f4b8ce24386b4baaf28584",
+    "materialSha256": "1469c8b18b05224dc4e060526c087359bd8769e6e1da7f227f2d732f5f4d88fc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

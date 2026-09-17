@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/eukrate/eukrate-elevation-surface@2x.webp",
-          "bytes": 333922,
-          "sha256": "55028540883a091aa4265c8399a3f90d59cfcad0c5945e61766f4764ad4a4eaf",
+          "bytes": 304968,
+          "sha256": "561b166fd2c63ffbb8ffb0e2002ea824cd03a9ed9bc3e9e2a23d6e6f68a728d7",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/eukrate/eukrate-shape-surface@2x.webp",
-          "bytes": 75720,
-          "sha256": "00cdec0191ad4c875c4f07146938f83581ca71f21901764634f31e204a2a510a",
+          "bytes": 74568,
+          "sha256": "a9e9decf86d84be8db905dc5f8df98a8cfc1b434155ecff6fa5076106e683561",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "eukrate",
-    "materialSha256": "4153496637c28f46884c9bf87aba665b239f36a426bafe9748581504a668ce0a",
+    "materialSha256": "492ba70b4596de67bddf6cad527683591b37a60289ae006504d7c73012e7c7eb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

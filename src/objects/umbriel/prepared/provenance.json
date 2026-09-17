@@ -1037,8 +1037,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5824,
-          "sha256": "3a0b297584826b5748eb155b46ab8ffa4afc7be3cf743786aa2d77ff4d25f0a2",
+          "bytes": 5942,
+          "sha256": "eb75c07c8117bdeeb4627c6ea73108e09867db0c3c102c9fc81a316009f726e1",
           "verification": "bytes-verified"
         }
       ],
@@ -1111,7 +1111,7 @@
   },
   "lastPreparation": {
     "objectId": "umbriel",
-    "materialSha256": "3cae8ebf9793173a7753663778f66f85c87dbe6841e8668f7984409e26a6534f",
+    "materialSha256": "e6ad67228603a48f36c63601666fccc6760a9bd982b78a70673a929f873cf497",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

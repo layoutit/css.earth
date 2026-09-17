@@ -343,8 +343,8 @@
         },
         {
           "url": "/scenes/skathi/skathi-model-surface@2x.webp",
-          "bytes": 62644,
-          "sha256": "90ddf16579eb7f43535f18c7dd35a9613c79ce0bb15e13d953ac95d1f1cb9ca5",
+          "bytes": 52432,
+          "sha256": "fad90a455596e7b124c12807166c08f253ca955fd691f66c405cc465828c2283",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "skathi",
-    "materialSha256": "12a87fd3a728a2a3a1a3536793248eb283b9143e56f2ae90e09eaadc95ed2083",
+    "materialSha256": "0293614721b46abf6e05575b44882a0acd4cc6da7d5341cf1fc6fdf087baec9c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

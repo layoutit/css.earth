@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/ducrosa/ducrosa-elevation-surface@2x.webp",
-          "bytes": 326954,
-          "sha256": "29f814b3c5ebea4b0b09807b1cc8ae7dc06d11869d80ef4b266e39ba9265cbde",
+          "bytes": 297528,
+          "sha256": "f6278ceb65b065ef82f01d45bc6809f2ed5525d331fc3a9729f036ff405bf312",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/ducrosa/ducrosa-shape-surface@2x.webp",
-          "bytes": 72300,
-          "sha256": "3bc751831b60eceea1298d870d6c0f8727fe1d303d791a15d4772605a30d5a1f",
+          "bytes": 71138,
+          "sha256": "1d86ccc1c2a3b066443a8612d6d636ee950eec79fdec25696af1750dbc1c0eb3",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "ducrosa",
-    "materialSha256": "e37d8f295cc54dbb9b89e8f3c81d8893e4951a37a56d3c63b8ca47028c0974c4",
+    "materialSha256": "15a03be9eca152f31b89fb3de262c71632119957ffb3f6dfd5821994641d816c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

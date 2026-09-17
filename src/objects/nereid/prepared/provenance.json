@@ -386,8 +386,8 @@
         },
         {
           "url": "/scenes/nereid/nereid-model-surface@2x.webp",
-          "bytes": 63028,
-          "sha256": "bccdf30ea4090e26241c6475433ea873f30cbe834e779122267ad84640ffc50a",
+          "bytes": 51108,
+          "sha256": "711b1723e9cdc5d942968c4b17bb3967e40e7eb303fe8fa6b537e395d36b0d47",
           "verification": "bytes-verified"
         }
       ],
@@ -463,7 +463,7 @@
   },
   "lastPreparation": {
     "objectId": "nereid",
-    "materialSha256": "5ed15c1b4d6600dcc5de942f5a5bed2b49152d72471672f79c8333df96d5d158",
+    "materialSha256": "fb97b509b45936ff8bfd3ce3c3be9601b6e456aa4425d84482f0b835083a1f0b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

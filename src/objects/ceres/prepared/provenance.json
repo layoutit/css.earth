@@ -1423,8 +1423,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6497,
-          "sha256": "fed0f0d44f5953e74b4b6a877c2e37ede611ff891479835ad63e760edac2cdda",
+          "bytes": 6616,
+          "sha256": "2f565a45993694d52fa00947afdd0be3e1f3e24eacb96b7232e07bd9ef0504ac",
           "verification": "bytes-verified"
         }
       ],
@@ -1547,7 +1547,7 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "3f54676ad09db147f41d68d591033b7272e307438fd85f5d12be34aec3b3279d",
+    "materialSha256": "7a6fcbda2b455257d380e73e328c505ddb4f717c6204168d8ef27de8e9e903ef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

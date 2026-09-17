@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/rhodope/rhodope-elevation-surface@2x.webp",
-          "bytes": 283376,
-          "sha256": "b4683cd967e4815f96d42e02c354fc9c0dc9b4cc62451934308f1826be5a636d",
+          "bytes": 253420,
+          "sha256": "48ee6a5101ac601bbdaaa5dff44739a52fc6f086208da4804e1052eacb6d3557",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/rhodope/rhodope-shape-surface@2x.webp",
-          "bytes": 70682,
-          "sha256": "287ebd27b8c30acd9e0bb67d6ad94537a7811cc10f32b114a9a4e3d151c518d0",
+          "bytes": 69730,
+          "sha256": "e93b61dbfc1e0ecb647d0bcba51d25eb6602b35b03f08a886b605d1e9022ed95",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "rhodope",
-    "materialSha256": "fa7296faa3f18705996fbb624da266bd9bcdeb84ffd2126ba949c7ee1c26d278",
+    "materialSha256": "09f442efca2495eab002020abaaa5e0913572edc84de0b3747f7e373cca5ffe2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

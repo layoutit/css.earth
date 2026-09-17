@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/petrina/petrina-elevation-surface@2x.webp",
-          "bytes": 346112,
-          "sha256": "7658d6606745b01bb107a2253e7dc36700e290de76e2bd0ae315098cefed0c47",
+          "bytes": 315750,
+          "sha256": "5f4f1d1ec2cfe61467c8e24c7329155ece399a33f61d02fdab1e4c45f908f678",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/petrina/petrina-shape-surface@2x.webp",
-          "bytes": 72452,
-          "sha256": "5184f0012ed2bd63d2f1461ca6f7504a1f3432a91397bfe0990f4df9f477f9a7",
+          "bytes": 71266,
+          "sha256": "4ef3a141a2247307eeb4aa08459e6bb94fcddcf31bb13107d7d3745811986027",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "petrina",
-    "materialSha256": "e4a244c3d7864f6e2228ef23342aafc174852e980289670828cbd444318c2a92",
+    "materialSha256": "af02862879ac092042bf34f66c0076e82e96f5b7e4fb8ce8dca384fc9b0605b6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/vindobona/vindobona-elevation-surface@2x.webp",
-          "bytes": 289846,
-          "sha256": "a9531351f0187101c1201228200aabd5e575e868489c7ffd63aecd2eba547c69",
+          "bytes": 260022,
+          "sha256": "2e01f5d4a51ab458e0b4e27ae74a026e3daeac5966c3c239fc67d2d58b910399",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/vindobona/vindobona-shape-surface@2x.webp",
-          "bytes": 70616,
-          "sha256": "19a38e7c7dae1d2a8eaf767866f6c0eb7cd64901a272ad92ce788ba178565f89",
+          "bytes": 68462,
+          "sha256": "4d81791b48a4625b7c65125a12f21d431b666aa510c49c3d4425b64ba485f0c5",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "vindobona",
-    "materialSha256": "c4fe0c6244e224a3f9f600c2977b4822ea306f27917f9f7f3681d1030de16225",
+    "materialSha256": "9986cb37d3b47b4ced4cecb1335b5c493ddf7d6b7546544075683f2c1e87e646",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

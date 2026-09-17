@@ -407,8 +407,8 @@
         },
         {
           "url": "/scenes/nemesis/nemesis-elevation-surface@2x.webp",
-          "bytes": 378950,
-          "sha256": "9d93b7bd9e4fd5d370fa34f20a1459cf143144da2ca92edbe01df5fb702611e6",
+          "bytes": 317048,
+          "sha256": "ba61248d7cf029160493899d47c63f5f7edc2aa71a17802aeb5fcc7bfb939ad8",
           "verification": "bytes-verified"
         }
       ],
@@ -451,8 +451,8 @@
         },
         {
           "url": "/scenes/nemesis/nemesis-shape-surface@2x.webp",
-          "bytes": 78474,
-          "sha256": "bc74b1af6118100a633b0c30464bcbc6b108be7c75c3c62f70fce0420abb43f4",
+          "bytes": 76872,
+          "sha256": "8c78359a062753bb831388944ed5ed2570376bb65127523243b84b1f56a90604",
           "verification": "bytes-verified"
         }
       ],
@@ -548,7 +548,7 @@
   },
   "lastPreparation": {
     "objectId": "nemesis",
-    "materialSha256": "c312e0f3228b46775460ae47d05eddf1d2d4c0421e2838d5e256651e111fbc3f",
+    "materialSha256": "22392b7b1d799ac02487812f0c4007cd131b34554c63ede46be170b284da016c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

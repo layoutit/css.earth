@@ -124,7 +124,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const id = config.namespace;
   const entries = [
     ...(plan.rings ? [plan.rings.resource] : []),
-    { key: 'lighting', url: lighting.url, pool: 'mounted' },
+    ...(lighting ? [{ key: 'lighting', url: lighting.url, pool: 'mounted' }] : []),
     ...surfaces.flatMap(s => [
       { key: `surface:${s.id}`, url: s.surface.url, pool: s.id === config.presentation.defaultLens ? 'mounted' : 'lenses' },
       { key: `poles:${s.id}`, url: requireString(s.polesUrl), pool: s.id === config.presentation.defaultLens ? 'mounted' : 'lenses' },
@@ -154,7 +154,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const billboard = b.element('s', `${id}-billboard`), material = b.element('s', `${id}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboard); b.append(materialRoot, material);
   const { tree, index } = b.finish({ camera, scene });
-  const track:MaterialSourceTrack = { id: 'lighting', target: index(material),
+  const track:MaterialSourceTrack|null = lighting && { id: 'lighting', target: index(material),
     frame: { source: 'sun-z', minimum: -1, maximum: 1, count: lighting.frameCount, baseFrame: 0, remap: null },
     banks: [{ id: 'atlas', frames: lighting.frames, default: null, fixed: lighting.frames[lighting.frames.length-1],
       rows: [{ row: 0, resource: 'lighting', firstFrame: 0, lastFrame: lighting.frameCount - 1 }] }],
@@ -165,7 +165,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus] as const)));
   const variants = surfaces.flatMap(s => [false, true].map((shadows):PreparedVariant => ({
     ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(id, focus.get(s.id), plan.camera)} : {}),
-    when: { lensId: s.id, shadows }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, 'lighting', ...(rings ? ['rings'] : [])],
+    when: { lensId: s.id, shadows }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, ...(lighting ? ['lighting'] : []), ...(rings ? ['rings'] : [])],
     writes: [
       ...(rings ? [{ kind: 'texture' as const, target: index(rings), name: `--${id}-ring-image`, resource: 'rings', quoted: true }] : []),
       { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, quoted: true },
@@ -177,7 +177,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       { kind: 'style', target: index(materialRoot), name: `--${id}-billboard-color`, value: requireString(s.billboardColor) },
       { kind: 'attribute', target: -1, name: 'data-lens', value: s.id },
     ],
-    materials: config.geometry.radialTerrain ? [] : [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
+    materials: !track ? [] : [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
       rotationEnabled: shadows, frameOverride: null, clearWhenHidden: true, fixedMode: 'full-phase-curvature' }],
   })));
   function surfaceModel(lensId:string) {
@@ -190,7 +190,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       ...(entries.some(entry => entry.pool === 'lenses')
         ? [preparedResourcePool('lenses', entries, { retention: 'selection', capacity: 4, concurrency: 2 })] : [])],
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
-    tree, variants, materials: config.geometry.radialTerrain ? [] : [track], animations: [],
+    tree, variants, materials: track ? [track] : [], animations: [],
     ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles,
       ...(plan.surfaceLensRanges ? { lensRanges: plan.surfaceLensRanges } : {}),
       // XYZ source coordinates swap X/Y for CSS: outward faces are clockwise.

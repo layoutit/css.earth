@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/united-nations/united-nations-elevation-surface@2x.webp",
-          "bytes": 305070,
-          "sha256": "7a1b2de312653de372256c30f2d2923a1646752516327e5ba48bd29266644582",
+          "bytes": 259304,
+          "sha256": "a2982f68284329638e73273931de7c956d884fcd43f1ae03a9a41a147cc70a31",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/united-nations/united-nations-shape-surface@2x.webp",
-          "bytes": 63556,
-          "sha256": "3e7cbb155b662664961d6760c2c7294060a40e8288ab5089ffce321360396248",
+          "bytes": 61118,
+          "sha256": "209f21930654e8fa8272cd0633f2aec61bf24c112858de48217b96534c485067",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "united-nations",
-    "materialSha256": "6c46f4ed2c8cf7f0f597ee06afdafebffb6d36018b1d55c43da64a7a6f65827f",
+    "materialSha256": "126160713f38ef1e915cbf280dc09e680e1459be41b96bab87343a63f8a24902",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -330,8 +330,8 @@
         },
         {
           "url": "/scenes/fornjot/fornjot-model-surface@2x.webp",
-          "bytes": 63464,
-          "sha256": "4e3accae24a6853a65fcf3e22aa64a17cea9f85864bfc8cca34df85c488d55e7",
+          "bytes": 52620,
+          "sha256": "2d4890dcd447e1448d22b4562a37189b7b654ff4c5f684152e6e0190013c7176",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "fornjot",
-    "materialSha256": "6b2221d5fbcd15166bfe3e7f80edb8fdece8a828ee19c0f06ba187eab3983081",
+    "materialSha256": "a0801b6b79c1701e89c9f2f98dfa24c729481cc2e7c7752ffd2b954f96b81794",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

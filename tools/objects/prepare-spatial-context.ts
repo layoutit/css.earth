@@ -1,7 +1,8 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { BODIES, M_PER_KM, isSceneSatellite, sceneSatelliteStateKm } from '@cssearth/astronomy';
+import { BODIES, M_PER_KM, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
+import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
@@ -71,6 +72,23 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // A planet of another star closes its orbit around that star, which makes the star the root of its own planetary system.
     const classification = classifications.get(body.id);
     facts[body.id] = { radiusM, orbitStyle: classification === 'star' ? 'none' : planetIds.has(body.id) || classification === 'exoplanet' ? 'closed' : 'trail', classification };
+  }
+  // A star measured to be bound to another with no measured orbit carries the pair's centre of mass, weighted by the
+  // published masses (as gravitational parameters) at the two prepared positions.
+  for (const body of source.bodies) {
+    if (!(STAR_IDS as readonly string[]).includes(body.id)) continue;
+    const hostId = starAstrometry(body.id as StarId).boundTo;
+    if (!hostId) continue;
+    const masses = BODIES as Readonly<Record<string, { readonly gravitationalParameterKm3PerS2: number }>>;
+    const record = masses[body.id]!, host = masses[hostId];
+    const hostPositionM = hostId === source.focus.id ? source.frame.originM : states[hostId]?.positionM;
+    if (!host || !hostPositionM || !(host.gravitationalParameterKm3PerS2 > 0) || !(record.gravitationalParameterKm3PerS2 > 0)) {
+      throw new TypeError(`${body.id} is bound to ${hostId}, which the world context must place with a mass.`);
+    }
+    const share = record.gravitationalParameterKm3PerS2 / (record.gravitationalParameterKm3PerS2 + host.gravitationalParameterKm3PerS2);
+    const positionM = states[body.id]!.positionM;
+    const centerM = hostPositionM.map((value, axis) => value + (positionM[axis]! - value) * share) as unknown as Vector3;
+    facts[body.id] = { ...facts[body.id]!, boundTo: { hostId, centerM } };
   }
   const orbitCenters: Record<string, WorldContextOrbitCenter> = {};
   for (const body of source.bodies) {

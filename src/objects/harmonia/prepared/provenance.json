@@ -396,8 +396,8 @@
         },
         {
           "url": "/scenes/harmonia/harmonia-elevation-surface@2x.webp",
-          "bytes": 359452,
-          "sha256": "f1b4f3050d653dd072ef398ad2d8a5908f2661a718c41d7ede228658434910e1",
+          "bytes": 324422,
+          "sha256": "2c47caac79ccf507ff8b90f6f1949ac7579fa72518dffa8fa6cd9b4acda01f67",
           "verification": "bytes-verified"
         }
       ],
@@ -440,8 +440,8 @@
         },
         {
           "url": "/scenes/harmonia/harmonia-shape-surface@2x.webp",
-          "bytes": 77094,
-          "sha256": "7d50b095c1ba54d29e8e7fbbb5b22d51b3479d09ab0c35d8ddb5104c0074e328",
+          "bytes": 76460,
+          "sha256": "59f761257e5d07071346485c73bad93ada415d74d2c6f0e68253ba3b54188829",
           "verification": "bytes-verified"
         }
       ],
@@ -537,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "harmonia",
-    "materialSha256": "f2300ff8592a77dac7d6296ac64c84acae94b38761460611e73395c1b7055d5a",
+    "materialSha256": "696095c94879f50b42fdd77f6eb3abf50b0d7045a9ed9503de1849a944679d25",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

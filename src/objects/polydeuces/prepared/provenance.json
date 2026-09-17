@@ -466,8 +466,8 @@
         },
         {
           "url": "/scenes/polydeuces/polydeuces-normal-surface@2x.webp",
-          "bytes": 77532,
-          "sha256": "5e2c0909026c275c99ec7a2eb88f6dff09e37d8d8c5b80e792ef9f2f08c581c9",
+          "bytes": 67806,
+          "sha256": "b6acbcf7c11caa9f825efd0e32c898a5ca1720255200a6010190b4fc44309cfb",
           "verification": "bytes-verified"
         }
       ],
@@ -525,8 +525,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 3850,
-          "sha256": "b3e1e6c930aca95ac4ef0b3c54e501650bdf8a4050e90467595503bff3d0fc00",
+          "bytes": 972,
+          "sha256": "608c06ef53b98d123570b3995a33673d815d8f0314c1b8602504451f3593990c",
           "verification": "bytes-verified"
         }
       ]
@@ -538,7 +538,7 @@
   },
   "lastPreparation": {
     "objectId": "polydeuces",
-    "materialSha256": "9fc17caa388543f8dcb47b1af2f537df18be9b4c9afd228b874745bbbd99d237",
+    "materialSha256": "404b47d8895597b496612cca6181c3e19e04122610adbf3c8bbeaee06a128c0e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

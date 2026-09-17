@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/hygiea/hygiea-elevation-surface@2x.webp",
-          "bytes": 335460,
-          "sha256": "697f7e214fabebc5c9abf04dc9e81b2c8789d1de0840538bb93317f90c4d9b9a",
+          "bytes": 300104,
+          "sha256": "7ad9bafcf9d1a5262f54311d710cc16c75c3330e4391eb8c03806fd0d60792b2",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/hygiea/hygiea-shape-surface@2x.webp",
-          "bytes": 79030,
-          "sha256": "0bc0aafe7d8575b8db5670d6d94b83f125f2835960eddd5b953a2bf441492704",
+          "bytes": 77712,
+          "sha256": "f7067bc0029ef80f3a0c61364ca12f95fbc9b97007af700f3307200b48255454",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "hygiea",
-    "materialSha256": "aac6eec5ad5da148a62ea057e2b7a6ecf48aff9f5ee46c2f2619d32c373f292a",
+    "materialSha256": "33c563fabc5ff67103c76ef1fb867a6b7825a8cc9f6deeb54e3f7125f0aecf15",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

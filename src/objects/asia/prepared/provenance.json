@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/asia/asia-elevation-surface@2x.webp",
-          "bytes": 289010,
-          "sha256": "f71d5710396c971cb4778755eaac1b055531081a9926163a527381aa85d39889",
+          "bytes": 257920,
+          "sha256": "ed4f814cf03e4f6ece0d147b7cd51020e66e4907ee480fb58eba9a5b2b4c4c0f",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/asia/asia-shape-surface@2x.webp",
-          "bytes": 68512,
-          "sha256": "e6350bb8418104f955df56fb5d47f14d78baf9dbf35267b48911d5d859894918",
+          "bytes": 65990,
+          "sha256": "9c175ef5458272bf725b9f1c3faa83e5d2a54355b170b9a85f1b923ea8675ee5",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asia",
-    "materialSha256": "dac35088e25fa6e28200e2a08be8df9785032e8e5a3119b55faccd6bf68172ba",
+    "materialSha256": "b6255433da688ef5ceea4552877a626baeb9470bb9473f0bf7eda17334ae49d9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/agenor/agenor-elevation-surface@2x.webp",
-          "bytes": 289064,
-          "sha256": "7bac239d83e004280f26216b94f7639908224197563f3c047749febbfa1e5a7f",
+          "bytes": 254856,
+          "sha256": "c32fa9a92644fc4516b1cfc05628dee4dc085a7732eb52b1433390b6a6d852c4",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/agenor/agenor-shape-surface@2x.webp",
-          "bytes": 69362,
-          "sha256": "c230828c010796663ddd00e64fb6e82edb2e0499f9083015c899a59b81873802",
+          "bytes": 68782,
+          "sha256": "0af6fb5a19ce69e01f9095b3c2ec3115ba37ea0922b2e04e429aa4a73b60b344",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "agenor",
-    "materialSha256": "8590b4ac593063f516f76c962311045440c4f2d19b97d8b4978514c67da4da97",
+    "materialSha256": "c3dd5ef1a5ccbff7d69b420dcfb2ec676ac3f6628cac48ba187be4ca4216c1c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

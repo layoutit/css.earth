@@ -428,8 +428,8 @@
         },
         {
           "url": "/scenes/mithra/mithra-elevation-surface@2x.webp",
-          "bytes": 461074,
-          "sha256": "abbfe0b01e4f3ad3a93841e680d6dac05ddf173bbce986b02c88aba16c96fe83",
+          "bytes": 419100,
+          "sha256": "d8fc09a66813644698843129585c184f5314120b74fa7a072aebe7207c21f692",
           "verification": "bytes-verified"
         }
       ],
@@ -472,8 +472,8 @@
         },
         {
           "url": "/scenes/mithra/mithra-shape-surface@2x.webp",
-          "bytes": 91722,
-          "sha256": "a87e290f70d1931258e1983356e721a0acd371fa35550c6e9737c20c1a7add67",
+          "bytes": 91368,
+          "sha256": "42b11cf79a46e719d636f5fd8a761e08421056382be333c8982d3ced66f7f4ee",
           "verification": "bytes-verified"
         }
       ],
@@ -569,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "mithra",
-    "materialSha256": "069d7c72bb9cba1f060035db406c1c7cd08abc30f0ec6edcbe742af82d6eaa44",
+    "materialSha256": "fe5560113df891690db3781541d77943b146559188f6689c5dab05cedc37b4e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

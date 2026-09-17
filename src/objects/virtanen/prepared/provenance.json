@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/virtanen/virtanen-elevation-surface@2x.webp",
-          "bytes": 305900,
-          "sha256": "cee748a58ba99a804ed8bec7ccedbbf509322db954b556d1c518452c75398e21",
+          "bytes": 279118,
+          "sha256": "5c936a0a793b378512e7fd33596cb7a2574ed3f4b8641e82b97417725658b012",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/virtanen/virtanen-shape-surface@2x.webp",
-          "bytes": 68462,
-          "sha256": "c5e976ad1199112bf4e9881ca5366065554911debe45bc1cb4dfff583da653af",
+          "bytes": 67208,
+          "sha256": "768be0ce43f720c80109580e559c3adf7a7712b0168af0de6d9c101ab9d6f1aa",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "virtanen",
-    "materialSha256": "7e7afd9cf0efae4af5fd315ef7a7b8800e4e0ce41a0ab57e0d4ec798ff35cd73",
+    "materialSha256": "91e3b3281311f0e836197a5d63725c355474b368456b7af339265c3e507e4e82",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

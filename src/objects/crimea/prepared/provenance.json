@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/crimea/crimea-elevation-surface@2x.webp",
-          "bytes": 325204,
-          "sha256": "54be3cb6961d5d72e223cba325c3363bbbd653304393e9ed27a21659e35fc710",
+          "bytes": 293412,
+          "sha256": "edb8fe5439884b6b979671dc008042ad7971480e04f8ed66a8b072eb46991fe3",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/crimea/crimea-shape-surface@2x.webp",
-          "bytes": 72820,
-          "sha256": "0aa73ec70d1187ff98c2722bdbc650c9348bef001e25e494aae3bc73c9b0e393",
+          "bytes": 69294,
+          "sha256": "1d9e84a93260bb8d24ee82ac77f7927d9b1846a126643cf43d1aaf5cfedfa717",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "crimea",
-    "materialSha256": "3bd9752db2606a3350a40a92b0bb9c8ce65782d44ccd1d6504d0c9a4c391df59",
+    "materialSha256": "348db3e049bd1c966585e19e52ef2318bd2776f7621c1ace725e5009d0d680dd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

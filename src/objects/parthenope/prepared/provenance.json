@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/parthenope/parthenope-elevation-surface@2x.webp",
-          "bytes": 385188,
-          "sha256": "e264bc8836680e8f5936beb9a331265c997b46a83331d4404e2d7fe5425e8300",
+          "bytes": 325872,
+          "sha256": "dd107fcbc4adae86d510646ec9a585bad6743fc371c120d09aa3cbe33bca8525",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/parthenope/parthenope-shape-surface@2x.webp",
-          "bytes": 81204,
-          "sha256": "458ecc4d0d05234df8aa517c3193d70f40fe802947dfb163c5d8162c5f880b16",
+          "bytes": 79064,
+          "sha256": "d854793980cf93c4a4831aabdfe91054d10c00bdd4d27c762faf2f7aa91ea1fd",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "parthenope",
-    "materialSha256": "1c244f4ba96c5301a580c61b41b83890d88f891d3d54dca80f98cc1425be5198",
+    "materialSha256": "52b770d995b353e77866bc44af9f03253f028d4738c1d3c8e45264b26a86967e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

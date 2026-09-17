@@ -330,8 +330,8 @@
         },
         {
           "url": "/scenes/kiviuq/kiviuq-model-surface@2x.webp",
-          "bytes": 61006,
-          "sha256": "e82e1ed53ef1d3c315d909e6c14e58a76419ee2f9e24f6b161a6b4bfb196ca92",
+          "bytes": 50848,
+          "sha256": "f70f03adf7b1f631a5f87aa00ca7c972ccf660e62cfcad807b4b3cb8951c680e",
           "verification": "bytes-verified"
         }
       ],
@@ -407,7 +407,7 @@
   },
   "lastPreparation": {
     "objectId": "kiviuq",
-    "materialSha256": "58805fe1ba3803eebc5841dbbf2057325912cf1afa1616497cf26d286ecf6110",
+    "materialSha256": "224d8be4ae425877d79dcc3d774b637a4d568751b4915e90543ee21c00a17221",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

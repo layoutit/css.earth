@@ -356,8 +356,8 @@
         },
         {
           "url": "/scenes/ijiraq/ijiraq-model-surface@2x.webp",
-          "bytes": 61772,
-          "sha256": "744c2152c9953a7176dd36760974edf54465dfd358a910615084d3ec87c742d8",
+          "bytes": 52998,
+          "sha256": "decf69755d04b3151ee083f43ce0df71978e60c9fbe72d5932977ef3698803c1",
           "verification": "bytes-verified"
         }
       ],
@@ -433,7 +433,7 @@
   },
   "lastPreparation": {
     "objectId": "ijiraq",
-    "materialSha256": "9d2f2387f3e763ec711f6689d69c24b0231abd491c71ed1d79a7b4d20b024475",
+    "materialSha256": "a538a84fa387df32435eb47f38bfdaf6656d364ea2c680f67afda19dae23cd98",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

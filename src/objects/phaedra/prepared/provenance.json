@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/phaedra/phaedra-elevation-surface@2x.webp",
-          "bytes": 303302,
-          "sha256": "6496f2492dadff1dafc9396428e78739d3c4c641e9ac72d244d528deaf1dc290",
+          "bytes": 272580,
+          "sha256": "a42677ae614c682e28e38338c486840cf61a72538442be56f4f46f0137c4b0aa",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/phaedra/phaedra-shape-surface@2x.webp",
-          "bytes": 70322,
-          "sha256": "3a84597d84012784611ccadee778c7bc6d14a777b9aef84ff08035fa9558aae1",
+          "bytes": 68826,
+          "sha256": "c7856e4bcb903140aca575542eaf9b4c0ecfd6062e1d66d458bf72d149a351dd",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "phaedra",
-    "materialSha256": "85e4724143d112819e68a09d2483de67c6c257b1d35e90ccf556639b15945ae3",
+    "materialSha256": "eb10456bac53f9717eacc59dd2b6b7c9a6d0772348fde884f820ed391b74e707",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-surface@2x.webp",
-          "bytes": 283920,
-          "sha256": "bd74cc8fc3c1ef23edf29a450a1b96392f0d08c129c488c4cbbd987364e263da",
+          "bytes": 255114,
+          "sha256": "a78bdae3fca67cdb67959d7be898a5e3827bc6c326df7fb711fc3e7b970f9e81",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
-          "bytes": 66928,
-          "sha256": "859beec0b9b7b466e68b719c378c8af6b871be5105c17e920891bb2c8ad2c127",
+          "bytes": 64214,
+          "sha256": "4d8103f4e03e8ad8ec5cf94ed892cdb7d27b2447615c26b948820eef09a7c524",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "menelaus",
-    "materialSha256": "b6e0f6e5ce96bce65b781e62f60c3b9acf54b765126f4fe9ec7c9e29542466e5",
+    "materialSha256": "cdf7d9dc9483ca78251e0be89f6160a3b559c35428657cf036dc64b279273720",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

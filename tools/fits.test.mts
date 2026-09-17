@@ -111,3 +111,22 @@ test('HDU identities, unsupported data and cube planes cannot be silently reinte
   for (const i of [-1, .5, 4, NaN]) assert.throws(() => at(i), /outside/);
   for (const key of ['TSCAL1', 'TZERO1', 'TNULL1']) assert.throws(() => assertUnscaledFitsTable({ [key]: 1 }), /scaling or null/);
 });
+
+test('degenerate trailing axes are read as the sky image they hold, and a populated fourth axis is not', () => {
+  // Every ALMA product declares NAXIS = 4: two sky axes, then one frequency and one Stokes plane.
+  const alma = Buffer.concat([
+    Buffer.from([card('SIMPLE', 'T'), card('BITPIX', '-32'), card('NAXIS', '4'), card('NAXIS1', '2'), card('NAXIS2', '2'),
+      card('NAXIS3', '1'), card('NAXIS4', '1'), 'END'.padEnd(80)].join('').padEnd(2880)),
+    (() => { const data = Buffer.alloc(2880); [1, 2, 3, 4].forEach((v, i) => data.writeFloatBE(v, i * 4)); return data; })(),
+  ]);
+  const image = readFitsImage(alma);
+  assert.equal(image.width, 2);
+  assert.equal(image.height, 2);
+  assert.deepEqual([...image.values], [1, 2, 3, 4]);
+  const cube = Buffer.concat([
+    Buffer.from([card('SIMPLE', 'T'), card('BITPIX', '-32'), card('NAXIS', '4'), card('NAXIS1', '2'), card('NAXIS2', '2'),
+      card('NAXIS3', '1'), card('NAXIS4', '2'), 'END'.padEnd(80)].join('').padEnd(2880)),
+    Buffer.alloc(2880),
+  ]);
+  assert.throws(() => fitsImageAccessor(cube), /Unsupported FITS image/);
+});

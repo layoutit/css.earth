@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/arethusa/arethusa-elevation-surface@2x.webp",
-          "bytes": 315788,
-          "sha256": "5d5389f5e6a4737e5fbe83d7dd715b8c415247b079596e22263cdadd7171294d",
+          "bytes": 287364,
+          "sha256": "a15d2c0f3a2a9558ce83216603481d48d8837a0035c4df4d791847f4c4ebf5b5",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/arethusa/arethusa-shape-surface@2x.webp",
-          "bytes": 71276,
-          "sha256": "16fa8ab078f56b579bbad424750e3a10489ff198cccb30da09597a56e4317bfa",
+          "bytes": 68844,
+          "sha256": "c408d58e3fc0c530da441c7e0956d7dbb48faf8201cc4b08726199600dd4e028",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "arethusa",
-    "materialSha256": "ce2fc3aa62f255746bd12973cea52e3ebdbc50e1ab6e9fa0fcc1712a5750bbd3",
+    "materialSha256": "e3234074220b8ecfb2ebf9345072deaa8d3447e0cf4c0dc6743e9cc1600fe813",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

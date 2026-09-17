@@ -1056,8 +1056,8 @@
         },
         {
           "url": "/scenes/thebe/thebe-elevation-surface@2x.webp",
-          "bytes": 222810,
-          "sha256": "a5d00af75622e7ff47a39f885830a252cf6ceb5ad205f0edf0c14a44dbb376e2",
+          "bytes": 193538,
+          "sha256": "c842026ffd9ef949b570581936f528ab555cc54d82032f9c13a47e1099ef9bf1",
           "verification": "bytes-verified"
         }
       ],
@@ -1108,8 +1108,8 @@
         },
         {
           "url": "/scenes/thebe/thebe-normal-surface@2x.webp",
-          "bytes": 130856,
-          "sha256": "24f528bd8a293363f89eb330279bbbea5f793658eb9e473c6421351e2825f2f9",
+          "bytes": 111466,
+          "sha256": "ac0ef1e5b7720bb641ac560dc83c982edc6f70cb8571a4843eb0e2ea79e1ac98",
           "verification": "bytes-verified"
         }
       ],
@@ -1202,8 +1202,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 9714,
-          "sha256": "6b46e0f9194e1cc387460e7b7d3ba1055706ce9bb1a075d23c0c7141ce16a9af",
+          "bytes": 4276,
+          "sha256": "a3f5f20bbfe3c779281ab46622ee8b745f074672b45f38c1e3733cbdcd38b0b8",
           "verification": "bytes-verified"
         }
       ]
@@ -1240,7 +1240,7 @@
   },
   "lastPreparation": {
     "objectId": "thebe",
-    "materialSha256": "c8a9a5ff1f0b7c5c640efd6fdff8427075f400b05180a8dfcdbde7f8d635849a",
+    "materialSha256": "8e31c857c2c61c4a28d727a854e31f23eb30a071b79b4b28a444e3b0cf286cf1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

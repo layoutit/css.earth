@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/semele/semele-elevation-surface@2x.webp",
-          "bytes": 309146,
-          "sha256": "0273bafc95e58d96b13be1ce95fb909609845ddbb82176da39bda5516212534a",
+          "bytes": 279316,
+          "sha256": "32db17eccdae6d2555aed601ae2fce20fc1bc10fd62f876419c3b4d20c94559c",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/semele/semele-shape-surface@2x.webp",
-          "bytes": 71522,
-          "sha256": "0c22ae3e4195c20cc546f8a3ed992a9d34eab98c574a1c311cf3e99c53a667df",
+          "bytes": 69350,
+          "sha256": "63de1cf3bc149485ef86a5ca863be75ecb3461d70ab6c8a94ddc7bc47fc739d1",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "semele",
-    "materialSha256": "999892218e5a8224206f99af35ec9bdaacf872d253a539b3e9cea1fc95921cd8",
+    "materialSha256": "e7cdfee12471a435adebf82cdab7e41b2a4d87f1c6d2baaf0b65e6f67414ee5d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

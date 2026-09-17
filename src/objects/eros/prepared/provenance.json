@@ -789,8 +789,8 @@
         },
         {
           "url": "/scenes/eros/eros-normal-surface@2x.webp",
-          "bytes": 3823346,
-          "sha256": "0b3267e1b0c26909fdf83fbf21489c44dac5885568600ffb188af4714eb2d4b3",
+          "bytes": 3771308,
+          "sha256": "df1815a9422e87df064003986dede9cf236def64230c59c5ace2e678baebe51b",
           "verification": "bytes-verified"
         }
       ],
@@ -857,8 +857,8 @@
         },
         {
           "url": "/scenes/eros/eros-infrared-surface@2x.webp",
-          "bytes": 5237204,
-          "sha256": "b4c1e99ecfde90716cedba2effd41fec4ef0f933e8faca886a22ed1d984a911a",
+          "bytes": 5220554,
+          "sha256": "e0b88a2ebb451ca01e311fea08059e0bda9c0a56bdf1fdd250c6a699d836a344",
           "verification": "bytes-verified"
         }
       ],
@@ -912,8 +912,8 @@
         },
         {
           "url": "/scenes/eros/eros-elevation-surface@2x.webp",
-          "bytes": 932612,
-          "sha256": "db239996c4304e30abcbc94baff396226c553da5b2c4cd45b82ec6a84d6011cc",
+          "bytes": 755994,
+          "sha256": "8be7b7c029fc1ed224299826f1c2f67c8145319d927dabd256bce14b37234986",
           "verification": "bytes-verified"
         }
       ],
@@ -1070,7 +1070,7 @@
   },
   "lastPreparation": {
     "objectId": "eros",
-    "materialSha256": "536bc800233de785460247eac4ec181a57c76f831260769aaf439d3870f98fe5",
+    "materialSha256": "522b5101393bb168e849f0d46c848764f1df1299b5c157fd58f9e696fc5d24cc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

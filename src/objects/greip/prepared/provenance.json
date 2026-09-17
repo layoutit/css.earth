@@ -343,8 +343,8 @@
         },
         {
           "url": "/scenes/greip/greip-model-surface@2x.webp",
-          "bytes": 62990,
-          "sha256": "53dfb32e4448baaef505d66cc27fd9753f165ec893f89df60ad7db7ffcb9375b",
+          "bytes": 51496,
+          "sha256": "645e13fa5eb680a539ece8f64b23675f6cccfe656678f15a2b0a26f8b92a391a",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "greip",
-    "materialSha256": "85561415f7ce33bb15f31c538748bb9b46404229d55e0d1b3d4dee946643d91b",
+    "materialSha256": "cc9b5dca87b9eb7a55ba430d286f2785989a799de4635d43cee88200bf730ee2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

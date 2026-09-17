@@ -840,8 +840,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-normal-surface@2x.webp",
-          "bytes": 4026058,
-          "sha256": "185062ad407161b965175c36fddbaa5590ba76f2b1003506191250ca249bb297",
+          "bytes": 3988488,
+          "sha256": "c3cb6ef48fff0a87fde3f6cf4951a3b4d4cedc67f1640deb6fc0319f137676a4",
           "verification": "bytes-verified"
         }
       ],
@@ -900,8 +900,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-surface-surface@2x.webp",
-          "bytes": 3167190,
-          "sha256": "63da494bbdafb2d18e2acd108c5d2681fc0d4d0a41e6c026576f9b3a8581f6c4",
+          "bytes": 1866748,
+          "sha256": "94af6da9696cf965cf3d6158d2d9c4719d9c779e4102c38bad0795176500ebe4",
           "verification": "bytes-verified"
         }
       ],
@@ -961,8 +961,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-ratios-surface@2x.webp",
-          "bytes": 3266400,
-          "sha256": "f322484a33564e9fe0cd7868b96e802e820d76736208e0c25e9d6c3594ed2072",
+          "bytes": 2237534,
+          "sha256": "d49ef56a6b02aa5eee052840ac7adbddf5aa1176252d102ee288c329e0bf8e87",
           "verification": "bytes-verified"
         }
       ],
@@ -1016,8 +1016,8 @@
         },
         {
           "url": "/scenes/vesta/vesta-elevation-surface@2x.webp",
-          "bytes": 1932410,
-          "sha256": "6e30c71b3bed05cfd51848ded56a3b90e8b8182ada9af5f21fcb5a29de0a871f",
+          "bytes": 1278614,
+          "sha256": "5ff6f3babd8ca5282b932f1c408529f5ddf61698c77b5746d8baf6ec082e874a",
           "verification": "bytes-verified"
         }
       ],
@@ -1198,7 +1198,7 @@
   },
   "lastPreparation": {
     "objectId": "vesta",
-    "materialSha256": "784aeea2f7e92970b90b56b68f17310c50df807b9799c38ca65db1ad6d15a098",
+    "materialSha256": "371728756707c74c65d7bbee41ce5b76514b7f132009d2272986aae1b20bde15",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

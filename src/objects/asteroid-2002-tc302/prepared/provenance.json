@@ -326,8 +326,8 @@
         },
         {
           "url": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-surface@2x.webp",
-          "bytes": 60110,
-          "sha256": "780a3b59e41c9a4b0aceca8ce80bb5a02020cd1a3fea79a31c1e21ebf812b167",
+          "bytes": 49642,
+          "sha256": "fd9b8d98c5430d7ece31e12c1eb6cb637b2c311404065505a69e610455017176",
           "verification": "bytes-verified"
         }
       ],
@@ -403,7 +403,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-2002-tc302",
-    "materialSha256": "c6c6b812587b5e1b3f6f650bf0f7dda0926aca17c0e1d24d62e06c1191b71f06",
+    "materialSha256": "86c20d94ee7dd7ef46d17b1d900535cd5ffe2bd53fcfd492c7b4e8db68dab248",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

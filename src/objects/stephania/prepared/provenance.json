@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/stephania/stephania-elevation-surface@2x.webp",
-          "bytes": 320148,
-          "sha256": "6e5664bfd14679f061ee82119ea556901ca3f6f35a11b6f70c37e6bb94e8fde1",
+          "bytes": 291848,
+          "sha256": "7c38e389d34231cb0dd9c36861a0f83d5a476c1a54ad0d23ccdfac116c83df1d",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/stephania/stephania-shape-surface@2x.webp",
-          "bytes": 71816,
-          "sha256": "c4ed0ca7734dbdf74ca71d731aafe97da8f500fb3316d0a56f990b3393365606",
+          "bytes": 69442,
+          "sha256": "20d375216e42d4b849f7c3c0ec857cade776154b9f21aa81fa5a4107e2a84ed2",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "stephania",
-    "materialSha256": "5c0ee6d9c4ca409f2db529e3b572b331cc5849cddcf7ec80c1ca6b800b0dc662",
+    "materialSha256": "dd013aa895db38d877a75fa00a3345c209eee6ed6b20a31e1de686cacd7a27f3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

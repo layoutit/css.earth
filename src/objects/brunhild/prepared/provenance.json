@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/brunhild/brunhild-elevation-surface@2x.webp",
-          "bytes": 361642,
-          "sha256": "91937b41e98eef2057bb89635f1715fd37998c00026c7defc91740fbaf325c20",
+          "bytes": 321050,
+          "sha256": "38f076bf5b6056a2d7f9a0bc32c84129a75194ad2546d8f64fb422088963ccbf",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/brunhild/brunhild-shape-surface@2x.webp",
-          "bytes": 70832,
-          "sha256": "6b3ff9b3a7d8556930f81d3d51fc7da4fe38ba8baab82af2a4664e5ea3cadd2a",
+          "bytes": 66934,
+          "sha256": "1a66ced4a3ba3c2d652fdf40eb839b2c1422541fcaa89819cd14f44309c5662a",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "brunhild",
-    "materialSha256": "9a1bc20262821af74e4af2e942db8a1211cc36b632d2b40582dc513f10d232ce",
+    "materialSha256": "d7f60039aa907efff95ece0a3c22c2078668fa36f2942f7d2b101ee2cbcaee9c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

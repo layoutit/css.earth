@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/thyra/thyra-elevation-surface@2x.webp",
-          "bytes": 304522,
-          "sha256": "427b3286ff9973c4788732d39401c16c9ee77ea9ffe0f0e6b155eb0debb70f73",
+          "bytes": 271236,
+          "sha256": "15b57d574a19d170694ab89e2e2c3d9ca7030e0b24f198497a00696056f9d50a",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/thyra/thyra-shape-surface@2x.webp",
-          "bytes": 73450,
-          "sha256": "dddef9b308a16cbb8783df89cfec96355af3f194d9376aa7fd530c885722fd6c",
+          "bytes": 72454,
+          "sha256": "3be9d951b1f0bd1f8fc6ada4f9032fb4b821268a524905f894bfe0bc6f87c08d",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "thyra",
-    "materialSha256": "76068af669b5f153fe22798da17f3dcd764de124249e0c8e1aa1b528bd61827b",
+    "materialSha256": "043e92c7da56f772d7b237c104afb8cdf13c42491bb75ea745402afa065784dd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

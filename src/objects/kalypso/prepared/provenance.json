@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/kalypso/kalypso-elevation-surface@2x.webp",
-          "bytes": 310146,
-          "sha256": "4171124ac499bbc6d0fb3d3a7cc7efffdfae518bf2cffe3d7336ae95c7954922",
+          "bytes": 276972,
+          "sha256": "fd9532ca8f32c59b7c4d9fa8aad343dd09433641d87ce12fe62af5fe8861b748",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/kalypso/kalypso-shape-surface@2x.webp",
-          "bytes": 73958,
-          "sha256": "250956463f0218b3ac8fcb703e5e1e1e983fac9ce809334b460febbd5dbbe4c8",
+          "bytes": 71114,
+          "sha256": "5e7e86550a3258f222841a6dabbfa46dfb4f198ca2ebd9789c47d8cd8ab43ad2",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "kalypso",
-    "materialSha256": "ca5d3d4d61ee71cc3f6748aad60b56d34b0b533c3d5a16851d65a2af7b789553",
+    "materialSha256": "96477c41f349b16ff611bd2aa019950ae5aaf550c0781fa1fb2d4e9889cb00d0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

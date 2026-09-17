@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/ivar/ivar-elevation-surface@2x.webp",
-          "bytes": 292442,
-          "sha256": "a31b0e3d1072ffbd01b64419cd2a45d0eb198639e7eb9627c5b6ac0e991576cb",
+          "bytes": 263932,
+          "sha256": "2d5b902d218ea903fa53bad799aa78d27d27919b5a460a480f396eef7b7864a4",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/ivar/ivar-shape-surface@2x.webp",
-          "bytes": 72488,
-          "sha256": "494481b3c66e7ac707c02dfe8b3bc7251646349bd7580b44e08f931d04a1011c",
+          "bytes": 69354,
+          "sha256": "417dbda59b67dfc23bb3532fc3d5b271609efad11a66f66450389ce4883c7a63",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "ivar",
-    "materialSha256": "1c939592bb1783b816cd42812c0c222acd15dc1865f61a89f4a2838e5f9d17cc",
+    "materialSha256": "d47871b889a7680b691d857ecdd7f8445e3a0866c04787c60a2435ad649dacbb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

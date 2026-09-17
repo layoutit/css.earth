@@ -388,8 +388,8 @@
         },
         {
           "url": "/scenes/setebos/setebos-model-surface@2x.webp",
-          "bytes": 63630,
-          "sha256": "6dfa5657e0455016355901a6c168dea99add3bfb04fcc8bd43082a57e1cad30b",
+          "bytes": 51714,
+          "sha256": "3dbaab2ff385d5b0ccb93ec8f1548763fafaf1d9652dec0261d70c797ec063b7",
           "verification": "bytes-verified"
         }
       ],
@@ -465,7 +465,7 @@
   },
   "lastPreparation": {
     "objectId": "setebos",
-    "materialSha256": "1ab8aed8b18f8e74e015db5d46f6349775bc972afa189ba3fa54e4445deb3ae9",
+    "materialSha256": "6b02e28ece0c8d17b562790e971c91f617816cabc76bcc88fd7c010c336ab598",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

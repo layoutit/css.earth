@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "62d9f8359a658344ec3ec8cb3a08d19b7ffa07fb0ed2f18511ddf1bac92c7258"
+    "sha256": "8b1ce3bb5da50d230184d04edc198553f28e7b34130d9eac75e2cc0c1d888b4e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "01e9648a67d99807b00d9aba50096a4451481b821044568831835bba7b469260"
+    "bindingsSha256": "9bdf91b1d414c0926452b026398e7ddddf86ae6b95a583c1ca3e1656649512b7"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "71a8d4ad3d4566ef7bf6480291da29181561b65d45c4ba97b8b1bd7d72898eea",
+      "sha256": "c2fef198513f3b9ee08d6ef564d0cb87ac82f85d36918d737fee14a6e8ed35d8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -191,6 +191,177 @@
                   0.0931
                 ]
               }
+            },
+            {
+              "id": "filter-color",
+              "format": "controlled-shape-color",
+              "consumer": "galileo-color",
+              "metadata": {
+                "label": "False color",
+                "falseColor": true,
+                "coverage": "One Galileo pointing in 0.89 µm, green and violet filters, displayed as red, green and blue. The three frames were taken within 43 seconds; only the recorded strip of each frame covers Ida, and the grid marks what it does not.",
+                "attribution": {
+                  "label": "NASA/JPL/Galileo SSI; PDS Small Bodies Node",
+                  "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/"
+                }
+              },
+              "bands": [
+                {
+                  "channel": "red",
+                  "filter": "IR-8890"
+                },
+                {
+                  "channel": "green",
+                  "filter": "GREEN"
+                },
+                {
+                  "channel": "blue",
+                  "filter": "VIOLET"
+                }
+              ],
+              "frames": [
+                {
+                  "id": "set-1",
+                  "red": {
+                    "id": "202561352",
+                    "path": "observations/0202561352rcal_ir8.fit",
+                    "labelPath": "observations/0202561352rcal_ir8.xml",
+                    "encoding": "fits-ssi-iof",
+                    "cameraCatalog": {
+                      "path": "reference/243idaimg.tab",
+                      "labelPath": "reference/243idaimg.xml",
+                      "imageNumber": 202561352,
+                      "longitudeDirection": "east",
+                      "pixelOrigin": "one-based",
+                      "instrumentPath": "reference/gll36001.ti"
+                    },
+                    "quality": {
+                      "rawPath": "observations/i1352.fit",
+                      "rawLabelPath": "observations/i1352.lbl",
+                      "badDataPath": "observations/idabad.tab",
+                      "badDataLabelPath": "observations/idabad.lbl",
+                      "imageId": "i1352",
+                      "target": "IDA",
+                      "startTime": "1993-08-28T16:38:26.723Z",
+                      "filter": "IR-8890"
+                    },
+                    "coverageInsetPixels": 2
+                  },
+                  "green": {
+                    "id": "202561278",
+                    "path": "observations/0202561278rcal_gre.fit",
+                    "labelPath": "observations/0202561278rcal_gre.xml",
+                    "encoding": "fits-ssi-iof",
+                    "cameraCatalog": {
+                      "path": "reference/243idaimg.tab",
+                      "labelPath": "reference/243idaimg.xml",
+                      "imageNumber": 202561278,
+                      "longitudeDirection": "east",
+                      "pixelOrigin": "one-based",
+                      "instrumentPath": "reference/gll36001.ti"
+                    },
+                    "quality": {
+                      "rawPath": "observations/i1278.fit",
+                      "rawLabelPath": "observations/i1278.lbl",
+                      "badDataPath": "observations/idabad.tab",
+                      "badDataLabelPath": "observations/idabad.lbl",
+                      "imageId": "i1278",
+                      "target": "IDA",
+                      "startTime": "1993-08-28T16:37:43.324Z",
+                      "filter": "GREEN"
+                    },
+                    "coverageInsetPixels": 2
+                  },
+                  "blue": {
+                    "id": "202561313",
+                    "path": "observations/0202561313rcal_vio.fit",
+                    "labelPath": "observations/0202561313rcal_vio.xml",
+                    "encoding": "fits-ssi-iof",
+                    "cameraCatalog": {
+                      "path": "reference/243idaimg.tab",
+                      "labelPath": "reference/243idaimg.xml",
+                      "imageNumber": 202561313,
+                      "longitudeDirection": "east",
+                      "pixelOrigin": "one-based",
+                      "instrumentPath": "reference/gll36001.ti"
+                    },
+                    "quality": {
+                      "rawPath": "observations/i1313.fit",
+                      "rawLabelPath": "observations/i1313.lbl",
+                      "badDataPath": "observations/idabad.tab",
+                      "badDataLabelPath": "observations/idabad.lbl",
+                      "imageId": "i1313",
+                      "target": "IDA",
+                      "startTime": "1993-08-28T16:38:00.723Z",
+                      "filter": "VIOLET"
+                    },
+                    "coverageInsetPixels": 2
+                  }
+                }
+              ],
+              "bandAlignment": {
+                "references": [
+                  {
+                    "id": "202561278",
+                    "path": "observations/0202561278rcal_gre.fit",
+                    "labelPath": "observations/0202561278rcal_gre.xml",
+                    "encoding": "fits-ssi-iof",
+                    "cameraCatalog": {
+                      "path": "reference/243idaimg.tab",
+                      "labelPath": "reference/243idaimg.xml",
+                      "imageNumber": 202561278,
+                      "longitudeDirection": "east",
+                      "pixelOrigin": "one-based",
+                      "instrumentPath": "reference/gll36001.ti"
+                    },
+                    "quality": {
+                      "rawPath": "observations/i1278.fit",
+                      "rawLabelPath": "observations/i1278.lbl",
+                      "badDataPath": "observations/idabad.tab",
+                      "badDataLabelPath": "observations/idabad.lbl",
+                      "imageId": "i1278",
+                      "target": "IDA",
+                      "startTime": "1993-08-28T16:37:43.324Z",
+                      "filter": "GREEN"
+                    },
+                    "coverageInsetPixels": 2
+                  }
+                ],
+                "checks": [
+                  {
+                    "reference": "202561278",
+                    "targets": [
+                      "202561352",
+                      "202561313"
+                    ]
+                  }
+                ]
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 65
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 65,
+                "maximumEmissionDegrees": 65,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "displayRange": [
+                  0,
+                  0.11
+                ]
+              },
+              "focus": {
+                "longitudeDegrees": 47.71,
+                "latitudeDegrees": -5.23,
+                "zoom": 1.1
+              }
             }
           ]
         },
@@ -242,7 +413,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "46c8b7db71e43756d5d95601a71cf71d47e967cf8412513cfc1caaad6594c81d",
+      "sha256": "52ed5367323148669abbe43ffb19f449ae75c67dcc29deaba8a20fb9869dfd49",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -352,6 +523,32 @@
                 }
               ],
               "notes": "These two Galileo photographs show overlapping parts of Ida’s surface. Both were taken through a green filter. The original sunlight and shadows remain visible; the grid marks areas without usable photographs.",
+              "noData": true
+            },
+            {
+              "id": "filter-color",
+              "label": "False color",
+              "thumbnail": "/scenes/ida/ida-filter-color-thumbnail.webp",
+              "surface": "ida-filter-color-surface@2x.webp",
+              "poles": "ida-filter-color-surface@2x.webp",
+              "source": {
+                "id": "ida-0202561352rcal_ir8-fit",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "facts": [
+                {
+                  "id": "filters",
+                  "label": "Filters",
+                  "value": "0.89 µm, green, violet"
+                },
+                {
+                  "id": "image-scale",
+                  "label": "Image scale",
+                  "value": "106–111 m/pixel"
+                }
+              ],
+              "notes": "Galileo photographed Ida through near-infrared, green and violet filters within 43 seconds. Shown as red, green and blue, the colour differences are real but stronger than the eye would see. Only the recorded strip of these frames covers Ida; the grid marks the rest.",
               "noData": true
             },
             {
@@ -1134,6 +1331,306 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "ida-0202561352rcal_ir8-fit",
+      "path": "observations/0202561352rcal_ir8.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "width": 800,
+      "height": 800,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.fit"
+          }
+        ]
+      },
+      "sha256": "4a2a3cceab721b795e5fb0805844910197acea84c5bd626ebf90311fd168231c",
+      "bytes": 2563200,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/0202561352rcal_ir8.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-0202561352rcal_ir8-xml",
+      "path": "observations/0202561352rcal_ir8.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.xml"
+          }
+        ]
+      },
+      "sha256": "b0376ca65837f9ada841d5712631feb3bb586e4352daabf3e6c61c780240edcb",
+      "bytes": 12882,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/0202561352rcal_ir8.xml",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561352rcal_ir8.xml",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-i1352-fit",
+      "path": "observations/i1352.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.fit"
+          }
+        ]
+      },
+      "sha256": "15ec88bd164a53c273bac8e1060e37be4355d05f6c6a6820f572dde76813984e",
+      "bytes": 645120,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/i1352.fit",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-i1352-lbl",
+      "path": "observations/i1352.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.lbl"
+          }
+        ]
+      },
+      "sha256": "a6a36ffeab8d42b591a12e2920b136c3eecc3d983d8b457640f11cd27a505aaa",
+      "bytes": 10480,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/i1352.lbl",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1352.lbl",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-0202561313rcal_vio-fit",
+      "path": "observations/0202561313rcal_vio.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "width": 800,
+      "height": 800,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.fit"
+          }
+        ]
+      },
+      "sha256": "a163371d531d462cb8707129a9c546dbdc001b1054621136764d8fb46aa91bce",
+      "bytes": 2563200,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/0202561313rcal_vio.fit",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-0202561313rcal_vio-xml",
+      "path": "observations/0202561313rcal_vio.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.xml",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.xml"
+          }
+        ]
+      },
+      "sha256": "bde2777526375d605cfd770c189d2244752a0a143ff2f7961a473c652817ebc3",
+      "bytes": 12885,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/0202561313rcal_vio.xml",
+        "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202561313rcal_vio.xml",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-i1313-fit",
+      "path": "observations/i1313.fit",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.fit",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.fit"
+          }
+        ]
+      },
+      "sha256": "e2290d3988e58108464079721fba21bb66b5d33347de4bb4bf2ccee733d26a0d",
+      "bytes": 645120,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/i1313.fit",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.fit",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ida-i1313-lbl",
+      "path": "observations/i1313.lbl",
+      "origin": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.lbl",
+      "credit": "NASA/JPL/Galileo SSI; D. L. Domingue (I/F calibration); P. C. Thomas and colleagues (shape and control)",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "galileo-ssi-ida-color-set-1993",
+            "role": "material",
+            "evidence": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.lbl"
+          }
+        ]
+      },
+      "sha256": "8b33f93cce7daac9fc1ac6163b1cfd6702032fb50da392cf3315e948533ef061",
+      "bytes": 10480,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/i1313.lbl",
+        "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i1313.lbl",
+        "headers": {
+          "User-Agent": "curl/8.7.1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -1146,8 +1643,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "46c8b7db71e43756d5d95601a71cf71d47e967cf8412513cfc1caaad6594c81d",
-      "bytes": 8074,
+      "sha256": "52ed5367323148669abbe43ffb19f449ae75c67dcc29deaba8a20fb9869dfd49",
+      "bytes": 9079,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1301,8 +1798,8 @@
         },
         {
           "url": "/scenes/ida/ida-normal-surface@2x.webp",
-          "bytes": 1733006,
-          "sha256": "5235f435c22d09bf6a3fbeefb64e8f2dadbc635a254cff3b5725770e7ff4b761",
+          "bytes": 1700608,
+          "sha256": "3c73a3a718ca872195c740eb54684e338b1252dad7d358c4257f313631874e64",
           "verification": "bytes-verified"
         }
       ],
@@ -1356,8 +1853,8 @@
         },
         {
           "url": "/scenes/ida/ida-elevation-surface@2x.webp",
-          "bytes": 392234,
-          "sha256": "50343f00b26935f89407fa91459402e25d2f1dca414c233c6205cf3a487d7ea9",
+          "bytes": 325176,
+          "sha256": "f06ee7a6f105b6fed5d07ff9ade70e258652b25b2fcf76ac95696f65c2248b29",
           "verification": "bytes-verified"
         }
       ],
@@ -1414,8 +1911,69 @@
         },
         {
           "url": "/scenes/ida/ida-calibrated-surface@2x.webp",
-          "bytes": 279190,
-          "sha256": "f0ba128550ecb5b7e8c173cc42a955bcd5431b1ba0ed77a07d1e645ca391255b",
+          "bytes": 229496,
+          "sha256": "e71bd7e6038516647186f12c0dc243fec633dca793d83f7d3efef107ee4e467b",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ida-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "filter-color",
+      "label": "False color",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "filter-color"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "ida-0202561352rcal_ir8-fit",
+        "ida-0202561352rcal_ir8-xml",
+        "ida-camera-catalog-tab",
+        "ida-camera-catalog-xml",
+        "ida-gll36001-ti",
+        "ida-i1352-fit",
+        "ida-i1352-lbl",
+        "ida-idabad-tab",
+        "ida-idabad-lbl",
+        "ida-0202561278rcal_gre-fit",
+        "ida-0202561278rcal_gre-xml",
+        "ida-i1278-fit",
+        "ida-i1278-lbl",
+        "ida-0202561313rcal_vio-fit",
+        "ida-0202561313rcal_vio-xml",
+        "ida-i1313-fit",
+        "ida-i1313-lbl",
+        "ida-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ida/ida-filter-color-thumbnail.webp",
+          "bytes": 1470,
+          "sha256": "9c86285aad6b84a2a69f58fe19d7f40b3b2e6a68b4963e417c993f92410c34be",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ida/ida-filter-color-surface@2x.webp",
+          "bytes": 293176,
+          "sha256": "4fc8705884c873f58a48625177e384b3fc26f132d3d1efbf994feac006476035",
           "verification": "bytes-verified"
         }
       ],
@@ -1533,8 +2091,33 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 7476,
-          "sha256": "835719b981ec7171346e1d33b955ad0a04644ec27909e8bc8a2b03032057886a",
+          "bytes": 7404,
+          "sha256": "9706babbbc4df867c17d572fd678fa5c62b2774e652052d035e4fae935c59208",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:filter-color",
+      "label": "False color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "filter-color"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/filter-color.webp",
+          "bytes": 10112,
+          "sha256": "79a41fe93028e00055c34624d0edcadf8196a7785bf4834d55dddfcad6f03ac0",
           "verification": "bytes-verified"
         }
       ]
@@ -1571,11 +2154,11 @@
   },
   "lastPreparation": {
     "objectId": "ida",
-    "materialSha256": "6eeba9113c476246b02211a7f113522636be1b0dac3e974ee13bfcf27c4cd0f0",
+    "materialSha256": "ef7c3451a0c8a0f5a7744fba81c7173b9b4baf1b9b97d090eca63884abd69a01",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "01e9648a67d99807b00d9aba50096a4451481b821044568831835bba7b469260"
+      "bindingsSha256": "9bdf91b1d414c0926452b026398e7ddddf86ae6b95a583c1ca3e1656649512b7"
     }
   }
 }

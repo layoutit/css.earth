@@ -1,0 +1,296 @@
+{
+  "schema": "cssr-doradus-authoritative-sources@2",
+  "inputs": [
+    {
+      "expectedBytes": 325440,
+      "expectedSha256": "eaa56eb426806f2859644cb10d28e188249257c8c0e27cef279b29d7a15b975f",
+      "id": "r-doradus-alma-338ghz",
+      "path": "observations/r-doradus-alma-338ghz-0p625mas.fits",
+      "origin": "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits",
+      "credit": "ALMA project 2022.1.01071.S (PI T. Khouri), band 7 continuum image made by the ALMA pipeline; window cut and resampled by this repository",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "alma",
+            "evidence": "The 125 milliarcsecond window around the star in the ALMA pipeline's band 7 continuum image of member OUS uid://A001/X35f5/Xaea, observed 18 July 2023."
+          }
+        ]
+      },
+      "license": "Derived in this repository from the public ALMA archive image; ALMA data are released under CC BY 4.0 with the observatory acknowledgement in NOTICE.md.",
+      "acquisition": "Written by tools/objects/source-authoring/r-doradus/author.mts: the 25 by 25 pixel window around the star in the pinned archive image, resampled eight times finer by Catmull-Rom; `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "coverage": "ALMA band 7 continuum, 200 x 200 pixels of 0.625 milliarcseconds over a 125 milliarcsecond field, restoring beam 20.7 x 16.8 milliarcseconds at position angle -17.3 degrees, peak 5.71e-2 Jy/beam at a signal-to-noise ratio of 199. The half-power disc is 60 milliarcseconds across, against the 59.8 +/- 0.4 published from the same visibilities.",
+      "width": 200,
+      "height": 200,
+      "lensId": "alma",
+      "label": "ALMA continuum",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Derived here from the pinned archive image; repinned when the authoring tool changes."
+      }
+    },
+    {
+      "expectedBytes": 33212160,
+      "expectedSha256": "432234148d0633a028e987736f24a90a4d686074faf14b01c0772c079b58cb40",
+      "id": "alma-2023-07-band7-continuum",
+      "path": "observations/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits",
+      "origin": "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits",
+      "credit": "ALMA project 2022.1.01071.S (PI T. Khouri); imaged by the ALMA pipeline and served by the ALMA Science Archive. Observations published in Vlemmings et al. (2024, Nature 633, 323).",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "alma",
+            "evidence": "Band 7 continuum image, member OUS uid://A001/X35f5/Xaea, spectral windows 25, 27, 29 and 31 at 331.2 to 345.1 GHz, observed 18 July 2023, public since 23 August 2024."
+          }
+        ]
+      },
+      "license": "Public ALMA archive data under CC BY 4.0; the observatory asks for its standard acknowledgement, which NOTICE.md carries.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the ALMA Science Archive data portal. The 77 GB product tarball is never needed: the archive's nested datalink service serves this file on its own.",
+      "redistribution": "Not redistributed; only the cut window and the lens are derived.",
+      "consumers": [
+        "lens-frame-input"
+      ],
+      "coverage": "2880 x 2880 pixels of 5 milliarcseconds over a 14.4 arcsecond field, in Jy/beam, with the star near the middle. Four spectral windows combined by the pipeline.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Restored from the archive by its pinned URL and digest; not committed."
+      }
+    },
+    {
+      "expectedBytes": 65105,
+      "expectedSha256": "cacd9c8b013a24cd57334e58041bb240af45fee710a54fa90273d918b93d8d54",
+      "id": "uniform-disc-sphere",
+      "path": "shape/uniform-disc.tab",
+      "origin": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=R+Dor",
+      "credit": "Radius from the published 338 GHz angular diameter at the Hipparcos distance; sphere written by this repository",
+      "license": "Project-authored reference surface from a published radius.",
+      "acquisition": "Written by tools/objects/source-authoring/r-doradus/author.mts from measurements.json (radius 244291444 km, 5 degree steps); `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain"
+      ],
+      "projection": {
+        "kind": "body-fixed-radius-table",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 244291444000
+      },
+      "coverage": "A sphere of the published radius: the reference surface the ALMA image is cast onto, not a measured shape. The photosphere of an asymptotic giant branch star has no sharp limb.",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/r-doradus/author.mts",
+        "inputs": [
+          "measurements"
+        ],
+        "stepDegrees": 5
+      },
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written here from the retained measurements; repinned when they change."
+      }
+    },
+    {
+      "id": "r-doradus-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1693,
+      "expectedSha256": "21cdbf09a05a185bfc5278ef838e85031a4be5c41309b4c1b60a236bf28549bb",
+      "origin": "https://doi.org/10.1038/s41586-024-07836-9",
+      "credit": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-r-doradus-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r-doradus-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 6199,
+      "expectedSha256": "c7cf36d2a72a53db3b35d8675510b5bf650f9be80cdad80ee7647ef38bb3ea27",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "r-doradus-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1698,
+      "expectedSha256": "711c86cdd00b89db8b736983d48a5f2ba4bb4037ca55fd24710e042620ad1c7d",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "r-doradus-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "r-doradus-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 104,
+      "expectedSha256": "da6e3c6044795dda275319d6bf33e68537a68f36c124b132dc7550719829428b",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "r-doradus-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 220,
+      "expectedSha256": "ed0ded0020d04077237065a936c098daeb243e5e12fe1273d70527fc146efb15",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 117101,
+      "expectedSha256": "04a1c6577ff1cfc79004bd65568bb6759e3416efa15dae7b621adc64a1048ca0",
+      "origin": "https://doi.org/10.1038/s41586-024-07836-9",
+      "credit": "The ALMA continuum image on the lens palette; marker written by tools/objects/source-authoring/r-doradus/author.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/source-authoring/r-doradus/author.mts",
+        "inputs": [
+          "r-doradus-alma-338ghz"
+        ]
+      },
+      "generator": "tools/objects/source-authoring/r-doradus/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5580,
+      "expectedSha256": "f5b316836e3a4f63c8fb916760e85de8535edfd7c3f1c4c97af4d85cb2ea9339",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 654,
+      "expectedSha256": "320d852bd9bbc4252b321e81a40836815c30d6814083900bfead711e2ea2a3d2"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 446,
+      "expectedSha256": "f31298090147256894fbeeb51c075b5d2948e023c9566b05c4d1029efa243bc5"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1285,
+      "expectedSha256": "0ce934ecf3e8dc792d0de49b93752a6413005576bfca3ccbf41100e45ea05ff2"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5091,
+      "expectedSha256": "f23a0e7cfd21b71ffbaa037cb993d9c825faec0ad7a2d4222384377bbd6adbdb"
+    }
+  ]
+}

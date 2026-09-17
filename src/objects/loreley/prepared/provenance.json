@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/loreley/loreley-elevation-surface@2x.webp",
-          "bytes": 390518,
-          "sha256": "0d22a15b6f0513aceeeaea6c3d877af0322f70bcab17b0bd24e8ea890562043a",
+          "bytes": 329312,
+          "sha256": "78b60105825ca7bbc25f74aeb6989b4978714c86f7ee10872423fe56e5ef3a18",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/loreley/loreley-shape-surface@2x.webp",
-          "bytes": 80054,
-          "sha256": "aa35fb4e7899a6b25d9262f3bbfa8c934d232fdfc0bac763e392b4fa490151be",
+          "bytes": 78326,
+          "sha256": "e29116ad39320975ee3199aceb8d63966706d54d796e0c5c6a5cec322ed577cf",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "loreley",
-    "materialSha256": "e2819d506462eb4409cbfa62f5c2dde6a0ff66bff4e170515f6d5303ff890ec8",
+    "materialSha256": "061ce148d9ee206dbdae0f14bd13c4994fae080e3a411db01bac4cc58425205d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

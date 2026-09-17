@@ -359,8 +359,8 @@
         },
         {
           "url": "/scenes/varuna/varuna-model-surface@2x.webp",
-          "bytes": 59370,
-          "sha256": "966e8986b3940ee63fb748d3c4e87df98afad3dc9dd6a1062f5ea27a686397e8",
+          "bytes": 49982,
+          "sha256": "fe7bac904a621c8e94d0f7dcff4012a35e03a2b7a523cd8405124e60e636d2a0",
           "verification": "bytes-verified"
         }
       ],
@@ -436,7 +436,7 @@
   },
   "lastPreparation": {
     "objectId": "varuna",
-    "materialSha256": "4ab7a0d85dd40811b4ddbc98656ab1f47e072a080f3df0099ebe4d0c2e338ce1",
+    "materialSha256": "b4c28bfb87c837e502090b196faff3ea87866c2976ae4d22b33a739388ce5069",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -421,8 +421,8 @@
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-elevation-surface@2x.webp",
-          "bytes": 419880,
-          "sha256": "724105c9a6020e789d6ba71356a7536f95a595dc845b01b31b1824a5a72971f7",
+          "bytes": 370538,
+          "sha256": "4f1ba06546737f197c9b296d5db96f4c19dd41c55808b3a1cd1b4d2614ac65d7",
           "verification": "bytes-verified"
         }
       ],
@@ -465,8 +465,8 @@
         },
         {
           "url": "/scenes/asteroid-1996-hw1/asteroid-1996-hw1-shape-surface@2x.webp",
-          "bytes": 90150,
-          "sha256": "c93ebbba8aa86e1acda0662cba4c0e0d6c4638821d05082e79ac3fffcb529551",
+          "bytes": 89936,
+          "sha256": "7cb045727a3dad0479d2f45d364581b318858c77b590cb75e84d37f5b22cc6c2",
           "verification": "bytes-verified"
         }
       ],
@@ -562,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1996-hw1",
-    "materialSha256": "90d92a79e9fe5ac887f3020b56d22d1b53eefa1b7f2d58258b72fc6e3dd88020",
+    "materialSha256": "248e4bb182b2a2006dfa18e6e7cdf10bf445678915d541a3c563edaa093771a6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

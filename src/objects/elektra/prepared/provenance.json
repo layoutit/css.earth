@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/elektra/elektra-elevation-surface@2x.webp",
-          "bytes": 367734,
-          "sha256": "6e62152e7796bf3949ccacc1db5963c10ae5d7336f24269bd380c69182776cfe",
+          "bytes": 313118,
+          "sha256": "1900efbaf77b44a2d6f2fe39a96ec1097a20e6897180a16e6d86b2e2d29bfbcb",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/elektra/elektra-shape-surface@2x.webp",
-          "bytes": 74814,
-          "sha256": "9d02e7bac4eadb8ee092e4236e12256b48d2829d36deeed3d8dbcb975cf315fb",
+          "bytes": 73494,
+          "sha256": "dd3f1191ec664717e0931ae9ef1a79c5b4ce60a7a989e3da13a5331847112275",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "elektra",
-    "materialSha256": "5988cc67175ab66b458bb730295b0f58684bb4ffb0764b82f82ead661c213f1f",
+    "materialSha256": "9d9898e663dc58c67214667510452578a112b9ff2bceaaa0a89556031946fe79",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1148,8 +1148,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-normal-surface@2x.webp",
-          "bytes": 1004624,
-          "sha256": "0e5674169e18634c20196102c3a51c2e2b24a0eccea98fe1eb5d2c42a61aac3b",
+          "bytes": 973070,
+          "sha256": "ed6c493b166d7218f6b9d730af0f897bf87499016f7fd2fbc94afc33d67c4720",
           "verification": "bytes-verified"
         }
       ],
@@ -1206,8 +1206,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-enhanced-surface@2x.webp",
-          "bytes": 4234860,
-          "sha256": "da8dd9b465be1bb40d97fe483095ed7885ec1b798db8b42bcfc432379dd73b27",
+          "bytes": 4152684,
+          "sha256": "ca59f918bdeea02e5a7a5e310660e37ccd927a9961e6b32c7f6ee85223167580",
           "verification": "bytes-verified"
         }
       ],
@@ -1276,8 +1276,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-close-up-surface@2x.webp",
-          "bytes": 1782574,
-          "sha256": "b1a83c21579e82e50913c9189df9ea0f3fca07689ac49505b29c0ee301879f4e",
+          "bytes": 1726058,
+          "sha256": "0fbe277735c9ea3b83a9ac318b382acf7d8e649d09596b939702286b759074de",
           "verification": "bytes-verified"
         }
       ],
@@ -1331,8 +1331,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-elevation-surface@2x.webp",
-          "bytes": 1307486,
-          "sha256": "e6f3e65bc8ed2e378ac2175313c96fc8c7a943c0c56a77d1a9d9ca44e4ca320e",
+          "bytes": 1019642,
+          "sha256": "b423dd2b015aa30203e888addadb645bc337fc323c146705854ed0bbfdc60f2a",
           "verification": "bytes-verified"
         }
       ],
@@ -1382,8 +1382,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-thermal-inertia-surface@2x.webp",
-          "bytes": 3431978,
-          "sha256": "caad5bc7e6e08dc16366f9de3242ea38d7b8fa8cbf7ba78c5944f3acd566e315",
+          "bytes": 2101824,
+          "sha256": "5f38ab7e363925383e58a5322cf2d1ab015138fb97e72080ea31dee28105b8fb",
           "verification": "bytes-verified"
         }
       ],
@@ -1433,8 +1433,8 @@
         },
         {
           "url": "/scenes/ryugu/ryugu-spectral-slope-surface@2x.webp",
-          "bytes": 3722212,
-          "sha256": "439862137b38d8e34a37d398ecc075ea1c235dc3a80049d7d7d891bc465ed966",
+          "bytes": 2410266,
+          "sha256": "78b0da7c699d8b049196c6c5adb661f80f7201ed870658982d8ab6df004cc0b9",
           "verification": "bytes-verified"
         }
       ],
@@ -1666,7 +1666,7 @@
   },
   "lastPreparation": {
     "objectId": "ryugu",
-    "materialSha256": "5dad3e03896cfd497bcd7f14f138a3524e89c8ac3f0e66cbc46806f07e79a019",
+    "materialSha256": "56048fa05b930814ef3a76864b5562d2168f6f265711446ac21d379375c34660",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

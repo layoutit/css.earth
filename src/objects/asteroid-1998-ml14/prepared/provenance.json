@@ -428,8 +428,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-elevation-surface@2x.webp",
-          "bytes": 411388,
-          "sha256": "8cdbf8a51717aa4c505252bc2ca56d6b7d758656de33c4dadf0bd766275bd5ef",
+          "bytes": 386484,
+          "sha256": "f2650b9349c737a61bbb30dec5471383dc03c9762559fb5d50b5669caad0d624",
           "verification": "bytes-verified"
         }
       ],
@@ -472,8 +472,8 @@
         },
         {
           "url": "/scenes/asteroid-1998-ml14/asteroid-1998-ml14-shape-surface@2x.webp",
-          "bytes": 87834,
-          "sha256": "732b8bca7b1894d2c67aba052db034d98c43d059c908691bc097a6b6f9b93d33",
+          "bytes": 87110,
+          "sha256": "2940556edf53d62fa7742577692aa3a4d4e8f9f4528b884dedd2ef8f37bd0f70",
           "verification": "bytes-verified"
         }
       ],
@@ -569,7 +569,7 @@
   },
   "lastPreparation": {
     "objectId": "asteroid-1998-ml14",
-    "materialSha256": "3a04643e2b34ee12e2200ad543e5bb112cd1b1362a17773bf72739248a634fd5",
+    "materialSha256": "88fea42228a60e14a6e0b7a4e17f5e8ff218f04fb8c1cc3b35dfcd6140bf84cf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

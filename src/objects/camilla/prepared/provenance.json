@@ -396,8 +396,8 @@
         },
         {
           "url": "/scenes/camilla/camilla-elevation-surface@2x.webp",
-          "bytes": 338792,
-          "sha256": "ca595e5f2d2db15dd50e8b10c05fa5069503f50c0a2ee332f33aef2fb20d44b2",
+          "bytes": 305558,
+          "sha256": "743d77fc7df4694b4c702ba5c5355befedf6fcbe7b26722bf5a1e6c0a00dbe89",
           "verification": "bytes-verified"
         }
       ],
@@ -440,8 +440,8 @@
         },
         {
           "url": "/scenes/camilla/camilla-shape-surface@2x.webp",
-          "bytes": 68890,
-          "sha256": "e930174cad4612d218657c3aacd29d2029aafcf41f084c4fd12b6486215437d7",
+          "bytes": 69970,
+          "sha256": "33fb65d9fb989d96ed4e0df20f417138cf6ea1615351d116a3004085f1a14f02",
           "verification": "bytes-verified"
         }
       ],
@@ -537,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "camilla",
-    "materialSha256": "39120388ec1200fd7525f7c6390c30c2f0a49a1ef80f23f1265c0b68e7a3b2e1",
+    "materialSha256": "0a5339414dd497734644cd2e6f9f65ee84a08b3dba444d9eb7294e6582d147d1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

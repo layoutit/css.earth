@@ -49,7 +49,16 @@ export function decodeCalibratedCamera(bytes: Buffer, encoding = 'calibrated'): 
   if(encoding==='fits-oi-reconstruction'){
     const fits=readFitsImage(bytes);
     if(fits.bitpix!==-64||fits.planes!==1||![fits.width,fits.height].every(v=>Number.isSafeInteger(v)&&v>=2&&v<=4096))throw new Error('Unsupported reconstructed-image FITS layout.');
-    if(fits.header.CTYPE1!=='RA'||fits.header.CTYPE2!=='DEC')throw new Error('A reconstructed image states unprojected RA and Dec axes.');
+    // SQUEEZE writes plain RA and Dec: a reconstruction carries no projection. A radio interferometer's imager writes the same
+    // sky in a zenithal projection, and over a field this small the two agree far inside a pixel, so one is accepted with the
+    // field bounded. The departure of SIN or TAN from a constant plate scale grows as the cube of the field half-angle.
+    const projected=/^RA---(SIN|TAN)$/u.test(String(fits.header.CTYPE1??''))&&/^DEC--(SIN|TAN)$/u.test(String(fits.header.CTYPE2??''));
+    if(projected){
+      const scaleDegrees=Math.max(Math.abs(Number(fits.header.CDELT1)),Math.abs(Number(fits.header.CDELT2)));
+      const halfFieldRadians=Math.hypot(fits.width,fits.height)/2*scaleDegrees*Math.PI/180;
+      // A third of the cube is the leading term for TAN; a hundredth of a pixel is the bound taken here.
+      if(!(halfFieldRadians**3/3<scaleDegrees*Math.PI/180/100))throw new Error('A projected reconstructed image covers too wide a field to read as a plate scale.');
+    } else if(fits.header.CTYPE1!=='RA'||fits.header.CTYPE2!=='DEC')throw new Error('A reconstructed image states unprojected RA and Dec axes.');
     const {width,height}=fits;
     return {data:skyDisplayRaster(fits.values,width,height,skyImageAxes(fits.header)),width,height,offset:fits.dataOffset,encoding,allowZero:true};
   }
@@ -220,13 +229,21 @@ export async function checkBandAlignment(sourceDirectory: string,channels: reado
   registration: {references:readonly CameraFrame[];checks:readonly {reference:string;targets:readonly string[]}[]},mesh: Parameters<typeof alignCameraBands>[0]['mesh']){
   const frames=new Map<string,{frame:CameraFrame;filter:string}>();
   for(const entry of [...registration.references.map(frame=>({frame,filter:'reference'})),...channels.flatMap(channel=>channel.frames.map(frame=>({frame,filter:channel.filter})))]){
-    if(frames.has(entry.frame.id))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);
-    frames.set(entry.frame.id,entry);
+    // A registered band image may itself be the reference, stated identically in both places.
+    const known=frames.get(entry.frame.id);
+    if(known&&JSON.stringify(known.frame)!==JSON.stringify(entry.frame))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);
+    if(!known)frames.set(entry.frame.id,entry);
   }
   const sources=new Map<string,Promise<{frame:CameraFrame;image:CameraImage;sha256:string}>>();
   const load=(frame:CameraFrame)=>{
     let pending=sources.get(frame.id);
-    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(bytes=>({frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)}));sources.set(frame.id,pending);}
+    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(async bytes=>{
+      if(frame.encoding!=='fits-ssi-iof')return {frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)};
+      // Calibrated SSI: the catalog owns the camera, and archive fill and quality-withheld pixels are not measurements.
+      const [camera,image]=await Promise.all([resolveCatalogCamera(sourceDirectory,frame),loadShapeCameraImage(sourceDirectory,frame)]);
+      const data=Float32Array.from(image.data,(value,i)=>image.missing?.[i]||!(Math.abs(value)<1e30)?NaN:value);
+      return {frame:camera as CameraFrame,image:{...image,data},sha256:sha256(bytes)};
+    });sources.set(frame.id,pending);}
     return pending;
   };
   const confirmed=new Set(registration.references.slice(0,1).map(frame=>frame.id)),checks=[];

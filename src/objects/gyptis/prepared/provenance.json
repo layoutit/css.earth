@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/gyptis/gyptis-elevation-surface@2x.webp",
-          "bytes": 331058,
-          "sha256": "fb4138fce62f93707029047f57833eea961aaed319a86b1c0bdb812d14a628fb",
+          "bytes": 286402,
+          "sha256": "5f2f719d648e0d03bc9d068e20e76888cc5b73ed376695fa26ea99c43dae6acb",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
-          "bytes": 71884,
-          "sha256": "903a97180a1c3ebd144841a9f1b4d704cfc906d7ea0e0bebafa836f754c401f3",
+          "bytes": 67610,
+          "sha256": "a340e9160cb4cf524576256b5c7de3b1dc4ce8f73b26f3b759bdb24a27e1218b",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "gyptis",
-    "materialSha256": "2c6b2b36dfd88f59569785c338f31eefb18c6892d3678e336d8d702bada509bd",
+    "materialSha256": "8ce4c507014983f90b85d66fba7e232d27fb944862e96de7d80c9fd08ad00b93",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

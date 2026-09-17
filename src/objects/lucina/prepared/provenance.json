@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/lucina/lucina-elevation-surface@2x.webp",
-          "bytes": 355310,
-          "sha256": "42f7939df7fabaca231cf6e23d05799919e9d90c2620bc55bd18ddc6a142f050",
+          "bytes": 308140,
+          "sha256": "61bab1336648b83c94ae2514520420378db6bdd3e943b8d155cdf6ac4735d4b8",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/lucina/lucina-shape-surface@2x.webp",
-          "bytes": 78662,
-          "sha256": "878258206e0ea1b2aaa896a7adb7c86fb1dcb8b05799539a8a9b33fefbec75b8",
+          "bytes": 78404,
+          "sha256": "b615d639f79b97c53cff539b554a03793cedd163f86cc78c9d8488e8b3a3a9cf",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lucina",
-    "materialSha256": "121c6068a8b150b1a03c11de56a99007842b1a5f8487750131740fcb945fc977",
+    "materialSha256": "42917ce8d89b62ec9f46fbbb62dcfd12ffba8b86e5ba8238c372ff9a7041b489",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

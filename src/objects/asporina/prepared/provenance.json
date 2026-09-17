@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/asporina/asporina-elevation-surface@2x.webp",
-          "bytes": 289066,
-          "sha256": "7c3e8d5487e2b276f8be0bba6cf8f57299142754730e7e51658e7fbd21ec06b9",
+          "bytes": 256808,
+          "sha256": "206f2f9c41b398bfd434f990a1e2fb6a648f043236dc3e595290fd9499dedf9d",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/asporina/asporina-shape-surface@2x.webp",
-          "bytes": 69350,
-          "sha256": "b960dc86c21e8615daeb20af31ec7ddfc9cb55c6f6f10646c0cfebdf8bdad3fa",
+          "bytes": 66210,
+          "sha256": "beb9a16e2d95f9f61f9639e75a8d182c8ce835ba5d513f2320dd40e87c786cab",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "asporina",
-    "materialSha256": "ffdfe0fff5fb19652f11f2b968eb6d93ca63e6192391dbc1cc3607d3598192e1",
+    "materialSha256": "f764cc4d03916e4f50595ba035a6380d99f082acbba28b6605c1da1f91726534",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

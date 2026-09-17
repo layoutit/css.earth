@@ -1008,8 +1008,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-normal-surface@2x.webp",
-          "bytes": 750624,
-          "sha256": "e1cc536e288bbe293c861eb32849860159812b0298daa5553684aa0c88402e9e",
+          "bytes": 728552,
+          "sha256": "4f03019895c32330b32d5f68b465290d1407873b9bbc3017e1435c3c5b6aa9dc",
           "verification": "bytes-verified"
         }
       ],
@@ -1064,8 +1064,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-elevation-surface@2x.webp",
-          "bytes": 532728,
-          "sha256": "ae14800f7a76224d33699ce6285e3578a3642d59be371c9e2fb3bfd0437d8fc8",
+          "bytes": 378904,
+          "sha256": "5cb8a99b69d8624a058d992a142ed6919a73fe5b9f698ca50c14d1facf0044a1",
           "verification": "bytes-verified"
         }
       ],
@@ -1114,8 +1114,8 @@
         },
         {
           "url": "/scenes/mathilde/mathilde-near-msi-surface@2x.webp",
-          "bytes": 349802,
-          "sha256": "cb3f08ce99370cf88d5674ca9ae5bf04a3837d9794e9829e9a8bf7bb47d4199f",
+          "bytes": 275878,
+          "sha256": "e26fcea3a263061787c68ed2b4aaf5905eca607213a93a4718f54ae9107f37c9",
           "verification": "bytes-verified"
         }
       ],
@@ -1233,8 +1233,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/near-msi.webp",
-          "bytes": 10424,
-          "sha256": "84a241225f1ec535787dc9f3509520a8fb3fecd533a1b0de3e1e8c870ac0e623",
+          "bytes": 10312,
+          "sha256": "8c5496cde0c19fd8950636ebb62625477e4a1e405f3e44c5c3f06a28c80a6fe6",
           "verification": "bytes-verified"
         }
       ]
@@ -1271,7 +1271,7 @@
   },
   "lastPreparation": {
     "objectId": "mathilde",
-    "materialSha256": "1dea7c8c6087007208f9e8f2555705708884376d9ea41ca81eca4652bb6f2368",
+    "materialSha256": "4961c0ec903eccca6e76f8f3d7a1f00619ed80396b8bfe117489812550f77f74",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/eunomia/eunomia-elevation-surface@2x.webp",
-          "bytes": 363170,
-          "sha256": "62668f1ddec3336616f5b363260d3d201e7c4897277bbd09234c12831d0f4e54",
+          "bytes": 313586,
+          "sha256": "32b729e6b0873de60be89dc2954b273d8c729aaf27e7d7e577d05d197f7c53fc",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/eunomia/eunomia-shape-surface@2x.webp",
-          "bytes": 81528,
-          "sha256": "e415da189f855a5c1d3b1f648fe1c911dcf2b06213216e45e824714f68989e94",
+          "bytes": 80460,
+          "sha256": "59ec50ea3113b03706df0455891b3240586ac3f2159e7e516ab208787e982fc4",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "eunomia",
-    "materialSha256": "7f6fece7cf3ae9ba25f9c48c939cce34be7bdb2c012ea29b58941b181b708f21",
+    "materialSha256": "2158e904b8ec5a9abb09851b3de9c060d660994243150d55dfaf8a4831df1dd8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

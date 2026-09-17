@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/penthesilea/penthesilea-elevation-surface@2x.webp",
-          "bytes": 273956,
-          "sha256": "affcad32ac61d6e65885b60a9824b220471d2ed8502019cdebf6f30f7b2a4463",
+          "bytes": 249182,
+          "sha256": "12001adb94640cdc14fc77fbf04d1d6e6e2131fd635fbeeecd46922e8af27264",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/penthesilea/penthesilea-shape-surface@2x.webp",
-          "bytes": 69008,
-          "sha256": "8a091efdeb362d770d8b13875ad2732fcb03fbdb65fa2ffa416161f2dfcfe256",
+          "bytes": 68096,
+          "sha256": "ef37db999ca4f79b49bf07250b4abbcc103b67bd50c6a82207a3c977871049d8",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "penthesilea",
-    "materialSha256": "63e2ed4d91bff6735d61eed8e9185ae5513396b81cdd12b22018e8e5541de77c",
+    "materialSha256": "93fc255a3ec80345b7860206ef628798b091f6b09067b2721ec3b748adf808aa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

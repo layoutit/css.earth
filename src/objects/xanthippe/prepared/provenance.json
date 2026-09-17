@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/xanthippe/xanthippe-elevation-surface@2x.webp",
-          "bytes": 290550,
-          "sha256": "4d3a26150884a89a2b528358f32b748de772b499713ee10d06e3023a00328e60",
+          "bytes": 264836,
+          "sha256": "b5c2687cf6aa3ddb98208197cf0ccabac36a6f2314c44babe0d46e0d4a2b1e3b",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/xanthippe/xanthippe-shape-surface@2x.webp",
-          "bytes": 70222,
-          "sha256": "59605a730ce99206968744c1f941cd42cec96f2522e9e496f5a9fbcf3da91317",
+          "bytes": 70048,
+          "sha256": "e7ed9ed60859428113c88c2c7d0c3eb9d582055a1482d1cc21293a68f5abadac",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "xanthippe",
-    "materialSha256": "993c32549378277ec2ec8b6b44707b310b132d82d9310b8d17bb9680daa855ad",
+    "materialSha256": "b6f3928489f991a072ef52b7b27cfe895f334cec4382c31a9b8d28043bb906d3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

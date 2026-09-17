@@ -1,0 +1,160 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "r-doradus",
+  "displayName": "R Doradus",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "351 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2409-06785",
+          "url": "https://doi.org/10.1038/s41586-024-07836-9",
+          "label": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "55 parsecs",
+        "source": {
+          "catalogueId": "arxiv-2409-06785",
+          "url": "https://doi.org/10.1038/s41586-024-07836-9",
+          "label": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "angular-size",
+        "label": "Apparent size",
+        "value": "60 milliarcseconds",
+        "source": {
+          "catalogueId": "arxiv-2409-06785",
+          "url": "https://doi.org/10.1038/s41586-024-07836-9",
+          "label": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "angularDiameterMas; angularDiameterSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "alma",
+    "controls": [
+      {
+        "id": "alma",
+        "label": "ALMA continuum",
+        "thumbnail": "r-doradus-lens-alma.webp",
+        "surface": "r-doradus-surface-alma.webp",
+        "poles": "r-doradus-poles-alma.webp",
+        "source": {
+          "id": "r-doradus-alma-338ghz",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1038/s41586-024-07836-9"
+        },
+        "falseColor": true,
+        "notes": "One image of the photosphere made by the ALMA pipeline from band 7 visibilities of 18 July 2023, in the 331-345 GHz continuum, cast onto a sphere of the published radius. The restoring beam is 20.7 by 16.8 milliarcseconds across a 60 milliarcsecond disc, so about ten resolution elements cover the face and nothing finer than the beam is shown. The mottling is measured, not assumed: fitting a smooth disc through this image's own beam leaves a residual 7.0 times the image noise, against 3.0 times for the session's check quasar, which is a point source through the same beam. Individual convective cells are not resolved: the authors measure a dominant cell size of 13.1 milliarcseconds, smaller than the beam, so what is shown is convection smoothed to the resolution. The colours are a legend for relative brightness at 338 GHz on the heat scale used for the other stars here, not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Relative brightness at 338 GHz",
+          "labels": [
+            "0.35",
+            "0.67",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.35",
+              "0.67",
+              "1.00"
+            ]
+          }
+        }
+      },
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "r-doradus-lens-shape.webp",
+        "surface": "r-doradus-surface-shape.webp",
+        "poles": "r-doradus-poles-shape.webp",
+        "source": {
+          "id": "r-doradus-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1038/s41586-024-07836-9"
+        },
+        "falseColor": false,
+        "notes": "A sphere of the published radius with no image cast on it, for comparison with the ALMA lens. Neutral gray is a display convention, not a measured colour; the display axis is celestial north at the star, also a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+      "href": "https://doi.org/10.1038/s41586-024-07836-9"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1038/s41586-024-07836-9",
+      "credit": "Vlemmings et al. (2024), ALMA 2022.1.01071.S"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/r-doradus.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -2066,8 +2066,8 @@
         },
         {
           "url": "/scenes/pandora/pandora-elevation-surface@2x.webp",
-          "bytes": 484474,
-          "sha256": "92f8b18778430bad320ce3077fb775a3d1513ecf438bd90080db94ce09eaae07",
+          "bytes": 392764,
+          "sha256": "7196a8e119b4acfe325ba4a7780700d1025f5325f68663630d75f975f07d6c5c",
           "verification": "bytes-verified"
         }
       ],
@@ -2130,8 +2130,8 @@
         },
         {
           "url": "/scenes/pandora/pandora-normal-surface@2x.webp",
-          "bytes": 397526,
-          "sha256": "a43a90e343d01ad4bbebdd9f2f9f0bc3fc6c0cf31d095e8aa92f6ca272ff463b",
+          "bytes": 316928,
+          "sha256": "e7a885635a2d9c67cb3a64487dbf85f0afe67048a8315bc8c9650e91477157f5",
           "verification": "bytes-verified"
         }
       ],
@@ -2180,8 +2180,8 @@
         },
         {
           "url": "/scenes/pandora/pandora-filter-color-surface@2x.webp",
-          "bytes": 319562,
-          "sha256": "b7711a4d79fdacec260dd90c87a5e08f64500076fbefb811bdcea0416a2643a7",
+          "bytes": 263598,
+          "sha256": "dae9cae6eccaf9858c62a50f00f619d74002b06b7aec88b309a53fa0eff1a766",
           "verification": "bytes-verified"
         }
       ],
@@ -2239,8 +2239,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 16054,
-          "sha256": "027d3b4b27a179cb52af0c76c0bc7f86bd8c56eac8844c3efa20123c8c7503d8",
+          "bytes": 14376,
+          "sha256": "4b2590c0733bd63694ae61866853f6e80202dcbee232a47870e63383ff910b98",
           "verification": "bytes-verified"
         }
       ]
@@ -2264,8 +2264,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/filter-color.webp",
-          "bytes": 8048,
-          "sha256": "4afba84a4ca4ceaf185511507b65473b20e8c43fc636014ab67e29274fd44cc3",
+          "bytes": 7000,
+          "sha256": "a720e72a09db501cb1084fa272ad3fa3b2e3eb4b91e6a41ccf73abab5ac82a6c",
           "verification": "bytes-verified"
         }
       ]
@@ -2302,7 +2302,7 @@
   },
   "lastPreparation": {
     "objectId": "pandora",
-    "materialSha256": "dc04d4960d51462d406b1c85c842fa043f7ca23307d67f4167db02859c2df3f7",
+    "materialSha256": "39726bea4087639f8f2b920fa1f170ae3a5b98cccdaff6aa5ff4c4af4d867574",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/aethra/aethra-elevation-surface@2x.webp",
-          "bytes": 281192,
-          "sha256": "12ec169f45ed8dffad67822cd0f11cf8dc08e91f394f681a5dff3426a059c0ee",
+          "bytes": 254142,
+          "sha256": "17036f564615e4b36887eabe277b95b54cafe00a30897dc04bca38379df8de60",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/aethra/aethra-shape-surface@2x.webp",
-          "bytes": 71784,
-          "sha256": "00aaff54c7b266130bb436577ff52b3cdc1b590d593f63f1445554bf7139fe9c",
+          "bytes": 69934,
+          "sha256": "5ccedb932dd2d252ec6b95e47a28c1855b28811ba0e29c7213e813551ebeec5a",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "aethra",
-    "materialSha256": "0784388f5a4292f414e2d5d7c8d460a8f7dbb750b48d3d8e7756a718bd107617",
+    "materialSha256": "ce5b7131b42ee92a819e51382d61ab5c58e23fbbf2762941b1c3de41cbcb98a8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

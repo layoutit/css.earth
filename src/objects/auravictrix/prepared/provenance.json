@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/auravictrix/auravictrix-elevation-surface@2x.webp",
-          "bytes": 336256,
-          "sha256": "9ff038596340663811fc70878643b1b53126f138cbd58bbc3177e611c0ec0d38",
+          "bytes": 312520,
+          "sha256": "dadbe207c04c7f9c208d23c8e816ea6f743237568786e1c4b2ad6fca3b967320",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/auravictrix/auravictrix-shape-surface@2x.webp",
-          "bytes": 73932,
-          "sha256": "b56bc1333d4c1b0acb63c71dd32eced1df8998c96b08b84635d19e237ba9f2c9",
+          "bytes": 74252,
+          "sha256": "fe57fc9193eb3f740f250babed8cb8bd9fcbf28f4886082c6b7c2e45680ba4a9",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "auravictrix",
-    "materialSha256": "3ed04436e5ba4d615e22533bed032eafbdae687c3029b6f33a5cca6fb48a596a",
+    "materialSha256": "fdebdb493aa46b5bcdd4d6eaa63eaf89af135fb2f306e31bd92c110bb398249c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

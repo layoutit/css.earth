@@ -425,30 +425,42 @@ source pixel footprints before applying display gain/gamma. Source special value
 are masked before sampling; observed black is retained. It reads one row strip
 at a time and supplies the same interpretation to the globe and sidebar map.
 
-## Internal fill for globe seams
+## Seam repair and the globe interior disc
 
-Spherical and ellipsoidal objects share one retained interior disc. Irregular
-body meshes cannot use it: the disc's inner ellipsoid is limited by the nearest
-leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks outside it
-stay open. An irregular body whose recipe sets `interiorSlices` instead gets
-slices of its own mesh (`tools/prepared-interior-slices.mts`):
+Spherical and ellipsoidal objects share one retained interior disc behind their
+leaves. An irregular body cannot use it: the disc's inner ellipsoid is limited by
+the nearest leaf plane to the centre, 0.39 of Alphonsina's mean radius, so cracks
+outside it stay open. Irregular bodies close their cracks with seam repair in the
+leaves themselves, as PolyCSS prepares any solid mesh
+(`RADIAL_SEAM_REPAIR` in `tools/objects/terrestrial-layers/radial-terrain.mts`):
 
-- Each slice is the loop where a plane through the body origin cuts the leaves,
-  for six plane normals (the icosahedron axes). It is drawn as a fan of solid
-  rectangles, one per outline edge, reaching from the edge to the origin.
-- Chrome depth-sorts element boxes, not what is drawn in them, so each slice is
-  the largest shrink of its loop whose rectangles cut no surface leaf box. With
-  every surface indent caught by that test, the rectangles stay inside the body.
-- The leaves are solid one-colour rectangles because Chrome gives such layers no
-  raster tiles. Triangle slice leaves (corner-shaped `u`) at DPR 2 exhausted the
-  GPU raster budget from zoom 1.75, and Chrome dropped tiles of surface leaves
-  in front of the slice; with an 8 GB budget the same view was correct.
-- The body's leaves overlap nothing (`seamBleed` 0). The runtime shows the slice
-  whose normal is nearest the view and gives the others `display: none`.
+- `buildSeamBleedPolygonEdges` names the edges each face shares with a
+  neighbour. A shared edge overlaps it by 12 CSS pixels; a face with no shared
+  edge, at an open boundary, keeps the solid-triangle bleed of 0.75.
+- The atlas rectangle covers the overlapped triangle, and every texel it draws is
+  sampled, so the overlap continues the surface instead of repeating an edge.
+- Texels beyond the drawn triangle by more than two take the nearest sampled
+  texel in their row; they are never displayed.
 
-Measured on Alphonsina (elevation lens, pixelmatch against main, threshold 0.1,
-five poses): 0.34–0.57% at default zoom, mostly at the limb where the overlap no
-longer blurs the outline, and 0.002–0.036% at maximum zoom.
+Measured on Alphonsina, Ida, Itokawa, Mathilde, Achlys, Amalthea and comet 1P
+(DPR 2, five poses, zoom 1.1 and 4, surface leaves painted white with back faces
+hidden, so any crack is a thin non-white line inside the body):
+
+| Body | Open crack pixels without overlap | With 12 CSS pixels |
+| --- | --- | --- |
+| Itokawa | 14,147 | 7 |
+| Ida | 16,708 | 24 |
+| Amalthea | 5,746 | 4 |
+| Achlys | 5,574 | 0 |
+
+![Itokawa without and with the 12-pixel overlap: the top row is a zoomed crop of the same surface patch, the bottom row the whole body at the default distance. The hairline seams that cross the left frames are gone on the right.](images/itokawa-seam-repair.webp)
+
+Surface detail is unchanged: Itokawa's mean surface detail (absolute Laplacian
+over pixels that are neither crack nor sky) is 1.572 without overlap and 1.669
+with it; Ida's is 0.912 and 0.918. Pixelmatch between two overlap sizes differs
+across the whole surface, because the atlas is packed again and every texel moves
+by a fraction of a pixel; only same-layout comparisons measure a change in what is
+drawn.
 
 The disc for globes works as follows. The common presentation compiler measures the actual
 surface leaf planes in the body's frame and fits an inner ellipsoid behind

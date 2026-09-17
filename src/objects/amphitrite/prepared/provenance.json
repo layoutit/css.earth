@@ -394,8 +394,8 @@
         },
         {
           "url": "/scenes/amphitrite/amphitrite-elevation-surface@2x.webp",
-          "bytes": 368484,
-          "sha256": "c99c9fd128a0dd9cf196a8aa72eb446a264ed353f178466d6a276e3a260f2523",
+          "bytes": 322128,
+          "sha256": "bd7669531e9e4dfc40d62850209a02fc95c0d6db2e37541147aa71853058e97e",
           "verification": "bytes-verified"
         }
       ],
@@ -438,8 +438,8 @@
         },
         {
           "url": "/scenes/amphitrite/amphitrite-shape-surface@2x.webp",
-          "bytes": 78572,
-          "sha256": "b44d7bd81e9fd50ac71f7d86159822485b02bcfda526245a128039f9758ea56a",
+          "bytes": 78678,
+          "sha256": "a35e8b4b2ae6c91e35bdbfa88fc4b98ba09c4cb699daf1a7391164cdb0ad6362",
           "verification": "bytes-verified"
         }
       ],
@@ -535,7 +535,7 @@
   },
   "lastPreparation": {
     "objectId": "amphitrite",
-    "materialSha256": "20a0e81e8bba4c3daee58da85956cf6c29dd1dddccdd6aa994842a44e6f95a28",
+    "materialSha256": "3c32903a15ae70d4b4860567aeddb0312d67b2ba1239d0dc8b0f5f36b7d34b82",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

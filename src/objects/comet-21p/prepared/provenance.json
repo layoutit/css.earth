@@ -324,8 +324,8 @@
         },
         {
           "url": "/scenes/comet-21p/comet-21p-model-surface@2x.webp",
-          "bytes": 58178,
-          "sha256": "0813c7d9fb224a6b58bc0e2d4c19d4c5ab7d917015e3d2c4e24c444072e4a833",
+          "bytes": 49916,
+          "sha256": "cbfe2375b22f08620ea6c22af52eda927538ceedf355c1bc7fac1d7b5919c260",
           "verification": "bytes-verified"
         }
       ],
@@ -371,7 +371,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-21p",
-    "materialSha256": "a23f6172bcc0ab7e1850b9e32cfc35073ced8639bb40be056f08e44d04eb32d1",
+    "materialSha256": "8e7fb4a74161da2c645a88b477da67f1b1baa2182c7de6690a7818d9328d6ceb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

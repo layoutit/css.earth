@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/schorria/schorria-elevation-surface@2x.webp",
-          "bytes": 318130,
-          "sha256": "0e21b3ea14905f935c5bc84ec212eb4073c45d78fa95842c362987298517bb32",
+          "bytes": 288698,
+          "sha256": "6dacbfd56f1d601b651afd9f6580d7433c4857f57e46f61a7b4a140f44205882",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/schorria/schorria-shape-surface@2x.webp",
-          "bytes": 62384,
-          "sha256": "2bbb253eff1d5e8cfa0ad07282033c56ae86a3b357dbf560f6cbdd20749576c9",
+          "bytes": 59822,
+          "sha256": "e39b9a8f0e1bd0e86b026a00051907f8bc1f3dd2ded56167308b63e7c7a0a7de",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "schorria",
-    "materialSha256": "574e2511a69cda08cd7953f5093b86bb005f440c2a1b1b87010b509eac1a0ced",
+    "materialSha256": "e3c08df02c6897b55171fcc4f4224f6dadb6791ba6512932c136dd496e107732",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

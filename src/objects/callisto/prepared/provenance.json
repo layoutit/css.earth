@@ -1380,8 +1380,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6401,
-          "sha256": "2453ddf96fa3cbb8fd495854a70d8fdee77ed035b9a1eae4dd1f11068822621e",
+          "bytes": 6520,
+          "sha256": "b35b5f0b4292d89a3f85372021431c5114fd9955eca421dd5625cd49060e446a",
           "verification": "bytes-verified"
         }
       ],
@@ -1504,7 +1504,7 @@
   },
   "lastPreparation": {
     "objectId": "callisto",
-    "materialSha256": "3d29082dc7ebf9ba90ad43a2403aba9401ff1c3390808c4436854da69132ce24",
+    "materialSha256": "3f6da205c984dcc7ac21804c159d83f67258afd9b8fe566d068dc916636c79fb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

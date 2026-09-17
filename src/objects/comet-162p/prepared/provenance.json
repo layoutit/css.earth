@@ -328,8 +328,8 @@
         },
         {
           "url": "/scenes/comet-162p/comet-162p-model-surface@2x.webp",
-          "bytes": 55294,
-          "sha256": "b0205317b5b794811a8437edb451758c51bfbda76d212f7369d2ad50cec565e6",
+          "bytes": 47128,
+          "sha256": "58d6eb2cc4bc338d55b058135cc44220b2aa88d46e351c61304885bf7fd58277",
           "verification": "bytes-verified"
         }
       ],
@@ -375,7 +375,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-162p",
-    "materialSha256": "427f3bb7f8a17449251c29d21ab058c86b7adcd68701ff37634b31640e30d207",
+    "materialSha256": "c11893218d878b1328665e3ec44cc1fdc75faf1cc3df3b322cb93dec2d24637c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/gerda/gerda-elevation-surface@2x.webp",
-          "bytes": 312176,
-          "sha256": "79ee1e2f5f6a1311260361962bf84292dc69896e3bcf1546a9e3e3621860c3fb",
+          "bytes": 281814,
+          "sha256": "47772aebf3f90f0bea328c8a124812e5361c8c08ade2e75840c928bc70382384",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/gerda/gerda-shape-surface@2x.webp",
-          "bytes": 74758,
-          "sha256": "245c4b00717fa98ff7dcfd89ddae19e0b07d6b82ac17e378d800667d563cf2f6",
+          "bytes": 72244,
+          "sha256": "80e44e995780fce0b0ae5b54d7f8286541117f2dbc0bb01fe18a0cde3c67f501",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "gerda",
-    "materialSha256": "a901d8ea69e1ab61afdeb65bf1826c23d7e10ed7c48c01af3fb2d2ef8f1ffa81",
+    "materialSha256": "110ca995528db5c27ed465fafab45c58e09d9a700b4efbfa6d22d4e56767e581",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

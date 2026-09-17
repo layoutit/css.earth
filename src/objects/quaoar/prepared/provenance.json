@@ -369,8 +369,8 @@
         },
         {
           "url": "/scenes/quaoar/quaoar-model-surface@2x.webp",
-          "bytes": 61948,
-          "sha256": "3722d412af4885bbfa4d6a5994e4630dc6bde784c85c1d8e3cb112f4eddb3df5",
+          "bytes": 52128,
+          "sha256": "9d2841937c49663822a5bd1289b9448d19fd9e57e4e78aeb62ca6d9d2503edc6",
           "verification": "bytes-verified"
         }
       ],
@@ -446,7 +446,7 @@
   },
   "lastPreparation": {
     "objectId": "quaoar",
-    "materialSha256": "3d3398637447349a845925dbd767ab517a1f5d823df4c4dd160475a2f747a171",
+    "materialSha256": "bf92bdbebd038744dfda74a62967cfb6dee973958e976b612d7f683f34f4e29f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

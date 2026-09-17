@@ -343,8 +343,8 @@
         },
         {
           "url": "/scenes/mundilfari/mundilfari-model-surface@2x.webp",
-          "bytes": 61348,
-          "sha256": "edee18bcb05daf0cf62a27a4528d15dbbaabdcc15bdc02c05fb0ed389c4e39ba",
+          "bytes": 51870,
+          "sha256": "216ab1419d358e5f9801e6cc2264ab99259a6422a3dc03782ac05a0cc255e8c7",
           "verification": "bytes-verified"
         }
       ],
@@ -420,7 +420,7 @@
   },
   "lastPreparation": {
     "objectId": "mundilfari",
-    "materialSha256": "c9bfd7dde76b4d4160894b3a033d0d2fe514dae9c4e647cde37638aa5bcfc699",
+    "materialSha256": "70e83a00dfcf4169b2a7b2fa273bc54873942d1355776fda89e586b5e5060318",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

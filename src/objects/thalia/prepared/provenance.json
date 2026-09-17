@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/thalia/thalia-elevation-surface@2x.webp",
-          "bytes": 359842,
-          "sha256": "9040774c35db691bf7560e09e8e92d029ae7ec5ffe315369e62c5bea48dff7cc",
+          "bytes": 313636,
+          "sha256": "5fa9fa5b14d0d5652b06f1e982ab25db4c9766f6a6072137122d7bd8eda98a6d",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/thalia/thalia-shape-surface@2x.webp",
-          "bytes": 79848,
-          "sha256": "f5fe7ad36c8adefee69aecedcc0068f19069a7b1c1bbc725e85e911f2b625510",
+          "bytes": 77924,
+          "sha256": "7bc9a41940d427b7fc5b0220c631c68894ca23a363b87c8268c05e60ee9b39a7",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "thalia",
-    "materialSha256": "3072f916a98fcd684cd03d35dc6c00a46038ba2a76dfb8c728c385769734923e",
+    "materialSha256": "a4fb0681f9b8ac5c5c965662fdd9ff78ffbf6bbce433e45c857600ccb0ee42ac",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

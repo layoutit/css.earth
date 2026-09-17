@@ -7,7 +7,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs, rasterAtlasLayout } from './radial-terrain.mts';
+import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs, rasterAtlasLayout, fillUndrawnTexels } from './radial-terrain.mts';
 import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mts';
 
 test('source topology preserves translated inward-facing facets and welds duplicated positions', async () => {
@@ -145,4 +145,13 @@ test('raster atlas: each face gets its own rectangle at one texel density, and i
   // Density follows size: ten times the edges is many times the texels (the fixed seam overlap widens the small face), and a sliver stays thin.
   assert.ok(plans[0].rect.width * plans[0].rect.height > 20 * plans[1].rect.width * plans[1].rect.height);
   assert.ok(plans[2].rect.width > 5 * plans[2].rect.height);
+});
+
+test('undrawn atlas texels copy the nearest sampled texel in their row, the left one on a tie', () => {
+  const undrawn = Uint8Array.from([1, 0, 1, 1, 1, 0, 1, 1,
+                                   0, 1, 1, 1, 1, 1, 1, 1]);
+  const copies: string[] = [];
+  fillUndrawnTexels(undrawn, 8, 2, (row, from, to) => copies.push(`${row}:${to}<${from}`));
+  assert.deepEqual(copies, ['0:0<1', '0:2<1', '0:3<1', '0:4<5', '0:6<5', '0:7<5', '1:1<0', '1:2<0', '1:3<0', '1:4<0', '1:5<0', '1:6<0', '1:7<0']);
+  assert.throws(() => fillUndrawnTexels(Uint8Array.from([1, 1]), 2, 1, () => {}), /no sampled texel/u);
 });

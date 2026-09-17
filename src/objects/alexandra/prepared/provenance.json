@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/alexandra/alexandra-elevation-surface@2x.webp",
-          "bytes": 314926,
-          "sha256": "c61a2891ad00551cc37f672a32d35dc80b0734de2f6c6f9435181ebe871f4bee",
+          "bytes": 283458,
+          "sha256": "80927fe75a127ece6722347b05a57bb78abd3755dcae90a53ab70e833febbe01",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/alexandra/alexandra-shape-surface@2x.webp",
-          "bytes": 77448,
-          "sha256": "8af51c30f6dcfd4651efbd2b5fea595ed208d5a6185ed5c0e087ad30a6e03bdc",
+          "bytes": 76044,
+          "sha256": "cf144aa18cd6732082abff3ca1adb353181362ecf1ca9804ada9ca14d64fdc07",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "alexandra",
-    "materialSha256": "40ab1329ac784fa73d7a68cc37de013fe47d97171392ef1b00179a29915e5788",
+    "materialSha256": "0aa88d91d0570b49ecddb614bb227d23890b55e95757ff849f84ca2aefe7b686",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

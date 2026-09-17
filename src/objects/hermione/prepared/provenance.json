@@ -396,8 +396,8 @@
         },
         {
           "url": "/scenes/hermione/hermione-elevation-surface@2x.webp",
-          "bytes": 330246,
-          "sha256": "995270097e4f6873d9fbd3760e7c7ca742dbfb24dde0e15090f2ca0a1d193769",
+          "bytes": 297634,
+          "sha256": "2fdf29aa96a676326a74f72a2425b18243c0bdc56665c7e76573636081610e9b",
           "verification": "bytes-verified"
         }
       ],
@@ -440,8 +440,8 @@
         },
         {
           "url": "/scenes/hermione/hermione-shape-surface@2x.webp",
-          "bytes": 77238,
-          "sha256": "07cf8be98728fd8166083f51e766dbfd9b18b10306cd373bf539ea6e8126653a",
+          "bytes": 76208,
+          "sha256": "168c49d00da921dcae2e73be5ec03be7869fa8f25fd8e04ad82286da0d721234",
           "verification": "bytes-verified"
         }
       ],
@@ -537,7 +537,7 @@
   },
   "lastPreparation": {
     "objectId": "hermione",
-    "materialSha256": "7b766f40eeb1682d1bdeee35f6f02c83d8c0a23b1b3c04aee25ac9f41beeefdd",
+    "materialSha256": "feec0e1108b9928d380424f7b242410101a78bb884d5dbcf6f88cfc139b410e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -353,8 +353,8 @@
         },
         {
           "url": "/scenes/leucus/leucus-model-surface@2x.webp",
-          "bytes": 58256,
-          "sha256": "9d1a79ec7006d1155078332e9714fb0c0d9c721146a03dd3ff5739b7db1e54f1",
+          "bytes": 48896,
+          "sha256": "8736c59e76555811dfedbe2d659b56d6325387769fb910e928a95fb427f0b8e5",
           "verification": "bytes-verified"
         }
       ],
@@ -430,7 +430,7 @@
   },
   "lastPreparation": {
     "objectId": "leucus",
-    "materialSha256": "c6dd1ac8e67702534f4934f06c6cf34952922a73ea78e2613d49f0676b04e505",
+    "materialSha256": "663674b5c33195562671d183feda24c1f153bc6cfc4739c5d15aeb0169ca2a81",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

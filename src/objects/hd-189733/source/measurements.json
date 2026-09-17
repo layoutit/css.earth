@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-189733",
+  "angularDiameterMas": 0.35,
+  "angularDiameterSource": "Computed here from the radius and distance: 2 x 523,166.4 km at 19.776 pc = 0.354 mas. The measured limb-darkened diameter is 0.3848 mas (Boyajian et al. 2015, MNRAS 447, 846, CHARA in the H band, as the JMDC lists it), 9 percent larger; the sphere keeps the eclipse map's stellar radius so the planet's orbit and size, fitted in units of it, stay as published.",
+  "distanceParsecs": 19.775801965002984,
+  "distanceSource": "Gaia DR3 parallax 50.567 +/- 0.016 mas (photometry/gaia-dr3-source.csv): 1000/50.567 = 19.776 pc, no zero-point correction",
+  "radiusKm": 523166.4,
+  "radiusSource": "0.752 solar radii (523,166.4 km at 695,700 km per solar radius), the stellar radius Lally et al. (2025, arXiv:2503.20895, Table 1) fix for their eclipse map of HD 189733b. A model-dependent value; the interferometric diameter above gives 0.818 solar radii at the Gaia distance.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the map paper's radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json) and dimmed toward the limb by a law fitted to TESS transits, because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
+  }
+}

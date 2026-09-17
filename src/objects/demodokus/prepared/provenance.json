@@ -417,8 +417,8 @@
         },
         {
           "url": "/scenes/demodokus/demodokus-elevation-surface@2x.webp",
-          "bytes": 343946,
-          "sha256": "5582ad4f5e74fc5d12769b5fd56dbe487812818a07f8198e42f8dcb5474baf3c",
+          "bytes": 313062,
+          "sha256": "8497586b515a0c84d5fe1e907f6b6596d5cabf687a05640d9d9d602d8637d06b",
           "verification": "bytes-verified"
         }
       ],
@@ -461,8 +461,8 @@
         },
         {
           "url": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
-          "bytes": 70950,
-          "sha256": "3c59bf76f17247a4a08bf2d6ce8e1aef1bc0caf1d4ae32de968a25ffd8683db6",
+          "bytes": 69666,
+          "sha256": "7a952f6eda61ccd6396f77165af2d11031dc502e147766d355d1f0d22bd876b3",
           "verification": "bytes-verified"
         }
       ],
@@ -558,7 +558,7 @@
   },
   "lastPreparation": {
     "objectId": "demodokus",
-    "materialSha256": "4f5ca80f664760847dc40189c8766fca2ce929f7f7dd6b5d973483f2e012936a",
+    "materialSha256": "da8c6d2487640b8455863bbb741b754cddafbce6fe2f362b5e17214a78f18517",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

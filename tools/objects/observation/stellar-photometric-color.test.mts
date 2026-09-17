@@ -28,6 +28,7 @@ test('records and catalogue rows fail closed', () => {
   assert.throws(() => parseStellarColorRecord({ ...record, schema: 'other' }), /cssearth-stellar-photometric-color@1/u);
   assert.throws(() => parseStellarColorRecord({ ...record, spectrum: 'model' }), /Planck/u);
   const parsed = parseStellarColorRecord(record);
+  assert.ok(parsed.spectrum === 'planck');
   assert.throws(() => readStellarTemperature('source_id,teff_gspphot\n1,4400\n', parsed), /exactly one row/u);
   assert.throws(() => readStellarTemperature(`source_id,teff_gspphot,teff_gspphot_lower,teff_gspphot_upper\n${parsed.sourceId},4400,4500,4600\n`, parsed), /inside its bounds/u);
 });
@@ -51,5 +52,25 @@ test("WASP-43's TESS limb darkening is read from its pinned catalogue row and da
     assert.ok(Math.abs(alphaAt(radial) - expected) <= 1 / 255, `alpha at ${radial}: ${alphaAt(radial)} vs ${expected}`);
   }
   assert.ok(alphaAt(0.95) > alphaAt(0.8) && alphaAt(0.8) > alphaAt(0.5), 'darker toward the limb');
-  assert.throws(() => readQuadraticLimbDarkening('Name\tu1-j\nOTHER\t0.5\n', limbDarkening.recipe), /exactly one row/u);
+  const { recipe: table } = limbDarkening;
+  assert.ok(table.source === 'table');
+  assert.throws(() => readQuadraticLimbDarkening('Name\tu1-j\nOTHER\t0.5\n', table), /exactly one row/u);
+});
+
+test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 189733 A pale orange-white, B, a red dwarf, orange', async () => {
+  const { readXpSampledSpectrum, xpSampledColor, XP_SAMPLED_WAVELENGTHS_NM } = await import('./stellar-photometric-color.mts');
+  assert.deepEqual([XP_SAMPLED_WAVELENGTHS_NM[0], XP_SAMPLED_WAVELENGTHS_NM.at(-1), XP_SAMPLED_WAVELENGTHS_NM.length], [336, 1020, 343]);
+  for (const [id, sourceId, srgb] of [['hd-189733', '1827242816201846144', [255, 226, 207]], ['hd-189733-companion', '1827242816176111360', [255, 201, 123]]] as const) {
+    const system = new URL(`../../../src/objects/${id}/source/`, import.meta.url);
+    const load = async () => loadStellarPhotometricColor(async path => readFile(new URL(path, system)), { colorMatching: 'reference/CIE_xyz_1931_2deg.csv' }, 'photometry/stellar-color.json');
+    const { color, range, temperature } = await load();
+    assert.equal(temperature, null);
+    assert.deepEqual(color.srgb, srgb, id);
+    for (const bound of range) for (let channel = 0; channel < 3; channel++) assert.ok(Math.abs(bound.srgb[channel]! - color.srgb[channel]!) <= 3, `${id} bound`);
+    const csv = (await readFile(new URL('photometry/gaia-dr3-xp-sampled.csv', system))).toString('utf8');
+    assert.throws(() => readXpSampledSpectrum(csv, '1'), /exactly one row/u);
+    // A flat spectrum in energy is slightly pink in sRGB, since the D65 white is not flat; a hotter slope is bluer.
+    const flat = xpSampledColor(new Array(343).fill(1), colorMatching), blue = xpSampledColor(XP_SAMPLED_WAVELENGTHS_NM.map(w => (500 / w) ** 4), colorMatching);
+    assert.ok(blue.linear[2]! / blue.linear[0]! > flat.linear[2]! / flat.linear[0]!);
+  }
 });

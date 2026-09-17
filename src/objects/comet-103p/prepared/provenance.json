@@ -5678,8 +5678,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-model-surface@2x.webp",
-          "bytes": 149666,
-          "sha256": "c8ed83e7eb2445f723a3e0d834744edd8ebcbf9354a8ab8c55c932e65d9bfab5",
+          "bytes": 123122,
+          "sha256": "dd3386c1892f521cb8545b2a8164376027b938d94c9a86cc22a817f1bd83e22e",
           "verification": "bytes-verified"
         }
       ],
@@ -5732,8 +5732,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-constraints-surface@2x.webp",
-          "bytes": 172254,
-          "sha256": "4b13729bbfcb2b63f93edf61c5cb499f4250fad2baf6020668aac4a4901120ce",
+          "bytes": 154970,
+          "sha256": "6d13b17245b069aad0a55cf6a0a960c61380374bce19bddbcb3765c729c8f373",
           "verification": "bytes-verified"
         }
       ],
@@ -5908,8 +5908,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-temperature-surface@2x.webp",
-          "bytes": 347332,
-          "sha256": "8e04e1aa70b09e644d76e7f0f91f016b4e852755a58335b42026e0b5a09b932e",
+          "bytes": 272078,
+          "sha256": "2eb9bf9aa76249728d49b46dc1e39b3347c5df305d329dd51371c485be4335dd",
           "verification": "bytes-verified"
         }
       ],
@@ -6079,8 +6079,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-spectral-slope-surface@2x.webp",
-          "bytes": 347412,
-          "sha256": "e5d33bb35e71409bc231acdcf0d0294913e71f23f582a021bbda06e6a5ea71ec",
+          "bytes": 272024,
+          "sha256": "32b106cd4730394eda3533f52b2f3bcec5201b7646dd63e0618d9ef9c2d98f3b",
           "verification": "bytes-verified"
         }
       ],
@@ -6138,8 +6138,8 @@
         },
         {
           "url": "/scenes/comet-103p/comet-103p-mri-surface@2x.webp",
-          "bytes": 274250,
-          "sha256": "774c5f5d6677efe4ade29369d1e003c8b4f8437b7e629d001faaa3a510347f2c",
+          "bytes": 255882,
+          "sha256": "ca518badd489ad52164fff2f5f9884943ea28f12965e674085d1496570e29f97",
           "verification": "bytes-verified"
         }
       ],
@@ -6254,8 +6254,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/mri.webp",
-          "bytes": 16866,
-          "sha256": "811eec4e835e936f5bcc91b72e7a5ae554eed65d83b37a2f29b2db3a1af2a614",
+          "bytes": 2818,
+          "sha256": "190ef1e610a586c19e4ef011e045e1e3c3f829cc1670678acb314354f0dc673d",
           "verification": "bytes-verified"
         }
       ]
@@ -6317,7 +6317,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-103p",
-    "materialSha256": "971b7e5e582227b67ead429e4c97f8e77112d62cc1d519fbd1cb4e9727318017",
+    "materialSha256": "c07b23f477f1e47c99b844f7c6ff1b14a5edebb6d1eee6f7cbf5fe2511a9b5f4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

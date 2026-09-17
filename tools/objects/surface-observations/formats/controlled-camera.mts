@@ -255,8 +255,10 @@ export const controlledColorFormat: SurfaceObservationFormat = {
       const bands: ObservationFrame[] = [];
       for (const band of recipe.bands) {
         const source = set[band.channel as Band], { frame, label } = await loadControlledFrame(source, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context);
-        const reflectance = pds3LabelHasReflectance(label);
-        if (!pds3Values(label, 'FILTER_NAME')?.includes(band.filter) || !reflectance) throw new Error(`Band colour needs the actual filter and calibrated reflectance units in its native label: ${source.id}`);
+        // Calibrated SSI states its filter in both labels, which its loader checks against each other, and is I/F by its archive's definition.
+        const ssi = source.encoding === 'fits-ssi-iof';
+        const reflectance = ssi || pds3LabelHasReflectance(label), stated = ssi ? frame.filter === band.filter : pds3Values(label, 'FILTER_NAME')?.includes(band.filter);
+        if (!stated || !reflectance) throw new Error(`Band colour needs the actual filter and calibrated reflectance units in its native label: ${source.id}`);
         bands.push(frame);
       }
       frames.push(bandSetFrame(set.id, bands));

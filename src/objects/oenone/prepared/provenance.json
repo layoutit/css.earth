@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/oenone/oenone-elevation-surface@2x.webp",
-          "bytes": 330954,
-          "sha256": "c24908cac9d9a8e6312cf402d8cfd578d913fa7f21d060132b9e883770c4e73d",
+          "bytes": 300318,
+          "sha256": "9baa3af4552622d8d2d288c6350ecd902dae31391235c0cb1b7a5461daf43593",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/oenone/oenone-shape-surface@2x.webp",
-          "bytes": 75968,
-          "sha256": "46817a5d548e7f46430ae2759ae8007f720e566433fb72872d0c98938a95368a",
+          "bytes": 73754,
+          "sha256": "b859658be6c13012b4c87b9eeea8a3d7065f72c48e9012a6326d5a54483e952d",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "oenone",
-    "materialSha256": "e37430f05ba2dc5d7e8acb8af3c29254d1236a899324598d68773e41429156f7",
+    "materialSha256": "6917a343d93f1c35046c2665cf7cffd554dee7c85043c37bcbb20321da34297c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

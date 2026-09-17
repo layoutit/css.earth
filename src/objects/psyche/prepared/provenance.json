@@ -2046,8 +2046,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-elevation-surface@2x.webp",
-          "bytes": 374438,
-          "sha256": "d52419645a675e003eb7591f08a04db6ee49d82a5bd4f0944385805c19e67767",
+          "bytes": 319222,
+          "sha256": "fbd228430aee0c42beb422d1479c79ae2f26a09ef7408a9e9fcc6ccf8663e8c5",
           "verification": "bytes-verified"
         }
       ],
@@ -2101,8 +2101,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-thermal-inertia-surface@2x.webp",
-          "bytes": 285250,
-          "sha256": "3653e8b2464bd22ecbfbb74d58eb3e9a648f857d69e349f21735a319f260a0e2",
+          "bytes": 169790,
+          "sha256": "7810dfe6696f9d4829cf1a5b422fc33b1b14999e222febf88041cdac2d8d2fe6",
           "verification": "bytes-verified"
         }
       ],
@@ -2156,8 +2156,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-dielectric-constant-surface@2x.webp",
-          "bytes": 243628,
-          "sha256": "11070b62b05673ec3e894cf70e9b485830a0f8abb7196c18cde365a86777b9c7",
+          "bytes": 145312,
+          "sha256": "c545569ff49a077b55285d2a6b8c3adba1cb554d46a6047aab495913a1508f7d",
           "verification": "bytes-verified"
         }
       ],
@@ -2200,8 +2200,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-shape-surface@2x.webp",
-          "bytes": 76498,
-          "sha256": "13d33d2da19b606a5bb5f233756229ee19c6e365e577d0badd11c21fb5232a3d",
+          "bytes": 74676,
+          "sha256": "2a7c758b05943d65c89c74c57145ed3b3ea5c3a5144f836b212933dafcafd1ce",
           "verification": "bytes-verified"
         }
       ],
@@ -2260,8 +2260,8 @@
         },
         {
           "url": "/scenes/psyche/psyche-zimpol-surface@2x.webp",
-          "bytes": 295708,
-          "sha256": "1ffabc6f18991bd0c351522daf6d9d60dfadb9316d27fac501ac3d00d458e765",
+          "bytes": 200662,
+          "sha256": "57e14d3b991c6962a981d1be09e0e08e10e13d7707772ae51aefc4cca25a2e90",
           "verification": "bytes-verified"
         }
       ],
@@ -2344,8 +2344,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 5864,
-          "sha256": "87824095b942370f17b98979caf7bba112858bdd9cd3ac73771af6ebc7b98ddd",
+          "bytes": 6002,
+          "sha256": "22478e873117529e8434d94f6da7f9d644a7286dd3e551186faa3a4f4818c05d",
           "verification": "bytes-verified"
         }
       ]
@@ -2432,7 +2432,7 @@
   },
   "lastPreparation": {
     "objectId": "psyche",
-    "materialSha256": "2faa12968ab75fe2b56ce2af088b8b4502d2dcffea4247fae871f6df5c97d705",
+    "materialSha256": "cd3d68b98d226fa2e03e9318ddd39dfb1305397b304399cf8207077726841951",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

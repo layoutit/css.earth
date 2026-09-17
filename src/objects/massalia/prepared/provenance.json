@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/massalia/massalia-elevation-surface@2x.webp",
-          "bytes": 333490,
-          "sha256": "09068218da481dd28196edfc66f389bfa123cc349abb7b7d7ec4b885049466ef",
+          "bytes": 305506,
+          "sha256": "beca2b79f0779b8bb00dde5179a990cf4326a33ababaf487b9bfdc58821742e9",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/massalia/massalia-shape-surface@2x.webp",
-          "bytes": 74778,
-          "sha256": "8661612aa1aa6593242d5082f272a5dec5981633d7f18aa385af8c30379a8696",
+          "bytes": 72344,
+          "sha256": "8dc9ee6f6d4eae38118370a6e53a89a7d6272089f1890f84a691aff3adb06076",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "massalia",
-    "materialSha256": "34ac09949b7308d5976af1ac7503b28721960e0990fdd6476c8f99023a593cd9",
+    "materialSha256": "990f22f64dc0f189ba416157899580688352e18c777859a420d83666d7c2da94",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

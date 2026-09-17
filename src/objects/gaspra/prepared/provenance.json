@@ -1319,8 +1319,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-normal-surface@2x.webp",
-          "bytes": 703350,
-          "sha256": "ab77f49e5aa7519800d14cfbe82472b571a3d6bc5016a9a7e865116a12f5820e",
+          "bytes": 689266,
+          "sha256": "4c3ad78d762180e5423d2ac1bc4a0149c31f509d1acff3c54803b51795b30698",
           "verification": "bytes-verified"
         }
       ],
@@ -1374,8 +1374,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-elevation-surface@2x.webp",
-          "bytes": 337794,
-          "sha256": "a74a33d98556edffbd56f2ed1389ffc71eefe2277ff7ea665de1553ac14d3cb2",
+          "bytes": 291866,
+          "sha256": "46d1a2a307d2b5b0a035bb086bbd22a5c14cd96c26d51d0ed60c5057ac5ba876",
           "verification": "bytes-verified"
         }
       ],
@@ -1432,8 +1432,8 @@
         },
         {
           "url": "/scenes/gaspra/gaspra-calibrated-surface@2x.webp",
-          "bytes": 232904,
-          "sha256": "a025a05ca0435883d985887051c2b7864b4d80d0ff83eaf5720f7a1cc24e245a",
+          "bytes": 193506,
+          "sha256": "0a05b2a24308d4f6ad8bafec1c0e8c01038257896ab384e201b62dc6503b83d3",
           "verification": "bytes-verified"
         }
       ],
@@ -1551,8 +1551,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/calibrated.webp",
-          "bytes": 7110,
-          "sha256": "4853bd9c3d3c5802ea1a743d1b4d287c51151086014fe7bdffdc618622f72b7d",
+          "bytes": 6348,
+          "sha256": "d32a898ed1be83639e82e53c9c6d28337b32bf3db914b434457e4c5737ef4e72",
           "verification": "bytes-verified"
         }
       ]
@@ -1589,7 +1589,7 @@
   },
   "lastPreparation": {
     "objectId": "gaspra",
-    "materialSha256": "07a5177d5dc691e5f03747ea5c20f08aa5f859513a3d25d32983a0d34e7ca1a4",
+    "materialSha256": "2e1eec007badfedaa04fbbd440f7e9779b7db12ff4aadb81ed97a90708116422",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

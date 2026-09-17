@@ -334,8 +334,8 @@
         },
         {
           "url": "/scenes/annefrank/annefrank-model-surface@2x.webp",
-          "bytes": 59432,
-          "sha256": "c3dd776937f025d1b18ae0137354c5cc2ef3e378c13c285400546d08ef465a12",
+          "bytes": 50100,
+          "sha256": "5e3ff6a81eff6688baf7b98339fd46049fd0177b832ae4a4524ab38e1e8ae49e",
           "verification": "bytes-verified"
         }
       ],
@@ -411,7 +411,7 @@
   },
   "lastPreparation": {
     "objectId": "annefrank",
-    "materialSha256": "db990477dda61be83f05d2474853295e178c75a2e404c7c43d0c499689c156a0",
+    "materialSha256": "6a00075ff17c3b757aaa3b691330acd5ec7afd20dd1f333134d3a7d1287b7f84",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/lamberta/lamberta-elevation-surface@2x.webp",
-          "bytes": 314996,
-          "sha256": "1cefe1aad0fdf1ad9221354b492ccc20bd5bdad6628ff04053be2a9cbc088a63",
+          "bytes": 284834,
+          "sha256": "48c458b46e4798ab8356b8c593c45662e88d0dde22d67483433fa538490d6d9c",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/lamberta/lamberta-shape-surface@2x.webp",
-          "bytes": 72134,
-          "sha256": "96e20187eaff5978b5b107a4bd9c71ec56c0261f79022480d3f04ec2bbadf89c",
+          "bytes": 71206,
+          "sha256": "63b703187fad42e48189b664914ff4f204ca48a5e1cff1cf77c215e7cc73435a",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "lamberta",
-    "materialSha256": "b4b18f85928152d2926bda33838f376fe4eb9f119c1ca3fe95d6124f1d0f26d3",
+    "materialSha256": "1c7fd31a83445cb18283970cb2000880441675c5a8fb17b950aeaa9c2c877bed",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

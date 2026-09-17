@@ -414,8 +414,8 @@
         },
         {
           "url": "/scenes/athor/athor-elevation-surface@2x.webp",
-          "bytes": 328558,
-          "sha256": "78b3ba5a8d219a63706c8ef80afc2355bf3597d0287ef6f3f362b24ccbf82c13",
+          "bytes": 302628,
+          "sha256": "9b417d2f9422063e4d18b857fac92a5444147c43ab226c4b7714e714f969f780",
           "verification": "bytes-verified"
         }
       ],
@@ -458,8 +458,8 @@
         },
         {
           "url": "/scenes/athor/athor-shape-surface@2x.webp",
-          "bytes": 71836,
-          "sha256": "66440c8f46f42a33ea45766a0fd0867151b9a526172361aa017941dd9ead62c1",
+          "bytes": 71224,
+          "sha256": "b648780d61c103a1967f64f6298bc7f542fd45bd2c08e60f26f86a6681044a37",
           "verification": "bytes-verified"
         }
       ],
@@ -555,7 +555,7 @@
   },
   "lastPreparation": {
     "objectId": "athor",
-    "materialSha256": "27ca332db81c34ea7d20452c1b4e9ee51174823d3b053090481ebebafc4b940a",
+    "materialSha256": "659d363c02c46ffde165556dfddbd283a33b7723d4c007df45d222e1ecf7269a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

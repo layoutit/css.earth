@@ -965,8 +965,8 @@
         },
         {
           "url": "/scenes/metis/metis-normal-surface@2x.webp",
-          "bytes": 42172,
-          "sha256": "c534e6a848805b5808bd458cc82bf0769367e0bb1d66aac05c30008cc4ebfac7",
+          "bytes": 38452,
+          "sha256": "ed8afa018d5eb04d76cc422e1442ddd2b9cd4ce2121b9bbaa281a32f7520d021",
           "verification": "bytes-verified"
         }
       ],
@@ -1024,8 +1024,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 5980,
-          "sha256": "a95847a6d3571cda193a45491bd453b899dc3df1e99b83b6c75966721ca2e4dd",
+          "bytes": 1550,
+          "sha256": "227a9f792a7a99ba95ba156dfd9671e545aebd2e6a4275b049c425ded7962e63",
           "verification": "bytes-verified"
         }
       ]
@@ -1037,7 +1037,7 @@
   },
   "lastPreparation": {
     "objectId": "metis",
-    "materialSha256": "3fd5e559b0b5126b76d1a5c55318cc3a8962bcaa5879d56902eb143c15aaf805",
+    "materialSha256": "29bbd76af01407172226c575fd142f5c0ed5acba1470e68850f974ebf830e1b9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
