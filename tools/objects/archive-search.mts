@@ -9,6 +9,10 @@
  *
  * Each search is split into a query and a pure summary of the rows it returns; the summaries are what the tests pin.
  * A search finds leads, never a verdict: a frame still needs a camera, registration and reuse terms before it can ship.
+ *
+ * Not searched: the PDS registry (its target index, checked 2026-09-16, lists only Lucy's SPICE collections for Dinkinesh although
+ * the imaging collections exist, so an empty answer would mislead), CHARA data not deposited in the OiDB, and journal supplements
+ * that no DataCite record describes.
  */
 import { requireArray, requireRecord } from '../source-values.mts';
 
