@@ -58,8 +58,9 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
     const exposures = frames.filter(frame => frame.dpType === 'FRINGE,OBJECT' && frame.templateStart === template);
     if (!sameSetup(exposures[0]!)) continue;
     const last = time(exposures.at(-1)!.dpId);
-    // A block's dark is the first dark after its last exposure, within the template's own few minutes.
-    const dark = darks.find(frame => time(frame.dpId) > last && time(frame.dpId) - last < 5 * 60e3);
+    // A block's dark is the first dark after its last exposure, within 15 minutes: service mode may put an on-sky kappa sequence
+    // between them (11 August 2019), or follow an aborted one-exposure template directly with the full block (29 August 2019).
+    const dark = darks.find(frame => time(frame.dpId) > last && time(frame.dpId) - last < 15 * 60e3);
     if (!dark) throw new Error(`Block ${template} (${exposures[0]!.object}) has no dark after it.`);
     const objects = new Set(exposures.map(frame => frame.object));
     if (objects.size !== 1) throw new Error(`Block ${template} observes ${[...objects].join(' and ')}.`);
@@ -84,6 +85,9 @@ export function planPionierNight(frames: readonly RawFrame[], target: string, wi
   if (!lamp) throw new Error('No FRINGE,LAMP spectral calibration in the night.');
   return { kappa: { dark: kappaDark.dpId, frames: kappaFrames.map(frame => frame.dpId) }, spectral: lamp.dpId, blocks };
 }
+
+/** pndrsCheckFile's limit on OIDATA files per transfer-function or calibration call (pioni_oidata_tf.i, pioni_oidata_calibrated.i). */
+export const PNDRS_FILE_LIMIT = 20;
 
 export interface PipelinePaths { readonly prefix: string; readonly catalogue: string; readonly yorick: string }
 
@@ -117,20 +121,43 @@ export async function calibratePionier(plan: PionierPlan, rawDirectory: string, 
   const kappaDark = await recipe('pioni_dark_calibration', 'dark-kappa', [[await raw(plan.kappa.dark), 'DARK']]);
   const kappa = await recipe('pioni_kappa_matrix', 'kappa', [[kappaDark, 'DARK_CALIBRATION'], ...await Promise.all(plan.kappa.frames.map(async frame => [await raw(frame), 'KAPPA'] as const))]);
   const spectral = await recipe('pioni_spectral_calibration', 'spectral', [[await raw(plan.spectral), 'SPEC_CAL']]);
-  const oidata: { role: PionierBlock['role']; file: string }[] = [];
+  const oidata: { role: PionierBlock['role']; block: number; file: string }[] = [];
   for (const [index, block] of plan.blocks.entries()) {
     const dark = await recipe('pioni_dark_calibration', `dark-${index}`, [[await raw(block.dark), 'DARK']]);
     for (const [exposureIndex, exposure] of block.exposures.entries()) {
-      oidata.push({ role: block.role, file: await recipe('pioni_oidata_raw', `raw-${index}-${exposureIndex}`,
+      oidata.push({ role: block.role, block: index, file: await recipe('pioni_oidata_raw', `raw-${index}-${exposureIndex}`,
         [[await raw(exposure), 'FRINGE'], [dark, 'DARK_CALIBRATION'], [kappa, 'KAPPA_MATRIX'], [spectral, 'SPECTRAL_CALIBRATION'], [paths.catalogue, 'JSDC_CAT']]) });
     }
   }
-  const transfer = resolve(work, 'transfer-function.fits'), calibrated = resolve(work, 'calibrated.fits');
-  await pndrs('pioni_oidata_tf.i', [`--inputOiDataFiles=${oidata.filter(entry => entry.role === 'calibrator').map(entry => entry.file).join(',')}`, `--inputCatalogFile=${paths.catalogue}`, `--outputOiDataTfFile=${transfer}`], 'transfer-function.log');
-  await pndrs('pioni_oidata_calibrated.i', [`--inputOiDataFiles=${oidata.filter(entry => entry.role === 'science').map(entry => entry.file).join(',')}`, `--inputOiDataTfFiles=${transfer}`,
-    `--outputOiDataCalibratedFile=${calibrated}.partial`, `--outputOiDataTfeFile=${resolve(work, 'transfer-function-estimate.fits')}`], 'calibrated.log');
-  await rename(`${calibrated}.partial`, calibrated);
-  return calibrated;
+  // pndrs's scripts accept at most 20 OIDATA files per call (pndrsCheckFile), and a service-mode night holds more. Whole blocks are
+  // grouped up to 20 files; each calibrator group gives one transfer-function file, and every science group is calibrated against
+  // all of them, so the transfer function is still interpolated across the night.
+  const groups = (role: PionierBlock['role']) => {
+    const result: string[][] = [];
+    for (const blockIndex of [...new Set(oidata.filter(entry => entry.role === role).map(entry => entry.block))]) {
+      const files = oidata.filter(entry => entry.block === blockIndex).map(entry => entry.file);
+      if (files.length > PNDRS_FILE_LIMIT) throw new Error(`Block ${blockIndex} has ${files.length} exposures; pndrs reads at most ${PNDRS_FILE_LIMIT}.`);
+      if (!result.length || result.at(-1)!.length + files.length > PNDRS_FILE_LIMIT) result.push([]);
+      result.at(-1)!.push(...files);
+    }
+    return result;
+  };
+  const transfers: string[] = [];
+  for (const [index, files] of groups('calibrator').entries()) {
+    const transfer = resolve(work, `transfer-function-${index + 1}.fits`);
+    await pndrs('pioni_oidata_tf.i', [`--inputOiDataFiles=${files.join(',')}`, `--inputCatalogFile=${paths.catalogue}`, `--outputOiDataTfFile=${transfer}`], `transfer-function-${index + 1}.log`);
+    transfers.push(transfer);
+  }
+  const science = groups('science'), calibratedFiles: string[] = [];
+  for (const [index, files] of science.entries()) {
+    const calibrated = resolve(work, science.length === 1 ? 'calibrated.fits' : `calibrated-${index + 1}.fits`);
+    await pndrs('pioni_oidata_calibrated.i', [`--inputOiDataFiles=${files.join(',')}`, `--inputOiDataTfFiles=${transfers.join(',')}`,
+      `--outputOiDataCalibratedFile=${calibrated}.partial`, `--outputOiDataTfeFile=${resolve(work, `transfer-function-estimate-${index + 1}.fits`)}`], `calibrated-${index + 1}.log`);
+    await access(`${calibrated}.partial`).catch(() => { throw new Error(`pndrs wrote no calibrated file; see ${resolve(work, `calibrated-${index + 1}.log`)}.`); });
+    await rename(`${calibrated}.partial`, calibrated);
+    calibratedFiles.push(calibrated);
+  }
+  return calibratedFiles;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -155,6 +182,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   await mkdir(work, { recursive: true });
   await writeFile(resolve(work, 'plan.json'), `${JSON.stringify(plan, null, 2)}\n`);
   const overrides = { ...(option('--pipeline') ? { prefix: option('--pipeline')! } : {}), ...(option('--calib') ? { calib: option('--calib')! } : {}), ...(option('--yorick') ? { yorick: option('--yorick')! } : {}) };
-  const calibrated = await calibratePionier(plan, option('--raw') ?? resolve(work, 'raw'), work, await pipelinePaths(overrides));
-  console.log(`${calibrated}: ${plan.blocks.filter(block => block.role === 'science').length} science and ${plan.blocks.filter(block => block.role === 'calibrator').length} calibrator blocks.`);
+  const calibratedFiles = await calibratePionier(plan, option('--raw') ?? resolve(work, 'raw'), work, await pipelinePaths(overrides));
+  console.log(`${calibratedFiles.join(', ')}: ${plan.blocks.filter(block => block.role === 'science').length} science and ${plan.blocks.filter(block => block.role === 'calibrator').length} calibrator blocks.`);
 }
