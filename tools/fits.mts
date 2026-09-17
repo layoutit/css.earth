@@ -5,10 +5,11 @@ export type FitsHeader = Record<string, FitsValue>;
 const RECORD = 2880, CARD = 80;
 const padded = (size: number) => Math.ceil(size / RECORD) * RECORD;
 
-/** ESO names retain their namespace; they never replace ordinary structural keys. */
-function esoHierarchy(card: string) {
+/** HIERARCH names retain their namespace and have at least two words, so they never replace ordinary structural keys. ESO pipelines
+ * write namespaces other than ESO (MATISSE's `PRO DISP COEF0`) and lower-case letters after the first word (GRAVITY's `MET OFFVOLT FC1FTx`). */
+export function esoHierarchy(card: string) {
   const equals = card.indexOf('=', 9), name = card.slice(9, equals).trim();
-  if (card[8] !== ' ' || equals < 10 || !/^ESO(?: +[A-Z0-9_-]+)+$/u.test(name))
+  if (card[8] !== ' ' || equals < 10 || !/^[A-Z][A-Z0-9_-]*(?: +[A-Za-z0-9_-]+)+$/u.test(name))
     throw new Error('Unsupported or malformed FITS HIERARCH name.');
   return { key: name.replace(/ +/gu, ' '), valueStart: equals + 1 };
 }
@@ -16,10 +17,12 @@ function esoHierarchy(card: string) {
 /** Scan value cards, leaving repeatable COMMENT/HISTORY cards alone. A string value
  * ending in `&` may continue on the CONTINUE cards that immediately follow it
  * (FITS 4.0, section 4.2.1.2); those records reach the visitor with their value card. */
-export function scanFitsCards(bytes: Buffer, start: number, visit: (key: string, card: string, continuation: readonly string[]) => void, limit = 64 * RECORD) {
+/** ESO raw primaries reach 2,480 cards (MATISSE, GRAVITY), so the bound is 256 records (9,216 cards), not the 64 a product header needs. */
+export const MAX_HEADER_RECORDS = 256;
+export function scanFitsCards(bytes: Buffer, start: number, visit: (key: string, card: string, continuation: readonly string[]) => void, limit = MAX_HEADER_RECORDS * RECORD) {
   if (!Number.isSafeInteger(start) || start < 0 || start % RECORD || start >= bytes.length)
     throw new Error('Invalid FITS header offset.');
-  const stop = Math.min(bytes.length, start + Math.min(limit, 64 * RECORD));
+  const stop = Math.min(bytes.length, start + Math.min(limit, MAX_HEADER_RECORDS * RECORD));
   let pending: [string, string, string[]] | undefined;
   const flush = () => { if (pending) visit(...pending); pending = undefined; };
   for (let offset = start; offset + CARD <= stop; offset += CARD) {
@@ -80,8 +83,9 @@ function fitsLiteral(field: string, card: string): FitsValue {
   // Preserve their literal text; this is not time-system interpretation.
   if (['T_OBS', 'T_START', 'T_STOP'].includes(card.slice(0, 8).trim()) &&
       /^\d{4}\.\d{1,2}\.\d{1,2}_\d{1,2}:\d{1,2}:\d{1,2}(?:\.\d+)?_TAI$/u.test(value)) return value;
-  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[DE][+-]?\d+)?$/u.test(value)) throw new Error('Invalid or unsupported FITS scalar.');
-  const number = Number(value.replace('D', 'E'));
+  // ESO instruments write lower-case exponents (AMBER's `3.000e-05`); Astropy reads them as the standard's E and D.
+  if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[DEde][+-]?\d+)?$/u.test(value)) throw new Error('Invalid or unsupported FITS scalar.');
+  const number = Number(value.replace(/[Dd]/u, 'E'));
   if (!Number.isFinite(number) || (/^[+-]?\d+$/u.test(value) && !Number.isSafeInteger(number)))
     throw new Error('FITS scalar exceeds numeric precision.');
   return number;

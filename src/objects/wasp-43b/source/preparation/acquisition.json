@@ -18,6 +18,15 @@
       ],
       "path": "science/challener-2024/wasp-43b.tar",
       "url": "https://zenodo.org/api/records/12627524/files/wasp-43b.tar/content"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
+      "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=269"
     }
   ]
 }

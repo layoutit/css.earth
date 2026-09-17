@@ -9,7 +9,7 @@
     "gravitationalParameterKm3PerS2": 2355645810744.4,
     "parent": null
   },
-  "physicalNotes": "Joyce et al. (2020, ApJ 902, 63; arXiv:2006.09837) radius 764 (+116/-62) solar radii at 695700 km per solar radius; GM from the midpoint of their 16.5-19 solar-mass range times the JPL solar GM 132712440041.93938 km^3/s^2.",
+  "physicalNotes": "Joyce et al. (2020, ApJ 902, 63; arXiv:2006.09837) radius 764 (+116/-62) solar radii at 695700 km per solar radius; GM from the midpoint of their 16.5-19 solar-mass range times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the ALMA rotation pole lies in the plane of the sky, and with the ecliptic up the camera orbit cannot reach the Earth-facing hemisphere, so the presentation frame puts the pole up; the camera orbit then lies in the star's equator, which contains the line of sight from Earth.",
   "star": {
     "rightAscensionDegrees": 88.79293899077537,
     "declinationDegrees": 7.407063995272694,
@@ -23,6 +23,7 @@
       "distance": "Joyce et al. (2020, ApJ 902, 63; arXiv:2006.09837): 168 (+27/-15) pc, parallax 5.95 (+0.58/-0.85) mas. Hipparcos (van Leeuwen 2007) gives 6.55 +/- 0.83 mas (153 pc); Harper et al. (2017, AJ 154, 11) give 4.51 +/- 0.80 mas (222 pc).",
       "properMotion": "van Leeuwen (2007, A&A 474, 653) via SIMBAD: 27.54, 11.30 mas/yr, error 1.03 mas/yr",
       "radialVelocity": "Famaey et al. (2005, A&A 430, 165; bibcode 2005A&A...430..165F) via SIMBAD: 21.91 +/- 0.51 km/s"
-    }
+    },
+    "presentationUp": "display-axis"
   }
 }

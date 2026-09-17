@@ -23,21 +23,24 @@ test('the default camera looks at the Earth-facing hemisphere, one degree off th
     `sub-camera point ${view.subCamera.longitudeDegrees.toFixed(1)}, ${view.subCamera.latitudeDegrees.toFixed(1)}`);
 });
 
-test('the display axis stands up on screen, with celestial north up and the Earth toward the viewer', async () => {
+test('the star\'s pole, WASP-43b\'s orbit normal, stands up on screen, with the Earth toward the viewer', async () => {
   const descriptor = requireRecord(await json('object.json')), runtime = requireRecord(await json('prepared/runtime.json'));
-  const rotation = requireRecord(await json('source/preparation/rotation.json'));
   const star = requireRecord(requireRecord(JSON.parse(await readFile(resolve(BODY, '../../../packages/astronomy/data/bodies/wasp-43.json'), 'utf8')) as unknown).star);
   assert.equal(star.presentationUp, 'display-axis');
-  const view = defaultViewGeometry('wasp-43', requireRecord(runtime.camera) as never, requireRecord(requireRecord(descriptor.properties).worldFrame) as never);
-  const pole = view.screen(direction(requireFiniteNumber(rotation.rightAscensionDegrees), requireFiniteNumber(rotation.declinationDegrees)));
-  assert.ok(Math.abs(pole.angleDegrees - 90) < 0.1, `display axis ${pole.angleDegrees.toFixed(2)} degrees from screen-right`);
+  const { readAuthoredRotation } = await import('../../../../tools/objects/authored-rotation.mts');
+  const { sha256 } = await import('../../../../src/platform/sha256.mts');
+  const worldFrame = requireRecord(requireRecord(descriptor.properties).worldFrame);
+  const epoch = requireFiniteNumber(requireRecord(worldFrame).epochJdTt ?? 2461286.5);
+  const bytes = await readFile(resolve(BODY, 'source/preparation/rotation.json'));
+  const rotation = await readAuthoredRotation(BODY, { path: 'source/preparation/rotation.json', sha256: sha256(bytes) }, epoch);
+  const planetBytes = await readFile(resolve(BODY, '../wasp-43b/source/preparation/rotation.json'));
+  const planet = await readAuthoredRotation(resolve(BODY, '../wasp-43b'), { path: 'source/preparation/rotation.json', sha256: sha256(planetBytes) }, epoch);
+  assert.ok(Math.abs(rotation.poleRightAscensionRad - planet.poleRightAscensionRad) < 1e-9 && Math.abs(rotation.poleDeclinationRad - planet.poleDeclinationRad) < 1e-9, 'the pole is the planet\'s orbit normal');
+  assert.equal(rotation.spinRateRadPerDay, 0, 'no rotation period is measured');
+  const view = defaultViewGeometry('wasp-43', requireRecord(runtime.camera) as never, worldFrame as never);
+  const pole = view.screen(direction(rotation.poleRightAscensionRad / DEG, rotation.poleDeclinationRad / DEG));
+  assert.ok(Math.abs(pole.angleDegrees - 90) < 0.1, `pole ${pole.angleDegrees.toFixed(2)} degrees from screen-right`);
   const ra = requireFiniteNumber(star.rightAscensionDegrees), dec = requireFiniteNumber(star.declinationDegrees);
-  const north = view.screen([-Math.sin(dec * DEG) * Math.cos(ra * DEG), -Math.sin(dec * DEG) * Math.sin(ra * DEG), Math.cos(dec * DEG)]);
-  const east = view.screen([-Math.sin(ra * DEG), Math.cos(ra * DEG), 0]);
   const earth = view.screen(direction(ra, dec).map(v => -v) as [number, number, number]);
-  assert.ok(Math.abs(north.angleDegrees - 90) < 0.1, `celestial north is up: ${north.angleDegrees.toFixed(1)}`);
-  assert.ok(earth.towardViewer && Math.abs(earth.angleDegrees - 90) < 0.1, 'the Earth direction points at the viewer');
-  // Measured, not endorsed: on the sky east is 90 degrees counterclockwise of north; the scene shows it clockwise, as for Betelgeuse.
-  const eastFromNorth = ((east.angleDegrees - north.angleDegrees) % 360 + 540) % 360 - 180;
-  assert.ok(Math.abs(eastFromNorth + 90) < 0.1, `east is ${eastFromNorth.toFixed(1)} degrees from north on screen`);
+  assert.ok(earth.towardViewer, 'the Earth direction points at the viewer');
 });

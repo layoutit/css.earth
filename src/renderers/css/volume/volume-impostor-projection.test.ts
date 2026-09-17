@@ -22,11 +22,13 @@ const publication = (distance = 10, focalPixels = 100): VolumeCameraPublication 
 });
 test('perspective footprint follows focal length, position and principal point with shared physical handedness', () => {
   const p = publication();
-  expect(projectVolumeImpostors(p, frame, bank)).toMatchObject({ x: 7, y: -4, diameterPixels: 20, volumeMix: 0,
-    visible: true, views: [{ id: 'front', weight: 1, matrix: [1, 0, 0, -1] }] });
+  const front = projectVolumeImpostors(p, frame, bank);
+  expect(front).toMatchObject({ x: 7, y: -4, diameterPixels: 20, volumeMix: 0, visible: true, views: [{ id: 'front', weight: 1 }] });
+  // Seen from its front the image is upright: its right and down axes are the camera's.
+  [1, 0, 0, 1].forEach((n, i) => expect(front.views[0]!.matrix[i]).toBeCloseTo(n));
   expect(projectVolumeImpostors(publication(10, 200), frame, bank).diameterPixels).toBe(40);
   expect(projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, positionM: [1, 2, 10] } } }, frame, bank))
-    .toMatchObject({ x: -3, y: -24 });
+    .toMatchObject({ x: -3, y: 16 });
 });
 test('continuous size handoff keeps full volume inside the cloud and culls only the exterior distant sphere', () => {
   for (const [diameter, volumeMix] of [[128, 0], [192, .5], [256, 1]]) {
@@ -42,7 +44,8 @@ test('camera roll rotates the prepared image, without selecting another depth di
   const p = publication(), a = Math.sqrt(.5);
   const view = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, orientationXyzw: [0, 0, a, a] } } }, frame, bank).views[0]!;
   expect(view.id).toBe('front');
-  [0, -1, -1, 0].forEach((n, i) => expect(view.matrix[i]).toBeCloseTo(n));
+  // A quarter-turn roll is a rotation of the image, not a reflection.
+  [0, 1, -1, 0].forEach((n, i) => expect(view.matrix[i]).toBeCloseTo(n));
 });
 test('directional views have bounded continuous weights and declared orthonormal camera bases', () => {
   const resources = new Set(bank.views.map(view => view.texturePath));

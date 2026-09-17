@@ -29,9 +29,14 @@
   },
   "datasets": {
     "temperature": {
-      "title": "JWST eclipse map",
+      "title": "JWST NIRSpec map",
       "detail": "Measured temperature",
       "summary": "Each part of the planet's heat, fitted to JWST light curves. The hot spot is east of noon; how far south varies by fit."
+    },
+    "miri": {
+      "title": "JWST MIRI map",
+      "detail": "Our map from raw data",
+      "summary": "Mid-infrared heat mapped here from raw JWST frames. Day and night agree with the published values."
     }
   }
 }

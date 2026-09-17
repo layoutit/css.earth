@@ -1,28 +1,30 @@
 ---
 import type { OverviewScope } from '../overview-context.mts';
 import type { HTMLAttributes } from 'astro/types';
-interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: OverviewScope; includeObject?: boolean; currentPage?: boolean; }
+interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: OverviewScope; systemId?: string; includeObject?: boolean; currentPage?: boolean; }
 import { SCENE_OBJECTS } from '../objects.mts';
 import preparedWorld from '../../src/objects/sun/prepared/world-context.json';
-import { solarSystemFocus } from '../overview-selection.mts';
+import { SOLAR_SYSTEM_ID, systemById, systemOfObject } from '../object-systems.mts';
 
-const { objectId, scope, includeObject = false, currentPage = Boolean(scope) || includeObject, ...attributes } = Astro.props;
+const { objectId, scope, systemId, includeObject = false, currentPage = Boolean(scope) || includeObject, ...attributes } = Astro.props;
 const object = SCENE_OBJECTS.find(object => object.id === objectId);
-const systemRoute = solarSystemFocus(SCENE_OBJECTS)!.route;
-const hierarchy: { scope: OverviewScope; label: string }[] = [
+// The galactic scopes are measured from the Sun, so their overviews stay on its route.
+const galacticRoute = systemById(SCENE_OBJECTS, SOLAR_SYSTEM_ID)!.route;
+const galactic: { scope: OverviewScope; label: string }[] = [
   { scope: 'nearby-universe', label: 'Nearby Universe' },
   { scope: 'local-group', label: 'Local Group' },
   { scope: 'milky-way', label: 'Milky Way' },
-  { scope: 'solar-system', label: object?.systemName ?? 'Solar System' },
 ];
-const scopeIndex = hierarchy.findIndex(entry => entry.scope === (scope ?? 'solar-system'));
-const crumbs = hierarchy.slice(0, scopeIndex + 1).map(entry => ({
-  label: entry.label, href: `${systemRoute}?overview=${entry.scope}`,
-}));
-if (object && !scope) {
-  // Use the same prepared orbit parents as the moon result rows.
+const crumbs = galactic.slice(0, scope && scope !== 'system' ? galactic.findIndex(entry => entry.scope === scope) + 1 : galactic.length)
+  .map(entry => ({ label: entry.label, href: `${galacticRoute}?overview=${entry.scope}` }));
+// An object's trail passes through its own planetary system; a star outside every system sits directly in the Milky Way.
+const system = scope === 'system' ? systemById(SCENE_OBJECTS, systemId ?? SOLAR_SYSTEM_ID)
+  : !scope && object ? systemOfObject(SCENE_OBJECTS, object.id) : null;
+if (system) crumbs.push({ label: system.name, href: `${system.route}?overview=system` });
+if (object && !scope && system) {
+  // Use the same prepared orbit parents as the moon result rows; a planet's parent is the system's star, already named.
   const parentId = preparedWorld.bodies.find(body => body.id === object.id)?.orbit?.centerBodyId;
-  const parent = object.classification === 'satellite' ? SCENE_OBJECTS.find(body => body.id === parentId) : null;
+  const parent = parentId && parentId !== system.id ? SCENE_OBJECTS.find(body => body.id === parentId) : null;
   if (parent) crumbs.push({ label: parent.name, href: parent.route });
 }
 // Mission cards end their trail at the body they describe, which is the current page.

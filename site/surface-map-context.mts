@@ -3,7 +3,8 @@ import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-n
 import type { BrowserWindow } from './browser-types.mts';
 import { record, requiredElement } from './browser-types.mts';
 import type { SurfaceAxes } from './surface-minimap-math.mts';
-export interface SurfaceMapConfig extends SurfaceAxes { readonly surfaceSelector: string; }
+/** Axes and the map's left edge longitude: latitude and longitude sit where the prepared feature labels place them. */
+export interface SurfaceMapConfig extends SurfaceAxes { readonly surfaceSelector: string; readonly mapLeftEdgeLongitudeDeg: number; }
 export interface SurfaceCamera { readonly navigation?: ObjectWorldNavigation; }
 export interface MapViewport { left: number; right: number; top: number; bottom: number; }
 export type SurfaceMapReader = ReturnType<typeof createSurfaceMapReader>;
@@ -14,7 +15,8 @@ export function parseSurfaceMapConfig(source: string | undefined): SurfaceMapCon
     if (!Array.isArray(input) || input.length !== 3 || !input.every(component => typeof component === 'number' && Number.isFinite(component))) throw new TypeError('Surface map requires finite three-component axes.');
     return [input[0], input[1], input[2]];
   };
-  return { surfaceSelector: value.surfaceSelector, prime: axis(value.prime), east: axis(value.east), north: axis(value.north) };
+  if (typeof value.mapLeftEdgeLongitudeDeg !== 'number' || !Number.isFinite(value.mapLeftEdgeLongitudeDeg)) throw new TypeError('Surface map requires its left edge longitude.');
+  return { surfaceSelector: value.surfaceSelector, prime: axis(value.prime), east: axis(value.east), north: axis(value.north), mapLeftEdgeLongitudeDeg: value.mapLeftEdgeLongitudeDeg };
 }
 interface MapEntry {
   source: string | undefined; config: SurfaceMapConfig; body: HTMLElement; scene: HTMLElement; nodes: HTMLElement[];
@@ -48,7 +50,7 @@ function surfaceAxes(body: HTMLElement, scene: HTMLElement, config: SurfaceMapCo
 function surfaceSnapshot(body: HTMLElement, scene: HTMLElement, config: SurfaceMapConfig, navigation: ObjectWorldNavigation, windowTarget: BrowserWindow, axes = surfaceAxes(body, scene, config, navigation, windowTarget)) {
   const world = navigation.capture();
   const relative: PositionM = [0, 1, 2].map(i => world.pose.positionM[i] - navigation.frame.originM[i]) as [number, number, number];
-  return { world, relative, axes, scene };
+  return { world, relative, axes, scene, mapLeftEdgeLongitudeDeg: config.mapLeftEdgeLongitudeDeg };
 }
 
 /** One shell-content owner shares the rendered surface axes between its consumers.

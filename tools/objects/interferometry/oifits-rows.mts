@@ -1,12 +1,26 @@
 /** Squared-visibility and closure-phase rows of an OIFITS file, one row per spectral channel, with the channel's wavelength.
  * For a file whose channels stay separate (PIONIER's three H-band channels), the image is fitted at each channel's own
- * wavelength; the statistics are the per-channel chi-squared sums over all rows. */
+ * wavelength; the statistics are the per-channel chi-squared sums over all rows.
+ *
+ * OI_VIS amplitudes and phases are kept per baseline row, not per channel: a differential quantity (OIFITS 2 AMPTYP or
+ * PHITYP "differential", and AMBER's amdlib phases, which state no type) is only defined relative to the other channels of
+ * its row. `flagged` counts squared-visibility and closure-phase cells only, as it always has. */
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from './fits-table.mts';
 import { fitStatistics, type ImagePlane } from './image-fit.mts';
 
 export interface ChannelVis2 { readonly u: number; readonly v: number; readonly wavelengthMetres: number; readonly vis2: number; readonly error: number }
 export interface ChannelT3 { readonly u1: number; readonly v1: number; readonly u2: number; readonly v2: number; readonly wavelengthMetres: number; readonly phaseDegrees: number; readonly errorDegrees: number }
-export interface ChannelRows { readonly vis2: readonly ChannelVis2[]; readonly t3: readonly ChannelT3[]; readonly wavelengthsMetres: readonly number[]; readonly flagged: number }
+export interface VisChannel { readonly wavelengthMetres: number; readonly amplitude: number; readonly amplitudeError: number; readonly phaseDegrees: number; readonly phaseErrorDegrees: number }
+/** One OI_VIS baseline row. `phaseOrder` is the polynomial in wavenumber a differential phase has removed (PHIORDER, 1 when
+ * unstated: amdlib and the ESO pipelines remove an offset and a slope). */
+export interface VisRow {
+  readonly u: number; readonly v: number; readonly channels: readonly VisChannel[];
+  readonly amplitudeType: 'absolute' | 'differential' | 'correlated flux' | 'unstated'; readonly phaseType: 'absolute' | 'differential' | 'unstated'; readonly phaseOrder: number;
+}
+export interface ChannelRows { readonly vis2: readonly ChannelVis2[]; readonly t3: readonly ChannelT3[]; readonly vis: readonly VisRow[]; readonly wavelengthsMetres: readonly number[]; readonly flagged: number }
+
+const amplitudeType = (value: unknown): VisRow['amplitudeType'] => value === 'absolute' || value === 'differential' || value === 'correlated flux' ? value : 'unstated';
+const phaseType = (value: unknown): VisRow['phaseType'] => value === 'absolute' || value === 'differential' ? value : 'unstated';
 
 export function readChannelRows(bytes: Buffer): ChannelRows {
   const hdus = readFitsHdus(bytes);
@@ -34,7 +48,20 @@ export function readChannelRows(bytes: Buffer): ChannelRows {
       for (let k = 0; k < phases.length; k++) { if (flags[k]) { flagged++; continue; } t3.push({ u1, v1, u2, v2, wavelengthMetres: list[k]!, phaseDegrees: phases[k]!, errorDegrees: errors[k]! }); }
     }
   }
-  return { vis2, t3, wavelengthsMetres: [...new Set([...vis2, ...t3].map(row => row.wavelengthMetres))].sort(), flagged };
+  const vis: VisRow[] = [];
+  for (const hdu of hdus.filter(hdu => hdu.extname === 'OI_VIS')) {
+    const table = binaryTable(hdu), list = channels(table);
+    if (!table.columns.some(column => column.name === 'VISPHI')) continue;
+    const kinds = { amplitudeType: amplitudeType(hdu.header.AMPTYP), phaseType: phaseType(hdu.header.PHITYP), phaseOrder: typeof hdu.header.PHIORDER === 'number' ? hdu.header.PHIORDER : 1 };
+    const column = (name: string) => tableColumn(table, name);
+    for (let row = 0; row < table.rows; row++) {
+      const [amplitude, amplitudeError, phase, phaseError, flags] = ['VISAMP', 'VISAMPERR', 'VISPHI', 'VISPHIERR', 'FLAG'].map(name => numbers(bytes, table, row, column(name))) as [number[], number[], number[], number[], number[]];
+      const kept: VisChannel[] = [];
+      for (let k = 0; k < list.length; k++) if (!flags[k]) kept.push({ wavelengthMetres: list[k]!, amplitude: amplitude[k]!, amplitudeError: amplitudeError[k]!, phaseDegrees: phase[k]!, phaseErrorDegrees: phaseError[k]! });
+      if (kept.length) vis.push({ u: numbers(bytes, table, row, column('UCOORD'))[0]!, v: numbers(bytes, table, row, column('VCOORD'))[0]!, channels: kept, ...kinds });
+    }
+  }
+  return { vis2, t3, vis, wavelengthsMetres: [...new Set([...vis2, ...t3].map(row => row.wavelengthMetres))].sort(), flagged };
 }
 
 /** Reduced chi-squared of an image against every channel, each channel transformed at its own wavelength. */

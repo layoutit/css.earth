@@ -15,7 +15,7 @@ try {
   const page = await createTestPage(browser,{ viewport: { width: 1995, height: 1236 }, deviceScaleFactor: 1 });
   page.setDefaultTimeout(30000);
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto(origin + '/sun/?overview=solar-system&v=QIbBkSLwnW4k1MGFkmedQymlwhnOcujO7eZBQsczQAAAAD-gLB5wu8pjv-K4lOO5D4K_x4IgKqGAwAABAAAAAAAAAAA');
+  await page.goto(origin + '/sun/?overview=system&v=QIbBkSLwnW4k1MGFkmedQymlwhnOcujO7eZBQsczQAAAAD-gLB5wu8pjv-K4lOO5D4K_x4IgKqGAwAABAAAAAAAAAAA');
   await page.waitForFunction(() => window.__cssEarth?.ready);
   await page.getByRole('button', { name: 'Record diagnostic data' }).click();
   const id = required(await page.evaluate(() => window.__cssearthTest.required(window.__cssEarthRecorder,'diagnostic recorder').id));

@@ -40,7 +40,7 @@
         "consumer": "challener-2024-eclipse-map",
         "sampling": "bilinear",
         "displaySampling": "bilinear",
-        "outputLongitudeOrigin": -90,
+        "outputLongitudeOrigin": 0,
         "units": "K",
         "values": [
           "whitelight",
@@ -71,6 +71,109 @@
         "description": "Brightness temperature of the whole planet, fitted to how its light changed over a full JWST orbit. Only large patterns are real.",
         "title": "JWST NIRSpec · eclipse map",
         "sourceUrl": "https://zenodo.org/records/12627524"
+      }
+    },
+    {
+      "id": "miri",
+      "output": "wasp-43b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-43b-lens-{id}.webp",
+      "source": "science/jwst-1366-miri/white-5.0-10.5um.csv",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "miri",
+        "label": "MIRI",
+        "format": "eclipse-map-fit",
+        "path": "science/jwst-1366-miri/white-5.0-10.5um.csv",
+        "consumer": "wasp-43b-miri-maps",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "planet": "wasp-43b",
+        "host": "wasp-43",
+        "lightCurve": {
+          "encoding": "csv",
+          "time": "time",
+          "flux": "flux",
+          "error": "err",
+          "mask": "mask",
+          "skipLeading": 780,
+          "columns": [
+            "centroid_y",
+            "psf_width_y"
+          ]
+        },
+        "fit": {
+          "degrees": [
+            2,
+            3
+          ],
+          "eigencurves": [
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "positive": true,
+          "transitExclusionPhase": 0.04,
+          "gridHeight": 90,
+          "systematics": [
+            {
+              "kind": "time"
+            },
+            {
+              "kind": "exponential-ramp",
+              "timeConstantsDays": [
+                0.005,
+                0.01,
+                0.02,
+                0.04,
+                0.08,
+                0.16
+              ]
+            },
+            {
+              "kind": "column",
+              "column": "centroid_y"
+            },
+            {
+              "kind": "column",
+              "column": "psf_width_y"
+            }
+          ],
+          "transitFromLightCurve": true
+        },
+        "band": {
+          "encoding": "count-spectrum-csv",
+          "path": "science/jwst-1366-miri/stellar-counts.csv",
+          "wavelength": "wavelength_um",
+          "counts": "counts",
+          "minimumMicrons": 5.0,
+          "maximumMicrons": 10.5
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml"
+        },
+        "minimum": 700,
+        "maximum": 2000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "700",
+          "1350",
+          "2000"
+        ],
+        "description": "Brightness temperature over 5.0–10.5 µm, fitted in this project to the JWST MIRI phase curve it reduced from raw exposures. Only large patterns are real.",
+        "title": "JWST MIRI · our map from raw data",
+        "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
       }
     }
   ],

@@ -49,7 +49,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 The PDS image header’s body-fixed convenience fields are unavailable, but that does not mean PDS lacks orientation: the separately released PCK supplies it. The selected PCK and Porter 2021 fit have strong source-frame evidence—the PCK cites the same 2021 dimensions and pole fit, and the frozen-pose independent silhouette agrees—but neither release explicitly declares that STL XYZ/longitude zero is the `IAU_NIX` frame. The new interior transfer provides spatially withheld relative alignment evidence in addition to the limb check. It does not recover an absolute prime meridian or a phase at another epoch. The forward detail check is useful, but the reverse disagreement leaves uniform image-to-mesh control unresolved. The photographic view remains a local experiment.
 
-The lens has one LORRI view. It does not establish global coverage, a photometric correction, natural color, or scientific surface units. The published model is an image-constrained shape fit, not a global measured elevation raster.
+The lens has one LORRI view. It does not establish global coverage, a photometric correction, natural color, or scientific surface units. There is no color lens: New Horizons' only MVIC color scan of Nix resolves it across 24 × 17 pixels at 1.99 km per pixel, too coarse to register or to show its red region (see the [investigation ledger](investigations.json)). The published model is an image-constrained shape fit, not a global measured elevation raster.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 

@@ -182,8 +182,8 @@
     {
       "id": "eros-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1180,
-      "expectedSha256": "3ff3335cfad4cb3e06beec85aabb6215a123609eeb010e1e940630bc4070e25e",
+      "expectedBytes": 1148,
+      "expectedSha256": "367b2472a5a0953c0936be2a3995de249b59576a537f925caf93b61d6bf38640",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -200,8 +200,8 @@
     {
       "id": "eros-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 151,
-      "expectedSha256": "60ada4ee5030f75a1b46489f3ea38c55251306c400a700886db709e16e6f447e",
+      "expectedBytes": 183,
+      "expectedSha256": "6e8c1b50fbc63feb0c6fe2aa403e7a52166e67cb9dbaa645b4498780b1963be4",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -271,8 +271,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3762,
-      "expectedSha256": "f5425ad98f8a2d033debde0d30f3c795d7ee68bfe8f8361e9992db7f666b023f"
+      "expectedBytes": 3743,
+      "expectedSha256": "1c2cf09ef6e05e2fd5b78ac739e3ee4812e20177a3893255cd0d33fed6a160b1"
     },
     {
       "path": "presentation/title-mark.json",

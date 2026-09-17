@@ -21,9 +21,8 @@ import {hasErrorCode,requireRecord,requireString,requireFiniteNumber} from '../.
 import {parseDimensions} from './source-records.mts';
 export interface SolidRasterGrid {width:number;height:number;bandCount:number;gutter:number;poleSize:number;}
 export interface TextureGridLens {textureScale?:number;monochromeBase?:string;previewGrid?:{width:number;height:number};surfaceSampling?:unknown;format?:string;}
-import { copyFile, link, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { createHash, randomUUID } from 'node:crypto';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { fromFile } from 'geotiff';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mts';
@@ -299,13 +298,19 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const nearest = categorical || displaySampling === 'nearest';
     const display = missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing) : rgb;
     const rgba = await sharp(display, { raw: { width, height, channels: 3 } }).ensureAlpha().raw().toBuffer();
-    const projected = reprojectSolidBodySurfaceRaster(rgba, { width, height, latitudeSegments: bandCount, sampling: nearest ? 'nearest' : 'bilinear' });
-    const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount, gutter });
-    const { data, ...layout } = packed, stem = `${config.namespace}-${id}`;
-    const normalized = sharp(rgba, { raw: { width, height, channels: 4 } });
+    const stem = `${config.namespace}-${id}`, normalized = sharp(rgba, { raw: { width, height, channels: 4 } });
     const map = await emit(`${stem}-map.webp`, normalized.clone());
-    const surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }), nearest ? { lossless: true, effort: 4 } : surfaceEncoding(config));
     const thumbnail = await emit(`${stem}-thumbnail.webp`, normalized.clone().resize(96, 48, { kernel: nearest ? 'nearest' : 'lanczos3' }));
+    // A radial body draws its surface from a triangle atlas that prepareRadialMaterials writes over this surface and layout,
+    // so the banded projection is not built or encoded for it; index.mts refuses a radial surface left without its atlas.
+    let surface = map, layout: SolidSurface['layout'] = { kind: 'radial-triangle-atlas-pending' };
+    if (!radial) {
+      const projected = reprojectSolidBodySurfaceRaster(rgba, { width, height, latitudeSegments: bandCount, sampling: nearest ? 'nearest' : 'bilinear' });
+      const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount, gutter });
+      const { data, ...packedLayout } = packed;
+      surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }), nearest ? { lossless: true, effort: 4 } : surfaceEncoding(config));
+      layout = packedLayout;
+    }
     return { id, ...metadata, ...(categorical ? { categorical: true } : {}), ...(nearest ? { displaySampling: 'nearest' } : {}), map, surface, thumbnail, layout,
       ...(missing && config.raster.reportMissingPixels ? { missingPixels: missing.reduce((sum, value) => sum + value, 0) } : {}) };
   }
@@ -331,42 +336,27 @@ export function lambertAttenuationAtlas({ frameSize, columns, frameCount, termin
   return { pixels, width, height, rows };
 }
 
-export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, config }: {surfaces: SolidSurface[]; publicDirectory: string; config: Pick<SolidMaterialConfig, 'namespace' | 'publicBase' | 'raster'>}) {
+export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; config: Pick<SolidMaterialConfig, 'namespace' | 'publicBase' | 'raster'>; radial?: boolean}) {
   for (const surface of surfaces) {
     const { poleSize } = lensTextureGrid(surface, config.raster);
     const { data, info } = await sharp(resolve(publicDirectory, requireString(surface.map.url.split('/').at(-1)))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-    const atlas = prepareSolidBodyPoleRaster(data, { width: info.width, height: info.height, tileSize: poleSize, sampling: surface.displaySampling === 'nearest' ? 'nearest' : 'bilinear' });
     const filename = `${config.namespace}-${surface.id}-poles@2x.webp`;
     surface.polesUrl = `${config.publicBase}${filename}`;
-    await sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }).webp(surface.displaySampling === 'nearest' ? { lossless: true, effort: 4 } : surfaceEncoding(config)).toFile(resolve(publicDirectory, filename));
+    // A radial body's poles come from its triangle atlas (prepareRadialMaterials replaces polesUrl), so no pole image is drawn for it.
+    if (!radial) {
+      const atlas = prepareSolidBodyPoleRaster(data, { width: info.width, height: info.height, tileSize: poleSize, sampling: surface.displaySampling === 'nearest' ? 'nearest' : 'bilinear' });
+      await sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }).webp(surface.displaySampling === 'nearest' ? { lossless: true, effort: 4 } : surfaceEncoding(config)).toFile(resolve(publicDirectory, filename));
+    }
     const mean = await sharp(data, { raw: info }).resize(1, 1).removeAlpha().raw().toBuffer();
     surface.billboardColor = `#${mean.subarray(0, 3).toString('hex')}`;
   }
 }
 
-/**
- * The attenuation atlas is one image for every body that shares its parameters, and its lossless encoding takes about 30 s.
- * The encoded bytes are kept under the digest of the pixels, the encoder options and the libvips build, created once and never
- * replaced, so a body reuses them byte for byte and a changed generator or encoder simply finds no entry.
- */
-async function encodeLightingAtlas(pixels: Uint8Array, width: number, height: number, destination: string) {
-  const options = { lossless: true, quality: 100, effort: 6 };
-  const key = createHash('sha256').update(pixels).update(JSON.stringify([width, height, options, sharp.versions])).digest('hex');
-  const cached = resolve(process.cwd(), '.local/lighting-atlas', `${key}.webp`);
-  try { await copyFile(cached, destination); return; } catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
-  await sharp(pixels, { raw: { width, height, channels: 4 } }).webp(options).toFile(destination);
-  await mkdir(dirname(cached), { recursive: true });
-  const temporary = `${cached}.${randomUUID()}.tmp`;
-  await copyFile(destination, temporary);
-  // A hard link creates the entry only if no other body wrote it first; either way the bytes are the same.
-  try { await link(temporary, cached); } catch (error) { if (!hasErrorCode(error, 'EEXIST')) throw error; } finally { await rm(temporary, { force: true }); }
-}
-
-export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDirectory, config }: {surfaces: SolidSurface[]; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig}) {
-  await prepareSolidSurfacePoles({ surfaces, publicDirectory, config });
+export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig; radial?: boolean}) {
+  await prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial });
   const { pixels, width, height, rows } = lambertAttenuationAtlas(config.lighting);
   const filename = `${config.namespace}-lighting.webp`, url = `${config.publicBase}${filename}`;
-  await encodeLightingAtlas(pixels, width, height, resolve(publicDirectory, filename));
+  await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(resolve(publicDirectory, filename));
   const { columns, frameCount, logicalSize } = config.lighting;
   const frames = Array.from({ length: frameCount }, (_, frame) => ({ resource: 'lighting', frame, row: 0,
     backgroundPosition: `${-(frame % columns) * logicalSize}px ${-Math.floor(frame / columns) * logicalSize}px`,

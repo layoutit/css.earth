@@ -35,8 +35,5 @@ test('a positive rotation turns image-up counterclockwise on the y-down screen',
   // Rotated 90 degrees counterclockwise the marker moves to the left.
   const left = offLimbPlate(source, { ...display, rotationDegrees: 90 }, size, bodyDiameter);
   assert.ok(pixel(left, size, 200 - 130, 200)[3]! > 0, 'marker left of the centre'); assert.equal(pixel(left, size, 200, 200 - 130)[3], 0);
-  // Mirrored, the same rotation sends the marker to the right instead.
-  const mirrored = offLimbPlate(source, { ...display, rotationDegrees: 90, mirror: true }, size, bodyDiameter);
-  assert.ok(pixel(mirrored, size, 200 + 130, 200)[3]! > 0, 'mirrored marker right of the centre');
   assert.throws(() => offLimbPlate(source, { ...display, low: 0 }, size, bodyDiameter), /display stretch/);
 });

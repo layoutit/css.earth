@@ -1,6 +1,5 @@
-/** What the default camera shows, from the runtime's camera math and the pinned records, with no browser.
- * The numbers were also measured in Chrome through the app's world camera and the polar-cap leaf (2026-09-16):
- * sub-camera longitude -12.1, latitude -10.5 at pitch 0; pole 40.06 degrees from screen-right at the default camera. */
+/** What the default camera shows, from the runtime's camera math and the pinned records, with no browser. The presentation puts the
+ * ALMA pole up, so the camera orbit lies in the star's equator, which contains the line of sight from Earth. */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -13,33 +12,34 @@ const json = async (path: string) => JSON.parse(await readFile(resolve(BODY, pat
 const DEG = Math.PI / 180;
 const direction = (ra: number, dec: number): [number, number, number] => [Math.cos(dec * DEG) * Math.cos(ra * DEG), Math.cos(dec * DEG) * Math.sin(ra * DEG), Math.sin(dec * DEG)];
 
-test('the default camera looks at the photographed hemisphere, as close as the orbit reaches', async () => {
+test('the default camera looks at the photographed hemisphere, two degrees off the sub-Earth point', async () => {
   const descriptor = requireRecord(await json('object.json')), runtime = requireRecord(await json('prepared/runtime.json'));
   const raster = requireRecord(await json('source/preparation/raster.json'));
   const lensFrame = requireRecord(requireArray(requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0]).science).lens).frames)[0]);
   const subObserver = { longitudeDegrees: -requireFiniteNumber(lensFrame.observerWestLongitude), latitudeDegrees: requireFiniteNumber(lensFrame.observerLatitude) };
   const camera = requireRecord(runtime.camera) as never, worldFrame = requireRecord(requireRecord(descriptor.properties).worldFrame) as never;
   const view = defaultViewGeometry('betelgeuse', camera, worldFrame);
-  // From Betelgeuse the Earth lies below the ecliptic plane the orbit never pitches under, so the best default is 18 degrees off.
   const separation = angularSeparationDegrees(view.subCamera, subObserver);
-  assert.ok(separation < 20, `default view ${separation.toFixed(1)} degrees from the sub-observer point`);
-  assert.ok(Math.abs(view.subCamera.longitudeDegrees - -13.7) < 0.5 && Math.abs(view.subCamera.latitudeDegrees - -11.8) < 0.5,
+  assert.ok(separation < 2.5, `default view ${separation.toFixed(1)} degrees from the sub-observer point`);
+  assert.ok(Math.abs(view.subCamera.longitudeDegrees) < 0.1 && Math.abs(view.subCamera.latitudeDegrees + 2) < 0.1,
     `sub-camera point ${view.subCamera.longitudeDegrees.toFixed(1)}, ${view.subCamera.latitudeDegrees.toFixed(1)}`);
 });
 
-test('the pole and the sky directions land where the browser measured them', async () => {
+test('the pole stands up and the sky keeps its handedness: north 48 degrees clockwise of the pole, east counterclockwise of north', async () => {
   const descriptor = requireRecord(await json('object.json')), runtime = requireRecord(await json('prepared/runtime.json'));
   const rotation = requireRecord(await json('source/preparation/rotation.json'));
   const star = requireRecord(requireRecord(JSON.parse(await readFile(resolve(BODY, '../../../packages/astronomy/data/bodies/betelgeuse.json'), 'utf8')) as unknown).star);
   const view = defaultViewGeometry('betelgeuse', requireRecord(runtime.camera) as never, requireRecord(requireRecord(descriptor.properties).worldFrame) as never);
   const pole = view.screen(direction(requireFiniteNumber(rotation.rightAscensionDegrees), requireFiniteNumber(rotation.declinationDegrees)));
-  assert.ok(Math.abs(pole.angleDegrees - 40.1) < 0.5, `pole ${pole.angleDegrees.toFixed(2)} degrees from screen-right (Chrome measured 40.06)`);
-  // The lens's off-limb plate is turned to this angle: image north 48 degrees clockwise of the pole (mirrored), so image-up is at -1.6 degrees.
+  assert.ok(Math.abs(pole.angleDegrees - 90) < 0.1, `pole ${pole.angleDegrees.toFixed(2)} degrees from screen-right`);
+  // The pole lies 48 degrees east of north on the sky, so celestial north sits 48 degrees clockwise of it; the lens's off-limb plate turns image-up by -48 degrees.
   const ra = requireFiniteNumber(star.rightAscensionDegrees), dec = requireFiniteNumber(star.declinationDegrees);
   const north = view.screen([-Math.sin(dec * DEG) * Math.cos(ra * DEG), -Math.sin(dec * DEG) * Math.sin(ra * DEG), Math.cos(dec * DEG)]);
   const east = view.screen([-Math.sin(ra * DEG), Math.cos(ra * DEG), 0]);
-  assert.ok(Math.abs(north.angleDegrees - 90) < 1, `celestial north is up: ${north.angleDegrees.toFixed(1)}`);
-  // Measured, not endorsed: on the sky east is 90 degrees counterclockwise of north; the scene shows it clockwise. See the README.
+  assert.ok(Math.abs(north.angleDegrees - 42) < 0.1, `celestial north at ${north.angleDegrees.toFixed(1)} degrees from screen-right`);
+  // As on the sky seen from Earth, east is 90 degrees counterclockwise of north.
   const eastFromNorth = ((east.angleDegrees - north.angleDegrees) % 360 + 540) % 360 - 180;
-  assert.ok(Math.abs(eastFromNorth + 90) < 1, `east is ${eastFromNorth.toFixed(1)} degrees from north on screen`);
+  assert.ok(Math.abs(eastFromNorth - 90) < 0.1, `east is ${eastFromNorth.toFixed(1)} degrees from north on screen`);
+  const offLimb = requireRecord(requireRecord(requireRecord(requireArray(requireRecord(await json('source/preparation/raster.json')).surfaces)[0]).science).offLimb);
+  assert.ok(Math.abs(requireFiniteNumber(offLimb.rotationDegrees) - (north.angleDegrees - 90)) < 0.1, 'the off-limb plate turns image north onto celestial north');
 });

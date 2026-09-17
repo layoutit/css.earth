@@ -23,7 +23,7 @@ export type { ObjectSharedView, ObjectSceneLifecycle, DeferredMountOptions } fro
 export { createNavigableObjectMount } from './runtime/navigable-object-mount.js';
 export { parsePreparedWorldCameraFrame } from './validation/world-frame.js';
 export { worldCameraFromCenteredPresentation, presentWorldCamera } from './navigation/world-camera.js';
-export { worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
+export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldReflection, worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
 export type { PreparedWorldCameraFrame, WorldCameraPose } from './navigation/world-camera.js';
 export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './runtime/world-navigation-types.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';

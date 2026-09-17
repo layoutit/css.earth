@@ -31,6 +31,11 @@
               "id": "temperature",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "miri",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
@@ -100,7 +105,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2a9d5d69e963f686c5583137e004fb44556ff5a9d454a4dd998abb0198d9fb09"
+        "sha256": "e543597020f577dd6edca7513e003e6589a6ff836218dbbad909cc5f12a48b44"
       }
     },
     "catalog": {
@@ -109,7 +114,7 @@
       "color": "#e97a54",
       "distanceAu": 17976692.3,
       "description": "Hot Jupiter whose heat map JWST measured from its eclipses.",
-      "systemName": "WASP-43",
+      "systemName": "WASP-43 system",
       "order": 906,
       "context": {
         "order": 903
@@ -124,15 +129,15 @@
         -458043586291200000
       ],
       "presentationToReference": [
-        -0.9419285047378485,
+        -0.8775754434887368,
         0.29829147416959223,
-        0.15424943565554022,
-        0.2903470823037573,
+        0.37534455827050256,
+        0.2837555569989943,
         0.9541916795936617,
-        -0.072227490555343,
-        -0.16872837271785784,
+        -0.09487371852318978,
+        0.38645067584070514,
         -0.02324725859017409,
-        -0.9853884011941816
+        0.9220170497937139
       ],
       "orbitUpReference": [
         -0.29829147416959223,
@@ -146,6 +151,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2c959a474c201de9e82079f37552e8f98ef619ef80e8ea76ad82750a2ae12289"
+    "sha256": "ec11fc1acb1b5a2252283294c428b0f0a5a87949624da174817b7bc0d75d66da"
   }
 }

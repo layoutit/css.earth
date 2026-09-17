@@ -848,8 +848,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9635,
-      "expectedSha256": "f8bd8c0fc8685a933ffd43229d7d1b552f41a6a950b8a03fb0157c308cc1c287"
+      "expectedBytes": 9616,
+      "expectedSha256": "684feba5a39fab7b1f953cbcdb1b762e4fcceda988ce6c0ff103ff88e63d2918"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -930,8 +930,8 @@
     {
       "id": "dimorphos-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1193,
-      "expectedSha256": "c93be12a666cd7216804b2e6c2c59a3bc1385a1f63ba92f5a22f51bfe7bd48a2",
+      "expectedBytes": 1161,
+      "expectedSha256": "08a35d36d90f933260a95f34aa43c3b72bcd47663b74b8bdd4215ad2b670f8f7",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -948,8 +948,8 @@
     {
       "id": "dimorphos-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "49a8398207a279568f098d9629215d1b3f33dee77c82ac50669540b4837a704d",
+      "expectedBytes": 188,
+      "expectedSha256": "90817538597c6ec594d451248cd2cf56fc55d48046aa0a1c87d5190ff819721b",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

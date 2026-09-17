@@ -1887,8 +1887,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 19667,
-      "expectedSha256": "74dcc6ec8a1572984b088092310bd661da87329c81c8a323fc45df12c1fc88fd"
+      "expectedBytes": 19648,
+      "expectedSha256": "836f3ac59b3c7d69be91da9ed14e2c0402023522e1800a3248a7de22d739bd05"
     },
     {
       "path": "presentation/minimap.json",
@@ -1928,8 +1928,8 @@
         "kind": "local",
         "reason": "Source-camera feature registration job; fits detector translation and roll against pinned reference images on the unchanged published shape with disjoint held-out patches."
       },
-      "expectedBytes": 2396,
-      "expectedSha256": "3b14fbc8e3095ad7f975935df3a337033f33ae8013b5c433cdf5d156b31e8b80"
+      "expectedBytes": 2379,
+      "expectedSha256": "0a5c0021e0ebea6151071e4233de08cd804d25b08150a49d63283e6ff86b88d1"
     },
     {
       "path": "preparation/close-encounters-filters.json",
@@ -1937,8 +1937,8 @@
         "kind": "local",
         "reason": "Source-camera feature registration job; fits detector translation and roll against pinned reference images on the unchanged published shape with disjoint held-out patches."
       },
-      "expectedBytes": 3444,
-      "expectedSha256": "427defe52d787506f5aaa192837a5fd6f74750f6273ff0a2f720c6eeac71d534"
+      "expectedBytes": 3427,
+      "expectedSha256": "3382868b0ce4f24008db1f18f3f632f969c7780b004c47a8c4b8bf3f725c56eb"
     },
     {
       "path": "validation/close-encounters-reference.json",

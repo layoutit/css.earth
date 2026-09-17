@@ -23,7 +23,8 @@ import PlanetFactsheet from './PlanetFactsheet.astro';
 import InformationTabs from './InformationTabs.astro';
 import PlanetAccordion from './PlanetAccordion.astro';
 import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
-import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
+import { OVERVIEW_TITLES, SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
+import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
@@ -57,11 +58,12 @@ const speedValues: Readonly<Record<string, number>> = Object.freeze({
 const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const activeObject = SCENE_OBJECTS.find((object) => object.id === objectId);
-const systemStar = SCENE_OBJECTS.find(object => object.classification === 'star' && object.distance.meters === 0)!;
-// Placed stars whose planets carry imagery are browsable systems; the registry decides, not a list.
+const systemStar = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!;
+// Every prepared planetary system is browsable; the orbits decide, not a list.
 const LIGHT_YEAR_M = 9460730472580800;
-const hostedSystems = SCENE_OBJECTS.filter(object => object.classification === 'star' && object.discovery.hostsImagery)
-  .map(star => ({ star, distanceLy: Math.round(star.distance.meters / LIGHT_YEAR_M) }))
+const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({ system, star: SCENE_OBJECTS.find(object => object.id === system.id)! }));
+const hostedSystems = systems.filter(({ system }) => system.id !== SOLAR_SYSTEM_ID)
+  .map(({ system, star }) => ({ system, star, distanceLy: Math.round(star.distance.meters / LIGHT_YEAR_M) }))
   .sort((a, b) => a.distanceLy - b.distanceLy);
 const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
@@ -314,13 +316,13 @@ const searchCategories = ([
           role="region" aria-label="Planetary systems">
           <ul class="planet-object-list">
             <li>
-              <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${systemStar.route}?overview=solar-system`} data-browse-solar-system aria-label="Browse Solar System">
+              <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${systemStar.route}?overview=system`} data-browse-solar-system aria-label="Browse Solar System">
                 <span class="planet-lens-icon"><PlanetNavigationMarker planetId={systemStar.id} color={systemStar.color} /></span>
                 <span class="planet-object-name planet-lens-label">Solar System</span>
               </a>
             </li>
-            {hostedSystems.map(({ star, distanceLy }) => <li>
-              <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={star.route} data-object-id={star.id} aria-label={`Browse ${star.name} system`}>
+            {hostedSystems.map(({ system, star, distanceLy }) => <li>
+              <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${system.route}?overview=system`} data-browse-system={system.id} aria-label={`Browse ${system.name}`}>
                 <span class="planet-lens-icon"><PlanetNavigationMarker planetId={star.id} color={star.color} /></span>
                 <span class="planet-object-name planet-lens-label">{star.name}</span>
                 <span class="planet-object-distance planet-lens-detail">
@@ -347,11 +349,12 @@ const searchCategories = ([
         </div>
       </PlanetCard>
       <ExtragalacticOverviews />
-      <PlanetCard class="planet-overview-card" data-solar-system-results>
-        <PlanetCardHeader heading={false} title={OVERVIEW_TITLES['solar-system']}
-          introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.">
-          <PlanetBreadcrumbs scope="solar-system" />
-        </PlanetCardHeader>
+      <PlanetCard class="planet-overview-card" data-system-results>
+        {systems.map(({ system, star }) => <PlanetCardHeader heading={false} title={SYSTEM_TITLES[system.id]!}
+          data-system-header={system.id} data-system-current={system.id === SOLAR_SYSTEM_ID ? '' : undefined}
+          introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
+          <PlanetBreadcrumbs scope="system" systemId={system.id} />
+        </PlanetCardHeader>)}
         <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
           <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
             aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>

@@ -244,8 +244,7 @@
         "compression": "gzip"
       },
       "faceBudget": 850,
-      "tileSize": 128,
-      "atlasColumns": 16,
+      "texelsPerFace": 16384,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",

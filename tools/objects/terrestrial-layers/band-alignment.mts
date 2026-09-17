@@ -25,10 +25,14 @@ function sample(image:AlignmentImage,a:ArrayLike<number>,x:number,y:number,valid
  const w=image.width,margin=S.minimumConvolutionMarginPixels;
  if(x<margin||y<margin||x>=w-margin||y>=image.height-margin)return null;
  const ix=Math.floor(x),iy=Math.floor(y),u=x-ix,v=y-iy,i=iy*w+ix;
- const ns=[a[i],a[i+1],a[i+w],a[i+w+1]];
- if(ns.some(n=>!Number.isFinite(n))||(validity?[validity[i],validity[i+1],validity[i+w],validity[i+w+1]]:ns).some(n=>!Number.isFinite(n)||n<S.minimumValidSignal))return null;
- return (ns[0]*(1-u)+ns[1]*u)*(1-v)+(ns[2]*(1-u)+ns[3]*u)*v;
+ // Scalar neighbours: the search below samples every patch point at hundreds of offsets.
+ const n0=a[i],n1=a[i+1],n2=a[i+w],n3=a[i+w+1];
+ if(!Number.isFinite(n0)||!Number.isFinite(n1)||!Number.isFinite(n2)||!Number.isFinite(n3))return null;
+ const g0=validity?validity[i]:n0,g1=validity?validity[i+1]:n1,g2=validity?validity[i+w]:n2,g3=validity?validity[i+w+1]:n3;
+ if(!valid(g0)||!valid(g1)||!valid(g2)||!valid(g3))return null;
+ return (n0*(1-u)+n1*u)*(1-v)+(n2*(1-u)+n3*u)*v;
 }
+const valid=(n:number)=>Number.isFinite(n)&&!(n<S.minimumValidSignal);
 function detail({data:values,width:w,height:h}:AlignmentImage){
  const integral=new Float64Array((w+1)*(h+1));
  for(let y=0;y<h;y++){let row=0;for(let x=0;x<w;x++){row+=Number.isFinite(values[y*w+x])?values[y*w+x]:0;integral[(y+1)*(w+1)+x+1]=integral[y*(w+1)+x+1]+row;}}
@@ -88,7 +92,9 @@ export function alignCameraBands<F extends AlignmentFrame>({mesh,camera,referenc
    const visible=patch.points.every(p=>{const delta=p.map((n,i)=>n-projector.position[i]),distance=Math.hypot(...delta),hit=mesh.intersect(projector.position,delta.map(n=>n/distance));return hit&&Math.abs(hit.radius-distance)<S.maximumSourceMeshVisibilityResidualMeters;});
    if(!visible)continue;
    const xy=patch.points.map(p=>projector.project(p));if(xy.some(v=>!v))continue;
-   const score=(dx:number,dy:number)=>{const b=xy.map(p=>p?sample(image,targetDetail,p[0]+dx,p[1]+dy,image.data):null);return b.some(v=>v===null)?-1:ncc(patch.values,b.filter((v):v is number=>v!==null));};
+   // Any point without a sample fails the offset, so the walk stops at the first; the rest fill one reused array in patch order.
+   const shifted=new Array<number>(xy.length);
+   const score=(dx:number,dy:number)=>{for(let i=0;i<xy.length;i++){const p=xy[i]!,value=sample(image,targetDetail,p[0]+dx,p[1]+dy,image.data);if(value===null)return -1;shifted[i]=value;}return ncc(patch.values,shifted);};
    let best=-1,bx=0,by=0;
    for(let dy=origin[1]-search;dy<=origin[1]+search;dy++)for(let dx=origin[0]-search;dx<=origin[0]+search;dx++){const s=score(dx,dy);if(s>best){best=s;bx=dx;by=dy;}}
    if(best<C.minimumCorrelation||Math.abs(bx-origin[0])===search||Math.abs(by-origin[1])===search)continue;

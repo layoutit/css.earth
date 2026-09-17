@@ -1,12 +1,13 @@
 import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
-import { transposeWorldRotation, worldRotationCss, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
 import { validatePreparedCssSky, validatePreparedSkyParallax } from './validation.js';
 
 /** Transports retained celestial images through the shared physical observer pose.
- * The baked-star faces are the background at every distance until the volume takes over. */
+ * A sky with baked stars carries two cubes: the Sun's neighbour stars over the diffuse Milky Way. The star cube shows
+ * at `near` opacity; the plain cube stays the background from another star, where those stars would be misplaced. */
 export function mountPreparedCssSky({ host, before, payload: input, resources, resolveResource }: {
   host: HTMLElement; before: Element; payload: PreparedCssSky; resources: PreparedCssVolume['resources']; resolveResource(path: string): string;
 }) {
@@ -33,19 +34,32 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
       boundedFaces.push({ node, bounds: face.boundsCssPixels, shown: true });
     }
     camera.appendChild(scene); wrapper.appendChild(camera); root.appendChild(wrapper);
-    return { wrapper, camera, scene, boundedFaces };
+    return { wrapper, camera, scene, boundedFaces, opacity: 1, shown: true };
   };
-  const cubes = [mountCube(payload.nearFaces ?? payload.faces, payload.nearFaces ? 'prepared-celestial-sky-near' : 'prepared-celestial-sky-far')];
+  const cubes = [mountCube(payload.faces, 'prepared-celestial-sky-far')];
+  if (payload.nearFaces) {
+    cubes.push(mountCube(payload.nearFaces, 'prepared-celestial-sky-near'));
+    // The opaque star cube covers the plain one, which leaves layout, and so image loading, until the handoff needs it.
+    cubes[0]!.shown = false; cubes[0]!.wrapper.style.display = 'none';
+  }
   host.insertBefore(root, before);
   let destroyed = false, previousTransform = '', previousPerspective = '', previousOrigin = '', previousClipView = '';
   return Object.freeze({ root,
-    publish(world: WorldCameraPose, viewport: WorldCameraViewport, visible = true): void {
+    /** `near` is the baked-star cube's opacity: 1 in the Sun's neighbourhood, 0 once its parallax shows. */
+    publish(world: WorldCameraPose, viewport: WorldCameraViewport, visible = true, near = 1): void {
       if (destroyed) return;
       if (world.referenceFrame !== payload.referenceFrame || world.epochJdTt !== payload.epochJdTt) throw new TypeError('Prepared sky and observer reference frames differ.');
       const pose = preparedSkyCameraPose(world, viewport, payload.parallax);
       const transform = skyTransformCss(pose);
       root.style.visibility = visible ? 'visible' : 'hidden';
       if (!visible) return;
+      if (cubes.length === 2) {
+        const nearOpacity = Math.max(0, Math.min(1, near)), far = cubes[0]!, close = cubes[1]!;
+        if (nearOpacity !== close.opacity) { close.opacity = nearOpacity; close.wrapper.style.opacity = nearOpacity === 1 ? '' : String(nearOpacity); }
+        const farShown = nearOpacity < 1, closeShown = nearOpacity > 0;
+        if (farShown !== far.shown) { far.shown = farShown; far.wrapper.style.display = farShown ? '' : 'none'; }
+        if (closeShown !== close.shown) { close.shown = closeShown; close.wrapper.style.display = closeShown ? '' : 'none'; }
+      }
       const perspective = `${format(viewport.focalPixels)}px`, origin = `calc(50% + ${format(viewport.principalOffsetPixels[0])}px) calc(50% + ${format(viewport.principalOffsetPixels[1])}px)`;
       if (perspective !== previousPerspective) { for (const cube of cubes) cube.camera.style.perspective = perspective; previousPerspective = perspective; }
       if (origin !== previousOrigin) { for (const cube of cubes) cube.camera.style.perspectiveOrigin = origin; previousOrigin = origin; }
@@ -76,7 +90,7 @@ function preparedSkyCameraPose(world: WorldCameraPose, viewport: WorldCameraView
       world.pose.orientationXyzw.length !== 4 || !world.pose.orientationXyzw.every(Number.isFinite) || Math.abs(Math.hypot(...world.pose.orientationXyzw) - 1) > 1e-9) {
     throw new TypeError('Prepared sky observer or projection is invalid.');
   }
-  const view = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+  const view = cssViewFromOrientation(world.pose.orientationXyzw);
   // Prepared PolyCSS vertices are [ICRF y, ICRF x, ICRF z]. This is the same
   // single renderer reflection as the shared volume camera.
   const rotation = [view[1], view[0], view[2], view[4], view[3], view[5], view[7], view[6], view[8]];

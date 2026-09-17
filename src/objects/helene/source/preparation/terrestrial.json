@@ -587,8 +587,7 @@
         "indexBase": 0
       },
       "faceBudget": 2000,
-      "tileSize": 128,
-      "atlasColumns": 16,
+      "texelsPerFace": 16384,
       "simplification": {
         "targetFaces": 800,
         "maximumErrorMeters": 300,

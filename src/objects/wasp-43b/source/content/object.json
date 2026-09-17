@@ -66,8 +66,8 @@
     "controls": [
       {
         "id": "temperature",
-        "label": "Temperature",
-        "qualification": "Eclipse map · 3rd-degree harmonics · JWST NIRSpec 2023 phase curve",
+        "label": "NIRSpec",
+        "qualification": "Published map · Challener et al. 2024 · JWST NIRSpec 2.9–5.2 µm, 2023",
         "thumbnail": "wasp-43b-lens-temperature.webp",
         "surface": "wasp-43b-surface-temperature.webp",
         "poles": "wasp-43b-poles-temperature.webp",
@@ -123,6 +123,66 @@
           "sourceUrl": "https://zenodo.org/records/12627524"
         },
         "notes": "Brightness temperature fitted to JWST light curves; large patterns only. The hot spot sits about 7° east of noon and south of the equator; how far south depends on the model, 4° to 16°."
+      },
+      {
+        "id": "miri",
+        "label": "MIRI",
+        "qualification": "Reduced here from raw JWST exposures · MIRI 5–10.5 µm, 2022",
+        "thumbnail": "wasp-43b-lens-miri.webp",
+        "surface": "wasp-43b-surface-miri.webp",
+        "poles": "wasp-43b-poles-miri.webp",
+        "source": {
+          "id": "wasp-43b-miri-white",
+          "path": "../manifest.json",
+          "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "700",
+            "1350",
+            "2000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "700",
+              "1350",
+              "2000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
+        },
+        "notes": "Dayside and nightside agree with Bell et al. (2024). The hot spot sits about 6° east of noon; published analyses of the same data place it up to 7.5° east."
       }
     ]
   },

@@ -147,8 +147,7 @@
       "latitudeSegments": 64,
       "longitudeSegments": 128,
       "faceBudget": 850,
-      "tileSize": 128,
-      "atlasColumns": 16,
+      "texelsPerFace": 16384,
       "lightFieldSize": 4,
       "primitive": "u",
       "simplification": {

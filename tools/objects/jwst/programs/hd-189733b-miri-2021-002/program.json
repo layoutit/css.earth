@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-jwst-tso-program@1",
+  "id": "hd-189733b-miri-2021-002",
+  "title": "HD 189733b MIRI/LRS slitless eclipse 1, JWST program 2021 observation 002",
+  "planet": "hd-189733b",
+  "eventName": "hd189733b",
+  "instrument": "MIRI/SLITLESSPRISM",
+  "credit": "JWST program 2021; raw exposures from MAST",
+  "crdsContext": "jwst_1535.pmap",
+  "batchSegments": 5,
+  "stages": {
+    "S1": "S1_hd189733b.ecf",
+    "S2": "S2_hd189733b.ecf",
+    "S3": "S3_hd189733b.ecf",
+    "S4": "S4_hd189733b.ecf",
+    "S4channels": "S4_hd189733b_channels.ecf"
+  },
+  "settingsSource": "Bell et al. (2024)'s Eureka! v1 settings for MIRI/LRS as in wasp-43b-miri-1366, with Lally et al. (2025)'s choices for this star: background fitted linearly (bg_deg 1) outside a 24-pixel aperture (bg_hw 12), and the white light curve in the Spitzer 8 um band, 6.37-9.43 um",
+  "segments": [
+    {
+      "name": "jw02021002001_04103_00001-seg001_mirimage_uncal.fits",
+      "bytes": 911885760,
+      "uri": "mast:JWST/product/jw02021002001_04103_00001-seg001_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02021002001_04103_00001-seg002_mirimage_uncal.fits",
+      "bytes": 911885760,
+      "uri": "mast:JWST/product/jw02021002001_04103_00001-seg002_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02021002001_04103_00001-seg003_mirimage_uncal.fits",
+      "bytes": 911885760,
+      "uri": "mast:JWST/product/jw02021002001_04103_00001-seg003_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02021002001_04103_00001-seg004_mirimage_uncal.fits",
+      "bytes": 911885760,
+      "uri": "mast:JWST/product/jw02021002001_04103_00001-seg004_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02021002001_04103_00001-seg005_mirimage_uncal.fits",
+      "bytes": 911885760,
+      "uri": "mast:JWST/product/jw02021002001_04103_00001-seg005_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02021002001_04103_00001-seg006_mirimage_uncal.fits",
+      "bytes": 910013760,
+      "uri": "mast:JWST/product/jw02021002001_04103_00001-seg006_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02021002001_04103_00001-seg007_mirimage_uncal.fits",
+      "bytes": 910013760,
+      "uri": "mast:JWST/product/jw02021002001_04103_00001-seg007_mirimage_uncal.fits"
+    }
+  ],
+  "oracle": {
+    "kind": "deposit-files",
+    "title": "Data Products for Eclipse Mapping with MIRI: 2D Map of HD 189733b from 8um JWST MIRI LRS Observations (Lally et al. 2025)",
+    "record": "https://zenodo.org/records/15103479",
+    "license": "CC BY 4.0",
+    "time": "Eureka_eclipse1_8mu_clipped-time.txt",
+    "flux": "Eureka_eclipse1_8mu_clipped-flux.txt",
+    "err": "Eureka_eclipse1_8mu_clipped-ferr.txt",
+    "map": "output_E.npy",
+    "dvectors": "Eureka_eclipse1_8mu_clipped-dvectors.txt",
+    "files": [
+      {
+        "path": "Eureka_eclipse1_8mu_clipped-time.txt",
+        "url": "https://zenodo.org/api/records/15103479/files/Eureka_eclipse1_8mu_clipped-time.txt/content",
+        "bytes": 424950,
+        "md5": "aab7b8ba012c6438569a8bbf4a729dd9"
+      },
+      {
+        "path": "Eureka_eclipse1_8mu_clipped-flux.txt",
+        "url": "https://zenodo.org/api/records/15103479/files/Eureka_eclipse1_8mu_clipped-flux.txt/content",
+        "bytes": 424950,
+        "md5": "a0ebf37da46b7dd34ffadf93c8123827"
+      },
+      {
+        "path": "Eureka_eclipse1_8mu_clipped-ferr.txt",
+        "url": "https://zenodo.org/api/records/15103479/files/Eureka_eclipse1_8mu_clipped-ferr.txt/content",
+        "bytes": 424950,
+        "md5": "c0e2cda22ecd0fef67fce31249411911"
+      },
+      {
+        "path": "Eureka_eclipse1_8mu_clipped-dvectors.txt",
+        "url": "https://zenodo.org/api/records/15103479/files/Eureka_eclipse1_8mu_clipped-dvectors.txt/content",
+        "bytes": 1300347,
+        "md5": "e4e4e3473e1cffefad30dc75b901f632"
+      },
+      {
+        "path": "output_E.npy",
+        "url": "https://zenodo.org/api/records/15103479/files/output_E.npy/content",
+        "bytes": 922286,
+        "md5": "dfb3f096bef955f228ed7e4d4bda12f0"
+      }
+    ]
+  }
+}

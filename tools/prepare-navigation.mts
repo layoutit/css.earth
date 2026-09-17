@@ -205,24 +205,31 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
   const parents = new Set<string | null | undefined>(planets.filter(({ classification }) => classification === "satellite")
     .map(({ id }) => bodies[id]?.parent).filter(Boolean));
   const markers: Record<string, {url: string; pixels: number}> = {};
-  for (const descriptor of descriptors) {
-    if (!parents.has(descriptor.planetId) && !descriptor.context) continue;
-    const sourcePath = resolve(projectRoot, "src/objects", descriptor.planetId, "source", descriptor.source.path);
-    let crop = await readMarkerImage(descriptor.source, sourcePath);
-    for (const operation of descriptor.operations) {
-      if (operation.type === "resize") break;
-      if (operation.type === "rotate") crop = crop.rotate();
-      if (operation.type === "trim") crop = crop.trim({ threshold: operation.threshold });
-      if (operation.type === "extract") crop = crop.extract({ left: operation.left, top: operation.top, width: operation.width, height: operation.height });
+  const contexts = descriptors.filter(descriptor => parents.has(descriptor.planetId) || descriptor.context);
+  // Each context image is independent: encode them concurrently, a bounded few at a time; bytes and file names are unchanged.
+  let next = 0;
+  const results: {url: string; pixels: number}[] = [];
+  await Promise.all(Array.from({ length: Math.min(8, contexts.length) }, async () => {
+    for (let index = next++; index < contexts.length; index = next++) {
+      const descriptor = contexts[index];
+      const sourcePath = resolve(projectRoot, "src/objects", descriptor.planetId, "source", descriptor.source.path);
+      let crop = await readMarkerImage(descriptor.source, sourcePath);
+      for (const operation of descriptor.operations) {
+        if (operation.type === "resize") break;
+        if (operation.type === "rotate") crop = crop.rotate();
+        if (operation.type === "trim") crop = crop.trim({ threshold: operation.threshold });
+        if (operation.type === "extract") crop = crop.extract({ left: operation.left, top: operation.top, width: operation.width, height: operation.height });
+      }
+      const { info } = await crop.raw().toBuffer({ resolveWithObject: true });
+      // Fixed canonical image, capped by the actual native crop, never the UI atlas.
+      const pixels = Math.min(descriptor.context?.pixels ?? 1536, info.width, info.height);
+      const png = await renderMarker(descriptor, { sourcePath, tileSize: pixels });
+      const filename = `${descriptor.planetId}-context.webp`;
+      await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(outputRoot, filename));
+      results[index] = { url: `/navigation/${filename}`, pixels };
     }
-    const { info } = await crop.raw().toBuffer({ resolveWithObject: true });
-    // Fixed canonical image, capped by the actual native crop, never the UI atlas.
-    const pixels = Math.min(descriptor.context?.pixels ?? 1536, info.width, info.height);
-    const png = await renderMarker(descriptor, { sourcePath, tileSize: pixels });
-    const filename = `${descriptor.planetId}-context.webp`;
-    await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(outputRoot, filename));
-    markers[descriptor.planetId] = { url: `/navigation/${filename}`, pixels };
-  }
+  }));
+  contexts.forEach((descriptor, index) => { markers[descriptor.planetId] = results[index]; });
   return markers;
 }
 
