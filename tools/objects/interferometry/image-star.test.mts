@@ -86,13 +86,14 @@ test('the π¹ Gruis season from raw matches the author file and image, and is c
   if (!await access(verdictPath).then(() => true, () => false)) return t.skip('run image-star.mts on the season first');
   const result = JSON.parse(await readFile(verdictPath, 'utf8')) as {
     verdict: { cast: boolean; reasons: string[] }; disc: { diameterMas: number };
-    comparison: { calibrated: { pairs: number; medianRatio: number }; imageCorrelation: number };
+    comparison: { calibrated: { pairs: number; medianRatio: number; medianSigma: number }; imageCorrelation: number };
   };
   assert.ok(result.verdict.cast, result.verdict.reasons.join('; '));
-  assert.ok(Math.abs(result.disc.diameterMas - 18.17) < 0.5, `${result.disc.diameterMas} mas`);
-  assert.ok(result.comparison.calibrated.pairs > 500, `${result.comparison.calibrated.pairs} paired points`);
-  assert.ok(Math.abs(result.comparison.calibrated.medianRatio - 1) < 0.05, `median ratio ${result.comparison.calibrated.medianRatio}`);
-  assert.ok(result.comparison.imageCorrelation > 0.7, `image correlation ${result.comparison.imageCorrelation}`);
+  // Measured 18.12 mas, 828 pairs at median ratio 0.999 and 0.08 sigma, and 0.990 against the shipped image.
+  assert.ok(Math.abs(result.disc.diameterMas - 18.17) < 0.2, `${result.disc.diameterMas} mas`);
+  assert.ok(result.comparison.calibrated.pairs > 800, `${result.comparison.calibrated.pairs} paired points`);
+  assert.ok(Math.abs(result.comparison.calibrated.medianRatio - 1) < 0.01 && result.comparison.calibrated.medianSigma < 0.2, `median ratio ${result.comparison.calibrated.medianRatio}`);
+  assert.ok(result.comparison.imageCorrelation > 0.98, `image correlation ${result.comparison.imageCorrelation}`);
 });
 
 test('the author file compared with itself pairs every point with itself', async () => {
