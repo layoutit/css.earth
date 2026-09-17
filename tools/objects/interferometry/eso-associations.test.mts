@@ -41,7 +41,7 @@ test('the calselector tree parses into nested associations with their files and 
 
 test('a GRAVITY plan takes the dark with the science integration time, the P2VM calibrations, and the nearest calibrator in the same mode', async () => {
   const { record } = await plan(GRAVITY_REDUCTION, 'gravity-2018-01-27', 'GRAVI.2018-01-27T05:30:10.657');
-  assert.equal(record.calibrator, 'GRAVI.2018-01-27T05:57:43.726');
+  assert.deepEqual(record.calibrators, ['GRAVI.2018-01-27T05:57:43.726']);
   assert.deepEqual(record.steps.map(step => `${step.recipe} ${step.step}`), [
     'gravity_dark dark-2018-01-27T10:33:32.425',
     'gravity_p2vm p2vm-2018-01-28T10:28:16.378',
@@ -64,11 +64,18 @@ test('a GRAVITY plan takes the dark with the science integration time, the P2VM 
     'DIAMETER_CAT M.GRAVITY.2017-03-29T11:53:36.950', 'SINGLE_CAL_VIS std_single-2018-01-27T05:57:43.726/SINGLE_CAL_VIS_0002.fits', 'SINGLE_SCI_VIS sci_single-2018-01-27T05:30:10.657/SINGLE_SCI_VIS_0002.fits',
   ]);
   await assert.rejects(plan(GRAVITY_REDUCTION, 'gravity-2018-01-27', 'GRAVI.2018-01-27T05:36:13.672'), /no recorded header|is not a SINGLE_SCI_RAW/u);
+  // A chosen calibrator must head its own calibrator association: the science tree is refused.
+  const headers = JSON.parse(await readFile(fixture('gravity-2018-01-27-headers.json'), 'utf8')) as Record<string, EsoHeader>;
+  const tree = parseAssociationTree(await readFile(fixture('gravity-2018-01-27-associations.xml'), 'utf8'));
+  await assert.rejects(reduceAssociation(GRAVITY_REDUCTION, tree, 'GRAVI.2018-01-27T05:30:10.657', {
+    header: async name => headers[name]!, frame: async name => name, kitFrame: async pattern => pattern.source,
+    run: async (step, _recipe, _frames, _options, categories) => categories.map(category => ({ category, path: `${step}/${category}` })),
+  }, [{ tree, dpId: 'GRAVI.2018-01-27T05:42:19.687' }]), /heads a SCI_SINGLE association, not STD_SINGLE/u);
 });
 
 test('a MATISSE plan takes the sky and calibrator in the science exposure\'s BCD state and reduces each shared calibration once', async () => {
   const { record } = await plan(MATISSE_REDUCTION, 'matisse-2020-02-08', 'MATIS.2020-02-08T00:06:12.142');
-  assert.equal(record.calibrator, 'MATIS.2020-02-08T00:30:08.078');
+  assert.deepEqual(record.calibrators, ['MATIS.2020-02-08T00:30:08.078']);
   const names = record.steps.map(step => step.step);
   assert.equal(new Set(names).size, names.length);
   assert.deepEqual(names, [
@@ -134,3 +141,45 @@ async function compareWithAuthor(oursPath: string, authorPath: string, insname?:
   };
 }
 const present = (...paths: string[]) => Promise.all(paths.map(path => access(path).then(() => true, () => false))).then(all => all.every(Boolean));
+
+test('GRAVITY calibrated from raw frames with the authors\' calibrator exposures reproduces Rosales-Guzmán et al.\'s file', async context => {
+  const ours = resolve(repository, 'output/calibration/rcar-2018-01-27/calibrate-2018-01-27T05:30:10.657/GRAVI.2018-01-27T05:30:10.657_singlescivis_singlesciviscalibrated.fits');
+  const author = resolve(repository, 'output/calibration/oracles/p1_GRAVI.2018-01-27T05_30_10.657_singlescivis_singlesciviscalibrated.fits');
+  if (!await present(ours, author)) {
+    context.skip('run calibrate-gravity.mts GRAVI.2018-01-27T05:30:10.657 with --calibrator for 06:51:37.863, 07:02:58.891, 07:56:08.026 and 08:07:26.055, and restore the OiDB file, to cover this');
+    return;
+  }
+  const { ratios, closures } = await compareWithAuthor(ours, author, 'GRAVITY_SC_P1');
+  for (const { key, median } of ratios) context.diagnostic(`V² ${key}: median ratio ${median.toFixed(3)}`);
+  for (const { key, median } of closures) context.diagnostic(`closure ${key}: median difference ${median.toFixed(2)} degrees`);
+  assert.equal(ratios.length, 6);
+  // Measured with GRAVITY 1.11.0 against the authors' 1.0.7: all points 0.994, baselines 0.96 to 1.12 (the high two where V² is
+  // below 0.02), closure phases within 0.2 degree on every triangle. The archive tree's own calibrator exposure alone gave 0.955.
+  assert.ok(Math.abs(median(ratios.map(ratio => ratio.median)) - 1) < 0.05, 'median of the baseline ratios');
+  for (const { key, median: ratio } of ratios) assert.ok(Math.abs(ratio - 1) < 0.2, `${key}: median ratio ${ratio.toFixed(3)}`);
+  for (const { key, median: difference } of closures) assert.ok(Math.abs(difference) < 3, `${key}: closure difference ${difference.toFixed(2)} degrees`);
+});
+
+test('MATISSE calibrated from raw frames reproduces the IN-IN exposure of Drevon et al.\'s Betelgeuse file', async context => {
+  const oursPath = resolve(repository, 'output/calibration/betelgeuse-2020-02-08/calibrate-2020-02-08T00:06:12.142/TARGET_CAL_INT_0002.fits');
+  const authorPath = resolve(repository, 'src/objects/betelgeuse/source/observations/oifits/2020-02-08T000149_alfOri_A0B2D0C1_IR-LM_MED_IN_IN_noChop_cal_oifits_0.fits');
+  if (!await present(oursPath, authorPath)) { context.skip('run calibrate-matisse.mts MATIS.2020-02-08T00:06:12.142 and restore the Betelgeuse sources to cover this'); return; }
+  const { ratios, closures } = await compareWithAuthor(oursPath, authorPath);
+  for (const { key, median } of closures) context.diagnostic(`closure ${key}: median difference ${median.toFixed(2)} degrees`);
+  assert.equal(ratios.length, 6);
+  // Measured with MATISSE 2.5.0 defaults against the authors' 1.5.1/1.6.0 reduction. On B2-C1, the one baseline where V² is high
+  // (0.50), the median ratio is 1.048. The other five have V² below 0.03, where ratios mean little: there the median difference
+  // runs from −0.0052 (B2-D0) to +0.0025 (C1-D0). Closure phases differ by at most 2 degrees per triangle. Removing the channel
+  // bias subtraction (cb), which the authors did not use, changed none of these.
+  const author = observables(await readFile(authorPath));
+  const mine = observables(await readFile(oursPath));
+  for (const row of author.vis2) {
+    const match = mine.vis2.find(candidate => candidate.key === row.key)!;
+    const pairs = author.wavelengths.map((wavelength, i) => [interpolate(mine.wavelengths, match.values, wavelength), row.values[i]!] as const).filter(([a, b]) => Number.isFinite(a) && Number.isFinite(b));
+    const level = median(pairs.map(([, theirs]) => theirs));
+    context.diagnostic(`V² ${row.key} at ${level.toFixed(4)}: median difference ${median(pairs.map(([ours, theirs]) => ours - theirs)).toFixed(4)}`);
+    if (level > 0.1) assert.ok(Math.abs(median(pairs.map(([ours, theirs]) => ours / theirs)) - 1) < 0.1, `${row.key}: ratio`);
+    else assert.ok(Math.abs(median(pairs.map(([ours, theirs]) => ours - theirs))) < 0.01, `${row.key}: difference at V² ${level.toFixed(4)}`);
+  }
+  for (const { key, median: difference } of closures) assert.ok(Math.abs(difference) < 3, `${key}: closure difference ${difference.toFixed(2)} degrees`);
+});

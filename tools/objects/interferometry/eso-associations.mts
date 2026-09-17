@@ -9,9 +9,11 @@
  * with the science frame's integration time, a sky with the same beam commutation). The tree is reduced from the bottom, each
  * association once, and the science and calibrator exposures are combined by the instrument's calibration recipe.
  *
- * Only frames the tree names are used. One science exposure and one calibrator exposure are reduced: the requested one, and
- * the calibrator exposure in the same instrument setup nearest in time. */
-import { readdir, readFile, rm, writeFile, mkdir, access } from 'node:fs/promises';
+ * Only frames the trees name are used. One science exposure is reduced with, by default, the calibrator exposure in its tree
+ * that shares its instrument setup and is nearest in time. Authors often choose other calibrator exposures of the night (the
+ * R Car GRAVITY file used four later ones); each named calibrator exposure is then reduced through its own tree, and the
+ * calibration recipe interpolates between them. */
+import { access, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { archiveHeader, esoEnvironment, esoHeader, frameTime, rawFrame, runRecipe, type EsoHeader, type EsoPipeline } from './eso-pipeline.mts';
 import { toolchainPath } from './toolchain.mts';
@@ -109,16 +111,22 @@ export interface ReductionIo {
   run(step: string, recipe: string, frames: Frames, options: readonly string[], categories: readonly string[]): Promise<Product[]>;
 }
 export interface ReductionRecord {
-  readonly science: string; readonly calibrator: string; readonly calibrated: string;
+  readonly science: string; readonly calibrators: readonly string[]; readonly calibrated: string;
   readonly steps: readonly { readonly step: string; readonly recipe: string; readonly frames: Frames }[];
 }
 
 const isRaw = (name: string) => !name.startsWith('M.');
+const groupBy = <T,>(items: readonly T[], key: (item: T) => string) => {
+  const groups = new Map<string, T[]>();
+  for (const item of items) groups.set(key(item), [...groups.get(key(item)) ?? [], item]);
+  return groups;
+};
 const stepName = (category: string, exposure: string | undefined, files: readonly AssociationFile[]) =>
   `${category.toLowerCase()}-${(exposure ?? files[0]?.name ?? 'none').replace(/^[A-Z]+\./u, '')}`;
 
 /** Reduce the science frame dpId through its association tree; returns the calibrated file and what was run. */
-export async function reduceAssociation(reduction: InstrumentReduction, tree: Association, dpId: string, io: ReductionIo): Promise<ReductionRecord> {
+export async function reduceAssociation(reduction: InstrumentReduction, tree: Association, dpId: string, io: ReductionIo,
+  chosenCalibrators: readonly { readonly tree: Association; readonly dpId: string }[] = []): Promise<ReductionRecord> {
   const memo = new Map<string, Promise<Product[]>>(), steps: { step: string; recipe: string; frames: Frames }[] = [];
   const header = (name: string) => io.header(name);
   const agree = async (candidate: string, reference: EsoHeader, keys: readonly string[]) => {
@@ -126,7 +134,7 @@ export async function reduceAssociation(reduction: InstrumentReduction, tree: As
     return keys.every(key => { if (!(key in reference) || !(key in other)) throw new Error(`${candidate}: no ${key} to match.`); return other[key] === reference[key]; });
   };
   /** The candidate matching the reference on the keys, nearest in time to it. */
-  const nearestMatch = async <T>(candidates: readonly T[], name: (candidate: T) => string, reference: { name: string; header: EsoHeader }, keys: readonly string[], what: string) => {
+  const nearestMatch = async <T,>(candidates: readonly T[], name: (candidate: T) => string, reference: { name: string; header: EsoHeader }, keys: readonly string[], what: string) => {
     const matching: T[] = [];
     for (const candidate of candidates) if (await agree(name(candidate), reference.header, keys)) matching.push(candidate);
     const time = frameTime(reference.name);
@@ -163,7 +171,7 @@ export async function reduceAssociation(reduction: InstrumentReduction, tree: As
     }
     if (step.exposure && ![...rawFiles.values()].some(file => file.category === step.exposure)) throw new Error(`${exposure} is not a ${step.exposure} of this ${node.category} association.`);
     const frames: (readonly [string, string])[] = [];
-    const byCategory = Map.groupBy(rawFiles.values(), file => file.category);
+    const byCategory = groupBy([...rawFiles.values()], file => file.category);
     for (const [category, files] of byCategory) {
       const keys = matchedKeys(category);
       const chosen = keys && reference ? [await nearestMatch(files, file => file.name, reference, keys, category)] : files;
@@ -171,7 +179,7 @@ export async function reduceAssociation(reduction: InstrumentReduction, tree: As
     }
 
     // Reduced children.
-    const reducedChildren = Map.groupBy(node.children.filter(child => Array.isArray(step.inputs[child.category])), child => child.category);
+    const reducedChildren = groupBy(node.children.filter(child => Array.isArray(step.inputs[child.category])), child => child.category);
     for (const [category, candidates] of reducedChildren) {
       const distinct = [...new Map(candidates.map(child => [child.files.map(file => file.name).sort().join(','), child])).values()];
       const keys = matchedKeys(category);
@@ -194,10 +202,18 @@ export async function reduceAssociation(reduction: InstrumentReduction, tree: As
 
   const scienceProducts = await reduce(tree, dpId, []);
   const science = { name: dpId, header: await header(dpId) };
-  const calibratorExposures = tree.children.filter(child => child.category === reduction.calibrator.association)
-    .flatMap(child => child.files.filter(file => file.category === reduction.steps[child.category]?.exposure).map(file => ({ child, name: file.name })));
-  const calibrator = await nearestMatch(calibratorExposures, candidate => candidate.name, science, reduction.calibrator.keys, 'calibrator exposure');
-  const calibratorProducts = await reduce(calibrator.child, calibrator.name, [tree]);
+  const calibratorExposure = (association: Association) => association.files.filter(file => file.category === reduction.steps[association.category]?.exposure);
+  const calibrators: { name: string; products: Product[] }[] = [];
+  if (chosenCalibrators.length) for (const chosen of chosenCalibrators) {
+    if (chosen.tree.category !== reduction.calibrator.association) throw new Error(`${chosen.dpId} heads a ${chosen.tree.category} association, not ${reduction.calibrator.association}.`);
+    if (!calibratorExposure(chosen.tree).some(file => file.name === chosen.dpId)) throw new Error(`${chosen.dpId} is not an exposure of its own association.`);
+    await nearestMatch([chosen.dpId], name => name, science, reduction.calibrator.keys, 'calibrator exposure');
+    calibrators.push({ name: chosen.dpId, products: await reduce(chosen.tree, chosen.dpId, []) });
+  } else {
+    const candidates = tree.children.filter(child => child.category === reduction.calibrator.association).flatMap(child => calibratorExposure(child).map(file => ({ child, name: file.name })));
+    const nearest = await nearestMatch(candidates, candidate => candidate.name, science, reduction.calibrator.keys, 'calibrator exposure');
+    calibrators.push({ name: nearest.name, products: await reduce(nearest.child, nearest.name, [tree]) });
+  }
 
   const { calibrate } = reduction;
   const pick = (products: readonly Product[], category: string) => {
@@ -205,20 +221,22 @@ export async function reduceAssociation(reduction: InstrumentReduction, tree: As
     if (matches.length !== 1) throw new Error(`${matches.length} ${category} products where one was expected.`);
     return [matches[0]!.path, category] as const;
   };
-  const frames: (readonly [string, string])[] = [pick(scienceProducts, calibrate.science), pick(calibratorProducts, calibrate.calibrator)];
+  const frames: (readonly [string, string])[] = [pick(scienceProducts, calibrate.science), ...calibrators.map(calibrator => pick(calibrator.products, calibrate.calibrator))];
   for (const category of calibrate.raw ?? []) for (const child of tree.children) if (child.category === category) for (const file of child.files) frames.push([await io.frame(file.name), file.category]);
   const name = stepName('calibrate', dpId, []);
   steps.push({ step: name, recipe: calibrate.recipe, frames });
   const outputs = await io.run(name, calibrate.recipe, frames, calibrate.options ?? [], [calibrate.product]);
   const calibrated = outputs.filter(product => !calibrate.file || calibrate.file.test(product.path));
   if (calibrated.length !== 1) throw new Error(`${calibrated.length} ${calibrate.product} files where one was expected.`);
-  return { science: dpId, calibrator: calibrator.name, calibrated: calibrated[0]!.path, steps };
+  return { science: dpId, calibrators: calibrators.map(calibrator => calibrator.name), calibrated: calibrated[0]!.path, steps };
 }
 
-/** Run a recipe unless the step directory already records a run with the same recipe, options and frames. The recipe's
+/** Run a recipe unless the step directory already records a run with the same recipe, options and input files, each file
+ * identified by path, size and modification time so a rerun upstream step invalidates what read its products. The recipe's
  * products in the kept categories are returned; everything else it wrote is deleted. */
 async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe: string, frames: Frames, options: readonly string[], categories: readonly string[]) {
-  const record = resolve(work, name, 'products.json'), inputs = JSON.stringify({ recipe, options, frames, categories });
+  const files = await Promise.all(frames.map(async ([path, tag]) => { const { size, mtimeMs } = await stat(path); return [path, tag, size, mtimeMs] as const; }));
+  const record = resolve(work, name, 'products.json'), inputs = JSON.stringify({ recipe, options, files, categories });
   if (await exists(record)) {
     const previous = JSON.parse(await readFile(record, 'utf8')) as unknown;
     if (typeof previous === 'object' && previous && 'inputs' in previous && 'products' in previous && previous.inputs === inputs && Array.isArray(previous.products)
@@ -238,7 +256,7 @@ async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe
 }
 
 /** Calibrate one science frame with an installed toolchain: fetch the tree, reduce it, and write calibrated.json beside the work. */
-export async function calibrateFromAssociations(reduction: InstrumentReduction, dpId: string, work: string, rawDirectory: string) {
+export async function calibrateFromAssociations(reduction: InstrumentReduction, dpId: string, work: string, rawDirectory: string, calibratorIds: readonly string[] = []) {
   const root = await toolchainPath(reduction.toolchain);
   const calibrationRoot = resolve(root, 'calib/share/esopipes/datastatic');
   const kits = (await readdir(calibrationRoot)).filter(name => name.startsWith(`${reduction.toolchain}-`));
@@ -246,6 +264,7 @@ export async function calibrateFromAssociations(reduction: InstrumentReduction, 
   const pipeline = esoEnvironment(resolve(root, 'pipeline'), resolve(work, 'home'));
   const tree = await associationTree(dpId, work);
   const calibration = resolve(calibrationRoot, kits[0]!);
+  const calibrators = await Promise.all(calibratorIds.map(async id => ({ dpId: id, tree: await associationTree(id, work) })));
   const result = await reduceAssociation(reduction, tree, dpId, {
     header: name => archiveHeader(name, resolve(rawDirectory, 'headers')),
     frame: name => rawFrame(name, rawDirectory),
@@ -255,15 +274,17 @@ export async function calibrateFromAssociations(reduction: InstrumentReduction, 
       return resolve(calibration, matches[0]!);
     },
     run: (step, recipe, frames, options, categories) => runStep(pipeline, work, step, recipe, frames, options, categories),
-  });
+  }, calibrators);
   await writeFile(resolve(work, 'calibrated.json'), JSON.stringify(result, null, 2) + '\n');
   return result;
 }
 
-/** The command line every association-driven calibration shares: <science dp_id> <work directory> [--raw <directory>]. */
+/** The command line every association-driven calibration shares:
+ * <science dp_id> <work directory> [--raw <directory>] [--calibrator <dp_id> ...]. */
 export async function associationCli(reduction: InstrumentReduction, argv: readonly string[]) {
   const [dpId, work, ...rest] = argv, rawIndex = rest.indexOf('--raw');
-  if (!dpId || !work) throw new TypeError(`Usage: calibrate-${reduction.toolchain} <science dp_id> <work directory> [--raw <directory>]`);
-  const result = await calibrateFromAssociations(reduction, dpId, resolve(work), resolve(rawIndex < 0 ? resolve(work, 'raw') : rest[rawIndex + 1]!));
-  console.log(`${result.calibrated}: ${dpId} calibrated with ${result.calibrator} in ${result.steps.length} recipe runs.`);
+  const calibrators = rest.flatMap((value, index) => rest[index - 1] === '--calibrator' ? [value] : []);
+  if (!dpId || !work) throw new TypeError(`Usage: calibrate-${reduction.toolchain} <science dp_id> <work directory> [--raw <directory>] [--calibrator <dp_id> ...]`);
+  const result = await calibrateFromAssociations(reduction, dpId, resolve(work), resolve(rawIndex < 0 ? resolve(work, 'raw') : rest[rawIndex + 1]!), calibrators);
+  console.log(`${result.calibrated}: ${dpId} calibrated with ${result.calibrators.join(', ')} in ${result.steps.length} recipe runs.`);
 }

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /** VLTI/GRAVITY calibration from raw frames, through the archive's association tree (eso-associations.mts).
  *
- *   node tools/objects/interferometry/calibrate-gravity.mts <science dp_id> <work directory> [--raw <directory>]
+ *   node tools/objects/interferometry/calibrate-gravity.mts <science dp_id> <work directory> [--raw <directory>] [--calibrator <dp_id> ...]
  *
  * A science exposure (SINGLE_SCI_RAW) is reduced by gravity_vis with its sky, a dark of the same science-camera integration
  * time, and the bad-pixel map, flat, wavelength table and P2VM of the P2VM association (gravity_p2vm from raw darks, flats,
  * wavelength and P2VM scans). The calibrator exposure in the same spectral resolution and polarisation mode nearest in time is
- * reduced the same way, and gravity_viscal divides by its transfer function. --force-calib=TRUE: the archive's DIAMETER_CAT does
+ * reduced the same way, or each --calibrator exposure through its own tree, and gravity_viscal divides by the transfer function
+ * interpolated between them. --force-calib=TRUE: the archive's DIAMETER_CAT does
  * not mark every calibrator as one, and without it gravity_viscal writes no calibrated file. The archive tree lists no Earth
  * orientation table for 2018 frames, so the kit's EOP_PARAM is used. */
 import { resolve } from 'node:path';
