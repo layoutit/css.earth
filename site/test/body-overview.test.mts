@@ -50,4 +50,4 @@ test('compact spectra reject unordered or nonfinite samples', () => {
   ]) assert.throws(() => renderCompactSpectrum({ ...profile, points }));
 });
 
-function frame(bodyRadiusM: number): NonNullable<Parameters<typeof overviewMeasurements>[0]['worldFrame']> { return { bodyRadiusM, referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0,0,0], metersPerUnit: 1, presentationToReference: [1,0,0,0,1,0,0,0,1] }; }
+function frame(bodyRadiusM: number): NonNullable<Parameters<typeof overviewMeasurements>[0]['worldFrame']> { return { bodyRadiusM, referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [0,0,0], metersPerUnit: 1, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1] }; }

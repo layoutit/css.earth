@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "264f60ca331db2a8e81e29879f7cce09fb369fe99858f32c57dc0068b54ababe"
+    "sha256": "ed3dbe0911602742981400f3c0d49bbc98b7fa4f34f684aae67b829b79621058"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "8d604abe78a5e0fe301488dc6d2e4b1373c54317d57482f5272d3f05d22f70c2"
+    "bindingsSha256": "babfe8e7b98a728005bb0d659984041db5dfc9965fd2dd65970079bf7690cca9"
   },
   "recipes": [
     {
@@ -527,7 +527,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "c363ef21603ad9114928376bae4d0390766c05c202881098d3166a52017107fe",
+      "sha256": "441e2c51f0dba574a394cd1aea44a04d8082055038b855897369297146dcc511",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -538,7 +538,6 @@
           "metadata": "metadata_nomenclature_points_ENCELADUS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "enceladus-features.json",
         "publicBase": "/scenes/enceladus/",
         "target": {
@@ -957,8 +956,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "02505cf90f3299d9da02f513681d1dc5ca2d1458d3ac48edbc8fea6ae861de65",
-      "bytes": 156,
+      "sha256": "25199a65668fe0b541dd7c0197865ae9bb23b2e6a4b417a8a1906a64016b7ebb",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1302,7 +1301,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1455,11 +1453,11 @@
   },
   "lastPreparation": {
     "objectId": "enceladus",
-    "materialSha256": "b94bf99a27ad28fe478180f386f48f81df4fadf5f712d230f46e2247bcd9a127",
+    "materialSha256": "67c978244e8563f4b5c930c4f09ab486f609be3b5379094f4a4d4fb837c8d4fd",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "8d604abe78a5e0fe301488dc6d2e4b1373c54317d57482f5272d3f05d22f70c2"
+      "bindingsSha256": "babfe8e7b98a728005bb0d659984041db5dfc9965fd2dd65970079bf7690cca9"
     }
   }
 }

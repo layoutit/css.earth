@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d3df36b9164dcb476c8d1d35f10af4ae447923f444429b4ff576ce65765e950"
+    "sha256": "b36a1ff03393bcca89ba9132c7f26bb2155594a1260accb99de3cf6c7d4cbb5b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a1172e3b7b90ac4adf3b5e0cd562b6b4897c7e46e2c14e1d4a510fd8f08c0d57"
+    "bindingsSha256": "f0a6b507ce4c79db282b26ac66636da5730482df8f3664a2ab8f09f362a84e8e"
   },
   "recipes": [
     {
@@ -425,7 +425,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "d67357bb1382bd4e03ebb6cf82a84390d492634dcafc20f331b03a7a776b479a",
+      "sha256": "7c28165f8cee607ed263798df77a92c2f16414e4b3501824b99aa0b6e256cf4d",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -436,7 +436,6 @@
           "metadata": "metadata_nomenclature_points_AMALTHEA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "amalthea-features.json",
         "publicBase": "/scenes/amalthea/",
         "target": {
@@ -1017,8 +1016,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "38f55714f6a719c11d68896d591602df177cddda737cd39b411c23590e06be83",
-      "bytes": 155,
+      "sha256": "acc02f8a7259c2b6074f84032d6f93673a3e52c7ef42c80c982af3101e009e49",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1196,7 +1195,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1274,11 +1272,11 @@
   },
   "lastPreparation": {
     "objectId": "amalthea",
-    "materialSha256": "4dce2b720569842e11e039a01c123b7c71bb485434ab00f92189bb51badb6cd9",
+    "materialSha256": "207c221e2c475807e22a600c6cc619bd405562051d6fe52d1de39b25da46437b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a1172e3b7b90ac4adf3b5e0cd562b6b4897c7e46e2c14e1d4a510fd8f08c0d57"
+      "bindingsSha256": "f0a6b507ce4c79db282b26ac66636da5730482df8f3664a2ab8f09f362a84e8e"
     }
   }
 }

@@ -226,8 +226,8 @@
     {
       "id": "triton-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1144,
-      "expectedSha256": "cbe37fdbb767bafcffceb3ecc8c7e1b7d483fe643f06bcc06e4500744011431f",
+      "expectedBytes": 1110,
+      "expectedSha256": "719bcac440d79f29a46b3a8ac3d9b9ccf33e70ba170b398e16a13346391e008c",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -244,8 +244,8 @@
     {
       "id": "triton-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 153,
-      "expectedSha256": "d0f3f908574d4e81e0124751c533e1b653c5699d9af4fc28d0417557cb7d7b2c",
+      "expectedBytes": 187,
+      "expectedSha256": "7a96b21c979807295efe23ddc3dd3f6b3f8819484766bfb0c07433ba11d3e6ba",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

@@ -1,6 +1,6 @@
 import { createPreparedLeafFrustum, preparedLeafMayContribute, type PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
 import { validatePreparedCssVolume } from './validation.js';
 
@@ -218,10 +218,7 @@ function cssVolumeRotation(camera: VolumeLocalCamera): readonly number[] {
 }
 
 function cameraView(camera: VolumeLocalCamera): readonly number[] {
-  const cameraToVolume = worldRotationFromQuaternion(camera.orientationXyzw);
-  return [cameraToVolume[0]!, cameraToVolume[3]!, cameraToVolume[6]!,
-    cameraToVolume[1]!, cameraToVolume[4]!, cameraToVolume[7]!,
-    cameraToVolume[2]!, cameraToVolume[5]!, cameraToVolume[8]!];
+  return cssViewFromOrientation(camera.orientationXyzw);
 }
 
 function axisWeights(camera: VolumeLocalCamera): readonly { weight: number; opticalGain: number }[] {

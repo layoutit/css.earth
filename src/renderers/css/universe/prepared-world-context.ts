@@ -12,7 +12,7 @@ import type { PositionM } from '@cssearth/engine';
 import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 import { array, finite, numbers, positive, record, text, unique } from '../validation/guards.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { transposeWorldRotation, validateWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, validateWorldRotation } from '../navigation/world-camera-math.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { applySprite, applySpriteImage } from '../solar-system/heliocentric-sprites.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
@@ -778,7 +778,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       latest = { world, viewport }; systemRetired = opacity === 0;
       presentationRevision++;
       let ranksChanged = false;
-      const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+      const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       // Camera translation adds the same depth offset to every prepared body.
       // Only orientation changes their order; selection changes where the
       // retained detail layers (0..3) sit within that order.

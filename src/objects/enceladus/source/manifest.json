@@ -692,8 +692,8 @@
     {
       "id": "enceladus-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1221,
-      "expectedSha256": "c363ef21603ad9114928376bae4d0390766c05c202881098d3166a52017107fe",
+      "expectedBytes": 1189,
+      "expectedSha256": "441e2c51f0dba574a394cd1aea44a04d8082055038b855897369297146dcc511",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -710,8 +710,8 @@
     {
       "id": "enceladus-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 156,
-      "expectedSha256": "02505cf90f3299d9da02f513681d1dc5ca2d1458d3ac48edbc8fea6ae861de65",
+      "expectedBytes": 188,
+      "expectedSha256": "25199a65668fe0b541dd7c0197865ae9bb23b2e6a4b417a8a1906a64016b7ebb",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

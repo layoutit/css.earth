@@ -185,8 +185,8 @@
     {
       "id": "vesta-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1119,
-      "expectedSha256": "2e00300733f8a2572e548323aaa05ad8afa6cba2131718cd4cefa3e9a6c47c89",
+      "expectedBytes": 1087,
+      "expectedSha256": "7868bde6f73e0427c7f8ae25d27828fb9b6026ed0512c04d3a7063f5ccb5ab54",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -203,8 +203,8 @@
     {
       "id": "vesta-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 152,
-      "expectedSha256": "75f4e502b985c08b6a527b7c6459a3ca268a0bb27ce5da8c518435d647501fa5",
+      "expectedBytes": 184,
+      "expectedSha256": "e2ea16371b7d9ee6018209750ad06f6c7e5e8d4c590ba78d8a2647a7d100c9c8",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

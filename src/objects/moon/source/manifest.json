@@ -637,8 +637,8 @@
     {
       "id": "moon-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1406,
-      "expectedSha256": "59fd79640b484ce809a31d4d42c670a5ab5665cf4d16a7cc726cabcf3c1f2f01",
+      "expectedBytes": 1372,
+      "expectedSha256": "a4b98df89e6482faf79da809d09d33bdcfec581cf334ad87685d808295b6a7a0",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -655,8 +655,8 @@
     {
       "id": "moon-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 151,
-      "expectedSha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
+      "expectedBytes": 185,
+      "expectedSha256": "8cb169b7cafdc2e1dc397a406bf246f1a66a03a4b31036829cd14fe65456a5ad",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

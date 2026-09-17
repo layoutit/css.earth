@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f665843719f955e02f391667d870dffe52a4d48c4b1ee0dc309957afcfe0669"
+    "sha256": "d9394ccbaa9d360a68fb0c954c06081a0656049ca5604494608ed861fc1b2052"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "6c08afa835a1b7c2a4c596355c4f6a79fffc71da3465cc80b8fb6226b9726c5e"
+    "bindingsSha256": "f362b1f1eb6dfbc967cdb777feccc2fabe1483d141b0f59b8231b83a6e3ca100"
   },
   "recipes": [
     {
@@ -365,7 +365,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "3ff3335cfad4cb3e06beec85aabb6215a123609eeb010e1e940630bc4070e25e",
+      "sha256": "367b2472a5a0953c0936be2a3995de249b59576a537f925caf93b61d6bf38640",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -376,7 +376,6 @@
           "metadata": "metadata_nomenclature_points_EROS.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "eros-features.json",
         "publicBase": "/scenes/eros/",
         "target": {
@@ -684,8 +683,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "60ada4ee5030f75a1b46489f3ea38c55251306c400a700886db709e16e6f447e",
-      "bytes": 151,
+      "sha256": "6e8c1b50fbc63feb0c6fe2aa403e7a52166e67cb9dbaa645b4498780b1963be4",
+      "bytes": 183,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -972,7 +971,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1076,11 +1074,11 @@
   },
   "lastPreparation": {
     "objectId": "eros",
-    "materialSha256": "166df531c87981e9d8c1a8d9b2806f0414df45f75833fb8144f8ffc1054cccad",
+    "materialSha256": "0dfa89cb967e1da988c9fa34c546cc5a75308300fa6395fd146db8a0a7bd37e6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "6c08afa835a1b7c2a4c596355c4f6a79fffc71da3465cc80b8fb6226b9726c5e"
+      "bindingsSha256": "f362b1f1eb6dfbc967cdb777feccc2fabe1483d141b0f59b8231b83a6e3ca100"
     }
   }
 }

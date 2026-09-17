@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b3d0e8bc130cf935da9cb1c34873d7f617bf6d4f3b162a2d8a070f251e8b1d18"
+    "sha256": "e0e13dd676c97f7d5e85e17cd90067347509af50c7b337750d295fefa2b79207"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "3ca4562a616a855fae1f11b11a48ba2b7a3e59e583efd7a9c8c3edaa3f604b9d"
+    "bindingsSha256": "96f0f53a3dd5bab8a28f025d2aef711f019119abffae13e9b93b6eebc9988036"
   },
   "recipes": [
     {
@@ -435,7 +435,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "ff88ecfc748ec421f40500362a9c4621e1ef7ba2197233ca57a8fea4b5d2079b",
+      "sha256": "de1cd7df66c04340d820b43e07597238868e66c31101bdfebbbc612e2b63ea05",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -446,7 +446,6 @@
           "metadata": "metadata_nomenclature_points_CERES.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "ceres-features.json",
         "publicBase": "/scenes/ceres/",
         "target": {
@@ -764,8 +763,8 @@
         "kind": "local",
         "reason": "Project-authored texture axes and CSS surface selector."
       },
-      "sha256": "f200fc2fab0d64481e1bfa2338f8716d47f3bb54986e536c0e181bd50e027047",
-      "bytes": 152,
+      "sha256": "19f737699beda385a474893d66887ac7f676f3e483e22b6d9a28206952a84f57",
+      "bytes": 184,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1446,7 +1445,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1549,11 +1547,11 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "2c59fc62cf7586c934d196ebbb52a0f0adf4793b6fc02885a9fa240e148d736c",
+    "materialSha256": "3f54676ad09db147f41d68d591033b7272e307438fd85f5d12be34aec3b3279d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "3ca4562a616a855fae1f11b11a48ba2b7a3e59e583efd7a9c8c3edaa3f604b9d"
+      "bindingsSha256": "96f0f53a3dd5bab8a28f025d2aef711f019119abffae13e9b93b6eebc9988036"
     }
   }
 }

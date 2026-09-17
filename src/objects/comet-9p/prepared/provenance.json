@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b282f39096b48c1f6e3e909af2ec5c7970fad21eb9006a39c7afdef9643197d5"
+    "sha256": "c1d65fcd552f80f89a2ea3699e71f38f260e268d6c408e6b83d3686dc82c3f9f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c4c5bfb55f0c05ac402ef8c56652a3b43fb9be332dd687e91db2b9aab89be1a3"
+    "bindingsSha256": "67d0d5c42b716381587ab03d025c4cc822ac2ca60175b162b18f0686ab93ea0f"
   },
   "recipes": [
     {
@@ -698,14 +698,13 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "d028de321807bb901a0e1eb871b7218b973aaa7ad8782ca9245c38c6a433919a",
+      "sha256": "d2f4fe19e4f2fbc891855b4ea392aa632b095aa0a79b6d372be18b816f7c8ddf",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
         "archive": null,
         "members": null,
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 0,
         "output": "comet-9p-features.json",
         "publicBase": "/scenes/comet-9p/",
         "target": {
@@ -5384,8 +5383,8 @@
         "kind": "local",
         "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
       },
-      "sha256": "2aa34bfdd57c0f7f4d720f78982c0a141634cb0c2b2f2a5e1700836c7a2c2301",
-      "bytes": 155,
+      "sha256": "33bf563bcc804c2db463284b58faedf00f33d5d038416d096c81da70e9bf7d0d",
+      "bytes": 187,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -5977,7 +5976,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 0,
         "excludedTypeCodes": {}
       },
       "inputs": [
@@ -6127,11 +6125,11 @@
   },
   "lastPreparation": {
     "objectId": "comet-9p",
-    "materialSha256": "ca1fc974d32c0eb78d79400a9bd10146169865a6e9358321ac1fc985de620186",
+    "materialSha256": "7661fd871b889b245d1612b1ed84f9fa971153ba96affec9ecdc32bb842825b3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c4c5bfb55f0c05ac402ef8c56652a3b43fb9be332dd687e91db2b9aab89be1a3"
+      "bindingsSha256": "67d0d5c42b716381587ab03d025c4cc822ac2ca60175b162b18f0686ab93ea0f"
     }
   }
 }

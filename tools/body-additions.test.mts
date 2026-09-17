@@ -18,7 +18,7 @@ async function addBody(root: string, id: string, classification: string, parent 
   await write(resolve(root, `src/objects/${id}/object.json`), {
     schema: 'cssearth-object@1', id, type: 'test', properties: {
       recipe: { sources: [] },
-      worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: id === 'sun' ? [0,0,0] : [1,0,0], presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 1 },
+      worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: id === 'sun' ? [0,0,0] : [1,0,0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 1 },
       catalog: { name: id, classification, systemName: 'Solar System', color: '#aaaaaa',
         distanceAu: 3, description: 'Synthetic catalogue test input.', context: {} },
     },

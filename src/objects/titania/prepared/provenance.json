@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c4223b2b0779a6e1b71b80e830fee5c5d759e2c6dac4049b021cabdecbe4c00"
+    "sha256": "addec0d589f36d06dc0adeb7c6b1c2b2cf2f0d7b397bb456b44c68f0f1ece8ad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "2c6c2f03dd4bff17e02a8925728fee543aa8a17f0149e25f33ecc1a1d0fbf8e0"
+    "bindingsSha256": "62f529f74ab5e539a511ac426fd52d1cc2c067b163fa7f497fd0d0f3106dac99"
   },
   "recipes": [
     {
@@ -586,7 +586,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "105e3448490802b19252cd49920159a8c149b111b96c82504e25556eccf0945f",
+      "sha256": "7a078791155b6a6e7c5884ece28d705944ca3cf3a81dc74b6626d688913577e9",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -597,7 +597,6 @@
           "metadata": "metadata_nomenclature_points_TITANIA.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "titania-features.json",
         "publicBase": "/scenes/titania/",
         "target": {
@@ -904,8 +903,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "c3a1868259bb800ba4489a9b4dad80ce69ccf10e3f523a3e27f11fe0228963a2",
-      "bytes": 154,
+      "sha256": "35728890c032564a8e1c6379072fd0aaa2374259a50e4d81ccfa6bd11a0cb3c4",
+      "bytes": 188,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1585,7 +1584,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -1688,11 +1686,11 @@
   },
   "lastPreparation": {
     "objectId": "titania",
-    "materialSha256": "ea1c95a8516ebbd092a1ecb5c23748b394a827abe0d2c04e4308906551cf0318",
+    "materialSha256": "de1c75b2822d3cf84376edf409d28e5fc47635ca12650106fc22e0a777ff0d6c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "2c6c2f03dd4bff17e02a8925728fee543aa8a17f0149e25f33ecc1a1d0fbf8e0"
+      "bindingsSha256": "62f529f74ab5e539a511ac426fd52d1cc2c067b163fa7f497fd0d0f3106dac99"
     }
   }
 }

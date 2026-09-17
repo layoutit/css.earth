@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8ecdf3d3436afbcea6755c388ea716b7d4f202f13a22ccb5abcf4fcabf8b9c0d"
+    "sha256": "e43e0b20dcc4387368f0be8fb6e69e48c6051db75a82dd750610f8cdd516df48"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "4fc7b8d14b8eb565947da955806e2013780fa5aa8ebf455b41c3bf37114f9299"
+    "bindingsSha256": "b9b0b256ee13853868f318fb33e08f6f163a782a2439b1bff71d8e304299d521"
   },
   "recipes": [
     {
@@ -1790,7 +1790,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "59fd79640b484ce809a31d4d42c670a5ab5665cf4d16a7cc726cabcf3c1f2f01",
+      "sha256": "a4b98df89e6482faf79da809d09d33bdcfec581cf334ad87685d808295b6a7a0",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -1801,7 +1801,6 @@
           "metadata": "metadata_nomenclature_points_MOON.xml"
         },
         "surfaceMap": "presentation/surface-map.json",
-        "mapLeftEdgeLongitudeDeg": 180,
         "output": "moon-features.json",
         "publicBase": "/scenes/moon/",
         "target": {
@@ -2288,8 +2287,8 @@
         "kind": "local",
         "reason": "Project-authored map frame."
       },
-      "sha256": "59bd7a28b740a273bfa4e1a643dfc7a84f426f7bcbc0b5eace30e275f7763d6a",
-      "bytes": 151,
+      "sha256": "8cb169b7cafdc2e1dc397a406bf246f1a66a03a4b31036829cd14fe65456a5ad",
+      "bytes": 185,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3387,7 +3386,6 @@
       ],
       "interpretation": {
         "kind": "nomenclature-centre-points",
-        "mapLeftEdgeLongitudeDeg": 180,
         "excludedTypeCodes": {
           "AL": "Telescopic albedo features carry no Gazetteer diameter and describe historic shading, not mapped landforms."
         }
@@ -3618,11 +3616,11 @@
   },
   "lastPreparation": {
     "objectId": "moon",
-    "materialSha256": "79b4390c993c9beaa5e40bbdf51c0690fd16ab13957296a15e7ead0d4e70902e",
+    "materialSha256": "02f89ff283173d55eebd50f63090a5e0a5139811fce2ba8add6a44518176c769",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "4fc7b8d14b8eb565947da955806e2013780fa5aa8ebf455b41c3bf37114f9299"
+      "bindingsSha256": "b9b0b256ee13853868f318fb33e08f6f163a782a2439b1bff71d8e304299d521"
     }
   }
 }

@@ -1,7 +1,5 @@
 /** What the default camera shows, from the runtime's camera math and the pinned records, with no browser: the substellar point,
- * with the orbit normal up. The atlas is painted with longitude -90 at its first column because the planet route puts body
- * longitude 0 a quarter turn along the mesh; measured in Chrome on 2026-09-16, the leaf under the screen centre spans atlas
- * longitudes 0 to 11.25 degrees, west to the left and east to the right. */
+ * with the orbit normal up. The atlas is painted with longitude 0 at its first column, as the mesh places every atlas. */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -21,5 +19,5 @@ test('the default camera looks at the substellar point with the orbit normal up'
   const m = requireBodyFixedToIcrf('wasp-43b');
   assert.ok(Math.abs(view.screen([m[2]!, m[5]!, m[8]!]).angleDegrees - 90) < 0.1, 'the pole is straight up');
   const science = requireRecord(requireRecord(requireArray(requireRecord(await json('source/preparation/raster.json')).surfaces)[0]).science);
-  assert.equal(science.outputLongitudeOrigin, -90);
+  assert.equal(science.outputLongitudeOrigin, 0);
 });

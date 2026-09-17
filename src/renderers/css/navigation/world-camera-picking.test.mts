@@ -16,7 +16,7 @@ const bounds = { x: 0, y: 0, width: 1000, height: 800 } satisfies Pick<DOMRect, 
 // The shared world camera presents Mercury's physical radius through a 900 px focal length.
 const radiusUnits = runtimeDefinition.camera.logicalBodyDiameter / 2;
 const frame: PreparedWorldCameraFrame = { referenceFrame: 'sun-icrf', epochJdTt: 2461287.5, originM: [0, 0, 0],
-  presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1000, bodyRadiusM: radiusUnits * 1000 };
+  presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1000, bodyRadiusM: radiusUnits * 1000 };
 const project = (bodyCenterUnits: readonly [number, number, number]) => {
   const presented = presentWorldCamera(worldCameraFromPresentation({ rotation: [1,0,0,0,1,0,0,0,1], bodyCenterUnits }, frame),
     frame, { focalPixels: 900, principalOffsetPixels: [0, 0] });

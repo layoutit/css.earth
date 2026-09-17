@@ -101,8 +101,8 @@
     {
       "id": "callisto-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 155,
-      "expectedSha256": "a3f124900fc2f62dc6d3b76ead7962907ae909c5203e3104950fe56368befde5",
+      "expectedBytes": 187,
+      "expectedSha256": "b6a0020a853ab46efd7907ccefde2f248afa704f80cc7a89119f5ea0656dc027",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -370,8 +370,8 @@
     {
       "id": "callisto-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1172,
-      "expectedSha256": "23e234f835da8bc7877fd8be8c16bcb218afa9cee16abd01ce065bb42767828a",
+      "expectedBytes": 1140,
+      "expectedSha256": "6621ff031a61e771e0db9af9264d853885f93b89f5b9e6dfdd9b56a54e885c3c",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
