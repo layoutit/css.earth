@@ -16,9 +16,11 @@
  * 3. Size. A uniform disc fitted around the reference diameter (disc-fit.mts): the start image, the spotless twins' size and the beam.
  * 4. Twins. The two interleaved halves of the data, a spotless limb-darkened disc on the season's sampling and errors
  *    (spotless-disc.mts), and the same two halves of that disc.
- * 5. Reconstruct. SQUEEZE with the season's recipe on the season, its halves and their three spotless twins: six runs, one at a time.
- * 6. Check. The fit SQUEEZE reports, the spot ratio against the spotless twin, and the correlation of the halves once each half's
- *    twin is subtracted, combined by reconstructionVerdict into cast or not cast with the reasons.
+ * 5. Reconstruct. SQUEEZE with the season's recipe on the season, its five spotless twins, its halves and their twins: nine runs,
+ *    one at a time.
+ * 6. Check. The fit SQUEEZE reports, the spot ratio against the spottiest of spotless twins across ±2 percent in size
+ *    (TWIN_SCALES), and the correlation of the halves once each half's twin is subtracted, combined by reconstructionVerdict into
+ *    cast or not cast with the reasons.
  * 7. Compare. When the season names them, the calibrated squared visibilities against the author's file and the image against the
  *    author-derived image already shipped.
  *
@@ -60,6 +62,8 @@ export interface Season {
   };
   readonly recipe: SqueezeRecipe;
   readonly limbDarkening: number;
+  /** Twin sizes as fractions of the fitted disc; the spot ratio is taken against the spottiest twin. */
+  readonly twinScales: readonly number[];
   readonly oracles: { readonly calibrated?: string; readonly image?: string };
 }
 
@@ -110,11 +114,19 @@ export function parseSeason(value: unknown): Season {
     },
     recipe: { pixelMas: requireFiniteNumber(recipe.pixelMas), width: requireFiniteNumber(recipe.width), entropy: requireFiniteNumber(recipe.entropy), elements: requireFiniteNumber(recipe.elements), iterations: requireFiniteNumber(recipe.iterations), discard: requireFiniteNumber(recipe.discard) },
     limbDarkening: check.limbDarkening === undefined ? 0 : requireFiniteNumber(check.limbDarkening),
+    twinScales: check.twinScales === undefined ? TWIN_SCALES : requireArray(check.twinScales).map(value => { const scale = requireFiniteNumber(value); if (!(scale > 0.8 && scale < 1.2)) throw new RangeError(`Twin scale ${scale} is not near the fitted disc.`); return scale; }),
     oracles: { ...(oracles.calibrated ? { calibrated: requireString(oracles.calibrated) } : {}), ...(oracles.image ? { image: requireString(oracles.image) } : {}) },
   };
 }
 
 const exists = (path: string) => access(path).then(() => true, () => false);
+
+/** A reconstruction of a spotless disc can come out as spotty as a real star at one size and clean at a size 1 percent away:
+ * on Betelgeuse's February 2020 MATISSE coverage, twins between 42.0 and 44.3 mas left spot maps with rms 0.03 to 0.14 against
+ * the real image's 0.13, while π¹ Gruis's twins stayed between 0.012 and 0.019 over ±2 percent. Neither more iterations, four
+ * chains nor half-size pixels made a spotty twin clean. So the season's spots are compared with twins across ±2 percent, about
+ * the uncertainty of a diameter fitted to a star that is not a disc, and the spottiest decides. */
+export const TWIN_SCALES: readonly number[] = [0.98, 0.99, 1, 1.01, 1.02];
 const repository = resolve(import.meta.dirname, '../../..');
 
 interface Progress { calibrated: Record<string, string[]>; runs: Record<string, SqueezeFit & { seconds: number; inputs: string }> }
@@ -159,8 +171,11 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
 
   // 4. Twins.
   // Each half's twin is that half of the season's twin, so a point carries the same noise draw in both.
-  const spotless = simulateSpotlessDisc(selected.bytes, { diameterMas: disc.diameterMas, limbDarkening: season.limbDarkening }).bytes;
-  const inputs: Record<string, Buffer> = { season: selected.bytes, 'season-spotless': spotless };
+  const twin = (scale: number) => simulateSpotlessDisc(selected.bytes, { diameterMas: disc.diameterMas * scale, limbDarkening: season.limbDarkening }).bytes;
+  const twinName = (scale: number) => scale === 1 ? 'season-spotless' : `season-spotless-${scale}`;
+  const spotless = twin(1);
+  const inputs: Record<string, Buffer> = { season: selected.bytes };
+  for (const scale of new Set([1, ...season.twinScales])) inputs[twinName(scale)] = scale === 1 ? spotless : twin(scale);
   for (const half of ['even', 'odd'] as const) { inputs[half] = selectOifits(selected.bytes, { half }).bytes; inputs[`${half}-spotless`] = selectOifits(spotless, { half }).bytes; }
   for (const [name, bytes] of Object.entries(inputs)) await writeFile(resolve(work, `${name}.fits`), bytes);
 
@@ -177,7 +192,10 @@ export async function imageStar(seasonDirectory: string, work: string, rawDirect
 
   // 6. Check.
   const map = async (name: string) => spotMap(await readReconstructionPlane(resolve(work, `${name}-image.fits`)), disc.diameterMas, disc.beamMas);
-  const spots = compareSpotMaps(await map('season'), await map('season-spotless'));
+  const real = await map('season'), twins = [];
+  for (const scale of new Set([1, ...season.twinScales])) twins.push({ scale, diameterMas: disc.diameterMas * scale, ...compareSpotMaps(real, await map(twinName(scale))) });
+  // The spottiest twin decides; every size is kept in the verdict.
+  const spots = { ...twins.reduce((worst, entry) => entry.ratio < worst.ratio ? entry : worst), twins: twins.map(({ scale, diameterMas, spotlessRms, ratio }) => ({ scale, diameterMas, spotlessRms, ratio })) };
   const halves = reproducibility(await map('even'), await map('even-spotless'), await map('odd'), await map('odd-spotless'));
   const fit = progress.runs.season!;
   const verdict = reconstructionVerdict({ vis2: fit.vis2, closurePhase: fit.closurePhase }, spots, halves);
