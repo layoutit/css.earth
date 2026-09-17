@@ -107,6 +107,1261 @@
           }
         ]
       }
+    },
+    {
+      "id": "metis-spin-record",
+      "path": "reference/release-parameters.txt",
+      "origin": "https://observations.lam.fr/astero/3Dshape/9_Metis_param",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "Rotation record: pole latitude, pole longitude and sidereal period, then the phase epoch and phase. Read latitude-first: the second column, 181.3819 degrees, cannot be a latitude. The release names this file without an extension.",
+      "expectedBytes": 40,
+      "expectedSha256": "5dc152f3e52f69996fe0c506fc7a9cccb6f5042426734120255384073d3d77da",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-spin-record",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-horizons-sphere-observer",
+      "path": "reference/horizons-sphere-observer.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
+      "expectedBytes": 3552,
+      "expectedSha256": "3d93ee9e43914dbac3c598e4ca1142293e66a1350526754a310483d2e4ec1c51",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-horizons-sphere-observer",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-horizons-sphere-heliocentric",
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "heliocentric position vectors at each exposure less its light time, for the direction to the Sun at the body",
+      "expectedBytes": 4062,
+      "expectedSha256": "2697b1f9f656d830a053652653ded40a0c6e05f1018424af94f459fdf2049c44",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-horizons-sphere-heliocentric",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608064446",
+      "path": "observations/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "8ce68652fa3e9d1f253446ed2886b5610b268304d9be106f6665fac29c637101",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608064446",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608064850",
+      "path": "observations/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d1cab4fd052f212afe5f4fd9f995d7c3aa0a4e784371dca8321300cfdb5a8772",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608064850",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608065255",
+      "path": "observations/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "cd3b1d615f3a3aadaef0068ae3e364f06de8a4924c136e1cd4c3aea4762f4554",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608065255",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608065658",
+      "path": "observations/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "cbe745a862b009a350e87ba31e50b23443cbe6c70f09605ad9f322762de8bcad",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608065658",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608070101",
+      "path": "observations/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "cb28cbc44dd541da3466b48e6320d6a6fd8e727de94890e083e3c7cc6bd82693",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608070101",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608073141",
+      "path": "observations/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "09cd6ddf1646ec1ffa5e6bf9c0b17121671d427fde66be0fb528dc300b1bd021",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608073141",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608073546",
+      "path": "observations/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "e72639360eec19f31f77e917d3d46775c618a97d5bd18bc907f2c93bacc13229",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608073546",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608073952",
+      "path": "observations/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "940ae0b8c6c90979f0956a2994886728b3aac91ebbe3ec7611ba3bbf8f0e4315",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608073952",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608074356",
+      "path": "observations/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "9c56ab5ef994082d7093cd6bdd10d736c506e147344d6397bf7c13d74b637319",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608074356",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180608074759",
+      "path": "observations/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "cf465c64c79bdf3809f91214d604e04649fd25fb06e75f25ddb6a495080e7cd9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180608074759",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180612041313",
+      "path": "observations/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "b0a1ab4d1b3b6664d500b3bb9f546f71730f4361d197ee7ffd2082add7ee1e35",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180612041313",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180612041718",
+      "path": "observations/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "9a7c9d9f1b1f1b300791ca9c5a264d1eaa788e51c5308bb2bc42e7f594e6c2c1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180612041718",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180612042123",
+      "path": "observations/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d6f76ec9e605949ae8fa8492ae6a3991b9f47a847170d294a3b7793096853143",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180612042123",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180612042527",
+      "path": "observations/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "50250ce0e52a6678ace933c3177704db22bf66cac649b44d89f032ccfd45f346",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180612042527",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180612042930",
+      "path": "observations/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "0a0fde447f59acaa482ebf9d0f243722c8e0186a4a101d3d39983f9098f5080e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180612042930",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180617030114",
+      "path": "observations/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "0b402fe6c84f14837d8df20dda7d9b3f038866d86763cadfa58afc280ad82947",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180617030114",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180617030519",
+      "path": "observations/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "fe1ee5bec27b5c14a4c0f8bacdeeef21ceff79742a12025ddbc2464e04051457",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180617030519",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180617030925",
+      "path": "observations/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "beff22232290bf22cae552d52e19d93b59853c21eeb5d8c7be0c5305be8fe335",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180617030925",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180617031329",
+      "path": "observations/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "c62b4318d029982faba579f6cea5058193de9561594b96e99276ab07075e559e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180617031329",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180617031733",
+      "path": "observations/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "71228fbb285a03c12ef2b2bba428e9dd4d857a47a8e2f20d39574d7dc6b6ddcf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180617031733",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710033943",
+      "path": "observations/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "493745f2ce20781a01336d4f7d59c3e8766e428333ac87d12b5fa446948d7e2a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710033943",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/26"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710034347",
+      "path": "observations/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "41d37295fd24a48b7fb41d0c01afca36f55448cea48d9704c0438d99a3811c59",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710034347",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710034752",
+      "path": "observations/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "4c3272ee279e5b365746e16268119630b0aa03ebd28692e48ebbe505ba91e1c9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710034752",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/28"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710035156",
+      "path": "observations/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "131baad928e49cd454502a79eaa75f89df65ee404e2547ee334a8fbbff50baca",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710035156",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/29"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710035559",
+      "path": "observations/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "07928eaf0cf98876bb81e1574b166c58b66048cd3a7d733a798041909b529108",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710035559",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/30"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710044406",
+      "path": "observations/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "ba06e2f49eafcdd1bbddc895aa87fc9043eeb794ed30529f26a3de462440eee4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710044406",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/31"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710044811",
+      "path": "observations/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "aa7b18d0d3dd082e663fad4a76c8d44563b47892624196099d78152e96ba568a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710044811",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/32"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710045217",
+      "path": "observations/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f333070cd9c29c1f9c5acebca3eb52d4bf9379004789a368c770d78d3caba922",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710045217",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/33"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710045620",
+      "path": "observations/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "69893aebd9e2a62bc9437c33825e0f3de79d66e35f18bd21c36fb31c7dffead8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710045620",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/34"
+          }
+        ]
+      }
+    },
+    {
+      "id": "metis-sphere-20180710050022",
+      "path": "observations/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "446a10ba756331f66e4d5d6a3844950dbb25ac1bcc504c1b0a004e99df1a7f1b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-sphere-20180710050022",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@24e2730084f5b0528499be985940392e1d16da17#/inputs/35"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -139,8 +1394,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8427,
-      "expectedSha256": "4ed3020b7f7aab55d6b26c34c80b6c44bb0d4ceeccabf8986bb992eeb42fd817",
+      "expectedBytes": 9432,
+      "expectedSha256": "e7d897753f71bad86cf6267c8728e37e8bf6a76ec0e5db5cd291e50395e24474",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -148,8 +1403,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 913,
-      "expectedSha256": "dcb3fa93f2e5c157d1b7040f166186096b417937ef23b342af4eb524ff1daa01"
+      "expectedBytes": 15235,
+      "expectedSha256": "f70c16bd50abc0bf2ee6c7084aaa6896a970611870b7a5f66f1df17dd292764e"
     },
     {
       "path": "preparation/navigation.json",
@@ -163,8 +1418,13 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2728,
-      "expectedSha256": "0f258a9691b4aa4f1c5677cc598e7908086de094194e69d79018f65a5d974fda"
+      "expectedBytes": 22564,
+      "expectedSha256": "47c35363baab31b832b98108ff735ef0979644f321fc0a85480a5abb314bb0f3"
+    },
+    {
+      "path": "preparation/observer-cameras.json",
+      "expectedBytes": 443,
+      "expectedSha256": "a33f2a3c0ff519bac391e931c34e3f2c94472c8de178ee01fd5de6d37c5087fb"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -195,11 +1455,6 @@
       "path": "reference/model-properties.json",
       "expectedBytes": 1843,
       "expectedSha256": "4a5787b3c4cb2340db40d0757fd7dd492772dd9cfee06fb9fe69823f1d50a75b"
-    },
-    {
-      "path": "reference/release-parameters.txt",
-      "expectedBytes": 40,
-      "expectedSha256": "5dc152f3e52f69996fe0c506fc7a9cccb6f5042426734120255384073d3d77da"
     },
     {
       "path": "reference/sbdb.json",

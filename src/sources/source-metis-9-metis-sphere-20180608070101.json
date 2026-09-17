@@ -1,0 +1,37 @@
+{
+  "id": "source-metis-9-metis-sphere-20180608070101",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "9 Metis · metis sphere 20180608070101",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/metis-9/source/manifest.json",
+      "revision": "24e2730084f5b0528499be985940392e1d16da17",
+      "sha256": "98103a68aa191535906913f360730f052facb8d6e84b6d7e0babcfa36e4f237d",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The metis sphere 20180608070101 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
