@@ -10,7 +10,7 @@
     { "from": "2014-09-29T14:00:00", "to": "2014-09-30T12:00:00" }
   ],
   "referenceDiameter": { "mas": 18.17, "source": "src/objects/pi1-gruis/source/measurements.json angularDiameterMas" },
-  "selection": { "errorFloors": { "vis2Relative": 0.05, "closureDegrees": 2 }, "errorFloorsSource": "every point of PI_GRU_forImage.fits, the file Paladini et al. imaged from, carries 5 percent and 2 degrees" },
+  "selection": { "errorFloors": { "vis2Relative": 0.05, "vis2Minimum": 5e-6, "closureDegrees": 2 }, "errorFloorsSource": "in PI_GRU_forImage.fits, the file Paladini et al. imaged from, every squared-visibility error is the largest of its own, 5 percent of the value and 5e-6, and every closure-phase error at least 2 degrees" },
   "reconstruction": { "code": "squeeze", "pixelMas": 0.4, "width": 128, "entropy": 10, "elements": 3000, "iterations": 3000, "discard": 500, "source": "src/objects/pi1-gruis/source/reference/squeeze-command.txt" },
   "check": { "limbDarkening": 0 },
   "oracles": {

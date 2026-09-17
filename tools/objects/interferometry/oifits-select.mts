@@ -4,7 +4,7 @@
  * published scale factor.
  *
  *   node tools/objects/interferometry/oifits-select.mts <in.fits> <out.fits> [--window <min>:<max> ...] [--mjd <min>:<max>] [--half even|odd] [--wavelength-scale <factor>]
- *     [--error-floor <vis2 fraction>:<closure degrees>]
+ *     [--error-floor <vis2 fraction>:<closure degrees>[:<vis2 minimum>]]
  *
  * Windows are in metres, inclusive. A continuum window keeps a surface reconstruction off the molecular lines that show the
  * extended atmosphere instead (R Dor's CO band head at 2.2935 um). The wavelength scale is for a published calibration of the
@@ -14,19 +14,22 @@
  * time), so both halves keep nearly the same coverage but independent noise: the reproducibility check compares them.
  * Already-flagged cells stay flagged.
  *
- * Error floors raise each squared-visibility error to at least a fraction of its value and each closure-phase error to at least
- * some degrees, keeping larger errors. Calibrated errors from one night's statistics understate the scatter between nights; the
- * π¹ Gruis file its authors imaged from gives every point exactly 5 percent and 2 degrees. */
+ * Error floors raise each squared-visibility error to at least a fraction of its value, and to at least a minimum, and each
+ * closure-phase error to at least some degrees, keeping larger errors. Calibrated errors from one night's statistics understate the
+ * scatter between nights. In the π¹ Gruis file its authors imaged from, every error is the largest of its own, 5 percent of the
+ * value and 5e-6, and every closure-phase error at least 2 degrees. Without the minimum, points past a null with squared
+ * visibilities near 1e-5 carry errors near 5e-7 and decide a fit: five such points gave 59 percent of the chi-squared of the
+ * shipped image against π¹ Gruis's season from raw. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell } from './fits-table.mts';
 
 export interface SelectOptions { readonly windowsMetres?: readonly (readonly [number, number])[]; readonly mjdRange?: readonly [number, number]; readonly half?: 'even' | 'odd'; readonly wavelengthScale?: number;
-  readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number } }
+  readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number; readonly vis2Minimum?: number } }
 
 export function selectOifits(input: Buffer, { windowsMetres = [], mjdRange, half, wavelengthScale = 1, errorFloors }: SelectOptions) {
-  if (errorFloors && !(errorFloors.vis2Relative >= 0 && errorFloors.vis2Relative < 1 && errorFloors.closureDegrees >= 0 && errorFloors.closureDegrees < 90)) throw new RangeError('Error floors are a fraction below 1 and degrees below 90.');
+  if (errorFloors && !(errorFloors.vis2Relative >= 0 && errorFloors.vis2Relative < 1 && errorFloors.closureDegrees >= 0 && errorFloors.closureDegrees < 90 && (errorFloors.vis2Minimum ?? 0) >= 0 && (errorFloors.vis2Minimum ?? 0) < 1)) throw new RangeError('Error floors are a fraction below 1, degrees below 90 and a squared-visibility minimum below 1.');
   if (mjdRange && !(mjdRange[1] > mjdRange[0])) throw new RangeError(`MJD range ${mjdRange.join(':')} is empty.`);
   if (!(wavelengthScale > 0.9 && wavelengthScale < 1.1)) throw new RangeError(`A wavelength scale of ${wavelengthScale} is not a spectrograph calibration.`);
   for (const [min, max] of windowsMetres) if (!(min > 0 && max > min)) throw new RangeError(`Window ${min}:${max} is not a wavelength range in metres.`);
@@ -83,7 +86,7 @@ export function selectOifits(input: Buffer, { windowsMetres = [], mjdRange, half
     for (let row = 0; row < table.rows; row++) {
       const values = numbers(bytes, table, row, value);
       numbers(bytes, table, row, error).forEach((current, k) => {
-        const floor = vis2 ? errorFloors.vis2Relative * Math.abs(values[k]!) : errorFloors.closureDegrees;
+        const floor = vis2 ? Math.max(errorFloors.vis2Relative * Math.abs(values[k]!), errorFloors.vis2Minimum ?? 0) : errorFloors.closureDegrees;
         if (current < floor) { writeCell(bytes, table, row, error, k, floor); raisedErrors++; }
       });
     }
@@ -95,13 +98,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const [input, output, ...rest] = process.argv.slice(2);
   if (!input || !output) throw new TypeError('Usage: oifits-select <in.fits> <out.fits> [--window <min>:<max> ...] [--mjd <min>:<max>] [--wavelength-scale <factor>]');
   const windowsMetres: [number, number][] = [];
-  let wavelengthScale = 1, mjdRange: [number, number] | undefined, half: 'even' | 'odd' | undefined, errorFloors: { vis2Relative: number; closureDegrees: number } | undefined;
+  let wavelengthScale = 1, mjdRange: [number, number] | undefined, half: 'even' | 'odd' | undefined, errorFloors: { vis2Relative: number; closureDegrees: number; vis2Minimum?: number } | undefined;
   for (let i = 0; i < rest.length; i++) {
     if (rest[i] === '--window') { const [min, max] = String(rest[++i]).split(':').map(Number); windowsMetres.push([min!, max!]); }
     else if (rest[i] === '--half') { const value = rest[++i]; if (value !== 'even' && value !== 'odd') throw new TypeError('--half is even or odd.'); half = value; }
     else if (rest[i] === '--mjd') { const [min, max] = String(rest[++i]).split(':').map(Number); mjdRange = [min!, max!]; }
     else if (rest[i] === '--wavelength-scale') wavelengthScale = Number(rest[++i]);
-    else if (rest[i] === '--error-floor') { const [vis2Relative, closureDegrees] = String(rest[++i]).split(':').map(Number); errorFloors = { vis2Relative: vis2Relative!, closureDegrees: closureDegrees! }; }
+    else if (rest[i] === '--error-floor') { const [vis2Relative, closureDegrees, vis2Minimum] = String(rest[++i]).split(':').map(Number); errorFloors = { vis2Relative: vis2Relative!, closureDegrees: closureDegrees!, ...(vis2Minimum === undefined ? {} : { vis2Minimum }) }; }
     else throw new TypeError(`Unknown argument ${rest[i]}.`);
   }
   const result = selectOifits(await readFile(input), { windowsMetres, wavelengthScale, ...(mjdRange ? { mjdRange } : {}), ...(half ? { half } : {}), ...(errorFloors ? { errorFloors } : {}) });

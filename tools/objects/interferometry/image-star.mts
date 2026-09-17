@@ -51,7 +51,7 @@ export type SeasonData =
 export interface Season {
   readonly id: string; readonly object: string; readonly target: string; readonly data: SeasonData;
   readonly referenceDiameterMas: number;
-  readonly selection: { readonly windowsMetres: readonly (readonly [number, number])[]; readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number } };
+  readonly selection: { readonly windowsMetres: readonly (readonly [number, number])[]; readonly errorFloors?: { readonly vis2Relative: number; readonly closureDegrees: number; readonly vis2Minimum?: number } };
   readonly recipe: SqueezeRecipe;
   readonly limbDarkening: number;
   readonly oracles: { readonly calibrated?: string; readonly image?: string };
@@ -90,7 +90,7 @@ export function parseSeason(value: unknown): Season {
     referenceDiameterMas: requireFiniteNumber(reference.mas),
     selection: {
       windowsMetres: requireArray(selection.windowsMicrons ?? []).map(entry => { const [min, max] = requireArray(entry).map(number => requireFiniteNumber(number) * 1e-6); return [min!, max!] as const; }),
-      ...(floors ? { errorFloors: { vis2Relative: requireFiniteNumber(floors.vis2Relative), closureDegrees: requireFiniteNumber(floors.closureDegrees) } } : {}),
+      ...(floors ? { errorFloors: { vis2Relative: requireFiniteNumber(floors.vis2Relative), closureDegrees: requireFiniteNumber(floors.closureDegrees), ...(floors.vis2Minimum === undefined ? {} : { vis2Minimum: requireFiniteNumber(floors.vis2Minimum) }) } } : {}),
     },
     recipe: { pixelMas: requireFiniteNumber(recipe.pixelMas), width: requireFiniteNumber(recipe.width), entropy: requireFiniteNumber(recipe.entropy), elements: requireFiniteNumber(recipe.elements), iterations: requireFiniteNumber(recipe.iterations), discard: requireFiniteNumber(recipe.discard) },
     limbDarkening: check.limbDarkening === undefined ? 0 : requireFiniteNumber(check.limbDarkening),
