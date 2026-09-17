@@ -3,7 +3,7 @@
 `OBJECTS` owns navigable scenes. `MISSIONS` owns individual missions.
 `FACILITIES` owns what is credited with observing: spacecraft, landers, rovers and
 ground telescopes. Facility is the term astronomy uses in its own records (the
-Facilities line of AAS journal articles lists telescopes and spacecraft alike, each
+[Facilities line of AAS journal articles](https://journals.aas.org/facility-keywords/) lists telescopes and spacecraft alike, each
 with its instruments); the instruments a facility carries, such as MATISSE on the
 VLTI, are not separate records. A facility can serve more than one mission, and a
 mission can operate several facilities. The mission's participant list owns that
