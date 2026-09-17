@@ -47,8 +47,15 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
   const axes: Axis[] = ['x', 'y', 'z'];
   return { schema: 'cssearth-css-volume@1' as const, id, frame,
     anchors: recipe.anchors.map(anchor => ({ id: anchor.id, positionUnits: referencePositionToUnits(anchor.referencePositionM, frame) })),
-    stacks: axes.map(axis => ({ axis, leaves: balanceVolumeSlices(
-      leaves.filter(leaf => leaf.axis === axis).map(({ axis: _axis, ...leaf }) => leaf), axis) })),
+    stacks: axes.map((axis, index) => {
+      const quads = slices.quads.filter(quad => quad.axis === axis), normal = quads[0]?.normal;
+      if (!normal || Math.abs(Math.hypot(...normal) - 1) > 1e-8 || quads.some(quad =>
+        Math.abs(Math.abs(quad.normal.reduce((sum, value, i) => sum + value * normal[i]!, 0)) - 1) > 1e-8))
+        throw new TypeError('Volume bank needs parallel unit normals.');
+      const rotated = normal.some((value, i) => i !== index && Math.abs(value) > 1e-10);
+      return { axis, ...(rotated ? { normalUnits: normal } : {}), leaves: balanceVolumeSlices(
+        leaves.filter(leaf => leaf.axis === axis).map(({ axis: _axis, ...leaf }) => leaf), axis, rotated ? normal : undefined) };
+    }),
     resources: slices.quads.filter(quad => quad.alphaCoverage !== 0).map(quad => ({ path: quad.texturePath, sha256: quad.sha256, bytes: quad.bytes,
       width: quad.widthPx, height: quad.heightPx })), provenance: slices.provenance, approximation: slices.approximation };
 }

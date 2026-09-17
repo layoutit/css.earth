@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-sky-band-composite@1",
+  "grid": {
+    "width": 4000,
+    "height": 4000,
+    "fovDeg": 10,
+    "centerIcrsDegrees": [
+      13.19,
+      -72.83
+    ]
+  },
+  "bands": [
+    {
+      "band": "SPIRE250",
+      "sha256": "c8e175783d63e3617b506732a93c87cbf699c1d607204a3d9305e7656bb06e9d",
+      "bytes": 128004480
+    }
+  ],
+  "backgroundPercentile": 5,
+  "peakPercentile": 99.7,
+  "coverage": "alpha",
+  "display": {
+    "minimum": 0,
+    "stretch": 0.6,
+    "softening": 8
+  }
+}

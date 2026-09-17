@@ -86,17 +86,19 @@ export interface AsinhBandDisplay {
 }
 
 /** Calibrated sky bands, each already divided by its own measured range, share one black level,
- * one linear stretch and one softening. The route names one band (monochrome) or three distinct
- * bands in red, green, blue order. The display has no gains of its own; hue shows where each band
- * is bright relative to its own range, not physical band ratios. */
+ * one linear stretch and one softening. The route names one band (monochrome), two distinct bands in
+ * red, blue order, or three distinct bands in red, green, blue order. Two bands take green from their
+ * mean, the convention of the CDS DSS2 colour survey. The display has no gains of its own; hue shows
+ * where each band is bright relative to its own range, not physical band ratios. */
+export const TWO_BAND_GREEN_REFERENCE = 'https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json';
 export function asinhBandDisplay(bands: readonly string[], value: unknown): AsinhBandDisplay {
   const row = requireRecord(value, 'Asinh display');
   const keys = Object.keys(row).sort().join();
   if (keys !== 'minimum,softening,stretch') throw new TypeError('An asinh display declares only minimum, stretch and softening.');
   const minimum = requireFiniteNumber(row.minimum, 'Asinh minimum'), stretch = requireFiniteNumber(row.stretch, 'Asinh stretch');
   const softening = requireFiniteNumber(row.softening, 'Asinh softening');
-  if (![1, 3].includes(bands.length) || new Set(bands).size !== bands.length || bands.some(band => !band) || !(stretch > 0) || !(softening > 0))
-    throw new TypeError('An asinh display binds one band or three distinct bands with a positive stretch and softening.');
+  if (![1, 2, 3].includes(bands.length) || new Set(bands).size !== bands.length || bands.some(band => !band) || !(stretch > 0) || !(softening > 0))
+    throw new TypeError('An asinh display binds one band, two or three distinct bands with a positive stretch and softening.');
   return { kind: 'band-asinh', inputQuantity: 'band-normalized-surface-brightness', bands: [...bands], minimum, stretch, softening, outputEncoding: 'lupton-asinh' };
 }
 
@@ -109,9 +111,10 @@ export function encodeAsinhBands(values: Float32Array | Float64Array, missing: U
   const result = Buffer.alloc(missing.length * 3), channel = [0, 0, 0];
   for (let pixel = 0; pixel < missing.length; pixel++) if (!missing[pixel]) {
     for (let c = 0; c < 3; c++) {
-      const value = values[pixel * count + (count === 1 ? 0 : c)];
+      // One band fills every channel; two bands are red and blue with their mean as green.
+      const value = count === 3 ? values[pixel * 3 + c] : count === 1 ? values[pixel] : c === 1 ? (values[pixel * 2]! + values[pixel * 2 + 1]!) / 2 : values[pixel * 2 + c / 2];
       if (!Number.isFinite(value)) throw new TypeError('A display band value must be finite.');
-      channel[c] = value - display.minimum;
+      channel[c] = value! - display.minimum;
     }
     const intensity = (channel[0] + channel[1] + channel[2]) / 3;
     const ratio = intensity <= 0 ? 0 : Math.asinh(intensity * soften) * slope / intensity;
@@ -125,5 +128,6 @@ export function encodeAsinhBands(values: Float32Array | Float64Array, missing: U
 
 export function asinhBandEvidence(display: AsinhBandDisplay) {
   return { ...display, interpretation: display.bands.length === 1 ? 'monochrome' : 'false-color', transferReference: LUPTON_ASINH_REFERENCE,
+    ...(display.bands.length === 2 ? { channels: 'Red is the first band, blue the second, green their mean (the CDS DSS2 colour survey convention).', channelReference: TWO_BAND_GREEN_REFERENCE } : {}),
     processing: 'Each band is calibrated to MJy/sr and divided by its own measured range, so hue shows where a band is bright relative to itself, not physical band ratios. One common minimum is subtracted; one asinh curve maps the mean of the bands and scales every band by the same factor. Pixels brighter than the display are scaled down as a whole, then quantized once to 8 bits. This does not reconstruct natural color.' };
 }
