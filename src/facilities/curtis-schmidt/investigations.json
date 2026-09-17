@@ -4,12 +4,13 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Archive access for the Michigan Curtis Schmidt telescope",
-      "status": "deferred",
-      "finding": "No open archive endpoint was found or probed; this telescope's data reach this repository through published images and papers.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "subject": "Archive access and query interface",
+      "status": "excluded",
+      "finding": "No public archive was found. NOIRLab's Astro Data Archive telescope list has no entry for this telescope, its photographic plates are held offline in a plate archive, and its modern orbital-debris survey publishes no archive.",
+      "revisitWhen": "An archive publishes this telescope's data, or a specific image is obtained from its owners.",
       "evidence": [
-        "https://noirlab.edu/public/programs/ctio/",
+        "https://astroarchive.noirlab.edu/api/adv_search/cat_lists/?format=json",
+        "https://astroarchive.noirlab.edu/about/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -24,10 +25,11 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "No terms, licence or credit requirement were found for this telescope's data. NOIRLab's archive acknowledgement does not apply, because the telescope is not in that archive.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://noirlab.edu/public/programs/ctio/"
+        "https://astroarchive.noirlab.edu/about/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +41,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined.",
+      "finding": "No reduction package and no distributed finished products were found.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://noirlab.edu/public/programs/ctio/"
+        "https://noirlab.edu/public/programs/ctio/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

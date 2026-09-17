@@ -4,11 +4,12 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Submillimeter Array archive access",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "The SMA archive answered on 2026-09-17 (200, after a redirect). Its own web interface, not TAP.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "The SMA archive offers a public web search and download of data older than the proprietary period, with no login; a separate archive holds proprietary data. No TAP endpoint was found.",
+      "revisitWhen": "A body in this repository needs submillimetre interferometry.",
       "evidence": [
+        "https://lweb.cfa.harvard.edu/rtdc/SMAdata/archives/",
         "https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
@@ -24,10 +25,11 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "Regular projects carry a 15-month proprietary period and large-scale projects 12 months after the last observation. No reuse licence is published; the Smithsonian and Academia Sinica joint-project sentence is the stated credit.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl"
+        "https://lweb.cfa.harvard.edu/rtdc/newweb/SMAdata/SMAdata_FAQ/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +41,14 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: CASA and MIR.",
+      "finding": "MIR reduces SMA data but is IDL-based and needs a commercial IDL licence, and its repository declares no open-source licence; the observatory recommends MIRIAD or CASA for imaging.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://lweb.cfa.harvard.edu/cgi-bin/sma/smaarch.pl"
+        "https://github.com/qi-molecules/sma-mir",
+        "https://lweb.cfa.harvard.edu/rtdc/newweb/SMAdata/SMAdata_FAQ/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

@@ -4,10 +4,10 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "CADC archive access for the Canada-France-Hawaii Telescope",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "CADC holds CFHT data. Its TAP service answered anonymously on 2026-09-17 (capabilities 200 at the argus endpoint). Nothing queried for a body yet.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "CADC serves CFHT data and answered anonymously on 2026-09-17 through its TAP service (argus, sync and async endpoints). Public files need no credentials; proprietary access is granted by CADC group membership per run.",
+      "revisitWhen": "A body or star in this repository needs CFHT data.",
       "evidence": [
         "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
         "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
@@ -25,11 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined: CFHT's proprietary period and the licence CADC distributes under.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "The proprietary period is typically 13 months after the end of the semester. No reuse licence is published; CADC asks for its own acknowledgement sentence and directs users to CFHT's acknowledgement page.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
-        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/credits.html",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -41,13 +42,14 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: CFHT instrument pipelines (Elixir, MegaPipe) and whether reduced products suffice.",
+      "finding": "CFHT detrends with Elixir and CADC stacks with MegaPipe. Both run as services rather than distributed packages: no download or licence is published, and users are asked to cite the MegaPipe paper.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus/capabilities",
-        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/megapipe/docs/intro.html",
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/megapipe/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

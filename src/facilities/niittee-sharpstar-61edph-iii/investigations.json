@@ -4,10 +4,9 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Archive access for a private telescope",
-      "status": "deferred",
-      "finding": "A privately owned telescope with no archive: its images reach this repository by the owner's own publication and permission.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "subject": "Archive access and query interface",
+      "status": "included",
+      "finding": "A privately owned telescope with no archive: its images reach this repository by its owner's publication and permission.",
       "evidence": [
         "https://www.astrobin.com/",
         "https://github.com/layoutit/css.earth/pull/293"
@@ -23,11 +22,11 @@
     {
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
-      "status": "deferred",
+      "status": "included",
       "finding": "Each image is used on the terms its owner states; no archive policy applies.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
       "evidence": [
-        "https://www.astrobin.com/"
+        "https://www.astrobin.com/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +38,12 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
-      "status": "deferred",
+      "subject": "Reduction software",
+      "status": "included",
       "finding": "No reduction software is run here; the owner delivers finished images.",
-      "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://www.astrobin.com/"
+        "https://www.astrobin.com/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

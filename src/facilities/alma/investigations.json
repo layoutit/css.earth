@@ -37,10 +37,12 @@
       "id": "reduction-software",
       "subject": "CASA and the ALMA imaging pipeline",
       "status": "deferred",
-      "finding": "Not examined: CASA's licence, size and macOS support. Re-imaging from raw data does not fit on this machine (R Dor band 7 alone is 464 GB of ASDM), so the first route is the archive's own continuum images.",
+      "finding": "CASA processes ALMA data and is distributed by NRAO under GPL v3 or later; its size and macOS support were not checked. Re-imaging from raw data does not fit on this machine (R Dor band 7 alone is 464 GB of raw measurement sets), so the first route is the archive's own continuum images, which the pipeline already produced.",
       "revisitWhen": "The archive continuum images are inspected and show surface structure worth re-imaging, or a calibrated measurement set becomes downloadable on its own.",
       "evidence": [
-        "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea"
+        "https://casa.nrao.edu/",
+        "https://almascience.eso.org/datalink/sync?ID=uid://A001/X35f5/Xaea",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

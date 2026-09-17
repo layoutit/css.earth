@@ -4,13 +4,12 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Radar data from Goldstone DSS-14",
-      "status": "deferred",
-      "finding": "Goldstone's asteroid radar observations reach this repository through NASA's PDS Small Bodies Node rather than an observatory archive; the PDS search API answered on 2026-09-17 (200). Shape models derived from its radar are already used for several asteroids.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "subject": "Archive access and query interface",
+      "status": "included",
+      "finding": "Goldstone radar reaches this repository through NASA's Planetary Data System Small Bodies Node, not an observatory archive: a dedicated Geographos dataset, and compilations of radar detections and shape models, several of which combine Goldstone transmissions with Arecibo or DSS-13 reception. No bulk raw Goldstone bundle was found, and the radar group's own site publishes no archive.",
       "evidence": [
-        "https://pds.nasa.gov/api/search/1/products?limit=1",
-        "https://pds.nasa.gov/",
+        "https://sbn.psi.edu/pds/resource/geograph.html",
+        "https://sbn.psi.edu/pds/resource/jplradarshape.html",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -24,12 +23,11 @@
     {
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
-      "status": "deferred",
-      "finding": "PDS data carry no restrictions on use; the specific product licences were not re-checked here.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "status": "included",
+      "finding": "Planetary Data System data are in the public domain and are expected to be cited when used. No separate Goldstone data policy was found.",
       "evidence": [
-        "https://pds.nasa.gov/api/search/1/products?limit=1",
-        "https://pds.nasa.gov/"
+        "https://search-pdsppi.igpp.ucla.edu/faq.jsp",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -41,13 +39,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
-      "status": "deferred",
-      "finding": "Radar shape models are delivered as finished products; no reduction software is run here.",
-      "revisitWhen": "Raw data from this facility are reduced here.",
+      "subject": "Reduction software",
+      "status": "excluded",
+      "finding": "Only finished products are distributed: radar shape models come from the SHAPE code lineage, for which no public distribution or licence was found.",
+      "revisitWhen": "A radar shape-model code is published openly, or raw radar data are archived.",
       "evidence": [
-        "https://pds.nasa.gov/api/search/1/products?limit=1",
-        "https://pds.nasa.gov/"
+        "https://sbn.psi.edu/pds/resource/rshape.html",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

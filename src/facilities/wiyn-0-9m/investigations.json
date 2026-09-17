@@ -4,12 +4,13 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "NOIRLab archive access for the WIYN 0.9-metre telescope",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "NOIRLab's Astro Data Archive answered anonymously on 2026-09-17 (200). Whether it holds this telescope's data was not checked.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "NOIRLab's Astro Data Archive holds this telescope's data under the code kp09m (HDI, an earlier CCD imager and Mosaic frames) and needs no account for public data. Simple Image Access, not TAP.",
+      "revisitWhen": "A body in this repository needs WIYN 0.9-metre data.",
       "evidence": [
-        "https://astroarchive.noirlab.edu/",
+        "https://astroarchive.noirlab.edu/about/",
+        "https://astroarchive.noirlab.edu/faq/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -24,10 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "The NOIRLab archive policy applies: usually 18 months, then public without an account. The telescope's own pages state no data policy, licence or acknowledgement wording.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://astroarchive.noirlab.edu/"
+        "https://astroarchive.noirlab.edu/faq/",
+        "https://www.wiyn.org/0.9m/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +42,13 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined.",
+      "finding": "No official reduction package is published for its instruments by the observatory or NOIRLab.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://astroarchive.noirlab.edu/"
+        "https://www.wiyn.org/0.9m/",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

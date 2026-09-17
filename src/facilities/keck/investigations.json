@@ -4,13 +4,13 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Keck Observatory Archive (KOA) access",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "KOA's TAP service answered anonymously on 2026-09-17 (capabilities 200). Keck data become public after their proprietary period; nothing queried for a body yet.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "The Keck Observatory Archive serves both telescopes and answered anonymously on 2026-09-17: anyone may search and download data past their proprietary period without an account, and its TAP service is public-data only, with ADQL not fully implemented.",
+      "revisitWhen": "A body or star in this repository needs Keck data.",
       "evidence": [
+        "https://koa.ipac.caltech.edu/UserGuide/access.html",
         "https://koa.ipac.caltech.edu/TAP/capabilities",
-        "https://koa.ipac.caltech.edu/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
@@ -25,11 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined: the proprietary period and licence.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "The default proprietary period was 18 months through 2022B; from 2023A it is 12 months for NASA Keck programmes and 18 for other partners, and principal investigators may set other periods per programme and night. No reuse licence is published; the archive asks for its own acknowledgement sentence and for crediting the original investigators.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://koa.ipac.caltech.edu/TAP/capabilities",
-        "https://koa.ipac.caltech.edu/"
+        "https://koa.ipac.caltech.edu/UserGuide/access.html",
+        "https://koa.ipac.caltech.edu/acknowledge.html",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -41,13 +42,14 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined: Keck instrument pipelines.",
+      "finding": "There is no single Keck pipeline: the archive names a reduction package per instrument and asks that it be cited. PypeIt (BSD 3-clause) covers DEIMOS, KCWI, MOSFIRE and NIRES; the KCWI and KPF pipelines are separate repositories.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://koa.ipac.caltech.edu/TAP/capabilities",
-        "https://koa.ipac.caltech.edu/"
+        "https://koa.ipac.caltech.edu/acknowledge.html",
+        "https://github.com/pypeit/PypeIt",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {

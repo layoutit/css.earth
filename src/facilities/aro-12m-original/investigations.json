@@ -4,11 +4,12 @@
   "entries": [
     {
       "id": "archive-access",
-      "subject": "Archive access for the ARO 12-metre telescope",
+      "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "No open archive endpoint was found or probed for the Arizona Radio Observatory's original 12-metre dish.",
-      "revisitWhen": "A body or star in this repository needs data from this facility.",
+      "finding": "This antenna's earlier National Radio Astronomy Observatory era has a public archive of raw data from late 1986 to July 2000, downloadable in bulk. For the Arizona Radio Observatory era from 2000 onward, no public archive was found on the observatory's pages.",
+      "revisitWhen": "A body in this repository needs single-dish millimetre spectra, or the observatory publishes an archive for its own era.",
       "evidence": [
+        "https://science.nrao.edu/observing/nrao-12m-telescope-data-archive",
         "https://aro.as.arizona.edu/",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
@@ -24,10 +25,12 @@
       "id": "data-policy",
       "subject": "Proprietary period, licence and credit",
       "status": "deferred",
-      "finding": "Not examined.",
-      "revisitWhen": "This facility's data are used, or its terms are needed to publish a derived product.",
+      "finding": "The archived National Radio Astronomy Observatory data are beyond their proprietary period and may be used for any purpose, with the NRAO, NSF and AUI acknowledgement. The observatory states its own acknowledgement sentence for publications but no proprietary period or licence.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
       "evidence": [
-        "https://aro.as.arizona.edu/"
+        "https://science.nrao.edu/observing/nrao-12m-telescope-data-archive",
+        "https://aro.as.arizona.edu/?q=publishing",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
@@ -39,12 +42,14 @@
     },
     {
       "id": "reduction-software",
-      "subject": "Reduction software for this facility",
+      "subject": "Reduction software",
       "status": "deferred",
-      "finding": "Not examined.",
+      "finding": "The archived data are raw, in single-dish and CLASS formats, and can be processed with the UniPOPS package; the observatory documents its own condar package for continuum data, for which no download location was found.",
       "revisitWhen": "Raw data from this facility are reduced here.",
       "evidence": [
-        "https://aro.as.arizona.edu/"
+        "https://science.nrao.edu/observing/nrao-12m-telescope-data-archive",
+        "https://aro.as.arizona.edu/?q=12m-manual-chapter-6",
+        "https://github.com/layoutit/css.earth/pull/293"
       ],
       "checked": [
         {
