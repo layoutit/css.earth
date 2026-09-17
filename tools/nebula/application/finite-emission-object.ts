@@ -25,6 +25,22 @@ function parsePin(value: unknown, at: string): Pin {
   return { path: text(pin.path, `${at} path`), sha256: digest };
 }
 const read = async (root: string, pin: Pin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
+
+/** True when the installed bank matches the committed descriptor and every texture it names is intact. */
+async function deliveredBankVerified(directory: string, installed: string): Promise<boolean> {
+  try {
+    const descriptor = record(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'descriptor');
+    const prepared = record(descriptor.prepared, 'descriptor delivery');
+    const bytes = await readFile(resolve(installed, 'lenses.json'));
+    if (hash(bytes) !== prepared.sha256) return false;
+    const data = validatePreparedVolumeLenses(record(json(bytes, false), 'installed bank').data);
+    for (const lens of data.lenses) for (const resource of lens.volume.resources) {
+      const texture = await readFile(resolve(installed, resource.path));
+      if (texture.length !== resource.bytes || hash(texture) !== resource.sha256) return false;
+    }
+    return true;
+  } catch { return false; }
+}
 /** Build the filter from validated primitives; the shared validator then enforces its own bounds. */
 function parseDensityFilter(value: unknown, at: string): CloudDensityFilter {
   const raw = record(value, at), cutoff = raw.cutoff, softness = raw.softness, showRemoved = raw.showRemoved;
@@ -45,7 +61,9 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
   assert.ok(typeof framingRadiusUnits === 'number' && framingRadiusUnits > 0, 'A delivered bank needs a framing radius.');
   const frame = record(inputs.frame, 'delivered frame');
   const installed = resolve(directory, 'prepared');
-  if (ifMissing && await readdir(installed).then(names => names.includes('lenses.json'), () => false)) return { id: bankId, status: 'verified' };
+  // A cached delivery counts only when the installed bank is the one the committed descriptor pins, and
+  // every atlas it names is present with the expected bytes. Presence alone would accept a stale bank.
+  if (ifMissing && await deliveredBankVerified(directory, installed)) return { id: bankId, status: 'verified' };
 
   const starsPayload = parsePreparedLmcStars(await read(root, parsePin(inputs.stars, 'delivered stars')), frame as never);
   const staging = resolve(directory, `.prepared-finite-${process.pid}`);
