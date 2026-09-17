@@ -9,6 +9,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '../source-values.mts';
+import { offsetAgreementDegrees, VERDICT_DEGREES } from './surface-observations/registration.mts';
 
 export const REGISTRATION_BLOCK_BEGIN = '<!-- registration-report:begin -->';
 export const REGISTRATION_BLOCK_END = '<!-- registration-report:end -->';
@@ -18,18 +19,23 @@ const ratio = (value: unknown) => typeof value === 'number' && Number.isFinite(v
 
 /**
  * Whether a lens registers: every measurement that reached a verdict (the outline over three or more scored frames, a
- * reference or the relief over their decisive minimum) places it within three degrees, and at least one did.
+ * reference or the relief over their decisive minimum, and only when those decisive offsets agree with each other to
+ * within the same gate) places it within three degrees, and at least one did.
  */
 export function registrationVerdict(registration: Record<string, unknown>): 'registered' | 'conflict' | 'no verdict' {
   const silhouette = requireRecord(registration.silhouette), measured: unknown[] = [];
   if (Number(silhouette.scored) >= 3) measured.push(silhouette.systematicDegrees);
   for (const report of [registration.reference, registration.relief]) {
     if (report === undefined) continue;
-    const record = requireRecord(report), rule = requireRecord(record.rule);
-    if (Number(record.decisive) >= Number(rule.minimumFrames ?? 3)) measured.push(record.medianOffsetDegrees);
+    const record = requireRecord(report), rule = requireRecord(record.rule), minimumFrames = Number(rule.minimumFrames ?? 3);
+    if (Number(record.decisive) < minimumFrames) continue;
+    // A sweep whose decisive offsets disagree by more than the gate has measured nothing to compare against it.
+    const agreement = offsetAgreementDegrees(requireArray(record.frames) as Parameters<typeof offsetAgreementDegrees>[0], minimumFrames);
+    if (agreement !== null && agreement > VERDICT_DEGREES) continue;
+    measured.push(record.medianOffsetDegrees);
   }
   const offsets = measured.filter((value): value is number => typeof value === 'number' && Number.isFinite(value));
-  return !offsets.length ? 'no verdict' : offsets.every(value => Math.abs(value) <= 3) ? 'registered' : 'conflict';
+  return !offsets.length ? 'no verdict' : offsets.every(value => Math.abs(value) <= VERDICT_DEGREES) ? 'registered' : 'conflict';
 }
 
 /** The block for one object's prepared surfaces, or null when no lens carries a registration stage. */
@@ -68,7 +74,7 @@ export function registrationBlock(surfaces: unknown): string | null {
     '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
     ...rows,
     '',
-    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames) is within three degrees; a conflict ships only when named in the known conflicts of `report-registration.test.mts`.',
+    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`.',
   ].join('\n');
 }
 

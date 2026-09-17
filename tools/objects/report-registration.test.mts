@@ -24,11 +24,23 @@ test('a lens registers only when every measurement that reached a verdict is wit
   assert.equal(verdict({}, {}), 'registered', 'the outline scored two frames and is no verdict; frames and relief agree');
   assert.equal(verdict({ scored: 3, systematicDegrees: 7.3 }, {}), 'conflict', 'an outline 7.3 degrees off is not outvoted by agreeing references');
   assert.equal(verdict({}, { decisive: 2 }), 'registered', 'two decisive frames reach no verdict');
+  // A median is a location, not a measurement: offsets that disagree by more than the gate have placed nothing.
+  const sweep = (offsets: number[]) => ({ rule: { minimumFrames: 3 }, decisive: offsets.length,
+    medianOffsetDegrees: [...offsets].sort((a, b) => a - b)[Math.floor(offsets.length / 2)],
+    frames: offsets.map(offsetDegrees => ({ decisive: true, exact: { offsetDegrees } })) });
+  const judge = (silhouette: Record<string, unknown>, relief: Record<string, unknown>) => registrationVerdict({
+    stage: 'cssearth-registration-stage@1', silhouette: { frames: [{}, {}, {}], scored: 0, systematicDegrees: null, ...silhouette },
+    reference: { kind: 'frames', rule: { minimumFrames: 3 }, decisive: 0, medianOffsetDegrees: null, frames: [] }, relief });
+  const spread = [-9.5, -8.25, 9.5], tight = [7, 7.5, 8];
+  assert.equal(judge({}, sweep(spread)), 'no verdict', 'decisive offsets 19 degrees apart reach no verdict rather than a conflict');
+  assert.equal(judge({ scored: 3, systematicDegrees: 1.65 }, sweep(spread)), 'registered', 'a disagreeing sweep does not outvote an outline that agrees');
+  assert.equal(judge({ scored: 3, systematicDegrees: 1.65 }, sweep(tight)), 'conflict', 'decisive offsets that agree on 7.5 degrees are a conflict');
 });
 
-// Shipped lenses whose measurements disagree. Each stays by decision, not by rule: its frames, which carry real
-// markings, agree with the camera, and only the relief reference, which depends on the mesh, disagrees.
-const KNOWN_CONFLICTS = new Set(['helene/normal', 'prometheus/normal']);
+// Shipped lenses whose measurements disagree, which ship by decision rather than by rule. Empty: the two that stood
+// here, Helene and Prometheus, were the case the agreement rule now measures — a relief sweep whose own decisive
+// offsets disagree reaches no verdict, so it no longer contradicts frames that do agree with the camera.
+const KNOWN_CONFLICTS = new Set<string>([]);
 
 test('no shipped lens contradicts its own registration unless it is a named known conflict', () => {
   const conflicts: string[] = [];

@@ -1,0 +1,164 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+
+
+*******************************************************************************
+Ephemeris / API_USER Thu Sep 17 13:22:47 2026 Pasadena, USA      / Horizons
+*******************************************************************************
+Target body name: 24 Themis (A853 GA)             {source: JPL#154}
+Center body name: Sun (10)                        {source: DE441}
+Center-site name: BODY CENTER
+*******************************************************************************
+Start time      : A.D. 2018-Dec-27 06:28:30.5100 TDB
+Stop  time      : A.D. 2019-Jan-17 02:57:53.5557 TDB
+Step-size       : DISCRETE TIME-LIST
+*******************************************************************************
+Center geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}
+Small perturbers: Yes                             {source: SB441-N16}
+Output units    : AU-D
+Calendar mode   : Mixed Julian/Gregorian
+Output type     : GEOMETRIC cartesian states
+Output format   : 1 (position only)
+Reference frame : ICRF
+*******************************************************************************
+Initial IAU76/J2000 heliocentric ecliptic osculating elements (au, days, deg.):
+  EPOCH=  2458194.5 ! 2018-Mar-17.00 (TDB)         Residual RMS= .25262        
+   EC= .125086008936354    QR= 2.74484878470776    TP= 2458627.2712732889      
+   OM= 35.9439563022094    W=  106.8964635513056   IN= .7517800782537345       
+  Equivalent ICRF heliocentric cartesian coordinates (au, au/d):
+   X= 1.915938493075877E+00  Y= 2.226239492701986E+00  Z= 9.772593493341263E-01
+  VX=-8.427698479091571E-03 VY= 4.615489342539528E-03 VZ= 2.130656374609017E-03
+Asteroid physical parameters (km, seconds, rotational period in hours):        
+   GM= n.a.                RAD= 99.                ROTPER= 8.374               
+   H= 7.21                 G= .190                 B-V= .684                   
+                           ALBEDO= .067            STYP= B                     
+*******************************************************************************
+JDTDB
+   X     Y     Z
+*******************************************************************************
+$$SOE
+2458479.769797570 = A.D. 2018-Dec-27 06:28:30.5100 TDB 
+ X =-9.265190380376197E-01 Y = 2.406723594952806E+00 Z = 1.081763505397932E+00
+2458479.772374065 = A.D. 2018-Dec-27 06:32:13.1192 TDB 
+ X =-9.265447367804496E-01 Y = 2.406713589685961E+00 Z = 1.081759257373301E+00
+2458479.774923870 = A.D. 2018-Dec-27 06:35:53.4224 TDB 
+ X =-9.265701692179098E-01 Y = 2.406703687854833E+00 Z = 1.081755053259989E+00
+2458479.777480192 = A.D. 2018-Dec-27 06:39:34.2886 TDB 
+ X =-9.265956665797781E-01 Y = 2.406693760501765E+00 Z = 1.081750838305295E+00
+2458479.780041363 = A.D. 2018-Dec-27 06:43:15.5738 TDB 
+ X =-9.266212122238542E-01 Y = 2.406683814104737E+00 Z = 1.081746615259604E+00
+2458481.662657422 = A.D. 2018-Dec-29 03:54:13.6013 TDB 
+ X =-9.453763950709494E-01 Y = 2.399314865450324E+00 Z = 1.078616464297193E+00
+2458481.665236494 = A.D. 2018-Dec-29 03:57:56.4331 TDB 
+ X =-9.454020576284382E-01 Y = 2.399304691368110E+00 Z = 1.078612140636000E+00
+2458481.667812105 = A.D. 2018-Dec-29 04:01:38.9659 TDB 
+ X =-9.454276856602519E-01 Y = 2.399294530724336E+00 Z = 1.078607822680410E+00
+2458481.670379324 = A.D. 2018-Dec-29 04:05:20.7736 TDB 
+ X =-9.454532301079698E-01 Y = 2.399284402970719E+00 Z = 1.078603518696831E+00
+2458481.672929402 = A.D. 2018-Dec-29 04:09:01.1003 TDB 
+ X =-9.454786039150748E-01 Y = 2.399274342626746E+00 Z = 1.078599243355061E+00
+2458492.708302847 = A.D. 2019-Jan-09 04:59:57.3660 TDB 
+ X =-1.054470226449948E+00 Y = 2.353766183450845E+00 Z = 1.059210856444184E+00
+2458492.710884046 = A.D. 2019-Jan-09 05:03:40.3816 TDB 
+ X =-1.054495522219506E+00 Y = 2.353755079412762E+00 Z = 1.059206114710882E+00
+2458492.713463695 = A.D. 2019-Jan-09 05:07:23.2632 TDB 
+ X =-1.054520802705927E+00 Y = 2.353743981827531E+00 Z = 1.059201375728212E+00
+2458492.716012093 = A.D. 2019-Jan-09 05:11:03.4448 TDB 
+ X =-1.054545776839400E+00 Y = 2.353733018473347E+00 Z = 1.059196694061168E+00
+2458492.718574831 = A.D. 2019-Jan-09 05:14:44.8654 TDB 
+ X =-1.054570891409980E+00 Y = 2.353721993217071E+00 Z = 1.059191985955317E+00
+2458492.744558063 = A.D. 2019-Jan-09 05:52:09.8166 TDB 
+ X =-1.054825519086093E+00 Y = 2.353610197814371E+00 Z = 1.059144245785272E+00
+2458492.747134910 = A.D. 2019-Jan-09 05:55:52.4562 TDB 
+ X =-1.054850770864360E+00 Y = 2.353599109494895E+00 Z = 1.059139510695256E+00
+2458492.749713990 = A.D. 2019-Jan-09 05:59:35.2887 TDB 
+ X =-1.054876044427594E+00 Y = 2.353588011353734E+00 Z = 1.059134771406136E+00
+2458492.752284749 = A.D. 2019-Jan-09 06:03:17.4023 TDB 
+ X =-1.054901236355219E+00 Y = 2.353576948805893E+00 Z = 1.059130047311704E+00
+2458492.754820125 = A.D. 2019-Jan-09 06:06:56.4588 TDB 
+ X =-1.054926081458862E+00 Y = 2.353566038310175E+00 Z = 1.059125388144062E+00
+2458496.741917206 = A.D. 2019-Jan-13 05:48:21.6466 TDB 
+ X =-1.093881041420349E+00 Y = 2.336153208057032E+00 Z = 1.051683616018426E+00
+2458496.744493191 = A.D. 2019-Jan-13 05:52:04.2117 TDB 
+ X =-1.093906133463786E+00 Y = 2.336141793391493E+00 Z = 1.051678733954381E+00
+2458496.747063469 = A.D. 2019-Jan-13 05:55:46.2837 TDB 
+ X =-1.093931169816252E+00 Y = 2.336130403803893E+00 Z = 1.051673862611442E+00
+2458496.749633284 = A.D. 2019-Jan-13 05:59:28.3157 TDB 
+ X =-1.093956201556586E+00 Y = 2.336119016058266E+00 Z = 1.051668992051569E+00
+2458496.752199696 = A.D. 2019-Jan-13 06:03:10.0537 TDB 
+ X =-1.093981200054691E+00 Y = 2.336107643179946E+00 Z = 1.051664127845732E+00
+2458500.613285065 = A.D. 2019-Jan-17 02:43:07.8296 TDB 
+ X =-1.131477539222958E+00 Y = 2.318759398533678E+00 Z = 1.044238877669222E+00
+2458500.615861035 = A.D. 2019-Jan-17 02:46:50.3934 TDB 
+ X =-1.131502478981912E+00 Y = 2.318747665846819E+00 Z = 1.044233852408797E+00
+2458500.618448371 = A.D. 2019-Jan-17 02:50:33.9393 TDB 
+ X =-1.131527528682452E+00 Y = 2.318735881177596E+00 Z = 1.044228804878974E+00
+2458500.620990070 = A.D. 2019-Jan-17 02:54:13.5421 TDB 
+ X =-1.131552136438676E+00 Y = 2.318724304166723E+00 Z = 1.044223846287402E+00
+2458500.623536524 = A.D. 2019-Jan-17 02:57:53.5557 TDB 
+ X =-1.131576790133012E+00 Y = 2.318712705290264E+00 Z = 1.044218878325958E+00
+$$EOE
+*******************************************************************************
+ 
+TIME
+
+  Barycentric Dynamical Time ("TDB" or T_eph) output was requested. This
+continuous coordinate time is equivalent to the relativistic proper time
+of a clock at rest in a reference frame co-moving with the solar system
+barycenter but outside the system's gravity well. It is the independent
+variable in the solar system relativistic equations of motion.
+
+  TDB runs at a uniform rate of one SI second per second and is independent
+of irregularities in Earth's rotation.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+REFERENCE FRAME AND COORDINATES
+
+  International Celestial Reference Frame (ICRF)
+
+    The ICRF is an adopted reference frame whose axes are defined relative to 
+    fixed extragalactic radio sources distributed across the sky.
+
+    The ICRF was aligned with the prior FK5/J2000 dynamical system at the ~0.02 
+    arcsecond level but is not identical and has no associated standard epoch.
+
+  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+      X      X-component of position vector (au)
+      Y      Y-component of position vector (au)
+      Z      Z-component of position vector (au)
+
+ABERRATIONS AND CORRECTIONS
+
+ Geometric state vectors have NO corrections or aberrations applied.
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+*******************************************************************************
