@@ -75,7 +75,13 @@ test('ESO HIERARCH values retain their full names and original cards', () => {
   assert.deepEqual(image.cards.slice(5, 9), records);
   assert.deepEqual([...image.values], [1, 2]);
   assert.throws(() => readFitsImage(imageFixture(16, [0, 1], [...records, records[0]])), /Duplicate/);
-  for (const c of ['HIERARCH ESO BAD', 'HIERARCH ESO BAD.NAME = 1', 'HIERARCH SIMPLE = F'])
+  const pipeline = ['HIERARCH PRO DISP COEF0 = 5.35550535653145', 'HIERARCH ESO MET OFFVOLT FC1FTx = -0.0022 / voltage'].map(c => c.padEnd(80));
+  const written = readFitsHeader(imageFixture(16, [0, 1], pipeline)).header;
+  assert.equal(written['PRO DISP COEF0'], 5.35550535653145);
+  assert.equal(written['ESO MET OFFVOLT FC1FTx'], -0.0022);
+  assert.equal(fitsCardValue('HIERARCH ESO DET CHIP PXSPACE= 3.000e-05 / Pixel-Pixel Spacing'.padEnd(80)), 3e-5);
+  assert.equal(fitsCardValue(card('VALUE', '2.5d2')), 250);
+  for (const c of ['HIERARCH ESO BAD', 'HIERARCH ESO BAD.NAME = 1', 'HIERARCH SIMPLE = F', 'HIERARCH eso DET = 1'])
     assert.throws(() => readFitsHeader(imageFixture(16, [0, 1], [c.padEnd(80)])), /HIERARCH/);
 });
 
