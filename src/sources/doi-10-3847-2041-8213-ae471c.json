@@ -1,0 +1,45 @@
+{
+  "id": "doi-10-3847-2041-8213-ae471c",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hui et al. (2026), Nucleus and Postperihelion Activity of Interstellar Object 3I/ATLAS Observed by Hubble Space Telescope",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ae471c"
+    },
+    {
+      "type": "arXiv",
+      "value": "2601.21569"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ae471c",
+      "label": "ApJL article"
+    },
+    {
+      "role": "mirror",
+      "url": "https://arxiv.org/abs/2601.21569",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/comet-3i/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)",
+      "scope": "Effective nucleus radius, assumed albedo and axis-ratio limit behind the display ellipsoid.",
+      "evidence": "Manifest credit field."
+    }
+  ]
+}
