@@ -12,7 +12,7 @@ import type { PositionM } from '@cssearth/engine';
 import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 import { array, finite, numbers, positive, record, text, unique } from '../validation/guards.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { transposeWorldRotation, validateWorldRotation, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation, validateWorldRotation } from '../navigation/world-camera-math.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { applySprite, applySpriteImage } from '../solar-system/heliocentric-sprites.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
@@ -235,6 +235,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     const rawBody = point(input, fields);
     const systemView = parseSystemView(input.systemView);
     if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
+    // A placed star can name the star it is measured to be bound to, with the pair's centre of mass.
     const bound = input.boundTo === undefined ? undefined : (() => {
       const pair = record(input.boundTo, 'bound companion', ['hostId', 'centerM']);
       return { hostId: text(pair.hostId, 'bound companion host'), centerM: vector(pair.centerM, 'bound companion centre') };
@@ -785,7 +786,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       latest = { world, viewport }; systemRetired = opacity === 0;
       presentationRevision++;
       let ranksChanged = false;
-      const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+      const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       // Camera translation adds the same depth offset to every prepared body.
       // Only orientation changes their order; selection changes where the
       // retained detail layers (0..3) sit within that order.
