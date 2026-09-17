@@ -48,7 +48,77 @@
         "Included: JPL Horizons 2026-09-03 heliocentric osculating trajectory and independent vectors; not a simulation of its non-gravitational acceleration."
       ],
       "references": [],
-      "distanceAu": 10.877658422787514
+      "distanceAu": 10.877658422787514,
+      "rotationFact": true,
+      "textCitations": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3I",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "locator": "Object, orbit and perihelion time",
+          "quote": "C/2025 N1 (ATLAS); e 6.14; q 1.36 au; tp 2460977.995 (2025-Oct-29.50)"
+        }
+      ]
+    },
+    {
+      "id": "comet-2i",
+      "name": "2I/Borisov",
+      "horizons": "2I;",
+      "aliases": [
+        "2I",
+        "Borisov",
+        "C/2019 Q4",
+        "C/2019 Q4 (Borisov)",
+        "gb00234"
+      ],
+      "fullAxesKm": [
+        0.8,
+        0.8,
+        0.8
+      ],
+      "radiusKm": 0.4,
+      "poleIcrfDegrees": [
+        205,
+        52
+      ],
+      "periodHours": null,
+      "periodText": "Not determined",
+      "population": "Interstellar visitor",
+      "classification": "interstellar",
+      "shapeLabel": "Estimated-size sphere",
+      "source": "https://doi.org/10.3847/1538-3881/ab9df8",
+      "credit": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration",
+      "papers": [
+        "https://doi.org/10.3847/2041-8213/ab621b",
+        "https://doi.org/10.3847/2041-8213/ab9228",
+        "https://science.nasa.gov/solar-system/comets/2i-borisov/"
+      ],
+      "shapeMeaning": "No image resolves the nucleus. Hubble limits its radius to at most 0.5 km at assumed geometric albedo 0.04, and its non-gravitational acceleration requires at least 0.2 km at assumed density 500 kg/m³ (Jewitt et al. 2020). Hui et al. (2020) estimate it is most likely at most 0.4 km. The display is a 0.4 km sphere: an estimate inside those bounds, not a measured size or shape.",
+      "orientationMeaning": "Pole RA 205°, Dec 52° (obliquity 30°), fitted to coma anisotropy by Kim et al. (2020); the prime meridian and spin phase are arbitrary and the period is not determined.",
+      "introduction": "It swung past the Sun in December 2019, trailing gas like an ordinary comet. Its nucleus was never resolved; the sphere shown is an estimated size.",
+      "card": "The second interstellar object seen passing through the Solar System, and the first clearly active comet.",
+      "datasetSummary": "A sphere of estimated size inside Hubble limits, turned on the pole fitted to its coma; the true shape is unknown.",
+      "survey": [
+        "Included: Hui et al. (2020) nucleus radius most likely at most 0.4 km from non-gravitational acceleration and CO production.",
+        "Included as bounds: Jewitt et al. (2020) Hubble coma modelling, radius at most 0.5 km (pV 0.04), and at least 0.2 km from acceleration (density 500 kg/m³).",
+        "Included: Kim et al. (2020) pole RA 205°, Dec 52° from coma anisotropy.",
+        "Excluded: coma photographs and artist impressions as surface textures; the nucleus is unresolved. The 2020 outburst fragments are not modelled.",
+        "Included: JPL Horizons 2026-09-03 heliocentric osculating trajectory and independent vectors."
+      ],
+      "references": [],
+      "distanceAu": 48.099927316612195,
+      "textCitations": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2I",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-16",
+          "locator": "Object, orbit and perihelion time",
+          "quote": "C/2019 Q4 (Borisov); e 3.36; q 2.01 au; tp 2458826.053 (2019-Dec-08.55)"
+        }
+      ],
+      "poleSource": "https://doi.org/10.3847/2041-8213/ab9228"
     }
   ]
 }
