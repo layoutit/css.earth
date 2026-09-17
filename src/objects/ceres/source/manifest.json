@@ -39,8 +39,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "missionId": "dawn",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
           }
@@ -95,8 +95,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "missionId": "dawn",
             "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
           }
@@ -162,8 +162,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "missionId": "dawn",
             "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
           }

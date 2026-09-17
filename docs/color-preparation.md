@@ -138,6 +138,19 @@ rectangles once faint emission is stretched. WISE bands are therefore built from
 the AllWISE atlas tiles, with one level fitted for each tile from its overlaps
 ([wise-atlas-mosaic.mts](../tools/objects/observation/wise-atlas-mosaic.mts)).
 
+The compositor also selects WISE atlas tiles by their projected footprint polygon, not its bounding box, and leaves out a grid-edge tile whose overlaps are too small to fix its level only when the joined tiles already cover every pixel it observed; such a tile is recorded in the evidence.
+
+Scanned photographic plates saturate, so the sky band route measures that from the plate itself: a flat-topped
+core a point spread function cannot produce, grown to where the ring median reaches the plate's own background
+([plate-saturation.mts](../tools/objects/observation/plate-saturation.mts)). Those pixels are neither light nor
+zero. A recipe that declares `coverage: "alpha"` composes an RGBA raster whose alpha is 0 wherever no band
+observed a pixel, and the nebula lab carries that channel through rectification into the coverage its material
+and fits read. Plate-to-plate background steps are a separate defect and are not corrected: the plate footprints
+are not in the pinned inputs, and a segmentation of the plate's own background map cannot separate a seam from
+the extended light of the object on it.
+
+Two routes extend this. Two bands display as red and blue, with their mean as green, following the [CDS DSS2 colour survey](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json). Bands without a documented flux calibration, the DSS2 photographic plates and the ESASky Herschel HiPS, keep `toMJyPerSr: null` and record their levels in relative source units. Dividing by each band's range means the image looks the same either way. The missing calibration only limits what the recorded levels can claim.
+
 ## Evidence must match the claim
 
 Check native band identities, units and registration separately from display

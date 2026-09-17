@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "71beeda5cae451fbe59bfe7d5f64c748ac9059217831d0f32b27b22e967c67c1"
+    "sha256": "547cf633a1b2cb4334bdc32113292db9be7eb51dabbdf9d223f4fe9ca8ee6bdf"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -886,8 +886,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
             "missionId": "new-horizons"
           }
@@ -927,8 +927,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "The preserved credit for this input reads: NASA/JHUAPL/SwRI; Paul Schenk, LPI; New Horizons team; NASA PDS Small Bodies Node",
             "missionId": "new-horizons"
           }
@@ -1051,8 +1051,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
             "missionId": "new-horizons"
           }
@@ -1155,8 +1155,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "science/leisa/preparation.json",
             "missionId": "new-horizons"
           }
@@ -1212,8 +1212,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "new-horizons",
+            "kind": "facility",
+            "facilityId": "new-horizons",
             "evidence": "science/leisa/preparation.json",
             "missionId": "new-horizons"
           }

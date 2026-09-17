@@ -1,5 +1,6 @@
-/** Report investigation decisions and missing ledgers from the same descriptors that generate OBJECTS.
- * Usage: node tools/report-investigations.mts [--classification=asteroid] [--status=deferred,unresolved] [--search=registration] [--summary] [--json]
+/** Report investigation decisions and missing ledgers from the same descriptors that generate OBJECTS, or with --facilities from
+ * the facilities catalogue's ground telescopes and their ledgers under src/facilities.
+ * Usage: node tools/report-investigations.mts [--facilities] [--classification=asteroid] [--status=deferred,unresolved] [--search=registration] [--summary] [--json]
  *        node tools/report-investigations.mts --index [--write]
  *
  * `--index` renders the open-work index: every unresolved or deferred decision grouped by what is being waited on, so the
@@ -8,17 +9,18 @@
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { INVESTIGATION_STATUSES, readInvestigationLedgers, type InvestigationLedger, type InvestigationStatus } from './investigation-ledger.mts';
+import { readFile } from 'node:fs/promises';
+import { INVESTIGATION_STATUSES, readFacilityLedgers, readInvestigationLedgers, type InvestigationLedger, type InvestigationStatus } from './investigation-ledger.mts';
 import { readCatalog } from './prepare-catalog.mts';
 
 interface ObjectIdentity { id: string; classification: string }
-export interface InvestigationOptions { classification?: string; statuses: readonly InvestigationStatus[]; search?: string; summary: boolean; json: boolean; index: boolean; write: boolean }
+export interface InvestigationOptions { classification?: string; statuses: readonly InvestigationStatus[]; search?: string; summary: boolean; json: boolean; facilities: boolean; index: boolean; write: boolean }
 export const INVESTIGATION_INDEX_FILE = 'docs/provenance/investigation-index.md';
 export function investigationOptions(args: readonly string[]): InvestigationOptions {
   const { values } = parseArgs({ args: [...args], strict: true, options: {
     classification: { type: 'string' }, status: { type: 'string' }, search: { type: 'string' },
     summary: { type: 'boolean', default: false }, json: { type: 'boolean', default: false },
-    index: { type: 'boolean', default: false }, write: { type: 'boolean', default: false },
+    index: { type: 'boolean', default: false }, write: { type: 'boolean', default: false }, facilities: { type: 'boolean', default: false },
   } });
   const requested = values.status?.split(',') ?? ['deferred', 'unresolved', 'excluded'];
   const statuses = [...new Set(requested)].map(name => {
@@ -28,8 +30,9 @@ export function investigationOptions(args: readonly string[]): InvestigationOpti
   });
   if (values.classification !== undefined && !values.classification.trim()) throw new TypeError('Classification must not be empty.');
   if (values.write && !values.index) throw new TypeError('--write refreshes the committed index; pass --index.');
+  if (values.facilities && values.classification !== undefined) throw new TypeError('Facilities have no object classification.');
   return { classification: values.classification, statuses, search: values.search, summary: values.summary, json: values.json,
-    index: values.index, write: values.write };
+    facilities: values.facilities, index: values.index, write: values.write };
 }
 
 /** Ledger coverage measures recorded decisions, never scientific acceptance or completeness of an archive survey. */
@@ -115,8 +118,21 @@ export function formatInvestigationIndex(report: ReturnType<typeof investigation
   return lines.join('\n') + '\n';
 }
 
+/** The facilities a sweep covers: the catalogue's ground telescopes. A facility may keep a ledger without a page record. */
+export async function groundFacilities(root: string) {
+  const catalogue = JSON.parse(await readFile(resolve(root, 'site/source/facilities/catalog.json'), 'utf8')) as { facilities: { id: string; setting: { value: string } }[] };
+  return catalogue.facilities.filter(facility => facility.setting.value === 'ground').map(facility => ({ id: facility.id, classification: 'ground-facility' }));
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const root = fileURLToPath(new URL('../', import.meta.url)), options = investigationOptions(process.argv.slice(2));
+  if (options.facilities) {
+    const [facilities, ledgers] = await Promise.all([groundFacilities(root), readFacilityLedgers(root)]);
+    const report = investigationReport(facilities, ledgers.map(ledger => ({ schema: ledger.schema, objectId: ledger.facilityId, entries: ledger.entries })), options);
+    console.log(options.json ? JSON.stringify(report, null, 2)
+      : formatInvestigationReport(report, options.summary).replace(/catalogued objects have ledgers/u, 'ground facilities have ledgers').trimEnd());
+    process.exit(0);
+  }
   const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
   // The index covers every recorded decision, so its status filter is not the report's.
   const report = investigationReport(objects, ledgers, options.index ? { ...options, statuses: [...INVESTIGATION_STATUSES] } : options);

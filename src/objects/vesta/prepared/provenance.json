@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d0d6494f22d90a7c604a279e4bf69f1db420d56999a322889b6a2832c628ee4a"
+    "sha256": "79f453294fc362670e40340a2ec1c20ae964cd38973951f7e38e2b9b0a2b3da7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -474,8 +474,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png",
             "missionId": "dawn"
           }
@@ -529,8 +529,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip",
             "missionId": "dawn"
           }
@@ -586,8 +586,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
             "missionId": "dawn"
           }
@@ -642,8 +642,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "dawn",
+            "kind": "facility",
+            "facilityId": "dawn",
             "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive.",
             "missionId": "dawn"
           }

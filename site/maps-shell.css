@@ -567,7 +567,7 @@
   padding-inline: var(--explorer-card-padding-inline-start) var(--explorer-card-padding-inline-end);
   border-top: var(--explorer-divider-width) solid var(--explorer-divider);
 }
-.planet-card-tabpanel :is(.planet-surface-minimap, .planet-lens-legend-panel, .planet-machine-preview) + .planet-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
+.planet-card-tabpanel :is(.planet-surface-minimap, .planet-lens-legend-panel, .planet-facility-preview) + .planet-lens-details-copy { margin-top: 12px; margin-inline-end: 0; }
 .planet-card-tabpanel .planet-lens-legend-panel { width: 100%; min-height: 28px; }
 .planet-card-tabpanel .planet-lens-legend-labels {
   display: grid;
@@ -593,31 +593,31 @@
 .planet-card-tabpanel .planet-lens-search { text-align: left; }
 .planet-card-tabpanel:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
 
-.planet-machine { margin: 0; }
-.planet-machine[hidden] { display: none; }
-.planet-machine:not([hidden]) ~ .planet-machine:not([hidden]) { margin-top: 20px; }
-.planet-machine-preview { position: relative; }
+.planet-facility { margin: 0; }
+.planet-facility[hidden] { display: none; }
+.planet-facility:not([hidden]) ~ .planet-facility:not([hidden]) { margin-top: 20px; }
+.planet-facility-preview { position: relative; }
 /* A photograph fills its frame, so its title sits over it. A render is
-   transparent and cropped to the machine, leaving nothing to sit on, so its
+   transparent and cropped to the facility, leaving nothing to sit on, so its
    title keeps the normal flow above the artwork. */
-.planet-machine-preview-overlay > .planet-machine-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
-.planet-machine-heading .planet-lens-details-title { margin-bottom: 0; }
+.planet-facility-preview-overlay > .planet-facility-heading { position: absolute; inset: 0 0 auto; z-index: 1; pointer-events: none; }
+.planet-facility-heading .planet-lens-details-title { margin-bottom: 0; }
 /* A model render arrives on the sidebar's own near-black, so its title needs no
    help. A published photograph is bright and busy, so the heading takes a light
    wash rather than a runtime gradient over the image. */
-.planet-machine-heading-backdrop { padding: 8px 12px 10px; background: rgb(0 0 0 / .35); }
+.planet-facility-heading-backdrop { padding: 8px 12px 10px; background: rgb(0 0 0 / .35); }
 /* Over artwork the date reads with the title, not as muted sidebar metadata. */
-.planet-machine-heading-backdrop .planet-selected-content-meta { color: var(--shell-text); }
-.planet-machine-heading .planet-selected-content-meta { display: block; }
-.planet-machine { font: var(--shell-font-metadata); }
-.planet-machine a { color: inherit; text-underline-offset: 3px; }
-.planet-machine a:hover { color: var(--shell-text); }
-.planet-machine :is(a, summary):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
+.planet-facility-heading-backdrop .planet-selected-content-meta { color: var(--shell-text); }
+.planet-facility-heading .planet-selected-content-meta { display: block; }
+.planet-facility { font: var(--shell-font-metadata); }
+.planet-facility a { color: inherit; text-underline-offset: 3px; }
+.planet-facility a:hover { color: var(--shell-text); }
+.planet-facility :is(a, summary):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
 [data-dataset-notice] { margin: 12px 0; font-size: 12px; }
-.planet-machine-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
-/* A render is transparent apart from its machine, so the card shows the region
-   the machine actually occupies instead of the empty frame around it. */
-.planet-machine-image-crop {
+.planet-facility-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
+/* A render is transparent apart from its facility, so the card shows the region
+   the facility actually occupies instead of the empty frame around it. */
+.planet-facility-image-crop {
   position: relative;
   overflow: hidden;
   aspect-ratio: var(--subject-w) / var(--subject-h);
@@ -625,17 +625,17 @@
   width: min(100%, calc(148px * var(--subject-w) / var(--subject-h)));
   margin-inline: auto;
 }
-.planet-machine-image-crop > .planet-machine-image {
+.planet-facility-image-crop > .planet-facility-image {
   position: absolute; object-fit: fill;
   width: calc(var(--frame-w) / var(--subject-w) * 100%);
   height: calc(var(--frame-h) / var(--subject-h) * 100%);
   left: calc(var(--subject-x) / var(--subject-w) * -100%);
   top: calc(var(--subject-y) / var(--subject-h) * -100%);
 }
-.planet-machine-image { display: block; width: 100%; height: 100%; object-fit: contain; }
-.planet-machine-emblem { position: absolute; left: 0; top: 64px; display: block; width: 64px; height: 64px; }
-.planet-machine-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.planet-machine a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
+.planet-facility-image { display: block; width: 100%; height: 100%; object-fit: contain; }
+.planet-facility-emblem { position: absolute; left: 0; top: 64px; display: block; width: 64px; height: 64px; }
+.planet-facility-emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.planet-facility a:focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 4px; }
 /* Labels, format notes and bibliographies are needed to read a dataset but are
    not the dataset, so they fold away under the source that requires them. */
 

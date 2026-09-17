@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
 import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { parseDensityPlacement, densityPlacementTransform } from '@cssearth/volume-core/coordinates/density-placement';
 import type { ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { createAlignedObservationMapping } from '@cssearth/volume-core/coordinates/observation-mapping';
@@ -45,6 +46,10 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const descriptor=parseLabModelJson((await pinned(root,work.cloud.descriptor)).toString());
   const sourceSlices=parseLabModelJson((await pinned(root,work.cloud.slices)).toString()) as VolumeSlices;
   const evidence=parseLabModelJson((await pinned(root,work.cloud.provenance)).toString());
+  const placement = work.cloud.modelPlacement ? parseDensityPlacement(parseLabModelJson((await pinned(root,work.cloud.modelPlacement)).toString())) : undefined;
+  if (placement && JSON.stringify((sourceSlices.provenance as { identity?: { placement?: unknown } }).identity?.placement) !== JSON.stringify(work.cloud.modelPlacement))
+    throw new TypeError('Placed density geometry and authored placement pin disagree.');
+  if (placement && work.stars) throw new TypeError('Placed density with an observed stellar catalogue requires a separately qualified catalogue realization.');
   if(descriptor.properties.preparation.sha256!==work.cloud.provenance.sha256||
     JSON.stringify(descriptor.properties.volume.boundsUnits)!==JSON.stringify(sourceSlices.boundsUnits))throw new TypeError('Canonical cloud pins or bounds disagree.');
   const frame=descriptor.properties.volume;
@@ -75,9 +80,10 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   // Read the same pinned density source as Alignment; never rebuild its delivery geometry.
   progress('density',0,1,'Preparing one source-independent density signal and stellar support');
   const densitySource=await loadVolumeSource(dirname(resolve(root,work.cloud.provenance.path)),parseVolumeRecipe(evidence));
-  if(JSON.stringify(densitySource.recipe.grid.bounds)!==JSON.stringify(frame.boundsUnits))
+  const densityBounds=placement ? densityPlacementTransform(placement).bounds(densitySource.recipe.grid.bounds) : densitySource.recipe.grid.bounds;
+  if(JSON.stringify(densityBounds)!==JSON.stringify(frame.boundsUnits))
     throw new TypeError('Alignment density and prepared cloud bounds disagree.');
-  const densityProjection=prepareDensityProjection(densitySource,mapping.distanceUnits);
+  const densityProjection=prepareDensityProjection(densitySource,mapping.distanceUnits,256,placement);
   await writeObservationPanel(resolve(output,'source/aligned-image.png'),densityProjection.photo,undefined,false);
   let starsPath:string|undefined;
   if(work.stars) {
@@ -107,7 +113,9 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
     densityProjection:{width:densityProjection.photo.width,height:densityProjection.photo.height,
       tangentBoundsKpc:densityProjection.boundsUnits,observerDistanceKpc:densityProjection.distanceUnits,
       meaning:'Integrated signal of the untouched Alignment density source; identical cutoff for all materials.'},
-    validation,limitations:['The Alignment cloud is simulated stellar density, not measured gas depth.',
+    qualification:{status:'research-baseline',materialGatePassed:false,reason:'Projected image color is repeated through line-of-sight depth; finite 3D material is not inferred.'},
+    validation,limitations:['Projected colors do not pass the finite-3D-material gate; this result is an inspection baseline, not a qualified cloud.',
+      'The Alignment cloud is simulated stellar density, not measured gas depth.',
       'Candidate color and optional local contrast paint the fixed cloud. Image brightness never changes geometry or alpha.',
       'Uncovered or black image samples retain neutral density colors; coverage counts record this mixed-source material.',
       'Catalogue astrometry is preserved; one common Alignment mapping and density-conditioned model supplies the same stellar positions for every material.']};

@@ -29,8 +29,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://esahubble.org/images/heic0515a/"
           }
         ]
@@ -63,8 +63,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "webb",
+            "kind": "facility",
+            "facilityId": "webb",
             "evidence": "https://esawebb.org/images/weic2326a/ — NIRCam and MIRI; Colours & filters"
           }
         ]
@@ -97,8 +97,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "webb",
+            "kind": "facility",
+            "facilityId": "webb",
             "evidence": "https://esawebb.org/images/weic2417a/ — Webb infrared components"
           }
         ]
@@ -131,8 +131,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "https://esahubble.org/images/potw1720c/"
           }
         ]
@@ -165,8 +165,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vla",
+            "kind": "facility",
+            "facilityId": "vla",
             "evidence": "https://esahubble.org/images/potw1720b/ — VLA radio observation"
           }
         ]
@@ -199,8 +199,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "chandra",
+            "kind": "facility",
+            "facilityId": "chandra",
             "evidence": "https://esahubble.org/images/potw1720f/ — Chandra X-ray observation"
           }
         ]
@@ -232,8 +232,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hubble",
+            "kind": "facility",
+            "facilityId": "hubble",
             "evidence": "https://esahubble.org/images/potw1720d/"
           }
         ]
@@ -306,8 +306,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cfht",
+            "kind": "facility",
+            "facilityId": "cfht",
             "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
@@ -338,8 +338,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cfht",
+            "kind": "facility",
+            "facilityId": "cfht",
             "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
@@ -370,8 +370,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "cfht",
+            "kind": "facility",
+            "facilityId": "cfht",
             "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
           }
         ]
@@ -435,9 +435,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "gaia",
-            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing machine."
+            "kind": "facility",
+            "facilityId": "gaia",
+            "evidence": "https://dc.zah.uni-heidelberg.de/tableinfo/gaia.dr3lite — Gaia DR3 astrometry and G/BP/RP photometry, with EDR3-based Bailer-Jones geometric distance inference; catalogue extraction and exact query receipts are pinned in stellar-field.json. Bailer-Jones is a distance method, not another observing facility."
           }
         ]
       }

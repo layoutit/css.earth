@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50141106bee9a18f09afa9d689ef97b393c73646f90337b7ea5b9f4291b1771c"
+    "sha256": "53ddb4d224b069b9dff435641629218f95c2edf0b9b7cfba3424962607c2f520"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -319,20 +319,20 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
             "missionId": "goldstone-solar-system-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "vlba",
+            "kind": "facility",
+            "facilityId": "vlba",
             "evidence": "The preserved credit for this input reads: Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive"
           }
         ]

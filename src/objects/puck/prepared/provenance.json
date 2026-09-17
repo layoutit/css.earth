@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3fee6872de9f6258ebb5ddff1cce4f6c032b07ba39bffaed4302934e82eff0f2"
+    "sha256": "bd548dbfb280cb0e7285a9cd0939070d619f6d85e70643e36491cf09a758e2c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -265,8 +265,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG",
             "missionId": "voyager-2"
           }
@@ -312,8 +312,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "voyager-2",
+            "kind": "facility",
+            "facilityId": "voyager-2",
             "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL",
             "missionId": "voyager-2"
           }

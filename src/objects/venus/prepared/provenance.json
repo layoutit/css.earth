@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d1ca37b3a2039b766807241b2e991fd59f51058e905e6a09de3514d93f034046"
+    "sha256": "44b3a7601add090ebe505a316333a1f3de3b98c812769045dd9ead763b45a902"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -766,8 +766,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "magellan",
+            "kind": "facility",
+            "facilityId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }
@@ -813,8 +813,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "magellan",
+            "kind": "facility",
+            "facilityId": "magellan",
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
             "missionId": "magellan"
           }
@@ -1094,8 +1094,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "54cc7c82a696f47dca88aa7d4e7e4679fbc3012394628b357b9eb12715883d04",
-      "bytes": 14477,
+      "sha256": "9636d709bdaff36759618a0e6d66daf515ac66bb2f096a161543d8ad5ade9c5e",
+      "bytes": 14490,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1582,7 +1582,7 @@
   },
   "lastPreparation": {
     "objectId": "venus",
-    "materialSha256": "90886175af499b40c0dd64e2cab9a1fa2e3a76c9052e60372b58210090a102db",
+    "materialSha256": "ce3cb3d473b0da13cac4c3fb96e964b0e6bfc57bd4f630c7dbac40ccdd8e6337",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

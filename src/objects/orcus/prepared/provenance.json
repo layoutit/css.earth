@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7179d77e0998a7e5cb10bbee10b8adb8ffa89c52753b2b0a6071c5253472293"
+    "sha256": "3fa570148dc0b838b1167793b0eb0e6aa1051a5867b67ee7c93c5d01e25798a7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -256,18 +256,18 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "alma",
+            "kind": "facility",
+            "facilityId": "alma",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           },
           {
-            "kind": "machine",
-            "machineId": "spitzer",
+            "kind": "facility",
+            "facilityId": "spitzer",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           },
           {
-            "kind": "machine",
-            "machineId": "herschel",
+            "kind": "facility",
+            "facilityId": "herschel",
             "evidence": "The preserved credit for this input reads: Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling."
           }
         ]

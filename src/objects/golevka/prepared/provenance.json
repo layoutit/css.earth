@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1315128c2c5847b9d02ac4330fc74a6baebc947d6ac0a41d39af00c42f5bc37b"
+    "sha256": "bca08fa65896a3c421198762952e4d775f549848f2c55a2d40161086a6e8c50f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -319,8 +319,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: Hudson et al. (2000), Icarus 148, 37–51; Goldstone radar, optical light curves and NASA/JPL",
             "missionId": "goldstone-solar-system-radar"
           }

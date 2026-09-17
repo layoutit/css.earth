@@ -15,7 +15,8 @@ export async function writeOriginalOverlay(directory:string,photo:ObservationPho
   for(let y=0;y<photo.height;y++)for(let x=0;x<photo.width;x++) {
     const at=y*photo.width+x;
     const covered=mapping.uvAtTangent(min[0]+(x+.5)/photo.width*(max[0]-min[0]),max[1]-(y+.5)/photo.height*(max[1]-min[1]));
-    if(covered) {rgba.set(photo.rgb.subarray(at*3,at*3+3),at*4);rgba[at*4+3]=255;}
+    // Coverage is geometric and, for a source that declares one, its own mask: masked pixels stay unobserved.
+    if(covered&&(photo.sourceCoverage===undefined||photo.sourceCoverage[at]===1)) {rgba.set(photo.rgb.subarray(at*3,at*3+3),at*4);rgba[at*4+3]=255;}
   }
   const bytes=await sharp(rgba,{raw:{width:photo.width,height:photo.height,channels:4}}).png().toBuffer();
   await writeFile(resolve(directory,'source/original-image.png'),bytes);

@@ -8,7 +8,7 @@ export interface StarRemovalPreview {
   id: string; origin: [number, number]; source: string; removed: string; mask: string; stars: string; width: number; height: number;
 }
 export interface StarRemovalResult {
-  schema: 'cssearth-star-removal-result@1'; method: 'nox'; imageId: string; operation: RemovalRequest['action'];
+  schema: 'cssearth-star-removal-result@1'; method: 'nox' | 'preserve'; imageId: string; operation: RemovalRequest['action'];
   sourceSha256: string; sourcePreviewSha256: string; nativeDimensions: [number, number];
   overview: { url: string; dimensions: [number, number] };
   previews?: StarRemovalPreview[]; applied?: AppliedStarLayers;

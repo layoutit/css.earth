@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4e4546b62489540ea54d31fca61be7bd9e2a54495c15c9dd94e6b8482f23f581"
+    "sha256": "5126fe602afe8681dfcb4f51f72cf13942cb3a5ecc383e12d265076924f41a01"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -290,14 +290,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
             "missionId": "arecibo-planetary-radar"
           },
           {
-            "kind": "machine",
-            "machineId": "goldstone-dss14",
+            "kind": "facility",
+            "facilityId": "goldstone-dss14",
             "evidence": "The preserved credit for this input reads: R. S. Hudson, S. J. Ostro and D. J. Scheeres; Arecibo and Goldstone; NASA PDS",
             "missionId": "goldstone-solar-system-radar"
           }

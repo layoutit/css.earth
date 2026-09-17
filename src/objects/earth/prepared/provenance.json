@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f14e24eda9f91f8a5d92f8b3785e242bbef34f3aeda5dbda742191db400df740"
+    "sha256": "db7dd25e554162037d401ed92d790b16fc89fcba2eb266e54c998edd35c2d7ed"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1624,8 +1624,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "terra",
+            "kind": "facility",
+            "facilityId": "terra",
             "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
             "missionId": "terra"
           }

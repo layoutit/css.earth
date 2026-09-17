@@ -81,6 +81,8 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     const slices=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/volume-slices.json'),'utf8'));
     const reference=JSON.parse(await readFile(slicesPath,'utf8'));
     assert.equal(provenance.method,'alignment-density-material-v1');
+    assert.equal(provenance.qualification.status,'research-baseline');
+    assert.equal(provenance.qualification.materialGatePassed,false);
     assert.deepEqual(slices.boundsUnits,descriptor.properties.volume.boundsUnits);
     assert.deepEqual(slices.quads.map((q:any)=>q.vertices),reference.quads.map((q:any)=>q.vertices));
     assert.equal(provenance.validation.sameGeometry,true);assert.equal(provenance.validation.sameAlpha,true);

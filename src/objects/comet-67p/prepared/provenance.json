@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43c37bb545ac21dec9ec94576b6e858ba542122c076e9c0b6025a1a4b8668e12"
+    "sha256": "27b0cc7e00f4e31f4cd5a5f9de1e1e6195bf6f081b1d826bb7e485c04cc5d209"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1512,8 +1512,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -1787,8 +1787,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -1882,8 +1882,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -1977,8 +1977,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "rosetta",
+            "kind": "facility",
+            "facilityId": "rosetta",
             "evidence": "The preserved credit for this input reads: ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
             "missionId": "rosetta"
           }
@@ -3003,8 +3003,8 @@
       "kind": "source-document",
       "title": "features/sites.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "82872a1dc96d6d97fcd9ffef2c480ef39feafb4a50db2fc19d3a4db852d3999b",
-      "bytes": 3139,
+      "sha256": "798271a08d700552ec826c7225da3edbe3dc12d1a77850730decbbcdcf746448",
+      "bytes": 3141,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3746,7 +3746,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-67p",
-    "materialSha256": "f5dc8d509ebd48df09ebb12ad8fbce0427c072c8786692f41be78f6ee5337abb",
+    "materialSha256": "b240fff2334aceb91897daebe7d204fb5754e5a38c3955f705811dd1099f958e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

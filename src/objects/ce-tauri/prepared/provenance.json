@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "05fa42d09fa0cc0329aa9690a071b0fa8d126e7a3a62863546104988a3bcdf28"
+    "sha256": "b4bcd6b76402dafa12a349a8f543940b9306fddf266c80478fae64f7da3f432e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -492,8 +492,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "Averaged reconstructed image for the November 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
             "missionId": "eso-vlti-pionier-ce-tauri"
           }
@@ -582,8 +582,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "vlti",
+            "kind": "facility",
+            "facilityId": "vlti",
             "evidence": "Averaged reconstructed image for the December 2016 dataset, SQUEEZE, 32 x 32 pixels of 0.5 mas, as deposited by the authors.",
             "missionId": "eso-vlti-pionier-ce-tauri"
           }

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-simulation-guided-reconstruction@1",
+  "baselineId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333",
+  "width": 384,
+  "longestAxisSlabs": 128,
+  "samplesPerSlab": 4,
+  "exposureGain": 2.5,
+  "backgroundSpread": 0.5,
+  "controls": {
+    "detail": 1,
+    "faint": 0.6,
+    "depth": 1
+  },
+  "depth": {
+    "depthSamples": 256,
+    "maximumModes": 1,
+    "modeRelativeThreshold": 0.25,
+    "minimumSigmaZ": 330,
+    "maximumSigmaZ": 3300,
+    "featureThicknessRatio": 2,
+    "supportSigma": 4
+  },
+  "exclusions": [
+    {
+      "x": 0.294,
+      "y": 0.456,
+      "rx": 0.04,
+      "ry": 0.04,
+      "reason": "Authored exclusion of foreground globular cluster identified in registered optical image; not SMC gas."
+    }
+  ],
+  "depthInterpretation": "Authored dominant conditional ray-mode hypothesis. Select the strongest prior mode per image component and assign its complete projected weight there. Not a recovered gas depth; no duplicated secondary-mode feature or artificial bridge. Two-scale variant: smoothed image light is carried along the simulation's own density (envelope); finite components fit only the remaining detail. Ellipsoid variant: the envelope follows the VMC-constrained ellipsoid hypothesis, which scores better against the red-clump observations than the simulation, instead of the Garver simulation.",
+  "envelope": {
+    "scalePixels": 10,
+    "fraction": 0.85,
+    "floor": 0.03,
+    "depthSamples": 256,
+    "depthTrim": 0.005
+  },
+  "fullChromaAlphaByte": 24,
+  "priorCloud": {
+    "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json",
+    "sha256": "9ac62796fc36a98a92c5b0d9d8c30f44eb6d35005476937237488d345ae2382e"
+  }
+}

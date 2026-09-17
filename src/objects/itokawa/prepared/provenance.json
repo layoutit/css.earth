@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4ecb93ef1dd89b0f236deab29ab3d8ef51b87f1b9217e28e907fcfb11a2d2007"
+    "sha256": "14267fee2a5fd4a0700c371f3dcc118ea8a97cdf0d9f9fac7adda95d3eb11a5f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -471,8 +471,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "hayabusa",
+            "kind": "facility",
+            "facilityId": "hayabusa",
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
             "missionId": "hayabusa"
           }

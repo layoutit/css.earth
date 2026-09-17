@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "86b9782af8d634a77589ad9b5e7ca4753c7280876d2bcd845cb5396975afef32"
+    "sha256": "a8b4576d5e267ae87dded28bc6f2786d2befdeca5d5df4bac9c7ab9b81bce404"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -211,8 +211,8 @@
       "capture": {
         "attributions": [
           {
-            "kind": "machine",
-            "machineId": "arecibo-305m",
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
             "evidence": "The preserved credit for this input reads: Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
             "missionId": "arecibo-planetary-radar"
           }

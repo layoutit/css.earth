@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
+import { compilerSlabMaterial, alphaLimitedSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
 
 test('thin displaced emission takes its own image color rather than the empty slice center', () => {
   const color: [number, number, number] = [0, 0, 0];
@@ -49,4 +49,16 @@ test('XYZ slab materials sample identical emitting coordinates and preserve comp
     (_x, _y, _z, out) => { out[0] = out[2] = 127.5; out[1] = 0; return true; });
   assert.ok(mixture(0, 0, 0, rgb, { axis: 'z', pitch: 1, samples: 4 }));
   assert.deepEqual(rgb, [127.5, 0, 127.5], 'Mixed components must not be normalized back to twice their emission.');
+});
+
+test('alpha-limited slab material keeps chroma in dense slabs and neutralizes thin ones', () => {
+  const orange = (_x: number, _y: number, _z: number, out: [number, number, number]) => { out[0] = 255; out[1] = 128; out[2] = 0; return true; };
+  const slab = { axis: 'z' as const, pitch: 1, samples: 4 }, out: [number, number, number] = [0, 0, 0];
+  const dense = (_x: number, _y: number, _z: number, out: [number, number, number]) => { out[0] = out[1] = out[2] = 2; };
+  const thin = (_x: number, _y: number, _z: number, out: [number, number, number]) => { out[0] = out[1] = out[2] = .001; };
+  assert.ok(alphaLimitedSlabMaterial(compilerSlabMaterial(dense, orange), dense, 1, 24)(0, 0, 0, out, slab));
+  assert.deepEqual(out.map(Math.round), [255, 128, 0]);
+  assert.ok(alphaLimitedSlabMaterial(compilerSlabMaterial(thin, orange), thin, 1, 24)(0, 0, 0, out, slab));
+  assert.ok(out[2] > 240 && out[1] > 245, `thin slab stays near neutral: ${out}`);
+  assert.throws(() => alphaLimitedSlabMaterial(compilerSlabMaterial(thin, orange), thin, 0, 24));
 });
