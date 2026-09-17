@@ -1,0 +1,36 @@
+{
+  "id": "doi-10-3847-1538-3881-ab9df8",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hui et al. (2020), Physical Characterization of Interstellar Comet 2I/2019 Q4 (Borisov)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab9df8"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab9df8",
+      "label": "AJ article"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/comet-2i/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration",
+      "scope": "Estimated nucleus radius behind the display sphere.",
+      "evidence": "Manifest credit field."
+    }
+  ]
+}
