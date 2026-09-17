@@ -3,8 +3,8 @@ import { test } from 'node:test';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { mapBasisCurves } from './phase-curve.mts';
 import { realSphericalHarmonics } from './spherical-harmonics.mts';
-import { brightnessTemperature, equalAngleGrid, planckRadiance, seededRandom } from './eigenmap-fit.mts';
-import { bandTemperatureTable, binAverage, fitLightCurveMap, hemisphereTemperature, temperatureGrid } from './light-curve-map.mts';
+import { brightnessTemperature, eigenBasis, equalAngleGrid, planckRadiance, seededRandom } from './eigenmap-fit.mts';
+import { bandTemperatureTable, binAverage, fitLightCurveMap, hemisphereTemperature, meridionalOffset, temperatureGrid } from './light-curve-map.mts';
 
 test('a one-sample band with a blackbody star is the single-wavelength brightness temperature', () => {
   const band = { wavelengthMicrons: Float64Array.of(4.5), counts: Float64Array.of(1), stellarIntensity: Float64Array.of(planckRadiance(4.5, 4520)) };
@@ -52,10 +52,10 @@ test('an injected degree-1 map under a ramp and a drift is recovered with the ra
   const fit = fitLightCurveMap({ time, flux, error: new Float64Array(time.length).fill(sigma), columns: new Map() },
     { degrees: [1, 2], eigencurves: [1, 2, 3, 4], positive: true, transitExclusionPhase: 0.04, gridHeight: 45,
       systematics: [{ kind: 'time' }, { kind: 'exponential-ramp', timeConstantsDays: [0.01, 0.04, 0.16] }] }, orbit, host, rp);
-  assert.equal(fit.rampTimeConstantDays, 0.04);
+  assert.ok(Math.abs(fit.rampTimeConstantDays! / 0.04 - 1) < 0.1, `ramp time constant ${fit.rampTimeConstantDays}`);
   assert.equal(fit.basis.lmax, 1, 'the injected degree, not a higher one within the BIC tolerance');
   assert.ok(Math.abs(fit.hotspot.longitude) < 5 && Math.abs(fit.hotspot.latitude) < 15, `hotspot ${fit.hotspot.latitude}, ${fit.hotspot.longitude}`);
-  assert.ok(fit.candidates.length >= 5 && fit.candidates.every(c => c.rampTimeConstantDays === 0.04));
+  assert.ok(fit.candidates.length >= 5 && fit.candidates.every(c => Math.abs(c.rampTimeConstantDays! / 0.04 - 1) < 0.1));
   // The hemisphere a flat blackbody-star band sees at eclipse, back to its temperature, matches the injected dayside.
   const table = bandTemperatureTable({ wavelengthMicrons: Float64Array.of(7.5), counts: Float64Array.of(1), stellarIntensity: Float64Array.of(planckRadiance(7.5, 4500)) });
   const truthFit = { ...fit.fit, coefficients: new Float64Array(fit.fit.ncurves), uniformAmplitude: 2.5e-3, stellarCorrection: 0 };
@@ -63,4 +63,31 @@ test('an injected degree-1 map under a ramp and a drift is recovered with the ra
   assert.ok(Math.abs(uniform.flux - 2.5e-3) < 2e-5, `a uniform planet shows its full flux: ${uniform.flux}`);
   const map = temperatureGrid(fit.basis, fit.fit, table, rp, 45), day = map.temperatures[22 * 90 + 45]!, night = map.temperatures[22 * 90 + 0]!;
   assert.ok(day > night, `substellar ${day} K above antistellar ${night} K`);
+  // The injected dipole points at the substellar meridian, so the fitted map's meridional offset is near 0.
+  assert.ok(Math.abs(meridionalOffset(fit.basis, fit.fit, 0.25)) < 5, `meridional offset ${meridionalOffset(fit.basis, fit.fit, 0.25)}`);
 });
+
+test('the meridional offset finds the longitude of a tilted dipole wherever its latitude sits', () => {
+  const orbit = hostedOrbit('wasp-43b'), host = starAstrometry('wasp-43'), rp = BODIES['wasp-43b'].meanRadiusKm / BODIES['wasp-43'].meanRadiusKm;
+  const basis = eigenBasis(1, equalAngleGrid(45, 90), orbit, host, rp, Float64Array.from({ length: 50 }, (_, i) => orbit.transitTimeBmjdTdb + i * orbit.periodDays / 50));
+  // Express a dipole toward (latitude -30, longitude +12) in the eigenmaps: solve for coefficients on the grid by least squares.
+  const lat = -30 * Math.PI / 180, lon = 12 * Math.PI / 180, grid = basis.grid, n = basis.maps.length;
+  const target = Float64Array.from(grid.latitudes, (_, c) => { const a = grid.latitudes[c]! * Math.PI / 180, b = grid.longitudes[c]! * Math.PI / 180; return Math.cos(a) * Math.cos(lat) * Math.cos(b - lon) + Math.sin(a) * Math.sin(lat); });
+  const normal = new Float64Array(n * n), rhs = new Float64Array(n);
+  for (let c = 0; c < target.length; c++) for (let i = 0; i < n; i++) { rhs[i] += basis.maps[i]![c]! * target[c]!; for (let j = 0; j < n; j++) normal[i * n + j] += basis.maps[i]![c]! * basis.maps[j]![c]!; }
+  const coefficients = solveSmall(normal, rhs, n);
+  const fit = { ncurves: n, coefficients, uniformAmplitude: 0, stellarCorrection: 0 } as unknown as Parameters<typeof meridionalOffset>[1];
+  assert.ok(Math.abs(meridionalOffset(basis, fit, 0.05) - 12) < 0.1, `offset ${meridionalOffset(basis, fit, 0.05)}`);
+});
+
+function solveSmall(matrix: Float64Array, rhs: Float64Array, n: number) {
+  const a = Float64Array.from(matrix), b = Float64Array.from(rhs);
+  for (let k = 0; k < n; k++) {
+    let pivot = k; for (let i = k + 1; i < n; i++) if (Math.abs(a[i * n + k]!) > Math.abs(a[pivot * n + k]!)) pivot = i;
+    for (let j = 0; j < n; j++) [a[k * n + j], a[pivot * n + j]] = [a[pivot * n + j]!, a[k * n + j]!]; [b[k], b[pivot]] = [b[pivot]!, b[k]!];
+    for (let i = k + 1; i < n; i++) { const f = a[i * n + k]! / a[k * n + k]!; for (let j = k; j < n; j++) a[i * n + j] -= f * a[k * n + j]!; b[i] -= f * b[k]!; }
+  }
+  const x = new Float64Array(n);
+  for (let i = n - 1; i >= 0; i--) { let s = b[i]!; for (let j = i + 1; j < n; j++) s -= a[i * n + j]! * x[j]!; x[i] = s / a[i * n + i]!; }
+  return x;
+}

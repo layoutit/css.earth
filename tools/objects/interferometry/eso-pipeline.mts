@@ -43,13 +43,15 @@ export async function queryRawTable(instrument: string, columns: readonly string
 }
 
 const exists = (path: string) => access(path).then(() => true, () => false);
+let downloads = 0;
 
 /** A public raw frame from the ESO data portal, decompressed, unless it is already in the raw directory. */
 export async function rawFrame(dpId: string, directory: string) {
   const target = resolve(directory, `${dpId}.fits`);
   if (await exists(target)) return target;
   await mkdir(directory, { recursive: true });
-  const download = `${target}.download`;
+  // Private temporary names, so two calls for the same frame (a prefetch and a step) never write one file.
+  const partial = `${target}.${process.pid}-${++downloads}`, download = `${partial}.download`;
   // The portal drops connections now and then, before or during a transfer; the whole request is repeated up to five times,
   // waiting 5, 10, 20 and 40 seconds in between. Refusals (a proprietary frame, a missing one) are not repeated.
   for (let attempt = 1; ; attempt++) {
@@ -68,11 +70,19 @@ export async function rawFrame(dpId: string, directory: string) {
   const magic = Buffer.alloc(2), handle = await open(download, 'r');
   await handle.read(magic, 0, 2, 0); await handle.close();
   if (magic[0] === 0x1f && (magic[1] === 0x9d || magic[1] === 0x8b)) {
-    await rename(download, `${target}.Z`);
-    const run = spawnSync('gzip', ['-d', '-f', `${target}.Z`]);
+    await rename(download, `${partial}.Z`);
+    const run = spawnSync('gzip', ['-d', '-f', `${partial}.Z`]);
     if (run.status !== 0) throw new Error(`${dpId}: could not decompress (${String(run.stderr)}).`);
+    await rename(partial, target);
   } else await rename(download, target);
   return target;
+}
+
+/** Download a night's frames before its steps run, a few at a time: a PIONIER frame takes about 10 seconds to arrive on one
+ * connection and 2 to reduce, so a 311-exposure night spent most of its hour downloading one frame after another. */
+export async function rawFrames(dpIds: Iterable<string>, directory: string, connections = 4) {
+  const queue = [...new Set(dpIds)];
+  await Promise.all(Array.from({ length: connections }, async () => { for (let id = queue.shift(); id !== undefined; id = queue.shift()) await rawFrame(id, directory); }));
 }
 
 export interface EsoPipeline { readonly prefix: string; readonly env: NodeJS.ProcessEnv }
