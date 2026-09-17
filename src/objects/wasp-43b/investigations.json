@@ -27,10 +27,13 @@
       "id": "hammond-2024-miri-eclipse-map",
       "subject": "Hammond et al. (2024) JWST MIRI/LRS eclipse map",
       "status": "excluded",
-      "finding": "A second-degree spherical-harmonic dayside map from the MIRI phase curve of the Transiting Exoplanet ERS program 1366. The arXiv HTML names no data deposit or repository for the map, so there is no grid to cast; its hotspot agrees with the NIRSpec map in direction. This project's own map from the same observation (raw-miri-reduction-lenses) puts the hot spot 5.3 degrees east, against their 7.5 +/- 0.5; on Bell et al.'s deposited curve the same fit gives 5.0. The difference is not resolved.",
+      "finding": "A second-degree spherical-harmonic dayside map from the MIRI phase curve of the Transiting Exoplanet ERS program 1366. The arXiv HTML names no data deposit or repository for the map, so there is no grid to cast. Its longitudinal offset, 7.5 +/- 0.5 degrees east (eigenmapping; 7.75 +/- 0.36 with starry), differs from this package's MIRI lens (6.05 degrees) for measured reasons. The transit in the pinned light curve comes 19.5 s (18.5 to 20.0) before the package ephemeris predicts; with the 15 s light time across the orbit, the eclipses sit near -4.5 s, where the map gives 6.2 degrees. The paper's ephemeris (t0 55934.292283 BMJD_TDB, period held at 0.813474 d) puts this transit at -39.5 s, which the transit rules out (chi-squared +579), and with it the map gives 7.45 degrees. Whether their code used that exact period cannot be checked; with Bell et al.'s fitted period the same t0 gives -13 s and 6.4 to 6.6 degrees. The ramp time constant is a second lever: at the measured timing 0.08 and 0.16 d fit within chi-squared 1 and give 5.8 and 6.95 degrees. Bell et al.'s deposited curve gives offsets about 0.7 degrees smaller than this project's reduction at every timing.",
       "revisitWhen": "The map grid is deposited as data.",
       "evidence": [
-        "https://arxiv.org/abs/2404.16488"
+        "https://arxiv.org/abs/2404.16488",
+        "https://zenodo.org/records/10525170",
+        "https://github.com/layoutit/css.earth/blob/51cdc1896358c496b7fe567ba1f995e96edbedbc/tests/objects/unit/wasp-43b/hammond-offset.test.mts",
+        "https://github.com/layoutit/css.earth/blob/51cdc1896358c496b7fe567ba1f995e96edbedbc/src/objects/wasp-43b/README.md"
       ],
       "checked": [
         {
@@ -40,6 +43,10 @@
         {
           "date": "2026-09-17",
           "commit": "188586d727a9d34acc136b05e53cc027228a755b"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "51cdc1896358c496b7fe567ba1f995e96edbedbc"
         }
       ]
     },
@@ -220,18 +227,23 @@
       "id": "raw-miri-reduction-lenses",
       "subject": "MIRI lenses from this project's reduction of the raw program 1366 exposures",
       "status": "included",
-      "finding": "The 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366 (1-2 December 2022), reduced by tools/objects/jwst/reduce-tso.mts with Bell et al. (2024)'s settings, give the pinned light curves; the tool's white-light export is byte-identical to the pinned file (sha256 a116e36f), and bell-2024-miri-products records its agreement with the deposited curve. Fitted at preparation time with BIC model choice: 5-10.5 micrometres degree 2 with 6 eigencurves, ramp 0.08 d, dayside 1527 K and nightside 833 K against Bell et al.'s 1524 +/- 35 and 863 +/- 23 K (5-12 micrometres); hot spot 5.3 degrees east against Hammond et al. (2024)'s 7.5 +/- 0.5. Slices 5-6.5, 6.5-8.5 and 8.5-10.5 micrometres choose degree 2 with 4 eigencurves: dayside 1539, 1493, 1565 K; nightside 831, 847, 914 K; hot spot 2.9, 8.4, 8.2 degrees east. At 4 eigencurves every slice puts the hottest latitude near +10 degrees, a property of the basis, so the slices do not locate latitude. Band weights are the star's own median extracted counts per detector column.",
+      "finding": "The 30 raw MIRI/SLITLESSPRISM segments of JWST program 1366 (1-2 December 2022), reduced by tools/objects/jwst/reduce-tso.mts with Bell et al. (2024)'s settings, give the pinned light curves; the tool's white-light export is byte-identical to the pinned file (sha256 a116e36f), and bell-2024-miri-products records its agreement with the deposited curve. Fitted at preparation time with BIC model choice: 5-10.5 micrometres degree 2 with 6 eigencurves, ramp 0.103 d, dayside 1527 K and nightside 840 K against Bell et al.'s 1524 +/- 35 and 863 +/- 23 K (5-12 micrometres); longitudinal offset 6.05 degrees east (see hammond-2024-miri-eclipse-map for the difference from Hammond et al.'s 7.5). Slices 5-6.5, 6.5-8.5 and 8.5-10.5 micrometres choose degree 2 with 4 eigencurves: dayside 1539, 1493, 1565 K; nightside 835, 837, 913 K; offsets 3.4, 7.75, 8.3 degrees east. At 4 eigencurves every slice puts the hottest latitude near +10 degrees, a property of the basis, so the slices do not locate latitude. Band weights are the star's own median extracted counts per detector column. The first release (commit 188586d727a9d34acc136b05e53cc027228a755b) stopped the ramp time constant at its 0.08 d grid value and reported the hottest point, 5.3 degrees, as the comparison with Hammond et al.",
       "evidence": [
         "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
         "https://arxiv.org/abs/2401.13027",
         "https://arxiv.org/abs/2404.16488",
         "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/tests/objects/unit/wasp-43b/lens-fits.test.mts",
-        "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/src/objects/wasp-43b/README.md"
+        "https://github.com/layoutit/css.earth/blob/188586d727a9d34acc136b05e53cc027228a755b/src/objects/wasp-43b/README.md",
+        "https://github.com/layoutit/css.earth/blob/51cdc1896358c496b7fe567ba1f995e96edbedbc/tests/objects/unit/wasp-43b/lens-fits.test.mts"
       ],
       "checked": [
         {
           "date": "2026-09-17",
           "commit": "188586d727a9d34acc136b05e53cc027228a755b"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "51cdc1896358c496b7fe567ba1f995e96edbedbc"
         }
       ]
     }
