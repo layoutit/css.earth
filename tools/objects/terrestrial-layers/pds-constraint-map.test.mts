@@ -86,7 +86,7 @@ test('terrain preparation verifies categorical output pins named by either histo
   const recipe={width:16,height:8,stepDegrees:90,colors:{1:'#ff0000',2:'#00ff00',3:'#0000ff'}};
   const expected=await preparePdsConstraintMap(parsePdsPlanetocentricShape(table,profile),recipe);
   const config={namespace:'fixture',geometry:{radius:1,radiusKm:1,radialTerrain:{format:'pds-planetocentric-plate',path:'source.tab',grid:profile,
-    faceBudget:8,tileSize:4,atlasColumns:4,simplification:{method:'source-meshoptimizer',targetFaces:8,maximumErrorMeters:.1}}}};
+    faceBudget:8,texelsPerFace:16,simplification:{method:'source-meshoptimizer',targetFaces:8,maximumErrorMeters:.1}}}};
   for(const extension of ['mjs','mts']) {
     let verified=0;
     await writeFile(join(directory,'constraint.png'),expected);

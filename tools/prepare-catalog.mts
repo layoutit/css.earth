@@ -8,6 +8,7 @@ import { hasErrorCode, isRecord } from './source-values.mts';
 import { prepareSceneDistance, readPreparedFocusObjects } from './prepare-navigation-destinations.mts';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
+import { BODIES } from '@cssearth/astronomy';
 
 const root = resolve(import.meta.dirname, '..');
 const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
@@ -76,8 +77,16 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, 'site/prepared-object-catalog.mts'), text);
   const discoveries = await Promise.all(entries.map(async ({ id }) => {
     const folder = resolve(projectRoot, 'src/objects', id);
-    return [id, await prepareObjectDiscovery(JSON.parse(await readFile(resolve(folder, 'object.json'), 'utf8')), folder)];
+    return [id, await prepareObjectDiscovery(JSON.parse(await readFile(resolve(folder, 'object.json'), 'utf8')), folder)] as const;
   }));
+  // A star without imagery of its own stays on the map when a body with imagery orbits it (a placed star's planet).
+  const withImagery = new Set(discoveries.filter(([, discovery]) => discovery.imagery).map(([id]) => id));
+  const parents = BODIES as Readonly<Record<string, { readonly parent: string | null }>>;
+  for (const [id, discovery] of discoveries) {
+    const entry = entries.find(candidate => candidate.id === id)!;
+    if (entry.classification !== 'star' || discovery.imagery) continue;
+    if ([...withImagery].some(child => parents[child]?.parent === id)) discovery.hostsImagery = true;
+  }
   await writeGenerated(resolve(projectRoot, 'site/prepared-object-discovery.json'), JSON.stringify(Object.fromEntries(discoveries)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-object-distances.json'), JSON.stringify(Object.fromEntries(entries.map(entry => [entry.id, entry.distance]))) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-focus-objects.json'), JSON.stringify(focuses) + '\n');

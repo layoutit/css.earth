@@ -53,6 +53,7 @@ const {
   SMALL_BODY_IDS, asteroidElements,
   COMET_IDS, cometElements,
   STAR_IDS, starAstrometry, starStateKm,
+  HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   systemBarycentreHeliocentricAu,
@@ -65,8 +66,10 @@ const {
 
 // A star other than the Sun is placed by its catalogue astrometry; the Sun itself is the origin and has no entry.
 const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
+// A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
+const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);
 const BODIES = SCENE_OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar"].includes(body.classification) ||
+  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet"].includes(body.classification) ||
   (body.classification === "star" && isPlacedStar(body.id))).map(body => {
   if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
   return body.id as BodyId;
@@ -150,21 +153,23 @@ const planetVelocity = (id: string) => systemBarycentreVelocityAuPerDay(planetKe
   .map((value, axis) => value + (id === "earth" ? epochStates.get("earth")!.velocityKmPerDay[axis] / ASTRONOMICAL_UNIT_KILOMETERS : 0));
 
 const entries = BODIES.map((body) => {
-  const parent = ASTRONOMY_BODY_DATA[body].parent, star = isPlacedStar(body);
+  const parent = ASTRONOMY_BODY_DATA[body].parent, star = isPlacedStar(body), hosted = isHostedPlanet(body);
+  const hostedState = hosted ? hostedPlanetStateRelativeKm(body as Parameters<typeof hostedPlanetStateRelativeKm>[0], EPOCH_JD_TT) : null;
   if (parent === null && !star) throw new TypeError(`Solar geometry requires an orbital parent for ${body}.`);
   const isSatellite = parent !== null && parent !== "sun";
   const epochState = isSatellite ? epochStates.get(body) : null;
   if (epochState && epochState.centerBodyId !== parent) throw new TypeError(`Ephemeris parent differs for ${body}.`);
-  const moonPosition = isSatellite ? epochState?.positionKm ?? moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT) : null;
+  const moonPosition = hostedState ? hostedState.positionKm : isSatellite ? epochState?.positionKm ?? moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT) : null;
   // ELP supplies the Earth's Moon position; take its centred derivative.
   // Other satellite records already expose their analytic Kepler velocity.
   const dt = 0.001;
-  const moonVelocity = !isSatellite ? null : epochState ? epochState.velocityKmPerDay : isIncluded(SATELLITE_IDS, body)
+  const moonVelocity = !isSatellite ? null : hostedState ? hostedState.velocityKmPerDay : epochState ? epochState.velocityKmPerDay : isIncluded(SATELLITE_IDS, body)
     ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
     : moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT + dt).map((value, index) =>
       (value - moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
   const parentPosition = !isSatellite ? null : isSatellite
-    ? primaryStates.has(parent)
+    ? hostedState ? starStateKm(parent as Parameters<typeof starStateKm>[0], EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : primaryStates.has(parent)
       ? primaryStates.get(parent)!.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : isIncluded(DWARF_PLANET_IDS, parent)
       ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
@@ -190,6 +195,8 @@ const entries = BODIES.map((body) => {
     ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
     : planetVelocity(body);
   const orbitPositionAu = isSatellite ? moonPosition!.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
+  // Every body keeps its true Sun direction: the world context rebuilds heliocentric positions from it. A hosted planet's own
+  // light source is its host star, which its synchronous rotation record faces at longitude 0; its map is emissive.
   const toSunIcrf = normalize(heliocentricAu.map((component) => -component));
   const orbitNormalIcrf = normalize(cross(orbitPositionAu, velocityAuPerDay));
   const velocityIcrf = normalize(velocityAuPerDay);
@@ -204,7 +211,8 @@ const entries = BODIES.map((body) => {
   const bodyFixed = toBodyFixed(toSunIcrf);
   // A placed star may put its own display axis up instead of the ecliptic pole: the camera orbit then lies in the star's
   // equator, where its sub-Earth point is, instead of a plane the Earth may sit far outside of.
-  const eclipticNorth = star && starAstrometry(body as Parameters<typeof starAstrometry>[0]).presentationUp === 'display-axis' ? [0, 0, 1] : toBodyFixed(ECLIPTIC_NORTH_ICRF);
+  // A hosted planet's orbit plane has nothing to do with the Solar System's ecliptic; its own pole (the orbit normal) is up.
+  const eclipticNorth = hosted || star && starAstrometry(body as Parameters<typeof starAstrometry>[0]).presentationUp === 'display-axis' ? [0, 0, 1] : toBodyFixed(ECLIPTIC_NORTH_ICRF);
   const orbitNormal = toBodyFixed(orbitNormalIcrf);
   const orbitalVelocity = toBodyFixed(velocityIcrf);
   const elements = rotationAtEpoch(body);

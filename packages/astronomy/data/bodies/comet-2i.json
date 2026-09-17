@@ -1,0 +1,75 @@
+{
+  "id": "comet-2i",
+  "classification": "interstellar",
+  "physical": {
+    "name": "2I/Borisov",
+    "horizonsCode": "2I;",
+    "meanRadiusKm": 0.4,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Estimated nucleus radius, most likely at most 0.4 km (Hui et al. 2020), inside the Hubble bounds 0.2 to 0.5 km (Jewitt et al. 2020); not a direct measurement.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "2I;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272I%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": -127354672.0085863,
+      "eccentricity": 3.350918825576984,
+      "inclinationRad": 1.062422791677155,
+      "ascendingNodeRad": 5.599453417174575,
+      "argumentOfPeriapsisRad": 3.2854739722715713,
+      "meanAnomalyAtEpochRad": 53.86826172727925,
+      "meanMotionRadPerDay": 0.021900157441309166
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272I%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          74206013.44379942,
+          -4189737935.324235,
+          -5744707591.075709
+        ],
+        "velocity": [
+          162785.9014676651,
+          -1740299.038423781,
+          -2236596.904730275
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          79089778.03356636,
+          -4241942159.720558,
+          -5811798607.846602
+        ],
+        "velocity": [
+          162798.3500069826,
+          -1739983.992604421,
+          -2236139.475228794
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          83973881.8400253,
+          -4294137064.591582,
+          -5878876071.536222
+        ],
+        "velocity": [
+          162808.1013422242,
+          -1739678.291306785,
+          -2235693.501113184
+        ]
+      }
+    ]
+  }
+}

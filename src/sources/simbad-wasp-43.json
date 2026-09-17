@@ -1,0 +1,31 @@
+{
+  "id": "simbad-wasp-43",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for WASP-43",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43",
+      "checkedOn": "2026-09-16",
+      "locator": "Basic data: ICRS coordinates, parallax and proper motion (Gaia EDR3), radial velocity (Gaia DR2), spectral type K7V"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; position, parallax and proper motion from Gaia EDR3, radial velocity from Gaia DR2",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

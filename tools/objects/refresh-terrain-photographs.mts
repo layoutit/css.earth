@@ -30,18 +30,18 @@ export function retainedPhotographicAtlas(scene:Record<string,unknown>):Photogra
   });
   const faces=shadeRadialFaces(triangles),leaves=records(scene.bodyLeaves);
   if(leaves.length!==faces.length)throw new Error('Retained atlas and triangle count disagree.');
-  let width=0,height=0,tileSize=0;
+  let width=0,height=0;
   const plans=leaves.map((leaf,index)=>{
     const style=requireString(leaf.style);
     const numbers=(pattern:RegExp)=>{const match=style.match(pattern);if(!match)throw new Error('Missing retained atlas property.');return match[1].split(/[ ,]+/).map(value=>parseFloat(value));};
     const matrix=numbers(/transform:matrix3d\(([^)]+)\)/),[x,y]=numbers(/background-position:([^;]+)/),[w,h]=numbers(/background-size:([^;]+)/);
     const [tw]=numbers(/--polycss-atlas-width:([^;]+)/),[th]=numbers(/--polycss-atlas-height:([^;]+)/);
-    if(leaf.tag!=='u' || matrix.length!==16 || ![...matrix,x,y,w,h,tw,th].every(Number.isFinite) || tw!==th ||
-      (index>0 && (w!==width || h!==height || tw!==tileSize)))throw new Error('Unsupported retained atlas layout.');
-    width=w;height=h;tileSize=tw;
-    return {face:faces[index],matrix,rect:{x:-x,y:-y},geometry:{leafWidth:tw,leafHeight:th}};
+    if(leaf.tag!=='u' || matrix.length!==16 || ![...matrix,x,y,w,h,tw,th].every(Number.isFinite) ||
+      (index>0 && (w!==width || h!==height)))throw new Error('Unsupported retained atlas layout.');
+    width=w;height=h;
+    return {face:faces[index],matrix,rect:{x:-x,y:-y,width:tw,height:th},geometry:{leafWidth:tw,leafHeight:th}};
   });
-  return {width,height,tileSize,plans};
+  return {width,height,plans};
 }
 
 async function refreshContext(id:string,ids:readonly string[]) {

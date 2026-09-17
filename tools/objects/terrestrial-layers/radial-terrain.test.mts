@@ -7,7 +7,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from './radial-terrain.mts';
+import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs, rasterAtlasLayout } from './radial-terrain.mts';
 import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mts';
 
 test('source topology preserves translated inward-facing facets and welds duplicated positions', async () => {
@@ -95,7 +95,7 @@ test('two-sided radial preparation retains exact source geometry and atlas layou
   try {
     await writeFile(join(directory, 'shape.obj'), 'v 1 0 0\nv 0 1 0\nv 0 0 1\nv 0 0 0\nf 1 2 3\nf 1 4 2\nf 2 4 3\nf 3 4 1\n');
     const config = { namespace: 'fixture', geometry: { radius: 1, radiusKm: .001,
-      radialTerrain: { path: 'shape.obj', format: 'wavefront-obj', tileSize: 16, atlasColumns: 2,
+      radialTerrain: { path: 'shape.obj', format: 'wavefront-obj', texelsPerFace: 256,
         grid: { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }, faceBudget: 4,
         simplification: { method: 'source-meshoptimizer', targetFaces: 4, maximumErrorMeters: .001 } } } };
     let validations = 0;
@@ -120,4 +120,29 @@ test('two-sided radial preparation retains exact source geometry and atlas layou
     for (const value of ['true', 1, null]) await assert.rejects(prepare(value), /backface visibility must be boolean/);
     assert.equal(validations, 3, 'invalid coverage policy is rejected before source loading');
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('raster atlas: each face gets its own rectangle at one texel density, and its leaf is that rectangle', () => {
+  // A large face, a small one and a sliver, in source units.
+  const faces = [[[0,0,0],[40,0,0],[0,30,0]], [[0,0,5],[4,0,5],[0,3,5]], [[0,0,9],[40,0,9],[20,1,9]]]
+    .map(vertices => ({ vertices, normal: [0,0,1], vertexNormals: [[0,0,1],[0,0,1],[0,0,1]] }));
+  const { plans, width, height } = rasterAtlasLayout(faces, 4096, 8);
+  assert.ok(plans.reduce((sum, { rect }) => sum + rect.width * rect.height, 0) <= 4096 * faces.length, 'the budget holds');
+  assert.ok(width <= 16383 && height <= 16383);
+  for (const [i, { rect, geometry, matrix: m }] of plans.entries()) {
+    for (const n of [rect.x, rect.y, rect.width, rect.height]) assert.equal(n % 8, 0, 'every lens scale addresses whole pixels');
+    assert.ok(rect.x + rect.width <= width && rect.y + rect.height <= height);
+    for (const other of plans.slice(i + 1)) assert.ok(rect.x + rect.width <= other.rect.x || other.rect.x + other.rect.width <= rect.x ||
+      rect.y + rect.height <= other.rect.y || other.rect.y + other.rect.height <= rect.y, 'rectangles never overlap');
+    assert.deepEqual([geometry.leafWidth, geometry.leafHeight], [rect.width, rect.height], 'one leaf pixel is one atlas texel');
+    assert.deepEqual(geometry.backgroundPosition, [-rect.x, -rect.y]);
+    // The leaf's bottom corners and top centre land on the face, overlapped outward by the seam bleed: each lies near a vertex, in CSS units.
+    const at = (x: number, y: number) => [0, 1, 2].map(k => m[k] * x + m[4 + k] * y + m[12 + k]);
+    const css = faces[i].vertices.map(([x, y, z]) => [y * 50, x * 50, z * 50]);
+    for (const corner of [at(0, rect.height), at(rect.width, rect.height), at(rect.width / 2, 0)])
+      assert.ok(css.some(v => Math.hypot(...v.map((n, k) => n - corner[k])) < 200), 'the leaf triangle covers its face');
+  }
+  // Density follows size: ten times the edges is many times the texels (the fixed seam overlap widens the small face), and a sliver stays thin.
+  assert.ok(plans[0].rect.width * plans[0].rect.height > 20 * plans[1].rect.width * plans[1].rect.height);
+  assert.ok(plans[2].rect.width > 5 * plans[2].rect.height);
 });

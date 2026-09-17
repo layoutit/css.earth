@@ -22,7 +22,7 @@ test('Harmonia preserves calibrated original coordinates and the paired spin mod
 });
 test('Harmonia keeps closed source connectivity at 800 native raster leaves',async()=>{
  const {config}=requireRadialTestConfig(await read('preparation/terrestrial.json'));const source=await createSourceManifest({planetId:'harmonia',planetName:'Harmonia',sourceRoot:root}),r=requireClosedRadialTerrain(await loadRadialTerrain({config,sourceDirectory:root,source}));
- assert.equal(r.faces.length,800);assert.equal(r.simplification.sourceFaces,800);assert.equal(r.simplification.removedOppositeFaces,0);assert.equal(r.simplification.topology.eulerCharacteristic,2);assert.ok(r.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));assert.deepEqual([r.tileSize,r.width,r.height],[128,2048,6400]);
+ assert.equal(r.faces.length,800);assert.equal(r.simplification.sourceFaces,800);assert.equal(r.simplification.removedOppositeFaces,0);assert.equal(r.simplification.topology.eulerCharacteristic,2);assert.ok(r.leaves.every(l=>l.tag==='u'&&l.attributes['data-polycss-texture-leaf-sizing']==='raster'));assert.ok(r.plans.reduce((sum,p)=>sum+p.rect.width*p.rect.height,0)<=16384*r.faces.length);
  assert.equal(r.simplification.estimatedErrorMeters,0);
  const canonical=(faces:readonly (readonly (readonly number[])[])[])=>faces.map(f=>f.map(v=>v.join(',')).sort().join(';')).sort();
  const {indices,positions}=r.grid;assert.ok(indices);assert.ok(positions);

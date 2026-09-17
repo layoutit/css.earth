@@ -1,0 +1,298 @@
+{
+  "schema": "csswasp-43-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "wasp-43-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1151,
+      "expectedSha256": "c9bd413c0b8d83e38af92a0838ad14b0dbb5a6f2efb6a1bc52432cbeae12288d",
+      "origin": "https://arxiv.org/abs/2406.10207",
+      "credit": "Challener et al. (2024), ApJL 969, L32",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-43-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2115,
+      "expectedSha256": "b6fcddef1a5f52410f80fb5430433e92cfbe296875fe3fc51b04973cebb2457d",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "wasp-43-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1684,
+      "expectedSha256": "e532cb86ababf24a91425502ba2aca919758564f3c86b4e758f00771210bc28f",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-43-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "wasp-43-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 102,
+      "expectedSha256": "51fa0ed77f2fd2572f5b561bc52ed43ac7a9e92d5e7807492817e8a960e35b5a",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-43-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 282,
+      "expectedSha256": "e9003c64e500e232f30bc50dff10d3b1c3f2746171147019c4ed022d39b20c05",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "wasp-43-gaia-dr3-source",
+      "path": "photometry/gaia-dr3-source.csv",
+      "expectedBytes": 288,
+      "expectedSha256": "6fb01cc374683897fde7c5e423ec9a423746188e9e19f8b778aff4183b293e28",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; GSP-Phot, Andrae et al. (2023), A&A 674, A27",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP sync, CSV response saved unchanged on 2026-09-16; the ADQL query is recorded in photometry/stellar-color.json",
+      "redistribution": "One catalogue row, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/gaia-dr3-source.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1221,
+      "expectedSha256": "2d27e51797b6ff4168ae069cd5df7ff80fe4cca30cb0d765e76ea825fd32206f",
+      "origin": "https://doi.org/10.1051/0004-6361/202243462",
+      "credit": "Gaia DR3 GSP-Phot effective temperature (Andrae et al. 2023); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived Gaia row, its temperature columns and the Planck spectrum applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-gsp-phot-wasp-43",
+            "role": "material",
+            "evidence": "src/objects/wasp-43/source/photometry/stellar-color.json#/temperature"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-43-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6347,
+      "expectedSha256": "1e9392888fd992b79bec0d48c8f759c766869d33dbd729f46c033c9e75f13a87",
+      "origin": "https://arxiv.org/abs/2406.10207",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-star.mts",
+        "inputs": [
+          "wasp-43-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-star.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2936,
+      "expectedSha256": "b6768ac5c476fd561060ce77b5052643c7fa125760fb35e0e5af2ec733136116",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 444,
+      "expectedSha256": "016c703105865cd69990317cf5346076619c75585080296dded9b6f1b46358fd"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1023,
+      "expectedSha256": "487907dcbed257a4321f5602089d6fc950da09ff795b6b25a5e248a7a5b46b18"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3807,
+      "expectedSha256": "80a334101e3a7f656be03841e6f56aba8e993432289c7213a29040e15c3a05d6"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 191451,
+      "expectedSha256": "a791308df0c14370bb873a62620fa1d212c3dc09393dfd63636e382ec4607014",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /wasp-43/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
+      }
+    }
+  ]
+}

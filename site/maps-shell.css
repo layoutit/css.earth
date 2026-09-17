@@ -447,8 +447,9 @@
   /* 20px rows + 8px gaps, including the initial 8px padding. */
   max-height: calc(var(--object-category-visible-rows) * 28px);
 }
-[data-search-results] [data-solar-system-results] { padding-top: 8px; }
-[data-search-results] [data-solar-system-results] > :is(.planet-selected-panel, .planet-object-tabs) { display: none; }
+[data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
+[data-search-results] [data-system-results] { padding-top: 8px; }
+[data-search-results] [data-system-results] > :is(.planet-selected-panel, .planet-object-tabs) { display: none; }
 [data-search-results] #object-category-results { max-height: min(420px, 55dvh); }
 [data-search-results] #object-category-results .planet-object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
 [data-search-results] #object-category-results .planet-object-distance { color: var(--shell-text-secondary); }

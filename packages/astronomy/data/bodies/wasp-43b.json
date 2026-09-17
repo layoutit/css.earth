@@ -1,0 +1,27 @@
+{
+  "id": "wasp-43b",
+  "classification": "exoplanet",
+  "order": 906,
+  "physical": {
+    "name": "WASP-43b",
+    "horizonsCode": null,
+    "meanRadiusKm": 73481.18,
+    "gravitationalParameterKm3PerS2": 259960767.8,
+    "parent": "wasp-43"
+  },
+  "physicalNotes": "Radius: Rp/R* 0.15883 (Challener et al. 2024, ApJL 969, L32, Table 1, fitted to the white-light transit) times the host record's 462,640.5 km. A sphere: tidal and rotational flattening are not modelled. GM from the assumed planet mass 2.052 Jupiter masses (same table) times Jupiter's GM 126,686,534 km^3/s^2 (JPL).",
+  "hostedOrbit": {
+    "periodDays": 0.8134741,
+    "semiMajorAxisStellarRadii": 4.8767,
+    "inclinationDegrees": 82.155,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 55934.2922503,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Challener et al. (2024), Table 1, assumed orbital period 0.8134741 d, matching Hammond et al. (2024)",
+      "shape": "Challener et al. (2024), Table 1: semi-major axis 4.8767 +0.0068/-0.0069 stellar radii and inclination 82.155 +/- 0.027 degrees fitted to the white-light transit; eccentricity 0 assumed",
+      "phase": "Challener et al. (2024), Table 1: transit time 55934.2922503 BMJD_TDB",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north). The orbit passes the stellar disc on the side Challener et al. (2024) assume for their map (footnote 1): their map's north is the orbit normal's side as constructed here."
+    }
+  }
+}

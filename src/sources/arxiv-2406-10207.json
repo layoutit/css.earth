@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-2406-10207",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Challener et al. (2024): Latitudinal Asymmetry in the Dayside Atmosphere of WASP-43b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2406.10207"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ad5958"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2406.10207",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ad5958",
+      "label": "ApJL 969, L32 (2024)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2406.10207",
+      "checkedOn": "2026-09-16",
+      "locator": "Table 1 system parameters; sections 4-5 mapping method and white-light map"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters 969, L32",
+  "creators": [
+    "R. C. Challener",
+    "Z. Rustamkulov",
+    "E. K. H. Lee",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

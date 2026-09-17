@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wasp-43b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-43b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 73481.18
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/wasp-43b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2a9d5d69e963f686c5583137e004fb44556ff5a9d454a4dd998abb0198d9fb09"
+      }
+    },
+    "catalog": {
+      "name": "WASP-43b",
+      "classification": "exoplanet",
+      "color": "#e97a54",
+      "distanceAu": 17976692.3,
+      "description": "Hot Jupiter whose heat map JWST measured from its eclipses.",
+      "systemName": "WASP-43 system",
+      "order": 906,
+      "context": {
+        "order": 903
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2399897467675476500,
+        1123782738795824900,
+        -458043586291200000
+      ],
+      "presentationToReference": [
+        -0.9419285047378485,
+        0.29829147416959223,
+        0.15424943565554022,
+        0.2903470823037573,
+        0.9541916795936617,
+        -0.072227490555343,
+        -0.16872837271785784,
+        -0.02324725859017409,
+        -0.9853884011941816
+      ],
+      "orbitUpReference": [
+        -0.29829147416959223,
+        -0.9541916795936617,
+        0.02324725859017409
+      ],
+      "metersPerUnit": 237036.06451612903,
+      "bodyRadiusM": 73481180
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "2c959a474c201de9e82079f37552e8f98ef619ef80e8ea76ad82750a2ae12289"
+  }
+}

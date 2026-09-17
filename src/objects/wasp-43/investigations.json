@@ -1,0 +1,100 @@
+{
+ "schema": "cssearth-investigation-ledger@1",
+ "objectId": "wasp-43",
+ "entries": [
+  {
+   "id": "resolved-photosphere",
+   "subject": "Disc-resolved images or interferometry of WASP-43",
+   "status": "excluded",
+   "finding": "At 87.15 pc a 0.665 solar-radius star spans 0.071 mas (computed from the radius and distance), far below the resolution of any telescope or optical interferometer. No image or interferometric diameter is published.",
+   "revisitWhen": "An interferometric diameter or surface image of WASP-43 is published.",
+   "evidence": [
+    "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
+   ],
+   "checked": [
+    {
+     "date": "2026-09-16",
+     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+    }
+   ]
+  },
+  {
+   "id": "challener-2024-stellar-parameters",
+   "subject": "Stellar radius and mass from Challener et al. (2024)",
+   "status": "included",
+   "finding": "Table 1 lists the assumed stellar radius 0.665 solar radii and mass 0.6916 solar masses, matching Hammond et al. (2024); they set the sphere and the display GM, and the WASP-43b package's orbit is expressed in this radius.",
+   "evidence": [
+    "https://arxiv.org/abs/2406.10207"
+   ],
+   "checked": [
+    {
+     "date": "2026-09-16",
+     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+    }
+   ]
+  },
+  {
+   "id": "gaia-edr3-placement",
+   "subject": "Gaia EDR3 astrometry via SIMBAD",
+   "status": "included",
+   "finding": "Position, parallax 11.474 +/- 0.016 mas (87.15 pc, no zero-point correction) and proper motion -41.992, -38.004 mas/yr from Gaia EDR3; radial velocity -3.7 +/- 0.7 km/s from Gaia DR2.",
+   "evidence": [
+    "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WASP-43"
+   ],
+   "checked": [
+    {
+     "date": "2026-09-16",
+     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+    }
+   ]
+  },
+  {
+   "id": "stellar-rotation-axis",
+   "subject": "Rotation axis of WASP-43",
+   "status": "unresolved",
+   "finding": "No measured axis. Challener et al. (2024) cite only some evidence of rotational modulation longer than 15 days (Hellier et al. 2011). The display axis is celestial north at the star.",
+   "revisitWhen": "A published stellar inclination or spin-orbit angle for WASP-43.",
+   "evidence": [
+    "https://arxiv.org/abs/2406.10207"
+   ],
+   "checked": [
+    {
+     "date": "2026-09-16",
+     "commit": "93fb1335199d780d2659d7f808faece1c1521127"
+    }
+   ]
+  },
+  {
+   "id": "gaia-dr3-xp-spectrum",
+   "subject": "A measured optical spectrum for the photosphere colour",
+   "status": "excluded",
+   "finding": "Gaia DR3 published no BP/RP (XP) spectrum for WASP-43 (source_id 3767805209112436736, has_xp_sampled and has_xp_continuous false), so no flux-calibrated optical spectrum is available to integrate.",
+   "revisitWhen": "Gaia DR4 publishes XP spectra, or a flux-calibrated optical spectrum of WASP-43 is released.",
+   "evidence": [
+    "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736"
+   ],
+   "checked": [
+    {
+     "date": "2026-09-16",
+     "commit": "5926bcf4edbd5dbf8bf5c474c8f6eb0d6479d12b"
+    }
+   ]
+  },
+  {
+   "id": "gaia-dr3-gsp-phot-color",
+   "subject": "Photosphere colour from the Gaia DR3 photometric temperature",
+   "status": "included",
+   "finding": "GSP-Phot gives 4,416 K (16th–84th percentiles 4,407–4,424 K; systematics not included). A Planck spectrum at that temperature through the CIE 1931 2° observer gives sRGB 255, 220, 184 (#ffdcb8); the percentiles move a channel by at most 1. The spectroscopic 4,520 K that Challener et al. (2024) use gives 255, 222, 189. A blackbody ignores the K dwarf's absorption bands, and the colour carries no brightness.",
+   "evidence": [
+    "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20bp_rp%2C%20has_xp_sampled%2C%20teff_gspphot%2C%20teff_gspphot_lower%2C%20teff_gspphot_upper%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%203767805209112436736",
+    "https://doi.org/10.1051/0004-6361/202243462"
+   ],
+   "checked": [
+    {
+     "date": "2026-09-16",
+     "commit": "5926bcf4edbd5dbf8bf5c474c8f6eb0d6479d12b"
+    }
+   ]
+  }
+ ]
+}

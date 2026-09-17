@@ -1,0 +1,29 @@
+{
+  "id": "wasp-43",
+  "classification": "star",
+  "order": 905,
+  "physical": {
+    "name": "WASP-43",
+    "horizonsCode": null,
+    "meanRadiusKm": 462640.5,
+    "gravitationalParameterKm3PerS2": 91783923533.00528,
+    "parent": null
+  },
+  "physicalNotes": "Radius: 0.665 solar radii at 695700 km per solar radius, the stellar radius Challener et al. (2024, ApJL 969, L32; arXiv:2406.10207, Table 1) assume, matching Hammond et al. (2024). GM from their stellar mass 0.6916 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the star has no measured axis, so the presentation frame puts the display axis (celestial north at the star) up.",
+  "star": {
+    "rightAscensionDegrees": 154.90837038061,
+    "declinationDegrees": -9.80627938926,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 87.15356458079135,
+    "properMotionRaMasPerYear": -41.992,
+    "properMotionDecMasPerYear": -38.004,
+    "radialVelocityKmPerS": -3.7,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "SIMBAD basic record for WASP-43, ICRS J2000 position from Gaia EDR3 (Gaia Collaboration 2020; bibcode 2020yCat.1350....0G), retrieved 2026-09-16",
+      "distance": "Gaia EDR3 parallax 11.474 +/- 0.016 mas via SIMBAD (2020yCat.1350....0G): 1000/11.474 = 87.15 pc, no zero-point correction",
+      "properMotion": "Gaia EDR3 via SIMBAD (2020yCat.1350....0G): -41.992, -38.004 mas/yr",
+      "radialVelocity": "Gaia DR2 via SIMBAD (2018yCat.1345....0G): -3.7 +/- 0.7 km/s"
+    }
+  }
+}

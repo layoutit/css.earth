@@ -52,7 +52,7 @@ try {
       console.log(`${object.id} DPR ${dpr}: ${checks.length} matching material demands`);
     }
     for (const id of ['saturn', 'ceres', 'earth']) {
-      await page.goto(`${origin}/sun/?overview=solar-system&v=QMZBtanKo8iixjxxYIMYX7RAwePn46QAMwJBQsczQAAAAD_E2KUfHzakP9G9rdLKWIG_2AwMFIfdHwABAAAAAAAAAAA`);
+      await page.goto(`${origin}/sun/?overview=system&v=QMZBtanKo8iixjxxYIMYX7RAwePn46QAMwJBQsczQAAAAD_E2KUfHzakP9G9rdLKWIG_2AwMFIfdHwABAAAAAAAAAAA`);
       await page.waitForFunction(() => window.__cssEarth?.ready && window.__sun?.ready);
       await page.evaluate(id => {
         window.__decodedImages = [];

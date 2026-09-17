@@ -62,7 +62,7 @@ test('640x320 facet preview bounds exact ray queries and cannot alter native atl
       raster:{width:1280,height:640,bandCount:16,gutter:1,poleSize:16,surfaceQuality:90,observations:[{id:'normal',validity:{kind:'image-rgb-no-data',noData:null,centerLongitude:0}}],scientific:[lens]}};
 const face={vertices:[[5,0,0],[5,1,0],[5,0,1]],normal:[1,0,0],vertexNormals:[[1,0,0],[1,0,0],[1,0,0]]};
     const matrix=[BASE_TILE/2,0,0,0,0,0,BASE_TILE/2,0,0,0,1,0,0,5*BASE_TILE,0,1];
-    const radial={grid,leaves:[],faces:[face],width:2,height:2,tileSize:2,plans:[{face,rect:{x:0,y:0,width:2,height:2},geometry:{leafWidth:2,leafHeight:2,matrix:`matrix3d(${matrix})`,backgroundPosition:[0,0],backgroundSize:[2,2]},matrix}]};
+    const radial={grid,leaves:[],faces:[face],width:2,height:2,plans:[{face,rect:{x:0,y:0,width:2,height:2},geometry:{leafWidth:2,leafHeight:2,matrix:`matrix3d(${matrix})`,backgroundPosition:[0,0],backgroundSize:[2,2]},matrix}]};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source,radial});
     assert.equal(rays,640*320);
     const normal=surfaces.find(surface=>surface.id==='normal');

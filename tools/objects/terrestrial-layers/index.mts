@@ -248,10 +248,6 @@ export function parseTerrestrialProfile(input:unknown) {
     if (lens.textureScale !== undefined) {
       lensTextureGrid(lens, value.raster);
       if (value.geometry.radialModels) throw new TypeError('Texture scaling for radial model families is not supported.');
-      const tile = value.geometry.radialTerrain?.tileSize;
-      if (tile !== undefined && (!Number.isSafeInteger(tile * lens.textureScale) || tile * lens.textureScale < 1)) {
-        throw new TypeError('Scaled radial textures require integral source atlas tiles.');
-      }
     }
   }
   return input as typeof value;
