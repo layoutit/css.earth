@@ -1,5 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
+import { readFitsHeader } from '../../fits.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -47,28 +48,18 @@ export function selectVegaCandidate(values:readonly (VegaValue|null)[]):{index:n
   return winner;
 }
 
-export function readFitsCards(bytes:Uint8Array) {
-  const s=Buffer.from(bytes).toString('ascii'), cards=new Map<string,string>();
-  for(let i=0;i<s.length;i+=80) {
-    const row=s.slice(i,i+80);
-    if(row.slice(0,8).trim()==='END') break;
-    if(row.slice(8,10)==='= ') cards.set(row.slice(0,8).trim(),row.slice(10,30).trim().replace(/^'|'$/g,'').trim());
-  }
-  return cards;
-}
-
 /** These two native KFKI products have 512 rows followed by FITS padding.
  * The old MSB_INTEGER label describes unsigned 8-bit detector data. The native
  * checksum and stated maximum independently qualify that interpretation. */
 export function decodeVegaImage(bytes:Uint8Array, header:Uint8Array) {
-  const cards=readFitsCards(header), width=Number(cards.get('NAXIS1')), height=Number(cards.get('NAXIS2'));
-  assert.equal(Number(cards.get('BITPIX')),8);
-  assert.equal(Number(cards.get('BSCALE')),1); assert.equal(Number(cards.get('BZERO')),0);
+  const cards=readFitsHeader(Buffer.from(header)).header, width=Number(cards.NAXIS1), height=Number(cards.NAXIS2);
+  assert.equal(cards.BITPIX,8);
+  assert.equal(cards.BSCALE,1); assert.equal(cards.BZERO,0);
   assert.equal(width,512); assert.equal(height,512);
   assert.equal(bytes.length,Math.ceil(width*height/2880)*2880);
   const data=bytes.slice(0,width*height);
-  assert.equal(data.reduce((sum,n)=>sum+n,0),Number(cards.get('CHECKSUM')),'Native image/header checksum mismatch');
-  assert.equal(data.reduce((max,n)=>Math.max(max,n),0),Number(cards.get('DATA-MAX')));
+  assert.equal(data.reduce((sum,n)=>sum+n,0),Number(cards.CHECKSUM),'Native image/header checksum mismatch');
+  assert.equal(data.reduce((max,n)=>Math.max(max,n),0),Number(cards['DATA-MAX']));
   return {data,width,height,cards};
 }
 
@@ -112,19 +103,19 @@ export async function prepareEncounters(sourceDirectory:string) {
   const vega=[];
   for(const observation of registration.observations) {
     const image=decodeVegaImage(await readFile(resolve(sourceDirectory,`vega/${observation.id}.img`)),await readFile(resolve(sourceDirectory,`vega/${observation.id}.hdr`)));
-    assert.equal(observation.utc.slice(11,19),image.cards.get('TIM--OBS'));
-    assert.deepEqual(observation.kmPerPixel,[Number(image.cards.get('SCALEX')),Number(image.cards.get('SCALEY'))]);
+    assert.equal(observation.utc.slice(11,19),image.cards['TIM--OBS']);
+    assert.deepEqual(observation.kmPerPixel,[Number(image.cards.SCALEX),Number(image.cards.SCALEY)]);
     assert.ok(observation.scaleMultiplier>=.9 && observation.scaleMultiplier<=1.1);
     const derived=await deriveVegaCamera(sourceDirectory,observation.utc);
     for(const key of ['bodyEye','bodySun','bodyRight','bodyUp'] as const) {
       assert.equal(observation[key].length,3);
       assert.ok(observation[key].every((n,i)=>Math.abs(n-derived[key][i])<1e-8),`${observation.id}: ${key} must follow the pinned spin state and ephemeris`);
     }
-    assert.ok(Math.abs(derived.rangeKm/Number(image.cards.get('RANGE'))-1)<.01);
-    assert.ok(Math.abs(derived.phaseDegrees-Number(image.cards.get('PHASEANG')))<.5);
-    assert.ok(Math.abs(derived.sunCounterclockwiseFromUpDegrees-Number(image.cards.get('SUNANG')))<1.5);
+    assert.ok(Math.abs(derived.rangeKm/Number(image.cards['RANGE'])-1)<.01);
+    assert.ok(Math.abs(derived.phaseDegrees-Number(image.cards['PHASEANG']))<.5);
+    assert.ok(Math.abs(derived.sunCounterclockwiseFromUpDegrees-Number(image.cards['SUNANG']))<1.5);
     const outline=validateVegaOutline(mesh,observation);
-    vega.push({id:observation.id,filter:image.cards.get('FILTER'),geometry:derived,outline,sample:createVegaSampler(mesh,observation,registration.mask,image)});
+    vega.push({id:observation.id,filter:image.cards['FILTER'],geometry:derived,outline,sample:createVegaSampler(mesh,observation,registration.mask,image)});
   }
   const weights=[[1/3,1/3,1/3],[.6,.2,.2],[.2,.6,.2],[.2,.2,.6],[.8,.1,.1],[.1,.8,.1],[.1,.1,.8]];
   let totalArea=0,oldArea=0,newArea=0;

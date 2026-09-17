@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { GRAVITY_REDUCTION } from './calibrate-gravity.mts';
 import { MATISSE_REDUCTION } from './calibrate-matisse.mts';
 import { parseAssociationTree, reduceAssociation, type InstrumentReduction, type ReductionIo } from './eso-associations.mts';
-import type { EsoHeader } from './eso-pipeline.mts';
+import { parseHeaderCards, type EsoHeader } from './eso-pipeline.mts';
 import { binaryTable, numbers, readFitsHdus, tableColumn, text, type BinaryTable } from './fits-table.mts';
 
 const fixture = (name: string) => resolve(import.meta.dirname, 'fixtures', name);
@@ -184,4 +184,16 @@ test('MATISSE calibrated from raw frames reproduces the IN-IN exposure of Drevon
     else assert.ok(Math.abs(median(pairs.map(([ours, theirs]) => ours - theirs))) < 0.01, `${row.key}: difference at V² ${level.toFixed(4)}`);
   }
   for (const { key, median: difference } of closures) assert.ok(Math.abs(difference) < 3, `${key}: closure difference ${difference.toFixed(2)} degrees`);
+});
+
+test('archive header text reads through the shared FITS reader, one line per card however wide', () => {
+  const lines = ['SIMPLE  =                T / Standard FITS', "HIERARCH ESO TPL NAME = 'DARK - Woll: IN, Grism: HIGH, DET1: 0.7000000, DET2: 30' / ",
+    "HIERARCH ESO DET CLDC1 DCNM16 = 'DC16_RelaySwitchLowActive' / Name of bias voltage", 'HIERARCH ESO DET CHIP PXSPACE= 3.000e-05 / Pixel-Pixel Spacing', 'END'];
+  const header = parseHeaderCards(lines);
+  assert.equal(header['ESO TPL NAME'], 'DARK - Woll: IN, Grism: HIGH, DET1: 0.7000000, DET2: 30');
+  assert.equal(header['ESO DET CLDC1 DCNM16'], 'DC16_RelaySwitchLowActive');
+  assert.equal(header['ESO DET CHIP PXSPACE'], 3e-5);
+  assert.throws(() => parseHeaderCards([`HIERARCH ESO TPL NAME = 'unterminated`, 'END']), /Unterminated/);
+  assert.throws(() => parseHeaderCards(lines.slice(0, -1)), /END/);
+  assert.throws(() => parseHeaderCards([lines[0]!, lines[0]!, 'END']), /Duplicate/);
 });

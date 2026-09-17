@@ -1,9 +1,14 @@
-/** FITS headers and binary tables (OIFITS) read with the standard's own byte layout: 2880-byte blocks, 80-character cards,
+/** Binary tables (OIFITS) read with the standard's own byte layout: 2880-byte blocks, 80-character cards,
  * big-endian columns whose TFORM states a repeat count and a type. No heap (variable-length) columns are read. Complex columns
  * (C single, M double precision; OIFITS 2 VISDATA and VISERR) read as real and imaginary pairs, so a table that carries them,
- * as AMBER and GRAVITY files do, can be read and rewritten. */
-export interface FitsHdu { readonly header: Readonly<Record<string, string | number | boolean>>; readonly dataOffset: number; readonly dataBytes: number; readonly extname: string }
-export interface TableColumn { readonly name: string; readonly repeat: number; readonly type: 'D' | 'E' | 'I' | 'J' | 'K' | 'L' | 'A' | 'B' | 'C' | 'M'; readonly offset: number; readonly bytes: number }
+ * as AMBER and GRAVITY files do, can be read and rewritten. Headers and HDU bounds come from tools/fits.mts. */
+import { readFitsHdus as readSharedHdus, type FitsHeader } from '../../fits.mts';
+/** One HDU as tools/fits.mts reads it: its header (ESO HIERARCH keywords as "ESO DET NAME" style keys), where its header and data start,
+ * and how many data bytes it holds before padding. */
+export interface FitsHdu { readonly header: FitsHeader; readonly headerOffset: number; readonly dataOffset: number; readonly dataBytes: number; readonly extname: string }
+/** `nullValue` is the column's TNULL, read back as NaN. A column whose TSCAL or TZERO changes its values is refused when read or written. */
+export interface TableColumn { readonly name: string; readonly repeat: number; readonly type: 'D' | 'E' | 'I' | 'J' | 'K' | 'L' | 'A' | 'B' | 'C' | 'M'; readonly offset: number; readonly bytes: number;
+  readonly scaled?: true; readonly nullValue?: number }
 export interface BinaryTable { readonly hdu: FitsHdu; readonly columns: readonly TableColumn[]; readonly rows: number; readonly rowBytes: number }
 
 const BLOCK = 2880, CARD = 80;
@@ -11,53 +16,15 @@ const BLOCK = 2880, CARD = 80;
 const TYPE_BYTES = { D: 8, E: 4, I: 2, J: 4, K: 8, L: 1, A: 1, B: 1, C: 8, M: 16 } as const;
 const FORM = /^(\d*)([DEIJKLABCM])$/;
 
-function parseCardValue(text: string): string | number | boolean {
-  const trimmed = text.trim();
-  if (trimmed.startsWith("'")) { const end = trimmed.lastIndexOf("'"); return trimmed.slice(1, end).replace(/''/g, "'").trimEnd(); }
-  if (trimmed === 'T') return true;
-  if (trimmed === 'F') return false;
-  const number = Number(trimmed.replace(/D/i, 'E'));
-  if (!Number.isFinite(number)) throw new Error(`Unreadable FITS card value: ${text}`);
-  return number;
-}
-
-/** Every HDU in the file: header keywords and the data segment bounds. */
+/** Every HDU in the file, read and bounds-checked by the repository's one FITS reader. */
 export function readFitsHdus(bytes: Buffer): FitsHdu[] {
-  const hdus: FitsHdu[] = [];
-  let offset = 0;
-  while (offset + BLOCK <= bytes.length) {
-    const header: Record<string, string | number | boolean> = {};
-    let end = -1, cursor = offset;
-    while (end < 0) {
-      if (cursor + BLOCK > bytes.length) throw new Error('FITS header runs past the file.');
-      for (let i = 0; i < BLOCK; i += CARD) {
-        const card = bytes.toString('latin1', cursor + i, cursor + i + CARD), key = card.slice(0, 8).trim();
-        if (key === 'END') { end = cursor + i; break; }
-        if (!key || key === 'COMMENT' || key === 'HISTORY' || card[8] !== '=') continue;
-        const body = card.slice(10);
-        let valueText = body;
-        if (body.startsWith("'")) {
-          // A quoted value ends at the first quote not doubled; a doubled quote is an escaped quote inside it.
-          let closing = body.indexOf("'", 1);
-          while (closing >= 0 && body[closing + 1] === "'") closing = body.indexOf("'", closing + 2);
-          valueText = body.slice(0, closing + 1);
-        } else if (body.includes('/')) valueText = body.slice(0, body.indexOf('/'));
-        header[key] = parseCardValue(valueText);
-      }
-      cursor += BLOCK;
-    }
-    const naxis = Number(header.NAXIS ?? 0);
-    let dataBytes = 0;
-    if (naxis > 0) {
-      dataBytes = Math.abs(Number(header.BITPIX)) / 8;
-      for (let axis = 1; axis <= naxis; axis++) dataBytes *= Number(header[`NAXIS${axis}`]);
-      dataBytes = dataBytes * Number(header.GCOUNT ?? 1) + Number(header.PCOUNT ?? 0) * Math.abs(Number(header.BITPIX)) / 8;
-    }
-    const extname = typeof header.EXTNAME === 'string' ? header.EXTNAME : hdus.length === 0 ? 'PRIMARY' : '';
-    hdus.push({ header, dataOffset: cursor, dataBytes, extname });
-    offset = cursor + Math.ceil(dataBytes / BLOCK) * BLOCK;
-  }
-  return hdus;
+  let headerOffset = 0;
+  return readSharedHdus(bytes).map((hdu, index) => {
+    const extname = typeof hdu.header.EXTNAME === 'string' ? hdu.header.EXTNAME : index === 0 ? 'PRIMARY' : '';
+    const read = { header: hdu.header, headerOffset, dataOffset: hdu.dataOffset, dataBytes: hdu.dataBytes, extname };
+    headerOffset = hdu.nextOffset;
+    return read;
+  });
 }
 
 export function binaryTable(hdu: FitsHdu): BinaryTable {
@@ -69,7 +36,12 @@ export function binaryTable(hdu: FitsHdu): BinaryTable {
     const form = String(hdu.header[`TFORM${index}`]).trim(), match = FORM.exec(form);
     if (!match) throw new Error(`Unsupported FITS column form ${form} in ${hdu.extname}.`);
     const repeat = match[1] ? Number(match[1]) : 1, type = match[2] as TableColumn['type'], bytes = repeat * TYPE_BYTES[type];
-    columns.push({ name: String(hdu.header[`TTYPE${index}`]).trim(), repeat, type, offset, bytes });
+    const scale = hdu.header[`TSCAL${index}`] ?? 1, zero = hdu.header[`TZERO${index}`] ?? 0, nullValue = hdu.header[`TNULL${index}`];
+    if (typeof scale !== 'number' || typeof zero !== 'number') throw new Error(`Column ${index} of ${hdu.extname} states a non-numeric TSCAL or TZERO.`);
+    if (nullValue !== undefined && (typeof nullValue !== 'number' || !Number.isSafeInteger(nullValue) || !'BIJK'.includes(type)))
+      throw new Error(`Column ${index} of ${hdu.extname} states a TNULL that only an integer column can carry.`);
+    columns.push({ name: String(hdu.header[`TTYPE${index}`]).trim(), repeat, type, offset, bytes,
+      ...(scale !== 1 || zero !== 0 ? { scaled: true as const } : {}), ...(nullValue !== undefined ? { nullValue } : {}) });
     offset += bytes;
   }
   if (offset !== rowBytes) throw new Error(`FITS row width ${rowBytes} differs from its columns (${offset}) in ${hdu.extname}.`);
@@ -84,6 +56,7 @@ export function tableColumn(table: BinaryTable, name: string): TableColumn {
 
 /** Numeric cells of one row: a repeat-count array of numbers (logicals as 0/1; complex cells as re, im pairs, twice as long). */
 export function numbers(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn): number[] {
+  unscaled(column);
   const base = table.hdu.dataOffset + row * table.rowBytes + column.offset;
   if (column.type === 'C' || column.type === 'M') {
     const out = new Array<number>(column.repeat * 2), size = column.type === 'C' ? 4 : 8;
@@ -95,12 +68,18 @@ export function numbers(bytes: Buffer, table: BinaryTable, row: number, column: 
     const at = base + i * TYPE_BYTES[column.type];
     out[i] = column.type === 'D' ? bytes.readDoubleBE(at) : column.type === 'E' ? bytes.readFloatBE(at) : column.type === 'I' ? bytes.readInt16BE(at)
       : column.type === 'J' ? bytes.readInt32BE(at) : column.type === 'K' ? Number(bytes.readBigInt64BE(at)) : column.type === 'L' ? (bytes[at] === 0x54 ? 1 : 0) : bytes[at]!;
+    if (out[i] === column.nullValue) out[i] = Number.NaN;
   }
   return out;
 }
 
+function unscaled(column: TableColumn) {
+  if (column.scaled) throw new Error(`Column ${column.name} is scaled by TSCAL or TZERO, which these tables do not apply.`);
+}
+
 /** Overwrite one complex cell (C or M) in place with its real and imaginary parts. */
 export function writeComplexCell(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn, index: number, re: number, im: number) {
+  unscaled(column);
   if (column.type !== 'C' && column.type !== 'M') throw new TypeError(`${column.name} (${column.type}) is not a complex column.`);
   if (index < 0 || index >= column.repeat) throw new RangeError(`${column.name} has ${column.repeat} cells, not ${index + 1}.`);
   const at = table.hdu.dataOffset + row * table.rowBytes + column.offset + index * TYPE_BYTES[column.type];
@@ -109,6 +88,7 @@ export function writeComplexCell(bytes: Buffer, table: BinaryTable, row: number,
 
 /** Overwrite one cell in place: a floating-point value or a logical flag. The column's own type decides the encoding. */
 export function writeCell(bytes: Buffer, table: BinaryTable, row: number, column: TableColumn, index: number, value: number | boolean) {
+  unscaled(column);
   if (index < 0 || index >= column.repeat) throw new RangeError(`${column.name} has ${column.repeat} cells, not ${index + 1}.`);
   const at = table.hdu.dataOffset + row * table.rowBytes + column.offset + index * TYPE_BYTES[column.type];
   if (column.type === 'D') bytes.writeDoubleBE(Number(value), at);
