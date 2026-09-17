@@ -10,7 +10,7 @@ export default defineConfig({
   vite: { server: { fs: { allow: ['..'] } } },
   integrations: [starlight({
     title: 'cssEarth wiki',
-    description: 'Every object in cssEarth: what it is, where its data comes from and what is still unresolved.',
+    description: 'Pages built from the object packages in src/objects.',
     social: [{ icon: 'github', label: 'GitHub', href: REPOSITORY_URL }],
     editLink: { baseUrl: `${REPOSITORY_URL}/edit/main/` },
     customCss: ['./src/wiki.css'],
