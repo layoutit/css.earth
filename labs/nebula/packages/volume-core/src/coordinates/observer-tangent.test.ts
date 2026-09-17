@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { angularScale, physicalToField, fieldToPhysical, physicalBounds } from './simulation-guided-coordinates.ts';
+import { angularScale, physicalToField, fieldToPhysical, physicalBounds } from './observer-tangent.ts';
 function close(actual: number, expected: number) { assert.ok(Math.abs(actual - expected) < 1e-8 * Math.max(1, Math.abs(expected)), `${actual} differs from ${expected}`); }
 test('one Earth ray retains its image coordinate at different physical depths', () => {
   const distance = 62.44, scale = angularScale(distance), tangent = [2, -1];
