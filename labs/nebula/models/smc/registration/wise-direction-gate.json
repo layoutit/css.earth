@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-image-direction-gate@1",
+  "status": "fail",
+  "pass": false,
+  "cloudProcessingPerformed": false,
+  "imageSha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
+  "source": {
+    "path": ".local/nebula-lab/smc-intake/WISE2010-028.tiff",
+    "sha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
+    "nativeDimensions": [
+      5855,
+      4596
+    ],
+    "workingDimensions": [
+      5000,
+      3925
+    ],
+    "wcs": {
+      "referenceDimension": [
+        5855,
+        4596
+      ],
+      "referencePixel": [
+        2907,
+        1981
+      ],
+      "referenceValueDeg": [
+        13.1045616,
+        -73.2921265
+      ],
+      "scaleDeg": [
+        -0.000764,
+        0.000764
+      ],
+      "rotationDeg": -24.94
+    }
+  },
+  "reference": {
+    "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
+    "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
+    "nativeDimensions": [
+      3827,
+      3190
+    ],
+    "workingDimensions": [
+      3827,
+      3190
+    ],
+    "wcs": {
+      "referenceDimension": [
+        3827,
+        3190
+      ],
+      "referencePixel": [
+        1913.5,
+        1595
+      ],
+      "referenceValueDeg": [
+        13.6618118598,
+        -72.8687942632
+      ],
+      "scaleDeg": [
+        -0.00138788065837,
+        0.00138788065837
+      ],
+      "rotationDeg": 30.12000000000002
+    }
+  },
+  "failureReason": "'NoneType' object is not subscriptable"
+}

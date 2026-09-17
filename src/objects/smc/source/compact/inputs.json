@@ -1,0 +1,385 @@
+{
+  "schema": "cssearth-compact-finite-emission@1",
+  "method": "simulation-guided-finite-material@1",
+  "bankId": "smc",
+  "defaultLens": "smc-horalek-wide",
+  "framingRadiusUnits": 7,
+  "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      558685736318132900000,
+      162842042038617440000,
+      -1.83671292332706e+21
+    ],
+    "localToReferenceXyzw": [
+      0.5930234436925893,
+      0.7905512466577111,
+      0.12224251888534837,
+      0.09169889975068647
+    ],
+    "metersPerUnit": 30856775814913670000,
+    "boundsUnits": {
+      "min": [
+        -7.921340139025261,
+        -9.077825371668188,
+        -10.652996905888628
+      ],
+      "max": [
+        8.600007418943365,
+        6.891913440126711,
+        8.882893247926392
+      ]
+    }
+  },
+  "geometry": {
+    "observerDistanceKpc": 62.440000000000005,
+    "tangentBoundsKpc": {
+      "min": [
+        -6.934778663022302,
+        -6.349517644972341
+      ],
+      "max": [
+        5.0181112585612855,
+        5.481686229435286
+      ]
+    },
+    "physicalBoundsKpc": {
+      "min": [
+        -7.921340139025261,
+        -9.077825371668188,
+        -10.652996905888628
+      ],
+      "max": [
+        8.600007418943365,
+        6.891913440126711,
+        8.882893247926392
+      ]
+    }
+  },
+  "material": {
+    "exposureGain": 2.5,
+    "fullChromaAlphaByte": 24
+  },
+  "appearance": {
+    "saturation": 1,
+    "detailStrength": 0,
+    "detailScale": 24,
+    "brightness": 1,
+    "gamma": 1
+  },
+  "encoding": {
+    "format": "webp",
+    "quality": 92
+  },
+  "emissionField": {
+    "path": "src/objects/smc/source/compact/emission-field.json.gz",
+    "sha256": "76b068eaf76190ebe1e939e750a1b3b50ac01f4adae04cd449f89184256df4be",
+    "bytes": 21537
+  },
+  "envelope": {
+    "path": "src/objects/smc/source/compact/envelope.json.gz",
+    "sha256": "81daa06385668c40455510e5cba528825edeb9ed0a778bf434815855d350f547",
+    "bytes": 245417
+  },
+  "neutralSlices": {
+    "path": "src/objects/smc/source/compact/neutral-slices.json.gz",
+    "sha256": "b479f5c8ae91b0b0e46528239f8234ae2db30ac643d5df02537bca535e9fd708",
+    "bytes": 43001
+  },
+  "neutralTextures": "src/objects/smc/source/compact/neutral",
+  "priorCloud": {
+    "identityPin": {
+      "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json",
+      "sha256": "9ac62796fc36a98a92c5b0d9d8c30f44eb6d35005476937237488d345ae2382e"
+    },
+    "recipe": {
+      "path": "src/objects/smc/source/compact/prior/volume.json",
+      "sha256": "9ac62796fc36a98a92c5b0d9d8c30f44eb6d35005476937237488d345ae2382e",
+      "bytes": 1369
+    }
+  },
+  "stars": {
+    "path": "src/objects/smc/source/compact/stars.json.gz",
+    "sha256": "f0da063073f7a34832c4d3d1123f1e1966a0826c221bcea9d1320248bc5b16b2",
+    "bytes": 159252
+  },
+  "lenses": [
+    {
+      "imageId": "smc-horalek-wide",
+      "sourceResultId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333",
+      "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
+      "tangentBoundsKpc": {
+        "min": [
+          -6.934778663022302,
+          -6.349517644972341
+        ],
+        "max": [
+          5.0181112585612855,
+          5.481686229435286
+        ]
+      },
+      "sourceDigest": "7160278899509d4e42de27b6dad25990c90aa60855761cee892e47bdb443486d",
+      "registered": {
+        "path": "src/objects/smc/source/compact/lenses/smc-horalek-wide/registered.png",
+        "sha256": "60faabb0887bc1328513e354edeaaa138be42f5553c9d9027ec71b287647cf49",
+        "bytes": 778199
+      },
+      "coverage": {
+        "path": "src/objects/smc/source/compact/lenses/smc-horalek-wide/coverage.png",
+        "sha256": "dbe60fa45a44d004911c9f0ddbb74e7c234feda9a20cadc374edf1e9247184e2",
+        "bytes": 9928
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/smc/source/lenses/smc-horalek-wide/provenance.json",
+        "sha256": "a160ee251e99d32e006a22a5c58c2d81be069fa3a7eb04376d8eb727876ee3d6"
+      },
+      "presentation": {
+        "label": "Horálek optical",
+        "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/"
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-vista",
+      "sourceResultId": "1f80d4736aa5c70518e67239776d4306b1bfab086712c2e962415178d3a8a770",
+      "resultId": "47b2b88ee7980f15a69e7bf76686690b8936aa1bfb8406eb1829e6654ecba9d5",
+      "tangentBoundsKpc": {
+        "min": [
+          -4.099758621990718,
+          -3.6342223487462384
+        ],
+        "max": [
+          2.577797972621645,
+          2.4551454595970643
+        ]
+      },
+      "sourceDigest": "bc23102e7f4e3ee90f72d8ea54c2e84780350a68402ccb3443589fc43a5a9366",
+      "registered": {
+        "path": "src/objects/smc/source/compact/lenses/smc-vista/registered.png",
+        "sha256": "06b6423fbb9496656f3e96753a6d0a45e984e5d03b8cdedf0e85e0b1b4aa81bf",
+        "bytes": 1639979
+      },
+      "coverage": {
+        "path": "src/objects/smc/source/compact/lenses/smc-vista/coverage.png",
+        "sha256": "7d78e4d47e0d651cee43d468182a4009784a9061c2e250efe59e233719791245",
+        "bytes": 7724
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/smc/source/lenses/smc-vista/provenance.json",
+        "sha256": "64b337b148bbf02f110d8aab1d51299d3e9d8d2e5ade78d5b40179a2ee7c4add"
+      },
+      "presentation": {
+        "label": "ESO VISTA",
+        "description": "Near-infrared colors from ESO's VISTA VMC survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://www.eso.org/public/images/eso1714a/"
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-smash",
+      "sourceResultId": "a1e5a1d4ee16dfa3bb1861fa4b069642bb8840e86928158afcc0ff4b4aa10032",
+      "resultId": "47706bfc6892c31a07be246b7b243d18b5dfd07f7cea3cf8ef5a763d0d3c1371",
+      "tangentBoundsKpc": {
+        "min": [
+          -4.573045880767771,
+          -4.101410981563896
+        ],
+        "max": [
+          2.9041698089493813,
+          3.0827097461894732
+        ]
+      },
+      "sourceDigest": "a385045e34afe3d6a4a18ad3151a8f6aa5d00a9a4d80b13cf4b80175e8f781b7",
+      "registered": {
+        "path": "src/objects/smc/source/compact/lenses/smc-smash/registered.png",
+        "sha256": "b323d4c98e7328f86ffd66ba12d10ec80fba943014b2815b459ec57754a3eee2",
+        "bytes": 1274535
+      },
+      "coverage": {
+        "path": "src/objects/smc/source/compact/lenses/smc-smash/coverage.png",
+        "sha256": "9d6c3ec9bdcae60aa4025ac497572fb53e9bc914275e04c4d98b95c75209ad5d",
+        "bytes": 9582
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/smc/source/lenses/smc-smash/provenance.json",
+        "sha256": "07e2ecd64b6b463b007d4db48c238f4d5032a07c4601bc978dc7150ad77c13e5"
+      },
+      "presentation": {
+        "label": "NOIRLab SMASH",
+        "description": "Visible-light colors from the NOIRLab SMASH DECam survey image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://noirlab.edu/public/images/noirlab2030b/"
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-dss2",
+      "sourceResultId": "a280d527b56c9ad28aeaf58182b5360aa5eb7a80a4f0e0ebb95c0d37aada0031",
+      "resultId": "84eeda58886c45da9ba8be598d9d3e29f94c0e79dba77145ed56ce2ec8c47e9a",
+      "tangentBoundsKpc": {
+        "min": [
+          -2.4753084363656517,
+          -2.3005928116554477
+        ],
+        "max": [
+          1.6024926689011136,
+          1.937825293962566
+        ]
+      },
+      "sourceDigest": "bc1ac92a3ebd661fdc75568d0371c2cf3ddd98ea5f78a143edc8505990dffd89",
+      "registered": {
+        "path": "src/objects/smc/source/compact/lenses/smc-dss2/registered.png",
+        "sha256": "ad9bc277cba0ec96c37c405cefa3c9c2ade232d0421cff9eade5c4ce2d867dbc",
+        "bytes": 1857412
+      },
+      "coverage": {
+        "path": "src/objects/smc/source/compact/lenses/smc-dss2/coverage.png",
+        "sha256": "b45596e55ca398a37df3d7d265222d6ee390a43a8d2b25fa00519257e189a2e9",
+        "bytes": 7133
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/smc/source/lenses/smc-dss2/provenance.json",
+        "sha256": "050fc3113a948cf0a34964b41ef77c870e25a388c0288cb1dd5a21bb1be88995"
+      },
+      "presentation": {
+        "label": "DSS2 optical",
+        "description": "Visible-light colors from the ESA/Hubble Digitized Sky Survey 2 image, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://esahubble.org/images/heic0514c/"
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    },
+    {
+      "imageId": "smc-allwise-wide",
+      "sourceResultId": "298c402ba303bd906466d0279b4d9b7ee2d15718eb3679ee1b0aa5af8a4ef6cb",
+      "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
+      "tangentBoundsKpc": {
+        "min": [
+          -6.588161840382211,
+          -6.371945680500293
+        ],
+        "max": [
+          4.828595780739954,
+          5.045880289813057
+        ]
+      },
+      "sourceDigest": "99eb45c9ab288b20a702e826f319a7aae3e5aabb79cac665eef6cdda52acac2a",
+      "registered": {
+        "path": "src/objects/smc/source/compact/lenses/smc-allwise-wide/registered.png",
+        "sha256": "5448bee5e391fcf5e6a69ea46a89f0c06ef36f868b8c9d69f9f63a9282d662a9",
+        "bytes": 632401
+      },
+      "coverage": {
+        "path": "src/objects/smc/source/compact/lenses/smc-allwise-wide/coverage.png",
+        "sha256": "d55fc06ba2718b9ee27771829b283b079e5e367b3f36e271598fe6dc5638e3dd",
+        "bytes": 7938
+      },
+      "densityFilter": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "enabledIds": [
+        "all-light"
+      ],
+      "provenance": {
+        "path": "src/objects/smc/source/lenses/smc-allwise-wide/provenance.json",
+        "sha256": "7355f18fb9f30a04c10b769a402263530fdf09d20bae65dd85f7b741de3b8dc1"
+      },
+      "presentation": {
+        "label": "NASA AllWISE",
+        "description": "Infrared colors from the NASA/IPAC AllWISE color mosaic served by CDS, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+        "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json"
+      },
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 1
+      }
+    }
+  ],
+  "limitations": [
+    "Delivered replay of an accepted image-fitted finite emission model. No fit, star removal or registration runs from these inputs.",
+    "The coverage mask carries only the alpha the accepted bake reads from the registered original; its RGB is not delivered because nothing reads it.",
+    "The depth density keeps the accepted pin identity so the envelope still refuses a prior it was not fitted with."
+  ]
+}

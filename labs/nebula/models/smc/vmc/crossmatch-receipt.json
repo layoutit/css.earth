@@ -1,0 +1,425 @@
+{
+  "schema": "cssearth-vmc-red-clump@1",
+  "status": "observational-standard-candle-estimates-not-exact-paper-reproduction",
+  "paper": "https://doi.org/10.1093/mnras/staa3857",
+  "photometryRelease": "VMC DR5.1 public PSF catalogue vmc_dr5_psf_yjks_V3",
+  "releaseDocumentation": "https://www.eso.org/rm/api/v1/public/releaseDescriptions/155",
+  "catalogue": {
+    "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz",
+    "sha256": "e27a0db84ce43032161a53fef64af23cabc2a508c481459164d04f88cc86502f",
+    "rows": 561813,
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/504/2983/rcsmcext.dat.gz"
+  },
+  "sources": [
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/2_2.json",
+      "sha256": "49cae81ee059e03f9e764c6063abed878b9210a3ae3dcd83ce073aeb8649de22",
+      "rows": 26491,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/2_2.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/2_3.json",
+      "sha256": "eda14f67cb4b1f2ca77c3ddd581ac98f78d9cf2823e3f7b4cc5c75d04b44c677",
+      "rows": 37424,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/2_3.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/2_4.json",
+      "sha256": "7313b5fab819c0a1ab9a6c657035caea1322ad244fcf4fa7093775b265733c51",
+      "rows": 32419,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/2_4.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/2_5.json",
+      "sha256": "46683caad28403d80167ef9cc61a5e32949c628ea132c22b16ddf6c30a8889e7",
+      "rows": 22184,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/2_5.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/3_1.json",
+      "sha256": "331f3d5bf429769d7b232f1297239a8ae60cdbb7a41f7dbf5553b479c1f9a796",
+      "rows": 17849,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/3_1.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/3_2.json",
+      "sha256": "bc52c7e9fb764af42c1fe266ace319ec39d031c8d367d196abbfe9e95fea3482",
+      "rows": 58341,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/3_2.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/3_3.json",
+      "sha256": "0fa4932df46c00f67e10d054d7928530483c7352f1e140826b8399cdb4caef7f",
+      "rows": 144370,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/3_3.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/3_4.json",
+      "sha256": "26390a7c958cc9ee8bdb406cc7d299209cbc0bc406ea9c00de7249bde0449466",
+      "rows": 90745,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/3_4.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/3_5.json",
+      "sha256": "24135dda06e61f632f6db82e1ecbad7a96288d4da0da2c874eb0f177fe407b5b",
+      "rows": 28034,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/3_5.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/3_6.json",
+      "sha256": "5ca1bf56c4d55935692d378397b9c3cfdb0c1fd493475f27d0929626c26fd13d",
+      "rows": 17788,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/3_6.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/4_1.json",
+      "sha256": "be6fb135f3dbb0f6fad9ba7b735d59143941f0097394408b7b886db86ad068e2",
+      "rows": 17107,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/4_1.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/4_2.json",
+      "sha256": "049fe34df50c92825888e0190e61df29fb7712603332bad4a09b3c97da7d40c6",
+      "rows": 69025,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/4_2.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/4_3.json",
+      "sha256": "46dd8c790d036d4720338daaa664ac27495da6165bf03e0708dedab9a757d204",
+      "rows": 335580,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/4_3.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/4_4.json",
+      "sha256": "16662d92348ef8a4efbf495bb46a3dedc2ce6373ebf8770402d4d6cfe8f2cb79",
+      "rows": 222170,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/4_4.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/4_5.json",
+      "sha256": "9d919ee13513ff43efad1574538dbce4db91061fb8e7572d273222231e8f0024",
+      "rows": 40407,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/4_5.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/4_6.json",
+      "sha256": "679bdbb16d39d89e2a7680e3f57c2414c6f4e0cbfdf7ccfce60912330070a2b0",
+      "rows": 18801,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/4_6.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/5_2.json",
+      "sha256": "49328556a310ec2b2a66246480e3e8d3f01952cd0ff51e09c2b60a2c26aa2666",
+      "rows": 149551,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/5_2.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/5_3.json",
+      "sha256": "13836d299407774085d3ff675f6316a422d1735956ee40e3cb8ee514405e3a0e",
+      "rows": 130578,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/5_3.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/5_4.json",
+      "sha256": "bef7761e68082e140ea4af452eb134f675806736bb4dff5f303f63de2cd49855",
+      "rows": 157066,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/5_4.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/5_5.json",
+      "sha256": "4728c006f51b6eaddb7e51865cda287b71c04ed4a0fe0def184813a6fa2b34a0",
+      "rows": 38654,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/5_5.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/5_6.json",
+      "sha256": "cdf26af2c38ac6d4107817beae64d1b582184f464a706d0fb7f9792b3c0036e1",
+      "rows": 18869,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/5_6.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/6_2.json",
+      "sha256": "da4b3c3650dd6daaf78f49f76a5ba72993d8ff3597c2dc16f34353d79e73f115",
+      "rows": 20778,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/6_2.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/6_3.json",
+      "sha256": "843f2355bde2b763186618042c2f071142e29863983cdf10c7c3163cd37c81b6",
+      "rows": 33234,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/6_3.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/6_4.json",
+      "sha256": "0bfc30ef3cbe8aa8ad06f28ac0a1f825413028c328df2417896913358fb8f3c4",
+      "rows": 50525,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/6_4.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/6_5.json",
+      "sha256": "a948e922b776ddf5dda9832a4ce73ce8b5ef03c786415d474d5d1d542002a7ee",
+      "rows": 24963,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/6_5.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/7_3.json",
+      "sha256": "eeaa3cfdd422bbd6bb7389b6b9991d588668cf91b6d409ad2b42bee09f6c65b3",
+      "rows": 18725,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/7_3.json.query.txt"
+    },
+    {
+      "path": ".local/nebula-lab/smc-vmc/photometry/7_4.json",
+      "sha256": "50cc240a568942282d52206098dde463a9fb22f196fc935ba6d7e3bba6fb1038",
+      "rows": 19317,
+      "queryPath": ".local/nebula-lab/smc-vmc/photometry/7_4.json.query.txt"
+    }
+  ],
+  "output": {
+    "path": ".local/nebula-lab/smc-vmc/matched-rc.tsv",
+    "sha256": "b739a6c9602206b2bb9871e0638693431f8230450d6880a00109f14193ce12dd",
+    "rows": 510131,
+    "uniquePhotometryIds": 489853
+  },
+  "formula": {
+    "ks0": "KSPSFMAG - 0.443 * max(0, published E(Y-Ks))",
+    "distanceKpc": "61 * 10 ** ((ks0 - 17.304) / 5)"
+  },
+  "matching": {
+    "radiusArcsec": 0.5,
+    "colorToleranceMag": null,
+    "method": "Nearest angular match within 0.5 arcsec; reject second distinct PSF source within 0.05 arcsec of the nearest separation. Per-tile colour-offset residual is diagnostic only; all matched published RC rows retained, including original overlap measurements.",
+    "separationMedianArcsec": 0.09212667987207604,
+    "separationP90Arcsec": 0.16854894357226288,
+    "separationMaxArcsec": 0.4987576987981583,
+    "colorAbsoluteResidualP90Mag": 0.01899899999999908,
+    "unmatchedRows": 51682,
+    "noPhotometryWithinRadius": 5440,
+    "ambiguousCloseTies": 46242
+  },
+  "distanceKpc": {
+    "p01": 50.89238997573645,
+    "p10": 55.9939939981536,
+    "median": 61.83310695215645,
+    "p90": 67.5712471996269,
+    "p99": 71.4351274011814
+  },
+  "ksErrorMag": {
+    "median": 0.012,
+    "p90": 0.019
+  },
+  "tiles": [
+    {
+      "tile": "2_2",
+      "colorOffsetMag": -0.022453999999997337,
+      "colorOffsetP10": -0.022456000000000254,
+      "colorOffsetP90": -0.022449999999997174,
+      "acceptedUpdates": 6134
+    },
+    {
+      "tile": "2_3",
+      "colorOffsetMag": -0.019828999999997945,
+      "colorOffsetP10": -0.019831999999999225,
+      "colorOffsetP90": -0.019825999999999053,
+      "acceptedUpdates": 11364
+    },
+    {
+      "tile": "2_4",
+      "colorOffsetMag": -0.027181999999998444,
+      "colorOffsetP10": -0.027184000000001554,
+      "colorOffsetP90": -0.027178999999999648,
+      "acceptedUpdates": 9647
+    },
+    {
+      "tile": "2_5",
+      "colorOffsetMag": -0.023551999999999868,
+      "colorOffsetP10": -0.02355400000000095,
+      "colorOffsetP90": -0.023549999999998836,
+      "acceptedUpdates": 5838
+    },
+    {
+      "tile": "3_1",
+      "colorOffsetMag": -0.014280000000002036,
+      "colorOffsetP10": -0.014282999999999962,
+      "colorOffsetP90": -0.014277999999999902,
+      "acceptedUpdates": 1857
+    },
+    {
+      "tile": "3_2",
+      "colorOffsetMag": 0.007070000000001374,
+      "colorOffsetP10": 0.007066999999999412,
+      "colorOffsetP90": 0.007073000000000128,
+      "acceptedUpdates": 18748
+    },
+    {
+      "tile": "3_3",
+      "colorOffsetMag": -0.03854599999999685,
+      "colorOffsetP10": -0.053547000000002475,
+      "colorOffsetP90": -0.024545999999999322,
+      "acceptedUpdates": 58906
+    },
+    {
+      "tile": "3_4",
+      "colorOffsetMag": -0.03437200000000125,
+      "colorOffsetP10": -0.03437500000000149,
+      "colorOffsetP90": -0.03436899999999865,
+      "acceptedUpdates": 31980
+    },
+    {
+      "tile": "3_5",
+      "colorOffsetMag": -0.032815999999999665,
+      "colorOffsetP10": -0.03281899999999768,
+      "colorOffsetP90": -0.03281299999999697,
+      "acceptedUpdates": 7736
+    },
+    {
+      "tile": "3_6",
+      "colorOffsetMag": -0.016051999999999816,
+      "colorOffsetP10": -0.016054999999999132,
+      "colorOffsetP90": -0.01604999999999798,
+      "acceptedUpdates": 3749
+    },
+    {
+      "tile": "4_1",
+      "colorOffsetMag": 0.01223500000000319,
+      "colorOffsetP10": 0.012232999999997728,
+      "colorOffsetP90": 0.012238000000001116,
+      "acceptedUpdates": 1778
+    },
+    {
+      "tile": "4_2",
+      "colorOffsetMag": -0.010986000000002022,
+      "colorOffsetP10": -0.01098900000000147,
+      "colorOffsetP90": -0.010983999999998356,
+      "acceptedUpdates": 22342
+    },
+    {
+      "tile": "4_3",
+      "colorOffsetMag": -0.042955000000000826,
+      "colorOffsetP10": -0.042957999999999275,
+      "colorOffsetP90": -0.042952999999996716,
+      "acceptedUpdates": 131296
+    },
+    {
+      "tile": "4_4",
+      "colorOffsetMag": -0.03520599999999993,
+      "colorOffsetP10": -0.06020700000000091,
+      "colorOffsetP90": -0.008212000000000635,
+      "acceptedUpdates": 85628
+    },
+    {
+      "tile": "4_5",
+      "colorOffsetMag": -0.03658199999999791,
+      "colorOffsetP10": -0.04958199999999918,
+      "colorOffsetP90": -0.027582000000002493,
+      "acceptedUpdates": 12884
+    },
+    {
+      "tile": "4_6",
+      "colorOffsetMag": -0.0389460000000004,
+      "colorOffsetP10": -0.03894899999999908,
+      "colorOffsetP90": -0.03894299999999902,
+      "acceptedUpdates": 4554
+    },
+    {
+      "tile": "5_2",
+      "colorOffsetMag": -0.037848000000000444,
+      "colorOffsetP10": -0.06984700000000298,
+      "colorOffsetP90": 0.0031530000000010577,
+      "acceptedUpdates": 4631
+    },
+    {
+      "tile": "5_3",
+      "colorOffsetMag": -0.035290000000000286,
+      "colorOffsetP10": -0.06528800000000068,
+      "colorOffsetP90": -0.014288999999997415,
+      "acceptedUpdates": 45627
+    },
+    {
+      "tile": "5_4",
+      "colorOffsetMag": -0.022739999999998546,
+      "colorOffsetP10": -0.02473800000000076,
+      "colorOffsetP90": -0.02074000000000118,
+      "acceptedUpdates": 60110
+    },
+    {
+      "tile": "5_5",
+      "colorOffsetMag": -0.038946000000000286,
+      "colorOffsetP10": -0.038948999999999734,
+      "colorOffsetP90": -0.038943000000000366,
+      "acceptedUpdates": 14206
+    },
+    {
+      "tile": "5_6",
+      "colorOffsetMag": -0.015039000000000004,
+      "colorOffsetP10": -0.03503899999999744,
+      "colorOffsetP90": -0.00004399999999890082,
+      "acceptedUpdates": 4176
+    },
+    {
+      "tile": "6_2",
+      "colorOffsetMag": -0.033142000000000005,
+      "colorOffsetP10": -0.03314400000000106,
+      "colorOffsetP90": -0.03313999999999816,
+      "acceptedUpdates": 3680
+    },
+    {
+      "tile": "6_3",
+      "colorOffsetMag": -0.03766800000000023,
+      "colorOffsetP10": -0.07266999999999982,
+      "colorOffsetP90": 0.012333000000003227,
+      "acceptedUpdates": 9168
+    },
+    {
+      "tile": "6_4",
+      "colorOffsetMag": -0.030716000000000715,
+      "colorOffsetP10": -0.030720999999998836,
+      "colorOffsetP90": -0.030713999999998465,
+      "acceptedUpdates": 12737
+    },
+    {
+      "tile": "6_5",
+      "colorOffsetMag": -0.01520300000000132,
+      "colorOffsetP10": -0.015206000000002384,
+      "colorOffsetP90": -0.015200999999999729,
+      "acceptedUpdates": 7375
+    },
+    {
+      "tile": "7_3",
+      "colorOffsetMag": 0.0008449999999994157,
+      "colorOffsetP10": 0.0008419999999997527,
+      "colorOffsetP90": 0.0008470000000002503,
+      "acceptedUpdates": 3485
+    },
+    {
+      "tile": "7_4",
+      "colorOffsetMag": -0.02444400000000068,
+      "colorOffsetP10": -0.02444700000000069,
+      "colorOffsetP90": -0.024440999999999626,
+      "acceptedUpdates": 3819
+    }
+  ],
+  "examinedPhotometryRows": 1840995,
+  "limits": [
+    "Apparent depth includes red-clump intrinsic luminosity scatter, photometric errors, reddening errors and population contamination; no deconvolution or claim that each distance is geometrically measured.",
+    "Published reddening predates the public DR5.1 photometric zero-point alignment. DR5.1 documentation reports mean Ks shift -0.007 mag with tile scatter 0.008 and Y-Ks shift -0.022 with scatter 0.018; individual original Ks tile shifts are not supplied, so exact Tatton distances cannot be reproduced. No empirical image-fitting correction is applied.",
+    "Per-tile colour offsets are matching diagnostics only; they do not alter magnitudes, reddening or distances.",
+    "Input retrieval magnitude and colour bounds are broad matching preselection, not an astrophysical boundary. Unmatched rows are explicitly counted.",
+    "All matched catalogue entries retained. Tile-overlap measurements can repeat physical stars; unique source counts are not a calibrated stellar mass density.",
+    "Published source selection and survey footprint impose completeness limits. Quality columns are retained rather than imposing new sample cuts."
+  ],
+  "reproduce": [
+    "node --experimental-strip-types labs/nebula/packages/lab/src/cli/commands/acquire-vmc-psf.ts",
+    "node --experimental-strip-types labs/nebula/packages/lab/src/cli/commands/prepare-vmc-red-clump.ts",
+    "node --experimental-strip-types labs/nebula/packages/lab/src/cli/commands/deduplicate-vmc-red-clump.ts"
+  ],
+  "densityCatalogue": {
+    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
+    "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e",
+    "rows": 489760,
+    "removedRepeatedMeasurements": 20371,
+    "samePhotometryIdPairs": 20278,
+    "crossTileOverlapPairs": 93,
+    "policy": "Connected components of identical public PSF IDs or pairs in different tiles within 0.3 arcsec. Keep the lowest Ks uncertainty, then lowest matching separation. No averaging of distance or position. Original measurement catalogue remains preserved.",
+    "limitation": "Cross-tile positional deduplication may merge unresolved close pairs. Counts represent selected RC tracers, not a completeness-corrected stellar mass density."
+  }
+}

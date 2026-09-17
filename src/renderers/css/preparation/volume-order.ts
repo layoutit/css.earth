@@ -3,11 +3,11 @@ import type { Axis, Vector3 } from '@cssearth/volume-core/contracts/volume-recip
 /** Parallel slice planes need no source-depth DOM ordering: the browser still
  * resolves their physical depth. Offer median planes first so its first-pivot
  * BSP builder does not receive a linear chain. Coplanar source order stays exact. */
-export function balanceVolumeSlices<T extends { centerUnits: Vector3 }>(leaves: readonly T[], axis: Axis): T[] {
+export function balanceVolumeSlices<T extends { centerUnits: Vector3 }>(leaves: readonly T[], axis: Axis, normal?: readonly number[]): T[] {
   const component = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
   const planes = new Map<number, T[]>();
   for (const leaf of leaves) {
-    const depth = leaf.centerUnits[component];
+    const depth = normal ? leaf.centerUnits.reduce((sum, value, i) => sum + value * normal[i]!, 0) : leaf.centerUnits[component];
     const group = planes.get(depth);
     if (group) group.push(leaf);
     else planes.set(depth, [leaf]);

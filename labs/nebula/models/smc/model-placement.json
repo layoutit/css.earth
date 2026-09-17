@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-density-placement@1",
+  "sourceDirectory": "labs/nebula/models/smc/full-density",
+  "scale": 1.4270000000000003,
+  "rotationZDegrees": 119.6,
+  "pivotUnits": [
+    -3.5839240550994873,
+    -8.495028495788574,
+    -9.775346755981445
+  ],
+  "translationUnits": [
+    2.484602681013528,
+    8.120696337337312,
+    9.775346755981445
+  ],
+  "originalDensity": {
+    "path": "labs/nebula/models/smc/full-density/source/volume.json",
+    "sha256": "319358fc2ef89b273d1a369d7d43393eae64a6a2b49ffb99651b5735e3bb681f"
+  },
+  "fit": {
+    "method": "Bounded perspective model-only XY similarity against smoothed original SMASH stellar light; uniform XYZ scale",
+    "image": {
+      "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
+      "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4"
+    },
+    "particles": {
+      "path": ".local/nebula-lab/full-density/smc-full-density.f32",
+      "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4",
+      "count": 225000
+    },
+    "observerDistanceKpc": 62.44,
+    "targetProcessing": {
+      "resizeWidth": 1024,
+      "gaussianSigmaPixels": 8,
+      "backgroundQuantile": 0.15,
+      "clipQuantile": 0.995,
+      "frameExtentKpc": 16,
+      "gridSize": 160,
+      "observedCells": 2795
+    },
+    "score": "Pearson correlation on observed footprint only; outside image is unconstrained",
+    "beforeCorrelation": -0.2350712150834555,
+    "centeredOnlyCorrelation": 0.7698657057898112,
+    "afterCorrelation": 0.9055203617805438,
+    "evaluations": 180,
+    "limitations": [
+      "Authored image-to-simulation morphological placement, not astrometry or a recovered physical size/distance.",
+      "Original unresolved optical light approximates stellar morphology, with foreground sources/background and age/extinction biases.",
+      "All 225000 particles retained; outer tails outside observed footprint are unconstrained, not removed.",
+      "This placement changes model coordinates only and cannot prove physical depth or volumetric material quality."
+    ]
+  }
+}

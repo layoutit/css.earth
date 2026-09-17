@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-image-direction-gate@1",
+  "status": "fail",
+  "pass": false,
+  "cloudProcessingPerformed": false,
+  "imageSha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
+  "source": {
+    "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
+    "sha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
+    "nativeDimensions": [
+      6069,
+      4045
+    ],
+    "workingDimensions": [
+      5000,
+      3333
+    ],
+    "wcs": {
+      "referenceDimension": [
+        6069,
+        4045
+      ],
+      "referencePixel": [
+        3035,
+        2023
+      ],
+      "referenceValueDeg": [
+        13.2954600823,
+        -72.7962247167
+      ],
+      "scaleDeg": [
+        -0.00152895324209255,
+        0.0015290753239204
+      ],
+      "rotationDeg": 133.5337627021,
+      "projection": "TAN",
+      "coordinateFrame": "ICRS"
+    }
+  },
+  "reference": {
+    "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
+    "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
+    "nativeDimensions": [
+      3827,
+      3190
+    ],
+    "workingDimensions": [
+      3827,
+      3190
+    ],
+    "wcs": {
+      "referenceDimension": [
+        3827,
+        3190
+      ],
+      "referencePixel": [
+        1913.5,
+        1595
+      ],
+      "referenceValueDeg": [
+        13.6618118598,
+        -72.8687942632
+      ],
+      "scaleDeg": [
+        -0.00138788065837,
+        0.00138788065837
+      ],
+      "rotationDeg": 30.12000000000002
+    }
+  },
+  "failureReason": "arrays used as indices must be of integer (or boolean) type"
+}

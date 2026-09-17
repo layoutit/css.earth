@@ -1,0 +1,167 @@
+{
+  "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
+  "pass": true,
+  "gates": {
+    "uniqueMatches": true,
+    "allFourQuadrants": true,
+    "halfImageHull": true,
+    "median": true,
+    "p90": true,
+    "chanceExcess": true
+  },
+  "source": {
+    "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
+    "sha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
+    "nativeDimensions": [
+      4000,
+      4000
+    ],
+    "channel": "W1 blue channel",
+    "wcs": {
+      "projection": "TAN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        4000,
+        4000
+      ],
+      "referencePixel": [
+        2000,
+        2000
+      ],
+      "referenceValueDeg": [
+        13.5,
+        -73
+      ],
+      "scaleDeg": [
+        -0.0025063655876378,
+        0.0025063655876378
+      ],
+      "rotationDeg": 0
+    }
+  },
+  "catalogue": {
+    "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
+    "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941",
+    "downloadedRows": 13220,
+    "inFieldIsolatedCandidates": 7195,
+    "query": {
+      "path": "labs/nebula/models/smc/registration/allwise-query.json",
+      "sha256": "50ccac83eb62b94ba98a93dde46008c2afa749593285f3d457570323328e6dda"
+    }
+  },
+  "predeclaredProtocol": {
+    "minUniqueMatches": 100,
+    "minQuadrants": 4,
+    "minHullFraction": 0.5,
+    "maxMedianNativeWisePixels": 0.75,
+    "maxP90NativeWisePixels": 1.5,
+    "chanceRadiusNativePixels": 0.75,
+    "minChanceExcessMargin": 5,
+    "correspondenceWindowNativeWisePixels": 2.5,
+    "catalogueIsolationPixels": 5,
+    "catalogueMagnitudeRangeW1": [
+      8,
+      11
+    ]
+  },
+  "chanceExcess": {
+    "closeMatches": 7153,
+    "expectation": 53,
+    "ratio": 134.96226415094338,
+    "pass": true,
+    "analyticExpectedChanceMatches": 28.624694433934234,
+    "detectionDensityPerSquarePixel": 0.0022558125,
+    "method": "Inside the chance radius, real matches must exceed the largest chance estimate by the declared margin. The estimate is the larger of every shifted and wrong-transform control count in that same radius and the analytic rate for this detection density, so denser detections raise the bar instead of failing a fixed ratio."
+  },
+  "refitted": false,
+  "allCoordinatesHeldOutFromAnyFit": true,
+  "uniqueMatchedStars": 7172,
+  "reservedCheckCount": 2391,
+  "detectedStars": 36093,
+  "residualNativeWisePixels": {
+    "median": 0.23158028674785003,
+    "p90": 0.38324756569962304,
+    "max": 2.2837293392730578
+  },
+  "reservedCheckResidualNativeWisePixels": {
+    "median": 0.23337509912116128,
+    "p90": 0.3842062589330275,
+    "max": 2.2837293392730578
+  },
+  "residualArcseconds": {
+    "median": 2.105723942815821,
+    "p90": 3.4666608454012735,
+    "max": 20.605898258758085
+  },
+  "matchedSourceHullFraction": 0.9875063528283838,
+  "quadrantMatchCounts": [
+    1747,
+    1613,
+    1833,
+    1979
+  ],
+  "shiftedControls": [
+    {
+      "offsetNativePixels": [
+        40,
+        0
+      ],
+      "matchesWithin2_5Pixels": 418,
+      "matchesWithinChanceRadius": 31
+    },
+    {
+      "offsetNativePixels": [
+        0,
+        40
+      ],
+      "matchesWithin2_5Pixels": 412,
+      "matchesWithinChanceRadius": 30
+    },
+    {
+      "offsetNativePixels": [
+        100,
+        -70
+      ],
+      "matchesWithin2_5Pixels": 380,
+      "matchesWithinChanceRadius": 31
+    }
+  ],
+  "wrongTransformControls": {
+    "mirrorX": {
+      "matchesWithin2_5Pixels": 410,
+      "matchesWithinChanceRadius": 47
+    },
+    "mirrorY": {
+      "matchesWithin2_5Pixels": 393,
+      "matchesWithinChanceRadius": 43
+    },
+    "rotate90": {
+      "matchesWithin2_5Pixels": 439,
+      "matchesWithinChanceRadius": 49
+    },
+    "scale09": {
+      "matchesWithin2_5Pixels": 488,
+      "matchesWithinChanceRadius": 53
+    },
+    "scale11": {
+      "matchesWithin2_5Pixels": 386,
+      "matchesWithinChanceRadius": 40
+    }
+  },
+  "limitations": [
+    "Catalogue and image originate from the same infrared survey; catalogue positions independently check fixed publisher image WCS.",
+    "The chance control measures association by coincidence at this raster's own detection density; it does not bound systematic errors that move real and control matches together.",
+    "Display raster sampling is not native detector angular resolution.",
+    "Centroids use sharp sigma4 Gaussian highpass and blue W1; no image transform is fitted.",
+    "Association uses the unchanged 2.5-pixel window and LMC acceptance thresholds; the chance-excess control gates acceptance."
+  ],
+  "compositeBlueChannel": "AllWISE W1 colour HiPS blue channel",
+  "implementation": {
+    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts",
+    "sha256": "b62eca42b7abad48f8865716ade4df92a1a9d97462742af3510c6835dae422b7"
+  },
+  "matchedStars": {
+    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-allwise-wide/matched-stars.json",
+    "sha256": "ac9dbe1a7642d26ccef1416ad165492b2a38ec00561345c8ad2118399a2e07a8"
+  }
+}

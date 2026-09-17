@@ -1,0 +1,49 @@
+{
+  "id": "noirlab-iotw2615a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Small Magellanic Cloud · NOIRLab iotw2615a",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "iotw2615a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/iotw2615a/",
+      "label": "Published source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "labs/nebula/models/smc/image-candidates.json",
+      "revision": "101899478bc56f7549cafe9e51d7617cce301a3d",
+      "sha256": "370201999627e8a3f80649bc82c25cae491005a8fc78739e9d88dcbadb79144f",
+      "locator": "/targets/0/images/8"
+    }
+  ],
+  "publisher": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "scope": "Published source",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0; full credit required",
+      "scope": "Redistributed display derivatives",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
+    },
+    {
+      "kind": "limitation",
+      "text": "Display-stretched optical photograph, not calibrated surface brightness. Its sky solution is a matched-star transfer through VISTA to SMASH, verified only inside the matched hull (50.5% of the field).",
+      "scope": "Registration and photometry",
+      "evidence": "https://github.com/layoutit/css.earth/blob/101899478bc56f7549cafe9e51d7617cce301a3d/labs/nebula/models/smc/image-candidates.json#/targets/0/images/8/registrationNote"
+    }
+  ]
+}

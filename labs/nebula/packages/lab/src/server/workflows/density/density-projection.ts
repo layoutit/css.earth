@@ -1,4 +1,15 @@
 import {prepareDensityProjection as project} from '@cssearth/volume-core/fields/density-projection';
 import {sampleEncoded,type VolumeSource} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import {channelDensity} from '@cssearth/volume-bake/slices/density';
-export function prepareDensityProjection(source:VolumeSource,distance:number,width=256){const encoded:[number,number,number,number]=[0,0,0,0];return project({bounds:source.recipe.grid.bounds,depth:source.depth,exposureGain:source.recipe.material.exposureGain,densityAt(x,y,z){sampleEncoded(source,x,y,z,encoded);return channelDensity(encoded[3],source.recipe.grid.encoding);}},distance,width);}
+import { densityPlacementTransform, type DensityPlacement } from '@cssearth/volume-core/coordinates/density-placement';
+export function prepareDensityProjection(source: VolumeSource, distance: number, width = 256, placement?: DensityPlacement) {
+  const encoded: [number, number, number, number] = [0, 0, 0, 0];
+  const transform = placement ? densityPlacementTransform(placement) : undefined;
+  return project({ bounds: transform?.bounds(source.recipe.grid.bounds) ?? source.recipe.grid.bounds,
+    depth: source.depth, exposureGain: source.recipe.material.exposureGain / (placement?.scale ?? 1),
+    densityAt(x, y, z) {
+      const point = transform?.inverse([x, y, z]) ?? [x, y, z];
+      sampleEncoded(source, point[0]!, point[1]!, point[2]!, encoded);
+      return channelDensity(encoded[3], source.recipe.grid.encoding);
+    } }, distance, width);
+}
