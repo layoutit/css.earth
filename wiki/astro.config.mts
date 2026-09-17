@@ -34,9 +34,9 @@ export default defineConfig({
     sidebar: [
       { label: 'All objects', link: '/' },
       ...systems.map(system => ({
-        label: `${system.label} (${system.groups.reduce((total, group) => total + count(group.entries), 0)})`, collapsed: true,
+        label: `${system.label} (${(system.star ? count([system.star]) : 0) + system.groups.reduce((total, group) => total + count(group.entries), 0)})`, collapsed: true,
         items: [
-          ...(system.star ? [{ label: system.star.title, link: `/${system.star.id}/` }] : []),
+          ...(system.star ? [item(system.star)] : []),
           ...system.groups.map(group => ({ label: `${group.label} (${count(group.entries)})`, collapsed: true, items: group.entries.map(item) })),
         ],
       })),
