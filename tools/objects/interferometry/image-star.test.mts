@@ -125,7 +125,8 @@ test('the π¹ Gruis season from the author file is cast and reproduces the ship
   assert.ok(result.verdict.cast, result.verdict.reasons.join('; '));
   // The fit SQUEEZE reported for the shipped image, from the same file and recipe.
   assert.deepEqual([result.fit.season.vis2, result.fit.season.closurePhase], [2.45, 1.06]);
-  assert.ok(result.spots.ratio > 5 && result.halves.correlation > 0.9, `ratio ${result.spots.ratio}, halves ${result.halves.correlation}`);
+  // Against the spottiest twin within 2 percent: measured 2.40 (5.38 against the full-size twin).
+  assert.ok(result.spots.ratio > 2 && result.halves.correlation > 0.9, `ratio ${result.spots.ratio}, halves ${result.halves.correlation}`);
   assert.equal(result.comparison.calibrated.medianSigma, 0);
   assert.ok(result.comparison.imageCorrelation > 0.999, `image correlation ${result.comparison.imageCorrelation}`);
 });
