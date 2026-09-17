@@ -131,6 +131,7 @@
       "finding": "A name screen of all 498 catalogued bodies against the ESO archive on 2026-09-17 matched 144 of them, 145,077 rows across the whole archive rather than this telescope alone; the largest instruments are APEXHET (51456), APEXBOL (26625), VISIR (14125). Adaptive-optics imaging of main-belt asteroids with SPHERE and NAOS+CONICA is the part that could give unphotographed bodies a surface.",
       "revisitWhen": "A candidate from the screen is taken up, or the screen is rerun per telescope.",
       "evidence": [
+        "https://archive.eso.org/tap_obs/capabilities",
         "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
         "https://github.com/layoutit/css.earth/pull/293"
       ],
