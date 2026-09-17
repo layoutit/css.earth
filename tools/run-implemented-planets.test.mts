@@ -48,10 +48,10 @@ function deferred(): { promise: Promise<void>; resolve: () => void } {
 test("preparation defaults leave headroom for image workers on small and large hosts", () => {
   const gibibyte = 1024 ** 3;
   assert.equal(defaultPreparationConcurrency({ cores: 2, memoryBytes: 64 * gibibyte }), 1);
-  assert.equal(defaultPreparationConcurrency({ cores: 16, memoryBytes: 8 * gibibyte }), 1);
-  assert.equal(defaultPreparationConcurrency({ cores: 8, memoryBytes: 16 * gibibyte }), 2);
-  assert.equal(defaultPreparationConcurrency({ cores: 14, memoryBytes: 36 * gibibyte }), 3);
-  assert.equal(defaultPreparationConcurrency({ cores: 128, memoryBytes: 1024 * gibibyte }), 3);
+  assert.equal(defaultPreparationConcurrency({ cores: 16, memoryBytes: 8 * gibibyte }), 2);
+  assert.equal(defaultPreparationConcurrency({ cores: 8, memoryBytes: 16 * gibibyte }), 4);
+  assert.equal(defaultPreparationConcurrency({ cores: 14, memoryBytes: 36 * gibibyte }), 9);
+  assert.equal(defaultPreparationConcurrency({ cores: 128, memoryBytes: 1024 * gibibyte }), 126);
   assert.throws(() => defaultPreparationConcurrency({ cores: 0, memoryBytes: gibibyte }), /capacity/);
 });
 
@@ -187,4 +187,28 @@ test("the native command interface retains actual process exits and signals", as
   await assert.rejects(runObjectCommand({
     command: resolve(root, "definitely-missing-preparation-command"), argumentsList: [], cwd: root,
   }), /ENOENT/);
+});
+
+test("objects start heaviest first and only while their expected growth fits the available memory", async () => {
+  const selected = ids.slice(0, 5), peaks = new Map(selected.map((id, i) => [id, i === 3 ? 4 : 1]));
+  const gates = new Map(selected.map(id => [id, deferred()])), started: string[] = [];
+  let reserved = 0, maximumReserved = 0, launched = deferred();
+  const pending = runPreparationObjects({
+    projectRoot: root, objectIds: selected, concurrency: 4, onEvent: quiet, memoryAvailableBytes: () => 5, memoryFloorBytes: 0,
+    peakMemoryBytes: async id => peaks.get(id) ?? 0, residentBytes: () => new Map(),
+    async runCommand({ id }) {
+      started.push(id); reserved += peaks.get(id) ?? 0; maximumReserved = Math.max(maximumReserved, reserved);
+      launched.resolve();
+      await gates.get(id)?.promise;
+      reserved -= peaks.get(id) ?? 0; return success;
+    },
+  });
+  await launched.promise; await setImmediate();
+  assert.deepEqual(started, [selected[3], selected[0]]);
+  launched = deferred(); gates.get(selected[3])?.resolve(); await launched.promise; await setImmediate();
+  assert.deepEqual(started, [selected[3], selected[0], selected[1], selected[2], selected[4]]);
+  for (const gate of gates.values()) gate.resolve();
+  const report = await pending;
+  assert.ok(maximumReserved <= 5);
+  assert.deepEqual(report.results.map(result => result.id), selected);
 });
