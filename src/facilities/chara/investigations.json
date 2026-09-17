@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "chara",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "CHARA raw data archive",
+      "status": "excluded",
+      "finding": "Raw CHARA data are reached through an account on CHARA's Remote Data Reduction Machine, set up by contacting its data scientist; the pages checked state no eligibility and no anonymous download. This project does not contact people for access.",
+      "revisitWhen": "The user holds a CHARA account, or CHARA publishes raw data for anonymous download.",
+      "evidence": [
+        "https://www.chara.gsu.edu/observers/database",
+        "https://www.chara.gsu.edu/observers/data-reduction-software"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "CHARA proprietary period and republishing reduced data",
+      "status": "unresolved",
+      "finding": "CHARA data become public after an 18-month proprietary period, except thesis data and long-term surveys. Whether reduced data may be copied off the remote machine or republished is not stated on the pages checked.",
+      "revisitWhen": "CHARA states terms for copying or republishing reduced data.",
+      "evidence": [
+        "https://www.chara.gsu.edu/observers/database"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "MIRC-X and MYSTIC reduction pipeline",
+      "status": "deferred",
+      "finding": "The MIRC-X/MYSTIC pipeline is public under the MIT licence (jdmonnier/mircx_mystic) and installed on CHARA's remote machine; running it here was not tried, since there are no raw data to run it on.",
+      "revisitWhen": "Raw MIRC-X data are available to this project.",
+      "evidence": [
+        "https://github.com/jdmonnier/mircx_mystic",
+        "https://www.chara.gsu.edu/observers/data-reduction-software"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d"
+        }
+      ]
+    },
+    {
+      "id": "oidb-calibrated",
+      "subject": "Calibrated CHARA files in the JMMC OiDB",
+      "status": "excluded",
+      "finding": "A screen of the OiDB found one non-survey calibrated MIRC-X season on a star resolved enough to image: Polaris, April 2021. Its reconstruction does not beat a spotless disc (spot ratio 1.05), so Polaris ships shape-only.",
+      "revisitWhen": "New calibrated MIRC-X or MYSTIC imaging seasons of resolved stars appear in the OiDB.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/pull/257",
+        "https://oidb.jmmc.fr/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 257
+        }
+      ]
+    }
+  ]
+}

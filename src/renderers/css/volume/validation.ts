@@ -31,6 +31,10 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   }
   const leafIds = new Set<string>();
   for (const stackInput of stacks) validateStack(record(stackInput, 'volume stack'), resources, leafIds);
+  const normals = stacks.map((stack, index) => stack.normalUnits ?? AXES.map(axis => axis === stack.axis ? 1 : 0));
+  for (let i = 0; i < normals.length; i++) for (let j = 0; j < i; j++)
+    if (Math.abs(normals[i].reduce((sum: number, value: number, k: number) => sum + value * normals[j][k], 0)) > 1e-8)
+      throw new TypeError('Volume stack normals must be orthogonal.');
   if (value.anchors !== undefined) {
     if (!Array.isArray(value.anchors)) throw new TypeError('Prepared CSS volume anchors are invalid.');
     for (const anchorInput of value.anchors) {
@@ -52,10 +56,12 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
 }
 
 function validateStack(stack: Record<string, unknown>, resources: Set<string>, leafIds: Set<string>): void {
-  exactKeys(stack, ['axis', 'leaves'], 'volume stack');
+  exactKeys(stack, ['axis', 'leaves', ...(Object.hasOwn(stack, 'normalUnits') ? ['normalUnits'] : [])], 'volume stack');
   if (!isAxis(stack.axis) || !Array.isArray(stack.leaves) || stack.leaves.length === 0) {
     throw new TypeError('Prepared CSS volume stack is invalid.');
   }
+  if (stack.normalUnits !== undefined && (!finiteVector(stack.normalUnits) || Math.abs(Math.hypot(...stack.normalUnits) - 1) > 1e-8))
+    throw new TypeError('Volume stack normal must be a finite unit vector.');
   for (const leafInput of stack.leaves) {
     const leaf = record(leafInput, 'volume leaf');
     exactKeys(leaf, ['id', 'centerUnits', 'texturePath', 'widthPx', 'heightPx', 'style', ...(Object.hasOwn(leaf, 'boundsCssPixels') ? ['boundsCssPixels'] : [])], 'volume leaf');

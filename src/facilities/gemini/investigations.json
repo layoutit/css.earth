@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "gemini",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "Gemini's own archive refused this project on 2026-09-17 (403 to its JSON search and its search form, with and without a browser user agent), and it offers a REST interface rather than TAP. Its public data are also at CADC, which answered anonymously, so Gemini data are reachable through CADC's TAP service.",
+      "revisitWhen": "A body in this repository needs Gemini data; then query CADC rather than the Gemini archive.",
+      "evidence": [
+        "https://archive.gemini.edu/help/index.html",
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/gemini/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "Science data usually carry a 12-month proprietary period, reduced from 18 months in 2016A, with metadata and most calibrations public at once; non-proprietary data need no login to download. No reuse licence is published. The NSF NOIRLab acknowledgement wording could not be read: gemini.edu and noirlab.edu refuse this project's requests.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://archive.gemini.edu/help/index.html",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "DRAGONS is Gemini's reduction platform, distributed as a conda package and on GitHub under the BSD 3-clause licence.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://github.com/GeminiDRSoftware/DRAGONS",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "deferred",
+      "finding": "The same screen matched 118 bodies across CADC's Gemini and CFHT collections, 59,021 rows, largest instruments NIRI (37543), GNIRS (6171), ESPaDOnS (5604). The counts are archive-wide, not per telescope.",
+      "revisitWhen": "A Gemini or CFHT candidate from the screen is taken up.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}

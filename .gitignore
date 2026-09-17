@@ -170,7 +170,7 @@ src/objects/*/source/**/*.bpc
 
 # Combined catalogues and navigation are rebuilt from individual body records.
 /site/prepared-sources.json
-/site/prepared-machines.json
+/site/prepared-facilities.json
 /site/prepared-object-catalog.mts
 /site/prepared-object-discovery.json
 /site/prepared-context-objects.mts
@@ -226,10 +226,12 @@ src/objects/*/source/**/*.bpc
 /src/objects/m1/prepared/
 /src/objects/m45/prepared/
 /src/objects/m8/prepared/
+/src/objects/smc/prepared/
 /src/objects/m42/.prepared-*/
 /src/objects/helix/.prepared-*/
 /src/objects/m2-9/.prepared-*/
 /src/objects/m1/.prepared-*/
+/src/objects/smc/.prepared-*/
 /src/objects/m45/.prepared-*/
 /src/objects/m8/.prepared-*/
 # Shared dataset cards and lineage are restored by prepare:nebulae / prepare:sources.
@@ -255,8 +257,6 @@ src/spice/**/*.bc
 /src/objects/m31/prepared/provenance.json
 /src/objects/m33/prepared/presentation.json
 /src/objects/m33/prepared/provenance.json
-/src/objects/smc/prepared/presentation.json
-/src/objects/smc/prepared/provenance.json
 
 # Reproduced by prepare:galaxy-field from pinned CDS responses.
 /src/objects/nearby-universe/prepared/
@@ -270,7 +270,6 @@ src/spice/**/*.bc
 /src/objects/galaxy-clusters/prepared/runtime-assets.json
 /src/objects/m31/prepared/runtime-assets.json
 /src/objects/m33/prepared/runtime-assets.json
-/src/objects/smc/prepared/runtime-assets.json
 
 # Small expected-output receipt supports offline source recovery.
 !/src/objects/nearby-universe/prepared/

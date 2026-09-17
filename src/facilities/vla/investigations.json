@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "facilityId": "vla",
+  "entries": [
+    {
+      "id": "archive-access",
+      "subject": "Archive access and query interface",
+      "status": "deferred",
+      "finding": "The NRAO Archive Access Tool serves VLA data. Metadata search is anonymous; a login is needed for proprietary data and for direct delivery. A TAP service exists at data-query.nrao.edu, whose ObsCore table is reached as tap_schema.obscore rather than ivoa.obscore, but downloads are not yet possible through it.",
+      "revisitWhen": "A body in this repository needs centimetre-wave imaging.",
+      "evidence": [
+        "https://science.nrao.edu/facilities/vla/archive/scripted-access-to-the-nrao-archive",
+        "https://data.nrao.edu/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "data-policy",
+      "subject": "Proprietary period, licence and credit",
+      "status": "deferred",
+      "finding": "From semester 2026A the proprietary period is normally at most 24 months after the last observation, and at most 6 months for director's discretionary time; afterwards data become public. No reuse licence is published; the NRAO, NSF and AUI acknowledgement sentence is required.",
+      "revisitWhen": "This facility's data are used, or its terms are needed for a derived product.",
+      "evidence": [
+        "https://science.nrao.edu/observing/policies/docs/manuals/users-policy/preparation-and-execution-of-observations/data-delivery-and-data-rights/proprietary-periods-and-observational-data-access",
+        "https://science.nrao.edu/facilities/vla/docs/manuals/oss2013A/pub-guidelines/acknowledgement-to-nrao",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "reduction-software",
+      "subject": "Reduction software",
+      "status": "deferred",
+      "finding": "CASA is the processing package for VLA data, distributed by NRAO under GPL v3 or later. Imaging from raw measurement sets needs it; this repository has never run it.",
+      "revisitWhen": "Raw data from this facility are reduced here.",
+      "evidence": [
+        "https://casa.nrao.edu/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    },
+    {
+      "id": "bodies-with-data",
+      "subject": "What this archive holds for catalogued bodies",
+      "status": "unresolved",
+      "finding": "The NRAO archive answered 503 Service Unavailable throughout the screen on 2026-09-17, so its holdings for catalogued bodies are unmeasured.",
+      "revisitWhen": "The NRAO archive answers again and the screen is rerun.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
+        "https://data.nrao.edu/",
+        "https://github.com/layoutit/css.earth/pull/293"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
+          "pr": 293
+        }
+      ]
+    }
+  ]
+}
