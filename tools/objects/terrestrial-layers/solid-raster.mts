@@ -41,11 +41,10 @@ import { renderRadialSnapshot } from './radial-snapshot.mts';
 import { radialModelForLens } from './radial-models.mts';
 import { npyLonLatGridDependencies } from './npy-lonlat-grid.mts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './shape-material.mts';
-import { encodeWebp } from '../../webp-cache.mts';
 
 export function createRasterEmitter(publicDirectory:string, publicBase:string) {
   return async (filename:string, pipeline:Sharp, encoding:WebpOptions = { lossless: true, effort: 4 }) => {
-    const bytes = await encodeWebp(pipeline, encoding);
+    const bytes = await pipeline.webp(encoding).toBuffer();
     await writeFile(resolve(publicDirectory, filename), bytes);
     const { width, height } = await sharp(bytes).metadata();
     if (!width || !height) throw new Error(`Raster output has no dimensions: ${filename}`);
@@ -355,10 +354,11 @@ export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, conf
 
 export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig; radial?: boolean}) {
   await prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial });
+  // A radial body's triangle atlases carry their own baked lighting, and its presentation draws no lighting frames.
+  if (radial) return { surfaces, lighting: null };
   const { pixels, width, height, rows } = lambertAttenuationAtlas(config.lighting);
   const filename = `${config.namespace}-lighting.webp`, url = `${config.publicBase}${filename}`;
-  // One image for every body that shares these parameters; its lossless effort-6 encode (about 30 s) is cached by encodeWebp.
-  await writeFile(resolve(publicDirectory, filename), await encodeWebp(sharp(pixels, { raw: { width, height, channels: 4 } }), { lossless: true, quality: 100, effort: 6 }));
+  await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(resolve(publicDirectory, filename));
   const { columns, frameCount, logicalSize } = config.lighting;
   const frames = Array.from({ length: frameCount }, (_, frame) => ({ resource: 'lighting', frame, row: 0,
     backgroundPosition: `${-(frame % columns) * logicalSize}px ${-Math.floor(frame / columns) * logicalSize}px`,
