@@ -1,7 +1,7 @@
 import { isArray } from '../src/platform/is-array.mts';
-import { spawn } from "node:child_process";
-import { access, readdir } from "node:fs/promises";
-import { availableParallelism, totalmem } from "node:os";
+import { execFileSync, spawn } from "node:child_process";
+import { access, readdir, readFile } from "node:fs/promises";
+import { availableParallelism, freemem, totalmem } from "node:os";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -17,7 +17,9 @@ export type PreparationEvent = {phase: 'queue'; objectIds: string[]; concurrency
   | {phase: 'start'; id: string; index: number; total: number}
   | ({phase: 'finish'; elapsedMilliseconds: number} & PreparationResult)
   | {phase: 'complete'; report: PreparationReport};
-export interface PreparationOptions {projectRoot?: string; objectIds?: readonly string[]; concurrency?: number; argumentsList?: readonly string[]; runCommand?: (request: PreparationCommand) => Promise<ObjectCommandOutcome>; onEvent?: (event: PreparationEvent) => void;}
+export interface PreparationOptions {projectRoot?: string; objectIds?: readonly string[]; concurrency?: number; argumentsList?: readonly string[]; runCommand?: (request: PreparationCommand) => Promise<ObjectCommandOutcome>; onEvent?: (event: PreparationEvent) => void;
+  /** Memory the running objects may reserve together; an object starts only while its peak fits beside theirs. */
+  memoryBudgetBytes?: number; peakMemoryBytes?: (id: string) => Promise<number>;}
 interface ResolveOptions {projectRoot?: string; accessFile?: typeof access;}
 
 export function planetTestDirectory(id: string, projectRoot = process.cwd()) {
@@ -114,12 +116,41 @@ export function defaultPreparationConcurrency({
       !Number.isFinite(memoryBytes) || memoryBytes <= 0) {
     throw new TypeError("Preparation host capacity is incompatible.");
   }
-  // Each object has its own Sharp/libvips workers and decoded image buffers.
-  // Leave capacity for the browser and avoid a worker per logical CPU.
+  // One core each, two left for the browser and the system. Memory, not cores, bounds photographed bodies: the scheduler
+  // admits each object against the memory budget, so this only caps how many light objects run together.
   const gibibyte = 1024 ** 3;
-  if (cores >= 12 && memoryBytes >= 32 * gibibyte) return 3;
-  if (cores >= 4 && memoryBytes >= 16 * gibibyte) return 2;
-  return 1;
+  return Math.max(1, Math.min(cores - 2, Math.floor(memoryBytes / (4 * gibibyte))));
+}
+
+const gibibyte = 1024 ** 3;
+/** Reserved memory per preparation, from measured peak resident memory (2026-09-17, 36 GB host): an irregular body without
+ * photographs 1.15–1.29 GiB; with photographs 2.1 GiB (Amalthea) to 5.75 GiB (67P). Two of the largest together exceed their
+ * reservations by 1.5 GiB, which the floor below absorbs. Other objects run their own pipelines and are reserved as heavy. */
+export const PREPARATION_PEAK_BYTES = { light: 1.5 * gibibyte, heavy: 5 * gibibyte } as const;
+const PREPARATION_MEMORY_FLOOR = 2.5 * gibibyte;
+
+export async function preparationPeakBytes(id: string, projectRoot = process.cwd()) {
+  if (!await authoredObject(id, projectRoot)) return PREPARATION_PEAK_BYTES.heavy;
+  let recipe: {raster?: {surfaceObservations?: unknown[]}; geometry?: {radialTerrain?: unknown}};
+  try { recipe = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'source/preparation/terrestrial.json'), 'utf8')); }
+  catch { return PREPARATION_PEAK_BYTES.heavy; }
+  return recipe.geometry?.radialTerrain && !recipe.raster?.surfaceObservations?.length ? PREPARATION_PEAK_BYTES.light : PREPARATION_PEAK_BYTES.heavy;
+}
+
+/** Memory the system can hand to new processes now: free, inactive and purgeable pages on macOS, MemAvailable on Linux. */
+export function availableMemoryBytes() {
+  if (process.platform === 'darwin') {
+    const text = execFileSync('vm_stat', { encoding: 'utf8' }), page = Number(/page size of (\d+) bytes/u.exec(text)?.[1]);
+    const pages = (name: string) => Number(new RegExp(`${name}:\\s+(\\d+)`, 'u').exec(text)?.[1] ?? 0);
+    const bytes = page * (pages('Pages free') + pages('Pages inactive') + pages('Pages speculative') + pages('Pages purgeable'));
+    if (Number.isFinite(bytes) && bytes > 0) return bytes;
+  }
+  return freemem();
+}
+
+/** What preparation may reserve: the memory available at the start of the queue, less a floor kept for the system. */
+export function defaultPreparationMemoryBudget(available = availableMemoryBytes()) {
+  return Math.max(PREPARATION_PEAK_BYTES.heavy, available - PREPARATION_MEMORY_FLOOR);
 }
 
 export async function runObjectCommand({ command, argumentsList, cwd, env }: ObjectCommand): Promise<ObjectCommandOutcome> {
@@ -138,6 +169,8 @@ export async function runPreparationObjects({
   argumentsList = [],
   runCommand = runObjectCommand,
   onEvent = printPreparationProgress,
+  memoryBudgetBytes = Infinity,
+  peakMemoryBytes = async () => 0,
 }: PreparationOptions = {}) {
   const knownIds = new Set(SCENE_OBJECTS.map(({ id }) => id));
   if (!isArray(objectIds) || objectIds.some(id => !knownIds.has(id)) ||
@@ -168,44 +201,59 @@ export async function runPreparationObjects({
     })),
   };
   const failures: Error[] = [];
-  let next = 0;
+  // Heavier objects start first, so they run beside light ones instead of queueing together at the end; results keep the requested order.
+  const peaks = await Promise.all(commands.map(({ id }) => peakMemoryBytes(id)));
+  const order = commands.map((_, index) => index).sort((a, b) => peaks[b] - peaks[a] || a - b);
+  let next = 0, reserved = 0, running = 0, released: (() => void) | null = null;
   function emit(event: PreparationEvent) {
     try { onEvent(event); }
     catch (cause) { failures.push(new Error("Preparation progress reporting failed.", { cause })); }
   }
   emit({ phase: "queue", objectIds: [...objectIds], concurrency: report.concurrency });
-  async function worker() {
-    while (failures.length === 0 && next < commands.length) {
-      const index = next++, request = commands[index], result = report.results[index];
-      const commandStart = performance.now();
-      result.status = "running";
-      result.startedAt = new Date().toISOString();
-      emit({ phase: "start", id: request.id, index, total: commands.length });
-      try {
-        const outcome = await runCommand(request);
-        if (!outcome || !(outcome.exitCode === null || Number.isInteger(outcome.exitCode)) ||
-            !(outcome.signal === null || typeof outcome.signal === "string")) {
-          throw new TypeError(`${request.id} preparation did not return a process exit receipt.`);
-        }
-        result.exitCode = outcome.exitCode;
-        result.signal = outcome.signal;
-        if (outcome.exitCode !== 0 || outcome.signal !== null) {
-          throw new Error(`${request.id} preparation failed with ${outcome.signal ?? `exit ${outcome.exitCode}`}.`);
-        }
-        result.status = "succeeded";
-      } catch (cause) {
-        const error = cause instanceof Error ? cause : new Error(String(cause));
-        result.status = "failed";
-        result.error = error.message;
-        failures.push(error);
-      } finally {
-        result.elapsedMilliseconds = performance.now() - commandStart;
-        emit({ phase: "finish", ...result, elapsedMilliseconds: result.elapsedMilliseconds });
+  async function run(index: number) {
+    const request = commands[index], result = report.results[index];
+    const commandStart = performance.now();
+    result.status = "running";
+    result.startedAt = new Date().toISOString();
+    emit({ phase: "start", id: request.id, index, total: commands.length });
+    try {
+      const outcome = await runCommand(request);
+      if (!outcome || !(outcome.exitCode === null || Number.isInteger(outcome.exitCode)) ||
+          !(outcome.signal === null || typeof outcome.signal === "string")) {
+        throw new TypeError(`${request.id} preparation did not return a process exit receipt.`);
       }
+      result.exitCode = outcome.exitCode;
+      result.signal = outcome.signal;
+      if (outcome.exitCode !== 0 || outcome.signal !== null) {
+        throw new Error(`${request.id} preparation failed with ${outcome.signal ?? `exit ${outcome.exitCode}`}.`);
+      }
+      result.status = "succeeded";
+    } catch (cause) {
+      const error = cause instanceof Error ? cause : new Error(String(cause));
+      result.status = "failed";
+      result.error = error.message;
+      failures.push(error);
+    } finally {
+      result.elapsedMilliseconds = performance.now() - commandStart;
+      emit({ phase: "finish", ...result, elapsedMilliseconds: result.elapsedMilliseconds });
+      running--; reserved -= peaks[index];
+      released?.();
     }
   }
-  // A failure closes the queue but never abandons an already-started object.
-  await Promise.all(Array.from({ length: report.concurrency }, worker));
+  // A failure closes the queue but never abandons an already-started object. An object that does not fit waits for one to
+  // finish; one that alone exceeds the budget still runs when nothing else does.
+  const started: Promise<void>[] = [];
+  while (failures.length === 0 && next < commands.length) {
+    const index = order[next];
+    if (running >= report.concurrency || (running > 0 && reserved + peaks[index] > memoryBudgetBytes)) {
+      await new Promise<void>(resolvePromise => { released = resolvePromise; });
+      released = null;
+      continue;
+    }
+    next++; running++; reserved += peaks[index];
+    started.push(run(index));
+  }
+  await Promise.all(started);
   report.elapsedMilliseconds = performance.now() - start;
   emit({ phase: "complete", report });
   if (failures.length) {
