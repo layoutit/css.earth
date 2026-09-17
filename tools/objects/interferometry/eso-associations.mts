@@ -241,12 +241,8 @@ export async function reduceAssociation(reduction: InstrumentReduction, tree: As
  * products in the kept categories are returned; everything else it wrote is deleted. */
 async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe: string, frames: Frames, options: readonly string[], categories: readonly string[],
   raw: { readonly directory: string; readonly discard: readonly string[] }) {
-  const archiveId = (path: string) => { const match = ARCHIVE_FRAME.exec(path.slice(raw.directory.length + 1)); return path.startsWith(`${raw.directory}/`) && match ? match[1]! : undefined; };
-  const files = await Promise.all(frames.map(async ([path, tag]) => {
-    if (archiveId(path)) return [path, tag, 'archive'] as const;
-    const { size, mtimeMs } = await stat(path); return [path, tag, size, mtimeMs] as const;
-  }));
-  const record = resolve(work, name, 'products.json'), inputs = JSON.stringify({ recipe, options, files, categories });
+  const archiveId = (path: string) => archiveFrameId(path, raw.directory);
+  const record = resolve(work, name, 'products.json'), inputs = JSON.stringify({ recipe, options, files: await stepFiles(frames, raw.directory), categories });
   if (await exists(record)) {
     const previous = JSON.parse(await readFile(record, 'utf8')) as unknown;
     if (typeof previous === 'object' && previous && 'inputs' in previous && 'products' in previous && previous.inputs === inputs && Array.isArray(previous.products)
@@ -268,6 +264,20 @@ async function runStep(pipeline: EsoPipeline, work: string, name: string, recipe
 }
 
 const ARCHIVE_FRAME = /^((?:M\.)?[A-Z]+\.\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d{3})\.fits$/u;
+
+/** The archive id of a frame directly in the raw directory, or undefined for any other file. */
+export function archiveFrameId(path: string, rawDirectory: string) {
+  if (!path.startsWith(`${rawDirectory}/`)) return undefined;
+  return ARCHIVE_FRAME.exec(path.slice(rawDirectory.length + 1))?.[1];
+}
+
+/** How a step's inputs are identified for reuse: archive frames by name, everything else by size and modification time. */
+export async function stepFiles(frames: Frames, rawDirectory: string) {
+  return Promise.all(frames.map(async ([path, tag]) => {
+    if (archiveFrameId(path, rawDirectory)) return [path, tag, 'archive'] as const;
+    const { size, mtimeMs } = await stat(path); return [path, tag, size, mtimeMs] as const;
+  }));
+}
 
 /** Calibrate one science frame with an installed toolchain: fetch the tree, reduce it, and write calibrated.json beside the work. */
 export async function calibrateFromAssociations(reduction: InstrumentReduction, dpId: string, work: string, rawDirectory: string, calibratorIds: readonly string[] = []) {
