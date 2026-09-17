@@ -1,7 +1,9 @@
 /** Why the MIRI map's longitudinal offset (6.05 degrees) differs from Hammond et al. (2024)'s 7.5 +/- 0.5 on the same observation.
- * An eclipse map's longitude trades against two things the fit assumes: when the eclipses happen, and the time constant of the
- * detector ramp. These checks measure both on the package's pinned light curve and show the published ephemeris accounts for the
- * rest. Hammond et al. quote t0 = 55934.292283 BMJD_TDB with the period held at 0.813474 d. */
+ * Their timing agrees with the data; the difference is which of two systematics solutions the light curve is given. A fast detector
+ * ramp with a steep linear trend and a slow ramp with a gentle trend both fit; Hammond et al.'s Table 1 (ramp r1 = 3.7 +/- 0.3 per day,
+ * amplitude 1319 +/- 66 ppm, trend -240 +/- 60 ppm/day) is the slow one. On the light curve they mapped (Bell et al.'s Eureka! v1
+ * white light), this repository's fit with their time constant returns their systematics and their offset; the data prefer the
+ * fast ramp. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -13,43 +15,54 @@ import { readCsvColumns } from '../../../../tools/objects/terrestrial-layers/ecl
 
 const source = resolve(import.meta.dirname, '../../../../src/objects/wasp-43b/source');
 const orbit = hostedOrbit('wasp-43b'), host = starAstrometry('wasp-43'), radiusRatio = BODIES['wasp-43b'].meanRadiusKm / BODIES['wasp-43'].meanRadiusKm;
-const load = async () => {
-  const raster = JSON.parse(await readFile(resolve(source, 'preparation/raster.json'), 'utf8')) as { surfaces: { id: string; science: { path: string; fit: FitRecipe } }[] };
-  const science = raster.surfaces.find(surface => surface.id === 'miri')!.science, table = readCsvColumns(await readFile(resolve(source, science.path)));
-  const mask = table.get('mask')!, keep = Array.from(mask.keys()).filter(i => i >= 780 && mask[i] === 0), pick = (name: string) => Float64Array.from(keep, i => table.get(name)![i]!);
-  return { recipe: science.fit, curve: { time: pick('time'), flux: pick('flux'), error: pick('err'), columns: new Map([['centroid_y', pick('centroid_y')], ['psf_width_y', pick('psf_width_y')]]) } };
+const load = async (path: string) => {
+  const table = readCsvColumns(await readFile(resolve(source, path)));
+  const mask = table.get('mask')!, keep = Array.from(mask.keys()).filter(i => i >= 780 && mask[i] === 0 && Number.isFinite(table.get('flux')![i]!));
+  const pick = (name: string) => Float64Array.from(keep, i => table.get(name)![i]!);
+  return { time: pick('time'), flux: pick('flux'), error: pick('err'), columns: new Map([['centroid_y', pick('centroid_y')], ['psf_width_y', pick('psf_width_y')]]) };
 };
+const ours = 'science/jwst-1366-miri/white-5.0-10.5um.csv', bell = 'science/bell-2024/eureka-v1-white-5.0-10.5um.csv';
 const at = (seconds: number): HostedOrbit => ({ ...orbit, transitTimeBmjdTdb: orbit.transitTimeBmjdTdb + seconds / 86400 });
-// This visit's transit number from the package ephemeris, and where Hammond et al.'s printed ephemeris puts that transit.
-const epoch = 4893, hammondSeconds = (55934.292283 + epoch * 0.813474 - (orbit.transitTimeBmjdTdb + epoch * orbit.periodDays)) * 86400;
 const near = (actual: number, expected: number, tolerance: number, label: string) => assert.ok(Math.abs(actual - expected) <= tolerance, `${label}: ${actual}, expected ${expected} ± ${tolerance}`);
 
-test('the transit in the MIRI curve comes 19.5 s before the package ephemeris predicts, and 20 s after Hammond et al.\'s ephemeris', async () => {
-  const { curve } = await load();
-  near(hammondSeconds, -39.5, 0.1, 'Hammond et al. ephemeris minus package');
-  const transit = measureTransitShift(curve, orbit, host, radiusRatio);
-  // Measured 2026-09-17: -19.5 s (-20.0 to -18.5); batman-package 2.5.3 on the same window gives the same, and -20.5 s on Bell et al.'s deposited curve.
-  near(transit.shiftSeconds, -19.5, 1, 'mid-transit'); assert.ok(transit.high - transit.low <= 2.5, 'measured to about a second');
-  assert.ok(transit.chiSquaredAt(hammondSeconds) > 400, `Hammond et al.'s ephemeris is ${transit.chiSquaredAt(hammondSeconds)} worse on the transit`);
+test('Hammond et al.\'s ephemeris, read with starry\'s light delay, places the transit where both light curves show it', async () => {
+  const epoch = 4893, packageTransit = orbit.transitTimeBmjdTdb + epoch * orbit.periodDays;
+  // Their t0 with the period Bell et al. fitted (the paper prints it rounded to 0.813474 d). starry, through exoplanet, delays light
+  // relative to the barycentre, so a transit is seen a sin(i)/c before its geometric time: 4.859 stellar radii, i = 82.106 degrees.
+  const lightSeconds = 4.859 * BODIES['wasp-43'].meanRadiusKm * Math.sin(82.106 * Math.PI / 180) / 299792.458;
+  const hammondObserved = (55934.292283 + epoch * 0.8134740621723353 - packageTransit) * 86400 - lightSeconds;
+  near(hammondObserved, -20.6, 0.1, 'Hammond et al. observed transit');
+  // Measured 2026-09-17: -20.5 s on Bell et al.'s curve, -19.5 s on this project's reduction (batman-package 2.5.3 agrees on both).
+  const bellTransit = measureTransitShift(await load(bell), orbit, host, radiusRatio), oursTransit = measureTransitShift(await load(ours), orbit, host, radiusRatio);
+  near(bellTransit.shiftSeconds, -20.5, 1, 'Bell et al. curve'); near(oursTransit.shiftSeconds, -19.5, 1, 'this project\'s curve');
+  near(hammondObserved, bellTransit.shiftSeconds, 1, 'their timing matches the curve they fitted');
+  // With the rounded period instead, the transit would be at -47 s, which the curve rules out.
+  const rounded = (55934.292283 + epoch * 0.813474 - packageTransit) * 86400 - lightSeconds;
+  assert.ok(bellTransit.chiSquaredAt(rounded) > 400, `rounded period: ${rounded} s, chi2 +${bellTransit.chiSquaredAt(rounded)}`);
 });
 
-test('longitude follows the assumed eclipse timing and the ramp time constant; the printed ephemeris reproduces 7.5 degrees', async () => {
-  const { recipe, curve } = await load();
-  // Each timing uses the ramp time constant the lens recipe's profile refines to there (measured 2026-09-17), so the test runs
-  // one fit per case; lens-fits.test.mts checks the refinement itself.
-  const withRamp = (tau: number) => recipe.systematics.map(s => s.kind === 'exponential-ramp' ? { kind: 'exponential-ramp' as const, timeConstantsDays: [tau] } : s);
-  const fit = (seconds: number, tau: number) => {
-    const result = fitLightCurveMap(curve, { ...recipe, degrees: [2], eigencurves: [6], systematics: withRamp(tau) }, at(seconds), host, radiusRatio);
-    return { chiSquared: result.fit.chiSquared, offset: meridionalOffset(result.basis, result.fit) };
+test('with Hammond et al.\'s ramp time constant the fit returns their systematics and their offset; the data prefer a faster ramp', async () => {
+  const recipe = (JSON.parse(await readFile(resolve(source, 'preparation/raster.json'), 'utf8')) as { surfaces: { id: string; science: { fit: FitRecipe } }[] })
+    .surfaces.find(surface => surface.id === 'miri')!.science.fit;
+  const fit = async (path: string, tau: number) => {
+    const systematics = recipe.systematics.map(s => s.kind === 'exponential-ramp' ? { kind: 'exponential-ramp' as const, timeConstantsDays: [tau] } : s);
+    // Eclipses as the transit timing shows them: -20.5 s transit plus the 15 s light time across the orbit.
+    const result = fitLightCurveMap(await load(path), { ...recipe, degrees: [2], eigencurves: [6], systematics }, at(-5.5), host, radiusRatio);
+    const [trend, ramp, position, width] = result.fit.systematics;
+    return { chiSquared: result.fit.chiSquared, offset: meridionalOffset(result.basis, result.fit), ramp: ramp! * 1e6, trend: trend! * 1e6, position: position!, width: width! };
   };
-  // Eclipse light leaves the planet 2a/c (15.0 s) after transit light, so the eclipses should sit near -19.5 + 15 = -4.5 s.
-  const packageTiming = fit(0, 0.1026), measured = fit(-4.5, 0.1052), hammond = fit(hammondSeconds, 0.1385);
-  // Measured 2026-09-17: 6.05 degrees (chi2 11255.8), 6.2 (11250.4), 7.45 (11427.5).
-  near(packageTiming.offset, 6.05, 0.1, 'package ephemeris'); near(measured.offset, 6.2, 0.1, 'measured timing'); near(hammond.offset, 7.45, 0.15, 'Hammond et al. ephemeris');
-  assert.ok(measured.chiSquared < packageTiming.chiSquared && hammond.chiSquared - measured.chiSquared > 150, 'the eclipses prefer the measured timing');
-  assert.ok(Math.abs(hammond.offset - 7.5) <= 0.5, 'within Hammond et al.\'s interval');
-  // The ramp: at the measured timing, 0.08 and 0.16 day time constants fit within chi2 4 of each other and differ by about a degree.
-  const fast = fit(-4.5, 0.08), slow = fit(-4.5, 0.16);
-  // Measured: 5.8 degrees at chi2 11253.5, 6.95 at 11254.4.
-  assert.ok(Math.abs(fast.chiSquared - slow.chiSquared) < 4 && slow.offset - fast.offset > 0.9, `ramp 0.08 d: ${fast.offset} at ${fast.chiSquared}; 0.16 d: ${slow.offset} at ${slow.chiSquared}`);
+  // Measured 2026-09-17 on Bell et al.'s curve. Fast (0.10 d): chi2 11798.0, 5.45 deg, ramp 749 ppm, trend -926 ppm/day.
+  // Slow (0.27 d, 1/3.7): chi2 11812.2, 7.45 deg, ramp 1275 ppm, trend -279 ppm/day, position 0.0120, width -0.0423.
+  const fast = await fit(bell, 0.10), slow = await fit(bell, 1 / 3.7);
+  near(slow.ramp, 1319, 2 * 66, 'ramp amplitude against Table 1'); near(slow.trend, -240, 2 * 60, 'trend against Table 1');
+  near(slow.position, 0.0122, 0.0013, 'position trend'); near(slow.width, -0.0385, 0.0072, 'width trend');
+  near(slow.offset, 7.5, 0.5, 'offset against Hammond et al.');
+  assert.ok(Math.abs(fast.trend + 240) > 10 * 60, `the fast ramp's trend (${fast.trend} ppm/day) is not theirs`);
+  near(fast.offset, 5.45, 0.15, 'fast-ramp offset');
+  // The fast ramp fits better by 14, about 9.5 after Hammond et al.'s error scaling of 1.2225.
+  near(slow.chiSquared - fast.chiSquared, 14.2, 1, 'chi2 preference for the fast ramp');
+  // This project's reduction: the same two solutions, 6.1 and 7.95 degrees, 14.1 apart.
+  const oursFast = await fit(ours, 0.1026), oursSlow = await fit(ours, 1 / 3.7);
+  near(oursFast.offset, 6.1, 0.15, 'this reduction, fast ramp'); near(oursSlow.offset, 7.95, 0.15, 'this reduction, slow ramp');
+  near(oursSlow.chiSquared - oursFast.chiSquared, 14.1, 1, 'this reduction also prefers the fast ramp');
 });
