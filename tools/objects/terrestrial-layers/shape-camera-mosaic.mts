@@ -220,13 +220,21 @@ export async function checkBandAlignment(sourceDirectory: string,channels: reado
   registration: {references:readonly CameraFrame[];checks:readonly {reference:string;targets:readonly string[]}[]},mesh: Parameters<typeof alignCameraBands>[0]['mesh']){
   const frames=new Map<string,{frame:CameraFrame;filter:string}>();
   for(const entry of [...registration.references.map(frame=>({frame,filter:'reference'})),...channels.flatMap(channel=>channel.frames.map(frame=>({frame,filter:channel.filter})))]){
-    if(frames.has(entry.frame.id))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);
-    frames.set(entry.frame.id,entry);
+    // A registered band image may itself be the reference, stated identically in both places.
+    const known=frames.get(entry.frame.id);
+    if(known&&JSON.stringify(known.frame)!==JSON.stringify(entry.frame))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);
+    if(!known)frames.set(entry.frame.id,entry);
   }
   const sources=new Map<string,Promise<{frame:CameraFrame;image:CameraImage;sha256:string}>>();
   const load=(frame:CameraFrame)=>{
     let pending=sources.get(frame.id);
-    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(bytes=>({frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)}));sources.set(frame.id,pending);}
+    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(async bytes=>{
+      if(frame.encoding!=='fits-ssi-iof')return {frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)};
+      // Calibrated SSI: the catalog owns the camera, and archive fill and quality-withheld pixels are not measurements.
+      const [camera,image]=await Promise.all([resolveCatalogCamera(sourceDirectory,frame),loadShapeCameraImage(sourceDirectory,frame)]);
+      const data=Float32Array.from(image.data,(value,i)=>image.missing?.[i]||!(Math.abs(value)<1e30)?NaN:value);
+      return {frame:camera as CameraFrame,image:{...image,data},sha256:sha256(bytes)};
+    });sources.set(frame.id,pending);}
     return pending;
   };
   const confirmed=new Set(registration.references.slice(0,1).map(frame=>frame.id)),checks=[];

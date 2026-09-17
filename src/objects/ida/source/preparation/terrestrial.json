@@ -173,6 +173,177 @@
             0.0931
           ]
         }
+      },
+      {
+        "id": "filter-color",
+        "format": "controlled-shape-color",
+        "consumer": "galileo-color",
+        "metadata": {
+          "label": "False color",
+          "falseColor": true,
+          "coverage": "One Galileo pointing in 0.89 µm, green and violet filters, displayed as red, green and blue. The three frames were taken within 43 seconds; only the recorded strip of each frame covers Ida, and the grid marks what it does not.",
+          "attribution": {
+            "label": "NASA/JPL/Galileo SSI; PDS Small Bodies Node",
+            "url": "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/"
+          }
+        },
+        "bands": [
+          {
+            "channel": "red",
+            "filter": "IR-8890"
+          },
+          {
+            "channel": "green",
+            "filter": "GREEN"
+          },
+          {
+            "channel": "blue",
+            "filter": "VIOLET"
+          }
+        ],
+        "frames": [
+          {
+            "id": "set-1",
+            "red": {
+              "id": "202561352",
+              "path": "observations/0202561352rcal_ir8.fit",
+              "labelPath": "observations/0202561352rcal_ir8.xml",
+              "encoding": "fits-ssi-iof",
+              "cameraCatalog": {
+                "path": "reference/243idaimg.tab",
+                "labelPath": "reference/243idaimg.xml",
+                "imageNumber": 202561352,
+                "longitudeDirection": "east",
+                "pixelOrigin": "one-based",
+                "instrumentPath": "reference/gll36001.ti"
+              },
+              "quality": {
+                "rawPath": "observations/i1352.fit",
+                "rawLabelPath": "observations/i1352.lbl",
+                "badDataPath": "observations/idabad.tab",
+                "badDataLabelPath": "observations/idabad.lbl",
+                "imageId": "i1352",
+                "target": "IDA",
+                "startTime": "1993-08-28T16:38:26.723Z",
+                "filter": "IR-8890"
+              },
+              "coverageInsetPixels": 2
+            },
+            "green": {
+              "id": "202561278",
+              "path": "observations/0202561278rcal_gre.fit",
+              "labelPath": "observations/0202561278rcal_gre.xml",
+              "encoding": "fits-ssi-iof",
+              "cameraCatalog": {
+                "path": "reference/243idaimg.tab",
+                "labelPath": "reference/243idaimg.xml",
+                "imageNumber": 202561278,
+                "longitudeDirection": "east",
+                "pixelOrigin": "one-based",
+                "instrumentPath": "reference/gll36001.ti"
+              },
+              "quality": {
+                "rawPath": "observations/i1278.fit",
+                "rawLabelPath": "observations/i1278.lbl",
+                "badDataPath": "observations/idabad.tab",
+                "badDataLabelPath": "observations/idabad.lbl",
+                "imageId": "i1278",
+                "target": "IDA",
+                "startTime": "1993-08-28T16:37:43.324Z",
+                "filter": "GREEN"
+              },
+              "coverageInsetPixels": 2
+            },
+            "blue": {
+              "id": "202561313",
+              "path": "observations/0202561313rcal_vio.fit",
+              "labelPath": "observations/0202561313rcal_vio.xml",
+              "encoding": "fits-ssi-iof",
+              "cameraCatalog": {
+                "path": "reference/243idaimg.tab",
+                "labelPath": "reference/243idaimg.xml",
+                "imageNumber": 202561313,
+                "longitudeDirection": "east",
+                "pixelOrigin": "one-based",
+                "instrumentPath": "reference/gll36001.ti"
+              },
+              "quality": {
+                "rawPath": "observations/i1313.fit",
+                "rawLabelPath": "observations/i1313.lbl",
+                "badDataPath": "observations/idabad.tab",
+                "badDataLabelPath": "observations/idabad.lbl",
+                "imageId": "i1313",
+                "target": "IDA",
+                "startTime": "1993-08-28T16:38:00.723Z",
+                "filter": "VIOLET"
+              },
+              "coverageInsetPixels": 2
+            }
+          }
+        ],
+        "bandAlignment": {
+          "references": [
+            {
+              "id": "202561278",
+              "path": "observations/0202561278rcal_gre.fit",
+              "labelPath": "observations/0202561278rcal_gre.xml",
+              "encoding": "fits-ssi-iof",
+              "cameraCatalog": {
+                "path": "reference/243idaimg.tab",
+                "labelPath": "reference/243idaimg.xml",
+                "imageNumber": 202561278,
+                "longitudeDirection": "east",
+                "pixelOrigin": "one-based",
+                "instrumentPath": "reference/gll36001.ti"
+              },
+              "quality": {
+                "rawPath": "observations/i1278.fit",
+                "rawLabelPath": "observations/i1278.lbl",
+                "badDataPath": "observations/idabad.tab",
+                "badDataLabelPath": "observations/idabad.lbl",
+                "imageId": "i1278",
+                "target": "IDA",
+                "startTime": "1993-08-28T16:37:43.324Z",
+                "filter": "GREEN"
+              },
+              "coverageInsetPixels": 2
+            }
+          ],
+          "checks": [
+            {
+              "reference": "202561278",
+              "targets": [
+                "202561352",
+                "202561313"
+              ]
+            }
+          ]
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 65
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "maximumGain": 1
+        },
+        "display": {
+          "basis": "authored",
+          "displayRange": [
+            0,
+            0.11
+          ]
+        },
+        "focus": {
+          "longitudeDegrees": 47.71,
+          "latitudeDegrees": -5.23,
+          "zoom": 1.1
+        }
       }
     ]
   },

@@ -1,5 +1,4 @@
 import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill } from './prepared-interior-fill.mts';
-import { withPreparedInteriorSlices, withoutPreparedInteriorSlices } from './prepared-interior-slices.mts';
 import { isRecord } from './source-values.mts';
 import type { PreparedInteriorDisc } from '../src/renderers/css/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '../src/renderers/css/rendering/prepared-presentation.ts';
@@ -25,13 +24,11 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!url.startsWith(`/scenes/${input.id}/`)) throw new Error(`Interior fill asset ${url} is not this object's scene asset.`);
     return resolve(publicDirectory, basename(url));
   } : resolve(root, 'public');
-  const definition = restoreDepthSource(withoutPreparedInteriorSlices(withoutPreparedInteriorFill(input)));
+  const definition = restoreDepthSource(withoutPreparedInteriorFill(input));
   const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', definition.id, 'object.json'), 'utf8'));
   const recipe = isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) ? descriptor.properties.recipe : null;
   const shape = recipe && isRecord(recipe.shape) ? recipe.shape : null;
   const ellipsoid = shape?.kind === 'sphere' || shape?.kind === 'ellipsoid';
-  // Irregular bodies: leaves overlap nothing and slices of their own mesh fill the cracks between them.
-  const sliced = shape?.kind === 'radial-terrain';
   const closed = ellipsoid && !definition.surfaceHit;
   const ratios = shape?.kind === 'ellipsoid' && typeof shape.radiusKm === 'number'
     ? [1, typeof shape.secondaryRadiusKm === 'number' ? shape.secondaryRadiusKm / shape.radiusKm : 1,
@@ -46,7 +43,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     await page.setContent('<main class="planet-stage example-stage"></main>');
     await page.addStyleTag({ content: styles.join('\n') });
     const browserDefinition: PresentationSource = { ...definition, id: input.id };
-    const prepared = await page.evaluate(({ definition, closed, sliced, ratios, inset, interiorOnly }) => {
+    const prepared = await page.evaluate(({ definition, closed, ratios, inset, interiorOnly }) => {
       const stage = document.querySelector('main');
       if (!stage) throw new TypeError('Preparation stage is missing.');
       stage.dataset.objectId = definition.id;
@@ -231,9 +228,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       for (const animation of stage.getAnimations({ subtree: true })) { animation.pause(); animation.currentTime = 0; }
       const interior = interiorGeometry();
       const bodyNode = definition.tree.nodes.findIndex(node => node.className?.split(/\s+/u).some(name => name.endsWith('-body')) && !node.className.includes('cutaway'));
-      const bodyFrame = sliced && bodyNode >= 0 ? frame(bodyNode) : null;
-      if (sliced && !bodyFrame) throw new Error('Interior slices require a measurable body frame.');
-      if (interiorOnly) return { interior, bodyFrame: null, surface: null, depthReason: null, motion: [], facing: [] };
+      if (interiorOnly) return { interior, surface: null, depthReason: null, motion: [], facing: [] };
       // Preserve the default CSS animation order for existing saved playback
       // times. Hidden variants may expose additional prepared motion handles.
       const selections = [null, ...definition.variants];
@@ -293,9 +288,9 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       }
       // Recheck after every variant has declared its motion targets.
       const finalSurface = variableSurface ? null : depthSurface();
-      return { interior, bodyFrame: bodyFrame ? Array.from(bodyFrame.toFloat64Array()) : null, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].flatMap(([target, binding]) => binding && facingPlane(target) ? [{target, ...binding}] : []) };
-    }, { definition: browserDefinition, closed, sliced, ratios, inset: interiorFillInset, interiorOnly });
-    const { interior, bodyFrame, surface, depthReason, ...bindings } = prepared;
+      return { interior, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].flatMap(([target, binding]) => binding && facingPlane(target) ? [{target, ...binding}] : []) };
+    }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly });
+    const { interior, surface, depthReason, ...bindings } = prepared;
     if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, assetRoot);
     const source = { ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } };
     let compiled = prepareDepthPartitions(source, surface);
@@ -304,8 +299,6 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!compiled.depthPartitions) reason ??= 'no decomposition within carrier budget';
     onDepthResult?.({ id: source.id, source, compiled, surface, reason });
     const activated = { ...compiled, tree: { ...compiled.tree, activationGroups: prepareActivationGroups(compiled) } };
-    if (bodyFrame) return withPreparedInteriorSlices(activated, bodyFrame,
-      typeof assetRoot === 'string' ? (url: string) => resolve(assetRoot, `.${url}`) : assetRoot);
     return withPreparedInteriorFill(activated, interior, assetRoot);
   } finally { await page.close(); if (!suppliedBrowser) await browser.close(); }
 }
