@@ -72,12 +72,17 @@ export interface Catalogue { readonly name: string; readonly title: string; read
 
 /** `aboutStarBibcodes` holds the references about this star (`aboutStar`); level-3 files from any other paper are calibrated
  * for something else, typically a diameter survey. */
+const VLTI_CALIBRATORS: ReadonlySet<string> = new Set(['PIONIER', 'AMBER', 'GRAVITY', 'MATISSE']);
+
 export function candidateVerdict(oidb: readonly OidbGroup[], catalogues: readonly Catalogue[], aboutStarBibcodes: ReadonlySet<string>) {
   // Only an interferometric image deposit about this star shows its photosphere; other image deposits of it are context.
   const deposited = catalogues.filter(catalogue => catalogue.imageLines.length && catalogue.aboutStar && catalogue.interferometric);
   if (deposited.length) return { route: 'published-image', reason: `cast the authors' deposited image as published: ${deposited.map(catalogue => catalogue.name).join(', ')}` } as const;
   const authored = oidb.filter(group => group.calibrationLevel >= 3 && group.bibcode !== null && aboutStarBibcodes.has(group.bibcode));
   if (authored.length) return { route: 'author-calibrated', reason: `reconstruct from author-calibrated visibilities (level 3, ${authored.map(group => `${group.instrument} by ${group.dataPi}`).join('; ')}), then run tools/objects/interferometry/spotless-disc.mts on the same sampling before casting it: Polaris's April 2021 image failed that test. Compare with any published figure` } as const;
+  // Level 0 and 1 granules of the VLTI instruments are the ESO archive's public raw frames, which the interferometry tools calibrate.
+  const raw = [...new Set(oidb.filter(group => group.calibrationLevel <= 1 && VLTI_CALIBRATORS.has(group.instrument)).map(group => group.instrument))];
+  if (raw.length) return { route: 'raw-calibration', reason: `calibrate public raw ${raw.join(', ')} frames with tools/objects/interferometry/calibrate-<instrument>.mts, choosing one season observed on the small, medium and large arrays; reconstruct, then run tools/objects/interferometry/spotless-disc.mts (fit, spot ratio, halves) before casting` } as const;
   if (oidb.some(group => group.calibrationLevel >= 2)) return { route: 'automated-calibration', reason: 'only visibilities calibrated automatically (level 2) or for another paper, such as a diameter survey, are public; a reconstruction may not converge (Antares). Keep the package shape-only and record the attempt in its ledger' } as const;
   return { route: 'shape-only', reason: 'no calibrated interferometry and no deposited image: a shape-only package, off the map' } as const;
 }
