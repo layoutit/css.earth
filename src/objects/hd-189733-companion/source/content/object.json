@@ -34,14 +34,14 @@
       {
         "id": "orbit",
         "label": "Orbit around HD 189733 A",
-        "value": "Not measured; 1,500 to 21,000 years in the fit",
+        "value": "Not measured; a fit allows 1,500 to 21,000 years",
         "source": {
           "catalogueId": "doi-10-3847-1538-4357-ab8389",
           "url": "https://doi.org/10.3847/1538-4357/ab8389",
           "label": "Fitted here with LOFTI (Pearce et al. 2020)",
           "checked": "2026-09-17",
-          "path": "source/orbits/orbit-family.json",
-          "locator": "method; the fitted orbits are orbits/lofti-astrometry-only.txt"
+          "path": "source/reference/lofti-candidate-orbits.txt",
+          "locator": "the 300 accepted orbits"
         }
       }
     ],

@@ -31,6 +31,7 @@ import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 import * as applicationWorldContext from './application-world-context.mts';
 import { watchOverviewSelection } from './overview-selection.mts';
 import { systemById } from './object-systems.mts';
+import { SYSTEM_CENTERS } from './system-framing.mts';
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
 import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mts';
@@ -709,11 +710,26 @@ export function createSceneRouter({
     session.framePresenter?.enable();
   }
   function setOverview(enabled: boolean) {
+    const entered = enabled && !overview;
     overview = enabled;
     active?.mount?.navigation?.setZoomOutCentering?.(enabled);
     shellOwner?.shell?.setOverview?.(enabled);
     worldContextMount?.setOverview?.(enabled);
     if (stage.dataset) stage.dataset.selection = enabled ? 'system' : objectId;
+    if (entered) aimAtSystemCenter();
+  }
+  /** A binary's overview is centred on the pair's centre of mass, not on the star the scene mounts. Entering the overview
+   * turns the camera onto that centre at the same distance; zooming out then keeps the pair centred. */
+  function aimAtSystemCenter() {
+    const session = active, mount = session?.mount;
+    if (!session || !mount || !navigation || !SYSTEM_CENTERS.has(objectId)) return;
+    const target = navigation.systemCenterTarget?.({ objectId, fromId: objectId, mount });
+    if (!target) return;
+    const controller = new AbortController();
+    session.lifetime.onDispose(() => controller.abort());
+    void navigation.focus({ objectId, mount, signal: controller.signal, reducedMotion: reducedMotionActive,
+      targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM, centerSelection: true })
+      .catch((error: unknown) => { if (!controller.signal.aborted) reportError(error); });
   }
   function connectOverviewSelection(session: Session) {
     const owner = session.mount?.navigation;

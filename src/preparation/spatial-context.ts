@@ -48,7 +48,7 @@ export interface WorldContextSource {
   readonly sky: SkyBaseline;
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus;
-  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: OrbitPlacement }[];
+  readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate' }[];
   /** Preparation resolves catalogue membership before computing the context. */
   readonly bodySelection?: "catalog";
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
@@ -71,23 +71,12 @@ export interface OrbitalState {
   readonly trueAnomalyRadians: number;
 }
 /** `none`: a body placed by its astrometry rather than an orbit, such as a star; it is listed with its position and radius only.
- * `candidateStates`: further orbits consistent with the same measurements as the body's state, when no single orbit is measured
- * (a wide binary's companion). Each passes through the body's position around the same parent and is drawn beside the first. */
+ * `boundTo`: a placed star measured to be bound to another with no measured orbit (a wide binary companion), with the pair's
+ * centre of mass. The pair is one system, framed and aimed at that centre. */
 export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail' | 'none'; readonly classification?: string;
-  readonly candidateStates?: readonly OrbitalState[];
-  /** Where a candidate-orbit body is drawn: its own measured placement, which lies on none of the candidate orbits. */
-  readonly measuredPositionM?: Vector3; }
-/** How a body's drawn orbit relates to measurement: `approximate`, an illustrative phase on a published orbit; `candidate-orbits`,
- * a measured position with several orbits the measurements allow and none singled out. */
-export type OrbitPlacement = 'approximate' | 'candidate-orbits';
+  readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 }; }
 /** A source-backed coordinate origin with no rendered body, surface or marker. */
 export interface WorldContextOrbitCenter { readonly positionM: Vector3; readonly centerBodyId: string; }
-export interface PreparedBodyOrbit { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
-  readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
-  readonly extentChords: readonly number[]; readonly lod: PreparedOrbitLod;
-  /** Open trajectories carry N-1 chords, an explicit epoch vertex and a finite display window. */
-  readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
-  readonly trailModel?: 'finite-open-trajectory-constant-weight' }
 export interface PreparedWorldContext {
   readonly schema: 'cssearth-world-context@1';
   readonly orbitCenters?: Readonly<Record<string, WorldContextOrbitCenter>>;
@@ -98,11 +87,16 @@ export interface PreparedWorldContext {
   readonly classificationViews?: Readonly<Record<string, PreparedSystemView>>;
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly systemView?: PreparedSystemView;
-    readonly placement?: OrbitPlacement;
+    readonly placement?: 'approximate';
+    /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
+    readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
     /** Absent for a placed body, which has a position but no orbit to draw. */
-    readonly orbit?: PreparedBodyOrbit;
-    /** Further candidate orbits of a `candidate-orbits` body, each around the same parent and through the same position. */
-    readonly additionalOrbits?: readonly PreparedBodyOrbit[] }[];
+    readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
+      readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
+      readonly extentChords: readonly number[]; readonly lod: PreparedOrbitLod;
+      /** Open trajectories carry N-1 chords, an explicit epoch vertex and a finite display window. */
+      readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
+      readonly trailModel?: 'finite-open-trajectory-constant-weight' } }[];
   readonly camera: WorldContextSource['camera'];
   readonly system: WorldContextSource['system'];
   readonly volume: WorldContextSource['volume'];
@@ -121,8 +115,8 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
   const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
     const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement'], `world context body ${index}`);
-    if (body.placement !== undefined && body.placement !== 'approximate' && body.placement !== 'candidate-orbits') throw new TypeError('Unsupported orbital placement qualification.');
-    return freeze({ ...(body.placement === undefined ? {} : { placement: body.placement as OrbitPlacement }), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
+    if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
+    return freeze({ ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
   });
   if (new Set(bodies.map(body => body.id)).size !== bodies.length || bodies.some(body => body.id === focus.id)) throw new TypeError('World context body ids must be unique and exclude the focus.');
   const orbit = record(input.orbit, 'world context orbit'); keys(orbit, ['segments', 'trail'], 'world context orbit');
@@ -178,6 +172,15 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const fact = facts[body.id], state = states[body.id];
     if (!fact || !state || !positive(fact.radiusM, `${body.id} radius`)) throw new TypeError(`Missing physical facts for ${body.id}.`);
     validateState(state, body.id);
+    if (fact.boundTo) {
+      const hostPositionM = fact.boundTo.hostId === source.focus.id ? source.frame.originM : states[fact.boundTo.hostId]?.positionM;
+      const centre = fact.boundTo.centerM;
+      if (!hostPositionM || fact.orbitStyle !== 'none' || fact.boundTo.hostId === body.id) throw new TypeError(`${body.id} must be a placed body bound to another prepared body.`);
+      // The centre of mass lies on the line between the pair: its two distances add up to their separation.
+      const separation = Math.hypot(...hostPositionM.map((value, axis) => value - state.positionM[axis]!));
+      const split = Math.hypot(...hostPositionM.map((value, axis) => value - centre[axis]!)) + Math.hypot(...centre.map((value, axis) => value - state.positionM[axis]!));
+      if (!(separation > 0) || Math.abs(split - separation) > separation * 1e-9) throw new TypeError(`${body.id} centre of mass must lie between it and ${fact.boundTo.hostId}.`);
+    }
     const parent = state.centerBodyId === source.focus.id ? source.frame.originM : centerState(state.centerBodyId)?.positionM;
     if (!parent || state.centerBodyId === body.id || !source.bodies.some(body => body.id === state.centerBodyId) && !orbitCenters[state.centerBodyId] && state.centerBodyId !== source.focus.id ||
         Math.hypot(...parent.map((value, axis) => value - state.centerPositionM[axis]!)) > .001) {
@@ -188,26 +191,41 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       if (ancestors.has(parentId) || !centerState(parentId)) throw new TypeError(`${body.id} orbit parent hierarchy is invalid.`);
       ancestors.add(parentId);
     }
-    if (fact.orbitStyle === 'none') {
-      if (fact.candidateStates?.length) throw new TypeError(`${body.id} is placed without an orbit and cannot carry candidate orbits.`);
-      return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM });
+    if (fact.orbitStyle === 'none') return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
+      ...(fact.boundTo ? { boundTo: freeze({ hostId: fact.boundTo.hostId, centerM: copy(fact.boundTo.centerM) }) } : {}) });
+    const motion = unit(cross(state.normal, state.perihelionDirection));
+    const path = state.eccentricity > 1 ? prepareHyperbolicPath({
+      semiMajorAxisUnits: state.semiMajorAxisM, eccentricity: state.eccentricity, trueAnomalyRad: state.trueAnomalyRadians,
+      unitsPerAu: M_PER_AU, heliocentricDistanceAu: Math.hypot(...state.positionM) / M_PER_AU,
+      focus: add(state.centerPositionM, scale(state.positionM, -1)), perihelionDirection: state.perihelionDirection,
+      perihelionMotion: motion, segments: source.orbit.segments,
+    }) : undefined;
+    let verticesM: readonly Vector3[], trail: readonly number[];
+    if (path) {
+      verticesM = freeze(path.vertices.map((vertex, index) => index === path.bodyVertexIndex
+        ? copy(state.positionM) : copy(add(state.positionM, vertex))));
+      trail = path.trail;
+    } else {
+      const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = add(state.centerPositionM, scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity));
+      const eccentric = 2 * Math.atan2(Math.sqrt(1 - state.eccentricity) * Math.sin(state.trueAnomalyRadians / 2),
+        Math.sqrt(1 + state.eccentricity) * Math.cos(state.trueAnomalyRadians / 2));
+      verticesM = freeze(Array.from({ length: source.orbit.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
+        eccentric + index * 2 * Math.PI / source.orbit.segments)));
+      trail = fact.orbitStyle === 'closed' ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
+        : trailWeights(source.orbit.segments, source.orbit.trail);
     }
-    const candidates = fact.candidateStates ?? [];
-    if ((body.placement === 'candidate-orbits') !== (candidates.length > 0)) throw new TypeError(`${body.id} needs candidate orbits exactly when its placement names them.`);
-    // Candidates differ in where they put the body along the line of sight, which is the measurement they lack. Each carries its
-    // own position on its own orbit; the body's drawn position is its measured one, and lies on none of them.
-    for (const [index, candidate] of candidates.entries()) {
-      validateState(candidate, `${body.id} candidate ${index + 1}`);
-      if (candidate.centerBodyId !== state.centerBodyId ||
-        candidate.centerPositionM.some((value, axis) => value !== state.centerPositionM[axis])) {
-        throw new TypeError(`${body.id} candidate orbits must share the body's parent.`);
-      }
-    }
-    const orbit = prepareBodyOrbit(state, fact, source.orbit);
-    // A candidate body keeps its measured position; its orbits are drawn where each candidate puts it.
-    const positionM = copy(candidates.length ? fact.measuredPositionM ?? state.positionM : state.positionM);
-    return freeze({ ...body, positionM, radiusM: fact.radiusM, orbit,
-      ...(candidates.length ? { additionalOrbits: freeze(candidates.map(candidate => prepareBodyOrbit(candidate, fact, source.orbit))) } : {}) });
+    const activeChords = freeze(trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+    const extentChords = prepareExtentChords(activeChords);
+    // Enclose the actual authored trail, including the pinned ephemeris vertex.
+    // A sphere containing its endpoints also contains every active chord.
+    const endpoints = activeChords.length ? activeChords.flatMap(index => [verticesM[index]!, verticesM[(index + 1) % verticesM.length]!]) : verticesM;
+    const centerM = [0, 1, 2].map(axis => (Math.min(...endpoints.map(v => v[axis]!)) + Math.max(...endpoints.map(v => v[axis]!))) / 2) as unknown as Vector3;
+    const bounds = freeze({ centerM: copy(centerM), radiusM: Math.max(...endpoints.map(vertex =>
+      Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON) });
+    const lod = prepareOrbitLod(verticesM, trail, path ? path.closed !== false : true, path?.bodyVertexIndex ?? 0);
+    return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
+      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords, lod,
+        ...(path ? { closed: path.closed, bodyVertexIndex: path.bodyVertexIndex, displayExtentAu: path.displayExtentAu, trailModel: path.trailModel } : {}) }) });
   });
   const focus = { ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM };
   // The root system frames its major planets, including the smaller terrestrial planets.
@@ -235,42 +253,6 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       const systemView = systemViewPolicy === undefined ? undefined : prepareSystemView(body, bodies, states, systemViewPolicy);
       return systemView ? freeze({ ...body, systemView }) : body;
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
-}
-
-/** One orbit's prepared chords, trail, bounds and detail levels, from a same-epoch orbital state. */
-function prepareBodyOrbit(state: OrbitalState, fact: WorldContextBodyFact, orbitSource: WorldContextSource['orbit']): PreparedBodyOrbit {
-    const motion = unit(cross(state.normal, state.perihelionDirection));
-    const path = state.eccentricity > 1 ? prepareHyperbolicPath({
-      semiMajorAxisUnits: state.semiMajorAxisM, eccentricity: state.eccentricity, trueAnomalyRad: state.trueAnomalyRadians,
-      unitsPerAu: M_PER_AU, heliocentricDistanceAu: Math.hypot(...state.positionM) / M_PER_AU,
-      focus: add(state.centerPositionM, scale(state.positionM, -1)), perihelionDirection: state.perihelionDirection,
-      perihelionMotion: motion, segments: orbitSource.segments,
-    }) : undefined;
-    let verticesM: readonly Vector3[], trail: readonly number[];
-    if (path) {
-      verticesM = freeze(path.vertices.map((vertex, index) => index === path.bodyVertexIndex
-        ? copy(state.positionM) : copy(add(state.positionM, vertex))));
-      trail = path.trail;
-    } else {
-      const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = add(state.centerPositionM, scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity));
-      const eccentric = 2 * Math.atan2(Math.sqrt(1 - state.eccentricity) * Math.sin(state.trueAnomalyRadians / 2),
-        Math.sqrt(1 + state.eccentricity) * Math.cos(state.trueAnomalyRadians / 2));
-      verticesM = freeze(Array.from({ length: orbitSource.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
-        eccentric + index * 2 * Math.PI / orbitSource.segments)));
-      trail = fact.orbitStyle === 'closed' ? freeze(Array.from({ length: orbitSource.segments }, () => 1))
-        : trailWeights(orbitSource.segments, orbitSource.trail);
-    }
-    const activeChords = freeze(trail.flatMap((weight, index) => weight > 0 ? [index] : []));
-    const extentChords = prepareExtentChords(activeChords);
-    // Enclose the actual authored trail, including the pinned ephemeris vertex.
-    // A sphere containing its endpoints also contains every active chord.
-    const endpoints = activeChords.length ? activeChords.flatMap(index => [verticesM[index]!, verticesM[(index + 1) % verticesM.length]!]) : verticesM;
-    const centerM = [0, 1, 2].map(axis => (Math.min(...endpoints.map(v => v[axis]!)) + Math.max(...endpoints.map(v => v[axis]!))) / 2) as unknown as Vector3;
-    const bounds = freeze({ centerM: copy(centerM), radiusM: Math.max(...endpoints.map(vertex =>
-      Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON) });
-    const lod = prepareOrbitLod(verticesM, trail, path ? path.closed !== false : true, path?.bodyVertexIndex ?? 0);
-    return freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords, lod,
-      ...(path ? { closed: path.closed, bodyVertexIndex: path.bodyVertexIndex, displayExtentAu: path.displayExtentAu, trailModel: path.trailModel } : {}) });
 }
 
 export interface PreparedOrbitLodLevel {

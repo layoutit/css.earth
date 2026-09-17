@@ -19,11 +19,13 @@
     "properMotionDecMasPerYear": -253.99335006117343,
     "radialVelocityKmPerS": -2.531722,
     "presentationUp": "display-axis",
+    "boundTo": "hd-189733",
     "sources": {
       "position": "Gaia DR3 source 1827242816176111360 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-189733-companion/source/photometry/gaia-dr3-source.csv: 11.44 arcsec from HD 189733 A at position angle 244 degrees, 226 au in projection",
       "distance": "HD 189733 A's Gaia DR3 distance, 19.776 pc. B's own parallax, 50.629 +/- 0.014 mas (19.752 pc), differs from A's by 0.06 mas; taken literally it would put B 5,000 au nearer than A, 20 times its projected separation, although the pair moves together. The depth between them is not measured.",
       "properMotion": "Gaia DR3 (same row): -12.193, -253.993 mas/yr",
-      "radialVelocity": "HD 189733 A's Gaia DR3 value, -2.53 km/s: B's own, 1.5 +/- 1.2 km/s, is too uncertain to separate the pair"
+      "radialVelocity": "HD 189733 A's Gaia DR3 value, -2.53 km/s: B's own, 1.5 +/- 1.2 km/s, is too uncertain to separate the pair",
+      "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HD 189733 A and B in their Gaia EDR3 wide-binary catalogue with a chance-alignment probability of 1.3e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the companion is placed by its own astrometry and carries no orbit."
     }
   }
 }

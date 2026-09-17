@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "334de08782c8ff4465bb008a4f3ef66f7edc3642a4282524a068a8ca32347b1e"
+    "sha256": "9b122a9ae3b406ad316f33f0db8c937ea4f74a70f7dc0b9fe524c5e621af8249"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -87,7 +87,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6b108df1048f516bae06e96be16128c5eee616aab983969971242d1f460b4117",
+      "sha256": "9bed197a036319f79b4286d995cdd02c9a7de1386b3101bf40eb0c75b7748cd8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -124,14 +124,14 @@
             {
               "id": "orbit",
               "label": "Orbit around HD 189733 A",
-              "value": "Not measured; 1,500 to 21,000 years in the fit",
+              "value": "Not measured; a fit allows 1,500 to 21,000 years",
               "source": {
                 "catalogueId": "doi-10-3847-1538-4357-ab8389",
                 "url": "https://doi.org/10.3847/1538-4357/ab8389",
                 "label": "Fitted here with LOFTI (Pearce et al. 2020)",
                 "checked": "2026-09-17",
-                "path": "source/orbits/orbit-family.json",
-                "locator": "method; the fitted orbits are orbits/lofti-astrometry-only.txt"
+                "path": "source/reference/lofti-candidate-orbits.txt",
+                "locator": "the 300 accepted orbits"
               }
             }
           ],
@@ -267,8 +267,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6b108df1048f516bae06e96be16128c5eee616aab983969971242d1f460b4117",
-      "bytes": 3471,
+      "sha256": "9bed197a036319f79b4286d995cdd02c9a7de1386b3101bf40eb0c75b7748cd8",
+      "bytes": 3446,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -384,8 +384,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7857,
-          "sha256": "5bb32b00a6c3d9344ca890644fdf97be0d8ef03525e69addb32a7d43f9670efe",
+          "bytes": 7832,
+          "sha256": "2c6d0273869189f207c29dda36ab2f5da241b4f20d562aee55a6d8ec5ee5b34b",
           "verification": "bytes-verified"
         }
       ],
@@ -423,7 +423,7 @@
   },
   "lastPreparation": {
     "objectId": "hd-189733-companion",
-    "materialSha256": "c4cc99499f943422b7c448b537dde41e32bea7f15e961fdb5ee0b4c26b690a02",
+    "materialSha256": "316c76cce33632c6ab1e4fa6a37f142c83035017ec2d101cd2a2b877815a2bd2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

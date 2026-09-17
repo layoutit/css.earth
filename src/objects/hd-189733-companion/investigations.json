@@ -164,7 +164,7 @@
       "id": "system-membership",
       "subject": "Whether HD 189733 B belongs to the HD 189733 system",
       "status": "included",
-      "finding": "El-Badry et al. (2021, MNRAS 506, 2269) list the pair in their Gaia wide-binary catalogue with a chance-alignment probability of 1.3e-4 and a projected separation of 226 au. The package draws the candidate orbits around HD 189733 A, which puts B in the system's orbit chain, so it shares the system's breadcrumb and card. Its candidates frame nothing: the system view still frames the planet's orbit.",
+      "finding": "El-Badry et al. (2021, MNRAS 506, 2269) list the pair in their Gaia wide-binary catalogue with a chance-alignment probability of 1.3e-4 and a projected separation of 226 au. B's astrometry record states that bond with boundTo, which puts B in the HD 189733 system without an orbit, so it shares the system's breadcrumb and card, and carries the pair's centre of mass: the system view still frames the planet's orbit, and only a camera farther out than the two stars are apart turns onto that centre.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/506/2269"
       ],

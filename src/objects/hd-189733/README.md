@@ -18,7 +18,7 @@ HD 189733 A is a K2 dwarf in Vulpecula, 19.8 parsecs away. It hosts the hot Jupi
 
 **On the map.** The star has no surface image, but a planet with imagery orbits it (`hostsImagery`) and its colour comes from its own spectrum (`sourceColor`, [prepare-object-discovery.mts](../../../tools/prepare-object-discovery.mts)), so it stays on the map.
 
-**Its system.** The HD 189733 system holds the planet, on its measured orbit, and the companion B, which has no measured orbit: B is drawn with the orbits its measurements allow around this star (see [B's README](../hd-189733-companion/README.md)). The system view frames the planet's orbit, 7,000 times smaller than the companion's separation, so the candidates appear only when the view is wide enough to hold them.
+**Its system.** The HD 189733 system holds the planet, on its measured orbit, and the companion B, which is measured to be bound to this star but has no measured orbit, so none is drawn (see [B's README](../hd-189733-companion/README.md)). The system view frames the planet's orbit, 7,000 times smaller than the companion's separation; once the camera is farther out than the two stars are apart, it turns onto the pair's centre of mass instead of this star.
 
 ## Evidence
 
