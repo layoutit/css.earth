@@ -1145,9 +1145,14 @@
       "expectedSha256": "1648b26e7387ea48ed9d3d32d6e5ee02c87f05a1ac9b023b4c5e20871de85441"
     },
     {
+      "path": "preparation/published-comparison.json",
+      "expectedBytes": 944,
+      "expectedSha256": "8c144d2ef5463b8b9c55e676a9bb008dbb6aacd2a9359cdf21888aa35bbf9b2f"
+    },
+    {
       "path": "preparation/observer-cameras.json",
-      "expectedBytes": 612,
-      "expectedSha256": "4cba4a8520cc29622af7429c2af8085188113ea3dc62db5e2021286f1fb474eb"
+      "expectedBytes": 525,
+      "expectedSha256": "9adbd0ef68dff00d83cfc117f648d5dc1887ff0b1b9c59b61908943af4e08ba0"
     },
     {
       "path": "preparation/rotation.json",

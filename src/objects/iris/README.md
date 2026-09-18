@@ -12,7 +12,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
 | SPHERE photograph | [23 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 2017 October 10 and 11](https://observations.lam.fr/astero/Data/7Iris/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/7_Iris_adam.obj) |
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/7_Iris_param.txt), read longitude-first, and JPL Horizons geometry from Paranal |
-| Photograph registration | [Hanuš et al. (2019), Figure 2](https://doi.org/10.1051/0004-6361/201834541) |
+| Photograph registration | [Vernazza et al. (2021), Figure B.6](https://doi.org/10.1051/0004-6361/202141781); earlier [Hanuš et al. (2019), Figure 2](https://doi.org/10.1051/0004-6361/201834541) |
 
 Iris is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape.
 
@@ -24,16 +24,17 @@ Iris is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publishe
 
 ### SPHERE photograph
 
-The photograph's placement reproduces the paper that published these frames. Hanuš et al. (2019) fitted their model to the same images and show the fit, epoch by epoch, in their Figure 2. Our cameras, computed from the survey's rotation record, JPL Horizons and each frame's header, reproduce that figure:
+The photograph's placement reproduces the survey's own comparison of these frames with its models, [Vernazza et al. (2021) Figure B.6](https://doi.org/10.1051/0004-6361/202141781), measured by `tools/objects/published-comparison.mts`:
 
 | Check | Result |
 | --- | --- |
-| Projected rotation axis on the sky | 23.3°; the paper draws 23.9° |
-| Outline overlap with the paper's images and model, at our phase | 0.980 and 0.972, the single peak of a full-turn sweep |
-| Outline residual in the native frames after the centre fit | 0.84 px mean over 23 frames; smallest at our phase, rising about 0.1 px per degree |
-| The authors' own crater identifications, cast through our cameras onto the mesh | 6.1 km RMS per crater across epochs, about 2.6 native pixels |
+| Outline overlap with the paper's ADAM panels, at our phase | 0.957 to 0.979; over a full turn in 10° steps it peaks at our phase in three 2017 columns and 10° away in the fourth, by 0.004 |
+| Outline overlap with the paper's photographs | 0.964 to 0.983 |
+| Our outline against itself drawn at the paper's pixel scale | 0.985 to 0.988, what this measure gives one shape at these two pixel sizes |
+| Projected spin axis on the sky | 23.3° to 23.5°; the figure's arrows 19.2° to 20.7° |
+| Outline residual in the native frames after the centre fit | 0.843 px mean over 23 frames, smallest at our phase |
 
-The measurements and method are in the ledger entry `zimpol-published-comparison`. [The first frame of each epoch beside our render and our projected limb](evidence/sphere-camera-comparison.webp) shows the cameras on the native pixels.
+The axis difference is about the 3.0° between the release record's pole and the paper's Table A.1; that is not verified as its cause. Earlier, against Hanuš et al. (2019) Figure 2, the same cameras gave outline overlaps of 0.972 and 0.980 and put the authors' own crater identifications on one surface point to 6.1 km. The measurements are in [`evidence/published-comparison.json`](evidence/published-comparison.json) and the ledger entry `zimpol-published-comparison`; [the paper's panels beside ours](evidence/published-comparison.webp) and [the first frame of each epoch beside our render and limb](evidence/sphere-camera-comparison.webp) show them.
 
 ### Registration
 
@@ -43,6 +44,8 @@ Measured by the registration stage when the body was last prepared; the numbers 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `zimpol` | 23 | 9 | 6.83° | 1.98° | 6.54° | its other 23 frames | 0 of 23 | — | 23 of 23, 0.75° | — | ×1.02 | conflict |
+
+`zimpol` ships on its paper’s comparison, [Figure B.6](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
 Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
