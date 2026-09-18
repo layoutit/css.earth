@@ -10,18 +10,14 @@ Join [chat.polycss.com](https://chat.polycss.com) for support and community disc
 
 ## How It Works
 
-css.earth outputs one URL per celestial body with a shared camera, so you can fly from Saturn to another galaxy without leaving the page. So far, it covers 495 objects:
+[css.earth](https://css.earth) outputs one URL per celestial body with a shared camera, so you can fly from Saturn to another galaxy without leaving the page. So far, it covers 495 objects:
 
 - **The Solar System:** the Sun, the eight planets, 5 dwarf planets, 99 moons, 311 asteroids, 32 comets and 17 other trans-Neptunian objects, all on their orbits. Where a mission photographed a body, its surface comes from that mission's images; the rest are shown as shape models.
-
-<img src=".github/assets/solar-system.webp" alt="The inner Solar System out to Saturn, with orbits and labels, rendered as DOM and CSS markup" width="960">
-
 - **Stars and exoplanets:** stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
 - **Interstellar visitors:** 'Oumuamua, Borisov and 3I/ATLAS.
 - **Nebulae:** the Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster.
 - **Galaxies:** the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
-
-<img src=".github/assets/milky-way-lmc.webp" alt="The Milky Way beside the Large Magellanic Cloud, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/solar-system.webp" alt="The inner Solar System out to Saturn, with orbits and labels, rendered as DOM and CSS markup" width="960">
 
 ## Motivation
 
@@ -29,7 +25,9 @@ Space agencies and observatories publish decades of public data, but it is burie
 
 Other universe browsers already exist, and many of them inspired this platform: NASA's [Eyes on the Solar System](https://eyes.nasa.gov/apps/solar-system/), [OpenSpace](https://www.openspaceproject.com/), [Celestia](https://celestiaproject.space/), [Stellarium](https://stellarium.org/) and [Google Earth](https://earth.google.com/). 
 
-The key difference is that css.earth does not need WebGL: it runs in any modern browser, which makes it easier to open and share. It even works without JavaScript!
+The key difference is that [css.earth](https://css.earth) does not require WebGL: it runs in any modern browser, which makes it easier to open and share. It even works without JavaScript!
+
+<img src=".github/assets/milky-way-lmc.webp" alt="The Milky Way beside the Large Magellanic Cloud, rendered as DOM and CSS markup" width="960">
 
 ## Datasets
 
@@ -57,13 +55,9 @@ Preparation reads archive formats directly with in-house TypeScript readers. The
 
 ## Architecture
 
-css.earth is built on the [PolyCSS](https://github.com/LayoutitStudio/polycss) 3D DOM rendering engine. Every body is a mesh of real HTML elements: faces are placed with CSS `matrix3d(...)` transforms and painted from prepared texture atlases. The scene uses no `<canvas>` or WebGL, and no `clip-path`, masks, filters, gradients or blend modes at runtime.
+[css.earth](https://css.earth) is built on the [PolyCSS](https://github.com/LayoutitStudio/polycss) 3D DOM rendering engine. Every body is a mesh of real HTML elements: faces are placed with CSS `matrix3d(...)` transforms and painted from prepared texture atlases. The scene uses no `<canvas>` or WebGL, and no `clip-path`, masks, filters, gradients or blend modes at runtime.
 
 Preparation reads the original products: PDS and FITS images, shape models, SPICE kernels, star catalogues, interferometric and radio data, and published fact sheets. It checks each input against its pinned hash, then writes the textures, geometry, lighting, orbits, labels and page text for each object. The outputs are reproducible from the checked-in inputs, and each one records the sources it came from.
-
-Each object is a package under [`src/objects/<id>/`](src/objects/README.md) with its pinned inputs, preparation recipe and README. One `OBJECTS` registry, one application shell and one shared camera serve every object, and only one object scene is mounted at a time.
-
-Git tracks a small inventory of each object's prepared files; the files themselves are stored in R2 by content hash. `pnpm setup:assets` downloads them into the checkout, Astro builds the site, and Netlify serves it.
 
 The browser does not derive geometry, textures or charts. It loads the prepared state for the selected object, mounts it into a retained DOM, and moves the camera. Earth is the one object that pages its prepared imagery in and out as you zoom towards city level.
 
