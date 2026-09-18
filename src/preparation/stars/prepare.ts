@@ -11,6 +11,7 @@ import { containedPath, verifiedBytes, sha256 } from '@cssearth/volume-bake/comp
 import type { PreparedCssPointFieldManifest } from './types.js';
 import { prepareDiffuseSky } from '../../renderers/css/preparation/stars/diffuse-sky.js';
 import { encodePointFieldBank } from '../../renderers/css/preparation/stars/point-field-bank.js';
+import { preparePreparedAssetManifest } from '../../platform/runtime-asset-closure.mts';
 
 export async function prepareStarsObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory,'prepared'));
@@ -43,7 +44,11 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:'cssearth-css-point-field-bank@1',data};
   const bytes = Buffer.from(JSON.stringify(envelope)+'\n'), outputPath = resolve(outputDirectory,'stars.json');
   await writeFile(outputPath,bytes);
-  if (outputDirectory===resolve(objectDirectory,'prepared')) await writeFile(descriptorPath,JSON.stringify({...descriptor,prepared:{format:envelope.format,url:relative(objectDirectory,outputPath).split('\\').join('/'),sha256:sha256(bytes)}},null,2)+'\n');
+  if (outputDirectory===resolve(objectDirectory,'prepared')) {
+    await writeFile(descriptorPath,JSON.stringify({...descriptor,prepared:{format:envelope.format,url:relative(objectDirectory,outputPath).split('\\').join('/'),sha256:sha256(bytes)}},null,2)+'\n');
+    // stellar-neighbourhood has no runtime-assets.json, so the whole bake is the R2 inventory.
+    await preparePreparedAssetManifest({ planetId: id, preparedRoot: outputDirectory, manifestPath: resolve(objectDirectory, 'prepared-assets.json') });
+  }
   const magnitude = encoded.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   console.log(`PREPARED ${id}: ${encoded.bank.starCount} catalogue rows; ${encoded.bank.nodeCount} hierarchy nodes; ${bytes.length} manifest bytes; ${encoded.bytes.length} bank bytes; ${atlas.length} atlas bytes; magnitude error ${magnitude.measured} <= ${magnitude.bound} mag (pixel alpha <= ${magnitude.displayAlphaChange})`);
   return envelope;

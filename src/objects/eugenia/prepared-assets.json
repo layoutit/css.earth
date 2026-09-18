@@ -1,0 +1,16 @@
+{
+  "schema": "csseugenia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 765170,
+      "sha256": "1c1ae46b936eb10a834917188bfc72a5b6180fc798116c9bd91fe8dafb52d103"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620956,
+      "sha256": "4cebecaa7a073512543e15fb33062bbac0a1195fb49b544a1cbb12b8097583f5"
+    }
+  ]
+}

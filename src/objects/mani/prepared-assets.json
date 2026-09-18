@@ -1,0 +1,16 @@
+{
+  "schema": "cssmani-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 456536,
+      "sha256": "265c76bae07546a3777b6ef9cc4fef9b4583b49feeeb2d30af6ede44f7d5d48b"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 368285,
+      "sha256": "56608d17f432281d8dbfb882a4b92367182a849cbdff9ac715b567b99ec36b13"
+    }
+  ]
+}

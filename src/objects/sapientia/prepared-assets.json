@@ -1,0 +1,16 @@
+{
+  "schema": "csssapientia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 753180,
+      "sha256": "4c876018936c973ce039d106f2779ed58f128fd06159873f545b20b9af096f36"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 622716,
+      "sha256": "883f43921b5136fec926a985a464ae3fb1cfc1e047062eae9c836a70c65ef0e8"
+    }
+  ]
+}

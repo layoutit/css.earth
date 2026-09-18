@@ -1,0 +1,16 @@
+{
+  "schema": "csskallisto-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 752431,
+      "sha256": "dc2ba5b4f977875b064e1bcfe780cd463ef89599df07cdddc69a6bb5f5156e68"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 622251,
+      "sha256": "459947cca9681f0626eb96579d868e0bb3fea33d858dc13725fa3138b3bcd727"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssaurora-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 764927,
+      "sha256": "825bb71f2984308f47f92a9a78db0756a532454091f0b66a86254a3730fd2cc2"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 621092,
+      "sha256": "ad7cc73b11872f2e75dabdd33cde09ad01e9114166e01ef25fbca863e6edf3cc"
+    }
+  ]
+}

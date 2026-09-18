@@ -4,9 +4,9 @@ import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { runtimeAssets, setupObjectIds } from './runtime-assets.mts';
+import { preparedAssetObjectIds, preparedAssets, runtimeAssets, setupObjectIds } from './runtime-assets.mts';
 import { installRuntimeAssets } from './setup.mts';
-import { assembleRuntimeAssetClosure, validateRuntimeAssetManifest, verifyRuntimeAssetClosure } from '../src/platform/runtime-asset-closure.mts';
+import { assembleRuntimeAssetClosure, preparePreparedAssetManifest, validateRuntimeAssetManifest, verifyPreparedAssetClosure, verifyRuntimeAssetClosure } from '../src/platform/runtime-asset-closure.mts';
 
 const bytes = Buffer.from('prepared fixture');
 const sha256 = createHash('sha256').update(bytes).digest('hex');
@@ -76,4 +76,48 @@ test('prepared resources install public dataset previews under their declared pu
   assert.equal(await readFile(resolve(preparedRoot, 'undeclared.json'), 'utf8'), 'unexpected');
   await rm(resolve(preparedRoot, 'undeclared.json'));
   assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2 });
+});
+
+test('prepared-assets: default discovery scans src/objects/*, install restores runtime.json/scene.json byte-identically', async t => {
+  const root = await mkdtemp(resolve(tmpdir(), 'prepared-assets-setup-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  // A SCENE_OBJECTS-style body (runtime.json + scene.json) plus a context-style object (full nested closure) —
+  // both discovered without any hardcoded id list, and both untouched if no --object filter is given elsewhere.
+  const bodyDirectory = resolve(root, 'src/objects/fixture-body/prepared');
+  await mkdir(bodyDirectory, { recursive: true });
+  await writeFile(resolve(bodyDirectory, 'runtime.json'), 'runtime-bytes');
+  await writeFile(resolve(bodyDirectory, 'scene.json'), 'scene-bytes');
+  await writeFile(resolve(bodyDirectory, '..', 'provenance.json'), 'not inventoried, stays tracked');
+  await preparePreparedAssetManifest({ planetId: 'fixture-body', preparedRoot: bodyDirectory,
+    manifestPath: resolve(bodyDirectory, '..', 'prepared-assets.json'), filenames: ['runtime.json', 'scene.json'] });
+
+  const contextDirectory = resolve(root, 'src/objects/fixture-context/prepared/atlases');
+  await mkdir(contextDirectory, { recursive: true });
+  await writeFile(resolve(contextDirectory, 'x.webp'), 'atlas-bytes');
+  await preparePreparedAssetManifest({ planetId: 'fixture-context', preparedRoot: resolve(root, 'src/objects/fixture-context/prepared'),
+    manifestPath: resolve(root, 'src/objects/fixture-context/prepared-assets.json') });
+
+  assert.deepEqual(preparedAssetObjectIds([], root), ['fixture-body', 'fixture-context']);
+  assert.deepEqual(preparedAssetObjectIds(['--object=fixture-context'], root), ['fixture-context']);
+  assert.throws(() => preparedAssetObjectIds(['--object=missing-fixture'], root), /prepared-assets\.json inventory/);
+
+  const assets = await preparedAssets(root, ['fixture-body', 'fixture-context']);
+  assert.deepEqual(assets.map(a => a.filename).sort(), ['atlases/x.webp', 'runtime.json', 'scene.json']);
+  const bodyRuntimeAsset = assets.find(a => a.filename === 'runtime.json')!;
+  assert.equal(bodyRuntimeAsset.file, resolve(bodyDirectory, 'runtime.json'));
+  assert.equal(bodyRuntimeAsset.key, `runtime-assets/${bodyRuntimeAsset.sha256}/runtime.json`);
+
+  await rm(bodyDirectory, { recursive: true });
+  await mkdir(bodyDirectory, { recursive: true });
+  const contents: Record<string, string> = { 'runtime.json': 'runtime-bytes', 'scene.json': 'scene-bytes', 'atlases/x.webp': 'atlas-bytes' };
+  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async url => {
+    const asset = assets.find(a => a.url === String(url))!;
+    return new Response(contents[asset.filename]!);
+  } }), { installed: 2, reused: 1 });
+  assert.equal(await readFile(resolve(bodyDirectory, 'runtime.json'), 'utf8'), 'runtime-bytes');
+  assert.equal(await readFile(resolve(contextDirectory, 'x.webp'), 'utf8'), 'atlas-bytes');
+  // provenance.json (not inventoried) is untouched by prepared-assets install or verification.
+  assert.equal(await readFile(resolve(bodyDirectory, '..', 'provenance.json'), 'utf8'), 'not inventoried, stays tracked');
+  const manifest = JSON.parse(await readFile(resolve(bodyDirectory, '..', 'prepared-assets.json'), 'utf8'));
+  assert.equal(await verifyPreparedAssetClosure({ planetId: 'fixture-body', manifest, root: bodyDirectory, closure: false }), true);
 });

@@ -1,0 +1,16 @@
+{
+  "schema": "cssflora-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 761100,
+      "sha256": "05307ed24701d27431ea6f5f07406a858e54ddd8cc8f180733ed5cd914b002c7"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 618631,
+      "sha256": "a6008b6090c18dc4781ba3cb1adb894b1300730bd045baf98988d09a14e40221"
+    }
+  ]
+}
