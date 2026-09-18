@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-volume-recipe@1",
+  "grid": {
+    "path": "density-veil-2019-12.ktx2",
+    "sha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99",
+    "decodedSha256": "1df70577fd84e2854875a12103ad99ae7abd04f4264446687ce2b562fb2e87ed",
+    "dimensions": [
+      96,
+      96,
+      96
+    ],
+    "encoding": "sqrt-density-unorm8",
+    "bounds": {
+      "min": [
+        -6,
+        -6,
+        -6
+      ],
+      "max": [
+        6,
+        6,
+        6
+      ]
+    }
+  },
+  "material": {
+    "emission": [
+      {
+        "channel": 0,
+        "color": [
+          1,
+          0.82,
+          0.62
+        ],
+        "strength": 1
+      }
+    ],
+    "absorption": [],
+    "emissionTransfer": "shared-opacity",
+    "intensityScale": 1,
+    "stepScale": 1,
+    "stepMetric": "source",
+    "exposureGain": 2.5
+  },
+  "bake": {
+    "sliceCounts": {
+      "x": 24,
+      "y": 24,
+      "z": 24
+    },
+    "unitsPerSourceUnit": 1,
+    "imageWidth": 320,
+    "samplesPerSlab": 4,
+    "cropTransparent": true,
+    "opticalWeight": 1,
+    "imageEncoding": {
+      "format": "webp",
+      "quality": 90
+    }
+  },
+  "anchors": [
+    {
+      "id": "betelgeuse",
+      "referencePositionM": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+  }
+}

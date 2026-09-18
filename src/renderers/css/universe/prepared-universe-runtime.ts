@@ -119,6 +119,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       // Keep the background below every depth-sorted body in the isolated stage.
       root.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${-plan.bodies.length - 2}`;
       presentationHost.insertBefore(root, presentationHost.firstChild);
+      // A bank whose every voxel lies between the observer and the body it surrounds composites over the
+      // detail scene instead of behind it. Two flattened roots cannot interleave, so the payload declares
+      // which side its data is on and the universe mounts it there; nothing is reordered at runtime.
+      const frontRoot = document.createElement('div');
+      frontRoot.className = 'prepared-universe-front';
+      frontRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
+      presentationHost.appendChild(frontRoot);
+      const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
       const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
       const volumeHost = document.createElement('div');
       volumeHost.className = 'prepared-volume-context';
@@ -189,14 +197,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const bank of lensBanks) bank.destroy();
         additionalPoints.destroy();
         opacityClock.destroy();
-        root.remove();
+        root.remove(); frontRoot.remove();
         delete stage.dataset.contextScale;
       };
       try {
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         for (const bank of imageLayers) imageBanks.push(mountPreparedCssImageLayers({ host: root, before: end, ...bank }));
-        for (const bank of lensPlans) lensBanks.push(bank.mount({ host: root, before: end }));
+        for (const bank of lensPlans) lensBanks.push(bank.mount({ host: root, before: end, frontHost: frontRoot, frontBefore: frontEnd }));
         // Far layers leave layout, and so image loading, until a publication shows them.
         for (const bank of [...imageBanks, ...lensBanks]) bank.root.style.display = 'none';
         let galaxyPrefetched = false;

@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "betelgeuse-shell",
+  "name": "Betelgeuse dust shell",
+  "defaultLens": "zimpol-v",
+  "bank": {
+    "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
+    "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
+    "bytes": 162844
+  },
+  "recipes": [
+    {
+      "id": "zimpol-v",
+      "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
+      "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+      "bytes": 1387
+    },
+    {
+      "id": "veil-2019-12",
+      "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
+      "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
+      "bytes": 1399
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "lenses": [
+    {
+      "id": "zimpol-v",
+      "label": "SPHERE/ZIMPOL · polarised dust, 2024",
+      "title": "Polarised dust around Betelgeuse in 2024",
+      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+      "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.",
+      "detail": "1024 × 1024 px at 3.6 mas",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "VLT/SPHERE-ZIMPOL, V band, 3 December 2024"
+        },
+        {
+          "id": "resolution",
+          "label": "Angular resolution",
+          "value": "16 mas, 0.76 stellar radii"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "1 to 4.5 stellar radii, tapering to 6"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; a plane-of-sky slab spread by scattering angle"
+        }
+      ],
+      "input": "sphere-zimpol-betelgeuse-p1-v-dolp",
+      "preview": {
+        "path": "src/objects/betelgeuse-shell/source/previews/aa61023-26-fig3.jpg",
+        "sha256": "016094a65ecf21a125dc9e4f45625ecf4edf97ddfaa10cd9b955d64bb5cc3292",
+        "bytes": 323819,
+        "url": "https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg"
+      }
+    },
+    {
+      "id": "veil-2019-12",
+      "label": "Great Dimming clump · December 2019",
+      "title": "The dust clump of the Great Dimming",
+      "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
+      "summary": "A published model of the dust that dimmed the southern hemisphere in December 2019.",
+      "detail": "Sphere of 6.5 au at 13.0 au",
+      "facts": [
+        {
+          "id": "model",
+          "label": "Model",
+          "value": "RADMC-3D sphere of constant density, Montargès et al. 2021, Extended Data Table 3"
+        },
+        {
+          "id": "geometry",
+          "label": "Centre and radius",
+          "value": "(−1.9, −3.0, +12.5) au along right ascension, declination and toward Earth; radius 6.5 au"
+        },
+        {
+          "id": "density",
+          "label": "Dust density",
+          "value": "3.2 × 10⁻¹⁹ g cm⁻³ in MgFeSiO₄ grains centred on 0.21 µm"
+        },
+        {
+          "id": "epoch",
+          "label": "Epoch",
+          "value": "December 2019, the only optimised solution the paper reports"
+        }
+      ],
+      "input": "veil-2019-12-parameters",
+      "preview": {
+        "path": "src/objects/betelgeuse-shell/source/previews/eso2109a.jpg",
+        "sha256": "dc91807cd8b41719cc7e4cc310c99082d9ad02c49a08b51155bb00be2d1fbf17",
+        "bytes": 45713,
+        "url": "https://cdn.eso.org/images/screen/eso2109a.jpg",
+        "crop": {
+          "left": 320,
+          "top": 40,
+          "width": 318,
+          "height": 520
+        }
+      }
+    }
+  ]
+}

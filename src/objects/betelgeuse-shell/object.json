@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "betelgeuse-shell",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        108273570124094580,
+        5139556753316323000,
+        668312118652173600
+      ],
+      "localToReferenceXyzw": [
+        0.006950382848136284,
+        0.6599182058077769,
+        0.7512636334570914,
+        0.007912450098292433
+      ],
+      "metersPerUnit": 531514800000,
+      "boundsUnits": {
+        "min": [
+          -6,
+          -6,
+          -6
+        ],
+        "max": [
+          6,
+          6,
+          6
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json",
+      "sha256": "a22e5ca318f68b11ceb43b186d19373198aeb2ec06bb40f6594e2b3049a4864d"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa"
+  }
+}

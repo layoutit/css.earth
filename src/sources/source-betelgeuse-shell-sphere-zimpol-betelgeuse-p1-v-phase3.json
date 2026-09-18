@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-v-phase3",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse Shell · sphere zimpol betelgeuse p1 v phase3",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse-shell/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "scope": "The sphere zimpol betelgeuse p1 v phase3 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

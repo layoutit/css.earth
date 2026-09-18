@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "betelgeuse-shell",
+  "entries": [
+    {
+      "id": "lens-zimpol-v",
+      "subject": "VLT/SPHERE-ZIMPOL V-band degree of linear polarisation, 3 December 2024 (ESO Phase 3 collection BETELGEUSE-B)",
+      "status": "included",
+      "finding": "The ancillary degree-of-linear-polarisation map released beside the V-band intensity resolves patches of scattered light from one to about 4.5 stellar radii, which Kervella et al. 2016 and the release paper attribute to dust. Its instrumental floor, measured between eight and twelve stellar radii on the map itself, is 0.55 percent, and the patches reach about 5 percent. The map is drawn as a plane-of-sky slab spread along the line of sight by the scattering-angle efficiency of polarised light, which is the convention of the papers that publish such maps; no depth was observed.",
+      "evidence": [
+        "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+        "https://doi.org/10.1051/0004-6361/202661023",
+        "https://doi.org/10.1051/0004-6361/201527134"
+      ],
+      "checked": [{ "date": "2026-09-18", "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da" }]
+    },
+    {
+      "id": "lens-veil-2019-12",
+      "subject": "The December 2019 RADMC-3D dust clump of Montarg\u00e8s et al. 2021, Nature 594, 365",
+      "status": "included",
+      "finding": "Extended Data Table 3 publishes the optimised December 2019 solution in full: a sphere of radius 6.5 au centred at (-1.9, -3.0, +12.5) au, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres, in the coordinate system Extended Data Figure 6 defines as right ascension, declination and toward Earth. Those numbers place the clump south and slightly west of the star and between it and us, which is the hemisphere that dimmed. It is drawn as starlight scattered by that dust; the published density is uniform, so only the illumination varies across it. The January and March 2020 solutions in the same table are recorded by the authors as unoptimised best guesses and are not shipped.",
+      "evidence": [
+        "https://doi.org/10.1038/s41586-021-03546-8",
+        "https://arxiv.org/abs/2201.10551",
+        "https://www.eso.org/public/images/eso2109a/"
+      ],
+      "checked": [{ "date": "2026-09-18", "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da" }]
+    },
+    {
+      "id": "n-i-polarisation",
+      "subject": "The N_I pair of the same ESO release",
+      "status": "excluded",
+      "finding": "The N_I degree map carries three times the polarised signal of the V map, but it sits in a tight ring at the limb, which is what a resolved disc's own edge produces, rather than in the envelope one to 4.5 radii out. Measured on the released products, in the ring one to 1.5 stellar radii out the mean degree is 0.037 against 0.014 for V, and inside half a radius 0.048 against 0.028; beyond about five radii both fall to their instrumental floor near 0.008.",
+      "evidence": [
+        "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
+      ],
+      "revisitWhen": "A published separation of the limb polarisation from the envelope in this filter, or a deeper N_I epoch.",
+      "checked": [{ "date": "2026-09-18", "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da" }]
+    },
+    {
+      "id": "occultation-by-absorption",
+      "subject": "Drawing the clump as extinction of the photosphere rather than as scattered light",
+      "status": "deferred",
+      "finding": "The clump is optically thick enough in the visible to dim the star, which is what the Great Dimming was. The renderer composites the volume and the body as two flattened roots, so a lens can be ordered in front of the body but cannot absorb its light; the clump therefore covers the star's disc with its own scattered light instead of extinguishing it. Ordering is exact here because every voxel of this clump stands clear of the photosphere in depth, which preparation checks.",
+      "evidence": [
+        "https://arxiv.org/abs/2201.10551",
+        "https://drafts.csswg.org/css-transforms-2/#3d-rendering-contexts"
+      ],
+      "revisitWhen": "The body is drawn inside the volume's own three-dimensional context, so that leaves and faces intersect per pixel.",
+      "checked": [{ "date": "2026-09-18", "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da" }]
+    }
+  ]
+}

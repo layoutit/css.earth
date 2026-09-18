@@ -1,0 +1,87 @@
+{
+  "schema": "cssearth-volume-presentation@1",
+  "objectId": "betelgeuse-shell",
+  "controls": [
+    {
+      "id": "zimpol-v",
+      "label": "SPHERE/ZIMPOL · polarised dust, 2024",
+      "title": "Polarised dust around Betelgeuse in 2024",
+      "thumbnailUrl": "/scenes/betelgeuse-shell/datasets/d835c72c3d593434e9d81abd7a4cf690ccebcac958a23561119343ad628d2234.webp",
+      "texture": {
+        "url": "/scenes/betelgeuse-shell/datasets/d835c72c3d593434e9d81abd7a4cf690ccebcac958a23561119343ad628d2234.webp",
+        "width": 768,
+        "height": 573,
+        "attribution": {
+          "label": "ESO/VLT/SPHERE-ZIMPOL",
+          "url": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
+        }
+      },
+      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+      "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.",
+      "detail": "1024 × 1024 px at 3.6 mas",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "VLT/SPHERE-ZIMPOL, V band, 3 December 2024"
+        },
+        {
+          "id": "resolution",
+          "label": "Angular resolution",
+          "value": "16 mas, 0.76 stellar radii"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "1 to 4.5 stellar radii, tapering to 6"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; a plane-of-sky slab spread by scattering angle"
+        }
+      ]
+    },
+    {
+      "id": "veil-2019-12",
+      "label": "Great Dimming clump · December 2019",
+      "title": "The dust clump of the Great Dimming",
+      "thumbnailUrl": "/scenes/betelgeuse-shell/datasets/4a9fc9ff8de22b2cf9dee11c518898810e7352ac840893d0b7ce7e02e2495e8c.webp",
+      "texture": {
+        "url": "/scenes/betelgeuse-shell/datasets/4a9fc9ff8de22b2cf9dee11c518898810e7352ac840893d0b7ce7e02e2495e8c.webp",
+        "width": 318,
+        "height": 520,
+        "attribution": {
+          "label": "Montargès et al. (2021)",
+          "url": "https://arxiv.org/abs/2201.10551"
+        }
+      },
+      "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
+      "summary": "A published model of the dust that dimmed the southern hemisphere in December 2019.",
+      "detail": "Sphere of 6.5 au at 13.0 au",
+      "facts": [
+        {
+          "id": "model",
+          "label": "Model",
+          "value": "RADMC-3D sphere of constant density, Montargès et al. 2021, Extended Data Table 3"
+        },
+        {
+          "id": "geometry",
+          "label": "Centre and radius",
+          "value": "(−1.9, −3.0, +12.5) au along right ascension, declination and toward Earth; radius 6.5 au"
+        },
+        {
+          "id": "density",
+          "label": "Dust density",
+          "value": "3.2 × 10⁻¹⁹ g cm⁻³ in MgFeSiO₄ grains centred on 0.21 µm"
+        },
+        {
+          "id": "epoch",
+          "label": "Epoch",
+          "value": "December 2019, the only optimised solution the paper reports"
+        }
+      ]
+    }
+  ],
+  "defaultLens": "zimpol-v"
+}

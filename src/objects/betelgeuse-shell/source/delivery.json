@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "betelgeuse-shell",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
+    "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/betelgeuse-shell/source/provenance.json",
+      "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+    },
+    {
+      "path": "src/objects/betelgeuse-shell/source/density-zimpol-v.ktx2",
+      "sha256": "31937584c22188442817a594e6922aade689a85206f1b00d5a9e5af9b16fa872"
+    },
+    {
+      "path": "src/objects/betelgeuse-shell/source/density-veil-2019-12.ktx2",
+      "sha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      88.79314473841248,
+      7.407147711522079
+    ],
+    "distancePc": 168.00059762989528,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.021148478264358558
+  },
+  "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+  "description": "Dust around Betelgeuse in two datasets that share one frame: the degree of linear polarisation measured by VLT/SPHERE-ZIMPOL on 3 December 2024, and the dust clump Montargès et al. fitted to the Great Dimming of December 2019. One unit is one stellar radius; the depth of each is a stated model, not a measurement.",
+  "defaultLens": "zimpol-v",
+  "framingRadiusUnits": 6,
+  "acceptedLabResult": "betelgeuse-shell-two-grids",
+  "compactInputs": {
+    "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
+    "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "zimpol-v",
+      "label": "SPHERE/ZIMPOL · polarised dust, 2024",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "recipe": {
+        "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
+        "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4"
+      }
+    },
+    {
+      "id": "veil-2019-12",
+      "label": "Great Dimming clump · December 2019",
+      "sourceUrl": "https://arxiv.org/abs/2201.10551",
+      "recipe": {
+        "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
+        "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f"
+      },
+      "occultingCentreUnits": [
+        0.5347658321649745,
+        -0.8443671034183808,
+        -3.5181962642432536
+      ]
+    }
+  ]
+}

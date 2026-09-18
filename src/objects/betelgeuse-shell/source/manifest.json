@@ -1,0 +1,270 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-n-i-dolp",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-n-i-dolp",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_N_I_DOLP.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.648",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.648",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.648. N_I degree of linear polarisation, retained for comparison and not drawn.",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "expectedSha256": "9198ce56b85ea829347d12a69e63b9e7113efc240c461af0c3010c21b55c5af7",
+      "expectedBytes": 8455680
+    },
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-n-i-phase3",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-n-i-phase3",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_N_I_phase3.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.647",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.647",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.647. N_I pipeline intensity, retained for comparison and not drawn.",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "expectedSha256": "50acda00ac3cde75cde275504c90849d33e6f975e4b4e0ac2e98dc40c9e92bb3",
+      "expectedBytes": 8458560
+    },
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-v-dolp",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-v-dolp",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/2"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.656",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.656",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.656. V-band degree of linear polarisation; the quantity the 2024 lens carries.",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "lensId": "zimpol-v",
+      "expectedSha256": "0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687",
+      "expectedBytes": 8455680
+    },
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-v-phase3",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-v-phase3",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_phase3.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.655",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.655. V-band pipeline intensity; the star centre and the intensity floor are measured on it.",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "expectedSha256": "b40cfcb32103c99c5de9f77588519bbb6c9322eb250d7bc9756339fee8abd8eb",
+      "expectedBytes": 8458560
+    },
+    {
+      "id": "preview-zimpol-v",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-preview-zimpol-v",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/previews/aa61023-26-fig3.jpg",
+      "origin": "https://doi.org/10.1051/0004-6361/202661023",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361/202661023",
+      "title": "Degree of linear polarisation around Betelgeuse, V band, 3 December 2024",
+      "credit": "Montargès et al. 2026, A&A 711, L12, Fig. B.1; ESO/VLT/SPHERE-ZIMPOL",
+      "displayCredit": "Montargès et al. 2026, A&A 711, L12, Fig. B.1; ESO/VLT/SPHERE-ZIMPOL",
+      "acquisition": "Publisher figure downloaded unchanged from https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg; preparation resizes it into this object's dataset preview.",
+      "license": "CC-BY-4.0. Open access under the Creative Commons Attribution 4.0 International licence; retain the citation.",
+      "expectedSha256": "016094a65ecf21a125dc9e4f45625ecf4edf97ddfaa10cd9b955d64bb5cc3292",
+      "expectedBytes": 323819
+    },
+    {
+      "id": "preview-veil-2019-12",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-preview-veil-2019-12",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/previews/eso2109a.jpg",
+      "origin": "https://www.eso.org/public/images/eso2109a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso2109a/",
+      "title": "Betelgeuse’s surface before and during its 2019–2020 Great Dimming",
+      "credit": "ESO/M. Montargès et al.",
+      "displayCredit": "ESO/M. Montargès et al.",
+      "acquisition": "Publisher figure downloaded unchanged from https://cdn.eso.org/images/screen/eso2109a.jpg; preparation resizes it into this object's dataset preview.",
+      "license": "CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit.",
+      "expectedSha256": "dc91807cd8b41719cc7e4cc310c99082d9ad02c49a08b51155bb00be2d1fbf17",
+      "expectedBytes": 45713
+    },
+    {
+      "id": "veil-2019-12-parameters",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-veil-2019-12-parameters",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/veil-2019-12-parameters.json",
+      "origin": "https://doi.org/10.1038/s41586-021-03546-8",
+      "sourceUrl": "https://arxiv.org/abs/2201.10551",
+      "title": "Montargès et al. 2021 · December 2019 dust clump parameters",
+      "credit": "Montargès et al. 2021, Nature 594, 365, Extended Data Table 3 and Figure 6",
+      "displayCredit": "Montargès et al. (2021)",
+      "acquisition": "The published December 2019 clump geometry, density, composition and grain size, transcribed from the paper with its coordinate convention. This record identifies the transcription; the paper is the source.",
+      "license": "Published numbers cited under normal scholarly citation; the paper is not redistributed here.",
+      "lensId": "veil-2019-12",
+      "expectedSha256": "a79a54e7124a36cef7a7e4c09e6fbd6b80b70349506700c21d007ef00d547ff3",
+      "expectedBytes": 1155
+    }
+  ],
+  "documents": [
+    {
+      "id": "delivery-json",
+      "path": "src/objects/betelgeuse-shell/source/delivery.json",
+      "expectedSha256": "a22e5ca318f68b11ceb43b186d19373198aeb2ec06bb40f6594e2b3049a4864d",
+      "expectedBytes": 2624,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "nebula-json",
+      "path": "src/objects/betelgeuse-shell/source/nebula.json",
+      "expectedSha256": "796a1f71aac4d4f6ce9f6242ed82d7445b71326dfc344c164477c75b6eded2b2",
+      "expectedBytes": 1992,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "release-description",
+      "path": "src/objects/betelgeuse-shell/source/observations/BETELGEUSE-B-release-description.pdf",
+      "expectedSha256": "66e85b89175b4539a5299f890ed1eee2eda77e9ef128460e165db42289ab01b4",
+      "expectedBytes": 68728,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The ESO Phase 3 release description of the collection, retained beside the products it describes."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/betelgeuse-shell/source/presentation.json",
+      "expectedSha256": "7957e5d91c5e0be832dfe251948a09647241c9cb5f4cec38d81208858e80b50d",
+      "expectedBytes": 4423,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/betelgeuse-shell/source/provenance.json",
+      "expectedSha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4",
+      "expectedBytes": 5084,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-veil-2019-12-ktx2",
+      "path": "src/objects/betelgeuse-shell/source/density-veil-2019-12.ktx2",
+      "expectedSha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99",
+      "expectedBytes": 7845,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    },
+    {
+      "id": "density-zimpol-v-ktx2",
+      "path": "src/objects/betelgeuse-shell/source/density-zimpol-v.ktx2",
+      "expectedSha256": "31937584c22188442817a594e6922aade689a85206f1b00d5a9e5af9b16fa872",
+      "expectedBytes": 194614,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    },
+    {
+      "id": "volume-veil-2019-12-json",
+      "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
+      "expectedSha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
+      "expectedBytes": 1399,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    },
+    {
+      "id": "volume-zimpol-v-json",
+      "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
+      "expectedSha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+      "expectedBytes": 1387,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    }
+  ]
+}

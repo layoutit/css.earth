@@ -1,0 +1,582 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "betelgeuse-shell",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "fa25c0ce8aa373e04d82b2447ad2e5922637453e6dce9998c1e97f06679ce23c"
+  },
+  "generator": {
+    "path": "tools/prepare-volume-provenance.mts",
+    "sha256": "8c90d087eb5aa0ff68d5acd1e6ace90a1dd5fc85860528f4a14f6b9811ef7b38",
+    "bindingsSha256": "199c0711782690ae512b43b439e99bb9b3c35e38819653582432970adcd3932a"
+  },
+  "sources": [
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-n-i-dolp",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_N_I_DOLP.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.648",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.648",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.648. N_I degree of linear polarisation, retained for comparison and not drawn.",
+      "sha256": "9198ce56b85ea829347d12a69e63b9e7113efc240c461af0c3010c21b55c5af7",
+      "bytes": 8455680,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-n-i-dolp",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation."
+    },
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-n-i-phase3",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_N_I_phase3.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.647",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.647",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.647. N_I pipeline intensity, retained for comparison and not drawn.",
+      "sha256": "50acda00ac3cde75cde275504c90849d33e6f975e4b4e0ac2e98dc40c9e92bb3",
+      "bytes": 8458560,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-n-i-phase3",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation."
+    },
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-v-dolp",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.656",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.656",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.656. V-band degree of linear polarisation; the quantity the 2024 lens carries.",
+      "sha256": "0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687",
+      "bytes": 8455680,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-v-dolp",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/2"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "lensId": "zimpol-v",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation."
+    },
+    {
+      "id": "sphere-zimpol-betelgeuse-p1-v-phase3",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_phase3.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655",
+      "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+      "title": "ESO Phase 3 BETELGEUSE-B · ADP.2026-08-19T13:19:07.655",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.655. V-band pipeline intensity; the star centre and the intensity floor are measured on it.",
+      "sha256": "b40cfcb32103c99c5de9f77588519bbb6c9322eb250d7bc9756339fee8abd8eb",
+      "bytes": 8458560,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-v-phase3",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation."
+    },
+    {
+      "id": "preview-zimpol-v",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/previews/aa61023-26-fig3.jpg",
+      "origin": "https://doi.org/10.1051/0004-6361/202661023",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361/202661023",
+      "title": "Degree of linear polarisation around Betelgeuse, V band, 3 December 2024",
+      "credit": "Montargès et al. 2026, A&A 711, L12, Fig. B.1; ESO/VLT/SPHERE-ZIMPOL",
+      "acquisition": "Publisher figure downloaded unchanged from https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg; preparation resizes it into this object's dataset preview.",
+      "sha256": "016094a65ecf21a125dc9e4f45625ecf4edf97ddfaa10cd9b955d64bb5cc3292",
+      "bytes": 323819,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-preview-zimpol-v",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "displayCredit": "Montargès et al. 2026, A&A 711, L12, Fig. B.1; ESO/VLT/SPHERE-ZIMPOL",
+      "license": "CC-BY-4.0. Open access under the Creative Commons Attribution 4.0 International licence; retain the citation."
+    },
+    {
+      "id": "preview-veil-2019-12",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/previews/eso2109a.jpg",
+      "origin": "https://www.eso.org/public/images/eso2109a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso2109a/",
+      "title": "Betelgeuse’s surface before and during its 2019–2020 Great Dimming",
+      "credit": "ESO/M. Montargès et al.",
+      "acquisition": "Publisher figure downloaded unchanged from https://cdn.eso.org/images/screen/eso2109a.jpg; preparation resizes it into this object's dataset preview.",
+      "sha256": "dc91807cd8b41719cc7e4cc310c99082d9ad02c49a08b51155bb00be2d1fbf17",
+      "bytes": 45713,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-preview-veil-2019-12",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "displayCredit": "ESO/M. Montargès et al.",
+      "license": "CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit."
+    },
+    {
+      "id": "veil-2019-12-parameters",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/veil-2019-12-parameters.json",
+      "origin": "https://doi.org/10.1038/s41586-021-03546-8",
+      "sourceUrl": "https://arxiv.org/abs/2201.10551",
+      "title": "Montargès et al. 2021 · December 2019 dust clump parameters",
+      "credit": "Montargès et al. 2021, Nature 594, 365, Extended Data Table 3 and Figure 6",
+      "acquisition": "The published December 2019 clump geometry, density, composition and grain size, transcribed from the paper with its coordinate convention. This record identifies the transcription; the paper is the source.",
+      "sha256": "a79a54e7124a36cef7a7e4c09e6fbd6b80b70349506700c21d007ef00d547ff3",
+      "bytes": 1155,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-veil-2019-12-parameters",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "lensId": "veil-2019-12",
+      "displayCredit": "Montargès et al. (2021)",
+      "license": "Published numbers cited under normal scholarly citation; the paper is not redistributed here."
+    }
+  ],
+  "recipes": [
+    {
+      "id": "presentation",
+      "path": "src/objects/betelgeuse-shell/source/presentation.json",
+      "sha256": "7957e5d91c5e0be832dfe251948a09647241c9cb5f4cec38d81208858e80b50d",
+      "parameters": {
+        "schema": "cssearth-volume-presentation-source@1",
+        "objectId": "betelgeuse-shell",
+        "name": "Betelgeuse dust shell",
+        "defaultLens": "zimpol-v",
+        "bank": {
+          "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
+          "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
+          "bytes": 162844
+        },
+        "recipes": [
+          {
+            "id": "zimpol-v",
+            "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
+            "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+            "bytes": 1387
+          },
+          {
+            "id": "veil-2019-12",
+            "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
+            "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
+            "bytes": 1399
+          }
+        ],
+        "sharedInputs": [],
+        "inputEvidence": [],
+        "lenses": [
+          {
+            "id": "zimpol-v",
+            "label": "SPHERE/ZIMPOL · polarised dust, 2024",
+            "title": "Polarised dust around Betelgeuse in 2024",
+            "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+            "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.",
+            "detail": "1024 × 1024 px at 3.6 mas",
+            "facts": [
+              {
+                "id": "instrument",
+                "label": "Instrument",
+                "value": "VLT/SPHERE-ZIMPOL, V band, 3 December 2024"
+              },
+              {
+                "id": "resolution",
+                "label": "Angular resolution",
+                "value": "16 mas, 0.76 stellar radii"
+              },
+              {
+                "id": "extent",
+                "label": "Drawn extent",
+                "value": "1 to 4.5 stellar radii, tapering to 6"
+              },
+              {
+                "id": "depth",
+                "label": "Depth",
+                "value": "Not measured; a plane-of-sky slab spread by scattering angle"
+              }
+            ],
+            "input": "sphere-zimpol-betelgeuse-p1-v-dolp",
+            "preview": {
+              "path": "src/objects/betelgeuse-shell/source/previews/aa61023-26-fig3.jpg",
+              "sha256": "016094a65ecf21a125dc9e4f45625ecf4edf97ddfaa10cd9b955d64bb5cc3292",
+              "bytes": 323819,
+              "url": "https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg"
+            }
+          },
+          {
+            "id": "veil-2019-12",
+            "label": "Great Dimming clump · December 2019",
+            "title": "The dust clump of the Great Dimming",
+            "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
+            "summary": "A published model of the dust that dimmed the southern hemisphere in December 2019.",
+            "detail": "Sphere of 6.5 au at 13.0 au",
+            "facts": [
+              {
+                "id": "model",
+                "label": "Model",
+                "value": "RADMC-3D sphere of constant density, Montargès et al. 2021, Extended Data Table 3"
+              },
+              {
+                "id": "geometry",
+                "label": "Centre and radius",
+                "value": "(−1.9, −3.0, +12.5) au along right ascension, declination and toward Earth; radius 6.5 au"
+              },
+              {
+                "id": "density",
+                "label": "Dust density",
+                "value": "3.2 × 10⁻¹⁹ g cm⁻³ in MgFeSiO₄ grains centred on 0.21 µm"
+              },
+              {
+                "id": "epoch",
+                "label": "Epoch",
+                "value": "December 2019, the only optimised solution the paper reports"
+              }
+            ],
+            "input": "veil-2019-12-parameters",
+            "preview": {
+              "path": "src/objects/betelgeuse-shell/source/previews/eso2109a.jpg",
+              "sha256": "dc91807cd8b41719cc7e4cc310c99082d9ad02c49a08b51155bb00be2d1fbf17",
+              "bytes": 45713,
+              "url": "https://cdn.eso.org/images/screen/eso2109a.jpg",
+              "crop": {
+                "left": 320,
+                "top": 40,
+                "width": 318,
+                "height": 520
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "zimpol-v",
+      "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
+      "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+      "parameters": {
+        "schema": "cssearth-volume-recipe@1",
+        "grid": {
+          "path": "density-zimpol-v.ktx2",
+          "sha256": "31937584c22188442817a594e6922aade689a85206f1b00d5a9e5af9b16fa872",
+          "decodedSha256": "31ce0ed952d811e4f1168ea1718c7e5c36b50819f26637dd1f4adf876d09d4c9",
+          "dimensions": [
+            96,
+            96,
+            96
+          ],
+          "encoding": "sqrt-density-unorm8",
+          "bounds": {
+            "min": [
+              -6,
+              -6,
+              -6
+            ],
+            "max": [
+              6,
+              6,
+              6
+            ]
+          }
+        },
+        "material": {
+          "emission": [
+            {
+              "channel": 0,
+              "color": [
+                1,
+                1,
+                1
+              ],
+              "strength": 1
+            }
+          ],
+          "absorption": [],
+          "emissionTransfer": "shared-opacity",
+          "intensityScale": 1,
+          "stepScale": 1,
+          "stepMetric": "source",
+          "exposureGain": 4
+        },
+        "bake": {
+          "sliceCounts": {
+            "x": 24,
+            "y": 24,
+            "z": 24
+          },
+          "unitsPerSourceUnit": 1,
+          "imageWidth": 320,
+          "samplesPerSlab": 4,
+          "cropTransparent": true,
+          "opticalWeight": 1,
+          "imageEncoding": {
+            "format": "webp",
+            "quality": 90
+          }
+        },
+        "anchors": [
+          {
+            "id": "betelgeuse",
+            "referencePositionM": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "provenance": {
+          "path": "provenance.json",
+          "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+        }
+      }
+    },
+    {
+      "id": "veil-2019-12",
+      "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
+      "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
+      "parameters": {
+        "schema": "cssearth-volume-recipe@1",
+        "grid": {
+          "path": "density-veil-2019-12.ktx2",
+          "sha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99",
+          "decodedSha256": "1df70577fd84e2854875a12103ad99ae7abd04f4264446687ce2b562fb2e87ed",
+          "dimensions": [
+            96,
+            96,
+            96
+          ],
+          "encoding": "sqrt-density-unorm8",
+          "bounds": {
+            "min": [
+              -6,
+              -6,
+              -6
+            ],
+            "max": [
+              6,
+              6,
+              6
+            ]
+          }
+        },
+        "material": {
+          "emission": [
+            {
+              "channel": 0,
+              "color": [
+                1,
+                0.82,
+                0.62
+              ],
+              "strength": 1
+            }
+          ],
+          "absorption": [],
+          "emissionTransfer": "shared-opacity",
+          "intensityScale": 1,
+          "stepScale": 1,
+          "stepMetric": "source",
+          "exposureGain": 2.5
+        },
+        "bake": {
+          "sliceCounts": {
+            "x": 24,
+            "y": 24,
+            "z": 24
+          },
+          "unitsPerSourceUnit": 1,
+          "imageWidth": 320,
+          "samplesPerSlab": 4,
+          "cropTransparent": true,
+          "opticalWeight": 1,
+          "imageEncoding": {
+            "format": "webp",
+            "quality": 90
+          }
+        },
+        "anchors": [
+          {
+            "id": "betelgeuse",
+            "referencePositionM": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "provenance": {
+          "path": "provenance.json",
+          "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+        }
+      }
+    }
+  ],
+  "products": [
+    {
+      "id": "zimpol-v",
+      "label": "SPHERE/ZIMPOL · polarised dust, 2024",
+      "process": "Apply the pinned source image to the shared prepared volume field; preserve the saved reconstruction and display settings.",
+      "recipe": "presentation",
+      "selector": "/lenses/0",
+      "recipeDependencies": [
+        "presentation",
+        "zimpol-v",
+        "veil-2019-12"
+      ],
+      "inputs": [
+        "sphere-zimpol-betelgeuse-p1-v-dolp"
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "sphere-zimpol-betelgeuse-p1-v-dolp",
+          "role": "appearance",
+          "evidence": "Selected image at source/presentation.json#/lenses/0/input."
+        }
+      ],
+      "parents": [],
+      "lensIds": [
+        "zimpol-v"
+      ],
+      "observationAttribution": "source-lineage",
+      "interpretation": {
+        "kind": "observation-conditioned-volume",
+        "sourceKind": "published-display-image"
+      },
+      "limitations": [
+        "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+        "1024 × 1024 px at 3.6 mas"
+      ],
+      "outputs": [
+        {
+          "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
+          "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
+          "bytes": 162844,
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse-shell/datasets/d835c72c3d593434e9d81abd7a4cf690ccebcac958a23561119343ad628d2234.webp",
+          "sha256": "d835c72c3d593434e9d81abd7a4cf690ccebcac958a23561119343ad628d2234",
+          "bytes": 19306,
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "veil-2019-12",
+      "label": "Great Dimming clump · December 2019",
+      "process": "Apply the pinned source image to the shared prepared volume field; preserve the saved reconstruction and display settings.",
+      "recipe": "presentation",
+      "selector": "/lenses/1",
+      "recipeDependencies": [
+        "presentation",
+        "zimpol-v",
+        "veil-2019-12"
+      ],
+      "inputs": [
+        "veil-2019-12-parameters"
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "veil-2019-12-parameters",
+          "role": "appearance",
+          "evidence": "Selected image at source/presentation.json#/lenses/1/input."
+        }
+      ],
+      "parents": [],
+      "lensIds": [
+        "veil-2019-12"
+      ],
+      "observationAttribution": "source-lineage",
+      "interpretation": {
+        "kind": "observation-conditioned-volume",
+        "sourceKind": "published-display-image"
+      },
+      "limitations": [
+        "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
+        "Sphere of 6.5 au at 13.0 au"
+      ],
+      "outputs": [
+        {
+          "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
+          "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
+          "bytes": 162844,
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse-shell/datasets/4a9fc9ff8de22b2cf9dee11c518898810e7352ac840893d0b7ce7e02e2495e8c.webp",
+          "sha256": "4a9fc9ff8de22b2cf9dee11c518898810e7352ac840893d0b7ce7e02e2495e8c",
+          "bytes": 1870,
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": [
+      "Native source identities are recovered from checked-in pins; this metadata preparation does not rerun or scientifically validate the reconstruction."
+    ]
+  }
+}

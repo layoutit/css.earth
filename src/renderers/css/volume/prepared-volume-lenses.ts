@@ -8,6 +8,7 @@ import { DEFAULT_POINT_VISIBILITY, projectedVolumeOpacity, projectedVolumeRadius
 import { nativeProjectedFade } from '../rendering/native-projection.js';
 import type { PreparedPointVisibility } from './projected-volume-visibility.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
+import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { mountPreparedCataloguePoints, samePreparedCatalogueGeometry, samePreparedPhysicalFrame,
   validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 import type { PreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
@@ -22,6 +23,10 @@ export interface PreparedVolumeLens {
   readonly volume: PreparedCssVolume;
   readonly brightness: PreparedVolumeLensBrightness;
   readonly stars: PreparedCataloguePoints;
+  /** The centre of a compact structure that can pass in front of the body at the middle of this frame. The bank
+   * composites this lens over the detail scene while that centre is nearer to the camera than the body, and behind
+   * it otherwise. Omitted for a lens whose emission surrounds the body, which always composites behind it. */
+  readonly occultingCentreUnits?: readonly [number, number, number];
 }
 export type { PreparedPointVisibility };
 export interface PreparedVolumeLenses {
@@ -78,7 +83,9 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
   const ids = new Set<string>(), resources = new Map<string, string>();
   const lenses = value.lenses.map(lens => {
     if (!lens || !validId(lens.id) || ids.has(lens.id) || [lens.label, lens.title, lens.description].some(text => typeof text !== 'string' || !text.trim()) ||
-        typeof lens.sourceUrl !== 'string' || !/^https:\/\//u.test(lens.sourceUrl)) throw new TypeError('Prepared volume lens content is invalid.');
+        typeof lens.sourceUrl !== 'string' || !/^https:\/\//u.test(lens.sourceUrl) ||
+        (lens.occultingCentreUnits !== undefined && (!Array.isArray(lens.occultingCentreUnits) ||
+          lens.occultingCentreUnits.length !== 3 || !lens.occultingCentreUnits.every(Number.isFinite)))) throw new TypeError('Prepared volume lens content is invalid.');
     ids.add(lens.id);
     const volume = validatePreparedCssVolume(lens.volume), stars = validatePreparedCataloguePoints(lens.stars);
     if (!samePreparedPhysicalFrame(volume.frame, stars.frame)) throw new TypeError('Prepared volume and catalogue must share a physical frame.');
@@ -93,7 +100,8 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
       resources.set(resource.path, resource.sha256);
     }
     return Object.freeze({ id: lens.id, label: lens.label, title: lens.title, description: lens.description,
-      sourceUrl: lens.sourceUrl, volume, stars, brightness: Object.freeze({ ...lens.brightness }) });
+      sourceUrl: lens.sourceUrl, volume, stars, brightness: Object.freeze({ ...lens.brightness }),
+      ...(lens.occultingCentreUnits === undefined ? {} : { occultingCentreUnits: Object.freeze([...lens.occultingCentreUnits] as [number, number, number]) }) });
   });
   if (!ids.has(value.defaultLens)) throw new TypeError('Prepared default volume lens is unavailable.');
   if (lenses.some(lens => !samePreparedCatalogueGeometry(lenses[0].stars, lens.stars))) {
@@ -143,7 +151,9 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
     return url;
   };
   return Object.freeze({ assets, payload: data,
-    mount({ host, before, nativeFocalCss }: { host: HTMLElement; before: Element; nativeFocalCss?: string }) {
+    mount({ host, before, frontHost, frontBefore, nativeFocalCss }: { host: HTMLElement; before: Element;
+      /** Where a lens whose data lies wholly between the observer and the body composites; without it every lens stays behind. */
+      frontHost?: HTMLElement; frontBefore?: Element; nativeFocalCss?: string }) {
       const document = host.ownerDocument;
       const existing = [...document.querySelectorAll<HTMLElement>('.prepared-volume-lenses[data-prepared-volume-node="0"]')].find(root => root.dataset.volumeLensObject === data.id) ?? null;
       const dom = preparedDomAdoption(document, existing, nativeFocalCss !== undefined), create = dom.create;
@@ -152,6 +162,14 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
       root.className = 'prepared-volume-lenses'; root.dataset.volumeLensObject = data.id;
       Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none' });
       const end = create('span'); end.hidden = true; root.append(end);
+      const frontLenses = frontHost && frontBefore ? data.lenses.filter(lens => lens.occultingCentreUnits !== undefined).length : 0;
+      const frontRoot = frontLenses ? create('div') : null;
+      if (frontRoot) {
+        frontRoot.className = 'prepared-volume-lenses-front'; frontRoot.dataset.volumeLensObject = data.id;
+        Object.assign(frontRoot.style, { position: 'absolute', inset: '0', pointerEvents: 'none' });
+      }
+      const frontEnd = frontRoot ? create('span') : null;
+      if (frontRoot && frontEnd) { frontEnd.hidden = true; frontRoot.append(frontEnd); }
       let selected = data.lenses.some(lens => lens.id === selectedNative) ? selectedNative! : data.defaultLens, destroyed = false, latest: VolumeCameraPublication | null = null;
       const nativeStars = existing ? [...document.querySelectorAll<HTMLInputElement>('[data-focus-lens-bank] [data-focus-stars]')]
         .find(input => input.closest<HTMLElement>('[data-focus-lens-bank]')?.dataset.focusLensBank === data.id) : null;
@@ -167,7 +185,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
       const destroy = () => {
         if (destroyed) return; destroyed = true; latest = null; listeners.clear();
         for (const bank of banks) bank.runtime.destroy();
-        stars?.destroy(); root.remove();
+        stars?.destroy(); root.remove(); frontRoot?.remove();
       };
       const publish = (publication: VolumeCameraPublication, visible = true) => {
         if (destroyed) return;
@@ -176,6 +194,16 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         latest = visible ? publication : null;
         if (!visible) return;
         const bank = banks.find(candidate => candidate.lens.id === selected)!;
+        // A compact structure passes in front of the body and behind it as the camera goes round. Two flattened
+        // roots cannot interleave, so the whole surface moves to the side its centre is on; that is exact while the
+        // structure stays clear of the body's silhouette in depth, which is why only a compact lens declares one.
+        const centre = bank.lens.occultingCentreUnits;
+        if (centre && frontRoot && frontEnd) {
+          const [px, py, pz] = presentPhysicalPoseInVolume(publication.world.pose, bank.lens.volume.frame).positionUnits;
+          const nearer = Math.hypot(px - centre[0], py - centre[1], pz - centre[2]) < Math.hypot(px, py, pz);
+          const target = nearer ? frontRoot : root, marker = nearer ? frontEnd : end;
+          if (bank.surface.parentNode !== target) target.insertBefore(bank.surface, marker);
+        }
         bank.runtime.publish(publication);
         const opacity = volumeLensCompositeOpacity(bank.runtime.roots.map((axisRoot, index) => ({
           axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
@@ -208,7 +236,9 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         }
         stars = mountPreparedCataloguePoints({ host: root, before: end, payload: banks.find(bank => bank.lens.id === selected)!.lens.stars, createElement: create, nativeFocalCss });
         stars.root.style.display = starsVisible ? 'block' : 'none';
-        root.dataset.selectedLens = selected; host.insertBefore(root, before); dom.finish();
+        root.dataset.selectedLens = selected; host.insertBefore(root, before);
+        if (frontRoot) frontHost!.insertBefore(frontRoot, frontBefore!);
+        dom.finish();
         return Object.freeze({ root, publish, state, destroy,
           subscribe(listener: (state: PreparedVolumeLensState) => void) {
             if (!destroyed) listeners.add(listener);

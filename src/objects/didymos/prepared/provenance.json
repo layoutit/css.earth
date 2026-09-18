@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "didymos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b02d4ca22abc7977a2fd03f948c080458a9ddb9a9aca309298d7cdb52533bb0e"
+    "sha256": "2411f451c668ba06a0567d8b5c7b49451e42ce8818c29c66515a7f0dfb3f97c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -747,7 +747,7 @@
       "sha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20",
       "bytes": 3616200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -788,7 +788,7 @@
       "sha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
       "bytes": 1189440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -822,7 +822,7 @@
       "sha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
       "bytes": 6724,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -862,7 +862,7 @@
       "sha256": "e3a24cd1589987b2454f95dbb7c557e1fe2eb2b0e9c04a378d6768091b69750e",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -900,7 +900,7 @@
       "sha256": "4d4847a207f5e14975431949b8d500ade608c0bb0612bac54f1f3deed91cc5aa",
       "bytes": 40054,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -940,7 +940,7 @@
       "sha256": "3290224e1f16b41abe2999763a8416c781d41657c81b02b749571f953dfdd04f",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -978,7 +978,7 @@
       "sha256": "ab5b4d3eea17bd6ac8e0f03024cfbd5145b23545a2434c0577a207a07ff9e9bc",
       "bytes": 40053,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -996,15 +996,6 @@
       "path": "observations/liciacube_luke_l2_1664234229_00005_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234229_00005_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1019,14 +1010,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234229-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/9"
           }
         ]
       },
       "sha256": "d840ec3e3f6ff328a5de3ec899f2855543bdd47d278d91dfee6e9b1ed8f9c378",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1044,15 +1035,6 @@
       "path": "observations/liciacube_luke_l2_1664234231_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234231_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1067,14 +1049,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234231-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/11"
           }
         ]
       },
       "sha256": "ebc62596740bcbabc4b36c88388384310dc59127b7c2aafc1d7a79001733f881",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1092,15 +1074,6 @@
       "path": "observations/liciacube_luke_l2_1664234233_01003_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234233_01003_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1115,14 +1088,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234233-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/13"
           }
         ]
       },
       "sha256": "e8a8f9da7ab7dc03642b7651ae6de01f93cca7a6268e9b1fdb295396ecceec99",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1140,15 +1113,6 @@
       "path": "observations/liciacube_luke_l2_1664234235_00005_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234235_00005_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1163,14 +1127,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234235-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/15"
           }
         ]
       },
       "sha256": "1115f0f7ddaec8cf93d561881ee51e2c9a6b574b4a6b7369d8c9f314242c3a5c",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1188,15 +1152,6 @@
       "path": "observations/liciacube_luke_l2_1664234237_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234237_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1211,14 +1166,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234237-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/17"
           }
         ]
       },
       "sha256": "f8889481ab8b3d0304c34b1c299dec6bc041cae8c8165a1d24eac505dce6e249",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1236,15 +1191,6 @@
       "path": "observations/liciacube_luke_l2_1664234239_01003_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234239_01003_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1259,14 +1205,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234239-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/19"
           }
         ]
       },
       "sha256": "4a255693967e768535493364fde13554ffaec1fe8634aa1c5a22a31e4977df79",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1284,15 +1230,6 @@
       "path": "observations/liciacube_luke_l2_1664234240_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234240_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1307,14 +1244,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234240-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/21"
           }
         ]
       },
       "sha256": "2cc1724ca485205a636e3c61951b8f8c3483c1e550e0035c6337b60b7c68fdea",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1332,15 +1269,6 @@
       "path": "observations/liciacube_luke_l2_1664234243_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234243_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1355,14 +1283,14 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234243-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/23"
           }
         ]
       },
       "sha256": "968799c6048912c7e7da7ea07b21e1aca1f955919cfe564f002f6b61d43e744f",
       "bytes": 26749440,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1390,7 +1318,7 @@
       "sha256": "426204dee38c77af98f996d9a97d31a08e252b6a3fc76f21adfe14b4eade2f17",
       "bytes": 12943,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1412,7 +1340,7 @@
       "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
       "bytes": 1310,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1438,7 +1366,7 @@
       "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
       "bytes": 6693,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1467,7 +1395,7 @@
       "sha256": "0094e844aa309c843d3ff4b62f4c4efddd1f27c9a3ddbc472da86f5518ec254a",
       "bytes": 186,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1494,7 +1422,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1526,19 +1454,19 @@
           "url": "/scenes/didymos/didymos-elevation-thumbnail.webp",
           "bytes": 5004,
           "sha256": "cd4746448a1140e2b673d293d13883d930167f1cf1450c4329aca95fadabf2e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-elevation-surface@2x.webp",
           "bytes": 284730,
           "sha256": "a38cf5878f35c3a2c2ca996f47403943207338e68e1696167440e27ae2559f4c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1578,19 +1506,19 @@
           "url": "/scenes/didymos/didymos-albedo-thumbnail.webp",
           "bytes": 2558,
           "sha256": "713c5a1e83de5145eb85c02ac447aa6bf452e74b9ba66308ad8a6853baecf041",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-albedo-surface@2x.webp",
           "bytes": 201266,
           "sha256": "cb654827d238fad774031aa91835981324a289a42e7ea5351f7a52ac50ab1e20",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1628,13 +1556,13 @@
           "url": "/scenes/didymos/didymos-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-shape-surface@2x.webp",
           "bytes": 77528,
           "sha256": "85402e9e3de98dfdca758974700e378494b016cc350ec9d97ba15560e125a8be",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1676,13 +1604,13 @@
           "url": "/scenes/didymos/didymos-draco-thumbnail.webp",
           "bytes": 1986,
           "sha256": "222e9dffe41e12a04d4bdb6f5af273a2e7f775e09f2e03be1eb31efb4d78434a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-draco-surface@2x.webp",
           "bytes": 228286,
           "sha256": "25d699259714bf30319a6a8c70d415683ea5c5aed21d5bd60ab20bd24b0d93ff",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1728,13 +1656,13 @@
           "url": "/scenes/didymos/didymos-luke-thumbnail.webp",
           "bytes": 3134,
           "sha256": "c7a569c9f84a815b8c2a92426c3ebf78f4b077da0a25341dcb171ba63a302ef1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/didymos/didymos-luke-surface@2x.webp",
           "bytes": 326124,
           "sha256": "ba83b8edf0f86255ade7759848a27d97d16004aa09d8c765c82ec3bd4d7f3782",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -1802,7 +1730,7 @@
           "url": "/scenes/didymos/didymos-features.json",
           "bytes": 2800,
           "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
