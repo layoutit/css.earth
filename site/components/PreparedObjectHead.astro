@@ -5,6 +5,8 @@ interface Props {
   preparedAssets: PreparedAssets;
 }
 
+// `preparedAssets` (from `loadObjectPageData`) is already resolved to the published origin
+// when ASSET_ORIGIN is set.
 const { preparedAssets } = Astro.props;
 const startupKeys = new Set(preparedAssets.startup);
 const urls = [...new Set(preparedAssets.entries.filter((asset) => startupKeys.has(asset.key)).map((asset) => asset.url).filter(

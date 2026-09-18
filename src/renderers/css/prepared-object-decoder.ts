@@ -2,6 +2,7 @@ import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import { parsePreparedObjectRuntime } from './validation/index.js';
 import type { ObjectRuntimeDefinition } from './runtime/object-runtime-types.js';
 import { record } from './validation/guards.js';
+import { parsePreparedAssetOrigin } from './rendering/prepared-asset-origin.js';
 
 export const PREPARED_CSS_OBJECT_FORMAT = 'cssearth-css-object@5';
 
@@ -31,5 +32,8 @@ export async function decodePreparedCssObject(descriptorInput: unknown, bytes: A
     if (record(input, 'runtime plan').id !== descriptor.id) throw new TypeError(`Prepared CSS definition does not match object ${descriptor.id}.`);
     return parsePreparedObjectRuntime(input, { parsedJson: true });
   });
-  return prepared.data;
+  // Origin resolution is carried by the descriptor, never the sha256-verified transport
+  // itself: a rebake is never required to move an object's assets onto `assetOrigin`.
+  const assetOrigin = parsePreparedAssetOrigin(descriptor.properties.assetOrigin);
+  return assetOrigin ? { ...prepared.data, assetOrigin } : prepared.data;
 }
