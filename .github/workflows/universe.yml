@@ -113,6 +113,8 @@ jobs:
           tools/serialize-prepared-scene.test.mts
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
+      - name: Check every object's runtime ownership and physical frame receipt
+        run: node tools/check-object-runtime-ownership.mts --all
       - name: Test complete shared renderer and camera
         run: pnpm test:renderer
 
