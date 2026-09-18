@@ -91,14 +91,9 @@ test('the manifest names icons that exist and the layout links it', async () => 
   assert.match(layout, /rel="apple-touch-icon" href="\/app-icons\/apple-touch-icon\.png"/u);
 });
 
-test('Firefox tabs stay uncontrolled; installed apps and other browsers register', () => {
-  const firefox = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:155.0) Gecko/20100101 Firefox/155.0';
-  const safari = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Safari/605.1.15';
-  const chrome = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36';
-  assert.equal(shouldRegisterServiceWorker(firefox, false), false);
-  assert.equal(shouldRegisterServiceWorker(firefox, true), true);
-  assert.equal(shouldRegisterServiceWorker(safari, false), true);
-  assert.equal(shouldRegisterServiceWorker(chrome, false), true);
+test('only the installed app registers; every browser tab stays uncontrolled', () => {
+  assert.equal(shouldRegisterServiceWorker(true), true);
+  assert.equal(shouldRegisterServiceWorker(false), false);
 });
 
 test('a failed request serves stored files first only for a short window', () => {
