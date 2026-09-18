@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "dimorphos",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "46f51c798bc37f565c59b798763146fd2f0f8bf6b44776f9df1cc39c6c6cd42d"
@@ -683,7 +683,7 @@
       "sha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
       "bytes": 14454228,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -724,7 +724,7 @@
       "sha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
       "bytes": 4728960,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -759,7 +759,7 @@
       "sha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
       "bytes": 6781,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -795,7 +795,7 @@
       "sha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
       "bytes": 4726080,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -831,7 +831,7 @@
       "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
       "bytes": 7093,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -870,7 +870,7 @@
       "sha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -908,7 +908,7 @@
       "sha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee",
       "bytes": 39996,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -948,7 +948,7 @@
       "sha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -986,7 +986,7 @@
       "sha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319",
       "bytes": 40081,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1026,7 +1026,7 @@
       "sha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1064,7 +1064,7 @@
       "sha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e",
       "bytes": 40081,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1104,7 +1104,7 @@
       "sha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2",
       "bytes": 67132800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1141,7 +1141,7 @@
       "sha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890",
       "bytes": 40081,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1169,7 +1169,7 @@
       "sha256": "477d53ba44e92d8f843699919271029d5d06f23f96d70d6cf2353b764643d035",
       "bytes": 14904,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1191,7 +1191,7 @@
       "sha256": "8e8e9b5e10eba9b6e1645ffd6ac6e6cb95aac0a08513367c570649b69f52c0a7",
       "bytes": 1319,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1217,7 +1217,7 @@
       "sha256": "c7770000681f11b73deffc7aaad881e0028c3b75d61553a1c52bf786511368cb",
       "bytes": 30289,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1246,7 +1246,7 @@
       "sha256": "90817538597c6ec594d451248cd2cf56fc55d48046aa0a1c87d5190ff819721b",
       "bytes": 188,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1273,7 +1273,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1298,7 +1298,7 @@
       "sha256": "c39b21c81cfaf9c4944be4bd04edb145ff3d6fd6af623a3de0d3148fbd14a34a",
       "bytes": 1429,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1330,19 +1330,19 @@
           "url": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
           "bytes": 4926,
           "sha256": "23fa84b1ad4607a2f9febe182e90a7daaefab0c0905b3377c11d6e78ff2cf82e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-elevation-surface@2x.webp",
           "bytes": 382966,
           "sha256": "aaf3850371fbf69ec7be1c320c24520ce266daf69b93dd5bfa9d3e4f15982a32",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1382,19 +1382,19 @@
           "url": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
           "bytes": 2054,
           "sha256": "40ae515de84bda9cc14eca9c251833fb6ee7088e35ce956339aa5f74a27c4f7b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-legend.webp",
           "bytes": 64,
           "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-albedo-surface@2x.webp",
           "bytes": 265060,
           "sha256": "b18d4cd6b5e268657ed2435bca38067f9fdcc436e99713dd84c46a8b0de007a8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1434,19 +1434,19 @@
           "url": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
           "bytes": 1122,
           "sha256": "80d0174445c6f14e65521f6926e39e75e663c34f92d710677e4b6999e1d9d9ab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-slope-legend.webp",
           "bytes": 232,
           "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-slope-surface@2x.webp",
           "bytes": 2026170,
           "sha256": "137f5d12b0d7eaf82def78618254b4eda5a830b735707371f77832575663865b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1484,13 +1484,13 @@
           "url": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
           "bytes": 76292,
           "sha256": "81b31e0d8f4ebde5015be8ce11fb643b42eaeb161205c0b76a0a4b6a09c0877b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1536,13 +1536,13 @@
           "url": "/scenes/dimorphos/dimorphos-draco-thumbnail.webp",
           "bytes": 1962,
           "sha256": "57f498ef5a01a0881145958cef9935e6e419559113ce3b8d2a1260628212da57",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/dimorphos/dimorphos-draco-surface@2x.webp",
           "bytes": 706022,
           "sha256": "d098a3d85c6db6118e49b9eb2e1c0c20e08261ddbae5dbd836eb5d42438b73f0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
@@ -1611,7 +1611,7 @@
           "url": "/scenes/dimorphos/dimorphos-features.json",
           "bytes": 9936,
           "sha256": "1210c10d888f85d0d9cf668dde368a155f62485cd5f17125a229da4a960e9bf8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1748,7 +1748,7 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "241b67302289bb415b194210ff17d51af292ec36df3c5a93012982597d014359",
+    "materialSha256": "d5e97001478c53dc76d29d1887fc028802ceb39dc029ee179fde5178a128a482",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
