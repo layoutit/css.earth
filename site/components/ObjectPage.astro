@@ -6,6 +6,7 @@ import { loadObjectPageData } from '../object-page-data.mts';
 import { objectPageStyles } from '../object-page-contract.mts';
 import shellCss from '../planet-shell.css?inline';
 import { loadPreparedSceneMarkup } from '../../tools/load-prepared-scene.mts';
+import { rewriteSceneCss, resolveSceneAddressesDeep } from '../asset-origin.mts';
 
 interface Props { objectId: string; navigation?: boolean; }
 const { objectId, navigation = false } = Astro.props;
@@ -17,9 +18,9 @@ const descriptors = import.meta.glob('../../src/objects/*/object.json', { import
 // shared cascade. Only the selected package's authored CSS is emitted.
 const cssFiles = import.meta.glob<string>('../../src/**/*.css', { query: '?inline', import: 'default' });
 const descriptor = await descriptors[`../../src/objects/${objectId}/object.json`]();
-const preparedContent = await contentFiles[`../../src/objects/${objectId}/prepared/content.json`]();
+const preparedContent = await resolveSceneAddressesDeep(await contentFiles[`../../src/objects/${objectId}/prepared/content.json`]());
 const styles = await Promise.all(objectPageStyles(descriptor)
-  .map(async path => ({ path, css: path === 'site/planet-shell.css' ? shellCss : await cssFiles[`../../${path}`]() })));
+  .map(async path => ({ path, css: await rewriteSceneCss(path === 'site/planet-shell.css' ? shellCss : await cssFiles[`../../${path}`]()) })));
 ---
 
 <PlanetLayout objectId={objectId} navigation={navigation} scene={scene}>
