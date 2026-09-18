@@ -1558,8 +1558,8 @@
     },
     {
       "path": "city/r2-cors.json",
-      "expectedSha256": "4d9db512d4308ee0e738c28f34d836b361eb0e8a74fbef3f3246fcc7376cd956",
-      "expectedBytes": 504,
+      "expectedSha256": "d7d78b7e0749fb3ca29b25aec58802ea2792067b633565b3ec7e93ebeae30344",
+      "expectedBytes": 609,
       "purpose": "Read-only cross-origin delivery policy with exact range response headers for the canonical R2 asset bucket"
     },
     {
