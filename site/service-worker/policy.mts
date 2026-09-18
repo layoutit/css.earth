@@ -149,3 +149,16 @@ export function isStorableRoute(route: RequestRoute): boolean {
 export function shouldRegisterServiceWorker(userAgent: string, standalone: boolean): boolean {
   return standalone || !/\bFirefox\//u.test(userAgent);
 }
+
+// How long a failed request keeps the worker serving stored files first. The
+// window restarts on every failure and ends early on any success, so a visitor
+// whose connection returns sees fresh files within this time without reloading.
+export const NETWORK_DOWN_WINDOW_MS = 10_000;
+
+export function networkDownUntil(now: number): number {
+  return now + NETWORK_DOWN_WINDOW_MS;
+}
+
+export function isNetworkDown(downUntil: number, now: number): boolean {
+  return now < downUntil;
+}

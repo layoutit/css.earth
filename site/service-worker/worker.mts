@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 import {
-  CACHE_PREFIX, evictionPlan, INDEX_CACHE, INDEX_URL, isStorableRoute, offlinePageFallback, parseIndex, parsePutMessage,
+  CACHE_PREFIX, evictionPlan, INDEX_CACHE, isNetworkDown, networkDownUntil, INDEX_URL, isStorableRoute, offlinePageFallback, parseIndex, parsePutMessage,
   parseUrlsMessage, responseValidator, routeRequest, RUNTIME_CACHE, runtimeBudget, STORE_MESSAGE, TOUCH_MESSAGE,
   type IndexEntry, type PutMessage,
 } from './policy.mts';
@@ -137,42 +137,36 @@ self.addEventListener('message', event => {
 
 // Streaming responses through the worker costs about half a second per scene
 // load, even without copying them. So online subresources skip it entirely;
-// only page loads, one request each, always get the stored fallback. A page
-// load that falls back marks the network as down, because navigator.onLine can
-// still report a connection that no longer answers.
-let networkDown = false;
+// only page loads, one request each, always get the stored fallback. A failed
+// request marks the network as down for a short window, because
+// navigator.onLine can still report a connection that no longer answers.
+// While it is down, stored files answer first; afterwards the network is tried
+// first again, so a returning connection is never ignored.
+let downUntil = 0;
 
-async function page(request: Request): Promise<Response> {
+async function networkFirst(request: Request): Promise<Response> {
   try {
     const response = await fetch(request);
-    networkDown = false;
+    downUntil = 0;
     return response;
   } catch {
-    networkDown = true;
+    downUntil = networkDownUntil(Date.now());
     return offlineAnswer(request);
   }
 }
 
-// Once a page load has failed, its files come straight from storage; only
-// files never stored still try the network.
-async function stored(request: Request): Promise<Response> {
+async function storedFirst(request: Request): Promise<Response> {
   const hit = await cached(request.url);
-  if (hit) return hit;
-  try {
-    const response = await fetch(request);
-    networkDown = false;
-    return response;
-  } catch {
-    return Response.error();
-  }
+  return hit ?? networkFirst(request);
 }
 
 self.addEventListener('fetch', event => {
   if (event.request.headers.has('range')) return;
   const { request } = event;
   const navigation = request.mode === 'navigate';
-  if (!navigation && !networkDown && self.navigator.onLine) return;
+  const down = isNetworkDown(downUntil, Date.now());
+  if (!navigation && !down && self.navigator.onLine) return;
   const route = routeRequest({ url: request.url, method: request.method, scope: self.registration.scope });
   if (route.kind === 'bypass') return;
-  event.respondWith(navigation ? page(request) : stored(request));
+  event.respondWith(!navigation && down ? storedFirst(request) : networkFirst(request));
 });

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { shouldRegisterServiceWorker, evictionPlan, offlinePageFallback, parseIndex, parsePutMessage, parseUrlsMessage, PUT_MESSAGE, responseValidator, STORE_MESSAGE, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
+import { isNetworkDown, NETWORK_DOWN_WINDOW_MS, networkDownUntil, shouldRegisterServiceWorker, evictionPlan, offlinePageFallback, parseIndex, parsePutMessage, parseUrlsMessage, PUT_MESSAGE, responseValidator, STORE_MESSAGE, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
 
 const scope = 'https://css.earth/';
 const route = (url: string, method = 'GET') => routeRequest({ url, method, scope }).kind;
@@ -99,4 +99,15 @@ test('Firefox tabs stay uncontrolled; installed apps and other browsers register
   assert.equal(shouldRegisterServiceWorker(firefox, true), true);
   assert.equal(shouldRegisterServiceWorker(safari, false), true);
   assert.equal(shouldRegisterServiceWorker(chrome, false), true);
+});
+
+test('a failed request serves stored files first only for a short window', () => {
+  const failedAt = 1_000_000;
+  const until = networkDownUntil(failedAt);
+  assert.equal(isNetworkDown(until, failedAt + 1), true);
+  assert.equal(isNetworkDown(until, failedAt + NETWORK_DOWN_WINDOW_MS - 1), true);
+  // After the window the network is tried first again, even if nothing reloads.
+  assert.equal(isNetworkDown(until, failedAt + NETWORK_DOWN_WINDOW_MS), false);
+  // A success resets the window to zero.
+  assert.equal(isNetworkDown(0, failedAt), false);
 });
