@@ -32,7 +32,7 @@ test('an applycal statement restates the record, table for table', async () => {
 test('the restore script performs import, flags, every application, the targets split and imaging, in that order', async () => {
   const script = restoreScript({ asdm: '/raw/uid___A002_X1', visibilities: 'uid___A002_X1.ms', applications: parseCalibrationRecord(await record()),
     flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/R_Dor.restored' });
-  const order = ['importasdm(', "mode='restore'", 'PHASE', 'TARGET,CHECK', 'BANDPASS,AMPLITUDE', 'split(', 'tclean(', 'exportfits('];
+  const order = ['importasdm(', "mode='restore'", 'PHASE', 'TARGET,CHECK', 'BANDPASS,AMPLITUDE', 'mstransform(', 'tclean(', 'exportfits('];
   let cursor = -1;
   for (const marker of order) {
     const at = script.indexOf(marker, cursor + 1);
@@ -49,8 +49,8 @@ test('the restore script performs import, flags, every application, the targets 
   assert.ok(script.includes("intent='OBSERVE_TARGET#ON_SOURCE'"));
   // A measurement set left by an interrupted import is removed, never reused, and the full set goes once the target is split.
   assert.ok(script.indexOf("shutil.rmtree(stale") < script.indexOf('importasdm('));
-  const removed = script.indexOf("os.remove(imported); shutil.rmtree('uid___A002_X1.ms')");
-  assert.ok(removed > script.indexOf('split(') && removed < script.indexOf('tclean('));
+  const removed = script.indexOf("os.remove(imported); os.remove(calibrated); shutil.rmtree('uid___A002_X1.ms')");
+  assert.ok(removed > script.indexOf('mstransform(') && removed < script.indexOf('tclean('));
   assert.ok(script.indexOf('disk_usage') < script.indexOf('importasdm('), 'the scratch disk is checked before anything is written');
 });
 
@@ -58,7 +58,7 @@ test('both measurement sets are written to the scratch disk, the calibration tab
   const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
     flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x', scratch: '/fast' });
   assert.ok(script.includes("importasdm(asdm='/raw/x', vis='/fast/x.ms'"));
-  assert.ok(script.includes("split(vis='/fast/x.ms', outputvis='/fast/R_Dor.targets.ms'"));
+  assert.ok(script.includes("mstransform(vis='/fast/x.ms', outputvis='/fast/R_Dor.targets.ms'"));
   assert.ok(script.includes("tclean(vis='/fast/R_Dor.targets.ms'"));
   assert.ok(!script.includes("gaintable=['/fast/"), 'caltables are resolved from the working directory, not the scratch disk');
   // The delivered flag versions are staged under the bare name, whatever disk the measurement set is on.
@@ -66,6 +66,10 @@ test('both measurement sets are written to the scratch disk, the calibration tab
   // Only an import that wrote its marker is reused.
   assert.ok(script.indexOf("open(imported, 'w')") > script.indexOf('importasdm('));
   assert.ok(script.indexOf("if not os.path.exists(imported):") < script.indexOf('importasdm('));
+  // A finished calibration is not repeated, and the flags are never restored over it.
+  const guard = script.indexOf('if not os.path.exists(calibrated):');
+  assert.ok(guard < script.indexOf("mode='restore'") && script.indexOf("open(calibrated, 'w')") < script.indexOf('mstransform('));
+  assert.ok(/\n    applycal\(/u.test(script), 'every applycal sits inside the calibration guard');
 });
 
 test('imaging follows the pipeline\u2019s own call rather than a plausible guess', async () => {
@@ -90,7 +94,7 @@ test('self-calibration is applied as its record states, with the map that spread
   assert.ok(script.includes('calwt=False'));
   // The second table's map is 32 entries of one window; the first table needs none.
   assert.ok(/spwmap=\[\[\], \[25, 25, /u.test(script));
-  assert.ok(script.includes("split(vis='x.ms', outputvis='R_Dor.targets.ms'"));
+  assert.ok(script.includes("mstransform(vis='x.ms', outputvis='R_Dor.targets.ms'"));
   assert.ok(script.indexOf('/aux/sc/Target_R_Dor_') > script.indexOf("outputvis='R_Dor.targets.ms'"));
   assert.ok(script.indexOf('/aux/sc/Target_R_Dor_') < script.indexOf('tclean('));
   assert.ok(script.includes("tclean(vis='R_Dor.targets.ms'"));

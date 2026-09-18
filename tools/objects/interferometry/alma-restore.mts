@@ -61,7 +61,7 @@ export function restoreScript(options: {
   const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
     'import os, sys, json, shutil',
-    'from casatasks import importasdm, flagmanager, applycal, split, tclean, exportfits, casalog',
+    'from casatasks import importasdm, flagmanager, applycal, mstransform, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
     // The calapply record names intents the pipeline's way; the measurement set names them as the observatory scheduled them.
     // The pipeline translates one into the other before it calls applycal, and so does this route, reading the set's own
@@ -85,6 +85,7 @@ export function restoreScript(options: {
     'if not os.path.exists(imported):',
     `    for stale in (${python(visibilities)}, ${python(`${visibilities}.flagversions`)}):`,
     '        shutil.rmtree(stale, ignore_errors=True)',
+    `    if os.path.exists(${python(`${visibilities}.calibrated`)}): os.remove(${python(`${visibilities}.calibrated`)})`,
     // The lazy import leaves the visibilities in the ASDM's binary files and reads them in place, so the measurement set holds
     // only metadata, flags and the corrected column. What the scratch disk must hold is then about the ASDM's size once.
     `    need = sum(os.path.getsize(os.path.join(root, name)) for root, _, names in os.walk(${python(asdm)}) for name in names)`,
@@ -96,20 +97,26 @@ export function restoreScript(options: {
     `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=True)`,
     "    open(imported, 'w').close()",
     "    steps.append('importasdm')",
-    ...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
+    // Restoring flags and applying the calibration are one step: restoring the flags again would undo what calflagstrict
+    // flagged. A marker records that both finished, so a later failure does not repeat an hour of applycal.
+    `calibrated = ${python(`${visibilities}.calibrated`)}`,
+    'if not os.path.exists(calibrated):',
+    ...[...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
       // Replace the filler's empty flag versions with the pipeline's before restoring from them.
       `shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
       `shutil.copytree(os.path.join(${python(options.flagStage ?? '.')}, ${python(`${options.visibilities}.flagversions`)}), ${python(`${visibilities}.flagversions`)})`,
       `flagmanager(vis=${python(visibilities)}, mode='restore', versionname=${python(flagVersion)})`,
       "steps.append('flags restored')",
     ]),
-    ...applications.map(application => `${applycalStatement(application, visibilities)}\nsteps.append('applycal ' + ${python(application.intent)})`),
+    ...applications.flatMap(application => [applycalStatement(application, visibilities), `steps.append('applycal ' + ${python(application.intent)})`]),
+    "open(calibrated, 'w').close()"].map(line => `    ${line}`),
     // Every science channel, science target only, and the spectral windows keep their numbers: the self-calibration maps are
     // indexed by absolute window id, so renumbering them here would misapply the solutions without failing.
-    `split(vis=${python(visibilities)}, outputvis=${python(targets)}, field=${python(plan.target)}, spw=${python(plan.scienceWindows)}, intent='OBSERVE_TARGET#ON_SOURCE', datacolumn='corrected', keepflags=True, reindex=False)`,
+    // split has no reindex argument; mstransform, which split wraps, does.
+    `mstransform(vis=${python(visibilities)}, outputvis=${python(targets)}, field=${python(plan.target)}, spw=${python(plan.scienceWindows)}, intent='OBSERVE_TARGET#ON_SOURCE', datacolumn='corrected', keepflags=True, reindex=False)`,
     "steps.append('split targets')",
     // The full measurement set is rebuilt from the ASDM by the next run; only the target split is imaged.
-    `os.remove(imported); shutil.rmtree(${python(visibilities)}); shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
+    `os.remove(imported); os.remove(calibrated); shutil.rmtree(${python(visibilities)}); shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
     ...(selfcal === null || !selfcal.succeeded ? ["steps.append('no self-calibration applied')"] : [
       `applycal(vis=${python(targets)}, field=${python(plan.target)}, gaintable=${pythonList(selfcal.tables.map(table => resolveTable(table)))}, ` +
         `interp=${pythonList([...selfcal.interpolation])}, spwmap=[${selfcal.spectralWindowMaps.map(map => `[${map.join(', ')}]`).join(', ')}], ` +
