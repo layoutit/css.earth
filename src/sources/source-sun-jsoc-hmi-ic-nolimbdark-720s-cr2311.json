@@ -1,0 +1,28 @@
+{
+  "id": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SDO/HMI hmi.Ic_noLimbDark_720s continuum intensity with limb darkening removed, CR2311 daily records",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "http://jsoc.stanford.edu/ajax/lookdata.html?ds=hmi.Ic_noLimbDark_720s",
+      "label": "JSOC series hmi.Ic_noLimbDark_720s"
+    },
+    {
+      "role": "rights",
+      "url": "https://sdo.gsfc.nasa.gov/data/rules.php",
+      "label": "SDO data use policy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "http://jsoc.stanford.edu/cgi-bin/ajax/jsoc_info?ds=hmi.Ic_noLimbDark_720s%5B2026.05.13_00:00:00_TAI-2026.06.09_00:00:00_TAI@1d%5D,hmi.Ic_noLimbDark_720s%5B2026.05.26_12:00:00_TAI%5D&op=rs_list&key=T_REC,T_OBS,QUALITY,CTYPE1,CTYPE2,CUNIT1,CUNIT2,CRPIX1,CRPIX2,CRVAL1,CRVAL2,CDELT1,CDELT2,CROTA2,RSUN_OBS,DSUN_OBS,CRLN_OBS,CRLT_OBS,CAR_ROT&seg=continuum",
+      "checkedOn": "2026-09-18",
+      "locator": "keywords T_REC, QUALITY and segments.continuum for the 28 records"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
