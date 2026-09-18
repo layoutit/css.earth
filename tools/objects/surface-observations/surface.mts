@@ -3,7 +3,7 @@ import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../terres
 import type { SourceInput } from '../../../src/platform/source-manifest.mts';
 import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contract.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
-import { fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
+import { finestOnSurface, fitObservationLevels, sampleTrianglePoints, selectObservation } from './levels.mts';
 import { qualifiedFace } from './geometry.mts';
 import { bandColorByte, bandColorEvidence, interpolatePalette, linearToSrgb } from '../color-transfer.mts';
 
@@ -69,21 +69,26 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     return { point, values };
   };
   const scale = (i: number) => frames[i].nominalPixelScaleMeters ?? frames[i].footprint.nadirMedianMeters;
+  const scales = frames.map((_, i) => scale(i));
+  if (policy.selection === 'finest-resolution' && scales.some(value => !(value > 0))) throw new Error('A finest-resolution observation needs every frame\'s pixel scale.');
+  // Finest-resolution ties keep the frame with the finer pixel scale, then the earlier one in the recipe.
+  const byScale = frames.map((_, i) => i).sort((a, b) => scales[a] - scales[b] || a - b);
   // Frames sharing one viewing direction tie on emission; recipe order then ranks them. Brightness never chooses a frame.
   const choose = (values: readonly (Missing | Accepted)[]) => policy.selection === 'single' ? (values[0].reason === undefined ? 0 : -1)
     : policy.selection === 'recipe-order' ? values.findIndex(value => value.reason === undefined)
-    : policy.selection === 'finest-resolution' ? values.reduce((best, value, i) => value.reason === undefined && (best < 0 || scale(i) < scale(best)) ? i : best, -1)
+    : policy.selection === 'finest-resolution' ? finestOnSurface(byScale, scales, i => { const value = values[i]; return value.reason === undefined ? value : undefined; }).index
     : selectObservation(values);
-  // A selection that ranks frames in a fixed order can stop at the first accepted frame: it is the frame choose() picks from all of them
-  // (finest-resolution keeps the lowest index among equal scales). Only lowest-emission and single frames sample every frame.
-  const rank = policy.selection === 'recipe-order' ? frames.map((_, i) => i)
-    : policy.selection === 'finest-resolution' && frames.every((_, i) => Number.isFinite(scale(i))) ? frames.map((_, i) => i).sort((a, b) => scale(a) - scale(b) || a - b) : null;
-  const sampleFirst = (displayPoint: readonly number[], order: readonly number[]) => {
+  // Recipe order stops at the first accepted frame and finest resolution once no remaining frame can be finer; each picks
+  // the frame choose() picks from all of them. Only lowest-emission and single frames sample every frame.
+  const sampleOrdered = (displayPoint: readonly number[]) => {
     const point = displayPoint.map(n => n * metersPerUnit), hit = mesh.closestPoint(point);
-    if (hit && qualifiedFace(mesh, hit.faceId)) for (const i of order) {
+    const accepted = (i: number): Accepted | undefined => {
+      if (!hit || !qualifiedFace(mesh, hit.faceId)) return undefined;
       const frame = frames[i], sample = frame.sample(hit.point);
-      if (sample.reason === undefined && frame.visible(hit.point)) return { point, index: i, value: { ...sample, distanceMeters: hit.distanceMeters } as Missing | Accepted };
-    }
+      return sample.reason === undefined && frame.visible(hit.point) ? { ...sample, distanceMeters: hit.distanceMeters } : undefined;
+    };
+    if (policy.selection === 'finest-resolution') return { point, ...finestOnSurface(byScale, scales, accepted) };
+    for (let i = 0; i < frames.length; i++) { const value = accepted(i); if (value) return { point, index: i, value }; }
     return { point, index: -1, value: undefined };
   };
   // Estimated faces complete an open source surface that no photograph observed, so their sample points stay withheld.
@@ -112,7 +117,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   }
   const samplePoint = (displayPoint: readonly number[]): SurfaceColorSample => {
     let point: readonly number[], index: number, value: Missing | Accepted | undefined;
-    if (rank) ({ point, index, value } = sampleFirst(displayPoint, rank));
+    if (policy.selection === 'recipe-order' || policy.selection === 'finest-resolution') ({ point, index, value } = sampleOrdered(displayPoint));
     else {
       const all = sampleAll(displayPoint), first = all.values[0];
       ({ point } = all); index = choose(all.values); value = all.values[index];

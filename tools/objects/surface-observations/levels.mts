@@ -98,3 +98,27 @@ export function selectObservation(samples: readonly ObservationSample[]) {
       (index < 0 || (samples[i].maximumEmissionDegrees ?? Infinity) < (samples[index].maximumEmissionDegrees ?? Infinity))) index = i;
   return index;
 }
+
+/** How much surface one pixel covers where a frame sees it: the frame's pixel scale stretched by the obliquity of the view. */
+export function pixelOnSurface(scaleMeters: number, emissionDegrees: number | undefined) {
+  if (!(scaleMeters > 0) || typeof emissionDegrees !== 'number' || !(emissionDegrees >= 0 && emissionDegrees < 90)) throw new Error('A pixel on the surface needs a pixel scale and an emission angle.');
+  return scaleMeters / Math.cos(emissionDegrees * Math.PI / 180);
+}
+
+/**
+ * The finest resolution at a point: the frame whose pixel covers the least surface there, so a nearer frame that sees the
+ * point obliquely loses to a farther one that sees it face on when its pixel lands on less surface. Frames are walked from
+ * the finest pixel scale (`order`, ties to the earlier frame) and the walk stops once no remaining frame can do better,
+ * since a pixel covers at least its own scale on any surface. `sampleAt` returns a frame's accepted sample or nothing.
+ */
+export function finestOnSurface<T extends Pick<ObservationSample, 'maximumEmissionDegrees'>>(order: readonly number[], scales: readonly number[], sampleAt: (frame: number) => T | undefined) {
+  let index = -1, size = Infinity, value: T | undefined;
+  for (const frame of order) {
+    if (scales[frame] >= size) break;
+    const sample = sampleAt(frame);
+    if (sample === undefined) continue;
+    const candidate = pixelOnSurface(scales[frame], sample.maximumEmissionDegrees);
+    if (candidate < size) { index = frame; size = candidate; value = sample; }
+  }
+  return { index, value };
+}

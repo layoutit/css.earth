@@ -2,7 +2,7 @@ import { fixtureRecord } from '../../test-values.mts';
 import { required } from '../../test-values.mts';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './levels.mts';
+import { finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from './levels.mts';
 import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
 import { namedLevelRefusal } from './surface.mts';
 import { observingSeasons } from './formats/controlled-camera.mts';
@@ -125,6 +125,30 @@ test('seasons follow the frames\' start times, a new one at the gap or more', ()
   assert.deepEqual(observingSeasons(['2018-01-01T00:00:00', '2018-05-01T00:00:00']), [0, 1], '120 days apart');
   assert.deepEqual(observingSeasons(['2018-01-01T00:00:00', '2018-04-30T23:59:59']), [0, 0]);
   assert.throws(() => observingSeasons(['no time']), /start time/);
+});
+
+test('the finest resolution is the least surface under one pixel, not the nearest frame', () => {
+  assert.equal(pixelOnSurface(1000, 0), 1000);
+  assert.ok(Math.abs(pixelOnSurface(1000, 60) - 2000) < 1e-9, 'a view 60° from the normal spreads a pixel over twice the surface');
+  assert.throws(() => pixelOnSurface(1000, 90), /emission/);
+  assert.throws(() => pixelOnSurface(1000, undefined), /emission/);
+  // A nearer frame seeing the point at 70° (2.92 per pixel) loses to one 20% farther seeing it at 10° (1.22).
+  const scales = [1, 1.2, 2], emissions = [70, 10, 0], asked: number[] = [];
+  const pick = finestOnSurface([0, 1, 2], scales, frame => { asked.push(frame); return { maximumEmissionDegrees: emissions[frame] }; });
+  assert.equal(pick.index, 1);
+  assert.deepEqual(asked, [0, 1], 'a frame whose own scale is already coarser than the best is never sampled');
+  assert.equal(finestOnSurface([0, 1, 2], scales, () => undefined).index, -1);
+  // The early stop always agrees with comparing every frame, ties going to the earlier frame in scale order.
+  let seed = 7;
+  const random = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let trial = 0; trial < 500; trial++) {
+    const count = 1 + Math.floor(random() * 8), frameScales = Array.from({ length: count }, () => 1 + Math.floor(random() * 4) / 2);
+    const views = Array.from({ length: count }, () => random() < .3 ? undefined : { maximumEmissionDegrees: Math.floor(random() * 9) * 10 });
+    const order = frameScales.map((_, i) => i).sort((a, b) => frameScales[a] - frameScales[b] || a - b);
+    let brute = -1, size = Infinity;
+    for (const i of order) { const view = views[i]; if (!view) continue; const candidate = pixelOnSurface(frameScales[i], view.maximumEmissionDegrees); if (candidate < size) { brute = i; size = candidate; } }
+    assert.equal(finestOnSurface(order, frameScales, i => views[i]).index, brute, `trial ${trial}`);
+  }
 });
 
 test('source selection preserves valid darkness, rejects missing samples, and resolves ties stably', () => {
