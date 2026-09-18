@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.24",
+  "document": {
+    "input": "eugenia-survey-research",
+    "object": 1103,
+    "width": 1358,
+    "height": 2466,
+    "sha256": "85daae84727f23856b2afbdca6e356932e34b7c7eb9435217031ade86297c9f0"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2018-05-04T01:41:20",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-05-04T02:57:50",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-05-04T03:31:33",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-07-28T08:19:08",
+      "frame": "zimpol-20190728-081908",
+      "band": 0
+    },
+    {
+      "label": "2019-07-30T07:34:02",
+      "frame": "zimpol-20190730-073402",
+      "band": 0
+    },
+    {
+      "label": "2019-08-03T05:15:12",
+      "frame": "zimpol-20190803-051512",
+      "band": 1
+    },
+    {
+      "label": "2019-08-05T05:07:16",
+      "frame": "zimpol-20190805-050716",
+      "band": 1
+    },
+    {
+      "label": "2019-08-06T01:01:20",
+      "frame": "zimpol-20190806-010120",
+      "band": 1
+    },
+    {
+      "label": "2019-08-06T06:12:03",
+      "frame": "zimpol-20190806-061203",
+      "band": 1
+    },
+    {
+      "label": "2019-08-07T00:46:06",
+      "frame": "zimpol-20190807-004606",
+      "band": 1
+    }
+  ]
+}

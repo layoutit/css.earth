@@ -51,13 +51,13 @@
     {
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
-      "status": "unresolved",
-      "finding": "The live source folder https://observations.lam.fr/astero/Data/31Euphrosyne/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
-      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 32 camera-1 deconvolved frames, 6 nights from 2019-03-15 to 2019-04-10, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 3 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/31Euphrosyne/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/euphrosyne/README.md",
         "https://observations.lam.fr/astero/Data/31Euphrosyne/",
-        "https://observations.lam.fr/astero/"
+        "https://observations.lam.fr/astero/",
+        "https://observations.lam.fr/astero/Data/31Euphrosyne/Deconv/"
       ],
       "checked": [
         {
@@ -68,15 +68,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
     {
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
-      "status": "excluded",
-      "finding": "The live directory also lists 31_Euphrosyne_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
-      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "status": "included",
+      "finding": "The live directory also lists 31_Euphrosyne_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Reopened 2026-09-18 because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure B.22 describe; the Shape and Elevation views keep MPCD.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/31_Euphrosyne_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -88,15 +91,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Measured with the cross-frame registration test on 35 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 758 pixels (median); peak correlation 0.18 (median) against a mirror margin of 0.97; 3 of 35 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists.",
-      "revisitWhen": "A registration reference for this body: a spacecraft map, or frames in which the cross-frame test resolves markings (peak correlation above 0.15 with a mirror margin above 1.5 on most frames).",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 32 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured with the cross-frame registration test on 35 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 758 pixels (median); peak correlation 0.18 (median) against a mirror margin of 0.97; 3 of 35 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/31Euphrosyne/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -106,6 +112,27 @@
         {
           "date": "2026-09-16",
           "commit": "9e4e61078d077eda7285731e004f513ac1322d69"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.22 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.22, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.956 to 0.970 at our phase, against 0.966 to 0.972 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 7 columns, one step from it in 4. With the paper’s photographs 0.956 to 0.969. Turned in the image, our outline best overlaps the paper’s photographs at -6.0 to 3.5° and its model panels at -7.0 to 0.0°. The spin axis we project lies at 91.1 to 91.3° on the sky against 89.1 to 89.3° for the figure’s arrows. Native outline residual 2.341 px mean over 32 frames at our phase; the sweep’s lowest is 2.263 px at 22°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 1.47° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/31Euphrosyne/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/31_Euphrosyne_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     }

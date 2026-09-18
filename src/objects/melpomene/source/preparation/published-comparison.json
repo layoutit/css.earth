@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.15",
+  "document": {
+    "input": "melpomene-survey-research",
+    "object": 1094,
+    "width": 1598,
+    "height": 1233,
+    "sha256": "f9feebeb029e48afb97ac87323766911fa124c4d25729bf48f84ec3d8cf2b12b"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2018-05-04T01:13:08",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-05-04T02:27:39",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-06-21T08:51:41",
+      "frame": "zimpol-20190621-085141",
+      "band": 0
+    },
+    {
+      "label": "2019-07-18T07:06:41",
+      "frame": "zimpol-20190718-070641",
+      "band": 0
+    },
+    {
+      "label": "2019-08-03T01:57:37",
+      "frame": "zimpol-20190803-015737",
+      "band": 0
+    },
+    {
+      "label": "2019-08-06T04:59:38",
+      "frame": "zimpol-20190806-045938",
+      "band": 0
+    }
+  ]
+}

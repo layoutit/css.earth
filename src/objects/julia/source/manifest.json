@@ -107,6 +107,1345 @@
           }
         ]
       }
+    },
+    {
+      "id": "julia-sphere-20170708092249",
+      "path": "observations/d89Julia_2017-07-08T09_22_49.670_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-08T09_22_49.670_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "bae93714b7ed2c1c614537cd3cf9b00b6376986bff8484bc5e90807ac54a78e6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170708092249",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170708092621",
+      "path": "observations/d89Julia_2017-07-08T09_26_21.073_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-08T09_26_21.073_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "6b83f06669f2e52fe70921b731d78f632cac6d1d6c7bd4b52c1f3694ef64c10c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170708092621",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170708092952",
+      "path": "observations/d89Julia_2017-07-08T09_29_52.707_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-08T09_29_52.707_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7d720baa09a742a9207109619e25d01ae95a87c139030b84d58e4946f1b2f3e3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170708092952",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170708093322",
+      "path": "observations/d89Julia_2017-07-08T09_33_22.195_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-08T09_33_22.195_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "ae72808ba4ab8d62a298378bec64ec714d06dded8524a4c150e8a35192a446f5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170708093322",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170710090326",
+      "path": "observations/d89Julia_2017-07-10T09_03_26.434_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-10T09_03_26.434_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "58a926fd5611ba2e01037e70b43f59e58594551dfd9c1a210523f2003027ea53",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170710090326",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170710090656",
+      "path": "observations/d89Julia_2017-07-10T09_06_56.601_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-10T09_06_56.601_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "142988306203eef81e95da971db5790d34df378124170fde40a106f4006ef564",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170710090656",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170710091025",
+      "path": "observations/d89Julia_2017-07-10T09_10_25.904_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-10T09_10_25.904_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "599eb66f13d211d967a7d42d4be4af70fbd0f4d919dbf283d02f0860c248df35",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170710091025",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170710091355",
+      "path": "observations/d89Julia_2017-07-10T09_13_55.764_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-10T09_13_55.764_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "dce66d43807f2ac44d04d80d6919b5b635f3be2668966e9e431205ddd1b53d82",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170710091355",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170714094404",
+      "path": "observations/d89Julia_2017-07-14T09_44_04.707_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-14T09_44_04.707_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "a90b05f5e26379a16edfa3781b7f72449c81a67adaffefd2e71b606501dfdfdb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170714094404",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170714094736",
+      "path": "observations/d89Julia_2017-07-14T09_47_36.152_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-14T09_47_36.152_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "0d79386c59643161dbb3e2446d268253751eb35187789b929df8af2fc51b43b0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170714094736",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170714095104",
+      "path": "observations/d89Julia_2017-07-14T09_51_04.931_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-14T09_51_04.931_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f7e68234620377b2e827b269f8ccef58822b072b388f3ad082fd74d98c7964b3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170714095104",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170714095435",
+      "path": "observations/d89Julia_2017-07-14T09_54_35.260_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-07-14T09_54_35.260_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d40da88e8a7e816f788b19e0cec8a4a851fcbb123ce82a51a2d1ea238a764b0d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170714095435",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170808044820",
+      "path": "observations/d89Julia_2017-08-08T04_48_20.975_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-08T04_48_20.975_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "07f47ae0ee723b93bbdb8584dca9b81e41b33b3f07995c024a1cc17d8fbb9ea2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170808044820",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170808045151",
+      "path": "observations/d89Julia_2017-08-08T04_51_51.017_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-08T04_51_51.017_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7ea4a5b6163e50ac87c4641f42f9cd30c139f47c6ac8a51319344f125304adaa",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170808045151",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170808045522",
+      "path": "observations/d89Julia_2017-08-08T04_55_22.334_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-08T04_55_22.334_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "7616e13ef8c33b2514c4b2482caecd8566d7e7c458681cba6826b88abf092ec0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170808045522",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170808045853",
+      "path": "observations/d89Julia_2017-08-08T04_58_53.920_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-08T04_58_53.920_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f6d82df325fc93a8786a5b789a5afd0fb4906f8a984622bd373b9c9f7c179e09",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170808045853",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170823024811",
+      "path": "observations/d89Julia_2017-08-23T02_48_11.190_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-23T02_48_11.190_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f332a849eaa30d5b733f7c579b72c1644ad837708217bfe63084943216abbe67",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170823024811",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170823025142",
+      "path": "observations/d89Julia_2017-08-23T02_51_42.848_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-23T02_51_42.848_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "050edd5ed1e659c7cdc1772ece1f2a8faab6570978f91453be39988035a2a452",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170823025142",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170823025512",
+      "path": "observations/d89Julia_2017-08-23T02_55_12.186_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-23T02_55_12.186_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "140603a9219d0ffb0cbe13e02d585b3c49e011cdb802cb7238c64ec10a759671",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170823025512",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170823025841",
+      "path": "observations/d89Julia_2017-08-23T02_58_41.991_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-23T02_58_41.991_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "4b75da862e0b9b84eeb9b8dc5ed6e5bc24ed0b0a09e91fa439951726d708b371",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170823025841",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170824025748",
+      "path": "observations/d89Julia_2017-08-24T02_57_48.739_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-24T02_57_48.739_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "5e92c365018ca84d35a0bd8844f8009ab364941dd3173956b5a8687ae1e1d82e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170824025748",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170824030120",
+      "path": "observations/d89Julia_2017-08-24T03_01_20.133_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-24T03_01_20.133_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "9a34c933ae192c41150ad2260ff9ff4c79285709252f35f48b05002d0173c7d3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170824030120",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170824030450",
+      "path": "observations/d89Julia_2017-08-24T03_04_50.731_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-24T03_04_50.731_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "e8db6a170a3e655c8053c1931f57936f296ed94104b409e2e4ecfda5a11a6e37",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170824030450",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/25"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20170824030819",
+      "path": "observations/d89Julia_2017-08-24T03_08_19.547_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-08-24T03_08_19.547_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "65cb54ece8b3d0623ab9b981472e70e6344d43e3a994f05ad164258235e7470e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20170824030819",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/26"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171002012025",
+      "path": "observations/d89Julia_2017-10-02T01_20_25.287_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-02T01_20_25.287_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "22a246ef79705ec46adc225e02b7e3c3c7fb27d2562f191cb0f0ea753e63f8ef",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171002012025",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171002012306",
+      "path": "observations/d89Julia_2017-10-02T01_23_06.014_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-02T01_23_06.014_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "0915251e50f269d33c78bfd5e6d91d221bd84c0b7b68fbe4cb0aaec0e1e483b5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171002012306",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/28"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171002012547",
+      "path": "observations/d89Julia_2017-10-02T01_25_47.586_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-02T01_25_47.586_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "8a5f16c87954427c607564a8b49e7a7801793cdef861ddf249bbdea87fcf9007",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171002012547",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/29"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171002012827",
+      "path": "observations/d89Julia_2017-10-02T01_28_27.532_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-02T01_28_27.532_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d47ee254af965d4d17a3856dcf57fd426bbba83c6afa7b62ba0a819b723696bc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171002012827",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/30"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171007014406",
+      "path": "observations/d89Julia_2017-10-07T01_44_06.722_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-07T01_44_06.722_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "b26b92771072ba071e55f0c92dd9277a643d3b910bc215e2d6502af7be7b7f17",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171007014406",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/31"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171007014646",
+      "path": "observations/d89Julia_2017-10-07T01_46_46.754_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-07T01_46_46.754_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "b3fed582bcc513a7814b9a61be00f879b50814194defcbefd73407a30f34e5f9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171007014646",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/32"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171007014928",
+      "path": "observations/d89Julia_2017-10-07T01_49_28.386_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-07T01_49_28.386_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "ec0e095da420ed33ee0ef6a6d6f12d86862c3b2ae67b15abadc2123ec4f47def",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171007014928",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/33"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-sphere-20171007015207",
+      "path": "observations/d89Julia_2017-10-07T01_52_07.893_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-07T01_52_07.893_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d0b98f3af955a9e5ffb3c2854c342d83e415660e3b644f3e80e5b81a0887ecc7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-sphere-20171007015207",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/34"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-adam-shape",
+      "path": "shape/89_Julia_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/89_Julia_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "adam-terrain"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "expectedBytes": 48107,
+      "expectedSha256": "affa698cf6f4e0339cb4ae0d0f3f5747828e49f21eb25faabe41b31b8045d2a3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/35"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-horizons-sphere-observer",
+      "path": "reference/horizons-sphere-observer.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
+      "expectedBytes": 14006,
+      "expectedSha256": "61a1f50dcd54f7fc2ee816878d84dfe10be7485d3c3647f11f6d727c45e9cb16",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-horizons-sphere-observer",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/36"
+          }
+        ]
+      }
+    },
+    {
+      "id": "julia-horizons-sphere-heliocentric",
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
+      "expectedBytes": 10688,
+      "expectedSha256": "1a0bacfb3de82a36449382749d189dc07211ce754ea5275ddf9177cf0beabdbd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-julia-julia-horizons-sphere-heliocentric",
+            "role": "material",
+            "evidence": "src/objects/julia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/37"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -139,8 +1478,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6771,
-      "expectedSha256": "e6abb400c7f0d9752e85c57bffbd792bacd15055ead465b2c45afabf578894bb",
+      "expectedBytes": 7964,
+      "expectedSha256": "ff91feb5944ff512c236c12a0f704be35b0a23ae1d0150701310f18d27b55c53",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -148,8 +1487,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 915,
-      "expectedSha256": "77e6fb93c33c679d728d658c98a85da0dfac1e66adca96b8129a22000caba641"
+      "expectedBytes": 14138,
+      "expectedSha256": "060050122191a5ba422dccfa7cfeaf6a6d5874c68468019611a5dbb6f5eb3095"
     },
     {
       "path": "preparation/navigation.json",
@@ -163,8 +1502,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2712,
-      "expectedSha256": "a1d60d23046f1df6572c34c9628e776f050252448c0783690d1de33a9045d663"
+      "expectedBytes": 24502,
+      "expectedSha256": "04ed8087084ff54ac30a7c636f358695b234231cebfeafca142d69520a639cf4"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -215,6 +1554,16 @@
           }
         ]
       }
+    },
+    {
+      "path": "preparation/observer-cameras.json",
+      "expectedBytes": 524,
+      "expectedSha256": "b3de344740a9dd1de2d9cfd0cdd171e96bd54c5a9f1cf39e8de263d691ca3a80"
+    },
+    {
+      "path": "preparation/published-comparison.json",
+      "expectedBytes": 1325,
+      "expectedSha256": "e36c75fb43ab8fa3d16f812c5b066cea88692684b63bb44373829014b2afa4d0"
     }
   ]
 }

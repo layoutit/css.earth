@@ -1,0 +1,37 @@
+{
+  "id": "source-lamberta-lamberta-horizons-sphere-heliocentric",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lamberta · lamberta horizons sphere heliocentric",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/lamberta/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "d690db6aca27adc864b70560de892ad6bf018bd001cdb7ef90be730898c41bcb",
+      "locator": "/inputs/29"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "scope": "The lamberta horizons sphere heliocentric input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ephemeris service output; cite JPL Horizons.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

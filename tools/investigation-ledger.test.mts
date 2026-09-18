@@ -15,7 +15,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const SHARED_FINDING_BODIES = 3;
 /** Open decisions that still name no source outside this repository. It is a backlog: it may only go down, except when a
  * decision is about this repository's own code, where there is no archive, deposit or paper to watch. */
-const UNSOURCED_DECISIONS = 645;
+const UNSOURCED_DECISIONS = 642;
 // The source survey a body README used to carry: list items led by a bold decision such as Included, Excluded or Selected.
 const SURVEY_ITEM = /^\s*[-*] \*\*(?:Included|Excluded|Unresolved|Deferred|Selected|Superseded|Not selected|Older interpretation|Literature)\b/m;
 // This is deliberately limited to an explicit README section title. Bodies may still use

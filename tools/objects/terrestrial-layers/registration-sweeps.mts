@@ -120,6 +120,9 @@ export interface LimbCentre {
  * price is the terminator side, which at phase angle α ends up to R(1 − cos α) inside the limb. For a main-belt body
  * seen from Earth α is under 25 degrees, and the bias is a fraction of a pixel on a deconvolved frame.
  */
+/** Half-step iterations a limb fit may take after its plain ones, when it has not settled. */
+export const DAMPED_LIMB_ITERATIONS = 16;
+
 export function limbCentre(source: CameraImage | RegistrationImage, sighting: Sighting, orientation: BodyOrientation, positions: readonly (readonly number[])[],
     { edgeFraction = 0.25, bins = 72, iterations = 8 } = {}): LimbCentre {
   const image = registrationImage(source), { width, height, values } = image;
@@ -131,7 +134,10 @@ export function limbCentre(source: CameraImage | RegistrationImage, sighting: Si
   if (count < bins) throw new Error('The frame shows too little disc to place a limb on.');
   cx /= count; cy /= count;
   let moved = 0, done = 0, limbBins = 0, residualPixels = NaN;
-  for (let iteration = 0; iteration < iterations; iteration++) {
+  // A fit still moving after its plain iterations takes half steps: on an elongated outline the full step can bounce
+  // the centre between two positions for ever (Kleopatra's frames flip 0.52 px each way), and half steps settle between
+  // them. A fit that settles within the plain iterations never reaches this and is unchanged.
+  for (let iteration = 0; iteration < iterations + DAMPED_LIMB_ITERATIONS; iteration++) {
     const camera = controlledShapeCamera(observerCamera({ ...sighting, center: [cx, cy] }, orientation));
     const model = new Float64Array(bins);
     for (const position of positions) {
@@ -151,7 +157,8 @@ export function limbCentre(source: CameraImage | RegistrationImage, sighting: Si
     const determinant = scc * sss - scs * scs;
     if (limbBins < bins / 2 || !(Math.abs(determinant) > 1e-9)) throw new Error('The frame shows too little limb to place a centre on.');
     const dx = (rc * sss - rs * scs) / determinant, dy = (rs * scc - rc * scs) / determinant;
-    cx += dx; cy += dy; moved = Math.hypot(dx, dy); done = iteration + 1;
+    const step = iteration < iterations ? 1 : 0.5;
+    cx += step * dx; cy += step * dy; moved = step * Math.hypot(dx, dy); done = iteration + 1;
     if (moved < 0.05) break;
   }
   return { center: [cx, cy], iterations: done, movedPixels: moved, limbBins, residualPixels };

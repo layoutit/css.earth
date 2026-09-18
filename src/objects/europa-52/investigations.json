@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 319 km, ecliptic J2000 pole (255\u00b0, 40\u00b0), period 5.629954 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 159.12972831753473 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 319 km, ecliptic J2000 pole (255°, 40°), period 5.629954 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 159.12972831753473 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/europa-52/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -51,13 +51,13 @@
     {
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
-      "status": "unresolved",
-      "finding": "The live source folder https://observations.lam.fr/astero/Data/52Europa/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
-      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 32 camera-1 deconvolved frames, 4 nights from 2018-07-08 to 2018-08-10, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 33 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/52Europa/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/europa-52/README.md",
         "https://observations.lam.fr/astero/Data/52Europa/",
-        "https://observations.lam.fr/astero/"
+        "https://observations.lam.fr/astero/",
+        "https://observations.lam.fr/astero/Data/52Europa/Deconv/"
       ],
       "checked": [
         {
@@ -68,15 +68,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
         }
       ]
     },
     {
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
-      "status": "excluded",
-      "finding": "The live directory also lists 52_Europa_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
-      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "status": "included",
+      "finding": "The live directory also lists 52_Europa_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Reopened 2026-09-18 because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure B.27 describe; the Shape and Elevation views keep MPCD.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/52_Europa_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -88,15 +91,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
         }
       ]
     },
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Measured with the cross-frame registration test on 65 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 1072 pixels (median); peak correlation 0.10 (median) against a mirror margin of 0.65; 1 of 65 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists. The outline does not place it either: 52 of 65 frames score, but they leave 6.213 degrees after a 5.070-degree floor, twice the three-degree gate. Measured outside preparation by the registration stage's own limb rule driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit; the stage's own number can differ, and on Themis it read 1.65 degrees where this route read 2.92.",
-      "revisitWhen": "A registration reference for this body: a spacecraft map, or frames in which the cross-frame test resolves markings (peak correlation above 0.15 with a mirror margin above 1.5 on most frames).",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 32 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured with the cross-frame registration test on 65 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 1072 pixels (median); peak correlation 0.10 (median) against a mirror margin of 0.65; 1 of 65 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists. The outline does not place it either: 52 of 65 frames score, but they leave 6.213 degrees after a 5.070-degree floor, twice the three-degree gate. Measured outside preparation by the registration stage's own limb rule driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit; the stage's own number can differ, and on Themis it read 1.65 degrees where this route read 2.92.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/52Europa/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -110,6 +116,31 @@
         {
           "date": "2026-09-17",
           "commit": "24e2730084f5b0528499be985940392e1d16da17"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.27 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.27, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.968 to 0.974 at our phase, against 0.972 to 0.977 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 6 of 6 columns. With the paper’s photographs 0.955 to 0.971. Turned in the image, our outline best overlaps the paper’s photographs at -3.0 to 0.0° and its model panels at -2.5 to 0.0°. The spin axis we project lies at 36.6 to 42.5° on the sky against 34.5 to 40.4° for the figure’s arrows. Native outline residual 2.790 px mean over 32 frames at our phase; the sweep’s lowest is 2.738 px at -2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.39° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/52Europa/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/52_Europa_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "2391723b720b7f747554e0dfe8605455a7ce8a65"
         }
       ]
     }

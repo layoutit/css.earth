@@ -1,0 +1,37 @@
+{
+  "id": "source-europa-52-europa-52-sphere-20180710024721",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "52 Europa · europa 52 sphere 20180710024721",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/52Europa/Deconv/d52Europa_2018-07-10T02_47_21.526_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa-52/source/manifest.json",
+      "revision": "9d984f641976e683f23c99aa244d00a4d4974be6",
+      "sha256": "917b41fb600a2f9d9db911e7684a121e7cc9fefa0a70e56c8aae36b384972cd1",
+      "locator": "/inputs/24"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The europa 52 sphere 20180710024721 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

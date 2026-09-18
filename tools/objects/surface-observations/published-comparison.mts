@@ -20,8 +20,9 @@ export interface ComparisonSpec {
   schema: string; lensId: string; source: string; figure: string;
   /** The figure as an image object of a pinned paper: the manifest input, the object number and the decoded pixels' identity. */
   document: { input: string; object: number; width: number; height: number; sha256: string };
-  /** The rows of photographs and of the model the lens rides, counted from the top of the figure's dark band, and how many image rows the band holds. */
-  rows: { image: number; model: number; count: number };
+  /** The rows of photographs and of the model the lens rides, counted from the top of the figure's dark band, how many image rows the
+   * band holds, and how many lines of text each photograph panel prints at its top, which the body's outline leaves out. */
+  rows: { image: number; model: number; count: number; labelLines: number };
   /** One entry per figure column, band by band and left to right within a band: its printed label and the lens frame it shows, or null for an epoch the lens does not use. A figure with more epochs than fit one band continues them in a second band below. */
   columns: ComparisonColumn[];
 }
@@ -38,7 +39,8 @@ export function parseComparisonSpec(value: unknown): ComparisonSpec {
   const spec: ComparisonSpec = {
     schema: COMPARISON_SPEC_SCHEMA, lensId: requireString(record.lensId, 'lensId'), source, figure: requireString(record.figure, 'figure'),
     document: { input: requireString(document.input, 'document input'), object: integer(document.object, 'document object'), width: integer(document.width, 'figure width'), height: integer(document.height, 'figure height'), sha256 },
-    rows: { image: integer(rows.image, 'image row'), model: integer(rows.model, 'model row'), count: integer(rows.count, 'row count') },
+    rows: { image: integer(rows.image, 'image row'), model: integer(rows.model, 'model row'), count: integer(rows.count, 'row count'),
+      labelLines: rows.labelLines === undefined ? 0 : integer(rows.labelLines, 'label lines') },
     columns: requireArray(record.columns, 'columns').map((value, index) => {
       const column = requireRecord(value, `column ${index}`);
       return { label: requireString(column.label, `column ${index} label`), frame: column.frame === null ? null : requireString(column.frame, `column ${index} frame`),
@@ -96,7 +98,9 @@ export function columnCells(figure: Raster, spec: Pick<ComparisonSpec, 'rows' | 
   };
 }
 
-const isRed = (image: Raster, x: number, y: number) => pixel(image, x, y, 0) > 150 && pixel(image, x, y, 1) < 110 && pixel(image, x, y, 2) < 110;
+/** The figures' spin-axis arrows are the only coloured ink on grey panels, so red is any pixel whose red channel clearly
+ * leads the other two, including the arrow's darker anti-aliased fringe. */
+const isRed = (image: Raster, x: number, y: number) => { const r = pixel(image, x, y, 0), g = pixel(image, x, y, 1), b = pixel(image, x, y, 2); return r > 60 && r > 1.6 * g && r > 1.6 * b; };
 
 function components(mask: Uint8Array, width: number, height: number) {
   const label = new Int32Array(width * height), sizes: number[] = [0], stack: number[] = [];
@@ -128,10 +132,29 @@ function dilate(mask: Uint8Array, width: number, height: number, radius: number,
   return out;
 }
 
-/** The body in one panel: its largest bright region with the red axis arrows removed and the thin gap they leave closed, holes filled. */
-export function panelDisc(figure: Raster, box: Box, threshold = 40): Mask {
+/** A printed line of text is at most this many rows tall; a taller run of ink rows is the body, not a label. */
+const TEXT_LINE_ROWS = 24;
+/** The first row below the given number of text lines at the top of a panel. A line is a run of rows with ink, parted from
+ * the next by an empty row; a run too tall to be text ends the search, so a body that touches its label is never cut. */
+export function belowTopLines(figure: Raster, box: Box, lines: number) {
+  const inkRow = (y: number) => { for (let x = box.x0 + 4; x < box.x1 - 4; x++) if (Math.max(pixel(figure, x, y, 0), pixel(figure, x, y, 1), pixel(figure, x, y, 2)) > 128) return true; return false; };
+  let y = box.y0;
+  for (let line = 0; line < lines; line++) {
+    while (y < box.y1 && !inkRow(y)) y++;
+    const start = y;
+    while (y < box.y1 && inkRow(y)) y++;
+    if (y - start > TEXT_LINE_ROWS) return start;
+  }
+  return y;
+}
+
+/** The body in one panel: its largest bright region with the red axis arrows removed and the thin gap they leave closed, holes
+ * filled. Printed lines of text at the top of the panel, such as a photograph's date and phase, are left out first, since the
+ * closing would otherwise join a label that nearly touches the body. */
+export function panelDisc(figure: Raster, box: Box, threshold = 40, labelLines = 0): Mask {
   const width = box.x1 - box.x0, height = box.y1 - box.y0, bright = new Uint8Array(width * height);
-  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+  const firstRow = labelLines > 0 ? belowTopLines(figure, box, labelLines) - box.y0 : 0;
+  for (let y = firstRow; y < height; y++) for (let x = 0; x < width; x++) {
     const X = box.x0 + x, Y = box.y0 + y, gray = (pixel(figure, X, Y, 0) + pixel(figure, X, Y, 1) + pixel(figure, X, Y, 2)) / 3;
     bright[y * width + x] = +(gray > threshold && !isRed(figure, X, Y));
   }
@@ -197,8 +220,26 @@ export const COMPARISON_BLOCK_END = '<!-- published-comparison:end -->';
 
 export interface ComparisonEvidence {
   figure: string; source: string;
-  columns: { label: string; overlapWithModel: number; overlapWithPhotograph: number; sameShapeOverlap: number; bestTurnDegrees: number; imageTurnDegrees: { model: number; photograph: number }; axis: { paperDegrees: number | null; oursDegrees: number | null } }[];
+  columns: { label: string; overlapWithModel: number; overlapWithPhotograph: number; sameShapeOverlap: number; bestTurnDegrees: number; turns: Record<string, number>; imageTurnDegrees: { model: number; photograph: number }; axis: { paperDegrees: number | null; oursDegrees: number | null } }[];
   nativeOutline: { frames: number; residualPixelsAtZero: number; residualPixels: Record<string, number> };
+}
+
+/** The rotational phase step of the sweep that compares our outline with each of the paper's model panels. */
+export const PHASE_SWEEP_STEP_DEGREES = 10;
+
+/**
+ * Where a column's phase sweep puts the best overlap with the paper's model, against our own phase: at it, one sweep
+ * step from it, or elsewhere by less than the measure resolves, which a nearly round outline does. The measure's
+ * resolution is what one outline loses against itself drawn at the paper's pixel size. Anything else means our
+ * rotation and the paper's differ in that column.
+ */
+export type PhaseAgreement = 'at' | 'step' | 'unresolved' | 'elsewhere';
+export function phaseAgreement(column: ComparisonEvidence['columns'][number]): PhaseAgreement {
+  if (column.bestTurnDegrees === 0) return 'at';
+  if (Math.abs(column.bestTurnDegrees) <= PHASE_SWEEP_STEP_DEGREES) return 'step';
+  const ours = column.turns['0'];
+  if (ours === undefined) throw new TypeError(`Column ${column.label} has no sweep score at our phase.`);
+  return Math.max(...Object.values(column.turns)) - ours < 1 - column.sameShapeOverlap ? 'unresolved' : 'elsewhere';
 }
 
 /** The evidence a README block is written from, validated. */
@@ -212,7 +253,9 @@ export function parseComparisonEvidence(value: unknown): ComparisonEvidence {
       const column = requireRecord(value, `column ${index}`), axis = requireRecord(column.axis, `column ${index} axis`), image = requireRecord(column.imageTurnDegrees, `column ${index} image turn`);
       return { label: requireString(column.label, 'label'), overlapWithModel: requireFiniteNumber(column.overlapWithModel, 'model overlap'),
         overlapWithPhotograph: requireFiniteNumber(column.overlapWithPhotograph, 'photograph overlap'), sameShapeOverlap: requireFiniteNumber(column.sameShapeOverlap, 'same-shape overlap'),
-        bestTurnDegrees: requireFiniteNumber(column.bestTurnDegrees, 'best turn'), imageTurnDegrees: { model: requireFiniteNumber(image.model, 'image turn onto the model'), photograph: requireFiniteNumber(image.photograph, 'image turn onto the photograph') },
+        bestTurnDegrees: requireFiniteNumber(column.bestTurnDegrees, 'best turn'),
+        turns: Object.fromEntries(Object.entries(requireRecord(column.turns, `column ${index} phase sweep`)).map(([turn, overlap]) => [turn, requireFiniteNumber(overlap, `column ${index} overlap at ${turn}°`)])),
+        imageTurnDegrees: { model: requireFiniteNumber(image.model, 'image turn onto the model'), photograph: requireFiniteNumber(image.photograph, 'image turn onto the photograph') },
         axis: { paperDegrees: angle(axis.paperDegrees, 'paper axis'), oursDegrees: angle(axis.oursDegrees, 'our axis') } };
     }),
     nativeOutline: { frames: requireFiniteNumber(native.frames, 'frames'), residualPixelsAtZero: requireFiniteNumber(native.residualPixelsAtZero, 'residual'),
@@ -225,7 +268,7 @@ export function comparisonBlock(evidence: ComparisonEvidence): string {
   const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels || Math.abs(a.offset) - Math.abs(b.offset));
   const lowest = sweep[0], native = evidence.nativeOutline;
   return [
-    `Measured by \`tools/objects/published-comparison.mts\` against [${evidence.figure}](${evidence.source}), the survey's comparison of these frames with its models. The numbers are read from [\`evidence/published-comparison.json\`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.`,
+    `Measured by \`tools/objects/published-comparison.mts\` against [${evidence.figure}](${evidence.source}), the survey's comparison of these frames with its models. The numbers are read from [\`evidence/published-comparison.json\`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.`,
     '',
     '| Figure column | Overlap with the paper\'s model | With the paper\'s photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure\'s |',
     '| --- | --- | --- | --- | --- | --- | --- |',

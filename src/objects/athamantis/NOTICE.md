@@ -1,5 +1,7 @@
 # Athamantis: notices
 
+`evidence/published-comparison.webp` reproduces the photograph panels of the article’s Figure B.38 with outlines drawn over them, under the article’s CC-BY-4.0 licence. The photographic surface is the survey’s own deconvolved VLT/SPHERE/ZIMPOL frames, credited to its authors and to ESO programme 199.C-0074; it carries their photographed illumination and no radiometric calibration, so it is not measured albedo or colour. Its placement reproduces the article’s Figure B.38. No photographic texture is attributed to NASA.
+
 DAMIT, Astronomical Institute of Charles University; Torppa et al. (2003), Hanuš et al. (2013); model 185, version 2007-02-27.
 
 Shape and derived geometry: DAMIT CC BY 4.0, https://creativecommons.org/licenses/by/4.0/. Original source and selected record: https://damit.cuni.cz/projects/damit/asteroid_models/view/185.

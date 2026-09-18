@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.18",
+  "document": {
+    "input": "kalliope-survey-research",
+    "object": 1097,
+    "width": 2318,
+    "height": 1233,
+    "sha256": "ff345d5cbeae28bc55a789f4c242b5db772483309cd33a3065870961c75a99e3"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2018-03-15T08:03:46",
+      "frame": "zimpol-20180315-080346",
+      "band": 0
+    },
+    {
+      "label": "2018-04-20T05:11:36",
+      "frame": "zimpol-20180420-051136",
+      "band": 0
+    },
+    {
+      "label": "2018-04-20T05:36:16",
+      "frame": "zimpol-20180420-053616",
+      "band": 0
+    },
+    {
+      "label": "2018-05-05T02:34:13",
+      "frame": "zimpol-20180505-023413",
+      "band": 0
+    },
+    {
+      "label": "2018-05-05T02:40:24",
+      "frame": "zimpol-20180505-024024",
+      "band": 0
+    },
+    {
+      "label": "2019-06-09T08:55:04",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-06-27T03:38:22",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-06-27T03:55:48",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-07-08T00:48:15",
+      "frame": null,
+      "band": 0
+    }
+  ]
+}

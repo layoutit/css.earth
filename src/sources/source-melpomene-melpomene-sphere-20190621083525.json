@@ -1,0 +1,37 @@
+{
+  "id": "source-melpomene-melpomene-sphere-20190621083525",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Melpomene · melpomene sphere 20190621083525",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-06-21T08_35_25.727_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/melpomene/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "755453cbe14bacb3c7fc7cacc673a51b06429b10fdf9b75ee9734ff56d9ffe39",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The melpomene sphere 20190621083525 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

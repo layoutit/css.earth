@@ -1,0 +1,37 @@
+{
+  "id": "source-davida-davida-sphere-20180906052757",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Davida · davida sphere 20180906052757",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_27_57.273_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/davida/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "17a0a1f466f8cb688f8e4088061c28bdd08372c762cc4c0697e2020c8872572e",
+      "locator": "/inputs/21"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The davida sphere 20180906052757 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

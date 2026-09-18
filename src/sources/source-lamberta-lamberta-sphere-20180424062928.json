@@ -1,0 +1,37 @@
+{
+  "id": "source-lamberta-lamberta-sphere-20180424062928",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lamberta · lamberta sphere 20180424062928",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/187Lamberta/Deconv/d187Lamberta_2018-04-24T06_29_28.917_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/lamberta/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "d690db6aca27adc864b70560de892ad6bf018bd001cdb7ef90be730898c41bcb",
+      "locator": "/inputs/19"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The lamberta sphere 20180424062928 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
