@@ -77,6 +77,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   // Where LAM withholds the release's own mesh and record, the archive copy that supplied them is named (Flora: DAMIT).
   const archive = setup.releasedModel?.spin !== undefined ? setup.releasedModel.model : null;
   const meshWords = (onAdam ? 'the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses.'
+    : setup.primaryIsAdam ? 'the ADAM reconstruction from the same survey, its only one for this body and the model the Shape view uses. The survey’s rotation record describes that frame.'
     : 'the released reconstruction the Shape view uses; the release publishes no ADAM mesh for this body.')
     + (archive ? ` LAM withholds this body’s own ADAM mesh and rotation record, so both come from ${archive}, DAMIT’s copy of the survey model.` : '');
   const recordWords = archive ? `the rotation state ${archive} states` : 'the release rotation record';
@@ -168,9 +169,9 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     const checked = requireArray(entry.checked).map(value => requireRecord(value));
     entry.checked = checked.some(earlier => earlier.date === check.date && earlier.commit === check.commit) ? checked : [...checked, check];
   };
-  close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
+  close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
   close('lam-adam-alternative', earlier => `${earlier} Reopened ${today} because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure ${figure} describe; the Shape and Elevation views keep MPCD.`);
-  close('sphere-cross-frame-registration', earlier => `Decided ${today} by the published comparison instead: the lens is prepared from ${lensFrames} camera-1 frames on the ${onAdam ? 'ADAM' : 'primary'} mesh with the rotation record read ${setup.columnOrder.order}, and ships on ${COMPARISON_ENTRY}; the registration stage’s numbers are in the README. Earlier result, kept: ${earlier}`);
+  close('sphere-cross-frame-registration', earlier => `Decided ${today} by the published comparison instead: the lens is prepared from ${lensFrames} camera-1 frames on the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with the rotation record read ${setup.columnOrder.order}, and ships on ${COMPARISON_ENTRY}; the registration stage’s numbers are in the README. Earlier result, kept: ${earlier}`);
   ledger.entries = entries;
   await writeJson(resolve(objectDirectory, 'investigations.json'), ledger);
 

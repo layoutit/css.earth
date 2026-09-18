@@ -234,7 +234,9 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
     document: { input: paperInput ? requireString(paperInput.id) : `${objectId}-survey-research`, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
     rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
-  if (adam) {
+  // A body whose own shape is already the release's ADAM mesh (Adeona, which has no MPCD) needs no second copy of it.
+  const primaryIsAdam = requireRecord(geometry.radialTerrain).path === adamPath;
+  if (adam && !primaryIsAdam) {
     const counts = objCounts(adam.toString('utf8')), primary = requireRecord(geometry.radialTerrain);
     // The release's ADAM meshes are Wavefront OBJ files in kilometres, whatever format the primary mesh came in (a DAMIT
     // plate model, say); the rest of the primary's settings carry over.
@@ -262,7 +264,7 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   const pin = (bytes: Buffer | string) => { const data = Buffer.from(bytes); return { expectedBytes: data.length, expectedSha256: sha256(data) }; };
   const setInput = (entry: Record<string, unknown>) => { const at = inputs.findIndex(input => input.path === entry.path); if (at >= 0) inputs[at] = { ...inputs[at], ...entry }; else inputs.push(entry); };
   for (const entry of frames) setInput(frameInput(objectId, entry.frame, entry.bytes));
-  if (adam) setInput(adamInput(objectId, number, figure.name, adamPath, adam, withheld));
+  if (adam && !primaryIsAdam) setInput(adamInput(objectId, number, figure.name, adamPath, adam, withheld));
   setInput({ ...tableInput(objectId, 'observer', HORIZONS.observer, Buffer.from(tables.observer)) });
   setInput({ ...tableInput(objectId, 'heliocentric', HORIZONS.heliocentric, Buffer.from(tables.heliocentric)) });
   if (!paperInput) setInput(paperInputFor(objectId, paper));
@@ -279,7 +281,7 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   const result = await measurePublishedComparison(objectId, { sourceDirectory: source });
   await writeComparisonEvidence(result, resolve(work, 'evidence'));
   const setup = { schema: SETUP_SCHEMA, objectId, survey: { number, name: figure.name, figure: figure.figure, command }, lensId: LENS_ID,
-    listing: framesUrl(number, figure.name), spinRecordUrl, apparition: { nights, frames: frames.length, released: listing.length }, leftOut: leaveOut, lensMesh: adam ? 'adam' : 'primary', releasedModel: released ?? null, tablePole: figure.pole,
+    listing: framesUrl(number, figure.name), spinRecordUrl, apparition: { nights, frames: frames.length, released: listing.length }, leftOut: leaveOut, lensMesh: adam && !primaryIsAdam ? 'adam' : 'primary', primaryIsAdam, releasedModel: released ?? null, tablePole: figure.pole,
     sources: { mesh: adam ? { label: withheld ? `ADAM reconstruction, as ${withheld.model} distributes it` : 'ADAM reconstruction', url: adamUrl } : null,
       rotation: { label: withheld ? `Rotation state, as ${withheld.model} states it` : 'Release rotation record', url: spinRecordUrl } },
     labels: columns, columnOrder: { order: reading.order, separationDegrees: Number(reading.separationDegrees.toFixed(2)), otherSeparationDegrees: reading.otherSeparationDegrees === null ? null : Number(reading.otherSeparationDegrees.toFixed(2)) },
@@ -364,7 +366,8 @@ function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
   for (const column of setup.evidence.columns) lines.push(`  ${column.label}  model ${column.overlapWithModel}, photograph ${column.overlapWithPhotograph}, same shape ${column.sameShapeOverlap}; best turn ${column.bestTurnDegrees}°; axis ${column.axis.oursDegrees}° against ${column.axis.paperDegrees}°`);
   lines.push(`  native outline ${setup.evidence.nativeOutline.residualPixelsAtZero} px over ${setup.evidence.nativeOutline.frames} frames, smallest at ${setup.evidence.nativeOutline.bestOffsetDegrees}°`);
   if (setup.leftOut.length) lines.push(`  left out by name: ${setup.leftOut.join(', ')}`);
-  if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
+  if (setup.primaryIsAdam) lines.push('  the body’s own shape is the release’s ADAM mesh; the lens rides it');
+  else if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
   if (setup.earlierLens) lines.push(`  the package's lens: ${setup.earlierLens.frames} frames, ${setup.earlierLens.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierLens.camerasDiffering.length ? setup.earlierLens.camerasDiffering.join(', ') : 'none'}`);
   lines.push(`Evidence: ${relative(ROOT, resolve(ROOT, 'output/sphere-survey', setup.objectId, 'evidence/published-comparison.webp'))}`);
   return lines.join('\n');
