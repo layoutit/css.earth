@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { COMPARISON_SPEC_FILE, axisDifferenceDegrees, columnCells, figureBands, figureCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from './published-comparison.mts';
+import { COMPARISON_SPEC_FILE, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, figureBands, figureCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from './published-comparison.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const DEGREE = Math.PI / 180;
@@ -81,6 +81,21 @@ test('outline overlap ignores scale and position but not shape', () => {
   assert.ok(smaller > 0.96 && smaller < 1, `the same shape at 0.8 of the size scores ${smaller}: high, but its pixels keep it below 1, so the tool reports that ceiling`);
   assert.ok(outlineOverlap(ellipse(30, 20), ellipse(20, 30)) < 0.8, 'the same shape turned a quarter');
   assert.throws(() => outlineOverlap(ellipse(30, 20), { width: 4, height: 4, data: new Uint8Array(16) }), /empty outline/);
+});
+
+test('the image turn that best lays one outline on another is found in half degrees, counter-clockwise as seen', () => {
+  // A bar level in one picture and raised at its right end in the other; picture rows grow downward.
+  const bar = (degrees: number): Mask => {
+    const size = 120, data = new Uint8Array(size * size), turn = degrees * DEGREE;
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      const u = x - 60, v = y - 60;
+      data[y * size + x] = +(Math.abs(u * Math.cos(turn) - v * Math.sin(turn)) < 30 && Math.abs(u * Math.sin(turn) + v * Math.cos(turn)) < 8);
+    }
+    return { width: size, height: size, data };
+  };
+  assert.equal(bestImageTurnDegrees(bar(0), bar(5)), 5);
+  assert.equal(bestImageTurnDegrees(bar(3), bar(0)), -3);
+  assert.ok(outlineOverlap(bar(0), bar(5), 5) > outlineOverlap(bar(0), bar(5)));
 });
 
 test('the comparison record names its paper, figure pixels, rows and frames', async () => {

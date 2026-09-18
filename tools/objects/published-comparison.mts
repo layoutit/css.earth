@@ -19,7 +19,7 @@ import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type 
 import { decodeCalibratedCamera, loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
 import { radialTerrainForLens } from './terrestrial-layers/radial-models.mts';
 import { observerCaster, turnedOrientation, type TurnableCaster } from './terrestrial-layers/registration-sweeps.mts';
-import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, axisDifferenceDegrees, columnCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from './surface-observations/published-comparison.mts';
+import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from './surface-observations/published-comparison.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const TURN_STEP = 10, SWEEP = { from: -30, to: 30, step: 2 };
@@ -29,8 +29,9 @@ const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
 /** A new record may leave the figure's pixel digest as 64 zeros; `--write` then adopts the figure it finds, once. */
 const UNPINNED = '0'.repeat(64);
 
-export async function measurePublishedComparison(objectId: string, { adopt = false } = {}) {
-  const sourceDirectory = resolve(ROOT, 'src/objects', objectId, 'source'), specPath = resolve(sourceDirectory, COMPARISON_SPEC_FILE);
+/** The measurement for a body's package, or for any source directory laid out like one, such as a setup run's scratch copy. */
+export async function measurePublishedComparison(objectId: string, { adopt = false, sourceDirectory = resolve(ROOT, 'src/objects', objectId, 'source') } = {}) {
+  const specPath = resolve(sourceDirectory, COMPARISON_SPEC_FILE);
   const stated = JSON.parse(await readFile(specPath, 'utf8')), spec = parseComparisonSpec(stated);
   const { record, recipe, frames } = await loadObserverCameraInputs(sourceDirectory);
   if (spec.lensId !== record.lensId) throw new TypeError(`The comparison names lens ${spec.lensId}; the observer cameras derive ${record.lensId}.`);
@@ -103,6 +104,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
     const bestTurn = Number(Object.entries(turns).sort((a, b) => b[1] - a[1])[0][0]);
     columns.push({ label: column.label, frame: column.frame, overlapWithModel: turns[0], overlapWithPhotograph: round(outlineOverlap(drawn.mask, photograph)), sameShapeOverlap: round(floor),
       bestTurnDegrees: bestTurn > 180 ? bestTurn - 360 : bestTurn, turns,
+      imageTurnDegrees: { model: bestImageTurnDegrees(drawn.mask, model), photograph: bestImageTurnDegrees(drawn.mask, photograph) },
       axis: { paperDegrees: paperAxis === null ? null : round(paperAxis, 1), oursDegrees: ours === null ? null : round(ours, 1), differenceDegrees: paperAxis === null || ours === null ? null : round(axisDifferenceDegrees(ours, paperAxis), 1) } });
     visuals.push({ label: column.label, model, shade: drawn.shade, ours: drawn.mask, cellModel: spec.rows.model, cellImage: spec.rows.image, column: index });
   }
@@ -114,6 +116,13 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
     nativeOutline: { frames: atZero.length, residualPixelsAtZero: sweep[0], bestOffsetDegrees: Number(best[0]), sweepDegrees: SWEEP, residualPixels: sweep },
   };
   return { evidence, figure, cell, visuals };
+}
+
+/** Write `published-comparison.json` and its image into an evidence directory. */
+export async function writeComparisonEvidence(result: Awaited<ReturnType<typeof measurePublishedComparison>>, directory: string) {
+  await mkdir(directory, { recursive: true });
+  await writeFile(resolve(directory, 'published-comparison.json'), JSON.stringify(result.evidence, null, 2) + '\n');
+  await evidenceImage(result, resolve(directory, 'published-comparison.webp'));
 }
 
 /** A side-by-side image per compared column: the paper's model panel, our rendering, and the paper's photograph with our outline. */
@@ -149,13 +158,13 @@ if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).
   const [objectId, flag] = process.argv.slice(2);
   if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node tools/objects/published-comparison.mts <object-id> [--write]'); process.exit(2); }
   const result = await measurePublishedComparison(objectId, { adopt: flag === '--write' }), { evidence } = result;
-  for (const c of evidence.columns) console.log(`${c.label}  overlap with the paper's model ${c.overlapWithModel}, with its photograph ${c.overlapWithPhotograph}, same shape at both scales ${c.sameShapeOverlap}; best turn ${c.bestTurnDegrees}°; axis ours ${c.axis.oursDegrees}° against ${c.axis.paperDegrees}° (${c.axis.differenceDegrees}°)`);
+  for (const c of evidence.columns) console.log(`${c.label}  overlap with the paper's model ${c.overlapWithModel}, with its photograph ${c.overlapWithPhotograph}, same shape at both scales ${c.sameShapeOverlap}; best turn ${c.bestTurnDegrees}°; image turn onto the model ${c.imageTurnDegrees.model}°, onto the photograph ${c.imageTurnDegrees.photograph}°; axis ours ${c.axis.oursDegrees}° against ${c.axis.paperDegrees}° (${c.axis.differenceDegrees}°)`);
   const o = evidence.nativeOutline;
   console.log(`native outline over ${o.frames} frames: ${o.residualPixelsAtZero} px at our phase, smallest at ${o.bestOffsetDegrees}°`);
   if (flag === '--write') {
-    const directory = resolve(ROOT, 'src/objects', objectId, 'evidence'); await mkdir(directory, { recursive: true });
-    await writeFile(resolve(directory, 'published-comparison.json'), JSON.stringify(evidence, null, 2) + '\n');
-    await evidenceImage(result, resolve(directory, 'published-comparison.webp'));
+    await writeComparisonEvidence(result, resolve(ROOT, 'src/objects', objectId, 'evidence'));
+    const readmePath = resolve(ROOT, 'src/objects', objectId, 'README.md'), { readme, replaced } = withComparisonBlock(await readFile(readmePath, 'utf8'), comparisonBlock(parseComparisonEvidence(evidence)));
+    if (replaced) { await writeFile(readmePath, readme); console.log(`Wrote the comparison block into ${objectId}/README.md.`); }
     console.log(`Wrote evidence/published-comparison.json and its image for ${objectId}.`);
   }
 }

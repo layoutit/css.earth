@@ -158,25 +158,85 @@ export function panelAxisDegrees(figure: Raster, box: Box): number | null {
   return ((0.5 * Math.atan2(2 * xy, xx - yy)) * 180 / Math.PI + 180) % 180;
 }
 
-/** A mask resampled so its area is that of a circle of the given radius, centred on its centroid, on a square canvas. */
-export function normalisedMask(mask: Mask, radius = 60, size = 200): Uint8Array {
+/** A mask resampled so its area is that of a circle of the given radius, centred on its centroid, on a square canvas,
+ * and turned in the image plane by the given angle, counter-clockwise as the image is seen. */
+export function normalisedMask(mask: Mask, radius = 60, size = 200, turnDegrees = 0): Uint8Array {
   let n = 0, sx = 0, sy = 0;
   for (let i = 0; i < mask.data.length; i++) if (mask.data[i]) { n++; sx += i % mask.width; sy += Math.floor(i / mask.width); }
   if (!n) throw new TypeError('An empty outline cannot be compared.');
   const cx = sx / n, cy = sy / n, scale = Math.sqrt(n / Math.PI) / radius, out = new Uint8Array(size * size);
+  const c = Math.cos(turnDegrees * Math.PI / 180), s = Math.sin(turnDegrees * Math.PI / 180);
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
-    const X = Math.round(cx + (x + 0.5 - size / 2) * scale - 0.5), Y = Math.round(cy + (y + 0.5 - size / 2) * scale - 0.5);
+    const u = (x + 0.5 - size / 2) * scale, v = (y + 0.5 - size / 2) * scale;
+    const X = Math.round(cx + c * u - s * v - 0.5), Y = Math.round(cy + s * u + c * v - 0.5);
     out[y * size + x] = X >= 0 && Y >= 0 && X < mask.width && Y < mask.height ? mask.data[Y * mask.width + X] : 0;
   }
   return out;
 }
 
-/** Scale-free outline overlap: intersection over union of the two outlines normalised to one area and centroid. */
-export function outlineOverlap(a: Mask, b: Mask) {
-  const na = normalisedMask(a), nb = normalisedMask(b); let inter = 0, union = 0;
+/** Scale-free outline overlap: intersection over union of the two outlines normalised to one area and centroid, the
+ * first turned in the image plane by the given angle. */
+export function outlineOverlap(a: Mask, b: Mask, turnDegrees = 0) {
+  const na = normalisedMask(a, 60, 200, turnDegrees), nb = normalisedMask(b); let inter = 0, union = 0;
   for (let i = 0; i < na.length; i++) { inter += na[i] & nb[i]; union += na[i] | nb[i]; }
   return inter / union;
 }
 
+/** The image-plane turn of the first outline, within ±8° in half-degree steps, that best overlaps the second. */
+export function bestImageTurnDegrees(a: Mask, b: Mask) {
+  let best = { turn: 0, overlap: -1 };
+  for (let step = -16; step <= 16; step++) { const overlap = outlineOverlap(a, b, step / 2); if (overlap > best.overlap + 1e-12) best = { turn: step / 2, overlap }; }
+  return best.turn;
+}
+
 /** The difference between two axis angles, folded to (-90, 90]. */
 export const axisDifferenceDegrees = (a: number, b: number) => { const d = ((a - b) % 180 + 180) % 180; return d > 90 ? d - 180 : d; };
+
+export const COMPARISON_BLOCK_BEGIN = '<!-- published-comparison:begin -->';
+export const COMPARISON_BLOCK_END = '<!-- published-comparison:end -->';
+
+export interface ComparisonEvidence {
+  figure: string; source: string;
+  columns: { label: string; overlapWithModel: number; overlapWithPhotograph: number; sameShapeOverlap: number; bestTurnDegrees: number; imageTurnDegrees: { model: number; photograph: number }; axis: { paperDegrees: number | null; oursDegrees: number | null } }[];
+  nativeOutline: { frames: number; residualPixelsAtZero: number; residualPixels: Record<string, number> };
+}
+
+/** The evidence a README block is written from, validated. */
+export function parseComparisonEvidence(value: unknown): ComparisonEvidence {
+  const record = requireRecord(value, 'comparison evidence');
+  if (record.schema !== COMPARISON_EVIDENCE_SCHEMA) throw new TypeError(`Comparison evidence states schema ${COMPARISON_EVIDENCE_SCHEMA}.`);
+  const angle = (value: unknown, at: string) => value === null ? null : requireFiniteNumber(value, at);
+  const native = requireRecord(record.nativeOutline, 'native outline'), sweep = requireRecord(native.residualPixels, 'residual sweep');
+  return { figure: requireString(record.figure, 'figure'), source: requireString(record.source, 'source'),
+    columns: requireArray(record.columns, 'columns').map((value, index) => {
+      const column = requireRecord(value, `column ${index}`), axis = requireRecord(column.axis, `column ${index} axis`), image = requireRecord(column.imageTurnDegrees, `column ${index} image turn`);
+      return { label: requireString(column.label, 'label'), overlapWithModel: requireFiniteNumber(column.overlapWithModel, 'model overlap'),
+        overlapWithPhotograph: requireFiniteNumber(column.overlapWithPhotograph, 'photograph overlap'), sameShapeOverlap: requireFiniteNumber(column.sameShapeOverlap, 'same-shape overlap'),
+        bestTurnDegrees: requireFiniteNumber(column.bestTurnDegrees, 'best turn'), imageTurnDegrees: { model: requireFiniteNumber(image.model, 'image turn onto the model'), photograph: requireFiniteNumber(image.photograph, 'image turn onto the photograph') },
+        axis: { paperDegrees: angle(axis.paperDegrees, 'paper axis'), oursDegrees: angle(axis.oursDegrees, 'our axis') } };
+    }),
+    nativeOutline: { frames: requireFiniteNumber(native.frames, 'frames'), residualPixelsAtZero: requireFiniteNumber(native.residualPixelsAtZero, 'residual'),
+      residualPixels: Object.fromEntries(Object.entries(sweep).map(([offset, pixels]) => [offset, requireFiniteNumber(pixels, `residual at ${offset}`)])) } };
+}
+
+/** The README's comparison section, written from the evidence so that none of its numbers is typed. */
+export function comparisonBlock(evidence: ComparisonEvidence): string {
+  const number = (value: number) => value.toFixed(3), degrees = (value: number | null) => value === null ? '—' : `${value.toFixed(1)}°`;
+  const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels || Math.abs(a.offset) - Math.abs(b.offset));
+  const lowest = sweep[0], native = evidence.nativeOutline;
+  return [
+    `Measured by \`tools/objects/published-comparison.mts\` against [${evidence.figure}](${evidence.source}), the survey's comparison of these frames with its models. The numbers are read from [\`evidence/published-comparison.json\`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.`,
+    '',
+    '| Figure column | Overlap with the paper\'s model | With the paper\'s photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure\'s |',
+    '| --- | --- | --- | --- | --- | --- | --- |',
+    ...evidence.columns.map(column => `| ${column.label.replace('T', ' ')} | ${number(column.overlapWithModel)} | ${number(column.overlapWithPhotograph)} | ${number(column.sameShapeOverlap)} | ${column.bestTurnDegrees}° | ${column.imageTurnDegrees.model}°, ${column.imageTurnDegrees.photograph}° | ${degrees(column.axis.oursDegrees)} against ${degrees(column.axis.paperDegrees)} |`),
+    '',
+    `Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the ${native.frames} native frames after the centre fit is ${native.residualPixelsAtZero.toFixed(3)} px at our phase${lowest.offset === 0 ? ', the lowest of a ±30° sweep' : `; the lowest of a ±30° sweep is ${lowest.pixels.toFixed(3)} px at ${lowest.offset}°`}.`,
+  ].join('\n');
+}
+
+export function withComparisonBlock(readme: string, block: string) {
+  const begin = readme.indexOf(COMPARISON_BLOCK_BEGIN), end = readme.indexOf(COMPARISON_BLOCK_END);
+  if (begin < 0 || end < 0 || end < begin) return { readme, replaced: false };
+  return { readme: `${readme.slice(0, begin + COMPARISON_BLOCK_BEGIN.length)}\n${block}\n${readme.slice(end)}`, replaced: true };
+}
