@@ -10,7 +10,7 @@ const FLUSH_INTERVAL_MS = 5000;
 // and hands the changed ones to the worker: the page's cache holds exactly the
 // bytes it showed, while Safari gives the worker a separate cache that kept an
 // earlier deploy's bytes. A page that should not be controlled
-// (development servers, Firefox tabs, or a build that turns offline support
+// (development servers, browser tabs, or a build that turns offline support
 // off) removes any worker and copies an earlier visit left behind.
 export function registerServiceWorker(windowTarget: Window, enabled: boolean) {
   const container = windowTarget.navigator.serviceWorker;
@@ -20,7 +20,7 @@ export function registerServiceWorker(windowTarget: Window, enabled: boolean) {
     if (windowTarget.document.readyState === 'complete') task();
     else windowTarget.addEventListener('load', task, { once: true });
   };
-  if (!enabled || !shouldRegisterServiceWorker(windowTarget.navigator.userAgent, standalone)) {
+  if (!enabled || !shouldRegisterServiceWorker(standalone)) {
     whenLoaded(() => { void removeServiceWorker(windowTarget, container); });
     return;
   }

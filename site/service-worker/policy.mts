@@ -151,13 +151,14 @@ export function isStorableRoute(route: RequestRoute): boolean {
   return route.kind === 'immutable' || route.kind === 'network-first';
 }
 
-// Firefox sends every request of a controlled page to the worker, even one
-// whose fetch handler does nothing; on a Moon load (about 600 requests) that
-// delayed data-ready by 0.9 s in Firefox 155, while Chrome and Safari paid under
-// 0.1 s. Firefox browser tabs therefore stay uncontrolled; an installed app
-// still gets offline copies.
-export function shouldRegisterServiceWorker(userAgent: string, standalone: boolean): boolean {
-  return standalone || !/\bFirefox\//u.test(userAgent);
+// Only the installed app is controlled. Browser tabs get the manifest but no
+// worker: a first visit gains nothing from offline copies yet would store about
+// 70 MB (one Moon visit), and Firefox tabs paid 0.9 s before data-ready for
+// any fetch handler (Firefox 155, about 600 requests per Moon load). Someone
+// who installs cssEarth has asked for an app, so it works offline. Tabs run the
+// removal path, which clears a worker an earlier build registered.
+export function shouldRegisterServiceWorker(standalone: boolean): boolean {
+  return standalone;
 }
 
 // How long a failed request keeps the worker serving stored files first. The
