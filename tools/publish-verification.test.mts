@@ -63,7 +63,7 @@ test('a key still missing after the retry, and a JSON key with drifted bytes, bo
 });
 
 test('non-JSON assets beyond the sample size are HEAD-checked only, not byte-verified', async () => {
-  const bytesFor = new Map(Array.from({ length: 5 }, (_, i) => [`asset-${i}.webp`, Buffer.from(`payload ${i}`)] as const));
+  const bytesFor: ReadonlyMap<string, Buffer<ArrayBuffer>> = new Map(Array.from({ length: 5 }, (_, i) => [`asset-${i}.webp`, Buffer.from(`payload ${i}`)] as const));
   const assets = [...bytesFor.entries()].map(([key, bytes]) => asset(key, bytes));
   const getCalls: string[] = [];
   const fetcher = async (url: string, init?: RequestInit) => {

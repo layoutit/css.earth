@@ -123,7 +123,7 @@ test('a finding many bodies share lives in one shared record, and every record i
 test('the committed open-work index matches the ledgers', async () => {
   const root = fileURLToPath(new URL('../', import.meta.url));
   const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
-  const report = investigationReport(objects, ledgers, { statuses: [...INVESTIGATION_STATUSES], summary: false, json: false, index: true, write: false });
+  const report = investigationReport(objects, ledgers, { statuses: [...INVESTIGATION_STATUSES], summary: false, json: false, facilities: false, index: true, write: false });
   const committed = await readFile(resolve(root, INVESTIGATION_INDEX_FILE), 'utf8');
   assert.equal(committed, formatInvestigationIndex(report), `${INVESTIGATION_INDEX_FILE} is stale; run pnpm investigations:index`);
 });

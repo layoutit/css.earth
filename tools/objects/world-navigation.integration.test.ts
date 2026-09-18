@@ -88,6 +88,7 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
     const north = map ? requireArray(map.north).map(Number) : [0, 0, 1];
     const x = [0, 1, 2].map(axis => Math.cos(edge) * prime[axis]! - Math.sin(edge) * east[axis]!), y = [0, 1, 2].map(axis => Math.sin(edge) * prime[axis]! + Math.cos(edge) * east[axis]!);
     const drawn = multiply(chain(...transforms), [x[0]!, y[0]!, north[0]!, x[1]!, y[1]!, north[1]!, x[2]!, y[2]!, north[2]!]);
+    if (!('bodyToPresentation' in first.receipt)) throw new TypeError(`${descriptor.id}: expected an authored presentation basis in its navigation receipt.`);
     const authored = first.receipt.bodyToPresentation;
     assert.ok(authored);
     assert.doesNotThrow(() => reflection(authored));
