@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "234efe015189d449276c646e4a77e2ac6ed52ad72ec4f5cf188dfa26c850b1a5"
+    "sha256": "e6137eeb6b77f363bdea22d1bdd672067df0b1af02a58a918a9c31cc34863881"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "0bcd21a782b961448b72015108fb558d38e99d2a935e602788180fd986c4ded5"
+    "bindingsSha256": "b3a8eab54749cc078b828f2e32914563a1993e942fe9160f12ec2f39a12f0aad"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "d449a3bab08d4743399b5412c25ec72525be9fcc7c996e180a1652b949b48896",
+      "sha256": "ac7b7ecefd155407b309e9538f265ab93d1e7bd4596a68da0c08544301591907",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/hd-189733b/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -121,7 +117,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "338f4add862a9ca2decdf87f200d4394f9982040727a5e5faceb0ff5b2f13532",
+      "sha256": "97ac7455dcebc7186e67222735cf89dbe1d612aa13ca223e8de4f91eb6c6234b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -193,8 +189,8 @@
               "label": "MIRI",
               "qualification": "Published map · Lally et al. 2025 · JWST MIRI 8 µm eclipses, 2022–2023, with Spitzer",
               "thumbnail": "hd-189733b-lens-temperature.webp",
-              "surface": "hd-189733b-surface-temperature.webp",
-              "poles": "hd-189733b-poles-temperature.webp",
+              "surface": "hd-189733b-surface-temperature@2x.webp",
+              "poles": "hd-189733b-poles-temperature@2x.webp",
               "source": {
                 "id": "hd-189733b-lally-2025-map",
                 "path": "../manifest.json",
@@ -347,8 +343,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "338f4add862a9ca2decdf87f200d4394f9982040727a5e5faceb0ff5b2f13532",
-      "bytes": 4680,
+      "sha256": "97ac7455dcebc7186e67222735cf89dbe1d612aa13ca223e8de4f91eb6c6234b",
+      "bytes": 4686,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -381,12 +377,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/hd-189733b/hd-189733b-surface-temperature.webp",
-          "bytes": 14080,
-          "sha256": "c38bb1469f25c27a8ec9a11cfcb258acf2d2d71dfd8f17f50222b567d14c9d7e",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/hd-189733b/hd-189733b-surface-temperature@2x.webp",
           "bytes": 33900,
           "sha256": "f5520d4c29c47928e6e6785233793862a5083d86bfebbfcf03c748d7daa8a39f",
@@ -399,27 +389,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/hd-189733b/hd-189733b-poles-temperature.webp",
-          "bytes": 17674,
-          "sha256": "7924c7d9db02cd9974cc9cd4a83a45c198d1e327038c4ecf74ec6dfc3f63f6a6",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/hd-189733b/hd-189733b-poles-temperature@2x.webp",
           "bytes": 38048,
           "sha256": "64f9da69c3dd18a8f2474c13ec92613258085326c4ced5c7482062e9d3dc72df",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/hd-189733b/hd-189733b-context-temperature.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/hd-189733b/hd-189733b-limb-temperature.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -502,11 +474,11 @@
   },
   "lastPreparation": {
     "objectId": "hd-189733b",
-    "materialSha256": "2b80c6bbf0f949e184bcd507c22e595a774daad0d26d61702a5177038a810f1c",
+    "materialSha256": "1b198826886bb05ba9012b9730a808c5a5a1a52a4e200b0c31feeedde92d6a1a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "0bcd21a782b961448b72015108fb558d38e99d2a935e602788180fd986c4ded5"
+      "bindingsSha256": "b3a8eab54749cc078b828f2e32914563a1993e942fe9160f12ec2f39a12f0aad"
     }
   }
 }

@@ -5,10 +5,10 @@ const objectControls = await readPreparedFixture("callisto", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "callisto", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/callisto/callisto-normal.webp", two: "/scenes/callisto/callisto-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/callisto/callisto-poles-normal.webp", two: "/scenes/callisto/callisto-poles-normal@2x.webp" }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/callisto/callisto-normal@2x.webp",
+      "/scenes/callisto/callisto-poles-normal@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "enhanced",

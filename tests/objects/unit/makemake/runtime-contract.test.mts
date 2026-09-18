@@ -15,7 +15,7 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../..
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ["color"];
+const LENS_IDS = ["color", "illustration"];
 
 objectRuntimePackageTests(runtimeDefinition);
 
@@ -27,7 +27,7 @@ test("Makemake's actual import closure has only shared runtime owners", async ()
   }
 });
 
-test("Makemake is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 1 lens", () => {
+test("Makemake is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 2 lenses", () => {
   assert.equal(scene.schema, "cssmakemake-prepared-runtime-scene@1");
   assert.equal(scene.runtimeGeometry, false);
   assert.equal(scene.runtimeRasterization, false);

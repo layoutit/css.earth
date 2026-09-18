@@ -99,8 +99,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "io-lens-normal.webp",
-        "surface": "io-normal.webp",
-        "poles": "io-poles-normal.webp",
+        "surface": "io-normal@2x.webp",
+        "poles": "io-poles-normal@2x.webp",
         "source": {
           "id": "usgs-normal-global-1km",
           "path": "../manifest.json"
@@ -112,8 +112,8 @@
         "id": "enhanced",
         "label": "Enhanced color",
         "thumbnail": "io-lens-enhanced.webp",
-        "surface": "io-enhanced.webp",
-        "poles": "io-poles-enhanced.webp",
+        "surface": "io-enhanced@2x.webp",
+        "poles": "io-poles-enhanced@2x.webp",
         "source": {
           "id": "usgs-enhanced-global-1km",
           "path": "../manifest.json"
@@ -125,8 +125,8 @@
         "id": "geology",
         "label": "Geology",
         "thumbnail": "io-lens-geology.webp",
-        "surface": "io-geology.webp",
-        "poles": "io-poles-geology.webp",
+        "surface": "io-geology@2x.webp",
+        "poles": "io-poles-geology@2x.webp",
         "falseColor": true,
         "source": {
           "id": "usgs-sim3168-geologic-units",
@@ -240,8 +240,8 @@
         "id": "spectral-slope",
         "label": "Spectral slope",
         "thumbnail": "io-lens-spectral-slope.webp",
-        "surface": "io-spectral-slope.webp",
-        "poles": "io-poles-spectral-slope.webp",
+        "surface": "io-spectral-slope@2x.webp",
+        "poles": "io-poles-spectral-slope@2x.webp",
         "source": {
           "id": "io-muse-spectral-slope-night-1",
           "path": "../manifest.json",
@@ -295,8 +295,8 @@
         "id": "visible-absorption",
         "label": "Visible absorption",
         "thumbnail": "io-lens-visible-absorption.webp",
-        "surface": "io-visible-absorption.webp",
-        "poles": "io-poles-visible-absorption.webp",
+        "surface": "io-visible-absorption@2x.webp",
+        "poles": "io-poles-visible-absorption@2x.webp",
         "source": {
           "id": "io-muse-visible-absorption-night-1",
           "path": "../manifest.json",

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b122a9ae3b406ad316f33f0db8c937ea4f74a70f7dc0b9fe524c5e621af8249"
+    "sha256": "eaca383a185cfcca358306b1f338e96c0081243982bacea4e75e6e5937f6239a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "918f980afe7357d54869f392fe08354ac800d54220d847b3d9d49f3c734ffd34"
+    "bindingsSha256": "64ef9c98c757cef24b323636e29edad1cfd03a2dddcd75c2919a412d15ee80a5"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "d1691d5c453674de39ce216ba00dc3842fb5953ad4fa8ee66ece6d88a052ef38",
+      "sha256": "b6c2ac9048bfb02dd2aa629e9eb9d9a3871d753a96dbd5fb7562712947ea854c",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/hd-189733-companion/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -87,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9bed197a036319f79b4286d995cdd02c9a7de1386b3101bf40eb0c75b7748cd8",
+      "sha256": "8b3a404b483906e9018a2f5c3b25398017828a00c517504646d72c821a2add70",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -146,8 +142,8 @@
               "label": "Color",
               "qualification": "Colour from Gaia's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
               "thumbnail": "hd-189733-companion-lens-color.webp",
-              "surface": "hd-189733-companion-surface-color.webp",
-              "poles": "hd-189733-companion-poles-color.webp",
+              "surface": "hd-189733-companion-surface-color@2x.webp",
+              "poles": "hd-189733-companion-poles-color@2x.webp",
               "source": {
                 "id": "hd-189733-companion-stellar-color",
                 "path": "../manifest.json",
@@ -267,8 +263,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9bed197a036319f79b4286d995cdd02c9a7de1386b3101bf40eb0c75b7748cd8",
-      "bytes": 3446,
+      "sha256": "8b3a404b483906e9018a2f5c3b25398017828a00c517504646d72c821a2add70",
+      "bytes": 3452,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -302,12 +298,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/hd-189733-companion/hd-189733-companion-surface-color.webp",
-          "bytes": 78,
-          "sha256": "4c369a188fbe596659b4fdc6fb222342867b6923f96d7e770468bfe68543896a",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/hd-189733-companion/hd-189733-companion-surface-color@2x.webp",
           "bytes": 178,
           "sha256": "2ba62b21e45671b69a17bb643b1f926d22145d43fd65a5fc3534c1997492e597",
@@ -320,27 +310,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/hd-189733-companion/hd-189733-companion-poles-color.webp",
-          "bytes": 680,
-          "sha256": "35177b808ad53035529af72009033a8fe1088c7d86353e28372a99f4f9f64510",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/hd-189733-companion/hd-189733-companion-poles-color@2x.webp",
           "bytes": 1340,
           "sha256": "e8f70b8dd2c2627210561ba93e1cf9ee46bb67b2e69d83202a310e24299326d9",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/hd-189733-companion/hd-189733-companion-context-color.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/hd-189733-companion/hd-189733-companion-limb-color.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -423,11 +395,11 @@
   },
   "lastPreparation": {
     "objectId": "hd-189733-companion",
-    "materialSha256": "316c76cce33632c6ab1e4fa6a37f142c83035017ec2d101cd2a2b877815a2bd2",
+    "materialSha256": "f652dd8bb22b795b2fce86b45482b4d41bf318f92c1b0dbf361ed508ed53c53f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "918f980afe7357d54869f392fe08354ac800d54220d847b3d9d49f3c734ffd34"
+      "bindingsSha256": "64ef9c98c757cef24b323636e29edad1cfd03a2dddcd75c2919a412d15ee80a5"
     }
   }
 }

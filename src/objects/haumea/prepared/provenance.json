@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cd36c5a75b07530073b98379c673efffe5ffbb52b1f98d0b270aa5b138a65833"
+    "sha256": "ce112131766855741d3e986c9badadac400a21a61ad3ac1f4f92357eba0cd90d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "6a393599bd06f65ca2aee21662d3190dd3343a814a8566d1758863dfac288a78"
+    "bindingsSha256": "f22c7d5010d2b21257bc990341e6c90c9a73ccbced786a1d36b5f4606388db33"
   },
   "recipes": [
     {
       "id": "shape-model",
       "path": "source/preparation/shape-model.json",
-      "sha256": "bd4d886e4c01566739caafa6a48023aac64f735abb223f104200a0dcb80981ee",
+      "sha256": "ffb01ca8a6488d4f1d0b60e7b0f8b32a1c76051bb1b3ede8ac67e8e8ee57e50d",
       "parameters": {
         "schema": "cssearth-shape-model@1",
         "displayName": "Haumea",
@@ -37,15 +37,27 @@
           "displayOpacity": 0.5,
           "qualification": "Ring dimensions from the 2017 occultation. Gray appearance and constant display opacity are schematic; the measured 0.5 occultation opacity is not a view-independent optical model."
         },
-        "surface": {
-          "source": "photometry/disc-color.json",
-          "science": {
-            "kind": "disc-integrated-color",
-            "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
-            "illuminant": "reference/CIE_std_illum_D65.csv",
-            "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
+        "surfaces": [
+          {
+            "lens": "color",
+            "source": "photometry/disc-color.json",
+            "science": {
+              "kind": "disc-integrated-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "illuminant": "reference/CIE_std_illum_D65.csv",
+              "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
+            }
+          },
+          {
+            "lens": "illustration",
+            "source": "nasa-haumea.glb",
+            "science": {
+              "kind": "glb-base-color",
+              "model": "nasa-haumea.glb",
+              "qualification": "An artist's surface from NASA's Haumea 3D model, carried through the model's own texture coordinates; not an observation."
+            }
           }
-        },
+        ],
         "camera": {
           "maximumHeightShare": 0.4
         }
@@ -54,7 +66,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cab94a7d374eb7c261f252206014b2bd97f08bf6b2685dc8b9da7ba078affe53",
+      "sha256": "dad19322afd0d496139bcb4f54f098407d3a65502a1e201f1186c394c770c8c0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -143,14 +155,28 @@
               "label": "Color",
               "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
               "thumbnail": "color-thumbnail.webp",
-              "surface": "surface.webp",
-              "poles": "poles.webp",
+              "surface": "surface-color.webp",
+              "poles": "poles-color.webp",
               "source": {
                 "id": "haumea-disc-color",
                 "path": "../manifest.json",
                 "url": "https://doi.org/10.1086/499575"
               },
               "notes": "One measured mean colour and albedo for the whole disc, averaged over rotation. Display coordinates are arbitrary; the known darker, redder region and any other colour variation are not shown."
+            },
+            {
+              "id": "illustration",
+              "label": "Illustration",
+              "qualification": "An artist's surface from NASA's Haumea 3D model; not an observation.",
+              "thumbnail": "illustration-thumbnail.webp",
+              "surface": "surface-illustration.webp",
+              "poles": "poles-illustration.webp",
+              "source": {
+                "id": "nasa-vtad-haumea-model",
+                "path": "../manifest.json",
+                "url": "https://science.nasa.gov/resource/haumea-3d-model/"
+              },
+              "notes": "NASA's illustration of Haumea, from its 3D model. No image resolves this surface, so none of the terrain, albedo or colour in it was observed. Display coordinates are arbitrary."
             }
           ]
         },
@@ -177,6 +203,12 @@
             "role": "color",
             "description": "2006 rotation-corrected BVRI colours",
             "href": "https://doi.org/10.1086/499575"
+          },
+          {
+            "label": "NASA VTAD",
+            "role": "illustration",
+            "description": "Haumea 3D model and illustrative surface texture",
+            "href": "https://science.nasa.gov/resource/haumea-3d-model/"
           }
         ],
         "provenance": {
@@ -322,6 +354,39 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "nasa-vtad-haumea-model",
+      "path": "nasa-haumea.glb",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/haumea-3d-model/",
+      "redistribution": "NASA media; an illustrative model, not photographed terrain or a measured map",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-haumea-nasa-vtad-haumea-model",
+            "role": "material",
+            "evidence": "pending"
+          }
+        ]
+      },
+      "sha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
+      "bytes": 11335060,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "nasa-haumea.glb",
+        "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -334,8 +399,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cab94a7d374eb7c261f252206014b2bd97f08bf6b2685dc8b9da7ba078affe53",
-      "bytes": 4145,
+      "sha256": "dad19322afd0d496139bcb4f54f098407d3a65502a1e201f1186c394c770c8c0",
+      "bytes": 5067,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,9 +413,9 @@
       "label": "Color",
       "recipe": "shape-model",
       "selector": "",
-      "observationAttribution": "none",
+      "observationAttribution": "source-lineage",
       "parents": [],
-      "process": "Fill the authored shape with the shared neutral gray display convention; no surface texture.",
+      "process": "Fill the authored shape with the published whole-disc colour and V geometric albedo, uniform; no surface map.",
       "limitations": [
         "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved."
       ],
@@ -361,7 +426,7 @@
         "shape-model"
       ],
       "interpretation": {
-        "kind": "neutral-shape",
+        "kind": "disc-integrated-color",
         "resolvedSurfaceObservation": false
       },
       "inputs": [
@@ -378,15 +443,64 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/haumea/surface.webp",
+          "url": "/scenes/haumea/surface-color.webp",
           "bytes": 342,
           "sha256": "ad3e5db9db6f594a967970ac8cde7bab9724f4d208310efe95f7ef7233fed0a5",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/haumea/poles.webp",
+          "url": "/scenes/haumea/poles-color.webp",
           "bytes": 680,
           "sha256": "7bffec0b32dfa557e5cfdbbb2e1481d74c0d8ca95791b4befbb23f7eac9a95d3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "illustration",
+      "label": "Illustration",
+      "recipe": "shape-model",
+      "selector": "",
+      "observationAttribution": "none",
+      "parents": [],
+      "process": "Carry the published model's base-color texture through its own UVs onto the authored shape; an illustration, not an observation.",
+      "limitations": [
+        "An artist's surface from NASA's Haumea 3D model; not an observation."
+      ],
+      "lensIds": [
+        "illustration"
+      ],
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "interpretation": {
+        "kind": "illustrative-model",
+        "resolvedSurfaceObservation": false
+      },
+      "inputs": [
+        "ortiz-2017-shape",
+        "nasa-vtad-haumea-model",
+        "haumea-cie-1931-2deg-cmf",
+        "haumea-cie-std-illuminant-d65"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/haumea/illustration-thumbnail.webp",
+          "bytes": 2420,
+          "sha256": "c9f82de3c313e4610d82aed7e14cbf363a92491624902a5ca5662a35baa4c9ab",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/haumea/surface-illustration.webp",
+          "bytes": 3525294,
+          "sha256": "c69a552407aa144d2c47741928cfac6bfdc798a25503c29941d2639b96f60742",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/haumea/poles-illustration.webp",
+          "bytes": 75844,
+          "sha256": "ceb4de7e2d997b2b0cda4ef9fc932e5bd8edd1cc0052dd85c3fc716c3ec9d8b1",
           "verification": "bytes-verified"
         }
       ],
@@ -411,8 +525,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6710,
-          "sha256": "7b76e3899b0a795cbe83188c299c2bb55517241b3eacf6547103cde2eef2f363",
+          "bytes": 6879,
+          "sha256": "9b1eb2808e4a0ddceb166c6da891728dc1a02e87104859d9c59bc16a56f6793c",
           "verification": "bytes-verified"
         }
       ],
@@ -426,7 +540,7 @@
       "recipeDependencies": [
         "shape-model"
       ],
-      "observationAttribution": "none",
+      "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
         "color"
@@ -442,6 +556,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:illustration",
+      "label": "Illustration preview",
+      "recipe": "shape-model",
+      "selector": "",
+      "recipeDependencies": [
+        "shape-model"
+      ],
+      "observationAttribution": "none",
+      "inputs": [],
+      "parents": [
+        "illustration"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/illustration.webp",
+          "bytes": 48410,
+          "sha256": "b036d6681f490495d995f9c39b68d8f343f93bc525e8fa8aabb70bfef9ecc64b",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -450,11 +589,11 @@
   },
   "lastPreparation": {
     "objectId": "haumea",
-    "materialSha256": "d19d4ddf3c9e6ee00b8932bddc91d7ae581a39f6cd35d81705979ffbe9e2bc9d",
+    "materialSha256": "e53262b39bcca955ffd611f8f9d2df5d151e34131e6fb31c067184ebf22ef1d5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "6a393599bd06f65ca2aee21662d3190dd3343a814a8566d1758863dfac288a78"
+      "bindingsSha256": "f22c7d5010d2b21257bc990341e6c90c9a73ccbced786a1d36b5f4606388db33"
     }
   }
 }

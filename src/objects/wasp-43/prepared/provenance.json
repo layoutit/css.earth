@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29b6180867b0192fa958f1e99fffa22e47cf58ae7a6262faa91ea949ec77252c"
+    "sha256": "4b9a6554a313bfc4e4ff2ab5b43282c8887791fa2e474a210d1635650e10d771"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5ca7c62dcf30f82fc4ad1d139d4a7dfb558040fc17f37dc541a1b2ed16d3510b"
+    "bindingsSha256": "9423d3746915ca8949f6562ae3603dfc75da13071475ec7807dc523f43633e64"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "d33e1e19b13e86e48ac1eb616d137add5f29af78d89b55378b2aa60c1f9e975c",
+      "sha256": "b103c9f7139929ac73bc7b936abc9f296ab26b89ee1ffa65d27fd42ffc9735fe",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/wasp-43/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -100,7 +96,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "2c88d39e538e8f0daf015345a719bec9677f755ff20f88da04a775fea5a25054",
+      "sha256": "aa8a85426146e31492861bb0090891d130bd59ca3b2cb03508bf2d8f1140ce8c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -146,8 +142,8 @@
               "label": "Color",
               "qualification": "Colour from Gaia's photometric temperature; darkening toward the edge measured from TESS transits of WASP-43b. The disc itself is unresolved.",
               "thumbnail": "wasp-43-lens-color.webp",
-              "surface": "wasp-43-surface-color.webp",
-              "poles": "wasp-43-poles-color.webp",
+              "surface": "wasp-43-surface-color@2x.webp",
+              "poles": "wasp-43-poles-color@2x.webp",
               "source": {
                 "id": "wasp-43-stellar-color",
                 "path": "../manifest.json",
@@ -325,8 +321,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2c88d39e538e8f0daf015345a719bec9677f755ff20f88da04a775fea5a25054",
-      "bytes": 3080,
+      "sha256": "aa8a85426146e31492861bb0090891d130bd59ca3b2cb03508bf2d8f1140ce8c",
+      "bytes": 3086,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -361,12 +357,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/wasp-43/wasp-43-surface-color.webp",
-          "bytes": 78,
-          "sha256": "df591fe6c56fcf125d639962f96fe76439ee68fbc14687079423c31ee2d51a48",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/wasp-43/wasp-43-surface-color@2x.webp",
           "bytes": 178,
           "sha256": "4bda1c4a9c8a5c979e36e94cf6dc29bc0123a488a044a36033565572a7f4816b",
@@ -379,27 +369,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/wasp-43/wasp-43-poles-color.webp",
-          "bytes": 680,
-          "sha256": "a100e3770f68bfa5ac46f0efdb907f3e630f41e3e19279ed5e58b37562d5ff26",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/wasp-43/wasp-43-poles-color@2x.webp",
           "bytes": 1340,
           "sha256": "484261234f0e314bdce6a4c3dc9b596ef22a795d321e7e7f6110e1bfff6514dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43/wasp-43-context-color.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/wasp-43/wasp-43-limb-color.webp",
-          "bytes": 29086,
-          "sha256": "f7d39306f5f7e58d2abc0340f3dbb6181ff31be7867c5d18edb1f4f6ce53d094",
           "verification": "bytes-verified"
         },
         {
@@ -482,11 +454,11 @@
   },
   "lastPreparation": {
     "objectId": "wasp-43",
-    "materialSha256": "21aab6072cf0b1a309c2352a34f8cb7ec55188eefec65639aff51212b2f9bfb2",
+    "materialSha256": "73aaf2fc479e11ebce5b62433f29961b884ab7f679e8da52611bc1b27dec3617",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5ca7c62dcf30f82fc4ad1d139d4a7dfb558040fc17f37dc541a1b2ed16d3510b"
+      "bindingsSha256": "9423d3746915ca8949f6562ae3603dfc75da13071475ec7807dc523f43633e64"
     }
   }
 }

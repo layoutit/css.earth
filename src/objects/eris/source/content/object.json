@@ -60,14 +60,28 @@
         "label": "Color",
         "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
         "thumbnail": "eris-lens-color.webp",
-        "surface": "eris-color.webp",
-        "poles": "eris-poles-color.webp",
+        "surface": "eris-color@2x.webp",
+        "poles": "eris-poles-color@2x.webp",
         "source": {
           "id": "eris-disc-color",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1051/0004-6361:20066526"
         },
         "notes": "One measured mean colour and albedo for the whole disc. Display coordinates are arbitrary; no terrain, albedo pattern or colour variation is claimed."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "An artist's surface from NASA's Eris 3D model; not an observation.",
+        "thumbnail": "eris-lens-illustration.webp",
+        "surface": "eris-illustration@2x.webp",
+        "poles": "eris-poles-illustration@2x.webp",
+        "source": {
+          "id": "nasa-vtad-eris-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/eris-3d-model/"
+        },
+        "notes": "NASA's illustration of Eris, from its 3D model. No image resolves this surface, so none of the terrain, albedo or colour in it was observed. Display coordinates are arbitrary."
       }
     ]
   },
@@ -101,6 +115,12 @@
       "role": "rotation",
       "description": "2023 photometry showing synchronous rotation",
       "href": "https://arxiv.org/abs/2303.13445"
+    },
+    {
+      "label": "NASA VTAD",
+      "role": "illustration",
+      "description": "Eris 3D model and illustrative surface texture",
+      "href": "https://science.nasa.gov/resource/eris-3d-model/"
     }
   ],
   "provenance": {

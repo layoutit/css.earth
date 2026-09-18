@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "09a75a1a30e079e46853342715b3e6335c80da4cbf03bef96eff1763b9dca437"
+    "sha256": "2b7137d29b8397162132eefcfcd6e9e04c5f178dcf66ebd1e3280a213f68c9cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "1d054adced73a78a8207e1acd4e8d7c7d1b9c2845141494e10481fc098733ff3"
+    "bindingsSha256": "10ad97ec0d45dd229bf068801d2130f9c90545959de965c6300c79155c28e7e5"
   },
   "recipes": [
     {
@@ -365,9 +365,580 @@
       }
     },
     {
+      "id": "observations",
+      "path": "source/preparation/observations.json",
+      "sha256": "07663ddafe19626090ff139ee2c0e49ef36eb8361b5eb8eb3861e6e3943e1798",
+      "parameters": {
+        "schema": "cssearth-observed-surfaces@1",
+        "sources": [
+          {
+            "id": "hubble-opal-neptune-visible",
+            "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+            "expectedBytes": 789926,
+            "expectedSha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
+            "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+            "credit": "NASA, ESA, OPAL team, and STScI",
+            "license": "MAST public science data terms"
+          },
+          {
+            "id": "hubble-opal-neptune-fq619n",
+            "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+            "expectedBytes": 1045440,
+            "expectedSha256": "b1ad52870f9fdcf36cde019705209005d07f927ab99ea00305f36ebe36967a1b",
+            "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+            "credit": "NASA, ESA, OPAL team, and STScI",
+            "license": "MAST public science data terms"
+          },
+          {
+            "id": "hubble-opal-neptune-f845m",
+            "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+            "expectedBytes": 1045440,
+            "expectedSha256": "7373c6c3daf3ace7cf1576596ed0480659cb03c255893b71629d282fe7291b4c",
+            "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+            "credit": "NASA, ESA, OPAL team, and STScI",
+            "license": "MAST public science data terms"
+          },
+          {
+            "id": "ras-oxford-neptune-true-colour-reference",
+            "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
+            "expectedBytes": 338632,
+            "expectedSha256": "2f7d106d547adde83f356a3bd5f97053cd314a199fd6fb2c7d8d9c470df55ec7",
+            "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
+            "credit": "Patrick Irwin, University of Oxford, and NASA",
+            "license": "CC BY 4.0"
+          }
+        ],
+        "lenses": [
+          {
+            "id": "normal",
+            "source": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+            "decode": {
+              "kind": "raster",
+              "channels": 3,
+              "crop": {
+                "left": 0,
+                "top": 0,
+                "width": 720,
+                "height": 360
+              }
+            },
+            "products": [
+              {
+                "kind": "surface",
+                "filename": "neptune-surface-normal.webp",
+                "transforms": [],
+                "packing": {
+                  "bandCount": 20,
+                  "gutter": 18
+                },
+                "encoding": {
+                  "quality": 92,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "surface",
+                "filename": "neptune-surface-normal@2x.webp",
+                "transforms": [
+                  {
+                    "kind": "resize",
+                    "width": 5120,
+                    "height": 2560
+                  }
+                ],
+                "packing": {
+                  "bandCount": 20,
+                  "gutter": 32
+                },
+                "encoding": {
+                  "quality": 90,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "poles",
+                "filename": "neptune-poles-normal.webp",
+                "projection": {
+                  "tileSize": 128,
+                  "poles": [
+                    "north",
+                    "south",
+                    "north",
+                    "south"
+                  ],
+                  "latitudeSegments": 20,
+                  "angularMode": "direct-segment",
+                  "sampling": "bilinear-wrapped"
+                },
+                "encoding": {
+                  "quality": 95,
+                  "alphaQuality": 100,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "poles",
+                "filename": "neptune-poles-normal@2x.webp",
+                "projection": {
+                  "tileSize": 256,
+                  "poles": [
+                    "north",
+                    "south",
+                    "north",
+                    "south"
+                  ],
+                  "latitudeSegments": 20,
+                  "angularMode": "direct-segment",
+                  "sampling": "bilinear-wrapped"
+                },
+                "encoding": {
+                  "quality": 95,
+                  "alphaQuality": 100,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "thumbnail",
+                "filename": "neptune-lens-normal.webp",
+                "transforms": [
+                  {
+                    "kind": "crop",
+                    "region": {
+                      "left": 1184,
+                      "top": 464,
+                      "width": 512,
+                      "height": 512
+                    }
+                  },
+                  {
+                    "kind": "resize",
+                    "width": 48,
+                    "height": 48
+                  }
+                ],
+                "encoding": {
+                  "quality": 90,
+                  "effort": 6
+                }
+              }
+            ],
+            "coverage": {
+              "kind": "boundary-mean",
+              "boundaryFraction": 0.3333333333333333,
+              "exponent": 3,
+              "minimumBoundarySum": 18
+            },
+            "calibration": {
+              "source": "color/ras-oxford-neptune-true-colors-2024.jpg",
+              "sourceSample": {
+                "left": 0,
+                "top": 150,
+                "width": 720,
+                "height": 80
+              },
+              "targetSample": {
+                "left": 1780,
+                "top": 1070,
+                "width": 200,
+                "height": 200
+              },
+              "reference": {
+                "source": "Irwin et al. 2024 true-colour Neptune reconstruction",
+                "credit": "Patrick Irwin, University of Oxford, and NASA",
+                "distribution": "Royal Astronomical Society CC BY 4.0",
+                "sourcePath": "source/color/ras-oxford-neptune-true-colors-2024.jpg"
+              }
+            },
+            "transforms": [
+              {
+                "kind": "resize",
+                "width": 2880,
+                "height": 1440
+              }
+            ],
+            "atmosphereColor": {
+              "share": 0.2,
+              "maximum": 248,
+              "luminance": [
+                0.2126,
+                0.7152,
+                0.0722
+              ]
+            }
+          },
+          {
+            "id": "methane",
+            "source": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+            "decode": {
+              "kind": "fits",
+              "bitpix": -32,
+              "width": 721,
+              "height": 361,
+              "color": {
+                "percentiles": [
+                  0.01,
+                  0.995
+                ],
+                "minimumCoverage": 0,
+                "positiveValidity": false,
+                "channels": 3,
+                "transfer": "power",
+                "exponent": 0.72,
+                "palette": [
+                  [
+                    4,
+                    17,
+                    31
+                  ],
+                  [
+                    26,
+                    108,
+                    139
+                  ],
+                  [
+                    205,
+                    245,
+                    246
+                  ]
+                ]
+              },
+              "continuation": {
+                "boundaryFraction": 0.3333333333333333,
+                "exponent": 3,
+                "minimumBoundarySum": 0
+              }
+            },
+            "products": [
+              {
+                "kind": "surface",
+                "filename": "neptune-surface-methane.webp",
+                "transforms": [],
+                "packing": {
+                  "bandCount": 20,
+                  "gutter": 18
+                },
+                "encoding": {
+                  "quality": 92,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "surface",
+                "filename": "neptune-surface-methane@2x.webp",
+                "transforms": [
+                  {
+                    "kind": "resize",
+                    "width": 5120,
+                    "height": 2560
+                  }
+                ],
+                "packing": {
+                  "bandCount": 20,
+                  "gutter": 32
+                },
+                "encoding": {
+                  "quality": 90,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "poles",
+                "filename": "neptune-poles-methane.webp",
+                "projection": {
+                  "tileSize": 128,
+                  "poles": [
+                    "north",
+                    "south",
+                    "north",
+                    "south"
+                  ],
+                  "latitudeSegments": 20,
+                  "angularMode": "direct-segment",
+                  "sampling": "bilinear-wrapped"
+                },
+                "encoding": {
+                  "quality": 95,
+                  "alphaQuality": 100,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "poles",
+                "filename": "neptune-poles-methane@2x.webp",
+                "projection": {
+                  "tileSize": 256,
+                  "poles": [
+                    "north",
+                    "south",
+                    "north",
+                    "south"
+                  ],
+                  "latitudeSegments": 20,
+                  "angularMode": "direct-segment",
+                  "sampling": "bilinear-wrapped"
+                },
+                "encoding": {
+                  "quality": 95,
+                  "alphaQuality": 100,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "thumbnail",
+                "filename": "neptune-lens-methane.webp",
+                "transforms": [
+                  {
+                    "kind": "crop",
+                    "region": {
+                      "left": 1184,
+                      "top": 464,
+                      "width": 512,
+                      "height": 512
+                    }
+                  },
+                  {
+                    "kind": "resize",
+                    "width": 48,
+                    "height": 48
+                  }
+                ],
+                "encoding": {
+                  "quality": 90,
+                  "effort": 6
+                }
+              }
+            ],
+            "transforms": [
+              {
+                "kind": "flip"
+              },
+              {
+                "kind": "crop",
+                "region": {
+                  "left": 0,
+                  "top": 0,
+                  "width": 720,
+                  "height": 360
+                }
+              },
+              {
+                "kind": "resize",
+                "width": 2880,
+                "height": 1440
+              },
+              {
+                "kind": "sharpen",
+                "options": {
+                  "sigma": 0.55
+                }
+              }
+            ],
+            "atmosphereColor": {
+              "share": 0.2,
+              "maximum": 248,
+              "luminance": [
+                0.2126,
+                0.7152,
+                0.0722
+              ]
+            }
+          },
+          {
+            "id": "near-infrared",
+            "source": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+            "decode": {
+              "kind": "fits",
+              "bitpix": -32,
+              "width": 721,
+              "height": 361,
+              "color": {
+                "percentiles": [
+                  0.01,
+                  0.995
+                ],
+                "minimumCoverage": 0,
+                "positiveValidity": false,
+                "channels": 3,
+                "transfer": "power",
+                "exponent": 0.72,
+                "palette": [
+                  [
+                    7,
+                    8,
+                    20
+                  ],
+                  [
+                    49,
+                    46,
+                    105
+                  ],
+                  [
+                    214,
+                    183,
+                    244
+                  ]
+                ]
+              },
+              "continuation": {
+                "boundaryFraction": 0.3333333333333333,
+                "exponent": 3,
+                "minimumBoundarySum": 0
+              }
+            },
+            "products": [
+              {
+                "kind": "surface",
+                "filename": "neptune-surface-near-infrared.webp",
+                "transforms": [],
+                "packing": {
+                  "bandCount": 20,
+                  "gutter": 18
+                },
+                "encoding": {
+                  "quality": 92,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "surface",
+                "filename": "neptune-surface-near-infrared@2x.webp",
+                "transforms": [
+                  {
+                    "kind": "resize",
+                    "width": 5120,
+                    "height": 2560
+                  }
+                ],
+                "packing": {
+                  "bandCount": 20,
+                  "gutter": 32
+                },
+                "encoding": {
+                  "quality": 90,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "poles",
+                "filename": "neptune-poles-near-infrared.webp",
+                "projection": {
+                  "tileSize": 128,
+                  "poles": [
+                    "north",
+                    "south",
+                    "north",
+                    "south"
+                  ],
+                  "latitudeSegments": 20,
+                  "angularMode": "direct-segment",
+                  "sampling": "bilinear-wrapped"
+                },
+                "encoding": {
+                  "quality": 95,
+                  "alphaQuality": 100,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "poles",
+                "filename": "neptune-poles-near-infrared@2x.webp",
+                "projection": {
+                  "tileSize": 256,
+                  "poles": [
+                    "north",
+                    "south",
+                    "north",
+                    "south"
+                  ],
+                  "latitudeSegments": 20,
+                  "angularMode": "direct-segment",
+                  "sampling": "bilinear-wrapped"
+                },
+                "encoding": {
+                  "quality": 95,
+                  "alphaQuality": 100,
+                  "smartSubsample": true,
+                  "effort": 6
+                }
+              },
+              {
+                "kind": "thumbnail",
+                "filename": "neptune-lens-near-infrared.webp",
+                "transforms": [
+                  {
+                    "kind": "crop",
+                    "region": {
+                      "left": 1184,
+                      "top": 464,
+                      "width": 512,
+                      "height": 512
+                    }
+                  },
+                  {
+                    "kind": "resize",
+                    "width": 48,
+                    "height": 48
+                  }
+                ],
+                "encoding": {
+                  "quality": 90,
+                  "effort": 6
+                }
+              }
+            ],
+            "transforms": [
+              {
+                "kind": "flip"
+              },
+              {
+                "kind": "crop",
+                "region": {
+                  "left": 0,
+                  "top": 0,
+                  "width": 720,
+                  "height": 360
+                }
+              },
+              {
+                "kind": "resize",
+                "width": 2880,
+                "height": 1440
+              },
+              {
+                "kind": "sharpen",
+                "options": {
+                  "sigma": 0.55
+                }
+              }
+            ],
+            "atmosphereColor": {
+              "share": 0.2,
+              "maximum": 248,
+              "luminance": [
+                0.2126,
+                0.7152,
+                0.0722
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "a384fa59dddeb5a68693eead7d0d7fd87d30bd5a99df2b14de62a164da20ff09",
+      "sha256": "7b9a848ed39aa6dc0a2d42ed331b6414b892b53363a1e75ba3f48c65c1b5e835",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/neptune/",
@@ -377,10 +948,6 @@
         "height": 1440,
         "latitudeBands": 20,
         "polarTile": 128,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -560,6 +1127,184 @@
   ],
   "sources": [
     {
+      "kind": "source-input",
+      "id": "hubble-opal-neptune-visible",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
+      ],
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
+      "redistribution": "prepared derivative with OPAL and STScI credit",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+            "missionId": "hubble"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-visible",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
+      "sha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
+      "bytes": 789926,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+        "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+        "groups": [
+          "refresh"
+        ]
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ras-oxford-neptune-true-colour-reference",
+      "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
+      "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
+      "credit": "Patrick Irwin, University of Oxford, and NASA",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://ras.ac.uk/media/1488"
+      ],
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
+      "redistribution": "checked true-colour calibration reference with attribution",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-ras-oxford-neptune-true-colour-reference",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "2f7d106d547adde83f356a3bd5f97053cd314a199fd6fb2c7d8d9c470df55ec7",
+      "bytes": 338632,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
+        "url": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
+        "groups": [
+          "refresh"
+        ]
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hubble-opal-neptune-fq619n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
+      ],
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
+      "redistribution": "prepared false-colour derivative with source credit",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-fq619n",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
+      "sha256": "b1ad52870f9fdcf36cde019705209005d07f927ab99ea00305f36ebe36967a1b",
+      "bytes": 1045440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+        "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+        "groups": [
+          "refresh"
+        ]
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hubble-opal-neptune-f845m",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
+      ],
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
+      "redistribution": "prepared false-colour derivative with source credit",
+      "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-f845m",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
+      "sha256": "7373c6c3daf3ace7cf1576596ed0480659cb03c255893b71629d282fe7291b4c",
+      "bytes": 1045440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+        "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+        "groups": [
+          "refresh"
+        ]
+      },
+      "verificationOperations": []
+    },
+    {
       "kind": "authored-content",
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
@@ -690,108 +1435,6 @@
       "inputs": [],
       "outputs": [
         {
-          "url": "/scenes/neptune/neptune-lighting-1x-billboard.webp",
-          "bytes": 21920,
-          "sha256": "56eec5925fc059ccb767ba44a8e2a1b256f0ae8d745e7618adfb4d1c7375f64e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-00.webp",
-          "bytes": 14842,
-          "sha256": "371b66adc77be49cae12542f5c8ce980b16b8331a8120f28c6d9b9b085f1fc10",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-01.webp",
-          "bytes": 22840,
-          "sha256": "490157c3d625c2ee07635b891091c853b6a026c2823ea2770a949a785073f386",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-02.webp",
-          "bytes": 25748,
-          "sha256": "8fd36b3c48c284b7568f568f7c9f5a15637d71adc185afdf6bb50a3776868e5f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-03.webp",
-          "bytes": 26308,
-          "sha256": "4f9c2673806ced874c3f58516cac6d72aaffb7728462a055dec36c280e8f4160",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-04.webp",
-          "bytes": 26104,
-          "sha256": "50190c236ee5e663ab36be6f930f6b4dbce04f9ab9c71368c8953fd990a31eab",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-05.webp",
-          "bytes": 24458,
-          "sha256": "be3fdacf7d69429eae3aef6ff6cb9151b1f116fbe5aa7c0e4b12fd18f5c6b558",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-06.webp",
-          "bytes": 23012,
-          "sha256": "621d52699ac250904baff5c2ec43e565a42f58e0b8ad32ce4dcdd5a341f978db",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-07.webp",
-          "bytes": 13506,
-          "sha256": "da68bcd93908887d111d6f7521343e394e2c33f59391685b9b7194d49f2ce9cf",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-08.webp",
-          "bytes": 14788,
-          "sha256": "bc6fa8a0fb39f40936a86f0b521e7aae26adb6735d93fe21806997af55b4918b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-09.webp",
-          "bytes": 21920,
-          "sha256": "0232d2481944e6744b1e026d0e3313bc5ae101d90acaa03e05836550a7cee2f1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-10.webp",
-          "bytes": 25118,
-          "sha256": "88481a2754923b6c4e313c223ea49d26301beaaa86d2605f911006a7f92c64ad",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-11.webp",
-          "bytes": 26844,
-          "sha256": "d6710d7707fc4e771a122938382033f812501d3ab4aca409fc6249c6333fcbb0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-12.webp",
-          "bytes": 27954,
-          "sha256": "c544add184d089944c40e281fca7c5010599158b51c1252828d89929e4d9cd2b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-13.webp",
-          "bytes": 29978,
-          "sha256": "df804db202abf7c9f6981a61fa33881bd1a5483ed14e3ddffa41ef961f348973",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-14.webp",
-          "bytes": 31886,
-          "sha256": "3e21ab8c6e648187919d414d44d3d4df7b4f3aec42516fc24cbf5d166dfb9335",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-lighting-1x-row-15.webp",
-          "bytes": 43416,
-          "sha256": "11faadbb42e8993f682b7225ab94e62abda3e6f49394ce924dec5384bf8c7278",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/neptune/neptune-lighting-2x-billboard.webp",
           "bytes": 64902,
           "sha256": "54fb6cc1a14dd917379dd5beeb30e642a73853b45f2bc8fa669eda92cfee8947",
@@ -895,6 +1538,166 @@
         }
       ],
       "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "normal",
+      "label": "Visible color",
+      "recipe": "observations",
+      "selector": "/lenses/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Apply the declared observation, polar coverage and spectral display operation.",
+      "limitations": [],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "observations"
+      ],
+      "interpretation": {},
+      "inputs": [
+        "hubble-opal-neptune-visible",
+        "ras-oxford-neptune-true-colour-reference"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/neptune/neptune-lens-normal.webp",
+          "bytes": 238,
+          "sha256": "3ed7c32964f2a5a56de2bb2a9f5774ea3831947d3c1fc1927ae935285f311739",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-surface-normal.webp",
+          "bytes": 104812,
+          "sha256": "b0cac21dfcc32a73767696908bacbfc95394cb078fecd650e92e2d9bb6f95135",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-surface-normal@2x.webp",
+          "bytes": 188994,
+          "sha256": "c48aa9bbc66893cb65dd6521dd7649f52b34bce1aa12e440aa34aebfda731c12",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-poles-normal.webp",
+          "bytes": 4524,
+          "sha256": "e0779d1a7c0457e2a0ed1ece5ff8fc8c1b3d74c3148221a75884595240f128d2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-poles-normal@2x.webp",
+          "bytes": 11348,
+          "sha256": "63315b36fe09ae420cb4cf992fee540a8b4af8d9f2e186217b410289641037e4",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "methane",
+      "label": "Methane",
+      "recipe": "observations",
+      "selector": "/lenses/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Apply the declared observation, polar coverage and spectral display operation.",
+      "limitations": [],
+      "lensIds": [
+        "methane"
+      ],
+      "recipeDependencies": [
+        "observations"
+      ],
+      "interpretation": {},
+      "inputs": [
+        "hubble-opal-neptune-fq619n"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/neptune/neptune-lens-methane.webp",
+          "bytes": 490,
+          "sha256": "87340f2be6071a4195e2bd522bb6b6b56ce0d21a186f371889883ea21ac6f681",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-surface-methane.webp",
+          "bytes": 161114,
+          "sha256": "c247caadd3db25d77c40c51f8ff430b08e6e40db2d3bb65f6e23c2ca9a20d916",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-surface-methane@2x.webp",
+          "bytes": 288044,
+          "sha256": "509fe52e07466fbae77b4170056761ca946231350b2853bf8245221910d91818",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-poles-methane.webp",
+          "bytes": 4868,
+          "sha256": "601a631e22c98f39fac791ed9378624ee111671d6632f30751e1817549fb1840",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-poles-methane@2x.webp",
+          "bytes": 11594,
+          "sha256": "bf786cddaefed053c7adf936c4f680e0f00df6efa351cd110ca7078b914e0068",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "near-infrared",
+      "label": "Near infrared",
+      "recipe": "observations",
+      "selector": "/lenses/2",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Apply the declared observation, polar coverage and spectral display operation.",
+      "limitations": [],
+      "lensIds": [
+        "near-infrared"
+      ],
+      "recipeDependencies": [
+        "observations"
+      ],
+      "interpretation": {},
+      "inputs": [
+        "hubble-opal-neptune-f845m"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/neptune/neptune-lens-near-infrared.webp",
+          "bytes": 352,
+          "sha256": "d1cc245defcacb3fc251f26f804bdba1b424311af177b12bdf255c1e573c9ff4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-surface-near-infrared.webp",
+          "bytes": 128466,
+          "sha256": "c8c466d8ef412fd16bdf3db7daf0cdd50dcd7f2f0910c261dcb64c4ad865d792",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-surface-near-infrared@2x.webp",
+          "bytes": 235582,
+          "sha256": "a31fa4f8160f21034bd2df0535409b209196a1450d9f1853e9c7bde1bb116781",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-poles-near-infrared.webp",
+          "bytes": 4298,
+          "sha256": "be95fcd06421f806fe0514b6548ab5d142845c49bc4dc3b5b287b1dbdd42643b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-poles-near-infrared@2x.webp",
+          "bytes": 10202,
+          "sha256": "f18ae95fcd51f0374dd5cda5c42229b8a56dbb81f2fe1c32bb00f40d27ac3357",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
     },
     {
       "id": "content",
@@ -1007,32 +1810,94 @@
         }
       ],
       "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Visible color preview",
+      "recipe": "observations",
+      "selector": "/lenses/0",
+      "recipeDependencies": [
+        "observations"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 6996,
+          "sha256": "82fb37c64a92dd05b5daab7d0617e8b06d91f640406534057b7dd67613f629a2",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:methane",
+      "label": "Methane preview",
+      "recipe": "observations",
+      "selector": "/lenses/1",
+      "recipeDependencies": [
+        "observations"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "methane"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/methane.webp",
+          "bytes": 13858,
+          "sha256": "02e2495ff71cde688b51ba02301c489f2c0128121d3a662333a5b375b1445143",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:near-infrared",
+      "label": "Near infrared preview",
+      "recipe": "observations",
+      "selector": "/lenses/2",
+      "recipeDependencies": [
+        "observations"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "near-infrared"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/near-infrared.webp",
+          "bytes": 11670,
+          "sha256": "ce5dd46a93599c0ed87ba3ee9716e32bba76e891a275f690e1c72f6c82f47d8d",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
-    "unresolved": [
-      {
-        "product": "normal",
-        "reason": "The preparation capability has no product dependency binding yet."
-      },
-      {
-        "product": "methane",
-        "reason": "The preparation capability has no product dependency binding yet."
-      },
-      {
-        "product": "near-infrared",
-        "reason": "The preparation capability has no product dependency binding yet."
-      }
-    ]
+    "unresolved": []
   },
   "lastPreparation": {
     "objectId": "neptune",
-    "materialSha256": "71e642c251ac8c9bf0c16323642aa73cb403d9f28005ca0529c137d7953c94ab",
+    "materialSha256": "ed31e4cdfadb5a5bdbb91b662b134c024732f61b7117f5b5ed66d064a8e71ad2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "1d054adced73a78a8207e1acd4e8d7c7d1b9c2845141494e10481fc098733ff3"
+      "bindingsSha256": "10ad97ec0d45dd229bf068801d2130f9c90545959de965c6300c79155c28e7e5"
     }
   }
 }

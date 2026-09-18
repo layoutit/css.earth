@@ -1,5 +1,6 @@
 import { alternativeForLens } from './terrestrial-layers/alternative-lenses.mts';
-import {record, records, maybeRecord, text, texts, optionalText, numbers, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
+import {record, records, maybeRecord, text, texts, optionalText, namedRecords, textValues, provenanceManifest} from './provenance-records.mts';
+import {CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY} from '../../src/platform/prepared-object-assets.mts';
 import type {ProductBinding, ProvenanceGap, ProvenanceRecipeSource, GeographicProvenance} from './provenance-records.mts';
 // Dependency bindings for the shared preparers. These follow acquisition paths
 // and recipe operations, never factsheet links, publisher names, or UI credits.
@@ -50,6 +51,12 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
     products.push(value);
   };
   const raster = recipe('raster'), terrestrial = recipe('terrestrial');
+  const addObservationLenses = () => namedRecords(record(recipe('observations')).lenses).forEach((plan, index) => add(plan.id, 'observations', `/lenses/${index}`, paths(plan),
+    'Apply the declared observation, polar coverage and spectral display operation.', {
+      interpretation: { operation: plan.operation, qualification: plan.qualification ?? maybeRecord(plan.control)?.qualification },
+    }));
+  // A body on the shared sphere lane takes only its lighting bank from the raster recipe; its lenses are observations.
+  const lightingOnlyRaster = raster?.schema === 'cssearth-raster-recipe@1' && Array.isArray(raster.surfaces) && !raster.surfaces.length;
   if (raster?.schema === 'cssearth-raster-recipe@1') {
     const name = (template: unknown, density: number, key?: string) => prefix + text(template).replaceAll('{id}', key ?? '')
       .replaceAll('{suffix}', density === 2 ? '@2x' : '').replaceAll('{density}', String(density));
@@ -63,17 +70,19 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       if (surfaceObservation) used.push(...group(text(record(surfaceObservation.lens).consumer)), text(record(surfaceObservation.shape).path));
       const controlledDetail=maybeRecord(maybeRecord(plan.science)?.detailMosaic);
       if(controlledDetail?.format==='controlled-geotiff')used.push(...group(text(controlledDetail.consumer)));
-      const outputUrls = [...numbers(raster.densities).map(d => name(plan.output, d, plan.id)), name(plan.thumbnail, 1, plan.id)];
-      if (!raster.polesCombined) outputUrls.push(...numbers(raster.densities).map(d => name(raster.polesOutput, d, plan.id)));
+      const outputUrls = [name(plan.output, RASTER_DENSITY, plan.id), name(plan.thumbnail, 1, plan.id)];
+      if (!raster.polesCombined) outputUrls.push(name(raster.polesOutput, RASTER_DENSITY, plan.id));
       const emission = maybeRecord(raster.emission);
-      if (emission) outputUrls.push(...numbers(raster.densities).flatMap(d => [name(emission.offLimbOutput, d, plan.id), name(emission.limbOutput, d, plan.id)]));
+      if (emission) outputUrls.push(name(emission.offLimbOutput, RASTER_DENSITY, plan.id), name(emission.limbOutput, RASTER_DENSITY, plan.id));
       const synoptic = maybeRecord(maybeRecord(plan.science)?.synoptic);
       const nativePoles = plan.nativeSourcePoles || maybeRecord(plan.science)?.nativePhotographicSampling;
       add(plan.id, 'raster', `/surfaces/${index}`, used, nativePoles
         ? 'Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.'
         : 'Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.', {
         inputRoles: frames ? {} : { [text(plan.source)]: { role: 'appearance', evidence: `Raster source at /surfaces/${index}/source.` } },
+        ...(maybeRecord(plan.science)?.kind === 'glb-base-color' ? { observationAttribution: 'none' as const } : {}),
         urls: outputUrls, interpretation: { falseColor: plan.falseColor,
+          ...(maybeRecord(plan.science)?.kind === 'glb-base-color' ? { kind: 'illustrative-model', resolvedSurfaceObservation: false } : {}),
           ...(controlledDetail ? { controlledPhotographicDetail: controlledDetail, originalIllumination:true } : {}),
           ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
@@ -83,12 +92,12 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       });
     });
     if (raster.polesCombined) add('surface-poles', 'raster', '/polesOutput', [], 'Assemble polar tiles from the interpreted surface maps.', {
-      parents: namedRecords(raster.surfaces).map(plan => plan.id), urls: numbers(raster.densities).map(d => name(raster.polesOutput, d)), lensIds: [],
+      parents: namedRecords(raster.surfaces).map(plan => plan.id), urls: [name(raster.polesOutput, RASTER_DENSITY)], lensIds: [],
     });
     if (raster.interior) {
       const plan = record(raster.interior);
       add('interior', 'raster', '/interior', [text(plan.source), text(plan.surface)], 'Prepare a schematic core and outer shell from the structural source; pack the cutaway textures.', {
-        urls: [...numbers(raster.densities).flatMap(d => ['outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput'].map(key => name(plan[key], d))), name(plan.thumbnail, 1)],
+        urls: [...['outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput'].map(key => name(plan[key], RASTER_DENSITY)), name(plan.thumbnail, 1)],
         observationAttribution: 'none', interpretation: { kind: 'schematic-interior', observedInteriorImagery: false },
       });
     }
@@ -99,8 +108,9 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       });
     }
     if (raster.atmosphere) add('atmosphere', 'raster', '/atmosphere', paths(raster.atmosphere), 'Prepare the declared atmospheric material and observation layers.', {
-      urls: numbers(raster.densities).flatMap(d => ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key], d))), lensIds: [],
+      urls: ['materialOutput', 'observationOutput', 'lightingOutput'].map(key => name(record(raster.atmosphere)[key], RASTER_DENSITY)), lensIds: [],
     });
+    if (lightingOnlyRaster && recipe('observations')?.lenses) addObservationLenses();
   } else if (terrestrial?.kind === 'solid-observation-body') {
     const plans = record(terrestrial.raster), geometry = record(terrestrial.geometry);
     namedRecords(plans.observations).forEach((plan, index) => {
@@ -145,16 +155,23 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       'Prepare the declared registered surface lens and affine atmospheric presentation.'));
   } else if (recipe('shape-model')) {
     const plan = record(recipe('shape-model'));
-    // The shape source is the measurement record the manifest binds to this recipe.
-    for (const lens of controls) add(lens.id, 'shape-model', '', group('shape-model'),
-      'Fill the authored shape with the shared neutral gray display convention; no surface texture.', {
-        observationAttribution: 'none', interpretation: { kind: 'neutral-shape', resolvedSurfaceObservation: false },
-      });
+    const surfaces = Array.isArray(plan.surfaces) ? namedRecords(plan.surfaces.map(item => ({ ...record(item), id: text(record(item).lens) }))) : [];
+    // The shape source is the measurement record the manifest binds to this recipe; each lens adds its own surface source.
+    for (const lens of controls) {
+      const surface = surfaces.find(item => item.id === lens.id), kind = maybeRecord(surface?.science)?.kind;
+      const used = [...group('shape-model').filter(path => !surfaces.some(item => item.source === path && item.id !== lens.id)), ...paths(surface?.science)];
+      if (kind === 'glb-base-color') add(lens.id, 'shape-model', '', used,
+        "Carry the published model's base-color texture through its own UVs onto the authored shape; an illustration, not an observation.", {
+          observationAttribution: 'none', interpretation: { kind: 'illustrative-model', resolvedSurfaceObservation: false } });
+      else if (kind === 'disc-integrated-color') add(lens.id, 'shape-model', '', used,
+        'Fill the authored shape with the published whole-disc colour and V geometric albedo, uniform; no surface map.', {
+          interpretation: { kind: 'disc-integrated-color', resolvedSurfaceObservation: false } });
+      else add(lens.id, 'shape-model', '', used,
+        'Fill the authored shape with the shared neutral gray display convention; no surface texture.', {
+          observationAttribution: 'none', interpretation: { kind: 'neutral-shape', resolvedSurfaceObservation: false } });
+    }
   } else if (recipe('observations')?.lenses) {
-    namedRecords(record(recipe('observations')).lenses).forEach((plan, index) => add(plan.id, 'observations', `/lenses/${index}`, paths(plan),
-      'Apply the declared observation, polar coverage and spectral display operation.', {
-        interpretation: { operation: plan.operation, qualification: plan.qualification ?? maybeRecord(plan.control)?.qualification },
-      }));
+    addObservationLenses();
   } else if (recipe('surface')?.lenses) {
     const plan = record(recipe('surface'));
     // In this family geometry.sources is an executable input map, not an

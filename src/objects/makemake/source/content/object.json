@@ -87,14 +87,28 @@
         "label": "Color",
         "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
         "thumbnail": "makemake-lens-color.webp",
-        "surface": "makemake-color.webp",
-        "poles": "makemake-poles-color.webp",
+        "surface": "makemake-color@2x.webp",
+        "poles": "makemake-poles-color@2x.webp",
         "source": {
           "id": "makemake-disc-color",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1051/0004-6361/201935274"
         },
         "notes": "One measured mean colour and albedo for the whole disc. Display coordinates are arbitrary; no terrain, albedo pattern or colour variation is claimed."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "An artist's surface from NASA's Makemake 3D model; not an observation.",
+        "thumbnail": "makemake-lens-illustration.webp",
+        "surface": "makemake-illustration@2x.webp",
+        "poles": "makemake-poles-illustration@2x.webp",
+        "source": {
+          "id": "nasa-vtad-makemake-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/makemake-3d-model/"
+        },
+        "notes": "NASA's illustration of Makemake, from its 3D model. No image resolves this surface, so none of the terrain, albedo or colour in it was observed. Display coordinates are arbitrary."
       }
     ]
   },
@@ -122,6 +136,12 @@
       "role": "shape",
       "description": "2011 occultation projected size and atmospheric constraints",
       "href": "https://doi.org/10.1038/nature11597"
+    },
+    {
+      "label": "NASA VTAD",
+      "role": "illustration",
+      "description": "Makemake 3D model and illustrative surface texture",
+      "href": "https://science.nasa.gov/resource/makemake-3d-model/"
     }
   ],
   "provenance": {

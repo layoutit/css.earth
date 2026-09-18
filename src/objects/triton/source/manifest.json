@@ -310,8 +310,8 @@
     {
       "id": "triton-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 5075,
-      "expectedSha256": "b01cc2895974945754e13a929f3302e14f0ea6bb5ae787de2bf5c0bf08ae81ce",
+      "expectedBytes": 5040,
+      "expectedSha256": "242dba906057f7c57c9f34aa1d0e7e45c83ec67fd0a13d88a4945837fea8ffa6",
       "origin": "Repository-authored Triton raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -329,8 +329,8 @@
     {
       "id": "triton-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1608,
-      "expectedSha256": "9e8c9c6412738c083dadb446ec841d1172aab8d38881384d3552d0734ad5644f",
+      "expectedBytes": 1614,
+      "expectedSha256": "29f5e9204a96b66f892b01b90c6b7c87b1a6e5ce7e565a1b64abbbfaab0f23b1",
       "origin": "Repository-authored Triton geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -423,8 +423,8 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7922,
-      "expectedSha256": "52f2c8073d9e29b359a447c603630b64186666fc8f95ecab9c1fe8b3cf48f41a",
+      "expectedBytes": 7934,
+      "expectedSha256": "08cb9dbb97987fc5e90694cbbe4a6e0ae19950467808621be4468dc00ebb8cf1",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

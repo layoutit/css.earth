@@ -69,8 +69,8 @@
         "label": "NIRSpec",
         "qualification": "Published map · Challener et al. 2024 · JWST NIRSpec 2.9–5.2 µm, 2023",
         "thumbnail": "wasp-43b-lens-temperature.webp",
-        "surface": "wasp-43b-surface-temperature.webp",
-        "poles": "wasp-43b-poles-temperature.webp",
+        "surface": "wasp-43b-surface-temperature@2x.webp",
+        "poles": "wasp-43b-poles-temperature@2x.webp",
         "source": {
           "id": "wasp-43b-challener-2024-deposit",
           "path": "../manifest.json",
@@ -129,8 +129,8 @@
         "label": "MIRI",
         "qualification": "Reduced here from raw JWST exposures · MIRI 5–10.5 µm, 2022",
         "thumbnail": "wasp-43b-lens-miri.webp",
-        "surface": "wasp-43b-surface-miri.webp",
-        "poles": "wasp-43b-poles-miri.webp",
+        "surface": "wasp-43b-surface-miri@2x.webp",
+        "poles": "wasp-43b-poles-miri@2x.webp",
         "source": {
           "id": "wasp-43b-miri-white",
           "path": "../manifest.json",

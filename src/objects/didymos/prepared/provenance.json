@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b02d4ca22abc7977a2fd03f948c080458a9ddb9a9aca309298d7cdb52533bb0e"
+    "sha256": "2411f451c668ba06a0567d8b5c7b49451e42ce8818c29c66515a7f0dfb3f97c6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -996,15 +996,6 @@
       "path": "observations/liciacube_luke_l2_1664234229_00005_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234229_00005_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1019,7 +1010,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234229-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/9"
           }
         ]
       },
@@ -1044,15 +1035,6 @@
       "path": "observations/liciacube_luke_l2_1664234231_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234231_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1067,7 +1049,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234231-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/11"
           }
         ]
       },
@@ -1092,15 +1074,6 @@
       "path": "observations/liciacube_luke_l2_1664234233_01003_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234233_01003_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1115,7 +1088,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234233-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/13"
           }
         ]
       },
@@ -1140,15 +1113,6 @@
       "path": "observations/liciacube_luke_l2_1664234235_00005_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234235_00005_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1163,7 +1127,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234235-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/15"
           }
         ]
       },
@@ -1188,15 +1152,6 @@
       "path": "observations/liciacube_luke_l2_1664234237_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234237_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1211,7 +1166,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234237-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/17"
           }
         ]
       },
@@ -1236,15 +1191,6 @@
       "path": "observations/liciacube_luke_l2_1664234239_01003_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234239_01003_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1259,7 +1205,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234239-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/19"
           }
         ]
       },
@@ -1284,15 +1230,6 @@
       "path": "observations/liciacube_luke_l2_1664234240_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234240_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1307,7 +1244,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234240-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/21"
           }
         ]
       },
@@ -1332,15 +1269,6 @@
       "path": "observations/liciacube_luke_l2_1664234243_00002_01.fits",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234243_00002_01.fits",
       "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "mission",
-            "missionId": "dart",
-            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
-          }
-        ]
-      },
       "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
       "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -1355,7 +1283,7 @@
           {
             "catalogueId": "source-didymos-didymos-luke-1664234243-fits",
             "role": "material",
-            "evidence": "src/objects/didymos/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/23"
           }
         ]
       },

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5ce0b6b4dbf648fa7c9d5158e67dc81dd7127e54e1783ae5481ba79eb74240eb"
+    "sha256": "74df873f089a0c434556292c80581f8623076a16a38abbd3769857b2cdc82763"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5b9c6baea847b99061b9101bc72e2eb22ca79037d62536a1a150169d1aea3845"
+    "bindingsSha256": "70ac03dfa4ec27ed6adc35666ee62667d38c1dd4a5ac2f68b6318af0f3a29635"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "c2eb3388846336c3301c5950c686d766d0adc389b9874e6f69ba67471e616bb4",
+      "sha256": "8318dc67fe9ea99282feb60835007b959c540c5955324e0d1b89df50dff67d9d",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/polaris/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -86,7 +82,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "bee2f60ecd117c800bc58d5172ec55c29e0bdf00f06681e97745ba4435d9980e",
+      "sha256": "36b5ec4f1c2a31d891fcd6fc53894278219b12af16b0a75deb635141d61946aa",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -132,8 +128,8 @@
               "label": "Shape",
               "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
               "thumbnail": "polaris-lens-shape.webp",
-              "surface": "polaris-surface-shape.webp",
-              "poles": "polaris-poles-shape.webp",
+              "surface": "polaris-surface-shape@2x.webp",
+              "poles": "polaris-poles-shape@2x.webp",
               "source": {
                 "id": "polaris-observational-measurements",
                 "path": "../manifest.json",
@@ -213,8 +209,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "bee2f60ecd117c800bc58d5172ec55c29e0bdf00f06681e97745ba4435d9980e",
-      "bytes": 2950,
+      "sha256": "36b5ec4f1c2a31d891fcd6fc53894278219b12af16b0a75deb635141d61946aa",
+      "bytes": 2956,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -247,12 +243,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/polaris/polaris-surface-shape.webp",
-          "bytes": 78,
-          "sha256": "2ec4d1bb2d266fdbb9283cb47781b2b34b4ff694f799a903f01db856ed2b22fc",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/polaris/polaris-surface-shape@2x.webp",
           "bytes": 178,
           "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
@@ -265,27 +255,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/polaris/polaris-poles-shape.webp",
-          "bytes": 680,
-          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/polaris/polaris-poles-shape@2x.webp",
           "bytes": 1340,
           "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/polaris/polaris-context-shape.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/polaris/polaris-limb-shape.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -368,11 +340,11 @@
   },
   "lastPreparation": {
     "objectId": "polaris",
-    "materialSha256": "4e7a1e2f93097473dd49225ad0fa5d00c9badc3b2d0976bea526e5cff4778a64",
+    "materialSha256": "0cec5ced666fdab5d91eca34932c8d686c9a0d62039b9da093d66d7d12d6f229",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5b9c6baea847b99061b9101bc72e2eb22ca79037d62536a1a150169d1aea3845"
+      "bindingsSha256": "70ac03dfa4ec27ed6adc35666ee62667d38c1dd4a5ac2f68b6318af0f3a29635"
     }
   }
 }

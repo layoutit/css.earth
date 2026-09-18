@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2acb949776501d851204a3253d37270bd6af91d479bdbad2d4d140a672230f6b"
+    "sha256": "d28874e0ace1dbadc1ad824368230d5edc9fad66d13819165a5aa6f871e4343b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a93bddb05bd38f98a55bd55b39a23e2b6f326c98c53ac43fb3f2b6c5f1ebe93f"
+    "bindingsSha256": "742eb393af10614e8922956edd5df779a660bd1d1cd18661e2164651b2fcbb23"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "9a1e44e8ca4086f661e89398cc968e08f488d5cd4c0a3b5773a5faa9e9f1d40a",
+      "sha256": "dd64051f02361879c4ce5e45760d09fdae18e66fd73ef39d5eecce96776f7f0e",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/sun/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -303,7 +299,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9cf0817c1084c25202535fd603de1bcff07bdef57cc0f927cefd88ebb9d49cc5",
+      "sha256": "3e0db71fb2f2b9cc2799cb02fd345ae2f89d9cdc3ad7982e45473c9ce4efe948",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -380,8 +376,8 @@
               "label": "Photosphere",
               "shortLabel": "Continuum",
               "thumbnail": "sun-lens-photosphere.webp",
-              "surface": "sun-surface-photosphere.webp",
-              "poles": "sun-poles-photosphere.webp",
+              "surface": "sun-surface-photosphere@2x.webp",
+              "poles": "sun-poles-photosphere@2x.webp",
               "source": {
                 "id": "sdo-hmi-continuum-cr2311-20260513"
               },
@@ -394,8 +390,8 @@
               "label": "Magnetic field",
               "shortLabel": "HMI Bᵣ",
               "thumbnail": "sun-lens-magnetic.webp",
-              "surface": "sun-surface-magnetic.webp",
-              "poles": "sun-poles-magnetic.webp",
+              "surface": "sun-surface-magnetic@2x.webp",
+              "poles": "sun-poles-magnetic@2x.webp",
               "source": {
                 "id": "jsoc-hmi-cr2311-radial-field-synoptic-map",
                 "url": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
@@ -444,8 +440,8 @@
               "label": "Chromosphere",
               "shortLabel": "304 Å",
               "thumbnail": "sun-lens-chromosphere.webp",
-              "surface": "sun-surface-chromosphere.webp",
-              "poles": "sun-poles-chromosphere.webp",
+              "surface": "sun-surface-chromosphere@2x.webp",
+              "poles": "sun-poles-chromosphere@2x.webp",
               "source": {
                 "id": "sdo-aia-304-cr2311-synoptic-map",
                 "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
@@ -492,8 +488,8 @@
               "label": "Corona",
               "shortLabel": "171 Å",
               "thumbnail": "sun-lens-corona.webp",
-              "surface": "sun-surface-corona.webp",
-              "poles": "sun-poles-corona.webp",
+              "surface": "sun-surface-corona@2x.webp",
+              "poles": "sun-poles-corona@2x.webp",
               "source": {
                 "id": "sdo-aia-171-cr2311-synoptic-map",
                 "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
@@ -2118,8 +2114,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "9cf0817c1084c25202535fd603de1bcff07bdef57cc0f927cefd88ebb9d49cc5",
-      "bytes": 10724,
+      "sha256": "3e0db71fb2f2b9cc2799cb02fd345ae2f89d9cdc3ad7982e45473c9ce4efe948",
+      "bytes": 10748,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2190,12 +2186,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/sun/sun-surface-photosphere.webp",
-          "bytes": 52712,
-          "sha256": "230cf0b52fabd6f8eca2056220641f2438b4f8b74bc02e7f359bf29648206534",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-surface-photosphere@2x.webp",
           "bytes": 223392,
           "sha256": "cb560e57c26b8a5c0d3e5c1719f3b27156c03fe4150757b2a06b975b14ae2cef",
@@ -2208,27 +2198,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sun/sun-poles-photosphere.webp",
-          "bytes": 16700,
-          "sha256": "d4ca7f01363fe06fc19ba91a0a2e425ee47c9679f01b2b0213126b0b6c4fa0b4",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-poles-photosphere@2x.webp",
           "bytes": 37092,
           "sha256": "3fb36d82d85a14c51337778a15f31a1445de339c37de59b01a31771b4992d1c2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-corona-photosphere.webp",
-          "bytes": 66,
-          "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-limb-photosphere.webp",
-          "bytes": 12700,
-          "sha256": "76b64002caf9a33df498c4501f5432085c505c73c326551d6e40e01b6ec109af",
           "verification": "bytes-verified"
         },
         {
@@ -2305,12 +2277,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/sun/sun-surface-magnetic.webp",
-          "bytes": 280774,
-          "sha256": "c8d081f99d7b76fb77722457d337acf6598a5fb5da255e1db802455d4abfc047",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-surface-magnetic@2x.webp",
           "bytes": 771488,
           "sha256": "2abdaa8759c7d504f440a8d2d1ad78e883c22dc396cb71b98ce8e0da7e22edb2",
@@ -2323,27 +2289,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sun/sun-poles-magnetic.webp",
-          "bytes": 29154,
-          "sha256": "41b37a105ff4e3b5942dfde5d5d968c414a5a10fc5f40da159370e4531fb32e6",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-poles-magnetic@2x.webp",
           "bytes": 67324,
           "sha256": "251e48c1e59620f903add6ea55ba78d288300b8cffa55a9d79ea5a8e27b16fad",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-corona-magnetic.webp",
-          "bytes": 66,
-          "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-limb-magnetic.webp",
-          "bytes": 7238,
-          "sha256": "12a176da30d1c561fb9089b5699c669ca8de47a28ffd8b76da85e729ca80d92d",
           "verification": "bytes-verified"
         },
         {
@@ -2430,12 +2378,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/sun/sun-surface-chromosphere.webp",
-          "bytes": 216718,
-          "sha256": "b3a392d9f50e5f14672b1746c09acad9994f2d577d2e0e698216198605168877",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-surface-chromosphere@2x.webp",
           "bytes": 599342,
           "sha256": "3ea26ae72464197f235f50425a158d073eed4e5d157c5ae5a5a13a860b97119c",
@@ -2448,27 +2390,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sun/sun-poles-chromosphere.webp",
-          "bytes": 17854,
-          "sha256": "a9b05f825704f74bb2101c8958f52f2fcf857df4a77f4d0fb46592795ee61fa8",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-poles-chromosphere@2x.webp",
           "bytes": 40354,
           "sha256": "efe90e0f276e341f2aa7ba48734ca8c64fbea641f578d09a722f0e6cbf6f288b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-corona-chromosphere.webp",
-          "bytes": 38960,
-          "sha256": "08d5949e1df3eca2bb1d902edcbdd5036b19f3faf15b6667996da30b567e000a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-limb-chromosphere.webp",
-          "bytes": 7238,
-          "sha256": "f217d13612f00b58a420472eeefdb142f8245d5db5a0c7b8b58be41143897637",
           "verification": "bytes-verified"
         },
         {
@@ -2555,12 +2479,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/sun/sun-surface-corona.webp",
-          "bytes": 187478,
-          "sha256": "0f907c2b4c5e093c5845c59c30fc22922fdfe51f458719602ddfbb5deb7116f8",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-surface-corona@2x.webp",
           "bytes": 478720,
           "sha256": "bd8a8b87f4a0b09805e344f42123492ae08d9677a5b19aadd3ba7f76a19f3c5a",
@@ -2573,27 +2491,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sun/sun-poles-corona.webp",
-          "bytes": 25578,
-          "sha256": "564b11314dc36696317a46b9484d70ea82695824c5856a64794cce486fb5a0f8",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/sun/sun-poles-corona@2x.webp",
           "bytes": 64356,
           "sha256": "26b24a09ecf2a73dd099e0adb7d8a1021e520f436492e0eb1a1dd14ef66fa7f2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-corona-corona.webp",
-          "bytes": 56282,
-          "sha256": "26252495041bebff43786f6e4386cdd062b397a1bd80ac6fa5c8e994d52b43e8",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/sun/sun-limb-corona.webp",
-          "bytes": 7238,
-          "sha256": "ddec547890fe63035b390cb31a0cfa0daa7f25ef925f2b5f72f543739cceb992",
           "verification": "bytes-verified"
         },
         {
@@ -2751,11 +2651,11 @@
   },
   "lastPreparation": {
     "objectId": "sun",
-    "materialSha256": "1be285772ea61466393638a796c38900f635277c4433d33307be2f99e2635900",
+    "materialSha256": "ed5d8d597cfbe1540ee6c06f288bacc678cd59c60ccaf48c429aec776eb3503c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a93bddb05bd38f98a55bd55b39a23e2b6f326c98c53ac43fb3f2b6c5f1ebe93f"
+      "bindingsSha256": "742eb393af10614e8922956edd5df779a660bd1d1cd18661e2164651b2fcbb23"
     }
   }
 }

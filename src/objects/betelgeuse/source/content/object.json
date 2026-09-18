@@ -55,8 +55,8 @@
         "id": "matisse",
         "label": "MATISSE reconstruction",
         "thumbnail": "betelgeuse-lens-matisse.webp",
-        "surface": "betelgeuse-surface-matisse.webp",
-        "poles": "betelgeuse-poles-matisse.webp",
+        "surface": "betelgeuse-surface-matisse@2x.webp",
+        "poles": "betelgeuse-poles-matisse@2x.webp",
         "source": {
           "id": "betelgeuse-matisse-2020-02-continuum",
           "path": "../manifest.json"

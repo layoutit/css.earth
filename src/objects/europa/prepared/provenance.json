@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32998e992addee20260c15bd2ae63b01ecc10631be60f850f99a4a2ea95486eb"
+    "sha256": "258a8c8d3d318eeb3a3612ce08059c6fef497eba78af53f8a895712ed74c6ede"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "bfc243a1f85959cb2b4ba2dd470e528a53676106416d335ce34b96afa6746f84"
+    "bindingsSha256": "c88b067c39b7c7c416af7bff036851be00df90d034e3c3881b3d96a96a362b34"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "c1fd90d5c68c04e5ff9d901db7442057143ba4c4c12ee2213521fba056decede",
+      "sha256": "6d992ff91e83327d1502c9344849b24e8cd447bbc9f0dbefbcd04ca5fe65eb67",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/europa/",
@@ -25,10 +25,6 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -550,7 +546,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8f4898752aed967d3e2a8d496d7484f085f8bb43c9d15d413425f0302c558be7",
+      "sha256": "ac5fab975fe53569cd2f647746b4aafe4f945934eb59bdcf361a9b9410d9284f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -652,8 +648,8 @@
               "id": "normal",
               "label": "Monochrome",
               "thumbnail": "europa-lens-normal.webp",
-              "surface": "europa-normal.webp",
-              "poles": "europa-poles-normal.webp",
+              "surface": "europa-normal@2x.webp",
+              "poles": "europa-poles-normal@2x.webp",
               "source": {
                 "id": "usgs-voyager-galileo-global-500m",
                 "path": "../manifest.json"
@@ -665,8 +661,8 @@
               "id": "enhanced",
               "label": "False color",
               "thumbnail": "europa-lens-enhanced.webp",
-              "surface": "europa-enhanced.webp",
-              "poles": "europa-poles-enhanced.webp",
+              "surface": "europa-enhanced@2x.webp",
+              "poles": "europa-poles-enhanced@2x.webp",
               "source": {
                 "id": "observed-color",
                 "path": "../manifest.json"
@@ -679,8 +675,8 @@
               "id": "elevation",
               "label": "Elevation",
               "thumbnail": "europa-lens-elevation.webp",
-              "surface": "europa-elevation.webp",
-              "poles": "europa-poles-elevation.webp",
+              "surface": "europa-elevation@2x.webp",
+              "poles": "europa-poles-elevation@2x.webp",
               "falseColor": true,
               "source": {
                 "id": "usgs-agenor-controlled-dtm",
@@ -761,8 +757,8 @@
               "id": "geology",
               "label": "Geology",
               "thumbnail": "europa-lens-geology.webp",
-              "surface": "europa-geology.webp",
-              "poles": "europa-poles-geology.webp",
+              "surface": "europa-geology@2x.webp",
+              "poles": "europa-poles-geology@2x.webp",
               "source": {
                 "id": "usgs-europa-geologic-units-grid",
                 "path": "../manifest.json",
@@ -833,8 +829,8 @@
               "id": "infrared",
               "label": "Infrared",
               "thumbnail": "europa-lens-infrared.webp",
-              "surface": "europa-infrared.webp",
-              "poles": "europa-poles-infrared.webp",
+              "surface": "europa-infrared@2x.webp",
+              "poles": "europa-poles-infrared@2x.webp",
               "source": {
                 "id": "europa-registered-nims-composite",
                 "path": "../manifest.json",
@@ -848,8 +844,8 @@
               "id": "ice-signature",
               "label": "Ice signature",
               "thumbnail": "europa-lens-ice-signature.webp",
-              "surface": "europa-ice-signature.webp",
-              "poles": "europa-poles-ice-signature.webp",
+              "surface": "europa-ice-signature@2x.webp",
+              "poles": "europa-poles-ice-signature@2x.webp",
               "source": {
                 "id": "europa-composition-ice-signature",
                 "path": "../manifest.json",
@@ -908,8 +904,8 @@
               "id": "fine-ice",
               "label": "Fine ice",
               "thumbnail": "europa-lens-fine-ice.webp",
-              "surface": "europa-fine-ice.webp",
-              "poles": "europa-poles-fine-ice.webp",
+              "surface": "europa-fine-ice@2x.webp",
+              "poles": "europa-poles-fine-ice@2x.webp",
               "source": {
                 "id": "europa-composition-fine-ice",
                 "path": "../manifest.json",
@@ -968,8 +964,8 @@
               "id": "coarse-ice",
               "label": "Coarse ice",
               "thumbnail": "europa-lens-coarse-ice.webp",
-              "surface": "europa-coarse-ice.webp",
-              "poles": "europa-poles-coarse-ice.webp",
+              "surface": "europa-coarse-ice@2x.webp",
+              "poles": "europa-poles-coarse-ice@2x.webp",
               "source": {
                 "id": "europa-composition-coarse-ice",
                 "path": "../manifest.json",
@@ -23016,8 +23012,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8f4898752aed967d3e2a8d496d7484f085f8bb43c9d15d413425f0302c558be7",
-      "bytes": 20352,
+      "sha256": "ac5fab975fe53569cd2f647746b4aafe4f945934eb59bdcf361a9b9410d9284f",
+      "bytes": 20400,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -23505,12 +23501,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-normal.webp",
-          "bytes": 2367852,
-          "sha256": "b408e252043299a1003e62449621bb0d13d263fc0228a297570789849f8e2acb",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-normal@2x.webp",
           "bytes": 6976746,
           "sha256": "5e1f982d5483762ec96f269d88d9e4cd2645a06e4def0b1ba27d4d67179a87c9",
@@ -23520,12 +23510,6 @@
           "url": "/scenes/europa/europa-lens-normal.webp",
           "bytes": 922,
           "sha256": "7656c4698d76da9e393e23eb26504436bfbcf5364c6066faca4aa26cc65022d3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-normal.webp",
-          "bytes": 46680,
-          "sha256": "dbbd90ec419dad5ebf56f952ac1483b6244d813fb8e8a24f0738b067e7823e33",
           "verification": "bytes-verified"
         },
         {
@@ -23569,12 +23553,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-enhanced.webp",
-          "bytes": 2319192,
-          "sha256": "003af8c6437edbc9360590fcdabdc6093e42afbb40d4d3581280b2c78ed89cab",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-enhanced@2x.webp",
           "bytes": 6469160,
           "sha256": "a1d399e34e5d34afb4909653f87b2e88d4c3391fa941d53719692a98a1b4bf60",
@@ -23584,12 +23562,6 @@
           "url": "/scenes/europa/europa-lens-enhanced.webp",
           "bytes": 916,
           "sha256": "a63aa6f1354bfc04c6147d9a0146bab661a0ab3ba97ae2933203a1c4bdf96c02",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-enhanced.webp",
-          "bytes": 43912,
-          "sha256": "d65a0dfbaee75fef3ffe24e6f6a6ec049e7cf63d766d806b993055fa08390b37",
           "verification": "bytes-verified"
         },
         {
@@ -23631,12 +23603,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-elevation.webp",
-          "bytes": 15924,
-          "sha256": "1002760c5d9e38a9ba1b2507cf260b459c0ca74f0bbe7421d56aa4fed797ea7e",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-elevation@2x.webp",
           "bytes": 47256,
           "sha256": "e5407450266e800dfafade50ddceae75756150685d9fcc25b7f6694fefc57e08",
@@ -23646,12 +23612,6 @@
           "url": "/scenes/europa/europa-lens-elevation.webp",
           "bytes": 240,
           "sha256": "7f7eb1f866707be8ae0e57bfcbd9243f9f9b6438c7b33ca8e9f3b7cec345d904",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-elevation.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
           "verification": "bytes-verified"
         },
         {
@@ -23693,12 +23653,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-geology.webp",
-          "bytes": 43076,
-          "sha256": "a5cc473103f9d4775aed9592af0ead1e2a0c929941cec0ae32c948dbab60d45f",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-geology@2x.webp",
           "bytes": 77748,
           "sha256": "a3fd7b9f836f9d4c5e19c5f35da3da1b73fb7cd9974879ca81dae14dc99113a7",
@@ -23708,12 +23662,6 @@
           "url": "/scenes/europa/europa-lens-geology.webp",
           "bytes": 470,
           "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-geology.webp",
-          "bytes": 6030,
-          "sha256": "7376b869d45db2f83376a2bb559bfccbd3404a853c8dd3eda497cf25fb04f792",
           "verification": "bytes-verified"
         },
         {
@@ -23755,12 +23703,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-infrared.webp",
-          "bytes": 111272,
-          "sha256": "60a7fdea5d70e4c710b7ac5d156e0d9e475e1202463be3aeeab43e5336c952c0",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-infrared@2x.webp",
           "bytes": 218316,
           "sha256": "36f9d2a251ae888cec5020aeb38a39235152d78d09c64b13f591c5819a1f6c37",
@@ -23770,12 +23712,6 @@
           "url": "/scenes/europa/europa-lens-infrared.webp",
           "bytes": 712,
           "sha256": "74e0b9e6414fbb77b0a1cf3a9c5a9804e5dc430117cb6ce3e2b6d73074d4ad13",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-infrared.webp",
-          "bytes": 21526,
-          "sha256": "8613375c4dfc5864d22038eecafe17a10a12fcdefa77eeb9739f7690c4762987",
           "verification": "bytes-verified"
         },
         {
@@ -23817,12 +23753,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-ice-signature.webp",
-          "bytes": 19416,
-          "sha256": "213aaaf1feae8facefc96449e0661a3a5c1ae02f1ce43fc2fe65d87daf6a6c7a",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-ice-signature@2x.webp",
           "bytes": 38392,
           "sha256": "1cb04424881acf1fe3b1bf442ad8fdcb13dedde0320ed372a2a56dba09b2e11e",
@@ -23832,12 +23762,6 @@
           "url": "/scenes/europa/europa-lens-ice-signature.webp",
           "bytes": 4320,
           "sha256": "1d3747071e6b6dc8d776e686907651eb07c17c66322e899d3541488bef28be53",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-ice-signature.webp",
-          "bytes": 3436,
-          "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2",
           "verification": "bytes-verified"
         },
         {
@@ -23879,12 +23803,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-fine-ice.webp",
-          "bytes": 19132,
-          "sha256": "489891eac605bd6f740707a82ad3a7c69bc14af7c3c2da5bfe6afb52114ce619",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-fine-ice@2x.webp",
           "bytes": 37256,
           "sha256": "8249b8c3fbcc7deec23cf39a11680b84d575abded14da051ca77c7d5670382b0",
@@ -23894,12 +23812,6 @@
           "url": "/scenes/europa/europa-lens-fine-ice.webp",
           "bytes": 4488,
           "sha256": "e98011c7da839a2ba0093aa5c7a9b2819624cebf513fbb17f0d1aa8e0af2c46b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-fine-ice.webp",
-          "bytes": 3436,
-          "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2",
           "verification": "bytes-verified"
         },
         {
@@ -23941,12 +23853,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/europa/europa-coarse-ice.webp",
-          "bytes": 20152,
-          "sha256": "6664f29a64af4d48c2cc9d5b8b492d478d0859168fe8d4a7b736f84890b4b1da",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/europa/europa-coarse-ice@2x.webp",
           "bytes": 40214,
           "sha256": "3445290322e40e6b3f5bf745b69757e140bc89366377d989bf63137491a16e30",
@@ -23956,12 +23862,6 @@
           "url": "/scenes/europa/europa-lens-coarse-ice.webp",
           "bytes": 4454,
           "sha256": "78eef448eb826f1a50fc56756ad375c28dcd0713a37e38f7f305a4f8cf5ddf8d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-coarse-ice.webp",
-          "bytes": 3436,
-          "sha256": "ff5af59f1ac279891d6f751be8d9d4d0ed906c3306cf0739348f32205ee5bdd2",
           "verification": "bytes-verified"
         },
         {
@@ -23998,204 +23898,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/europa/europa-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/europa/europa-lighting-2x-billboard.webp",
           "bytes": 115740,
@@ -24665,11 +24367,11 @@
   },
   "lastPreparation": {
     "objectId": "europa",
-    "materialSha256": "f832a02bdf74cccdf5ecb4f1f6fea6663c7f0c6f5927b0caadd57eb39ab34720",
+    "materialSha256": "ed7b677817e6b483cefa276d836ddacd6117034bcd11065e30b1e6b1004aea0b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "bfc243a1f85959cb2b4ba2dd470e528a53676106416d335ce34b96afa6746f84"
+      "bindingsSha256": "c88b067c39b7c7c416af7bff036851be00df90d034e3c3881b3d96a96a362b34"
     }
   }
 }

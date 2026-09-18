@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/antares/antares-surface-shape.webp",
+      "url": "/scenes/antares/antares-surface-shape@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/antares/antares-poles-shape.webp",
+      "url": "/scenes/antares/antares-poles-shape@2x.webp",
       "width": 512,
       "height": 256
     },

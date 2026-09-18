@@ -49,8 +49,8 @@
     {
       "id": "wasp-43-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2606,
-      "expectedSha256": "d33e1e19b13e86e48ac1eb616d137add5f29af78d89b55378b2aa60c1f9e975c",
+      "expectedBytes": 2571,
+      "expectedSha256": "b103c9f7139929ac73bc7b936abc9f296ab26b89ee1ffa65d27fd42ffc9735fe",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +68,8 @@
     {
       "id": "wasp-43-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1684,
-      "expectedSha256": "e532cb86ababf24a91425502ba2aca919758564f3c86b4e758f00771210bc28f",
+      "expectedBytes": 1690,
+      "expectedSha256": "215d664261c7c0b158bdcdb1c638b27a929399019a4d23f94309b3c723099f44",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -285,8 +285,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3080,
-      "expectedSha256": "2c88d39e538e8f0daf015345a719bec9677f755ff20f88da04a775fea5a25054",
+      "expectedBytes": 3086,
+      "expectedSha256": "aa8a85426146e31492861bb0090891d130bd59ca3b2cb03508bf2d8f1140ce8c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
