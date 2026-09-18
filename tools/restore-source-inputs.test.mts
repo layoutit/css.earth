@@ -11,6 +11,7 @@ import { setupObjectIds } from './runtime-assets.mts';
 import { validateObjectPackageFiles } from './object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
 import { parseAcquisitionPlan } from './objects/dist/operations.js';
+import { requirePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
 
 const project = resolve(import.meta.dirname, '..');
 const pin = (path: string, bytes: Uint8Array) => ({ path, expectedBytes: bytes.length,
@@ -49,10 +50,21 @@ test('every registered body has its package files and tracked or restorable sour
   }).split('\0'));
   const missing = [];
   for (const id of setupObjectIds([])) {
+    // Phase 2 (feat/gh-pages-r2-assets): prepared/runtime.json is no longer git-tracked for any body; a clean
+    // checkout restores it from R2 via the object's prepared-assets.json inventory instead. Every other
+    // required file keeps the original "must be tracked" proof.
+    const preparedRuntimePath = relative(project, resolve(project, 'src/objects', id, 'prepared/runtime.json'));
     await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
       accessFile: async path => {
         if (typeof path !== 'string') throw new TypeError('Fixture access must receive a string path.');
-        assert.ok(tracked.has(relative(project, path)), path);
+        const relativePath = relative(project, path);
+        if (relativePath === preparedRuntimePath) {
+          const manifest = requirePreparedAssetManifest(id, JSON.parse(
+            await readFile(resolve(project, 'src/objects', id, 'prepared-assets.json'), 'utf8')));
+          assert.ok(manifest.assets.some(asset => asset.filename === 'runtime.json'), path);
+          return;
+        }
+        assert.ok(tracked.has(relativePath), path);
       } });
     const source = `src/objects/${id}/source`;
     const inputs: unknown[] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
