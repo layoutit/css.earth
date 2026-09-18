@@ -156,13 +156,25 @@ test("prepared-assets: refuses to inventory a git-tracked file, which setup:asse
   assert.deepEqual(manifest.assets.map(a => a.filename), ["runtime.json"]);
 });
 
-test("prepared-assets: the real mimas object's tracked provenance.json is refused if added to its inventory", async () => {
+test("prepared-assets: the real mimas object's tracked provenance.json is refused if added to its inventory", async (context) => {
   // Reproduces the live gap found in review: nothing stopped a git-tracked contract file from being listed in a
   // prepared-assets inventory (a body's provenance.json was added to it and every suite stayed green). Exercises
-  // the default (real git) path against this actual checkout, not an injected fake.
+  // the default (real git) tracked-path lookup against this actual checkout, not an injected fake.
+  //
+  // Only provenance.json (always git-tracked, always present in a checkout) is listed here — not runtime.json,
+  // which setup:assets/setup:prepared restores from R2 and is not guaranteed to exist yet wherever this test
+  // runs. preparePreparedAssetManifest checks each listed filename exists before checking git-tracked status, so
+  // listing runtime.json would make this guard's own pass/fail depend on that unrelated restore having already
+  // happened; the fixture simply does not need that file to exercise the guard.
+  //
+  // manifestPath points at a throwaway temp file, never the real tracked src/objects/mimas/prepared-assets.json:
+  // the guard is expected to reject before any write, but a regression that reached the write must not be able
+  // to corrupt a tracked file as a side effect of running this test.
   const preparedRoot = resolve(import.meta.dirname, "../../src/objects/mimas/prepared");
+  const tempDirectory = await mkdtemp(resolve(tmpdir(), "mimas-tracked-guard-"));
+  context.after(() => rm(tempDirectory, { recursive: true, force: true }));
   await assert.rejects(preparePreparedAssetManifest({
-    planetId: "mimas", preparedRoot, manifestPath: resolve(preparedRoot, "../prepared-assets.json"),
-    filenames: ["runtime.json", "provenance.json"],
+    planetId: "mimas", preparedRoot, manifestPath: resolve(tempDirectory, "prepared-assets.json"),
+    filenames: ["provenance.json"],
   }), /git-tracked.*provenance\.json/);
 });
