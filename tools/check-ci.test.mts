@@ -13,8 +13,7 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  assert.ok(lint.some(step=>step.run.includes('check:assets-published')&&step.env.GH_TOKEN===undefined),'the workflow token is dropped locally');
  assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:shared')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
  assert.ok(universe.length>10);
- assert.equal(universe.at(-1)?.run.trim(),'node tools/check-object-runtime-ownership.mts --all');
- assert.equal(readCiSteps(workflow,'nebula').at(-1)?.run.trim(),'pnpm test:renderer');
+ assert.equal(universe.at(-1)?.run.trim(),'pnpm test:renderer');
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
  const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');

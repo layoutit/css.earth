@@ -60,11 +60,14 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Generate the registry, renderer and preparation bundle
         # Only what these checks import: SCENE_OBJECTS (site/objects.mts), the renderer the prepared-object reader
-        # imports, and tools/objects/dist/operations.js. No build:tools, no restored asset.
+        # imports, and tools/objects/dist/operations.js with the solar geometry and shell titles it bundles. The
+        # rest of build:tools (navigation, world context, shell assets) and every restored asset are left out.
         run: |
           pnpm build:packages
           pnpm build:renderer
           pnpm prepare:catalog
+          node tools/prepare-solar-geometry.mts > "$RUNNER_TEMP/solar-geometry.log"
+          pnpm prepare:titles
           pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts
       - name: Check every object's package files, source citations and restoration plan
         run: |
@@ -102,8 +105,6 @@ jobs:
           else
             pnpm check:assets-published --added-since="origin/${GITHUB_BASE_REF:-main}"
           fi
-      - name: Enforce activation preparation for every registered object
-        run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
 
   typecheck:
     name: Typecheck
@@ -209,9 +210,9 @@ jobs:
           site/test/prepared-context-navigation.test.mts
           site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
       - name: Test authored preparation publication and cache
-        # None of these tests launches a browser (preparation-cache names a headless-shell path in a fixture string
-        # only), so this job installs no Chromium.
+        # Finalization renders through headless Chromium, so the browser stays installed here.
         run: |
+          pnpm exec playwright install --with-deps chromium
           node --test --test-concurrency=1 \
             tests/objects/prepared-finalization.test.mts \
             tests/objects/publication.test.mts \
@@ -257,8 +258,14 @@ jobs:
           site/test/dataset-url.test.mts
           site/test/browser-node-imports.test.mts
           tools/serialize-prepared-scene.test.mts
+      - name: Enforce activation preparation for every registered object
+        # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
+        run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
       - name: Check every object's runtime ownership and physical frame receipt
         run: node tools/check-object-runtime-ownership.mts --all
+      - name: Test complete shared renderer and camera
+        # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
+        run: pnpm test:renderer
 
   nebula:
     name: Internal nebula packages and isolated controls
@@ -273,10 +280,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies without preparing application assets
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - name: Build shared TypeScript dependencies and the renderer
-        run: |
-          pnpm -r --filter "./packages/**" build
-          pnpm build:renderer
+      - name: Build shared TypeScript dependencies
+        run: pnpm -r --filter "./packages/**" build
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps chromium
       - name: Check all nebula packages, tests and dependency boundaries
@@ -304,6 +309,3 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
-      - name: Test complete shared renderer and camera
-        # Needs only the built packages and renderer, so it runs here instead of after the prepared-universe restore.
-        run: pnpm test:renderer
