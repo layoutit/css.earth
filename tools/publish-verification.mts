@@ -20,7 +20,13 @@ export interface VerifyOptions {
 }
 
 function headOk(response: Response | null, expectedBytes: number): boolean {
-  return !!response && response.ok && Number(response.headers.get('content-length')) === expectedBytes;
+  if (!response || !response.ok) return false;
+  // A compressible content type (e.g. `application/json`) can come back content-encoded (br/gzip) with no
+  // `content-length` at all — observed live against the real origin once JSON started publishing with that
+  // content type. There is then nothing left to compare at the HEAD level; `response.ok` is the whole signal,
+  // and exact bytes are still confirmed by the full-content check below (always for JSON, sampled for the rest).
+  const contentLength = response.headers.get('content-length');
+  return contentLength === null || Number(contentLength) === expectedBytes;
 }
 
 function defaultSample(assets: readonly PublishAsset[], count: number): readonly PublishAsset[] {

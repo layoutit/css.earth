@@ -1,0 +1,16 @@
+{
+  "schema": "csskerberos-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 458794,
+      "sha256": "5a47c557bead22d763309b7d9dd1167f2baa530527b8cb36d571b55605e9f3d0"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 370148,
+      "sha256": "e0c9164c7bbab8b10641d47452dae775c1028eced0a3bace5cd59aa2601e9946"
+    }
+  ]
+}

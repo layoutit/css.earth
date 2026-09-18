@@ -1,0 +1,16 @@
+{
+  "schema": "csstoro-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 749518,
+      "sha256": "d7348826ce35ba0be145ed7bbc86941198894e62a082a2ac881267256c92916d"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 619507,
+      "sha256": "f1fd41448d1117948e1a77838e338cc385e92769abfea35a966748d7ccac91b9"
+    }
+  ]
+}

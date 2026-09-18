@@ -1,0 +1,16 @@
+{
+  "schema": "cssamalthea-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 747528,
+      "sha256": "d9eb3638546ecf68ec4c7b4dce967a251429dc098f21c6132f3b0326e981964e"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 617728,
+      "sha256": "11715b5ccb99321b15cd4de9c4eb82d5b2bbfa3dcfe39e7845960b4f5bdb7616"
+    }
+  ]
+}

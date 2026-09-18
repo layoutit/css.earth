@@ -1,0 +1,78 @@
+# Excerpt of member.uid___A001_X362b_X5d9.hifa_calimage_selfcal_nocube.casa_commands.log:
+# the four continuum tclean calls the ALMA pipeline ran on R Doradus, kept verbatim.
+
+tclean(vis=['uid___A002_X10ed869_X1ec34_targets.ms'], field='R_Dor',
+       spw=['25:455.3506751226~455.6221594976GHz;456.5713782476~456.6729407476GHz;456.9698157476~457.1866126226GHz,27:458.5196126226~458.5489094976GHz;458.6914876226~458.9453938726GHz;458.9825032476~458.9942219976GHz,29:467.3311438726~467.4600501226GHz;467.7159094976~467.7725501226GHz;468.3194251226~468.4209876226GHz;468.5205969976~468.6905188726GHz;468.7745032476~468.8213782476GHz;469.0694251226~469.1807532476GHz,31:469.2285969976~469.2344563726GHz;469.2383626226~469.2500813726GHz;469.3184407476~469.3282063726GHz;469.6094563726~469.6192219976GHz;469.8731282476~469.8907063726GHz;470.9004719976~471.0723469976GHz'],
+       antenna=['0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40&'],
+       scan=['9,11,13,15,22,24,26,30,33,37'], intent='OBSERVE_TARGET#ON_SOURCE',
+       datacolumn='data',
+       imagename='uid___A001_X362b_X5d9.s35_0.R_Dor_sci.spw25_27_29_31.cont.regcal.I.iter0',
+       imsize=[3200, 3200], cell=['0.0055arcsec'], phasecenter='ICRS
+       04:36:45.3572 -062.04.39.619', stokes='I', specmode='mfs', nchan=-1,
+       outframe='LSRK', perchanweightdensity=False, gridder='standard',
+       mosweight=False, usepointing=False, pblimit=0.2, deconvolver='hogbom',
+       restoration=False, restoringbeam='common', pbcor=False,
+       weighting='briggs', robust=0.5, npixels=0, niter=0, threshold='0.0mJy',
+       nsigma=0.0, interactive=False, fullsummary=True, usemask='auto-
+       multithresh', sidelobethreshold=2.5, noisethreshold=5.0,
+       lownoisethreshold=1.5, negativethreshold=0.0, minbeamfrac=0.3,
+       growiterations=75, dogrowprune=True, minpercentchange=1.0,
+       fastnoise=True, savemodel='none', parallel=True)
+
+tclean(vis=['uid___A002_X10ed869_X1ec34_targets.ms'], field='R_Dor',
+       spw=['25:455.3506751226~455.6221594976GHz;456.5713782476~456.6729407476GHz;456.9698157476~457.1866126226GHz,27:458.5196126226~458.5489094976GHz;458.6914876226~458.9453938726GHz;458.9825032476~458.9942219976GHz,29:467.3311438726~467.4600501226GHz;467.7159094976~467.7725501226GHz;468.3194251226~468.4209876226GHz;468.5205969976~468.6905188726GHz;468.7745032476~468.8213782476GHz;469.0694251226~469.1807532476GHz,31:469.2285969976~469.2344563726GHz;469.2383626226~469.2500813726GHz;469.3184407476~469.3282063726GHz;469.6094563726~469.6192219976GHz;469.8731282476~469.8907063726GHz;470.9004719976~471.0723469976GHz'],
+       antenna=['0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40&'],
+       scan=['9,11,13,15,22,24,26,30,33,37'], intent='OBSERVE_TARGET#ON_SOURCE',
+       datacolumn='data',
+       imagename='uid___A001_X362b_X5d9.s35_0.R_Dor_sci.spw25_27_29_31.cont.regcal.I.iter1',
+       imsize=[3200, 3200], cell=['0.0055arcsec'], phasecenter='ICRS
+       04:36:45.3572 -062.04.39.619', stokes='I', specmode='mfs', nchan=-1,
+       outframe='LSRK', perchanweightdensity=False, gridder='standard',
+       mosweight=False, usepointing=False, pblimit=0.2, deconvolver='hogbom',
+       restoration=True, restoringbeam='common', pbcor=True, weighting='briggs',
+       robust=0.5, npixels=0, niter=300000000, threshold='0.00391Jy',
+       nsigma=0.0, interactive=False, fullsummary=True, usemask='auto-
+       multithresh', sidelobethreshold=2.5, noisethreshold=5.0,
+       lownoisethreshold=1.5, negativethreshold=0.0, minbeamfrac=0.3,
+       growiterations=75, dogrowprune=True, minpercentchange=1.0,
+       fastnoise=True, restart=True, savemodel='none', calcres=False,
+       calcpsf=False, parallel=True)
+
+
+tclean(vis=['uid___A002_X10ed869_X1ec34_targets.ms'], field='R_Dor',
+       spw=['25:455.3506751226~455.6221594976GHz;456.5713782476~456.6729407476GHz;456.9698157476~457.1866126226GHz,27:458.5196126226~458.5489094976GHz;458.6914876226~458.9453938726GHz;458.9825032476~458.9942219976GHz,29:467.3311438726~467.4600501226GHz;467.7159094976~467.7725501226GHz;468.3194251226~468.4209876226GHz;468.5205969976~468.6905188726GHz;468.7745032476~468.8213782476GHz;469.0694251226~469.1807532476GHz,31:469.2285969976~469.2344563726GHz;469.2383626226~469.2500813726GHz;469.3184407476~469.3282063726GHz;469.6094563726~469.6192219976GHz;469.8731282476~469.8907063726GHz;470.9004719976~471.0723469976GHz'],
+       antenna=['0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40&'],
+       scan=['9,11,13,15,22,24,26,30,33,37'], intent='OBSERVE_TARGET#ON_SOURCE',
+       datacolumn='corrected',
+       imagename='uid___A001_X362b_X5d9.s44_0.R_Dor_sci.spw25_27_29_31.cont.selfcal.I.iter0',
+       imsize=[3200, 3200], cell=['0.0055arcsec'], phasecenter='ICRS
+       04:36:45.3572 -062.04.39.619', stokes='I', specmode='mfs', nchan=-1,
+       outframe='LSRK', perchanweightdensity=False, gridder='standard',
+       mosweight=False, usepointing=False, pblimit=0.2, deconvolver='mtmfs',
+       nterms=2, restoration=False, restoringbeam='common', pbcor=False,
+       weighting='briggs', robust=0.5, npixels=0, niter=0, threshold='0.0mJy',
+       nsigma=0.0, interactive=False, fullsummary=True, usemask='auto-
+       multithresh', sidelobethreshold=2.5, noisethreshold=5.0,
+       lownoisethreshold=1.5, negativethreshold=0.0, minbeamfrac=0.3,
+       growiterations=75, dogrowprune=True, minpercentchange=1.0,
+       fastnoise=True, savemodel='none', parallel=True)
+
+tclean(vis=['uid___A002_X10ed869_X1ec34_targets.ms'], field='R_Dor',
+       spw=['25:455.3506751226~455.6221594976GHz;456.5713782476~456.6729407476GHz;456.9698157476~457.1866126226GHz,27:458.5196126226~458.5489094976GHz;458.6914876226~458.9453938726GHz;458.9825032476~458.9942219976GHz,29:467.3311438726~467.4600501226GHz;467.7159094976~467.7725501226GHz;468.3194251226~468.4209876226GHz;468.5205969976~468.6905188726GHz;468.7745032476~468.8213782476GHz;469.0694251226~469.1807532476GHz,31:469.2285969976~469.2344563726GHz;469.2383626226~469.2500813726GHz;469.3184407476~469.3282063726GHz;469.6094563726~469.6192219976GHz;469.8731282476~469.8907063726GHz;470.9004719976~471.0723469976GHz'],
+       antenna=['0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40&'],
+       scan=['9,11,13,15,22,24,26,30,33,37'], intent='OBSERVE_TARGET#ON_SOURCE',
+       datacolumn='corrected',
+       imagename='uid___A001_X362b_X5d9.s44_0.R_Dor_sci.spw25_27_29_31.cont.selfcal.I.iter1',
+       imsize=[3200, 3200], cell=['0.0055arcsec'], phasecenter='ICRS
+       04:36:45.3572 -062.04.39.619', stokes='I', specmode='mfs', nchan=-1,
+       outframe='LSRK', perchanweightdensity=False, gridder='standard',
+       mosweight=False, usepointing=False, pblimit=0.2, deconvolver='mtmfs',
+       nterms=2, restoration=True, restoringbeam='common', pbcor=True,
+       weighting='briggs', robust=0.5, npixels=0, niter=1999999999,
+       threshold='0.000949Jy', nsigma=0.0, interactive=False, fullsummary=True,
+       usemask='auto-multithresh', sidelobethreshold=2.5, noisethreshold=5.0,
+       lownoisethreshold=1.5, negativethreshold=0.0, minbeamfrac=0.3,
+       growiterations=75, dogrowprune=True, minpercentchange=1.0,
+       fastnoise=True, restart=True, savemodel='none', calcres=False,
+       calcpsf=False, parallel=True)
+

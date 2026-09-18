@@ -1,0 +1,16 @@
+{
+  "schema": "cssjulia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 756619,
+      "sha256": "309c59544826106ccbb6bd1a102b04d776ec24719bf8dde462316090e274345d"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 614698,
+      "sha256": "45c4dd6999daac7dbc44423de5ee88f635aa1df5a1045dc8a40969ea315c6d47"
+    }
+  ]
+}

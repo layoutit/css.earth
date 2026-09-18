@@ -1,0 +1,16 @@
+{
+  "schema": "cssleto-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 747793,
+      "sha256": "0a08f91725fc07a9719a2520378b9172dd9f3ce2b5bb37545cf53a336e4d91e5"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 617899,
+      "sha256": "f978605ec1884de00d51369602091831f35cacffbfab1f8aa73c8aa8415416f0"
+    }
+  ]
+}

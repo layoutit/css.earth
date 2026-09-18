@@ -1,0 +1,16 @@
+{
+  "schema": "cssio-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 525111,
+      "sha256": "daf9971839d04140344e0ab10fdf6af3e1c65ae55d17f3c55ee2b1351cda04cf"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 373455,
+      "sha256": "de3bd0a09892e53964ad7be1f1630cf893e5f2d26989e3525b627d072c8454bb"
+    }
+  ]
+}

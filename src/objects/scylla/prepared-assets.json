@@ -1,0 +1,16 @@
+{
+  "schema": "cssscylla-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750448,
+      "sha256": "9c4ccfd52f287b914645892e0fb9cdb308ab36a7dde6e4caac8073f7b1f7a484"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620583,
+      "sha256": "af3416bcd226641397a2996faffca69291380aa3e2c7da97699115b1a688fea3"
+    }
+  ]
+}

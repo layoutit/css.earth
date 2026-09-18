@@ -1,0 +1,16 @@
+{
+  "schema": "cssce-tauri-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 361500,
+      "sha256": "e9621e80e22bc5e23ec53cb060a3726b416bd6bb3a3c410b0c04faf81843da22"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 347871,
+      "sha256": "bb6627977f20c53e06e660ceeec043d77c1d38d372ab204c98d7bf00436da184"
+    }
+  ]
+}

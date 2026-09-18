@@ -1,0 +1,16 @@
+{
+  "schema": "csselektra-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750988,
+      "sha256": "63ef572086516c04c232661902de7644b460a7d971cc7c185629501dad99be92"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620684,
+      "sha256": "81dc5d486b8e9cc5926fbf86ea6a17483d317981587305dd926363faf32351a4"
+    }
+  ]
+}
