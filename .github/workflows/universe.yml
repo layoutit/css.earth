@@ -121,9 +121,10 @@ jobs:
       - name: Test asset inventory, publish verification, closure and local CI tooling
         # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
-        # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the prune dry-run report,
-        # and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`, which this
-        # workflow does not run and which has known unrelated failures.
+        # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
+        # path (tools/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
+        # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
+        # which this workflow does not run and which has known unrelated failures.
         run: >-
           node --test tools/runtime-assets.test.mts
           tools/publish-verification.test.mts
@@ -132,6 +133,7 @@ jobs:
           tools/object-scope-gate.test.mts
           tools/classify-changes.test.mts
           tools/scope-runtime-ownership-check.test.mts
+          tools/setup.test.mts
           tools/prune-runtime-assets.test.mts
           tools/check-ci.test.mts
       - name: Check published assets this change adds
@@ -528,6 +530,10 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared TypeScript dependencies
         run: pnpm -r --filter "./packages/**" build
+      - name: Test the object registry and adapter packages
+        # 802 tests, ~6 s local; never ran in CI before (output/TEST_AUDIT.md section 1.5). Needs only the build
+        # above, so it runs here rather than adding another checkout+install in Contract lint.
+        run: pnpm test:packages
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps chromium
       - name: Check all nebula packages, tests and dependency boundaries
