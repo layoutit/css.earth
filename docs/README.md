@@ -15,6 +15,8 @@ For a body's sources, processing, evidence and known problems, read its
 | Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
 | Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
+| What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
+| Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
 | Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
