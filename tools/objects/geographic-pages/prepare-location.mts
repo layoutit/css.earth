@@ -84,9 +84,10 @@ export function prepareLocationCamera(scene: GeographicScene, point: readonly nu
     roll = degrees(Math.atan2(-northX, -northY));
   }
   return {
-    // The recipe states the default pose on the control-to-scene scale; its steepest scene pitch follows from it.
+    // The recipe states its steepest scene pitch directly; the default camera angles it used to
+    // derive this from are prepared, not authored (#294), and are no longer on the recipe camera.
     controlPitch: preparedControlPitch(pitch, { maximumControlPitchDegrees: camera.maximumControlPitchDegrees,
-      maximumScenePitchDegrees: camera.initialScenePitchDegrees * camera.maximumControlPitchDegrees / (camera.maximumControlPitchDegrees - camera.defaultControlPitchDegrees) }),
+      maximumScenePitchDegrees: camera.maximumScenePitchDegrees }),
     controlYaw: yaw, zoom,
     ...(northUp ? { controlRoll: roll } : {}),
   };
