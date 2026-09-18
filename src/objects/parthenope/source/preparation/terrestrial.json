@@ -72,7 +72,7 @@
         "metadata": {
           "label": "SPHERE photograph",
           "falseColor": false,
-          "coverage": "19 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2019-04-19 to 2019-06-19, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.10. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+          "coverage": "24 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 5 nights in 2 apparitions from 2018-02-06 to 2019-06-19, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.10. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
         },
         "selection": "finest-resolution",
         "levelMatching": {
@@ -103,6 +103,86 @@
           ]
         },
         "frames": [
+          {
+            "id": "zimpol-20180206-022657",
+            "path": "observations/d11Parthenope_2018-02-06T02_26_57.151_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 71.442,
+            "observerWestLongitude": 241.0331,
+            "sunLatitude": 73.163,
+            "sunWestLongitude": 226.1959,
+            "rangeKm": 257595209.9,
+            "northAzimuthDegrees": 12.6254,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.339,
+              137.533
+            ]
+          },
+          {
+            "id": "zimpol-20180206-023106",
+            "path": "observations/d11Parthenope_2018-02-06T02_31_06.667_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 71.4417,
+            "observerWestLongitude": 242.8533,
+            "sunLatitude": 73.1631,
+            "sunWestLongitude": 228.0121,
+            "rangeKm": 257596571.9,
+            "northAzimuthDegrees": 12.6274,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.636,
+              134.958
+            ]
+          },
+          {
+            "id": "zimpol-20180206-023517",
+            "path": "observations/d11Parthenope_2018-02-06T02_35_17.855_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 71.4413,
+            "observerWestLongitude": 244.6857,
+            "sunLatitude": 73.1632,
+            "sunWestLongitude": 229.8405,
+            "rangeKm": 257597945.1,
+            "northAzimuthDegrees": 12.6294,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              129.44,
+              134.015
+            ]
+          },
+          {
+            "id": "zimpol-20180206-023926",
+            "path": "observations/d11Parthenope_2018-02-06T02_39_26.938_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 71.4409,
+            "observerWestLongitude": 246.5028,
+            "sunLatitude": 73.1633,
+            "sunWestLongitude": 231.6536,
+            "rangeKm": 257599308.8,
+            "northAzimuthDegrees": 12.6314,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.513,
+              134.396
+            ]
+          },
+          {
+            "id": "zimpol-20180206-024337",
+            "path": "observations/d11Parthenope_2018-02-06T02_43_37.007_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 71.4405,
+            "observerWestLongitude": 248.327,
+            "sunLatitude": 73.1634,
+            "sunWestLongitude": 233.4738,
+            "rangeKm": 257600680,
+            "northAzimuthDegrees": 12.6335,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              131.014,
+              135.204
+            ]
+          },
           {
             "id": "zimpol-20190419-040156",
             "path": "observations/d11Parthenope_2019-04-19T04_01_56.678_zpl_science_imaging_cam1.fits",

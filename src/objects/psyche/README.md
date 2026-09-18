@@ -28,7 +28,7 @@ The [Zenodo release](https://doi.org/10.5281/zenodo.6321315) (CC BY 4.0) is kept
 | --- | --- | --- |
 | Thermal inertia | 25 to 594 J m⁻² K⁻¹ s⁻½, 23 distinct values | 134 (46 to 175) |
 | Dielectric constant | 7.5 to 55 | 1.9 (0.5 to 4.1) |
-| SPHERE photograph | [32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 5 nights from 2019-07-28 to 2019-08-06](https://observations.lam.fr/astero/Data/16Psyche/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj) |
+| SPHERE photograph | [60 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 11 nights from 2018-04-24 to 2019-08-06](https://observations.lam.fr/astero/Data/16Psyche/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj) |
 | Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/16_Psyche_param.txt), read longitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.14](https://doi.org/10.1051/0004-6361/202141781) |
 
@@ -55,6 +55,11 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.14](https
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2018-04-24 08:42:52 | 0.964 | 0.961 | 0.965 | 0° | -1°, -2.5° | 33.1° against 35.8° |
+| 2018-04-28 07:51:11 | 0.965 | 0.968 | 0.968 | 0° | -2°, 0.5° | 33.9° against 37.5° |
+| 2018-05-04 05:53:17 | 0.966 | 0.967 | 0.969 | 0° | -1.5°, 0.5° | 35.4° against 38.4° |
+| 2018-05-05 01:51:26 | 0.964 | 0.966 | 0.972 | 0° | -3°, -1° | 35.6° against 37.2° |
+| 2018-06-03 23:58:13 | 0.961 | 0.956 | 0.969 | 0° | -2°, 2° | 48.1° against 46.6° |
 | 2019-07-28 09:04:11 | 0.968 | 0.960 | 0.973 | 0° | -2.5°, -1° | 172.8° against 174.9° |
 | 2019-07-30 06:27:16 | 0.966 | 0.948 | 0.970 | 0° | -1.5°, 1° | 172.9° against 175.1° |
 | 2019-07-30 08:03:04 | 0.966 | 0.957 | 0.972 | 0° | -2°, -2° | 172.9° against 175.0° |
@@ -63,7 +68,7 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.14](https
 | 2019-08-06 02:42:42 | 0.968 | 0.965 | 0.973 | 0° | -1°, 0° | 173.2° against 175.5° |
 | 2019-08-06 04:27:36 | 0.966 | 0.963 | 0.970 | 0° | -1°, -1° | 173.2° against 175.3° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 0.835 px at our phase; the lowest of a ±30° sweep is 0.813 px at -4°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 60 native frames after the centre fit is 1.224 px at our phase, the lowest of a ±30° sweep.
 <!-- published-comparison:end -->
 
 
@@ -74,7 +79,7 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 32 | 32 | 4.98° | 3.74° | 3.29° | its other 32 frames | 0 of 32 | — | 6 of 32, -2.00° | — | ×1.17 | conflict |
+| `zimpol` | 60 | 49 | 4.64° | 3.29° | 3.28° | its other 60 frames | 1 of 60 | — | 10 of 60, -2.00° | — | ×1.59 | conflict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.14](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
@@ -94,7 +99,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Psyche from 8° to 10° south, so surface the survey did not see keeps the missing-imagery grid.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another. It is not albedo or colour. The frames see Psyche from 10° south to 80° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

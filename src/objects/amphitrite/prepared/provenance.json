@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a5532c791a2f7f668dc39119cebdfa296d822ca9c431b83f1e53479afca67d63"
+    "sha256": "d041e61e5bd560c0527deb5b6ae581e89129422900b360167d2f7585bc75d6d0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "3e9eda00c53594941184c24fc7040ad8e5acb27f146a97c1e700616a0d67d7bf"
+    "bindingsSha256": "5dadb290319e02e0b350d21dedca59c2b063597147cebb6045e63d1fbf742a20"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "857c8ec18f42a66debae283ff70b1f30618e6be475438e0a54063e483cebcefb",
+      "sha256": "a9b546883aca1cafc0f1a5bb4f8bcd5d6fcb616a5795b2b04be3e89e91e1da44",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,7 +90,7 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 5 nights from 2019-08-16 to 2019-08-29, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.20. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "55 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 7 nights in 3 apparitions from 2017-05-20 to 2019-08-29, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.20. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
               "selection": "finest-resolution",
               "levelMatching": {
@@ -121,6 +121,246 @@
                 ]
               },
               "frames": [
+                {
+                  "id": "zimpol-20170520-013759",
+                  "path": "observations/d29Amphitrite_2017-05-20T01_37_59.406_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0562,
+                  "observerWestLongitude": 341.6028,
+                  "sunLatitude": 43.4366,
+                  "sunWestLongitude": 9.5388,
+                  "rangeKm": 341290930.2,
+                  "northAzimuthDegrees": 183.9628,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.336,
+                    128.322
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-014130",
+                  "path": "observations/d29Amphitrite_2017-05-20T01_41_30.350_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0559,
+                  "observerWestLongitude": 345.5166,
+                  "sunLatitude": 43.4362,
+                  "sunWestLongitude": 13.4524,
+                  "rangeKm": 341295889.8,
+                  "northAzimuthDegrees": 183.9633,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.898,
+                    128.103
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-014501",
+                  "path": "observations/d29Amphitrite_2017-05-20T01_45_01.003_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0557,
+                  "observerWestLongitude": 349.425,
+                  "sunLatitude": 43.4357,
+                  "sunWestLongitude": 17.3607,
+                  "rangeKm": 341300843.8,
+                  "northAzimuthDegrees": 183.9637,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.048,
+                    127.997
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-014831",
+                  "path": "observations/d29Amphitrite_2017-05-20T01_48_31.442_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0555,
+                  "observerWestLongitude": 353.3295,
+                  "sunLatitude": 43.4353,
+                  "sunWestLongitude": 21.265,
+                  "rangeKm": 341305793.8,
+                  "northAzimuthDegrees": 183.9642,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.29,
+                    128.64
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-015200",
+                  "path": "observations/d29Amphitrite_2017-05-20T01_52_00.588_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0552,
+                  "observerWestLongitude": 357.21,
+                  "sunLatitude": 43.4348,
+                  "sunWestLongitude": 25.1453,
+                  "rangeKm": 341310714.7,
+                  "northAzimuthDegrees": 183.9647,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.059,
+                    128.049
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-021932",
+                  "path": "observations/d29Amphitrite_2017-05-20T02_19_32.240_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0534,
+                  "observerWestLongitude": 27.8547,
+                  "sunLatitude": 43.4314,
+                  "sunWestLongitude": 55.7886,
+                  "rangeKm": 341349613.1,
+                  "northAzimuthDegrees": 183.9684,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.668,
+                    128.164
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-022302",
+                  "path": "observations/d29Amphitrite_2017-05-20T02_23_02.321_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0531,
+                  "observerWestLongitude": 31.7525,
+                  "sunLatitude": 43.4309,
+                  "sunWestLongitude": 59.6863,
+                  "rangeKm": 341354565.4,
+                  "northAzimuthDegrees": 183.9688,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.09,
+                    127.842
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-022632",
+                  "path": "observations/d29Amphitrite_2017-05-20T02_26_32.832_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0529,
+                  "observerWestLongitude": 35.6584,
+                  "sunLatitude": 43.4305,
+                  "sunWestLongitude": 63.5919,
+                  "rangeKm": 341359528.9,
+                  "northAzimuthDegrees": 183.9693,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.076,
+                    127.794
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-022959",
+                  "path": "observations/d29Amphitrite_2017-05-20T02_29_59.406_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0527,
+                  "observerWestLongitude": 39.4911,
+                  "sunLatitude": 43.43,
+                  "sunWestLongitude": 67.4245,
+                  "rangeKm": 341364400.5,
+                  "northAzimuthDegrees": 183.9698,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.803,
+                    127.814
+                  ]
+                },
+                {
+                  "id": "zimpol-20170520-023328",
+                  "path": "observations/d29Amphitrite_2017-05-20T02_33_28.985_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 57.0524,
+                  "observerWestLongitude": 43.3796,
+                  "sunLatitude": 43.4296,
+                  "sunWestLongitude": 71.3128,
+                  "rangeKm": 341369344,
+                  "northAzimuthDegrees": 183.9703,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.701,
+                    127.557
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-091421",
+                  "path": "observations/d29Amphitrite_2018-06-08T09_14_21.958_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -33.5175,
+                  "observerWestLongitude": 129.2809,
+                  "sunLatitude": -29.0576,
+                  "sunWestLongitude": 131.1329,
+                  "rangeKm": 257866685.7,
+                  "northAzimuthDegrees": 239.7117,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.172,
+                    129.201
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-091831",
+                  "path": "observations/d29Amphitrite_2018-06-08T09_18_31.324_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -33.5169,
+                  "observerWestLongitude": 133.9069,
+                  "sunLatitude": -29.0582,
+                  "sunWestLongitude": 135.7597,
+                  "rangeKm": 257865752,
+                  "northAzimuthDegrees": 239.7115,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.549,
+                    130.236
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-092240",
+                  "path": "observations/d29Amphitrite_2018-06-08T09_22_40.568_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -33.5163,
+                  "observerWestLongitude": 138.5306,
+                  "sunLatitude": -29.0587,
+                  "sunWestLongitude": 140.3842,
+                  "rangeKm": 257864819.8,
+                  "northAzimuthDegrees": 239.7113,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.574,
+                    129.078
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-092650",
+                  "path": "observations/d29Amphitrite_2018-06-08T09_26_50.467_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -33.5158,
+                  "observerWestLongitude": 143.1665,
+                  "sunLatitude": -29.0592,
+                  "sunWestLongitude": 145.0208,
+                  "rangeKm": 257863886.3,
+                  "northAzimuthDegrees": 239.711,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.474,
+                    129.205
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-093100",
+                  "path": "observations/d29Amphitrite_2018-06-08T09_31_00.698_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -33.5152,
+                  "observerWestLongitude": 147.8086,
+                  "sunLatitude": -29.0598,
+                  "sunWestLongitude": 149.6637,
+                  "rangeKm": 257862952.7,
+                  "northAzimuthDegrees": 239.7108,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    131.734,
+                    130.351
+                  ]
+                },
                 {
                   "id": "zimpol-20190816-063941",
                   "path": "observations/d29Amphitrite_2019-08-16T06_39_41.095_zpl_science_imaging_cam1.fits",
@@ -186,6 +426,38 @@
                   ]
                 },
                 {
+                  "id": "zimpol-20190816-065622",
+                  "path": "observations/d29Amphitrite_2019-08-16T06_56_22.534_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -22.75,
+                  "observerWestLongitude": 285.2486,
+                  "sunLatitude": -40.54,
+                  "sunWestLongitude": 270.5414,
+                  "rangeKm": 270250811.7,
+                  "northAzimuthDegrees": 143.442,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.891,
+                    131.429
+                  ]
+                },
+                {
+                  "id": "zimpol-20190816-075205",
+                  "path": "observations/d29Amphitrite_2019-08-16T07_52_05.602_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -22.7464,
+                  "observerWestLongitude": 347.275,
+                  "sunLatitude": -40.5315,
+                  "sunWestLongitude": 332.5752,
+                  "rangeKm": 270183844.9,
+                  "northAzimuthDegrees": 143.4415,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.978,
+                    130.575
+                  ]
+                },
+                {
                   "id": "zimpol-20190816-075617",
                   "path": "observations/d29Amphitrite_2019-08-16T07_56_17.269_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
@@ -247,6 +519,22 @@
                   "center": [
                     123.118,
                     130.656
+                  ]
+                },
+                {
+                  "id": "zimpol-20190817-060735",
+                  "path": "observations/d29Amphitrite_2019-08-17T06_07_35.917_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -22.6586,
+                  "observerWestLongitude": 33.9951,
+                  "sunLatitude": -40.329,
+                  "sunWestLongitude": 19.4688,
+                  "rangeKm": 268596451,
+                  "northAzimuthDegrees": 143.4275,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.082,
+                    132.054
                   ]
                 },
                 {
@@ -378,6 +666,38 @@
                   ]
                 },
                 {
+                  "id": "zimpol-20190817-075711",
+                  "path": "observations/d29Amphitrite_2019-08-17T07_57_11.006_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -22.6519,
+                  "observerWestLongitude": 155.9872,
+                  "sunLatitude": -40.3124,
+                  "sunWestLongitude": 141.4758,
+                  "rangeKm": 268465569.2,
+                  "northAzimuthDegrees": 143.4268,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.832,
+                    132.209
+                  ]
+                },
+                {
+                  "id": "zimpol-20190817-081055",
+                  "path": "observations/d29Amphitrite_2019-08-17T08_10_55.514_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -22.6511,
+                  "observerWestLongitude": 171.2849,
+                  "sunLatitude": -40.3103,
+                  "sunWestLongitude": 156.7753,
+                  "rangeKm": 268449249.8,
+                  "northAzimuthDegrees": 143.4267,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.131,
+                    130.818
+                  ]
+                },
+                {
                   "id": "zimpol-20190817-081507",
                   "path": "observations/d29Amphitrite_2019-08-17T08_15_07.048_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
@@ -439,6 +759,22 @@
                   "center": [
                     132.164,
                     131.388
+                  ]
+                },
+                {
+                  "id": "zimpol-20190822-065221",
+                  "path": "observations/d29Amphitrite_2019-08-22T06_52_21.441_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -22.2637,
+                  "observerWestLongitude": 178.9747,
+                  "sunLatitude": -39.2239,
+                  "sunWestLongitude": 165.4386,
+                  "rangeKm": 260196167.3,
+                  "northAzimuthDegrees": 143.3954,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.702,
+                    131.15
                   ]
                 },
                 {
@@ -506,6 +842,22 @@
                   ]
                 },
                 {
+                  "id": "zimpol-20190823-080902",
+                  "path": "observations/d29Amphitrite_2019-08-23T08_09_02.232_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -22.1989,
+                  "observerWestLongitude": 67.3493,
+                  "sunLatitude": -38.9912,
+                  "sunWestLongitude": 54.0312,
+                  "rangeKm": 258487544.7,
+                  "northAzimuthDegrees": 143.3981,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.707,
+                    131.921
+                  ]
+                },
+                {
                   "id": "zimpol-20190823-081313",
                   "path": "observations/d29Amphitrite_2019-08-23T08_13_13.781_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
@@ -567,6 +919,22 @@
                   "center": [
                     134.829,
                     133.25
+                  ]
+                },
+                {
+                  "id": "zimpol-20190829-053219",
+                  "path": "observations/d29Amphitrite_2019-08-29T05_32_19.310_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -21.9519,
+                  "observerWestLongitude": 150.8676,
+                  "sunLatitude": -37.6812,
+                  "sunWestLongitude": 138.8354,
+                  "rangeKm": 249299234.2,
+                  "northAzimuthDegrees": 143.4738,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    132.69,
+                    131.952
                   ]
                 },
                 {
@@ -708,7 +1076,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7eb6330dd166f84c0822bd669bd86de5701709ae3a3baca4911be0129487135",
+      "sha256": "16c4bc87e907409587a84c6f23c77c436a7a83626053834e034e5f5fe8b25d13",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -818,7 +1186,7 @@
               },
               "falseColor": false,
               "noData": true,
-              "notes": "32 deconvolved VLT/SPHERE/ZIMPOL frames, 5 nights from 2019-08-16 to 2019-08-29, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.20. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+              "notes": "55 deconvolved VLT/SPHERE/ZIMPOL frames, 7 nights from 2017-05-20 to 2019-08-29, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.20. Grayscale is photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -921,6 +1289,786 @@
         ],
         "path": "shape/29_Amphitrite_mpcd.obj",
         "url": "https://observations.lam.fr/astero/3Dshape/29_Amphitrite_mpcd.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520013759",
+      "path": "observations/d29Amphitrite_2017-05-20T01_37_59.406_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_37_59.406_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520013759",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/38"
+          }
+        ]
+      },
+      "sha256": "ee7fcee540e07de471a93ce8d498fb76ac09d97f2a8381989273c00d607875c5",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T01_37_59.406_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_37_59.406_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520014130",
+      "path": "observations/d29Amphitrite_2017-05-20T01_41_30.350_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_41_30.350_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520014130",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/39"
+          }
+        ]
+      },
+      "sha256": "892a08d93b5042a392f283120d53a2c0f07e4d5128728c0cc547724557a21786",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T01_41_30.350_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_41_30.350_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520014501",
+      "path": "observations/d29Amphitrite_2017-05-20T01_45_01.003_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_45_01.003_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520014501",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/40"
+          }
+        ]
+      },
+      "sha256": "00c006aad15e405c1cec05181d093c42a6532741ddf948f13498f267bd024d52",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T01_45_01.003_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_45_01.003_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520014831",
+      "path": "observations/d29Amphitrite_2017-05-20T01_48_31.442_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_48_31.442_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520014831",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/41"
+          }
+        ]
+      },
+      "sha256": "6c3afbfcb436f9a7b0c7d9a51e824d8bd72975c67fe9bd80a96ae72176348754",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T01_48_31.442_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_48_31.442_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520015200",
+      "path": "observations/d29Amphitrite_2017-05-20T01_52_00.588_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_52_00.588_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520015200",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/42"
+          }
+        ]
+      },
+      "sha256": "32b6d55efa44f1d96b8fe4060234af618c8b28a0b083f7b6ad46ebb3c39e91f4",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T01_52_00.588_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T01_52_00.588_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520021932",
+      "path": "observations/d29Amphitrite_2017-05-20T02_19_32.240_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_19_32.240_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520021932",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/43"
+          }
+        ]
+      },
+      "sha256": "7b24cf849e82ea9f26106d4b70377fd0d9f7edc49c8a127784ee09a7c65d65ef",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T02_19_32.240_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_19_32.240_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520022302",
+      "path": "observations/d29Amphitrite_2017-05-20T02_23_02.321_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_23_02.321_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520022302",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/44"
+          }
+        ]
+      },
+      "sha256": "7c2bc8e54aede9315a65297ddd9fb80fa36e38e6037c7c3d6ddf1fca3f9d14cf",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T02_23_02.321_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_23_02.321_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520022632",
+      "path": "observations/d29Amphitrite_2017-05-20T02_26_32.832_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_26_32.832_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520022632",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/45"
+          }
+        ]
+      },
+      "sha256": "7a3d4e379bf2ae97df778bdf5d4cc68e8c4ce7665bea5a2cba6306c9970ad90c",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T02_26_32.832_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_26_32.832_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520022959",
+      "path": "observations/d29Amphitrite_2017-05-20T02_29_59.406_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_29_59.406_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520022959",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/46"
+          }
+        ]
+      },
+      "sha256": "16ac8c1da826b53432a4a31ebd819a6c8b2c04c86f2a6fb1178241d8ca3f13a9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T02_29_59.406_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_29_59.406_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20170520023328",
+      "path": "observations/d29Amphitrite_2017-05-20T02_33_28.985_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_33_28.985_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20170520023328",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/47"
+          }
+        ]
+      },
+      "sha256": "664d4da1af5dccf407064c81df0f475333f72759883ffe3de5ffe26d1b50c8e1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2017-05-20T02_33_28.985_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2017-05-20T02_33_28.985_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20180608091421",
+      "path": "observations/d29Amphitrite_2018-06-08T09_14_21.958_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_14_21.958_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608091421",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/48"
+          }
+        ]
+      },
+      "sha256": "f1a109184ad7bcb2b90a7e1cf4931b82f962c24ef2cbcf4c69abcbfe7dd69d00",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2018-06-08T09_14_21.958_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_14_21.958_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20180608091831",
+      "path": "observations/d29Amphitrite_2018-06-08T09_18_31.324_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_18_31.324_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608091831",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/49"
+          }
+        ]
+      },
+      "sha256": "406fe2b7eaf6ba8fcc8b753b0135946d7d9b2609ca98634cb8ad5cbd28ceb2fd",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2018-06-08T09_18_31.324_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_18_31.324_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20180608092240",
+      "path": "observations/d29Amphitrite_2018-06-08T09_22_40.568_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_22_40.568_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608092240",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/50"
+          }
+        ]
+      },
+      "sha256": "de7b1cec67f76829e7d97219c628af4206fe50b21104233eb0b6cfadc40173dd",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2018-06-08T09_22_40.568_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_22_40.568_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20180608092650",
+      "path": "observations/d29Amphitrite_2018-06-08T09_26_50.467_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_26_50.467_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608092650",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/51"
+          }
+        ]
+      },
+      "sha256": "71261fd930d6c2f8ca0d405c66b381c3d51304fe800fe586c7a5385f38f97f53",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2018-06-08T09_26_50.467_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_26_50.467_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20180608093100",
+      "path": "observations/d29Amphitrite_2018-06-08T09_31_00.698_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_31_00.698_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20180608093100",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/52"
+          }
+        ]
+      },
+      "sha256": "de80aa0daa721270e58855392373e3d132a4f0c85e359d657eaed81257a75003",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2018-06-08T09_31_00.698_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2018-06-08T09_31_00.698_zpl_science_imaging_cam1.fits",
         "headers": {
           "Cookie": "CesAM_LAM_opens_the_door=1"
         }
@@ -1137,6 +2285,110 @@
     },
     {
       "kind": "source-input",
+      "id": "amphitrite-sphere-20190816065622",
+      "path": "observations/d29Amphitrite_2019-08-16T06_56_22.534_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T06_56_22.534_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190816065622",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/53"
+          }
+        ]
+      },
+      "sha256": "e669801d517af26ab9429d15bd7c5f92d34f9d8565e8d69086fa2c816b896d2b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-16T06_56_22.534_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T06_56_22.534_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20190816075205",
+      "path": "observations/d29Amphitrite_2019-08-16T07_52_05.602_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T07_52_05.602_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190816075205",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/54"
+          }
+        ]
+      },
+      "sha256": "71d2255a358ffc0d7746461209e095ffd7177b5719e12bac25436041fa966f16",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-16T07_52_05.602_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T07_52_05.602_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "amphitrite-sphere-20190816075617",
       "path": "observations/d29Amphitrite_2019-08-16T07_56_17.269_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T07_56_17.269_zpl_science_imaging_cam1.fits",
@@ -1337,6 +2589,58 @@
         ],
         "path": "observations/d29Amphitrite_2019-08-16T08_08_47.949_zpl_science_imaging_cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-16T08_08_47.949_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20190817060735",
+      "path": "observations/d29Amphitrite_2019-08-17T06_07_35.917_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T06_07_35.917_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190817060735",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/55"
+          }
+        ]
+      },
+      "sha256": "829e12bfe061791a4a41378f88e7d68a1a2ade497654814b5869f41c01c66065",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-17T06_07_35.917_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T06_07_35.917_zpl_science_imaging_cam1.fits",
         "headers": {
           "Cookie": "CesAM_LAM_opens_the_door=1"
         }
@@ -1761,6 +3065,110 @@
     },
     {
       "kind": "source-input",
+      "id": "amphitrite-sphere-20190817075711",
+      "path": "observations/d29Amphitrite_2019-08-17T07_57_11.006_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T07_57_11.006_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190817075711",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/56"
+          }
+        ]
+      },
+      "sha256": "8199f7da0e724af6ebb0bb35975f2518ef543c8d1044b8d799319373c3314012",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-17T07_57_11.006_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T07_57_11.006_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20190817081055",
+      "path": "observations/d29Amphitrite_2019-08-17T08_10_55.514_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T08_10_55.514_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190817081055",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/57"
+          }
+        ]
+      },
+      "sha256": "a2aedad76ec85bad46a769aeb9340330ac0bd2a0955a188e858535b64afbbf95",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-17T08_10_55.514_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T08_10_55.514_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "amphitrite-sphere-20190817081507",
       "path": "observations/d29Amphitrite_2019-08-17T08_15_07.048_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T08_15_07.048_zpl_science_imaging_cam1.fits",
@@ -1961,6 +3369,58 @@
         ],
         "path": "observations/d29Amphitrite_2019-08-17T08_27_37.652_zpl_science_imaging_cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-17T08_27_37.652_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20190822065221",
+      "path": "observations/d29Amphitrite_2019-08-22T06_52_21.441_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-22T06_52_21.441_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190822065221",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/58"
+          }
+        ]
+      },
+      "sha256": "14a90ba2d82fb19e3edbad8260a8bf3962f2df93fa5590bc11271028e7386004",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-22T06_52_21.441_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-22T06_52_21.441_zpl_science_imaging_cam1.fits",
         "headers": {
           "Cookie": "CesAM_LAM_opens_the_door=1"
         }
@@ -2177,6 +3637,58 @@
     },
     {
       "kind": "source-input",
+      "id": "amphitrite-sphere-20190823080902",
+      "path": "observations/d29Amphitrite_2019-08-23T08_09_02.232_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-23T08_09_02.232_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190823080902",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/59"
+          }
+        ]
+      },
+      "sha256": "6f1bb1e909dff405fc7dcddcbce3fcef856fbe436e45b8823fb39fa58b05eb79",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-23T08_09_02.232_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-23T08_09_02.232_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "amphitrite-sphere-20190823081313",
       "path": "observations/d29Amphitrite_2019-08-23T08_13_13.781_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-23T08_13_13.781_zpl_science_imaging_cam1.fits",
@@ -2377,6 +3889,58 @@
         ],
         "path": "observations/d29Amphitrite_2019-08-23T08_25_46.275_zpl_science_imaging_cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-23T08_25_46.275_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "amphitrite-sphere-20190829053219",
+      "path": "observations/d29Amphitrite_2019-08-29T05_32_19.310_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-29T05_32_19.310_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-amphitrite-amphitrite-sphere-20190829053219",
+            "role": "material",
+            "evidence": "src/objects/amphitrite/source/manifest.json@0000000000000000000000000000000000000000#/inputs/60"
+          }
+        ]
+      },
+      "sha256": "0327b8f92f56dd4630818c35cf12b7a2dcaec95cc20b5332cc35619ab6f3c9cc",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d29Amphitrite_2019-08-29T05_32_19.310_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/29Amphitrite/Deconv/d29Amphitrite_2019-08-29T05_32_19.310_zpl_science_imaging_cam1.fits",
         "headers": {
           "Cookie": "CesAM_LAM_opens_the_door=1"
         }
@@ -2658,8 +4222,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d7eb6330dd166f84c0822bd669bd86de5701709ae3a3baca4911be0129487135",
-      "bytes": 10128,
+      "sha256": "16c4bc87e907409587a84c6f23c77c436a7a83626053834e034e5f5fe8b25d13",
+      "bytes": 10195,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2780,14 +4344,32 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
+        "amphitrite-sphere-20170520013759",
+        "amphitrite-sphere-20170520014130",
+        "amphitrite-sphere-20170520014501",
+        "amphitrite-sphere-20170520014831",
+        "amphitrite-sphere-20170520015200",
+        "amphitrite-sphere-20170520021932",
+        "amphitrite-sphere-20170520022302",
+        "amphitrite-sphere-20170520022632",
+        "amphitrite-sphere-20170520022959",
+        "amphitrite-sphere-20170520023328",
+        "amphitrite-sphere-20180608091421",
+        "amphitrite-sphere-20180608091831",
+        "amphitrite-sphere-20180608092240",
+        "amphitrite-sphere-20180608092650",
+        "amphitrite-sphere-20180608093100",
         "amphitrite-sphere-20190816063941",
         "amphitrite-sphere-20190816064352",
         "amphitrite-sphere-20190816064802",
         "amphitrite-sphere-20190816065212",
+        "amphitrite-sphere-20190816065622",
+        "amphitrite-sphere-20190816075205",
         "amphitrite-sphere-20190816075617",
         "amphitrite-sphere-20190816080028",
         "amphitrite-sphere-20190816080437",
         "amphitrite-sphere-20190816080847",
+        "amphitrite-sphere-20190817060735",
         "amphitrite-sphere-20190817061144",
         "amphitrite-sphere-20190817061556",
         "amphitrite-sphere-20190817062007",
@@ -2796,18 +4378,23 @@
         "amphitrite-sphere-20190817074440",
         "amphitrite-sphere-20190817074851",
         "amphitrite-sphere-20190817075300",
+        "amphitrite-sphere-20190817075711",
+        "amphitrite-sphere-20190817081055",
         "amphitrite-sphere-20190817081507",
         "amphitrite-sphere-20190817081917",
         "amphitrite-sphere-20190817082328",
         "amphitrite-sphere-20190817082737",
+        "amphitrite-sphere-20190822065221",
         "amphitrite-sphere-20190822065632",
         "amphitrite-sphere-20190822070043",
         "amphitrite-sphere-20190822070453",
         "amphitrite-sphere-20190822070904",
+        "amphitrite-sphere-20190823080902",
         "amphitrite-sphere-20190823081313",
         "amphitrite-sphere-20190823081725",
         "amphitrite-sphere-20190823082135",
         "amphitrite-sphere-20190823082546",
+        "amphitrite-sphere-20190829053219",
         "amphitrite-sphere-20190829053630",
         "amphitrite-sphere-20190829054042",
         "amphitrite-sphere-20190829054453",
@@ -2817,14 +4404,14 @@
       "outputs": [
         {
           "url": "/scenes/amphitrite/amphitrite-zimpol-thumbnail.webp",
-          "bytes": 1984,
-          "sha256": "f661bead3c7f2f59b9095744973c2a85f73261c6aa9b84806891415d0e805f03",
+          "bytes": 1992,
+          "sha256": "c556fe71d422b3ce2db7c7af8db5090239920b485cc1939bdb0bd14cc8ecd5a1",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amphitrite/amphitrite-zimpol-surface@2x.webp",
-          "bytes": 223004,
-          "sha256": "51678ed8a09f41c432e2c0ca8c40b8ca0f740a0a0e337605168f1912773af163",
+          "bytes": 330946,
+          "sha256": "3db29e284ff534c120c57d32cc374cb22af2df54f4594e8ac7b2064bd07e3cda",
           "verification": "bytes-verified"
         }
       ],
@@ -2907,8 +4494,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 10656,
-          "sha256": "1964114cfab751213498debd345e2f573a7413d2de07ff60fa00c1eb7fb662d1",
+          "bytes": 16960,
+          "sha256": "763914c906953156df22d93f0f49649b452ce0300a9b2137a51acd6d93649e12",
           "verification": "bytes-verified"
         }
       ]
@@ -2945,11 +4532,11 @@
   },
   "lastPreparation": {
     "objectId": "amphitrite",
-    "materialSha256": "bb24d6ac1f81e7e8ac179b11dbab6d59575df0685ea82a05f939cea09c0dad29",
+    "materialSha256": "fe637feca57f8e665684885f10c0392ae697a03003965427af97e2d323af7f43",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "3e9eda00c53594941184c24fc7040ad8e5acb27f146a97c1e700616a0d67d7bf"
+      "bindingsSha256": "5dadb290319e02e0b350d21dedca59c2b063597147cebb6045e63d1fbf742a20"
     }
   }
 }

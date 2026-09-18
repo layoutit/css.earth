@@ -287,6 +287,126 @@
       }
     },
     {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T01_13_08.474_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T01_13_08.474_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T01_17_18.898_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T01_17_18.898_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T01_21_30.234_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T01_21_30.234_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T01_25_40.045_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T01_25_40.045_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T01_29_49.411_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T01_29_49.411_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T02_15_09.227_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T02_15_09.227_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T02_19_19.070_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T02_19_19.070_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T02_23_29.375_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T02_23_29.375_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T02_27_39.244_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T02_27_39.244_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d18Melpomene_2018-05-04T02_31_49.412_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2018-05-04T02_31_49.412_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
       "kind": "horizons-time-list",
       "groups": [
         "refresh"
@@ -305,6 +425,16 @@
         "CSV_FORMAT": "'NO'"
       },
       "epochs": [
+        2458242.5507925116,
+        2458242.553690949,
+        2458242.5565999188,
+        2458242.55949125,
+        2458242.562377442,
+        2458242.593856782,
+        2458242.596748484,
+        2458242.5996455327,
+        2458242.6025375463,
+        2458242.605433009,
         2458655.8579366435,
         2458655.8607650576,
         2458655.8636082173,
@@ -347,6 +477,16 @@
         "CSV_FORMAT": "'NO'"
       },
       "epochs": [
+        2458242.53896946,
+        2458242.5418677153,
+        2458242.5447765025,
+        2458242.5476676524,
+        2458242.550553663,
+        2458242.58203102,
+        2458242.584922539,
+        2458242.587819405,
+        2458242.5907112355,
+        2458242.5936065153,
         2458655.8503772574,
         2458655.8532057544,
         2458655.856048997,

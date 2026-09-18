@@ -746,8 +746,8 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 11829,
-      "expectedSha256": "391d1b850d2b1ea39bb2aac5f619ce617ddf0a24d090753520d42de86decbc1b",
+      "expectedBytes": 12469,
+      "expectedSha256": "919987a32c31efd35dd2b08a69fa3bf944b2ddef2ee280859295a4b9a90220e3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -771,8 +771,8 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 8392,
-      "expectedSha256": "42834679e778feb873aac03a24e056429298c98ff9fb7c71bc4d4ed1c0483bb9",
+      "expectedBytes": 9067,
+      "expectedSha256": "4ac4bb468f439fbb2047f00cfe93799f5124a33bb040a92b165cbb0ceffa52df",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -780,6 +780,201 @@
             "catalogueId": "source-flora-flora-horizons-sphere-heliocentric",
             "role": "material",
             "evidence": "src/objects/flora/source/manifest.json@35b2477d3d85b15a2dbc71ab4ddfebdddfaa757e#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flora-sphere-20190504080535",
+      "path": "observations/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f4b0d8a1578d239c7eb257c992c9f63175a364df2d9c98d35e088e824d237b3c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504080535",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flora-sphere-20190504080937",
+      "path": "observations/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d8f2cff91a86aa62ef99a78eeab886400599a76ed6323171a594c757a3771eb0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504080937",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flora-sphere-20190504081339",
+      "path": "observations/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "9a44c2fe606fa8e900166c529cc79eba08b2124e9c6c2bc13ab4742f2f011f03",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504081339",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flora-sphere-20190504081740",
+      "path": "observations/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d26ae736c4acdd7a7134290c0701b27942154039dc794fbe07c5541e32441bcc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504081740",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "flora-sphere-20190504082141",
+      "path": "observations/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "8f54a3e204e3dbb5901a2b70faea1518e7558f8c4b2d838fc19e3a9b7bcd4fbe",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504082141",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
           }
         ]
       }
@@ -815,8 +1010,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8228,
-      "expectedSha256": "b4728aecac733322ed344309338e5d162ecd0ff1f8ad3a575b34205a7077b2f5",
+      "expectedBytes": 8308,
+      "expectedSha256": "336d59830d1bf3d14ec004fd4365672dd061dc2cb812b44ecd9c03a9c03e8379",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -824,8 +1019,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 9114,
-      "expectedSha256": "588af3f4e69902ceb37b200287a93bb7f23d304b7c3f65f65ee6421e888075ce"
+      "expectedBytes": 11391,
+      "expectedSha256": "4826be38a88541992373c335c3121d133b86ebe8fcbab50d8e6120437871a8fd"
     },
     {
       "path": "preparation/navigation.json",
@@ -839,8 +1034,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 14326,
-      "expectedSha256": "b7f3c4b39fd3c659ea1d3e8725836bdda13870c6718e77ceba1456d0dbdbe5be"
+      "expectedBytes": 17375,
+      "expectedSha256": "c9a9f5d5e0cb3b40b3d7dba0b9881fe748bff920bf5d9f4623e2f06031257680"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -894,8 +1089,8 @@
     },
     {
       "path": "preparation/published-comparison.json",
-      "expectedBytes": 872,
-      "expectedSha256": "067ca37456d62bd681767663fbe44a4b76447bb1ddbe808402ce0daa1b607cad"
+      "expectedBytes": 892,
+      "expectedSha256": "7114fae56f2d5c30b8865387904e80378eaaafb08442898e55aa59bc97d87150"
     },
     {
       "path": "reference/damit-model-5928-spin.txt",

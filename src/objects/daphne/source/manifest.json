@@ -747,7 +747,7 @@
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
       "expectedBytes": 11829,
-      "expectedSha256": "71b30e9c405f5d2fa8bad28d7c6432930b377748cf45d452b85f33b8342d115a",
+      "expectedSha256": "caf50605ecf6593656c9b3bbd70f078cb4070607e42cf06f0861a3b6f4b90fc5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -772,7 +772,7 @@
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
       "expectedBytes": 8392,
-      "expectedSha256": "84acc421ab1d737f76f5aabcb9b6445e9c4e87f7b957674c10617e477d075f41",
+      "expectedSha256": "774f7ee4e6aa19ce3038bc216207ee29795e1c59a20718d7683752a6fbb7cd5c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -72,7 +72,7 @@
         "metadata": {
           "label": "SPHERE photograph",
           "falseColor": false,
-          "coverage": "32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 8 nights from 2018-12-22 to 2019-01-27, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.39. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+          "coverage": "85 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 15 nights in 2 apparitions from 2017-06-23 to 2019-01-27, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.39. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
         },
         "selection": "finest-resolution",
         "levelMatching": {
@@ -103,6 +103,566 @@
           ]
         },
         "frames": [
+          {
+            "id": "zimpol-20170623-054506",
+            "path": "observations/d324Bamberga_2017-06-23T05_45_06.240_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -5.2619,
+            "observerWestLongitude": 151.6167,
+            "sunLatitude": 0.0706,
+            "sunWestLongitude": 154.5743,
+            "rangeKm": 229572412.9,
+            "northAzimuthDegrees": 212.3776,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.076,
+              130.973
+            ]
+          },
+          {
+            "id": "zimpol-20170623-054835",
+            "path": "observations/d324Bamberga_2017-06-23T05_48_35.244_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -5.2615,
+            "observerWestLongitude": 152.3261,
+            "sunLatitude": 0.0703,
+            "sunWestLongitude": 155.2848,
+            "rangeKm": 229570978.1,
+            "northAzimuthDegrees": 212.3772,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.601,
+              131.136
+            ]
+          },
+          {
+            "id": "zimpol-20170623-055206",
+            "path": "observations/d324Bamberga_2017-06-23T05_52_06.430_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -5.2612,
+            "observerWestLongitude": 153.043,
+            "sunLatitude": 0.0701,
+            "sunWestLongitude": 156.0026,
+            "rangeKm": 229569529.6,
+            "northAzimuthDegrees": 212.3767,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.868,
+              130.843
+            ]
+          },
+          {
+            "id": "zimpol-20170623-055535",
+            "path": "observations/d324Bamberga_2017-06-23T05_55_35.760_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -5.2608,
+            "observerWestLongitude": 153.7535,
+            "sunLatitude": 0.0699,
+            "sunWestLongitude": 156.7142,
+            "rangeKm": 229568095,
+            "northAzimuthDegrees": 212.3763,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              124.304,
+              130.625
+            ]
+          },
+          {
+            "id": "zimpol-20170623-055904",
+            "path": "observations/d324Bamberga_2017-06-23T05_59_04.703_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -5.2604,
+            "observerWestLongitude": 154.4628,
+            "sunLatitude": 0.0696,
+            "sunWestLongitude": 157.4245,
+            "rangeKm": 229566664.3,
+            "northAzimuthDegrees": 212.3758,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              124.756,
+              130.575
+            ]
+          },
+          {
+            "id": "zimpol-20170714-042400",
+            "path": "observations/d324Bamberga_2017-07-14T04_24_00.696_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -1.7299,
+            "observerWestLongitude": 174.4781,
+            "sunLatitude": -2.0793,
+            "sunWestLongitude": 185.7315,
+            "rangeKm": 225327218.8,
+            "northAzimuthDegrees": 208.732,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.714,
+              130.85
+            ]
+          },
+          {
+            "id": "zimpol-20170714-042731",
+            "path": "observations/d324Bamberga_2017-07-14T04_27_31.412_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -1.7295,
+            "observerWestLongitude": 175.1935,
+            "sunLatitude": -2.0796,
+            "sunWestLongitude": 186.4478,
+            "rangeKm": 225327676.5,
+            "northAzimuthDegrees": 208.7317,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              124.12,
+              130.769
+            ]
+          },
+          {
+            "id": "zimpol-20170714-043102",
+            "path": "observations/d324Bamberga_2017-07-14T04_31_02.065_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -1.729,
+            "observerWestLongitude": 175.9087,
+            "sunLatitude": -2.0798,
+            "sunWestLongitude": 187.1639,
+            "rangeKm": 225328135.3,
+            "northAzimuthDegrees": 208.7313,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.927,
+              130.532
+            ]
+          },
+          {
+            "id": "zimpol-20170714-043431",
+            "path": "observations/d324Bamberga_2017-07-14T04_34_31.882_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -1.7286,
+            "observerWestLongitude": 176.621,
+            "sunLatitude": -2.0801,
+            "sunWestLongitude": 187.8771,
+            "rangeKm": 225328593.5,
+            "northAzimuthDegrees": 208.7309,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.637,
+              130.118
+            ]
+          },
+          {
+            "id": "zimpol-20170714-043801",
+            "path": "observations/d324Bamberga_2017-07-14T04_38_01.191_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -1.7282,
+            "observerWestLongitude": 177.3316,
+            "sunLatitude": -2.0803,
+            "sunWestLongitude": 188.5887,
+            "rangeKm": 225329051.7,
+            "northAzimuthDegrees": 208.7305,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.94,
+              130.459
+            ]
+          },
+          {
+            "id": "zimpol-20170720-033424",
+            "path": "observations/d324Bamberga_2017-07-20T03_34_24.040_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -0.6869,
+            "observerWestLongitude": 124.4815,
+            "sunLatitude": -2.7153,
+            "sunWestLongitude": 137.837,
+            "rangeKm": 226972937.6,
+            "northAzimuthDegrees": 207.8904,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              132.171,
+              138.044
+            ]
+          },
+          {
+            "id": "zimpol-20170720-033755",
+            "path": "observations/d324Bamberga_2017-07-20T03_37_55.241_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -0.6865,
+            "observerWestLongitude": 125.1986,
+            "sunLatitude": -2.7156,
+            "sunWestLongitude": 138.555,
+            "rangeKm": 226973867.4,
+            "northAzimuthDegrees": 207.8901,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              131.316,
+              137.085
+            ]
+          },
+          {
+            "id": "zimpol-20170720-034126",
+            "path": "observations/d324Bamberga_2017-07-20T03_41_26.034_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -0.6861,
+            "observerWestLongitude": 125.9143,
+            "sunLatitude": -2.7158,
+            "sunWestLongitude": 139.2715,
+            "rangeKm": 226974796.6,
+            "northAzimuthDegrees": 207.8897,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              131.095,
+              136.772
+            ]
+          },
+          {
+            "id": "zimpol-20170720-034455",
+            "path": "observations/d324Bamberga_2017-07-20T03_44_55.382_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -0.6856,
+            "observerWestLongitude": 126.6251,
+            "sunLatitude": -2.7161,
+            "sunWestLongitude": 139.9832,
+            "rangeKm": 226975720.7,
+            "northAzimuthDegrees": 207.8894,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              131.81,
+              137.125
+            ]
+          },
+          {
+            "id": "zimpol-20170720-034824",
+            "path": "observations/d324Bamberga_2017-07-20T03_48_24.139_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -0.6852,
+            "observerWestLongitude": 127.3339,
+            "sunLatitude": -2.7163,
+            "sunWestLongitude": 140.6928,
+            "rangeKm": 226976643.3,
+            "northAzimuthDegrees": 207.8891,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.891,
+              136.881
+            ]
+          },
+          {
+            "id": "zimpol-20170725-044120",
+            "path": "observations/d324Bamberga_2017-07-25T04_41_20.552_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.1587,
+            "observerWestLongitude": 165.028,
+            "sunLatitude": -3.2614,
+            "sunWestLongitude": 180.0223,
+            "rangeKm": 229238613.4,
+            "northAzimuthDegrees": 207.3057,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              129.047,
+              134.752
+            ]
+          },
+          {
+            "id": "zimpol-20170725-044450",
+            "path": "observations/d324Bamberga_2017-07-25T04_44_50.745_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.1592,
+            "observerWestLongitude": 165.7418,
+            "sunLatitude": -3.2616,
+            "sunWestLongitude": 180.7368,
+            "rangeKm": 229239930.8,
+            "northAzimuthDegrees": 207.3055,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.061,
+              135.375
+            ]
+          },
+          {
+            "id": "zimpol-20170725-044821",
+            "path": "observations/d324Bamberga_2017-07-25T04_48_21.298_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.1596,
+            "observerWestLongitude": 166.4568,
+            "sunLatitude": -3.2619,
+            "sunWestLongitude": 181.4525,
+            "rangeKm": 229241251.5,
+            "northAzimuthDegrees": 207.3052,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.066,
+              135.476
+            ]
+          },
+          {
+            "id": "zimpol-20170725-045149",
+            "path": "observations/d324Bamberga_2017-07-25T04_51_49.883_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.16,
+            "observerWestLongitude": 167.1651,
+            "sunLatitude": -3.2622,
+            "sunWestLongitude": 182.1616,
+            "rangeKm": 229242560.8,
+            "northAzimuthDegrees": 207.3049,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.695,
+              135.672
+            ]
+          },
+          {
+            "id": "zimpol-20170725-045519",
+            "path": "observations/d324Bamberga_2017-07-25T04_55_19.447_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.1604,
+            "observerWestLongitude": 167.8767,
+            "sunLatitude": -3.2624,
+            "sunWestLongitude": 182.874,
+            "rangeKm": 229243877.3,
+            "northAzimuthDegrees": 207.3047,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              130.787,
+              135.879
+            ]
+          },
+          {
+            "id": "zimpol-20170729-020903",
+            "path": "observations/d324Bamberga_2017-07-29T02_09_03.162_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.774,
+            "observerWestLongitude": 227.6341,
+            "sunLatitude": -3.6878,
+            "sunWestLongitude": 243.7944,
+            "rangeKm": 231482811,
+            "northAzimuthDegrees": 206.9473,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              131.087,
+              138.003
+            ]
+          },
+          {
+            "id": "zimpol-20170729-021233",
+            "path": "observations/d324Bamberga_2017-07-29T02_12_33.854_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.7743,
+            "observerWestLongitude": 228.3496,
+            "sunLatitude": -3.688,
+            "sunWestLongitude": 244.5106,
+            "rangeKm": 231484350.4,
+            "northAzimuthDegrees": 206.9471,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              132.329,
+              138.089
+            ]
+          },
+          {
+            "id": "zimpol-20170729-021604",
+            "path": "observations/d324Bamberga_2017-07-29T02_16_04.157_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.7747,
+            "observerWestLongitude": 229.0638,
+            "sunLatitude": -3.6883,
+            "sunWestLongitude": 245.2255,
+            "rangeKm": 231485888.2,
+            "northAzimuthDegrees": 206.9469,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              132.453,
+              138.171
+            ]
+          },
+          {
+            "id": "zimpol-20170729-021932",
+            "path": "observations/d324Bamberga_2017-07-29T02_19_32.841_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.7751,
+            "observerWestLongitude": 229.7725,
+            "sunLatitude": -3.6886,
+            "sunWestLongitude": 245.935,
+            "rangeKm": 231487415.4,
+            "northAzimuthDegrees": 206.9467,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              131.55,
+              137.056
+            ]
+          },
+          {
+            "id": "zimpol-20170729-022302",
+            "path": "observations/d324Bamberga_2017-07-29T02_23_02.259_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 0.7755,
+            "observerWestLongitude": 230.4837,
+            "sunLatitude": -3.6888,
+            "sunWestLongitude": 246.6468,
+            "rangeKm": 231488949.2,
+            "northAzimuthDegrees": 206.9465,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              132.048,
+              137.023
+            ]
+          },
+          {
+            "id": "zimpol-20170819-015003",
+            "path": "observations/d324Bamberga_2017-08-19T01_50_03.511__zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.2772,
+            "observerWestLongitude": 267.0605,
+            "sunLatitude": -6.0583,
+            "sunWestLongitude": 287.9569,
+            "rangeKm": 249417072,
+            "northAzimuthDegrees": 206.5077,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              120.339,
+              138.795
+            ]
+          },
+          {
+            "id": "zimpol-20170819-015334",
+            "path": "observations/d324Bamberga_2017-08-19T01_53_34.259__zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.2774,
+            "observerWestLongitude": 267.7765,
+            "sunLatitude": -6.0585,
+            "sunWestLongitude": 288.6733,
+            "rangeKm": 249419633.5,
+            "northAzimuthDegrees": 206.5078,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              118.147,
+              140.815
+            ]
+          },
+          {
+            "id": "zimpol-20170819-015705",
+            "path": "observations/d324Bamberga_2017-08-19T01_57_05.131__zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.2776,
+            "observerWestLongitude": 268.493,
+            "sunLatitude": -6.0588,
+            "sunWestLongitude": 289.3902,
+            "rangeKm": 249422197.6,
+            "northAzimuthDegrees": 206.5079,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              118.02,
+              142.128
+            ]
+          },
+          {
+            "id": "zimpol-20170819-020032",
+            "path": "observations/d324Bamberga_2017-08-19T02_00_32.911__zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.2778,
+            "observerWestLongitude": 269.1989,
+            "sunLatitude": -6.0591,
+            "sunWestLongitude": 290.0966,
+            "rangeKm": 249424725.2,
+            "northAzimuthDegrees": 206.508,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              117.074,
+              145.136
+            ]
+          },
+          {
+            "id": "zimpol-20170819-020402",
+            "path": "observations/d324Bamberga_2017-08-19T02_04_02.272__zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.2781,
+            "observerWestLongitude": 269.9103,
+            "sunLatitude": -6.0594,
+            "sunWestLongitude": 290.8083,
+            "rangeKm": 249427273.1,
+            "northAzimuthDegrees": 206.5081,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              118.174,
+              141.882
+            ]
+          },
+          {
+            "id": "zimpol-20170822-022644",
+            "path": "observations/d324Bamberga_2017-08-22T02_26_44.533_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.5035,
+            "observerWestLongitude": 75.2468,
+            "sunLatitude": -6.4096,
+            "sunWestLongitude": 96.6139,
+            "rangeKm": 252619763.3,
+            "northAzimuthDegrees": 206.6484,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              121.251,
+              131.484
+            ]
+          },
+          {
+            "id": "zimpol-20170822-023014",
+            "path": "observations/d324Bamberga_2017-08-22T02_30_14.168_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.5037,
+            "observerWestLongitude": 75.9591,
+            "sunLatitude": -6.4099,
+            "sunWestLongitude": 97.3265,
+            "rangeKm": 252622418.8,
+            "northAzimuthDegrees": 206.6485,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              120.466,
+              130.39
+            ]
+          },
+          {
+            "id": "zimpol-20170822-023344",
+            "path": "observations/d324Bamberga_2017-08-22T02_33_44.869_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.5039,
+            "observerWestLongitude": 76.675,
+            "sunLatitude": -6.4102,
+            "sunWestLongitude": 98.0428,
+            "rangeKm": 252625088.9,
+            "northAzimuthDegrees": 206.6486,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              120.453,
+              132.437
+            ]
+          },
+          {
+            "id": "zimpol-20170822-023714",
+            "path": "observations/d324Bamberga_2017-08-22T02_37_14.279_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.5041,
+            "observerWestLongitude": 77.3865,
+            "sunLatitude": -6.4105,
+            "sunWestLongitude": 98.7548,
+            "rangeKm": 252627743.6,
+            "northAzimuthDegrees": 206.6488,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              121.3,
+              131.778
+            ]
+          },
+          {
+            "id": "zimpol-20170822-024043",
+            "path": "observations/d324Bamberga_2017-08-22T02_40_43.520_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 3.5043,
+            "observerWestLongitude": 78.0975,
+            "sunLatitude": -6.4108,
+            "sunWestLongitude": 99.4661,
+            "rangeKm": 252630397.1,
+            "northAzimuthDegrees": 206.6489,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              121.111,
+              131.193
+            ]
+          },
           {
             "id": "zimpol-20181222-061522",
             "path": "observations/d324Bamberga_2018-12-22T06_15_22.910_zpl_science_imaging_cam1.fits",
@@ -168,6 +728,22 @@
             ]
           },
           {
+            "id": "zimpol-20181222-062642",
+            "path": "observations/d324Bamberga_2018-12-22T06_26_42.274_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 18.7754,
+            "observerWestLongitude": 343.6014,
+            "sunLatitude": 8.8589,
+            "sunWestLongitude": 333.514,
+            "rangeKm": 253027375.4,
+            "northAzimuthDegrees": 132.2669,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              138.972,
+              144.483
+            ]
+          },
+          {
             "id": "zimpol-20181223-063358",
             "path": "observations/d324Bamberga_2018-12-23T06_33_58.681_zpl_science_imaging_cam1.fits",
             "encoding": "fits-zimpol-intensity",
@@ -229,6 +805,38 @@
             "center": [
               136.825,
               137.501
+            ]
+          },
+          {
+            "id": "zimpol-20181223-064516",
+            "path": "observations/d324Bamberga_2018-12-23T06_45_16.961_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 18.6701,
+            "observerWestLongitude": 280.7288,
+            "sunLatitude": 8.9531,
+            "sunWestLongitude": 271.0048,
+            "rangeKm": 252364542.8,
+            "northAzimuthDegrees": 132.3091,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              136.931,
+              137.578
+            ]
+          },
+          {
+            "id": "zimpol-20190109-054256",
+            "path": "observations/d324Bamberga_2019-01-09T05_42_56.966_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 16.2431,
+            "observerWestLongitude": 214.1984,
+            "sunLatitude": 10.4689,
+            "sunWestLongitude": 211.078,
+            "rangeKm": 246683455.9,
+            "northAzimuthDegrees": 133.3687,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.884,
+              132.361
             ]
           },
           {
@@ -360,6 +968,38 @@
             ]
           },
           {
+            "id": "zimpol-20190110-052802",
+            "path": "observations/d324Bamberga_2019-01-10T05_28_02.851_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 16.0691,
+            "observerWestLongitude": 144.441,
+            "sunLatitude": 10.5539,
+            "sunWestLongitude": 141.7237,
+            "rangeKm": 246703190,
+            "northAzimuthDegrees": 133.4499,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.232,
+              131.573
+            ]
+          },
+          {
+            "id": "zimpol-20190113-063841",
+            "path": "observations/d324Bamberga_2019-01-13T06_38_41.412_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 15.5171,
+            "observerWestLongitude": 318.6535,
+            "sunLatitude": 10.8136,
+            "sunWestLongitude": 317.1798,
+            "rangeKm": 247028241.2,
+            "northAzimuthDegrees": 133.7116,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              134.694,
+              134.19
+            ]
+          },
+          {
             "id": "zimpol-20190113-064131",
             "path": "observations/d324Bamberga_2019-01-13T06_41_31.260_zpl_science_imaging_cam1.fits",
             "encoding": "fits-zimpol-intensity",
@@ -424,6 +1064,54 @@
             ]
           },
           {
+            "id": "zimpol-20190116-032900",
+            "path": "observations/d324Bamberga_2019-01-16T03_29_00.282_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.981,
+            "observerWestLongitude": 79.8433,
+            "sunLatitude": 11.0546,
+            "sunWestLongitude": 79.5348,
+            "rangeKm": 247703564.6,
+            "northAzimuthDegrees": 133.9705,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              139.146,
+              137.732
+            ]
+          },
+          {
+            "id": "zimpol-20190116-033150",
+            "path": "observations/d324Bamberga_2019-01-16T03_31_50.911_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9806,
+            "observerWestLongitude": 80.4225,
+            "sunLatitude": 11.0548,
+            "sunWestLongitude": 80.1148,
+            "rangeKm": 247704122.8,
+            "northAzimuthDegrees": 133.9706,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              141.421,
+              138.446
+            ]
+          },
+          {
+            "id": "zimpol-20190116-033441",
+            "path": "observations/d324Bamberga_2019-01-16T03_34_41.208_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9803,
+            "observerWestLongitude": 81.0005,
+            "sunLatitude": 11.0549,
+            "sunWestLongitude": 80.6936,
+            "rangeKm": 247704680.7,
+            "northAzimuthDegrees": 133.9708,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              138.791,
+              136.497
+            ]
+          },
+          {
             "id": "zimpol-20190116-033730",
             "path": "observations/d324Bamberga_2019-01-16T03_37_30.999_zpl_science_imaging_cam1.fits",
             "encoding": "fits-zimpol-intensity",
@@ -469,6 +1157,70 @@
             "center": [
               137.754,
               136.657
+            ]
+          },
+          {
+            "id": "zimpol-20190116-034643",
+            "path": "observations/d324Bamberga_2019-01-16T03_46_43.199_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9786,
+            "observerWestLongitude": 83.4512,
+            "sunLatitude": 11.0556,
+            "sunWestLongitude": 83.1477,
+            "rangeKm": 247707055.7,
+            "northAzimuthDegrees": 133.9716,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.406,
+              134.138
+            ]
+          },
+          {
+            "id": "zimpol-20190116-034933",
+            "path": "observations/d324Bamberga_2019-01-16T03_49_33.571_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9783,
+            "observerWestLongitude": 84.0295,
+            "sunLatitude": 11.0558,
+            "sunWestLongitude": 83.7268,
+            "rangeKm": 247707618.5,
+            "northAzimuthDegrees": 133.9718,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              134.941,
+              135.365
+            ]
+          },
+          {
+            "id": "zimpol-20190116-035222",
+            "path": "observations/d324Bamberga_2019-01-16T03_52_22.277_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9779,
+            "observerWestLongitude": 84.6021,
+            "sunLatitude": 11.056,
+            "sunWestLongitude": 84.3003,
+            "rangeKm": 247708176.6,
+            "northAzimuthDegrees": 133.972,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              134.89,
+              135.596
+            ]
+          },
+          {
+            "id": "zimpol-20190116-035510",
+            "path": "observations/d324Bamberga_2019-01-16T03_55_10.676_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9775,
+            "observerWestLongitude": 85.1737,
+            "sunLatitude": 11.0561,
+            "sunWestLongitude": 84.8727,
+            "rangeKm": 247708734.6,
+            "northAzimuthDegrees": 133.9722,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              134.051,
+              134.417
             ]
           },
           {
@@ -520,6 +1272,38 @@
             ]
           },
           {
+            "id": "zimpol-20190116-043115",
+            "path": "observations/d324Bamberga_2019-01-16T04_31_15.076_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9726,
+            "observerWestLongitude": 92.5203,
+            "sunLatitude": 11.0582,
+            "sunWestLongitude": 92.2296,
+            "rangeKm": 247715986.2,
+            "northAzimuthDegrees": 133.9745,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.091,
+              136.626
+            ]
+          },
+          {
+            "id": "zimpol-20190116-043404",
+            "path": "observations/d324Bamberga_2019-01-16T04_34_04.405_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.9722,
+            "observerWestLongitude": 93.0951,
+            "sunLatitude": 11.0584,
+            "sunWestLongitude": 92.8051,
+            "rangeKm": 247716559.8,
+            "northAzimuthDegrees": 133.9747,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.661,
+              135.841
+            ]
+          },
+          {
             "id": "zimpol-20190117-042201",
             "path": "observations/d324Bamberga_2019-01-17T04_22_01.922_zpl_science_imaging_cam1.fits",
             "encoding": "fits-zimpol-intensity",
@@ -568,6 +1352,38 @@
             ]
           },
           {
+            "id": "zimpol-20190117-043030",
+            "path": "observations/d324Bamberga_2019-01-17T04_30_30.866_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.7824,
+            "observerWestLongitude": 25.644,
+            "sunLatitude": 11.1415,
+            "sunWestLongitude": 25.7575,
+            "rangeKm": 248037903.8,
+            "northAzimuthDegrees": 134.0675,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.21,
+              132.874
+            ]
+          },
+          {
+            "id": "zimpol-20190117-043319",
+            "path": "observations/d324Bamberga_2019-01-17T04_33_19.932_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 14.782,
+            "observerWestLongitude": 26.2178,
+            "sunLatitude": 11.1416,
+            "sunWestLongitude": 26.3322,
+            "rangeKm": 248038563.9,
+            "northAzimuthDegrees": 134.0677,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.493,
+              133.946
+            ]
+          },
+          {
             "id": "zimpol-20190127-025559",
             "path": "observations/d324Bamberga_2019-01-27T02_55_59.887_zpl_science_imaging_cam1.fits",
             "encoding": "fits-zimpol-intensity",
@@ -613,6 +1429,38 @@
             "center": [
               149.707,
               134.85
+            ]
+          },
+          {
+            "id": "zimpol-20190127-030431",
+            "path": "observations/d324Bamberga_2019-01-27T03_04_31.843_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 12.8513,
+            "observerWestLongitude": 60.9342,
+            "sunLatitude": 11.9496,
+            "sunWestLongitude": 64.9525,
+            "rangeKm": 253639455.4,
+            "northAzimuthDegrees": 135.0325,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              149.805,
+              130.98
+            ]
+          },
+          {
+            "id": "zimpol-20190127-030720",
+            "path": "observations/d324Bamberga_2019-01-27T03_07_20.728_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": 12.8509,
+            "observerWestLongitude": 61.5074,
+            "sunLatitude": 11.9497,
+            "sunWestLongitude": 65.5265,
+            "rangeKm": 253640962.4,
+            "northAzimuthDegrees": 135.0327,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              145.828,
+              135.475
             ]
           }
         ]

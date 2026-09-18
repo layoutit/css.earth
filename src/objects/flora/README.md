@@ -10,7 +10,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
-| SPHERE photograph | [15 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 2017-12-30 and 2017-12-31](https://observations.lam.fr/astero/Data/8Flora/Deconv/) on the [ADAM reconstruction, as DAMIT model 5928 distributes it](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj) |
+| SPHERE photograph | [20 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 3 nights from 2017-12-30 to 2019-05-04](https://observations.lam.fr/astero/Data/8Flora/Deconv/) on the [ADAM reconstruction, as DAMIT model 5928 distributes it](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj) |
 | Photograph cameras | [Rotation state, as DAMIT model 5928 states it](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/spin.txt), read longitude-first, and JPL Horizons geometry from Paranal |
 | Photograph registration | [Vernazza et al. (2021), Figure B.7](https://doi.org/10.1051/0004-6361/202141781) |
 
@@ -32,8 +32,9 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.7](https:
 | 2017-12-30 03:26:45 | 0.973 | 0.969 | 0.976 | 0° | -4°, 5° | 1.3° against 149.9° |
 | 2017-12-30 05:47:16 | 0.969 | 0.961 | 0.974 | -10° | -6.5°, 1° | 1.3° against 147.4° |
 | 2017-12-31 03:14:29 | 0.966 | 0.962 | 0.978 | -10° | -5.5°, -3.5° | 1.3° against 148.1° |
+| 2019-05-04 08:21:41 | 0.959 | 0.957 | 0.963 | -10° | -2.5°, -2.5° | 14.5° against 4.9° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 15 native frames after the centre fit is 1.388 px at our phase; the lowest of a ±30° sweep is 1.340 px at -6°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 20 native frames after the centre fit is 1.189 px at our phase; the lowest of a ±30° sweep is 1.158 px at -6°.
 <!-- published-comparison:end -->
 
 ### Registration
@@ -43,7 +44,7 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 15 | 0 | — | — | — | its other 15 frames | 0 of 15 | — | 0 of 15 | — | ×1.03 | no verdict |
+| `zimpol` | 20 | 0 | — | — | — | its other 20 frames | 0 of 20 | — | 0 of 20 | — | ×1.15 | no verdict |
 
 `zimpol` ships on its paper’s comparison, [Figure B.7](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
@@ -66,7 +67,7 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Flora from 39° north, so surface the survey did not see keeps the missing-imagery grid. LAM withholds this body’s own ADAM mesh and rotation record, so both come from DAMIT model 5928, which rounds the pole to whole degrees and the period to 12.86667 h. From its 1953 epoch that rounding leaves up to 6.2° of rotational phase uncertain at the 2017 frames; the native frames’ outline fits best 6° from our phase.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another. It is not albedo or colour. The frames see Flora from 11° to 39° north, so surface the survey did not see keeps the missing-imagery grid.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

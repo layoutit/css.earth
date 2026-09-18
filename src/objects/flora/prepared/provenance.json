@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7ccd51146eb55e4d43875eec0a9e9f45f78850cf163be1ab8725382fd3a880cb"
+    "sha256": "ce655dc5076a1245a551123bf0d970ffd542ccced01fd7186e1577754a56e066"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c187bf759d453339ea72589c32f201c5cd7f6046bacd64b4dabb574516d53fbd"
+    "bindingsSha256": "5d28cc3ec4067fc806fe463454a15758ecb1cab10e56b1e0759244ac702758f4"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b7f3c4b39fd3c659ea1d3e8725836bdda13870c6718e77ceba1456d0dbdbe5be",
+      "sha256": "c9a9f5d5e0cb3b40b3d7dba0b9881fe748bff920bf5d9f4623e2f06031257680",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,7 +90,7 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "15 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 2 nights from 2017-12-30 to 2017-12-31, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.7. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "20 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 3 nights in 2 apparitions from 2017-12-30 to 2019-05-04, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.7. Grayscale retains photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
               "selection": "finest-resolution",
               "levelMatching": {
@@ -360,6 +360,86 @@
                     125.149,
                     127.84
                   ]
+                },
+                {
+                  "id": "zimpol-20190504-080535",
+                  "path": "observations/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 11.4825,
+                  "observerWestLongitude": 295.9106,
+                  "sunLatitude": 15.1516,
+                  "sunWestLongitude": 292.418,
+                  "rangeKm": 230600948.3,
+                  "northAzimuthDegrees": 255.5109,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.506,
+                    133.13
+                  ]
+                },
+                {
+                  "id": "zimpol-20190504-080937",
+                  "path": "observations/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 11.4833,
+                  "observerWestLongitude": 297.7907,
+                  "sunLatitude": 15.151,
+                  "sunWestLongitude": 294.2981,
+                  "rangeKm": 230599850.4,
+                  "northAzimuthDegrees": 255.5107,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.791,
+                    132.062
+                  ]
+                },
+                {
+                  "id": "zimpol-20190504-081339",
+                  "path": "observations/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 11.484,
+                  "observerWestLongitude": 299.672,
+                  "sunLatitude": 15.1504,
+                  "sunWestLongitude": 296.1794,
+                  "rangeKm": 230598753.5,
+                  "northAzimuthDegrees": 255.5106,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.674,
+                    132.951
+                  ]
+                },
+                {
+                  "id": "zimpol-20190504-081740",
+                  "path": "observations/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 11.4847,
+                  "observerWestLongitude": 301.5456,
+                  "sunLatitude": 15.1497,
+                  "sunWestLongitude": 298.0529,
+                  "rangeKm": 230597662.7,
+                  "northAzimuthDegrees": 255.5105,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.474,
+                    131.483
+                  ]
+                },
+                {
+                  "id": "zimpol-20190504-082141",
+                  "path": "observations/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 11.4854,
+                  "observerWestLongitude": 303.4126,
+                  "sunLatitude": 15.1491,
+                  "sunWestLongitude": 299.9199,
+                  "rangeKm": 230596577.3,
+                  "northAzimuthDegrees": 255.5104,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.535,
+                    131.825
+                  ]
                 }
               ]
             }
@@ -436,7 +516,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b4728aecac733322ed344309338e5d162ecd0ff1f8ad3a575b34205a7077b2f5",
+      "sha256": "336d59830d1bf3d14ec004fd4365672dd061dc2cb812b44ecd9c03a9c03e8379",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -546,7 +626,7 @@
               },
               "falseColor": false,
               "noData": true,
-              "notes": "15 deconvolved VLT/SPHERE/ZIMPOL frames, 2017-12-30 and 2017-12-31, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. LAM withholds this body’s own ADAM mesh and rotation record, so both come from DAMIT model 5928, DAMIT’s copy of the survey model. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.7. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+              "notes": "20 deconvolved VLT/SPHERE/ZIMPOL frames, 3 nights from 2017-12-30 to 2019-05-04, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. LAM withholds this body’s own ADAM mesh and rotation record, so both come from DAMIT model 5928, DAMIT’s copy of the survey model. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.7. Grayscale is photographed illumination and matched relative frame brightness, each apparition placed through the surface it shares with another. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -1437,6 +1517,266 @@
     },
     {
       "kind": "source-input",
+      "id": "flora-sphere-20190504080535",
+      "path": "observations/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504080535",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+          }
+        ]
+      },
+      "sha256": "f4b0d8a1578d239c7eb257c992c9f63175a364df2d9c98d35e088e824d237b3c",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "flora-sphere-20190504080937",
+      "path": "observations/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504080937",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+          }
+        ]
+      },
+      "sha256": "d8f2cff91a86aa62ef99a78eeab886400599a76ed6323171a594c757a3771eb0",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "flora-sphere-20190504081339",
+      "path": "observations/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504081339",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+          }
+        ]
+      },
+      "sha256": "9a44c2fe606fa8e900166c529cc79eba08b2124e9c6c2bc13ab4742f2f011f03",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "flora-sphere-20190504081740",
+      "path": "observations/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504081740",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+          }
+        ]
+      },
+      "sha256": "d26ae736c4acdd7a7134290c0701b27942154039dc794fbe07c5541e32441bcc",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "flora-sphere-20190504082141",
+      "path": "observations/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-flora-flora-sphere-20190504082141",
+            "role": "material",
+            "evidence": "src/objects/flora/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+          }
+        ]
+      },
+      "sha256": "8f54a3e204e3dbb5901a2b70faea1518e7558f8c4b2d838fc19e3a9b7bcd4fbe",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "flora-adam-shape",
       "path": "shape/damit-model-5928-shape.obj",
       "origin": "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj",
@@ -1499,8 +1839,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "b4728aecac733322ed344309338e5d162ecd0ff1f8ad3a575b34205a7077b2f5",
-      "bytes": 8228,
+      "sha256": "336d59830d1bf3d14ec004fd4365672dd061dc2cb812b44ecd9c03a9c03e8379",
+      "bytes": 8308,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1636,19 +1976,24 @@
         "flora-sphere-20171231031852",
         "flora-sphere-20171231032102",
         "flora-sphere-20171231032313",
+        "flora-sphere-20190504080535",
+        "flora-sphere-20190504080937",
+        "flora-sphere-20190504081339",
+        "flora-sphere-20190504081740",
+        "flora-sphere-20190504082141",
         "flora-adam-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/flora/flora-zimpol-thumbnail.webp",
-          "bytes": 1818,
-          "sha256": "29aff0ad9bd6459190e8b898a3b1d38d445f1fffe53f283e8e7500dce17340d4",
+          "bytes": 1788,
+          "sha256": "dc7c440695a9bfd8c13a17625288109becb245eff0826eb1fdf1c8a88620e227",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/flora/flora-zimpol-surface@2x.webp",
-          "bytes": 213664,
-          "sha256": "2249ad13f55c6a386988b4cdc203c01e68bf552e1717103b7ca8200d785c3aad",
+          "bytes": 289462,
+          "sha256": "054539140b75dc2693c19132193cb5e6d1aca5ba8776946a49e14f7a6af23954",
           "verification": "bytes-verified"
         }
       ],
@@ -1731,8 +2076,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7506,
-          "sha256": "31f49b20aeb2388c19c7f666323fde21decfb56e38fcb6f9f73c1cc221ea6c55",
+          "bytes": 10596,
+          "sha256": "a54eefd0fc66ea8129b51dc064ebeac3106efeb383f2b56011d1d00ca8ddd160",
           "verification": "bytes-verified"
         }
       ]
@@ -1769,11 +2114,11 @@
   },
   "lastPreparation": {
     "objectId": "flora",
-    "materialSha256": "bde892326cb847a5b2afa690b6e167de02170cf327a807efc620a4dd88e1d5fc",
+    "materialSha256": "8191bb05a00260181b91e1f368e5158b53900ba6d3656e9e74de6661b5e4caeb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c187bf759d453339ea72589c32f201c5cd7f6046bacd64b4dabb574516d53fbd"
+      "bindingsSha256": "5d28cc3ec4067fc806fe463454a15758ecb1cab10e56b1e0759244ac702758f4"
     }
   }
 }

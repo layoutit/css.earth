@@ -224,6 +224,66 @@
       "url": "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj"
     },
     {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_05_35.775_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_09_37.688_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_13_39.741_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_17_40.809_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/8Flora/Deconv/d8Flora_2019-05-04T08_21_41.025_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
       "kind": "horizons-time-list",
       "groups": [
         "refresh"
@@ -256,7 +316,12 @@
         2458118.636580023,
         2458118.6381066553,
         2458118.639613368,
-        2458118.6411285186
+        2458118.6411285186,
+        2458607.837219618,
+        2458607.8400195367,
+        2458607.842821065,
+        2458607.8456112035,
+        2458607.8483914817
       ]
     },
     {
@@ -293,7 +358,12 @@
         2458118.6306271474,
         2458118.632153772,
         2458118.6336604767,
-        2458118.6351756193
+        2458118.6351756193,
+        2458607.828316817,
+        2458607.8311167783,
+        2458607.833918349,
+        2458607.83670853,
+        2458607.83948885
       ]
     }
   ]

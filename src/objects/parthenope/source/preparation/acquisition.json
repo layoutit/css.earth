@@ -275,6 +275,66 @@
       }
     },
     {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_26_57.151_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_26_57.151_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_31_06.667_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_31_06.667_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_35_17.855_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_35_17.855_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_39_26.938_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_39_26.938_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d11Parthenope_2018-02-06T02_43_37.007_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2018-02-06T02_43_37.007_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
       "kind": "horizons-time-list",
       "groups": [
         "refresh"
@@ -293,6 +353,11 @@
         "CSV_FORMAT": "'NO'"
       },
       "epochs": [
+        2458155.6020503473,
+        2458155.6049382635,
+        2458155.6078455327,
+        2458155.610728449,
+        2458155.613622766,
         2458592.668017106,
         2458592.6708322573,
         2458592.6736676157,
@@ -334,6 +399,11 @@
         "CSV_FORMAT": "'NO'"
       },
       "epochs": [
+        2458155.5921053803,
+        2458155.5949932444,
+        2458155.5979004605,
+        2458155.6007833243,
+        2458155.603677588,
         2458592.6591840778,
         2458592.661999354,
         2458592.6648348384,

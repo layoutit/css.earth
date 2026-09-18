@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "54dbf1e27be1b648b59712d95f0d625ff2a2db2d6d2a63df4f9da7caad12ea69"
+    "sha256": "5fabe8f4a6f561b7bef823e5766a1414095d56461571722aecbcd6ea2bf67eb2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1644,14 +1644,14 @@
       "outputs": [
         {
           "url": "/scenes/daphne/daphne-zimpol-thumbnail.webp",
-          "bytes": 1650,
-          "sha256": "f12287ae9ab8c1d1b904fa5296bc8e99fc44af225c99fceb19682a358149967b",
+          "bytes": 1628,
+          "sha256": "c4449d6d27de79331a7b11a41792421f80b4430d498fb107449d986994be4439",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphne/daphne-zimpol-surface@2x.webp",
-          "bytes": 234048,
-          "sha256": "657b2abbd5203e1fe756870a9c381baffd1fbdcebf36863ce4ef5c1a2916da0b",
+          "bytes": 262132,
+          "sha256": "31afa90722b8d91a4931aa0edd0e7edb0f06f08e70fbad5fe84281c09ae75bcb",
           "verification": "bytes-verified"
         }
       ],
@@ -1734,8 +1734,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7472,
-          "sha256": "a4cfda34a227a933b49be7f8b699a67eb1d2cde2403b72cc0f53ae103d33ab16",
+          "bytes": 8512,
+          "sha256": "4bd99f84f52975100b7f2b3caa455807f167c475c7faa26e52c10feb3b936a2b",
           "verification": "bytes-verified"
         }
       ]
@@ -1772,7 +1772,7 @@
   },
   "lastPreparation": {
     "objectId": "daphne",
-    "materialSha256": "34b1ca84cc4e1e0666edbd92ed9161a9b1761013929e6bdc5226f55529862651",
+    "materialSha256": "dfb873bcbb09dc4e5cff5512db7c198ab3d56e15658f7817a35e35e4083d728e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
