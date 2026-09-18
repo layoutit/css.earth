@@ -1,0 +1,67 @@
+{
+ "datetime": "2023-11-17 03:30:25",
+ "pipeline_version": "2023.1.0.124",
+ "version": 1.0,
+ "scal_targets": [
+  {
+   "sc_success": true,
+   "sc_lib": {
+    "final_solint": "8.06s",
+    "final_solint_mode": "p",
+    "uid___A002_X10ed869_X1ec34_targets.ms": {
+     "applycal_interpolate_final": [
+      "linearPD",
+      "linearPD"
+     ],
+     "applycal_mode_final": "calflag",
+     "gaincal_combine_final": "spw",
+     "gaintable_final": [
+      "Target_R_Dor_uid___A002_X10ed869_X1ec34_targets.ms_Band_8_inf_EB_0_p.g",
+      "Target_R_Dor_uid___A002_X10ed869_X1ec34_targets.ms_Band_8_8.06s_3_p.g"
+     ],
+     "8.06s": {
+      "spwmap": [
+       [],
+       [
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25
+       ]
+      ],
+      "solmode": "p",
+      "solint": "8.06s"
+     }
+    }
+   }
+  }
+ ]
+}

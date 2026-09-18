@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MainTable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:main="http://Alma/XASDM/MainTable" schemaVersion="4" schemaRevision="-1">
+  <Entity entityId="uid://A002/X10f1046/X1" entityIdEncrypted="na" entityTypeName="MainTable" schemaVersion="1" documentVersion="1"/>
+  <ContainerEntity entityId="uid://A002/X10ed869/X1ec34" entityIdEncrypted="na" entityTypeName="ASDM" schemaVersion="1" documentVersion="1"/>
+  <row>
+    <time> 5205713366544000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>INTEGRATION</timeSampling>
+    <interval> 4032000000 </interval>
+    <numIntegration> 252 </numIntegration>
+    <scanNumber> 1 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 515173 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ec53" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_0 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_0 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205713366544000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>INTEGRATION</timeSampling>
+    <interval> 4032000000 </interval>
+    <numIntegration> 2 </numIntegration>
+    <scanNumber> 1 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 7115714 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ec36" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_1 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_0 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205713366544000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>SUBINTEGRATION</timeSampling>
+    <interval> 4032000000 </interval>
+    <numIntegration> 4 </numIntegration>
+    <scanNumber> 1 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 122011 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ec35" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_2 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_0 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205713366544000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>SUBINTEGRATION</timeSampling>
+    <interval> 4032000000 </interval>
+    <numIntegration> 4 </numIntegration>
+    <scanNumber> 1 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 4772 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ec37" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_3 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_0 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205713372448000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>INTEGRATION</timeSampling>
+    <interval> 4032000000 </interval>
+    <numIntegration> 252 </numIntegration>
+    <scanNumber> 1 </scanNumber>
+    <subscanNumber> 2 </subscanNumber>
+    <dataSize> 515173 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ec54" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_0 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_0 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205713372448000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>INTEGRATION</timeSampling>
+    <interval> 4032000000 </interval>
+    <numIntegration> 2 </numIntegration>
+    <scanNumber> 1 </scanNumber>
+    <subscanNumber> 2 </subscanNumber>
+    <dataSize> 7115714 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ec39" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_1 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_0 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205714502560000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>INTEGRATION</timeSampling>
+    <interval> 12096000000 </interval>
+    <numIntegration> 756 </numIntegration>
+    <scanNumber> 6 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 1542325 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ecd5" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_4 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_1 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205714502560000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>INTEGRATION</timeSampling>
+    <interval> 12096000000 </interval>
+    <numIntegration> 6 </numIntegration>
+    <scanNumber> 6 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 158715968 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ecb5" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_7 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_1 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205714502560000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>SUBINTEGRATION</timeSampling>
+    <interval> 12096000000 </interval>
+    <numIntegration> 12 </numIntegration>
+    <scanNumber> 6 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 361395 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ecb4" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_8 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_1 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205714502560000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>SUBINTEGRATION</timeSampling>
+    <interval> 12096000000 </interval>
+    <numIntegration> 12 </numIntegration>
+    <scanNumber> 6 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 8711 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ecb6" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_3 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_1 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205715581984000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>SUBINTEGRATION</timeSampling>
+    <interval> 12096000000 </interval>
+    <numIntegration> 12 </numIntegration>
+    <scanNumber> 38 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 8717 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1eefb" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_3 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_1 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+<row>
+    <time> 5205715625520000000 </time>
+    <numAntenna> 41 </numAntenna>
+    <timeSampling>INTEGRATION</timeSampling>
+    <interval> 50400000000 </interval>
+    <numIntegration> 3150 </numIntegration>
+    <scanNumber> 39 </scanNumber>
+    <subscanNumber> 1 </subscanNumber>
+    <dataSize> 6442502 </dataSize>
+    <dataUID>
+      <EntityRef entityId="uid://A002/X10ed869/X1ef0b" partId="X00000000" entityTypeName="Main" documentVersion="1"/>
+    </dataUID>
+    <configDescriptionId> ConfigDescription_4 </configDescriptionId>
+    <execBlockId> ExecBlock_0 </execBlockId>
+    <fieldId> Field_3 </fieldId>
+    <stateId> 1 41 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0 State_0  </stateId>
+  </row>
+</MainTable>
