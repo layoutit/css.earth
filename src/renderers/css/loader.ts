@@ -24,3 +24,5 @@ export async function loadPreparedCssObject(
   if (typeof Worker === 'undefined') return decodePreparedCssObject(descriptor, bytes);
   return decodePreparedObjectInWorker({ descriptor, bytes }, { signal });
 }
+
+const __ciProofTypeError: number = "not a number";
