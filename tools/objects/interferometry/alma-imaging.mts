@@ -28,6 +28,8 @@ export interface PipelineImaging {
   readonly phaseCentre: string | null;
   readonly scan: string | null;
   readonly intent: string | null;
+  /** The baselines imaged. The pipeline imports auto-correlations and images without them: every antenna followed by `&`. */
+  readonly antenna: string | null;
   /** Every argument as written, for anything this route does not model. */
   readonly arguments: ReadonlyMap<string, string>;
 }
@@ -90,6 +92,7 @@ export function pipelineImaging(log: string, field: string): PipelineImaging {
     weighting: unquote(argument(chosen, 'weighting') ?? "'briggs'"), robust: asNumber(argument(chosen, 'robust'), 0.5),
     threshold: unquote(argument(chosen, 'threshold') ?? "'0mJy'"),
     phaseCentre: optional('phasecenter'), scan: optional('scan'), intent: optional('intent'),
+    antenna: optional('antenna'),
     arguments: values,
   };
 }

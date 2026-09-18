@@ -60,7 +60,7 @@ export function restoreScript(options: {
   const visibilities = onScratch(options.visibilities), targets = onScratch(`${plan.target}.targets.ms`);
   const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
-    'import os, sys, json, shutil',
+    'import os, sys, json, shutil, glob',
     'from casatasks import importasdm, flagmanager, applycal, mstransform, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
     // The calapply record names intents the pipeline's way; the measurement set names them as the observatory scheduled them.
@@ -78,54 +78,66 @@ export function restoreScript(options: {
     "        patterns += [f'*{mode}*' for mode in found]",
     "    return ','.join(patterns)",
     'steps = []',
-    // A measurement set left by an interrupted import looks whole to every later task, so it is reused only when the import
-    // wrote its completion marker; anything else is removed and imported afresh.
-    `imported = ${python(`${visibilities}.imported`)}`,
-    `shutil.rmtree(${python(targets)}, ignore_errors=True)`,
-    'if not os.path.exists(imported):',
-    `    for stale in (${python(visibilities)}, ${python(`${visibilities}.flagversions`)}):`,
-    '        shutil.rmtree(stale, ignore_errors=True)',
-    `    if os.path.exists(${python(`${visibilities}.calibrated`)}): os.remove(${python(`${visibilities}.calibrated`)})`,
-    // The lazy import leaves the visibilities in the ASDM's binary files and reads them in place, so the measurement set holds
-    // only metadata, flags and the corrected column. What the scratch disk must hold is then about the ASDM's size once.
-    `    need = sum(os.path.getsize(os.path.join(root, name)) for root, _, names in os.walk(${python(asdm)}) for name in names)`,
-    `    free = shutil.disk_usage(os.path.dirname(os.path.abspath(${python(visibilities)}))).free`,
-    "    if free < 1.5 * need:",
-    "        sys.exit(f'The scratch disk has {free / 1e9:.0f} GB free; the corrected column and the target split need about {1.5 * need / 1e9:.0f} GB.')",
-    // ocorr_mode 'ca' is what the pipeline imports with: cross-correlations and auto-correlations.
-    // hifa_restoredata's own defaults, so the measurement set carries the metadata the pipeline's did.
-    `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=True)`,
-    "    open(imported, 'w').close()",
-    "    steps.append('importasdm')",
-    // Restoring flags and applying the calibration are one step: restoring the flags again would undo what calflagstrict
-    // flagged. A marker records that both finished, so a later failure does not repeat an hour of applycal.
-    `calibrated = ${python(`${visibilities}.calibrated`)}`,
-    'if not os.path.exists(calibrated):',
-    ...[...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
-      // Replace the filler's empty flag versions with the pipeline's before restoring from them.
-      `shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
-      `shutil.copytree(os.path.join(${python(options.flagStage ?? '.')}, ${python(`${options.visibilities}.flagversions`)}), ${python(`${visibilities}.flagversions`)})`,
-      `flagmanager(vis=${python(visibilities)}, mode='restore', versionname=${python(flagVersion)})`,
-      "steps.append('flags restored')",
-    ]),
-    ...applications.flatMap(application => [applycalStatement(application, visibilities), `steps.append('applycal ' + ${python(application.intent)})`]),
-    "open(calibrated, 'w').close()"].map(line => `    ${line}`),
-    // Every science channel, science target only, and the spectral windows keep their numbers: the self-calibration maps are
-    // indexed by absolute window id, so renumbering them here would misapply the solutions without failing.
-    // split has no reindex argument; mstransform, which split wraps, does.
-    `mstransform(vis=${python(visibilities)}, outputvis=${python(targets)}, field=${python(plan.target)}, spw=${python(plan.scienceWindows)}, intent='OBSERVE_TARGET#ON_SOURCE', datacolumn='corrected', keepflags=True, reindex=False)`,
-    "steps.append('split targets')",
-    // The full measurement set is rebuilt from the ASDM by the next run; only the target split is imaged.
-    `os.remove(imported); os.remove(calibrated); shutil.rmtree(${python(visibilities)}); shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
-    ...(selfcal === null || !selfcal.succeeded ? ["steps.append('no self-calibration applied')"] : [
-      `applycal(vis=${python(targets)}, field=${python(plan.target)}, gaintable=${pythonList(selfcal.tables.map(table => resolveTable(table)))}, ` +
-        `interp=${pythonList([...selfcal.interpolation])}, spwmap=[${selfcal.spectralWindowMaps.map(map => `[${map.join(', ')}]`).join(', ')}], ` +
-        `calwt=False, applymode=${python(selfcal.applyMode)}, flagbackup=False)`,
-      `steps.append('self-calibration at ' + ${python(selfcal.solutionInterval)})`,
-    ]),
+    // The calibrated, self-calibrated target split is the input to imaging, and making it is most of the run. A marker records
+    // that it is finished, so a change to the imaging alone re-images instead of importing and calibrating again.
+    `ready = ${python(`${targets}.ready`)}`,
+    'if not os.path.exists(ready):',
+    ...[
+      // A measurement set left by an interrupted import looks whole to every later task, so it is reused only when the import
+      // wrote its completion marker; anything else is removed and imported afresh.
+      `imported = ${python(`${visibilities}.imported`)}`,
+      `shutil.rmtree(${python(targets)}, ignore_errors=True)`,
+      'if not os.path.exists(imported):',
+      `    for stale in (${python(visibilities)}, ${python(`${visibilities}.flagversions`)}):`,
+      '        shutil.rmtree(stale, ignore_errors=True)',
+      `    if os.path.exists(${python(`${visibilities}.calibrated`)}): os.remove(${python(`${visibilities}.calibrated`)})`,
+      // The lazy import leaves the visibilities in the ASDM's binary files and reads them in place, so the measurement set holds
+      // only metadata, flags and the corrected column. What the scratch disk must hold is then about the ASDM's size once.
+      `    need = sum(os.path.getsize(os.path.join(root, name)) for root, _, names in os.walk(${python(asdm)}) for name in names)`,
+      `    free = shutil.disk_usage(os.path.dirname(os.path.abspath(${python(visibilities)}))).free`,
+      "    if free < 1.5 * need:",
+      "        sys.exit(f'The scratch disk has {free / 1e9:.0f} GB free; the corrected column and the target split need about {1.5 * need / 1e9:.0f} GB.')",
+      // ocorr_mode 'ca' is what the pipeline imports with: cross-correlations and auto-correlations.
+      // hifa_restoredata's own defaults, so the measurement set carries the metadata the pipeline's did.
+      `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=True)`,
+      "    open(imported, 'w').close()",
+      "    steps.append('importasdm')",
+      // Restoring flags and applying the calibration are one step: restoring the flags again would undo what calflagstrict
+      // flagged. A marker records that both finished, so a later failure does not repeat an hour of applycal.
+      `calibrated = ${python(`${visibilities}.calibrated`)}`,
+      'if not os.path.exists(calibrated):',
+      ...[...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
+        // Replace the filler's empty flag versions with the pipeline's before restoring from them.
+        `shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
+        `shutil.copytree(os.path.join(${python(options.flagStage ?? '.')}, ${python(`${options.visibilities}.flagversions`)}), ${python(`${visibilities}.flagversions`)})`,
+        `flagmanager(vis=${python(visibilities)}, mode='restore', versionname=${python(flagVersion)})`,
+        "steps.append('flags restored')",
+      ]),
+      ...applications.flatMap(application => [applycalStatement(application, visibilities), `steps.append('applycal ' + ${python(application.intent)})`]),
+      "open(calibrated, 'w').close()"].map(line => `    ${line}`),
+      // Every science channel, science target only, and the spectral windows keep their numbers: the self-calibration maps are
+      // indexed by absolute window id, so renumbering them here would misapply the solutions without failing.
+      // split has no reindex argument; mstransform, which split wraps, does.
+      `mstransform(vis=${python(visibilities)}, outputvis=${python(targets)}, field=${python(plan.target)}, spw=${python(plan.scienceWindows)}, intent='OBSERVE_TARGET#ON_SOURCE', datacolumn='corrected', keepflags=True, reindex=False)`,
+      "steps.append('split targets')",
+      // The full measurement set is rebuilt from the ASDM by the next run; only the target split is imaged.
+      `os.remove(imported); os.remove(calibrated); shutil.rmtree(${python(visibilities)}); shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
+      ...(selfcal === null || !selfcal.succeeded ? ["steps.append('no self-calibration applied')"] : [
+        `applycal(vis=${python(targets)}, field=${python(plan.target)}, gaintable=${pythonList(selfcal.tables.map(table => resolveTable(table)))}, ` +
+          `interp=${pythonList([...selfcal.interpolation])}, spwmap=[${selfcal.spectralWindowMaps.map(map => `[${map.join(', ')}]`).join(', ')}], ` +
+          `calwt=False, applymode=${python(selfcal.applyMode)}, flagbackup=False)`,
+        `steps.append('self-calibration at ' + ${python(selfcal.solutionInterval)})`,
+      ]),
+      "open(ready, 'w').close()",
+    ].map(line => `    ${line}`),
+    // tclean continues from any model it finds under its image name, so the previous run's images are removed first.
+    `for product in glob.glob(${python(`${imageBase}.*`)}):`,
+    '    if os.path.isdir(product): shutil.rmtree(product)',
     // The imaging the pipeline itself performed, from the command log it shipped.
     `tclean(vis=${python(targets)}, imagename=${python(imageBase)}, field=${python(plan.target)}, spw=${python(imaging.spw)}, ` +
-      `${imaging.scan === null ? '' : `scan=${python(imaging.scan)}, `}${imaging.intent === null ? '' : `intent=${python(imaging.intent)}, `}` +
+      // Without the pipeline's antenna selection the auto-correlations enter the Briggs weights as zero-spacing samples: on the
+      // R Doradus band 8 execution that widened the beam from 45.2 x 28.3 to 56.5 x 39.5 mas.
+      `${imaging.antenna === null ? '' : `antenna=${python(imaging.antenna)}, `}${imaging.scan === null ? '' : `scan=${python(imaging.scan)}, `}${imaging.intent === null ? '' : `intent=${python(imaging.intent)}, `}` +
       `datacolumn='corrected', specmode='mfs', deconvolver=${python(imaging.deconvolver)}${imaging.terms > 1 ? `, nterms=${imaging.terms}` : ''}, ` +
       `gridder='standard', imsize=[${imaging.imageSize[0]}, ${imaging.imageSize[1]}], cell=${python(imaging.cell)}, ` +
       `weighting=${python(imaging.weighting)}, robust=${imaging.robust}, niter=100000, threshold=${python(imaging.threshold)}, ` +

@@ -69,7 +69,13 @@ test('both measurement sets are written to the scratch disk, the calibration tab
   // A finished calibration is not repeated, and the flags are never restored over it.
   const guard = script.indexOf('if not os.path.exists(calibrated):');
   assert.ok(guard < script.indexOf("mode='restore'") && script.indexOf("open(calibrated, 'w')") < script.indexOf('mstransform('));
-  assert.ok(/\n    applycal\(/u.test(script), 'every applycal sits inside the calibration guard');
+  // Inside both guards: the target split's own guard, then the calibration's.
+  const calibrations = script.split('\n').filter(line => line.trimStart().startsWith("applycal(vis='/fast/x.ms'") || line.trimStart().startsWith("applycal(vis='x.ms'"));
+  assert.ok(calibrations.length > 0 && calibrations.every(line => line.startsWith('        applycal(')), 'every applycal sits inside the calibration guard');
+  // A finished target split is imaged again without importing; the previous images go first, or tclean resumes from their model.
+  assert.ok(script.indexOf('if not os.path.exists(ready):') < script.indexOf('importasdm('));
+  assert.ok(script.indexOf("open(ready, 'w')") < script.indexOf("for product in glob.glob('/work/x.*')"));
+  assert.ok(script.indexOf("for product in glob.glob('/work/x.*')") < script.indexOf('tclean('));
 });
 
 test('imaging follows the pipeline\u2019s own call rather than a plausible guess', async () => {
@@ -80,6 +86,7 @@ test('imaging follows the pipeline\u2019s own call rather than a plausible guess
   assert.ok(script.includes("cell='0.0055arcsec'") && script.includes('imsize=[3200, 3200]'));
   assert.ok(script.includes("threshold='0.000949Jy'") && script.includes("weighting='briggs', robust=0.5"));
   assert.ok(script.includes("scan='9,11,13,15,22,24,26,30,33,37'"), 'the scan selection is one string, not the first of ten');
+  assert.ok(/tclean\([^)]*antenna='[\d,]+&'/u.test(script), 'the auto-correlations stay out of the image');
   // The channels imaged are the pipeline's frame-converted ranges, never cont.dat's LSRK numbers.
   assert.ok(script.includes('455.3506751226~455.6221594976GHz'));
   assert.ok(!script.includes('455.38~455.65GHz'));
