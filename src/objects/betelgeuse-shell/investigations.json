@@ -148,6 +148,24 @@
           "commit": "2d5df092687e5ba0fe765cde33a58686e19c5abe"
         }
       ]
+    },
+    {
+      "id": "alma-depth-screen",
+      "subject": "Whether a public ALMA line cube can measure the depth this package infers",
+      "status": "deferred",
+      "finding": "The envelope drawn here is a shape fitted to one projection, so it cannot say at what radius a patch really sits or which side of the star it is on. A spectral line cube can: the Doppler sign separates near from far and a velocity law turns the shift into a radius. Screened the ALMA archive within 0.02 degrees of this object's scene origin on 2026-09-18, 302 public rows in six projects, against this package's own geometry, a shell 148 milliarcseconds across inside an envelope reaching 190. Scored on the resolution each observation actually has, capped by its own maximum recoverable scale. Three projects are compact-configuration monitoring with beams of 3.5 to 3.8 arcseconds, 0.04 beams across the shell, and measure the star as a point: 2019.2.00120.S, 2019.A.00028.S and 2021.1.00927.S are out. 2019.1.01098.S reaches 35 mas in band 4 with SiO v=0 3-2, 4.2 beams across, recoverable to 667 mas, usable but coarse. 2015.1.00206.S reaches 16.8 mas in band 7 with CO 3-2, 8.8 beams across, recoverable to 302 mas, observed November 2015. The best is 2022.A.00026.S of August 2023: band 6 at 21.9 mas gives 6.8 beams across with CO 2-1 and SiO v=0, v=1 and v=2 5-4 and recovers to 351 mas, and band 7 at 14.2 mas gives 10.4 beams with CO 3-2 but recovers only to 200 mas. Its band 8 is the finest beam ever taken of this star at 9.7 mas and is rejected outright: it recovers only 127 mas and would throw the envelope away, which is exactly what the resolution rule exists to catch.",
+      "evidence": [
+        "https://almascience.eso.org/tap/sync",
+        "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+        "https://almascience.org/aq/?result_view=observation&projectCode=2015.1.00206.S"
+      ],
+      "revisitWhen": "A restored cube from 2022.A.00026.S band 6 through the merged ALMA reduction route, deprojected with a stated velocity law. Two things must be settled first: the cube is August 2023 and the polarisation map is December 2024, so it can test the fitted shell radius but cannot place these patches; and carbon monoxide in the inner envelope is optically thick with rising and falling gas together, so velocity is not single-valued in radius.",
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "af510a3d176689f41eb45aba1d9452ee9cd707ef"
+        }
+      ]
     }
   ]
 }
