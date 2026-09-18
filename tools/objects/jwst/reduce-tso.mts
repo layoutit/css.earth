@@ -23,7 +23,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { access, lstat, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
+import { createReadStream, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
@@ -255,6 +255,15 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   const program = segments === undefined ? full : { ...full, segments: full.segments.slice(0, segments) };
   const raw = resolve(work, 'raw'), progressPath = resolve(work, 'progress.json');
   await mkdir(raw, { recursive: true });
+  // One reduction per work directory: a second run on the same visit would download into and calibrate the same files.
+  const lock = resolve(work, 'reduce.lock');
+  const holder = Number(await readFile(lock, 'utf8').catch(() => ''));
+  if (holder && holder !== process.pid && (() => { try { process.kill(holder, 0); return true; } catch { return false; } })()) {
+    console.log(`${work} is being reduced by process ${holder}; leaving it to that run.`);
+    return resolve(work, 'light-curves');
+  }
+  await writeFile(lock, String(process.pid));
+  process.on('exit', () => { try { rmSync(lock); } catch { /* already removed */ } });
   const progress = await readFile(progressPath, 'utf8').then(text => JSON.parse(text) as { segments: string[]; steps: Record<string, string> }, () => ({ segments: [] as string[], steps: {} as Record<string, string> }));
   const save = () => writeFile(progressPath, `${JSON.stringify(progress, null, 2)}\n`);
   const settings = async (step: string, template: string, stagePrefix: string, inputdir: string, outputdir: string) => {
