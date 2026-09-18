@@ -51,12 +51,13 @@ export function restoreScript(options: {
   readonly asdm: string; readonly visibilities: string; readonly applications: readonly CalibrationApplication[];
   readonly flagVersion: string | null; readonly plan: ImagingPlan; readonly imageBase: string;
   readonly imaging: PipelineImaging; readonly selfcal: SelfCalibration | null; readonly tableDirectory?: string;
+  readonly flagStage?: string;
 }) {
   const { asdm, visibilities, applications, flagVersion, plan, imageBase, imaging, selfcal } = options;
   const targets = `${plan.target}.targets.ms`;
   const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
-    'import os, sys, json',
+    'import os, sys, json, shutil',
     'from casatasks import importasdm, flagmanager, applycal, split, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
     'steps = []',
@@ -66,6 +67,9 @@ export function restoreScript(options: {
     `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=False)`,
     "    steps.append('importasdm')",
     ...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
+      // Replace the filler's empty flag versions with the pipeline's before restoring from them.
+      `shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
+      `shutil.copytree(os.path.join(${python(options.flagStage ?? '.')}, ${python(`${visibilities}.flagversions`)}), ${python(`${visibilities}.flagversions`)})`,
       `flagmanager(vis=${python(visibilities)}, mode='restore', versionname=${python(flagVersion)})`,
       "steps.append('flags restored')",
     ]),
@@ -103,8 +107,11 @@ export function pipelineFlagVersion(names: readonly string[]) {
   return null;
 }
 
+/** A macOS volume that is not HFS+ carries an AppleDouble twin beside every file, and those twins are not the data. */
+const real = (name: string) => !name.split('/').some(part => part.startsWith('._'));
+
 async function findOne(directory: string, matches: (name: string) => boolean, what: string, deep = true) {
-  const names = (await readdir(directory, { recursive: deep })).filter(name => !basename(name).startsWith('._'));
+  const names = (await readdir(directory, { recursive: deep })).filter(real);
   const found = names.filter(name => matches(basename(name)));
   if (found.length !== 1) throw new Error(`Expected one ${what} under ${directory}, found ${found.length}.`);
   return resolve(directory, found[0]!);
@@ -112,10 +119,10 @@ async function findOne(directory: string, matches: (name: string) => boolean, wh
 
 /** The flag versions the pipeline saved: each is a directory `flags.<name>` inside `<measurement set>.flagversions`. */
 export async function savedFlagVersions(calibration: string) {
-  const names = await readdir(calibration, { withFileTypes: true });
+  const names = (await readdir(calibration, { withFileTypes: true })).filter(entry => real(entry.name));
   const archive = names.find(entry => entry.isDirectory() && entry.name.endsWith('.ms.flagversions'));
   if (!archive) return [];
-  const versions = await readdir(resolve(calibration, archive.name), { withFileTypes: true });
+  const versions = (await readdir(resolve(calibration, archive.name), { withFileTypes: true })).filter(entry => real(entry.name));
   return versions.filter(entry => entry.isDirectory() && entry.name.startsWith('flags.')).map(entry => entry.name.slice('flags.'.length));
 }
 
@@ -126,7 +133,10 @@ export async function restoreExecution(directory: string, plan: ImagingPlan) {
     const result = spawnSync(command, args, { cwd, stdio: 'inherit' });
     if (result.status !== 0) throw new Error(`${command} ${args[0]} failed (status ${result.status}).`);
   };
-  run('tar', ['xf', resolve(work, 'asdm.tar'), '-C', unpacked], work);
+  // Both tarballs unpack into one tree. Extracting 23 GB again on a rerun costs a quarter of an hour for nothing.
+  const asdmPresent = await readdir(unpacked, { recursive: true })
+    .then(names => names.some(name => name.endsWith('.asdm.sdm')), () => false);
+  if (!asdmPresent) run('tar', ['xf', resolve(work, 'asdm.tar'), '-C', unpacked], work);
   run('tar', ['xf', resolve(work, 'auxiliary.tar'), '-C', unpacked], work);
   const record = await findOne(unpacked, name => name.endsWith('.ms.calapply.txt'), 'calapply record');
   const applications = parseCalibrationRecord(await readFile(record, 'utf8'));
@@ -134,38 +144,45 @@ export async function restoreExecution(directory: string, plan: ImagingPlan) {
   await mkdir(calibration, { recursive: true });
   const caltables = await findOne(unpacked, name => name.endsWith('.caltables.tgz'), 'calibration table archive');
   run('tar', ['xzf', caltables, '-C', calibration], work);
+  // importasdm writes its own <vis>.flagversions and refuses to start if that name is taken, so the pipeline's copy is staged
+  // elsewhere and moved in afterwards. hifa_restoredata does the same: remove the filler's version, restore the delivered one.
+  const flagStage = resolve(work, 'flagversions');
+  await mkdir(flagStage, { recursive: true });
   const flags = await findOne(unpacked, name => name.endsWith('.ms.flagversions.tgz'), 'flag version archive');
-  run('tar', ['xzf', flags, '-C', calibration], work);
+  run('tar', ['xzf', flags, '-C', flagStage], work);
   // The auxiliary products carry the self-calibration solutions and the record that says how to apply them.
   const products = resolve(work, 'auxproducts');
   await mkdir(products, { recursive: true });
   const auxproducts = await findOne(unpacked, name => name.endsWith('.auxproducts.tgz'), 'auxiliary product archive');
   run('tar', ['xzf', auxproducts, '-C', products], work);
-  const staged = await readdir(calibration);
+  const staged = (await readdir(calibration)).filter(real);
   const missing = requiredTables(applications).filter(table => !staged.includes(table));
   if (missing.length) throw new Error(`The calibration archive is missing ${missing.length} table(s) the record applies: ${missing[0]}`);
-  const versions = await savedFlagVersions(calibration);
+  const versions = await savedFlagVersions(flagStage);
   const flagVersion = pipelineFlagVersion(versions);
   // The pipeline's flags are half of what restoring means; running without them would calibrate data it had thrown away.
   if (flagVersion === null) throw new Error(`The delivery saved no flag version this route recognises (found ${versions.join(', ') || 'none'}).`);
-  const asdm = await findOne(unpacked, name => /^uid___A002_[0-9A-Za-z_]+$/u.test(name), 'raw ASDM directory', false);
-  const visibilities = `${basename(asdm)}.ms`;
+  // The delivery nests the ASDM under its project, science goal, group and member, and names it with the suffix the archive
+  // gives the tarball. importasdm takes the directory; the measurement set is named for the execution, without the suffix.
+  const asdm = await findOne(unpacked, name => /^uid___A002_[0-9A-Za-z_]+\.asdm\.sdm$/u.test(name), 'raw ASDM directory');
+  const execution = basename(asdm).replace(/\.asdm\.sdm$/u, '');
+  const visibilities = `${execution}.ms`;
 
   const log = await findOne(unpacked, name => name.endsWith('.casa_commands.log'), 'pipeline command log');
   const imaging = pipelineImaging(await readFile(log, 'utf8'), plan.target);
   const selfcalRecord = await readdir(products, { withFileTypes: true })
-    .then(entries => entries.find(entry => entry.isFile() && entry.name.endsWith('.selfcal.json'))?.name ?? null);
+    .then(entries => entries.find(entry => real(entry.name) && entry.isFile() && entry.name.endsWith('.selfcal.json'))?.name ?? null);
   const selfcal = selfcalRecord ? parseSelfCalibration(JSON.parse(await readFile(resolve(products, selfcalRecord), 'utf8'))) : null;
-  const workdir = (await readdir(products, { withFileTypes: true })).find(entry => entry.isDirectory() && entry.name.startsWith('sc_workdir'));
+  const workdir = (await readdir(products, { withFileTypes: true })).find(entry => real(entry.name) && entry.isDirectory() && entry.name.startsWith('sc_workdir'));
   if (selfcal?.succeeded && !workdir) throw new Error('The delivery self-calibrated but ships no table directory.');
   if (selfcal?.succeeded) {
-    const tables = await readdir(resolve(products, workdir!.name));
+    const tables = (await readdir(resolve(products, workdir!.name))).filter(real);
     const absent = selfcal.tables.filter(table => !tables.includes(table));
     if (absent.length) throw new Error(`The self-calibration record names ${absent.length} table(s) the delivery does not carry: ${absent[0]}`);
   }
 
   const script = restoreScript({ asdm, visibilities, applications, flagVersion, plan, imaging, selfcal,
-    tableDirectory: workdir ? resolve(products, workdir.name) : undefined, imageBase: resolve(work, `${plan.target}.restored`) });
+    flagStage, tableDirectory: workdir ? resolve(products, workdir.name) : undefined, imageBase: resolve(work, `${plan.target}.restored`) });
   const scriptPath = resolve(work, 'restore.py');
   await writeFile(scriptPath, script);
   const casa = await toolchainPath('casa');
