@@ -3,13 +3,15 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import { SOURCE_CATALOGUE } from './sources-catalog.mts';
+import { projectRoot } from '../src/platform/project-root.mts';
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
 // reconstructs a document from scientific citations.
-// Resolve against the working directory rather than `import.meta.url`: once Astro
-// bundles this module into `dist/.prerender/chunks`, the module's own URL no
-// longer sits beside the project root, but the build always runs from it.
-const root = process.cwd();
+// Resolve against the discovered project root rather than `process.cwd()` (a
+// workspace-filtered script runs elsewhere) or `import.meta.url` (once Astro
+// bundles this module into `dist/.prerender/chunks`, its own URL no longer
+// sits beside the project root).
+const root = projectRoot(import.meta.url);
 const revision = process.env.COMMIT_REF || execFileSync('git', ['rev-parse', 'HEAD'], {
   cwd: root, encoding: 'utf8',
 }).trim();
