@@ -9,6 +9,9 @@ import {
   assembleRuntimeAssetClosure,
   normalizeRuntimeAssetUrls,
   prepareRuntimeAssetManifest,
+  preparePreparedAssetManifest,
+  validatePreparedAssetManifest,
+  verifyPreparedAssetClosure,
   verifyRuntimeAssetClosure,
 } from "./runtime-asset-closure.mts";
 
@@ -84,4 +87,50 @@ test("rejects undeclared public files and removes only undeclared production fil
   await assembleRuntimeAssetClosure({ planetId: "fixture", manifestPath, productionRoot });
   assert.deepEqual(await readdir(productionRoot), ["a.webp"]);
   assert.equal(JSON.parse(await readFile(manifestPath, "utf8")).assets.length, 1);
+});
+
+test("prepared-assets: explicit filenames cover only a subset of prepared/, ignoring its other tracked files", async (context) => {
+  const root = await mkdtemp(resolve(tmpdir(), "prepared-assets-"));
+  context.after(() => rm(root, { force: true, recursive: true }));
+  const preparedRoot = resolve(root, "prepared");
+  await mkdir(preparedRoot);
+  await writeFile(resolve(preparedRoot, "runtime.json"), "runtime-bytes");
+  await writeFile(resolve(preparedRoot, "scene.json"), "scene-bytes");
+  await writeFile(resolve(preparedRoot, "provenance.json"), "kept-tracked");
+  const manifestPath = resolve(root, "prepared-assets.json");
+  const manifest = await preparePreparedAssetManifest({
+    planetId: "fixture", preparedRoot, manifestPath, filenames: ["runtime.json", "scene.json"],
+  });
+  assert.equal(manifest.schema, "cssfixture-prepared-assets@1");
+  assert.equal(manifest.resourceRoot, "prepared");
+  assert.deepEqual(manifest.assets.map(a => a.filename), ["runtime.json", "scene.json"]);
+  assert.equal(validatePreparedAssetManifest("fixture", manifest), true);
+  // Subset verification tolerates the untracked-from-this-manifest provenance.json neighbor.
+  assert.equal(await verifyPreparedAssetClosure({ planetId: "fixture", manifest, root: preparedRoot, closure: false }), true);
+  await writeFile(resolve(preparedRoot, "runtime.json"), "drifted");
+  await assert.rejects(verifyPreparedAssetClosure({ planetId: "fixture", manifest, root: preparedRoot, closure: false }), /prepared asset drifted: runtime\.json/);
+  await writeFile(resolve(preparedRoot, "runtime.json"), "runtime-bytes");
+  await rm(resolve(preparedRoot, "scene.json"));
+  await assert.rejects(verifyPreparedAssetClosure({ planetId: "fixture", manifest, root: preparedRoot, closure: false }), /Missing: scene\.json/);
+});
+
+test("prepared-assets: nested closure mode inventories every file under prepared/ except the excluded ones", async (context) => {
+  const root = await mkdtemp(resolve(tmpdir(), "prepared-assets-closure-"));
+  context.after(() => rm(root, { force: true, recursive: true }));
+  const preparedRoot = resolve(root, "prepared");
+  await mkdir(resolve(preparedRoot, "atlases"), { recursive: true });
+  await writeFile(resolve(preparedRoot, "lenses.json"), "lens-bytes");
+  await writeFile(resolve(preparedRoot, "atlases/x.webp"), "atlas-bytes");
+  await writeFile(resolve(preparedRoot, "local-drift.json"), "not inventoried");
+  const manifestPath = resolve(root, "prepared-assets.json");
+  const manifest = await preparePreparedAssetManifest({
+    planetId: "context-nebula", preparedRoot, manifestPath, exclude: ["local-drift.json"],
+  });
+  assert.deepEqual(manifest.assets.map(a => a.filename), ["atlases/x.webp", "lenses.json"]);
+  // Full closure verification tolerates only the named exclusion, not any other undeclared file.
+  await assert.doesNotReject(verifyPreparedAssetClosure({ planetId: "context-nebula", manifest, root: preparedRoot, exclude: ["local-drift.json"] }));
+  await writeFile(resolve(preparedRoot, "undeclared.json"), "surprise");
+  await assert.rejects(verifyPreparedAssetClosure({ planetId: "context-nebula", manifest, root: preparedRoot, exclude: ["local-drift.json"] }), /Undeclared: undeclared\.json/);
+  await rm(resolve(preparedRoot, "undeclared.json"));
+  await assert.rejects(verifyPreparedAssetClosure({ planetId: "context-nebula", manifest, root: preparedRoot }), /Undeclared: local-drift\.json/);
 });

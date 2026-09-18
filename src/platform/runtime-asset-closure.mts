@@ -2,6 +2,12 @@ import { sha256 } from './sha256.mts';
 import { isArray } from './is-array.mts';
 export interface RuntimeAsset { filename: string; bytes: number; sha256: string; location?: 'public'; }
 export interface RuntimeAssetManifest { schema: string; resourceRoot?: 'prepared'; assets: readonly RuntimeAsset[]; }
+/** `runtime-assets` covers public scene textures (and, via the `prepared` resourceRoot, a handful of legacy
+ * context bundles). `prepared-assets` is the Phase 2 inventory of baked `prepared/*` outputs that git no longer
+ * tracks: either an explicit small filename list (`runtime.json`/`scene.json` for a body prepared through the
+ * runtime pipeline) or the full nested closure of a context/nebula object's `prepared/` directory. Both kinds
+ * share one schema shape, validator and closure verifier; only the schema suffix differs. */
+export type AssetManifestKind = 'runtime-assets' | 'prepared-assets';
 import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, stat, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
@@ -9,6 +15,10 @@ import { fileURLToPath } from "node:url";
 
 const SAFE_FILENAME = /^[a-z0-9][a-z0-9@._-]*$/u;
 const SHA256 = /^[0-9a-f]{64}$/u;
+
+function manifestSchema(kind: AssetManifestKind, planetId: string): string {
+  return `css${planetId}-${kind}@1`;
+}
 
 export function normalizeRuntimeAssetUrls({ planetId, urls }: { planetId: string; urls: readonly string[] }) {
   if (!/^[a-z][a-z0-9-]*$/u.test(planetId) || !isArray(urls) || urls.length === 0) {
@@ -60,6 +70,11 @@ export async function prepareRuntimeAssetManifest({
     schema: `css${planetId}-runtime-assets@1`,
     assets: Object.freeze(assets),
   });
+  await writeManifestAtomically(manifestPath, manifest);
+  return manifest;
+}
+
+async function writeManifestAtomically(manifestPath: string | URL, manifest: unknown): Promise<void> {
   const outputPath = manifestPath instanceof URL
     ? fileURLToPath(manifestPath)
     : manifestPath;
@@ -70,6 +85,53 @@ export async function prepareRuntimeAssetManifest({
   } finally {
     await rm(temporary, { force: true });
   }
+}
+
+/**
+ * Write the Phase 2 `prepared-assets.json` inventory for one object: either an explicit `filenames` list (a
+ * body's `prepared/runtime.json` + `prepared/scene.json`, whichever exist — every other `prepared/*` file stays
+ * a tracked contract file per FABLE_REVIEW.md section D) or, when `filenames` is omitted, the full nested
+ * closure of `preparedRoot` minus `exclude` (a context/nebula object with no `runtime-assets.json`, such as a
+ * nebula bake or milky-way/heliosphere/stellar-neighbourhood/lmc).
+ */
+export async function preparePreparedAssetManifest({
+  planetId,
+  preparedRoot,
+  manifestPath,
+  filenames,
+  exclude = [],
+}: { planetId: string; preparedRoot: string; manifestPath: string | URL; filenames?: readonly string[]; exclude?: readonly string[] }): Promise<Readonly<RuntimeAssetManifest>> {
+  let names: string[];
+  if (filenames) {
+    names = [...filenames];
+    for (const name of names) {
+      if (!(await lstat(resolve(preparedRoot, name)).catch(() => undefined))?.isFile()) {
+        throw new Error(`Prepared asset is not a regular file: ${planetId}/${name}.`);
+      }
+    }
+  } else {
+    const excluded = new Set(exclude);
+    names = (await runtimeFiles(preparedRoot, planetId, true)).filter(name => !excluded.has(name));
+  }
+  if (names.length === 0) throw new TypeError(`Planet ${planetId} has no prepared assets to inventory.`);
+  names.sort((left, right) => left.localeCompare(right));
+  for (const name of names) {
+    if (!name.split("/").every(component => SAFE_FILENAME.test(component))) {
+      throw new TypeError(`Planet ${planetId} has an unsafe prepared asset path: ${name}.`);
+    }
+  }
+  if (new Set(names).size !== names.length) throw new TypeError(`Planet ${planetId} repeats a prepared asset path.`);
+  const assets = [];
+  for (const filename of names) {
+    const bytes = await readFile(resolve(preparedRoot, filename));
+    assets.push(Object.freeze({ filename, bytes: bytes.byteLength, sha256: sha256(bytes) }));
+  }
+  const manifest = Object.freeze({
+    schema: `css${planetId}-prepared-assets@1`,
+    resourceRoot: "prepared" as const,
+    assets: Object.freeze(assets),
+  });
+  await writeManifestAtomically(manifestPath, manifest);
   return manifest;
 }
 
@@ -88,31 +150,57 @@ export async function assembleRuntimeAssetClosure({
   return manifest;
 }
 
-export async function verifyRuntimeAssetClosure({ planetId, manifest, root, publicRoot }: { planetId: string; manifest: RuntimeAssetManifest; root: string; publicRoot?: string }) {
-  validateRuntimeAssetManifest(planetId, manifest);
+/**
+ * `closure` (default true) asserts the target directory contains exactly the manifest's files (plus `exclude`,
+ * which may be present on disk without being declared — used for files that stay outside this inventory, such
+ * as a sibling context object's own `manifest.json`, or pre-existing local drift called out by name). Body
+ * manifests that only cover a subset of `prepared/` (`runtime.json`/`scene.json` beside tracked contract files)
+ * pass `closure: false`: every listed file must exist and match its hash, but undeclared neighbors are expected.
+ */
+export async function verifyAssetClosure(kind: AssetManifestKind, { planetId, manifest, root, publicRoot, closure = true, exclude = [] }: {
+  planetId: string; manifest: RuntimeAssetManifest; root: string; publicRoot?: string; closure?: boolean; exclude?: readonly string[];
+}) {
+  validateAssetManifest(kind, planetId, manifest);
   const publicAssets = manifest.assets.filter(asset => asset.location === "public");
   if (publicAssets.length && !publicRoot) throw new TypeError("Public runtime assets require an explicit publicRoot for verification.");
   const prepared = manifest.resourceRoot === "prepared";
-  await assertDirectoryClosure(root, manifest.assets.filter(asset => asset.location !== "public").map(({ filename }) => filename), planetId, prepared,
-    prepared ? ["manifest.json"] : []);
-  if (publicAssets.length) await assertDirectoryClosure(publicRoot!, publicAssets.map(({ filename }) => filename), planetId, true);
+  if (closure) {
+    await assertDirectoryClosure(root, manifest.assets.filter(asset => asset.location !== "public").map(({ filename }) => filename), planetId, prepared,
+      prepared ? [...exclude, "manifest.json"] : exclude);
+    if (publicAssets.length) await assertDirectoryClosure(publicRoot!, publicAssets.map(({ filename }) => filename), planetId, true);
+  } else {
+    for (const asset of manifest.assets.filter(asset => asset.location !== "public")) {
+      const target = resolve(root, asset.filename);
+      if (!(await lstat(target).catch(() => undefined))?.isFile()) {
+        throw new Error(`Planet ${planetId} ${kind} closure mismatch. Missing: ${asset.filename}.`);
+      }
+    }
+  }
   for (const asset of manifest.assets) {
     const bytes = await readFile(resolve(asset.location === "public" ? publicRoot! : root, asset.filename));
     const digest = sha256(bytes);
     if (bytes.byteLength !== asset.bytes || digest !== asset.sha256) {
-      throw new Error(`Planet ${planetId} runtime asset drifted: ${asset.filename}.`);
+      throw new Error(`Planet ${planetId} ${kind === "prepared-assets" ? "prepared" : "runtime"} asset drifted: ${asset.filename}.`);
     }
   }
   return true;
 }
 
-export function validateRuntimeAssetManifest(planetId: string, input: unknown): true {
+export async function verifyRuntimeAssetClosure(args: { planetId: string; manifest: RuntimeAssetManifest; root: string; publicRoot?: string }) {
+  return verifyAssetClosure("runtime-assets", args);
+}
+
+export async function verifyPreparedAssetClosure(args: { planetId: string; manifest: RuntimeAssetManifest; root: string; closure?: boolean; exclude?: readonly string[] }) {
+  return verifyAssetClosure("prepared-assets", args);
+}
+
+export function validateAssetManifest(kind: AssetManifestKind, planetId: string, input: unknown): true {
   const manifest = input as RuntimeAssetManifest;
   if (!manifest || typeof manifest !== "object" || isArray(manifest) ||
-      manifest.schema !== `css${planetId}-runtime-assets@1` ||
+      manifest.schema !== manifestSchema(kind, planetId) ||
       (manifest.resourceRoot !== undefined && manifest.resourceRoot !== "prepared") ||
       !isArray(manifest.assets) || manifest.assets.length === 0) {
-    throw new TypeError(`Planet ${planetId} runtime asset manifest is incompatible.`);
+    throw new TypeError(`Planet ${planetId} ${kind} manifest is incompatible.`);
   }
   const filenames = new Set();
   for (const asset of manifest.assets) {
@@ -134,9 +222,25 @@ export function validateRuntimeAssetManifest(planetId: string, input: unknown): 
   return true;
 }
 
-export function requireRuntimeAssetManifest(planetId: string, input: unknown): Readonly<RuntimeAssetManifest> {
-  validateRuntimeAssetManifest(planetId, input);
+export function validateRuntimeAssetManifest(planetId: string, input: unknown): true {
+  return validateAssetManifest("runtime-assets", planetId, input);
+}
+
+export function validatePreparedAssetManifest(planetId: string, input: unknown): true {
+  return validateAssetManifest("prepared-assets", planetId, input);
+}
+
+export function requireAssetManifest(kind: AssetManifestKind, planetId: string, input: unknown): Readonly<RuntimeAssetManifest> {
+  validateAssetManifest(kind, planetId, input);
   return input as RuntimeAssetManifest;
+}
+
+export function requireRuntimeAssetManifest(planetId: string, input: unknown): Readonly<RuntimeAssetManifest> {
+  return requireAssetManifest("runtime-assets", planetId, input);
+}
+
+export function requirePreparedAssetManifest(planetId: string, input: unknown): Readonly<RuntimeAssetManifest> {
+  return requireAssetManifest("prepared-assets", planetId, input);
 }
 
 async function runtimeFiles(root: string, planetId: string, nested: boolean, prefix = ""): Promise<string[]> {
