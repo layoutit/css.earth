@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1d921fbe76c0446efb3ee7585c7c161e23b8f9ff14084d77cf8fa1ae1b45f2ad"
+    "sha256": "b69f1d3bb491591c7f00fdf7358b8f6cdb978eaf90d94958eeb5011a0935be30"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -460,7 +460,7 @@
           {
             "catalogueId": "source-r-doradus-r-doradus-observational-measurements",
             "role": "material",
-            "evidence": "src/objects/r-doradus/source/manifest.json@9ad342267dd0513ba6cae28ca66f5ceb2956483e#/inputs/3"
+            "evidence": "src/objects/r-doradus/source/manifest.json@71348fe882075b91e3ea041e52ff94e4f4cbc01c#/inputs/3"
           }
         ]
       },
