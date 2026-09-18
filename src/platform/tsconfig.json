@@ -20,7 +20,9 @@
     ],
     "typeRoots": [
       "../../packages/engine/node_modules/@types"
-    ]
+    ],
+    "incremental": true,
+    "tsBuildInfoFile": "../../output/tsbuildinfo/platform.tsbuildinfo"
   },
   "include": [
     "**/*.mts",

@@ -20,7 +20,9 @@
       "node"
     ],
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "incremental": true,
+    "tsBuildInfoFile": "../../output/tsbuildinfo/preparation.tsbuildinfo"
   },
   "include": [
     "**/*.ts",
