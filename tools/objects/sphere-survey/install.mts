@@ -5,10 +5,10 @@
  *
  * The run is rebuilt first, so the package receives exactly what was just measured: the frames, the ADAM mesh, both
  * Horizons tables and the spin record where they are new, the recipe, the observer-cameras and comparison records and
- * the manifest. Around them it writes what a shipped lens needs: download operations, the lens control, reader text,
- * the ledger's decision and the entries it closes, the README's source rows and generated evidence blocks, credits and
- * the evidence itself, then re-pins the package's documents. Preparation, the registration block, source records and
- * publishing follow with their own commands, which it prints.
+ * the manifest. Around them it writes what a shipped lens needs: download operations and the Horizons tables' refresh
+ * steps, the lens control, reader text, the ledger's decision and the entries it closes, the README's source rows and
+ * generated evidence blocks, credits and the evidence itself, then re-pins the package's documents. Preparation, the
+ * registration block, source records and publishing follow with their own commands, which it prints.
  */
 import { execFileSync } from 'node:child_process';
 import { access, copyFile, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
@@ -21,6 +21,7 @@ import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES,
 import { OBSERVER_CAMERAS_FILE } from '../terrestrial-layers/observer-cameras.mts';
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.mts';
 import { INVESTIGATION_SURVEY_DIRECTORY } from '../../investigation-survey.mts';
+import { writeHorizonsOperations } from '../sphere-horizons.mts';
 import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArgument, localCopy } from './setup.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
@@ -128,6 +129,8 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   }
   plan.operations = operations;
   await writeJson(resolve(packageSource, 'preparation/acquisition.json'), plan);
+  // The Horizons tables are asked for again by their own refresh steps, holding the exact batched queries.
+  await writeHorizonsOperations(objectId, packageSource);
 
   // The lens control and its reader text.
   const content = await readJson(resolve(packageSource, 'content/object.json')), controls = requireArray(requireRecord(content.lenses).controls);

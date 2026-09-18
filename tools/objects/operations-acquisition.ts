@@ -28,7 +28,9 @@ interface VerifyDownload extends OperationBase {kind:'verify-download';url:strin
 interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;}
 interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
-export type AcquisitionOperation=MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck;
+/** A pinned JPL Horizons time-list table asked for again; Horizons dates each response, so its rows are compared, not its bytes. */
+interface HorizonsTimeList extends OperationBase {kind:'horizons-time-list';path:string;url:string;parameters:Record<string,string>;epochs:number[];}
+export type AcquisitionOperation=MappedComposition|SpectralBandMaps|HriiFacets|DskMesh|Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|HorizonsTimeList;
 export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
@@ -37,9 +39,10 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  // tracked needs no reacquisition operation at all (e.g. eris, haumea, makemake).
  const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
  for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
+  if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','horizons-time-list'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','tile-mosaic'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(step.kind==='horizons-time-list'){const parameters=record(step.parameters);if(Object.values(parameters).some(value=>typeof value!=='string')||'TLIST' in parameters||!Array.isArray(step.epochs)||!step.epochs.length||step.epochs.some(epoch=>typeof epoch!=='number'||!Number.isFinite(epoch)))throw new TypeError('Invalid Horizons time list.');}
   if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.archiveSha256!=='string'||!/^[a-f0-9]{64}$/.test(step.archiveSha256)||!Number.isSafeInteger(step.archiveBytes)||Number(step.archiveBytes)<=0||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
@@ -153,6 +156,12 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    for(const replacement of step.replacements??[])text=text.replace(new RegExp(replacement.pattern,replacement.flags),replacement.replacement);
    if(step.trimEnd)text=text.trimEnd();if(step.appendText!==undefined)text+=step.appendText;
    await publish(step.path,new TextEncoder().encode(text));
+  }
+  else if(step.kind==='horizons-time-list'){
+   const [{timeListRows},{horizonsRows}]=await Promise.all([import('./sphere-horizons.mts'),import('./terrestrial-layers/observer-cameras.mts')]);
+   const asked=await timeListRows(step.url,step.parameters,step.epochs,async url=>(await request(url)).text());
+   const pinned=horizonsRows(await readFile(containedPath(sourceRoot,step.path),'utf8'));
+   if(asked.length!==pinned.length||asked.some((row,index)=>row!==pinned[index]))throw new Error(`Horizons rows drifted from ${step.path}.`);
   }
   else if(step.kind==='verify-download'){if(sha256(await bytes(step.url))!==step.sha256)throw new Error(`Pinned upstream bytes drifted: ${step.url}.`);}
   else if(step.kind==='verify-json'){const expected=record(JSON.parse(await readFile(containedPath(sourceRoot,step.expectedPath),'utf8')) as unknown),actual=record(await(await request(step.url)).json());for(const [remote,local] of Object.entries(step.fields))if(actual[remote]!==expected[local])throw new Error(`Source identity field ${remote} drifted.`);}

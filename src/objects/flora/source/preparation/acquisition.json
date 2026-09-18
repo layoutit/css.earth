@@ -222,6 +222,79 @@
       ],
       "path": "shape/damit-model-5928-shape.obj",
       "url": "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj"
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-observer.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'8;'",
+        "EPHEM_TYPE": "'OBSERVER'",
+        "CENTER": "'309'",
+        "TLIST_TYPE": "'JD'",
+        "TIME_TYPE": "'UT'",
+        "QUANTITIES": "'1,13,20,24,43'",
+        "ANG_FORMAT": "'DEG'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458117.643584988,
+        2458117.645097303,
+        2458117.646624491,
+        2458117.6481474424,
+        2458117.6496412964,
+        2458117.7411616785,
+        2458117.742674074,
+        2458117.744185671,
+        2458117.745679699,
+        2458117.747172535,
+        2458118.63506397,
+        2458118.636580023,
+        2458118.6381066553,
+        2458118.639613368,
+        2458118.6411285186
+      ]
+    },
+    {
+      "kind": "horizons-time-list",
+      "groups": [
+        "refresh"
+      ],
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "parameters": {
+        "format": "text",
+        "COMMAND": "'8;'",
+        "EPHEM_TYPE": "'VECTORS'",
+        "CENTER": "'500@10'",
+        "TLIST_TYPE": "'JD'",
+        "REF_PLANE": "'FRAME'",
+        "REF_SYSTEM": "'ICRF'",
+        "VEC_TABLE": "'1'",
+        "OUT_UNITS": "'AU-D'",
+        "CSV_FORMAT": "'NO'"
+      },
+      "epochs": [
+        2458117.6376370653,
+        2458117.639149375,
+        2458117.640676557,
+        2458117.642199503,
+        2458117.643693351,
+        2458117.7352133486,
+        2458117.7367257373,
+        2458117.7382373274,
+        2458117.739731348,
+        2458117.7412241767,
+        2458118.6291111023,
+        2458118.6306271474,
+        2458118.632153772,
+        2458118.6336604767,
+        2458118.6351756193
+      ]
     }
   ]
 }
