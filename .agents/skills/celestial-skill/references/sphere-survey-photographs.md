@@ -45,10 +45,13 @@ the way it:
 - writes both Horizons tables, derives every camera and measures the figure.
 
 It stops with the reason when the spin record and the paper describe
-different solutions (Eleonora, Nemesis and Thisbe), when the figure uses
-another layout, or when LAM refuses a file. Table A.1 prints Thisbe's pole past
-the pole, latitude 116°; the setup folds it to the direction its printed
-obliquity confirms before comparing.
+different solutions (Nemesis), when the figure uses another layout, or when LAM
+refuses a file. Where Table A.1 describes another solution than the survey's
+released model, the figure table names that model as DAMIT's 2021 import of it
+states it (Eleonora, Thisbe): the record is read against it, and the figure
+decides. Where LAM withholds a body's own ADAM mesh and record, the table also
+names DAMIT's files for the model (Flora), and the README states what DAMIT's
+rounding leaves uncertain.
 It also stops when a frame's limb fit does not settle, naming the frame: the
 recipe states each disc centre, so it must be a settled one. After eight full
 steps a fit still moving takes half steps, which settles one bouncing between
