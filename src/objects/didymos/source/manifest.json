@@ -123,15 +123,15 @@
       "id": "usgs-gazetteer-didymos-nomenclature-center-pts",
       "path": "features/DIDYMOS_nomenclature_center_pts.zip",
       "expectedBytes": 6693,
-      "expectedSha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
+      "expectedSha256": "b08088b26cf9046da402987a7659c9e339b870ce948feb06d3f2678671af3e5a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIDYMOS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "consumers": [
         "features"
       ],
@@ -808,7 +808,7 @@
       "id": "didymos-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1310,
-      "expectedSha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
+      "expectedSha256": "5de49baa402ac4419a34536b7dbdeb3a5f0bc372e0c31c7b2f406b4b3b18feca",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2411f451c668ba06a0567d8b5c7b49451e42ce8818c29c66515a7f0dfb3f97c6"
+    "sha256": "bbe52575685ca8a4a1d945b4fce547cf91f502d6b989190ef45d88ae5c9db60f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1337,7 +1337,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
+      "sha256": "5de49baa402ac4419a34536b7dbdeb3a5f0bc372e0c31c7b2f406b4b3b18feca",
       "bytes": 1310,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1354,8 +1354,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Didymos centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIDYMOS/target",
@@ -1363,7 +1363,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
+      "sha256": "b08088b26cf9046da402987a7659c9e339b870ce948feb06d3f2678671af3e5a",
       "bytes": 6693,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1729,7 +1729,7 @@
         {
           "url": "/scenes/didymos/didymos-features.json",
           "bytes": 2800,
-          "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
+          "sha256": "04b7d61f418a9285280af81f61aa1ddbacde295a4b841f0f06c77aeeb9f2c289",
           "verification": "bytes-verified"
         }
       ],
@@ -1867,7 +1867,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "75c98ded555527ef0fac9ab9b89e77f9ab0fe06e207c2f06dd222ab1a2ca8826",
+    "materialSha256": "c573dffe4272eed63ef2d57954902f1a957af40ade0edac779310fae5356c2a6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
