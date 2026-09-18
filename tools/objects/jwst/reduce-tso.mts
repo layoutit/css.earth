@@ -124,10 +124,11 @@ async function segmentFile(segment: Segment, raw: string, rawSources: readonly s
     const candidate = resolve(source, segment.name);
     if (await sizeOf(candidate) === segment.bytes) { await rm(target, { force: true }); await symlink(candidate, target); return target; }
   }
-  // MAST drops slow transfers; curl resumes a partial file, and a stalled transfer is abandoned and resumed, five times at most.
-  for (let attempt = 1; attempt <= 5 && await sizeOf(target) !== segment.bytes; attempt++) {
+  // MAST drops slow transfers, and one connection can crawl while others run at full speed: a transfer under 500 kB/s for a
+  // minute is abandoned and resumed on a fresh connection, from where the partial file ends, twenty times at most.
+  for (let attempt = 1; attempt <= 20 && await sizeOf(target) !== segment.bytes; attempt++) {
     if (await sizeOf(target) > segment.bytes) await rm(target);
-    await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '10000', '--speed-time', '120', '-o', target, `https://mast.stsci.edu/api/v0.1/Download/file?uri=${segment.uri}`]);
+    await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '500000', '--speed-time', '60', '-o', target, `https://mast.stsci.edu/api/v0.1/Download/file?uri=${segment.uri}`]);
   }
   if (await sizeOf(target) !== segment.bytes) throw new Error(`${segment.name} did not download to its pinned ${segment.bytes} bytes.`);
   return target;

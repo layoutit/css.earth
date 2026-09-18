@@ -18,8 +18,8 @@ calibrated_spectra  False   # Set True to generate flux-calibrated spectra/photo
 gain            3.57
 
 # Subarray region of interest
-ywindow         [465, 565]  # full frame: TRAPPIST-1 at x 697.1, y 515.4 (1177 observation 7)
-xwindow         [647, 747]
+ywindow         [460, 560]  # full frame: TRAPPIST-1 at x 692.4, y 510.4 (2304 observations 1 and 2)
+xwindow         [642, 742]
 dqmask          True
 
 # Background parameters
@@ -28,7 +28,7 @@ bg_thresh       [5,5]
 
 # Photometric extraction parameters
 interp_method   linear      # Interpolate bad pixels. Options: None (if no interpolation should be performed), linear, nearest, cubic
-ctr_guess       [697, 515]  # Initial guess of centroid position. If None, will first perform centroiding on whole frame (can sometimes fail)
+ctr_guess       [692, 510]  # Initial guess of centroid position. If None, will first perform centroiding on whole frame (can sometimes fail)
 ctr_cutout_size 10          # Cutoff size all around the centroid after the coarse centroid calculation or first centroid guess when using the mgmc method. 
 centroid_method fgc         # Method used for centroiding. Options: mgmc, fgc
 oneoverf_corr   None        # Options: None, meanerr, median
