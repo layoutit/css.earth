@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './levels.mts';
 import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
+import { namedLevelRefusal } from './surface.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
@@ -22,6 +23,20 @@ test('calibration withholds steep-angle pairs without changing displayed source 
   // With every pair withheld, each frame keeps its own level.
   const unlevelled = fitObservationLevels([a.map(s => ({ ...s, maximumIncidenceDegrees: NaN })), b], { ...policy, maximumAngleDegrees: 70 });
   assert.deepEqual(unlevelled.gains, [1, 1]); assert.deepEqual(unlevelled.groups, [[0], [1]]);
+});
+
+test('a refused level fit names the frames beyond its budget, against the first frame and the median', () => {
+  // Frame a is dim: against it every other frame needs a gain of 1/5. Against the median only a itself is beyond budget.
+  const levels = [1, 5, 5, 5.2];
+  const samples = levels.map(level => Array.from({ length: 200 }, (_, i) => sample((1 + i / 200) * level)));
+  let refusal: unknown;
+  try { fitObservationLevels(samples, { minimumPairs: 64, maximumGain: 4 }); } catch (error) { refusal = error; }
+  assert.ok(refusal instanceof Error && /authored gain budget/.test(refusal.message));
+  const named = namedLevelRefusal(refusal, ['a', 'b', 'c', 'd'], 4);
+  assert.ok(named instanceof Error);
+  assert.match(named.message, /^Observation level fit exceeds its authored gain budget\. Beyond the 4× budget: a 1\.00× the first frame's level, 5\.00× the median frame's; b 0\.20×/);
+  const other = new Error('something else');
+  assert.equal(namedLevelRefusal(other, ['a'], 4), other, 'other errors pass through');
 });
 
 test('robust overlap fit recovers connected source scales despite missing pairs and outliers', () => {

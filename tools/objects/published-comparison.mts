@@ -19,10 +19,10 @@ import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type 
 import { decodeCalibratedCamera, loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
 import { radialTerrainForLens } from './terrestrial-layers/radial-models.mts';
 import { observerCaster, turnedOrientation, type TurnableCaster } from './terrestrial-layers/registration-sweeps.mts';
-import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from './surface-observations/published-comparison.mts';
+import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from './surface-observations/published-comparison.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
-const TURN_STEP = 10, SWEEP = { from: -30, to: 30, step: 2 };
+const SWEEP = { from: -30, to: 30, step: 2 };
 const round = (value: number, digits = 3) => Number(value.toFixed(digits));
 const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
 
@@ -81,7 +81,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
     const { width, height } = decodeCalibratedCamera(await readFile(resolve(sourceDirectory, camera.path)), 'fits-zimpol-intensity');
     const caster = observerCaster(camera.sighting, base), model = panelDisc(figure, cell(spec.rows.model, index)), photograph = panelDisc(figure, cell(spec.rows.image, index), 40, spec.rows.labelLines);
     const turns: Record<string, number> = {};
-    for (let turn = 0; turn < 360; turn += TURN_STEP) turns[turn] = round(outlineOverlap(render(turn === 0 ? caster : caster.turned(turn), width, height).mask, model));
+    for (let turn = 0; turn < 360; turn += PHASE_SWEEP_STEP_DEGREES) turns[turn] = round(outlineOverlap(render(turn === 0 ? caster : caster.turned(turn), width, height).mask, model));
     const drawn = render(caster, width, height);
     // What the measure gives one shape at this pair of scales: our outline against itself drawn at the paper panel's pixel
     // scale. The two drawings differ only by their pixels, so this is the score to read the paper comparisons against.

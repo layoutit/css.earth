@@ -36,20 +36,31 @@ the way it:
   the figure's frames always kept;
 - takes every file from this machine when a copy exists, and downloads the rest
   from LAM with its public cookie;
-- reads the spin record in the column order the published pole supports;
-- gives the ADAM mesh the body's own mesh settings, raising the simplification error bound to the next
-  100 m above what the ADAM mesh reaches at the face target when the body's bound falls short;
+- reads the spin record in the column order the survey's Table A.1 pole
+  supports. A body whose own published pole belongs to another solution, such
+  as a DAMIT model, gets the survey's pole in its lens record;
+- gives the ADAM mesh, an OBJ in kilometres, the body's own mesh settings,
+  raising the simplification error bound to the next 100 m above what the ADAM
+  mesh reaches at the face target when the body's bound falls short;
 - writes both Horizons tables, derives every camera and measures the figure.
 
-It stops with the reason when the body's pole is not the survey's own, when
-the spin record and the paper describe different solutions, when the figure
-uses another layout, or when LAM refuses a file.
+It stops with the reason when the spin record and the paper describe
+different solutions (Eleonora, Nemesis and Thisbe), when the figure uses
+another layout, or when LAM refuses a file. Table A.1 prints Thisbe's pole past
+the pole, latitude 116°; the setup folds it to the direction its printed
+obliquity confirms before comparing.
+`--leave-out=<frame-id>,…` leaves named frames out of the selection; a frame
+the figure shows cannot be left out.
 
 ## Decide
 
 Look at `evidence/published-comparison.webp`. It shows each figure column's
 photograph with the outline of the paper's model in amber and ours in cyan. The
-lens ships when our outline follows the paper's at the same phase.
+lens ships when our outline follows the paper's at the same phase. The install
+checks this for every column: over a full turn in 10° steps, the best match to
+the paper's model must be at our phase, one step from it, or better by less
+than the same-shape loss, which happens on nearly round outlines. Otherwise it
+refuses and names the column.
 
 ![The weakest figure column of each body installed on 2026-09-18](sphere-survey-photographs.webp)
 
@@ -79,6 +90,26 @@ node tools/prepare-object.mts <id>
 ```bash
 node tools/objects/report-registration.mts <id> --write
 ```
+
+Install and prepare one body at a time: the text step checks every package,
+so a body installed but not yet prepared stops every other body's preparation.
+A body whose preparation fails must be reset before the next one runs.
+
+Preparation stops with "Observation level fit exceeds its authored gain
+budget" when a frame needs more than a 4× level adjustment against the first
+frame, which anchors the display. The error names each frame beyond the budget
+against the first frame or the median frame, so it shows whether the first
+frame is the odd one (Davida's is, and every other frame is named against it)
+or a few others are. Reset the package, then install again leaving out the
+fewest frames that bring the rest within the budget of the first remaining
+frame, never one the figure shows, with the measured reason:
+
+```bash
+node tools/objects/sphere-survey/install.mts <id> --leave-out=<frame-id>,… --because="<measured reason>"
+```
+
+The reason goes into the ledger decision, the `surface-imagery` entry and the
+README's known problems.
 
 Commit, then run `pnpm author:sources <id> --evidence <commit>` and commit again.
 Publish with `pnpm publish:runtime-assets --object=<id>` before merging.

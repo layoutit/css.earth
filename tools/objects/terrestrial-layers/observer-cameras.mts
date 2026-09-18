@@ -8,7 +8,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { decodeProfile, number, optional, shape, text } from './source-records.mts';
+import { array, decodeProfile, number, optional, shape, text } from './source-records.mts';
 import { readFitsHdu } from '../../fits.mts';
 import { parseTextKernel } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds } from '../../spice/lsk.mts';
@@ -23,7 +23,13 @@ export const OBSERVER_CAMERAS_FILE = 'preparation/observer-cameras.json';
 /** The shared leap-second kernel every IAU pole model is evaluated with. */
 export const LEAP_SECONDS_KERNEL = 'src/spice/cassini/lsk/naif0012.tls';
 
-const parseRotation = shape({ kind: text, path: text, columnOrder: optional(text), body: optional(number) });
+/**
+ * A spin record's column order is established against a published pole: the body's own, `reference/model-properties.json`,
+ * or, when that belongs to another solution (a DAMIT model beside a survey lens, say), the one the rotation states with
+ * the publication and table it comes from.
+ */
+const parsePublishedPole = shape({ source: text, table: text, eclipticJ2000Degrees: array(number) });
+const parseRotation = shape({ kind: text, path: text, columnOrder: optional(text), body: optional(number), publishedPole: optional(parsePublishedPole) });
 /**
  * The published comparison a ground-based lens ships on. The survey papers register a model by fitting shape, spin and a
  * per-image offset together and show the fit as a figure per epoch; they state no independent check. A lens whose cameras
@@ -44,8 +50,10 @@ export function parseObserverCameras(value: unknown): ObserverCamerasRecord {
   if (rotation.kind === 'spin-record') {
     if (rotation.columnOrder !== 'latitude-first' && rotation.columnOrder !== 'longitude-first') throw new TypeError('A spin record states its column order, latitude-first or longitude-first, established against a published pole.');
     if (rotation.body !== undefined) throw new TypeError('A spin record names no body code.');
+    const pole = rotation.publishedPole?.eclipticJ2000Degrees;
+    if (pole && (pole.length !== 2 || !(Math.abs(pole[1]) <= 90))) throw new TypeError('A stated published pole is an ecliptic longitude and a latitude within 90 degrees.');
   } else if (rotation.kind === 'iau-pck') {
-    if (!Number.isInteger(rotation.body) || rotation.columnOrder !== undefined) throw new TypeError('An IAU pole model names its NAIF body code and no column order.');
+    if (!Number.isInteger(rotation.body) || rotation.columnOrder !== undefined || rotation.publishedPole !== undefined) throw new TypeError('An IAU pole model names its NAIF body code and no column order.');
   } else throw new TypeError(`Unknown rotation model kind ${rotation.kind}.`);
   if (record.epoch !== 'exposure-midpoint') throw new TypeError('The exposure epoch rule is exposure-midpoint.');
   if (record.centre.method !== 'limb' || !(record.centre.edgeFraction > 0 && record.centre.edgeFraction < 1)) throw new TypeError('The centre rule is the limb at a stated fraction of the peak.');
@@ -62,8 +70,9 @@ export function parseObserverCameras(value: unknown): ObserverCamerasRecord {
 export async function loadOrientation(sourceDirectory: string, rotation: ObserverCamerasRecord['rotation'], repositoryRoot: string): Promise<BodyOrientation> {
   const source = await readFile(resolve(sourceDirectory, rotation.path), 'utf8');
   if (rotation.kind === 'spin-record') {
-    // The stated column order must be the one the body's published pole supports; nothing in the record says which it is.
-    const pole = await publishedPole(sourceDirectory);
+    // The stated column order must be the one the published pole supports; nothing in the record says which it is.
+    const stated = rotation.publishedPole?.eclipticJ2000Degrees;
+    const pole = stated ? { longitudeDegrees: stated[0], latitudeDegrees: stated[1] } : await publishedPole(sourceDirectory);
     if (pole) {
       const reading = spinRecordReading(source, pole);
       if (reading.order !== rotation.columnOrder) throw new TypeError(`${rotation.path} is stated ${rotation.columnOrder}, but the published pole reads it ${reading.order} (${reading.separationDegrees.toFixed(1)}° against ${reading.otherSeparationDegrees?.toFixed(1) ?? 'no other reading'}).`);

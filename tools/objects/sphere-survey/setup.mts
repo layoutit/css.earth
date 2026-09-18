@@ -28,7 +28,7 @@ import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
 import type { RadialSimplification } from '../terrestrial-layers/radial-meshoptimizer.mts';
 import { requireTerrainMesh, simplifyRadialShape } from '../terrestrial-layers/radial-terrain.mts';
-import { publishedPole, spinRecordReading } from '../terrestrial-layers/spin-record-reading.mts';
+import { spinRecordReading } from '../terrestrial-layers/spin-record-reading.mts';
 import { glyphTemplates, readLabel } from './figure-labels.mts';
 import { selectFrames } from './frames.mts';
 import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, parseFrameListing, shapeUrl, spinRecordName, type LamFrame } from './lam.mts';
@@ -36,7 +36,7 @@ import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, parseFrameListing,
 const ROOT = resolve(import.meta.dirname, '../../..');
 export const LENS_ID = 'zimpol';
 export const SETUP_SCHEMA = 'cssearth-sphere-survey-setup@1';
-const PAPER_PATH = 'reference/vernazza-2021.pdf', SPIN_RECORD_PATH = 'reference/release-parameters.txt';
+const PAPER_PATH = 'reference/vernazza-2021.pdf', SPIN_RECORD_PATH = 'reference/release-parameters.txt', ADAM_METERS_PER_UNIT = 1000;
 const HORIZONS = { observer: 'reference/horizons-sphere-observer.txt', heliocentric: 'reference/horizons-sphere-heliocentric.txt' } as const;
 /** The survey figures print every panel 240 pixels square, and each photograph panel two lines of text at its top: the frame's time and its phase. */
 const PANEL = 240, SURVEY_LABEL_LINES = 2;
@@ -53,7 +53,7 @@ export const SURVEY_LENS_SETTINGS = {
   display: { basis: 'authored', percentiles: [1, 99.5] },
 } as const;
 
-interface SurveyFigure { figure: string; number: number; name: string; page: number; object: number; width: number; height: number }
+interface SurveyFigure { figure: string; number: number; name: string; page: number; object: number; width: number; height: number; pole: [number, number] }
 const readJson = async (path: string) => JSON.parse(await readFile(path, 'utf8')) as unknown;
 const exists = (path: string) => access(path).then(() => true, () => false);
 const frameId = (frame: LamFrame) => `${LENS_ID}-${frame.second.slice(0, 10).replaceAll('-', '')}-${frame.second.slice(11).replaceAll(':', '')}`;
@@ -62,8 +62,11 @@ export async function surveyFigures() {
   const table = requireRecord(await readJson(resolve(import.meta.dirname, 'vernazza-2021-figures.json')));
   const paper = requireRecord(table.paper);
   return { paper: { source: requireString(paper.source), bytes: requireFiniteNumber(paper.bytes), sha256: requireString(paper.sha256) },
-    figures: requireArray(table.figures).map(value => { const f = requireRecord(value); return { figure: requireString(f.figure), number: requireFiniteNumber(f.number), name: requireString(f.name),
-      page: requireFiniteNumber(f.page), object: requireFiniteNumber(f.object), width: requireFiniteNumber(f.width), height: requireFiniteNumber(f.height) } satisfies SurveyFigure; }) };
+    figures: requireArray(table.figures).map(value => {
+      const f = requireRecord(value), pole = requireArray(f.pole).map(angle => requireFiniteNumber(angle));
+      if (pole.length !== 2) throw new TypeError(`Figure ${String(f.figure)} states no Table A.1 pole pair.`);
+      return { figure: requireString(f.figure), number: requireFiniteNumber(f.number), name: requireString(f.name),
+        page: requireFiniteNumber(f.page), object: requireFiniteNumber(f.object), width: requireFiniteNumber(f.width), height: requireFiniteNumber(f.height), pole: [pole[0], pole[1]] } satisfies SurveyFigure; }) };
 }
 
 /** A file already on this machine: the package's own copy, then the same path in any sibling checkout, checked by size and hash when a pin is known. */
@@ -108,7 +111,7 @@ function objCounts(text: string) {
   return { vertices, faces };
 }
 
-export async function buildSetup(objectId: string) {
+export async function buildSetup(objectId: string, options: { leaveOut?: readonly string[] } = {}) {
   const objectDirectory = resolve(ROOT, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
   const work = resolve(ROOT, 'output/sphere-survey', objectId), source = resolve(work, 'source'), downloads = resolve(work, 'downloads');
 
@@ -119,9 +122,15 @@ export async function buildSetup(objectId: string) {
   const figure = figures.find(entry => entry.number === number);
   if (!Number.isInteger(number) || !figure) throw new Error(`${objectId} (Horizons '${command}') is not a body of the survey's Appendix B.`);
 
-  // The pole the column order is decided by must be the survey's own.
+  // The pole the column order is decided by is the survey's own, as its Table A.1 prints it. A body whose published pole
+  // belongs to another solution, a DAMIT model say, carries the survey's in its lens record, beside the rotation it decides.
+  // The table prints Thisbe's past the pole, latitude 116°: the direction (λ + 180°, 180° − β), which the obliquity it
+  // prints confirms, so it is folded; a record describing another solution is still refused below.
+  const [printedLongitude, printedLatitude] = figure.pole;
+  const surveyPole = Math.abs(printedLatitude) <= 90 ? { longitudeDegrees: printedLongitude, latitudeDegrees: printedLatitude }
+    : { longitudeDegrees: (printedLongitude + 180) % 360, latitudeDegrees: Math.sign(printedLatitude) * 180 - printedLatitude };
   const properties = requireRecord(await readJson(resolve(packageSource, 'reference/model-properties.json')).catch(() => ({})));
-  if (properties.source !== paperPin.source) throw new Error(`${objectId}'s published pole comes from ${String(properties.source ?? 'no source')}, not the survey (${paperPin.source}); the survey's Table A.1 pole is needed to read its spin record.`);
+  const ownPole = properties.source === paperPin.source;
 
   // The figure and its column labels.
   const paper = await surveyPaper(objectId, paperPin);
@@ -139,7 +148,13 @@ export async function buildSetup(objectId: string) {
   // The released frames, the ones the figure shows, and the apparition the lens keeps.
   const listing = parseFrameListing(await lamText(framesUrl(number, figure.name)), framesUrl(number, figure.name)).filter(frame => frame.camera === 1);
   const shown = labels.map(({ label }) => listing.find(frame => frame.second === label) ?? null);
-  const selected = selectFrames(listing, shown.filter((frame): frame is LamFrame => frame !== null));
+  // Frames left out by name, each for a reason the install records; never one the figure shows.
+  const leaveOut = [...(options.leaveOut ?? [])];
+  for (const id of leaveOut) {
+    if (!listing.some(frame => frameId(frame) === id)) throw new Error(`${id} is not a released camera-1 frame of ${figure.name}.`);
+    if (shown.some(frame => frame !== null && frameId(frame) === id)) throw new Error(`Figure ${figure.figure} shows ${id}; a frame the comparison reads cannot be left out.`);
+  }
+  const selected = selectFrames(listing.filter(frame => !leaveOut.includes(frameId(frame))), shown.filter((frame): frame is LamFrame => frame !== null));
   const columns = labels.map(({ label, band }, index) => ({ label, frame: shown[index] && selected.includes(shown[index]) ? frameId(shown[index]) : null, band }));
   if (!columns.some(column => column.frame)) throw new Error(`None of Figure ${figure.figure}'s columns shows a released camera-1 frame.`);
 
@@ -162,17 +177,23 @@ export async function buildSetup(objectId: string) {
     await put(path, bytes);
     frames.push({ frame, id: frameId(frame), path, bytes, exposure: zimpolExposure(readFitsHdu(bytes).header) });
   }
-  const adamPath = `shape/${number}_${figure.name}_adam.obj`, adam = await fetchOnce(objectId, adamPath, shapeUrl(number, figure.name, 'adam'), downloads);
-  await put(adamPath, adam);
-  const spinRecordUrl = `${LAM}/3Dshape/${spinRecordName(await lamText(`${LAM}/3Dshape/`), number, figure.name)}`;
-  const spinRecord = await exists(resolve(packageSource, SPIN_RECORD_PATH)) ? await readFile(resolve(packageSource, SPIN_RECORD_PATH)) : await fetchOnce(objectId, SPIN_RECORD_PATH, spinRecordUrl, downloads);
-  await put(SPIN_RECORD_PATH, spinRecord);
+  // A release without an ADAM mesh for the body leaves the lens on the primary mesh, the release's MPCD: Themis's
+  // 3Dshape directory answers 404 for it.
+  const adamPath = `shape/${number}_${figure.name}_adam.obj`;
+  const adam = await fetchOnce(objectId, adamPath, shapeUrl(number, figure.name, 'adam'), downloads).catch((error: unknown) => {
+    if (error instanceof Error && error.message.startsWith('LAM answered 404 ')) return null;
+    throw error;
+  });
+  if (adam) await put(adamPath, adam);
+  const recordName = spinRecordName(await lamText(`${LAM}/3Dshape/`), number, figure.name), spinRecordUrl = `${LAM}/3Dshape/${recordName}`;
+  // A package that already keeps the release's record under its archive name reads that copy rather than adding a second.
+  const spinRecordPath = await exists(resolve(packageSource, `reference/${recordName}`)) ? `reference/${recordName}` : SPIN_RECORD_PATH;
+  const spinRecord = await exists(resolve(packageSource, spinRecordPath)) ? await readFile(resolve(packageSource, spinRecordPath)) : await fetchOnce(objectId, spinRecordPath, spinRecordUrl, downloads);
+  await put(spinRecordPath, spinRecord);
   if (!await exists(resolve(packageSource, PAPER_PATH))) await put(PAPER_PATH, paper);
 
-  // The column order the published pole supports.
-  const pole = await publishedPole(source);
-  if (!pole) throw new Error(`${objectId} states no published pole.`);
-  const reading = spinRecordReading(spinRecord.toString('utf8'), pole);
+  // The column order the survey's pole supports.
+  const reading = spinRecordReading(spinRecord.toString('utf8'), surveyPole);
 
   // Both Horizons tables for exactly these exposures, kept with the downloads so a rerun asks Horizons once.
   const cachedTables = resolve(downloads, 'horizons.json'), starts = frames.map(entry => entry.exposure.startJd);
@@ -184,7 +205,8 @@ export async function buildSetup(objectId: string) {
   await put(HORIZONS.observer, tables.observer); await put(HORIZONS.heliocentric, tables.heliocentric);
 
   // The records: the observer cameras, the figure, the ADAM mesh as the lens's model, and the lens itself.
-  const record = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: LENS_ID, rotation: { kind: 'spin-record', path: SPIN_RECORD_PATH, columnOrder: reading.order },
+  const record = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: LENS_ID, rotation: { kind: 'spin-record', path: spinRecordPath, columnOrder: reading.order,
+    ...(ownPole ? {} : { publishedPole: { source: paperPin.source, table: 'Table A.1', eclipticJ2000Degrees: [surveyPole.longitudeDegrees, surveyPole.latitudeDegrees] } }) },
     ephemeris: HORIZONS, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
   await put(OBSERVER_CAMERAS_FILE, JSON.stringify(record, null, 2) + '\n');
   const manifest = requireRecord(await readJson(resolve(source, 'manifest.json')));
@@ -193,10 +215,15 @@ export async function buildSetup(objectId: string) {
     document: { input: paperInput ? requireString(paperInput.id) : `${objectId}-survey-research`, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
     rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
-  const counts = objCounts(adam.toString('utf8')), primary = requireRecord(geometry.radialTerrain);
-  const alternative = { lensId: LENS_ID, ...primary, path: adamPath, grid: { ...requireRecord(primary.grid), expectedVertices: counts.vertices, expectedFaces: counts.faces },
-    ...(primary.simplification === undefined ? {} : { simplification: await adamSimplification(requireRecord(primary.simplification), resolve(source, adamPath), requireRecord(primary.grid), counts, Number(primary.faceBudget), Number(geometry.radius) / (Number(geometry.radiusKm) * 1000)) }) };
-  requireArray(geometry.radialTerrainAlternatives).push(alternative);
+  if (adam) {
+    const counts = objCounts(adam.toString('utf8')), primary = requireRecord(geometry.radialTerrain);
+    // The release's ADAM meshes are Wavefront OBJ files in kilometres, whatever format the primary mesh came in (a DAMIT
+    // plate model, say); the rest of the primary's settings carry over.
+    const adamGrid = { metersPerUnit: ADAM_METERS_PER_UNIT, expectedVertices: counts.vertices, expectedFaces: counts.faces };
+    const alternative = { lensId: LENS_ID, ...primary, path: adamPath, format: 'wavefront-obj', grid: adamGrid,
+      ...(primary.simplification === undefined ? {} : { simplification: await adamSimplification(requireRecord(primary.simplification), resolve(source, adamPath), adamGrid, counts, Number(primary.faceBudget), Number(geometry.radius) / (Number(geometry.radiusKm) * 1000)) }) };
+    requireArray(geometry.radialTerrainAlternatives).push(alternative);
+  }
   const mesh = await loadCameraShape(source, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], LENS_ID));
   const cameras = await deriveObserverCameras(source, parseObserverCameras(record), frames, mesh, ROOT);
   const nights = [...new Set(frames.map(entry => entry.frame.second.slice(0, 10)))];
@@ -213,11 +240,13 @@ export async function buildSetup(objectId: string) {
   const pin = (bytes: Buffer | string) => { const data = Buffer.from(bytes); return { expectedBytes: data.length, expectedSha256: sha256(data) }; };
   const setInput = (entry: Record<string, unknown>) => { const at = inputs.findIndex(input => input.path === entry.path); if (at >= 0) inputs[at] = { ...inputs[at], ...entry }; else inputs.push(entry); };
   for (const entry of frames) setInput(frameInput(objectId, entry.frame, entry.bytes));
-  setInput(adamInput(objectId, number, figure.name, adamPath, adam));
+  if (adam) setInput(adamInput(objectId, number, figure.name, adamPath, adam));
   setInput({ ...tableInput(objectId, 'observer', HORIZONS.observer, Buffer.from(tables.observer)) });
   setInput({ ...tableInput(objectId, 'heliocentric', HORIZONS.heliocentric, Buffer.from(tables.heliocentric)) });
   if (!paperInput) setInput(paperInputFor(objectId, paper));
-  for (const path of [OBSERVER_CAMERAS_FILE, COMPARISON_SPEC_FILE, SPIN_RECORD_PATH, 'preparation/terrestrial.json']) {
+  for (const path of [OBSERVER_CAMERAS_FILE, COMPARISON_SPEC_FILE, spinRecordPath, 'preparation/terrestrial.json']) {
+    // A record the package already pins as a downloaded input stays an input; a manifest names each path once.
+    if (inputs.some(input => input.path === path)) continue;
     const bytes = await readFile(resolve(source, path)), at = documents.findIndex(document => document.path === path);
     if (at >= 0) documents[at] = { ...documents[at], ...pin(bytes) }; else documents.push({ path, ...pin(bytes) });
   }
@@ -228,11 +257,18 @@ export async function buildSetup(objectId: string) {
   const result = await measurePublishedComparison(objectId, { sourceDirectory: source });
   await writeComparisonEvidence(result, resolve(work, 'evidence'));
   const setup = { schema: SETUP_SCHEMA, objectId, survey: { number, name: figure.name, figure: figure.figure, command }, lensId: LENS_ID,
-    listing: framesUrl(number, figure.name), spinRecordUrl, apparition: { nights, frames: frames.length, released: listing.length },
+    listing: framesUrl(number, figure.name), spinRecordUrl, apparition: { nights, frames: frames.length, released: listing.length }, leftOut: leaveOut, lensMesh: adam ? 'adam' : 'primary',
     labels: columns, columnOrder: { order: reading.order, separationDegrees: Number(reading.separationDegrees.toFixed(2)), otherSeparationDegrees: reading.otherSeparationDegrees === null ? null : Number(reading.otherSeparationDegrees.toFixed(2)) },
     written: written.sort(), earlierLens: earlierLens ? compareEarlierLens(earlierLens, lens) : null, evidence: result.evidence };
   await writeFile(resolve(work, 'setup.json'), JSON.stringify(setup, null, 2) + '\n');
   return setup;
+}
+
+/** Frame ids from a `--leave-out=a,b` argument, an empty list without one, or null for any other argument. */
+export function leaveOutArgument(args: readonly string[]): string[] | null {
+  const flag = '--leave-out=';
+  if (args.some(arg => !arg.startsWith(flag)) || args.length > 1) return null;
+  return args.length ? args[0].slice(flag.length).split(',').filter(id => id.length > 0) : [];
 }
 
 /**
@@ -297,13 +333,15 @@ function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
     ...setup.labels.map(column => `  column ${column.label}${column.band ? ` (band ${column.band})` : ''}: ${column.frame ?? 'no lens frame'}`)];
   for (const column of setup.evidence.columns) lines.push(`  ${column.label}  model ${column.overlapWithModel}, photograph ${column.overlapWithPhotograph}, same shape ${column.sameShapeOverlap}; best turn ${column.bestTurnDegrees}°; axis ${column.axis.oursDegrees}° against ${column.axis.paperDegrees}°`);
   lines.push(`  native outline ${setup.evidence.nativeOutline.residualPixelsAtZero} px over ${setup.evidence.nativeOutline.frames} frames, smallest at ${setup.evidence.nativeOutline.bestOffsetDegrees}°`);
+  if (setup.leftOut.length) lines.push(`  left out by name: ${setup.leftOut.join(', ')}`);
+  if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
   if (setup.earlierLens) lines.push(`  the package's lens: ${setup.earlierLens.frames} frames, ${setup.earlierLens.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierLens.camerasDiffering.length ? setup.earlierLens.camerasDiffering.join(', ') : 'none'}`);
   lines.push(`Evidence: ${relative(ROOT, resolve(ROOT, 'output/sphere-survey', setup.objectId, 'evidence/published-comparison.webp'))}`);
   return lines.join('\n');
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [objectId, ...rest] = process.argv.slice(2);
-  if (!objectId || rest.length) { console.error('usage: node tools/objects/sphere-survey/setup.mts <object-id>'); process.exit(2); }
-  console.log(summary(await buildSetup(objectId)));
+  const [objectId, ...rest] = process.argv.slice(2), leaveOut = leaveOutArgument(rest);
+  if (!objectId || leaveOut === null) { console.error('usage: node tools/objects/sphere-survey/setup.mts <object-id> [--leave-out=<frame-id>,…]'); process.exit(2); }
+  console.log(summary(await buildSetup(objectId, { leaveOut })));
 }

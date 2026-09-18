@@ -44,6 +44,12 @@ test('the record refuses a rotation model it cannot evaluate', () => {
   assert.throws(() => parseObserverCameras({ ...base, rotation: { kind: 'iau-pck', path: 'p' } }), /body code/);
   assert.throws(() => parseObserverCameras({ ...base, rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first' }, epoch: 'exposure-start' }), /exposure-midpoint/);
   assert.throws(() => parseObserverCameras({ ...base, schema: 'other', rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first' } }), /schema/);
+  // A spin record may state the published pole its column order was established against, with where it is printed.
+  const pole = { source: 'https://doi.org/10.1051/0004-6361/202141781', table: 'Table A.1', eclipticJ2000Degrees: [294, 51] };
+  assert.deepEqual(parseObserverCameras({ ...base, rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first', publishedPole: pole } }).rotation.publishedPole, pole);
+  assert.throws(() => parseObserverCameras({ ...base, rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first', publishedPole: { ...pole, eclipticJ2000Degrees: [350, 116] } } }), /latitude within 90/);
+  assert.throws(() => parseObserverCameras({ ...base, rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first', publishedPole: { ...pole, table: undefined } } }));
+  assert.throws(() => parseObserverCameras({ ...base, rotation: { kind: 'iau-pck', path: 'p', body: 2000004, publishedPole: pole } }), /body code/);
 });
 
 test('a published comparison names only the ledger entry that decides it', () => {

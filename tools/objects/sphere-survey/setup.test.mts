@@ -5,7 +5,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '../surface-observations/published-comparison.mts';
 import { latitudeSpan, nightsText, noticeWithLens, readmeWithLens, withAnchoredLens } from './install.mts';
-import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, surveyFigures } from './setup.mts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, leaveOutArgument, surveyFigures } from './setup.mts';
+import { horizonsCommand } from '../sphere-horizons.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
 const json = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
@@ -30,6 +31,37 @@ test('the survey figure table names each Appendix B figure once, in the paper ev
   assert.equal(new Set(figures.map(figure => figure.object)).size, 42);
   const pinned = (json(resolve(OBJECTS, 'iris/source/manifest.json')).inputs as { path: string; expectedBytes: number; expectedSha256: string }[]).find(input => input.path === 'reference/vernazza-2021.pdf');
   assert.deepEqual([pinned?.expectedBytes, pinned?.expectedSha256], [paper.bytes, paper.sha256]);
+});
+
+test('the table\'s Table A.1 poles are the ones every survey-sourced package states, and each lens record that states one', async () => {
+  // Two readings of one printed table: the survey table's poles and the retained extracts packages made from Table 1
+  // and Table A.1. Every pole must agree to the digit; a latitude the table prints outside ±90° is kept as printed.
+  const { paper, figures } = await surveyFigures(), byNumber = new Map(figures.map(figure => [figure.number, figure]));
+  let compared = 0;
+  for (const id of readdirSync(OBJECTS)) {
+    const properties = resolve(OBJECTS, id, 'source/reference/model-properties.json'), body = resolve(ROOT, 'packages/astronomy/data/bodies', `${id}.json`);
+    if (!existsSync(properties) || !existsSync(body) || json(properties).source !== paper.source) continue;
+    const figure = byNumber.get(Number(horizonsCommand(json(body)).replace(/;$/u, '')));
+    if (!figure) continue;
+    assert.deepEqual(json(properties).poleEclipticJ2000Degrees, figure.pole, `${id}: Table A.1 pole`);
+    compared++;
+  }
+  assert.ok(compared >= 25, `${compared} survey-sourced poles compared`);
+  for (const id of readdirSync(OBJECTS)) {
+    const record = resolve(OBJECTS, id, 'source/preparation/observer-cameras.json');
+    if (!existsSync(record) || json(record).rotation.publishedPole === undefined) continue;
+    const stated = json(record).rotation.publishedPole, figure = byNumber.get(Number(horizonsCommand(json(resolve(ROOT, 'packages/astronomy/data/bodies', `${id}.json`))).replace(/;$/u, '')));
+    assert.deepEqual([stated.source, stated.table, stated.eclipticJ2000Degrees], [paper.source, 'Table A.1', figure?.pole], `${id}: the lens record's pole is Table A.1's`);
+  }
+  assert.deepEqual(figures.find(figure => figure.name === 'Thisbe')?.pole, [350, 116], 'a pole printed past the pole is kept as printed; the setup folds it');
+});
+
+test('frames are left out only by a comma-separated list of ids', () => {
+  assert.deepEqual(leaveOutArgument([]), []);
+  assert.deepEqual(leaveOutArgument(['--leave-out=zimpol-20190803-042450']), ['zimpol-20190803-042450']);
+  assert.deepEqual(leaveOutArgument(['--leave-out=a,b']), ['a', 'b']);
+  assert.equal(leaveOutArgument(['--other']), null);
+  assert.equal(leaveOutArgument(['--leave-out=a', '--leave-out=b']), null);
 });
 
 test('every shipped comparison\'s README section is its evidence, read', () => {

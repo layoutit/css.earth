@@ -220,8 +220,26 @@ export const COMPARISON_BLOCK_END = '<!-- published-comparison:end -->';
 
 export interface ComparisonEvidence {
   figure: string; source: string;
-  columns: { label: string; overlapWithModel: number; overlapWithPhotograph: number; sameShapeOverlap: number; bestTurnDegrees: number; imageTurnDegrees: { model: number; photograph: number }; axis: { paperDegrees: number | null; oursDegrees: number | null } }[];
+  columns: { label: string; overlapWithModel: number; overlapWithPhotograph: number; sameShapeOverlap: number; bestTurnDegrees: number; turns: Record<string, number>; imageTurnDegrees: { model: number; photograph: number }; axis: { paperDegrees: number | null; oursDegrees: number | null } }[];
   nativeOutline: { frames: number; residualPixelsAtZero: number; residualPixels: Record<string, number> };
+}
+
+/** The rotational phase step of the sweep that compares our outline with each of the paper's model panels. */
+export const PHASE_SWEEP_STEP_DEGREES = 10;
+
+/**
+ * Where a column's phase sweep puts the best overlap with the paper's model, against our own phase: at it, one sweep
+ * step from it, or elsewhere by less than the measure resolves, which a nearly round outline does. The measure's
+ * resolution is what one outline loses against itself drawn at the paper's pixel size. Anything else means our
+ * rotation and the paper's differ in that column.
+ */
+export type PhaseAgreement = 'at' | 'step' | 'unresolved' | 'elsewhere';
+export function phaseAgreement(column: ComparisonEvidence['columns'][number]): PhaseAgreement {
+  if (column.bestTurnDegrees === 0) return 'at';
+  if (Math.abs(column.bestTurnDegrees) <= PHASE_SWEEP_STEP_DEGREES) return 'step';
+  const ours = column.turns['0'];
+  if (ours === undefined) throw new TypeError(`Column ${column.label} has no sweep score at our phase.`);
+  return Math.max(...Object.values(column.turns)) - ours < 1 - column.sameShapeOverlap ? 'unresolved' : 'elsewhere';
 }
 
 /** The evidence a README block is written from, validated. */
@@ -235,7 +253,9 @@ export function parseComparisonEvidence(value: unknown): ComparisonEvidence {
       const column = requireRecord(value, `column ${index}`), axis = requireRecord(column.axis, `column ${index} axis`), image = requireRecord(column.imageTurnDegrees, `column ${index} image turn`);
       return { label: requireString(column.label, 'label'), overlapWithModel: requireFiniteNumber(column.overlapWithModel, 'model overlap'),
         overlapWithPhotograph: requireFiniteNumber(column.overlapWithPhotograph, 'photograph overlap'), sameShapeOverlap: requireFiniteNumber(column.sameShapeOverlap, 'same-shape overlap'),
-        bestTurnDegrees: requireFiniteNumber(column.bestTurnDegrees, 'best turn'), imageTurnDegrees: { model: requireFiniteNumber(image.model, 'image turn onto the model'), photograph: requireFiniteNumber(image.photograph, 'image turn onto the photograph') },
+        bestTurnDegrees: requireFiniteNumber(column.bestTurnDegrees, 'best turn'),
+        turns: Object.fromEntries(Object.entries(requireRecord(column.turns, `column ${index} phase sweep`)).map(([turn, overlap]) => [turn, requireFiniteNumber(overlap, `column ${index} overlap at ${turn}°`)])),
+        imageTurnDegrees: { model: requireFiniteNumber(image.model, 'image turn onto the model'), photograph: requireFiniteNumber(image.photograph, 'image turn onto the photograph') },
         axis: { paperDegrees: angle(axis.paperDegrees, 'paper axis'), oursDegrees: angle(axis.oursDegrees, 'our axis') } };
     }),
     nativeOutline: { frames: requireFiniteNumber(native.frames, 'frames'), residualPixelsAtZero: requireFiniteNumber(native.residualPixelsAtZero, 'residual'),
