@@ -50,9 +50,30 @@ export const PRODUCTS = Object.freeze({
 export const PIXEL_SCALE_MAS = 3.6;
 /** One unit is one stellar radius. Six radii each way holds the 2024 patches and the 2019 clump, in twenty-four half-radius slabs. */
 export const GRID = Object.freeze({ size: 96, halfUnits: 6, slabs: 24 });
-/** Polarisation stretch: the median degree beyond eight radii is instrumental floor; five percent is the top of the measured patches. */
-export const STRETCH = Object.freeze({ backgroundAnnulusUnits: [8, 12] as const, topDegree: 0.05, intensityFloorOfPeak: 3e-3,
+/** Polarisation stretch: the median degree beyond eight radii is instrumental floor, and the top is the top of the
+ * published colourbar, so this volume carries the same transfer function as the figure it reproduces. */
+export const STRETCH = Object.freeze({ backgroundAnnulusUnits: [8, 12] as const, topDegree: 0.10, intensityFloorOfPeak: 3e-3,
   innerMaskUnits: 1, taperFromUnits: 4.5 });
+/** The figure's own colour map, sampled at the quarters of its bar: matplotlib `inferno`, which Montargès et al. 2026
+ * print the V-band degree of linear polarisation in (Fig. B.1). Four stops are all an RGBA8 grid can carry, and four is
+ * enough: the slab compiler sums the channels' emission, so tent weights over these stops interpolate the bar linearly
+ * and zero leaves black. The stops are the published map's, not chosen here. */
+export const COLOUR_MAP = Object.freeze({
+  name: 'inferno',
+  stops: Object.freeze([
+    Object.freeze([0.258, 0.039, 0.406] as const), // inferno(0.25) #420a68
+    Object.freeze([0.578, 0.148, 0.404] as const), // inferno(0.50) #932667
+    Object.freeze([0.865, 0.317, 0.226] as const), // inferno(0.75) #dd513a
+    Object.freeze([0.988, 0.998, 0.645] as const), // inferno(1.00) #fcffa4
+  ]),
+  /** The alpha the top of the bar reaches once the renderer's 1-exp(-gain*column) transfer is applied. */
+  topAlpha: 0.9,
+});
+/** Tent weights over the four stops. Their sum interpolates the bar, and below the first stop it fades to black. */
+export function colourMapWeights(value: number): readonly [number, number, number, number] {
+  const p = Math.max(0, Math.min(1, value)) * COLOUR_MAP.stops.length;
+  return [0, 1, 2, 3].map(k => Math.max(0, 1 - Math.abs(p - (k + 1)))) as unknown as readonly [number, number, number, number];
+}
 /** Montargès et al. 2021, Extended Data Table 3, December 2019: the optimised epoch. January and March 2020 are recorded
  * there as unoptimised best guesses and are not shipped. Coordinates are theirs, in astronomical units. */
 export const VEIL_2019_12 = Object.freeze({ centreRaDecEarthAu: [-1.9, -3.0, 12.5] as const, radiusAu: 6.5,
@@ -78,21 +99,21 @@ async function pinnedFits(product: { path: string; sha256: string; bytes: number
   return readFitsImage(bytes);
 }
 
-/** Encode one scalar field as the RGBA8 grid the slab baker reads; its own channel transfer squares the byte back. */
-function encodeGrid(sample: (x: number, y: number, z: number) => number | readonly [number, number]) {
+/** Encode a field as the RGBA8 grid the slab baker reads; its own channel transfer squares the byte back. */
+function encodeGrid(sample: (x: number, y: number, z: number) => number | readonly number[]) {
   const { size, halfUnits } = GRID, step = 2 * halfUnits / size, rgba = new Uint8Array(size ** 3 * 4);
   const byte = (value: number) => Math.round(255 * Math.sqrt(Math.max(0, Math.min(1, value))));
   let peak = 0, filled = 0;
   for (let k = 0; k < size; k++) for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     const value = sample(-halfUnits + (i + 0.5) * step, -halfUnits + (j + 0.5) * step, -halfUnits + (k + 0.5) * step);
-    // One field fills the first three channels; a pair puts extinction in the first channel and the light it
-    // scatters in the second, which is how the slab compiler reads absorption and emission separately.
-    const [first, second] = typeof value === 'number' ? [value, value] : value;
-    if (!(first > 0) && !(second > 0)) continue;
-    peak = Math.max(peak, first, second); filled++;
+    // A scalar fills the first three channels. A pair puts extinction in the first channel and the light it scatters in
+    // the second, which is how the slab compiler reads absorption and emission separately. Four are four emission
+    // channels, one per stop of a colour map.
+    const channels = typeof value === 'number' ? [value, value, value, 0] : value;
+    if (!channels.some(channel => channel > 0)) continue;
+    peak = Math.max(peak, ...channels); filled++;
     const o = 4 * ((k * size + j) * size + i);
-    if (typeof value === 'number') { rgba[o] = rgba[o + 1] = rgba[o + 2] = byte(first); }
-    else { rgba[o] = byte(first); rgba[o + 1] = byte(second); }
+    for (const [c, channel] of channels.entries()) rgba[o + c] = byte(channel);
   }
   return { rgba, ktx2: encodeDensityKtx2({ width: size, height: size, depth: size, encodedRgba: rgba }, 9), peak, filled };
 }
@@ -155,12 +176,20 @@ export async function author(defaultLens = 'zimpol-v') {
     for (let k = 0; k < size; k++) { const z = -halfUnits + (k + 0.5) * step; sum += r2 / (r2 + 2 * z * z) * step; }
     norm[j * size + i] = sum;
   }
+  // Each voxel carries the four colour-map weights of its sky value, shaped along the line of sight by the same
+  // normalised Rayleigh profile. The ray integral of channel k is therefore the weight itself, so a column reproduces
+  // the figure's colour at its own measured degree, and every channel shares one profile, which keeps the composite's
+  // chromaticity constant along a column instead of only approximately so.
   const zimpol = encodeGrid((x, y, z) => {
     const i = Math.round((x + halfUnits) / step - 0.5), j = Math.round((y + halfUnits) / step - 0.5);
     const value = plane[j * size + i] ?? 0; if (!(value > 0)) return 0;
-    const r2 = x * x + y * y;
-    return value * (r2 / (r2 + 2 * z * z)) / norm[j * size + i]!;
+    const r2 = x * x + y * y, profile = (r2 / (r2 + 2 * z * z)) / norm[j * size + i]!;
+    return colourMapWeights(value).map(weight => weight * profile);
   });
+  // The renderer turns a column into 1-exp(-gain * column) and takes its chromaticity from the same sum, so the gain is
+  // fixed by one requirement: the top of the published bar reaches the stated alpha. Its column there is the brightest
+  // channel of the last stop.
+  const zimpolGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...COLOUR_MAP.stops.at(-1)!);
 
   // --- the published lens: the December 2019 RADMC-3D clump, drawn as scattered starlight ---
   // Their axes are x along right ascension (east), y along declination (north), z positive toward Earth. This grid's are
@@ -213,15 +242,19 @@ export async function author(defaultLens = 'zimpol-v') {
     ],
     paper: { doi: '10.1051/0004-6361/202661023', citation: 'Montargès et al. 2026, A&A 711, L12 (the 2024 polarimetry)' },
     measured: { starCentrePixel: [cx, cy], intensityPeak: peakValue, polarisationFloor: background, pixelsPerStellarRadius: pixelsPerUnit,
+      colourMap: COLOUR_MAP.name, colourScaleTopDegree: STRETCH.topDegree, zimpolExposureGain: zimpolGain,
       stellarRadiusArcsec: radiusArcsec, stellarRadiusAu: auPerUnit, sceneOriginRaDecDeg: [raDeg, decDeg], distancePc: distanceM / METERS_PER_PARSEC,
       veilCentreUnits: [...centre], veilRadiusUnits: veilRadius },
     models: {
-      'zimpol-v': 'Sky-plane slab. The degree map, floor-subtracted and stretched to five percent, sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.',
+      'zimpol-v': `Sky-plane slab, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to ${STRETCH.topDegree.toFixed(2)}. It sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. Colour is matplotlib ${COLOUR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
       'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
     },
     limitations: [
       'The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.',
       'The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.',
+      `The 2024 colours are the publisher's ${COLOUR_MAP.name} colour map for that ratio, on the same zero-to-${STRETCH.topDegree.toFixed(2)} scale as their figure. They are a legend, not the colour of the dust and not a temperature.`,
+      `Brightness follows the renderer's 1-exp(-gain*column) transfer rather than the flat bar of a printed figure, so mid-scale values sit brighter than a linear colourbar would put them; the hue at every value is the published one.`,
+      'Four colour stops are the most an RGBA8 grid can carry, so the bar is interpolated between quarters rather than sampled continuously.',
       'Structure finer than the 16 mas beam, three quarters of a stellar radius, is not in the 2024 data.',
       'The 2019 clump is a model fitted to images, not an image. Its January and March 2020 epochs are recorded by its own authors as unoptimised best guesses and are not shipped.',
       'Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.',
@@ -238,7 +271,11 @@ export async function author(defaultLens = 'zimpol-v') {
   const grids = [
     { id: 'zimpol-v', label: 'SPHERE/ZIMPOL · polarised dust, 2024', file: 'density-zimpol-v.ktx2', built: zimpol,
       sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
-      material: { emission: [{ channel: 0, color: [1, 1, 1], strength: 1 }], absorption: [], emissionTransfer: 'shared-opacity', exposureGain: 4 } },
+      // Four emission channels, one per stop of the figure's colour map. The compiler sums them, so a column emits the
+      // interpolated bar colour at its own degree; shared opacity keeps that chromaticity exactly and turns the summed
+      // column into the alpha. This is the published false-colour map rendered in depth, not a colour of the dust.
+      material: { emission: COLOUR_MAP.stops.map((color, channel) => ({ channel, color: [...color], strength: 1 })),
+        absorption: [], emissionTransfer: 'shared-opacity', exposureGain: zimpolGain } },
     { id: 'veil-2019-12', label: 'Great Dimming clump · December 2019', file: 'density-veil-2019-12.ktx2', built: veil,
       sourceUrl: 'https://arxiv.org/abs/2201.10551', occultingCentreUnits: [...centre] as [number, number, number],
       // Grey extinction from the uniform published density, and the warm light it scatters from the second channel.
@@ -281,6 +318,7 @@ export async function author(defaultLens = 'zimpol-v') {
     ? [{ id: 'instrument', label: 'Instrument', value: 'VLT/SPHERE-ZIMPOL, V band, 3 December 2024' },
        { id: 'resolution', label: 'Angular resolution', value: '16 mas, 0.76 stellar radii' },
        { id: 'extent', label: 'Drawn extent', value: '1 to 4.5 stellar radii, tapering to 6' },
+       { id: 'scale', label: 'Colour scale', value: `Degree of linear polarisation 0 to ${STRETCH.topDegree.toFixed(2)}, the paper's ${COLOUR_MAP.name} map` },
        { id: 'depth', label: 'Depth', value: 'Not measured; a plane-of-sky slab spread by scattering angle' }]
     : [{ id: 'model', label: 'Model', value: 'RADMC-3D sphere of constant density, Montarg\u00e8s et al. 2021, Extended Data Table 3' },
        { id: 'geometry', label: 'Centre and radius', value: '(\u22121.9, \u22123.0, +12.5) au along right ascension, declination and toward Earth; radius 6.5 au' },
@@ -297,7 +335,7 @@ export async function author(defaultLens = 'zimpol-v') {
     lenses: grids.map(grid => ({
       id: grid.id, label: grid.label, title: grid.id === 'zimpol-v' ? 'Polarised dust around Betelgeuse in 2024' : 'The dust clump of the Great Dimming',
       description: grid.id === 'zimpol-v'
-        ? 'The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.'
+        ? `The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-${STRETCH.topDegree.toFixed(2)} scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.`
         : 'The dust clump Montarg\u00e8s et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.',
       summary: grid.id === 'zimpol-v' ? 'Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.' : 'The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.',
       detail: grid.id === 'zimpol-v' ? '1024 \u00d7 1024 px at 3.6 mas' : 'Sphere of 6.5 au at 13.0 au',

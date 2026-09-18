@@ -5,20 +5,20 @@
   "defaultLens": "zimpol-v",
   "bank": {
     "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "bd491c7332b15c51477042b1b2fcdb013c61be57728f322e4a0646a83aafb07d",
-    "bytes": 164164
+    "sha256": "a2ae3067888d1c5f9107230fa36ac41814df7b7104a01f30bc18644b7e0e2600",
+    "bytes": 165343
   },
   "recipes": [
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33",
-      "bytes": 1387
+      "sha256": "8427dcd02628066e73c6bbddb3e71e820d6fb692c57bfb26b669fe934ed9c3ef",
+      "bytes": 1838
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4",
+      "sha256": "86d3338c3f5b93a4a14350131ec41077a5bcff590bc41dc695f9b2fe6bc9f327",
       "bytes": 1523
     }
   ],
@@ -29,7 +29,7 @@
       "id": "zimpol-v",
       "label": "SPHERE/ZIMPOL · polarised dust, 2024",
       "title": "Polarised dust around Betelgeuse in 2024",
-      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-0.10 scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
       "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.",
       "detail": "1024 × 1024 px at 3.6 mas",
       "facts": [
@@ -47,6 +47,11 @@
           "id": "extent",
           "label": "Drawn extent",
           "value": "1 to 4.5 stellar radii, tapering to 6"
+        },
+        {
+          "id": "scale",
+          "label": "Colour scale",
+          "value": "Degree of linear polarisation 0 to 0.10, the paper's inferno map"
         },
         {
           "id": "depth",

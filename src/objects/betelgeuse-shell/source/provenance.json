@@ -60,6 +60,9 @@
     "intensityPeak": 244980.17392728516,
     "polarisationFloor": 0.005475879376362386,
     "pixelsPerStellarRadius": 5.874577295655155,
+    "colourMap": "inferno",
+    "colourScaleTopDegree": 0.1,
+    "zimpolExposureGain": 2.307199491978002,
     "stellarRadiusArcsec": 0.021148478264358558,
     "stellarRadiusAu": 3.5529569873750884,
     "sceneOriginRaDecDeg": [
@@ -75,12 +78,15 @@
     "veilRadiusUnits": 1.8294620574064917
   },
   "models": {
-    "zimpol-v": "Sky-plane slab. The degree map, floor-subtracted and stretched to five percent, sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+    "zimpol-v": "Sky-plane slab, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. It sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
     "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
   },
   "limitations": [
     "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
     "The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.",
+    "The 2024 colours are the publisher's inferno colour map for that ratio, on the same zero-to-0.10 scale as their figure. They are a legend, not the colour of the dust and not a temperature.",
+    "Brightness follows the renderer's 1-exp(-gain*column) transfer rather than the flat bar of a printed figure, so mid-scale values sit brighter than a linear colourbar would put them; the hue at every value is the published one.",
+    "Four colour stops are the most an RGBA8 grid can carry, so the bar is interpolated between quarters rather than sampled continuously.",
     "Structure finer than the 16 mas beam, three quarters of a stellar radius, is not in the 2024 data.",
     "The 2019 clump is a model fitted to images, not an image. Its January and March 2020 epochs are recorded by its own authors as unoptimised best guesses and are not shipped.",
     "Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.",

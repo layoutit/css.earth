@@ -20,6 +20,22 @@
       ]
     },
     {
+      "id": "polarisation-colour-map",
+      "subject": "How to colour a map of a dimensionless ratio in a volume",
+      "status": "included",
+      "finding": "The first draft drew the degree of linear polarisation as white light on a zero-to-0.05 stretch, which read as a featureless pale smudge and threw away the structure the publishers show. The decision is to carry their own transfer function instead: matplotlib inferno on the zero-to-0.10 scale of the colourbar in Montarges et al. 2026 Fig. B.1, so the dataset is that figure given depth rather than an impression of it. Four stops of the bar, sampled at its quarters, are carried as four emission channels with the stop colours; the slab compiler sums emission along a ray, so tent weights over those stops interpolate the bar and a column emits the bar colour of its own measured degree. Every channel shares one depth profile, so a column's chromaticity does not vary along it, which is the condition under which the compositor's telescoping is exact rather than approximate. Four stops are the most an RGBA8 grid can carry. Two honest departures from the print are recorded: the renderer's exponential brightness transfer puts mid-scale values above a linear bar, and the instrumental floor measured beyond eight radii is subtracted here and is not in the figure, so empty sky is darker. The hue at every value is the published one, and the dataset is marked false colour and carries the bar as its legend.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202661023",
+        "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "2024e6574788c8e66aa5547c52eb2031435ed374"
+        }
+      ]
+    },
+    {
       "id": "lens-veil-2019-12",
       "subject": "The December 2019 RADMC-3D dust clump of Montarg\u00e8s et al. 2021, Nature 594, 365",
       "status": "included",

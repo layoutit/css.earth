@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0966480f8109d53588d4f6083e5fed2ee2d188d302d1ccf3c33ff0b0c66eed17"
+    "sha256": "8d8b9c4dbba2a53d4197bf616de13b60084f66737b65f99f505a7f0daf978fb2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a267e7b9bd77519420d8f344cf898330dc1b3ad986bb05cf3a569de5045b452b"
+    "bindingsSha256": "5861dcd36a5e0ac47b4dd76e4d154737ef1c7c52c9c1b4f6a12ef7b52bd11957"
   },
   "recipes": [
     {
@@ -163,7 +163,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ae9714536b7b82b5c61321cddc0f9b21a1686eb5cb0b6320c580e7d4e387f309",
+      "sha256": "483c64c868d20ebb29251643de298fc4d23c2cda41204fdb5ba33729fa1ba793",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -290,7 +290,58 @@
                 "lensId": "zimpol-v",
                 "surface": "matisse"
               },
-              "notes": "The photosphere as the MATISSE reconstruction shows it, with the dust around it: the degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, released by ESO as Phase 3 collection BETELGEUSE-B beside Montargès et al. (2026). The patches one to about 4.5 stellar radii out are starlight scattered by dust. The map is a sky-plane image with no third axis, so it is placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light; that depth is a convention, not a measurement."
+              "notes": "The photosphere as the MATISSE reconstruction shows it, with the dust around it: the degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, released by ESO as Phase 3 collection BETELGEUSE-B beside Montargès et al. (2026). The patches one to about 4.5 stellar radii out are starlight scattered by dust. This is their own Fig. B.1 given depth: the same inferno colour map on the same zero-to-0.10 scale, carried as four emission channels so a line of sight emits the bar colour of its own measured degree. The colours are a legend for a ratio, not the colour of the dust. The instrumental polarisation measured beyond eight radii is subtracted, so the empty sky is darker here than in the printed figure. The map is a sky-plane image with no third axis, so it is placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light; that depth is a convention, not a measurement.",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Degree of linear polarisation",
+                "labels": [
+                  "0.00",
+                  "0.05",
+                  "0.10"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      0,
+                      4
+                    ],
+                    [
+                      66,
+                      10,
+                      104
+                    ],
+                    [
+                      147,
+                      38,
+                      103
+                    ],
+                    [
+                      221,
+                      81,
+                      58
+                    ],
+                    [
+                      252,
+                      165,
+                      10
+                    ],
+                    [
+                      252,
+                      255,
+                      164
+                    ]
+                  ],
+                  "labels": [
+                    "0.00",
+                    "0.05",
+                    "0.10"
+                  ]
+                },
+                "meta": "V band, 3 December 2024 · the paper's own inferno scale",
+                "sourceUrl": "https://doi.org/10.1051/0004-6361/202661023"
+              }
             },
             {
               "id": "dust-2019",
@@ -518,8 +569,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ae9714536b7b82b5c61321cddc0f9b21a1686eb5cb0b6320c580e7d4e387f309",
-      "bytes": 7245,
+      "sha256": "483c64c868d20ebb29251643de298fc4d23c2cda41204fdb5ba33729fa1ba793",
+      "bytes": 8760,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -664,6 +715,74 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "dust-2024",
+      "label": "Polarised dust · December 2024",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "matisse"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [],
+      "lensIds": [
+        "dust-2024"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "betelgeuse-shell",
+        "lensId": "zimpol-v",
+        "surface": "matisse"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "dust-2019",
+      "label": "Great Dimming clump · December 2019",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "matisse"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [],
+      "lensIds": [
+        "dust-2019"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "betelgeuse-shell",
+        "lensId": "veil-2019-12",
+        "surface": "matisse"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -717,24 +836,15 @@
   ],
   "coverage": {
     "scope": "object-datasets-and-bound-rendering-products",
-    "unresolved": [
-      {
-        "product": "dust-2024",
-        "reason": "The preparation capability has no product dependency binding yet."
-      },
-      {
-        "product": "dust-2019",
-        "reason": "The preparation capability has no product dependency binding yet."
-      }
-    ]
+    "unresolved": []
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "176ab5d0b857ac67e9b4e2ea3a595397e8889e8ed519c6885e76bb5debe05ca4",
+    "materialSha256": "130472863b182b156d2648842b988111ef1ca207a2d8c432c2b22f63afabefec",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a267e7b9bd77519420d8f344cf898330dc1b3ad986bb05cf3a569de5045b452b"
+      "bindingsSha256": "5861dcd36a5e0ac47b4dd76e4d154737ef1c7c52c9c1b4f6a12ef7b52bd11957"
     }
   }
 }

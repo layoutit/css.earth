@@ -16,7 +16,7 @@
           "url": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
         }
       },
-      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+      "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-0.10 scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
       "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.",
       "detail": "1024 × 1024 px at 3.6 mas",
       "facts": [
@@ -34,6 +34,11 @@
           "id": "extent",
           "label": "Drawn extent",
           "value": "1 to 4.5 stellar radii, tapering to 6"
+        },
+        {
+          "id": "scale",
+          "label": "Colour scale",
+          "value": "Degree of linear polarisation 0 to 0.10, the paper's inferno map"
         },
         {
           "id": "depth",

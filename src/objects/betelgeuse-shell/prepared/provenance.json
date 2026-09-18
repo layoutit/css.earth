@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "47a9295522eded076638fc5ba3bb78d2889a13337e437bcbbd0597209de15447"
+    "sha256": "ca16ab874b94c8f38650bd271ce2956f1d432104d24e75dcdef97e65cb61c5bc"
   },
   "generator": {
     "path": "tools/prepare-volume-provenance.mts",
@@ -201,7 +201,7 @@
     {
       "id": "presentation",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "sha256": "4b63fa8fe44db92cc015dc6e084a35d996b256d9b188be9a31d9cd16d9bf8c1c",
+      "sha256": "fd5fde10bc4ab3702950e87c34813eb321aec14efa886773f9b2c5d8f93e088b",
       "parameters": {
         "schema": "cssearth-volume-presentation-source@1",
         "objectId": "betelgeuse-shell",
@@ -209,20 +209,20 @@
         "defaultLens": "zimpol-v",
         "bank": {
           "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "bd491c7332b15c51477042b1b2fcdb013c61be57728f322e4a0646a83aafb07d",
-          "bytes": 164164
+          "sha256": "a2ae3067888d1c5f9107230fa36ac41814df7b7104a01f30bc18644b7e0e2600",
+          "bytes": 165343
         },
         "recipes": [
           {
             "id": "zimpol-v",
             "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-            "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33",
-            "bytes": 1387
+            "sha256": "8427dcd02628066e73c6bbddb3e71e820d6fb692c57bfb26b669fe934ed9c3ef",
+            "bytes": 1838
           },
           {
             "id": "veil-2019-12",
             "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-            "sha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4",
+            "sha256": "86d3338c3f5b93a4a14350131ec41077a5bcff590bc41dc695f9b2fe6bc9f327",
             "bytes": 1523
           }
         ],
@@ -233,7 +233,7 @@
             "id": "zimpol-v",
             "label": "SPHERE/ZIMPOL · polarised dust, 2024",
             "title": "Polarised dust around Betelgeuse in 2024",
-            "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+            "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-0.10 scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
             "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.",
             "detail": "1024 × 1024 px at 3.6 mas",
             "facts": [
@@ -251,6 +251,11 @@
                 "id": "extent",
                 "label": "Drawn extent",
                 "value": "1 to 4.5 stellar radii, tapering to 6"
+              },
+              {
+                "id": "scale",
+                "label": "Colour scale",
+                "value": "Degree of linear polarisation 0 to 0.10, the paper's inferno map"
               },
               {
                 "id": "depth",
@@ -320,13 +325,13 @@
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33",
+      "sha256": "8427dcd02628066e73c6bbddb3e71e820d6fb692c57bfb26b669fe934ed9c3ef",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
           "path": "density-zimpol-v.ktx2",
-          "sha256": "31937584c22188442817a594e6922aade689a85206f1b00d5a9e5af9b16fa872",
-          "decodedSha256": "31ce0ed952d811e4f1168ea1718c7e5c36b50819f26637dd1f4adf876d09d4c9",
+          "sha256": "a1a27bf5436b26a0a8c55e8c2fc5a1e147b657269f64a6cdc12d28b39205eab3",
+          "decodedSha256": "d0ef29c8722eb0d2758535e13b58965a03126848eafdd6a5edc6a9c66aa76a33",
           "dimensions": [
             96,
             96,
@@ -354,16 +359,43 @@
             {
               "channel": 0,
               "color": [
-                1,
-                1,
-                1
+                0.258,
+                0.039,
+                0.406
+              ],
+              "strength": 1
+            },
+            {
+              "channel": 1,
+              "color": [
+                0.578,
+                0.148,
+                0.404
+              ],
+              "strength": 1
+            },
+            {
+              "channel": 2,
+              "color": [
+                0.865,
+                0.317,
+                0.226
+              ],
+              "strength": 1
+            },
+            {
+              "channel": 3,
+              "color": [
+                0.988,
+                0.998,
+                0.645
               ],
               "strength": 1
             }
           ],
           "absorption": [],
           "emissionTransfer": "shared-opacity",
-          "exposureGain": 4
+          "exposureGain": 2.307199491978002
         },
         "bake": {
           "sliceCounts": {
@@ -393,14 +425,14 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b"
+          "sha256": "27e8dc0655041b50153f75a0ea0e21d279a989c5c91f6dede471da0d200fd079"
         }
       }
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4",
+      "sha256": "86d3338c3f5b93a4a14350131ec41077a5bcff590bc41dc695f9b2fe6bc9f327",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
@@ -482,7 +514,7 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b"
+          "sha256": "27e8dc0655041b50153f75a0ea0e21d279a989c5c91f6dede471da0d200fd079"
         }
       }
     }
@@ -519,14 +551,14 @@
         "sourceKind": "published-display-image"
       },
       "limitations": [
-        "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
+        "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-0.10 scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
         "1024 × 1024 px at 3.6 mas"
       ],
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "bd491c7332b15c51477042b1b2fcdb013c61be57728f322e4a0646a83aafb07d",
-          "bytes": 164164,
+          "sha256": "a2ae3067888d1c5f9107230fa36ac41814df7b7104a01f30bc18644b7e0e2600",
+          "bytes": 165343,
           "verification": "bytes-verified"
         },
         {
@@ -574,8 +606,8 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "bd491c7332b15c51477042b1b2fcdb013c61be57728f322e4a0646a83aafb07d",
-          "bytes": 164164,
+          "sha256": "a2ae3067888d1c5f9107230fa36ac41814df7b7104a01f30bc18644b7e0e2600",
+          "bytes": 165343,
           "verification": "bytes-verified"
         },
         {

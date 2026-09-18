@@ -124,7 +124,58 @@
           "lensId": "zimpol-v",
           "surface": "matisse"
         },
-        "notes": "The photosphere as the MATISSE reconstruction shows it, with the dust around it: the degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, released by ESO as Phase 3 collection BETELGEUSE-B beside Montargès et al. (2026). The patches one to about 4.5 stellar radii out are starlight scattered by dust. The map is a sky-plane image with no third axis, so it is placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light; that depth is a convention, not a measurement."
+        "notes": "The photosphere as the MATISSE reconstruction shows it, with the dust around it: the degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, released by ESO as Phase 3 collection BETELGEUSE-B beside Montargès et al. (2026). The patches one to about 4.5 stellar radii out are starlight scattered by dust. This is their own Fig. B.1 given depth: the same inferno colour map on the same zero-to-0.10 scale, carried as four emission channels so a line of sight emits the bar colour of its own measured degree. The colours are a legend for a ratio, not the colour of the dust. The instrumental polarisation measured beyond eight radii is subtracted, so the empty sky is darker here than in the printed figure. The map is a sky-plane image with no third axis, so it is placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light; that depth is a convention, not a measurement.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Degree of linear polarisation",
+          "labels": [
+            "0.00",
+            "0.05",
+            "0.10"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                66,
+                10,
+                104
+              ],
+              [
+                147,
+                38,
+                103
+              ],
+              [
+                221,
+                81,
+                58
+              ],
+              [
+                252,
+                165,
+                10
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0.00",
+              "0.05",
+              "0.10"
+            ]
+          },
+          "meta": "V band, 3 December 2024 · the paper's own inferno scale",
+          "sourceUrl": "https://doi.org/10.1051/0004-6361/202661023"
+        }
       },
       {
         "id": "dust-2019",
