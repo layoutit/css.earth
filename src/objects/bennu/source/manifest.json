@@ -187,15 +187,15 @@
       "id": "usgs-gazetteer-bennu-nomenclature-center-pts",
       "path": "features/BENNU_nomenclature_center_pts.zip",
       "expectedBytes": 95757,
-      "expectedSha256": "baad704dc0b3e070b5781d68205e145339df3eabacf48ba33ad3aa019928c7fa",
+      "expectedSha256": "6ba31d54a588018b6931db6af5d9ab27ced8f9c9ae91b65715fc736aad729aaf",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Bennu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Bennu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (36 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "consumers": [
         "features"
       ],
@@ -297,7 +297,7 @@
       "id": "bennu-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1303,
-      "expectedSha256": "c017ad68493fbe0daab1f8ad6820b2a1ecfb6b293cbde675702327e5df555c94",
+      "expectedSha256": "f1be26d2e941aba923bf156af9702c84581142e891c53fa3d9e26bf113e67ca4",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",

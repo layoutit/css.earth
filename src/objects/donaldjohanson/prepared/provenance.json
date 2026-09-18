@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@3",
   "objectId": "donaldjohanson",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4fdd11f709ce56ed78ead3b5ac708387c79d2f673a9f9ca00bb80379e956830c"
+    "sha256": "c27b3cce6e1eedd949d13c6d7d5fe5e92021fda2dc99ee0a0e23f832a4e26608"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -489,7 +489,7 @@
       "sha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
       "bytes": 11193210,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -515,7 +515,7 @@
       "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
       "bytes": 10526400,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -543,7 +543,7 @@
       "sha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac",
       "bytes": 9023,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -569,7 +569,7 @@
       "sha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284",
       "bytes": 10526400,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -597,7 +597,7 @@
       "sha256": "b0b13261ce3adcd46636d9ece1bfcca4567423d90b08f3046358430773e47003",
       "bytes": 276961,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -617,7 +617,7 @@
       "sha256": "cc227d474e17c8a04a5b20067bdff5b35f848bab78e573dd37816d18d3a40f9b",
       "bytes": 16595,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -636,10 +636,10 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "b5ca18dfacbff53035e64239d9e9fc2753a54a5e7cd2ade76b27a44bb25fcb92",
+      "sha256": "48f72a6c18e11aaa3a42b48db885d38f9da418d86f0f758d57dc282277867b3c",
       "bytes": 1339,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -653,8 +653,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Donaldjohanson on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Donaldjohanson on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (11 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Donaldjohanson centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DONALDJOHANSON/target",
@@ -662,10 +662,10 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "1f516df5c1da65c45e435aa1a377998814561eec05c9823e1d5ddc715a97d5d9",
+      "sha256": "b74f7a8f8a495be46cc554283f0577e8a1bf1c2567bcd76d50c2778201643f79",
       "bytes": 30329,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -694,7 +694,7 @@
       "sha256": "2baf4d4af169d4af154ec6c846c5ece03a52af6f3e29fd288bc9d57bb51c1b75",
       "bytes": 193,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -721,7 +721,7 @@
       "sha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "bytes": 478,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -753,19 +753,19 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-elevation-thumbnail.webp",
           "bytes": 5206,
           "sha256": "6792dd8994eacdb6c5bd52f7f406a3ee082f59fe343aa27e8cd59d9726750e76",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-elevation-surface@2x.webp",
           "bytes": 326732,
           "sha256": "6b847ec836e5019a3932a2a5f4e71a39143d6a5d982335c9339cbc328d46a373",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -803,13 +803,13 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
           "bytes": 44,
           "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-shape-surface@2x.webp",
           "bytes": 84606,
           "sha256": "fda31a47cf56e2fc29241ca528214d4be3d565385ed4726d50ff7e6cb3c0a4f1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -851,13 +851,13 @@
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
           "bytes": 1372,
           "sha256": "c51d55efa3313a6db01edcfd77de1febadba4c410a9ff4163c0ad967433ccf3e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-llorri-surface@2x.webp",
           "bytes": 430640,
           "sha256": "decb1a02282e5dd97b7c8b6a229cb5b069080f8009d6b9ab15dc7ba44c29a1f1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputEvidence": [
@@ -924,8 +924,8 @@
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-features.json",
           "bytes": 7930,
-          "sha256": "ff7f6eebc5b85ac5912badd40fd4970bec98d95b2b5952ff99701344c4274692",
-          "verification": "bytes-verified"
+          "sha256": "adf6403cc4beaa96f9ce22887d9c325675dff51004ea0ebac970eba1aa8dba5b",
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
