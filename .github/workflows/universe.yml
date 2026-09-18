@@ -65,9 +65,11 @@ jobs:
         # (site/objects.mts), which build:tools just generated. On a PR, a miss outside the objects the PR itself
         # touched (vs. its base branch) only warns instead of failing, so an unrelated pre-existing gap cannot
         # block it; a push to main (and any local run) stays strict and fails on every miss.
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            pnpm check:assets-published --changed-since=origin/${{ github.base_ref }}
+            pnpm check:assets-published --changed-since="origin/$BASE_REF"
           else
             pnpm check:assets-published
           fi
