@@ -13,10 +13,12 @@ pnpm setup:assets
 pnpm dev
 ```
 
-`pnpm install` builds the packages and restores the prepared JSON beside each
-body; `pnpm setup:assets` downloads the prepared browser images; `pnpm dev`
-serves the site on port 4210. The [README](README.md#how-to-build) explains
-the variants, including a single body and production builds.
+`pnpm install` builds the shared packages, the renderer and the preparation
+tools; `pnpm setup:assets` downloads the prepared browser images; `pnpm dev`
+restores the prepared JSON beside each body (it needs the images `setup:assets`
+just downloaded) and serves the site on port 4210. The
+[README](README.md#how-to-build) explains the variants, including a single
+body and production builds.
 
 Development startup checks installed volume packages without preparing every
 nebula. A missing or invalid package leaves its catalogue facts accessible and
