@@ -69,35 +69,47 @@ export function gainForTopAlpha(integrals: readonly Float64Array[], peak: number
   return -Math.log(1 - topAlpha) / brightest;
 }
 
-/** Close thin gaps (masked stars and their spikes) in one channel before it is spread. A missing sample is filled only when it
- * is surrounded: finite samples within `radius` in at least three of the four quadrants around it, `minimumNeighbours` in all.
- * It then takes their median, and passes repeat up to `passes` times so a gap closes from its edges. The edge of coverage is
- * never surrounded, so it does not grow. Returns the filled channel and how many samples were filled. */
-export function fillThinGaps(channel: Float32Array, width: number, height: number, radius = 4, passes = 4, minimumNeighbours = 8) {
-  let current = Float32Array.from(channel), filled = 0;
+/** Close interior gaps (masked stars and their spikes) in one channel before it is spread. A gap is a connected group of missing
+ * samples; one that touches the grid border is the edge of coverage and stays open, and so does one larger than `maxGap`
+ * samples. Every other gap is filled inward from its rim: a missing sample with at least `minimumNeighbours` finite samples
+ * within `radius` takes their median, pass after pass until the gap is closed. Returns the filled channel and the count. */
+export function fillThinGaps(channel: Float32Array, width: number, height: number, radius = 2, maxGap = 20_000, minimumNeighbours = 3) {
+  const count = width * height, current = Float32Array.from(channel), fillable = new Uint8Array(count), seen = new Uint8Array(count);
+  for (let p = 0; p < count; p++) {
+    if (seen[p] || Number.isFinite(current[p]!)) continue;
+    const gap: number[] = [p]; seen[p] = 1;
+    let border = false;
+    for (let i = 0; i < gap.length; i++) {
+      const q = gap[i]!, x = q % width, y = Math.floor(q / width);
+      if (x === 0 || y === 0 || x === width - 1 || y === height - 1) border = true;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) {
+        const xx = x + dx, yy = y + dy, r = yy * width + xx;
+        if (xx >= 0 && yy >= 0 && xx < width && yy < height && !seen[r] && !Number.isFinite(current[r]!)) { seen[r] = 1; gap.push(r); }
+      }
+    }
+    if (!border && gap.length <= maxGap) for (const q of gap) fillable[q] = 1;
+  }
+  let filled = 0;
   const window: number[] = [];
-  for (let pass = 0; pass < passes; pass++) {
-    const next = Float32Array.from(current);
-    let changed = 0;
-    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-      if (Number.isFinite(current[y * width + x]!)) continue;
+  for (let remaining = fillable.reduce((sum, v) => sum + v, 0); remaining > 0;) {
+    const updates: [number, number][] = [];
+    for (let p = 0; p < count; p++) {
+      if (!fillable[p]) continue;
+      const x = p % width, y = Math.floor(p / width);
       window.length = 0;
-      let quadrants = 0;
       for (let dy = -radius; dy <= radius; dy++) for (let dx = -radius; dx <= radius; dx++) {
         const xx = x + dx, yy = y + dy;
-        if (xx < 0 || yy < 0 || xx >= width || yy >= height || (dx === 0 && dy === 0)) continue;
+        if (xx < 0 || yy < 0 || xx >= width || yy >= height) continue;
         const value = current[yy * width + xx]!;
-        if (!Number.isFinite(value)) continue;
-        window.push(value);
-        quadrants |= 1 << ((dx >= 0 ? 1 : 0) + (dy >= 0 ? 2 : 0));
+        if (Number.isFinite(value)) window.push(value);
       }
-      const sides = (quadrants & 1) + ((quadrants >> 1) & 1) + ((quadrants >> 2) & 1) + ((quadrants >> 3) & 1);
-      if (window.length < minimumNeighbours || sides < 3) continue;
+      if (window.length < minimumNeighbours) continue;
       window.sort((a, b) => a - b);
-      next[y * width + x] = window[window.length >> 1]!; changed++;
+      updates.push([p, window[window.length >> 1]!]);
     }
-    current = next; filled += changed;
-    if (!changed) break;
+    if (!updates.length) break;
+    for (const [p, value] of updates) { current[p] = value; fillable[p] = 0; }
+    filled += updates.length; remaining -= updates.length;
   }
   return { channel: current, filled };
 }

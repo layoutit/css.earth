@@ -44,13 +44,14 @@ test('the gain puts the brightest column at the requested opacity, and bad input
   assert.throws(() => gainForTopAlpha(result.integral, result.peak, 1), /strictly between/u);
 });
 
-test('thin masked gaps close from their edges and a wide hole stays open', () => {
-  const w = 40, h = 20, plane = Float32Array.from({ length: w * h }, (_, p) => 5 + (p % w) * 0.1);
-  for (let y = 0; y < h; y++) for (let x = 10; x < 13; x++) plane[y * w + x] = NaN;             // a three-sample spike
-  for (let y = 0; y < h; y++) for (let x = 25; x < 40; x++) plane[y * w + x] = NaN;             // the edge of coverage
-  const { channel, filled } = fillThinGaps(plane, w, h, 4, 4);
-  // Rows at the grid border have only two quadrants and stay open; every interior row closes.
-  for (let y = 1; y < h - 1; y++) assert.ok(Math.abs(channel[y * w + 11]! - 6.1) < 0.25, `row ${y}: ${channel[y * w + 11]}`);
-  assert.ok(Number.isNaN(channel[5 * w + 39]!), 'far inside the uncovered edge stays missing');
-  assert.ok(filled >= 3 * (h - 2));
+test('interior gaps close from their rims, and a gap reaching the grid border stays open', () => {
+  const w = 60, h = 40, plane = Float32Array.from({ length: w * h }, (_, p) => 5 + (p % w) * 0.1);
+  for (let y = 5; y < 35; y++) for (let x = 10; x < 13; x++) plane[y * w + x] = NaN;             // a spike
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (Math.hypot(x - 30, y - 20) < 8) plane[y * w + x] = NaN; // a star core
+  for (let y = 0; y < h; y++) for (let x = 50; x < 60; x++) plane[y * w + x] = NaN;             // the edge of coverage
+  const { channel, filled } = fillThinGaps(plane, w, h);
+  for (let y = 5; y < 35; y++) assert.ok(Math.abs(channel[y * w + 11]! - 6.1) < 0.25, `spike row ${y}: ${channel[y * w + 11]}`);
+  assert.ok(Math.abs(channel[20 * w + 30]! - 8) < 0.5, `star centre ${channel[20 * w + 30]}`);
+  assert.ok(Number.isNaN(channel[20 * w + 55]!), 'the uncovered edge stays missing');
+  assert.ok(filled > 3 * 30 + 150);
 });
