@@ -13,8 +13,9 @@ import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, prese
 import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';
 
 // Independent oracle: checked-in ephemerides, the real preparation basis and the authored body radii,
-// without importing the new shared frame preparer or transport's matrix helpers. PolyCSS writes world X/Y as CSS Y/X,
-// so the presentation map is the basis with those body axes swapped: a reflection, as every map into CSS 3D space is.
+// without importing the new shared frame preparer or transport's matrix helpers. The solved system node
+// crosses the body's own x axis with north (#294), so the presentation map is already a reflection: no
+// axis swap is applied here.
 function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: number): PreparedWorldCameraFrame {
   const bodyFixedToIcrf = BODY_FIXED_TO_ICRF_MATRICES[id];
   const basis = prepareEclipticPresentationFrame(id).basis;
@@ -22,7 +23,7 @@ function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: nu
     [0, 1, 2].reduce((sum, column) => sum + bodyFixedToIcrf[row * 3 + column] * vector[column], 0));
   const origin = directionToIcrf(BODY_FIXED_SUN_DIRECTIONS[id]);
   const distanceM = BODY_ORBITS[id].heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS * 1000;
-  const columns = basis.map(axis => directionToIcrf([axis[1], axis[0], axis[2]]));
+  const columns = basis.map(axis => directionToIcrf(axis));
   return { referenceFrame: 'sun-icrf', epochJdTt: SOLAR_GEOMETRY_EPOCH_JD_TT,
     originM: [-origin[0] * distanceM, -origin[1] * distanceM, -origin[2] * distanceM],
     presentationToReference: [0, 1, 2].flatMap(row => columns.map(column => column[row])),
