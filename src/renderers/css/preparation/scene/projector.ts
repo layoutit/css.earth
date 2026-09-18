@@ -53,9 +53,13 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       const position = raster.backgroundPosition.map(value => value === 0 ? '0px' : formatCssLength(value)).join(' ');
       const size = raster.backgroundSize.map(formatCssLength).join(' ');
       const variable = patch.pole ? `--${ns}-pole-position` : `--${ns}-surface-position`;
+      // A polar cap closes the top of the band mesh. Its fitted plate can come out with the opposite winding to the
+      // bands around it, and a culled cap leaves a hole at the pole through which the body's interior fill shows as a
+      // flat disc. A cap is only ever seen from outside the body, so it is drawn from both sides.
+      const caps = patch.pole ? ';backface-visibility:visible' : '';
       const style = p.positionVariables
-        ? `transform:matrix3d(${fitted.matrix});${variable}:${position};background-position:var(${variable});background-size:${size};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px`
-        : `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:url(${fitted.url});background-position:${position};background-size:${size}`;
+        ? `transform:matrix3d(${fitted.matrix});${variable}:${position};background-position:var(${variable});background-size:${size};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${caps}`
+        : `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:url(${fitted.url});background-position:${position};background-size:${size}${caps}`;
       return { tag: 's', className: className ?? (patch.pole ? `${ns}-polar ${ns}-polar-${patch.pole}${patch.inner ? ` ${ns}-polar-inner` : ''}` : ''), style,
         ...(!patch.pole || p.projectivePoles ? { projectiveTextureLayer: { ...prepareProjectiveTextureLayer(fitted.matrix, p.rasterScale),
           // Surface leaves tile exactly; the body publishes the outset that closes their antialiased seams.
