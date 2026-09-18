@@ -54,7 +54,7 @@ test('the install says nights, latitudes and credits the way the READMEs do', ()
   assert.equal(latitudeSpan([-10, 20]), '10° south to 20° north');
   assert.equal(latitudeSpan([-63.7, -63.6]), '64° south');
   const notice = noticeWithLens('# Hebe attribution\n\nCredit. This package does not attribute a photographic surface texture to NASA or ESO. The grid is ours.\n', 'B.5');
-  assert.match(notice, /Figure B\.5 beside cssEarth’s renderings/);
+  assert.match(notice, /photograph panels of the article’s Figure B\.5 with outlines drawn over them/);
   assert.doesNotMatch(notice, /does not attribute a photographic/);
 });
 

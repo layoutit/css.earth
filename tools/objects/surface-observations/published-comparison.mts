@@ -98,7 +98,9 @@ export function columnCells(figure: Raster, spec: Pick<ComparisonSpec, 'rows' | 
   };
 }
 
-const isRed = (image: Raster, x: number, y: number) => pixel(image, x, y, 0) > 150 && pixel(image, x, y, 1) < 110 && pixel(image, x, y, 2) < 110;
+/** The figures' spin-axis arrows are the only coloured ink on grey panels, so red is any pixel whose red channel clearly
+ * leads the other two, including the arrow's darker anti-aliased fringe. */
+const isRed = (image: Raster, x: number, y: number) => { const r = pixel(image, x, y, 0), g = pixel(image, x, y, 1), b = pixel(image, x, y, 2); return r > 60 && r > 1.6 * g && r > 1.6 * b; };
 
 function components(mask: Uint8Array, width: number, height: number) {
   const label = new Int32Array(width * height), sizes: number[] = [0], stack: number[] = [];
@@ -246,7 +248,7 @@ export function comparisonBlock(evidence: ComparisonEvidence): string {
   const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels || Math.abs(a.offset) - Math.abs(b.offset));
   const lowest = sweep[0], native = evidence.nativeOutline;
   return [
-    `Measured by \`tools/objects/published-comparison.mts\` against [${evidence.figure}](${evidence.source}), the survey's comparison of these frames with its models. The numbers are read from [\`evidence/published-comparison.json\`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.`,
+    `Measured by \`tools/objects/published-comparison.mts\` against [${evidence.figure}](${evidence.source}), the survey's comparison of these frames with its models. The numbers are read from [\`evidence/published-comparison.json\`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.`,
     '',
     '| Figure column | Overlap with the paper\'s model | With the paper\'s photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure\'s |',
     '| --- | --- | --- | --- | --- | --- | --- |',

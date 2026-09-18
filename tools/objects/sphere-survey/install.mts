@@ -17,7 +17,7 @@ import { pathToFileURL } from 'node:url';
 import { authorSourceRecords } from '../../author-source-records.mts';
 import { requireArray, requireRecord, requireString } from '../../source-values.mts';
 import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '../report-registration.mts';
-import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence, withComparisonBlock } from '../surface-observations/published-comparison.mts';
+import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence, withComparisonBlock, type ComparisonEvidence } from '../surface-observations/published-comparison.mts';
 import { OBSERVER_CAMERAS_FILE } from '../terrestrial-layers/observer-cameras.mts';
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.mts';
 import { LENS_ID, buildSetup, localCopy } from './setup.mts';
@@ -26,6 +26,15 @@ const ROOT = resolve(import.meta.dirname, '../../..');
 export const COMPARISON_ENTRY = `${LENS_ID}-published-comparison`;
 const readJson = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const writeJson = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
+
+/** The ledger's account of a published comparison, from its evidence and the spin record's reading; nothing in it is typed. */
+export function decisionFinding(figure: string, evidence: ComparisonEvidence, columnOrder: { order: string; separationDegrees: number }) {
+  const models = evidence.columns.map(column => column.overlapWithModel), same = evidence.columns.map(column => column.sameShapeOverlap);
+  const atPhase = evidence.columns.filter(column => column.bestTurnDegrees === 0).length;
+  const ours = evidence.columns.flatMap(column => column.axis.oursDegrees ?? []), theirs = evidence.columns.flatMap(column => column.axis.paperDegrees ?? []);
+  const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels || Math.abs(a.offset) - Math.abs(b.offset));
+  return `Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure ${figure}, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels ${span(models)} at our phase, against ${span(same)} for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in ${atPhase} of ${evidence.columns.length} columns. With the paper’s photographs ${span(evidence.columns.map(column => column.overlapWithPhotograph))}. Turned in the image, our outline best overlaps the paper’s photographs at ${span(evidence.columns.map(column => column.imageTurnDegrees.photograph), 1)}° and its model panels at ${span(evidence.columns.map(column => column.imageTurnDegrees.model), 1)}°. The spin axis we project lies at ${span(ours, 1)}° on the sky against ${span(theirs, 1)}° for the figure’s arrows. Native outline residual ${evidence.nativeOutline.residualPixelsAtZero.toFixed(3)} px mean over ${evidence.nativeOutline.frames} frames at our phase${sweep[0].offset === 0 ? ', the lowest of a ±30° sweep' : `; the sweep’s lowest is ${sweep[0].pixels.toFixed(3)} px at ${sweep[0].offset}°`}. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads ${columnOrder.order}, ${columnOrder.separationDegrees}° from the published pole.`;
+}
 
 /** Nights as a reader says them: one date, two joined, or the first and last of several. */
 export function nightsText(nights: readonly string[]) {
@@ -86,13 +95,9 @@ export async function installSetup(objectId: string) {
   const ledger = await readJson(resolve(objectDirectory, 'investigations.json')), entries = requireArray(ledger.entries).map(value => requireRecord(value));
   const check = { date: today, commit }, listing = framesUrl(number, name), adam = shapeUrl(number, name, 'adam');
   const unused = setup.apparition.released - lensFrames;
-  const models = evidence.columns.map(column => column.overlapWithModel), same = evidence.columns.map(column => column.sameShapeOverlap);
-  const atPhase = evidence.columns.filter(column => column.bestTurnDegrees === 0).length;
-  const ours = evidence.columns.flatMap(column => column.axis.oursDegrees ?? []), theirs = evidence.columns.flatMap(column => column.axis.paperDegrees ?? []);
-  const sweep = Object.entries(evidence.nativeOutline.residualPixels).map(([offset, pixels]) => ({ offset: Number(offset), pixels })).sort((a, b) => a.pixels - b.pixels);
   const decision = {
     id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph lens`, status: 'included',
-    finding: `Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure ${figure}, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels ${span(models)} at our phase, against ${span(same)} for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in ${atPhase} of ${evidence.columns.length} columns. With the paper’s photographs ${span(evidence.columns.map(column => column.overlapWithPhotograph))}. Turned in the image, our outline best overlaps the paper’s photographs at ${span(evidence.columns.map(column => column.imageTurnDegrees.photograph), 1)}° and its model panels at ${span(evidence.columns.map(column => column.imageTurnDegrees.model), 1)}°. The spin axis we project lies at ${span(ours, 1)}° on the sky against ${span(theirs, 1)}° for the figure’s arrows. Native outline residual ${evidence.nativeOutline.residualPixelsAtZero.toFixed(3)} px mean over ${evidence.nativeOutline.frames} frames at our phase${sweep[0].offset === 0 ? ', the lowest of a ±30° sweep' : `; the sweep’s lowest is ${sweep[0].pixels.toFixed(3)} px at ${sweep[0].offset}°`}. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads ${setup.columnOrder.order}, ${setup.columnOrder.separationDegrees}° from the published pole.`,
+    finding: decisionFinding(figure, evidence, setup.columnOrder),
     evidence: [setup.evidence.source, listing, adam], checked: [check] };
   const at = entries.findIndex(entry => entry.id === COMPARISON_ENTRY);
   if (at >= 0) entries[at] = decision; else entries.push(decision);
@@ -209,7 +214,7 @@ export function latitudeSpan([low, high]: readonly [number, number]) {
 
 /** The credits with the photograph's source and the reproduced figure panels. */
 export function noticeWithLens(notice: string, figure: string) {
-  const credit = `\`evidence/published-comparison.webp\` reproduces panels of the article’s Figure ${figure} beside cssEarth’s renderings, under the article’s CC-BY-4.0 licence. The photographic surface is the survey’s own deconvolved VLT/SPHERE/ZIMPOL frames, credited to its authors and to ESO programme 199.C-0074; it carries their photographed illumination and no radiometric calibration, so it is not measured albedo or colour. Its placement reproduces the article’s Figure ${figure}. No photographic texture is attributed to NASA.`;
+  const credit = `\`evidence/published-comparison.webp\` reproduces the photograph panels of the article’s Figure ${figure} with outlines drawn over them, under the article’s CC-BY-4.0 licence. The photographic surface is the survey’s own deconvolved VLT/SPHERE/ZIMPOL frames, credited to its authors and to ESO programme 199.C-0074; it carries their photographed illumination and no radiometric calibration, so it is not measured albedo or colour. Its placement reproduces the article’s Figure ${figure}. No photographic texture is attributed to NASA.`;
   const shapeOnly = 'This package does not attribute a photographic surface texture to NASA or ESO.';
   if (notice.includes(shapeOnly)) return notice.replace(shapeOnly, credit);
   const title = notice.indexOf('\n\n');
