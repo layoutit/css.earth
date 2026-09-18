@@ -276,6 +276,24 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 3988,
       "expectedSha256": "19f66da2fbac2bb2ba7d48e6e63e570a87384890658abb23f477be286d5bf149"
+    },
+    {
+      "path": "reference/rendered-thermal-day.png",
+      "expectedBytes": 571960,
+      "expectedSha256": "888c68c4dfbb6907c07caa2a5a56248abd4e66e6d4b9b0d9807269bbb0a77d15",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /trappist-1b/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-18 after preparation on the merged base, no console errors: the default camera on the day side: the MIRI 15 µm map glows about 520 K under the star, with the lens panel's 50–550 K legend and map preview."
+      }
+    },
+    {
+      "path": "reference/rendered-thermal-night.png",
+      "expectedBytes": 542422,
+      "expectedSha256": "4e7c003f22dc6062e63f09dd96fbbeb2b579dd142d18c20f9d1231ec2561bcf5",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /trappist-1b/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-18 after preparation on the merged base, no console errors: after dragging the camera half way round: the night side, about 45 K at the equator opposite the star, brightening toward the limb where the unmeasured poles and the terminators show."
+      }
     }
   ]
 }
