@@ -1044,11 +1044,14 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.arg
   if (failures.length) process.exitCode = 1;
   else console.log(`${OBJECTS.length} registered objects: ${receipts} physical frame receipt(s), source pins and document pins are current.`);
 } else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
-  const args = process.argv.slice(2), index = args.indexOf("--object");
-  const id = index < 0 ? null : args[index + 1];
-  if (id && !OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);
-  if (!args.includes("--inventory") && !args.includes("--all") && !id) throw new Error("Use --inventory, --object ID, --all, or --receipts.");
-  const report = await auditObjectRuntimeOwnership({ objects: id ? OBJECTS.filter(object => object.id === id) : OBJECTS,
+  const args = process.argv.slice(2);
+  // One or more `--object <id>` pairs scope the audit to those objects; each occurrence is collected, not just
+  // the first, so a PR-scoped run (tools/scope-runtime-ownership-check.mts) can name every object it touched.
+  const ids: string[] = [];
+  for (let i = 0; i < args.length; i++) if (args[i] === "--object") { const id = args[i + 1]; if (id) { ids.push(id); i++; } }
+  for (const id of ids) if (!OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);
+  if (!args.includes("--inventory") && !args.includes("--all") && !ids.length) throw new Error("Use --inventory, --object ID, --all, or --receipts.");
+  const report = await auditObjectRuntimeOwnership({ objects: ids.length ? OBJECTS.filter(object => ids.includes(object.id)) : OBJECTS,
     strict: !args.includes("--inventory") });
   console.log(JSON.stringify(report, null, 2));
 }

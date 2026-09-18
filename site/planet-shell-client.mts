@@ -15,7 +15,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
+export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -36,6 +36,7 @@ import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
+import { loadCatalogueFragment, readCatalogueFragmentPin, scheduleWhenIdle } from './catalogue-fragment-loader.mts';
 import { SCENE_OBJECTS } from './objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { objectClassificationLabel } from './planet-search-objects.mts';
@@ -59,6 +60,8 @@ export function mountPlanetShell({
   onAsteroidOrbitsChange = () => {},
   asteroidLabelsEnabled = false,
   onAsteroidLabelsChange = () => {},
+  minimapEnabled = false,
+  onMinimapChange = () => {},
   orbitRenderer = 'strokes',
   onOrbitRendererChange = () => {},
   onCategoryChange = () => {},
@@ -286,7 +289,7 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
+      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, minimapEnabled, orbitRenderer,
         onOrbitRendererChange(renderer) { orbitRenderer = renderer; onOrbitRendererChange(renderer); },
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
         onIllustrationModelsChange(enabled) {
@@ -297,6 +300,7 @@ export function mountPlanetShell({
         onAsteroidBodiesChange(enabled) { asteroidBodiesEnabled = enabled; onAsteroidBodiesChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
+        onMinimapChange(enabled) { minimapEnabled = enabled; onMinimapChange(enabled); },
       }, owner));
     const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
@@ -379,7 +383,7 @@ function createSettingsController(
   documentTarget: Document,
   windowTarget: BrowserWindow,
   { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange = () => {}, heliosphereEnabled, onHeliosphereChange,
-    illustrationModelsEnabled, onIllustrationModelsChange, asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
+    illustrationModelsEnabled, onIllustrationModelsChange, asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, minimapEnabled, onMinimapChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'minimapEnabled' | 'onMinimapChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -391,6 +395,7 @@ function createSettingsController(
   const asteroidBodies = documentTarget.querySelector(".planet-asteroid-bodies-setting");
   const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
   const asteroidLabels = documentTarget.querySelector(".planet-asteroid-labels-setting");
+  const minimap = documentTarget.querySelector(".planet-minimap-setting");
   const orbitRendererSelect = documentTarget.querySelector(".planet-orbit-renderer-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
@@ -404,6 +409,7 @@ function createSettingsController(
       !(asteroidBodies instanceof windowTarget.HTMLInputElement) ||
       !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
       !(asteroidLabels instanceof windowTarget.HTMLInputElement) ||
+      !(minimap instanceof windowTarget.HTMLInputElement) ||
       !(orbitRendererSelect instanceof windowTarget.HTMLSelectElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
@@ -412,7 +418,7 @@ function createSettingsController(
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
-  for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = false;
+  for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, minimap, orbitRendererSelect]) input.disabled = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -476,6 +482,17 @@ function createSettingsController(
     onAsteroidLabelsChange(asteroidLabelsEnabled);
   }, { signal: events.signal });
   renderAsteroidLabels();
+  // The stylesheet reads this flag: off hides the minimap and frees its corner.
+  const renderMinimap = () => {
+    minimap.checked = minimapEnabled === true;
+    documentTarget.body.dataset.minimap = minimap.checked ? 'on' : 'off';
+  };
+  minimap.addEventListener("change", () => {
+    minimapEnabled = minimap.checked;
+    renderMinimap();
+    onMinimapChange(minimapEnabled);
+  }, { signal: events.signal });
+  renderMinimap();
   orbitRendererSelect.value = orbitRenderer;
   orbitRendererSelect.addEventListener("change", () => {
     const next = orbitRendererSelect.value;
@@ -508,7 +525,7 @@ function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = true;
+      for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, minimap, orbitRendererSelect]) input.disabled = true;
       delete documentTarget.body.dataset.skyContrast;
     },
   });
@@ -540,16 +557,21 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       !(empty instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell object browser is incomplete.");
   }
-  const items = [...browser.querySelectorAll<HTMLElement>(".planet-object-item")]
-    .filter((item) => item instanceof windowTarget.HTMLLIElement);
-  if (items.length === 0) {
-    throw new Error("Planet shell object browser has no objects.");
-  }
-  const searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
-  const sourceLinks = sourceDocuments(documentTarget);
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
   const resultsPanel = requiredElement(browser, '#object-category-results');
-  const chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
+  let items = [...browser.querySelectorAll<HTMLElement>(".planet-object-item")]
+    .filter((item) => item instanceof windowTarget.HTMLLIElement);
+  // Production pages ship the catalogue rows empty and reference the shared,
+  // content-addressed fragment instead (`catalogue-fragment-pin.mts`). A page
+  // or fixture without that pin must still ship its rows inline.
+  const cataloguePin = items.length === 0 ? readCatalogueFragmentPin(resultsPanel) : null;
+  if (items.length === 0 && !cataloguePin) {
+    throw new Error("Planet shell object browser has no objects.");
+  }
+  const catalogueLoading = cataloguePin ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
+  let searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
+  let sourceLinks = sourceDocuments(documentTarget);
+  let chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
     .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.planet-object-item')] }));
   const refreshChunks = () => {
     for (const { node, items: rows } of chunks) {
@@ -559,21 +581,80 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       if (node.style.containIntrinsicBlockSize !== height) node.style.containIntrinsicBlockSize = height;
     }
   };
-  if (chunks.length && typeof windowTarget.IntersectionObserver === 'function') {
-    const observer = new windowTarget.IntersectionObserver(changes => {
-      for (const { target, isIntersecting } of changes) target.toggleAttribute('data-in-view', isIntersecting);
-    }, { root: resultsPanel, rootMargin: '100px 0px' });
-    for (const { node } of chunks) observer.observe(node);
-    resultsPanel.dataset.groupedVisibility = '';
-    lifetime.onDispose(() => observer.disconnect());
-  }
+  let chunkVisibility: { disconnect(): void } | null = null;
+  const bindChunkVisibility = () => {
+    chunkVisibility?.disconnect();
+    chunkVisibility = null;
+    if (chunks.length && typeof windowTarget.IntersectionObserver === 'function') {
+      const observer = new windowTarget.IntersectionObserver(changes => {
+        for (const { target, isIntersecting } of changes) target.toggleAttribute('data-in-view', isIntersecting);
+      }, { root: resultsPanel, rootMargin: '100px 0px' });
+      for (const { node } of chunks) observer.observe(node);
+      resultsPanel.dataset.groupedVisibility = '';
+      chunkVisibility = observer;
+    }
+  };
+  bindChunkVisibility();
+  lifetime.onDispose(() => chunkVisibility?.disconnect());
   browser.dataset.retained = '';
   information.dataset.retained = '';
-  const distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
-  const planetOrder = [
+  let distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
+  let planetOrder = [
     ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
     ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
   ];
+  /** Re-reads the catalogue rows after the shared fragment is inserted, so every
+   * derived list (search labels, source links, grouped chunks, sort orders)
+   * reflects the real rows instead of the empty placeholder. The fragment's own
+   * rows already carry the same default-category `hidden` state a page used to
+   * render inline, and an open panel is repaired by the `filter()` call that
+   * follows this, so no hidden state is recomputed here. */
+  const attachCatalogueRows = () => {
+    items = [...browser.querySelectorAll<HTMLElement>(".planet-object-item")]
+      .filter((item) => item instanceof windowTarget.HTMLLIElement);
+    searchLabels = items.map(item => ({ ...objectSearchLabels(item), item }));
+    sourceLinks = sourceDocuments(documentTarget);
+    chunks = [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')]
+      .map(node => ({ node, items: [...node.querySelectorAll<HTMLElement>('.planet-object-item')] }));
+    bindChunkVisibility();
+    distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceM) - Number(b.dataset.objectDistanceM));
+    planetOrder = [
+      ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
+      ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
+    ];
+    refreshChunks();
+  };
+  // Fetches the shared catalogue fragment at most once, at first idle or as
+  // soon as the browser panel opens, whichever happens first. `filter` and
+  // `markSelection` are declared further down this closure but only run once
+  // this promise settles, well after the whole controller has been built.
+  let catalogueLoad: Promise<void> | null = null;
+  const ensureCatalogueLoaded = (): Promise<void> => {
+    if (!cataloguePin) return Promise.resolve();
+    if (catalogueLoad) return catalogueLoad;
+    catalogueLoad = loadCatalogueFragment(cataloguePin, { windowTarget }).then(rows => {
+      if (lifetime.disposed) return;
+      requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(rows);
+      if (catalogueLoading) catalogueLoading.hidden = true;
+      attachCatalogueRows();
+      // A page's own row was previously marked by the server, from the id it
+      // was built for. That id never reaches `setObject` (only a later
+      // in-app navigation does), so back-fill it once here, the one time the
+      // catalogue starts empty and the shell is still showing its own object.
+      if (!selectedObjectName && !overview && !preparedFocus) {
+        const current = SCENE_OBJECTS.find(object => object.id === documentTarget.body.dataset.objectShell);
+        if (current) selectedObjectName = current.name;
+      }
+      markSelection();
+      publishSourceContext();
+      if (open) { filteredQuery = null; filter(false); }
+    }).catch((error: unknown) => {
+      catalogueLoad = null;
+      if (!lifetime.disposed) console.error('The object catalogue could not load.', error);
+    });
+    return catalogueLoad;
+  };
+  if (cataloguePin) scheduleWhenIdle(windowTarget, () => { void ensureCatalogueLoaded(); });
   let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
   let showingSearchResults = false;
   let initialCategory: string | null = searchCard.hasAttribute('data-search-submitted') ? activeCategory : null;
@@ -756,6 +837,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       input.disabled = !input.value;
     }
     if (next && resetQuery) search.value = "";
+    if (next) void ensureCatalogueLoaded();
     destinations?.setOpen(next);
     if (next) filter();
     else {

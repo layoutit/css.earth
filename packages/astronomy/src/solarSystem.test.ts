@@ -76,6 +76,7 @@ describe('the solar-system frame tree', () => {
     expect(tree.chainToRoot('moon')).toEqual(['moon', 'earth', 'earthBarycentre', SUN_FRAME_ID, SSB_FRAME_ID])
   })
 
+  // Samples every frame over full orbits; ~5.6 s on a loaded CI runner, above vitest's 5 s default.
   it('declares maxOffsetInParent that really bounds the origin, sampled over full orbits', () => {
     // The invariant that only fires months later if it is wrong. Every frame is
     // sampled across the whole validity window AND across an integer-plus-a-bit
@@ -118,7 +119,7 @@ describe('the solar-system frame tree', () => {
       expect(Number.isFinite(frame.maxOffsetInParent)).toBe(true)
       if (frame.maxOffsetInParent > 0) expect((worst + correctionAllowance) / frame.maxOffsetInParent).toBeGreaterThan(0.9)
     }
-  })
+  }, 30000)
 
   it('keeps every frame capturable from its own surface with real hysteresis', () => {
     // The literal 20, not the imported constant: asserting against

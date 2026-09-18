@@ -1,39 +1,33 @@
 ---
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
-import PlanetObjectResult from "./PlanetObjectResult.astro";
-import PreparedObjectResult from './PreparedObjectResult.astro';
-import ContextNavigationMarker from './ContextNavigationMarker.astro';
-import { OVERVIEW_TITLES, SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
-import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
-import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
-import { SCENE_OBJECTS } from '../objects.mts';
-import { overviewSourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
-import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mts";
+import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount } from "../object-categories.mts";
+import PlanetCatalogueRows from "./PlanetCatalogueRows.astro";
 
-interface Props { activeObjectId?: string; formId?: string; }
-const { activeObjectId, formId } = Astro.props;
+interface Props { formId?: string; }
+const { formId } = Astro.props;
 const searchObjects = PLANET_SEARCH_OBJECTS;
-// The galactic scopes are measured from the Sun, so their overviews stay on its route.
-const galacticRoute = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!.route;
-const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({ system, star: SCENE_OBJECTS.find(object => object.id === system.id)!,
-  source: systemSourceDocumentation(system) }));
 const defaultCategory = 'planet';
 const types = new Map(OBJECT_CATEGORIES);
 for (const object of searchObjects) if (!types.has(objectCategory(object.classification))) {
   types.set(object.classification, object.classification.replaceAll('-', ' ') + 's');
 }
 const classifications = searchObjects.map(object => object.classification);
-// Retain every source row. Small layout groups let the browser skip offscreen
-// descendants without removing them from search, accessibility or navigation.
-const defaultObjects = [
-  ...searchObjects.filter(object => object.classification === 'planet'),
-  ...searchObjects.filter(object => object.classification !== 'planet'),
-];
-const rows = Array.from({ length: Math.ceil(searchObjects.length / 16) },
-  (_, index) => defaultObjects.slice(index * 16, (index + 1) * 16));
 const groups = [...types].map(([type, label]) => ({ type, label,
   count: objectCategoryCount(classifications, type),
 }));
+// The rows below (systems, overview scopes and every object) are identical on
+// every object page. `tools/build-catalogue-fragment.mts` renders them once,
+// from `PlanetCatalogueRows.astro`, into one content-addressed file and
+// substitutes its hash for these tokens after `astro build`. The client
+// fetches that file and inserts it into the placeholder list below; the
+// no-JS search function does the same (see `search-response.mts`).
+// `astro dev` never runs that build step, so it renders the rows inline
+// instead: full fidelity for local development, with no fetch and no stale
+// placeholder tokens. The unused pin below is harmless there, since the
+// client and the no-JS function only read it when the list starts empty.
+const catalogueSrc = '/catalogue/__CATALOGUE_FRAGMENT_SHA__.html';
+const catalogueSha256 = '__CATALOGUE_FRAGMENT_SHA__';
+const catalogueBytes = '__CATALOGUE_FRAGMENT_BYTES__';
 ---
 
 <div class="planet-object-tabs" role="tablist" aria-label="Object categories">
@@ -46,34 +40,12 @@ const groups = [...types].map(([type, label]) => ({ type, label,
 </div>
 <div id="object-category-results" class="planet-object-results-scroll" role="tabpanel"
   aria-labelledby={`object-tab-${defaultCategory}`} tabindex="0"
+  data-catalogue-src={catalogueSrc} data-catalogue-sha256={catalogueSha256} data-catalogue-bytes={catalogueBytes}
   style={`--object-category-visible-rows: ${Math.min(8, Number(objectCategoryCount(classifications, 'planet')))}`}>
-  <ul class="planet-object-list">
-    {systems.map(({ system, star, source }) => <li data-search-overview={SYSTEM_TITLES[system.id]!.label.toLocaleLowerCase('en')} hidden>
-      <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${system.route}?overview=system`}
-        data-source-subject={`overview:system:${system.id}`} data-source-document={source.href} data-source-label={source.label}>
-        <span class="planet-lens-icon"><PlanetNavigationMarker planetId={star.id} color={star.color} /></span>
-        <span class="planet-object-name planet-lens-label">{system.name}</span>
-      </a>
-    </li>)}
-    {Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} hidden>
-      <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${galacticRoute}?overview=${scope}`}
-        data-source-subject={`overview:${scope}`} data-source-document={overviewSourceDocumentation(scope, title.label).href}
-        data-source-label={overviewSourceDocumentation(scope, title.label).label}>
-        <span class="planet-lens-icon"><ContextNavigationMarker objectId={scope} /></span>
-        <span class="planet-object-name planet-lens-label">{title.label}</span>
-      </a>
-    </li>)}
-    {rows.map(group => <li class="planet-object-chunk" role="presentation"
-      hidden={!group.some(object => matchesObjectCategory(object.classification, defaultCategory))}
-      style={`contain-intrinsic-block-size:${Math.max(0, group.filter(object => matchesObjectCategory(object.classification, defaultCategory)).length * 28 - 8)}px`}>
-      <ul class="planet-object-chunk-list" role="presentation">
-        {group.map(object => object.kind === 'prepared-focus'
-          ? <PreparedObjectResult object={object} hidden={!matchesObjectCategory(object.classification, defaultCategory)} />
-          : <PlanetObjectResult object={object} activeObjectId={activeObjectId}
-            hidden={!matchesObjectCategory(object.classification, defaultCategory)} />)}
-      </ul>
-    </li>)}
-  </ul>
+  {import.meta.env.DEV
+    ? <PlanetCatalogueRows />
+    : <ul class="planet-object-list" data-catalogue-list></ul>}
+  <p class="planet-object-loading" role="status" data-catalogue-loading hidden={import.meta.env.DEV}>Loading celestial objects…</p>
   <p class="planet-object-empty" aria-live="polite" hidden>No matching results</p>
   <slot />
 </div>
