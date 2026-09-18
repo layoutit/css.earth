@@ -489,6 +489,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   const contextFile = 'src/objects/sun/prepared/world-context.json';
   const planFile = 'site/world-context-plan.mts';
   const plan = await readFile(planFile, 'utf8');
+  const nodeReaderFile = 'tools/prepared-world-context-node-source.mts', nodeReader = await readFile(nodeReaderFile, 'utf8');
   const packagedFile = 'site/packaged-object-runtime.mts', applicationFile = 'site/application-world-context.mts', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
   const starsPayloadFile = 'src/objects/stellar-neighbourhood/prepared/stars.json', contextObjectsFile = 'site/prepared-context-objects.mts';
   const [contextText, packaged, application, starDescriptorText, starsPayloadText, contextObjects] = await Promise.all([
@@ -536,6 +537,12 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     'An orbitless physical point does not require fabricated orbital geometry');
   const contextMutations: [SourceOverlay, RegExp][] = [
     [{ [planFile]: plan.replace("'../tools/prepared-world-context-node-source.mts'", "'../tools/other-context-plan.mts'") }, /world context plan|Computed dynamic imports/],
+    [{ [planFile]: plan.replace("type: 'json'", "type: 'javascript'") }, /world context plan|Computed dynamic imports/],
+    [{ [planFile]: plan.replace("'src/objects/sun/prepared/world-context.json'", "'src/objects/sun/prepared/other-context.json'") }, /world context plan|Computed dynamic imports/],
+    [{ [planFile]: plan.replace("if (source.protocol === 'file:') {", "if (source.protocol !== 'https:') {") }, /world context plan|Computed dynamic imports/],
+    // The Node-side path helper is followed and scanned: it cannot construct code or hide an import.
+    [{ [nodeReaderFile]: nodeReader.replace('return pathToFileURL(', "eval('0');\n  return pathToFileURL(") }, /Runtime code construction/],
+    [{ [nodeReaderFile]: `${nodeReader}\nexport const hidden = () => import(['./load', 'er.mts'].join(''));\n` }, /Computed dynamic imports/],
     [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
     [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
     [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],
@@ -569,7 +576,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
       return [{ [starsDescriptorFile]: JSON.stringify(descriptor), [starsPayloadFile]: bytes }, /point field.*identity/];
     })(),
   ];
-  for (const [changes, expected] of contextMutations) { assert.ok(Object.entries(changes).every(([file, value]) => value !== ({ [planFile]: plan, [packagedFile]: packaged, [applicationFile]: application } as SourceOverlay)[file]), "Mutation changes its source"); await assert.rejects(audit(changes), expected); }
+  for (const [changes, expected] of contextMutations) { assert.ok(Object.entries(changes).every(([file, value]) => value !== ({ [planFile]: plan, [nodeReaderFile]: nodeReader, [packagedFile]: packaged, [applicationFile]: application } as SourceOverlay)[file]), "Mutation changes its source"); await assert.rejects(audit(changes), expected); }
 });
 
 
