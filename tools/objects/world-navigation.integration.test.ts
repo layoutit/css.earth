@@ -106,11 +106,22 @@ it('changed authored bytes fail the finalizer source pin before publication', as
   const temporary = await mkdtemp(resolve(tmpdir(), 'physical-source-pin-'));
   try {
     await writeFile(resolve(temporary, 'object.json'), JSON.stringify(object.descriptor));
+    const manifestTarget = resolve(temporary, 'source/manifest.json');
+    await mkdir(dirname(manifestTarget), { recursive: true });
+    await writeFile(manifestTarget, await readFile(resolve(object.directory, 'source/manifest.json'), 'utf8'));
     const source = object.descriptor.properties.recipe.sources[0];
+    // Every declared recipe source is read and verified, not only the one under test;
+    // copy the rest unmodified so only the corrupted source can fail the pin check.
+    for (const reference of object.descriptor.properties.recipe.sources) {
+      if (reference.id === source.id) continue;
+      const path = resolve(temporary, reference.path);
+      await mkdir(dirname(path), { recursive: true });
+      await writeFile(path, await readFile(resolve(object.directory, reference.path)));
+    }
     const target = resolve(temporary, source.path);
     await mkdir(dirname(target), { recursive: true });
     await writeFile(target, `${await readFile(resolve(object.directory, source.path), 'utf8')} `);
     const definition = parsePreparedObjectRuntime(await read(resolve(object.directory, 'prepared/runtime.json')));
-    await assert.rejects(prepareWorldNavigationDefinition({ objectDirectory: temporary, definition, projectRoot: root }), /Navigation source pin differs/);
+    await assert.rejects(prepareWorldNavigationDefinition({ objectDirectory: temporary, definition, projectRoot: root }), /source (?:size|hash) drifted/);
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
