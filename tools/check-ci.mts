@@ -71,9 +71,10 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  const root=resolve(import.meta.dirname,'..'),args=process.argv.slice(2);
  const flags=['--list','--quick','--typecheck'];
  if(args.some(arg=>!flags.includes(arg)&&!/^--job=[a-z][a-z0-9-]*$/.test(arg))||new Set(args.map(arg=>arg.split('=')[0])).size!==args.length)
-  throw new Error('Usage: pnpm check:ci [--job=lint|typecheck|typecheck-tests|universe|nebula] [--quick] [--typecheck] [--list]');
+  throw new Error('Usage: pnpm check:ci [--job=lint|typecheck|typecheck-tests|universe|universe-preparation|nebula] [--quick] [--typecheck] [--list]');
  // Without --job, run every job the shared-universe checks need, in the order that fails fastest.
- const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6),jobNames=jobName?[jobName]:['lint','typecheck','typecheck-tests','universe'];
+ const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6),
+  jobNames=jobName?[jobName]:['lint','typecheck','typecheck-tests','universe','universe-preparation'];
  const workflow=await readFile(resolve(root,'.github/workflows/universe.yml'),'utf8');
  let steps=jobNames.flatMap(jobName=>readCiSteps(workflow,jobName));
  if(args.includes('--quick'))steps=quickSteps(steps);

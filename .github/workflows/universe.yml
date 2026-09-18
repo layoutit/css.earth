@@ -15,8 +15,35 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 # Contract lint needs no build or restored asset and answers within about two minutes; `pnpm check:pr` runs its
-# steps locally. The three heavy jobs start after it, in parallel, and any of them failing cancels the run.
+# steps locally. The heavy jobs start after it, in parallel, and any of them failing cancels the run. A docs-only
+# pull request (tools/classify-changes.mts) skips the heavy jobs entirely; Contract lint alone (doc links and
+# placement) still runs, and a push to main always runs everything.
 jobs:
+  changes:
+    name: Classify changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      docs_only: ${{ steps.classify.outputs.docs_only }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # History without blobs: a PR needs a merge base with its base branch, and a push needs the previous tip;
+          # `git diff --name-only` reads only commits and trees either way.
+          fetch-depth: 0
+          filter: blob:none
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Classify what this change touched
+        id: classify
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            node tools/classify-changes.mts pr "origin/$GITHUB_BASE_REF"
+          else
+            node tools/classify-changes.mts push "${{ github.event.before }}"
+          fi
+
   lint:
     name: Contract lint
     runs-on: ubuntu-latest
@@ -83,14 +110,16 @@ jobs:
       - name: Test asset inventory, publish verification, closure and local CI tooling
         # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
-        # workflow, object-scope.yml), the prune dry-run report, and the runner behind `pnpm check:pr`. Deliberately
-        # not the wider `pnpm test:platform`, which this workflow does not run and which has known unrelated failures.
+        # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the prune dry-run report,
+        # and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`, which this
+        # workflow does not run and which has known unrelated failures.
         run: >-
           node --test tools/runtime-assets.test.mts
           tools/publish-verification.test.mts
           tools/check-assets-published.test.mts
           src/platform/runtime-asset-closure.test.mts
           tools/object-scope-gate.test.mts
+          tools/classify-changes.test.mts
           tools/prune-runtime-assets.test.mts
           tools/check-ci.test.mts
       - name: Check published assets this change adds
@@ -109,10 +138,12 @@ jobs:
 
   typecheck:
     name: Typecheck
-    needs: lint
+    needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing.
-    if: ${{ !cancelled() }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
+    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
+    # still run and fail here, never skip. A push to main never skips, docs-only or not.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -247,10 +278,12 @@ jobs:
 
   universe:
     name: Prepared universe and shared renderer
-    needs: lint
+    needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing.
-    if: ${{ !cancelled() }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
+    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
+    # still run and fail here, never skip. A push to main never skips, docs-only or not.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -360,12 +393,13 @@ jobs:
 
   universe-preparation:
     name: Prepared universe preparation and galaxy field
-    needs: lint
+    needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
     # failed `needs` reports "skipped", which a ruleset counts as passing. Split out of the `universe` job so the
     # two halves of "Prepared universe and shared renderer" run in parallel at roughly equal length; see
-    # output/CI_OPTIMIZATION.md section 6, item 3.
-    if: ${{ !cancelled() }}
+    # output/CI_OPTIMIZATION.md section 6, item 3. A docs-only pull request skips this job (see the `changes` job
+    # and tools/classify-changes.mts); a push to main never skips, and a failed lint still fails here, not skip.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -436,10 +470,12 @@ jobs:
 
   nebula:
     name: Internal nebula packages and isolated controls
-    needs: lint
+    needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing.
-    if: ${{ !cancelled() }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
+    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
+    # still run and fail here, never skip. A push to main never skips, docs-only or not.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
