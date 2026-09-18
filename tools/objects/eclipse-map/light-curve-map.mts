@@ -24,6 +24,8 @@ export interface FitRecipe {
   readonly transitExclusionPhase: number;
   readonly systematics: readonly Systematic[];
   readonly gridHeight: number;
+  /** Only harmonics even in longitude about the substellar meridian: a map centred on the substellar point. */
+  readonly longitudeSymmetric?: boolean;
 }
 
 /** Fits the map, choosing the model by BIC. Linear systematics are columns; an exponential ramp's time constant is profiled by
@@ -57,7 +59,7 @@ export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: Ho
   });
   const taus = ramps.length ? ramps[0]!.timeConstantsDays : [null];
   const degrees = [...recipe.degrees].sort((a, b) => a - b), counts = [...recipe.eigencurves].sort((a, b) => a - b);
-  const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time, lightTravel)]));
+  const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time, lightTravel, { longitudeSymmetric: recipe.longitudeSymmetric ?? false })]));
   const fitWith = (basis: EigenBasis, count: number, tau: number | null) => fitEigenmap(basis, count, flux, error, () => true, { positive: recipe.positive, systematics: columns(tau) });
   // Profiling the ramp uses the unconstrained linear fit, which is fast; the candidates and the final map keep positivity.
   const profileChi = (basis: EigenBasis, count: number, tau: number | null) => fitEigenmap(basis, count, flux, error, () => true, { positive: false, systematics: columns(tau) }).chiSquared;
