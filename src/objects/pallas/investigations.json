@@ -233,6 +233,23 @@
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
+    },
+    {
+      "id": "second-apparition-levels",
+      "subject": "The other apparition's frames and the level fit",
+      "status": "unresolved",
+      "finding": "Measured on 2026-09-18 with tools/objects/sphere-survey/apparitions.mts. The lens casts 30 frames from 2017-10-08 to 2017-11-03, which see Pallas from 63° to 70° south. The release also holds 25 frames from 2019-03-14 to 2019-03-28, which see it from 70° to 75° north; they would add about 49 percentage points of photographed surface. No frame of that apparition shares any surface with a cast frame within the level fit's 60° angle limit: 0 display samples, against the 128 the fit needs. The deconvolved frames state no unit and their scale changes between apparitions, so without shared surface the other apparition's level cannot be placed, and the lens keeps the apparition the survey's figure shows most.",
+      "revisitWhen": "The frames are placed on a common photometric scale, by the producers or by a documented per-frame normalisation, or a released frame is found that shares surface with both apparitions within the level fit's angle limit.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/2Pallas/Deconv/",
+        "https://github.com/layoutit/css.earth/blob/86dba0be4d4a0f103c48ea5f69cb9717e3c08c3f/tools/objects/sphere-survey/apparitions.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "86dba0be4d4a0f103c48ea5f69cb9717e3c08c3f"
+        }
+      ]
     }
   ]
 }
