@@ -3354,6 +3354,55 @@
           }
         ]
       }
+    },
+    {
+      "id": "liciacube",
+      "name": {
+        "value": "LICIACube",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Italian Space Agency cubesat carried by DART; separated before impact to image the collision and the resulting ejecta from Dimorphos.",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      }
     }
   ],
   "missions": [
@@ -5695,6 +5744,69 @@
           {
             "catalogueId": "arxiv-1802-06086",
             "checkedOn": "2026-09-16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart",
+      "name": {
+        "value": "DART",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "description": {
+        "value": "NASA kinetic-impactor test that struck Dimorphos to change its orbit around Didymos; LICIACube, provided by the Italian Space Agency, imaged the impact.",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA",
+          "ASI"
+        ],
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "facilityId": "liciacube",
+          "role": "flyby",
+          "citations": [
+            {
+              "catalogueId": "nasa-dart-orbit-change",
+              "checkedOn": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "started": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "ended": {
+        "value": "2022",
+        "citations": [
+          {
+            "catalogueId": "nasa-dart-orbit-change",
+            "checkedOn": "2026-09-18"
           }
         ]
       }

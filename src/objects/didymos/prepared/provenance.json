@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bbe52575685ca8a4a1d945b4fce547cf91f502d6b989190ef45d88ae5c9db60f"
+    "sha256": "993331b093fe2567256d06398680627128b291be275e47d5da8624bb7ad8fd1f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1014,6 +1014,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "d840ec3e3f6ff328a5de3ec899f2855543bdd47d278d91dfee6e9b1ed8f9c378",
       "bytes": 26749440,
       "dependencies": [],
@@ -1050,6 +1059,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234231-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/11"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
@@ -1092,6 +1110,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "e8a8f9da7ab7dc03642b7651ae6de01f93cca7a6268e9b1fdb295396ecceec99",
       "bytes": 26749440,
       "dependencies": [],
@@ -1128,6 +1155,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234235-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/15"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
@@ -1170,6 +1206,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "f8889481ab8b3d0304c34b1c299dec6bc041cae8c8165a1d24eac505dce6e249",
       "bytes": 26749440,
       "dependencies": [],
@@ -1206,6 +1251,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234239-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/19"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
@@ -1248,6 +1302,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "2cc1724ca485205a636e3c61951b8f8c3483c1e550e0035c6337b60b7c68fdea",
       "bytes": 26749440,
       "dependencies": [],
@@ -1284,6 +1347,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234243-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/23"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
