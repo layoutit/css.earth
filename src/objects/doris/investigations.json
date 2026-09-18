@@ -6,7 +6,7 @@
       "id": "selected-shape-and-spin",
       "subject": "DAMIT 1845: selected shape and spin",
       "status": "included",
-      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1845.txt. Model 1845, version 2017-09-21, pole (298\u00b0, 59\u00b0), period 11.8901 h match the retained metadata. The archive diameter field is 210 \u00b123 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-1845.txt. Model 1845, version 2017-09-21, pole (298°, 59°), period 11.8901 h match the retained metadata. The archive diameter field is 210 ±23 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/doris/README.md",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845",
@@ -28,15 +28,21 @@
     },
     {
       "id": "surface-imagery",
-      "survey": "surface-imagery-2",
-      "status": "unresolved",
+      "subject": "Registered surface imagery",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 10 camera-1 deconvolved frames, 2017-11-02 and 2017-11-29, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: Shape uses the shared missing-imagery grid. DAMIT's viewer illustrations are not source surface maps; no albedo, photographic color, regolith or composition is inferred.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/doris/README.md"
+        "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/doris/README.md",
+        "https://observations.lam.fr/astero/Data/48Doris/Deconv/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
@@ -44,7 +50,7 @@
       "id": "damit-alternatives",
       "subject": "Other DAMIT shape solutions",
       "status": "unresolved",
-      "finding": "The live DAMIT export lists these other models for this target: 936: pole (297\u00b0, 61\u00b0), 11.8901 h, version 2016-01-04. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "finding": "The live DAMIT export lists these other models for this target: 936: pole (297°, 61°), 11.8901 h, version 2016-01-04. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
       "revisitWhen": "Independent shape, spin or scale evidence distinguishes these alternatives, or a changed release offers a demonstrably better supported model.",
       "evidence": [
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/936"
@@ -60,9 +66,8 @@
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Measured on all 10 deconvolved frames with the release's rotation record, read latitude-first because 293.5116 degrees cannot be a latitude, cast onto the released mesh. Only the five frames of 2017-11-29 score, and they agree closely with each other, leaving a 0.61-degree floor, but they sit 3.58 degrees from the model, just outside the gate. Five frames from one night are a single rotational phase, so that offset cannot be separated from a phase error, and no lens ships. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
-      "revisitWhen": "Frames from a second night whose outline scores, to separate a constant pole offset from a rotational phase error.",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 10 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured on all 10 deconvolved frames with the release's rotation record, read latitude-first because 293.5116 degrees cannot be a latitude, cast onto the released mesh. Only the five frames of 2017-11-29 score, and they agree closely with each other, leaving a 0.61-degree floor, but they sit 3.58 degrees from the model, just outside the gate. Five frames from one night are a single rotational phase, so that offset cannot be separated from a phase error, and no lens ships. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/48Doris/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/48_Doris_param.txt",
@@ -76,6 +81,27 @@
         {
           "date": "2026-09-17",
           "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.25 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.25, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.956 to 0.966 at our phase, against 0.967 to 0.968 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 1 of 2 columns, one step from it in 1. With the paper’s photographs 0.949 to 0.964. Turned in the image, our outline best overlaps the paper’s photographs at -1.0 to 4.5° and its model panels at -2.0 to 0.5°. The spin axis we project lies at 34.5 to 36.8° on the sky against 32.6 to 35.1° for the figure’s arrows. Native outline residual 3.027 px mean over 10 frames at our phase; the sweep’s lowest is 2.639 px at -14°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.77° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/48Doris/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/48_Doris_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     }

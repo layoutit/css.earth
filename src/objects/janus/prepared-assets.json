@@ -1,0 +1,16 @@
+{
+  "schema": "cssjanus-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 676211,
+      "sha256": "8d746de18b5127a191beba9a2569aea9dc7c30c7dd66415b13b73d373e91b609"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 557100,
+      "sha256": "b07b88d2d9cde5f527a4d43e35286af25741b4151337f93911c3e1e4b34a03ce"
+    }
+  ]
+}

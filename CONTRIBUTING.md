@@ -14,12 +14,24 @@ pnpm dev
 ```
 
 `pnpm install` builds the shared packages, the renderer and the preparation
-tools; `pnpm setup:assets` downloads the prepared browser images; `pnpm dev`
-restores the prepared JSON beside each body (it needs the images `setup:assets`
-just downloaded) and serves the site on port 4210. For a single body, use
-`pnpm setup:assets --object=<id>` and open `/<id>/`. For a production build,
-run `pnpm build`, then `pnpm preview`; the build first runs `setup:assets`
-itself, which only downloads files that are missing or changed.
+tools; `pnpm setup:assets` downloads the prepared browser images and each
+object's baked `prepared/runtime.json` and `prepared/scene.json` (or, for
+milky-way/heliosphere/stellar-neighbourhood/lmc and the nebulae, its whole
+baked `prepared/` output) — git no longer tracks those files; `pnpm dev`
+re-derives the prepared JSON transport beside each
+body from what `setup:assets` just downloaded, and serves the site on port
+4210. For a single body, use `pnpm setup:assets --object=<id>` and open
+`/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the
+`prepared/*` inventory (skipping the public texture download) — useful when
+only the JSON changed. For a production build, run `pnpm build`, then `pnpm
+preview`; the build first runs `setup:assets` itself, which only downloads
+files that are missing or changed.
+
+Maintainer flow after baking a body or a context object: bake locally, `node
+tools/publish-runtime-assets.mts --object=<id>` to publish every file its
+`runtime-assets.json` and/or `prepared-assets.json` inventory (both kinds;
+see [Publishing prepared assets](README.md#publishing-prepared-assets-maintainers)),
+then commit the refreshed inventory — never the baked files themselves.
 
 Development startup checks installed volume packages without preparing every
 nebula. A missing or invalid package leaves its catalogue facts accessible and
@@ -53,6 +65,10 @@ issue from the archive-product template instead of writing a reader for one body
 as a failure with no steps recorded, so no branch has CI evidence and every check
 must be run locally. Cite this section in a PR instead of explaining it again.
 
+`node tools/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
+(it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
+`prepared/scene.json`, no longer committed) before it, or it fails on missing files rather than ownership defects.
+
 Browser checks also require the exact prepared rendering assets. Sources and
 catalogue preparation restore metadata, not those assets. Successfully opening
 an unavailable Helix view does not qualify Helix's rendering or interaction.
@@ -76,6 +92,10 @@ requires its referenced bank to be present.
 - Lead with the problem and what now happens. Link the body README or guide you changed.
 - Keep prepared outputs reproducible from checked-in inputs, and keep evidence beside the body it belongs to. Do not commit scratch output.
 - Every added file must support a named claim, explanation or test. Explain unusually large additions.
+- A PR touching more than 12 `src/objects/<id>/` directories fails the separate "Object-scope gate" check unless it
+  carries the `pipeline-change` label; that check re-runs on its own when the label is added or removed, so labeling
+  an already-red PR clears it without pushing a new commit. Keep ordinary body work scoped to a few bodies instead
+  of asking for the label.
 
 ## Licence
 

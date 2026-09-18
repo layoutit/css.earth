@@ -1,0 +1,16 @@
+{
+  "schema": "csscharon-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 540687,
+      "sha256": "ef33b5362993aed718b3ff245d5e6be6e1aa7319c25f7ac4492defee16db754c"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 386008,
+      "sha256": "95ade16449a57137164af25de4cd0ed8b04a184992e5612273e537200da294e3"
+    }
+  ]
+}

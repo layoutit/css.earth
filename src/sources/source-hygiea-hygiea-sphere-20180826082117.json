@@ -1,0 +1,37 @@
+{
+  "id": "source-hygiea-hygiea-sphere-20180826082117",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hygiea · hygiea sphere 20180826082117",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_21_17.749_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hygiea/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "2877ac260640a7db7f61c29e182520ee8d7571b8356fc16d6a53fa67adbaf251",
+      "locator": "/inputs/17"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The hygiea sphere 20180826082117 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

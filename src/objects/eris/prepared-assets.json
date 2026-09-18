@@ -1,0 +1,16 @@
+{
+  "schema": "csseris-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 515190,
+      "sha256": "b813562b9f4bdb417638897b782c73c08ac021df22e0a828bc7b09e7573c2c1f"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 374772,
+      "sha256": "c47d278c88367581ea2dc12db6829cb6bc230ca448c138fafe1a432917132d74"
+    }
+  ]
+}

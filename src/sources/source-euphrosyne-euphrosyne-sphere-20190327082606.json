@@ -1,0 +1,37 @@
+{
+  "id": "source-euphrosyne-euphrosyne-sphere-20190327082606",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Euphrosyne · euphrosyne sphere 20190327082606",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/31Euphrosyne/Deconv/d31Euphrosyne_2019-03-27T08_26_06.418_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/euphrosyne/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "a27e4a13122f5681463db23d9d546240a5d59d4832c167c460c09bffde41e976",
+      "locator": "/inputs/21"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The euphrosyne sphere 20190327082606 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

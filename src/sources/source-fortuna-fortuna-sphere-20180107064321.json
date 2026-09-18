@@ -1,0 +1,37 @@
+{
+  "id": "source-fortuna-fortuna-sphere-20180107064321",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Fortuna · fortuna sphere 20180107064321",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/19Fortuna/Deconv/d19Fortuna_2018-01-07T06_43_21.868_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/fortuna/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "5a683bce40a0fe0cefa63cafd334dff7dba1d123f9917e430d997a56a8a4938a",
+      "locator": "/inputs/11"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The fortuna sphere 20180107064321 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

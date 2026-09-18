@@ -1,0 +1,16 @@
+{
+  "schema": "cssvera-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 748486,
+      "sha256": "161b8cb75a7682fb435d9db6d3c75fa652e6e35e1ec6a19a92cc6b6563df769b"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 618357,
+      "sha256": "a756fed1bb4dd3e58c2391fc68b955c338540b60f40298c9fb7efab84ad6b51a"
+    }
+  ]
+}

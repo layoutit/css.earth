@@ -1,0 +1,16 @@
+{
+  "schema": "cssklio-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 748011,
+      "sha256": "322bb2957a6315276bd6801ce443011eac1afa66c3afeae38d3e19ce3225103c"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 618088,
+      "sha256": "9a1712c082a1bbccec196a1671f776b530ecb4e0636098d6e047dcabf1000b94"
+    }
+  ]
+}

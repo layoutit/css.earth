@@ -19,10 +19,10 @@ import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type 
 import { decodeCalibratedCamera, loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
 import { radialTerrainForLens } from './terrestrial-layers/radial-models.mts';
 import { observerCaster, turnedOrientation, type TurnableCaster } from './terrestrial-layers/registration-sweeps.mts';
-import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from './surface-observations/published-comparison.mts';
+import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, comparisonBlock, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonEvidence, parseComparisonSpec, withComparisonBlock, type Mask, type Raster } from './surface-observations/published-comparison.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
-const TURN_STEP = 10, SWEEP = { from: -30, to: 30, step: 2 };
+const SWEEP = { from: -30, to: 30, step: 2 };
 const round = (value: number, digits = 3) => Number(value.toFixed(digits));
 const area = (mask: Mask) => mask.data.reduce((sum, value) => sum + value, 0);
 
@@ -63,23 +63,14 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   }
   const best = Object.entries(sweep).sort((a, b) => a[1] - b[1])[0];
 
-  const faceNormals = (mesh.indices as number[][]).map(([a, b, c]) => {
-    const p = mesh.positions as number[][], u = p[b].map((v, k) => v - p[a][k]), w = p[c].map((v, k) => v - p[a][k]);
-    const n = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]], m = Math.hypot(...n);
-    const outward = n[0] * (p[a][0] + p[b][0] + p[c][0]) + n[1] * (p[a][1] + p[b][1] + p[c][1]) + n[2] * (p[a][2] + p[b][2] + p[c][2]) < 0 ? -1 : 1;
-    return n.map(v => outward * v / m);
-  });
+  // Our outline at a camera: every pixel whose ray meets the mesh.
   const render = (caster: TurnableCaster, width: number, height: number) => {
-    const mask = new Uint8Array(width * height), shade = new Uint8Array(width * height), origin = caster.positionMeters, sun = caster.sunDirection;
-    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-      const hit = mesh.intersect(origin, caster.ray(x, y)); if (!hit) continue;
-      const n = faceNormals[hit.faceId], i = y * width + x;
-      mask[i] = 1; shade[i] = Math.round(40 + 215 * Math.max(0, n[0] * sun[0] + n[1] * sun[1] + n[2] * sun[2]));
-    }
-    return { mask: { width, height, data: mask } as Mask, shade };
+    const mask = new Uint8Array(width * height), origin = caster.positionMeters;
+    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (mesh.intersect(origin, caster.ray(x, y))) mask[y * width + x] = 1;
+    return { mask: { width, height, data: mask } as Mask };
   };
 
-  const columns = [], visuals: { label: string; model: Mask; shade: Uint8Array; ours: Mask; cellModel: number; cellImage: number; column: number }[] = [];
+  const columns = [], visuals: { label: string; model: Mask; photograph: Mask; ours: Mask; cellModel: number; cellImage: number; column: number }[] = [];
   for (const [index, column] of spec.columns.entries()) {
     if (column.frame === null) continue;
     const camera = atZero.find(entry => entry.id === column.frame);
@@ -88,9 +79,9 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
     if (!(Math.abs(Date.parse(`${column.label}Z`) - Date.parse(`${camera.exposure.start}Z`)) < 1000))
       throw new TypeError(`Figure column ${column.label} names ${column.frame}, whose exposure starts at ${camera.exposure.start}.`);
     const { width, height } = decodeCalibratedCamera(await readFile(resolve(sourceDirectory, camera.path)), 'fits-zimpol-intensity');
-    const caster = observerCaster(camera.sighting, base), model = panelDisc(figure, cell(spec.rows.model, index)), photograph = panelDisc(figure, cell(spec.rows.image, index));
+    const caster = observerCaster(camera.sighting, base), model = panelDisc(figure, cell(spec.rows.model, index)), photograph = panelDisc(figure, cell(spec.rows.image, index), 40, spec.rows.labelLines);
     const turns: Record<string, number> = {};
-    for (let turn = 0; turn < 360; turn += TURN_STEP) turns[turn] = round(outlineOverlap(render(turn === 0 ? caster : caster.turned(turn), width, height).mask, model));
+    for (let turn = 0; turn < 360; turn += PHASE_SWEEP_STEP_DEGREES) turns[turn] = round(outlineOverlap(render(turn === 0 ? caster : caster.turned(turn), width, height).mask, model));
     const drawn = render(caster, width, height);
     // What the measure gives one shape at this pair of scales: our outline against itself drawn at the paper panel's pixel
     // scale. The two drawings differ only by their pixels, so this is the score to read the paper comparisons against.
@@ -106,7 +97,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
       bestTurnDegrees: bestTurn > 180 ? bestTurn - 360 : bestTurn, turns,
       imageTurnDegrees: { model: bestImageTurnDegrees(drawn.mask, model), photograph: bestImageTurnDegrees(drawn.mask, photograph) },
       axis: { paperDegrees: paperAxis === null ? null : round(paperAxis, 1), oursDegrees: ours === null ? null : round(ours, 1), differenceDegrees: paperAxis === null || ours === null ? null : round(axisDifferenceDegrees(ours, paperAxis), 1) } });
-    visuals.push({ label: column.label, model, shade: drawn.shade, ours: drawn.mask, cellModel: spec.rows.model, cellImage: spec.rows.image, column: index });
+    visuals.push({ label: column.label, model, photograph, ours: drawn.mask, cellModel: spec.rows.model, cellImage: spec.rows.image, column: index });
   }
   const evidence = {
     schema: COMPARISON_EVIDENCE_SCHEMA, objectId, lensId: spec.lensId, source: spec.source, figure: spec.figure,
@@ -125,32 +116,32 @@ export async function writeComparisonEvidence(result: Awaited<ReturnType<typeof 
   await evidenceImage(result, resolve(directory, 'published-comparison.webp'));
 }
 
-/** A side-by-side image per compared column: the paper's model panel, our rendering, and the paper's photograph with our outline. */
+/**
+ * One tile per compared column, up to four to a row: the paper's photograph panel with the outline of the paper's model
+ * in amber and ours in cyan. The figure does not align a column's panels with each other (Elektra's photographs sit 4 to
+ * 14 px from its model panels), so both outlines are centred on the photograph, as the overlap measure compares shapes:
+ * the paper's model keeps its own size, and ours is scaled to it.
+ */
 async function evidenceImage(result: Awaited<ReturnType<typeof measurePublishedComparison>>, path: string) {
-  const { figure, cell, visuals } = result, tile = 220, gap = 8, label = 150;
-  const width = label + 3 * tile + 2 * gap, height = 40 + visuals.length * (tile + gap), canvas = Buffer.alloc(width * height * 3, 16);
-  const put = (x: number, y: number, rgb: number[]) => { if (x >= 0 && y >= 0 && x < width && y < height) canvas.set(rgb, (y * width + x) * 3); };
+  const { figure, cell, visuals } = result, tile = 220, gap = 8, header = 30, perRow = Math.min(4, visuals.length), rows = Math.ceil(visuals.length / perRow);
+  const width = Math.max(perRow * tile + (perRow - 1) * gap, 2 * tile + gap), height = header + rows * tile + (rows - 1) * gap, canvas = Buffer.alloc(width * height * 3, 16);
+  const put = (x: number, y: number, rgb: readonly number[]) => { if (x >= 0 && y >= 0 && x < width && y < height) canvas.set(rgb, (y * width + x) * 3); };
   const figurePixel = (x: number, y: number) => [0, 1, 2].map(k => Number(figure.data[(y * figure.width + x) * 3 + k]));
-  for (const [row, visual] of visuals.entries()) {
-    const top = 40 + row * (tile + gap);
-    for (const [slot, cellRow] of [[0, visual.cellModel], [2, visual.cellImage]] as const) {
-      const box = cell(cellRow, visual.column), side = Math.min(box.x1 - box.x0, box.y1 - box.y0);
-      for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) put(label + slot * (tile + gap) + x, top + y, figurePixel(box.x0 + Math.floor(x * side / tile), box.y0 + Math.floor(y * side / tile)));
-    }
-    // Our rendering and outline, scaled so the body has the paper model's area, centred where the paper's body is.
-    const centroid = (m: Mask) => { let n = 0, sx = 0, sy = 0; m.data.forEach((v, i) => { if (v) { n++; sx += i % m.width; sy += Math.floor(i / m.width); } }); return [sx / n, sy / n]; };
-    const box = cell(visual.cellModel, visual.column), side = Math.min(box.x1 - box.x0, box.y1 - box.y0);
-    const scale = Math.sqrt(area(visual.ours) / area(visual.model)), [ox, oy] = centroid(visual.ours), [mx, my] = centroid(visual.model);
-    const source = (x: number, y: number) => [Math.round(ox + (x * side / tile - mx) * scale), Math.round(oy + (y * side / tile - my) * scale)];
-    for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) {
-      const [sx, sy] = source(x, y), inside = sx >= 0 && sy >= 0 && sx < visual.ours.width && sy < visual.ours.height, i = sy * visual.ours.width + sx;
-      const v = inside ? visual.shade[i] : 0; put(label + (tile + gap) + x, top + y, [v, v, v]);
-      const edge = inside && visual.ours.data[i] && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => { const nx = sx + dx, ny = sy + dy; return nx < 0 || ny < 0 || nx >= visual.ours.width || ny >= visual.ours.height || !visual.ours.data[ny * visual.ours.width + nx]; });
-      if (edge) put(label + 2 * (tile + gap) + x, top + y, [0, 220, 255]);
-    }
+  const centroid = (m: Mask) => { let n = 0, sx = 0, sy = 0; m.data.forEach((v, i) => { if (v) { n++; sx += i % m.width; sy += Math.floor(i / m.width); } }); return [sx / n, sy / n]; };
+  const within = (m: Mask, x: number, y: number) => x >= 0 && y >= 0 && x < m.width && y < m.height && m.data[y * m.width + x] === 1;
+  const edge = (inside: (x: number, y: number) => boolean, x: number, y: number) => inside(x, y) && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => !inside(x + dx, y + dy));
+  for (const [index, visual] of visuals.entries()) {
+    const left = (index % perRow) * (tile + gap), top = header + Math.floor(index / perRow) * (tile + gap);
+    const photo = cell(visual.cellImage, visual.column), step = Math.min(photo.x1 - photo.x0, photo.y1 - photo.y0) / tile;
+    for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) put(left + x, top + y, figurePixel(photo.x0 + Math.floor(x * step), photo.y0 + Math.floor(y * step)));
+    const [px, py] = centroid(visual.photograph), [mx, my] = centroid(visual.model), [ox, oy] = centroid(visual.ours);
+    const inModel = (x: number, y: number) => within(visual.model, Math.floor(x * step - px + mx), Math.floor(y * step - py + my));
+    const scale = Math.sqrt(area(visual.ours) / area(visual.model));
+    const inOurs = (x: number, y: number) => within(visual.ours, Math.round(ox + (x * step - px) * scale), Math.round(oy + (y * step - py) * scale));
+    for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) if (edge(inModel, x, y)) put(left + x, top + y, [255, 176, 0]);
+    for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) if (edge(inOurs, x, y)) put(left + x, top + y, [0, 220, 255]);
   }
-  const text = (x: number, y: number, s: string) => `<text x="${x}" y="${y}" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#e6e6e6">${s}</text>`;
-  const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">${text(label + 6, 26, 'Paper: model')}${text(label + tile + gap + 6, 26, 'Ours: same epoch')}${text(label + 2 * (tile + gap) + 6, 26, 'Paper photo, our outline')}${visuals.map((v, r) => text(10, 40 + r * (tile + gap) + tile / 2, v.label.replace('T', ' '))).join('')}</svg>`;
+  const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><text x="2" y="20" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#e6e6e6">Paper photographs, with the outlines of <tspan fill="#ffb000">the paper's model</tspan> and <tspan fill="#00dcff">ours</tspan> centred on each</text></svg>`;
   await sharp(canvas, { raw: { width, height, channels: 3 } }).composite([{ input: Buffer.from(svg) }]).webp({ quality: 86 }).toFile(path);
 }
 

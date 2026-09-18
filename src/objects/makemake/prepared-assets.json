@@ -1,0 +1,16 @@
+{
+  "schema": "cssmakemake-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 519155,
+      "sha256": "d37fb44c69dd94ee37df4e89ab696af307a0fbd1cbb016ae146e6cd310f27ba9"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 378376,
+      "sha256": "8c6fbe567d9b7372f811987969b09e248882db50af0714716e934925f8571190"
+    }
+  ]
+}

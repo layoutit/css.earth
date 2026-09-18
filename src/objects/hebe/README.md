@@ -25,16 +25,16 @@ Hebe is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publishe
 ### SPHERE photograph
 
 <!-- published-comparison:begin -->
-Measured by `tools/objects/published-comparison.mts` against [Figure B.5](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.
+Measured by `tools/objects/published-comparison.mts` against [Figure B.5](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2018-11-28 03:58:20 | 0.960 | 0.951 | 0.976 | 0° | -2.5°, 0° | 54.3° against 52.4° |
-| 2018-12-14 07:09:41 | 0.948 | 0.953 | 0.980 | 0° | -1.5°, 0° | 52.7° against 51.1° |
-| 2018-12-19 04:49:05 | 0.967 | 0.963 | 0.978 | 0° | -2.5°, 1° | 52.1° against 50.1° |
-| 2018-12-19 04:53:46 | 0.964 | 0.968 | 0.979 | 0° | -1.5°, 0.5° | 52.1° against 50.1° |
-| 2018-12-19 05:57:07 | 0.967 | 0.969 | 0.979 | 0° | -3°, 0° | 52.1° against 49.9° |
-| 2018-12-19 06:30:23 | 0.978 | 0.973 | 0.983 | 0° | 0°, 0° | 52.1° against 49.9° |
+| 2018-11-28 03:58:20 | 0.959 | 0.951 | 0.976 | 0° | -2.5°, 0° | 54.3° against 52.3° |
+| 2018-12-14 07:09:41 | 0.954 | 0.953 | 0.980 | 0° | -1.5°, 0° | 52.7° against 51.0° |
+| 2018-12-19 04:49:05 | 0.973 | 0.963 | 0.976 | 0° | -2°, 1° | 52.1° against 50.1° |
+| 2018-12-19 04:53:46 | 0.968 | 0.968 | 0.977 | 0° | -1.5°, 0.5° | 52.1° against 50.1° |
+| 2018-12-19 05:57:07 | 0.969 | 0.969 | 0.981 | 0° | -3°, 0° | 52.1° against 49.9° |
+| 2018-12-19 06:30:23 | 0.980 | 0.973 | 0.983 | 0° | 0°, 0° | 52.1° against 49.8° |
 
 Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 1.445 px at our phase; the lowest of a ±30° sweep is 1.422 px at 10°.
 <!-- published-comparison:end -->

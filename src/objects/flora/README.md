@@ -10,6 +10,9 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
+| SPHERE photograph | [15 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 2017-12-30 and 2017-12-31](https://observations.lam.fr/astero/Data/8Flora/Deconv/) on the [ADAM reconstruction, as DAMIT model 5928 distributes it](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj) |
+| Photograph cameras | [Rotation state, as DAMIT model 5928 states it](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/spin.txt), read longitude-first, and JPL Horizons geometry from Paranal |
+| Photograph registration | [Vernazza et al. (2021), Figure B.7](https://doi.org/10.1051/0004-6361/202141781) |
 
 Flora is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape.
 
@@ -18,6 +21,36 @@ Flora is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publish
 - [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/8_Flora_mpcd.obj): 4002 vertices, 8000 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 70.982687 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 154.745 × 149.762 × 127.654 km; these are not best-fit ellipsoid axes.
 
 ## Evidence
+
+### SPHERE photograph
+
+<!-- published-comparison:begin -->
+Measured by `tools/objects/published-comparison.mts` against [Figure B.7](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
+
+| Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2017-12-30 03:26:45 | 0.973 | 0.969 | 0.976 | 0° | -4°, 5° | 1.3° against 149.9° |
+| 2017-12-30 05:47:16 | 0.969 | 0.961 | 0.974 | -10° | -6.5°, 1° | 1.3° against 147.4° |
+| 2017-12-31 03:14:29 | 0.966 | 0.962 | 0.978 | -10° | -5.5°, -3.5° | 1.3° against 148.1° |
+
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 15 native frames after the centre fit is 1.388 px at our phase; the lowest of a ±30° sweep is 1.340 px at -6°.
+<!-- published-comparison:end -->
+
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 15 | 0 | — | — | — | its other 15 frames | 0 of 15 | — | 0 of 15 | — | ×1.03 | no verdict |
+
+`zimpol` ships on its paper’s comparison, [Figure B.7](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+<!-- registration-report:end -->
+
+### Shape
 
 The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
@@ -32,6 +65,8 @@ Shape uses the shared neutral-gray material. It is not photographed color, refle
 Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
+
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Flora from 39° north, so surface the survey did not see keeps the missing-imagery grid. LAM withholds this body’s own ADAM mesh and rotation record, so both come from DAMIT model 5928, which rounds the pole to whole degrees and the period to 12.86667 h. From its 1953 epoch that rounding leaves up to 6.2° of rotational phase uncertain at the 2017 frames; the native frames’ outline fits best 6° from our phase.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 146 km, ecliptic J2000 pole (337\u00b0, -1\u00b0), period 12.86667 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 70.98268657749367 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 146 km, ecliptic J2000 pole (337°, -1°), period 12.86667 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 70.98268657749367 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/flora/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -51,13 +51,13 @@
     {
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
-      "status": "unresolved",
-      "finding": "The live source folder https://observations.lam.fr/astero/Data/8Flora/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
-      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 15 camera-1 deconvolved frames, 2017-12-30 and 2017-12-31, cast onto the ADAM mesh with cameras computed from the rotation state DAMIT model 5928 states, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 5 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/8Flora/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/flora/README.md",
         "https://observations.lam.fr/astero/Data/8Flora/",
-        "https://observations.lam.fr/astero/"
+        "https://observations.lam.fr/astero/",
+        "https://observations.lam.fr/astero/Data/8Flora/Deconv/"
       ],
       "checked": [
         {
@@ -68,15 +68,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
         }
       ]
     },
     {
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
-      "status": "excluded",
-      "finding": "The live directory also lists 8_Flora_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
-      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "status": "included",
+      "finding": "The live directory also lists 8_Flora_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Reopened 2026-09-18 because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure B.7 describe; the Shape and Elevation views keep MPCD.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/8_Flora_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -88,15 +91,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
         }
       ]
     },
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Corrected: DAMIT lists three models for this body, so the column order was never the blocker. The blocker is the archive: 8_Flora_param.txt and 8_Flora_adam.obj are listed in the release directory but answer 403, while the MPCD mesh and the deconvolved frames are served. No registration was attempted without a rotation record for the frame the release describes.",
-      "revisitWhen": "8_Flora_param.txt or 8_Flora_adam.obj answering from the release directory.",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 15 camera-1 frames on the ADAM mesh with the rotation record read longitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Corrected: DAMIT lists three models for this body, so the column order was never the blocker. The blocker is the archive: 8_Flora_param.txt and 8_Flora_adam.obj are listed in the release directory but answer 403, while the MPCD mesh and the deconvolved frames are served. No registration was attempted without a rotation record for the frame the release describes. Checked again 2026-09-18: both files still answer 403 with the release’s public cookie, so the lens takes both from DAMIT model 5928, DAMIT’s copy of the survey model, cited to the survey paper.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/",
         "https://observations.lam.fr/astero/Data/8Flora/",
@@ -110,6 +116,31 @@
         {
           "date": "2026-09-17",
           "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.7 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.7, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.966 to 0.973 at our phase, against 0.974 to 0.978 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 1 of 3 columns, one step from it in 2. With the paper’s photographs 0.961 to 0.969. Turned in the image, our outline best overlaps the paper’s photographs at -3.5 to 5.0° and its model panels at -6.5 to -4.0°. The spin axis we project lies at 1.3° on the sky against 147.4 to 149.9° for the figure’s arrows. Native outline residual 1.388 px mean over 15 frames at our phase; the sweep’s lowest is 1.340 px at -6°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads longitude-first, 0° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/8Flora/Deconv/",
+        "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
         }
       ]
     }

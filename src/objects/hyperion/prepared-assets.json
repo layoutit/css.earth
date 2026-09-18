@@ -1,0 +1,16 @@
+{
+  "schema": "csshyperion-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 1123570,
+      "sha256": "d4100d3b00c812f04a602517d12600a0a52d3b8bde1adeaf0d34b22a57d312d8"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 928464,
+      "sha256": "317332fe612cfb6cb0cc52e0789793a2f40105d7f5e7b817df26a22ddc5ee9d7"
+    }
+  ]
+}

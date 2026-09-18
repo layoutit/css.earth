@@ -1,0 +1,16 @@
+{
+  "schema": "csserato-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 748981,
+      "sha256": "0173b5cf0413d465bdfc2256a7e204e52a93310254a6646485bce19187c948a3"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 619164,
+      "sha256": "dd752f1ee101bed522cd449672dcd845509e29a1fcdb48d21216d0e45b547d14"
+    }
+  ]
+}

@@ -122,16 +122,26 @@
     },
     {
       "id": "surface-imagery",
-      "survey": "surface-imagery",
-      "status": "unresolved",
+      "subject": "Registered surface imagery",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 25 camera-1 deconvolved frames, 2018-09-28 and 2018-09-29, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The release supplies no registered surface imagery; the grid marks that gap.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/ausonia/README.md",
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/140"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/140",
+        "https://observations.lam.fr/astero/Data/63Ausonia/Deconv/"
       ],
       "checked": [
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
         }
       ]
     },
@@ -161,9 +171,8 @@
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Measured with the cross-frame registration test on 5 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 132 pixels (median); peak correlation 0.20 (median) against a mirror margin of 0.54; 0 of 5 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. The lens stands on the silhouette registration recorded in the entry above and on the route proven against the Dawn mosaic on Vesta; this test adds no independent check for this body. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 1.93° against relief −8.00°.",
-      "revisitWhen": "Registration measurements that agree within three degrees: a map, resolved markings, or a rotation record and mesh on which the outline and the relief place these frames together.",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 25 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured with the cross-frame registration test on 5 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read latitude-first. Disc interior 132 pixels (median); peak correlation 0.20 (median) against a mirror margin of 0.54; 0 of 5 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. The lens stands on the silhouette registration recorded in the entry above and on the route proven against the Dawn mosaic on Vesta; this test adds no independent check for this body. Removed on 2026-09-16: a lens ships only when every registration measurement that reaches a verdict places it within three degrees, and this one measured outline systematic 1.93° against relief −8.00°.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/63Ausonia/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -177,6 +186,31 @@
         {
           "date": "2026-09-16",
           "commit": "e0404e8fac9a5c87f5216124b931773de55a75a0"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.28 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.28, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.922 to 0.935 at our phase, against 0.928 to 0.940 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 5 of 6 columns, one step from it in 1. With the paper’s photographs 0.917 to 0.935. Turned in the image, our outline best overlaps the paper’s photographs at -2.0 to 0.5° and its model panels at -6.0 to -1.5°. The spin axis we project lies at 3.5° on the sky against 1.4 to 1.6° for the figure’s arrows. Native outline residual 0.927 px mean over 25 frames at our phase; the sweep’s lowest is 0.910 px at -2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.14° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/63Ausonia/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/63_Ausonia_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
         }
       ]
     }

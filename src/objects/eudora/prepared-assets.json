@@ -1,0 +1,16 @@
+{
+  "schema": "csseudora-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750004,
+      "sha256": "545307afaaeeb8468f0ddce762873a49b530018027341d65476f01a186cbf685"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 619947,
+      "sha256": "42776ae82119d2e0ce10ba93567874c453305dd607d19965e34a04f046bccdbb"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "source-eugenia-eugenia-sphere-20190806010120",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eugenia · eugenia sphere 20190806010120",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T01_01_20.438_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eugenia/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "b5a46b7ab5ba74caf48e5783d1c0060752810f050aeb9e3762d6671243a2a94b",
+      "locator": "/inputs/28"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The eugenia sphere 20190806010120 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

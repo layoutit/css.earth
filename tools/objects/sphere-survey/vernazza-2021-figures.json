@@ -6,7 +6,7 @@
     "bytes": 25270498,
     "sha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f"
   },
-  "derivation": "Each page's caption 'Fig. B.n: (number) Name' matched in order to the page's image XObjects wider than 500 pixels, read with pypdf from the pinned PDF. The setup tool checks each object's decoded size, and that the labels it reads from the figure are exposure starts of the body's own frames.",
+  "derivation": "Each page's caption 'Fig. B.n: (number) Name' matched in order to the page's image XObjects wider than 500 pixels, read with pypdf from the pinned PDF. The setup tool checks each object's decoded size, and that the labels it reads from the figure are exposure starts of the body's own frames. Each pole is Table A.1's λ and β as printed on page 18, read the same way and checked against a render of the page; the table prints Thisbe's latitude as 116°, past the pole. Eleonora's and Thisbe's releasedModel is the survey's released model as DAMIT's 2021 import of it states, cited to the survey paper: their release rotation records agree with it and not with Table A.1. Flora's releasedModel also names DAMIT's files for the model, because LAM withholds the release's own spin record and ADAM mesh for it.",
   "figures": [
     {
       "figure": "B.1",
@@ -15,7 +15,11 @@
       "page": 19,
       "object": 1072,
       "width": 2440,
-      "height": 3054
+      "height": 3054,
+      "pole": [
+        348.832,
+        81.553
+      ]
     },
     {
       "figure": "B.2",
@@ -24,7 +28,11 @@
       "page": 20,
       "object": 1081,
       "width": 1614,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        42,
+        -15
+      ]
     },
     {
       "figure": "B.3",
@@ -33,7 +41,11 @@
       "page": 21,
       "object": 1082,
       "width": 1614,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        105,
+        18
+      ]
     },
     {
       "figure": "B.4",
@@ -42,7 +54,11 @@
       "page": 22,
       "object": 1083,
       "width": 2882,
-      "height": 3046
+      "height": 3046,
+      "pole": [
+        330.82,
+        57.72
+      ]
     },
     {
       "figure": "B.5",
@@ -51,7 +67,11 @@
       "page": 23,
       "object": 1084,
       "width": 1614,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        342,
+        50
+      ]
     },
     {
       "figure": "B.6",
@@ -60,7 +80,11 @@
       "page": 23,
       "object": 1085,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        20,
+        23
+      ]
     },
     {
       "figure": "B.7",
@@ -69,7 +93,21 @@
       "page": 24,
       "object": 1086,
       "width": 1118,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        337,
+        -1
+      ],
+      "releasedModel": {
+        "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5928",
+        "model": "DAMIT model 5928",
+        "pole": [
+          334,
+          -2
+        ],
+        "spin": "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/spin.txt",
+        "shape": "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5928/shape.obj"
+      }
     },
     {
       "figure": "B.8",
@@ -78,7 +116,11 @@
       "page": 24,
       "object": 1087,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        181,
+        22
+      ]
     },
     {
       "figure": "B.9",
@@ -87,7 +129,11 @@
       "page": 25,
       "object": 1088,
       "width": 1598,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        306,
+        -29
+      ]
     },
     {
       "figure": "B.10",
@@ -96,7 +142,11 @@
       "page": 26,
       "object": 1089,
       "width": 1358,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        312,
+        17
+      ]
     },
     {
       "figure": "B.11",
@@ -105,7 +155,11 @@
       "page": 26,
       "object": 1090,
       "width": 1358,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        177,
+        -27
+      ]
     },
     {
       "figure": "B.12",
@@ -114,7 +168,11 @@
       "page": 27,
       "object": 1091,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        38,
+        31
+      ]
     },
     {
       "figure": "B.13",
@@ -123,7 +181,11 @@
       "page": 28,
       "object": 1092,
       "width": 2084,
-      "height": 2463
+      "height": 2463,
+      "pole": [
+        355,
+        -70
+      ]
     },
     {
       "figure": "B.14",
@@ -132,7 +194,11 @@
       "page": 29,
       "object": 1093,
       "width": 1838,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        35,
+        -9
+      ]
     },
     {
       "figure": "B.15",
@@ -141,7 +207,11 @@
       "page": 30,
       "object": 1094,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        12,
+        19
+      ]
     },
     {
       "figure": "B.16",
@@ -150,7 +220,11 @@
       "page": 30,
       "object": 1095,
       "width": 2318,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        103,
+        60
+      ]
     },
     {
       "figure": "B.17",
@@ -159,7 +233,11 @@
       "page": 31,
       "object": 1096,
       "width": 4450,
-      "height": 2946
+      "height": 2946,
+      "pole": [
+        52,
+        -8
+      ]
     },
     {
       "figure": "B.18",
@@ -168,7 +246,11 @@
       "page": 31,
       "object": 1097,
       "width": 2318,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        195,
+        4
+      ]
     },
     {
       "figure": "B.19",
@@ -177,7 +259,11 @@
       "page": 32,
       "object": 1098,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        146,
+        73
+      ]
     },
     {
       "figure": "B.20",
@@ -186,7 +272,11 @@
       "page": 33,
       "object": 1099,
       "width": 1598,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        323,
+        -29
+      ]
     },
     {
       "figure": "B.21",
@@ -195,7 +285,11 @@
       "page": 34,
       "object": 1100,
       "width": 1118,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        106,
+        19
+      ]
     },
     {
       "figure": "B.22",
@@ -204,7 +298,11 @@
       "page": 34,
       "object": 1101,
       "width": 1838,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        94,
+        67
+      ]
     },
     {
       "figure": "B.23",
@@ -213,7 +311,11 @@
       "page": 35,
       "object": 1102,
       "width": 1118,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        199,
+        -32
+      ]
     },
     {
       "figure": "B.24",
@@ -222,7 +324,11 @@
       "page": 36,
       "object": 1103,
       "width": 1358,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        128,
+        -35
+      ]
     },
     {
       "figure": "B.25",
@@ -231,7 +337,11 @@
       "page": 37,
       "object": 1104,
       "width": 638,
-      "height": 752
+      "height": 752,
+      "pole": [
+        294,
+        51
+      ]
     },
     {
       "figure": "B.26",
@@ -240,7 +350,11 @@
       "page": 37,
       "object": 1105,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        170,
+        -66
+      ]
     },
     {
       "figure": "B.27",
@@ -249,7 +363,11 @@
       "page": 38,
       "object": 1106,
       "width": 1598,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        255,
+        40
+      ]
     },
     {
       "figure": "B.28",
@@ -258,7 +376,11 @@
       "page": 39,
       "object": 1107,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        121,
+        -27
+      ]
     },
     {
       "figure": "B.29",
@@ -267,7 +389,11 @@
       "page": 39,
       "object": 1108,
       "width": 2080,
-      "height": 1230
+      "height": 1230,
+      "pole": [
+        75,
+        64
+      ]
     },
     {
       "figure": "B.30",
@@ -276,7 +402,19 @@
       "page": 40,
       "object": 1109,
       "width": 1598,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        350,
+        116
+      ],
+      "releasedModel": {
+        "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5926",
+        "model": "DAMIT model 5926",
+        "pole": [
+          74,
+          63
+        ]
+      }
     },
     {
       "figure": "B.31",
@@ -285,7 +423,11 @@
       "page": 40,
       "object": 1110,
       "width": 2076,
-      "height": 1230
+      "height": 1230,
+      "pole": [
+        14,
+        -24
+      ]
     },
     {
       "figure": "B.32",
@@ -294,7 +436,11 @@
       "page": 41,
       "object": 1111,
       "width": 1358,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        313,
+        -19
+      ]
     },
     {
       "figure": "B.33",
@@ -303,7 +449,11 @@
       "page": 41,
       "object": 1112,
       "width": 1838,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        68,
+        -89
+      ]
     },
     {
       "figure": "B.34",
@@ -312,7 +462,11 @@
       "page": 42,
       "object": 1113,
       "width": 878,
-      "height": 752
+      "height": 752,
+      "pole": [
+        101,
+        48
+      ]
     },
     {
       "figure": "B.35",
@@ -321,7 +475,11 @@
       "page": 42,
       "object": 1114,
       "width": 1358,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        28,
+        -17
+      ]
     },
     {
       "figure": "B.36",
@@ -330,7 +488,11 @@
       "page": 43,
       "object": 1115,
       "width": 1358,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        115,
+        -79
+      ]
     },
     {
       "figure": "B.37",
@@ -339,7 +501,11 @@
       "page": 44,
       "object": 1116,
       "width": 1598,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        74,
+        22
+      ]
     },
     {
       "figure": "B.38",
@@ -348,7 +514,11 @@
       "page": 45,
       "object": 1117,
       "width": 878,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        111,
+        66
+      ]
     },
     {
       "figure": "B.39",
@@ -357,7 +527,11 @@
       "page": 46,
       "object": 1118,
       "width": 2078,
-      "height": 2463
+      "height": 2463,
+      "pole": [
+        17,
+        -57
+      ]
     },
     {
       "figure": "B.40",
@@ -366,7 +540,19 @@
       "page": 47,
       "object": 1119,
       "width": 1838,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        154,
+        24
+      ],
+      "releasedModel": {
+        "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5919",
+        "model": "DAMIT model 5919",
+        "pole": [
+          154,
+          51
+        ]
+      }
     },
     {
       "figure": "B.41",
@@ -375,7 +561,11 @@
       "page": 47,
       "object": 1120,
       "width": 1838,
-      "height": 1233
+      "height": 1233,
+      "pole": [
+        300,
+        26
+      ]
     },
     {
       "figure": "B.42",
@@ -384,7 +574,11 @@
       "page": 48,
       "object": 1121,
       "width": 1838,
-      "height": 2466
+      "height": 2466,
+      "pole": [
+        87,
+        62
+      ]
     }
   ]
 }

@@ -1,0 +1,37 @@
+{
+  "id": "source-athamantis-athamantis-horizons-sphere-observer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Athamantis · athamantis horizons sphere observer",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/athamantis/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "91d870a550483371bc02a471f39329b4f1fdb433bd596d67c965ec63b9a838b6",
+      "locator": "/inputs/17"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "scope": "The athamantis horizons sphere observer input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ephemeris service output; cite JPL Horizons.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
