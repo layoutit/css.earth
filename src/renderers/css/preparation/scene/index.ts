@@ -46,6 +46,16 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  const leaves=polygons.map((patch,index)=>projector.surface(patch,index,seamEdges.get(index)));
  const innerPolarLeaves=profile.surface.innerPoles?(['north','south'] as Pole[]).map((pole,index)=>projector.surface(createPolarPatch(profile.surface,pole,true),polygons.length+index)):[];
  const bodyLeaves=[...leaves,...innerPolarLeaves];
+ // A ring is one leaf: its prepared atlas scaled to the plane's diameter in tile units and centred on the body. It hangs
+ // under the same system node as the surface, so it takes the body's orientation and never states one of its own.
+ const planes=(profile.planes??[]).map(plane=>{
+  const scale=2*plane.radius*profile.projection.tileSize/plane.size,half=scale*plane.size/2,round=(value:number)=>Number(value.toFixed(6));
+  return {id:plane.id,className:`${profile.namespace}-${plane.id}-plane`,url:plane.url,color:plane.color,radius:plane.radius,
+   leaf:{tag:'s',className:`${profile.namespace}-${plane.id}-leaf`,
+    style:`transform:matrix3d(0,${round(scale)},0,0,${round(scale)},0,0,0,0,0,1,0,${round(-half)},${round(-half)},0,1);`+
+     `--polycss-atlas-width:${plane.size}px;--polycss-atlas-height:${plane.size}px;background-position:0 0;`+
+     `background-size:${plane.size}px ${plane.size}px;backface-visibility:visible`}};
+ });
  const interior=profile.cutaway&&assets.interior?prepareCutaway(profile,assets.interior,polygons,leaves,projector):undefined;
  if(Boolean(profile.cutaway)!==Boolean(assets.interior))throw new TypeError('Cutaway geometry and prepared assets must be supplied together.');
  // A stepped outset replaces the stretched compositor overlap. Leaves overlap only by their matched raster overscan,
@@ -64,7 +74,7 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
   preparedSurface:{latitudeSegments:profile.surface.latitudeSegments,longitudeSegments:profile.surface.longitudeSegments,radius:profile.surface.radius,bodyFaceCount:leaves.filter(leaf=>!leaf.polar).length,polarLeafCount:leaves.filter(leaf=>leaf.polar).length+innerPolarLeaves.length,sourceWidth:profile.surface.surface.width,sourceHeight:profile.surface.surfaceLatitudeHeight,retainedSourceLongitudes:profile.surface.longitudeSegments,seamRepair},
   ...(interior?{interior}:{}),...(profile.output.motion?{motion:profile.output.motion}:{}),
   counts:{bodyLeafCount:bodyLeaves.length,interiorLeafCount:interior?.leafCount??0,textureLeafCount:bodyLeaves.length+1+(interior?.leafCount??0),retainedRootCount:profile.output.retainedRootCount}
- }:{...common,runtimeGeometry:false,runtimeRasterization:false,
+ }:{...common,runtimeGeometry:false,runtimeRasterization:false,...(planes.length?{planes}:{}),
   body:{leaves:bodyLeaves,equatorialRadius:profile.surface.radius,polarRadius:profile.surface.polarRadius,latitudeSegments:profile.surface.latitudeSegments,longitudeSegments:profile.surface.longitudeSegments,...profile.output.body,sourceMapSize:[profile.surface.surface.width,profile.surface.surface.height],seamRepair},
   ...(profile.output.animation?{animation:profile.output.animation}:{}),
   counts:{polygonCount:leaves.length,textureLeafCount:bodyLeaves.length,polarLeafCount:leaves.filter(leaf=>leaf.polarCap).length}

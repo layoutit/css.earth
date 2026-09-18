@@ -7,8 +7,8 @@ import {readFile,mkdtemp,readdir,rm,writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import sharp from 'sharp';
-import {continueBoundaryMean,percentileFalseColor,completeUniformCoverage,polarDiscAtlas,parseObservedSurfaceRecipe,prepareObservedSurfaces} from './observations.mts';
-import type {PolarProjection} from './observation-contract.mts';
+import {continueBoundaryMean,percentileFalseColor,completeUniformCoverage,polarDiscAtlas,parseObservedSurfaceRecipe,prepareObservedSurfaces} from './index.mts';
+import type {PolarProjection} from './contract.mts';
 
 test('boundary continuation retains observed rows and varies only source-derived longitude',()=>{
   const input=new Float32Array([0,0,0,0,2,6,10,12,14,16,18,20]);

@@ -193,6 +193,20 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const { createSurfaceInterpreter } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observation/interpret.mts')).href) as typeof import('./observation/interpret.mts');
   const interpret = await createSurfaceInterpreter({ objectId: descriptor.id, displayName: solarSource.displayName, sourceDirectory, recipe: rasterConfig });
   const raster = await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: rasterConfig, interpret });
+  // A body may take its surfaces from an observed-surfaces recipe rather than this lane, which then prepares only its
+  // lighting bank. The observed products are published beside it and the lenses name them, as they name any other surface.
+  const observationsSource = source(sources, 'observations');
+  const observed = observationsSource
+    ? await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/observed-surfaces/index.mts')).href) as typeof import('./observed-surfaces/index.mts'))
+        .prepareObservedSurfaces({ sourceDirectory, publicDirectory, config: observationsSource.value, write: true })
+    : null;
+  // A body may also declare radial layers, such as a ring, whose image this lane publishes beside the surfaces; the
+  // geometry profile places it as a plane.
+  const ringsSource = source(sources, 'rings');
+  const radial = ringsSource
+    ? await (await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/index.mts')).href) as typeof import('./giant-layers/index.mts'))
+        .prepareGiantLayers({ sourceDirectory, publicDirectory, config: ringsSource.value, write: true })
+    : null;
   const celestial = await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
   // A body outside the ephemeris tables (the Sun) frames its scene from the authored world context.
@@ -216,7 +230,13 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
     manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
-    values: [raster, celestial, scene, runtime, content] });
+    values: [raster, celestial, scene, runtime, content,
+      // Observed surfaces and radial layers publish their own files; the manifest reads them by url, as it reads every other asset.
+      ...[observed, radial].filter(entry => entry !== null).map(entry => {
+        const source = entry as { assets: { filename: string; data?: Uint8Array }[] };
+        return { schema: 'cssearth-prepared-published-assets@1',
+          assets: source.assets.map(({ data: _data, filename, ...rest }) => ({ ...rest, filename, url: `/scenes/${descriptor.id}/${filename}` })) };
+      })] });
   if (write) {
     const descriptorData = record(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown, 'descriptor');
     const properties = record(descriptorData.properties, 'descriptor.properties');
