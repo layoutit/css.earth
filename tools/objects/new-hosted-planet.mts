@@ -10,7 +10,7 @@
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node tools/prepare-object.mts <id> */
-import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
@@ -166,6 +166,14 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const id = args.find((argument, index) => !argument.startsWith('--') && !args[index - 1]?.startsWith('--'));
   if (!id) throw new TypeError('Usage: new-hosted-planet <id> --name <name> --system <system> --description <line> --paper <url> --paper-credit <credit>');
   const root = resolve(import.meta.dirname, '../..');
+  const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
+  if (await exists(`src/objects/${id}`)) throw new Error(`src/objects/${id} already exists; the scaffold never overwrites a package.`);
+  // Everything the scaffold copies is checked before a file is written, so a missing input never leaves half a package.
+  const font = 'src/objects/themis/source/presentation/InterVariable.ttf', license = 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL';
+  for (const path of [font, license]) if (!await exists(path)) throw new Error(`${path} is missing; restore it (pnpm setup:assets) before scaffolding.`);
+  const order = flag('order'), color = flag('color');
+  if (order !== undefined && !Number.isSafeInteger(Number(order))) throw new TypeError(`--order must be a whole number, not ${order}.`);
+  if (color !== undefined && !/^#[0-9a-f]{6}$/iu.test(color)) throw new TypeError(`--color must be #rrggbb, not ${color}.`);
   const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
   const body = requireRecord(await read(`packages/astronomy/data/bodies/${id}.json`), 'astronomy record');
   const hostId = requireString(requireRecord(body.physical, 'physical').parent, 'physical.parent');
@@ -174,14 +182,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     id, name: requireString(flag('name'), '--name'), system: requireString(flag('system'), '--system'),
     description: requireString(flag('description'), '--description'), paper: requireString(flag('paper'), '--paper'),
     paperCredit: requireString(flag('paper-credit'), '--paper-credit'),
-    ...(flag('order') === undefined ? {} : { order: Number(flag('order')) }), ...(flag('color') === undefined ? {} : { color: flag('color') }),
+    ...(order === undefined ? {} : { order: Number(order) }), ...(color === undefined ? {} : { color }),
   }, body, await read(`packages/astronomy/data/bodies/${hostId}.json`), SOLAR_GEOMETRY_EPOCH_JD_TT);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
   const { neutralDiscMarker } = await import('./new-star.mts');
   const presentation = resolve(root, 'src/objects', id, 'source/presentation');
-  await copyFile(resolve(root, 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL'), resolve(presentation, 'LICENSE.INTER-OFL'));
+  await copyFile(resolve(root, license), resolve(presentation, 'LICENSE.INTER-OFL'));
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-  const font = resolve(root, 'src/objects/themis/source/presentation/InterVariable.ttf');
-  await copyFile(font, resolve(presentation, 'InterVariable.ttf'));
+  await copyFile(resolve(root, font), resolve(presentation, 'InterVariable.ttf'));
   console.log(`${files.size + 3} files written. Replace every ${TODO}, then: node tools/prepare-object.mts ${id}`);
 }

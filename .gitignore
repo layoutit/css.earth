@@ -74,6 +74,8 @@ src/objects/*/source/**/*.bds
 !src/objects/wasp-43b/source/science/jwst-1366-miri/white-5.0-10.5um.csv
 !src/objects/wasp-43b/source/science/jwst-1366-miri/stellar-counts.csv
 !src/objects/wasp-43b/source/science/bell-2024/eureka-v1-white-5.0-10.5um.csv
+!src/objects/trappist-1b/source/science/jwst-trappist-1/b-emission-15um.csv
+!src/objects/trappist-1/source/photometry/gaia-dr3-xp-sampled.csv
 
 src/objects/*/.prepared/
 

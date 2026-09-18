@@ -90,6 +90,9 @@ export function readXpSampledSpectrum(csv: string, sourceId: string) {
   return { flux, fluxError };
 }
 
+/** How far below zero a sample may scatter and still be read as no emission, in its own standard errors. */
+export const NOISE_FLOOR_SIGMA = 3;
+
 /** The colour of a measured spectrum: its samples at the even wavelengths from 380 to 780 nm through the observer, as the Planck
  * colour takes every nanometre. The samples are 2 nm apart, so the odd wavelengths add nothing a finer grid would change.
  *
@@ -97,9 +100,6 @@ export function readXpSampledSpectrum(csv: string, sourceId: string) {
  * that is not positive but lies within three times its own error of zero is read as no emission at that wavelength: ordinary
  * noise across hundreds of samples. A sample below zero by more than that is a spectrum this colour cannot be taken from, and
  * fails. Without `fluxError` every visible sample must be positive, which is what the one-sigma bounds pass. */
-/** How far below zero a sample may scatter and still be read as no emission, in its own standard errors. */
-export const NOISE_FLOOR_SIGMA = 3;
-
 export function xpSampledColor(flux: readonly number[], colorMatching: Map<number, readonly number[]>, fluxError?: readonly number[]): StellarColor {
   const index = (wavelength: number) => (wavelength - 336) / 2;
   const wavelengths = XP_SAMPLED_WAVELENGTHS_NM.filter(wavelength => wavelength >= 380 && wavelength <= 780);

@@ -5,7 +5,7 @@
 TRAPPIST-1 is an ultracool red dwarf 12.47 parsecs away in Aquarius, with seven transiting Earth-sized planets. The star is barely
 larger than Jupiter, and all seven orbits fit inside 0.062 au: the whole system would sit well within Mercury's orbit.
 
-**Placement.** Gaia DR3 source 2635476908753563008, archived as [`photometry/gaia-dr3-source.csv`](source/photometry/gaia-dr3-source.csv):
+**Placement.** Gaia DR3 source 2635476908753563008, archived as `source/photometry/gaia-dr3-source.csv` (restored and pinned in the [manifest](source/manifest.json)):
 ICRS position at epoch J2016.0, parallax 80.2123 +/- 0.0716 mas (12.467 pc) and a proper motion of 930.8, -479.0 mas/yr, the largest
 of any star in this application. Gaia publishes no radial velocity for it — the star is too cool and too faint in BP — so the
 -52.003 +/- 0.134 km/s of Jeffers et al. (2020) is used, through SIMBAD.
@@ -15,7 +15,7 @@ derive the radius from the photodynamic stellar density and the mass from the Ma
 
 **Colour lens.** Gaia measured this star's BP/RP spectrum, but publishes the *sampled* product only for brighter sources; at G =
 15.62 only the basis-function coefficients are released. They are pinned as
-[`photometry/gaia-dr3-xp-continuous.csv`](source/photometry/gaia-dr3-xp-continuous.csv) and sampled here onto the archive's own
+`source/photometry/gaia-dr3-xp-continuous.csv` and sampled here onto the archive's own
 336-1020 nm grid with GaiaXPy, the archive's library, by
 [`xp-continuous-sample.py`](../../../tools/objects/observation/xp-continuous-sample.py). Through the CIE 1931 2-degree observer
 that gives **255, 205, 106 (#ffcd6a)**.
@@ -35,7 +35,8 @@ it stays on the map with its seven planets.
 
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) covers the colour
   path, including the rule for samples consistent with zero.
-- [`source.test.mts`](../../../tests/objects/unit/trappist-1/source.test.mts) checks the pins, the radius and mass, and the distance.
+- [`source.test.mts`](../../../tests/objects/unit/trappist-1/source.test.mts) checks every package's source pins, and that each planet turns
+  synchronously with longitude 0 on the star and orbits it.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the system holds all seven planets.
 - Driven in a real browser: the system view draws the seven orbits, markers and labels around the star. The orbits are inclined
   89.7 to 89.9 degrees with the node at celestial north, so from the default angle they project onto a single line — the geometry

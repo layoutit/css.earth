@@ -2,7 +2,7 @@
 
 ## Sources
 
-TRAPPIST-1h is the outermost and smallest planets of [TRAPPIST-1](../trappist-1/README.md), an ultracool dwarf 12.47 parsecs away. Every number in this
+TRAPPIST-1h is the outermost and smallest of the seven planets of [TRAPPIST-1](../trappist-1/README.md), an ultracool dwarf 12.47 parsecs away. Every number in this
 package comes from Agol et al. (2021, PSJ 2, 1), who fitted the seven planets' transit times and the Spitzer and ground-based photometry together: the
 planets perturb each other enough for their masses to be read from the timing of their transits.
 
@@ -23,8 +23,9 @@ surface, lit by its own star at the measured orbit, and the page says so.
 
 ## Evidence
 
-- [`source.test.mts`](../../../tests/objects/unit/trappist-1h/source.test.mts) checks the pins and that the package's radius, mass and
-  orbit are the astronomy record's.
+- [`source.test.mts`](../../../tests/objects/unit/trappist-1/source.test.mts) checks the pins, and that the planet turns synchronously
+  with longitude 0 on its star and orbits it;
+  [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
 - Driven in a real browser: the seven orbits and labels draw around the star in the system view, and this planet's page opens on a
   lit sphere of the measured radius.

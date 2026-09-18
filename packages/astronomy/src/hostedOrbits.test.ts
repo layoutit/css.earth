@@ -44,6 +44,20 @@ describe('hosted orbits', () => {
     const behind = hostedOrbitStateRelativeKm(orbit, star, hostRadiusKm, transit + orbit.periodDays / 2)
     expect(dot(behind.positionKm, sight)).toBeGreaterThan(0)
   })
+  it('puts each TRAPPIST-1 planet in front of its star at mid-transit, a cos i off centre, and behind it half an orbit later', () => {
+    const star = starAstrometry('trappist-1'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
+    const radiusKm = BODIES['trappist-1'].meanRadiusKm
+    for (const id of ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h'] as const) {
+      const orbit = hostedOrbit(id), transit = orbit.transitTimeBmjdTdb + 2400000.5 + 1000 * orbit.periodDays
+      const inFront = hostedOrbitStateRelativeKm(orbit, star, radiusKm, transit), along = dot(inFront.positionKm, sight)
+      expect(along, id).toBeLessThan(0)
+      const skySeparation = Math.hypot(...inFront.positionKm.map((v, axis) => v - along * sight[axis]!)) / radiusKm
+      expect(skySeparation, id).toBeCloseTo(orbit.semiMajorAxisStellarRadii * Math.cos(orbit.inclinationDegrees * Math.PI / 180), 6)
+      // Every planet transits: the impact parameter stays inside the stellar disc.
+      expect(skySeparation, id).toBeLessThan(1)
+      expect(dot(hostedOrbitStateRelativeKm(orbit, star, radiusKm, transit + orbit.periodDays / 2).positionKm, sight), id).toBeGreaterThan(0)
+    }
+  })
   it('moves on a circle at the Keplerian speed with the orbit normal inclined i to the line of sight', () => {
     const orbit = hostedOrbit('wasp-43b'), state = hostedPlanetStateRelativeKm('wasp-43b', 2461286.5)
     const a = orbit.semiMajorAxisStellarRadii * hostRadiusKm

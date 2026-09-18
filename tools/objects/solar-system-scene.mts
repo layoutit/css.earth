@@ -98,7 +98,7 @@ export function prepareSolarSystemSunPresentation(source:{bodyId:string;displayN
     bodyFixedDirection,
     presentationFrame: frame.model, localDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId,
-      ...prepareDefaultCameraAngles(bodyId), sceneDirection: localDirection }),
+      ...prepareDefaultCameraAngles(bodyId, { light: star ? 'host' : 'sun' }), sceneDirection: localDirection }),
   });
 }
 

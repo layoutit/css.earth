@@ -62,6 +62,10 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
     return { name, bytes: requireFiniteNumber(segment.bytes), uri: requireString(segment.uri) };
   });
   if (new Set(segments.map(segment => segment.name)).size !== segments.length) throw new TypeError(`${directory}: a segment is listed twice.`);
+  // A dispersed spectrum has channel light curves and photometry has none: the channel stage follows the mode.
+  if ((record.mode === 'photometry') === (stages.S4channels !== undefined)) {
+    throw new TypeError(`${directory}: ${record.mode === 'photometry' ? 'photometry has no channel stage (S4channels)' : 'a spectroscopy program needs its channel stage (S4channels)'}.`);
+  }
   return {
     id: requireString(record.id), eventName: requireString(record.eventName), crdsContext: requireString(record.crdsContext),
     batchSegments: requireFiniteNumber(record.batchSegments),
@@ -196,7 +200,7 @@ def column(*names):
         if name in lc: return np.asarray(lc[name]).ravel()
     return np.full(np.asarray(lc.time).shape, np.nan)
 width = column('psf_width_y', 'centroid_sy')
-centroid = column('centroid_y', 'centroid_sy')
+centroid = column('centroid_y')
 def write(name, f, e, m):
     median = np.nanmedian(np.where(m, np.nan, f))
     np.savetxt(name, np.column_stack([lc.time, f / median, e / median, m.astype(float), centroid, width]),

@@ -292,7 +292,7 @@
       "generator": "tools/objects/observation/xp-continuous-sample.py",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The archived continuous spectrum on the archive's own 336-1020 nm sampling, in the DataLink sampled layout, because Gaia publishes no sampled spectrum for a source this faint."
+        "reason": "The archived continuous spectrum on the archive's own 336-1020 nm sampling, in the DataLink sampled layout, because Gaia publishes no sampled spectrum for a source this faint. Kept in git (15 KB) so the star prepares on a fresh checkout without GaiaXPy; regenerate it with the generator when its input changes."
       }
     }
   ],

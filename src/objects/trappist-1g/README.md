@@ -23,8 +23,9 @@ surface, lit by its own star at the measured orbit, and the page says so.
 
 ## Evidence
 
-- [`source.test.mts`](../../../tests/objects/unit/trappist-1g/source.test.mts) checks the pins and that the package's radius, mass and
-  orbit are the astronomy record's.
+- [`source.test.mts`](../../../tests/objects/unit/trappist-1/source.test.mts) checks the pins, and that the planet turns synchronously
+  with longitude 0 on its star and orbits it;
+  [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
 - Driven in a real browser: the seven orbits and labels draw around the star in the system view, and this planet's page opens on a
   lit sphere of the measured radius.
