@@ -95,13 +95,14 @@ jobs:
           tools/check-ci.test.mts
       - name: Check published assets this change adds
         # HEAD only the R2 keys this change's inventories add (keys are content-addressed, so an unchanged line
-        # needs no new proof): on a PR, against its base branch; on a push to main, against the last green main
-        # run (a full sweep when there is none). The full sweep of every key is nightly (nightly.yml).
+        # needs no new proof): on a PR, against its base branch, failing only on a real 404; on a push to main,
+        # against the last green main run (a full sweep when there is none), reporting only. Unverified (network)
+        # keys never fail. Findings go to the job summary. The full sweep of every key is nightly (nightly.yml).
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
-            pnpm check:assets-published --added-since-last-green
+            pnpm check:assets-published --added-since-last-green --report-only
           else
             pnpm check:assets-published --added-since="origin/${GITHUB_BASE_REF:-main}"
           fi

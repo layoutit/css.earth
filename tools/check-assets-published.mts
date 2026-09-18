@@ -1,5 +1,6 @@
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
+import { appendFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
@@ -143,17 +144,20 @@ export function createHeadFetcher({ connections = MAX_CONNECTIONS } = {}): { fet
 
 function errorText(error: unknown): string { return error instanceof Error ? error.message : String(error); }
 
-/** undici wraps the socket error (ECONNRESET, ETIMEDOUT, EAI_AGAIN, UND_ERR_SOCKET) in `cause`; report that code. */
+/**
+ * undici wraps the socket error (ECONNRESET, ETIMEDOUT, EAI_AGAIN, UND_ERR_SOCKET) in `cause`; report that code.
+ * A key that never answered is unverified, not missing: nothing says R2 lacks it.
+ */
 export function networkErrorReason(error: unknown, timeoutMs = REQUEST_TIMEOUT_MS): string {
   if (error instanceof Error) {
     const cause: unknown = error.cause;
-    if (isRecord(cause) && typeof cause.code === "string") return `network error: ${cause.code}`;
-    if (error.name === "TimeoutError") return `network error: timed out after ${timeoutMs} ms`;
+    if (isRecord(cause) && typeof cause.code === "string") return `unverified (network: ${cause.code})`;
+    if (error.name === "TimeoutError") return `unverified (network: timed out after ${timeoutMs} ms)`;
   }
-  return `network error: ${errorText(error)}`;
+  return `unverified (network: ${errorText(error)})`;
 }
 
-interface HeadCheck { readonly ok: boolean; readonly reason: string; readonly kind: MissClass; readonly retryAfterMs: number | null; }
+interface HeadCheck { readonly ok: boolean; readonly reason: string; readonly kind: MissClass; readonly retryAfterMs: number | null; readonly status?: number; }
 
 function retryAfterMs(value: string | null): number | null {
   if (value === null) return null;
@@ -171,7 +175,7 @@ async function headCheck(fetcher: HeadFetcher, origin: string, asset: RuntimeAss
   }
   if (!response.ok) {
     const throttled = response.status === 429 || response.status >= 500;
-    return { ok: false, reason: `HTTP ${response.status}`, kind: throttled ? "throttled" : "missing",
+    return { ok: false, reason: `HTTP ${response.status}`, kind: throttled ? "throttled" : "missing", status: response.status,
       retryAfterMs: throttled ? retryAfterMs(response.headers.get("retry-after")) : null };
   }
   // A compressed (e.g. brotli) response can omit content-length entirely — see publish-verification.mts's headOk.
@@ -207,10 +211,12 @@ export interface CheckAssetsPublishedResult {
   readonly checked: number;
   readonly inventoried: number;
   readonly scope: string;
-  /** Keys whose last attempt answered but not with the published file (404, other HTTP, byte-count mismatch). */
-  readonly misses: readonly string[];
-  /** Keys whose last attempt never got an answer (network error or timeout); the check cannot prove them. */
-  readonly unreachable: readonly string[];
+  /** Keys R2 answered with HTTP 404 on every attempt: really not published. The only class that fails a gate. */
+  readonly notFound: readonly string[];
+  /** Keys whose last answer was another HTTP status or a byte-count mismatch: warned, not failed. */
+  readonly otherMisses: readonly string[];
+  /** Keys that never got an answer (network error or timeout): unverified, warned, never failed. */
+  readonly unverified: readonly string[];
 }
 
 /**
@@ -220,7 +226,7 @@ export interface CheckAssetsPublishedResult {
  * `addedSince` narrows the check to the keys `addedAssetKeys` finds against that ref (a PR's base branch, or the
  * last green `main` commit); without it every key is checked (local use and the nightly sweep). Each miss is
  * re-checked under `DEFAULT_RETRY_POLICY` for its kind; a key is reported only once every attempt failed, with
- * the reason from its last attempt. Unreachable keys still fail the gate, because publication is unproven.
+ * the reason from its last attempt. `gateVerdict` decides what fails.
  */
 export async function checkAssetsPublished(objectIds: readonly string[], { origin = RUNTIME_ASSET_ORIGIN, fetcher,
   root = defaultRoot, concurrency = DEFAULT_RETRY_POLICY.missing.concurrency, retryPolicy = {},
@@ -263,18 +269,38 @@ export async function checkAssetsPublished(objectIds: readonly string[], { origi
   } finally {
     await owned?.close();
   }
-  const unreachable = remaining.filter(asset => results.get(asset)?.kind === "network");
+  const format = (keep: (check: HeadCheck | undefined) => boolean) => remaining.filter(asset => keep(results.get(asset))).map(asset => formatMiss(asset, results));
   return { checked: assets.length, inventoried: inventoried.length, scope,
-    misses: remaining.filter(asset => results.get(asset)?.kind !== "network").map(asset => formatMiss(asset, results)),
-    unreachable: unreachable.map(asset => formatMiss(asset, results)) };
+    notFound: format(check => check?.status === 404),
+    otherMisses: format(check => check?.kind !== "network" && check?.status !== 404),
+    unverified: format(check => check?.kind === "network") };
+}
+
+/**
+ * What the gate's result means for the job. A PR, a local run and the nightly sweep fail only on a real HTTP 404;
+ * any other HTTP answer, a byte-count mismatch and every unverified (network) key only warn. `reportOnly` (a push
+ * to main) never fails: that change already passed its PR gate, and a deploy tolerates a missing asset, so the
+ * findings go to the report as warnings instead of turning main red.
+ */
+export function gateVerdict(result: CheckAssetsPublishedResult, { reportOnly = false }: { reportOnly?: boolean } = {}): { exitCode: 0 | 1; report: string } {
+  const lines = [`Checked ${result.checked} of ${result.inventoried} inventoried file(s) against ${RUNTIME_ASSET_ORIGIN}: ${result.scope}.`];
+  const section = (title: string, entries: readonly string[]) => {
+    if (entries.length) lines.push("", `${title} (${entries.length}):`, ...entries.map(entry => `- ${entry}`));
+  };
+  section(reportOnly ? "WARNING: not published (HTTP 404); this push to main does not fail on assets" : "FAIL: not published (HTTP 404)", result.notFound);
+  section("WARNING: other HTTP answers", result.otherMisses);
+  section("WARNING: unverified (network); publication neither proven nor disproven", result.unverified);
+  const failed = !reportOnly && result.notFound.length > 0;
+  if (!result.notFound.length && !result.otherMisses.length && !result.unverified.length) lines.push("", "Every checked file is published.");
+  return { exitCode: failed ? 1 : 0, report: lines.join("\n") };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
   const option = (name: string) => args.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
   const addedSinceArg = option("added-since"), concurrencyArg = option("concurrency");
-  const lastGreen = args.includes("--added-since-last-green");
-  const objectArgs = args.filter(arg => !/^--(?:added-since|concurrency)=/u.test(arg) && arg !== "--added-since-last-green");
+  const lastGreen = args.includes("--added-since-last-green"), reportOnly = args.includes("--report-only");
+  const objectArgs = args.filter(arg => !/^--(?:added-since|concurrency)=/u.test(arg) && arg !== "--added-since-last-green" && arg !== "--report-only");
   if (addedSinceArg !== undefined && lastGreen) throw new Error("Use --added-since=<ref> or --added-since-last-green, not both.");
   const concurrency = concurrencyArg === undefined ? undefined : Number(concurrencyArg);
   if (concurrency !== undefined && (!Number.isInteger(concurrency) || concurrency < 1)) throw new Error(`Invalid --concurrency=${concurrencyArg}`);
@@ -287,15 +313,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     else addedSince = sha;
   }
   const result = await checkAssetsPublished(objectArgs, { ...(addedSince ? { addedSince } : {}), ...(concurrency ? { concurrency } : {}) });
-  console.log(`Checked ${result.checked} of ${result.inventoried} inventoried file(s) against ${RUNTIME_ASSET_ORIGIN}: ${result.scope}.`);
-  if (result.misses.length) {
-    console.error(`${result.misses.length} file(s) are not published:`);
-    for (const miss of result.misses) console.error(`  ${miss}`);
-  }
-  if (result.unreachable.length) {
-    console.error(`${result.unreachable.length} file(s) were unreachable on every attempt (publication unproven):`);
-    for (const miss of result.unreachable) console.error(`  ${miss}`);
-  }
-  if (result.misses.length || result.unreachable.length) process.exitCode = 1;
-  else console.log("Every checked file is published.");
+  const { exitCode, report } = gateVerdict(result, { reportOnly });
+  console.log(report);
+  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `### Published assets\n\n${report}\n`);
+  process.exitCode = exitCode;
 }

@@ -26,5 +26,6 @@ jobs:
         run: pnpm build:astronomy && pnpm prepare:catalog
       - name: Check every inventoried key is published
         # PRs and main pushes check only the keys they add. Only this full sweep notices R2 losing an object whose
-        # inventory line did not change; concurrency 8 matches the shared agent's connection cap.
+        # inventory line did not change; concurrency 8 matches the shared agent's connection cap. A real 404 fails
+        # the job and is listed in its summary; unverified (network) keys only warn.
         run: pnpm check:assets-published --concurrency=8

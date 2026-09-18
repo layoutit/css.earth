@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { promisify } from 'node:util';
-import { addedAssetKeys, checkAssetsPublished, createHeadFetcher, lastGreenMainSha, MAX_CONNECTIONS, type HeadFetcher } from './check-assets-published.mts';
+import { addedAssetKeys, checkAssetsPublished, createHeadFetcher, gateVerdict, lastGreenMainSha, MAX_CONNECTIONS, type CheckAssetsPublishedResult, type HeadFetcher } from './check-assets-published.mts';
 import { preparePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
 
 const execFileAsync = promisify(execFile);
@@ -43,8 +43,8 @@ test('reports zero misses when every key HEADs ok', async t => {
   t.after(() => rm(root, { recursive: true, force: true }));
   const result = await checkAssetsPublished(['--object=fixture-body'], { root, fetcher: async () => ok() });
   assert.equal(result.checked, 2);
-  assert.deepEqual(result.misses, []);
-  assert.deepEqual(result.unreachable, []);
+  assert.deepEqual(result.notFound, []);
+  assert.deepEqual(result.unverified, []);
 });
 
 test('lists every miss by id/filename/key with the final HTTP status, and never uploads or deletes anything', async t => {
@@ -58,16 +58,16 @@ test('lists every miss by id/filename/key with the final HTTP status, and never 
   } });
   assert.equal(calls, 2);
   assert.equal(result.checked, 2);
-  assert.deepEqual(result.misses, [sceneMiss('fixture-body')]);
+  assert.deepEqual(result.notFound, [sceneMiss('fixture-body')]);
 });
 
-test('a network error without a cause code is reported as unreachable by its message', async t => {
+test('a network error without a cause code is reported as unverified by its message', async t => {
   const root = await fixtureRoot();
   t.after(() => rm(root, { recursive: true, force: true }));
   const result = await checkAssetsPublished(['--object=fixture-body'], { root, retryPolicy: NO_RETRIES,
     fetcher: sceneOnly(() => { throw new Error('fetch failed: ECONNRESET'); }) });
-  assert.deepEqual(result.misses, []);
-  assert.deepEqual(result.unreachable, [sceneMiss('fixture-body', '12-byte-scn!', 'network error: fetch failed: ECONNRESET')]);
+  assert.deepEqual(result.notFound, []);
+  assert.deepEqual(result.unverified, [sceneMiss('fixture-body', '12-byte-scn!', 'unverified (network: fetch failed: ECONNRESET)')]);
 });
 
 test('a network error surfaces the socket code undici wraps in error.cause, not the bare "fetch failed"', async t => {
@@ -75,7 +75,7 @@ test('a network error surfaces the socket code undici wraps in error.cause, not 
   t.after(() => rm(root, { recursive: true, force: true }));
   const result = await checkAssetsPublished(['--object=fixture-body'], { root, retryPolicy: NO_RETRIES,
     fetcher: sceneOnly(() => { throw new TypeError('fetch failed', { cause: Object.assign(new Error('getaddrinfo EAI_AGAIN'), { code: 'EAI_AGAIN' }) }); }) });
-  assert.deepEqual(result.unreachable, [sceneMiss('fixture-body', '12-byte-scn!', 'network error: EAI_AGAIN')]);
+  assert.deepEqual(result.unverified, [sceneMiss('fixture-body', '12-byte-scn!', 'unverified (network: EAI_AGAIN)')]);
 });
 
 test('every HEAD carries a timeout signal, so a hung request fails as a timeout instead of holding a worker', async t => {
@@ -89,7 +89,7 @@ test('every HEAD carries a timeout signal, so a hung request fails as a timeout 
         init.signal.addEventListener('abort', () => { clearTimeout(fallback); reject(init.signal.reason); });
       });
     } });
-  assert.deepEqual(result.unreachable, [sceneMiss('fixture-body', '12-byte-scn!', 'network error: timed out after 20 ms')]);
+  assert.deepEqual(result.unverified, [sceneMiss('fixture-body', '12-byte-scn!', 'unverified (network: timed out after 20 ms)')]);
 });
 
 test('a content-length mismatch is reported with the expected and actual byte counts', async t => {
@@ -97,7 +97,8 @@ test('a content-length mismatch is reported with the expected and actual byte co
   t.after(() => rm(root, { recursive: true, force: true }));
   const result = await checkAssetsPublished(['--object=fixture-body'], { root, retryPolicy: NO_RETRIES,
     fetcher: sceneOnly(() => new Response(null, { status: 200, headers: { 'content-length': '3' } })) });
-  assert.deepEqual(result.misses, [sceneMiss('fixture-body', '12-byte-scn!', 'content-length mismatch: expected 12, got 3')]);
+  assert.deepEqual(result.notFound, []);
+  assert.deepEqual(result.otherMisses, [sceneMiss('fixture-body', '12-byte-scn!', 'content-length mismatch: expected 12, got 3')]);
 });
 
 test('a persistent 404 is retried the full 2/5/10 s schedule and still fails', async t => {
@@ -109,7 +110,7 @@ test('a persistent 404 is retried the full 2/5/10 s schedule and still fails', a
     fetcher: sceneOnly(() => { sceneAttempts++; return new Response(null, { status: 404 }); }) });
   assert.equal(sceneAttempts, 4, '1 initial check + 3 retries');
   assert.deepEqual(sleeps, [2000, 5000, 10000]);
-  assert.deepEqual(result.misses, [sceneMiss('fixture-body')]);
+  assert.deepEqual(result.notFound, [sceneMiss('fixture-body')]);
 });
 
 // No retryPolicy override: pins the default schedule for an edge 5xx. If the default were weakened to no retries,
@@ -123,7 +124,7 @@ test('a transient 503 is retried on the default throttled schedule and is not re
     fetcher: sceneOnly(() => ++sceneAttempts === 1 ? new Response(null, { status: 503 }) : ok()) });
   assert.equal(sceneAttempts, 2);
   assert.deepEqual(sleeps, [5000], 'a 5xx backs off 5 s before its first re-check');
-  assert.deepEqual(result.misses, []);
+  assert.deepEqual(result.otherMisses, []);
 });
 
 test('a 429 waits for its Retry-After header instead of the schedule', async t => {
@@ -134,11 +135,11 @@ test('a 429 waits for its Retry-After header instead of the schedule', async t =
   const result = await checkAssetsPublished(['--object=fixture-body'], { root, sleep: async ms => { sleeps.push(ms); },
     fetcher: sceneOnly(() => ++sceneAttempts === 1 ? new Response(null, { status: 429, headers: { 'retry-after': '7' } }) : ok()) });
   assert.deepEqual(sleeps, [7000]);
-  assert.deepEqual(result.misses, []);
+  assert.deepEqual(result.otherMisses, []);
 });
 
 // The main-run incident: a burst of `fetch failed` that outlasted a 17 s retry budget while every key was live.
-test('network errors back off about two minutes at concurrency 2 before a key is reported unreachable', async t => {
+test('network errors back off about two minutes at concurrency 2 before a key is reported unverified', async t => {
   const extra = Array.from({ length: 8 }, (_, index) => `extra-${index}.bin`);
   const root = await fixtureRoot(extra);
   t.after(() => rm(root, { recursive: true, force: true }));
@@ -158,8 +159,8 @@ test('network errors back off about two minutes at concurrency 2 before a key is
   assert.deepEqual(sleeps, [5000, 15000, 30000, 60000]);
   assert.equal(retryPeak, 2, 're-checks after a network error run two at a time');
   assert.equal(attempts, 9 * 5, 'each failing key: 1 check + 4 re-checks');
-  assert.equal(result.unreachable.length, 9);
-  assert.deepEqual(result.misses, []);
+  assert.equal(result.unverified.length, 9);
+  assert.deepEqual(result.notFound, []);
 });
 
 async function listen(server: Server): Promise<string> {
@@ -193,7 +194,7 @@ test('without an injected fetcher the gate uses the shared agent against a real 
   const origin = await listen(server);
   t.after(async () => { await new Promise(accept => server.close(accept)); await rm(root, { recursive: true, force: true }); });
   const result = await checkAssetsPublished(['--object=fixture-body'], { root, origin });
-  assert.deepEqual(result.misses, []);
+  assert.deepEqual(result.notFound, []);
   assert.deepEqual(seen.sort(), [`HEAD /runtime-assets/${sha('12-byte-run!')}/runtime.json`, `HEAD /${sceneKey()}`].sort());
 });
 
@@ -251,7 +252,7 @@ test('a scoped gate still fails when an added key is missing', async t => {
   t.after(() => rm(root, { recursive: true, force: true }));
   const result = await checkAssetsPublished([], { root, addedSince: 'base', retryPolicy: NO_RETRIES,
     fetcher: async url => String(url).endsWith(sceneKey('12-byte-nob!')) ? new Response(null, { status: 404 }) : ok() });
-  assert.deepEqual(result.misses, [sceneMiss('new-body', '12-byte-nob!')]);
+  assert.deepEqual(result.notFound, [sceneMiss('new-body', '12-byte-nob!')]);
 });
 
 test('addedAssetKeys checks everything when key-construction code changed or there is no merge base', async () => {
@@ -286,4 +287,40 @@ test('lastGreenMainSha asks for the latest successful push run on main and valid
   assert.ok(asked.includes('repos/owner/repo/actions/workflows/universe.yml/runs'));
   assert.equal(await lastGreenMainSha({ run: async () => '\n' }), null);
   await assert.rejects(lastGreenMainSha({ run: async () => 'not-a-sha' }), /Unexpected head SHA/);
+});
+
+function gateResult(parts: Partial<CheckAssetsPublishedResult>): CheckAssetsPublishedResult {
+  return { checked: 3, inventoried: 9, scope: 'keys added since origin/main', notFound: [], otherMisses: [], unverified: [], ...parts };
+}
+const MISSING = 'new-body/scene.json (runtime-assets/abc/scene.json) — HTTP 404';
+const UNVERIFIED = 'saturn/stream-row-15.webp (runtime-assets/def/stream-row-15.webp) — unverified (network: ECONNRESET)';
+const OTHER = 'new-body/runtime.json (runtime-assets/123/runtime.json) — HTTP 503';
+
+test('a PR, a local run and the nightly sweep fail on a real 404 and list it', () => {
+  const { exitCode, report } = gateVerdict(gateResult({ notFound: [MISSING], unverified: [UNVERIFIED] }));
+  assert.equal(exitCode, 1);
+  assert.match(report, /FAIL: not published \(HTTP 404\) \(1\):\n- new-body\/scene\.json/);
+  assert.match(report, /WARNING: unverified \(network\).*\n- saturn\/stream-row-15\.webp .* unverified \(network: ECONNRESET\)/);
+});
+
+test('network errors and other HTTP answers only warn, in every mode', () => {
+  for (const reportOnly of [false, true]) {
+    const { exitCode, report } = gateVerdict(gateResult({ unverified: [UNVERIFIED], otherMisses: [OTHER] }), { reportOnly });
+    assert.equal(exitCode, 0, `reportOnly=${reportOnly}`);
+    assert.match(report, /WARNING: other HTTP answers \(1\)/);
+    assert.match(report, /WARNING: unverified/);
+  }
+});
+
+// The #331 main run went red on one live key that answered "fetch failed". A push to main must never fail here.
+test('a push to main never fails on assets: real 404s and unverified keys become warnings', () => {
+  const { exitCode, report } = gateVerdict(gateResult({ notFound: [MISSING], otherMisses: [OTHER], unverified: [UNVERIFIED] }), { reportOnly: true });
+  assert.equal(exitCode, 0);
+  assert.match(report, /WARNING: not published \(HTTP 404\); this push to main does not fail on assets \(1\):\n- new-body/);
+  assert.doesNotMatch(report, /FAIL/);
+});
+
+test('a clean result says every checked file is published', () => {
+  assert.deepEqual(gateVerdict(gateResult({})), { exitCode: 0,
+    report: 'Checked 3 of 9 inventoried file(s) against https://earth-assets.lowpoly.cc: keys added since origin/main.\n\nEvery checked file is published.' });
 });

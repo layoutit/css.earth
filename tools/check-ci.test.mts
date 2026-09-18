@@ -10,7 +10,9 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  const lint=readCiSteps(workflow,'lint'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
  assert.equal(lint[0]?.name,'Check documentation links and organization');
  assert.ok(lint.some(step=>step.run.includes('check-object-runtime-ownership.mts --receipts')));
- assert.ok(lint.some(step=>step.run.includes('check:assets-published')&&step.env.GH_TOKEN===undefined),'the workflow token is dropped locally');
+ const gate=lint.find(step=>step.run.includes('check:assets-published'));
+ assert.equal(gate?.env.GH_TOKEN,undefined,'the workflow token is dropped locally');
+ assert.match(gate?.run??'',/--added-since-last-green --report-only/,'a push to main never fails on assets');
  assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:shared')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
  assert.ok(universe.length>10);
  assert.equal(universe.at(-1)?.run.trim(),'pnpm test:renderer');
