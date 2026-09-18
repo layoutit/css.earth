@@ -24,3 +24,5 @@ export async function loadPreparedCssObject(
   if (typeof Worker === 'undefined') return decodePreparedCssObject(descriptor, bytes);
   return decodePreparedObjectInWorker({ descriptor, bytes }, { signal });
 }
+
+// CI proof: renderer-only change for timing (safe to delete).
