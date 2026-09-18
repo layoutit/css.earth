@@ -22,15 +22,29 @@ function run(command: string, args: readonly string[]): Promise<void> {
   });
 }
 
-async function bulkPut(batch: readonly PublishAsset[], type: string): Promise<void> {
+// A batch of hundreds to thousands of uploads over a real network will occasionally hit one transient failure
+// (observed live: a single "fetch failed" mid-batch aborts wrangler's whole bulk-put run, having uploaded only
+// a handful of the batch). Re-running the same batch is safe (`--force`, content-addressed keys) and cheap
+// relative to giving up, so retry the whole batch a few times before surfacing the failure.
+async function bulkPut(batch: readonly PublishAsset[], type: string, attempts = 4): Promise<void> {
   if (!batch.length) return;
   const directory = await mkdtemp(join(tmpdir(), "cssearth-publish-assets-"));
   try {
     const filename = join(directory, "assets.json");
     await writeFile(filename, JSON.stringify(batch.map(({ key, file }) => ({ key, file }))));
-    await run("npx", ["--yes", "wrangler@4.129.0", "r2", "bulk", "put", BUCKET,
-      "--filename", filename, "--concurrency", "16", "--remote", "--force",
-      "--content-type", type, "--cache-control", CACHE_CONTROL]);
+    for (let attempt = 1; ; attempt++) {
+      try {
+        await run("npx", ["--yes", "wrangler@4.129.0", "r2", "bulk", "put", BUCKET,
+          "--filename", filename, "--concurrency", "16", "--remote", "--force",
+          "--content-type", type, "--cache-control", CACHE_CONTROL]);
+        return;
+      } catch (error) {
+        if (attempt >= attempts) throw error;
+        const waitMs = 3000 * attempt;
+        console.log(`Bulk upload attempt ${attempt}/${attempts} failed (${(error as Error).message}); retrying the batch in ${waitMs}ms.`);
+        await new Promise(accept => setTimeout(accept, waitMs));
+      }
+    }
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
