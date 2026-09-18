@@ -26,7 +26,7 @@ const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v
 // Prepared pixels and their contract must invalidate a previously installed handoff together.
 const implementationFiles = [
   'tools/nebula/application/package-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
-  'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts',
+  'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
   'tools/nebula/application/star-sprites.ts', 'tools/nebula/application/fits.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
   'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/volume-impostors.ts',
