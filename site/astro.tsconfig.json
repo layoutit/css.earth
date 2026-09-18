@@ -1,6 +1,10 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": { "jsx": "preserve" },
+  "compilerOptions": {
+    "jsx": "preserve",
+    "incremental": false,
+    "tsBuildInfoFile": null
+  },
   "include": ["**/*.astro", "**/*.mts", "**/*.ts"],
   "exclude": ["test"]
 }
