@@ -3,7 +3,9 @@
   "compilerOptions": {
     "lib": ["ES2022"],
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "incremental": true,
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-astronomy.tsbuildinfo"
   },
   "include": ["src"]
 }

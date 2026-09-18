@@ -6,7 +6,9 @@
     ],
     "typeRoots": [
       "../../packages/engine/node_modules/@types"
-    ]
+    ],
+    "incremental": true,
+    "tsBuildInfoFile": "../../output/tsbuildinfo/browser-owners.tsbuildinfo"
   },
   "include": [
     "dataset-navigation-browser.mts",

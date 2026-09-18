@@ -22,7 +22,9 @@
     ],
     "types": [
       "node"
-    ]
+    ],
+    "incremental": true,
+    "tsBuildInfoFile": "../output/tsbuildinfo/tools.tsbuildinfo"
   },
   "include": [
     "**/*.mts",

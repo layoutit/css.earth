@@ -9,7 +9,9 @@
     "rootDir": "src",
     "outDir": "dist",
     "allowJs": false,
-    "types": []
+    "types": [],
+    "incremental": true,
+    "tsBuildInfoFile": "../../output/tsbuildinfo/packages-objects.tsbuildinfo"
   },
   "include": [
     "src"
