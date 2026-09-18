@@ -1,0 +1,22 @@
+{
+  "check": "East and west of the drawn volume against the sky, at Betelgeuse’s default view",
+  "revision": "66cfa8331cde16b1e80331ce916af913cf489f79",
+  "date": "2026-09-18",
+  "method": "Headless Chromium, 1200 x 1000 px at device scale 1, the local dev server, /betelgeuse/?dataset=matisse and ?dataset=sio-2023 with the same default camera, 12 s after load, shell hidden. The SiO light is what the SiO frame adds in green and blue over the MATISSE frame outside 1.2 disc radii; its weighted centroid is compared with the screen angle the default-view test pins for the SiO ring’s east-south-east weight (celestial north 42 degrees counterclockwise of screen-right, east 90 degrees beyond it, weight at position angle 122).",
+  "image": "east-west.webp",
+  "result": {
+    "disc": {
+      "centreXPx": 615.9,
+      "centreYPx": 482.2,
+      "radiusPx": 201.1
+    },
+    "sioCentroidPx": [
+      -237.3,
+      152.4
+    ],
+    "sioCentroidDiscRadii": 1.4,
+    "measuredScreenAngleDegrees": 147.3,
+    "eastLeftPredictionDegrees": 164,
+    "mirroredPredictionDegrees": 280
+  }
+}

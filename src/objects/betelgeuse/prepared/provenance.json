@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "450a29d9f46d773388382ef184abe2105aa2ecdaf6dcc99375addbd2a3349630"
+    "sha256": "4b627e321e3f24057ffee5f2481863a605966bcc9c624ee352193404a6374978"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "ef81929a9fc014823a17169b6eb914500884fa14def11efa6c275ad0f68b904b"
+    "bindingsSha256": "d203bc86a96caf451b8eb1f792be504e6b15a5fc3fc9af59cbd299e818ddebaf"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "b598cbcfd1c5bc56648d616f35a77012b5e2d534b40bb244e72b18cfd79b11dc",
+      "sha256": "e97986e9ffaa5d8c9b5fdecd0b2c7187632c10a697af61451a913fce4fcfeebb",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
@@ -27,6 +27,7 @@
         "polarTile": 256,
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
+        "missingCoverage": "dark",
         "polesCombined": false,
         "polesOutput": "betelgeuse-poles-{id}{suffix}.webp",
         "surfaceMetadata": {
@@ -122,8 +123,7 @@
                   ]
                 },
                 "consumer": "sphere-photograph"
-              },
-              "offLimb": {}
+              }
             }
           }
         ],
@@ -135,12 +135,12 @@
           "limbOutput": "betelgeuse-limb-{id}{suffix}.webp",
           "metadata": {
             "schema": "cssbetelgeuse-prepared-emission@1",
-            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "presentation": "prepared-emissive-surface-with-volumetric-off-limb-light-and-limb-plate",
             "offLimbContext": {
               "logicalSize": 1168,
-              "source": "the same beam-convolved reconstruction: its light outside the 42.45 mas disc, 20 percent of the flux, on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 100 mas field",
-              "composition": "sky-plane image registered to the disc (496 px = 42.45 mas), mirrored and turned to the scene's handedness so its north meets the rendered pole (measured 40.4 degrees from screen-right at the default camera, against the image's 42 degrees mirrored)",
-              "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
+              "source": "none: the light outside the 42.45 mas disc is no longer a flat plate behind the sphere. It is a dataset of the betelgeuse-shell volume, drawn on the envelope that best projects to its measured radial profile, so it has depth and turns with the scene.",
+              "composition": "withdrawn; see src/objects/betelgeuse-shell for the volume that replaced it",
+              "rotation": "n/a",
               "runtimeAlphaProcessing": false
             },
             "limbMaterial": {
@@ -159,7 +159,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "857b298eb4b46690cfb0ac9bfb10320c662effc88168c7c672af794ec5c11a41",
+      "sha256": "3c81f2304881920c3bede2ca4b0de8475514bad91d36bff1d4bd79fdd8663f83",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -224,7 +224,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": true,
-              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Its bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
+              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Its bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. A fifth of the reconstruction's flux lies outside the disc, and it is drawn here in three dimensions rather than as a flat plate behind the sphere: the envelope that best projects to its measured radial profile, which falls as r to the minus eight. The ring within one beam of the limb is left out, because there the light is the star's own edge smeared by the 4 milliarcsecond beam rather than anything resolved; that is about half of the off-limb flux. What is drawn is the extended emission the visibilities require. The far hemisphere and the poles were not observed.",
               "noData": true,
               "legend": {
                 "kind": "scale",
@@ -275,6 +275,141 @@
                 },
                 "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
                 "sourceUrl": "https://arxiv.org/abs/2401.12404"
+              },
+              "volume": {
+                "objectId": "betelgeuse-shell",
+                "lensId": "emission-2020",
+                "surface": "matisse"
+              }
+            },
+            {
+              "id": "dust-2024",
+              "label": "Polarised dust · December 2024",
+              "thumbnail": "betelgeuse-lens-matisse.webp",
+              "volume": {
+                "objectId": "betelgeuse-shell",
+                "lensId": "zimpol-v",
+                "surface": "matisse"
+              },
+              "notes": "The photosphere as the MATISSE reconstruction shows it, with the dust around it: the degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, released by ESO as Phase 3 collection BETELGEUSE-B beside Montargès et al. (2026). The patches one to about 4.5 stellar radii out are starlight scattered by dust. This is their own Fig. B.1 given depth: the same inferno colour map on the same zero-to-0.10 scale, carried as four emission channels so a line of sight emits the bar colour of its own measured degree. The colours are a legend for a ratio, not the colour of the dust. The instrumental polarisation measured beyond eight radii is subtracted, so the empty sky is darker here than in the printed figure. The map is a sky-plane image with no third axis, so the depth is inferred rather than pushed back from the sky: the azimuthally averaged radial profile is fitted with simple envelopes around the star, and the one that projects to it is a spherical shell of 3.5 stellar radii and gaussian thickness 1.2, which beats both a steady outflow and the constant depth an extrusion assumes. Each patch is placed on that shell, in front of the star and behind it, because nothing in one image says which. That shape is an inference from the profile, not a measurement.",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Degree of linear polarisation",
+                "labels": [
+                  "0.00",
+                  "0.05",
+                  "0.10"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      0,
+                      4
+                    ],
+                    [
+                      66,
+                      10,
+                      104
+                    ],
+                    [
+                      147,
+                      38,
+                      103
+                    ],
+                    [
+                      221,
+                      81,
+                      58
+                    ],
+                    [
+                      252,
+                      165,
+                      10
+                    ],
+                    [
+                      252,
+                      255,
+                      164
+                    ]
+                  ],
+                  "labels": [
+                    "0.00",
+                    "0.05",
+                    "0.10"
+                  ]
+                },
+                "meta": "V band, 3 December 2024 · the paper's own inferno scale",
+                "sourceUrl": "https://doi.org/10.1051/0004-6361/202661023"
+              }
+            },
+            {
+              "id": "dust-2019",
+              "label": "Great Dimming clump · December 2019",
+              "thumbnail": "betelgeuse-lens-matisse.webp",
+              "volume": {
+                "objectId": "betelgeuse-shell",
+                "lensId": "veil-2019-12",
+                "surface": "matisse"
+              },
+              "notes": "The same photosphere, with the dust clump Montargès et al. (2021) fitted to the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as they report for the southern hemisphere, and the light it scatters back is drawn faintly over that. A model fitted to images, not an image."
+            },
+            {
+              "id": "sio-2023",
+              "label": "SiO envelope · August 2023",
+              "thumbnail": "betelgeuse-lens-matisse.webp",
+              "falseColor": true,
+              "volume": {
+                "objectId": "betelgeuse-shell",
+                "lensId": "sio-2023",
+                "surface": "matisse"
+              },
+              "notes": "The same photosphere, with the silicon monoxide ALMA saw around it in August 2023. This is the only dataset here placed in depth by its own measured velocities rather than by a shape fitted to a picture. Everything is measured from the star itself, which the same observation's continuum places a tenth of an arcsecond, nearly five stellar radii, from where ALMA pointed. In front of the star the molecule absorbs its light, some of it leaving the star and some falling back; around it, the molecule glows in a lopsided ring between two and four stellar radii out, heaviest to the east-south-east. Each channel of the line cube is placed along the line of sight on a spherical outflow at the speed of the fastest gas absorbing in front of the star, about twenty-two kilometres a second, which is the usual first reading of an expanding stellar envelope. Gas that is falling back is placed as if it were flowing out, so the depths are a model. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness, not colour or temperature.",
+              "legend": {
+                "kind": "scale",
+                "title": "SiO line brightness, integrated",
+                "labels": [
+                  "0.00",
+                  "0.50",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      59,
+                      82,
+                      139
+                    ],
+                    [
+                      33,
+                      145,
+                      140
+                    ],
+                    [
+                      94,
+                      201,
+                      98
+                    ],
+                    [
+                      253,
+                      231,
+                      37
+                    ]
+                  ],
+                  "labels": [
+                    "0.00",
+                    "0.50",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the peak · ALMA band 6, 217.105 GHz · viridis, false colour",
+                "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
               }
             }
           ]
@@ -492,8 +627,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "857b298eb4b46690cfb0ac9bfb10320c662effc88168c7c672af794ec5c11a41",
-      "bytes": 5578,
+      "sha256": "3c81f2304881920c3bede2ca4b0de8475514bad91d36bff1d4bd79fdd8663f83",
+      "bytes": 12068,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -575,8 +710,8 @@
       "outputs": [
         {
           "url": "/scenes/betelgeuse/betelgeuse-surface-matisse@2x.webp",
-          "bytes": 55478,
-          "sha256": "25408fca4a1378963da43ea0688c223818c649b56c2a14ec3fb39eb996119603",
+          "bytes": 78948,
+          "sha256": "02fa83f854b5ed8ad7b19419a1d6dd18e56fb2b99bf17ad64959d6702b2bf7d9",
           "verification": "bytes-verified"
         },
         {
@@ -587,14 +722,14 @@
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-poles-matisse@2x.webp",
-          "bytes": 16222,
-          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "bytes": 42818,
+          "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/betelgeuse/betelgeuse-context-matisse@2x.webp",
-          "bytes": 155490,
-          "sha256": "235839a468fcf77d7153810b6e16768cc6b59047cc9c983c53869b9ad659023f",
+          "bytes": 270,
+          "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8",
           "verification": "bytes-verified"
         },
         {
@@ -609,6 +744,108 @@
           "sourceId": "betelgeuse-matisse-2020-02-continuum",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "dust-2024",
+      "label": "Polarised dust · December 2024",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "matisse"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [],
+      "lensIds": [
+        "dust-2024"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "betelgeuse-shell",
+        "lensId": "zimpol-v",
+        "surface": "matisse"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "dust-2019",
+      "label": "Great Dimming clump · December 2019",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "matisse"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [],
+      "lensIds": [
+        "dust-2019"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "betelgeuse-shell",
+        "lensId": "veil-2019-12",
+        "surface": "matisse"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "sio-2023",
+      "label": "SiO envelope · August 2023",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "matisse"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [],
+      "lensIds": [
+        "sio-2023"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "betelgeuse-shell",
+        "lensId": "sio-2023",
+        "surface": "matisse"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -658,8 +895,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/matisse.webp",
-          "bytes": 9878,
-          "sha256": "2fa84be7a54c3104fd98dda4887d730c9499d3b33fa7d2390d9fdd12bf87d14e",
+          "bytes": 14508,
+          "sha256": "f89144bbecd89ed1534df711c24f4c5d8f8f9a080474ae4e42f7d1cd3df485a8",
           "verification": "bytes-verified"
         }
       ]
@@ -671,11 +908,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "f221132b45b76050c430dca2960d66329f94a4a7fa7d778ec6a15ad2b8645199",
+    "materialSha256": "1d63e8d4e3c849d8b5d2930a27ab4a684a4425abb2fc6ae57218865449510a19",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "ef81929a9fc014823a17169b6eb914500884fa14def11efa6c275ad0f68b904b"
+      "bindingsSha256": "d203bc86a96caf451b8eb1f792be504e6b15a5fc3fc9af59cbd299e818ddebaf"
     }
   }
 }

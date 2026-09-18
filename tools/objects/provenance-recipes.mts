@@ -245,6 +245,18 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       else unresolved.push({ product: lens.id, reason: 'Requires geographic release provenance; the global base map does not establish this dataset.' });
     }
   }
+  // A dataset that names a companion cloud prepares nothing of its own: it keeps the plates of the lens it borrows and
+  // turns on a volume another package prepares, pins and accounts for. Its parent is that lens; the cloud's own
+  // evidence lives in the companion package's provenance, which the volume presentation binds.
+  for (const lens of controls) {
+    const volume = maybeRecord(lens.volume);
+    if (!volume || products.some(product => product.id === lens.id)) continue;
+    add(lens.id, 'content', '', [],
+      'Keep the borrowed lens\'s prepared plates and enable the companion volume this dataset names.', {
+        parents: [text(volume.surface)],
+        interpretation: { kind: 'companion-volume', objectId: text(volume.objectId), lensId: text(volume.lensId), surface: text(volume.surface) },
+      });
+  }
   for (const lens of controls) {
     if (!products.some(product => product.lensIds.includes(lens.id)) && !unresolved.some(gap => gap.product === lens.id))
       unresolved.push({ product: lens.id, reason: 'The preparation capability has no product dependency binding yet.' });

@@ -10,12 +10,20 @@ import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-res
  * inside the prepared inner ellipsoid at every camera orientation. */
 export const interiorFillInset = (1 - 1e-6) / (1 + 4 / PREPARED_INTERIOR_DISC_SIZE);
 
-export async function preparedSurfaceMean(paths: readonly string[]): Promise<string> {
+/** Colours a surface paints where it has no observation. They are a display convention, so a body that declares one
+ * keeps them out of the mean that stands in for its surface behind the leaves; otherwise a map that is mostly gap
+ * gives an interior nothing like the part anyone looks at. */
+export interface SurfaceMeanExclusion { colors: readonly (readonly number[])[]; tolerance: number }
+
+export async function preparedSurfaceMean(paths: readonly string[], exclude?: SurfaceMeanExclusion): Promise<string> {
   const sum = [0, 0, 0]; let weight = 0;
+  const excluded = (r: number, g: number, b: number) => exclude !== undefined && exclude.colors.some(color =>
+    Math.abs(r - color[0]!) <= exclude.tolerance && Math.abs(g - color[1]!) <= exclude.tolerance && Math.abs(b - color[2]!) <= exclude.tolerance);
   for (const path of paths) {
     const { data, info } = await sharp(await readFile(path)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     if (info.channels !== 4) throw new Error('Surface mean requires RGBA pixels.');
     for (let i = 0; i < data.length; i += 4) {
+      if (excluded(data[i]!, data[i + 1]!, data[i + 2]!)) continue;
       const alpha = data[i + 3]; weight += alpha;
       for (let channel = 0; channel < 3; channel++) sum[channel] += data[i + channel] * alpha;
     }
@@ -28,6 +36,7 @@ export async function preparedSurfaceMean(paths: readonly string[]): Promise<str
  * inside that body's actual surface; there is no object-specific renderer. */
 export async function withPreparedInteriorFill<T extends PreparedPresentationDefinition & { assets?: PreparedAssets }>(
   presentation: T, geometry: PreparedInteriorDisc | null, publicRoot: string | ((url: string) => string),
+  exclude?: SurfaceMeanExclusion,
 ): Promise<T> {
   // Write-mode preparation stages every scene asset in a flat directory before publishing; the
   // surface mean must read those staged pixels, never a previously published copy under public/.
@@ -49,7 +58,7 @@ export async function withPreparedInteriorFill<T extends PreparedPresentationDef
         if (!asset || !asset.url.startsWith('/scenes/') || asset.url.includes('..')) throw new Error('Interior fill requires local prepared surface pixels.');
         return resolveAsset(asset.url);
       });
-      colors.set(key, preparedSurfaceMean(paths));
+      colors.set(key, preparedSurfaceMean(paths, exclude));
     }
     const writes: PreparedWrite[] = [
       { kind: 'style', target, name: 'display', value: interior ? 'none' : 'block' },

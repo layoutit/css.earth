@@ -2,7 +2,7 @@ import type { PreparedLeaf } from '../scene/projector.js';
 import type { CameraPlan } from '../../navigation/types.js';
 import type { CubicSkyPlan } from '../../solar-system/cubic-sky-runtime.js';
 import type { DirectionalSunPlan } from '../../solar-system/directional-sun-coordinate.js';
-import type { ObjectControls } from '../../runtime/object-contract.js';
+import type { LensVolume, ObjectControls } from '../../runtime/object-contract.js';
 import type { ObjectRuntimeDefinition } from '../../runtime/object-runtime-types.js';
 import type { PreparedAssets } from '../../rendering/prepared-residency.js';
 import type { PreparedTree, PreparedVariant, PreparedViewBinding } from '../../rendering/prepared-presentation.js';
@@ -13,6 +13,8 @@ type SeamRepair = { outset?: PreparedSeamOutset };
 
 export interface Lens {
   id: string; view?: string; billboardColor: string;
+  /** A dataset that names a companion cloud borrows another lens's plates instead of owning any. */
+  volume?: LensVolume;
   surfaceUrl: string; surface2xUrl?: string; polesUrl: string; poles2xUrl?: string;
   materialUrl: string; material2xUrl?: string;
   /** Emissive bodies: the stationary off-limb context and the limb plate of this lens. */
