@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { finalizeObjectJson } from '../../tools/prepare-object-json.mts';
 import { requireRecord } from '../../tools/source-values.mts';
+import { requirePreparedAssetManifest, verifyPreparedAssetClosure } from '../../src/platform/runtime-asset-closure.mts';
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 async function snapshot(objectDirectory: string) {
   const files = ['object.json', ...(await readdir(resolve(objectDirectory, 'prepared'), { withFileTypes: true }))
@@ -65,5 +66,30 @@ test('--keep-bindings finalizes an unedited copy of Mimas normally', async () =>
     const finalized = await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
       descriptorPath: resolve(stage, 'object.json') }, { keepBindings: true });
     assert.deepEqual(finalized.definition, runtime);
+  } finally { await rm(stage, { recursive: true, force: true }); }
+});
+
+test('finalization writes a prepared-assets.json inventory covering only runtime.json and scene.json', async () => {
+  const root = resolve(import.meta.dirname, '../..'), objectDirectory = resolve(root, 'src/objects/mimas');
+  const runtime: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8'));
+  const stage = await mkdtemp(resolve(tmpdir(), 'cssearth-finalization-prepared-assets-'));
+  try {
+    const preparedDirectory = resolve(stage, 'prepared'); await mkdir(preparedDirectory);
+    await copyFile(resolve(objectDirectory, 'prepared/scene.json'), resolve(preparedDirectory, 'scene.json'));
+    // A tracked contract file that must stay out of the inventory (FABLE_REVIEW.md section D).
+    await copyFile(resolve(objectDirectory, 'prepared/provenance.json'), resolve(preparedDirectory, 'provenance.json'));
+    await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
+      descriptorPath: resolve(stage, 'object.json') });
+    const manifest = requirePreparedAssetManifest('mimas', JSON.parse(await readFile(resolve(stage, 'prepared-assets.json'), 'utf8')));
+    assert.equal(manifest.schema, 'cssmimas-prepared-assets@1');
+    assert.equal(manifest.resourceRoot, 'prepared');
+    assert.deepEqual(manifest.assets.map(a => a.filename).sort(), ['runtime.json', 'scene.json']);
+    assert.equal(await verifyPreparedAssetClosure({ planetId: 'mimas', manifest, root: preparedDirectory, closure: false }), true);
+    // Mutation check: corrupting an inventoried file must fail verification even though provenance.json (not
+    // inventoried) is untouched, proving the writer records real hashes rather than trusting its file list.
+    const { writeFile } = await import('node:fs/promises');
+    await writeFile(resolve(preparedDirectory, 'scene.json'), 'drifted');
+    await assert.rejects(verifyPreparedAssetClosure({ planetId: 'mimas', manifest, root: preparedDirectory, closure: false }),
+      /prepared asset drifted: scene\.json/);
   } finally { await rm(stage, { recursive: true, force: true }); }
 });

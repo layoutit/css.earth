@@ -28,6 +28,7 @@ import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
+import { preparePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = PREPARED_CSS_OBJECT_FORMAT;
@@ -93,6 +94,16 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
     properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
+  // Phase 2 (feat/gh-pages-r2-assets): only runtime.json/scene.json move to R2; every other prepared/* file
+  // (provenance.json, content.json, page.json, …) stays a tracked contract file — FABLE_REVIEW.md section D.
+  const inventoried: string[] = [];
+  for (const filename of ['runtime.json', 'scene.json']) {
+    if (await access(resolve(preparedDirectory, filename)).then(() => true, () => false)) inventoried.push(filename);
+  }
+  if (inventoried.length) {
+    await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory,
+      manifestPath: resolve(preparedDirectory, '..', 'prepared-assets.json'), filenames: inventoried });
+  }
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }
 
