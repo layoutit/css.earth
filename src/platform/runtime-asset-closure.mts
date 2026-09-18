@@ -3,17 +3,59 @@ import { isArray } from './is-array.mts';
 export interface RuntimeAsset { filename: string; bytes: number; sha256: string; location?: 'public'; }
 export interface RuntimeAssetManifest { schema: string; resourceRoot?: 'prepared'; assets: readonly RuntimeAsset[]; }
 /** `runtime-assets` covers public scene textures (and, via the `prepared` resourceRoot, a handful of legacy
- * context bundles). `prepared-assets` is the Phase 2 inventory of baked `prepared/*` outputs that git no longer
- * tracks: either an explicit small filename list (`runtime.json`/`scene.json` for a body prepared through the
- * runtime pipeline) or the full nested closure of a context/nebula object's `prepared/` directory. Both kinds
- * share one schema shape, validator and closure verifier; only the schema suffix differs. */
+ * context bundles). `prepared-assets` inventories baked `prepared/*` outputs that git no longer tracks: either an
+ * explicit small filename list (`runtime.json`/`scene.json` for a body prepared through the runtime pipeline) or
+ * the full nested closure of a context/nebula object's `prepared/` directory. Both kinds share one schema shape,
+ * validator and closure verifier; only the schema suffix differs. */
 export type AssetManifestKind = 'runtime-assets' | 'prepared-assets';
+import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, stat, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 
+const execFileAsync = promisify(execFile);
 const SAFE_FILENAME = /^[a-z0-9][a-z0-9@._-]*$/u;
+
+let cachedRepoRoot: Promise<string | null> | undefined;
+function repoRoot(): Promise<string | null> {
+  cachedRepoRoot ??= execFileAsync("git", ["rev-parse", "--show-toplevel"]).then(({ stdout }) => stdout.trim(), () => null);
+  return cachedRepoRoot;
+}
+
+/**
+ * Which of these absolute paths git currently tracks, batched into one `git ls-files` call regardless of how many
+ * paths are checked. Fails open (reports nothing tracked) when there is no git repository to ask — an isolated
+ * test fixture, or tooling run outside a checkout — rather than making every prepare/publish step depend on git
+ * being available; the writers below still call this by default, and remain the read backstop everywhere a real
+ * checkout runs them.
+ */
+async function defaultGitTrackedPaths(paths: readonly string[]): Promise<Set<string>> {
+  if (!paths.length) return new Set();
+  const root = await repoRoot();
+  if (!root) return new Set();
+  const tracked = await execFileAsync("git", ["ls-files", "-z", "--full-name", "--", ...paths], { maxBuffer: 1024 * 1024 * 64 })
+    .then(({ stdout }) => new Set(stdout.split("\0").filter(Boolean).map(name => resolve(root, name))), () => new Set<string>());
+  return new Set(paths.filter(path => tracked.has(resolve(path))));
+}
+
+/**
+ * Guard shared by both manifest writers below (the P2 gap that let a git-tracked file — e.g. a body's
+ * `prepared/provenance.json` — end up inside a `runtime-assets.json`/`prepared-assets.json` inventory: `setup:assets`
+ * would then silently overwrite a contributor's tracked, committed bytes with whatever R2 happens to hold).
+ */
+async function rejectGitTrackedAssets(planetId: string, root: string, filenames: readonly string[],
+  gitTrackedPaths: (paths: readonly string[]) => Promise<Set<string>>): Promise<void> {
+  const absolute = filenames.map(name => resolve(root, name));
+  const tracked = await gitTrackedPaths(absolute);
+  if (!tracked.size) return;
+  const trackedNames = filenames.filter(name => tracked.has(resolve(root, name)));
+  if (!trackedNames.length) return;
+  throw new TypeError(`Planet ${planetId} inventory includes git-tracked file(s), which setup:assets/setup:prepared ` +
+    `would silently overwrite: ${trackedNames.join(", ")}.`);
+}
+
 const SHA256 = /^[0-9a-f]{64}$/u;
 
 function manifestSchema(kind: AssetManifestKind, planetId: string): string {
@@ -54,7 +96,9 @@ export async function prepareRuntimeAssetManifest({
 }: { planetId: string; urls: readonly string[]; publicRoot: string; manifestPath: string | URL; allowPreparationArtifacts?: boolean }) {
   const filenames = normalizeRuntimeAssetUrls({ planetId, urls });
   // Offline baking may emit intermediate densities. They are not shipped;
-  // production assembly and verification still enforce exact closure.
+  // production assembly and verification still enforce exact closure. Unlike prepared-assets.json below, a
+  // handful of legacy context bundles (e.g. m31, galaxy-clusters) intentionally list git-tracked files here
+  // under the `prepared` resourceRoot, so this writer does not reject a tracked path the way that one does.
   if (!allowPreparationArtifacts) await assertDirectoryClosure(publicRoot, filenames, planetId);
   const assets = [];
   for (const filename of filenames) {
@@ -88,11 +132,11 @@ async function writeManifestAtomically(manifestPath: string | URL, manifest: unk
 }
 
 /**
- * Write the Phase 2 `prepared-assets.json` inventory for one object: either an explicit `filenames` list (a
- * body's `prepared/runtime.json` + `prepared/scene.json`, whichever exist — every other `prepared/*` file stays
- * a tracked contract file per FABLE_REVIEW.md section D) or, when `filenames` is omitted, the full nested
- * closure of `preparedRoot` minus `exclude` (a context/nebula object with no `runtime-assets.json`, such as a
- * nebula bake or milky-way/heliosphere/stellar-neighbourhood/lmc).
+ * Write the `prepared-assets.json` inventory for one object: either an explicit `filenames` list (a body's
+ * `prepared/runtime.json` + `prepared/scene.json`, whichever exist — every other `prepared/*` file stays a
+ * tracked contract file, not part of this inventory) or, when `filenames` is omitted, the full nested closure of
+ * `preparedRoot` minus `exclude` (a context/nebula object with no `runtime-assets.json`, such as a nebula bake or
+ * milky-way/heliosphere/stellar-neighbourhood/lmc).
  */
 export async function preparePreparedAssetManifest({
   planetId,
@@ -100,7 +144,9 @@ export async function preparePreparedAssetManifest({
   manifestPath,
   filenames,
   exclude = [],
-}: { planetId: string; preparedRoot: string; manifestPath: string | URL; filenames?: readonly string[]; exclude?: readonly string[] }): Promise<Readonly<RuntimeAssetManifest>> {
+  gitTrackedPaths = defaultGitTrackedPaths,
+}: { planetId: string; preparedRoot: string; manifestPath: string | URL; filenames?: readonly string[]; exclude?: readonly string[];
+  gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>> }): Promise<Readonly<RuntimeAssetManifest>> {
   let names: string[];
   if (filenames) {
     names = [...filenames];
@@ -121,6 +167,7 @@ export async function preparePreparedAssetManifest({
     }
   }
   if (new Set(names).size !== names.length) throw new TypeError(`Planet ${planetId} repeats a prepared asset path.`);
+  await rejectGitTrackedAssets(planetId, preparedRoot, names, gitTrackedPaths);
   const assets = [];
   for (const filename of names) {
     const bytes = await readFile(resolve(preparedRoot, filename));

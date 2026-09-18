@@ -134,3 +134,35 @@ test("prepared-assets: nested closure mode inventories every file under prepared
   await rm(resolve(preparedRoot, "undeclared.json"));
   await assert.rejects(verifyPreparedAssetClosure({ planetId: "context-nebula", manifest, root: preparedRoot }), /Undeclared: local-drift\.json/);
 });
+
+test("prepared-assets: refuses to inventory a git-tracked file, which setup:assets/setup:prepared would overwrite", async (context) => {
+  const root = await mkdtemp(resolve(tmpdir(), "prepared-assets-tracked-"));
+  context.after(() => rm(root, { force: true, recursive: true }));
+  const preparedRoot = resolve(root, "prepared");
+  await mkdir(preparedRoot);
+  await writeFile(resolve(preparedRoot, "runtime.json"), "runtime-bytes");
+  await writeFile(resolve(preparedRoot, "provenance.json"), "tracked-contract-bytes");
+  const manifestPath = resolve(root, "prepared-assets.json");
+  const trackedPath = resolve(preparedRoot, "provenance.json");
+  await assert.rejects(preparePreparedAssetManifest({
+    planetId: "fixture", preparedRoot, manifestPath, filenames: ["runtime.json", "provenance.json"],
+    gitTrackedPaths: async paths => new Set(paths.filter(path => path === trackedPath)),
+  }), /git-tracked.*provenance\.json/);
+  // A filename this call never asked to inventory being tracked elsewhere must not affect it.
+  const manifest = await preparePreparedAssetManifest({
+    planetId: "fixture", preparedRoot, manifestPath, filenames: ["runtime.json"],
+    gitTrackedPaths: async () => new Set([resolve(preparedRoot, "some-other-tracked-file.json")]),
+  });
+  assert.deepEqual(manifest.assets.map(a => a.filename), ["runtime.json"]);
+});
+
+test("prepared-assets: the real mimas object's tracked provenance.json is refused if added to its inventory", async () => {
+  // Reproduces the live gap found in review: nothing stopped a git-tracked contract file from being listed in a
+  // prepared-assets inventory (a body's provenance.json was added to it and every suite stayed green). Exercises
+  // the default (real git) path against this actual checkout, not an injected fake.
+  const preparedRoot = resolve(import.meta.dirname, "../../src/objects/mimas/prepared");
+  await assert.rejects(preparePreparedAssetManifest({
+    planetId: "mimas", preparedRoot, manifestPath: resolve(preparedRoot, "../prepared-assets.json"),
+    filenames: ["runtime.json", "provenance.json"],
+  }), /git-tracked.*provenance\.json/);
+});
