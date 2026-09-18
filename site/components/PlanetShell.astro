@@ -360,7 +360,7 @@ const searchCategories = ([
           introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
           <PlanetBreadcrumbs scope="system" systemId={system.id} />
         </PlanetCardHeader>)}
-        <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
+        <PlanetObjectResults formId={searchFormId}>
           <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
             aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
             <p class="planet-feature-hint planet-destination-hint" role="status"></p>
