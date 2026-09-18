@@ -5,9 +5,12 @@ import { prepareNebulaObject } from './objects.ts';
 import { prepareCompactDensityObject } from './density-object.ts';
 import { preparePreparedAssetManifest } from '../../../src/platform/runtime-asset-closure.mts';
 const args = process.argv.slice(2);
-if (args.some(arg=>arg !== '--if-missing' && !/^--object=[a-z][a-z0-9-]*$/.test(arg)) || args.filter(arg=>arg.startsWith('--object=')).length > 1)
-  throw new TypeError('Usage: tools/nebula/prepare.mts [--if-missing] [--object=<id>]. Research: pnpm lab:nebula:bake --research.');
+if (args.some(arg=>arg !== '--if-missing' && arg !== '--allow-missing' && !/^--object=[a-z][a-z0-9-]*$/.test(arg)) || args.filter(arg=>arg.startsWith('--object=')).length > 1)
+  throw new TypeError('Usage: tools/nebula/prepare.mts [--if-missing] [--allow-missing] [--object=<id>]. Research: pnpm lab:nebula:bake --research.');
 const selected = args.find(arg=>arg.startsWith('--object='))?.slice(9);
+// Deploy builds only: a package missing from R2 (setup:assets/setup:prepared skipped a 404) reports unavailable
+// instead of triggering a from-scratch bake here, which needs a source acquisition service this build never runs.
+const allowMissing = args.includes('--allow-missing') || process.env.CSSEARTH_ALLOW_MISSING_ASSETS === '1';
 const root = process.cwd(), objects = resolve(root,'src/objects'), results = [];
 async function exists(path: string) {
   try { await access(path); return true; }
@@ -17,10 +20,13 @@ for (const entry of (await readdir(objects,{withFileTypes:true})).filter(entry=>
   if (selected && entry.name !== selected) continue;
   const directory = resolve(objects,entry.name);
   let result;
-  if (await exists(resolve(directory,'source/compact-delivery.json'))) result = await prepareCompactDensityObject(root,directory,args.includes('--if-missing'));
-  else if (await exists(resolve(directory,'source/delivery.json'))) result = await prepareNebulaObject(root,directory,args.includes('--if-missing'));
+  if (await exists(resolve(directory,'source/compact-delivery.json'))) result = await prepareCompactDensityObject(root,directory,args.includes('--if-missing'),allowMissing);
+  else if (await exists(resolve(directory,'source/delivery.json'))) result = await prepareNebulaObject(root,directory,args.includes('--if-missing'),undefined,allowMissing);
   else continue;
   results.push(result);
+  // An unavailable object's `prepared/` output is incomplete by definition: no manifest to write, and the
+  // shared context-availability check (astro.config.mts) is what reports it, not this inventory.
+  if (result.status === 'unavailable') continue;
   // This object has no runtime-assets.json, so its whole `prepared/` bake (this loop's only output) is the R2
   // inventory — a full nested closure, no exclusions needed since `object.json` and the `.prepared-<pid>`
   // staging directory both live outside `prepared/`.
