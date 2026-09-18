@@ -31,7 +31,7 @@
     "matisse": {
       "title": "Photosphere at 4 µm",
       "detail": "February 2020, one side",
-      "summary": "Rebuilt from four telescopes' fringes; colour is infrared brightness. Its patches are unconfirmed and may be artefacts."
+      "summary": "Rebuilt from four telescopes' fringes, with the light outside its disc given a shape. Patches unconfirmed."
     },
     "dust-2024": {
       "title": "Polarised dust, 2024",
@@ -55,19 +55,6 @@
           "catalogueId": "source-betelgeuse-shell-veil-2019-12-parameters",
           "url": "https://doi.org/10.1038/s41586-021-03546-8",
           "label": "Montargès et al. 2021, Nature 594, 365, Extended Data Table 3",
-          "checked": "2026-09-18"
-        }
-      ]
-    },
-    "emission-2020": {
-      "title": "Light outside the disc",
-      "detail": "February 2020, 4 µm",
-      "summary": "The fifth of the reconstruction that lies outside the star's disc, given the shape that best fits it.",
-      "sources": [
-        {
-          "catalogueId": "source-betelgeuse-shell-matisse-2020-02-continuum-4mas",
-          "url": "https://doi.org/10.1051/0004-6361/202347719",
-          "label": "VLTI/MATISSE February 2020 visibilities, Drevon et al. 2024; reconstruction by this repository",
           "checked": "2026-09-18"
         }
       ]

@@ -53,7 +53,9 @@ export function requireObjectControls(content: ObjectControls, objectId = 'unkno
     throw new TypeError(`Object ${objectId} lens IDs/default are invalid.`);
   }
   // A cloud lens borrows a prepared surface; the surface it borrows must itself be prepared, so the chain is one deep.
-  const surfaceIds = lensControls.filter(lens => lens.volume === undefined).map(lens => lens.id);
+  // A dataset may name a cloud and still own its surface, which is what a dataset whose own observation continues
+  // beyond the body does: it borrows itself.
+  const surfaceIds = lensControls.filter(lens => lens.volume === undefined || lens.volume.surface === lens.id).map(lens => lens.id);
   for (const lens of lensControls) {
     if (lens.volume === undefined) continue;
     const volume = lens.volume;

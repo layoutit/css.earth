@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0c7b4c6f5feb0ddf661bef71f402f4599eba6e3dc40d602c95a5c5a3ce007fb9"
+    "sha256": "fb1913d3106ab79361ce8947852208efdec94964f4a2e59a1539b0753397e888"
   },
   "generator": {
     "path": "tools/prepare-volume-provenance.mts",
     "sha256": "96d85aa788c8f8161b4870f5aba68169968be86b329bb5455a5a7bcf0d73b7b0",
-    "bindingsSha256": "0070332b33fa2f914a34e856b4c092b7671faa3886e3a038dbf4ca8876cd02b9"
+    "bindingsSha256": "2fcff5d3cf694ba50052f3d417f0c68bb98ddef72e1345b86e80036ef960a761"
   },
   "sources": [
     {
@@ -29,7 +29,7 @@
           {
             "catalogueId": "source-betelgeuse-shell-matisse-2020-02-continuum-4mas",
             "role": "material",
-            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@8c8c14b9845821ec0ea8529f89ce5b873cc7f187#/inputs/0"
           }
         ]
       },

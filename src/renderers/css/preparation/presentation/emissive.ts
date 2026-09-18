@@ -19,7 +19,7 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   if (input.sun !== null && input.sun !== undefined) throw new TypeError('An emissive body carries no directional Sun.');
   // A dataset that names a companion cloud borrows another lens's prepared surface, so it owns no plates and needs
   // no variant of its own; the selection resolves it to the surface it borrows before this definition is read.
-  const surfaces = lenses.controls.filter(lens => lens.volume === undefined);
+  const surfaces = lenses.controls.filter(lens => lens.volume === undefined || lens.volume.surface === lens.id);
   const entries = surfaces.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
     url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
   const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`);

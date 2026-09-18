@@ -56,7 +56,7 @@
               "id": "matisse-2020-02-continuum",
               "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 0.00001,
+              "backgroundMaximum": 1e-05,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,
@@ -105,8 +105,7 @@
             ]
           },
           "consumer": "sphere-photograph"
-        },
-        "offLimb": {}
+        }
       }
     }
   ],
@@ -118,12 +117,12 @@
     "limbOutput": "betelgeuse-limb-{id}{suffix}.webp",
     "metadata": {
       "schema": "cssbetelgeuse-prepared-emission@1",
-      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "presentation": "prepared-emissive-surface-with-volumetric-off-limb-light-and-limb-plate",
       "offLimbContext": {
         "logicalSize": 1168,
-        "source": "the same beam-convolved reconstruction: its light outside the 42.45 mas disc, 20 percent of the flux, on the lens palette and stretch with alpha fading to the background maximum; the plate spans the 100 mas field",
-        "composition": "sky-plane image registered to the disc (496 px = 42.45 mas), mirrored and turned to the scene's handedness so its north meets the rendered pole (measured 40.4 degrees from screen-right at the default camera, against the image's 42 degrees mirrored)",
-        "rotation": "stationary sky-plane context; drawn behind the sphere, so the disc itself is hidden",
+        "source": "none: the light outside the 42.45 mas disc is no longer a flat plate behind the sphere. It is a dataset of the betelgeuse-shell volume, drawn on the envelope that best projects to its measured radial profile, so it has depth and turns with the scene.",
+        "composition": "withdrawn; see src/objects/betelgeuse-shell for the volume that replaced it",
+        "rotation": "n/a",
         "runtimeAlphaProcessing": false
       },
       "limbMaterial": {

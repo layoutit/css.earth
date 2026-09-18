@@ -40,7 +40,8 @@ test('the pole stands up and the sky keeps its handedness: north 48 degrees cloc
   // As on the sky seen from Earth, east is 90 degrees counterclockwise of north.
   const eastFromNorth = ((east.angleDegrees - north.angleDegrees) % 360 + 540) % 360 - 180;
   assert.ok(Math.abs(eastFromNorth - 90) < 0.1, `east is ${eastFromNorth.toFixed(1)} degrees from north on screen`);
-  // The plate's turn is derived at preparation; the lens report records it.
-  const report = JSON.stringify(await json('prepared/assets.json')), turn = Number(/"offLimb":\{[^}]*"rotationDegrees":(-?[\d.e+-]+)/u.exec(report)?.[1]);
-  assert.ok(Math.abs(requireFiniteNumber(turn) - (north.angleDegrees - 90)) < 0.1, 'the off-limb plate turns image north onto celestial north');
+  // The light outside the disc is no longer a plate whose turn preparation derives: it is a dataset of the
+  // betelgeuse-shell volume, placed by that bank's own frame, so there is no rotation for this test to check.
+  assert.ok(!JSON.stringify(await json('prepared/assets.json')).includes('"offLimb"'),
+    'the off-limb plate is withdrawn; the volume carries that light');
 });

@@ -42,7 +42,7 @@ function validateCapabilityComposition(descriptor: AuthoredObjectDescriptor, ras
   // A dataset that names a companion cloud borrows a prepared surface instead of owning one, so it is not a surface
   // lens and the recipe does not declare it. Its own contract check is that the surface it borrows exists.
   const controls = record(lenses, 'prepared lenses').controls as { id?: unknown; volume?: { surface?: unknown } }[];
-  const surfaces = controls.filter(control => control.volume === undefined);
+  const surfaces = controls.filter(control => control.volume === undefined || control.volume.surface === control.id);
   const prepared = ids(surfaces, 'prepared lenses.controls');
   sameIds(prepared, declared, 'Prepared lenses');
   for (const control of controls) {

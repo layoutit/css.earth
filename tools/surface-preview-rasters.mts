@@ -30,7 +30,8 @@ export function assertSurfacePreviewCoverage(controls:readonly {id:string;volume
   const available = new Set(images.map(image => image.id));
   const nonSurface = new Set(bindings.filter(lens => lens.view === 'interior' || lens.overlayId).map(lens => lens.id));
   // A dataset that names a companion cloud draws no surface of its own; it borrows one, and that one has a preview.
-  const missing = controls.filter(lens => lens.volume === undefined && !available.has(lens.id) && !nonSurface.has(lens.id));
+  const missing = controls.filter(lens => (lens.volume === undefined || (lens.volume as { surface?: string }).surface === lens.id)
+    && !available.has(lens.id) && !nonSurface.has(lens.id));
   if (missing.length) throw new Error(`Missing prepared surface previews: ${missing.map(lens => lens.id).join(', ')}`);
 }
 
