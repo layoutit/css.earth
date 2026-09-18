@@ -9,7 +9,7 @@
  * 1. Takes each segment from --raw when a file of the pinned size is there, and otherwise downloads it from MAST with resume,
  *    three at a time: MAST throttles one connection to a fraction of what three reach together.
  * 2. Runs Stage 1 (ramp fitting) and Stage 2 (calibration) on batches of segments, one Python process and one worker at a time,
- *    and refuses to start a batch with less than half the memory free: one MIRI segment's Stage 1 peaks near 17 GB. The next
+ *    and waits for 14 GB of free memory before a batch starts: Stage 1 has peaked at 8 to 12 GB per batch. The next
  *    batch downloads while one reduces; a calibrated batch's downloaded raw files and Stage 1 ramps are then removed, so a
  *    programme larger than the free disk still reduces.
  * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 twice: the white light curve and the channels.
@@ -108,11 +108,22 @@ const DOWNLOAD_AHEAD = 6;
 const exists = (path: string) => access(path).then(() => true, () => false);
 const sizeOf = (path: string) => stat(path).then(info => info.size, () => -1);
 
-/** The free-memory percentage macOS reports; a heavy stage does not start below half. */
-function freeMemoryPercent() {
+/** Memory macOS reports free, in GB. Stage 1 has peaked at 8 to 12 GB per batch on MIRI imaging segments. */
+const STAGE_1_FREE_GB = 14;
+function freeMemoryGb() {
   const output = spawnSync('memory_pressure', { encoding: 'utf8' }).stdout ?? '';
-  const match = /free percentage: (\d+)%/u.exec(output);
-  return match ? Number(match[1]) : Number.NaN;
+  const percent = /free percentage: (\d+)%/u.exec(output), total = /The system has (\d+) \(/u.exec(output);
+  return percent && total ? Number(percent[1]) / 100 * Number(total[1]) / 1e9 : Number.NaN;
+}
+
+/** Waits up to half an hour for another reduction's Stage 1 to finish rather than failing the batch. */
+async function waitForMemory() {
+  for (let waited = 0; ; waited += 15) {
+    const free = freeMemoryGb();
+    if (free >= STAGE_1_FREE_GB) return;
+    if (waited >= 1800) throw new Error(`Only ${free.toFixed(1)} GB of memory has been free for half an hour; Stage 1 needs ${STAGE_1_FREE_GB} GB. Finished batches are kept.`);
+    await new Promise(done => setTimeout(done, 15000));
+  }
 }
 
 const run = (command: string, args: readonly string[]) => new Promise<number>(done => { spawn(command, args, { stdio: 'inherit' }).on('close', code => done(code ?? 1)); });
@@ -295,8 +306,7 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
       const file = await segmentFile(segment, raw, rawSources), link = resolve(input, segment.name);
       if (!await exists(link)) await symlink(file, link);
     }
-    const free = freeMemoryPercent();
-    if (!(free >= 50)) throw new Error(`Only ${free}% of memory is free; Stage 1 needs about 17 GB. Close other work and rerun: finished batches are kept.`);
+    await waitForMemory();
     const ecf = await settings(name, program.stages.S1, 'S1', `Uncalibrated_${name}`, `Stage1_${name}`);
     await writeFile(resolve(ecf, `S2_${program.eventName}.ecf`), renderSettings(await readFile(resolve(programDirectory, program.stages.S2), 'utf8'), { topdir: `${work}/`, inputdir: `Stage1_${name}`, outputdir: `Stage2_${name}` }));
     progress.steps[name] = await python(toolchain, work, STAGE_RUNNER, ['S12', ecf, program.eventName], resolve(work, `${name}.log`));
