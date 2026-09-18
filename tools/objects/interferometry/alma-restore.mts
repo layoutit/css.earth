@@ -32,6 +32,15 @@ export interface ImagingPlan {
   readonly scienceWindows: string;
 }
 
+/** tclean arguments the route sets itself: the measurement set and image it works on, and the pipeline's instructions to continue
+ * the iteration before this one instead of starting afresh. */
+const REPLACED_TCLEAN_ARGUMENTS = new Set(['vis', 'imagename', 'calcres', 'calcpsf', 'restart']);
+
+/** The pipeline's tclean arguments this route passes on unchanged, as the Python literals the log wrote. */
+export function pipelineTcleanArguments(imaging: PipelineImaging) {
+  return new Map([...imaging.arguments].filter(([name]) => !REPLACED_TCLEAN_ARGUMENTS.has(name)));
+}
+
 const python = (value: string) => `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
 const pythonList = (values: readonly string[]) => `[${values.map(python).join(', ')}]`;
 
@@ -63,7 +72,7 @@ export function restoreScript(options: {
   const imaged = options.scratch ? `${options.scratch}/${imageBase.split('/').at(-1)}` : imageBase;
   const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
-    'import os, sys, json, shutil, glob',
+    'import os, sys, json, shutil, glob, ast',
     'from casatasks import importasdm, flagmanager, applycal, mstransform, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
     // The calapply record names intents the pipeline's way; the measurement set names them as the observatory scheduled them.
@@ -136,15 +145,14 @@ export function restoreScript(options: {
     // tclean continues from any model it finds under its image name, so the previous run's images are removed first.
     `for product in glob.glob(${python(`${imaged}.*`)}):`,
     '    if os.path.isdir(product): shutil.rmtree(product)',
-    // The imaging the pipeline itself performed, from the command log it shipped.
-    `tclean(vis=${python(targets)}, imagename=${python(imaged)}, field=${python(plan.target)}, spw=${python(imaging.spw)}, ` +
-      // Without the pipeline's antenna selection the auto-correlations enter the Briggs weights as zero-spacing samples: on the
-      // R Doradus band 8 execution that widened the beam from 45.2 x 28.3 to 56.5 x 39.5 mas.
-      `${imaging.antenna === null ? '' : `antenna=${python(imaging.antenna)}, `}${imaging.scan === null ? '' : `scan=${python(imaging.scan)}, `}${imaging.intent === null ? '' : `intent=${python(imaging.intent)}, `}` +
-      `datacolumn='corrected', specmode='mfs', deconvolver=${python(imaging.deconvolver)}${imaging.terms > 1 ? `, nterms=${imaging.terms}` : ''}, ` +
-      `gridder='standard', imsize=[${imaging.imageSize[0]}, ${imaging.imageSize[1]}], cell=${python(imaging.cell)}, ` +
-      `weighting=${python(imaging.weighting)}, robust=${imaging.robust}, niter=100000, threshold=${python(imaging.threshold)}, ` +
-      "restoringbeam='common', pbcor=True, interactive=False)",
+    // The imaging the pipeline itself performed: its final tclean call, argument for argument, from the command log it shipped.
+    // Leaving any out changes the image. Without the antenna selection's trailing &, the auto-correlations entered the Briggs
+    // weights and widened the beam; without phasecenter the grid moved 0.37 mas; without the auto-multithresh mask, CLEAN
+    // worked on noise peaks everywhere and the noise fell 40% below the archive's. Each value is a Python literal read with
+    // ast.literal_eval, so nothing in the log is executed. Only the input and output names are this route's, and the three
+    // arguments that continue the pipeline's earlier iteration are dropped: this run makes its own PSF and residual.
+    `PIPELINE_TCLEAN = {${[...pipelineTcleanArguments(imaging)].map(([name, value]) => `${python(name)}: ${python(value)}`).join(', ')}}`,
+    `tclean(vis=[${python(targets)}], imagename=${python(imaged)}, **{name: ast.literal_eval(value) for name, value in PIPELINE_TCLEAN.items()})`,
     "steps.append('tclean')",
     // mtmfs writes one image per Taylor term; the zeroth is the continuum intensity.
     `exportfits(imagename=${python(`${imaged}.image${imaging.terms > 1 ? '.tt0' : ''}.pbcor`)}, fitsimage=${python(`${imageBase}.fits`)}, overwrite=True, dropdeg=False)`,

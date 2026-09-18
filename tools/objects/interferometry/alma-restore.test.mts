@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { parseCalibrationRecord } from './alma-calibration.mts';
 import { pipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration } from './alma-selfcal.mts';
-import { applycalStatement, pipelineFlagVersion, restoreScript } from './alma-restore.mts';
+import { applycalStatement, pipelineFlagVersion, pipelineTcleanArguments, restoreScript } from './alma-restore.mts';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 const record = () => readFile(resolve(root, 'tests/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt'), 'utf8');
@@ -59,7 +59,7 @@ test('both measurement sets are written to the scratch disk, the calibration tab
     flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x', scratch: '/fast' });
   assert.ok(script.includes("importasdm(asdm='/raw/x', vis='/fast/x.ms'"));
   assert.ok(script.includes("mstransform(vis='/fast/x.ms', outputvis='/fast/R_Dor.targets.ms'"));
-  assert.ok(script.includes("tclean(vis='/fast/R_Dor.targets.ms', imagename='/fast/x'"), 'CASA images are made on the scratch disk');
+  assert.ok(script.includes("tclean(vis=['/fast/R_Dor.targets.ms'], imagename='/fast/x'"), 'CASA images are made on the scratch disk');
   assert.ok(script.includes("fitsimage='/work/x.fits'"), 'only the FITS goes beside the delivery');
   assert.ok(!script.includes("gaintable=['/fast/"), 'caltables are resolved from the working directory, not the scratch disk');
   // The delivered flag versions are staged under the bare name, whatever disk the measurement set is on.
@@ -82,14 +82,20 @@ test('both measurement sets are written to the scratch disk, the calibration tab
 test('imaging follows the pipeline\u2019s own call rather than a plausible guess', async () => {
   const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
     flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x' });
-  assert.ok(script.includes("deconvolver='mtmfs', nterms=2"), 'this delivery used mtmfs, whatever the general rule says');
-  assert.ok(script.includes("exportfits(imagename='/work/x.image.tt0.pbcor'"), 'mtmfs names its intensity image for the zeroth term');
-  assert.ok(script.includes("cell='0.0055arcsec'") && script.includes('imsize=[3200, 3200]'));
-  assert.ok(script.includes("threshold='0.000949Jy'") && script.includes("weighting='briggs', robust=0.5"));
-  assert.ok(script.includes("scan='9,11,13,15,22,24,26,30,33,37'"), 'the scan selection is one string, not the first of ten');
-  assert.ok(/tclean\([^)]*antenna='[\d,]+&'/u.test(script), 'the auto-correlations stay out of the image');
-  // The channels imaged are the pipeline's frame-converted ranges, never cont.dat's LSRK numbers.
-  assert.ok(script.includes('455.3506751226~455.6221594976GHz'));
+  // Every argument of the pipeline's final call reaches tclean as the literal it logged; none is re-chosen here.
+  const passed = pipelineTcleanArguments(await imaging());
+  assert.equal(passed.get('deconvolver'), "'mtmfs'", 'this delivery used mtmfs, whatever the general rule says');
+  assert.equal(passed.get('nterms'), '2');
+  assert.equal(passed.get('cell'), "['0.0055arcsec']");
+  assert.equal(passed.get('threshold'), "'0.000949Jy'");
+  assert.equal(passed.get('scan'), "['9,11,13,15,22,24,26,30,33,37']", 'the scan selection is one string, not the first of ten');
+  assert.ok(passed.get('antenna')?.endsWith("&']"), 'the auto-correlations stay out of the image');
+  assert.equal(passed.get('usemask'), "'auto-multithresh'", 'CLEAN works inside the pipeline\u2019s mask, not on noise peaks');
+  assert.ok(passed.get('phasecenter')?.includes('04:36:45.3572'), 'the grid is centred where the pipeline centred it');
+  for (const replaced of ['vis', 'imagename', 'calcres', 'calcpsf', 'restart']) assert.ok(!passed.has(replaced), replaced);
+  // The literals are read by ast.literal_eval in the script, never executed.
+  assert.ok(script.includes('ast.literal_eval(value) for name, value in PIPELINE_TCLEAN.items()'));
+  assert.ok(passed.get('spw')?.includes('455.3506751226~455.6221594976GHz'));
   assert.ok(!script.includes('455.38~455.65GHz'));
 });
 
@@ -106,7 +112,7 @@ test('self-calibration is applied as its record states, with the map that spread
   assert.ok(script.includes("mstransform(vis='x.ms', outputvis='R_Dor.targets.ms'"));
   assert.ok(script.indexOf('/aux/sc/Target_R_Dor_') > script.indexOf("outputvis='R_Dor.targets.ms'"));
   assert.ok(script.indexOf('/aux/sc/Target_R_Dor_') < script.indexOf('tclean('));
-  assert.ok(script.includes("tclean(vis='R_Dor.targets.ms'"));
+  assert.ok(script.includes("tclean(vis=['R_Dor.targets.ms']"));
 });
 
 test('a delivery whose self-calibration did not succeed is imaged without it', async () => {
@@ -116,7 +122,7 @@ test('a delivery whose self-calibration did not succeed is imaged without it', a
   assert.ok(script.includes('no self-calibration applied'));
   // The shipped calibration still carries its own spectral-window maps; it is the self-calibration tables that are absent.
   assert.ok(!script.includes('Target_R_Dor_'));
-  assert.ok(script.includes("tclean(vis='R_Dor.targets.ms'"), 'the targets split is still what gets imaged');
+  assert.ok(script.includes("tclean(vis=['R_Dor.targets.ms']"), 'the targets split is still what gets imaged');
   assert.equal(pipelineFlagVersion([]), null);
   assert.equal(pipelineFlagVersion(['Original', 'Pipeline_Final']), 'Pipeline_Final');
   assert.equal(pipelineFlagVersion(['Original', 'statwt_1']), 'statwt_1');

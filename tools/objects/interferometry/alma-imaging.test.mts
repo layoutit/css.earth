@@ -25,7 +25,7 @@ test('the pipeline’s own continuum imaging of a field is read from its command
   // A selection that holds commas is one string, not several: ten scans, four windows.
   assert.equal(imaging.scan, '9,11,13,15,22,24,26,30,33,37');
   // Every antenna, cross-correlations only: the trailing & is what keeps the auto-correlations out of the weights.
-  assert.ok(imaging.antenna?.endsWith('&'), `antenna selection ${imaging.antenna}`);
+  assert.ok(imaging.arguments.get('antenna')?.endsWith("&']"), `antenna selection ${imaging.arguments.get('antenna')}`);
   assert.deepEqual(imaging.spw.split(',').map(part => part.split(':')[0]), ['25', '27', '29', '31']);
   assert.ok(imaging.arguments.has('pbcor') && imaging.arguments.has('usemask'));
 });
