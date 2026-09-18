@@ -48,11 +48,19 @@ restores pinned source downloads, and some conversions call Python 3 with
 
 ## Check your change
 
-`pnpm check:ci` runs the same command steps as the GitHub workflow, in order,
-and stops at the first failure. It takes about forty minutes on a laptop;
-`pnpm check:ci --list` shows the exact commands so you can run only
-the ones your change touches. Choose checks by what changed, and say in the PR
-which ones you ran and which you did not.
+`pnpm check:pr` runs the steps of the "Contract lint" CI job (lockfile, package
+files and source citations, physical frame receipts and pins, published assets
+your branch adds, documentation links) in about a minute and stops at the first
+failure. `pnpm check:ci` runs the lint, typecheck and prepared-universe jobs'
+command steps in order and takes far longer; `--job=<id>` picks one job and
+`--list` shows the exact commands. Choose checks by what changed, and say in the
+PR which ones you ran and which you did not. Test files are type-checked nightly
+and on main; run `pnpm typecheck` locally for the full check.
+
+To run the fast subset before every push, opt in with `pnpm hooks:install`: the
+pre-push hook runs `pnpm check:pr --quick`, which skips the network check and the
+documentation audits. Skip it once with `git push --no-verify` or
+`CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
 
 Reference implementations live under `tools/oracles/` with their own pinned
 Python environment (`pnpm oracles:setup`); their fixtures under `tests/oracles/`
@@ -61,9 +69,9 @@ are committed evidence, and the comparing tests run without Python. See
 one. When an archive product has no reader, route or kernel bank yet, open an
 issue from the archive-product template instead of writing a reader for one body.
 
-**Standing limit: GitHub Actions does not run on this repository.** Jobs complete
-as a failure with no steps recorded, so no branch has CI evidence and every check
-must be run locally. Cite this section in a PR instead of explaining it again.
+GitHub Actions runs Contract lint, Typecheck, the prepared-universe tests, the
+nebula and renderer tests, and the Object-scope gate on every PR and every push to
+`main`. A nightly workflow checks that every inventoried asset is still published.
 
 `node tools/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
 (it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and

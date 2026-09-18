@@ -17,7 +17,9 @@ import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "..
 import { readPreparedJsonExports, readPreparedPresentationModule, requirePreparedDefinitionSource,
   requirePreparedControlSource } from "./check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
-import { readDescriptorDefinition, requireDescriptorAdapterSource } from './prepared-object-source.mts';
+import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from './prepared-object-source.mts';
+import { requireAuthoredWorldFrameReceipt } from './authored-world-frame.mts';
+import { pinObjectDocuments, type DocumentPinChange } from './pin-object-documents.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 
 const runtimePath = "src/platform/object-runtime.mts";
@@ -1006,11 +1008,46 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   return report;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
+/**
+ * `--receipts`: every registered object's physical frame receipt (`prepared/world-navigation.json` against its
+ * manifest pins and descriptor frame), its authored source pins, and its document pins, from tracked files only.
+ * It needs no restored prepared scene or runtime, so the contract-lint job runs it minutes before `--all` could.
+ * Every object is checked and every failure is reported together.
+ */
+export async function auditPhysicalFrameReceipts({ root = process.cwd(), objects = OBJECTS,
+  readText = (path: string) => readFile(path, "utf8"),
+  stalePins = (directory: string) => pinObjectDocuments(directory, { write: false }) }:
+  { root?: string; objects?: readonly AuditObject[]; readText?: RuntimeSourceReader;
+    stalePins?: (directory: string) => Promise<DocumentPinChange[]> } = {}): Promise<{ receipts: number; failures: string[] }> {
+  const failures: string[] = [];
+  let receipts = 0;
+  for (const object of objects) {
+    const directory = resolve(root, "src/objects", object.id);
+    try {
+      const descriptor = requireRecord(JSON.parse(await readText(resolve(directory, "object.json"))), `${object.id} descriptor`);
+      if (await requireAuthoredSourcePins({ objectId: object.id, descriptor, root, source: readText, closure: new Set() })) {
+        await requireAuthoredWorldFrameReceipt({ descriptor, directory, readText });
+        receipts++;
+      }
+      for (const change of await stalePins(directory)) {
+        failures.push(`${object.id}: stale pin in ${change.file} for ${change.path} (run: pnpm pin:documents ${object.id})`);
+      }
+    } catch (error) { failures.push(`${object.id}: ${errorMessage(error)}`); }
+  }
+  return { receipts, failures };
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.argv.includes("--receipts")) {
+  if (process.argv.length !== 3) throw new Error("--receipts checks every registered object and takes no other option.");
+  const { receipts, failures } = await auditPhysicalFrameReceipts();
+  for (const failure of failures) console.error(failure);
+  if (failures.length) process.exitCode = 1;
+  else console.log(`${OBJECTS.length} registered objects: ${receipts} physical frame receipt(s), source pins and document pins are current.`);
+} else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2), index = args.indexOf("--object");
   const id = index < 0 ? null : args[index + 1];
   if (id && !OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);
-  if (!args.includes("--inventory") && !args.includes("--all") && !id) throw new Error("Use --inventory, --object ID, or --all.");
+  if (!args.includes("--inventory") && !args.includes("--all") && !id) throw new Error("Use --inventory, --object ID, --all, or --receipts.");
   const report = await auditObjectRuntimeOwnership({ objects: id ? OBJECTS.filter(object => object.id === id) : OBJECTS,
     strict: !args.includes("--inventory") });
   console.log(JSON.stringify(report, null, 2));
