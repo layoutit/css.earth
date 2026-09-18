@@ -390,7 +390,11 @@ their triggering acquisition, asset or delivery changes are present.
 A body PR is finished when its branch turns the change on end to end. It holds:
 
 - the recipe, source pins, acquisition operations and catalogued bindings;
-- the prepared outputs the recipe produces;
+- the prepared outputs the recipe produces: `object.json`'s pin and every other tracked `prepared/*` contract
+  file (`provenance.json`, `content.json`, `page.json`, …) committed as before; `prepared/runtime.json` and
+  `prepared/scene.json` themselves are not committed — refresh the body's `prepared-assets.json` inventory
+  (written automatically by the preparation tools) and publish the baked bytes with
+  `node tools/publish-runtime-assets.mts --object=<id>` before opening the PR;
 - the body README's account of sources, processing, results and known problems;
 - any published photometric model as a cited record, used inside its fitted range.
 

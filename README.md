@@ -17,13 +17,19 @@ endorsement.
 
 ## Publishing prepared assets (maintainers)
 
-Prepared runtime files (`prepared/runtime.json`, `prepared/scene.json`, textures, …) are served from an R2 bucket,
-content-addressed by `runtime-assets/<sha256>/<filename>`. `node tools/publish-runtime-assets.mts [--object=<id> ...]`
-publishes every file the checked-in `src/objects/<id>/runtime-assets.json` inventories describe (omit `--object` to
-publish everything). It bulk-uploads with `wrangler r2 bulk put`, then HEAD-verifies every key, retries any miss
-individually, and byte-verifies every JSON key plus a sample of the rest — bulk put is fire-and-forget and has been
-observed to silently drop a subset of a batch, so a publish that reports success has actually confirmed the files
-are live, not just that the upload command exited 0.
+Prepared runtime files (public browser textures via `runtime-assets.json`, and — since Phase 2 of the R2
+migration — baked `prepared/*` output via `prepared-assets.json`: a body's `prepared/runtime.json` +
+`prepared/scene.json`, or a context/nebula object's whole `prepared/` closure) are served from an R2 bucket,
+content-addressed by `runtime-assets/<sha256>/<filename>`. Neither inventory is committed as its baked bytes —
+only the small JSON inventory file is tracked; git no longer carries `prepared/runtime.json` or
+`prepared/scene.json` for any object. `node tools/publish-runtime-assets.mts [--object=<id> ...]` publishes every
+file either inventory kind describes for the given ids (omit `--object` to publish everything discovered under
+`src/objects/`). It is incremental: it HEADs every key first and uploads only the misses (one `wrangler r2 object
+put` per miss), then HEAD-verifies every key again, retries any miss the upload step somehow still left missing,
+and byte-verifies every JSON key plus a sample of the rest — a publish that reports success has actually confirmed
+the files are live, not just that the upload command exited 0. JSON keys upload as `application/json`; everything
+else as `application/octet-stream`. `node tools/check-assets-published.mts [--object=<id> ...]` HEADs every key
+from both inventories without uploading anything, and exits non-zero listing whatever is missing.
 
 A second, smaller cache lives beside it at `source-cache/<sha256>/<filename>`: pinned publisher inputs (a facility
 volume preview, a fragile-upstream archive such as a USGS Gazetteer nomenclature export) mirrored so a build never

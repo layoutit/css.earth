@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared packages and affected entry points
+        # setup:assets restores public/scenes AND (Phase 2, feat/gh-pages-r2-assets) each object's
+        # prepared-assets.json inventory (prepared/runtime.json + prepared/scene.json, or a context/nebula
+        # object's whole prepared/ output) — git no longer tracks those files, and prepare:object-json reads them.
         run: |
           pnpm build:tools
           pnpm setup:assets
