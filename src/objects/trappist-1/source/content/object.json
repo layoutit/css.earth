@@ -72,7 +72,22 @@
     "titleKey": "settings",
     "controls": []
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "light-curve",
+      "titleKey": "photometricPhase",
+      "open": false,
+      "src": "/scenes/trappist-1/trappist-1-light-curve-15um.svg",
+      "width": 306,
+      "height": 141,
+      "alt": "TRAPPIST-1's 15 µm brightness over 59 hours in 20-minute averages, with the transits of b, g and c, the eclipse of b and c, and flares.",
+      "source": {
+        "id": "trappist-1-miri-3077-white",
+        "path": "../science/jwst-3077/white-15um.csv",
+        "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

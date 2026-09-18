@@ -245,6 +245,49 @@
           }
         ]
       }
+    },
+    {
+      "id": "trappist-1-miri-3077-white",
+      "path": "science/jwst-3077/white-15um.csv",
+      "expectedBytes": 800442,
+      "expectedSha256": "0735af0fbda80458572ef15045d6dafb1928fd0fb470306847febad7656c6364",
+      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
+      "productId": "15 um white light curve, program 3077 visit 1",
+      "title": "TRAPPIST-1 MIRI/F1500W phase-curve light curve, 59 hours",
+      "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
+      "credit": "JWST program 3077 (PI Gillon); reduced in this project with Eureka! 1.4 on Bell's settings (Gillon, Ducrot et al. 2025)",
+      "displayCredit": "JWST MIRI · program 3077",
+      "license": "JWST data are public (STScI MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
+      ],
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/trappist-1b-miri-3077 as light-curves/ours-white.csv: the 108 raw MIRI/F1500W segments of both exposures from MAST (CRDS context jwst_1535.pmap). The run of 2026-09-18 wrote this file byte for byte.",
+      "redistribution": "Public JWST data, reduced here.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
+      }
+    },
+    {
+      "id": "trappist-1-chart-assets",
+      "path": "content/charts.json",
+      "expectedSha256": "0172365249efb4f0725dcb2218b7042e6a32211274d30fb04c718df1b2a68f10",
+      "expectedBytes": 1318,
+      "origin": "Repository-authored TRAPPIST-1 chart asset recipe bound to scientific source records.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked chart recipe maintained beside TRAPPIST-1 inputs.",
+      "redistribution": "Prepared source-backed chart SVGs.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored chart layout, scales and labels; each chart names its numerical input."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -299,8 +342,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3330,
-      "expectedSha256": "c236b9a65bda168815d338f331a358c499582ec226b1f7bfe7da16744528144a",
+      "expectedBytes": 3899,
+      "expectedSha256": "1d185fe2436aeb0805ca678f0293cd3844a1701ec992b81d89777e35ff55ac86",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

@@ -86,6 +86,10 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json"
         }
       ],
       "emission": {

@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b71f6179f9c01e646c78b0da8469eda7bbb7cb5913c8e857a15cdcaa322d17da"
+    "sha256": "17f60b33111c10f1d298c4fbaaf39f30914246867bfca63dc6be6409dd68de28"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "cb22e9ffba8f71d15005d6add118648ef102d63c50efaea85c71d49dd153b42f"
+    "bindingsSha256": "161af19701c8184dd3e2764b100627da3028956d20eb584cfdf5b7e6c9d882f3"
   },
   "recipes": [
     {
@@ -83,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c236b9a65bda168815d338f331a358c499582ec226b1f7bfe7da16744528144a",
+      "sha256": "1d185fe2436aeb0805ca678f0293cd3844a1701ec992b81d89777e35ff55ac86",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -158,7 +158,22 @@
           "titleKey": "settings",
           "controls": []
         },
-        "charts": [],
+        "charts": [
+          {
+            "id": "light-curve",
+            "titleKey": "photometricPhase",
+            "open": false,
+            "src": "/scenes/trappist-1/trappist-1-light-curve-15um.svg",
+            "width": 306,
+            "height": 141,
+            "alt": "TRAPPIST-1's 15 µm brightness over 59 hours in 20-minute averages, with the transits of b, g and c, the eclipse of b and c, and flares.",
+            "source": {
+              "id": "trappist-1-miri-3077-white",
+              "path": "../science/jwst-3077/white-15um.csv",
+              "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
+            }
+          }
+        ],
         "resources": [
           {
             "label": "Research",
@@ -180,6 +195,56 @@
             "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
           }
         }
+      }
+    },
+    {
+      "id": "charts",
+      "path": "source/content/charts.json",
+      "sha256": "0172365249efb4f0725dcb2218b7042e6a32211274d30fb04c718df1b2a68f10",
+      "parameters": {
+        "schema": "cssearth-chart-assets@1",
+        "publicBase": "/scenes/trappist-1/",
+        "charts": [
+          {
+            "kind": "light-curve",
+            "id": "trappist-1",
+            "source": "science/jwst-3077/white-15um.csv",
+            "timeField": "time",
+            "fluxField": "flux",
+            "maskField": "mask",
+            "binMinutes": 20,
+            "axisLabel": "hours at 15 µm",
+            "output": "trappist-1-light-curve-15um.svg",
+            "title": "TRAPPIST-1 at 15 µm over 59 hours",
+            "description": "TRAPPIST-1's brightness at 15 µm over JWST program 3077's 59-hour visit, reduced from raw in this project, in 20-minute averages: transits of b, g and c, the eclipse of b and c, and the star's own flares.",
+            "metadata": {
+              "source": "JWST program 3077, MIRI/F1500W, reduced with Eureka! 1.4 in this project",
+              "eventTimes": "transit and eclipse mid-times from this project's joint fit of the ten visits"
+            },
+            "events": [
+              {
+                "time": 60271.25436,
+                "label": "b"
+              },
+              {
+                "time": 60271.4793,
+                "label": "g"
+              },
+              {
+                "time": 60272.016,
+                "label": "b+c"
+              },
+              {
+                "time": 60272.766,
+                "label": "b"
+              },
+              {
+                "time": 60273.23314,
+                "label": "c"
+              }
+            ]
+          }
+        ]
       }
     }
   ],
@@ -260,8 +325,35 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c236b9a65bda168815d338f331a358c499582ec226b1f7bfe7da16744528144a",
-      "bytes": 3330,
+      "sha256": "1d185fe2436aeb0805ca678f0293cd3844a1701ec992b81d89777e35ff55ac86",
+      "bytes": 3899,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "trappist-1-miri-3077-white",
+      "path": "science/jwst-3077/white-15um.csv",
+      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
+      "productId": "15 um white light curve, program 3077 visit 1",
+      "title": "TRAPPIST-1 MIRI/F1500W phase-curve light curve, 59 hours",
+      "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
+      "credit": "JWST program 3077 (PI Gillon); reduced in this project with Eureka! 1.4 on Bell's settings (Gillon, Ducrot et al. 2025)",
+      "displayCredit": "JWST MIRI · program 3077",
+      "license": "JWST data are public (STScI MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://outerspace.stsci.edu/display/MASTDOCS/JWST+Data+Rights+and+Access"
+      ],
+      "acquisition": "Written by tools/objects/jwst/reduce-tso.mts with tools/objects/jwst/programs/trappist-1b-miri-3077 as light-curves/ours-white.csv: the 108 raw MIRI/F1500W segments of both exposures from MAST (CRDS context jwst_1535.pmap). The run of 2026-09-18 wrote this file byte for byte.",
+      "redistribution": "Public JWST data, reduced here.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by this repository's JWST reduction; repinned when the reduction is rerun."
+      },
+      "sha256": "0735af0fbda80458572ef15045d6dafb1928fd0fb470306847febad7656c6364",
+      "bytes": 800442,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -353,8 +445,37 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4963,
-          "sha256": "ac7ca3a621518bbb9ecefefedcb15e258a77e711dcb2071b1e8852315b1a89a4",
+          "bytes": 5462,
+          "sha256": "6eeba785792a2f9f1798c4cbbed9074d9a7294da884d0bf77b9a5dd1292e3ba4",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "chart:0",
+      "label": "TRAPPIST-1 at 15 µm over 59 hours",
+      "recipe": "charts",
+      "selector": "/charts/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the authored scientific chart from its bound data and mathematical recipe.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "charts"
+      ],
+      "interpretation": {
+        "kind": "light-curve"
+      },
+      "inputs": [
+        "trappist-1-miri-3077-white"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/trappist-1/trappist-1-light-curve-15um.svg",
+          "bytes": 4269,
+          "sha256": "299367e8e66dead8720219f6ac2c9c9ef30bd84da2df3257fe6be25fe020450f",
           "verification": "bytes-verified"
         }
       ],
@@ -392,11 +513,11 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1",
-    "materialSha256": "4de6a387e080dbf7c9a71ae8ae780412723bcc858697ca2ebfdff9f4f2cd5649",
+    "materialSha256": "0a7aea48219710a477b76df164fc5e0bd454a001ac366ea9c476a397b7229cc0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "cb22e9ffba8f71d15005d6add118648ef102d63c50efaea85c71d49dd153b42f"
+      "bindingsSha256": "161af19701c8184dd3e2764b100627da3028956d20eb584cfdf5b7e6c9d882f3"
     }
   }
 }

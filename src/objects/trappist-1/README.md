@@ -31,6 +31,12 @@ direction of the axis on the sky, so the display axis is celestial north at the 
 **On the map.** The star has no surface image, but its colour comes from its own spectrum, so discovery marks it `sourceColor` and
 it stays on the map with its seven planets.
 
+**Light curve at 15 µm.** The page's chart is TRAPPIST-1's brightness over the 59 hours of JWST program 3077, reduced from raw in
+this project ([`white-15um.csv`](source/science/jwst-3077/white-15um.csv), in 20-minute averages): the transits of b, g, b again and c,
+the shallow eclipse of b and c together, the star's own flares, and the detector settling over the first hours. The event labels are
+the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](../trappist-1b/README.md)'s temperature map and
+[TRAPPIST-1c](../trappist-1c/README.md)'s measured dayside come from the same data.
+
 ## Evidence
 
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) covers the colour
@@ -49,6 +55,7 @@ read as no emission. The one-sigma range above bounds what that can move.
 
 **No image, diameter or axis.** The disc is about 0.07 milliarcseconds across; nothing resolves it.
 
-**The system view arrives edge-on.** The seven orbits are nearly in the line of sight, so the default camera angle stacks them.
+**The system is seen almost edge-on from the Sun.** The seven orbits lie nearly in the line of sight, which is why they transit; on
+arrival the overview turns up to 30° above their plane so they open into ellipses, as it does for every other star's system.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
