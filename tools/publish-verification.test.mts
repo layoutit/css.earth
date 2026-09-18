@@ -88,3 +88,14 @@ test('a sampled non-JSON asset with the right length but wrong bytes is caught',
   const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => {}, sampleSize: 10 });
   assert.deepEqual(result.sampleFailures, ['asset.webp']);
 });
+
+test('a JSON key with drifted bytes is caught even with sampleSize: 0 (JSON is always fully verified, never sampled)', async () => {
+  const bytes = Buffer.from('{"ok":1}'), wrong = Buffer.from(bytes); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
+  const assets = [asset('a.json', bytes)];
+  const fetcher = async (url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200, headers: { 'content-length': String(bytes.length) } });
+    return new Response(wrong, { status: 200 }); // same length as the pin; only the sha256 comparison can catch this.
+  };
+  const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => {}, sampleSize: 0 });
+  assert.deepEqual(result.sampleFailures, ['a.json'], 'sampleSize must only govern non-JSON assets; every JSON key is always fully byte-verified');
+});
