@@ -18,7 +18,7 @@ import { decodeNearMsi, parseNearCameraClosure } from '../../terrestrial-layers/
 import { decodeNewHorizonsLorri, decodeArrokothMvic } from '../../terrestrial-layers/new-horizons-geo.mts';
 import { validPublishedPhotometryShape } from '../../terrestrial-layers/published-photometry.mts';
 import { decodePds4GeometryCube, PDS4_GEOMETRY_CUBE_FORMAT } from '../../terrestrial-layers/pds4-geometry-cube.mts';
-import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, ABERRATIONS } from '../../terrestrial-layers/spice-camera.mts';
+import { decodeSpiceCameraFrame, SPICE_CAMERA_FORMAT, SPICE_CAMERA_COLOR_FORMAT, ABERRATIONS } from '../../terrestrial-layers/spice-camera.mts';
 import { refineCameraByLimb } from '../../terrestrial-layers/limb-refinement.mts';
 import { loadKernelSet } from '../../../spice/kernel-set.mts';
 import { kernelBankPaths } from '../../../spice/kernel-bank.mts';
@@ -70,6 +70,11 @@ export const GEO_SCHEMAS: Readonly<Record<string, GeoSchema>> = {
   // A VICAR frame brings its PDS3 label; a FITS frame carries its own header.
   [SPICE_CAMERA_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
     photometry: ['lommel-seeliger', 'retained-observation'], published: true, display: 'percentiles', maximumFrames: 8 },
+  // The same camera for an archive whose bands are planes of one array. The composite is a scientific visualization
+  // of three calibrated bands, as every band composite here is; it is not a qualified natural-colour reconstruction.
+  [SPICE_CAMERA_COLOR_FORMAT]: { camera: 'kernels', frame: { required: [], optional: ['labelPath'] }, lens: { required: ['filter', 'spice'], optional: ['limbRefinement'] },
+    photometry: ['retained-observation'], published: true, display: 'displayRange', maximumFrames: 8,
+    color: { bands: ['RED', 'GREEN', 'BLUE'], inputQuantity: 'radiance', units: 'calibrated radiance; the detector\'s red, green and blue bands' } },
 };
 export const GEO_FORMATS = Object.keys(GEO_SCHEMAS);
 
@@ -108,7 +113,9 @@ function validateGeoRecipe(value: unknown, sourceGeometry: unknown): void {
     { selections: ['lowest-emission', 'recipe-order'], displays: [schema.display], maximumFrames: schema.maximumFrames, maximumLevelGain: 1.5, samplesPerTriangle: 'required' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
   if (!recipe.filter || (recipe.format === 'amica-gaskell' && recipe.filter !== 'V') || recipe.frames.some(frame => !frame.startTime)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
-  if (schema.color && (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true)) throw new TypeError('MVIC color requires source-derived bands, false color and retained illumination.');
+  // Every band composite is a scientific visualization, not natural colour: it states so and starts its range at zero.
+  if (schema.color && (recipe.display.displayRange?.[0] !== 0 || recipe.metadata.falseColor !== true))
+    throw new TypeError('Band colour requires source-derived bands, false color and retained illumination.');
   if (recipe.radiometry !== undefined && recipe.radiometry !== 'radiance-factor') throw new TypeError('Invalid observation radiometry.');
   validatePhotometry(recipe, schema);
   if (recipe.spice) validateSpice(recipe.spice, recipe.frames);
@@ -141,10 +148,14 @@ function validateSpice(spice: SpiceCameraDeclaration, frames: readonly GeoFrame[
   const vicar = spice.image.format === 'vicar-pds3';
   if (spice.kernels.length < 2 || spice.kernels.length > 32 || !Number.isInteger(spice.observer) || !Number.isInteger(spice.target) || spice.observer === spice.target ||
       !Number.isInteger(spice.instrument) || !Number.isInteger(spice.clock.spacecraft) ||
-      !(spice.clock.header ? spice.clock.start === undefined && spice.clock.stop === undefined : spice.clock.start && spice.clock.stop) ||
+      // Exactly one epoch source: a UTC card, one clock card, or the VICAR label's start and stop counts.
+      [spice.clock.utcHeader, spice.clock.header, spice.clock.start].filter(value => value !== undefined).length !== 1 ||
+      (spice.clock.start !== undefined) !== (spice.clock.stop !== undefined) ||
       (spice.kernelSet !== undefined && !/^[a-z][a-z0-9-]*$/u.test(spice.kernelSet)) ||
       (spice.image.format !== undefined && !['fits', 'vicar-pds3'].includes(spice.image.format)) ||
       vicar !== (spice.clock.start !== undefined) || frames.some(frame => (frame.labelPath !== undefined) !== vicar) ||
+      (spice.image.colorPlanes !== undefined && (spice.image.colorPlanes.length !== 3 ||
+        spice.image.colorPlanes.some(plane => !Number.isInteger(plane) || plane < 1) || new Set(spice.image.colorPlanes).size !== 3)) ||
       !spice.bodyFrame || !ABERRATIONS.includes(spice.aberration as typeof ABERRATIONS[number]) ||
       spice.pixels.focalLength.unit !== 'mm' || !['micrometre', 'mm'].includes(spice.pixels.pixelPitch.unit) || ![0, 1].includes(spice.pixels.origin) ||
       !AXES.includes(spice.pixels.column) || !AXES.includes(spice.pixels.row) || spice.pixels.column.replace('-', '') === spice.pixels.row.replace('-', '') ||
@@ -223,12 +234,12 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
     const decoded = refined(decodeOsirisReflectance(await read(frame.path), closure, allowLossy));
     return rayFrame(decoded, matrixCamera('archived-closure', decoded.camera));
   }
-  if (recipe.format === SPICE_CAMERA_FORMAT) {
+  if (recipe.format === SPICE_CAMERA_FORMAT || recipe.format === SPICE_CAMERA_COLOR_FORMAT) {
     const spice = spiceDeclaration(recipe);
     const kernels = await loadKernelSet(spice.kernelSet ? await kernelBankPaths(spice.kernelSet, spice.kernels) : spice.kernels.map(path => resolve(sourceDirectory, path)));
     const decoded = refined(decodeSpiceCameraFrame(await read(frame.path), kernels, spice, recipe.filter,
       spice.image.format === 'vicar-pds3' ? (await read(frame.labelPath)).toString('latin1') : undefined));
-    return rayFrame(decoded, matrixCamera('kernels', decoded.camera));
+    return rayFrame(decoded, matrixCamera('kernels', decoded.camera), decoded.colorPlanes);
   }
   if (recipe.format === PDS4_GEOMETRY_CUBE_FORMAT) {
     const decoded = decodePds4GeometryCube(await read(frame.path), (await read(frame.labelPath)).toString('utf8'),

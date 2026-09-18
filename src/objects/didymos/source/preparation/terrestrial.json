@@ -213,6 +213,152 @@
           "falseColor": false,
           "coverage": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid."
         }
+      },
+      {
+        "id": "luke",
+        "format": "spice-camera-color",
+        "consumer": "luke-photograph",
+        "metadata": {
+          "label": "LICIACube colour",
+          "falseColor": true,
+          "coverage": "Eight LICIACube/LUKE frames from 165 to 179 seconds after the DART impact, through closest approach at 60 km. The camera is computed from the mission's reconstructed SPICE kernels; the three planes of each frame are the detector's red, green and blue bands, composed as a band visualization rather than a qualified natural-colour reconstruction. Every frame looks through the impact ejecta, and the kernels place the body about half a degree from where the frames show it, so coverage is partial and the registration stage reaches no verdict. The unseen surface keeps the grid."
+        },
+        "selection": "recipe-order",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 128,
+          "maximumGain": 1.5,
+          "maximumAngleDegrees": 60
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 70,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A contributor lies within two pixel footprints of the closest source-mesh point and must be visible from the stated camera."
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1,
+          "formula": "Original acquisition illumination retained; no photometric disk correction.",
+          "applicationLighting": "Uniform flat lighting."
+        },
+        "display": {
+          "basis": "authored",
+          "displayRange": [
+            0,
+            0.020229
+          ]
+        },
+        "filter": "RGB",
+        "spice": {
+          "kernelSet": "liciacube",
+          "kernels": [
+            "lsk/naif0012.tls",
+            "sclk/licia_sclk_0002.tsc",
+            "pck/pck00010.tpc",
+            "pck/didymos_system_15.tpc",
+            "fk/licia_006.tf",
+            "fk/didymos_system_007.tf",
+            "ik/licia_pl_005.ti",
+            "spk/de430.bsp",
+            "spk/didymos_barycenter_s205_v01.bsp",
+            "spk/didymos_system_s542_v01.bsp",
+            "spk/dart_2022_231_2022_269_rec_v03.bsp",
+            "spk/licia_2022_254_2023_091_rec_v04.bsp",
+            "ck/licia_2022_254_2022_276_rec_v02.bc"
+          ],
+          "observer": -210,
+          "target": 920065803,
+          "bodyFrame": "DIDYMOS_FIXED",
+          "instrument": -210200,
+          "clock": {
+            "utcHeader": "CORT_UTC",
+            "spacecraft": -210
+          },
+          "aberration": "LT+S",
+          "pixels": {
+            "focalLength": {
+              "key": "FOCAL_LENGTH",
+              "unit": "mm"
+            },
+            "pixelPitch": {
+              "key": "PIXEL_SIZE",
+              "unit": "micrometre"
+            },
+            "center": "CCD_CENTER",
+            "boresight": "BORESIGHT",
+            "samples": "PIXEL_SAMPLES",
+            "lines": "PIXEL_LINES",
+            "frame": "FOV_FRAME",
+            "origin": 1,
+            "column": "Y",
+            "row": "X"
+          },
+          "image": {
+            "quantity": "radiance",
+            "plane": 1,
+            "colorPlanes": [
+              1,
+              2,
+              3
+            ],
+            "header": {
+              "INSTRUME": "LUKE",
+              "HOSTNAME": "LICIACube"
+            },
+            "missingValueKeys": [
+              "MISPXVAL",
+              "BADMASKV"
+            ],
+            "saturationKey": "SATPXVAL"
+          }
+        },
+        "frames": [
+          {
+            "id": "luke-plus-165s",
+            "path": "observations/liciacube_luke_l2_1664234229_00005_01.fits",
+            "startTime": "2022-09-26T23:17:08.909Z"
+          },
+          {
+            "id": "luke-plus-167s",
+            "path": "observations/liciacube_luke_l2_1664234231_00002_01.fits",
+            "startTime": "2022-09-26T23:17:10.909Z"
+          },
+          {
+            "id": "luke-plus-169s",
+            "path": "observations/liciacube_luke_l2_1664234233_01003_01.fits",
+            "startTime": "2022-09-26T23:17:13.009Z"
+          },
+          {
+            "id": "luke-plus-171s",
+            "path": "observations/liciacube_luke_l2_1664234235_00005_01.fits",
+            "startTime": "2022-09-26T23:17:14.909Z"
+          },
+          {
+            "id": "luke-plus-173s",
+            "path": "observations/liciacube_luke_l2_1664234237_00002_01.fits",
+            "startTime": "2022-09-26T23:17:16.909Z"
+          },
+          {
+            "id": "luke-plus-175s",
+            "path": "observations/liciacube_luke_l2_1664234239_01003_01.fits",
+            "startTime": "2022-09-26T23:17:19.009Z"
+          },
+          {
+            "id": "luke-plus-176s",
+            "path": "observations/liciacube_luke_l2_1664234240_00002_01.fits",
+            "startTime": "2022-09-26T23:17:19.909Z"
+          },
+          {
+            "id": "luke-plus-179s",
+            "path": "observations/liciacube_luke_l2_1664234243_00002_01.fits",
+            "startTime": "2022-09-26T23:17:22.909Z"
+          }
+        ]
       }
     ]
   },

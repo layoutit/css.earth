@@ -66,7 +66,13 @@ export function aberrationRotation(u: readonly number[], velocity: readonly numb
 export function pixelModel(pool: KernelPool, instrument: number, keys: PixelModelKeys) {
   const key = (suffix: string) => `INS${instrument}_${suffix}`;
   const read = (suffix: string) => { if (!has(pool, key(suffix))) throw new Error(`Instrument kernel lacks ${key(suffix)}.`); return numbers(pool, key(suffix)); };
-  const focalLengthMm = number(pool, key(keys.focalLength.key)), pitch = number(pool, key(keys.pixelPitch.key));
+  const focalLengthMm = number(pool, key(keys.focalLength.key));
+  // Some instrument kernels state a square detector's pitch as one value per axis. Accept that pair only when
+  // the two agree, so a genuinely non-square detector still fails rather than silently taking one axis.
+  const pitchValues = numbers(pool, key(keys.pixelPitch.key));
+  if (pitchValues.length === 2 && pitchValues[0] !== pitchValues[1]) throw new Error(`Instrument ${instrument} states a non-square pixel pitch.`);
+  if (pitchValues.length > 2) throw new Error(`Instrument ${instrument} states an unsupported pixel pitch.`);
+  const pitch = pitchValues[0]!;
   const pixelPitchMm = keys.pixelPitch.unit === 'micrometre' ? pitch / 1000 : pitch;
   const center = read(keys.center), boresight = read(keys.boresight), samples = read(keys.samples), lines = read(keys.lines);
   const frame = string(pool, key(keys.frame));

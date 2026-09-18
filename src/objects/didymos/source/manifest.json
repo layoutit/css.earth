@@ -258,6 +258,438 @@
         ]
       },
       "coverage": "One approach observation acquired 2022-09-26T23:11:46.381Z; valid coverage is bounded by the native readout window and qualified surface geometry."
+    },
+    {
+      "id": "didymos-luke-1664234229-fits",
+      "path": "observations/liciacube_luke_l2_1664234229_00005_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234229_00005_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "d840ec3e3f6ff328a5de3ec899f2855543bdd47d278d91dfee6e9b1ed8f9c378",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234229-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234229-xml",
+      "path": "observations/liciacube_luke_l2_1664234229_00005_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234229_00005_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13051,
+      "expectedSha256": "d7fe226439d90a67540c93e82656b9e5d0b601869298525b1cf66e3b418c58f2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234229-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234231-fits",
+      "path": "observations/liciacube_luke_l2_1664234231_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234231_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "ebc62596740bcbabc4b36c88388384310dc59127b7c2aafc1d7a79001733f881",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234231-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234231-xml",
+      "path": "observations/liciacube_luke_l2_1664234231_00002_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234231_00002_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13065,
+      "expectedSha256": "b12a495c3471290cc0c8da9a3ac349c0a26173a1656e8260945112b310860999",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234231-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234233-fits",
+      "path": "observations/liciacube_luke_l2_1664234233_01003_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234233_01003_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "e8a8f9da7ab7dc03642b7651ae6de01f93cca7a6268e9b1fdb295396ecceec99",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234233-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234233-xml",
+      "path": "observations/liciacube_luke_l2_1664234233_01003_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234233_01003_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13065,
+      "expectedSha256": "1e6ba744b4ad99898b2ba56234c938551480b27f2c185e16b16948c4d850650b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234233-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234235-fits",
+      "path": "observations/liciacube_luke_l2_1664234235_00005_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234235_00005_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "1115f0f7ddaec8cf93d561881ee51e2c9a6b574b4a6b7369d8c9f314242c3a5c",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234235-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234235-xml",
+      "path": "observations/liciacube_luke_l2_1664234235_00005_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234235_00005_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13051,
+      "expectedSha256": "2a3b2c89cb66e0e2aa4cba3ba9d562e819fffed5e67f0e50a92eea3ceaf68258",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234235-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234237-fits",
+      "path": "observations/liciacube_luke_l2_1664234237_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234237_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "f8889481ab8b3d0304c34b1c299dec6bc041cae8c8165a1d24eac505dce6e249",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234237-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234237-xml",
+      "path": "observations/liciacube_luke_l2_1664234237_00002_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234237_00002_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13065,
+      "expectedSha256": "d9ee9c8c6e1bd593edec05f318d2d4e3b8815b654dfb28e99df922fbe7369a6a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234237-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234239-fits",
+      "path": "observations/liciacube_luke_l2_1664234239_01003_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234239_01003_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "4a255693967e768535493364fde13554ffaec1fe8634aa1c5a22a31e4977df79",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234239-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234239-xml",
+      "path": "observations/liciacube_luke_l2_1664234239_01003_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234239_01003_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13065,
+      "expectedSha256": "91cfd075af513801fdaad44bda3088a7219033d391f8766ec1b45e9a9aa9cec7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234239-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234240-fits",
+      "path": "observations/liciacube_luke_l2_1664234240_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234240_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "2cc1724ca485205a636e3c61951b8f8c3483c1e550e0035c6337b60b7c68fdea",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234240-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234240-xml",
+      "path": "observations/liciacube_luke_l2_1664234240_00002_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234240_00002_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13065,
+      "expectedSha256": "beeab789db0904372f3ab29b911d99db8e481c06ca546f4f0c72e16099f9605e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234240-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234243-fits",
+      "path": "observations/liciacube_luke_l2_1664234243_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234243_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "luke-photograph"
+      ],
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "expectedBytes": 26749440,
+      "expectedSha256": "968799c6048912c7e7da7ea07b21e1aca1f955919cfe564f002f6b61d43e744f",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234243-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "didymos-luke-1664234243-xml",
+      "path": "observations/liciacube_luke_l2_1664234243_00002_01.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234243_00002_01.xml",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
+      "expectedBytes": 13065,
+      "expectedSha256": "1802c69e1c62def130379977f20a5bfd0a748ce0f1c820f0e1ed3a503de1435a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234243-xml",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/24"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -290,8 +722,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11887,
-      "expectedSha256": "9779b23a72c70831c700befbc9d163e49e45618e19423452a7c7b82ccb42f2d1",
+      "expectedBytes": 12943,
+      "expectedSha256": "426204dee38c77af98f996d9a97d31a08e252b6a3fc76f21adfe14b4eade2f17",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -299,8 +731,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2694,
-      "expectedSha256": "863376e4c6daacb6f2380a0d0eea1fe2d40e33169aae138322d9989948fd7dd1"
+      "expectedBytes": 7846,
+      "expectedSha256": "ab89cc48124f700b29fc4d9fbfa4b5acb8acf4e8bb41a87d6ad260e2d9e62ca6"
     },
     {
       "path": "preparation/navigation.json",
@@ -314,8 +746,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 8096,
-      "expectedSha256": "d1fe95e6378b61a5f2b0fc254b6aebea8836bf03dd9221238f900662073d51a2"
+      "expectedBytes": 13516,
+      "expectedSha256": "7f1fc12e6ee829c6834ebbe7ac570373151306cf0bae947de9faf03e9f226be0"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
