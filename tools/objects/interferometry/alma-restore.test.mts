@@ -48,7 +48,7 @@ test('the restore script performs import, flags, every application, the targets 
   assert.ok(script.includes("intent='OBSERVE_TARGET#ON_SOURCE'"));
   // A measurement set left by an interrupted import is removed, never reused, and the full set goes once the target is split.
   assert.ok(script.indexOf("shutil.rmtree(stale") < script.indexOf('importasdm('));
-  const removed = script.indexOf("shutil.rmtree('uid___A002_X1.ms')");
+  const removed = script.indexOf("os.remove(imported); shutil.rmtree('uid___A002_X1.ms')");
   assert.ok(removed > script.indexOf('split(') && removed < script.indexOf('tclean('));
   assert.ok(script.indexOf('disk_usage') < script.indexOf('importasdm('), 'the scratch disk is checked before anything is written');
 });
@@ -60,6 +60,11 @@ test('both measurement sets are written to the scratch disk, the calibration tab
   assert.ok(script.includes("split(vis='/fast/x.ms', outputvis='/fast/R_Dor.targets.ms'"));
   assert.ok(script.includes("tclean(vis='/fast/R_Dor.targets.ms'"));
   assert.ok(!script.includes("gaintable=['/fast/"), 'caltables are resolved from the working directory, not the scratch disk');
+  // The delivered flag versions are staged under the bare name, whatever disk the measurement set is on.
+  assert.ok(script.includes("os.path.join('.', 'x.ms.flagversions'), '/fast/x.ms.flagversions')"));
+  // Only an import that wrote its marker is reused.
+  assert.ok(script.indexOf("open(imported, 'w')") > script.indexOf('importasdm('));
+  assert.ok(script.indexOf("if not os.path.exists(imported):") < script.indexOf('importasdm('));
 });
 
 test('imaging follows the pipeline\u2019s own call rather than a plausible guess', async () => {

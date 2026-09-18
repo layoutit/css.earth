@@ -64,23 +64,28 @@ export function restoreScript(options: {
     'from casatasks import importasdm, flagmanager, applycal, split, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
     'steps = []',
-    // A measurement set left by an interrupted import looks whole to every later task, so each run imports afresh.
-    `for stale in (${python(visibilities)}, ${python(`${visibilities}.flagversions`)}, ${python(targets)}):`,
-    '    shutil.rmtree(stale, ignore_errors=True)',
+    // A measurement set left by an interrupted import looks whole to every later task, so it is reused only when the import
+    // wrote its completion marker; anything else is removed and imported afresh.
+    `imported = ${python(`${visibilities}.imported`)}`,
+    `shutil.rmtree(${python(targets)}, ignore_errors=True)`,
+    'if not os.path.exists(imported):',
+    `    for stale in (${python(visibilities)}, ${python(`${visibilities}.flagversions`)}):`,
+    '        shutil.rmtree(stale, ignore_errors=True)',
     // The lazy import leaves the visibilities in the ASDM's binary files and reads them in place, so the measurement set holds
     // only metadata, flags and the corrected column. What the scratch disk must hold is then about the ASDM's size once.
-    `need = sum(os.path.getsize(os.path.join(root, name)) for root, _, names in os.walk(${python(asdm)}) for name in names)`,
-    `free = shutil.disk_usage(os.path.dirname(os.path.abspath(${python(visibilities)}))).free`,
-    "if free < 1.5 * need:",
-    "    sys.exit(f'The scratch disk has {free / 1e9:.0f} GB free; the corrected column and the target split need about {1.5 * need / 1e9:.0f} GB.')",
+    `    need = sum(os.path.getsize(os.path.join(root, name)) for root, _, names in os.walk(${python(asdm)}) for name in names)`,
+    `    free = shutil.disk_usage(os.path.dirname(os.path.abspath(${python(visibilities)}))).free`,
+    "    if free < 1.5 * need:",
+    "        sys.exit(f'The scratch disk has {free / 1e9:.0f} GB free; the corrected column and the target split need about {1.5 * need / 1e9:.0f} GB.')",
     // ocorr_mode 'ca' is what the pipeline imports with: cross-correlations and auto-correlations.
     // hifa_restoredata's own defaults, so the measurement set carries the metadata the pipeline's did.
-    `importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=True)`,
-    "steps.append('importasdm')",
+    `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=True)`,
+    "    open(imported, 'w').close()",
+    "    steps.append('importasdm')",
     ...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
       // Replace the filler's empty flag versions with the pipeline's before restoring from them.
       `shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
-      `shutil.copytree(os.path.join(${python(options.flagStage ?? '.')}, ${python(`${visibilities}.flagversions`)}), ${python(`${visibilities}.flagversions`)})`,
+      `shutil.copytree(os.path.join(${python(options.flagStage ?? '.')}, ${python(`${options.visibilities}.flagversions`)}), ${python(`${visibilities}.flagversions`)})`,
       `flagmanager(vis=${python(visibilities)}, mode='restore', versionname=${python(flagVersion)})`,
       "steps.append('flags restored')",
     ]),
@@ -90,7 +95,7 @@ export function restoreScript(options: {
     `split(vis=${python(visibilities)}, outputvis=${python(targets)}, field=${python(plan.target)}, spw=${python(plan.scienceWindows)}, intent='OBSERVE_TARGET#ON_SOURCE', datacolumn='corrected', keepflags=True, reindex=False)`,
     "steps.append('split targets')",
     // The full measurement set is rebuilt from the ASDM by the next run; only the target split is imaged.
-    `shutil.rmtree(${python(visibilities)}); shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
+    `os.remove(imported); shutil.rmtree(${python(visibilities)}); shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
     ...(selfcal === null || !selfcal.succeeded ? ["steps.append('no self-calibration applied')"] : [
       `applycal(vis=${python(targets)}, field=${python(plan.target)}, gaintable=${pythonList(selfcal.tables.map(table => resolveTable(table)))}, ` +
         `interp=${pythonList([...selfcal.interpolation])}, spwmap=[${selfcal.spectralWindowMaps.map(map => `[${map.join(', ')}]`).join(', ')}], ` +
