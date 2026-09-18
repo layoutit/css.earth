@@ -265,25 +265,16 @@ export async function author(defaultLens = 'zimpol-v') {
     sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
     description: 'Dust around Betelgeuse in two datasets that share one frame: the degree of linear polarisation measured by VLT/SPHERE-ZIMPOL on 3 December 2024, and the dust clump Montargès et al. fitted to the Great Dimming of December 2019. One unit is one stellar radius; the depth of each is a stated model, not a measurement.',
     defaultLens, framingRadiusUnits: GRID.halfUnits,
+    // This cloud belongs to Betelgeuse. It is not a place of its own, so it has no catalogue entry and never appears
+    // as a marker, a search result or a destination; its datasets are listed by the star.
+    attachedTo: 'betelgeuse',
     acceptedLabResult: 'betelgeuse-shell-two-grids',
     compactInputs: deliveryGrids.find(grid => grid.id === defaultLens)!.recipe, compactMethod: 'density-grid',
     grids: deliveryGrids,
   };
   const sceneBytes = await readFile(starScene);
-  const catalogue = {
-    schema: 'cssearth-nebula-catalog@1', frame: { referenceFrame: scene.worldFrame.referenceFrame, epochJdTt: scene.worldFrame.epochJdTt },
-    sources: [
-      { id: 'eso-zimpol-v-dolp', url: `https://dataportal.eso.org/dataPortal/file/${PRODUCTS.dolp.dpId}`, sha256: PRODUCTS.dolp.sha256, bytes: PRODUCTS.dolp.bytes, citation: 'ESO Phase 3 collection BETELGEUSE-B, SPHERE/ZIMPOL V-band degree of linear polarisation, 2024-12-03; Montargès et al. 2026, A&A 711, L12' },
-      { id: 'betelgeuse-scene', url: 'https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/README.md', sha256: sha256(sceneBytes), bytes: sceneBytes.length, citation: 'Betelgeuse prepared world frame: SIMBAD position and proper motion, Joyce et al. 2020 distance and radius' },
-    ],
-    objects: [{ id: 'betelgeuse-shell', kind: 'nebula', name: 'Betelgeuse dust shell', aliases: ['alf Ori dust shell'],
-      positionM: origin, skyPosition: { raDeg, decDeg, sourceRef: 'betelgeuse-scene' },
-      distance: { valuePc: distanceM / METERS_PER_PARSEC, sourceRef: 'betelgeuse-scene', method: 'Joyce et al. 2020 asteroseismic distance, 168 (+27/-15) pc, as adopted by the Betelgeuse object.' },
-      classification: { name: 'Circumstellar dust', basis: 'Polarised light from dust one to 4.5 stellar radii out, measured in 2024, and the dust clump fitted to the 2019 Great Dimming; depth in both follows the convention of the papers that published them.', sourceRef: 'eso-zimpol-v-dolp' },
-      status: 'confirmed', detailedObjectId: 'betelgeuse-shell' }],
-  };
-  outputs.push(['delivery.json', Buffer.from(JSON.stringify(delivery, null, 2) + '\n')],
-    ['nebula.json', Buffer.from(JSON.stringify(catalogue, null, 2) + '\n')]);
+  void sceneBytes;
+  outputs.push(['delivery.json', Buffer.from(JSON.stringify(delivery, null, 2) + '\n')]);
 
   // The presentation the application reads, and the manifest that accounts for every retained source byte.
   const facts = (grid: typeof grids[number]) => grid.id === 'zimpol-v'

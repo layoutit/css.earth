@@ -33,6 +33,7 @@
   "description": "Dust around Betelgeuse in two datasets that share one frame: the degree of linear polarisation measured by VLT/SPHERE-ZIMPOL on 3 December 2024, and the dust clump Montargès et al. fitted to the Great Dimming of December 2019. One unit is one stellar radius; the depth of each is a stated model, not a measurement.",
   "defaultLens": "zimpol-v",
   "framingRadiusUnits": 6,
+  "attachedTo": "betelgeuse",
   "acceptedLabResult": "betelgeuse-shell-two-grids",
   "compactInputs": {
     "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",

@@ -60,6 +60,7 @@ export function readNebulaDelivery(v: unknown) {
   if (r.schema !== 'cssearth-nebula-delivery@1' || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
       !['compiler','axial-symmetry','density-grid'].includes(text(r.method)) || !Array.isArray(center) || center.length !== 2 || !Array.isArray(r.inputPins)) throw new TypeError('Invalid nebula delivery recipe.');
   if (!(finite(r.framingRadiusUnits)>0) || !/^https:\/\//.test(text(r.sourceUrl))) throw new TypeError('Invalid nebula framing/source URL.');
+  if (r.attachedTo !== undefined && !/^[a-z][a-z0-9-]*$/.test(text(r.attachedTo))) throw new TypeError('Invalid attached body id.');
   if (r.compositeRecipe !== undefined && r.method !== 'compiler') throw new TypeError('Optical composite requires compiler delivery.');
   if (r.compactInputs !== undefined && !['compiler','sampled','symmetry','density-grid'].includes(text(r.compactMethod))) throw new TypeError('Invalid compact bake method.');
   if (r.compactInputs !== undefined && ((r.compactMethod === 'symmetry') !== (r.method === 'axial-symmetry'))) throw new TypeError('Compact method and delivery method differ.');
@@ -89,6 +90,7 @@ export function readNebulaDelivery(v: unknown) {
     framingRadiusUnits: finite(r.framingRadiusUnits), acceptedLabResult: text(r.acceptedLabResult),
     ...(r.compactInputs === undefined ? {} : { compactInputs: pin(r.compactInputs), compactMethod: text(r.compactMethod) }),
     ...(grids === undefined ? {} : { grids }),
+    ...(r.attachedTo === undefined ? {} : { attachedTo: text(r.attachedTo) }),
     ...(r.compositeRecipe === undefined ? {} : { compositeRecipe: pin(r.compositeRecipe) }),
     ...(r.fieldStars === undefined ? {} : { fieldStars: pin(r.fieldStars) }),
     ...(r.symmetryDirectory === undefined ? {} : { symmetryDirectory: text(r.symmetryDirectory) }) };
@@ -106,11 +108,20 @@ async function installed(directory: string, recipeSha256: string, implementation
 }
 export async function prepareNebulaObject(root: string, directory: string, ifMissing = false, research?: NebulaResearchBackend) {
   const recipeBytes = await readFile(local(directory,'source/delivery.json')), recipe = readNebulaDelivery(JSON.parse(recipeBytes.toString()));
-  const catalogue = parsePreparedNebulaCatalog(await read(directory,'source/nebula.json'));
-  if (catalogue.objects.length !== 1 || catalogue.objects[0]!.id !== recipe.id ||
-      catalogue.objects[0]!.distance.valuePc !== recipe.sky.distancePc ||
-      catalogue.objects[0]!.skyPosition.raDeg !== recipe.sky.centerIcrsDegrees[0] ||
-      catalogue.objects[0]!.skyPosition.decDeg !== recipe.sky.centerIcrsDegrees[1]) throw new TypeError('Nebula catalogue and delivery identity/sky frame differ.');
+  // A volume that belongs to a body it surrounds is not a place of its own: it has no catalogue entry, so it never
+  // becomes a map marker, a search result or a destination. Only a free-standing cloud registers itself.
+  const catalogueBytes = await readFile(local(directory,'source/nebula.json')).catch((error: unknown) => {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
+    throw error;
+  });
+  if (catalogueBytes === null && recipe.attachedTo === undefined) throw new TypeError('A nebula delivery without a catalogue entry names the body it attaches to.');
+  if (catalogueBytes !== null) {
+    const catalogue = parsePreparedNebulaCatalog(JSON.parse(catalogueBytes.toString()) as unknown);
+    if (catalogue.objects.length !== 1 || catalogue.objects[0]!.id !== recipe.id ||
+        catalogue.objects[0]!.distance.valuePc !== recipe.sky.distancePc ||
+        catalogue.objects[0]!.skyPosition.raDeg !== recipe.sky.centerIcrsDegrees[0] ||
+        catalogue.objects[0]!.skyPosition.decDeg !== recipe.sky.centerIcrsDegrees[1]) throw new TypeError('Nebula catalogue and delivery identity/sky frame differ.');
+  }
   if (research) {
     for (const input of [recipe.request,...recipe.inputPins,...(recipe.compositeRecipe ? [recipe.compositeRecipe] : [])]) await pinned(root,input);
   } else {

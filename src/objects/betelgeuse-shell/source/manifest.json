@@ -177,18 +177,8 @@
     {
       "id": "delivery-json",
       "path": "src/objects/betelgeuse-shell/source/delivery.json",
-      "expectedSha256": "d2bb48a24913ba05f9a5cb56596ec6f3a3ca10fae79557ef48dec6c49519102c",
-      "expectedBytes": 2624,
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
-      }
-    },
-    {
-      "id": "nebula-json",
-      "path": "src/objects/betelgeuse-shell/source/nebula.json",
-      "expectedSha256": "796a1f71aac4d4f6ce9f6242ed82d7445b71326dfc344c164477c75b6eded2b2",
-      "expectedBytes": 1992,
+      "expectedSha256": "44c89af29a8f9530f3b6833128ecfc8ae5c87f12faaa50d99c6d3eeda24a360b",
+      "expectedBytes": 2654,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
