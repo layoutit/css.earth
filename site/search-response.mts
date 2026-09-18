@@ -6,6 +6,7 @@ import { parseFeatureIndex, parseFeaturePin, matchFeatures, featureResult } from
 import { renderDatasetResponse } from './dataset-response.mts';
 import { renderSourceLink } from './source-link.mts';
 import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
+import { readCatalogueFragmentPin } from './catalogue-fragment-pin.mts';
 
 export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
@@ -52,6 +53,29 @@ function publishResults(root: HTMLElement, results: readonly Result[], hint: str
     requiredElement(anchor, '.planet-destination-result-name').textContent = result.name;
     requiredElement(anchor, '.planet-destination-result-context').textContent = result.context;
   }
+}
+
+/** A no-JS search reads the object rows straight from this document, but a page
+ * ships them empty and refers to the shared, content-addressed catalogue
+ * fragment instead (`catalogue-fragment-pin.mts`). Fetch and splice it in
+ * before matching, the one no-JS reader of that markup. */
+async function ensureCatalogueRows(document: Document, browser: HTMLElement, origin: string, fetcher: typeof fetch): Promise<void> {
+  const resultsPanel = requiredElement<HTMLElement>(browser, '#object-category-results');
+  if (resultsPanel.querySelector('.planet-object-item')) return;
+  const pin = readCatalogueFragmentPin(resultsPanel);
+  if (!pin) return;
+  const response = await fetcher(new URL(pin.url, origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
+  if (!response.ok) throw new Error('Object catalogue fragment could not load.');
+  const bytes = await response.arrayBuffer();
+  if (bytes.byteLength !== pin.bytes) throw new Error('Object catalogue fragment size drifted.');
+  const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
+  if (digest !== pin.sha256) throw new Error('Object catalogue fragment identity drifted.');
+  const fragment = parseHTML(`<html><body>${new TextDecoder().decode(bytes)}</body></html>`).document;
+  const rows = fragment.querySelector('ul.planet-object-list');
+  if (!rows) throw new Error('Object catalogue fragment content is missing its list.');
+  requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(document.importNode(rows, true));
+  const loading = resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]');
+  if (loading) loading.hidden = true;
 }
 
 /** Modify only the shared shell. Everything outside these boundaries, including
@@ -108,6 +132,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   for (const card of browser.querySelectorAll<HTMLElement>('[data-large-scale-overview]')) card.hidden = true;
   if (system) system.hidden = !searching && !!focusCard;
   if (searching) {
+    await ensureCatalogueRows(document, browser, url.origin, fetcher);
     const items = [...browser.querySelectorAll<HTMLElement>('.planet-object-item')];
     const labels = items.map(item => ({ ...objectSearchLabels(item), item }));
     const requestedCategory = url.searchParams.get('category');
