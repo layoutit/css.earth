@@ -1,0 +1,47 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      HOSTING_AUTH_TOKEN: ${{ secrets.HOSTING_AUTH_TOKEN }}
+      HOSTING_SITE_ID: ${{ secrets.HOSTING_SITE_ID }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - name: Check deploy inputs
+        run: |
+          test -n "$HOSTING_AUTH_TOKEN"
+          test -n "$HOSTING_SITE_ID"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Build the site
+        # prebuild restores prepared assets from R2 (setup:assets), so nothing is baked here.
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: pnpm build
+      - name: Publish the prebuilt site
+        # netlify.toml supplies the edge route and the search function; the site is not linked to git,
+        # so Actions is the only thing that deploys it.
+        run: |
+          pnpm --package=netlify-cli@latest dlx netlify deploy \
+            --prod \
+            --dir=dist \
+            --no-build \
+            --auth "$HOSTING_AUTH_TOKEN" \
+            --site "$HOSTING_SITE_ID"
