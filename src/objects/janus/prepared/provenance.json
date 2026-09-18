@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c3de5291fccd9fbc2aa07f6912bf3449bb28779061c08258b7dd003684a3ff3e"
+    "sha256": "eac97ffbbc8e385a9d1249eb0c74f32e0a340e5d3848050aff79a91493d19796"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1654,14 +1654,14 @@
       "outputs": [
         {
           "url": "/scenes/janus/janus-normal-thumbnail.webp",
-          "bytes": 1998,
-          "sha256": "2163a2bcc35d86eedbada417c49639737a0e210b56f9c5392e2e3a3dc266e887",
+          "bytes": 2002,
+          "sha256": "62ee6280876d9fc14af13fd8c7b81c8ac2ec3d1d87463413fce800c0f7289073",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/janus/janus-normal-surface@2x.webp",
-          "bytes": 373928,
-          "sha256": "7513ced75bfa87d512f48138d96182a7ba0b58271ebe06c362573c21753e8147",
+          "bytes": 374112,
+          "sha256": "2879ade40b6d688652e100677f35aacca67b139ff829e567f51301ebc2894352",
           "verification": "bytes-verified"
         }
       ],
@@ -1769,8 +1769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 16256,
-          "sha256": "32e5306424c15f0e23a615083c8996094c51e46450df5d0995e5df659beae58c",
+          "bytes": 16300,
+          "sha256": "4b0233c5241542c865fe426833b8afe84f4bd8aff496174ad179e0742310d721",
           "verification": "bytes-verified"
         }
       ]
@@ -1832,7 +1832,7 @@
   },
   "lastPreparation": {
     "objectId": "janus",
-    "materialSha256": "0961d9f162b9951ad029f45458b320a6500153a0f318454a2875c44ea8b26759",
+    "materialSha256": "fac0a751533883328be089f2340040ec5b2376e92f88f3e34040e6c91cf87ccb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -2354,14 +2354,14 @@
       "outputs": [
         {
           "url": "/scenes/ino/ino-zimpol-thumbnail.webp",
-          "bytes": 1796,
-          "sha256": "d95763f84115b3981ed410ef852da55a3b724273f2160db24a2c9689b345e01c",
+          "bytes": 1850,
+          "sha256": "c9be10e5a12719977968f729cc385a028e9f88abf995691b227fe240209a86f0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ino/ino-zimpol-surface@2x.webp",
-          "bytes": 220114,
-          "sha256": "99d88a4d16db7dce46e6e166f8b4c6100b3e341bea3198b5c499ec87ac7f5032",
+          "bytes": 293710,
+          "sha256": "6fc3210496f84da5919e6aa218a07b6d9cbc866ed3f4fdd5b5841742c58f7f35",
           "verification": "bytes-verified"
         }
       ],
@@ -2444,8 +2444,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7692,
-          "sha256": "d355505efc66d3eb45712af22066cae46906a69a9837647d7c2753e5f6e0ec8e",
+          "bytes": 10092,
+          "sha256": "719a80c4c6ae57cc7577b712abb2b410246686e25d772e451e8fe861bb167bf5",
           "verification": "bytes-verified"
         }
       ]
@@ -2482,7 +2482,7 @@
   },
   "lastPreparation": {
     "objectId": "ino",
-    "materialSha256": "88cd5511ae97187da77a2c33943cab72ae5e2f23afedc349ecf5f0d34adfeea3",
+    "materialSha256": "a4dc8987871529c8584a4a0726657bb158f63109122a73fc03282ebc4b816f57",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -1989,14 +1989,14 @@
       "outputs": [
         {
           "url": "/scenes/urania/urania-zimpol-thumbnail.webp",
-          "bytes": 1440,
-          "sha256": "dafacf225ac69ab680fc89b3aad5de363ed53b1b2deb358e60abc60696741b6f",
+          "bytes": 1360,
+          "sha256": "fc0c75ffc201ee764118818537b3d9b7601fb6d39f8c084193191278d5864e7b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/urania/urania-zimpol-surface@2x.webp",
-          "bytes": 217094,
-          "sha256": "563519461866be74e98213958acb00d12df0ef396d7170513299aecf9584e02b",
+          "bytes": 302966,
+          "sha256": "881682d3cf34b958af456e52f8aab15bd48571fdc94e9ccc54a1bfccb03c9b24",
           "verification": "bytes-verified"
         }
       ],
@@ -2079,8 +2079,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8394,
-          "sha256": "9c083aae996aab849c396a9d175bc51e7b4b4e7f3c0e32e9f5e5b56f96eded44",
+          "bytes": 13322,
+          "sha256": "73d01dcb197f2b4f795acdd8bbe79f055e249bae647a4585c5466fa5ab880745",
           "verification": "bytes-verified"
         }
       ]
@@ -2117,7 +2117,7 @@
   },
   "lastPreparation": {
     "objectId": "urania",
-    "materialSha256": "b3d9997e3ccbccf49ce199341bcb30a904c4c863ccd5f341b67a0590e19030e9",
+    "materialSha256": "04e8fdb268fd896b1adb0d9893b5772681ccc283d43a80797ceb3ec82431c277",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

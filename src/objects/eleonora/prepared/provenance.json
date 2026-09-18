@@ -2817,14 +2817,14 @@
       "outputs": [
         {
           "url": "/scenes/eleonora/eleonora-zimpol-thumbnail.webp",
-          "bytes": 1606,
-          "sha256": "2f80ff192868305073c274234a262aa40f2c53b7b8f6e9d474ee95cb4dcf50d4",
+          "bytes": 1572,
+          "sha256": "b6f3fc34ce6032ae5526b4b66d48cf92711ad84c7a613036d1b2d24f060598f3",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eleonora/eleonora-zimpol-surface@2x.webp",
-          "bytes": 241584,
-          "sha256": "4409a91b71a07bd7378d17da83f479bfe9451b8109f5af226ed70cef7d80c0d7",
+          "bytes": 332270,
+          "sha256": "f45f5e366e67ebdadc3b9f9fec7f6437549c75230549b57926bc46d8ce9a2ed5",
           "verification": "bytes-verified"
         }
       ],
@@ -2907,8 +2907,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 13650,
-          "sha256": "b921504d7bcefb199a6c1771f30fd5132bf3586986eb5fa4f411e9feb06f15df",
+          "bytes": 18646,
+          "sha256": "74d0e511daaf626e10035a9acaff701a14f50074799de15cb1336a23f23b941b",
           "verification": "bytes-verified"
         }
       ]
@@ -2945,7 +2945,7 @@
   },
   "lastPreparation": {
     "objectId": "eleonora",
-    "materialSha256": "ce45119de039bafee476843ce4b4845f70393a76ebbaa39cc538998e3609b6ef",
+    "materialSha256": "b840b98c34f2f27d37462054563d779545790a961b228ef4715b988e8d5f5b5a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

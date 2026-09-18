@@ -2679,14 +2679,14 @@
       "outputs": [
         {
           "url": "/scenes/fortuna/fortuna-zimpol-thumbnail.webp",
-          "bytes": 1790,
-          "sha256": "f4c1759097d6cc43d1f5b4b1088ea19475b8fe055a672cb40a72c88b236907b1",
+          "bytes": 1700,
+          "sha256": "7477532305fe3dbdc3ce5fd53843d7a6066ece794a2bf2582c838136435e384f",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/fortuna/fortuna-zimpol-surface@2x.webp",
-          "bytes": 221792,
-          "sha256": "ca77779cab10a4ec64ee37696dc86171b4b7670605453b99d9ac291fcddc3a9e",
+          "bytes": 278090,
+          "sha256": "84085ff25bc7bffb010aa0c894047dc679ab82c2702f75303bfdb5938f2dd1bd",
           "verification": "bytes-verified"
         }
       ],
@@ -2769,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8626,
-          "sha256": "1c684eb30c8a3d173c7ab13c6fa324ef7d33cfbfb8498c79e95b0e354e2b4e66",
+          "bytes": 12502,
+          "sha256": "01442a7bdf2fefdfc8362b524f4109e2515bb750b56a5e8078b49a8b33ed2af3",
           "verification": "bytes-verified"
         }
       ]
@@ -2807,7 +2807,7 @@
   },
   "lastPreparation": {
     "objectId": "fortuna",
-    "materialSha256": "e79a590f7ee27cd197af908497ad43671e32fa4e1aff623cf04679faed64b45f",
+    "materialSha256": "c9e4df2df3897c73307d4ef53eae681dcbfa099d5fc4c57e4c72888aea08639a",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

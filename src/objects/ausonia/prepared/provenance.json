@@ -2354,14 +2354,14 @@
       "outputs": [
         {
           "url": "/scenes/ausonia/ausonia-zimpol-thumbnail.webp",
-          "bytes": 1474,
-          "sha256": "445e140d46a1649f3281fbc07d286a867a3230c525539aab5d3f6e31c00bb9ce",
+          "bytes": 1314,
+          "sha256": "e1abc271fc6a07c7246f0f587c4ecb323ae63995b114b35ecc8d4d10fb52d2f5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ausonia/ausonia-zimpol-surface@2x.webp",
-          "bytes": 258166,
-          "sha256": "2d4cf947405dc89caec6759a0606448c8ea5df374ff926dc6a7cb9e00fdebf43",
+          "bytes": 325990,
+          "sha256": "3803692e1b09af1362db0fde8a829fcdd3f5c53532af37c4ef36a65021fe8544",
           "verification": "bytes-verified"
         }
       ],
@@ -2444,8 +2444,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 11064,
-          "sha256": "3e5201bc3e36343b5733764e2b9e4b96d227ce3b7f1867f2c88924b21c553d98",
+          "bytes": 13394,
+          "sha256": "3412532dd68c3946e1bfcfed99daed66ed8fbe8fd45db6cefcfb17536f582319",
           "verification": "bytes-verified"
         }
       ]
@@ -2482,7 +2482,7 @@
   },
   "lastPreparation": {
     "objectId": "ausonia",
-    "materialSha256": "48425324776bc4fecf143aec28fbb2a08f8fee5be6221bd4b9e2ce181558cba8",
+    "materialSha256": "1403a19c474d594855b2fb008185f4059dc3c491780a690bc500f2051e6e0487",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

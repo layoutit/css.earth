@@ -2679,14 +2679,14 @@
       "outputs": [
         {
           "url": "/scenes/juno/juno-zimpol-thumbnail.webp",
-          "bytes": 2122,
-          "sha256": "11964f4ad4c3bc55c46f7c861235a0c35fda0c82e32997601ccd68ab7d832aae",
+          "bytes": 1892,
+          "sha256": "3440ba78f498e529edf2af0a96fe59fdf739868847087a5f55e366af2650fd1d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juno/juno-zimpol-surface@2x.webp",
-          "bytes": 229696,
-          "sha256": "07e17c58cb0cf0fba6bd6e8883bedc26363d7da7729039b165928ab35c7916b7",
+          "bytes": 424466,
+          "sha256": "45c2fe773ce7f56bc4f2f15c9e6498744c981cb38b36408dd5ad16fc68b6af16",
           "verification": "bytes-verified"
         }
       ],
@@ -2769,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 10038,
-          "sha256": "8317ae36d117f478c3e6c88e1b65f26d7e1e75505eb310afd2cbfef1e6b32f6d",
+          "bytes": 13484,
+          "sha256": "4441466df359e21a04027bbdd4d024f8ee5415ecc338a5fc76f87ab9aea091a5",
           "verification": "bytes-verified"
         }
       ]
@@ -2807,7 +2807,7 @@
   },
   "lastPreparation": {
     "objectId": "juno",
-    "materialSha256": "2a83da5405f3e7e1e843249ac5f58fcde79490fd9cec55dc871491bc68eacdc2",
+    "materialSha256": "157e6c39a5648bda4802a6b0379a884228d25340b09371cd8c2d235a185e6efa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

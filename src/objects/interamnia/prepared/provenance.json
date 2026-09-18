@@ -2817,14 +2817,14 @@
       "outputs": [
         {
           "url": "/scenes/interamnia/interamnia-zimpol-thumbnail.webp",
-          "bytes": 1940,
-          "sha256": "6f47326ab93d3b3b3de52d0ebd49e535cfadde64617b85e5ec08b1a6e67322b6",
+          "bytes": 1860,
+          "sha256": "8ecf919ceda7a06c4f8364b9fcfea78893ea1916a7e208112f96c4e538804043",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/interamnia/interamnia-zimpol-surface@2x.webp",
-          "bytes": 224694,
-          "sha256": "5a4204c2e062e09cd76daad13621baeb5ebddc288c608ca3ebc170bc2382a802",
+          "bytes": 362172,
+          "sha256": "2dc6dca89d807738580657e2471eb8ca41897e6d07a301250ceca46cafb334ce",
           "verification": "bytes-verified"
         }
       ],
@@ -2907,8 +2907,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 9980,
-          "sha256": "736ef98945fb475c94edaa8386b3455baade155fe963db0096dac3667fe7fa95",
+          "bytes": 15576,
+          "sha256": "12fda797098c96c0bc0a1cf9cb94036cffc054efef109fae80cf1bc7017af68d",
           "verification": "bytes-verified"
         }
       ]
@@ -2945,7 +2945,7 @@
   },
   "lastPreparation": {
     "objectId": "interamnia",
-    "materialSha256": "8fdf4bb0aad6d39c13079f9c5d30712d9d0ce8cb3ba81f7a41bb06282248dec4",
+    "materialSha256": "e88ccbf67d7b1b0dda6b67938fc93b47df42bc0a96975c50c18ea3b7a9097f21",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

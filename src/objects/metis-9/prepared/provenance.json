@@ -2679,14 +2679,14 @@
       "outputs": [
         {
           "url": "/scenes/metis-9/metis-9-zimpol-thumbnail.webp",
-          "bytes": 1642,
-          "sha256": "4f061f9e3993303d43b75c918c79b2c5eac90c10719aea5b510c344f5177a367",
+          "bytes": 1638,
+          "sha256": "6cc75cd6a33b5209dd73611827004319e69cbc7221b8fe1178b53f138df5c5fc",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-zimpol-surface@2x.webp",
-          "bytes": 221730,
-          "sha256": "de73c18d3d0222bd9ad1d158849d219b0784bbe4f5d832288e67bf583932b0ec",
+          "bytes": 299588,
+          "sha256": "9bf863a491e64463d864799a5e89001e2add82277227789a9bfa28940cc47ddc",
           "verification": "bytes-verified"
         }
       ],
@@ -2769,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 11740,
-          "sha256": "de35835f3b5142b222713727839c140946af7c47546fe31350826b3bdab1991c",
+          "bytes": 15200,
+          "sha256": "89b1b348911b60b34eaf2dab77c7db21886d0a32604f28cd9ac877e2198b6927",
           "verification": "bytes-verified"
         }
       ]
@@ -2807,7 +2807,7 @@
   },
   "lastPreparation": {
     "objectId": "metis-9",
-    "materialSha256": "78c37de13a77e2ea9276da2f544bfc8e14f0ae17019aa746497bb431da8750d6",
+    "materialSha256": "00a3b239e948bb7dc4f5a7b782ec806a7a3fdd51b237864f107248e32bba9600",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

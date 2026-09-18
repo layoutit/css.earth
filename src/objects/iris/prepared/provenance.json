@@ -2196,14 +2196,14 @@
       "outputs": [
         {
           "url": "/scenes/iris/iris-zimpol-thumbnail.webp",
-          "bytes": 1864,
-          "sha256": "852176fd084bde685b0c3bb5f1040402a9221c77f6006044ab070b5d0fe3be9b",
+          "bytes": 1922,
+          "sha256": "274e55ad59ff0354b456aaa9d04de9f8cec676c6173b91993ccfb844d2b762b9",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/iris/iris-zimpol-surface@2x.webp",
-          "bytes": 247344,
-          "sha256": "3dff0ba861e4d78a3ef992b39ade6706e23d5d7a0a06a03481c1b1840033cd75",
+          "bytes": 374524,
+          "sha256": "a1578af73b6f493ea6556882f5e1f03a3022377ab83b2aafffa01701455f4d76",
           "verification": "bytes-verified"
         }
       ],
@@ -2286,8 +2286,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8268,
-          "sha256": "dcef7ded56f8371b939afba52221ac0e238d9a4e36c0287eeae3a4837440132f",
+          "bytes": 11146,
+          "sha256": "ba764afb9a3fa2284d51d21327382332ef9b7d31ca9fff4e382260d976b874f8",
           "verification": "bytes-verified"
         }
       ]
@@ -2324,7 +2324,7 @@
   },
   "lastPreparation": {
     "objectId": "iris",
-    "materialSha256": "72f57b44d61ebe96e9358a9ddfbf3386a7b7920e32524b48f9a45f7ead9b0998",
+    "materialSha256": "6a7060cdcffeec7f2b7a2975bb59992ad8e61b34bf0cf5e0199dae0d10d4eee4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

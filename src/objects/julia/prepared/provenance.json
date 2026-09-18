@@ -2817,14 +2817,14 @@
       "outputs": [
         {
           "url": "/scenes/julia/julia-zimpol-thumbnail.webp",
-          "bytes": 1854,
-          "sha256": "e121eb8862556d42647e9f4abbcc848a48726bc83ea84776849416a5f8c03734",
+          "bytes": 1780,
+          "sha256": "6d1787902eab2f7af319a3e8014b27c09ba66d636fdd919b4a20a4476f38211e",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/julia/julia-zimpol-surface@2x.webp",
-          "bytes": 246622,
-          "sha256": "94ce85dd1a71724748796b10c870c8dd545eb7de76b9ec37f7675de945300317",
+          "bytes": 323044,
+          "sha256": "ac166914b015045d7567a4469c562c02e211127103e74a11ab9eccf6a4dceee7",
           "verification": "bytes-verified"
         }
       ],
@@ -2907,8 +2907,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8732,
-          "sha256": "690a532412508bb939fffdc505623f6f02ed5f791e298254c9cfc9a1b0670e6a",
+          "bytes": 11360,
+          "sha256": "163e6ac39e874fbbaff46f2dbb88879a64d7d6fcaf447a7acde87d76ee6a06e7",
           "verification": "bytes-verified"
         }
       ]
@@ -2945,7 +2945,7 @@
   },
   "lastPreparation": {
     "objectId": "julia",
-    "materialSha256": "d46c5135128555f8c45231ed08e0027b0ceee4cc41c53bea96b7c9cb6f958686",
+    "materialSha256": "02e654650a83d85f1e7d9c369ef83a59c58043a47a082cbfd0cde9ae17418b68",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

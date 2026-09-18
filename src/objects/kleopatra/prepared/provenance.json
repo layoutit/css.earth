@@ -4275,14 +4275,14 @@
       "outputs": [
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-thumbnail.webp",
-          "bytes": 884,
-          "sha256": "0854bf0ff9b5422e260033070e65a91991ff6e781f0a97ca3467d0356a6f50c1",
+          "bytes": 882,
+          "sha256": "12b8803fda249f8bb7a23cbe9c50578518a495b7e7e2520e90d217f0cd2b36e0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-surface@2x.webp",
-          "bytes": 203486,
-          "sha256": "105d9b93757f59d2e99aab8e6ef38f64427e4ccf52b4b212e24a5dffcc87a56a",
+          "bytes": 326610,
+          "sha256": "fec5c3fe94fe2e63c2d611c0dceaf45613aa106443e745f155be4a26e3f7479e",
           "verification": "bytes-verified"
         }
       ],
@@ -4365,8 +4365,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 6384,
-          "sha256": "213cd0a457ca9f5815d9ad018022f4a626113f6ef7f7b8a988afc9c85a0ce56c",
+          "bytes": 10246,
+          "sha256": "30ecc7f35efdc25289561d589e531ce6513b87783402a4beec48aed3aec0392f",
           "verification": "bytes-verified"
         }
       ]
@@ -4378,7 +4378,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "1f7de5ba0e79e03a098973c53220b5d5effdf837ad3cb6f3f37614a107510146",
+    "materialSha256": "4cfe725f7379a993f7db0885ea01e66bbcd31a752fb416fcd851946386fe882f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -2623,14 +2623,14 @@
       "outputs": [
         {
           "url": "/scenes/egeria/egeria-zimpol-thumbnail.webp",
-          "bytes": 1788,
-          "sha256": "40f03a8c10675b7faf9ab602a4473b2d8b3bed61d41c40b4e91009a1937fa61c",
+          "bytes": 1676,
+          "sha256": "7e30c18dbafa80cfbb28e86a9dafb6032ffdab4a8956d3b713d903d8a9302f07",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/egeria/egeria-zimpol-surface@2x.webp",
-          "bytes": 219988,
-          "sha256": "8887f6a1c0be9cc6033908c1b1724a00b90d1ad4fbcca9d7a8f6f7c7f5f144b9",
+          "bytes": 281076,
+          "sha256": "4771cb0e0d6e9e8ead55c6187e5f40a3b3e4f07b35ca23214dba1d0d35367e42",
           "verification": "bytes-verified"
         }
       ],
@@ -2713,8 +2713,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7502,
-          "sha256": "2791e03b1ddc3ea4f480a513c99a98eb3a3366b81dde402bf9ae9a7a1dbe22be",
+          "bytes": 10038,
+          "sha256": "dcf03c7f5a4e35d805b48461cf3f4cf92c60318687630e3b6a807c7d819fe3ae",
           "verification": "bytes-verified"
         }
       ]
@@ -2751,7 +2751,7 @@
   },
   "lastPreparation": {
     "objectId": "egeria",
-    "materialSha256": "7d5e777cd9cffa48ffeeef058b3f25f9199310d6ba8886f2669cb7b3d107a824",
+    "materialSha256": "752be92c92132393c27d4539346f92ffaecd882835d917ff3b98076343639155",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -2679,14 +2679,14 @@
       "outputs": [
         {
           "url": "/scenes/pallas/pallas-zimpol-thumbnail.webp",
-          "bytes": 2100,
-          "sha256": "160e254df00e61e735481b0dfc90878a2724f87b1e9daab7f8bf145ec9d5575b",
+          "bytes": 2170,
+          "sha256": "b7e8e5c0769200979c9cab9590a719fd9da99c0631e6dbe03123c94ea5c6d15a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/pallas/pallas-zimpol-surface@2x.webp",
-          "bytes": 224816,
-          "sha256": "b494ea80ded769aebcbbe1610bd16f20ea71ab6fe8e4c2d3c20761af944a1f2d",
+          "bytes": 351200,
+          "sha256": "6f940806f9957ce035ac31b04d6cf5d0716d5b90aa12a0dbe57acb1216d6a73f",
           "verification": "bytes-verified"
         }
       ],
@@ -2769,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7184,
-          "sha256": "d55ba5ba606aa1f9059c5727ee352ceaa50278e3b21badb6b9a9de505427145e",
+          "bytes": 9350,
+          "sha256": "6671d9aead9cd6277c837241a81e2e40e01894a054f2dcc88633955187f2f978",
           "verification": "bytes-verified"
         }
       ]
@@ -2807,7 +2807,7 @@
   },
   "lastPreparation": {
     "objectId": "pallas",
-    "materialSha256": "f454a18715809291cdaf18fc9bcc282ea7455d502b0fd80fcd6febef236efd52",
+    "materialSha256": "1552022e7e7f00a8efacff16b65b0b312b30a68c7a73d263026fa4e824dd0dcb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

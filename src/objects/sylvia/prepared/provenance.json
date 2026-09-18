@@ -2817,14 +2817,14 @@
       "outputs": [
         {
           "url": "/scenes/sylvia/sylvia-zimpol-thumbnail.webp",
-          "bytes": 1402,
-          "sha256": "69ed3e2fe53e7ddd0589078cf95cc239e6f237202770fbac822d07368e188bf3",
+          "bytes": 1282,
+          "sha256": "ee643118a673de078b5414455ffe913c2e960712a0e471f577d23b6e416a113d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 213842,
-          "sha256": "7f8b6d74abe921302ffaedeac96af4ecc4d3fab2e0d2a2ffcaa093915411caca",
+          "bytes": 313922,
+          "sha256": "adf566fb78466beaf65dd5d392b14616cdcebcc8b92e8db06ee251934ab067df",
           "verification": "bytes-verified"
         }
       ],
@@ -2907,8 +2907,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 9042,
-          "sha256": "d29b54edb6e08e05b0da04cddff0d2ee8d54835512428acd0a5e4a24606dce2b",
+          "bytes": 15344,
+          "sha256": "11b8a68d980a60c53b2b816f93d9fc73b184f7b9fc4f8710c2508fdc3c7218b3",
           "verification": "bytes-verified"
         }
       ]
@@ -2945,7 +2945,7 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "72def3358e8b1916b6094087b77c58d51c9fb067d40be5a669d1683df4efb10d",
+    "materialSha256": "117f953eb44bf0633551a07fb9e9ad895b99e405d3f06ecbd8eeb579173db216",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

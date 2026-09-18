@@ -2603,14 +2603,14 @@
       "outputs": [
         {
           "url": "/scenes/themis/themis-zimpol-thumbnail.webp",
-          "bytes": 1830,
-          "sha256": "a3c9d35257e628f751c6a616daa2b2a797ebc91ac3d99bdb528e6d1d46d4173d",
+          "bytes": 1746,
+          "sha256": "376264eddeef3744aed3c3499b7cc00237dfb6875667a6ce382e071853e7e866",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/themis/themis-zimpol-surface@2x.webp",
-          "bytes": 216540,
-          "sha256": "c5278988311ba1bcee9b8502ebdfaeccf235fadd75f8401e7de15ae1ab865294",
+          "bytes": 325714,
+          "sha256": "6a961dc120df16ab56fe904d5caa333bcf37dbd8582b57655109f768444fb269",
           "verification": "bytes-verified"
         }
       ],
@@ -2693,8 +2693,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 11450,
-          "sha256": "f58201b9f61562aada9cc882c9e4734b8bdcb0df9107946421becdc86b0eb6af",
+          "bytes": 17588,
+          "sha256": "aa7ab79939c9539a152aae2d472d6ede363ffe41798afc359d5206dd2d9003fa",
           "verification": "bytes-verified"
         }
       ]
@@ -2731,7 +2731,7 @@
   },
   "lastPreparation": {
     "objectId": "themis",
-    "materialSha256": "9e3b0dd47b50d20055d771a2a701383e5e0e9f4180b31a7e973587d4c924ce48",
+    "materialSha256": "9d1ed3b3a663c19532a801079cf301f4e0a32a201ce74be759c1616f9fc0bf8f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

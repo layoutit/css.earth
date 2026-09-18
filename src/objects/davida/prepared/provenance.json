@@ -2817,14 +2817,14 @@
       "outputs": [
         {
           "url": "/scenes/davida/davida-zimpol-thumbnail.webp",
-          "bytes": 1498,
-          "sha256": "32a371cde5e2288721a323a51be108cb585009459a26ac537a84b3df09228ada",
+          "bytes": 1510,
+          "sha256": "11f899e31a2f2dbd95e0b131f3fd36c9f729ad247c02d1da712ae1bf6cd63005",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/davida/davida-zimpol-surface@2x.webp",
-          "bytes": 220322,
-          "sha256": "46f9376f6d3a2580f0924859422044b45f3d68692fb256371a399ecc0ef42a7f",
+          "bytes": 299928,
+          "sha256": "51061b9a650ff9069a922e23899f7cba7a5e2bacd9249c7ec8e9795b16fd88b9",
           "verification": "bytes-verified"
         }
       ],
@@ -2907,8 +2907,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 10158,
-          "sha256": "da691c12e614ac94395773e948b6c2f789ca6310d4845b3b2652e23f63337cac",
+          "bytes": 15628,
+          "sha256": "dc585498c9ef6b884901eeedd2a26ff77fa5408d0721a19802fcbeec7509b9fe",
           "verification": "bytes-verified"
         }
       ]
@@ -2945,7 +2945,7 @@
   },
   "lastPreparation": {
     "objectId": "davida",
-    "materialSha256": "036e2e5035afbdbd81ad67a1732c18cd5a69d6a44280f57afa5b00e90c16413f",
+    "materialSha256": "508bb3ae52a54d2e9b66c3f47b0d8a39022ab79e46450a46337636213b9dbf26",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

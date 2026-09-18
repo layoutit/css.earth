@@ -2830,14 +2830,14 @@
       "outputs": [
         {
           "url": "/scenes/euphrosyne/euphrosyne-zimpol-thumbnail.webp",
-          "bytes": 1672,
-          "sha256": "eb9b37a2b7c67a661d3272643b53ddfe749393d3738bb3b216f3e91ae037dc88",
+          "bytes": 1716,
+          "sha256": "401219ce0adb152f080535f58ca71dd5fbb87e8d316b5b368b7e184758fbf165",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/euphrosyne/euphrosyne-zimpol-surface@2x.webp",
-          "bytes": 190746,
-          "sha256": "4949d917a727ab30bb46faf902c26460cc995034f52fae89b2a4cb079453ad50",
+          "bytes": 302054,
+          "sha256": "3194fda606e70b90a92a509f91f964e651d0397e3e1caa13886349263da1b657",
           "verification": "bytes-verified"
         }
       ],
@@ -2920,8 +2920,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 10098,
-          "sha256": "e016969cbb0b15a73646eee3baf24d84244ca51ed3438ff604cb7fa37246eb38",
+          "bytes": 16560,
+          "sha256": "818e5f17924ddf91dfc529111f82a2505c3a460aff2c54e0ec8306508fcfa3fe",
           "verification": "bytes-verified"
         }
       ]
@@ -2958,7 +2958,7 @@
   },
   "lastPreparation": {
     "objectId": "euphrosyne",
-    "materialSha256": "6a752ed785be2d94a11e9b109be43feb94eff986c2aedd3cf8f8a46ec58a5f11",
+    "materialSha256": "1b3d9700e97704f08a18951f12c8700f1cb598b3a1edbeb100f4f92fc5519492",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

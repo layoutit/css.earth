@@ -1595,14 +1595,14 @@
       "outputs": [
         {
           "url": "/scenes/athamantis/athamantis-zimpol-thumbnail.webp",
-          "bytes": 1634,
-          "sha256": "a7181ad326a08611594c363c85f6d16724b7a1d9c1b49f19610cb29f59d92940",
+          "bytes": 1580,
+          "sha256": "b8f8b9610a8e9ab6883979af6ba595e7cbce6f2255182ccda08ac08b6559175c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/athamantis/athamantis-zimpol-surface@2x.webp",
-          "bytes": 221932,
-          "sha256": "560c6b568ad529c46bf61101588395f3d6021de6f0e70ebbf5031f4a4f708c3a",
+          "bytes": 254848,
+          "sha256": "148bce84eeda8ea8e59f29faf4e6e6cb9f0f374af062fa4330ff173a91f6958e",
           "verification": "bytes-verified"
         }
       ],
@@ -1685,8 +1685,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8236,
-          "sha256": "f3fdebc83c1a81681ffaf33e995e591a113078fad3b8478cbb4516b6ac9bbd4e",
+          "bytes": 9816,
+          "sha256": "7cc27caa4a65756cf91496d69b02ccff03ddf7e1cd6f03e5b7a1b48a9261ba29",
           "verification": "bytes-verified"
         }
       ]
@@ -1723,7 +1723,7 @@
   },
   "lastPreparation": {
     "objectId": "athamantis",
-    "materialSha256": "23360e28c6c53a0a469160097ad587db0586c3a14b4c7a31a529b81a2f1789ac",
+    "materialSha256": "996c5956bf9ef6995ee218697503710e056528b1fcb5adf6481e51e42f0df9c6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

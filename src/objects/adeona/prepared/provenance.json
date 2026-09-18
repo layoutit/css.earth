@@ -1568,14 +1568,14 @@
       "outputs": [
         {
           "url": "/scenes/adeona/adeona-zimpol-thumbnail.webp",
-          "bytes": 1794,
-          "sha256": "92553fb293994cfa4e578c273dbad685c7195cfb0584e89cd98aacf6adc7a018",
+          "bytes": 1718,
+          "sha256": "ed8ad32b067dcab0342a4bd49dddd9e0cfa86e72fc612d773291ffd6824dce0a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/adeona/adeona-zimpol-surface@2x.webp",
-          "bytes": 231434,
-          "sha256": "644931ec899cbde39741a2f8c0aade32799526c716630bb7e672b3d50671ac78",
+          "bytes": 283376,
+          "sha256": "c38f36a36e77ac18c43075b39ed367d8e89c0139e6154237ad5884222482b302",
           "verification": "bytes-verified"
         }
       ],
@@ -1658,8 +1658,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 7616,
-          "sha256": "23578d8d7d298ad818b47bea82c5c79a6da1ba0107d383afe17400ec246fcfa6",
+          "bytes": 9426,
+          "sha256": "24310b96e86903332740eea0b01400a30d912f8a277c946c7d9296bee1a2d3e3",
           "verification": "bytes-verified"
         }
       ]
@@ -1696,7 +1696,7 @@
   },
   "lastPreparation": {
     "objectId": "adeona",
-    "materialSha256": "d338995dcdfd9f51414447318fe11028419e1d98b8a83cc0f23fbf3afc07e364",
+    "materialSha256": "6e07d6facc431dd6eb6590148614246d0f37220021a2b9c25a2e3ee6ad45e312",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

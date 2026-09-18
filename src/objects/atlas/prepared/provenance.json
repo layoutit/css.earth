@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e4793deea38215b061d7e5cbf394c3156a91619218280f45a99a3b6b9b809c67"
+    "sha256": "4c82861ca96f1841b3b5074001893b60eb69194eb46466955e1678644780cc0e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1482,14 +1482,14 @@
       "outputs": [
         {
           "url": "/scenes/atlas/atlas-normal-thumbnail.webp",
-          "bytes": 1468,
-          "sha256": "31feb870afea6d33e7351900efda3003aab84017c0a9bb9ae27a4a7c18e54967",
+          "bytes": 1416,
+          "sha256": "47365dff9646c3be1b2e7730b75e566848937f15d695902acca24152272578ed",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/atlas/atlas-normal-surface@2x.webp",
-          "bytes": 300346,
-          "sha256": "de17dce199d8f1a6e4248d6cb1aaef235fe62e4f7b7007b0225e7faba9918c42",
+          "bytes": 304468,
+          "sha256": "de0e37a645b62b452bf4f8ee29fe92f9491618e3eb04fe5751de29b33574dc21",
           "verification": "bytes-verified"
         }
       ],
@@ -1597,8 +1597,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 8698,
-          "sha256": "24f6af1d77718ab1044d4eefbd733cb2dbd57548593a38bc6119f5d2607238b5",
+          "bytes": 8916,
+          "sha256": "1a466a224f94f0d8ba9fb627110cc9f727b88bc3ea69275b166c8e47eefb1a12",
           "verification": "bytes-verified"
         }
       ]
@@ -1660,7 +1660,7 @@
   },
   "lastPreparation": {
     "objectId": "atlas",
-    "materialSha256": "a7e53b32c0af6e98c505bc1f8dd9142069050d1f965f3edb97e428251f84d3df",
+    "materialSha256": "2af9067d68ce2f1a47f66f67982656ea32b031caa96d873ee6409c41d9a44682",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

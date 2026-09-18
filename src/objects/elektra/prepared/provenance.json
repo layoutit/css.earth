@@ -2679,14 +2679,14 @@
       "outputs": [
         {
           "url": "/scenes/elektra/elektra-zimpol-thumbnail.webp",
-          "bytes": 1378,
-          "sha256": "01485dc2966d70ae04d597fcc125cdce087699730cf67c08e14e2c21d2023d7c",
+          "bytes": 1290,
+          "sha256": "9150c3f7046a75749c065c1fe5b0230ca97d01cc34b8ef9c7fd09bfbf0e69666",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/elektra/elektra-zimpol-surface@2x.webp",
-          "bytes": 229402,
-          "sha256": "d7bf26f243352dce0ede688bf68b226f238647e15eae6f7beee0f579f09085c3",
+          "bytes": 312196,
+          "sha256": "f16835b5465c997c46dd7e2796b0f464dd0d64798461430907032cf2151ccc6c",
           "verification": "bytes-verified"
         }
       ],
@@ -2769,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 11448,
-          "sha256": "376f43d0ea963e90f38e2c674d83918a265a76fb3bb4cdac69df8d26e3c93862",
+          "bytes": 15940,
+          "sha256": "c2368c1ad0339f57683348a7971274f3b442e345a230253e0fead6eb8cb36990",
           "verification": "bytes-verified"
         }
       ]
@@ -2807,7 +2807,7 @@
   },
   "lastPreparation": {
     "objectId": "elektra",
-    "materialSha256": "c1767d517bf5217505df45d3b4367de704b86844ec15d879af0bd5f0f24e2e6c",
+    "materialSha256": "be1249d2600515e5761400619c8bfa8754a708a8cfdec6a4d787ab1057a79f4e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

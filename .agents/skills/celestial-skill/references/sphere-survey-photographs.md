@@ -37,6 +37,16 @@ add, and the display samples it shares with a cast frame. Beside them it prints
 the surface the lens's own frames cover, from geometry, next to the prepared
 lens's measured coverage: that pair shows how far the geometry can be trusted.
 
+![Lens maps of the twelve bodies with a linked apparition, one apparition above, all linked apparitions below](sphere-survey-apparitions.webp)
+
+Above, each body's lens map with one apparition (top) and with every linked one
+(bottom), and the measured share of the surface photographed. The geometry
+decides only which apparitions to try. Daphne's 2017 frames were predicted to
+share 193 samples with its 2018 frames, but the fit found at most 59 in the
+pixels, so that apparition is left out by name
+(`--leave-out-apparition=2017-05-20`). Its map changes only through the frame
+choice.
+
 ## Set up and measure
 
 ```bash
