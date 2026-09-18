@@ -25,13 +25,13 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.37](https
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2017-07-14 05:00:59 | 0.891 | 0.925 | 0.936 | 0° | -3.5°, -0.5° | 131.2° against 127.4° |
-| 2017-07-22 04:18:07 | 0.896 | 0.916 | 0.930 | 0° | -2.5°, -0.5° | 130.6° against 126.7° |
+| 2017-07-22 04:18:07 | 0.898 | 0.921 | 0.941 | 0° | -2.5°, 0° | 130.6° against 126.7° |
 | 2017-07-22 05:05:06 | 0.909 | 0.907 | 0.948 | 0° | -1.5°, -1.5° | 130.6° against 128.4° |
-| 2017-07-27 04:27:42 | 0.883 | 0.855 | 0.936 | -10° | -3°, -0.5° | 130.2° against 126.6° |
+| 2017-07-27 04:27:42 | 0.878 | 0.848 | 0.932 | -10° | -3°, -0.5° | 130.2° against 126.6° |
 | 2017-08-10 05:21:58 | 0.873 | 0.905 | 0.937 | -10° | -3°, 0° | 129.3° against 125.1° |
 | 2017-08-22 01:42:34 | 0.899 | 0.889 | 0.945 | 0° | -1.5°, -3.5° | 128.8° against 126.1° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 30 native frames after the centre fit is 2.205 px at our phase; the lowest of a ±30° sweep is 2.174 px at -2°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 30 native frames after the centre fit is 2.220 px at our phase; the lowest of a ±30° sweep is 2.184 px at -2°.
 <!-- published-comparison:end -->
 
 ### Registration

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a0b58a1e343188f73c33010d2ba6a2a274fa3b0e28f52cec37d00765a68f17de"
+    "sha256": "ab83d7e2febeffd4b33e86a18fb6f6b96731320384abb5e3d1000b702b2ae6c2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "c59ff6ab7f148331af9f3dc31833de0fc1acb85c76e4f540a7a5e8fd4d912254",
+      "sha256": "6516d39c5ad7b244d879027410cc471a7eb093433686e75b31beb5f4fbc259e6",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -186,8 +186,8 @@
                   "northAzimuthDegrees": 266.4982,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    130.672,
-                    135.108
+                    130.71,
+                    135.102
                   ]
                 },
                 {
@@ -2354,14 +2354,14 @@
       "outputs": [
         {
           "url": "/scenes/ausonia/ausonia-zimpol-thumbnail.webp",
-          "bytes": 1448,
-          "sha256": "be32fd5c323ac407fe38efc02164f3c66a94ebb54e235185f93fbc6f6ae2c29f",
+          "bytes": 1474,
+          "sha256": "445e140d46a1649f3281fbc07d286a867a3230c525539aab5d3f6e31c00bb9ce",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ausonia/ausonia-zimpol-surface@2x.webp",
-          "bytes": 257986,
-          "sha256": "b78554dce5b9d0533742670af128cc4c8939f5f7bbec469992a3001dbef8bc29",
+          "bytes": 258166,
+          "sha256": "2d4cf947405dc89caec6759a0606448c8ea5df374ff926dc6a7cb9e00fdebf43",
           "verification": "bytes-verified"
         }
       ],
@@ -2444,8 +2444,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 11094,
-          "sha256": "c3e954849f2d3666e12ad3f6eb6e385576e4dd171a76454ddc26b18769ac6c72",
+          "bytes": 11064,
+          "sha256": "3e5201bc3e36343b5733764e2b9e4b96d227ce3b7f1867f2c88924b21c553d98",
           "verification": "bytes-verified"
         }
       ]
@@ -2482,7 +2482,7 @@
   },
   "lastPreparation": {
     "objectId": "ausonia",
-    "materialSha256": "ed096d25c4a1024140b070365cb44d88298bbfa337b7c08e1c6578e13372840d",
+    "materialSha256": "48425324776bc4fecf143aec28fbb2a08f8fee5be6221bd4b9e2ce181558cba8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

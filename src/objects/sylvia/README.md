@@ -39,7 +39,7 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.29](https
 | 2018-11-26 02:31:28 | 0.967 | 0.965 | 0.971 | 0° | -1°, 0° | 86.2° against 84.2° |
 | 2018-11-29 04:41:40 | 0.963 | 0.957 | 0.969 | 0° | -2°, 0.5° | 86.2° against 84.3° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 5.754 px at our phase; the lowest of a ±30° sweep is 5.576 px at 6°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 5.298 px at our phase; the lowest of a ±30° sweep is 5.212 px at 14°.
 <!-- published-comparison:end -->
 
 
@@ -50,7 +50,7 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 32 | 32 | 4.39° | 3.32° | 2.88° | its other 32 frames | 1 of 32 | — | 4 of 32, 7.00° | — | ×7.95 | registered |
+| `zimpol` | 32 | 32 | 4.41° | 3.35° | 2.86° | its other 32 frames | 1 of 32 | — | 5 of 32, 7.00° | — | ×7.94 | registered |
 
 `zimpol` ships on its paper’s comparison, [Figure B.29](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
@@ -61,7 +61,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 The original Cartesian frame is retained with +Z north and east-positive longitude. The published ecliptic pole is converted to equatorial J2000 with obliquity 23.439291111°. Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase. The release’s unlabeled parameter file is read as a spin record by the photograph’s cameras, in the column order the survey’s pole supports; it is not read as an IAU W model.
 
-The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Sylvia from 18° south, so surface the survey did not see keeps the missing-imagery grid.
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Sylvia from 18° south, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20181112-061547. Its limb fit does not settle: after 8 full and 16 half steps the centre still moves 0.55 px, and a lens states only settled centres. The figure does not show it.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 

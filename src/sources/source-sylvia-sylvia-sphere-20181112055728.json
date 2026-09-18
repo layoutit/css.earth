@@ -1,22 +1,22 @@
 {
-  "id": "source-sylvia-sylvia-sphere-20181112061547",
+  "id": "source-sylvia-sylvia-sphere-20181112055728",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Sylvia · sylvia sphere 20181112061547",
+  "title": "Sylvia · sylvia sphere 20181112055728",
   "identifiers": [],
   "links": [
     {
       "role": "landing",
-      "url": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T06_15_47.663_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T05_57_28.603_zpl_science_imaging_cam1.fits",
       "label": "Source"
     }
   ],
   "evidence": [
     {
       "path": "src/objects/sylvia/source/manifest.json",
-      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
-      "sha256": "0323ed4e606273f3606b96c3bece1521e3920bf50f6bf751fc2ae60710f640f9",
-      "locator": "/inputs/22"
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/38"
     }
   ],
   "relations": [],
@@ -24,7 +24,7 @@
     {
       "kind": "credit",
       "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-      "scope": "The sylvia sphere 20181112061547 input.",
+      "scope": "The sylvia sphere 20181112055728 input.",
       "evidence": "Manifest credit field."
     },
     {

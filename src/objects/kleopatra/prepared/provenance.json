@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7dea6e9b0010247aa8dad8a9d9b7e68e49ecbb91542fef4aaba164477aa25b5f"
+    "sha256": "b8d7e44f8dd399664e9d5ab78075467edf07974391f56fd54e33f8fffb73c8ae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "511070adfff3b155d9fbdb310ca0bcea1a2f81b3675a19e5d5fb9c9fd269dc42",
+      "sha256": "adc36b0588aab8fc8de11ab71d739de7b613b32bd6ecff7037d857988a84d220",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -107,8 +107,8 @@
                   "northAzimuthDegrees": 318.7974,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.523,
-                    127.296
+                    128.479,
+                    126.988
                   ]
                 },
                 {
@@ -123,8 +123,8 @@
                   "northAzimuthDegrees": 318.7976,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.571,
-                    127.892
+                    128.508,
+                    127.831
                   ]
                 },
                 {
@@ -139,8 +139,8 @@
                   "northAzimuthDegrees": 318.7978,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.858,
-                    127.779
+                    127.814,
+                    127.746
                   ]
                 },
                 {
@@ -155,8 +155,8 @@
                   "northAzimuthDegrees": 318.7981,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.985,
-                    127.464
+                    128.023,
+                    127.472
                   ]
                 },
                 {
@@ -171,8 +171,8 @@
                   "northAzimuthDegrees": 319.4225,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.815,
-                    126.633
+                    127.735,
+                    126.642
                   ]
                 },
                 {
@@ -203,8 +203,8 @@
                   "northAzimuthDegrees": 319.4229,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.306,
-                    126.496
+                    128.173,
+                    126.501
                   ]
                 },
                 {
@@ -219,8 +219,8 @@
                   "northAzimuthDegrees": 319.4232,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.679,
-                    127.752
+                    127.591,
+                    127.736
                   ]
                 },
                 {
@@ -283,8 +283,8 @@
                   "northAzimuthDegrees": 319.4254,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.762,
-                    128.07
+                    128.955,
+                    127.854
                   ]
                 },
                 {
@@ -315,8 +315,8 @@
                   "northAzimuthDegrees": 319.4258,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    129.085,
-                    126.985
+                    129.096,
+                    126.951
                   ]
                 },
                 {
@@ -331,8 +331,8 @@
                   "northAzimuthDegrees": 319.8079,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.321,
-                    127.573
+                    127.316,
+                    127.48
                   ]
                 },
                 {
@@ -363,8 +363,8 @@
                   "northAzimuthDegrees": 319.8084,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    126.767,
-                    127.102
+                    126.719,
+                    126.991
                   ]
                 },
                 {
@@ -379,8 +379,8 @@
                   "northAzimuthDegrees": 319.8086,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    126.016,
-                    126.604
+                    125.792,
+                    126.559
                   ]
                 },
                 {
@@ -395,8 +395,8 @@
                   "northAzimuthDegrees": 319.8089,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.554,
-                    126.716
+                    126.96,
+                    126.893
                   ]
                 },
                 {
@@ -411,8 +411,8 @@
                   "northAzimuthDegrees": 320.7371,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.093,
-                    128.329
+                    127.082,
+                    128.37
                   ]
                 },
                 {
@@ -443,8 +443,8 @@
                   "northAzimuthDegrees": 320.7375,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.24,
-                    127.371
+                    127.242,
+                    127.37
                   ]
                 },
                 {
@@ -459,8 +459,8 @@
                   "northAzimuthDegrees": 320.7376,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.142,
-                    127.201
+                    128.274,
+                    127.316
                   ]
                 },
                 {
@@ -523,8 +523,8 @@
                   "northAzimuthDegrees": 321.1824,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.553,
-                    126.983
+                    127.512,
+                    126.913
                   ]
                 },
                 {
@@ -539,8 +539,8 @@
                   "northAzimuthDegrees": 321.1825,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    126.82,
-                    126.771
+                    126.832,
+                    126.84
                   ]
                 },
                 {
@@ -555,8 +555,8 @@
                   "northAzimuthDegrees": 321.1826,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    126.914,
-                    127.209
+                    126.906,
+                    127.187
                   ]
                 }
               ]
@@ -2550,14 +2550,14 @@
       "outputs": [
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-thumbnail.webp",
-          "bytes": 1020,
-          "sha256": "b5cca14854b04b250f20c968341a36ff007fe55d9d95f56b3c6ecfe09c1afdf1",
+          "bytes": 1018,
+          "sha256": "d7ae9747685c21e879b41e73cd88eda68cc8ff459735e59536376a05fae0f630",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/kleopatra/kleopatra-zimpol-surface@2x.webp",
-          "bytes": 254842,
-          "sha256": "52cd6f0bd9117f73918c617263010d39368c59517fe4e0feddd99c988d48bb17",
+          "bytes": 254112,
+          "sha256": "7169002b58b8b2dbf88a78489c192d1adc862aa83f99c0509b459bf4a2673cc8",
           "verification": "bytes-verified"
         }
       ],
@@ -2640,8 +2640,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8308,
-          "sha256": "cfd204d8d60381db957261d335261e369e8f3e26567c2959819b6965fcec9716",
+          "bytes": 8442,
+          "sha256": "2b7f2579b2c9e85d6eee33ee818b69b7b6e7c341c851861dcbddf631e944be39",
           "verification": "bytes-verified"
         }
       ]
@@ -2653,7 +2653,7 @@
   },
   "lastPreparation": {
     "objectId": "kleopatra",
-    "materialSha256": "644419fb5e33f90636d182284445fdc1c68f1f6b3fdd55cefbf6b045907e9069",
+    "materialSha256": "ad8292ef219fb186d7c3f61864fcd09fc084ff8e4031a6a03e1ded433b806bd3",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

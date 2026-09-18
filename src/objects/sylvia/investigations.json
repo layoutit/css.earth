@@ -77,6 +77,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
         }
       ]
     },
@@ -98,6 +102,10 @@
         {
           "date": "2026-09-18",
           "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
         }
       ]
     },
@@ -105,7 +113,7 @@
       "id": "zimpol-published-comparison",
       "subject": "Vernazza et al. (2021) Figure B.29 as the registration of the SPHERE photograph lens",
       "status": "included",
-      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.29, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.953 to 0.967 at our phase, against 0.962 to 0.971 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 6 of 8 columns, one step from it in 2. With the paper’s photographs 0.946 to 0.965. Turned in the image, our outline best overlaps the paper’s photographs at -0.5 to 2.0° and its model panels at -2.5 to 0.0°. The spin axis we project lies at 85.7 to 86.2° on the sky against 83.8 to 84.3° for the figure’s arrows. Native outline residual 5.754 px mean over 32 frames at our phase; the sweep’s lowest is 5.576 px at 6°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 1.73° from the published pole.",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.29, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.953 to 0.967 at our phase, against 0.962 to 0.971 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 6 of 8 columns, one step from it in 2. With the paper’s photographs 0.946 to 0.965. Turned in the image, our outline best overlaps the paper’s photographs at -0.5 to 2.0° and its model panels at -2.5 to 0.0°. The spin axis we project lies at 85.7 to 86.2° on the sky against 83.8 to 84.3° for the figure’s arrows. Native outline residual 5.298 px mean over 32 frames at our phase; the sweep’s lowest is 5.212 px at 14°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 1.73° from the published pole. Left out by name: zimpol-20181112-061547. Its limb fit does not settle: after 8 full and 16 half steps the centre still moves 0.55 px, and a lens states only settled centres. The figure does not show it.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/",
@@ -114,7 +122,7 @@
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+          "commit": "02e5ba7c2e5069f84e2353d04709ff04fdba8746"
         }
       ]
     }

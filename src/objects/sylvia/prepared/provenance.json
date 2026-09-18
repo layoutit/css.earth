@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b33607c7f8eca2a1e6f70d2d62a09184ebb86da781b15fd34d3be5bd41cc14b9"
+    "sha256": "37a44e7e107f861ba766aee74232af64050978c14936d9455454316cc18c7d66"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b56a4a788a19cd2935de0e2e3b60df7beee4fb98593a856b349f1eefbf3aac86"
+    "bindingsSha256": "55f3a8e58e469f28aec8ebfbeff8246660e9c54ce4d027ef944e72e823685bc8"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a1b11598957ae523e6b313f9c8e9520bb30f7d198f887f697d251e2fcadce11d",
+      "sha256": "50faab7289fcc70cc8275b2762a80464faf451e13286d5d35721bf27a021ed21",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -314,6 +314,22 @@
                   ]
                 },
                 {
+                  "id": "zimpol-20181112-055728",
+                  "path": "observations/d87Sylvia_2018-11-12T05_57_28.603_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -18.255,
+                  "observerWestLongitude": 57.4053,
+                  "sunLatitude": -19.28,
+                  "sunWestLongitude": 59.9274,
+                  "rangeKm": 359821428.4,
+                  "northAzimuthDegrees": 4.0026,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.945,
+                    136.45
+                  ]
+                },
+                {
                   "id": "zimpol-20181112-060203",
                   "path": "observations/d87Sylvia_2018-11-12T06_02_03.309_zpl_science_imaging_cam1.fits",
                   "encoding": "fits-zimpol-intensity",
@@ -341,7 +357,7 @@
                   "northAzimuthDegrees": 4.0025,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    125.309,
+                    125.308,
                     139.877
                   ]
                 },
@@ -359,22 +375,6 @@
                   "center": [
                     125.11,
                     138.024
-                  ]
-                },
-                {
-                  "id": "zimpol-20181112-061547",
-                  "path": "observations/d87Sylvia_2018-11-12T06_15_47.663_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -18.2551,
-                  "observerWestLongitude": 78.6105,
-                  "sunLatitude": -19.2807,
-                  "sunWestLongitude": 81.128,
-                  "rangeKm": 359819889.2,
-                  "northAzimuthDegrees": 4.0024,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    125.33,
-                    137.556
                   ]
                 },
                 {
@@ -1553,6 +1553,58 @@
     },
     {
       "kind": "source-input",
+      "id": "sylvia-sphere-20181112055728",
+      "path": "observations/d87Sylvia_2018-11-12T05_57_28.603_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T05_57_28.603_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sylvia-sylvia-sphere-20181112055728",
+            "role": "material",
+            "evidence": "src/objects/sylvia/source/manifest.json@0000000000000000000000000000000000000000#/inputs/38"
+          }
+        ]
+      },
+      "sha256": "28e4a763c6a82135d1a8ddc583350f0f2dd486754f195261bef1be3ce0437dd3",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d87Sylvia_2018-11-12T05_57_28.603_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T05_57_28.603_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "sylvia-sphere-20181112060203",
       "path": "observations/d87Sylvia_2018-11-12T06_02_03.309_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T06_02_03.309_zpl_science_imaging_cam1.fits",
@@ -1701,58 +1753,6 @@
         ],
         "path": "observations/d87Sylvia_2018-11-12T06_11_12.561_zpl_science_imaging_cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T06_11_12.561_zpl_science_imaging_cam1.fits",
-        "headers": {
-          "Cookie": "CesAM_LAM_opens_the_door=1"
-        }
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "sylvia-sphere-20181112061547",
-      "path": "observations/d87Sylvia_2018-11-12T06_15_47.663_zpl_science_imaging_cam1.fits",
-      "origin": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T06_15_47.663_zpl_science_imaging_cam1.fits",
-      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "vlt-ut3",
-            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
-            "missionId": "eso-sphere-asteroid-survey"
-          }
-        ]
-      },
-      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
-      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
-      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
-      "width": 256,
-      "height": 256,
-      "lensId": "zimpol",
-      "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-sylvia-sylvia-sphere-20181112061547",
-            "role": "material",
-            "evidence": "src/objects/sylvia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/22"
-          }
-        ]
-      },
-      "sha256": "d145e98154d1ce8acdad69d78b7cb028a0090fd300bafe9bb34ab5ce100a25b5",
-      "bytes": 593280,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "restore",
-          "refresh"
-        ],
-        "path": "observations/d87Sylvia_2018-11-12T06_15_47.663_zpl_science_imaging_cam1.fits",
-        "url": "https://observations.lam.fr/astero/Data/87Sylvia/Deconv/d87Sylvia_2018-11-12T06_15_47.663_zpl_science_imaging_cam1.fits",
         "headers": {
           "Cookie": "CesAM_LAM_opens_the_door=1"
         }
@@ -2792,10 +2792,10 @@
         "sylvia-sphere-20181019043052",
         "sylvia-sphere-20181019043529",
         "sylvia-sphere-20181019044004",
+        "sylvia-sphere-20181112055728",
         "sylvia-sphere-20181112060203",
         "sylvia-sphere-20181112060638",
         "sylvia-sphere-20181112061112",
-        "sylvia-sphere-20181112061547",
         "sylvia-sphere-20181112065812",
         "sylvia-sphere-20181112070246",
         "sylvia-sphere-20181112070720",
@@ -2817,14 +2817,14 @@
       "outputs": [
         {
           "url": "/scenes/sylvia/sylvia-zimpol-thumbnail.webp",
-          "bytes": 1482,
-          "sha256": "4ce7a7e4d19b1c8bc6c569992d83526d88a758f8f7800e64e6641b1c4471f52b",
+          "bytes": 1402,
+          "sha256": "69ed3e2fe53e7ddd0589078cf95cc239e6f237202770fbac822d07368e188bf3",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sylvia/sylvia-zimpol-surface@2x.webp",
-          "bytes": 216960,
-          "sha256": "78e9f29bc98a515834396b51877923083a93ec187ea1287c6feee89a7a3f5d8e",
+          "bytes": 213842,
+          "sha256": "7f8b6d74abe921302ffaedeac96af4ecc4d3fab2e0d2a2ffcaa093915411caca",
           "verification": "bytes-verified"
         }
       ],
@@ -2907,8 +2907,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 8812,
-          "sha256": "468132fef6f850151ec300b87a2a8bca3584fc83dba5635215392ac49aad7525",
+          "bytes": 9042,
+          "sha256": "d29b54edb6e08e05b0da04cddff0d2ee8d54835512428acd0a5e4a24606dce2b",
           "verification": "bytes-verified"
         }
       ]
@@ -2945,11 +2945,11 @@
   },
   "lastPreparation": {
     "objectId": "sylvia",
-    "materialSha256": "2e74f008962bd09278519406f6a39806feb604468ff2239282fafe26aa9d2d69",
+    "materialSha256": "72def3358e8b1916b6094087b77c58d51c9fb067d40be5a669d1683df4efb10d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b56a4a788a19cd2935de0e2e3b60df7beee4fb98593a856b349f1eefbf3aac86"
+      "bindingsSha256": "55f3a8e58e469f28aec8ebfbeff8246660e9c54ce4d027ef944e72e823685bc8"
     }
   }
 }
