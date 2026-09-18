@@ -116,38 +116,23 @@ for (const name of selected) {
   const engine = ENGINES[name];
   if (!engine) throw new Error(`Unknown engine ${name}.`);
 
-  test(`${name}: a browser tab is never controlled, and an earlier worker is removed`, async t => {
+  test(`${name}: the offline worker never keeps a visitor on stale content`, async t => {
     const site = new Site();
     const base = await site.start();
     const browser = await engine.launch({ headless: true });
     t.after(async () => { await browser.close(); await site.stop(); });
-    const page = await (await browser.newContext()).newPage();
-    assert.equal((await open(page, `${base}/alpha/`)).controlled, false);
-    assert.equal((await state(page)).registrations, 0);
-    // A worker registered by an earlier build (the tab rule came later).
-    await page.evaluate(async () => { await navigator.serviceWorker.register('/sw.js'); await navigator.serviceWorker.ready; await (await caches.open('cssearth-runtime-v1')).put('/planted', new Response('old')); });
-    await open(page, `${base}/alpha/`);
-    await page.waitForFunction(async () => (await navigator.serviceWorker.getRegistrations()).length === 0);
-    await page.waitForFunction(async () => (await caches.keys()).every(name => !name.startsWith('cssearth-')));
-    assert.deepEqual(await state(page), { registrations: 0, caches: [] });
-  });
+    let page = await (await browser.newContext()).newPage();
 
-  test(`${name}: the installed app works offline and never keeps a visitor on stale content`, async t => {
-    const site = new Site();
-    const base = await site.start();
-    const browser = await engine.launch({ headless: true });
-    t.after(async () => { await browser.close(); await site.stop(); });
-    const context = await browser.newContext();
-    // Playwright cannot launch an installed app, so the page sees the display
-    // mode an installed app reports.
-    await context.addInitScript(() => {
-      const original = window.matchMedia.bind(window);
-      window.matchMedia = query => query === '(display-mode: standalone)'
-        ? { matches: true, media: query, onchange: null, addListener() {}, removeListener() {},
-            addEventListener() {}, removeEventListener() {}, dispatchEvent: () => false } as MediaQueryList
-        : original(query);
-    });
-    let page = await context.newPage();
+    if (name === 'firefox') {
+      // Firefox tabs are never controlled, and a worker left by an earlier build is removed.
+      assert.equal((await open(page, `${base}/alpha/`)).controlled, false);
+      assert.equal((await state(page)).registrations, 0);
+      await page.evaluate(async () => { await navigator.serviceWorker.register('/sw.js'); await navigator.serviceWorker.ready; await (await caches.open('cssearth-runtime-v1')).put('/planted', new Response('old')); });
+      await open(page, `${base}/alpha/`);
+      await page.waitForFunction(async () => (await navigator.serviceWorker.getRegistrations()).length === 0);
+      assert.deepEqual(await state(page), { registrations: 0, caches: [] });
+      return;
+    }
 
     await t.test('a visit is stored for offline use', async () => {
       await open(page, `${base}/alpha/`);
@@ -174,9 +159,8 @@ for (const name of selected) {
     await t.test('when the connection returns, fresh files arrive without a reload', async () => {
       site.version = 3;
       site.down = false;
-      // Within the window either version may answer (a restarted worker has
-      // already forgotten the failure); after it, only the fresh one.
-      assert.ok(['v2', 'v3'].includes(await liveData(page)));
+      // Within the window after the failure, storage still answers first.
+      assert.equal(await liveData(page), 'v2');
       await page.waitForTimeout(NETWORK_DOWN_WINDOW_MS + 500);
       assert.equal(await liveData(page), 'v3');
     });

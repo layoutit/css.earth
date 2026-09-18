@@ -93,10 +93,8 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
       import { registerServiceWorker } from '../service-worker-registration.mts';
-      import { bindInstallPrompt } from '../install-prompt.mts';
       bindNativeViewForms(document, window);
       registerServiceWorker(window, import.meta.env.PROD);
-      bindInstallPrompt(window);
       import("../scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         delete document.documentElement.dataset.shellContext;
