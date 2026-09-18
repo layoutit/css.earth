@@ -8,8 +8,10 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireRecord, requireString } from '../source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '../source-values.mts';
+import { COMPARISON_SPEC_FILE, parseComparisonSpec } from './surface-observations/published-comparison.mts';
 import { offsetAgreementDegrees, VERDICT_DEGREES } from './surface-observations/registration.mts';
+import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './terrestrial-layers/observer-cameras.mts';
 
 export const REGISTRATION_BLOCK_BEGIN = '<!-- registration-report:begin -->';
 export const REGISTRATION_BLOCK_END = '<!-- registration-report:end -->';
@@ -38,8 +40,11 @@ export function registrationVerdict(registration: Record<string, unknown>): 'reg
   return !offsets.length ? 'no verdict' : offsets.every(value => Math.abs(value) <= VERDICT_DEGREES) ? 'registered' : 'conflict';
 }
 
+/** A lens that ships on its paper's comparison figure, as the block states it: the figure and the paper's DOI. */
+export interface ShippedComparison { lensId: string; figure: string; source: string }
+
 /** The block for one object's prepared surfaces, or null when no lens carries a registration stage. */
-export function registrationBlock(surfaces: unknown): string | null {
+export function registrationBlock(surfaces: unknown, comparisons: readonly ShippedComparison[] = []): string | null {
   const lenses = requireArray(requireRecord(surfaces).surfaces).map(value => requireRecord(value));
   const rows: string[] = [];
   for (const lens of lenses) {
@@ -73,6 +78,8 @@ export function registrationBlock(surfaces: unknown): string | null {
     '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |',
     '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
     ...rows,
+    ...comparisons.filter(comparison => rows.some(row => row.startsWith(`| \`${comparison.lensId}\` |`))).flatMap(comparison => ['',
+      `\`${comparison.lensId}\` ships on its paper\u2019s comparison, [${comparison.figure}](${comparison.source}), measured in [\`evidence/published-comparison.json\`](evidence/published-comparison.json); its verdict is reported, not a gate.`]),
     '',
     'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.',
   ].join('\n');
@@ -86,8 +93,17 @@ export function withRegistrationBlock(readme: string, block: string | null) {
   return { readme: readme.slice(0, begin + REGISTRATION_BLOCK_BEGIN.length) + inside + readme.slice(end), replaced: true };
 }
 
+/** The comparison a body's ground-based lens ships on, from its observer-cameras record and comparison spec, or none. */
+export async function shippedComparisons(objectDirectory: string): Promise<ShippedComparison[]> {
+  let record;
+  try { record = parseObserverCameras(JSON.parse(await readFile(resolve(objectDirectory, 'source', OBSERVER_CAMERAS_FILE), 'utf8'))); } catch (error) { if (hasErrorCode(error, 'ENOENT')) return []; throw error; }
+  if (!record.publishedComparison) return [];
+  const spec = parseComparisonSpec(JSON.parse(await readFile(resolve(objectDirectory, 'source', COMPARISON_SPEC_FILE), 'utf8')));
+  return [{ lensId: spec.lensId, figure: spec.figure, source: spec.source }];
+}
+
 export async function registrationBlockFor(objectDirectory: string) {
-  return registrationBlock(JSON.parse(await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8')));
+  return registrationBlock(JSON.parse(await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8')), await shippedComparisons(objectDirectory));
 }
 
 const invoked = process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href;

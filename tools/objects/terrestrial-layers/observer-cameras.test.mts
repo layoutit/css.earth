@@ -46,15 +46,13 @@ test('the record refuses a rotation model it cannot evaluate', () => {
   assert.throws(() => parseObserverCameras({ ...base, schema: 'other', rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first' } }), /schema/);
 });
 
-test('a published comparison names its paper by DOI, its figure and its ledger entry', () => {
+test('a published comparison names only the ledger entry that decides it', () => {
   const base = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: 'zimpol', rotation: { kind: 'spin-record', path: 'p', columnOrder: 'longitude-first' },
     ephemeris: { observer: 'a', heliocentric: 'b' }, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
-  const comparison = { source: 'https://doi.org/10.1051/0004-6361/201834541', figure: 'Figure 2', ledgerEntry: 'zimpol-published-comparison' };
-  assert.deepEqual(parseObserverCameras({ ...base, publishedComparison: comparison }).publishedComparison, comparison);
+  assert.deepEqual(parseObserverCameras({ ...base, publishedComparison: { ledgerEntry: 'zimpol-published-comparison' } }).publishedComparison, { ledgerEntry: 'zimpol-published-comparison' });
   assert.equal(parseObserverCameras(base).publishedComparison, undefined, 'the block is optional');
-  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ...comparison, source: 'Hanus et al. 2019' } }), /DOI/);
-  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ...comparison, figure: ' ' } }), /figure/);
-  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ...comparison, ledgerEntry: 'Figure 2' } }), /ledger entry/);
+  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ledgerEntry: 'Figure 2' } }), /ledger entry/);
+  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ledgerEntry: 'x', figure: 'Figure B.6' } }), /published-comparison.json/);
 });
 
 test('a frame header states its exposure, and the midpoint is half the stated exposure after the start', () => {
