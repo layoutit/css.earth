@@ -47,17 +47,20 @@ jobs:
       - name: Build shared packages and affected entry points
         run: pnpm build:tools
       - name: Test asset inventory, publish verification and closure tooling
-        # Fast, self-contained unit tests (temp-directory fixtures and injected fetchers/transports, no network,
-        # no restored assets) for the tools that construct and verify runtime/prepared asset inventories and the
-        # publish gate below. Deliberately not part of the wider `pnpm test:platform` (which this workflow does
-        # not run at all, and which currently has 37 pre-existing unrelated failures) — this is the narrow slice
-        # of it that actually needs CI coverage. Needs build:tools (site/objects.mts's generated catalog), not
-        # setup:assets: every case here uses its own temp fixture, never a restored prepared/runtime.json.
+        # Fast, self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no
+        # network, no restored assets) for the tools that construct and verify runtime/prepared asset inventories,
+        # the publish gate below, the object-scope gate (its own workflow, object-scope.yml, calls the same tool
+        # at runtime), and the prune dry-run report. Deliberately not part of the wider `pnpm test:platform` (which
+        # this workflow does not run at all, and which currently has 37 pre-existing unrelated failures) — this is
+        # the narrow slice of it that actually needs CI coverage. Needs build:tools (site/objects.mts's generated
+        # catalog), not setup:assets: every case here uses its own temp fixture, never a restored prepared/runtime.json.
         run: >-
           node --test tools/runtime-assets.test.mts
           tools/publish-verification.test.mts
           tools/check-assets-published.test.mts
           src/platform/runtime-asset-closure.test.mts
+          tools/object-scope-gate.test.mts
+          tools/prune-runtime-assets.test.mts
       - name: Check published assets
         # HEAD every key in both inventory kinds (runtime-assets.json and prepared-assets.json) and fail with the
         # list of misses before anything is restored, so a contributor who bakes locally but forgets to publish
