@@ -28,10 +28,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Shape only",
-      "detail": "Published radius",
-      "summary": "A sphere of the measured radius, lit by its star. No image, colour or map of this planet exists."
+    "temperature": {
+      "title": "JWST MIRI map",
+      "detail": "Our map from raw data",
+      "summary": "Heat at 15 µm, mapped here from ten raw JWST visits. A hot day side and a dark night side: no sign of an atmosphere."
     }
   }
 }

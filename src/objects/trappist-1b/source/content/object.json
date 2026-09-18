@@ -62,22 +62,67 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "temperature",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "trappist-1b-lens-shape.webp",
-        "surface": "trappist-1b-surface-shape.webp",
-        "poles": "trappist-1b-poles-shape.webp",
+        "id": "temperature",
+        "label": "MIRI 15 µm",
+        "qualification": "Reduced here from raw JWST exposures · MIRI 15 µm, 2022–2023",
+        "thumbnail": "trappist-1b-lens-temperature.webp",
+        "surface": "trappist-1b-surface-temperature.webp",
+        "poles": "trappist-1b-poles-temperature.webp",
         "source": {
-          "id": "trappist-1b-observational-measurements",
+          "id": "trappist-1b-miri-emission",
           "path": "../manifest.json",
-          "url": "https://doi.org/10.3847/PSJ/abd022"
+          "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
         },
-        "falseColor": false,
-        "notes": "No image or colour of TRAPPIST-1b exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit."
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "50",
+            "300",
+            "550"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "50",
+              "300",
+              "550"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
+        },
+        "notes": "About 520 K where the star is overhead, near zero on the night side: no sign of an atmosphere carrying heat around. The map is centred on the star-facing point because the hot spot's offset is not measured; north-south detail is not measured either."
       }
     ]
   },

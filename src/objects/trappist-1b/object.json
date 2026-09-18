@@ -13,7 +13,6 @@
         "panel-content",
         "lenses",
         "starfield",
-        "sky-sun",
         "system-markers",
         "scene",
         "controls",
@@ -30,9 +29,9 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "temperature",
               "source": "content",
-              "material": "lighting"
+              "material": "emission"
             }
           ]
         }
@@ -43,9 +42,9 @@
       },
       "materials": [
         {
-          "id": "lighting",
+          "id": "emission",
           "source": "raster",
-          "model": "lit"
+          "model": "emissive"
         }
       ],
       "sources": [
@@ -89,15 +88,20 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
         }
-      ]
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/planet-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/trappist-1b-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0cfd892c7f17165c2ef15fbb25948b4ef9ad53288e0971c7270fe3d24477303d"
+        "sha256": "e413cbf4da35d24184aa55f486e24a56ad61a8a3bbc55740326d08650742a4fa"
       }
     },
     "catalog": {
@@ -144,6 +148,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "90b82a02a001ba145aaf012935cc51eea440bb23ab669f416f813b9f1f82ad0f"
+    "sha256": "8266085b82e3d89735daec429ff0255738ad65ef19a339d93d6de72782a2b0eb"
   }
 }

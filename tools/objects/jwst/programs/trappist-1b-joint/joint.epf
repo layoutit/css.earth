@@ -1,0 +1,121 @@
+# Stage 5 Fit Parameters Documentation: https://eurekadocs.readthedocs.io/en/latest/ecf.html#stage-5-fit-parameters
+
+
+#Name	 	Value	 			Free?				PriorPar1		PriorPar2	PriorType
+# "Free?" can be free, fixed, white_free, white_fixed, shared, or independent
+# PriorType can be U (Uniform), LU (Log Uniform), or N (Normal).
+# If U/LU, PriorPar1 and PriorPar2 represent upper and lower limits of the parameter/log(the parameter).
+# If N, PriorPar1 is the mean and PriorPar2 is the standard deviation of a Gaussian prior.
+#-------------------------------------------------------------------------------------------------------
+time_offset     0					'independent'
+# ---------------------------------
+# TRAPPIST-1b phasecurve parameters
+# ---------------------------------
+rp              0.08590				'shared'			0.08590			0.01		N
+fp              940e-6				'shared'			861e-6			500e-6		N
+quasi_gamma     0					'fixed'
+AmpCos1         0.4				'shared'			0				1			U
+AmpSin1         0.0					'fixed'
+AmpCos2         0					'fixed'
+AmpSin2         0					'fixed'
+AmpCos1_pl1     0					'fixed'
+AmpSin1_pl1     0					'fixed'
+AmpCos2_pl1     0					'fixed'
+AmpSin2_pl1     0					'fixed'
+AmpCos1_pl2     0					'fixed'
+AmpSin1_pl2     0					'fixed'
+AmpCos2_pl2     0					'fixed'
+AmpSin2_pl2     0					'fixed'
+# ------------------------------
+# TRAPPIST-1b orbital parameters
+# ------------------------------
+per             1.5115				'shared'			1.5115			0.0013		N
+t0              60271.25424			'shared'			60271.25424		0.00089		N
+inc             89.728				'shared'			89.728			0.165		N
+a               20.843				'shared'			20.843			0.155		N
+t_secondary     60272.0120			'free'				60272.0120		0.0031		N
+
+t_secondary_ch1 59891.2730		'free'				59891.2730		0.0031		N
+t_secondary_ch2 59895.8051		'free'				59895.8051		0.0031		N
+t_secondary_ch3 59903.3600		'free'				59903.3600		0.0031		N
+t_secondary_ch4 59907.8922		'free'				59907.8922		0.0031		N
+t_secondary_ch5 59916.9579		'free'				59916.9579		0.0031		N
+
+t_secondary_ch6 59880.6968		'fixed'
+t_secondary_ch7 59913.9356		'fixed'
+t_secondary_ch8 59882.2074		'fixed'
+t_secondary_ch9 59889.7616		'fixed'
+
+ecc             0 					'fixed'
+w               90					'fixed'
+# ---------------------------------
+# TRAPPIST-1c phasecurve parameters
+# ---------------------------------
+rp_pl1          0.08440				'shared'			0.08440			0.01		N
+fp_pl1          421e-6				'shared'			421e-6			500e-6		N
+quasi_gamma_pl1 3					'shared'			3				0.5			N
+# ------------------------------
+# TRAPPIST-1c orbital parameters
+# ------------------------------
+per_pl1         2.4211				'shared'			2.4211			0.0012		N
+t0_pl1          60273.23403			'shared'			60273.23403		0.00085		N
+inc_pl1         89.778				'shared'			89.778			0.118		N
+a_pl1           28.549				'shared'			28.549			0.212		N
+t_secondary_pl1 60272.0236		'free'				60272.0236		0.0037	N
+
+t_secondary_pl1_ch1	59891.7993		'fixed'
+t_secondary_pl1_ch2	59895.2215		'fixed'
+t_secondary_pl1_ch3	59903.9083		'fixed'
+t_secondary_pl1_ch4	59908.7527		'fixed'
+t_secondary_pl1_ch5	59918.4397		'fixed'
+
+t_secondary_pl1_ch6	59879.6903		'free'				59879.6903		0.0036		N
+t_secondary_pl1_ch7	59913.5960		'free'				59913.5960		0.0036		N
+t_secondary_pl1_ch8	59882.1125		'free'				59882.1125		0.0036		N
+t_secondary_pl1_ch9	59889.3781		'free'				59889.3781		0.0036		N
+
+ecc_pl1         0 					'fixed'
+w_pl1           90					'fixed'
+# ---------------------------------
+# TRAPPIST-1g phasecurve parameters
+# ---------------------------------
+rp_pl2          0.08590				'shared'			0.08590			0.01		N
+fp_pl2          0					'fixed'
+quasi_gamma_pl2 0					'fixed'
+# ------------------------------
+# TRAPPIST-1g orbital parameters
+# ------------------------------
+per_pl2         12.3556				'shared'			12.3556			0.0021		N
+t0_pl2          60271.4793			'shared'			60271.4761		0.0015		N
+inc_pl2         89.742				'shared'			89.742			0.012		N
+a_pl2           84.591				'shared'			84.591			0.628		N
+t_secondary_pl2 60277.6571		'fixed'
+ecc_pl2         0 					'fixed'
+w_pl2           90					'fixed'
+# -------------------------
+# Limb darkening parameters
+# -------------------------
+limb_dark       'kipping2013'		'independent'
+u1              0.05				'shared'			0				1			U
+u2              0.16				'shared'			0				1			U
+# --------------------
+# Systematic variables
+# --------------------
+c0              0.99995				'free'			1.0				0.001		N
+c1              0.00008				'free'			0.0				0.001		N
+# Centroid decorrelation parameters
+ypos            0.01				'free'			0.01			1			N
+xpos            0.004				'free'			0.004			1			N
+ywidth          0.09				'free'			0.09			1			N
+xwidth          0.11				'free'			0.11			1			N
+# GP Parameters
+A               -17					'free'			-24				-10			U
+m               -4					'free'			-7				0			U
+# -----------
+# White noise
+# -----------
+scatter_mult    1.17				'free'			1.17			0.3			N
+# ---------------------------------------
+# Light travel time correction parameters
+# ---------------------------------------
+Rs              0.1192				'fixed'  # Agol et al. 2021
