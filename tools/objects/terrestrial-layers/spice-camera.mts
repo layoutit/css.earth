@@ -13,7 +13,11 @@ const projectRoot = resolve(import.meta.dirname, '../../..');
  * root, or a checkout under a different home directory). Recorded evidence must be reproducible across machines and
  * checkouts, so it names each kernel relative to the project root rather than embedding that absolute path. */
 function kernelEvidence(set: KernelSet) {
-  return set.kernels.map(kernel => ({ path: relative(projectRoot, kernel.path), bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind }));
+  return set.kernels.map(kernel => {
+    const path = relative(projectRoot, kernel.path);
+    if (path.startsWith('..')) throw new Error(`Kernel evidence path escapes the project root: ${kernel.path}`);
+    return { path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind };
+  });
 }
 
 /**
