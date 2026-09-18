@@ -25,17 +25,25 @@ export interface SurfaceObservation {
 }
 
 /**
- * The level fit's refusal with the frames it would adjust beyond its budget named, each against the first frame, which
- * anchors the display, and against the median frame. A dim first frame puts every other frame over budget; the median
- * shows which frames disagree with the rest. Any other error passes through unchanged.
+ * The level fit's refusal with the frames named. Frames it would adjust beyond its budget are named against the first
+ * frame, which anchors the display, and against the median frame; with seasons, against their own season's first and
+ * median frames. A dim first frame puts every other frame over budget; the median shows which frames disagree with the
+ * rest. Frames no accepted overlap joins are named by group. Any other error passes through unchanged.
  */
 export function namedLevelRefusal(error: unknown, ids: readonly string[], maximumGain: number): unknown {
-  const cause = error instanceof Error && typeof error.cause === 'object' && error.cause !== null ? error.cause as { gains?: unknown } : null;
+  const cause = error instanceof Error && typeof error.cause === 'object' && error.cause !== null ? error.cause as { gains?: unknown; groups?: unknown; seasons?: unknown } : null;
+  if (!(error instanceof Error)) return error;
+  const groups = Array.isArray(cause?.groups) && cause.groups.every(group => Array.isArray(group) && group.every(i => Number.isInteger(i) && i >= 0 && i < ids.length)) ? cause.groups as number[][] : null;
+  if (groups) return new Error(`${error.message} Groups no accepted overlap joins: ${groups.map(group => group.map(i => ids[i]).join(', ')).join(' | ')}.`, { cause: error.cause });
   const gains = Array.isArray(cause?.gains) && cause.gains.length === ids.length && cause.gains.every(gain => typeof gain === 'number') ? cause.gains as number[] : null;
-  if (!(error instanceof Error) || !gains) return error;
-  const median = [...gains].sort((a, b) => a - b)[Math.floor(gains.length / 2)];
+  if (!gains) return error;
+  const seasons = Array.isArray(cause?.seasons) && cause.seasons.length === ids.length ? cause.seasons as number[] : ids.map(() => 0);
   const beyond = (ratio: number) => !Number.isFinite(ratio) || ratio > maximumGain || ratio < 1 / maximumGain;
-  const named = ids.flatMap((id, i) => beyond(gains[i]) || beyond(gains[i] / median) ? [`${id} ${gains[i].toFixed(2)}× the first frame's level, ${(gains[i] / median).toFixed(2)}× the median frame's`] : []);
+  const seasonal = new Set(seasons).size > 1, first = seasonal ? 'its season\'s first frame\'s level' : 'the first frame\'s level', middle = seasonal ? 'its season\'s median frame\'s' : 'the median frame\'s';
+  const named = ids.flatMap((id, i) => {
+    const members = gains.filter((_, j) => seasons[j] === seasons[i]), median = [...members].sort((a, b) => a - b)[Math.floor(members.length / 2)], anchor = gains[seasons.indexOf(seasons[i])];
+    return beyond(gains[i] / anchor) || beyond(gains[i] / median) ? [`${id} ${(gains[i] / anchor).toFixed(2)}× ${first}, ${(gains[i] / median).toFixed(2)}× ${middle}`] : [];
+  });
   return new Error(`${error.message} Beyond the ${maximumGain}× budget: ${named.join('; ')}.`, { cause: error.cause });
 }
 
@@ -84,7 +92,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     ? frames.map((): Missing | Accepted => missing(point.map(n => n * metersPerUnit), 'estimated-geometry')) : sampleAll(point).values);
   if (frames.length > 1 && !policy.levelMatching) throw new Error('A multi-frame observation needs its level-matching budget.');
   const fit = (levelMatching: NonNullable<typeof policy.levelMatching>) => {
-    try { return fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), levelMatching); }
+    try { return fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), levelMatching, policy.levelSeasons); }
     catch (error) { throw namedLevelRefusal(error, frames.map(frame => frame.id), levelMatching.maximumGain); }
   };
   const levels = frames.length === 1 || !policy.levelMatching ? { gains: [1], pairs: [] } : fit(policy.levelMatching);

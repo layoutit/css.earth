@@ -17,15 +17,23 @@ export function sampleTrianglePoints(faces: Pick<PreparedTriangle, "vertices">[]
   }));
 }
 
+/** The most frames one fit compares, and so the most a controlled-camera lens may cast. The fit compares every pair, so
+ * its cost grows with the square of the count; the SPHERE survey's largest release is 85 camera-1 frames (Bamberga). */
+export const MAXIMUM_LEVEL_FRAMES = 96;
+
 /** Fit one bounded log gain per observation from robust co-located overlap
  * ratios. Frames join through accepted overlaps, and each group keeps the level
  * of its first frame, so the first observation anchors the display and a frame
  * no accepted overlap reaches keeps its own calibrated brightness. Reject gains
- * outside the authored budget rather than inventing a calibration. */
-export function fitObservationLevels(samples: ObservationSample[][], policy: ObservationLevelPolicy) {
+ * outside the authored budget rather than inventing a calibration.
+ *
+ * Frames with no calibrated level name their observing season instead, one index per frame. Every frame must then be
+ * reached by accepted overlaps, because an unreached frame has no level of its own to keep. Each season's level comes
+ * from the overlaps alone, and the budget bounds every frame against its own season's first frame. */
+export function fitObservationLevels(samples: ObservationSample[][], policy: ObservationLevelPolicy, seasons?: readonly number[]) {
   const count = samples.length;
-  // The bound matches the controlled-camera frame cap; the fit compares every pair, so its cost grows with the square of the count.
-  if (count < 2 || count > 32 || samples.some(s => s.length !== samples[0].length)) throw new Error('Invalid observation overlap samples.');
+  if (count < 2 || count > MAXIMUM_LEVEL_FRAMES || samples.some(s => s.length !== samples[0].length)) throw new Error('Invalid observation overlap samples.');
+  if (seasons && (seasons.length !== count || seasons.some(season => !Number.isInteger(season) || season < 0))) throw new Error('Invalid observation seasons.');
   const pairs: OverlapPair[] = [], weights = new Map<OverlapPair, number>();
   for (let a = 0; a < count; a++) for (let b = a + 1; b < count; b++) {
     const ratios = [];
@@ -52,6 +60,8 @@ export function fitObservationLevels(samples: ObservationSample[][], policy: Obs
   }
   const group = Array.from({ length: count }, (_, i) => i), root = (i: number): number => group[i] === i ? i : (group[i] = root(group[i]));
   for (const { a, b } of weights.keys()) { const ra = root(a), rb = root(b); if (ra !== rb) group[Math.max(ra, rb)] = Math.min(ra, rb); }
+  const groups = [...new Set(group.map((_, i) => root(i)))].map(anchor => group.map((_, i) => i).filter(i => root(i) === anchor));
+  if (seasons && groups.length > 1) throw new Error('Observation overlaps leave frames unreached, and these frames carry no calibrated level to keep.', { cause: { groups, pairs } });
   const columns: number[] = [];
   let n = 0;
   for (let i = 0; i < count; i++) columns.push(root(i) === i ? -1 : n++);
@@ -71,10 +81,12 @@ export function fitObservationLevels(samples: ObservationSample[][], policy: Obs
       for (let j = k; j <= n; j++) augmented[i][j] -= factor * augmented[k][j]; }
   }
   const logGains = columns.map(column => column < 0 ? 0 : augmented[column][n]), gains = logGains.map(Math.exp);
-  if (gains.some(gain => !Number.isFinite(gain) || gain < 1 / policy.maximumGain || gain > policy.maximumGain)) throw new Error('Observation level fit exceeds its authored gain budget.', { cause: { gains, pairs } });
+  // Without seasons every frame answers to the first, whose gain is 1; with them, to its own season's first frame.
+  const anchor = (i: number) => seasons ? seasons.indexOf(seasons[i]) : 0;
+  if (gains.some((gain, i) => { const relative = gain / gains[anchor(i)]; return !Number.isFinite(relative) || relative < 1 / policy.maximumGain || relative > policy.maximumGain; }))
+    throw new Error('Observation level fit exceeds its authored gain budget.', { cause: { gains, pairs, ...(seasons ? { seasons } : {}) } });
   for (const pair of pairs) if (pair.accepted && pair.medianLogRatio !== null) pair.residualLogRatio = pair.medianLogRatio + logGains[pair.a] - logGains[pair.b];
-  const groups = [...new Set(group.map((_, i) => root(i)))].map(anchor => group.map((_, i) => i).filter(i => root(i) === anchor));
-  return { gains, pairs, referenceIndex: 0, ...(groups.length > 1 ? { groups } : {}),
+  return { gains, pairs, referenceIndex: 0, ...(groups.length > 1 ? { groups } : {}), ...(seasons && new Set(seasons).size > 1 ? { seasons: [...seasons] } : {}),
     interpretation: 'Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.' };
 }
 

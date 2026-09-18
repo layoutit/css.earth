@@ -18,6 +18,7 @@ import { castSourceRays } from '../geometry.mts';
 import { cameraFrame } from '../footprint.mts';
 import { diskPhotometry, publishedPhotometry } from '../photometry.mts';
 import { deriveLimits } from '../limits.mts';
+import { MAXIMUM_LEVEL_FRAMES } from '../levels.mts';
 import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, positive, validateEnvelope, validateTransfer, type EnvelopeRules } from '../recipe.mts';
 
 const CONTEXT = 'controlled camera recipe';
@@ -28,10 +29,29 @@ const BANDS = ['red', 'green', 'blue'] as const;
 type Band = typeof BANDS[number];
 // Raw detector frames through different filters and exposures need wide levels: Amalthea's Galileo frames measure 10.3 from their reference.
 // A survey night repeats the same view minutes apart, and those repeats are what set the registration stage's noise floor, so they
-// are not redundant frames to be thinned: Themis contributes 30 over six nights.
-/** The most frames one controlled-camera lens may cast. */
-export const CONTROLLED_CAMERA_MAXIMUM_FRAMES = 32;
+// are not redundant frames to be thinned: Themis contributes 30 over six nights, and a lens that casts several apparitions more.
+/** The most frames one controlled-camera lens may cast: as many as one level fit compares. */
+export const CONTROLLED_CAMERA_MAXIMUM_FRAMES = MAXIMUM_LEVEL_FRAMES;
 const RULES: Omit<EnvelopeRules, 'displays'> = { selections: ['finest-resolution', 'lowest-emission'], maximumFrames: CONTROLLED_CAMERA_MAXIMUM_FRAMES, maximumLevelGain: 16, samplesPerTriangle: 'optional' };
+
+/**
+ * A deconvolved ZIMPOL frame states no unit, and the survey's deconvolution changes scale between observing seasons:
+ * Kleopatra's 2017 frames total about 3 million and its 2018 frames about 60 million, through one filter at one detector
+ * gain, while one season's nights stay within about 3× of each other. Such frames share a level only within a season, and
+ * frames this many days or more apart are placed by their overlaps alone.
+ */
+export const DECONVOLVED_SEASON_GAP_DAYS = 120;
+const DECONVOLVED = 'fits-zimpol-intensity';
+
+/** Each frame's season, counted in time order: a frame starts a new season when it follows the one before by the gap or more. */
+export function observingSeasons(startTimes: readonly string[], gapDays = DECONVOLVED_SEASON_GAP_DAYS) {
+  const times = startTimes.map(time => Date.parse(/(?:Z|[+-]\d{2}:?\d{2})$/u.test(time) ? time : `${time}Z`));
+  if (times.some(time => !Number.isFinite(time))) throw new Error('A frame states no usable start time for its season.');
+  const order = times.map((_, i) => i).sort((a, b) => times[a] - times[b]), seasons = Array<number>(times.length);
+  let season = -1;
+  order.forEach((frame, k) => { if (k === 0 || times[frame] - times[order[k - 1]] >= gapDays * 86_400_000) season++; seasons[frame] = season; });
+  return seasons;
+}
 
 const diskBlock = shape({ model: text, weight: optional(number), referenceIncidenceDegrees: number, referenceEmissionDegrees: number,
   maximumIncidenceDegrees: number, maximumEmissionDegrees: number, maximumGain: number });
@@ -236,11 +256,14 @@ export const controlledCameraFormat: SurfaceObservationFormat = {
     const recipe = parseControlledCameraLens(value), photometry = await lensPhotometry(recipe.photometry, context), frames: ObservationFrame[] = [];
     for (const frame of recipe.frames) frames.push((await loadControlledFrame(frame, photometry, recipe.transfer, incidenceLimit(recipe.photometry), context)).frame);
     const quantity = recipe.frames.some(frame => frame.encoding === 'vicar-byte-dn') ? 'detector brightness, DN / 255'
-      : recipe.frames.some(frame => frame.encoding === 'fits-zimpol-intensity') ? 'deconvolved intensity'
+      : recipe.frames.some(frame => frame.encoding === DECONVOLVED) ? 'deconvolved intensity'
       : recipe.frames.some(frame => frame.encoding === 'fits-oi-reconstruction') ? 'reconstructed intensity'
       : 'I/F';
     const units = photometry.units ?? `relative ${retained(recipe.photometry) ? `${quantity} with original illumination` : `disk-normalized ${quantity}`}; linear ${recipe.display.palette ? 'palette' : 'grayscale'} display`;
-    return lensPolicy(recipe, frames, photometry, context, units);
+    const result = lensPolicy(recipe, frames, photometry, context, units);
+    // Deconvolved frames carry no calibrated level, so their level fit is told each frame's season.
+    return frames.length > 1 && recipe.frames.every(frame => frame.encoding === DECONVOLVED)
+      ? { ...result, policy: { ...result.policy, levelSeasons: observingSeasons(frames.map(frame => frame.startTime)) } } : result;
   },
 };
 

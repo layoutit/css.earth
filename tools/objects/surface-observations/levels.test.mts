@@ -5,6 +5,7 @@ import { test } from 'node:test';
 import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './levels.mts';
 import { validateSurfaceObservation, loadSurfaceObservation } from './index.mts';
 import { namedLevelRefusal } from './surface.mts';
+import { observingSeasons } from './formats/controlled-camera.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
@@ -87,6 +88,43 @@ test('level matching keeps unconnected frames at their own level, accepts precis
   assert.ok(Math.abs(fitObservationLevels(scattered(999), policy).gains[1] - 1.2) < 1e-12);
   assert.deepEqual(fitObservationLevels(scattered(99), policy).groups, [[0], [1]]);
   assert.throws(() => fitObservationLevels([Array(100).fill(sample(1)), Array(100).fill(sample(.1))], policy), /budget/);
+});
+
+test('frames without a calibrated level are placed season by season through their overlaps', () => {
+  // Two seasons 20× apart, as Kleopatra's 2017 and 2018 frames are; each season's frames within 1.2× of each other.
+  const levels = [1, 1.2, 20, 22], seasons = [0, 0, 1, 1];
+  const samples = levels.map(level => Array.from({ length: 300 }, (_, i) => sample((1 + i / 300) * level)));
+  assert.throws(() => fitObservationLevels(samples, { minimumPairs: 64, maximumGain: 4 }), /budget/, 'one budget across seasons refuses them');
+  const fit = fitObservationLevels(samples, { minimumPairs: 64, maximumGain: 4 }, seasons);
+  levels.forEach((level, i) => assert.ok(Math.abs(fit.gains[i] - 1 / level) < 1e-12, `frame ${i} matched to the first`));
+  assert.deepEqual(fit.seasons, seasons);
+  assert.equal('seasons' in fitObservationLevels(samples.slice(0, 2), { minimumPairs: 64, maximumGain: 4 }, [0, 0]), false, 'one season reports as before');
+  // Within a season the budget still holds, against the season's own first frame.
+  const wide = [1, 1.2, 20, 100].map(level => Array.from({ length: 300 }, (_, i) => sample((1 + i / 300) * level)));
+  let refusal: unknown;
+  try { fitObservationLevels(wide, { minimumPairs: 64, maximumGain: 4 }, seasons); } catch (error) { refusal = error; }
+  const named = namedLevelRefusal(refusal, ['a', 'b', 'c', 'd'], 4);
+  assert.ok(named instanceof Error);
+  assert.match(named.message, /Beyond the 4× budget: d 0\.20× its season's first frame's level/);
+});
+
+test('with seasons, a frame no accepted overlap reaches is refused and named', () => {
+  const samples = [Array(200).fill(sample(1)), Array(200).fill(sample(1.1)), Array(200).fill({ reason: 'missing' })];
+  let refusal: unknown;
+  try { fitObservationLevels(samples, { minimumPairs: 64, maximumGain: 4 }, [0, 0, 1]); } catch (error) { refusal = error; }
+  assert.ok(refusal instanceof Error && /no calibrated level/.test(refusal.message));
+  const named = namedLevelRefusal(refusal, ['a', 'b', 'c'], 4);
+  assert.ok(named instanceof Error);
+  assert.match(named.message, /Groups no accepted overlap joins: a, b \| c\.$/);
+  assert.deepEqual(fitObservationLevels(samples, { minimumPairs: 64, maximumGain: 4 }).groups, [[0, 1], [2]], 'without seasons the frame keeps its own level');
+});
+
+test('seasons follow the frames\' start times, a new one at the gap or more', () => {
+  assert.deepEqual(observingSeasons(['2017-07-14T05:00:59.538', '2017-08-22T01:42:34', '2018-12-10T06:41:03', '2019-01-14T04:57:42']), [0, 0, 1, 1]);
+  assert.deepEqual(observingSeasons(['2018-12-10T06:41:03', '2017-07-14T05:00:59']), [1, 0], 'counted in time order, reported in frame order');
+  assert.deepEqual(observingSeasons(['2018-01-01T00:00:00', '2018-05-01T00:00:00']), [0, 1], '120 days apart');
+  assert.deepEqual(observingSeasons(['2018-01-01T00:00:00', '2018-04-30T23:59:59']), [0, 0]);
+  assert.throws(() => observingSeasons(['no time']), /start time/);
 });
 
 test('source selection preserves valid darkness, rejects missing samples, and resolves ties stably', () => {

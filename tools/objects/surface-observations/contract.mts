@@ -110,6 +110,8 @@ export interface SurfacePolicy {
   format: string;
   selection: 'single' | 'lowest-emission' | 'recipe-order' | 'finest-resolution';
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
+  /** Each frame's observing season, for frames that carry no calibrated level: the level fit then places every season by overlaps alone. */
+  levelSeasons?: readonly number[];
   samplesPerTriangle: number;
   /** An authored palette replaces the linear grey of a monochrome lens; the display levels are unchanged. */
   display: ({ range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'stated-range'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay }) & { palette?: readonly string[] } & { basis: 'authored' | 'source'; sourceId?: string };
