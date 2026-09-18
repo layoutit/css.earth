@@ -42,8 +42,8 @@ test('explicit context setup uses prepared paths and hash URLs without changing 
   assert.deepEqual(await installRuntimeAssets([asset!], { fetcher: async url => {
     assert.equal(String(url), asset!.url);
     return new Response(bytes);
-  } }), { installed: 1, reused: 0 });
-  assert.deepEqual(await installRuntimeAssets([asset!], { fetcher: async () => { throw new Error('Expected prepared file reuse'); } }), { installed: 0, reused: 1 });
+  } }), { installed: 1, reused: 0, skipped: 0 });
+  assert.deepEqual(await installRuntimeAssets([asset!], { fetcher: async () => { throw new Error('Expected prepared file reuse'); } }), { installed: 0, reused: 1, skipped: 0 });
   await verifyRuntimeAssetClosure({ planetId: 'context-fixture', manifest: { ...manifest, resourceRoot: 'prepared' }, root: resolve(base, 'prepared') });
   await rm(resolve(base, 'prepared/levels'), { recursive: true });
   await symlink(resolve(root), resolve(base, 'prepared/levels'));
@@ -60,7 +60,7 @@ test('prepared resources install public dataset previews under their declared pu
   await writeFile(resolve(base, 'runtime-assets.json'), JSON.stringify(mixed));
   const assets = await runtimeAssets(root, ['context-fixture']);
   assert.equal(assets[1]!.file, resolve(root, 'public/scenes/context-fixture/datasets/preview.webp'));
-  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => new Response(bytes) }), { installed: 2, reused: 0 });
+  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => new Response(bytes) }), { installed: 2, reused: 0, skipped: 0 });
   const typedManifest = { ...manifest, resourceRoot: 'prepared' as const, assets: [...manifest.assets, { filename: 'datasets/preview.webp', location: 'public' as const, bytes: bytes.length, sha256 }] };
   const preparedRoot = resolve(base, 'prepared'), publicRoot = resolve(root, 'public/scenes/context-fixture');
   await writeFile(resolve(preparedRoot, 'manifest.json'), 'preparation receipt');
@@ -75,7 +75,7 @@ test('prepared resources install public dataset previews under their declared pu
   await assert.rejects(verifyRuntimeAssetClosure({ planetId: 'context-fixture', manifest: typedManifest, root: preparedRoot, publicRoot }), /Undeclared: undeclared.json/);
   assert.equal(await readFile(resolve(preparedRoot, 'undeclared.json'), 'utf8'), 'unexpected');
   await rm(resolve(preparedRoot, 'undeclared.json'));
-  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2 });
+  assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2, skipped: 0 });
 });
 
 test('prepared-assets: default discovery scans src/objects/*, install restores runtime.json/scene.json byte-identically', async t => {
@@ -113,7 +113,7 @@ test('prepared-assets: default discovery scans src/objects/*, install restores r
   assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async url => {
     const asset = assets.find(a => a.url === String(url))!;
     return new Response(contents[asset.filename]!);
-  } }), { installed: 2, reused: 1 });
+  } }), { installed: 2, reused: 1, skipped: 0 });
   assert.equal(await readFile(resolve(bodyDirectory, 'runtime.json'), 'utf8'), 'runtime-bytes');
   assert.equal(await readFile(resolve(contextDirectory, 'x.webp'), 'utf8'), 'atlas-bytes');
   // provenance.json (not inventoried) is untouched by prepared-assets install or verification.
