@@ -38,7 +38,7 @@ const pythonList = (values: readonly string[]) => `[${values.map(python).join(',
 /** One applycal call, written as the record states it. */
 export function applycalStatement(application: CalibrationApplication, visibilities: string) {
   const tables = application.tables;
-  return `applycal(vis=${python(visibilities)}, field=${python(application.field)}, intent=${python(application.intent)}, ` +
+  return `applycal(vis=${python(visibilities)}, field=${python(application.field)}, intent=casa_intent(${python(visibilities)}, ${python(application.intent)}), ` +
     `spw=${python(application.spw)}, antenna=${python(application.antenna)}, ` +
     `gaintable=${pythonList(tables.map(table => table.gaintable))}, gainfield=${pythonList(tables.map(table => table.gainfield))}, ` +
     `spwmap=[${tables.map(table => `[${table.spwmap.join(', ')}]`).join(', ')}], interp=${pythonList(tables.map(table => table.interp))}, ` +
@@ -63,6 +63,20 @@ export function restoreScript(options: {
     'import os, sys, json, shutil',
     'from casatasks import importasdm, flagmanager, applycal, split, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
+    // The calapply record names intents the pipeline's way; the measurement set names them as the observatory scheduled them.
+    // The pipeline translates one into the other before it calls applycal, and so does this route, reading the set's own
+    // states. An intent without a translation, or one with no scan to select, stops the run rather than calibrating less.
+    "PIPELINE_INTENTS = {'AMPLITUDE': ('CALIBRATE_FLUX', 'CALIBRATE_AMPLI'), 'BANDPASS': ('CALIBRATE_BANDPASS',), 'PHASE': ('CALIBRATE_PHASE',), 'TARGET': ('OBSERVE_TARGET',), 'CHECK': ('OBSERVE_CHECK_SOURCE',), 'POLARIZATION': ('CALIBRATE_POLARIZATION',)}",
+    'def casa_intent(vis, names):',
+    '    from casatools import table',
+    "    tb = table(); tb.open(vis + '/STATE'); modes = {mode for row in tb.getcol('OBS_MODE') for mode in str(row).split(',')}; tb.close()",
+    '    patterns = []',
+    "    for name in names.split(','):",
+    "        if name not in PIPELINE_INTENTS: sys.exit(f'The calapply record names intent {name}, which this route does not translate.')",
+    "        found = sorted(mode for mode in modes if mode.split('#')[0] in PIPELINE_INTENTS[name])",
+    "        if not found: sys.exit(f'The measurement set has no scan with intent {name}.')",
+    "        patterns += [f'*{mode}*' for mode in found]",
+    "    return ','.join(patterns)",
     'steps = []',
     // A measurement set left by an interrupted import looks whole to every later task, so it is reused only when the import
     // wrote its completion marker; anything else is removed and imported afresh.

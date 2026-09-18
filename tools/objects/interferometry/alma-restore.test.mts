@@ -18,7 +18,8 @@ const plan = { target: 'R_Dor', scienceWindows: '25,27,29,31' };
 test('an applycal statement restates the record, table for table', async () => {
   const [phase] = parseCalibrationRecord(await record());
   const statement = applycalStatement(phase!, 'x.ms');
-  assert.ok(statement.startsWith("applycal(vis='x.ms', field='J0516-6207', intent='PHASE'"));
+  // The record's intent is the pipeline's name, translated against the measurement set's own states when the script runs.
+  assert.ok(statement.startsWith("applycal(vis='x.ms', field='J0516-6207', intent=casa_intent('x.ms', 'PHASE')"));
   // The per-table arguments stay parallel lists in applycal's own order.
   for (const name of ['gaintable=[', 'gainfield=[', 'spwmap=[[', 'interp=[', 'calwt=[']) assert.ok(statement.includes(name), name);
   assert.equal(statement.match(/\.tbl'/gu)?.length, phase!.tables.length);
