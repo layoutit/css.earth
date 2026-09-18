@@ -447,6 +447,16 @@
   /* 20px rows + 8px gaps, including the initial 8px padding. */
   max-height: calc(var(--object-category-visible-rows) * 28px);
 }
+/* Reserve the loaded list's own height while the shared catalogue fragment is
+   still in flight, so inserting it never shifts the panel around it. */
+#object-category-results:has(> .planet-object-loading:not([hidden])) {
+  min-height: calc(var(--object-category-visible-rows) * 28px);
+}
+.planet-object-loading {
+  margin: 0;
+  color: var(--shell-text-muted);
+  font: var(--shell-font-content);
+}
 [data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
 [data-search-results] [data-system-results] { padding-top: 8px; }
 [data-search-results] [data-system-results] > :is(.planet-selected-panel, .planet-object-tabs) { display: none; }
