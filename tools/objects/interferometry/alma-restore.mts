@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Restore one ALMA execution from its raw visibilities and image it, then check the result against the archive's own image.
  *
- *   node tools/objects/interferometry/alma-restore.mts <working directory> --target R_Dor [--cell 0.006] [--imsize 512]
+ *   node tools/objects/interferometry/alma-restore.mts <working directory> --target R_Dor [--scratch <fast local directory>]
  *
  * The working directory holds what the archive served for one member observing unit set: `asdm.tar` (one execution's raw
  * visibilities), `auxiliary.tar` (the pipeline's calibration tables, its flag versions and its calapply record) and
@@ -51,21 +51,32 @@ export function restoreScript(options: {
   readonly asdm: string; readonly visibilities: string; readonly applications: readonly CalibrationApplication[];
   readonly flagVersion: string | null; readonly plan: ImagingPlan; readonly imageBase: string;
   readonly imaging: PipelineImaging; readonly selfcal: SelfCalibration | null; readonly tableDirectory?: string;
-  readonly flagStage?: string;
+  readonly flagStage?: string; readonly scratch?: string;
 }) {
-  const { asdm, visibilities, applications, flagVersion, plan, imageBase, imaging, selfcal } = options;
-  const targets = `${plan.target}.targets.ms`;
+  const { asdm, applications, flagVersion, plan, imageBase, imaging, selfcal } = options;
+  // Both measurement sets live on the scratch disk: the import and the corrected column are random writes that an external
+  // drive serves at a tenth of its sequential rate. The calibration tables stay where they were unpacked.
+  const onScratch = (name: string) => (options.scratch ? `${options.scratch}/${name}` : name);
+  const visibilities = onScratch(options.visibilities), targets = onScratch(`${plan.target}.targets.ms`);
   const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
     'import os, sys, json, shutil',
     'from casatasks import importasdm, flagmanager, applycal, split, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
     'steps = []',
-    `if not os.path.exists(${python(visibilities)}):`,
+    // A measurement set left by an interrupted import looks whole to every later task, so each run imports afresh.
+    `for stale in (${python(visibilities)}, ${python(`${visibilities}.flagversions`)}, ${python(targets)}):`,
+    '    shutil.rmtree(stale, ignore_errors=True)',
+    // The lazy import leaves the visibilities in the ASDM's binary files and reads them in place, so the measurement set holds
+    // only metadata, flags and the corrected column. What the scratch disk must hold is then about the ASDM's size once.
+    `need = sum(os.path.getsize(os.path.join(root, name)) for root, _, names in os.walk(${python(asdm)}) for name in names)`,
+    `free = shutil.disk_usage(os.path.dirname(os.path.abspath(${python(visibilities)}))).free`,
+    "if free < 1.5 * need:",
+    "    sys.exit(f'The scratch disk has {free / 1e9:.0f} GB free; the corrected column and the target split need about {1.5 * need / 1e9:.0f} GB.')",
     // ocorr_mode 'ca' is what the pipeline imports with: cross-correlations and auto-correlations.
     // hifa_restoredata's own defaults, so the measurement set carries the metadata the pipeline's did.
-    `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=False)`,
-    "    steps.append('importasdm')",
+    `importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=True)`,
+    "steps.append('importasdm')",
     ...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
       // Replace the filler's empty flag versions with the pipeline's before restoring from them.
       `shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
@@ -78,6 +89,8 @@ export function restoreScript(options: {
     // indexed by absolute window id, so renumbering them here would misapply the solutions without failing.
     `split(vis=${python(visibilities)}, outputvis=${python(targets)}, field=${python(plan.target)}, spw=${python(plan.scienceWindows)}, intent='OBSERVE_TARGET#ON_SOURCE', datacolumn='corrected', keepflags=True, reindex=False)`,
     "steps.append('split targets')",
+    // The full measurement set is rebuilt from the ASDM by the next run; only the target split is imaged.
+    `shutil.rmtree(${python(visibilities)}); shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
     ...(selfcal === null || !selfcal.succeeded ? ["steps.append('no self-calibration applied')"] : [
       `applycal(vis=${python(targets)}, field=${python(plan.target)}, gaintable=${pythonList(selfcal.tables.map(table => resolveTable(table)))}, ` +
         `interp=${pythonList([...selfcal.interpolation])}, spwmap=[${selfcal.spectralWindowMaps.map(map => `[${map.join(', ')}]`).join(', ')}], ` +
@@ -126,7 +139,7 @@ export async function savedFlagVersions(calibration: string) {
   return versions.filter(entry => entry.isDirectory() && entry.name.startsWith('flags.')).map(entry => entry.name.slice('flags.'.length));
 }
 
-export async function restoreExecution(directory: string, plan: ImagingPlan) {
+export async function restoreExecution(directory: string, plan: ImagingPlan, options: { readonly scratch?: string } = {}) {
   const work = resolve(directory), unpacked = resolve(work, 'unpacked');
   await mkdir(unpacked, { recursive: true });
   const run = (command: string, args: readonly string[], cwd: string) => {
@@ -181,7 +194,9 @@ export async function restoreExecution(directory: string, plan: ImagingPlan) {
     if (absent.length) throw new Error(`The self-calibration record names ${absent.length} table(s) the delivery does not carry: ${absent[0]}`);
   }
 
-  const script = restoreScript({ asdm, visibilities, applications, flagVersion, plan, imaging, selfcal,
+  const scratch = resolve(options.scratch ?? calibration);
+  await mkdir(scratch, { recursive: true });
+  const script = restoreScript({ asdm, visibilities, applications, flagVersion, plan, imaging, selfcal, scratch,
     flagStage, tableDirectory: workdir ? resolve(products, workdir.name) : undefined, imageBase: resolve(work, `${plan.target}.restored`) });
   const scriptPath = resolve(work, 'restore.py');
   await writeFile(scriptPath, script);
@@ -198,7 +213,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const index = process.argv.indexOf(`--${name}`);
     return index > 0 ? process.argv[index + 1] ?? fallback : fallback;
   };
-  const result = await restoreExecution(directory, { target: argument('target', 'R_Dor'), scienceWindows: argument('spw', '25,27,29,31') });
+  const scratch = argument('scratch', '');
+  const result = await restoreExecution(directory, { target: argument('target', 'R_Dor'), scienceWindows: argument('spw', '25,27,29,31') },
+    scratch ? { scratch } : {});
   console.log(`Restored flags ${result.flagVersion} and applied ${result.applications} calibration steps.`);
   console.log(result.selfcal?.succeeded
     ? `Self-calibrated at ${result.selfcal.solutionInterval} with ${result.selfcal.tables.length} table(s), ${result.selfcal.applyMode}.`

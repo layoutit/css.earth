@@ -39,14 +39,27 @@ test('the restore script performs import, flags, every application, the targets 
     cursor = at;
   }
   // The import takes hifa_restoredata's own arguments, not the manual calibration script's.
-  assert.ok(script.includes("ocorr_mode='ca'") && script.includes('bdfflags=True') && script.includes('lazy=False'));
+  assert.ok(script.includes("ocorr_mode='ca'") && script.includes('bdfflags=True') && script.includes('lazy=True'));
   assert.ok(script.includes('CalPointing') && !script.includes('CorrelatorMode'));
   // The calibration is applied the way the pipeline applied it, which the calapply record does not state.
   assert.equal(script.match(/applymode='calflagstrict'/gu)?.length, 3);
   // The split keeps the window numbering, because the self-calibration maps are indexed by absolute window id.
   assert.ok(script.includes('reindex=False') && script.includes("spw='25,27,29,31'"));
   assert.ok(script.includes("intent='OBSERVE_TARGET#ON_SOURCE'"));
-  assert.ok(script.includes("if not os.path.exists('uid___A002_X1.ms'):"), 'an import that already ran is not repeated');
+  // A measurement set left by an interrupted import is removed, never reused, and the full set goes once the target is split.
+  assert.ok(script.indexOf("shutil.rmtree(stale") < script.indexOf('importasdm('));
+  const removed = script.indexOf("shutil.rmtree('uid___A002_X1.ms')");
+  assert.ok(removed > script.indexOf('split(') && removed < script.indexOf('tclean('));
+  assert.ok(script.indexOf('disk_usage') < script.indexOf('importasdm('), 'the scratch disk is checked before anything is written');
+});
+
+test('both measurement sets are written to the scratch disk, the calibration tables stay where they were unpacked', async () => {
+  const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
+    flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x', scratch: '/fast' });
+  assert.ok(script.includes("importasdm(asdm='/raw/x', vis='/fast/x.ms'"));
+  assert.ok(script.includes("split(vis='/fast/x.ms', outputvis='/fast/R_Dor.targets.ms'"));
+  assert.ok(script.includes("tclean(vis='/fast/R_Dor.targets.ms'"));
+  assert.ok(!script.includes("gaintable=['/fast/"), 'caltables are resolved from the working directory, not the scratch disk');
 });
 
 test('imaging follows the pipeline\u2019s own call rather than a plausible guess', async () => {
