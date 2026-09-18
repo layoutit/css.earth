@@ -39,7 +39,10 @@ volume preview, a fragile-upstream archive such as a USGS Gazetteer nomenclature
 depends on a third party's uptime. `node tools/publish-source-cache.mts --object=<id> [...]` publishes every such
 pin this repository knows how to find for that object (skipping one that isn't present locally or doesn't match its
 own hash — run `node tools/restore-source-inputs.mts --object=<id>` first); `--file=<path> --sha256=<hex>
---bytes=<n>` publishes one file directly. Same verify-after-publish contract as above.
+--bytes=<n>` publishes one file directly. Same verify-after-publish contract as above. The three pinned VizieR
+galaxy-field catalogues (`src/objects/nearby-universe/source/catalogue.json`) are mirrored the same way via
+`--file=...`; `pnpm prepare:galaxy-field` tries that mirror first and only falls back to a live VizieR query on a
+miss, so an ordinary clean build never depends on VizieR's uptime.
 
 Both scripts require `wrangler` to already be authenticated. Neither ever deletes a key.
 
