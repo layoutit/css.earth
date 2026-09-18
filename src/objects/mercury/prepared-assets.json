@@ -1,0 +1,16 @@
+{
+  "schema": "cssmercury-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 793625,
+      "sha256": "b5aa86477842b1bea79984f77b91c801d44c12d7314ce3fde26342ccca378102"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 696406,
+      "sha256": "13cb74c5c62525fbabd0da82db675a52c4324cbf2298fa0c0bbe4f593b67404a"
+    }
+  ]
+}

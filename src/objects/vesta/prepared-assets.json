@@ -1,0 +1,16 @@
+{
+  "schema": "cssvesta-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 763642,
+      "sha256": "729a619b035768cf0a7e4d2c1bcf8032a3bb1005df74a571e09fb1151f8b8595"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 617663,
+      "sha256": "39b962d49fb98b3b13676a2447a916bc00ef16d5371d274ab85773feb4e4379e"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssbraille-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 459025,
+      "sha256": "4af59fc19fdf5fc77501fde4e633ef19a0abb18a984303ffa000bb33dd8c4172"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 370609,
+      "sha256": "83dc3a738839aa5ce15aecb5111260d7295fb96b64d6d793610c3903117d23ca"
+    }
+  ]
+}

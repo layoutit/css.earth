@@ -80,6 +80,13 @@ src/objects/*/.prepared/
 # Prepared JSON transport rebuilt from checked-in object preparation output.
 /src/objects/*/prepared/object.json
 
+# Phase 2 (feat/gh-pages-r2-assets): baked runtime.json/scene.json move to R2, inventoried by each object's
+# prepared-assets.json (tools/runtime-assets.mts, tools/setup-prepared.mts). File globs, not a directory glob —
+# a directory glob would make prepared/ negations further down (e.g. comet-67p's terrain.json) un-re-includable.
+# Placed before every existing negation so a later `!/src/objects/<id>/prepared/...` still applies.
+/src/objects/*/prepared/runtime.json
+/src/objects/*/prepared/scene.json
+
 /src/objects/charon/source/observations/*.tif
 /src/objects/charon/source/science/*.tif
 
@@ -319,6 +326,15 @@ src/spice/**/*.bc
 
 # Nebula lens/axis atlases are reproduced by the delivery bake.
 /src/objects/lmc/prepared/*/atlases/*.webp
+
+# Phase 2 (feat/gh-pages-r2-assets): these 4 objects have no runtime-assets.json, so their whole `prepared/`
+# bake is the R2 inventory (prepared-assets.json, full nested closure) — same shape as the nebulae above.
+# lmc's own presentation.json/provenance.json/atlases (lines above) were already untracked local drift before
+# this change and stay excluded from its inventory; this line only covers what was tracked.
+/src/objects/lmc/prepared/
+/src/objects/milky-way/prepared/
+/src/objects/heliosphere/prepared/
+/src/objects/stellar-neighbourhood/prepared/
 
 # Compact registered material inputs; runtime slice/atlas outputs remain ignored.
 !src/objects/lmc/source/bake-inputs/*.png

@@ -1,0 +1,16 @@
+{
+  "schema": "cssartemis-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 751849,
+      "sha256": "44e5cab7fea1a47dedeed2c64e36699b15c342756d319cdeef6cced44c76dd0b"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 621468,
+      "sha256": "64bc854d25269e8a8606060106a714d436dbbbd3d5fe5719c7a7893f85d58665"
+    }
+  ]
+}

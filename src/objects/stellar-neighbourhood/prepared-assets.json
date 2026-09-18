@@ -1,0 +1,21 @@
+{
+  "schema": "cssstellar-neighbourhood-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "point-atlas.png",
+      "bytes": 14017,
+      "sha256": "f14d45575bf61c4cadecc1903827c4fa7ecc1b2c75cfedc20e2084fa3aa8379c"
+    },
+    {
+      "filename": "stars.bin",
+      "bytes": 2799000,
+      "sha256": "2d2587f56e5561aa4dd6cc8298309394cd1c2f5b6c166333073dfdaa3e7d3c5e"
+    },
+    {
+      "filename": "stars.json",
+      "bytes": 55778,
+      "sha256": "ce772fbcabb72a8517b0ba5d03bfa0378ca063d07cbd03ac3d4bf3571b67af06"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssepimetheus-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 679538,
+      "sha256": "e275ae679095a7bac448b7cf00aa2531b5f6a4de9c45f3a0c7296608ca8d38aa"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 560145,
+      "sha256": "c340822763cd82eb8f48ddc483baad02fe65b56c9cf8830d660eba0bb7ee7e1c"
+    }
+  ]
+}

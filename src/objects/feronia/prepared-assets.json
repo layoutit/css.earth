@@ -1,0 +1,16 @@
+{
+  "schema": "cssferonia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 765439,
+      "sha256": "e63f24b06b519775976fb4354fdccbf042f01e77a0b1e8c06b21280a0361ab91"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 621107,
+      "sha256": "d36c2c67d1fe58d9b6d15ad37d9d5138ed34a29ed5c8bb4545f30dca8ca66cf5"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "csshebe-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 759230,
+      "sha256": "695b82c564c0e3a20f16900941341132668aec3694f371a64b6db2cc8326fcea"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 618513,
+      "sha256": "d8b2ff552288a9a6f5314d8a2a673ce4f39ef7f19030a1caef545299e6200c00"
+    }
+  ]
+}
