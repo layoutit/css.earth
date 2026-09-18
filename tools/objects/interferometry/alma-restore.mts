@@ -32,9 +32,10 @@ export interface ImagingPlan {
   readonly scienceWindows: string;
 }
 
-/** tclean arguments the route sets itself: the measurement set and image it works on, and the pipeline's instructions to continue
- * the iteration before this one instead of starting afresh. */
-const REPLACED_TCLEAN_ARGUMENTS = new Set(['vis', 'imagename', 'calcres', 'calcpsf', 'restart']);
+/** tclean arguments the route sets itself: the measurement set and image it works on, the pipeline's instructions to continue
+ * the iteration before this one instead of starting afresh, and `parallel`, which asks for the MPI cluster the pipeline ran
+ * under. That changes how the work is spread, not the image, and a plain casatasks install has no cluster to give it. */
+const REPLACED_TCLEAN_ARGUMENTS = new Set(['vis', 'imagename', 'calcres', 'calcpsf', 'restart', 'parallel']);
 
 /** The pipeline's tclean arguments this route passes on unchanged, as the Python literals the log wrote. */
 export function pipelineTcleanArguments(imaging: PipelineImaging) {
@@ -149,8 +150,7 @@ export function restoreScript(options: {
     // Leaving any out changes the image. Without the antenna selection's trailing &, the auto-correlations entered the Briggs
     // weights and widened the beam; without phasecenter the grid moved 0.37 mas; without the auto-multithresh mask, CLEAN
     // worked on noise peaks everywhere and the noise fell 40% below the archive's. Each value is a Python literal read with
-    // ast.literal_eval, so nothing in the log is executed. Only the input and output names are this route's, and the three
-    // arguments that continue the pipeline's earlier iteration are dropped: this run makes its own PSF and residual.
+    // ast.literal_eval, so nothing in the log is executed. REPLACED_TCLEAN_ARGUMENTS lists the few this route sets itself.
     `PIPELINE_TCLEAN = {${[...pipelineTcleanArguments(imaging)].map(([name, value]) => `${python(name)}: ${python(value)}`).join(', ')}}`,
     `tclean(vis=[${python(targets)}], imagename=${python(imaged)}, **{name: ast.literal_eval(value) for name, value in PIPELINE_TCLEAN.items()})`,
     "steps.append('tclean')",
