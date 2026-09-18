@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { deriveObserverCameras, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA } from './observer-cameras.mts';
+import { deriveObserverCameras, limbSettled, loadObserverCameraInputs, parseObserverCameras, recipeFields, zimpolExposure, OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA } from './observer-cameras.mts';
 import { loadCameraShape } from './shape-camera-mosaic.mts';
 import { radialTerrainForLens } from './radial-models.mts';
 
@@ -27,7 +27,7 @@ for (const id of bodies) test(`${id}: the recipe states the cameras its pinned i
   for (const [index, camera] of derived.entries()) {
     const stated = frames[index].stated, fields = recipeFields(camera);
     for (const [key, value] of Object.entries(fields)) assert.deepEqual(stated[key], value, `${id} ${camera.id} ${key}: recipe states ${JSON.stringify(stated[key])}, the pinned inputs give ${JSON.stringify(value)}`);
-    assert.ok(camera.limb.limbBins >= 8 && camera.limb.movedPixels < 0.5, `${id} ${camera.id}: the limb fit settled (${camera.limb.limbBins} bins, last move ${camera.limb.movedPixels} px)`);
+    assert.ok(limbSettled(camera.limb), `${id} ${camera.id}: the limb fit settled (${camera.limb.limbBins} bins, last move ${camera.limb.movedPixels} px)`);
     // The two sub-points are consistent with the phase angle the geometry implies, whichever way the frame is handed.
     const point = (latitude: number, longitude: number) => [Math.cos(latitude * Math.PI / 180) * Math.cos(longitude * Math.PI / 180), Math.cos(latitude * Math.PI / 180) * Math.sin(longitude * Math.PI / 180), Math.sin(latitude * Math.PI / 180)];
     const a = point(camera.observerLatitude, camera.observerWestLongitude), s = point(camera.sunLatitude, camera.sunWestLongitude);

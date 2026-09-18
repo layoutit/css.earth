@@ -22,7 +22,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
 import { horizonsCommand, horizonsTables, tableInput } from '../sphere-horizons.mts';
 import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../surface-observations/published-comparison.mts';
-import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, parseObserverCameras, recipeFields, zimpolExposure } from '../terrestrial-layers/observer-cameras.mts';
+import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, limbSettled, parseObserverCameras, recipeFields, zimpolExposure } from '../terrestrial-layers/observer-cameras.mts';
 import { radialTerrainForLens } from '../terrestrial-layers/radial-models.mts';
 import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
@@ -226,6 +226,9 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   }
   const mesh = await loadCameraShape(source, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], LENS_ID));
   const cameras = await deriveObserverCameras(source, parseObserverCameras(record), frames, mesh, ROOT);
+  // The recipe states each frame's limb-fitted centre, so a fit that has not settled cannot be stated.
+  const unsettled = cameras.filter(camera => !limbSettled(camera.limb));
+  if (unsettled.length > 0) throw new Error(`The limb fit does not settle on ${unsettled.map(camera => `${camera.id} (last move ${camera.limb.movedPixels.toFixed(2)} px)`).join(', ')}; leave those frames out with --leave-out and say why.`);
   const nights = [...new Set(frames.map(entry => entry.frame.second.slice(0, 10)))];
   const lens = { id: LENS_ID, format: SURVEY_LENS_SETTINGS.format, consumer: SURVEY_LENS_SETTINGS.consumer,
     metadata: { label: 'SPHERE photograph', falseColor: false, coverage: lensCoverage(frames.length, nights, figure.figure) },

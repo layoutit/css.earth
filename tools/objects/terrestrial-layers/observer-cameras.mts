@@ -15,13 +15,16 @@ import { parseLeapSeconds } from '../../spice/lsk.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
 import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from './observer-camera.mts';
 import { limbCentre } from './registration-sweeps.mts';
-import { publishedPole, spinRecordReading } from './spin-record-reading.mts';
+import { readingPole, spinRecordReading } from './spin-record-reading.mts';
 
 const DEGREE = Math.PI / 180;
 export const OBSERVER_CAMERAS_SCHEMA = 'cssearth-observer-cameras@1';
 export const OBSERVER_CAMERAS_FILE = 'preparation/observer-cameras.json';
 /** The shared leap-second kernel every IAU pole model is evaluated with. */
 export const LEAP_SECONDS_KERNEL = 'src/spice/cassini/lsk/naif0012.tls';
+/** A frame's limb-fitted centre is stated only when the fit settled: enough limb, and a last step under half a pixel. */
+export const SETTLED_LIMB = { minimumBins: 8, maximumLastMovePixels: 0.5 } as const;
+export const limbSettled = (limb: { limbBins: number; movedPixels: number }) => limb.limbBins >= SETTLED_LIMB.minimumBins && limb.movedPixels < SETTLED_LIMB.maximumLastMovePixels;
 
 /**
  * A spin record's column order is established against a published pole: the body's own, `reference/model-properties.json`,
@@ -71,8 +74,7 @@ export async function loadOrientation(sourceDirectory: string, rotation: Observe
   const source = await readFile(resolve(sourceDirectory, rotation.path), 'utf8');
   if (rotation.kind === 'spin-record') {
     // The stated column order must be the one the published pole supports; nothing in the record says which it is.
-    const stated = rotation.publishedPole?.eclipticJ2000Degrees;
-    const pole = stated ? { longitudeDegrees: stated[0], latitudeDegrees: stated[1] } : await publishedPole(sourceDirectory);
+    const pole = await readingPole(sourceDirectory, rotation.publishedPole);
     if (pole) {
       const reading = spinRecordReading(source, pole);
       if (reading.order !== rotation.columnOrder) throw new TypeError(`${rotation.path} is stated ${rotation.columnOrder}, but the published pole reads it ${reading.order} (${reading.separationDegrees.toFixed(1)}° against ${reading.otherSeparationDegrees?.toFixed(1) ?? 'no other reading'}).`);

@@ -146,13 +146,22 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     entries[index] = { id: own.id, subject: requireString(shared.subject), status: own.status, finding: requireString(shared.finding),
       evidence: [...(Array.isArray(shared.evidence) ? shared.evidence : []), ...requireArray(own.evidence)], checked: own.checked };
   }
+  // An install run again the same day finds its own words at the front or back of an entry; it replaces them.
+  const earlierWords = (text: string) => {
+    for (const [start, kept] of [[`Included ${today} as the SPHERE photograph lens:`, ' Earlier finding, kept: '], [`Decided ${today} by the published comparison instead:`, ' Earlier result, kept: ']] as const)
+      if (text.startsWith(start) && text.includes(kept)) return text.slice(text.indexOf(kept) + kept.length);
+    const reopened = text.indexOf(` Reopened ${today} because its condition was met:`);
+    return reopened >= 0 ? text.slice(0, reopened) : text;
+  };
   const close = (id: string, finding: (earlier: string) => string, link?: string) => {
     const entry = entries.find(candidate => candidate.id === id);
     if (!entry) return;
-    entry.status = 'included'; entry.finding = finding(requireString(entry.finding)); delete entry.revisitWhen;
+    entry.status = 'included'; entry.finding = finding(earlierWords(requireString(entry.finding))); delete entry.revisitWhen;
     const links = requireArray(entry.evidence).map(value => requireString(value));
     if (link && !links.includes(link)) links.push(link);
-    entry.evidence = links; entry.checked = [...requireArray(entry.checked), check];
+    entry.evidence = links;
+    const checked = requireArray(entry.checked).map(value => requireRecord(value));
+    entry.checked = checked.some(earlier => earlier.date === check.date && earlier.commit === check.commit) ? checked : [...checked, check];
   };
   close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam ? 'ADAM' : 'primary'} mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
   close('lam-adam-alternative', earlier => `${earlier} Reopened ${today} because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure ${figure} describe; the Shape and Elevation views keep MPCD.`);

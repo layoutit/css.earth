@@ -49,8 +49,11 @@ different solutions (Eleonora, Nemesis and Thisbe), when the figure uses
 another layout, or when LAM refuses a file. Table A.1 prints Thisbe's pole past
 the pole, latitude 116°; the setup folds it to the direction its printed
 obliquity confirms before comparing.
-`--leave-out=<frame-id>,…` leaves named frames out of the selection; a frame
-the figure shows cannot be left out.
+It also stops when a frame's limb fit does not settle, naming the frame: the
+recipe states each disc centre, so it must be a settled one. After eight full
+steps a fit still moving takes half steps, which settles one bouncing between
+two positions (Kleopatra's did). `--leave-out=<frame-id>,…` leaves named
+frames out of the selection; a frame the figure shows cannot be left out.
 
 ## Decide
 

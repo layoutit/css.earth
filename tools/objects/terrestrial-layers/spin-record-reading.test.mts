@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { publishedPole, spinRecordReading } from './spin-record-reading.mts';
+import { readingPole, spinRecordReading } from './spin-record-reading.mts';
 import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './observer-cameras.mts';
 
 const OBJECTS = resolve(import.meta.dirname, '../../../src/objects');
@@ -32,8 +32,9 @@ test('every released spin record reads one way against its published pole, apart
   const unreadable: string[] = [];
   let read = 0;
   for (const id of readdirSync(OBJECTS)) {
-    const source = resolve(OBJECTS, id, 'source'), record = resolve(source, 'reference/release-parameters.txt');
-    const pole = existsSync(record) ? await publishedPole(source) : null;
+    const source = resolve(OBJECTS, id, 'source'), record = resolve(source, 'reference/release-parameters.txt'), lens = resolve(source, OBSERVER_CAMERAS_FILE);
+    const stated = existsSync(lens) ? parseObserverCameras(JSON.parse(readFileSync(lens, 'utf8'))).rotation.publishedPole : undefined;
+    const pole = existsSync(record) ? await readingPole(source, stated) : null;
     if (!pole) continue;
     try { spinRecordReading(readFileSync(record, 'utf8'), pole); read++; } catch { unreadable.push(id); }
   }
@@ -50,7 +51,7 @@ test('every ground-based lens states the column order its published pole support
     const source = resolve(OBJECTS, id, 'source'), path = resolve(source, OBSERVER_CAMERAS_FILE);
     if (!existsSync(path)) continue;
     const { rotation } = parseObserverCameras(JSON.parse(readFileSync(path, 'utf8')));
-    const pole = await publishedPole(source);
+    const pole = await readingPole(source, rotation.publishedPole);
     if (rotation.kind !== 'spin-record' || !pole) continue;
     assert.equal(spinRecordReading(readFileSync(resolve(source, rotation.path), 'utf8'), pole).order, rotation.columnOrder, `${id}: ${rotation.path}`);
   }
