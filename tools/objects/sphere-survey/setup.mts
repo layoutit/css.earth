@@ -162,7 +162,7 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   const labels = bands.flatMap((band, index) => figureCells(image, rows, Math.round((band.x1 - band.x0) / PANEL), index)[0].map(cell => ({ label: readLabel(image, cell, templates), band: index })));
 
   // The released frames and the ones the figure shows.
-  const listing = await releasedFrames(number, figure.name, downloads);
+  const listing = await releasedFrames(framesUrl(number, figure.name), downloads);
   const shown = labels.map(({ label }) => listing.find(frame => frame.second === label) ?? null);
   // Frames left out by name, each for a reason the install records; never one the figure shows.
   const leaveOut = [...(options.leaveOut ?? [])];

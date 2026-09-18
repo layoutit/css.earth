@@ -27,7 +27,7 @@ import { horizonsRows, loadOrientation, observerRowValues, parseObserverCameras 
 import { radialTerrainForLens } from '../terrestrial-layers/radial-models.mts';
 import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { apparitions } from './frames.mts';
-import { framesUrl, lamText, parseFrameListing, type LamFrame } from './lam.mts';
+import { lamText, parseFrameListing, type LamFrame } from './lam.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const DEGREE = Math.PI / 180;
@@ -130,26 +130,26 @@ export async function listedViews(frames: readonly LamFrame[], orientation: Body
 }
 
 /** The release's listing of a body's deconvolved frames, fetched once into the downloads folder. */
-export async function releasedFrames(number: number, name: string, downloads: string) {
-  const path = resolve(downloads, 'listing.html'), url = framesUrl(number, name);
+export async function releasedFrames(url: string, downloads: string) {
+  const path = resolve(downloads, 'listing.html');
   const html = await readFile(path, 'utf8').catch(async () => { const text = await lamText(url); await mkdir(downloads, { recursive: true }); await writeFile(path, text); return text; });
   return parseFrameListing(html, url).filter(frame => frame.camera === 1);
 }
 
 /** One shipped lens's apparitions: what the frames it casts cover, and what each apparition would add and share. */
 async function auditLens(objectId: string) {
-  // The setup casts apparitions with this module, so the audit reaches the survey table through it at run time.
-  const { surveyFigures } = await import('./setup.mts');
   const source = resolve(ROOT, 'src/objects', objectId, 'source'), downloads = resolve(ROOT, 'output/sphere-survey', objectId, 'downloads');
   const recipe = requireRecord(JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8')));
   const lens = requireArray(requireRecord(recipe.raster).surfaceObservations).map(value => requireRecord(value)).find(entry => entry.id === 'zimpol');
   if (!lens) throw new Error(`${objectId} has no survey lens.`);
   const record = parseObserverCameras(JSON.parse(await readFile(resolve(source, 'preparation/observer-cameras.json'), 'utf8')));
   const command = horizonsCommand(JSON.parse(await readFile(resolve(ROOT, 'packages/astronomy/data/bodies', `${objectId}.json`), 'utf8')));
-  const number = Number(command.replace(/;$/u, '')), figure = (await surveyFigures()).figures.find(entry => entry.number === number);
-  if (!figure) throw new Error(`${objectId} is not a survey body.`);
-  const released = await releasedFrames(number, figure.name, downloads), orientation = await loadOrientation(source, record.rotation, ROOT);
   const stated = new Map(requireArray(lens.frames).map(value => requireRecord(value)).map(frame => [requireString(frame.path), frame]));
+  // The release's listing is the folder the lens's own frames were pinned from.
+  const inputs = requireArray(requireRecord(JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8'))).inputs).map(value => requireRecord(value));
+  const origin = inputs.find(input => stated.has(requireString(input.path)))?.origin;
+  if (typeof origin !== 'string') throw new Error(`${objectId}: the manifest pins no origin for the lens's frames.`);
+  const released = await releasedFrames(new URL('./', origin).href, downloads), orientation = await loadOrientation(source, record.rotation, ROOT);
   const listed = await listedViews(released, orientation, command, downloads);
   // The frames the lens casts keep the cameras its recipe states; the others take the listed start's.
   const views = released.map((frame, index) => {
