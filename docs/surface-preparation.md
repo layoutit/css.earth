@@ -160,11 +160,14 @@ FITS decoding happens during preparation, never in the browser. The shared
 values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
 Product adapters still own units, quality masks, camera registration,
 spectral selection, missing-data policies and display transforms. Sky images do not
-own their orientation: [fits-sky.mts](../tools/fits-sky.mts) reads it from the WCS.
+own their orientation: [fits-sky.mts](../tools/fits-sky.mts) reads it from the WCS. An axis-aligned image is flipped into
+display order; a rotated gnomonic (TAN) image is resampled through `skyProjection`, which refuses distortion terms and frames
+other than ICRS or FK5 and is checked against Astropy in both directions.
 
 | Input | Supported contract and owner |
 | --- | --- |
 | Primary images and IMAGE extensions | 2D images or explicitly selected 3D planes; unsigned 8-bit, signed 16/32-bit, IEEE float32/64, big-endian. `BSCALE`/`BZERO` are applied once; integer `BLANK` becomes `NaN` before scaling. Zero and negative measurements remain values. |
+| Large archive products | `readFitsFileHdus` locates every HDU by reading headers only; `readFitsFileRegion` reads one rectangle of one image extension from disk. A mosaic of hundreds of megabytes is never loaded whole. |
 | Multi-HDU observations | Encounter, LORRI/L'LORRI and MVIC adapters require their exact instrument layout, units and quality conventions. Named HDUs do not imply a camera model. |
 | Spectral and geometry cubes | LEISA uses bounded sample access without expanding a whole cube. PDS4 geometry labels must agree with FITS axes, element types and offsets; label special constants remain authoritative. |
 | Fixed facet tables | Only the declared `1J + 5E` BINTABLE profiles, with their mesh identity and centroid checks. Column scaling (`TSCAL`/`TZERO`) and null (`TNULL`) declarations are rejected, not ignored. |
