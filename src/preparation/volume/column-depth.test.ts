@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { gainForTopAlpha, spreadColumns } from './column-depth.ts';
+import { fillThinGaps, gainForTopAlpha, spreadColumns } from './column-depth.ts';
 
 const width = 6, height = 4, depth = 32, depthStep = 0.5;
 // A shell: every column's matter sits at one depth, which moves with x, except column x = 5, where the model is empty.
@@ -42,4 +42,15 @@ test('the gain puts the brightest column at the requested opacity, and bad input
   assert.throws(() => spreadColumns({ width, height, depth, channels: [], profile, depthStep }), /One to four channels/u);
   assert.throws(() => spreadColumns({ width, height, depth, channels: [new Float32Array(3)], profile, depthStep }), /One to four channels/u);
   assert.throws(() => gainForTopAlpha(result.integral, result.peak, 1), /strictly between/u);
+});
+
+test('thin masked gaps close from their edges and a wide hole stays open', () => {
+  const w = 40, h = 20, plane = Float32Array.from({ length: w * h }, (_, p) => 5 + (p % w) * 0.1);
+  for (let y = 0; y < h; y++) for (let x = 10; x < 13; x++) plane[y * w + x] = NaN;             // a three-sample spike
+  for (let y = 0; y < h; y++) for (let x = 25; x < 40; x++) plane[y * w + x] = NaN;             // the edge of coverage
+  const { channel, filled } = fillThinGaps(plane, w, h, 4, 4);
+  // Rows at the grid border have only two quadrants and stay open; every interior row closes.
+  for (let y = 1; y < h - 1; y++) assert.ok(Math.abs(channel[y * w + 11]! - 6.1) < 0.25, `row ${y}: ${channel[y * w + 11]}`);
+  assert.ok(Number.isNaN(channel[5 * w + 39]!), 'far inside the uncovered edge stays missing');
+  assert.ok(filled >= 3 * (h - 2));
 });
