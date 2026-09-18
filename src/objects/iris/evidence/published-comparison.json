@@ -60,6 +60,10 @@
         "340": 0.919,
         "350": 0.949
       },
+      "imageTurnDegrees": {
+        "model": -1.5,
+        "photograph": -1.5
+      },
       "axis": {
         "paperDegrees": 19.6,
         "oursDegrees": 23.3,
@@ -110,6 +114,10 @@
         "330": 0.868,
         "340": 0.891,
         "350": 0.92
+      },
+      "imageTurnDegrees": {
+        "model": -4,
+        "photograph": -1.5
       },
       "axis": {
         "paperDegrees": 20.7,
@@ -162,6 +170,10 @@
         "340": 0.895,
         "350": 0.933
       },
+      "imageTurnDegrees": {
+        "model": -4,
+        "photograph": 1
+      },
       "axis": {
         "paperDegrees": 19.8,
         "oursDegrees": 23.4,
@@ -212,6 +224,10 @@
         "330": 0.879,
         "340": 0.905,
         "350": 0.94
+      },
+      "imageTurnDegrees": {
+        "model": -3,
+        "photograph": -0.5
       },
       "axis": {
         "paperDegrees": 19.2,
