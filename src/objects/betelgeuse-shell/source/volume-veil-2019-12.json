@@ -2,8 +2,8 @@
   "schema": "cssearth-volume-recipe@1",
   "grid": {
     "path": "density-veil-2019-12.ktx2",
-    "sha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99",
-    "decodedSha256": "1df70577fd84e2854875a12103ad99ae7abd04f4264446687ce2b562fb2e87ed",
+    "sha256": "9d540e479b7afd1f85d0d0245d1ea48ebe83adb1be950daaddc072e8e6cced1c",
+    "decodedSha256": "f53aa5a766d9afd4f7a1b74782409e0eecfd6d8ef7e73e6ccdd46e35afd3677a",
     "dimensions": [
       96,
       96,
@@ -24,9 +24,12 @@
     }
   },
   "material": {
+    "intensityScale": 1,
+    "stepScale": 1,
+    "stepMetric": "source",
     "emission": [
       {
-        "channel": 0,
+        "channel": 1,
         "color": [
           1,
           0.82,
@@ -35,12 +38,18 @@
         "strength": 1
       }
     ],
-    "absorption": [],
-    "emissionTransfer": "shared-opacity",
-    "intensityScale": 1,
-    "stepScale": 1,
-    "stepMetric": "source",
-    "exposureGain": 2.5
+    "absorption": [
+      {
+        "channel": 0,
+        "color": [
+          1,
+          1,
+          1
+        ],
+        "strength": 0.6293065996291471
+      }
+    ],
+    "exposureGain": 0.10357820290764465
   },
   "bake": {
     "sliceCounts": {
@@ -70,6 +79,6 @@
   ],
   "provenance": {
     "path": "provenance.json",
-    "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+    "sha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b"
   }
 }

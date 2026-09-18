@@ -4,12 +4,12 @@
   "method": "density-grid",
   "request": {
     "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-    "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4"
+    "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33"
   },
   "inputPins": [
     {
       "path": "src/objects/betelgeuse-shell/source/provenance.json",
-      "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+      "sha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b"
     },
     {
       "path": "src/objects/betelgeuse-shell/source/density-zimpol-v.ktx2",
@@ -17,7 +17,7 @@
     },
     {
       "path": "src/objects/betelgeuse-shell/source/density-veil-2019-12.ktx2",
-      "sha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99"
+      "sha256": "9d540e479b7afd1f85d0d0245d1ea48ebe83adb1be950daaddc072e8e6cced1c"
     }
   ],
   "sky": {
@@ -36,7 +36,7 @@
   "acceptedLabResult": "betelgeuse-shell-two-grids",
   "compactInputs": {
     "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-    "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4"
+    "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33"
   },
   "compactMethod": "density-grid",
   "grids": [
@@ -46,7 +46,7 @@
       "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
       "recipe": {
         "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-        "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4"
+        "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33"
       }
     },
     {
@@ -55,7 +55,7 @@
       "sourceUrl": "https://arxiv.org/abs/2201.10551",
       "recipe": {
         "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-        "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f"
+        "sha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4"
       },
       "occultingCentreUnits": [
         0.5347658321649745,

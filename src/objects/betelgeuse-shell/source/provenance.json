@@ -76,7 +76,7 @@
   },
   "models": {
     "zimpol-v": "Sky-plane slab. The degree map, floor-subtracted and stretched to five percent, sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
-    "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. It is drawn as starlight scattered by that dust, so brightness follows the inverse-square illumination each parcel receives; the published density itself is uniform."
+    "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
   },
   "limitations": [
     "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
@@ -86,7 +86,9 @@
     "Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.",
     "Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.",
     "The two lenses are five years apart. Neither is a picture of the other.",
-    "The clump covers the star rather than dimming it: the leaves composite over the photosphere while the clump is the nearer of the two, but they add their own light instead of absorbing the star’s.",
+    "The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.",
+    "Its extinction is grey. Silicate dust reddens what it transmits; no colour was applied because the photosphere behind it is drawn in an infrared intensity palette, not in colour.",
+    "The scattered light is a stated display level, not a measurement.",
     "The 2024 map always composites behind the star, because its emission surrounds the body instead of standing clear of it in depth."
   ]
 }

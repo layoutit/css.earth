@@ -177,7 +177,7 @@
     {
       "id": "delivery-json",
       "path": "src/objects/betelgeuse-shell/source/delivery.json",
-      "expectedSha256": "a22e5ca318f68b11ceb43b186d19373198aeb2ec06bb40f6594e2b3049a4864d",
+      "expectedSha256": "d2bb48a24913ba05f9a5cb56596ec6f3a3ca10fae79557ef48dec6c49519102c",
       "expectedBytes": 2624,
       "sourceBinding": {
         "kind": "local",
@@ -207,8 +207,8 @@
     {
       "id": "presentation-json",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "expectedSha256": "7957e5d91c5e0be832dfe251948a09647241c9cb5f4cec38d81208858e80b50d",
-      "expectedBytes": 4423,
+      "expectedSha256": "68ab4c9ebc7850996601bbca9f368e9f8573ab41634406d3da8c6383cbf51ec4",
+      "expectedBytes": 4735,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -217,8 +217,8 @@
     {
       "id": "provenance-json",
       "path": "src/objects/betelgeuse-shell/source/provenance.json",
-      "expectedSha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4",
-      "expectedBytes": 5084,
+      "expectedSha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b",
+      "expectedBytes": 5761,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -229,8 +229,8 @@
     {
       "id": "density-veil-2019-12-ktx2",
       "path": "src/objects/betelgeuse-shell/source/density-veil-2019-12.ktx2",
-      "expectedSha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99",
-      "expectedBytes": 7845,
+      "expectedSha256": "9d540e479b7afd1f85d0d0245d1ea48ebe83adb1be950daaddc072e8e6cced1c",
+      "expectedBytes": 7527,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -249,8 +249,8 @@
     {
       "id": "volume-veil-2019-12-json",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "expectedSha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
-      "expectedBytes": 1399,
+      "expectedSha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4",
+      "expectedBytes": 1523,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -259,7 +259,7 @@
     {
       "id": "volume-zimpol-v-json",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "expectedSha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+      "expectedSha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33",
       "expectedBytes": 1387,
       "sourceBinding": {
         "kind": "local",

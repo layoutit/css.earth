@@ -56,8 +56,8 @@
           "url": "https://arxiv.org/abs/2201.10551"
         }
       },
-      "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
-      "summary": "A published model of the dust that dimmed the southern hemisphere in December 2019.",
+      "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.",
+      "summary": "The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.",
       "detail": "Sphere of 6.5 au at 13.0 au",
       "facts": [
         {
@@ -74,6 +74,11 @@
           "id": "density",
           "label": "Dust density",
           "value": "3.2 × 10⁻¹⁹ g cm⁻³ in MgFeSiO₄ grains centred on 0.21 µm"
+        },
+        {
+          "id": "extinction",
+          "label": "Optical depth",
+          "value": "ln 10 through the centre, the 10-times dimming the paper reports"
         },
         {
           "id": "epoch",

@@ -24,6 +24,9 @@
     }
   },
   "material": {
+    "intensityScale": 1,
+    "stepScale": 1,
+    "stepMetric": "source",
     "emission": [
       {
         "channel": 0,
@@ -37,9 +40,6 @@
     ],
     "absorption": [],
     "emissionTransfer": "shared-opacity",
-    "intensityScale": 1,
-    "stepScale": 1,
-    "stepMetric": "source",
     "exposureGain": 4
   },
   "bake": {
@@ -70,6 +70,6 @@
   ],
   "provenance": {
     "path": "provenance.json",
-    "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+    "sha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b"
   }
 }

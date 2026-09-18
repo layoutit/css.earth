@@ -55,13 +55,12 @@
     {
       "id": "occultation-by-absorption",
       "subject": "Drawing the clump as extinction of the photosphere rather than as scattered light",
-      "status": "deferred",
-      "finding": "The clump is optically thick enough in the visible to dim the star, which is what the Great Dimming was. The renderer composites the volume and the body as two flattened roots, so a lens can be ordered in front of the body but cannot absorb its light; the clump therefore covers the star's disc with its own scattered light instead of extinguishing it. Ordering is exact here because every voxel of this clump stands clear of the photosphere in depth, which preparation checks.",
+      "status": "included",
+      "finding": "The clump is optically thick enough in the visible to dim the star, which is what the Great Dimming was, and the renderer can express that without per-pixel intersection. The slab compiler already takes absorption channels beside emission, and a leaf whose alpha is its extinction and whose colour is the light it scatters composites in ordinary source-over as transmission times what is behind plus the scattered term. Because every voxel of this clump stands clear of the photosphere in depth, ordering it in front of the detail scene is exact, so the star behind it is dimmed rather than covered. The absorption strength is set from the paper's own report that the southern hemisphere went ten times darker: the line of sight through the clump's centre carries an optical depth of ln 10, and the sum of the compiler's step lengths across the sphere is its diameter, so the strength is ln 10 divided by 13 au. The scattered light is drawn at four percent of the photosphere's surface brightness, which is a stated display level.",
       "evidence": [
         "https://arxiv.org/abs/2201.10551",
         "https://drafts.csswg.org/css-transforms-2/#3d-rendering-contexts"
       ],
-      "revisitWhen": "The body is drawn inside the volume's own three-dimensional context, so that leaves and faces intersect per pixel.",
       "checked": [
         {
           "date": "2026-09-18",

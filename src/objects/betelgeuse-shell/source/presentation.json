@@ -5,21 +5,21 @@
   "defaultLens": "zimpol-v",
   "bank": {
     "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
-    "bytes": 162844
+    "sha256": "817bfb71529d88f9e3167e87712f71d4e42f23b0c8d2361ee3ec30eea31f813d",
+    "bytes": 164132
   },
   "recipes": [
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+      "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33",
       "bytes": 1387
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
-      "bytes": 1399
+      "sha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4",
+      "bytes": 1523
     }
   ],
   "sharedInputs": [],
@@ -66,8 +66,8 @@
       "id": "veil-2019-12",
       "label": "Great Dimming clump · December 2019",
       "title": "The dust clump of the Great Dimming",
-      "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
-      "summary": "A published model of the dust that dimmed the southern hemisphere in December 2019.",
+      "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.",
+      "summary": "The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.",
       "detail": "Sphere of 6.5 au at 13.0 au",
       "facts": [
         {
@@ -84,6 +84,11 @@
           "id": "density",
           "label": "Dust density",
           "value": "3.2 × 10⁻¹⁹ g cm⁻³ in MgFeSiO₄ grains centred on 0.21 µm"
+        },
+        {
+          "id": "extinction",
+          "label": "Optical depth",
+          "value": "ln 10 through the centre, the 10-times dimming the paper reports"
         },
         {
           "id": "epoch",

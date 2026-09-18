@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f5594fc6f26a0b6f9cc941e1579e5b3a09b1d41b15ddb3eff3f3b57956afc6f4"
+    "sha256": "5e88a2cef72729b7ebc9155a74e525cb95a4b8021524ee78cf475e5edaf2c4b3"
   },
   "generator": {
     "path": "tools/prepare-volume-provenance.mts",
@@ -201,7 +201,7 @@
     {
       "id": "presentation",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "sha256": "7957e5d91c5e0be832dfe251948a09647241c9cb5f4cec38d81208858e80b50d",
+      "sha256": "68ab4c9ebc7850996601bbca9f368e9f8573ab41634406d3da8c6383cbf51ec4",
       "parameters": {
         "schema": "cssearth-volume-presentation-source@1",
         "objectId": "betelgeuse-shell",
@@ -209,21 +209,21 @@
         "defaultLens": "zimpol-v",
         "bank": {
           "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
-          "bytes": 162844
+          "sha256": "817bfb71529d88f9e3167e87712f71d4e42f23b0c8d2361ee3ec30eea31f813d",
+          "bytes": 164132
         },
         "recipes": [
           {
             "id": "zimpol-v",
             "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-            "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+            "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33",
             "bytes": 1387
           },
           {
             "id": "veil-2019-12",
             "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-            "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
-            "bytes": 1399
+            "sha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4",
+            "bytes": 1523
           }
         ],
         "sharedInputs": [],
@@ -270,8 +270,8 @@
             "id": "veil-2019-12",
             "label": "Great Dimming clump · December 2019",
             "title": "The dust clump of the Great Dimming",
-            "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
-            "summary": "A published model of the dust that dimmed the southern hemisphere in December 2019.",
+            "description": "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.",
+            "summary": "The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.",
             "detail": "Sphere of 6.5 au at 13.0 au",
             "facts": [
               {
@@ -288,6 +288,11 @@
                 "id": "density",
                 "label": "Dust density",
                 "value": "3.2 × 10⁻¹⁹ g cm⁻³ in MgFeSiO₄ grains centred on 0.21 µm"
+              },
+              {
+                "id": "extinction",
+                "label": "Optical depth",
+                "value": "ln 10 through the centre, the 10-times dimming the paper reports"
               },
               {
                 "id": "epoch",
@@ -315,7 +320,7 @@
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "ffb53561b0f2e3922f584ee1dc5f07d81dc1008978f55281597b7b1cde2581f4",
+      "sha256": "8f8e059530137681f9ef6161e0322a78bdc10e6661fbe854b5d16a6951610a33",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
@@ -342,6 +347,9 @@
           }
         },
         "material": {
+          "intensityScale": 1,
+          "stepScale": 1,
+          "stepMetric": "source",
           "emission": [
             {
               "channel": 0,
@@ -355,9 +363,6 @@
           ],
           "absorption": [],
           "emissionTransfer": "shared-opacity",
-          "intensityScale": 1,
-          "stepScale": 1,
-          "stepMetric": "source",
           "exposureGain": 4
         },
         "bake": {
@@ -388,20 +393,20 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+          "sha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b"
         }
       }
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "b8402c92c61c9e12e24fa12b72a8a3a57542722e3b76248a79d4ec30e19a8b3f",
+      "sha256": "03b05086de9f3fdbf4afba93a5948e2585ab8acf0d63696c39612d67cc974bc4",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
           "path": "density-veil-2019-12.ktx2",
-          "sha256": "22fc092bb34b5832ed22fd2d69a86d12491961621e8046863532ce5d48e10b99",
-          "decodedSha256": "1df70577fd84e2854875a12103ad99ae7abd04f4264446687ce2b562fb2e87ed",
+          "sha256": "9d540e479b7afd1f85d0d0245d1ea48ebe83adb1be950daaddc072e8e6cced1c",
+          "decodedSha256": "f53aa5a766d9afd4f7a1b74782409e0eecfd6d8ef7e73e6ccdd46e35afd3677a",
           "dimensions": [
             96,
             96,
@@ -422,9 +427,12 @@
           }
         },
         "material": {
+          "intensityScale": 1,
+          "stepScale": 1,
+          "stepMetric": "source",
           "emission": [
             {
-              "channel": 0,
+              "channel": 1,
               "color": [
                 1,
                 0.82,
@@ -433,12 +441,18 @@
               "strength": 1
             }
           ],
-          "absorption": [],
-          "emissionTransfer": "shared-opacity",
-          "intensityScale": 1,
-          "stepScale": 1,
-          "stepMetric": "source",
-          "exposureGain": 2.5
+          "absorption": [
+            {
+              "channel": 0,
+              "color": [
+                1,
+                1,
+                1
+              ],
+              "strength": 0.6293065996291471
+            }
+          ],
+          "exposureGain": 0.10357820290764465
         },
         "bake": {
           "sliceCounts": {
@@ -468,7 +482,7 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "5b16bdf09322b3d6350780999994a704190ebc156b65792f977b7cf41d1b64b4"
+          "sha256": "4ff710f7736cd30dfd4173cf0a1a58c9afe937c8daf7aed81ebdf53cf7c8e47b"
         }
       }
     }
@@ -511,8 +525,8 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
-          "bytes": 162844,
+          "sha256": "817bfb71529d88f9e3167e87712f71d4e42f23b0c8d2361ee3ec30eea31f813d",
+          "bytes": 164132,
           "verification": "bytes-verified"
         },
         {
@@ -554,14 +568,14 @@
         "sourceKind": "published-display-image"
       },
       "limitations": [
-        "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.",
+        "The dust clump Montargès et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.",
         "Sphere of 6.5 au at 13.0 au"
       ],
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "df850c4bfb401dab22f658d37a3d917686a7139f2cb51d3a91aee9134b5affaa",
-          "bytes": 162844,
+          "sha256": "817bfb71529d88f9e3167e87712f71d4e42f23b0c8d2361ee3ec30eea31f813d",
+          "bytes": 164132,
           "verification": "bytes-verified"
         },
         {

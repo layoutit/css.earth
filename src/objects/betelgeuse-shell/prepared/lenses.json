@@ -2457,7 +2457,7 @@
             },
             "models": {
               "zimpol-v": "Sky-plane slab. The degree map, floor-subtracted and stretched to five percent, sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
-              "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. It is drawn as starlight scattered by that dust, so brightness follows the inverse-square illumination each parcel receives; the published density itself is uniform."
+              "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
             },
             "limitations": [
               "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
@@ -2467,7 +2467,9 @@
               "Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.",
               "Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.",
               "The two lenses are five years apart. Neither is a picture of the other.",
-              "The clump covers the star rather than dimming it: the leaves composite over the photosphere while the clump is the nearer of the two, but they add their own light instead of absorbing the star’s.",
+              "The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.",
+              "Its extinction is grey. Silicate dust reddens what it transmits; no colour was applied because the photosphere behind it is drawn in an infrared intensity palette, not in colour.",
+              "The scattered light is a stated display level, not a measurement.",
               "The 2024 map always composites behind the star, because its emission surrounds the body instead of standing clear of it in depth."
             ]
           },
@@ -3143,7 +3145,7 @@
                     "height": "96px",
                     "transform": "matrix3d(1.8875,0,0,0,0,0,-1.8875,0,0,1,0,0,-133.725,-62.5,-83.775,1)",
                     "backgroundSize": "687px 104px",
-                    "backgroundPosition": "-308px -2px"
+                    "backgroundPosition": "-208px -2px"
                   }
                 },
                 {
@@ -3151,16 +3153,16 @@
                   "centerUnits": [
                     -1.75,
                     -0.8625,
-                    -3.4875000000000003
+                    -3.50625
                   ],
                   "texturePath": "veil-2019-12/atlases/x.webp",
                   "widthPx": 82,
-                  "heightPx": 82,
+                  "heightPx": 83,
                   "boundsCssPixels": {
                     "min": [
                       -120.6,
                       -87.5,
-                      -251.849988
+                      -253.72501400000002
                     ],
                     "max": [
                       34.349987999999996,
@@ -3170,8 +3172,8 @@
                   },
                   "style": {
                     "width": "82px",
-                    "height": "82px",
-                    "transform": "matrix3d(1.889634,0,0,0,0,0,-1.889634,0,0,1,0,0,-120.6,-87.5,-96.9,1)",
+                    "height": "83px",
+                    "transform": "matrix3d(1.889634,0,0,0,0,0,-1.889458,0,0,1,0,0,-120.6,-87.5,-96.9,1)",
                     "backgroundSize": "687px 104px",
                     "backgroundPosition": "-408px -2px"
                   }
@@ -3181,27 +3183,27 @@
                   "centerUnits": [
                     -2.25,
                     -0.8812499999999996,
-                    -3.4875
+                    -3.5062499999999996
                   ],
                   "texturePath": "veil-2019-12/atlases/x.webp",
                   "widthPx": 55,
-                  "heightPx": 56,
+                  "heightPx": 55,
                   "boundsCssPixels": {
                     "min": [
                       -96.225,
                       -112.5,
-                      -227.47502400000002
+                      -227.47499
                     ],
                     "max": [
                       8.099990000000005,
                       -112.5,
-                      -121.275
+                      -123.15
                     ]
                   },
                   "style": {
                     "width": "55px",
-                    "height": "56px",
-                    "transform": "matrix3d(1.896818,0,0,0,0,0,-1.896429,0,0,1,0,0,-96.225,-112.5,-121.275,1)",
+                    "height": "55px",
+                    "transform": "matrix3d(1.896818,0,0,0,0,0,-1.896818,0,0,1,0,0,-96.225,-112.5,-123.15,1)",
                     "backgroundSize": "687px 104px",
                     "backgroundPosition": "-577px -2px"
                   }
@@ -3271,29 +3273,29 @@
                   "centerUnits": [
                     0.25,
                     -0.8625,
-                    -3.4875
+                    -3.5062499999999996
                   ],
                   "texturePath": "veil-2019-12/atlases/x.webp",
                   "widthPx": 96,
-                  "heightPx": 96,
+                  "heightPx": 95,
                   "boundsCssPixels": {
                     "min": [
                       -133.725,
                       12.5,
-                      -264.975
+                      -264.97494500000005
                     ],
                     "max": [
                       47.474999999999994,
                       12.5,
-                      -83.775
+                      -85.65
                     ]
                   },
                   "style": {
                     "width": "96px",
-                    "height": "96px",
-                    "transform": "matrix3d(1.8875,0,0,0,0,0,-1.8875,0,0,1,0,0,-133.725,12.5,-83.775,1)",
+                    "height": "95px",
+                    "transform": "matrix3d(1.8875,0,0,0,0,0,-1.887631,0,0,1,0,0,-133.725,12.5,-85.65,1)",
                     "backgroundSize": "687px 104px",
-                    "backgroundPosition": "-208px -2px"
+                    "backgroundPosition": "-308px -2px"
                   }
                 },
                 {
@@ -3358,7 +3360,7 @@
                     "height": "100px",
                     "transform": "matrix3d(0,-1.887,0,0,0,0,-1.887,0,1,0,0,0,-37.5,66.225,-83.775,1)",
                     "backgroundSize": "685px 104px",
-                    "backgroundPosition": "-2px -2px"
+                    "backgroundPosition": "-106px -2px"
                   }
                 },
                 {
@@ -3396,27 +3398,27 @@
                   "centerUnits": [
                     -0.5062499999999996,
                     -2.25,
-                    -3.4875
+                    -3.5062499999999996
                   ],
                   "texturePath": "veil-2019-12/atlases/y.webp",
                   "widthPx": 75,
-                  "heightPx": 76,
+                  "heightPx": 75,
                   "boundsCssPixels": {
                     "min": [
                       -112.5,
                       -96.225,
-                      -246.224964
+                      -246.225
                     ],
                     "max": [
                       -112.5,
                       45.6,
-                      -102.525
+                      -104.4
                     ]
                   },
                   "style": {
                     "width": "75px",
-                    "height": "76px",
-                    "transform": "matrix3d(0,-1.891,0,0,0,0,-1.890789,0,1,0,0,0,-112.5,45.6,-102.525,1)",
+                    "height": "75px",
+                    "transform": "matrix3d(0,-1.891,0,0,0,0,-1.891,0,1,0,0,0,-112.5,45.6,-104.4,1)",
                     "backgroundSize": "685px 104px",
                     "backgroundPosition": "-499px -2px"
                   }
@@ -3456,16 +3458,16 @@
                   "centerUnits": [
                     -0.5625,
                     -1.25,
-                    -3.54375
+                    -3.5625
                   ],
                   "texturePath": "veil-2019-12/atlases/y.webp",
                   "widthPx": 100,
-                  "heightPx": 99,
+                  "heightPx": 100,
                   "boundsCssPixels": {
                     "min": [
                       -62.5,
                       -122.475,
-                      -270.599979
+                      -272.475
                     ],
                     "max": [
                       -62.5,
@@ -3475,10 +3477,10 @@
                   },
                   "style": {
                     "width": "100px",
-                    "height": "99px",
-                    "transform": "matrix3d(0,-1.887,0,0,0,0,-1.887121,0,1,0,0,0,-62.5,66.225,-83.775,1)",
+                    "height": "100px",
+                    "transform": "matrix3d(0,-1.887,0,0,0,0,-1.887,0,1,0,0,0,-62.5,66.225,-83.775,1)",
                     "backgroundSize": "685px 104px",
-                    "backgroundPosition": "-106px -2px"
+                    "backgroundPosition": "-2px -2px"
                   }
                 },
                 {
@@ -3602,7 +3604,7 @@
                     "width": "100px",
                     "height": "99px",
                     "transform": "matrix3d(0,-1.887,0,0,-1.887121,0,0,0,0,0,-1,0,53.1,66.225,-162.5,1)",
-                    "backgroundSize": "695px 103px",
+                    "backgroundSize": "694px 103px",
                     "backgroundPosition": "-106px -2px"
                   }
                 },
@@ -3632,24 +3634,24 @@
                     "width": "95px",
                     "height": "96px",
                     "transform": "matrix3d(0,-1.887631,0,0,-1.8875,0,0,0,0,0,-1,0,47.475,64.35,-212.5,1)",
-                    "backgroundSize": "695px 103px",
-                    "backgroundPosition": "-310px -2px"
+                    "backgroundSize": "694px 103px",
+                    "backgroundPosition": "-210px -2px"
                   }
                 },
                 {
                   "id": "z-2",
                   "centerUnits": [
-                    -0.48750000000000027,
+                    -0.5062500000000001,
                     -0.8625000000000003,
                     -4.75
                   ],
                   "texturePath": "veil-2019-12/atlases/z.webp",
-                  "widthPx": 82,
+                  "widthPx": 83,
                   "heightPx": 82,
                   "boundsCssPixels": {
                     "min": [
                       -120.599988,
-                      -101.849988,
+                      -103.72501400000002,
                       -237.5
                     ],
                     "max": [
@@ -3659,11 +3661,11 @@
                     ]
                   },
                   "style": {
-                    "width": "82px",
+                    "width": "83px",
                     "height": "82px",
-                    "transform": "matrix3d(0,-1.889634,0,0,-1.889634,0,0,0,0,0,-1,0,34.35,53.1,-237.5,1)",
-                    "backgroundSize": "695px 103px",
-                    "backgroundPosition": "-496px -2px"
+                    "transform": "matrix3d(0,-1.889458,0,0,-1.889634,0,0,0,0,0,-1,0,34.35,53.1,-237.5,1)",
+                    "backgroundSize": "694px 103px",
+                    "backgroundPosition": "-408px -2px"
                   }
                 },
                 {
@@ -3692,8 +3694,8 @@
                     "width": "55px",
                     "height": "55px",
                     "transform": "matrix3d(0,-1.896818,0,0,-1.896818,0,0,0,0,0,-1,0,8.1,26.85,-262.5,1)",
-                    "backgroundSize": "695px 103px",
-                    "backgroundPosition": "-582px -2px"
+                    "backgroundSize": "694px 103px",
+                    "backgroundPosition": "-581px -2px"
                   }
                 },
                 {
@@ -3722,24 +3724,24 @@
                     "width": "100px",
                     "height": "99px",
                     "transform": "matrix3d(0,-1.887,0,0,-1.887121,0,0,0,0,0,-1,0,53.1,66.225,-187.5,1)",
-                    "backgroundSize": "695px 103px",
+                    "backgroundSize": "694px 103px",
                     "backgroundPosition": "-2px -2px"
                   }
                 },
                 {
                   "id": "z-7",
                   "centerUnits": [
-                    -0.5062500000000001,
-                    -0.8812500000000001,
+                    -0.48750000000000027,
+                    -0.8625000000000003,
                     -2.25
                   ],
                   "texturePath": "veil-2019-12/atlases/z.webp",
-                  "widthPx": 83,
-                  "heightPx": 83,
+                  "widthPx": 82,
+                  "heightPx": 82,
                   "boundsCssPixels": {
                     "min": [
-                      -122.47501400000002,
-                      -103.72501400000002,
+                      -120.599988,
+                      -101.849988,
                       -112.5
                     ],
                     "max": [
@@ -3749,71 +3751,71 @@
                     ]
                   },
                   "style": {
-                    "width": "83px",
-                    "height": "83px",
-                    "transform": "matrix3d(0,-1.889458,0,0,-1.889458,0,0,0,0,0,-1,0,34.35,53.1,-112.5,1)",
-                    "backgroundSize": "695px 103px",
-                    "backgroundPosition": "-409px -2px"
+                    "width": "82px",
+                    "height": "82px",
+                    "transform": "matrix3d(0,-1.889634,0,0,-1.889634,0,0,0,0,0,-1,0,34.35,53.1,-112.5,1)",
+                    "backgroundSize": "694px 103px",
+                    "backgroundPosition": "-495px -2px"
                   }
                 },
                 {
                   "id": "z-6",
                   "centerUnits": [
-                    -0.4874999999999998,
+                    -0.5062499999999996,
                     -0.8624999999999998,
                     -2.75
                   ],
                   "texturePath": "veil-2019-12/atlases/z.webp",
-                  "widthPx": 96,
+                  "widthPx": 95,
                   "heightPx": 96,
                   "boundsCssPixels": {
                     "min": [
                       -133.725,
-                      -114.975,
+                      -114.97494500000002,
                       -137.5
                     ],
                     "max": [
                       47.475,
-                      66.225,
+                      64.35,
                       -137.5
                     ]
                   },
                   "style": {
-                    "width": "96px",
+                    "width": "95px",
                     "height": "96px",
-                    "transform": "matrix3d(0,-1.8875,0,0,-1.8875,0,0,0,0,0,-1,0,47.475,66.225,-137.5,1)",
-                    "backgroundSize": "695px 103px",
-                    "backgroundPosition": "-210px -2px"
+                    "transform": "matrix3d(0,-1.887631,0,0,-1.8875,0,0,0,0,0,-1,0,47.475,64.35,-137.5,1)",
+                    "backgroundSize": "694px 103px",
+                    "backgroundPosition": "-309px -2px"
                   }
                 },
                 {
                   "id": "z-8",
                   "centerUnits": [
                     -0.5625,
-                    -0.8062499999999999,
+                    -0.8249999999999997,
                     -1.75
                   ],
                   "texturePath": "veil-2019-12/atlases/z.webp",
                   "widthPx": 52,
-                  "heightPx": 53,
+                  "heightPx": 52,
                   "boundsCssPixels": {
                     "min": [
-                      -90.599973,
+                      -90.59995200000002,
                       -77.474952,
                       -87.5
                     ],
                     "max": [
-                      9.975,
+                      8.1,
                       21.225,
                       -87.5
                     ]
                   },
                   "style": {
                     "width": "52px",
-                    "height": "53px",
-                    "transform": "matrix3d(0,-1.898076,0,0,-1.897641,0,0,0,0,0,-1,0,9.975,21.225,-87.5,1)",
-                    "backgroundSize": "695px 103px",
-                    "backgroundPosition": "-641px -2px"
+                    "height": "52px",
+                    "transform": "matrix3d(0,-1.898076,0,0,-1.898076,0,0,0,0,0,-1,0,8.1,21.225,-87.5,1)",
+                    "backgroundSize": "694px 103px",
+                    "backgroundPosition": "-640px -2px"
                   }
                 }
               ]
@@ -3822,205 +3824,205 @@
           "resources": [
             {
               "path": "veil-2019-12/impostors/view-nnn.png",
-              "sha256": "beed7c5c9d03661af261b515488367563a488ffc1d952cbdfb079ff5cb640bd9",
-              "bytes": 3933,
+              "sha256": "6316df659a2cdde5431c91cb69cfaadfb06725865e5857fb3d8a31279166a5e3",
+              "bytes": 4940,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-nn0.png",
-              "sha256": "ea340e46ef0c9b151c20fd78a7bb35af6639bb086f96162489ff5d5cf865270b",
-              "bytes": 3734,
+              "sha256": "7834313d5314c6ebb85be470a3699c4a31a95cd92dc7775ff05f0ef2347b2b44",
+              "bytes": 4929,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-nnp.png",
-              "sha256": "699b203a673b9193da97c228dc8b042d3a31b8354710b467dc2e25cf43f9862b",
-              "bytes": 4035,
+              "sha256": "704692f766c497a81324f4a5ac81ed674d8facb47a67313220d34398d2206812",
+              "bytes": 5433,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-n0n.png",
-              "sha256": "80cc4f1ad9a2662195db14a780557bb0d9c6f7f207b9909ca9f2065cd702153a",
-              "bytes": 3940,
+              "sha256": "8813a515e21906f7e6c32e7f0f80fd905e6447c03b8d13d69004ee2afa106e61",
+              "bytes": 4601,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-n00.png",
-              "sha256": "d125bb0e26eca7b725a11a29fa19714295b6d214522b8780d12be1fec7f8620c",
-              "bytes": 3670,
+              "sha256": "fbd97da314737ed0982824ba19afa9c8c90cec991a355229e650d26d185f3485",
+              "bytes": 4742,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-n0p.png",
-              "sha256": "0565d50715b58f5962605c16822d9519359beafc5646762350df3a64d7da9236",
-              "bytes": 4033,
+              "sha256": "0defde9eb2a8dbb57810bd25e65dadfa7e5e161a657041a885fc2a46563c3555",
+              "bytes": 5027,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-npn.png",
-              "sha256": "3d7158836085598ee41de2264571d8d31ea54e27be4534fa6dd19e806ce4db8d",
-              "bytes": 4038,
+              "sha256": "29f140c50957750614725f63103713386470e468984d8471b1567da7007e7d99",
+              "bytes": 5166,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-np0.png",
-              "sha256": "04419b1e6b9f138cc6e29a47a91f2777d0f9a5a601c30fd376906e5437c9a70d",
-              "bytes": 3771,
+              "sha256": "fdb338c69fa724d3160645615a7d7be8ca7117aef354fb41bd2d1a791a175a2e",
+              "bytes": 5072,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-npp.png",
-              "sha256": "e88aa95e90f5b39f95827287e8363a1707f4b00f795f8ce100f457ae77c1204b",
-              "bytes": 4065,
+              "sha256": "b14defe83a3d6b1284bf4a91176c1daa6cd3a18465d4a2b7bea119fbebc83a13",
+              "bytes": 5488,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-0nn.png",
-              "sha256": "cbb2bb97d3ee9cec5d77a0d14b59046ef7a1588dbcfdd260b523d71bb5736260",
-              "bytes": 3760,
+              "sha256": "ee239189cf06d12fa548ef5f4f0163c351372e49d834d860096839fab41b87ee",
+              "bytes": 4420,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-0n0.png",
-              "sha256": "10d66fea8b6897c37addda8945b148c1e3d3a808a5f0dfb0d7469a1e5ccdc8e0",
-              "bytes": 3803,
+              "sha256": "50aa972159ed77aacda6354bd14daf0bbf4168ecb0f7b93bc276fa242a952d31",
+              "bytes": 4620,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-0np.png",
-              "sha256": "d5c7f320e4c97abd8199426577ac16c0c8903cf5cd1ba08a37d708f936e293b7",
-              "bytes": 3924,
+              "sha256": "094057fc66af5fd9b254d8cd021463209e2eb25c33f9af2503c96c1d029b8ed4",
+              "bytes": 4993,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-00n.png",
-              "sha256": "ae0c9ecad25c6d114c8a39ee3902d923fbf0ee1a8818e72e45dd05da9254ca96",
-              "bytes": 3737,
+              "sha256": "a4ffa4dd43b1602cf84e20fbe36f236602cadbfec171ddf6a85ad82075efd6f9",
+              "bytes": 3841,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-00p.png",
-              "sha256": "4d772fc3dea684c7707d54a5096ab0abe9cc3f887f2551b9217e4cf5a0ad33fb",
-              "bytes": 3852,
+              "sha256": "20e6ebc73a0905dd3f2058abcbb17be0de2fc294bf4692ba1a851103c60714c8",
+              "bytes": 4390,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-0pn.png",
-              "sha256": "1e752e701d12c788d88f472f06ddf6c6d41aee0ae47402664910181a7ad88059",
-              "bytes": 3819,
+              "sha256": "eb97b027d1d08cbf74da833d80ad145bc17ea350f982c88772f93bc4c53f386c",
+              "bytes": 4711,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-0p0.png",
-              "sha256": "d921c61e47a940f882c9faa1e25db0a2f261335972905504643d55951e4a00cd",
-              "bytes": 3823,
+              "sha256": "d7796c264babbc14766c721474968a1a3f803c4b5966862f980b3a4b084dc37d",
+              "bytes": 4710,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-0pp.png",
-              "sha256": "0b01c67ad043466879e38fc43df85518324d52d26fecef1933594d538a1825bf",
-              "bytes": 3912,
+              "sha256": "381e5f7f91035cd40cb52f03b0219e3e2814c358205ec2df13cf888cf0733dc5",
+              "bytes": 4756,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-pnn.png",
-              "sha256": "d78f160ce015e624d39df306d64e26c78b517bb3e0fd2e39d78e6fe7e678ad78",
-              "bytes": 3979,
+              "sha256": "a2615cc24631746f48ec6a56d1468879a5f352b093d1b89f44eed906bf1c379d",
+              "bytes": 5189,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-pn0.png",
-              "sha256": "121190a47fcd29225e56f4c64792c650f4a07751e21de1c207608b1ba38af052",
-              "bytes": 3759,
+              "sha256": "b3861639d96cbafabe957522a4028d5a8016ab120495c995cb4ca341b8fef8e3",
+              "bytes": 5003,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-pnp.png",
-              "sha256": "10f61563f51fdc2e0c2dc84e7bb57666285bdbc5c0863ba9b005e90053fa3d29",
-              "bytes": 4105,
+              "sha256": "aa1f36f535fdda7d79fb6cdeebee0699f80cc08b439741b68ca71d0e460f037b",
+              "bytes": 5439,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-p0n.png",
-              "sha256": "067859f20e9323ae264c7e31961d806fdc3058ef600a46c52797850222c99327",
-              "bytes": 3940,
+              "sha256": "211e76bc3fb162d5325fc0e6ec7301231aecc0ab222076c5f3200593c64f4667",
+              "bytes": 4720,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-p00.png",
-              "sha256": "edca1462a1b6008d8b00605f2f1c0f3b6075d98938d9b3bdb3fae2c8d23414e6",
-              "bytes": 3592,
+              "sha256": "239de0c75e52df095a7c682fdaa5356fbad055fbbf66b7c77936c05b84b838a9",
+              "bytes": 4799,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-p0p.png",
-              "sha256": "2e583f7c2b48b81a9dd73fdb1ddf1409eafd499eee255e6ea8d59f55443af45e",
-              "bytes": 4099,
+              "sha256": "e81a337802262399bb3735cda257ca47bb311ffa5ca6392bd947dfd885a1e91b",
+              "bytes": 5093,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-ppn.png",
-              "sha256": "54ce74d64ae90bcfd52a61a6dc401ec23e685698b1d5663aab66728fab2a228d",
-              "bytes": 4039,
+              "sha256": "884d96b0b8bd4951118afa20ed7251514246593b50e2d1181471cfd317b213e9",
+              "bytes": 5250,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-pp0.png",
-              "sha256": "49797aef0c9c518de2650d18647259056a26c4030f4baca9f7db89cf3e217c48",
-              "bytes": 3810,
+              "sha256": "fa3933850f5461ad8081c4cdcb3c9c87536168be4b55660970146b6dd2f609fb",
+              "bytes": 5034,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/impostors/view-ppp.png",
-              "sha256": "c8cbb647e3d9bc2e1b5159ca88253c3e22d31b7f1eb552d74a24a7a14dc6c024",
-              "bytes": 4051,
+              "sha256": "faabad50275edf4c9955956d916e10866a6df1e83d8085c27c47ef61b4c9813e",
+              "bytes": 5382,
               "width": 256,
               "height": 256
             },
             {
               "path": "veil-2019-12/atlases/x.webp",
-              "sha256": "b8c91be14647b9d020736b9e20914dee891c0d67cc018d4c06edf1def8652cc4",
-              "bytes": 16136,
+              "sha256": "2b6eababef2d052908bc0cfd23131acd600396aaefbd4e2c531ddca7b9539d79",
+              "bytes": 7688,
               "width": 687,
               "height": 104
             },
             {
               "path": "veil-2019-12/atlases/y.webp",
-              "sha256": "f26ae48ce960aa475ac5d693d0978886d0561d524664c621dcb2547cbb249b4c",
-              "bytes": 15326,
+              "sha256": "86acc3f38d3044dcd01126b4f47c81dda596b8450dc1965855a06ad3c2956ab7",
+              "bytes": 7712,
               "width": 685,
               "height": 104
             },
             {
               "path": "veil-2019-12/atlases/z.webp",
-              "sha256": "7572a851cf0298dd7af8cf5356e894f0396e3dacb5e132e6372a1feddb056beb",
-              "bytes": 13936,
-              "width": 695,
+              "sha256": "ab69ee4817a6ce0853d22a36d13b9a02b71bdf4f61e708b21adf97d47017f1f1",
+              "bytes": 7594,
+              "width": 694,
               "height": 103
             }
           ],
@@ -4102,7 +4104,7 @@
             },
             "models": {
               "zimpol-v": "Sky-plane slab. The degree map, floor-subtracted and stretched to five percent, sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
-              "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. It is drawn as starlight scattered by that dust, so brightness follows the inverse-square illumination each parcel receives; the published density itself is uniform."
+              "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
             },
             "limitations": [
               "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
@@ -4112,22 +4114,23 @@
               "Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.",
               "Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.",
               "The two lenses are five years apart. Neither is a picture of the other.",
-              "The clump covers the star rather than dimming it: the leaves composite over the photosphere while the clump is the nearer of the two, but they add their own light instead of absorbing the star’s.",
+              "The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.",
+              "Its extinction is grey. Silicate dust reddens what it transmits; no colour was applied because the photosphere behind it is drawn in an infrared intensity palette, not in colour.",
+              "The scattered light is a stated display level, not a measurement.",
               "The 2024 map always composites behind the star, because its emission surrounds the body instead of standing clear of it in depth."
             ]
           },
           "approximation": {
-            "method": "Filtered scalar fields; decoded after filtering; integrated RGB emission; exponential shared opacity with optical RGB ratios in ordinary alpha.",
+            "method": "Filtered scalar fields; decoded after filtering; integrated emission/absorption; symmetric slab attenuation; exponential energy in ordinary alpha.",
             "radialEmission": "None.",
             "limitations": [
-              "Shared-opacity display emission preserves column-constant chromaticity before RGBA8 quantization; varying chromaticity remains a slab approximation. Extinction is unsupported.",
+              "Ordinary alpha approximates emitted light and wavelength-dependent extinction.",
               "Finite slices and axis handoffs approximate a continuous field; angle-dependent opacity and sampling differences remain.",
               "No runtime ray integration, near-field noise or global HDR display pass."
             ],
             "samplesPerSlab": 4,
             "opticalWeight": 1,
-            "exposureGain": 2.5,
-            "emissionTransfer": "shared-opacity",
+            "exposureGain": 0.10357820290764465,
             "sliceCounts": {
               "x": 24,
               "y": 24,

@@ -56,7 +56,13 @@ export const STRETCH = Object.freeze({ backgroundAnnulusUnits: [8, 12] as const,
 /** Montargès et al. 2021, Extended Data Table 3, December 2019: the optimised epoch. January and March 2020 are recorded
  * there as unoptimised best guesses and are not shipped. Coordinates are theirs, in astronomical units. */
 export const VEIL_2019_12 = Object.freeze({ centreRaDecEarthAu: [-1.9, -3.0, 12.5] as const, radiusAu: 6.5,
-  densityGramsPerCubicCentimetre: 3.2e-19, grainMicrometres: 0.21, composition: 'MgFeSiO4' });
+  densityGramsPerCubicCentimetre: 3.2e-19, grainMicrometres: 0.21, composition: 'MgFeSiO4',
+  /** "the southern hemisphere of the star was ten times darker than usual in the visible" (abstract). */
+  dimmingFactor: 10,
+  /** Display choice, not a measurement: the brightest scattered column is drawn at this fraction of the photosphere's
+   * surface brightness, the order an inverse-square dilution gives for a clump 3.7 stellar radii out with a silicate
+ * albedo near a half. */
+  scatteredSurfaceBrightness: 0.04 });
 const METERS_PER_PARSEC = 3.085677581491367e16, ARCSEC_PER_RADIAN = 206264.80624709636, METRES_PER_AU = 1.495978707e11;
 
 function bilinear(values: Float64Array, width: number, height: number, x: number, y: number): number {
@@ -73,28 +79,31 @@ async function pinnedFits(product: { path: string; sha256: string; bytes: number
 }
 
 /** Encode one scalar field as the RGBA8 grid the slab baker reads; its own channel transfer squares the byte back. */
-function encodeGrid(sample: (x: number, y: number, z: number) => number) {
+function encodeGrid(sample: (x: number, y: number, z: number) => number | readonly [number, number]) {
   const { size, halfUnits } = GRID, step = 2 * halfUnits / size, rgba = new Uint8Array(size ** 3 * 4);
+  const byte = (value: number) => Math.round(255 * Math.sqrt(Math.max(0, Math.min(1, value))));
   let peak = 0, filled = 0;
   for (let k = 0; k < size; k++) for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     const value = sample(-halfUnits + (i + 0.5) * step, -halfUnits + (j + 0.5) * step, -halfUnits + (k + 0.5) * step);
-    if (!(value > 0)) continue;
-    peak = Math.max(peak, value); filled++;
-    const byte = Math.round(255 * Math.sqrt(Math.min(1, value)));
+    // One field fills the first three channels; a pair puts extinction in the first channel and the light it
+    // scatters in the second, which is how the slab compiler reads absorption and emission separately.
+    const [first, second] = typeof value === 'number' ? [value, value] : value;
+    if (!(first > 0) && !(second > 0)) continue;
+    peak = Math.max(peak, first, second); filled++;
     const o = 4 * ((k * size + j) * size + i);
-    rgba[o] = rgba[o + 1] = rgba[o + 2] = byte;
+    if (typeof value === 'number') { rgba[o] = rgba[o + 1] = rgba[o + 2] = byte(first); }
+    else { rgba[o] = byte(first); rgba[o + 1] = byte(second); }
   }
   return { rgba, ktx2: encodeDensityKtx2({ width: size, height: size, depth: size, encodedRgba: rgba }, 9), peak, filled };
 }
 
 /** The slab recipe both grids share: one emission channel, shared opacity, twenty-four slabs an axis. */
-function volumeRecipe(grid: string, gridSha256: string, decodedSha256: string, provenanceSha256: string, exposureGain: number, color: readonly number[]) {
+function volumeRecipe(grid: string, gridSha256: string, decodedSha256: string, provenanceSha256: string, material: Record<string, unknown>) {
   return {
     schema: 'cssearth-volume-recipe@1',
     grid: { path: grid, sha256: gridSha256, decodedSha256, dimensions: [GRID.size, GRID.size, GRID.size], encoding: 'sqrt-density-unorm8',
       bounds: { min: [-GRID.halfUnits, -GRID.halfUnits, -GRID.halfUnits], max: [GRID.halfUnits, GRID.halfUnits, GRID.halfUnits] } },
-    material: { emission: [{ channel: 0, color: [...color], strength: 1 }], absorption: [], emissionTransfer: 'shared-opacity',
-      intensityScale: 1, stepScale: 1, stepMetric: 'source', exposureGain },
+    material: { intensityScale: 1, stepScale: 1, stepMetric: 'source', ...material },
     bake: { sliceCounts: { x: GRID.slabs, y: GRID.slabs, z: GRID.slabs }, unitsPerSourceUnit: 1, imageWidth: 320, samplesPerSlab: 4,
       cropTransparent: true, opticalWeight: 1, imageEncoding: { format: 'webp', quality: 90 } },
     anchors: [{ id: 'betelgeuse', referencePositionM: [0, 0, 0] }],
@@ -160,15 +169,35 @@ export async function author(defaultLens = 'zimpol-v') {
   const centre = [-xRa / auPerUnit, yDec / auPerUnit, -zEarth / auPerUnit] as const;
   const veilRadius = VEIL_2019_12.radiusAu / auPerUnit;
   const nearest = Math.max(1, Math.hypot(...centre) - veilRadius);
+  // Montarges et al. 2021 report the southern hemisphere ten times darker than usual, so the line of sight through
+  // the clump carries an optical depth of ln 10. The slab compiler integrates density * strength * ds along the ray
+  // and the sum of ds across the sphere is its diameter, so this strength puts exactly that depth on the central ray.
+  const veilOpticalDepth = Math.log(VEIL_2019_12.dimmingFactor), veilAbsorption = veilOpticalDepth / (2 * veilRadius);
   // The published clump lies wholly between the observer and the photosphere at the Earth view, so the bank may
   // composite it over the star while its centre is the nearer of the two. Fail rather than claim that wrongly.
   if (!(centre[2] + veilRadius < -1)) throw new Error('The clump overlaps the photosphere in depth; it cannot occult it as a whole.');
   const veil = encodeGrid((x, y, z) => {
-    if (Math.hypot(x - centre[0], y - centre[1], z - centre[2]) > veilRadius) return 0;
-    // The published density is uniform, so brightness is only the inverse-square illumination each parcel receives,
-    // normalised to the parcel of this clump that lies closest to the photosphere.
-    return Math.min(1, nearest ** 2 / Math.max(1, x * x + y * y + z * z));
+    if (Math.hypot(x - centre[0], y - centre[1], z - centre[2]) > veilRadius) return [0, 0] as const;
+    // The published density is uniform, so the first channel, which the slab compiler reads as extinction, is flat
+    // inside the sphere. The second is the light that dust scatters toward us, which follows the inverse-square
+    // illumination each parcel receives, normalised to the parcel closest to the photosphere.
+    return [1, Math.min(1, nearest ** 2 / Math.max(1, x * x + y * y + z * z))] as const;
   });
+  // The scattered light has to be far fainter than the photosphere or it hides the extinction that is the point.
+  // Its brightest column is measured here, and the gain below puts that column at the target surface brightness.
+  let veilBrightestColumn = 0;
+  for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
+    const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step;
+    let column = 0;
+    for (let k = 0; k < size; k++) {
+      const z = -halfUnits + (k + 0.5) * step;
+      if (Math.hypot(x - centre[0], y - centre[1], z - centre[2]) > veilRadius) continue;
+      column += Math.min(1, nearest ** 2 / Math.max(1, x * x + y * y + z * z)) * step;
+    }
+    veilBrightestColumn = Math.max(veilBrightestColumn, column);
+  }
+  // The slab compiler applies exp(-tau/2) to a slab's own emission, so the gain compensates for the clump's depth.
+  const veilGain = -Math.log(1 - VEIL_2019_12.scatteredSurfaceBrightness) / (veilBrightestColumn * Math.exp(-veilOpticalDepth / 2));
 
   const provenance = {
     schema: 'cssearth-volume-provenance@1',
@@ -188,7 +217,7 @@ export async function author(defaultLens = 'zimpol-v') {
       veilCentreUnits: [...centre], veilRadiusUnits: veilRadius },
     models: {
       'zimpol-v': 'Sky-plane slab. The degree map, floor-subtracted and stretched to five percent, sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.',
-      'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. It is drawn as starlight scattered by that dust, so brightness follows the inverse-square illumination each parcel receives; the published density itself is uniform.`,
+      'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
     },
     limitations: [
       'The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.',
@@ -198,22 +227,30 @@ export async function author(defaultLens = 'zimpol-v') {
       'Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.',
       'Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.',
       'The two lenses are five years apart. Neither is a picture of the other.',
-      'The clump covers the star rather than dimming it: the leaves composite over the photosphere while the clump is the nearer of the two, but they add their own light instead of absorbing the star\u2019s.',
+      'The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.',
+      'Its extinction is grey. Silicate dust reddens what it transmits; no colour was applied because the photosphere behind it is drawn in an infrared intensity palette, not in colour.',
+      'The scattered light is a stated display level, not a measurement.',
       'The 2024 map always composites behind the star, because its emission surrounds the body instead of standing clear of it in depth.',
     ],
   };
   const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n');
   const provenanceSha = sha256(provenanceBytes);
   const grids = [
-    { id: 'zimpol-v', label: 'SPHERE/ZIMPOL · polarised dust, 2024', file: 'density-zimpol-v.ktx2', built: zimpol, exposureGain: 4, color: [1, 1, 1] as const,
-      sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B' },
-    { id: 'veil-2019-12', label: 'Great Dimming clump · December 2019', file: 'density-veil-2019-12.ktx2', built: veil, exposureGain: 2.5, color: [1, 0.82, 0.62] as const,
-      sourceUrl: 'https://arxiv.org/abs/2201.10551', occultingCentreUnits: [...centre] as [number, number, number] },
+    { id: 'zimpol-v', label: 'SPHERE/ZIMPOL · polarised dust, 2024', file: 'density-zimpol-v.ktx2', built: zimpol,
+      sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
+      material: { emission: [{ channel: 0, color: [1, 1, 1], strength: 1 }], absorption: [], emissionTransfer: 'shared-opacity', exposureGain: 4 } },
+    { id: 'veil-2019-12', label: 'Great Dimming clump · December 2019', file: 'density-veil-2019-12.ktx2', built: veil,
+      sourceUrl: 'https://arxiv.org/abs/2201.10551', occultingCentreUnits: [...centre] as [number, number, number],
+      // Grey extinction from the uniform published density, and the warm light it scatters from the second channel.
+      // Ordinary source-over then gives transmission times what is behind plus the scattered term, which is the
+      // emission-absorption composite: the star behind the clump is dimmed, not covered.
+      material: { emission: [{ channel: 1, color: [1, 0.82, 0.62], strength: 1 }],
+        absorption: [{ channel: 0, color: [1, 1, 1], strength: veilAbsorption }], exposureGain: veilGain } },
   ];
   const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes]];
   const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string; sha256: string }; occultingCentreUnits?: [number, number, number] }[] = [];
   for (const grid of grids) {
-    const recipeBytes = Buffer.from(JSON.stringify(volumeRecipe(grid.file, sha256(grid.built.ktx2), sha256(grid.built.rgba), provenanceSha, grid.exposureGain, grid.color), null, 2) + '\n');
+    const recipeBytes = Buffer.from(JSON.stringify(volumeRecipe(grid.file, sha256(grid.built.ktx2), sha256(grid.built.rgba), provenanceSha, grid.material), null, 2) + '\n');
     outputs.push([grid.file, Buffer.from(grid.built.ktx2)], [`volume-${grid.id}.json`, recipeBytes]);
     deliveryGrids.push({ id: grid.id, label: grid.label, sourceUrl: grid.sourceUrl,
       recipe: { path: `src/objects/betelgeuse-shell/source/volume-${grid.id}.json`, sha256: sha256(recipeBytes) },
@@ -257,6 +294,7 @@ export async function author(defaultLens = 'zimpol-v') {
     : [{ id: 'model', label: 'Model', value: 'RADMC-3D sphere of constant density, Montarg\u00e8s et al. 2021, Extended Data Table 3' },
        { id: 'geometry', label: 'Centre and radius', value: '(\u22121.9, \u22123.0, +12.5) au along right ascension, declination and toward Earth; radius 6.5 au' },
        { id: 'density', label: 'Dust density', value: '3.2 \u00d7 10\u207b\u00b9\u2079 g cm\u207b\u00b3 in MgFeSiO\u2084 grains centred on 0.21 \u00b5m' },
+       { id: 'extinction', label: 'Optical depth', value: `ln ${VEIL_2019_12.dimmingFactor} through the centre, the ${VEIL_2019_12.dimmingFactor}-times dimming the paper reports` },
        { id: 'epoch', label: 'Epoch', value: 'December 2019, the only optimised solution the paper reports' }];
   const presentation = {
     schema: 'cssearth-volume-presentation-source@1', objectId: 'betelgeuse-shell', name: 'Betelgeuse dust shell',
@@ -269,8 +307,8 @@ export async function author(defaultLens = 'zimpol-v') {
       id: grid.id, label: grid.label, title: grid.id === 'zimpol-v' ? 'Polarised dust around Betelgeuse in 2024' : 'The dust clump of the Great Dimming',
       description: grid.id === 'zimpol-v'
         ? 'The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.'
-        : 'The dust clump Montarg\u00e8s et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. It is drawn as starlight scattered by that dust, so only the illumination varies across it. This is a model fitted to images, not an image.',
-      summary: grid.id === 'zimpol-v' ? 'Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.' : 'A published model of the dust that dimmed the southern hemisphere in December 2019.',
+        : 'The dust clump Montarg\u00e8s et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.',
+      summary: grid.id === 'zimpol-v' ? 'Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.' : 'The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.',
       detail: grid.id === 'zimpol-v' ? '1024 \u00d7 1024 px at 3.6 mas' : 'Sphere of 6.5 au at 13.0 au',
       facts: facts(grid), input: grid.id === 'zimpol-v' ? 'sphere-zimpol-betelgeuse-p1-v-dolp' : 'veil-2019-12-parameters',
       preview: { path: `${packageBase}/${PREVIEWS[grid.id as keyof typeof PREVIEWS].path}`,
