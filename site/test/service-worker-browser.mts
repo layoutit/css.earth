@@ -67,6 +67,12 @@ class Site {
 <body><output id="data"></output><script>
 fetch('/scenes/alpha/data.json').then(r => r.json()).then(d => { document.getElementById('data').value = d.version; document.documentElement.dataset.ready = 'true'; });
 </script><script src="/register.js"></script>`);
+    } else if (path === '/gamma/') {
+      send('text/html; charset=utf-8', `<!doctype html><title>many files</title><body><output id="data">many</output><script>
+Promise.all(Array.from({ length: 200 }, (_, i) => fetch('/scenes/gamma/' + i + '.json').then(r => r.json()))).then(all => { document.body.dataset.files = String(all.length); document.documentElement.dataset.ready = 'true'; });
+</script><script src="/register.js"></script>`);
+    } else if (/^\/scenes\/gamma\/\d+\.json$/u.test(path)) {
+      send('application/json', JSON.stringify({ file: path, padding: 'x'.repeat(20_000) }));
     } else if (path === '/scenes/alpha/data.json') {
       send('application/json', JSON.stringify({ version: `v${this.version}` }));
     } else if (path === '/register.js') {
@@ -142,6 +148,8 @@ for (const name of selected) {
     // mode an installed app reports.
     await context.addInitScript(() => {
       const original = window.matchMedia.bind(window);
+      // A page opened with ?tab is an ordinary browser tab of the same visitor.
+      if (location.search.includes('tab')) return;
       window.matchMedia = query => query === '(display-mode: standalone)'
         ? { matches: true, media: query, onchange: null, addListener() {}, removeListener() {},
             addEventListener() {}, removeEventListener() {}, dispatchEvent: () => false } as MediaQueryList
@@ -155,6 +163,36 @@ for (const name of selected) {
       await storedVersion(page, base, 'v1');
     });
 
+    await t.test('a browser tab of the same visitor keeps the installed app\'s worker and copies', async () => {
+      const tabPage = await context.newPage();
+      await open(tabPage, `${base}/alpha/?tab`);
+      await tabPage.waitForTimeout(1500);
+      const after = await state(tabPage);
+      await tabPage.close();
+      assert.equal(after.registrations, 1);
+      assert.ok(after.caches.includes('cssearth-runtime-v1'));
+      await storedVersion(page, base, 'v1');
+    });
+
+    await t.test('a page left right away is still complete offline', async () => {
+      await open(page, `${base}/gamma/`);
+      // Leave before the next five-second copy batch; the worker finishes it.
+      await open(page, `${base}/alpha/`);
+      // Entries can be listed before their writes finish, so wait until the
+      // complete set has held for five seconds.
+      const complete = () => page.evaluate(async origin => {
+        const keys = (await (await caches.open('cssearth-runtime-v1')).keys()).map(request => request.url);
+        return keys.filter(url => url.startsWith(`${origin}/scenes/gamma/`)).length === 200 && keys.includes(`${origin}/gamma/`);
+      }, base);
+      let heldSince = 0;
+      for (const deadline = Date.now() + 60_000; Date.now() < deadline;) {
+        heldSince = await complete() ? heldSince || Date.now() : 0;
+        if (heldSince && Date.now() - heldSince >= 5_000) break;
+        await page.waitForTimeout(500);
+      }
+      assert.ok(heldSince && Date.now() - heldSince >= 5_000, 'the left page was never completely stored');
+    });
+
     await t.test('after a deploy, online visitors see it at once and the stored copies follow', async () => {
       site.version = 2;
       assert.deepEqual(await open(page, `${base}/alpha/`), { deploy: 'v2', data: 'v2', controlled: true });
@@ -164,6 +202,7 @@ for (const name of selected) {
     await t.test('offline, visited pages load from storage and unvisited pages fail', async () => {
       site.outage();
       assert.deepEqual(await open(page, `${base}/alpha/`), { deploy: 'v2', data: 'v2', controlled: true });
+      assert.equal(await open(page, `${base}/gamma/`).then(() => page.evaluate(() => document.body.dataset.files)), '200');
       await assert.rejects(page.goto(`${base}/beta/`));
       // Reopening the app after that failure still finds the stored page. A new
       // tab avoids racing Chromium's late-committing error page for /beta/.

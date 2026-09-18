@@ -4,6 +4,10 @@
 
 export const CACHE_PREFIX = 'cssearth-';
 export const RUNTIME_CACHE = 'cssearth-runtime-v1';
+// Written by the installed app when it registers. Browser tabs share the same
+// origin, worker and storage, so a tab removes the worker only when this marker
+// is missing, meaning the worker came from an earlier build that registered tabs.
+export const INSTALLED_CACHE = 'cssearth-installed-v1';
 export const INDEX_CACHE = 'cssearth-runtime-index-v1';
 export const INDEX_URL = '/__cssearth-runtime-index__';
 export const RUNTIME_BUDGET_BYTES = 512 * 1024 * 1024;
@@ -13,6 +17,8 @@ export const STORE_CONCURRENCY = 4;
 export const STORE_MESSAGE = 'cssearth-store';
 export const PUT_MESSAGE = 'cssearth-put';
 export const TOUCH_MESSAGE = 'cssearth-touch';
+// Files the page could not copy before it was hidden; the worker copies them.
+export const FETCH_MESSAGE = 'cssearth-fetch';
 const STORE_BATCH_LIMIT = 2000;
 
 // Query parameters that route a page through the search function. Offline, the

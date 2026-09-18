@@ -1,13 +1,13 @@
 /// <reference lib="webworker" />
 import {
-  CACHE_PREFIX, storedHeaders, evictionPlan, INDEX_CACHE, isNetworkDown, networkDownUntil, INDEX_URL, isStorableRoute, offlinePageFallback, parseIndex, parsePutMessage,
-  parseUrlsMessage, responseValidator, routeRequest, RUNTIME_CACHE, runtimeBudget, STORE_MESSAGE, TOUCH_MESSAGE,
+  CACHE_PREFIX, FETCH_MESSAGE, INSTALLED_CACHE, storedHeaders, evictionPlan, INDEX_CACHE, isNetworkDown, networkDownUntil, INDEX_URL, isStorableRoute, offlinePageFallback, parseIndex, parsePutMessage,
+  parseUrlsMessage, responseValidator, routeRequest, RUNTIME_CACHE, runtimeBudget, STORE_CONCURRENCY, STORE_MESSAGE, TOUCH_MESSAGE,
   type IndexEntry, type PutMessage,
 } from './policy.mts';
 
 declare const self: ServiceWorkerGlobalScope;
 
-const OWNED_CACHES = new Set([RUNTIME_CACHE, INDEX_CACHE]);
+const OWNED_CACHES = new Set([RUNTIME_CACHE, INDEX_CACHE, INSTALLED_CACHE]);
 const INDEX_WRITE_DELAY_MS = 2000;
 
 let index: Map<string, IndexEntry> | null = null;
@@ -65,7 +65,19 @@ function requestTrim(): Promise<void> {
   return trimming;
 }
 
-async function put({ url, body, headers }: PutMessage) {
+// Writes to one entry never overlap: when the page is hidden its last copy can
+// still be landing while the worker copies the same file, and overlapping
+// cache.put calls for one URL lost the entry in Firefox and WebKit.
+const writing = new Map<string, Promise<void>>();
+
+function put(message: PutMessage): Promise<void> {
+  const previous = writing.get(message.url) ?? Promise.resolve();
+  const next = previous.then(() => write(message));
+  writing.set(message.url, next);
+  return next.finally(() => { if (writing.get(message.url) === next) writing.delete(message.url); });
+}
+
+async function write({ url, body, headers }: PutMessage) {
   if (!isStorableRoute(routeRequest({ url, method: 'GET', scope: self.registration.scope }))) return;
   const responseHeaders = new Headers(storedHeaders(headers));
   try {
@@ -87,6 +99,33 @@ async function markUsed(urls: readonly string[]) {
   const now = Date.now();
   for (const url of urls) { const entry = entries.get(url); if (entry) entry.used = now; }
   scheduleIndexWrite();
+}
+
+// Copies files the page left behind when it was hidden, so a quick visit is
+// still complete offline. Named files are revalidated with the server: Safari
+// gives the worker its own HTTP cache, which would otherwise replay an earlier
+// deploy's bytes. Hashed files cannot change, so any cached copy will do.
+async function keep(url: string) {
+  const route = routeRequest({ url, method: 'GET', scope: self.registration.scope });
+  if (!isStorableRoute(route)) return;
+  const entries = await loadIndex();
+  if (route.kind === 'immutable' && entries.has(url)) { await markUsed([url]); return; }
+  try {
+    const response = await fetch(url, { cache: route.kind === 'immutable' ? 'force-cache' : 'no-cache', credentials: 'same-origin' });
+    if (response.status !== 200 || response.type !== 'basic' || response.redirected) { await response.body?.cancel(); return; }
+    const validator = responseValidator(response.headers);
+    if (validator && entries.get(url)?.validator === validator) { await response.body?.cancel(); await markUsed([url]); return; }
+    await put({ url, body: await response.arrayBuffer(), headers: [...response.headers] });
+  } catch {
+    // The copy is best effort; the next visit tries again.
+  }
+}
+
+async function keepAll(urls: readonly string[]) {
+  const queue = [...urls];
+  await Promise.all(Array.from({ length: STORE_CONCURRENCY }, async () => {
+    for (let url = queue.shift(); url !== undefined; url = queue.shift()) await keep(url);
+  }));
 }
 
 // Answers which of the page's files are worth sending and what version of
@@ -129,6 +168,8 @@ self.addEventListener('message', event => {
   const [port] = event.ports;
   const ask = parseUrlsMessage(event.data, STORE_MESSAGE);
   if (ask && port) { event.waitUntil(known(ask).then(answer => port.postMessage(answer))); return; }
+  const left = parseUrlsMessage(event.data, FETCH_MESSAGE);
+  if (left) { event.waitUntil(keepAll(left)); return; }
   const used = parseUrlsMessage(event.data, TOUCH_MESSAGE);
   if (used) { event.waitUntil(markUsed(used)); return; }
   const message = parsePutMessage(event.data);

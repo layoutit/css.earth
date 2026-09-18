@@ -1,5 +1,6 @@
 import {
-  CACHE_PREFIX, PUT_MESSAGE, responseValidator, shouldRegisterServiceWorker, STORE_CONCURRENCY, STORE_MESSAGE, TOUCH_MESSAGE,
+  CACHE_PREFIX, FETCH_MESSAGE, INSTALLED_CACHE, PUT_MESSAGE, responseValidator, shouldRegisterServiceWorker, STORE_CONCURRENCY,
+  STORE_MESSAGE, TOUCH_MESSAGE,
 } from './service-worker/policy.mts';
 
 const FLUSH_INTERVAL_MS = 5000;
@@ -9,9 +10,11 @@ const FLUSH_INTERVAL_MS = 5000;
 // worker. Instead the page reads the files it used back from its own HTTP cache
 // and hands the changed ones to the worker: the page's cache holds exactly the
 // bytes it showed, while Safari gives the worker a separate cache that kept an
-// earlier deploy's bytes. A page that should not be controlled
-// (development servers, browser tabs, or a build that turns offline support
-// off) removes any worker and copies an earlier visit left behind.
+// earlier deploy's bytes. What the page has not copied when it is hidden goes
+// to the worker, which copies it itself. A build that turns offline support off
+// (or a development server) removes any worker and every copy. A browser tab
+// removes only a worker an earlier build registered from a tab: the installed
+// app shares the tab's origin, worker and storage, and marks its own.
 export function registerServiceWorker(windowTarget: Window, enabled: boolean) {
   const container = windowTarget.navigator.serviceWorker;
   if (!container) return;
@@ -20,8 +23,14 @@ export function registerServiceWorker(windowTarget: Window, enabled: boolean) {
     if (windowTarget.document.readyState === 'complete') task();
     else windowTarget.addEventListener('load', task, { once: true });
   };
-  if (!enabled || !shouldRegisterServiceWorker(standalone)) {
+  if (!enabled) {
     whenLoaded(() => { void removeServiceWorker(windowTarget, container); });
+    return;
+  }
+  if (!shouldRegisterServiceWorker(standalone)) {
+    whenLoaded(() => {
+      void installedAppOwnsWorker(windowTarget).then(owned => owned ? undefined : removeServiceWorker(windowTarget, container));
+    });
     return;
   }
   const origin = windowTarget.location.origin;
@@ -39,26 +48,45 @@ export function registerServiceWorker(windowTarget: Window, enabled: boolean) {
     return;
   }
   let copying = Promise.resolve();
+  const unfinished = new Set<string>();
   const flush = (worker: ServiceWorker | null) => {
     add(`${origin}${windowTarget.location.pathname}`);
     if (!worker || !pending.size) return;
     const urls = [...pending];
     pending.clear();
-    for (const url of urls) sent.add(url);
-    copying = copying.then(() => copyToWorker(worker, urls)).catch(() => undefined);
+    for (const url of urls) { sent.add(url); unfinished.add(url); }
+    copying = copying.then(() => copyToWorker(worker, urls, url => unfinished.delete(url))).catch(() => undefined);
+  };
+  // Copying in the page stops when the page goes away; the worker finishes it.
+  const handOver = (worker: ServiceWorker | null) => {
+    add(`${origin}${windowTarget.location.pathname}`);
+    const urls = [...unfinished, ...pending];
+    if (!worker || !urls.length) return;
+    for (const url of pending) sent.add(url);
+    pending.clear();
+    unfinished.clear();
+    worker.postMessage({ type: FETCH_MESSAGE, urls });
   };
   const register = () => {
     container.register('/sw.js', { scope: '/' }).then(async registration => {
       await container.ready;
+      await windowTarget.caches.open(INSTALLED_CACHE).then(cache => cache.put('/installed', new Response('1'))).catch(() => undefined);
       flush(registration.active);
       windowTarget.setInterval(() => flush(registration.active), FLUSH_INTERVAL_MS);
-      // A visitor may leave before the next interval.
-      windowTarget.addEventListener('pagehide', () => flush(registration.active));
+      windowTarget.addEventListener('pagehide', () => handOver(registration.active));
     }).catch(error => {
       console.warn('Offline support is unavailable.', error);
     });
   };
   whenLoaded(register);
+}
+
+async function installedAppOwnsWorker(windowTarget: Window): Promise<boolean> {
+  try {
+    return await windowTarget.caches.has(INSTALLED_CACHE);
+  } catch {
+    return false;
+  }
 }
 
 async function removeServiceWorker(windowTarget: Window, container: ServiceWorkerContainer) {
@@ -88,8 +116,9 @@ function askWorker(worker: ServiceWorker, urls: readonly string[]): Promise<Reco
   });
 }
 
-async function copyToWorker(worker: ServiceWorker, urls: readonly string[]) {
+async function copyToWorker(worker: ServiceWorker, urls: readonly string[], done: (url: string) => void) {
   const known = await askWorker(worker, urls);
+  for (const url of urls) if (!(url in known)) done(url);
   const queue = Object.keys(known);
   const unchanged: string[] = [];
   await Promise.all(Array.from({ length: STORE_CONCURRENCY }, async () => {
@@ -103,6 +132,8 @@ async function copyToWorker(worker: ServiceWorker, urls: readonly string[]) {
         worker.postMessage({ type: PUT_MESSAGE, url, body, headers: [...response.headers] }, [body]);
       } catch {
         // The copy is best effort; the next visit tries again.
+      } finally {
+        done(url);
       }
     }
   }));
