@@ -4,6 +4,7 @@ import type { SourceBinding } from '../../src/platform/source-catalog.mts';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
 export { executeAcquisition, parseAcquisitionPlan };
+import { RUNTIME_ASSET_ORIGIN } from '../source-mirror.mts';
 import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from '../../src/renderers/css/paging/prepared-block-transport.js';
 import type { PreparedReference } from '../../src/renderers/css/paging/types.js';
 import { createHash, randomUUID } from 'node:crypto';
@@ -169,8 +170,11 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
    for(const entry of [manifest.inputs,manifest.generatedIntermediates,manifest.documents].flat())try{await lstat(containedPath(sourceRoot,entry.path));}catch(error){if((error as NodeJS.ErrnoException).code==='ENOENT')missing.push(entry.path);else throw error;}
    if(groups.length||missing.length){
     const plan=parseAcquisitionPlan(JSON.parse(await readFile(resolve(sourceRoot,'preparation/acquisition.json'),'utf8')) as unknown);
-    if(groups.length)await executeAcquisition({sourceRoot,manifest,plan,group:groups[0]});
-    else await restoreMissingSources({sourceRoot,manifest,plan,missing});
+    // The mirror is opt-in in library code (executeAcquisition/restoreMissingSources default to no mirror, so a
+    // test's injected transport is never bypassed by surprise); this CLI entry point is the real restore path
+    // (invoked by restore-source-inputs.mts), so it explicitly turns the mirror on.
+    if(groups.length)await executeAcquisition({sourceRoot,manifest,plan,group:groups[0],mirrorOrigin:RUNTIME_ASSET_ORIGIN});
+    else await restoreMissingSources({sourceRoot,manifest,plan,missing,mirrorOrigin:RUNTIME_ASSET_ORIGIN});
    }
   }
   return verifySources({sourceRoot,manifest});
