@@ -145,10 +145,11 @@
     },
     {
       "id": "zimpol-published-comparison",
-      "subject": "Hanuš et al. (2019) Figure 2 as the registration of the SPHERE photograph lens",
+      "subject": "Vernazza et al. (2021) Figure B.6 as the registration of the SPHERE photograph lens",
       "status": "included",
-      "finding": "Our cameras reproduce the paper’s own comparison of images and model. Projected rotation axis 23.3° on the sky against the paper’s 23.9°, measured on its red axis line in all five panels; latitude-first gives 17.9°. Scale-free outline overlap with the paper’s image and model panels 0.980 and 0.972 at our phase, the single peak of a full-turn sweep in 10° steps, falling to 0.94 to 0.96 at ±10° and about 0.85 at a quarter turn. In the 23 native frames the outline residual after the limb-fitted centre is 0.84 px mean (median 0.83, largest 1.46), smallest at our phase and rising about 0.1 px per degree. The authors’ crater contours in their Figure 4, cast from native pixels through our cameras, put each of six craters on one surface point to 6.1 km RMS over 17 sightings, about 2.6 native pixels (8.8 km latitude-first). The paper’s phase labels count rotations from its first image, 2017-10-10 03:56:12, and agree with ours to the printed digits after that offset. Measured outside preparation with scratch scripts driving the pipeline’s own observerCamera, controlledShapeCamera, limbCentre and mesh intersection; the figure measures use the published figure, not native pixels. The paper states no phase uncertainty.",
+      "finding": "Measured with tools/objects/published-comparison.mts against Vernazza et al. (2021) Figure B.6, the survey’s comparison of these frames with its MPCD and ADAM models. Outline overlap with the ADAM panels 0.957 to 0.979 at our phase; over a full turn in 10° steps it peaks at our phase in three of the four 2017 columns and 10° away in the fourth, by 0.004. With the photographs 0.964 to 0.983. Our own outline drawn again at the paper’s pixel scale scores 0.985 to 0.988 against itself, what the measure gives one shape at these two pixel sizes. The spin axis we project lies at 23.3° to 23.5° on the sky against 19.2° to 20.7° for the figure’s arrows, about the 3.0° between the release record’s pole and Table A.1’s; not verified as the cause. Native outline residual 0.843 px mean over 23 frames, smallest at 0°. Earlier, against Hanuš et al. (2019) Figure 2: Our cameras reproduce the paper’s own comparison of images and model. Projected rotation axis 23.3° on the sky against the paper’s 23.9°, measured on its red axis line in all five panels; latitude-first gives 17.9°. Scale-free outline overlap with the paper’s image and model panels 0.980 and 0.972 at our phase, the single peak of a full-turn sweep in 10° steps, falling to 0.94 to 0.96 at ±10° and about 0.85 at a quarter turn. In the 23 native frames the outline residual after the limb-fitted centre is 0.84 px mean (median 0.83, largest 1.46), smallest at our phase and rising about 0.1 px per degree. The authors’ crater contours in their Figure 4, cast from native pixels through our cameras, put each of six craters on one surface point to 6.1 km RMS over 17 sightings, about 2.6 native pixels (8.8 km latitude-first). The paper’s phase labels count rotations from its first image, 2017-10-10 03:56:12, and agree with ours to the printed digits after that offset. Measured outside preparation with scratch scripts driving the pipeline’s own observerCamera, controlledShapeCamera, limbCentre and mesh intersection; the figure measures use the published figure, not native pixels. The paper states no phase uncertainty.",
       "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
         "https://doi.org/10.1051/0004-6361/201834541",
         "https://arxiv.org/abs/1902.09242",
         "https://observations.lam.fr/astero/Data/7Iris/Deconv/",
@@ -162,6 +163,10 @@
         {
           "date": "2026-09-18",
           "commit": "72bb4d4db7c61d0b5997025b6bbe73351ada6f11"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "78c6b5e67424a52a5990316bc1ebb1c7dd1524b5"
         }
       ]
     },

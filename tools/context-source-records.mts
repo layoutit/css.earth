@@ -14,7 +14,8 @@ export async function manifestSources(manifest: Record<string, unknown>, root: s
       const installed = (path.startsWith('.local/') || collection === 'generatedIntermediates') ? await readFile(resolve(root, path)).catch((error: unknown) => {
         if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error;
       }) : await input(path);
-      if (installed && (installed.length !== bytes || sha256(installed) !== pin)) throw new Error(`Changed source document: ${path}`);
+      if (installed && (installed.length !== bytes || sha256(installed) !== pin)) throw new Error(`Changed source document: ${path}${collection !== 'generatedIntermediates' ? ''
+        : path.endsWith('sun/prepared/world-context.json') ? '. It is generated; run pnpm prepare:world-context first.' : '. It is generated; rebuild it with the step that writes it first.'}`);
       entries.push({ id: typeof raw.id === 'string' ? raw.id : `document-${sha256(path).slice(0,16)}`, path, bytes, sha256: pin,
         kind: typeof raw.kind === 'string' ? raw.kind : collection === 'inputs' ? 'source-input' : 'source-document',
         origin: typeof raw.origin === 'string' ? raw.origin : 'unrecorded', credit: typeof raw.credit === 'string' ? raw.credit : 'unrecorded',

@@ -2,7 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END, registrationBlock, registrationVerdict, withRegistrationBlock } from './report-registration.mts';
+import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END, registrationBlock, registrationBlockFor, registrationVerdict, withRegistrationBlock } from './report-registration.mts';
+import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, parseComparisonSpec } from './surface-observations/published-comparison.mts';
 import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './terrestrial-layers/observer-cameras.mts';
 
 const OBJECTS = resolve(import.meta.dirname, '../../src/objects');
@@ -67,19 +68,28 @@ test('no shipped lens contradicts its own registration unless it is a named know
   assert.deepEqual(conflicts.sort(), [...KNOWN_CONFLICTS].sort());
 });
 
-test('a lens that ships on its published comparison is prepared and names an included ledger entry', () => {
+test('a lens that ships on its published comparison has its figure, its measurements and an included ledger entry', () => {
+  let shipped = 0;
   for (const id of readdirSync(OBJECTS)) {
     const comparison = publishedComparison(id);
     if (!comparison) continue;
+    shipped++;
+    const spec = parseComparisonSpec(JSON.parse(readFileSync(resolve(OBJECTS, id, 'source', COMPARISON_SPEC_FILE), 'utf8')));
+    assert.equal(spec.lensId, comparison.lensId, `${id}: the comparison spec names the lens the observer cameras derive`);
     const prepared = resolve(OBJECTS, id, 'prepared/surfaces.json');
-    assert.ok(existsSync(prepared) && (JSON.parse(readFileSync(prepared, 'utf8')) as { surfaces: { id: string }[] }).surfaces.some(lens => lens.id === comparison.lensId),
-      `${id}: the ${comparison.lensId} lens it compares with ${comparison.source} is prepared`);
+    assert.ok(existsSync(prepared) && (JSON.parse(readFileSync(prepared, 'utf8')) as { surfaces: { id: string }[] }).surfaces.some(lens => lens.id === spec.lensId), `${id}: the ${spec.lensId} lens is prepared`);
+    const evidence = JSON.parse(readFileSync(resolve(OBJECTS, id, 'evidence/published-comparison.json'), 'utf8')) as Record<string, any>;
+    assert.equal(evidence.schema, COMPARISON_EVIDENCE_SCHEMA);
+    assert.deepEqual([evidence.lensId, evidence.source, evidence.figure, evidence.document?.object, evidence.document?.pixels], [spec.lensId, spec.source, spec.figure, spec.document.object, spec.document.sha256],
+      `${id}: evidence/published-comparison.json measures the figure the spec names; run node tools/objects/published-comparison.mts ${id} --write`);
+    assert.equal(evidence.columns?.length, spec.columns.filter(column => column.frame !== null).length, `${id}: every figure column with a lens frame is measured`);
     const ledger = JSON.parse(readFileSync(resolve(OBJECTS, id, 'investigations.json'), 'utf8')) as { entries: { id: string; status: string; evidence?: string[] }[] };
     const entry = ledger.entries.find(candidate => candidate.id === comparison.ledgerEntry);
-    assert.ok(entry, `${id}: investigations.json holds ${comparison.ledgerEntry}, the measurements behind ${comparison.figure}`);
+    assert.ok(entry, `${id}: investigations.json holds ${comparison.ledgerEntry}`);
     assert.equal(entry.status, 'included', `${id}: ${comparison.ledgerEntry} is an included decision`);
-    assert.ok(entry.evidence?.some(link => link === comparison.source), `${id}: ${comparison.ledgerEntry} cites the paper it compares with`);
+    assert.ok(entry.evidence?.includes(spec.source), `${id}: ${comparison.ledgerEntry} cites ${spec.source}`);
   }
+  assert.ok(shipped >= 1, 'at least one lens ships on its published comparison');
 });
 
 test('the block goes between the markers and leaves a README without them alone', () => {
@@ -90,7 +100,7 @@ test('the block goes between the markers and leaves a README without them alone'
   assert.deepEqual(withRegistrationBlock('# Body', 'new block'), { readme: '# Body', replaced: false });
 });
 
-test('every README that carries the markers states exactly what its prepared report gives', () => {
+test('every README that carries the markers states exactly what its prepared report gives', async () => {
   let carried = 0;
   for (const id of readdirSync(OBJECTS)) {
     const path = resolve(OBJECTS, id, 'README.md'), prepared = resolve(OBJECTS, id, 'prepared/surfaces.json');
@@ -99,7 +109,7 @@ test('every README that carries the markers states exactly what its prepared rep
     if (!readme.includes(REGISTRATION_BLOCK_BEGIN)) continue;
     carried++;
     assert.ok(existsSync(prepared), `${id}: a README with registration markers has a prepared surfaces report`);
-    const block = registrationBlock(JSON.parse(readFileSync(prepared, 'utf8')));
+    const block = await registrationBlockFor(resolve(OBJECTS, id));
     const { readme: expected } = withRegistrationBlock(readme, block);
     assert.equal(readme, expected, `${id}/README.md: the registration block differs from the prepared report; run node tools/objects/report-registration.mts ${id} --write`);
   }
