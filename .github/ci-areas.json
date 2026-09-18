@@ -7,7 +7,8 @@
     "in that order; a path matching no area also falls back to shared (unsure means shared). The final job set is",
     "the union of every touched area's `jobs`. Job ids match the workflow's job ids in universe.yml: typecheck,",
     "universe, universePreparation (job id universe-preparation), nebula. Contract lint and the object-scope gate",
-    "always run and are not listed here."
+    "always run and are not listed here.",
+    "CI proof: shared-file change for timing (safe to delete)."
   ],
   "shared": [
     "package.json",
@@ -37,10 +38,53 @@
     "tools/objects/**"
   ],
   "areas": [
-    { "id": "object", "patterns": ["src/objects/*/**"], "jobs": [] },
-    { "id": "renderer", "patterns": ["src/renderers/**"], "jobs": ["typecheck", "universe"] },
-    { "id": "site", "patterns": ["site/**"], "jobs": ["typecheck", "universe"] },
-    { "id": "tooling", "patterns": ["tools/**", "packages/**", "labs/nebula/**"], "jobs": ["typecheck", "nebula"] },
-    { "id": "docs", "patterns": ["**/*.md", "docs/**", "LICENSE*"], "jobs": [] }
+    {
+      "id": "object",
+      "patterns": [
+        "src/objects/*/**"
+      ],
+      "jobs": []
+    },
+    {
+      "id": "renderer",
+      "patterns": [
+        "src/renderers/**"
+      ],
+      "jobs": [
+        "typecheck",
+        "universe"
+      ]
+    },
+    {
+      "id": "site",
+      "patterns": [
+        "site/**"
+      ],
+      "jobs": [
+        "typecheck",
+        "universe"
+      ]
+    },
+    {
+      "id": "tooling",
+      "patterns": [
+        "tools/**",
+        "packages/**",
+        "labs/nebula/**"
+      ],
+      "jobs": [
+        "typecheck",
+        "nebula"
+      ]
+    },
+    {
+      "id": "docs",
+      "patterns": [
+        "**/*.md",
+        "docs/**",
+        "LICENSE*"
+      ],
+      "jobs": []
+    }
   ]
 }
