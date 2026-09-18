@@ -1,0 +1,18 @@
+{
+  "check": "The HD 181327 debris ring rendered in the application, face-on and tilted",
+  "revision": "6a3bcdec72f24a701b853dc06dd87488b9c662d7",
+  "date": "2026-09-18",
+  "method": "Headless Chromium, 1440 x 900 px at device scale 1, the local dev server, /hd-181327/?dataset=debris-ring, 4 s after load, then ten wheel steps out to about 350 au (face-on) and one more step and a 150 px upward drag (tilted). No console errors on either page.",
+  "images": {
+    "rendered-face-on.webp": "Altitude 349 au, the default viewing direction from Earth",
+    "rendered-tilted.webp": "Altitude 562 au after the drag; baked at 48 slices an axis"
+  },
+  "result": {
+    "stripeAmplitude": {
+      "method": "rms of a detrended pixel column through the ring at x = 1000 px, tilted view",
+      "slices24": 0.0396,
+      "slices48": 0.0078,
+      "note": "the two tilted captures were taken at 349 and 562 au, so the comparison is indicative, not like for like"
+    }
+  }
+}

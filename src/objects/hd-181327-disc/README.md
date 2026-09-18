@@ -49,7 +49,7 @@ The ring wins and is drawn: each sky column's three colours are spread along it 
 - [`disc-envelope.test.mts`](../../../tools/objects/circumstellar/disc-envelope.test.mts): a synthetic inclined ring is recovered from its own projection (radius, inclination, position angle, centre, width), the stated near side lies toward the observer, a spherical shell is refused as a ring, and a ridge of noise is refused.
 - [`imaging.test.mts`](../../../tools/objects/jwst/imaging/imaging.test.mts): coron3 programs parse, and the occulter is read from the observation's name.
 - `node tools/objects/circumstellar/author.mts hd-181327-disc --check` reproduces the grid, recipe, delivery, presentation, preview and manifest.
-- Rendered in the application (headless Chrome, 1440 × 900) at 350 au face-on and tilted, with no console errors.
+- Rendered in the application (headless Chrome, 1440 × 900) face-on and tilted, with no console errors: [`evidence/rendered.json`](evidence/rendered.json) and its two images.
 
 ## Known problems
 
