@@ -511,7 +511,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 .planet-information-panel > .planet-native-tabs:has(> [data-information-tab="dataset"]:not(:checked)) ~ .planet-dataset-context-rail,
 .planet-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
 
-/* Dataset context uses the same cards as the left sidebar, above the minimap. */
+/* Dataset context uses the same cards as the left sidebar, above the minimap.
+   With the Minimap setting off they may use its corner as well. */
+body[data-object-shell]:not([data-minimap="on"]) { --explorer-minimap-size: 0px; }
 .planet-dataset-context-dock { display: contents; }
 .planet-dataset-context-rail {
   --explorer-card-padding-left: var(--explorer-content-inset);

@@ -60,6 +60,7 @@ export function createSceneRouter({
   let asteroidBodiesEnabled = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
+  let minimapEnabled = false;
   let orbitRenderer: OrbitRenderer = 'strokes';
   let highlightedClassification: string | null = null;
   let scenePaused = true;
@@ -139,7 +140,7 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner: { shell: Shell | null } = { shell: null };
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, minimapEnabled, orbitRenderer,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
           } },
@@ -166,6 +167,10 @@ export function createSceneRouter({
           onAsteroidLabelsChange(next) { if (shellOwner === owner && active) {
             asteroidLabelsEnabled = next === true;
             worldContextMount?.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
+          } },
+          onMinimapChange(next) { if (shellOwner === owner && active) {
+            minimapEnabled = next === true;
+            worldContextMount?.setMinimapEnabled?.(minimapEnabled);
           } },
           onOrbitRendererChange(next) { if (shellOwner === owner && active) {
             orbitRenderer = next;
@@ -694,6 +699,7 @@ export function createSceneRouter({
         value.setAsteroidBodiesEnabled?.(asteroidBodiesEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
+        value.setMinimapEnabled?.(minimapEnabled);
         value.setOrbitRenderer?.(orbitRenderer);
         value.setHighlightedClassification?.(highlightedClassification);
         return value;

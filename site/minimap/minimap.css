@@ -88,10 +88,12 @@
 @media (max-width: 640px) {
   .space-minimap { --explorer-minimap-size: 140px; right: 8px; --map-scale: .7368421; }
 }
-/* Phones give the scene the whole screen, with no minimap over it. */
+/* Phones give the scene the whole screen, with no minimap over it and no setting for one. */
 @media (max-width: 820px), (orientation: portrait) {
-  .space-minimap { display: none; }
+  .space-minimap, .planet-setting-control.planet-minimap-setting-control { display: none; }
 }
+/* The Minimap setting starts off. The shell mirrors it on the body. */
+body:not([data-minimap="on"]) .space-minimap { display: none; }
 
 .space-minimap-dot[data-classification="galaxy"],
 .space-minimap-dot[data-classification="galaxy-cluster"] {

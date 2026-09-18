@@ -338,8 +338,8 @@ jobs:
       - name: Test selected dataset textures and bounded residency
         run: |
           node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
-      - name: Test prepared minimap point ownership, range and coverage
-        run: node --test site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
+      - name: Test the minimap setting and prepared minimap point ownership, range and coverage
+        run: node --test site/test/minimap-setting.test.mts site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
       - name: Test shared shell and search ownership
         run: >-
           node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts
