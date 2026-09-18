@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '../surface-observations/published-comparison.mts';
 import { latitudeSpan, nightsText, noticeWithLens, readmeWithLens, unusedWords, withAnchoredLens, withRefreshedLens } from './install.mts';
-import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, leaveOutArgument, surveyFigures } from './setup.mts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, leaveOutArguments, surveyFigures } from './setup.mts';
 import { horizonsCommand } from '../sphere-horizons.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
@@ -57,12 +57,13 @@ test('the table\'s Table A.1 poles are the ones every survey-sourced package sta
   assert.deepEqual(figures.find(figure => figure.name === 'Thisbe')?.pole, [350, 116], 'a pole printed past the pole is kept as printed; the setup folds it');
 });
 
-test('frames are left out only by a comma-separated list of ids', () => {
-  assert.deepEqual(leaveOutArgument([]), []);
-  assert.deepEqual(leaveOutArgument(['--leave-out=zimpol-20190803-042450']), ['zimpol-20190803-042450']);
-  assert.deepEqual(leaveOutArgument(['--leave-out=a,b']), ['a', 'b']);
-  assert.equal(leaveOutArgument(['--other']), null);
-  assert.equal(leaveOutArgument(['--leave-out=a', '--leave-out=b']), null);
+test('frames and whole apparitions are left out only by comma-separated lists', () => {
+  assert.deepEqual(leaveOutArguments([]), { leaveOut: [], leaveOutApparitions: [] });
+  assert.deepEqual(leaveOutArguments(['--leave-out=zimpol-20190803-042450']), { leaveOut: ['zimpol-20190803-042450'], leaveOutApparitions: [] });
+  assert.deepEqual(leaveOutArguments(['--leave-out=a,b', '--leave-out-apparition=2017-05-20']), { leaveOut: ['a', 'b'], leaveOutApparitions: ['2017-05-20'] });
+  assert.equal(leaveOutArguments(['--other']), null);
+  assert.equal(leaveOutArguments(['--leave-out=a', '--leave-out=b']), null);
+  assert.equal(leaveOutArguments(['--leave-out-apparition=May 2017']), null, 'an apparition is named by the date of its first night');
 });
 
 test('every shipped comparison\'s README section is its evidence, read', () => {

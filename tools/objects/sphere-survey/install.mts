@@ -22,7 +22,7 @@ import { OBSERVER_CAMERAS_FILE } from '../terrestrial-layers/observer-cameras.mt
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.mts';
 import { INVESTIGATION_SURVEY_DIRECTORY } from '../../investigation-survey.mts';
 import { writeHorizonsOperations } from '../sphere-horizons.mts';
-import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArgument, localCopy } from './setup.mts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './setup.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 export const COMPARISON_ENTRY = `${LENS_ID}-published-comparison`;
@@ -65,17 +65,18 @@ export function unusedWords(apparitions: readonly { from: string; to: string; fr
 }
 const span = (values: readonly number[], digits = 3) => { const low = Math.min(...values).toFixed(digits), high = Math.max(...values).toFixed(digits); return low === high ? low : `${low} to ${high}`; };
 
-export async function installSetup(objectId: string, options: { leaveOut?: readonly string[]; because?: string; replace?: boolean } = {}) {
+export async function installSetup(objectId: string, options: { leaveOut?: readonly string[]; leaveOutApparitions?: readonly string[]; because?: string; replace?: boolean } = {}) {
   const objectDirectory = resolve(ROOT, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
   const recipe = await readJson(resolve(packageSource, 'preparation/terrestrial.json'));
   const lenses = requireRecord(recipe.raster).surfaceObservations;
   const earlier = Array.isArray(lenses) ? lenses.map(lens => requireRecord(lens)).find(lens => lens.id === LENS_ID) : undefined;
   if (earlier && !options.replace) throw new Error(`${objectId} already has a ${LENS_ID} lens; the setup run compares with it and installs nothing. --replace rebuilds it from the setup.`);
   const earlierFrames = earlier ? requireArray(earlier.frames).map(frame => requireString(requireRecord(frame).path)) : [];
-  const leaveOut = options.leaveOut ?? [];
-  if (leaveOut.length > 0 && !options.because?.trim()) throw new Error('A frame left out needs its reason: --because=<why>.');
-  const setup = await buildSetup(objectId, { leaveOut }), work = resolve(ROOT, 'output/sphere-survey', objectId), scratch = resolve(work, 'source');
-  const leftOutText = leaveOut.length ? `Left out by name: ${leaveOut.join(', ')}. ${options.because?.trim()}` : '';
+  const leaveOut = options.leaveOut ?? [], leaveOutApparitions = options.leaveOutApparitions ?? [];
+  if (leaveOut.length + leaveOutApparitions.length > 0 && !options.because?.trim()) throw new Error('A frame or apparition left out needs its reason: --because=<why>.');
+  const setup = await buildSetup(objectId, { leaveOut, leaveOutApparitions }), work = resolve(ROOT, 'output/sphere-survey', objectId), scratch = resolve(work, 'source');
+  const named = [...leaveOut, ...setup.leftOutApparitions.map(entry => `the ${entry.from === entry.to ? entry.from : `${entry.from} to ${entry.to}`} apparition (${entry.frames} frames)`)];
+  const leftOutText = named.length ? `Left out by name: ${named.join(', ')}. ${options.because?.trim()}` : '';
   const { number, name, figure } = setup.survey, evidence = parseComparisonEvidence(setup.evidence);
   const disagreeing = evidence.columns.filter(column => phaseAgreement(column) === 'elsewhere');
   if (disagreeing.length > 0) throw new Error(`${objectId}'s rotation and the paper's model disagree in ${disagreeing.map(column => `${column.label} (best at ${column.bestTurnDegrees}°)`).join(', ')}; nothing installed.`);
@@ -149,7 +150,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   // The ledger: the decision, and the entries it answers.
   const ledger = await readJson(resolve(objectDirectory, 'investigations.json')), entries = requireArray(ledger.entries).map(value => requireRecord(value));
   const check = { date: today, commit }, listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
-  const unused = setup.cast.released - lensFrames - leaveOut.length;
+  const unused = setup.cast.released - lensFrames - leaveOut.length - setup.leftOutApparitions.reduce((sum, entry) => sum + entry.frames, 0);
   const decision = {
     id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph lens`, status: 'included',
     finding: [decisionFinding(figure, evidence, setup.columnOrder), leftOutText].filter(Boolean).join(' '),
@@ -332,7 +333,7 @@ export function noticeWithLens(notice: string, figure: string) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [objectId, ...rest] = process.argv.slice(2), because = rest.find(arg => arg.startsWith('--because='))?.slice('--because='.length), replace = rest.includes('--replace');
-  const leaveOut = leaveOutArgument(rest.filter(arg => !arg.startsWith('--because=') && arg !== '--replace'));
-  if (!objectId || leaveOut === null) { console.error('usage: node tools/objects/sphere-survey/install.mts <object-id> [--replace] [--leave-out=<frame-id>,… --because=<why>]'); process.exit(2); }
-  await installSetup(objectId, { leaveOut, because, replace });
+  const leaveOuts = leaveOutArguments(rest.filter(arg => !arg.startsWith('--because=') && arg !== '--replace'));
+  if (!objectId || leaveOuts === null) { console.error('usage: node tools/objects/sphere-survey/install.mts <object-id> [--replace] [--leave-out=<frame-id>,…] [--leave-out-apparition=<first night>,…] [--because=<why>]'); process.exit(2); }
+  await installSetup(objectId, { ...leaveOuts, because, replace });
 }

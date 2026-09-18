@@ -140,8 +140,13 @@ report records them.
   after surface transfer, and the report records the band policy. Encoding does
   not qualify natural color.
 - **Selection.** A mosaic picks the lowest emission, the first frame in recipe
-  order, or the finest pixel scale. Each displayed point keeps the one photograph
-  it came from.
+  order, or the finest resolution. Each displayed point keeps the one photograph
+  it came from. The finest resolution is the frame whose pixel covers the least
+  surface at that point: its pixel scale over the cosine of the emission angle
+  there, so a nearer frame that sees the point obliquely loses to a farther one
+  that sees it face on. Ranking by pixel scale alone left Kleopatra's
+  two-apparition lens at 6.69 km per displayed pixel on the surface against
+  5.06 km, and Hebe's at 5.31 against 4.42, measured on their meshes.
 - **Level matching.** Frames are compared on equal-area samples
   (`samplesPerTriangle`). A pair of frames counts when it shares `minimumPairs`
   samples and its median log ratio is known to 0.07, that is

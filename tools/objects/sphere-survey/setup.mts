@@ -32,7 +32,7 @@ import { parseSpinState, spinOrientation } from '../terrestrial-layers/observer-
 import { spinRecordReading } from '../terrestrial-layers/spin-record-reading.mts';
 import { glyphTemplates, readLabel } from './figure-labels.mts';
 import { apparitionLinks, listedViews, meshFaces, releasedFrames } from './apparitions.mts';
-import { anchorApparition, selectFrames } from './frames.mts';
+import { anchorApparition, apparitions, selectFrames } from './frames.mts';
 import { LAM, SURVEY_PAPER_URL, framesUrl, lamBytes, lamText, shapeUrl, spinRecordName, type LamFrame } from './lam.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
@@ -127,7 +127,7 @@ function objCounts(text: string) {
   return { vertices, faces };
 }
 
-export async function buildSetup(objectId: string, options: { leaveOut?: readonly string[] } = {}) {
+export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   const objectDirectory = resolve(ROOT, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
   const work = resolve(ROOT, 'output/sphere-survey', objectId), source = resolve(work, 'source'), downloads = resolve(work, 'downloads');
 
@@ -170,7 +170,13 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
     if (!listing.some(frame => frameId(frame) === id)) throw new Error(`${id} is not a released camera-1 frame of ${figure.name}.`);
     if (shown.some(frame => frame !== null && frameId(frame) === id)) throw new Error(`Figure ${figure.figure} shows ${id}; a frame the comparison reads cannot be left out.`);
   }
-  const candidates = listing.filter(frame => !leaveOut.includes(frameId(frame))), shownFrames = shown.filter((frame): frame is LamFrame => frame !== null);
+  // Whole apparitions left out by the date of their first night, each for a reason the install records: the pixels can
+  // refuse a link the geometry predicted (Daphne's 2017 frames). Their columns then show no lens frame, like any apparition
+  // the lens does not cast.
+  const leftApparitions = apparitions(listing).filter(members => (options.leaveOutApparitions ?? []).includes(members[0].second.slice(0, 10)));
+  for (const date of options.leaveOutApparitions ?? []) if (!leftApparitions.some(members => members[0].second.startsWith(date))) throw new Error(`No apparition of ${figure.name} starts on ${date}.`);
+  const leftFrames = new Set(leftApparitions.flat());
+  const candidates = listing.filter(frame => !leaveOut.includes(frameId(frame)) && !leftFrames.has(frame)), shownFrames = shown.filter((frame): frame is LamFrame => frame !== null && !leftFrames.has(frame));
 
   // A fresh copy of the package's source directory, without any earlier lens of this id, to build the lens in.
   await rm(source, { recursive: true, force: true });
@@ -305,6 +311,7 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
       return { from: members[0].second.slice(0, 10), to: members.at(-1)!.second.slice(0, 10), frames: members.length, cast: members.filter(frame => selected.includes(frame)).length,
         anchor: index === anchor, sharedSamples: links[index].sharedSamples, subObserverLatitude: [Math.min(...latitudes), Math.max(...latitudes)].map(value => Number(value.toFixed(1))) };
     }),
+    leftOutApparitions: leftApparitions.map(members => ({ from: members[0].second.slice(0, 10), to: members.at(-1)!.second.slice(0, 10), frames: members.length })),
     leftOut: leaveOut, lensMesh: adam && !primaryIsAdam ? 'adam' : 'primary', primaryIsAdam, releasedModel: released ?? null, tablePole: figure.pole,
     sources: { mesh: adam ? { label: withheld ? `ADAM reconstruction, as ${withheld.model} distributes it` : 'ADAM reconstruction', url: adamUrl } : null,
       rotation: { label: withheld ? `Rotation state, as ${withheld.model} states it` : 'Release rotation record', url: spinRecordUrl } },
@@ -314,11 +321,17 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   return setup;
 }
 
-/** Frame ids from a `--leave-out=a,b` argument, an empty list without one, or null for any other argument. */
-export function leaveOutArgument(args: readonly string[]): string[] | null {
-  const flag = '--leave-out=';
-  if (args.some(arg => !arg.startsWith(flag)) || args.length > 1) return null;
-  return args.length ? args[0].slice(flag.length).split(',').filter(id => id.length > 0) : [];
+export interface LeaveOuts { leaveOut?: readonly string[]; leaveOutApparitions?: readonly string[] }
+/**
+ * Frame ids from `--leave-out=a,b` and apparitions from `--leave-out-apparition=YYYY-MM-DD,…` (the date of each one's
+ * first night), each flag at most once; empty lists without them, or null for any other argument.
+ */
+export function leaveOutArguments(args: readonly string[]): { leaveOut: string[]; leaveOutApparitions: string[] } | null {
+  const read = (flag: string) => { const found = args.filter(arg => arg.startsWith(flag)); return found.length > 1 ? null : found.length ? found[0].slice(flag.length).split(',').filter(value => value.length > 0) : []; };
+  const leaveOut = read('--leave-out='), leaveOutApparitions = read('--leave-out-apparition=');
+  if (leaveOut === null || leaveOutApparitions === null || args.some(arg => !arg.startsWith('--leave-out=') && !arg.startsWith('--leave-out-apparition='))) return null;
+  if (leaveOutApparitions.some(date => !/^\d{4}-\d{2}-\d{2}$/u.test(date))) return null;
+  return { leaveOut, leaveOutApparitions };
 }
 
 /**
@@ -392,6 +405,7 @@ function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
   for (const column of setup.evidence.columns) lines.push(`  ${column.label}  model ${column.overlapWithModel}, photograph ${column.overlapWithPhotograph}, same shape ${column.sameShapeOverlap}; best turn ${column.bestTurnDegrees}°; axis ${column.axis.oursDegrees}° against ${column.axis.paperDegrees}°`);
   lines.push(`  native outline ${setup.evidence.nativeOutline.residualPixelsAtZero} px over ${setup.evidence.nativeOutline.frames} frames, smallest at ${setup.evidence.nativeOutline.bestOffsetDegrees}°`);
   if (setup.leftOut.length) lines.push(`  left out by name: ${setup.leftOut.join(', ')}`);
+  for (const entry of setup.leftOutApparitions) lines.push(`  apparition left out by name: ${entry.from} to ${entry.to}, ${entry.frames} frames`);
   if (setup.primaryIsAdam) lines.push('  the body’s own shape is the release’s ADAM mesh; the lens rides it');
   else if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
   if (setup.earlierLens) lines.push(`  the package's lens: ${setup.earlierLens.frames} frames, ${setup.earlierLens.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierLens.camerasDiffering.length ? setup.earlierLens.camerasDiffering.join(', ') : 'none'}`);
@@ -400,7 +414,7 @@ function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [objectId, ...rest] = process.argv.slice(2), leaveOut = leaveOutArgument(rest);
-  if (!objectId || leaveOut === null) { console.error('usage: node tools/objects/sphere-survey/setup.mts <object-id> [--leave-out=<frame-id>,…]'); process.exit(2); }
-  console.log(summary(await buildSetup(objectId, { leaveOut })));
+  const [objectId, ...rest] = process.argv.slice(2), leaveOuts = leaveOutArguments(rest);
+  if (!objectId || leaveOuts === null) { console.error('usage: node tools/objects/sphere-survey/setup.mts <object-id> [--leave-out=<frame-id>,…] [--leave-out-apparition=<first night>,…]'); process.exit(2); }
+  console.log(summary(await buildSetup(objectId, leaveOuts)));
 }
