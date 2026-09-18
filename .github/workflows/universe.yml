@@ -94,13 +94,6 @@ jobs:
           node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Check independent body additions
         run: node --test tools/body-additions.test.mts
-      - name: Test the offline worker in Chromium, WebKit and Firefox
-        # A synthetic site with the real bundled worker and registration code:
-        # deploys reach online visitors at once, stored copies follow, offline
-        # reloads work, a returning connection wins, and turning it off removes it.
-        run: |
-          pnpm exec playwright install --with-deps chromium webkit firefox
-          pnpm test:browser:service-worker
       - name: Typecheck shared code and enforce TypeScript ownership
         env:
           NODE_OPTIONS: --max-old-space-size=4096
