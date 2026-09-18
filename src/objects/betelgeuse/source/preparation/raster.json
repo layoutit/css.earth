@@ -13,6 +13,7 @@
   ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
+  "missingCoverage": "dark",
   "polesCombined": false,
   "polesOutput": "betelgeuse-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
@@ -59,7 +60,7 @@
               "id": "matisse-2020-02-continuum",
               "path": "observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
               "encoding": "fits-oi-reconstruction",
-              "backgroundMaximum": 1e-05,
+              "backgroundMaximum": 0.00001,
               "observerLatitude": 0,
               "observerWestLongitude": 0,
               "sunLatitude": 0,

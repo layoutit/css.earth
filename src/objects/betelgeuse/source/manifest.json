@@ -1124,8 +1124,8 @@
     {
       "id": "betelgeuse-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6406,
-      "expectedSha256": "98783df19374970aff7e117d69da28bc0dec03deb2e9a6305b3df9c4b6d34730",
+      "expectedBytes": 6437,
+      "expectedSha256": "4c616efcf98db7e0dab88ba663556d9c49a794103394be0b0efac782ce21e39f",
       "origin": "Repository-authored raster recipe: the MATISSE reconstruction cast onto the reference sphere by the surface-observation route, polar bands, transparent off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",

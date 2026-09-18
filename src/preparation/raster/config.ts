@@ -115,6 +115,9 @@ export interface RasterRecipe {
      * packing so the resampler never reads across stored latitude-strip gutters. */
     unpackedResizeBeforePack?: boolean;
     polarProjection: 'angular-nearest' | 'orthographic-bilinear';
+    /** How a data gap is filled. The shared cartographic grey is the default; `dark` keeps the same graticule on black,
+     * for a body whose observed side is a self-luminous image rather than a lit map. */
+    missingCoverage?: 'gray' | 'dark';
     surfaces: SurfaceRasterRecipe[];
     polesOutput: string;
     polesCombined: boolean;

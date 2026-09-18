@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "97462971b4a1f198cea164983343c2e29bd4611758f45d09b2366a77f0ee02e6"
+    "sha256": "9b3b45f6e52c39a96dbe81fda1cf2c910caf211079fc05640e0a447ca4c6c8bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "c7cf36d2a72a53db3b35d8675510b5bf650f9be80cdad80ee7647ef38bb3ea27",
+      "sha256": "9c2107f6db473126cc0780764c78c6530e55458b3371b055dcbf8c05f3d7d479",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/r-doradus/",
@@ -31,6 +31,7 @@
         ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
+        "missingCoverage": "dark",
         "polesCombined": false,
         "polesOutput": "r-doradus-poles-{id}{suffix}.webp",
         "surfaceMetadata": {
@@ -561,14 +562,14 @@
       "outputs": [
         {
           "url": "/scenes/r-doradus/r-doradus-surface-alma.webp",
-          "bytes": 20834,
-          "sha256": "5dad21b810d3895f1a75acb55d1b23e6d9ddaa921505ec480dc0da90fe19e6bb",
+          "bytes": 32898,
+          "sha256": "b1e9194518c2f0eafd84b23050f59a0d690a559780df3f0709c677150cb24bfc",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/r-doradus/r-doradus-surface-alma@2x.webp",
-          "bytes": 45252,
-          "sha256": "7a280f4e175c4ed63597e27523117d5e231ecbb515033c8cafd6d247f820d21f",
+          "bytes": 69108,
+          "sha256": "e8fb07515840409934b301caa77b34b99abba9f9e9f4b5d98420604219d1fe3a",
           "verification": "bytes-verified"
         },
         {
@@ -579,14 +580,14 @@
         },
         {
           "url": "/scenes/r-doradus/r-doradus-poles-alma.webp",
-          "bytes": 6700,
-          "sha256": "bfd8ae7936ed5bef1a553c59863bfae584154b4824ee0f0f734c80fd29fdfd78",
+          "bytes": 18300,
+          "sha256": "c0b4113246d3520a810a2798bdec2daa075f326767f434caea884ac5fe056b8d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/r-doradus/r-doradus-poles-alma@2x.webp",
-          "bytes": 16222,
-          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "bytes": 42818,
+          "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
           "verification": "bytes-verified"
         },
         {
@@ -756,8 +757,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/alma.webp",
-          "bytes": 8088,
-          "sha256": "153b8f6063dd8b13aba00169899afc4a11883ad30cf87fe33d86b362cecd4c49",
+          "bytes": 12494,
+          "sha256": "82671191effefe2945c79354a6919aeef2a549ffa6c01a16cf59c40f502c8467",
           "verification": "bytes-verified"
         }
       ]
@@ -794,7 +795,7 @@
   },
   "lastPreparation": {
     "objectId": "r-doradus",
-    "materialSha256": "c8b9c766a2758c25e1c98bfc316390164a91b75f216b3098be94abe626e0faf7",
+    "materialSha256": "d4d91d2f7728f077d66bee878d26c4d0dd9e023e0ab30af27dd4b5de08f1022e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

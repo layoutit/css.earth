@@ -142,8 +142,8 @@
     {
       "id": "r-doradus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6199,
-      "expectedSha256": "c7cf36d2a72a53db3b35d8675510b5bf650f9be80cdad80ee7647ef38bb3ea27",
+      "expectedBytes": 6228,
+      "expectedSha256": "9c2107f6db473126cc0780764c78c6530e55458b3371b055dcbf8c05f3d7d479",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",

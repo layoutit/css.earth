@@ -13,6 +13,7 @@
   ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
+  "missingCoverage": "dark",
   "polesCombined": false,
   "polesOutput": "r-doradus-poles-{id}{suffix}.webp",
   "surfaceMetadata": {
