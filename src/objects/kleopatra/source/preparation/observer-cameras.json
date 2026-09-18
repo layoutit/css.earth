@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-observer-cameras@1",
+  "lensId": "zimpol",
+  "rotation": {
+    "kind": "spin-record",
+    "path": "reference/216_Kleopatra_param.txt",
+    "columnOrder": "latitude-first",
+    "publishedPole": {
+      "source": "https://doi.org/10.1051/0004-6361/202141781",
+      "table": "Table A.1",
+      "eclipticJ2000Degrees": [
+        74,
+        22
+      ]
+    }
+  },
+  "ephemeris": {
+    "observer": "reference/horizons-sphere-observer.txt",
+    "heliocentric": "reference/horizons-sphere-heliocentric.txt"
+  },
+  "epoch": "exposure-midpoint",
+  "centre": {
+    "method": "limb",
+    "edgeFraction": 0.25
+  },
+  "publishedComparison": {
+    "ledgerEntry": "zimpol-published-comparison"
+  }
+}

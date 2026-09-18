@@ -51,13 +51,13 @@
     {
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
-      "status": "unresolved",
-      "finding": "The live source folder https://observations.lam.fr/astero/Data/3Juno/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
-      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 30 camera-1 deconvolved frames, 3 nights from 2018-11-08 to 2018-11-12, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/3Juno/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/juno/README.md",
         "https://observations.lam.fr/astero/Data/3Juno/",
-        "https://observations.lam.fr/astero/"
+        "https://observations.lam.fr/astero/",
+        "https://observations.lam.fr/astero/Data/3Juno/Deconv/"
       ],
       "checked": [
         {
@@ -68,15 +68,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
     {
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
-      "status": "excluded",
-      "finding": "The live directory also lists 3_Juno_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
-      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "status": "included",
+      "finding": "The live directory also lists 3_Juno_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Reopened 2026-09-18 because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure B.3 describe; the Shape and Elevation views keep MPCD.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -88,6 +91,10 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
@@ -95,7 +102,7 @@
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "included",
-      "finding": "The lens is prepared and the registration stage judged it. The outline scores 5 of 30 frames — those elongated enough to define a position angle, 1.294 to 1.300 — and leaves 2.21 degrees after a 2.03-degree floor, inside the three-degree gate, so the verdict is registered. The five fall in one window of two and a quarter minutes on 2018-11-11, so they sample one rotational phase rather than five independent looks. The other 25 are round, several at elongation 1.1923 to 1.1930 against the 1.2 minimum. Neither marking-based sweep places the body: the cross-frame test is decisive on 0 of 30, and the relief sweep, decisive on 20 of 30, spreads from 0.50 to 6.50 degrees, 3.25 degrees from its own median, so it disagrees by more than the gate and reaches no verdict. Measured before preparation, the same limb rule read 2.485 degrees over a 2.151-degree floor; the stage's own number is 2.21 over 2.03, the expected divergence between the two routes. Coverage is 72.7% of retained surface area over 5,884,773 interior texels, level-matched within gains of 0.67 to 1.03 and leaving at most a factor of 1.21 between overlapping frames. A registration reference independent of the outline, or frames whose outlines score across more than one rotational phase, would test the longitude this lens is pinned at; neither exists in this release.",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 30 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: The lens is prepared and the registration stage judged it. The outline scores 5 of 30 frames — those elongated enough to define a position angle, 1.294 to 1.300 — and leaves 2.21 degrees after a 2.03-degree floor, inside the three-degree gate, so the verdict is registered. The five fall in one window of two and a quarter minutes on 2018-11-11, so they sample one rotational phase rather than five independent looks. The other 25 are round, several at elongation 1.1923 to 1.1930 against the 1.2 minimum. Neither marking-based sweep places the body: the cross-frame test is decisive on 0 of 30, and the relief sweep, decisive on 20 of 30, spreads from 0.50 to 6.50 degrees, 3.25 degrees from its own median, so it disagrees by more than the gate and reaches no verdict. Measured before preparation, the same limb rule read 2.485 degrees over a 2.151-degree floor; the stage's own number is 2.21 over 2.03, the expected divergence between the two routes. Coverage is 72.7% of retained surface area over 5,884,773 interior texels, level-matched within gains of 0.67 to 1.03 and leaving at most a factor of 1.21 between overlapping frames. A registration reference independent of the outline, or frames whose outlines score across more than one rotational phase, would test the longitude this lens is pinned at; neither exists in this release.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/3Juno/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -113,6 +120,27 @@
         {
           "date": "2026-09-17",
           "commit": "321a9bd9027ba274c484fb1614947da1138cc3de"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.3 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.3, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.962 to 0.970 at our phase, against 0.986 to 0.988 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 4 of 6 columns, one step from it in 2. With the paper’s photographs 0.961 to 0.972. Turned in the image, our outline best overlaps the paper’s photographs at -3.5 to 0.0° and its model panels at -4.5 to -1.0°. The spin axis we project lies at 131.0 to 131.1° on the sky against 129.0 to 129.1° for the figure’s arrows. Native outline residual 1.339 px mean over 30 frames at our phase; the sweep’s lowest is 1.317 px at 2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 1.78° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/3Juno/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     }

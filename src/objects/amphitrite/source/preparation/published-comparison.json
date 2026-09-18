@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.20",
+  "document": {
+    "input": "amphitrite-survey-research",
+    "object": 1099,
+    "width": 1598,
+    "height": 2466,
+    "sha256": "15ff3c4ec0eeb84ad609e1fe3ec4f087aad03ac3ff017d4820478435bebd55c4"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2017-05-20T01:37:59",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-05-20T02:33:28",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-06-08T09:22:40",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-08-16T06:39:41",
+      "frame": "zimpol-20190816-063941",
+      "band": 0
+    },
+    {
+      "label": "2019-08-16T07:21:27",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-08-16T08:00:28",
+      "frame": "zimpol-20190816-080028",
+      "band": 0
+    },
+    {
+      "label": "2019-08-17T06:24:17",
+      "frame": "zimpol-20190817-062417",
+      "band": 1
+    },
+    {
+      "label": "2019-08-17T07:40:29",
+      "frame": "zimpol-20190817-074029",
+      "band": 1
+    },
+    {
+      "label": "2019-08-17T08:19:17",
+      "frame": "zimpol-20190817-081917",
+      "band": 1
+    },
+    {
+      "label": "2019-08-22T07:00:43",
+      "frame": "zimpol-20190822-070043",
+      "band": 1
+    },
+    {
+      "label": "2019-08-23T08:25:46",
+      "frame": "zimpol-20190823-082546",
+      "band": 1
+    },
+    {
+      "label": "2019-08-29T05:49:03",
+      "frame": "zimpol-20190829-054903",
+      "band": 1
+    }
+  ]
+}

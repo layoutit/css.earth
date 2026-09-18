@@ -107,6 +107,877 @@
           }
         ]
       }
+    },
+    {
+      "id": "melpomene-sphere-20190621083525",
+      "path": "observations/d18Melpomene_2019-06-21T08_35_25.727_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-06-21T08_35_25.727_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "22dd0b45eb0328fe8675c28057eb16427d12f5b7978438d0d7c98beec8e41ea0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190621083525",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190621083930",
+      "path": "observations/d18Melpomene_2019-06-21T08_39_30.101_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-06-21T08_39_30.101_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "9b214e4d7a78e157cb2f5a8ea6fc4eaa63ebd3557743163e77dc277a44707012",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190621083930",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190621084335",
+      "path": "observations/d18Melpomene_2019-06-21T08_43_35.750_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-06-21T08_43_35.750_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "cde209437af67b8386711cb6a6659cbfcd6a20724d794d5b31dd9cb367c08e0b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190621084335",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190621084738",
+      "path": "observations/d18Melpomene_2019-06-21T08_47_38.246_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-06-21T08_47_38.246_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "beda913307c1194bc265315a6285a7c369dac56bea55003324f14b721539b093",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190621084738",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190621085141",
+      "path": "observations/d18Melpomene_2019-06-21T08_51_41.170_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-06-21T08_51_41.170_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "c1a89fb8b357f3c09b7550279c43ddd992fd02b8990f27aa35f85ff0df60e127",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190621085141",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190718065830",
+      "path": "observations/d18Melpomene_2019-07-18T06_58_30.301_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-07-18T06_58_30.301_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "3b03ea2de8be39572315f31f69fb615aa691e24217c041165e31dfc4933c1ef3",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190718065830",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190718070236",
+      "path": "observations/d18Melpomene_2019-07-18T07_02_36.459_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-07-18T07_02_36.459_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "56a04cdbe90f8754826102e1c50c6f34ff164e277b6bc4d01c566a91819f5fad",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190718070236",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190718070641",
+      "path": "observations/d18Melpomene_2019-07-18T07_06_41.996_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-07-18T07_06_41.996_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "1ef03f745f4cdb7c9384eb3e575006f9cb3ee59c85c554d030a25e22d8e32fb0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190718070641",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190718071044",
+      "path": "observations/d18Melpomene_2019-07-18T07_10_44.910_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-07-18T07_10_44.910_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "de655a0aee08fd4a80f4a9ba79bccb7d756398722b7d1833c654cefade000d26",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190718071044",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190718071449",
+      "path": "observations/d18Melpomene_2019-07-18T07_14_49.111_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-07-18T07_14_49.111_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "f454062ac95e67c38876e853588e42d9ae91cce55dc2935d9bd23cf1f900b587",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190718071449",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190803014927",
+      "path": "observations/d18Melpomene_2019-08-03T01_49_27.655_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-03T01_49_27.655_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "fecbe2c1ac6668e45ccceecb17a402b3e0085b2a772763f8e5d2c97b296408cf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190803014927",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190803015332",
+      "path": "observations/d18Melpomene_2019-08-03T01_53_32.501_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-03T01_53_32.501_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "111391f85b81a0718448991704d3ea833e03c4a6c946862ae6ca03b1b92a1e99",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190803015332",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190803015737",
+      "path": "observations/d18Melpomene_2019-08-03T01_57_37.135_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-03T01_57_37.135_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "17321148de129394f8f7c67dd1fbbcd32310035da53418ade223c8e7dfd80a87",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190803015737",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190803020140",
+      "path": "observations/d18Melpomene_2019-08-03T02_01_40.676_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-03T02_01_40.676_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "e302a3a8d7a7642013e11c14b15a9494236bbbe23abda147255375d375d0492e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190803020140",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190803020545",
+      "path": "observations/d18Melpomene_2019-08-03T02_05_45.301_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-03T02_05_45.301_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "37957fca916555a8fda1cb42c166123d3176be3aef98b9a29c2a3a2fde3157fb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190803020545",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190806045938",
+      "path": "observations/d18Melpomene_2019-08-06T04_59_38.376_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-06T04_59_38.376_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "d68801e1158fbf4498c8a9c336982f0c8d5a8d0e1a9077732f7d85da86af5443",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190806045938",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190806050343",
+      "path": "observations/d18Melpomene_2019-08-06T05_03_43.252_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-06T05_03_43.252_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "c861e50c949310ca77582004f17fbca3284ef70456fddc6a96c790417dfa14d0",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190806050343",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190806050747",
+      "path": "observations/d18Melpomene_2019-08-06T05_07_47.277_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-06T05_07_47.277_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "3789fdf663b69439beb1724b86f03f3e76be97eaa5d21bba87316bf1697e5dbd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190806050747",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190806051151",
+      "path": "observations/d18Melpomene_2019-08-06T05_11_51.422_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-06T05_11_51.422_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "86cd755bd1e09a6674634d385385b0fb8caedb0a6682ee7b3a2d742c21a606ee",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190806051151",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-sphere-20190806051554",
+      "path": "observations/d18Melpomene_2019-08-06T05_15_54.447_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/18Melpomene/Deconv/d18Melpomene_2019-08-06T05_15_54.447_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "sphere-photograph"
+      ],
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "expectedBytes": 593280,
+      "expectedSha256": "691d5fdadedb5b4e21dac5cfe34878921f5399edf92ef01ffa0cacfa7c463b1f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-sphere-20190806051554",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-adam-shape",
+      "path": "shape/18_Melpomene_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/18_Melpomene_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "missionId": "eso-sphere-asteroid-survey",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "adam-terrain"
+      ],
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "expectedBytes": 31085,
+      "expectedSha256": "9ab6915b7807c060619e082c2373d9b485cdb925056e04ce34cc7daea5fa51a4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-horizons-sphere-observer",
+      "path": "reference/horizons-sphere-observer.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
+      "expectedBytes": 12468,
+      "expectedSha256": "46a9202df1d2232a54a844d0af7f07c461707c16704d95b60ea438e4cf6582dd",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-horizons-sphere-observer",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+          }
+        ]
+      }
+    },
+    {
+      "id": "melpomene-horizons-sphere-heliocentric",
+      "path": "reference/horizons-sphere-heliocentric.txt",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "credit": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "license": "Public ephemeris service output; cite JPL Horizons.",
+      "acquisition": "Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.",
+      "redistribution": "Public NASA/JPL output; retain the citation.",
+      "consumers": [
+        "sphere-sighting-geometry"
+      ],
+      "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
+      "expectedBytes": 9066,
+      "expectedSha256": "27ecabb0545e6fbf68734fec2573ccee14687a6e48c8b95f335e44e65b528ea7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-melpomene-melpomene-horizons-sphere-heliocentric",
+            "role": "material",
+            "evidence": "src/objects/melpomene/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -139,8 +1010,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10105,
-      "expectedSha256": "3d425c08b73a34f8dbb6f246d64f812f7e6b44f0fd9efd1a5ee260500f956c71",
+      "expectedBytes": 11318,
+      "expectedSha256": "c25ff96d505c8606ad9b9473eb2807496251cdc80a6a33541e7f93b3ac268648",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -148,8 +1019,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 923,
-      "expectedSha256": "bb4757ef68bc3c95bebc8d6662789a7e560bfbfce0bf1822cb41db63b8276792"
+      "expectedBytes": 9546,
+      "expectedSha256": "9f517c5d7a8aaf315cdccd9d892fc6a13ed6e1316277556a1f2fabf3636bae17"
     },
     {
       "path": "preparation/navigation.json",
@@ -163,8 +1034,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2752,
-      "expectedSha256": "cf4f836f510e4ed9a2a109b30f8e265adb6fa2bc4f0ecc898c78b2e31f9d4e62"
+      "expectedBytes": 17439,
+      "expectedSha256": "0b4a67696845053fdcda489cb9624f503ed1be92dd27297470536fe3314c1eb0"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -215,6 +1086,16 @@
           }
         ]
       }
+    },
+    {
+      "path": "preparation/observer-cameras.json",
+      "expectedBytes": 524,
+      "expectedSha256": "b3de344740a9dd1de2d9cfd0cdd171e96bd54c5a9f1cf39e8de263d691ca3a80"
+    },
+    {
+      "path": "preparation/published-comparison.json",
+      "expectedBytes": 1073,
+      "expectedSha256": "f63191560c0dbee4b9d9e7314bbcd9e683fe1563367d0e70424d372573529607"
     }
   ]
 }

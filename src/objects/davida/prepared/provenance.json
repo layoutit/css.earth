@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f5d47f7498292b2f9ce8e759b8ae0734a250170e057a21fe990ef16d1cf449e"
+    "sha256": "17a0a1f466f8cb688f8e4088061c28bdd08372c762cc4c0697e2020c8872572e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "1a876b250fa4e1567b38ca41a4af73e97a586fe7212cd3e71fd19bf9b934688a"
+    "bindingsSha256": "a0cea37b94b2ef06e5ad28560b52c770ae44834bd570591ce844d13836da88ad"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d072ddd97e28327488626cdb567d4b55bca05918f52d862303307f46bfe07227",
+      "sha256": "96a0e44cbe7b9de1c63e13df986b810be9ef36bc2646293a9f307438bb6c5497",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,6 +81,560 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "zimpol",
+              "format": "controlled-shape-camera",
+              "consumer": "sphere-photograph",
+              "metadata": {
+                "label": "SPHERE photograph",
+                "falseColor": false,
+                "coverage": "32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2018-08-31 to 2018-09-08, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.41. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 4,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1,
+                  99.5
+                ]
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20180831-034730",
+                  "path": "observations/d511Davida_2018-08-31T03_47_30.184_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.0015,
+                  "observerWestLongitude": 107.9523,
+                  "sunLatitude": -22.4961,
+                  "sunWestLongitude": 107.6898,
+                  "rangeKm": 321694875.5,
+                  "northAzimuthDegrees": 79.9014,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.06,
+                    135.613
+                  ]
+                },
+                {
+                  "id": "zimpol-20180831-035134",
+                  "path": "observations/d511Davida_2018-08-31T03_51_34.466_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.0017,
+                  "observerWestLongitude": 112.7154,
+                  "sunLatitude": -22.4957,
+                  "sunWestLongitude": 112.4522,
+                  "rangeKm": 321691771,
+                  "northAzimuthDegrees": 79.9012,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.288,
+                    135.114
+                  ]
+                },
+                {
+                  "id": "zimpol-20180831-035538",
+                  "path": "observations/d511Davida_2018-08-31T03_55_38.393_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.0019,
+                  "observerWestLongitude": 117.4715,
+                  "sunLatitude": -22.4952,
+                  "sunWestLongitude": 117.2076,
+                  "rangeKm": 321688672.6,
+                  "northAzimuthDegrees": 79.901,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.004,
+                    134.936
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-084019",
+                  "path": "observations/d511Davida_2018-09-05T08_40_19.025_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4066,
+                  "observerWestLongitude": 233.7292,
+                  "sunLatitude": -21.6671,
+                  "sunWestLongitude": 232.0905,
+                  "rangeKm": 316583771.2,
+                  "northAzimuthDegrees": 79.5461,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.382,
+                    127.316
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-084423",
+                  "path": "observations/d511Davida_2018-09-05T08_44_23.185_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4069,
+                  "observerWestLongitude": 238.4899,
+                  "sunLatitude": -21.6666,
+                  "sunWestLongitude": 236.8504,
+                  "rangeKm": 316581311.2,
+                  "northAzimuthDegrees": 79.5458,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.858,
+                    127.428
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-084827",
+                  "path": "observations/d511Davida_2018-09-05T08_48_27.903_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4071,
+                  "observerWestLongitude": 243.2614,
+                  "sunLatitude": -21.6662,
+                  "sunWestLongitude": 241.6212,
+                  "rangeKm": 316578847.3,
+                  "northAzimuthDegrees": 79.5456,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.676,
+                    126.277
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-085232",
+                  "path": "observations/d511Davida_2018-09-05T08_52_32.364_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4074,
+                  "observerWestLongitude": 248.0279,
+                  "sunLatitude": -21.6657,
+                  "sunWestLongitude": 246.387,
+                  "rangeKm": 316576387.8,
+                  "northAzimuthDegrees": 79.5454,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.779,
+                    127.02
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-085636",
+                  "path": "observations/d511Davida_2018-09-05T08_56_36.380_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4077,
+                  "observerWestLongitude": 252.7858,
+                  "sunLatitude": -21.6653,
+                  "sunWestLongitude": 251.1441,
+                  "rangeKm": 316573934.5,
+                  "northAzimuthDegrees": 79.5452,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.357,
+                    128.477
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-091415",
+                  "path": "observations/d511Davida_2018-09-05T09_14_15.682_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4088,
+                  "observerWestLongitude": 273.4402,
+                  "sunLatitude": -21.6633,
+                  "sunWestLongitude": 271.7952,
+                  "rangeKm": 316563303.6,
+                  "northAzimuthDegrees": 79.5443,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.331,
+                    128.92
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-091820",
+                  "path": "observations/d511Davida_2018-09-05T09_18_20.866_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4091,
+                  "observerWestLongitude": 278.2208,
+                  "sunLatitude": -21.6628,
+                  "sunWestLongitude": 276.5751,
+                  "rangeKm": 316560847.4,
+                  "northAzimuthDegrees": 79.5441,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.332,
+                    128.981
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-092226",
+                  "path": "observations/d511Davida_2018-09-05T09_22_26.858_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4093,
+                  "observerWestLongitude": 283.0172,
+                  "sunLatitude": -21.6624,
+                  "sunWestLongitude": 281.3707,
+                  "rangeKm": 316558384.7,
+                  "northAzimuthDegrees": 79.5439,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.873,
+                    129.028
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-092631",
+                  "path": "observations/d511Davida_2018-09-05T09_26_31.555_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4096,
+                  "observerWestLongitude": 287.7883,
+                  "sunLatitude": -21.6619,
+                  "sunWestLongitude": 286.1411,
+                  "rangeKm": 316555936.6,
+                  "northAzimuthDegrees": 79.5436,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.722,
+                    128.555
+                  ]
+                },
+                {
+                  "id": "zimpol-20180905-093034",
+                  "path": "observations/d511Davida_2018-09-05T09_30_34.781_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4099,
+                  "observerWestLongitude": 292.5307,
+                  "sunLatitude": -21.6615,
+                  "sunWestLongitude": 290.8828,
+                  "rangeKm": 316553504.7,
+                  "northAzimuthDegrees": 79.5434,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.688,
+                    128.151
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-045749",
+                  "path": "observations/d511Davida_2018-09-06T04_57_49.911_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4821,
+                  "observerWestLongitude": 218.0844,
+                  "sunLatitude": -21.5317,
+                  "sunWestLongitude": 216.221,
+                  "rangeKm": 315844455.9,
+                  "northAzimuthDegrees": 79.4833,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.514,
+                    139.222
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-050153",
+                  "path": "observations/d511Davida_2018-09-06T05_01_53.838_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4824,
+                  "observerWestLongitude": 222.8405,
+                  "sunLatitude": -21.5312,
+                  "sunWestLongitude": 220.9763,
+                  "rangeKm": 315841996,
+                  "northAzimuthDegrees": 79.4831,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.578,
+                    138.152
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-050558",
+                  "path": "observations/d511Davida_2018-09-06T05_05_58.653_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4826,
+                  "observerWestLongitude": 227.614,
+                  "sunLatitude": -21.5308,
+                  "sunWestLongitude": 225.749,
+                  "rangeKm": 315839529.1,
+                  "northAzimuthDegrees": 79.4829,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.889,
+                    139.331
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-051002",
+                  "path": "observations/d511Davida_2018-09-06T05_10_02.968_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4829,
+                  "observerWestLongitude": 232.3777,
+                  "sunLatitude": -21.5303,
+                  "sunWestLongitude": 230.512,
+                  "rangeKm": 315837069.1,
+                  "northAzimuthDegrees": 79.4827,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.731,
+                    139.268
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-052352",
+                  "path": "observations/d511Davida_2018-09-06T05_23_52.109_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4839,
+                  "observerWestLongitude": 248.5444,
+                  "sunLatitude": -21.5288,
+                  "sunWestLongitude": 246.6761,
+                  "rangeKm": 315828735.1,
+                  "northAzimuthDegrees": 79.4819,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.72,
+                    140.726
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-052757",
+                  "path": "observations/d511Davida_2018-09-06T05_27_57.273_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4841,
+                  "observerWestLongitude": 253.3246,
+                  "sunLatitude": -21.5283,
+                  "sunWestLongitude": 251.4556,
+                  "rangeKm": 315826275.3,
+                  "northAzimuthDegrees": 79.4817,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.047,
+                    141.762
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-053201",
+                  "path": "observations/d511Davida_2018-09-06T05_32_01.427_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4844,
+                  "observerWestLongitude": 258.0851,
+                  "sunLatitude": -21.5279,
+                  "sunWestLongitude": 256.2154,
+                  "rangeKm": 315823827.5,
+                  "northAzimuthDegrees": 79.4815,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.027,
+                    141.15
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-053604",
+                  "path": "observations/d511Davida_2018-09-06T05_36_04.473_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.4847,
+                  "observerWestLongitude": 262.8241,
+                  "sunLatitude": -21.5274,
+                  "sunWestLongitude": 260.9536,
+                  "rangeKm": 315821392.8,
+                  "northAzimuthDegrees": 79.4813,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.526,
+                    141.301
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-054008",
+                  "path": "observations/d511Davida_2018-09-06T05_40_08.574_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.485,
+                  "observerWestLongitude": 267.5836,
+                  "sunLatitude": -21.527,
+                  "sunWestLongitude": 265.7123,
+                  "rangeKm": 315818949.6,
+                  "northAzimuthDegrees": 79.481,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.116,
+                    140.648
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-092213",
+                  "path": "observations/d511Davida_2018-09-06T09_22_13.566_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.5002,
+                  "observerWestLongitude": 167.3958,
+                  "sunLatitude": -21.5023,
+                  "sunWestLongitude": 165.4834,
+                  "rangeKm": 315688582.2,
+                  "northAzimuthDegrees": 79.469,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.557,
+                    139.529
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-092618",
+                  "path": "observations/d511Davida_2018-09-06T09_26_18.929_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.5005,
+                  "observerWestLongitude": 172.1799,
+                  "sunLatitude": -21.5018,
+                  "sunWestLongitude": 170.2667,
+                  "rangeKm": 315686232.6,
+                  "northAzimuthDegrees": 79.4688,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.976,
+                    139.491
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-093023",
+                  "path": "observations/d511Davida_2018-09-06T09_30_23.804_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.5008,
+                  "observerWestLongitude": 176.9545,
+                  "sunLatitude": -21.5014,
+                  "sunWestLongitude": 175.0406,
+                  "rangeKm": 315683889.2,
+                  "northAzimuthDegrees": 79.4686,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.93,
+                    140.479
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-093427",
+                  "path": "observations/d511Davida_2018-09-06T09_34_27.072_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.501,
+                  "observerWestLongitude": 181.6977,
+                  "sunLatitude": -21.5009,
+                  "sunWestLongitude": 179.7831,
+                  "rangeKm": 315681562.7,
+                  "northAzimuthDegrees": 79.4684,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.552,
+                    141.858
+                  ]
+                },
+                {
+                  "id": "zimpol-20180906-093831",
+                  "path": "observations/d511Davida_2018-09-06T09_38_31.253_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.5013,
+                  "observerWestLongitude": 186.4588,
+                  "sunLatitude": -21.5005,
+                  "sunWestLongitude": 184.5434,
+                  "rangeKm": 315679228.9,
+                  "northAzimuthDegrees": 79.4681,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.742,
+                    141.764
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-065116",
+                  "path": "observations/d511Davida_2018-09-08T06_51_16.390_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.6828,
+                  "observerWestLongitude": 120.0676,
+                  "sunLatitude": -21.1981,
+                  "sunWestLongitude": 117.6508,
+                  "rangeKm": 314139570.7,
+                  "northAzimuthDegrees": 79.3218,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.464,
+                    129.634
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-065521",
+                  "path": "observations/d511Davida_2018-09-08T06_55_21.775_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.6831,
+                  "observerWestLongitude": 124.8521,
+                  "sunLatitude": -21.1976,
+                  "sunWestLongitude": 122.4345,
+                  "rangeKm": 314137367,
+                  "northAzimuthDegrees": 79.3215,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.218,
+                    130.647
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-065927",
+                  "path": "observations/d511Davida_2018-09-08T06_59_27.424_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.6834,
+                  "observerWestLongitude": 129.6418,
+                  "sunLatitude": -21.1971,
+                  "sunWestLongitude": 127.2234,
+                  "rangeKm": 314135163,
+                  "northAzimuthDegrees": 79.3213,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.748,
+                    130.204
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-070331",
+                  "path": "observations/d511Davida_2018-09-08T07_03_31.963_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.6837,
+                  "observerWestLongitude": 134.4099,
+                  "sunLatitude": -21.1967,
+                  "sunWestLongitude": 131.9907,
+                  "rangeKm": 314132971,
+                  "northAzimuthDegrees": 79.3211,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.184,
+                    128.965
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-070735",
+                  "path": "observations/d511Davida_2018-09-08T07_07_35.111_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -12.684,
+                  "observerWestLongitude": 139.1508,
+                  "sunLatitude": -21.1962,
+                  "sunWestLongitude": 136.7309,
+                  "rangeKm": 314130793.4,
+                  "northAzimuthDegrees": 79.3208,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.173,
+                    130.665
+                  ]
+                }
+              ]
+            }
           ]
         },
         "lighting": {
@@ -118,7 +672,30 @@
               "maximumErrorMeters": 2600,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/511_Davida_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 786,
+                "expectedFaces": 1568
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 2600,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -131,7 +708,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "92d5a03b87d90113dd0976257f8db5044ad2ff6fe50fae802840100270993bb3",
+      "sha256": "c219b8fdc25bf9fdb991d8f90a282ad16be92fa6f5eb3b9c1fbd908f87046b91",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,6 +805,20 @@
                 "image": "/scenes/davida/davida-elevation-legend.webp"
               },
               "notes": "Source shape · radial height"
+            },
+            {
+              "id": "zimpol",
+              "label": "SPHERE photograph",
+              "thumbnail": "/scenes/davida/davida-zimpol-thumbnail.webp",
+              "surface": "davida-zimpol-surface@2x.webp",
+              "poles": "davida-zimpol-surface@2x.webp",
+              "source": {
+                "id": "davida-adam-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true,
+              "notes": "32 deconvolved VLT/SPHERE/ZIMPOL frames, 4 nights from 2018-08-31 to 2018-09-08, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.41. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -337,6 +928,1724 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "davida-sphere-20180831034730",
+      "path": "observations/d511Davida_2018-08-31T03_47_30.184_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-08-31T03_47_30.184_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180831034730",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "654c756770f537a3a10222015088b4aeef3f9e6a8044e2ba133fda825324f75f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-08-31T03_47_30.184_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-08-31T03_47_30.184_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180831035134",
+      "path": "observations/d511Davida_2018-08-31T03_51_34.466_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-08-31T03_51_34.466_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180831035134",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "38c3ee4adc8bf3e4f756bbdaa7a6d76fe60014f670854c2c3ee39eaf7e88b64c",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-08-31T03_51_34.466_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-08-31T03_51_34.466_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180831035538",
+      "path": "observations/d511Davida_2018-08-31T03_55_38.393_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-08-31T03_55_38.393_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180831035538",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      },
+      "sha256": "b73bf589d3c9b404cb5e580e18a53015912acf1b3dd30754fbfb85a111361e71",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-08-31T03_55_38.393_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-08-31T03_55_38.393_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905084019",
+      "path": "observations/d511Davida_2018-09-05T08_40_19.025_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_40_19.025_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905084019",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+          }
+        ]
+      },
+      "sha256": "c77b0098da0abc4fff4163efe5b18ba9d32ad3335d13466359e3fb9617eb618e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T08_40_19.025_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_40_19.025_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905084423",
+      "path": "observations/d511Davida_2018-09-05T08_44_23.185_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_44_23.185_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905084423",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "55046f7f09c74ab3a28677d93f54de6106d0ecb01c7f96cd7103f1f55fd1a7ea",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T08_44_23.185_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_44_23.185_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905084827",
+      "path": "observations/d511Davida_2018-09-05T08_48_27.903_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_48_27.903_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905084827",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+          }
+        ]
+      },
+      "sha256": "06316e4019e5eeb130963a363597255299bb47095a1906bbb20c95a3f9856f1b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T08_48_27.903_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_48_27.903_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905085232",
+      "path": "observations/d511Davida_2018-09-05T08_52_32.364_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_52_32.364_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905085232",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+          }
+        ]
+      },
+      "sha256": "fe4229e9f332916c63e5a9d87ba7132af6f77ce7d7c963bb86e8a018025db446",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T08_52_32.364_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_52_32.364_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905085636",
+      "path": "observations/d511Davida_2018-09-05T08_56_36.380_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_56_36.380_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905085636",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+          }
+        ]
+      },
+      "sha256": "e34c71a70b3b8b590b977eec80f5e4b5d670de46e6399e797be5f997aefddd7d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T08_56_36.380_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T08_56_36.380_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905091415",
+      "path": "observations/d511Davida_2018-09-05T09_14_15.682_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_14_15.682_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905091415",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "45c5483addcc47663407894c68bd9dbc258d6aa642d44661c91d9539b6e6ca46",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T09_14_15.682_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_14_15.682_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905091820",
+      "path": "observations/d511Davida_2018-09-05T09_18_20.866_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_18_20.866_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905091820",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+          }
+        ]
+      },
+      "sha256": "e786db8ba9f9e8eb09536d5398c255a7a78af837f111ed671c775848498d7782",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T09_18_20.866_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_18_20.866_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905092226",
+      "path": "observations/d511Davida_2018-09-05T09_22_26.858_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_22_26.858_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905092226",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+          }
+        ]
+      },
+      "sha256": "2ae87307964cdfaa93e4646a3d7b4b84e37e017ea1f3c324e616ec7e25b85920",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T09_22_26.858_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_22_26.858_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905092631",
+      "path": "observations/d511Davida_2018-09-05T09_26_31.555_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_26_31.555_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905092631",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+          }
+        ]
+      },
+      "sha256": "932ef3e6a243c451d2ddb94a93342a155d234356631b4695be9e29993725768e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T09_26_31.555_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_26_31.555_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180905093034",
+      "path": "observations/d511Davida_2018-09-05T09_30_34.781_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_30_34.781_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180905093034",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+          }
+        ]
+      },
+      "sha256": "edb470e33fdcb386ba9f943f237a9605818432416cb0b949856a5c2c2418c547",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-05T09_30_34.781_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-05T09_30_34.781_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906045749",
+      "path": "observations/d511Davida_2018-09-06T04_57_49.911_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T04_57_49.911_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906045749",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+          }
+        ]
+      },
+      "sha256": "cec742fb674e7441f5f96e5af5a17d6b8a510325538b54d3db710941404b30cb",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T04_57_49.911_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T04_57_49.911_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906050153",
+      "path": "observations/d511Davida_2018-09-06T05_01_53.838_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_01_53.838_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906050153",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+          }
+        ]
+      },
+      "sha256": "601cd4662ed86fbaea4f1a036a87acba08911a5d0e014b7c283660c44a69aa82",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_01_53.838_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_01_53.838_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906050558",
+      "path": "observations/d511Davida_2018-09-06T05_05_58.653_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_05_58.653_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906050558",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+          }
+        ]
+      },
+      "sha256": "ca9d09d75e94065d531efb4f5f1957db781396f9dc7cb9a993ff6ba290f187c8",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_05_58.653_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_05_58.653_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906051002",
+      "path": "observations/d511Davida_2018-09-06T05_10_02.968_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_10_02.968_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906051002",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+          }
+        ]
+      },
+      "sha256": "b64715fe1678727dd56be66d1dfefe272046aab028f397045bb1d27b32d64213",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_10_02.968_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_10_02.968_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906052352",
+      "path": "observations/d511Davida_2018-09-06T05_23_52.109_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_23_52.109_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906052352",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "05081c69f3128480fc0db6c8df7514f13d29b08977e4c94dd9b06ce46dda1537",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_23_52.109_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_23_52.109_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906052757",
+      "path": "observations/d511Davida_2018-09-06T05_27_57.273_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_27_57.273_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906052757",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+          }
+        ]
+      },
+      "sha256": "28e5dd0a360171665037fe1ad809fe9a4c0f0bf1757653eb16685deb1b22c08e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_27_57.273_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_27_57.273_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906053201",
+      "path": "observations/d511Davida_2018-09-06T05_32_01.427_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_32_01.427_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906053201",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+          }
+        ]
+      },
+      "sha256": "78f6567848bff29c75772488bfd62115f2d3667f6d14942addc5769f2b15270b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_32_01.427_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_32_01.427_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906053604",
+      "path": "observations/d511Davida_2018-09-06T05_36_04.473_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_36_04.473_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906053604",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+          }
+        ]
+      },
+      "sha256": "32933f22144fba07eaa7aac807864a711e9f1dbe3d31edd6d982ecf4f41e23c4",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_36_04.473_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_36_04.473_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906054008",
+      "path": "observations/d511Davida_2018-09-06T05_40_08.574_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_40_08.574_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906054008",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+          }
+        ]
+      },
+      "sha256": "78bfdf3e9c86bf64d65412e1ca5892b761b11e74dea9c85d04e0d17ff35e6161",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T05_40_08.574_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T05_40_08.574_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906092213",
+      "path": "observations/d511Davida_2018-09-06T09_22_13.566_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_22_13.566_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906092213",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+          }
+        ]
+      },
+      "sha256": "eb9e3a3a8e4aac0fc09a122e4bc122b2b67074d220355c57a6f57c5ef375bc4b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T09_22_13.566_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_22_13.566_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906092618",
+      "path": "observations/d511Davida_2018-09-06T09_26_18.929_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_26_18.929_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906092618",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/26"
+          }
+        ]
+      },
+      "sha256": "d240258989ae22d06a3fdb68ad2da772390cf53f3d5a0e352d30f9f0d951f892",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T09_26_18.929_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_26_18.929_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906093023",
+      "path": "observations/d511Davida_2018-09-06T09_30_23.804_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_30_23.804_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906093023",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+          }
+        ]
+      },
+      "sha256": "4ed9652a05f0104db89c4b3626264651f7ed28b0226c44d38e1f055a4a06621b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T09_30_23.804_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_30_23.804_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906093427",
+      "path": "observations/d511Davida_2018-09-06T09_34_27.072_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_34_27.072_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906093427",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+          }
+        ]
+      },
+      "sha256": "231eaae591d722e8c7b63551d93bf3593a6f29168c80dfeb328626bc8a380840",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T09_34_27.072_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_34_27.072_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180906093831",
+      "path": "observations/d511Davida_2018-09-06T09_38_31.253_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_38_31.253_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180906093831",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/29"
+          }
+        ]
+      },
+      "sha256": "b2976476a059fb677028ea803b58d69f45db9c9b6b33a34b92e76ea601f3c6de",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-06T09_38_31.253_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-06T09_38_31.253_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180908065116",
+      "path": "observations/d511Davida_2018-09-08T06_51_16.390_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T06_51_16.390_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180908065116",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/30"
+          }
+        ]
+      },
+      "sha256": "935850c370c61e9312ad215c5fa6581456d78b45a68bcf18510211df5773c88b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-08T06_51_16.390_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T06_51_16.390_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180908065521",
+      "path": "observations/d511Davida_2018-09-08T06_55_21.775_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T06_55_21.775_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180908065521",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/31"
+          }
+        ]
+      },
+      "sha256": "54a9480ae3018f4cf4735516732536cbe8da06562beea3005fb3a348a916d3d9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-08T06_55_21.775_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T06_55_21.775_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180908065927",
+      "path": "observations/d511Davida_2018-09-08T06_59_27.424_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T06_59_27.424_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180908065927",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/32"
+          }
+        ]
+      },
+      "sha256": "9d460e0507d58d231f8261d07ed0007b5837f4383a48a4554d8d907e958dbe76",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-08T06_59_27.424_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T06_59_27.424_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180908070331",
+      "path": "observations/d511Davida_2018-09-08T07_03_31.963_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T07_03_31.963_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180908070331",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/33"
+          }
+        ]
+      },
+      "sha256": "edbc8e8795d1b4b7ea4194905f63668a0a976362af572873b4c630f9be67bd97",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-08T07_03_31.963_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T07_03_31.963_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-sphere-20180908070735",
+      "path": "observations/d511Davida_2018-09-08T07_07_35.111_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T07_07_35.111_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-sphere-20180908070735",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/34"
+          }
+        ]
+      },
+      "sha256": "5824c392b15f5fe95da1c35213743c1bdc93c10410b5fb24c517caec3869bf32",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d511Davida_2018-09-08T07_07_35.111_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/511Davida/Deconv/d511Davida_2018-09-08T07_07_35.111_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "davida-adam-shape",
+      "path": "shape/511_Davida_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/511_Davida_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-davida-davida-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/davida/source/manifest.json@0000000000000000000000000000000000000000#/inputs/35"
+          }
+        ]
+      },
+      "sha256": "589d65abc3f64ec5b49567731ee9096fb5771e39befff723a679adeb6dc9a018",
+      "bytes": 43467,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/511_Davida_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/511_Davida_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -349,8 +2658,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "92d5a03b87d90113dd0976257f8db5044ad2ff6fe50fae802840100270993bb3",
-      "bytes": 8395,
+      "sha256": "c219b8fdc25bf9fdb991d8f90a282ad16be92fa6f5eb3b9c1fbd908f87046b91",
+      "bytes": 9593,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -453,6 +2762,82 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "zimpol",
+      "label": "SPHERE photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "zimpol"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "davida-sphere-20180831034730",
+        "davida-sphere-20180831035134",
+        "davida-sphere-20180831035538",
+        "davida-sphere-20180905084019",
+        "davida-sphere-20180905084423",
+        "davida-sphere-20180905084827",
+        "davida-sphere-20180905085232",
+        "davida-sphere-20180905085636",
+        "davida-sphere-20180905091415",
+        "davida-sphere-20180905091820",
+        "davida-sphere-20180905092226",
+        "davida-sphere-20180905092631",
+        "davida-sphere-20180905093034",
+        "davida-sphere-20180906045749",
+        "davida-sphere-20180906050153",
+        "davida-sphere-20180906050558",
+        "davida-sphere-20180906051002",
+        "davida-sphere-20180906052352",
+        "davida-sphere-20180906052757",
+        "davida-sphere-20180906053201",
+        "davida-sphere-20180906053604",
+        "davida-sphere-20180906054008",
+        "davida-sphere-20180906092213",
+        "davida-sphere-20180906092618",
+        "davida-sphere-20180906093023",
+        "davida-sphere-20180906093427",
+        "davida-sphere-20180906093831",
+        "davida-sphere-20180908065116",
+        "davida-sphere-20180908065521",
+        "davida-sphere-20180908065927",
+        "davida-sphere-20180908070331",
+        "davida-sphere-20180908070735",
+        "davida-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/davida/davida-zimpol-thumbnail.webp",
+          "bytes": 1498,
+          "sha256": "32a371cde5e2288721a323a51be108cb585009459a26ac537a84b3df09228ada",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/davida/davida-zimpol-surface@2x.webp",
+          "bytes": 220322,
+          "sha256": "46f9376f6d3a2580f0924859422044b45f3d68692fb256371a399ecc0ef42a7f",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "davida-adam-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -504,6 +2889,31 @@
       ]
     },
     {
+      "id": "preview:zimpol",
+      "label": "SPHERE photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "zimpol"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/zimpol.webp",
+          "bytes": 10158,
+          "sha256": "da691c12e614ac94395773e948b6c2f789ca6310d4845b3b2652e23f63337cac",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -535,11 +2945,11 @@
   },
   "lastPreparation": {
     "objectId": "davida",
-    "materialSha256": "1494f9cb406327d4af36e256bd0f68c419d9d892536361790a1b365cd2189889",
+    "materialSha256": "036e2e5035afbdbd81ad67a1732c18cd5a69d6a44280f57afa5b00e90c16413f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "1a876b250fa4e1567b38ca41a4af73e97a586fe7212cd3e71fd19bf9b934688a"
+      "bindingsSha256": "a0cea37b94b2ef06e5ad28560b52c770ae44834bd570591ce844d13836da88ad"
     }
   }
 }

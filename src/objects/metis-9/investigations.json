@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 173 km, ecliptic J2000 pole (181\u00b0, 22\u00b0), period 5.079176 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 85.9106652849721 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 173 km, ecliptic J2000 pole (181°, 22°), period 5.079176 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 85.9106652849721 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/metis-9/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -52,7 +52,7 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "included",
-      "finding": "The deconvolved camera-1 frames under https://observations.lam.fr/astero/Data/9Metis/ are qualified and cast as a photograph lens: 30 frames over four nights, geometry computed from the release's parameter record and pinned Horizons tables at each exposure midpoint, measured coverage 84.9 percent of the retained surface area, level matching inside gains of 0.80 to 1.87 as a single joined group. The reduced Red/ products are not used. This is photographed illumination, not a calibrated global reflectance map, so the missing-imagery grid still marks unphotographed, grazing and rejected surface.",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 30 camera-1 deconvolved frames, 4 nights from 2018-06-08 to 2018-07-10, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The deconvolved camera-1 frames under https://observations.lam.fr/astero/Data/9Metis/ are qualified and cast as a photograph lens: 30 frames over four nights, geometry computed from the release's parameter record and pinned Horizons tables at each exposure midpoint, measured coverage 84.9 percent of the retained surface area, level matching inside gains of 0.80 to 1.87 as a single joined group. The reduced Red/ products are not used. This is photographed illumination, not a calibrated global reflectance map, so the missing-imagery grid still marks unphotographed, grazing and rejected surface.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/24e2730084f5b0528499be985940392e1d16da17/src/objects/metis-9/README.md",
         "https://observations.lam.fr/astero/Data/9Metis/Deconv/",
@@ -71,15 +71,18 @@
         {
           "date": "2026-09-17",
           "commit": "24e2730084f5b0528499be985940392e1d16da17"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
     {
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
-      "status": "excluded",
-      "finding": "The live directory also lists 9_Metis_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
-      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "status": "included",
+      "finding": "The live directory also lists 9_Metis_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Reopened 2026-09-18 because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure B.8 describe; the Shape and Elevation views keep MPCD.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/9_Metis_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -91,6 +94,10 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
@@ -98,7 +105,7 @@
       "id": "sphere-photograph-lens",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "included",
-      "finding": "The lens is derived and registers on its outline. All 30 frames project an outline elongated enough to define a position angle, 1.354 to 1.685, and the predicted limb position angles match the photographed contour with 2.30 degrees left after removing the 4.35-degree floor that exposures minutes apart set. The released MPCD shape is used rather than the ADAM reconstruction because it agrees more closely with the record, 2.30 against 2.72 degrees under the same rule. Neither marking-dependent sweep places the body: the cross-frame test is decisive on 2 of 30 frames, and the relief sweep's 16 decisive frames disagree among themselves by up to 9 degrees, so their 0.00-degree median reaches no verdict. The rotation record is read latitude-first because 181.3819 degrees cannot be a latitude.",
+      "finding": "Rebuilt 2026-09-18 by the survey setup on the ADAM mesh, the model the release’s rotation record describes, with the same 30 frames; it ships on zimpol-published-comparison. The rest of this finding describes the earlier lens on the MPCD mesh: The lens is derived and registers on its outline. All 30 frames project an outline elongated enough to define a position angle, 1.354 to 1.685, and the predicted limb position angles match the photographed contour with 2.30 degrees left after removing the 4.35-degree floor that exposures minutes apart set. The released MPCD shape is used rather than the ADAM reconstruction because it agrees more closely with the record, 2.30 against 2.72 degrees under the same rule. Neither marking-dependent sweep places the body: the cross-frame test is decisive on 2 of 30 frames, and the relief sweep's 16 decisive frames disagree among themselves by up to 9 degrees, so their 0.00-degree median reaches no verdict. The rotation record is read latitude-first because 181.3819 degrees cannot be a latitude.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/9Metis/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/9_Metis_param",
@@ -108,6 +115,27 @@
         {
           "date": "2026-09-17",
           "commit": "24e2730084f5b0528499be985940392e1d16da17"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.8 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.8, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.932 to 0.963 at our phase, against 0.962 to 0.967 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 5 of 6 columns, one step from it in 1. With the paper’s photographs 0.925 to 0.961. Turned in the image, our outline best overlaps the paper’s photographs at -7.5 to 2.0° and its model panels at -7.5 to -0.5°. The spin axis we project lies at 24.0 to 28.0° on the sky against 22.0 to 26.0° for the figure’s arrows. Native outline residual 1.391 px mean over 30 frames at our phase, the lowest of a ±30° sweep. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.8° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/9Metis/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/9_Metis_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     }

@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.16",
+  "document": {
+    "input": "fortuna-survey-research",
+    "object": 1095,
+    "width": 2318,
+    "height": 1233,
+    "sha256": "2b348f4af1e35f42fcb1de3ccca3beb43731bf47a0d2ae01dc526b0ba06a28c4"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2018-01-07T05:22:02",
+      "frame": "zimpol-20180107-052202",
+      "band": 0
+    },
+    {
+      "label": "2018-01-07T05:34:33",
+      "frame": "zimpol-20180107-053433",
+      "band": 0
+    },
+    {
+      "label": "2018-01-07T06:30:50",
+      "frame": "zimpol-20180107-063050",
+      "band": 0
+    },
+    {
+      "label": "2018-01-07T06:47:30",
+      "frame": "zimpol-20180107-064730",
+      "band": 0
+    },
+    {
+      "label": "2018-01-07T07:18:54",
+      "frame": "zimpol-20180107-071854",
+      "band": 0
+    },
+    {
+      "label": "2018-01-29T04:49:51",
+      "frame": "zimpol-20180129-044951",
+      "band": 0
+    },
+    {
+      "label": "2018-02-06T03:09:46",
+      "frame": "zimpol-20180206-030946",
+      "band": 0
+    },
+    {
+      "label": "2018-02-06T03:18:08",
+      "frame": "zimpol-20180206-031808",
+      "band": 0
+    },
+    {
+      "label": "2018-02-06T05:02:26",
+      "frame": "zimpol-20180206-050226",
+      "band": 0
+    }
+  ]
+}

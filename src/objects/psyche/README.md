@@ -28,6 +28,9 @@ The [Zenodo release](https://doi.org/10.5281/zenodo.6321315) (CC BY 4.0) is kept
 | --- | --- | --- |
 | Thermal inertia | 25 to 594 J m⁻² K⁻¹ s⁻½, 23 distinct values | 134 (46 to 175) |
 | Dielectric constant | 7.5 to 55 | 1.9 (0.5 to 4.1) |
+| SPHERE photograph | [32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 5 nights from 2019-07-28 to 2019-08-06](https://observations.lam.fr/astero/Data/16Psyche/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj) |
+| Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/16_Psyche_param.txt), read longitude-first, and JPL Horizons geometry from Paranal |
+| Photograph registration | [Vernazza et al. (2021), Figure B.14](https://doi.org/10.1051/0004-6361/202141781) |
 
 The maps are in the body frame of the Shepard et al. (2021) shape: longitude 0 on the major axis, east positive. The lenses ride the ADAM mesh, like the SPHERE photograph, and each mesh direction is carried into the map frame through the two published spin states at the ALMA midpoint, 2019-06-19 07:52 UTC ([alma-body-frame.json](source/thermal/alma-body-frame.json)). The map frame's state is Cambioni et al. (2022) equation 2 (pole ecliptic 36°, −8°; phase 341.56° at J2000, TDB; period 4.195948 h); the mesh's is LAM's parameter file, read in UTC as the photograph lens reads it. At that epoch the mesh prime meridian lies at map longitude −4.11° and the two poles differ by 1.63°.
 
@@ -45,6 +48,25 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
+### SPHERE photograph
+
+<!-- published-comparison:begin -->
+Measured by `tools/objects/published-comparison.mts` against [Figure B.14](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
+
+| Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2019-07-28 09:04:11 | 0.968 | 0.960 | 0.973 | 0° | -2.5°, -1° | 172.8° against 174.9° |
+| 2019-07-30 06:27:16 | 0.966 | 0.948 | 0.970 | 0° | -1.5°, 1° | 172.9° against 175.1° |
+| 2019-07-30 08:03:04 | 0.966 | 0.957 | 0.972 | 0° | -2°, -2° | 172.9° against 175.0° |
+| 2019-08-03 04:56:19 | 0.969 | 0.963 | 0.968 | 0° | 0°, -1° | 173.0° against 175.2° |
+| 2019-08-05 07:51:38 | 0.969 | 0.969 | 0.972 | 0° | -1°, -0.5° | 173.1° against 175.2° |
+| 2019-08-06 02:42:42 | 0.968 | 0.965 | 0.973 | 0° | -1°, 0° | 173.2° against 175.5° |
+| 2019-08-06 04:27:36 | 0.966 | 0.963 | 0.970 | 0° | -1°, -1° | 173.2° against 175.3° |
+
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 0.835 px at our phase; the lowest of a ±30° sweep is 0.813 px at -4°.
+<!-- published-comparison:end -->
+
+
 ### Registration
 
 <!-- registration-report:begin -->
@@ -52,7 +74,9 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 16 | 6 | 3.19° | 2.15° | 2.35° | its other 16 frames | 2 of 16 | — | 1 of 16 | tilted 5.00° by the silhouette | ×1.02 | registered |
+| `zimpol` | 32 | 32 | 4.98° | 3.74° | 3.29° | its other 32 frames | 0 of 32 | — | 6 of 32, -2.00° | — | ×1.17 | conflict |
+
+`zimpol` ships on its paper’s comparison, [Figure B.14](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
 
 Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
@@ -70,6 +94,8 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Psyche from 8° to 10° south, so surface the survey did not see keeps the missing-imagery grid.
+
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
@@ -77,9 +103,9 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 <details>
 <summary>Selected data</summary>
 
-- [Original ADAM comparison](https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj): radius 111.887165 km. Excluded as a second lens: it is an alternative reconstruction of the same shape. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
+- [Original ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/16_Psyche_adam.obj): radius 111.887165 km. The SPHERE photograph and the ALMA maps ride it, because the release's rotation record describes this reconstruction; the Shape and Elevation views keep the MPCD refinement, which uses resolved SPHERE detail (survey section 3 and Appendix B).
 
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/16Psyche/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
+- [Released SPHERE images](https://observations.lam.fr/astero/Data/16Psyche/): individual, illuminated, resolved telescope images. The deconvolved camera-1 frames of the 2019 apparition, the one the survey's Figure B.14 shows, are the SPHERE photograph lens; the reduced `Red/` products are not used. This is photographed illumination, not a registered global reflectance mosaic, and the frames remain the observational constraints behind the selected reconstruction.
 
 - [Individual research](https://observations.lam.fr/astero/Papers/Viikinkoski2018.pdf): complementary interpretation and model/image comparisons. The later [Ferrais et al. (2020)](https://doi.org/10.1051/0004-6361/202038100) release includes updated shape and relative-albedo results.
 

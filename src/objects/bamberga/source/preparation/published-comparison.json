@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.39",
+  "document": {
+    "input": "bamberga-survey-research",
+    "object": 1118,
+    "width": 2078,
+    "height": 2463,
+    "sha256": "9a253e5ee85644d5245e6c91ce26b44d8f1e407997b3b884bc97615ed770d2fd"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2017-06-23T05:45:06",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-07-14T04:34:31",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-07-20T03:37:55",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-07-25T04:51:49",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-07-29T02:09:03",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-08-19T01:50:03",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-08-22T02:26:44",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-12-22T06:15:22",
+      "frame": "zimpol-20181222-061522",
+      "band": 0
+    },
+    {
+      "label": "2018-12-23T06:33:58",
+      "frame": "zimpol-20181223-063358",
+      "band": 1
+    },
+    {
+      "label": "2019-01-09T05:54:15",
+      "frame": "zimpol-20190109-055415",
+      "band": 1
+    },
+    {
+      "label": "2019-01-10T05:19:33",
+      "frame": "zimpol-20190110-051933",
+      "band": 1
+    },
+    {
+      "label": "2019-01-13T06:49:59",
+      "frame": "zimpol-20190113-064959",
+      "band": 1
+    },
+    {
+      "label": "2019-01-16T03:40:20",
+      "frame": "zimpol-20190116-034020",
+      "band": 1
+    },
+    {
+      "label": "2019-01-17T04:22:01",
+      "frame": "zimpol-20190117-042201",
+      "band": 1
+    },
+    {
+      "label": "2019-01-27T02:58:49",
+      "frame": "zimpol-20190127-025849",
+      "band": 1
+    }
+  ]
+}
