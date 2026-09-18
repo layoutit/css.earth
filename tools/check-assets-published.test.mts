@@ -186,9 +186,17 @@ test('changedObjectIds extracts ids from paths under src/objects/<id>/, includin
   assert.deepEqual([...scope.ids].sort(), ['hebe', 'iris']);
 });
 
-test('changedObjectIds treats a change to key-construction or manifest/closure code as touching every object', async () => {
+test('changedObjectIds treats a change to key-construction code (tools/runtime-assets.mts) as touching every object', async () => {
   const scope = await changedObjectIds('origin/main', { changedPaths: async () => [
     'tools/runtime-assets.mts',
+    'src/objects/hebe/prepared-assets.json',
+  ] });
+  assert.equal(scope.allObjectsTouched, true);
+});
+
+test('changedObjectIds treats a change to the manifest/closure code (src/platform/runtime-asset-closure.mts) as touching every object', async () => {
+  const scope = await changedObjectIds('origin/main', { changedPaths: async () => [
+    'src/platform/runtime-asset-closure.mts',
     'src/objects/hebe/prepared-assets.json',
   ] });
   assert.equal(scope.allObjectsTouched, true);
