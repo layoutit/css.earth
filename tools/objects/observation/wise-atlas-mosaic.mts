@@ -20,6 +20,17 @@ export { MONTAGE_BACKGROUND_REFERENCE } from './background-offsets.mts';
 export interface TilePins { readonly schema: 'cssearth-wise-atlas-tiles@1'; readonly band: WiseBand; readonly tiles: readonly { readonly coaddId: string; readonly sha256: string; readonly bytes: number }[] }
 export interface SkyGrid { readonly width: number; readonly height: number; readonly fovDeg: number; readonly centerIcrsDegrees: readonly [number, number] }
 
+/** A TAN output grid as a recipe states it. CDS hips2fits refuses requests above 50 million pixels; every route keeps that limit. */
+export function parseSkyGrid(value: unknown): SkyGrid {
+  const grid = requireRecord(value, 'Sky band grid');
+  const size = (n: unknown) => { const v = requireFiniteNumber(n, 'Grid size'); if (!Number.isSafeInteger(v) || v < 16) throw new TypeError('Invalid grid size.'); return v; };
+  const width = size(grid.width), height = size(grid.height), fovDeg = requireFiniteNumber(grid.fovDeg, 'Grid field');
+  const center = requireArray(grid.centerIcrsDegrees).map(n => requireFiniteNumber(n, 'Grid centre'));
+  if (width * height > 50_000_000 || !(fovDeg > 0 && fovDeg < 90) || center.length !== 2 || !(center[0]! >= 0 && center[0]! < 360) || Math.abs(center[1]!) > 90)
+    throw new TypeError('Invalid sky grid.');
+  return { width, height, fovDeg, centerIcrsDegrees: [center[0]!, center[1]!] };
+}
+
 export function parseTilePins(value: unknown): TilePins {
   const row = requireRecord(value, 'WISE atlas tiles');
   if (row.schema !== 'cssearth-wise-atlas-tiles@1' || typeof row.band !== 'string' || !Object.hasOwn(WISE_ATLAS_BANDS, row.band)) throw new TypeError('Unsupported WISE atlas tile list.');

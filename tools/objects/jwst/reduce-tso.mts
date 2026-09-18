@@ -26,6 +26,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
+import { freeMemoryPercent, mastFile, toolchainPython } from './mast.mts';
 
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
 export interface TsoProgram {
@@ -93,32 +94,7 @@ export function renderSettings(template: string, directories: { readonly topdir:
 }
 
 const exists = (path: string) => access(path).then(() => true, () => false);
-const sizeOf = (path: string) => stat(path).then(info => info.size, () => -1);
-
-/** The free-memory percentage macOS reports; a heavy stage does not start below half. */
-function freeMemoryPercent() {
-  const output = spawnSync('memory_pressure', { encoding: 'utf8' }).stdout ?? '';
-  const match = /free percentage: (\d+)%/u.exec(output);
-  return match ? Number(match[1]) : Number.NaN;
-}
-
-const run = (command: string, args: readonly string[]) => new Promise<number>(done => { spawn(command, args, { stdio: 'inherit' }).on('close', code => done(code ?? 1)); });
-
-async function segmentFile(segment: Segment, raw: string, rawSources: readonly string[]) {
-  const target = resolve(raw, segment.name);
-  if (await sizeOf(target) === segment.bytes) return target;
-  for (const source of rawSources) {
-    const candidate = resolve(source, segment.name);
-    if (await sizeOf(candidate) === segment.bytes) { await rm(target, { force: true }); await symlink(candidate, target); return target; }
-  }
-  // MAST drops slow transfers; curl resumes a partial file, and a stalled transfer is abandoned and resumed, five times at most.
-  for (let attempt = 1; attempt <= 5 && await sizeOf(target) !== segment.bytes; attempt++) {
-    if (await sizeOf(target) > segment.bytes) await rm(target);
-    await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '10000', '--speed-time', '120', '-o', target, `https://mast.stsci.edu/api/v0.1/Download/file?uri=${segment.uri}`]);
-  }
-  if (await sizeOf(target) !== segment.bytes) throw new Error(`${segment.name} did not download to its pinned ${segment.bytes} bytes.`);
-  return target;
-}
+const segmentFile = (segment: Segment, raw: string, rawSources: readonly string[]) => mastFile(segment, raw, rawSources);
 
 /** Every segment in place before Stage 1 starts, three downloads at a time. */
 async function segmentFiles(segments: readonly Segment[], raw: string, rawSources: readonly string[]) {
@@ -193,13 +169,8 @@ np.savetxt(name, np.column_stack([wave[order], np.nanmedian(optimal, axis=0)[ord
 print(name, optimal.shape)
 `;
 
-function python(toolchain: EurekaToolchain, cwd: string, script: string, args: readonly string[], log: string) {
-  const result = spawnSync(toolchain.python, ['-c', script, ...args], { cwd, env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
-  return writeFile(log, `${result.stdout}${result.stderr}`).then(() => {
-    if (result.status !== 0) throw new Error(`Python ${args[0] ?? ''} failed; see ${log}.`);
-    return result.stdout.trim().split('\n').at(-1) ?? '';
-  });
-}
+const python = (toolchain: EurekaToolchain, cwd: string, script: string, args: readonly string[], log: string) =>
+  toolchainPython(toolchain, cwd, script, args, log).then(result => result.lastLine);
 
 async function findOne(directory: string, pattern: RegExp): Promise<string> {
   const found: string[] = [];

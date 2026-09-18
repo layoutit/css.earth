@@ -7,7 +7,7 @@ import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '../../../src/platform/sha256.mts';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '../color-transfer.mts';
-import { composeSkyBands, parseSkyBandComposite, skyBandCompositeFile, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
+import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandCompositeFile, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
 import { gridWcs } from './wise-atlas-mosaic.mts';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };
@@ -143,3 +143,70 @@ test('uncalibrated plate and Herschel routes keep relative units, two bands take
   assert.deepEqual(at(2, 0), [...encodeAsinhBands(new Float32Array([1, 0]), new Uint8Array(1), composite.display)]);
   assert.match(JSON.stringify(result.evidence.display), /mean/);
 }));
+
+/** A small JWST-like level-3 product: a data-less primary naming the instrument, then a rotated TAN SCI image in MJy/sr. */
+function i2d(filter: string, pupil: string, value: (eastArcsec: number, northArcsec: number) => number, hole?: [number, number]) {
+  const size = 96, scaleDeg = 1 / 3600, rotation = 30 * Math.PI / 180;
+  const block = (cards: string[]) => Buffer.from([...cards, 'END'.padEnd(80)].join('').padEnd(Math.ceil((cards.length + 1) * 80 / 2880) * 2880));
+  const primary = block([card('SIMPLE', 'T'), card('BITPIX', '8'), card('NAXIS', '0'), card('EXTEND', 'T'), card('TELESCOP', "'JWST'"),
+    card('INSTRUME', "'NIRCAM'"), card('FILTER', `'${filter}'`), card('PUPIL', `'${pupil}'`), card('PROGRAM', "'02733'")]);
+  // East-left, north-up turned by 30 degrees: intermediate x (east) = -s cos r * dx - s sin r * dy, y (north) = -s sin r * dx + s cos r * dy.
+  const pc = [-Math.cos(rotation), -Math.sin(rotation), -Math.sin(rotation), Math.cos(rotation)];
+  const sci = block([card('XTENSION', "'IMAGE'"), card('BITPIX', '-32'), card('NAXIS', '2'), card('NAXIS1', String(size)), card('NAXIS2', String(size)),
+    card('PCOUNT', '0'), card('GCOUNT', '1'), card('EXTNAME', "'SCI'"), card('BUNIT', "'MJy/sr'"), card('RADESYS', "'ICRS'"),
+    card('CTYPE1', "'RA---TAN'"), card('CTYPE2', "'DEC--TAN'"), card('CUNIT1', "'deg'"), card('CUNIT2', "'deg'"),
+    card('CRPIX1', String((size + 1) / 2)), card('CRPIX2', String((size + 1) / 2)), card('CRVAL1', String(ra)), card('CRVAL2', String(dec)),
+    card('CDELT1', String(scaleDeg)), card('CDELT2', String(scaleDeg)),
+    card('PC1_1', String(pc[0])), card('PC1_2', String(pc[1])), card('PC2_1', String(pc[2])), card('PC2_2', String(pc[3]))]);
+  const data = Buffer.alloc(Math.ceil(size * size * 4 / 2880) * 2880);
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const dx = x + 1 - (size + 1) / 2, dy = y + 1 - (size + 1) / 2;
+    const east = (pc[0]! * dx + pc[1]! * dy) * 3600 * scaleDeg, north = (pc[2]! * dx + pc[3]! * dy) * 3600 * scaleDeg;
+    const inHole = hole && Math.hypot(east - hole[0], north - hole[1]) < 6;
+    data.writeFloatBE(inHole ? NaN : value(east, north), (y * size + x) * 4);
+  }
+  return Buffer.concat([primary, sci, data]);
+}
+async function withMast(bytes: Buffer, run: (cache: string, input: { sha256: string; bytes: number }) => Promise<void>) {
+  const cache = await mkdtemp(join(tmpdir(), 'sky-bands-mast-'));
+  try {
+    await mkdir(join(cache, 'mast'), { recursive: true }); await writeFile(join(cache, 'mast', `${sha(bytes)}.fits`), bytes);
+    await run(cache, { sha256: sha(bytes), bytes: bytes.length });
+  } finally { await rm(cache, { recursive: true, force: true }); }
+}
+const product = 'jw02733-o001_t001_nircam_clear-f187n_i2d.fits';
+
+test('a JWST level-3 mosaic is resampled onto the grid east-left and north-up, with its holes missing', () =>
+  withMast(i2d('F187N', 'CLEAR', east => 100 + 10 * east, [20, 20]), async (cache, pin) => {
+    const composed = await composeSkyBands(parseSkyBandComposite({ schema: 'cssearth-sky-band-composite@1', grid, coverage: 'alpha',
+      bands: [{ band: 'NIRCAM-F187N', product, ...pin }], backgroundPercentile: 5, peakPercentile: 100, display: { minimum: 0, stretch: 2, softening: 8 } }),
+    { input: noInput, cache });
+    const band = composed.evidence.bands[0]!;
+    assert.equal(band.acquisition.kind, 'mast-product');
+    assert.equal(band.toMJyPerSr, 1);
+    const red = (x: number, y: number) => composed.rgb[(y * width + x) * 4]!, covered = (x: number, y: number) => composed.rgb[(y * width + x) * 4 + 3] === 255;
+    // The value rises to the east, and east is the left of the display grid.
+    assert.ok(red(1, 12) > red(8, 12), `east-left: ${red(1, 12)} vs ${red(8, 12)}`);
+    // The hole 20 arcsec east and 20 arcsec north of centre is missing, upper left on 3.6 arcsec pixels; its mirror images are not.
+    assert.equal(covered(2, 2), false);
+    for (const [x, y] of [[13, 2], [2, 13], [13, 13]] as const) assert.equal(covered(x, y), true, `${x}, ${y} is covered`);
+    assert.ok(composed.missingPixels > 0 && composed.missingPixels < 20, `missing ${composed.missingPixels}`);
+  }));
+
+test('a JWST product for another filter, or changed bytes, is refused', async () => {
+  await withMast(i2d('F212N', 'CLEAR', () => 1), (cache, pin) =>
+    assert.rejects(composeSkyBands(recipe([{ band: 'NIRCAM-F187N', product, ...pin }]), { input: noInput, cache }), /not a NIRCAM F187N\/CLEAR product/u));
+  await withMast(i2d('F187N', 'CLEAR', () => 1), async (cache, pin) => {
+    await writeFile(join(cache, 'mast', `${pin.sha256}.fits`), Buffer.alloc(pin.bytes));
+    await assert.rejects(composeSkyBands(recipe([{ band: 'NIRCAM-F187N', product, ...pin }]), { input: noInput, cache }), /Changed sky band input/u);
+  });
+  assert.throws(() => recipe([{ band: 'NIRCAM-F187N', product: 'not-a-product.fits', sha256: '0'.repeat(64), bytes: 5760 }]), /level-3 i2d/u);
+});
+
+test('the planes a volume reads are each band divided by its own measured range, before any display', () =>
+  withMast(i2d('F187N', 'CLEAR', east => 100 + 10 * east), async (cache, pin) => {
+    const planes = await composeSkyBandPlanes(recipe([{ band: 'NIRCAM-F187N', product, ...pin }]), { input: noInput, cache });
+    const finite = Array.from(planes.values).filter((_, p) => !planes.missing[p]).sort((a, b) => a - b);
+    assert.ok(Math.abs(finite[Math.floor(0.05 * (finite.length - 1))]!) < 1e-6, 'the background percentile maps to 0');
+    assert.ok(Math.abs(finite.at(-1)! - 1) < 1e-6, 'the peak percentile maps to 1');
+  }));

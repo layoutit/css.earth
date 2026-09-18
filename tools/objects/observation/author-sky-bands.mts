@@ -1,6 +1,7 @@
-/** Author the pins of a sky band composite recipe: hips2fits responses and AllWISE atlas tile lists.
+/** Author the pins of a sky band composite recipe: hips2fits responses, AllWISE atlas tile lists and JWST MAST products.
  * Usage: node tools/objects/observation/author-sky-bands.mts <recipe.json> [--cache=.local/nebula-lab/sky-bands]
  * A band without pins is acquired and pinned; existing pins are verified, never silently replaced.
+ * A JWST band names its level-3 product in the draft ({ band, product }); the product is downloaded by streaming and pinned.
  * WISE tiles come from the IRSA IBE atlas search around the grid; a tile is kept when any sample of its
  * published footprint edges or its centre projects inside the grid. */
 import { sha256 } from '../../../src/platform/sha256.mts';
@@ -8,7 +9,8 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../../source-values.mts';
-import { parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
+import { acquireMastProduct, parseSkyBandComposite, SKY_BANDS, skyBandUrl } from './sky-band-composite.mts';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { gridWcs, skyToGridPixel, WISE_ATLAS_BANDS, wiseAtlasUrl, type SkyGrid, type WiseBand } from './wise-atlas-mosaic.mts';
 
 const IBE_SEARCH = 'https://irsa.ipac.caltech.edu/ibe/search/wise/allwise/p3am_cdd';
@@ -102,6 +104,18 @@ if (import.meta.main) {
         bands.push({ band: id, sha256: digest, bytes: bytes.length });
       }
       console.log(`SKY_BAND ${id} hips2fits pinned`);
+      continue;
+    }
+    if (route.acquisition.kind === 'jwst') {
+      const product = requireString(band.product, `${id} product`);
+      if (typeof band.sha256 === 'string') {
+        const expected = { sha256: band.sha256, bytes: Number(band.bytes) };
+        const onDisk = await sha256File(resolve(cache, 'mast', `${band.sha256}.fits`)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+        if (!onDisk) await acquireMastProduct(product, cache, expected);
+        else if (onDisk.sha256 !== expected.sha256 || onDisk.bytes !== expected.bytes) throw new Error(`Changed ${id} product in the cache: ${product}`);
+        bands.push({ band: id, product, ...expected });
+      } else bands.push({ band: id, product, ...await acquireMastProduct(product, cache) });
+      console.log(`SKY_BAND ${id} ${product} pinned`);
       continue;
     }
     const wiseBand = route.acquisition.band, listPath = relative(root, resolve(dirname(recipePath), `${basename(recipePath, '.json')}-${wiseBand.toLowerCase()}-tiles.json`));

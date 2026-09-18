@@ -151,6 +151,11 @@ the extended light of the object on it.
 
 Two routes extend this. Two bands display as red and blue, with their mean as green, following the [CDS DSS2 colour survey](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json). Bands without a documented flux calibration, the DSS2 photographic plates and the ESASky Herschel HiPS, keep `toMJyPerSr: null` and record their levels in relative source units. Dividing by each band's range means the image looks the same either way. The missing calibration only limits what the recorded levels can claim.
 
+JWST bands come either from MAST's level-3 mosaics or from the pipeline's level-3 stage re-run onto the recipe grid; both are
+already MJy/sr, so the route applies no factor. [JWST imaging](jwst-imaging.md) describes both routes, the reproduction check
+against MAST and what they cost. A recipe may set `pointSources: "mask"` to report stars found on each band as no coverage
+([point-sources.mts](../tools/objects/observation/point-sources.mts)), which a lens that places the image in depth needs.
+
 ## Evidence must match the claim
 
 Check native band identities, units and registration separately from display
