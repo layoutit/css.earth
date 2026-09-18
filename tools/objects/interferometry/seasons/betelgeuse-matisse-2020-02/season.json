@@ -98,7 +98,7 @@
         "spectralType": "M2Iab"
       }
     },
-    "continuumSource": "CONTINUUM_RECIPE in tools/objects/source-authoring/betelgeuse/author.mts, the recipe of the shipped image"
+    "continuumSource": "CONTINUUM_RECIPE in tools/objects/source-authoring/betelgeuse/author.mts, the recipe of the shipped image. Its error floors are a conservative envelope over the beam-commuter repeats, not the repeats themselves. Measured on the 29 calibrated files, every averaged point has 8 or 12 repeats, and a least-squares fit of the repeat scatter to sqrt((a V2)^2 + b^2) gives a = 0.085 with no positive b, unchanged by correcting the small-sample bias; the median fractional scatter above V2 = 0.05 is 4.9 per cent and the median absolute scatter below it is 3.5e-4. The recipe states 0.12 and 5.65e-4, larger than both, so every error it writes is at least the measured scatter. Erring large claims less structure, the safe direction for a lens whose patches are already labelled unconfirmed."
   },
   "reconstruction": {
     "code": "squeeze",
