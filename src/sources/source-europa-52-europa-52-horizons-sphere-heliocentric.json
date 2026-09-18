@@ -1,0 +1,37 @@
+{
+  "id": "source-europa-52-europa-52-horizons-sphere-heliocentric",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "52 Europa · europa 52 horizons sphere heliocentric",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa-52/source/manifest.json",
+      "revision": "9d984f641976e683f23c99aa244d00a4d4974be6",
+      "sha256": "917b41fb600a2f9d9db911e7684a121e7cc9fefa0a70e56c8aae36b384972cd1",
+      "locator": "/inputs/37"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "scope": "The europa 52 horizons sphere heliocentric input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ephemeris service output; cite JPL Horizons.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

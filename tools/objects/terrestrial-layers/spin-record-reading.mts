@@ -49,6 +49,13 @@ export function spinRecordReading(text: string, published: PublishedPole): SpinR
   return { ...best, otherSeparationDegrees: other?.separationDegrees ?? null };
 }
 
+/** The pole a lens's spin record is read against: the one its rotation states, when the body's own belongs to another
+ * solution, otherwise the body's own. */
+export async function readingPole(sourceDirectory: string, stated?: { eclipticJ2000Degrees: readonly number[] }): Promise<PublishedPole | null> {
+  if (stated) return { longitudeDegrees: stated.eclipticJ2000Degrees[0], latitudeDegrees: stated.eclipticJ2000Degrees[1] };
+  return publishedPole(sourceDirectory);
+}
+
 /** The pole a body's retained publication extract states, `reference/model-properties.json`, or null when it records none. */
 export async function publishedPole(sourceDirectory: string): Promise<PublishedPole | null> {
   let text: string;

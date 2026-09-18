@@ -107,7 +107,7 @@ async function installed(directory: string, recipeSha256: string, implementation
     return true;
   } catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false; throw error; }
 }
-export async function prepareNebulaObject(root: string, directory: string, ifMissing = false, research?: NebulaResearchBackend) {
+export async function prepareNebulaObject(root: string, directory: string, ifMissing = false, research?: NebulaResearchBackend, allowMissing = false) {
   const recipeBytes = await readFile(local(directory,'source/delivery.json')), recipe = readNebulaDelivery(JSON.parse(recipeBytes.toString()));
   // A volume that belongs to a body it surrounds is not a place of its own: it has no catalogue entry, so it never
   // becomes a map marker, a search result or a destination. Only a free-standing cloud registers itself.
@@ -136,6 +136,12 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   const packagePins = await packageImplementationPins(root, ['@cssearth/volume-core', '@cssearth/volume-bake']);
   const implementationSha256 = sha256(json([...await Promise.all(owners.map(async path => ({path,sha256:sha256(await readFile(local(root,path)))}))), ...packagePins]));
   if (ifMissing && await installed(directory,sha256(recipeBytes),implementationSha256)) return { id:recipe.id,status:'verified' };
+  // Deploy builds may tolerate a package missing from R2 instead of baking one from scratch here (no source
+  // acquisition service runs at build time): report it unavailable and move on, loudly.
+  if (allowMissing) {
+    console.warn(`Prepared package unavailable for ${recipe.id}; not baking a replacement (allow-missing). It will report unavailable.`);
+    return { id: recipe.id, status: 'unavailable' };
+  }
   const staging = resolve(directory,`.prepared-${process.pid}`); await mkdir(staging,{recursive:true});
   const lenses: PreparedVolumeLens[] = []; let sourceResult = recipe.acceptedLabResult;
   let fieldStars: Awaited<ReturnType<typeof prepareNebulaCatalogueField>>['receipt'] | undefined;

@@ -1,0 +1,37 @@
+{
+  "id": "source-daphne-daphne-sphere-20180806092243",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Daphne · daphne sphere 20180806092243",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/41Daphne/Deconv/d41Daphne_2018-08-06T09_22_43.251_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/daphne/source/manifest.json",
+      "revision": "9d984f641976e683f23c99aa244d00a4d4974be6",
+      "sha256": "e731bce84caf6e70b668fe8ea3eb836b3c369a933d71ae27c76977dcb4ed0e25",
+      "locator": "/inputs/14"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The daphne sphere 20180806092243 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

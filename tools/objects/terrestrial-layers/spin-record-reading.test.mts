@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { publishedPole, spinRecordReading } from './spin-record-reading.mts';
+import { readingPole, spinRecordReading } from './spin-record-reading.mts';
 import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './observer-cameras.mts';
 
 const OBJECTS = resolve(import.meta.dirname, '../../../src/objects');
@@ -25,15 +25,18 @@ test('a record the published pole cannot place is refused', () => {
   assert.throws(() => spinRecordReading('20 21 7\n2450000 0\n', { longitudeDegrees: 20.5, latitudeDegrees: 20.5 }), /does not decide/);
 });
 
-// Bodies whose released record describes a different solution from the published table; each keeps the finding in its ledger.
-const RECORD_DISAGREES = new Map([['eleonora', 'survey-table-pole'], ['nemesis', 'release-record-solution']]);
+// Bodies whose released record describes a different solution from every published pole; each keeps the finding in its
+// ledger. Eleonora's and Thisbe's records disagree with Table A.1 but not with the survey's released model, which their
+// lens records state and their figures confirm.
+const RECORD_DISAGREES = new Map([['nemesis', 'release-record-solution']]);
 
-test('every released spin record reads one way against its published pole, apart from the two recorded disagreements', async () => {
+test('every released spin record reads one way against its published pole, apart from the recorded disagreement', async () => {
   const unreadable: string[] = [];
   let read = 0;
   for (const id of readdirSync(OBJECTS)) {
-    const source = resolve(OBJECTS, id, 'source'), record = resolve(source, 'reference/release-parameters.txt');
-    const pole = existsSync(record) ? await publishedPole(source) : null;
+    const source = resolve(OBJECTS, id, 'source'), record = resolve(source, 'reference/release-parameters.txt'), lens = resolve(source, OBSERVER_CAMERAS_FILE);
+    const stated = existsSync(lens) ? parseObserverCameras(JSON.parse(readFileSync(lens, 'utf8'))).rotation.publishedPole : undefined;
+    const pole = existsSync(record) ? await readingPole(source, stated) : null;
     if (!pole) continue;
     try { spinRecordReading(readFileSync(record, 'utf8'), pole); read++; } catch { unreadable.push(id); }
   }
@@ -50,7 +53,7 @@ test('every ground-based lens states the column order its published pole support
     const source = resolve(OBJECTS, id, 'source'), path = resolve(source, OBSERVER_CAMERAS_FILE);
     if (!existsSync(path)) continue;
     const { rotation } = parseObserverCameras(JSON.parse(readFileSync(path, 'utf8')));
-    const pole = await publishedPole(source);
+    const pole = await readingPole(source, rotation.publishedPole);
     if (rotation.kind !== 'spin-record' || !pole) continue;
     assert.equal(spinRecordReading(readFileSync(resolve(source, rotation.path), 'utf8'), pole).order, rotation.columnOrder, `${id}: ${rotation.path}`);
   }

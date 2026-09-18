@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.9",
+  "document": {
+    "input": "hygiea-survey-research",
+    "object": 1088,
+    "width": 1598,
+    "height": 2466,
+    "sha256": "c92b6dc135a9d593d4888402f0c592a945fe74bd7a7fb6ca3d16fd0b6ac6e725"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2017-08-22T23:05:43",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-06-23T03:52:59",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-07-20T04:38:44",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-07-22T01:57:29",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-07-22T03:35:13",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2017-08-15T00:34:45",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-08-25T05:45:03",
+      "frame": "zimpol-20180825-054503",
+      "band": 1
+    },
+    {
+      "label": "2018-08-26T05:41:28",
+      "frame": "zimpol-20180826-054128",
+      "band": 1
+    },
+    {
+      "label": "2018-08-26T08:13:00",
+      "frame": "zimpol-20180826-081300",
+      "band": 1
+    },
+    {
+      "label": "2018-09-08T04:38:41",
+      "frame": "zimpol-20180908-043841",
+      "band": 1
+    },
+    {
+      "label": "2018-09-08T06:25:23",
+      "frame": "zimpol-20180908-062523",
+      "band": 1
+    },
+    {
+      "label": "2018-09-11T05:08:03",
+      "frame": "zimpol-20180911-050803",
+      "band": 1
+    }
+  ]
+}

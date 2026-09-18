@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 208 km, ecliptic J2000 pole (146\u00b0, 73\u00b0), period 8.374187 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 103.8031274924952 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 208 km, ecliptic J2000 pole (146°, 73°), period 8.374187 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 103.8031274924952 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/themis/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -52,7 +52,7 @@
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
       "status": "included",
-      "finding": "The deconvolved camera-1 frames under https://observations.lam.fr/astero/Data/24Themis/ are now qualified and cast: their pixels carry the survey's own deconvolution, their geometry is computed from the release's rotation record and pinned Horizons tables at each exposure midpoint, and measured coverage is 84.9 percent of the retained surface area with level matching inside gains of 0.91 to 2.74. The reduced Red/ products are not used. This is photographed illumination, not a calibrated global reflectance map, so the missing-imagery grid still marks unphotographed, grazing and rejected surface.",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 30 camera-1 deconvolved frames, 5 nights from 2018-12-27 to 2019-01-17, cast onto the primary mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The deconvolved camera-1 frames under https://observations.lam.fr/astero/Data/24Themis/ are now qualified and cast: their pixels carry the survey's own deconvolution, their geometry is computed from the release's rotation record and pinned Horizons tables at each exposure midpoint, and measured coverage is 84.9 percent of the retained surface area with level matching inside gains of 0.91 to 2.74. The reduced Red/ products are not used. This is photographed illumination, not a calibrated global reflectance map, so the missing-imagery grid still marks unphotographed, grazing and rejected surface.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/39e1052341253664212b7f168692700471069f40/src/objects/themis/README.md",
         "https://observations.lam.fr/astero/Data/24Themis/Deconv/",
@@ -71,6 +71,10 @@
         {
           "date": "2026-09-17",
           "commit": "39e1052341253664212b7f168692700471069f40"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
@@ -79,7 +83,7 @@
       "subject": "Released SAGE companion model",
       "status": "unresolved",
       "finding": "The live directory also lists 24_Themis.obj, which the imported ledger omitted. Its existence establishes a numerical candidate; method, calibration and independence from the selected MPCD reconstruction still need comparison.",
-      "revisitWhen": "The SAGE companion\u2019s paper, scale and shape constraints have been compared with the selected MPCD release.",
+      "revisitWhen": "The SAGE companion’s paper, scale and shape constraints have been compared with the selected MPCD release.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/24_Themis.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -98,7 +102,7 @@
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
       "status": "included",
-      "finding": "All 30 deconvolved ZIMPOL frames (camera 1) are cast as a photograph lens. The registration stage places the body by its outline: 30 of 30 frames project an outline elongated enough to define a position angle, between 1.227 and 1.328, and their limb residual leaves 1.65 degrees after removing the 3.58-degree floor that exposures minutes apart set, so the lens registers. The two sweeps that need surface markings find none: the cross-frame test is decisive on 2 of 30 frames, and the relief sweep's 11 decisive frames disagree among themselves from -9.5 to +9.5 degrees, so their -8.25-degree median reaches no verdict. The column order of the rotation record is settled twice: 145.9511 degrees cannot be a latitude, and both columns match the pole of DAMIT model 5916.",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 30 camera-1 frames on the primary mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: All 30 deconvolved ZIMPOL frames (camera 1) are cast as a photograph lens. The registration stage places the body by its outline: 30 of 30 frames project an outline elongated enough to define a position angle, between 1.227 and 1.328, and their limb residual leaves 1.65 degrees after removing the 3.58-degree floor that exposures minutes apart set, so the lens registers. The two sweeps that need surface markings find none: the cross-frame test is decisive on 2 of 30 frames, and the relief sweep's 11 decisive frames disagree among themselves from -9.5 to +9.5 degrees, so their -8.25-degree median reaches no verdict. The column order of the rotation record is settled twice: 145.9511 degrees cannot be a latitude, and both columns match the pole of DAMIT model 5916.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/24Themis/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/24_Themis_param.txt",
@@ -113,6 +117,26 @@
         {
           "date": "2026-09-17",
           "commit": "39e1052341253664212b7f168692700471069f40"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.19 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.19, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.957 to 0.961 at our phase, against 0.965 to 0.969 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 6 columns, one step from it in 3. With the paper’s photographs 0.958 to 0.966. Turned in the image, our outline best overlaps the paper’s photographs at -2.5 to 1.5° and its model panels at -4.5 to -1.5°. The spin axis we project lies at 109.0 to 109.5° on the sky against 107.0 to 107.6° for the figure’s arrows. Native outline residual 1.798 px mean over 30 frames at our phase, the lowest of a ±30° sweep. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.22° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/24Themis/Deconv/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     }

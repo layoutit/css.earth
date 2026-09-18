@@ -24,6 +24,21 @@ export interface SurfaceObservation {
   retainsIllumination: boolean;
 }
 
+/**
+ * The level fit's refusal with the frames it would adjust beyond its budget named, each against the first frame, which
+ * anchors the display, and against the median frame. A dim first frame puts every other frame over budget; the median
+ * shows which frames disagree with the rest. Any other error passes through unchanged.
+ */
+export function namedLevelRefusal(error: unknown, ids: readonly string[], maximumGain: number): unknown {
+  const cause = error instanceof Error && typeof error.cause === 'object' && error.cause !== null ? error.cause as { gains?: unknown } : null;
+  const gains = Array.isArray(cause?.gains) && cause.gains.length === ids.length && cause.gains.every(gain => typeof gain === 'number') ? cause.gains as number[] : null;
+  if (!(error instanceof Error) || !gains) return error;
+  const median = [...gains].sort((a, b) => a - b)[Math.floor(gains.length / 2)];
+  const beyond = (ratio: number) => !Number.isFinite(ratio) || ratio > maximumGain || ratio < 1 / maximumGain;
+  const named = ids.flatMap((id, i) => beyond(gains[i]) || beyond(gains[i] / median) ? [`${id} ${gains[i].toFixed(2)}× the first frame's level, ${(gains[i] / median).toFixed(2)}× the median frame's`] : []);
+  return new Error(`${error.message} Beyond the ${maximumGain}× budget: ${named.join('; ')}.`, { cause: error.cause });
+}
+
 export function createSurfaceObservation({ frames, policy, radial, config, entries }: { frames: readonly ObservationFrame[]; policy: SurfacePolicy; radial: RadialSurface; config: SurfaceConfig; entries: readonly SourceInput[] }): SurfaceObservation {
   if (policy.display.basis === 'source' && !entries.some(entry => entry.id === policy.display.sourceId)) throw new Error(`A source-based display names ${policy.display.sourceId}, which the lens does not consume.`);
   if (!frames.length || (policy.selection === 'single') !== (frames.length === 1)) throw new Error('A surface observation selects among its frames only when it has several.');
@@ -68,8 +83,11 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   const samples = points.map((point, i) => radial.faces[Math.floor(i / policy.samplesPerTriangle)].estimated
     ? frames.map((): Missing | Accepted => missing(point.map(n => n * metersPerUnit), 'estimated-geometry')) : sampleAll(point).values);
   if (frames.length > 1 && !policy.levelMatching) throw new Error('A multi-frame observation needs its level-matching budget.');
-  const levels = frames.length === 1 || !policy.levelMatching ? { gains: [1], pairs: [] }
-    : fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), policy.levelMatching);
+  const fit = (levelMatching: NonNullable<typeof policy.levelMatching>) => {
+    try { return fitObservationLevels(frames.map((_, i) => samples.map(values => values[i])), levelMatching); }
+    catch (error) { throw namedLevelRefusal(error, frames.map(frame => frame.id), levelMatching.maximumGain); }
+  };
+  const levels = frames.length === 1 || !policy.levelMatching ? { gains: [1], pairs: [] } : fit(policy.levelMatching);
   let low: number, high: number;
   if (policy.display.range === 'stated-range') ({ low, high } = policy.display);
   else {

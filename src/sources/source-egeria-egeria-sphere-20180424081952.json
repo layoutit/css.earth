@@ -1,0 +1,37 @@
+{
+  "id": "source-egeria-egeria-sphere-20180424081952",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Egeria · egeria sphere 20180424081952",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/13Egeria/Deconv/d13Egeria_2018-04-24T08_19_52.684_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/egeria/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "80101b53248ed358fcb0b6f125fab7fa625bb5bd64beaa060fce8b4d3286480d",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The egeria sphere 20180424081952 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "source-lamberta-lamberta-survey-research",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lamberta · lamberta survey research",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/lamberta/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "d690db6aca27adc864b70560de892ad6bf018bd001cdb7ef90be730898c41bcb",
+      "locator": "/inputs/30"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza et al. (2021), Astronomy & Astrophysics 654, A56",
+      "scope": "The lamberta survey research input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0 research article; retain the citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
