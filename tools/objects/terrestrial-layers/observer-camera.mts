@@ -143,8 +143,9 @@ const direction = (rightAscensionDegrees: number, declinationDegrees: number): V
  * pole; this parser only enforces that the values are numbers in range for the stated order.
  */
 export function parseSpinState(text: string, order: 'latitude-first' | 'longitude-first'): SpinState {
+  // DAMIT's spin.txt is the same two lines followed by its photometric parameters, numbers only; nothing else may follow.
   const lines = text.trim().split(/\r?\n/).map(line => line.trim()).filter(line => line.length > 0);
-  if (lines.length !== 2) throw new TypeError('A spin parameter record holds exactly two non-empty lines.');
+  if (lines.length < 2 || lines.slice(2).some(line => !/^[-+0-9.eE]+(\s+[-+0-9.eE]+)*$/u.test(line))) throw new TypeError('A spin parameter record holds exactly two non-empty lines, then at most DAMIT’s photometric parameters.');
   const first = lines[0].split(/\s+/).map(Number), second = lines[1].split(/\s+/).map(Number);
   if (first.length !== 3 || second.length !== 2) throw new TypeError('A spin parameter record holds three values then two.');
   const [a, b, periodHours] = first.map((value, index) => requireFiniteNumber(value, `spin parameter ${index + 1}`));

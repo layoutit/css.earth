@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.7",
+  "document": {
+    "input": "flora-survey-research",
+    "object": 1086,
+    "width": 1118,
+    "height": 1233,
+    "sha256": "a905f6c4fbd39fef8223b6668fcc3ed98c58b3d13cab11ae093ae7f4faa8dd92"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2017-12-30T03:26:45",
+      "frame": "zimpol-20171230-032645",
+      "band": 0
+    },
+    {
+      "label": "2017-12-30T05:47:16",
+      "frame": "zimpol-20171230-054716",
+      "band": 0
+    },
+    {
+      "label": "2017-12-31T03:14:29",
+      "frame": "zimpol-20171231-031429",
+      "band": 0
+    },
+    {
+      "label": "2019-05-04T08:21:41",
+      "frame": null,
+      "band": 0
+    }
+  ]
+}

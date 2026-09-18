@@ -51,7 +51,8 @@ test('the table\'s Table A.1 poles are the ones every survey-sourced package sta
     const record = resolve(OBJECTS, id, 'source/preparation/observer-cameras.json');
     if (!existsSync(record) || json(record).rotation.publishedPole === undefined) continue;
     const stated = json(record).rotation.publishedPole, figure = byNumber.get(Number(horizonsCommand(json(resolve(ROOT, 'packages/astronomy/data/bodies', `${id}.json`))).replace(/;$/u, '')));
-    assert.deepEqual([stated.source, stated.table, stated.eclipticJ2000Degrees], [paper.source, 'Table A.1', figure?.pole], `${id}: the lens record's pole is Table A.1's`);
+    const expected = figure?.releasedModel ? [figure.releasedModel.source, figure.releasedModel.model, figure.releasedModel.pole] : [paper.source, 'Table A.1', figure?.pole];
+    assert.deepEqual([stated.source, stated.table, stated.eclipticJ2000Degrees], expected, `${id}: the lens record's pole is Table A.1's, or the released model's where the table names one`);
   }
   assert.deepEqual(figures.find(figure => figure.name === 'Thisbe')?.pole, [350, 116], 'a pole printed past the pole is kept as printed; the setup folds it');
 });

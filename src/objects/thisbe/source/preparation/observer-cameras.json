@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-observer-cameras@1",
+  "lensId": "zimpol",
+  "rotation": {
+    "kind": "spin-record",
+    "path": "reference/release-parameters.txt",
+    "columnOrder": "latitude-first",
+    "publishedPole": {
+      "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5926",
+      "table": "DAMIT model 5926",
+      "eclipticJ2000Degrees": [
+        74,
+        63
+      ]
+    }
+  },
+  "ephemeris": {
+    "observer": "reference/horizons-sphere-observer.txt",
+    "heliocentric": "reference/horizons-sphere-heliocentric.txt"
+  },
+  "epoch": "exposure-midpoint",
+  "centre": {
+    "method": "limb",
+    "edgeFraction": 0.25
+  },
+  "publishedComparison": {
+    "ledgerEntry": "zimpol-published-comparison"
+  }
+}

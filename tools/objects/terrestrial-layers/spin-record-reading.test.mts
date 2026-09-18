@@ -25,10 +25,12 @@ test('a record the published pole cannot place is refused', () => {
   assert.throws(() => spinRecordReading('20 21 7\n2450000 0\n', { longitudeDegrees: 20.5, latitudeDegrees: 20.5 }), /does not decide/);
 });
 
-// Bodies whose released record describes a different solution from the published table; each keeps the finding in its ledger.
-const RECORD_DISAGREES = new Map([['eleonora', 'survey-table-pole'], ['nemesis', 'release-record-solution']]);
+// Bodies whose released record describes a different solution from every published pole; each keeps the finding in its
+// ledger. Eleonora's and Thisbe's records disagree with Table A.1 but not with the survey's released model, which their
+// lens records state and their figures confirm.
+const RECORD_DISAGREES = new Map([['nemesis', 'release-record-solution']]);
 
-test('every released spin record reads one way against its published pole, apart from the two recorded disagreements', async () => {
+test('every released spin record reads one way against its published pole, apart from the recorded disagreement', async () => {
   const unreadable: string[] = [];
   let read = 0;
   for (const id of readdirSync(OBJECTS)) {

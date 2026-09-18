@@ -1,0 +1,218 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/145_Adeona_adam.obj",
+      "url": "https://observations.lam.fr/astero/3Dshape/145_Adeona_adam.obj",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/vernazza-2021.pdf",
+      "url": "https://observations.lam.fr/astero/Papers/Vernazza2021.pdf",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2017-12-31T06_45_40.111_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2017-12-31T06_45_40.111_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2017-12-31T06_50_50.664_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2017-12-31T06_50_50.664_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2017-12-31T06_56_00.807_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2017-12-31T06_56_00.807_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2017-12-31T07_01_08.794_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2017-12-31T07_01_08.794_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2017-12-31T07_06_17.030_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2017-12-31T07_06_17.030_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-01T04_58_56.647_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-01T04_58_56.647_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-01T05_04_07.308_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-01T05_04_07.308_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-01T05_09_18.187_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-01T05_09_18.187_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-01T05_14_27.539_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-01T05_14_27.539_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-01T05_19_37.373_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-01T05_19_37.373_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-07T05_55_57.289_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-07T05_55_57.289_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-07T06_01_08.761_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-07T06_01_08.761_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-07T06_06_19.727_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-07T06_06_19.727_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-07T06_11_29.939_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-07T06_11_29.939_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/d145Adeona_2018-01-07T06_16_39.616_zpl_science_imaging_cam1.fits",
+      "url": "https://observations.lam.fr/astero/Data/145Adeona/Deconv/d145Adeona_2018-01-07T06_16_39.616_zpl_science_imaging_cam1.fits",
+      "headers": {
+        "Cookie": "CesAM_LAM_opens_the_door=1"
+      }
+    }
+  ]
+}

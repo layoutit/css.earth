@@ -1,0 +1,37 @@
+{
+  "id": "source-eleonora-eleonora-horizons-sphere-observer",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eleonora · eleonora horizons sphere observer",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eleonora/source/manifest.json",
+      "revision": "35b2477d3d85b15a2dbc71ab4ddfebdddfaa757e",
+      "sha256": "7200d2f93d8570106e47d575713fc52a479f49dcbc9ccf14c6f8e87475f53c5c",
+      "locator": "/inputs/36"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "scope": "The eleonora horizons sphere observer input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ephemeris service output; cite JPL Horizons.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

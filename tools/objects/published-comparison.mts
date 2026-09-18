@@ -70,7 +70,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
     return { mask: { width, height, data: mask } as Mask };
   };
 
-  const columns = [], visuals: { label: string; model: Mask; ours: Mask; cellModel: number; cellImage: number; column: number }[] = [];
+  const columns = [], visuals: { label: string; model: Mask; photograph: Mask; ours: Mask; cellModel: number; cellImage: number; column: number }[] = [];
   for (const [index, column] of spec.columns.entries()) {
     if (column.frame === null) continue;
     const camera = atZero.find(entry => entry.id === column.frame);
