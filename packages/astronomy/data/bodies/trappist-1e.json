@@ -1,0 +1,27 @@
+{
+  "id": "trappist-1e",
+  "classification": "exoplanet",
+  "order": 914,
+  "physical": {
+    "name": "TRAPPIST-1e",
+    "horizonsCode": null,
+    "meanRadiusKm": 5868.0,
+    "gravitationalParameterKm3PerS2": 275782.076,
+    "parent": "trappist-1"
+  },
+  "physicalNotes": "Radius 5.868e8 cm and mass 4.132e27 g from Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 6, which combines their transit-timing masses with the photodynamic radius ratios and the Mann et al. (2019) stellar mass. GM from that mass and the CODATA gravitational constant 6.67430e-20 km^3 kg^-1 s^-2. A sphere: no oblateness of these planets is measured.",
+  "hostedOrbit": {
+    "periodDays": 6.101013,
+    "semiMajorAxisStellarRadii": 52.855,
+    "inclinationDegrees": 89.793,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 57257.32771,
+    "ascendingNodePositionAngleDegrees": 0,
+    "sources": {
+      "period": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2 (transit-timing analysis): 6.101013 d",
+      "shape": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 5 (photodynamic model): a/R* 52.855, inclination 89.793 degrees. Eccentricity is set to 0: their Table 2 gives |e| = 0.00632 for this planet, which moves it by less than its own radius.",
+      "phase": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2: t0 = BJD_TDB 2457257.82771, the transit time of the osculating elements at the start of their photodynamic model, here BMJD_TDB 57257.32771. Transit-timing variations of up to about half an hour are not modelled.",
+      "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+    }
+  }
+}

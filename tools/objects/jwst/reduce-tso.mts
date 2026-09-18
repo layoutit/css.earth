@@ -30,7 +30,10 @@ import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
 export interface TsoProgram {
   readonly id: string; readonly eventName: string; readonly crdsContext: string; readonly batchSegments: number;
-  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels: string };
+  /** How Stage 3 measures the star: a dispersed spectrum, or aperture photometry of an imaging time series. Photometry has one
+   * channel, so it has no channel light curves and no per-column stellar counts. */
+  readonly mode: 'spectroscopy' | 'photometry';
+  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels?: string };
   readonly segments: readonly Segment[];
   readonly oracle: EurekaZipOracle | DepositFilesOracle;
 }
@@ -58,7 +61,10 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
   return {
     id: requireString(record.id), eventName: requireString(record.eventName), crdsContext: requireString(record.crdsContext),
     batchSegments: requireFiniteNumber(record.batchSegments),
-    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4), S4channels: requireString(stages.S4channels) },
+    mode: record.mode === undefined ? 'spectroscopy' : requireString(record.mode) === 'photometry' ? 'photometry'
+      : requireString(record.mode) === 'spectroscopy' ? 'spectroscopy' : (() => { throw new TypeError(`${directory}: mode must be spectroscopy or photometry.`); })(),
+    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4),
+      ...(stages.S4channels === undefined ? {} : { S4channels: requireString(stages.S4channels) }) },
     segments,
     oracle: parseOracle(oracle),
   };
@@ -170,10 +176,17 @@ source, prefix = sys.argv[1:3]
 lc = xr.open_dataset(source, engine='h5netcdf')
 # Eureka! 1.4 writes data, err, mask and centroid_sy; the Eureka! v1 deposit writes flux, err, mask, psf_width_y and flux_white.
 flux, err, mask = (np.asarray(lc[name]) for name in ('flux' if 'flux' in lc else 'data', 'err', 'mask'))
-width = np.asarray(lc['psf_width_y' if 'psf_width_y' in lc else 'centroid_sy'])
+# Aperture photometry records no cross-dispersion centroid or width; those columns are written as NaN so every
+# light curve this pipeline exports has the same shape.
+def column(*names):
+    for name in names:
+        if name in lc: return np.asarray(lc[name]).ravel()
+    return np.full(np.asarray(lc.time).shape, np.nan)
+width = column('psf_width_y', 'centroid_sy')
+centroid = column('centroid_y', 'centroid_sy')
 def write(name, f, e, m):
     median = np.nanmedian(np.where(m, np.nan, f))
-    np.savetxt(name, np.column_stack([lc.time, f / median, e / median, m.astype(float), lc.centroid_y, width]),
+    np.savetxt(name, np.column_stack([lc.time, f / median, e / median, m.astype(float), centroid, width]),
                delimiter=',', header='time,flux,err,mask,centroid_y,psf_width_y', comments='')
 if 'flux_white' in lc: write(prefix + '-white.csv', *(np.asarray(lc[name]).ravel() for name in ('flux_white', 'err_white', 'mask_white')))
 if flux.shape[0] == 1: write(prefix + '-white.csv', flux[0], err[0], mask[0])
@@ -219,8 +232,14 @@ const sha256File = (path: string) => new Promise<string>((done, fail) => {
   createReadStream(path).on('data', chunk => hash.update(chunk)).on('error', fail).on('end', () => done(hash.digest('hex')));
 });
 
-export async function reduceTso(programDirectory: string, work: string, rawSources: readonly string[] = []) {
-  const program = await readProgram(programDirectory), toolchain = await eurekaToolchain(program.crdsContext);
+/** `segments` reduces only the first n pinned segments: a partial run that proves the path before a programme's whole
+ * download is committed. The light curve it produces covers that part of the time series and nothing more. */
+export async function reduceTso(programDirectory: string, work: string, rawSources: readonly string[] = [], segments?: number) {
+  const full = await readProgram(programDirectory), toolchain = await eurekaToolchain(full.crdsContext);
+  if (segments !== undefined && !(Number.isInteger(segments) && segments > 0 && segments <= full.segments.length)) {
+    throw new TypeError(`--segments must be between 1 and ${full.segments.length}.`);
+  }
+  const program = segments === undefined ? full : { ...full, segments: full.segments.slice(0, segments) };
   const raw = resolve(work, 'raw'), progressPath = resolve(work, 'progress.json');
   await mkdir(raw, { recursive: true });
   const progress = await readFile(progressPath, 'utf8').then(text => JSON.parse(text) as { segments: string[]; steps: Record<string, string> }, () => ({ segments: [] as string[], steps: {} as Record<string, string> }));
@@ -263,11 +282,12 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     await save();
   }
 
-  // Stage 3 on every calibrated segment, then Stage 4 for the white light curve and for the channels.
+  // Stage 3 on every calibrated segment, then Stage 4 for the white light curve and, for a dispersed spectrum, the channels.
+  const channelStage = program.stages.S4channels;
   for (const [step, template, prefix, inputdir, outputdir] of [
     ['S3', program.stages.S3, 'S3', 'Stage2_all', 'Stage3'],
     ['S4', program.stages.S4, 'S4', 'Stage3', 'Stage4'],
-    ['S4channels', program.stages.S4channels, 'S4', 'Stage3', 'Stage4_channels'],
+    ...(channelStage === undefined ? [] : [['S4channels', channelStage, 'S4', 'Stage3', 'Stage4_channels'] as const]),
   ] as const) {
     if (progress.steps[step]) continue;
     progress.steps[step] = await python(toolchain, work, STAGE_RUNNER, [step.slice(0, 2), await settings(step, template, prefix, inputdir, outputdir), program.eventName], resolve(work, `${step}.log`));
@@ -278,8 +298,14 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   const curves = resolve(work, 'light-curves');
   await mkdir(curves, { recursive: true });
   await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours.log'));
-  await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_channels'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours-channels.log'));
-  await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
+  if (channelStage !== undefined) {
+    await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_channels'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours-channels.log'));
+  }
+  // A dispersed spectrum carries the star's counts per detector column, the band response a temperature conversion needs.
+  // Photometry has one band: its response is the filter's own transmission, which the package pins instead.
+  if (program.mode === 'spectroscopy') {
+    await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
+  }
   const oracle = program.oracle, oracleDirectory = resolve(work, 'oracle');
   await mkdir(oracleDirectory, { recursive: true });
   if (oracle.kind === 'eureka-light-curve-zip') {
@@ -306,7 +332,8 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [programDirectory, work, ...rest] = process.argv.slice(2);
-  if (!programDirectory || !work) throw new TypeError('Usage: reduce-tso <program directory> <work directory> [--raw <directory> ...]');
+  if (!programDirectory || !work) throw new TypeError('Usage: reduce-tso <program directory> <work directory> [--raw <directory> ...] [--segments <n>]');
   const rawSources = rest.flatMap((value, index) => rest[index - 1] === '--raw' ? [resolve(value)] : []);
-  console.log(`Light curves in ${await reduceTso(resolve(programDirectory), resolve(work), rawSources)}`);
+  const limit = rest.flatMap((value, index) => rest[index - 1] === '--segments' ? [Number(value)] : []).at(0);
+  console.log(`Light curves in ${await reduceTso(resolve(programDirectory), resolve(work), rawSources, limit)}`);
 }

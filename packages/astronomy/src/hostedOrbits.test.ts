@@ -9,9 +9,11 @@ const hostRadiusKm = BODIES['wasp-43'].meanRadiusKm
 
 describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
-    expect(EXOPLANET_IDS).toEqual(['hd-189733b', 'wasp-43b'])
+    const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
+    expect(EXOPLANET_IDS).toEqual(['hd-189733b', ...trappist, 'wasp-43b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b'])
+    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b', ...trappist])
+    for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
     expect(BODIES['hd-189733b'].parent).toBe('hd-189733')
     // Rp/R* 0.15883 of WASP-43's 0.665 solar radii, 0.155313 of HD 189733 A's 0.752.

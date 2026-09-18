@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-synchronous-rotation@1",
+  "host": "trappist-1",
+  "source": "Assumed synchronous rotation: a planet 112 stellar radii from its star is expected to be tidally locked, and no rotation period of TRAPPIST-1h is measured: Agol et al. (2021) and Gillon et al. (2017) report none, and the planets' own transits constrain only their orbits. Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/trappist-1h.json.",
+  "coordinateSystem": "ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.",
+  "qualification": "Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of TRAPPIST-1h is measured."
+}

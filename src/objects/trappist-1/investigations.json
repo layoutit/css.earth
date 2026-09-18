@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "trappist-1",
+  "entries": [
+    {
+      "id": "gaia-xp-sampled",
+      "subject": "A sampled Gaia spectrum for the colour lens",
+      "finding": "Gaia DR3 releases externally calibrated sampled spectra only for the brighter sources; TRAPPIST-1 at G = 15.62 carries only the continuous basis-function coefficients (has_xp_sampled false, has_xp_continuous true). The coefficients are pinned and sampled here with GaiaXPy onto the archive's own grid, which is the same calibration the sampled product uses.",
+      "verdict": "resolved",
+      "checked": "2026-09-17",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.5281/zenodo.6674521"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Imagery of the photosphere",
+      "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.07 milliarcseconds across, far below any interferometer's reach. The colour lens is its own measured spectrum.",
+      "verdict": "shape-only",
+      "checked": "2026-09-17",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "jwst-thermal",
+      "subject": "JWST measurements of the planets",
+      "finding": "393 public JWST observations of this system are in MAST, including MIRI imaging time series of the planets' eclipses (programs 1177, 1279, 2304) and thermal phase curves of b and c (program 3077). Six segments of program 3077 were reduced from raw with this project's pipeline and Bell's deposited control files: correlation 0.9953 with his published light curve over the same 300 integrations, difference 223 ppm against a per-point scatter of 862 ppm (ours) and 891 ppm (his). The thermal lens itself is not in this package yet.",
+      "verdict": "in-progress",
+      "checked": "2026-09-17",
+      "evidence": [
+        "https://mast.stsci.edu/",
+        "https://doi.org/10.5281/zenodo.17710453",
+        "https://doi.org/10.5281/zenodo.13385020"
+      ]
+    }
+  ]
+}

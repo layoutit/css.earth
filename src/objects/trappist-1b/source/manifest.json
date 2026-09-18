@@ -1,0 +1,204 @@
+{
+  "schema": "csstrappist-1b-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "trappist-1b-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1485,
+      "expectedSha256": "7cf633f91c4ad6a713f5abca4525ce21959a7c46642ccf93fb5d1956f30da4cf",
+      "origin": "https://doi.org/10.3847/PSJ/abd022",
+      "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1b-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/trappist-1b/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1b-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2425,
+      "expectedSha256": "21291e911f919b2702bd6ce1606cb49840918b93e4551e3cfc5b9f1a62fd77a1",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "trappist-1b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1659,
+      "expectedSha256": "3d527e4ad4226611f06b712a024a39229de8abd812ea326610e5ece28c06e6f7",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "trappist-1b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield",
+        "sky-sun"
+      ]
+    },
+    {
+      "id": "trappist-1b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 107,
+      "expectedSha256": "806df02f90ffef6c7f548a02e4d5929eeae9628165b79ea7b07f1b4e23bb1320",
+      "origin": "Repository-authored presentation profile: composite mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "trappist-1b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 219,
+      "expectedSha256": "3d6d2ee991de42712a3b37ad2ac90c0a0ad1e801fe06421a427b7e110edee82a",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "origin": "https://doi.org/10.3847/PSJ/abd022",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-hosted-planet.mts",
+        "inputs": [
+          "trappist-1b-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-hosted-planet.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3805,
+      "expectedSha256": "0cb4871c85ce36ca2f389aa8ff0411e6a23c1794013d1236d043307d0f983dde",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 448,
+      "expectedSha256": "cd232134d91e54e5bd11bc22844081e1d2c017c6f5544a5f903ba95db1d9930f"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 862,
+      "expectedSha256": "ec724b430cc3c40bbd771d9a07806b70f495e72e3e6e3aa26ee5f8806ae04f1b"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3988,
+      "expectedSha256": "19f66da2fbac2bb2ba7d48e6e63e570a87384890658abb23f477be286d5bf149"
+    }
+  ]
+}

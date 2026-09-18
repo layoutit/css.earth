@@ -114,3 +114,24 @@ test('the HD 189733b MIRI eclipses reduced from raw reproduce Lally et al. (2025
   }
 });
 
+
+test('the TRAPPIST-1b phase-curve program pins the whole visit as MIRI photometry, with the authors\' control files', async () => {
+  const pinned = await readProgram(resolve(import.meta.dirname, 'programs/trappist-1b-miri-3077'));
+  assert.equal(pinned.mode, 'photometry');
+  assert.equal(pinned.segments.length, 70);
+  assert.equal(pinned.segments.reduce((sum, segment) => sum + segment.bytes, 0), 102_428_380_800);
+  // Photometry has one band: no channel light curves, so no Stage 4 channels file.
+  assert.equal(pinned.stages.S4channels, undefined);
+  assert.equal(pinned.crdsContext, 'jwst_1535.pmap');
+  assert.equal(pinned.oracle.kind, 'eureka-light-curve-zip');
+  for (const template of Object.values(pinned.stages)) {
+    await access(resolve(import.meta.dirname, 'programs/trappist-1b-miri-3077', template));
+  }
+  // Bell's Stage 3 settings, carried over: aperture photometry of the star with his aperture and sky annulus.
+  const stage3 = await readFile(resolve(import.meta.dirname, 'programs/trappist-1b-miri-3077', pinned.stages.S3), 'utf8');
+  for (const setting of [/^photometry\s+True$/mu, /^photap\s+5\b/mu, /^skyin\s+16\b/mu, /^skywidth\s+30\b/mu, /^gain\s+3\.57$/mu]) {
+    assert.match(stage3, setting);
+  }
+  // One worker, because this machine runs one heavy job at a time.
+  assert.match(stage3, /^ncpu\s+1$/mu);
+});

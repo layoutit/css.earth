@@ -78,7 +78,9 @@ export const XP_SAMPLED_WAVELENGTHS_NM = Array.from({ length: 343 }, (_, i) => 3
 export function readXpSampledSpectrum(csv: string, sourceId: string) {
   const lines = csv.split(/\r?\n/u).filter(line => line.trim());
   if (lines[0] !== 'source_id,solution_id,ra,dec,flux,flux_error') throw new TypeError('The XP spectrum table must have the DataLink CSV columns.');
-  const rows = lines.slice(1).map(line => /^(\d+),(\d+),([^,]+),([^,]+),"\(([^)]*)\)","\(([^)]*)\)"$/u.exec(line));
+  // The DataLink sampled product carries the source's position; a spectrum sampled here from the coefficients leaves those
+  // two fields empty, because the coefficient product does not repeat them. Neither is read.
+  const rows = lines.slice(1).map(line => /^(\d+),(\d+),([^,]*),([^,]*),"\(([^)]*)\)","\(([^)]*)\)"$/u.exec(line));
   if (rows.some(row => !row)) throw new TypeError('An XP spectrum row does not have the DataLink CSV layout.');
   const matches = rows.filter(row => row![1] === sourceId);
   if (matches.length !== 1) throw new TypeError(`The XP spectrum table must hold exactly one row for source ${sourceId}.`);
@@ -89,12 +91,27 @@ export function readXpSampledSpectrum(csv: string, sourceId: string) {
 }
 
 /** The colour of a measured spectrum: its samples at the even wavelengths from 380 to 780 nm through the observer, as the Planck
- * colour takes every nanometre. The samples are 2 nm apart, so the odd wavelengths add nothing a finer grid would change. */
-export function xpSampledColor(flux: readonly number[], colorMatching: Map<number, readonly number[]>): StellarColor {
+ * colour takes every nanometre. The samples are 2 nm apart, so the odd wavelengths add nothing a finer grid would change.
+ *
+ * A cool star can be too faint to measure at the blue end, where its samples scatter around zero. With `fluxError`, a sample
+ * that is not positive but lies within three times its own error of zero is read as no emission at that wavelength: ordinary
+ * noise across hundreds of samples. A sample below zero by more than that is a spectrum this colour cannot be taken from, and
+ * fails. Without `fluxError` every visible sample must be positive, which is what the one-sigma bounds pass. */
+/** How far below zero a sample may scatter and still be read as no emission, in its own standard errors. */
+export const NOISE_FLOOR_SIGMA = 3;
+
+export function xpSampledColor(flux: readonly number[], colorMatching: Map<number, readonly number[]>, fluxError?: readonly number[]): StellarColor {
   const index = (wavelength: number) => (wavelength - 336) / 2;
   const wavelengths = XP_SAMPLED_WAVELENGTHS_NM.filter(wavelength => wavelength >= 380 && wavelength <= 780);
-  if (wavelengths.some(wavelength => !(flux[index(wavelength)]! > 0))) throw new TypeError('The XP spectrum must be positive across the visible range.');
-  return spectrumColor(wavelengths, wavelength => flux[index(wavelength)]!, colorMatching, 'The XP spectrum colour');
+  const sample = (wavelength: number) => {
+    const value = flux[index(wavelength)]!;
+    if (value > 0) return value;
+    const error = fluxError?.[index(wavelength)];
+    if (error === undefined || !(Math.abs(value) <= NOISE_FLOOR_SIGMA * error)) throw new TypeError('The XP spectrum must be positive across the visible range, or consistent with zero where it is not.');
+    return 0;
+  };
+  if (!wavelengths.some(wavelength => sample(wavelength) > 0)) throw new TypeError('The XP spectrum has no visible emission.');
+  return spectrumColor(wavelengths, sample, colorMatching, 'The XP spectrum colour');
 }
 
 export async function loadStellarPhotometricColor(read: (path: string) => Promise<Buffer>, science: Record<string, unknown>, sourcePath: string) {
@@ -118,11 +135,11 @@ export async function loadStellarPhotometricColor(read: (path: string) => Promis
   })();
   if (record.spectrum === 'gaia-xp-sampled') {
     const spectrum = readXpSampledSpectrum((await read(record.spectrumPath)).toString('utf8'), record.sourceId);
-    return { temperature: null, spectrum: { samples: spectrum.flux.length }, color: xpSampledColor(spectrum.flux, colorMatching), limbDarkening,
+    return { temperature: null, spectrum: { samples: spectrum.flux.length }, color: xpSampledColor(spectrum.flux, colorMatching, spectrum.fluxError), limbDarkening,
       // The colours of the spectrum one standard error fainter and brighter at every sample, a bound on what the noise can move. A faint
       // red dwarf's bluest samples are within their errors of zero; the fainter spectrum stops at zero there rather than going negative.
       range: [xpSampledColor(spectrum.flux.map((value, i) => Math.max(Number.MIN_VALUE, value - spectrum.fluxError[i]!)), colorMatching),
-        xpSampledColor(spectrum.flux.map((value, i) => value + spectrum.fluxError[i]!), colorMatching)] as const };
+        xpSampledColor(spectrum.flux.map((value, i) => Math.max(Number.MIN_VALUE, value + spectrum.fluxError[i]!)), colorMatching)] as const };
   }
   const temperature = readStellarTemperature((await read(record.temperaturePath)).toString('utf8'), record);
   return { temperature, spectrum: null, color: planckColor(temperature.kelvin, colorMatching), limbDarkening,

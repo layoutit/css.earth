@@ -1,0 +1,117 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "trappist-1b",
+  "displayName": "TRAPPIST-1b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.116 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.374 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "massEarths; massSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "1.511 days",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "starlight",
+        "label": "Starlight received",
+        "value": "4.15 times Earth's",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "insolationEarths; insolationSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "trappist-1b-lens-shape.webp",
+        "surface": "trappist-1b-surface-shape.webp",
+        "poles": "trappist-1b-poles-shape.webp",
+        "source": {
+          "id": "trappist-1b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/PSJ/abd022"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TRAPPIST-1b exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
+      "href": "https://doi.org/10.3847/PSJ/abd022"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/PSJ/abd022",
+      "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/trappist-1b.json",
+      "credit": "Published radius, mass and transit-fitted orbit from E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1"
+    }
+  }
+}

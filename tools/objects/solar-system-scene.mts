@@ -13,10 +13,11 @@ import { prepareEclipticPresentationFrame } from "../../src/platform/solar-prese
 import { LIT_DEFAULT_VIEW, prepareDefaultCameraAngles, refuseAuthoredCameraAngles } from "../../src/platform/default-camera.mts";
 import { prepareAstrometricSkySceneRegistration } from "../../src/platform/astrometric-sky-registration.mts";
 import { prepareSunReferenceViewDirection } from "../../src/platform/prepare-sun-view-direction.mts";
+import type { Vector3 } from "../../src/renderers/css/solar-system/types.ts";
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from "../../src/platform/directional-sun-contract.mts";
 import {
   ASTRONOMICAL_UNIT_KILOMETERS, SOLAR_GEOMETRY_EPOCH_JD_TT,
-  SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection,
+  SOLAR_GEOMETRY_EPOCH_LABEL, bodyFixedStarDirection, requireBodyFixedSunDirection,
   requireBodyFixedToIcrf, requireBodyOrbit,
 } from "../../src/platform/solar-geometry.mts";
 
@@ -76,18 +77,35 @@ export function prepareSolarSystemSunPresentation(source:{bodyId:string;displayN
   const { bodyId, displayName } = source;
   if (typeof displayName !== "string" || !displayName.trim()) throw new TypeError("Sun presentation needs the observer's display name.");
   const frame = prepareEclipticPresentationFrame(bodyId);
+  // A planet of another star is lit by that star, whose direction its synchronous rotation holds at longitude 0. Every body
+  // the Sun lights keeps the Sun's own direction; the presentation frame itself is unchanged either way.
+  const star = bodyFixedStarDirection(bodyId);
+  const bodyFixedDirection = star ?? requireBodyFixedSunDirection(bodyId);
+  const localDirection = star ? unitVector(frame.toPresentation(star as Vector3)) : frame.sunDirection;
   return Object.freeze({
     ...DIRECTIONAL_SUN_PRESENTATION_STANDARD,
-    source: "VSOP87A heliocentric positions with IAU/WGCCRE rotation elements",
+    source: star
+      ? "Transit-fitted hosted orbit with the synchronous rotation it implies"
+      : "VSOP87A heliocentric positions with IAU/WGCCRE rotation elements",
     sourcePath: "src/platform/solar-geometry.mts",
-    qualification: `Observed ${displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
-      "expressed in the ecliptic presentation frame (north up, Sun left at " +
-      "zero yaw) and in view space at the default camera pose.",
-    bodyFixedDirection: requireBodyFixedSunDirection(bodyId),
-    presentationFrame: frame.model, localDirection: frame.sunDirection,
+    qualification: star
+      ? `Direction to ${displayName}'s own star at ${SOLAR_GEOMETRY_EPOCH_LABEL}, from its transit-fitted orbit, ` +
+        "expressed in the presentation frame and in view space at the default camera pose. Assumed synchronous rotation " +
+        "holds that direction at longitude 0."
+      : `Observed ${displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
+        "expressed in the ecliptic presentation frame (north up, Sun left at " +
+        "zero yaw) and in view space at the default camera pose.",
+    bodyFixedDirection,
+    presentationFrame: frame.model, localDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId,
-      ...prepareDefaultCameraAngles(bodyId), sceneDirection: frame.sunDirection }),
+      ...prepareDefaultCameraAngles(bodyId), sceneDirection: localDirection }),
   });
+}
+
+function unitVector(direction: readonly number[]): Vector3 {
+  const length = Math.hypot(...direction);
+  if (!(length > 0)) throw new TypeError("A light direction must be a nonzero vector.");
+  return Object.freeze(direction.map(component => component / length)) as unknown as Vector3;
 }
 
 export async function prepareSolarSystemScene(options:SolarSceneOptions) {

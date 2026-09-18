@@ -1,0 +1,812 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "trappist-1b",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "b0b28a679f5ae16c1d3ab92ced2856eb8a209f5c0f6ff8c1378806f1dd66221b"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "32326bbf6799c3c0180aa8c49908b79b5d250c15072d09cfd04a06b5ef7034b9"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "21291e911f919b2702bd6ce1606cb49840918b93e4551e3cfc5b9f1a62fd77a1",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/trappist-1b/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "trappist-1b-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "csstrappist-1b-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "shape",
+            "output": "trappist-1b-surface-{id}{suffix}.webp",
+            "thumbnail": "trappist-1b-lens-{id}.webp",
+            "source": "measurements.json",
+            "falseColor": false,
+            "science": {
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star."
+            }
+          }
+        ],
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "presentationSize": 460,
+          "defaultFrame": 230,
+          "billboardFrameSize": 24,
+          "billboardColumns": 16,
+          "rowOutput": "trappist-1b-lighting-{density}x-row-{row}.webp",
+          "billboardOutput": "trappist-1b-lighting-{density}x-billboard.webp",
+          "minimumLightViewZ": -1,
+          "maximumLightViewZ": 1,
+          "frameCount": 256,
+          "shadowlessFloodLimbFloor": 0.35,
+          "ambientIntensity": 0.05,
+          "radiusScale": 0.505,
+          "terminator": [
+            0,
+            0.1
+          ],
+          "maximumAlpha": 0.95,
+          "bankSchema": "csstrappist-1b-prepared-lighting-bank@1",
+          "billboardSchema": "csstrappist-1b-prepared-lighting-billboard@1",
+          "metadata": {
+            "schema": "csstrappist-1b-prepared-lighting@1",
+            "storageModel": "prepared-full-resolution-density-row-shards",
+            "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+            "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+            "ambientIntensity": 0.05,
+            "shadowlessFloodLimbFloor": 0.35,
+            "orenNayarRoughness": 0,
+            "terminatorSmoothstep": [
+              0,
+              0.1
+            ],
+            "minimumLightViewZ": -1,
+            "maximumLightViewZ": 1,
+            "baseLightAzimuthDegrees": 0,
+            "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+            "runtimeRasterization": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "0cb4871c85ce36ca2f389aa8ff0411e6a23c1794013d1236d043307d0f983dde",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "trappist-1b",
+        "displayName": "TRAPPIST-1b",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "1.116 Earth radii",
+              "source": {
+                "catalogueId": "doi-10-3847-psj-abd022",
+                "url": "https://doi.org/10.3847/PSJ/abd022",
+                "label": "Agol et al. 2021",
+                "checked": "2026-09-17",
+                "path": "source/measurements.json",
+                "locator": "radiusKm; radiusSource"
+              }
+            },
+            {
+              "id": "mass",
+              "label": "Mass",
+              "value": "1.374 Earth masses",
+              "source": {
+                "catalogueId": "doi-10-3847-psj-abd022",
+                "url": "https://doi.org/10.3847/PSJ/abd022",
+                "label": "Agol et al. 2021",
+                "checked": "2026-09-17",
+                "path": "source/measurements.json",
+                "locator": "massEarths; massSource"
+              }
+            },
+            {
+              "id": "period",
+              "label": "Year",
+              "value": "1.511 days",
+              "source": {
+                "catalogueId": "doi-10-3847-psj-abd022",
+                "url": "https://doi.org/10.3847/PSJ/abd022",
+                "label": "Agol et al. 2021",
+                "checked": "2026-09-17",
+                "path": "source/measurements.json",
+                "locator": "orbitalPeriodDays; orbitalPeriodSource"
+              }
+            },
+            {
+              "id": "starlight",
+              "label": "Starlight received",
+              "value": "4.15 times Earth's",
+              "source": {
+                "catalogueId": "doi-10-3847-psj-abd022",
+                "url": "https://doi.org/10.3847/PSJ/abd022",
+                "label": "Agol et al. 2021",
+                "checked": "2026-09-17",
+                "path": "source/measurements.json",
+                "locator": "insolationEarths; insolationSource"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
+              "thumbnail": "trappist-1b-lens-shape.webp",
+              "surface": "trappist-1b-surface-shape.webp",
+              "poles": "trappist-1b-poles-shape.webp",
+              "source": {
+                "id": "trappist-1b-observational-measurements",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.3847/PSJ/abd022"
+              },
+              "falseColor": false,
+              "notes": "No image or colour of TRAPPIST-1b exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
+            "href": "https://doi.org/10.3847/PSJ/abd022"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://doi.org/10.3847/PSJ/abd022",
+            "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/trappist-1b.json",
+            "credit": "Published radius, mass and transit-fitted orbit from E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "trappist-1b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://doi.org/10.3847/PSJ/abd022",
+      "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "sha256": "7cf633f91c4ad6a713f5abca4525ce21959a7c46642ccf93fb5d1956f30da4cf",
+      "bytes": 1485,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "0cb4871c85ce36ca2f389aa8ff0411e6a23c1794013d1236d043307d0f983dde",
+      "bytes": 3805,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "trappist-1b-observational-measurements"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-surface-shape.webp",
+          "bytes": 78,
+          "sha256": "2ec4d1bb2d266fdbb9283cb47781b2b34b4ff694f799a903f01db856ed2b22fc",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-surface-shape@2x.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-poles-shape.webp",
+          "bytes": 680,
+          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "trappist-1b-observational-measurements",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "lighting",
+      "label": "lighting",
+      "recipe": "raster",
+      "selector": "/lighting",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Evaluate the declared surface-lighting model into phase banks.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "kind": "rendering-model"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-billboard.webp",
+          "bytes": 40826,
+          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-00.webp",
+          "bytes": 14922,
+          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-01.webp",
+          "bytes": 27532,
+          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-02.webp",
+          "bytes": 34558,
+          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-03.webp",
+          "bytes": 40648,
+          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-04.webp",
+          "bytes": 45092,
+          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-05.webp",
+          "bytes": 49044,
+          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-06.webp",
+          "bytes": 52968,
+          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-07.webp",
+          "bytes": 56198,
+          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-08.webp",
+          "bytes": 59392,
+          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-09.webp",
+          "bytes": 61906,
+          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-10.webp",
+          "bytes": 62672,
+          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-11.webp",
+          "bytes": 61062,
+          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-12.webp",
+          "bytes": 59454,
+          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-13.webp",
+          "bytes": 52762,
+          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-14.webp",
+          "bytes": 42196,
+          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-15.webp",
+          "bytes": 23242,
+          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-16.webp",
+          "bytes": 28714,
+          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-17.webp",
+          "bytes": 52870,
+          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-18.webp",
+          "bytes": 65644,
+          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-19.webp",
+          "bytes": 76630,
+          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-20.webp",
+          "bytes": 85368,
+          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-21.webp",
+          "bytes": 93744,
+          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-22.webp",
+          "bytes": 99970,
+          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-23.webp",
+          "bytes": 107422,
+          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-24.webp",
+          "bytes": 112788,
+          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-25.webp",
+          "bytes": 122328,
+          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-26.webp",
+          "bytes": 130124,
+          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-27.webp",
+          "bytes": 137048,
+          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-28.webp",
+          "bytes": 148122,
+          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-29.webp",
+          "bytes": 157328,
+          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-30.webp",
+          "bytes": 167218,
+          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-1x-row-31.webp",
+          "bytes": 182238,
+          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-billboard.webp",
+          "bytes": 115740,
+          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-00.webp",
+          "bytes": 37672,
+          "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-01.webp",
+          "bytes": 70898,
+          "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-02.webp",
+          "bytes": 92030,
+          "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-03.webp",
+          "bytes": 106840,
+          "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-04.webp",
+          "bytes": 120584,
+          "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-05.webp",
+          "bytes": 132094,
+          "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-06.webp",
+          "bytes": 143228,
+          "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-07.webp",
+          "bytes": 153142,
+          "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-08.webp",
+          "bytes": 163984,
+          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-09.webp",
+          "bytes": 172632,
+          "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-10.webp",
+          "bytes": 177128,
+          "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-11.webp",
+          "bytes": 179144,
+          "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-12.webp",
+          "bytes": 173518,
+          "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-13.webp",
+          "bytes": 161150,
+          "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-14.webp",
+          "bytes": 132038,
+          "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-15.webp",
+          "bytes": 69930,
+          "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-16.webp",
+          "bytes": 74522,
+          "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-17.webp",
+          "bytes": 143520,
+          "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-18.webp",
+          "bytes": 185628,
+          "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-19.webp",
+          "bytes": 218252,
+          "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-20.webp",
+          "bytes": 245184,
+          "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-21.webp",
+          "bytes": 269836,
+          "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-22.webp",
+          "bytes": 291326,
+          "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-23.webp",
+          "bytes": 312110,
+          "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-24.webp",
+          "bytes": 333302,
+          "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-25.webp",
+          "bytes": 355976,
+          "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-26.webp",
+          "bytes": 377782,
+          "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-27.webp",
+          "bytes": 403282,
+          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-28.webp",
+          "bytes": 429004,
+          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-29.webp",
+          "bytes": 456570,
+          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-30.webp",
+          "bytes": 481914,
+          "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1b/trappist-1b-lighting-2x-row-31.webp",
+          "bytes": 526556,
+          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "authored-recipe"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5933,
+          "sha256": "9904cbe76663df890af3583eb677a10819b2c28efaf691218ef3ee31aaabb3de",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "trappist-1b",
+    "materialSha256": "863fe1dcd2edadca83bfb1ecdd562e3e2b05e9867b3de1db4d968ca52d5d3fbb",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "32326bbf6799c3c0180aa8c49908b79b5d250c15072d09cfd04a06b5ef7034b9"
+    }
+  }
+}

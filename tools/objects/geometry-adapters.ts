@@ -29,8 +29,12 @@ export async function loadGeometryAdapters(): Promise<ScenePreparationAdapters> 
       if (!Object.hasOwn(BODIES, input.bodyId)) throw new TypeError('Physical scene requires a known astronomy body.');
       // A placed star is self-luminous: it has a presentation frame and a world frame from its astrometry, but no directional Sun.
       // A planet of another star is lit by its host, not the Sun; its prepared map is emissive, so it carries none either.
-      const unlit = (STAR_IDS as readonly string[]).includes(input.bodyId) || (HOSTED_PLANET_IDS as readonly string[]).includes(input.bodyId);
-      if ((input.sun === null) !== unlit) throw new TypeError(unlit ? 'A placed star or hosted planet carries no directional Sun.' : 'Physical scene requires its prepared directional Sun.');
+      // A placed star lights itself. A planet of another star may carry its own star's light or, where its lens is a thermal
+      // map of its own emission, none; every body the Sun lights must carry the Sun's.
+      const unlit = (STAR_IDS as readonly string[]).includes(input.bodyId);
+      const optional = (HOSTED_PLANET_IDS as readonly string[]).includes(input.bodyId);
+      if (unlit && input.sun !== null) throw new TypeError('A placed star carries no directional light.');
+      if (!unlit && !optional && input.sun === null) throw new TypeError('Physical scene requires its prepared directional Sun.');
       return scene.prepareSolarSystemScene({ bodyId: input.bodyId as BodyId,
         bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,
         defaultZoom: requireFiniteNumber(input.defaultZoom), geometryScale: optionalNumber(input.geometryScale),

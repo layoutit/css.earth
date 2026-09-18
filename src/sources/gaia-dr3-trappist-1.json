@@ -1,0 +1,37 @@
+{
+  "id": "gaia-dr3-trappist-1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TRAPPIST-1 · trappist 1 gaia dr3 source",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
+      "scope": "The trappist 1 gaia dr3 source input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data terms: free use with acknowledgement",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
