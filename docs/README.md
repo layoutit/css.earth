@@ -69,3 +69,4 @@ This reads committed files; add `--index` to include the staged change. It does
 not acquire sources or qualify scientific claims.
 
 CI proof: docs-only change for timing (safe to delete).
+CI proof: retrigger after retargeting base to ci/affected-only.
