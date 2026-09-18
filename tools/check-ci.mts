@@ -9,6 +9,9 @@ import {requireArray, requireRecord, requireString} from './source-values.mts';
 interface CiStep {name:string;run:string;env:Record<string,string>;}
 /** The workflow's own token; a local run uses the contributor's `gh` login instead. */
 const WORKFLOW_TOKEN='${{ github.token }}';
+/** Step conditions that only mean something inside a GitHub run: skip the step when Contract lint failed, or cancel
+ * the rest of the run after a failure. */
+export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
 /** Execute the maintained job's commands, so local checks cannot drift from CI. */
 export function readCiSteps(source:string,jobName='universe'):CiStep[] {
  const workflow=requireRecord(parse(source)),jobs=requireRecord(workflow.jobs);
@@ -26,6 +29,9 @@ export function readCiSteps(source:string,jobName='universe'):CiStep[] {
     throw new Error(`Local CI does not implement action ${action}`);
    return [];
   }
+  // CI-only housekeeping: a local run executes Contract lint first and stops at its first failure, so it has no
+  // failed prerequisite to report and no parallel job to cancel.
+  if(step.if!==undefined&&CI_ONLY_CONDITIONS.includes(String(step.if).trim()))return [];
   if(step.if!==undefined||step['working-directory']!==undefined||step['continue-on-error']!==undefined||step.shell!==undefined)
    throw new Error('Local CI needs explicit support for this step execution policy.');
   const result={name:requireString(step.name),run:requireString(step.run),env:{...inherited,...decodeEnvironment(step.env)}};

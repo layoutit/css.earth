@@ -14,8 +14,8 @@ concurrency:
   group: universe-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-# Four parallel jobs. Contract lint needs no build or restored asset and answers within about two minutes; the
-# others repeat the install and build they need. `pnpm check:pr` runs the Contract lint steps locally.
+# Contract lint needs no build or restored asset and answers within about two minutes; `pnpm check:pr` runs its
+# steps locally. The three heavy jobs start after it, in parallel, and any of them failing cancels the run.
 jobs:
   lint:
     name: Contract lint
@@ -108,9 +108,22 @@ jobs:
 
   typecheck:
     name: Typecheck
+    needs: lint
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
     steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -152,12 +165,30 @@ jobs:
           pnpm typecheck:shared
           pnpm check:typescript-ownership
           pnpm test:typescript-ownership
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
 
   universe:
     name: Prepared universe and shared renderer
+    needs: lint
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
     steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -266,12 +297,30 @@ jobs:
       - name: Test complete shared renderer and camera
         # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
         run: pnpm test:renderer
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
 
   nebula:
     name: Internal nebula packages and isolated controls
+    needs: lint
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
     steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -309,3 +358,8 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"

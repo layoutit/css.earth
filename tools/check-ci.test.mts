@@ -3,7 +3,7 @@ import {test} from 'node:test';
 import {mkdtemp,readFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {QUICK_SKIPPED_STEPS,quickSteps,readCiSteps,runCiSteps,sharedCodeChanged} from './check-ci.mts';
+import {CI_ONLY_CONDITIONS,QUICK_SKIPPED_STEPS,quickSteps,readCiSteps,runCiSteps,sharedCodeChanged} from './check-ci.mts';
 
 test('local CI reads the actual workflow jobs in order, including strict TypeScript and renderer gates',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
@@ -53,4 +53,14 @@ test('a selected job uses its own steps and inherited environment',()=>{
  const workflow='env:\n  SHARED: shared\njobs:\n  universe:\n    steps:\n      - name: main\n        run: echo main\n  nebula:\n    env:\n      SUBJECT: cloud\n    steps:\n      - name: lab\n        run: echo lab\n';
  assert.deepEqual(readCiSteps(workflow,'nebula'),[{name:'lab',run:'echo lab',env:{SHARED:'shared',SUBJECT:'cloud'}}]);
  assert.throws(()=>readCiSteps(workflow,'absent'),/Unknown CI job/);
+});
+test('the lint prerequisite and run-cancel steps are CI-only; any other condition still refuses a local run',async()=>{
+ const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ for(const job of ['typecheck','universe','nebula']){
+  const names=readCiSteps(workflow,job).map(step=>step.name);
+  assert.ok(!names.includes('Stop when Contract lint did not pass')&&!names.includes('Cancel the rest of the run'),job);
+ }
+ const step=(condition:string)=>`jobs:\n  universe:\n    steps:\n      - name: t\n        if: ${condition}\n        run: echo t\n`;
+ for(const condition of CI_ONLY_CONDITIONS)assert.deepEqual(readCiSteps(step(`"${condition}"`)),[]);
+ assert.throws(()=>readCiSteps(step('success()')),/explicit support/);
 });
