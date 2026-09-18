@@ -15,7 +15,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
+export interface ShellOptions { highContrastSky?: boolean; onSkyContrastChange?(enabled: boolean): void; objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; asteroidBodiesEnabled?: boolean; onAsteroidBodiesChange?(enabled: boolean): void; asteroidOrbitsEnabled?: boolean; onAsteroidOrbitsChange?(enabled: boolean): void; asteroidLabelsEnabled?: boolean; onAsteroidLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; orbitRenderer?: OrbitRenderer; onOrbitRendererChange?(renderer: OrbitRenderer): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -59,6 +59,8 @@ export function mountPlanetShell({
   onAsteroidOrbitsChange = () => {},
   asteroidLabelsEnabled = false,
   onAsteroidLabelsChange = () => {},
+  minimapEnabled = false,
+  onMinimapChange = () => {},
   orbitRenderer = 'strokes',
   onOrbitRendererChange = () => {},
   onCategoryChange = () => {},
@@ -286,7 +288,7 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, orbitRenderer,
+      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, illustrationModelsEnabled, asteroidBodiesEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled, minimapEnabled, orbitRenderer,
         onOrbitRendererChange(renderer) { orbitRenderer = renderer; onOrbitRendererChange(renderer); },
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
         onIllustrationModelsChange(enabled) {
@@ -297,6 +299,7 @@ export function mountPlanetShell({
         onAsteroidBodiesChange(enabled) { asteroidBodiesEnabled = enabled; onAsteroidBodiesChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
+        onMinimapChange(enabled) { minimapEnabled = enabled; onMinimapChange(enabled); },
       }, owner));
     const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
@@ -379,7 +382,7 @@ function createSettingsController(
   documentTarget: Document,
   windowTarget: BrowserWindow,
   { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange = () => {}, heliosphereEnabled, onHeliosphereChange,
-    illustrationModelsEnabled, onIllustrationModelsChange, asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
+    illustrationModelsEnabled, onIllustrationModelsChange, asteroidBodiesEnabled, onAsteroidBodiesChange, asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange, minimapEnabled, onMinimapChange, orbitRenderer, onOrbitRendererChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'asteroidBodiesEnabled' | 'onAsteroidBodiesChange' | 'asteroidOrbitsEnabled' | 'onAsteroidOrbitsChange' | 'asteroidLabelsEnabled' | 'onAsteroidLabelsChange' | 'minimapEnabled' | 'onMinimapChange' | 'orbitRenderer' | 'onOrbitRendererChange'>> & { highContrastSky?: boolean; onSkyContrastChange?: (enabled: boolean) => void },
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -391,6 +394,7 @@ function createSettingsController(
   const asteroidBodies = documentTarget.querySelector(".planet-asteroid-bodies-setting");
   const asteroidOrbits = documentTarget.querySelector(".planet-asteroid-orbits-setting");
   const asteroidLabels = documentTarget.querySelector(".planet-asteroid-labels-setting");
+  const minimap = documentTarget.querySelector(".planet-minimap-setting");
   const orbitRendererSelect = documentTarget.querySelector(".planet-orbit-renderer-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
@@ -404,6 +408,7 @@ function createSettingsController(
       !(asteroidBodies instanceof windowTarget.HTMLInputElement) ||
       !(asteroidOrbits instanceof windowTarget.HTMLInputElement) ||
       !(asteroidLabels instanceof windowTarget.HTMLInputElement) ||
+      !(minimap instanceof windowTarget.HTMLInputElement) ||
       !(orbitRendererSelect instanceof windowTarget.HTMLSelectElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
@@ -412,7 +417,7 @@ function createSettingsController(
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
-  for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = false;
+  for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, minimap, orbitRendererSelect]) input.disabled = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -476,6 +481,17 @@ function createSettingsController(
     onAsteroidLabelsChange(asteroidLabelsEnabled);
   }, { signal: events.signal });
   renderAsteroidLabels();
+  // The stylesheet reads this flag: off hides the minimap and frees its corner.
+  const renderMinimap = () => {
+    minimap.checked = minimapEnabled === true;
+    documentTarget.body.dataset.minimap = minimap.checked ? 'on' : 'off';
+  };
+  minimap.addEventListener("change", () => {
+    minimapEnabled = minimap.checked;
+    renderMinimap();
+    onMinimapChange(minimapEnabled);
+  }, { signal: events.signal });
+  renderMinimap();
   orbitRendererSelect.value = orbitRenderer;
   orbitRendererSelect.addEventListener("change", () => {
     const next = orbitRendererSelect.value;
@@ -508,7 +524,7 @@ function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, orbitRendererSelect]) input.disabled = true;
+      for (const input of [motion, heliosphere, illustrationModels, asteroidBodies, asteroidOrbits, asteroidLabels, minimap, orbitRendererSelect]) input.disabled = true;
       delete documentTarget.body.dataset.skyContrast;
     },
   });
