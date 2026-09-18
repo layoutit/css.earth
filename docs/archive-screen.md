@@ -29,8 +29,8 @@ epoch and distance.
 
 | Body | Apparent size (mas) | Beams across | Best imager (frames) | Others |
 | --- | --- | --- | --- | --- |
-| pallas | 398 | 19.9 | ALMA 10 (28) | ALMA 3 (333); ALMA 4 (46) |
-| juno | 210 | 10.5 | ALMA 6 7 (8) | ALMA 7 (8); ALMA 9 (8) |
+| pallas | 398 | 19.9 (measured: 4.5) | ALMA 10 (28) | ALMA 3 (333); ALMA 4 (46) |
+| juno | 210 | 10.5 (measured: 0.8) | ALMA 6 7 (8) | ALMA 7 (8); ALMA 9 (8) |
 | europa-52 | 210 | 7.0 | ESO SPHERE (65) |  |
 | cybele | 179 | 6.0 | ESO SPHERE (41) | ESASky HST (12); ESO NAOS+CONICA (47) |
 | metis-9 | 172 | 5.7 | ESO SPHERE (30) | Gemini/CFHT NIRI (16) |
@@ -91,6 +91,12 @@ epoch and distance.
   it covers Hubble, Herschel and XMM alone.
 - **Frame counts are archive rows**, not usable images: calibrations, guider frames and failed exposures are
   included. Keck's and IRTF's largest counts are guider and spectrograph rows.
+- **The beam count is the instrument's best, not the observation's.** It divides the body's size at its closest possible
+  approach by the instrument's finest resolution, and a body is rarely observed in both conditions at once. The two rows
+  checked against the observations that exist, on 17 September 2026, both fell: Pallas ranks at 19.9 beams and its 1,323
+  archived rows reach 60.6 milliarcseconds, about 4.5 beams on its disc at the epochs observed; Juno ranks at 10.5 and its 24
+  rows reach 174.2, about 0.8 beams, so it is never resolved. Treat every number in the column as an upper bound that a real
+  check can only lower.
 - **Resolving a disc is not imaging a surface.** Two beams across a body shows an ellipse, not terrain. The
   spotless-disc gate in [interferometric imaging](interferometric-imaging.md) exists because coverage alone
   invents structure; an equivalent check is needed before any of these becomes a lens.

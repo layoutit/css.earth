@@ -72,7 +72,7 @@
       "id": "bodies-with-data",
       "subject": "What this archive holds for catalogued bodies",
       "status": "deferred",
-      "finding": "The same screen matched 26 bodies in the ALMA archive, 17,934 rows, mostly bands 3, 6 and 7. Pallas and Juno are the strongest unphotographed candidates anywhere in the screen, at roughly 20 and 10 beams across.",
+      "finding": "The same screen matched 26 bodies in the ALMA archive, 17,934 rows, mostly bands 3, 6 and 7. The screen ranked Pallas and Juno as the strongest unphotographed candidates at roughly 20 and 10 beams across; checked against the observations that exist, on 17 September 2026, both numbers are wrong. The screen divided each body's size at its closest possible approach by the instrument's finest resolution, and neither body was ever observed under those conditions. The finest resolution ALMA actually used is 60.6 milliarcseconds on Pallas over 1,323 rows and 174.2 on Juno over 24, which puts Pallas at about 4.5 beams across its disc at the epochs observed and Juno at 0.8: Juno is never resolved at all. Pallas is a flux calibrator in 1,295 of its rows, and the pipeline images bandpass, phase and check-source calibrators only, so no image of it exists to take. Its finest execution is a 19-antenna single 151-second scan with no auxiliary products; the best one that could be reduced is 3.6 beams. Polaris was turned down at about six.",
       "revisitWhen": "Pallas, Juno or another ALMA candidate is taken up.",
       "evidence": [
         "https://almascience.eso.org/tap/capabilities",
