@@ -37,6 +37,16 @@ test('changed prepared bytes and authored source documents are rejected', async 
   }
 });
 
+test('committed runtime-assets.json matches what context provenance currently generates', async () => {
+  const contexts=await prepareContextProvenance();
+  for(const context of contexts){
+    const generated=context.outputs.find(o=>o.path.endsWith('/runtime-assets.json'));
+    assert.ok(generated,`${context.id}: missing generated inventory`);
+    const committed=await readFile(`${context.base}/runtime-assets.json`,'utf8');
+    assert.equal(committed,generated!.text,`${context.id}: committed runtime-assets.json is stale; run prepare:provenance and publish:runtime-assets`);
+  }
+});
+
 test('offline context recovery is independent of installed generated images and filesystem insertion order', async t => {
   const root=await mkdtemp(join(tmpdir(),'context-offline-'));
   t.after(()=>rm(root,{recursive:true,force:true}));
