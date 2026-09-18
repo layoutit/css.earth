@@ -103,6 +103,23 @@ test('a live HEAD response with no content-length (e.g. a compressed JSON respon
   assert.deepEqual(result, { retried: [], misses: [], sampleFailures: [] });
 });
 
+test('a JSON key with no content-length on HEAD but drifted bytes still fails verification', async () => {
+  // Combines the two prior cases: a compressed JSON response with no content-length header makes headOk pass on
+  // status alone (so the key is never retried/re-uploaded as a "miss"), but the full byte check below — always
+  // run for JSON regardless of what HEAD reported — must still catch drifted content.
+  const bytes = Buffer.from('{"ok":1}'), wrong = Buffer.from(bytes); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
+  const assets = [asset('a.json', bytes)];
+  const fetcher = async (url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200 }); // no content-length header
+    return new Response(wrong, { status: 200 }); // same length as the pin; only the sha256 comparison can catch this.
+  };
+  const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => { throw new Error('must not re-upload: HEAD reported it live'); } });
+  assert.deepEqual(result.retried, [], 'a no-content-length HEAD that is otherwise ok is never treated as a miss');
+  assert.deepEqual(result.misses, []);
+  assert.deepEqual(result.sampleFailures, ['a.json']);
+  assert.throws(() => reportVerification(result), /a\.json/);
+});
+
 test('a JSON key with drifted bytes is caught even with sampleSize: 0 (JSON is always fully verified, never sampled)', async () => {
   const bytes = Buffer.from('{"ok":1}'), wrong = Buffer.from(bytes); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
   const assets = [asset('a.json', bytes)];
