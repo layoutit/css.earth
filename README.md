@@ -15,6 +15,25 @@ sources. See the planet-owned
 presentation limits, and credits. NASA and other source credits do not imply
 endorsement.
 
+## Publishing prepared assets (maintainers)
+
+Prepared runtime files (`prepared/runtime.json`, `prepared/scene.json`, textures, …) are served from an R2 bucket,
+content-addressed by `runtime-assets/<sha256>/<filename>`. `node tools/publish-runtime-assets.mts [--object=<id> ...]`
+publishes every file the checked-in `src/objects/<id>/runtime-assets.json` inventories describe (omit `--object` to
+publish everything). It bulk-uploads with `wrangler r2 bulk put`, then HEAD-verifies every key, retries any miss
+individually, and byte-verifies every JSON key plus a sample of the rest — bulk put is fire-and-forget and has been
+observed to silently drop a subset of a batch, so a publish that reports success has actually confirmed the files
+are live, not just that the upload command exited 0.
+
+A second, smaller cache lives beside it at `source-cache/<sha256>/<filename>`: pinned publisher inputs (a facility
+volume preview, a fragile-upstream archive such as a USGS Gazetteer nomenclature export) mirrored so a build never
+depends on a third party's uptime. `node tools/publish-source-cache.mts --object=<id> [...]` publishes every such
+pin this repository knows how to find for that object (skipping one that isn't present locally or doesn't match its
+own hash — run `node tools/restore-source-inputs.mts --object=<id>` first); `--file=<path> --sha256=<hex>
+--bytes=<n>` publishes one file directly. Same verify-after-publish contract as above.
+
+Both scripts require `wrangler` to already be authenticated. Neither ever deletes a key.
+
 ## Contributing scientific data and evidence
 
 Start with [adding a body](src/objects/README.md), the

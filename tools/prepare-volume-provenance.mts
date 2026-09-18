@@ -108,7 +108,7 @@ interface Options {
 }
 
 export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>,
-  { mirrorOrigin = RUNTIME_ASSET_ORIGIN }: { mirrorOrigin?: string } = {}): Promise<{ bytes: Buffer; width: number; height: number }> {
+  { mirrorOrigin = RUNTIME_ASSET_ORIGIN, fetcher = fetch }: { mirrorOrigin?: string; fetcher?: typeof fetch } = {}): Promise<{ bytes: Buffer; width: number; height: number }> {
   const path = resolve(root, pin.path);
   if (pin.skyBands) {
     // The recipe is source closure whether or not its composite is already cached.
@@ -126,10 +126,11 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     // Try the content-addressed mirror first: it is our own reliable storage, sha-verified before use. A miss, a mismatch or
     // any mirror error falls back to the publisher URL, which stays the provenance origin either way.
     const mirrorUrl = sourceCacheUrl(mirrorOrigin, pin.sha256, basename(pin.path));
-    bytes = await fetchWithRetry(mirrorUrl, { timeoutMs: 60000, attempts: 1 })
+    bytes = await fetchWithRetry(fetcher, mirrorUrl, { idleMs: 5000, attempts: 1 })
       .then(candidate => (candidate.length === pin.bytes && sha256(candidate) === pin.sha256) ? candidate : null)
       .catch(() => null);
-    if (bytes === null) bytes = await fetchWithRetry(pin.url!, { timeoutMs: 600000, attempts: 3 })
+    // Capped at 3 attempts x 120s idle (~6 min worst case, not 30): a stalled publisher must not hang the build.
+    if (bytes === null) bytes = await fetchWithRetry(fetcher, pin.url!, { idleMs: 120000, attempts: 3 })
       .catch((error: unknown) => { throw new Error(`Preview download failed: ${pin.url} (${error instanceof Error ? error.message : String(error)})`); });
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed publisher preview: ${pin.url}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);

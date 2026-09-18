@@ -59,50 +59,44 @@ function chunkedResponse(chunks: Uint8Array[]): Response {
   return response;
 }
 
-test('a plain download tries the content-addressed mirror first and falls back to the publisher',()=>temporary(async directory=>{
-  const { createServer } = await import('node:http');
+test('a plain download tries the content-addressed mirror first and falls back to the publisher, through the injected transport only',()=>temporary(async directory=>{
   const data=Buffer.from('mirrored source bytes, tried before the publisher'),manifest=rawManifest(data);
   const digest=manifest.inputs[0]!.expectedSha256;
-  let mirrorHits=0, mirrorBehavior:'serve'|'miss'|'wrong'='serve';
-  const server=createServer((req,res)=>{
-    mirrorHits++;
-    if(req.url===`/source-cache/${digest}/source.img`){
-      if(mirrorBehavior==='miss'){res.writeHead(404);res.end();return;}
-      if(mirrorBehavior==='wrong'){res.writeHead(200);res.end('not the pinned bytes');return;}
-      res.writeHead(200);res.end(data);return;
+  const mirrorOrigin='https://mirror.test.invalid', mirrorUrl=`${mirrorOrigin}/source-cache/${digest}/source.img`;
+  const publisherUrl=manifest.inputs[0]!.origin;
+  // Same length as `data`, differing only in content: a length check alone must not be able to accept this; only
+  // the sha256 check inside publishPinnedSourceStream can reject it.
+  const wrong=Buffer.from(data); wrong[Math.floor(wrong.length/2)]=wrong[Math.floor(wrong.length/2)]!^0xff;
+  let mirrorHits=0, publisherHits=0, mirrorBehavior:'serve'|'miss'|'wrong'='serve';
+  const transport={fetch:async(url:string)=>{
+    if(url===mirrorUrl){
+      mirrorHits++;
+      if(mirrorBehavior==='miss')return new Response(null,{status:404});
+      return new Response(mirrorBehavior==='wrong'?wrong:data,{status:200});
     }
-    res.writeHead(404);res.end();
-  });
-  await new Promise<void>(accept=>server.listen(0,'127.0.0.1',accept));
-  try {
-    const address=server.address();assert.ok(address&&typeof address!=='string');
-    const mirrorOrigin=`http://127.0.0.1:${address.port}`;
+    if(url===publisherUrl){publisherHits++;return new Response(data,{status:200});}
+    throw new Error(`Unexpected request in a network-free test: ${url}`);
+  }};
 
-    mirrorBehavior='serve';
-    await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,
-      transport:{fetch:async()=>{throw new Error('The publisher must not be contacted on a mirror hit.');}}});
-    assert.deepEqual(await readFile(join(directory,'source.img')),data);
-    assert.equal(mirrorHits,1);
+  mirrorBehavior='serve';
+  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,transport});
+  assert.deepEqual(await readFile(join(directory,'source.img')),data);
+  assert.equal(mirrorHits,1); assert.equal(publisherHits,0,'the publisher must not be contacted on a mirror hit');
 
-    for(const behavior of ['miss','wrong'] as const){
-      await rm(join(directory,'source.img'));
-      mirrorBehavior=behavior;
-      let publisherCalled=false;
-      await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,
-        transport:{fetch:async(url)=>{publisherCalled=true;assert.equal(url,manifest.inputs[0]!.origin);return new Response(data);}}});
-      assert.ok(publisherCalled,`publisher must be contacted when the mirror ${behavior}es`);
-      assert.deepEqual(await readFile(join(directory,'source.img')),data);
-    }
-
-    // mirrorOrigin: null disables the lookup outright (used by tests that must never touch the network for it).
+  for(const behavior of ['miss','wrong'] as const){
     await rm(join(directory,'source.img'));
-    mirrorBehavior='serve';
-    let publisherCalled=false;
-    await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin:null,
-      transport:{fetch:async(url)=>{publisherCalled=true;assert.equal(url,manifest.inputs[0]!.origin);return new Response(data);}}});
-    assert.ok(publisherCalled);
-    assert.equal(mirrorHits,3);
-  } finally { await new Promise<void>(accept=>server.close(()=>accept())); }
+    mirrorBehavior=behavior; publisherHits=0;
+    await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,transport});
+    assert.equal(publisherHits,1,`publisher must be contacted when the mirror ${behavior}`);
+    assert.deepEqual(await readFile(join(directory,'source.img')),data);
+  }
+
+  // mirrorOrigin: null disables the lookup outright: no request may ever reach the mirror URL.
+  await rm(join(directory,'source.img'));
+  mirrorBehavior='serve'; mirrorHits=0; publisherHits=0;
+  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin:null,transport});
+  assert.equal(mirrorHits,0,'a null mirrorOrigin must never reach the mirror URL');
+  assert.equal(publisherHits,1);
 }));
 
 test('raw downloads install exact streamed bytes and verify source closure',()=>temporary(async directory=>{
@@ -158,7 +152,7 @@ test('abrupt source stream errors clean up without replacing the previous pin',(
   const response=new Response(new ReadableStream<Uint8Array>({pull(controller){
     if(pulls++===0)controller.enqueue(data.subarray(0,4));else controller.error(new Error('Source connection interrupted'));
   }},{highWaterMark:0}));
-  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,
+  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,mirrorOrigin:null,
     transport:{fetch:async()=>response}}),/Source connection interrupted/);
   assert.deepEqual(await readFile(join(directory,'source.img')),old);assert.deepEqual(await readdir(directory),['source.img']);
 }));
@@ -170,10 +164,13 @@ test('an unbounded overlong response is cancelled after bounded chunk consumptio
     pull(controller){pulls++;controller.enqueue(new Uint8Array(1024));},
     cancel(){cancelled=true;},
   },{highWaterMark:0}));
-  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,
+  await assert.rejects(executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,mirrorOrigin:null,
     transport:{fetch:async()=>response}}),/size drifted/);
   assert.ok(cancelled,'Rejecting an overlong source must cancel the response');
-  assert.ok(pulls<8,`Unexpectedly consumed ${pulls} chunks after exceeding the pin`);
+  // The idle-timeout relay (a Transform and a PassThrough between the source and the pinned write) adds a little of
+  // its own in-flight buffering, so this is looser than a direct pipe would need; it still proves boundedness, not
+  // "eventually consumes the source's whole (unbounded) output".
+  assert.ok(pulls<200,`Unexpectedly consumed ${pulls} chunks after exceeding the pin`);
   assert.deepEqual(await readFile(join(directory,'source.img')),old);assert.deepEqual(await readdir(directory),['source.img']);
 }));
 

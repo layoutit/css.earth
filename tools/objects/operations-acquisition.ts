@@ -11,7 +11,7 @@ import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import { containedPath, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
 import type { SourceManifest } from './operations.js';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../source-mirror.mts';
+import { RUNTIME_ASSET_ORIGIN, sourceCacheUrl, withIdleTimeout } from '../source-mirror.mts';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
 import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
@@ -76,21 +76,28 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   if(step.kind==='download'){
    if(!step.encoding){
     const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
-    // Try our own content-addressed mirror first: it is reliable storage, sha-verified before use. A miss, a mismatch
-    // or any mirror error falls back to the publisher URL, which stays the recorded provenance either way.
-    let stream:Readable|undefined;
+    // Try our own content-addressed mirror first, through the same injected transport as the publisher (so tests
+    // never reach the real network): reliable storage, streamed straight into the pinned-write path, which verifies
+    // size and hash before ever touching the real destination. A miss, a non-OK response, an idle stall or a hash
+    // mismatch there all surface as a rejected publishPinnedSourceStream and fall back to the publisher URL, which
+    // stays the recorded provenance either way. Streaming (not buffering) means a >20 MB input costs no more memory
+    // here than the publisher path already does.
+    let usedMirror=false;
     if(mirrorOrigin){
      const filename=step.path.split('/').at(-1)!;
-     const mirrored=await fetchWithRetry(sourceCacheUrl(mirrorOrigin,entry.expectedSha256,filename),{timeoutMs:8000,attempts:1})
-      .then(candidate=>(candidate.length===entry.expectedBytes&&sha256(candidate)===entry.expectedSha256)?candidate:null)
-      .catch(()=>null);
-     if(mirrored)stream=Readable.from(mirrored);
+     try{
+      const response=await transport.fetch(sourceCacheUrl(mirrorOrigin,entry.expectedSha256,filename));
+      if(response.ok&&response.body){
+       await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),8000)});
+       usedMirror=true;
+      }
+     }catch{/* fall through to the publisher below */}
     }
-    if(!stream){
+    if(!usedMirror){
      const response=await request(step.url,{headers:step.headers});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
-     stream=Readable.fromWeb(response.body as never);
+     await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),120000)});
     }
-    await publishPinnedSourceStream({sourceRoot,entry,stream});continue;
+    continue;
    }
    let data=new Uint8Array(await(await request(step.url,{headers:step.headers})).arrayBuffer());
    if(step.encoding==='gzip')data=gzipSync(data,{level:9});

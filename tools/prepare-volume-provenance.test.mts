@@ -212,7 +212,9 @@ test('a publisher preview tries the content-addressed mirror first and falls bac
   const { preparePreview } = await import('./prepare-volume-provenance.mts');
   const { sha256 } = await import('../src/platform/sha256.mts');
   const image = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#048' } }).jpeg().toBuffer();
-  const wrong = Buffer.from('not the pinned bytes, at all, padded past the real length for a clean mismatch');
+  // Same length as `image`, differing only in content: a length check alone must not be able to accept this: only
+  // the sha256 comparison can reject it, so deleting that check (and keeping only a length check) turns this red.
+  const wrong = Buffer.from(image); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
   const digest = sha256(image);
   const requests: string[] = [];
   const filename = 'archive-original.jpg';
