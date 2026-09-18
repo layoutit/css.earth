@@ -154,7 +154,7 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/planet-surfaces.css",
-        "src/objects/ganymede/composition.css"
+        "src/renderers/css/styles/ganymede-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",

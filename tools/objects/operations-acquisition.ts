@@ -32,7 +32,9 @@ export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operation
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
 export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
- const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations)||!plan.operations.length)throw new TypeError('Invalid acquisition plan.');
+ // An empty plan is legal: a body whose every declared source input is already
+ // tracked needs no reacquisition operation at all (e.g. eris, haumea, makemake).
+ const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
  for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
   if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}

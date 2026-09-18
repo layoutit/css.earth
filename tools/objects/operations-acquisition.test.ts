@@ -23,6 +23,11 @@ const temporary = async (work: (directory: string) => Promise<void>) => {
   try { await work(directory); } finally { await rm(directory,{recursive:true,force:true}); }
 };
 
+test('an empty acquisition plan is valid when every source input is already tracked',()=>{
+  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[]});
+  assert.deepEqual(plan.operations,[]);
+});
+
 test('mapped composition acquisition restores the pinned map and report through the selected group',()=>temporary(async directory=>{
   const values=Array.from({length:180},()=>Array.from({length:360},()=>0.25));
   const original=gzipSync(JSON.stringify({metadata:{target:'Fixture',observation_name:'published',nan_value:-99,

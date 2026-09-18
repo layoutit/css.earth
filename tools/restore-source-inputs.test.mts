@@ -28,7 +28,7 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));
-  await writeFile(resolve(root, 'site/objects.mts'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];`);
+  await writeFile(resolve(root, 'site/objects.mts'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];\nexport const SCENE_OBJECTS = OBJECTS;`);
   await json(resolve(root, `src/objects/${id}/object.json`), { id });
   return root;
 }
