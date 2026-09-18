@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1493d6646adf8381e8dbb8b0eab278ef3957b96a7db72a88a040a0564041b7a0"
+    "sha256": "0deff22393cf574dfca91aa9c65be88c1c4d20a81094dc73b9a490ee3472cbcc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "8f3b1e1596a71800394530913eb352ab5a6f206e9451a1d6e3fea362466d7d3d"
+    "bindingsSha256": "1c75c8d3148d0b199e27120f8652bbf5a12920d743adc19b376a5b15a2a0696a"
   },
   "recipes": [
     {
@@ -159,7 +159,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9ce483373fd82ae9b03feb2d0d9e007398d206f5abae0466d2b9163cad3c5e8a",
+      "sha256": "2c5c2e65f1ec482fbe3891092778f5519afd8da80e8b926bdd1f78fb912eda38",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -354,6 +354,63 @@
                 "surface": "matisse"
               },
               "notes": "The same photosphere, with the dust clump Montargès et al. (2021) fitted to the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as they report for the southern hemisphere, and the light it scatters back is drawn faintly over that. A model fitted to images, not an image."
+            },
+            {
+              "id": "sio-2023",
+              "label": "SiO clump · August 2023",
+              "thumbnail": "betelgeuse-lens-matisse.webp",
+              "falseColor": true,
+              "volume": {
+                "objectId": "betelgeuse-shell",
+                "lensId": "sio-2023",
+                "surface": "matisse"
+              },
+              "notes": "The same photosphere, with a clump of silicon monoxide ALMA saw around it on 2 August 2023. This is the only dataset here whose depth is measured rather than inferred. The archive's own pipeline cube was cut out around the star, its continuum removed against 1738 line-free channels and the line integrated; 51 beams clear five times the map noise. What they show is not a shell but a single clump about three stellar radii out to the south-west, in the same quarter of the sky as the clump that dimmed the star in 2019 and about as far out as that one would have drifted in the intervening years at an ordinary ejecta speed. Each parcel is then placed in depth by its own Doppler shift, under a radial flow of eight kilometres a second that combines its motion across the sky with its motion along the line of sight. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness, not colour or temperature. The flow speed is the one assumption; the two sky axes and the velocity are measured.",
+              "legend": {
+                "kind": "scale",
+                "title": "SiO line brightness, integrated",
+                "labels": [
+                  "0.00",
+                  "0.50",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      59,
+                      82,
+                      139
+                    ],
+                    [
+                      33,
+                      145,
+                      140
+                    ],
+                    [
+                      94,
+                      201,
+                      98
+                    ],
+                    [
+                      253,
+                      231,
+                      37
+                    ]
+                  ],
+                  "labels": [
+                    "0.00",
+                    "0.50",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the brightest beam · ALMA band 6, 217.105 GHz · viridis, false colour",
+                "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
+              }
             }
           ]
         },
@@ -570,8 +627,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9ce483373fd82ae9b03feb2d0d9e007398d206f5abae0466d2b9163cad3c5e8a",
-      "bytes": 9538,
+      "sha256": "2c5c2e65f1ec482fbe3891092778f5519afd8da80e8b926bdd1f78fb912eda38",
+      "bytes": 12036,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -760,6 +817,40 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "sio-2023",
+      "label": "SiO clump · August 2023",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "matisse"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [],
+      "lensIds": [
+        "sio-2023"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "betelgeuse-shell",
+        "lensId": "sio-2023",
+        "surface": "matisse"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -817,11 +908,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "a5a80dc461d73255fafab2a58735875a913f90159316f57367e6f2716bb0f6d0",
+    "materialSha256": "2371404dfdc6d1cba71f63187939ce122eacc32ff7b535a967c43c81206149f8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "8f3b1e1596a71800394530913eb352ab5a6f206e9451a1d6e3fea362466d7d3d"
+      "bindingsSha256": "1c75c8d3148d0b199e27120f8652bbf5a12920d743adc19b376a5b15a2a0696a"
     }
   }
 }

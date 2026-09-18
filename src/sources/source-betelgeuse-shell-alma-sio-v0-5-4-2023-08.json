@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-shell-alma-sio-v0-5-4-2023-08",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse Shell · alma sio v0 5 4 2023 08",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse-shell/source/manifest.json",
+      "revision": "6ddc771fc11655a1526d23d8c77924e2943ab54e",
+      "sha256": "35c1334863667c938013360b53ec19ce09c227dfce00166717ac7f1e914d4390",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member uid://A001/X360d/Xae",
+      "scope": "The alma sio v0 5 4 2023 08 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

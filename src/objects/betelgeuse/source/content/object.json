@@ -203,7 +203,52 @@
           "lensId": "sio-2023",
           "surface": "matisse"
         },
-        "notes": "The same photosphere, with a clump of silicon monoxide ALMA saw around it on 2 August 2023. This is the only dataset here whose depth is measured rather than inferred. The archive's own pipeline cube was cut out around the star, its continuum removed against 1738 line-free channels and the line integrated; 51 beams clear five times the map noise. What they show is not a shell but a single clump about three stellar radii out to the south-west, in the same quarter of the sky as the clump that dimmed the star in 2019 and about as far out as that one would have drifted in the intervening years at an ordinary ejecta speed. Each parcel is then placed in depth by its own Doppler shift, under a radial flow of eight kilometres a second that combines its motion across the sky with its motion along the line of sight. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness, not colour or temperature. The flow speed is the one assumption; the two sky axes and the velocity are measured."
+        "notes": "The same photosphere, with a clump of silicon monoxide ALMA saw around it on 2 August 2023. This is the only dataset here whose depth is measured rather than inferred. The archive's own pipeline cube was cut out around the star, its continuum removed against 1738 line-free channels and the line integrated; 51 beams clear five times the map noise. What they show is not a shell but a single clump about three stellar radii out to the south-west, in the same quarter of the sky as the clump that dimmed the star in 2019 and about as far out as that one would have drifted in the intervening years at an ordinary ejecta speed. Each parcel is then placed in depth by its own Doppler shift, under a radial flow of eight kilometres a second that combines its motion across the sky with its motion along the line of sight. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness, not colour or temperature. The flow speed is the one assumption; the two sky axes and the velocity are measured.",
+        "legend": {
+          "kind": "scale",
+          "title": "SiO line brightness, integrated",
+          "labels": [
+            "0.00",
+            "0.50",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0.00",
+              "0.50",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the brightest beam · ALMA band 6, 217.105 GHz · viridis, false colour",
+          "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
+        }
       }
     ]
   },
