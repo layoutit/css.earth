@@ -153,7 +153,7 @@ committed fixture, at its documented tolerance.
    path; add a new format adapter only when its scientific convention is known.
 3. Run the native generator twice into separate test/scratch files and compare.
    As recorded above, the native backend is not bit-reproducible: expect small
-   (≲2e-4 relative) floating-point drift, not byte-for-byte agreement, and check
+   (≲3.1e-4 relative) floating-point drift, not byte-for-byte agreement, and check
    the new case's values stay within the comparison tolerances on both runs.
    Preserve the committed fixture and run the comparing tests. A repeat checks
    reproducibility bounds, not scientific accuracy.
