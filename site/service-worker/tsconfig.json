@@ -4,16 +4,14 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "strict": true,
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "lib": ["ES2023", "WebWorker"],
     "allowJs": false,
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["node"],
-    "typeRoots": ["../packages/engine/node_modules/@types", "../node_modules/@types"]
+    "types": []
   },
-  "include": ["**/*.mts", "**/*.ts", "../netlify/**/*.ts"],
-  "exclude": ["test", "service-worker/worker.mts"]
+  "include": ["*.mts"]
 }
