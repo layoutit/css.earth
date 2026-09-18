@@ -14,6 +14,8 @@ import type { PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 import type { PreparedSurfaceFeaturePlan, SurfaceFeatureLayerRuntime, SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
 export type { SurfaceFeatureNavigationRuntime };
 import type { SurfaceFeatureMountOptions } from '../labels/surface-feature-labels.js';
+import type { PreparedAssetOrigin } from '../rendering/prepared-asset-origin.js';
+export type { PreparedAssetOrigin };
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
@@ -22,6 +24,9 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly destinations?: unknown;
   readonly surfaceHit?: PreparedSurfaceHit;
   readonly features?: PreparedSurfaceFeaturePlan;
+  /** Set only when the build published this object's textures and scene JSON to an
+   * asset origin (`ASSET_ORIGIN`); unset reproduces today's same-origin `/scenes/` behavior. */
+  readonly assetOrigin?: PreparedAssetOrigin;
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
 export type PageLayerStats = ReturnType<ReturnType<typeof import('../paging/city-pages.js').mountPreparedMapPages>['stats']>;
@@ -40,6 +45,7 @@ export interface ObjectRuntimeCapabilities {
   createDestinations?(options: { plan: unknown; ready: Promise<void>; lifetime: SceneLifetime;
     selectLens(id: string): Promise<boolean>; navigate(camera: Parameters<RetainedCubicSkyOrbit["flyToState"]>[0]): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
     reset(): ReturnType<RetainedCubicSkyOrbit["flyToState"]> | undefined;
+    assetOrigin?: PreparedAssetOrigin;
   }): PreparedDestinationRuntime;
   /** Prepared nomenclature labels anchored to the body mesh; the catalogue is fetched and byte-verified by the layer. */
   mountSurfaceFeatures?(options: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime;

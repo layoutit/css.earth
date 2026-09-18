@@ -25,6 +25,10 @@ jobs:
     timeout-minutes: 5
     outputs:
       docs_only: ${{ steps.classify.outputs.docs_only }}
+      run_typecheck: ${{ steps.classify.outputs.run_typecheck }}
+      run_universe: ${{ steps.classify.outputs.run_universe }}
+      run_universe_preparation: ${{ steps.classify.outputs.run_universe_preparation }}
+      run_nebula: ${{ steps.classify.outputs.run_nebula }}
       runtime_ownership_args: ${{ steps.ownership-scope.outputs.args }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -36,13 +40,16 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
-      - name: Classify what this change touched
+      - name: Classify what this change touched, and which heavy jobs it needs
+        # .github/ci-areas.json maps changed paths to areas, and areas to the heavy jobs below (tools/ci-affected.mts).
+        # A push to main always runs every job regardless of this output (see each job's `if:`); only a pull request
+        # can skip one. `docs_only` is kept for callers outside this workflow that still read it.
         id: classify
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/classify-changes.mts pr "origin/$GITHUB_BASE_REF"
+            node tools/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
           else
-            node tools/classify-changes.mts push "${{ github.event.before }}"
+            node tools/ci-affected.mts push "${{ github.event.before }}"
           fi
       - name: Scope the runtime ownership check
         id: ownership-scope
@@ -94,12 +101,37 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: node-modules-
       - name: Install dependencies and prove the lockfile
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: lint-bundle-cache
+        with:
+          # Everything the next step writes: packages/renderer/tools-objects builds, and prepare:catalog's,
+          # prepare-solar-geometry's and prepare:titles' generated (gitignored) files. Keyed on their own inputs, so
+          # a change under any of them (or to an object's own object.json) invalidates it; anything else reuses it.
+          path: |
+            packages/*/dist
+            src/renderers/css/dist
+            tools/objects/dist
+            site/prepared-object-catalog.mts
+            site/prepared-object-discovery.json
+            site/prepared-context-objects.mts
+            site/prepared-object-distances.json
+            site/prepared-focus-objects.json
+            src/platform/solar-geometry.mts
+            site/prepared-shell-titles.mjs
+          key: lint-bundle-v1-${{ hashFiles('tools/**', 'packages/**', 'src/renderers/**', 'site/*.mts', 'site/source/titles/**', 'src/objects/*/object.json') }}
       - name: Generate the registry, renderer and preparation bundle
         # Only what these checks import: SCENE_OBJECTS (site/objects.mts), the renderer the prepared-object reader
         # imports, and tools/objects/dist/operations.js with the solar geometry and shell titles it bundles. The
         # rest of build:tools (navigation, world context, shell assets) and every restored asset are left out.
+        # Skipped outright on a cache hit (see lint-bundle-cache above); tools/check-ci.mts always runs it locally.
+        if: steps.lint-bundle-cache.outputs.cache-hit != 'true'
         run: |
           pnpm build:packages
           pnpm build:renderer
@@ -154,16 +186,15 @@ jobs:
     name: Typecheck
     needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
-    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
-    # still run and fail here, never skip. A push to main never skips, docs-only or not.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A pull request whose changed areas do not
+    # need Typecheck (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not
+    # failure — unless lint itself did not pass, which must still run and fail here, never skip. A push to main
+    # never skips.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_typecheck == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
       contents: read
-      # The last step cancels the rest of the run when this job fails.
-      actions: write
     steps:
       - name: Stop when Contract lint did not pass
         if: needs.lint.result != 'success'
@@ -176,6 +207,13 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # node_modules itself, on top of setup-node's pnpm store cache: with both warm, --frozen-lockfile mostly
+          # verifies rather than re-links every workspace package.
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: node-modules-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
@@ -223,11 +261,6 @@ jobs:
           pnpm typecheck:pr
           pnpm check:typescript-ownership
           pnpm test:typescript-ownership
-      - name: Cancel the rest of the run
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
 
   typecheck-tests:
     name: Typecheck test files
@@ -239,8 +272,6 @@ jobs:
     timeout-minutes: 25
     permissions:
       contents: read
-      # The last step cancels the rest of the run when this job fails.
-      actions: write
     steps:
       - name: Stop when Contract lint did not pass
         if: needs.lint.result != 'success'
@@ -253,6 +284,11 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: node-modules-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # See the Typecheck job: one .tsbuildinfo per tsc program, keyed the same way, so a warm cache here
@@ -295,26 +331,20 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=6144
         run: pnpm typecheck:tests
-      - name: Cancel the rest of the run
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
 
   universe:
     name: Prepared universe and shared renderer
     needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
-    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
-    # still run and fail here, never skip. A push to main never skips, docs-only or not.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A pull request whose changed areas do not
+    # need this job (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not
+    # failure — unless lint itself did not pass, which must still run and fail here, never skip. A push to main
+    # never skips.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_universe == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
       contents: read
-      # The last step cancels the rest of the run when this job fails.
-      actions: write
     steps:
       - name: Stop when Contract lint did not pass
         if: needs.lint.result != 'success'
@@ -327,6 +357,11 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: node-modules-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -417,11 +452,6 @@ jobs:
       - name: Test complete shared renderer and camera
         # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
         run: pnpm test:renderer
-      - name: Cancel the rest of the run
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
 
   universe-preparation:
     name: Prepared universe preparation and galaxy field
@@ -429,15 +459,14 @@ jobs:
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
     # failed `needs` reports "skipped", which a ruleset counts as passing. Split out of the `universe` job so the
     # two halves of "Prepared universe and shared renderer" run in parallel at roughly equal length; see
-    # output/CI_OPTIMIZATION.md section 6, item 3. A docs-only pull request skips this job (see the `changes` job
-    # and tools/classify-changes.mts); a push to main never skips, and a failed lint still fails here, not skip.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
+    # output/CI_OPTIMIZATION.md section 6, item 3. A pull request whose changed areas do not need this job
+    # (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not failure; a push to
+    # main never skips, and a failed lint still fails here, not skip.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_universe_preparation == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
       contents: read
-      # The last step cancels the rest of the run when this job fails.
-      actions: write
     steps:
       - name: Stop when Contract lint did not pass
         if: needs.lint.result != 'success'
@@ -450,6 +479,11 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: node-modules-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -494,26 +528,20 @@ jobs:
         run: |
           pnpm test:preparation --universe
           node --test tools/objects/material-composition/coplanar-raster.test.mts
-      - name: Cancel the rest of the run
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
 
   nebula:
     name: Internal nebula packages and isolated controls
     needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
-    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
-    # still run and fail here, never skip. A push to main never skips, docs-only or not.
-    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A pull request whose changed areas do not
+    # need this job (.github/ci-areas.json, computed by the `changes` job) skips it, reporting success, not
+    # failure — unless lint itself did not pass, which must still run and fail here, never skip. A push to main
+    # never skips.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.run_nebula == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: read
-      # The last step cancels the rest of the run when this job fails.
-      actions: write
     steps:
       - name: Stop when Contract lint did not pass
         if: needs.lint.result != 'success'
@@ -526,6 +554,11 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: node-modules-
       - name: Install dependencies without preparing application assets
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared TypeScript dependencies
@@ -561,8 +594,43 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
-      - name: Cancel the rest of the run
-        if: failure()
+
+  ci-guard:
+    name: Report the first CI failure
+    # Runs after every other job settles (never before: a `needs` job only starts once every listed job is
+    # complete, so this cannot cancel a sibling early — see the commit that removed the old per-job
+    # `gh run cancel "$GITHUB_RUN_ID"` steps). Each of those steps cancelled the whole run, including its own
+    # still-running job, and GitHub sometimes reported that job's conclusion as "cancelled" instead of "failure" —
+    # the real failure disappeared behind a wall of unrelated red checks (seen on PR #343). This job trades early
+    # cancellation for a conclusion that is always right: nothing here ever turns a job's own true conclusion into
+    # "cancelled", and it points straight at whichever job and step actually failed.
+    needs: [lint, changes, typecheck, typecheck-tests, universe, universe-preparation, nebula]
+    if: >-
+      ${{ always() && (needs.lint.result == 'failure' || needs.typecheck.result == 'failure' ||
+      needs.typecheck-tests.result == 'failure' || needs.universe.result == 'failure' ||
+      needs.universe-preparation.result == 'failure' || needs.nebula.result == 'failure') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - name: Point at the job and step that actually failed
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
+        run: |
+          jobs_json=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs" --paginate --jq '.jobs')
+          found=0
+          while IFS= read -r job; do
+            job_name=$(echo "$job" | jq -r '.name')
+            job_id=$(echo "$job" | jq -r '.id')
+            step_name=$(echo "$job" | jq -r '[.steps[]? | select(.conclusion == "failure")][0].name // "(no failed step recorded)"')
+            url="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/job/${job_id}"
+            echo "::error::${job_name} -> ${step_name} failed: ${url}"
+            echo "- ❌ **${job_name}** → ${step_name} failed: <${url}>" >> "$GITHUB_STEP_SUMMARY"
+            found=1
+          done < <(echo "$jobs_json" | jq -c '.[] | select(.conclusion == "failure" and .name != "Report the first CI failure")')
+          if [ "$found" -eq 0 ]; then
+            echo "::error::A required job failed, but the jobs API has not recorded which one yet."
+            echo "- A required job failed; see the run's job list." >> "$GITHUB_STEP_SUMMARY"
+          fi

@@ -15,6 +15,7 @@ import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../rendering/prepared-object-a
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "./scene-native-waits.js";
 import { createPreparedResidency } from "../rendering/prepared-residency.js";
+import { resolvePreparedAssetUrl } from "../rendering/prepared-asset-origin.js";
 import { createObjectSelectionRuntime } from "../rendering/object-selection-runtime.js";
 import { createObjectControlBinding } from "../rendering/object-control-binding.js";
 import { createPreparedPlayback } from "../rendering/prepared-playback.js";
@@ -92,6 +93,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onReady() { guarded(() => orbit?.invalidate()); },
         onWarmError(error: unknown) { if (!lifetime.disposed) console.error(error); },
         onCleanupError: fatal,
+        ...(definition.assetOrigin ? { assetOrigin: definition.assetOrigin } : {}),
       };
       resources = preparedResources ? preparedResources.claim(definition.assets, resourceOptions) : environment.createResources(resourceOptions);
     } catch (error) {
@@ -114,6 +116,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       navigate: camera => { stopMotion(); alignMotionFrame(); return getOrbit().flyToState(camera, { surfaceTarget: true }); },
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }),
+      ...(definition.assetOrigin ? { assetOrigin: definition.assetOrigin } : {}),
     }) : null;
     const preparedEpochJdTt = worldFrame?.epochJdTt ?? null;
     let restoreVersion = 0;
@@ -362,10 +365,13 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       context.own(() => selection?.destroy());
       if (definition.features) {
         if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
-        surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: definition.features, objectId: definition.id, target: mounted.featureTarget,
+        const featureOrigin = definition.assetOrigin, featurePlan = definition.features;
+        surfaceFeatures = capabilities.mountSurfaceFeatures({ host: stage, plan: featurePlan, objectId: definition.id, target: mounted.featureTarget,
           scene: mounted.sceneElement, zoomRange: () => ({ minimum: definition.camera.minimumZoom, maximum: cameraPlan.maximumZoom }),
           ...(navigation && worldFrame ? { navigation, flightLimits: () => ({ minimumDistanceM: (definition.camera.dolly?.minimumDistanceRadii ?? 1.2) * worldFrame.bodyRadiusM }),
             onFlight: () => { stopMotion(); } } : {}),
+          ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
+            fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
           lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
         context.own(() => surfaceFeatures?.destroy());
         surfaceFeatures.setLens({ id: initialSelection.lensId });

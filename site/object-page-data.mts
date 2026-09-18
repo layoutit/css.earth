@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { requireAssets, requireControls } from '../src/renderers/css/dist/index.js';
 import { record } from './browser-types.mts';
+import { resolveSceneAddressesDeep } from './asset-origin.mts';
 
 /** Server/build-only metadata read. Scene trees remain separate runtime assets. */
 export async function readPreparedObjectBytes(id: string, root = process.cwd()) {
@@ -40,5 +41,8 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   }
   requireAssets(object.assets);
   requireControls(object.controls);
-  return { assets: object.assets, controls: object.controls };
+  // `DatasetLenses.astro` and its sibling result/overview components read lens thumbnail and
+  // dataset-preview addresses straight off this data, outside the runtime `resources.url()`
+  // chokepoint (`prepared-residency.ts`) and outside `PreparedObjectHead`'s preload list.
+  return { assets: await resolveSceneAddressesDeep(object.assets, root), controls: await resolveSceneAddressesDeep(object.controls, root) };
 }

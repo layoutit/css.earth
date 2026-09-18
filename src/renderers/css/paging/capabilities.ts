@@ -3,6 +3,7 @@ import type { PreparedPagePlan } from './types.js';
 import { mountPreparedMapPages } from './city-pages.js';
 import { isPreparedAssetPath, normalizeCityAssetOrigin } from './city-asset-url.js';
 import { mountSurfaceFeatureLabels } from '../labels/surface-feature-labels.js';
+import { resolvePreparedAssetUrl } from '../rendering/prepared-asset-origin.js';
 
 function object(value: unknown, label: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`Invalid prepared ${label}.`);
@@ -66,7 +67,7 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
     return mountPreparedMapPages({ ...options, plan: parsePreparedPagePlan(options.plan, { lensIds }),
       carrier, system, className, textureClassName, lensIds });
   },
-  createDestinations({ plan: input, ready, lifetime, selectLens, navigate, reset }) {
+  createDestinations({ plan: input, ready, lifetime, selectLens, navigate, reset, assetOrigin }) {
     const plan = object(input, 'destinations'), catalog = object(plan.catalog, 'destination catalog');
     const statuses = object(plan.statuses, 'destination statuses');
     if (typeof catalog.url !== 'string' || !catalog.url.startsWith('/scenes/') ||
@@ -75,7 +76,9 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
         typeof plan.defaultLens !== 'string' || typeof statuses.detail !== 'string' || typeof statuses.overview !== 'string') {
       throw new TypeError('Invalid prepared destination plan.');
     }
-    const url = catalog.url, defaultLens = plan.defaultLens;
+    // The address stays `/scenes/…` in the plan itself (so this check keeps validating the
+    // tracked prepared data); only the fetch address is resolved, mirroring city-index.ts.
+    const url = resolvePreparedAssetUrl(catalog.url, assetOrigin, catalog.sha256), defaultLens = plan.defaultLens;
     const controller = new AbortController();
     lifetime.onDispose(() => controller.abort());
     const assertLive = () => { if (lifetime.disposed) throw new Error('Object was unmounted.'); };
