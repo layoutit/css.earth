@@ -19,7 +19,9 @@ import { interpolatePalette } from '../../color-transfer.mts';
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/source');
 
 /** The reconstruction recipe the pilot settled: the paper's pseudo-continuum windows, its two February 2020 nights, and the
- * error floors measured from the beam-commuting-device repeats. */
+ * error floors set above the scatter of the beam-commuting-device repeats: the repeats give 0.085 of the squared visibility
+ * and no additive term, and the recipe states 0.12 and 5.65e-4, so every error written is at least the measured scatter.
+ * season.json records the measurement. */
 export const CONTINUUM_RECIPE: ContinuumRecipe = Object.freeze({
   windowsMicrometres: [[3.942, 3.974], [3.992, 3.998]] as const,
   referenceWavelengthMetres: 3.97e-6, referenceBandMetres: 0.06e-6,
