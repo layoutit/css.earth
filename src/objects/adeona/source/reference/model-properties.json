@@ -1,0 +1,39 @@
+{
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "table": "Table 1 and Table A.1",
+  "diameterKm": 144,
+  "diameterInterpretation": "Published survey volume-equivalent diameter. The survey released only its ADAM reconstruction for this body, whose original coordinates are not rescaled.",
+  "periodHours": 15.07081,
+  "poleEclipticJ2000Degrees": [
+    101,
+    48
+  ],
+  "massKg": 2400000000000000000,
+  "shape": {
+    "source": "https://observations.lam.fr/astero/3Dshape/145_Adeona_adam.obj",
+    "vertices": 578,
+    "faces": 1152,
+    "units": "km",
+    "firstVertexKm": [
+      0.0,
+      0.0,
+      83.5825
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      156.3747,
+      151.4363,
+      152.9315
+    ],
+    "volumeCubicKm": 1574207.2346863227,
+    "volumeEquivalentRadiusKm": 72.16463702794964,
+    "radialRangeKm": [
+      62.68996907879282,
+      85.62606434544333
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "adeona",
+  "entries": [
+    {
+      "id": "selected-shape",
+      "subject": "LAM/SPHERE ADAM: selected reconstruction",
+      "status": "included",
+      "finding": "The LAM 3Dshape directory lists 145_Adeona_adam.obj, and 145_Adeona_mpcd.obj answers 404: the survey released only its ADAM reconstruction for this body, and its Figure B.34 has no MPCD row. The mesh is the preparation input: 578 vertices and 1152 faces in km, one closed component with Euler characteristic 2, measured on the release file.",
+      "evidence": [
+        "https://observations.lam.fr/astero/3Dshape/145_Adeona_adam.obj",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://doi.org/10.1051/0004-6361/202141781"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "145e36d8b599d9273594adfa06c087168890a812"
+        }
+      ]
+    },
+    {
+      "id": "selected-size-and-pole",
+      "subject": "Size, mass and pole",
+      "status": "included",
+      "finding": "Vernazza et al. (2021) Table 1, as CDS distributes it, gives a volume-equivalent diameter of 144 ± 3 km and a mass of (2.4 ± 0.3) × 10^18 kg; Table A.1 gives the ecliptic J2000 pole (101°, 48°) and the sidereal period 15.07081 h. The ADAM mesh measures a volume-equivalent radius of 72.16 km. The release rotation record reads latitude-first, (100.72°, 47.77°), 0.3° from the table’s pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/654/A56/table1.dat"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "145e36d8b599d9273594adfa06c087168890a812"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Released SPHERE observations and surface registration",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 15 camera-1 deconvolved frames, 3 nights from 2017-12-31 to 2018-01-07, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/145Adeona/ contains deconvolved camera-1 frames. Their geometry against this ADAM model has not yet been established, so the grid remains an explicit missing-imagery presentation.",
+      "evidence": [
+        "https://observations.lam.fr/astero/Data/145Adeona/",
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/145Adeona/Deconv/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "145e36d8b599d9273594adfa06c087168890a812"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.34 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.34, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.961 to 0.964 at our phase, against 0.964 to 0.970 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 3 columns. With the paper’s photographs 0.947 to 0.964. Turned in the image, our outline best overlaps the paper’s photographs at -3.0 to 3.0° and its model panels at -1.5 to 1.5°. The spin axis we project lies at 86.3 to 87.1° on the sky against 84.1 to 85.3° for the figure’s arrows. Native outline residual 1.470 px mean over 15 frames at our phase; the sweep’s lowest is 1.154 px at -20°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.3° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/145Adeona/Deconv/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "145e36d8b599d9273594adfa06c087168890a812"
+        }
+      ]
+    }
+  ]
+}

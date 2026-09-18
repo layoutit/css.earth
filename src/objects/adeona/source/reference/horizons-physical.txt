@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27145%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                145 Adeona (A875 LB)           2026-Sep-18 11:14:34
+Rec #:     145 (+COV) Soln.date: 2026-Jun-05_03:12:16  # obs: 12054 (1875-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458426.5 ! 2018-Nov-04.00 (TDB)         Residual RMS= .21196
+   EC= .1441015450747914   QR= 2.287841137546164   TP= 2458161.0904222666
+   OM= 77.41144817740542   W=  44.14497364162611   IN= 12.63542128866806
+   A= 2.673028703791834    MA= 59.85703927034234   ADIST= 3.058216270037504
+   PER= 4.37032            N= .225527051           ANGMOM= .027830862
+   DAN= 2.37222            DDN= 2.9194             L= 120.8547193
+   B= 8.763239499999999    MOID= 1.32077003        TP= 2018-Feb-11.5904222666
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 63.8915            ROTPER= 15.071
+   H= 8.4                  G= .150                 B-V= .701
+                           ALBEDO= .061            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#140, OCC=0
+2: source=ORB
+*******************************************************************************
