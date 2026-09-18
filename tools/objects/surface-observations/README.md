@@ -152,7 +152,14 @@ report records them.
   the lens's `maximumGain`, which the format caps: 1.5 for geo formats, 3 for
   encounter frames and 16 for controlled cameras, whose raw detector frames
   through different filters and exposures measure up to 10.3 from their
-  reference.
+  reference. Deconvolved ZIMPOL frames state no unit, and the survey's
+  deconvolution changes scale between observing seasons (Kleopatra's 2017 and
+  2018 frames differ about 20× in total counts through one filter at one gain).
+  Their format gives the fit each frame's season, frames 120 days or more apart
+  starting a new one. Every frame must then be reached by counted pairs, each
+  season's level comes from those pairs alone, and `maximumGain` bounds each
+  frame against its own season's first frame. A controlled-camera lens casts at
+  most 96 frames, the fit's bound.
 - **Controlled-camera registration.** A frame is refused when its stated camera
   places more than a quarter of its lit source shape, within the lens's incidence
   limit, on the photograph's edge-connected sky. Across the first 136 controlled
