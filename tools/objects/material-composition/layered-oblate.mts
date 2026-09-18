@@ -41,7 +41,7 @@ import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPo
 import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared-webp.mts';
 import { fitTextureGeometry, polarQuad } from './texture-geometry.mts';
-import { verifyObservationSources } from '../giant-layers/observations.mts';
+import { verifyObservationSources } from '../observed-surfaces/index.mts';
 import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
 import { ellipsoidPoint, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, crossVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';

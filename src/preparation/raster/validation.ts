@@ -50,10 +50,13 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         const crop = record(thumbnail.crop, 'thumbnail.crop');
         fields(crop, ['left', 'top', 'width', 'height'], 'thumbnail.crop');
     }
-    if (!Array.isArray(recipe.surfaces) || !recipe.surfaces.length)
+    // A body whose surfaces come from an observed-surfaces recipe states none here and takes only its lighting bank from
+    // this lane. Every other recipe still states at least one; the composition check refuses a body that supplies neither.
+    const observedSurfaces = Array.isArray(recipe.surfaces) && recipe.surfaces.length === 0 && recipe.lighting !== undefined;
+    if (!observedSurfaces && (!Array.isArray(recipe.surfaces) || !recipe.surfaces.length))
         throw new TypeError('At least one source surface is required.');
     const ids = new Set<string>();
-    for (const entry of recipe.surfaces) {
+    for (const entry of (Array.isArray(recipe.surfaces) ? recipe.surfaces : [])) {
         const surface = record(entry, 'surface');
         text(surface.id, 'surface.id');
         if (ids.has(surface.id))
@@ -153,5 +156,6 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         numbers(interior.worldLightDirection, 'interior.worldLightDirection', 3);
         record(interior.metadata, 'interior.metadata');
     }
-    return recipe as unknown as RasterRecipe;
+    // Downstream reads one list; a recipe that states no surface prepares only its lighting bank.
+    return { ...recipe, surfaces: Array.isArray(recipe.surfaces) ? recipe.surfaces : [] } as unknown as RasterRecipe;
 }

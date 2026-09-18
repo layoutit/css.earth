@@ -1,5 +1,5 @@
 import * as s from '../material-composition/data-schema.mts';
-import {sourcePin, vector2, vector3, webpEncoding} from './radial-contract.mts';
+import {sourcePin, vector2, vector3, webpEncoding} from '../giant-layers/radial-contract.mts';
 const n = s.number, str = s.string, opt = s.optional, arr = s.array, obj = s.object;
 const region = obj({left: n, top: n, width: n, height: n});
 export type Region = s.Infer<typeof region>;

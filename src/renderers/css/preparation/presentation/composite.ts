@@ -13,6 +13,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const material=plan.material;
   // An airless body carries Mercury's Lambert row bank instead of an atmospheric phase atlas: the composite plane
   // then streams the same row shards and billboard the row-bank cutaway uses, and no atmosphere toggle exists.
+  const planes=plan.planes??[];
   const atmospheric='lightingUrl' in material && typeof material.lightingUrl==='string';
   const bank=atmospheric?null:assets.lighting?.banks[String(CANONICAL_PREPARED_IMAGE_DENSITY)];
   if(!atmospheric&&(!bank||!bank.billboard||bank.billboard.presentations.length!==assets.lighting.frameCount))throw new TypeError('Airless composite needs the prepared lighting bank and billboard atlas.');
@@ -23,9 +24,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
   const entries=[...warm,...lenses.controls.flatMap(lens=>layers.map(layer=>({key:`${layer}:${lens.id}`,
     url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"}))),...lightingRows,
-    ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"mounted"}))];
+    ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"warm"}))];
   const required=(id: string)=>[...layers.map(layer=>`${layer}:${id}`),...(atmospheric?[]:["shadowless",BILLBOARD_LIGHTING_KEY])];
-  const planes=plan.planes??[];
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.body.leaves,...planes.map(entry=>entry.leaf)].map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera planet-render-root");
   const scene=b.element("div","polycss-scene",`transform:${plan.camera.defaultTransform}`,{"aria-hidden":"true","data-polycss-lighting":"baked"});

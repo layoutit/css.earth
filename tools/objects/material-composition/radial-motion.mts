@@ -9,7 +9,7 @@ import sharp from 'sharp';
 import {textureTintFactors} from '@layoutit/polycss';
 import {parseRadialLayerRecipe} from '../giant-layers/index.mts';
 import {sampleRadialProfile,rasterObservedRadialField, loadObservedProfile} from '../giant-layers/rings.mts';
-import {verifyObservationSources} from '../giant-layers/observations.mts';
+import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {cropTransparentRgba,responsiveTransparentCrop} from './rgba.mts';
 import {normalizeVector,rotateX as rotateVectorX,rotateZ as rotateVectorZ} from './ellipsoid.mts';
 /** Observed radial-profile sampling, seeded density tracers and ellipsoid penumbra. */
