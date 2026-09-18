@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, mkdir, mkdtemp, rm, cp, copyFile } from 'node:fs/promises';
+import { readFile, readdir, mkdir, mkdtemp, rm, cp, copyFile, symlink } from 'node:fs/promises';
 import { prepareContextProvenance } from './prepare-context-provenance.mts';
+import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { sha256 } from '../src/platform/sha256.mts';
 
 
@@ -44,6 +45,34 @@ test('committed runtime-assets.json matches what context provenance currently ge
     assert.ok(generated,`${context.id}: missing generated inventory`);
     const committed=await readFile(`${context.base}/runtime-assets.json`,'utf8');
     assert.equal(committed,generated!.text,`${context.id}: committed runtime-assets.json is stale; run prepare:provenance and publish:runtime-assets`);
+  }
+});
+
+test('committed image-layer-bank runtime-assets.json matches what volume provenance currently generates', async t => {
+  // Only image-layer banks publish a body-root inventory. Build them in isolation so the check
+  // needs no other volume's installed previews.
+  const ids:string[]=[];
+  for(const entry of await readdir('src/objects',{withFileTypes:true})){
+    if(!entry.isDirectory())continue;
+    const descriptor:unknown=JSON.parse(await readFile(`src/objects/${entry.name}/object.json`,'utf8').catch((error: unknown) => { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return 'null'; throw error; }));
+    if(descriptor!==null&&typeof descriptor==='object'&&'type' in descriptor&&descriptor.type==='image-layer-bank')ids.push(entry.name);
+  }
+  assert.ok(ids.length>0,'at least one image-layer bank is registered');
+  const root=await mkdtemp(join(tmpdir(),'image-layer-inventory-'));
+  t.after(()=>rm(root,{recursive:true,force:true}));
+  await mkdir(join(root,'src/objects'),{recursive:true});
+  for(const path of ['tools','site'])await symlink(resolve(path),join(root,path));
+  for(const id of ids){
+    await mkdir(join(root,'src/objects',id));
+    for(const name of ['source','prepared','object.json'])await symlink(resolve('src/objects',id,name),join(root,'src/objects',id,name));
+  }
+  const volumes=await prepareVolumeProvenance({root});
+  assert.deepEqual(volumes.map(v=>v.id).sort(),[...ids].sort());
+  for(const volume of volumes){
+    const generated=volume.outputs.find(o=>o.path===join(root,volume.base,'runtime-assets.json'));
+    assert.ok(generated,`${volume.id}: missing generated inventory`);
+    const committed=await readFile(`${volume.base}/runtime-assets.json`,'utf8');
+    assert.equal(committed,String(generated!.text),`${volume.id}: committed runtime-assets.json is stale; run prepare:facilities and publish:runtime-assets`);
   }
 });
 
