@@ -75,3 +75,11 @@ test('the lint prerequisite and run-cancel steps are CI-only; any other conditio
  for(const condition of CI_ONLY_CONDITIONS)assert.deepEqual(readCiSteps(step(`"${condition}"`)),[]);
  assert.throws(()=>readCiSteps(step('success()')),/explicit support/);
 });
+test('a cache-hit-gated step always runs locally instead of being skipped',()=>{
+ const workflow="jobs:\n  universe:\n    steps:\n      - name: generate\n        if: steps.build-tools-cache.outputs.cache-hit != 'true'\n        run: echo generate\n";
+ assert.deepEqual(readCiSteps(workflow),[{name:'generate',run:'echo generate',env:{}}]);
+ // Mutation check: a condition that merely looks similar (a different outputs path) must still refuse, so this
+ // allowance cannot silently swallow an unrelated `if:`.
+ const other="jobs:\n  universe:\n    steps:\n      - name: t\n        if: steps.x.outputs.something != 'true'\n        run: echo t\n";
+ assert.throws(()=>readCiSteps(other),/explicit support/);
+});
