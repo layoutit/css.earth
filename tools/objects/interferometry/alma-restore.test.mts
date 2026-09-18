@@ -93,6 +93,7 @@ test('imaging follows the pipeline\u2019s own call rather than a plausible guess
   assert.equal(passed.get('usemask'), "'auto-multithresh'", 'CLEAN works inside the pipeline\u2019s mask, not on noise peaks');
   assert.ok(passed.get('phasecenter')?.includes('04:36:45.3572'), 'the grid is centred where the pipeline centred it');
   for (const replaced of ['vis', 'imagename', 'calcres', 'calcpsf', 'restart', 'parallel']) assert.ok(!passed.has(replaced), replaced);
+  assert.equal(pipelineTcleanArguments(await imaging(), 'ICRS 69.18898818777deg -62.07767209321deg').get('phasecenter'), "'ICRS 69.18898818777deg -62.07767209321deg'");
   // The literals are read by ast.literal_eval in the script, never executed.
   assert.ok(script.includes('ast.literal_eval(value) for name, value in PIPELINE_TCLEAN.items()'));
   assert.ok(passed.get('spw')?.includes('455.3506751226~455.6221594976GHz'));

@@ -20,7 +20,8 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseCalibrationRecord, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
-import { pipelineImaging, type PipelineImaging } from './alma-imaging.mts';
+import { readFitsHeader } from '../../fits.mts';
+import { pipelineImaging, precisePhaseCentre, type PipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration, type SelfCalibration } from './alma-selfcal.mts';
 import { toolchainPath } from './toolchain.mts';
 
@@ -38,8 +39,10 @@ export interface ImagingPlan {
 const REPLACED_TCLEAN_ARGUMENTS = new Set(['vis', 'imagename', 'calcres', 'calcpsf', 'restart', 'parallel']);
 
 /** The pipeline's tclean arguments this route passes on unchanged, as the Python literals the log wrote. */
-export function pipelineTcleanArguments(imaging: PipelineImaging) {
-  return new Map([...imaging.arguments].filter(([name]) => !REPLACED_TCLEAN_ARGUMENTS.has(name)));
+export function pipelineTcleanArguments(imaging: PipelineImaging, phaseCentre?: string) {
+  const passed = new Map([...imaging.arguments].filter(([name]) => !REPLACED_TCLEAN_ARGUMENTS.has(name)));
+  if (phaseCentre !== undefined) passed.set('phasecenter', python(phaseCentre));
+  return passed;
 }
 
 const python = (value: string) => `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
@@ -61,7 +64,7 @@ export function restoreScript(options: {
   readonly asdm: string; readonly visibilities: string; readonly applications: readonly CalibrationApplication[];
   readonly flagVersion: string | null; readonly plan: ImagingPlan; readonly imageBase: string;
   readonly imaging: PipelineImaging; readonly selfcal: SelfCalibration | null; readonly tableDirectory?: string;
-  readonly flagStage?: string; readonly scratch?: string;
+  readonly flagStage?: string; readonly scratch?: string; readonly phaseCentre?: string;
 }) {
   const { asdm, applications, flagVersion, plan, imageBase, imaging, selfcal } = options;
   // Both measurement sets live on the scratch disk: the import and the corrected column are random writes that an external
@@ -151,7 +154,7 @@ export function restoreScript(options: {
     // weights and widened the beam; without phasecenter the grid moved 0.37 mas; without the auto-multithresh mask, CLEAN
     // worked on noise peaks everywhere and the noise fell 40% below the archive's. Each value is a Python literal read with
     // ast.literal_eval, so nothing in the log is executed. REPLACED_TCLEAN_ARGUMENTS lists the few this route sets itself.
-    `PIPELINE_TCLEAN = {${[...pipelineTcleanArguments(imaging)].map(([name, value]) => `${python(name)}: ${python(value)}`).join(', ')}}`,
+    `PIPELINE_TCLEAN = {${[...pipelineTcleanArguments(imaging, options.phaseCentre)].map(([name, value]) => `${python(name)}: ${python(value)}`).join(', ')}}`,
     `tclean(vis=[${python(targets)}], imagename=${python(imaged)}, **{name: ast.literal_eval(value) for name, value in PIPELINE_TCLEAN.items()})`,
     "steps.append('tclean')",
     // mtmfs writes one image per Taylor term; the zeroth is the continuum intensity.
@@ -246,7 +249,11 @@ export async function restoreExecution(directory: string, plan: ImagingPlan, opt
 
   const scratch = resolve(options.scratch ?? calibration);
   await mkdir(scratch, { recursive: true });
-  const script = restoreScript({ asdm, visibilities, applications, flagVersion, plan, imaging, selfcal, scratch,
+  // The log rounds the phase centre; the archive image, when it is here as the oracle, records it unrounded.
+  const archive = resolve(work, 'archive.fits');
+  const phaseCentre = imaging.phaseCentre !== null && await readFile(archive).then(() => true, () => false)
+    ? precisePhaseCentre(imaging.phaseCentre, readFitsHeader(await readFile(archive)).header, imaging.imageSize).phaseCentre : undefined;
+  const script = restoreScript({ asdm, visibilities, applications, flagVersion, plan, imaging, selfcal, scratch, phaseCentre,
     flagStage, tableDirectory: workdir ? resolve(products, workdir.name) : undefined, imageBase: resolve(work, `${plan.target}.restored`) });
   const scriptPath = resolve(work, 'restore.py');
   await writeFile(scriptPath, script);
