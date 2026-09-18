@@ -44,7 +44,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
   if (!frames.length || (policy.selection === 'single') !== (frames.length === 1)) throw new Error('A surface observation selects among its frames only when it has several.');
   const mesh = radial.grid, metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const missing = (point: readonly number[], reason: string): Missing => ({ reason, color: missingCoverageColor(Math.atan2(point[1], point[0]) * 180 / Math.PI,
-    Math.atan2(point[2], Math.hypot(point[0], point[1])) * 180 / Math.PI, 180 / config.raster.height) });
+    Math.atan2(point[2], Math.hypot(point[0], point[1])) * 180 / Math.PI, 180 / config.raster.height, config.raster.missingCoverage) });
   // One closest source point per displayed point serves every frame; each frame then checks its own footprint and visibility. The display
   // mesh simplifies this source mesh, so the closest point lies on the displayed point's own surface; only an exact tie between distinct
   // surface points leaves it undecided.

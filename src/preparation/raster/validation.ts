@@ -28,6 +28,8 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         throw new TypeError('unpackedResizeBeforePack needs source-packed storage.');
     if (recipe.polarProjection !== 'angular-nearest' && recipe.polarProjection !== 'orthographic-bilinear')
         throw new TypeError('Unknown polar projection operator.');
+    if (recipe.missingCoverage !== undefined && recipe.missingCoverage !== 'gray' && recipe.missingCoverage !== 'dark')
+        throw new TypeError('Unknown missing-coverage fill.');
     if (typeof recipe.polesCombined !== 'boolean')
         throw new TypeError('polesCombined must be boolean.');
     if (recipe.polesCombined !== (recipe.polarProjection === 'angular-nearest'))

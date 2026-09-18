@@ -1,3 +1,5 @@
+import type { LensVolume } from '../../../src/renderers/css/runtime/object-contract.js';
+
 export interface TitleSource {
   label: string;
   viewBox: string;
@@ -62,6 +64,11 @@ export interface LensRecipe {
   material?: string;
   legend?: LensLegendRecipe;
   legendNote?: string;
+  /**
+   * A dataset may name a cloud that accompanies the body. It borrows the named surface's prepared
+   * plates for the body itself, and the shell asks the cloud's bank for the lens while it is selected.
+   */
+  volume?: LensVolume;
   source: LensSource;
 }
 

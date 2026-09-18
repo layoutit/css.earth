@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-published-model-parameters@1",
+  "objectId": "betelgeuse-shell",
+  "lensId": "veil-2019-12",
+  "citation": "Montargès, M., Cannon, E., Lagadec, E., de Koter, A., Kervella, P., Sanchez-Bermudez, J., Paladini, C., Cannon, E., et al. 2021, \"A dusty veil shading Betelgeuse during its Great Dimming\", Nature 594, 365",
+  "doi": "10.1038/s41586-021-03546-8",
+  "preprint": "https://arxiv.org/abs/2201.10551",
+  "locator": "Extended Data Table 3, column \"December 2019\"; axes defined by Extended Data Figure 6",
+  "coordinates": "x along right ascension, y along declination, z positive toward Earth, origin at the centre of the star",
+  "epoch": "2019-12",
+  "centreAu": [
+    -1.9,
+    -3,
+    12.5
+  ],
+  "radiusAu": 6.5,
+  "dustDensityGramsPerCubicCentimetre": 3.2e-19,
+  "composition": "MgFeSiO4",
+  "grainMicrometres": 0.21,
+  "notes": "The same table gives January and March 2020 solutions, which the paper records as unoptimised best guesses; they are not used. Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than the uniform sphere the paper published and this record repeats."
+}

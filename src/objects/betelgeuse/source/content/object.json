@@ -62,7 +62,7 @@
           "path": "../manifest.json"
         },
         "falseColor": true,
-        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Its bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The faint halo outside the disc is the same reconstruction's light beyond the photosphere, a fifth of the flux: half of it within one beam of the limb, the rest extended emission the visibilities require. The far hemisphere and the poles were not observed.",
+        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 8 and 19 February 2020, in the 3.94-4.00 micrometre continuum, convolved to the 4 milliarcsecond interferometric beam and cast onto a sphere of the published radius, so nothing finer than the beam is shown. Its bright and dark patches are not confirmed as surface features: a spotless disc reconstructed from the same coverage, at sizes within 2 percent of the star's, leaves patches up to as strong. Negating every closure phase fits equally well, so which limb is brighter is weakly constrained. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. A fifth of the reconstruction's flux lies outside the disc, and it is drawn here in three dimensions rather than as a flat plate behind the sphere: the envelope that best projects to its measured radial profile, which falls as r to the minus eight. The ring within one beam of the limb is left out, because there the light is the star's own edge smeared by the 4 milliarcsecond beam rather than anything resolved; that is about half of the off-limb flux. What is drawn is the extended emission the visibilities require. The far hemisphere and the poles were not observed.",
         "noData": true,
         "legend": {
           "kind": "scale",
@@ -113,6 +113,141 @@
           },
           "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
           "sourceUrl": "https://arxiv.org/abs/2401.12404"
+        },
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "emission-2020",
+          "surface": "matisse"
+        }
+      },
+      {
+        "id": "dust-2024",
+        "label": "Polarised dust · December 2024",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "zimpol-v",
+          "surface": "matisse"
+        },
+        "notes": "The photosphere as the MATISSE reconstruction shows it, with the dust around it: the degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, released by ESO as Phase 3 collection BETELGEUSE-B beside Montargès et al. (2026). The patches one to about 4.5 stellar radii out are starlight scattered by dust. This is their own Fig. B.1 given depth: the same inferno colour map on the same zero-to-0.10 scale, carried as four emission channels so a line of sight emits the bar colour of its own measured degree. The colours are a legend for a ratio, not the colour of the dust. The instrumental polarisation measured beyond eight radii is subtracted, so the empty sky is darker here than in the printed figure. The map is a sky-plane image with no third axis, so the depth is inferred rather than pushed back from the sky: the azimuthally averaged radial profile is fitted with simple envelopes around the star, and the one that projects to it is a spherical shell of 3.5 stellar radii and gaussian thickness 1.2, which beats both a steady outflow and the constant depth an extrusion assumes. Each patch is placed on that shell, in front of the star and behind it, because nothing in one image says which. That shape is an inference from the profile, not a measurement.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Degree of linear polarisation",
+          "labels": [
+            "0.00",
+            "0.05",
+            "0.10"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                66,
+                10,
+                104
+              ],
+              [
+                147,
+                38,
+                103
+              ],
+              [
+                221,
+                81,
+                58
+              ],
+              [
+                252,
+                165,
+                10
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0.00",
+              "0.05",
+              "0.10"
+            ]
+          },
+          "meta": "V band, 3 December 2024 · the paper's own inferno scale",
+          "sourceUrl": "https://doi.org/10.1051/0004-6361/202661023"
+        }
+      },
+      {
+        "id": "dust-2019",
+        "label": "Great Dimming clump · December 2019",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "veil-2019-12",
+          "surface": "matisse"
+        },
+        "notes": "The same photosphere, with the dust clump Montargès et al. (2021) fitted to the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as they report for the southern hemisphere, and the light it scatters back is drawn faintly over that. A model fitted to images, not an image."
+      },
+      {
+        "id": "sio-2023",
+        "label": "SiO envelope · August 2023",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "falseColor": true,
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "sio-2023",
+          "surface": "matisse"
+        },
+        "notes": "The same photosphere, with the silicon monoxide ALMA saw around it in August 2023. This is the only dataset here placed in depth by its own measured velocities rather than by a shape fitted to a picture. Everything is measured from the star itself, which the same observation's continuum places a tenth of an arcsecond, nearly five stellar radii, from where ALMA pointed. In front of the star the molecule absorbs its light, some of it leaving the star and some falling back; around it, the molecule glows in a lopsided ring between two and four stellar radii out, heaviest to the east-south-east. Each channel of the line cube is placed along the line of sight on a spherical outflow at the speed of the fastest gas absorbing in front of the star, about twenty-two kilometres a second, which is the usual first reading of an expanding stellar envelope. Gas that is falling back is placed as if it were flowing out, so the depths are a model. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness, not colour or temperature.",
+        "legend": {
+          "kind": "scale",
+          "title": "SiO line brightness, integrated",
+          "labels": [
+            "0.00",
+            "0.50",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "0.00",
+              "0.50",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the peak · ALMA band 6, 217.105 GHz · viridis, false colour",
+          "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
         }
       }
     ]

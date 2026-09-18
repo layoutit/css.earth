@@ -39,13 +39,19 @@ function pin(raw: unknown): Pin {
   const value = sourceObject(raw, ['path', 'sha256', 'bytes']);
   return { path: sourcePath(value.path), sha256: sourceDigest(value.sha256), bytes: integer(value.bytes) };
 }
-/** A preview is either a publisher image downloaded by URL or composed from a pinned sky band recipe. */
-interface Preview extends Pin { url?: string; skyBands?: { path: string; sha256: string }; crop?: { left: number; top: number; width: number; height: number }; }
+/** A preview is a publisher image downloaded by URL, a composite of a pinned sky band recipe, or an image this package
+ * draws itself from one of its own declared inputs. The third kind exists for a dataset whose source is the package's
+ * own product rather than a figure someone published: there is nothing to download, and a publisher figure of some
+ * other observation would misrepresent it. */
+interface Preview extends Pin { url?: string; skyBands?: { path: string; sha256: string }; authoredFrom?: string;
+  crop?: { left: number; top: number; width: number; height: number }; }
 function preview(raw: unknown): Preview {
-  const value = sourceObject(raw, ['path', 'sha256', 'bytes', 'url', 'skyBands', 'crop']);
+  const value = sourceObject(raw, ['path', 'sha256', 'bytes', 'url', 'skyBands', 'authoredFrom', 'crop']);
   const result: Preview = pin({ path: value.path, sha256: value.sha256, bytes: value.bytes });
-  if ((value.url === undefined) === (value.skyBands === undefined)) throw new TypeError('A preview names either a URL or a sky band recipe.');
-  if (value.url !== undefined) result.url = sourceUrl(value.url);
+  const kinds = [value.url, value.skyBands, value.authoredFrom].filter(candidate => candidate !== undefined);
+  if (kinds.length !== 1) throw new TypeError('A preview names exactly one of a URL, a sky band recipe or the input it is drawn from.');
+  if (value.authoredFrom !== undefined) result.authoredFrom = sourceId(value.authoredFrom);
+  else if (value.url !== undefined) result.url = sourceUrl(value.url);
   else {
     const bands = sourceObject(value.skyBands, ['path', 'sha256']);
     result.skyBands = { path: sourcePath(bands.path), sha256: sourceDigest(bands.sha256) };
@@ -60,6 +66,8 @@ function preview(raw: unknown): Preview {
 interface LensRecord {
   id: string; label: string; title: string; description: string; summary: string; detail: string;
   facts: { id: string; label: string; value: string }[]; input: string; preview: Preview;
+  /** Further inputs this one lens was built from, each with its role, beyond its own image and the shared inputs. */
+  inputEvidence: ProductInputEvidence[];
 }
 interface Presentation {
   objectId: string; name: string; defaultLens: string; bank: Pin; recipes: (Pin & { id: string })[];
@@ -69,9 +77,10 @@ function presentation(raw: unknown): Presentation {
   const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultLens', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'lenses']);
   if (value.schema !== 'cssearth-volume-presentation-source@1') throw new TypeError('Invalid volume presentation source.');
   const lenses = sourceArray(value.lenses, raw => {
-    const lens = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview']);
+    const lens = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview', 'inputEvidence']);
     const result = { id: sourceId(lens.id), label: sourceText(lens.label), title: sourceText(lens.title), description: sourceText(lens.description),
       summary: sourceText(lens.summary), detail: sourceText(lens.detail), input: sourceId(lens.input), preview: preview(lens.preview),
+      inputEvidence: [...sourceArray(lens.inputEvidence ?? [], parseProductInputEvidence)],
       facts: [...sourceArray(lens.facts, raw => { const fact = sourceObject(raw, ['id', 'label', 'value']); return { id: sourceId(fact.id), label: sourceText(fact.label), value: sourceText(fact.value) }; })] };
     validateDatasetText(result);
     return result;
@@ -100,6 +109,31 @@ function source(raw: unknown): ProvenanceSource {
 export interface PreparedVolumeProvenance {
   id: string; name: string; route: string; base: string; controls: Lens[]; defaultLens: string; provenance: ProvenanceDocument;
   outputs: { path: string; text: string | Uint8Array }[];
+  /** A volume attached to a body is no place of its own: each of its lenses is reached through the body's dataset that shows it. */
+  hostedBy?: HostedDatasets;
+}
+export interface HostedDatasets {
+  objectId: string; name: string; route: string; datasets: Record<string, { lensId: string; label: string }>;
+}
+/** The body an attached volume's delivery names, and which of the body's own datasets shows each of the volume's lenses. */
+async function hostedDatasets(root: string, base: string, objectId: string, lensIds: readonly string[], input: (path: string) => Promise<Buffer>): Promise<HostedDatasets | undefined> {
+  const deliveryPath = `${base}/source/delivery.json`;
+  const exists = await readFile(resolve(root, deliveryPath)).then(() => true, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
+  if (!exists) return undefined;
+  const host = sourceObject(json(await input(deliveryPath))).attachedTo;
+  if (host === undefined) return undefined;
+  const hostId = sourceId(host), content = sourceObject(json(await input(`src/objects/${hostId}/source/content/object.json`)));
+  const datasets: Record<string, { lensId: string; label: string }> = {};
+  for (const raw of sourceArray(sourceObject(content.lenses).controls, sourceObject)) {
+    if (raw.volume === undefined) continue;
+    const volume = sourceObject(raw.volume);
+    if (volume.objectId !== objectId) continue;
+    const lensId = sourceId(volume.lensId);
+    if (datasets[lensId]) throw new TypeError(`Two datasets of ${hostId} show ${objectId}/${lensId}.`);
+    datasets[lensId] = { lensId: sourceId(raw.id), label: sourceText(raw.label) };
+  }
+  for (const lensId of lensIds) if (!datasets[lensId]) throw new TypeError(`No dataset of ${hostId} shows ${objectId}/${lensId}.`);
+  return { objectId: hostId, name: sourceText(content.displayName), route: `/${hostId}/`, datasets };
 }
 interface Options {
   root?: string;
@@ -119,7 +153,11 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     const name = pin.path.split('/').at(-1);
     if (name !== skyBandCompositeFile(name?.split('.')[0] ?? '', pin.sha256)) throw new TypeError(`A sky band preview is cached under its own hash: ${pin.path}`);
   }
-  let bytes = await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+  // An authored preview is written and checked in by the package's own author, so it is source closure; every other
+  // preview is a download or a cache and stays outside it.
+  let bytes = pin.authoredFrom
+    ? await input(pin.path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) throw new Error(`Authored preview is missing: ${pin.path}; run this object's source author.`); throw error; })
+    : await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   if (bytes === null && pin.skyBands) {
     // The survey bands download into the shared cache; only the pinned recipe and tile lists are source closure.
     bytes = (await composeSkyBandPng(pin.skyBands, { input, cache: resolve(root, '.local/nebula-lab/sky-bands') })).bytes;
@@ -215,6 +253,8 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     for (const [index, lens] of record.lenses.entries()) {
       const own = bySource.get(lens.input);
       if (!own || own.lensId !== lens.id) throw new TypeError(`Unbound volume lens image: ${record.objectId}/${lens.id}`);
+      for (const evidence of lens.inputEvidence) if (!bySource.has(evidence.sourceId) || evidence.sourceId === lens.input)
+        throw new TypeError(`Unknown or repeated lens input: ${record.objectId}/${lens.id}/${evidence.sourceId}`);
       const image = await preparePreview(root, lens.preview, input, { mirrorOrigin });
       const previewUrl = `/scenes/${record.objectId}/datasets/${sha256(image.bytes)}.webp`;
       outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
@@ -223,8 +263,8 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
         description: lens.description, summary: lens.summary, detail: lens.detail, facts: lens.facts });
       products.push({ id: lens.id, label: lens.label, process: 'Apply the pinned source image to the shared prepared volume field; preserve the saved reconstruction and display settings.',
         recipe: 'presentation', selector: `/lenses/${index}`, recipeDependencies: recipes.map(recipe => recipe.id),
-        inputs: [...new Set([lens.input, ...record.sharedInputs])],
-        inputEvidence: [{ sourceId: lens.input, role: 'appearance', evidence: `Selected image at source/presentation.json#/lenses/${index}/input.` }, ...record.inputEvidence], parents: [], lensIds: [lens.id],
+        inputs: [...new Set([lens.input, ...lens.inputEvidence.map(evidence => evidence.sourceId), ...record.sharedInputs])],
+        inputEvidence: [{ sourceId: lens.input, role: 'appearance', evidence: `Selected image at source/presentation.json#/lenses/${index}/input.` }, ...lens.inputEvidence, ...record.inputEvidence], parents: [], lensIds: [lens.id],
         observationAttribution: 'source-lineage', interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail],
         outputs: [...(bankBytes === undefined ? [] : [{ url: bankPath, sha256: bankSha256, bytes: bankBytes, verification: installedBank === null ? 'descriptor-pin' : 'bytes-verified' }]),
           ...layerOutputs, { url: previewUrl, sha256: sha256(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
@@ -255,16 +295,24 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
       const inventory = stringify({ schema: `css${record.objectId}-runtime-assets@1`, resourceRoot: 'prepared', assets });
       outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory });
     }
-    results.push({ id: record.objectId, name: record.name, route: `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs });
+    const hostedBy = await hostedDatasets(root, base, record.objectId, record.lenses.map(lens => lens.id), input);
+    results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs,
+      ...(hostedBy === undefined ? {} : { hostedBy }) });
   }
+  return results;
+}
+
+/** Prepare every volume's presentation and provenance and write them as one set. Real callers opt into the mirror. */
+export async function writeVolumeProvenance(options: Options = {}) {
+  const results = await prepareVolumeProvenance(options);
+  const outputs = results.flatMap(result => result.outputs);
+  for (const output of outputs) await mkdir(dirname(output.path), { recursive: true });
+  await writePreparedSet(outputs);
   return results;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const results = await prepareVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
-  const outputs = results.flatMap(result => result.outputs);
-  for (const output of outputs) await mkdir(dirname(output.path), { recursive: true });
-  await writePreparedSet(outputs);
+  const results = await writeVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
   console.log(`Prepared volume presentation and provenance: ${results.length} objects, ${results.reduce((sum, result) => sum + result.controls.length, 0)} lenses.`);
 }

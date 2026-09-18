@@ -1,0 +1,3 @@
+# The preview images are the publisher figures this package cites; they are small and are the only copy the
+# preparation reads, so they are committed rather than re-downloaded on every checkout.
+!/source/previews/*.jpg

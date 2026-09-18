@@ -18,6 +18,7 @@ function fixture() {
     ready: nativeReady.promise,
     datasets: {
       ids: ['normal', 'mapped'], defaultId: 'normal', current: () => 'normal',
+      volumes: [], volumeOf: (_id: string) => null,
       select: vi.fn(async (_id: string, _options?: { signal?: AbortSignal }) => true),
       subscribe: (_listener: (id: string) => void) => () => {},
     },

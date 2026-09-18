@@ -6,6 +6,7 @@ import { formatSharedView } from '../../src/renderers/css/dist/index.js';
 import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
 import { worldCameraFromCenteredPresentation } from '../../src/renderers/css/dist/navigation.js';
 import type { ObjectSceneLifecycle } from '../../src/renderers/css/runtime/deferred-object-mount.ts';
+import type { LensVolume } from '../../src/renderers/css/runtime/object-contract.ts';
 import type { SharedView } from '../../src/renderers/css/navigation/view-url.js';
 import type { BrowserWindow, SceneFactory, MountOptions } from '../browser-types.mts';
 import type { ObjectEntry } from '../object-schema.mts';
@@ -32,7 +33,7 @@ type FocusController = ReturnType<typeof createPreparedContextNavigation>;
 type FocusCallbacks = NonNullable<Parameters<FocusController['connect']>[1]>;
 type MockWorldContext = { mount(options: { stage: HTMLElement; signal: AbortSignal; windowTarget: Window }): Promise<MockWorldMount> };
 type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setHighContrastSky?(value: boolean): void; setAsteroidBodiesEnabled?(value: boolean): void; setAsteroidLabelsEnabled?(value: boolean): void; setAsteroidOrbitsEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
-type MockDataset = { ids: readonly string[]; defaultId: string; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
+type MockDataset = { ids: readonly string[]; defaultId: string; volumes: readonly LensVolume[]; volumeOf(id: string): LensVolume | null; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
 type MockMount = Mutable<Omit<ObjectSceneLifecycle, 'navigation' | 'datasets'>> & { id: string; options: MountOptions & {proof?: string}; value: SharedView; calls: string[]; restores: number; publishCamera?(camera: WorldCameraPose): void; manualDataset?(id: string): void; datasets?: MockDataset; navigation?: ObjectWorldNavigation };
 type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCitation[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
 type MockDocument = EventTarget & {hidden: boolean; querySelector(selector: string): null; documentElement: {dataset: Record<string, string>}; body: {classList: {add(): void; remove(): void}}};
@@ -142,7 +143,7 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
       let selected = 'normal', live = true;
       const changes = new Set<(id: string) => void>();
       const publish = (id: string) => { selected = id; for (const listener of changes) listener(id); };
-      typedMount.datasets = { ids: ['normal', 'mapped', 'failed'], defaultId: 'normal', current: () => selected,
+      typedMount.datasets = { ids: ['normal', 'mapped', 'failed'], defaultId: 'normal', volumes: [], volumeOf: () => null, current: () => selected,
         async select(id: string, { signal }: { signal?: AbortSignal } = {}) {
           if (!this.ids.includes(id)) throw new RangeError('Unknown dataset');
           if (id === 'failed') throw new Error('Dataset decode failed');

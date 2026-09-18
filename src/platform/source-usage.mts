@@ -2,7 +2,7 @@ import { productSourceIds, validateObjectProvenance } from './object-provenance.
 import type { ProvenanceDocument } from './object-provenance.mts';
 import { parseSourceBinding, sourceArray, sourceEnum, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from './source-catalog.mts';
 import type { SourceResolver, SourceReference } from './source-catalog.mts';
-import { datasetDestination, parseDatasetDestination } from './dataset-destination.mts';
+import { objectDataset, parseDatasetDestination, type DatasetHost } from './dataset-destination.mts';
 
 export type SourceUseKind = 'product-input' | 'method' | 'citation' | 'shared-context' | 'artwork';
 export interface SourceUse {
@@ -15,12 +15,14 @@ export interface SourceUse {
   readonly lensIds: readonly string[]; readonly limitations: readonly string[];
   readonly credit?: string; readonly license?: string; readonly redistribution?: string;
 }
-export interface SourceDataset { readonly objectId: string; readonly objectName: string; readonly lensId: string; readonly label: string; readonly href: string; }
+export interface SourceDataset { readonly objectId: string; readonly objectName: string; readonly lensId: string; readonly label: string; readonly href: string; readonly host?: DatasetHost; }
 export interface SourceUsage {
   readonly edges: readonly SourceUse[]; readonly datasets: readonly SourceDataset[];
   readonly bySource: Readonly<Record<string, readonly number[]>>; readonly byObject: Readonly<Record<string, readonly number[]>>;
 }
-export interface SourceUsageObject { readonly id: string; readonly name: string; readonly route: string; readonly base: string; readonly controls: readonly {readonly id: string; readonly label: string}[]; readonly provenance: ProvenanceDocument; }
+export interface SourceUsageObject { readonly id: string; readonly name: string; readonly route: string; readonly base: string; readonly controls: readonly {readonly id: string; readonly label: string}[]; readonly provenance: ProvenanceDocument;
+  /** Set for a volume attached to a body: its lenses are reached through these datasets of the body. */
+  readonly hostedBy?: { readonly objectId: string; readonly name: string; readonly route: string; readonly datasets: Readonly<Record<string, { readonly lensId: string; readonly label: string }>> }; }
 export const sourceDatasetKey = (objectId: string, lensId: string) => `${objectId}/${lensId}`;
 export function sourceUsageIndexes(edges: readonly SourceUse[]) {
   const bySource: Record<string, number[]> = Object.create(null), byObject: Record<string, number[]> = Object.create(null);
@@ -66,7 +68,8 @@ export function compileSourceUsage(objects: readonly SourceUsageObject[], source
       }
     }
     for (const lens of object.controls) if (usedLenses.has(lens.id)) {
-      datasets.push(Object.freeze({objectId:object.id,objectName:object.name,lensId:lens.id,label:lens.label,href:datasetDestination(object.id,object.route,lens.id)}));
+      const dataset = objectDataset(object,lens);
+      if (!datasets.some(known => known.objectId === dataset.objectId && known.lensId === dataset.lensId)) datasets.push(Object.freeze(dataset));
     }
   }
   edges.push(...metadata);
@@ -75,9 +78,10 @@ export function compileSourceUsage(objects: readonly SourceUsageObject[], source
 export function parseSourceUsage(raw: unknown, sources: SourceResolver): SourceUsage {
   const value = sourceObject(raw,['edges','datasets','bySource','byObject']);
   const datasets = sourceArray(value.datasets,raw => {
-    const dataset = sourceObject(raw,['objectId','objectName','lensId','label','href']), objectId = sourceId(dataset.objectId),lensId = sourceId(dataset.lensId);
-    const href = parseDatasetDestination(dataset.href,objectId,lensId);
-    return Object.freeze({objectId,lensId,href,objectName:sourceText(dataset.objectName),label:sourceText(dataset.label)});
+    const dataset = sourceObject(raw,['objectId','objectName','lensId','label','href','host']), objectId = sourceId(dataset.objectId),lensId = sourceId(dataset.lensId);
+    const host = dataset.host === undefined ? undefined : (raw => Object.freeze({objectId:sourceId(raw.objectId),lensId:sourceId(raw.lensId)}))(sourceObject(dataset.host,['objectId','lensId']));
+    const href = parseDatasetDestination(dataset.href,objectId,lensId,host);
+    return Object.freeze({objectId,lensId,href,objectName:sourceText(dataset.objectName),label:sourceText(dataset.label),...(host === undefined ? {} : {host})});
   });
   const keys = datasets.map(dataset => sourceDatasetKey(dataset.objectId,dataset.lensId)); sourceUnique(keys,'dataset destination');
   const edges = sourceArray(value.edges,raw => {

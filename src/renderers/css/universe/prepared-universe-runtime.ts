@@ -119,6 +119,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       // Keep the background below every depth-sorted body in the isolated stage.
       root.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${-plan.bodies.length - 2}`;
       presentationHost.insertBefore(root, presentationHost.firstChild);
+      // A bank whose every voxel lies between the observer and the body it surrounds composites over the
+      // detail scene instead of behind it. Two flattened roots cannot interleave, so the payload declares
+      // which side its data is on and the universe mounts it there; nothing is reordered at runtime.
+      const frontRoot = document.createElement('div');
+      frontRoot.className = 'prepared-universe-front';
+      frontRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1';
+      presentationHost.appendChild(frontRoot);
+      const frontEnd = document.createElement('span'); frontEnd.hidden = true; frontRoot.appendChild(frontEnd);
       const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
       const volumeHost = document.createElement('div');
       volumeHost.className = 'prepared-volume-context';
@@ -150,6 +158,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const prefetchAbort = new AbortController();
       const lensBanks: ReturnType<ReturnType<typeof createPreparedVolumeLenses>['mount']>[] = [];
       const publishedBankOpacity = imageLayers.map(() => NaN), publishedLensOpacity = volumeLenses.map(() => NaN);
+      // A cloud that accompanies a body waits for one of that body's datasets to ask for it; every other bank is
+      // drawn whenever it is in view, as it always was.
+      const lensEnabled = volumeLenses.map(({ payload }) => payload.attachedTo === undefined);
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       const mountedShells = [...shells];
       let selected = plan.focus;
@@ -189,14 +200,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const bank of lensBanks) bank.destroy();
         additionalPoints.destroy();
         opacityClock.destroy();
-        root.remove();
+        root.remove(); frontRoot.remove();
         delete stage.dataset.contextScale;
       };
       try {
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         for (const bank of imageLayers) imageBanks.push(mountPreparedCssImageLayers({ host: root, before: end, ...bank }));
-        for (const bank of lensPlans) lensBanks.push(bank.mount({ host: root, before: end }));
+        for (const bank of lensPlans) lensBanks.push(bank.mount({ host: root, before: end, frontHost: frontRoot, frontBefore: frontEnd }));
         // Far layers leave layout, and so image loading, until a publication shows them.
         for (const bank of [...imageBanks, ...lensBanks]) bank.root.style.display = 'none';
         let galaxyPrefetched = false;
@@ -236,6 +247,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           volumeLensFrames: Object.freeze(Object.fromEntries(volumeLenses.map(({ payload }) => [payload.id,
             { frame: payload.lenses[0]!.volume.frame, framingRadiusUnits: payload.framingRadiusUnits }]))),
           volumeLensState(id: string) { return lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)]?.state() ?? null; },
+          /** Draw or hide a cloud that accompanies a body. A free-standing cloud ignores this; it is always drawn. */
+          setVolumeLensEnabled(id: string, enabled: boolean) {
+            if (destroyed || typeof enabled !== 'boolean') return;
+            const index = volumeLenses.findIndex(bank => bank.payload.id === id);
+            if (index < 0 || volumeLenses[index]!.payload.attachedTo === undefined || lensEnabled[index] === enabled) return;
+            lensEnabled[index] = enabled;
+            requestPublication?.();
+          },
           selectVolumeLens(id: string, lens: string) {
             const bank = lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)];
             if (!bank) throw new TypeError('Unknown prepared volume lens bank.');
@@ -322,10 +341,15 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             for (const [index, bank] of lensBanks.entries()) {
               const { frame, radiusUnits, visibility } = lensFraming[index]!;
               const contextOpacity = volumeLenses[index]!.payload.contextVisibility === 'independent' ? 1 : volumeOpacity;
-              const opacity = contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+              const opacity = lensEnabled[index] ? contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) : 0;
               if (opacity !== publishedLensOpacity[index]) {
-                bank.root.style.opacity = String(opacity);
-                bank.root.style.display = opacity > 0 ? 'block' : 'none';
+                // A lens that composites in front of the body sits in the bank's second root, so both carry the
+                // bank's visibility; gating only the first leaves a disabled cloud drawing over the star.
+                for (const target of [bank.root, bank.frontRoot]) {
+                  if (!target) continue;
+                  target.style.opacity = String(opacity);
+                  target.style.display = opacity > 0 ? 'block' : 'none';
+                }
                 publishedLensOpacity[index] = opacity;
               }
               bank.publish({ world, viewport }, opacity > 0);

@@ -12,6 +12,16 @@ interface Props {
 }
 const { objectId, lenses, controlName = 'dataset', route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
 const focus = controlName === 'focusLens';
+// A dataset that names a companion cloud keeps the plates of another dataset, so the body on screen is drawn in that
+// one's scale. Its legend is published beside the cloud's own, or the reader is left with a body nothing explains.
+const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][number]) => {
+  const surface = lens.volume?.surface;
+  if (surface === undefined) return undefined;
+  const lender = lenses.controls.find(candidate => candidate.id === surface);
+  if (!lender?.legend) return undefined;
+  // A dataset that carries the very scale it borrows publishes it once, not twice.
+  return JSON.stringify(lender.legend) === JSON.stringify(lens.legend) ? undefined : lender;
+};
 ---
 <section id={`${objectId}-lenses`} class="planet-lenses">
   <form id={`${objectId}-datasets`} action={route} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
@@ -80,6 +90,7 @@ const focus = controlName === 'focusLens';
               ></span>)}
             </>}
           </div>}
+          {borrowedLegend(lens) && <DatasetLegend {objectId} lens={borrowedLegend(lens)!} owner={lens.id} />}
           <DatasetLegend {objectId} {lens} />
         </DatasetDescription>
         {!focus && lens.facts && lens.facts.length > 0 && <details class="planet-lens-facts">
