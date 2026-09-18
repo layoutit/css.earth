@@ -1,10 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '../surface-observations/published-comparison.mts';
 import { latitudeSpan, nightsText, noticeWithLens, readmeWithLens, withAnchoredLens } from './install.mts';
-import { LENS_ID, SURVEY_LENS_SETTINGS, surveyFigures } from './setup.mts';
+import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, surveyFigures } from './setup.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
 const json = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
@@ -76,4 +77,22 @@ test('the install adds its lens to the anchor row of a body in place, once', () 
   assert.equal(withAnchoredLens(once, 'hebe', 'zimpol'), once);
   assert.equal(withAnchoredLens(table, 'juno', 'zimpol'), table, 'a body without a row is left alone');
   assert.ok(once.includes('"radiusM": 97500.0'), 'numbers keep their spelling');
+});
+
+test('the ADAM mesh keeps the primary error bound where it reaches the face target, and takes the next hundred metres otherwise', async () => {
+  // A bumpy 100 km sphere of 2,592 triangles, in kilometres like the survey releases.
+  const rows = 36, columns = 72, vertices: string[] = [], faces: string[] = [], index = (r: number, c: number) => 2 + (r - 1) * columns + (c % columns);
+  const point = (latitude: number, longitude: number) => { const radius = 100 + 3 * Math.sin(3 * longitude) * Math.cos(2 * latitude);
+    return `v ${radius * Math.cos(latitude) * Math.cos(longitude)} ${radius * Math.cos(latitude) * Math.sin(longitude)} ${radius * Math.sin(latitude)}`; };
+  vertices.push(point(Math.PI / 2, 0), point(-Math.PI / 2, 0));
+  for (let r = 1; r < rows; r++) for (let c = 0; c < columns; c++) vertices.push(point(Math.PI / 2 - r * Math.PI / rows, c * 2 * Math.PI / columns));
+  for (let c = 0; c < columns; c++) { faces.push(`f 1 ${index(1, c)} ${index(1, c + 1)}`); faces.push(`f 2 ${index(rows - 1, c + 1)} ${index(rows - 1, c)}`); }
+  for (let r = 1; r < rows - 1; r++) for (let c = 0; c < columns; c++) faces.push(`f ${index(r, c)} ${index(r + 1, c)} ${index(r + 1, c + 1)}`, `f ${index(r, c)} ${index(r + 1, c + 1)} ${index(r, c + 1)}`);
+  const path = `${mkdtempSync(`${tmpdir()}/adam-`)}/body_adam.obj`;
+  writeFileSync(path, [...vertices, ...faces].join('\n') + '\n');
+  const counts = { vertices: vertices.length, faces: faces.length }, grid = { metersPerUnit: 1000, expectedVertices: 0, expectedFaces: 0 };
+  const loose = await adamSimplification({ method: 'source-meshoptimizer', targetFaces: 800, maximumErrorMeters: 50_000, regularize: true }, path, grid, counts, 800, 230 / 100_000);
+  assert.equal(loose.maximumErrorMeters, 50_000, 'a bound that already reaches the target stays');
+  const tight = await adamSimplification({ method: 'source-meshoptimizer', targetFaces: 800, maximumErrorMeters: 10, regularize: true }, path, grid, counts, 800, 230 / 100_000);
+  assert.ok(tight.maximumErrorMeters > 10 && tight.maximumErrorMeters % 100 === 0, `a tight bound becomes the next hundred metres: ${tight.maximumErrorMeters}`);
 });

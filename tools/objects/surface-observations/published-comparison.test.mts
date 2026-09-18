@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { COMPARISON_SPEC_FILE, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, figureBands, figureCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from './published-comparison.mts';
+import { COMPARISON_SPEC_FILE, axisDifferenceDegrees, belowTopLines, bestImageTurnDegrees, columnCells, figureBands, figureCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from './published-comparison.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const DEGREE = Math.PI / 180;
@@ -50,7 +50,7 @@ test('a figure that continues its epochs in a second band is read band by band',
   const figure: Raster = { width, height, channels: 3, data };
   assert.deepEqual(figureBands(figure), [{ x0: 20, x1: 180, y0: 10, y1: 130 }, { x0: 20, x1: 260, y0: 180, y1: 300 }], 'top band first; the small mark is no band');
   const columns = [0, 0, 1, 1, 1].map((band, index) => ({ label: `c${index}`, frame: null, band }));
-  const cell = columnCells(figure, { rows: { image: 0, model: 1, count: 2 }, columns });
+  const cell = columnCells(figure, { rows: { image: 0, model: 1, count: 2, labelLines: 0 }, columns });
   assert.deepEqual(cell(1, 1), { x0: 100, x1: 180, y0: 70, y1: 130 }, 'second column of the top band, model row');
   assert.deepEqual(cell(0, 4), { x0: 180, x1: 260, y0: 180, y1: 240 }, 'third column of the bottom band, photograph row');
   assert.throws(() => figureCells(figure, 2, 2, 2), /2 dark bands; band 2 does not exist/);
@@ -64,6 +64,22 @@ test('a panel’s body is its largest bright region, without the axis arrow outs
   const [cx, cy] = centres[1][1], box = cells[1][1], at = (x: number, y: number) => drawn.data[(y - box.y0) * drawn.width + (x - box.x0)];
   assert.equal(at(Math.round(cx + 32 * Math.cos(20 * DEGREE)), Math.round(cy - 32 * Math.sin(20 * DEGREE))), 0, 'the arrow past the limb is not body');
   assert.equal(at(Math.round(cx - 12 * Math.cos(20 * DEGREE)), Math.round(cy + 12 * Math.sin(20 * DEGREE))), 1, 'the arrow across the body is');
+});
+
+test('a photograph panel\'s printed label lines stay out of the body even when the closing would join them', () => {
+  // Two white text lines at the top of a black panel, and a grey body starting two rows under the second.
+  const width = 120, height = 120, data = new Uint8Array(width * height * 3);
+  const paint = (x0: number, y0: number, x1: number, y1: number, value: number) => { for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) data.fill(value, (y * width + x) * 3, (y * width + x) * 3 + 3); };
+  paint(20, 6, 100, 18, 255); paint(30, 22, 90, 34, 255);
+  for (let y = 36; y < 110; y++) for (let x = 10; x < 110; x++) if ((x - 60) ** 2 + (y - 72) ** 2 <= 36 ** 2) paint(x, y, x + 1, y + 1, 170);
+  const figure: Raster = { width, height, channels: 3, data }, box = { x0: 0, y0: 0, x1: width, y1: height };
+  const top = (mask: Mask) => { for (let y = 0; y < mask.height; y++) for (let x = 0; x < mask.width; x++) if (mask.data[y * mask.width + x]) return y; return -1; };
+  assert.ok(top(panelDisc(figure, box)) < 34, 'without it the second line joins the body');
+  assert.equal(top(panelDisc(figure, box, 40, 2)), 36);
+  assert.equal(belowTopLines(figure, box, 2), 34);
+  const tallData = new Uint8Array(data), tall: Raster = { width, height, channels: 3, data: tallData };
+  for (let y = 18; y < 36; y++) for (let x = 55; x < 65; x++) tallData.fill(255, (y * width + x) * 3, (y * width + x) * 3 + 3);
+  assert.equal(belowTopLines(tall, box, 2), 6, 'a run of ink taller than a line of text is not skipped');
 });
 
 test('the drawn spin axis is read as an angle on the image, and folded differences stay within a quarter turn', () => {

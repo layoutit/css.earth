@@ -88,7 +88,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
     if (!(Math.abs(Date.parse(`${column.label}Z`) - Date.parse(`${camera.exposure.start}Z`)) < 1000))
       throw new TypeError(`Figure column ${column.label} names ${column.frame}, whose exposure starts at ${camera.exposure.start}.`);
     const { width, height } = decodeCalibratedCamera(await readFile(resolve(sourceDirectory, camera.path)), 'fits-zimpol-intensity');
-    const caster = observerCaster(camera.sighting, base), model = panelDisc(figure, cell(spec.rows.model, index)), photograph = panelDisc(figure, cell(spec.rows.image, index));
+    const caster = observerCaster(camera.sighting, base), model = panelDisc(figure, cell(spec.rows.model, index)), photograph = panelDisc(figure, cell(spec.rows.image, index), 40, spec.rows.labelLines);
     const turns: Record<string, number> = {};
     for (let turn = 0; turn < 360; turn += TURN_STEP) turns[turn] = round(outlineOverlap(render(turn === 0 ? caster : caster.turned(turn), width, height).mask, model));
     const drawn = render(caster, width, height);

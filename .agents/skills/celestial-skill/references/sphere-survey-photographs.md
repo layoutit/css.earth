@@ -37,6 +37,8 @@ the way it:
 - takes every file from this machine when a copy exists, and downloads the rest
   from LAM with its public cookie;
 - reads the spin record in the column order the published pole supports;
+- gives the ADAM mesh the body's own mesh settings, raising the simplification error bound to the next
+  100 m above what the ADAM mesh reaches at the face target when the body's bound falls short;
 - writes both Horizons tables, derives every camera and measures the figure.
 
 It stops with the reason when the body's pole is not the survey's own, when

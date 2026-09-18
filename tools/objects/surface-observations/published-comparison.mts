@@ -20,8 +20,9 @@ export interface ComparisonSpec {
   schema: string; lensId: string; source: string; figure: string;
   /** The figure as an image object of a pinned paper: the manifest input, the object number and the decoded pixels' identity. */
   document: { input: string; object: number; width: number; height: number; sha256: string };
-  /** The rows of photographs and of the model the lens rides, counted from the top of the figure's dark band, and how many image rows the band holds. */
-  rows: { image: number; model: number; count: number };
+  /** The rows of photographs and of the model the lens rides, counted from the top of the figure's dark band, how many image rows the
+   * band holds, and how many lines of text each photograph panel prints at its top, which the body's outline leaves out. */
+  rows: { image: number; model: number; count: number; labelLines: number };
   /** One entry per figure column, band by band and left to right within a band: its printed label and the lens frame it shows, or null for an epoch the lens does not use. A figure with more epochs than fit one band continues them in a second band below. */
   columns: ComparisonColumn[];
 }
@@ -38,7 +39,8 @@ export function parseComparisonSpec(value: unknown): ComparisonSpec {
   const spec: ComparisonSpec = {
     schema: COMPARISON_SPEC_SCHEMA, lensId: requireString(record.lensId, 'lensId'), source, figure: requireString(record.figure, 'figure'),
     document: { input: requireString(document.input, 'document input'), object: integer(document.object, 'document object'), width: integer(document.width, 'figure width'), height: integer(document.height, 'figure height'), sha256 },
-    rows: { image: integer(rows.image, 'image row'), model: integer(rows.model, 'model row'), count: integer(rows.count, 'row count') },
+    rows: { image: integer(rows.image, 'image row'), model: integer(rows.model, 'model row'), count: integer(rows.count, 'row count'),
+      labelLines: rows.labelLines === undefined ? 0 : integer(rows.labelLines, 'label lines') },
     columns: requireArray(record.columns, 'columns').map((value, index) => {
       const column = requireRecord(value, `column ${index}`);
       return { label: requireString(column.label, `column ${index} label`), frame: column.frame === null ? null : requireString(column.frame, `column ${index} frame`),
@@ -128,10 +130,29 @@ function dilate(mask: Uint8Array, width: number, height: number, radius: number,
   return out;
 }
 
-/** The body in one panel: its largest bright region with the red axis arrows removed and the thin gap they leave closed, holes filled. */
-export function panelDisc(figure: Raster, box: Box, threshold = 40): Mask {
+/** A printed line of text is at most this many rows tall; a taller run of ink rows is the body, not a label. */
+const TEXT_LINE_ROWS = 24;
+/** The first row below the given number of text lines at the top of a panel. A line is a run of rows with ink, parted from
+ * the next by an empty row; a run too tall to be text ends the search, so a body that touches its label is never cut. */
+export function belowTopLines(figure: Raster, box: Box, lines: number) {
+  const inkRow = (y: number) => { for (let x = box.x0 + 4; x < box.x1 - 4; x++) if (Math.max(pixel(figure, x, y, 0), pixel(figure, x, y, 1), pixel(figure, x, y, 2)) > 128) return true; return false; };
+  let y = box.y0;
+  for (let line = 0; line < lines; line++) {
+    while (y < box.y1 && !inkRow(y)) y++;
+    const start = y;
+    while (y < box.y1 && inkRow(y)) y++;
+    if (y - start > TEXT_LINE_ROWS) return start;
+  }
+  return y;
+}
+
+/** The body in one panel: its largest bright region with the red axis arrows removed and the thin gap they leave closed, holes
+ * filled. Printed lines of text at the top of the panel, such as a photograph's date and phase, are left out first, since the
+ * closing would otherwise join a label that nearly touches the body. */
+export function panelDisc(figure: Raster, box: Box, threshold = 40, labelLines = 0): Mask {
   const width = box.x1 - box.x0, height = box.y1 - box.y0, bright = new Uint8Array(width * height);
-  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+  const firstRow = labelLines > 0 ? belowTopLines(figure, box, labelLines) - box.y0 : 0;
+  for (let y = firstRow; y < height; y++) for (let x = 0; x < width; x++) {
     const X = box.x0 + x, Y = box.y0 + y, gray = (pixel(figure, X, Y, 0) + pixel(figure, X, Y, 1) + pixel(figure, X, Y, 2)) / 3;
     bright[y * width + x] = +(gray > threshold && !isRed(figure, X, Y));
   }

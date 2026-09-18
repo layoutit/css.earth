@@ -25,6 +25,9 @@ import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells,
 import { OBSERVER_CAMERAS_FILE, OBSERVER_CAMERAS_SCHEMA, deriveObserverCameras, parseObserverCameras, recipeFields, zimpolExposure } from '../terrestrial-layers/observer-cameras.mts';
 import { radialTerrainForLens } from '../terrestrial-layers/radial-models.mts';
 import { loadCameraShape } from '../terrestrial-layers/shape-camera-mosaic.mts';
+import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
+import type { RadialSimplification } from '../terrestrial-layers/radial-meshoptimizer.mts';
+import { requireTerrainMesh, simplifyRadialShape } from '../terrestrial-layers/radial-terrain.mts';
 import { publishedPole, spinRecordReading } from '../terrestrial-layers/spin-record-reading.mts';
 import { glyphTemplates, readLabel } from './figure-labels.mts';
 import { selectFrames } from './frames.mts';
@@ -35,8 +38,8 @@ export const LENS_ID = 'zimpol';
 export const SETUP_SCHEMA = 'cssearth-sphere-survey-setup@1';
 const PAPER_PATH = 'reference/vernazza-2021.pdf', SPIN_RECORD_PATH = 'reference/release-parameters.txt';
 const HORIZONS = { observer: 'reference/horizons-sphere-observer.txt', heliocentric: 'reference/horizons-sphere-heliocentric.txt' } as const;
-/** The survey figures print every panel 240 pixels square. */
-const PANEL = 240;
+/** The survey figures print every panel 240 pixels square, and each photograph panel two lines of text at its top: the frame's time and its phase. */
+const PANEL = 240, SURVEY_LABEL_LINES = 2;
 /** The one figure whose labels were read by eye and confirmed against frame headers; its glyphs read every other figure. */
 const REFERENCE_FIGURE = { objectId: 'iris', object: 1085 } as const;
 
@@ -188,10 +191,11 @@ export async function buildSetup(objectId: string) {
   const paperInput = requireArray(manifest.inputs).map(value => requireRecord(value)).find(input => input.path === PAPER_PATH);
   const spec = { schema: COMPARISON_SPEC_SCHEMA, lensId: LENS_ID, source: paperPin.source, figure: `Figure ${figure.figure}`,
     document: { input: paperInput ? requireString(paperInput.id) : `${objectId}-survey-research`, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
-    rows: { image: 0, model: rows - 1, count: rows }, columns };
+    rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
   const counts = objCounts(adam.toString('utf8')), primary = requireRecord(geometry.radialTerrain);
-  const alternative = { lensId: LENS_ID, ...primary, path: adamPath, grid: { ...requireRecord(primary.grid), expectedVertices: counts.vertices, expectedFaces: counts.faces } };
+  const alternative = { lensId: LENS_ID, ...primary, path: adamPath, grid: { ...requireRecord(primary.grid), expectedVertices: counts.vertices, expectedFaces: counts.faces },
+    ...(primary.simplification === undefined ? {} : { simplification: await adamSimplification(requireRecord(primary.simplification), resolve(source, adamPath), requireRecord(primary.grid), counts, Number(primary.faceBudget), Number(geometry.radius) / (Number(geometry.radiusKm) * 1000)) }) };
   requireArray(geometry.radialTerrainAlternatives).push(alternative);
   const mesh = await loadCameraShape(source, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], LENS_ID));
   const cameras = await deriveObserverCameras(source, parseObserverCameras(record), frames, mesh, ROOT);
@@ -229,6 +233,21 @@ export async function buildSetup(objectId: string) {
     written: written.sort(), earlierLens: earlierLens ? compareEarlierLens(earlierLens, lens) : null, evidence: result.evidence };
   await writeFile(resolve(work, 'setup.json'), JSON.stringify(setup, null, 2) + '\n');
   return setup;
+}
+
+/**
+ * The ADAM mesh is simplified to the primary mesh's face target. Its error bound is the primary's wherever that reaches
+ * the target, as it does for Iris and Hebe; otherwise it is the next hundred metres above the error the ADAM mesh
+ * reaches there, the rule the primary bounds were authored by.
+ */
+export async function adamSimplification(primary: Record<string, unknown>, path: string, grid: Record<string, unknown>, counts: { vertices: number; faces: number }, faceBudget: number, scale: number) {
+  const simplification = { ...primary } as unknown as RadialSimplification;
+  if (primary.method !== 'source-meshoptimizer') return simplification;
+  const mesh = requireTerrainMesh(await loadObjShape(path, { ...grid, expectedVertices: counts.vertices, expectedFaces: counts.faces }));
+  const probe = await simplifyRadialShape(mesh, { faceBudget, simplification: { ...simplification, maximumErrorMeters: 1e9 } }, scale);
+  const reached = requireFiniteNumber(requireRecord(probe.simplification).estimatedErrorMeters, 'estimated error');
+  if (reached > simplification.maximumErrorMeters) simplification.maximumErrorMeters = Math.ceil(reached / 100) * 100;
+  return simplification;
 }
 
 /** How a rebuilt lens compares with the one the package already has: its frames and every camera field. */
