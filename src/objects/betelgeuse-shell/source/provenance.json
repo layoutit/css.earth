@@ -57,8 +57,14 @@
       513.0008794032184,
       429.0879365019645
     ],
+    "polarisationCentrePixel": [
+      502.39784946236557,
+      428.4301075268817
+    ],
+    "polarisationMaskRadiusUnits": 0.9261683067390526,
+    "productOffsetPixels": 10.623416723779588,
     "intensityPeak": 244980.17392728516,
-    "polarisationFloor": 0.005475879376362386,
+    "polarisationFloor": 0.0054274498079658565,
     "pixelsPerStellarRadius": 5.874577295655155,
     "colourMap": "inferno",
     "colourScaleTopDegree": 0.1,
@@ -84,6 +90,7 @@
   "limitations": [
     "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
     "The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.",
+    "The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.",
     "The 2024 colours are the publisher's inferno colour map for that ratio, on the same zero-to-0.10 scale as their figure. They are a legend, not the colour of the dust and not a temperature.",
     "Brightness follows the renderer's 1-exp(-gain*column) transfer rather than the flat bar of a printed figure, so mid-scale values sit brighter than a linear colourbar would put them; the hue at every value is the published one.",
     "Four colour stops are the most an RGBA8 grid can carry, so the bar is interpolated between quarters rather than sampled continuously.",

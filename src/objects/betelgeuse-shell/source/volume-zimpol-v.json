@@ -2,8 +2,8 @@
   "schema": "cssearth-volume-recipe@1",
   "grid": {
     "path": "density-zimpol-v.ktx2",
-    "sha256": "a1a27bf5436b26a0a8c55e8c2fc5a1e147b657269f64a6cdc12d28b39205eab3",
-    "decodedSha256": "d0ef29c8722eb0d2758535e13b58965a03126848eafdd6a5edc6a9c66aa76a33",
+    "sha256": "f3200dee8c7df55fd2d74e034853ee10d7290d3a6d72ec36807a7ed90b60b8b3",
+    "decodedSha256": "9eab9eb813f41014db3551bf99a90048bd4f4b554e01218d3c3621eb0cf62c04",
     "dimensions": [
       96,
       96,
@@ -97,6 +97,6 @@
   ],
   "provenance": {
     "path": "provenance.json",
-    "sha256": "27e8dc0655041b50153f75a0ea0e21d279a989c5c91f6dede471da0d200fd079"
+    "sha256": "441b0693772d684aa6be611ff98855209d1f4e5c51ed12bc738d8dcaab42b9f5"
   }
 }

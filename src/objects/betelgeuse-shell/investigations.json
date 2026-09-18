@@ -20,6 +20,22 @@
       ]
     },
     {
+      "id": "product-registration",
+      "subject": "Where the star sits inside the 2024 polarisation map",
+      "status": "included",
+      "finding": "The two released V-band products carry one WCS but are not pixel-aligned to each other, and a first version of this package did not notice. The intensity image puts the star at pixel (513.00, 429.09), agreed by its peak, its half-maximum silhouette centroid and its ten-percent centroid. The degree map instead marks the stellar disc by setting 93 pixels to exact zero, a disc of 0.93 stellar radii centred at (502.40, 428.43); nothing else in that frame is exactly zero. The centres are 10.6 pixels apart, 38 mas, 1.8 stellar radii. Sampling the degree map about the intensity centre put the whole polarised envelope nearly two stellar radii off the star, which is visible in the render as the star standing outside its own cavity. Each product is now read about its own centre, and the author fails if the degree map marks no disc or marks one that is not about one stellar radius across. Verified against the publishers' own Fig. B.1, which is shipped in this package: its axis ticks calibrate the panel at 0.31348 mas per pixel with no assumption, its red circle is 21.0 mas in radius against this package's 21.15, and fitting the panel to the degree map at that scale peaks at 0.798 normalised cross-correlation with the figure's origin at degree-map pixel (501.53, 430.31). The old sampling centre scores 0.282 against that fit and the new one 0.771, 0.35 stellar radii from the paper's marker. The same fit settles the grid's handedness: the mirrored alternatives reach only 0.455 and 0.421, so increasing image column is west, as the sampling assumes.",
+      "evidence": [
+        "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+        "https://doi.org/10.1051/0004-6361/202661023"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "640a2a870133f46e57d14c59df37bae53f22721b"
+        }
+      ]
+    },
+    {
       "id": "polarisation-colour-map",
       "subject": "How to colour a map of a dimensionless ratio in a volume",
       "status": "included",

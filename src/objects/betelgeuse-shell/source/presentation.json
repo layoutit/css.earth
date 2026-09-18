@@ -5,20 +5,20 @@
   "defaultLens": "zimpol-v",
   "bank": {
     "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "a2ae3067888d1c5f9107230fa36ac41814df7b7104a01f30bc18644b7e0e2600",
-    "bytes": 165343
+    "sha256": "193f5c2d868b1e1ee9a903296b032d6a2e03b52960a05d6e47a403af930838ba",
+    "bytes": 166363
   },
   "recipes": [
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "8427dcd02628066e73c6bbddb3e71e820d6fb692c57bfb26b669fe934ed9c3ef",
+      "sha256": "a3a60ecb8d9331690707324cd20e1bb7f8bb7a00a8f7e85f78329fbb25521254",
       "bytes": 1838
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "86d3338c3f5b93a4a14350131ec41077a5bcff590bc41dc695f9b2fe6bc9f327",
+      "sha256": "0605d13dad712596a70ddd837950a694490e4a9780edd1f239c7c432a2602b5c",
       "bytes": 1523
     }
   ],

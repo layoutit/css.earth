@@ -156,9 +156,20 @@ export async function author(defaultLens = 'zimpol-v') {
     cx = sx / s; cy = sy / s;
   }
   const peakValue = I[peakIndex]!;
+  // The two released products share one WCS but are NOT pixel-aligned to each other, so the star's place in the
+  // polarisation map has to be measured on the polarisation map. It marks the stellar disc by setting it to exact
+  // zero, which nothing else in the frame is; that masked disc is the star. Its centroid is about eleven columns from
+  // the intensity centroid, and the published figure's own origin marker agrees with the mask, not with the intensity.
+  // Sampling the degree map about the intensity centre put the whole envelope two stellar radii off the star.
+  let mx = 0, my = 0, masked = 0;
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (P[y * width + x] === 0) { mx += x; my += y; masked++; }
+  if (!masked) throw new Error('The polarisation product marks no stellar disc; its centre cannot be measured.');
+  const px = mx / masked, py = my / masked, maskedRadiusUnits = Math.sqrt(masked / Math.PI) / pixelsPerUnit;
+  if (!(maskedRadiusUnits > 0.5 && maskedRadiusUnits < 1.5)) throw new Error(`The polarisation mask is ${maskedRadiusUnits.toFixed(2)} stellar radii; it is not the stellar disc.`);
+  const productOffsetPixels = Math.hypot(px - cx, py - cy);
   const floorSamples: number[] = [];
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-    const r = Math.hypot(x - cx, y - cy) / pixelsPerUnit;
+    const r = Math.hypot(x - px, y - py) / pixelsPerUnit;
     if (r >= STRETCH.backgroundAnnulusUnits[0] && r < STRETCH.backgroundAnnulusUnits[1]) floorSamples.push(P[y * width + x]!);
   }
   floorSamples.sort((a, b) => a - b);
@@ -168,8 +179,9 @@ export async function author(defaultLens = 'zimpol-v') {
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
     // This grid's axes: x toward increasing image column (west), y toward increasing image row (north), z away from the observer.
     const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step, r = Math.hypot(x, y);
-    const col = cx + x * pixelsPerUnit, row = cy + y * pixelsPerUnit;
-    if (r < STRETCH.innerMaskUnits || bilinear(I, width, height, col - 0.5, row - 0.5) < STRETCH.intensityFloorOfPeak * peakValue) continue;
+    // Each product is read about its own stellar centre, because they are offset from one another.
+    const col = px + x * pixelsPerUnit, row = py + y * pixelsPerUnit;
+    if (r < STRETCH.innerMaskUnits || bilinear(I, width, height, cx + x * pixelsPerUnit - 0.5, cy + y * pixelsPerUnit - 0.5) < STRETCH.intensityFloorOfPeak * peakValue) continue;
     const degree = bilinear(P, width, height, col - 0.5, row - 0.5) - background;
     plane[j * size + i] = Math.max(0, Math.min(1, degree / (STRETCH.topDegree - background))) * (1 - smoothstep(STRETCH.taperFromUnits, halfUnits, r));
     let sum = 0; const r2 = x * x + y * y;
@@ -241,7 +253,8 @@ export async function author(defaultLens = 'zimpol-v') {
       { id: 'veil-parameters', url: 'https://doi.org/10.1038/s41586-021-03546-8', preprint: 'https://arxiv.org/abs/2201.10551', role: 'Montargès et al. 2021, Nature 594, 365, Extended Data Table 3 and Figure 6: the December 2019 clump centre, radius, density, composition and grain size, and the coordinate system they are given in' },
     ],
     paper: { doi: '10.1051/0004-6361/202661023', citation: 'Montargès et al. 2026, A&A 711, L12 (the 2024 polarimetry)' },
-    measured: { starCentrePixel: [cx, cy], intensityPeak: peakValue, polarisationFloor: background, pixelsPerStellarRadius: pixelsPerUnit,
+    measured: { starCentrePixel: [cx, cy], polarisationCentrePixel: [px, py], polarisationMaskRadiusUnits: maskedRadiusUnits,
+      productOffsetPixels, intensityPeak: peakValue, polarisationFloor: background, pixelsPerStellarRadius: pixelsPerUnit,
       colourMap: COLOUR_MAP.name, colourScaleTopDegree: STRETCH.topDegree, zimpolExposureGain: zimpolGain,
       stellarRadiusArcsec: radiusArcsec, stellarRadiusAu: auPerUnit, sceneOriginRaDecDeg: [raDeg, decDeg], distancePc: distanceM / METERS_PER_PARSEC,
       veilCentreUnits: [...centre], veilRadiusUnits: veilRadius },
@@ -252,6 +265,7 @@ export async function author(defaultLens = 'zimpol-v') {
     limitations: [
       'The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.',
       'The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.',
+      'The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.',
       `The 2024 colours are the publisher's ${COLOUR_MAP.name} colour map for that ratio, on the same zero-to-${STRETCH.topDegree.toFixed(2)} scale as their figure. They are a legend, not the colour of the dust and not a temperature.`,
       `Brightness follows the renderer's 1-exp(-gain*column) transfer rather than the flat bar of a printed figure, so mid-scale values sit brighter than a linear colourbar would put them; the hue at every value is the published one.`,
       'Four colour stops are the most an RGBA8 grid can carry, so the bar is interpolated between quarters rather than sampled continuously.',
