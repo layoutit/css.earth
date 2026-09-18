@@ -204,3 +204,68 @@ test('sky band previews verify their recipe with a warm or cold cache and ignore
     await assert.rejects(preparePreview(temporary, { ...warm, path: `${directory}/spitzer-mid-infrared.tif` }, input), /cached under its own hash/);
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
+
+test('a publisher preview tries the content-addressed mirror first and falls back to the publisher URL', async t => {
+  const { mkdtemp, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { createServer } = await import('node:http');
+  const { preparePreview } = await import('./prepare-volume-provenance.mts');
+  const { sha256 } = await import('../src/platform/sha256.mts');
+  const image = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#048' } }).jpeg().toBuffer();
+  const wrong = Buffer.from('not the pinned bytes, at all, padded past the real length for a clean mismatch');
+  const digest = sha256(image);
+  const requests: string[] = [];
+  const filename = 'archive-original.jpg';
+  let mirrorBehavior: 'serve' | 'miss' | 'wrong' = 'serve';
+  const server = createServer((req, res) => {
+    requests.push(req.url ?? '');
+    if (req.url?.startsWith('/source-cache/')) {
+      if (mirrorBehavior === 'miss') { res.writeHead(404); res.end(); return; }
+      if (mirrorBehavior === 'wrong') { res.writeHead(200); res.end(wrong); return; }
+      res.writeHead(200); res.end(image); return;
+    }
+    if (req.url === `/publisher/${filename}`) { res.writeHead(200); res.end(image); return; }
+    res.writeHead(404); res.end();
+  });
+  await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
+  t.after(() => new Promise<void>(accept => server.close(() => accept())));
+  const address = server.address();
+  assert.ok(address && typeof address !== 'string');
+  const origin = `http://127.0.0.1:${address.port}`;
+  const temporary = await mkdtemp(resolve(tmpdir(), 'publisher-preview-'));
+  t.after(() => rm(temporary, { recursive: true, force: true }));
+  const input = async () => { throw new Error('No source-closure input expected for a publisher preview.'); };
+
+  await t.test('mirror hit: the publisher is never contacted', async () => {
+    requests.length = 0; mirrorBehavior = 'serve';
+    const pin = { path: `downloads/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/${filename}` };
+    const result = await preparePreview(temporary, pin, input, { mirrorOrigin: origin });
+    assert.equal(result.width, 8);
+    assert.deepEqual(requests, [`/source-cache/${digest}/${filename}`]);
+    await rm(resolve(temporary, pin.path));
+  });
+
+  await t.test('mirror miss (404): falls back to the publisher URL', async () => {
+    requests.length = 0; mirrorBehavior = 'miss';
+    const pin = { path: `downloads-2/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/${filename}` };
+    const result = await preparePreview(temporary, pin, input, { mirrorOrigin: origin });
+    assert.equal(result.width, 8);
+    assert.deepEqual(requests, [`/source-cache/${digest}/${filename}`, `/publisher/${filename}`]);
+    await rm(resolve(temporary, pin.path));
+  });
+
+  await t.test('mirror serves the wrong bytes: sha verification rejects it and falls back to the publisher', async () => {
+    requests.length = 0; mirrorBehavior = 'wrong';
+    const pin = { path: `downloads-3/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/${filename}` };
+    const result = await preparePreview(temporary, pin, input, { mirrorOrigin: origin });
+    assert.equal(result.width, 8);
+    assert.deepEqual(requests, [`/source-cache/${digest}/${filename}`, `/publisher/${filename}`]);
+    await rm(resolve(temporary, pin.path));
+  });
+
+  await t.test('mirror and publisher both fail: the caller sees a clear error, not a silent empty result', async () => {
+    requests.length = 0; mirrorBehavior = 'miss';
+    const pin = { path: `downloads-4/${filename}`, sha256: digest, bytes: image.length, url: `${origin}/publisher/does-not-exist.jpg` };
+    await assert.rejects(preparePreview(temporary, pin, input, { mirrorOrigin: origin }), /Preview download failed/);
+  });
+});

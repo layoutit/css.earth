@@ -2,7 +2,7 @@ import { sha256 } from '../src/platform/sha256.mts';
 import { parseProductInputEvidence } from '../src/platform/product-input-evidence.mts';
 import type { ProductInputEvidence } from '../src/platform/product-input-evidence.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import type { Lens } from '../site/planet-shell-types.ts';
@@ -15,6 +15,27 @@ import { hasErrorCode } from './source-values.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { manifestSources } from './context-source-records.mts';
 import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from './objects/observation/sky-band-composite.mts';
+import { RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
+
+/** A once-downloaded copy of every pinned publisher preview lives in R2, content-addressed exactly like a runtime asset.
+ * The publisher stays the provenance URL; the mirror only saves a slow or unreliable third party from blocking a build. */
+export function sourceCacheUrl(origin: string, sha256Digest: string, filename: string): string {
+  return `${origin}/source-cache/${sha256Digest}/${filename}`;
+}
+
+/** Fetch with a generous timeout and a couple of retries: publisher archives (ESO/NASA/CDS originals) are large and occasionally
+ * slow, and a single timed-out attempt should not fail a build that a retry would have survived. */
+export async function fetchWithRetry(url: string, { timeoutMs = 600000, attempts = 3 }: { timeoutMs?: number; attempts?: number } = {}): Promise<Buffer<ArrayBuffer>> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    try {
+      const response = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return Buffer.from(await response.arrayBuffer());
+    } catch (error) { lastError = error; }
+  }
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+}
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts',
   'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'tools/fits.mts'] as const;
@@ -106,7 +127,8 @@ interface Options {
   input?: (path: string) => Promise<Buffer>;
 }
 
-export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>): Promise<{ bytes: Buffer; width: number; height: number }> {
+export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>,
+  { mirrorOrigin = RUNTIME_ASSET_ORIGIN }: { mirrorOrigin?: string } = {}): Promise<{ bytes: Buffer; width: number; height: number }> {
   const path = resolve(root, pin.path);
   if (pin.skyBands) {
     // The recipe is source closure whether or not its composite is already cached.
@@ -121,9 +143,14 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed sky band preview: ${pin.skyBands.path}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   } else if (bytes === null) {
-    const response = await fetch(pin.url!, { signal: AbortSignal.timeout(60000) });
-    if (!response.ok) throw new Error(`Preview download failed: ${response.status} ${pin.url}`);
-    bytes = Buffer.from(await response.arrayBuffer());
+    // Try the content-addressed mirror first: it is our own reliable storage, sha-verified before use. A miss, a mismatch or
+    // any mirror error falls back to the publisher URL, which stays the provenance origin either way.
+    const mirrorUrl = sourceCacheUrl(mirrorOrigin, pin.sha256, basename(pin.path));
+    bytes = await fetchWithRetry(mirrorUrl, { timeoutMs: 60000, attempts: 1 })
+      .then(candidate => (candidate.length === pin.bytes && sha256(candidate) === pin.sha256) ? candidate : null)
+      .catch(() => null);
+    if (bytes === null) bytes = await fetchWithRetry(pin.url!, { timeoutMs: 600000, attempts: 3 })
+      .catch((error: unknown) => { throw new Error(`Preview download failed: ${pin.url} (${error instanceof Error ? error.message : String(error)})`); });
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed publisher preview: ${pin.url}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   }
