@@ -7,7 +7,7 @@ import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '../../../src/platform/sha256.mts';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '../color-transfer.mts';
-import { composeSkyBands, parseSkyBandComposite, skyBandCompositeFile, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
+import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandCompositeFile, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from './sky-band-composite.mts';
 import { gridWcs } from './wise-atlas-mosaic.mts';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };
@@ -202,3 +202,11 @@ test('a JWST product for another filter, or changed bytes, is refused', async ()
   });
   assert.throws(() => recipe([{ band: 'NIRCAM-F187N', product: 'not-a-product.fits', sha256: '0'.repeat(64), bytes: 5760 }]), /level-3 i2d/u);
 });
+
+test('the planes a volume reads are each band divided by its own measured range, before any display', () =>
+  withMast(i2d('F187N', 'CLEAR', east => 100 + 10 * east), async (cache, pin) => {
+    const planes = await composeSkyBandPlanes(recipe([{ band: 'NIRCAM-F187N', product, ...pin }]), { input: noInput, cache });
+    const finite = Array.from(planes.values).filter((_, p) => !planes.missing[p]).sort((a, b) => a - b);
+    assert.ok(Math.abs(finite[Math.floor(0.05 * (finite.length - 1))]!) < 1e-6, 'the background percentile maps to 0');
+    assert.ok(Math.abs(finite.at(-1)! - 1) < 1e-6, 'the peak percentile maps to 1');
+  }));

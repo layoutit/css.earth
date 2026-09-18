@@ -354,8 +354,10 @@ function percentilesOf(values: Float32Array, ...percentiles: number[]): number[]
   return percentiles.map(percentile => finite[Math.floor(percentile / 100 * (finite.length - 1))]!);
 }
 
-/** DOM row order (top row first), one RGB byte triple per pixel, with the grid's TAN WCS. */
-export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
+/** Every band on the grid, calibrated and divided by its own measured range, before any display: one float per band per
+ * pixel (band-interleaved, top row first) and the pixels no band observed. A consumer with its own transfer, such as a volume
+ * whose renderer applies 1 - exp(-gain * column), reads these instead of display bytes, so the image is not stretched twice. */
+export async function composeSkyBandPlanes(recipe: SkyBandComposite, io: SkyBandIo) {
   const { width, height } = recipe.grid, count = width * height, bandCount = recipe.bands.length;
   const values = new Float32Array(count * bandCount), missing = new Uint8Array(count), bands = [];
   for (const [b, input] of recipe.bands.entries()) {
@@ -386,6 +388,12 @@ export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
         brightestStars: saturation.stars.slice(0, 8) } } : {}) });
     io.progress?.(`${input.band}: ${route.toMJyPerSr === null ? 'relative units' : 'calibrated'}; background ${background.toFixed(3)} and peak ${peak.toFixed(3)} ${route.toMJyPerSr === null ? 'source units' : 'MJy/sr'}`);
   }
+  return { width, height, values, missing, bands };
+}
+
+/** DOM row order (top row first), one RGB byte triple per pixel, with the grid's TAN WCS. */
+export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
+  const { width, height, values, missing, bands } = await composeSkyBandPlanes(recipe, io), count = width * height;
   const encoded = encodeAsinhBands(values, missing, recipe.display);
   const channels = recipe.coverage === 'alpha' ? 4 as const : 3 as const;
   let rgb = encoded;
