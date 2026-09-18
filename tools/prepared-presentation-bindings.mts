@@ -1,4 +1,5 @@
-import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill } from './prepared-interior-fill.mts';
+import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFill, type SurfaceMeanExclusion } from './prepared-interior-fill.mts';
+import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../src/platform/prepare-missing-coverage.mts';
 import { isRecord } from './source-values.mts';
 import type { PreparedInteriorDisc } from '../src/renderers/css/rendering/prepared-interior-disc.ts';
 import type { PreparedPresentationDefinition, PreparedVariant } from '../src/renderers/css/rendering/prepared-presentation.ts';
@@ -24,6 +25,13 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!url.startsWith(`/scenes/${input.id}/`)) throw new Error(`Interior fill asset ${url} is not this object's scene asset.`);
     return resolve(publicDirectory, basename(url));
   } : resolve(root, 'public');
+  // A body that declares how it fills a data gap keeps that convention out of its interior colour: the disc stands in
+  // for the surface behind the leaves, and a map that is mostly gap would otherwise give it a colour nobody sees.
+  const declaredFill: unknown = await readFile(resolve(root, 'src/objects', input.id, 'source/preparation/raster.json'), 'utf8')
+    .then(text => (JSON.parse(text) as { missingCoverage?: unknown }).missingCoverage, () => undefined);
+  const gapExclusion: SurfaceMeanExclusion | undefined = isMissingCoverageStyle(declaredFill)
+    ? { colors: [MISSING_COVERAGE_STYLES[declaredFill].base, MISSING_COVERAGE_STYLES[declaredFill].line], tolerance: 20 }
+    : undefined;
   const definition = restoreDepthSource(withoutPreparedInteriorFill(input));
   const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', definition.id, 'object.json'), 'utf8'));
   const recipe = isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) ? descriptor.properties.recipe : null;
@@ -291,7 +299,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       return { interior, surface: finalSurface, depthReason: variableSurface ? 'selection-dependent geometry' : depthReason, motion: [...tracks.values()], facing: [...planes].flatMap(([target, binding]) => binding && facingPlane(target) ? [{target, ...binding}] : []) };
     }, { definition: browserDefinition, closed, ratios, inset: interiorFillInset, interiorOnly });
     const { interior, surface, depthReason, ...bindings } = prepared;
-    if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, assetRoot);
+    if (interiorOnly) return withPreparedInteriorFill(withoutPreparedInteriorFill(input), interior, assetRoot, gapExclusion);
     const source = { ...definition, ...bindings, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } };
     let compiled = prepareDepthPartitions(source, surface);
     let reason = depthReason;
@@ -299,6 +307,6 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!compiled.depthPartitions) reason ??= 'no decomposition within carrier budget';
     onDepthResult?.({ id: source.id, source, compiled, surface, reason });
     const activated = { ...compiled, tree: { ...compiled.tree, activationGroups: prepareActivationGroups(compiled) } };
-    return withPreparedInteriorFill(activated, interior, assetRoot);
+    return withPreparedInteriorFill(activated, interior, assetRoot, gapExclusion);
   } finally { await page.close(); if (!suppliedBrowser) await browser.close(); }
 }
