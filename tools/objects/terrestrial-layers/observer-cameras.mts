@@ -23,7 +23,16 @@ export const OBSERVER_CAMERAS_FILE = 'preparation/observer-cameras.json';
 export const LEAP_SECONDS_KERNEL = 'src/spice/cassini/lsk/naif0012.tls';
 
 const parseRotation = shape({ kind: text, path: text, columnOrder: optional(text), body: optional(number) });
-const parseRecord = shape({ schema: text, lensId: text, rotation: parseRotation, ephemeris: shape({ observer: text, heliocentric: text }), epoch: text, centre: shape({ method: text, edgeFraction: number }) });
+/**
+ * The published comparison a ground-based lens ships on. The survey papers register a model by fitting shape, spin and a
+ * per-image offset together and show the fit as a figure per epoch; they state no independent check. A lens whose cameras
+ * reproduce that figure, and on which the authors' own feature identifications land on one surface point, names the paper
+ * by DOI, the figure, and the included ledger entry that holds the measurements. Its registration verdict is then reported
+ * beside the lens, not used as a gate.
+ */
+const parseComparison = shape({ source: text, figure: text, ledgerEntry: text });
+const parseRecord = shape({ schema: text, lensId: text, rotation: parseRotation, ephemeris: shape({ observer: text, heliocentric: text }), epoch: text,
+  centre: shape({ method: text, edgeFraction: number }), publishedComparison: optional(parseComparison) });
 export type ObserverCamerasRecord = ReturnType<typeof parseRecord>;
 
 /** The derivation record, validated: one lens, one rotation model, two Horizons tables, the epoch and centre rules. */
@@ -39,6 +48,12 @@ export function parseObserverCameras(value: unknown): ObserverCamerasRecord {
   } else throw new TypeError(`Unknown rotation model kind ${rotation.kind}.`);
   if (record.epoch !== 'exposure-midpoint') throw new TypeError('The exposure epoch rule is exposure-midpoint.');
   if (record.centre.method !== 'limb' || !(record.centre.edgeFraction > 0 && record.centre.edgeFraction < 1)) throw new TypeError('The centre rule is the limb at a stated fraction of the peak.');
+  const comparison = record.publishedComparison;
+  if (comparison !== undefined) {
+    if (!/^https:\/\/doi\.org\/10\.\S+$/u.test(comparison.source)) throw new TypeError('A published comparison names its paper by DOI URL.');
+    if (!comparison.figure.trim()) throw new TypeError('A published comparison names the figure the cameras reproduce.');
+    if (!/^[a-z0-9][a-z0-9-]*$/u.test(comparison.ledgerEntry)) throw new TypeError('A published comparison names the ledger entry that holds its measurements.');
+  }
   return record;
 }
 

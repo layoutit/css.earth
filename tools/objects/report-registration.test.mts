@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END, registrationBlock, registrationVerdict, withRegistrationBlock } from './report-registration.mts';
+import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './terrestrial-layers/observer-cameras.mts';
 
 const OBJECTS = resolve(import.meta.dirname, '../../src/objects');
 
@@ -42,17 +43,43 @@ test('a lens registers only when every measurement that reached a verdict is wit
 // offsets disagree reaches no verdict, so it no longer contradicts frames that do agree with the camera.
 const KNOWN_CONFLICTS = new Set<string>([]);
 
-test('no shipped lens contradicts its own registration unless it is a named known conflict', () => {
+/** The published comparison a body's ground-based lens ships on, from its observer-cameras record, or null. */
+function publishedComparison(id: string) {
+  const path = resolve(OBJECTS, id, 'source', OBSERVER_CAMERAS_FILE);
+  if (!existsSync(path)) return null;
+  const record = parseObserverCameras(JSON.parse(readFileSync(path, 'utf8')));
+  return record.publishedComparison ? { lensId: record.lensId, ...record.publishedComparison } : null;
+}
+
+test('no shipped lens contradicts its own registration unless it is a named known conflict or ships on its published comparison', () => {
   const conflicts: string[] = [];
   for (const id of readdirSync(OBJECTS)) {
     const prepared = resolve(OBJECTS, id, 'prepared/surfaces.json');
     if (!existsSync(prepared)) continue;
     for (const lens of (JSON.parse(readFileSync(prepared, 'utf8')) as { surfaces: { id: string; observation?: { registration?: Record<string, unknown> } }[] }).surfaces) {
       const registration = lens.observation?.registration;
-      if (registration?.stage !== undefined && registrationVerdict(registration) === 'conflict') conflicts.push(`${id}/${lens.id}`);
+      if (registration?.stage === undefined || registrationVerdict(registration) !== 'conflict') continue;
+      // A ground-based lens that reproduces its paper's comparison figure ships on that comparison; its verdict is reported, not a gate.
+      if (publishedComparison(id)?.lensId === lens.id) continue;
+      conflicts.push(`${id}/${lens.id}`);
     }
   }
   assert.deepEqual(conflicts.sort(), [...KNOWN_CONFLICTS].sort());
+});
+
+test('a lens that ships on its published comparison is prepared and names an included ledger entry', () => {
+  for (const id of readdirSync(OBJECTS)) {
+    const comparison = publishedComparison(id);
+    if (!comparison) continue;
+    const prepared = resolve(OBJECTS, id, 'prepared/surfaces.json');
+    assert.ok(existsSync(prepared) && (JSON.parse(readFileSync(prepared, 'utf8')) as { surfaces: { id: string }[] }).surfaces.some(lens => lens.id === comparison.lensId),
+      `${id}: the ${comparison.lensId} lens it compares with ${comparison.source} is prepared`);
+    const ledger = JSON.parse(readFileSync(resolve(OBJECTS, id, 'investigations.json'), 'utf8')) as { entries: { id: string; status: string; evidence?: string[] }[] };
+    const entry = ledger.entries.find(candidate => candidate.id === comparison.ledgerEntry);
+    assert.ok(entry, `${id}: investigations.json holds ${comparison.ledgerEntry}, the measurements behind ${comparison.figure}`);
+    assert.equal(entry.status, 'included', `${id}: ${comparison.ledgerEntry} is an included decision`);
+    assert.ok(entry.evidence?.some(link => link === comparison.source), `${id}: ${comparison.ledgerEntry} cites the paper it compares with`);
+  }
 });
 
 test('the block goes between the markers and leaves a README without them alone', () => {

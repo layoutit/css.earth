@@ -10,6 +10,9 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/7_Iris_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
+| SPHERE photograph | [23 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 2017 October 10 and 11](https://observations.lam.fr/astero/Data/7Iris/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/7_Iris_adam.obj) |
+| Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/7_Iris_param.txt), read longitude-first, and JPL Horizons geometry from Paranal |
+| Photograph registration | [Hanuš et al. (2019), Figure 2](https://doi.org/10.1051/0004-6361/201834541) |
 
 Iris is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape.
 
@@ -18,6 +21,33 @@ Iris is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publishe
 - [Original MPCD mesh](https://observations.lam.fr/astero/3Dshape/7_Iris_mpcd.obj): 13970 vertices, 27936 triangles, unmodified Cartesian coordinates in kilometers. Its measured volume-equivalent radius is 101.958245 km. The survey's diameter averages ADAM and MPCD; the original coordinates are not rescaled to that average. Maximum Cartesian extents are 246.448 × 242.631 × 155.531 km; these are not best-fit ellipsoid axes.
 
 ## Evidence
+
+### SPHERE photograph
+
+The photograph's placement reproduces the paper that published these frames. Hanuš et al. (2019) fitted their model to the same images and show the fit, epoch by epoch, in their Figure 2. Our cameras, computed from the survey's rotation record, JPL Horizons and each frame's header, reproduce that figure:
+
+| Check | Result |
+| --- | --- |
+| Projected rotation axis on the sky | 23.3°; the paper draws 23.9° |
+| Outline overlap with the paper's images and model, at our phase | 0.980 and 0.972, the single peak of a full-turn sweep |
+| Outline residual in the native frames after the centre fit | 0.84 px mean over 23 frames; smallest at our phase, rising about 0.1 px per degree |
+| The authors' own crater identifications, cast through our cameras onto the mesh | 6.1 km RMS per crater across epochs, about 2.6 native pixels |
+
+The measurements and method are in the ledger entry `zimpol-published-comparison`. [The first frame of each epoch beside our render and our projected limb](evidence/sphere-camera-comparison.webp) shows the cameras on the native pixels.
+
+### Registration
+
+<!-- registration-report:begin -->
+Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+
+| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `zimpol` | 23 | 9 | 6.83° | 1.98° | 6.54° | its other 23 frames | 0 of 23 | — | 23 of 23, 0.75° | — | ×1.02 | conflict |
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
+<!-- registration-report:end -->
+
+The registration stage reports a conflict for this lens, and the lens ships on its published comparison instead, under the rule in the [surface-observations guide](../../../tools/objects/surface-observations/README.md#registration-stage). The outline test scores 9 of 23 frames, whose outlines are barely elongated enough to define an angle, and finds 6.5°. The same measure between the paper's own model and its images gives −9.3° to +13.4°, so it would reject the published fit too. The relief sweep places all 23 frames at 0.75°.
 
 The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
@@ -32,6 +62,12 @@ Shape uses the shared neutral-gray material. It is not photographed color, refle
 Source constraints are uneven and ground-based; a 4096 × 2048 display map does not add observational resolution. The existing scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade. Both views retain the shared Shadows control and flood lighting.
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
+
+The survey's rotation record lists pole longitude first. An earlier cross-frame test read it latitude-first, 9.4° from the paper's pole, and its failure is preserved in the ledger. Read longitude-first, it matches Hanuš et al. (2019) Table 1 to 0.1°.
+
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with relative frame levels matched between 0.86 and 1.51. It is not albedo or colour. The frames see Iris from about 64° south, so the northern surface is unphotographed and keeps the grid. The native outlines fix the rotational phase to about a degree; the paper states no phase uncertainty.
+
+The crater coordinates in Hanuš et al. (2019) Table 2 are not used. Projected as printed, they land a median 139 km from the authors' own contours in their Figure 4, and no rotation or mirror of the table fits all six named craters. Their longitude system is not stated.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

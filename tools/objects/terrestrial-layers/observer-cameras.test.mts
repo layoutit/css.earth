@@ -46,6 +46,17 @@ test('the record refuses a rotation model it cannot evaluate', () => {
   assert.throws(() => parseObserverCameras({ ...base, schema: 'other', rotation: { kind: 'spin-record', path: 'p', columnOrder: 'latitude-first' } }), /schema/);
 });
 
+test('a published comparison names its paper by DOI, its figure and its ledger entry', () => {
+  const base = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: 'zimpol', rotation: { kind: 'spin-record', path: 'p', columnOrder: 'longitude-first' },
+    ephemeris: { observer: 'a', heliocentric: 'b' }, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
+  const comparison = { source: 'https://doi.org/10.1051/0004-6361/201834541', figure: 'Figure 2', ledgerEntry: 'zimpol-published-comparison' };
+  assert.deepEqual(parseObserverCameras({ ...base, publishedComparison: comparison }).publishedComparison, comparison);
+  assert.equal(parseObserverCameras(base).publishedComparison, undefined, 'the block is optional');
+  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ...comparison, source: 'Hanus et al. 2019' } }), /DOI/);
+  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ...comparison, figure: ' ' } }), /figure/);
+  assert.throws(() => parseObserverCameras({ ...base, publishedComparison: { ...comparison, ledgerEntry: 'Figure 2' } }), /ledger entry/);
+});
+
 test('a frame header states its exposure, and the midpoint is half the stated exposure after the start', () => {
   const exposure = zimpolExposure({ 'DATE-OBS': "'2018-06-08T05:27:05.809'", 'ESO DET SEQ1 EXPTIME': '81.29684', 'ESO INS3 OPTI5 NAME': "'N_R     '", CD1_1: '-1.00833333333333E-6' });
   assert.equal(exposure.filter, 'N_R');
