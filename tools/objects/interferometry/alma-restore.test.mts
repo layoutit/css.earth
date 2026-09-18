@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -44,8 +45,11 @@ test('the restore script performs import, flags, every application, the targets 
   }
   // The pipeline's flags are replayed by selection, never restored by row, and checked before any calibration is applied.
   assert.ok(!script.includes('flagmanager'), 'a flag version is restored by row, and rows differ between CASA versions');
-  assert.ok(script.indexOf('sys.exit(\'The replayed flags differ') < script.indexOf('applycal('));
+  assert.ok(script.indexOf('sys.exit("The replayed flags differ') < script.indexOf('applycal('));
   assert.ok(script.includes('if worst[0] > 0.005'));
+  // The generated script is Python, and a quoting slip in a template only shows when Python reads it.
+  const compiled = spawnSync('python3', ['-c', 'import ast, sys; ast.parse(sys.stdin.read())'], { input: script, encoding: 'utf8' });
+  assert.equal(compiled.status, 0, compiled.stderr);
   // The import takes hifa_restoredata's own arguments, not the manual calibration script's.
   assert.ok(script.includes("ocorr_mode='ca'") && script.includes('bdfflags=True') && script.includes('lazy=True'));
   assert.ok(script.includes('CalPointing') && !script.includes('CorrelatorMode'));

@@ -139,7 +139,7 @@ export function restoreScript(options: {
         '        report[spw + " " + name] = [round(ours, 6), round(theirs, 6)]',
         "        if abs(ours - theirs) >= worst[0]: worst = (abs(ours - theirs), f'spw {spw} {name}: {100 * ours:.2f}% here, {100 * theirs:.2f}% in the pipeline')",
         `open(${python(`${imageBase}.flags.json`)}, 'w').write(json.dumps(report, indent=1))`,
-        `if worst[0] > ${FLAG_TOLERANCE}: sys.exit('The replayed flags differ from the pipeline\'s count: ' + worst[1])`,
+        `if worst[0] > ${FLAG_TOLERANCE}: sys.exit("The replayed flags differ from the pipeline's count: " + worst[1])`,
         "steps.append(f'flags replayed; largest per-antenna difference from the pipeline {100 * worst[0]:.2f} points')",
       ...applications.flatMap(application => [applycalStatement(application, visibilities), `steps.append('applycal ' + ${python(application.intent)})`]),
       "open(calibrated, 'w').close()"].map(line => `    ${line}`),
