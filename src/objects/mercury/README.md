@@ -76,3 +76,5 @@ Landing sites: 1 spacecraft landing, touchdown or impact sites are labelled besi
 Feature notes: 486 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
 </details>
+
+CI proof: one-body change for timing (safe to delete).
