@@ -25,15 +25,15 @@ Kalliope is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publ
 ### SPHERE photograph
 
 <!-- published-comparison:begin -->
-Measured by `tools/objects/published-comparison.mts` against [Figure B.18](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.
+Measured by `tools/objects/published-comparison.mts` against [Figure B.18](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2018-03-15 08:03:46 | 0.947 | 0.933 | 0.946 | 0° | 0.5°, -2.5° | 112.6° against — |
-| 2018-04-20 05:11:36 | 0.953 | 0.946 | 0.959 | 0° | 0°, 2° | 81.5° against — |
-| 2018-04-20 05:36:16 | 0.951 | 0.938 | 0.953 | 0° | 1°, 2° | 81.4° against — |
-| 2018-05-05 02:34:13 | 0.945 | 0.940 | 0.953 | 0° | 2.5°, 2.5° | 71.5° against — |
-| 2018-05-05 02:40:24 | 0.940 | 0.934 | 0.949 | 0° | 2.5°, 2.5° | 71.5° against — |
+| 2018-03-15 08:03:46 | 0.947 | 0.933 | 0.946 | 0° | 0.5°, -2.5° | 112.6° against 129.5° |
+| 2018-04-20 05:11:36 | 0.953 | 0.946 | 0.959 | 0° | 0°, 2° | 81.5° against 93.9° |
+| 2018-04-20 05:36:16 | 0.951 | 0.938 | 0.953 | 0° | 1°, 2° | 81.4° against 90.0° |
+| 2018-05-05 02:34:13 | 0.945 | 0.940 | 0.953 | 0° | 2.5°, 2.5° | 71.5° against 77.4° |
+| 2018-05-05 02:40:24 | 0.940 | 0.934 | 0.949 | 0° | 2.5°, 2.5° | 71.5° against 64.6° |
 
 Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 20 native frames after the centre fit is 1.417 px at our phase; the lowest of a ±30° sweep is 1.218 px at 2°.
 <!-- published-comparison:end -->

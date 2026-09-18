@@ -25,19 +25,19 @@ Iris is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publishe
 ### SPHERE photograph
 
 <!-- published-comparison:begin -->
-Measured by `tools/objects/published-comparison.mts` against [Figure B.6](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.
+Measured by `tools/objects/published-comparison.mts` against [Figure B.6](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2017-10-10 04:00:55 | 0.979 | 0.983 | 0.987 | 0° | -1.5°, -1.5° | 23.3° against 19.6° |
-| 2017-10-11 04:44:16 | 0.957 | 0.964 | 0.987 | 10° | -4°, -1.5° | 23.4° against 20.7° |
-| 2017-10-11 05:38:15 | 0.971 | 0.980 | 0.988 | 0° | -4°, 1° | 23.4° against 19.8° |
-| 2017-10-11 06:28:33 | 0.975 | 0.980 | 0.985 | 0° | -3°, -0.5° | 23.5° against 19.2° |
+| 2017-10-10 04:00:55 | 0.981 | 0.983 | 0.988 | 0° | -1.5°, -1.5° | 23.3° against 19.6° |
+| 2017-10-11 04:44:16 | 0.958 | 0.964 | 0.987 | 10° | -4.5°, -1.5° | 23.4° against 20.7° |
+| 2017-10-11 05:38:15 | 0.976 | 0.980 | 0.985 | 0° | -3°, 1° | 23.4° against 19.8° |
+| 2017-10-11 06:28:33 | 0.978 | 0.980 | 0.986 | 0° | -3°, -0.5° | 23.5° against 19.2° |
 
 Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 23 native frames after the centre fit is 0.843 px at our phase, the lowest of a ±30° sweep.
 <!-- published-comparison:end -->
 
-Our outline meets the paper's photographs with at most a 1.5° turn, but needs 1.5° to 4° to meet its model panels, about the spin-axis difference. So the paper's own model and photograph panels differ by roughly that angle; why is not verified here. Earlier, against Hanuš et al. (2019) Figure 2, the same cameras gave outline overlaps of 0.972 and 0.980 and put the authors' own crater identifications on one surface point to 6.1 km; the ledger entry `zimpol-published-comparison` keeps both results. [The first frame of each epoch beside our render and limb](evidence/sphere-camera-comparison.webp) shows the cameras on the native frames.
+Our outline meets the paper's photographs with at most a 1.5° turn, but needs 1.5° to 4.5° to meet its model panels, about the spin-axis difference. So the paper's own model and photograph panels differ by roughly that angle; why is not verified here. Earlier, against Hanuš et al. (2019) Figure 2, the same cameras gave outline overlaps of 0.972 and 0.980 and put the authors' own crater identifications on one surface point to 6.1 km; the ledger entry `zimpol-published-comparison` keeps both results. [The first frame of each epoch beside our render and limb](evidence/sphere-camera-comparison.webp) shows the cameras on the native frames.
 
 ### Registration
 

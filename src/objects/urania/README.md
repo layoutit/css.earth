@@ -25,14 +25,14 @@ Urania is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publis
 ### SPHERE photograph
 
 <!-- published-comparison:begin -->
-Measured by `tools/objects/published-comparison.mts` against [Figure B.21](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.
+Measured by `tools/objects/published-comparison.mts` against [Figure B.21](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2018-09-16 05:00:02 | 0.906 | 0.934 | 0.942 | 0° | -0.5°, 1.5° | 133.5° against 131.6° |
-| 2018-09-27 02:17:58 | 0.916 | 0.933 | 0.942 | 0° | -2.5°, -1° | 133.1° against 131.2° |
-| 2018-09-27 06:29:55 | 0.923 | 0.928 | 0.955 | 0° | -3.5°, -4° | 133.1° against 131.0° |
-| 2018-09-28 03:11:08 | 0.916 | 0.943 | 0.945 | 0° | -0.5°, 1.5° | 133.1° against 131.0° |
+| 2018-09-16 05:00:02 | 0.937 | 0.934 | 0.941 | 0° | -1.5°, 1.5° | 133.5° against 131.6° |
+| 2018-09-27 02:17:58 | 0.935 | 0.933 | 0.942 | 0° | -1°, -1° | 133.1° against 131.1° |
+| 2018-09-27 06:29:55 | 0.942 | 0.928 | 0.955 | 0° | -5°, -4° | 133.1° against 131.0° |
+| 2018-09-28 03:11:08 | 0.942 | 0.943 | 0.945 | 0° | -2.5°, 1.5° | 133.1° against 131.1° |
 
 Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 20 native frames after the centre fit is 1.073 px at our phase; the lowest of a ±30° sweep is 1.015 px at -4°.
 <!-- published-comparison:end -->

@@ -140,7 +140,7 @@
       "id": "zimpol-published-comparison",
       "subject": "Vernazza et al. (2021) Figure B.23 as the registration of the SPHERE photograph lens",
       "status": "included",
-      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.23, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.949 to 0.952 at our phase, against 0.962 to 0.970 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 3 columns. With the paper’s photographs 0.945 to 0.954. Turned in the image, our outline best overlaps the paper’s photographs at -1.5 to 1.5° and its model panels at -2.0 to -1.0°. The spin axis we project lies at 117.4° on the sky against 114.7 to 116.0° for the figure’s arrows. Native outline residual 1.323 px mean over 15 frames at our phase; the sweep’s lowest is 1.320 px at 2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.39° from the published pole.",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.23, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.949 to 0.954 at our phase, against 0.963 to 0.969 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 3 of 3 columns. With the paper’s photographs 0.945 to 0.954. Turned in the image, our outline best overlaps the paper’s photographs at -1.5 to 1.5° and its model panels at -2.5 to -1.0°. The spin axis we project lies at 117.4° on the sky against 114.7 to 116.2° for the figure’s arrows. Native outline residual 1.323 px mean over 15 frames at our phase; the sweep’s lowest is 1.320 px at 2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.39° from the published pole.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/Data/41Daphne/Deconv/",
@@ -150,6 +150,10 @@
         {
           "date": "2026-09-18",
           "commit": "cc7b96d42341dec16efb740be3bb2e893069686b"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "2391723b720b7f747554e0dfe8605455a7ce8a65"
         }
       ]
     }

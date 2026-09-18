@@ -25,16 +25,16 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 ### SPHERE photograph
 
 <!-- published-comparison:begin -->
-Measured by `tools/objects/published-comparison.mts` against [Figure B.27](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.
+Measured by `tools/objects/published-comparison.mts` against [Figure B.27](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2018-07-08 06:15:40 | 0.962 | 0.955 | 0.974 | 0° | -1.5°, -0.5° | 36.6° against 34.7° |
-| 2018-07-08 07:17:12 | 0.963 | 0.969 | 0.973 | 0° | -1.5°, -1° | 36.6° against 34.7° |
-| 2018-07-08 08:33:04 | 0.962 | 0.971 | 0.974 | 0° | -3°, 0° | 36.6° against 34.6° |
-| 2018-07-10 02:47:21 | 0.964 | 0.968 | 0.979 | 0° | -3°, 0° | 36.9° against 34.9° |
-| 2018-07-13 07:35:42 | 0.971 | 0.964 | 0.976 | 0° | -2.5°, -2.5° | 37.4° against 35.3° |
-| 2018-08-10 05:07:42 | 0.965 | 0.963 | 0.972 | 0° | -1.5°, -3° | 42.5° against 40.4° |
+| 2018-07-08 06:15:40 | 0.970 | 0.955 | 0.973 | 0° | -2°, -0.5° | 36.6° against 34.6° |
+| 2018-07-08 07:17:12 | 0.972 | 0.969 | 0.972 | 0° | -1.5°, -1° | 36.6° against 34.7° |
+| 2018-07-08 08:33:04 | 0.974 | 0.971 | 0.977 | 0° | 0°, 0° | 36.6° against 34.5° |
+| 2018-07-10 02:47:21 | 0.971 | 0.968 | 0.976 | 0° | -1.5°, 0° | 36.9° against 34.8° |
+| 2018-07-13 07:35:42 | 0.974 | 0.964 | 0.976 | 0° | -2.5°, -2.5° | 37.4° against 35.3° |
+| 2018-08-10 05:07:42 | 0.968 | 0.963 | 0.976 | 0° | -1.5°, -3° | 42.5° against 40.4° |
 
 Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 2.790 px at our phase; the lowest of a ±30° sweep is 2.738 px at -2°.
 <!-- published-comparison:end -->

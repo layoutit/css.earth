@@ -25,13 +25,13 @@ Daphne is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publis
 ### SPHERE photograph
 
 <!-- published-comparison:begin -->
-Measured by `tools/objects/published-comparison.mts` against [Figure B.23](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.
+Measured by `tools/objects/published-comparison.mts` against [Figure B.23](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2018-08-06 06:26:16 | 0.952 | 0.954 | 0.966 | 0° | -2°, -1.5° | 117.4° against 114.7° |
-| 2018-08-06 07:38:35 | 0.950 | 0.945 | 0.962 | 0° | -1°, 1.5° | 117.4° against 115.3° |
-| 2018-08-06 09:32:00 | 0.949 | 0.945 | 0.970 | 0° | -1°, 0.5° | 117.4° against 116.0° |
+| 2018-08-06 06:26:16 | 0.952 | 0.954 | 0.965 | 0° | -2.5°, -1.5° | 117.4° against 114.7° |
+| 2018-08-06 07:38:35 | 0.954 | 0.945 | 0.963 | 0° | -1°, 1.5° | 117.4° against 115.4° |
+| 2018-08-06 09:32:00 | 0.949 | 0.945 | 0.969 | 0° | -1°, 0.5° | 117.4° against 116.2° |
 
 Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 15 native frames after the centre fit is 1.323 px at our phase; the lowest of a ±30° sweep is 1.320 px at 2°.
 <!-- published-comparison:end -->

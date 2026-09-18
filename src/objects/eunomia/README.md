@@ -25,19 +25,19 @@ Eunomia is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publi
 ### SPHERE photograph
 
 <!-- published-comparison:begin -->
-Measured by `tools/objects/published-comparison.mts` against [Figure B.13](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's panels beside ours](evidence/published-comparison.webp) show them.
+Measured by `tools/objects/published-comparison.mts` against [Figure B.13](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
 | Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
 | --- | --- | --- | --- | --- | --- | --- |
-| 2019-07-28 08:52:58 | 0.964 | 0.973 | 0.981 | 0° | -3°, 1.5° | 60.8° against 58.5° |
-| 2019-07-29 04:43:47 | 0.970 | 0.971 | 0.984 | 0° | -0.5°, 1° | 60.8° against 58.4° |
-| 2019-07-30 06:54:49 | 0.969 | 0.973 | 0.981 | 0° | -1.5°, 1° | 60.8° against 58.5° |
-| 2019-08-04 04:31:05 | 0.967 | 0.971 | 0.980 | 0° | 0.5°, 6° | 60.8° against 58.5° |
-| 2019-08-04 05:08:04 | 0.966 | 0.975 | 0.983 | 0° | -3°, 1° | 60.8° against 58.6° |
-| 2019-08-04 07:39:29 | 0.965 | 0.969 | 0.980 | 0° | -1°, 0° | 60.8° against 58.5° |
-| 2019-08-05 05:45:23 | 0.967 | 0.976 | 0.985 | 0° | -2°, 0.5° | 60.8° against 58.5° |
-| 2019-08-07 08:16:10 | 0.972 | 0.975 | 0.979 | 0° | -1.5°, 0.5° | 60.8° against 58.4° |
-| 2019-08-07 08:38:30 | 0.974 | 0.973 | 0.978 | 0° | -1°, -1° | 60.8° against 58.4° |
+| 2019-07-28 08:52:58 | 0.973 | 0.973 | 0.982 | 0° | -2.5°, 1.5° | 60.8° against 58.5° |
+| 2019-07-29 04:43:47 | 0.976 | 0.971 | 0.983 | 0° | -1.5°, 1° | 60.8° against 58.4° |
+| 2019-07-30 06:54:49 | 0.971 | 0.973 | 0.980 | 0° | -2°, 1° | 60.8° against 58.5° |
+| 2019-08-04 04:31:05 | 0.975 | 0.971 | 0.980 | 0° | 0°, 6° | 60.8° against 58.5° |
+| 2019-08-04 05:08:04 | 0.974 | 0.975 | 0.982 | 0° | -3°, 1° | 60.8° against 58.6° |
+| 2019-08-04 07:39:29 | 0.976 | 0.969 | 0.982 | 0° | -1°, 0° | 60.8° against 58.4° |
+| 2019-08-05 05:45:23 | 0.975 | 0.976 | 0.984 | 0° | -2°, 0.5° | 60.8° against 58.4° |
+| 2019-08-07 08:16:10 | 0.978 | 0.975 | 0.979 | 0° | -1.5°, 0.5° | 60.8° against 58.4° |
+| 2019-08-07 08:38:30 | 0.978 | 0.973 | 0.981 | 0° | -1°, -1° | 60.8° against 58.4° |
 
 Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 1.257 px at our phase; the lowest of a ±30° sweep is 1.222 px at 2°.
 <!-- published-comparison:end -->
