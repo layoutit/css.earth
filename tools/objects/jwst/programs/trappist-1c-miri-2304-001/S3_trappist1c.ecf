@@ -1,0 +1,62 @@
+# From Bell's Eureka! control file for these observations, deposited with Gillon, Ducrot et al. (2025) at
+# doi:10.5281/zenodo.17710453. Changed here: one worker and one file at a time (this machine runs one heavy job),
+# no plots, and the directories the pipeline templates.
+
+# Eureka! Control File for Stage 3: Data Reduction
+
+# Stage 3 Documentation: https://eurekadocs.readthedocs.io/en/latest/ecf.html#stage-3
+
+ncpu            1
+nfiles          1
+max_memory      0.5
+indep_batches   False       # Independently treat each batch of files? Strongly recommended to leave this as False unless you have a clear reason to set it to True.
+suffix          calints
+photometry      True
+
+calibrated_spectra  False   # Set True to generate flux-calibrated spectra/photometry in mJy
+                            # Set False to convert to electrons
+gain            3.57
+
+# Subarray region of interest
+ywindow         [460, 560]  # full frame: TRAPPIST-1 at x 692.4, y 510.4 (2304 observations 1 and 2)
+xwindow         [642, 742]
+dqmask          True
+
+# Background parameters
+flag_bg         True
+bg_thresh       [5,5]
+
+# Photometric extraction parameters
+interp_method   linear      # Interpolate bad pixels. Options: None (if no interpolation should be performed), linear, nearest, cubic
+ctr_guess       [692, 510]  # Initial guess of centroid position. If None, will first perform centroiding on whole frame (can sometimes fail)
+ctr_cutout_size 10          # Cutoff size all around the centroid after the coarse centroid calculation or first centroid guess when using the mgmc method. 
+centroid_method fgc         # Method used for centroiding. Options: mgmc, fgc
+oneoverf_corr   None        # Options: None, meanerr, median
+skip_apphot_bg  False       # Skips the background subtraction during the aperture photometry step
+photap          5           # Size of photometry aperture in pixels
+phot_method     photutils   # Bell's control file uses poet, whose whole-pixel aperture flips between 78 and 79 pixels as the
+                            # centroid moves 0.01 px, a step of about 650 ppm in this light curve.
+aperture_edge   exact       # Fractional edge pixels: a constant 78.54-pixel aperture.
+# photap          [3,11,1]    # Size of photometry aperture in pixels
+skyin           16          # Inner sky annulus edge, in pixels
+# skyin           [10,24,2]   # Inner sky annulus edge, in pixels
+skywidth        30          # Width of the sky annulus, in pixels
+# skywidth        [10,40,2]   # Width of the sky annulus, in pixels
+centroid_tech   com         # (mgmc method param) Technique used for centroiding. Options: com, 1dg, 2dg
+gauss_frame     15          # (mgmc method param) Half-width away from second centroid guess to include in centroiding map for gaussian widths. Recommend ~15 for MIRI photometry.
+
+# Diagnostics
+isplots_S3      1
+nplots          5
+testing_S3      False
+hide_plots      True
+save_output     True
+save_fluxdata   False
+verbose         True
+
+# Project directory
+topdir          {topdir}
+
+# Directories relative to topdir
+inputdir        {inputdir}
+outputdir       {outputdir}

@@ -17,7 +17,7 @@ const systematic = (value: unknown): Systematic => {
 const profile = shape({
   path: text, sampling: text, units: text, planet: text, host: text,
   lightCurve: shape({ encoding: text }),
-  fit: shape({ degrees: array(number), eigencurves: array(number), positive: boolean, transitExclusionPhase: number, gridHeight: number, systematics: array(systematic), transitFromLightCurve: boolean }),
+  fit: shape({ degrees: array(number), eigencurves: array(number), positive: boolean, transitExclusionPhase: number, gridHeight: number, systematics: array(systematic), transitFromLightCurve: boolean, longitudeSymmetric: optional(boolean) }),
   band: shape({ encoding: text, path: text }),
   star: shape({ encoding: text, path: text }),
 });
@@ -52,6 +52,17 @@ export function readSvoTable(bytes: Uint8Array, expectedUnits: readonly [string,
   return { wavelengthMicrons: Float64Array.from(wavelength, a => a / 1e4), values: Float64Array.from(values) };
 }
 
+/** An SVO filter profile. A unitless transmission, or a photon-counting response in electrons per photon (`ephot`, as the Filter
+ * Profile Service gives JWST filters) when the profile declares a photon-counting detector (DetectorType 1): either way the counted
+ * signal scales with the response times lambda times the star's intensity. */
+export function readSvoFilter(bytes: Uint8Array) {
+  const xml = Buffer.from(bytes).toString('utf8');
+  const detector = /<PARAM name="DetectorType"[^>]*value="([^"]*)"/u.exec(xml)?.[1];
+  const second = /<FIELD\b[^>]*>[\s\S]*?<FIELD\b[^>]*unit="([^"]*)"/u.exec(xml)?.[1] ?? '';
+  if (second.toLowerCase() === 'ephot' && detector !== '1') throw new TypeError('An electrons-per-photon filter profile must declare a photon-counting detector.');
+  return readSvoTable(bytes, ['Angstrom', second.toLowerCase() === 'ephot' ? 'ephot' : '']);
+}
+
 /** A map of brightness temperature fitted from a light curve at preparation time: the eigencurve fit on the package's own orbit,
  * then the band conversion against a stellar model spectrum (see `tools/objects/eclipse-map/light-curve-map.mts`). */
 export async function loadEclipseMapFit(root: string, value: unknown) {
@@ -83,7 +94,7 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
   let band;
   if (recipe.band.encoding === 'svo-filter') {
     // A filter transmission: counted photons scale with transmission times lambda times the star's intensity.
-    const filter = readSvoTable(await read(recipe.band.path), ['Angstrom', '']);
+    const filter = readSvoFilter(await read(recipe.band.path));
     const intensity = binAverage(stellar, filter.wavelengthMicrons), spacing = filter.wavelengthMicrons.map((w, i, all) => ((all[Math.min(all.length - 1, i + 1)]! - all[Math.max(0, i - 1)]!) / 2));
     band = { wavelengthMicrons: filter.wavelengthMicrons, stellarIntensity: intensity, counts: filter.values.map((t, i) => Math.max(0, t) * filter.wavelengthMicrons[i]! * intensity[i]! * spacing[i]!) };
   } else if (recipe.band.encoding === 'count-spectrum-csv') {
@@ -108,7 +119,7 @@ export async function loadEclipseMapFit(root: string, value: unknown) {
   }
   const result = fitLightCurveMap(curve, recipe.fit, orbit, starAstrometry(hostId), radiusRatio, { stellarRadiusKm: BODIES[hostId].meanRadiusKm });
   // Temperatures are taken on the fit's own grid, the cells positivity was enforced on; a finer grid can dip below zero between them.
-  const table = bandTemperatureTable(band), height = recipe.fit.gridHeight, width = 2 * height;
+  const table = bandTemperatureTable(band, { minimumK: 20 }), height = recipe.fit.gridHeight, width = 2 * height;
   if (!Number.isSafeInteger(height) || height < 2) throw new TypeError('The fit grid needs a whole height of at least 2.');
   const grid = temperatureGrid(result.basis, result.fit, table, radiusRatio, height);
   const cell = (x: number, y: number) => { const v = grid.temperatures[y * width + ((x % width) + width) % width]!; return Number.isFinite(v) ? v : null; };

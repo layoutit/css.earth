@@ -9,7 +9,9 @@
  * 1. Takes each segment from --raw when a file of the pinned size is there, and otherwise downloads it from MAST with resume,
  *    three at a time: MAST throttles one connection to a fraction of what three reach together.
  * 2. Runs Stage 1 (ramp fitting) and Stage 2 (calibration) on batches of segments, one Python process and one worker at a time,
- *    and refuses to start a batch with less than half the memory free: one MIRI segment's Stage 1 peaks near 17 GB.
+ *    and waits for 14 GB of free memory before a batch starts: Stage 1 has peaked at 8 to 12 GB per batch. The next
+ *    batch downloads while one reduces; a calibrated batch's downloaded raw files and Stage 1 ramps are then removed, so a
+ *    programme larger than the free disk still reduces.
  * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 twice: the white light curve and the channels.
  * 4. Exports both light curves to CSV (time, flux, err, mask, centroid_y, psf_width_y; flux and err divided by the median flux),
  *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text. A deposit is either a zip holding
@@ -18,10 +20,11 @@
  *    per detector column (ours-stellar-counts.csv) are the band response an eclipse map's temperature conversion needs.
  *
  * Finished batches and stages are recorded in the work directory and skipped on a rerun. */
-import { spawn, spawnSync } from 'node:child_process';
-import { access, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import { access, lstat, mkdir, readdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { totalmem } from 'node:os';
 import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
+import { createReadStream, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
@@ -31,9 +34,14 @@ import { freeMemoryPercent, mastFile, toolchainPython } from './mast.mts';
 export interface Segment { readonly name: string; readonly bytes: number; readonly uri: string }
 export interface TsoProgram {
   readonly id: string; readonly eventName: string; readonly crdsContext: string; readonly batchSegments: number;
-  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels: string };
+  /** How Stage 3 measures the star: a dispersed spectrum, or aperture photometry of an imaging time series. Photometry has one
+   * channel, so it has no channel light curves and no per-column stellar counts. */
+  readonly mode: 'spectroscopy' | 'photometry';
+  readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels?: string };
   readonly segments: readonly Segment[];
-  readonly oracle: EurekaZipOracle | DepositFilesOracle;
+  /** The author's deposited light curve, when one exists. A visit whose authors deposited none is checked against published
+   * values instead, outside this reduction. */
+  readonly oracle?: EurekaZipOracle | DepositFilesOracle;
 }
 export interface EurekaZipOracle { readonly kind: 'eureka-light-curve-zip'; readonly url: string; readonly path: string; readonly bytes: number; readonly sha256: string; readonly lightCurve: string }
 export interface DepositFile { readonly path: string; readonly url: string; readonly bytes: number; readonly md5: string }
@@ -48,7 +56,7 @@ export interface DepositFilesOracle {
 export async function readProgram(directory: string): Promise<TsoProgram> {
   const record = requireRecord(JSON.parse(await readFile(resolve(directory, 'program.json'), 'utf8')) as unknown, 'program.json');
   if (record.schema !== 'cssearth-jwst-tso-program@1') throw new TypeError(`${directory}: unexpected program schema.`);
-  const stages = requireRecord(record.stages, 'stages'), oracle = requireRecord(record.oracle, 'oracle');
+  const stages = requireRecord(record.stages, 'stages');
   const segments = requireArray(record.segments).map(value => {
     const segment = requireRecord(value, 'segment');
     const name = requireString(segment.name);
@@ -56,12 +64,19 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
     return { name, bytes: requireFiniteNumber(segment.bytes), uri: requireString(segment.uri) };
   });
   if (new Set(segments.map(segment => segment.name)).size !== segments.length) throw new TypeError(`${directory}: a segment is listed twice.`);
+  // A dispersed spectrum has channel light curves and photometry has none: the channel stage follows the mode.
+  if ((record.mode === 'photometry') === (stages.S4channels !== undefined)) {
+    throw new TypeError(`${directory}: ${record.mode === 'photometry' ? 'photometry has no channel stage (S4channels)' : 'a spectroscopy program needs its channel stage (S4channels)'}.`);
+  }
   return {
     id: requireString(record.id), eventName: requireString(record.eventName), crdsContext: requireString(record.crdsContext),
     batchSegments: requireFiniteNumber(record.batchSegments),
-    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4), S4channels: requireString(stages.S4channels) },
+    mode: record.mode === undefined ? 'spectroscopy' : requireString(record.mode) === 'photometry' ? 'photometry'
+      : requireString(record.mode) === 'spectroscopy' ? 'spectroscopy' : (() => { throw new TypeError(`${directory}: mode must be spectroscopy or photometry.`); })(),
+    stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4),
+      ...(stages.S4channels === undefined ? {} : { S4channels: requireString(stages.S4channels) }) },
     segments,
-    oracle: parseOracle(oracle),
+    ...(record.oracle === undefined ? {} : { oracle: parseOracle(requireRecord(record.oracle, 'oracle')) }),
   };
 }
 
@@ -93,14 +108,25 @@ export function renderSettings(template: string, directories: { readonly topdir:
   return text;
 }
 
-const exists = (path: string) => access(path).then(() => true, () => false);
-const segmentFile = (segment: Segment, raw: string, rawSources: readonly string[]) => mastFile(segment, raw, rawSources);
+/** Segments downloaded ahead of the batch being reduced. */
+const DOWNLOAD_AHEAD = 6;
 
-/** Every segment in place before Stage 1 starts, three downloads at a time. */
-async function segmentFiles(segments: readonly Segment[], raw: string, rawSources: readonly string[]) {
-  const queue = [...segments];
-  await Promise.all(Array.from({ length: 3 }, async () => { for (let segment = queue.shift(); segment; segment = queue.shift()) await segmentFile(segment, raw, rawSources); }));
+const exists = (path: string) => access(path).then(() => true, () => false);
+/** Memory macOS reports free, in GB. Stage 1 has peaked at 8 to 12 GB per batch on MIRI imaging segments. */
+const STAGE_1_FREE_GB = 14;
+const freeMemoryGb = () => freeMemoryPercent() / 100 * totalmem() / 1e9;
+
+/** Waits up to half an hour for another reduction's Stage 1 to finish rather than failing the batch. */
+async function waitForMemory() {
+  for (let waited = 0; ; waited += 15) {
+    const free = freeMemoryGb();
+    if (free >= STAGE_1_FREE_GB) return;
+    if (waited >= 1800) throw new Error(`Only ${free.toFixed(1)} GB of memory has been free for half an hour; Stage 1 needs ${STAGE_1_FREE_GB} GB. Finished batches are kept.`);
+    await new Promise(done => setTimeout(done, 15000));
+  }
 }
+
+const segmentFile = (segment: Segment, raw: string, rawSources: readonly string[]) => mastFile(segment, raw, rawSources);
 
 const md5File = (path: string) => new Promise<string>((done, fail) => {
   const hash = createHash('md5');
@@ -146,10 +172,17 @@ source, prefix = sys.argv[1:3]
 lc = xr.open_dataset(source, engine='h5netcdf')
 # Eureka! 1.4 writes data, err, mask and centroid_sy; the Eureka! v1 deposit writes flux, err, mask, psf_width_y and flux_white.
 flux, err, mask = (np.asarray(lc[name]) for name in ('flux' if 'flux' in lc else 'data', 'err', 'mask'))
-width = np.asarray(lc['psf_width_y' if 'psf_width_y' in lc else 'centroid_sy'])
+# Aperture photometry records no cross-dispersion centroid or width; those columns are written as NaN so every
+# light curve this pipeline exports has the same shape.
+def column(*names):
+    for name in names:
+        if name in lc: return np.asarray(lc[name]).ravel()
+    return np.full(np.asarray(lc.time).shape, np.nan)
+width = column('psf_width_y', 'centroid_sy')
+centroid = column('centroid_y')
 def write(name, f, e, m):
     median = np.nanmedian(np.where(m, np.nan, f))
-    np.savetxt(name, np.column_stack([lc.time, f / median, e / median, m.astype(float), lc.centroid_y, width]),
+    np.savetxt(name, np.column_stack([lc.time, f / median, e / median, m.astype(float), centroid, width]),
                delimiter=',', header='time,flux,err,mask,centroid_y,psf_width_y', comments='')
 if 'flux_white' in lc: write(prefix + '-white.csv', *(np.asarray(lc[name]).ravel() for name in ('flux_white', 'err_white', 'mask_white')))
 if flux.shape[0] == 1: write(prefix + '-white.csv', flux[0], err[0], mask[0])
@@ -190,10 +223,25 @@ const sha256File = (path: string) => new Promise<string>((done, fail) => {
   createReadStream(path).on('data', chunk => hash.update(chunk)).on('error', fail).on('end', () => done(hash.digest('hex')));
 });
 
-export async function reduceTso(programDirectory: string, work: string, rawSources: readonly string[] = []) {
-  const program = await readProgram(programDirectory), toolchain = await eurekaToolchain(program.crdsContext);
+/** `segments` reduces only the first n pinned segments: a partial run that proves the path before a programme's whole
+ * download is committed. The light curve it produces covers that part of the time series and nothing more. */
+export async function reduceTso(programDirectory: string, work: string, rawSources: readonly string[] = [], segments?: number) {
+  const full = await readProgram(programDirectory), toolchain = await eurekaToolchain(full.crdsContext);
+  if (segments !== undefined && !(Number.isInteger(segments) && segments > 0 && segments <= full.segments.length)) {
+    throw new TypeError(`--segments must be between 1 and ${full.segments.length}.`);
+  }
+  const program = segments === undefined ? full : { ...full, segments: full.segments.slice(0, segments) };
   const raw = resolve(work, 'raw'), progressPath = resolve(work, 'progress.json');
   await mkdir(raw, { recursive: true });
+  // One reduction per work directory: a second run on the same visit would download into and calibrate the same files.
+  const lock = resolve(work, 'reduce.lock');
+  const holder = Number(await readFile(lock, 'utf8').catch(() => ''));
+  if (holder && holder !== process.pid && (() => { try { process.kill(holder, 0); return true; } catch { return false; } })()) {
+    console.log(`${work} is being reduced by process ${holder}; leaving it to that run.`);
+    return resolve(work, 'light-curves');
+  }
+  await writeFile(lock, String(process.pid));
+  process.on('exit', () => { try { rmSync(lock); } catch { /* already removed */ } });
   const progress = await readFile(progressPath, 'utf8').then(text => JSON.parse(text) as { segments: string[]; steps: Record<string, string> }, () => ({ segments: [] as string[], steps: {} as Record<string, string> }));
   const save = () => writeFile(progressPath, `${JSON.stringify(progress, null, 2)}\n`);
   const settings = async (step: string, template: string, stagePrefix: string, inputdir: string, outputdir: string) => {
@@ -204,19 +252,48 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     return directory;
   };
 
-  // Stages 1 and 2, in batches.
+  // Stages 1 and 2, in batches. A whole programme's raw segments can outgrow the disk, so each batch is downloaded while
+  // the previous one reduces, and once a batch is calibrated its downloaded raw files and Stage 1 ramps are removed.
+  // Raw files linked from --raw belong to their source directory and are kept.
   const pending = program.segments.filter(segment => !progress.segments.includes(segment.name));
-  await segmentFiles(pending, raw, rawSources);
-  for (let start = 0; start < pending.length; start += program.batchSegments) {
-    const batch = pending.slice(start, start + program.batchSegments), name = `batch${String(Object.keys(progress.steps).filter(key => key.startsWith('batch')).length + 1).padStart(2, '0')}`;
+  const batches = Array.from({ length: Math.ceil(pending.length / program.batchSegments) }, (_, index) => pending.slice(index * program.batchSegments, (index + 1) * program.batchSegments));
+  if (batches.length > 0) {
+    // New segments change the time series: the later stages run again over all of them.
+    for (const step of ['S3', 'S4', 'S4channels']) delete progress.steps[step];
+    for (const directory of ['Stage3', 'Stage4', 'Stage4_channels']) await rm(resolve(work, directory), { recursive: true, force: true });
+    await save();
+  }
+  // Downloads run ahead of the reduction, three connections at a time, at most DOWNLOAD_AHEAD segments beyond the batch
+  // being reduced: MAST throttles each connection, and a one-segment batch would otherwise download on one.
+  const downloads = new Map(pending.map(segment => {
+    let settle!: { resolve: (path: string) => void; reject: (error: unknown) => void };
+    const promise = new Promise<string>((resolve, reject) => { settle = { resolve, reject }; });
+    promise.catch(() => {});
+    return [segment.name, { promise, ...settle }] as const;
+  }));
+  let reduced = 0, wake = () => {};
+  const downloader = (async () => {
+    const active = new Set<Promise<void>>();
+    for (const [index, segment] of pending.entries()) {
+      while (index - reduced >= DOWNLOAD_AHEAD + program.batchSegments || active.size >= 3) {
+        await (active.size >= 3 ? Promise.race(active) : new Promise<void>(done => { wake = done; }));
+      }
+      const slot = downloads.get(segment.name)!;
+      const tracked: Promise<void> = segmentFile(segment, raw, rawSources).then(slot.resolve, slot.reject).finally(() => active.delete(tracked));
+      active.add(tracked);
+    }
+    await Promise.all(active);
+  })();
+  for (const batch of batches) {
+    await Promise.all(batch.map(segment => downloads.get(segment.name)!.promise));
+    const name = `batch${String(Object.keys(progress.steps).filter(key => key.startsWith('batch')).length + 1).padStart(2, '0')}`;
     const input = resolve(work, `Uncalibrated_${name}`);
     await mkdir(input, { recursive: true });
     for (const segment of batch) {
       const file = await segmentFile(segment, raw, rawSources), link = resolve(input, segment.name);
       if (!await exists(link)) await symlink(file, link);
     }
-    const free = freeMemoryPercent();
-    if (!(free >= 50)) throw new Error(`Only ${free}% of memory is free; Stage 1 needs about 17 GB. Close other work and rerun: finished batches are kept.`);
+    await waitForMemory();
     const ecf = await settings(name, program.stages.S1, 'S1', `Uncalibrated_${name}`, `Stage1_${name}`);
     await writeFile(resolve(ecf, `S2_${program.eventName}.ecf`), renderSettings(await readFile(resolve(programDirectory, program.stages.S2), 'utf8'), { topdir: `${work}/`, inputdir: `Stage1_${name}`, outputdir: `Stage2_${name}` }));
     progress.steps[name] = await python(toolchain, work, STAGE_RUNNER, ['S12', ecf, program.eventName], resolve(work, `${name}.log`));
@@ -232,13 +309,22 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     await walk(resolve(work, `Stage2_${name}`));
     progress.segments.push(...batch.map(segment => segment.name));
     await save();
+    await rm(resolve(work, `Stage1_${name}`), { recursive: true, force: true });
+    for (const segment of batch) {
+      const target = resolve(raw, segment.name);
+      if (!(await lstat(target)).isSymbolicLink()) await rm(target);
+    }
+    reduced += batch.length;
+    wake();
   }
+  await downloader;
 
-  // Stage 3 on every calibrated segment, then Stage 4 for the white light curve and for the channels.
+  // Stage 3 on every calibrated segment, then Stage 4 for the white light curve and, for a dispersed spectrum, the channels.
+  const channelStage = program.stages.S4channels;
   for (const [step, template, prefix, inputdir, outputdir] of [
     ['S3', program.stages.S3, 'S3', 'Stage2_all', 'Stage3'],
     ['S4', program.stages.S4, 'S4', 'Stage3', 'Stage4'],
-    ['S4channels', program.stages.S4channels, 'S4', 'Stage3', 'Stage4_channels'],
+    ...(channelStage === undefined ? [] : [['S4channels', channelStage, 'S4', 'Stage3', 'Stage4_channels'] as const]),
   ] as const) {
     if (progress.steps[step]) continue;
     progress.steps[step] = await python(toolchain, work, STAGE_RUNNER, [step.slice(0, 2), await settings(step, template, prefix, inputdir, outputdir), program.eventName], resolve(work, `${step}.log`));
@@ -249,9 +335,16 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   const curves = resolve(work, 'light-curves');
   await mkdir(curves, { recursive: true });
   await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours.log'));
-  await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_channels'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours-channels.log'));
-  await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
+  if (channelStage !== undefined) {
+    await python(toolchain, curves, EXPORTER, [await findOne(resolve(work, 'Stage4_channels'), /^S4_.*_LCData\.h5$/u), 'ours'], resolve(work, 'export-ours-channels.log'));
+  }
+  // A dispersed spectrum carries the star's counts per detector column, the band response a temperature conversion needs.
+  // Photometry has one band: its response is the filter's own transmission, which the package pins instead.
+  if (program.mode === 'spectroscopy') {
+    await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
+  }
   const oracle = program.oracle, oracleDirectory = resolve(work, 'oracle');
+  if (!oracle) return curves;
   await mkdir(oracleDirectory, { recursive: true });
   if (oracle.kind === 'eureka-light-curve-zip') {
     const deposit = resolve(oracleDirectory, oracle.path);
@@ -277,7 +370,8 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const [programDirectory, work, ...rest] = process.argv.slice(2);
-  if (!programDirectory || !work) throw new TypeError('Usage: reduce-tso <program directory> <work directory> [--raw <directory> ...]');
+  if (!programDirectory || !work) throw new TypeError('Usage: reduce-tso <program directory> <work directory> [--raw <directory> ...] [--segments <n>]');
   const rawSources = rest.flatMap((value, index) => rest[index - 1] === '--raw' ? [resolve(value)] : []);
-  console.log(`Light curves in ${await reduceTso(resolve(programDirectory), resolve(work), rawSources)}`);
+  const limit = rest.flatMap((value, index) => rest[index - 1] === '--segments' ? [Number(value)] : []).at(0);
+  console.log(`Light curves in ${await reduceTso(resolve(programDirectory), resolve(work), rawSources, limit)}`);
 }

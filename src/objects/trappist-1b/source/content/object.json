@@ -1,0 +1,162 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "trappist-1b",
+  "displayName": "TRAPPIST-1b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.116 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.374 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "massEarths; massSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "1.511 days",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "starlight",
+        "label": "Starlight received",
+        "value": "4.15 times Earth's",
+        "source": {
+          "catalogueId": "doi-10-3847-psj-abd022",
+          "url": "https://doi.org/10.3847/PSJ/abd022",
+          "label": "Agol et al. 2021",
+          "checked": "2026-09-17",
+          "path": "source/measurements.json",
+          "locator": "insolationEarths; insolationSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "temperature",
+    "controls": [
+      {
+        "id": "temperature",
+        "label": "MIRI 15 µm",
+        "qualification": "Reduced here from raw JWST exposures · MIRI 15 µm, 2022–2023",
+        "thumbnail": "trappist-1b-lens-temperature.webp",
+        "surface": "trappist-1b-surface-temperature@2x.webp",
+        "poles": "trappist-1b-poles-temperature@2x.webp",
+        "source": {
+          "id": "trappist-1b-miri-emission",
+          "path": "../manifest.json",
+          "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "50",
+            "300",
+            "550"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "50",
+              "300",
+              "550"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
+        },
+        "notes": "About 520 K where the star is overhead, near zero on the night side: no sign of an atmosphere carrying heat around. The map is centred on the star-facing point because the hot spot's offset is not measured; north-south detail is not measured either."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
+      "href": "https://doi.org/10.3847/PSJ/abd022"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/PSJ/abd022",
+      "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/trappist-1b.json",
+      "credit": "Published radius, mass and transit-fitted orbit from E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1"
+    }
+  }
+}

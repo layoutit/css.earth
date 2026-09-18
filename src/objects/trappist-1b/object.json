@@ -1,0 +1,153 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "trappist-1b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TRAPPIST-1b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7119
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/trappist-1b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9ca980e137086c64d4932b59101ed540e3cf437a9a5b739e25fff269ca50d4d1"
+      }
+    },
+    "catalog": {
+      "name": "TRAPPIST-1b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 2571368.4,
+      "description": "Earth-sized planet of TRAPPIST-1, one year every 1.51 days.",
+      "systemName": "TRAPPIST-1 system",
+      "order": 911,
+      "context": {
+        "order": 911
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        372794614321491900,
+        -88610827886689800,
+        -33826923726489628
+      ],
+      "presentationToReference": [
+        0.9702012296504007,
+        -0.22669432044133345,
+        0.08555266836570367,
+        -0.225780405690944,
+        -0.9739658674217456,
+        -0.020339555143597858,
+        -0.08793624048640447,
+        -0.0004173452393094055,
+        0.9961260178471739
+      ],
+      "orbitUpReference": [
+        0.22669432044133345,
+        0.9739658674217456,
+        0.0004173452393094055
+      ],
+      "metersPerUnit": 22964.516129032258,
+      "bodyRadiusM": 7119000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "9334b83d67dbcbdf652a0272e82c7fdaebb960756bef5e94606718d4dc819b81"
+  }
+}

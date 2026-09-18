@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "trappist-1d",
+  "entries": [
+    {
+      "id": "unresolved-disc",
+      "survey": "exoplanet-unresolved-disc",
+      "status": "excluded",
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "228bc900512a64a6ddbe420316d4d2c3964cb64c"
+        }
+      ]
+    }
+  ]
+}

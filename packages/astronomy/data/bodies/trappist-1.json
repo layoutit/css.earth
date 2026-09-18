@@ -1,0 +1,29 @@
+{
+  "id": "trappist-1",
+  "classification": "star",
+  "order": 910,
+  "physical": {
+    "name": "TRAPPIST-1",
+    "horizonsCode": null,
+    "meanRadiusKm": 82927.44,
+    "gravitationalParameterKm3PerS2": 11917577115.766157,
+    "parent": null
+  },
+  "physicalNotes": "Radius: 0.1192 solar radii at 695700 km per solar radius, from Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), who derive the stellar radius from the photodynamic stellar density and the Mann et al. (2019) mass. The star is barely larger than Jupiter. GM from their stellar mass, 0.0898 +/- 0.0023 solar masses, times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no rotation axis of this star is measured, so the display axis is celestial north at the star.",
+  "star": {
+    "rightAscensionDegrees": 346.62652162764437,
+    "declinationDegrees": -5.043528319429532,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 12.46691341544997,
+    "properMotionRaMasPerYear": 930.7875225817781,
+    "properMotionDecMasPerYear": -479.0375409528857,
+    "radialVelocityKmPerS": -52.003101,
+    "presentationUp": "display-axis",
+    "sources": {
+      "position": "Gaia DR3 source 2635476908753563008 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/trappist-1/source/photometry/gaia-dr3-source.csv",
+      "distance": "Gaia DR3 parallax 80.2123 +/- 0.0716 mas (same row): 1000/80.2123 = 12.467 pc, no zero-point correction",
+      "properMotion": "Gaia DR3 (same row): 930.788, -479.038 mas/yr, the largest proper motion of any star in this application",
+      "radialVelocity": "Jeffers et al. (2020, AJ 160, 120) via SIMBAD: -52.003 +/- 0.134 km/s. Gaia DR3 publishes no radial velocity for this star: it is too cool and too faint in BP."
+    }
+  }
+}

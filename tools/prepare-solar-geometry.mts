@@ -284,11 +284,17 @@ const entries = BODIES.map((body) => {
     );
   }
 
+  // A hosted planet is lit by its own star, not by the Sun: the body-fixed direction to the host, which its synchronous
+  // rotation record puts at longitude 0. Prepared separately so the Sun direction every other consumer reads stays the Sun's.
+  const starDirection = hostedState
+    ? toBodyFixed(normalize(hostedState.positionKm.map(value => -value)))
+    : null;
   return Object.freeze({
     body,
     parent,
     centerPositionAu,
     direction: bodyFixed,
+    starDirection,
     eclipticNorth,
     orbitNormal,
     orbitalVelocity,
@@ -362,6 +368,17 @@ export const BODY_POSITION_PROVENANCE = Object.freeze(${JSON.stringify(Object.fr
 // Canonical ICRF heliocentric primary states at this exact scene epoch. A
 // coordinate origin here need not have a visible surface or navigation marker.
 export const BODY_HELIOCENTRIC_STATES: Readonly<Record<string, { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; provenance: { model: string; epochJdTt: number; referenceFrame: string; target: number; center: number; source: string; sourcePath: string; sha256: string; solution?: string; limitations?: readonly string[]; timeQualification?: string; qualification?: readonly string[]; targetKind?: string } }>> = Object.freeze(${JSON.stringify(Object.fromEntries(primaryStates), null, 2)});
+
+// A planet of another star is lit by that star. Its direction in the planet's own frame, which synchronous rotation holds
+// at longitude 0: what the lighting bake and the scene's light presentation read instead of the Sun's direction.
+export const BODY_FIXED_STAR_DIRECTIONS: Readonly<Record<string, readonly number[]>> = Object.freeze({
+${
+  entries.filter(entry => entry.starDirection).map(({ body, starDirection }) =>
+    `  ${sourceKey(body)}: Object.freeze([\n` +
+    starDirection!.map((component) => `    ${component},\n`).join("") +
+    `  ]),`).join("\n")
+}
+});
 
 export const BODY_FIXED_SUN_DIRECTIONS: Readonly<Record<string, readonly number[]>> = Object.freeze({
 ${
@@ -466,6 +483,11 @@ ${
     `  }),`).join("\n")
 }
 });
+
+/** The direction to a hosted planet's own star in its body-fixed frame; null for every body the Sun lights. */
+export function bodyFixedStarDirection(bodyId: string) {
+  return BODY_FIXED_STAR_DIRECTIONS[bodyId as keyof typeof BODY_FIXED_STAR_DIRECTIONS] ?? null;
+}
 
 export function requireBodyFixedSunDirection(bodyId: string) {
   const direction = BODY_FIXED_SUN_DIRECTIONS[bodyId as keyof typeof BODY_FIXED_SUN_DIRECTIONS];

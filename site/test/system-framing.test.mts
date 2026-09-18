@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyCardViewAtCamera } from '../overview-context.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
+import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
+import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
@@ -76,7 +77,10 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
     assert.ok(view, `${id} has a prepared system view`);
     const target = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: cameraMount }));
     const projection = presentWorldCamera(target, frame, viewport);
-    assert.ok(required(projection.centerPixels).every(value => Math.abs(value) < 1e-5), `${id} stays centered`);
+    // A turned camera at another star is centred to the precision of its coordinates: about 500 m at 87 parsecs.
+    const range = Math.hypot(...target.pose.positionM.map((value, axis) => value - frame.originM[axis]!));
+    const centering = Math.max(1e-5, 8 * Number.EPSILON * Math.max(...frame.originM.map(Math.abs)) / range * viewport.focalPixels);
+    assert.ok(required(projection.centerPixels).every(value => Math.abs(value) < centering), `${id} stays centered`);
     const moons = context.bodies.filter(body => body.orbit?.centerBodyId === id);
     for (const moon of moons.filter(moon => view.memberIds.includes(moon.id))) {
       const orbit = required(moon.orbit), bound = required(orbit.bounds);
@@ -96,9 +100,48 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
     const otherMount = { sharedView: unusedSharedView, navigation: { ...cameraMount.navigation, capture: () => ({ ...world,
       pose: { positionM: [1e14, -2e14, -1e15] as const, orientationXyzw: [0, 1, 0, 0] as const } }) } };
     const otherTarget = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: otherMount }));
-    assert.deepEqual(otherTarget.pose.orientationXyzw, [0, 1, 0, 0], `${id} preserves the opposite viewing direction too`);
+    if (!STELLAR_SYSTEMS.has(id)) assert.deepEqual(otherTarget.pose.orientationXyzw, [0, 1, 0, 0], `${id} preserves the opposite viewing direction too`);
   }
 });
+
+test('another star\'s system, reached edge-on from the Sun, opens to the shallowest prepared elevation', () => {
+  assert.deepEqual([...STELLAR_SYSTEMS].sort(), SCENE_OBJECTS.filter(object => object.classification === 'star' && object.id !== 'sun'
+    && SYSTEM_VIEWS.has(object.id)).map(object => object.id).sort());
+  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
+  const minimum = Math.min(...SYSTEM_FRAMING_ANGLES.elevationsDegrees);
+  for (const id of STELLAR_SYSTEMS) {
+    const frame = required(required(SCENE_OBJECTS.find(object => object.id === id)).worldFrame), view = required(SYSTEM_VIEWS.get(id));
+    const normal = orbitNormal(view.candidates);
+    // Look from the Sun toward the star, as a flight from the Solar System arrives.
+    const from = { ...world, pose: { positionM: [0, 0, 0] as const, orientationXyzw: lookingAlong(frame.originM) } };
+    const cameraMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => from, () => optics) };
+    const target = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: cameraMount }));
+    const elevation = (orientation: readonly number[]) => {
+      const r = worldRotationFromQuaternion(orientation as [number, number, number, number]);
+      return Math.asin(Math.abs(r[2]! * normal[0] + r[5]! * normal[1] + r[8]! * normal[2])) * 180 / Math.PI;
+    };
+    const arrival = elevation(from.pose.orientationXyzw), opened = elevation(target.pose.orientationXyzw);
+    assert.ok(opened >= Math.max(arrival, minimum) - 1e-6, `${id} opens from ${arrival.toFixed(2)}° to ${opened.toFixed(2)}°`);
+    assert.ok(opened <= Math.max(arrival, minimum) + 1e-6, `${id} turns no further than it must`);
+  }
+});
+
+function orbitNormal(candidates: readonly { readonly cameraToReference: readonly number[] }[]) {
+  const right = (m: readonly number[]) => [m[0]!, m[3]!, m[6]!];
+  const [a, b] = [right(candidates[0]!.cameraToReference), right(candidates[1]!.cameraToReference)];
+  const n = [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
+  const length = Math.hypot(...n);
+  return n.map(value => value / length);
+}
+
+/** A camera at the origin whose view runs along `direction`, with +z toward the eye. */
+function lookingAlong(direction: readonly number[]): [number, number, number, number] {
+  const length = Math.hypot(...direction), back = direction.map(value => -value / length);
+  const helper = Math.abs(back[2]!) < .9 ? [0, 0, 1] : [1, 0, 0];
+  const cross = (a: readonly number[], b: readonly number[]) => [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
+  const x = cross(helper, back), xl = Math.hypot(...x), right = x.map(value => value / xl), up = cross(back, right);
+  return [...worldQuaternionFromRotation([right[0]!, up[0]!, back[0]!, right[1]!, up[1]!, back[1]!, right[2]!, up[2]!, back[2]!])] as [number, number, number, number];
+}
 
 test('selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat', () => {
   const planets = SCENE_OBJECTS.filter(object => object.classification === 'planet').map(object => object.id).sort();

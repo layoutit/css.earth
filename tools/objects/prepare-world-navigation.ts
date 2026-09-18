@@ -72,7 +72,9 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const sky = alreadyPhysical ? { ...oriented.sky, sceneRegistration } : { ...oriented.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
     sceneRegistration, sceneRegistrationModel: 'icrf-in-authored-presentation-frame', sceneRegistrationEpoch: solar.SOLAR_GEOMETRY_EPOCH_LABEL };
   // The sky cube and the Sun follow the body as drawn, for a solved lane and for a lane that still carries typed node angles.
-  const localDirection = transform(bodyToPresentation, bodySun);
+  // The light is the body's own star's where it has one: a planet of another star is lit by its host, whose direction the scene
+  // stage records; the frame origin above still places the body from the Sun.
+  const localDirection = transform(bodyToPresentation, (solar.bodyFixedStarDirection(descriptor.id) ?? bodySun) as Vector3);
   const sun = oriented.sun ? { ...oriented.sun, localDirection,
     referenceViewDirection: direction.prepareSunReferenceViewDirection({ bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
