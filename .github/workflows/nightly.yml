@@ -1,0 +1,30 @@
+name: Nightly asset sweep
+
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  assets:
+    name: Every published asset
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Generate the object registry
+        run: pnpm build:astronomy && pnpm prepare:catalog
+      - name: Check every inventoried key is published
+        # PRs and main pushes check only the keys they add. Only this full sweep notices R2 losing an object whose
+        # inventory line did not change; concurrency 8 matches the shared agent's connection cap.
+        run: pnpm check:assets-published --concurrency=8

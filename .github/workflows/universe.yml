@@ -11,8 +11,10 @@ permissions:
   actions: read
 
 concurrency:
-  group: universe-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # A PR's new push cancels its stale run. Every push to main keeps its own group (keyed by SHA) and is never
+  # cancelled: a shared group would still drop a pending main run when a third merge arrives.
+  group: universe-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   universe:
