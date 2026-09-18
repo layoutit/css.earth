@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 import {
-  CACHE_PREFIX, evictionPlan, INDEX_CACHE, isNetworkDown, networkDownUntil, INDEX_URL, isStorableRoute, offlinePageFallback, parseIndex, parsePutMessage,
+  CACHE_PREFIX, storedHeaders, evictionPlan, INDEX_CACHE, isNetworkDown, networkDownUntil, INDEX_URL, isStorableRoute, offlinePageFallback, parseIndex, parsePutMessage,
   parseUrlsMessage, responseValidator, routeRequest, RUNTIME_CACHE, runtimeBudget, STORE_MESSAGE, TOUCH_MESSAGE,
   type IndexEntry, type PutMessage,
 } from './policy.mts';
@@ -67,7 +67,7 @@ function requestTrim(): Promise<void> {
 
 async function put({ url, body, headers }: PutMessage) {
   if (!isStorableRoute(routeRequest({ url, method: 'GET', scope: self.registration.scope }))) return;
-  const responseHeaders = new Headers(headers);
+  const responseHeaders = new Headers(storedHeaders(headers));
   try {
     await (await caches.open(RUNTIME_CACHE)).put(url, new Response(body, { status: 200, headers: responseHeaders }));
   } catch {

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { isNetworkDown, NETWORK_DOWN_WINDOW_MS, networkDownUntil, shouldRegisterServiceWorker, evictionPlan, offlinePageFallback, parseIndex, parsePutMessage, parseUrlsMessage, PUT_MESSAGE, responseValidator, STORE_MESSAGE, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
+import { storedHeaders, isNetworkDown, NETWORK_DOWN_WINDOW_MS, networkDownUntil, shouldRegisterServiceWorker, evictionPlan, offlinePageFallback, parseIndex, parsePutMessage, parseUrlsMessage, PUT_MESSAGE, responseValidator, STORE_MESSAGE, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
 
 const scope = 'https://css.earth/';
 const route = (url: string, method = 'GET') => routeRequest({ url, method, scope }).kind;
@@ -110,4 +110,11 @@ test('a failed request serves stored files first only for a short window', () =>
   assert.equal(isNetworkDown(until, failedAt + NETWORK_DOWN_WINDOW_MS), false);
   // A success resets the window to zero.
   assert.equal(isNetworkDown(0, failedAt), false);
+});
+
+test('stored copies keep content headers and drop transport headers', () => {
+  assert.deepEqual(storedHeaders([
+    ['content-type', 'text/html'], ['content-encoding', 'br'], ['content-length', '120'],
+    ['transfer-encoding', 'chunked'], ['ETag', 'W/"1"'], ['last-modified', 'Fri'], ['set-cookie', 'a=b'],
+  ]), [['content-type', 'text/html'], ['ETag', 'W/"1"'], ['last-modified', 'Fri']]);
 });

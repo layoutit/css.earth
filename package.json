@@ -111,6 +111,7 @@
     "test:browser": "node site/test/dom-cleanliness-browser.mts",
     "test:browser:all": "node tools/run-browser-suites.mts",
     "test:browser:conformance": "node site/test/planet-browser-conformance.mts",
+    "test:browser:service-worker": "node --test site/test/service-worker-browser.mts",
     "test:browser:datasets": "node site/test/dataset-navigation-browser.mts",
     "test:browser:flight": "node site/test/flight-registry-browser.mts",
     "test:browser:galaxy-handoff": "node site/test/galaxy-handoff-browser.mts",

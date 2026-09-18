@@ -137,6 +137,16 @@ export function parsePutMessage(value: unknown): PutMessage | null {
   return { url: value.url, body: value.body, headers };
 }
 
+// Stored bodies are the decoded bytes the page read, so transport headers
+// (content-encoding, content-length, transfer-encoding) would describe bytes
+// that are not there. No engine tested refused such a copy, but only headers
+// that describe the content itself are kept.
+const STORED_HEADERS = new Set(['content-type', 'etag', 'last-modified', 'content-language']);
+
+export function storedHeaders(headers: Iterable<[string, string]>): [string, string][] {
+  return [...headers].filter(([name]) => STORED_HEADERS.has(name.toLowerCase()));
+}
+
 export function isStorableRoute(route: RequestRoute): boolean {
   return route.kind === 'immutable' || route.kind === 'network-first';
 }
