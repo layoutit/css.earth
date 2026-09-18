@@ -1,12 +1,17 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import { SOURCE_CATALOGUE } from './sources-catalog.mts';
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
 // reconstructs a document from scientific citations.
+// Resolve against the working directory rather than `import.meta.url`: once Astro
+// bundles this module into `dist/.prerender/chunks`, the module's own URL no
+// longer sits beside the project root, but the build always runs from it.
+const root = process.cwd();
 const revision = process.env.COMMIT_REF || execFileSync('git', ['rev-parse', 'HEAD'], {
-  cwd: new URL('../', import.meta.url), encoding: 'utf8',
+  cwd: root, encoding: 'utf8',
 }).trim();
 if (!/^[a-f0-9]{40}$/u.test(revision)) throw new Error('Source documentation needs the build commit.');
 const checked = new Set<string>();
@@ -41,7 +46,7 @@ export function sourceDocumentation(objectId: string, name: string) {
   if (!/^[a-z0-9][a-z0-9-]*$/u.test(objectId)) throw new Error(`Invalid source document owner: ${objectId}`);
   const path = `src/objects/${objectId}/README.md`;
   if (!checked.has(path)) {
-    if (!existsSync(new URL(`../${path}`, import.meta.url))) throw new Error(`Missing source document: ${path}`);
+    if (!existsSync(resolve(root, path))) throw new Error(`Missing source document: ${path}`);
     checked.add(path);
   }
   return { href: `https://github.com/layoutit/cssEarth/blob/${revision}/${path}`,
