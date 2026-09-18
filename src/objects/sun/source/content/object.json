@@ -77,11 +77,12 @@
         "surface": "sun-surface-photosphere@2x.webp",
         "poles": "sun-poles-photosphere@2x.webp",
         "source": {
-          "id": "sdo-hmi-continuum-cr2311-20260513"
+          "id": "jsoc-hmi-continuum-cr2311-keywords",
+          "url": "http://jsoc.stanford.edu/ajax/lookdata.html?ds=hmi.Ic_noLimbDark_720s"
         },
         "falseColor": false,
-        "qualification": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
-        "notes": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments."
+        "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation",
+        "notes": "HMI continuum intensity for Carrington Rotation 2311, 12 May–9 June 2026, with limb darkening removed by JSOC. It combines 28 observation dates. Colours follow SDO's own browse colour table, and the polar continuation is a prepared display adjustment."
       },
       {
         "id": "magnetic",

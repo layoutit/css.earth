@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 163 km, ecliptic J2000 pole (313\u00b0, -19\u00b0), period 38.9325 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 83.00209257577323 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 163 km, ecliptic J2000 pole (313°, -19°), period 38.9325 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 83.00209257577323 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/nemesis/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -75,7 +75,7 @@
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
       "status": "excluded",
-      "finding": "The live directory also lists 128_Nemesis_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
+      "finding": "The live directory also lists 128_Nemesis_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
       "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/128_Nemesis_adam.obj",
@@ -96,7 +96,7 @@
       "subject": "Released SAGE companion model",
       "status": "unresolved",
       "finding": "The live directory also lists 128_Nemesis_sage.obj, which the imported ledger omitted. Its existence establishes a numerical candidate; method, calibration and independence from the selected MPCD reconstruction still need comparison.",
-      "revisitWhen": "The SAGE companion\u2019s paper, scale and shape constraints have been compared with the selected MPCD release.",
+      "revisitWhen": "The SAGE companion’s paper, scale and shape constraints have been compared with the selected MPCD release.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/128_Nemesis_sage.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -129,6 +129,24 @@
         {
           "date": "2026-09-17",
           "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
+        }
+      ]
+    },
+    {
+      "id": "release-record-solution",
+      "subject": "The release rotation record against Vernazza et al. (2021) Table A.1",
+      "status": "unresolved",
+      "finding": "The release record states a 77.86 h period, twice Table A.1’s 38.93 h, and a pole whose longitude is 53° from the table’s (313°, −19°) under either column order; only the latitude agrees. It describes a different solution from the table. DAMIT holds no Nemesis model. Earlier measurements here used the release record.",
+      "revisitWhen": "The survey releases a record matching Table A.1, or a publication identifies the solution the released mesh uses.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
         }
       ]
     }

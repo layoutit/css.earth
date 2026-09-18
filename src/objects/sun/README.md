@@ -9,7 +9,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 | View | Source | What it means |
 | --- | --- | --- |
-| Photosphere | SDO/HMI continuum browse images | Successive strips from the center of the Sun’s disk form a map; color, brightness and polar coverage are adjusted. |
+| Photosphere | JSOC SDO/HMI `hmi.Ic_noLimbDark_720s`, 28 frames of CR2311 | Strips near the centre of each day’s disc form a map; JSOC removed the limb darkening. Colours and polar coverage are display choices. |
 | Magnetic field | JSOC HMI, CR2311 | Magnetic field pointing into or out of the Sun, shown in false color. |
 | Chromosphere | SDO AIA 304 Å CR2311 FITS | Logarithmic intensity in false color. |
 | Corona | SDO AIA 171 Å CR2311 FITS | Logarithmic intensity in false color. |
@@ -30,36 +30,48 @@ credits of the bodies in this overview.
 
 ## Evidence
 
-Lane change (this PR): the static-surface lane was retired; the Sun now prepares
-through the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto.
-The same pinned inputs and the same numerical interpretation (continuum strip
-mosaic with limb normalization, HMI and AIA FITS decoding and colour transforms,
-polar-boundary continuation, off-limb registration and limb plates) moved from
-`tools/objects/static-surface/synoptic-emission.mts` into the shared observation
-adapter (`tools/objects/observation/solar-synoptic.mts`) without numerical changes.
-Verified with the package, source-closure, minimap and browser conformance checks
-listed in the pull request. No new scientific review is claimed.
+Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
 
-Three prepared products differ from the retired lane and were inspected, not
-re-derived from science: each pole closes with the shared lane's single flat
-cap instead of the retired 32-segment band ring (see Known problems), the polar
-cap no longer blends a blurred low-latitude proxy texture into the continuation
-(the cap shows the Fourier continuation of the measured boundary only), and the
-lens thumbnails crop the central half-height square of the map instead of the
-central full-height square.
-
-Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js sun --write`
-prepared the package through the shared raster lane, the `emissive` presentation
-and the star-centred scene; `node --test tests/objects/unit/sun/*.test.mts` passes
-except the shared runtime-package and import-closure tests that fail identically on
-`main` (recorded once in the pull request). A headless Chrome probe
-(`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server and
-selected the photosphere, magnetic, chromosphere and corona lenses with no console
-errors or failed requests; the captures show the limb-darkened continuum disc, the
-off-limb 171 Å context behind the sphere and the band step at the polar cap listed
-under Known problems. [Unit tests](../../../tests/objects/unit/sun) and the
-[browser profile](../../../tests/objects/browser/sun/browser-profile.mts) define the
-checks; no dated scientific review is cited for this version.
+- The old photosphere was built from daily browse JPEGs and sampled each day's
+  disc on the wrong side of its central meridian between frames. With the
+  sign fixed, 100% of sunspot pixels fall within 1° of strong field in JSOC's
+  own `hmi.mrsynop_small_720s[2311]` magnetic map, against 76% before; the old
+  map also showed doubled, half-strength spots where two frames blended
+  ([before, after and the magnetic field](source/reference/photosphere-before-after.png)).
+- The Chromosphere and Corona FITS maps were mirrored east–west against the
+  magnetic map. JSOC's header for the magnetic map (CTYPE1 `CRLN-CEA`, CDELT1
+  −0.5, pixel 1 at Carrington longitude 0.3°) and the AIA maps both run
+  longitude up to the right; the magnetic lens reversed its axis and the AIA
+  lenses did not. The raster lane takes east-positive maps (Mars's Gazetteer
+  features, which are east-positive, sit on the Viking MDIM mosaic), and
+  Carrington longitude increases toward the west limb, so every Sun map must be
+  reversed. Before: |B| correlates with 304 Å at r = 0.44 as prepared and 0.57
+  mirrored; after: 0.57 as prepared (0.55 for 171 Å).
+- The photosphere now reads 28 JSOC `hmi.Ic_noLimbDark_720s` frames (daily at
+  00:00 TAI from 13 May to 9 June, plus 26 May 12:00 for the missing midnight,
+  all QUALITY 0). Each frame is placed by its pinned DRMS record: CRPIX,
+  CDELT, CROTA2, RSUN_OBS and the observer's CRLN_OBS and CRLT_OBS. This replaces
+  the disc detection, the radial normalization and the approximate B0 formula.
+  Each map column blends the two frames whose central meridians bracket it.
+- The rim darkening plate uses the limb darkening JSOC removed, measured as the
+  ratio of the 13 May `hmi.Ic_720s` frame to its flattened twin. The record's
+  LDCoef0–5 do not follow a polynomial in 1 − μ (up to 6% off near μ = 0.2), so
+  the coefficients are not used.
+- Colours follow SDO's own browse colour table, measured by registering the
+  13 May browse JPEG on the `hmi.Ic_720s` frame: I/I₀ = 0.56 → (249, 85, 1) up
+  to 1.08 → (255, 178, 37), with a tight 10–90% spread (≤ 16 levels). Below
+  0.56 sunspots are only a few JPEG pixels wide and the table is not
+  measurable; the palette ramps linearly to black there.
+- The JSOC segments are Rice tile-compressed FITS. `tools/fits-rice.mts`
+  decodes them; on the full 13 May frame every one of the 16.8 million samples
+  equals astropy's raw integer through BSCALE/BZERO, with BLANK samples in the
+  same places. The [oracle table](../../../tools/oracles/README.md) lists the
+  committed fixture.
+- [Unit tests](../../../tests/objects/unit/sun) and the
+  [browser profile](../../../tests/objects/browser/sun/browser-profile.mts)
+  define the package checks. The [four-lens render](source/reference/rendered-lenses.png)
+  of this version was inspected after the scene reported ready: active regions
+  sit in the same places in every lens.
 
 ## Known problems
 
@@ -88,17 +100,21 @@ checks; no dated scientific review is cited for this version.
 <details>
 <summary>Map dimensions and missing-sample treatment</summary>
 
-- Photosphere: colorized SDO/HMI continuum browse images, assembled from
-  central-meridian strips across CR2311. Source-derived limb normalization and
-  continuation beyond the observed polar latitudes are display approximations.
+- Photosphere: JSOC `hmi.Ic_noLimbDark_720s` continuum intensity (limb
+  darkening removed by JSOC) from 28 frames across CR2311, placed by each
+  frame's recorded geometry and coloured with SDO's measured browse colour
+  table. Continuation beyond 80° latitude is a display approximation.
 - Magnetic field: JSOC `hmi.mrsynop_small_720s[2311]`, the 720 x 360 radial
   magnetic-field map for Carrington Rotation 2311. The FITS grid is equally
-  spaced in sine latitude. Preparation resamples it to equal latitude and uses
-  a declared bipolar blue-to-amber false-colour scale.
+  spaced in sine latitude. Preparation resamples it to equal latitude, reverses
+  its longitude axis to east-positive and uses a declared bipolar
+  blue-to-amber false-colour scale.
 - Chromosphere: NASA SDO AIA 304 Å CR2311 FITS synoptic map, 3,600 × 1,080,
-  displayed in false color with a logarithmic intensity scale.
+  longitude reversed to east-positive, displayed in false color with a
+  logarithmic intensity scale.
 - Corona: NASA SDO AIA 171 Å CR2311 FITS synoptic map, 3,600 × 1,080,
-  displayed in false color with a logarithmic intensity scale.
+  longitude reversed to east-positive, displayed in false color with a
+  logarithmic intensity scale.
 
 CR2311 covers 2026-05-12 through 2026-06-09. A synoptic map combines central meridian
 observations across one solar rotation; it is a full-surface temporal map, not a simultaneous
@@ -112,7 +128,7 @@ latitude bands, projects the poles and encodes the textures at both prepared
 densities. The legends in `source/content/object.json` name the same palette stops
 as the raster recipe.
 
-The browse images and FITS maps are already processed mission products. Strip assembly,
+The continuum frames and FITS maps are processed mission products. Strip assembly,
 resampling, missing-sample filling and color mapping are our additional steps; the textures are
 display outputs.
 

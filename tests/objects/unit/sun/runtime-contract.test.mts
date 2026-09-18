@@ -32,7 +32,7 @@ objectRuntimePackageTests(runtimeDefinition);
 test("binds the exact Sun source and runtime closures", async () => {
   const source = await createSourceManifest({ planetId: "sun", planetName: "Sun", sourceRoot: resolve(projectRoot, "src/objects/sun/source") });
   // 38 retired-lane inputs + 7 authored records that moved from documents to local inputs (the navigation recipe included); 3 documents remain.
-  assert.deepEqual(await source.verify(), { inputCount: 43, generatedIntermediateCount: 0, documentCount: 1 });
+  assert.deepEqual(await source.verify(), { inputCount: 48, generatedIntermediateCount: 0, documentCount: 3 });
   const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
   assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
   // 4 lenses x (surface, poles, corona, limb) at the one prepared density + 4 thumbnails.

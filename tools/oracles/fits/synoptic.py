@@ -14,6 +14,8 @@ for body in ['sun', 'jupiter']:
     manifest = json.loads((source / 'manifest.json').read_text())
     for entry in manifest['inputs']:
         if not entry['path'].endswith('.fits'): continue
+        # The HMI continuum frames are tile-compressed segments; fits/rice.py owns their decoding.
+        if entry['path'].startswith(('hmi/continuum/', 'hmi/limb-darkening/')): continue
         path = source / entry['path']; inputs.append(path)
         with fits.open(path, memmap=False) as hdus:
             data = hdus[0].data

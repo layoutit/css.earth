@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d28874e0ace1dbadc1ad824368230d5edc9fad66d13819165a5aa6f871e4343b"
+    "sha256": "db42e5770c219721aa89416cfaaa70353e4a9e440e5438dbf9cc3dfc8bcb4858"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "742eb393af10614e8922956edd5df779a660bd1d1cd18661e2164651b2fcbb23"
+    "bindingsSha256": "2dae30c701d694ad84158841bec53271d22d6948825c9eff329621081844b2ad"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "dd64051f02361879c4ce5e45760d09fdae18e66fd73ef39d5eecce96776f7f0e",
+      "sha256": "83b7e9748a4f8541343092f96a1369c12f612658c2c05ef64d06c9c553f1cc37",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/sun/",
@@ -25,6 +25,10 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
+        "densities": [
+          1,
+          2
+        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -39,50 +43,189 @@
         "surfaces": [
           {
             "id": "photosphere",
-            "source": "sdo/continuum/CR2311",
+            "source": "hmi/continuum",
             "falseColor": false,
             "output": "sun-surface-{id}{suffix}.webp",
             "thumbnail": "sun-lens-{id}.webp",
             "science": {
               "synoptic": {
-                "kind": "continuum-disc-mosaic",
-                "mapFiles": [
-                  "sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260514_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260515_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260516_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260517_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260518_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260519_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260520_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260521_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260522_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260523_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260524_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260525_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260527_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260528_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260529_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260530_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260531_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260601_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260602_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260603_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260604_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260605_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260606_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260607_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260608_000000_1024_HMIIC.jpg",
-                  "sdo/continuum/CR2311/20260609_000000_1024_HMIIC.jpg"
-                ],
+                "kind": "hmi-continuum-mosaic",
                 "continuum": {
-                  "start": "2026-05-12T21:56:01Z",
-                  "stop": "2026-06-09T02:57:22Z",
+                  "keywords": "hmi/continuum/keywords.json",
+                  "frames": [
+                    {
+                      "file": "hmi/continuum/20260513_000000_TAI.fits",
+                      "record": "2026.05.13_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260514_000000_TAI.fits",
+                      "record": "2026.05.14_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260515_000000_TAI.fits",
+                      "record": "2026.05.15_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260516_000000_TAI.fits",
+                      "record": "2026.05.16_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260517_000000_TAI.fits",
+                      "record": "2026.05.17_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260518_000000_TAI.fits",
+                      "record": "2026.05.18_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260519_000000_TAI.fits",
+                      "record": "2026.05.19_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260520_000000_TAI.fits",
+                      "record": "2026.05.20_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260521_000000_TAI.fits",
+                      "record": "2026.05.21_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260522_000000_TAI.fits",
+                      "record": "2026.05.22_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260523_000000_TAI.fits",
+                      "record": "2026.05.23_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260524_000000_TAI.fits",
+                      "record": "2026.05.24_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260525_000000_TAI.fits",
+                      "record": "2026.05.25_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260526_120000_TAI.fits",
+                      "record": "2026.05.26_12:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260527_000000_TAI.fits",
+                      "record": "2026.05.27_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260528_000000_TAI.fits",
+                      "record": "2026.05.28_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260529_000000_TAI.fits",
+                      "record": "2026.05.29_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260530_000000_TAI.fits",
+                      "record": "2026.05.30_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260531_000000_TAI.fits",
+                      "record": "2026.05.31_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260601_000000_TAI.fits",
+                      "record": "2026.06.01_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260602_000000_TAI.fits",
+                      "record": "2026.06.02_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260603_000000_TAI.fits",
+                      "record": "2026.06.03_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260604_000000_TAI.fits",
+                      "record": "2026.06.04_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260605_000000_TAI.fits",
+                      "record": "2026.06.05_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260606_000000_TAI.fits",
+                      "record": "2026.06.06_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260607_000000_TAI.fits",
+                      "record": "2026.06.07_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260608_000000_TAI.fits",
+                      "record": "2026.06.08_00:00:00_TAI"
+                    },
+                    {
+                      "file": "hmi/continuum/20260609_000000_TAI.fits",
+                      "record": "2026.06.09_00:00:00_TAI"
+                    }
+                  ],
+                  "limbDarkening": {
+                    "file": "hmi/limb-darkening/20260513_000000_TAI.fits",
+                    "keywords": "hmi/limb-darkening/keywords.json",
+                    "record": "2026.05.13_00:00:00_TAI"
+                  },
                   "maximumLatitudeDegrees": 80,
-                  "minimumDiscRadius": 450,
-                  "maximumDiscRadius": 490,
-                  "discBrightnessThreshold": 72,
-                  "solarPoleTiltDegrees": 7.25
+                  "palette": {
+                    "intensities": [
+                      0,
+                      0.56,
+                      0.6,
+                      0.7,
+                      0.8,
+                      0.9,
+                      1,
+                      1.08
+                    ],
+                    "colors": [
+                      [
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        249,
+                        85,
+                        1
+                      ],
+                      [
+                        254,
+                        91,
+                        1
+                      ],
+                      [
+                        254,
+                        111,
+                        1
+                      ],
+                      [
+                        254,
+                        133,
+                        1
+                      ],
+                      [
+                        253,
+                        155,
+                        2
+                      ],
+                      [
+                        253,
+                        172,
+                        24
+                      ],
+                      [
+                        255,
+                        178,
+                        37
+                      ]
+                    ]
+                  }
                 },
                 "polarStabilization": {
                   "latitudeSegments": 16,
@@ -160,7 +303,7 @@
                   "width": 3600,
                   "height": 1080,
                   "latitude": "equirectangular",
-                  "reverseLongitude": false,
+                  "reverseLongitude": true,
                   "nearestLatitudeLimit": 128,
                   "positiveOnly": true,
                   "color": {
@@ -220,7 +363,7 @@
                   "width": 3600,
                   "height": 1080,
                   "latitude": "equirectangular",
-                  "reverseLongitude": false,
+                  "reverseLongitude": true,
                   "nearestLatitudeLimit": 128,
                   "positiveOnly": true,
                   "color": {
@@ -299,7 +442,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3e0db71fb2f2b9cc2799cb02fd345ae2f89d9cdc3ad7982e45473c9ce4efe948",
+      "sha256": "c1d8210cd8a902c10d3d0c4bfff1a5446aa2b0e323b73b319687896900b395ce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -376,22 +519,23 @@
               "label": "Photosphere",
               "shortLabel": "Continuum",
               "thumbnail": "sun-lens-photosphere.webp",
-              "surface": "sun-surface-photosphere@2x.webp",
-              "poles": "sun-poles-photosphere@2x.webp",
+              "surface": "sun-surface-photosphere.webp",
+              "poles": "sun-poles-photosphere.webp",
               "source": {
-                "id": "sdo-hmi-continuum-cr2311-20260513"
+                "id": "jsoc-hmi-continuum-cr2311-keywords",
+                "url": "http://jsoc.stanford.edu/ajax/lookdata.html?ds=hmi.Ic_noLimbDark_720s"
               },
               "falseColor": false,
-              "qualification": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
-              "notes": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments."
+              "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation",
+              "notes": "HMI continuum intensity for Carrington Rotation 2311, 12 May–9 June 2026, with limb darkening removed by JSOC. It combines 28 observation dates. Colours follow SDO's own browse colour table, and the polar continuation is a prepared display adjustment."
             },
             {
               "id": "magnetic",
               "label": "Magnetic field",
               "shortLabel": "HMI Bᵣ",
               "thumbnail": "sun-lens-magnetic.webp",
-              "surface": "sun-surface-magnetic@2x.webp",
-              "poles": "sun-poles-magnetic@2x.webp",
+              "surface": "sun-surface-magnetic.webp",
+              "poles": "sun-poles-magnetic.webp",
               "source": {
                 "id": "jsoc-hmi-cr2311-radial-field-synoptic-map",
                 "url": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
@@ -440,8 +584,8 @@
               "label": "Chromosphere",
               "shortLabel": "304 Å",
               "thumbnail": "sun-lens-chromosphere.webp",
-              "surface": "sun-surface-chromosphere@2x.webp",
-              "poles": "sun-poles-chromosphere@2x.webp",
+              "surface": "sun-surface-chromosphere.webp",
+              "poles": "sun-poles-chromosphere.webp",
               "source": {
                 "id": "sdo-aia-304-cr2311-synoptic-map",
                 "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
@@ -488,8 +632,8 @@
               "label": "Corona",
               "shortLabel": "171 Å",
               "thumbnail": "sun-lens-corona.webp",
-              "surface": "sun-surface-corona@2x.webp",
-              "poles": "sun-poles-corona@2x.webp",
+              "surface": "sun-surface-corona.webp",
+              "poles": "sun-poles-corona.webp",
               "source": {
                 "id": "sdo-aia-171-cr2311-synoptic-map",
                 "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
@@ -599,23 +743,22 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260513",
-      "path": "sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/13/20260513_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-cr2311-keywords",
+      "path": "hmi/continuum/keywords.json",
+      "origin": "http://jsoc.stanford.edu/cgi-bin/ajax/jsoc_info?ds=hmi.Ic_noLimbDark_720s%5B2026.05.13_00:00:00_TAI-2026.06.09_00:00:00_TAI@1d%5D,hmi.Ic_noLimbDark_720s%5B2026.05.26_12:00:00_TAI%5D&op=rs_list&key=T_REC,T_OBS,QUALITY,CTYPE1,CTYPE2,CUNIT1,CUNIT2,CRPIX1,CRPIX2,CRVAL1,CRVAL2,CDELT1,CDELT2,CROTA2,RSUN_OBS,DSUN_OBS,CRLN_OBS,CRLT_OBS,CAR_ROT&seg=continuum",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact JSOC jsoc_info rs_list response: record keywords and segment paths of the 28 hmi.Ic_noLimbDark_720s frames",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/13/20260513_000000_1024_HMIIC.jpg",
+            "evidence": "http://jsoc.stanford.edu/cgi-bin/ajax/jsoc_info?ds=hmi.Ic_noLimbDark_720s%5B2026.05.13_00:00:00_TAI-2026.06.09_00:00:00_TAI@1d%5D,hmi.Ic_noLimbDark_720s%5B2026.05.26_12:00:00_TAI%5D&op=rs_list&key=T_REC,T_OBS,QUALITY,CTYPE1,CTYPE2,CUNIT1,CUNIT2,CRPIX1,CRPIX2,CRVAL1,CRVAL2,CDELT1,CDELT2,CROTA2,RSUN_OBS,DSUN_OBS,CRLN_OBS,CRLT_OBS,CAR_ROT&seg=continuum",
             "missionId": "sdo"
           }
         ]
@@ -624,14 +767,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260513",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "3f892eddb79a3e0918968f789ffde00296fd1dab3db70deb4a3a0e84e2987fd8",
-      "bytes": 201610,
+      "sha256": "36289d8a41a477a0e163f32b87c1fb5aeb1b12a40a5d15197cc6dd722405c866",
+      "bytes": 10387,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -639,30 +782,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/13/20260513_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/keywords.json",
+        "url": "http://jsoc.stanford.edu/cgi-bin/ajax/jsoc_info?ds=hmi.Ic_noLimbDark_720s%5B2026.05.13_00:00:00_TAI-2026.06.09_00:00:00_TAI@1d%5D,hmi.Ic_noLimbDark_720s%5B2026.05.26_12:00:00_TAI%5D&op=rs_list&key=T_REC,T_OBS,QUALITY,CTYPE1,CTYPE2,CUNIT1,CUNIT2,CRPIX1,CRPIX2,CRVAL1,CRVAL2,CDELT1,CDELT2,CROTA2,RSUN_OBS,DSUN_OBS,CRLN_OBS,CRLT_OBS,CAR_ROT&seg=continuum"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260514",
-      "path": "sdo/continuum/CR2311/20260514_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/14/20260514_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260513-000000-tai",
+      "path": "hmi/continuum/20260513_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM96/D1995449626/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.13_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/14/20260514_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM96/D1995449626/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -671,14 +813,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260514",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "89397586ef57d2855b5e7e17c1cabc9d614e91b248891dedce7faffd46c40799",
-      "bytes": 201167,
+      "sha256": "bd0efbb1f6950d8f57257da704cf6549f68049cef395159ac0d531031d278a96",
+      "bytes": 15647040,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -686,30 +828,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260514_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/14/20260514_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260513_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM96/D1995449626/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260515",
-      "path": "sdo/continuum/CR2311/20260515_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/15/20260515_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260514-000000-tai",
+      "path": "hmi/continuum/20260514_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM84/D1995830938/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.14_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/15/20260515_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM84/D1995830938/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -718,14 +859,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260515",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "76cd18e53cdb2300d975f4b5daecdb98ecbe6f928a85f7bf6e573142c6e0b9d8",
-      "bytes": 201160,
+      "sha256": "ce191f1646a793839d19026d26e28c5f0a3ea7ccf390a2b00dba330cb6eb83c5",
+      "bytes": 15629760,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -733,30 +874,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260515_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/15/20260515_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260514_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM84/D1995830938/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260516",
-      "path": "sdo/continuum/CR2311/20260516_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/16/20260516_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260515-000000-tai",
+      "path": "hmi/continuum/20260515_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM86/D1996196117/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.15_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/16/20260516_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM86/D1996196117/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -765,14 +905,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260516",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "8def98477239d28fe06ee770e221fe65ec7f04b9a0d087849738efb8dadd7fa8",
-      "bytes": 200916,
+      "sha256": "3c257c9b41a3e4b0fcc373d8d7539df7538ecfcf085f49b5df3e6075675df8c3",
+      "bytes": 15635520,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -780,30 +920,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260516_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/16/20260516_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260515_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM86/D1996196117/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260517",
-      "path": "sdo/continuum/CR2311/20260517_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/17/20260517_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260516-000000-tai",
+      "path": "hmi/continuum/20260516_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM93/D1996591035/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.16_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/17/20260517_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM93/D1996591035/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -812,14 +951,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260517",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "36c257e8a54e3225c0dd3ec1b483eb68e590c6763158d75f0aaa3a81cc2c305c",
-      "bytes": 201242,
+      "sha256": "b116caeb267a5250bf5d1e72622851ab9f88e79c134d304a306085bebc749517",
+      "bytes": 15626880,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -827,30 +966,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260517_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/17/20260517_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260516_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM93/D1996591035/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260518",
-      "path": "sdo/continuum/CR2311/20260518_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/18/20260518_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260517-000000-tai",
+      "path": "hmi/continuum/20260517_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM92/D1996919159/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.17_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/18/20260518_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM92/D1996919159/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -859,14 +997,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260518",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "6c8f6a2aeba52e13bce42ee142b79a69edfd37dba530547ced0e6032c6121089",
-      "bytes": 201369,
+      "sha256": "1dff3551e08cf180018b4e3832acbd85d7539236843bc8584917128d2e73d01f",
+      "bytes": 15624000,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -874,30 +1012,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260518_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/18/20260518_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260517_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM92/D1996919159/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260519",
-      "path": "sdo/continuum/CR2311/20260519_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/19/20260519_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260518-000000-tai",
+      "path": "hmi/continuum/20260518_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM94/D1997290784/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.18_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/19/20260519_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM94/D1997290784/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -906,14 +1043,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260519",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "76ed3f989b3fdc725de3cf6a84816bf9aad0fc375c3e2a9bcf3604eaaf4c99df",
-      "bytes": 201555,
+      "sha256": "b56f792d254fc7417b0223e93e7aeed08282bb424a4fa701384de46372c90d5e",
+      "bytes": 15618240,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -921,30 +1058,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260519_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/19/20260519_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260518_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM94/D1997290784/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260520",
-      "path": "sdo/continuum/CR2311/20260520_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/20/20260520_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260519-000000-tai",
+      "path": "hmi/continuum/20260519_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM84/D1997660075/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.19_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/20/20260520_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM84/D1997660075/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -953,14 +1089,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260520",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "1b9002ef8e5a81ddea7487b4411aa5be2e4daf02b0afffe1440fb18d6070bbc2",
-      "bytes": 201528,
+      "sha256": "16ec2b9971bf8a2230ff590d2d8d29886e618b2329eecf4b8f420360803f0c79",
+      "bytes": 15609600,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -968,30 +1104,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260520_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/20/20260520_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260519_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM84/D1997660075/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260521",
-      "path": "sdo/continuum/CR2311/20260521_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/21/20260521_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260520-000000-tai",
+      "path": "hmi/continuum/20260520_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM85/D1998041216/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.20_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/21/20260521_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM85/D1998041216/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1000,14 +1135,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260521",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "c429676a01c47cb871edce7821363ee79df6e42861cc1e88a1d87f3b276e4343",
-      "bytes": 201697,
+      "sha256": "60e078e44d18b8458cda49696e28cb745cf524c9a25694d737f97563b8b0abae",
+      "bytes": 15603840,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1015,30 +1150,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260521_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/21/20260521_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260520_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM85/D1998041216/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260522",
-      "path": "sdo/continuum/CR2311/20260522_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/22/20260522_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260521-000000-tai",
+      "path": "hmi/continuum/20260521_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM88/D1998368073/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.21_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/22/20260522_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM88/D1998368073/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1047,14 +1181,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260522",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "82bbdcb50a5555dddbe7d2d1cb5ab50665fe0433a9ba6278c7bca03a12f21f5b",
-      "bytes": 201436,
+      "sha256": "d1aa4db76a7d969b2341e5ad7c6e916ea3012e6e69806d7b8da8dda6a2c60056",
+      "bytes": 15598080,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1062,30 +1196,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260522_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/22/20260522_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260521_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM88/D1998368073/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260523",
-      "path": "sdo/continuum/CR2311/20260523_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/23/20260523_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260522-000000-tai",
+      "path": "hmi/continuum/20260522_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM85/D1999155504/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.22_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/23/20260523_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM85/D1999155504/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1094,14 +1227,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260523",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "a9ded4a39f69c2cb0a026c74b91a57e9e4d8cfecae1c66c66856c8d11f9f0627",
-      "bytes": 201398,
+      "sha256": "c954427ab2ff66ed923d2df81dcb51f7f1346a06e4061023b4d6ba493d54c024",
+      "bytes": 15589440,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1109,30 +1242,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260523_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/23/20260523_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260522_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM85/D1999155504/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260524",
-      "path": "sdo/continuum/CR2311/20260524_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/24/20260524_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260523-000000-tai",
+      "path": "hmi/continuum/20260523_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM86/D1999153061/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.23_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/24/20260524_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM86/D1999153061/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1141,14 +1273,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260524",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "ec35222f178e689b06ea8f5258abe4aec9eb5b75e3ff679ecd8a52c3bb92de1d",
-      "bytes": 201853,
+      "sha256": "8838b647aec15dd3be8080d3e12aae9a8f04119f786a8ad539976bc0a225b46a",
+      "bytes": 15592320,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1156,30 +1288,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260524_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/24/20260524_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260523_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM86/D1999153061/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260525",
-      "path": "sdo/continuum/CR2311/20260525_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/25/20260525_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260524-000000-tai",
+      "path": "hmi/continuum/20260524_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM88/D1999414588/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.24_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/25/20260525_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM88/D1999414588/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1188,14 +1319,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260525",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "a4b6963e8255a1e4b8fe70f2f7419f742a6a2067537127b475075ffa36f88062",
-      "bytes": 201921,
+      "sha256": "13763655b8e358a1b2402435fc3b7785eb49a64ed3e3bc37d5e512a324bb0c33",
+      "bytes": 15595200,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1203,30 +1334,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260525_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/25/20260525_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260524_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM88/D1999414588/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260527",
-      "path": "sdo/continuum/CR2311/20260527_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260525-000000-tai",
+      "path": "hmi/continuum/20260525_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM88/D1999878099/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.25_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM88/D1999878099/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1235,14 +1365,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260527",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "2d653bb2d39bcc24e8598951a16b8cf1397292ee1aeff034ce7bd82ca1e7ab7c",
-      "bytes": 201937,
+      "sha256": "8bbbbf3bdbb64eedfbe9f14c0d864734b22286192dd5c65b7263ee74551aa281",
+      "bytes": 15586560,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1250,30 +1380,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260527_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260525_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM88/D1999878099/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260528",
-      "path": "sdo/continuum/CR2311/20260528_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/28/20260528_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260526-120000-tai",
+      "path": "hmi/continuum/20260526_120000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM88/D2000079510/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.26_12:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/28/20260528_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM88/D2000079510/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1282,14 +1411,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260528",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "9826280d78c56635353ad01bd361f22844314e1a190daad461db4b5c66a57433",
-      "bytes": 201925,
+      "sha256": "bcd852172f58e9457c995402a94323abac21de9cb6a35b145a869d356838ce63",
+      "bytes": 15626880,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1297,30 +1426,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260528_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/28/20260528_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260526_120000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM88/D2000079510/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260529",
-      "path": "sdo/continuum/CR2311/20260529_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/29/20260529_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260527-000000-tai",
+      "path": "hmi/continuum/20260527_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM93/D2000383703/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.27_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/29/20260529_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM93/D2000383703/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1329,14 +1457,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260529",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "9e3ac8a22f13778ea1554e36172cd522646c99f7cb1d8e87eba644fb32842ef5",
-      "bytes": 202146,
+      "sha256": "aec1d325407ffbb6e55b35743c7ab907d793b8f6223869f8fa976178fd082a67",
+      "bytes": 15560640,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1344,30 +1472,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260529_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/29/20260529_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260527_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM93/D2000383703/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260530",
-      "path": "sdo/continuum/CR2311/20260530_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/30/20260530_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260528-000000-tai",
+      "path": "hmi/continuum/20260528_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM91/D2000715425/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.28_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/30/20260530_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM91/D2000715425/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1376,14 +1503,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260530",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "ee23ebd76fba906742ad5963f8f73273bed0e2ff1c2ca216316952bbd4ed37ba",
-      "bytes": 202431,
+      "sha256": "3e79c29f6f6b83152da20da7ba06ff0e7c747e837c1faec91268f701fba36194",
+      "bytes": 15563520,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1391,30 +1518,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260530_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/30/20260530_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260528_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM91/D2000715425/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260531",
-      "path": "sdo/continuum/CR2311/20260531_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/31/20260531_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260529-000000-tai",
+      "path": "hmi/continuum/20260529_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM95/D2001293287/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.29_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/31/20260531_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM95/D2001293287/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1423,14 +1549,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260531",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "04acaf1f08d85eac2618b81db5b5746fec37907f5b1992540ef86421be272668",
-      "bytes": 201895,
+      "sha256": "8e38f57b351a22cccb846e2d91d1f884885e96593ceca8694a7a0ef6e6eb97d4",
+      "bytes": 15554880,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1438,30 +1564,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260531_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/31/20260531_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260529_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM95/D2001293287/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260601",
-      "path": "sdo/continuum/CR2311/20260601_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/01/20260601_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260530-000000-tai",
+      "path": "hmi/continuum/20260530_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM85/D2001597072/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.30_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/01/20260601_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM85/D2001597072/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1470,14 +1595,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260601",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "2969b0723e9f7bb30f03d57883c6911a68526730dcbebd906d020c6df241ca58",
-      "bytes": 201902,
+      "sha256": "bbeea359f2b8985d517460ed2255440a2a4368c1c11e2334b3ba3596f92fe81a",
+      "bytes": 15554880,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1485,30 +1610,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260601_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/01/20260601_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260530_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM85/D2001597072/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260602",
-      "path": "sdo/continuum/CR2311/20260602_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/02/20260602_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260531-000000-tai",
+      "path": "hmi/continuum/20260531_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM89/D2001910073/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.05.31_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/02/20260602_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM89/D2001910073/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1517,14 +1641,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260602",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "87b1112185053c05a486607f1afd543ccba1037b34358cfa4064b0849d9afe23",
-      "bytes": 202123,
+      "sha256": "999d7cb45f7fbdfb92f8294d36efffe2aa9814545551c1bd45c36c6a0d268ed0",
+      "bytes": 15549120,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1532,30 +1656,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260602_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/02/20260602_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260531_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM89/D2001910073/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260603",
-      "path": "sdo/continuum/CR2311/20260603_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/03/20260603_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260601-000000-tai",
+      "path": "hmi/continuum/20260601_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM92/D2002220375/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.01_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/03/20260603_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM92/D2002220375/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1564,14 +1687,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260603",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "0341a126279acb1bf26dcd253ccd8ceb345ce488b10f93bbaf38c677ab418b26",
-      "bytes": 202360,
+      "sha256": "618376f58142b6ee23ac5b4c75c0c78bead433f5afefa578d8ea68f6cd1bdec8",
+      "bytes": 15543360,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1579,30 +1702,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260603_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/03/20260603_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260601_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM92/D2002220375/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260604",
-      "path": "sdo/continuum/CR2311/20260604_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/04/20260604_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260602-000000-tai",
+      "path": "hmi/continuum/20260602_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM93/D2002513272/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.02_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/04/20260604_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM93/D2002513272/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1611,14 +1733,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260604",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "2e755fdcca312d4e89b9ef00261198f41628ddb3bbbf08ea10e87b5aed74ea0a",
-      "bytes": 202812,
+      "sha256": "87842b0a009179f49891731bb03b68970827d40bccfacbbfd657b17414bd7731",
+      "bytes": 15540480,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1626,30 +1748,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260604_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/04/20260604_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260602_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM93/D2002513272/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260605",
-      "path": "sdo/continuum/CR2311/20260605_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/05/20260605_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260603-000000-tai",
+      "path": "hmi/continuum/20260603_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM90/D2002756466/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.03_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/05/20260605_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM90/D2002756466/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1658,14 +1779,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260605",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "1ba5981f51630ad9829eafbe23f51bce9a928438e3c6bb8e36968335c88d66d4",
-      "bytes": 202269,
+      "sha256": "99317c77bac5e8894a18de93e600ed56f328c77b9c4a625d72b39edde16baafe",
+      "bytes": 15540480,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1673,30 +1794,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260605_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/05/20260605_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260603_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM90/D2002756466/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260606",
-      "path": "sdo/continuum/CR2311/20260606_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/06/20260606_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260604-000000-tai",
+      "path": "hmi/continuum/20260604_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM98/D2002975977/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.04_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/06/20260606_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM98/D2002975977/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1705,14 +1825,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260606",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "5e9f63736d8fecd37afb5b30354a558c54dc6a9b11c09772f7e23deac25df251",
-      "bytes": 202113,
+      "sha256": "f6326f7dc18ce2ec6fd94d416387d31eb14eb9a78bad926b9df33738b44a5692",
+      "bytes": 15526080,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1720,30 +1840,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260606_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/06/20260606_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260604_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM98/D2002975977/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260607",
-      "path": "sdo/continuum/CR2311/20260607_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/07/20260607_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260605-000000-tai",
+      "path": "hmi/continuum/20260605_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM92/D2003387699/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.05_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/07/20260607_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM92/D2003387699/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1752,14 +1871,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260607",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "2d3a622440eee08738e68cb09a38320d733abf4473a2fd84cfabfc7a1d33a1c0",
-      "bytes": 202295,
+      "sha256": "15ad4075e5256582172fe0e5e9fddf00dde71e591d9078a02fb69e4ec45cedb0",
+      "bytes": 15517440,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1767,30 +1886,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260607_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/07/20260607_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260605_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM92/D2003387699/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260608",
-      "path": "sdo/continuum/CR2311/20260608_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/08/20260608_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260606-000000-tai",
+      "path": "hmi/continuum/20260606_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM91/D2003729111/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.06_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/08/20260608_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM91/D2003729111/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1799,14 +1917,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260608",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "8d54b5872061e422d32ac27495d33903460d9cc9d06d487771183e6049514e9f",
-      "bytes": 201556,
+      "sha256": "60fa38761859f8cb1f67f060e9a20db5654f601f2068fbe6927ca92c85d27c9e",
+      "bytes": 15508800,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1814,30 +1932,29 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260608_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/08/20260608_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260606_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM91/D2003729111/S00003/continuum.fits"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "sdo-hmi-continuum-cr2311-20260609",
-      "path": "sdo/continuum/CR2311/20260609_000000_1024_HMIIC.jpg",
-      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/09/20260609_000000_1024_HMIIC.jpg",
-      "credit": "NASA/SDO and the HMI science team",
-      "license": "NASA media usage guidelines and SDO data use policy",
+      "id": "jsoc-hmi-continuum-20260607-000000-tai",
+      "path": "hmi/continuum/20260607_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM94/D2004074118/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
         "https://sdo.gsfc.nasa.gov/data/rules.php"
       ],
-      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
-      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.07_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
       "capture": {
         "attributions": [
           {
             "kind": "facility",
             "facilityId": "sdo",
-            "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/09/20260609_000000_1024_HMIIC.jpg",
+            "evidence": "https://jsoc1.stanford.edu/SUM94/D2004074118/S00003/continuum.fits",
             "missionId": "sdo"
           }
         ]
@@ -1846,14 +1963,14 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260609",
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+            "evidence": "JSOC record set named by the pinned keyword response"
           }
         ]
       },
-      "sha256": "b26903c43d0ae028d9b95f7609234d1270446ce50cf2d3c43216c8c6f359bbfc",
-      "bytes": 201690,
+      "sha256": "d8dc5df3edf5b7c34177ed67d41bac700aaf1e95c2797c139f0d6a04aa6e661c",
+      "bytes": 15503040,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1861,8 +1978,192 @@
         "groups": [
           "refresh"
         ],
-        "path": "sdo/continuum/CR2311/20260609_000000_1024_HMIIC.jpg",
-        "url": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/09/20260609_000000_1024_HMIIC.jpg"
+        "path": "hmi/continuum/20260607_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM94/D2004074118/S00003/continuum.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "jsoc-hmi-continuum-20260608-000000-tai",
+      "path": "hmi/continuum/20260608_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM93/D2004405503/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
+      "licenseEvidence": [
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.08_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "sdo",
+            "evidence": "https://jsoc1.stanford.edu/SUM93/D2004405503/S00003/continuum.fits",
+            "missionId": "sdo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
+            "role": "material",
+            "evidence": "JSOC record set named by the pinned keyword response"
+          }
+        ]
+      },
+      "sha256": "ffa678170e835973b744af4c419f903494b429e1d2695f59012c0e3dd0e4ba38",
+      "bytes": 15500160,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "hmi/continuum/20260608_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM93/D2004405503/S00003/continuum.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "jsoc-hmi-continuum-20260609-000000-tai",
+      "path": "hmi/continuum/20260609_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM89/D2004711914/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
+      "licenseEvidence": [
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact hmi.Ic_noLimbDark_720s[2026.06.09_00:00:00_TAI] continuum segment (Rice tile-compressed FITS)",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "sdo",
+            "evidence": "https://jsoc1.stanford.edu/SUM89/D2004711914/S00003/continuum.fits",
+            "missionId": "sdo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-jsoc-hmi-ic-nolimbdark-720s-cr2311",
+            "role": "material",
+            "evidence": "JSOC record set named by the pinned keyword response"
+          }
+        ]
+      },
+      "sha256": "1f6f97ba35c8cb5450e16d6ac877db1ad847d14fa45b89bb47e5c6d720213513",
+      "bytes": 15497280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "hmi/continuum/20260609_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM89/D2004711914/S00003/continuum.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "jsoc-hmi-limb-darkening-20260513",
+      "path": "hmi/limb-darkening/20260513_000000_TAI.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM11/D1995447909/S00003/continuum.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
+      "licenseEvidence": [
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact hmi.Ic_720s[2026.05.13_00:00:00_TAI] continuum segment (Rice tile-compressed FITS), the limb-darkened twin of the first mosaic frame",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "sdo",
+            "evidence": "https://jsoc1.stanford.edu/SUM11/D1995447909/S00003/continuum.fits",
+            "missionId": "sdo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-jsoc-hmi-ic-720s-20260513",
+            "role": "material",
+            "evidence": "JSOC record set named by the pinned keyword response"
+          }
+        ]
+      },
+      "sha256": "868283b4d15dc9c6b0b1db24ff493bb1547a86ad26a7b6a2ce0828fc704a6d1e",
+      "bytes": 14339520,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "hmi/limb-darkening/20260513_000000_TAI.fits",
+        "url": "https://jsoc1.stanford.edu/SUM11/D1995447909/S00003/continuum.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "jsoc-hmi-limb-darkening-keywords",
+      "path": "hmi/limb-darkening/keywords.json",
+      "origin": "http://jsoc.stanford.edu/cgi-bin/ajax/jsoc_info?ds=hmi.Ic_720s%5B2026.05.13_00:00:00_TAI%5D&op=rs_list&key=T_REC,T_OBS,QUALITY,CTYPE1,CTYPE2,CUNIT1,CUNIT2,CRPIX1,CRPIX2,CRVAL1,CRVAL2,CDELT1,CDELT2,CROTA2,RSUN_OBS,DSUN_OBS,CRLN_OBS,CRLT_OBS,CAR_ROT&seg=continuum",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
+      "licenseEvidence": [
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact JSOC jsoc_info rs_list response for hmi.Ic_720s[2026.05.13_00:00:00_TAI]",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "sdo",
+            "evidence": "http://jsoc.stanford.edu/cgi-bin/ajax/jsoc_info?ds=hmi.Ic_720s%5B2026.05.13_00:00:00_TAI%5D&op=rs_list&key=T_REC,T_OBS,QUALITY,CTYPE1,CTYPE2,CUNIT1,CUNIT2,CRPIX1,CRPIX2,CRVAL1,CRVAL2,CDELT1,CDELT2,CROTA2,RSUN_OBS,DSUN_OBS,CRLN_OBS,CRLT_OBS,CAR_ROT&seg=continuum",
+            "missionId": "sdo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-jsoc-hmi-ic-720s-20260513",
+            "role": "material",
+            "evidence": "JSOC record set named by the pinned keyword response"
+          }
+        ]
+      },
+      "sha256": "eca2ba4c9a76c0fc9a1bcdf95332bbf4d16169d158d6ee7242dfd14ce43a7daf",
+      "bytes": 1050,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "hmi/limb-darkening/keywords.json",
+        "url": "http://jsoc.stanford.edu/cgi-bin/ajax/jsoc_info?ds=hmi.Ic_720s%5B2026.05.13_00:00:00_TAI%5D&op=rs_list&key=T_REC,T_OBS,QUALITY,CTYPE1,CTYPE2,CUNIT1,CUNIT2,CRPIX1,CRPIX2,CRVAL1,CRVAL2,CDELT1,CDELT2,CROTA2,RSUN_OBS,DSUN_OBS,CRLN_OBS,CRLT_OBS,CAR_ROT&seg=continuum"
       },
       "verificationOperations": []
     },
@@ -2114,8 +2415,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "3e0db71fb2f2b9cc2799cb02fd345ae2f89d9cdc3ad7982e45473c9ce4efe948",
-      "bytes": 10748,
+      "sha256": "c1d8210cd8a902c10d3d0c4bfff1a5446aa2b0e323b73b319687896900b395ce",
+      "bytes": 10898,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2132,7 +2433,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation"
+        "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation"
       ],
       "lensIds": [
         "photosphere"
@@ -2143,64 +2444,140 @@
       "interpretation": {
         "falseColor": false,
         "synoptic": {
-          "kind": "continuum-disc-mosaic",
-          "observationInterval": {
-            "start": "2026-05-12T21:56:01Z",
-            "stop": "2026-06-09T02:57:22Z",
+          "kind": "hmi-continuum-mosaic",
+          "continuum": {
             "maximumLatitudeDegrees": 80,
-            "minimumDiscRadius": 450,
-            "maximumDiscRadius": 490,
-            "discBrightnessThreshold": 72,
-            "solarPoleTiltDegrees": 7.25
+            "palette": {
+              "intensities": [
+                0,
+                0.56,
+                0.6,
+                0.7,
+                0.8,
+                0.9,
+                1,
+                1.08
+              ],
+              "colors": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  249,
+                  85,
+                  1
+                ],
+                [
+                  254,
+                  91,
+                  1
+                ],
+                [
+                  254,
+                  111,
+                  1
+                ],
+                [
+                  254,
+                  133,
+                  1
+                ],
+                [
+                  253,
+                  155,
+                  2
+                ],
+                [
+                  253,
+                  172,
+                  24
+                ],
+                [
+                  255,
+                  178,
+                  37
+                ]
+              ]
+            }
           }
         }
       },
       "inputs": [
-        "sdo-hmi-continuum-cr2311-20260513",
-        "sdo-hmi-continuum-cr2311-20260514",
-        "sdo-hmi-continuum-cr2311-20260515",
-        "sdo-hmi-continuum-cr2311-20260516",
-        "sdo-hmi-continuum-cr2311-20260517",
-        "sdo-hmi-continuum-cr2311-20260518",
-        "sdo-hmi-continuum-cr2311-20260519",
-        "sdo-hmi-continuum-cr2311-20260520",
-        "sdo-hmi-continuum-cr2311-20260521",
-        "sdo-hmi-continuum-cr2311-20260522",
-        "sdo-hmi-continuum-cr2311-20260523",
-        "sdo-hmi-continuum-cr2311-20260524",
-        "sdo-hmi-continuum-cr2311-20260525",
-        "sdo-hmi-continuum-cr2311-20260527",
-        "sdo-hmi-continuum-cr2311-20260528",
-        "sdo-hmi-continuum-cr2311-20260529",
-        "sdo-hmi-continuum-cr2311-20260530",
-        "sdo-hmi-continuum-cr2311-20260531",
-        "sdo-hmi-continuum-cr2311-20260601",
-        "sdo-hmi-continuum-cr2311-20260602",
-        "sdo-hmi-continuum-cr2311-20260603",
-        "sdo-hmi-continuum-cr2311-20260604",
-        "sdo-hmi-continuum-cr2311-20260605",
-        "sdo-hmi-continuum-cr2311-20260606",
-        "sdo-hmi-continuum-cr2311-20260607",
-        "sdo-hmi-continuum-cr2311-20260608",
-        "sdo-hmi-continuum-cr2311-20260609"
+        "jsoc-hmi-continuum-cr2311-keywords",
+        "jsoc-hmi-continuum-20260513-000000-tai",
+        "jsoc-hmi-continuum-20260514-000000-tai",
+        "jsoc-hmi-continuum-20260515-000000-tai",
+        "jsoc-hmi-continuum-20260516-000000-tai",
+        "jsoc-hmi-continuum-20260517-000000-tai",
+        "jsoc-hmi-continuum-20260518-000000-tai",
+        "jsoc-hmi-continuum-20260519-000000-tai",
+        "jsoc-hmi-continuum-20260520-000000-tai",
+        "jsoc-hmi-continuum-20260521-000000-tai",
+        "jsoc-hmi-continuum-20260522-000000-tai",
+        "jsoc-hmi-continuum-20260523-000000-tai",
+        "jsoc-hmi-continuum-20260524-000000-tai",
+        "jsoc-hmi-continuum-20260525-000000-tai",
+        "jsoc-hmi-continuum-20260526-120000-tai",
+        "jsoc-hmi-continuum-20260527-000000-tai",
+        "jsoc-hmi-continuum-20260528-000000-tai",
+        "jsoc-hmi-continuum-20260529-000000-tai",
+        "jsoc-hmi-continuum-20260530-000000-tai",
+        "jsoc-hmi-continuum-20260531-000000-tai",
+        "jsoc-hmi-continuum-20260601-000000-tai",
+        "jsoc-hmi-continuum-20260602-000000-tai",
+        "jsoc-hmi-continuum-20260603-000000-tai",
+        "jsoc-hmi-continuum-20260604-000000-tai",
+        "jsoc-hmi-continuum-20260605-000000-tai",
+        "jsoc-hmi-continuum-20260606-000000-tai",
+        "jsoc-hmi-continuum-20260607-000000-tai",
+        "jsoc-hmi-continuum-20260608-000000-tai",
+        "jsoc-hmi-continuum-20260609-000000-tai",
+        "jsoc-hmi-limb-darkening-20260513",
+        "jsoc-hmi-limb-darkening-keywords"
       ],
       "outputs": [
         {
+          "url": "/scenes/sun/sun-surface-photosphere.webp",
+          "bytes": 5872,
+          "sha256": "af465c6f3ea816c0f50d9f98a71a56d45d6e96c02594cda3b0330557c0236e02",
+          "verification": "bytes-verified"
+        },
+        {
           "url": "/scenes/sun/sun-surface-photosphere@2x.webp",
-          "bytes": 223392,
-          "sha256": "cb560e57c26b8a5c0d3e5c1719f3b27156c03fe4150757b2a06b975b14ae2cef",
+          "bytes": 24640,
+          "sha256": "2e714e910563c83d0f95277f3a2ec54fbb642cb89ec02a15dc410310b7bbffa5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-photosphere.webp",
-          "bytes": 206,
-          "sha256": "4a32502c9ed4012f3154d6400aff3e1c76a87da756d841c3fbbbc57f35357d24",
+          "bytes": 140,
+          "sha256": "8660f3f71295fa67bed07b3ed12a2c5637f1d015ace4f5128e25975837b3a1e9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-poles-photosphere.webp",
+          "bytes": 4388,
+          "sha256": "ea7ae09d9b5e0d1e49fbccb234364314eed5face670c27cc17e2524b216c1221",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-photosphere@2x.webp",
-          "bytes": 37092,
-          "sha256": "3fb36d82d85a14c51337778a15f31a1445de339c37de59b01a31771b4992d1c2",
+          "bytes": 9694,
+          "sha256": "f1ac97ad2d17d0439c7520a5db568a271ebe3bce7bd642970a328ef326a92dcf",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-corona-photosphere.webp",
+          "bytes": 66,
+          "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-limb-photosphere.webp",
+          "bytes": 12404,
+          "sha256": "80aea71268aa69f7135afd35d9ca0163ae66ff57513fc3aef4bb9fc939abeb22",
           "verification": "bytes-verified"
         },
         {
@@ -2211,8 +2588,8 @@
         },
         {
           "url": "/scenes/sun/sun-limb-photosphere@2x.webp",
-          "bytes": 34132,
-          "sha256": "3615e02c33919acf10bb7a1a6094db55c6dcc589ad3253b59c0815a00dd592bb",
+          "bytes": 33320,
+          "sha256": "98833caa61cf8902622cfa4975d75e7de142738a1c988abb7e8f513a4ce9b31e",
           "verification": "bytes-verified"
         }
       ],
@@ -2277,6 +2654,12 @@
       ],
       "outputs": [
         {
+          "url": "/scenes/sun/sun-surface-magnetic.webp",
+          "bytes": 280774,
+          "sha256": "c8d081f99d7b76fb77722457d337acf6598a5fb5da255e1db802455d4abfc047",
+          "verification": "bytes-verified"
+        },
+        {
           "url": "/scenes/sun/sun-surface-magnetic@2x.webp",
           "bytes": 771488,
           "sha256": "2abdaa8759c7d504f440a8d2d1ad78e883c22dc396cb71b98ce8e0da7e22edb2",
@@ -2289,9 +2672,27 @@
           "verification": "bytes-verified"
         },
         {
+          "url": "/scenes/sun/sun-poles-magnetic.webp",
+          "bytes": 29154,
+          "sha256": "41b37a105ff4e3b5942dfde5d5d968c414a5a10fc5f40da159370e4531fb32e6",
+          "verification": "bytes-verified"
+        },
+        {
           "url": "/scenes/sun/sun-poles-magnetic@2x.webp",
           "bytes": 67324,
           "sha256": "251e48c1e59620f903add6ea55ba78d288300b8cffa55a9d79ea5a8e27b16fad",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-corona-magnetic.webp",
+          "bytes": 66,
+          "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-limb-magnetic.webp",
+          "bytes": 7238,
+          "sha256": "12a176da30d1c561fb9089b5699c669ca8de47a28ffd8b76da85e729ca80d92d",
           "verification": "bytes-verified"
         },
         {
@@ -2342,7 +2743,7 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": false,
+            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {
@@ -2378,21 +2779,45 @@
       ],
       "outputs": [
         {
+          "url": "/scenes/sun/sun-surface-chromosphere.webp",
+          "bytes": 216940,
+          "sha256": "d3cd4a70378c46cbd1a86a048c84bef6c394310d9f93e24cb80080e0063b55ab",
+          "verification": "bytes-verified"
+        },
+        {
           "url": "/scenes/sun/sun-surface-chromosphere@2x.webp",
-          "bytes": 599342,
-          "sha256": "3ea26ae72464197f235f50425a158d073eed4e5d157c5ae5a5a13a860b97119c",
+          "bytes": 604992,
+          "sha256": "235f5d61aec47332e1b0a01579cbeb4998517b9e360f5dbbacec139c8451ff78",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-chromosphere.webp",
-          "bytes": 1940,
-          "sha256": "9b5b23b749e873c2cc65e6f56d8d820716f3098f6f3323803ee81d5c506cfffb",
+          "bytes": 1980,
+          "sha256": "7ffbea22ed1f1374bf60d2d68d23c2326043c6f9bbf2f4d030e01535ab22947c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-poles-chromosphere.webp",
+          "bytes": 17968,
+          "sha256": "075fc9f8a0f428f16050dbc97fc0448f3d29278c5f51a19bc34bb0be14377aed",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-chromosphere@2x.webp",
-          "bytes": 40354,
-          "sha256": "efe90e0f276e341f2aa7ba48734ca8c64fbea641f578d09a722f0e6cbf6f288b",
+          "bytes": 40608,
+          "sha256": "cafb78ec602652266b31eee594a6b7805f250c209d8dd70f792f5355d6af0c1a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-corona-chromosphere.webp",
+          "bytes": 38960,
+          "sha256": "08d5949e1df3eca2bb1d902edcbdd5036b19f3faf15b6667996da30b567e000a",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-limb-chromosphere.webp",
+          "bytes": 7238,
+          "sha256": "8c0ad5ff8aa06bde1f0207d34e2e6585584425a5baca8891b19bca1481b85c1b",
           "verification": "bytes-verified"
         },
         {
@@ -2404,7 +2829,7 @@
         {
           "url": "/scenes/sun/sun-limb-chromosphere@2x.webp",
           "bytes": 20528,
-          "sha256": "6518de58c3e7cd37d2acc764a195d44391c73abe0f019f0274cdad8e193d3b0b",
+          "sha256": "37b772d7e668fdd88875472e399b5dc381b14fc9a27de7509f0f0583ef7248fe",
           "verification": "bytes-verified"
         }
       ],
@@ -2443,7 +2868,7 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": false,
+            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {
@@ -2479,21 +2904,45 @@
       ],
       "outputs": [
         {
+          "url": "/scenes/sun/sun-surface-corona.webp",
+          "bytes": 188016,
+          "sha256": "a555e112d4180f8887cbf07ec82defa1dffc7696d9b67b56f92424118c85dd91",
+          "verification": "bytes-verified"
+        },
+        {
           "url": "/scenes/sun/sun-surface-corona@2x.webp",
-          "bytes": 478720,
-          "sha256": "bd8a8b87f4a0b09805e344f42123492ae08d9677a5b19aadd3ba7f76a19f3c5a",
+          "bytes": 480796,
+          "sha256": "a57496133c83a6297a89add85b4378d1fd3d0cab97e5adb665f17ebc5d8ab4cf",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-corona.webp",
-          "bytes": 2260,
-          "sha256": "b2031b33b9f8b31680dc1c5e196b900617d322b87451970bf9498b195f392815",
+          "bytes": 2226,
+          "sha256": "cc1c65146e61eb76f1daaadd6d3500bce510f97f465589e0130dbe5d9c316a2f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-poles-corona.webp",
+          "bytes": 25506,
+          "sha256": "2a8d462f26dc54d83ec64f4c922d2cc8b6596e53510197a49658c70e2000c4c5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-corona@2x.webp",
-          "bytes": 64356,
-          "sha256": "26b24a09ecf2a73dd099e0adb7d8a1021e520f436492e0eb1a1dd14ef66fa7f2",
+          "bytes": 64592,
+          "sha256": "52a84b44eb1e6bebec510a24017fc7c3828ac72b1ee794b04084fad80a725c54",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-corona-corona.webp",
+          "bytes": 56282,
+          "sha256": "26252495041bebff43786f6e4386cdd062b397a1bd80ac6fa5c8e994d52b43e8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/sun/sun-limb-corona.webp",
+          "bytes": 7238,
+          "sha256": "50c06b70a859f3b8f1528c242c891986d85df54a906d9759550e97a35f3afc41",
           "verification": "bytes-verified"
         },
         {
@@ -2505,7 +2954,7 @@
         {
           "url": "/scenes/sun/sun-limb-corona@2x.webp",
           "bytes": 20528,
-          "sha256": "68e4589cdef690afe06366efc72e6d757729ff14d364ba48f2b2cb2d3d3eb745",
+          "sha256": "6c833b312733974ee88227cc1e99ec81d5457f1c3a60d0d033242b3ede3056e7",
           "verification": "bytes-verified"
         }
       ],
@@ -2563,8 +3012,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/photosphere.webp",
-          "bytes": 13502,
-          "sha256": "d25af52b58da07acd6df704f9a429bee2f50b7cb255d928c40f4ea14e5516dc0",
+          "bytes": 1824,
+          "sha256": "4983323a25e5e3e4880273352b7e00fe814a5e4c4152f321b96cf219dd42eb79",
           "verification": "bytes-verified"
         }
       ]
@@ -2613,8 +3062,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/chromosphere.webp",
-          "bytes": 70892,
-          "sha256": "ecffe40934b4fe0c11dbbc179a660804b40aef90bea7c0e6bd6398f29c5aeb2f",
+          "bytes": 70466,
+          "sha256": "49878d8b60ecd961ad43768c22570b107a3419f898a08d5748622ef97e2e4a06",
           "verification": "bytes-verified"
         }
       ]
@@ -2638,8 +3087,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/corona.webp",
-          "bytes": 64808,
-          "sha256": "8093c7f0333e9617884070afbdf6d07a977b6e0d30d33f50b8ef8d2b35362e96",
+          "bytes": 64348,
+          "sha256": "882f6d485974ff9d757309eaefd3b55c13ccc6d9ea53f31ee62b33d66b473e11",
           "verification": "bytes-verified"
         }
       ]
@@ -2651,11 +3100,11 @@
   },
   "lastPreparation": {
     "objectId": "sun",
-    "materialSha256": "ed5d8d597cfbe1540ee6c06f288bacc678cd59c60ccaf48c429aec776eb3503c",
+    "materialSha256": "fd350971140018dc654fcca7030810321b10d5758ad121b30eae84d0936827ae",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "742eb393af10614e8922956edd5df779a660bd1d1cd18661e2164651b2fcbb23"
+      "bindingsSha256": "2dae30c701d694ad84158841bec53271d22d6948825c9eff329621081844b2ad"
     }
   }
 }
