@@ -47,9 +47,15 @@ uses another layout, or when LAM refuses a file.
 
 ## Decide
 
-Look at `evidence/published-comparison.webp`. The lens ships when it shows our
-outline on the paper's photographs and our model matching the paper's at the
-same phase. Read each overlap against its same-shape score. The numbers are
+Look at `evidence/published-comparison.webp`. It shows each figure column's
+photograph with the outline of the paper's model in amber and ours in cyan. The
+lens ships when our outline follows the paper's at the same phase.
+
+![The weakest figure column of each body installed on 2026-09-18](sphere-survey-photographs.webp)
+
+Above, each body installed on 2026-09-18 appears once, at the column where our
+outline overlaps the paper's model least, beside that column's same-shape
+ceiling. Read each overlap against its same-shape score. The numbers are
 reported, not a gate, and the registration stage's verdict is reported beside
 them.
 
