@@ -101,10 +101,9 @@ views of all three lenses retain their geometry and source appearance. Their
 roughly one-pixel cores are intentionally subtle; existing coarse halos remain.
 
 [`site/test/nebula-datasets-browser.mts`](../../site/test/nebula-datasets-browser.mts)
-walks each object's dataset context rail across every lens and checks that the
-selected dataset stays visible after a merge. Its fixed captures preserve the
-merged-visibility fix for M42, Helix and M2–9:
-
-![M42 dataset context rail after the merged-visibility fix](../images/nebulae/m42-datasets.jpg)
-![Helix dataset context rail after the merged-visibility fix](../images/nebulae/helix-datasets.jpg)
-![M2–9 dataset context rail after the merged-visibility fix](../images/nebulae/m2-9-datasets.jpg)
+walks each object's dataset context rail across every lens and checks that
+switching lenses keeps its own attribution visible in the rail, keeps the same
+document and stage, retains the shared camera, and updates the `focusLens` URL
+parameter. The merged-visibility regression this guards against was a
+`prepared-sky-runtime` fix ([af4dc9282](https://github.com/layoutit/css.earth/commit/af4dc9282db2fbcf563dc463edfca04a9f92b9b0)),
+not something a dataset-rail screenshot shows.
