@@ -17,6 +17,7 @@
  *
  * Both grids share one frame anchored on Betelgeuse's prepared scene origin, so one volume unit is one stellar radius. */
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
+import sharp from 'sharp';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '../../../fits.mts';
@@ -47,7 +48,21 @@ export const PRODUCTS = Object.freeze({
   dolp: { path: 'observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits', dpId: 'ADP.2026-08-19T13:19:07.656',
     sha256: '0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687', bytes: 8455680 },
 });
+export const EMISSION_PREVIEW_PATH = 'previews/emission-2020-off-limb.png';
 export const PIXEL_SCALE_MAS = 3.6;
+/** The 4 micrometre reconstruction this package's third dataset reads, the same bytes Betelgeuse's own package ships.
+ * Only its light outside the photosphere is used; the disc itself is already the star's drawn sphere. */
+export const EMISSION_2020 = Object.freeze({
+  path: 'observations/betelgeuse-matisse-2020-02-continuum-4mas.fits',
+  sha256: '43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd', bytes: 135360,
+  /** The image states its own pixel in milliarcseconds, and the reconstruction is convolved to this beam. */
+  pixelMas: 0.78, beamMas: 4,
+  /** The published disc: 42.45 mas across. Inside it the sphere is drawn, and within one beam of it the light is the
+   * star's own edge smeared by that beam, so neither belongs in a volume. */
+  discDiameterMas: 42.45,
+  /** The top of the drawn scale, as a fraction of the image's central brightness. */
+  topOfCentral: 0.06,
+});
 /** One unit is one stellar radius. Six radii each way holds the 2024 patches and the 2019 clump, in twenty-four half-radius slabs. */
 export const GRID = Object.freeze({ size: 96, halfUnits: 6, slabs: 24 });
 /** Polarisation stretch: the median degree beyond eight radii is instrumental floor, and the top is the top of the
@@ -59,7 +74,7 @@ export const STRETCH = Object.freeze({ backgroundAnnulusUnits: [8, 12] as const,
  * Two shapes are tried against the azimuthal average, a spherical shell of free radius and thickness and the steady
  * outflow a constant mass-loss rate gives, and the residuals of both are recorded beside the answer. */
 export const SHELL_SEARCH = Object.freeze({ profileUnits: [1, 6] as const, bins: 44,
-  radiusUnits: [1, 5] as const, widthUnits: [0.2, 3] as const, gridStep: 0.05, outflowExponents: [0.5, 6] as const });
+  radiusUnits: [1, 5] as const, widthUnits: [0.2, 3] as const, gridStep: 0.05, outflowExponents: [0.5, 12] as const });
 
 /** The figure's own colour map, sampled at the quarters of its bar: matplotlib `inferno`, which Montargès et al. 2026
  * print the V-band degree of linear polarisation in (Fig. B.1). Four stops are all an RGBA8 grid can carry, and four is
@@ -76,6 +91,23 @@ export const COLOUR_MAP = Object.freeze({
   /** The alpha the top of the bar reaches once the renderer's 1-exp(-gain*column) transfer is applied. */
   topAlpha: 0.9,
 });
+/** The palette the MATISSE reconstruction is already drawn in on the star's own sphere, sampled at the quarters of its
+ * bar. This dataset is the same quantity as that sphere, relative intensity at 4 micrometres, so it carries the same
+ * scale: the light outside the disc continues the light on it. */
+export const HEAT_MAP = Object.freeze({
+  name: 'matisse heat scale',
+  stops: Object.freeze([
+    Object.freeze([0.235, 0.020, 0.000] as const), // 59, 5, 0
+    Object.freeze([0.604, 0.118, 0.000] as const), // 154, 30, 0
+    Object.freeze([0.878, 0.392, 0.102] as const), // 224, 100, 26
+    Object.freeze([1.000, 0.702, 0.251] as const), // 255, 179, 64
+  ]),
+});
+export function heatMapWeights(value: number): readonly [number, number, number, number] {
+  const p = Math.max(0, Math.min(1, value)) * HEAT_MAP.stops.length;
+  return [0, 1, 2, 3].map(k => Math.max(0, 1 - Math.abs(p - (k + 1)))) as unknown as readonly [number, number, number, number];
+}
+
 /** Tent weights over the four stops. Their sum interpolates the bar, and below the first stop it fades to black. */
 export function colourMapWeights(value: number): readonly [number, number, number, number] {
   const p = Math.max(0, Math.min(1, value)) * COLOUR_MAP.stops.length;
@@ -104,6 +136,41 @@ async function pinnedFits(product: { path: string; sha256: string; bytes: number
   const bytes = await readFile(resolve(root, product.path));
   if (bytes.length !== product.bytes || sha256(bytes) !== product.sha256) throw new Error(`ESO product differs from its pin: ${product.path}`);
   return readFitsImage(bytes);
+}
+
+/** Score simple envelopes against a measured radial profile and keep the best. Constant depth is always a candidate,
+ * because that is what pushing the image backwards assumes and it is the number every real shape has to beat; the
+ * author refuses to write a grid whose best shape is that one. */
+function fitEnvelope(profile: readonly { b: number; value: number }[], score: (density: (r: number) => number) => number, innerMaskUnits: number) {
+  let shell = { radiusUnits: 0, widthUnits: 0, residual: Infinity };
+  for (let radius = SHELL_SEARCH.radiusUnits[0]; radius <= SHELL_SEARCH.radiusUnits[1]; radius += SHELL_SEARCH.gridStep) {
+    for (let width of [...Array(Math.round((SHELL_SEARCH.widthUnits[1] - SHELL_SEARCH.widthUnits[0]) / SHELL_SEARCH.gridStep) + 1).keys()]
+      .map(step => SHELL_SEARCH.widthUnits[0] + step * SHELL_SEARCH.gridStep)) {
+      const residual = score(r => Math.exp(-(((r - radius) / width) ** 2) / 2));
+      if (residual < shell.residual) shell = { radiusUnits: radius, widthUnits: width, residual };
+    }
+  }
+  let outflow = { exponent: 0, residual: Infinity };
+  for (let n = SHELL_SEARCH.outflowExponents[0]; n <= SHELL_SEARCH.outflowExponents[1]; n += SHELL_SEARCH.gridStep) {
+    const residual = score(r => (r < innerMaskUnits ? 0 : Math.pow(r, -n)));
+    if (residual < outflow.residual) outflow = { exponent: n, residual };
+  }
+  const flatResidual = score(() => 1);
+  const signalRms = Math.sqrt(profile.reduce((total, point) => total + point.value * point.value, 0) / profile.length);
+  const best = shell.residual <= outflow.residual ? 'spherical-shell' : 'steady-outflow';
+  const railed = best === 'spherical-shell'
+    ? [shell.radiusUnits === SHELL_SEARCH.radiusUnits[0] || shell.radiusUnits === SHELL_SEARCH.radiusUnits[1],
+       shell.widthUnits <= SHELL_SEARCH.widthUnits[0] || shell.widthUnits >= SHELL_SEARCH.widthUnits[1]].some(Boolean)
+    : outflow.exponent <= SHELL_SEARCH.outflowExponents[0] || outflow.exponent >= SHELL_SEARCH.outflowExponents[1] - SHELL_SEARCH.gridStep;
+  if (railed) throw new Error(`The best envelope sits on the edge of the search, so it is not a fit (${best}: shell ${shell.radiusUnits}/${shell.widthUnits}, outflow ${outflow.exponent}).`);
+  const bestResidual = Math.min(shell.residual, outflow.residual);
+  if (!(bestResidual < flatResidual)) {
+    throw new Error(`No envelope beats constant depth for this profile (shell ${shell.residual}, outflow ${outflow.residual}, flat ${flatResidual}).`);
+  }
+  const density = best === 'spherical-shell'
+    ? (r: number) => Math.exp(-(((r - shell.radiusUnits) / shell.widthUnits) ** 2) / 2)
+    : (r: number) => (r < innerMaskUnits ? 0 : Math.pow(r, -outflow.exponent));
+  return { shell, outflow, flatResidual, signalRms, shape: best, density };
 }
 
 /** Encode a field as the RGBA8 grid the slab baker reads; its own channel transfer squares the byte back. */
@@ -206,25 +273,7 @@ export async function author(defaultLens = 'zimpol-v') {
     for (const [i, point] of measuredProfile.entries()) { const d = point.value - gain * model[i]!; residual += d * d; }
     return Math.sqrt(residual / measuredProfile.length);
   };
-  let shell = { radiusUnits: 0, widthUnits: 0, residual: Infinity };
-  for (let radius = SHELL_SEARCH.radiusUnits[0]; radius <= SHELL_SEARCH.radiusUnits[1]; radius += SHELL_SEARCH.gridStep) {
-    for (let width_ = SHELL_SEARCH.widthUnits[0]; width_ <= SHELL_SEARCH.widthUnits[1]; width_ += SHELL_SEARCH.gridStep) {
-      const residual = scoreProfile(r => Math.exp(-(((r - radius) / width_) ** 2) / 2));
-      if (residual < shell.residual) shell = { radiusUnits: radius, widthUnits: width_, residual };
-    }
-  }
-  let outflow = { exponent: 0, residual: Infinity };
-  for (let n = SHELL_SEARCH.outflowExponents[0]; n <= SHELL_SEARCH.outflowExponents[1]; n += SHELL_SEARCH.gridStep) {
-    const residual = scoreProfile(r => (r < STRETCH.innerMaskUnits ? 0 : Math.pow(r, -n)));
-    if (residual < outflow.residual) outflow = { exponent: n, residual };
-  }
-  const flatResidual = scoreProfile(() => 1);
-  const signalRms = Math.sqrt(measuredProfile.reduce((total, point) => total + point.value * point.value, 0) / measuredProfile.length);
-  if (!(shell.residual < outflow.residual && shell.residual < flatResidual)) {
-    throw new Error(`The shell is not the best shape for this profile (shell ${shell.residual}, outflow ${outflow.residual}, flat ${flatResidual}).`);
-  }
-  /** The fitted envelope. A column is spread along this, so a clump lands at the shell's radius in front and behind. */
-  const shellDensity = (r: number) => Math.exp(-(((r - shell.radiusUnits) / shell.widthUnits) ** 2) / 2);
+  const { shell, outflow, flatResidual, signalRms, density: shellDensity } = fitEnvelope(measuredProfile, scoreProfile, STRETCH.innerMaskUnits);
 
   // Resolve the sky plane and each column's normalisation once; the encoder then only samples them.
   const plane = new Float64Array(size * size), norm = new Float64Array(size * size);
@@ -256,6 +305,86 @@ export async function author(defaultLens = 'zimpol-v') {
   // fixed by one requirement: the top of the published bar reaches the stated alpha. Its column there is the brightest
   // channel of the last stop.
   const zimpolGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...COLOUR_MAP.stops.at(-1)!);
+
+  // --- the third measured lens: the 4 micrometre light outside the photosphere, given the same treatment ---
+  // The reconstruction that paints the star's own sphere also carries a fifth of its flux outside the disc. On the
+  // sphere that light is a flat plate behind the body; here it is asked for a shape, exactly as the polarisation was.
+  const emissionFits = await pinnedFits(EMISSION_2020);
+  const { width: ew, height: eh } = emissionFits, E = emissionFits.values;
+  const emissionPixelsPerUnit = radiusArcsec * 1000 / EMISSION_2020.pixelMas;
+  let esx = 0, esy = 0, es = 0;
+  for (let i = 0; i < E.length; i++) { const v = Math.max(0, E[i]!); esx += v * (i % ew); esy += v * Math.floor(i / ew); es += v; }
+  const ecx = esx / es, ecy = esy / es;
+  // Inside the published disc the sphere is drawn, and within one beam of it the light is the star's own edge smeared
+  // by that beam. Neither is resolved structure, so the volume starts one beam outside the disc.
+  const emissionInnerUnits = (EMISSION_2020.discDiameterMas / 2 + EMISSION_2020.beamMas) / (radiusArcsec * 1000);
+  // The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the
+  // edge of its own field rather than at the cube wall.
+  const emissionFieldUnits = Math.min(halfUnits, (Math.min(ew, eh) / 2) * EMISSION_2020.pixelMas / (radiusArcsec * 1000));
+  // The shoulder this dataset exists for sits just inside the field edge, so the taper is short and late.
+  const emissionTaperFrom = emissionFieldUnits * 0.94;
+  let emissionCentral = 0;
+  for (let y = 0; y < eh; y++) for (let x = 0; x < ew; x++) {
+    if (Math.hypot(x - ecx, y - ecy) / emissionPixelsPerUnit < 0.25) emissionCentral = Math.max(emissionCentral, E[y * ew + x]!);
+  }
+  const emissionTop = emissionCentral * EMISSION_2020.topOfCentral;
+  const emissionProfileSum = new Float64Array(bins), emissionProfileCount = new Float64Array(bins);
+  for (let y = 0; y < eh; y++) for (let x = 0; x < ew; x++) {
+    const b = Math.hypot(x - ecx, y - ecy) / emissionPixelsPerUnit;
+    if (b < emissionInnerUnits || b >= emissionFieldUnits) continue;
+    const k = Math.min(bins - 1, Math.floor((b - profileLow) / profileStep));
+    if (k < 0) continue;
+    emissionProfileSum[k]! += Math.max(0, E[y * ew + x]!); emissionProfileCount[k]! += 1;
+  }
+  const emissionProfile = [...emissionProfileSum].flatMap((total, k) => profileCount === undefined || !emissionProfileCount[k]
+    ? [] : [{ b: profileLow + (k + 0.5) * profileStep, value: total / emissionProfileCount[k]! }]);
+  const scoreEmission = (density: (r: number) => number) => {
+    const model = emissionProfile.map(({ b }) => {
+      let total = 0; const dz = 0.02;
+      for (let z = -halfUnits; z <= halfUnits; z += dz) total += density(Math.hypot(b, z)) * dz;
+      return total;
+    });
+    let num = 0, den = 0;
+    for (const [i, point] of emissionProfile.entries()) { num += point.value * model[i]!; den += model[i]! * model[i]!; }
+    const gain = den > 0 ? num / den : 0;
+    let residual = 0;
+    for (const [i, point] of emissionProfile.entries()) { const d = point.value - gain * model[i]!; residual += d * d; }
+    return Math.sqrt(residual / Math.max(1, emissionProfile.length));
+  };
+  const emissionFit = fitEnvelope(emissionProfile, scoreEmission, emissionInnerUnits);
+  const emissionPlane = new Float64Array(size * size), emissionNorm = new Float64Array(size * size);
+  for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
+    const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step, r = Math.hypot(x, y);
+    if (r < emissionInnerUnits || r >= emissionFieldUnits) continue;
+    const value = bilinear(E, ew, eh, ecx + x * emissionPixelsPerUnit - 0.5, ecy + y * emissionPixelsPerUnit - 0.5);
+    emissionPlane[j * size + i] = Math.max(0, Math.min(1, value / emissionTop)) * (1 - smoothstep(emissionTaperFrom, emissionFieldUnits, r));
+    let sum = 0;
+    for (let k = 0; k < size; k++) { const z = -halfUnits + (k + 0.5) * step; sum += emissionFit.density(Math.hypot(r, z)) * step; }
+    emissionNorm[j * size + i] = sum;
+  }
+  const emission = encodeGrid((x, y, z) => {
+    const i = Math.round((x + halfUnits) / step - 0.5), j = Math.round((y + halfUnits) / step - 0.5);
+    const value = emissionPlane[j * size + i] ?? 0; if (!(value > 0)) return 0;
+    const column = emissionNorm[j * size + i]!; if (!(column > 0)) return 0;
+    const profile = emissionFit.density(Math.hypot(x, y, z)) / column;
+    return heatMapWeights(value).map(weight => weight * profile);
+  });
+  const emissionGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...HEAT_MAP.stops.at(-1)!);
+  // This dataset's own preview. There is no publisher figure of it: it is this repository's reconstruction, and the
+  // part of it drawn here is the part the star's sphere does not show. So the package draws its own, from the same
+  // sky plane the grid carries, in the same heat scale, with the removed disc left black.
+  const previewSize = 512, previewPixels = Buffer.alloc(previewSize * previewSize * 3);
+  for (let y = 0; y < previewSize; y++) for (let x = 0; x < previewSize; x++) {
+    const u = (x + 0.5) / previewSize * 2 - 1, v = (y + 0.5) / previewSize * 2 - 1;
+    const i = Math.round((u * emissionFieldUnits + halfUnits) / step - 0.5), j = Math.round((v * emissionFieldUnits + halfUnits) / step - 0.5);
+    const value = i >= 0 && j >= 0 && i < size && j < size ? emissionPlane[j * size + i] ?? 0 : 0;
+    const weights = heatMapWeights(value), out = [0, 0, 0];
+    for (const [k, weight] of weights.entries()) for (let c = 0; c < 3; c++) out[c]! += weight * HEAT_MAP.stops[k]![c]!;
+    const o = (y * previewSize + x) * 3;
+    for (let c = 0; c < 3; c++) previewPixels[o + c] = Math.round(255 * Math.max(0, Math.min(1, out[c]!)));
+  }
+  const emissionPreview = await sharp(previewPixels, { raw: { width: previewSize, height: previewSize, channels: 3 } })
+    .png({ compressionLevel: 9 }).toBuffer();
 
   // --- the published lens: the December 2019 RADMC-3D clump, drawn as scattered starlight ---
   // Their axes are x along right ascension (east), y along declination (north), z positive toward Earth. This grid's are
@@ -308,6 +437,10 @@ export async function author(defaultLens = 'zimpol-v') {
     ],
     paper: { doi: '10.1051/0004-6361/202661023', citation: 'Montargès et al. 2026, A&A 711, L12 (the 2024 polarimetry)' },
     measured: { starCentrePixel: [cx, cy], polarisationCentrePixel: [px, py], polarisationMaskRadiusUnits: maskedRadiusUnits,
+      emissionEnvelope: { shape: emissionFit.shape, radiusUnits: emissionFit.shell.radiusUnits, gaussianWidthUnits: emissionFit.shell.widthUnits,
+        outflowExponent: emissionFit.outflow.exponent, residualRms: Math.min(emissionFit.shell.residual, emissionFit.outflow.residual),
+        constantDepthResidualRms: emissionFit.flatResidual, signalRms: emissionFit.signalRms,
+        innerMaskUnits: emissionInnerUnits, fieldUnits: emissionFieldUnits },
       envelope: { shape: 'spherical-shell', radiusUnits: shell.radiusUnits, gaussianWidthUnits: shell.widthUnits,
         residualRms: shell.residual, signalRms, alternatives: { steadyOutflowExponent: outflow.exponent, steadyOutflowResidualRms: outflow.residual, constantDepthResidualRms: flatResidual } },
       productOffsetPixels, intensityPeak: peakValue, polarisationFloor: background, pixelsPerStellarRadius: pixelsPerUnit,
@@ -316,6 +449,7 @@ export async function author(defaultLens = 'zimpol-v') {
       veilCentreUnits: [...centre], veilRadiusUnits: veilRadius },
     models: {
       'zimpol-v': `Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to ${STRETCH.topDegree.toFixed(2)}. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius ${shell.radiusUnits.toFixed(2)} stellar radii and gaussian thickness ${shell.widthUnits.toFixed(2)}, which leaves a residual of ${shell.residual.toExponential(2)} against a profile of ${signalRms.toExponential(2)}. A steady outflow r^-${outflow.exponent.toFixed(2)} leaves ${outflow.residual.toExponential(2)} and a constant depth, which is what pushing the image backwards assumes, leaves ${flatResidual.toExponential(2)}. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib ${COLOUR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
+      'emission-2020': `The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a ${emissionFit.shape} (${emissionFit.shape === 'spherical-shell' ? `radius ${emissionFit.shell.radiusUnits.toFixed(2)} stellar radii, gaussian thickness ${emissionFit.shell.widthUnits.toFixed(2)}` : `r^-${emissionFit.outflow.exponent.toFixed(2)}`}) leaving ${Math.min(emissionFit.shell.residual, emissionFit.outflow.residual).toExponential(2)}, against ${emissionFit.flatResidual.toExponential(2)} for the constant depth an extrusion assumes and a profile of ${emissionFit.signalRms.toExponential(2)}. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.`,
       'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
     },
     limitations: [
@@ -353,8 +487,14 @@ export async function author(defaultLens = 'zimpol-v') {
       // emission-absorption composite: the star behind the clump is dimmed, not covered.
       material: { emission: [{ channel: 1, color: [1, 0.82, 0.62], strength: 1 }],
         absorption: [{ channel: 0, color: [1, 1, 1], strength: veilAbsorption }], exposureGain: veilGain } },
+    { id: 'emission-2020', label: 'VLTI/MATISSE · off-limb light, 2020', file: 'density-emission-2020.ktx2', built: emission,
+      sourceUrl: 'https://doi.org/10.1051/0004-6361/202347719',
+      // The same quantity as the star's own sphere, so the same palette: four channels over the reconstruction's heat
+      // scale, shared opacity, and the light outside the disc continues the light on it.
+      material: { emission: HEAT_MAP.stops.map((color, channel) => ({ channel, color: [...color], strength: 1 })),
+        absorption: [], emissionTransfer: 'shared-opacity', exposureGain: emissionGain } },
   ];
-  const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes]];
+  const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes], [EMISSION_PREVIEW_PATH, emissionPreview]];
   const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string; sha256: string }; occultingCentreUnits?: [number, number, number] }[] = [];
   for (const grid of grids) {
     const recipeBytes = Buffer.from(JSON.stringify(volumeRecipe(grid.file, sha256(grid.built.ktx2), sha256(grid.built.rgba), provenanceSha, grid.material), null, 2) + '\n');
@@ -375,7 +515,7 @@ export async function author(defaultLens = 'zimpol-v') {
     // This cloud belongs to Betelgeuse. It is not a place of its own, so it has no catalogue entry and never appears
     // as a marker, a search result or a destination; its datasets are listed by the star.
     attachedTo: 'betelgeuse',
-    acceptedLabResult: 'betelgeuse-shell-two-grids',
+    acceptedLabResult: 'betelgeuse-shell-three-grids',
     compactInputs: deliveryGrids.find(grid => grid.id === defaultLens)!.recipe, compactMethod: 'density-grid',
     grids: deliveryGrids,
   };
@@ -384,7 +524,13 @@ export async function author(defaultLens = 'zimpol-v') {
   outputs.push(['delivery.json', Buffer.from(JSON.stringify(delivery, null, 2) + '\n')]);
 
   // The presentation the application reads, and the manifest that accounts for every retained source byte.
-  const facts = (grid: typeof grids[number]) => grid.id === 'zimpol-v'
+  const facts = (grid: typeof grids[number]) => grid.id === 'emission-2020'
+    ? [{ id: 'instrument', label: 'Instrument', value: 'VLTI/MATISSE, 3.94\u20134.00 \u00b5m, February 2020, 4 mas beam' },
+       { id: 'extent', label: 'Drawn extent', value: `${emissionInnerUnits.toFixed(2)} to ${emissionFieldUnits.toFixed(2)} stellar radii: outside the disc and its first beam, to the edge of the 100 mas field` },
+       { id: 'share', label: 'Share of the flux', value: 'A fifth of the reconstruction lies outside the disc' },
+       { id: 'scale', label: 'Colour scale', value: "The reconstruction's own heat scale, the one the star's sphere carries" },
+       { id: 'depth', label: 'Depth', value: `Not measured; the steeply falling envelope r^\u2212${emissionFit.outflow.exponent.toFixed(1)} that best projects to the measured profile` }]
+    : grid.id === 'zimpol-v'
     ? [{ id: 'instrument', label: 'Instrument', value: 'VLT/SPHERE-ZIMPOL, V band, 3 December 2024' },
        { id: 'resolution', label: 'Angular resolution', value: '16 mas, 0.76 stellar radii' },
        { id: 'extent', label: 'Drawn extent', value: '1 to 4.5 stellar radii, tapering to 6' },
@@ -403,17 +549,27 @@ export async function author(defaultLens = 'zimpol-v') {
     sharedInputs: [],
     inputEvidence: [],
     lenses: grids.map(grid => ({
-      id: grid.id, label: grid.label, title: grid.id === 'zimpol-v' ? 'Polarised dust around Betelgeuse in 2024' : 'The dust clump of the Great Dimming',
-      description: grid.id === 'zimpol-v'
+      id: grid.id, label: grid.label,
+      title: grid.id === 'emission-2020' ? 'The light outside Betelgeuse\u2019s disc at 4 micrometres'
+        : grid.id === 'zimpol-v' ? 'Polarised dust around Betelgeuse in 2024' : 'The dust clump of the Great Dimming',
+      description: grid.id === 'emission-2020'
+        ? `The same reconstruction that paints this star\u2019s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star\u2019s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^\u2212${emissionFit.outflow.exponent.toFixed(1)}, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction\u2019s own heat scale, because this is the same quantity as the sphere.`
+        : grid.id === 'zimpol-v'
         ? `The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-${STRETCH.topDegree.toFixed(2)} scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.`
         : 'The dust clump Montarg\u00e8s et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.',
-      summary: grid.id === 'zimpol-v' ? 'Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.' : 'The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.',
-      detail: grid.id === 'zimpol-v' ? '1024 \u00d7 1024 px at 3.6 mas' : 'Sphere of 6.5 au at 13.0 au',
-      facts: facts(grid), input: grid.id === 'zimpol-v' ? 'sphere-zimpol-betelgeuse-p1-v-dolp' : 'veil-2019-12-parameters',
-      preview: { path: `${packageBase}/${PREVIEWS[grid.id as keyof typeof PREVIEWS].path}`,
-        sha256: PREVIEWS[grid.id as keyof typeof PREVIEWS].sha256, bytes: PREVIEWS[grid.id as keyof typeof PREVIEWS].bytes,
-        url: PREVIEWS[grid.id as keyof typeof PREVIEWS].url,
-        ...('crop' in PREVIEWS[grid.id as keyof typeof PREVIEWS] ? { crop: (PREVIEWS[grid.id as keyof typeof PREVIEWS] as { crop: unknown }).crop } : {}) },
+      summary: grid.id === 'emission-2020' ? 'The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.'
+        : grid.id === 'zimpol-v' ? 'Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.' : 'The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.',
+      detail: grid.id === 'emission-2020' ? '128 \u00d7 128 px at 0.78 mas'
+        : grid.id === 'zimpol-v' ? '1024 \u00d7 1024 px at 3.6 mas' : 'Sphere of 6.5 au at 13.0 au',
+      facts: facts(grid), input: grid.id === 'emission-2020' ? 'matisse-2020-02-continuum-4mas'
+        : grid.id === 'zimpol-v' ? 'sphere-zimpol-betelgeuse-p1-v-dolp' : 'veil-2019-12-parameters',
+      preview: grid.id === 'emission-2020'
+        ? { path: `${packageBase}/${EMISSION_PREVIEW_PATH}`, sha256: sha256(emissionPreview), bytes: emissionPreview.length,
+            authoredFrom: 'matisse-2020-02-continuum-4mas' }
+        : { path: `${packageBase}/${PREVIEWS[grid.id as keyof typeof PREVIEWS].path}`,
+            sha256: PREVIEWS[grid.id as keyof typeof PREVIEWS].sha256, bytes: PREVIEWS[grid.id as keyof typeof PREVIEWS].bytes,
+            url: PREVIEWS[grid.id as keyof typeof PREVIEWS].url,
+            ...('crop' in PREVIEWS[grid.id as keyof typeof PREVIEWS] ? { crop: (PREVIEWS[grid.id as keyof typeof PREVIEWS] as { crop: unknown }).crop } : {}) },
     })),
   };
   outputs.push(['veil-2019-12-parameters.json', Buffer.from(JSON.stringify({
@@ -490,6 +646,16 @@ export async function author(defaultLens = 'zimpol-v') {
         credit: preview.credit, displayCredit: preview.credit,
         acquisition: `Publisher figure downloaded unchanged from ${preview.url}; preparation resizes it into this object's dataset preview.`,
         license: preview.license, ...pin });
+    } else if (name === EMISSION_2020.path) {
+      inputs.push({ id: 'matisse-2020-02-continuum-4mas', ...binding('matisse-2020-02-continuum-4mas'), path,
+        origin: 'https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455',
+        sourceUrl: 'https://doi.org/10.1051/0004-6361/202347719',
+        title: 'VLTI/MATISSE 4 \u00b5m reconstruction, February 2020, convolved to the 4 mas beam',
+        credit: 'Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)',
+        displayCredit: 'ESO/VLTI/MATISSE; reconstruction by this repository',
+        acquisition: 'The same bytes Betelgeuse\u2019s own package ships and pins, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star\u2019s drawn sphere.',
+        license: 'Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.',
+        lensId: 'emission-2020', ...pin });
     } else if (name === 'veil-2019-12-parameters.json') {
       inputs.push({ id: 'veil-2019-12-parameters', ...binding('veil-2019-12-parameters'), path,
         origin: 'https://doi.org/10.1038/s41586-021-03546-8', sourceUrl: 'https://arxiv.org/abs/2201.10551',

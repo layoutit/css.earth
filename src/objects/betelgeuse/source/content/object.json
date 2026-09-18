@@ -187,6 +187,68 @@
           "surface": "matisse"
         },
         "notes": "The same photosphere, with the dust clump Montargès et al. (2021) fitted to the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as they report for the southern hemisphere, and the light it scatters back is drawn faintly over that. A model fitted to images, not an image."
+      },
+      {
+        "id": "emission-2020",
+        "label": "Off-limb light · February 2020",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "falseColor": true,
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "emission-2020",
+          "surface": "matisse"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Relative intensity at 4 µm",
+          "labels": [
+            "0.35",
+            "0.68",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.35",
+              "0.68",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+          "sourceUrl": "https://arxiv.org/abs/2401.12404"
+        },
+        "notes": "The same photosphere, with the light the same reconstruction carries outside it. A fifth of the reconstruction's flux lies beyond the published 42.45 milliarcsecond disc. On the sphere that light is a flat plate drawn behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star's own edge smeared by the 4 milliarcsecond beam. What remains falls far too slowly to be that beam: the envelope that best projects to its measured radial profile goes as r to the minus eight, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone and fades at the edge of its own field. The colours are the reconstruction's own heat scale, the one the sphere carries, because this is the same quantity: relative intensity at 4 micrometres, not colour or temperature. The depth is an inference from one projection, and the envelope is symmetric, so each patch is drawn in front of the star and behind it alike."
       }
     ]
   },

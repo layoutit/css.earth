@@ -91,6 +91,51 @@
           "value": "December 2019, the only optimised solution the paper reports"
         }
       ]
+    },
+    {
+      "id": "emission-2020",
+      "label": "VLTI/MATISSE · off-limb light, 2020",
+      "title": "The light outside Betelgeuse’s disc at 4 micrometres",
+      "thumbnailUrl": "/scenes/betelgeuse-shell/datasets/cade788caed76381ad7fcf837ca072ff0be8526bf85b14cf90228578731a80e7.webp",
+      "texture": {
+        "url": "/scenes/betelgeuse-shell/datasets/cade788caed76381ad7fcf837ca072ff0be8526bf85b14cf90228578731a80e7.webp",
+        "width": 512,
+        "height": 512,
+        "attribution": {
+          "label": "ESO/VLTI/MATISSE; reconstruction by this repository",
+          "url": "https://doi.org/10.1051/0004-6361/202347719"
+        }
+      },
+      "description": "The same reconstruction that paints this star’s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star’s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^−7.9, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction’s own heat scale, because this is the same quantity as the sphere.",
+      "summary": "The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.",
+      "detail": "128 × 128 px at 0.78 mas",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "VLTI/MATISSE, 3.94–4.00 µm, February 2020, 4 mas beam"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "1.19 to 2.36 stellar radii: outside the disc and its first beam, to the edge of the 100 mas field"
+        },
+        {
+          "id": "share",
+          "label": "Share of the flux",
+          "value": "A fifth of the reconstruction lies outside the disc"
+        },
+        {
+          "id": "scale",
+          "label": "Colour scale",
+          "value": "The reconstruction's own heat scale, the one the star's sphere carries"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the steeply falling envelope r^−7.9 that best projects to the measured profile"
+        }
+      ]
     }
   ],
   "defaultLens": "zimpol-v"

@@ -62,11 +62,22 @@
       428.4301075268817
     ],
     "polarisationMaskRadiusUnits": 0.9261683067390526,
+    "emissionEnvelope": {
+      "shape": "steady-outflow",
+      "radiusUnits": 1,
+      "gaussianWidthUnits": 0.35000000000000003,
+      "outflowExponent": 7.949999999999981,
+      "residualRms": 0.0000029940105664073293,
+      "constantDepthResidualRms": 0.00001503946458540775,
+      "signalRms": 0.000020936567078028904,
+      "innerMaskUnits": 1.1927572132937616,
+      "fieldUnits": 2.360453521808705
+    },
     "envelope": {
       "shape": "spherical-shell",
       "radiusUnits": 3.4999999999999956,
-      "gaussianWidthUnits": 1.2000000000000004,
-      "residualRms": 0.00427793333049162,
+      "gaussianWidthUnits": 1.2,
+      "residualRms": 0.004277933330491618,
       "signalRms": 0.014126183435468629,
       "alternatives": {
         "steadyOutflowExponent": 0.7000000000000002,
@@ -97,6 +108,7 @@
   },
   "models": {
     "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+    "emission-2020": "The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a steady-outflow (r^-7.95) leaving 2.99e-6, against 1.50e-5 for the constant depth an extrusion assumes and a profile of 2.09e-5. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.",
     "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
   },
   "limitations": [

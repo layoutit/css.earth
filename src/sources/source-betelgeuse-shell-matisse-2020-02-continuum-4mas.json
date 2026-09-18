@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-shell-matisse-2020-02-continuum-4mas",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse Shell · matisse 2020 02 continuum 4mas",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse-shell/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
+      "scope": "The matisse 2020 02 continuum 4mas input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "schema": "cssearth-nebula-delivery-receipt@1",
-  "recipeSha256": "37476b7da203e9798f2797587e007716ddc81513f769e6dcee23f31865929370",
-  "implementationSha256": "7661c510930a31a2e54eac4c7afcb927f78216c0ef123ab9516427aa7150d222",
-  "sourceResult": "betelgeuse-shell-two-grids",
-  "acceptedLabResult": "betelgeuse-shell-two-grids",
+  "recipeSha256": "fbc8d5cd441f40424b843ef44b648cbfc778501e673b9b96f0360892c008c680",
+  "implementationSha256": "4ac7b8e8a7fae209eb370394d7033a3a728a9346b05628c66e88cef8bddf4c71",
+  "sourceResult": "betelgeuse-shell-three-grids",
+  "acceptedLabResult": "betelgeuse-shell-three-grids",
   "lenses": [
     {
       "id": "zimpol-v",
@@ -12,6 +12,11 @@
     },
     {
       "id": "veil-2019-12",
+      "stars": 0,
+      "leaves": 29
+    },
+    {
+      "id": "emission-2020",
       "stars": 0,
       "leaves": 29
     }

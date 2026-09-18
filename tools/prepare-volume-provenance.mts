@@ -39,13 +39,19 @@ function pin(raw: unknown): Pin {
   const value = sourceObject(raw, ['path', 'sha256', 'bytes']);
   return { path: sourcePath(value.path), sha256: sourceDigest(value.sha256), bytes: integer(value.bytes) };
 }
-/** A preview is either a publisher image downloaded by URL or composed from a pinned sky band recipe. */
-interface Preview extends Pin { url?: string; skyBands?: { path: string; sha256: string }; crop?: { left: number; top: number; width: number; height: number }; }
+/** A preview is a publisher image downloaded by URL, a composite of a pinned sky band recipe, or an image this package
+ * draws itself from one of its own declared inputs. The third kind exists for a dataset whose source is the package's
+ * own product rather than a figure someone published: there is nothing to download, and a publisher figure of some
+ * other observation would misrepresent it. */
+interface Preview extends Pin { url?: string; skyBands?: { path: string; sha256: string }; authoredFrom?: string;
+  crop?: { left: number; top: number; width: number; height: number }; }
 function preview(raw: unknown): Preview {
-  const value = sourceObject(raw, ['path', 'sha256', 'bytes', 'url', 'skyBands', 'crop']);
+  const value = sourceObject(raw, ['path', 'sha256', 'bytes', 'url', 'skyBands', 'authoredFrom', 'crop']);
   const result: Preview = pin({ path: value.path, sha256: value.sha256, bytes: value.bytes });
-  if ((value.url === undefined) === (value.skyBands === undefined)) throw new TypeError('A preview names either a URL or a sky band recipe.');
-  if (value.url !== undefined) result.url = sourceUrl(value.url);
+  const kinds = [value.url, value.skyBands, value.authoredFrom].filter(candidate => candidate !== undefined);
+  if (kinds.length !== 1) throw new TypeError('A preview names exactly one of a URL, a sky band recipe or the input it is drawn from.');
+  if (value.authoredFrom !== undefined) result.authoredFrom = sourceId(value.authoredFrom);
+  else if (value.url !== undefined) result.url = sourceUrl(value.url);
   else {
     const bands = sourceObject(value.skyBands, ['path', 'sha256']);
     result.skyBands = { path: sourcePath(bands.path), sha256: sourceDigest(bands.sha256) };
@@ -125,6 +131,9 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     bytes = (await composeSkyBandPng(pin.skyBands, { input, cache: resolve(root, '.local/nebula-lab/sky-bands') })).bytes;
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed sky band preview: ${pin.skyBands.path}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
+  } else if (bytes === null && pin.authoredFrom) {
+    // Nothing to download: the package's own author writes this one beside the grid it previews.
+    throw new Error(`Authored preview is missing: ${pin.path}; run this object's source author.`);
   } else if (bytes === null) {
     // Try the content-addressed mirror first (only when a caller opted in): it is our own reliable storage,
     // sha-verified before use. A miss, a mismatch or any mirror error falls back to the publisher URL, which stays

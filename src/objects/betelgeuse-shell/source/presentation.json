@@ -5,21 +5,27 @@
   "defaultLens": "zimpol-v",
   "bank": {
     "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
-    "bytes": 170077
+    "sha256": "caaa1308bd8b567e7549ee5712fd517a0d5139319a9c4ac18ed244c3503e4741",
+    "bytes": 248253
   },
   "recipes": [
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
+      "sha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225",
       "bytes": 1838
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
+      "sha256": "77ef7f6300121b6e2bf5dc69dc0b3d40b118c13de698fc7db471713dea0a5dec",
       "bytes": 1523
+    },
+    {
+      "id": "emission-2020",
+      "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
+      "sha256": "cc6cbba32670ba1ece58a2aafcc08ad355ded17b9f62f4a5600eaf2b9aeaf923",
+      "bytes": 1830
     }
   ],
   "sharedInputs": [],
@@ -113,6 +119,48 @@
           "width": 318,
           "height": 520
         }
+      }
+    },
+    {
+      "id": "emission-2020",
+      "label": "VLTI/MATISSE · off-limb light, 2020",
+      "title": "The light outside Betelgeuse’s disc at 4 micrometres",
+      "description": "The same reconstruction that paints this star’s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star’s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^−7.9, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction’s own heat scale, because this is the same quantity as the sphere.",
+      "summary": "The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.",
+      "detail": "128 × 128 px at 0.78 mas",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "VLTI/MATISSE, 3.94–4.00 µm, February 2020, 4 mas beam"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "1.19 to 2.36 stellar radii: outside the disc and its first beam, to the edge of the 100 mas field"
+        },
+        {
+          "id": "share",
+          "label": "Share of the flux",
+          "value": "A fifth of the reconstruction lies outside the disc"
+        },
+        {
+          "id": "scale",
+          "label": "Colour scale",
+          "value": "The reconstruction's own heat scale, the one the star's sphere carries"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the steeply falling envelope r^−7.9 that best projects to the measured profile"
+        }
+      ],
+      "input": "matisse-2020-02-continuum-4mas",
+      "preview": {
+        "path": "src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png",
+        "sha256": "250e938fdd00b7867332e7348ae0805b3cacf6d07d60ca9918d75a3f3856356a",
+        "bytes": 5621,
+        "authoredFrom": "matisse-2020-02-continuum-4mas"
       }
     }
   ]

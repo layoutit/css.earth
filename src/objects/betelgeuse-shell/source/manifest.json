@@ -3,6 +3,31 @@
   "pathBase": "repository",
   "inputs": [
     {
+      "id": "matisse-2020-02-continuum-4mas",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-matisse-2020-02-continuum-4mas",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
+      "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361/202347719",
+      "title": "VLTI/MATISSE 4 µm reconstruction, February 2020, convolved to the 4 mas beam",
+      "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
+      "displayCredit": "ESO/VLTI/MATISSE; reconstruction by this repository",
+      "acquisition": "The same bytes Betelgeuse’s own package ships and pins, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star’s drawn sphere.",
+      "license": "Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.",
+      "lensId": "emission-2020",
+      "expectedSha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
+      "expectedBytes": 135360
+    },
+    {
       "id": "sphere-zimpol-betelgeuse-p1-n-i-dolp",
       "dependencies": [],
       "sourceBinding": {
@@ -177,8 +202,8 @@
     {
       "id": "delivery-json",
       "path": "src/objects/betelgeuse-shell/source/delivery.json",
-      "expectedSha256": "37476b7da203e9798f2797587e007716ddc81513f769e6dcee23f31865929370",
-      "expectedBytes": 2654,
+      "expectedSha256": "fbc8d5cd441f40424b843ef44b648cbfc778501e673b9b96f0360892c008c680",
+      "expectedBytes": 3187,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -197,8 +222,18 @@
     {
       "id": "presentation-json",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "expectedSha256": "224b365af9009e40c8ef90fd6be508815ea630c70ecf34032fbb140cce14f8da",
-      "expectedBytes": 5091,
+      "expectedSha256": "edad4f7d95cc2c461628a8d0e9670fbc13c13fc38e1d794321ca9956d561cf7e",
+      "expectedBytes": 7646,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "previews-emission-2020-off-limb-png",
+      "path": "src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png",
+      "expectedSha256": "250e938fdd00b7867332e7348ae0805b3cacf6d07d60ca9918d75a3f3856356a",
+      "expectedBytes": 5621,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -207,8 +242,8 @@
     {
       "id": "provenance-json",
       "path": "src/objects/betelgeuse-shell/source/provenance.json",
-      "expectedSha256": "d43568ee7b9de7095c46e61dbc38a9eeb40e2e79b32b8264c35e856a11005d19",
-      "expectedBytes": 8426,
+      "expectedSha256": "07034cb167af2db54b156e93f20f2f5fdcf5c399b48aed999afe3adf7bd92fb6",
+      "expectedBytes": 9681,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -216,6 +251,16 @@
     }
   ],
   "generatedIntermediates": [
+    {
+      "id": "density-emission-2020-ktx2",
+      "path": "src/objects/betelgeuse-shell/source/density-emission-2020.ktx2",
+      "expectedSha256": "96262bd61a961228837703d6c0b2491748b61fde062afe871e636d50c3645f2f",
+      "expectedBytes": 50653,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    },
     {
       "id": "density-veil-2019-12-ktx2",
       "path": "src/objects/betelgeuse-shell/source/density-veil-2019-12.ktx2",
@@ -237,9 +282,19 @@
       }
     },
     {
+      "id": "volume-emission-2020-json",
+      "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
+      "expectedSha256": "cc6cbba32670ba1ece58a2aafcc08ad355ded17b9f62f4a5600eaf2b9aeaf923",
+      "expectedBytes": 1830,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    },
+    {
       "id": "volume-veil-2019-12-json",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "expectedSha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
+      "expectedSha256": "77ef7f6300121b6e2bf5dc69dc0b3d40b118c13de698fc7db471713dea0a5dec",
       "expectedBytes": 1523,
       "sourceBinding": {
         "kind": "local",
@@ -249,7 +304,7 @@
     {
       "id": "volume-zimpol-v-json",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "expectedSha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
+      "expectedSha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225",
       "expectedBytes": 1838,
       "sourceBinding": {
         "kind": "local",

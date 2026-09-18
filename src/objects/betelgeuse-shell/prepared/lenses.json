@@ -2443,11 +2443,22 @@
                 428.4301075268817
               ],
               "polarisationMaskRadiusUnits": 0.9261683067390526,
+              "emissionEnvelope": {
+                "shape": "steady-outflow",
+                "radiusUnits": 1,
+                "gaussianWidthUnits": 0.35000000000000003,
+                "outflowExponent": 7.949999999999981,
+                "residualRms": 0.0000029940105664073293,
+                "constantDepthResidualRms": 0.00001503946458540775,
+                "signalRms": 0.000020936567078028904,
+                "innerMaskUnits": 1.1927572132937616,
+                "fieldUnits": 2.360453521808705
+              },
               "envelope": {
                 "shape": "spherical-shell",
                 "radiusUnits": 3.4999999999999956,
-                "gaussianWidthUnits": 1.2000000000000004,
-                "residualRms": 0.00427793333049162,
+                "gaussianWidthUnits": 1.2,
+                "residualRms": 0.004277933330491618,
                 "signalRms": 0.014126183435468629,
                 "alternatives": {
                   "steadyOutflowExponent": 0.7000000000000002,
@@ -2478,6 +2489,7 @@
             },
             "models": {
               "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+              "emission-2020": "The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a steady-outflow (r^-7.95) leaving 2.99e-6, against 1.50e-5 for the constant depth an extrusion assumes and a profile of 2.09e-5. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.",
               "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
             },
             "limitations": [
@@ -4115,11 +4127,22 @@
                 428.4301075268817
               ],
               "polarisationMaskRadiusUnits": 0.9261683067390526,
+              "emissionEnvelope": {
+                "shape": "steady-outflow",
+                "radiusUnits": 1,
+                "gaussianWidthUnits": 0.35000000000000003,
+                "outflowExponent": 7.949999999999981,
+                "residualRms": 0.0000029940105664073293,
+                "constantDepthResidualRms": 0.00001503946458540775,
+                "signalRms": 0.000020936567078028904,
+                "innerMaskUnits": 1.1927572132937616,
+                "fieldUnits": 2.360453521808705
+              },
               "envelope": {
                 "shape": "spherical-shell",
                 "radiusUnits": 3.4999999999999956,
-                "gaussianWidthUnits": 1.2000000000000004,
-                "residualRms": 0.00427793333049162,
+                "gaussianWidthUnits": 1.2,
+                "residualRms": 0.004277933330491618,
                 "signalRms": 0.014126183435468629,
                 "alternatives": {
                   "steadyOutflowExponent": 0.7000000000000002,
@@ -4150,6 +4173,7 @@
             },
             "models": {
               "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+              "emission-2020": "The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a steady-outflow (r^-7.95) leaving 2.99e-6, against 1.50e-5 for the constant depth an extrusion assumes and a profile of 2.09e-5. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.",
               "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
             },
             "limitations": [
@@ -4737,6 +4761,2050 @@
           -0.8443671034183808,
           -3.5181962642432536
         ]
+      },
+      {
+        "id": "emission-2020",
+        "label": "VLTI/MATISSE · off-limb light, 2020",
+        "title": "VLTI/MATISSE · off-limb light, 2020",
+        "description": "Dust around Betelgeuse in two datasets that share one frame: the degree of linear polarisation measured by VLT/SPHERE-ZIMPOL on 3 December 2024, and the dust clump Montargès et al. fitted to the Great Dimming of December 2019. One unit is one stellar radius; the depth of each is a stated model, not a measurement.",
+        "sourceUrl": "https://doi.org/10.1051/0004-6361/202347719",
+        "volume": {
+          "schema": "cssearth-css-volume@1",
+          "id": "betelgeuse-shell-emission-2020",
+          "frame": {
+            "referenceFrame": "sun-icrf",
+            "epochJdTt": 2461286.5,
+            "originM": [
+              108273570124094580,
+              5139556753316323000,
+              668312118652173600
+            ],
+            "localToReferenceXyzw": [
+              0.006950382848136284,
+              0.6599182058077769,
+              0.7512636334570914,
+              0.007912450098292433
+            ],
+            "metersPerUnit": 531514800000,
+            "boundsUnits": {
+              "min": [
+                -6,
+                -6,
+                -6
+              ],
+              "max": [
+                6,
+                6,
+                6
+              ]
+            }
+          },
+          "anchors": [
+            {
+              "id": "betelgeuse",
+              "positionUnits": [
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "stacks": [
+            {
+              "axis": "x",
+              "leaves": [
+                {
+                  "id": "x-11",
+                  "centerUnits": [
+                    0.25,
+                    0.018750000000000266,
+                    -2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 127,
+                  "heightPx": 168,
+                  "boundsCssPixels": {
+                    "min": [
+                      -118.725,
+                      12.5,
+                      -158.100024
+                    ],
+                    "max": [
+                      120.60002300000002,
+                      12.5,
+                      158.1
+                    ]
+                  },
+                  "style": {
+                    "width": "127px",
+                    "height": "168px",
+                    "transform": "matrix3d(1.884449,0,0,0,0,0,-1.882143,0,0,1,0,0,-118.725,12.5,158.1,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-634px -2px"
+                  }
+                },
+                {
+                  "id": "x-14",
+                  "centerUnits": [
+                    -1.25,
+                    -0.03750000000000009,
+                    -4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 104,
+                  "heightPx": 176,
+                  "boundsCssPixels": {
+                    "min": [
+                      -99.975,
+                      -62.5,
+                      -165.59996800000002
+                    ],
+                    "max": [
+                      96.224952,
+                      -62.5,
+                      165.6
+                    ]
+                  },
+                  "style": {
+                    "width": "104px",
+                    "height": "176px",
+                    "transform": "matrix3d(1.886538,0,0,0,0,0,-1.881818,0,0,1,0,0,-99.975,-62.5,165.6,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-224px -2px"
+                  }
+                },
+                {
+                  "id": "x-15",
+                  "centerUnits": [
+                    -1.75,
+                    0.07500000000000018,
+                    4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 86,
+                  "heightPx": 184,
+                  "boundsCssPixels": {
+                    "min": [
+                      -77.475,
+                      -87.5,
+                      -173.100048
+                    ],
+                    "max": [
+                      84.97495800000002,
+                      -87.5,
+                      173.1
+                    ]
+                  },
+                  "style": {
+                    "width": "86px",
+                    "height": "184px",
+                    "transform": "matrix3d(1.888953,0,0,0,0,0,-1.881522,0,0,1,0,0,-77.475,-87.5,173.1,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-2px -2px"
+                  }
+                },
+                {
+                  "id": "x-16",
+                  "centerUnits": [
+                    -2.25,
+                    -0.07499999999999973,
+                    -4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 58,
+                  "heightPx": 176,
+                  "boundsCssPixels": {
+                    "min": [
+                      -58.725,
+                      -112.5,
+                      -165.59996800000002
+                    ],
+                    "max": [
+                      51.22502000000001,
+                      -112.5,
+                      165.6
+                    ]
+                  },
+                  "style": {
+                    "width": "58px",
+                    "height": "176px",
+                    "transform": "matrix3d(1.89569,0,0,0,0,0,-1.881818,0,0,1,0,0,-58.725,-112.5,165.6,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-332px -2px"
+                  }
+                },
+                {
+                  "id": "x-12",
+                  "centerUnits": [
+                    -0.25,
+                    2.220446049250313e-16,
+                    2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 128,
+                  "heightPx": 182,
+                  "boundsCssPixels": {
+                    "min": [
+                      -120.6,
+                      -12.5,
+                      -171.224926
+                    ],
+                    "max": [
+                      120.6,
+                      -12.5,
+                      171.225
+                    ]
+                  },
+                  "style": {
+                    "width": "128px",
+                    "height": "182px",
+                    "transform": "matrix3d(1.884375,0,0,0,0,0,-1.881593,0,0,1,0,0,-120.6,-12.5,171.225,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-92px -2px"
+                  }
+                },
+                {
+                  "id": "x-13",
+                  "centerUnits": [
+                    -0.75,
+                    -0.018750000000000044,
+                    2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 121,
+                  "heightPx": 172,
+                  "boundsCssPixels": {
+                    "min": [
+                      -114.975,
+                      -37.5,
+                      -161.850044
+                    ],
+                    "max": [
+                      113.09995699999999,
+                      -37.5,
+                      161.85
+                    ]
+                  },
+                  "style": {
+                    "width": "121px",
+                    "height": "172px",
+                    "transform": "matrix3d(1.884917,0,0,0,0,0,-1.881977,0,0,1,0,0,-114.975,-37.5,161.85,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-394px -2px"
+                  }
+                },
+                {
+                  "id": "x-8",
+                  "centerUnits": [
+                    1.75,
+                    -0.1499999999999999,
+                    -2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 84,
+                  "heightPx": 148,
+                  "boundsCssPixels": {
+                    "min": [
+                      -86.85,
+                      87.5,
+                      -139.34998399999998
+                    ],
+                    "max": [
+                      71.84994,
+                      87.5,
+                      139.35
+                    ]
+                  },
+                  "style": {
+                    "width": "84px",
+                    "height": "148px",
+                    "transform": "matrix3d(1.889285,0,0,0,0,0,-1.883108,0,0,1,0,0,-86.85,87.5,139.35,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-872px -2px"
+                  }
+                },
+                {
+                  "id": "x-9",
+                  "centerUnits": [
+                    1.25,
+                    0.018749999999999822,
+                    2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 111,
+                  "heightPx": 172,
+                  "boundsCssPixels": {
+                    "min": [
+                      -103.725,
+                      62.5,
+                      -161.850044
+                    ],
+                    "max": [
+                      105.600021,
+                      62.5,
+                      161.85
+                    ]
+                  },
+                  "style": {
+                    "width": "111px",
+                    "height": "172px",
+                    "transform": "matrix3d(1.885811,0,0,0,0,0,-1.881977,0,0,1,0,0,-103.725,62.5,161.85,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-519px -2px"
+                  }
+                },
+                {
+                  "id": "x-10",
+                  "centerUnits": [
+                    0.75,
+                    0.3187500000000001,
+                    -2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 103,
+                  "heightPx": 168,
+                  "boundsCssPixels": {
+                    "min": [
+                      -81.225,
+                      37.5,
+                      -158.100024
+                    ],
+                    "max": [
+                      113.09995,
+                      37.5,
+                      158.1
+                    ]
+                  },
+                  "style": {
+                    "width": "103px",
+                    "height": "168px",
+                    "transform": "matrix3d(1.88665,0,0,0,0,0,-1.882143,0,0,1,0,0,-81.225,37.5,158.1,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-765px -2px"
+                  }
+                },
+                {
+                  "id": "x-7",
+                  "centerUnits": [
+                    2.25,
+                    0,
+                    -4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/x.webp",
+                  "widthPx": 60,
+                  "heightPx": 136,
+                  "boundsCssPixels": {
+                    "min": [
+                      -56.85,
+                      112.5,
+                      -128.100064
+                    ],
+                    "max": [
+                      56.85005999999999,
+                      112.5,
+                      128.1
+                    ]
+                  },
+                  "style": {
+                    "width": "60px",
+                    "height": "136px",
+                    "transform": "matrix3d(1.895001,0,0,0,0,0,-1.883824,0,0,1,0,0,-56.85,112.5,128.1,1)",
+                    "backgroundSize": "1022px 188px",
+                    "backgroundPosition": "-960px -2px"
+                  }
+                }
+              ]
+            },
+            {
+              "axis": "y",
+              "leaves": [
+                {
+                  "id": "y-12",
+                  "centerUnits": [
+                    -0.03750000000000031,
+                    0.25,
+                    0
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 124,
+                  "heightPx": 160,
+                  "boundsCssPixels": {
+                    "min": [
+                      12.5,
+                      -118.72494800000001,
+                      -150.6
+                    ],
+                    "max": [
+                      12.5,
+                      114.975,
+                      150.6
+                    ]
+                  },
+                  "style": {
+                    "width": "124px",
+                    "height": "160px",
+                    "transform": "matrix3d(0,-1.884677,0,0,0,0,-1.8825,0,1,0,0,0,12.5,114.975,150.6,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-622px -2px"
+                  }
+                },
+                {
+                  "id": "y-9",
+                  "centerUnits": [
+                    -0.0187499999999996,
+                    -1.25,
+                    2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 113,
+                  "heightPx": 182,
+                  "boundsCssPixels": {
+                    "min": [
+                      -62.5,
+                      -107.47506000000001,
+                      -171.224926
+                    ],
+                    "max": [
+                      -62.5,
+                      105.6,
+                      171.225
+                    ]
+                  },
+                  "style": {
+                    "width": "113px",
+                    "height": "182px",
+                    "transform": "matrix3d(0,-1.88562,0,0,0,0,-1.881593,0,1,0,0,0,-62.5,105.6,171.225,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-2px -2px"
+                  }
+                },
+                {
+                  "id": "y-8",
+                  "centerUnits": [
+                    0.2999999999999998,
+                    -1.75,
+                    -2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 74,
+                  "heightPx": 158,
+                  "boundsCssPixels": {
+                    "min": [
+                      -87.5,
+                      -54.974984000000006,
+                      -148.72501000000003
+                    ],
+                    "max": [
+                      -87.5,
+                      84.975,
+                      148.725
+                    ]
+                  },
+                  "style": {
+                    "width": "74px",
+                    "height": "158px",
+                    "transform": "matrix3d(0,-1.891216,0,0,0,0,-1.882595,0,1,0,0,0,-87.5,84.975,148.725,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-750px -2px"
+                  }
+                },
+                {
+                  "id": "y-7",
+                  "centerUnits": [
+                    -0.39375000000000027,
+                    -2.25,
+                    -2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 33,
+                  "heightPx": 148,
+                  "boundsCssPixels": {
+                    "min": [
+                      -112.5,
+                      -51.225012,
+                      -139.34998399999998
+                    ],
+                    "max": [
+                      -112.5,
+                      11.85,
+                      139.35
+                    ]
+                  },
+                  "style": {
+                    "width": "33px",
+                    "height": "148px",
+                    "transform": "matrix3d(0,-1.911364,0,0,0,0,-1.883108,0,1,0,0,0,-112.5,11.85,139.35,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-828px -2px"
+                  }
+                },
+                {
+                  "id": "y-11",
+                  "centerUnits": [
+                    0.11250000000000004,
+                    -0.25,
+                    -2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 116,
+                  "heightPx": 138,
+                  "boundsCssPixels": {
+                    "min": [
+                      -12.5,
+                      -103.72502,
+                      -129.975048
+                    ],
+                    "max": [
+                      -12.5,
+                      114.975,
+                      129.975
+                    ]
+                  },
+                  "style": {
+                    "width": "116px",
+                    "height": "138px",
+                    "transform": "matrix3d(0,-1.885345,0,0,0,0,-1.883696,0,1,0,0,0,-12.5,114.975,129.975,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-865px -2px"
+                  }
+                },
+                {
+                  "id": "y-10",
+                  "centerUnits": [
+                    0.037499999999999645,
+                    -0.75,
+                    4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 118,
+                  "heightPx": 164,
+                  "boundsCssPixels": {
+                    "min": [
+                      -37.5,
+                      -109.34994200000003,
+                      -154.34998800000002
+                    ],
+                    "max": [
+                      -37.5,
+                      113.1,
+                      154.35
+                    ]
+                  },
+                  "style": {
+                    "width": "118px",
+                    "height": "164px",
+                    "transform": "matrix3d(0,-1.885169,0,0,0,0,-1.882317,0,1,0,0,0,-37.5,113.1,154.35,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-500px -2px"
+                  }
+                },
+                {
+                  "id": "y-15",
+                  "centerUnits": [
+                    -0.07500000000000018,
+                    1.75,
+                    -4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 86,
+                  "heightPx": 166,
+                  "boundsCssPixels": {
+                    "min": [
+                      87.5,
+                      -84.97495800000002,
+                      -156.22501400000002
+                    ],
+                    "max": [
+                      87.5,
+                      77.475,
+                      156.225
+                    ]
+                  },
+                  "style": {
+                    "width": "86px",
+                    "height": "166px",
+                    "transform": "matrix3d(0,-1.888953,0,0,0,0,-1.882229,0,1,0,0,0,87.5,77.475,156.225,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-358px -2px"
+                  }
+                },
+                {
+                  "id": "y-14",
+                  "centerUnits": [
+                    0.018750000000000044,
+                    1.25,
+                    4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 111,
+                  "heightPx": 174,
+                  "boundsCssPixels": {
+                    "min": [
+                      62.5,
+                      -103.725021,
+                      -163.724904
+                    ],
+                    "max": [
+                      62.5,
+                      105.6,
+                      163.725
+                    ]
+                  },
+                  "style": {
+                    "width": "111px",
+                    "height": "174px",
+                    "transform": "matrix3d(0,-1.885811,0,0,0,0,-1.881896,0,1,0,0,0,62.5,105.6,163.725,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-119px -2px"
+                  }
+                },
+                {
+                  "id": "y-13",
+                  "centerUnits": [
+                    -0.03749999999999987,
+                    0.75,
+                    2.220446049250313e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 120,
+                  "heightPx": 172,
+                  "boundsCssPixels": {
+                    "min": [
+                      37.5,
+                      -114.975,
+                      -161.850044
+                    ],
+                    "max": [
+                      37.5,
+                      111.225,
+                      161.85
+                    ]
+                  },
+                  "style": {
+                    "width": "120px",
+                    "height": "172px",
+                    "transform": "matrix3d(0,-1.885,0,0,0,0,-1.881977,0,1,0,0,0,37.5,111.225,161.85,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-234px -2px"
+                  }
+                },
+                {
+                  "id": "y-16",
+                  "centerUnits": [
+                    0.2250000000000001,
+                    2.25,
+                    -4.440892098500626e-16
+                  ],
+                  "texturePath": "emission-2020/atlases/y.webp",
+                  "widthPx": 48,
+                  "heightPx": 166,
+                  "boundsCssPixels": {
+                    "min": [
+                      112.5,
+                      -34.34999999999999,
+                      -156.22501400000002
+                    ],
+                    "max": [
+                      112.5,
+                      56.85,
+                      156.225
+                    ]
+                  },
+                  "style": {
+                    "width": "48px",
+                    "height": "166px",
+                    "transform": "matrix3d(0,-1.9,0,0,0,0,-1.882229,0,1,0,0,0,112.5,56.85,156.225,1)",
+                    "backgroundSize": "983px 186px",
+                    "backgroundPosition": "-448px -2px"
+                  }
+                }
+              ]
+            },
+            {
+              "axis": "z",
+              "leaves": [
+                {
+                  "id": "z-12",
+                  "centerUnits": [
+                    -0.03750000000000009,
+                    -2.220446049250313e-16,
+                    0.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 126,
+                  "heightPx": 128,
+                  "boundsCssPixels": {
+                    "min": [
+                      -120.6,
+                      -120.60002400000002,
+                      12.5
+                    ],
+                    "max": [
+                      120.6,
+                      116.85,
+                      12.5
+                    ]
+                  },
+                  "style": {
+                    "width": "126px",
+                    "height": "128px",
+                    "transform": "matrix3d(0,-1.884524,0,0,-1.884375,0,0,0,0,0,-1,0,120.6,116.85,12.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-132px -2px"
+                  }
+                },
+                {
+                  "id": "z-8",
+                  "centerUnits": [
+                    -0.0187499999999996,
+                    -4.440892098500626e-16,
+                    -1.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 123,
+                  "heightPx": 126,
+                  "boundsCssPixels": {
+                    "min": [
+                      -118.72502400000002,
+                      -116.84998800000002,
+                      -87.5
+                    ],
+                    "max": [
+                      118.725,
+                      114.975,
+                      -87.5
+                    ]
+                  },
+                  "style": {
+                    "width": "123px",
+                    "height": "126px",
+                    "transform": "matrix3d(0,-1.884756,0,0,-1.884524,0,0,0,0,0,-1,0,118.725,114.975,-87.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-776px -2px"
+                  }
+                },
+                {
+                  "id": "z-6",
+                  "centerUnits": [
+                    -0.018750000000000044,
+                    0.018750000000000044,
+                    -2.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 119,
+                  "heightPx": 121,
+                  "boundsCssPixels": {
+                    "min": [
+                      -113.09995699999999,
+                      -113.099996,
+                      -137.5
+                    ],
+                    "max": [
+                      114.975,
+                      111.225,
+                      -137.5
+                    ]
+                  },
+                  "style": {
+                    "width": "119px",
+                    "height": "121px",
+                    "transform": "matrix3d(0,-1.885084,0,0,-1.884917,0,0,0,0,0,-1,0,114.975,111.225,-137.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1280px -2px"
+                  }
+                },
+                {
+                  "id": "z-5",
+                  "centerUnits": [
+                    -0.3937499999999998,
+                    0.05625000000000013,
+                    -3.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 99,
+                  "heightPx": 115,
+                  "boundsCssPixels": {
+                    "min": [
+                      -105.60002500000002,
+                      -113.09997900000002,
+                      -162.5
+                    ],
+                    "max": [
+                      111.225,
+                      73.725,
+                      -162.5
+                    ]
+                  },
+                  "style": {
+                    "width": "99px",
+                    "height": "115px",
+                    "transform": "matrix3d(0,-1.887121,0,0,-1.885435,0,0,0,0,0,-1,0,111.225,73.725,-162.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1526px -2px"
+                  }
+                },
+                {
+                  "id": "z-4",
+                  "centerUnits": [
+                    -2.0625,
+                    -0.3187500000000001,
+                    -3.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 8,
+                  "heightPx": 47,
+                  "boundsCssPixels": {
+                    "min": [
+                      -60.600004000000006,
+                      -111.22500000000001,
+                      -187.5
+                    ],
+                    "max": [
+                      28.725,
+                      -95.025,
+                      -187.5
+                    ]
+                  },
+                  "style": {
+                    "width": "8px",
+                    "height": "47px",
+                    "transform": "matrix3d(0,-2.025,0,0,-1.900532,0,0,0,0,0,-1,0,28.725,-95.025,-187.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1732px -2px"
+                  }
+                },
+                {
+                  "id": "z-7",
+                  "centerUnits": [
+                    -0.018749999999999822,
+                    0.018750000000000266,
+                    -2.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 121,
+                  "heightPx": 125,
+                  "boundsCssPixels": {
+                    "min": [
+                      -116.85000000000002,
+                      -114.97495699999999,
+                      -112.5
+                    ],
+                    "max": [
+                      118.725,
+                      113.1,
+                      -112.5
+                    ]
+                  },
+                  "style": {
+                    "width": "121px",
+                    "height": "125px",
+                    "transform": "matrix3d(0,-1.884917,0,0,-1.8846,0,0,0,0,0,-1,0,118.725,113.1,-112.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1030px -2px"
+                  }
+                },
+                {
+                  "id": "z-10",
+                  "centerUnits": [
+                    -0.018750000000000266,
+                    -2.220446049250313e-16,
+                    -0.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 125,
+                  "heightPx": 128,
+                  "boundsCssPixels": {
+                    "min": [
+                      -120.6,
+                      -118.72500000000002,
+                      -37.5
+                    ],
+                    "max": [
+                      120.6,
+                      116.85,
+                      -37.5
+                    ]
+                  },
+                  "style": {
+                    "width": "125px",
+                    "height": "128px",
+                    "transform": "matrix3d(0,-1.8846,0,0,-1.884375,0,0,0,0,0,-1,0,120.6,116.85,-37.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-262px -2px"
+                  }
+                },
+                {
+                  "id": "z-9",
+                  "centerUnits": [
+                    -0.03750000000000031,
+                    -2.220446049250313e-16,
+                    -1.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 124,
+                  "heightPx": 128,
+                  "boundsCssPixels": {
+                    "min": [
+                      -120.6,
+                      -118.72507200000001,
+                      -62.5
+                    ],
+                    "max": [
+                      120.6,
+                      114.975,
+                      -62.5
+                    ]
+                  },
+                  "style": {
+                    "width": "124px",
+                    "height": "128px",
+                    "transform": "matrix3d(0,-1.884678,0,0,-1.884375,0,0,0,0,0,-1,0,120.6,114.975,-62.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-520px -2px"
+                  }
+                },
+                {
+                  "id": "z-11",
+                  "centerUnits": [
+                    -0.03750000000000009,
+                    -2.220446049250313e-16,
+                    -0.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 126,
+                  "heightPx": 128,
+                  "boundsCssPixels": {
+                    "min": [
+                      -120.6,
+                      -120.60002400000002,
+                      -12.5
+                    ],
+                    "max": [
+                      120.6,
+                      116.85,
+                      -12.5
+                    ]
+                  },
+                  "style": {
+                    "width": "126px",
+                    "height": "128px",
+                    "transform": "matrix3d(0,-1.884524,0,0,-1.884375,0,0,0,0,0,-1,0,120.6,116.85,-12.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-2px -2px"
+                  }
+                },
+                {
+                  "id": "z-16",
+                  "centerUnits": [
+                    -0.018749999999999822,
+                    0.018750000000000266,
+                    2.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 121,
+                  "heightPx": 125,
+                  "boundsCssPixels": {
+                    "min": [
+                      -116.85000000000002,
+                      -114.97495699999999,
+                      112.5
+                    ],
+                    "max": [
+                      118.725,
+                      113.1,
+                      112.5
+                    ]
+                  },
+                  "style": {
+                    "width": "121px",
+                    "height": "125px",
+                    "transform": "matrix3d(0,-1.884917,0,0,-1.8846,0,0,0,0,0,-1,0,118.725,113.1,112.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1155px -2px"
+                  }
+                },
+                {
+                  "id": "z-14",
+                  "centerUnits": [
+                    -0.03750000000000031,
+                    -2.220446049250313e-16,
+                    1.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 124,
+                  "heightPx": 128,
+                  "boundsCssPixels": {
+                    "min": [
+                      -120.6,
+                      -118.72507200000001,
+                      62.5
+                    ],
+                    "max": [
+                      120.6,
+                      114.975,
+                      62.5
+                    ]
+                  },
+                  "style": {
+                    "width": "124px",
+                    "height": "128px",
+                    "transform": "matrix3d(0,-1.884678,0,0,-1.884375,0,0,0,0,0,-1,0,120.6,114.975,62.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-648px -2px"
+                  }
+                },
+                {
+                  "id": "z-13",
+                  "centerUnits": [
+                    -0.018750000000000266,
+                    -2.220446049250313e-16,
+                    0.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 125,
+                  "heightPx": 128,
+                  "boundsCssPixels": {
+                    "min": [
+                      -120.6,
+                      -118.72500000000002,
+                      37.5
+                    ],
+                    "max": [
+                      120.6,
+                      116.85,
+                      37.5
+                    ]
+                  },
+                  "style": {
+                    "width": "125px",
+                    "height": "128px",
+                    "transform": "matrix3d(0,-1.8846,0,0,-1.884375,0,0,0,0,0,-1,0,120.6,116.85,37.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-391px -2px"
+                  }
+                },
+                {
+                  "id": "z-15",
+                  "centerUnits": [
+                    -0.0187499999999996,
+                    -4.440892098500626e-16,
+                    1.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 123,
+                  "heightPx": 126,
+                  "boundsCssPixels": {
+                    "min": [
+                      -118.72502400000002,
+                      -116.84998800000002,
+                      87.5
+                    ],
+                    "max": [
+                      118.725,
+                      114.975,
+                      87.5
+                    ]
+                  },
+                  "style": {
+                    "width": "123px",
+                    "height": "126px",
+                    "transform": "matrix3d(0,-1.884756,0,0,-1.884524,0,0,0,0,0,-1,0,118.725,114.975,87.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-903px -2px"
+                  }
+                },
+                {
+                  "id": "z-18",
+                  "centerUnits": [
+                    -0.3937499999999998,
+                    0.05625000000000013,
+                    3.25
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 99,
+                  "heightPx": 115,
+                  "boundsCssPixels": {
+                    "min": [
+                      -105.60002500000002,
+                      -113.09997900000002,
+                      162.5
+                    ],
+                    "max": [
+                      111.225,
+                      73.725,
+                      162.5
+                    ]
+                  },
+                  "style": {
+                    "width": "99px",
+                    "height": "115px",
+                    "transform": "matrix3d(0,-1.887121,0,0,-1.885435,0,0,0,0,0,-1,0,111.225,73.725,162.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1629px -2px"
+                  }
+                },
+                {
+                  "id": "z-17",
+                  "centerUnits": [
+                    -0.018750000000000044,
+                    0.018750000000000044,
+                    2.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 119,
+                  "heightPx": 121,
+                  "boundsCssPixels": {
+                    "min": [
+                      -113.09995699999999,
+                      -113.099996,
+                      137.5
+                    ],
+                    "max": [
+                      114.975,
+                      111.225,
+                      137.5
+                    ]
+                  },
+                  "style": {
+                    "width": "119px",
+                    "height": "121px",
+                    "transform": "matrix3d(0,-1.885084,0,0,-1.884917,0,0,0,0,0,-1,0,114.975,111.225,137.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1403px -2px"
+                  }
+                },
+                {
+                  "id": "z-19",
+                  "centerUnits": [
+                    -2.0625,
+                    -0.3187500000000001,
+                    3.75
+                  ],
+                  "texturePath": "emission-2020/atlases/z.webp",
+                  "widthPx": 8,
+                  "heightPx": 47,
+                  "boundsCssPixels": {
+                    "min": [
+                      -60.600004000000006,
+                      -111.22500000000001,
+                      187.5
+                    ],
+                    "max": [
+                      28.725,
+                      -95.025,
+                      187.5
+                    ]
+                  },
+                  "style": {
+                    "width": "8px",
+                    "height": "47px",
+                    "transform": "matrix3d(0,-2.025,0,0,-1.900532,0,0,0,0,0,-1,0,28.725,-95.025,187.5,1)",
+                    "backgroundSize": "1754px 132px",
+                    "backgroundPosition": "-1744px -2px"
+                  }
+                }
+              ]
+            }
+          ],
+          "resources": [
+            {
+              "path": "emission-2020/impostors/view-nnn.png",
+              "sha256": "40c71d6a5c3122fd6267def51e4044d58e54b0cfe411e5f471d5add2456eac0e",
+              "bytes": 14824,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-nn0.png",
+              "sha256": "de5d75f8188c0e70275dece328625b9b48f10a28d0e305a1c0d29c13c304744b",
+              "bytes": 12625,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-nnp.png",
+              "sha256": "8bd979de0995606aef948af6a4b9f8d00c4c67a5ca274474b78394d19b4cd532",
+              "bytes": 14843,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-n0n.png",
+              "sha256": "2b694e89eabefa7033bcb9d1eced833c26458b7f58ef6d8663e46fe07233007e",
+              "bytes": 14101,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-n00.png",
+              "sha256": "781e222a8245cee94df722d86552d52e0270ad7e04cfe33ef2512eae2e3df728",
+              "bytes": 12288,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-n0p.png",
+              "sha256": "c8fe873ff719b2f861c7d0c029faf269634cae359c351eddd4c824732e207464",
+              "bytes": 14138,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-npn.png",
+              "sha256": "03d3f644196a226c767f1dd0bffff2ddb86994d13fd11731e722df1bee7d022c",
+              "bytes": 14915,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-np0.png",
+              "sha256": "3c6219f04ff87c5e6da0d5d098c0c66ec0538bf24e5af0bc05b02a656ab5e73a",
+              "bytes": 12567,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-npp.png",
+              "sha256": "c8ed9cf1f6f55558919154702ad2634976d35488653ddd32e935ad7a4b7f4d6e",
+              "bytes": 14896,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-0nn.png",
+              "sha256": "7238060c5cf692910b637a5d9bce46065163bf0763b394b335db8c95c8cba25d",
+              "bytes": 14236,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-0n0.png",
+              "sha256": "6c93e411fcbc5af247fcef771c3e287ed9940e92d34717a98f0a971345c05b77",
+              "bytes": 12788,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-0np.png",
+              "sha256": "74d473a676d13ac9d3ba6bbb677b9e4d9b098555df7ffd945de2daf8a6ed0c86",
+              "bytes": 14230,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-00n.png",
+              "sha256": "bcd4ee80fa81b849c794d2bee9384cb4789401f8a159c0ff23a177c73fe35207",
+              "bytes": 6983,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-00p.png",
+              "sha256": "0bd410a226f10b3d5fc45d46202711a373317254240ee01a9202a7bfa40213e6",
+              "bytes": 6960,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-0pn.png",
+              "sha256": "fecab64eee0a176f1a862e8428ad590402ad2730fcdf6c43827bb42cf0c5f131",
+              "bytes": 14249,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-0p0.png",
+              "sha256": "a24cbba24c0ba008840a31d2a389de0b404cb200413eeca2b453b4718d22b227",
+              "bytes": 12718,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-0pp.png",
+              "sha256": "f62fabc001669e11a0c2aa5dcd9ae7b96aa567cb44e6815e190e9960b9e740bd",
+              "bytes": 14238,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-pnn.png",
+              "sha256": "cdc0d689af6cc7ea7cf1cd80d946ce1c2178692a65c0899631bb853144323806",
+              "bytes": 14905,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-pn0.png",
+              "sha256": "f66d5a6762e923d0e05e9c74117e2078bc4666cd1db4f60c249cd100aa716344",
+              "bytes": 12500,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-pnp.png",
+              "sha256": "9801725e14ced58d2a0f8509a40884faf5c9985b30a32d9c3d98ebb1e9eb1350",
+              "bytes": 14901,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-p0n.png",
+              "sha256": "848c32a64c31a4e46d6b3a3436fd7f77fbdfe171efe9a0ad13961b226f6f54f5",
+              "bytes": 14104,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-p00.png",
+              "sha256": "887ea52e0c3962d22518de0ecc522bff3c37c057f52f3833c23e591009cb0e48",
+              "bytes": 12109,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-p0p.png",
+              "sha256": "7f4a1178b68756156657c9e5427cdc49e2c0482c9b64d7092df20ad845561ad8",
+              "bytes": 14095,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-ppn.png",
+              "sha256": "7b0d67e5e9724f603c2e300dd3dfed032ffad95fa4a30cf2ab0cf3289623e75c",
+              "bytes": 14840,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-pp0.png",
+              "sha256": "e07dd59ef091b76eb30d9bde88e7391e031d1c4f35389c7ef4c9c6207dd4486d",
+              "bytes": 12554,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/impostors/view-ppp.png",
+              "sha256": "e8bb656871f7973f36df96eae47a590122ab8b5112f14ede1aa5a9bc8aa9d6b1",
+              "bytes": 14833,
+              "width": 256,
+              "height": 256
+            },
+            {
+              "path": "emission-2020/atlases/x.webp",
+              "sha256": "52dbf9ec5cf89fc15fcebad5171877e921fb4f10bc6785b62ea5dcc1962a00de",
+              "bytes": 26834,
+              "width": 1022,
+              "height": 188
+            },
+            {
+              "path": "emission-2020/atlases/y.webp",
+              "sha256": "b940d0310914d0aa7ffd372dc62ba03d11c86d32a8df868d4bc752970f6e9dd5",
+              "bytes": 27612,
+              "width": 983,
+              "height": 186
+            },
+            {
+              "path": "emission-2020/atlases/z.webp",
+              "sha256": "42152289298059053e0c957a6ab026e73aa41f278f8efaf29739a64210caacbd",
+              "bytes": 42718,
+              "width": 1754,
+              "height": 132
+            }
+          ],
+          "provenance": {
+            "schema": "cssearth-volume-provenance@1",
+            "title": "Betelgeuse circumstellar dust: measured polarisation and the published Great Dimming clump",
+            "kind": "observed-sky-map-and-published-radiative-transfer-model",
+            "authors": [
+              "M. Montargès",
+              "E. Cannon",
+              "A. de Koter",
+              "P. Kervella",
+              "E. Lagadec",
+              "L. Decin",
+              "A. Boccaletti",
+              "O. Flasseur",
+              "J. Milli",
+              "S. Ridgway",
+              "A. K. Dupree"
+            ],
+            "organizations": [
+              "ESO (VLT/SPHERE-ZIMPOL, programmes 0104.D-0300 and 114.28H9.001)",
+              "High Contrast Data Centre (reduction)"
+            ],
+            "license": {
+              "spdx": "CC-BY-4.0",
+              "dataLicenseDeclaration": "https://archive.eso.org/cms/eso-data-access-policy.html",
+              "note": "ESO Phase 3 release description BETELGEUSE-B DR1, 2026-08-19: science data products from the ESO archive may be distributed under the Creative Commons Attribution 4.0 International license with credit to the ESO provenance. The 2019 clump parameters are published numbers from Montargès et al. 2021, Extended Data Table 3."
+            },
+            "sources": [
+              {
+                "id": "zimpol-v-intensity",
+                "dpId": "ADP.2026-08-19T13:19:07.655",
+                "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655",
+                "sha256": "b40cfcb32103c99c5de9f77588519bbb6c9322eb250d7bc9756339fee8abd8eb",
+                "bytes": 8458560,
+                "role": "star centre and intensity floor"
+              },
+              {
+                "id": "zimpol-v-dolp",
+                "dpId": "ADP.2026-08-19T13:19:07.656",
+                "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.656",
+                "sha256": "0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687",
+                "bytes": 8455680,
+                "role": "degree of linear polarisation, the quantity the 2024 leaves carry"
+              },
+              {
+                "id": "veil-parameters",
+                "url": "https://doi.org/10.1038/s41586-021-03546-8",
+                "preprint": "https://arxiv.org/abs/2201.10551",
+                "role": "Montargès et al. 2021, Nature 594, 365, Extended Data Table 3 and Figure 6: the December 2019 clump centre, radius, density, composition and grain size, and the coordinate system they are given in"
+              }
+            ],
+            "paper": {
+              "doi": "10.1051/0004-6361/202661023",
+              "citation": "Montargès et al. 2026, A&A 711, L12 (the 2024 polarimetry)"
+            },
+            "measured": {
+              "starCentrePixel": [
+                513.0008794032184,
+                429.0879365019645
+              ],
+              "polarisationCentrePixel": [
+                502.39784946236557,
+                428.4301075268817
+              ],
+              "polarisationMaskRadiusUnits": 0.9261683067390526,
+              "emissionEnvelope": {
+                "shape": "steady-outflow",
+                "radiusUnits": 1,
+                "gaussianWidthUnits": 0.35000000000000003,
+                "outflowExponent": 7.949999999999981,
+                "residualRms": 0.0000029940105664073293,
+                "constantDepthResidualRms": 0.00001503946458540775,
+                "signalRms": 0.000020936567078028904,
+                "innerMaskUnits": 1.1927572132937616,
+                "fieldUnits": 2.360453521808705
+              },
+              "envelope": {
+                "shape": "spherical-shell",
+                "radiusUnits": 3.4999999999999956,
+                "gaussianWidthUnits": 1.2,
+                "residualRms": 0.004277933330491618,
+                "signalRms": 0.014126183435468629,
+                "alternatives": {
+                  "steadyOutflowExponent": 0.7000000000000002,
+                  "steadyOutflowResidualRms": 0.0062327494811967935,
+                  "constantDepthResidualRms": 0.006939448861903369
+                }
+              },
+              "productOffsetPixels": 10.623416723779588,
+              "intensityPeak": 244980.17392728516,
+              "polarisationFloor": 0.0054274498079658565,
+              "pixelsPerStellarRadius": 5.874577295655155,
+              "colourMap": "inferno",
+              "colourScaleTopDegree": 0.1,
+              "zimpolExposureGain": 2.307199491978002,
+              "stellarRadiusArcsec": 0.021148478264358558,
+              "stellarRadiusAu": 3.5529569873750884,
+              "sceneOriginRaDecDeg": [
+                88.79314473841248,
+                7.407147711522079
+              ],
+              "distancePc": 168.00059762989528,
+              "veilCentreUnits": [
+                0.5347658321649745,
+                -0.8443671034183808,
+                -3.5181962642432536
+              ],
+              "veilRadiusUnits": 1.8294620574064917
+            },
+            "models": {
+              "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+              "emission-2020": "The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a steady-outflow (r^-7.95) leaving 2.99e-6, against 1.50e-5 for the constant depth an extrusion assumes and a profile of 2.09e-5. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.",
+              "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
+            },
+            "limitations": [
+              "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed. Its depth is the envelope that best projects to the measured radial profile, which is an inference from that profile, not a measurement, and it cannot say which patches are in front and which behind.",
+              "The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.",
+              "The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.",
+              "The 2024 colours are the publisher's inferno colour map for that ratio, on the same zero-to-0.10 scale as their figure. They are a legend, not the colour of the dust and not a temperature.",
+              "Brightness follows the renderer's 1-exp(-gain*column) transfer rather than the flat bar of a printed figure, so mid-scale values sit brighter than a linear colourbar would put them; the hue at every value is the published one.",
+              "Four colour stops are the most an RGBA8 grid can carry, so the bar is interpolated between quarters rather than sampled continuously.",
+              "Structure finer than the 16 mas beam, three quarters of a stellar radius, is not in the 2024 data.",
+              "The 2019 clump is a model fitted to images, not an image. Its January and March 2020 epochs are recorded by its own authors as unoptimised best guesses and are not shipped.",
+              "Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.",
+              "Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.",
+              "The two lenses are five years apart. Neither is a picture of the other.",
+              "The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.",
+              "Its extinction is grey. Silicate dust reddens what it transmits; no colour was applied because the photosphere behind it is drawn in an infrared intensity palette, not in colour.",
+              "The scattered light is a stated display level, not a measurement.",
+              "The 2024 map always composites behind the star, because its emission surrounds the body instead of standing clear of it in depth."
+            ]
+          },
+          "approximation": {
+            "method": "Filtered scalar fields; decoded after filtering; integrated RGB emission; exponential shared opacity with optical RGB ratios in ordinary alpha.",
+            "radialEmission": "None.",
+            "limitations": [
+              "Shared-opacity display emission preserves column-constant chromaticity before RGBA8 quantization; varying chromaticity remains a slab approximation. Extinction is unsupported.",
+              "Finite slices and axis handoffs approximate a continuous field; angle-dependent opacity and sampling differences remain.",
+              "No runtime ray integration, near-field noise or global HDR display pass."
+            ],
+            "samplesPerSlab": 4,
+            "opticalWeight": 1,
+            "exposureGain": 2.302585092994046,
+            "emissionTransfer": "shared-opacity",
+            "sliceCounts": {
+              "x": 24,
+              "y": 24,
+              "z": 24
+            },
+            "slabPitchUnits": {
+              "x": 0.5,
+              "y": 0.5,
+              "z": 0.5
+            }
+          },
+          "impostors": {
+            "schema": "cssearth-volume-impostors@1",
+            "radiusUnits": 10.392304845413264,
+            "fullBelowDiameterPixels": 128,
+            "volumeAboveDiameterPixels": 256,
+            "views": [
+              {
+                "id": "view-nnn",
+                "texturePath": "emission-2020/impostors/view-nnn.png",
+                "back": [
+                  -0.5773502691896258,
+                  -0.5773502691896258,
+                  -0.5773502691896258
+                ],
+                "right": [
+                  -0.7071067811865476,
+                  0,
+                  0.7071067811865476
+                ],
+                "down": [
+                  0.4082482904638631,
+                  -0.8164965809277261,
+                  0.4082482904638631
+                ]
+              },
+              {
+                "id": "view-nn0",
+                "texturePath": "emission-2020/impostors/view-nn0.png",
+                "back": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0
+                ],
+                "right": [
+                  0,
+                  0,
+                  1
+                ],
+                "down": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0
+                ]
+              },
+              {
+                "id": "view-nnp",
+                "texturePath": "emission-2020/impostors/view-nnp.png",
+                "back": [
+                  -0.5773502691896258,
+                  -0.5773502691896258,
+                  0.5773502691896258
+                ],
+                "right": [
+                  0.7071067811865476,
+                  0,
+                  0.7071067811865476
+                ],
+                "down": [
+                  0.4082482904638631,
+                  -0.8164965809277261,
+                  -0.4082482904638631
+                ]
+              },
+              {
+                "id": "view-n0n",
+                "texturePath": "emission-2020/impostors/view-n0n.png",
+                "back": [
+                  -0.7071067811865475,
+                  0,
+                  -0.7071067811865475
+                ],
+                "right": [
+                  -0.7071067811865475,
+                  0,
+                  0.7071067811865475
+                ],
+                "down": [
+                  0,
+                  -0.9999999999999998,
+                  0
+                ]
+              },
+              {
+                "id": "view-n00",
+                "texturePath": "emission-2020/impostors/view-n00.png",
+                "back": [
+                  -1,
+                  0,
+                  0
+                ],
+                "right": [
+                  0,
+                  0,
+                  1
+                ],
+                "down": [
+                  0,
+                  -1,
+                  0
+                ]
+              },
+              {
+                "id": "view-n0p",
+                "texturePath": "emission-2020/impostors/view-n0p.png",
+                "back": [
+                  -0.7071067811865475,
+                  0,
+                  0.7071067811865475
+                ],
+                "right": [
+                  0.7071067811865475,
+                  0,
+                  0.7071067811865475
+                ],
+                "down": [
+                  0,
+                  -0.9999999999999998,
+                  0
+                ]
+              },
+              {
+                "id": "view-npn",
+                "texturePath": "emission-2020/impostors/view-npn.png",
+                "back": [
+                  -0.5773502691896258,
+                  0.5773502691896258,
+                  -0.5773502691896258
+                ],
+                "right": [
+                  -0.7071067811865476,
+                  0,
+                  0.7071067811865476
+                ],
+                "down": [
+                  -0.4082482904638631,
+                  -0.8164965809277261,
+                  -0.4082482904638631
+                ]
+              },
+              {
+                "id": "view-np0",
+                "texturePath": "emission-2020/impostors/view-np0.png",
+                "back": [
+                  -0.7071067811865475,
+                  0.7071067811865475,
+                  0
+                ],
+                "right": [
+                  0,
+                  0,
+                  1
+                ],
+                "down": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0
+                ]
+              },
+              {
+                "id": "view-npp",
+                "texturePath": "emission-2020/impostors/view-npp.png",
+                "back": [
+                  -0.5773502691896258,
+                  0.5773502691896258,
+                  0.5773502691896258
+                ],
+                "right": [
+                  0.7071067811865476,
+                  0,
+                  0.7071067811865476
+                ],
+                "down": [
+                  -0.4082482904638631,
+                  -0.8164965809277261,
+                  0.4082482904638631
+                ]
+              },
+              {
+                "id": "view-0nn",
+                "texturePath": "emission-2020/impostors/view-0nn.png",
+                "back": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "right": [
+                  -1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  -0.7071067811865475,
+                  0.7071067811865475
+                ]
+              },
+              {
+                "id": "view-0n0",
+                "texturePath": "emission-2020/impostors/view-0n0.png",
+                "back": [
+                  0,
+                  -1,
+                  0
+                ],
+                "right": [
+                  1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  0,
+                  -1
+                ]
+              },
+              {
+                "id": "view-0np",
+                "texturePath": "emission-2020/impostors/view-0np.png",
+                "back": [
+                  0,
+                  -0.7071067811865475,
+                  0.7071067811865475
+                ],
+                "right": [
+                  1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ]
+              },
+              {
+                "id": "view-00n",
+                "texturePath": "emission-2020/impostors/view-00n.png",
+                "back": [
+                  0,
+                  0,
+                  -1
+                ],
+                "right": [
+                  -1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  -1,
+                  0
+                ]
+              },
+              {
+                "id": "view-00p",
+                "texturePath": "emission-2020/impostors/view-00p.png",
+                "back": [
+                  0,
+                  0,
+                  1
+                ],
+                "right": [
+                  1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  -1,
+                  0
+                ]
+              },
+              {
+                "id": "view-0pn",
+                "texturePath": "emission-2020/impostors/view-0pn.png",
+                "back": [
+                  0,
+                  0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "right": [
+                  -1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ]
+              },
+              {
+                "id": "view-0p0",
+                "texturePath": "emission-2020/impostors/view-0p0.png",
+                "back": [
+                  0,
+                  1,
+                  0
+                ],
+                "right": [
+                  -1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  0,
+                  -1
+                ]
+              },
+              {
+                "id": "view-0pp",
+                "texturePath": "emission-2020/impostors/view-0pp.png",
+                "back": [
+                  0,
+                  0.7071067811865475,
+                  0.7071067811865475
+                ],
+                "right": [
+                  1,
+                  0,
+                  0
+                ],
+                "down": [
+                  0,
+                  -0.7071067811865475,
+                  0.7071067811865475
+                ]
+              },
+              {
+                "id": "view-pnn",
+                "texturePath": "emission-2020/impostors/view-pnn.png",
+                "back": [
+                  0.5773502691896258,
+                  -0.5773502691896258,
+                  -0.5773502691896258
+                ],
+                "right": [
+                  -0.7071067811865476,
+                  0,
+                  -0.7071067811865476
+                ],
+                "down": [
+                  -0.4082482904638631,
+                  -0.8164965809277261,
+                  0.4082482904638631
+                ]
+              },
+              {
+                "id": "view-pn0",
+                "texturePath": "emission-2020/impostors/view-pn0.png",
+                "back": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0
+                ],
+                "right": [
+                  0,
+                  0,
+                  -1
+                ],
+                "down": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0
+                ]
+              },
+              {
+                "id": "view-pnp",
+                "texturePath": "emission-2020/impostors/view-pnp.png",
+                "back": [
+                  0.5773502691896258,
+                  -0.5773502691896258,
+                  0.5773502691896258
+                ],
+                "right": [
+                  0.7071067811865476,
+                  0,
+                  -0.7071067811865476
+                ],
+                "down": [
+                  -0.4082482904638631,
+                  -0.8164965809277261,
+                  -0.4082482904638631
+                ]
+              },
+              {
+                "id": "view-p0n",
+                "texturePath": "emission-2020/impostors/view-p0n.png",
+                "back": [
+                  0.7071067811865475,
+                  0,
+                  -0.7071067811865475
+                ],
+                "right": [
+                  -0.7071067811865475,
+                  0,
+                  -0.7071067811865475
+                ],
+                "down": [
+                  0,
+                  -0.9999999999999998,
+                  0
+                ]
+              },
+              {
+                "id": "view-p00",
+                "texturePath": "emission-2020/impostors/view-p00.png",
+                "back": [
+                  1,
+                  0,
+                  0
+                ],
+                "right": [
+                  0,
+                  0,
+                  -1
+                ],
+                "down": [
+                  0,
+                  -1,
+                  0
+                ]
+              },
+              {
+                "id": "view-p0p",
+                "texturePath": "emission-2020/impostors/view-p0p.png",
+                "back": [
+                  0.7071067811865475,
+                  0,
+                  0.7071067811865475
+                ],
+                "right": [
+                  0.7071067811865475,
+                  0,
+                  -0.7071067811865475
+                ],
+                "down": [
+                  0,
+                  -0.9999999999999998,
+                  0
+                ]
+              },
+              {
+                "id": "view-ppn",
+                "texturePath": "emission-2020/impostors/view-ppn.png",
+                "back": [
+                  0.5773502691896258,
+                  0.5773502691896258,
+                  -0.5773502691896258
+                ],
+                "right": [
+                  -0.7071067811865476,
+                  0,
+                  -0.7071067811865476
+                ],
+                "down": [
+                  0.4082482904638631,
+                  -0.8164965809277261,
+                  -0.4082482904638631
+                ]
+              },
+              {
+                "id": "view-pp0",
+                "texturePath": "emission-2020/impostors/view-pp0.png",
+                "back": [
+                  0.7071067811865475,
+                  0.7071067811865475,
+                  0
+                ],
+                "right": [
+                  0,
+                  0,
+                  -1
+                ],
+                "down": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0
+                ]
+              },
+              {
+                "id": "view-ppp",
+                "texturePath": "emission-2020/impostors/view-ppp.png",
+                "back": [
+                  0.5773502691896258,
+                  0.5773502691896258,
+                  0.5773502691896258
+                ],
+                "right": [
+                  0.7071067811865476,
+                  0,
+                  -0.7071067811865476
+                ],
+                "down": [
+                  0.4082482904638631,
+                  -0.8164965809277261,
+                  0.4082482904638631
+                ]
+              }
+            ]
+          }
+        },
+        "stars": {
+          "frame": {
+            "referenceFrame": "sun-icrf",
+            "epochJdTt": 2461286.5,
+            "originM": [
+              108273570124094580,
+              5139556753316323000,
+              668312118652173600
+            ],
+            "localToReferenceXyzw": [
+              0.006950382848136284,
+              0.6599182058077769,
+              0.7512636334570914,
+              0.007912450098292433
+            ],
+            "metersPerUnit": 531514800000,
+            "boundsUnits": {
+              "min": [
+                -6,
+                -6,
+                -6
+              ],
+              "max": [
+                6,
+                6,
+                6
+              ]
+            }
+          },
+          "points": []
+        },
+        "brightness": {
+          "overall": 1,
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
       }
     ],
     "starsEnabled": false,

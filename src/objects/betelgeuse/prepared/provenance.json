@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "be5cfc2cc99324d4776ccf41e38fa8f9122da78f207072643b726e47983029f2"
+    "sha256": "e75dc510813b0acfa5fdf51f710573e7ff84b6adf761126c5215a3cdb341a48a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "8f3b1e1596a71800394530913eb352ab5a6f206e9451a1d6e3fea362466d7d3d"
+    "bindingsSha256": "53c64a179076b9fa8f15651ce0549f8d06a378d1e32f79b2b788c406bcac5bba"
   },
   "recipes": [
     {
@@ -160,7 +160,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0ec863440539e810f1cc01626215a31fe99fe996127bd6a2a5f6724c4cc9af03",
+      "sha256": "2a8ff64d373417d37cefd06bb08afc53f538667721cfa939e42c6e0251743a6d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -350,6 +350,68 @@
                 "surface": "matisse"
               },
               "notes": "The same photosphere, with the dust clump Montargès et al. (2021) fitted to the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as they report for the southern hemisphere, and the light it scatters back is drawn faintly over that. A model fitted to images, not an image."
+            },
+            {
+              "id": "emission-2020",
+              "label": "Off-limb light · February 2020",
+              "thumbnail": "betelgeuse-lens-matisse.webp",
+              "falseColor": true,
+              "volume": {
+                "objectId": "betelgeuse-shell",
+                "lensId": "emission-2020",
+                "surface": "matisse"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Relative intensity at 4 µm",
+                "labels": [
+                  "0.35",
+                  "0.68",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      59,
+                      5,
+                      0
+                    ],
+                    [
+                      154,
+                      30,
+                      0
+                    ],
+                    [
+                      224,
+                      100,
+                      26
+                    ],
+                    [
+                      255,
+                      179,
+                      64
+                    ],
+                    [
+                      255,
+                      233,
+                      160
+                    ],
+                    [
+                      255,
+                      251,
+                      240
+                    ]
+                  ],
+                  "labels": [
+                    "0.35",
+                    "0.68",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+                "sourceUrl": "https://arxiv.org/abs/2401.12404"
+              },
+              "notes": "The same photosphere, with the light the same reconstruction carries outside it. A fifth of the reconstruction's flux lies beyond the published 42.45 milliarcsecond disc. On the sphere that light is a flat plate drawn behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star's own edge smeared by the 4 milliarcsecond beam. What remains falls far too slowly to be that beam: the envelope that best projects to its measured radial profile goes as r to the minus eight, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone and fades at the edge of its own field. The colours are the reconstruction's own heat scale, the one the sphere carries, because this is the same quantity: relative intensity at 4 micrometres, not colour or temperature. The depth is an inference from one projection, and the envelope is symmetric, so each patch is drawn in front of the star and behind it alike."
             }
           ]
         },
@@ -566,8 +628,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0ec863440539e810f1cc01626215a31fe99fe996127bd6a2a5f6724c4cc9af03",
-      "bytes": 9082,
+      "sha256": "2a8ff64d373417d37cefd06bb08afc53f538667721cfa939e42c6e0251743a6d",
+      "bytes": 11613,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -756,6 +818,40 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "emission-2020",
+      "label": "Off-limb light · February 2020",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [
+        "matisse"
+      ],
+      "process": "Keep the borrowed lens's prepared plates and enable the companion volume this dataset names.",
+      "limitations": [],
+      "lensIds": [
+        "emission-2020"
+      ],
+      "recipeDependencies": [
+        "content"
+      ],
+      "interpretation": {
+        "kind": "companion-volume",
+        "objectId": "betelgeuse-shell",
+        "lensId": "emission-2020",
+        "surface": "matisse"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse.webp",
+          "bytes": 580,
+          "sha256": "027b26553386b54c9a3a6ea27c06dd3ac349d3f52c0db58635bfe21c96c193b3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -813,11 +909,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "21d0d2f22b1a629934e1ecedd9f68e1d3935f9f29332fda67c34a5dc7a5fd77e",
+    "materialSha256": "94919336c84bb3e92a5c1adf0b1bcabee3f182154da4f898de6ef5b29428a649",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "8f3b1e1596a71800394530913eb352ab5a6f206e9451a1d6e3fea362466d7d3d"
+      "bindingsSha256": "53c64a179076b9fa8f15651ce0549f8d06a378d1e32f79b2b788c406bcac5bba"
     }
   }
 }

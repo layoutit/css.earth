@@ -4,14 +4,41 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "01b1ff2b42fbff9e3e1631d436048e570c333a09f0c860ef849dfb4aaf98cea5"
+    "sha256": "0c7b4c6f5feb0ddf661bef71f402f4599eba6e3dc40d602c95a5c5a3ce007fb9"
   },
   "generator": {
     "path": "tools/prepare-volume-provenance.mts",
-    "sha256": "78060c699f8f4bdc52f0755d4942ba45ad57e06a1370cce5ab477eceed13cd07",
-    "bindingsSha256": "3f0459769b14825d0e21b276776acf8136cd5d383ad28f5d000ec970a3004038"
+    "sha256": "96d85aa788c8f8161b4870f5aba68169968be86b329bb5455a5a7bcf0d73b7b0",
+    "bindingsSha256": "0070332b33fa2f914a34e856b4c092b7671faa3886e3a038dbf4ca8876cd02b9"
   },
   "sources": [
+    {
+      "id": "matisse-2020-02-continuum-4mas",
+      "kind": "source-input",
+      "path": "src/objects/betelgeuse-shell/source/observations/betelgeuse-matisse-2020-02-continuum-4mas.fits",
+      "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "sourceUrl": "https://doi.org/10.1051/0004-6361/202347719",
+      "title": "VLTI/MATISSE 4 µm reconstruction, February 2020, convolved to the 4 mas beam",
+      "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
+      "acquisition": "The same bytes Betelgeuse’s own package ships and pins, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star’s drawn sphere.",
+      "sha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
+      "bytes": 135360,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-matisse-2020-02-continuum-4mas",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "lensId": "emission-2020",
+      "displayCredit": "ESO/VLTI/MATISSE; reconstruction by this repository",
+      "license": "Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy."
+    },
     {
       "id": "sphere-zimpol-betelgeuse-p1-n-i-dolp",
       "kind": "source-input",
@@ -201,7 +228,7 @@
     {
       "id": "presentation",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "sha256": "224b365af9009e40c8ef90fd6be508815ea630c70ecf34032fbb140cce14f8da",
+      "sha256": "edad4f7d95cc2c461628a8d0e9670fbc13c13fc38e1d794321ca9956d561cf7e",
       "parameters": {
         "schema": "cssearth-volume-presentation-source@1",
         "objectId": "betelgeuse-shell",
@@ -209,21 +236,27 @@
         "defaultLens": "zimpol-v",
         "bank": {
           "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
-          "bytes": 170077
+          "sha256": "caaa1308bd8b567e7549ee5712fd517a0d5139319a9c4ac18ed244c3503e4741",
+          "bytes": 248253
         },
         "recipes": [
           {
             "id": "zimpol-v",
             "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-            "sha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
+            "sha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225",
             "bytes": 1838
           },
           {
             "id": "veil-2019-12",
             "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-            "sha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
+            "sha256": "77ef7f6300121b6e2bf5dc69dc0b3d40b118c13de698fc7db471713dea0a5dec",
             "bytes": 1523
+          },
+          {
+            "id": "emission-2020",
+            "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
+            "sha256": "cc6cbba32670ba1ece58a2aafcc08ad355ded17b9f62f4a5600eaf2b9aeaf923",
+            "bytes": 1830
           }
         ],
         "sharedInputs": [],
@@ -318,6 +351,48 @@
                 "height": 520
               }
             }
+          },
+          {
+            "id": "emission-2020",
+            "label": "VLTI/MATISSE · off-limb light, 2020",
+            "title": "The light outside Betelgeuse’s disc at 4 micrometres",
+            "description": "The same reconstruction that paints this star’s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star’s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^−7.9, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction’s own heat scale, because this is the same quantity as the sphere.",
+            "summary": "The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.",
+            "detail": "128 × 128 px at 0.78 mas",
+            "facts": [
+              {
+                "id": "instrument",
+                "label": "Instrument",
+                "value": "VLTI/MATISSE, 3.94–4.00 µm, February 2020, 4 mas beam"
+              },
+              {
+                "id": "extent",
+                "label": "Drawn extent",
+                "value": "1.19 to 2.36 stellar radii: outside the disc and its first beam, to the edge of the 100 mas field"
+              },
+              {
+                "id": "share",
+                "label": "Share of the flux",
+                "value": "A fifth of the reconstruction lies outside the disc"
+              },
+              {
+                "id": "scale",
+                "label": "Colour scale",
+                "value": "The reconstruction's own heat scale, the one the star's sphere carries"
+              },
+              {
+                "id": "depth",
+                "label": "Depth",
+                "value": "Not measured; the steeply falling envelope r^−7.9 that best projects to the measured profile"
+              }
+            ],
+            "input": "matisse-2020-02-continuum-4mas",
+            "preview": {
+              "path": "src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png",
+              "sha256": "250e938fdd00b7867332e7348ae0805b3cacf6d07d60ca9918d75a3f3856356a",
+              "bytes": 5621,
+              "authoredFrom": "matisse-2020-02-continuum-4mas"
+            }
           }
         ]
       }
@@ -325,7 +400,7 @@
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
+      "sha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
@@ -425,14 +500,14 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "d43568ee7b9de7095c46e61dbc38a9eeb40e2e79b32b8264c35e856a11005d19"
+          "sha256": "07034cb167af2db54b156e93f20f2f5fdcf5c399b48aed999afe3adf7bd92fb6"
         }
       }
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
+      "sha256": "77ef7f6300121b6e2bf5dc69dc0b3d40b118c13de698fc7db471713dea0a5dec",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
@@ -514,7 +589,114 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "d43568ee7b9de7095c46e61dbc38a9eeb40e2e79b32b8264c35e856a11005d19"
+          "sha256": "07034cb167af2db54b156e93f20f2f5fdcf5c399b48aed999afe3adf7bd92fb6"
+        }
+      }
+    },
+    {
+      "id": "emission-2020",
+      "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
+      "sha256": "cc6cbba32670ba1ece58a2aafcc08ad355ded17b9f62f4a5600eaf2b9aeaf923",
+      "parameters": {
+        "schema": "cssearth-volume-recipe@1",
+        "grid": {
+          "path": "density-emission-2020.ktx2",
+          "sha256": "96262bd61a961228837703d6c0b2491748b61fde062afe871e636d50c3645f2f",
+          "decodedSha256": "61168980d5badfe22148544611f2ae111f333a28272e0be8f3ce4bed08d1dd7f",
+          "dimensions": [
+            96,
+            96,
+            96
+          ],
+          "encoding": "sqrt-density-unorm8",
+          "bounds": {
+            "min": [
+              -6,
+              -6,
+              -6
+            ],
+            "max": [
+              6,
+              6,
+              6
+            ]
+          }
+        },
+        "material": {
+          "intensityScale": 1,
+          "stepScale": 1,
+          "stepMetric": "source",
+          "emission": [
+            {
+              "channel": 0,
+              "color": [
+                0.235,
+                0.02,
+                0
+              ],
+              "strength": 1
+            },
+            {
+              "channel": 1,
+              "color": [
+                0.604,
+                0.118,
+                0
+              ],
+              "strength": 1
+            },
+            {
+              "channel": 2,
+              "color": [
+                0.878,
+                0.392,
+                0.102
+              ],
+              "strength": 1
+            },
+            {
+              "channel": 3,
+              "color": [
+                1,
+                0.702,
+                0.251
+              ],
+              "strength": 1
+            }
+          ],
+          "absorption": [],
+          "emissionTransfer": "shared-opacity",
+          "exposureGain": 2.302585092994046
+        },
+        "bake": {
+          "sliceCounts": {
+            "x": 24,
+            "y": 24,
+            "z": 24
+          },
+          "unitsPerSourceUnit": 1,
+          "imageWidth": 320,
+          "samplesPerSlab": 4,
+          "cropTransparent": true,
+          "opticalWeight": 1,
+          "imageEncoding": {
+            "format": "webp",
+            "quality": 90
+          }
+        },
+        "anchors": [
+          {
+            "id": "betelgeuse",
+            "referencePositionM": [
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "provenance": {
+          "path": "provenance.json",
+          "sha256": "07034cb167af2db54b156e93f20f2f5fdcf5c399b48aed999afe3adf7bd92fb6"
         }
       }
     }
@@ -529,7 +711,8 @@
       "recipeDependencies": [
         "presentation",
         "zimpol-v",
-        "veil-2019-12"
+        "veil-2019-12",
+        "emission-2020"
       ],
       "inputs": [
         "sphere-zimpol-betelgeuse-p1-v-dolp"
@@ -557,8 +740,8 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
-          "bytes": 170077,
+          "sha256": "caaa1308bd8b567e7549ee5712fd517a0d5139319a9c4ac18ed244c3503e4741",
+          "bytes": 248253,
           "verification": "bytes-verified"
         },
         {
@@ -578,7 +761,8 @@
       "recipeDependencies": [
         "presentation",
         "zimpol-v",
-        "veil-2019-12"
+        "veil-2019-12",
+        "emission-2020"
       ],
       "inputs": [
         "veil-2019-12-parameters"
@@ -606,14 +790,64 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
-          "bytes": 170077,
+          "sha256": "caaa1308bd8b567e7549ee5712fd517a0d5139319a9c4ac18ed244c3503e4741",
+          "bytes": 248253,
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/betelgeuse-shell/datasets/4a9fc9ff8de22b2cf9dee11c518898810e7352ac840893d0b7ce7e02e2495e8c.webp",
           "sha256": "4a9fc9ff8de22b2cf9dee11c518898810e7352ac840893d0b7ce7e02e2495e8c",
           "bytes": 1870,
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "emission-2020",
+      "label": "VLTI/MATISSE · off-limb light, 2020",
+      "process": "Apply the pinned source image to the shared prepared volume field; preserve the saved reconstruction and display settings.",
+      "recipe": "presentation",
+      "selector": "/lenses/2",
+      "recipeDependencies": [
+        "presentation",
+        "zimpol-v",
+        "veil-2019-12",
+        "emission-2020"
+      ],
+      "inputs": [
+        "matisse-2020-02-continuum-4mas"
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "matisse-2020-02-continuum-4mas",
+          "role": "appearance",
+          "evidence": "Selected image at source/presentation.json#/lenses/2/input."
+        }
+      ],
+      "parents": [],
+      "lensIds": [
+        "emission-2020"
+      ],
+      "observationAttribution": "source-lineage",
+      "interpretation": {
+        "kind": "observation-conditioned-volume",
+        "sourceKind": "published-display-image"
+      },
+      "limitations": [
+        "The same reconstruction that paints this star’s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star’s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^−7.9, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction’s own heat scale, because this is the same quantity as the sphere.",
+        "128 × 128 px at 0.78 mas"
+      ],
+      "outputs": [
+        {
+          "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
+          "sha256": "caaa1308bd8b567e7549ee5712fd517a0d5139319a9c4ac18ed244c3503e4741",
+          "bytes": 248253,
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse-shell/datasets/cade788caed76381ad7fcf837ca072ff0be8526bf85b14cf90228578731a80e7.webp",
+          "sha256": "cade788caed76381ad7fcf837ca072ff0be8526bf85b14cf90228578731a80e7",
+          "bytes": 9342,
           "verification": "bytes-verified"
         }
       ]
