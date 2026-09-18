@@ -39,8 +39,16 @@ function validateCapabilityComposition(descriptor: AuthoredObjectDescriptor, ras
   if (Boolean(descriptor.recipe.cutaway) !== Boolean(rasterConfig.interior) || Boolean(descriptor.recipe.cutaway) !== Boolean(geometryConfig.cutaway)) throw new TypeError('Authored cutaway and its prepared geometry/assets disagree.');
   if (Boolean(descriptor.recipe.atmosphere) !== Boolean(rasterConfig.atmosphere)) throw new TypeError('Authored atmosphere and its prepared raster backend disagree.');
   const declared = new Set(descriptor.recipe.surfaces.flatMap(surface => surface.lenses.map(lens => lens.id)));
-  const prepared = ids(record(lenses, 'prepared lenses').controls, 'prepared lenses.controls');
+  // A dataset that names a companion cloud borrows a prepared surface instead of owning one, so it is not a surface
+  // lens and the recipe does not declare it. Its own contract check is that the surface it borrows exists.
+  const controls = record(lenses, 'prepared lenses').controls as { id?: unknown; volume?: { surface?: unknown } }[];
+  const surfaces = controls.filter(control => control.volume === undefined);
+  const prepared = ids(surfaces, 'prepared lenses.controls');
   sameIds(prepared, declared, 'Prepared lenses');
+  for (const control of controls) {
+    if (control.volume === undefined) continue;
+    if (!declared.has(String(control.volume.surface))) throw new TypeError(`Prepared lens ${String(control.id)} borrows an unprepared surface.`);
+  }
 }
 async function writePreparedObject(id: string, definition: Record<string, unknown>): Promise<void> {
   const module = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-object-json.mts')).href), 'prepared object writer');

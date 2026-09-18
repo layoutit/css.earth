@@ -158,6 +158,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const prefetchAbort = new AbortController();
       const lensBanks: ReturnType<ReturnType<typeof createPreparedVolumeLenses>['mount']>[] = [];
       const publishedBankOpacity = imageLayers.map(() => NaN), publishedLensOpacity = volumeLenses.map(() => NaN);
+      // A cloud that accompanies a body waits for one of that body's datasets to ask for it; every other bank is
+      // drawn whenever it is in view, as it always was.
+      const lensEnabled = volumeLenses.map(({ payload }) => payload.attachedTo === undefined);
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       const mountedShells = [...shells];
       let selected = plan.focus;
@@ -244,6 +247,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           volumeLensFrames: Object.freeze(Object.fromEntries(volumeLenses.map(({ payload }) => [payload.id,
             { frame: payload.lenses[0]!.volume.frame, framingRadiusUnits: payload.framingRadiusUnits }]))),
           volumeLensState(id: string) { return lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)]?.state() ?? null; },
+          /** Draw or hide a cloud that accompanies a body. A free-standing cloud ignores this; it is always drawn. */
+          setVolumeLensEnabled(id: string, enabled: boolean) {
+            if (destroyed || typeof enabled !== 'boolean') return;
+            const index = volumeLenses.findIndex(bank => bank.payload.id === id);
+            if (index < 0 || volumeLenses[index]!.payload.attachedTo === undefined || lensEnabled[index] === enabled) return;
+            lensEnabled[index] = enabled;
+            requestPublication?.();
+          },
           selectVolumeLens(id: string, lens: string) {
             const bank = lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)];
             if (!bank) throw new TypeError('Unknown prepared volume lens bank.');
@@ -330,7 +341,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             for (const [index, bank] of lensBanks.entries()) {
               const { frame, radiusUnits, visibility } = lensFraming[index]!;
               const contextOpacity = volumeLenses[index]!.payload.contextVisibility === 'independent' ? 1 : volumeOpacity;
-              const opacity = contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
+              const opacity = lensEnabled[index] ? contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) : 0;
               if (opacity !== publishedLensOpacity[index]) {
                 bank.root.style.opacity = String(opacity);
                 bank.root.style.display = opacity > 0 ? 'block' : 'none';

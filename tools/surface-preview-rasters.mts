@@ -26,10 +26,11 @@ export function unpackSurfacePreview({ data, info }:RasterImage, options:Paramet
   return { data: output, info: { width: layout.width, height: layout.height, channels: 4 as const } };
 }
 
-export function assertSurfacePreviewCoverage(controls:readonly {id:string}[], images:readonly {id:string}[], bindings:readonly {id:string;view?:string;overlayId?:string}[] = []) {
+export function assertSurfacePreviewCoverage(controls:readonly {id:string;volume?:unknown}[], images:readonly {id:string}[], bindings:readonly {id:string;view?:string;overlayId?:string}[] = []) {
   const available = new Set(images.map(image => image.id));
   const nonSurface = new Set(bindings.filter(lens => lens.view === 'interior' || lens.overlayId).map(lens => lens.id));
-  const missing = controls.filter(lens => !available.has(lens.id) && !nonSurface.has(lens.id));
+  // A dataset that names a companion cloud draws no surface of its own; it borrows one, and that one has a preview.
+  const missing = controls.filter(lens => lens.volume === undefined && !available.has(lens.id) && !nonSurface.has(lens.id));
   if (missing.length) throw new Error(`Missing prepared surface previews: ${missing.map(lens => lens.id).join(', ')}`);
 }
 

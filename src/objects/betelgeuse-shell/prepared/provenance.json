@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "435b152671717e52dfbec31e064e11419a70d39e758307afd8f4279a06351d7d"
+    "sha256": "47a9295522eded076638fc5ba3bb78d2889a13337e437bcbbd0597209de15447"
   },
   "generator": {
     "path": "tools/prepare-volume-provenance.mts",
@@ -201,7 +201,7 @@
     {
       "id": "presentation",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "sha256": "68ab4c9ebc7850996601bbca9f368e9f8573ab41634406d3da8c6383cbf51ec4",
+      "sha256": "4b63fa8fe44db92cc015dc6e084a35d996b256d9b188be9a31d9cd16d9bf8c1c",
       "parameters": {
         "schema": "cssearth-volume-presentation-source@1",
         "objectId": "betelgeuse-shell",
@@ -209,8 +209,8 @@
         "defaultLens": "zimpol-v",
         "bank": {
           "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "817bfb71529d88f9e3167e87712f71d4e42f23b0c8d2361ee3ec30eea31f813d",
-          "bytes": 164132
+          "sha256": "bd491c7332b15c51477042b1b2fcdb013c61be57728f322e4a0646a83aafb07d",
+          "bytes": 164164
         },
         "recipes": [
           {
@@ -525,8 +525,8 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "817bfb71529d88f9e3167e87712f71d4e42f23b0c8d2361ee3ec30eea31f813d",
-          "bytes": 164132,
+          "sha256": "bd491c7332b15c51477042b1b2fcdb013c61be57728f322e4a0646a83aafb07d",
+          "bytes": 164164,
           "verification": "bytes-verified"
         },
         {
@@ -574,8 +574,8 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "817bfb71529d88f9e3167e87712f71d4e42f23b0c8d2361ee3ec30eea31f813d",
-          "bytes": 164132,
+          "sha256": "bd491c7332b15c51477042b1b2fcdb013c61be57728f322e4a0646a83aafb07d",
+          "bytes": 164164,
           "verification": "bytes-verified"
         },
         {

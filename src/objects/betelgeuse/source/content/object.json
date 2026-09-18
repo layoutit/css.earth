@@ -114,6 +114,28 @@
           "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
           "sourceUrl": "https://arxiv.org/abs/2401.12404"
         }
+      },
+      {
+        "id": "dust-2024",
+        "label": "Polarised dust · December 2024",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "zimpol-v",
+          "surface": "matisse"
+        },
+        "notes": "The photosphere as the MATISSE reconstruction shows it, with the dust around it: the degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, released by ESO as Phase 3 collection BETELGEUSE-B beside Montargès et al. (2026). The patches one to about 4.5 stellar radii out are starlight scattered by dust. The map is a sky-plane image with no third axis, so it is placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light; that depth is a convention, not a measurement."
+      },
+      {
+        "id": "dust-2019",
+        "label": "Great Dimming clump · December 2019",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "veil-2019-12",
+          "surface": "matisse"
+        },
+        "notes": "The same photosphere, with the dust clump Montargès et al. (2021) fitted to the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as they report for the southern hemisphere, and the light it scatters back is drawn faintly over that. A model fitted to images, not an image."
       }
     ]
   },

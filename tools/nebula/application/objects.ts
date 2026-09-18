@@ -235,7 +235,8 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     }
     await rm(resolve(staging, 'compact'), { recursive: true, force: true });
     const data = validatePreparedVolumeLenses({schema:'cssearth-volume-lenses@1',id:recipe.id,defaultLens:recipe.defaultLens,
-      framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:lenses[0]!.stars.points.length>0,lenses});
+      framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:lenses[0]!.stars.points.length>0,
+      ...(recipe.attachedTo === undefined ? {} : {attachedTo:recipe.attachedTo}),lenses});
     const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-lens-bank',format:'cssearth-volume-lenses@1',data});
     await put(resolve(staging,'lenses.json'),envelope);
     await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@1',recipeSha256:sha256(recipeBytes),implementationSha256,sourceResult,

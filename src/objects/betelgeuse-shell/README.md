@@ -4,21 +4,27 @@
 
 The shell is the degree of linear polarisation around Betelgeuse measured by VLT/SPHERE-ZIMPOL in the V band on 3 December 2024, from the ESO Phase 3 collection `BETELGEUSE-B` (programme 114.28H9.001, released 2026-08-19) that accompanies Montargès et al. (2026, [A&A 711, L12](https://doi.org/10.1051/0004-6361/202661023)). Two of the four released products are used: the pipeline intensity image `SPHERE_ZIMPOL_Betelgeuse_P1_V_phase3.fits` (ESO `ADP.2026-08-19T13:19:07.655`) and its ancillary degree-of-linear-polarisation map `SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits` (`ADP.2026-08-19T13:19:07.656`), both 1024 × 1024 pixels of 3.6 milliarcseconds, north up and east left by their WCS. The N_I pair is kept beside them and not shown: its polarisation is a tight ring at the limb, the pattern a resolved disc's own edge produces, while the V map shows the patches from one to 4.5 stellar radii that Kervella et al. (2016) and the release paper attribute to dust.
 
-**Placement.** The cube is anchored on the Betelgeuse object's own scene origin, not on the FITS header centre, which is the catalogue position and sits 0.8 arcseconds, 38 stellar radii, from the star at the scene epoch. One volume unit is one stellar radius (531,514,800 km, Joyce et al. 2020), so the cube spans 5.25 radii each way. The star's centre in the image is the intensity centroid, at pixel (513.0, 429.1).
+**Placement.** The cube is anchored on the Betelgeuse object's own scene origin, not on the FITS header centre, which is the catalogue position and sits 0.8 arcseconds, 38 stellar radii, from the star at the scene epoch. One volume unit is one stellar radius (531,514,800 km, Joyce et al. 2020), so the cube spans six radii each way. The star's centre in the image is the intensity centroid, at pixel (513.0, 429.1).
 
-**Depth model, stated.** The map is a sky-plane image with no third axis. Following the convention of the polarimetric papers, the polarised light is placed in the plane of the sky through the star and spread along the line of sight by the Rayleigh polarisation efficiency r² / (r² + 2 z²), normalised so that each sky pixel's column reproduces its measured degree. The map is floor-subtracted (the median degree between 8 and 12 radii, 0.55 percent, is instrumental) and stretched linearly to 5 percent; the disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 5.25 radii. Depth is not measured.
+**Depth model, stated.** The map is a sky-plane image with no third axis. Following the convention of the polarimetric papers, the polarised light is placed in the plane of the sky through the star and spread along the line of sight by the Rayleigh polarisation efficiency r² / (r² + 2 z²), normalised so that each sky pixel's column reproduces its measured degree. The map is floor-subtracted (the median degree between 8 and 12 radii, 0.55 percent, is instrumental) and stretched linearly to 5 percent; the disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and six radii. Depth is not measured.
 
-**Preparation.** `tools/objects/source-authoring/betelgeuse-shell/author.mts` samples the map into a 64³ density grid (`source/density.ktx2`) and writes the volume recipe, the delivery, the catalogue entry and the provenance record. The nebula delivery's `density-grid` method bakes 21 slabs per axis, half a radius apart, through the Milky Way's slab baker, and the ordinary nebula preparation installs the lens bank.
+**Preparation.** `tools/objects/source-authoring/betelgeuse-shell/author.mts` samples each dataset into a 96³ density grid, `source/density-zimpol-v.ktx2` and `source/density-veil-2019-12.ktx2`, and writes the two volume recipes, the delivery, the presentation and the provenance record. The nebula delivery's `density-grid` method bakes 24 slabs per axis, half a radius apart, through the Milky Way's slab baker, one lens per grid, and the ordinary nebula preparation installs the lens bank. The two grids must share their bounds; the method refuses them otherwise.
+
+## Where it appears
+
+A cloud that surrounds the body it accompanies is not a place of its own, so this package ships no catalogue entry: it has no marker, no search result and no destination on the map. Its delivery names `attachedTo: "betelgeuse"` instead, and the bank it mounts stays dark until one of Betelgeuse's own datasets asks for it.
+
+Betelgeuse's Datasets list therefore has three entries. `matisse` is the reconstruction and draws no cloud. `dust-2024` and `dust-2019` each name a lens of this package, and each borrows the MATISSE dataset's prepared surface for the star itself, so the two add no textures of their own: the photosphere is the same sphere under all three, and only the cloud around it changes. Selecting one asks the bank for that lens and turns the other off; one lens is drawn at a time.
 
 ## Evidence
 
 - The ESO products are pinned by SHA-256 and size in `source/provenance.json`; the authoring script refuses a byte that differs.
 - The star centre, intensity peak, polarisation floor and pixel scale are measured by the script and recorded in `source/provenance.json#/measured`.
-- A rendered check of the cube around the sphere on the Betelgeuse page is the acceptance gate for this proof; it has not been recorded yet.
+- The acceptance gate for this proof is a rendered check of the cube around the sphere on the Betelgeuse page. It was made on 18 September 2026 against the local dev server, on all three of that page's datasets: the 2024 shell draws around the star, the 2019 clump draws in front of it and dims it, and the MATISSE dataset draws no cloud at all.
 
 ## Known problems
 
-**Proof of concept.** This package exists to prove that a body can sit inside a prepared volume. Its presentation and provenance records for the application's availability gate are not written yet, so the dev server admits it through a local bypass only.
+**Proof of concept.** This package exists to prove that a body can sit inside a prepared volume. It passes the application's availability gate on its own records; the local bypass an earlier draft needed is gone.
 
 **No third axis.** Everything along the line of sight is a stated model. Orbiting away from the observed direction shows the slab's assumed thickness, not a measurement.
 

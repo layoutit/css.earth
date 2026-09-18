@@ -21,7 +21,7 @@
     },
     {
       "id": "lens-veil-2019-12",
-      "subject": "The December 2019 RADMC-3D dust clump of Montargès et al. 2021, Nature 594, 365",
+      "subject": "The December 2019 RADMC-3D dust clump of Montarg\u00e8s et al. 2021, Nature 594, 365",
       "status": "included",
       "finding": "Extended Data Table 3 publishes the optimised December 2019 solution in full: a sphere of radius 6.5 au centred at (-1.9, -3.0, +12.5) au, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres, in the coordinate system Extended Data Figure 6 defines as right ascension, declination and toward Earth. Those numbers place the clump south and slightly west of the star and between it and us, which is the hemisphere that dimmed. It is drawn as starlight scattered by that dust; the published density is uniform, so only the illumination varies across it. The January and March 2020 solutions in the same table are recorded by the authors as unoptimised best guesses and are not shipped.",
       "evidence": [
@@ -65,6 +65,22 @@
         {
           "date": "2026-09-18",
           "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
+        }
+      ]
+    },
+    {
+      "id": "companion-of-betelgeuse",
+      "subject": "Whether a cloud that surrounds a body is a place of its own",
+      "status": "included",
+      "finding": "It is not. A first draft shipped this package with its own catalogue entry, which put the dust on the map as a second destination beside the star it surrounds, reachable and framable on its own. The decision is that a volume that accompanies a body carries no place: the delivery names the body it attaches to, ships no catalogue entry, and its bank stays dark until one of that body's datasets asks for it. Betelgeuse's Datasets list holds all three entries, the two dust datasets borrow the MATISSE dataset's prepared surface for the star so they add no textures of their own, and one cloud lens is drawn at a time. Checked on the running application on 18 September 2026: the 2024 shell draws around the star, the 2019 clump draws in front of it and dims it, and the MATISSE dataset draws no cloud.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/pull/310",
+        "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "813f59caca90e7717f5cfeaa708b4018e56b8d99"
         }
       ]
     },

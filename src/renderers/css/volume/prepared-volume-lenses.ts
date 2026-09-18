@@ -39,6 +39,9 @@ export interface PreparedVolumeLenses {
   readonly starsEnabled?: boolean;
   /** Nearby volumes must not inherit the Milky Way overview fade. */
   readonly contextVisibility?: 'galactic' | 'independent';
+  /** The body this cloud accompanies. An accompanying cloud is not a place of its own and is drawn only while one of
+   * that body's own datasets asks for it; a free-standing cloud names nothing and is drawn whenever it is in view. */
+  readonly attachedTo?: string;
   readonly pointVisibility?: PreparedPointVisibility;
   readonly provenance?: unknown;
 }
@@ -77,6 +80,7 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
   if (value.schema !== 'cssearth-volume-lenses@1' || !validId(value.id) || !Number.isFinite(value.framingRadiusUnits) ||
       value.framingRadiusUnits <= 0 || !Array.isArray(value.lenses) || !value.lenses.length ||
       (value.starsEnabled !== undefined && typeof value.starsEnabled !== 'boolean') ||
+      (value.attachedTo !== undefined && (typeof value.attachedTo !== 'string' || !validId(value.attachedTo))) ||
       (value.contextVisibility !== undefined && !['galactic', 'independent'].includes(value.contextVisibility))) {
     throw new TypeError('Prepared volume lens identity, framing or bank is invalid.');
   }
@@ -114,6 +118,7 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
   }
   return Object.freeze({ schema: value.schema, id: value.id, defaultLens: value.defaultLens,
     contextVisibility: value.contextVisibility ?? 'galactic', framingRadiusUnits: value.framingRadiusUnits, lenses: Object.freeze(lenses), starsEnabled: value.starsEnabled ?? true,
+    ...(value.attachedTo === undefined ? {} : { attachedTo: value.attachedTo }),
     pointVisibility: Object.freeze({ ...visibility }),
     ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}) });
 }

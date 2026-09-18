@@ -2,9 +2,18 @@ import { PLANET_SPEED_STATES } from '../rendering/planet-feature-controls.js';
 
 export const OBJECT_RUNTIME_SCHEMA = 'cssearth-object-runtime@4';
 
+/** A companion cloud this body owns. A lens control that names one keeps a prepared surface and turns the cloud on;
+ * the shell drives the cloud, and the object's own presentation never learns about it. */
+export interface LensVolume {
+  readonly objectId: string;
+  readonly lensId: string;
+  /** The prepared surface lens this control keeps. It must name another control that has one. */
+  readonly surface: string;
+}
 export interface LensControl {
   readonly id: string;
   readonly label: string;
+  readonly volume?: LensVolume;
   readonly [key: string]: unknown;
 }
 export interface CycleState { readonly label: string; readonly value: number }
@@ -38,11 +47,21 @@ export function requireObjectControls(content: ObjectControls, objectId = 'unkno
       throw new TypeError(`Object ${objectId} ${name} controls must be an array.`);
     }
   }
-  const lensIds = (content.lenses?.controls ?? []).map(lens => lens.id);
+  const lensControls = content.lenses?.controls ?? [], lensIds = lensControls.map(lens => lens.id);
   if (lensIds.some(id => !nonempty(id)) || new Set(lensIds).size !== lensIds.length ||
       (lensIds.length && !lensIds.includes(content.lenses!.defaultLens))) {
     throw new TypeError(`Object ${objectId} lens IDs/default are invalid.`);
   }
+  // A cloud lens borrows a prepared surface; the surface it borrows must itself be prepared, so the chain is one deep.
+  const surfaceIds = lensControls.filter(lens => lens.volume === undefined).map(lens => lens.id);
+  for (const lens of lensControls) {
+    if (lens.volume === undefined) continue;
+    const volume = lens.volume;
+    if (!volume || typeof volume !== 'object' || !nonempty(volume.objectId) || !nonempty(volume.lensId) || !surfaceIds.includes(volume.surface)) {
+      throw new TypeError(`Object ${objectId} lens ${lens.id} must name a cloud object, its dataset and a prepared surface lens.`);
+    }
+  }
+  if (lensControls.length && !surfaceIds.length) throw new TypeError(`Object ${objectId} has no prepared surface lens.`);
   const settings = content.settings?.controls ?? [], names = settings.map(setting => setting.name);
   if (names.some(name => !nonempty(name) || ['motion', 'skyContrast', 'heliosphere', 'illustrationModels', 'asteroidBodies', 'asteroidOrbits', 'asteroidLabels'].includes(name)) || new Set(names).size !== names.length ||
       settings.some(setting => !['toggle', 'cycle'].includes(setting.kind) || !nonempty(setting.label) ||
@@ -50,6 +69,12 @@ export function requireObjectControls(content: ObjectControls, objectId = 'unkno
     throw new TypeError(`Object ${objectId} settings controls are invalid.`);
   }
   return content;
+}
+
+/** The cloud a selected lens turns on, if it names one. */
+export function selectedLensVolume(controls: ObjectControls, lensId: string | null): LensVolume | null {
+  if (lensId === null) return null;
+  return (controls.lenses?.controls ?? []).find(lens => lens.id === lensId)?.volume ?? null;
 }
 
 export function objectCycleStates(control: CycleControl): readonly CycleState[] {
