@@ -1,0 +1,16 @@
+{
+  "schema": "csshypatia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750774,
+      "sha256": "c3dfe2c6981f272922abfc43eae8c540538f400a49385ada405390308b5f3c90"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620782,
+      "sha256": "f8fb1e5ff5cce25572d3609bbc3c16ab42ffcc44fecc01b501f01b3942f2ebc2"
+    }
+  ]
+}

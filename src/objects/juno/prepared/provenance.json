@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b3d5e6f972eb8d2ad8938aad4da1e69f75ff4e5f273b6e886a25395b499caf7f"
+    "sha256": "d2c6d1fb8eefdcf25a918f61c4fa05ea6bb455d8e9f576ec561a4f582049c9a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "9780c9cf99067cf1fbff033eb1acbf2271440e8e6caa5c51dc6a88b8151bab6e"
+    "bindingsSha256": "e6024eb0ed4cd81fe79f6fb7f9f4b53aa0f5dc1f66af7bc35aa4ec1a4e683cd1"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b21785b5b4c6a7a6edcd2a6662a6124e683a00373bd89cd5cb9ee9a27f4b907e",
+      "sha256": "229468585b38a61c031f2dd0000e833242beb95d938a930ebfcc52f27a4701ea",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,7 +90,7 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over three nights, 2018-11-08 to 2018-11-12, cast onto the released MPCD shape the body already selects. The camera's pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 3 nights from 2018-11-08 to 2018-11-12, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.3. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
               "selection": "finest-resolution",
               "levelMatching": {
@@ -133,8 +133,8 @@
                   "northAzimuthDegrees": 319.028,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    123.287,
-                    125.375
+                    123.274,
+                    125.588
                   ]
                 },
                 {
@@ -149,8 +149,8 @@
                   "northAzimuthDegrees": 319.028,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    123.666,
-                    126.222
+                    123.536,
+                    126.528
                   ]
                 },
                 {
@@ -165,8 +165,8 @@
                   "northAzimuthDegrees": 319.028,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.09,
-                    126.252
+                    124.02,
+                    126.588
                   ]
                 },
                 {
@@ -181,8 +181,8 @@
                   "northAzimuthDegrees": 319.028,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.093,
-                    125.381
+                    124.007,
+                    125.727
                   ]
                 },
                 {
@@ -197,8 +197,8 @@
                   "northAzimuthDegrees": 319.028,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.232,
-                    125.33
+                    124.163,
+                    125.67
                   ]
                 },
                 {
@@ -213,8 +213,8 @@
                   "northAzimuthDegrees": 319.0261,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    125.499,
-                    125.776
+                    125.759,
+                    125.901
                   ]
                 },
                 {
@@ -229,8 +229,8 @@
                   "northAzimuthDegrees": 319.0261,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    125.435,
-                    124.643
+                    125.674,
+                    124.792
                   ]
                 },
                 {
@@ -245,8 +245,8 @@
                   "northAzimuthDegrees": 319.026,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    125.287,
-                    124.451
+                    125.478,
+                    124.591
                   ]
                 },
                 {
@@ -261,8 +261,8 @@
                   "northAzimuthDegrees": 319.026,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    125.012,
-                    124.339
+                    125.243,
+                    124.481
                   ]
                 },
                 {
@@ -277,8 +277,8 @@
                   "northAzimuthDegrees": 319.026,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.93,
-                    124.581
+                    125.14,
+                    124.752
                   ]
                 },
                 {
@@ -293,8 +293,8 @@
                   "northAzimuthDegrees": 318.9698,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    123.949,
-                    127.184
+                    124.129,
+                    127.388
                   ]
                 },
                 {
@@ -309,8 +309,8 @@
                   "northAzimuthDegrees": 318.9698,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.888,
-                    127.896
+                    125.047,
+                    128.098
                   ]
                 },
                 {
@@ -325,8 +325,8 @@
                   "northAzimuthDegrees": 318.9698,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    125.206,
-                    126.986
+                    125.39,
+                    127.221
                   ]
                 },
                 {
@@ -341,8 +341,8 @@
                   "northAzimuthDegrees": 318.9698,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.387,
-                    127.956
+                    124.547,
+                    128.179
                   ]
                 },
                 {
@@ -357,8 +357,8 @@
                   "northAzimuthDegrees": 318.9698,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    123.866,
-                    127.039
+                    124.053,
+                    127.243
                   ]
                 },
                 {
@@ -373,8 +373,8 @@
                   "northAzimuthDegrees": 318.9674,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.955,
-                    128.97
+                    127.904,
+                    128.74
                   ]
                 },
                 {
@@ -389,8 +389,8 @@
                   "northAzimuthDegrees": 318.9673,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.465,
-                    129.775
+                    128.53,
+                    129.591
                   ]
                 },
                 {
@@ -405,8 +405,8 @@
                   "northAzimuthDegrees": 318.9673,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.013,
-                    128.506
+                    128.087,
+                    128.307
                   ]
                 },
                 {
@@ -421,8 +421,8 @@
                   "northAzimuthDegrees": 318.9673,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128,
-                    129.473
+                    128.123,
+                    129.314
                   ]
                 },
                 {
@@ -437,8 +437,8 @@
                   "northAzimuthDegrees": 318.9673,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    128.013,
-                    128.105
+                    128.174,
+                    127.975
                   ]
                 },
                 {
@@ -453,8 +453,8 @@
                   "northAzimuthDegrees": 318.9668,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.047,
-                    127.479
+                    127.435,
+                    127.445
                   ]
                 },
                 {
@@ -469,8 +469,8 @@
                   "northAzimuthDegrees": 318.9667,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.244,
-                    126.997
+                    127.616,
+                    126.986
                   ]
                 },
                 {
@@ -485,8 +485,8 @@
                   "northAzimuthDegrees": 318.9667,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.111,
-                    126.904
+                    127.505,
+                    126.879
                   ]
                 },
                 {
@@ -501,8 +501,8 @@
                   "northAzimuthDegrees": 318.9667,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    126.903,
-                    126.903
+                    127.279,
+                    126.879
                   ]
                 },
                 {
@@ -517,8 +517,8 @@
                   "northAzimuthDegrees": 318.9667,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    127.279,
-                    126.773
+                    127.684,
+                    126.775
                   ]
                 },
                 {
@@ -533,8 +533,8 @@
                   "northAzimuthDegrees": 318.9378,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.027,
-                    126.615
+                    124.486,
+                    126.628
                   ]
                 },
                 {
@@ -549,8 +549,8 @@
                   "northAzimuthDegrees": 318.9378,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    123.214,
-                    126.596
+                    123.774,
+                    126.739
                   ]
                 },
                 {
@@ -565,8 +565,8 @@
                   "northAzimuthDegrees": 318.9378,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    122.925,
-                    126.488
+                    123.549,
+                    126.719
                   ]
                 },
                 {
@@ -581,8 +581,8 @@
                   "northAzimuthDegrees": 318.9377,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    123.936,
-                    126.243
+                    124.433,
+                    126.394
                   ]
                 },
                 {
@@ -597,8 +597,8 @@
                   "northAzimuthDegrees": 318.9377,
                   "pixelAngleMicroradians": 0.017599,
                   "center": [
-                    124.067,
-                    126.491
+                    124.549,
+                    126.638
                   ]
                 }
               ]
@@ -640,7 +640,30 @@
               "maximumErrorMeters": 2400,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/3_Juno_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 1026,
+                "expectedFaces": 2048
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 2400,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -653,7 +676,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e0eaa42c7302123082cd4f8e90320492c37914a5feec98803d830950161681c4",
+      "sha256": "ff1aafebd09ed274513db6bcae438d51ea2eb90e1d6cef32346b31789853af3f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -758,12 +781,12 @@
               "surface": "juno-zimpol-surface@2x.webp",
               "poles": "juno-zimpol-surface@2x.webp",
               "source": {
-                "id": "juno-shape",
+                "id": "juno-adam-shape",
                 "path": "../manifest.json"
               },
               "falseColor": false,
               "noData": true,
-              "notes": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over three nights, 2018-11-08 to 2018-11-12, cast onto the released MPCD shape. Pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+              "notes": "30 deconvolved VLT/SPHERE/ZIMPOL frames, 3 nights from 2018-11-08 to 2018-11-12, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.3. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -895,14 +918,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108054530",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/3"
           }
         ]
       },
@@ -947,14 +970,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108054606",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/4"
           }
         ]
       },
@@ -999,14 +1022,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108054641",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/5"
           }
         ]
       },
@@ -1051,14 +1074,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108054715",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/6"
           }
         ]
       },
@@ -1103,14 +1126,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108054749",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/7"
           }
         ]
       },
@@ -1155,14 +1178,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108075713",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/8"
           }
         ]
       },
@@ -1207,14 +1230,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108075748",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/9"
           }
         ]
       },
@@ -1259,14 +1282,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108075822",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/10"
           }
         ]
       },
@@ -1311,14 +1334,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108075855",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/11"
           }
         ]
       },
@@ -1363,14 +1386,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181108075930",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/12"
           }
         ]
       },
@@ -1415,14 +1438,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111020502",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/13"
           }
         ]
       },
@@ -1467,14 +1490,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111020536",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/14"
           }
         ]
       },
@@ -1519,14 +1542,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111020610",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/15"
           }
         ]
       },
@@ -1571,14 +1594,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111020644",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/16"
           }
         ]
       },
@@ -1623,14 +1646,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111020718",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/17"
           }
         ]
       },
@@ -1675,14 +1698,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111035944",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/18"
           }
         ]
       },
@@ -1727,14 +1750,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111040019",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/19"
           }
         ]
       },
@@ -1779,14 +1802,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111040053",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/20"
           }
         ]
       },
@@ -1831,14 +1854,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111040127",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/21"
           }
         ]
       },
@@ -1883,14 +1906,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111040159",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/22"
           }
         ]
       },
@@ -1935,14 +1958,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111042604",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/24"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/23"
           }
         ]
       },
@@ -1987,14 +2010,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111042639",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/24"
           }
         ]
       },
@@ -2039,14 +2062,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111042713",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/26"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/25"
           }
         ]
       },
@@ -2091,14 +2114,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111042748",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/26"
           }
         ]
       },
@@ -2143,14 +2166,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181111042821",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/27"
           }
         ]
       },
@@ -2195,14 +2218,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181112045138",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/29"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/28"
           }
         ]
       },
@@ -2247,14 +2270,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181112045213",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/30"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/29"
           }
         ]
       },
@@ -2299,14 +2322,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181112045248",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/31"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/30"
           }
         ]
       },
@@ -2351,14 +2374,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181112045324",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/32"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/31"
           }
         ]
       },
@@ -2403,14 +2426,14 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "source-juno-juno-sphere-20181112045356",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/33"
+            "evidence": "src/objects/juno/source/manifest.json@321a9bd9027ba274c484fb1614947da1138cc3de#/inputs/32"
           }
         ]
       },
@@ -2433,6 +2456,60 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "juno-adam-shape",
+      "path": "shape/3_Juno_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/juno/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/35"
+          }
+        ]
+      },
+      "sha256": "c14a0dcec7525a24f38c57d948f77b85e12d09648f77fbcd1603ce00259d2cd8",
+      "bytes": 56791,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/3_Juno_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -2445,8 +2522,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e0eaa42c7302123082cd4f8e90320492c37914a5feec98803d830950161681c4",
-      "bytes": 7383,
+      "sha256": "ff1aafebd09ed274513db6bcae438d51ea2eb90e1d6cef32346b31789853af3f",
+      "bytes": 7576,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2597,25 +2674,25 @@
         "juno-sphere-20181112045248",
         "juno-sphere-20181112045324",
         "juno-sphere-20181112045356",
-        "juno-shape"
+        "juno-adam-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/juno/juno-zimpol-thumbnail.webp",
-          "bytes": 2146,
-          "sha256": "3423cc258c43f5e8be3d4b57c103780c313cee16e2d4ecd2e47b66dd9192b399",
+          "bytes": 2122,
+          "sha256": "11964f4ad4c3bc55c46f7c861235a0c35fda0c82e32997601ccd68ab7d832aae",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/juno/juno-zimpol-surface@2x.webp",
-          "bytes": 258754,
-          "sha256": "fa10dd009f3e09e4748b8fd76bcedb82081a378f7b9d136f6b11834ca70b6224",
+          "bytes": 229696,
+          "sha256": "07e17c58cb0cf0fba6bd6e8883bedc26363d7da7729039b165928ab35c7916b7",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "juno-shape",
+          "sourceId": "juno-adam-shape",
           "role": "geometry",
           "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
@@ -2692,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 12828,
-          "sha256": "790e9940a768308168ece2343db81aa4fdb59d124f06e3de6ded17ebc300f03d",
+          "bytes": 10038,
+          "sha256": "8317ae36d117f478c3e6c88e1b65f26d7e1e75505eb310afd2cbfef1e6b32f6d",
           "verification": "bytes-verified"
         }
       ]
@@ -2730,11 +2807,11 @@
   },
   "lastPreparation": {
     "objectId": "juno",
-    "materialSha256": "b4ab12caf92db9f398e9d9748ac08e4baa106335f452fff6270010d3923a49f8",
+    "materialSha256": "2a83da5405f3e7e1e843249ac5f58fcde79490fd9cec55dc871491bc68eacdc2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "9780c9cf99067cf1fbff033eb1acbf2271440e8e6caa5c51dc6a88b8151bab6e"
+      "bindingsSha256": "e6024eb0ed4cd81fe79f6fb7f9f4b53aa0f5dc1f66af7bc35aa4ec1a4e683cd1"
     }
   }
 }

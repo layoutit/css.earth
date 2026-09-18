@@ -112,8 +112,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "ceres-lens-normal.webp",
-        "surface": "ceres-normal.webp",
-        "poles": "ceres-poles-normal.webp",
+        "surface": "ceres-normal@2x.webp",
+        "poles": "ceres-poles-normal@2x.webp",
         "source": {
           "id": "usgs-dawn-fc-global-140m",
           "path": "../manifest.json"
@@ -125,8 +125,8 @@
         "id": "enhanced",
         "label": "Enhanced color",
         "thumbnail": "ceres-lens-enhanced.webp",
-        "surface": "ceres-enhanced.webp",
-        "poles": "ceres-poles-enhanced.webp",
+        "surface": "ceres-enhanced@2x.webp",
+        "poles": "ceres-poles-enhanced@2x.webp",
         "source": {
           "id": "nasa-dawn-fc-pia19977",
           "path": "../manifest.json"
@@ -138,8 +138,8 @@
         "id": "elevation",
         "label": "Elevation",
         "thumbnail": "ceres-lens-elevation.webp",
-        "surface": "ceres-elevation.webp",
-        "poles": "ceres-poles-elevation.webp",
+        "surface": "ceres-elevation@2x.webp",
+        "poles": "ceres-poles-elevation@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Elevation",

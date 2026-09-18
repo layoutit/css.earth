@@ -18,6 +18,7 @@ import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
 import type { PreparedVolumeLens } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
+import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
@@ -25,7 +26,7 @@ const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v
 // Prepared pixels and their contract must invalidate a previously installed handoff together.
 const implementationFiles = [
   'tools/nebula/application/package-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
-  'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts',
+  'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
   'tools/nebula/application/star-sprites.ts', 'tools/nebula/application/fits.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
   'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/volume-impostors.ts',
@@ -81,7 +82,7 @@ async function installed(directory: string, recipeSha256: string, implementation
     return true;
   } catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false; throw error; }
 }
-export async function prepareNebulaObject(root: string, directory: string, ifMissing = false, research?: NebulaResearchBackend) {
+export async function prepareNebulaObject(root: string, directory: string, ifMissing = false, research?: NebulaResearchBackend, allowMissing = false) {
   const recipeBytes = await readFile(local(directory,'source/delivery.json')), recipe = readNebulaDelivery(JSON.parse(recipeBytes.toString()));
   const catalogue = parsePreparedNebulaCatalog(await read(directory,'source/nebula.json'));
   if (catalogue.objects.length !== 1 || catalogue.objects[0]!.id !== recipe.id ||
@@ -101,6 +102,12 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   const packagePins = await packageImplementationPins(root, ['@cssearth/volume-core', '@cssearth/volume-bake']);
   const implementationSha256 = sha256(json([...await Promise.all(owners.map(async path => ({path,sha256:sha256(await readFile(local(root,path)))}))), ...packagePins]));
   if (ifMissing && await installed(directory,sha256(recipeBytes),implementationSha256)) return { id:recipe.id,status:'verified' };
+  // Deploy builds may tolerate a package missing from R2 instead of baking one from scratch here (no source
+  // acquisition service runs at build time): report it unavailable and move on, loudly.
+  if (allowMissing) {
+    console.warn(`Prepared package unavailable for ${recipe.id}; not baking a replacement (allow-missing). It will report unavailable.`);
+    return { id: recipe.id, status: 'unavailable' };
+  }
   const staging = resolve(directory,`.prepared-${process.pid}`); await mkdir(staging,{recursive:true});
   const lenses: PreparedVolumeLens[] = []; let sourceResult = recipe.acceptedLabResult;
   let fieldStars: Awaited<ReturnType<typeof prepareNebulaCatalogueField>>['receipt'] | undefined;
@@ -108,7 +115,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     const add = async (id: string,label: string,sourceUrl: string,volumePath: string,volumeSha: string,
       frame: ReturnType<typeof embedNebulaFrame>,stars: PreparedVolumeLens['stars'],anchorPoints?: PreparedVolumeLens['stars']['points']) => {
       const raw = record(JSON.parse((await pinned(root,{path:volumePath,sha256:volumeSha})).toString()));
-      const volume = validatePreparedCssVolume(raw.data ?? raw);
+      const volume = sanitizeVolumeProvenance(validatePreparedCssVolume(raw.data ?? raw));
       for (const resource of volume.resources) {
         const bytes = await pinned(dirname(local(root,volumePath)),{path:resource.path,sha256:resource.sha256});
         await put(local(staging,`${id}/${resource.path}`),bytes);

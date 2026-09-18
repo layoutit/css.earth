@@ -1,0 +1,16 @@
+{
+  "schema": "cssvictoria-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 760037,
+      "sha256": "95bd382d1f4dda3acb1da4864d7e34904bd8024062b8adbde68b237d1554662f"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 621050,
+      "sha256": "6b15e1d513590857286edf206cd9eec7d08dc62432cfef38f56251b3dbd20f6f"
+    }
+  ]
+}

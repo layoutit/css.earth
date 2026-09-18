@@ -29,11 +29,9 @@ according to projected CSS size, independently of DPR; dataset selection remains
 manual. These texture levels are separate from its retired geographic paging.
 The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
-current datasets and retained source history. A row-bank cutaway body can declare
-the same kind of levels in its presentation recipe. Its density 1 and 2 surface
-maps become two levels, chosen by the same texels-per-CSS-pixel rule
-([surface texture levels](../src/renderers/css/preparation/presentation/surface-texture-levels.ts)).
-[Mercury's README](../src/objects/mercury/README.md) records its thresholds.
+current datasets and retained source history. The shared raster lane prepares
+each image once, at the canonical @2x density, so its bodies have no texture
+levels; the lane refuses a `densities` field and a presentation `textureLevels`.
 
 ## Decode the source before choosing its display
 

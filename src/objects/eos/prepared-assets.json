@@ -1,0 +1,16 @@
+{
+  "schema": "csseos-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 747598,
+      "sha256": "c07a907224dc79761a78ca9084205920b809ed05c13b0caf2256dba26933ffe2"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 617366,
+      "sha256": "2db8eb3563951daa37395fb6857c276032b8f3da8d8d4654ea630bd01d8b28c1"
+    }
+  ]
+}

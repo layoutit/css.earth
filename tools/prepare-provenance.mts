@@ -10,6 +10,7 @@ import { prepareObjectProvenance } from './objects/provenance.mts';
 import { sourceObject } from '../src/platform/source-catalog.mts';
 import { prepareFacilities } from './prepare-facilities.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
+import { RUNTIME_ASSET_ORIGIN } from './source-mirror.mts';
 
 // A fresh run stays a fresh run when its pinned lineage still matches. A changed
 // source/recipe/output/binding requires a new record and loses that run claim.
@@ -76,7 +77,8 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
   if (unverified.length) console.error(`Recovered records that cannot be verified here: ${unverified.join(', ')}.`);
   // Invalid identities, capture pairs, lens IDs or artwork leave the entire
   // previous prepared set in place. Consumers also verify the closure pins.
-  const catalogue = await prepareFacilities({ root, publish: false, provenance: documents });
+  // recoverObjectProvenance's only caller is this file's own CLI entry point below, so it opts the mirror in here.
+  const catalogue = await prepareFacilities({ root, publish: false, provenance: documents, mirrorOrigin: RUNTIME_ASSET_ORIGIN });
   await writePreparedSet([...outputs, ...catalogue.outputs]);
   return results.map(result => ({ ...result,
     citedFacts: catalogue.preparedSources.usage.edges.filter(edge => edge.consumerKind === 'object-fact' && edge.objectId === result.id).length,

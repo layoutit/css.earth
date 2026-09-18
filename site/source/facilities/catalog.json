@@ -3354,6 +3354,59 @@
           }
         ]
       }
+    },
+    {
+      "id": "liciacube",
+      "name": {
+        "value": "LICIACube",
+        "citations": [
+          {
+            "catalogueId": "reference-liciacube",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Light Italian Cubesat for Imaging of Asteroids: an ASI cubesat that flew aboard DART and separated about 10 days before impact to image the collision and the resulting plume from Dimorphos.",
+        "citations": [
+          {
+            "catalogueId": "reference-liciacube",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "citations": [
+          {
+            "catalogueId": "reference-liciacube",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "setting": {
+        "value": "space",
+        "citations": [
+          {
+            "catalogueId": "reference-liciacube",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "reference-dart",
+            "checkedOn": "2026-09-18"
+          },
+          {
+            "catalogueId": "reference-liciacube",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      }
     }
   ],
   "missions": [
@@ -5695,6 +5748,68 @@
           {
             "catalogueId": "arxiv-1802-06086",
             "checkedOn": "2026-09-16"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dart",
+      "name": {
+        "value": "DART",
+        "citations": [
+          {
+            "catalogueId": "reference-dart",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "description": {
+        "value": "NASA's kinetic-impactor test that struck the asteroid moonlet Dimorphos to demonstrate asteroid deflection.",
+        "citations": [
+          {
+            "catalogueId": "reference-dart",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "citations": [
+          {
+            "catalogueId": "reference-dart",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "participants": [
+        {
+          "facilityId": "liciacube",
+          "role": "flyby",
+          "citations": [
+            {
+              "catalogueId": "reference-liciacube",
+              "checkedOn": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "started": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "reference-dart",
+            "checkedOn": "2026-09-18"
+          }
+        ]
+      },
+      "ended": {
+        "value": "2022",
+        "citations": [
+          {
+            "catalogueId": "reference-dart",
+            "checkedOn": "2026-09-18"
           }
         ]
       }

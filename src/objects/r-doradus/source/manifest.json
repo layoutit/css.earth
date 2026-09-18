@@ -108,8 +108,14 @@
         "shape-model"
       ],
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-r-doradus-r-doradus-observational-measurements",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/manifest.json@71348fe882075b91e3ea041e52ff94e4f4cbc01c#/inputs/3"
+          }
+        ]
       }
     },
     {
@@ -142,8 +148,8 @@
     {
       "id": "r-doradus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6199,
-      "expectedSha256": "c7cf36d2a72a53db3b35d8675510b5bf650f9be80cdad80ee7647ef38bb3ea27",
+      "expectedBytes": 6164,
+      "expectedSha256": "618dd3d1b78e7585ad7bc617c6b2c532e7f7666efce4a209c8433427ad9c5273",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -161,8 +167,8 @@
     {
       "id": "r-doradus-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1698,
-      "expectedSha256": "711c86cdd00b89db8b736983d48a5f2ba4bb4037ca55fd24710e042620ad1c7d",
+      "expectedBytes": 1704,
+      "expectedSha256": "ba9ea69c012d28f1e3587deef8e23c0b4cedae87fb59d17df17c96e31bf20bd6",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -260,8 +266,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5580,
-      "expectedSha256": "f5b316836e3a4f63c8fb916760e85de8535edfd7c3f1c4c97af4d85cb2ea9339",
+      "expectedBytes": 5592,
+      "expectedSha256": "3d1c859899590960b5e45595fbc0da2571db71c44fec7ea66bad488169e25d59",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

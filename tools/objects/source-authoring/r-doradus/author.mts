@@ -16,8 +16,8 @@ import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '../../../fits.mts';
 import { headerBlock, padBlock } from '../../interferometry/fits-table.mts';
 import { readReconstruction } from '../../interferometry/beam-convolve.mts';
-import { requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
-import { contextMarker, uniformDiscTable } from '../betelgeuse/author.mts';
+import { requireFiniteNumber, requireString } from '../../../source-values.mts';
+import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/r-doradus/source');
 
@@ -52,11 +52,7 @@ export function locateStar(values: ArrayLike<number>, width: number, height: num
 }
 
 export async function authorRDoradus({ check = false } = {}) {
-  const measurements = requireRecord(JSON.parse(await readFile(resolve(root, 'measurements.json'), 'utf8')), 'measurements');
-  if (measurements.schema !== 'cssearth-uniform-disc-star@1') throw new TypeError('Unexpected R Doradus measurements schema.');
-  const shape = requireRecord(measurements.shape, 'shape');
-  if (requireString(shape.path) !== SPHERE_PATH) throw new TypeError('R Doradus sphere path differs from the authoring tool.');
-  const table = uniformDiscTable(requireFiniteNumber(measurements.radiusKm), requireFiniteNumber(shape.stepDegrees));
+  await authorUniformDiscSphere(root, 'R Doradus', { check });
 
   const archive = readFitsImage(await readFile(resolve(root, ARCHIVE_PATH)), { maxDecodedBytes: 256 * 1024 * 1024 });
   const { width, height, values, header } = archive;
@@ -91,7 +87,7 @@ export async function authorRDoradus({ check = false } = {}) {
   ]), padBlock(data)]);
 
   const marker = await contextMarker(readReconstruction(frame), PALETTE, PERCENTILES, BACKGROUND_MAXIMUM);
-  const outputs: [string, Buffer][] = [[SPHERE_PATH, Buffer.from(table, 'latin1')], [FRAME_PATH, frame], [CONTEXT_PATH, marker]];
+  const outputs: [string, Buffer][] = [[FRAME_PATH, frame], [CONTEXT_PATH, marker]];
   for (const [path, bytes] of outputs) {
     const target = resolve(root, path);
     if (check) { if (!(await readFile(target)).equals(bytes)) throw new Error(`${path} differs from its authored recomputation.`); }

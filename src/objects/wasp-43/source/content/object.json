@@ -43,8 +43,8 @@
         "label": "Color",
         "qualification": "Colour from Gaia's photometric temperature; darkening toward the edge measured from TESS transits of WASP-43b. The disc itself is unresolved.",
         "thumbnail": "wasp-43-lens-color.webp",
-        "surface": "wasp-43-surface-color.webp",
-        "poles": "wasp-43-poles-color.webp",
+        "surface": "wasp-43-surface-color@2x.webp",
+        "poles": "wasp-43-poles-color@2x.webp",
         "source": {
           "id": "wasp-43-stellar-color",
           "path": "../manifest.json",

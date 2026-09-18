@@ -1,0 +1,16 @@
+{
+  "schema": "cssiris-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 1381979,
+      "sha256": "d78e23239ba27c58d1658090b512354c2163fb4fe221eb1e24afe12114ccf731"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 1345412,
+      "sha256": "a5413631e73003dc2674db235881c601030fbf4873d803e19cc97b7f11ef89a6"
+    }
+  ]
+}

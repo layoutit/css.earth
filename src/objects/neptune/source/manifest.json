@@ -437,7 +437,7 @@
             "catalogueId": "arxiv-1808-01973",
             "role": "method",
             "evidence": "Phase-equation coefficients transcribed from Mallama and Hilton. The local record states the angle limits and terms held fixed.",
-            "locator": "Equations 2\u201317; body-specific phase equation"
+            "locator": "Equations 2–17; body-specific phase equation"
           }
         ]
       }
@@ -463,8 +463,8 @@
     {
       "id": "neptune-authored-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2059,
-      "expectedSha256": "a384fa59dddeb5a68693eead7d0d7fd87d30bd5a99df2b14de62a164da20ff09",
+      "expectedBytes": 2024,
+      "expectedSha256": "7b9a848ed39aa6dc0a2d42ed331b6414b892b53363a1e75ba3f48c65c1b5e835",
       "origin": "Checked lighting bank parameters for the shared sphere lane",
       "credit": "cssEarth",
       "license": "Project-authored specification",

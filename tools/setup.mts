@@ -1,17 +1,23 @@
 import { sha256 } from '../src/platform/sha256.mts';
 import type { RuntimeAssetLocation } from './runtime-assets.mts';
-interface InstallProgress {completed: number; total: number; installed: number; reused: number;}
+interface InstallProgress {completed: number; total: number; installed: number; reused: number; skipped: number;}
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { publishSourceBytes } from "../src/platform/source-acquisition.mts";
 import { runtimeAssets, setupObjectIds } from "./runtime-assets.mts";
 
+/** `node tools/setup.mts --allow-missing` or `CSSEARTH_ALLOW_MISSING_ASSETS=1`: deploy builds only. */
+export function readAllowMissingFlag(args: readonly string[] = []) {
+  return args.includes("--allow-missing") || process.env.CSSEARTH_ALLOW_MISSING_ASSETS === "1";
+}
+
 // Install already prepared files. Source acquisition and geometry authoring
 // remain separate; setup needs neither a browser nor the worldwide mirror.
 export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = 8,
-  onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; onProgress?: (progress: InstallProgress) => void} = {}) {
-  let next = 0, installed = 0, reused = 0;
+  allowMissing = false, onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
+  onProgress?: (progress: InstallProgress) => void} = {}) {
+  let next = 0, installed = 0, reused = 0, skipped = 0;
   // A fresh checkout should learn about every missing or drifted file in one
   // run, so keep installing after a failure and report them together.
   const failures: string[] = [];
@@ -27,6 +33,16 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
           reused++;
         } else {
           const response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) });
+          // A deploy build may tolerate one object's asset genuinely missing from R2 (a 404, not a flaky
+          // 5xx/network error) rather than fail the whole build: skip it loudly and let the object's own
+          // unavailable-package path report it, instead of installing a fabricated or partial file here.
+          if (response.status === 404 && allowMissing) {
+            await response.body?.cancel();
+            console.warn(`Prepared asset missing on R2, skipping (allow-missing): ${asset.id}/${asset.filename} (HTTP 404).`);
+            skipped++;
+            onProgress({ completed: installed + reused + skipped, total: assets.length, installed, reused, skipped });
+            continue;
+          }
           if (!response.ok || !response.body) {
             await response.body?.cancel();
             throw new Error(`Prepared asset unavailable: ${asset.id}/${asset.filename} (HTTP ${response.status}).`);
@@ -43,22 +59,23 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
               expectedBytes: asset.bytes, expectedSha256: asset.sha256 } });
           installed++;
         }
-        onProgress({ completed: installed + reused, total: assets.length, installed, reused });
+        onProgress({ completed: installed + reused + skipped, total: assets.length, installed, reused, skipped });
       } catch (error) { failures.push(error instanceof Error ? error.message : String(error)); }
     }
   }));
   if (failures.length) {
     throw new Error(`${failures.length} of ${assets.length} prepared files could not be installed:\n${failures.join('\n')}`);
   }
-  return { installed, reused };
+  return { installed, reused, skipped };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const ids = setupObjectIds(process.argv.slice(2));
+  const allowMissing = readAllowMissingFlag(process.argv.slice(2));
+  const ids = setupObjectIds(process.argv.slice(2).filter(arg => arg !== "--allow-missing"));
   const assets = await runtimeAssets(resolve(import.meta.dirname, ".."), ids);
   console.log(`Setting up ${ids.join(", ")}: ${assets.length} prepared files. No source preparation or geometry mirror required.`);
-  const result = await installRuntimeAssets(assets, { onProgress: ({ completed, total }) => {
+  const result = await installRuntimeAssets(assets, { allowMissing, onProgress: ({ completed, total }) => {
     if (completed % 100 === 0) console.log(`Prepared files: ${completed}/${total}`);
   } });
-  console.log(`Setup complete: ${result.installed} downloaded, ${result.reused} reused. Run pnpm dev.`);
+  console.log(`Setup complete: ${result.installed} downloaded, ${result.reused} reused${result.skipped ? `, ${result.skipped} skipped (missing on R2, allow-missing)` : ""}. Run pnpm dev.`);
 }

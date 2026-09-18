@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.22",
+  "document": {
+    "input": "euphrosyne-survey-research",
+    "object": 1101,
+    "width": 1838,
+    "height": 1233,
+    "sha256": "af07ae69ba0aec71d5dd84386c6ac6faa0fdef586fc899b58b0aab8658fd1852"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2019-03-15T07:07:59",
+      "frame": "zimpol-20190315-070759",
+      "band": 0
+    },
+    {
+      "label": "2019-03-20T04:16:29",
+      "frame": "zimpol-20190320-041629",
+      "band": 0
+    },
+    {
+      "label": "2019-03-25T02:53:48",
+      "frame": "zimpol-20190325-025348",
+      "band": 0
+    },
+    {
+      "label": "2019-03-27T08:16:28",
+      "frame": "zimpol-20190327-081628",
+      "band": 0
+    },
+    {
+      "label": "2019-04-08T04:07:52",
+      "frame": "zimpol-20190408-040752",
+      "band": 0
+    },
+    {
+      "label": "2019-04-10T02:30:41",
+      "frame": "zimpol-20190410-023041",
+      "band": 0
+    },
+    {
+      "label": "2019-04-10T07:20:44",
+      "frame": "zimpol-20190410-072044",
+      "band": 0
+    }
+  ]
+}

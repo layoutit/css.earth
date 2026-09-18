@@ -273,15 +273,15 @@
       "id": "usgs-gazetteer-donaldjohanson-nomenclature-center-pts",
       "path": "features/DONALDJOHANSON_nomenclature_center_pts.zip",
       "expectedBytes": 30329,
-      "expectedSha256": "1f516df5c1da65c45e435aa1a377998814561eec05c9823e1d5ddc715a97d5d9",
+      "expectedSha256": "b74f7a8f8a495be46cc554283f0577e8a1bf1c2567bcd76d50c2778201643f79",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DONALDJOHANSON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Donaldjohanson on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Donaldjohanson on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (11 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "consumers": [
         "features"
       ],
@@ -479,7 +479,7 @@
       "id": "donaldjohanson-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1339,
-      "expectedSha256": "b5ca18dfacbff53035e64239d9e9fc2753a54a5e7cd2ade76b27a44bb25fcb92",
+      "expectedSha256": "48f72a6c18e11aaa3a42b48db885d38f9da418d86f0f758d57dc282277867b3c",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",

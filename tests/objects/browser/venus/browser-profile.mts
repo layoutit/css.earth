@@ -5,24 +5,12 @@ const objectControls = await readPreparedFixture("venus", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "venus", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({
-        one: "/scenes/venus/venus-clouds.webp",
-        two: "/scenes/venus/venus-clouds@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/venus/venus-poles-clouds.webp",
-        two: "/scenes/venus/venus-poles-clouds@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/venus/venus-material.webp",
-        two: "/scenes/venus/venus-material@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/venus/venus-lighting.webp",
-        two: "/scenes/venus/venus-lighting@2x.webp",
-      }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/venus/venus-clouds@2x.webp",
+      "/scenes/venus/venus-poles-clouds@2x.webp",
+      "/scenes/venus/venus-material@2x.webp",
+      "/scenes/venus/venus-lighting@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "clouds",
       slowId: "radar",

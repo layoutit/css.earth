@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4fdd11f709ce56ed78ead3b5ac708387c79d2f673a9f9ca00bb80379e956830c"
+    "sha256": "c27b3cce6e1eedd949d13c6d7d5fe5e92021fda2dc99ee0a0e23f832a4e26608"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -636,7 +636,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "b5ca18dfacbff53035e64239d9e9fc2753a54a5e7cd2ade76b27a44bb25fcb92",
+      "sha256": "48f72a6c18e11aaa3a42b48db885d38f9da418d86f0f758d57dc282277867b3c",
       "bytes": 1339,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -653,8 +653,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Donaldjohanson on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Donaldjohanson on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (11 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Donaldjohanson centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DONALDJOHANSON/target",
@@ -662,7 +662,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "1f516df5c1da65c45e435aa1a377998814561eec05c9823e1d5ddc715a97d5d9",
+      "sha256": "b74f7a8f8a495be46cc554283f0577e8a1bf1c2567bcd76d50c2778201643f79",
       "bytes": 30329,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -924,7 +924,7 @@
         {
           "url": "/scenes/donaldjohanson/donaldjohanson-features.json",
           "bytes": 7930,
-          "sha256": "ff7f6eebc5b85ac5912badd40fd4970bec98d95b2b5952ff99701344c4274692",
+          "sha256": "adf6403cc4beaa96f9ce22887d9c325675dff51004ea0ebac970eba1aa8dba5b",
           "verification": "bytes-verified"
         }
       ],
@@ -1012,7 +1012,7 @@
   },
   "lastPreparation": {
     "objectId": "donaldjohanson",
-    "materialSha256": "198e21e8ce5f78e2d47b6878a75d4d4e53adf61df770de5f8dbd8fd88d1f35f1",
+    "materialSha256": "8b09ded276606bc69577608113925abcdcb5db0e94cb92055a92b4faddaa8135",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

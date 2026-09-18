@@ -116,8 +116,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "triton-lens-normal.webp",
-        "surface": "triton-normal.webp",
-        "poles": "triton-poles-normal.webp",
+        "surface": "triton-normal@2x.webp",
+        "poles": "triton-poles-normal@2x.webp",
         "source": {
           "id": "usgs-2023-triton-clear-frames",
           "path": "../manifest.json",
@@ -129,8 +129,8 @@
         "id": "enhanced",
         "label": "Enhanced color",
         "thumbnail": "triton-lens-enhanced.webp",
-        "surface": "triton-enhanced.webp",
-        "poles": "triton-poles-enhanced.webp",
+        "surface": "triton-enhanced@2x.webp",
+        "poles": "triton-poles-enhanced@2x.webp",
         "source": {
           "id": "voyager-triton-enhanced-color",
           "path": "../manifest.json",

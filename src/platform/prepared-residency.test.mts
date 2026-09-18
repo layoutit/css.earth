@@ -104,7 +104,9 @@ test('decoded byte budget evicts completed pages before admitting an atomic repl
   assert.throws(() => manager.request({ required: ['0', '1', '2'] }), /capacity/);
   manager.destroy();
 });
-const rowPlans={mercury:rowPlan(definitions.mercury),mars:rowPlan(definitions.mars),jupiter:rowPlan(definitions.jupiter),earthLighting:rowPlan(definitions.earth),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
+// Mars's lighting track is the atmospheric single-sheet bank (authored atmosphere, predating the
+// #294/#297 frame refactors): it carries no rows, so it gets its own residency case below instead.
+const rowPlans={mercury:rowPlan(definitions.mercury),jupiter:rowPlan(definitions.jupiter),earthLighting:rowPlan(definitions.earth),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
 for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row policy preserves its bound and protected published row`, async () => {
   const { maximumRetainedRowCount: capacity, initialWarmRows } = plan.transport;
   const rowUrls = plan.rows.map(row => row.url);
@@ -121,6 +123,21 @@ for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row 
   assert.ok(manager.stats().pools[0].resident <= capacity);
   assert.ok(images.length <= capacity);
   assert.equal(manager.resources.has(target), true);
+  manager.destroy();
+});
+
+test('mars atmospheric lighting bank is a single warm-pool sheet, not a row bank', async () => {
+  const track = definitions.mars.materials.find(track => track.id === 'lighting');
+  assert.ok(track);
+  const bank = track.banks[0];
+  assert.ok(bank.frames.every(frame => frame.resource === null && frame.row === null),
+    'An atmospheric material has no per-row resource or retained row: the sheet is fixed.');
+  const key = 'lighting', url = assetUrl(definitions.mars, key);
+  const pool = definitions.mars.assets.pools.find(pool => pool.id === 'warm');
+  assert.ok(pool);
+  const { manager, commit } = harness(catalog([url], { capacity: pool.capacity, concurrency: pool.concurrency, retention: pool.retention, reuse: pool.reuse }));
+  await commit(['0']);
+  assert.equal(manager.resources.has('0'), true, 'The atmospheric sheet is resident once requested.');
   manager.destroy();
 });
 

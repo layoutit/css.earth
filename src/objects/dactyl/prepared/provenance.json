@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a622ab502180ed558ac9ba55fd30a5d0a572b414b1641b9723b9fd6f5268dd56"
+    "sha256": "2be505f2d18dc35c41eea0ff2b38c7d5687a300c74f770b5c28fbe2ea538fa8d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -310,7 +310,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "09a690c808c7cd7ed7e96f104de757c163d78ccbb632f89d9de4e36f3dbc29b9",
+      "sha256": "54771134f201aecfa71d4fb946c3447cc52c048a0db2b40f237c20ba68d1d948",
       "bytes": 1066,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -327,8 +327,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dactyl on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dactyl on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members and the FGDC metadata record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-11 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-11 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Dactyl centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DACTYL/target",
@@ -336,7 +336,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "f9b0a51bbadab614072090fdb2269015d52d79fac1afda5b2fa7ca5781d657a8",
+      "sha256": "3767bbd27912607abf5ac0496988a6ac7bd79cfbb8d4f550045524717e2bc941",
       "bytes": 42071,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -500,7 +500,7 @@
         {
           "url": "/scenes/dactyl/dactyl-features.json",
           "bytes": 2490,
-          "sha256": "4663b7aa532d4ed47f0dd7473c7c6ac945c04cfa89c8c8415874487381ba3647",
+          "sha256": "f4040a1cae780948bea4881c7a756018f7eb6ce5449c791f95aa305c8c3e6fa5",
           "verification": "bytes-verified"
         }
       ],
@@ -538,7 +538,7 @@
   },
   "lastPreparation": {
     "objectId": "dactyl",
-    "materialSha256": "7d3f4ae7cfd9ee9243320d7a76a0485216116ab3a2a555c268415f71b487142f",
+    "materialSha256": "0912648b44758f431c8a6ccd691ba5d6c3b07ba91d0f180924c6fbf14c98c4e0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

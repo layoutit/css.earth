@@ -138,13 +138,13 @@
         "id": "clouds",
         "label": "Clouds",
         "thumbnail": "venus-lens-clouds.webp",
-        "surface": "venus-clouds.webp",
+        "surface": "venus-clouds@2x.webp",
         "source": {
           "id": "openspace-clouds",
           "url": "https://github.com/OpenSpace/OpenSpace"
         },
-        "poles": "venus-poles-clouds.webp",
-        "material": "venus-material.webp",
+        "poles": "venus-poles-clouds@2x.webp",
+        "material": "venus-material@2x.webp",
         "shortLabel": "VIS",
         "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
         "falseColor": false,
@@ -154,13 +154,13 @@
         "id": "radar",
         "label": "Radar",
         "thumbnail": "venus-lens-radar.webp",
-        "surface": "venus-radar.webp",
+        "surface": "venus-radar@2x.webp",
         "source": {
           "id": "magellan-radar",
           "url": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
         },
-        "poles": "venus-poles-radar.webp",
-        "material": "venus-observation-material.webp",
+        "poles": "venus-poles-radar@2x.webp",
+        "material": "venus-observation-material@2x.webp",
         "shortLabel": "SAR",
         "qualification": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
         "falseColor": true,
@@ -170,13 +170,13 @@
         "id": "elevation",
         "label": "Elevation",
         "thumbnail": "venus-lens-elevation.webp",
-        "surface": "venus-elevation.webp",
+        "surface": "venus-elevation@2x.webp",
         "source": {
           "id": "magellan-elevation",
           "url": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
         },
-        "poles": "venus-poles-elevation.webp",
-        "material": "venus-observation-material.webp",
+        "poles": "venus-poles-elevation@2x.webp",
+        "material": "venus-observation-material@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Relative elevation",

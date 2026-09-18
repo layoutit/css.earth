@@ -27,7 +27,7 @@ export interface BlockReference extends AssetReference { encoding: string; offse
 export interface TileNode { key: string; level: number; corners: number[][]; normal: number[]; normalSlack: number; pages: string[]; children: string[]; maximumCssSpan: number }
 export interface TileStub extends Omit<TileNode, 'pages' | 'children'> { stub: boolean; directory: BlockReference }
 export interface TreeSection { bytes: Uint8Array; root: TileNode; tiles: number; leaves: number; ref: Omit<BlockReference, 'url' | 'offset'> }
-export interface CameraPolicy { defaultControlPitchDegrees: number; initialScenePitchDegrees: number; maximumControlPitchDegrees: number }
+export interface CameraPolicy { maximumControlPitchDegrees: number; maximumScenePitchDegrees: number }
 export interface PreparedCityPage extends PageGeometry { children: string[]; coverageCorners?: number[][]; childrenCoverImage?: boolean }
 export interface CorePage extends PageGeometry { corePath: string; children?: string[]; coverageCorners?: number[][]; childrenCoverImage?: boolean }
 export interface CityRuntimePage extends Omit<PreparedCityPage, 'geographicMatrix' | 'geographicProjection'> { url: string; bytes: number; sha256: string; maximumCssSpan: number }

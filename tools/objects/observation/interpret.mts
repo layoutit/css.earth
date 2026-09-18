@@ -33,6 +33,7 @@ import { observationRaster, parseObservationLens, loadNativeObservationPoleSampl
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
+import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
@@ -104,19 +105,21 @@ const fits = object({ bitpix: number, width: number, height: number, latitude: l
   reverseLongitude: optional((v): v is boolean => typeof v === 'boolean'), positiveOnly: optional((v): v is boolean => typeof v === 'boolean'), nearestLatitudeLimit: number,
   color: union(object({ kind: literal('signed-asinh'), palette: array(array(number)), softening: number, maximum: number }),
     object({ kind: literal('positive-log'), palette: array(array(number)), range: tuple(number, number) })) });
-const continuum = object({ start: string, stop: string, maximumLatitudeDegrees: number, minimumDiscRadius: number, maximumDiscRadius: number, discBrightnessThreshold: number, solarPoleTiltDegrees: number });
+const record = object({ file: string, record: string });
+const continuum = object({ keywords: string, frames: array(record), limbDarkening: object({ file: string, keywords: string, record: string }),
+  maximumLatitudeDegrees: number, palette: object({ intensities: array(number), colors: array(array(number)) }) });
 const synoptic = object({
-  kind: literal('continuum-disc-mosaic', 'fits-map'), mapFiles: optional(array(string)), continuum: optional(continuum), fits: optional(fits),
+  kind: literal('hmi-continuum-mosaic', 'fits-map'), continuum: optional(continuum), fits: optional(fits),
   polarStabilization: optional(object({ latitudeSegments: number, polarDetailSigma: number })),
   limb: object({ mode: literal('continuum-darkening', 'rim') }),
   offLimb: union(nil, object({ observedFile: string, center: tuple(number, number), radius: number })),
 });
-/** A synoptic solar map: the continuum disc mosaic or a FITS synoptic map, with its polar continuation and plates. */
+/** A synoptic solar map: the HMI continuum mosaic or a FITS synoptic map, with its polar continuation and plates. */
 export function parseSynopticRecipe(value: unknown): SynopticRecipe {
   const input = parse(value, synoptic, 'synoptic surface');
-  if (input.kind === 'continuum-disc-mosaic') {
-    if (!input.mapFiles?.length || !input.continuum) throw new TypeError('A continuum mosaic names its frames and interval.');
-    return { source: { kind: 'continuum-disc-mosaic', mapFiles: input.mapFiles, continuum: input.continuum }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
+  if (input.kind === 'hmi-continuum-mosaic') {
+    if (!input.continuum?.frames.length) throw new TypeError('An HMI continuum mosaic names its frames, their keywords and its limb-darkening pair.');
+    return { source: { kind: 'hmi-continuum-mosaic', ...input.continuum }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
   }
   if (!input.fits) throw new TypeError('A FITS synoptic map declares its FITS geometry and colour transform.');
   if (input.limb.mode === 'continuum-darkening') throw new TypeError('Continuum limb darkening needs the continuum mosaic source.');
@@ -357,6 +360,14 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         return { ...rgb3(rgb, missing, width, height, false), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
           report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees, fluxFractionOutsideDisc: outside / total,
             meaning: 'The frame\'s light outside the silhouette on the lens display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
+      }
+      case 'glb-base-color': {
+        // An illustration: the published model's base-color texture, carried through its own UVs onto the displayed shape.
+        // Nothing here is observed; the lens is listed in the object's illustration lenses and never counts as imagery.
+        const model = requireString(surface.science.model);
+        if (model !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.model must equal the surface source.`);
+        const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, model), width, height);
+        return { data: pixels, channels: 4, nearest: false };
       }
       case 'neutral-shape': {
         // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.

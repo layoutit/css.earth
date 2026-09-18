@@ -20,23 +20,25 @@ test('Haumea retains its measured triaxial shape and ring within the actual leaf
   assert.ok(runtime.tree.nodes.filter((node: { tag: string; }) => node.tag === 's').length <= 2000);
   assert.deepEqual([scene.model.ring.innerRadiusKm, scene.model.ring.outerRadiusKm], [2252, 2322]);
 });
-test('the measured colour lens stays evenly lit with an identified model dataset and no shadow control', async () => {
+test('the measured colour lens is the default beside a non-default illustration, evenly lit, with no shadow control', async () => {
   const runtime = await json('prepared/runtime.json');
   assert.equal(runtime.controls.lenses.defaultLens, 'color');
-  assert.deepEqual(runtime.controls.lenses.controls.map((lens:unknown) => requireRecord(lens).label), ['Color']);
+  assert.deepEqual(runtime.controls.lenses.controls.map((lens:unknown) => requireRecord(lens).label), ['Color', 'Illustration']);
   const lens = (await json('prepared/lenses.json')).controls[0];
   assert.ok(lens.surfaceUrl && lens.polesUrl);
   assert.equal(lens.surfaceUrl, lens.surface2xUrl);
   assert.equal(lens.polesUrl, lens.poles2xUrl);
   const { images } = await json('prepared/minimaps.json');
-  assert.equal(images.length, 1);
+  assert.equal(images.length, 2);
   assert.equal(images[0].id, lens.id);
   assert.deepEqual([images[0].width, images[0].height], [640, 320]);
   assert.equal(images[0].attribution.url, lens.source.url);
   assert.ok((await readFile(new URL('prepared/' + images[0].path, root))).length < 100_000);
   assert.deepEqual(runtime.controls.settings.controls, []);
-  assert.deepEqual(runtime.variants.map((v:unknown) => requireRecord(v).when), [{ lensId: 'color' }]);
-  assert.ok(runtime.assets.entries.some((a: { key: string; }) => a.key === 'surface'));
+  assert.deepEqual(runtime.variants.map((v:unknown) => requireRecord(v).when), [{ lensId: 'color' }, { lensId: 'illustration' }]);
+  // The default lens mounts with the body; the illustration decodes only when selected.
+  assert.deepEqual(runtime.assets.startup.filter((key: string) => key.includes(':')), ['surface:color', 'poles:color']);
+  assert.ok(runtime.assets.entries.some((a: { key: string; pool: string }) => a.key === 'surface:illustration' && a.pool === 'lenses'));
   assert.ok(runtime.assets.entries.every((a: { key: string|string[]; }) => !a.key.includes('lit-')));
   const material = runtime.materials[0];
   assert.equal(material.rotation.kind, 'ellipsoid');

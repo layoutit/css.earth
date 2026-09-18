@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/eris/eris-color.webp",
+      "url": "/scenes/eris/eris-color@2x.webp",
       "width": 2048,
       "height": 1536
     },
     "surfaceLatitudeHeight": 1024,
     "packedBandGutter": 16,
     "poles": {
-      "url": "/scenes/eris/eris-poles-color.webp",
+      "url": "/scenes/eris/eris-poles-color@2x.webp",
       "width": 512,
       "height": 256
     },

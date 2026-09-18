@@ -2,19 +2,9 @@
   "schema": "csscharon-runtime-assets@1",
   "assets": [
     {
-      "filename": "charon-albedo.webp",
-      "bytes": 212330,
-      "sha256": "62b306c90bd57b4faf531ed54978a23d1d38605a09694264ad271f5f9d1a1b0f"
-    },
-    {
       "filename": "charon-albedo@2x.webp",
       "bytes": 295890,
       "sha256": "b6f320ab2309a6a73ca130f731daacd77aaf2ae66da10075b4e256dbd19502e2"
-    },
-    {
-      "filename": "charon-ammonia.webp",
-      "bytes": 284676,
-      "sha256": "89f6181c3fbdfdaefe0895e64d17e92c86b425a7b1cde76354067456327a9492"
     },
     {
       "filename": "charon-ammonia@2x.webp",
@@ -22,19 +12,9 @@
       "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40"
     },
     {
-      "filename": "charon-elevation.webp",
-      "bytes": 753412,
-      "sha256": "c8892e3e045357db12cc790c816b7e8634a7b900a446a984b2f8ded10b5e4362"
-    },
-    {
       "filename": "charon-elevation@2x.webp",
       "bytes": 2364048,
       "sha256": "37304b9513340545aadb6a44af74ccc644790bed1d188faa74b8a23ef353079c"
-    },
-    {
-      "filename": "charon-enhanced-color.webp",
-      "bytes": 552444,
-      "sha256": "3d8bae625694b85de3207e0ad74cf49ff296d7b3c590ba19198fe42c1a4617f4"
     },
     {
       "filename": "charon-enhanced-color@2x.webp",
@@ -75,171 +55,6 @@
       "filename": "charon-lens-water-ice.webp",
       "bytes": 178,
       "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05"
-    },
-    {
-      "filename": "charon-lighting-1x-billboard.webp",
-      "bytes": 40826,
-      "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608"
-    },
-    {
-      "filename": "charon-lighting-1x-row-00.webp",
-      "bytes": 14922,
-      "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874"
-    },
-    {
-      "filename": "charon-lighting-1x-row-01.webp",
-      "bytes": 27532,
-      "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7"
-    },
-    {
-      "filename": "charon-lighting-1x-row-02.webp",
-      "bytes": 34558,
-      "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e"
-    },
-    {
-      "filename": "charon-lighting-1x-row-03.webp",
-      "bytes": 40648,
-      "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7"
-    },
-    {
-      "filename": "charon-lighting-1x-row-04.webp",
-      "bytes": 45092,
-      "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef"
-    },
-    {
-      "filename": "charon-lighting-1x-row-05.webp",
-      "bytes": 49044,
-      "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b"
-    },
-    {
-      "filename": "charon-lighting-1x-row-06.webp",
-      "bytes": 52968,
-      "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911"
-    },
-    {
-      "filename": "charon-lighting-1x-row-07.webp",
-      "bytes": 56198,
-      "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193"
-    },
-    {
-      "filename": "charon-lighting-1x-row-08.webp",
-      "bytes": 59392,
-      "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d"
-    },
-    {
-      "filename": "charon-lighting-1x-row-09.webp",
-      "bytes": 61906,
-      "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653"
-    },
-    {
-      "filename": "charon-lighting-1x-row-10.webp",
-      "bytes": 62672,
-      "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6"
-    },
-    {
-      "filename": "charon-lighting-1x-row-11.webp",
-      "bytes": 61062,
-      "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2"
-    },
-    {
-      "filename": "charon-lighting-1x-row-12.webp",
-      "bytes": 59454,
-      "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46"
-    },
-    {
-      "filename": "charon-lighting-1x-row-13.webp",
-      "bytes": 52762,
-      "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd"
-    },
-    {
-      "filename": "charon-lighting-1x-row-14.webp",
-      "bytes": 42196,
-      "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957"
-    },
-    {
-      "filename": "charon-lighting-1x-row-15.webp",
-      "bytes": 23242,
-      "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009"
-    },
-    {
-      "filename": "charon-lighting-1x-row-16.webp",
-      "bytes": 28714,
-      "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85"
-    },
-    {
-      "filename": "charon-lighting-1x-row-17.webp",
-      "bytes": 52870,
-      "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35"
-    },
-    {
-      "filename": "charon-lighting-1x-row-18.webp",
-      "bytes": 65644,
-      "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520"
-    },
-    {
-      "filename": "charon-lighting-1x-row-19.webp",
-      "bytes": 76630,
-      "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d"
-    },
-    {
-      "filename": "charon-lighting-1x-row-20.webp",
-      "bytes": 85368,
-      "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef"
-    },
-    {
-      "filename": "charon-lighting-1x-row-21.webp",
-      "bytes": 93744,
-      "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a"
-    },
-    {
-      "filename": "charon-lighting-1x-row-22.webp",
-      "bytes": 99970,
-      "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1"
-    },
-    {
-      "filename": "charon-lighting-1x-row-23.webp",
-      "bytes": 107422,
-      "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f"
-    },
-    {
-      "filename": "charon-lighting-1x-row-24.webp",
-      "bytes": 112788,
-      "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1"
-    },
-    {
-      "filename": "charon-lighting-1x-row-25.webp",
-      "bytes": 122328,
-      "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75"
-    },
-    {
-      "filename": "charon-lighting-1x-row-26.webp",
-      "bytes": 130124,
-      "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346"
-    },
-    {
-      "filename": "charon-lighting-1x-row-27.webp",
-      "bytes": 137048,
-      "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e"
-    },
-    {
-      "filename": "charon-lighting-1x-row-28.webp",
-      "bytes": 148122,
-      "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae"
-    },
-    {
-      "filename": "charon-lighting-1x-row-29.webp",
-      "bytes": 157328,
-      "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66"
-    },
-    {
-      "filename": "charon-lighting-1x-row-30.webp",
-      "bytes": 167218,
-      "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4"
-    },
-    {
-      "filename": "charon-lighting-1x-row-31.webp",
-      "bytes": 182238,
-      "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e"
     },
     {
       "filename": "charon-lighting-2x-billboard.webp",
@@ -407,19 +222,9 @@
       "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
     },
     {
-      "filename": "charon-normal.webp",
-      "bytes": 2154474,
-      "sha256": "d904032c4e2fd8dda96d45ad58dd779816acd82da741d7262f688a77f6970808"
-    },
-    {
       "filename": "charon-normal@2x.webp",
       "bytes": 5759254,
       "sha256": "63257c2d55bbd2aaec3720e7d3ce56cf1a2d84fa51625d4d9c51d3f65bf4a136"
-    },
-    {
-      "filename": "charon-poles-albedo.webp",
-      "bytes": 6540,
-      "sha256": "d58f250d556d796b46bd8882da70503e8f14359c16ef997f5828087f68d2ab6b"
     },
     {
       "filename": "charon-poles-albedo@2x.webp",
@@ -427,19 +232,9 @@
       "sha256": "9abf55667011be61a0c2983c26478b142a56c4f5331bcb94b4cc71b246f908b5"
     },
     {
-      "filename": "charon-poles-ammonia.webp",
-      "bytes": 27966,
-      "sha256": "d3933bc6c9417a9377e3edf1e3629ca664341bf2fe151741bc20d29b205b7d55"
-    },
-    {
       "filename": "charon-poles-ammonia@2x.webp",
       "bytes": 71400,
       "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661"
-    },
-    {
-      "filename": "charon-poles-elevation.webp",
-      "bytes": 50262,
-      "sha256": "ed35e6ab255802e3f9812151bd583de5a63cc629a16a24d63cbd03e63c21701f"
     },
     {
       "filename": "charon-poles-elevation@2x.webp",
@@ -447,19 +242,9 @@
       "sha256": "9a8354d1b55ac8f82e2642b3db538486cfb8ddb0122aa29d7fa99c6c49d096af"
     },
     {
-      "filename": "charon-poles-enhanced-color.webp",
-      "bytes": 46738,
-      "sha256": "ec91937f2398ce61111f265e5a653b3607874d2321486ef9411b52bc4114e914"
-    },
-    {
       "filename": "charon-poles-enhanced-color@2x.webp",
       "bytes": 120610,
       "sha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f"
-    },
-    {
-      "filename": "charon-poles-normal.webp",
-      "bytes": 41860,
-      "sha256": "6c0ba923b5d663449f172249df04d7e9a50b0842c956ff8624b8712e713d88a7"
     },
     {
       "filename": "charon-poles-normal@2x.webp",
@@ -467,19 +252,9 @@
       "sha256": "92933b9ff45c544a8242faa4a984cfb7fa9549a88a278ec041d6a29f7a59c810"
     },
     {
-      "filename": "charon-poles-water-ice.webp",
-      "bytes": 38118,
-      "sha256": "1df493f6d7863c23180a3eecccd40b7bbf1e2227ae50f32e79d17b6094025429"
-    },
-    {
       "filename": "charon-poles-water-ice@2x.webp",
       "bytes": 103854,
       "sha256": "34c2dc40cbd87bbde52b552b10f97f4be7051e2c321bc68809317293eee6dce9"
-    },
-    {
-      "filename": "charon-water-ice.webp",
-      "bytes": 495484,
-      "sha256": "b85f81927fe554e93ecedc77c949661a54b6f36e08ff53c8e381e20b2cdb1de6"
     },
     {
       "filename": "charon-water-ice@2x.webp",

@@ -129,6 +129,21 @@ pixels and points behind the camera must be withheld. Display UVs are not a
 coverage mask. A source image, pointing file and shape being loadable together
 does not establish their physical registration or certify a new surface lens.
 
+### Known problem: native regeneration is not bit-reproducible
+
+Two consecutive `pnpm oracles:run sbmt/projection` runs against the same pinned
+inputs and locked SBMT/Java bytes do not agree byte for byte: 1,643 of 34,777
+numeric leaves in `tests/oracles/sbmt/projection.json` differ between runs, with
+a maximum absolute difference of about 1.6e-4 and a maximum relative difference
+of about 3.1e-4 (checked 2026-09-18, macOS ARM release above). The drift sits far
+under the 0.25-pixel UV comparison limit and the 5 cm mesh-distance limit above,
+so it has not been observed to flip a comparison result, but it means the native
+backend's own output is floating-point-order-dependent (likely thread-scheduling
+or JIT-order dependent inside the bundled Java/VTK pipeline; `OMP_NUM_THREADS=1`
+and `VTK_SMP_MAX_THREADS=1` do not remove it). Do not add a stricter
+byte-identity check against a second live run; compare each run only against the
+committed fixture, at its documented tolerance.
+
 ## Add a case
 
 1. Pin the selected native inputs in the body's existing source manifest and
@@ -136,9 +151,12 @@ does not establish their physical registration or certify a new surface lens.
    ledger. A synthetic case belongs in `tests/fixtures/sbmt` and must say so.
 2. Add the file identities and dimensions to `cases.json`. Reuse the generic
    path; add a new format adapter only when its scientific convention is known.
-3. Run the native generator twice into separate test/scratch files and require
-   byte-for-byte agreement. Preserve the committed fixture and run the comparing
-   tests. A repeat checks reproducibility, not scientific accuracy.
+3. Run the native generator twice into separate test/scratch files and compare.
+   As recorded above, the native backend is not bit-reproducible: expect small
+   (≲3.1e-4 relative) floating-point drift, not byte-for-byte agreement, and check
+   the new case's values stay within the comparison tolerances on both runs.
+   Preserve the committed fixture and run the comparing tests. A repeat checks
+   reproducibility bounds, not scientific accuracy.
 4. Inspect each stage's result. A new case does not become qualified because
    another body passed, because the fixture exists, or because regression tests
    correctly report its discrepancy. Document new limitations here and the

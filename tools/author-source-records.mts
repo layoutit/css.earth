@@ -8,7 +8,10 @@
  * that revision's manifest bytes. Documents cite records authored by hand,
  * such as the publication behind a photometric model record; their placeholder
  * evidence is pinned the same way, for this manifest and locator only. Existing
- * records and pinned evidence are never rewritten.
+ * records and pinned evidence are never rewritten. The body's provenance record
+ * pins the manifest's bytes, so the command line records it again whenever it
+ * changed the manifest; a stale record otherwise fails the next preparation of
+ * any body.
  */
 import { sha256 } from '../src/platform/sha256.mts';
 import { execFile } from 'node:child_process';
@@ -130,7 +133,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   // Without --evidence, evidenceIndex + 1 is 0, which must not drop the object id.
   const ids = arguments_.filter((argument, index) => argument !== '--evidence' && (evidenceIndex < 0 || index !== evidenceIndex + 1));
   if (ids.length !== 1 || (evidenceIndex >= 0 && !evidence)) throw new TypeError('Usage: author-source-records <object-id> [--evidence <revision>]');
-  const result = await authorSourceRecords({ root: process.cwd(), objectId: ids[0], evidence });
+  const root = process.cwd(), manifestPath = resolve(root, 'src/objects', ids[0], 'source/manifest.json'), before = await readFile(manifestPath);
+  const result = await authorSourceRecords({ root, objectId: ids[0], evidence });
   console.log(JSON.stringify(result, null, 1));
   if (result.records.length && !evidence) console.log(`Commit the manifest, then rerun with --evidence <revision> to pin ${result.records.length} record(s).`);
+  if (!before.equals(await readFile(manifestPath))) {
+    const { recoverObjectProvenance } = await import('./prepare-provenance.mts');
+    for (const outcome of await recoverObjectProvenance([ids[0]], { root })) console.log(`Provenance recorded again for the changed manifest: ${JSON.stringify(outcome)}`);
+  }
 }

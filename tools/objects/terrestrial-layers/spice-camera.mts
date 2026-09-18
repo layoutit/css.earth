@@ -6,6 +6,19 @@ import { etToUtc, utcToEt } from '../../spice/lsk.mts';
 import { spiceCamera, type Aberration, type PixelModelKeys } from '../../spice/camera.mts';
 import type { SpiceCameraDeclaration } from './source-records.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
+import { relative, resolve } from 'node:path';
+
+const projectRoot = resolve(import.meta.dirname, '../../..');
+/** The kernel bank and the oracle fixtures both load kernels from an absolute, machine-specific path (the worktree
+ * root, or a checkout under a different home directory). Recorded evidence must be reproducible across machines and
+ * checkouts, so it names each kernel relative to the project root rather than embedding that absolute path. */
+function kernelEvidence(set: KernelSet) {
+  return set.kernels.map(kernel => {
+    const path = relative(projectRoot, kernel.path);
+    if (path.startsWith('..')) throw new Error(`Kernel evidence path escapes the project root: ${kernel.path}`);
+    return { path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind };
+  });
+}
 
 /**
  * Images whose archive ships no geometry: the camera comes from the mission's
@@ -74,7 +87,7 @@ function decodeVicarSpiceFrame(bytes: Buffer, label: string | undefined, set: Ke
       flagDefinition: 'VICAR calibrated samples with no archived flag plane; nonfinite pixels rejected.',
       geometry: 'Per-pixel full-source mesh intersections from the SPICE-derived camera; prepared geometry, not archive-supplied backplanes.',
       exposure: { clockCard: `${startKey} and ${stopKey}`, clock: `${start} to ${stop}`, ticks, et, utc: startTime },
-      camera: report, kernels: set.kernels.map(kernel => ({ path: kernel.path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind })) } };
+      camera: report, kernels: kernelEvidence(set) } };
 }
 
 /** Decode the image plane, read the exposure epoch from its header and derive the camera from the loaded kernel set. */
@@ -132,5 +145,5 @@ export function decodeSpiceCameraFrame(bytes: Buffer, set: KernelSet, spice: Spi
       flagDefinition: missing.length || saturation !== null ? `Header flag values rejected: ${[...missing, ...(saturation === null ? [] : [saturation])].join(', ')}.` : 'No archive flag values declared; nonfinite pixels rejected.',
       geometry: 'Per-pixel full-source mesh intersections from the SPICE-derived camera; prepared geometry, not archive-supplied backplanes.',
       exposure: { clockCard, clock: clockText, ticks, et, utc: startTime },
-      camera: report, kernels: set.kernels.map(kernel => ({ path: kernel.path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind })) } };
+      camera: report, kernels: kernelEvidence(set) } };
 }

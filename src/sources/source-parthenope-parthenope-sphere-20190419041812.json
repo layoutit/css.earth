@@ -1,0 +1,37 @@
+{
+  "id": "source-parthenope-parthenope-sphere-20190419041812",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Parthenope · parthenope sphere 20190419041812",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/11Parthenope/Deconv/d11Parthenope_2019-04-19T04_18_12.759_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/parthenope/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "096f09067dcc632f859c67fa6a9aa0db01bddb9c1d3eda0d48c0e2b07041179a",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The parthenope sphere 20190419041812 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

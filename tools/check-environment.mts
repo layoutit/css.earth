@@ -38,8 +38,8 @@ export async function checkEnvironment(root: string): Promise<string[]> {
   }
   const bundle = await optionalStat(join(root, 'tools/objects/dist/prepare-authored.js'));
   const sources = Math.max(await newestSource(join(root, 'tools/objects'), new Set(['dist'])), await newestSource(join(root, 'src/preparation'), new Set()));
-  if (!bundle) problems.push('tools/objects/dist is missing; run pnpm build:preparation.');
-  else if (bundle.mtimeMs < sources) problems.push('tools/objects/dist is older than its sources; run pnpm build:preparation (tsup builds it, not tsc).');
+  if (!bundle) problems.push('tools/objects/dist is missing; run pnpm build:tools.');
+  else if (bundle.mtimeMs < sources) problems.push('tools/objects/dist is older than its sources; run pnpm build:tools (tsup builds it, not tsc).');
   return problems;
 }
 

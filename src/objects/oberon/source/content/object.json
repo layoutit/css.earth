@@ -85,8 +85,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "oberon-lens-normal.webp",
-        "surface": "oberon-normal.webp",
-        "poles": "oberon-poles-normal.webp",
+        "surface": "oberon-normal@2x.webp",
+        "poles": "oberon-poles-normal@2x.webp",
         "source": {
           "id": "schenk-2020-oberon-normal",
           "path": "../manifest.json",

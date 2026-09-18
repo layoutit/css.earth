@@ -114,11 +114,8 @@ The main site's prepared-resource glob includes the generated proxy PNGs automat
 
 ## Integration evidence
 
-The [current provenance inspection](../../site/test/evidence/nebula-provenance-2026-09-14/)
-records the source-card cases, delivered input identities, browser version,
-viewport, DPR and cameras. It concerns application behavior and attribution,
-not scientific validation of inferred cloud depth. Every object README links its
-own investigation ledger and original processing assessments.
+Every object README links its own investigation ledger and original
+processing assessments.
 
 The [retained integration reports](../../site/test/evidence/nebulae/2026-09-14/)
 preserve earlier catalogue-field and final Helix/Lagoon visual checks without

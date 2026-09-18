@@ -1,0 +1,16 @@
+{
+  "schema": "csseva-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 748695,
+      "sha256": "5322c89b96647b41f27c8ee1a30efbd1540ae7434fef0fab7a27df6555c5579b"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 618505,
+      "sha256": "2dc16b7fc80556f050052a423363a774cfeae470b5ae502c26766ea40780d0fe"
+    }
+  ]
+}

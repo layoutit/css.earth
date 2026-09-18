@@ -19,6 +19,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Full history: the published-assets gate below needs a merge base with the PR's base branch to scope
+          # itself to what the PR actually touched (a shallow, depth-1 checkout has no such ancestry available).
+          fetch-depth: 0
       - name: Check documentation links and organization
         run: |
           python3 tools/audits/test_documentation_links.py
@@ -41,11 +45,26 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Check published assets
+        # HEAD every key in both inventory kinds (runtime-assets.json and prepared-assets.json) and fail with the
+        # list of misses before anything is restored, so a contributor who bakes locally but forgets to publish
+        # gets a red PR instead of a silent local pass. Runs as early as the job allows: it needs SCENE_OBJECTS
+        # (site/objects.mts), which build:tools just generated. On a PR, a miss outside the objects the PR itself
+        # touched (vs. its base branch) only warns instead of failing, so an unrelated pre-existing gap cannot
+        # block it; a push to main (and any local run) stays strict and fails on every miss.
         run: |
-          pnpm build:packages
-          pnpm build:renderer
-          pnpm prepare:catalog
-          pnpm build:preparation
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            pnpm check:assets-published --changed-since=origin/${{ github.base_ref }}
+          else
+            pnpm check:assets-published
+          fi
+      - name: Restore prepared assets and object JSON
+        # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
+        # + prepared/scene.json, or a context/nebula object's whole prepared/ output) — git no longer tracks those
+        # files, and prepare:object-json reads them.
+        run: |
+          pnpm setup:assets
           pnpm prepare:object-json
       - name: Test unavailable prepared packages and focus controls
         run: >-
@@ -75,6 +94,13 @@ jobs:
           node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Check independent body additions
         run: node --test tools/body-additions.test.mts
+      - name: Test the offline worker and the Install button in Chromium, WebKit and Firefox
+        # A synthetic site with the real bundled worker and registration code:
+        # deploys reach online visitors at once, stored copies follow, offline
+        # reloads work, a returning connection wins, and turning it off removes it.
+        run: |
+          pnpm exec playwright install --with-deps chromium webkit firefox
+          pnpm test:browser:service-worker
       - name: Typecheck shared code and enforce TypeScript ownership
         env:
           NODE_OPTIONS: --max-old-space-size=4096
@@ -111,9 +137,12 @@ jobs:
           site/test/search-response.test.mts
           site/test/dataset-response.test.mts
           site/test/dataset-url.test.mts
+          site/test/browser-node-imports.test.mts
           tools/serialize-prepared-scene.test.mts
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
+      - name: Check every object's runtime ownership and physical frame receipt
+        run: node tools/check-object-runtime-ownership.mts --all
       - name: Test complete shared renderer and camera
         run: pnpm test:renderer
 

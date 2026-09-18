@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d32d0c4ae5f96c4b26e636d3d90905d1f9b61ee17fd21f5a7e6ba99e0ba87865"
+    "sha256": "d5c772f000ec19e50b84b00302b0492fabd8e69d79567a21329a1ef8599417ee"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b9b0b256ee13853868f318fb33e08f6f163a782a2439b1bff71d8e304299d521"
+    "bindingsSha256": "860894a14c79f4b7549d8f112488a0e2171ee69bc14ee3cbc9e3c994e2a4d5bb"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "b5a08af420176145843fd336e8aa68fabe38723ee66a8a3b00c864089d75eb3f",
+      "sha256": "523fa6e05d792e7af1aad119488bd5f3b8f8a5f5a57dcd180717c5a72ab9c749",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/moon/",
@@ -25,10 +25,6 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -635,7 +631,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "94ca75cbc042ee9c586f63fd4e7cc8dc4df269fb3e4fc9f12ceaf62f34416f83",
+      "sha256": "1a274ae4080acb0a1d7c3e9dc35233f40935c2955d3ff8d843931f3eb65b302d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -762,8 +758,8 @@
               "id": "surface",
               "label": "Monochrome",
               "thumbnail": "moon-lens-surface.webp",
-              "surface": "moon-surface.webp",
-              "poles": "moon-poles-surface.webp",
+              "surface": "moon-surface@2x.webp",
+              "poles": "moon-poles-surface@2x.webp",
               "source": {
                 "id": "lroc-wac-global-032p",
                 "url": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P"
@@ -777,8 +773,8 @@
               "id": "midnight-temperature",
               "label": "Midnight temperature",
               "thumbnail": "moon-lens-midnight-temperature.webp",
-              "surface": "moon-midnight-temperature.webp",
-              "poles": "moon-poles-midnight-temperature.webp",
+              "surface": "moon-midnight-temperature@2x.webp",
+              "poles": "moon-poles-midnight-temperature@2x.webp",
               "source": {
                 "id": "diviner-ghrm-tbol_m-compact",
                 "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img"
@@ -847,8 +843,8 @@
               "id": "heat-anomalies",
               "label": "Heat anomalies",
               "thumbnail": "moon-lens-heat-anomalies.webp",
-              "surface": "moon-heat-anomalies.webp",
-              "poles": "moon-poles-heat-anomalies.webp",
+              "surface": "moon-heat-anomalies@2x.webp",
+              "poles": "moon-poles-heat-anomalies@2x.webp",
               "source": {
                 "id": "diviner-ghrm-tbol_anom-compact",
                 "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img"
@@ -917,8 +913,8 @@
               "id": "rock-abundance",
               "label": "Rock abundance",
               "thumbnail": "moon-lens-rock-abundance.webp",
-              "surface": "moon-rock-abundance.webp",
-              "poles": "moon-poles-rock-abundance.webp",
+              "surface": "moon-rock-abundance@2x.webp",
+              "poles": "moon-poles-rock-abundance@2x.webp",
               "source": {
                 "id": "diviner-ghrm-ra_sam-compact",
                 "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img"
@@ -977,8 +973,8 @@
               "id": "topography",
               "label": "Elevation",
               "thumbnail": "moon-lens-topography.webp",
-              "surface": "moon-topography.webp",
-              "poles": "moon-poles-topography.webp",
+              "surface": "moon-topography@2x.webp",
+              "poles": "moon-poles-topography@2x.webp",
               "source": {
                 "id": "lro-lola-ldem16-numeric",
                 "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img"
@@ -1036,8 +1032,8 @@
               "id": "crust",
               "label": "Crust",
               "thumbnail": "moon-lens-crust.webp",
-              "surface": "moon-crust.webp",
-              "poles": "moon-poles-crust.webp",
+              "surface": "moon-crust@2x.webp",
+              "poles": "moon-poles-crust@2x.webp",
               "source": {
                 "id": "nasa-grail-crustal-thickness",
                 "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
@@ -1387,8 +1383,8 @@
               "id": "silicate-signature",
               "label": "Silicate signature",
               "thumbnail": "moon-lens-silicate-signature.webp",
-              "surface": "moon-silicate-signature.webp",
-              "poles": "moon-poles-silicate-signature.webp",
+              "surface": "moon-silicate-signature@2x.webp",
+              "poles": "moon-poles-silicate-signature@2x.webp",
               "source": {
                 "id": "lro-diviner-christiansen-feature",
                 "url": "https://zenodo.org/records/4558194"
@@ -1447,8 +1443,8 @@
               "id": "geology",
               "label": "Geology",
               "thumbnail": "moon-lens-geology.webp",
-              "surface": "moon-geology.webp",
-              "poles": "moon-poles-geology.webp",
+              "surface": "moon-geology@2x.webp",
+              "poles": "moon-poles-geology@2x.webp",
               "source": {
                 "id": "usgs-moon-geologic-units-grid",
                 "url": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
@@ -2214,8 +2210,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "94ca75cbc042ee9c586f63fd4e7cc8dc4df269fb3e4fc9f12ceaf62f34416f83",
-      "bytes": 35627,
+      "sha256": "1a274ae4080acb0a1d7c3e9dc35233f40935c2955d3ff8d843931f3eb65b302d",
+      "bytes": 35675,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2441,12 +2437,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-surface.webp",
-          "bytes": 3599904,
-          "sha256": "844381b1e326f2f13ddc547b790a08b037530fec657ef85ca10785591a38f73a",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-surface@2x.webp",
           "bytes": 13451346,
           "sha256": "8aecd7be09a70f3cd3ea9454a0f46d50da16e917539d8cc709e0e1521815bde1",
@@ -2456,12 +2446,6 @@
           "url": "/scenes/moon/moon-lens-surface.webp",
           "bytes": 638,
           "sha256": "9a7c1de34999142e821e1957f94560f2c1811f30e9aad073dc86bfcafc25dcb1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-surface.webp",
-          "bytes": 106794,
-          "sha256": "f830e2c3bdbbe24a715a5e66ca03d0b00982dc368d90557c18e586975e2b1af4",
           "verification": "bytes-verified"
         },
         {
@@ -2505,12 +2489,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-midnight-temperature.webp",
-          "bytes": 2955320,
-          "sha256": "ca762599f856e1ea817e03b30abc93b03cba75fcae3214f55fd437f0c297895c",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-midnight-temperature@2x.webp",
           "bytes": 13982156,
           "sha256": "bbd563fae44d3ccbebb72e4bf0c6fc1cf1a10bc252476e6f56beddb683fd23f3",
@@ -2520,12 +2498,6 @@
           "url": "/scenes/moon/moon-lens-midnight-temperature.webp",
           "bytes": 3642,
           "sha256": "d5bf78701c81bacc192ca107dda1ef6d0b3ce56b88b0b675743fc920ddc97c45",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-midnight-temperature.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
           "verification": "bytes-verified"
         },
         {
@@ -2569,12 +2541,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-heat-anomalies.webp",
-          "bytes": 1554006,
-          "sha256": "0189faf6ad342bcd81ad66c2e6a584a8a92d45b0daa63a05ae3588d383b47260",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-heat-anomalies@2x.webp",
           "bytes": 9349372,
           "sha256": "db035b5eb92a3e09bcc8f87ada7923678e0d6466793ea36948508b7772050586",
@@ -2584,12 +2550,6 @@
           "url": "/scenes/moon/moon-lens-heat-anomalies.webp",
           "bytes": 4554,
           "sha256": "5a09317f6d8f48988b588024391853f494e82540e344bea150e9e9972db4af87",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-heat-anomalies.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
           "verification": "bytes-verified"
         },
         {
@@ -2633,12 +2593,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-rock-abundance.webp",
-          "bytes": 1498280,
-          "sha256": "7adcbbee346722b9e52d4133b5ac58bed18561b98847e1cb5529a5bf5e60d313",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-rock-abundance@2x.webp",
           "bytes": 9022440,
           "sha256": "49fb72eb2e1738ce3d802fb87aa1b25f57cfc20483585af4f232e80d0fbcfe01",
@@ -2648,12 +2602,6 @@
           "url": "/scenes/moon/moon-lens-rock-abundance.webp",
           "bytes": 3916,
           "sha256": "70682ca05012dbe135a55752d5ea2389c9ee862931cea8006fe4a6a26a8fcaf4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-rock-abundance.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
           "verification": "bytes-verified"
         },
         {
@@ -2697,12 +2645,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-topography.webp",
-          "bytes": 2055584,
-          "sha256": "45280a882cfd5aa4983f67126ac5a635cf695b92ef4660879d2a096dbd159182",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-topography@2x.webp",
           "bytes": 8271894,
           "sha256": "61b1bddde1bb35a6a01701be98f64e127e861b2a45e150c9c2ac443789638e81",
@@ -2712,12 +2654,6 @@
           "url": "/scenes/moon/moon-lens-topography.webp",
           "bytes": 3534,
           "sha256": "4b40b491c3d8056f9d5a225d1f03a65c9fdbf98498ae34651607ffbc4fd09d49",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-topography.webp",
-          "bytes": 84798,
-          "sha256": "bb5a810646b0abe051fe5c8adaf26b28764811f5aa0179a62ba9e5ce35a82e98",
           "verification": "bytes-verified"
         },
         {
@@ -2761,12 +2697,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-crust.webp",
-          "bytes": 692496,
-          "sha256": "e4276eb4cfa6d79bdfc249346913470f1418c1ee2093a25fe628e45119b06863",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-crust@2x.webp",
           "bytes": 1482016,
           "sha256": "d235a4866c59e480ef71c51356705cce91d23f0f60fbe65a44b00224e84f9b99",
@@ -2776,12 +2706,6 @@
           "url": "/scenes/moon/moon-lens-crust.webp",
           "bytes": 2410,
           "sha256": "9deeb6beb098289de0c7ed8dbc20c2721430ff9fdd0f5d213e1130acaefdec87",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-crust.webp",
-          "bytes": 114872,
-          "sha256": "33c621f951779ebdc35bf727149432c16554769e1055cade7b60f5867fcd3e2e",
           "verification": "bytes-verified"
         },
         {
@@ -2825,12 +2749,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-silicate-signature.webp",
-          "bytes": 2793884,
-          "sha256": "ee2ec429307b98c4bd0d53738f536b33f6390225cc2635212205613308391617",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-silicate-signature@2x.webp",
           "bytes": 4450426,
           "sha256": "07bb12ed6a602c9d195f04028141bf78c13cd11126df29de5a2d0860590d5ce3",
@@ -2840,12 +2758,6 @@
           "url": "/scenes/moon/moon-lens-silicate-signature.webp",
           "bytes": 5220,
           "sha256": "44cc35d44c508ceac3861f2733e7869f2985b2a7baa058346cf5a536b6209295",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-silicate-signature.webp",
-          "bytes": 4204,
-          "sha256": "d4c671de63704299c9942a93c339575bbf5c44964824a00c0d65d60f50a984f0",
           "verification": "bytes-verified"
         },
         {
@@ -2889,12 +2801,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/moon/moon-geology.webp",
-          "bytes": 185000,
-          "sha256": "07b44caf3fa4cc2c7fd86e5e4f8626441b8094c53575791d778d4b2257d5dfd2",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/moon/moon-geology@2x.webp",
           "bytes": 328518,
           "sha256": "5b3d55f497ca734a5703a6743ccaea41d4e40adddc78c0aa014496797c6ec971",
@@ -2904,12 +2810,6 @@
           "url": "/scenes/moon/moon-lens-geology.webp",
           "bytes": 1706,
           "sha256": "203431b8cdb722cf166e2be0009d2869b671ee9c5ee2c00f8359a190af10caa4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-poles-geology.webp",
-          "bytes": 8122,
-          "sha256": "46188a8aff2300cfc35fbe248e97fe8ffaf7e0f084f23a71427d39d3c55ae911",
           "verification": "bytes-verified"
         },
         {
@@ -2946,204 +2846,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/moon/moon-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/moon/moon-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/moon/moon-lighting-2x-billboard.webp",
           "bytes": 115740,
@@ -3402,8 +3104,8 @@
       "outputs": [
         {
           "url": "/scenes/moon/moon-features.json",
-          "bytes": 9327754,
-          "sha256": "24006b77507356cece119118ee70e0d39e6bbf597273c2e9d9d4ddfd2e9499cb",
+          "bytes": 9327756,
+          "sha256": "5410336fee2c92de88c1353c1cd3820c67e5ea5a3575c3eaf2a5e40569012216",
           "verification": "bytes-verified"
         }
       ],
@@ -3616,11 +3318,11 @@
   },
   "lastPreparation": {
     "objectId": "moon",
-    "materialSha256": "1235d4da5446e34811aa96e7ef16985e080c0d3e12b5eed3c50888fb61c12f30",
+    "materialSha256": "cbc46175f7eeda6d22c4df295fb073df3190cfad5106a8fa23542a96a2873920",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b9b0b256ee13853868f318fb33e08f6f163a782a2439b1bff71d8e304299d521"
+      "bindingsSha256": "860894a14c79f4b7549d8f112488a0e2171ee69bc14ee3cbc9e3c994e2a4d5bb"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "schema": "cssivar-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750270,
+      "sha256": "32a22a4fbf204fb4e09b63fea7f8cd2c0364d13964726ac6d40ced5e6a9475ec"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620744,
+      "sha256": "0a5e0ba25dd61139ff619fc041df7f8ecf790e36caff1bf2e9725ed387e6f3fa"
+    }
+  ]
+}

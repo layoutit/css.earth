@@ -2,5 +2,5 @@
   "extends": "./tsconfig.json",
   "compilerOptions": { "jsx": "preserve" },
   "include": ["**/*.astro", "**/*.mts", "**/*.ts"],
-  "exclude": ["test"]
+  "exclude": ["test", "service-worker/worker.mts"]
 }

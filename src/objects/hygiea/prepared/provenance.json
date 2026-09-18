@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e379fc68bba19384daf081dca18dc755b3a90e2f4759d840c20bef08586b9f2"
+    "sha256": "836aab11229f9612957aa000489679f0e96176be7fd02706becb00197fa288f3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "6da43d2bc809ef7f02d0fedaf251d7fac4b86d4a0bcc0c7242ccf7ebc87bff36"
+    "bindingsSha256": "90307523da245d86893eac4c7b87f584c730724bfc08d7bc23cf5ec3e1455f22"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "aa2032142d50e6b10d9ca50cb7172ccb67599d432f45dc397e04634157ad904d",
+      "sha256": "0e5013ee221940b99429e7ac48eadc79bf654ee814238f4e39a6736309acd237",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,6 +81,528 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "zimpol",
+              "format": "controlled-shape-camera",
+              "consumer": "sphere-photograph",
+              "metadata": {
+                "label": "SPHERE photograph",
+                "falseColor": false,
+                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2018-08-25 to 2018-09-11, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.9. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 4,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1,
+                  99.5
+                ]
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20180825-054503",
+                  "path": "observations/d10Hygiea_2018-08-25T05_45_03.660_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.0799,
+                  "observerWestLongitude": 191.2393,
+                  "sunLatitude": -32.8556,
+                  "sunWestLongitude": 185.7413,
+                  "rangeKm": 359882293,
+                  "northAzimuthDegrees": 148.3941,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.846,
+                    130.797
+                  ]
+                },
+                {
+                  "id": "zimpol-20180825-054913",
+                  "path": "observations/d10Hygiea_2018-08-25T05_49_13.701_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.0801,
+                  "observerWestLongitude": 193.0476,
+                  "sunLatitude": -32.8553,
+                  "sunWestLongitude": 187.5502,
+                  "rangeKm": 359879321.1,
+                  "northAzimuthDegrees": 148.3942,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.796,
+                    131.119
+                  ]
+                },
+                {
+                  "id": "zimpol-20180825-055324",
+                  "path": "observations/d10Hygiea_2018-08-25T05_53_24.748_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.0804,
+                  "observerWestLongitude": 194.8632,
+                  "sunLatitude": -32.8549,
+                  "sunWestLongitude": 189.3664,
+                  "rangeKm": 359876339.6,
+                  "northAzimuthDegrees": 148.3944,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.666,
+                    133.174
+                  ]
+                },
+                {
+                  "id": "zimpol-20180825-055734",
+                  "path": "observations/d10Hygiea_2018-08-25T05_57_34.782_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.0807,
+                  "observerWestLongitude": 196.6714,
+                  "sunLatitude": -32.8545,
+                  "sunWestLongitude": 191.1753,
+                  "rangeKm": 359873372.2,
+                  "northAzimuthDegrees": 148.3946,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.273,
+                    131.141
+                  ]
+                },
+                {
+                  "id": "zimpol-20180825-060144",
+                  "path": "observations/d10Hygiea_2018-08-25T06_01_44.560_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.081,
+                  "observerWestLongitude": 198.4778,
+                  "sunLatitude": -32.8541,
+                  "sunWestLongitude": 192.9824,
+                  "rangeKm": 359870409.9,
+                  "northAzimuthDegrees": 148.3947,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.821,
+                    131.901
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-052448",
+                  "path": "observations/d10Hygiea_2018-08-26T05_24_48.219_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1723,
+                  "observerWestLongitude": 87.3032,
+                  "sunLatitude": -32.7295,
+                  "sunWestLongitude": 82.0155,
+                  "rangeKm": 358894750,
+                  "northAzimuthDegrees": 148.4486,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    128.367,
+                    127.37
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-052858",
+                  "path": "observations/d10Hygiea_2018-08-26T05_28_58.096_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1726,
+                  "observerWestLongitude": 89.1103,
+                  "sunLatitude": -32.7292,
+                  "sunWestLongitude": 83.8232,
+                  "rangeKm": 358891869,
+                  "northAzimuthDegrees": 148.4488,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.23,
+                    126.358
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-053308",
+                  "path": "observations/d10Hygiea_2018-08-26T05_33_08.105_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1729,
+                  "observerWestLongitude": 90.9184,
+                  "sunLatitude": -32.7288,
+                  "sunWestLongitude": 85.632,
+                  "rangeKm": 358888988.5,
+                  "northAzimuthDegrees": 148.449,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.08,
+                    127.384
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-053718",
+                  "path": "observations/d10Hygiea_2018-08-26T05_37_18.332_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1731,
+                  "observerWestLongitude": 92.728,
+                  "sunLatitude": -32.7284,
+                  "sunWestLongitude": 87.4422,
+                  "rangeKm": 358886107.7,
+                  "northAzimuthDegrees": 148.4491,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.966,
+                    126.274
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-054128",
+                  "path": "observations/d10Hygiea_2018-08-26T05_41_28.632_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1734,
+                  "observerWestLongitude": 94.5382,
+                  "sunLatitude": -32.7281,
+                  "sunWestLongitude": 89.253,
+                  "rangeKm": 358883228.2,
+                  "northAzimuthDegrees": 148.4493,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.361,
+                    125.987
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-080438",
+                  "path": "observations/d10Hygiea_2018-08-26T08_04_38.528_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1833,
+                  "observerWestLongitude": 156.6605,
+                  "sunLatitude": -32.7153,
+                  "sunWestLongitude": 151.3972,
+                  "rangeKm": 358785729.5,
+                  "northAzimuthDegrees": 148.4552,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.681,
+                    153.264
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-080849",
+                  "path": "observations/d10Hygiea_2018-08-26T08_08_49.150_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1835,
+                  "observerWestLongitude": 158.473,
+                  "sunLatitude": -32.715,
+                  "sunWestLongitude": 153.2104,
+                  "rangeKm": 358782923,
+                  "northAzimuthDegrees": 148.4554,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.198,
+                    152.955
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-081300",
+                  "path": "observations/d10Hygiea_2018-08-26T08_13_00.611_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1838,
+                  "observerWestLongitude": 160.2916,
+                  "sunLatitude": -32.7146,
+                  "sunWestLongitude": 155.0296,
+                  "rangeKm": 358780109.1,
+                  "northAzimuthDegrees": 148.4555,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.436,
+                    152.84
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-081710",
+                  "path": "observations/d10Hygiea_2018-08-26T08_17_10.331_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1841,
+                  "observerWestLongitude": 162.0976,
+                  "sunLatitude": -32.7142,
+                  "sunWestLongitude": 156.8362,
+                  "rangeKm": 358777316.7,
+                  "northAzimuthDegrees": 148.4557,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.403,
+                    150.044
+                  ]
+                },
+                {
+                  "id": "zimpol-20180826-082117",
+                  "path": "observations/d10Hygiea_2018-08-26T08_21_17.749_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -24.1844,
+                  "observerWestLongitude": 163.8869,
+                  "sunLatitude": -32.7139,
+                  "sunWestLongitude": 158.6262,
+                  "rangeKm": 358774552,
+                  "northAzimuthDegrees": 148.4559,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.644,
+                    150.88
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-043020",
+                  "path": "observations/d10Hygiea_2018-09-08T04_30_20.895_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.6948,
+                  "observerWestLongitude": 266.4904,
+                  "sunLatitude": -31.0693,
+                  "sunWestLongitude": 264.1409,
+                  "rangeKm": 349169133.6,
+                  "northAzimuthDegrees": 149.2967,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.044,
+                    139.276
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-043431",
+                  "path": "observations/d10Hygiea_2018-09-08T04_34_31.128_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.6952,
+                  "observerWestLongitude": 268.2999,
+                  "sunLatitude": -31.069,
+                  "sunWestLongitude": 265.9512,
+                  "rangeKm": 349167654.1,
+                  "northAzimuthDegrees": 149.2969,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.764,
+                    138.149
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-043841",
+                  "path": "observations/d10Hygiea_2018-09-08T04_38_41.141_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.6956,
+                  "observerWestLongitude": 270.1079,
+                  "sunLatitude": -31.0686,
+                  "sunWestLongitude": 267.7599,
+                  "rangeKm": 349166178,
+                  "northAzimuthDegrees": 149.2972,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.702,
+                    139.549
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-044251",
+                  "path": "observations/d10Hygiea_2018-09-08T04_42_51.325_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.696,
+                  "observerWestLongitude": 271.9171,
+                  "sunLatitude": -31.0682,
+                  "sunWestLongitude": 269.5698,
+                  "rangeKm": 349164703,
+                  "northAzimuthDegrees": 149.2974,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.539,
+                    139.94
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-044659",
+                  "path": "observations/d10Hygiea_2018-09-08T04_46_59.796_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.6964,
+                  "observerWestLongitude": 273.714,
+                  "sunLatitude": -31.0678,
+                  "sunWestLongitude": 271.3674,
+                  "rangeKm": 349163240.4,
+                  "northAzimuthDegrees": 149.2976,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.148,
+                    137.888
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-061703",
+                  "path": "observations/d10Hygiea_2018-09-08T06_17_03.473_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.7051,
+                  "observerWestLongitude": 312.791,
+                  "sunLatitude": -31.0598,
+                  "sunWestLongitude": 310.4596,
+                  "rangeKm": 349131979.2,
+                  "northAzimuthDegrees": 149.3024,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.42,
+                    132.769
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-062114",
+                  "path": "observations/d10Hygiea_2018-09-08T06_21_14.093_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.7056,
+                  "observerWestLongitude": 314.6034,
+                  "sunLatitude": -31.0595,
+                  "sunWestLongitude": 312.2727,
+                  "rangeKm": 349130554.8,
+                  "northAzimuthDegrees": 149.3026,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.584,
+                    131.961
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-062523",
+                  "path": "observations/d10Hygiea_2018-09-08T06_25_23.700_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.706,
+                  "observerWestLongitude": 316.4085,
+                  "sunLatitude": -31.0591,
+                  "sunWestLongitude": 314.0784,
+                  "rangeKm": 349129138.4,
+                  "northAzimuthDegrees": 149.3028,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.662,
+                    132.45
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-062933",
+                  "path": "observations/d10Hygiea_2018-09-08T06_29_33.230_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.7064,
+                  "observerWestLongitude": 318.213,
+                  "sunLatitude": -31.0587,
+                  "sunWestLongitude": 315.8836,
+                  "rangeKm": 349127724.7,
+                  "northAzimuthDegrees": 149.3031,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.251,
+                    131.289
+                  ]
+                },
+                {
+                  "id": "zimpol-20180908-063342",
+                  "path": "observations/d10Hygiea_2018-09-08T06_33_42.846_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -25.7068,
+                  "observerWestLongitude": 320.0181,
+                  "sunLatitude": -31.0583,
+                  "sunWestLongitude": 317.6894,
+                  "rangeKm": 349126312.6,
+                  "northAzimuthDegrees": 149.3033,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.017,
+                    132.484
+                  ]
+                },
+                {
+                  "id": "zimpol-20180911-045122",
+                  "path": "observations/d10Hygiea_2018-09-11T04_51_22.236_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -26.1171,
+                  "observerWestLongitude": 350.0407,
+                  "sunLatitude": -30.6826,
+                  "sunWestLongitude": 348.4106,
+                  "rangeKm": 347847062.9,
+                  "northAzimuthDegrees": 149.5228,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.01,
+                    138.437
+                  ]
+                },
+                {
+                  "id": "zimpol-20180911-045531",
+                  "path": "observations/d10Hygiea_2018-09-11T04_55_31.644_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -26.1175,
+                  "observerWestLongitude": 351.8443,
+                  "sunLatitude": -30.6823,
+                  "sunWestLongitude": 350.2149,
+                  "rangeKm": 347845963.5,
+                  "northAzimuthDegrees": 149.523,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.267,
+                    139.389
+                  ]
+                },
+                {
+                  "id": "zimpol-20180911-045942",
+                  "path": "observations/d10Hygiea_2018-09-11T04_59_42.872_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -26.1179,
+                  "observerWestLongitude": 353.6611,
+                  "sunLatitude": -30.6819,
+                  "sunWestLongitude": 352.0323,
+                  "rangeKm": 347844858.3,
+                  "northAzimuthDegrees": 149.5232,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.883,
+                    139.519
+                  ]
+                },
+                {
+                  "id": "zimpol-20180911-050352",
+                  "path": "observations/d10Hygiea_2018-09-11T05_03_52.832_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -26.1183,
+                  "observerWestLongitude": 355.4687,
+                  "sunLatitude": -30.6815,
+                  "sunWestLongitude": 353.8406,
+                  "rangeKm": 347843761,
+                  "northAzimuthDegrees": 149.5234,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.335,
+                    138.44
+                  ]
+                },
+                {
+                  "id": "zimpol-20180911-050803",
+                  "path": "observations/d10Hygiea_2018-09-11T05_08_03.058_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -26.1187,
+                  "observerWestLongitude": 357.2782,
+                  "sunLatitude": -30.6812,
+                  "sunWestLongitude": 355.6508,
+                  "rangeKm": 347842664.7,
+                  "northAzimuthDegrees": 149.5237,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.544,
+                    138.244
+                  ]
+                }
+              ]
+            }
           ]
         },
         "lighting": {
@@ -118,7 +640,30 @@
               "maximumErrorMeters": 3700,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/10_Hygiea_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 1602,
+                "expectedFaces": 3200
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 3700,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -131,7 +676,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0314f0012daf89e5fa90b1b2e6a8ab2c6e26ba40f5c04e667a0e6fda068afe45",
+      "sha256": "98ae52c771ec892439fc043b933b7dd1a975f5058dc8ef8673a11b4e320a2815",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,6 +773,20 @@
                 "image": "/scenes/hygiea/hygiea-elevation-legend.webp"
               },
               "notes": "Source shape · radial height"
+            },
+            {
+              "id": "zimpol",
+              "label": "SPHERE photograph",
+              "thumbnail": "/scenes/hygiea/hygiea-zimpol-thumbnail.webp",
+              "surface": "hygiea-zimpol-surface@2x.webp",
+              "poles": "hygiea-zimpol-surface@2x.webp",
+              "source": {
+                "id": "hygiea-adam-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true,
+              "notes": "30 deconvolved VLT/SPHERE/ZIMPOL frames, 4 nights from 2018-08-25 to 2018-09-11, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.9. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -337,6 +896,1620 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180825054503",
+      "path": "observations/d10Hygiea_2018-08-25T05_45_03.660_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_45_03.660_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180825054503",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "8273283f2f3bff24545121882f658c6d6530978a27d9246813c9a41fb939c969",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-25T05_45_03.660_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_45_03.660_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180825054913",
+      "path": "observations/d10Hygiea_2018-08-25T05_49_13.701_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_49_13.701_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180825054913",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "fc4e754522d3b72a646431baa8305c688020894bc966a0877706d8eeac17928d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-25T05_49_13.701_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_49_13.701_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180825055324",
+      "path": "observations/d10Hygiea_2018-08-25T05_53_24.748_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_53_24.748_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180825055324",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/5"
+          }
+        ]
+      },
+      "sha256": "26db3dcbe47f70fa349d69e33d058c91e235b59c4c3649013bbef40b84cc8d27",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-25T05_53_24.748_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_53_24.748_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180825055734",
+      "path": "observations/d10Hygiea_2018-08-25T05_57_34.782_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_57_34.782_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180825055734",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/6"
+          }
+        ]
+      },
+      "sha256": "9018ee728c8e271d3119ac11883b820f1a1179e95203988a2b56937df2634aac",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-25T05_57_34.782_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T05_57_34.782_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180825060144",
+      "path": "observations/d10Hygiea_2018-08-25T06_01_44.560_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T06_01_44.560_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180825060144",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "02dbd5e039590d5f2e077e7855097740598b30b2dac288d7260f2d8725ebd369",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-25T06_01_44.560_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-25T06_01_44.560_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826052448",
+      "path": "observations/d10Hygiea_2018-08-26T05_24_48.219_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_24_48.219_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826052448",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/8"
+          }
+        ]
+      },
+      "sha256": "52adf70155618fb90845f1958903a847378958b00d2f30fbc69dc125dc4aad39",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T05_24_48.219_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_24_48.219_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826052858",
+      "path": "observations/d10Hygiea_2018-08-26T05_28_58.096_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_28_58.096_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826052858",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/9"
+          }
+        ]
+      },
+      "sha256": "d23aaf581c799115016eac0695cbefc017cd423ba4fde56094777885fae4a6b1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T05_28_58.096_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_28_58.096_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826053308",
+      "path": "observations/d10Hygiea_2018-08-26T05_33_08.105_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_33_08.105_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826053308",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/10"
+          }
+        ]
+      },
+      "sha256": "f7c3c175cfcdf6b93ed54382aa3ec57b85ee3f400e08387fccee1a437ee99b84",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T05_33_08.105_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_33_08.105_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826053718",
+      "path": "observations/d10Hygiea_2018-08-26T05_37_18.332_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_37_18.332_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826053718",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "ad6758ead098848aaabc1f22cd6e95a4cca30d38df23ad2d196ec5cc041457bc",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T05_37_18.332_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_37_18.332_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826054128",
+      "path": "observations/d10Hygiea_2018-08-26T05_41_28.632_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_41_28.632_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826054128",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/12"
+          }
+        ]
+      },
+      "sha256": "a6f57cfe12eaf4b0ca39485d6274880912e06dba3520ba76b345b515040ce787",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T05_41_28.632_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T05_41_28.632_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826080438",
+      "path": "observations/d10Hygiea_2018-08-26T08_04_38.528_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_04_38.528_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826080438",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/13"
+          }
+        ]
+      },
+      "sha256": "58ec94e1999370c47748bd8c7420f65a43a8c0a8c9775a97747f4df3ef1a6bb5",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T08_04_38.528_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_04_38.528_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826080849",
+      "path": "observations/d10Hygiea_2018-08-26T08_08_49.150_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_08_49.150_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826080849",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/14"
+          }
+        ]
+      },
+      "sha256": "bfc5b3628dd9656e8d748cc32e08c9f4afcead24007d4365bcdaa4912fa70c8b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T08_08_49.150_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_08_49.150_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826081300",
+      "path": "observations/d10Hygiea_2018-08-26T08_13_00.611_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_13_00.611_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826081300",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/15"
+          }
+        ]
+      },
+      "sha256": "b806a981349b584791a6fc44db135245ed67aef64161caecf01f844bd84fc9c5",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T08_13_00.611_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_13_00.611_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826081710",
+      "path": "observations/d10Hygiea_2018-08-26T08_17_10.331_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_17_10.331_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826081710",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/16"
+          }
+        ]
+      },
+      "sha256": "990c5b50eb3879ab6e1e8ba6e88773b7dc2b72e35fbdda5a32f4d01e326f373c",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T08_17_10.331_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_17_10.331_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180826082117",
+      "path": "observations/d10Hygiea_2018-08-26T08_21_17.749_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_21_17.749_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180826082117",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/17"
+          }
+        ]
+      },
+      "sha256": "26bc30d3629e9e4dc2e696f6f62d6b3f99518343483973e0b15d13d096d2ab83",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-08-26T08_21_17.749_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-08-26T08_21_17.749_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908043020",
+      "path": "observations/d10Hygiea_2018-09-08T04_30_20.895_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_30_20.895_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908043020",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/18"
+          }
+        ]
+      },
+      "sha256": "91649b0d439c6c2e41e8a48414ed4abdd55d8f0d821cfaa2e1115214bde6ac2f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T04_30_20.895_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_30_20.895_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908043431",
+      "path": "observations/d10Hygiea_2018-09-08T04_34_31.128_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_34_31.128_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908043431",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/19"
+          }
+        ]
+      },
+      "sha256": "e4fdc3c7881ab25e2da692957999f780a824f4859d1b3c2c70609dc50dd40351",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T04_34_31.128_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_34_31.128_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908043841",
+      "path": "observations/d10Hygiea_2018-09-08T04_38_41.141_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_38_41.141_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908043841",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "5677a73d6ea9f0629f231e64bafebde166f5024f7c34538239aa66f95d3e63ae",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T04_38_41.141_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_38_41.141_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908044251",
+      "path": "observations/d10Hygiea_2018-09-08T04_42_51.325_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_42_51.325_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908044251",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/21"
+          }
+        ]
+      },
+      "sha256": "5e21cd8867b4590fd700e1c09deb37c95f0f4bb25352e47d82a731255e75e3e2",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T04_42_51.325_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_42_51.325_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908044659",
+      "path": "observations/d10Hygiea_2018-09-08T04_46_59.796_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_46_59.796_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908044659",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/22"
+          }
+        ]
+      },
+      "sha256": "939447c63626b9d07ed6e48bc25e81825ad36e1695fe32522408b2adfe1c051e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T04_46_59.796_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T04_46_59.796_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908061703",
+      "path": "observations/d10Hygiea_2018-09-08T06_17_03.473_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_17_03.473_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908061703",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/23"
+          }
+        ]
+      },
+      "sha256": "4d9f1e2aac2a9cbb744d4e6577a85944aadc18bad3f1ba718fb49abe3ada4372",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T06_17_03.473_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_17_03.473_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908062114",
+      "path": "observations/d10Hygiea_2018-09-08T06_21_14.093_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_21_14.093_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908062114",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/24"
+          }
+        ]
+      },
+      "sha256": "16a4181b7a6ce7f7db0fef9f64d2a77f8d6b133841a5c31efbc140f941f6c709",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T06_21_14.093_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_21_14.093_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908062523",
+      "path": "observations/d10Hygiea_2018-09-08T06_25_23.700_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_25_23.700_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908062523",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/25"
+          }
+        ]
+      },
+      "sha256": "67052f4347ecc992241278506b9bd3334ce02958f9c08d55f3ef70054fce9147",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T06_25_23.700_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_25_23.700_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908062933",
+      "path": "observations/d10Hygiea_2018-09-08T06_29_33.230_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_29_33.230_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908062933",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/26"
+          }
+        ]
+      },
+      "sha256": "081804cc6effa95330a171e670e2b1379163c21e774dece67212d3acedacf6af",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T06_29_33.230_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_29_33.230_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180908063342",
+      "path": "observations/d10Hygiea_2018-09-08T06_33_42.846_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_33_42.846_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180908063342",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/27"
+          }
+        ]
+      },
+      "sha256": "ff677be49656b42518ae13b48d9cff8e28a18ebce4b2b79d5efb45b6ea0efd10",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-08T06_33_42.846_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-08T06_33_42.846_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180911045122",
+      "path": "observations/d10Hygiea_2018-09-11T04_51_22.236_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T04_51_22.236_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180911045122",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/28"
+          }
+        ]
+      },
+      "sha256": "0aff3c93b781a4514209c61e6334b980ce987aed90d1e6755864cab09922b7cb",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-11T04_51_22.236_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T04_51_22.236_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180911045531",
+      "path": "observations/d10Hygiea_2018-09-11T04_55_31.644_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T04_55_31.644_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180911045531",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/29"
+          }
+        ]
+      },
+      "sha256": "0e82e56b9b5f454f06487e11af754954562942d62e9a604fc374aaa0fbf1e81a",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-11T04_55_31.644_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T04_55_31.644_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180911045942",
+      "path": "observations/d10Hygiea_2018-09-11T04_59_42.872_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T04_59_42.872_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180911045942",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/30"
+          }
+        ]
+      },
+      "sha256": "29f565874d52888b5a272ede2152e80f5460d949ceb2e5a526e25b46657bdda7",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-11T04_59_42.872_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T04_59_42.872_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180911050352",
+      "path": "observations/d10Hygiea_2018-09-11T05_03_52.832_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T05_03_52.832_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180911050352",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/31"
+          }
+        ]
+      },
+      "sha256": "1564433bca4cbf34bc9d7685ca3e868b6bb7c87bf3b861b4b0613612505795da",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-11T05_03_52.832_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T05_03_52.832_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-sphere-20180911050803",
+      "path": "observations/d10Hygiea_2018-09-11T05_08_03.058_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T05_08_03.058_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-sphere-20180911050803",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/32"
+          }
+        ]
+      },
+      "sha256": "eef8bb661725a506c6f68f5348eca09a49417dd797dee206d0b278f3b2819e18",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d10Hygiea_2018-09-11T05_08_03.058_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/10Hygiea/Deconv/d10Hygiea_2018-09-11T05_08_03.058_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "hygiea-adam-shape",
+      "path": "shape/10_Hygiea_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/10_Hygiea_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hygiea-hygiea-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/hygiea/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/33"
+          }
+        ]
+      },
+      "sha256": "cab2ffa4c9bd0b58a91d934a31c7629035f9268b17325932c36565555fe92e9d",
+      "bytes": 94142,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/10_Hygiea_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/10_Hygiea_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -349,8 +2522,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0314f0012daf89e5fa90b1b2e6a8ab2c6e26ba40f5c04e667a0e6fda068afe45",
-      "bytes": 8297,
+      "sha256": "98ae52c771ec892439fc043b933b7dd1a975f5058dc8ef8673a11b4e320a2815",
+      "bytes": 9494,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -453,6 +2626,80 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "zimpol",
+      "label": "SPHERE photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "zimpol"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "hygiea-sphere-20180825054503",
+        "hygiea-sphere-20180825054913",
+        "hygiea-sphere-20180825055324",
+        "hygiea-sphere-20180825055734",
+        "hygiea-sphere-20180825060144",
+        "hygiea-sphere-20180826052448",
+        "hygiea-sphere-20180826052858",
+        "hygiea-sphere-20180826053308",
+        "hygiea-sphere-20180826053718",
+        "hygiea-sphere-20180826054128",
+        "hygiea-sphere-20180826080438",
+        "hygiea-sphere-20180826080849",
+        "hygiea-sphere-20180826081300",
+        "hygiea-sphere-20180826081710",
+        "hygiea-sphere-20180826082117",
+        "hygiea-sphere-20180908043020",
+        "hygiea-sphere-20180908043431",
+        "hygiea-sphere-20180908043841",
+        "hygiea-sphere-20180908044251",
+        "hygiea-sphere-20180908044659",
+        "hygiea-sphere-20180908061703",
+        "hygiea-sphere-20180908062114",
+        "hygiea-sphere-20180908062523",
+        "hygiea-sphere-20180908062933",
+        "hygiea-sphere-20180908063342",
+        "hygiea-sphere-20180911045122",
+        "hygiea-sphere-20180911045531",
+        "hygiea-sphere-20180911045942",
+        "hygiea-sphere-20180911050352",
+        "hygiea-sphere-20180911050803",
+        "hygiea-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/hygiea/hygiea-zimpol-thumbnail.webp",
+          "bytes": 2118,
+          "sha256": "d1e9c9c56a09b19a989b7a7576a57181cd286ae007342d302e4d3055200b21cf",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/hygiea/hygiea-zimpol-surface@2x.webp",
+          "bytes": 221018,
+          "sha256": "d2a42a1f9dd67f010efdad7f046db6682f28d2703b94a2c450fbfcfd5885e3fe",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "hygiea-adam-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -504,6 +2751,31 @@
       ]
     },
     {
+      "id": "preview:zimpol",
+      "label": "SPHERE photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "zimpol"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/zimpol.webp",
+          "bytes": 9312,
+          "sha256": "fd508038092cb3d978790ae8db92eb83fd209358f4d17a7ca734085dd264a484",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -535,11 +2807,11 @@
   },
   "lastPreparation": {
     "objectId": "hygiea",
-    "materialSha256": "33c563fabc5ff67103c76ef1fb867a6b7825a8cc9f6deeb54e3f7125f0aecf15",
+    "materialSha256": "e24e63e0df33afd1bb0cee9c8cd1c3663e31a7d5f3b31a00ebc3db5be66ebd7e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "6da43d2bc809ef7f02d0fedaf251d7fac4b86d4a0bcc0c7242ccf7ebc87bff36"
+      "bindingsSha256": "90307523da245d86893eac4c7b87f584c730724bfc08d7bc23cf5ec3e1455f22"
     }
   }
 }

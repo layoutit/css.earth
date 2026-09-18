@@ -436,8 +436,8 @@
     {
       "id": "callisto-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 3939,
-      "expectedSha256": "7182c63af34220e041f4dbff51565bc6ebe41692bc64a2f8fdd25e6c2e8568bf",
+      "expectedBytes": 3904,
+      "expectedSha256": "315c22121d4fb821057cd4cd03836daa69170765a614632378c30866da2a7b27",
       "origin": "Repository-authored Callisto raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -455,8 +455,8 @@
     {
       "id": "callisto-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1609,
-      "expectedSha256": "865cad41fc185912bad82bc7a63a9f56e609aa3229d366d83eae2d7a7d5c4cf7",
+      "expectedBytes": 1615,
+      "expectedSha256": "9ab8193a20b0857c70be3dd9d10a3c023f0499f7fb16be773201756a8f6c2f95",
       "origin": "Repository-authored Callisto geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -549,8 +549,8 @@
     {
       "id": "callisto-object-content",
       "path": "content/object.json",
-      "expectedBytes": 11055,
-      "expectedSha256": "7d4efccc31cb9cb2e1925bfb774948735be0fd3e3a8b520304abaacecd539719",
+      "expectedBytes": 11073,
+      "expectedSha256": "1610ab2dbb1d320847a5c1d152d7c51eb41174cc3e398f70e986f46a2bacc839",
       "origin": "Repository-authored Callisto object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

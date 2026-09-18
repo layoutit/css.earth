@@ -1,0 +1,42 @@
+{
+  "id": "source-r-doradus-r-doradus-observational-measurements",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "R Doradus · r-doradus observational measurements",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1038/s41586-024-07836-9"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41586-024-07836-9",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/r-doradus/source/manifest.json",
+      "revision": "71348fe882075b91e3ea041e52ff94e4f4cbc01c",
+      "sha256": "97462971b4a1f198cea164983343c2e29bd4611758f45d09b2366a77f0ee02e6",
+      "locator": "/inputs/3"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+      "scope": "The r-doradus observational measurements input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

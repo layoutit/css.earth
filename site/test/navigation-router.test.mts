@@ -120,8 +120,10 @@ function harness({ prepare = async () => ({}), focus, centerTarget, systemTarget
     if (worldFrames?.[id]) {
       const frame = worldFrames[id], cameraListeners = new Set<ObjectWorldNavigationListener>();
       const optics = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null };
+      // The camera's own rotation is a proper rotation; the frame's presentationToReference is
+      // a reflection (CSS 3D space is left-handed) and must not be reused as the camera basis.
       let world = options.initialWorldCamera ?? worldCameraFromCenteredPresentation({
-        rotation: frame.presentationToReference, distanceUnits: frame.bodyRadiusM * 10,
+        rotation: identityRotation, distanceUnits: frame.bodyRadiusM * 10,
       }, frame, optics);
       typedMount.navigation = {
         frame, capture: () => world, optics: () => optics, apply(next) { world = next; },
@@ -772,8 +774,11 @@ test('a first selection frames the object system and changes its card, then the 
 test('zooming out after first-click system framing restores the overview at the same camera pose', async () => {
   const au = 149597870700;
   const rotation = identityRotation;
+  // The map between CSS presentation directions and reference directions is a reflection
+  // (fix/world-handedness, #284): a determinant-1 rotation is refused here.
+  const reflection = [1, 0, 0, 0, -1, 0, 0, 0, 1] as const;
   const frame = (originM: readonly [number, number, number], bodyRadiusM: number) => ({ originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1,
-    presentationToReference: rotation, metersPerUnit: 1 });
+    presentationToReference: reflection, metersPerUnit: 1 });
   const worldFrames = { mercury: frame([500, 0, 0], 1), venus: frame([1000, 0, 0], 1), sun: frame([0, 0, 0], 10) };
   const camera = (distanceUnits: number) => worldCameraFromCenteredPresentation({ rotation, distanceUnits },
     worldFrames.venus, { focalPixels: 1000, principalOffsetPixels: [0, 0] });

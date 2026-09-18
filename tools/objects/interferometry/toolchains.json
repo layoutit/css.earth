@@ -138,10 +138,28 @@
         "runtime": "openmp-20.1.8.src.tar.xz",
         "runtimeCmake": "cmake-20.1.8.src.tar.xz",
         "guard": "#if defined (_OPENMP) && !defined( __APPLE__)",
-        "files": ["hdrl/hdrl_utils.h", "hdrl/catalogue/hdrl_cat_def.h", "matisse/mat_apply_staticcalib.c", "matisse/mat_ext_beams_lib.c", "matisse/mat_shift.c"],
+        "files": [
+          "hdrl/hdrl_utils.h",
+          "hdrl/catalogue/hdrl_cat_def.h",
+          "matisse/mat_apply_staticcalib.c",
+          "matisse/mat_ext_beams_lib.c",
+          "matisse/mat_shift.c"
+        ],
         "threads": 4
       },
       "executable": "pipeline/bin/esorex"
+    },
+    "casa": {
+      "purpose": "Calibration and imaging of radio-interferometric visibilities (NRAO CASA), used to restore an ALMA measurement set from its raw ASDM and the pipeline's own calibration tables.",
+      "license": "casatools and casatasks: LGPL-2.1 or later (NRAO). Not redistributed here; installed from the pinned wheels.",
+      "build": "python-venv",
+      "python": "python3.12",
+      "requirements": [
+        "casatools==6.7.6.14",
+        "casatasks==6.7.6.14"
+      ],
+      "executable": "venv/bin/python",
+      "note": "casatasks carries the CASA tasks used here (importasdm, flagmanager, applycal, split, tclean). The ALMA pipeline package (hifa_*) is not installed and is not needed: the calibration the pipeline applied is replayed from the calapply record shipped beside the data."
     }
   }
 }

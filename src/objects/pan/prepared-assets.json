@@ -1,0 +1,16 @@
+{
+  "schema": "csspan-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 743278,
+      "sha256": "85b8c61c636de009fb267b4a66ffe92a752394ef004280c913afd6bbb8465214"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 611706,
+      "sha256": "a91282d04931d4aa2298810759a423950166e7d0121ce5320f4309f4b6a1a8a9"
+    }
+  ]
+}

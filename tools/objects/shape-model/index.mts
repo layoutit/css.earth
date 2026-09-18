@@ -44,28 +44,27 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const sourceDirectory = resolve(objectDirectory, 'source'), publicBase = `/scenes/${id}/`;
   const lenses = parseShapeContent(sources.get('content')?.value).lenses.controls;
   const declaredLenses = descriptor.recipe.surfaces.flatMap(surface => surface.lenses);
-  if (lenses.length > 1 || lenses.length !== declaredLenses.length ||
-      lenses.some(lens => lens.id !== declaredLenses[0].id || lens.thumbnail !== `${lens.id}-thumbnail.webp`)) {
-    throw new TypeError('A shape model exposes its one uniform surface through the authored lens contract.');
+  if (!lenses.length || lenses.map(lens => lens.id).join() !== declaredLenses.map(lens => lens.id).join() ||
+      lenses.some(lens => lens.thumbnail !== `${lens.id}-thumbnail.webp`)) {
+    throw new TypeError('A shape model exposes each authored lens surface through the authored lens contract.');
   }
-  const lens = lenses[0];
+  const defaultLens = requireString(requireRecord(requireRecord(sources.get('content')?.value).lenses).defaultLens);
+  if (!lenses.some(lens => lens.id === defaultLens)) throw new TypeError(`Shape model default lens ${defaultLens} is not authored.`);
   const source = await createSourceManifest({ planetId: id, planetName: config.displayName, sourceRoot: sourceDirectory });
   await source.verify();
   await Promise.all([mkdir(outputDirectory, { recursive: true }), mkdir(publicDirectory, { recursive: true })]);
-  const modelRasters = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensId: lens?.id,
+  const modelLenses = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensIds: lenses.map(lens => lens.id),
     readSource: async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); } });
-  const {map,source:modelSource}=modelRasters, textures:Record<string,string>=modelRasters.textures;
-  if (lens) {
-    await writeJson(outputDirectory, 'assets', { surfaces: { [lens.id]: {
-      url: textures.surface, url2x: textures.surface, polesUrl: textures.poles, polesUrl2x: textures.poles,
-    } } });
+  await writeJson(outputDirectory, 'assets', { surfaces: Object.fromEntries(modelLenses.map(({ id, textures }) => [id, {
+    url: textures.surface, url2x: textures.surface, polesUrl: textures.poles, polesUrl2x: textures.poles,
+  }])) });
+  await writeJson(outputDirectory, 'surfaces', { objectId: id, surfaces: lenses.map((lens, index) => {
     const input = source.manifest.inputs.find(input => input.id === lens.source.id);
     if(!input)throw new TypeError(`Source manifest lacks shape texture ${lens.source.id}`);
-    await writeJson(outputDirectory, 'surfaces', { objectId: id, surfaces: [{ id: lens.id, map,
-      attribution: { label: input.credit, url: lens.source.url ?? input.origin },
-    }] });
-  }
-  textures.lighting = await prepareSphereLighting({ publicDirectory, publicBase });
+    return { id: lens.id, map: modelLenses[index]!.map, attribution: { label: input.credit, url: lens.source.url ?? input.origin } };
+  }) });
+  const initial = modelLenses.find(lens => lens.id === defaultLens)!;
+  const lightingUrl = await prepareSphereLighting({ publicDirectory, publicBase });
   const ringTexture = config.ring ? await prepareRingRaster({ config, publicDirectory, publicBase }) : null;
   const sky = preparePlanetCubicSky({ objectId: id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const cameraOptions = { bodyId: id, displayName: config.displayName };
@@ -81,7 +80,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     bodyRadiusKilometers: axes[0], defaultZoom: .75, geometryScale: 1, starfield: sky });
   const bodyLeaves = prepareSolidBodySurface({ id, radius: config.displayRadius,
     secondaryRadius: config.displayRadius * axes[1] / axes[0], polarRadius: config.displayRadius * axes[2] / axes[0],
-    mapUrl: textures.surface, polesUrl: textures.poles, latitudeSegments, longitudeSegments,
+    mapUrl: initial.textures.surface, polesUrl: initial.textures.poles, latitudeSegments, longitudeSegments,
     sourceWidth: width, sourceHeight: height, poleTileSize: poleSize, seamOverlap: config.mesh.seamOverlap });
   const ringFaces:Parameters<typeof prepareCoplanarColorRaster>[0]["faces"][number][] = [];
   const ringConfig=config.ring;
@@ -102,8 +101,13 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
       `background-size:${ringRaster.width}px ${ringRaster.height}px;background-repeat:no-repeat` })) : [];
   if (ringRaster) await writeFile(resolve(publicDirectory, 'ring.webp'), ringRaster.bytes);
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
-  const entries = [...Object.entries(textures).map(([key, url]) => ({ key, url, pool: 'mounted' })),
+  // The default lens mounts with the body; another lens decodes only when it is selected.
+  const entries = [...modelLenses.flatMap(lens => (['surface', 'poles'] as const).map(kind =>
+      ({ key: `${kind}:${lens.id}`, url: lens.textures[kind], pool: lens.id === defaultLens ? 'mounted' : 'lenses' }))),
+    { key: 'lighting', url: lightingUrl, pool: 'mounted' },
     ...(ringTexture ? [{ key: 'ring', url: ringTexture.url, pool: 'mounted' }] : [])];
+  const pools = [preparedResourcePool('mounted', entries), ...(modelLenses.length > 1
+    ? [preparedResourcePool('lenses', entries, { retention: 'selection', decoding: 'sync' })] : [])];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...bodyLeaves, ...ringLeaves].map(leaf => leaf.style)) });
   const camera = b.mesh(`polycss-camera shape-model-camera ${id}-camera planet-render-root`), root = b.mesh('polycss-scene');
   const system = b.mesh('shape-model-system', `transform:${scene.systemTransform}`), body = b.mesh('shape-model-body');
@@ -129,13 +133,13 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   function requiredMaterialRoot(){if(!materialRoot)throw new TypeError("Shape silhouette lacks its material root.");return materialRoot;}
   const definition = requireObjectRuntimeDefinition(JSON.parse(JSON.stringify({ schema: 'cssearth-object-runtime@4', id, camera: { ...scene.camera, ...materialReference, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
     controls: preparedContent.controls, tree,
-    assets: { entries, pools: [preparedResourcePool('mounted', entries)], startup: entries.map(entry => entry.key) },
-    variants: [{ when: lens ? { lensId: lens.id } : {}, required: ['surface', 'poles', 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [
-      { kind: 'texture', target: index(body), name: '--shape-surface', resource: 'surface', quoted: true },
-      { kind: 'texture', target: index(body), name: '--shape-poles', resource: 'poles', quoted: true },
+    assets: { entries, pools, startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
+    variants: lenses.map(lens => ({ when: { lensId: lens.id }, required: [`surface:${lens.id}`, `poles:${lens.id}`, 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [
+      { kind: 'texture', target: index(body), name: '--shape-surface', resource: `surface:${lens.id}`, quoted: true },
+      { kind: 'texture', target: index(body), name: '--shape-poles', resource: `poles:${lens.id}`, quoted: true },
       ...(material ? [{ kind: 'texture', target: index(material), name: '--shape-lighting', resource: 'lighting', quoted: true }] : []),
       ...(ring ? [{ kind: 'texture', target: index(ring), name: '--shape-ring', resource: 'ring', quoted: true }] : []),
-    ], materials: shapeLighting ? [shapeLighting.selection] : [] }],
+    ], materials: shapeLighting ? [shapeLighting.selection] : [] })),
     materials: shapeLighting ? [shapeLighting.track(index(shapeLighting.leaf))] : [], animations: [],
     viewBindings: shapeLighting ? [shapeLighting.binding(index(shapeLighting.counter))] :
       [{ kind: 'silhouette-fit', target: index(requiredMaterialRoot()), minimumRadius: 1.5, unitScale: 2 / scene.camera.logicalBodyDiameter }],
@@ -146,7 +150,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     ...(ringRaster ? { ringCoverage: { sourceFaceCount: sourceRingLeaves.length, preparedTileCount: ringLeaves.length,
       width: ringRaster.width, height: ringRaster.height, sourceFaces: ringFaces } } : {}),
     counts: { bodyQuads: bodyLeaves.length, ringQuads: ringLeaves.length, lightingQuads: 1, totalQuads: bodyLeaves.length + ringLeaves.length + 1, budget: config.quadBudget },
-    model: { semiAxesKm: axes, ...(config.ring ? { ring: config.ring } : {}), surface: config.surface ? 'published whole-disc colour and V geometric albedo, uniform; unresolved surface, no observed terrain or map' : 'shared neutral gray display convention; unresolved surface, no observed terrain', modelSource, phase: 'arbitrary-display-phase', lighting: sphereLighting ? 'prepared full-phase curvature lighting fitted to the projected sphere; no directional Sun shadows' : 'prepared illustrative full-phase curvature fitted to the projected shape; no directional Sun shadows' } };
+    model: { semiAxesKm: axes, ...(config.ring ? { ring: config.ring } : {}), surfaces: Object.fromEntries(modelLenses.map(lens => [lens.id, lens.source])), phase: 'arbitrary-display-phase', lighting: sphereLighting ? 'prepared full-phase curvature lighting fitted to the projected sphere; no directional Sun shadows' : 'prepared illustrative full-phase curvature fitted to the projected shape; no directional Sun shadows' } };
   await Promise.all([writeJson(outputDirectory, 'scene', geometry), writeJson(outputDirectory, 'runtime', definition),
     writeJson(outputDirectory, 'sky', scene.starfield), writeJson(outputDirectory, 'sun', sun)]);
   return { scene: geometry, definition, content: preparedContent.content };

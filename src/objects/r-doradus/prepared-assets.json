@@ -1,0 +1,16 @@
+{
+  "schema": "cssr-doradus-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 355900,
+      "sha256": "875575fcd4227df69873a03d06f5a17aff11d2d5fc6d212300fae12586a07f28"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 344227,
+      "sha256": "d264945e92f698f7d9b43e06067913b1ab5dbef928b42d98ee4b9ce400a7acae"
+    }
+  ]
+}

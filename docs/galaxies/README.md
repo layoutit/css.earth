@@ -27,7 +27,7 @@ The [source recipe](../../labs/nebula/models/image-candidates.json) retains the 
 | Point stars | [Bonanos et al. (2009)](https://arxiv.org/abs/0905.1328), [CDS J/AJ/138/1003](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | The retained 943-star sample supplies measured sky positions and photometry. Reconstruction assigns deterministic depths using one density/sky reference. All three lenses use identical positions; apparent point size/opacity comes from the magnitude display model. |
 | Surface color | The three registered observations above | Native star removal, then color sampling onto the fixed density. Each lens preserves the same 144 quads and every alpha byte. Uncovered density keeps neutral color. |
 
-The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image placement, saturation, detail, brightness and gamma. The [app settings](../../src/objects/lmc/README.md#saved-appearance) retain cloud selection, axis brightness, cutoff and stellar exposure/size. Switching lenses changes the material while retaining the cloud, stars and camera.
+The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image placement, saturation, detail, brightness and gamma. The [app settings](../../src/objects/lmc/README.md#evidence) retain cloud selection, axis brightness, cutoff and stellar exposure/size. Switching lenses changes the material while retaining the cloud, stars and camera.
 
 ## Extragalactic datasets
 

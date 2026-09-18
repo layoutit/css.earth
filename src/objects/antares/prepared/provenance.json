@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e06354f39e3d57fb2d75dfc49131f1039b62780c443944ec77abf3570dc20949"
+    "sha256": "7f275f2f7b8ee1d2e2bdd229ee2982c7b89e2c29c7b9e0ed4d6e229d9305e6e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "f0843a933fffe64e5c872983e24d3c8c9faddcf596b2786ce5293963bf0174af"
+    "bindingsSha256": "753723bde0719715632655f832ab798340712f34d1a32131c47dd40430cfe8cb"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "356a2bf146adf64901b696e357d1f76e192701b26bfe8eaed9390f6aa25b42a3",
+      "sha256": "658a8387ea04f009f759a361066b199b57dc3863fc14b59f208b053284d308a5",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/antares/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -86,7 +82,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "15c4654f25e9f63200e1b5b90f0b670fddb917079099cdc8363de0e6cb3e0b5f",
+      "sha256": "d036c0c5af51c73be6e8f5645900bd00df2bc245c019d71040ec3d44811cc479",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -145,8 +141,8 @@
               "label": "Shape",
               "qualification": "A sphere of the published angular diameter; the neutral gray is a display convention, not a measured colour or brightness.",
               "thumbnail": "antares-lens-shape.webp",
-              "surface": "antares-surface-shape.webp",
-              "poles": "antares-poles-shape.webp",
+              "surface": "antares-surface-shape@2x.webp",
+              "poles": "antares-poles-shape@2x.webp",
               "source": {
                 "id": "antares-observational-measurements",
                 "path": "../manifest.json",
@@ -238,8 +234,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "15c4654f25e9f63200e1b5b90f0b670fddb917079099cdc8363de0e6cb3e0b5f",
-      "bytes": 3873,
+      "sha256": "d036c0c5af51c73be6e8f5645900bd00df2bc245c019d71040ec3d44811cc479",
+      "bytes": 3879,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -272,12 +268,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/antares/antares-surface-shape.webp",
-          "bytes": 78,
-          "sha256": "2ec4d1bb2d266fdbb9283cb47781b2b34b4ff694f799a903f01db856ed2b22fc",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/antares/antares-surface-shape@2x.webp",
           "bytes": 178,
           "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
@@ -290,27 +280,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/antares/antares-poles-shape.webp",
-          "bytes": 680,
-          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/antares/antares-poles-shape@2x.webp",
           "bytes": 1340,
           "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/antares/antares-context-shape.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/antares/antares-limb-shape.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -393,11 +365,11 @@
   },
   "lastPreparation": {
     "objectId": "antares",
-    "materialSha256": "b6326954196416c6c0a03237200581a4264daecbba32934f0668f6aafad90496",
+    "materialSha256": "92601e93c467f9e62f3222ce41aac5f0bb0f1e8224e494f853873bf4e892dae5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "f0843a933fffe64e5c872983e24d3c8c9faddcf596b2786ce5293963bf0174af"
+      "bindingsSha256": "753723bde0719715632655f832ab798340712f34d1a32131c47dd40430cfe8cb"
     }
   }
 }

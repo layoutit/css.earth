@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "cb8fc8abda9d644657c465626d32ff04dc68918cc9e08e2bb9edfe02ceb8a2bc"
+    "sha256": "48759183021ef447febc253167684cb8fa411ff652ff8f258c74442f2c759421"
   },
   "properties": {
     "preparation": {
@@ -66,6 +66,11 @@
               "id": "color",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -114,11 +119,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8c2e1a40642238868ac475616d1501b0c91003981c1eb098bfa4a8b336fefc71"
+        "sha256": "7218b16bb1af1e9aae83d8a42291ea8fdc6fc009c85c66eced234b4a43a30da7"
       }
     },
     "catalog": {
-      "illustrationLenses": [],
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "Haumea",
       "classification": "dwarf-planet",
       "color": "#bcbdbf",

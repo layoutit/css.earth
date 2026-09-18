@@ -1,0 +1,37 @@
+{
+  "id": "source-pallas-pallas-sphere-20171028083014",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Pallas · pallas sphere 20171028083014",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-28T08_30_14.741_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/pallas/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "d219327998c0c545636a14029d23d5c050b885729133b3225648edead51bb4a4",
+      "locator": "/inputs/24"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The pallas sphere 20171028083014 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

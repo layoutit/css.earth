@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.27",
+  "document": {
+    "input": "europa-52-survey-research",
+    "object": 1106,
+    "width": 1598,
+    "height": 2466,
+    "sha256": "c8cb507a05307d9a86b1909dfc2da0419e909cd44fb51685b7681fcfed8247ff"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2018-07-08T06:15:40",
+      "frame": "zimpol-20180708-061540",
+      "band": 0
+    },
+    {
+      "label": "2018-07-08T07:17:12",
+      "frame": "zimpol-20180708-071712",
+      "band": 0
+    },
+    {
+      "label": "2018-07-08T08:33:04",
+      "frame": "zimpol-20180708-083304",
+      "band": 0
+    },
+    {
+      "label": "2018-07-10T02:47:21",
+      "frame": "zimpol-20180710-024721",
+      "band": 0
+    },
+    {
+      "label": "2018-07-13T07:35:42",
+      "frame": "zimpol-20180713-073542",
+      "band": 0
+    },
+    {
+      "label": "2018-08-10T05:07:42",
+      "frame": "zimpol-20180810-050742",
+      "band": 0
+    },
+    {
+      "label": "2019-07-30T07:21:44",
+      "frame": null,
+      "band": 1
+    },
+    {
+      "label": "2019-07-30T09:37:15",
+      "frame": null,
+      "band": 1
+    },
+    {
+      "label": "2019-08-05T06:52:39",
+      "frame": null,
+      "band": 1
+    },
+    {
+      "label": "2019-08-05T07:30:28",
+      "frame": null,
+      "band": 1
+    },
+    {
+      "label": "2019-08-05T08:22:05",
+      "frame": null,
+      "band": 1
+    },
+    {
+      "label": "2019-08-06T08:57:18",
+      "frame": null,
+      "band": 1
+    }
+  ]
+}

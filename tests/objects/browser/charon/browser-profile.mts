@@ -5,10 +5,10 @@ const objectControls = await readPreparedFixture("charon", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "charon", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/charon/charon-normal.webp", two: "/scenes/charon/charon-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/charon/charon-poles-normal.webp", two: "/scenes/charon/charon-poles-normal@2x.webp" }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/charon/charon-normal@2x.webp",
+      "/scenes/charon/charon-poles-normal@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "enhanced-color",

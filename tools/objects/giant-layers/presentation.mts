@@ -2,7 +2,7 @@ import {parse} from '../material-composition/data-schema.mts';
 import {layeredPresentationRecipe, type LayeredPresentationRecipe} from './presentation-contract.mts';
 import {bandedGeometryRecipe} from './geometry-contract.mts';
 import type {prepareBandedEllipsoid} from './geometry.mts';
-import {parseObservedSurfaceRecipe} from './observations.mts';
+import {parseObservedSurfaceRecipe} from '../observed-surfaces/index.mts';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
 import type {PreparedNode} from '../../prepared-node-tree.mts';
 import type {MaterialSourceTrack} from '../../prepare-materials.mts';

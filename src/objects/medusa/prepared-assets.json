@@ -1,0 +1,16 @@
+{
+  "schema": "cssmedusa-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750977,
+      "sha256": "8017a21b9b76ea6c1f829ffba7edcff0eea3ef18d16ef13f68665ad7c4ccf542"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 621078,
+      "sha256": "ba44478ea9604ac85465ea91b4912838eb185feee85320e26505352e969256d7"
+    }
+  ]
+}

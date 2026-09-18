@@ -10,7 +10,9 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/24_Themis_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
-| SPHERE photograph | [30 deconvolved ZIMPOL frames](https://observations.lam.fr/astero/Data/24Themis/Deconv/) |
+| SPHERE photograph | [30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 5 nights from 2018-12-27 to 2019-01-17](https://observations.lam.fr/astero/Data/24Themis/Deconv/) on the released reconstruction the Shape view uses |
+| Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/24_Themis_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
+| Photograph registration | [Vernazza et al. (2021), Figure B.19](https://doi.org/10.1051/0004-6361/202141781) |
 
 Themis is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its published reconstruction combines resolved telescope images with an ADAM starting shape.
 
@@ -30,7 +32,22 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
-### The photograph
+### SPHERE photograph
+
+<!-- published-comparison:begin -->
+Measured by `tools/objects/published-comparison.mts` against [Figure B.19](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
+
+| Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2018-12-27 06:43:58 | 0.960 | 0.958 | 0.966 | 0° | -3.5°, -0.5° | 109.5° against 107.6° |
+| 2018-12-29 04:24:23 | 0.961 | 0.965 | 0.965 | 0° | -2°, 1.5° | 109.5° against 107.5° |
+| 2019-01-09 05:14:59 | 0.961 | 0.964 | 0.966 | 10° | -2°, -2° | 109.2° against 107.2° |
+| 2019-01-09 06:14:37 | 0.960 | 0.966 | 0.969 | 0° | -1.5°, 0° | 109.2° against 107.2° |
+| 2019-01-13 06:07:03 | 0.957 | 0.961 | 0.965 | -10° | -4.5°, -2° | 109.1° against 107.1° |
+| 2019-01-17 03:05:32 | 0.961 | 0.965 | 0.968 | -10° | -2°, -2.5° | 109.0° against 107.0° |
+
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 30 native frames after the centre fit is 1.798 px at our phase, the lowest of a ±30° sweep.
+<!-- published-comparison:end -->
 
 Each frame's camera is computed, never authored: the pinned rotation record gives the pole and the absolute rotational phase, pinned JPL Horizons tables give the Paranal sighting and the direction to the Sun at the exposure midpoint, each frame's own header gives its plate scale and exposure, and the disc centre is fitted to the limb of the lens mesh. Every camera field in the recipe is reproduced by `node tools/objects/observer-cameras.mts themis`, which refuses a recipe that has drifted from those inputs.
 
@@ -45,10 +62,12 @@ Measured by the registration stage when the body was last prepared; the numbers 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `zimpol` | 30 | 30 | 3.94° | 3.58° | 1.65° | its other 30 frames | 2 of 30 | — | 11 of 30, -8.25° | — | ×1.15 | registered |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+`zimpol` ships on its paper’s comparison, [Figure B.19](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
 
-The outline is the measurement that places this body: all 30 frames project an outline elongated enough to define a position angle, between 1.227 and 1.328, and their predicted limb position angles match the photographed contour with 1.65° left after removing the 3.58° floor that exposures minutes apart set. The two sweeps that depend on surface markings do not place it and are not evidence either way: the cross-frame test finds only 2 of 30 frames decisive, and the relief sweep's 11 decisive frames disagree among themselves, from −9.5° to +9.5°, so their −8.25° median is a location rather than a measurement and reaches no verdict. That is what a nearly featureless C-type on a light-curve shape looks like to those tests.
+Of the registration stage's measurements, the outline is the one that reaches a verdict: all 30 frames project an outline elongated enough to define a position angle, between 1.227 and 1.328, and their predicted limb position angles match the photographed contour with 1.65° left after removing the 3.58° floor that exposures minutes apart set. The two sweeps that depend on surface markings do not place it and are not evidence either way: the cross-frame test finds only 2 of 30 frames decisive, and the relief sweep's 11 decisive frames disagree among themselves, from −9.5° to +9.5°, so their −8.25° median is a location rather than a measurement and reaches no verdict. That is what a nearly featureless C-type on a light-curve shape looks like to those tests.
 
 ## Known problems
 

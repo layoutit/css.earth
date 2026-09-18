@@ -6,7 +6,7 @@ import {normalizedPresentationRecipe} from './normalized-presentation-contract.m
 import {layeredPresentationRecipe} from './presentation-contract.mts';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
 import {parsePhotometricDiscRecipe} from './photometric-disc.mts';
-import {parseObservedSurfaceRecipe} from './observations.mts';
+import {parseObservedSurfaceRecipe} from '../observed-surfaces/index.mts';
 import {parseObservedPolarRecipe} from '../giant-observations/index.mts';
 import {shape,text,number,optional,array} from '../terrestrial-layers/source-records.mts';
 import {isRecord,requireRecord,requireFiniteNumber} from '../../source-values.mts';
@@ -20,7 +20,7 @@ import {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directi
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
 import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
 import {prepareGiantLayers,parseRadialLayerRecipe,rasterAnnularField} from './index.mts';
-import {prepareObservedSurfaces} from './observations.mts';
+import {prepareObservedSurfaces} from '../observed-surfaces/index.mts';
 import {prepareEllipsoidMaterials} from './materials.mts';
 import {prepareBandedEllipsoid} from './geometry.mts';
 import {prepareLayeredSurfacePresentation} from './presentation.mts';

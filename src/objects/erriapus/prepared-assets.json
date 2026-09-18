@@ -1,0 +1,16 @@
+{
+  "schema": "csserriapus-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 459670,
+      "sha256": "55418b39baa0ce323335f0b93b6a0073f1d2e73669936c3669ad605ea66de1bb"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 371171,
+      "sha256": "4f7e4bd6e5f50ded62e406ee9af8789643b89f5b05f81ec0c8e9c4ece7757fb6"
+    }
+  ]
+}

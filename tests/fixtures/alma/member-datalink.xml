@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VOTABLE xmlns="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.4">
+  <RESOURCE type="results">
+    <INFO name="standardID" value="ivo://ivoa.net/std/DataLink#links-1.1" />
+    <TABLE>
+      <FIELD name="ID" datatype="char" arraysize="*" ucd="meta.id;meta.main" />
+      <FIELD name="access_url" datatype="char" arraysize="*" ucd="meta.ref.url" />
+      <FIELD name="service_def" datatype="char" arraysize="*" ucd="meta.ref" />
+      <FIELD name="error_message" datatype="char" arraysize="*" ucd="meta.code.error" />
+      <FIELD name="semantics" datatype="char" arraysize="*" ucd="meta.code" />
+      <FIELD name="local_semantics" datatype="char" arraysize="*" ucd="meta.code">
+        <DESCRIPTION>local tag indicating equivalent meaning or role of this link (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="description" datatype="char" arraysize="*" ucd="meta.note" />
+      <FIELD name="content_type" datatype="char" arraysize="*" ucd="meta.code.mime" />
+      <FIELD name="content_length" datatype="long" ucd="phys.size;meta.file" unit="byte" />
+      <FIELD name="content_qualifier" datatype="char" arraysize="*">
+        <DESCRIPTION>the nature of the thing the link will deliver (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="link_auth" datatype="char" arraysize="*" ucd="meta.code">
+        <DESCRIPTION>link supports authentication (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <FIELD name="link_authorized" datatype="boolean" ucd="meta.code">
+        <DESCRIPTION>the current authenticated identity is authorized (DataLink-1.1)</DESCRIPTION>
+      </FIELD>
+      <DATA>
+        <TABLEDATA>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xaea.README.txt</TD>
+            <TD />
+            <TD />
+            <TD>#documentation</TD>
+            <TD />
+            <TD>Download documentation for ./uid://A001/X35f5/Xaea|README.</TD>
+            <TD>text/plain</TD>
+            <TD>3524</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/2022.1.01071.S_uid___A001_X35f5_Xaea_001_of_001.tar</TD>
+            <TD />
+            <TD />
+            <TD>#this</TD>
+            <TD />
+            <TD>Download dataset of type: null, and class: N/A.</TD>
+            <TD>application/x-tar</TD>
+            <TD>77463712768</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD />
+            <TD>DataLink.2022.1.01071.S_uid___A001_X35f5_Xaea_001_of_001.tar</TD>
+            <TD />
+            <TD>#this</TD>
+            <TD />
+            <TD />
+            <TD>application/x-votable+xml;content=datalink</TD>
+            <TD />
+            <TD />
+            <TD />
+            <TD />
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/2022.1.01071.S_uid___A001_X35f5_Xaea_auxiliary.tar</TD>
+            <TD />
+            <TD />
+            <TD>#auxiliary</TD>
+            <TD />
+            <TD>Download dataset of type: null, and class: N/A.</TD>
+            <TD>application/x-tar</TD>
+            <TD>879136768</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD />
+            <TD>DataLink.2022.1.01071.S_uid___A001_X35f5_Xaea_auxiliary.tar</TD>
+            <TD />
+            <TD>#auxiliary</TD>
+            <TD />
+            <TD />
+            <TD>application/x-votable+xml;content=datalink</TD>
+            <TD />
+            <TD />
+            <TD />
+            <TD />
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/2022.1.01071.S_uid___A002_X10a341d_Xcfac.asdm.sdm.tar</TD>
+            <TD />
+            <TD />
+            <TD>#progenitor</TD>
+            <TD />
+            <TD>Download dataset of type: , and class: N/A.</TD>
+            <TD>application/x-tar</TD>
+            <TD>63307551744</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/2022.1.01071.S_uid___A002_X10aa712_X2bb1.asdm.sdm.tar</TD>
+            <TD />
+            <TD />
+            <TD>#progenitor</TD>
+            <TD />
+            <TD>Download dataset of type: , and class: N/A.</TD>
+            <TD>application/x-tar</TD>
+            <TD>63125875712</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/2022.1.01071.S_uid___A002_X10ac6bc_Xfb7e.asdm.sdm.tar</TD>
+            <TD />
+            <TD />
+            <TD>#progenitor</TD>
+            <TD />
+            <TD>Download dataset of type: , and class: N/A.</TD>
+            <TD>application/x-tar</TD>
+            <TD>169034316800</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/2022.1.01071.S_uid___A002_X109bbf3_X2d03.asdm.sdm.tar</TD>
+            <TD />
+            <TD />
+            <TD>#package</TD>
+            <TD />
+            <TD>Download all data associated with uid://A001/X35f5/Xaea.</TD>
+            <TD>application/x-tar</TD>
+            <TD>124815156224</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+          <TR>
+            <TD>uid://A001/X35f5/Xaea</TD>
+            <TD>https://almascience.eso.org/dataPortal/2022.1.01071.S_uid___A002_X109d26e_X88ce.asdm.sdm.tar</TD>
+            <TD />
+            <TD />
+            <TD>#package</TD>
+            <TD />
+            <TD>Download all data associated with uid://A001/X35f5/Xaea.</TD>
+            <TD>application/x-tar</TD>
+            <TD>44045930496</TD>
+            <TD />
+            <TD>false</TD>
+            <TD>true</TD>
+          </TR>
+        </TABLEDATA>
+      </DATA>
+    </TABLE>
+    <INFO name="placeholder" value="ignore" />
+  </RESOURCE>
+  <RESOURCE type="meta" ID="DataLink.2022.1.01071.S_uid___A001_X35f5_Xaea_001_of_001.tar" utype="adhoc:service">
+    <PARAM name="standardID" datatype="char" arraysize="37" value="ivo://ivoa.net/std/DataLink#links-1.0" />
+    <PARAM name="accessURL" datatype="char" arraysize="96" value="https://almascience.eso.org/datalink/sync?ID=2022.1.01071.S_uid___A001_X35f5_Xaea_001_of_001.tar" />
+    <GROUP name="inputParams" />
+  </RESOURCE>
+  <RESOURCE type="meta" ID="DataLink.2022.1.01071.S_uid___A001_X35f5_Xaea_auxiliary.tar" utype="adhoc:service">
+    <PARAM name="standardID" datatype="char" arraysize="37" value="ivo://ivoa.net/std/DataLink#links-1.0" />
+    <PARAM name="accessURL" datatype="char" arraysize="95" value="https://almascience.eso.org/datalink/sync?ID=2022.1.01071.S_uid___A001_X35f5_Xaea_auxiliary.tar" />
+    <GROUP name="inputParams" />
+  </RESOURCE>
+</VOTABLE>

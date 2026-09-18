@@ -37,6 +37,11 @@
       "title": "DAMIT 5913 radial height",
       "detail": "Shape-derived radial height",
       "summary": "Height above or below a 72 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    },
+    "zimpol": {
+      "title": "ZIMPOL deconvolved imaging",
+      "detail": "25 frames, 2018",
+      "summary": "Telescope images of the lit surface, placed by the asteroid’s own measured spin. Grey is photographed light, not colour."
     }
   }
 }

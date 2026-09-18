@@ -1,0 +1,16 @@
+{
+  "schema": "cssbrucia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750976,
+      "sha256": "16a55fe85fd96b94cbab9311d914447a42d6e2480de5d686dead1a5800aff6be"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620960,
+      "sha256": "9d96a60a70b8386336cce711cbbee48bbf497014145507cfef725c2997cfefb5"
+    }
+  ]
+}
