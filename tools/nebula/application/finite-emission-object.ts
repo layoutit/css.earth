@@ -54,7 +54,7 @@ function parseDensityFilter(value: unknown, at: string): CloudDensityFilter {
  * Regenerate `prepared/lenses.json`, its axis atlases and the descriptor from delivered inputs alone.
  * Slice textures are an intermediate: the delivery ships three atlases per lens, as the other nebulae do.
  */
-export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: Pin, ifMissing: boolean) {
+export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: Pin, ifMissing: boolean, allowMissing = false) {
   const inputs = record(await read(root, compactInputs), 'compact inputs');
   const bankId = text(inputs.bankId, 'bank id'), defaultLens = text(inputs.defaultLens, 'default lens');
   const framingRadiusUnits = inputs.framingRadiusUnits;
@@ -64,6 +64,12 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
   // A cached delivery counts only when the installed bank is the one the committed descriptor pins, and
   // every atlas it names is present with the expected bytes. Presence alone would accept a stale bank.
   if (ifMissing && await deliveredBankVerified(directory, installed)) return { id: bankId, status: 'verified' };
+  // Deploy builds may tolerate a bank missing from R2 instead of baking one from scratch here (no source
+  // acquisition service runs at build time): report it unavailable and move on, loudly.
+  if (allowMissing) {
+    console.warn(`Prepared bank unavailable for ${bankId}; not baking a replacement (allow-missing). It will report unavailable.`);
+    return { id: bankId, status: 'unavailable' };
+  }
 
   const starsPayload = parsePreparedLmcStars(await read(root, parsePin(inputs.stars, 'delivered stars')), frame as never);
   const staging = resolve(directory, `.prepared-finite-${process.pid}`);
