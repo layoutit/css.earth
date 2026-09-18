@@ -1,10 +1,43 @@
 import assert from 'node:assert/strict';
+import { execFile } from 'node:child_process';
+import { mkdir, mkdtemp, rename, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { resolve } from 'node:path';
 import test from 'node:test';
+import { promisify } from 'node:util';
 import { DEFAULT_OBJECT_DIRECTORY_LIMIT, PIPELINE_CHANGE_LABEL, evaluateObjectScopeGate,
   objectScopeGate, parseLabelsArgument, touchedObjectDirectories } from './object-scope-gate.mts';
 
+const execFileAsync = promisify(execFile);
+
 function pathsFor(ids: readonly string[]): string[] {
   return ids.map(id => `src/objects/${id}/prepared/runtime.json`);
+}
+
+// a..n: 14 object ids, matching the default limit exactly, so any undercount below the real 12-limit boundary
+// would silently pass instead of failing.
+const FOURTEEN_IDS = 'abcdefghijklmn'.split('');
+
+/** A real, throwaway git repository (git's actual rename detection is the thing under test — an injected
+ * changedPaths fixture in the tests above cannot reproduce it) with one committed file per id under
+ * `src/objects/<id>/file.txt`. */
+async function fixtureGitRepoWithFourteenObjects(): Promise<string> {
+  const root = await mkdtemp(resolve(tmpdir(), 'object-scope-rename-'));
+  await execFileAsync('git', ['init', '-q', '-b', 'main'], { cwd: root });
+  await execFileAsync('git', ['config', 'user.email', 'fixture@example.com'], { cwd: root });
+  await execFileAsync('git', ['config', 'user.name', 'Fixture'], { cwd: root });
+  for (const id of FOURTEEN_IDS) {
+    await mkdir(resolve(root, 'src/objects', id), { recursive: true });
+    await writeFile(resolve(root, 'src/objects', id, 'file.txt'), `content for ${id}\n`.repeat(20));
+  }
+  await execFileAsync('git', ['add', '-A'], { cwd: root });
+  await execFileAsync('git', ['commit', '-q', '-m', 'base: 14 objects'], { cwd: root });
+  return root;
+}
+
+async function commitAll(root: string, message: string): Promise<void> {
+  await execFileAsync('git', ['add', '-A'], { cwd: root });
+  await execFileAsync('git', ['commit', '-q', '-m', message], { cwd: root });
 }
 
 test('touchedObjectDirectories extracts the distinct object ids from src/objects/<id>/ paths', () => {
@@ -74,4 +107,36 @@ test('parseLabelsArgument tolerates a missing argument and rejects a malformed o
   // A label-shaped object with a non-string name is dropped rather than trusted.
   assert.deepEqual(parseLabelsArgument(JSON.stringify([{ name: 42 }, { name: 'pipeline-change' }])), [{ name: 'pipeline-change' }]);
   assert.throws(() => parseLabelsArgument('{}'), /JSON array/);
+});
+
+test('a PR that moves 14 objects entirely out of src/objects/ still counts all 14 (git rename detection)', async t => {
+  const root = await fixtureGitRepoWithFourteenObjects();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(resolve(root, 'archive'), { recursive: true });
+  for (const id of FOURTEEN_IDS) await rename(resolve(root, 'src/objects', id, 'file.txt'), resolve(root, 'archive', `${id}.txt`));
+  await commitAll(root, 'move every object file out of src/objects');
+  const result = await objectScopeGate('HEAD~1', [], { root });
+  assert.equal(result.count, 14);
+  assert.deepEqual(result.touched, FOURTEEN_IDS);
+});
+
+test('a PR that moves files from 14 objects into one still counts all 14 (git rename detection)', async t => {
+  const root = await fixtureGitRepoWithFourteenObjects();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(resolve(root, 'src/objects/a/incoming'), { recursive: true });
+  for (const id of FOURTEEN_IDS) await rename(resolve(root, 'src/objects', id, 'file.txt'), resolve(root, 'src/objects/a/incoming', `${id}.txt`));
+  await commitAll(root, 'consolidate every object file into a');
+  const result = await objectScopeGate('HEAD~1', [], { root });
+  assert.equal(result.count, 14);
+  assert.deepEqual(result.touched, FOURTEEN_IDS);
+});
+
+test('a PR that deletes all 14 objects counts all 14 (baseline, no rename involved)', async t => {
+  const root = await fixtureGitRepoWithFourteenObjects();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  for (const id of FOURTEEN_IDS) await rm(resolve(root, 'src/objects', id), { recursive: true, force: true });
+  await commitAll(root, 'delete every object');
+  const result = await objectScopeGate('HEAD~1', [], { root });
+  assert.equal(result.count, 14);
+  assert.deepEqual(result.touched, FOURTEEN_IDS);
 });

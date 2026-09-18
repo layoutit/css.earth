@@ -7,7 +7,11 @@ import { inventoriedAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN, type Run
 const execFileAsync = promisify(execFile);
 
 async function gitChangedPaths(ref: string, root: string): Promise<string[]> {
-  const { stdout } = await execFileAsync("git", ["diff", "--name-only", `${ref}...HEAD`], { cwd: root, maxBuffer: 1024 * 1024 * 64 });
+  // --no-renames: with rename detection on, `git diff --name-only` reports only a renamed file's new path, which
+  // would let moving files out of an object's directory (or between objects) undercount which objects a PR
+  // touched. See tools/object-scope-gate.mts's gitChangedPaths for the full rationale — this scoping gate needs
+  // the same fix for the same reason.
+  const { stdout } = await execFileAsync("git", ["diff", "--no-renames", "--name-only", `${ref}...HEAD`], { cwd: root, maxBuffer: 1024 * 1024 * 64 });
   return stdout.split("\n").map(line => line.trim()).filter(Boolean);
 }
 

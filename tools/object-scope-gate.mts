@@ -14,7 +14,13 @@ export const DEFAULT_OBJECT_DIRECTORY_LIMIT = 12;
 export const PIPELINE_CHANGE_LABEL = 'pipeline-change';
 
 async function gitChangedPaths(ref: string, root: string): Promise<string[]> {
-  const { stdout } = await execFileAsync('git', ['diff', '--name-only', `${ref}...HEAD`], { cwd: root, maxBuffer: 1024 * 1024 * 64 });
+  // --no-renames: with rename detection on, `git diff --name-only` reports only a renamed file's new path, so
+  // moving every file out of a directory (or from many directories into one) can report zero or one changed
+  // directory instead of every one actually touched. Two paths (old and new) is the correct, uninflated count for
+  // this gate: it only ever compares a path's leading `src/objects/<id>/` segment, so a same-object rename still
+  // counts as one directory either way, and only a cross-object move counts twice — the two directories it truly
+  // touches.
+  const { stdout } = await execFileAsync('git', ['diff', '--no-renames', '--name-only', `${ref}...HEAD`], { cwd: root, maxBuffer: 1024 * 1024 * 64 });
   return stdout.split('\n').map(line => line.trim()).filter(Boolean);
 }
 
