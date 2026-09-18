@@ -1,4 +1,5 @@
 import type { PreparedImage, PreparedImageLease, PreparedImagePool } from "./prepared-image-store.js";
+import type { PreparedAssetOrigin } from "./prepared-asset-origin.js";
 export interface PreparedResourceEntry { key: string; url: string; pool: string; decodedBytes?: number; }
 export interface PreparedResourcePool extends PreparedImagePool { id: string; retention: "mount" | "warm" | "selection"; stabilityMilliseconds?: number; eviction?: "capacity" | "unused"; maximumDecodedBytes?: number; }
 export interface PreparedAssets { entries: readonly PreparedResourceEntry[]; pools: readonly PreparedResourcePool[]; startup: readonly string[]; }
@@ -7,21 +8,26 @@ export interface PreparedResources { has(key: string): boolean; read(key: string
 export interface PreparedResidencyTicket { readonly required: readonly string[]; readonly ready: Promise<PreparedResidencyTicket | null>; }
 export interface PreparedResidencyOptions {
   assets: PreparedAssets; createImage?: () => PreparedImage; onReady?: (key: string) => void; onWarmError?: (error: unknown) => void; onCleanupError?: (error: unknown) => void;
-  schedule?: typeof setTimeout; unschedule?: typeof clearTimeout;
+  schedule?: typeof setTimeout; unschedule?: typeof clearTimeout; assetOrigin?: PreparedAssetOrigin;
 }
 interface CacheEntry { key: string; lease: PreparedImageLease; ready: boolean; retired: boolean; timer: ReturnType<typeof setTimeout> | null; order: number;
   promise: Promise<PreparedImage | null>; resolve(value: PreparedImage | null): void; reject(reason: unknown): void; }
 interface TicketState { required: Set<string>; prewarm: string[]; ready: boolean; retired: boolean; resolve(value: PreparedResidencyTicket | null): void; }
 
 import { createPreparedImageStore } from "./prepared-image-store.js";
+import { resolvePreparedAssetUrl } from "./prepared-asset-origin.js";
 
 // Demands are prepared keys in priority order. This owner knows capacities and
 // leases, not planets, texture rows, lens semantics, or presentation elements.
 export function createPreparedResidency({
   assets, createImage, onReady = () => {}, onWarmError = () => {}, onCleanupError = onWarmError,
-  schedule = setTimeout, unschedule = clearTimeout,
+  schedule = setTimeout, unschedule = clearTimeout, assetOrigin,
 }: PreparedResidencyOptions) {
-  const catalog = new Map(assets.entries.map(entry => [entry.key, entry]));
+  // The single chokepoint every image load and material `url()` reads through
+  // (`resources.read`/`resources.url` below): entries keep their prepared `/scenes/`
+  // address unless the build published this object's assets to `assetOrigin`.
+  const catalog = new Map(assets.entries.map(entry => [entry.key,
+    assetOrigin ? { ...entry, url: resolvePreparedAssetUrl(entry.url, assetOrigin) } : entry]));
   const policies = new Map(assets.pools.map(pool => [pool.id, pool]));
   const images = createPreparedImageStore({ pools: assets.pools, ...(createImage ? { createImage } : {}) });
   const cache = new Map<string, CacheEntry>(), mount = new Set<string>(), warmed = new Set<string>(), tickets = new WeakMap<PreparedResidencyTicket, TicketState>();

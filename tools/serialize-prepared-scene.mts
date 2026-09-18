@@ -1,4 +1,4 @@
-import { initialObjectSelection } from '../src/renderers/css/dist/index.js';
+import { initialObjectSelection, resolvePreparedAssetUrl } from '../src/renderers/css/dist/index.js';
 import type { ObjectRuntimeDefinition } from '../src/renderers/css/runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; sha256?: string; }
@@ -44,7 +44,9 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, lens
     const style = target(index).style, property = cssName(name);
     if (value) style.set(property, value); else style.delete(property);
   };
-  const assets = new Map(definition.assets.entries.map(entry => [entry.key, entry.url]));
+  // This SSR markup reads `definition.assets` directly rather than through
+  // `createPreparedResidency`'s chokepoint, so it resolves the same way here.
+  const assets = new Map(definition.assets.entries.map(entry => [entry.key, resolvePreparedAssetUrl(entry.url, definition.assetOrigin)]));
   const texture = (key: string | null) => {
     if (key === null) return 'none';
     const url = assets.get(key);

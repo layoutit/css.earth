@@ -1,11 +1,16 @@
 import { loadPreparedCssObject } from '../src/renderers/css/dist/index.js';
 import { readPreparedObjectBytes } from '../site/object-page-data.mts';
 import { serializePreparedScene } from './serialize-prepared-scene.mts';
+import { preparedAssetOriginFor } from '../site/asset-origin.mts';
 
 export async function loadPreparedSceneMarkup(id: string) {
   const { descriptor, bytes } = await readPreparedObjectBytes(id);
-  const definition = await loadPreparedCssObject(descriptor, {
+  // The origin map rides the descriptor (embedded per-page, never the sha256-verified
+  // transport), so publishing an object's assets to R2 never requires a rebake.
+  const assetOrigin = await preparedAssetOriginFor(id);
+  const decodeDescriptor = assetOrigin ? { ...descriptor, properties: { ...descriptor.properties, assetOrigin } } : descriptor;
+  const definition = await loadPreparedCssObject(decodeDescriptor, {
     async read() { return Uint8Array.from(bytes).buffer; },
   });
-  return { ...serializePreparedScene(definition), sha256: descriptor.prepared?.sha256, descriptor };
+  return { ...serializePreparedScene(definition), sha256: descriptor.prepared?.sha256, descriptor: decodeDescriptor };
 }

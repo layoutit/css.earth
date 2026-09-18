@@ -185,7 +185,13 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
   const values=await Promise.all(entries.map(async file=>JSON.parse(await readFile(resolve(preparationRoot,file),'utf8')) as unknown));
   return prepareRuntimeManifest({id,publicRoot:resolve(root,'public/scenes',id),manifestPath,values,allowPreparationArtifacts:true});
  }
- if(mode==='assemble')return assembleRuntimeAssets({id,manifest:parseRuntimeManifest(JSON.parse(await readFile(manifestPath,'utf8')) as unknown,id),productionRoot:resolve(root,'dist/scenes',id)});
+ if(mode==='assemble'){
+  const productionRoot=resolve(root,'dist/scenes',id);
+  // ASSET_ORIGIN builds never populate dist/scenes (astro.config.mts removes the publicDir
+  // copy once the build finishes): nothing here needs verifying or pruning.
+  if(process.env.ASSET_ORIGIN?.trim()&&!(await lstat(productionRoot).catch(()=>null))?.isDirectory())return parseRuntimeManifest(JSON.parse(await readFile(manifestPath,'utf8')) as unknown,id);
+  return assembleRuntimeAssets({id,manifest:parseRuntimeManifest(JSON.parse(await readFile(manifestPath,'utf8')) as unknown,id),productionRoot});
+ }
  throw new TypeError(`Unknown object operation: ${mode}.`);
 }
 /** Default acquisition restores missing pins only. Existing bytes are verified afterwards, so a stale pin never blocks a download. */

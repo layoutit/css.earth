@@ -7,6 +7,7 @@ import { validateObjectProvenance } from '../../src/platform/object-provenance.m
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
 import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON, CONTEXT_OBJECT_ASSET_URLS } from '../prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
+import { resolveSceneAddressesDeep } from '../asset-origin.mts';
 interface Props { objectId: string; factsOnly?: boolean }
 const { objectId, factsOnly = false } = Astro.props;
 
@@ -15,17 +16,19 @@ type Descriptor = { id: string; type: string; prepared?: { url: string } };
 const descriptors = CONTEXT_OBJECT_DESCRIPTORS as Record<string, Descriptor>;
 const prepared = CONTEXT_OBJECT_PREPARED_JSON as Record<string, { data: PreparedVolumeLensBank } | undefined>;
 const presentations = CONTEXT_OBJECT_PREPARED_JSON, provenanceDocuments = CONTEXT_OBJECT_PREPARED_JSON;
-const banks = Object.entries(descriptors).filter(([, descriptor]) => (descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available) || descriptor.type === 'image-layer-bank').map(([path, descriptor]) => {
+const banks = await Promise.all(Object.entries(descriptors).filter(([, descriptor]) => (descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available) || descriptor.type === 'image-layer-bank').map(async ([path, descriptor]) => {
   const bank = descriptor.type === 'image-layer-bank'
     ? { id: descriptor.id, defaultLens: 'optical', lenses: [{id:'optical', stars:{points:[]}}] }
     : prepared[path.replace(/object\.json$/u, descriptor.prepared?.url ?? '')]?.data;
   if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus lenses unavailable: ${descriptor.id}.`);
   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\.json$/u, 'prepared/provenance.json')], bank.id);
-  const presentation = parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, provenance);
+  // presentation.json (a context object's own prepared JSON, not a Vite asset import) can carry
+  // bare `/scenes/<id>/datasets/<sha>.webp` dataset-preview addresses that Vite never rewrites.
+  const presentation = await resolveSceneAddressesDeep(parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, provenance));
   const prefix = path.replace(/object\.json$/u, '');
   const resources = Object.fromEntries(Object.entries(CONTEXT_OBJECT_ASSET_URLS).filter(([path]) => path.startsWith(prefix)).map(([path, url]) => [path.slice(prefix.length), url]));
   return { bank, presentation, descriptor, resources };
-});
+}));
 ---
 {banks.map(({ bank, presentation, descriptor, resources }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
   {presentation.controls.map(lens => <div data-focus-lens-details={lens.id} hidden={lens.id !== presentation.defaultLens}>
