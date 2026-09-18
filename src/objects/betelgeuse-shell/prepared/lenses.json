@@ -65,239 +65,239 @@
                   "id": "x-11",
                   "centerUnits": [
                     0.25,
-                    -0.11249999999999982,
+                    -0.09375,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 286,
+                  "widthPx": 293,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -274.35,
+                      -279.975,
                       12.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      263.100056,
+                      270.599835,
                       12.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "286px",
+                    "width": "293px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879196,0,0,0,0,0,-1.87875,0,0,1,0,0,-274.35,12.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-880px -2px"
+                    "transform": "matrix3d(1.879095,0,0,0,0,0,-1.87875,0,0,1,0,0,-279.975,12.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-301px -2px"
                   }
                 },
                 {
                   "id": "x-17",
                   "centerUnits": [
                     -2.75,
-                    0.07500000000000018,
+                    0.05624999999999991,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 262,
+                  "widthPx": 267,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -242.475,
+                      -248.1,
                       -137.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      249.97496000000004,
+                      253.72489800000002,
                       -137.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "262px",
+                    "width": "267px",
                     "height": "320px",
-                    "transform": "matrix3d(1.87958,0,0,0,0,0,-1.87875,0,0,1,0,0,-242.475,-137.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-2588px -2px"
+                    "transform": "matrix3d(1.879494,0,0,0,0,0,-1.87875,0,0,1,0,0,-248.1,-137.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-2630px -2px"
                   }
                 },
                 {
                   "id": "x-20",
                   "centerUnits": [
                     -4.25,
-                    -0.26249999999999973,
-                    0
+                    -0.2625000000000002,
+                    4.440892098500626e-16
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 190,
-                  "heightPx": 320,
+                  "widthPx": 196,
+                  "heightPx": 264,
                   "boundsCssPixels": {
                     "min": [
-                      -191.85,
+                      -197.475,
                       -212.5,
-                      -300.5999999999999
+                      -248.09988
                     ],
                     "max": [
-                      165.60004,
+                      171.225108,
                       -212.5,
-                      300.6
+                      248.1
                     ]
                   },
                   "style": {
-                    "width": "190px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.881316,0,0,0,0,0,-1.87875,0,0,1,0,0,-191.85,-212.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-3769px -2px"
+                    "width": "196px",
+                    "height": "264px",
+                    "transform": "matrix3d(1.881123,0,0,0,0,0,-1.879545,0,0,1,0,0,-197.475,-212.5,248.1,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-4523px -2px"
                   }
                 },
                 {
                   "id": "x-21",
                   "centerUnits": [
                     -4.75,
-                    0.5625,
+                    0.5812499999999998,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 118,
-                  "heightPx": 320,
+                  "widthPx": 123,
+                  "heightPx": 250,
                   "boundsCssPixels": {
                     "min": [
-                      -83.1,
+                      -86.85,
                       -237.5,
-                      -300.5999999999999
+                      -234.975
                     ],
                     "max": [
-                      139.34994200000003,
+                      144.97498800000002,
                       -237.5,
-                      300.6
+                      234.975
                     ]
                   },
                   "style": {
-                    "width": "118px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.885169,0,0,0,0,0,-1.87875,0,0,1,0,0,-83.1,-237.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-4638px -2px"
+                    "width": "123px",
+                    "height": "250px",
+                    "transform": "matrix3d(1.884756,0,0,0,0,0,-1.8798,0,0,1,0,0,-86.85,-237.5,234.975,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-4723px -2px"
                   }
                 },
                 {
                   "id": "x-22",
                   "centerUnits": [
                     -5.25,
-                    -0.2625000000000002,
+                    -0.26249999999999973,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 84,
-                  "heightPx": 320,
+                  "widthPx": 88,
+                  "heightPx": 210,
                   "boundsCssPixels": {
                     "min": [
-                      -92.475,
+                      -96.225,
                       -262.5,
-                      -300.5999999999999
+                      -197.47494000000003
                     ],
                     "max": [
-                      66.22502400000002,
+                      69.97496800000002,
                       -262.5,
-                      300.6
+                      197.475
                     ]
                   },
                   "style": {
-                    "width": "84px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.889286,0,0,0,0,0,-1.87875,0,0,1,0,0,-92.475,-262.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-4870px -2px"
+                    "width": "88px",
+                    "height": "210px",
+                    "transform": "matrix3d(1.888636,0,0,0,0,0,-1.880714,0,0,1,0,0,-96.225,-262.5,197.475,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-4966px -2px"
                   }
                 },
                 {
                   "id": "x-18",
                   "centerUnits": [
                     -3.25,
-                    -1.2000000000000002,
+                    -1.21875,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 176,
-                  "heightPx": 320,
+                  "widthPx": 177,
+                  "heightPx": 298,
                   "boundsCssPixels": {
                     "min": [
-                      -225.6,
+                      -227.475,
                       -162.5,
-                      -300.5999999999999
+                      -279.975046
                     ],
                     "max": [
-                      105.59996800000002,
+                      105.60006000000001,
                       -162.5,
-                      300.6
+                      279.975
                     ]
                   },
                   "style": {
-                    "width": "176px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.881818,0,0,0,0,0,-1.87875,0,0,1,0,0,-225.6,-162.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-3963px -2px"
+                    "width": "177px",
+                    "height": "298px",
+                    "transform": "matrix3d(1.88178,0,0,0,0,0,-1.879027,0,0,1,0,0,-227.475,-162.5,279.975,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-3831px -2px"
                   }
                 },
                 {
                   "id": "x-19",
                   "centerUnits": [
                     -3.75,
-                    -1.1625,
+                    -1.18125,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 168,
-                  "heightPx": 320,
+                  "widthPx": 169,
+                  "heightPx": 280,
                   "boundsCssPixels": {
                     "min": [
-                      -216.225,
+                      -218.1,
                       -187.5,
-                      -300.5999999999999
+                      -263.10007999999993
                     ],
                     "max": [
-                      99.97502399999999,
+                      99.97506899999999,
                       -187.5,
-                      300.6
+                      263.1
                     ]
                   },
                   "style": {
-                    "width": "168px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.882143,0,0,0,0,0,-1.87875,0,0,1,0,0,-216.225,-187.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-4321px -2px"
+                    "width": "169px",
+                    "height": "280px",
+                    "transform": "matrix3d(1.882101,0,0,0,0,0,-1.879286,0,0,1,0,0,-218.1,-187.5,263.1,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-4195px -2px"
                   }
                 },
                 {
                   "id": "x-14",
                   "centerUnits": [
                     -1.25,
-                    0.1499999999999999,
+                    0.13124999999999964,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 292,
+                  "widthPx": 295,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -266.85,
+                      -270.6,
                       -62.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      281.849828,
+                      283.72506,
                       -62.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "292px",
+                    "width": "295px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879109,0,0,0,0,0,-1.87875,0,0,1,0,0,-266.85,-62.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
+                    "transform": "matrix3d(1.879068,0,0,0,0,0,-1.87875,0,0,1,0,0,-270.6,-62.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
                     "backgroundPosition": "-2px -2px"
                   }
                 },
@@ -305,97 +305,37 @@
                   "id": "x-15",
                   "centerUnits": [
                     -1.75,
-                    0.13124999999999964,
+                    0.11250000000000027,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 287,
+                  "widthPx": 290,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -263.1,
+                      -266.85,
                       -87.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      276.22494699999993,
+                      278.10002,
                       -87.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "287px",
+                    "width": "290px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879181,0,0,0,0,0,-1.87875,0,0,1,0,0,-263.1,-87.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-589px -2px"
+                    "transform": "matrix3d(1.879138,0,0,0,0,0,-1.87875,0,0,1,0,0,-266.85,-87.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-1188px -2px"
                   }
                 },
                 {
                   "id": "x-16",
                   "centerUnits": [
                     -2.25,
-                    0.07499999999999973,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 280,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -259.35,
-                      -112.5,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      266.85007999999993,
-                      -112.5,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "280px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.879286,0,0,0,0,0,-1.87875,0,0,1,0,0,-259.35,-112.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-2032px -2px"
-                  }
-                },
-                {
-                  "id": "x-12",
-                  "centerUnits": [
-                    -0.25,
-                    -4.440892098500626e-16,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 284,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -266.85,
-                      -12.5,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      266.84989999999993,
-                      -12.5,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "284px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.879225,0,0,0,0,0,-1.87875,0,0,1,0,0,-266.85,-12.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-1458px -2px"
-                  }
-                },
-                {
-                  "id": "x-13",
-                  "centerUnits": [
-                    -0.75,
-                    0.30000000000000027,
+                    0.07500000000000018,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
@@ -403,352 +343,412 @@
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -249.975,
-                      -37.5,
+                      -261.225,
+                      -112.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      279.9749099999999,
-                      -37.5,
+                      268.7249099999999,
+                      -112.5,
                       300.6
                     ]
                   },
                   "style": {
                     "width": "282px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879255,0,0,0,0,0,-1.87875,0,0,1,0,0,-249.975,-37.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-1746px -2px"
+                    "transform": "matrix3d(1.879255,0,0,0,0,0,-1.87875,0,0,1,0,0,-261.225,-112.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-2063px -2px"
+                  }
+                },
+                {
+                  "id": "x-12",
+                  "centerUnits": [
+                    -0.25,
+                    0,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/x.webp",
+                  "widthPx": 288,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      -270.6,
+                      -12.5,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      270.600096,
+                      -12.5,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "288px",
+                    "height": "320px",
+                    "transform": "matrix3d(1.879167,0,0,0,0,0,-1.87875,0,0,1,0,0,-270.6,-12.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-1482px -2px"
+                  }
+                },
+                {
+                  "id": "x-13",
+                  "centerUnits": [
+                    -0.75,
+                    0.31874999999999964,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/x.webp",
+                  "widthPx": 285,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      -251.85,
+                      -37.5,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      283.72484999999995,
+                      -37.5,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "285px",
+                    "height": "320px",
+                    "transform": "matrix3d(1.87921,0,0,0,0,0,-1.87875,0,0,1,0,0,-251.85,-37.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-1774px -2px"
                   }
                 },
                 {
                   "id": "x-5",
                   "centerUnits": [
                     3.25,
-                    0.3562500000000004,
-                    0
+                    0.41249999999999964,
+                    4.440892098500626e-16
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 217,
-                  "heightPx": 320,
+                  "widthPx": 222,
+                  "heightPx": 314,
                   "boundsCssPixels": {
                     "min": [
-                      -186.225,
+                      -188.1,
                       162.5,
-                      -300.5999999999999
+                      -294.975108
                     ],
                     "max": [
-                      221.85001000000003,
+                      229.34991000000005,
                       162.5,
-                      300.6
+                      294.975
                     ]
                   },
                   "style": {
-                    "width": "217px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.88053,0,0,0,0,0,-1.87875,0,0,1,0,0,-186.225,162.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-3351px -2px"
+                    "width": "222px",
+                    "height": "314px",
+                    "transform": "matrix3d(1.880405,0,0,0,0,0,-1.878822,0,0,1,0,0,-188.1,162.5,294.975,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-3405px -2px"
                   }
                 },
                 {
                   "id": "x-8",
                   "centerUnits": [
                     1.75,
-                    0,
+                    0.09375,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 268,
+                  "widthPx": 277,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -251.85,
+                      -255.6,
                       87.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      251.85010400000002,
+                      264.974964,
                       87.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "268px",
+                    "width": "277px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879478,0,0,0,0,0,-1.87875,0,0,1,0,0,-251.85,87.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-2316px -2px"
+                    "transform": "matrix3d(1.879332,0,0,0,0,0,-1.87875,0,0,1,0,0,-255.6,87.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-2349px -2px"
                   }
                 },
                 {
                   "id": "x-9",
                   "centerUnits": [
                     1.25,
-                    -0.03750000000000009,
+                    0,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 284,
+                  "widthPx": 290,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -268.725,
+                      -272.475,
                       62.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      264.97489999999993,
+                      272.47502,
                       62.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "284px",
+                    "width": "290px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879225,0,0,0,0,0,-1.87875,0,0,1,0,0,-268.725,62.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-1170px -2px"
+                    "transform": "matrix3d(1.879138,0,0,0,0,0,-1.87875,0,0,1,0,0,-272.475,62.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-894px -2px"
                   }
                 },
                 {
                   "id": "x-10",
                   "centerUnits": [
                     0.75,
-                    -0.09375,
+                    -0.03750000000000009,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 287,
+                  "widthPx": 292,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -274.35,
+                      -276.225,
                       37.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      264.97494699999993,
+                      272.474828,
                       37.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "287px",
+                    "width": "292px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879181,0,0,0,0,0,-1.87875,0,0,1,0,0,-274.35,37.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-298px -2px"
+                    "transform": "matrix3d(1.879109,0,0,0,0,0,-1.87875,0,0,1,0,0,-276.225,37.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-598px -2px"
                   }
                 },
                 {
                   "id": "x-6",
                   "centerUnits": [
                     2.75,
-                    0.30000000000000027,
+                    0.2999999999999998,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 240,
+                  "widthPx": 244,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -210.6,
+                      -214.35,
                       137.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      240.6,
+                      244.34999200000001,
                       137.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "240px",
+                    "width": "244px",
                     "height": "320px",
-                    "transform": "matrix3d(1.88,0,0,0,0,0,-1.87875,0,0,1,0,0,-210.6,137.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-3107px -2px"
+                    "transform": "matrix3d(1.879918,0,0,0,0,0,-1.87875,0,0,1,0,0,-214.35,137.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-3157px -2px"
                   }
                 },
                 {
                   "id": "x-7",
                   "centerUnits": [
                     2.25,
-                    -0.05624999999999947,
+                    -0.07499999999999973,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 249,
+                  "widthPx": 252,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      -236.85,
+                      -240.6,
                       112.5,
                       -300.5999999999999
                     ],
                     "max": [
-                      231.224931,
+                      233.100024,
                       112.5,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "249px",
+                    "width": "252px",
                     "height": "320px",
-                    "transform": "matrix3d(1.879819,0,0,0,0,0,-1.87875,0,0,1,0,0,-236.85,112.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-2854px -2px"
+                    "transform": "matrix3d(1.879762,0,0,0,0,0,-1.87875,0,0,1,0,0,-240.6,112.5,300.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-2901px -2px"
                   }
                 },
                 {
                   "id": "x-2",
                   "centerUnits": [
                     4.75,
-                    0.3187500000000001,
-                    0
+                    0.4312499999999997,
+                    4.440892098500626e-16
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 141,
-                  "heightPx": 320,
+                  "widthPx": 151,
+                  "heightPx": 274,
                   "boundsCssPixels": {
                     "min": [
-                      -116.85,
+                      -120.6,
                       237.5,
-                      -300.5999999999999
+                      -257.47511999999995
                     ],
                     "max": [
-                      148.72491,
+                      163.724997,
                       237.5,
-                      300.6
+                      257.475
                     ]
                   },
                   "style": {
-                    "width": "141px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.88351,0,0,0,0,0,-1.87875,0,0,1,0,0,-116.85,237.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-4493px -2px"
+                    "width": "151px",
+                    "height": "274px",
+                    "transform": "matrix3d(1.882947,0,0,0,0,0,-1.87938,0,0,1,0,0,-120.6,237.5,257.475,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-4368px -2px"
                   }
                 },
                 {
                   "id": "x-3",
                   "centerUnits": [
                     4.25,
-                    0.3374999999999999,
+                    0.39375000000000004,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 174,
-                  "heightPx": 320,
+                  "widthPx": 179,
+                  "heightPx": 288,
                   "boundsCssPixels": {
                     "min": [
-                      -146.85,
+                      -148.725,
                       212.5,
-                      -300.5999999999999
+                      -270.600096
                     ],
                     "max": [
-                      180.599904,
+                      188.100016,
                       212.5,
-                      300.6
+                      270.6
                     ]
                   },
                   "style": {
-                    "width": "174px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.881896,0,0,0,0,0,-1.87875,0,0,1,0,0,-146.85,212.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-4143px -2px"
+                    "width": "179px",
+                    "height": "288px",
+                    "transform": "matrix3d(1.881704,0,0,0,0,0,-1.879167,0,0,1,0,0,-148.725,212.5,270.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-4012px -2px"
                   }
                 },
                 {
                   "id": "x-4",
                   "centerUnits": [
                     3.75,
-                    0.1312500000000001,
+                    0.1499999999999997,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 193,
-                  "heightPx": 320,
+                  "widthPx": 196,
+                  "heightPx": 300,
                   "boundsCssPixels": {
                     "min": [
-                      -174.975,
+                      -176.85,
                       187.5,
-                      -300.5999999999999
+                      -281.85
                     ],
                     "max": [
-                      188.10007400000003,
+                      191.850108,
                       187.5,
-                      300.6
+                      281.85
                     ]
                   },
                   "style": {
-                    "width": "193px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.881218,0,0,0,0,0,-1.87875,0,0,1,0,0,-174.975,187.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-3572px -2px"
+                    "width": "196px",
+                    "height": "300px",
+                    "transform": "matrix3d(1.881123,0,0,0,0,0,-1.879,0,0,1,0,0,-176.85,187.5,281.85,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-3631px -2px"
                   }
                 },
                 {
                   "id": "x-0",
                   "centerUnits": [
                     5.75,
-                    0.2625000000000002,
-                    -4.440892098500626e-16
+                    0.3374999999999999,
+                    -2.220446049250313e-16
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 24,
-                  "heightPx": 126,
+                  "widthPx": 42,
+                  "heightPx": 128,
                   "boundsCssPixels": {
                     "min": [
-                      -9.975,
+                      -23.1,
                       287.5,
-                      -118.72502400000002
+                      -120.6
                     ],
                     "max": [
-                      36.225,
+                      56.850024,
                       287.5,
-                      118.725
+                      120.6
                     ]
                   },
                   "style": {
-                    "width": "24px",
-                    "height": "126px",
-                    "transform": "matrix3d(1.925,0,0,0,0,0,-1.884524,0,0,1,0,0,-9.975,287.5,118.725,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-4958px -2px"
+                    "width": "42px",
+                    "height": "128px",
+                    "transform": "matrix3d(1.903572,0,0,0,0,0,-1.884375,0,0,1,0,0,-23.1,287.5,120.6,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-5058px -2px"
                   }
                 },
                 {
                   "id": "x-1",
                   "centerUnits": [
                     5.25,
-                    0.33749999999999947,
+                    0.375,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/x.webp",
-                  "widthPx": 106,
-                  "heightPx": 320,
+                  "widthPx": 112,
+                  "heightPx": 238,
                   "boundsCssPixels": {
                     "min": [
-                      -83.1,
+                      -86.85,
                       262.5,
-                      -300.5999999999999
+                      -223.724996
                     ],
                     "max": [
-                      116.85002599999999,
+                      124.34996799999999,
                       262.5,
-                      300.6
+                      223.725
                     ]
                   },
                   "style": {
-                    "width": "106px",
-                    "height": "320px",
-                    "transform": "matrix3d(1.886321,0,0,0,0,0,-1.87875,0,0,1,0,0,-83.1,262.5,300.6,1)",
-                    "backgroundSize": "4984px 324px",
-                    "backgroundPosition": "-4760px -2px"
+                    "width": "112px",
+                    "height": "238px",
+                    "transform": "matrix3d(1.885714,0,0,0,0,0,-1.880042,0,0,1,0,0,-86.85,262.5,223.725,1)",
+                    "backgroundSize": "5102px 324px",
+                    "backgroundPosition": "-4850px -2px"
                   }
                 }
               ]
@@ -759,8 +759,308 @@
                 {
                   "id": "y-12",
                   "centerUnits": [
-                    0.07499999999999973,
+                    0.07500000000000018,
                     0.25,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 304,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      12.5,
+                      -281.84988799999996,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      12.5,
+                      289.35,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "304px",
+                    "height": "320px",
+                    "transform": "matrix3d(0,-1.878947,0,0,0,0,-1.87875,0,1,0,0,0,12.5,289.35,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-2px -2px"
+                  }
+                },
+                {
+                  "id": "y-6",
+                  "centerUnits": [
+                    -0.037499999999999645,
+                    -2.75,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 240,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      -137.5,
+                      -227.475,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      -137.5,
+                      223.725,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "240px",
+                    "height": "320px",
+                    "transform": "matrix3d(0,-1.88,0,0,0,0,-1.87875,0,1,0,0,0,-137.5,223.725,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-2873px -2px"
+                  }
+                },
+                {
+                  "id": "y-3",
+                  "centerUnits": [
+                    -0.5062499999999999,
+                    -4.25,
+                    4.440892098500626e-16
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 185,
+                  "heightPx": 264,
+                  "boundsCssPixels": {
+                    "min": [
+                      -212.5,
+                      -199.35009499999998,
+                      -248.09988
+                    ],
+                    "max": [
+                      -212.5,
+                      148.725,
+                      248.1
+                    ]
+                  },
+                  "style": {
+                    "width": "185px",
+                    "height": "264px",
+                    "transform": "matrix3d(0,-1.881487,0,0,0,0,-1.879545,0,1,0,0,0,-212.5,148.725,248.1,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-4208px -2px"
+                  }
+                },
+                {
+                  "id": "y-2",
+                  "centerUnits": [
+                    -0.30000000000000027,
+                    -4.75,
+                    4.440892098500626e-16
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 142,
+                  "heightPx": 234,
+                  "boundsCssPixels": {
+                    "min": [
+                      -237.5,
+                      -148.725042,
+                      -219.974952
+                    ],
+                    "max": [
+                      -237.5,
+                      118.725,
+                      219.975
+                    ]
+                  },
+                  "style": {
+                    "width": "142px",
+                    "height": "234px",
+                    "transform": "matrix3d(0,-1.883451,0,0,0,0,-1.880128,0,1,0,0,0,-237.5,118.725,219.975,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-4397px -2px"
+                  }
+                },
+                {
+                  "id": "y-1",
+                  "centerUnits": [
+                    -0.2999999999999998,
+                    -5.25,
+                    -4.440892098500626e-16
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 106,
+                  "heightPx": 186,
+                  "boundsCssPixels": {
+                    "min": [
+                      -262.5,
+                      -114.97502599999999,
+                      -174.97507199999998
+                    ],
+                    "max": [
+                      -262.5,
+                      84.975,
+                      174.975
+                    ]
+                  },
+                  "style": {
+                    "width": "106px",
+                    "height": "186px",
+                    "transform": "matrix3d(0,-1.886321,0,0,0,0,-1.881452,0,1,0,0,0,-262.5,84.975,174.975,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-4995px -2px"
+                  }
+                },
+                {
+                  "id": "y-5",
+                  "centerUnits": [
+                    -0.33750000000000013,
+                    -3.25,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 230,
+                  "heightPx": 298,
+                  "boundsCssPixels": {
+                    "min": [
+                      -162.5,
+                      -233.09991,
+                      -279.975046
+                    ],
+                    "max": [
+                      -162.5,
+                      199.35,
+                      279.975
+                    ]
+                  },
+                  "style": {
+                    "width": "230px",
+                    "height": "298px",
+                    "transform": "matrix3d(0,-1.880217,0,0,0,0,-1.879027,0,1,0,0,0,-162.5,199.35,279.975,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-3578px -2px"
+                  }
+                },
+                {
+                  "id": "y-4",
+                  "centerUnits": [
+                    -0.41249999999999964,
+                    -3.75,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 212,
+                  "heightPx": 282,
+                  "boundsCssPixels": {
+                    "min": [
+                      -187.5,
+                      -219.975132,
+                      -264.9749099999999
+                    ],
+                    "max": [
+                      -187.5,
+                      178.725,
+                      264.975
+                    ]
+                  },
+                  "style": {
+                    "width": "212px",
+                    "height": "282px",
+                    "transform": "matrix3d(0,-1.880661,0,0,0,0,-1.879255,0,1,0,0,0,-187.5,178.725,264.975,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-3812px -2px"
+                  }
+                },
+                {
+                  "id": "y-9",
+                  "centerUnits": [
+                    -0.05624999999999991,
+                    -1.25,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 289,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      -62.5,
+                      -274.349928,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      -62.5,
+                      268.725,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "289px",
+                    "height": "320px",
+                    "transform": "matrix3d(0,-1.879152,0,0,0,0,-1.87875,0,1,0,0,0,-62.5,268.725,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-1219px -2px"
+                  }
+                },
+                {
+                  "id": "y-8",
+                  "centerUnits": [
+                    -0.11249999999999982,
+                    -1.75,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 284,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      -87.5,
+                      -272.47489999999993,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      -87.5,
+                      261.225,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "284px",
+                    "height": "320px",
+                    "transform": "matrix3d(0,-1.879225,0,0,0,0,-1.87875,0,1,0,0,0,-87.5,261.225,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-1512px -2px"
+                  }
+                },
+                {
+                  "id": "y-7",
+                  "centerUnits": [
+                    0.31874999999999964,
+                    -2.25,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 243,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      -112.5,
+                      -212.47493400000005,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      -112.5,
+                      244.35,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "243px",
+                    "height": "320px",
+                    "transform": "matrix3d(0,-1.879938,0,0,0,0,-1.87875,0,1,0,0,0,-112.5,244.35,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-2626px -2px"
+                  }
+                },
+                {
+                  "id": "y-11",
+                  "centerUnits": [
+                    0.07499999999999973,
+                    -0.25,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
@@ -768,12 +1068,12 @@
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
-                      12.5,
+                      -12.5,
                       -279.97484599999996,
                       -300.5999999999999
                     ],
                     "max": [
-                      12.5,
+                      -12.5,
                       287.475,
                       300.6
                     ]
@@ -781,309 +1081,9 @@
                   "style": {
                     "width": "302px",
                     "height": "320px",
-                    "transform": "matrix3d(0,-1.878973,0,0,0,0,-1.87875,0,1,0,0,0,12.5,287.475,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-2px -2px"
-                  }
-                },
-                {
-                  "id": "y-6",
-                  "centerUnits": [
-                    -0.018750000000000266,
-                    -2.75,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 237,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -137.5,
-                      -223.724931,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -137.5,
-                      221.85,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "237px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.880063,0,0,0,0,-1.87875,0,1,0,0,0,-137.5,221.85,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-3086px -2px"
-                  }
-                },
-                {
-                  "id": "y-3",
-                  "centerUnits": [
-                    -0.5062500000000003,
-                    -4.25,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 179,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -212.5,
-                      -193.725016,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -212.5,
-                      143.1,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "179px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.881704,0,0,0,0,-1.87875,0,1,0,0,0,-212.5,143.1,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-3972px -2px"
-                  }
-                },
-                {
-                  "id": "y-2",
-                  "centerUnits": [
-                    -0.2999999999999996,
-                    -4.75,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 138,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -237.5,
-                      -144.975048,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -237.5,
-                      114.975,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "138px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.883696,0,0,0,0,-1.87875,0,1,0,0,0,-237.5,114.975,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-4654px -2px"
-                  }
-                },
-                {
-                  "id": "y-1",
-                  "centerUnits": [
-                    -0.26249999999999973,
-                    -5.25,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 98,
-                  "heightPx": 310,
-                  "boundsCssPixels": {
-                    "min": [
-                      -262.5,
-                      -105.60001000000003,
-                      -291.22501
-                    ],
-                    "max": [
-                      -262.5,
-                      79.35,
-                      291.225
-                    ]
-                  },
-                  "style": {
-                    "width": "98px",
-                    "height": "310px",
-                    "transform": "matrix3d(0,-1.887245,0,0,0,0,-1.878871,0,1,0,0,0,-262.5,79.35,291.225,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-4904px -2px"
-                  }
-                },
-                {
-                  "id": "y-5",
-                  "centerUnits": [
-                    -0.2999999999999998,
-                    -3.25,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 226,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -162.5,
-                      -227.47506,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -162.5,
-                      197.475,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "226px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.88031,0,0,0,0,-1.87875,0,1,0,0,0,-162.5,197.475,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-3327px -2px"
-                  }
-                },
-                {
-                  "id": "y-4",
-                  "centerUnits": [
-                    -0.54375,
-                    -3.75,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 201,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -187.5,
-                      -216.22497,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -187.5,
-                      161.85,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "201px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.88097,0,0,0,0,-1.87875,0,1,0,0,0,-187.5,161.85,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-3767px -2px"
-                  }
-                },
-                {
-                  "id": "y-9",
-                  "centerUnits": [
-                    -0.03750000000000009,
-                    -1.25,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 286,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -62.5,
-                      -270.600056,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -62.5,
-                      266.85,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "286px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.879196,0,0,0,0,-1.87875,0,1,0,0,0,-62.5,266.85,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-1208px -2px"
-                  }
-                },
-                {
-                  "id": "y-8",
-                  "centerUnits": [
-                    -0.11250000000000027,
-                    -1.75,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 280,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -87.5,
-                      -268.72507999999993,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -87.5,
-                      257.475,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "280px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.879286,0,0,0,0,-1.87875,0,1,0,0,0,-87.5,257.475,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-1498px -2px"
-                  }
-                },
-                {
-                  "id": "y-7",
-                  "centerUnits": [
-                    0.31875000000000053,
-                    -2.25,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 241,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -112.5,
-                      -210.59993900000003,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -112.5,
-                      242.475,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "241px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.879979,0,0,0,0,-1.87875,0,1,0,0,0,-112.5,242.475,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-2598px -2px"
-                  }
-                },
-                {
-                  "id": "y-11",
-                  "centerUnits": [
-                    0.07500000000000018,
-                    -0.25,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 298,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      -12.5,
-                      -276.225046,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      -12.5,
-                      283.725,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "298px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.879027,0,0,0,0,-1.87875,0,1,0,0,0,-12.5,283.725,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-308px -2px"
+                    "transform": "matrix3d(0,-1.878973,0,0,0,0,-1.87875,0,1,0,0,0,-12.5,287.475,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-310px -2px"
                   }
                 },
                 {
@@ -1094,326 +1094,356 @@
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 274,
+                  "widthPx": 276,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
                       -37.5,
-                      -242.47511999999995,
+                      -244.35004800000002,
                       -300.5999999999999
                     ],
                     "max": [
                       -37.5,
-                      272.475,
+                      274.35,
+                      300.6
+                    ]
+                  },
+                  "style": {
+                    "width": "276px",
+                    "height": "320px",
+                    "transform": "matrix3d(0,-1.879348,0,0,0,0,-1.87875,0,1,0,0,0,-37.5,274.35,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-1800px -2px"
+                  }
+                },
+                {
+                  "id": "y-18",
+                  "centerUnits": [
+                    0.13124999999999964,
+                    3.25,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 245,
+                  "heightPx": 310,
+                  "boundsCssPixels": {
+                    "min": [
+                      162.5,
+                      -223.72501000000003,
+                      -291.22501
+                    ],
+                    "max": [
+                      162.5,
+                      236.85,
+                      291.225
+                    ]
+                  },
+                  "style": {
+                    "width": "245px",
+                    "height": "310px",
+                    "transform": "matrix3d(0,-1.879898,0,0,0,0,-1.878871,0,1,0,0,0,162.5,236.85,291.225,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-3329px -2px"
+                  }
+                },
+                {
+                  "id": "y-15",
+                  "centerUnits": [
+                    0.4125000000000001,
+                    1.75,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 274,
+                  "heightPx": 320,
+                  "boundsCssPixels": {
+                    "min": [
+                      87.5,
+                      -236.85011999999995,
+                      -300.5999999999999
+                    ],
+                    "max": [
+                      87.5,
+                      278.1,
                       300.6
                     ]
                   },
                   "style": {
                     "width": "274px",
                     "height": "320px",
-                    "transform": "matrix3d(0,-1.87938,0,0,0,0,-1.87875,0,1,0,0,0,-37.5,272.475,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-1782px -2px"
-                  }
-                },
-                {
-                  "id": "y-18",
-                  "centerUnits": [
-                    0.1312500000000001,
-                    3.25,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 239,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      162.5,
-                      -218.100019,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      162.5,
-                      231.225,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "239px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.880021,0,0,0,0,-1.87875,0,1,0,0,0,162.5,231.225,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-2843px -2px"
-                  }
-                },
-                {
-                  "id": "y-15",
-                  "centerUnits": [
-                    0.3937499999999998,
-                    1.75,
-                    0
-                  ],
-                  "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 271,
-                  "heightPx": 320,
-                  "boundsCssPixels": {
-                    "min": [
-                      87.5,
-                      -234.974988,
-                      -300.5999999999999
-                    ],
-                    "max": [
-                      87.5,
-                      274.35,
-                      300.6
-                    ]
-                  },
-                  "style": {
-                    "width": "271px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.879428,0,0,0,0,-1.87875,0,1,0,0,0,87.5,274.35,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-2060px -2px"
+                    "transform": "matrix3d(0,-1.87938,0,0,0,0,-1.87875,0,1,0,0,0,87.5,278.1,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-2080px -2px"
                   }
                 },
                 {
                   "id": "y-14",
                   "centerUnits": [
-                    0.15000000000000036,
+                    0.14999999999999947,
                     1.25,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 292,
+                  "widthPx": 294,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
                       62.5,
-                      -266.849828,
+                      -268.725108,
                       -300.5999999999999
                     ],
                     "max": [
                       62.5,
-                      281.85,
+                      283.725,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "292px",
+                    "width": "294px",
                     "height": "320px",
-                    "transform": "matrix3d(0,-1.879109,0,0,0,0,-1.87875,0,1,0,0,0,62.5,281.85,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-912px -2px"
+                    "transform": "matrix3d(0,-1.879082,0,0,0,0,-1.87875,0,1,0,0,0,62.5,283.725,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-921px -2px"
                   }
                 },
                 {
                   "id": "y-13",
                   "centerUnits": [
-                    0.11250000000000027,
+                    0.13125000000000053,
                     0.75,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 298,
+                  "widthPx": 301,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
                       37.5,
-                      -274.350046,
+                      -276.2250869999999,
                       -300.5999999999999
                     ],
                     "max": [
                       37.5,
-                      285.6,
+                      289.35,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "298px",
+                    "width": "301px",
                     "height": "320px",
-                    "transform": "matrix3d(0,-1.879027,0,0,0,0,-1.87875,0,1,0,0,0,37.5,285.6,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-610px -2px"
+                    "transform": "matrix3d(0,-1.878987,0,0,0,0,-1.87875,0,1,0,0,0,37.5,289.35,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-616px -2px"
                   }
                 },
                 {
                   "id": "y-17",
                   "centerUnits": [
-                    0.05624999999999947,
+                    0.07500000000000018,
                     2.75,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 259,
+                  "widthPx": 264,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
                       137.5,
-                      -240.59994700000001,
+                      -244.34988,
                       -300.5999999999999
                     ],
                     "max": [
                       137.5,
-                      246.225,
+                      251.85,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "259px",
+                    "width": "264px",
                     "height": "320px",
-                    "transform": "matrix3d(0,-1.879633,0,0,0,0,-1.87875,0,1,0,0,0,137.5,246.225,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-2335px -2px"
+                    "transform": "matrix3d(0,-1.879545,0,0,0,0,-1.87875,0,1,0,0,0,137.5,251.85,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-2358px -2px"
                   }
                 },
                 {
                   "id": "y-16",
                   "centerUnits": [
-                    1.3875000000000002,
+                    1.4250000000000003,
                     2.25,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 206,
+                  "widthPx": 208,
                   "heightPx": 320,
                   "boundsCssPixels": {
                     "min": [
                       112.5,
-                      -124.34994999999998,
+                      -124.34995199999997,
                       -300.5999999999999
                     ],
                     "max": [
                       112.5,
-                      263.1,
+                      266.85,
                       300.6
                     ]
                   },
                   "style": {
-                    "width": "206px",
+                    "width": "208px",
                     "height": "320px",
-                    "transform": "matrix3d(0,-1.880825,0,0,0,0,-1.87875,0,1,0,0,0,112.5,263.1,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-3557px -2px"
+                    "transform": "matrix3d(0,-1.880769,0,0,0,0,-1.87875,0,1,0,0,0,112.5,266.85,300.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-3117px -2px"
                   }
                 },
                 {
                   "id": "y-21",
                   "centerUnits": [
-                    0.018750000000000266,
+                    0.018750000000000044,
                     4.75,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 155,
-                  "heightPx": 320,
+                  "widthPx": 161,
+                  "heightPx": 230,
                   "boundsCssPixels": {
                     "min": [
                       237.5,
-                      -144.97500999999997,
-                      -300.5999999999999
+                      -150.599933,
+                      -216.22491
                     ],
                     "max": [
                       237.5,
-                      146.85,
-                      300.6
+                      152.475,
+                      216.225
                     ]
                   },
                   "style": {
-                    "width": "155px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.882742,0,0,0,0,-1.87875,0,1,0,0,0,237.5,146.85,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-4495px -2px"
+                    "width": "161px",
+                    "height": "230px",
+                    "transform": "matrix3d(0,-1.882453,0,0,0,0,-1.880217,0,1,0,0,0,237.5,152.475,216.225,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-4543px -2px"
                   }
                 },
                 {
                   "id": "y-20",
                   "centerUnits": [
-                    0.375,
+                    0.35624999999999973,
                     4.25,
-                    0
+                    4.440892098500626e-16
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 160,
-                  "heightPx": 320,
+                  "widthPx": 165,
+                  "heightPx": 224,
                   "boundsCssPixels": {
                     "min": [
                       212.5,
-                      -131.85,
-                      -300.5999999999999
+                      -137.475045,
+                      -210.59996800000002
                     ],
                     "max": [
                       212.5,
-                      169.35,
-                      300.6
+                      173.1,
+                      210.6
                     ]
                   },
                   "style": {
-                    "width": "160px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.8825,0,0,0,0,-1.87875,0,1,0,0,0,212.5,169.35,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-4331px -2px"
+                    "width": "165px",
+                    "height": "224px",
+                    "transform": "matrix3d(0,-1.882273,0,0,0,0,-1.880357,0,1,0,0,0,212.5,173.1,210.6,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-4708px -2px"
                   }
                 },
                 {
                   "id": "y-19",
                   "centerUnits": [
-                    0.8624999999999998,
+                    0.9374999999999996,
                     3.75,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 172,
-                  "heightPx": 320,
+                  "widthPx": 176,
+                  "heightPx": 280,
                   "boundsCssPixels": {
                     "min": [
                       187.5,
-                      -118.725044,
-                      -300.5999999999999
+                      -118.72496800000002,
+                      -263.10007999999993
                     ],
                     "max": [
                       187.5,
-                      204.975,
-                      300.6
+                      212.475,
+                      263.1
                     ]
                   },
                   "style": {
-                    "width": "172px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.881977,0,0,0,0,-1.87875,0,1,0,0,0,187.5,204.975,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-4155px -2px"
+                    "width": "176px",
+                    "height": "280px",
+                    "transform": "matrix3d(0,-1.881818,0,0,0,0,-1.879286,0,1,0,0,0,187.5,212.475,263.1,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-4028px -2px"
+                  }
+                },
+                {
+                  "id": "y-23",
+                  "centerUnits": [
+                    -0.9750000000000001,
+                    5.75,
+                    0
+                  ],
+                  "texturePath": "zimpol-v/atlases/y.webp",
+                  "widthPx": 6,
+                  "heightPx": 40,
+                  "boundsCssPixels": {
+                    "min": [
+                      287.5,
+                      -54.974982,
+                      -38.1
+                    ],
+                    "max": [
+                      287.5,
+                      -42.525,
+                      38.1
+                    ]
+                  },
+                  "style": {
+                    "width": "6px",
+                    "height": "40px",
+                    "transform": "matrix3d(0,-2.074997,0,0,0,0,-1.905,0,1,0,0,0,287.5,-42.525,38.1,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-5105px -2px"
                   }
                 },
                 {
                   "id": "y-22",
                   "centerUnits": [
-                    -0.41250000000000053,
+                    -0.37499999999999956,
                     5.25,
                     0
                   ],
                   "texturePath": "zimpol-v/atlases/y.webp",
-                  "widthPx": 104,
-                  "heightPx": 320,
+                  "widthPx": 114,
+                  "heightPx": 200,
                   "boundsCssPixels": {
                     "min": [
                       262.5,
-                      -118.724952,
-                      -300.5999999999999
+                      -126.224964,
+                      -188.1
                     ],
                     "max": [
                       262.5,
-                      77.475,
-                      300.6
+                      88.725,
+                      188.1
                     ]
                   },
                   "style": {
-                    "width": "104px",
-                    "height": "320px",
-                    "transform": "matrix3d(0,-1.886538,0,0,0,0,-1.87875,0,1,0,0,0,262.5,77.475,300.6,1)",
-                    "backgroundSize": "5004px 324px",
-                    "backgroundPosition": "-4796px -2px"
+                    "width": "114px",
+                    "height": "200px",
+                    "transform": "matrix3d(0,-1.885526,0,0,0,0,-1.881,0,1,0,0,0,262.5,88.725,188.1,1)",
+                    "backgroundSize": "5113px 324px",
+                    "backgroundPosition": "-4877px -2px"
                   }
                 }
               ]
@@ -1424,189 +1454,39 @@
                 {
                   "id": "z-12",
                   "centerUnits": [
-                    0.07499999999999973,
-                    0.05624999999999947,
+                    0.07500000000000018,
+                    0.018750000000000266,
                     0.25
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 299,
+                  "widthPx": 306,
+                  "heightPx": 303,
                   "boundsCssPixels": {
                     "min": [
-                      -278.09988699999997,
-                      -279.97484599999996,
+                      -283.72488,
+                      -283.7251319999999,
                       12.5
                     ],
                     "max": [
-                      283.725,
-                      287.475,
+                      285.6,
+                      291.225,
                       12.5
                     ]
                   },
                   "style": {
-                    "width": "302px",
-                    "height": "299px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.879013,0,0,0,0,0,-1,0,283.725,287.475,12.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-308px -2px"
+                    "width": "306px",
+                    "height": "303px",
+                    "transform": "matrix3d(0,-1.878922,0,0,-1.87896,0,0,0,0,0,-1,0,285.6,291.225,12.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-312px -2px"
                   }
                 },
                 {
                   "id": "z-6",
                   "centerUnits": [
-                    0.09375000000000044,
-                    0.056250000000000355,
-                    -2.75
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 299,
-                  "heightPx": 295,
-                  "boundsCssPixels": {
-                    "min": [
-                      -274.35006,
-                      -276.22488699999997,
-                      -137.5
-                    ],
-                    "max": [
-                      279.975,
-                      285.6,
-                      -137.5
-                    ]
-                  },
-                  "style": {
-                    "width": "299px",
-                    "height": "295px",
-                    "transform": "matrix3d(0,-1.879013,0,0,-1.879068,0,0,0,0,0,-1,0,279.975,285.6,-137.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1222px -305px"
-                  }
-                },
-                {
-                  "id": "z-3",
-                  "centerUnits": [
-                    0.09375,
-                    0.07499999999999973,
-                    -4.25
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 295,
-                  "heightPx": 290,
-                  "boundsCssPixels": {
-                    "min": [
-                      -268.72502,
-                      -272.47506,
-                      -212.5
-                    ],
-                    "max": [
-                      276.225,
-                      281.85,
-                      -212.5
-                    ]
-                  },
-                  "style": {
-                    "width": "295px",
-                    "height": "290px",
-                    "transform": "matrix3d(0,-1.879068,0,0,-1.879138,0,0,0,0,0,-1,0,276.225,281.85,-212.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1208px -606px"
-                  }
-                },
-                {
-                  "id": "z-1",
-                  "centerUnits": [
-                    0.09375,
-                    0.07500000000000018,
-                    -5.25
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 293,
-                  "heightPx": 288,
-                  "boundsCssPixels": {
-                    "min": [
-                      -266.850096,
-                      -270.599835,
-                      -262.5
-                    ],
-                    "max": [
-                      274.35,
-                      279.975,
-                      -262.5
-                    ]
-                  },
-                  "style": {
-                    "width": "293px",
-                    "height": "288px",
-                    "transform": "matrix3d(0,-1.879095,0,0,-1.879167,0,0,0,0,0,-1,0,274.35,279.975,-262.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-598px -903px"
-                  }
-                },
-                {
-                  "id": "z-0",
-                  "centerUnits": [
-                    0.11249999999999982,
-                    0.056250000000000355,
-                    -5.75
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 292,
-                  "heightPx": 285,
-                  "boundsCssPixels": {
-                    "min": [
-                      -264.97484999999995,
-                      -268.724828,
-                      -287.5
-                    ],
-                    "max": [
-                      270.6,
-                      279.975,
-                      -287.5
-                    ]
-                  },
-                  "style": {
-                    "width": "292px",
-                    "height": "285px",
-                    "transform": "matrix3d(0,-1.879109,0,0,-1.87921,0,0,0,0,0,-1,0,270.6,279.975,-287.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1192px -903px"
-                  }
-                },
-                {
-                  "id": "z-2",
-                  "centerUnits": [
-                    0.11249999999999982,
-                    0.07500000000000018,
-                    -4.75
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 294,
-                  "heightPx": 288,
-                  "boundsCssPixels": {
-                    "min": [
-                      -266.850096,
-                      -270.600108,
-                      -237.5
-                    ],
-                    "max": [
-                      274.35,
-                      281.85,
-                      -237.5
-                    ]
-                  },
-                  "style": {
-                    "width": "294px",
-                    "height": "288px",
-                    "transform": "matrix3d(0,-1.879082,0,0,-1.879167,0,0,0,0,0,-1,0,274.35,281.85,-237.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-2px -903px"
-                  }
-                },
-                {
-                  "id": "z-5",
-                  "centerUnits": [
                     0.07500000000000018,
                     0.05624999999999991,
-                    -3.25
+                    -2.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
                   "widthPx": 298,
@@ -1615,110 +1495,260 @@
                     "min": [
                       -272.474835,
                       -276.225046,
-                      -162.5
+                      -137.5
                     ],
                     "max": [
                       278.1,
                       283.725,
-                      -162.5
+                      -137.5
                     ]
                   },
                   "style": {
                     "width": "298px",
                     "height": "293px",
-                    "transform": "matrix3d(0,-1.879027,0,0,-1.879095,0,0,0,0,0,-1,0,278.1,283.725,-162.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-2px -606px"
+                    "transform": "matrix3d(0,-1.879027,0,0,-1.879095,0,0,0,0,0,-1,0,278.1,283.725,-137.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-3082px -2px"
+                  }
+                },
+                {
+                  "id": "z-3",
+                  "centerUnits": [
+                    0.11250000000000027,
+                    0.05624999999999991,
+                    -4.25
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 278,
+                  "heightPx": 261,
+                  "boundsCssPixels": {
+                    "min": [
+                      -242.47507800000002,
+                      -255.59984799999995,
+                      -212.5
+                    ],
+                    "max": [
+                      248.1,
+                      266.85,
+                      -212.5
+                    ]
+                  },
+                  "style": {
+                    "width": "278px",
+                    "height": "261px",
+                    "transform": "matrix3d(0,-1.879316,0,0,-1.879598,0,0,0,0,0,-1,0,248.1,266.85,-212.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-1482px -309px"
+                  }
+                },
+                {
+                  "id": "z-1",
+                  "centerUnits": [
+                    0.43125000000000036,
+                    -0.037499999999999645,
+                    -5.25
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 225,
+                  "heightPx": 202,
+                  "boundsCssPixels": {
+                    "min": [
+                      -191.85008200000001,
+                      -189.974925,
+                      -262.5
+                    ],
+                    "max": [
+                      188.1,
+                      233.1,
+                      -262.5
+                    ]
+                  },
+                  "style": {
+                    "width": "225px",
+                    "height": "202px",
+                    "transform": "matrix3d(0,-1.880333,0,0,-1.880941,0,0,0,0,0,-1,0,188.1,233.1,-262.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2578px -309px"
+                  }
+                },
+                {
+                  "id": "z-0",
+                  "centerUnits": [
+                    0.16874999999999973,
+                    0.1124999999999996,
+                    -5.75
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 175,
+                  "heightPx": 172,
+                  "boundsCssPixels": {
+                    "min": [
+                      -156.225044,
+                      -156.224975,
+                      -287.5
+                    ],
+                    "max": [
+                      167.475,
+                      173.1,
+                      -287.5
+                    ]
+                  },
+                  "style": {
+                    "width": "175px",
+                    "height": "172px",
+                    "transform": "matrix3d(0,-1.881857,0,0,-1.881977,0,0,0,0,0,-1,0,167.475,173.1,-287.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-3036px -309px"
+                  }
+                },
+                {
+                  "id": "z-2",
+                  "centerUnits": [
+                    0.1875,
+                    -0.2437499999999999,
+                    -4.75
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 262,
+                  "heightPx": 227,
+                  "boundsCssPixels": {
+                    "min": [
+                      -225.59992199999996,
+                      -236.84996000000004,
+                      -237.5
+                    ],
+                    "max": [
+                      201.225,
+                      255.6,
+                      -237.5
+                    ]
+                  },
+                  "style": {
+                    "width": "262px",
+                    "height": "227px",
+                    "transform": "matrix3d(0,-1.87958,0,0,-1.880286,0,0,0,0,0,-1,0,201.225,255.6,-237.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2046px -309px"
+                  }
+                },
+                {
+                  "id": "z-5",
+                  "centerUnits": [
+                    0.09375,
+                    0.07500000000000018,
+                    -3.25
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 293,
+                  "heightPx": 288,
+                  "boundsCssPixels": {
+                    "min": [
+                      -266.850096,
+                      -270.599835,
+                      -162.5
+                    ],
+                    "max": [
+                      274.35,
+                      279.975,
+                      -162.5
+                    ]
+                  },
+                  "style": {
+                    "width": "293px",
+                    "height": "288px",
+                    "transform": "matrix3d(0,-1.879095,0,0,-1.879167,0,0,0,0,0,-1,0,274.35,279.975,-162.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-304px -309px"
                   }
                 },
                 {
                   "id": "z-4",
                   "centerUnits": [
-                    0.09375,
-                    0.07499999999999973,
+                    0.07500000000000018,
+                    0.037499999999999645,
                     -3.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 297,
-                  "heightPx": 292,
+                  "widthPx": 288,
+                  "heightPx": 278,
                   "boundsCssPixels": {
                     "min": [
-                      -270.599828,
-                      -274.34988,
+                      -259.34984799999995,
+                      -266.850096,
                       -187.5
                     ],
                     "max": [
-                      278.1,
-                      283.725,
+                      263.1,
+                      274.35,
                       -187.5
                     ]
                   },
                   "style": {
-                    "width": "297px",
-                    "height": "292px",
-                    "transform": "matrix3d(0,-1.87904,0,0,-1.879109,0,0,0,0,0,-1,0,278.1,283.725,-187.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-606px -606px"
+                    "width": "288px",
+                    "height": "278px",
+                    "transform": "matrix3d(0,-1.879167,0,0,-1.879316,0,0,0,0,0,-1,0,263.1,274.35,-187.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-898px -309px"
                   }
                 },
                 {
                   "id": "z-9",
                   "centerUnits": [
-                    0.07499999999999973,
-                    0.037499999999999645,
+                    0.07500000000000018,
+                    0.03750000000000009,
                     -1.25
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 298,
+                  "widthPx": 304,
+                  "heightPx": 302,
                   "boundsCssPixels": {
                     "min": [
-                      -278.100046,
-                      -279.97484599999996,
+                      -281.84984599999996,
+                      -281.84988799999996,
                       -62.5
                     ],
                     "max": [
-                      281.85,
-                      287.475,
+                      285.6,
+                      289.35,
                       -62.5
                     ]
                   },
                   "style": {
-                    "width": "302px",
-                    "height": "298px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.879027,0,0,0,0,0,-1,0,281.85,287.475,-62.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-614px -2px"
+                    "width": "304px",
+                    "height": "302px",
+                    "transform": "matrix3d(0,-1.878947,0,0,-1.878973,0,0,0,0,0,-1,0,285.6,289.35,-62.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-1240px -2px"
                   }
                 },
                 {
                   "id": "z-8",
                   "centerUnits": [
-                    0.07499999999999973,
-                    0.056250000000000355,
+                    0.05624999999999991,
+                    0.037499999999999645,
                     -1.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 297,
+                  "widthPx": 303,
+                  "heightPx": 300,
                   "boundsCssPixels": {
                     "min": [
-                      -276.22488,
-                      -279.97484599999996,
+                      -279.975,
+                      -281.84988,
                       -87.5
                     ],
                     "max": [
-                      281.85,
+                      283.725,
                       287.475,
                       -87.5
                     ]
                   },
                   "style": {
-                    "width": "302px",
-                    "height": "297px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.87904,0,0,0,0,0,-1,0,281.85,287.475,-87.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-2px -305px"
+                    "width": "303px",
+                    "height": "300px",
+                    "transform": "matrix3d(0,-1.87896,0,0,-1.879,0,0,0,0,0,-1,0,283.725,287.475,-87.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-1856px -2px"
                   }
                 },
                 {
@@ -1729,94 +1759,214 @@
                     -2.25
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 300,
+                  "widthPx": 302,
                   "heightPx": 297,
                   "boundsCssPixels": {
                     "min": [
                       -276.22488,
-                      -278.1,
+                      -279.97484599999996,
                       -112.5
                     ],
                     "max": [
                       281.85,
-                      285.6,
+                      287.475,
                       -112.5
                     ]
                   },
                   "style": {
-                    "width": "300px",
+                    "width": "302px",
                     "height": "297px",
-                    "transform": "matrix3d(0,-1.879,0,0,-1.87904,0,0,0,0,0,-1,0,281.85,285.6,-112.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-614px -305px"
+                    "transform": "matrix3d(0,-1.878973,0,0,-1.87904,0,0,0,0,0,-1,0,281.85,287.475,-112.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2470px -2px"
                   }
                 },
                 {
                   "id": "z-11",
                   "centerUnits": [
-                    0.07499999999999973,
-                    0.05624999999999947,
+                    0.07500000000000018,
+                    0.018750000000000266,
                     -0.25
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 299,
+                  "widthPx": 306,
+                  "heightPx": 303,
                   "boundsCssPixels": {
                     "min": [
-                      -278.09988699999997,
-                      -279.97484599999996,
+                      -283.72488,
+                      -283.7251319999999,
                       -12.5
                     ],
                     "max": [
-                      283.725,
-                      287.475,
+                      285.6,
+                      291.225,
                       -12.5
                     ]
                   },
                   "style": {
-                    "width": "302px",
-                    "height": "299px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.879013,0,0,0,0,0,-1,0,283.725,287.475,-12.5,1)",
-                    "backgroundSize": "1836px 1193px",
+                    "width": "306px",
+                    "height": "303px",
+                    "transform": "matrix3d(0,-1.878922,0,0,-1.87896,0,0,0,0,0,-1,0,285.6,291.225,-12.5,1)",
+                    "backgroundSize": "3392px 604px",
                     "backgroundPosition": "-2px -2px"
                   }
                 },
                 {
                   "id": "z-10",
                   "centerUnits": [
-                    0.07499999999999973,
-                    0.037499999999999645,
+                    0.056250000000000355,
+                    0.018750000000000266,
                     -0.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 298,
+                  "widthPx": 305,
+                  "heightPx": 303,
                   "boundsCssPixels": {
                     "min": [
-                      -278.100046,
-                      -279.97484599999996,
+                      -283.72488,
+                      -283.72487,
                       -37.5
                     ],
                     "max": [
-                      281.85,
-                      287.475,
+                      285.6,
+                      289.35,
                       -37.5
                     ]
                   },
                   "style": {
-                    "width": "302px",
-                    "height": "298px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.879027,0,0,0,0,0,-1,0,281.85,287.475,-37.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-920px -2px"
+                    "width": "305px",
+                    "height": "303px",
+                    "transform": "matrix3d(0,-1.878934,0,0,-1.87896,0,0,0,0,0,-1,0,285.6,289.35,-37.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-622px -2px"
                   }
                 },
                 {
                   "id": "z-18",
                   "centerUnits": [
+                    0.09375,
+                    0.07500000000000018,
+                    3.25
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 293,
+                  "heightPx": 288,
+                  "boundsCssPixels": {
+                    "min": [
+                      -266.850096,
+                      -270.599835,
+                      162.5
+                    ],
+                    "max": [
+                      274.35,
+                      279.975,
+                      162.5
+                    ]
+                  },
+                  "style": {
+                    "width": "293px",
+                    "height": "288px",
+                    "transform": "matrix3d(0,-1.879095,0,0,-1.879167,0,0,0,0,0,-1,0,274.35,279.975,162.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-601px -309px"
+                  }
+                },
+                {
+                  "id": "z-15",
+                  "centerUnits": [
+                    0.05624999999999991,
+                    0.037499999999999645,
+                    1.75
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 303,
+                  "heightPx": 300,
+                  "boundsCssPixels": {
+                    "min": [
+                      -279.975,
+                      -281.84988,
+                      87.5
+                    ],
+                    "max": [
+                      283.725,
+                      287.475,
+                      87.5
+                    ]
+                  },
+                  "style": {
+                    "width": "303px",
+                    "height": "300px",
+                    "transform": "matrix3d(0,-1.87896,0,0,-1.879,0,0,0,0,0,-1,0,283.725,287.475,87.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2163px -2px"
+                  }
+                },
+                {
+                  "id": "z-14",
+                  "centerUnits": [
+                    0.07500000000000018,
+                    0.03750000000000009,
+                    1.25
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 304,
+                  "heightPx": 302,
+                  "boundsCssPixels": {
+                    "min": [
+                      -281.84984599999996,
+                      -281.84988799999996,
+                      62.5
+                    ],
+                    "max": [
+                      285.6,
+                      289.35,
+                      62.5
+                    ]
+                  },
+                  "style": {
+                    "width": "304px",
+                    "height": "302px",
+                    "transform": "matrix3d(0,-1.878947,0,0,-1.878973,0,0,0,0,0,-1,0,285.6,289.35,62.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-1548px -2px"
+                  }
+                },
+                {
+                  "id": "z-13",
+                  "centerUnits": [
+                    0.056250000000000355,
+                    0.018750000000000266,
+                    0.75
+                  ],
+                  "texturePath": "zimpol-v/atlases/z.webp",
+                  "widthPx": 305,
+                  "heightPx": 303,
+                  "boundsCssPixels": {
+                    "min": [
+                      -283.72488,
+                      -283.72487,
+                      37.5
+                    ],
+                    "max": [
+                      285.6,
+                      289.35,
+                      37.5
+                    ]
+                  },
+                  "style": {
+                    "width": "305px",
+                    "height": "303px",
+                    "transform": "matrix3d(0,-1.878934,0,0,-1.87896,0,0,0,0,0,-1,0,285.6,289.35,37.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-931px -2px"
+                  }
+                },
+                {
+                  "id": "z-17",
+                  "centerUnits": [
                     0.07500000000000018,
                     0.05624999999999991,
-                    3.25
+                    2.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
                   "widthPx": 298,
@@ -1825,140 +1975,20 @@
                     "min": [
                       -272.474835,
                       -276.225046,
-                      162.5
+                      137.5
                     ],
                     "max": [
                       278.1,
                       283.725,
-                      162.5
+                      137.5
                     ]
                   },
                   "style": {
                     "width": "298px",
                     "height": "293px",
-                    "transform": "matrix3d(0,-1.879027,0,0,-1.879095,0,0,0,0,0,-1,0,278.1,283.725,162.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-304px -606px"
-                  }
-                },
-                {
-                  "id": "z-15",
-                  "centerUnits": [
-                    0.07499999999999973,
-                    0.056250000000000355,
-                    1.75
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 297,
-                  "boundsCssPixels": {
-                    "min": [
-                      -276.22488,
-                      -279.97484599999996,
-                      87.5
-                    ],
-                    "max": [
-                      281.85,
-                      287.475,
-                      87.5
-                    ]
-                  },
-                  "style": {
-                    "width": "302px",
-                    "height": "297px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.87904,0,0,0,0,0,-1,0,281.85,287.475,87.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-308px -305px"
-                  }
-                },
-                {
-                  "id": "z-14",
-                  "centerUnits": [
-                    0.07499999999999973,
-                    0.037499999999999645,
-                    1.25
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 298,
-                  "boundsCssPixels": {
-                    "min": [
-                      -278.100046,
-                      -279.97484599999996,
-                      62.5
-                    ],
-                    "max": [
-                      281.85,
-                      287.475,
-                      62.5
-                    ]
-                  },
-                  "style": {
-                    "width": "302px",
-                    "height": "298px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.879027,0,0,0,0,0,-1,0,281.85,287.475,62.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1532px -2px"
-                  }
-                },
-                {
-                  "id": "z-13",
-                  "centerUnits": [
-                    0.07499999999999973,
-                    0.037499999999999645,
-                    0.75
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 302,
-                  "heightPx": 298,
-                  "boundsCssPixels": {
-                    "min": [
-                      -278.100046,
-                      -279.97484599999996,
-                      37.5
-                    ],
-                    "max": [
-                      281.85,
-                      287.475,
-                      37.5
-                    ]
-                  },
-                  "style": {
-                    "width": "302px",
-                    "height": "298px",
-                    "transform": "matrix3d(0,-1.878973,0,0,-1.879027,0,0,0,0,0,-1,0,281.85,287.475,37.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1226px -2px"
-                  }
-                },
-                {
-                  "id": "z-17",
-                  "centerUnits": [
-                    0.09375000000000044,
-                    0.056250000000000355,
-                    2.75
-                  ],
-                  "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 299,
-                  "heightPx": 295,
-                  "boundsCssPixels": {
-                    "min": [
-                      -274.35006,
-                      -276.22488699999997,
-                      137.5
-                    ],
-                    "max": [
-                      279.975,
-                      285.6,
-                      137.5
-                    ]
-                  },
-                  "style": {
-                    "width": "299px",
-                    "height": "295px",
-                    "transform": "matrix3d(0,-1.879013,0,0,-1.879068,0,0,0,0,0,-1,0,279.975,285.6,137.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1525px -305px"
+                    "transform": "matrix3d(0,-1.879027,0,0,-1.879095,0,0,0,0,0,-1,0,278.1,283.725,137.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2px -309px"
                   }
                 },
                 {
@@ -1969,176 +1999,176 @@
                     2.25
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 300,
+                  "widthPx": 302,
                   "heightPx": 297,
                   "boundsCssPixels": {
                     "min": [
                       -276.22488,
-                      -278.1,
+                      -279.97484599999996,
                       112.5
                     ],
                     "max": [
                       281.85,
-                      285.6,
+                      287.475,
                       112.5
                     ]
                   },
                   "style": {
-                    "width": "300px",
+                    "width": "302px",
                     "height": "297px",
-                    "transform": "matrix3d(0,-1.879,0,0,-1.87904,0,0,0,0,0,-1,0,281.85,285.6,112.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-918px -305px"
+                    "transform": "matrix3d(0,-1.878973,0,0,-1.87904,0,0,0,0,0,-1,0,281.85,287.475,112.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2776px -2px"
                   }
                 },
                 {
                   "id": "z-21",
                   "centerUnits": [
-                    0.11249999999999982,
-                    0.07500000000000018,
+                    0.1875,
+                    -0.2437499999999999,
                     4.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 294,
-                  "heightPx": 288,
+                  "widthPx": 262,
+                  "heightPx": 227,
                   "boundsCssPixels": {
                     "min": [
-                      -266.850096,
-                      -270.600108,
+                      -225.59992199999996,
+                      -236.84996000000004,
                       237.5
                     ],
                     "max": [
-                      274.35,
-                      281.85,
+                      201.225,
+                      255.6,
                       237.5
                     ]
                   },
                   "style": {
-                    "width": "294px",
-                    "height": "288px",
-                    "transform": "matrix3d(0,-1.879082,0,0,-1.879167,0,0,0,0,0,-1,0,274.35,281.85,237.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-300px -903px"
+                    "width": "262px",
+                    "height": "227px",
+                    "transform": "matrix3d(0,-1.87958,0,0,-1.880286,0,0,0,0,0,-1,0,201.225,255.6,237.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2312px -309px"
                   }
                 },
                 {
                   "id": "z-20",
                   "centerUnits": [
-                    0.09375,
-                    0.07499999999999973,
+                    0.11250000000000027,
+                    0.05624999999999991,
                     4.25
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 295,
-                  "heightPx": 290,
+                  "widthPx": 278,
+                  "heightPx": 261,
                   "boundsCssPixels": {
                     "min": [
-                      -268.72502,
-                      -272.47506,
+                      -242.47507800000002,
+                      -255.59984799999995,
                       212.5
                     ],
                     "max": [
-                      276.225,
-                      281.85,
+                      248.1,
+                      266.85,
                       212.5
                     ]
                   },
                   "style": {
-                    "width": "295px",
-                    "height": "290px",
-                    "transform": "matrix3d(0,-1.879068,0,0,-1.879138,0,0,0,0,0,-1,0,276.225,281.85,212.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1507px -606px"
+                    "width": "278px",
+                    "height": "261px",
+                    "transform": "matrix3d(0,-1.879316,0,0,-1.879598,0,0,0,0,0,-1,0,248.1,266.85,212.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-1764px -309px"
                   }
                 },
                 {
                   "id": "z-19",
                   "centerUnits": [
-                    0.09375,
-                    0.07499999999999973,
+                    0.07500000000000018,
+                    0.037499999999999645,
                     3.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 297,
-                  "heightPx": 292,
+                  "widthPx": 288,
+                  "heightPx": 278,
                   "boundsCssPixels": {
                     "min": [
-                      -270.599828,
-                      -274.34988,
+                      -259.34984799999995,
+                      -266.850096,
                       187.5
                     ],
                     "max": [
-                      278.1,
-                      283.725,
+                      263.1,
+                      274.35,
                       187.5
                     ]
                   },
                   "style": {
-                    "width": "297px",
-                    "height": "292px",
-                    "transform": "matrix3d(0,-1.87904,0,0,-1.879109,0,0,0,0,0,-1,0,278.1,283.725,187.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-907px -606px"
+                    "width": "288px",
+                    "height": "278px",
+                    "transform": "matrix3d(0,-1.879167,0,0,-1.879316,0,0,0,0,0,-1,0,263.1,274.35,187.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-1190px -309px"
                   }
                 },
                 {
                   "id": "z-23",
                   "centerUnits": [
-                    0.11249999999999982,
-                    0.056250000000000355,
+                    0.16874999999999973,
+                    0.1124999999999996,
                     5.75
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 292,
-                  "heightPx": 285,
+                  "widthPx": 175,
+                  "heightPx": 172,
                   "boundsCssPixels": {
                     "min": [
-                      -264.97484999999995,
-                      -268.724828,
+                      -156.225044,
+                      -156.224975,
                       287.5
                     ],
                     "max": [
-                      270.6,
-                      279.975,
+                      167.475,
+                      173.1,
                       287.5
                     ]
                   },
                   "style": {
-                    "width": "292px",
-                    "height": "285px",
-                    "transform": "matrix3d(0,-1.879109,0,0,-1.87921,0,0,0,0,0,-1,0,270.6,279.975,287.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-1488px -903px"
+                    "width": "175px",
+                    "height": "172px",
+                    "transform": "matrix3d(0,-1.881857,0,0,-1.881977,0,0,0,0,0,-1,0,167.475,173.1,287.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-3215px -309px"
                   }
                 },
                 {
                   "id": "z-22",
                   "centerUnits": [
-                    0.09375,
-                    0.07500000000000018,
+                    0.43125000000000036,
+                    -0.037499999999999645,
                     5.25
                   ],
                   "texturePath": "zimpol-v/atlases/z.webp",
-                  "widthPx": 293,
-                  "heightPx": 288,
+                  "widthPx": 225,
+                  "heightPx": 202,
                   "boundsCssPixels": {
                     "min": [
-                      -266.850096,
-                      -270.599835,
+                      -191.85008200000001,
+                      -189.974925,
                       262.5
                     ],
                     "max": [
-                      274.35,
-                      279.975,
+                      188.1,
+                      233.1,
                       262.5
                     ]
                   },
                   "style": {
-                    "width": "293px",
-                    "height": "288px",
-                    "transform": "matrix3d(0,-1.879095,0,0,-1.879167,0,0,0,0,0,-1,0,274.35,279.975,262.5,1)",
-                    "backgroundSize": "1836px 1193px",
-                    "backgroundPosition": "-895px -903px"
+                    "width": "225px",
+                    "height": "202px",
+                    "transform": "matrix3d(0,-1.880333,0,0,-1.880941,0,0,0,0,0,-1,0,188.1,233.1,262.5,1)",
+                    "backgroundSize": "3392px 604px",
+                    "backgroundPosition": "-2807px -309px"
                   }
                 }
               ]
@@ -2147,206 +2177,206 @@
           "resources": [
             {
               "path": "zimpol-v/impostors/view-nnn.png",
-              "sha256": "19280bb11ed0db9facae3d4275536a07c4fd60fd11be8b6bc3581ce2185dd1db",
-              "bytes": 43304,
+              "sha256": "c67ff923d789e5abc4be56e4bf19653a19cf554b1b452ea86cd0031a54fcfceb",
+              "bytes": 38320,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-nn0.png",
-              "sha256": "d93864892bf3bca8330b7095814189977a31da1f823b52fd29411fe60dcee5eb",
-              "bytes": 31158,
+              "sha256": "8d894572ad1c40ae6e649c1489b8ed5cf1df2de6fc86eeeeedf5f2747d6500b5",
+              "bytes": 29848,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-nnp.png",
-              "sha256": "f917be9e566ebca8a3cf2eba513cf1839e013025d10925e5506a8eca09f4c2a5",
-              "bytes": 43209,
+              "sha256": "609cd6a094aa5524cc25085a62094f6bfb5f386207057c61d0f2b2e83667e296",
+              "bytes": 38079,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-n0n.png",
-              "sha256": "489624d40af8dea7d963ea5282b7d57d485669e53d5014b36d37ffa695898dde",
-              "bytes": 40177,
+              "sha256": "5dd78a4a8192c29b5cf90c3365dfeb6806be10c32e21ceb381c8309a0d47ccaa",
+              "bytes": 36034,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-n00.png",
-              "sha256": "70e976a999d58857221cb5d14232967e7b9b68e21ec5273ceb7e808f930e98d5",
-              "bytes": 29942,
+              "sha256": "4b3ce0ff041c6b3e22266aef3e8e7cf3aeabe6482bb5a175f040ea083d43c923",
+              "bytes": 28451,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-n0p.png",
-              "sha256": "273a15d229b1f08761587cdc851565badb660691b8fb4a60224dca89877be7b9",
-              "bytes": 40250,
+              "sha256": "889ecb9dc157a78e9a55dd4f4ae07bab3ed09472b1934ca7b4ba1207c7385cd2",
+              "bytes": 36051,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-npn.png",
-              "sha256": "4b90d91925473a14681780eab6a9c989a4e6c3f13034e632627ca67e3dd0691e",
-              "bytes": 45880,
+              "sha256": "1faf28a5d9aa72b82d842492f3530afa0623071fc9589611fafd24de3377cbe8",
+              "bytes": 40701,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-np0.png",
-              "sha256": "e8399fece496b38d4511cef7f6886975cfb961630e6840cdfb7e82ff8f2323a8",
-              "bytes": 31591,
+              "sha256": "d725a717f1d6eb1d67d6728e6c53d5aa6b526dde3f6b02a189e5be49fb7e7f12",
+              "bytes": 32524,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-npp.png",
-              "sha256": "965848b6db40909a6561bd05dd2b4e5e4a2aa68ec6ae5fc89f385569fc76eae0",
-              "bytes": 45872,
+              "sha256": "7a92091e06f2a19e8de353cb7cc155af23e9eb8002a53fb0719d63aed52039bd",
+              "bytes": 40681,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-0nn.png",
-              "sha256": "0cb04756d97a44c23600e99ca61f5dd60a9d67d78eae8b18eb821fb84f5db9f4",
-              "bytes": 44551,
+              "sha256": "cb28ddda2755a5e5c74e0ce0f11bc0eae165713aa4c3830a34dac879fc0e7d1d",
+              "bytes": 40912,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-0n0.png",
-              "sha256": "33b9308b4636f41cf5219085e4eb76957ce207ce7b6a5d4747f060f32b1a4b8a",
-              "bytes": 38209,
+              "sha256": "158e0de4395fdba86c20bc7840629945234558a44bfa86df8de477ab90b854cd",
+              "bytes": 38988,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-0np.png",
-              "sha256": "42cdc25207bfab0f20a8fe6b449cfde24625797464c085ab2beb8299661dca5a",
-              "bytes": 44364,
+              "sha256": "d7f8261831753742bd437937db527af9a9838fb4cf11d766df996d2a0ea3323f",
+              "bytes": 40717,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-00n.png",
-              "sha256": "567ccb1dff27989c50279c25c79f4ebc23815ba5a59760212b395d3a6c678dcc",
-              "bytes": 23054,
+              "sha256": "14ae545ccb3f56d9b6ddfa63f176d1365890eb5516a97a2f61ba241241f323dc",
+              "bytes": 23287,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-00p.png",
-              "sha256": "18501d1aa040775d387609b61588b434d0a4c954d2a3529cc9b7f6c39c470ddb",
-              "bytes": 23005,
+              "sha256": "cda8b66b68d4891de1131e619f06cbb49cca6cf45997bdbf465460167d33fd7c",
+              "bytes": 23355,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-0pn.png",
-              "sha256": "163fc084c6914f2639cbef7872486e44a4ba79563915b62c5bc37f5b5c28bce6",
-              "bytes": 44732,
+              "sha256": "41b27c84d21a8bfdc50684626f8138382be29baa092b40060f78f2ed99b64f9c",
+              "bytes": 41019,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-0p0.png",
-              "sha256": "7acc00ff785c76b65896a71755d22cbc8a539930fa4fa36d586fcd3b293951a7",
-              "bytes": 38498,
+              "sha256": "2d7de2042a113c0f6b2fe5ee47c7cb9cdeb2934735f6f7ecd68660cf57158a4d",
+              "bytes": 39253,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-0pp.png",
-              "sha256": "ef732b51d89bd6f122c03aa350020fa5b90de071dfdeaafba734acab0dc5d9b9",
-              "bytes": 44573,
+              "sha256": "835c4df9a2bc07c1f93ba96d2a8cf96c9feb305e0fb1073aa8770cd706821061",
+              "bytes": 40909,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-pnn.png",
-              "sha256": "0725e61ea1835e2e3bc8a662fd425298de860a601668d99d5a9e6b357181bd38",
-              "bytes": 45415,
+              "sha256": "96b28dd974f0dbbe48ec7fd8fe018feb82f041dabe9b363322e57ef27804f470",
+              "bytes": 40657,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-pn0.png",
-              "sha256": "9a4dd155a7eb74dde8fa154a0d3ef6dda839eee60a49242567e62fc0cb412779",
-              "bytes": 31917,
+              "sha256": "9c3ada368efa05a1e41d29cedff6273e5ae8cd9ca2314c1590deaa7b92696278",
+              "bytes": 32600,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-pnp.png",
-              "sha256": "1455490a6cd54c146012b632b56249621ba7f10b21efc46cc0c8872280a388b5",
-              "bytes": 45554,
+              "sha256": "8701b0690baf03f3590fedbb7088c0511d123cef422284a30d032ab3659a63c6",
+              "bytes": 40842,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-p0n.png",
-              "sha256": "0397b1690d2c8ab79eaf2ac7cf1089ab447bc81e4ca7d150d0934e1cbe469a45",
-              "bytes": 40044,
+              "sha256": "62ba1f630820c77baac51c510a32a733da49bbd5eab5c77df5024d28517352ca",
+              "bytes": 36259,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-p00.png",
-              "sha256": "6e9bd8f7b4734abe2966c60ed141ca3ebaa68388fc9cf2498f06bbe051ed52e3",
-              "bytes": 29934,
+              "sha256": "4958c5c26f778b1aabc010a46022bd633b41fcde654e7664b4647bcdbec792f2",
+              "bytes": 28841,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-p0p.png",
-              "sha256": "3254ffd478ef11b8b77b3cb1a6dac6bdb502c4b8c8a667e951cae6ad36c3dd91",
-              "bytes": 40231,
+              "sha256": "b510eec54958068e4edd7494481e47dbe8b54af2fb7ad09504e0869aa4c7c33c",
+              "bytes": 36361,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-ppn.png",
-              "sha256": "67bdec65b3d13cbcd9d76bc06247b829aa3da6672656427267d0f3e63dec0185",
-              "bytes": 43698,
+              "sha256": "629af3284cf29b1bf8bf7cba4a8c66616d2accbfb1e74cada73c3a0e39dbe256",
+              "bytes": 38884,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-pp0.png",
-              "sha256": "8fb6d057200d9eed9429bac55fc283ca080d78f6d45879a7fd77655852ee0b84",
-              "bytes": 32148,
+              "sha256": "72889873ed5acf5a77fd099a036d92900634f4ba0285fec2a39b2a90d02c58c2",
+              "bytes": 30559,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/impostors/view-ppp.png",
-              "sha256": "719aa177207d43d4371ea501d1d858f534e321ac63f02ca91b1b626c1ded1994",
-              "bytes": 43612,
+              "sha256": "0b3b4713471f01fbfc7b5fe3115bd78b9025bcad0fb0597b9da75825545a1bce",
+              "bytes": 38704,
               "width": 256,
               "height": 256
             },
             {
               "path": "zimpol-v/atlases/x.webp",
-              "sha256": "3325ebe6dd342952f477fa2c2d1abf7b3c863ff6bfa8d08f4c1be262928f7b1d",
-              "bytes": 92150,
-              "width": 4984,
+              "sha256": "05df46c7398c0eba034fbf7bed61ef21066b040751104785b7654a59f0cb454b",
+              "bytes": 106640,
+              "width": 5102,
               "height": 324
             },
             {
               "path": "zimpol-v/atlases/y.webp",
-              "sha256": "1ef1d361070014e4dcc251c809aa4e9b8d8477b755a414380fb112034cb46336",
-              "bytes": 93702,
-              "width": 5004,
+              "sha256": "ec74f8dcaaea6016e9dd6712b31b315a807628cad284c3e15621c3772c1360c2",
+              "bytes": 108554,
+              "width": 5113,
               "height": 324
             },
             {
               "path": "zimpol-v/atlases/z.webp",
-              "sha256": "7f18f442d68b93f89a5d63c5d9e2587aab55c9b81960b9c566f01f2eeab90db3",
-              "bytes": 192048,
-              "width": 1836,
-              "height": 1193
+              "sha256": "0ac3e4f04ad950aee6ba3facf0441f3d7bf01d6633b9ba43f36d42b9f7d2aa34",
+              "bytes": 185368,
+              "width": 3392,
+              "height": 604
             }
           ],
           "provenance": {
@@ -2413,6 +2443,18 @@
                 428.4301075268817
               ],
               "polarisationMaskRadiusUnits": 0.9261683067390526,
+              "envelope": {
+                "shape": "spherical-shell",
+                "radiusUnits": 3.4999999999999956,
+                "gaussianWidthUnits": 1.2000000000000004,
+                "residualRms": 0.00427793333049162,
+                "signalRms": 0.014126183435468629,
+                "alternatives": {
+                  "steadyOutflowExponent": 0.7000000000000002,
+                  "steadyOutflowResidualRms": 0.0062327494811967935,
+                  "constantDepthResidualRms": 0.006939448861903369
+                }
+              },
               "productOffsetPixels": 10.623416723779588,
               "intensityPeak": 244980.17392728516,
               "polarisationFloor": 0.0054274498079658565,
@@ -2435,11 +2477,11 @@
               "veilRadiusUnits": 1.8294620574064917
             },
             "models": {
-              "zimpol-v": "Sky-plane slab, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. It sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+              "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
               "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
             },
             "limitations": [
-              "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
+              "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed. Its depth is the envelope that best projects to the measured radial profile, which is an inference from that profile, not a measurement, and it cannot say which patches are in front and which behind.",
               "The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.",
               "The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.",
               "The 2024 colours are the publisher's inferno colour map for that ratio, on the same zero-to-0.10 scale as their figure. They are a legend, not the colour of the dust and not a temperature.",
@@ -4073,6 +4115,18 @@
                 428.4301075268817
               ],
               "polarisationMaskRadiusUnits": 0.9261683067390526,
+              "envelope": {
+                "shape": "spherical-shell",
+                "radiusUnits": 3.4999999999999956,
+                "gaussianWidthUnits": 1.2000000000000004,
+                "residualRms": 0.00427793333049162,
+                "signalRms": 0.014126183435468629,
+                "alternatives": {
+                  "steadyOutflowExponent": 0.7000000000000002,
+                  "steadyOutflowResidualRms": 0.0062327494811967935,
+                  "constantDepthResidualRms": 0.006939448861903369
+                }
+              },
               "productOffsetPixels": 10.623416723779588,
               "intensityPeak": 244980.17392728516,
               "polarisationFloor": 0.0054274498079658565,
@@ -4095,11 +4149,11 @@
               "veilRadiusUnits": 1.8294620574064917
             },
             "models": {
-              "zimpol-v": "Sky-plane slab, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. It sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+              "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
               "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
             },
             "limitations": [
-              "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
+              "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed. Its depth is the envelope that best projects to the measured radial profile, which is an inference from that profile, not a measurement, and it cannot say which patches are in front and which behind.",
               "The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.",
               "The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.",
               "The 2024 colours are the publisher's inferno colour map for that ratio, on the same zero-to-0.10 scale as their figure. They are a legend, not the colour of the dust and not a temperature.",

@@ -5,20 +5,20 @@
   "defaultLens": "zimpol-v",
   "bank": {
     "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "193f5c2d868b1e1ee9a903296b032d6a2e03b52960a05d6e47a403af930838ba",
-    "bytes": 166363
+    "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
+    "bytes": 170077
   },
   "recipes": [
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "a3a60ecb8d9331690707324cd20e1bb7f8bb7a00a8f7e85f78329fbb25521254",
+      "sha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
       "bytes": 1838
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "0605d13dad712596a70ddd837950a694490e4a9780edd1f239c7c432a2602b5c",
+      "sha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
       "bytes": 1523
     }
   ],
@@ -56,7 +56,7 @@
         {
           "id": "depth",
           "label": "Depth",
-          "value": "Not measured; a plane-of-sky slab spread by scattering angle"
+          "value": "Not measured; the spherical shell at 3.5 stellar radii that best projects to the measured profile"
         }
       ],
       "input": "sphere-zimpol-betelgeuse-p1-v-dolp",

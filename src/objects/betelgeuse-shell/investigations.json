@@ -20,6 +20,22 @@
       ]
     },
     {
+      "id": "envelope-shape",
+      "subject": "How a sky-plane map is given depth",
+      "status": "included",
+      "finding": "The first version pushed the image backwards: every sky pixel was spread along the whole line of sight, weighted by the Rayleigh polarisation efficiency, which is the convention of the polarimetric papers but is an extrusion, not a shape. Reviewed against how this project builds Helix and M2-9, where a shape is inferred from the observations rather than extruded, the decision is to fit an envelope instead. The azimuthally averaged radial profile between one and six stellar radii is scored against three envelopes projected through the cube: a spherical shell of free radius and gaussian thickness, the steady outflow a constant mass-loss rate gives, and constant depth, which is what an extrusion assumes. Measured on the released degree map, against a profile whose own rms is 1.41e-2: the shell leaves 4.28e-3 at radius 3.50 stellar radii and gaussian thickness 1.20, the outflow leaves 6.23e-3 at r^-0.70, and constant depth leaves 6.94e-3. The shell is drawn, each sky column is spread along it and normalised so the column still reproduces its measured degree, and the author refuses to write the grid if the shell is not the best of the three. The envelope is symmetric in depth, so each patch appears both in front of the star and behind it; one image cannot separate them and none of this is a measurement of depth.",
+      "evidence": [
+        "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
+        "https://doi.org/10.1051/0004-6361/202661023"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "9e8b176ca252641a1e6f61c673c9b430212ceb5a"
+        }
+      ]
+    },
+    {
       "id": "product-registration",
       "subject": "Where the star sits inside the 2024 polarisation map",
       "status": "included",

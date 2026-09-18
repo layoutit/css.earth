@@ -12,7 +12,15 @@ The shell is the degree of linear polarisation around Betelgeuse measured by VLT
 
 **What is genuinely lopsided is the light, not the star.** The centroid of the drawn brightness between one and 4.5 radii lies about a stellar radius from the star, because the envelope is clumpy; one quadrant of the one-to-three-radius ring carries roughly a third of the polarised light of the other three. The published figure shows the same asymmetry.
 
-**Depth model, stated.** The map is a sky-plane image with no third axis. Following the convention of the polarimetric papers, the polarised light is placed in the plane of the sky through the star and spread along the line of sight by the Rayleigh polarisation efficiency r² / (r² + 2 z²), normalised so that each sky pixel's column reproduces its measured degree. The map is floor-subtracted (the median degree between 8 and 12 radii, 0.55 percent, is instrumental) and carried on the same zero-to-0.10 scale as the published figure's colourbar; the disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and six radii. Depth is not measured.
+**Depth: a shape fitted to the profile, not the image pushed backwards.** The map is a sky-plane image with no third axis, and an extrusion along the line of sight is not a shape. This package instead asks which simple envelope, placed around the star, projects to the radial profile that was measured. The azimuthal average between one and six stellar radii is fitted against a spherical shell of free radius and gaussian thickness, against the steady outflow a constant mass-loss rate gives, and against constant depth, which is what an extrusion assumes. The shell wins and is what is drawn:
+
+| envelope | residual against a profile of 1.41e-2 |
+|---|---|
+| spherical shell, radius 3.50 R★, gaussian thickness 1.20 R★ | 4.28e-3 |
+| steady outflow, ρ ∝ r^−0.70 | 6.23e-3 |
+| constant depth, what an extrusion assumes | 6.94e-3 |
+
+Each sky column is then spread along that envelope and normalised so it reproduces its own measured degree, which puts a patch at the shell's radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it; one image cannot say which, and nothing here pretends to. The author refuses to write the grid if the shell is not the best of the three. The map is floor-subtracted (the median degree between 8 and 12 radii, 0.55 percent, is instrumental) and carried on the same zero-to-0.10 scale as the published figure's colourbar; the disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and six radii. The shell radius is inferred, not measured.
 
 **Preparation.** `tools/objects/source-authoring/betelgeuse-shell/author.mts` samples each dataset into a 96³ density grid, `source/density-zimpol-v.ktx2` and `source/density-veil-2019-12.ktx2`, and writes the two volume recipes, the delivery, the presentation and the provenance record. The nebula delivery's `density-grid` method bakes 24 slabs per axis, half a radius apart, through the Milky Way's slab baker, one lens per grid, and the ordinary nebula preparation installs the lens bank. The two grids must share their bounds; the method refuses them otherwise.
 
@@ -32,7 +40,7 @@ Betelgeuse's Datasets list therefore has three entries. `matisse` is the reconst
 
 **Proof of concept.** This package exists to prove that a body can sit inside a prepared volume. It passes the application's availability gate on its own records; the local bypass an earlier draft needed is gone.
 
-**No third axis.** Everything along the line of sight is a stated model. Orbiting away from the observed direction shows the slab's assumed thickness, not a measurement. The masked disc is spread the same way, so it is a tube twelve radii long rather than a hole: seen from Earth's direction the star sits inside it, and seen from any other direction it reads as a dark lane through the cloud with the star in the middle of it. That lane is the convention made visible, not a placement error.
+**No third axis.** The shell is an inference from one projected profile, not a measurement. Orbiting away from the observed direction shows the slab's assumed thickness, not a measurement. The masked disc is spread the same way, so it is a tube twelve radii long rather than a hole: seen from Earth's direction the star sits inside it, and seen from any other direction it reads as a dark lane through the cloud with the star in the middle of it. That lane is the convention made visible, not a placement error.
 
 **The intensity file is scaled.** Its header carries `BSCALE = 10.977`; the shared FITS reader applies it, raw byte reads do not, and only ratios to the peak are used here.
 

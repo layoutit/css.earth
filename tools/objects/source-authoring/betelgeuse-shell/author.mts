@@ -54,6 +54,13 @@ export const GRID = Object.freeze({ size: 96, halfUnits: 6, slabs: 24 });
  * published colourbar, so this volume carries the same transfer function as the figure it reproduces. */
 export const STRETCH = Object.freeze({ backgroundAnnulusUnits: [8, 12] as const, topDegree: 0.10, intensityFloorOfPeak: 3e-3,
   innerMaskUnits: 1, taperFromUnits: 4.5 });
+/** The shape search. The map is a projection, so the depth comes from asking which simple three-dimensional shape,
+ * placed around the star, projects to the radial profile that was measured; it is not the sky image pushed backwards.
+ * Two shapes are tried against the azimuthal average, a spherical shell of free radius and thickness and the steady
+ * outflow a constant mass-loss rate gives, and the residuals of both are recorded beside the answer. */
+export const SHELL_SEARCH = Object.freeze({ profileUnits: [1, 6] as const, bins: 44,
+  radiusUnits: [1, 5] as const, widthUnits: [0.2, 3] as const, gridStep: 0.05, outflowExponents: [0.5, 6] as const });
+
 /** The figure's own colour map, sampled at the quarters of its bar: matplotlib `inferno`, which Montargès et al. 2026
  * print the V-band degree of linear polarisation in (Fig. B.1). Four stops are all an RGBA8 grid can carry, and four is
  * enough: the slab compiler sums the channels' emission, so tent weights over these stops interpolate the bar linearly
@@ -174,6 +181,51 @@ export async function author(defaultLens = 'zimpol-v') {
   }
   floorSamples.sort((a, b) => a - b);
   const background = floorSamples[Math.floor(floorSamples.length / 2)]!;
+  // --- the shape: which simple envelope projects to the profile that was measured ---
+  const { bins } = SHELL_SEARCH, [profileLow, profileHigh] = SHELL_SEARCH.profileUnits;
+  const profileStep = (profileHigh - profileLow) / bins;
+  const profileSum = new Float64Array(bins), profileCount = new Float64Array(bins);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const b = Math.hypot(x - px, y - py) / pixelsPerUnit;
+    if (b < profileLow || b >= profileHigh) continue;
+    const k = Math.min(bins - 1, Math.floor((b - profileLow) / profileStep));
+    profileSum[k]! += Math.max(0, P[y * width + x]! - background); profileCount[k]! += 1;
+  }
+  const measuredProfile = [...profileSum].map((total, k) => ({ b: profileLow + (k + 0.5) * profileStep, value: total / profileCount[k]! }));
+  /** Project a radial density through the cube and score it against the measured profile at its best gain. */
+  const scoreProfile = (density: (r: number) => number) => {
+    const model = measuredProfile.map(({ b }) => {
+      let total = 0; const dz = 0.02;
+      for (let z = -halfUnits; z <= halfUnits; z += dz) total += density(Math.hypot(b, z)) * dz;
+      return total;
+    });
+    let num = 0, den = 0;
+    for (const [i, point] of measuredProfile.entries()) { num += point.value * model[i]!; den += model[i]! * model[i]!; }
+    const gain = den > 0 ? num / den : 0;
+    let residual = 0;
+    for (const [i, point] of measuredProfile.entries()) { const d = point.value - gain * model[i]!; residual += d * d; }
+    return Math.sqrt(residual / measuredProfile.length);
+  };
+  let shell = { radiusUnits: 0, widthUnits: 0, residual: Infinity };
+  for (let radius = SHELL_SEARCH.radiusUnits[0]; radius <= SHELL_SEARCH.radiusUnits[1]; radius += SHELL_SEARCH.gridStep) {
+    for (let width_ = SHELL_SEARCH.widthUnits[0]; width_ <= SHELL_SEARCH.widthUnits[1]; width_ += SHELL_SEARCH.gridStep) {
+      const residual = scoreProfile(r => Math.exp(-(((r - radius) / width_) ** 2) / 2));
+      if (residual < shell.residual) shell = { radiusUnits: radius, widthUnits: width_, residual };
+    }
+  }
+  let outflow = { exponent: 0, residual: Infinity };
+  for (let n = SHELL_SEARCH.outflowExponents[0]; n <= SHELL_SEARCH.outflowExponents[1]; n += SHELL_SEARCH.gridStep) {
+    const residual = scoreProfile(r => (r < STRETCH.innerMaskUnits ? 0 : Math.pow(r, -n)));
+    if (residual < outflow.residual) outflow = { exponent: n, residual };
+  }
+  const flatResidual = scoreProfile(() => 1);
+  const signalRms = Math.sqrt(measuredProfile.reduce((total, point) => total + point.value * point.value, 0) / measuredProfile.length);
+  if (!(shell.residual < outflow.residual && shell.residual < flatResidual)) {
+    throw new Error(`The shell is not the best shape for this profile (shell ${shell.residual}, outflow ${outflow.residual}, flat ${flatResidual}).`);
+  }
+  /** The fitted envelope. A column is spread along this, so a clump lands at the shell's radius in front and behind. */
+  const shellDensity = (r: number) => Math.exp(-(((r - shell.radiusUnits) / shell.widthUnits) ** 2) / 2);
+
   // Resolve the sky plane and each column's normalisation once; the encoder then only samples them.
   const plane = new Float64Array(size * size), norm = new Float64Array(size * size);
   for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
@@ -184,18 +236,20 @@ export async function author(defaultLens = 'zimpol-v') {
     if (r < STRETCH.innerMaskUnits || bilinear(I, width, height, cx + x * pixelsPerUnit - 0.5, cy + y * pixelsPerUnit - 0.5) < STRETCH.intensityFloorOfPeak * peakValue) continue;
     const degree = bilinear(P, width, height, col - 0.5, row - 0.5) - background;
     plane[j * size + i] = Math.max(0, Math.min(1, degree / (STRETCH.topDegree - background))) * (1 - smoothstep(STRETCH.taperFromUnits, halfUnits, r));
-    let sum = 0; const r2 = x * x + y * y;
-    for (let k = 0; k < size; k++) { const z = -halfUnits + (k + 0.5) * step; sum += r2 / (r2 + 2 * z * z) * step; }
+    let sum = 0;
+    for (let k = 0; k < size; k++) { const z = -halfUnits + (k + 0.5) * step; sum += shellDensity(Math.hypot(r, z)) * step; }
     norm[j * size + i] = sum;
   }
-  // Each voxel carries the four colour-map weights of its sky value, shaped along the line of sight by the same
-  // normalised Rayleigh profile. The ray integral of channel k is therefore the weight itself, so a column reproduces
-  // the figure's colour at its own measured degree, and every channel shares one profile, which keeps the composite's
-  // chromaticity constant along a column instead of only approximately so.
+  // Each voxel carries the four colour-map weights of its sky value, placed along the line of sight on the fitted
+  // envelope rather than pushed back from the sky plane. The ray integral of channel k is still the weight itself, so a
+  // column reproduces the figure's colour at its own measured degree, and every channel shares one profile, which keeps
+  // the composite's chromaticity constant along a column instead of only approximately so. The envelope is symmetric in
+  // depth, so each patch is drawn both in front of the star and behind it; nothing here chooses between them.
   const zimpol = encodeGrid((x, y, z) => {
     const i = Math.round((x + halfUnits) / step - 0.5), j = Math.round((y + halfUnits) / step - 0.5);
     const value = plane[j * size + i] ?? 0; if (!(value > 0)) return 0;
-    const r2 = x * x + y * y, profile = (r2 / (r2 + 2 * z * z)) / norm[j * size + i]!;
+    const column = norm[j * size + i]!; if (!(column > 0)) return 0;
+    const profile = shellDensity(Math.hypot(x, y, z)) / column;
     return colourMapWeights(value).map(weight => weight * profile);
   });
   // The renderer turns a column into 1-exp(-gain * column) and takes its chromaticity from the same sum, so the gain is
@@ -254,16 +308,18 @@ export async function author(defaultLens = 'zimpol-v') {
     ],
     paper: { doi: '10.1051/0004-6361/202661023', citation: 'Montargès et al. 2026, A&A 711, L12 (the 2024 polarimetry)' },
     measured: { starCentrePixel: [cx, cy], polarisationCentrePixel: [px, py], polarisationMaskRadiusUnits: maskedRadiusUnits,
+      envelope: { shape: 'spherical-shell', radiusUnits: shell.radiusUnits, gaussianWidthUnits: shell.widthUnits,
+        residualRms: shell.residual, signalRms, alternatives: { steadyOutflowExponent: outflow.exponent, steadyOutflowResidualRms: outflow.residual, constantDepthResidualRms: flatResidual } },
       productOffsetPixels, intensityPeak: peakValue, polarisationFloor: background, pixelsPerStellarRadius: pixelsPerUnit,
       colourMap: COLOUR_MAP.name, colourScaleTopDegree: STRETCH.topDegree, zimpolExposureGain: zimpolGain,
       stellarRadiusArcsec: radiusArcsec, stellarRadiusAu: auPerUnit, sceneOriginRaDecDeg: [raDeg, decDeg], distancePc: distanceM / METERS_PER_PARSEC,
       veilCentreUnits: [...centre], veilRadiusUnits: veilRadius },
     models: {
-      'zimpol-v': `Sky-plane slab, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to ${STRETCH.topDegree.toFixed(2)}. It sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. Colour is matplotlib ${COLOUR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
+      'zimpol-v': `Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to ${STRETCH.topDegree.toFixed(2)}. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius ${shell.radiusUnits.toFixed(2)} stellar radii and gaussian thickness ${shell.widthUnits.toFixed(2)}, which leaves a residual of ${shell.residual.toExponential(2)} against a profile of ${signalRms.toExponential(2)}. A steady outflow r^-${outflow.exponent.toFixed(2)} leaves ${outflow.residual.toExponential(2)} and a constant depth, which is what pushing the image backwards assumes, leaves ${flatResidual.toExponential(2)}. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib ${COLOUR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
       'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
     },
     limitations: [
-      'The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.',
+      'The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed. Its depth is the envelope that best projects to the measured radial profile, which is an inference from that profile, not a measurement, and it cannot say which patches are in front and which behind.',
       'The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.',
       'The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.',
       `The 2024 colours are the publisher's ${COLOUR_MAP.name} colour map for that ratio, on the same zero-to-${STRETCH.topDegree.toFixed(2)} scale as their figure. They are a legend, not the colour of the dust and not a temperature.`,
@@ -333,7 +389,7 @@ export async function author(defaultLens = 'zimpol-v') {
        { id: 'resolution', label: 'Angular resolution', value: '16 mas, 0.76 stellar radii' },
        { id: 'extent', label: 'Drawn extent', value: '1 to 4.5 stellar radii, tapering to 6' },
        { id: 'scale', label: 'Colour scale', value: `Degree of linear polarisation 0 to ${STRETCH.topDegree.toFixed(2)}, the paper's ${COLOUR_MAP.name} map` },
-       { id: 'depth', label: 'Depth', value: 'Not measured; a plane-of-sky slab spread by scattering angle' }]
+       { id: 'depth', label: 'Depth', value: `Not measured; the spherical shell at ${shell.radiusUnits.toFixed(1)} stellar radii that best projects to the measured profile` }]
     : [{ id: 'model', label: 'Model', value: 'RADMC-3D sphere of constant density, Montarg\u00e8s et al. 2021, Extended Data Table 3' },
        { id: 'geometry', label: 'Centre and radius', value: '(\u22121.9, \u22123.0, +12.5) au along right ascension, declination and toward Earth; radius 6.5 au' },
        { id: 'density', label: 'Dust density', value: '3.2 \u00d7 10\u207b\u00b9\u2079 g cm\u207b\u00b3 in MgFeSiO\u2084 grains centred on 0.21 \u00b5m' },

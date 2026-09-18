@@ -62,6 +62,18 @@
       428.4301075268817
     ],
     "polarisationMaskRadiusUnits": 0.9261683067390526,
+    "envelope": {
+      "shape": "spherical-shell",
+      "radiusUnits": 3.4999999999999956,
+      "gaussianWidthUnits": 1.2000000000000004,
+      "residualRms": 0.00427793333049162,
+      "signalRms": 0.014126183435468629,
+      "alternatives": {
+        "steadyOutflowExponent": 0.7000000000000002,
+        "steadyOutflowResidualRms": 0.0062327494811967935,
+        "constantDepthResidualRms": 0.006939448861903369
+      }
+    },
     "productOffsetPixels": 10.623416723779588,
     "intensityPeak": 244980.17392728516,
     "polarisationFloor": 0.0054274498079658565,
@@ -84,11 +96,11 @@
     "veilRadiusUnits": 1.8294620574064917
   },
   "models": {
-    "zimpol-v": "Sky-plane slab, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. It sits in the plane of the sky through the star and is spread along the line of sight by the Rayleigh polarisation efficiency r^2/(r^2+2z^2), normalised so each column reproduces its measured degree. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
+    "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
     "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
   },
   "limitations": [
-    "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed.",
+    "The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed. Its depth is the envelope that best projects to the measured radial profile, which is an inference from that profile, not a measurement, and it cannot say which patches are in front and which behind.",
     "The degree of polarisation is a ratio; its instrumental floor was measured beyond eight radii and subtracted.",
     "The two released V-band products share one WCS but are not pixel-aligned to each other; each is read about its own stellar centre, the intensity centroid and the masked disc of the degree map respectively.",
     "The 2024 colours are the publisher's inferno colour map for that ratio, on the same zero-to-0.10 scale as their figure. They are a legend, not the colour of the dust and not a temperature.",

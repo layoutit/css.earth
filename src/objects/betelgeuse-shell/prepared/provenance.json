@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a25ca4db55cecdcee97de68877cf7fa732983db0380350dc40e366ccf77df427"
+    "sha256": "01b1ff2b42fbff9e3e1631d436048e570c333a09f0c860ef849dfb4aaf98cea5"
   },
   "generator": {
     "path": "tools/prepare-volume-provenance.mts",
@@ -201,7 +201,7 @@
     {
       "id": "presentation",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "sha256": "60e1a25556b4b6dc94c6494fecd5bc5a17ea0c750dab6f832a089bfc6f7b123e",
+      "sha256": "224b365af9009e40c8ef90fd6be508815ea630c70ecf34032fbb140cce14f8da",
       "parameters": {
         "schema": "cssearth-volume-presentation-source@1",
         "objectId": "betelgeuse-shell",
@@ -209,20 +209,20 @@
         "defaultLens": "zimpol-v",
         "bank": {
           "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "193f5c2d868b1e1ee9a903296b032d6a2e03b52960a05d6e47a403af930838ba",
-          "bytes": 166363
+          "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
+          "bytes": 170077
         },
         "recipes": [
           {
             "id": "zimpol-v",
             "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-            "sha256": "a3a60ecb8d9331690707324cd20e1bb7f8bb7a00a8f7e85f78329fbb25521254",
+            "sha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
             "bytes": 1838
           },
           {
             "id": "veil-2019-12",
             "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-            "sha256": "0605d13dad712596a70ddd837950a694490e4a9780edd1f239c7c432a2602b5c",
+            "sha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
             "bytes": 1523
           }
         ],
@@ -260,7 +260,7 @@
               {
                 "id": "depth",
                 "label": "Depth",
-                "value": "Not measured; a plane-of-sky slab spread by scattering angle"
+                "value": "Not measured; the spherical shell at 3.5 stellar radii that best projects to the measured profile"
               }
             ],
             "input": "sphere-zimpol-betelgeuse-p1-v-dolp",
@@ -325,13 +325,13 @@
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "a3a60ecb8d9331690707324cd20e1bb7f8bb7a00a8f7e85f78329fbb25521254",
+      "sha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
           "path": "density-zimpol-v.ktx2",
-          "sha256": "f3200dee8c7df55fd2d74e034853ee10d7290d3a6d72ec36807a7ed90b60b8b3",
-          "decodedSha256": "9eab9eb813f41014db3551bf99a90048bd4f4b554e01218d3c3621eb0cf62c04",
+          "sha256": "f1351b9a29e0f29b4ec1a9f2a7e7b0ababce2370ec9426733cc53f2ea5cbf462",
+          "decodedSha256": "69177a21ef3ee8558eb0082dfbc336317886494e12c911df04553179497317be",
           "dimensions": [
             96,
             96,
@@ -425,14 +425,14 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "441b0693772d684aa6be611ff98855209d1f4e5c51ed12bc738d8dcaab42b9f5"
+          "sha256": "d43568ee7b9de7095c46e61dbc38a9eeb40e2e79b32b8264c35e856a11005d19"
         }
       }
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "0605d13dad712596a70ddd837950a694490e4a9780edd1f239c7c432a2602b5c",
+      "sha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
       "parameters": {
         "schema": "cssearth-volume-recipe@1",
         "grid": {
@@ -514,7 +514,7 @@
         ],
         "provenance": {
           "path": "provenance.json",
-          "sha256": "441b0693772d684aa6be611ff98855209d1f4e5c51ed12bc738d8dcaab42b9f5"
+          "sha256": "d43568ee7b9de7095c46e61dbc38a9eeb40e2e79b32b8264c35e856a11005d19"
         }
       }
     }
@@ -557,8 +557,8 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "193f5c2d868b1e1ee9a903296b032d6a2e03b52960a05d6e47a403af930838ba",
-          "bytes": 166363,
+          "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
+          "bytes": 170077,
           "verification": "bytes-verified"
         },
         {
@@ -606,8 +606,8 @@
       "outputs": [
         {
           "url": "src/objects/betelgeuse-shell/prepared/lenses.json",
-          "sha256": "193f5c2d868b1e1ee9a903296b032d6a2e03b52960a05d6e47a403af930838ba",
-          "bytes": 166363,
+          "sha256": "ee059e681ee132f792af5797349bc4f16aff9970205a5ec204694d2297b18ea0",
+          "bytes": 170077,
           "verification": "bytes-verified"
         },
         {

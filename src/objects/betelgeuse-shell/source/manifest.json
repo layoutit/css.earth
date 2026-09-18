@@ -177,7 +177,7 @@
     {
       "id": "delivery-json",
       "path": "src/objects/betelgeuse-shell/source/delivery.json",
-      "expectedSha256": "8359099f86791bfd8818b8b509208943e64e4841bd79e53e88f0d5587cbfba83",
+      "expectedSha256": "37476b7da203e9798f2797587e007716ddc81513f769e6dcee23f31865929370",
       "expectedBytes": 2654,
       "sourceBinding": {
         "kind": "local",
@@ -197,8 +197,8 @@
     {
       "id": "presentation-json",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "expectedSha256": "60e1a25556b4b6dc94c6494fecd5bc5a17ea0c750dab6f832a089bfc6f7b123e",
-      "expectedBytes": 5054,
+      "expectedSha256": "224b365af9009e40c8ef90fd6be508815ea630c70ecf34032fbb140cce14f8da",
+      "expectedBytes": 5091,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -207,8 +207,8 @@
     {
       "id": "provenance-json",
       "path": "src/objects/betelgeuse-shell/source/provenance.json",
-      "expectedSha256": "441b0693772d684aa6be611ff98855209d1f4e5c51ed12bc738d8dcaab42b9f5",
-      "expectedBytes": 7248,
+      "expectedSha256": "d43568ee7b9de7095c46e61dbc38a9eeb40e2e79b32b8264c35e856a11005d19",
+      "expectedBytes": 8426,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -229,8 +229,8 @@
     {
       "id": "density-zimpol-v-ktx2",
       "path": "src/objects/betelgeuse-shell/source/density-zimpol-v.ktx2",
-      "expectedSha256": "f3200dee8c7df55fd2d74e034853ee10d7290d3a6d72ec36807a7ed90b60b8b3",
-      "expectedBytes": 274041,
+      "expectedSha256": "f1351b9a29e0f29b4ec1a9f2a7e7b0ababce2370ec9426733cc53f2ea5cbf462",
+      "expectedBytes": 283108,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -239,7 +239,7 @@
     {
       "id": "volume-veil-2019-12-json",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "expectedSha256": "0605d13dad712596a70ddd837950a694490e4a9780edd1f239c7c432a2602b5c",
+      "expectedSha256": "b42f8295bdc2fbaae985a1ba5d3250220db5cb446281168f6178ebbb88c06af5",
       "expectedBytes": 1523,
       "sourceBinding": {
         "kind": "local",
@@ -249,7 +249,7 @@
     {
       "id": "volume-zimpol-v-json",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "expectedSha256": "a3a60ecb8d9331690707324cd20e1bb7f8bb7a00a8f7e85f78329fbb25521254",
+      "expectedSha256": "651a9635a57ac9e05d7522601ec7209dcc4da0a79342ed8f6866a833319e88fc",
       "expectedBytes": 1838,
       "sourceBinding": {
         "kind": "local",
