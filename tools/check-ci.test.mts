@@ -3,14 +3,34 @@ import {test} from 'node:test';
 import {mkdtemp,readFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {readCiSteps,runCiSteps} from './check-ci.mts';
+import {QUICK_SKIPPED_STEPS,quickSteps,readCiSteps,runCiSteps,sharedCodeChanged} from './check-ci.mts';
 
-test('local CI reads the actual workflow in order, including strict TypeScript and renderer gates',async()=>{
- const steps=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'));
- assert.ok(steps.length>10);
- assert.equal(steps[0].name,'Check documentation links and organization');
- assert.ok(steps.some(step=>step.run.includes('pnpm typecheck')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
- assert.equal(steps.at(-1)?.run.trim(),'pnpm test:renderer');
+test('local CI reads the actual workflow jobs in order, including strict TypeScript and renderer gates',async()=>{
+ const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
+ const lint=readCiSteps(workflow,'lint'),typecheck=readCiSteps(workflow,'typecheck'),universe=readCiSteps(workflow);
+ assert.equal(lint[0]?.name,'Check documentation links and organization');
+ assert.ok(lint.some(step=>step.run.includes('check-object-runtime-ownership.mts --receipts')));
+ assert.ok(lint.some(step=>step.run.includes('check:assets-published')&&step.env.GH_TOKEN===undefined),'the workflow token is dropped locally');
+ assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:shared')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
+ assert.ok(universe.length>10);
+ assert.equal(universe.at(-1)?.run.trim(),'node tools/check-object-runtime-ownership.mts --all');
+ assert.equal(readCiSteps(workflow,'nebula').at(-1)?.run.trim(),'pnpm test:renderer');
+});
+test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
+ const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');
+ const quick=quickSteps(lint);
+ assert.deepEqual(lint.filter(step=>!quick.includes(step)).map(step=>step.name),QUICK_SKIPPED_STEPS);
+ assert.throws(()=>quickSteps(lint.filter(step=>step.name!==QUICK_SKIPPED_STEPS[1])),/--quick expects a step/);
+});
+test('--typecheck appends the typecheck only when shared code changed',()=>{
+ assert.equal(sharedCodeChanged(['src/objects/ceres/README.md','docs/README.md']),false);
+ for(const path of ['tools/check-ci.mts','site/objects.mts','src/platform/a.mts','src/renderers/css/b.ts','packages/astronomy/c.ts'])
+  assert.equal(sharedCodeChanged([path]),true,path);
+});
+test('only the workflow token expression is dropped; any other expression still refuses a local run',()=>{
+ const step=(value:string)=>`jobs:\n  universe:\n    steps:\n      - name: t\n        env:\n          VALUE: ${value}\n        run: echo t\n`;
+ assert.deepEqual(readCiSteps(step("${{ github.token }}")),[{name:'t',run:'echo t',env:{}}]);
+ assert.throws(()=>readCiSteps(step("${{ secrets.OTHER }}")),/cannot evaluate GitHub expressions/);
 });
 test('local CI passes the step environment and stops on failure without executing later steps',async()=>{
  const root=await mkdtemp(join(tmpdir(),'ci-runner-test-'));
