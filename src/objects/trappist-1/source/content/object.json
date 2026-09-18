@@ -56,8 +56,8 @@
         "label": "Colour",
         "qualification": "Uniform disc in the colour of the star's own Gaia DR3 spectrum; no image, limb darkening or rotation of this star is measured.",
         "thumbnail": "trappist-1-lens-color.webp",
-        "surface": "trappist-1-surface-color.webp",
-        "poles": "trappist-1-poles-color.webp",
+        "surface": "trappist-1-surface-color@2x.webp",
+        "poles": "trappist-1-poles-color@2x.webp",
         "source": {
           "id": "trappist-1-gaia-dr3-xp-continuous",
           "path": "../manifest.json",

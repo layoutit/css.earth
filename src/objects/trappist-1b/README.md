@@ -40,13 +40,15 @@ standard deviations, and the offset trades against the Gaussian process that mod
 harmonics symmetric about the star-facing point (`longitudeSymmetric`). Among those, the model chosen by BIC is degree 2 with one
 eigencurve.
 
-**What the map says.** About 520 K where the star is overhead, 350 K at the terminators and under 100 K on the night side: no sign
-of an atmosphere carrying heat around the planet, as Greene et al. and Gillon, Ducrot et al. concluded.
+**What the map says.** About 520 K where the star is overhead, falling to about 350 K at the terminators and 45 K at the equator
+opposite: no sign of an atmosphere carrying heat around the planet, as Greene et al. and Gillon, Ducrot et al. concluded. Averaged
+over each hemisphere the map gives 463 K by day and 242 K by night; the night average is held up by the poles, which the data cannot
+see (see Known problems).
 
 ## Evidence
 
-- [`source.test.mts`](../../../tests/objects/unit/trappist-1b/source.test.mts) checks the pins and that the package's radius, mass and
-  orbit are the astronomy record's.
+- [`lens-fits.test.mts`](../../../tests/objects/unit/trappist-1b/lens-fits.test.mts) runs the shipped map recipe and holds it to
+  the model, temperatures and centring it was measured to give.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
 - Each of the ten reduced visits was checked by image: the aperture on the star, its centroid through the visit, and the light
   curve. None lost the star.

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c139a1ef571f394e8b37658ed7292fbc1e72b13a31cfeb29326a608608c65b8a"
+    "sha256": "5dd5918fbdb8795f799c45e091d254b064e62e803b222d1e1949e31d77dc7e87"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "e954d8ff591a91ab443051ce64ff6ee932a9e9d84743e1ffab2e0d60822ed3f9"
+    "bindingsSha256": "cb22e9ffba8f71d15005d6add118648ef102d63c50efaea85c71d49dd153b42f"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "6005bff9df45ecb2b170b17811e8dbb798a82118bd8783e83fe44a27848ac057",
+      "sha256": "1357a732d27d619b44bda659154205c2765245a12811ec369ce23e2d0d8bdf54",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/trappist-1/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -87,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c553648040bf6a7d1107a9f60f481715d5572b4c91d28074fa828a666ef69a7a",
+      "sha256": "c236b9a65bda168815d338f331a358c499582ec226b1f7bfe7da16744528144a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -146,8 +142,8 @@
               "label": "Colour",
               "qualification": "Uniform disc in the colour of the star's own Gaia DR3 spectrum; no image, limb darkening or rotation of this star is measured.",
               "thumbnail": "trappist-1-lens-color.webp",
-              "surface": "trappist-1-surface-color.webp",
-              "poles": "trappist-1-poles-color.webp",
+              "surface": "trappist-1-surface-color@2x.webp",
+              "poles": "trappist-1-poles-color@2x.webp",
               "source": {
                 "id": "trappist-1-gaia-dr3-xp-continuous",
                 "path": "../manifest.json",
@@ -264,8 +260,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c553648040bf6a7d1107a9f60f481715d5572b4c91d28074fa828a666ef69a7a",
-      "bytes": 3324,
+      "sha256": "c236b9a65bda168815d338f331a358c499582ec226b1f7bfe7da16744528144a",
+      "bytes": 3330,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -299,12 +295,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/trappist-1/trappist-1-surface-color.webp",
-          "bytes": 78,
-          "sha256": "d788a944dbaa892a79e0b6c88dfb789a2183574a9447dff4a9eef3fb5defdedf",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/trappist-1/trappist-1-surface-color@2x.webp",
           "bytes": 178,
           "sha256": "2775b4d676169cd0d194356c42afc4eeb3ba33d58cd9416f966ad8c0d2c26bf8",
@@ -317,27 +307,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/trappist-1/trappist-1-poles-color.webp",
-          "bytes": 680,
-          "sha256": "8bc548606fb634247c55366ab5c7ba7b0e1261072a571d8d528f2cd2527b8a4c",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/trappist-1/trappist-1-poles-color@2x.webp",
           "bytes": 1340,
           "sha256": "92919c7fc30f4e560455cdc85ab72247998495183700e4427202d9dd8aebb3b0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1/trappist-1-context-color.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1/trappist-1-limb-color.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -420,11 +392,11 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1",
-    "materialSha256": "ddfabba8dbc4397e384c729c647b1881bc65d5528d9676ca32c39c20097fb963",
+    "materialSha256": "4de6a387e080dbf7c9a71ae8ae780412723bcc858697ca2ebfdff9f4f2cd5649",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "e954d8ff591a91ab443051ce64ff6ee932a9e9d84743e1ffab2e0d60822ed3f9"
+      "bindingsSha256": "cb22e9ffba8f71d15005d6add118648ef102d63c50efaea85c71d49dd153b42f"
     }
   }
 }

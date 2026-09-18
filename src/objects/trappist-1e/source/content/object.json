@@ -69,8 +69,8 @@
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
         "thumbnail": "trappist-1e-lens-shape.webp",
-        "surface": "trappist-1e-surface-shape.webp",
-        "poles": "trappist-1e-poles-shape.webp",
+        "surface": "trappist-1e-surface-shape@2x.webp",
+        "poles": "trappist-1e-poles-shape@2x.webp",
         "source": {
           "id": "trappist-1e-observational-measurements",
           "path": "../manifest.json",

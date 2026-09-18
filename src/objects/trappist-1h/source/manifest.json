@@ -49,8 +49,8 @@
     {
       "id": "trappist-1h-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2425,
-      "expectedSha256": "fe83eb75076cf7d2c70e93b0710c6c7c6c2594d8aafb8bde9cbc0f7da2b4fee5",
+      "expectedBytes": 2390,
+      "expectedSha256": "ec57190fabecb02d22821b1e5a75b916aeaafd428573f2a64ec0beee2cc3b27b",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +68,8 @@
     {
       "id": "trappist-1h-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1660,
-      "expectedSha256": "a89efbbf0ef1095e3c83199fcb970274e78b639848f8b2731fa041042debb194",
+      "expectedBytes": 1666,
+      "expectedSha256": "66cdda4ed36f2fde58917fb7ba5196afe0cfe7391f74dd432aaa61e1b8a53075",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
       "sourceBinding": {
         "kind": "local",
@@ -168,8 +168,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3806,
-      "expectedSha256": "eedbf9a2ab1e9673ce62469c39336687a7f68b4583cf6f488793b543ce115c0f",
+      "expectedBytes": 3812,
+      "expectedSha256": "53bd2f3a7be60004c1b2b7d81767808624c238264523df73b662377c7121ed20",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
