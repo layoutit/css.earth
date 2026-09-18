@@ -53,34 +53,66 @@
     },
     {
       "id": "lens-sio-2023",
-      "subject": "Measured depth from an ALMA line cube, instead of a shape fitted to a projection",
+      "subject": "Depth from an ALMA line cube's velocities, instead of a shape fitted to a projection",
       "status": "included",
-      "finding": "Every other dataset in this package is a sky image given a shape, which is an extrusion however the depth is weighted. This one is not. ALMA project 2022.A.00026.S observed this star on 2 August 2023 and its band 6 spectral window 27 carries SiO v=0 J=5-4 at 217.10498 GHz, the line of the molecule silicate dust condenses from. The archive's pipeline cube is 72 GB; its SODA service returned a 522 MB cutout on a circle of 0.00025 degrees about the observation's phase centre, so no raw visibilities were needed. Subtracting a per-pixel continuum measured on the 1738 line-free channels and smoothing to the beam takes the map noise from 0.90 to 0.536 mJy per beam and the line is then detected hard, up to 135 voxels above five sigma in a single channel across +23 to -8 km/s about a systemic +8. Integrated over the line, 51 beams clear five sigma and they are not a shell: they form one clump 3.32 stellar radii out at position angle 225 degrees, south-west. A spherical envelope would put that centroid on the star. Depth then comes from each parcel's own Doppler shift under a radial flow, whose speed combines 7.7 km/s across the sky, measured here as the growth in projected separation against Montarges et al. 2021's December 2019 clump over the 3.63 years between the epochs, with the clump's own mean line-of-sight velocity of -2.4 km/s, giving 8.1 km/s. 41 parcels are placed, the furthest 3.86 stellar radii along the line of sight, each spread over the beam it was measured with, and no line of sight is deprojected past 0.85 of the flow speed.",
+      "finding": "Every other dataset in this package is a sky image given a shape. This one is a line cube. ALMA project 2022.A.00026.S observed Betelgeuse in band 6 from 3 to 27 August 2023, and its spectral window 27 carries SiO v=0 J=5-4 at 217.10498 GHz, the molecule silicate dust condenses from. The archive's 72 GB pipeline cube was cut through its SODA service and boxed 300 mas about the phase centre by tools/objects/source-authoring/betelgeuse-shell/reduce-alma-sio.mts, keeping 47 channels of 1.35 km/s; the pipeline subtracts the continuum before imaging, so only the residual, the median of 1738 line-free channels, is removed. Every position is measured from the star found in the same observation's continuum image, 102 mas from the phase centre (see sio-registration). Measured about it, the line absorbs against the star from -21.3 to +16.4 km/s about the star's velocity, deepest 23 mJy per beam. Outside the star's continuum footprint, moment masking (the cube smoothed by its beam and three channels, cut at five times its noise and grown by the smoothing) keeps 331 pixels within six stellar radii, 22 beams carrying 0.55 Jy km/s: a lopsided ring brightest 2.4 radii out, with its weight 1.2 radii toward position angle 122 degrees. The star's velocity, the flux-weighted mean of the ring, is 5.1 km/s LSRK. The flow's terminal speed is the blue edge of the absorption, as a P Cygni profile is read: 21.3 km/s, 22.0 with half a channel. Every channel of every pixel is placed on a spherical outflow at that speed, at depth s v / sqrt(u^2 - v^2); 99.6 percent of the ring's flux lands in the grid, the deepest 5.2 radii along the line of sight. The red side of the absorption is gas falling back in front of the star, which this outflow places as if it were leaving, so the depths are the model's, not measured ones. A first version took the phase centre for the star. It drew the bright side of this ring as a lone clump 3.3 radii to the south-west, tied it to the 2019 clump and built an expansion age on that; all of it is withdrawn (see sio-clump-identity).",
       "evidence": [
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
-        "https://doi.org/10.1038/s41586-021-03546-8"
+        "https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits"
       ],
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "6ddc771fc11655a1526d23d8c77924e2943ab54e"
+          "commit": "cefbb91dc1578851bf2baa78a5b0e70e428030a0"
+        }
+      ]
+    },
+    {
+      "id": "sio-registration",
+      "subject": "Where the star is in the ALMA images",
+      "status": "included",
+      "finding": "The ALMA archive references the line cube and the continuum image of this member to the observation's phase centre, and the phase centre is not the star. The pipeline subtracts the continuum before it images a cube, so the cube cannot say where the star is: the median of its line-free channels is flat noise, peaking at 0.47 mJy per beam seven radii from the phase centre. The member's continuum image, made with the same regular calibration, shows the star at 43.7 mJy per beam, 121 times its noise. The centroid of its half-maximum lies 84.9 mas west and 57.2 mas south of the phase centre, 102 mas or 4.8 stellar radii; the peak refined by a parabola lies 4.5 mas from it; the two images' reference points agree to 0.8 mas. The line cube checks it independently, because absorption needs the star's continuum behind the gas: the centroid of the SiO absorption falls 2.2 mas from the continuum star. The author measures both and fails if the continuum shows no clean star, if the absorption is not centred on it, or if the box cannot hold the volume about it.",
+      "evidence": [
+        "https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits",
+        "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "cefbb91dc1578851bf2baa78a5b0e70e428030a0"
+        }
+      ]
+    },
+    {
+      "id": "sio-far-emission",
+      "subject": "SiO emission eight to fourteen stellar radii north of the star",
+      "status": "unresolved",
+      "finding": "Moment masking also keeps emission 8 to 14 stellar radii north of the star: 29 percent of the masked flux outside the star's footprint, separated from the ring by an empty gap at six to eight radii, at -9 to +4 km/s about the star's velocity, beside a continuum peak of 1.8 mJy per beam, 5.1 times the noise, 11 radii north of the star. The volume holds six radii, so it is not drawn. It may be circumstellar gas. It may also be an artefact of the bright star in images made without self-calibration, although the deepest negative in the continuum image is only three times its noise. The archive holds self-calibrated continuum images of this member but no self-calibrated cube.",
+      "evidence": [
+        "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
+      ],
+      "revisitWhen": "A self-calibrated SiO cube of this member, or another epoch of the line, which would show whether the northern emission and its continuum peak persist.",
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "cefbb91dc1578851bf2baa78a5b0e70e428030a0"
         }
       ]
     },
     {
       "id": "sio-clump-identity",
-      "subject": "Whether the 2023 SiO clump is the 2019 Great Dimming clump, moved",
-      "status": "unresolved",
-      "finding": "The two lie in the same quarter of the sky: the December 2019 clump of Montarges et al. 2021 is at projected 1.00 stellar radii, position angle 212 degrees, and the 2023 SiO clump is at 3.32 radii, position angle 225 degrees. Over the 3.63 years between them the projected separation grew 2.3 radii, which is an ordinary ejecta speed, and the position angle moved 13 degrees. That is suggestive and it is why this package uses that growth to set the flow speed. It is not an identification. The 2019 solution also placed its clump 3.52 stellar radii toward Earth, and a purely radial continuation of that vector at a constant speed would show about 27 km/s of blue shift in 2023, well outside the plus or minus 16 km/s over which the line is detected. So the 2023 clump is either a different structure, or the same one decelerated, or the published line-of-sight distance does not carry forward. Nothing in this package asserts they are the same object.",
+      "subject": "Whether the 2023 SiO is the 2019 Great Dimming clump, moved",
+      "status": "excluded",
+      "finding": "The question came from a registration error and does not arise. A first version took the ALMA phase centre for the star, saw a single SiO clump 3.3 stellar radii to the south-west, in the quarter of the Great Dimming clump, and asked whether the two were one structure. Measured from the star itself, found in the same observation's continuum 102 mas from the phase centre, the SiO is a lopsided ring around the star two to four radii out, heaviest to the east-south-east, and absorbing in front of it. Nothing in this package connects it to the 2019 clump, and nothing is placed on the assumption that it is.",
       "evidence": [
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
         "https://arxiv.org/abs/2201.10551"
       ],
-      "revisitWhen": "A second ALMA epoch of the same line, which would give the clump's own proper motion without any assumption about the 2019 solution.",
+      "revisitWhen": "A second ALMA epoch of the same line, which would show whether any part of the ring moves outward.",
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "6ddc771fc11655a1526d23d8c77924e2943ab54e"
+          "commit": "cefbb91dc1578851bf2baa78a5b0e70e428030a0"
         }
       ]
     },
@@ -118,9 +150,9 @@
     },
     {
       "id": "lens-veil-2019-12",
-      "subject": "The December 2019 RADMC-3D dust clump of Montarg\u00e8s et al. 2021, Nature 594, 365",
+      "subject": "The December 2019 RADMC-3D dust clump of Montargès et al. 2021, Nature 594, 365",
       "status": "included",
-      "finding": "Extended Data Table 3 publishes the optimised December 2019 solution in full: a sphere of radius 6.5 au centred at (-1.9, -3.0, +12.5) au, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres, in the coordinate system Extended Data Figure 6 defines as right ascension, declination and toward Earth. Those numbers place the clump south and slightly west of the star and between it and us, which is the hemisphere that dimmed. It is drawn as starlight scattered by that dust; the published density is uniform, so only the illumination varies across it. The January and March 2020 solutions in the same table are recorded by the authors as unoptimised best guesses and are not shipped.",
+      "finding": "Extended Data Table 3 publishes the optimised December 2019 solution in full: a sphere of radius 6.5 au centred at (-1.9, -3.0, +12.5) au, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres, in the coordinate system Extended Data Figure 6 defines as right ascension, declination and toward Earth. Those numbers place the clump south and slightly west of the star and between it and us, which is the hemisphere that dimmed. The au are given at the 222 pc the paper adopts, so this package reads them as angles at that distance and converts the angles to its own stellar radii: a sphere 1.38 radii in radius, centred 2.77 radii from the star. A first version divided by this scene's au per radius at 168 pc instead, which drew the clump 1.32 times too far out and too large. It is drawn as starlight scattered by that dust; the published density is uniform, so only the illumination varies across it. The January and March 2020 solutions in the same table are recorded by the authors as unoptimised best guesses and are not shipped.",
       "evidence": [
         "https://doi.org/10.1038/s41586-021-03546-8",
         "https://arxiv.org/abs/2201.10551",
@@ -184,31 +216,29 @@
     {
       "id": "world-view-east-west-sense",
       "subject": "Whether the world camera draws celestial east on the side of the star the sky puts it",
-      "status": "unresolved",
-      "finding": "The grid is right: its axes are read from the products' own WCS, where increasing column is west and increasing row is north, and its sky plane reproduces the published figure's patch layout (Montarges et al. 2026, Fig. B.1) with east on the left. The clump's position is transcribed into the same frame from the paper's stated axes. What is not verified is the last step: projecting the volume's east axis at the saved world camera of this object's captures puts east to the screen's right, and the star's own default camera is documented as putting east to the left. The two cameras differ in roll, and the renderer's world frames are known to mirror ICRF content unless a mirror flag compensates, so the east-west sense of the drawn cloud has not been checked against the sky. North and south are not in doubt: the clump covers the star's southern half, as the Great Dimming did.",
+      "status": "included",
+      "finding": "The grid is right: its axes are read from the products' own WCS, where increasing column is west and increasing row is north, and its sky plane reproduces the published figure's patch layout (Montarges et al. 2026, Fig. B.1) with east on the left; the mirrored fits to that figure score 0.455 and 0.421 against 0.798. The rendered frame is now checked too. Betelgeuse's default view is pinned by its default-view test with celestial north 42 degrees counterclockwise of screen-right and east 90 degrees beyond it. Rendered headless at that view on 18 September 2026, the light the SiO dataset adds over the MATISSE dataset lies at 147 degrees, 1.4 disc radii out, where the ring's east-south-east weight predicts 164 and a mirrored volume would put it at 280. Every lens of this package shares one bank frame, so the check covers them all. An earlier reading of the capture camera's east axis to the screen's right was made at a saved world camera of unknown roll, before the world-handedness fix.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202661023",
         "https://github.com/layoutit/css.earth/blob/2d5df092687e5ba0fe765cde33a58686e19c5abe/src/objects/betelgeuse/README.md"
       ],
-      "revisitWhen": "A rendered comparison of this object's 2024 lens against the published figure at a camera whose roll and handedness are known, or a shared world-frame handedness check the volume lenses can reuse.",
       "checked": [
         {
           "date": "2026-09-18",
-          "commit": "2d5df092687e5ba0fe765cde33a58686e19c5abe"
+          "commit": "cefbb91dc1578851bf2baa78a5b0e70e428030a0"
         }
       ]
     },
     {
       "id": "alma-depth-screen",
       "subject": "Whether a public ALMA line cube can measure the depth this package infers",
-      "status": "deferred",
-      "finding": "The envelope drawn here is a shape fitted to one projection, so it cannot say at what radius a patch really sits or which side of the star it is on. A spectral line cube can: the Doppler sign separates near from far and a velocity law turns the shift into a radius. Screened the ALMA archive within 0.02 degrees of this object's scene origin on 2026-09-18, 302 public rows in six projects, against this package's own geometry, a shell 148 milliarcseconds across inside an envelope reaching 190. Scored on the resolution each observation actually has, capped by its own maximum recoverable scale. Three projects are compact-configuration monitoring with beams of 3.5 to 3.8 arcseconds, 0.04 beams across the shell, and measure the star as a point: 2019.2.00120.S, 2019.A.00028.S and 2021.1.00927.S are out. 2019.1.01098.S reaches 35 mas in band 4 with SiO v=0 3-2, 4.2 beams across, recoverable to 667 mas, usable but coarse. 2015.1.00206.S reaches 16.8 mas in band 7 with CO 3-2, 8.8 beams across, recoverable to 302 mas, observed November 2015. The best is 2022.A.00026.S of August 2023: band 6 at 21.9 mas gives 6.8 beams across with CO 2-1 and SiO v=0, v=1 and v=2 5-4 and recovers to 351 mas, and band 7 at 14.2 mas gives 10.4 beams with CO 3-2 but recovers only to 200 mas. Its band 8 is the finest beam ever taken of this star at 9.7 mas and is rejected outright: it recovers only 127 mas and would throw the envelope away, which is exactly what the resolution rule exists to catch.",
+      "status": "included",
+      "finding": "The envelope drawn here is a shape fitted to one projection, so it cannot say at what radius a patch really sits or which side of the star it is on. A spectral line cube can: the Doppler sign separates near from far and a velocity law turns the shift into a radius. Screened the ALMA archive within 0.02 degrees of this object's scene origin on 2026-09-18, 302 public rows in six projects, against this package's own geometry, a shell 148 milliarcseconds across inside an envelope reaching 190. Scored on the resolution each observation actually has, capped by its own maximum recoverable scale. Three projects are compact-configuration monitoring with beams of 3.5 to 3.8 arcseconds, 0.04 beams across the shell, and measure the star as a point: 2019.2.00120.S, 2019.A.00028.S and 2021.1.00927.S are out. 2019.1.01098.S reaches 35 mas in band 4 with SiO v=0 3-2, 4.2 beams across, recoverable to 667 mas, usable but coarse. 2015.1.00206.S reaches 16.8 mas in band 7 with CO 3-2, 8.8 beams across, recoverable to 302 mas, observed November 2015. The best is 2022.A.00026.S of August 2023: band 6 at 21.9 mas gives 6.8 beams across with CO 2-1 and SiO v=0, v=1 and v=2 5-4 and recovers to 351 mas, and band 7 at 14.2 mas gives 10.4 beams with CO 3-2 but recovers only to 200 mas. Its band 8 is the finest beam ever taken of this star at 9.7 mas and is rejected outright: it recovers only 127 mas and would throw the envelope away, which is exactly what the resolution rule exists to catch. Acted on in lens-sio-2023, from the band 6 SiO v=0 J=5-4 pipeline cube of 2022.A.00026.S, cut out through the archive's SODA service rather than restored from visibilities. Two limits stand. The cube is August 2023 and the polarisation map December 2024, so the line cube cannot place the 2024 patches. Carbon monoxide was not used, because in the inner envelope it is optically thick with rising and falling gas together and its velocity is not single-valued in radius.",
       "evidence": [
         "https://almascience.eso.org/tap/sync",
         "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
         "https://almascience.org/aq/?result_view=observation&projectCode=2015.1.00206.S"
       ],
-      "revisitWhen": "A restored cube from 2022.A.00026.S band 6 through the merged ALMA reduction route, deprojected with a stated velocity law. Two things must be settled first: the cube is August 2023 and the polarisation map is December 2024, so it can test the fitted shell radius but cannot place these patches; and carbon monoxide in the inner envelope is optically thick with rising and falling gas together, so velocity is not single-valued in radius.",
       "checked": [
         {
           "date": "2026-09-18",

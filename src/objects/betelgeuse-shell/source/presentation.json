@@ -5,32 +5,32 @@
   "defaultLens": "zimpol-v",
   "bank": {
     "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "7a0ea7025a38fbedd6cdbc81eb2a3ab7743508f6c401a1895789ad317a7c5123",
-    "bytes": 325593
+    "sha256": "5629c5d71558a3eee6df5d40683c8724dc0ccffa663d71a61159e53c7f77d9c4",
+    "bytes": 375896
   },
   "recipes": [
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "db0b1170836bd9ee0b41ad09efebbd125588f5284cdaf0044dda26b3b82cc7e2",
+      "sha256": "9f4896c3cf7602d3beb49daab887dc2966772a04a8a94ab75da2b7f198293539",
       "bytes": 1838
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "1bebc87f26aa243bcc9a058101a54633717ef15a9839961e4b181f81f2c74893",
+      "sha256": "aa230dc95509b0fa4f1fe82e70a65d2c87c4dd0d45ac55444bd1be0d67f6a995",
       "bytes": 1523
     },
     {
       "id": "emission-2020",
       "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
-      "sha256": "99b55e178f552c845b78fa8839b84572871eef80443a0fe8159de6efd6bf34da",
+      "sha256": "e39e5a0b7a8058aeb285285f562fb7d1d84a1a345a35ac9dd1543e186c31ba5e",
       "bytes": 1830
     },
     {
       "id": "sio-2023",
       "path": "src/objects/betelgeuse-shell/source/volume-sio-2023.json",
-      "sha256": "4839894ee61b5189e6e0d08d9aa7335034fca6b7caf8aa2f6dc59ae0e3898215",
+      "sha256": "0ec76e2a9bba305a7f2084647edaf044c29bf66bb30a09c880d21e6335c97844",
       "bytes": 1839
     }
   ],
@@ -42,7 +42,7 @@
       "label": "SPHERE/ZIMPOL · polarised dust, 2024",
       "title": "Polarised dust around Betelgeuse in 2024",
       "description": "The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-0.10 scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.",
-      "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.",
+      "summary": "Measured polarised light from dust one to 4.5 stellar radii out; its depth is a fitted shell, not a measurement.",
       "detail": "1024 × 1024 px at 3.6 mas",
       "facts": [
         {
@@ -171,43 +171,50 @@
     },
     {
       "id": "sio-2023",
-      "label": "ALMA · SiO clump, August 2023",
-      "title": "A clump of silicon monoxide, placed by its own velocity",
-      "description": "ALMA saw silicon monoxide around this star on 2 August 2023, and this is the one dataset here whose depth is measured rather than inferred. The archive's own pipeline cube was cut out around the star, its continuum removed against 1738 line-free channels, and the line integrated: 51 beams clear 5 times the map noise. What they show is not a shell but a single clump 3.32 stellar radii out at position angle 225 degrees, the same quarter of the sky as the clump that dimmed the star in 2019, and about as far out as that one would have drifted at an ordinary ejecta speed. Each parcel is then placed in depth by its own Doppler shift, under a radial flow at 8.1 kilometres a second. Silicon monoxide is what silicate dust condenses from, so this is the material of the other two datasets caught before it became dust. The colours are a false-colour ramp for line brightness.",
-      "summary": "Silicon monoxide around the star, the only dataset here whose depth is measured rather than inferred.",
-      "detail": "57 × 57 px at 6.90 mas, 47 channels",
+      "label": "ALMA · SiO envelope, August 2023",
+      "title": "Silicon monoxide around Betelgeuse, placed by its own velocities",
+      "description": "ALMA saw silicon monoxide around this star in August 2023, and this is the one dataset here whose depth comes from measured velocities rather than from a shape fitted to a picture. Measured from the star itself, found in the same observation’s continuum, the molecule absorbs in front of the star and glows in a lopsided ring 2.4 stellar radii out, heaviest to the east-south-east. Every channel of the line cube is placed along the line of sight on a spherical outflow at 22.0 kilometres a second, the speed of the fastest gas it absorbs in front of the star, the usual first reading of an expanding stellar envelope. The same absorption shows gas falling back as well, and that gas is placed as if it were flowing out. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness.",
+      "summary": "Silicon monoxide around the star, placed in depth by its own measured velocities.",
+      "detail": "87 × 87 px at 6.90 mas, 47 channels",
       "facts": [
         {
           "id": "instrument",
           "label": "Instrument",
-          "value": "ALMA band 6, SiO v=0 J=5–4 at 217.105 GHz, 2 August 2023, beam 30 × 22 mas"
+          "value": "ALMA band 6, SiO v=0 J=5–4 at 217.105 GHz, 3 to 27 August 2023, beam 30 × 22 mas"
         },
         {
-          "id": "detection",
-          "label": "Detection",
-          "value": "51 beams above 5 sigma in the integrated line"
+          "id": "star",
+          "label": "The star",
+          "value": "Found in the same observation’s continuum, 102 mas from the phase centre; every position is measured from it"
         },
         {
-          "id": "clump",
-          "label": "Where it is",
-          "value": "3.32 stellar radii from the star on the sky, position angle 225 degrees"
+          "id": "emission",
+          "label": "Emission",
+          "value": "A lopsided ring brightest 2.4 stellar radii out and heaviest to the east-south-east, 0.55 Jy km/s outside the star’s footprint"
         },
         {
-          "id": "flow",
-          "label": "Flow speed",
-          "value": "8.1 km/s: 7.7 across the sky, measured against the 2019 clump, and -2.4 along the line of sight"
+          "id": "velocity",
+          "label": "Velocities",
+          "value": "The star at 5.1 km/s LSRK; emission reaches 23.2 km/s from it; absorption against the star from -21.3 to +16.4 km/s"
         },
         {
           "id": "depth",
           "label": "Depth",
-          "value": "Measured: the Doppler shift of each parcel, under a radial flow at that speed"
+          "value": "Every channel on a spherical outflow at 22.0 km/s, the blue edge of the absorption"
         }
       ],
       "input": "alma-sio-v0-5-4-2023-08",
+      "inputEvidence": [
+        {
+          "sourceId": "alma-continuum-2023-08",
+          "role": "registration",
+          "evidence": "The star every SiO position is measured from: the centroid of its continuum in this image."
+        }
+      ],
       "preview": {
         "path": "src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png",
-        "sha256": "22feab63780a8108c0a06bc6ed14dcfb35117446dcbc9bd69068a875905b5935",
-        "bytes": 8798,
+        "sha256": "9c4fcc9406211abccf8c807ef3ef29fbad264fd395606af9f357cd82c9df7ecc",
+        "bytes": 3977,
         "authoredFrom": "alma-sio-v0-5-4-2023-08"
       }
     }

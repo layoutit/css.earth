@@ -68,6 +68,9 @@ src/objects/*/source/**/*.bds
 # Retained upstream catalogue bytes with no acquisition plan to restore them.
 !src/objects/local-group/source/lvdb/comb_all.csv
 !src/objects/local-group/source/mcconnachie/NearbyGalaxies_Jan2021_PUBLIC.fits
+# Previews a package's own author draws from its pinned downloads; no checkout without those downloads can redraw them.
+!src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png
+!src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png
 
 # WASP-43b JWST reductions written by this repository's own pipeline
 # (tools/objects/jwst/reduce-tso.mts); repinned when the reduction reruns.

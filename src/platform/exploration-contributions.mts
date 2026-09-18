@@ -5,21 +5,23 @@ import { validateObjectProvenance } from './object-provenance.mts';
 import type { ProvenanceDocument } from './object-provenance.mts';
 import { explorationArray, explorationId, explorationRecord, explorationText, parseCapture, parseCaptureObservation, validateCapture } from './exploration-catalog.mts';
 import type { CaptureAttribution, CaptureObservation, ExplorationCatalog } from './exploration-catalog.mts';
-import { datasetDestination, parseDatasetDestination } from './dataset-destination.mts';
+import { objectDataset, parseDatasetDestination, type DatasetHost } from './dataset-destination.mts';
 export interface ContributionEdge {
   readonly objectId: string; readonly productId: string; readonly sourceId: string;
   readonly roles?: readonly InputRole[]; readonly observation?: CaptureObservation;
   readonly lensIds: readonly string[]; readonly attribution: CaptureAttribution;
 }
 /** One selectable presentation (object + lens), which can combine several published sources and products. */
-export interface DatasetView { readonly objectId: string; readonly objectName: string; readonly lensId: string; readonly label: string; readonly href: string; }
+export interface DatasetView { readonly objectId: string; readonly objectName: string; readonly lensId: string; readonly label: string; readonly href: string; readonly host?: DatasetHost; }
 export interface ContributionGraph {
   readonly edges: readonly ContributionEdge[]; readonly datasets: readonly DatasetView[];
   readonly byObject: Readonly<Record<string, readonly number[]>>;
   readonly byMission: Readonly<Record<string, readonly number[]>>;
   readonly byFacility: Readonly<Record<string, readonly number[]>>;
 }
-export interface ContributionObject { readonly id: string; readonly name: string; readonly route: string; readonly controls: readonly { readonly id: string; readonly label: string }[]; readonly provenance: ProvenanceDocument; }
+export interface ContributionObject { readonly id: string; readonly name: string; readonly route: string; readonly controls: readonly { readonly id: string; readonly label: string }[]; readonly provenance: ProvenanceDocument;
+  /** Set for a volume attached to a body: its lenses are reached through these datasets of the body. */
+  readonly hostedBy?: { readonly objectId: string; readonly name: string; readonly route: string; readonly datasets: Readonly<Record<string, { readonly lensId: string; readonly label: string }>> }; }
 export const datasetKey = (objectId: string, lensId: string) => `${objectId}/${lensId}`;
 export function contributionIndexes(edges: readonly ContributionEdge[]) {
   const byObject: Record<string, number[]> = Object.create(null), byMission: Record<string, number[]> = Object.create(null), byFacility: Record<string, number[]> = Object.create(null);
@@ -58,7 +60,8 @@ export function compileContributions(objects: readonly ContributionObject[], cat
       }
     }
     for (const lens of object.controls) if (linked.has(lens.id)) {
-      datasets.push(Object.freeze({ objectId: object.id, objectName: object.name, lensId: lens.id, label: lens.label, href: datasetDestination(object.id, object.route, lens.id) }));
+      const dataset = objectDataset(object, lens);
+      if (!datasets.some(known => known.objectId === dataset.objectId && known.lensId === dataset.lensId)) datasets.push(Object.freeze(dataset));
     }
   }
   return Object.freeze({ edges: Object.freeze(edges), datasets: Object.freeze(datasets), ...contributionIndexes(edges) });
@@ -66,9 +69,10 @@ export function compileContributions(objects: readonly ContributionObject[], cat
 export function parseContributionGraph(input: unknown, catalog: ExplorationCatalog): ContributionGraph {
   const graph = explorationRecord(input, ['edges', 'datasets', 'byObject', 'byMission', 'byFacility']);
   const datasets = explorationArray(graph.datasets, raw => {
-    const view = explorationRecord(raw, ['objectId', 'objectName', 'lensId', 'label', 'href']);
-    const objectId = explorationId(view.objectId), lensId = explorationId(view.lensId), href = parseDatasetDestination(view.href, objectId, lensId);
-    return Object.freeze({ objectId, lensId, href, objectName: explorationText(view.objectName), label: explorationText(view.label) });
+    const view = explorationRecord(raw, ['objectId', 'objectName', 'lensId', 'label', 'href', 'host']);
+    const host = view.host === undefined ? undefined : (record => Object.freeze({ objectId: explorationId(record.objectId), lensId: explorationId(record.lensId) }))(explorationRecord(view.host, ['objectId', 'lensId']));
+    const objectId = explorationId(view.objectId), lensId = explorationId(view.lensId), href = parseDatasetDestination(view.href, objectId, lensId, host);
+    return Object.freeze({ objectId, lensId, href, objectName: explorationText(view.objectName), label: explorationText(view.label), ...(host === undefined ? {} : { host }) });
   });
   const keys = new Set(datasets.map(view => datasetKey(view.objectId, view.lensId)));
   if (keys.size !== datasets.length) throw new TypeError('Duplicate dataset destination.');

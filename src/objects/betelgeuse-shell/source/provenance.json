@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-volume-provenance@1",
-  "title": "Betelgeuse circumstellar dust: measured polarisation and the published Great Dimming clump",
-  "kind": "observed-sky-map-and-published-radiative-transfer-model",
+  "title": "Betelgeuse circumstellar material: polarised dust, the 4 micrometre light outside the disc, silicon monoxide around the star and the published Great Dimming clump",
+  "kind": "observed-sky-maps-line-cube-and-published-radiative-transfer-model",
   "authors": [
     "M. Montargès",
     "E. Cannon",
@@ -17,12 +17,14 @@
   ],
   "organizations": [
     "ESO (VLT/SPHERE-ZIMPOL, programmes 0104.D-0300 and 114.28H9.001)",
-    "High Contrast Data Centre (reduction)"
+    "High Contrast Data Centre (reduction)",
+    "ESO (VLTI/MATISSE, February 2020, observations of Drevon et al. 2024)",
+    "ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S"
   ],
   "license": {
     "spdx": "CC-BY-4.0",
     "dataLicenseDeclaration": "https://archive.eso.org/cms/eso-data-access-policy.html",
-    "note": "ESO Phase 3 release description BETELGEUSE-B DR1, 2026-08-19: science data products from the ESO archive may be distributed under the Creative Commons Attribution 4.0 International license with credit to the ESO provenance. The 2019 clump parameters are published numbers from Montargès et al. 2021, Extended Data Table 3."
+    "note": "ESO Phase 3 release description BETELGEUSE-B DR1, 2026-08-19: science data products from the ESO archive may be distributed under the Creative Commons Attribution 4.0 International license with credit to the ESO provenance. The 2019 clump parameters are published numbers from Montargès et al. 2021, Extended Data Table 3. The 4 micrometre image is this repository’s SQUEEZE reconstruction of ESO/VLTI/MATISSE visibilities, which are ESO archive data under the same policy. The SiO cube is ALMA archive data, public under the ALMA data access policy with the ALMA credit line retained."
   },
   "sources": [
     {
@@ -40,6 +42,30 @@
       "sha256": "0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687",
       "bytes": 8455680,
       "role": "degree of linear polarisation, the quantity the 2024 leaves carry"
+    },
+    {
+      "id": "matisse-2020-02-continuum-4mas",
+      "url": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "paper": "https://doi.org/10.1051/0004-6361/202347719",
+      "sha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
+      "bytes": 135360,
+      "role": "the 4 micrometre light outside the photosphere that the emission-2020 leaves carry: this repository’s SQUEEZE reconstruction of the ESO/VLTI/MATISSE visibilities of February 2020 (Drevon et al. 2024), the image Betelgeuse’s own sphere is painted from"
+    },
+    {
+      "id": "alma-sio-v0-5-4-2023-08",
+      "url": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits&CIRCLE=88.79312208+7.40713833+0.00025",
+      "landing": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+      "sha256": "fd94c4ff071920e8222cb9780b04f8ef9f71d459a9c3751f6e21932ea604c151",
+      "bytes": 1428480,
+      "role": "the SiO v=0 J=5-4 line cube the sio-2023 leaves carry: ALMA (ESO/NAOJ/NRAO) project 2022.A.00026.S, member uid://A001/X360d/Xae, observed 3 to 27 August 2023, boxed and windowed by reduce-alma-sio.mts"
+    },
+    {
+      "id": "alma-continuum-2023-08",
+      "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits",
+      "landing": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+      "sha256": "28b7cfb6075b5cdb5dcfac176f94f3e116e1ce986903393314f26c8cf887bd68",
+      "bytes": 40320,
+      "role": "the same observation's continuum image, which locates the star the SiO is read about"
     },
     {
       "id": "veil-parameters",
@@ -62,20 +88,56 @@
       428.4301075268817
     ],
     "polarisationMaskRadiusUnits": 0.9261683067390526,
-    "sioClump": {
-      "detectedBeams": 51,
-      "placedParcels": 41,
-      "noiseJyBeamKmS": 0.020539618645608805,
-      "skyOffsetUnits": [
-        -2.3660996070453404,
-        -2.3318787497878555
+    "sio": {
+      "starFromPhaseCentreMas": [
+        -84.91744977580933,
+        -57.24553312244081
       ],
-      "projectedUnits": 3.322060483220058,
-      "positionAngleDegrees": 225.4173446249679,
-      "meanLineOfSightKmS": -2.401691342456832,
-      "skySpeedKmS": 7.7,
-      "outflowKmS": 8.065861473173966,
-      "deepestPlacedUnits": 3.8615501672560932
+      "peakFromCentroidMas": 4.488365133636173,
+      "continuumPeakJyBeam": 0.04366088658571243,
+      "continuumNoiseJyBeam": 0.0003603528252032141,
+      "channelNoiseJyBeam": 0.0009018509588786401,
+      "smoothedNoiseJyBeam": 0.0003338163574203131,
+      "maskedVoxels": 3243,
+      "emissionPixels": 331,
+      "emissionBeams": 21.716757323155957,
+      "lineFluxJyKmS": 0.5513236146199973,
+      "beyondReach": {
+        "share": 0.29008233519884874,
+        "nearestUnits": 8.343553178813975,
+        "furthestUnits": 14.475587598632691,
+        "positionAngleDegrees": 7.167487506809891,
+        "continuumPeakJyBeam": 0.0018312435131520033,
+        "continuumPeakSigma": 5.0818070098917865,
+        "continuumPeakUnits": [
+          2.478544748791417,
+          10.697958048984178
+        ]
+      },
+      "systemicLsrkKmS": 5.071474131833429,
+      "emissionRangeLsrkKmS": [
+        -13.550769483216516,
+        28.252954073806983
+      ],
+      "fastestKmS": 23.181479941973553,
+      "outflowKmS": 21.993511643877913,
+      "fasterThanFlowFraction": 0.00013279281753710037,
+      "absorption": {
+        "deepestJyBeam": -0.02289380133152008,
+        "atKmS": -5.1371714998729185,
+        "fromKmS": -21.319258038119063,
+        "toKmS": 16.438943884385036,
+        "centroidFromStarMas": 2.170860020877849
+      },
+      "ringRadiusUnits": 2.375,
+      "weightUnits": [
+        1.039045810036891,
+        -0.6385405877905619
+      ],
+      "weightPositionAngleDegrees": 121.57260375442934,
+      "placedFraction": 0.9959891271186834,
+      "outsideFraction": 0.0038780800637797964,
+      "deepestPlacedUnits": 5.215188034805006
     },
     "emissionEnvelope": {
       "shape": "steady-outflow",
@@ -115,15 +177,15 @@
     ],
     "distancePc": 168.00059762989528,
     "veilCentreUnits": [
-      0.5347658321649745,
-      -0.8443671034183808,
-      -3.5181962642432536
+      0.4046890963773153,
+      -0.6389827837536558,
+      -2.6624282656402323
     ],
-    "veilRadiusUnits": 1.8294620574064917
+    "veilRadiusUnits": 1.3844626981329209
   },
   "models": {
     "zimpol-v": "Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to 0.10. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius 3.50 stellar radii and gaussian thickness 1.20, which leaves a residual of 4.28e-3 against a profile of 1.41e-2. A steady outflow r^-0.70 leaves 6.23e-3 and a constant depth, which is what pushing the image backwards assumes, leaves 6.94e-3. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib inferno sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.",
-    "sio-2023": "Measured depth, not inferred. The archive's pipeline cube of SiO v=0 J=5-4 was cut out around the star, its continuum removed against 1738 line-free channels and the line integrated. 51 beams clear 5 times the map noise, and they form one clump 3.32 stellar radii out at position angle 225 degrees, not a shell. Each parcel's depth is its own Doppler shift under a radial flow of 8.1 km/s, which combines 7.7 km/s across the sky, measured against the published December 2019 clump over the 3.63 years between the epochs, with the clump's own mean line-of-sight velocity of -2.4 km/s. A parcel is spread over the beam it was measured with, and a line of sight is never deprojected past 0.85 of the flow speed. 41 parcels are placed, the furthest 3.86 stellar radii along the line of sight. The flow speed is the one stated assumption; the two sky axes and the velocity are measured.",
+    "sio-2023": "Measured on three axes, under one stated flow. ALMA observed SiO v=0 J=5-4 around the star from 3 to 27 August 2023; the archive's pipeline cube was cut out, its residual continuum removed and 47 channels of 1.35 km/s kept. The star is not at the observation's phase centre: the continuum image from the same observation and calibration puts it 102 mas away, 4.8 stellar radii, at position angle 236 degrees, and every position here is measured from it; the line's own absorption is centred 2.2 mas from that point. Against the star the line absorbs from -21.3 to +16.4 km/s about the star's velocity, deepest 23 mJy per beam: gas between us and the star, leaving it and, on the red side, falling back. Inside the star's continuum footprint emission cannot be told from that absorption and is not drawn. Outside it, moment masking (the cube smoothed by its beam and three channels, cut at 5 times its noise and grown by the smoothing) keeps 331 pixels within 6 stellar radii of the star, 22 beams carrying 0.55 Jy km/s: a lopsided ring, brightest 2.38 stellar radii from the star, with its weight toward position angle 122 degrees. The star's velocity, 5.1 km/s LSRK, is the flux-weighted mean of that ring. The blue edge of the absorption, the fastest gas in front of the star coming toward us, gives the flow's terminal speed the way a P Cygni profile does: 22.0 km/s with half a channel. Every channel of every pixel is placed along the line of sight on a spherical outflow at that speed: a parcel at sky distance s moving at v lies at depth s v / sqrt(u^2 - v^2). 99.6 percent of the ring's flux lands inside the grid, the deepest 5.22 stellar radii along the line of sight; 0.01 percent is faster than the flow and cannot be placed on it. Each sample is drawn as a gaussian a quarter of the beam's minor axis in standard deviation. Beyond the ring, a further 29 percent of the masked flux lies 8 to 14 stellar radii to the north, beside a 5.1-sigma continuum peak, outside the volume; it is not drawn, and whether it is circumstellar gas or an artefact of the bright star in this image is open. The sky positions and velocities are measured; that the gas flows straight out at one speed is assumed.",
     "emission-2020": "The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a steady-outflow (r^-7.95) leaving 2.99e-6, against 1.50e-5 for the constant depth an extrusion assumes and a profile of 2.09e-5. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.",
     "veil-2019-12": "The published December 2019 clump: a sphere of radius 6.5 au centred at (-1.9, -3, 12.5) au along right ascension, declination and toward Earth, of constant dust density 3.2e-19 g/cm3 in MgFeSiO4 grains centred on 0.21 micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln 10, which is the 10-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at 0.04 of the photosphere's surface brightness, which is a display choice."
   },
@@ -138,7 +200,12 @@
     "The 2019 clump is a model fitted to images, not an image. Its January and March 2020 epochs are recorded by its own authors as unoptimised best guesses and are not shipped.",
     "Silicates sublimate near 1500 K, so the real clump is emptier on the side facing the star than a uniform sphere; its authors record that this does not change their result, and the uniform sphere they published is what is drawn.",
     "Scattered starlight is drawn warm because it is the star’s own light; no colour was measured.",
-    "The two lenses are five years apart. Neither is a picture of the other.",
+    "The four lenses span 2019 to 2024 and measure different things. None is a picture of another.",
+    "The 4 micrometre light is one reconstruction of one epoch. Its depth is the envelope that best projects to its radial profile, an inference like the 2024 map’s, drawn symmetric in depth. Within one beam of the published disc that light is the star’s own edge smeared by the beam, so it is drawn only from 1.19 stellar radii out.",
+    "The SiO depths assume every parcel moves straight out from the star at one speed, the blue edge of its absorption against the star. The same absorption shows gas falling back, and the inner wind of a red supergiant is turbulent, so a velocity is not a unique depth: the depths are this model’s, not measured ones.",
+    "Inside the star’s continuum footprint the SiO line absorbs against the star and emission there is not drawn, so the envelope has an empty cylinder along the line of sight through the star.",
+    "The SiO cube is the archive's pipeline image at its own beam, 30 by 22 mas, with channels 1.35 km/s wide; each sample is drawn narrower than a channel's worth of depth, at its measured velocity.",
+    "The SiO colours are a false-colour ramp for integrated line brightness, not a colour, a temperature or a density.",
     "The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.",
     "Its extinction is grey. Silicate dust reddens what it transmits; no colour was applied because the photosphere behind it is drawn in an infrared intensity palette, not in colour.",
     "The scattered light is a stated display level, not a measurement.",
