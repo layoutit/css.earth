@@ -61,19 +61,17 @@
     {
       "id": "bodies-with-data",
       "subject": "What this archive holds for catalogued bodies",
-      "status": "unresolved",
-      "finding": "The NRAO archive answered 503 Service Unavailable throughout the screen on 2026-09-17, so its holdings for catalogued bodies are unmeasured.",
-      "revisitWhen": "The NRAO archive answers again and the screen is rerun.",
+      "status": "excluded",
+      "finding": "Screened on 18 September 2026, after the archive came back. Its documented TAP service at data-query.nrao.edu never answered on any port, so the screen used the portal's own JSON backend at data.nrao.edu/archive-service, which is anonymous and undocumented. All 486 bodies with a content record were queried: 98 matched by name and 24 survived checking their scan target names, over 12,120 execution blocks, VLBA 5,502, VLA 3,445, EVLA 2,602, GBT 571. Substring matching on short names is most of the difference: Io returns Orion fields, Leda returns the galaxy catalogue, Hydra the radio galaxy. Nothing reaches a surface. The best unphotographed candidates are Eunomia at 3.3 beams and Pallas at 3.1, both below the six beams Polaris was turned down at, and radio thermal emission maps subsurface temperature rather than appearance. The one holding our other archives lack is Katherine de Kleer's programme 20B-259 on M-type asteroids, eight public A-configuration blocks on Kalliope, Lutetia, Psyche and Eunomia from December 2020 to January 2021.",
+      "revisitWhen": "A configuration finer than A at Q band reaches one of these bodies, or a body passes closer while the array is extended.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
-        "https://data.nrao.edu/",
-        "https://github.com/layoutit/css.earth/pull/293"
+        "https://data.nrao.edu/portal/",
+        "https://science.nrao.edu/facilities/vla/docs/manuals/oss/performance/resolution"
       ],
       "checked": [
         {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
+          "date": "2026-09-18",
+          "commit": "fc74554fc2862c774b5ad4d02b6a499f6dc884a8"
         }
       ]
     }

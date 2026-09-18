@@ -15,9 +15,14 @@ The facility ledgers under `src/facilities/` record how each archive is reached 
 | MAST | 166 | 195,832 | MIPS (102227), IRAC (39794), IRS (27089) |
 | ESASky | 77 | 26,618 | HST (26618) |
 | IRTF | 37 | 17,660 | IRTF SpeX Guider (12111), IRTF SpeX Spectrograph (2782), IRTF iSHELL Guider (1582) |
+| NRAO | 24 of 98 named | 12,120 blocks | VLBA (5502), VLA (3445), EVLA (2602), GBT (571) |
 
-NRAO (VLA, VLBA, GBT) answered 503 Service Unavailable throughout the screen and is not included. Subaru,
-ASKAP, LOFAR and IRAM need an account or written approval, so they were not queried; their ledgers say so.
+NRAO answered 503 Service Unavailable on 17 September and was screened on 18 September, after it came back. Its documented TAP
+service at `data-query.nrao.edu` never answered on any port, so that screen used the portal's own anonymous JSON backend at
+`data.nrao.edu/archive-service`. Its unit is an execution block, an entire observing session including calibrators, so its count
+is not comparable one for one with the frame counts above; and its bodies are counted twice, as named matches and as the 24 that
+survived checking their scan target names, because substring matching on short names is most of the difference. Subaru, ASKAP,
+LOFAR and IRAM need an account or written approval, so they were not queried; their ledgers say so.
 
 ## Bodies that could gain a surface
 
