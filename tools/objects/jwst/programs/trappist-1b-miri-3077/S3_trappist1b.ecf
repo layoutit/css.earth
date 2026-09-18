@@ -34,6 +34,9 @@ centroid_method fgc         # Method used for centroiding. Options: mgmc, fgc
 oneoverf_corr   None        # Options: None, meanerr, median
 skip_apphot_bg  False       # Skips the background subtraction during the aperture photometry step
 photap          5           # Size of photometry aperture in pixels
+phot_method     photutils   # Bell's control file uses poet, whose whole-pixel aperture flips between 78 and 79 pixels as the
+                            # centroid moves 0.01 px, a step of about 650 ppm in this light curve.
+aperture_edge   exact       # Fractional edge pixels: a constant 78.54-pixel aperture.
 # photap          [3,11,1]    # Size of photometry aperture in pixels
 skyin           16          # Inner sky annulus edge, in pixels
 # skyin           [10,24,2]   # Inner sky annulus edge, in pixels

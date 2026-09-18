@@ -15,7 +15,7 @@
     "S3": "S3_trappist1b.ecf",
     "S4": "S4_trappist1b.ecf"
   },
-  "settingsSource": "Bell's Eureka! control files for these exact observations, deposited with Gillon, Ducrot et al. (2025, Nature Astronomy) at doi:10.5281/zenodo.17710453, carried over to this pipeline's one-worker batching: photometry with gain 3.57, a 100 by 100 pixel window, fgc centroiding from [255, 255], a 5-pixel aperture and a 16 to 46 pixel sky annulus.",
+  "settingsSource": "Bell's Eureka! control files for these exact observations, deposited with Gillon, Ducrot et al. (2025, Nature Astronomy) at doi:10.5281/zenodo.17710453, carried over to this pipeline's one-worker batching: photometry with gain 3.57, a 100 by 100 pixel window, fgc centroiding from [255, 255], a 5-pixel aperture and a 16 to 46 pixel sky annulus. One setting departs from his: the aperture weights its edge pixels by their area inside the circle (photutils, aperture_edge exact), because his whole-pixel aperture includes 78 or 79 pixels depending on a 0.01-pixel centroid shift, which puts steps of about 650 ppm into the light curve.",
   "segments": [
     {
       "name": "jw03077001001_03101_00001-seg001_mirimage_uncal.fits",
