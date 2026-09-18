@@ -158,6 +158,15 @@ src/objects/*/source/**/*.bpc
 !src/objects/smc/source/compact/lenses/*/*.png
 !src/objects/smc/source/compact/neutral/slices/*/*.png
 
+# USGS Gazetteer nomenclature archives re-pinned this phase: named explicitly (not a glob) so tracking stays limited
+# to the bodies actually verified here; each manifest documents these as a committed public-domain snapshot.
+!src/objects/didymos/source/features/DIDYMOS_nomenclature_center_pts.zip
+!src/objects/bennu/source/features/BENNU_nomenclature_center_pts.zip
+!src/objects/dimorphos/source/features/DIMORPHOS_nomenclature_center_pts.zip
+!src/objects/donaldjohanson/source/features/DONALDJOHANSON_nomenclature_center_pts.zip
+!src/objects/dactyl/source/features/DACTYL_nomenclature_center_pts.zip
+!src/objects/hyperion/source/features/HYPERION_nomenclature_center_pts.zip
+
 # Native Mathilde map retained as orientation evidence.
 !src/objects/mathilde/source/maps/253mathm.fit
 
