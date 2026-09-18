@@ -6,6 +6,22 @@ Explore the live version: [css.earth](https://css.earth) 🔭
 
 <img src=".github/assets/planets-contact-sheet.webp" alt="The eight planets, Mercury to Neptune, each rendered as DOM and CSS markup" width="960">
 
+## What It Covers
+
+css.earth has one route per object, and every object uses the same camera, so you can fly from a comet to Saturn to another galaxy without leaving the page.
+
+- **The Solar System:** the Sun, the eight planets, 5 dwarf planets, about 100 moons, more than 300 asteroids, 32 comets and 17 other trans-Neptunian objects, all on their orbits. Where a mission photographed a body, its surface comes from that mission's images; the rest are shown as shape models.
+- **Stars and exoplanets:** stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
+- **Interstellar visitors:** 'Oumuamua, Borisov and 3I/ATLAS.
+- **Nebulae:** the Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster.
+- **Galaxies:** the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
+
+Many objects have several dataset views, such as thermal, ultraviolet, radar or topography, each credited to its source.
+
+<img src=".github/assets/solar-system.webp" alt="The inner Solar System out to Saturn, with orbits and labels, rendered as DOM and CSS markup" width="960">
+
+<img src=".github/assets/milky-way-lmc.webp" alt="The Milky Way beside the Large Magellanic Cloud, rendered as DOM and CSS markup" width="960">
+
 ## How to Run
 
 Use Node.js 24 (or 22.18+) and pnpm 10. Install dependencies, download the prepared assets once, and start the dev server:
