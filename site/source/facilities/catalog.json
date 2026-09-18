@@ -3361,17 +3361,17 @@
         "value": "LICIACube",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-liciacube",
             "checkedOn": "2026-09-18"
           }
         ]
       },
       "aliases": [],
       "description": {
-        "value": "Italian Space Agency cubesat carried by DART; separated before impact to image the collision and the resulting ejecta from Dimorphos.",
+        "value": "Light Italian Cubesat for Imaging of Asteroids: an ASI cubesat that flew aboard DART and separated about 10 days before impact to image the collision and the resulting plume from Dimorphos.",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-liciacube",
             "checkedOn": "2026-09-18"
           }
         ]
@@ -3380,7 +3380,7 @@
         "value": "flyby",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-liciacube",
             "checkedOn": "2026-09-18"
           }
         ]
@@ -3389,7 +3389,7 @@
         "value": "space",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-liciacube",
             "checkedOn": "2026-09-18"
           }
         ]
@@ -3398,7 +3398,11 @@
         "value": "2021",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-dart",
+            "checkedOn": "2026-09-18"
+          },
+          {
+            "catalogueId": "reference-liciacube",
             "checkedOn": "2026-09-18"
           }
         ]
@@ -5754,28 +5758,27 @@
         "value": "DART",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-dart",
             "checkedOn": "2026-09-18"
           }
         ]
       },
       "description": {
-        "value": "NASA kinetic-impactor test that struck Dimorphos to change its orbit around Didymos; LICIACube, provided by the Italian Space Agency, imaged the impact.",
+        "value": "NASA's kinetic-impactor test that struck the asteroid moonlet Dimorphos to demonstrate asteroid deflection.",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-dart",
             "checkedOn": "2026-09-18"
           }
         ]
       },
       "agencyIds": {
         "value": [
-          "NASA",
-          "ASI"
+          "NASA"
         ],
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-dart",
             "checkedOn": "2026-09-18"
           }
         ]
@@ -5786,7 +5789,7 @@
           "role": "flyby",
           "citations": [
             {
-              "catalogueId": "nasa-dart-orbit-change",
+              "catalogueId": "reference-liciacube",
               "checkedOn": "2026-09-18"
             }
           ]
@@ -5796,7 +5799,7 @@
         "value": "2021",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-dart",
             "checkedOn": "2026-09-18"
           }
         ]
@@ -5805,7 +5808,7 @@
         "value": "2022",
         "citations": [
           {
-            "catalogueId": "nasa-dart-orbit-change",
+            "catalogueId": "reference-dart",
             "checkedOn": "2026-09-18"
           }
         ]
