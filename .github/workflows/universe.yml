@@ -239,6 +239,15 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # See the Typecheck job: one .tsbuildinfo per tsc program, keyed the same way, so a warm cache here
+          # recompiles only the test/fixture/capture files that changed since the last run on this branch.
+          path: output/tsbuildinfo
+          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -267,8 +276,10 @@ jobs:
           pnpm prepare:minimap
           pnpm prepare:sources
       - name: Typecheck test, fixture and capture files
+        # One unbatched program over the whole tests/tsconfig.json closure (tools/typecheck-tests.mts); a 6 GB heap
+        # covers the 3.9 GB the audit measured, well inside the runner's 16 GB.
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          NODE_OPTIONS: --max-old-space-size=6144
         run: pnpm typecheck:tests
       - name: Cancel the rest of the run
         if: failure()

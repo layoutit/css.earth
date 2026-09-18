@@ -41,6 +41,8 @@
       "/src/*": [
         "../src/*"
       ]
-    }
+    },
+    "incremental": true,
+    "tsBuildInfoFile": "../output/tsbuildinfo/tests.tsbuildinfo"
   }
 }
