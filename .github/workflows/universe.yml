@@ -7,6 +7,8 @@ on:
 
 permissions:
   contents: read
+  # The publish gate reads the last green main run to scope a push to main.
+  actions: read
 
 concurrency:
   group: universe-${{ github.workflow }}-${{ github.ref }}
@@ -61,20 +63,17 @@ jobs:
           src/platform/runtime-asset-closure.test.mts
           tools/object-scope-gate.test.mts
           tools/prune-runtime-assets.test.mts
-      - name: Check published assets
-        # HEAD every key in both inventory kinds (runtime-assets.json and prepared-assets.json) and fail with the
-        # list of misses before anything is restored, so a contributor who bakes locally but forgets to publish
-        # gets a red PR instead of a silent local pass. Runs as early as the job allows: it needs SCENE_OBJECTS
-        # (site/objects.mts), which build:tools just generated. On a PR, a miss outside the objects the PR itself
-        # touched (vs. its base branch) only warns instead of failing, so an unrelated pre-existing gap cannot
-        # block it; a push to main (and any local run) stays strict and fails on every miss.
+      - name: Check published assets this change adds
+        # HEAD only the R2 keys this change's inventories add (keys are content-addressed, so an unchanged line
+        # needs no new proof): on a PR, against its base branch; on a push to main, against the last green main
+        # run (a full sweep when there is none). The nightly workflow sweeps every key.
         env:
-          BASE_REF: ${{ github.base_ref }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            pnpm check:assets-published --changed-since="origin/$BASE_REF"
+          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+            pnpm check:assets-published --added-since-last-green
           else
-            pnpm check:assets-published
+            pnpm check:assets-published --added-since="origin/${GITHUB_BASE_REF:-main}"
           fi
       - name: Restore prepared assets and object JSON
         # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
