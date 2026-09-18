@@ -14,9 +14,7 @@ locations for the images used to inspect the reported visual changes.
 The first two reports retain their tested revisions, served input pins, browser
 version, viewport, DPR and camera state. The final visual record includes camera
 and payload identities but did not record browser version or viewport; it is
-therefore incomplete as a standalone reproduction receipt. The newer
-[provenance inspection](../../nebula-provenance-2026-09-14/) records the current
-application and its capture environment.
+therefore incomplete as a standalone reproduction receipt.
 
 Only images supporting the maintained cloud/core/edge explanation are retained.
 Routine navigation screenshots remain scratch; their recorded DOM/state checks

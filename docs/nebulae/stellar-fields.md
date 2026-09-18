@@ -99,3 +99,12 @@ The 14 September app inspection shows the added upper-halo cores in the WFI
 lens, including cores detected beyond that image’s coverage. Front and oblique
 views of all three lenses retain their geometry and source appearance. Their
 roughly one-pixel cores are intentionally subtle; existing coarse halos remain.
+
+[`site/test/nebula-datasets-browser.mts`](../../site/test/nebula-datasets-browser.mts)
+walks each object's dataset context rail across every lens and checks that the
+selected dataset stays visible after a merge. Its fixed captures preserve the
+merged-visibility fix for M42, Helix and M2–9:
+
+![M42 dataset context rail after the merged-visibility fix](../images/nebulae/m42-datasets.jpg)
+![Helix dataset context rail after the merged-visibility fix](../images/nebulae/helix-datasets.jpg)
+![M2–9 dataset context rail after the merged-visibility fix](../images/nebulae/m2-9-datasets.jpg)
