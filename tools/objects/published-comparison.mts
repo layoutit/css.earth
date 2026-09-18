@@ -97,7 +97,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
       bestTurnDegrees: bestTurn > 180 ? bestTurn - 360 : bestTurn, turns,
       imageTurnDegrees: { model: bestImageTurnDegrees(drawn.mask, model), photograph: bestImageTurnDegrees(drawn.mask, photograph) },
       axis: { paperDegrees: paperAxis === null ? null : round(paperAxis, 1), oursDegrees: ours === null ? null : round(ours, 1), differenceDegrees: paperAxis === null || ours === null ? null : round(axisDifferenceDegrees(ours, paperAxis), 1) } });
-    visuals.push({ label: column.label, model, ours: drawn.mask, cellModel: spec.rows.model, cellImage: spec.rows.image, column: index });
+    visuals.push({ label: column.label, model, photograph, ours: drawn.mask, cellModel: spec.rows.model, cellImage: spec.rows.image, column: index });
   }
   const evidence = {
     schema: COMPARISON_EVIDENCE_SCHEMA, objectId, lensId: spec.lensId, source: spec.source, figure: spec.figure,
@@ -118,8 +118,9 @@ export async function writeComparisonEvidence(result: Awaited<ReturnType<typeof 
 
 /**
  * One tile per compared column, up to four to a row: the paper's photograph panel with the outline of the paper's model
- * in amber and ours in cyan. The paper's model outline is drawn where its own panel puts it, since the figure aligns each
- * column's panels; ours is scaled to the paper model's area and centred on it, as the overlap measure compares them.
+ * in amber and ours in cyan. The figure does not align a column's panels with each other (Elektra's photographs sit 4 to
+ * 14 px from its model panels), so both outlines are centred on the photograph, as the overlap measure compares shapes:
+ * the paper's model keeps its own size, and ours is scaled to it.
  */
 async function evidenceImage(result: Awaited<ReturnType<typeof measurePublishedComparison>>, path: string) {
   const { figure, cell, visuals } = result, tile = 220, gap = 8, header = 30, perRow = Math.min(4, visuals.length), rows = Math.ceil(visuals.length / perRow);
@@ -133,13 +134,14 @@ async function evidenceImage(result: Awaited<ReturnType<typeof measurePublishedC
     const left = (index % perRow) * (tile + gap), top = header + Math.floor(index / perRow) * (tile + gap);
     const photo = cell(visual.cellImage, visual.column), step = Math.min(photo.x1 - photo.x0, photo.y1 - photo.y0) / tile;
     for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) put(left + x, top + y, figurePixel(photo.x0 + Math.floor(x * step), photo.y0 + Math.floor(y * step)));
-    const inModel = (x: number, y: number) => within(visual.model, Math.floor(x * step), Math.floor(y * step));
-    const scale = Math.sqrt(area(visual.ours) / area(visual.model)), [ox, oy] = centroid(visual.ours), [mx, my] = centroid(visual.model);
-    const inOurs = (x: number, y: number) => within(visual.ours, Math.round(ox + (x * step - mx) * scale), Math.round(oy + (y * step - my) * scale));
+    const [px, py] = centroid(visual.photograph), [mx, my] = centroid(visual.model), [ox, oy] = centroid(visual.ours);
+    const inModel = (x: number, y: number) => within(visual.model, Math.floor(x * step - px + mx), Math.floor(y * step - py + my));
+    const scale = Math.sqrt(area(visual.ours) / area(visual.model));
+    const inOurs = (x: number, y: number) => within(visual.ours, Math.round(ox + (x * step - px) * scale), Math.round(oy + (y * step - py) * scale));
     for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) if (edge(inModel, x, y)) put(left + x, top + y, [255, 176, 0]);
     for (let y = 0; y < tile; y++) for (let x = 0; x < tile; x++) if (edge(inOurs, x, y)) put(left + x, top + y, [0, 220, 255]);
   }
-  const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><text x="2" y="20" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#e6e6e6">Paper photographs, with the outline of <tspan fill="#ffb000">the paper's model</tspan> and <tspan fill="#00dcff">ours</tspan></text></svg>`;
+  const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><text x="2" y="20" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#e6e6e6">Paper photographs, with the outlines of <tspan fill="#ffb000">the paper's model</tspan> and <tspan fill="#00dcff">ours</tspan> centred on each</text></svg>`;
   await sharp(canvas, { raw: { width, height, channels: 3 } }).composite([{ input: Buffer.from(svg) }]).webp({ quality: 86 }).toFile(path);
 }
 

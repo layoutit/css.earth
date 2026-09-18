@@ -37,7 +37,7 @@ Measured by `tools/objects/published-comparison.mts` against [Figure B.22](https
 | 2019-04-10 02:30:41 | 0.970 | 0.969 | 0.971 | 0° | 0°, 2° | 91.3° against 89.3° |
 | 2019-04-10 07:20:44 | 0.968 | 0.966 | 0.972 | -10° | -1°, 3° | 91.3° against 89.2° |
 
-Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 2.341 px at our phase; the lowest of a ±30° sweep is 2.263 px at 22°.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 32 native frames after the centre fit is 2.341 px at our phase; the lowest of a ±30° sweep is 2.264 px at 16°.
 <!-- published-comparison:end -->
 
 ### Registration
