@@ -53,10 +53,19 @@ export const SURVEY_LENS_SETTINGS = {
   display: { basis: 'authored', percentiles: [1, 99.5] },
 } as const;
 
-interface SurveyFigure { figure: string; number: number; name: string; page: number; object: number; width: number; height: number; pole: [number, number] }
+interface ReleasedModel { source: string; model: string; pole: [number, number]; spin?: string; shape?: string }
+interface SurveyFigure { figure: string; number: number; name: string; page: number; object: number; width: number; height: number; pole: [number, number]; releasedModel?: ReleasedModel }
 const readJson = async (path: string) => JSON.parse(await readFile(path, 'utf8')) as unknown;
 const exists = (path: string) => access(path).then(() => true, () => false);
 const frameId = (frame: LamFrame) => `${LENS_ID}-${frame.second.slice(0, 10).replaceAll('-', '')}-${frame.second.slice(11).replaceAll(':', '')}`;
+
+/** The survey's released model as an archive states it, where Table A.1 describes another solution than that model. */
+function releasedModelOf(value: Record<string, unknown>): ReleasedModel {
+  const pole = requireArray(value.pole).map(angle => requireFiniteNumber(angle));
+  if (pole.length !== 2 || !(Math.abs(pole[1]) <= 90)) throw new TypeError('A released model states an ecliptic pole.');
+  const file = (key: string) => value[key] === undefined ? {} : { [key]: requireString(value[key]) };
+  return { source: requireString(value.source), model: requireString(value.model), pole: [pole[0], pole[1]], ...file('spin'), ...file('shape') };
+}
 
 export async function surveyFigures() {
   const table = requireRecord(await readJson(resolve(import.meta.dirname, 'vernazza-2021-figures.json')));
@@ -66,7 +75,8 @@ export async function surveyFigures() {
       const f = requireRecord(value), pole = requireArray(f.pole).map(angle => requireFiniteNumber(angle));
       if (pole.length !== 2) throw new TypeError(`Figure ${String(f.figure)} states no Table A.1 pole pair.`);
       return { figure: requireString(f.figure), number: requireFiniteNumber(f.number), name: requireString(f.name),
-        page: requireFiniteNumber(f.page), object: requireFiniteNumber(f.object), width: requireFiniteNumber(f.width), height: requireFiniteNumber(f.height), pole: [pole[0], pole[1]] } satisfies SurveyFigure; }) };
+        page: requireFiniteNumber(f.page), object: requireFiniteNumber(f.object), width: requireFiniteNumber(f.width), height: requireFiniteNumber(f.height), pole: [pole[0], pole[1]],
+        ...(f.releasedModel === undefined ? {} : { releasedModel: releasedModelOf(requireRecord(f.releasedModel)) }) } satisfies SurveyFigure; }) };
 }
 
 /** A file already on this machine: the package's own copy, then the same path in any sibling checkout, checked by size and hash when a pin is known. */
@@ -179,21 +189,29 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   }
   // A release without an ADAM mesh for the body leaves the lens on the primary mesh, the release's MPCD: Themis's
   // 3Dshape directory answers 404 for it.
-  const adamPath = `shape/${number}_${figure.name}_adam.obj`;
-  const adam = await fetchOnce(objectId, adamPath, shapeUrl(number, figure.name, 'adam'), downloads).catch((error: unknown) => {
+  // Where LAM withholds a body's own ADAM mesh and rotation record (Flora), the survey model's archive copy supplies both.
+  const withheld = figure.releasedModel?.spin !== undefined && figure.releasedModel.shape !== undefined
+    ? { ...figure.releasedModel, spin: figure.releasedModel.spin, shape: figure.releasedModel.shape } : undefined;
+  const archiveSlug = withheld ? withheld.model.toLowerCase().replace(/[^a-z0-9]+/gu, '-') : '';
+  const adamPath = withheld ? `shape/${archiveSlug}-shape.obj` : `shape/${number}_${figure.name}_adam.obj`, adamUrl = withheld ? withheld.shape : shapeUrl(number, figure.name, 'adam');
+  const adam = await fetchOnce(objectId, adamPath, adamUrl, downloads).catch((error: unknown) => {
     if (error instanceof Error && error.message.startsWith('LAM answered 404 ')) return null;
     throw error;
   });
   if (adam) await put(adamPath, adam);
-  const recordName = spinRecordName(await lamText(`${LAM}/3Dshape/`), number, figure.name), spinRecordUrl = `${LAM}/3Dshape/${recordName}`;
+  const recordName = withheld ? `${archiveSlug}-spin.txt` : spinRecordName(await lamText(`${LAM}/3Dshape/`), number, figure.name);
+  const spinRecordUrl = withheld ? withheld.spin : `${LAM}/3Dshape/${recordName}`;
   // A package that already keeps the release's record under its archive name reads that copy rather than adding a second.
-  const spinRecordPath = await exists(resolve(packageSource, `reference/${recordName}`)) ? `reference/${recordName}` : SPIN_RECORD_PATH;
+  const spinRecordPath = withheld || await exists(resolve(packageSource, `reference/${recordName}`)) ? `reference/${recordName}` : SPIN_RECORD_PATH;
   const spinRecord = await exists(resolve(packageSource, spinRecordPath)) ? await readFile(resolve(packageSource, spinRecordPath)) : await fetchOnce(objectId, spinRecordPath, spinRecordUrl, downloads);
   await put(spinRecordPath, spinRecord);
   if (!await exists(resolve(packageSource, PAPER_PATH))) await put(PAPER_PATH, paper);
 
   // The column order the survey's pole supports.
-  const reading = spinRecordReading(spinRecord.toString('utf8'), surveyPole);
+  // Where Table A.1 describes another solution than the survey's released model (Eleonora, Thisbe), the released model's
+  // pole as the archive's copy of it states decides the reading; the figure then decides whether the lens ships.
+  const released = figure.releasedModel, readingPole = released ? { longitudeDegrees: released.pole[0], latitudeDegrees: released.pole[1] } : surveyPole;
+  const reading = spinRecordReading(spinRecord.toString('utf8'), readingPole);
 
   // Both Horizons tables for exactly these exposures, kept with the downloads so a rerun asks Horizons once.
   const cachedTables = resolve(downloads, 'horizons.json'), starts = frames.map(entry => entry.exposure.startJd);
@@ -206,7 +224,8 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
 
   // The records: the observer cameras, the figure, the ADAM mesh as the lens's model, and the lens itself.
   const record = { schema: OBSERVER_CAMERAS_SCHEMA, lensId: LENS_ID, rotation: { kind: 'spin-record', path: spinRecordPath, columnOrder: reading.order,
-    ...(ownPole ? {} : { publishedPole: { source: paperPin.source, table: 'Table A.1', eclipticJ2000Degrees: [surveyPole.longitudeDegrees, surveyPole.latitudeDegrees] } }) },
+    ...(released ? { publishedPole: { source: released.source, table: released.model, eclipticJ2000Degrees: released.pole } }
+      : ownPole ? {} : { publishedPole: { source: paperPin.source, table: 'Table A.1', eclipticJ2000Degrees: [surveyPole.longitudeDegrees, surveyPole.latitudeDegrees] } }) },
     ephemeris: HORIZONS, epoch: 'exposure-midpoint', centre: { method: 'limb', edgeFraction: 0.25 } };
   await put(OBSERVER_CAMERAS_FILE, JSON.stringify(record, null, 2) + '\n');
   const manifest = requireRecord(await readJson(resolve(source, 'manifest.json')));
@@ -215,7 +234,9 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
     document: { input: paperInput ? requireString(paperInput.id) : `${objectId}-survey-research`, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
     rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
-  if (adam) {
+  // A body whose own shape is already the release's ADAM mesh (Adeona, which has no MPCD) needs no second copy of it.
+  const primaryIsAdam = requireRecord(geometry.radialTerrain).path === adamPath;
+  if (adam && !primaryIsAdam) {
     const counts = objCounts(adam.toString('utf8')), primary = requireRecord(geometry.radialTerrain);
     // The release's ADAM meshes are Wavefront OBJ files in kilometres, whatever format the primary mesh came in (a DAMIT
     // plate model, say); the rest of the primary's settings carry over.
@@ -243,7 +264,7 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   const pin = (bytes: Buffer | string) => { const data = Buffer.from(bytes); return { expectedBytes: data.length, expectedSha256: sha256(data) }; };
   const setInput = (entry: Record<string, unknown>) => { const at = inputs.findIndex(input => input.path === entry.path); if (at >= 0) inputs[at] = { ...inputs[at], ...entry }; else inputs.push(entry); };
   for (const entry of frames) setInput(frameInput(objectId, entry.frame, entry.bytes));
-  if (adam) setInput(adamInput(objectId, number, figure.name, adamPath, adam));
+  if (adam && !primaryIsAdam) setInput(adamInput(objectId, number, figure.name, adamPath, adam, withheld));
   setInput({ ...tableInput(objectId, 'observer', HORIZONS.observer, Buffer.from(tables.observer)) });
   setInput({ ...tableInput(objectId, 'heliocentric', HORIZONS.heliocentric, Buffer.from(tables.heliocentric)) });
   if (!paperInput) setInput(paperInputFor(objectId, paper));
@@ -260,7 +281,9 @@ export async function buildSetup(objectId: string, options: { leaveOut?: readonl
   const result = await measurePublishedComparison(objectId, { sourceDirectory: source });
   await writeComparisonEvidence(result, resolve(work, 'evidence'));
   const setup = { schema: SETUP_SCHEMA, objectId, survey: { number, name: figure.name, figure: figure.figure, command }, lensId: LENS_ID,
-    listing: framesUrl(number, figure.name), spinRecordUrl, apparition: { nights, frames: frames.length, released: listing.length }, leftOut: leaveOut, lensMesh: adam ? 'adam' : 'primary',
+    listing: framesUrl(number, figure.name), spinRecordUrl, apparition: { nights, frames: frames.length, released: listing.length }, leftOut: leaveOut, lensMesh: adam && !primaryIsAdam ? 'adam' : 'primary', primaryIsAdam, releasedModel: released ?? null, tablePole: figure.pole,
+    sources: { mesh: adam ? { label: withheld ? `ADAM reconstruction, as ${withheld.model} distributes it` : 'ADAM reconstruction', url: adamUrl } : null,
+      rotation: { label: withheld ? `Rotation state, as ${withheld.model} states it` : 'Release rotation record', url: spinRecordUrl } },
     labels: columns, columnOrder: { order: reading.order, separationDegrees: Number(reading.separationDegrees.toFixed(2)), otherSeparationDegrees: reading.otherSeparationDegrees === null ? null : Number(reading.otherSeparationDegrees.toFixed(2)) },
     written: written.sort(), earlierLens: earlierLens ? compareEarlierLens(earlierLens, lens) : null, evidence: result.evidence };
   await writeFile(resolve(work, 'setup.json'), JSON.stringify(setup, null, 2) + '\n');
@@ -315,12 +338,18 @@ function frameInput(objectId: string, frame: LamFrame, bytes: Buffer) {
     coverage: 'Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.',
     expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
 }
-function adamInput(objectId: string, number: number, name: string, path: string, bytes: Buffer) {
-  return { id: `${objectId}-adam-shape`, path, origin: shapeUrl(number, name, 'adam'), credit: SURVEY_CREDIT, capture: surveyCapture, ...surveyTerms, consumers: ['adam-terrain'],
+function adamInput(objectId: string, number: number, name: string, path: string, bytes: Buffer, archive?: { model: string; shape: string }) {
+  return { id: `${objectId}-adam-shape`, path, origin: archive?.shape ?? shapeUrl(number, name, 'adam'),
+    credit: archive ? `${SURVEY_CREDIT}; distributed as ${archive.model} by DAMIT, Astronomical Institute of Charles University` : SURVEY_CREDIT,
+    capture: surveyCapture, ...(archive ? damitTerms : surveyTerms), consumers: ['adam-terrain'],
     projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'kilometers' },
-    coverage: 'ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.',
+    coverage: archive
+      ? `ADAM reconstruction from the same survey, as ${archive.model} distributes it: LAM withholds the release’s own file for this body. The survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.`
+      : 'ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.',
     expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
 }
+const damitTerms = { license: 'CC-BY-4.0; DAMIT site license, retained with author and model attribution.', acquisition: 'Restored through source/preparation/acquisition.json.',
+  redistribution: 'CC-BY-4.0 with author/model attribution; see NOTICE.md.' };
 function paperInputFor(objectId: string, bytes: Buffer) {
   return { id: `${objectId}-survey-research`, path: PAPER_PATH, origin: SURVEY_PAPER_URL, credit: 'P. Vernazza et al. (2021), Astronomy & Astrophysics 654, A56', ...surveyTerms,
     license: 'CC-BY-4.0 research article; retain the citation.', consumers: ['physical', 'rotation'], expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
@@ -337,7 +366,8 @@ function summary(setup: Awaited<ReturnType<typeof buildSetup>>) {
   for (const column of setup.evidence.columns) lines.push(`  ${column.label}  model ${column.overlapWithModel}, photograph ${column.overlapWithPhotograph}, same shape ${column.sameShapeOverlap}; best turn ${column.bestTurnDegrees}°; axis ${column.axis.oursDegrees}° against ${column.axis.paperDegrees}°`);
   lines.push(`  native outline ${setup.evidence.nativeOutline.residualPixelsAtZero} px over ${setup.evidence.nativeOutline.frames} frames, smallest at ${setup.evidence.nativeOutline.bestOffsetDegrees}°`);
   if (setup.leftOut.length) lines.push(`  left out by name: ${setup.leftOut.join(', ')}`);
-  if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
+  if (setup.primaryIsAdam) lines.push('  the body’s own shape is the release’s ADAM mesh; the lens rides it');
+  else if (setup.lensMesh === 'primary') lines.push('  the release has no ADAM mesh for this body; the lens rides the primary mesh');
   if (setup.earlierLens) lines.push(`  the package's lens: ${setup.earlierLens.frames} frames, ${setup.earlierLens.sameFrames ? 'the same' : 'different'} frames, cameras differing: ${setup.earlierLens.camerasDiffering.length ? setup.earlierLens.camerasDiffering.join(', ') : 'none'}`);
   lines.push(`Evidence: ${relative(ROOT, resolve(ROOT, 'output/sphere-survey', setup.objectId, 'evidence/published-comparison.webp'))}`);
   return lines.join('\n');

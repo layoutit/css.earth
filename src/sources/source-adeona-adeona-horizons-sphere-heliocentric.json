@@ -1,0 +1,37 @@
+{
+  "id": "source-adeona-adeona-horizons-sphere-heliocentric",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Adeona · adeona horizons sphere heliocentric",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/adeona/source/manifest.json",
+      "revision": "e86ff96737869ce34fca472813b677a73d864814",
+      "sha256": "93f6e5763863ca8b09040d1a5a6f07ccfd749894980cffb3cb01e63995fe8c17",
+      "locator": "/inputs/19"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "scope": "The adeona horizons sphere heliocentric input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ephemeris service output; cite JPL Horizons.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

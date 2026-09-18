@@ -49,6 +49,13 @@ test('a pole stated just past the pole is folded, not refused, and orients the b
   }
 });
 
+test('a DAMIT spin file reads as its first two lines, whatever photometric parameters follow', () => {
+  // DAMIT model 5928, the survey's Flora model as DAMIT distributes it: the release layout, then the scattering weight.
+  const flora = parseSpinState('334 -2 12.86667\n2434419 0\n0.1\n', 'longitude-first');
+  assert.deepEqual([flora.longitudeDegrees, flora.latitudeDegrees, flora.periodHours, flora.epochJd, flora.phaseDegrees], [334, -2, 12.86667, 2434419, 0]);
+  assert.throws(() => parseSpinState('334 -2 12.86667\n2434419 0\nlambert 0.1\n', 'longitude-first'), /photometric/);
+});
+
 test('a spin parameter record is rejected when it cannot mean what the caller claims', () => {
   // A value far outside the range is not an unnormalised pole; it means the column order is wrong.
   assert.throws(() => parseSpinState('67.7259 -130.5 5.22466350\n2444914.8 0\n', 'longitude-first'), /latitude/);

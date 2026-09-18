@@ -51,13 +51,13 @@
     {
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
-      "status": "unresolved",
-      "finding": "The live source folder https://observations.lam.fr/astero/Data/354Eleonora/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
-      "revisitWhen": "The original image headers and publication establish a usable projection onto this specific MPCD model, and a native-pixel comparison qualifies geometry, illumination and measured coverage.",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 32 camera-1 deconvolved frames, 5 nights from 2018-11-23 to 2018-12-21, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 3 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: The live source folder https://observations.lam.fr/astero/Data/354Eleonora/ contains Deconv/ and Red/. Reduced and deconvolved observations therefore have a concrete archive route. Their pixels, image geometry, coverage and photometry were not qualified in this directory-level check, so these files cannot yet be treated as a registered global reflectance map. The current grid remains an explicit missing-imagery presentation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eleonora/README.md",
         "https://observations.lam.fr/astero/Data/354Eleonora/",
-        "https://observations.lam.fr/astero/"
+        "https://observations.lam.fr/astero/",
+        "https://observations.lam.fr/astero/Data/354Eleonora/Deconv/"
       ],
       "checked": [
         {
@@ -68,15 +68,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
         }
       ]
     },
     {
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
-      "status": "excluded",
-      "finding": "The live directory also lists 354_Eleonora_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
-      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "status": "included",
+      "finding": "The live directory also lists 354_Eleonora_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Reopened 2026-09-18 because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure B.40 describe; the Shape and Elevation views keep MPCD.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/354_Eleonora_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -88,15 +91,18 @@
           "date": "2026-09-13",
           "commit": "f17418b8cd2577f0e9dbbb5039f05df76c22f6ef",
           "pr": 192
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
         }
       ]
     },
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Measured on all 35 deconvolved frames with the release's rotation record, read latitude-first because 153.6484 degrees cannot be a latitude and both columns match DAMIT's 2021 model, cast onto the released ADAM mesh. The outline scores 24 of 35 frames and leaves 5.38 degrees after a 3.64-degree floor, outside the three-degree gate, so no lens ships. The disagreement is aspect-dependent rather than a constant error: restricted to the 11 frames whose outline reaches an elongation of 1.30, the residual is 1.31 degrees against a 1.35-degree floor, so where the outline defines a position angle at all the model agrees with it. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
-      "revisitWhen": "A registration reference for this body: a spacecraft map, or a night whose frames hold an elongation above 1.30 across enough of a rotation for the outline alone to reach the gate.",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 32 camera-1 frames on the ADAM mesh with the rotation record read latitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured on all 35 deconvolved frames with the release's rotation record, read latitude-first because 153.6484 degrees cannot be a latitude and both columns match DAMIT's 2021 model, cast onto the released ADAM mesh. The outline scores 24 of 35 frames and leaves 5.38 degrees after a 3.64-degree floor, outside the three-degree gate, so no lens ships. The disagreement is aspect-dependent rather than a constant error: restricted to the 11 frames whose outline reaches an elongation of 1.30, the residual is 1.31 degrees against a 1.35-degree floor, so where the outline defines a position angle at all the model agrees with it. Measured outside preparation by the registration stage's own modules (its limb fit, camera and caliper rule) driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit (15 scored, rms 2.887, floor 1.871, systematic 2.198); on Themis it read 2.92 degrees where the stage itself read 1.65, so treat these as the rule applied to the frames, not as a prepared verdict.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/354Eleonora/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/354_Eleonora_param.txt",
@@ -110,15 +116,18 @@
         {
           "date": "2026-09-17",
           "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
         }
       ]
     },
     {
       "id": "survey-table-pole",
       "subject": "Vernazza et al. (2021) Table A.1 pole against the release rotation record",
-      "status": "unresolved",
-      "finding": "Table A.1 lists the pole (154°, 24°) with a matching 71° obliquity; the release rotation record read latitude-first gives (153.65°, 50.85°), and DAMIT model 5919 of 2021-11-12 gives (154°, 51°). The survey’s table disagrees with its own released model by 27° in latitude. The camera route uses the release record, which is the one tied to the released mesh.",
-      "revisitWhen": "An erratum, or the survey’s model page, states which pole the released mesh uses.",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the survey’s own figure: read against the released model as DAMIT model 5919 states it, the release record reproduces Figure B.40 at our phase in every column, so the figure shows the released model and Table A.1’s latitude is the one that differs. The SPHERE photograph lens rides that record. Earlier finding, kept: Table A.1 lists the pole (154°, 24°) with a matching 71° obliquity; the release rotation record read latitude-first gives (153.65°, 50.85°), and DAMIT model 5919 of 2021-11-12 gives (154°, 51°). The survey’s table disagrees with its own released model by 27° in latitude. The camera route uses the release record, which is the one tied to the released mesh.",
       "evidence": [
         "https://doi.org/10.1051/0004-6361/202141781",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -128,6 +137,27 @@
         {
           "date": "2026-09-18",
           "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.40 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.40, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.937 to 0.957 at our phase, against 0.955 to 0.964 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 6 of 7 columns, and elsewhere in 1: at 20° by 0.013, less than the 0.039 the same shape loses to pixel size. With the paper’s photographs 0.916 to 0.953. Turned in the image, our outline best overlaps the paper’s photographs at -5.5 to 2.5° and its model panels at -4.5 to 0.5°. The spin axis we project lies at 123.9 to 124.4° on the sky against 121.9 to 122.5° for the figure’s arrows. Native outline residual 0.908 px mean over 32 frames at our phase; the sweep’s lowest is 0.850 px at 2°. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads latitude-first, 0.27° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/354Eleonora/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/354_Eleonora_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "b7cf9f91de86dac6dc195d66d6ff0187a87b31dc"
         }
       ]
     }

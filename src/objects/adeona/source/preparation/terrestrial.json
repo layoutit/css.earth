@@ -1,0 +1,394 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "adeona",
+  "displayName": "Adeona",
+  "publicBase": "/scenes/adeona/",
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/145_Adeona_adam.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 578,
+          "expectedFaces": 1152
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -72
+        },
+        "minimum": -15,
+        "maximum": 15,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 72000,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ],
+    "surfaceObservations": [
+      {
+        "id": "zimpol",
+        "format": "controlled-shape-camera",
+        "consumer": "sphere-photograph",
+        "metadata": {
+          "label": "SPHERE photograph",
+          "falseColor": false,
+          "coverage": "15 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 3 nights from 2017-12-31 to 2018-01-07, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.34. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+        },
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 128,
+          "maximumGain": 4,
+          "maximumAngleDegrees": 60
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 70,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "basis": "authored",
+          "percentiles": [
+            1,
+            99.5
+          ]
+        },
+        "frames": [
+          {
+            "id": "zimpol-20171231-064540",
+            "path": "observations/d145Adeona_2017-12-31T06_45_40.111_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.6649,
+            "observerWestLongitude": 146.079,
+            "sunLatitude": -48.2759,
+            "sunWestLongitude": 157.0957,
+            "rangeKm": 200641191.1,
+            "northAzimuthDegrees": 3.669,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.133,
+              138.461
+            ]
+          },
+          {
+            "id": "zimpol-20171231-065050",
+            "path": "observations/d145Adeona_2017-12-31T06_50_50.664_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.6655,
+            "observerWestLongitude": 148.1407,
+            "sunLatitude": -48.276,
+            "sunWestLongitude": 159.1547,
+            "rangeKm": 200639470.9,
+            "northAzimuthDegrees": 3.6686,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              121.848,
+              139.062
+            ]
+          },
+          {
+            "id": "zimpol-20171231-065600",
+            "path": "observations/d145Adeona_2017-12-31T06_56_00.807_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.6662,
+            "observerWestLongitude": 150.1997,
+            "sunLatitude": -48.276,
+            "sunWestLongitude": 161.2111,
+            "rangeKm": 200637756,
+            "northAzimuthDegrees": 3.6682,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              121.804,
+              137.486
+            ]
+          },
+          {
+            "id": "zimpol-20171231-070108",
+            "path": "observations/d145Adeona_2017-12-31T07_01_08.794_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.6668,
+            "observerWestLongitude": 152.2444,
+            "sunLatitude": -48.2761,
+            "sunWestLongitude": 163.2531,
+            "rangeKm": 200636055.9,
+            "northAzimuthDegrees": 3.6678,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.344,
+              138.168
+            ]
+          },
+          {
+            "id": "zimpol-20171231-070617",
+            "path": "observations/d145Adeona_2017-12-31T07_06_17.030_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.6674,
+            "observerWestLongitude": 154.2907,
+            "sunLatitude": -48.2762,
+            "sunWestLongitude": 165.2967,
+            "rangeKm": 200634357.3,
+            "northAzimuthDegrees": 3.6675,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.884,
+              138.298
+            ]
+          },
+          {
+            "id": "zimpol-20180101-045856",
+            "path": "observations/d145Adeona_2018-01-01T04_58_56.647_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.8265,
+            "observerWestLongitude": 317.1558,
+            "sunLatitude": -48.2919,
+            "sunWestLongitude": 327.489,
+            "rangeKm": 200208382.1,
+            "northAzimuthDegrees": 3.5718,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.295,
+              132.673
+            ]
+          },
+          {
+            "id": "zimpol-20180101-050407",
+            "path": "observations/d145Adeona_2018-01-01T05_04_07.308_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.8271,
+            "observerWestLongitude": 319.2183,
+            "sunLatitude": -48.292,
+            "sunWestLongitude": 329.5487,
+            "rangeKm": 200206741,
+            "northAzimuthDegrees": 3.5714,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.56,
+              132.673
+            ]
+          },
+          {
+            "id": "zimpol-20180101-050918",
+            "path": "observations/d145Adeona_2018-01-01T05_09_18.187_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.8278,
+            "observerWestLongitude": 321.2822,
+            "sunLatitude": -48.292,
+            "sunWestLongitude": 331.6099,
+            "rangeKm": 200205101.7,
+            "northAzimuthDegrees": 3.571,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.916,
+              132.475
+            ]
+          },
+          {
+            "id": "zimpol-20180101-051427",
+            "path": "observations/d145Adeona_2018-01-01T05_14_27.539_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.8284,
+            "observerWestLongitude": 323.336,
+            "sunLatitude": -48.2921,
+            "sunWestLongitude": 333.661,
+            "rangeKm": 200203473.5,
+            "northAzimuthDegrees": 3.5706,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              135.055,
+              131.499
+            ]
+          },
+          {
+            "id": "zimpol-20180101-051937",
+            "path": "observations/d145Adeona_2018-01-01T05_19_37.373_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -51.829,
+            "observerWestLongitude": 325.393,
+            "sunLatitude": -48.2921,
+            "sunWestLongitude": 335.7153,
+            "rangeKm": 200201845.6,
+            "northAzimuthDegrees": 3.5702,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              134.913,
+              132.633
+            ]
+          },
+          {
+            "id": "zimpol-20180107-055557",
+            "path": "observations/d145Adeona_2018-01-07T05_55_57.289_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -52.8434,
+            "observerWestLongitude": 181.5565,
+            "sunLatitude": -48.3585,
+            "sunWestLongitude": 187.2399,
+            "rangeKm": 198209459.8,
+            "northAzimuthDegrees": 2.8545,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.469,
+              132.476
+            ]
+          },
+          {
+            "id": "zimpol-20180107-060108",
+            "path": "observations/d145Adeona_2018-01-07T06_01_08.761_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -52.844,
+            "observerWestLongitude": 183.6245,
+            "sunLatitude": -48.3585,
+            "sunWestLongitude": 189.305,
+            "rangeKm": 198208715.8,
+            "northAzimuthDegrees": 2.854,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              123.122,
+              132.631
+            ]
+          },
+          {
+            "id": "zimpol-20180107-060619",
+            "path": "observations/d145Adeona_2018-01-07T06_06_19.727_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -52.8446,
+            "observerWestLongitude": 185.6892,
+            "sunLatitude": -48.3585,
+            "sunWestLongitude": 191.3668,
+            "rangeKm": 198207976,
+            "northAzimuthDegrees": 2.8535,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.723,
+              132.736
+            ]
+          },
+          {
+            "id": "zimpol-20180107-061129",
+            "path": "observations/d145Adeona_2018-01-07T06_11_29.939_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -52.8451,
+            "observerWestLongitude": 187.7488,
+            "sunLatitude": -48.3585,
+            "sunWestLongitude": 193.4235,
+            "rangeKm": 198207241,
+            "northAzimuthDegrees": 2.853,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.509,
+              132.714
+            ]
+          },
+          {
+            "id": "zimpol-20180107-061639",
+            "path": "observations/d145Adeona_2018-01-07T06_16_39.616_zpl_science_imaging_cam1.fits",
+            "encoding": "fits-zimpol-intensity",
+            "observerLatitude": -52.8457,
+            "observerWestLongitude": 189.8049,
+            "sunLatitude": -48.3585,
+            "sunWestLongitude": 195.4767,
+            "rangeKm": 198206510.2,
+            "northAzimuthDegrees": 2.8525,
+            "pixelAngleMicroradians": 0.017599,
+            "center": [
+              122.947,
+              131.741
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 72,
+    "mapUrl": "/scenes/adeona/adeona-shape-surface@2x.webp",
+    "polesUrl": "/scenes/adeona/adeona-shape-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/145_Adeona_adam.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 578,
+        "expectedFaces": 1152
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "texelsPerFace": 16384,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 1300,
+        "regularize": true
+      }
+    },
+    "radialTerrainAlternatives": []
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
+  },
+  "presentation": {
+    "defaultLens": "shape"
+  }
+}

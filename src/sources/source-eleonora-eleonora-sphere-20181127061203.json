@@ -1,0 +1,37 @@
+{
+  "id": "source-eleonora-eleonora-sphere-20181127061203",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eleonora · eleonora sphere 20181127061203",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/354Eleonora/Deconv/d354Eleonora_2018-11-27T06_12_03.774_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eleonora/source/manifest.json",
+      "revision": "35b2477d3d85b15a2dbc71ab4ddfebdddfaa757e",
+      "sha256": "7200d2f93d8570106e47d575713fc52a479f49dcbc9ccf14c6f8e87475f53c5c",
+      "locator": "/inputs/11"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The eleonora sphere 20181127061203 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

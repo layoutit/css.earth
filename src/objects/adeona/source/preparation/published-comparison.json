@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.34",
+  "document": {
+    "input": "adeona-survey-research",
+    "object": 1113,
+    "width": 878,
+    "height": 752,
+    "sha256": "a79522e6c4c4e20a9e08d7f86459d33e54b5a8a89d8f43ee76b192c2f4e61022"
+  },
+  "rows": {
+    "image": 0,
+    "model": 1,
+    "count": 2,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2017-12-31T06:45:40",
+      "frame": "zimpol-20171231-064540",
+      "band": 0
+    },
+    {
+      "label": "2018-01-01T05:19:37",
+      "frame": "zimpol-20180101-051937",
+      "band": 0
+    },
+    {
+      "label": "2018-01-07T06:16:39",
+      "frame": "zimpol-20180107-061639",
+      "band": 0
+    }
+  ]
+}
