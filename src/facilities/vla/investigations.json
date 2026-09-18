@@ -6,7 +6,7 @@
       "id": "archive-access",
       "subject": "Archive access and query interface",
       "status": "deferred",
-      "finding": "The NRAO Archive Access Tool serves VLA data. Metadata search is anonymous; a login is needed for proprietary data and for direct delivery. A TAP service exists at data-query.nrao.edu, whose ObsCore table is reached as tap_schema.obscore rather than ivoa.obscore, but downloads are not yet possible through it.",
+      "finding": "The NRAO Archive Access Tool serves VLA data. Metadata search is anonymous; a login is needed for proprietary data and for direct delivery. A TAP service exists at data-query.nrao.edu, whose ObsCore table is reached as tap_schema.obscore rather than ivoa.obscore, but downloads are not yet possible through it. Not every row is raw: 71 distinct EVLA execution blocks across W Hydrae, R Aquarii, U Orionis, VY Canis Majoris, Mira, R Leonis and RT Virginis carry cal_status Calibrated and data_rights PUBLIC, in bands Ka, K, Q and X and configurations A to D, at 10 to 460 GB per block. The VLBA side is uniformly raw correlator output marked Do Not Calibrate. Checked 18 September 2026 through the portal's JSON backend, because the documented TAP service at data-query.nrao.edu does not answer.",
       "revisitWhen": "A body in this repository needs centimetre-wave imaging.",
       "evidence": [
         "https://science.nrao.edu/facilities/vla/archive/scripted-access-to-the-nrao-archive",
@@ -15,9 +15,8 @@
       ],
       "checked": [
         {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
+          "date": "2026-09-18",
+          "commit": "fd15d9bdbf0c56042077d9fb3b2d49d70b387336"
         }
       ]
     },
@@ -44,36 +43,33 @@
       "id": "reduction-software",
       "subject": "Reduction software",
       "status": "deferred",
-      "finding": "CASA is the processing package for VLA data, distributed by NRAO under GPL v3 or later. Imaging from raw measurement sets needs it; this repository has never run it.",
-      "revisitWhen": "Raw data from this facility are reduced here.",
+      "finding": "CASA is the processing package for VLA data, distributed by NRAO under GPL v3 or later. This repository now pins it: casatools and casatasks 6.7.6.14 install into an isolated interpreter as the 'casa' toolchain, and the ALMA route replays a delivery's own calibration record through them rather than running the observatory pipeline. The same tasks apply to VLA measurement sets. What is untested here is VLA calibration specifically, and VLBI fringe fitting, which CASA still marks experimental.",
+      "revisitWhen": "A VLA measurement set is calibrated and imaged in this repository, or CASA's fringefit leaves its experimental state.",
       "evidence": [
-        "https://casa.nrao.edu/",
-        "https://github.com/layoutit/css.earth/pull/293"
+        "https://casadocs.readthedocs.io/en/stable/api/tt/casatasks.calibration.fringefit.html",
+        "https://science.nrao.edu/facilities/vla/data-processing"
       ],
       "checked": [
         {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
+          "date": "2026-09-18",
+          "commit": "fd15d9bdbf0c56042077d9fb3b2d49d70b387336"
         }
       ]
     },
     {
       "id": "bodies-with-data",
       "subject": "What this archive holds for catalogued bodies",
-      "status": "unresolved",
-      "finding": "The NRAO archive answered 503 Service Unavailable throughout the screen on 2026-09-17, so its holdings for catalogued bodies are unmeasured.",
-      "revisitWhen": "The NRAO archive answers again and the screen is rerun.",
+      "status": "excluded",
+      "finding": "Screened on 18 September 2026, after the archive came back. Its documented TAP service at data-query.nrao.edu never answered on any port, so the screen used the portal's own JSON backend at data.nrao.edu/archive-service, which is anonymous and undocumented. All 486 bodies with a content record were queried: 98 matched by name and 24 survived checking their scan target names, over 12,120 execution blocks, VLBA 5,502, VLA 3,445, EVLA 2,602, GBT 571. Substring matching on short names is most of the difference: Io returns Orion fields, Leda returns the galaxy catalogue, Hydra the radio galaxy. Nothing reaches a surface. The best unphotographed candidates are Eunomia at 3.3 beams and Pallas at 3.1, both below the six beams Polaris was turned down at, and radio thermal emission maps subsurface temperature rather than appearance. The one holding our other archives lack is Katherine de Kleer's programme 20B-259 on M-type asteroids, eight public A-configuration blocks on Kalliope, Lutetia, Psyche and Eunomia from December 2020 to January 2021.",
+      "revisitWhen": "A configuration finer than A at Q band reaches one of these bodies, or a body passes closer while the array is extended.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
-        "https://data.nrao.edu/",
-        "https://github.com/layoutit/css.earth/pull/293"
+        "https://data.nrao.edu/portal/",
+        "https://science.nrao.edu/facilities/vla/docs/manuals/oss/performance/resolution"
       ],
       "checked": [
         {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
+          "date": "2026-09-18",
+          "commit": "fc74554fc2862c774b5ad4d02b6a499f6dc884a8"
         }
       ]
     }

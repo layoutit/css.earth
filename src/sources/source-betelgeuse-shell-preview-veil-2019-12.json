@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-shell-preview-veil-2019-12",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse Shell · preview veil 2019 12",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso2109a/",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse-shell/source/manifest.json",
+      "revision": "b4ee25cadba04daf37ded1ad9e08565a9d3f8283",
+      "sha256": "fa25c0ce8aa373e04d82b2447ad2e5922637453e6dce9998c1e97f06679ce23c",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/M. Montargès et al.",
+      "scope": "The preview veil 2019 12 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

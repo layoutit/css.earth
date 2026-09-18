@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0fa683b287888d001f50e7c9c30e9e13d6b9c26b06304949aed25a3ed6aa83b0"
+    "sha256": "c6662f31a611c6afc6324e8fb7c5217b88090b45f38dbdc99788692a7b718754"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "27b2e9be0a1306d80d8f36149bb29787ca93c3a06769a50d84e56898d4e0c19c",
+      "sha256": "cb59097d4933c33aeab0bcaf8cf689d39e5e31fa8f18e0144fc2ca0d2d2de707",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ce-tauri/",
@@ -27,6 +27,7 @@
         "polarTile": 256,
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
+        "missingCoverage": "dark",
         "polesCombined": false,
         "polesOutput": "ce-tauri-poles-{id}{suffix}.webp",
         "surfaceMetadata": {
@@ -713,8 +714,8 @@
       "outputs": [
         {
           "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-11@2x.webp",
-          "bytes": 50792,
-          "sha256": "9f0f37fdb77f19f972020a00f2a72449351489d641f53fc83b5559c030f73ca4",
+          "bytes": 72058,
+          "sha256": "8f9171c12cfea3e7b3eb1b71ed4308cfcee26626381f23b2d6afae751a40b7ab",
           "verification": "bytes-verified"
         },
         {
@@ -725,8 +726,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-poles-pionier-2016-11@2x.webp",
-          "bytes": 16222,
-          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "bytes": 42818,
+          "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
           "verification": "bytes-verified"
         },
         {
@@ -824,8 +825,8 @@
       "outputs": [
         {
           "url": "/scenes/ce-tauri/ce-tauri-surface-pionier-2016-12@2x.webp",
-          "bytes": 52414,
-          "sha256": "83df69dae80a98212fc06bce77e9295e352c6565a4c61c9b1c4ac7e7061aa32c",
+          "bytes": 76512,
+          "sha256": "e4a19ee08feb5e656de754d689b566b6708e741ca36cf30014f74b8daa9c71b2",
           "verification": "bytes-verified"
         },
         {
@@ -836,8 +837,8 @@
         },
         {
           "url": "/scenes/ce-tauri/ce-tauri-poles-pionier-2016-12@2x.webp",
-          "bytes": 16222,
-          "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f",
+          "bytes": 42818,
+          "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
           "verification": "bytes-verified"
         },
         {
@@ -907,8 +908,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/pionier-2016-11.webp",
-          "bytes": 9608,
-          "sha256": "01512668213a555c9aec69d4fc294df039070be30aae14aeb97d0d205acb268b",
+          "bytes": 14054,
+          "sha256": "4a50fc162b9c28506536f6d404ec0be8a1270da9f3ca20192b304ee6ce85cecc",
           "verification": "bytes-verified"
         }
       ]
@@ -932,8 +933,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/pionier-2016-12.webp",
-          "bytes": 9930,
-          "sha256": "3482a2229805b63048cd1b4cabc481764265bf690e6be3274a0f0b83e358f738",
+          "bytes": 14332,
+          "sha256": "3fc50fda0ddaa588e8a16814f5174e551f2ffc347e4bf6e675f22a0e40641ead",
           "verification": "bytes-verified"
         }
       ]
@@ -945,7 +946,7 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "3386a9e1f4cca6850d59f05ba46c6a3bca1ef1d3a55409b781bbe3f921b0a5e1",
+    "materialSha256": "8a771d1f6676d3873aedc2f89e50023f1d186e4a7d2d9e1c67120af0fe0e301c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

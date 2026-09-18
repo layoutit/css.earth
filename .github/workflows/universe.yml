@@ -9,26 +9,40 @@ permissions:
   contents: read
 
 concurrency:
-  group: universe-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # A PR's new push cancels its stale run. Every push to main keeps its own group (keyed by SHA) and is never
+  # cancelled: a shared group would still drop a pending main run when a third merge arrives.
+  group: universe-${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
+# Contract lint needs no build or restored asset and answers within about two minutes; `pnpm check:pr` runs its
+# steps locally. The three heavy jobs start after it, in parallel, and any of them failing cancels the run.
 jobs:
-  universe:
-    name: Prepared universe and shared renderer
+  lint:
+    name: Contract lint
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      # The publish gate reads the last green main run to scope a push to main.
+      actions: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          # Full history: the published-assets gate below needs a merge base with the PR's base branch to scope
-          # itself to what the PR actually touched (a shallow, depth-1 checkout has no such ancestry available).
+          # History without blobs: the documentation and published-assets checks diff against a merge base, and
+          # `git diff --name-only` needs only commits and trees.
           fetch-depth: 0
+          filter: blob:none
       - name: Check documentation links and organization
+        # A PR checks the Markdown it changes (and links into what it deletes); main and local runs check all.
         run: |
           python3 tools/audits/test_documentation_links.py
           python3 tools/audits/test_provenance_documentation_inventory.py
           python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
-          python3 tools/audits/check-documentation-links.py --all
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            python3 tools/audits/check-documentation-links.py --base "origin/$GITHUB_BASE_REF"
+          else
+            python3 tools/audits/check-documentation-links.py --all
+          fi
       - name: Check tracked files against ignore rules
         run: |
           git ls-files -z > "$RUNNER_TEMP/tracked-paths"
@@ -42,18 +56,35 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
-      - name: Install dependencies
+      - name: Install dependencies and prove the lockfile
         run: pnpm install --frozen-lockfile --ignore-scripts
-      - name: Build shared packages and affected entry points
-        run: pnpm build:tools
-      - name: Test asset inventory, publish verification and closure tooling
-        # Fast, self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no
-        # network, no restored assets) for the tools that construct and verify runtime/prepared asset inventories,
-        # the publish gate below, the object-scope gate (its own workflow, object-scope.yml, calls the same tool
-        # at runtime), and the prune dry-run report. Deliberately not part of the wider `pnpm test:platform` (which
-        # this workflow does not run at all, and which currently has 37 pre-existing unrelated failures) — this is
-        # the narrow slice of it that actually needs CI coverage. Needs build:tools (site/objects.mts's generated
-        # catalog), not setup:assets: every case here uses its own temp fixture, never a restored prepared/runtime.json.
+      - name: Generate the registry, renderer and preparation bundle
+        # Only what these checks import: SCENE_OBJECTS (site/objects.mts), the renderer the prepared-object reader
+        # imports, and tools/objects/dist/operations.js with the solar geometry and shell titles it bundles. The
+        # rest of build:tools (navigation, world context, shell assets) and every restored asset are left out.
+        run: |
+          pnpm build:packages
+          pnpm build:renderer
+          pnpm prepare:catalog
+          node tools/prepare-solar-geometry.mts > "$RUNNER_TEMP/solar-geometry.log"
+          pnpm prepare:titles
+          pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts
+      - name: Check every object's package files, source citations and restoration plan
+        run: |
+          node --test tools/restore-source-inputs.test.mts
+          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
+      - name: Check physical frame receipts and document pins
+        # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
+        run: |
+          node tools/check-object-runtime-ownership.mts --receipts
+          node --test tools/physical-frame-receipts.test.mts
+      - name: Check independent body additions
+        run: node --test tools/body-additions.test.mts
+      - name: Test asset inventory, publish verification, closure and local CI tooling
+        # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
+        # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
+        # workflow, object-scope.yml), the prune dry-run report, and the runner behind `pnpm check:pr`. Deliberately
+        # not the wider `pnpm test:platform`, which this workflow does not run and which has known unrelated failures.
         run: >-
           node --test tools/runtime-assets.test.mts
           tools/publish-verification.test.mts
@@ -61,21 +92,196 @@ jobs:
           src/platform/runtime-asset-closure.test.mts
           tools/object-scope-gate.test.mts
           tools/prune-runtime-assets.test.mts
-      - name: Check published assets
-        # HEAD every key in both inventory kinds (runtime-assets.json and prepared-assets.json) and fail with the
-        # list of misses before anything is restored, so a contributor who bakes locally but forgets to publish
-        # gets a red PR instead of a silent local pass. Runs as early as the job allows: it needs SCENE_OBJECTS
-        # (site/objects.mts), which build:tools just generated. On a PR, a miss outside the objects the PR itself
-        # touched (vs. its base branch) only warns instead of failing, so an unrelated pre-existing gap cannot
-        # block it; a push to main (and any local run) stays strict and fails on every miss.
+          tools/check-ci.test.mts
+      - name: Check published assets this change adds
+        # HEAD only the R2 keys this change's inventories add (keys are content-addressed, so an unchanged line
+        # needs no new proof): on a PR, against its base branch, failing only on a real 404; on a push to main,
+        # against the last green main run (a full sweep when there is none), reporting only. Unverified (network)
+        # keys never fail. Findings go to the job summary. The full sweep of every key is nightly (nightly.yml).
         env:
-          BASE_REF: ${{ github.base_ref }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            pnpm check:assets-published --changed-since="origin/$BASE_REF"
+          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
+            pnpm check:assets-published --added-since-last-green --report-only
           else
-            pnpm check:assets-published
+            pnpm check:assets-published --added-since="origin/${GITHUB_BASE_REF:-main}"
           fi
+
+  typecheck:
+    name: Typecheck
+    needs: lint
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing.
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
+    steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
+          path: src/objects/earth/source/presentation/InterVariable.ttf
+          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Restore prepared assets and object JSON
+        run: |
+          pnpm setup:assets
+          pnpm prepare:object-json
+      - name: Prepare the minimap and source records the shell imports
+        run: |
+          pnpm prepare:environment-images
+          pnpm prepare:minimap
+          pnpm prepare:sources
+      - name: Typecheck shared code and enforce TypeScript ownership
+        # typecheck:pr is `pnpm typecheck` without typecheck:tests (main-only: the "Typecheck test files" job and the
+        # nightly workflow; it is most of the typecheck time) and typecheck:nebula (the nebula job runs it).
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: |
+          pnpm typecheck:pr
+          pnpm check:typescript-ownership
+          pnpm test:typescript-ownership
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
+
+  typecheck-tests:
+    name: Typecheck test files
+    needs: lint
+    # Main-only: type-checking test files is most of the typecheck time, so PRs skip it; the nightly workflow
+    # runs it too. Not a required check.
+    if: ${{ !cancelled() && github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
+    steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
+          path: src/objects/earth/source/presentation/InterVariable.ttf
+          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Restore prepared assets and object JSON
+        run: |
+          pnpm setup:assets
+          pnpm prepare:object-json
+      - name: Prepare the minimap and source records the shell imports
+        run: |
+          pnpm prepare:environment-images
+          pnpm prepare:minimap
+          pnpm prepare:sources
+      - name: Typecheck test, fixture and capture files
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm typecheck:tests
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
+
+  universe:
+    name: Prepared universe and shared renderer
+    needs: lint
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing.
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
+    steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
+          path: src/objects/earth/source/presentation/InterVariable.ttf
+          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download.
+          path: .local/galaxy-field/sources
+          key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: prepared-assets
+        with:
+          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Build shared packages and affected entry points
+        run: pnpm build:tools
       - name: Restore prepared assets and object JSON
         # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
         # + prepared/scene.json, or a context/nebula object's whole prepared/ output) — git no longer tracks those
@@ -83,12 +289,22 @@ jobs:
         run: |
           pnpm setup:assets
           pnpm prepare:object-json
+      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        # Main only: a 2.3 GB save costs a minute or more, and PR-scoped entries would crowd the 10 GB cache.
+        if: github.event_name == 'push' && steps.prepared-assets.outputs.cache-hit != 'true'
+        with:
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
       - name: Test unavailable prepared packages and focus controls
         run: >-
           node --test tools/prepare-context-availability.test.mts
           site/test/prepared-context-navigation.test.mts
           site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
       - name: Test authored preparation publication and cache
+        # Finalization renders through headless Chromium, so the browser stays installed here.
         run: |
           pnpm exec playwright install --with-deps chromium
           node --test --test-concurrency=1 \
@@ -105,19 +321,6 @@ jobs:
         run: pnpm test:galaxy-field
       - name: Test source records, provenance and scientific credits
         run: pnpm test:sources
-      - name: Check source restoration and tracked inputs
-        run: |
-          node --test tools/restore-source-inputs.test.mts
-          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
-      - name: Check independent body additions
-        run: node --test tools/body-additions.test.mts
-      - name: Typecheck shared code and enforce TypeScript ownership
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096
-        run: |
-          pnpm typecheck
-          pnpm check:typescript-ownership
-          pnpm test:typescript-ownership
       - name: Test prepared source, materials and world context
         run: |
           pnpm test:preparation --universe
@@ -150,17 +353,37 @@ jobs:
           site/test/browser-node-imports.test.mts
           tools/serialize-prepared-scene.test.mts
       - name: Enforce activation preparation for every registered object
+        # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
         run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
       - name: Check every object's runtime ownership and physical frame receipt
         run: node tools/check-object-runtime-ownership.mts --all
       - name: Test complete shared renderer and camera
+        # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
         run: pnpm test:renderer
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
 
   nebula:
     name: Internal nebula packages and isolated controls
+    needs: lint
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
     steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -198,3 +421,8 @@ jobs:
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel
           catalogue object-browser papers survey-images
           geometry-model observation-alignment structures-model
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"

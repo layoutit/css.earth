@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-volume-recipe@1",
+  "grid": {
+    "path": "density-emission-2020.ktx2",
+    "sha256": "96262bd61a961228837703d6c0b2491748b61fde062afe871e636d50c3645f2f",
+    "decodedSha256": "61168980d5badfe22148544611f2ae111f333a28272e0be8f3ce4bed08d1dd7f",
+    "dimensions": [
+      96,
+      96,
+      96
+    ],
+    "encoding": "sqrt-density-unorm8",
+    "bounds": {
+      "min": [
+        -6,
+        -6,
+        -6
+      ],
+      "max": [
+        6,
+        6,
+        6
+      ]
+    }
+  },
+  "material": {
+    "intensityScale": 1,
+    "stepScale": 1,
+    "stepMetric": "source",
+    "emission": [
+      {
+        "channel": 0,
+        "color": [
+          0.235,
+          0.02,
+          0
+        ],
+        "strength": 1
+      },
+      {
+        "channel": 1,
+        "color": [
+          0.604,
+          0.118,
+          0
+        ],
+        "strength": 1
+      },
+      {
+        "channel": 2,
+        "color": [
+          0.878,
+          0.392,
+          0.102
+        ],
+        "strength": 1
+      },
+      {
+        "channel": 3,
+        "color": [
+          1,
+          0.702,
+          0.251
+        ],
+        "strength": 1
+      }
+    ],
+    "absorption": [],
+    "emissionTransfer": "shared-opacity",
+    "exposureGain": 2.302585092994046
+  },
+  "bake": {
+    "sliceCounts": {
+      "x": 24,
+      "y": 24,
+      "z": 24
+    },
+    "unitsPerSourceUnit": 1,
+    "imageWidth": 320,
+    "samplesPerSlab": 4,
+    "cropTransparent": true,
+    "opticalWeight": 1,
+    "imageEncoding": {
+      "format": "webp",
+      "quality": 90
+    }
+  },
+  "anchors": [
+    {
+      "id": "betelgeuse",
+      "referencePositionM": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "8216524ba8b1b71be31e97f32a8dfe79ca41e9c79d5f7a426230e313a3198b5c"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "source-betelgeuse-shell-alma-continuum-2023-08",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse Shell · alma continuum 2023 08",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+      "label": "ALMA archive, project 2022.A.00026.S"
+    },
+    {
+      "role": "original",
+      "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits",
+      "label": "Continuum image this package boxed (48 MB)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse-shell/source/manifest.json",
+      "revision": "6aa298d3b884003b126a5cc2a9f5578268467093",
+      "sha256": "99a8d6de2594b2c87c6c3ebbe576fc0fc77f61b30f93ca0084396b1b7f2806a9",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member uid://A001/X360d/Xae",
+      "scope": "The alma continuum 2023 08 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

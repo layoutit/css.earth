@@ -12,6 +12,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import type { FitsHeader } from '../../fits.mts';
 
 export interface PipelineImaging {
   readonly field: string;
@@ -28,9 +29,7 @@ export interface PipelineImaging {
   readonly phaseCentre: string | null;
   readonly scan: string | null;
   readonly intent: string | null;
-  /** The baselines imaged. The pipeline imports auto-correlations and images without them: every antenna followed by `&`. */
-  readonly antenna: string | null;
-  /** Every argument as written, for anything this route does not model. */
+  /** Every argument as written, as Python literals. The restore passes these to tclean, not the fields above. */
   readonly arguments: ReadonlyMap<string, string>;
 }
 
@@ -92,9 +91,36 @@ export function pipelineImaging(log: string, field: string): PipelineImaging {
     weighting: unquote(argument(chosen, 'weighting') ?? "'briggs'"), robust: asNumber(argument(chosen, 'robust'), 0.5),
     threshold: unquote(argument(chosen, 'threshold') ?? "'0mJy'"),
     phaseCentre: optional('phasecenter'), scan: optional('scan'), intent: optional('intent'),
-    antenna: optional('antenna'),
     arguments: values,
   };
+}
+
+/** The pipeline's phase centre at full precision. The command log prints it shortened (to 0.1 ms in right ascension and 1 mas
+ * in declination), and a grid moved by that shortening shows up as a dipole across the star when the two images are differenced:
+ * 0.25 and 0.54 mas on R Doradus. The pipeline's image records the same centre as its reference pixel, unrounded. It is taken
+ * from there only when the image is centred on its reference pixel and agrees with the logged centre to within one unit
+ * of its last printed digit; anything else is a different centre and stops the run. */
+export function precisePhaseCentre(logged: string, header: FitsHeader, imageSize: readonly [number, number]) {
+  const match = /^(\w+)\s+(\d+):(\d+):(\d+(?:\.(\d+))?)\s+([+-]?)(\d+)\.(\d+)\.(\d+(?:\.(\d+))?)$/u.exec(logged.trim());
+  if (!match) throw new TypeError(`The logged phase centre ${logged} is not in the sexagesimal form this route reads.`);
+  const [, frame, hours, minutes, seconds, secondDigits = '', sign, degrees, arcminutes, arcseconds, arcsecondDigits = ''] = match;
+  const loggedRa = 15 * (Number(hours) + Number(minutes) / 60 + Number(seconds) / 3600);
+  const loggedDec = (sign === '-' ? -1 : 1) * (Number(degrees) + Number(arcminutes) / 60 + Number(arcseconds) / 3600);
+  const text = (key: string) => String(header[key] ?? '').trim();
+  const number = (key: string) => { const value = header[key]; if (typeof value !== 'number') throw new TypeError(`The archive image has no numeric ${key}.`); return value; };
+  if (text('RADESYS') !== frame) throw new TypeError(`The archive image is in ${text('RADESYS') || 'no frame'}, the logged centre in ${frame}.`);
+  if (!text('CTYPE1').startsWith('RA---') || !text('CTYPE2').startsWith('DEC--')) throw new TypeError('The archive image\u2019s first two axes are not right ascension and declination.');
+  if (number('CRPIX1') !== imageSize[0] / 2 + 1 || number('CRPIX2') !== imageSize[1] / 2 + 1) throw new TypeError('The archive image\u2019s reference pixel is not its centre, so it does not record the phase centre.');
+  const ra = number('CRVAL1'), dec = number('CRVAL2');
+  const cosine = Math.cos(dec * Math.PI / 180);
+  const offsetRaMas = Math.abs(ra - loggedRa) * cosine * 3.6e6, offsetDecMas = Math.abs(dec - loggedDec) * 3.6e6;
+  // One unit of the last printed digit: the log rounds right ascension (45.35716506 s became 45.3572) but truncates
+  // declination (39.61953556 arcsec became 39.619).
+  const toleranceRaMas = 10 ** -secondDigits.length * 15 * cosine * 1000, toleranceDecMas = 10 ** -arcsecondDigits.length * 1000;
+  if (offsetRaMas > toleranceRaMas * 1.01 || offsetDecMas > toleranceDecMas * 1.01) {
+    throw new TypeError(`The archive image is centred ${offsetRaMas.toFixed(2)} mas in RA and ${offsetDecMas.toFixed(2)} mas in Dec from the logged centre, more than the log's last digit.`);
+  }
+  return { phaseCentre: `${frame} ${ra.toFixed(11)}deg ${dec.toFixed(11)}deg`, offsetRaMas, offsetDecMas };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

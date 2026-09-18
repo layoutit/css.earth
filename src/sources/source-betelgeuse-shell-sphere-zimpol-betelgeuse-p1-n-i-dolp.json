@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-shell-sphere-zimpol-betelgeuse-p1-n-i-dolp",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse Shell · sphere zimpol betelgeuse p1 n i dolp",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.648",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse-shell/source/manifest.json",
+      "revision": "b4ee25cadba04daf37ded1ad9e08565a9d3f8283",
+      "sha256": "fa25c0ce8aa373e04d82b2447ad2e5922637453e6dce9998c1e97f06679ce23c",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
+      "scope": "The sphere zimpol betelgeuse p1 n i dolp input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

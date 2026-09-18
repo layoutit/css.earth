@@ -17,7 +17,10 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const material = plan.material as unknown as { model?: string; offLimbContext?: { logicalSize: number }; limbMaterial?: { logicalSize: number } };
   if (material.model !== 'emissive' || !assets.emission) throw new TypeError('Emissive presentation needs the prepared emission material and plates.');
   if (input.sun !== null && input.sun !== undefined) throw new TypeError('An emissive body carries no directional Sun.');
-  const entries = lenses.controls.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
+  // A dataset that names a companion cloud borrows another lens's prepared surface, so it owns no plates and needs
+  // no variant of its own; the selection resolves it to the surface it borrows before this definition is read.
+  const surfaces = lenses.controls.filter(lens => lens.volume === undefined || lens.volume.surface === lens.id);
+  const entries = surfaces.flatMap(lens => LAYERS.map(layer => ({ key: `${layer}:${lens.id}`,
     url: canonicalPreparedAsset(lens[`${layer}Url` as 'surfaceUrl'], lens[`${layer}2xUrl` as 'surface2xUrl']), pool: 'material' })));
   const required = (id: string) => LAYERS.map(layer => `${layer}:${id}`);
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
@@ -38,10 +41,15 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   b.append(null, corona, limb);
   const { tree, index } = b.finish({ camera, scene });
   const targets = [body, body, corona, limb];
-  const variants: PreparedVariant[] = lenses.controls.map(lens => ({ when: { lensId: lens.id }, required: required(lens.id), writes: [
-    ...LAYERS.map((layer, i) => ({ kind: 'texture' as const, target: index(targets[i]!), name: `--${ns}-${layer}-image`, resource: `${layer}:${lens.id}`, quoted: true })),
-    { kind: 'attribute', target: -1, name: 'data-lens', value: lens.id }, { kind: 'attribute', target: -1, name: 'data-view', value: null },
-  ], materials: [] }));
+  // Every dataset gets a variant. One that names a companion cloud draws the plates of the surface it borrows, so the
+  // table stays complete and nothing at runtime has to know that this dataset is not a surface of its own.
+  const variants: PreparedVariant[] = lenses.controls.map(lens => {
+    const surfaceId = lens.volume?.surface ?? lens.id;
+    return { when: { lensId: lens.id }, required: required(surfaceId), writes: [
+      ...LAYERS.map((layer, i) => ({ kind: 'texture' as const, target: index(targets[i]!), name: `--${ns}-${layer}-image`, resource: `${layer}:${surfaceId}`, quoted: true })),
+      { kind: 'attribute', target: -1, name: 'data-lens', value: lens.id }, { kind: 'attribute', target: -1, name: 'data-view', value: null },
+    ], materials: [] };
+  });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun: null,
     assets: { entries, pools: [preparedResourcePool('material', entries, { retention: 'selection', capacity: 8, concurrency: 8 })],
       startup: required(lenses.defaultLens) },
