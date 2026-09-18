@@ -41,3 +41,7 @@ The volume normally composites behind the body, which would put a clump that occ
 This orders two flattened roots. It does not intersect them: the clump covers the star's disc rather than being cut by it, and it adds its own light rather than absorbing the star's. A veil that truly dimmed the photosphere would need the body inside the volume's own three-dimensional context.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Credits](source/provenance.json)
+
+## What is not verified
+
+The grid's axes come from the products' own WCS, and its sky plane reproduces the patch layout of the published figure with east on the left. The clump is transcribed into the same frame from the paper's stated axes. The step that has not been checked is the last one: at the world camera used for this object's captures the volume's east axis projects to the screen's right, while the star's own default camera is documented as putting east on the left. The two cameras differ in roll, and the renderer's world frames mirror celestial content unless a flag compensates. North and south are not in doubt, and the clump covers the star's southern half as the Great Dimming did, but do not read the east–west side of either dataset off the screen until that check is made. The ledger carries it as an open decision.
