@@ -20,8 +20,7 @@ From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
-pnpm build:preparation
+pnpm build:tools
 node tools/objects/dist/prepare-stars.js src/objects/stellar-neighbourhood
 pnpm test:preparation --universe
 ```

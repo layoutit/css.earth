@@ -395,7 +395,7 @@ purposes; run those needed for the task, not every preparation step by default.
 
 | Purpose | Current entry point |
 | --- | --- |
-| Build shared tool bundles when needed | `pnpm build:packages`, `pnpm build:renderer`, `pnpm build:preparation` |
+| Build shared tool bundles when needed | `pnpm build:tools` |
 | Install already published prepared files | `pnpm setup:assets --object=<id>` |
 | Restore missing source pins and verify existing bytes | `node tools/objects/dist/operations.js acquire <id>` |
 | Verify source closure without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only` |
