@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f2ab00dbb83fb2f9860fffcc615b579d273e3a6bd78f2f5de81df73b10faee29"
+    "sha256": "564d23fef6b1d0bae66ff4ea2bd1b15f3b03e1db7ff6803ac89d11d1dec19d9a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -765,7 +765,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180916050002",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/3"
           }
         ]
       },
@@ -817,7 +817,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180916050400",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/4"
           }
         ]
       },
@@ -869,7 +869,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180916050757",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/5"
           }
         ]
       },
@@ -921,7 +921,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180916051152",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/6"
           }
         ]
       },
@@ -973,7 +973,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180916051549",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/7"
           }
         ]
       },
@@ -1025,7 +1025,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927021758",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/8"
           }
         ]
       },
@@ -1077,7 +1077,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927022156",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/9"
           }
         ]
       },
@@ -1129,7 +1129,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927022554",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/10"
           }
         ]
       },
@@ -1181,7 +1181,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927022949",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/11"
           }
         ]
       },
@@ -1233,7 +1233,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927023345",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/12"
           }
         ]
       },
@@ -1285,7 +1285,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927062955",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/13"
           }
         ]
       },
@@ -1337,7 +1337,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927063351",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/14"
           }
         ]
       },
@@ -1389,7 +1389,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927063749",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/15"
           }
         ]
       },
@@ -1441,7 +1441,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927064145",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/16"
           }
         ]
       },
@@ -1493,7 +1493,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180927064542",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/17"
           }
         ]
       },
@@ -1545,7 +1545,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180928031108",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/18"
           }
         ]
       },
@@ -1597,7 +1597,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180928031505",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/19"
           }
         ]
       },
@@ -1649,7 +1649,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180928031902",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/20"
           }
         ]
       },
@@ -1701,7 +1701,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180928032258",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/21"
           }
         ]
       },
@@ -1753,7 +1753,7 @@
           {
             "catalogueId": "source-urania-urania-sphere-20180928032654",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/22"
           }
         ]
       },
@@ -1807,7 +1807,7 @@
           {
             "catalogueId": "source-urania-urania-adam-shape",
             "role": "material",
-            "evidence": "src/objects/urania/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+            "evidence": "src/objects/urania/source/manifest.json@9d984f641976e683f23c99aa244d00a4d4974be6#/inputs/23"
           }
         ]
       },
