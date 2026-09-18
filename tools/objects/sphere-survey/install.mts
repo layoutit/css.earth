@@ -30,6 +30,7 @@ const writeJson = (path: string, value: unknown) => writeFile(path, JSON.stringi
 
 /** The ledger's account of a published comparison, from its evidence and the spin record's reading; nothing in it is typed. */
 /** The ledger entries a SPHERE photograph lens answers when it is installed. */
+const DAMIT = 'https://damit.cuni.cz/';
 const ANSWERED = ['surface-imagery', 'lam-adam-alternative', 'sphere-cross-frame-registration'];
 
 export function decisionFinding(figure: string, evidence: ComparisonEvidence, columnOrder: { order: string; separationDegrees: number }) {
@@ -73,8 +74,12 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   const primaryPath = requireString(requireRecord(requireRecord(recipe.geometry).radialTerrain).path);
   const primaryInput = requireArray((await readJson(resolve(packageSource, 'manifest.json'))).inputs).map(value => requireRecord(value)).find(input => input.path === primaryPath);
   const meshSource = onAdam ? `${objectId}-adam-shape` : requireString(primaryInput?.id, 'primary shape input');
-  const meshWords = onAdam ? 'the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses.'
-    : 'the released reconstruction the Shape view uses; the release publishes no ADAM mesh for this body.';
+  // Where LAM withholds the release's own mesh and record, the archive copy that supplied them is named (Flora: DAMIT).
+  const archive = setup.releasedModel?.spin !== undefined ? setup.releasedModel.model : null;
+  const meshWords = (onAdam ? 'the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses.'
+    : 'the released reconstruction the Shape view uses; the release publishes no ADAM mesh for this body.')
+    + (archive ? ` LAM withholds this body’s own ADAM mesh and rotation record, so both come from ${archive}, DAMIT’s copy of the survey model.` : '');
+  const recordWords = archive ? `the rotation state ${archive} states` : 'the release rotation record';
 
   // Source files and records, exactly as the run measured them.
   for (const path of setup.written) {
@@ -107,8 +112,8 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   const operations = requireArray(plan.operations).map(value => requireRecord(value)).filter(operation => !dropped.includes(String(operation.path)));
   for (const input of inputs) {
     const path = requireString(input.path), origin = typeof input.origin === 'string' ? input.origin : '';
-    if (!setup.written.includes(path) || !origin.startsWith(LAM) || operations.some(operation => operation.path === path)) continue;
-    operations.push({ kind: 'download', groups: ['restore', 'refresh'], path, url: origin, headers: { ...LAM_HEADERS } });
+    if (!setup.written.includes(path) || !(origin.startsWith(LAM) || origin.startsWith(DAMIT)) || operations.some(operation => operation.path === path)) continue;
+    operations.push({ kind: 'download', groups: ['restore', 'refresh'], path, url: origin, ...(origin.startsWith(LAM) ? { headers: { ...LAM_HEADERS } } : {}) });
   }
   plan.operations = operations;
   await writeJson(resolve(packageSource, 'preparation/acquisition.json'), plan);
@@ -129,7 +134,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
 
   // The ledger: the decision, and the entries it answers.
   const ledger = await readJson(resolve(objectDirectory, 'investigations.json')), entries = requireArray(ledger.entries).map(value => requireRecord(value));
-  const check = { date: today, commit }, listing = framesUrl(number, name), adam = shapeUrl(number, name, 'adam');
+  const check = { date: today, commit }, listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
   const unused = setup.apparition.released - lensFrames - leaveOut.length;
   const decision = {
     id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph lens`, status: 'included',
@@ -163,7 +168,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
     const checked = requireArray(entry.checked).map(value => requireRecord(value));
     entry.checked = checked.some(earlier => earlier.date === check.date && earlier.commit === check.commit) ? checked : [...checked, check];
   };
-  close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam ? 'ADAM' : 'primary'} mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
+  close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
   close('lam-adam-alternative', earlier => `${earlier} Reopened ${today} because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure ${figure} describe; the Shape and Elevation views keep MPCD.`);
   close('sphere-cross-frame-registration', earlier => `Decided ${today} by the published comparison instead: the lens is prepared from ${lensFrames} camera-1 frames on the ${onAdam ? 'ADAM' : 'primary'} mesh with the rotation record read ${setup.columnOrder.order}, and ships on ${COMPARISON_ENTRY}; the registration stage’s numbers are in the README. Earlier result, kept: ${earlier}`);
   ledger.entries = entries;
@@ -187,6 +192,7 @@ export async function installSetup(objectId: string, options: { leaveOut?: reado
   } else {
     await writeFile(resolve(objectDirectory, 'README.md'), readmeWithLens(await readFile(resolve(objectDirectory, 'README.md'), 'utf8'),
       { number, name, figure, lensFrames, nights, order: setup.columnOrder.order, source: setup.evidence.source, spinRecordUrl: setup.spinRecordUrl, block: comparisonBlock(evidence),
+        rotationLabel: setup.sources.rotation.label, mesh: setup.sources.mesh ?? undefined,
         bodyName: name, latitudes: [Math.min(...latitudes), Math.max(...latitudes)], leftOut: leftOutText }));
     await writeFile(resolve(objectDirectory, 'NOTICE.md'), noticeWithLens(await readFile(resolve(objectDirectory, 'NOTICE.md'), 'utf8'), figure));
   }
@@ -245,15 +251,15 @@ export async function moveUnownedSceneFiles(objectId: string) {
 }
 
 /** The README with the lens's source rows, a generated comparison section and the registration markers. */
-export function readmeWithLens(readme: string, lens: { number: number; name: string; figure: string; lensFrames: number; nights: readonly string[]; order: string; source: string; spinRecordUrl: string; block: string; bodyName: string; latitudes: readonly [number, number]; leftOut?: string }) {
+export function readmeWithLens(readme: string, lens: { number: number; name: string; figure: string; lensFrames: number; nights: readonly string[]; order: string; source: string; spinRecordUrl: string; block: string; bodyName: string; latitudes: readonly [number, number]; leftOut?: string; rotationLabel?: string; mesh?: { label: string; url: string } }) {
   if (readme.includes(COMPARISON_BLOCK_BEGIN) || readme.includes(REGISTRATION_BLOCK_BEGIN)) throw new Error('The README already carries lens evidence blocks.');
   const lines = readme.split('\n'), evidenceAt = lines.indexOf('## Evidence');
   let lastRow = -1;
   for (let index = 0; index < evidenceAt; index++) if (lines[index].startsWith('| ')) lastRow = index;
   if (evidenceAt < 0 || lastRow < 0) throw new Error('The README has no Sources table and Evidence section to extend.');
   lines.splice(lastRow + 1, 0,
-    `| SPHERE photograph | [${lens.lensFrames} deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, ${nightsText(lens.nights)}](${framesUrl(lens.number, lens.name)}) on the [ADAM reconstruction](${shapeUrl(lens.number, lens.name, 'adam')}) |`,
-    `| Photograph cameras | [Release rotation record](${lens.spinRecordUrl}), read ${lens.order}, and JPL Horizons geometry from Paranal |`,
+    `| SPHERE photograph | [${lens.lensFrames} deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, ${nightsText(lens.nights)}](${framesUrl(lens.number, lens.name)}) on the [${lens.mesh?.label ?? 'ADAM reconstruction'}](${lens.mesh?.url ?? shapeUrl(lens.number, lens.name, 'adam')}) |`,
+    `| Photograph cameras | [${lens.rotationLabel ?? 'Release rotation record'}](${lens.spinRecordUrl}), read ${lens.order}, and JPL Horizons geometry from Paranal |`,
     `| Photograph registration | [Vernazza et al. (2021), Figure ${lens.figure}](${lens.source}) |`);
   const at = lines.indexOf('## Evidence');
   lines.splice(at + 1, 0, '', '### SPHERE photograph', '', COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, '', '### Registration', '', REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END, '', '### Shape');

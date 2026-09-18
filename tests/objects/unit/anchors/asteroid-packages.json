@@ -354,7 +354,8 @@
   "claim": "Eleonora retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 82500.0
  },
@@ -415,7 +416,8 @@
   "claim": "Flora retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 73000.0
  },
@@ -1032,7 +1034,8 @@
   "claim": "Thisbe retains Shape, Elevation and native raster triangles",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 109000.0
  },
