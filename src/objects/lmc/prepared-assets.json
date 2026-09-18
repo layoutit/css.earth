@@ -3,6 +3,21 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "horalek-widefield/atlases/x.webp",
+      "bytes": 37766,
+      "sha256": "67fefdb85c8200a0e9e07bae9ef409c2fd8e42f692a7c2f93a12198ccf3b55af"
+    },
+    {
+      "filename": "horalek-widefield/atlases/y.webp",
+      "bytes": 40322,
+      "sha256": "7dc5c0bedf46ea6a209a437152ab7934f6f5dae6c33c902a80357cf8f8d01957"
+    },
+    {
+      "filename": "horalek-widefield/atlases/z.webp",
+      "bytes": 65590,
+      "sha256": "461edca3bbba6bc51763243fd2600a172d06159d9e9b54721e311d7f9fd9b0ec"
+    },
+    {
       "filename": "horalek-widefield/slices/x/00.webp",
       "bytes": 74,
       "sha256": "ca92c1adcc691ef4c3e7d99e12ea54b156406693ca583f33c211e911c3872c12"
@@ -728,6 +743,31 @@
       "sha256": "75e04281f3f08265f94bbd68a75f3183b351c8d94aae4c624a8d52272f8e4ac0"
     },
     {
+      "filename": "presentation.json",
+      "bytes": 4682,
+      "sha256": "978fb2bf2216e1b22acf81206c8bac1b07e5b0bff1536daa7dbbd463ea783777"
+    },
+    {
+      "filename": "provenance.json",
+      "bytes": 83961,
+      "sha256": "0a8df854e88808f57176c80c565e50ecca0c5d3693e3737d5062c4383d90787e"
+    },
+    {
+      "filename": "vista-infrared/atlases/x.webp",
+      "bytes": 40894,
+      "sha256": "46e4dd757f4fba092cd37fd850e7312e776415866b1752d40f3c6c7d4b628d89"
+    },
+    {
+      "filename": "vista-infrared/atlases/y.webp",
+      "bytes": 42622,
+      "sha256": "b48f0c783fe6ea7101bab04a17e1305e93364fcfd5b8b232cb4d3f7534ff6714"
+    },
+    {
+      "filename": "vista-infrared/atlases/z.webp",
+      "bytes": 67666,
+      "sha256": "d352a965382093362abef85c7ce45cd61d4588fd80d5695b06be35b4da0e69d9"
+    },
+    {
       "filename": "vista-infrared/slices/x/00.webp",
       "bytes": 74,
       "sha256": "ca92c1adcc691ef4c3e7d99e12ea54b156406693ca583f33c211e911c3872c12"
@@ -1446,6 +1486,21 @@
       "filename": "vista-infrared/slices/z/47.webp",
       "bytes": 74,
       "sha256": "ca92c1adcc691ef4c3e7d99e12ea54b156406693ca583f33c211e911c3872c12"
+    },
+    {
+      "filename": "wise-wide-infrared/atlases/x.webp",
+      "bytes": 48024,
+      "sha256": "01230143cbb3825b9cfbbcc61bd4fbc178b04ab93a32d0b1dc5a720d7444e873"
+    },
+    {
+      "filename": "wise-wide-infrared/atlases/y.webp",
+      "bytes": 50568,
+      "sha256": "7e71e565bb8576957a7a3f156a1b9b6e1bc3278199e2ab4b43ff5f6e667e0636"
+    },
+    {
+      "filename": "wise-wide-infrared/atlases/z.webp",
+      "bytes": 88610,
+      "sha256": "0eeae45b4ebe2a79d038f71c97c171c94e72244a062642a954436ae7ff7a4bb4"
     },
     {
       "filename": "wise-wide-infrared/slices/x/00.webp",
