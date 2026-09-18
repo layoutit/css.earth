@@ -63,6 +63,12 @@ test('model textures, shape-derived elevation and featured overrides cannot prom
   // A whole-disc measured colour is photometry of an unresolved body, not surface imagery.
   const color = [{ surfaces: [{ id: 'color', science: { kind: 'disc-integrated-color' } }] }];
   assert.deepEqual(deriveObjectDiscovery({}, controls('color'), color), { featured: false, imagery: false, illustration: false });
+  // A measured colour beside an illustrative model texture: the body stays "Shape only", and the illustration is not imagery.
+  const both = [{ surfaces: [{ id: 'color', science: { kind: 'disc-integrated-color' } }, { id: 'illustration', science: { kind: 'glb-base-color' } }] }];
+  assert.deepEqual(deriveObjectDiscovery({ illustrationLenses: ['illustration'] }, controls('color', 'illustration'), both),
+    { featured: false, imagery: false, illustration: false });
+  assert.deepEqual(deriveObjectDiscovery({ illustrationLenses: ['illustration'] }, controls('illustration'), both),
+    { featured: false, imagery: false, illustration: true });
 });
 
 test('partial photographic coverage still counts; source and lens counts do not', () => {

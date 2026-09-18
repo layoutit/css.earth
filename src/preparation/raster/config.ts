@@ -18,7 +18,7 @@ export interface SurfaceRasterRecipe {
     thumbnail: string;
     /** Offline surface resolution relative to the shared layout; does not change geometry or lighting. */
     resolutionScale?: number;
-    sharpen?: number[];
+    sharpen?: number;
     exposure?: number[];
     /** Opt in to sampling the pinned source image directly for pole sprites. The delivered latitude bands stay unchanged. */
     nativeSourcePoles?: boolean;
@@ -100,6 +100,8 @@ export interface StructureSource {
         };
     };
 }
+/** Every raster-lane image is prepared once, at the canonical density; there is no 1x output. */
+export { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '../../renderers/css/rendering/prepared-object-assets.js';
 export interface RasterRecipe {
     schema: 'cssearth-raster-recipe@1';
     publicBase: string;
@@ -109,7 +111,6 @@ export interface RasterRecipe {
     height: number;
     latitudeBands: number;
     polarTile: number;
-    densities: number[];
     resample: 'source-packed' | 'density-before-pack';
     /** Source-packed maps normally pack first, then resize. This opt-in resizes the accepted source map before
      * packing so the resampler never reads across stored latitude-strip gutters. */

@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/callisto/callisto-normal.webp",
+      "url": "/scenes/callisto/callisto-normal@2x.webp",
       "width": 4096,
       "height": 3072
     },
     "surfaceLatitudeHeight": 2048,
     "packedBandGutter": 32,
     "poles": {
-      "url": "/scenes/callisto/callisto-poles-normal.webp",
+      "url": "/scenes/callisto/callisto-poles-normal@2x.webp",
       "width": 512,
       "height": 256
     },

@@ -1,0 +1,16 @@
+{
+  "schema": "csshestia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750925,
+      "sha256": "f1b79503dec418090067d9b358416f4b749b5ddc5219472ec49eacdea11ce211"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620531,
+      "sha256": "03a7a290fc6b6cb7aa4c49713bdf9db68f82b7a2d03d0d911c92eb4f029d28d4"
+    }
+  ]
+}

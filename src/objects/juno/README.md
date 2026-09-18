@@ -10,7 +10,9 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 | --- | --- |
 | Shape | [Released reconstruction](https://observations.lam.fr/astero/3Dshape/3_Juno_mpcd.obj) |
 | Size and pole | [Vernazza et al. (2021), Tables 1 and A.1](https://doi.org/10.1051/0004-6361/202141781) |
-| SPHERE photograph | [30 deconvolved ZIMPOL frames](https://observations.lam.fr/astero/Data/3Juno/Deconv/) |
+| SPHERE photograph | [30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, 3 nights from 2018-11-08 to 2018-11-12](https://observations.lam.fr/astero/Data/3Juno/Deconv/) on the [ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj) |
+| Photograph cameras | [Release rotation record](https://observations.lam.fr/astero/3Dshape/3_Juno_param.txt), read latitude-first, and JPL Horizons geometry from Paranal |
+| Photograph registration | [Vernazza et al. (2021), Figure B.3](https://doi.org/10.1051/0004-6361/202141781) |
 
 Juno is an irregular main-belt asteroid with broad departures from an ellipsoid. This model combines light-curve constraints with resolved VLT/SPHERE observations.
 
@@ -26,15 +28,22 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height lens, with the sampling limits stated. Reduction softens small features.
 
-### The photograph
+### SPHERE photograph
 
-Each frame's camera is computed, never authored: the pinned rotation record gives the pole and the absolute rotational phase, pinned JPL Horizons tables give the Paranal sighting and the direction to the Sun at the exposure midpoint, each frame's own header gives its plate scale and exposure, and the disc centre is fitted to the limb of the lens mesh. Every camera field in the recipe is reproduced by `node tools/objects/observer-cameras.mts juno`, which refuses a recipe that has drifted from those inputs. The rotation record is read latitude-first: its second column, 103.7377°, cannot be a latitude, and its period, 7.20953041 h, matches the 7.209531 h of the survey table above.
+<!-- published-comparison:begin -->
+Measured by `tools/objects/published-comparison.mts` against [Figure B.3](https://doi.org/10.1051/0004-6361/202141781), the survey's comparison of these frames with its models. The numbers are read from [`evidence/published-comparison.json`](evidence/published-comparison.json), not typed; [the paper's photographs with its model's outline and ours](evidence/published-comparison.webp) show them.
 
-The lens rides the released MPCD shape this body already selects, not the release's ADAM reconstruction. The 30 deconvolved ZIMPOL frames, camera 1, were taken over three nights, 2018-11-08 to 2018-11-12, all through the N_R filter at 25.65 s.
+| Figure column | Overlap with the paper's model | With the paper's photograph | Same shape at both pixel sizes | Best turn | Image turn onto the model, the photograph | Spin axis, ours against the figure's |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2018-11-08 05:47:15 | 0.966 | 0.971 | 0.987 | 10° | -4°, -1° | 131.0° against 129.0° |
+| 2018-11-08 07:58:55 | 0.969 | 0.972 | 0.988 | 0° | -4.5°, 0° | 131.0° against 129.1° |
+| 2018-11-11 02:06:44 | 0.970 | 0.965 | 0.986 | 0° | -2°, -0.5° | 131.0° against 129.1° |
+| 2018-11-11 04:01:27 | 0.962 | 0.961 | 0.986 | 10° | -4°, -1.5° | 131.0° against 129.0° |
+| 2018-11-11 04:27:48 | 0.968 | 0.967 | 0.986 | 0° | -1°, -3.5° | 131.0° against 129.0° |
+| 2018-11-12 04:51:38 | 0.967 | 0.965 | 0.987 | 0° | -3.5°, -1° | 131.1° against 129.1° |
 
-The projected disc spans about 102 px and the nadir pixel footprint is 2746 m, so the frames are better sampled than most bodies in this release. That is sampling, not resolved terrain: what the lens carries is real brightness on a measured shape.
-
-The frames cover 72.7% of the retained surface area, transferred to 5,884,773 interior texels. Level matching reconciles their relative brightness within gains of 0.67 to 1.03 across all 30 frames, leaving at most a factor of 1.21 between overlapping frames. Display is the 1st to 99.5th percentile of the displayed samples, in relative deconvolved intensity with the photographed illumination retained.
+Overlaps are scale-free. Read each against the same-shape column, which is what the measure gives one outline drawn at both pixel sizes. The best turn is the rotational phase, in 10° steps, at which our outline best overlaps the paper's model. The image turn is how far our outline must turn in the picture, counter-clockwise and in half degrees, to best overlap the paper's model and its photograph. The outline residual in the 30 native frames after the centre fit is 1.339 px at our phase; the lowest of a ±30° sweep is 1.317 px at 2°.
+<!-- published-comparison:end -->
 
 ### Registration
 
@@ -43,16 +52,12 @@ Measured by the registration stage when the body was last prepared; the numbers 
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `zimpol` | 30 | 5 | 3.00° | 2.03° | 2.21° | its other 30 frames | 0 of 30 | — | 20 of 30, 3.75° | — | ×1.21 | registered |
+| `zimpol` | 30 | 5 | 3.29° | 2.15° | 2.48° | its other 30 frames | 0 of 30 | — | 23 of 30, 2.50° | — | ×1.21 | registered |
 
-Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`.
+`zimpol` ships on its paper’s comparison, [Figure B.3](https://doi.org/10.1051/0004-6361/202141781), measured in [`evidence/published-comparison.json`](evidence/published-comparison.json); its verdict is reported, not a gate.
+
+Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh's own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.
 <!-- registration-report:end -->
-
-The outline is what places this body, and it does so on five frames out of thirty. Those five run from 02:05:02 to 02:07:18 on 2018-11-11, a single window of two and a quarter minutes, with outlines elongated between 1.294 and 1.300; their predicted limb position angles match the photographed contour with 2.21° left after removing the 2.03° floor that exposures minutes apart set. The other 25 are round: several sit at elongation 1.1923 to 1.1930 against the 1.2 minimum, missing the gate by under a thousandth. Five frames in one window sample one rotational phase, not five independent looks, so the longitude this lens is pinned at rests on a narrower check than the frame count suggests.
-
-Neither sweep that depends on surface markings places it. The cross-frame test is decisive on 0 of 30 frames: these frames carry no markings it can register. The relief sweep is decisive on 20 of 30, but its offsets run from 0.50° to 6.50°, 3.25° from their own median, so they disagree by more than the three-degree gate and reach no verdict; its 3.75° median is a location rather than a measurement.
-
-Before preparation, the same limb rule driven from the pinned inputs read 2.485° over a 2.151° floor. The stage's own number, above, is 2.21° over 2.03°. Both sit inside the gate, and the difference is the expected divergence between the two routes.
 
 ## Known problems
 
@@ -62,6 +67,8 @@ Source constraints are uneven and ground-based; a 4096 × 2048 display map does 
 
 Rotation has an explicitly arbitrary display meridian, not an absolute rotational phase.
 
+The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels. It is not albedo or colour. The frames see Juno from 29° to 30° south, so surface the survey did not see keeps the missing-imagery grid.
+
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
@@ -69,9 +76,9 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 <details>
 <summary>Selected data</summary>
 
-- [Original ADAM comparison](https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj): radius 127.337488 km. Excluded as a second lens: it is an alternative reconstruction of the same shape. The selected MPCD refinement uses resolved SPHERE detail; see survey section 3 and Appendix B.
+- [Original ADAM reconstruction](https://observations.lam.fr/astero/3Dshape/3_Juno_adam.obj): radius 127.337488 km. The SPHERE photograph rides it, because the release's rotation record describes this reconstruction; the Shape and Elevation views keep the MPCD refinement, which uses resolved SPHERE detail (survey section 3 and Appendix B).
 
-- [Released SPHERE images](https://observations.lam.fr/astero/Data/3Juno/): individual, illuminated, resolved telescope images. Excluded as a globe texture in this PR: they are not a registered global reflectance mosaic. They remain the observational constraints behind the selected reconstruction.
+- [Released SPHERE images](https://observations.lam.fr/astero/Data/3Juno/): individual, illuminated, resolved telescope images. The deconvolved camera-1 frames are the SPHERE photograph lens, placed by computed cameras and checked against the survey's Figure B.3; the reduced `Red/` products are not used. This is photographed illumination, not a registered global reflectance mosaic, and the frames remain the observational constraints behind the selected reconstruction.
 
 - [Individual research](https://observations.lam.fr/astero/Papers/Vernazza2021.pdf): complementary interpretation and model/image comparisons.
 

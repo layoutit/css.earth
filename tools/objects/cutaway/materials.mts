@@ -8,7 +8,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared-webp.mts';
-import {verifyObservationSources} from '../giant-layers/observations.mts';
+import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {dotVector as dot3} from '../material-composition/ellipsoid.mts';
 import {validateMaterialRecipe,validateRelativePath} from '../material-composition/recipe.mts';
 /** Declared radial composition, two-face cutaway shading, and polar wedge rasters. */

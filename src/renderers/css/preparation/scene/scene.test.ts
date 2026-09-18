@@ -10,6 +10,7 @@ import type { GeometryProfile, GeometrySceneAssets, SolarSceneSource } from './i
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.js';
 import { parseRasterRecipe } from '../../../../preparation/raster/index.js';
 import { outputName } from '../../../../preparation/raster/io.js';
+import { RASTER_DENSITY } from '../../../../preparation/raster/config.js';
 const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
 const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -19,7 +20,7 @@ async function prepareAuthored(id:string,direction:[number,number,number],edit:(
  if(raster.lighting)assets.lighting={frameCount:raster.lighting.frameCount,defaultFrame:raster.lighting.defaultFrame};
  if(raster.interior){
   const source=await readJson(`${root}/${raster.interior.source}`) as {metallicCoreRadiusFraction:number;presentation:{cutaway:{centerLongitudeDegrees:number;widthDegrees:number}}};
-  const url=(template:string)=>raster.publicBase+outputName(template);
+  const url=(template:string)=>raster.publicBase+outputName(template,RASTER_DENSITY);
   assets.interior={cutaway:source.presentation.cutaway,metallicCoreRadiusFraction:source.metallicCoreRadiusFraction,coreUrl:url(raster.interior.coreOutput),corePolesUrl:url(raster.interior.corePolesOutput),sectionUrl:url(raster.interior.sectionOutput),outerPolesUrl:url(raster.interior.outerPolesOutput)};
  }
  if(raster.atmosphere){const source=readAtmosphereModel(JSON.parse(await readFile(join(fixtureRoot,root,raster.atmosphere.source),'utf8')));assets.atmosphere={source,model:deriveAtmosphereMaterial(source)};}

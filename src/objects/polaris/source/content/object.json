@@ -43,8 +43,8 @@
         "label": "Shape",
         "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
         "thumbnail": "polaris-lens-shape.webp",
-        "surface": "polaris-surface-shape.webp",
-        "poles": "polaris-poles-shape.webp",
+        "surface": "polaris-surface-shape@2x.webp",
+        "poles": "polaris-poles-shape@2x.webp",
         "source": {
           "id": "polaris-observational-measurements",
           "path": "../manifest.json",

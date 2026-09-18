@@ -53,8 +53,8 @@
       }
     },
     {
-      "expectedBytes": 1981,
-      "expectedSha256": "356a2bf146adf64901b696e357d1f76e192701b26bfe8eaed9390f6aa25b42a3",
+      "expectedBytes": 1946,
+      "expectedSha256": "658a8387ea04f009f759a361066b199b57dc3863fc14b59f208b053284d308a5",
       "id": "antares-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, no observation, transparent plates",
@@ -72,8 +72,8 @@
       ]
     },
     {
-      "expectedBytes": 1684,
-      "expectedSha256": "11702548e7647f666e069c99cb129105474b0bb0a970c1b75a716f313f63bfa6",
+      "expectedBytes": 1690,
+      "expectedSha256": "9d51dfbf09fe608e6409d07b47d23cdce965fbb3d349d31690027f267c43fbe8",
       "id": "antares-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -172,8 +172,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 3873,
-      "expectedSha256": "15c4654f25e9f63200e1b5b90f0b670fddb917079099cdc8363de0e6cb3e0b5f",
+      "expectedBytes": 3879,
+      "expectedSha256": "d036c0c5af51c73be6e8f5645900bd00df2bc245c019d71040ec3d44811cc479",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",

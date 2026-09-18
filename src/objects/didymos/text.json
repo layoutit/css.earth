@@ -61,6 +61,11 @@
       "title": "Relative-albedo model",
       "detail": "DART surface brightness",
       "summary": "Modeled brightness, not absolute albedo, on the 58% of facets that pass its checks."
+    },
+    "luke": {
+      "title": "LICIACube colour imaging",
+      "detail": "8 frames, 2022",
+      "summary": "Taken by a cubesat flying past, minutes after the DART impact. Colour from the camera's own bands, seen through the ejecta."
     }
   }
 }

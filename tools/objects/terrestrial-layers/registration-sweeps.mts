@@ -106,7 +106,11 @@ export function outline(width: number, height: number, admits: (x: number, y: nu
   return radii;
 }
 
-export interface LimbCentre { center: [number, number]; iterations: number; movedPixels: number; limbBins: number }
+export interface LimbCentre {
+  center: [number, number]; iterations: number; movedPixels: number; limbBins: number;
+  /** The radial residual left between the photographed and projected outlines once the centre is fitted, root mean square over the limb bins, in pixels: the contour residual the survey papers report. */
+  residualPixels: number;
+}
 
 /**
  * The disc centre from the limb. The brightness centroid sits toward the lit limb at any phase angle, so the mesh's
@@ -116,6 +120,9 @@ export interface LimbCentre { center: [number, number]; iterations: number; move
  * price is the terminator side, which at phase angle α ends up to R(1 − cos α) inside the limb. For a main-belt body
  * seen from Earth α is under 25 degrees, and the bias is a fraction of a pixel on a deconvolved frame.
  */
+/** Half-step iterations a limb fit may take after its plain ones, when it has not settled. */
+export const DAMPED_LIMB_ITERATIONS = 16;
+
 export function limbCentre(source: CameraImage | RegistrationImage, sighting: Sighting, orientation: BodyOrientation, positions: readonly (readonly number[])[],
     { edgeFraction = 0.25, bins = 72, iterations = 8 } = {}): LimbCentre {
   const image = registrationImage(source), { width, height, values } = image;
@@ -126,8 +133,11 @@ export function limbCentre(source: CameraImage | RegistrationImage, sighting: Si
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (lit(x, y)) { cx += x; cy += y; count++; }
   if (count < bins) throw new Error('The frame shows too little disc to place a limb on.');
   cx /= count; cy /= count;
-  let moved = 0, done = 0, limbBins = 0;
-  for (let iteration = 0; iteration < iterations; iteration++) {
+  let moved = 0, done = 0, limbBins = 0, residualPixels = NaN;
+  // A fit still moving after its plain iterations takes half steps: on an elongated outline the full step can bounce
+  // the centre between two positions for ever (Kleopatra's frames flip 0.52 px each way), and half steps settle between
+  // them. A fit that settles within the plain iterations never reaches this and is unchanged.
+  for (let iteration = 0; iteration < iterations + DAMPED_LIMB_ITERATIONS; iteration++) {
     const camera = controlledShapeCamera(observerCamera({ ...sighting, center: [cx, cy] }, orientation));
     const model = new Float64Array(bins);
     for (const position of positions) {
@@ -137,19 +147,21 @@ export function limbCentre(source: CameraImage | RegistrationImage, sighting: Si
       if (distance > model[bin]) model[bin] = distance;
     }
     const observed = outline(width, height, lit, cx, cy, bins);
-    let scc = 0, scs = 0, sss = 0, rc = 0, rs = 0; limbBins = 0;
+    let scc = 0, scs = 0, sss = 0, rc = 0, rs = 0, squared = 0; limbBins = 0;
     for (let bin = 0; bin < bins; bin++) {
       if (!(model[bin] > 0) || !(observed[bin] > 0)) continue;
       const theta = bin * 2 * Math.PI / bins, residual = observed[bin] - model[bin], c = Math.cos(theta), s = Math.sin(theta);
-      scc += c * c; scs += c * s; sss += s * s; rc += residual * c; rs += residual * s; limbBins++;
+      scc += c * c; scs += c * s; sss += s * s; rc += residual * c; rs += residual * s; squared += residual * residual; limbBins++;
     }
+    residualPixels = Math.sqrt(squared / limbBins);
     const determinant = scc * sss - scs * scs;
     if (limbBins < bins / 2 || !(Math.abs(determinant) > 1e-9)) throw new Error('The frame shows too little limb to place a centre on.');
     const dx = (rc * sss - rs * scs) / determinant, dy = (rs * scc - rc * scs) / determinant;
-    cx += dx; cy += dy; moved = Math.hypot(dx, dy); done = iteration + 1;
+    const step = iteration < iterations ? 1 : 0.5;
+    cx += step * dx; cy += step * dy; moved = step * Math.hypot(dx, dy); done = iteration + 1;
     if (moved < 0.05) break;
   }
-  return { center: [cx, cy], iterations: done, movedPixels: moved, limbBins };
+  return { center: [cx, cy], iterations: done, movedPixels: moved, limbBins, residualPixels };
 }
 
 /** One frame cast once: the body-fixed point, both shadings and the disc interior under every lit pixel. */

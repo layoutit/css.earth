@@ -1,0 +1,37 @@
+{
+  "id": "source-hebe-hebe-sphere-20181219055556",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hebe · hebe sphere 20181219055556",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/6Hebe/Deconv/d6Hebe_2018-12-19T05_55_56.226_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hebe/source/manifest.json",
+      "revision": "74c53af00906909d4ecf1a651942ab82c29db762",
+      "sha256": "aae7d22acc258e560a080ce60b0cf01a65048e6c1720858faa3ab74a75da7068",
+      "locator": "/inputs/19"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The hebe sphere 20181219055556 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

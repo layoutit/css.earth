@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 511 km, ecliptic J2000 pole (42\u00b0, -15\u00b0), period 7.81321 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 254.07824138806413 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 511 km, ecliptic J2000 pole (42°, -15°), period 7.81321 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 254.07824138806413 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/pallas/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -51,9 +51,8 @@
     {
       "id": "surface-imagery",
       "subject": "Released SPHERE observations and surface registration",
-      "status": "unresolved",
-      "finding": "Final bounded joint registration of the 05:04, 05:08 and 06:05 Camera 2 images used lit outlines and interior matches with the released MPCD mesh and spin fixed. The previously examined 06:05 holdout remains at 2.610 pixels RMS, maximum 5.460. That camera solution was frozen before checking the unused 06:07:17 Camera 2 photograph; with limb-only pointing and no interior adjustment, eight held-out matches give 5.289 pixels RMS, maximum 8.178. All fourteen matches in that fresh frame were evaluation data. This attempt is closed without a photographic surface. It does not prove registration impossible. Earlier simultaneous-camera, short/long transfer, image-identity and source-orientation evidence remains retained; the new evidence adds eight verified input pins and 51 recast/replayed control residuals.",
-      "revisitWhen": "New producer-controlled image geometry or independently verified surface correspondences with measured localization precision would reopen photographic preparation. Joint image-and-limb fitting has now been tried and failed the frozen fresh-exposure check; do not restart equivalent fits to the same uncertain controls. The inherited one-pixel criterion, telescope PSF and raster pole arrows are not established SPHERE camera-error bounds.",
+      "status": "included",
+      "finding": "Included 2026-09-18 as the SPHERE photograph lens: 30 camera-1 deconvolved frames, 4 nights from 2017-10-08 to 2017-11-03, cast onto the ADAM mesh with cameras computed from the release rotation record, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in zimpol-published-comparison. The other 25 released camera-1 frames are not used: a lens keeps one apparition and at most 32 frames. Earlier finding, kept: Final bounded joint registration of the 05:04, 05:08 and 06:05 Camera 2 images used lit outlines and interior matches with the released MPCD mesh and spin fixed. The previously examined 06:05 holdout remains at 2.610 pixels RMS, maximum 5.460. That camera solution was frozen before checking the unused 06:07:17 Camera 2 photograph; with limb-only pointing and no interior adjustment, eight held-out matches give 5.289 pixels RMS, maximum 8.178. All fourteen matches in that fresh frame were evaluation data. This attempt is closed without a photographic surface. It does not prove registration impossible. Earlier simultaneous-camera, short/long transfer, image-identity and source-orientation evidence remains retained; the new evidence adds eight verified input pins and 51 recast/replayed control residuals.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/pallas/README.md",
         "https://observations.lam.fr/astero/Data/2Pallas/",
@@ -69,7 +68,8 @@
         "https://github.com/layoutit/css.earth/pull/204",
         "https://doi.org/10.1051/0004-6361/201833620",
         "https://observations.lam.fr/astero/Papers/Vernazza2018.pdf",
-        "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T06_07_17.855_zpl_science_imaging_cam2.fits"
+        "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T06_07_17.855_zpl_science_imaging_cam2.fits",
+        "https://observations.lam.fr/astero/Data/2Pallas/Deconv/"
       ],
       "checked": [
         {
@@ -104,15 +104,18 @@
           "date": "2026-09-14",
           "commit": "dc850b5cd46c5c5179e9eaf7a8ac30338b29a146",
           "pr": 204
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
     {
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
-      "status": "excluded",
-      "finding": "The live directory also lists 2_Pallas_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Revisited for the photographic frame investigation: DAMIT model 4395, explicitly linked to Marsset et al. (2020), supplies a shape table and separate IAUspin record. Its 1602 vertices and 3200 indexed triangles match the LAM ADAM file exactly apart from a constant translation of (0.066526, 0.043641, 0.075851) km. Maximum residual after that translation is below 5e-14 km. A different ADAM geometry therefore does not explain the unqualified crater-to-image correspondence. It remains excluded as a duplicate delivered shape view; the published model and frame remain useful registration evidence.",
-      "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
+      "status": "included",
+      "finding": "The live directory also lists 2_Pallas_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked. Revisited for the photographic frame investigation: DAMIT model 4395, explicitly linked to Marsset et al. (2020), supplies a shape table and separate IAUspin record. Its 1602 vertices and 3200 indexed triangles match the LAM ADAM file exactly apart from a constant translation of (0.066526, 0.043641, 0.075851) km. Maximum residual after that translation is below 5e-14 km. A different ADAM geometry therefore does not explain the unqualified crater-to-image correspondence. It remains excluded as a duplicate delivered shape view; the published model and frame remain useful registration evidence. Reopened 2026-09-18 because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure B.2 describe; the Shape and Elevation views keep MPCD.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -132,6 +135,10 @@
         {
           "date": "2026-09-14",
           "commit": "6202baac4686008757eeaba418e37a18b043f06a"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     },
@@ -157,7 +164,7 @@
       "id": "marsset-crater-controls",
       "subject": "Published crater coordinates as image registration controls",
       "status": "unresolved",
-      "finding": "Four tentative native centres were recorded before projecting published coordinates with frozen ADAM and MPCD cameras. Toxa, Xyston and Akontia differ by 23\u201329 pixels; Hoplon by 9\u201311 pixels. The identification regions are not confidence intervals, so those discrepancies do not establish camera error or model incompatibility. Quadratic illumination correction did not resolve the identities, and no rigid-frame correction was adopted. The shared checker replays input pins, projections, visibility and residuals; its five focused tests and the preparation TypeScript project passed. The later ten-image sequence confirms a persistent lower-right structure, but does not establish its named-crater coordinates. See surface-imagery for the newly identified published-photo pairing. Earlier trials remain in the pinned evidence.",
+      "finding": "Four tentative native centres were recorded before projecting published coordinates with frozen ADAM and MPCD cameras. Toxa, Xyston and Akontia differ by 23–29 pixels; Hoplon by 9–11 pixels. The identification regions are not confidence intervals, so those discrepancies do not establish camera error or model incompatibility. Quadratic illumination correction did not resolve the identities, and no rigid-frame correction was adopted. The shared checker replays input pins, projections, visibility and residuals; its five focused tests and the preparation TypeScript project passed. The later ten-image sequence confirms a persistent lower-right structure, but does not establish its named-crater coordinates. See surface-imagery for the newly identified published-photo pairing. Earlier trials remain in the pinned evidence.",
       "revisitWhen": "Use the identified 05:08:49 Camera 2 / Vernazza Figure B.2 pairing to resolve the remaining image-to-model pose and interior correspondence. Explain the published pole-marker discrepancy before adopting a correction. Revisit named controls only with new identification or coordinate-frame evidence; do not repeat fits to the same tentative picks.",
       "evidence": [
         "https://doi.org/10.1038/s41550-019-1007-5",
@@ -188,9 +195,8 @@
     {
       "id": "sphere-cross-frame-registration",
       "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
-      "status": "unresolved",
-      "finding": "Measured with the cross-frame registration test on 55 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read longitude-first. Disc interior 9169 pixels (median); peak correlation 0.12 (median) against a mirror margin of 0.52; 0 of 55 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists. The outline confirms this independently: 0 of 55 frames project an outline elongated enough to define a position angle, elongation 1.088 to 1.10 against the rule's 1.20 threshold, so the silhouette cannot judge it, as recorded. The relief sweep is decisive on 47 of 55 frames with a median of 1.25 degrees, but that sweep correlates each frame against the shading of a mesh the survey fitted to these same frames, so it is not evidence independent of them; three of its decisive frames, all from 2017-11-03 and carrying the weakest correlations in the set, sit 3.5 to 6.75 degrees from that median. This body is the best resolved in the release at roughly 110 pixels across its disc, and even it registers no markings, which bounds what the other round bodies can offer. Measured outside preparation by the registration stage's own limb rule driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit; the stage's own number can differ, and on Themis it read 1.65 degrees where this route read 2.92.",
-      "revisitWhen": "A registration reference for this body: a spacecraft map, or frames in which the cross-frame test resolves markings (peak correlation above 0.15 with a mirror margin above 1.5 on most frames).",
+      "status": "included",
+      "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 30 camera-1 frames on the ADAM mesh with the rotation record read longitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured with the cross-frame registration test on 55 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read longitude-first. Disc interior 9169 pixels (median); peak correlation 0.12 (median) against a mirror margin of 0.52; 0 of 55 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists. The outline confirms this independently: 0 of 55 frames project an outline elongated enough to define a position angle, elongation 1.088 to 1.10 against the rule's 1.20 threshold, so the silhouette cannot judge it, as recorded. The relief sweep is decisive on 47 of 55 frames with a median of 1.25 degrees, but that sweep correlates each frame against the shading of a mesh the survey fitted to these same frames, so it is not evidence independent of them; three of its decisive frames, all from 2017-11-03 and carrying the weakest correlations in the set, sit 3.5 to 6.75 degrees from that median. This body is the best resolved in the release at roughly 110 pixels across its disc, and even it registers no markings, which bounds what the other round bodies can offer. Measured outside preparation by the registration stage's own limb rule driven from the pinned inputs, which reproduces Sylvia's prepared report to the digit; the stage's own number can differ, and on Themis it read 1.65 degrees where this route read 2.92.",
       "evidence": [
         "https://observations.lam.fr/astero/Data/2Pallas/Deconv/",
         "https://observations.lam.fr/astero/3Dshape/",
@@ -204,6 +210,27 @@
         {
           "date": "2026-09-17",
           "commit": "24e2730084f5b0528499be985940392e1d16da17"
+        },
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
+        }
+      ]
+    },
+    {
+      "id": "zimpol-published-comparison",
+      "subject": "Vernazza et al. (2021) Figure B.2 as the registration of the SPHERE photograph lens",
+      "status": "included",
+      "finding": "Measured with tools/objects/sphere-survey/setup.mts against Vernazza et al. (2021) Figure B.2, the survey’s comparison of these frames with its models. Outline overlap with the paper’s ADAM panels 0.963 to 0.980 at our phase, against 0.982 to 0.995 for our own outline drawn at the paper’s pixel scale; over a full turn in 10° steps it peaks at our phase in 5 of 6 columns, one step from it in 1. With the paper’s photographs 0.961 to 0.976. Turned in the image, our outline best overlaps the paper’s photographs at -4.0 to 2.0° and its model panels at -6.0 to 0.0°. The spin axis we project lies at 72.7 to 85.7° on the sky against 71.3 to 83.6° for the figure’s arrows. Native outline residual 1.826 px mean over 30 frames at our phase, the lowest of a ±30° sweep. The figure’s column labels were read from its pixels, and each names a frame’s exposure start to the second. The release rotation record reads longitude-first, 0.51° from the published pole.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/Data/2Pallas/Deconv/",
+        "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "8ec7f72bac6546ce24f402fde8a67d34f6fa7be4"
         }
       ]
     }

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0f49264aba2e1ce8a417f662e7f4064895ab0e3cecceb746bb8da77fcc539eb8"
+    "sha256": "4e621f5e8a3aa85f50cb85349f3c3c1d048d7cb17916e5721156aa3cb217d24c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "7e1223eaa6546d965e47c8f4431d82b23d2fe7287257865cdbd1e0ee457f0285"
+    "bindingsSha256": "da2ecc75278de019d32487e7afdbfd617751d6df87c41beddec77290409dbf5c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "47c35363baab31b832b98108ff735ef0979644f321fc0a85480a5abb314bb0f3",
+      "sha256": "f61f21aad31b24cd45367d4f8d69c73321e2eeed103ae8050a8edcb0f021da1f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -90,490 +90,8 @@
               "metadata": {
                 "label": "SPHERE photograph",
                 "falseColor": false,
-                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames over four nights, 2018-06-08 to 2018-07-10, cast onto the released MPCD shape, which registers its outline more closely than the release's ADAM reconstruction does. The camera's pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2018-06-08 to 2018-07-10, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.8. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
               },
-              "frames": [
-                {
-                  "id": "zimpol-20180608-064446",
-                  "path": "observations/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7853,
-                  "observerWestLongitude": 50.872,
-                  "sunLatitude": -6.6687,
-                  "sunWestLongitude": 51.5955,
-                  "rangeKm": 249952133.3,
-                  "northAzimuthDegrees": 65.9776,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    130.135,
-                    132.002
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-064850",
-                  "path": "observations/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7859,
-                  "observerWestLongitude": 55.6833,
-                  "sunLatitude": -6.6681,
-                  "sunWestLongitude": 56.4062,
-                  "rangeKm": 249951041.5,
-                  "northAzimuthDegrees": 65.9773,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    130.154,
-                    131.925
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-065255",
-                  "path": "observations/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7865,
-                  "observerWestLongitude": 60.5115,
-                  "sunLatitude": -6.6675,
-                  "sunWestLongitude": 61.2339,
-                  "rangeKm": 249949947.7,
-                  "northAzimuthDegrees": 65.9769,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    130.261,
-                    131.077
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-065658",
-                  "path": "observations/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7871,
-                  "observerWestLongitude": 65.2957,
-                  "sunLatitude": -6.6669,
-                  "sunWestLongitude": 66.0175,
-                  "rangeKm": 249948865.8,
-                  "northAzimuthDegrees": 65.9766,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    130.298,
-                    131.153
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-070101",
-                  "path": "observations/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7877,
-                  "observerWestLongitude": 70.0843,
-                  "sunLatitude": -6.6664,
-                  "sunWestLongitude": 70.8056,
-                  "rangeKm": 249947784.7,
-                  "northAzimuthDegrees": 65.9762,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    129.458,
-                    131.989
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-073141",
-                  "path": "observations/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7922,
-                  "observerWestLongitude": 106.3162,
-                  "sunLatitude": -6.6621,
-                  "sunWestLongitude": 107.0335,
-                  "rangeKm": 249939662.9,
-                  "northAzimuthDegrees": 65.9736,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    129.264,
-                    134.229
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-073546",
-                  "path": "observations/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7928,
-                  "observerWestLongitude": 111.1287,
-                  "sunLatitude": -6.6615,
-                  "sunWestLongitude": 111.8454,
-                  "rangeKm": 249938591.7,
-                  "northAzimuthDegrees": 65.9733,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    129.721,
-                    132.535
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-073952",
-                  "path": "observations/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7934,
-                  "observerWestLongitude": 115.9756,
-                  "sunLatitude": -6.661,
-                  "sunWestLongitude": 116.6918,
-                  "rangeKm": 249937514.6,
-                  "northAzimuthDegrees": 65.9729,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    129.64,
-                    131.883
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-074356",
-                  "path": "observations/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.794,
-                  "observerWestLongitude": 120.7795,
-                  "sunLatitude": -6.6604,
-                  "sunWestLongitude": 121.4952,
-                  "rangeKm": 249936448.7,
-                  "northAzimuthDegrees": 65.9726,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    129.626,
-                    131.916
-                  ]
-                },
-                {
-                  "id": "zimpol-20180608-074759",
-                  "path": "observations/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -2.7946,
-                  "observerWestLongitude": 125.5681,
-                  "sunLatitude": -6.6598,
-                  "sunWestLongitude": 126.2832,
-                  "rangeKm": 249935387.9,
-                  "northAzimuthDegrees": 65.9722,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    129.856,
-                    131.804
-                  ]
-                },
-                {
-                  "id": "zimpol-20180612-041313",
-                  "path": "observations/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -3.5896,
-                  "observerWestLongitude": 196.6817,
-                  "sunLatitude": -5.8849,
-                  "sunWestLongitude": 196.6672,
-                  "rangeKm": 248712175.2,
-                  "northAzimuthDegrees": 65.5008,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    124.834,
-                    130.647
-                  ]
-                },
-                {
-                  "id": "zimpol-20180612-041718",
-                  "path": "observations/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -3.5902,
-                  "observerWestLongitude": 201.491,
-                  "sunLatitude": -5.8843,
-                  "sunWestLongitude": 201.4759,
-                  "rangeKm": 248711481.2,
-                  "northAzimuthDegrees": 65.5004,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    123.784,
-                    130.597
-                  ]
-                },
-                {
-                  "id": "zimpol-20180612-042123",
-                  "path": "observations/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -3.5908,
-                  "observerWestLongitude": 206.3296,
-                  "sunLatitude": -5.8837,
-                  "sunWestLongitude": 206.314,
-                  "rangeKm": 248710784.9,
-                  "northAzimuthDegrees": 65.5,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    123.532,
-                    130.822
-                  ]
-                },
-                {
-                  "id": "zimpol-20180612-042527",
-                  "path": "observations/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -3.5914,
-                  "observerWestLongitude": 211.1217,
-                  "sunLatitude": -5.8832,
-                  "sunWestLongitude": 211.1055,
-                  "rangeKm": 248710097.3,
-                  "northAzimuthDegrees": 65.4997,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    124.162,
-                    130.873
-                  ]
-                },
-                {
-                  "id": "zimpol-20180612-042930",
-                  "path": "observations/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -3.592,
-                  "observerWestLongitude": 215.922,
-                  "sunLatitude": -5.8826,
-                  "sunWestLongitude": 215.9052,
-                  "rangeKm": 248709410.5,
-                  "northAzimuthDegrees": 65.4993,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    123.783,
-                    130.614
-                  ]
-                },
-                {
-                  "id": "zimpol-20180617-030114",
-                  "path": "observations/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -4.6409,
-                  "observerWestLongitude": 337.634,
-                  "sunLatitude": -4.8879,
-                  "sunWestLongitude": 336.6765,
-                  "rangeKm": 248040232.6,
-                  "northAzimuthDegrees": 64.8667,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    123.556,
-                    129.428
-                  ]
-                },
-                {
-                  "id": "zimpol-20180617-030519",
-                  "path": "observations/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -4.6416,
-                  "observerWestLongitude": 342.444,
-                  "sunLatitude": -4.8873,
-                  "sunWestLongitude": 341.4859,
-                  "rangeKm": 248040101,
-                  "northAzimuthDegrees": 64.8664,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    124.119,
-                    129.599
-                  ]
-                },
-                {
-                  "id": "zimpol-20180617-030925",
-                  "path": "observations/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -4.6422,
-                  "observerWestLongitude": 347.2845,
-                  "sunLatitude": -4.8867,
-                  "sunWestLongitude": 346.3259,
-                  "rangeKm": 248039970.5,
-                  "northAzimuthDegrees": 64.866,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    122.576,
-                    129.218
-                  ]
-                },
-                {
-                  "id": "zimpol-20180617-031329",
-                  "path": "observations/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -4.6428,
-                  "observerWestLongitude": 352.096,
-                  "sunLatitude": -4.8862,
-                  "sunWestLongitude": 351.1368,
-                  "rangeKm": 248039842.6,
-                  "northAzimuthDegrees": 64.8656,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    123.742,
-                    129.081
-                  ]
-                },
-                {
-                  "id": "zimpol-20180617-031733",
-                  "path": "observations/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -4.6434,
-                  "observerWestLongitude": 356.8973,
-                  "sunLatitude": -4.8856,
-                  "sunWestLongitude": 355.9375,
-                  "rangeKm": 248039716.9,
-                  "northAzimuthDegrees": 64.8652,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    123.016,
-                    128.643
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-033943",
-                  "path": "observations/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1135,
-                  "observerWestLongitude": 269.4837,
-                  "sunLatitude": -0.2353,
-                  "sunWestLongitude": 264.463,
-                  "rangeKm": 257861577.7,
-                  "northAzimuthDegrees": 62.0358,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    121.604,
-                    128.267
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-034347",
-                  "path": "observations/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1139,
-                  "observerWestLongitude": 274.2833,
-                  "sunLatitude": -0.2347,
-                  "sunWestLongitude": 269.2622,
-                  "rangeKm": 257864025.3,
-                  "northAzimuthDegrees": 62.0355,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    121.281,
-                    129.332
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-034752",
-                  "path": "observations/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1144,
-                  "observerWestLongitude": 279.1126,
-                  "sunLatitude": -0.2341,
-                  "sunWestLongitude": 274.091,
-                  "rangeKm": 257866489.9,
-                  "northAzimuthDegrees": 62.0352,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    120.825,
-                    129.199
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-035156",
-                  "path": "observations/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1148,
-                  "observerWestLongitude": 283.9147,
-                  "sunLatitude": -0.2336,
-                  "sunWestLongitude": 278.8927,
-                  "rangeKm": 257868942.6,
-                  "northAzimuthDegrees": 62.0349,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    121.162,
-                    129.406
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-035559",
-                  "path": "observations/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1153,
-                  "observerWestLongitude": 288.7046,
-                  "sunLatitude": -0.233,
-                  "sunWestLongitude": 283.6821,
-                  "rangeKm": 257871390.8,
-                  "northAzimuthDegrees": 62.0346,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    121.618,
-                    129.607
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-044406",
-                  "path": "observations/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1208,
-                  "observerWestLongitude": 345.5446,
-                  "sunLatitude": -0.2262,
-                  "sunWestLongitude": 340.5169,
-                  "rangeKm": 257900580.6,
-                  "northAzimuthDegrees": 62.031,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    122.807,
-                    127.822
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-044811",
-                  "path": "observations/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1212,
-                  "observerWestLongitude": 350.3635,
-                  "sunLatitude": -0.2256,
-                  "sunWestLongitude": 345.3354,
-                  "rangeKm": 257903066.7,
-                  "northAzimuthDegrees": 62.0307,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    122.977,
-                    129.817
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-045217",
-                  "path": "observations/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1217,
-                  "observerWestLongitude": 355.1947,
-                  "sunLatitude": -0.2251,
-                  "sunWestLongitude": 350.1661,
-                  "rangeKm": 257905560.8,
-                  "northAzimuthDegrees": 62.0304,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    122.652,
-                    129.567
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-045620",
-                  "path": "observations/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1221,
-                  "observerWestLongitude": 359.9949,
-                  "sunLatitude": -0.2245,
-                  "sunWestLongitude": 354.9659,
-                  "rangeKm": 257908040.6,
-                  "northAzimuthDegrees": 62.0301,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    122.76,
-                    127.625
-                  ]
-                },
-                {
-                  "id": "zimpol-20180710-050022",
-                  "path": "observations/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
-                  "encoding": "fits-zimpol-intensity",
-                  "observerLatitude": -9.1226,
-                  "observerWestLongitude": 4.7461,
-                  "sunLatitude": -0.2239,
-                  "sunWestLongitude": 359.7166,
-                  "rangeKm": 257910496.7,
-                  "northAzimuthDegrees": 62.0298,
-                  "pixelAngleMicroradians": 0.017599,
-                  "center": [
-                    122.806,
-                    129.745
-                  ]
-                }
-              ],
               "selection": "finest-resolution",
               "levelMatching": {
                 "samplesPerTriangle": 24,
@@ -601,7 +119,489 @@
                   1,
                   99.5
                 ]
-              }
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20180608-064446",
+                  "path": "observations/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7853,
+                  "observerWestLongitude": 50.872,
+                  "sunLatitude": -6.6687,
+                  "sunWestLongitude": 51.5955,
+                  "rangeKm": 249952133.3,
+                  "northAzimuthDegrees": 65.9776,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.026,
+                    132.246
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-064850",
+                  "path": "observations/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7859,
+                  "observerWestLongitude": 55.6833,
+                  "sunLatitude": -6.6681,
+                  "sunWestLongitude": 56.4062,
+                  "rangeKm": 249951041.5,
+                  "northAzimuthDegrees": 65.9773,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.071,
+                    132.114
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-065255",
+                  "path": "observations/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7865,
+                  "observerWestLongitude": 60.5115,
+                  "sunLatitude": -6.6675,
+                  "sunWestLongitude": 61.2339,
+                  "rangeKm": 249949947.7,
+                  "northAzimuthDegrees": 65.9769,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.258,
+                    131.216
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-065658",
+                  "path": "observations/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7871,
+                  "observerWestLongitude": 65.2957,
+                  "sunLatitude": -6.6669,
+                  "sunWestLongitude": 66.0175,
+                  "rangeKm": 249948865.8,
+                  "northAzimuthDegrees": 65.9766,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    130.286,
+                    131.311
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-070101",
+                  "path": "observations/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7877,
+                  "observerWestLongitude": 70.0843,
+                  "sunLatitude": -6.6664,
+                  "sunWestLongitude": 70.8056,
+                  "rangeKm": 249947784.7,
+                  "northAzimuthDegrees": 65.9762,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.558,
+                    132.177
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-073141",
+                  "path": "observations/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7922,
+                  "observerWestLongitude": 106.3162,
+                  "sunLatitude": -6.6621,
+                  "sunWestLongitude": 107.0335,
+                  "rangeKm": 249939662.9,
+                  "northAzimuthDegrees": 65.9736,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.106,
+                    134.041
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-073546",
+                  "path": "observations/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7928,
+                  "observerWestLongitude": 111.1287,
+                  "sunLatitude": -6.6615,
+                  "sunWestLongitude": 111.8454,
+                  "rangeKm": 249938591.7,
+                  "northAzimuthDegrees": 65.9733,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.597,
+                    132.409
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-073952",
+                  "path": "observations/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7934,
+                  "observerWestLongitude": 115.9756,
+                  "sunLatitude": -6.661,
+                  "sunWestLongitude": 116.6918,
+                  "rangeKm": 249937514.6,
+                  "northAzimuthDegrees": 65.9729,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.497,
+                    131.731
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-074356",
+                  "path": "observations/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.794,
+                  "observerWestLongitude": 120.7795,
+                  "sunLatitude": -6.6604,
+                  "sunWestLongitude": 121.4952,
+                  "rangeKm": 249936448.7,
+                  "northAzimuthDegrees": 65.9726,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.557,
+                    131.845
+                  ]
+                },
+                {
+                  "id": "zimpol-20180608-074759",
+                  "path": "observations/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.7946,
+                  "observerWestLongitude": 125.5681,
+                  "sunLatitude": -6.6598,
+                  "sunWestLongitude": 126.2832,
+                  "rangeKm": 249935387.9,
+                  "northAzimuthDegrees": 65.9722,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    129.702,
+                    131.874
+                  ]
+                },
+                {
+                  "id": "zimpol-20180612-041313",
+                  "path": "observations/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -3.5896,
+                  "observerWestLongitude": 196.6817,
+                  "sunLatitude": -5.8849,
+                  "sunWestLongitude": 196.6672,
+                  "rangeKm": 248712175.2,
+                  "northAzimuthDegrees": 65.5008,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.73,
+                    130.588
+                  ]
+                },
+                {
+                  "id": "zimpol-20180612-041718",
+                  "path": "observations/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -3.5902,
+                  "observerWestLongitude": 201.491,
+                  "sunLatitude": -5.8843,
+                  "sunWestLongitude": 201.4759,
+                  "rangeKm": 248711481.2,
+                  "northAzimuthDegrees": 65.5004,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.671,
+                    130.563
+                  ]
+                },
+                {
+                  "id": "zimpol-20180612-042123",
+                  "path": "observations/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -3.5908,
+                  "observerWestLongitude": 206.3296,
+                  "sunLatitude": -5.8837,
+                  "sunWestLongitude": 206.314,
+                  "rangeKm": 248710784.9,
+                  "northAzimuthDegrees": 65.5,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.4,
+                    130.848
+                  ]
+                },
+                {
+                  "id": "zimpol-20180612-042527",
+                  "path": "observations/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -3.5914,
+                  "observerWestLongitude": 211.1217,
+                  "sunLatitude": -5.8832,
+                  "sunWestLongitude": 211.1055,
+                  "rangeKm": 248710097.3,
+                  "northAzimuthDegrees": 65.4997,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.97,
+                    130.818
+                  ]
+                },
+                {
+                  "id": "zimpol-20180612-042930",
+                  "path": "observations/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -3.592,
+                  "observerWestLongitude": 215.922,
+                  "sunLatitude": -5.8826,
+                  "sunWestLongitude": 215.9052,
+                  "rangeKm": 248709410.5,
+                  "northAzimuthDegrees": 65.4993,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.658,
+                    130.711
+                  ]
+                },
+                {
+                  "id": "zimpol-20180617-030114",
+                  "path": "observations/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -4.6409,
+                  "observerWestLongitude": 337.634,
+                  "sunLatitude": -4.8879,
+                  "sunWestLongitude": 336.6765,
+                  "rangeKm": 248040232.6,
+                  "northAzimuthDegrees": 64.8667,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.16,
+                    129.292
+                  ]
+                },
+                {
+                  "id": "zimpol-20180617-030519",
+                  "path": "observations/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -4.6416,
+                  "observerWestLongitude": 342.444,
+                  "sunLatitude": -4.8873,
+                  "sunWestLongitude": 341.4859,
+                  "rangeKm": 248040101,
+                  "northAzimuthDegrees": 64.8664,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.781,
+                    129.48
+                  ]
+                },
+                {
+                  "id": "zimpol-20180617-030925",
+                  "path": "observations/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -4.6422,
+                  "observerWestLongitude": 347.2845,
+                  "sunLatitude": -4.8867,
+                  "sunWestLongitude": 346.3259,
+                  "rangeKm": 248039970.5,
+                  "northAzimuthDegrees": 64.866,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.296,
+                    129.117
+                  ]
+                },
+                {
+                  "id": "zimpol-20180617-031329",
+                  "path": "observations/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -4.6428,
+                  "observerWestLongitude": 352.096,
+                  "sunLatitude": -4.8862,
+                  "sunWestLongitude": 351.1368,
+                  "rangeKm": 248039842.6,
+                  "northAzimuthDegrees": 64.8656,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.504,
+                    128.943
+                  ]
+                },
+                {
+                  "id": "zimpol-20180617-031733",
+                  "path": "observations/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -4.6434,
+                  "observerWestLongitude": 356.8973,
+                  "sunLatitude": -4.8856,
+                  "sunWestLongitude": 355.9375,
+                  "rangeKm": 248039716.9,
+                  "northAzimuthDegrees": 64.8652,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.84,
+                    128.608
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-033943",
+                  "path": "observations/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1135,
+                  "observerWestLongitude": 269.4837,
+                  "sunLatitude": -0.2353,
+                  "sunWestLongitude": 264.463,
+                  "rangeKm": 257861577.7,
+                  "northAzimuthDegrees": 62.0358,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.804,
+                    128.117
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-034347",
+                  "path": "observations/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1139,
+                  "observerWestLongitude": 274.2833,
+                  "sunLatitude": -0.2347,
+                  "sunWestLongitude": 269.2622,
+                  "rangeKm": 257864025.3,
+                  "northAzimuthDegrees": 62.0355,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.367,
+                    129.46
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-034752",
+                  "path": "observations/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1144,
+                  "observerWestLongitude": 279.1126,
+                  "sunLatitude": -0.2341,
+                  "sunWestLongitude": 274.091,
+                  "rangeKm": 257866489.9,
+                  "northAzimuthDegrees": 62.0352,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    120.853,
+                    129.312
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-035156",
+                  "path": "observations/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1148,
+                  "observerWestLongitude": 283.9147,
+                  "sunLatitude": -0.2336,
+                  "sunWestLongitude": 278.8927,
+                  "rangeKm": 257868942.6,
+                  "northAzimuthDegrees": 62.0349,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.116,
+                    129.474
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-035559",
+                  "path": "observations/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1153,
+                  "observerWestLongitude": 288.7046,
+                  "sunLatitude": -0.233,
+                  "sunWestLongitude": 283.6821,
+                  "rangeKm": 257871390.8,
+                  "northAzimuthDegrees": 62.0346,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.548,
+                    129.741
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-044406",
+                  "path": "observations/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1208,
+                  "observerWestLongitude": 345.5446,
+                  "sunLatitude": -0.2262,
+                  "sunWestLongitude": 340.5169,
+                  "rangeKm": 257900580.6,
+                  "northAzimuthDegrees": 62.031,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.415,
+                    127.751
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-044811",
+                  "path": "observations/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1212,
+                  "observerWestLongitude": 350.3635,
+                  "sunLatitude": -0.2256,
+                  "sunWestLongitude": 345.3354,
+                  "rangeKm": 257903066.7,
+                  "northAzimuthDegrees": 62.0307,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.753,
+                    129.76
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-045217",
+                  "path": "observations/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1217,
+                  "observerWestLongitude": 355.1947,
+                  "sunLatitude": -0.2251,
+                  "sunWestLongitude": 350.1661,
+                  "rangeKm": 257905560.8,
+                  "northAzimuthDegrees": 62.0304,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.541,
+                    129.509
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-045620",
+                  "path": "observations/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1221,
+                  "observerWestLongitude": 359.9949,
+                  "sunLatitude": -0.2245,
+                  "sunWestLongitude": 354.9659,
+                  "rangeKm": 257908040.6,
+                  "northAzimuthDegrees": 62.0301,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.618,
+                    127.717
+                  ]
+                },
+                {
+                  "id": "zimpol-20180710-050022",
+                  "path": "observations/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -9.1226,
+                  "observerWestLongitude": 4.7461,
+                  "sunLatitude": -0.2239,
+                  "sunWestLongitude": 359.7166,
+                  "rangeKm": 257910496.7,
+                  "northAzimuthDegrees": 62.0298,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.598,
+                    129.907
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -640,7 +640,30 @@
               "maximumErrorMeters": 1700,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/9_Metis_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 578,
+                "expectedFaces": 1152
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 1700,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -653,7 +676,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e7d897753f71bad86cf6267c8728e37e8bf6a76ec0e5db5cd291e50395e24474",
+      "sha256": "ba680b11782c24a34291a8e9145334d2a40ebe53b77d46056b644c6d28560a0b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -758,12 +781,12 @@
               "surface": "metis-9-zimpol-surface@2x.webp",
               "poles": "metis-9-zimpol-surface@2x.webp",
               "source": {
-                "id": "metis-9-shape",
+                "id": "metis-9-adam-shape",
                 "path": "../manifest.json"
               },
               "falseColor": false,
               "noData": true,
-              "notes": "30 deconvolved VLT/SPHERE/ZIMPOL frames over four nights, 2018-06-08 to 2018-07-10, cast onto the released MPCD shape. Pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
+              "notes": "30 deconvolved VLT/SPHERE/ZIMPOL frames, 4 nights from 2018-06-08 to 2018-07-10, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.8. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -874,7 +897,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608064446",
+      "id": "metis-9-sphere-20180608064446",
       "path": "observations/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_44_46.109_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -895,7 +918,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -926,7 +949,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608064850",
+      "id": "metis-9-sphere-20180608064850",
       "path": "observations/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_48_50.462_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -947,7 +970,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -978,7 +1001,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608065255",
+      "id": "metis-9-sphere-20180608065255",
       "path": "observations/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_52_55.671_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -999,7 +1022,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1030,7 +1053,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608065658",
+      "id": "metis-9-sphere-20180608065658",
       "path": "observations/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T06_56_58.648_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1051,7 +1074,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1082,7 +1105,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608070101",
+      "id": "metis-9-sphere-20180608070101",
       "path": "observations/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_01_01.848_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1103,7 +1126,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1134,7 +1157,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608073141",
+      "id": "metis-9-sphere-20180608073141",
       "path": "observations/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_31_41.969_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1155,7 +1178,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1186,7 +1209,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608073546",
+      "id": "metis-9-sphere-20180608073546",
       "path": "observations/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_35_46.383_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1207,7 +1230,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1238,7 +1261,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608073952",
+      "id": "metis-9-sphere-20180608073952",
       "path": "observations/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_39_52.541_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1259,7 +1282,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1290,7 +1313,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608074356",
+      "id": "metis-9-sphere-20180608074356",
       "path": "observations/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_43_56.521_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1311,7 +1334,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1342,7 +1365,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180608074759",
+      "id": "metis-9-sphere-20180608074759",
       "path": "observations/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-08T07_47_59.720_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1363,7 +1386,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1394,7 +1417,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180612041313",
+      "id": "metis-9-sphere-20180612041313",
       "path": "observations/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_13_13.820_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1415,7 +1438,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1446,7 +1469,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180612041718",
+      "id": "metis-9-sphere-20180612041718",
       "path": "observations/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_17_18.070_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1467,7 +1490,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1498,7 +1521,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180612042123",
+      "id": "metis-9-sphere-20180612042123",
       "path": "observations/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_21_23.813_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1519,7 +1542,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1550,7 +1573,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180612042527",
+      "id": "metis-9-sphere-20180612042527",
       "path": "observations/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_25_27.190_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1571,7 +1594,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1602,7 +1625,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180612042930",
+      "id": "metis-9-sphere-20180612042930",
       "path": "observations/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-12T04_29_30.983_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1623,7 +1646,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1654,7 +1677,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180617030114",
+      "id": "metis-9-sphere-20180617030114",
       "path": "observations/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_01_14.897_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1675,7 +1698,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1706,7 +1729,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180617030519",
+      "id": "metis-9-sphere-20180617030519",
       "path": "observations/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_05_19.184_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1727,7 +1750,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1758,7 +1781,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180617030925",
+      "id": "metis-9-sphere-20180617030925",
       "path": "observations/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_09_25.024_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1779,7 +1802,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1810,7 +1833,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180617031329",
+      "id": "metis-9-sphere-20180617031329",
       "path": "observations/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_13_29.387_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1831,7 +1854,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1862,7 +1885,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180617031733",
+      "id": "metis-9-sphere-20180617031733",
       "path": "observations/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-06-17T03_17_33.234_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1883,7 +1906,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1914,7 +1937,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710033943",
+      "id": "metis-9-sphere-20180710033943",
       "path": "observations/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_39_43.675_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1935,7 +1958,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1966,7 +1989,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710034347",
+      "id": "metis-9-sphere-20180710034347",
       "path": "observations/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_43_47.453_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -1987,7 +2010,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2018,7 +2041,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710034752",
+      "id": "metis-9-sphere-20180710034752",
       "path": "observations/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_47_52.735_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2039,7 +2062,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2070,7 +2093,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710035156",
+      "id": "metis-9-sphere-20180710035156",
       "path": "observations/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_51_56.640_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2091,7 +2114,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2122,7 +2145,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710035559",
+      "id": "metis-9-sphere-20180710035559",
       "path": "observations/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T03_55_59.921_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2143,7 +2166,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2174,7 +2197,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710044406",
+      "id": "metis-9-sphere-20180710044406",
       "path": "observations/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_44_06.865_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2195,7 +2218,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2226,7 +2249,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710044811",
+      "id": "metis-9-sphere-20180710044811",
       "path": "observations/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_48_11.623_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2247,7 +2270,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2278,7 +2301,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710045217",
+      "id": "metis-9-sphere-20180710045217",
       "path": "observations/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_52_17.000_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2299,7 +2322,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2330,7 +2353,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710045620",
+      "id": "metis-9-sphere-20180710045620",
       "path": "observations/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T04_56_20.806_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2351,7 +2374,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2382,7 +2405,7 @@
     },
     {
       "kind": "source-input",
-      "id": "metis-sphere-20180710050022",
+      "id": "metis-9-sphere-20180710050022",
       "path": "observations/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
       "origin": "https://observations.lam.fr/astero/Data/9Metis/Deconv/d9Metis_2018-07-10T05_00_22.122_zpl_science_imaging_cam1.fits",
       "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
@@ -2403,7 +2426,7 @@
       "height": 256,
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
-      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey's and is not described in the file.",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2433,6 +2456,60 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "metis-9-adam-shape",
+      "path": "shape/9_Metis_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/9_Metis_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-metis-9-metis-9-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/metis-9/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/36"
+          }
+        ]
+      },
+      "sha256": "a46a7741e9dad9fe86134555aef2ed4826f35b0884229f6788c018446cd2a699",
+      "bytes": 31194,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/9_Metis_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/9_Metis_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -2445,8 +2522,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e7d897753f71bad86cf6267c8728e37e8bf6a76ec0e5db5cd291e50395e24474",
-      "bytes": 9432,
+      "sha256": "ba680b11782c24a34291a8e9145334d2a40ebe53b77d46056b644c6d28560a0b",
+      "bytes": 9629,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2567,55 +2644,55 @@
         "kind": "surfaceObservations"
       },
       "inputs": [
-        "metis-sphere-20180608064446",
-        "metis-sphere-20180608064850",
-        "metis-sphere-20180608065255",
-        "metis-sphere-20180608065658",
-        "metis-sphere-20180608070101",
-        "metis-sphere-20180608073141",
-        "metis-sphere-20180608073546",
-        "metis-sphere-20180608073952",
-        "metis-sphere-20180608074356",
-        "metis-sphere-20180608074759",
-        "metis-sphere-20180612041313",
-        "metis-sphere-20180612041718",
-        "metis-sphere-20180612042123",
-        "metis-sphere-20180612042527",
-        "metis-sphere-20180612042930",
-        "metis-sphere-20180617030114",
-        "metis-sphere-20180617030519",
-        "metis-sphere-20180617030925",
-        "metis-sphere-20180617031329",
-        "metis-sphere-20180617031733",
-        "metis-sphere-20180710033943",
-        "metis-sphere-20180710034347",
-        "metis-sphere-20180710034752",
-        "metis-sphere-20180710035156",
-        "metis-sphere-20180710035559",
-        "metis-sphere-20180710044406",
-        "metis-sphere-20180710044811",
-        "metis-sphere-20180710045217",
-        "metis-sphere-20180710045620",
-        "metis-sphere-20180710050022",
-        "metis-9-shape"
+        "metis-9-sphere-20180608064446",
+        "metis-9-sphere-20180608064850",
+        "metis-9-sphere-20180608065255",
+        "metis-9-sphere-20180608065658",
+        "metis-9-sphere-20180608070101",
+        "metis-9-sphere-20180608073141",
+        "metis-9-sphere-20180608073546",
+        "metis-9-sphere-20180608073952",
+        "metis-9-sphere-20180608074356",
+        "metis-9-sphere-20180608074759",
+        "metis-9-sphere-20180612041313",
+        "metis-9-sphere-20180612041718",
+        "metis-9-sphere-20180612042123",
+        "metis-9-sphere-20180612042527",
+        "metis-9-sphere-20180612042930",
+        "metis-9-sphere-20180617030114",
+        "metis-9-sphere-20180617030519",
+        "metis-9-sphere-20180617030925",
+        "metis-9-sphere-20180617031329",
+        "metis-9-sphere-20180617031733",
+        "metis-9-sphere-20180710033943",
+        "metis-9-sphere-20180710034347",
+        "metis-9-sphere-20180710034752",
+        "metis-9-sphere-20180710035156",
+        "metis-9-sphere-20180710035559",
+        "metis-9-sphere-20180710044406",
+        "metis-9-sphere-20180710044811",
+        "metis-9-sphere-20180710045217",
+        "metis-9-sphere-20180710045620",
+        "metis-9-sphere-20180710050022",
+        "metis-9-adam-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/metis-9/metis-9-zimpol-thumbnail.webp",
-          "bytes": 1636,
-          "sha256": "5f4097b99c81f13057fb7d568e2ff4b77db9ac779751cc579be18f522657d7a4",
+          "bytes": 1642,
+          "sha256": "4f061f9e3993303d43b75c918c79b2c5eac90c10719aea5b510c344f5177a367",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/metis-9/metis-9-zimpol-surface@2x.webp",
-          "bytes": 213016,
-          "sha256": "1aa54c6b315dd5e0a7d29bd76a064c5c84c579b0cbced3e06bfb6e8bde60174f",
+          "bytes": 221730,
+          "sha256": "de73c18d3d0222bd9ad1d158849d219b0784bbe4f5d832288e67bf583932b0ec",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "metis-9-shape",
+          "sourceId": "metis-9-adam-shape",
           "role": "geometry",
           "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
         }
@@ -2692,8 +2769,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/zimpol.webp",
-          "bytes": 12348,
-          "sha256": "3d03c1f75c75a6dc0552a081261c5c11bca6455216324162b2e1326bc8b1fd70",
+          "bytes": 11740,
+          "sha256": "de35835f3b5142b222713727839c140946af7c47546fe31350826b3bdab1991c",
           "verification": "bytes-verified"
         }
       ]
@@ -2730,11 +2807,11 @@
   },
   "lastPreparation": {
     "objectId": "metis-9",
-    "materialSha256": "be3c05c4a398d96d14a0c42a47edb78182ce584e303933fffad67d025e1a19c2",
+    "materialSha256": "78c37de13a77e2ea9276da2f544bfc8e14f0ae17019aa746497bb431da8750d6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "7e1223eaa6546d965e47c8f4431d82b23d2fe7287257865cdbd1e0ee457f0285"
+      "bindingsSha256": "da2ecc75278de019d32487e7afdbfd617751d6df87c41beddec77290409dbf5c"
     }
   }
 }

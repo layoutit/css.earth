@@ -134,7 +134,7 @@ Establish sample/line order, pixel origin, aspect ratio, flips and units, then
 inspect one native-pixel projection before fitting or baking. Read the product
 with this repository's own readers: [`tools/fits.mts`](../../../tools/fits.mts)
 for FITS, [`tools/fits-sky.mts`](../../../tools/fits-sky.mts) for which way a sky
-image faces, and [`tools/spice/`](../../../tools/spice) for kernels. Both are
+image faces and for resampling a rotated one, and [`tools/spice/`](../../../tools/spice) for kernels. Both are
 self-contained and run under plain Node, without installed packages or a
 prepared checkout, so an unbuilt worktree is not a reason to write a scratch
 decoder in another language. A scratch reader is untested, it can invert an
@@ -263,6 +263,7 @@ Read the applicable preparation guidance **before** processing those assets:
 | Soft photographic textures | [Photographic observations](references/surface-preparation.md#photographic-observations): trace intermediate resizes, sample registered originals at the delivered footprint, and separate sampling gains from encoding quality. |
 | Published photographic map or mapped paper figure | [Photographic investigation](references/photographic-investigation.md): verify the map frame, surface reference, usable pixels and inherited uncertainty; qualify any digitization before sampling. |
 | Unmapped photographs or images with archived surface geometry | [Registered photographic mosaics](references/registered-photographic-mosaics.md): camera holdouts where applicable, quality and visibility checks, deterministic selection, overlap levels, provenance and area coverage. |
+| Ground-based frames of a SPHERE survey asteroid | [SPHERE survey photographs](references/sphere-survey-photographs.md): frames, spin record and Horizons tables, then the survey's comparison figure measured through our cameras. |
 | Elevation or another measured scalar | [Scientific maps](references/surface-preparation.md#scientific-maps): datum, palette, readable relief and a truthful legend. |
 | Incomplete coverage | [Coverage](references/surface-preparation.md#coverage): source validity before interpolation; mark real gaps without erasing observed dark terrain. |
 | Irregular terrain or a triangle-mesh budget | [Irregular meshes](references/irregular-meshes.md): choose a representable source shape, simplify before baking, and use PolyCSS native raster triangles. |
@@ -389,7 +390,11 @@ their triggering acquisition, asset or delivery changes are present.
 A body PR is finished when its branch turns the change on end to end. It holds:
 
 - the recipe, source pins, acquisition operations and catalogued bindings;
-- the prepared outputs the recipe produces;
+- the prepared outputs the recipe produces: `object.json`'s pin and every other tracked `prepared/*` contract
+  file (`provenance.json`, `content.json`, `page.json`, …) committed as before; `prepared/runtime.json` and
+  `prepared/scene.json` themselves are not committed — refresh the body's `prepared-assets.json` inventory
+  (written automatically by the preparation tools) and publish the baked bytes with
+  `node tools/publish-runtime-assets.mts --object=<id>` before opening the PR;
 - the body README's account of sources, processing, results and known problems;
 - any published photometric model as a cited record, used inside its fitted range.
 

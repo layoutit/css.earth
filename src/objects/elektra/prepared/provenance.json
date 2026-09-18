@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "00d1befb184706aafc938ffbfaadf3dad2ce4168c718e4929312c2a078ff1540"
+    "sha256": "b0903bf86f4a2a62d046ba0761fdf0cbf1a0ceeaa82094a450e51b08a8a48e1e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "10e309e7b35b21e7078162e2c5204d5dd108eaa6adeb16bf72fa6822e6a5fae1"
+    "bindingsSha256": "d25cb0ec7e691836e251c843a3920315766be73f6b73e2b8b64d30bf412ea83c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "767065a7e6b4806c24f4f8eb316c4e4379abc1a099e84dff38c2d10955a9d9f9",
+      "sha256": "b690d88add11392502c5508807983d14b49d963e4c89babe70fe1eaadcae4bf7",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,6 +81,528 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "zimpol",
+              "format": "controlled-shape-camera",
+              "consumer": "sphere-photograph",
+              "metadata": {
+                "label": "SPHERE photograph",
+                "falseColor": false,
+                "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2019-07-30 to 2019-08-06, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.33. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 4,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1,
+                  99.5
+                ]
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20190730-083246",
+                  "path": "observations/d130Elektra_2019-07-30T08_32_46.922_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2895,
+                  "observerWestLongitude": 266.5392,
+                  "sunLatitude": -1.292,
+                  "sunWestLongitude": 254.8713,
+                  "rangeKm": 262643139.4,
+                  "northAzimuthDegrees": 199.8145,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    141.14,
+                    146.132
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-083636",
+                  "path": "observations/d130Elektra_2019-07-30T08_36_36.006_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2899,
+                  "observerWestLongitude": 270.9237,
+                  "sunLatitude": -1.2922,
+                  "sunWestLongitude": 259.2568,
+                  "rangeKm": 262639819.9,
+                  "northAzimuthDegrees": 199.8144,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.945,
+                    147.634
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-084026",
+                  "path": "observations/d130Elektra_2019-07-30T08_40_26.527_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2903,
+                  "observerWestLongitude": 275.3357,
+                  "sunLatitude": -1.2924,
+                  "sunWestLongitude": 263.6698,
+                  "rangeKm": 262636481.2,
+                  "northAzimuthDegrees": 199.8144,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.115,
+                    147.029
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-084414",
+                  "path": "observations/d130Elektra_2019-07-30T08_44_14.298_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2907,
+                  "observerWestLongitude": 279.6951,
+                  "sunLatitude": -1.2927,
+                  "sunWestLongitude": 268.0301,
+                  "rangeKm": 262633184,
+                  "northAzimuthDegrees": 199.8144,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.359,
+                    145.358
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-084803",
+                  "path": "observations/d130Elektra_2019-07-30T08_48_03.751_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2911,
+                  "observerWestLongitude": 284.0867,
+                  "sunLatitude": -1.2929,
+                  "sunWestLongitude": 272.4227,
+                  "rangeKm": 262629864.1,
+                  "northAzimuthDegrees": 199.8144,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    140.66,
+                    146.396
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-090011",
+                  "path": "observations/d130Elektra_2019-07-30T09_00_11.461_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2923,
+                  "observerWestLongitude": 298.0147,
+                  "sunLatitude": -1.2936,
+                  "sunWestLongitude": 286.3536,
+                  "rangeKm": 262619346,
+                  "northAzimuthDegrees": 199.8143,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.198,
+                    146.818
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-090401",
+                  "path": "observations/d130Elektra_2019-07-30T09_04_01.647_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2927,
+                  "observerWestLongitude": 302.4203,
+                  "sunLatitude": -1.2938,
+                  "sunWestLongitude": 290.7601,
+                  "rangeKm": 262616022.3,
+                  "northAzimuthDegrees": 199.8143,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.493,
+                    144.342
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-090752",
+                  "path": "observations/d130Elektra_2019-07-30T09_07_52.117_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2931,
+                  "observerWestLongitude": 306.8313,
+                  "sunLatitude": -1.294,
+                  "sunWestLongitude": 295.1721,
+                  "rangeKm": 262612696.1,
+                  "northAzimuthDegrees": 199.8142,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.43,
+                    144.426
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-091140",
+                  "path": "observations/d130Elektra_2019-07-30T09_11_40.649_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2935,
+                  "observerWestLongitude": 311.2053,
+                  "sunLatitude": -1.2943,
+                  "sunWestLongitude": 299.547,
+                  "rangeKm": 262609399.5,
+                  "northAzimuthDegrees": 199.8142,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.179,
+                    145.018
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-091530",
+                  "path": "observations/d130Elektra_2019-07-30T09_15_30.281_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -1.2939,
+                  "observerWestLongitude": 315.6003,
+                  "sunLatitude": -1.2945,
+                  "sunWestLongitude": 303.943,
+                  "rangeKm": 262606088.6,
+                  "northAzimuthDegrees": 199.8142,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.262,
+                    143.415
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-044151",
+                  "path": "observations/d130Elektra_2019-08-04T04_41_51.095_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0381,
+                  "observerWestLongitude": 349.5091,
+                  "sunLatitude": -1.6986,
+                  "sunWestLongitude": 339.5983,
+                  "rangeKm": 256914361.7,
+                  "northAzimuthDegrees": 199.7675,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.136,
+                    144.97
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-044540",
+                  "path": "observations/d130Elektra_2019-08-04T04_45_40.899_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0385,
+                  "observerWestLongitude": 353.9073,
+                  "sunLatitude": -1.6988,
+                  "sunWestLongitude": 343.9975,
+                  "rangeKm": 256911396.5,
+                  "northAzimuthDegrees": 199.7675,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.617,
+                    143.215
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-044931",
+                  "path": "observations/d130Elektra_2019-08-04T04_49_31.395_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0389,
+                  "observerWestLongitude": 358.3187,
+                  "sunLatitude": -1.699,
+                  "sunWestLongitude": 348.41,
+                  "rangeKm": 256908424.1,
+                  "northAzimuthDegrees": 199.7674,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    135.374,
+                    141.985
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-045319",
+                  "path": "observations/d130Elektra_2019-08-04T04_53_19.760_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0393,
+                  "observerWestLongitude": 2.6894,
+                  "sunLatitude": -1.6993,
+                  "sunWestLongitude": 352.7817,
+                  "rangeKm": 256905480.8,
+                  "northAzimuthDegrees": 199.7674,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.89,
+                    143.274
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-045708",
+                  "path": "observations/d130Elektra_2019-08-04T04_57_08.059_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0397,
+                  "observerWestLongitude": 7.0588,
+                  "sunLatitude": -1.6995,
+                  "sunWestLongitude": 357.1522,
+                  "rangeKm": 256902540.1,
+                  "northAzimuthDegrees": 199.7674,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.49,
+                    143.077
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-061435",
+                  "path": "observations/d130Elektra_2019-08-04T06_14_35.394_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0481,
+                  "observerWestLongitude": 96.0039,
+                  "sunLatitude": -1.704,
+                  "sunWestLongitude": 86.118,
+                  "rangeKm": 256843058.4,
+                  "northAzimuthDegrees": 199.7667,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.38,
+                    147.739
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-061823",
+                  "path": "observations/d130Elektra_2019-08-04T06_18_23.577_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0485,
+                  "observerWestLongitude": 100.3711,
+                  "sunLatitude": -1.7042,
+                  "sunWestLongitude": 90.4862,
+                  "rangeKm": 256840157.1,
+                  "northAzimuthDegrees": 199.7667,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.71,
+                    145.587
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-062214",
+                  "path": "observations/d130Elektra_2019-08-04T06_22_14.745_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0489,
+                  "observerWestLongitude": 104.7954,
+                  "sunLatitude": -1.7045,
+                  "sunWestLongitude": 94.9116,
+                  "rangeKm": 256837219.7,
+                  "northAzimuthDegrees": 199.7666,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.496,
+                    146.696
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-062603",
+                  "path": "observations/d130Elektra_2019-08-04T06_26_03.746_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0493,
+                  "observerWestLongitude": 109.1783,
+                  "sunLatitude": -1.7047,
+                  "sunWestLongitude": 99.2954,
+                  "rangeKm": 256834311.7,
+                  "northAzimuthDegrees": 199.7666,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    137.646,
+                    143.488
+                  ]
+                },
+                {
+                  "id": "zimpol-20190804-062953",
+                  "path": "observations/d130Elektra_2019-08-04T06_29_53.402_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.0497,
+                  "observerWestLongitude": 113.5736,
+                  "sunLatitude": -1.7049,
+                  "sunWestLongitude": 103.6918,
+                  "rangeKm": 256831397.2,
+                  "northAzimuthDegrees": 199.7666,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.231,
+                    144.412
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-091743",
+                  "path": "observations/d130Elektra_2019-08-05T09_17_43.959_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.2263,
+                  "observerWestLongitude": 159.9208,
+                  "sunLatitude": -1.799,
+                  "sunWestLongitude": 150.4654,
+                  "rangeKm": 255632500.3,
+                  "northAzimuthDegrees": 199.7535,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.971,
+                    132.905
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-092134",
+                  "path": "observations/d130Elektra_2019-08-05T09_21_34.530_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.2267,
+                  "observerWestLongitude": 164.3337,
+                  "sunLatitude": -1.7992,
+                  "sunWestLongitude": 154.8793,
+                  "rangeKm": 255629750.9,
+                  "northAzimuthDegrees": 199.7535,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.283,
+                    131.906
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-092523",
+                  "path": "observations/d130Elektra_2019-08-05T09_25_23.994_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.2271,
+                  "observerWestLongitude": 168.7254,
+                  "sunLatitude": -1.7994,
+                  "sunWestLongitude": 159.272,
+                  "rangeKm": 255627016.1,
+                  "northAzimuthDegrees": 199.7535,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.518,
+                    131.906
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-092912",
+                  "path": "observations/d130Elektra_2019-08-05T09_29_12.332_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.2276,
+                  "observerWestLongitude": 173.0955,
+                  "sunLatitude": -1.7997,
+                  "sunWestLongitude": 163.6432,
+                  "rangeKm": 255624296.2,
+                  "northAzimuthDegrees": 199.7534,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.549,
+                    132.011
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-093301",
+                  "path": "observations/d130Elektra_2019-08-05T09_33_01.414_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.228,
+                  "observerWestLongitude": 177.4799,
+                  "sunLatitude": -1.7999,
+                  "sunWestLongitude": 168.0286,
+                  "rangeKm": 255621568.7,
+                  "northAzimuthDegrees": 199.7534,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.374,
+                    132.339
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-052918",
+                  "path": "observations/d130Elektra_2019-08-06T05_29_18.996_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.3611,
+                  "observerWestLongitude": 111.2246,
+                  "sunLatitude": -1.8699,
+                  "sunWestLongitude": 102.0934,
+                  "rangeKm": 254756947.8,
+                  "northAzimuthDegrees": 199.7435,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    140.118,
+                    136.98
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-053309",
+                  "path": "observations/d130Elektra_2019-08-06T05_33_09.030_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.3615,
+                  "observerWestLongitude": 115.6272,
+                  "sunLatitude": -1.8702,
+                  "sunWestLongitude": 106.497,
+                  "rangeKm": 254754200.4,
+                  "northAzimuthDegrees": 199.7435,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.372,
+                    135.233
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-053659",
+                  "path": "observations/d130Elektra_2019-08-06T05_36_59.680_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.3619,
+                  "observerWestLongitude": 120.0415,
+                  "sunLatitude": -1.8704,
+                  "sunWestLongitude": 110.9125,
+                  "rangeKm": 254751447.4,
+                  "northAzimuthDegrees": 199.7435,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.331,
+                    135.301
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-054048",
+                  "path": "observations/d130Elektra_2019-08-06T05_40_48.145_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.3623,
+                  "observerWestLongitude": 124.4141,
+                  "sunLatitude": -1.8706,
+                  "sunWestLongitude": 115.2861,
+                  "rangeKm": 254748722.2,
+                  "northAzimuthDegrees": 199.7434,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    138.37,
+                    135.184
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-054436",
+                  "path": "observations/d130Elektra_2019-08-06T05_44_36.996_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -2.3627,
+                  "observerWestLongitude": 128.794,
+                  "sunLatitude": -1.8708,
+                  "sunWestLongitude": 119.667,
+                  "rangeKm": 254745994.4,
+                  "northAzimuthDegrees": 199.7434,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    139.561,
+                    135.66
+                  ]
+                }
+              ]
+            }
           ]
         },
         "lighting": {
@@ -118,7 +640,30 @@
               "maximumErrorMeters": 1700,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/130_Elektra_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 786,
+                "expectedFaces": 1568
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 1800,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -131,7 +676,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ab80b9a550445aa19889472514b078dad517458efda6a9ce3ccd0b29bb9bfeb1",
+      "sha256": "75e73c7f704a92ce0c72cded6783a687d647e84bf723eae77d4ea9cf2e0924a3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,6 +773,20 @@
                 "image": "/scenes/elektra/elektra-elevation-legend.webp"
               },
               "notes": "Source shape · radial height"
+            },
+            {
+              "id": "zimpol",
+              "label": "SPHERE photograph",
+              "thumbnail": "/scenes/elektra/elektra-zimpol-thumbnail.webp",
+              "surface": "elektra-zimpol-surface@2x.webp",
+              "poles": "elektra-zimpol-surface@2x.webp",
+              "source": {
+                "id": "elektra-adam-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true,
+              "notes": "30 deconvolved VLT/SPHERE/ZIMPOL frames, 4 nights from 2019-07-30 to 2019-08-06, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.33. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -337,6 +896,1620 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730083246",
+      "path": "observations/d130Elektra_2019-07-30T08_32_46.922_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_32_46.922_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730083246",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "3944eea1afcc0b920f496b1c5ad03d6d08eecfbc75a747e778446dec3f3e0fa9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T08_32_46.922_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_32_46.922_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730083636",
+      "path": "observations/d130Elektra_2019-07-30T08_36_36.006_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_36_36.006_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730083636",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "2ded7f6070ee82be710d2eb960cd7ca8b005c4c8ff58f9d100034cf77a89fe08",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T08_36_36.006_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_36_36.006_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730084026",
+      "path": "observations/d130Elektra_2019-07-30T08_40_26.527_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_40_26.527_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730084026",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/5"
+          }
+        ]
+      },
+      "sha256": "31f4553a96de77759646b09c4f9b2588fdfc58eb209094e97e59a9e8a5041e47",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T08_40_26.527_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_40_26.527_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730084414",
+      "path": "observations/d130Elektra_2019-07-30T08_44_14.298_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_44_14.298_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730084414",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/6"
+          }
+        ]
+      },
+      "sha256": "8b5719e400d3e35411d2f306c25452e2d32585648be58780e2343a83cba3ef6e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T08_44_14.298_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_44_14.298_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730084803",
+      "path": "observations/d130Elektra_2019-07-30T08_48_03.751_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_48_03.751_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730084803",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "ca78ef40b22250b6f37d1613937a2058083e5022a22a39f7ab0a6414cfe9169e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T08_48_03.751_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T08_48_03.751_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730090011",
+      "path": "observations/d130Elektra_2019-07-30T09_00_11.461_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_00_11.461_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730090011",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/8"
+          }
+        ]
+      },
+      "sha256": "a421af494bbcaa33bedd248457f614cbf78b803457d21e5965a399057b116afa",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T09_00_11.461_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_00_11.461_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730090401",
+      "path": "observations/d130Elektra_2019-07-30T09_04_01.647_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_04_01.647_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730090401",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/9"
+          }
+        ]
+      },
+      "sha256": "6f0acc1737dbdadbeb0649f30c125815e195d8a7a6c7e8c5303f43fba9ee5680",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T09_04_01.647_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_04_01.647_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730090752",
+      "path": "observations/d130Elektra_2019-07-30T09_07_52.117_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_07_52.117_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730090752",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/10"
+          }
+        ]
+      },
+      "sha256": "43aeb6f0cff93d775238090c4bafd3d40fff5ce5ffb7a84e9c25140f1f0be549",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T09_07_52.117_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_07_52.117_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730091140",
+      "path": "observations/d130Elektra_2019-07-30T09_11_40.649_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_11_40.649_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730091140",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "610791aee4da62430ff43c38f8bc3856abe5507106bcecf5fa8e21e5808d9918",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T09_11_40.649_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_11_40.649_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190730091530",
+      "path": "observations/d130Elektra_2019-07-30T09_15_30.281_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_15_30.281_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190730091530",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/12"
+          }
+        ]
+      },
+      "sha256": "61b368d3d32532f7fcad81b22d6a42c91403ced1c1aca3e850168fdcbfcdd78d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-07-30T09_15_30.281_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-07-30T09_15_30.281_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804044151",
+      "path": "observations/d130Elektra_2019-08-04T04_41_51.095_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_41_51.095_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804044151",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/13"
+          }
+        ]
+      },
+      "sha256": "0345fbb2dfb916ef99502f334bca2472905964978ee08885f30cf3dd1ac65cd9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T04_41_51.095_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_41_51.095_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804044540",
+      "path": "observations/d130Elektra_2019-08-04T04_45_40.899_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_45_40.899_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804044540",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/14"
+          }
+        ]
+      },
+      "sha256": "816f1162fdbfac66f7a465da53fe1b0f4d469ed89fd69cb17985a9e4eb385cd7",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T04_45_40.899_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_45_40.899_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804044931",
+      "path": "observations/d130Elektra_2019-08-04T04_49_31.395_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_49_31.395_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804044931",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/15"
+          }
+        ]
+      },
+      "sha256": "7a4a3f9a775e9f25ce482b12832f8058abdd7976b193de7e9629e9bd7f1d19be",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T04_49_31.395_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_49_31.395_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804045319",
+      "path": "observations/d130Elektra_2019-08-04T04_53_19.760_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_53_19.760_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804045319",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/16"
+          }
+        ]
+      },
+      "sha256": "5496162f53b44cd9418c2de93871bd96aafe599670c6a6618894e2f58710d9f6",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T04_53_19.760_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_53_19.760_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804045708",
+      "path": "observations/d130Elektra_2019-08-04T04_57_08.059_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_57_08.059_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804045708",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/17"
+          }
+        ]
+      },
+      "sha256": "5bd222c91e18af95f8f72bf2105267b69a47ff6995a37674012abeb0792a3ca8",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T04_57_08.059_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T04_57_08.059_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804061435",
+      "path": "observations/d130Elektra_2019-08-04T06_14_35.394_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_14_35.394_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804061435",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/18"
+          }
+        ]
+      },
+      "sha256": "772bc89507f04d189951af82f694a21b59cade7dd42f7c24a79c20eb064b8b9f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T06_14_35.394_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_14_35.394_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804061823",
+      "path": "observations/d130Elektra_2019-08-04T06_18_23.577_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_18_23.577_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804061823",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/19"
+          }
+        ]
+      },
+      "sha256": "7b2c931c1a1f4b61620d54dda13f2dfd99f509f594c1b4f4e013a277b7ff062a",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T06_18_23.577_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_18_23.577_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804062214",
+      "path": "observations/d130Elektra_2019-08-04T06_22_14.745_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_22_14.745_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804062214",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "59a9396f8861f9272b22c41d14d72e3c9668f5011a971a0951c5950ba2e3e15a",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T06_22_14.745_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_22_14.745_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804062603",
+      "path": "observations/d130Elektra_2019-08-04T06_26_03.746_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_26_03.746_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804062603",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/21"
+          }
+        ]
+      },
+      "sha256": "424a881baa8f5408af94fef0377318313f1be0223971aa8f3a731f077676f4d4",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T06_26_03.746_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_26_03.746_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190804062953",
+      "path": "observations/d130Elektra_2019-08-04T06_29_53.402_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_29_53.402_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190804062953",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/22"
+          }
+        ]
+      },
+      "sha256": "00469c639d0b513eab503bc570109d77de49e657ee674b31b03183b52a26893a",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-04T06_29_53.402_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-04T06_29_53.402_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190805091743",
+      "path": "observations/d130Elektra_2019-08-05T09_17_43.959_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_17_43.959_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190805091743",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/23"
+          }
+        ]
+      },
+      "sha256": "1c2a00b9c473940c050ef70ea1164b7e4c116b4491059432d45c6352b4202e1f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-05T09_17_43.959_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_17_43.959_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190805092134",
+      "path": "observations/d130Elektra_2019-08-05T09_21_34.530_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_21_34.530_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190805092134",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/24"
+          }
+        ]
+      },
+      "sha256": "a848c03a4d8ff3c44b859aae21cd00cbe04aefede4fbd75617cb6a4a2197a4bc",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-05T09_21_34.530_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_21_34.530_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190805092523",
+      "path": "observations/d130Elektra_2019-08-05T09_25_23.994_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_25_23.994_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190805092523",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/25"
+          }
+        ]
+      },
+      "sha256": "d90935a50b7f6804cf5790b07ca364b636568fb1df757dbfd2505a27e7dafdac",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-05T09_25_23.994_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_25_23.994_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190805092912",
+      "path": "observations/d130Elektra_2019-08-05T09_29_12.332_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_29_12.332_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190805092912",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/26"
+          }
+        ]
+      },
+      "sha256": "0ce4e252fdff56b8ba764601cc996c4de214e85cca5f3ec1f61eafc4a0326f60",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-05T09_29_12.332_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_29_12.332_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190805093301",
+      "path": "observations/d130Elektra_2019-08-05T09_33_01.414_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_33_01.414_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190805093301",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/27"
+          }
+        ]
+      },
+      "sha256": "8c3070fbf12be4ce36fd67473a1b1d3dbf9a4d6147ce8d0079688b347555c640",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-05T09_33_01.414_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-05T09_33_01.414_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190806052918",
+      "path": "observations/d130Elektra_2019-08-06T05_29_18.996_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_29_18.996_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190806052918",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/28"
+          }
+        ]
+      },
+      "sha256": "feac81c74b3e8abc1b9f47776c7f62bf18c8c4df8d6c1ba3f49878add1fcc2d9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-06T05_29_18.996_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_29_18.996_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190806053309",
+      "path": "observations/d130Elektra_2019-08-06T05_33_09.030_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_33_09.030_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190806053309",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/29"
+          }
+        ]
+      },
+      "sha256": "32893ac73fa26f7c962e1c069f3c510935e8a8ff8a1490ef15f0ae649d13eee9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-06T05_33_09.030_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_33_09.030_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190806053659",
+      "path": "observations/d130Elektra_2019-08-06T05_36_59.680_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_36_59.680_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190806053659",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/30"
+          }
+        ]
+      },
+      "sha256": "458e8c2c7256314c0f511fac3c8e9f59f8aa5909eb6fd9e17327374aedb48b01",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-06T05_36_59.680_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_36_59.680_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190806054048",
+      "path": "observations/d130Elektra_2019-08-06T05_40_48.145_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_40_48.145_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190806054048",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/31"
+          }
+        ]
+      },
+      "sha256": "e04dde3a0decf1dfc451374e0a36c7ab6f89fb8e8f1ecbe0c477ef431c468669",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-06T05_40_48.145_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_40_48.145_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-sphere-20190806054436",
+      "path": "observations/d130Elektra_2019-08-06T05_44_36.996_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_44_36.996_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-sphere-20190806054436",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/32"
+          }
+        ]
+      },
+      "sha256": "1aa638037f5eb6ef0b4a81366008eb595b93cb961f132e60a42502816c057fe7",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d130Elektra_2019-08-06T05_44_36.996_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/130Elektra/Deconv/d130Elektra_2019-08-06T05_44_36.996_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "elektra-adam-shape",
+      "path": "shape/130_Elektra_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/130_Elektra_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-elektra-elektra-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/elektra/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/33"
+          }
+        ]
+      },
+      "sha256": "c82bdade0fa4261f08e161b8dd1a20e9f83e9f8ef961632ac396dab37bb2df51",
+      "bytes": 42831,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/130_Elektra_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/130_Elektra_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -349,8 +2522,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ab80b9a550445aa19889472514b078dad517458efda6a9ce3ccd0b29bb9bfeb1",
-      "bytes": 7527,
+      "sha256": "75e73c7f704a92ce0c72cded6783a687d647e84bf723eae77d4ea9cf2e0924a3",
+      "bytes": 8730,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -453,6 +2626,80 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "zimpol",
+      "label": "SPHERE photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "zimpol"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "elektra-sphere-20190730083246",
+        "elektra-sphere-20190730083636",
+        "elektra-sphere-20190730084026",
+        "elektra-sphere-20190730084414",
+        "elektra-sphere-20190730084803",
+        "elektra-sphere-20190730090011",
+        "elektra-sphere-20190730090401",
+        "elektra-sphere-20190730090752",
+        "elektra-sphere-20190730091140",
+        "elektra-sphere-20190730091530",
+        "elektra-sphere-20190804044151",
+        "elektra-sphere-20190804044540",
+        "elektra-sphere-20190804044931",
+        "elektra-sphere-20190804045319",
+        "elektra-sphere-20190804045708",
+        "elektra-sphere-20190804061435",
+        "elektra-sphere-20190804061823",
+        "elektra-sphere-20190804062214",
+        "elektra-sphere-20190804062603",
+        "elektra-sphere-20190804062953",
+        "elektra-sphere-20190805091743",
+        "elektra-sphere-20190805092134",
+        "elektra-sphere-20190805092523",
+        "elektra-sphere-20190805092912",
+        "elektra-sphere-20190805093301",
+        "elektra-sphere-20190806052918",
+        "elektra-sphere-20190806053309",
+        "elektra-sphere-20190806053659",
+        "elektra-sphere-20190806054048",
+        "elektra-sphere-20190806054436",
+        "elektra-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/elektra/elektra-zimpol-thumbnail.webp",
+          "bytes": 1378,
+          "sha256": "01485dc2966d70ae04d597fcc125cdce087699730cf67c08e14e2c21d2023d7c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/elektra/elektra-zimpol-surface@2x.webp",
+          "bytes": 229402,
+          "sha256": "d7bf26f243352dce0ede688bf68b226f238647e15eae6f7beee0f579f09085c3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "elektra-adam-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -504,6 +2751,31 @@
       ]
     },
     {
+      "id": "preview:zimpol",
+      "label": "SPHERE photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "zimpol"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/zimpol.webp",
+          "bytes": 11448,
+          "sha256": "376f43d0ea963e90f38e2c674d83918a265a76fb3bb4cdac69df8d26e3c93862",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -535,11 +2807,11 @@
   },
   "lastPreparation": {
     "objectId": "elektra",
-    "materialSha256": "9d9898e663dc58c67214667510452578a112b9ff2bceaaa0a89556031946fe79",
+    "materialSha256": "c1767d517bf5217505df45d3b4367de704b86844ec15d879af0bd5f0f24e2e6c",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "10e309e7b35b21e7078162e2c5204d5dd108eaa6adeb16bf72fa6822e6a5fae1"
+      "bindingsSha256": "d25cb0ec7e691836e251c843a3920315766be73f6b73e2b8b64d30bf412ea83c"
     }
   }
 }

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29d93a92c5981f9cffc0461276a0a2de76f419de755455c91d3a62de75209287"
+    "sha256": "5919fe4d71eabe25a1454ef365cab7c87973c63de6086b31a240b6a2c976c212"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "f753f94a8a21ebb9e8c34d57ee9c17475b7450ca6f684ee0d81b7908ada6d079"
+    "bindingsSha256": "54543e5041c67e37273d9ea5e3c270fa06c6d18305fc839df4478915bd040219"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "91b6deb40f7800e0b7c9e7cd14f6577b4a5684f8a9e829054f0562f25d0d5ae4",
+      "sha256": "bd2790d53aed8ffef5a6540c9faa54fa5fff50793ed80833b52b28077c5b0ef2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -82,6 +82,208 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "zimpol",
+              "format": "controlled-shape-camera",
+              "consumer": "sphere-photograph",
+              "metadata": {
+                "label": "SPHERE photograph",
+                "falseColor": false,
+                "coverage": "10 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 2 nights from 2017-11-02 to 2017-11-29, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.25. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 4,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1,
+                  99.5
+                ]
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20171102-030317",
+                  "path": "observations/d48Doris_2017-11-02T03_03_17.127_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 19.4243,
+                  "observerWestLongitude": 345.2488,
+                  "sunLatitude": 16.2041,
+                  "sunWestLongitude": 345.9102,
+                  "rangeKm": 289137839.8,
+                  "northAzimuthDegrees": 53.1814,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.727,
+                    141.242
+                  ]
+                },
+                {
+                  "id": "zimpol-20171102-030828",
+                  "path": "observations/d48Doris_2017-11-02T03_08_28.198_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 19.4239,
+                  "observerWestLongitude": 347.8657,
+                  "sunLatitude": 16.2046,
+                  "sunWestLongitude": 348.5259,
+                  "rangeKm": 289136802.6,
+                  "northAzimuthDegrees": 53.1818,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    135.186,
+                    141.209
+                  ]
+                },
+                {
+                  "id": "zimpol-20171102-031339",
+                  "path": "observations/d48Doris_2017-11-02T03_13_39.943_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 19.4235,
+                  "observerWestLongitude": 350.4883,
+                  "sunLatitude": 16.2051,
+                  "sunWestLongitude": 351.1472,
+                  "rangeKm": 289135766.3,
+                  "northAzimuthDegrees": 53.1821,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.476,
+                    140.5
+                  ]
+                },
+                {
+                  "id": "zimpol-20171102-031848",
+                  "path": "observations/d48Doris_2017-11-02T03_18_48.922_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 19.4231,
+                  "observerWestLongitude": 353.0877,
+                  "sunLatitude": 16.2055,
+                  "sunWestLongitude": 353.7453,
+                  "rangeKm": 289134742.2,
+                  "northAzimuthDegrees": 53.1825,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.692,
+                    139.684
+                  ]
+                },
+                {
+                  "id": "zimpol-20171102-032357",
+                  "path": "observations/d48Doris_2017-11-02T03_23_57.744_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 19.4228,
+                  "observerWestLongitude": 355.6857,
+                  "sunLatitude": 16.206,
+                  "sunWestLongitude": 356.3421,
+                  "rangeKm": 289133721.9,
+                  "northAzimuthDegrees": 53.1829,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.219,
+                    138.511
+                  ]
+                },
+                {
+                  "id": "zimpol-20171129-001904",
+                  "path": "observations/d48Doris_SPHER.2017-11-29T00_19_04.632_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 16.6014,
+                  "observerWestLongitude": 86.4989,
+                  "sunLatitude": 19.8417,
+                  "sunWestLongitude": 78.1504,
+                  "rangeKm": 297316352.8,
+                  "northAzimuthDegrees": 55.4582,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.743,
+                    134.088
+                  ]
+                },
+                {
+                  "id": "zimpol-20171129-002415",
+                  "path": "observations/d48Doris_SPHER.2017-11-29T00_24_15.954_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 16.6011,
+                  "observerWestLongitude": 89.1176,
+                  "sunLatitude": 19.8422,
+                  "sunWestLongitude": 80.768,
+                  "rangeKm": 297319363.2,
+                  "northAzimuthDegrees": 55.4584,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    120.007,
+                    134.415
+                  ]
+                },
+                {
+                  "id": "zimpol-20171129-002927",
+                  "path": "observations/d48Doris_SPHER.2017-11-29T00_29_27.504_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 16.6007,
+                  "observerWestLongitude": 91.7383,
+                  "sunLatitude": 19.8426,
+                  "sunWestLongitude": 83.3876,
+                  "rangeKm": 297322378.6,
+                  "northAzimuthDegrees": 55.4587,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.896,
+                    134.46
+                  ]
+                },
+                {
+                  "id": "zimpol-20171129-003437",
+                  "path": "observations/d48Doris_SPHER.2017-11-29T00_34_37.685_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 16.6003,
+                  "observerWestLongitude": 94.3474,
+                  "sunLatitude": 19.8431,
+                  "sunWestLongitude": 85.9957,
+                  "rangeKm": 297325383.6,
+                  "northAzimuthDegrees": 55.4589,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.75,
+                    133.692
+                  ]
+                },
+                {
+                  "id": "zimpol-20171129-003946",
+                  "path": "observations/d48Doris_SPHER.2017-11-29T00_39_46.595_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 16.6,
+                  "observerWestLongitude": 96.9458,
+                  "sunLatitude": 19.8436,
+                  "sunWestLongitude": 88.593,
+                  "rangeKm": 297328379.1,
+                  "northAzimuthDegrees": 55.4591,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    120.004,
+                    135.51
+                  ]
+                }
+              ]
+            }
           ]
         },
         "lighting": {
@@ -120,7 +322,30 @@
               "maximumErrorMeters": 1,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/48_Doris_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 578,
+                "expectedFaces": 1152
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 2000,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons elements and DAMIT model 1845 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -133,7 +358,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "79f4b2e8ec34dca2a5ea831b2ea94d91c0b4246149cbc21c73da36fe1f52e8ab",
+      "sha256": "98cc1264a45c018525b74d086eaa61d1cc8d515d222adf96edea2460a9a78ffc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -243,6 +468,20 @@
                 "image": "/scenes/doris/doris-elevation-legend.webp"
               },
               "notes": "Source shape · radial height"
+            },
+            {
+              "id": "zimpol",
+              "label": "SPHERE photograph",
+              "thumbnail": "/scenes/doris/doris-zimpol-thumbnail.webp",
+              "surface": "doris-zimpol-surface@2x.webp",
+              "poles": "doris-zimpol-surface@2x.webp",
+              "source": {
+                "id": "doris-adam-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true,
+              "notes": "10 deconvolved VLT/SPHERE/ZIMPOL frames, 2017-11-02 and 2017-11-29, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.25. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -339,6 +578,580 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "doris-sphere-20171102030317",
+      "path": "observations/d48Doris_2017-11-02T03_03_17.127_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_03_17.127_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171102030317",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/2"
+          }
+        ]
+      },
+      "sha256": "5d9b2469d031e55d108ceeb3d4abe9d4ccaed2b883cc73beb54d15eab1056623",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_2017-11-02T03_03_17.127_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_03_17.127_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171102030828",
+      "path": "observations/d48Doris_2017-11-02T03_08_28.198_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_08_28.198_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171102030828",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "d8ee4e109ff0ebec884eeffe388f497ee919f8efeea84f2d69f622fe438cd8f8",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_2017-11-02T03_08_28.198_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_08_28.198_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171102031339",
+      "path": "observations/d48Doris_2017-11-02T03_13_39.943_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_13_39.943_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171102031339",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "0f04f0551fe1d7fdbb66e8b7e8d41ee7e62df2ed4234418c1eaf7dbae7e38d31",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_2017-11-02T03_13_39.943_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_13_39.943_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171102031848",
+      "path": "observations/d48Doris_2017-11-02T03_18_48.922_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_18_48.922_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171102031848",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/5"
+          }
+        ]
+      },
+      "sha256": "fe4c1df5fa92d116e47ef0f6ca12608c06ee487b18d268c7959b452dea5e492e",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_2017-11-02T03_18_48.922_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_18_48.922_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171102032357",
+      "path": "observations/d48Doris_2017-11-02T03_23_57.744_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_23_57.744_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171102032357",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/6"
+          }
+        ]
+      },
+      "sha256": "939d1503674c83c3ebf89fd93e33b73402cc53e2b6251d6d81b4b702796ac848",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_2017-11-02T03_23_57.744_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_2017-11-02T03_23_57.744_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171129001904",
+      "path": "observations/d48Doris_SPHER.2017-11-29T00_19_04.632_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_19_04.632_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171129001904",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "55b76bf13f68dbf4da0a59569f9c081762c7cfef467f8541f4efdc202044ac4d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_SPHER.2017-11-29T00_19_04.632_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_19_04.632_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171129002415",
+      "path": "observations/d48Doris_SPHER.2017-11-29T00_24_15.954_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_24_15.954_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171129002415",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/8"
+          }
+        ]
+      },
+      "sha256": "d97867e01405ba2832f7dac83af4cdcf9ae88044cd48dc643eb672d68213f142",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_SPHER.2017-11-29T00_24_15.954_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_24_15.954_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171129002927",
+      "path": "observations/d48Doris_SPHER.2017-11-29T00_29_27.504_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_29_27.504_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171129002927",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/9"
+          }
+        ]
+      },
+      "sha256": "6d56d48a8310d67b8258d45b577f394962392861266da9540e267f26a44bf075",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_SPHER.2017-11-29T00_29_27.504_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_29_27.504_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171129003437",
+      "path": "observations/d48Doris_SPHER.2017-11-29T00_34_37.685_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_34_37.685_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171129003437",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/10"
+          }
+        ]
+      },
+      "sha256": "ba8e13218faf3b4d6a8fb90e0e8b455dc093b8d57c9dabae93dd5ff3fd24cd3f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_SPHER.2017-11-29T00_34_37.685_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_34_37.685_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-sphere-20171129003946",
+      "path": "observations/d48Doris_SPHER.2017-11-29T00_39_46.595_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_39_46.595_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-sphere-20171129003946",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "938389a4867d266ad28243734f812be45884d1e843bf18d7b8df8d2aa08b34d9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d48Doris_SPHER.2017-11-29T00_39_46.595_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/48Doris/Deconv/d48Doris_SPHER.2017-11-29T00_39_46.595_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "doris-adam-shape",
+      "path": "shape/48_Doris_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/48_Doris_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-doris-doris-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/doris/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/12"
+          }
+        ]
+      },
+      "sha256": "f754b745e10945e032fa187c050410e350dd1d052f1a754d0202a801359270c2",
+      "bytes": 31332,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/48_Doris_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/48_Doris_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -351,8 +1164,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "79f4b2e8ec34dca2a5ea831b2ea94d91c0b4246149cbc21c73da36fe1f52e8ab",
-      "bytes": 7665,
+      "sha256": "98cc1264a45c018525b74d086eaa61d1cc8d515d222adf96edea2460a9a78ffc",
+      "bytes": 8845,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -455,6 +1268,60 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "zimpol",
+      "label": "SPHERE photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "zimpol"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "doris-sphere-20171102030317",
+        "doris-sphere-20171102030828",
+        "doris-sphere-20171102031339",
+        "doris-sphere-20171102031848",
+        "doris-sphere-20171102032357",
+        "doris-sphere-20171129001904",
+        "doris-sphere-20171129002415",
+        "doris-sphere-20171129002927",
+        "doris-sphere-20171129003437",
+        "doris-sphere-20171129003946",
+        "doris-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/doris/doris-zimpol-thumbnail.webp",
+          "bytes": 1544,
+          "sha256": "4e416f1a62faa1098542003829953a63ac410bd77584672162efa9fa09484c5b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/doris/doris-zimpol-surface@2x.webp",
+          "bytes": 203788,
+          "sha256": "53e569a61b7be1c58859f1eae4536efae882e468af41404469ffdd98105270c3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "doris-adam-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -506,6 +1373,31 @@
       ]
     },
     {
+      "id": "preview:zimpol",
+      "label": "SPHERE photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "zimpol"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/zimpol.webp",
+          "bytes": 7358,
+          "sha256": "8c0815ec4f3e06539d39042f7982109e0e0528ad7f8a9f2ce84e197feab51da5",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -537,11 +1429,11 @@
   },
   "lastPreparation": {
     "objectId": "doris",
-    "materialSha256": "8226e12d065e41f5fb35b9cac3071b99d80b7444dcb98c1592135afa6c35871b",
+    "materialSha256": "105626839e745477bd2845b78164bd9dd48ea343124b6067ecc25b4ed2b898e7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "f753f94a8a21ebb9e8c34d57ee9c17475b7450ca6f684ee0d81b7908ada6d079"
+      "bindingsSha256": "54543e5041c67e37273d9ea5e3c270fa06c6d18305fc839df4478915bd040219"
     }
   }
 }

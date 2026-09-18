@@ -1,0 +1,37 @@
+{
+  "id": "source-urania-urania-sphere-20180927063749",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Urania · urania sphere 20180927063749",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/30Urania/Deconv/d30Urania_2018-09-27T06_37_49.293_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/urania/source/manifest.json",
+      "revision": "9d984f641976e683f23c99aa244d00a4d4974be6",
+      "sha256": "f2ab00dbb83fb2f9860fffcc615b579d273e3a6bd78f2f5de81df73b10faee29",
+      "locator": "/inputs/15"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The urania sphere 20180927063749 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

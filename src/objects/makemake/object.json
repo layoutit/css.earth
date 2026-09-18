@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "05116d3b27643b41904111aeef1253d63afaf4054717e5af4c73e4c637aa516a"
+    "sha256": "b0d95e4beb7874d8501e064613bb30eefc59f845f01f0c4b4024a9b37e6cda5f"
   },
   "properties": {
     "preparation": {
@@ -84,6 +84,11 @@
               "id": "color",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -129,11 +134,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f2825c2d0b45f980b6f6b57d4ac7407ad567bc9b426781664acf930407162712"
+        "sha256": "04e4989a5df379f98ffe69d041dc147a23fdbaff5dc0d445bc44e72117a4b21c"
       }
     },
     "catalog": {
-      "illustrationLenses": [],
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "Makemake",
       "classification": "dwarf-planet",
       "color": "#f0e9d3",

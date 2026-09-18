@@ -17,9 +17,13 @@ No image resolves Makemake's surface. The Color lens shows one colour for the wh
 
 The values are transcribed in [the colour record](source/photometry/disc-color.json). Hromakina et al. found no colour change with rotation, within the uncertainties. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference); their sha256 values equal the checksums in CIE's dataset metadata.
 
+The Illustration lens is not an observation. It shows the base-colour texture of NASA's [Makemake 3D Model](https://science.nasa.gov/resource/makemake-3d-model/), credited to NASA Visualization Technology Applications and Development (VTAD). The original GLB is pinned in [the manifest](source/manifest.json) (4,441,844 bytes); on 2026-09-18 NASA's server still returned the same size, last modified 2024-10-19. The resource page gives only a one-line description and the credit; it does not say how the texture was made. Because no image resolves Makemake, its terrain, albedo pattern and colour are the artist's. Preparation carries the texture through the model's own texture coordinates onto the displayed sphere and does not repaint it. The map's left edge is the texture's own 0° column, so its longitudes are arbitrary. Color stays the default lens. The illustration is listed in the package's illustration lenses, so it never counts as imagery: Makemake stays "Shape only". NASA content is generally not subject to copyright in the United States and is credited to NASA ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+
 ## Evidence
 
-Run of 2026-09-16 (this version): `node tools/prepare-object.mts makemake` prepared the package with the Color lens. `node --test tools/objects/observation/disc-integrated-color.test.mts site/test/object-discovery.test.mts tests/objects/unit/makemake/runtime-contract.test.mts` passes.
+Run of 2026-09-18 (this version): preparation added the Illustration lens and dropped the 35 unused 1x files. The 36 files kept, including every Color lens image, are byte-identical to the previous pins. Discovery is unchanged: no imagery, not illustration-only. Measured this session, the illustration's area-weighted mean colour is sRGB 160, 119, 103 (#a07767) against the measured #f0e9d3; its linear luminance is about 27% of the measured colour's.
+
+Run of 2026-09-16: `node tools/prepare-object.mts makemake` prepared the package with the Color lens. `node --test tools/objects/observation/disc-integrated-color.test.mts site/test/object-discovery.test.mts tests/objects/unit/makemake/runtime-contract.test.mts` passes.
 
 Measured sensitivity, with the same method: each published colour uncertainty moves an sRGB channel by at most 3 of 255 (B−V ± 0.03 moves blue from 211 to 209–214). The older MBOSS colours from Rabinowitz et al. (2007), which have no V−R, move blue to 218. A 10% lower albedo gives 229, 222, 202.
 
@@ -29,6 +33,7 @@ Measured sensitivity, with the same method: each published colour uncertainty mo
 - The texture value is scaled to the V geometric albedo (0.82). The rendered disc brightness under the shared lighting is not checked against that albedo.
 - Hromakina et al. note the albedo would be about 10% lower if an undetected satellite adds light. The published 0.82 is used unchanged.
 - A uniform colour hides any albedo pattern. Hromakina et al. mention that thermal modelling has needed two albedo terrains; no map of them exists.
+- The Illustration lens is far darker and redder than the measured whole-disc colour (see Evidence). The illustration is shown as NASA published it; no colour is corrected.
 - Display pole and meridian are arbitrary, explicitly recorded as such. The reported rotation period is content only and does not drive an invented ephemeris. Orbital placement uses the existing pinned JPL elements at the shared 2026-09-04 epoch.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

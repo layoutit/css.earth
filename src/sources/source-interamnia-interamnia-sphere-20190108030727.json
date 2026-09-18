@@ -1,0 +1,37 @@
+{
+  "id": "source-interamnia-interamnia-sphere-20190108030727",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Interamnia · interamnia sphere 20190108030727",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/704Interamnia/Deconv/d704Interamnia_2019-01-08T03_07_27.107_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/interamnia/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "07b7a6e11d5726c175e8c46cffd53a61de095dd67f5731e9b11d88b4ff81fdf4",
+      "locator": "/inputs/19"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The interamnia sphere 20190108030727 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

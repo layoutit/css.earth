@@ -393,8 +393,8 @@
     {
       "id": "charon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 10478,
-      "expectedSha256": "7725965ada011228099956849262ea2b6059787e578f6bf6c0b296883fa4dc64",
+      "expectedBytes": 10443,
+      "expectedSha256": "63038330488fec4ba41fa9890a0c19f463ad0186b45c5f10e5b580216d5c0529",
       "origin": "Repository-authored Charon raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -412,8 +412,8 @@
     {
       "id": "charon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1590,
-      "expectedSha256": "1460ece1a2dbb501d7922ee1c324a91045e7f6d44a861e937d4c88626aee2f3c",
+      "expectedBytes": 1596,
+      "expectedSha256": "c6e36a0012bdef3b9392a258158639f9a98d336079be2d22e90f1320c37b98d9",
       "origin": "Repository-authored Charon geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -506,8 +506,8 @@
     {
       "id": "charon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16719,
-      "expectedSha256": "3acd0748cd93b5175123b489ad027e2aa4ebd58f9e8d508302200e86516ba75f",
+      "expectedBytes": 16755,
+      "expectedSha256": "9cc8a4efc0f2a82b02031af680a473c4f4e42dfcaff223ef07c90045ab05c01f",
       "origin": "Repository-authored Charon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

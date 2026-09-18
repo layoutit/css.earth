@@ -69,8 +69,8 @@
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge fitted here to TESS transits of HD 189733b. The disc itself is unresolved.",
         "thumbnail": "hd-189733-lens-color.webp",
-        "surface": "hd-189733-surface-color.webp",
-        "poles": "hd-189733-poles-color.webp",
+        "surface": "hd-189733-surface-color@2x.webp",
+        "poles": "hd-189733-poles-color@2x.webp",
         "source": {
           "id": "hd-189733-stellar-color",
           "path": "../manifest.json",

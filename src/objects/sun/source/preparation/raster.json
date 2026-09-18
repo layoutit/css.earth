@@ -7,10 +7,6 @@
   "height": 512,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
@@ -25,50 +21,189 @@
   "surfaces": [
     {
       "id": "photosphere",
-      "source": "sdo/continuum/CR2311",
+      "source": "hmi/continuum",
       "falseColor": false,
       "output": "sun-surface-{id}{suffix}.webp",
       "thumbnail": "sun-lens-{id}.webp",
       "science": {
         "synoptic": {
-          "kind": "continuum-disc-mosaic",
-          "mapFiles": [
-            "sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260514_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260515_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260516_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260517_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260518_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260519_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260520_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260521_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260522_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260523_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260524_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260525_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260527_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260528_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260529_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260530_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260531_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260601_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260602_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260603_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260604_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260605_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260606_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260607_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260608_000000_1024_HMIIC.jpg",
-            "sdo/continuum/CR2311/20260609_000000_1024_HMIIC.jpg"
-          ],
+          "kind": "hmi-continuum-mosaic",
           "continuum": {
-            "start": "2026-05-12T21:56:01Z",
-            "stop": "2026-06-09T02:57:22Z",
+            "keywords": "hmi/continuum/keywords.json",
+            "frames": [
+              {
+                "file": "hmi/continuum/20260513_000000_TAI.fits",
+                "record": "2026.05.13_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260514_000000_TAI.fits",
+                "record": "2026.05.14_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260515_000000_TAI.fits",
+                "record": "2026.05.15_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260516_000000_TAI.fits",
+                "record": "2026.05.16_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260517_000000_TAI.fits",
+                "record": "2026.05.17_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260518_000000_TAI.fits",
+                "record": "2026.05.18_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260519_000000_TAI.fits",
+                "record": "2026.05.19_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260520_000000_TAI.fits",
+                "record": "2026.05.20_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260521_000000_TAI.fits",
+                "record": "2026.05.21_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260522_000000_TAI.fits",
+                "record": "2026.05.22_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260523_000000_TAI.fits",
+                "record": "2026.05.23_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260524_000000_TAI.fits",
+                "record": "2026.05.24_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260525_000000_TAI.fits",
+                "record": "2026.05.25_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260526_120000_TAI.fits",
+                "record": "2026.05.26_12:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260527_000000_TAI.fits",
+                "record": "2026.05.27_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260528_000000_TAI.fits",
+                "record": "2026.05.28_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260529_000000_TAI.fits",
+                "record": "2026.05.29_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260530_000000_TAI.fits",
+                "record": "2026.05.30_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260531_000000_TAI.fits",
+                "record": "2026.05.31_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260601_000000_TAI.fits",
+                "record": "2026.06.01_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260602_000000_TAI.fits",
+                "record": "2026.06.02_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260603_000000_TAI.fits",
+                "record": "2026.06.03_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260604_000000_TAI.fits",
+                "record": "2026.06.04_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260605_000000_TAI.fits",
+                "record": "2026.06.05_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260606_000000_TAI.fits",
+                "record": "2026.06.06_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260607_000000_TAI.fits",
+                "record": "2026.06.07_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260608_000000_TAI.fits",
+                "record": "2026.06.08_00:00:00_TAI"
+              },
+              {
+                "file": "hmi/continuum/20260609_000000_TAI.fits",
+                "record": "2026.06.09_00:00:00_TAI"
+              }
+            ],
+            "limbDarkening": {
+              "file": "hmi/limb-darkening/20260513_000000_TAI.fits",
+              "keywords": "hmi/limb-darkening/keywords.json",
+              "record": "2026.05.13_00:00:00_TAI"
+            },
             "maximumLatitudeDegrees": 80,
-            "minimumDiscRadius": 450,
-            "maximumDiscRadius": 490,
-            "discBrightnessThreshold": 72,
-            "solarPoleTiltDegrees": 7.25
+            "palette": {
+              "intensities": [
+                0,
+                0.56,
+                0.6,
+                0.7,
+                0.8,
+                0.9,
+                1.0,
+                1.08
+              ],
+              "colors": [
+                [
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  249,
+                  85,
+                  1
+                ],
+                [
+                  254,
+                  91,
+                  1
+                ],
+                [
+                  254,
+                  111,
+                  1
+                ],
+                [
+                  254,
+                  133,
+                  1
+                ],
+                [
+                  253,
+                  155,
+                  2
+                ],
+                [
+                  253,
+                  172,
+                  24
+                ],
+                [
+                  255,
+                  178,
+                  37
+                ]
+              ]
+            }
           },
           "polarStabilization": {
             "latitudeSegments": 16,
@@ -146,7 +281,7 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": false,
+            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {
@@ -206,7 +341,7 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": false,
+            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {

@@ -6,7 +6,7 @@ import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Expression, CallExpression, VariableDeclarator } from "estree";
 import { isRecord, requireRecord, requireArray, requireString } from "./source-values.mts";
-import { nodeName, propertyKey, sourceStart, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
+import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from "./runtime-ast.mts";
 import type { RuntimeSourceReader } from "./runtime-source-graph.mts";
 import { SCENE_OBJECTS as OBJECTS } from "../site/objects.mts";
 import { parseNavigationDistance } from '../site/navigation-distance.mts';
@@ -17,7 +17,9 @@ import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "..
 import { readPreparedJsonExports, readPreparedPresentationModule, requirePreparedDefinitionSource,
   requirePreparedControlSource } from "./check-prepared-presentation.mts";
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
-import { readDescriptorDefinition, requireDescriptorAdapterSource } from './prepared-object-source.mts';
+import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from './prepared-object-source.mts';
+import { requireAuthoredWorldFrameReceipt } from './authored-world-frame.mts';
+import { pinObjectDocuments, type DocumentPinChange } from './pin-object-documents.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 
 const runtimePath = "src/platform/object-runtime.mts";
@@ -123,32 +125,61 @@ function preparedLightingProjectionRecord(node: Node, file: string) {
     field.value.object?.type === 'Identifier' && field.value.object.name === 'projection' && nameOf(field.value.property) === 'sun';
 }
 
-// The application fetches one pinned JSON plan. Its Node-only import has a
-// concrete URL and JSON attributes, so it contributes data rather than an executor.
-function worldContextPlanImport(ast: Program | null, file: string): number | null {
+// The application fetches one pinned JSON plan: over the network in a real
+// browser, or, on the Node-only `file:` branch, through one JSON-attributed
+// dynamic import. That import's URL comes from a Node-only path helper module,
+// imported by a literal dynamic import inside that same branch. The helper is
+// followed and scanned like any other dependency, as Node-side code (its `node:`
+// builtins are allowed; code construction and computed imports are not). The
+// JSON import names the same project file as `source`, and its attributes mean it
+// can only load data, never an executor, so it is the one computed import this
+// plan may contain.
+const worldContextNodeHelper = '../tools/prepared-world-context-node-source.mts';
+function worldContextPlanImport(ast: Program | null, file: string): {data: number; helper: number} | null {
   if (!ast || file !== 'site/world-context-plan.mts') return null;
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
   const source = nodes.find((node): node is VariableDeclarator => node.type === 'VariableDeclarator' && nameOf(node.id) === 'source');
   const url = astKind(source?.init, 'NewExpression');
   const base = astKind(url?.arguments[1], 'MemberExpression');
   const parser = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === '../src/renderers/css/dist/index.js');
-  const imports = nodes.filter(node => node.type === 'ImportExpression');
-  const imported = imports[0];
-  const options = imported?.type === 'ImportExpression' && 'options' in imported ? imported.options as Node | null : null;
-  const json = property(property(options, 'with')?.value, 'type')?.value;
+  const imports = nodes.filter((node): node is Extract<Node, {type: 'ImportExpression'}> => node.type === 'ImportExpression');
+  const helper = imports.find(node => node.source.type === 'Literal' && node.source.value === worldContextNodeHelper);
+  const data = imports.find(node => node !== helper);
+  const options = (node: Node | undefined) => node?.type === 'ImportExpression' && 'options' in node ? node.options as Node | null : null;
+  const json = property(property(options(data), 'with')?.value, 'type')?.value;
+  const locate = astKind(data?.source, 'CallExpression');
+  const locateBase = astKind(locate?.arguments[0], 'MemberExpression');
+  const locatePath = astKind(locate?.arguments[1], 'Literal');
+  // The helper's only binding is destructured straight from its awaited literal import.
+  const binding = nodes.find((node): node is VariableDeclarator => node.type === 'VariableDeclarator' && node.id.type === 'ObjectPattern' &&
+    astKind(node.init, 'AwaitExpression')?.argument === helper);
+  const pattern = astKind(binding?.id, 'ObjectPattern');
   const output = nodes.find((node): node is VariableDeclarator => node.type === 'VariableDeclarator' && nameOf(node.id) === 'APPLICATION_WORLD_CONTEXT');
   const validation = astKind(output?.init, 'CallExpression');
   const read = astKind(astKind(validation?.arguments[0], 'AwaitExpression')?.argument, 'CallExpression');
+  const sourcePath = url?.arguments[0]?.type === 'Literal' ? url.arguments[0].value : undefined;
+  // Both imports sit in the one `source.protocol === 'file:'` branch a browser never takes.
+  const nodeBranch = nodes.find((node): node is Extract<Node, {type: 'IfStatement'}> => node.type === 'IfStatement' &&
+    node.test.type === 'BinaryExpression' && node.test.operator === '===' && memberPath(node.test.left)?.join('.') === 'source.protocol' &&
+    node.test.right.type === 'Literal' && node.test.right.value === 'file:');
+  const inNodeBranch = (node: Node | undefined) => !!node && !!nodeBranch && sourceStart(node) >= sourceStart(nodeBranch.consequent) && sourceEnd(node) <= sourceEnd(nodeBranch.consequent);
   if (!url || nameOf(url.callee) !== 'URL' || url.arguments.length !== 2 ||
-      url.arguments[0]?.type !== 'Literal' || url.arguments[0].value !== '../src/objects/sun/prepared/world-context.json' ||
+      sourcePath !== '../src/objects/sun/prepared/world-context.json' ||
       base?.object.type !== 'MetaProperty' || base.object.meta.name !== 'import' || base.object.property.name !== 'meta' || nameOf(base.property) !== 'url' ||
       parser?.type !== 'ImportDeclaration' || !parser.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'parsePreparedWorldContext' && specifier.local.name === 'parsePreparedWorldContext') ||
-      imports.length !== 1 || imported?.type !== 'ImportExpression' || memberPath(imported.source)?.join('.') !== 'source.href' ||
-      json?.type !== 'Literal' || json.value !== 'json' || nameOf(validation?.callee) !== 'parsePreparedWorldContext' || validation?.arguments.length !== 1 ||
+      imports.length !== 2 || !helper || options(helper) || !data || !inNodeBranch(helper) || !inNodeBranch(data) ||
+      json?.type !== 'Literal' || json.value !== 'json' ||
+      pattern?.properties.length !== 1 || pattern.properties[0]?.type !== 'Property' ||
+      propertyKey(pattern.properties[0].key) !== 'nodeProjectFileUrl' || nameOf(pattern.properties[0].value) !== 'nodeProjectFileUrl' ||
+      nameOf(locate?.callee) !== 'nodeProjectFileUrl' || locate?.arguments.length !== 2 ||
+      locateBase?.object.type !== 'MetaProperty' || locateBase.object.meta.name !== 'import' || locateBase.object.property.name !== 'meta' || nameOf(locateBase.property) !== 'url' ||
+      // Project-relative spelling of the same file `source` names from `site/`.
+      locatePath?.value !== sourcePath.slice('../'.length) ||
+      nameOf(validation?.callee) !== 'parsePreparedWorldContext' || validation?.arguments.length !== 1 ||
       nameOf(read?.callee) !== 'readPreparedWorldContext' || read?.arguments.length !== 0) return null;
-  // No assignment may redirect the statically bound source.
-  if (nodes.some(node => node.type === 'AssignmentExpression' && (nameOf(node.left) === 'source' || memberPath(node.left)?.[0] === 'source'))) return null;
-  return sourceStart(imported);
+  // No assignment may redirect the statically bound source or the helper binding.
+  if (nodes.some(node => node.type === 'AssignmentExpression' && (['source', 'nodeProjectFileUrl'].includes(nameOf(node.left)) || memberPath(node.left)?.[0] === 'source'))) return null;
+  return { data: sourceStart(data), helper: sourceStart(helper) };
 }
 
 export function inspectObjectRuntimeModule(source: string, file: string, { shared = false, shellContent = false, serverOnly = false,
@@ -202,10 +233,12 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
   walkRuntimeAst(ast, node => { if (node.type === "ImportDeclaration" ||
       node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration" ||
       // A dynamic import with a literal specifier is followed like a static one; only a computed specifier hides its owner.
-      node.type === "ImportExpression" && node.source.type === "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) {
+      node.type === "ImportExpression" && node.source.type === "Literal" && !registryImportOffsets.has(sourceStart(node))) {
     if (isRecord(node) && (node.importKind === 'type' || node.exportKind === 'type')) return;
     const imported = requireString(node.type === "ImportExpression" ? (node.source.type === "Literal" ? node.source.value : undefined) : node.source?.value);
-    const onServer = node.type !== "ImportExpression" && (astroRoot ? frontmatterImports.has(node) : serverOnly);
+    // The world-context plan's validated helper import runs only on its Node `file:` branch.
+    const onServer = node.type === "ImportExpression" ? sourceStart(node) === contextImport?.helper :
+      (astroRoot ? frontmatterImports.has(node) : serverOnly);
     (onServer ? serverImports : clientImports).add(imported);
     if (!registryDescriptors.has(imported) && !(onServer && isBuiltin(imported))) imports.push(imported);
     for (const specifier of node.type === "ImportDeclaration" ? node.specifiers : []) {
@@ -215,7 +248,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
     }
   } });
   walkRuntimeAst(ast, node => {
-    if (node.type === "ImportExpression" && node.source.type !== "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport) note(node, "Computed dynamic imports hide ownership from the static closure");
+    if (node.type === "ImportExpression" && node.source.type !== "Literal" && !registryImportOffsets.has(sourceStart(node)) && sourceStart(node) !== contextImport?.data) note(node, "Computed dynamic imports hide ownership from the static closure");
     if ((node.type === "CallExpression" || node.type === "NewExpression") &&
         ["eval", "Function"].includes(nameOf(node.callee) || propertyName(node.callee))) note(node, "Runtime code construction hides ownership");
     if (shared) {
@@ -975,11 +1008,46 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   return report;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
+/**
+ * `--receipts`: every registered object's physical frame receipt (`prepared/world-navigation.json` against its
+ * manifest pins and descriptor frame), its authored source pins, and its document pins, from tracked files only.
+ * It needs no restored prepared scene or runtime, so the contract-lint job runs it minutes before `--all` could.
+ * Every object is checked and every failure is reported together.
+ */
+export async function auditPhysicalFrameReceipts({ root = process.cwd(), objects = OBJECTS,
+  readText = (path: string) => readFile(path, "utf8"),
+  stalePins = (directory: string) => pinObjectDocuments(directory, { write: false }) }:
+  { root?: string; objects?: readonly AuditObject[]; readText?: RuntimeSourceReader;
+    stalePins?: (directory: string) => Promise<DocumentPinChange[]> } = {}): Promise<{ receipts: number; failures: string[] }> {
+  const failures: string[] = [];
+  let receipts = 0;
+  for (const object of objects) {
+    const directory = resolve(root, "src/objects", object.id);
+    try {
+      const descriptor = requireRecord(JSON.parse(await readText(resolve(directory, "object.json"))), `${object.id} descriptor`);
+      if (await requireAuthoredSourcePins({ objectId: object.id, descriptor, root, source: readText, closure: new Set() })) {
+        await requireAuthoredWorldFrameReceipt({ descriptor, directory, readText });
+        receipts++;
+      }
+      for (const change of await stalePins(directory)) {
+        failures.push(`${object.id}: stale pin in ${change.file} for ${change.path} (run: pnpm pin:documents ${object.id})`);
+      }
+    } catch (error) { failures.push(`${object.id}: ${errorMessage(error)}`); }
+  }
+  return { receipts, failures };
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.argv.includes("--receipts")) {
+  if (process.argv.length !== 3) throw new Error("--receipts checks every registered object and takes no other option.");
+  const { receipts, failures } = await auditPhysicalFrameReceipts();
+  for (const failure of failures) console.error(failure);
+  if (failures.length) process.exitCode = 1;
+  else console.log(`${OBJECTS.length} registered objects: ${receipts} physical frame receipt(s), source pins and document pins are current.`);
+} else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2), index = args.indexOf("--object");
   const id = index < 0 ? null : args[index + 1];
   if (id && !OBJECTS.some(object => object.id === id)) throw new Error(`Unknown registered object: ${id}`);
-  if (!args.includes("--inventory") && !args.includes("--all") && !id) throw new Error("Use --inventory, --object ID, or --all.");
+  if (!args.includes("--inventory") && !args.includes("--all") && !id) throw new Error("Use --inventory, --object ID, --all, or --receipts.");
   const report = await auditObjectRuntimeOwnership({ objects: id ? OBJECTS.filter(object => object.id === id) : OBJECTS,
     strict: !args.includes("--inventory") });
   console.log(JSON.stringify(report, null, 2));

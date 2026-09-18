@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a08dd2e7d6967ff50fd66bfaf133bf3ef4b272655706fc474475aac0d4cd8df"
+    "sha256": "37c412c3e03b61050297ee43be0cc5e06f3205e97defb5bf0db28ec922eca715"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b676316f16f24607396565a1c2891ed3e5257715132720f917959f2b82971f58"
+    "bindingsSha256": "fd156523e0b0abeddb2e3aa584704b217325f52d70d2f01bd8859dbb8a71e526"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f8bcb8fb629e98ad81981625089b665de02f699087625c5dfe4744314aac9e35",
+      "sha256": "3f4c1617097a551156133e39c90e3b3f64c8c0a4b764c22fd111e23a458e08c2",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,6 +81,560 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "zimpol",
+              "format": "controlled-shape-camera",
+              "consumer": "sphere-photograph",
+              "metadata": {
+                "label": "SPHERE photograph",
+                "falseColor": false,
+                "coverage": "32 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 7 nights from 2019-07-28 to 2019-08-07, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.24. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 4,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1,
+                  99.5
+                ]
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20190728-081908",
+                  "path": "observations/d45Eugenia_2019-07-28T08_19_08.851_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.3677,
+                  "observerWestLongitude": 155.8708,
+                  "sunLatitude": 57.7769,
+                  "sunWestLongitude": 158.0715,
+                  "rangeKm": 239847130,
+                  "northAzimuthDegrees": 184.2584,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.325,
+                    138.781
+                  ]
+                },
+                {
+                  "id": "zimpol-20190728-082311",
+                  "path": "observations/d45Eugenia_2019-07-28T08_23_11.470_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.3675,
+                  "observerWestLongitude": 160.1266,
+                  "sunLatitude": 57.7769,
+                  "sunWestLongitude": 162.3298,
+                  "rangeKm": 239847806.5,
+                  "northAzimuthDegrees": 184.2572,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.841,
+                    138.599
+                  ]
+                },
+                {
+                  "id": "zimpol-20190728-082713",
+                  "path": "observations/d45Eugenia_2019-07-28T08_27_13.640_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.3673,
+                  "observerWestLongitude": 164.3746,
+                  "sunLatitude": 57.7769,
+                  "sunWestLongitude": 166.5802,
+                  "rangeKm": 239848483,
+                  "northAzimuthDegrees": 184.256,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.378,
+                    137.91
+                  ]
+                },
+                {
+                  "id": "zimpol-20190728-083114",
+                  "path": "observations/d45Eugenia_2019-07-28T08_31_14.269_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.3671,
+                  "observerWestLongitude": 168.5956,
+                  "sunLatitude": 57.7769,
+                  "sunWestLongitude": 170.8036,
+                  "rangeKm": 239849156.4,
+                  "northAzimuthDegrees": 184.2549,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.382,
+                    137.201
+                  ]
+                },
+                {
+                  "id": "zimpol-20190729-073255",
+                  "path": "observations/d45Eugenia_2019-07-29T07_32_55.910_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2941,
+                  "observerWestLongitude": 182.8178,
+                  "sunLatitude": 57.7788,
+                  "sunWestLongitude": 185.8477,
+                  "rangeKm": 240069694.6,
+                  "northAzimuthDegrees": 183.8601,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.377,
+                    133.665
+                  ]
+                },
+                {
+                  "id": "zimpol-20190729-073658",
+                  "path": "observations/d45Eugenia_2019-07-29T07_36_58.660_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2939,
+                  "observerWestLongitude": 187.076,
+                  "sunLatitude": 57.7788,
+                  "sunWestLongitude": 190.1083,
+                  "rangeKm": 240070469.5,
+                  "northAzimuthDegrees": 183.859,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.452,
+                    132.951
+                  ]
+                },
+                {
+                  "id": "zimpol-20190729-074100",
+                  "path": "observations/d45Eugenia_2019-07-29T07_41_00.059_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2937,
+                  "observerWestLongitude": 191.3104,
+                  "sunLatitude": 57.7788,
+                  "sunWestLongitude": 194.3452,
+                  "rangeKm": 240071241.5,
+                  "northAzimuthDegrees": 183.8578,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.426,
+                    133.661
+                  ]
+                },
+                {
+                  "id": "zimpol-20190729-074501",
+                  "path": "observations/d45Eugenia_2019-07-29T07_45_01.756_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2935,
+                  "observerWestLongitude": 195.5501,
+                  "sunLatitude": 57.7788,
+                  "sunWestLongitude": 198.5874,
+                  "rangeKm": 240072016,
+                  "northAzimuthDegrees": 183.8566,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.968,
+                    132.095
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-073402",
+                  "path": "observations/d45Eugenia_2019-07-30T07_34_02.920_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2163,
+                  "observerWestLongitude": 259.5832,
+                  "sunLatitude": 57.7792,
+                  "sunWestLongitude": 263.4666,
+                  "rangeKm": 240340282,
+                  "northAzimuthDegrees": 183.4516,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    135.124,
+                    139.201
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-073804",
+                  "path": "observations/d45Eugenia_2019-07-30T07_38_04.060_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2161,
+                  "observerWestLongitude": 263.8131,
+                  "sunLatitude": 57.7792,
+                  "sunWestLongitude": 267.699,
+                  "rangeKm": 240341165.5,
+                  "northAzimuthDegrees": 183.4504,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.998,
+                    140.806
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-074206",
+                  "path": "observations/d45Eugenia_2019-07-30T07_42_06.419_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2159,
+                  "observerWestLongitude": 268.0644,
+                  "sunLatitude": 57.7792,
+                  "sunWestLongitude": 271.9527,
+                  "rangeKm": 240342055,
+                  "northAzimuthDegrees": 183.4493,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.968,
+                    141.791
+                  ]
+                },
+                {
+                  "id": "zimpol-20190730-074606",
+                  "path": "observations/d45Eugenia_2019-07-30T07_46_06.249_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 59.2157,
+                  "observerWestLongitude": 272.2714,
+                  "sunLatitude": 57.7792,
+                  "sunWestLongitude": 276.162,
+                  "rangeKm": 240342936.6,
+                  "northAzimuthDegrees": 183.4481,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.991,
+                    138.989
+                  ]
+                },
+                {
+                  "id": "zimpol-20190803-041243",
+                  "path": "observations/d45Eugenia_2019-08-03T04_12_43.059_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.9012,
+                  "observerWestLongitude": 350.0711,
+                  "sunLatitude": 57.7663,
+                  "sunWestLongitude": 357.194,
+                  "rangeKm": 241757151.5,
+                  "northAzimuthDegrees": 181.9223,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    135.449,
+                    142.998
+                  ]
+                },
+                {
+                  "id": "zimpol-20190803-041645",
+                  "path": "observations/d45Eugenia_2019-08-03T04_16_45.194_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.901,
+                  "observerWestLongitude": 354.3185,
+                  "sunLatitude": 57.7663,
+                  "sunWestLongitude": 1.4438,
+                  "rangeKm": 241758400.5,
+                  "northAzimuthDegrees": 181.9212,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.748,
+                    141.542
+                  ]
+                },
+                {
+                  "id": "zimpol-20190803-042048",
+                  "path": "observations/d45Eugenia_2019-08-03T04_20_48.127_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.9008,
+                  "observerWestLongitude": 358.5799,
+                  "sunLatitude": 57.7662,
+                  "sunWestLongitude": 5.7076,
+                  "rangeKm": 241759655.7,
+                  "northAzimuthDegrees": 181.92,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    135.435,
+                    141.632
+                  ]
+                },
+                {
+                  "id": "zimpol-20190803-051109",
+                  "path": "observations/d45Eugenia_2019-08-03T05_11_09.288_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.8978,
+                  "observerWestLongitude": 51.5756,
+                  "sunLatitude": 57.766,
+                  "sunWestLongitude": 58.7328,
+                  "rangeKm": 241775436.6,
+                  "northAzimuthDegrees": 181.906,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    135.11,
+                    139.405
+                  ]
+                },
+                {
+                  "id": "zimpol-20190803-051512",
+                  "path": "observations/d45Eugenia_2019-08-03T05_15_12.125_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.8976,
+                  "observerWestLongitude": 55.8354,
+                  "sunLatitude": 57.766,
+                  "sunWestLongitude": 62.9949,
+                  "rangeKm": 241776718.6,
+                  "northAzimuthDegrees": 181.9048,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.807,
+                    139.27
+                  ]
+                },
+                {
+                  "id": "zimpol-20190803-051912",
+                  "path": "observations/d45Eugenia_2019-08-03T05_19_12.409_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.8974,
+                  "observerWestLongitude": 60.0503,
+                  "sunLatitude": 57.766,
+                  "sunWestLongitude": 67.2122,
+                  "rangeKm": 241777989.1,
+                  "northAzimuthDegrees": 181.9037,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.119,
+                    140.861
+                  ]
+                },
+                {
+                  "id": "zimpol-20190803-052312",
+                  "path": "observations/d45Eugenia_2019-08-03T05_23_12.319_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.8971,
+                  "observerWestLongitude": 64.2587,
+                  "sunLatitude": 57.766,
+                  "sunWestLongitude": 71.423,
+                  "rangeKm": 241779259.6,
+                  "northAzimuthDegrees": 181.9026,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.704,
+                    141.455
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-050716",
+                  "path": "observations/d45Eugenia_2019-08-05T05_07_16.526_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.7271,
+                  "observerWestLongitude": 198.709,
+                  "sunLatitude": 57.7502,
+                  "sunWestLongitude": 207.5039,
+                  "rangeKm": 242744653.9,
+                  "northAzimuthDegrees": 181.1487,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.968,
+                    130.609
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-051117",
+                  "path": "observations/d45Eugenia_2019-08-05T05_11_17.624_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.7269,
+                  "observerWestLongitude": 202.9383,
+                  "sunLatitude": 57.7502,
+                  "sunWestLongitude": 211.7355,
+                  "rangeKm": 242746147.9,
+                  "northAzimuthDegrees": 181.1477,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.77,
+                    130.004
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-051520",
+                  "path": "observations/d45Eugenia_2019-08-05T05_15_20.564_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.7266,
+                  "observerWestLongitude": 207.1998,
+                  "sunLatitude": 57.7502,
+                  "sunWestLongitude": 215.9994,
+                  "rangeKm": 242747655.4,
+                  "northAzimuthDegrees": 181.1465,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    121.546,
+                    131.515
+                  ]
+                },
+                {
+                  "id": "zimpol-20190805-051922",
+                  "path": "observations/d45Eugenia_2019-08-05T05_19_22.795_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.7264,
+                  "observerWestLongitude": 211.449,
+                  "sunLatitude": 57.7502,
+                  "sunWestLongitude": 220.2508,
+                  "rangeKm": 242749160.4,
+                  "northAzimuthDegrees": 181.1455,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    122.154,
+                    132.497
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-005320",
+                  "path": "observations/d45Eugenia_2019-08-06T00_53_20.176_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.6556,
+                  "observerWestLongitude": 7.0532,
+                  "sunLatitude": 57.7419,
+                  "sunWestLongitude": 16.5117,
+                  "rangeKm": 243191127.5,
+                  "northAzimuthDegrees": 180.8473,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.652,
+                    137.274
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-005721",
+                  "path": "observations/d45Eugenia_2019-08-06T00_57_21.323_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.6553,
+                  "observerWestLongitude": 11.2834,
+                  "sunLatitude": 57.7419,
+                  "sunWestLongitude": 20.7442,
+                  "rangeKm": 243192612.1,
+                  "northAzimuthDegrees": 180.8462,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.208,
+                    136.277
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-010120",
+                  "path": "observations/d45Eugenia_2019-08-06T01_01_20.438_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.6551,
+                  "observerWestLongitude": 15.4778,
+                  "sunLatitude": 57.7419,
+                  "sunWestLongitude": 24.9409,
+                  "rangeKm": 243194085.6,
+                  "northAzimuthDegrees": 180.8451,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    133.174,
+                    136.067
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-060403",
+                  "path": "observations/d45Eugenia_2019-08-06T06_04_03.441_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.6367,
+                  "observerWestLongitude": 334.0878,
+                  "sunLatitude": 57.7396,
+                  "sunWestLongitude": 343.7233,
+                  "rangeKm": 243311372.6,
+                  "northAzimuthDegrees": 180.7651,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.911,
+                    132.743
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-060803",
+                  "path": "observations/d45Eugenia_2019-08-06T06_08_03.571_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.6365,
+                  "observerWestLongitude": 338.3001,
+                  "sunLatitude": 57.7396,
+                  "sunWestLongitude": 347.9378,
+                  "rangeKm": 243312996.5,
+                  "northAzimuthDegrees": 180.764,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.842,
+                    132.773
+                  ]
+                },
+                {
+                  "id": "zimpol-20190806-061203",
+                  "path": "observations/d45Eugenia_2019-08-06T06_12_03.565_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.6362,
+                  "observerWestLongitude": 342.51,
+                  "sunLatitude": 57.7395,
+                  "sunWestLongitude": 352.15,
+                  "rangeKm": 243314621.2,
+                  "northAzimuthDegrees": 180.763,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.882,
+                    132.231
+                  ]
+                },
+                {
+                  "id": "zimpol-20190807-004205",
+                  "path": "observations/d45Eugenia_2019-08-07T00_42_05.061_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.5686,
+                  "observerWestLongitude": 70.8308,
+                  "sunLatitude": 57.7306,
+                  "sunWestLongitude": 81.0844,
+                  "rangeKm": 243762326.2,
+                  "northAzimuthDegrees": 180.4877,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.942,
+                    133.964
+                  ]
+                },
+                {
+                  "id": "zimpol-20190807-004606",
+                  "path": "observations/d45Eugenia_2019-08-07T00_46_06.638_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.5683,
+                  "observerWestLongitude": 75.0685,
+                  "sunLatitude": 57.7306,
+                  "sunWestLongitude": 85.3243,
+                  "rangeKm": 243763918.5,
+                  "northAzimuthDegrees": 180.4866,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    119.79,
+                    133.555
+                  ]
+                },
+                {
+                  "id": "zimpol-20190807-005008",
+                  "path": "observations/d45Eugenia_2019-08-07T00_50_08.244_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": 58.5681,
+                  "observerWestLongitude": 79.3067,
+                  "sunLatitude": 57.7305,
+                  "sunWestLongitude": 89.5648,
+                  "rangeKm": 243765512.5,
+                  "northAzimuthDegrees": 180.4856,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    120.029,
+                    133.914
+                  ]
+                }
+              ]
+            }
           ]
         },
         "lighting": {
@@ -118,7 +672,30 @@
               "maximumErrorMeters": 1700,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/45_Eugenia_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 578,
+                "expectedFaces": 1152
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 1700,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -131,7 +708,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "99b9042c492f98da23da5c51cb0a57346a25727cc33a908ca56eda5abc9b1b31",
+      "sha256": "6cb6fbb6b28659c399af1e78c8fb5981c2b19506c37bee554a141d1fda09f5bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,6 +805,20 @@
                 "image": "/scenes/eugenia/eugenia-elevation-legend.webp"
               },
               "notes": "Source shape · radial height"
+            },
+            {
+              "id": "zimpol",
+              "label": "SPHERE photograph",
+              "thumbnail": "/scenes/eugenia/eugenia-zimpol-thumbnail.webp",
+              "surface": "eugenia-zimpol-surface@2x.webp",
+              "poles": "eugenia-zimpol-surface@2x.webp",
+              "source": {
+                "id": "eugenia-adam-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true,
+              "notes": "32 deconvolved VLT/SPHERE/ZIMPOL frames, 7 nights from 2019-07-28 to 2019-08-07, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.24. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -337,6 +928,1724 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190728081908",
+      "path": "observations/d45Eugenia_2019-07-28T08_19_08.851_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_19_08.851_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190728081908",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "4ab27f1d7e3ee3172099506a73e593e0b2c69231705d2abc0a2560ee5ccc8742",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-28T08_19_08.851_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_19_08.851_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190728082311",
+      "path": "observations/d45Eugenia_2019-07-28T08_23_11.470_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_23_11.470_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190728082311",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "a16d96e619aaabad7faa15721902b24cc9387fe4590948a40ae3e884054c0b7a",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-28T08_23_11.470_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_23_11.470_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190728082713",
+      "path": "observations/d45Eugenia_2019-07-28T08_27_13.640_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_27_13.640_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190728082713",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/5"
+          }
+        ]
+      },
+      "sha256": "c4f25d1d9dbc05192a571b7c6949ebf8c4f5720e29b82abf403dca05c13cc0bf",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-28T08_27_13.640_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_27_13.640_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190728083114",
+      "path": "observations/d45Eugenia_2019-07-28T08_31_14.269_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_31_14.269_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190728083114",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/6"
+          }
+        ]
+      },
+      "sha256": "1d8a7438f7a2b2bcb381787519a8f73d5e43bd11fecf84b0c808baf00bebfa4d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-28T08_31_14.269_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-28T08_31_14.269_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190729073255",
+      "path": "observations/d45Eugenia_2019-07-29T07_32_55.910_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_32_55.910_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190729073255",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "ecf339bea45a7e8e5b0251834afd5b8f50e6ff1de2432a0e67253cd865614e17",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-29T07_32_55.910_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_32_55.910_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190729073658",
+      "path": "observations/d45Eugenia_2019-07-29T07_36_58.660_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_36_58.660_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190729073658",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/8"
+          }
+        ]
+      },
+      "sha256": "b314cbe462aba4c588ad6a21c105649125612b8d10000afde20e4012ec566878",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-29T07_36_58.660_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_36_58.660_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190729074100",
+      "path": "observations/d45Eugenia_2019-07-29T07_41_00.059_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_41_00.059_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190729074100",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/9"
+          }
+        ]
+      },
+      "sha256": "ad6014711a1595ac9a06805b201adfcd23e6ac8246eda12c719f309941fef822",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-29T07_41_00.059_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_41_00.059_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190729074501",
+      "path": "observations/d45Eugenia_2019-07-29T07_45_01.756_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_45_01.756_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190729074501",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/10"
+          }
+        ]
+      },
+      "sha256": "225ddaf7641ae525924e5b39f75f7f9e5b55f6ef5cd0fd0ebf124fe1f45d7768",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-29T07_45_01.756_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-29T07_45_01.756_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190730073402",
+      "path": "observations/d45Eugenia_2019-07-30T07_34_02.920_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_34_02.920_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190730073402",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "3ef91794acf8bde2e2086ded6dc0d30f6f0fa77e9c6c602eb33034278c9e4501",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-30T07_34_02.920_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_34_02.920_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190730073804",
+      "path": "observations/d45Eugenia_2019-07-30T07_38_04.060_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_38_04.060_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190730073804",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/12"
+          }
+        ]
+      },
+      "sha256": "a3114a2136afdff553b98f0e49335155311200892b4b70d160dab249dd22e56c",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-30T07_38_04.060_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_38_04.060_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190730074206",
+      "path": "observations/d45Eugenia_2019-07-30T07_42_06.419_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_42_06.419_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190730074206",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/13"
+          }
+        ]
+      },
+      "sha256": "071279f2da34d5266c29a4a5966c4484dbab017c283da210fcbcb85581dec773",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-30T07_42_06.419_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_42_06.419_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190730074606",
+      "path": "observations/d45Eugenia_2019-07-30T07_46_06.249_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_46_06.249_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190730074606",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/14"
+          }
+        ]
+      },
+      "sha256": "2bb8a2428cbbe6eecd68999386cd49cb1c755252fc9fd3598f422e29ebea999b",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-07-30T07_46_06.249_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-07-30T07_46_06.249_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190803041243",
+      "path": "observations/d45Eugenia_2019-08-03T04_12_43.059_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T04_12_43.059_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190803041243",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/15"
+          }
+        ]
+      },
+      "sha256": "dcd8e20c594fa63306b8efcf64c133d1f019fc153f385252f86084f61bbb40b4",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-03T04_12_43.059_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T04_12_43.059_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190803041645",
+      "path": "observations/d45Eugenia_2019-08-03T04_16_45.194_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T04_16_45.194_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190803041645",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/16"
+          }
+        ]
+      },
+      "sha256": "f11ab6572f3f4518151cc3296f0984ce30b78e225906895e0927fcbda022547f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-03T04_16_45.194_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T04_16_45.194_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190803042048",
+      "path": "observations/d45Eugenia_2019-08-03T04_20_48.127_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T04_20_48.127_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190803042048",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/17"
+          }
+        ]
+      },
+      "sha256": "437ebe3e6f1274c5cc1b871065db2d3380027917d690091ddd92611c94da8bdf",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-03T04_20_48.127_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T04_20_48.127_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190803051109",
+      "path": "observations/d45Eugenia_2019-08-03T05_11_09.288_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_11_09.288_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190803051109",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/18"
+          }
+        ]
+      },
+      "sha256": "8201d14990a42644a015816ae3e0b84281d18b170d53fe8f6fd16a4f68e33b50",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-03T05_11_09.288_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_11_09.288_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190803051512",
+      "path": "observations/d45Eugenia_2019-08-03T05_15_12.125_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_15_12.125_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190803051512",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/19"
+          }
+        ]
+      },
+      "sha256": "f9638e01f2b09b811c0bea4ab3d747235d376c9888dc880e7af71ec639e1e945",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-03T05_15_12.125_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_15_12.125_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190803051912",
+      "path": "observations/d45Eugenia_2019-08-03T05_19_12.409_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_19_12.409_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190803051912",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "5f4752c91498f44ee32c472ec4fe04c86af5c4c4cd1af47fbbfc93ca888ce162",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-03T05_19_12.409_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_19_12.409_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190803052312",
+      "path": "observations/d45Eugenia_2019-08-03T05_23_12.319_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_23_12.319_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190803052312",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/21"
+          }
+        ]
+      },
+      "sha256": "881c8c8f91182a666f36a40b8bdb179ae070aa380b1f8642ca0f2dc582f7e6ba",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-03T05_23_12.319_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-03T05_23_12.319_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190805050716",
+      "path": "observations/d45Eugenia_2019-08-05T05_07_16.526_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_07_16.526_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190805050716",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/22"
+          }
+        ]
+      },
+      "sha256": "5c430eb5af9c699239079cbfd8195b11a302630a7778452369a4a92dea0e93d4",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-05T05_07_16.526_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_07_16.526_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190805051117",
+      "path": "observations/d45Eugenia_2019-08-05T05_11_17.624_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_11_17.624_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190805051117",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/23"
+          }
+        ]
+      },
+      "sha256": "db83decf392fe1ada53e13d0bc91edc44b63f4f509f43fcd810083d0a36b19a8",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-05T05_11_17.624_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_11_17.624_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190805051520",
+      "path": "observations/d45Eugenia_2019-08-05T05_15_20.564_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_15_20.564_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190805051520",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/24"
+          }
+        ]
+      },
+      "sha256": "cb3a4052aa7549e4531cf72ebf69f5b5bac6d8efa05adca8f57b3660a87cde5a",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-05T05_15_20.564_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_15_20.564_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190805051922",
+      "path": "observations/d45Eugenia_2019-08-05T05_19_22.795_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_19_22.795_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190805051922",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/25"
+          }
+        ]
+      },
+      "sha256": "bf57fca4b019c2e14808d28544ef711da3c9ed5103c253f9ec4930d1f197ebab",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-05T05_19_22.795_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-05T05_19_22.795_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190806005320",
+      "path": "observations/d45Eugenia_2019-08-06T00_53_20.176_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T00_53_20.176_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190806005320",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/26"
+          }
+        ]
+      },
+      "sha256": "4443b45dc86a864364095be299a570979f0b9bdfcb8c96d3d8638d78e2540b9a",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-06T00_53_20.176_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T00_53_20.176_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190806005721",
+      "path": "observations/d45Eugenia_2019-08-06T00_57_21.323_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T00_57_21.323_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190806005721",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/27"
+          }
+        ]
+      },
+      "sha256": "741e0de101abeb31d88dc8dcf1ded9e3f80769970a35e73d995d8f49079e9ba1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-06T00_57_21.323_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T00_57_21.323_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190806010120",
+      "path": "observations/d45Eugenia_2019-08-06T01_01_20.438_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T01_01_20.438_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190806010120",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/28"
+          }
+        ]
+      },
+      "sha256": "84149b251077769414d9dfbd5a3bb387b4d57428ac4c2f5a433b72b8002e2e2d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-06T01_01_20.438_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T01_01_20.438_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190806060403",
+      "path": "observations/d45Eugenia_2019-08-06T06_04_03.441_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T06_04_03.441_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190806060403",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/29"
+          }
+        ]
+      },
+      "sha256": "118bf5f4d38e31d92856ebcb13663a0a5c0eeb3804d55dffe68f020666db4a42",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-06T06_04_03.441_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T06_04_03.441_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190806060803",
+      "path": "observations/d45Eugenia_2019-08-06T06_08_03.571_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T06_08_03.571_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190806060803",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/30"
+          }
+        ]
+      },
+      "sha256": "453b16697cfeeda6a7b7ac91377b08f17f6417b0602a55df393020abe7dec5d7",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-06T06_08_03.571_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T06_08_03.571_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190806061203",
+      "path": "observations/d45Eugenia_2019-08-06T06_12_03.565_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T06_12_03.565_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190806061203",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/31"
+          }
+        ]
+      },
+      "sha256": "f715910692ef63bf47f38fcd2125b98d9949bb202f91566001a2ffd08c182a2d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-06T06_12_03.565_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-06T06_12_03.565_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190807004205",
+      "path": "observations/d45Eugenia_2019-08-07T00_42_05.061_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-07T00_42_05.061_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190807004205",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/32"
+          }
+        ]
+      },
+      "sha256": "15d68b6724995b13ad0c1b7947bdd3859c15e0c91e63a9c744ad29310f775bd3",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-07T00_42_05.061_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-07T00_42_05.061_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190807004606",
+      "path": "observations/d45Eugenia_2019-08-07T00_46_06.638_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-07T00_46_06.638_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190807004606",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/33"
+          }
+        ]
+      },
+      "sha256": "4c90c8b304e174959fa32947827cb13db2ff554ed8ace30b18bcc1d1e203c378",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-07T00_46_06.638_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-07T00_46_06.638_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-sphere-20190807005008",
+      "path": "observations/d45Eugenia_2019-08-07T00_50_08.244_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-07T00_50_08.244_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-sphere-20190807005008",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/34"
+          }
+        ]
+      },
+      "sha256": "376d229ded45ad33dbbece04a2cd81d1ce62d01774086259d0ab2828878c3165",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d45Eugenia_2019-08-07T00_50_08.244_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/45Eugenia/Deconv/d45Eugenia_2019-08-07T00_50_08.244_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eugenia-adam-shape",
+      "path": "shape/45_Eugenia_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/45_Eugenia_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eugenia-eugenia-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/eugenia/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/35"
+          }
+        ]
+      },
+      "sha256": "016de3bf6f3c04a8cea819ecd176c4b1757a84725687b3ab53f79dbe61ae8910",
+      "bytes": 31217,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/45_Eugenia_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/45_Eugenia_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -349,8 +2658,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "99b9042c492f98da23da5c51cb0a57346a25727cc33a908ca56eda5abc9b1b31",
-      "bytes": 8606,
+      "sha256": "6cb6fbb6b28659c399af1e78c8fb5981c2b19506c37bee554a141d1fda09f5bf",
+      "bytes": 9809,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -453,6 +2762,82 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "zimpol",
+      "label": "SPHERE photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "zimpol"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "eugenia-sphere-20190728081908",
+        "eugenia-sphere-20190728082311",
+        "eugenia-sphere-20190728082713",
+        "eugenia-sphere-20190728083114",
+        "eugenia-sphere-20190729073255",
+        "eugenia-sphere-20190729073658",
+        "eugenia-sphere-20190729074100",
+        "eugenia-sphere-20190729074501",
+        "eugenia-sphere-20190730073402",
+        "eugenia-sphere-20190730073804",
+        "eugenia-sphere-20190730074206",
+        "eugenia-sphere-20190730074606",
+        "eugenia-sphere-20190803041243",
+        "eugenia-sphere-20190803041645",
+        "eugenia-sphere-20190803042048",
+        "eugenia-sphere-20190803051109",
+        "eugenia-sphere-20190803051512",
+        "eugenia-sphere-20190803051912",
+        "eugenia-sphere-20190803052312",
+        "eugenia-sphere-20190805050716",
+        "eugenia-sphere-20190805051117",
+        "eugenia-sphere-20190805051520",
+        "eugenia-sphere-20190805051922",
+        "eugenia-sphere-20190806005320",
+        "eugenia-sphere-20190806005721",
+        "eugenia-sphere-20190806010120",
+        "eugenia-sphere-20190806060403",
+        "eugenia-sphere-20190806060803",
+        "eugenia-sphere-20190806061203",
+        "eugenia-sphere-20190807004205",
+        "eugenia-sphere-20190807004606",
+        "eugenia-sphere-20190807005008",
+        "eugenia-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eugenia/eugenia-zimpol-thumbnail.webp",
+          "bytes": 1786,
+          "sha256": "06b412fb480b8a80a693de42e892c97b372a180f629eae863fd2c72693d038ce",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/eugenia/eugenia-zimpol-surface@2x.webp",
+          "bytes": 245754,
+          "sha256": "417aa093cba6ed1c2c262484e7233fff74d7ed2e8b42ab5b44037ba776fdb52f",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "eugenia-adam-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -504,6 +2889,31 @@
       ]
     },
     {
+      "id": "preview:zimpol",
+      "label": "SPHERE photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "zimpol"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/zimpol.webp",
+          "bytes": 8506,
+          "sha256": "4db34cb4b36f37033f8d20c92a66375c60783fd7fb6d7f7bdfd21ad614d79be2",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -535,11 +2945,11 @@
   },
   "lastPreparation": {
     "objectId": "eugenia",
-    "materialSha256": "fb2926b7cadb11e783cf5a81d69d52216299f720ad74736a273cd717cf4fa6ce",
+    "materialSha256": "11bc0e3f8a0105dcac15e3ee4c2d65190313d93eb31821ada4a71c696aecd01b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b676316f16f24607396565a1c2891ed3e5257715132720f917959f2b82971f58"
+      "bindingsSha256": "fd156523e0b0abeddb2e3aa584704b217325f52d70d2f01bd8859dbb8a71e526"
     }
   }
 }

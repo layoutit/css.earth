@@ -29,11 +29,9 @@ according to projected CSS size, independently of DPR; dataset selection remains
 manual. These texture levels are separate from its retired geographic paging.
 The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
 record that change; [Earth's README](../src/objects/earth/README.md) describes the
-current datasets and retained source history. A row-bank cutaway body can declare
-the same kind of levels in its presentation recipe. Its density 1 and 2 surface
-maps become two levels, chosen by the same texels-per-CSS-pixel rule
-([surface texture levels](../src/renderers/css/preparation/presentation/surface-texture-levels.ts)).
-[Mercury's README](../src/objects/mercury/README.md) records its thresholds.
+current datasets and retained source history. The shared raster lane prepares
+each image once, at the canonical @2x density, so its bodies have no texture
+levels; the lane refuses a `densities` field and a presentation `textureLevels`.
 
 ## Decode the source before choosing its display
 
@@ -162,11 +160,14 @@ FITS decoding happens during preparation, never in the browser. The shared
 values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
 Product adapters still own units, quality masks, camera registration,
 spectral selection, missing-data policies and display transforms. Sky images do not
-own their orientation: [fits-sky.mts](../tools/fits-sky.mts) reads it from the WCS.
+own their orientation: [fits-sky.mts](../tools/fits-sky.mts) reads it from the WCS. An axis-aligned image is flipped into
+display order; a rotated gnomonic (TAN) image is resampled through `skyProjection`, which refuses distortion terms and frames
+other than ICRS or FK5 and is checked against Astropy in both directions.
 
 | Input | Supported contract and owner |
 | --- | --- |
 | Primary images and IMAGE extensions | 2D images or explicitly selected 3D planes; unsigned 8-bit, signed 16/32-bit, IEEE float32/64, big-endian. `BSCALE`/`BZERO` are applied once; integer `BLANK` becomes `NaN` before scaling. Zero and negative measurements remain values. |
+| Large archive products | `readFitsFileHdus` locates every HDU by reading headers only; `readFitsFileRegion` reads one rectangle of one image extension from disk. A mosaic of hundreds of megabytes is never loaded whole. |
 | Multi-HDU observations | Encounter, LORRI/L'LORRI and MVIC adapters require their exact instrument layout, units and quality conventions. Named HDUs do not imply a camera model. |
 | Spectral and geometry cubes | LEISA uses bounded sample access without expanding a whole cube. PDS4 geometry labels must agree with FITS axes, element types and offsets; label special constants remain authoritative. |
 | Fixed facet tables | Only the declared `1J + 5E` BINTABLE profiles, with their mesh identity and centroid checks. Column scaling (`TSCAL`/`TZERO`) and null (`TNULL`) declarations are rejected, not ignored. |

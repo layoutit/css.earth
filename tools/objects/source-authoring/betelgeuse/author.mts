@@ -68,12 +68,23 @@ export async function contextMarker(image: ReturnType<typeof readReconstruction>
   return sharp(rgba, { raw: { width, height, channels: 4 } }).resize(CONTEXT_SIZE, CONTEXT_SIZE, { kernel: 'lanczos3', fit: 'fill' }).png({ compressionLevel: 9 }).toBuffer();
 }
 
-export async function authorBetelgeuse({ check = false } = {}) {
-  const measurements = requireRecord(JSON.parse(await readFile(resolve(root, 'measurements.json'), 'utf8')), 'measurements');
-  if (measurements.schema !== 'cssearth-uniform-disc-star@1') throw new TypeError('Unexpected Betelgeuse measurements schema.');
+/** The uniform-disc reference sphere alone: a deterministic function of the retained measurements, with no dependency on
+ * the much larger pinned interferometry archives every sibling star body also authors. Written or checked first, so the
+ * small sphere table restores without the archive files a full run also needs. Shared by every uniform-disc star body. */
+export async function authorUniformDiscSphere(sourceRoot: string, label: string, { check = false } = {}) {
+  const measurements = requireRecord(JSON.parse(await readFile(resolve(sourceRoot, 'measurements.json'), 'utf8')), 'measurements');
+  if (measurements.schema !== 'cssearth-uniform-disc-star@1') throw new TypeError(`Unexpected ${label} measurements schema.`);
   const shape = requireRecord(measurements.shape, 'shape');
-  if (requireString(shape.path) !== SPHERE_PATH) throw new TypeError('Betelgeuse sphere path differs from the authoring tool.');
-  const table = uniformDiscTable(requireFiniteNumber(measurements.radiusKm), requireFiniteNumber(shape.stepDegrees));
+  if (requireString(shape.path) !== SPHERE_PATH) throw new TypeError(`${label} sphere path differs from the authoring tool.`);
+  const bytes = Buffer.from(uniformDiscTable(requireFiniteNumber(measurements.radiusKm), requireFiniteNumber(shape.stepDegrees)), 'latin1');
+  const target = resolve(sourceRoot, SPHERE_PATH);
+  if (check) { if (!(await readFile(target)).equals(bytes)) throw new Error(`${SPHERE_PATH} differs from its authored recomputation.`); }
+  else await writeFile(target, bytes);
+  return measurements;
+}
+
+export async function authorBetelgeuse({ check = false } = {}) {
+  await authorUniformDiscSphere(root, 'Betelgeuse', { check });
   const oifitsDirectory = resolve(root, 'observations/oifits');
   const files = (await readdir(oifitsDirectory)).filter(name => name.endsWith('.fits') && CONTINUUM_NIGHTS.some(night => name.startsWith(night))).sort().map(name => resolve(oifitsDirectory, name));
   if (files.length !== 29) throw new Error(`Expected the 29 pinned February 2020 MATISSE files, found ${files.length}.`);
@@ -86,7 +97,7 @@ export async function authorBetelgeuse({ check = false } = {}) {
   const display = requireRecord(lens.display, 'display'), frame = requireRecord(requireArray(lens.frames)[0], 'frame');
   const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
   const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
-  const outputs: [string, Buffer][] = [[SPHERE_PATH, Buffer.from(table, 'latin1')], [MERGED_PATH, oifits], [BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
+  const outputs: [string, Buffer][] = [[MERGED_PATH, oifits], [BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
   for (const [path, bytes] of outputs) {
     const target = resolve(root, path);
     if (check) {

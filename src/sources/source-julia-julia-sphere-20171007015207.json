@@ -1,0 +1,37 @@
+{
+  "id": "source-julia-julia-sphere-20171007015207",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Julia · julia sphere 20171007015207",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/89Julia/Deconv/d89Julia_2017-10-07T01_52_07.893_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/julia/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "e7386e5e261fcb80d7afc9fbb53bd7d3693ab3b35510898715a8b87ca5db9669",
+      "locator": "/inputs/34"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The julia sphere 20171007015207 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

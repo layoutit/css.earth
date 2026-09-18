@@ -3,8 +3,8 @@
   "assets": [
     {
       "filename": "mars-features.json",
-      "bytes": 6046256,
-      "sha256": "bb7c7398fb9e27b63ff774796cf088ceeeac05340b0a71898cd4dd5a82d82cdb"
+      "bytes": 6046258,
+      "sha256": "ef2cd04dd50b1cfbd15f16d2a7b038ade8bbd03f940b5c4e8888176c8da8fd78"
     },
     {
       "filename": "mars-lens-elevation.webp",
@@ -22,29 +22,14 @@
       "sha256": "7126fb082cf201a4ad13091732305e2c31b1dac36109889e4ad0e7e5643f495a"
     },
     {
-      "filename": "mars-lighting.webp",
-      "bytes": 61694,
-      "sha256": "d4835d67e068f737dc999f039a0eb1ba8849c2f7c3cd582ba8ac6bfbd2165d70"
-    },
-    {
       "filename": "mars-lighting@2x.webp",
       "bytes": 169690,
       "sha256": "1369a6e9d5f4005a14996ebdafc3051121d9d5ca89c14bec8a7cb00a0e7eb4f7"
     },
     {
-      "filename": "mars-material.webp",
-      "bytes": 404286,
-      "sha256": "afc05aa05f6e967cfdc1a2ce8389316566853cc357ac10cfcc024cce5db9b15a"
-    },
-    {
       "filename": "mars-material@2x.webp",
       "bytes": 1130242,
       "sha256": "9820c485430e70a6ac0aabe78c1737edd99e9cac2fc10c24bfb7983e2443241e"
-    },
-    {
-      "filename": "mars-observation-material.webp",
-      "bytes": 161742,
-      "sha256": "6770d670817c4c3d1f5d52f79ea160126e63b22b16f1c81a03fe3e50ae5ebeaa"
     },
     {
       "filename": "mars-observation-material@2x.webp",
@@ -57,29 +42,14 @@
       "sha256": "46b2aacc1daa5c632189cce9d04879611096e471c652410ed30a68c8c4538752"
     },
     {
-      "filename": "mars-poles-elevation.webp",
-      "bytes": 134472,
-      "sha256": "869e9c68144d9c371a226e3cb83d2ad75abaf6c01e82949c97fb5d74a4c798e7"
-    },
-    {
       "filename": "mars-poles-elevation@2x.webp",
       "bytes": 461358,
       "sha256": "c271fb2ac24ff3d1dbdc8b73e2f2fd47856416323df24cf23102988d334d7741"
     },
     {
-      "filename": "mars-poles-normal.webp",
-      "bytes": 157040,
-      "sha256": "11b16a12f0a8ab21da7e0907575a055ac05e2cf9847876facdb290f899f304f3"
-    },
-    {
       "filename": "mars-poles-normal@2x.webp",
       "bytes": 524794,
       "sha256": "384fa36bdb1c4a30c5c6e470489bdc3c9667ba8d1072b556a9b67d118271120c"
-    },
-    {
-      "filename": "mars-poles-thermal.webp",
-      "bytes": 66246,
-      "sha256": "ccd49ca7cf385646fe3f4f1d53095e26cb1880cac4e13d4a283938e3bdb410c7"
     },
     {
       "filename": "mars-poles-thermal@2x.webp",
@@ -92,29 +62,14 @@
       "sha256": "6140a667a2b109fbfbb8907bf7e058607e98c464688031d033d9d3187ed35811"
     },
     {
-      "filename": "mars-surface-elevation.webp",
-      "bytes": 1062260,
-      "sha256": "5f4a8fa5c2df8b31887db328699da9a5996c348be188c2c61385b7dba76ce173"
-    },
-    {
       "filename": "mars-surface-elevation@2x.webp",
       "bytes": 4284386,
       "sha256": "aa991949a64c18d89cab197d91ea119bb8a2e52f5ee564463f43b1675776f310"
     },
     {
-      "filename": "mars-surface-normal.webp",
-      "bytes": 820510,
-      "sha256": "79d7f0b01fdff2f644f6d965fcbc742dcbc1c44a485ed94acc65d45cbaabd4dd"
-    },
-    {
       "filename": "mars-surface-normal@2x.webp",
       "bytes": 2996430,
       "sha256": "5cd225ec4de592bb2a9ab199248506eddb71f9149ca823e9cf48a466bfc15c39"
-    },
-    {
-      "filename": "mars-surface-thermal.webp",
-      "bytes": 1102274,
-      "sha256": "776b3d4dd57d21403defa5ab425cbb54938dd988c1caf6f80464ac2f114065f7"
     },
     {
       "filename": "mars-surface-thermal@2x.webp",

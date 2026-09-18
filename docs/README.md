@@ -18,6 +18,7 @@ For a body's sources, processing, evidence and known problems, read its
 | What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
 | Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
+| JWST images to sky band composites: MAST programs, the re-run level-3 stage, its oracle and depth from a model | [JWST imaging](jwst-imaging.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |
@@ -28,6 +29,14 @@ For a body's sources, processing, evidence and known problems, read its
 | Measured renderer and navigation performance work | [Performance notes](performance/README.md) |
 | TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
+| What the open archives hold for our catalogued bodies | [Archive screen](archive-screen.md) |
+| Facility model thumbnails: sources and appearance | [Facility thumbnails](facility-thumbnails.md) |
+| Moon sidebar listing, labels and orbit registration | [Moon catalogues](moon-catalogues.md) |
+| Scroll-driven camera distance experiment | [Native scroll zoom experiment](native-scroll-zoom.md) |
+| Choosing which destinations get featured or captioned | [Choosing destinations to explore](object-discovery.md) |
+| The shared neutral shape-only display material | [Shape-only material](shape-only-material.md) |
+| Sidebar row thumbnails for galaxies, nebulae and datasets | [Sidebar thumbnails](sidebar-thumbnails.md) |
+| Scene caption policy for the universe view | [Universe labels](universe-labels.md) |
 
 For contribution steps, use the [body contributor guide](../src/objects/README.md).
 [AGENTS.md](../AGENTS.md) sets application rules; the

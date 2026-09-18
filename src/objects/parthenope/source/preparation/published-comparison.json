@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.10",
+  "document": {
+    "input": "parthenope-survey-research",
+    "object": 1089,
+    "width": 1358,
+    "height": 1233,
+    "sha256": "b34c17808f12c9a309229e35b20d0d420492636c982771a70e3ec4cfeeaba167"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2018-02-06T02:26:57",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-04-19T04:01:56",
+      "frame": "zimpol-20190419-040156",
+      "band": 0
+    },
+    {
+      "label": "2019-05-04T07:44:28",
+      "frame": "zimpol-20190504-074428",
+      "band": 0
+    },
+    {
+      "label": "2019-06-05T05:38:50",
+      "frame": "zimpol-20190605-053850",
+      "band": 0
+    },
+    {
+      "label": "2019-06-19T03:39:14",
+      "frame": "zimpol-20190619-033914",
+      "band": 0
+    }
+  ]
+}

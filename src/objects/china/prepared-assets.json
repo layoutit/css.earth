@@ -1,0 +1,16 @@
+{
+  "schema": "csschina-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750102,
+      "sha256": "2fdc871de5e5a57a8a8998ff90d1113ff738c91149a649cb8d971cb4265a2f98"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620230,
+      "sha256": "135b75f13fedf5f18584b821634d23295f8157bf71902c155eabf158d57f1b7c"
+    }
+  ]
+}

@@ -143,22 +143,25 @@ const direction = (rightAscensionDegrees: number, declinationDegrees: number): V
  * pole; this parser only enforces that the values are numbers in range for the stated order.
  */
 export function parseSpinState(text: string, order: 'latitude-first' | 'longitude-first'): SpinState {
+  // DAMIT's spin.txt is the same two lines followed by its photometric parameters, numbers only; nothing else may follow.
   const lines = text.trim().split(/\r?\n/).map(line => line.trim()).filter(line => line.length > 0);
-  if (lines.length !== 2) throw new TypeError('A spin parameter record holds exactly two non-empty lines.');
+  if (lines.length < 2 || lines.slice(2).some(line => !/^[-+0-9.eE]+(\s+[-+0-9.eE]+)*$/u.test(line))) throw new TypeError('A spin parameter record holds exactly two non-empty lines, then at most DAMIT’s photometric parameters.');
   const first = lines[0].split(/\s+/).map(Number), second = lines[1].split(/\s+/).map(Number);
   if (first.length !== 3 || second.length !== 2) throw new TypeError('A spin parameter record holds three values then two.');
   const [a, b, periodHours] = first.map((value, index) => requireFiniteNumber(value, `spin parameter ${index + 1}`));
   const epochJd = requireFiniteNumber(second[0], 'spin phase epoch');
-  const phaseDegrees = requireFiniteNumber(second[1], 'spin phase');
+  let phaseDegrees = requireFiniteNumber(second[1], 'spin phase');
   let latitudeDegrees = order === 'latitude-first' ? a : b;
   let longitudeDegrees = order === 'latitude-first' ? b : a;
   // Some records state a pole a little past the pole rather than normalising it: 130 Elektra's is -92.2669, which is
-  // 2.27 degrees beyond the south pole. That is the same direction as (latitude -87.7331, longitude + 180), and
-  // reading it as an error loses the record. A value far outside the range is not an unnormalised pole, though;
-  // it means the caller has the column order wrong, and that stays an error.
+  // 2.27 degrees beyond the south pole. That is the same axis as (latitude -87.7331, longitude + 180), but the
+  // record's rotation convention builds a body frame turned half a turn about that axis, so folding the pole adds
+  // 180 degrees of phase as well. Reading it as an error loses the record. A value far outside the range is not an
+  // unnormalised pole, though; it means the caller has the column order wrong, and that stays an error.
   if (Math.abs(latitudeDegrees) > 90 && Math.abs(latitudeDegrees) <= 95) {
     latitudeDegrees = Math.sign(latitudeDegrees) * 180 - latitudeDegrees;
     longitudeDegrees += 180;
+    phaseDegrees = wrap360(phaseDegrees + 180);
   }
   if (!(Math.abs(latitudeDegrees) <= 90)) throw new TypeError(`Spin pole latitude ${latitudeDegrees} is out of range for a ${order} record.`);
   if (!(periodHours > 0) || !(periodHours < 24 * 365)) throw new TypeError('Spin period is out of range.');

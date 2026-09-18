@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b74312a38b86fd79f5fba154ba954a965030d4c23bd05051a1718f68e87340e"
+    "sha256": "180e2d27123e5992ebe2149912db899ac5ef26355e04d382e27467e01857f6d5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "fa9e7d2e97be74b5ef0544bb2f9342b48f6294313dfcbb8556157b79d49536e0"
+    "bindingsSha256": "0febb06cf2208cc87254d45e8a5af973747b7e6dc313c52f97bee8d487b642f5"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "c0d292abada427546d5ce2d322cd20a7480f89632977ee70ef2b69f017b0b11b",
+      "sha256": "3719334367b9f645dc46dda49f58ec599bcb3d971f481983759683015d196b55",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/titan/",
@@ -25,10 +25,6 @@
         "height": 2048,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -447,7 +443,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "059144a377c96a0da8579ee08c2e340c3d10b7b8b6b7acef1ed9957a77cf5c73",
+      "sha256": "263dd8742d4f8e0d3df9c2a86a232f1d589f6d3fd846516751eee5bb4155bd06",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -536,8 +532,8 @@
               "id": "normal",
               "label": "Near-infrared",
               "thumbnail": "titan-lens-normal.webp",
-              "surface": "titan-normal.webp",
-              "poles": "titan-poles-normal.webp",
+              "surface": "titan-normal@2x.webp",
+              "poles": "titan-poles-normal@2x.webp",
               "source": {
                 "id": "usgs-cassini-iss-2026-938nm",
                 "path": "../manifest.json"
@@ -549,8 +545,8 @@
               "id": "radar",
               "label": "Radar",
               "thumbnail": "titan-lens-radar.webp",
-              "surface": "titan-radar.webp",
-              "poles": "titan-poles-radar.webp",
+              "surface": "titan-radar@2x.webp",
+              "poles": "titan-poles-radar@2x.webp",
               "source": {
                 "id": "cassini-radar-midr",
                 "path": "../manifest.json"
@@ -562,8 +558,8 @@
               "id": "topography",
               "label": "Measured height",
               "thumbnail": "titan-lens-topography.webp",
-              "surface": "titan-topography.webp",
-              "poles": "titan-poles-topography.webp",
+              "surface": "titan-topography@2x.webp",
+              "poles": "titan-poles-topography@2x.webp",
               "source": {
                 "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
                 "path": "../manifest.json"
@@ -620,8 +616,8 @@
               "id": "interpolated",
               "label": "Interpolated height",
               "thumbnail": "titan-lens-interpolated.webp",
-              "surface": "titan-interpolated.webp",
-              "poles": "titan-poles-interpolated.webp",
+              "surface": "titan-interpolated@2x.webp",
+              "poles": "titan-poles-interpolated@2x.webp",
               "source": {
                 "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
                 "path": "../manifest.json"
@@ -677,8 +673,8 @@
               "id": "coverage-distance",
               "label": "Distance to data",
               "thumbnail": "titan-lens-coverage-distance.webp",
-              "surface": "titan-coverage-distance.webp",
-              "poles": "titan-poles-coverage-distance.webp",
+              "surface": "titan-coverage-distance@2x.webp",
+              "poles": "titan-poles-coverage-distance@2x.webp",
               "source": {
                 "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
                 "path": "../manifest.json"
@@ -734,8 +730,8 @@
               "id": "geology",
               "label": "Geology",
               "thumbnail": "titan-lens-geology.webp",
-              "surface": "titan-geology.webp",
-              "poles": "titan-poles-geology.webp",
+              "surface": "titan-geology@2x.webp",
+              "poles": "titan-poles-geology@2x.webp",
               "source": {
                 "id": "titan-global-geomorphology-grid",
                 "path": "../manifest.json",
@@ -1489,8 +1485,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "059144a377c96a0da8579ee08c2e340c3d10b7b8b6b7acef1ed9957a77cf5c73",
-      "bytes": 14944,
+      "sha256": "263dd8742d4f8e0d3df9c2a86a232f1d589f6d3fd846516751eee5bb4155bd06",
+      "bytes": 14980,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1647,12 +1643,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-normal.webp",
-          "bytes": 958590,
-          "sha256": "0b83619ef97af44517462d56235ec2bf55ec812c113ced5e95f7199f35fa1184",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/titan/titan-normal@2x.webp",
           "bytes": 3477388,
           "sha256": "0b22e5f53ac8ff0f293460bba1a5eebe795690796cf7983b87bb076b942c8655",
@@ -1662,12 +1652,6 @@
           "url": "/scenes/titan/titan-lens-normal.webp",
           "bytes": 1060,
           "sha256": "4e9c0e25bfd152607e19a9b4c54eb0e4e8decdcdd841f1da5bbc43810cbba335",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-poles-normal.webp",
-          "bytes": 53648,
-          "sha256": "7516c3bdfb7de0361bd1a290e5f6a912fc945ff298315714aa9952a689ab6097",
           "verification": "bytes-verified"
         },
         {
@@ -1709,12 +1693,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-radar.webp",
-          "bytes": 3256744,
-          "sha256": "556bc3b13ff720ccfb4c0900ccaf8bbe43559fc819413da8830ebfead77e1628",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/titan/titan-radar@2x.webp",
           "bytes": 13254156,
           "sha256": "fe7cd89a697af4edfaefebe12907cc7f6db381bf1530f26c44de0d1e29ba74f0",
@@ -1724,12 +1702,6 @@
           "url": "/scenes/titan/titan-lens-radar.webp",
           "bytes": 1572,
           "sha256": "b7f18cea26c004b33e8a5949fef2873cef0a2ce7a685e0855ecd9e7920eca589",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-poles-radar.webp",
-          "bytes": 74746,
-          "sha256": "c1bfd79eef57d7e7b4be2ea20eacd857ff9338f43f056986e08f606662f07f72",
           "verification": "bytes-verified"
         },
         {
@@ -1772,12 +1744,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-topography.webp",
-          "bytes": 719210,
-          "sha256": "641ed4f4d2cc5fb607f2dc9df582e31e29341e948ea5797aa4b7f6d73376f637",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/titan/titan-topography@2x.webp",
           "bytes": 935566,
           "sha256": "967933b9a5361088458b98aae2816b3b95370ed6ba17a99064aadc25315ae9f9",
@@ -1787,12 +1753,6 @@
           "url": "/scenes/titan/titan-lens-topography.webp",
           "bytes": 832,
           "sha256": "829b0dc4a86440fbc84bc89aca71619dbbb4fba6970fd1387ae1361e6b5fa2ec",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-poles-topography.webp",
-          "bytes": 17168,
-          "sha256": "538750b29d73ffb94606cd5f748129cc0b044f3e4a80229e9f2882e9b09adf0d",
           "verification": "bytes-verified"
         },
         {
@@ -1835,12 +1795,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-interpolated.webp",
-          "bytes": 2066546,
-          "sha256": "bdcfe42804d23e08ffebfd5761d05e135536a76cfa20c79394a158ceb9c6c7a9",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/titan/titan-interpolated@2x.webp",
           "bytes": 2586200,
           "sha256": "83ef20208fce6b9cd16f5d9641bbbda18007243d4731de72bcee5f0241a0489b",
@@ -1850,12 +1804,6 @@
           "url": "/scenes/titan/titan-lens-interpolated.webp",
           "bytes": 3154,
           "sha256": "69bca0e7fba303cef688facd7278fcd3c7a810587213f40bde18433d91f6f881",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-poles-interpolated.webp",
-          "bytes": 44416,
-          "sha256": "84062aa9cc3a67e52f220b10f1ce644da97e556be2d5112496c784eaaa2cd384",
           "verification": "bytes-verified"
         },
         {
@@ -1898,12 +1846,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-coverage-distance.webp",
-          "bytes": 2085294,
-          "sha256": "c9ed0a4c8490c5d783e69804f67196e536d27d2f4f65c8a987cc18d271b93ef5",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/titan/titan-coverage-distance@2x.webp",
           "bytes": 2782608,
           "sha256": "94fdd4f83358cde0861646f6644b65685f4b16c8e4e99f739f7ae6ed831bcbde",
@@ -1913,12 +1855,6 @@
           "url": "/scenes/titan/titan-lens-coverage-distance.webp",
           "bytes": 3370,
           "sha256": "a686a72884a53b603c1895ed0fb56c9e545fbf58cec368f3cd81ee460cc26e47",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-poles-coverage-distance.webp",
-          "bytes": 34416,
-          "sha256": "c2ed9cf6a1af8c28f2a531833536b7b1f93d388c3400c52668ebd04e7176e743",
           "verification": "bytes-verified"
         },
         {
@@ -1960,12 +1896,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/titan/titan-geology.webp",
-          "bytes": 175700,
-          "sha256": "dc3a66d1cb34960e87c576795c3448a33df59e11776d8a05963e16893fafb008",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/titan/titan-geology@2x.webp",
           "bytes": 208544,
           "sha256": "d069dfb5f8c1135e05e26dcbeafe498dee5822eb59c2640477d640865c576b4b",
@@ -1975,12 +1905,6 @@
           "url": "/scenes/titan/titan-lens-geology.webp",
           "bytes": 658,
           "sha256": "3778e00814ea5d17fd8a7a9d20efdf5d3061c291dc7494cfde40086a564a1a6e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-poles-geology.webp",
-          "bytes": 6980,
-          "sha256": "a65d8df9d7afdfd373d40616d137605af03ba768e6eff6aba07fbcb498ed6f7d",
           "verification": "bytes-verified"
         },
         {
@@ -2017,204 +1941,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/titan/titan-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/titan/titan-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/titan/titan-lighting-2x-billboard.webp",
           "bytes": 115740,
@@ -2471,8 +2197,8 @@
       "outputs": [
         {
           "url": "/scenes/titan/titan-features.json",
-          "bytes": 2077937,
-          "sha256": "6a479b823c21fa5451a8e9b47846c681b1276b34a32f0062c3ecda99ba1d744a",
+          "bytes": 2077938,
+          "sha256": "017db3cde5dd7212e66dcd33550ee4cd52fd510673f4137b9a6771992726f272",
           "verification": "bytes-verified"
         }
       ],
@@ -2635,11 +2361,11 @@
   },
   "lastPreparation": {
     "objectId": "titan",
-    "materialSha256": "7cc8ec48ccf7b6167917d328407e82b16ed64d62db3252a1c4ed1bdeb74c2ba6",
+    "materialSha256": "cfbd1b243e8b47cd5d11a434c6be17e5d00f01d491496a4a725240d6752e34b0",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "fa9e7d2e97be74b5ef0544bb2f9342b48f6294313dfcbb8556157b79d49536e0"
+      "bindingsSha256": "0febb06cf2208cc87254d45e8a5af973747b7e6dc313c52f97bee8d487b642f5"
     }
   }
 }

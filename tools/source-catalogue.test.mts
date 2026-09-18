@@ -141,7 +141,9 @@ test('new unresolved inputs, unknown bindings, stale lenses and inconsistent usa
 test('shared published identities combine usage without combining local input records', () => {
   const gaspra = prepared.sources['galileo-ssi-gll36001'];
   assert.equal(gaspra.version, '1.0');
-  assert.deepEqual(sourceDatasetViews(prepared.usage, gaspra.id).map(view => view.objectId).sort(), ['gaspra', 'ida']);
+  // Ida legitimately cites the shared camera catalog from two of its own lens datasets (calibrated, filter-color),
+  // so this is object-level combination, not a duplicate: dedupe objects, don't count per-lens dataset rows.
+  assert.deepEqual([...new Set(sourceDatasetViews(prepared.usage, gaspra.id).map(view => view.objectId))].sort(), ['gaspra', 'ida']);
   const localIds = prepared.usage.edges.filter(edge => edge.catalogueId === gaspra.id).map(edge => edge.localSourceId);
   assert.ok(localIds.includes('gaspra-gll36001-ti') && localIds.includes('ida-gll36001-ti'));
   const paper = prepared.sources['doi-10-3847-psj-acaf79'];

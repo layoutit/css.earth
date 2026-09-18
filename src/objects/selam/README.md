@@ -39,7 +39,7 @@ A subsequent inspection recovered
 Inspection shows smooth lobe geometry; it does not establish recovered terrain
 or image registration. The file's existence corrects the acquisition account,
 but is not a reason to replace the present source-constrained ellipsoid envelope.
-The [Dinkinesh source check](../dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
+The [Dinkinesh source check](https://github.com/layoutit/css.earth/blob/0d2c55a1f015d532c4a6392540a2406e74c2485c/src/objects/dinkinesh/README.md#lucy-photographic-source-check-13-september-2026)
 records the inspected archives and the L'LORRI geometric-header timing issue.
 No surface texture, inferred neck terrain, or new landmark placement was prepared.
 

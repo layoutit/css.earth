@@ -1,0 +1,16 @@
+{
+  "schema": "cssthalassa-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 458685,
+      "sha256": "8780d2e31d1c2cd81273accc204bdd6e5ab559b55f68f8a9406d82aea19d94e7"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 368701,
+      "sha256": "49e55657596f77f4ec5709ae0bd28c0ff007890893711d707522ab1b892f5b54"
+    }
+  ]
+}

@@ -196,8 +196,8 @@
     {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 5749,
-      "expectedSha256": "e1298c093fd1300bfdeef8f74addbbdbb4b0e7adc4af5d0354e88d53f19773b9",
+      "expectedBytes": 5714,
+      "expectedSha256": "1120b632f0a77c9413d9de08afdd0e491c426c618ca93cf3e02190e928bc4dc3",
       "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -215,8 +215,8 @@
     {
       "id": "wasp-43b-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1772,
-      "expectedSha256": "259d452b97ac90af578f831f15d1459fa3363e77d430852d31af4f733dc25e51",
+      "expectedBytes": 1778,
+      "expectedSha256": "910be18094f36eea75e1aa6652dfae32219927fef7c03d56a71f82814d7037fc",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -315,8 +315,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6201,
-      "expectedSha256": "bb41416f45cfc8ada942daa36bb93e28afa814d87e15cb17dff67bc110b0f883",
+      "expectedBytes": 6213,
+      "expectedSha256": "fe4ecc2c6c0984ec3948842b3ba14743ffa69b9e54b653396ba390f8989f8f6f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

@@ -5,10 +5,10 @@ const objectControls = await readPreparedFixture("umbriel", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "umbriel", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/umbriel/umbriel-normal.webp", two: "/scenes/umbriel/umbriel-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/umbriel/umbriel-poles-normal.webp", two: "/scenes/umbriel/umbriel-poles-normal@2x.webp" }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/umbriel/umbriel-normal@2x.webp",
+      "/scenes/umbriel/umbriel-poles-normal@2x.webp",
+    ]),
     retained: Object.freeze({
       lensIds: Object.freeze(["normal"]),
       allowedMountSelectors: Object.freeze([]),

@@ -86,8 +86,8 @@
         "id": "normal",
         "label": "Near-infrared",
         "thumbnail": "titan-lens-normal.webp",
-        "surface": "titan-normal.webp",
-        "poles": "titan-poles-normal.webp",
+        "surface": "titan-normal@2x.webp",
+        "poles": "titan-poles-normal@2x.webp",
         "source": {
           "id": "usgs-cassini-iss-2026-938nm",
           "path": "../manifest.json"
@@ -99,8 +99,8 @@
         "id": "radar",
         "label": "Radar",
         "thumbnail": "titan-lens-radar.webp",
-        "surface": "titan-radar.webp",
-        "poles": "titan-poles-radar.webp",
+        "surface": "titan-radar@2x.webp",
+        "poles": "titan-poles-radar@2x.webp",
         "source": {
           "id": "cassini-radar-midr",
           "path": "../manifest.json"
@@ -112,8 +112,8 @@
         "id": "topography",
         "label": "Measured height",
         "thumbnail": "titan-lens-topography.webp",
-        "surface": "titan-topography.webp",
-        "poles": "titan-poles-topography.webp",
+        "surface": "titan-topography@2x.webp",
+        "poles": "titan-poles-topography@2x.webp",
         "source": {
           "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
           "path": "../manifest.json"
@@ -170,8 +170,8 @@
         "id": "interpolated",
         "label": "Interpolated height",
         "thumbnail": "titan-lens-interpolated.webp",
-        "surface": "titan-interpolated.webp",
-        "poles": "titan-poles-interpolated.webp",
+        "surface": "titan-interpolated@2x.webp",
+        "poles": "titan-poles-interpolated@2x.webp",
         "source": {
           "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
           "path": "../manifest.json"
@@ -227,8 +227,8 @@
         "id": "coverage-distance",
         "label": "Distance to data",
         "thumbnail": "titan-lens-coverage-distance.webp",
-        "surface": "titan-coverage-distance.webp",
-        "poles": "titan-poles-coverage-distance.webp",
+        "surface": "titan-coverage-distance@2x.webp",
+        "poles": "titan-poles-coverage-distance@2x.webp",
         "source": {
           "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
           "path": "../manifest.json"
@@ -284,8 +284,8 @@
         "id": "geology",
         "label": "Geology",
         "thumbnail": "titan-lens-geology.webp",
-        "surface": "titan-geology.webp",
-        "poles": "titan-poles-geology.webp",
+        "surface": "titan-geology@2x.webp",
+        "poles": "titan-poles-geology@2x.webp",
         "source": {
           "id": "titan-global-geomorphology-grid",
           "path": "../manifest.json",

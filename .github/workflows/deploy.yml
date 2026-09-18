@@ -1,0 +1,106 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      HOSTING_AUTH_TOKEN: ${{ secrets.HOSTING_AUTH_TOKEN }}
+      HOSTING_SITE_ID: ${{ secrets.HOSTING_SITE_ID }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # __CSSEARTH_VERSION__ (astro.config.mts) counts commits with `git rev-list --count HEAD`;
+          # a shallow checkout would undercount it.
+          fetch-depth: 0
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - name: Check deploy inputs
+        run: |
+          test -n "$HOSTING_AUTH_TOKEN"
+          test -n "$HOSTING_SITE_ID"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # The same paths and key as the CI jobs (universe.yml), which save this cache on main pushes. setup:assets
+          # then sha-verifies every restored file and fetches only what is missing or changed.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Restore prepared assets and textures from R2
+        # Public read access, no credentials. Tolerates one object's asset missing on R2 (a 404
+        # from a transient outage or an unpublished object): the install is skipped loudly and the
+        # object reports unavailable through the existing unavailable-package path
+        # (tools/prepare-context-availability.mts) instead of failing the whole deploy over it.
+        # `pnpm setup:assets --allow-missing` cannot carry a trailing CLI flag past the first `&&`
+        # in that script (pnpm only appends trailing args to the end of a compound script command,
+        # so only the last of its three chained commands would see it) — the flag is an env var
+        # instead, read by tools/setup.mts, tools/setup-prepared.mts and
+        # tools/nebula/application/prepare.ts. CI (.github/workflows/universe.yml) never sets it
+        # and stays strict; `pnpm setup:assets` alone (no env var) also stays strict.
+        env:
+          CSSEARTH_ALLOW_MISSING_ASSETS: "1"
+        run: pnpm setup:assets
+      - name: Build the site
+        # prebuild restores prepared assets again (fast no-op once cached above) and needs the same
+        # allow-missing flag for the identical reason; nothing is baked here either way.
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+          CSSEARTH_ALLOW_MISSING_ASSETS: "1"
+        run: pnpm build
+      - name: Check the build output
+        run: |
+          set -euo pipefail
+          if [ ! -f dist/index.html ]; then
+            echo "::error::dist/index.html is missing; the build did not produce a site."
+            exit 1
+          fi
+          page_count=$(find dist -name '*.html' | wc -l | tr -d ' ')
+          echo "Built $page_count HTML pages."
+          du -sh dist
+          # Expected ~974 pages (see PLAN_TO_GH_PAGES_RELEASE.md). The margin below that tolerates a
+          # handful of objects reporting unavailable (allow-missing above); a much smaller count means
+          # a truncated build.
+          min_pages=900
+          if [ "$page_count" -lt "$min_pages" ]; then
+            echo "::error::Only $page_count HTML pages were built (expected roughly 974, refusing below $min_pages). Refusing to deploy a truncated site."
+            exit 1
+          fi
+      - name: Publish the prebuilt site
+        # netlify.toml supplies the edge route and the search function; the site is not linked to git,
+        # so Actions is the only thing that deploys it.
+        #
+        # netlify-cli treats this repo's pnpm workspace packages (packages/*, labs/nebula/packages/*,
+        # atlas) as ambiguous deploy candidates when invoked from inside the checkout, and fails
+        # non-interactively in CI ("Projects detected: ...") even with valid credentials — reproduced
+        # locally with netlify-cli 27.8.0 from this exact checkout. Its own escape hatch only skips
+        # that workspace-selection prompt when --cwd resolves to a directory OTHER than the process's
+        # actual working directory, so this step runs from $RUNNER_TEMP and points --cwd/--dir at the
+        # checkout with absolute paths. netlify.toml, the edge function and the search function are
+        # still read from the checkout (via --cwd), not from $RUNNER_TEMP.
+        run: |
+          cd "$RUNNER_TEMP"
+          pnpm --package=netlify-cli@27.8.0 dlx netlify deploy \
+            --cwd "$GITHUB_WORKSPACE" \
+            --prod \
+            --dir="$GITHUB_WORKSPACE/dist" \
+            --no-build \
+            --auth "$HOSTING_AUTH_TOKEN" \
+            --site "$HOSTING_SITE_ID"

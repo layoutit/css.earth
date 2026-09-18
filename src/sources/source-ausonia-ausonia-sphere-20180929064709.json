@@ -1,0 +1,37 @@
+{
+  "id": "source-ausonia-ausonia-sphere-20180929064709",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Ausonia · ausonia sphere 20180929064709",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://observations.lam.fr/astero/Data/63Ausonia/Deconv/d63Ausonia_2018-09-29T06_47_09.657_zpl_science_imaging_cam1.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ausonia/source/manifest.json",
+      "revision": "d9021e76689aa4945b17b9e34007568b17fd707f",
+      "sha256": "2d2d1470e446a0f27c2274dda3c582719de86e87137b0bc49f24e1a2cfb1af87",
+      "locator": "/inputs/18"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "scope": "The ausonia sphere 20180929064709 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

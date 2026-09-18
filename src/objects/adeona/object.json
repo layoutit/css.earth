@@ -1,0 +1,130 @@
+{
+  "id": "adeona",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Adeona",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 72
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -61141877539.907524,
+        297254356418.7054,
+        161483618121.48514
+      ],
+      "presentationToReference": [
+        -0.17853610793994878,
+        2.7755575615628914e-17,
+        0.9839333606305127,
+        0.9027412086499428,
+        0.3977771559319137,
+        0.1638036764665502,
+        0.39138621381813543,
+        -0.9174820620691818,
+        0.07101758524750601
+      ],
+      "orbitUpReference": [
+        -2.7755575615628914e-17,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 313.04347826086956,
+      "bodyRadiusM": 72000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/adeona-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8d301148e3ffe268c28040e46b59c22f4575dd757f1b9f751a2e477e91daf3a1"
+      }
+    },
+    "catalog": {
+      "name": "Adeona",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.671645158209067,
+      "description": "Dark carbonaceous main-belt asteroid, discovered in June 1875.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "0f365b2c68a0d6efcdf3ffee0673e2ea0d1733a966a7ec192b2bd9456a9b0674"
+  }
+}

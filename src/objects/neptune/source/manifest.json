@@ -287,8 +287,8 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14477,
-      "expectedSha256": "b2e20ab50675474aa9fd5d28ab0463abb93d155d43485e8356cbbea64e7ccf41",
+      "expectedBytes": 14300,
+      "expectedSha256": "02915ac43bc41de32e92b279a275328de2d5487fde632d8ba71eba9b010b999e",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -364,28 +364,10 @@
       }
     },
     {
-      "id": "neptune-authored-materials",
-      "path": "preparation/materials.json",
-      "expectedBytes": 6589,
-      "expectedSha256": "472ee4ef2aa39ab2e02bb1c71e6fdce97fd3bf34dcf3ef20159c1f8a9501e33c",
-      "origin": "Checked source-informed oblate lighting and retained material preparation parameters",
-      "credit": "cssEarth and the institutional sources identified by the source manifest",
-      "license": "Project-authored specification",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with referenced observation provenance",
-      "consumers": [
-        "material-composition"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored material and lighting parameters; observations used by the product retain separate source records."
-      }
-    },
-    {
       "id": "neptune-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1620,
-      "expectedSha256": "19eb613445e8d64c7f745b29667d43e268ce85116b4891951dae88e881a3e2c1",
+      "expectedBytes": 1518,
+      "expectedSha256": "637a5a9fd4a1c1a1f1dbe413dcc5795c5467639f9b0a96b3bc780a17ac5e728c",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -402,8 +384,8 @@
     {
       "id": "neptune-authored-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 2961,
-      "expectedSha256": "8aa3f35d817d25b0755f8d917ab380fa747706751e8c3d4962b0e5398887f1f8",
+      "expectedBytes": 103,
+      "expectedSha256": "891417623620dd516736824ef9f11165ef97af0964bf26a879dc9cf2b93b0459",
       "origin": "Checked retained scene composition, physical presentation and material residency policy",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -476,6 +458,60 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored source restoration commands and verification settings."
+      }
+    },
+    {
+      "id": "neptune-authored-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2024,
+      "expectedSha256": "7b9a848ed39aa6dc0a2d42ed331b6414b892b53363a1e75ba3f48c65c1b5e835",
+      "origin": "Checked lighting bank parameters for the shared sphere lane",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "raster"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored lighting bank; the observed surfaces retain their own source records."
+      }
+    },
+    {
+      "id": "neptune-authored-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "origin": "Project-authored sky and Sun composition for the shared lane",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "celestial"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition; physical and observed inputs retain separate source records."
+      }
+    },
+    {
+      "id": "neptune-authored-solar-system",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 208,
+      "expectedSha256": "54e87f13a6658dbe96d330f90541d66076fb2c786764d2586bf343a6e5a3efb9",
+      "origin": "Project-authored physical scene scale",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "solar-system"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored scene composition; physical and observed inputs retain separate source records."
       }
     }
   ],

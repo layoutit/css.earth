@@ -1,0 +1,39 @@
+name: Object-scope gate
+
+on:
+  pull_request:
+    # Adding/removing the pipeline-change label (or pushing a new commit) must re-evaluate the gate against a
+    # fresh event payload — re-running the same job only replays the payload from whenever it first triggered, so
+    # labeling a PR after a red run would never turn it green without these two extra trigger types.
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: object-scope-${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  object-scope:
+    name: Object-scope gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # History without blobs: needs a merge base with the PR's base branch to know what the PR actually
+          # touched, and `git diff --name-only` reads only commits and trees.
+          fetch-depth: 0
+          filter: blob:none
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Fail a PR that touches more than 12 object directories without the pipeline-change label
+        # Labels come straight from the triggering pull_request event payload (no extra API call, no token scope
+        # beyond the workflow's default contents:read) — see tools/object-scope-gate.mts. BASE_REF goes through
+        # env, not string interpolation into the shell command, so a base branch name can never inject shell syntax.
+        env:
+          PR_LABELS: ${{ toJson(github.event.pull_request.labels) }}
+          BASE_REF: ${{ github.base_ref }}
+        run: node tools/object-scope-gate.mts "origin/$BASE_REF" "$PR_LABELS"

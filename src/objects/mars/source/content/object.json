@@ -125,13 +125,13 @@
         "id": "normal",
         "label": "Visible color",
         "thumbnail": "mars-lens-normal.webp",
-        "surface": "mars-surface-normal.webp",
-        "poles": "mars-poles-normal.webp",
+        "surface": "mars-surface-normal@2x.webp",
+        "poles": "mars-poles-normal@2x.webp",
         "source": {
           "id": "normal",
           "path": "../manifest.json"
         },
-        "material": "mars-material.webp",
+        "material": "mars-material@2x.webp",
         "shortLabel": "RGB",
         "falseColor": false,
         "qualification": "USGS Viking MDIM 2.1 colorized global mosaic",
@@ -141,8 +141,8 @@
         "id": "elevation",
         "label": "Elevation",
         "thumbnail": "mars-lens-elevation.webp",
-        "surface": "mars-surface-elevation.webp",
-        "poles": "mars-poles-elevation.webp",
+        "surface": "mars-surface-elevation@2x.webp",
+        "poles": "mars-poles-elevation@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Relative elevation",
@@ -199,7 +199,7 @@
           "id": "elevation",
           "path": "../manifest.json"
         },
-        "material": "mars-observation-material.webp",
+        "material": "mars-observation-material@2x.webp",
         "shortLabel": "MOLA",
         "falseColor": true,
         "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
@@ -209,13 +209,13 @@
         "id": "thermal",
         "label": "Thermal infrared",
         "thumbnail": "mars-lens-thermal.webp",
-        "surface": "mars-surface-thermal.webp",
-        "poles": "mars-poles-thermal.webp",
+        "surface": "mars-surface-thermal@2x.webp",
+        "poles": "mars-poles-thermal@2x.webp",
         "source": {
           "id": "thermal",
           "path": "../manifest.json"
         },
-        "material": "mars-observation-material.webp",
+        "material": "mars-observation-material@2x.webp",
         "shortLabel": "IR",
         "falseColor": false,
         "qualification": "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval.",

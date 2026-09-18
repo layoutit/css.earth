@@ -41,9 +41,10 @@ test('prepared destination correction preserves close-range framing when the glo
   const body = scene[config.sceneBodyKey];
   const point = prepareLocationPoint(scene, -58.3816, -34.6037);
   const destination = prepareLocationCamera(scene, point, 2048, { body, camera: config.camera });
-  let local = rotate(point, 'z', -body.meshRotationDegrees);
-  local = rotate(local, 'y', -body.obliquityDegrees);
-  local = rotate(local, 'z', -body.presentationNodeDegrees);
+  // The retained body and mesh nodes carry one solved bodyMatrix (#294); prepareLocationCamera
+  // maps a geographic point into the scene through the same matrix.
+  const m = body.bodyMatrix;
+  let local = apply(m, point);
   local = rotate(local, 'y', destination.controlYaw);
   local = rotate(local, 'x', preparedScenePitch(destination.controlPitch, config.camera));
   local = local.map(value => value * config.camera.sceneScale);

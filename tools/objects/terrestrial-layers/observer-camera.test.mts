@@ -30,12 +30,30 @@ test('a spin parameter record is read in the column order the caller establishes
   assert.equal(pallas.longitudeDegrees, 35);
 });
 
-test('a pole stated just past the pole is folded, not refused', () => {
+test('a pole stated just past the pole is folded, not refused, and orients the body as the record does', () => {
   // 130 Elektra's release states -92.2669, which is 2.27 degrees beyond the south pole rather than a bad number.
-  // Refusing it loses the record; reading it literally puts the pole 156 degrees wrong.
   const elektra = parseSpinState('67.7259 -92.2669 5.22466350\n2444914.8 0\n', 'longitude-first');
   close(elektra.latitudeDegrees, -87.7331, 1e-9, 'folded pole latitude');
   close(elektra.longitudeDegrees, 247.7259, 1e-9, 'folded pole longitude');
+  // The record's own convention applied to its stated numbers is the oracle: the folded state must put every
+  // ecliptic direction at the same body coordinates. Folding the pole alone turns the body half a turn, which is
+  // what Figure B.33 of the survey measured (its model panels matched ours only at 170-180 degrees of phase).
+  const literal: SpinState = { latitudeDegrees: -92.2669, longitudeDegrees: 67.7259, periodHours: 5.2246635, epochJd: 2444914.8, phaseDegrees: 0 };
+  closeAngle(elektra.phaseDegrees, 180, 1e-9, 'folded phase');
+  for (const [longitude, latitude] of [[0, 0], [90, 30], [200, -60], [315, 80]]) {
+    for (const phase of [0, 75, 250]) {
+      const stated = eclipticToBody(direction(longitude, latitude), literal, phase);
+      const folded = eclipticToBody(direction(longitude, latitude), elektra, phase + elektra.phaseDegrees);
+      for (let axis = 0; axis < 3; axis++) close(folded[axis], stated[axis], 1e-12, `body axis ${axis} of (${longitude}, ${latitude}) at phase ${phase}`);
+    }
+  }
+});
+
+test('a DAMIT spin file reads as its first two lines, whatever photometric parameters follow', () => {
+  // DAMIT model 5928, the survey's Flora model as DAMIT distributes it: the release layout, then the scattering weight.
+  const flora = parseSpinState('334 -2 12.86667\n2434419 0\n0.1\n', 'longitude-first');
+  assert.deepEqual([flora.longitudeDegrees, flora.latitudeDegrees, flora.periodHours, flora.epochJd, flora.phaseDegrees], [334, -2, 12.86667, 2434419, 0]);
+  assert.throws(() => parseSpinState('334 -2 12.86667\n2434419 0\nlambert 0.1\n', 'longitude-first'), /photometric/);
 });
 
 test('a spin parameter record is rejected when it cannot mean what the caller claims', () => {

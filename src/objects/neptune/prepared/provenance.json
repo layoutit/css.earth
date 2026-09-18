@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e84e6883360f819a4efa4b641bccc2031dd59621e31d7309b18493e1cb5c0107"
+    "sha256": "2b7137d29b8397162132eefcfcd6e9e04c5f178dcf66ebd1e3280a213f68c9cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a71ced5c4f8573083c97b7d4b0aa0b7df3469993ea167382790fcd9b69afa1e1"
+    "bindingsSha256": "10ad97ec0d45dd229bf068801d2130f9c90545959de965c6300c79155c28e7e5"
   },
   "recipes": [
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "b2e20ab50675474aa9fd5d28ab0463abb93d155d43485e8356cbbea64e7ccf41",
+      "sha256": "02915ac43bc41de32e92b279a275328de2d5487fde632d8ba71eba9b010b999e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -158,7 +158,6 @@
               "thumbnail": "/scenes/neptune/neptune-lens-normal.webp",
               "surface": "/scenes/neptune/neptune-surface-normal.webp",
               "poles": "/scenes/neptune/neptune-poles-normal.webp",
-              "material": "/scenes/neptune/neptune-material-normal.webp",
               "falseColor": false,
               "source": {
                 "id": "normal",
@@ -172,7 +171,6 @@
               "thumbnail": "/scenes/neptune/neptune-lens-methane.webp",
               "surface": "/scenes/neptune/neptune-surface-methane.webp",
               "poles": "/scenes/neptune/neptune-poles-methane.webp",
-              "material": "/scenes/neptune/neptune-material-methane.webp",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -215,7 +213,6 @@
               "thumbnail": "/scenes/neptune/neptune-lens-near-infrared.webp",
               "surface": "/scenes/neptune/neptune-surface-near-infrared.webp",
               "poles": "/scenes/neptune/neptune-poles-near-infrared.webp",
-              "material": "/scenes/neptune/neptune-material-near-infrared.webp",
               "falseColor": true,
               "legend": {
                 "kind": "scale",
@@ -939,6 +936,80 @@
       }
     },
     {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "7b9a848ed39aa6dc0a2d42ed331b6414b892b53363a1e75ba3f48c65c1b5e835",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/neptune/",
+        "sourceWidth": 721,
+        "sourceHeight": 361,
+        "width": 2880,
+        "height": 1440,
+        "latitudeBands": 20,
+        "polarTile": 128,
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "neptune-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssneptune-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88
+        },
+        "surfaces": [],
+        "lighting": {
+          "frameSize": 256,
+          "columns": 16,
+          "presentationSize": 1024,
+          "defaultFrame": 128,
+          "billboardFrameSize": 24,
+          "billboardColumns": 16,
+          "rowOutput": "neptune-lighting-{density}x-row-{row}.webp",
+          "billboardOutput": "neptune-lighting-{density}x-billboard.webp",
+          "minimumLightViewZ": -1,
+          "maximumLightViewZ": 1,
+          "frameCount": 256,
+          "shadowlessFloodLimbFloor": 0.35,
+          "ambientIntensity": 0.6911503837897545,
+          "radiusScale": 0.505,
+          "terminator": [
+            0,
+            0.1
+          ],
+          "maximumAlpha": 0.95,
+          "bankSchema": "cssneptune-prepared-lighting-bank@1",
+          "billboardSchema": "cssneptune-prepared-lighting-billboard@1",
+          "metadata": {
+            "schema": "cssneptune-prepared-material@1",
+            "storageModel": "row-bank",
+            "model": "full-phase Lambert with a cubic sky term",
+            "worldLightDirection": [
+              0.42,
+              -0.73,
+              0.54
+            ],
+            "ambientIntensity": 0.6911503837897545,
+            "shadowlessFloodLimbFloor": 0.35,
+            "orenNayarRoughness": 0,
+            "terminatorSmoothstep": [
+              0,
+              0.1
+            ],
+            "minimumLightViewZ": -1,
+            "maximumLightViewZ": 1,
+            "baseLightAzimuthDegrees": 0,
+            "defaultLightViewZ": 0,
+            "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+            "runtimeRasterization": false,
+            "lightingModel": "full-phase Lambert with a cubic sky term and no atmosphere; the bank is indexed by light view z, so it carries no body orientation"
+          }
+        }
+      }
+    },
+    {
       "id": "charts",
       "path": "source/content/charts.json",
       "sha256": "b924bf227bdced8c394dd79184f903627f2e8ed1293b10cc8b69a0a05dabe42e",
@@ -1246,8 +1317,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "b2e20ab50675474aa9fd5d28ab0463abb93d155d43485e8356cbbea64e7ccf41",
-      "bytes": 14477,
+      "sha256": "02915ac43bc41de32e92b279a275328de2d5487fde632d8ba71eba9b010b999e",
+      "bytes": 14300,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1346,6 +1417,129 @@
   ],
   "products": [
     {
+      "id": "lighting",
+      "label": "lighting",
+      "recipe": "raster",
+      "selector": "/lighting",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Evaluate the declared surface-lighting model into phase banks.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "kind": "rendering-model"
+      },
+      "inputs": [],
+      "outputs": [
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-billboard.webp",
+          "bytes": 64902,
+          "sha256": "54fb6cc1a14dd917379dd5beeb30e642a73853b45f2bc8fa669eda92cfee8947",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-00.webp",
+          "bytes": 41198,
+          "sha256": "8b56f7d0cad7290ab19efa936b3ea2022807b36faf24fcc796413b5ba31910cf",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-01.webp",
+          "bytes": 61514,
+          "sha256": "bf9ddaf6f9286310b3563efee47296231f7c1d2f20b98467937d863e022d94a1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-02.webp",
+          "bytes": 65594,
+          "sha256": "f0e34316799f944ca4157d0c2c94c3b5c7beba1266ff8a15346a04e1a69bb87f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-03.webp",
+          "bytes": 67858,
+          "sha256": "abc19ed265314f1a66a4c78605ccbdfee4bb805af827363b9762b79b5c09e7f5",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-04.webp",
+          "bytes": 66754,
+          "sha256": "8d2b17757e5e1901bdb0df4a0ea73b97386d9c59b0e89ec2b92bf7d97f78ca7b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-05.webp",
+          "bytes": 63964,
+          "sha256": "0e66792dc735bfa36175641a92ea81e02a4f65b182982486f2648bd1c2890132",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-06.webp",
+          "bytes": 53340,
+          "sha256": "93e13c44b4f2b3c4ac15ad60f5ab79ade4739cd7ed1da6c9e1c41dc61d8830c1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-07.webp",
+          "bytes": 29170,
+          "sha256": "74b2567bbd79e61f2622823c33e1455bafb68c23e5c30d5d45ac0c09b369ab99",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-08.webp",
+          "bytes": 33954,
+          "sha256": "befacd06a3a67a66caf37c64bf9026584c541a3d56c0f95182e5a1f1c0d3249d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-09.webp",
+          "bytes": 50398,
+          "sha256": "8ea328f6decabe464a869ab463d0dc60074487a86574509f862f8da93c2d1df8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-10.webp",
+          "bytes": 58702,
+          "sha256": "aeab23077f1ac3fd907b3271a95ac3e57b2251e0995bccd5a5ff2fa857487cc8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-11.webp",
+          "bytes": 61854,
+          "sha256": "26ee1350832ede723778e37a61df27a84bc8e2c8e4b1343cbad0d58503c58c38",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-12.webp",
+          "bytes": 66352,
+          "sha256": "80ce3db65a2a66894dded141a630edc79adf1ea80eec0e1afc092d530cb1fb7b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-13.webp",
+          "bytes": 72030,
+          "sha256": "5c4d3ccf4354d309283b0d33af6f0e8384293daeb59416091f555cc9b4065579",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-14.webp",
+          "bytes": 78232,
+          "sha256": "2cb621ef978642ce8a0f592ec124241b7b08e1b7d449c6411343f3eb3ef6dcf1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/neptune/neptune-lighting-2x-row-15.webp",
+          "bytes": 113758,
+          "sha256": "b02f17c514e270c53dc627c1280f36064aa49301fc236589ef30e32cc2dbb34f",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "authored-recipe"
+    },
+    {
       "id": "normal",
       "label": "Visible color",
       "recipe": "observations",
@@ -1394,18 +1588,6 @@
           "url": "/scenes/neptune/neptune-poles-normal@2x.webp",
           "bytes": 11348,
           "sha256": "63315b36fe09ae420cb4cf992fee540a8b4af8d9f2e186217b410289641037e4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-material-normal.webp",
-          "bytes": 67596,
-          "sha256": "085e3f0ea4952edca52db166f504ab8d33ab1bcfc022a61b4e144de2022679b8",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-material-normal@2x.webp",
-          "bytes": 192124,
-          "sha256": "0adbf33ef6dfbedfaed4e9113d1d7ec8a6ba4e3a952daa3edd8b58ce6730d7bd",
           "verification": "bytes-verified"
         }
       ],
@@ -1460,18 +1642,6 @@
           "bytes": 11594,
           "sha256": "bf786cddaefed053c7adf936c4f680e0f00df6efa351cd110ca7078b914e0068",
           "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-material-methane.webp",
-          "bytes": 67038,
-          "sha256": "2dd3876370eb4a56b099917fd974228b709e13055fd12083d12dc75924acc715",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-material-methane@2x.webp",
-          "bytes": 190302,
-          "sha256": "adde6785924ede245a7a948c12b4ab80f67047789a5eba23a171b955375f4b0c",
-          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1524,18 +1694,6 @@
           "url": "/scenes/neptune/neptune-poles-near-infrared@2x.webp",
           "bytes": 10202,
           "sha256": "f18ae95fcd51f0374dd5cda5c42229b8a56dbb81f2fe1c32bb00f40d27ac3357",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-material-near-infrared.webp",
-          "bytes": 65664,
-          "sha256": "0e43fab98fe29ee417d1559f2baa65a5e1824224927043f64facd4868d0fd627",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/neptune/neptune-material-near-infrared@2x.webp",
-          "bytes": 182704,
-          "sha256": "eae4280e38357fb02cf77dc61293f830fd1982cadf00525705cf55fbd693dca5",
           "verification": "bytes-verified"
         }
       ],
@@ -1735,11 +1893,11 @@
   },
   "lastPreparation": {
     "objectId": "neptune",
-    "materialSha256": "adf631c9d098f280272ef9268bbbe719ea2dc3b320ef35d7ef5ef9e8dc8256e5",
+    "materialSha256": "ed31e4cdfadb5a5bdbb91b662b134c024732f61b7117f5b5ed66d064a8e71ad2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a71ced5c4f8573083c97b7d4b0aa0b7df3469993ea167382790fcd9b69afa1e1"
+      "bindingsSha256": "10ad97ec0d45dd229bf068801d2130f9c90545959de965c6300c79155c28e7e5"
     }
   }
 }

@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/sun/sun-surface-photosphere.webp",
+      "url": "/scenes/sun/sun-surface-photosphere@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/sun/sun-poles-photosphere.webp",
+      "url": "/scenes/sun/sun-poles-photosphere@2x.webp",
       "width": 512,
       "height": 256
     },

@@ -23,8 +23,6 @@ export interface AtlasAddress { frameIndex: number; rowIndex: number; url: strin
 export interface Billboard { schema: string; url: string; columns: number; rowCount: number; frameCount: number; presentations: AtlasAddress[]; }
 export interface Bank { billboard: Billboard; presentations: AtlasAddress[]; rows: {url: string}[];
   transport: {framesPerRow: number; maximumRetainedRowCount: number; defaultFrame: number; initialWarmRows: number[]}; }
-/** Authored silhouette rule for prepared surface levels; see surface-texture-levels.ts. */
-export interface TextureLevelProfile { hysteresis: number; texelsPerCssPixel: number; }
 export interface RasterAssets {
   surfaceDimensions: { width: number; height: number };
   poles: { url: string; url2x?: string };
@@ -44,6 +42,8 @@ export interface Scene {
   bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair}; preparedSurface?: {seamRepair?: SeamRepair};
   interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
+  /** Flat discs in the body's equatorial plane, such as a ring, drawn under the same system node as the surface. */
+  planes?: {id: string; className: string; url: string; color: string; radius: number; leaf: PreparedLeaf}[];
   material: CompositeMaterial;
 }
 export interface SolarSource { bodyId: string; }
@@ -65,7 +65,6 @@ export interface PresentationInputs {
   namespace: string; mode: 'row-bank-cutaway' | 'composite' | 'emissive';
   scene: Scene; assets: RasterAssets; lenses: Lenses; sun: DirectionalSunPlan | null;
   solarSource: SolarSource; controls: ObjectControls;
-  textureLevels?: TextureLevelProfile;
   /** Authored surface targets (positive-east degrees) a lens selects; composite only. */
   lensFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
 }

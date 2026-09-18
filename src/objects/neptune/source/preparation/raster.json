@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/neptune/",
+  "sourceWidth": 721,
+  "sourceHeight": 361,
+  "width": 2880,
+  "height": 1440,
+  "latitudeBands": 20,
+  "polarTile": 128,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "neptune-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssneptune-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88
+  },
+  "surfaces": [],
+  "lighting": {
+    "frameSize": 256,
+    "columns": 16,
+    "presentationSize": 1024,
+    "defaultFrame": 128,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "neptune-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "neptune-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.6911503837897545,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssneptune-prepared-lighting-bank@1",
+    "billboardSchema": "cssneptune-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssneptune-prepared-material@1",
+      "storageModel": "row-bank",
+      "model": "full-phase Lambert with a cubic sky term",
+      "worldLightDirection": [
+        0.42,
+        -0.73,
+        0.54
+      ],
+      "ambientIntensity": 0.6911503837897545,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "defaultLightViewZ": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false,
+      "lightingModel": "full-phase Lambert with a cubic sky term and no atmosphere; the bank is indexed by light view z, so it carries no body orientation"
+    }
+  }
+}

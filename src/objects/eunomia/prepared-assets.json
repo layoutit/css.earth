@@ -1,0 +1,16 @@
+{
+  "schema": "csseunomia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 1378462,
+      "sha256": "00230b95459247d265ce89b73ba3012caf668011359e72dd0696cff04c0d6e1a"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 1341744,
+      "sha256": "a651ec786be05c2d4a61ff3d102ac520c2265018f8096bb15d63cc4d512af385"
+    }
+  ]
+}

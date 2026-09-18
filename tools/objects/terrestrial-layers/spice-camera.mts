@@ -2,10 +2,23 @@ import { pds3Keyword } from '../pds-labels.mts';
 import { readFitsPlane } from '../observation/fits.mts';
 import type { KernelSet } from '../../spice/kernel-set.mts';
 import { encodeClock, clockToEt } from '../../spice/sclk.mts';
-import { etToUtc } from '../../spice/lsk.mts';
+import { etToUtc, utcToEt } from '../../spice/lsk.mts';
 import { spiceCamera, type Aberration, type PixelModelKeys } from '../../spice/camera.mts';
 import type { SpiceCameraDeclaration } from './source-records.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
+import { relative, resolve } from 'node:path';
+
+const projectRoot = resolve(import.meta.dirname, '../../..');
+/** The kernel bank and the oracle fixtures both load kernels from an absolute, machine-specific path (the worktree
+ * root, or a checkout under a different home directory). Recorded evidence must be reproducible across machines and
+ * checkouts, so it names each kernel relative to the project root rather than embedding that absolute path. */
+function kernelEvidence(set: KernelSet) {
+  return set.kernels.map(kernel => {
+    const path = relative(projectRoot, kernel.path);
+    if (path.startsWith('..')) throw new Error(`Kernel evidence path escapes the project root: ${kernel.path}`);
+    return { path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind };
+  });
+}
 
 /**
  * Images whose archive ships no geometry: the camera comes from the mission's
@@ -19,6 +32,8 @@ import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';
  * mesh exactly as for the archived-camera formats.
  */
 export const SPICE_CAMERA_FORMAT = 'spice-camera';
+/** The same camera where the archive ships its bands as further planes of one array. */
+export const SPICE_CAMERA_COLOR_FORMAT = 'spice-camera-color';
 export const ABERRATIONS: readonly Aberration[] = ['LT+S', 'LT', 'CN+S', 'CN', 'NONE'];
 
 /** Header card values as the FITS reader keeps them: quoted strings lose their quotes and padding. */
@@ -64,13 +79,15 @@ function decodeVicarSpiceFrame(bytes: Buffer, label: string | undefined, set: Ke
   let flagged = 0;
   for (let i = 0; i < count; i++) { const value = image.data[i]; values[i] = value; if (!Number.isFinite(value)) flagged++; }
   const { schema, matrix, rayMatrix, positionKm, sunDirection, report } = camera;
+  // A VICAR frame carries one band; the colour field exists so both decoders share one shape.
   return { width: image.width, height: image.height, planes: { IMAGE: values }, camera: { schema, matrix, rayMatrix, positionKm, sunDirection }, startTime, filter,
+    colorPlanes: undefined as readonly Float32Array[] | undefined,
     acceptPixel: (i: number) => Number.isFinite(values[i]),
     qualityReport: { units: `calibrated ${spice.image.quantity}`, plane: 1, saturatedPixels: 0, flaggedPixels: flagged,
       flagDefinition: 'VICAR calibrated samples with no archived flag plane; nonfinite pixels rejected.',
       geometry: 'Per-pixel full-source mesh intersections from the SPICE-derived camera; prepared geometry, not archive-supplied backplanes.',
       exposure: { clockCard: `${startKey} and ${stopKey}`, clock: `${start} to ${stop}`, ticks, et, utc: startTime },
-      camera: report, kernels: set.kernels.map(kernel => ({ path: kernel.path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind })) } };
+      camera: report, kernels: kernelEvidence(set) } };
 }
 
 /** Decode the image plane, read the exposure epoch from its header and derive the camera from the loaded kernel set. */
@@ -82,9 +99,24 @@ export function decodeSpiceCameraFrame(bytes: Buffer, set: KernelSet, spice: Spi
   }
   const flagValue = (key: string) => { const value = Number(unquoteCard(header[key])); if (!Number.isFinite(value)) throw new Error(`FITS header lacks a numeric ${key}.`); return value; };
   const missing = (spice.image.missingValueKeys ?? []).map(flagValue), saturation = spice.image.saturationKey === undefined ? null : flagValue(spice.image.saturationKey);
-  const clockCard = spice.clock.header ?? '', clockText = unquoteCard(header[clockCard]);
-  if (clockText === undefined) throw new Error(`FITS header lacks the clock card ${clockCard}.`);
-  const clock = set.clock(spice.clock.spacecraft), ticks = encodeClock(clock, clockText), et = clockToEt(clock, set.leapSeconds, ticks), startTime = etToUtc(set.leapSeconds, et);
+  // An archive that states the exposure epoch as UTC rather than a spacecraft clock count: read that card
+  // directly. The clock path stays exactly as it was for archives that carry a count.
+  const utcCard = spice.clock.utcHeader;
+  let clockCard: string, clockText: string, ticks: number | null, et: number;
+  if (utcCard !== undefined) {
+    const stated = unquoteCard(header[utcCard]);
+    if (stated === undefined) throw new Error(`FITS header lacks the epoch card ${utcCard}.`);
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?$/u.test(stated)) throw new Error(`FITS header ${utcCard} is not an ISO 8601 UTC instant: ${stated}.`);
+    clockCard = utcCard; clockText = stated; ticks = null;
+    et = utcToEt(set.leapSeconds, stated.endsWith('Z') ? stated : `${stated}Z`);
+  } else {
+    clockCard = spice.clock.header ?? '';
+    const stated = unquoteCard(header[clockCard]);
+    if (stated === undefined) throw new Error(`FITS header lacks the clock card ${clockCard}.`);
+    const clock = set.clock(spice.clock.spacecraft);
+    clockText = stated; ticks = encodeClock(clock, stated); et = clockToEt(clock, set.leapSeconds, ticks);
+  }
+  const startTime = etToUtc(set.leapSeconds, et);
   const camera = spiceCamera({ pool: set.pool, ephemeris: set.ephemeris, rotation: set.rotation, observer: spice.observer, target: spice.target, bodyFrame: spice.bodyFrame,
     instrument: spice.instrument, et, aberration: aberrationOf(spice), pixels: pixelModelKeys(spice) });
   if (camera.width !== image.width || camera.height !== image.height) throw new Error(`Image is ${image.width} x ${image.height}; the instrument kernel describes ${camera.width} x ${camera.height}.`);
@@ -94,12 +126,24 @@ export function decodeSpiceCameraFrame(bytes: Buffer, set: KernelSet, spice: Spi
     const value = image.values[i]; values[i] = value;
     if (value === saturation) saturated++; else if (!Number.isFinite(value) || missing.includes(value)) flagged++;
   }
+  // A colour product carries its bands as further planes of the same array. Each is read through the same
+  // reader and held to the same flag values, and a pixel is only accepted where every band is valid.
+  const declaredColorPlanes = spice.image.colorPlanes ?? [];
+  const colorPlanes = declaredColorPlanes.map(plane => {
+    const band = readFitsPlane(bytes, plane);
+    if (band.width !== image.width || band.height !== image.height) throw new Error(`FITS plane ${plane} is ${band.width} x ${band.height}; plane ${spice.image.plane ?? 1} is ${image.width} x ${image.height}.`);
+    const out = new Float32Array(count);
+    for (let i = 0; i < count; i++) out[i] = band.values[i]!;
+    return out;
+  });
+  const valid = (v: number | undefined) => v !== undefined && Number.isFinite(v) && v !== saturation && !missing.includes(v);
   const { schema, matrix, rayMatrix, positionKm, sunDirection, report } = camera;
   return { width: image.width, height: image.height, planes: { IMAGE: values }, camera: { schema, matrix, rayMatrix, positionKm, sunDirection }, startTime, filter,
-    acceptPixel: (i: number) => Number.isFinite(values[i]) && values[i] !== saturation && !missing.includes(values[i]),
+    colorPlanes: colorPlanes.length ? colorPlanes as readonly Float32Array[] : undefined,
+    acceptPixel: (i: number) => valid(values[i]) && colorPlanes.every(band => valid(band[i])),
     qualityReport: { units: `calibrated ${spice.image.quantity}`, plane: spice.image.plane ?? 1, saturatedPixels: saturated, flaggedPixels: flagged,
       flagDefinition: missing.length || saturation !== null ? `Header flag values rejected: ${[...missing, ...(saturation === null ? [] : [saturation])].join(', ')}.` : 'No archive flag values declared; nonfinite pixels rejected.',
       geometry: 'Per-pixel full-source mesh intersections from the SPICE-derived camera; prepared geometry, not archive-supplied backplanes.',
       exposure: { clockCard, clock: clockText, ticks, et, utc: startTime },
-      camera: report, kernels: set.kernels.map(kernel => ({ path: kernel.path, bytes: kernel.bytes, sha256: kernel.sha256, kind: kernel.kind })) } };
+      camera: report, kernels: kernelEvidence(set) } };
 }

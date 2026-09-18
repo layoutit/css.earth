@@ -1,0 +1,16 @@
+{
+  "schema": "csstriton-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 520014,
+      "sha256": "5be359c18c47e75310fe6b8fa3501e3a11b66b493d25e5171e4facdd3087976e"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 378636,
+      "sha256": "2de50dfc680e0ba01b9809fd889d395620852cee906f1e9ca5ba30a9e490fb53"
+    }
+  ]
+}

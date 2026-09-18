@@ -72,7 +72,35 @@
         "metadata": {
           "label": "SPHERE photograph",
           "falseColor": false,
-          "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, 2018-12-27 to 2019-01-17, cast onto the released MPCD shape. The survey released no ADAM reconstruction for this body, so the photograph rides the same mesh the Shape view uses. The camera's pointing and orientation are computed from the survey's rotation record, JPL Horizons geometry and each frame's header; the exposure epoch is the midpoint of each frame's stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame's peak. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+          "coverage": "30 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 5 nights from 2018-12-27 to 2019-01-17, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.19. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+        },
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 128,
+          "maximumGain": 4,
+          "maximumAngleDegrees": 60
+        },
+        "transfer": {
+          "maximumSeparationFootprints": 2,
+          "visibilityToleranceMeters": 0.5,
+          "maximumEmissionDegrees": 70,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+        },
+        "photometry": {
+          "model": "retained-observation",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 70,
+          "maximumEmissionDegrees": 70,
+          "maximumGain": 1
+        },
+        "display": {
+          "basis": "authored",
+          "percentiles": [
+            1,
+            99.5
+          ]
         },
         "frames": [
           {
@@ -555,35 +583,7 @@
               136.735
             ]
           }
-        ],
-        "selection": "finest-resolution",
-        "levelMatching": {
-          "samplesPerTriangle": 24,
-          "minimumPairs": 128,
-          "maximumGain": 4,
-          "maximumAngleDegrees": 60
-        },
-        "transfer": {
-          "maximumSeparationFootprints": 2,
-          "visibilityToleranceMeters": 0.5,
-          "maximumEmissionDegrees": 70,
-          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
-        },
-        "photometry": {
-          "model": "retained-observation",
-          "referenceIncidenceDegrees": 0,
-          "referenceEmissionDegrees": 0,
-          "maximumIncidenceDegrees": 70,
-          "maximumEmissionDegrees": 70,
-          "maximumGain": 1
-        },
-        "display": {
-          "basis": "authored",
-          "percentiles": [
-            1,
-            99.5
-          ]
-        }
+        ]
       }
     ]
   },
@@ -622,7 +622,8 @@
         "maximumErrorMeters": 1800,
         "regularize": true
       }
-    }
+    },
+    "radialTerrainAlternatives": []
   },
   "celestial": {
     "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"

@@ -282,8 +282,8 @@
     {
       "id": "ariel-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 4822,
-      "expectedSha256": "7a953c407170a5deb2652171dee904c25bec3ed01f9d2c605124a876d239c950",
+      "expectedBytes": 4787,
+      "expectedSha256": "6f60227965750c71b8718e3cc03ea13c25b6f8e3d9dc20740ec382da425ffd89",
       "origin": "Repository-authored Ariel raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -301,8 +301,8 @@
     {
       "id": "ariel-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1585,
-      "expectedSha256": "e8b7de64b3c3ee0a9f09d32baf4d1547ec06c10fee36a1f8eebe4924c0fab54f",
+      "expectedBytes": 1591,
+      "expectedSha256": "142f44d808d872044ba78202dcca27b205f532cb4a05f3ada71d6a36ad51d750",
       "origin": "Repository-authored Ariel geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -395,8 +395,8 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7761,
-      "expectedSha256": "4d9ef00cd74a270d2eb3fe411d664128cc29b19bf7e6bb68cf95f628c7efcf68",
+      "expectedBytes": 7773,
+      "expectedSha256": "4ec5efcd0ae7bd3cc20398f11c031907ba936ee2bc67bcdb5ae6d075a5d05d27",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

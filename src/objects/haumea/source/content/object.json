@@ -86,14 +86,28 @@
         "label": "Color",
         "qualification": "Whole-disc colour and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
         "thumbnail": "color-thumbnail.webp",
-        "surface": "surface.webp",
-        "poles": "poles.webp",
+        "surface": "surface-color.webp",
+        "poles": "poles-color.webp",
         "source": {
           "id": "haumea-disc-color",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1086/499575"
         },
         "notes": "One measured mean colour and albedo for the whole disc, averaged over rotation. Display coordinates are arbitrary; the known darker, redder region and any other colour variation are not shown."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "An artist's surface from NASA's Haumea 3D model; not an observation.",
+        "thumbnail": "illustration-thumbnail.webp",
+        "surface": "surface-illustration.webp",
+        "poles": "poles-illustration.webp",
+        "source": {
+          "id": "nasa-vtad-haumea-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/haumea-3d-model/"
+        },
+        "notes": "NASA's illustration of Haumea, from its 3D model. No image resolves this surface, so none of the terrain, albedo or colour in it was observed. Display coordinates are arbitrary."
       }
     ]
   },
@@ -120,6 +134,12 @@
       "role": "color",
       "description": "2006 rotation-corrected BVRI colours",
       "href": "https://doi.org/10.1086/499575"
+    },
+    {
+      "label": "NASA VTAD",
+      "role": "illustration",
+      "description": "Haumea 3D model and illustrative surface texture",
+      "href": "https://science.nasa.gov/resource/haumea-3d-model/"
     }
   ],
   "provenance": {

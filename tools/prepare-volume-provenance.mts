@@ -2,7 +2,7 @@ import { sha256 } from '../src/platform/sha256.mts';
 import { parseProductInputEvidence } from '../src/platform/product-input-evidence.mts';
 import type { ProductInputEvidence } from '../src/platform/product-input-evidence.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import type { Lens } from '../site/planet-shell-types.ts';
@@ -15,6 +15,7 @@ import { hasErrorCode } from './source-values.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { manifestSources } from './context-source-records.mts';
 import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from './objects/observation/sky-band-composite.mts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from './source-mirror.mts';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts',
   'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'tools/fits.mts'] as const;
@@ -104,9 +105,13 @@ interface Options {
   root?: string;
   /** Repository-relative, tracked compiler inputs only. Downloads never enter source closure. */
   input?: (path: string) => Promise<Buffer>;
+  /** Opt-in (default null/off): the real content-addressed mirror origin, named explicitly by a production caller.
+   * Left off by default so an ordinary test never makes a surprise real request to it. */
+  mirrorOrigin?: string | null;
 }
 
-export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>): Promise<{ bytes: Buffer; width: number; height: number }> {
+export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>,
+  { mirrorOrigin = null, fetcher = fetch }: { mirrorOrigin?: string | null; fetcher?: typeof fetch } = {}): Promise<{ bytes: Buffer; width: number; height: number }> {
   const path = resolve(root, pin.path);
   if (pin.skyBands) {
     // The recipe is source closure whether or not its composite is already cached.
@@ -121,9 +126,18 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed sky band preview: ${pin.skyBands.path}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   } else if (bytes === null) {
-    const response = await fetch(pin.url!, { signal: AbortSignal.timeout(60000) });
-    if (!response.ok) throw new Error(`Preview download failed: ${response.status} ${pin.url}`);
-    bytes = Buffer.from(await response.arrayBuffer());
+    // Try the content-addressed mirror first (only when a caller opted in): it is our own reliable storage,
+    // sha-verified before use. A miss, a mismatch or any mirror error falls back to the publisher URL, which stays
+    // the provenance origin either way.
+    if (mirrorOrigin) {
+      const mirrorUrl = sourceCacheUrl(mirrorOrigin, pin.sha256, basename(pin.path));
+      bytes = await fetchWithRetry(fetcher, mirrorUrl, { idleMs: 5000, attempts: 1 })
+        .then(candidate => (candidate.length === pin.bytes && sha256(candidate) === pin.sha256) ? candidate : null)
+        .catch(() => null);
+    }
+    // Capped at 3 attempts x 120s idle (~6 min worst case, not 30): a stalled publisher must not hang the build.
+    if (bytes === null) bytes = await fetchWithRetry(fetcher, pin.url!, { idleMs: 120000, attempts: 3 })
+      .catch((error: unknown) => { throw new Error(`Preview download failed: ${pin.url} (${error instanceof Error ? error.message : String(error)})`); });
     if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed publisher preview: ${pin.url}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   }
@@ -136,7 +150,7 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
 }
 
 /** Recover portable lineage from source-owned byte pins without replaying the cloud compiler. */
-export async function prepareVolumeProvenance({ root = process.cwd(), input = path => readFile(resolve(root, path)) }: Options = {}): Promise<PreparedVolumeProvenance[]> {
+export async function prepareVolumeProvenance({ root = process.cwd(), input = path => readFile(resolve(root, path)), mirrorOrigin = null }: Options = {}): Promise<PreparedVolumeProvenance[]> {
   const results: PreparedVolumeProvenance[] = [];
   const generatorBytes = await input(volumeProvenanceCompilerClosure[0]);
   for (const path of volumeProvenanceCompilerClosure.slice(1)) await input(path);
@@ -201,7 +215,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
     for (const [index, lens] of record.lenses.entries()) {
       const own = bySource.get(lens.input);
       if (!own || own.lensId !== lens.id) throw new TypeError(`Unbound volume lens image: ${record.objectId}/${lens.id}`);
-      const image = await preparePreview(root, lens.preview, input);
+      const image = await preparePreview(root, lens.preview, input, { mirrorOrigin });
       const previewUrl = `/scenes/${record.objectId}/datasets/${sha256(image.bytes)}.webp`;
       outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
       controls.push({ id: lens.id, label: lens.label, title: lens.title, thumbnailUrl: previewUrl,
@@ -247,7 +261,8 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const results = await prepareVolumeProvenance();
+  // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
+  const results = await prepareVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
   const outputs = results.flatMap(result => result.outputs);
   for (const output of outputs) await mkdir(dirname(output.path), { recursive: true });
   await writePreparedSet(outputs);

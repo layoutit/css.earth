@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import { resolve } from 'node:path';
 import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '@cssearth/objects';
-import type { RasterRecipe } from './config.js';
+import { RASTER_DENSITY, type RasterRecipe } from './config.js';
 import { raster, readRgba, assetPath } from './io.js';
 import { withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.js';
 import { missingCoverageColor } from '../../platform/prepare-missing-coverage.mts';
@@ -75,93 +75,90 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             }
             preparedSources.push({ id: surface.id, rgba: source, fallback });
         }
-        for (const density of config.densities) {
-            const scale = surface.resolutionScale ?? 1;
-            const width = config.width * density * scale, height = config.height * density * scale;
-            let nearest = false, pixels: Uint8Array;
-            let nativePhotograph: NativePoleSampler | undefined;
-            if (surface.science) {
-                if (!interpret) throw new TypeError(`Surface ${surface.id} declares a scientific interpretation but none was supplied.`);
-                const interpreted = await interpret({ id: surface.id, source: surface.source, science: surface.science, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) }, width, height, density);
-                nearest = interpreted.nearest; pixels = withAlpha(interpreted, width, height); nativePhotograph = interpreted.nativePhotograph;
-                if (interpreted.report) (interpretations[surface.id] ??= {})[density] = interpreted.report;
-                if (config.emission) {
-                    const plates = interpreted.plates;
-                    if (!plates) throw new TypeError(`Surface ${surface.id} declares emission but its interpretation returned no plates.`);
-                    const encode = (plate: InterpretedPlate) => plate.lossless ? { lossless: true, effort: 6 } : { quality: 90, alphaQuality: 100, smartSubsample: true, effort: 6 };
-                    await raster(plates.offLimb.data, plates.offLimb.size, plates.offLimb.size).webp(encode(plates.offLimb)).toFile(assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
-                    await raster(plates.limb.data, plates.limb.size, plates.limb.size).webp(encode(plates.limb)).toFile(assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
+        const density = RASTER_DENSITY, scale = surface.resolutionScale ?? 1;
+        const width = config.width * density * scale, height = config.height * density * scale;
+        let nearest = false, pixels: Uint8Array;
+        let nativePhotograph: NativePoleSampler | undefined;
+        if (surface.science) {
+            if (!interpret) throw new TypeError(`Surface ${surface.id} declares a scientific interpretation but none was supplied.`);
+            const interpreted = await interpret({ id: surface.id, source: surface.source, science: surface.science, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) }, width, height, density);
+            nearest = interpreted.nearest; pixels = withAlpha(interpreted, width, height); nativePhotograph = interpreted.nativePhotograph;
+            if (interpreted.report) (interpretations[surface.id] ??= {})[density] = interpreted.report;
+            if (config.emission) {
+                const plates = interpreted.plates;
+                if (!plates) throw new TypeError(`Surface ${surface.id} declares emission but its interpretation returned no plates.`);
+                const encode = (plate: InterpretedPlate) => plate.lossless ? { lossless: true, effort: 6 } : { quality: 90, alphaQuality: 100, smartSubsample: true, effort: 6 };
+                await raster(plates.offLimb.data, plates.offLimb.size, plates.offLimb.size).webp(encode(plates.offLimb)).toFile(assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
+                await raster(plates.limb.data, plates.limb.size, plates.limb.size).webp(encode(plates.limb)).toFile(assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
+            }
+        } else {
+            pixels = source ?? await readRgba(resolve(sourceDirectory, surface.source), width, height, true, surface.sharpen);
+            if (surface.nativeSourcePoles) {
+                let pending = nativeSourcePoles.get(surface.source);
+                if (!pending) {
+                    pending = loadNativeSourcePoleSampler(resolve(sourceDirectory, surface.source));
+                    nativeSourcePoles.set(surface.source, pending);
                 }
-            } else {
-                pixels = source ?? await readRgba(resolve(sourceDirectory, surface.source), width, height, true, surface.sharpen?.[density - 1]);
-                if (surface.nativeSourcePoles) {
-                    let pending = nativeSourcePoles.get(surface.source);
-                    if (!pending) {
-                        pending = loadNativeSourcePoleSampler(resolve(sourceDirectory, surface.source));
-                        nativeSourcePoles.set(surface.source, pending);
-                    }
-                    nativePhotograph = applyNativeSurfaceExposure(await pending, surface.exposure);
-                }
-            }
-            if (surface.exposure)
-                applySurfaceExposure(pixels, surface.exposure);
-            // The legacy source-packed route resized an already-packed raster, so a filter footprint could cross
-            // stored latitude-strip gutters. This opt-in resizes the completed source map first, then creates those
-            // same target-size gutters. It deliberately keeps coverage completion at the native source resolution.
-            if (source && config.unpackedResizeBeforePack && (config.sourceWidth !== width || config.sourceHeight !== height)) {
-                const resized = await raster(pixels, config.sourceWidth, config.sourceHeight)
-                    .resize(width, height, { kernel: 'lanczos3' }).raw().toBuffer();
-                if (resized.length !== width * height * 4) throw new Error(`Unpacked source resize drifted for ${surface.id}.`);
-                pixels = resized;
-            }
-            const resizedUnpacked = Boolean(source && config.unpackedResizeBeforePack);
-            const packingWidth = resizedUnpacked ? width : source ? config.sourceWidth : width;
-            const packingHeight = resizedUnpacked ? height : source ? config.sourceHeight : height;
-            const packed = packLatitudeRaster(pixels, packingWidth, packingHeight, config.latitudeBands, Math.max(2, packingHeight / config.latitudeBands / 4));
-            let image = raster(packed.data, packed.packedWidth, packed.packedHeight);
-            if (source && !resizedUnpacked && (packingWidth !== width || packingHeight !== height))
-                image = image.resize(width + height / config.latitudeBands / 2, height + height / 2, { kernel: 'lanczos3' });
-            // Numeric and categorical surfaces keep their selected values: lossless, no chroma subsampling.
-            const webp = nearest ? { lossless: true, effort: 6 } : config.resample === 'source-packed' ? { quality: density === 1 ? 88 : 90, smartSubsample: true } : { quality: 88, smartSubsample: true, effort: 6 };
-            const output = assetPath(publicDirectory, surface.output, density, surface.id);
-            if (surface.encoding) {
-                // Chrome decodes these maps faster as JPEG than as lossy WebP,
-                // and baseline faster than progressive. Encode from the same
-                // prepared raster, never the WebP. A grayscale map has one channel.
-                const { encoder, progressive, quality, grayscale = false, chromaSubsampling } = surface.encoding;
-                const pixels = image.clone().removeAlpha();
-                await (grayscale ? pixels.grayscale().toColourspace('b-w') : pixels).jpeg({ quality, mozjpeg: encoder === 'mozjpeg', progressive, ...(chromaSubsampling ? { chromaSubsampling } : {}) }).toFile(output);
-                // Lens thumbnails keep their accepted source: the WebP encoding
-                // of the density-1 map, now held in memory only.
-                if (density === 1 && config.thumbnail.crop)
-                    thumbnailSource = await image.clone().webp(webp).toBuffer();
-            }
-            else
-                await image.webp(webp).toFile(output);
-            if (!config.polesCombined) {
-                const polar = createPolarSprite(pixels, width, height, config.polarTile * density, config.latitudeBands, nativePhotograph
-                    ? { sampling: nearest ? 'nearest' : 'bilinear', nativePhotograph, missingColor: missingCoverageColor }
-                    : { sampling: nearest ? 'nearest' : 'bilinear' });
-                await raster(polar, config.polarTile * density * 2, config.polarTile * density).webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, config.polesOutput, density, surface.id));
-            }
-            if (config.resample === 'density-before-pack' && density === 2) {
-                const cropSize = Math.round(height / 2), top = Math.round((height - cropSize) / 2);
-                // The crop is centred on the declared longitude (column x is longitude x / width * 360) and wraps across the map edge.
-                const centre = config.thumbnail.centerLongitudeDegrees === undefined ? width / 2 : ((config.thumbnail.centerLongitudeDegrees / 360) * width % width + width) % width;
-                const left = Math.round(centre - cropSize / 2), crop = new Uint8Array(cropSize * cropSize * 4);
-                for (let y = 0; y < cropSize; y++) for (let x = 0; x < cropSize; x++) {
-                    const sourceX = ((left + x) % width + width) % width, offset = ((top + y) * width + sourceX) * 4;
-                    crop.set(pixels.subarray(offset, offset + 4), (y * cropSize + x) * 4);
-                }
-                await raster(crop, cropSize, cropSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha().webp(nearest ? { lossless: true, effort: 6 } : { quality: config.thumbnail.quality, effort: 6 }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+                nativePhotograph = applyNativeSurfaceExposure(await pending, surface.exposure);
             }
         }
+        if (surface.exposure)
+            applySurfaceExposure(pixels, surface.exposure);
+        // The legacy source-packed route resized an already-packed raster, so a filter footprint could cross
+        // stored latitude-strip gutters. This opt-in resizes the completed source map first, then creates those
+        // same target-size gutters. It deliberately keeps coverage completion at the native source resolution.
+        if (source && config.unpackedResizeBeforePack && (config.sourceWidth !== width || config.sourceHeight !== height)) {
+            const resized = await raster(pixels, config.sourceWidth, config.sourceHeight)
+                .resize(width, height, { kernel: 'lanczos3' }).raw().toBuffer();
+            if (resized.length !== width * height * 4) throw new Error(`Unpacked source resize drifted for ${surface.id}.`);
+            pixels = resized;
+        }
+        const resizedUnpacked = Boolean(source && config.unpackedResizeBeforePack);
+        const packingWidth = resizedUnpacked ? width : source ? config.sourceWidth : width;
+        const packingHeight = resizedUnpacked ? height : source ? config.sourceHeight : height;
+        const packed = packLatitudeRaster(pixels, packingWidth, packingHeight, config.latitudeBands, Math.max(2, packingHeight / config.latitudeBands / 4));
+        let image = raster(packed.data, packed.packedWidth, packed.packedHeight);
+        if (source && !resizedUnpacked && (packingWidth !== width || packingHeight !== height))
+            image = image.resize(width + height / config.latitudeBands / 2, height + height / 2, { kernel: 'lanczos3' });
+        // Numeric and categorical surfaces keep their selected values: lossless, no chroma subsampling.
+        const webp = nearest ? { lossless: true, effort: 6 } : config.resample === 'source-packed' ? { quality: 90, smartSubsample: true } : { quality: 88, smartSubsample: true, effort: 6 };
+        const output = assetPath(publicDirectory, surface.output, density, surface.id);
+        if (surface.encoding) {
+            // Chrome decodes these maps faster as JPEG than as lossy WebP,
+            // and baseline faster than progressive. Encode from the same
+            // prepared raster, never the WebP. A grayscale map has one channel.
+            const { encoder, progressive, quality, grayscale = false, chromaSubsampling } = surface.encoding;
+            const pixels = image.clone().removeAlpha();
+            await (grayscale ? pixels.grayscale().toColourspace('b-w') : pixels).jpeg({ quality, mozjpeg: encoder === 'mozjpeg', progressive, ...(chromaSubsampling ? { chromaSubsampling } : {}) }).toFile(output);
+            // Lens thumbnails come from the WebP encoding of the prepared map, held in memory only.
+            if (config.thumbnail.crop)
+                thumbnailSource = await image.clone().webp(webp).toBuffer();
+        }
+        else
+            await image.webp(webp).toFile(output);
+        if (!config.polesCombined) {
+            const polar = createPolarSprite(pixels, width, height, config.polarTile * density, config.latitudeBands, nativePhotograph
+                ? { sampling: nearest ? 'nearest' : 'bilinear', nativePhotograph, missingColor: missingCoverageColor }
+                : { sampling: nearest ? 'nearest' : 'bilinear' });
+            await raster(polar, config.polarTile * density * 2, config.polarTile * density).webp({ lossless: true, effort: 6 }).toFile(assetPath(publicDirectory, config.polesOutput, density, surface.id));
+        }
+        if (config.resample === 'density-before-pack') {
+            const cropSize = Math.round(height / 2), top = Math.round((height - cropSize) / 2);
+            // The crop is centred on the declared longitude (column x is longitude x / width * 360) and wraps across the map edge.
+            const centre = config.thumbnail.centerLongitudeDegrees === undefined ? width / 2 : ((config.thumbnail.centerLongitudeDegrees / 360) * width % width + width) % width;
+            const left = Math.round(centre - cropSize / 2), crop = new Uint8Array(cropSize * cropSize * 4);
+            for (let y = 0; y < cropSize; y++) for (let x = 0; x < cropSize; x++) {
+                const sourceX = ((left + x) % width + width) % width, offset = ((top + y) * width + sourceX) * 4;
+                crop.set(pixels.subarray(offset, offset + 4), (y * cropSize + x) * 4);
+            }
+            await raster(crop, cropSize, cropSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: nearest ? 'nearest' : 'lanczos3' }).removeAlpha().webp(nearest ? { lossless: true, effort: 6 } : { quality: config.thumbnail.quality, effort: 6 }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+        }
+        // The authored crop is in canonical-density map pixels.
         if (config.thumbnail.crop)
-            await sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, 1, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
+            await sharp(thumbnailSource ?? assetPath(publicDirectory, surface.output, RASTER_DENSITY, surface.id)).extract(config.thumbnail.crop).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality }).toFile(assetPath(publicDirectory, surface.thumbnail, 1, surface.id));
     }
-    if (config.polesCombined)
-        for (const density of config.densities) {
-            const tileSize = config.polarTile * density, width = tileSize * preparedSources.length * 2;
+    if (config.polesCombined) {
+        const density = RASTER_DENSITY, tileSize = config.polarTile * density, width = tileSize * preparedSources.length * 2;
             const atlas = new Uint8Array(width * tileSize * 4);
             for (const [surfaceIndex, surface] of preparedSources.entries())
                 for (let poleIndex = 0; poleIndex < 2; poleIndex++) {
@@ -173,6 +170,6 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                         atlas.set(tile.subarray(y * tileSize * 4, (y + 1) * tileSize * 4), (y * width + (surfaceIndex * 2 + poleIndex) * tileSize) * 4);
                 }
             await raster(atlas, width, tileSize).webp({ quality: 90, alphaQuality: 100 }).toFile(assetPath(publicDirectory, config.polesOutput, density));
-        }
+}
     return { metadata, decoded, interpretations };
 }

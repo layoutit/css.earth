@@ -12,7 +12,7 @@ function pin(value: unknown): Pin {
   assert.match(value.sha256,/^[a-f0-9]{64}$/);
   return {path:value.path,sha256:value.sha256};
 }
-export async function prepareCompactDensityObject(root: string, directory: string, ifMissing: boolean) {
+export async function prepareCompactDensityObject(root: string, directory: string, ifMissing: boolean, allowMissing = false) {
   const value: unknown = JSON.parse(await readFile(resolve(directory,'source/compact-delivery.json'),'utf8'));
   assert.ok(record(value) && value.schema === 'cssearth-compact-density-delivery@1' && typeof value.id === 'string' && record(value.delivery));
   const data = value.delivery;
@@ -20,9 +20,15 @@ export async function prepareCompactDensityObject(root: string, directory: strin
   assert.equal(resolve(root,data.directory),resolve(directory),'Density delivery differs from its source owner.');
   // A finite-emission delivery regenerates its own bank and atlases from delivered inputs; the historical
   // projection-only delivery replays slices into a pinned manifest instead.
-  if (data.method === 'finite-emission') return prepareFiniteEmissionObject(root,directory,pin(data.compactInputs),ifMissing);
+  if (data.method === 'finite-emission') return prepareFiniteEmissionObject(root,directory,pin(data.compactInputs),ifMissing,allowMissing);
   const delivery: BakeDelivery = {directory:data.directory,manifest:pin(data.manifest),atlasInputs:pin(data.atlasInputs),compactInputs:pin(data.compactInputs)};
   if (ifMissing && await deliveryReady(root,delivery)) return {id:value.id,status:'verified'};
+  // Deploy builds may tolerate a delivery missing from R2 instead of restoring one from scratch here: report
+  // it unavailable and move on, loudly.
+  if (allowMissing) {
+    console.warn(`Prepared delivery unavailable for ${value.id}; not restoring a replacement (allow-missing). It will report unavailable.`);
+    return { id: value.id, status: 'unavailable' };
+  }
   const temporary = await mkdtemp(resolve(directory,'.prepared-density-'));
   try {
     const results = await restoreCompactLmc(root,delivery.compactInputs!,temporary);

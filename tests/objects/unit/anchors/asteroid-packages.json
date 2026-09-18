@@ -7,6 +7,15 @@
   ],
   "radiusM": 65500.0
  },
+ "adeona": {
+  "claim": "Adeona retains Shape, Elevation, native raster triangles and physical context",
+  "lenses": [
+   "shape",
+   "elevation",
+   "zimpol"
+  ],
+  "radiusM": 72000.0
+ },
  "alphonsina": {
   "claim": "Alphonsina retains Shape, Elevation and native raster triangles",
   "lenses": [
@@ -19,7 +28,8 @@
   "claim": "Amphitrite retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 102000.0
  },
@@ -147,7 +157,8 @@
   "claim": "Bamberga retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 113500.0
  },
@@ -229,7 +240,8 @@
   "claim": "Daphne retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 93500.0
  },
@@ -237,7 +249,8 @@
   "claim": "Davida retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 149000.0
  },
@@ -299,7 +312,8 @@
   "claim": "Doris retains Shape, Elevation and native raster triangles",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 105000.0
  },
@@ -331,7 +345,8 @@
   "claim": "Egeria retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 101000.0
  },
@@ -339,7 +354,8 @@
   "claim": "Elektra retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 99500.0
  },
@@ -347,7 +363,8 @@
   "claim": "Eleonora retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 82500.0
  },
@@ -364,7 +381,8 @@
   "claim": "Eugenia retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 94000.0
  },
@@ -372,7 +390,8 @@
   "claim": "Eunomia retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 135000.0
  },
@@ -380,7 +399,8 @@
   "claim": "Euphrosyne retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 134000.0
  },
@@ -388,7 +408,8 @@
   "claim": "52 Europa retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 159500.0
  },
@@ -404,7 +425,8 @@
   "claim": "Flora retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 73000.0
  },
@@ -412,7 +434,8 @@
   "claim": "Fortuna retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 105500.0
  },
@@ -469,7 +492,8 @@
   "claim": "Hebe retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 97500.0
  },
@@ -525,7 +549,8 @@
   "claim": "Hygiea retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 216500.0
  },
@@ -550,7 +575,8 @@
   "claim": "Interamnia retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 166000.0
  },
@@ -566,7 +592,8 @@
   "claim": "Iris retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 99500.0
  },
@@ -590,7 +617,8 @@
   "claim": "Julia retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 70000.0
  },
@@ -598,7 +626,8 @@
   "claim": "Juno retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 127000.0
  },
@@ -606,14 +635,16 @@
   "claim": "Kalliope retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 75000.0
  },
  "kleopatra": {
   "claim": "Kleopatra retains the published Shape view, native raster triangles and physical context",
   "lenses": [
-   "shape"
+   "shape",
+   "zimpol"
   ],
   "radiusM": 59100.0
  },
@@ -679,7 +710,8 @@
   "claim": "Melpomene retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 70500.0
  },
@@ -687,7 +719,8 @@
   "claim": "9 Metis retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 86500.0
  },
@@ -743,7 +776,8 @@
   "claim": "Nemausa retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 75000.0
  },
@@ -775,7 +809,8 @@
   "claim": "Pallas retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 255500.0
  },
@@ -799,7 +834,8 @@
   "claim": "Parthenope retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 74500.0
  },
@@ -863,7 +899,8 @@
   "claim": "Psyche retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 111500.0
  },
@@ -980,7 +1017,8 @@
   "claim": "Sylvia retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 137000.0
  },
@@ -996,7 +1034,8 @@
   "claim": "Themis retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 104000.0
  },
@@ -1004,7 +1043,8 @@
   "claim": "Thisbe retains Shape, Elevation and native raster triangles",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 109000.0
  },
@@ -1052,7 +1092,8 @@
   "claim": "Urania retains Shape, Elevation, native raster triangles and physical context",
   "lenses": [
    "shape",
-   "elevation"
+   "elevation",
+   "zimpol"
   ],
   "radiusM": 44000.0
  },

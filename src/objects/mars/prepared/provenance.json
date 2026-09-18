@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d555fa47fc8e1b08e5fd63d7f552a80ee0de62ce49068037d16173c057f181f"
+    "sha256": "78b472b865e4e4882171ce7d9938721f11cf0439453b1bc8fa34113c3baeb9e6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "955c382e4984796d70de18e48cd87afaeef5da80668cb2f28df8769a792c23fc"
+    "bindingsSha256": "51520fe9775c90fc1b6776d5e884157bc30f597ecf05468dfe578776dcdcc7e0"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "b5efcf2c366c56a0f948b39ec10535813fb9a6fe6114a65e5ddf94b660687358",
+      "sha256": "ef74ed1c87a4a1df07cd2f3e673b0b98592bcd8eb75b8663e4a888ec22ebe0b8",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/mars/",
@@ -25,10 +25,6 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -97,7 +93,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8a6fce4bbfbf89eae188618e42674be4e65ce7c0ce7b1e2b35ec805218123e95",
+      "sha256": "1abe1b1110beef8c97fe45f481b07f68888eb2ff10bcb2d1d43a16fb6bd2d966",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -225,13 +221,13 @@
               "id": "normal",
               "label": "Visible color",
               "thumbnail": "mars-lens-normal.webp",
-              "surface": "mars-surface-normal.webp",
-              "poles": "mars-poles-normal.webp",
+              "surface": "mars-surface-normal@2x.webp",
+              "poles": "mars-poles-normal@2x.webp",
               "source": {
                 "id": "normal",
                 "path": "../manifest.json"
               },
-              "material": "mars-material.webp",
+              "material": "mars-material@2x.webp",
               "shortLabel": "RGB",
               "falseColor": false,
               "qualification": "USGS Viking MDIM 2.1 colorized global mosaic",
@@ -241,8 +237,8 @@
               "id": "elevation",
               "label": "Elevation",
               "thumbnail": "mars-lens-elevation.webp",
-              "surface": "mars-surface-elevation.webp",
-              "poles": "mars-poles-elevation.webp",
+              "surface": "mars-surface-elevation@2x.webp",
+              "poles": "mars-poles-elevation@2x.webp",
               "legend": {
                 "kind": "scale",
                 "title": "Relative elevation",
@@ -299,7 +295,7 @@
                 "id": "elevation",
                 "path": "../manifest.json"
               },
-              "material": "mars-observation-material.webp",
+              "material": "mars-observation-material@2x.webp",
               "shortLabel": "MOLA",
               "falseColor": true,
               "qualification": "USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
@@ -309,13 +305,13 @@
               "id": "thermal",
               "label": "Thermal infrared",
               "thumbnail": "mars-lens-thermal.webp",
-              "surface": "mars-surface-thermal.webp",
-              "poles": "mars-poles-thermal.webp",
+              "surface": "mars-surface-thermal@2x.webp",
+              "poles": "mars-poles-thermal@2x.webp",
               "source": {
                 "id": "thermal",
                 "path": "../manifest.json"
               },
-              "material": "mars-observation-material.webp",
+              "material": "mars-observation-material@2x.webp",
               "shortLabel": "IR",
               "falseColor": false,
               "qualification": "USGS/ASU THEMIS daytime infrared brightness mosaic; exact-zero source fill at the map edges stays black. No visible-light substitute; not a calibrated temperature retrieval.",
@@ -822,8 +818,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "8a6fce4bbfbf89eae188618e42674be4e65ce7c0ce7b1e2b35ec805218123e95",
-      "bytes": 13694,
+      "sha256": "1abe1b1110beef8c97fe45f481b07f68888eb2ff10bcb2d1d43a16fb6bd2d966",
+      "bytes": 13721,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1132,12 +1128,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/mars/mars-surface-normal.webp",
-          "bytes": 820510,
-          "sha256": "79d7f0b01fdff2f644f6d965fcbc742dcbc1c44a485ed94acc65d45cbaabd4dd",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/mars/mars-surface-normal@2x.webp",
           "bytes": 2996430,
           "sha256": "5cd225ec4de592bb2a9ab199248506eddb71f9149ca823e9cf48a466bfc15c39",
@@ -1147,12 +1137,6 @@
           "url": "/scenes/mars/mars-lens-normal.webp",
           "bytes": 664,
           "sha256": "c18b375dd5e4032d5dc8cc1b5cc75c982ac0b76abf893ef72ed4eed47d349f16",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mars/mars-poles-normal.webp",
-          "bytes": 157040,
-          "sha256": "11b16a12f0a8ab21da7e0907575a055ac05e2cf9847876facdb290f899f304f3",
           "verification": "bytes-verified"
         },
         {
@@ -1196,12 +1180,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/mars/mars-surface-elevation.webp",
-          "bytes": 1062260,
-          "sha256": "5f4a8fa5c2df8b31887db328699da9a5996c348be188c2c61385b7dba76ce173",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/mars/mars-surface-elevation@2x.webp",
           "bytes": 4284386,
           "sha256": "aa991949a64c18d89cab197d91ea119bb8a2e52f5ee564463f43b1675776f310",
@@ -1211,12 +1189,6 @@
           "url": "/scenes/mars/mars-lens-elevation.webp",
           "bytes": 1662,
           "sha256": "c5cf318000c6b1349f870c42c28900b323aee17181f46c1484e10cea7dce5bd1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mars/mars-poles-elevation.webp",
-          "bytes": 134472,
-          "sha256": "869e9c68144d9c371a226e3cb83d2ad75abaf6c01e82949c97fb5d74a4c798e7",
           "verification": "bytes-verified"
         },
         {
@@ -1260,12 +1232,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/mars/mars-surface-thermal.webp",
-          "bytes": 1102274,
-          "sha256": "776b3d4dd57d21403defa5ab425cbb54938dd988c1caf6f80464ac2f114065f7",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/mars/mars-surface-thermal@2x.webp",
           "bytes": 4811674,
           "sha256": "d5e91b15aa8e441f7aae2467ecfd2e8a5b0fb2cfe8b665b44c821087d5dbd285",
@@ -1275,12 +1241,6 @@
           "url": "/scenes/mars/mars-lens-thermal.webp",
           "bytes": 140,
           "sha256": "7126fb082cf201a4ad13091732305e2c31b1dac36109889e4ad0e7e5643f495a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mars/mars-poles-thermal.webp",
-          "bytes": 66246,
-          "sha256": "ccd49ca7cf385646fe3f4f1d53095e26cb1880cac4e13d4a283938e3bdb410c7",
           "verification": "bytes-verified"
         },
         {
@@ -1316,24 +1276,6 @@
         "mars-atmosphere-model"
       ],
       "outputs": [
-        {
-          "url": "/scenes/mars/mars-material.webp",
-          "bytes": 404286,
-          "sha256": "afc05aa05f6e967cfdc1a2ce8389316566853cc357ac10cfcc024cce5db9b15a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mars/mars-observation-material.webp",
-          "bytes": 161742,
-          "sha256": "6770d670817c4c3d1f5d52f79ea160126e63b22b16f1c81a03fe3e50ae5ebeaa",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/mars/mars-lighting.webp",
-          "bytes": 61694,
-          "sha256": "d4835d67e068f737dc999f039a0eb1ba8849c2f7c3cd582ba8ac6bfbd2165d70",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/mars/mars-material@2x.webp",
           "bytes": 1130242,
@@ -1498,8 +1440,8 @@
       "outputs": [
         {
           "url": "/scenes/mars/mars-features.json",
-          "bytes": 6046256,
-          "sha256": "bb7c7398fb9e27b63ff774796cf088ceeeac05340b0a71898cd4dd5a82d82cdb",
+          "bytes": 6046258,
+          "sha256": "ef2cd04dd50b1cfbd15f16d2a7b038ade8bbd03f940b5c4e8888176c8da8fd78",
           "verification": "bytes-verified"
         }
       ],
@@ -1587,11 +1529,11 @@
   },
   "lastPreparation": {
     "objectId": "mars",
-    "materialSha256": "0f7df8876786ad793271e2b80abd9990fcd91c1e5b022967c3098a20c2982bce",
+    "materialSha256": "c9752f871b5bd006c022baf7855b12610fafda8ac20b226e9059c8036a6c7b46",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "955c382e4984796d70de18e48cd87afaeef5da80668cb2f28df8769a792c23fc"
+      "bindingsSha256": "51520fe9775c90fc1b6776d5e884157bc30f597ecf05468dfe578776dcdcc7e0"
     }
   }
 }

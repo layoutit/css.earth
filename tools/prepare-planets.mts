@@ -2,7 +2,7 @@ import { sha256 } from '../src/platform/sha256.mts';
 import { isArray } from '../src/platform/is-array.mts';
 import assert from "node:assert/strict";
 import { randomUUID } from 'node:crypto';
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { basename, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -26,6 +26,7 @@ import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt 
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
 import { authoredObject } from './authored-object.mts';
 import { pinObjectDocuments } from './pin-object-documents.mts';
+import { preparePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
 
 const sharedSteps = ["prepare-shell-titles.mts", "prepare-wordmark-rail.mts",
   "prepare-planet-title-sources.mts", "prepare-scientific-charts.mts"];
@@ -130,6 +131,19 @@ export async function preparePlanets({ projectRoot = process.cwd(), force = fals
     const navigation = await runObjectCommand({ command: process.execPath,
       argumentsList: [resolve(root, "tools/prepare-navigation.mts"), ...objectIds], cwd: root });
     assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);
+    // Refresh the prepared/runtime.json + prepared/scene.json inventory for every prepared body, even when
+    // `prepare:object-json` does not run afterward (e.g. `prepare:checkout`).
+    for (const id of objectIds) {
+      const preparedDirectory = resolve(root, "src/objects", id, "prepared");
+      const inventoried: string[] = [];
+      for (const filename of ["runtime.json", "scene.json"]) {
+        if (await access(resolve(preparedDirectory, filename)).then(() => true, () => false)) inventoried.push(filename);
+      }
+      if (inventoried.length) {
+        await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory,
+          manifestPath: resolve(preparedDirectory, "..", "prepared-assets.json"), filenames: inventoried });
+      }
+    }
     const totalReport = { ...report, totalElapsedMilliseconds: performance.now() - start };
     await writeFile(resolve(root, cacheRoot, "latest-run.json"), JSON.stringify(totalReport, null, 2) + "\n");
     console.log(`Prepared ${report.rebuilt.length} objects; verified ${report.cached.length} unchanged objects in ${(totalReport.totalElapsedMilliseconds / 1000).toFixed(1)}s.`);

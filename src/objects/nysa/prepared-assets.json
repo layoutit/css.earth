@@ -1,0 +1,16 @@
+{
+  "schema": "cssnysa-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750325,
+      "sha256": "ee4462d6df2864a446c341a43765f1a7c7d27d7672b3700a98102dea41f8f16a"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 610218,
+      "sha256": "3278941a117a86480626039e82c4e1436786bc8368ee6b6ea1f2f548bcd6bbb9"
+    }
+  ]
+}

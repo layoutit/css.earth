@@ -1,0 +1,37 @@
+{
+  "id": "source-flora-flora-horizons-sphere-heliocentric",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Flora · flora horizons sphere heliocentric",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/flora/source/manifest.json",
+      "revision": "35b2477d3d85b15a2dbc71ab4ddfebdddfaa757e",
+      "sha256": "f491648a2f7a6c1bc42a3171dbc7c60b49da010e6010cdc5b77422e5e14411dd",
+      "locator": "/inputs/20"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons",
+      "scope": "The flora horizons sphere heliocentric input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public ephemeris service output; cite JPL Horizons.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

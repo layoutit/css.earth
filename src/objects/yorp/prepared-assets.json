@@ -1,0 +1,16 @@
+{
+  "schema": "cssyorp-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 537505,
+      "sha256": "7ce39b71bfb261646e50c073eaa4f36dc2a1f9c057918894eb935951e2e61ac3"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 440279,
+      "sha256": "01c5584621c4a80654d054c4b569afaba58712d4b0c7b2d5200b70713c10f2b8"
+    }
+  ]
+}

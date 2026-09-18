@@ -258,8 +258,8 @@
     {
       "id": "mars-object-content",
       "path": "content/object.json",
-      "expectedSha256": "8a6fce4bbfbf89eae188618e42674be4e65ce7c0ce7b1e2b35ec805218123e95",
-      "expectedBytes": 13694,
+      "expectedSha256": "1abe1b1110beef8c97fe45f481b07f68888eb2ff10bcb2d1d43a16fb6bd2d966",
+      "expectedBytes": 13721,
       "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -334,8 +334,8 @@
     {
       "id": "mars-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "cbbf440243fde7d51c307464f79bda43d826728d8d0c1e1cff7cf371ad1a108f",
-      "expectedBytes": 1604,
+      "expectedSha256": "fea22162e7f8f75850be273b1231f8e8a14abaa24cf133eec89b23c0107b6613",
+      "expectedBytes": 1610,
       "origin": "Repository-authored Mars CSS geometry recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -391,8 +391,8 @@
     {
       "id": "mars-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "b5efcf2c366c56a0f948b39ec10535813fb9a6fe6114a65e5ddf94b660687358",
-      "expectedBytes": 1894,
+      "expectedSha256": "ef74ed1c87a4a1df07cd2f3e673b0b98592bcd8eb75b8663e4a888ec22ebe0b8",
+      "expectedBytes": 1859,
       "origin": "Repository-authored Mars raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-published-comparison@1",
+  "lensId": "zimpol",
+  "source": "https://doi.org/10.1051/0004-6361/202141781",
+  "figure": "Figure B.13",
+  "document": {
+    "input": "eunomia-survey-research",
+    "object": 1092,
+    "width": 2084,
+    "height": 2463,
+    "sha256": "e6ea90faa4a5e29682fa511e015905da2283fd7af9486e89fea7764d33b7ec1d"
+  },
+  "rows": {
+    "image": 0,
+    "model": 2,
+    "count": 3,
+    "labelLines": 2
+  },
+  "columns": [
+    {
+      "label": "2018-03-22T07:34:12",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-04-23T06:59:58",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-04-28T07:03:43",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-05-05T01:03:24",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-05-05T02:21:29",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2018-05-16T03:44:58",
+      "frame": null,
+      "band": 0
+    },
+    {
+      "label": "2019-07-28T08:52:58",
+      "frame": "zimpol-20190728-085258",
+      "band": 0
+    },
+    {
+      "label": "2019-07-29T04:43:47",
+      "frame": "zimpol-20190729-044347",
+      "band": 0
+    },
+    {
+      "label": "2019-07-30T06:54:49",
+      "frame": "zimpol-20190730-065449",
+      "band": 1
+    },
+    {
+      "label": "2019-08-04T04:31:05",
+      "frame": "zimpol-20190804-043105",
+      "band": 1
+    },
+    {
+      "label": "2019-08-04T05:08:04",
+      "frame": "zimpol-20190804-050804",
+      "band": 1
+    },
+    {
+      "label": "2019-08-04T07:39:29",
+      "frame": "zimpol-20190804-073929",
+      "band": 1
+    },
+    {
+      "label": "2019-08-05T05:45:23",
+      "frame": "zimpol-20190805-054523",
+      "band": 1
+    },
+    {
+      "label": "2019-08-07T08:16:10",
+      "frame": "zimpol-20190807-081610",
+      "band": 1
+    },
+    {
+      "label": "2019-08-07T08:38:30",
+      "frame": "zimpol-20190807-083830",
+      "band": 1
+    }
+  ]
+}

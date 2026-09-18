@@ -6,8 +6,20 @@ import {requireRecord,requireString,isRecord,hasErrorCode} from './source-values
 import type {CheckedObjectRuntimeDefinition} from './object-runtime-contract.mts';
 import type {RecompiledPresentation} from './prepared-depth-partitions.mts';
 /** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation
- * bindings (depth partitions, interior fill), which depend on neither. */
+ * bindings (facing planes, depth partitions, interior fill). Facing planes are browser-measured against the solved
+ * system node, so this is only safe when that solve did not move: refuse rather than publish stale geometry. */
 type BindingOptions=Parameters<typeof preparePresentationBindings>[2] & {keepBindings?: boolean};
+
+/** `--keep-bindings` keeps browser-measured facing planes and depth partitions from before this navigation pass.
+ * Those are only trustworthy if the solved system transform they were measured against did not move: prepared
+ * navigation's own `{from, to}` pair (prepare-world-navigation.ts's `replaceSystemTransform`) already names the
+ * bound (`from`) and freshly solved (`to`) copies. Refuse loudly instead of publishing stale geometry. */
+export function refuseStaleKeptBindings(id: string, systemTransform: { readonly from: string; readonly to: string } | null): void {
+  if (systemTransform && systemTransform.from !== systemTransform.to) {
+    throw new TypeError(`${id}: --keep-bindings refused; the solved system transform moved (was ${systemTransform.from}, now ${
+      systemTransform.to}), so the bound facing planes and depth partitions no longer match it. Re-run without --keep-bindings.`);
+  }
+}
 import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -16,6 +28,7 @@ import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
+import { preparePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = PREPARED_CSS_OBJECT_FORMAT;
@@ -53,7 +66,8 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
   definition = requireObjectRuntimeDefinition(preparedNavigation.definition);
-  if (!options?.keepBindings) definition = await preparePresentationBindings(definition, projectRoot, options);
+  if (options?.keepBindings) refuseStaleKeptBindings(id, preparedNavigation.systemTransform);
+  else definition = await preparePresentationBindings(definition, projectRoot, options);
   const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });
@@ -80,6 +94,16 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
     properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
+  // Only runtime.json/scene.json move to R2; every other prepared/* file (provenance.json, content.json,
+  // page.json, …) stays a tracked contract file, not part of this inventory.
+  const inventoried: string[] = [];
+  for (const filename of ['runtime.json', 'scene.json']) {
+    if (await access(resolve(preparedDirectory, filename)).then(() => true, () => false)) inventoried.push(filename);
+  }
+  if (inventoried.length) {
+    await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory,
+      manifestPath: resolve(preparedDirectory, '..', 'prepared-assets.json'), filenames: inventoried });
+  }
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }
 

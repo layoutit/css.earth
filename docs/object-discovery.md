@@ -55,7 +55,7 @@ approximations without being resolved terrain meshes.
 - [Pallas](../src/objects/pallas/README.md) uses the released MPCD reconstruction;
   its neutral surface and shape-derived elevation do not make it an illustration.
 
-The current package declarations identify 105 approximate-only destinations.
+The current package declarations identify 104 approximate-only destinations.
 Their result rows and selected cards say **Illustration only**. Body-specific
 meshes without observation imagery say **Shape only**. These labels describe
 available content, not an uncertainty estimate or a qualification verdict.
@@ -63,7 +63,10 @@ available content, not an uncertainty estimate or a qualification verdict.
 ## Prepared promotion
 
 `catalog.illustrationLenses` names a package's approximate stand-in datasets.
-It is not a permanent blacklist of object identities. When replacing an
+A body is **Illustration only** when every exposed lens is one of them. A body that
+also has a measured lens, such as Makemake's whole-disc colour beside NASA's
+illustrative texture, stays **Shape only**, and the illustration never counts as
+imagery. The list is not a permanent blacklist of object identities. When replacing an
 approximation with a body-specific mesh, remove that dataset from this list as
 part of the package's source interpretation update.
 

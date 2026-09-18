@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aef30693a43a2d8fca46ebf85a532d50f399d3cf8045af70ac300aa5d0a5eece"
+    "sha256": "f3db421901cb982d7b018023e2e567d1392a97928d9a8c9a317281f93dad1080"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "69ec36d90db355eb9b818e49b3f8b7fbfcc07aab55b6963287ea1dfa6f9cd9ef"
+    "bindingsSha256": "a5373d14506bae904952c0bb31ee5aed88a1f19e197e416c1f42bd2a11f0debc"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "bbfc1d00c5ffe7630fecd2d6fa7fa0b5b1771570bf6791281e33c9de281dd073",
+      "sha256": "d5e706d1e357cb9a06d0d814197f172573c34bd866f091ca2b9642d36d7f52ee",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/hd-189733/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -98,7 +94,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c501afb3c25d889bc3f1b1844a1339480466329a8368a5621d1b8d1d072acb7d",
+      "sha256": "43fdcc61dc88080e6143ba51d2eee23b2eef48926a408948e0fae24b390cf956",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -170,8 +166,8 @@
               "label": "Color",
               "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge fitted here to TESS transits of HD 189733b. The disc itself is unresolved.",
               "thumbnail": "hd-189733-lens-color.webp",
-              "surface": "hd-189733-surface-color.webp",
-              "poles": "hd-189733-poles-color.webp",
+              "surface": "hd-189733-surface-color@2x.webp",
+              "poles": "hd-189733-poles-color@2x.webp",
               "source": {
                 "id": "hd-189733-stellar-color",
                 "path": "../manifest.json",
@@ -414,8 +410,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c501afb3c25d889bc3f1b1844a1339480466329a8368a5621d1b8d1d072acb7d",
-      "bytes": 3787,
+      "sha256": "43fdcc61dc88080e6143ba51d2eee23b2eef48926a408948e0fae24b390cf956",
+      "bytes": 3793,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -452,12 +448,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/hd-189733/hd-189733-surface-color.webp",
-          "bytes": 78,
-          "sha256": "9d472dd61c10be9fce527d76efdb31d6bfad641b45d5129c6ff5849c828d8597",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/hd-189733/hd-189733-surface-color@2x.webp",
           "bytes": 178,
           "sha256": "3f2b0d6a1dab8a50d819f4a00182c825c74ba5ad4c4524cc5ffa7d1911071f00",
@@ -470,27 +460,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/hd-189733/hd-189733-poles-color.webp",
-          "bytes": 680,
-          "sha256": "54a1dc43b5fae8e349cdead6c13dcce70e22bd2b8e0bcbcf4eb23115d9388052",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/hd-189733/hd-189733-poles-color@2x.webp",
           "bytes": 1340,
           "sha256": "8977ac32b7e5b92dd721a0dc929c3584faa600a3dc79697cb245db5a1c5c5cf5",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/hd-189733/hd-189733-context-color.webp",
-          "bytes": 54,
-          "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/hd-189733/hd-189733-limb-color.webp",
-          "bytes": 29862,
-          "sha256": "1e1dfff5596127071f35e0bb369661a9383f30278dd25250774435a1cc6c9ff9",
           "verification": "bytes-verified"
         },
         {
@@ -573,11 +545,11 @@
   },
   "lastPreparation": {
     "objectId": "hd-189733",
-    "materialSha256": "addca2f9a3981d2689f9ef9dd72082687a73cb14c03a38e650ea264ca760c134",
+    "materialSha256": "f49d9fda07e67cd94820c4407610ce88d39f456336559d9d9b7361bad1caa2f1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "69ec36d90db355eb9b818e49b3f8b7fbfcc07aab55b6963287ea1dfa6f9cd9ef"
+      "bindingsSha256": "a5373d14506bae904952c0bb31ee5aed88a1f19e197e416c1f42bd2a11f0debc"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "schema": "csshermione-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 739174,
+      "sha256": "bff777dda19cfdc100ba72a8c8cc0735bdf79a26eb5c2d663770d4a1c3276383"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 590128,
+      "sha256": "2eb9cb307de0c421af865a9fec410d71be925b665437bd26eadc38ce65f8d8b8"
+    }
+  ]
+}

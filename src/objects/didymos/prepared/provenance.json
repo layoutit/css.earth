@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "06ecd0cb7fdced8d83663636c4b9b4752b0574c498e197352b0f69d846b9671d"
+    "sha256": "993331b093fe2567256d06398680627128b291be275e47d5da8624bb7ad8fd1f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "0d76e3c159a2146cecd3edd2bf51078110e99eee408b83b0b1a500de1e8a82a8"
+    "bindingsSha256": "8407f81ee8edad46c715211dec107123e367544189d70f52d6c1dd0fbc504def"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "d1fe95e6378b61a5f2b0fc254b6aebea8836bf03dd9221238f900662073d51a2",
+      "sha256": "7f1fc12e6ee829c6834ebbe7ac570373151306cf0bae947de9faf03e9f226be0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -231,6 +231,152 @@
                 "falseColor": false,
                 "coverage": "Two DRACO frames from 158 and 94 seconds before impact. The later partial frame supplies closer detail; the earlier frame supplies wider coverage. The unseen surface keeps the grid."
               }
+            },
+            {
+              "id": "luke",
+              "format": "spice-camera-color",
+              "consumer": "luke-photograph",
+              "metadata": {
+                "label": "LICIACube colour",
+                "falseColor": true,
+                "coverage": "Eight LICIACube/LUKE frames from 165 to 179 seconds after the DART impact, through closest approach at 60 km. The camera is computed from the mission's reconstructed SPICE kernels; the three planes of each frame are the detector's red, green and blue bands, composed as a band visualization rather than a qualified natural-colour reconstruction. Every frame looks through the impact ejecta, and the kernels place the body about half a degree from where the frames show it, so coverage is partial and the registration stage reaches no verdict. The unseen surface keeps the grid."
+              },
+              "selection": "recipe-order",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 1.5,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A contributor lies within two pixel footprints of the closest source-mesh point and must be visible from the stated camera."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1,
+                "formula": "Original acquisition illumination retained; no photometric disk correction.",
+                "applicationLighting": "Uniform flat lighting."
+              },
+              "display": {
+                "basis": "authored",
+                "displayRange": [
+                  0,
+                  0.020229
+                ]
+              },
+              "filter": "RGB",
+              "spice": {
+                "kernelSet": "liciacube",
+                "kernels": [
+                  "lsk/naif0012.tls",
+                  "sclk/licia_sclk_0002.tsc",
+                  "pck/pck00010.tpc",
+                  "pck/didymos_system_15.tpc",
+                  "fk/licia_006.tf",
+                  "fk/didymos_system_007.tf",
+                  "ik/licia_pl_005.ti",
+                  "spk/de430.bsp",
+                  "spk/didymos_barycenter_s205_v01.bsp",
+                  "spk/didymos_system_s542_v01.bsp",
+                  "spk/dart_2022_231_2022_269_rec_v03.bsp",
+                  "spk/licia_2022_254_2023_091_rec_v04.bsp",
+                  "ck/licia_2022_254_2022_276_rec_v02.bc"
+                ],
+                "observer": -210,
+                "target": 920065803,
+                "bodyFrame": "DIDYMOS_FIXED",
+                "instrument": -210200,
+                "clock": {
+                  "utcHeader": "CORT_UTC",
+                  "spacecraft": -210
+                },
+                "aberration": "LT+S",
+                "pixels": {
+                  "focalLength": {
+                    "key": "FOCAL_LENGTH",
+                    "unit": "mm"
+                  },
+                  "pixelPitch": {
+                    "key": "PIXEL_SIZE",
+                    "unit": "micrometre"
+                  },
+                  "center": "CCD_CENTER",
+                  "boresight": "BORESIGHT",
+                  "samples": "PIXEL_SAMPLES",
+                  "lines": "PIXEL_LINES",
+                  "frame": "FOV_FRAME",
+                  "origin": 1,
+                  "column": "Y",
+                  "row": "X"
+                },
+                "image": {
+                  "quantity": "radiance",
+                  "plane": 1,
+                  "colorPlanes": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "header": {
+                    "INSTRUME": "LUKE",
+                    "HOSTNAME": "LICIACube"
+                  },
+                  "missingValueKeys": [
+                    "MISPXVAL",
+                    "BADMASKV"
+                  ],
+                  "saturationKey": "SATPXVAL"
+                }
+              },
+              "frames": [
+                {
+                  "id": "luke-plus-165s",
+                  "path": "observations/liciacube_luke_l2_1664234229_00005_01.fits",
+                  "startTime": "2022-09-26T23:17:08.909Z"
+                },
+                {
+                  "id": "luke-plus-167s",
+                  "path": "observations/liciacube_luke_l2_1664234231_00002_01.fits",
+                  "startTime": "2022-09-26T23:17:10.909Z"
+                },
+                {
+                  "id": "luke-plus-169s",
+                  "path": "observations/liciacube_luke_l2_1664234233_01003_01.fits",
+                  "startTime": "2022-09-26T23:17:13.009Z"
+                },
+                {
+                  "id": "luke-plus-171s",
+                  "path": "observations/liciacube_luke_l2_1664234235_00005_01.fits",
+                  "startTime": "2022-09-26T23:17:14.909Z"
+                },
+                {
+                  "id": "luke-plus-173s",
+                  "path": "observations/liciacube_luke_l2_1664234237_00002_01.fits",
+                  "startTime": "2022-09-26T23:17:16.909Z"
+                },
+                {
+                  "id": "luke-plus-175s",
+                  "path": "observations/liciacube_luke_l2_1664234239_01003_01.fits",
+                  "startTime": "2022-09-26T23:17:19.009Z"
+                },
+                {
+                  "id": "luke-plus-176s",
+                  "path": "observations/liciacube_luke_l2_1664234240_00002_01.fits",
+                  "startTime": "2022-09-26T23:17:19.909Z"
+                },
+                {
+                  "id": "luke-plus-179s",
+                  "path": "observations/liciacube_luke_l2_1664234243_00002_01.fits",
+                  "startTime": "2022-09-26T23:17:22.909Z"
+                }
+              ]
             }
           ]
         },
@@ -282,7 +428,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9779b23a72c70831c700befbc9d163e49e45618e19423452a7c7b82ccb42f2d1",
+      "sha256": "426204dee38c77af98f996d9a97d31a08e252b6a3fc76f21adfe14b4eade2f17",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -421,6 +567,21 @@
               },
               "notes": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
               "noData": true
+            },
+            {
+              "id": "luke",
+              "label": "LICIACube colour",
+              "thumbnail": "/scenes/didymos/didymos-luke-thumbnail.webp",
+              "surface": "didymos-luke-surface@2x.webp",
+              "poles": "didymos-luke-surface@2x.webp",
+              "source": {
+                "id": "draco-0401929957-21942-geo",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart:data_dracoddp-v1.0/"
+              },
+              "falseColor": true,
+              "noData": true,
+              "notes": "Eight LICIACube/LUKE frames from 165 to 179 seconds after the DART impact, cast onto the released Didymos shape. Pointing is computed from the mission's reconstructed SPICE kernels and each frame's own header. The three planes are the detector's red, green and blue bands composed as a band visualization, not a qualified natural-colour reconstruction. Every frame looks through the ejecta and the registration reaches no verdict, so this is an investigation view. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -830,6 +991,390 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234229-fits",
+      "path": "observations/liciacube_luke_l2_1664234229_00005_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234229_00005_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234229-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/9"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "d840ec3e3f6ff328a5de3ec899f2855543bdd47d278d91dfee6e9b1ed8f9c378",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234229_00005_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234229_00005_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234231-fits",
+      "path": "observations/liciacube_luke_l2_1664234231_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234231_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234231-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/11"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "ebc62596740bcbabc4b36c88388384310dc59127b7c2aafc1d7a79001733f881",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234231_00002_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234231_00002_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234233-fits",
+      "path": "observations/liciacube_luke_l2_1664234233_01003_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234233_01003_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234233-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/13"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "e8a8f9da7ab7dc03642b7651ae6de01f93cca7a6268e9b1fdb295396ecceec99",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234233_01003_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234233_01003_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234235-fits",
+      "path": "observations/liciacube_luke_l2_1664234235_00005_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234235_00005_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234235-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/15"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "1115f0f7ddaec8cf93d561881ee51e2c9a6b574b4a6b7369d8c9f314242c3a5c",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234235_00005_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234235_00005_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234237-fits",
+      "path": "observations/liciacube_luke_l2_1664234237_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234237_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234237-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/17"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "f8889481ab8b3d0304c34b1c299dec6bc041cae8c8165a1d24eac505dce6e249",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234237_00002_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234237_00002_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234239-fits",
+      "path": "observations/liciacube_luke_l2_1664234239_01003_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234239_01003_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234239-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/19"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "4a255693967e768535493364fde13554ffaec1fe8634aa1c5a22a31e4977df79",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234239_01003_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234239_01003_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234240-fits",
+      "path": "observations/liciacube_luke_l2_1664234240_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234240_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234240-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/21"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "2cc1724ca485205a636e3c61951b8f8c3483c1e550e0035c6337b60b7c68fdea",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234240_00002_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234240_00002_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "didymos-luke-1664234243-fits",
+      "path": "observations/liciacube_luke_l2_1664234243_00002_01.fits",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234243_00002_01.fits",
+      "credit": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "license": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "acquisition": "Restored through source/preparation/acquisition.json from the PDS Small Bodies Node.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
+      "width": 2048,
+      "height": 1088,
+      "lensId": "luke",
+      "label": "Calibrated LUKE frame",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-didymos-didymos-luke-1664234243-fits",
+            "role": "material",
+            "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/23"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
+      "sha256": "968799c6048912c7e7da7ea07b21e1aca1f955919cfe564f002f6b61d43e744f",
+      "bytes": 26749440,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/liciacube_luke_l2_1664234243_00002_01.fits",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234243_00002_01.fits"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -842,8 +1387,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9779b23a72c70831c700befbc9d163e49e45618e19423452a7c7b82ccb42f2d1",
-      "bytes": 11887,
+      "sha256": "426204dee38c77af98f996d9a97d31a08e252b6a3fc76f21adfe14b4eade2f17",
+      "bytes": 12943,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -864,7 +1409,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
+      "sha256": "5de49baa402ac4419a34536b7dbdeb3a5f0bc372e0c31c7b2f406b4b3b18feca",
       "bytes": 1310,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -881,8 +1426,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Didymos centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIDYMOS/target",
@@ -890,7 +1435,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
+      "sha256": "b08088b26cf9046da402987a7659c9e339b870ce948feb06d3f2678671af3e5a",
       "bytes": 6693,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1150,6 +1695,58 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "luke",
+      "label": "LICIACube colour",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "luke"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "didymos-luke-1664234229-fits",
+        "didymos-luke-1664234231-fits",
+        "didymos-luke-1664234233-fits",
+        "didymos-luke-1664234235-fits",
+        "didymos-luke-1664234237-fits",
+        "didymos-luke-1664234239-fits",
+        "didymos-luke-1664234240-fits",
+        "didymos-luke-1664234243-fits",
+        "didymos-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/didymos/didymos-luke-thumbnail.webp",
+          "bytes": 3134,
+          "sha256": "c7a569c9f84a815b8c2a92426c3ebf78f4b077da0a25341dcb171ba63a302ef1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/didymos/didymos-luke-surface@2x.webp",
+          "bytes": 326124,
+          "sha256": "ba83b8edf0f86255ade7759848a27d97d16004aa09d8c765c82ec3bd4d7f3782",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "didymos-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -1204,7 +1801,7 @@
         {
           "url": "/scenes/didymos/didymos-features.json",
           "bytes": 2800,
-          "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
+          "sha256": "04b7d61f418a9285280af81f61aa1ddbacde295a4b841f0f06c77aeeb9f2c289",
           "verification": "bytes-verified"
         }
       ],
@@ -1256,6 +1853,31 @@
           "url": "object:prepared/minimaps/draco.webp",
           "bytes": 6316,
           "sha256": "6b1e03304ae9d346cccea4a3f0188bfd62d3541d153376798fd26d81ccb332d6",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:luke",
+      "label": "LICIACube colour preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "luke"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/luke.webp",
+          "bytes": 14190,
+          "sha256": "844bec98c033966764867336d6eb5b2346946c2bc57d62b455fbed73af6e9862",
           "verification": "bytes-verified"
         }
       ]
@@ -1317,11 +1939,11 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "2d06144ebd54c18c4d1c5b6e383f4125572bf2dfd497c90310d5c07fbb414a63",
+    "materialSha256": "c573dffe4272eed63ef2d57954902f1a957af40ade0edac779310fae5356c2a6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "0d76e3c159a2146cecd3edd2bf51078110e99eee408b83b0b1a500de1e8a82a8"
+      "bindingsSha256": "8407f81ee8edad46c715211dec107123e367544189d70f52d6c1dd0fbc504def"
     }
   }
 }

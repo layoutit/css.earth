@@ -25,6 +25,7 @@ import { writePreparedSet } from './write-prepared-set.mts';
 import { restoreFactsheetEvidence } from './restore-factsheet-evidence.mts';
 import type { FactsheetSourceTransport } from './restore-factsheet-evidence.mts';
 import { prepareVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
+import { RUNTIME_ASSET_ORIGIN } from './source-mirror.mts';
 export const explorationCompilerClosure = [
   'tools/prepare-facilities.mts', 'tools/spatial-source-citations.mts', 'packages/catalog/src/spatial.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/clusters.ts', 'src/platform/exploration-catalog.mts', 'src/platform/exploration-contributions.mts',
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'src/platform/preparation-evidence.mts', 'tools/preparation-evidence.mts', 'src/platform/product-input-evidence.mts', 'site/objects.mts', 'site/object-schema.mts',
@@ -43,9 +44,12 @@ export const explorationCompilerClosure = [
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',
 ] as const;
 
-interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport; }
+interface Options { root?: string; publish?: boolean; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
+  /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
+   * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
+  mirrorOrigin?: string | null; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
-export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport }: Options = {}) {
+export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null }: Options = {}) {
   const closure: Record<string, string> = {};
   const input = async (path: string) => {
     const bytes = await readFile(resolve(root, path)); closure[path] = sha256(bytes); return bytes;
@@ -135,7 +139,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path))));
     objects.push({ id: object.id, name: object.name, route: object.route, base, controls: lenses, provenance: document });
   }
-  const volumes = [...await prepareVolumeProvenance({ root, input }), ...await prepareContextProvenance({ root, input })];
+  const volumes = [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];
   for (const volume of volumes) {
     const document = validateObjectProvenance(volume.provenance, volume.id);
     const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
@@ -168,7 +172,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
 
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const { prepared, factsheets } = await prepareFacilities();
+  // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
+  const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
   console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
   console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
 }
