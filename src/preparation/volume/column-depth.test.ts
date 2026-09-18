@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { fillThinGaps, gainForTopAlpha, spreadColumns } from './column-depth.ts';
+import { fillMaskedGaps, gainForTopAlpha, spreadColumns } from './column-depth.ts';
 
 const width = 6, height = 4, depth = 32, depthStep = 0.5;
 // A shell: every column's matter sits at one depth, which moves with x, except column x = 5, where the model is empty.
@@ -44,14 +44,16 @@ test('the gain puts the brightest column at the requested opacity, and bad input
   assert.throws(() => gainForTopAlpha(result.integral, result.peak, 1), /strictly between/u);
 });
 
-test('interior gaps close from their rims, and a gap reaching the grid border stays open', () => {
-  const w = 60, h = 40, plane = Float32Array.from({ length: w * h }, (_, p) => 5 + (p % w) * 0.1);
-  for (let y = 5; y < 35; y++) for (let x = 10; x < 13; x++) plane[y * w + x] = NaN;             // a spike
-  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (Math.hypot(x - 30, y - 20) < 8) plane[y * w + x] = NaN; // a star core
-  for (let y = 0; y < h; y++) for (let x = 50; x < 60; x++) plane[y * w + x] = NaN;             // the edge of coverage
-  const { channel, filled } = fillThinGaps(plane, w, h);
-  for (let y = 5; y < 35; y++) assert.ok(Math.abs(channel[y * w + 11]! - 6.1) < 0.25, `spike row ${y}: ${channel[y * w + 11]}`);
+test('masked gaps close from observed sky, and missing coverage stays open', () => {
+  const w = 60, h = 40, plane = Float32Array.from({ length: w * h }, (_, p) => 5 + (p % w) * 0.1), fillable = new Uint8Array(w * h);
+  const mask = (x: number, y: number) => { plane[y * w + x] = NaN; fillable[y * w + x] = 1; };
+  for (let y = 0; y < h; y++) for (let x = 10; x < 13; x++) mask(x, y);                                  // a spike across the grid
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (Math.hypot(x - 30, y - 20) < 8) mask(x, y); // a star core
+  for (let y = 0; y < h; y++) for (let x = 50; x < 60; x++) plane[y * w + x] = NaN;                     // no coverage
+  const { channel, filled } = fillMaskedGaps(plane, fillable, w, h);
+  for (let y = 0; y < h; y++) assert.ok(Math.abs(channel[y * w + 11]! - 6.1) < 0.25, `spike row ${y}: ${channel[y * w + 11]}`);
   assert.ok(Math.abs(channel[20 * w + 30]! - 8) < 0.5, `star centre ${channel[20 * w + 30]}`);
-  assert.ok(Number.isNaN(channel[20 * w + 55]!), 'the uncovered edge stays missing');
-  assert.ok(filled > 3 * 30 + 150);
+  assert.ok(Number.isNaN(channel[20 * w + 55]!), 'missing coverage stays missing');
+  assert.equal(filled, fillable.reduce((sum, v) => sum + v, 0));
+  assert.throws(() => fillMaskedGaps(plane, new Uint8Array(3), w, h), /One fill flag/u);
 });

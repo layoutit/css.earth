@@ -355,11 +355,12 @@ function percentilesOf(values: Float32Array, ...percentiles: number[]): number[]
 }
 
 /** Every band on the grid, calibrated and divided by its own measured range, before any display: one float per band per
- * pixel (band-interleaved, top row first) and the pixels no band observed. A consumer with its own transfer, such as a volume
+ * pixel (band-interleaved, top row first), the pixels no band observed or masked (`missing`), and among them the pixels a
+ * point-source mask removed from observed sky (`masked`). A consumer with its own transfer, such as a volume
  * whose renderer applies 1 - exp(-gain * column), reads these instead of display bytes, so the image is not stretched twice. */
 export async function composeSkyBandPlanes(recipe: SkyBandComposite, io: SkyBandIo) {
   const { width, height } = recipe.grid, count = width * height, bandCount = recipe.bands.length;
-  const values = new Float32Array(count * bandCount), missing = new Uint8Array(count), bands = [];
+  const values = new Float32Array(count * bandCount), missing = new Uint8Array(count), masked = new Uint8Array(count), bands = [];
   for (const [b, input] of recipe.bands.entries()) {
     const route = SKY_BANDS[input.band]!, { plane, acquisition } = await bandPlane(recipe, input, io);
     // A saturated plate star is not galaxy light and not zero: its flat core and halo become no coverage.
@@ -367,7 +368,7 @@ export async function composeSkyBandPlanes(recipe: SkyBandComposite, io: SkyBand
     if (saturation) io.progress?.(`${input.band}: masked ${saturation.stars.length} saturated plate stars over ${saturation.maskedPixels} pixels`);
     const points = recipe.pointSources === 'mask' ? findPointSources(plane, width, height) : undefined;
     if (points) {
-      for (let pixel = 0; pixel < count; pixel++) if (points.mask[pixel]) plane[pixel] = NaN;
+      for (let pixel = 0; pixel < count; pixel++) if (points.mask[pixel] && Number.isFinite(plane[pixel]!)) { plane[pixel] = NaN; masked[pixel] = 1; }
       io.progress?.(`${input.band}: masked ${points.cores} star cores over ${points.maskedPixels} pixels`);
     }
     let missingPixels = 0;
@@ -388,7 +389,7 @@ export async function composeSkyBandPlanes(recipe: SkyBandComposite, io: SkyBand
         brightestStars: saturation.stars.slice(0, 8) } } : {}) });
     io.progress?.(`${input.band}: ${route.toMJyPerSr === null ? 'relative units' : 'calibrated'}; background ${background.toFixed(3)} and peak ${peak.toFixed(3)} ${route.toMJyPerSr === null ? 'source units' : 'MJy/sr'}`);
   }
-  return { width, height, values, missing, bands };
+  return { width, height, values, missing, masked, bands };
 }
 
 /** DOM row order (top row first), one RGB byte triple per pixel, with the grid's TAN WCS. */
