@@ -76,6 +76,7 @@ test('imaging follows the pipeline\u2019s own call rather than a plausible guess
   const script = restoreScript({ asdm: '/raw/x', visibilities: 'x.ms', applications: parseCalibrationRecord(await record()),
     flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x' });
   assert.ok(script.includes("deconvolver='mtmfs', nterms=2"), 'this delivery used mtmfs, whatever the general rule says');
+  assert.ok(script.includes("exportfits(imagename='/work/x.image.tt0.pbcor'"), 'mtmfs names its intensity image for the zeroth term');
   assert.ok(script.includes("cell='0.0055arcsec'") && script.includes('imsize=[3200, 3200]'));
   assert.ok(script.includes("threshold='0.000949Jy'") && script.includes("weighting='briggs', robust=0.5"));
   assert.ok(script.includes("scan='9,11,13,15,22,24,26,30,33,37'"), 'the scan selection is one string, not the first of ten');

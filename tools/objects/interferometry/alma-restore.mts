@@ -131,7 +131,8 @@ export function restoreScript(options: {
       `weighting=${python(imaging.weighting)}, robust=${imaging.robust}, niter=100000, threshold=${python(imaging.threshold)}, ` +
       "restoringbeam='common', pbcor=True, interactive=False)",
     "steps.append('tclean')",
-    `exportfits(imagename=${python(`${imageBase}.image.pbcor`)}, fitsimage=${python(`${imageBase}.fits`)}, overwrite=True, dropdeg=False)`,
+    // mtmfs writes one image per Taylor term; the zeroth is the continuum intensity.
+    `exportfits(imagename=${python(`${imageBase}.image${imaging.terms > 1 ? '.tt0' : ''}.pbcor`)}, fitsimage=${python(`${imageBase}.fits`)}, overwrite=True, dropdeg=False)`,
     "steps.append('exportfits')",
     `open(${python(`${imageBase}.steps.json`)}, 'w').write(json.dumps(steps, indent=1))`,
     "print('restore complete:', ', '.join(steps))",
