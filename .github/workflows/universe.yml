@@ -19,6 +19,10 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Full history: the published-assets gate below needs a merge base with the PR's base branch to scope
+          # itself to what the PR actually touched (a shallow, depth-1 checkout has no such ancestry available).
+          fetch-depth: 0
       - name: Check documentation links and organization
         run: |
           python3 tools/audits/test_documentation_links.py
@@ -43,15 +47,22 @@ jobs:
       - name: Build shared packages and affected entry points
         run: pnpm build:tools
       - name: Check published assets
-        # Phase 3 gate (feat/gh-pages-r2-assets): HEAD every key in both inventory kinds (runtime-assets.json and
-        # prepared-assets.json) and fail with the list of misses before anything is restored, so a contributor who
-        # bakes locally but forgets to publish gets a red PR instead of a silent local pass. Runs as early as the
-        # job allows: it needs SCENE_OBJECTS (site/objects.mts), which build:tools just generated.
-        run: pnpm check:assets-published
+        # HEAD every key in both inventory kinds (runtime-assets.json and prepared-assets.json) and fail with the
+        # list of misses before anything is restored, so a contributor who bakes locally but forgets to publish
+        # gets a red PR instead of a silent local pass. Runs as early as the job allows: it needs SCENE_OBJECTS
+        # (site/objects.mts), which build:tools just generated. On a PR, a miss outside the objects the PR itself
+        # touched (vs. its base branch) only warns instead of failing, so an unrelated pre-existing gap cannot
+        # block it; a push to main (and any local run) stays strict and fails on every miss.
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            pnpm check:assets-published --changed-since=origin/${{ github.base_ref }}
+          else
+            pnpm check:assets-published
+          fi
       - name: Restore prepared assets and object JSON
-        # setup:assets restores public/scenes AND (Phase 2, feat/gh-pages-r2-assets) each object's
-        # prepared-assets.json inventory (prepared/runtime.json + prepared/scene.json, or a context/nebula
-        # object's whole prepared/ output) — git no longer tracks those files, and prepare:object-json reads them.
+        # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
+        # + prepared/scene.json, or a context/nebula object's whole prepared/ output) — git no longer tracks those
+        # files, and prepare:object-json reads them.
         run: |
           pnpm setup:assets
           pnpm prepare:object-json
