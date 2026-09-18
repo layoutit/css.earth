@@ -5,6 +5,7 @@ import { SITE_ORIGIN } from "./site/seo.mts";
 import { wmtsLocalMirror } from "./tools/objects/geographic-pages/operations/wmts-local-server.mts";
 import { performanceSourceMaps } from "./tools/performance/source-maps.mts";
 import { searchServer } from './tools/search-server.mts';
+import { serviceWorker } from "./tools/service-worker-bundle.mts";
 import { prepareContextAvailability } from "./tools/prepare-context-availability.mts";
 
 function cssEarthVersion() {
@@ -27,7 +28,7 @@ export default defineConfig({
   outDir: "./dist",
   output: "static",
   devToolbar: { enabled: false },
-  integrations: [{ name: 'prepared-context-availability', hooks: {
+  integrations: [serviceWorker(), { name: 'prepared-context-availability', hooks: {
     'astro:config:setup': async ({ command, logger, updateConfig }) => {
       const { availability, failures } = await prepareContextAvailability({ strict: command === 'build' });
       updateConfig({ vite: { define: { __CSSEARTH_CONTEXT_AVAILABILITY__: JSON.stringify(availability) } } });
