@@ -1,0 +1,46 @@
+{
+  "//": [
+    "Read by tools/ci-affected.mts (unit tests: tools/ci-affected.test.mts). Patterns use '**' for any depth,",
+    "'*' for one path segment or a run of characters within a segment. `shared` is checked first against every",
+    "changed path: one match there means the whole change is treated as shared, full run of every heavy job",
+    "no matter what else changed. Otherwise each changed path is assigned to the first matching entry in `areas`,",
+    "in that order; a path matching no area also falls back to shared (unsure means shared). The final job set is",
+    "the union of every touched area's `jobs`. Job ids match the workflow's job ids in universe.yml: typecheck,",
+    "universe, universePreparation (job id universe-preparation), nebula. Contract lint and the object-scope gate",
+    "always run and are not listed here."
+  ],
+  "shared": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    "tsconfig*.json",
+    "**/tsconfig*.json",
+    "astro.config.mts",
+    ".github/workflows/**",
+    ".github/ci-areas.json",
+    "tools/ci-affected.mts",
+    "tools/check-ci.mts",
+    "tools/classify-changes.mts",
+    "tools/scope-runtime-ownership-check.mts",
+    "tools/object-scope-gate.mts",
+    "src/platform/**",
+    "site/objects.mts",
+    "site/object-schema.mts",
+    "site/object-catalog.mts",
+    "site/minimap/**",
+    "tools/prepare-catalog.mts",
+    "tools/prepare-planets.mts",
+    "tools/prepare-object.mts",
+    "tools/prepare-navigation.mts",
+    "tools/prepare-solar-geometry.mts",
+    "tools/build-catalogue-fragment.mts",
+    "tools/objects/**"
+  ],
+  "areas": [
+    { "id": "object", "patterns": ["src/objects/*/**"], "jobs": [] },
+    { "id": "renderer", "patterns": ["src/renderers/**"], "jobs": ["typecheck", "universe"] },
+    { "id": "site", "patterns": ["site/**"], "jobs": ["typecheck", "universe"] },
+    { "id": "tooling", "patterns": ["tools/**", "packages/**", "labs/nebula/**"], "jobs": ["typecheck", "nebula"] },
+    { "id": "docs", "patterns": ["**/*.md", "docs/**", "LICENSE*"], "jobs": [] }
+  ]
+}
