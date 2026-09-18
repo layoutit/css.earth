@@ -55,6 +55,7 @@ src/objects/*/source/**/*.bds
 # upstream feed regenerates weekly, so the committed snapshot identifies the
 # exact pinned bytes; re-downloading later would not reproduce them.
 !src/objects/*/source/features/*_nomenclature_center_pts.zip
+# Mercury's global tectonic map: a Mendeley Data deposit (DOI 10.17632/p43b9wttpj.2), not the USGS gazetteer above.
 !src/objects/mercury/source/features/tectonic/global-tectonic-map.zip
 
 # Offline-authored galaxy overview crops with no acquisition plan to restore them.
