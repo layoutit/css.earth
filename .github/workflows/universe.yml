@@ -25,6 +25,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       docs_only: ${{ steps.classify.outputs.docs_only }}
+      runtime_ownership_args: ${{ steps.ownership-scope.outputs.args }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -42,6 +43,16 @@ jobs:
             node tools/classify-changes.mts pr "origin/$GITHUB_BASE_REF"
           else
             node tools/classify-changes.mts push "${{ github.event.before }}"
+          fi
+      - name: Scope the runtime ownership check
+        id: ownership-scope
+        # Computed here (this checkout already has the full history a merge-base diff needs) so the "Prepared
+        # universe and shared renderer" job's own checkout can stay shallow. A push to main always keeps --all.
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            echo "args=$(node tools/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=--all" >> "$GITHUB_OUTPUT"
           fi
 
   lint:
@@ -120,6 +131,7 @@ jobs:
           src/platform/runtime-asset-closure.test.mts
           tools/object-scope-gate.test.mts
           tools/classify-changes.test.mts
+          tools/scope-runtime-ownership-check.test.mts
           tools/prune-runtime-assets.test.mts
           tools/check-ci.test.mts
       - name: Check published assets this change adds
@@ -392,7 +404,14 @@ jobs:
         # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
         run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
       - name: Check every object's runtime ownership and physical frame receipt
-        run: node tools/check-object-runtime-ownership.mts --all
+        # Scoped to the objects this PR touched (tools/scope-runtime-ownership-check.mts, computed in the `changes`
+        # job above); --receipts in Contract lint already covers a scoped run's only real failure mode, and --all
+        # still runs whenever this PR also touched shared code, or on every push to main.
+        env:
+          RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
+        run: |
+          # shellcheck disable=SC2086 # intentional word-splitting: one or more "--object <id>" pairs, or "--all"
+          node tools/check-object-runtime-ownership.mts $RUNTIME_OWNERSHIP_ARGS
       - name: Test complete shared renderer and camera
         # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
         run: pnpm test:renderer

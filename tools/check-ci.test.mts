@@ -21,6 +21,10 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  const universePreparation=readCiSteps(workflow,'universe-preparation');
  assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:galaxy-field')));
  assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:preparation --universe')));
+ // A local run has no PR diff to scope the ownership check to, so it substitutes the always-correct --all rather
+ // than failing on an expression only a real GitHub run (the `changes` job's output) can evaluate.
+ const ownership=universe.find(step=>step.name.includes('runtime ownership'));
+ assert.equal(ownership?.env.RUNTIME_OWNERSHIP_ARGS,'--all');
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
  const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');

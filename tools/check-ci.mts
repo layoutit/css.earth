@@ -9,6 +9,11 @@ import {requireArray, requireRecord, requireString} from './source-values.mts';
 interface CiStep {name:string;run:string;env:Record<string,string>;}
 /** The workflow's own token; a local run uses the contributor's `gh` login instead. */
 const WORKFLOW_TOKEN='${{ github.token }}';
+/** Expressions only a real GitHub run can evaluate (a cross-job `needs` output, computed from the PR's diff): a
+ * local run has no such diff, so it substitutes the most thorough, always-correct value instead of failing. */
+const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
+ '${{ needs.changes.outputs.runtime_ownership_args }}':'--all',
+};
 /** Step conditions that only mean something inside a GitHub run: skip the step when Contract lint failed, or cancel
  * the rest of the run after a failure. */
 export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
@@ -18,7 +23,9 @@ export function readCiSteps(source:string,jobName='universe'):CiStep[] {
  if(!Object.hasOwn(jobs,jobName))throw new Error(`Unknown CI job: ${jobName}`);
  const job=requireRecord(jobs[jobName]);
  const decodeEnvironment=(value:unknown)=>Object.fromEntries(Object.entries(value===undefined?{}:requireRecord(value))
-   .map(([key,value])=>[key,requireString(value,`CI environment ${key}`)]).filter(([,value])=>value!==WORKFLOW_TOKEN));
+   .map(([key,value])=>[key,requireString(value,`CI environment ${key}`)])
+   .filter(([,value])=>value!==WORKFLOW_TOKEN)
+   .map(([key,value])=>[key,Object.hasOwn(LOCAL_EXPRESSION_SUBSTITUTIONS,value)?LOCAL_EXPRESSION_SUBSTITUTIONS[value]:value]));
  const inherited={...decodeEnvironment(workflow.env),...decodeEnvironment(job.env)};
  return requireArray(job.steps).flatMap(value=>{
   const step=requireRecord(value);
