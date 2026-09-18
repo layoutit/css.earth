@@ -1,7 +1,4 @@
 import { parsePreparedWorldContext } from '../src/renderers/css/dist/index.js';
-import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { projectRoot } from '../src/platform/project-root.mts';
 
 // The application's prepared world context, validated once. Startup, framing and
 // every detail mount share this immutable plan. The browser fetches the prepared
@@ -12,14 +9,22 @@ import { projectRoot } from '../src/platform/project-root.mts';
 // project root instead, since neither `process.cwd()` (a workspace-filtered
 // script runs elsewhere) nor this module's own bundled URL (Astro's prerender
 // moves it into `dist/.prerender/chunks`) reliably sit beside the project root.
+// This module is itself part of the browser bundle (reached from every mounted
+// object through `application-world-context.mts`), so the Node-only read below
+// lives in its own module and is reached only through a dynamic import, inside
+// the `file:`-only branch: a real browser never takes that branch, but Vite
+// still externalizes a *static* `node:` import for the client build and throws
+// on first property access, even when the call site itself is unreachable at
+// runtime. The dynamic import keeps that module, and its `node:` imports, out
+// of the client bundle's closure entirely.
 const source = new URL('../src/objects/sun/prepared/world-context.json', import.meta.url);
 /** The same prepared file, for the world planner worker to read its own copy. */
 export const APPLICATION_WORLD_CONTEXT_URL = source.href;
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
   if (source.protocol === 'file:') {
-    const path = resolve(projectRoot(import.meta.url), 'src/objects/sun/prepared/world-context.json');
-    return (await import(/* @vite-ignore */ pathToFileURL(path).href, { with: { type: 'json' } })).default;
+    const { readNodeWorldContext } = await import('../tools/prepared-world-context-node-source.mts');
+    return readNodeWorldContext(import.meta.url);
   }
   const response = await fetch(source);
   if (!response.ok) throw new Error(`Prepared world context request failed: ${response.status}.`);

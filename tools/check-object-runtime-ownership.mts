@@ -123,8 +123,12 @@ function preparedLightingProjectionRecord(node: Node, file: string) {
     field.value.object?.type === 'Identifier' && field.value.object.name === 'projection' && nameOf(field.value.property) === 'sun';
 }
 
-// The application fetches one pinned JSON plan. Its Node-only import has a
-// concrete URL and JSON attributes, so it contributes data rather than an executor.
+// The application fetches one pinned JSON plan: over the network in a real
+// browser, or, on the Node-only `file:` branch, through one dynamic import of
+// the dedicated Node-side reader module (kept out of this file so a static
+// `node:` import never becomes part of the client bundle's closure). Either
+// way this is one concrete, literal, JSON-attributed import, so it contributes
+// data rather than an executor.
 function worldContextPlanImport(ast: Program | null, file: string): number | null {
   if (!ast || file !== 'site/world-context-plan.mts') return null;
   const nodes: Node[] = []; walkRuntimeAst(ast, node => nodes.push(node));
@@ -139,12 +143,17 @@ function worldContextPlanImport(ast: Program | null, file: string): number | nul
   const output = nodes.find((node): node is VariableDeclarator => node.type === 'VariableDeclarator' && nameOf(node.id) === 'APPLICATION_WORLD_CONTEXT');
   const validation = astKind(output?.init, 'CallExpression');
   const read = astKind(astKind(validation?.arguments[0], 'AwaitExpression')?.argument, 'CallExpression');
+  const networkRead = imported?.type === 'ImportExpression' && memberPath(imported.source)?.join('.') === 'source.href';
+  const nodeRead = imported?.type === 'ImportExpression' && imported.source.type === 'Literal' &&
+    imported.source.value === '../tools/prepared-world-context-node-source.mts';
   if (!url || nameOf(url.callee) !== 'URL' || url.arguments.length !== 2 ||
       url.arguments[0]?.type !== 'Literal' || url.arguments[0].value !== '../src/objects/sun/prepared/world-context.json' ||
       base?.object.type !== 'MetaProperty' || base.object.meta.name !== 'import' || base.object.property.name !== 'meta' || nameOf(base.property) !== 'url' ||
       parser?.type !== 'ImportDeclaration' || !parser.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'parsePreparedWorldContext' && specifier.local.name === 'parsePreparedWorldContext') ||
-      imports.length !== 1 || imported?.type !== 'ImportExpression' || memberPath(imported.source)?.join('.') !== 'source.href' ||
-      json?.type !== 'Literal' || json.value !== 'json' || nameOf(validation?.callee) !== 'parsePreparedWorldContext' || validation?.arguments.length !== 1 ||
+      imports.length !== 1 || imported?.type !== 'ImportExpression' || (!networkRead && !nodeRead) ||
+      // The network read carries JSON import attributes; the Node-only reader module has none to carry.
+      (networkRead && (json?.type !== 'Literal' || json.value !== 'json')) ||
+      nameOf(validation?.callee) !== 'parsePreparedWorldContext' || validation?.arguments.length !== 1 ||
       nameOf(read?.callee) !== 'readPreparedWorldContext' || read?.arguments.length !== 0) return null;
   // No assignment may redirect the statically bound source.
   if (nodes.some(node => node.type === 'AssignmentExpression' && (nameOf(node.left) === 'source' || memberPath(node.left)?.[0] === 'source'))) return null;

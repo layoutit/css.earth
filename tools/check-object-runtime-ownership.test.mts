@@ -535,7 +535,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   assert.equal((await audit({ [contextFile]: JSON.stringify(orbitless) })).complete, true,
     'An orbitless physical point does not require fabricated orbital geometry');
   const contextMutations: [SourceOverlay, RegExp][] = [
-    [{ [planFile]: plan.replace("type: 'json'", "type: 'javascript'") }, /world context plan|Computed dynamic imports/],
+    [{ [planFile]: plan.replace("'../tools/prepared-world-context-node-source.mts'", "'../tools/other-context-plan.mts'") }, /world context plan|Computed dynamic imports/],
     [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
     [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
     [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],
