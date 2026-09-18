@@ -104,19 +104,21 @@ const fits = object({ bitpix: number, width: number, height: number, latitude: l
   reverseLongitude: optional((v): v is boolean => typeof v === 'boolean'), positiveOnly: optional((v): v is boolean => typeof v === 'boolean'), nearestLatitudeLimit: number,
   color: union(object({ kind: literal('signed-asinh'), palette: array(array(number)), softening: number, maximum: number }),
     object({ kind: literal('positive-log'), palette: array(array(number)), range: tuple(number, number) })) });
-const continuum = object({ start: string, stop: string, maximumLatitudeDegrees: number, minimumDiscRadius: number, maximumDiscRadius: number, discBrightnessThreshold: number, solarPoleTiltDegrees: number });
+const record = object({ file: string, record: string });
+const continuum = object({ keywords: string, frames: array(record), limbDarkening: object({ file: string, keywords: string, record: string }),
+  maximumLatitudeDegrees: number, palette: object({ intensities: array(number), colors: array(array(number)) }) });
 const synoptic = object({
-  kind: literal('continuum-disc-mosaic', 'fits-map'), mapFiles: optional(array(string)), continuum: optional(continuum), fits: optional(fits),
+  kind: literal('hmi-continuum-mosaic', 'fits-map'), continuum: optional(continuum), fits: optional(fits),
   polarStabilization: optional(object({ latitudeSegments: number, polarDetailSigma: number })),
   limb: object({ mode: literal('continuum-darkening', 'rim') }),
   offLimb: union(nil, object({ observedFile: string, center: tuple(number, number), radius: number })),
 });
-/** A synoptic solar map: the continuum disc mosaic or a FITS synoptic map, with its polar continuation and plates. */
+/** A synoptic solar map: the HMI continuum mosaic or a FITS synoptic map, with its polar continuation and plates. */
 export function parseSynopticRecipe(value: unknown): SynopticRecipe {
   const input = parse(value, synoptic, 'synoptic surface');
-  if (input.kind === 'continuum-disc-mosaic') {
-    if (!input.mapFiles?.length || !input.continuum) throw new TypeError('A continuum mosaic names its frames and interval.');
-    return { source: { kind: 'continuum-disc-mosaic', mapFiles: input.mapFiles, continuum: input.continuum }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
+  if (input.kind === 'hmi-continuum-mosaic') {
+    if (!input.continuum?.frames.length) throw new TypeError('An HMI continuum mosaic names its frames, their keywords and its limb-darkening pair.');
+    return { source: { kind: 'hmi-continuum-mosaic', ...input.continuum }, polarStabilization: input.polarStabilization, limb: input.limb, offLimb: input.offLimb };
   }
   if (!input.fits) throw new TypeError('A FITS synoptic map declares its FITS geometry and colour transform.');
   if (input.limb.mode === 'continuum-darkening') throw new TypeError('Continuum limb darkening needs the continuum mosaic source.');

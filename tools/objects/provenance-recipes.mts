@@ -55,8 +55,8 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       .replaceAll('{suffix}', density === 2 ? '@2x' : '').replaceAll('{density}', String(density));
     namedRecords(raster.surfaces).forEach((plan, index) => {
       // A science block names its pinned inputs (continuum frames, off-limb context images) beside the surface source.
-      // A continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
-      const frames = Array.isArray(maybeRecord(maybeRecord(plan.science)?.synoptic)?.mapFiles);
+      // An HMI continuum mosaic names its frames under the science block; its `source` is their directory, not an input.
+      const frames = maybeRecord(maybeRecord(plan.science)?.synoptic)?.kind === 'hmi-continuum-mosaic';
       const used = [...(frames ? [] : [text(plan.source)]), ...paths(plan.coverage), ...paths(plan.science)];
       // A surface-observation lens consumes its whole pinned group (frames, cameras, companions) and its reference shape.
       const surfaceObservation = maybeRecord(plan.science)?.kind === 'surface-observation' ? record(plan.science) : null;
@@ -77,7 +77,7 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
           ...(controlledDetail ? { controlledPhotographicDetail: controlledDetail, originalIllumination:true } : {}),
           ...(nativePoles ? { polarSampling: 'original-photograph-footprint' } : {}),
           ...(surface(plan.id)?.coverageCompletion ? { coverageCompletion: surface(plan.id)?.coverageCompletion } : {}),
-          ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { observationInterval: synoptic.continuum } : {}) } } : {}),
+          ...(synoptic ? { synoptic: { kind: synoptic.kind, ...(synoptic.fits ? { fits: synoptic.fits } : {}), ...(maybeRecord(synoptic.continuum) ? { continuum: { maximumLatitudeDegrees: record(synoptic.continuum).maximumLatitudeDegrees, palette: record(synoptic.continuum).palette } } : {}) } } : {}),
           ...(surfaceObservation ? { surfaceObservation: { format: record(surfaceObservation.lens).format, shape: surfaceObservation.shape, transfer: record(surfaceObservation.lens).transfer,
             photometry: record(surfaceObservation.lens).photometry, display: record(surfaceObservation.lens).display, originalIllumination: true } } : {}) },
       });
