@@ -1,6 +1,6 @@
 export const googleAnalyticsBootstrap = String.raw`
 (function () {
-  var GA_ID = "G-XV72TXWTM5";
+  var GA_ID = "G-QN2DXDZ41X";
   var productionHosts = ["css.earth", "www.css.earth"];
 
   if (productionHosts.indexOf(window.location.hostname) < 0) {
