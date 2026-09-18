@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0b617d66db7975603d832be75b7a4d6e209a839e9a1ab580206f5b014993fb73"
+    "sha256": "d0c6c2789fdad5e75a8d5d67801e3d0795b011b57166b0919f4f327c9d212884"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a6ec02396d67b670be3fa2c50b214c79f90103d2b1079702d89cb054763a56e7"
+    "bindingsSha256": "5485c5dbc53b28faf88caba6c452a82df126825fe626a2384f5d5aeda27c6c94"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "594596a3395bf706b1e8bb6d8519a3f0217f2be921d0d23126e82036ed71cd71",
+      "sha256": "7e27762e63f482aac500462de7cf1da9644c44f819ff4c8f73724ea6aeccffd8",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -81,6 +81,368 @@
               "label": "Shape",
               "consumer": "shape"
             }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "zimpol",
+              "format": "controlled-shape-camera",
+              "consumer": "sphere-photograph",
+              "metadata": {
+                "label": "SPHERE photograph",
+                "falseColor": false,
+                "coverage": "20 deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, over 4 nights from 2018-03-15 to 2018-05-05, cast onto the ADAM reconstruction the survey released with its rotation record. The camera’s pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header; the exposure epoch is the midpoint of each frame’s stated exposure, the disc centre is fitted to the limb of the lens mesh, and the sky threshold is one stated fraction of the frame’s peak. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.18. Grayscale retains photographed illumination and matched relative frame brightness, not measured albedo. The grid marks unphotographed, grazing or rejected surface."
+              },
+              "selection": "finest-resolution",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 128,
+                "maximumGain": 4,
+                "maximumAngleDegrees": 60
+              },
+              "transfer": {
+                "maximumSeparationFootprints": 2,
+                "visibilityToleranceMeters": 0.5,
+                "maximumEmissionDegrees": 70,
+                "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, so a contributor lies within two of those of the closest source-mesh point, and that point must be visible from the stated camera in the full mesh."
+              },
+              "photometry": {
+                "model": "retained-observation",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 1
+              },
+              "display": {
+                "basis": "authored",
+                "percentiles": [
+                  1,
+                  99.5
+                ]
+              },
+              "frames": [
+                {
+                  "id": "zimpol-20180315-080346",
+                  "path": "observations/d22Kalliope_2018-03-15T08_03_46.466_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -76.5027,
+                  "observerWestLongitude": 14.5192,
+                  "sunLatitude": -79.3056,
+                  "sunWestLongitude": 336.4191,
+                  "rangeKm": 319888858.9,
+                  "northAzimuthDegrees": 157.4223,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    135.784,
+                    133.8
+                  ]
+                },
+                {
+                  "id": "zimpol-20180315-080957",
+                  "path": "observations/d22Kalliope_2018-03-15T08_09_57.055_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -76.5027,
+                  "observerWestLongitude": 23.4497,
+                  "sunLatitude": -79.3062,
+                  "sunWestLongitude": 345.3559,
+                  "rangeKm": 319886153.2,
+                  "northAzimuthDegrees": 157.4258,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.98,
+                    132.558
+                  ]
+                },
+                {
+                  "id": "zimpol-20180315-081607",
+                  "path": "observations/d22Kalliope_2018-03-15T08_16_07.953_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -76.5027,
+                  "observerWestLongitude": 32.3877,
+                  "sunLatitude": -79.3067,
+                  "sunWestLongitude": 354.3001,
+                  "rangeKm": 319883449.8,
+                  "northAzimuthDegrees": 157.4293,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.613,
+                    132.212
+                  ]
+                },
+                {
+                  "id": "zimpol-20180315-082217",
+                  "path": "observations/d22Kalliope_2018-03-15T08_22_17.338_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -76.5027,
+                  "observerWestLongitude": 41.2892,
+                  "sunLatitude": -79.3073,
+                  "sunWestLongitude": 3.2079,
+                  "rangeKm": 319880761.8,
+                  "northAzimuthDegrees": 157.4328,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    134.696,
+                    131.285
+                  ]
+                },
+                {
+                  "id": "zimpol-20180315-082825",
+                  "path": "observations/d22Kalliope_2018-03-15T08_28_25.256_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -76.5026,
+                  "observerWestLongitude": 50.1553,
+                  "sunLatitude": -79.3079,
+                  "sunWestLongitude": 12.0802,
+                  "rangeKm": 319878088.9,
+                  "northAzimuthDegrees": 157.4362,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    136.02,
+                    131.839
+                  ]
+                },
+                {
+                  "id": "zimpol-20180420-051136",
+                  "path": "observations/d22Kalliope_2018-04-20T05_11_36.589_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.6908,
+                  "observerWestLongitude": 196.4839,
+                  "sunLatitude": -82.5301,
+                  "sunWestLongitude": 224.7976,
+                  "rangeKm": 323192225.2,
+                  "northAzimuthDegrees": 188.5496,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.117,
+                    125.662
+                  ]
+                },
+                {
+                  "id": "zimpol-20180420-051747",
+                  "path": "observations/d22Kalliope_2018-04-20T05_17_47.747_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.6907,
+                  "observerWestLongitude": 205.4277,
+                  "sunLatitude": -82.5303,
+                  "sunWestLongitude": 233.7505,
+                  "rangeKm": 323195831.1,
+                  "northAzimuthDegrees": 188.553,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.867,
+                    126.891
+                  ]
+                },
+                {
+                  "id": "zimpol-20180420-052357",
+                  "path": "observations/d22Kalliope_2018-04-20T05_23_57.202_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.6906,
+                  "observerWestLongitude": 214.3304,
+                  "sunLatitude": -82.5304,
+                  "sunWestLongitude": 242.6622,
+                  "rangeKm": 323199424.9,
+                  "northAzimuthDegrees": 188.5564,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.293,
+                    126.772
+                  ]
+                },
+                {
+                  "id": "zimpol-20180420-053006",
+                  "path": "observations/d22Kalliope_2018-04-20T05_30_06.909_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.6904,
+                  "observerWestLongitude": 223.2393,
+                  "sunLatitude": -82.5306,
+                  "sunWestLongitude": 251.58,
+                  "rangeKm": 323203025.6,
+                  "northAzimuthDegrees": 188.5598,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.454,
+                    125.723
+                  ]
+                },
+                {
+                  "id": "zimpol-20180420-053616",
+                  "path": "observations/d22Kalliope_2018-04-20T05_36_16.452_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.6903,
+                  "observerWestLongitude": 232.1442,
+                  "sunLatitude": -82.5307,
+                  "sunWestLongitude": 260.4939,
+                  "rangeKm": 323206629.1,
+                  "northAzimuthDegrees": 188.5632,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.329,
+                    126.738
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-233043",
+                  "path": "observations/d22Kalliope_2018-05-04T23_30_43.205_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4255,
+                  "observerWestLongitude": 334.9332,
+                  "sunLatitude": -82.591,
+                  "sunWestLongitude": 32.9211,
+                  "rangeKm": 339245991.6,
+                  "northAzimuthDegrees": 198.3773,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.361,
+                    131.927
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-233653",
+                  "path": "observations/d22Kalliope_2018-05-04T23_36_53.199_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4254,
+                  "observerWestLongitude": 343.8497,
+                  "sunLatitude": -82.5909,
+                  "sunWestLongitude": 41.8458,
+                  "rangeKm": 339251580.8,
+                  "northAzimuthDegrees": 198.3797,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.957,
+                    133.25
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-234304",
+                  "path": "observations/d22Kalliope_2018-05-04T23_43_04.739_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4254,
+                  "observerWestLongitude": 352.8034,
+                  "sunLatitude": -82.5908,
+                  "sunWestLongitude": 50.8077,
+                  "rangeKm": 339257196.9,
+                  "northAzimuthDegrees": 198.3822,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    123.848,
+                    131.77
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-234914",
+                  "path": "observations/d22Kalliope_2018-05-04T23_49_14.386_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4254,
+                  "observerWestLongitude": 1.7116,
+                  "sunLatitude": -82.5907,
+                  "sunWestLongitude": 59.724,
+                  "rangeKm": 339262788,
+                  "northAzimuthDegrees": 198.3847,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    124.754,
+                    132.145
+                  ]
+                },
+                {
+                  "id": "zimpol-20180504-235524",
+                  "path": "observations/d22Kalliope_2018-05-04T23_55_24.194_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4254,
+                  "observerWestLongitude": 10.6236,
+                  "sunLatitude": -82.5906,
+                  "sunWestLongitude": 68.6441,
+                  "rangeKm": 339268385.2,
+                  "northAzimuthDegrees": 198.3872,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    125.752,
+                    132.411
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-023413",
+                  "path": "observations/d22Kalliope_2018-05-05T02_34_13.236_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4249,
+                  "observerWestLongitude": 240.2639,
+                  "sunLatitude": -82.5877,
+                  "sunWestLongitude": 298.4947,
+                  "rangeKm": 339414061.7,
+                  "northAzimuthDegrees": 198.4512,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.302,
+                    134.683
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-024024",
+                  "path": "observations/d22Kalliope_2018-05-05T02_40_24.583_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4249,
+                  "observerWestLongitude": 249.213,
+                  "sunLatitude": -82.5876,
+                  "sunWestLongitude": 307.452,
+                  "rangeKm": 339419799.9,
+                  "northAzimuthDegrees": 198.4537,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.665,
+                    133.754
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-024635",
+                  "path": "observations/d22Kalliope_2018-05-05T02_46_35.446_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4249,
+                  "observerWestLongitude": 258.1504,
+                  "sunLatitude": -82.5875,
+                  "sunWestLongitude": 316.3975,
+                  "rangeKm": 339425535.3,
+                  "northAzimuthDegrees": 198.4562,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.704,
+                    133.42
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-025244",
+                  "path": "observations/d22Kalliope_2018-05-05T02_52_44.952_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4249,
+                  "observerWestLongitude": 267.0551,
+                  "sunLatitude": -82.5874,
+                  "sunWestLongitude": 325.3104,
+                  "rangeKm": 339431254.4,
+                  "northAzimuthDegrees": 198.4586,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    126.879,
+                    133.472
+                  ]
+                },
+                {
+                  "id": "zimpol-20180505-025853",
+                  "path": "observations/d22Kalliope_2018-05-05T02_58_53.718_zpl_science_imaging_cam1.fits",
+                  "encoding": "fits-zimpol-intensity",
+                  "observerLatitude": -75.4249,
+                  "observerWestLongitude": 275.942,
+                  "sunLatitude": -82.5872,
+                  "sunWestLongitude": 334.2055,
+                  "rangeKm": 339436966.7,
+                  "northAzimuthDegrees": 198.4611,
+                  "pixelAngleMicroradians": 0.017599,
+                  "center": [
+                    127.698,
+                    132.734
+                  ]
+                }
+              ]
+            }
           ]
         },
         "lighting": {
@@ -118,7 +480,30 @@
               "maximumErrorMeters": 1400,
               "regularize": true
             }
-          }
+          },
+          "radialTerrainAlternatives": [
+            {
+              "lensId": "zimpol",
+              "path": "shape/22_Kalliope_adam.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 402,
+                "expectedFaces": 800
+              },
+              "latitudeSegments": 90,
+              "longitudeSegments": 180,
+              "faceBudget": 800,
+              "texelsPerFace": 16384,
+              "primitive": "u",
+              "simplification": {
+                "method": "source-meshoptimizer",
+                "targetFaces": 800,
+                "maximumErrorMeters": 1400,
+                "regularize": true
+              }
+            }
+          ]
         },
         "celestial": {
           "sunSource": "Pinned JPL Horizons heliocentric elements and Vernazza et al. (2021) Table A.1 observed pole; arbitrary display phase, not an absolute rotational ephemeris"
@@ -131,7 +516,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7d55d0fa43d844b79dc5920d91f541492847bae2b0f43ae3b87c32b570948f9b",
+      "sha256": "c0fe5630ce5371cc31e0f411eb33fb7f5e27eac49831a78bd91bc38b9275c9e6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -228,6 +613,20 @@
                 "image": "/scenes/kalliope/kalliope-elevation-legend.webp"
               },
               "notes": "Source shape · radial height"
+            },
+            {
+              "id": "zimpol",
+              "label": "SPHERE photograph",
+              "thumbnail": "/scenes/kalliope/kalliope-zimpol-thumbnail.webp",
+              "surface": "kalliope-zimpol-surface@2x.webp",
+              "poles": "kalliope-zimpol-surface@2x.webp",
+              "source": {
+                "id": "kalliope-adam-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "noData": true,
+              "notes": "20 deconvolved VLT/SPHERE/ZIMPOL frames, 4 nights from 2018-03-15 to 2018-05-05, cast onto the ADAM reconstruction from the same survey. The survey’s rotation record describes that frame, so the photograph rides it rather than the model the Shape view uses. Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure B.18. Grayscale is photographed illumination and matched relative frame brightness. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected."
             }
           ]
         },
@@ -337,6 +736,1100 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180315080346",
+      "path": "observations/d22Kalliope_2018-03-15T08_03_46.466_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_03_46.466_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180315080346",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+          }
+        ]
+      },
+      "sha256": "540c87cc18a0785898a6bbf738888bd889f2f6ad51857c773bf6b50254e23453",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-03-15T08_03_46.466_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_03_46.466_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180315080957",
+      "path": "observations/d22Kalliope_2018-03-15T08_09_57.055_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_09_57.055_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180315080957",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      },
+      "sha256": "91ed39ba9949395273e2444511b039345345b3343abfec7335ca4125e6694d64",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-03-15T08_09_57.055_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_09_57.055_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180315081607",
+      "path": "observations/d22Kalliope_2018-03-15T08_16_07.953_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_16_07.953_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180315081607",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      },
+      "sha256": "3df38f5c9c3c5f747b69e44c2da2f347e2f9f9fe9a3b480882592f5604d9194f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-03-15T08_16_07.953_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_16_07.953_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180315082217",
+      "path": "observations/d22Kalliope_2018-03-15T08_22_17.338_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_22_17.338_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180315082217",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+          }
+        ]
+      },
+      "sha256": "bd5c503e3bfbc8a4f1b3040a7f4ac0c2a354e14eb468a2c48dcfe426d0706c95",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-03-15T08_22_17.338_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_22_17.338_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180315082825",
+      "path": "observations/d22Kalliope_2018-03-15T08_28_25.256_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_28_25.256_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180315082825",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+          }
+        ]
+      },
+      "sha256": "b9f736f11951c237c66a35b86b8e0c876565941acf71a4da76fed64419cfeb4f",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-03-15T08_28_25.256_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-03-15T08_28_25.256_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180420051136",
+      "path": "observations/d22Kalliope_2018-04-20T05_11_36.589_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_11_36.589_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180420051136",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+          }
+        ]
+      },
+      "sha256": "29e622a628dd2cc054a5a0f78a5c091a07e8db7aeae62ede6ea55e6c0ab772b9",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-04-20T05_11_36.589_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_11_36.589_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180420051747",
+      "path": "observations/d22Kalliope_2018-04-20T05_17_47.747_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_17_47.747_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180420051747",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/9"
+          }
+        ]
+      },
+      "sha256": "32dc8473b3a014d1e29a149f33337ecdaaf0490ce4e58716080790605d23e02d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-04-20T05_17_47.747_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_17_47.747_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180420052357",
+      "path": "observations/d22Kalliope_2018-04-20T05_23_57.202_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_23_57.202_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180420052357",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/10"
+          }
+        ]
+      },
+      "sha256": "9d214751ebb547949439567979502b590781af017889beb4efe6acde8460bdd1",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-04-20T05_23_57.202_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_23_57.202_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180420053006",
+      "path": "observations/d22Kalliope_2018-04-20T05_30_06.909_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_30_06.909_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180420053006",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/11"
+          }
+        ]
+      },
+      "sha256": "91c4d4a2746c5a50d2bfc6566d27488c11f1634a6d8e946a22eb33aa56360113",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-04-20T05_30_06.909_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_30_06.909_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180420053616",
+      "path": "observations/d22Kalliope_2018-04-20T05_36_16.452_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_36_16.452_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180420053616",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/12"
+          }
+        ]
+      },
+      "sha256": "5846738d9674bc94d9cc873eb57b038c61ce8595f85da28a60b1540fa4e526d4",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-04-20T05_36_16.452_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-04-20T05_36_16.452_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180504233043",
+      "path": "observations/d22Kalliope_2018-05-04T23_30_43.205_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_30_43.205_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180504233043",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/13"
+          }
+        ]
+      },
+      "sha256": "a4caac4a107914c7e9dba47969d15ed8dad6e23aa0d6bc4ef72743b4ea8c4152",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-04T23_30_43.205_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_30_43.205_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180504233653",
+      "path": "observations/d22Kalliope_2018-05-04T23_36_53.199_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_36_53.199_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180504233653",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/14"
+          }
+        ]
+      },
+      "sha256": "588cfa830e9aecfa779d145a9c7fcadbb34a781386c7d21b969017e850a93c77",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-04T23_36_53.199_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_36_53.199_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180504234304",
+      "path": "observations/d22Kalliope_2018-05-04T23_43_04.739_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_43_04.739_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180504234304",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/15"
+          }
+        ]
+      },
+      "sha256": "64aac56c59be800fda8ad54fba2c798fef08a20db58f96f94e7f554271d65a1c",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-04T23_43_04.739_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_43_04.739_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180504234914",
+      "path": "observations/d22Kalliope_2018-05-04T23_49_14.386_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_49_14.386_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180504234914",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/16"
+          }
+        ]
+      },
+      "sha256": "ebc31b23a665daf60e13f8726b61d48004008e850205ae1e29b5bfb3468db070",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-04T23_49_14.386_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_49_14.386_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180504235524",
+      "path": "observations/d22Kalliope_2018-05-04T23_55_24.194_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_55_24.194_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180504235524",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/17"
+          }
+        ]
+      },
+      "sha256": "6646a7c677918ea0d4723dda90b2edc455728d3adc9b232d31a35f442c9e8d4d",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-04T23_55_24.194_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-04T23_55_24.194_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180505023413",
+      "path": "observations/d22Kalliope_2018-05-05T02_34_13.236_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_34_13.236_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180505023413",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/18"
+          }
+        ]
+      },
+      "sha256": "614896b0ce446f6386a23074f2803120bd60c1152a98d1a20ef827adf9c741c3",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-05T02_34_13.236_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_34_13.236_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180505024024",
+      "path": "observations/d22Kalliope_2018-05-05T02_40_24.583_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_40_24.583_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180505024024",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/19"
+          }
+        ]
+      },
+      "sha256": "984a4a376c4f82842dfad70d12cefc4c4391cccbd13c8b60de6d440d640bfdc0",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-05T02_40_24.583_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_40_24.583_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180505024635",
+      "path": "observations/d22Kalliope_2018-05-05T02_46_35.446_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_46_35.446_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180505024635",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/20"
+          }
+        ]
+      },
+      "sha256": "a41a73081791887cfc0c8d06b3d3830a1a9efa735de7c229ab17afc1e15811a7",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-05T02_46_35.446_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_46_35.446_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180505025244",
+      "path": "observations/d22Kalliope_2018-05-05T02_52_44.952_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_52_44.952_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180505025244",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/21"
+          }
+        ]
+      },
+      "sha256": "38d0a0f91c560b5f397d29f86218ed8e6a379038bc9043a8adcd0514c0bbb310",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-05T02_52_44.952_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_52_44.952_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-sphere-20180505025853",
+      "path": "observations/d22Kalliope_2018-05-05T02_58_53.718_zpl_science_imaging_cam1.fits",
+      "origin": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_58_53.718_zpl_science_imaging_cam1.fits",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "width": 256,
+      "height": 256,
+      "lensId": "zimpol",
+      "label": "Deconvolved ZIMPOL frame",
+      "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-sphere-20180505025853",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/22"
+          }
+        ]
+      },
+      "sha256": "95a50d9fcfdd051009bca256913ca8dc611ecaa332f50048fbea23a3cc31dc35",
+      "bytes": 593280,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/d22Kalliope_2018-05-05T02_58_53.718_zpl_science_imaging_cam1.fits",
+        "url": "https://observations.lam.fr/astero/Data/22Kalliope/Deconv/d22Kalliope_2018-05-05T02_58_53.718_zpl_science_imaging_cam1.fits",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "kalliope-adam-shape",
+      "path": "shape/22_Kalliope_adam.obj",
+      "origin": "https://observations.lam.fr/astero/3Dshape/22_Kalliope_adam.obj",
+      "credit": "P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "The preserved credit for this input reads: P. Vernazza, M. Ferrais, L. Jorda et al.; ESO/VLT/SPHERE; LAM asteroid survey",
+            "missionId": "eso-sphere-asteroid-survey"
+          }
+        ]
+      },
+      "license": "Public scientific release from the source-author site accompanying CC-BY-4.0 research; retain credit and citations.",
+      "acquisition": "Restored through source/preparation/acquisition.json. Its ordinary public-site cookie is included in the request headers.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers"
+      },
+      "coverage": "ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kalliope-kalliope-adam-shape",
+            "role": "material",
+            "evidence": "src/objects/kalliope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/23"
+          }
+        ]
+      },
+      "sha256": "97532fc559a3757f248e9abe6f2b116d8457b8c7e92c59a7fe43cd79b8e5b519",
+      "bytes": 21393,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/22_Kalliope_adam.obj",
+        "url": "https://observations.lam.fr/astero/3Dshape/22_Kalliope_adam.obj",
+        "headers": {
+          "Cookie": "CesAM_LAM_opens_the_door=1"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -349,8 +1842,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7d55d0fa43d844b79dc5920d91f541492847bae2b0f43ae3b87c32b570948f9b",
-      "bytes": 8429,
+      "sha256": "c0fe5630ce5371cc31e0f411eb33fb7f5e27eac49831a78bd91bc38b9275c9e6",
+      "bytes": 9637,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -453,6 +1946,70 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "zimpol",
+      "label": "SPHERE photograph",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [],
+      "lensIds": [
+        "zimpol"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "kalliope-sphere-20180315080346",
+        "kalliope-sphere-20180315080957",
+        "kalliope-sphere-20180315081607",
+        "kalliope-sphere-20180315082217",
+        "kalliope-sphere-20180315082825",
+        "kalliope-sphere-20180420051136",
+        "kalliope-sphere-20180420051747",
+        "kalliope-sphere-20180420052357",
+        "kalliope-sphere-20180420053006",
+        "kalliope-sphere-20180420053616",
+        "kalliope-sphere-20180504233043",
+        "kalliope-sphere-20180504233653",
+        "kalliope-sphere-20180504234304",
+        "kalliope-sphere-20180504234914",
+        "kalliope-sphere-20180504235524",
+        "kalliope-sphere-20180505023413",
+        "kalliope-sphere-20180505024024",
+        "kalliope-sphere-20180505024635",
+        "kalliope-sphere-20180505025244",
+        "kalliope-sphere-20180505025853",
+        "kalliope-adam-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/kalliope/kalliope-zimpol-thumbnail.webp",
+          "bytes": 1506,
+          "sha256": "22db9a7c01cf2cfda70252aca393e5a0d2581c3970aac78680df5be8f3699ede",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/kalliope/kalliope-zimpol-surface@2x.webp",
+          "bytes": 215510,
+          "sha256": "1018eb730cb649eefdf8cad4f2b5b6b3989cdf547f0783cd8b4525166e58b367",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "kalliope-adam-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -504,6 +2061,31 @@
       ]
     },
     {
+      "id": "preview:zimpol",
+      "label": "SPHERE photograph preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "zimpol"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/zimpol.webp",
+          "bytes": 6830,
+          "sha256": "aea1502df246e32c196dd83fb30e786a75dbc55376406ba56afc97347f76a57e",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -535,11 +2117,11 @@
   },
   "lastPreparation": {
     "objectId": "kalliope",
-    "materialSha256": "f9aabc0b2a815a5263c0583a417b2180cfd791ede25939fe2275b9bc44420676",
+    "materialSha256": "c49bf0c3e32989152bd97517f135ea141bc259a9a1ba5064f04187fe2133caef",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a6ec02396d67b670be3fa2c50b214c79f90103d2b1079702d89cb054763a56e7"
+      "bindingsSha256": "5485c5dbc53b28faf88caba6c452a82df126825fe626a2384f5d5aeda27c6c94"
     }
   }
 }

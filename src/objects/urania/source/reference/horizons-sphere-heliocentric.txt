@@ -1,0 +1,167 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 30 Urania (A854 OA)           2026-Sep-18 07:12:37
+Rec #:      30 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 4904 (1860-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458014.5 ! 2017-Sep-18.00 (TDB)         Residual RMS= .28098
+   EC= .1272645851666821   QR= 2.064345645351172   TP= 2458493.1690975651
+   OM= 307.4831512301909   W=  87.41470361731355   IN= 2.095567920080909
+   A= 2.365373984216554    MA= 230.3150016561341   ADIST= 2.666402323081935
+   PER= 3.63796            N= .270928286           ANGMOM= .026241314
+   DAN= 2.31378            DDN= 2.3405             L= 34.8961271
+   B= 2.0934341            MOID= 1.07123995        TP= 2019-Jan-09.6690975651
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 46.3935            ROTPER= 13.686
+   H= 7.57                 G= .150                 B-V= .873
+                           ALBEDO= .192            STYP= Sl
+
+ASTEROID comments: 
+1: soln ref.= JPL#152, OCC=0
+2: source=ORB
+*******************************************************************************
+
+
+*******************************************************************************
+Ephemeris / API_USER Fri Sep 18 07:12:37 2026 Pasadena, USA      / Horizons
+*******************************************************************************
+Target body name: 30 Urania (A854 OA)             {source: JPL#152}
+Center body name: Sun (10)                        {source: DE441}
+Center-site name: BODY CENTER
+*******************************************************************************
+Start time      : A.D. 2018-Sep-16 04:50:45.6980 TDB
+Stop  time      : A.D. 2018-Sep-28 03:17:36.9597 TDB
+Step-size       : DISCRETE TIME-LIST
+*******************************************************************************
+Center geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}
+Small perturbers: Yes                             {source: SB441-N16}
+Output units    : AU-D
+Calendar mode   : Mixed Julian/Gregorian
+Output type     : GEOMETRIC cartesian states
+Output format   : 1 (position only)
+Reference frame : ICRF
+*******************************************************************************
+Initial IAU76/J2000 heliocentric ecliptic osculating elements (au, days, deg.):
+  EPOCH=  2458014.5 ! 2017-Sep-18.00 (TDB)         Residual RMS= .28098        
+   EC= .1272645851666821   QR= 2.064345645351172   TP= 2458493.1690975651      
+   OM= 307.4831512301909   W=  87.41470361731355   IN= 2.095567920080909       
+  Equivalent ICRF heliocentric cartesian coordinates (au, au/d):
+   X=-6.625773732696100E-01  Y=-2.254787361449972E+00  Z=-1.058968304703415E+00
+  VX= 1.007168854673737E-02 VY=-1.687425831434813E-03 VZ=-4.548083386939458E-04
+Asteroid physical parameters (km, seconds, rotational period in hours):        
+   GM= n.a.                RAD= 46.3935            ROTPER= 13.686              
+   H= 7.57                 G= .150                 B-V= .873                   
+                           ALBEDO= .192            STYP= Sl                    
+*******************************************************************************
+JDTDB
+   X     Y     Z
+*******************************************************************************
+$$SOE
+2458377.701917801 = A.D. 2018-Sep-16 04:50:45.6980 TDB 
+ X = 2.110708553711923E+00 Y =-1.961358782869014E-01 Z =-2.281131853780739E-02
+2458377.704668539 = A.D. 2018-Sep-16 04:54:43.3618 TDB 
+ X = 2.110709035246536E+00 Y =-1.961048713705316E-01 Z =-2.279703188696011E-02
+2458377.707418617 = A.D. 2018-Sep-16 04:58:40.9685 TDB 
+ X = 2.110709516169637E+00 Y =-1.960738718526353E-01 Z =-2.278274866088488E-02
+2458377.710136925 = A.D. 2018-Sep-16 05:02:35.8303 TDB 
+ X = 2.110709991049687E+00 Y =-1.960432304053705E-01 Z =-2.276863043374096E-02
+2458377.712871945 = A.D. 2018-Sep-16 05:06:32.1360 TDB 
+ X = 2.110710468360363E+00 Y =-1.960124005294859E-01 Z =-2.275442540265275E-02
+2458388.589372065 = A.D. 2018-Sep-27 02:08:41.7464 TDB 
+ X = 2.108711586344706E+00 Y =-7.312315786742891E-02 Z = 3.374274412429501E-02
+2458388.592118215 = A.D. 2018-Sep-27 02:12:39.0138 TDB 
+ X = 2.108710093518598E+00 Y =-7.309207675558188E-02 Z = 3.375700181436420E-02
+2458388.594873068 = A.D. 2018-Sep-27 02:16:37.0331 TDB 
+ X = 2.108708595458201E+00 Y =-7.306089712274563E-02 Z = 3.377130468243990E-02
+2458388.597594321 = A.D. 2018-Sep-27 02:20:32.1493 TDB 
+ X = 2.108707115174493E+00 Y =-7.303009776293742E-02 Z = 3.378543309409154E-02
+2458388.600331373 = A.D. 2018-Sep-27 02:24:28.6306 TDB 
+ X = 2.108705625800317E+00 Y =-7.299911956679440E-02 Z = 3.379964352646846E-02
+2458388.764335313 = A.D. 2018-Sep-27 06:20:38.5710 TDB 
+ X = 2.108615474613337E+00 Y =-7.114287745675429E-02 Z = 3.465111677647843E-02
+2458388.767067892 = A.D. 2018-Sep-27 06:24:34.6659 TDB 
+ X = 2.108613957414814E+00 Y =-7.111194885201735E-02 Z = 3.466530349449889E-02
+2458388.769816722 = A.D. 2018-Sep-27 06:28:32.1648 TDB 
+ X = 2.108612430693151E+00 Y =-7.108083629795363E-02 Z = 3.467957457272271E-02
+2458388.772554568 = A.D. 2018-Sep-27 06:32:28.7147 TDB 
+ X = 2.108610909573000E+00 Y =-7.104984804409120E-02 Z = 3.469378861952551E-02
+2458388.775290539 = A.D. 2018-Sep-27 06:36:25.1026 TDB 
+ X = 2.108609388997370E+00 Y =-7.101888099806378E-02 Z = 3.470799292260531E-02
+2458389.626285431 = A.D. 2018-Sep-28 03:01:51.0612 TDB 
+ X = 2.108112297168324E+00 Y =-6.138613064185022E-02 Z = 3.912567794914333E-02
+2458389.629019087 = A.D. 2018-Sep-28 03:05:47.2491 TDB 
+ X = 2.108110622814724E+00 Y =-6.135518491760316E-02 Z = 3.913986752321424E-02
+2458389.631768554 = A.D. 2018-Sep-28 03:09:44.8031 TDB 
+ X = 2.108108938276163E+00 Y =-6.132406019852896E-02 Z = 3.915413915597334E-02
+2458389.634494895 = A.D. 2018-Sep-28 03:13:40.3589 TDB 
+ X = 2.108107267410040E+00 Y =-6.129319725391980E-02 Z = 3.916829074132371E-02
+2458389.637233330 = A.D. 2018-Sep-28 03:17:36.9597 TDB 
+ X = 2.108105588634868E+00 Y =-6.126219739173975E-02 Z = 3.918250509161241E-02
+$$EOE
+*******************************************************************************
+ 
+TIME
+
+  Barycentric Dynamical Time ("TDB" or T_eph) output was requested. This
+continuous coordinate time is equivalent to the relativistic proper time
+of a clock at rest in a reference frame co-moving with the solar system
+barycenter but outside the system's gravity well. It is the independent
+variable in the solar system relativistic equations of motion.
+
+  TDB runs at a uniform rate of one SI second per second and is independent
+of irregularities in Earth's rotation.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+REFERENCE FRAME AND COORDINATES
+
+  International Celestial Reference Frame (ICRF)
+
+    The ICRF is an adopted reference frame whose axes are defined relative to 
+    fixed extragalactic radio sources distributed across the sky.
+
+    The ICRF was aligned with the prior FK5/J2000 dynamical system at the ~0.02 
+    arcsecond level but is not identical and has no associated standard epoch.
+
+  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+      X      X-component of position vector (au)
+      Y      Y-component of position vector (au)
+      Z      Z-component of position vector (au)
+
+ABERRATIONS AND CORRECTIONS
+
+ Geometric state vectors have NO corrections or aberrations applied.
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+*******************************************************************************
