@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-181327",
+  "displayName": "HD 181327",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.37 solar radii",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-181327",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME radius",
+          "checked": "2026-09-18",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "47.8 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-181327",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-18",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star. The disc itself is unresolved.",
+        "thumbnail": "hd-181327-lens-color.webp",
+        "surface": "hd-181327-surface-color@2x.webp",
+        "poles": "hd-181327-poles-color@2x.webp",
+        "source": {
+          "id": "hd-181327-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of the star: a slightly blue-white F-type dwarf. No image of the photosphere exists, and its spin axis is not measured; the display axis is celestial north."
+      },
+      {
+        "id": "debris-ring",
+        "label": "Debris ring · JWST 1.8–4.4 µm",
+        "thumbnail": "hd-181327-lens-color.webp",
+        "volume": {
+          "objectId": "hd-181327-disc",
+          "lensId": "nircam-six-filters",
+          "surface": "color"
+        },
+        "notes": "The star in its Gaia colour, with the ring of debris around it as JWST/NIRCam imaged it behind a coronagraph on 11 October 2023, in six filters from 1.8 to 4.4 micrometres (programme 2780; Gáspár et al. 2026). The ring is starlight scattered by dust. Measured on these images, its ridge is an ellipse 81 au in radius, tilted 29° from face-on with its long axis at position angle 101°; the paper publishes 80 au, 28.5° and 100.4°. The colours are the filters: the two shortest in blue, the middle two in green, the two longest in red, each on its own brightness range, so hue shows where each group is relatively bright, not the colour of the dust. The images have no third axis, so the depth is inferred: a tilted ring of that geometry projects to them better than a spherical shell or the constant depth an extrusion assumes, and each line of sight is placed on it. Which side is nearer to us and how thick the ring is are stated conventions. Nothing is drawn within 1″ of the star, where the starlight left over after subtraction outweighs the dust.",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Filters",
+          "items": [
+            {
+              "label": "F335M + F444W",
+              "description": "3.4 and 4.4 µm, each on its own brightness range",
+              "color": "#ff0000"
+            },
+            {
+              "label": "F250M + F300M",
+              "description": "2.5 and 3.0 µm, each on its own brightness range",
+              "color": "#00ff00"
+            },
+            {
+              "label": "F182M + F210M",
+              "description": "1.8 and 2.1 µm, each on its own brightness range",
+              "color": "#0000ff"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gáspár et al. (2026), arXiv:2608.27437: the JWST/NIRCam coronagraphic imaging of the debris disc",
+      "href": "https://arxiv.org/abs/2608.27437"
+    },
+    {
+      "label": "Archive",
+      "role": "facts",
+      "description": "Gaia DR3 source 6643589352010758400",
+      "href": "https://gea.esac.esa.int/archive/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2608.27437",
+      "credit": "Gáspár et al. (2026), arXiv:2608.27437"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-181327.json",
+      "credit": "Gaia DR3 FLAME radius and mass at the Gaia DR3 distance; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

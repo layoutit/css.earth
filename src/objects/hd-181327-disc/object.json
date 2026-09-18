@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-181327-disc",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        302962945641421100,
+        -799829332597926400,
+        -1200779110533781800
+      ],
+      "localToReferenceXyzw": [
+        0.9369314978531125,
+        0.17150200015437886,
+        0.05483444513337283,
+        0.2995657121579265
+      ],
+      "metersPerUnit": 149597870700,
+      "boundsUnits": {
+        "min": [
+          -140,
+          -140,
+          -140
+        ],
+        "max": [
+          140,
+          140,
+          140
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json",
+      "sha256": "b9fb8825ee09eb633b1834b262c6481b1edf44a040aa903faa823dcde7f7645b"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "b0e224bcba1b38a397ae8d59a79cb40008e995de7bbf1dd8d147c6fda4e54323"
+  }
+}

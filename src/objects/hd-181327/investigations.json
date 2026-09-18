@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-181327",
+  "entries": [
+    {
+      "id": "resolved-photosphere",
+      "subject": "Disc-resolved images or interferometric imaging of HD 181327",
+      "status": "excluded",
+      "finding": "The disc is 0.27 mas across at 47.8 pc. The JMMC diameter catalogue lists no measured diameter for this star, and no interferometric image of its surface is published. The sphere carries the colour of its Gaia spectrum only.",
+      "revisitWhen": "A reconstructed image of the star's surface is published, or public calibrated interferometry resolves it.",
+      "evidence": [
+        "https://jmmc.fr/jmdc",
+        "https://oidb.jmmc.fr/search.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "gaia-dr3-flame-parameters",
+      "subject": "Stellar radius and mass from Gaia DR3 FLAME",
+      "status": "included",
+      "finding": "The Gaia DR3 astrophysical_parameters row gives radius_flame 1.372 (1.344 to 1.400) solar radii and mass_flame 1.231 (1.191 to 1.271) solar masses for source 6643589352010758400; GSP-Phot gives 1.376 solar radii and 6375 K. They set the sphere and the display GM. FLAME assumes a single star on the main sequence, which this F6 dwarf is.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243688",
+        "https://doi.org/10.1051/0004-6361/202243919"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "debris-disc-volume",
+      "subject": "The debris ring imaged by JWST/NIRCam behind the MASK335R coronagraph (programme 2780)",
+      "status": "included",
+      "finding": "The ring is drawn as the attached volume hd-181327-disc, in the star's own frame, from the six NIRCam coronagraph mosaics as one colour composite; see that package's ledger and README for the fit and its limits.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437",
+        "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
 import { mastDownloadUrl, mastRequest, type MastFile } from '../mast.mts';
-import { JWST_BANDS, type JwstBand } from './bands.mts';
+import { JWST_BANDS, NIRCAM_OCCULTERS, type JwstBand } from './bands.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');
 const NAME = /^[A-Za-z0-9._-]+$/u;
@@ -84,12 +84,22 @@ export function parseImagingProgram(value: unknown): ImagingProgram {
     target: requireString(row.target, 'Target'), crdsContext: requireString(row.crdsContext, 'CRDS context'), ...(image3 ? { image3 } : {}), bands };
 }
 
-export const bandOfFilters = (instrument: string, filters: string): JwstBand => {
+export const bandOfFilters = (instrument: string, filters: string, observation = ''): JwstBand => {
   // CAOM lists NIRCam optical elements as "FILTER;PUPIL" and "CLEAR;FILTER" forms (a coronagraph's Lyot stop is the pupil, and
   // the mask is not listed); MIRI as the filter alone. compare.mts checks the band against the level-3 product's own header,
   // which names the mask.
   const parts = filters.split(';');
-  const found = Object.values(JWST_BANDS).filter(entry => entry.instrument === instrument &&
+  // A NIRCam coronagraph's occulter is not in the archive's filter list; the subarray in the observation's name carries it
+  // (sub320a335r is module A's MASK335R). A full-frame coronagraph observation names no occulter and cannot be pinned by name.
+  const lyot = parts.find(part => part === 'MASKRND' || part === 'MASKBAR');
+  if (instrument === 'NIRCAM' && lyot) {
+    const occulter = /-mask(?:rnd|bar)-sub\d+(?:x\d+)?a(210r|335r|430r|swb|lwb)$/u.exec(observation)?.[1]?.toUpperCase();
+    if (!occulter || NIRCAM_OCCULTERS[occulter]!.pupil !== lyot) throw new Error(`${observation || filters}: the observation's name does not say which occulter it is behind.`);
+    const found = JWST_BANDS[`NIRCAM-${parts.find(part => part !== lyot)}-MASK${occulter}`];
+    if (!found) throw new Error(`No JWST band for ${instrument} ${filters} behind MASK${occulter}.`);
+    return found;
+  }
+  const found = Object.values(JWST_BANDS).filter(entry => !entry.coronagraph && entry.instrument === instrument &&
     (entry.instrument === 'MIRI' ? parts.length === 1 && parts[0] === entry.filter
       : parts.includes(entry.filter) && parts.includes(entry.pupil ?? 'CLEAR') || entry.pupil === 'CLEAR' && parts.length === 1 && parts[0] === entry.filter));
   if (found.length !== 1) throw new Error(`${found.length ? 'More than one' : 'No'} JWST band for ${instrument} ${filters}.`);
@@ -101,7 +111,7 @@ export async function imagingBand(observation: string): Promise<ImagingBand & { 
   const [obs] = await mastRequest({ service: 'Mast.Caom.Filtered', format: 'json', params: { columns: 'obsid,obs_id,instrument_name,filters,proposal_id,target_name,calib_level',
     filters: [{ paramName: 'obs_collection', values: ['JWST'] }, { paramName: 'obs_id', values: [observation] }] } });
   if (!obs || obs.calib_level !== 3) throw new Error(`${observation} is not a level-3 JWST observation.`);
-  const instrument = requireString(obs.instrument_name).split('/')[0]!, band = bandOfFilters(instrument, requireString(obs.filters));
+  const instrument = requireString(obs.instrument_name).split('/')[0]!, band = bandOfFilters(instrument, requireString(obs.filters), observation);
   const products = await mastRequest({ service: 'Mast.Caom.Products', format: 'json', params: { obsid: String(obs.obsid) } });
   const pick = (kind: string, level: number, pattern: RegExp) => products.filter(p => p.productSubGroupDescription === kind && p.calib_level === level &&
     pattern.test(requireString(p.productFilename)));

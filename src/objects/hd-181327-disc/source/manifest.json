@@ -1,0 +1,230 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "nircam-six-filters-f335m",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-181327-disc-nircam-six-filters-f335m",
+            "role": "material",
+            "evidence": "src/objects/hd-181327-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/hd-181327-disc/observations/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "title": "MAST JWST programme 2780 · jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "nircam-six-filters",
+      "expectedSha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
+      "expectedBytes": 3084480
+    },
+    {
+      "id": "nircam-six-filters-f444w",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-181327-disc-nircam-six-filters-f444w",
+            "role": "material",
+            "evidence": "src/objects/hd-181327-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "path": ".local/hd-181327-disc/observations/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "title": "MAST JWST programme 2780 · jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "nircam-six-filters",
+      "expectedSha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
+      "expectedBytes": 3084480
+    },
+    {
+      "id": "nircam-six-filters-f250m",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-181327-disc-nircam-six-filters-f250m",
+            "role": "material",
+            "evidence": "src/objects/hd-181327-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/2"
+          }
+        ]
+      },
+      "path": ".local/hd-181327-disc/observations/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "title": "MAST JWST programme 2780 · jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "nircam-six-filters",
+      "expectedSha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
+      "expectedBytes": 3084480
+    },
+    {
+      "id": "nircam-six-filters-f300m",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-181327-disc-nircam-six-filters-f300m",
+            "role": "material",
+            "evidence": "src/objects/hd-181327-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+          }
+        ]
+      },
+      "path": ".local/hd-181327-disc/observations/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "title": "MAST JWST programme 2780 · jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "nircam-six-filters",
+      "expectedSha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
+      "expectedBytes": 3084480
+    },
+    {
+      "id": "nircam-six-filters-f182m",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-181327-disc-nircam-six-filters-f182m",
+            "role": "material",
+            "evidence": "src/objects/hd-181327-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      },
+      "path": ".local/hd-181327-disc/observations/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "title": "MAST JWST programme 2780 · jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "nircam-six-filters",
+      "expectedSha256": "1475883875640febac23487f0e171900cb6a5a37352945f74bec6b8e42e728f3",
+      "expectedBytes": 3101760
+    },
+    {
+      "id": "nircam-six-filters-f210m",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-181327-disc-nircam-six-filters-f210m",
+            "role": "material",
+            "evidence": "src/objects/hd-181327-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      },
+      "path": ".local/hd-181327-disc/observations/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
+      "title": "MAST JWST programme 2780 · jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "nircam-six-filters",
+      "expectedSha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
+      "expectedBytes": 3101760
+    }
+  ],
+  "documents": [
+    {
+      "id": "circumstellar-json",
+      "path": "src/objects/hd-181327-disc/source/circumstellar.json",
+      "expectedSha256": "cb69ec70d4a8c56e8dc631c9e2a63935ccb1d28b70399253bffaee5f5aba7747",
+      "expectedBytes": 4361,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe: the lenses, their pinned program and bands, the stated conventions and the published geometry each is checked against."
+      }
+    },
+    {
+      "id": "delivery-json",
+      "path": "src/objects/hd-181327-disc/source/delivery.json",
+      "expectedSha256": "b9fb8825ee09eb633b1834b262c6481b1edf44a040aa903faa823dcde7f7645b",
+      "expectedBytes": 2041,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/hd-181327-disc/source/presentation.json",
+      "expectedSha256": "0250794727e80a690f277f1c67b82e468896fea4948d700695de4d891ac32c1d",
+      "expectedBytes": 3593,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/hd-181327-disc/source/provenance.json",
+      "expectedSha256": "238a63fb9faf2b49f3c6f7db9947f88eb76a94aa5f7519c09e9b5f11af76d344",
+      "expectedBytes": 16952,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-nircam-six-filters-ktx2",
+      "path": "src/objects/hd-181327-disc/source/density-nircam-six-filters.ktx2",
+      "expectedSha256": "863b47558e19e53502acd0b64617aca8a514dfb76edf1b3731fbe6748eabafa8",
+      "expectedBytes": 234325,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-nircam-six-filters-json",
+      "path": "src/objects/hd-181327-disc/source/volume-nircam-six-filters.json",
+      "expectedSha256": "db1773f20b02967a4f02de8f6cc66220d2b5f4af599333b41b246abe01295524",
+      "expectedBytes": 1684,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-nircam-six-filters-png",
+      "path": "src/objects/hd-181327-disc/source/previews/nircam-six-filters.png",
+      "expectedSha256": "b80e2541b74eb8218f35e32c1d4bdfa2eabb3d54229b9d0f5894179a6be03591",
+      "expectedBytes": 27229,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    }
+  ]
+}

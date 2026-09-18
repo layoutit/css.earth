@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hd-181327",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 181327",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 954529.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/hd-181327-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c3c964e044f78d4691572a546d22e89710fd8bdff11c4b0835279eb56f6b5886"
+      }
+    },
+    "catalog": {
+      "name": "HD 181327",
+      "classification": "star",
+      "color": "#eeedff",
+      "distanceAu": 9854684.3,
+      "description": "F6 dwarf in Telescopium ringed by a bright belt of debris 48 parsecs away.",
+      "systemName": "Telescopium",
+      "order": 1110,
+      "context": {
+        "order": 1107
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        302962945641421250,
+        -799829332597926300,
+        -1200779110533781800
+      ],
+      "presentationToReference": [
+        0.20550570194829515,
+        -0.28851568133301464,
+        -0.935161006507267,
+        -0.5425399072907146,
+        0.7616932171745558,
+        -0.35422294096692525,
+        -0.8145046687795726,
+        -0.5801569999019415,
+        -0.000001028262381235917
+      ],
+      "orbitUpReference": [
+        0.28851568133301464,
+        -0.7616932171745558,
+        0.5801569999019415
+      ],
+      "metersPerUnit": 3079128.064516129,
+      "bodyRadiusM": 954529700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "ab9a1ff57d4f7990464493f8c32fe51191468cf658c67a1f920505c3215c1256"
+  }
+}

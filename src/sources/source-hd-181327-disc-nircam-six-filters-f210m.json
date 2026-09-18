@@ -1,0 +1,37 @@
+{
+  "id": "source-hd-181327-disc-nircam-six-filters-f210m",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Hd 181327 Disc · nircam six filters f210m",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-181327-disc/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
+      "scope": "The nircam six filters f210m input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

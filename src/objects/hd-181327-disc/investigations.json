@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-181327-disc",
+  "entries": [
+    {
+      "id": "lens-nircam-six-filters",
+      "subject": "JWST/NIRCam F182M, F210M, F250M, F300M, F335M and F444W behind MASK335R, 11 October 2023 (programme 2780, observation c1014): MAST's level-3 coronagraph mosaics as one colour composite",
+      "status": "included",
+      "finding": "Each of the six mosaics was re-run here from the archived exposures on the pinned toolchain and lands on MAST's grid with every PSF alignment fit converged. Against MAST's products, above the median brightness, the correlations are F182M 0.961, F210M 0.965, F250M 0.996, F300M 0.994, F335M 0.993, F444W 0.978; from 1 to 2 arcsec, where the ring is, 0.89 to 0.99. MAST's products are drawn, as one composite: red F335M + F444W, green F250M + F300M, blue F182M + F210M, each band on its own range and through the shared Lupton asinh display. On the mean of the six bands the ring's ridge is an ellipse of 80.9 au at inclination 29.0 degrees and position angle 100.6 degrees; the inclined ring leaves 0.104 of a signal of 0.485 (band-normalised), a spherical shell 0.127 and constant depth 0.218. Each band measured alone gives 80.3 to 81.1 au, 28.1 to 30.1 degrees and 98.8 to 102.3 degrees.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437",
+        "https://www.stsci.edu/jwst/phase2-public/2780.pdf"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "near-side-and-thickness",
+      "subject": "Which side of the ring is nearer, and the ring's vertical thickness",
+      "status": "unresolved",
+      "finding": "The image alone cannot say which end of the minor axis tilts toward the observer, and at 30 degrees the projection changes by 0.4 percent across vertical heights from 0.02 to 0.2 of the radius. Both are drawn as stated conventions: the south-south-west side nearer, height 0.05 of the radius. A scattering phase function fitted to the brightness asymmetry, which Gáspár et al. discuss, would decide the first.",
+      "revisitWhen": "A published near side or vertical scale height for this ring is transcribed, or the phase-function asymmetry is fitted here.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437",
+        "https://doi.org/10.1088/0004-637X/789/1/58"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "miri-coronagraphy",
+      "subject": "MIRI four-quadrant phase-mask coronagraphy of debris discs",
+      "status": "excluded",
+      "finding": "The pipeline's PSF alignment does not converge on MIRI 4QPM data (171 of 180 fits stop at their evaluation limit on HIP 65426 F1140C), so its mosaics depend on the machine that made them and this repository's coron3 runner refuses them (docs/jwst-imaging.md).",
+      "revisitWhen": "A pipeline release changes the align_refs fit, or a published MIRI reduction of this disc is deposited.",
+      "evidence": [
+        "https://jwst-pipeline.readthedocs.io/en/latest/jwst/align_refs/index.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "ring-geometry-and-depth",
+      "subject": "How the coronagraph images are given depth",
+      "status": "included",
+      "finding": "The ring's ridge, the radius of peak brightness in each azimuth under nine binnings on the mean of the six bands, traces an ellipse of 80.9 au and axis ratio 0.875: inclination 29.0 degrees, line of nodes at position angle 100.6 degrees. Gáspár et al. (2026) publish 80 au, 28.54 +/- 0.31 and 100.39 +/- 0.63 degrees; the author refuses a ring more than five degrees or a tenth of the radius from them. A mirrored reading of the mosaics would put the nodes near 80 degrees, so east is where the paper has it. Projected through the cube and scored between 1 arcsec and 120 au, the inclined ring beats a spherical shell and constant depth, what an extrusion assumes. The ring is drawn; each sky column is spread along it and keeps its measured colour. The residual stays above the noise because the real ring is brighter on one side and carries a halo of small grains; those are kept as measured.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    },
+    {
+      "id": "one-composite-not-six-lenses",
+      "subject": "Six filters as one dataset",
+      "status": "included",
+      "finding": "The six filters were first drawn as six lenses, each in the paper's own Figure 26 colour scale. They show one ring, so they are one dataset: a composite by wavelength, the display this repository uses for multi-band surveys, which also keeps the filters' relative brightness across the ring visible in one image. Water ice absorbs near 3 micrometres (the green channel), which is the measurement Gáspár et al. make across these filters; the composite shows band-relative brightness and does not measure ice.",
+      "evidence": [
+        "https://arxiv.org/abs/2608.27437"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "c05ca383100057c56c5d8f1e816ea4ffd8dc472f"
+        }
+      ]
+    }
+  ]
+}

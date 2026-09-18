@@ -69,13 +69,20 @@ test('coronagraph bands are built by coron3 from _calints exposures and PSF refe
 });
 
 test('the archive’s filter lists resolve coronagraph bands; the mask comes from the product header', () => {
-  assert.equal(bandOfFilters('NIRCAM', 'F444W;MASKRND').id, 'NIRCAM-F444W-MASK335R');
+  assert.equal(bandOfFilters('NIRCAM', 'F444W;MASKRND', 'jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r').id, 'NIRCAM-F444W-MASK335R');
+  assert.equal(bandOfFilters('NIRCAM', 'F182M;MASKRND', 'jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r').id, 'NIRCAM-F182M-MASK335R');
+  assert.equal(bandOfFilters('NIRCAM', 'F335M;MASKBAR', 'jw04451-c1001_t001_nircam_f335m-maskbar-sub320alwb').id, 'NIRCAM-F335M-MASKLWB');
+  assert.equal(bandOfFilters('NIRCAM', 'F460M;MASKBAR', 'jw01194-c1001_t001_nircam_f460m-maskbar-sub400x256alwb').id, 'NIRCAM-F460M-MASKLWB');
+  // A full-frame coronagraph observation names no occulter, and a bar is not behind the round Lyot stop.
+  assert.throws(() => bandOfFilters('NIRCAM', 'F444W;MASKRND', 'jw01193-c1031_t015_nircam_f444w-maskrnd'), /does not say which occulter/u);
+  assert.throws(() => bandOfFilters('NIRCAM', 'F444W;MASKRND', 'jw01193-c1031_t015_nircam_f444w-maskrnd-sub320alwb'), /does not say which occulter/u);
   assert.equal(bandOfFilters('NIRCAM', 'F444W;CLEAR').id, 'NIRCAM-F444W');
   assert.equal(bandOfFilters('MIRI', 'F1130W').id, 'MIRI-F1130W');
   // MIRI coronagraphy is not a band: its PSF alignment does not converge (coron3.mts).
   assert.throws(() => bandOfFilters('MIRI', 'F1140C;4QPM_1140'), /No JWST band/u);
   assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F444W', PUPIL: 'MASKRND', CORONMSK: 'MASKA335R' })?.id, 'NIRCAM-F444W-MASK335R');
-  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F444W', PUPIL: 'MASKRND', CORONMSK: 'MASKA430R' }), undefined);
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F444W', PUPIL: 'MASKRND', CORONMSK: 'MASKA430R' })?.id, 'NIRCAM-F444W-MASK430R');
+  assert.equal(bandOfHeader({ TELESCOP: 'JWST', INSTRUME: 'NIRCAM', FILTER: 'F444W', PUPIL: 'MASKRND', CORONMSK: 'MASKB335R' }), undefined);
 });
 
 test('a product header names its band, with NIRCam narrow filters behind F444W in the pupil wheel', () => {

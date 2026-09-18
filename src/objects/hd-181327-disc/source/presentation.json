@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "hd-181327-disc",
+  "name": "HD 181327 debris ring",
+  "defaultLens": "nircam-six-filters",
+  "bank": {
+    "path": "src/objects/hd-181327-disc/prepared/lenses.json",
+    "sha256": "b0e224bcba1b38a397ae8d59a79cb40008e995de7bbf1dd8d147c6fda4e54323",
+    "bytes": 182544
+  },
+  "recipes": [
+    {
+      "id": "nircam-six-filters",
+      "path": "src/objects/hd-181327-disc/source/volume-nircam-six-filters.json",
+      "sha256": "db1773f20b02967a4f02de8f6cc66220d2b5f4af599333b41b246abe01295524",
+      "bytes": 1684
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "lenses": [
+    {
+      "id": "nircam-six-filters",
+      "label": "JWST/NIRCam · debris ring, 1.8–4.4 µm",
+      "title": "The debris ring around HD 181327 in six infrared filters",
+      "description": "JWST/NIRCam imaged this star on 11 October 2023 in six filters from 1.8 to 4.4 micrometres, behind the MASK335R coronagraph, which blocks the star so the faint ring of colliding debris around it shows. These are MAST's own coronagraphy products, which this project also re-ran from the archived exposures and compared. The ring is starlight scattered by dust about 80 au out, tilted about 30° from face-on. The colours are the filters: the two shortest in blue, the middle two in green, the two longest in red, each on its own brightness range. So hue shows where each group is bright compared with the others, not the colour of the dust. Water ice in the grains absorbs near 3 micrometres, in the green filters, which is what Gáspár et al. (2026) measure across these images. The images have no third axis, so the depth is inferred: a tilted ring of the geometry measured on them projects to them better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Which side is nearer to us, and how thick the ring is, are stated conventions. The middle is empty because the coronagraph mask hides it; the star itself is the sphere at the centre.",
+      "summary": "Starlight scattered by a ring of debris about 80 au from the star, in six JWST filters as one colour image; its depth is the tilted ring that best fits them.",
+      "detail": "2023-10-11, 6 filters, 62.4 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "JWST/NIRCam behind the MASKA335R coronagraph, 2023-10-11: F335M, F444W, F250M, F300M, F182M, F210M"
+        },
+        {
+          "id": "colour",
+          "label": "Colour",
+          "value": "red F335M + F444W, green F250M + F300M, blue F182M + F210M; each band on its own range, shared asinh display"
+        },
+        {
+          "id": "ring",
+          "label": "Ring measured here",
+          "value": "81 au, tilted 29°, nodes at position angle 101°; published 80 au, 28.54°, 100.39°"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "48 au, the edge of the mask, to 140 au, tapering from 120 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the inclined ring that best projects to the images, with its south side nearer by convention"
+        }
+      ],
+      "input": "nircam-six-filters-f335m",
+      "preview": {
+        "path": "src/objects/hd-181327-disc/source/previews/nircam-six-filters.png",
+        "sha256": "b80e2541b74eb8218f35e32c1d4bdfa2eabb3d54229b9d0f5894179a6be03591",
+        "bytes": 27229,
+        "authoredFrom": "nircam-six-filters-f335m"
+      }
+    }
+  ]
+}
