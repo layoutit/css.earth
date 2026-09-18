@@ -21,7 +21,7 @@
     "build:objects": "pnpm --filter @cssearth/objects build",
     "build:packages": "pnpm -r --filter \"./packages/**\" build",
     "build:performance": "CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm prebuild && astro build --mode performance && pnpm assemble:planets",
-    "build:preparation": "pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts && pnpm prepare:world-context && pnpm prepare:shell",
+    "build:preparation": "pnpm prepare:titles && pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts && pnpm prepare:world-context && pnpm prepare:shell",
     "build:renderer": "pnpm --filter @cssearth/engine exec tsup --config ../../src/renderers/css/tsup.config.ts",
     "check:ci": "node tools/check-ci.mts",
     "check:environment": "node tools/check-environment.mts",
