@@ -62,19 +62,17 @@
     {
       "id": "bodies-with-data",
       "subject": "What this archive holds for catalogued bodies",
-      "status": "unresolved",
-      "finding": "The NRAO archive answered 503 Service Unavailable throughout the screen on 2026-09-17, so its holdings for catalogued bodies are unmeasured.",
-      "revisitWhen": "The NRAO archive answers again and the screen is rerun.",
+      "status": "excluded",
+      "finding": "Screened on 18 September 2026 with the VLA. No catalogued body gains a surface, and no star this project ships has VLBA data at all: R Doradus at -62 degrees and pi1 Gruis at -46 are below the array's reach. What the VLBA does resolve is circumstellar SiO maser structure around Mira variables that are not in this catalogue: TX Camelopardalis holds 1,033 public execution blocks from 1993 to 2019 and R Cassiopeiae 643 from 1993 to 2022. Every row of both is raw correlator output marked Do Not Calibrate, with no calibrated visibilities and no images served, about 3 GB per epoch. Near-Earth asteroids appear at formally many beams (Nereus, Itokawa, Toutatis, 1998 WT24) but every block belongs to Michael Busch's radar speckle programmes, where the VLBA is the receiving end of a bistatic radar link and the product is astrometry rather than an image. Two apparent matches are spacecraft: Juno on the VLBA is the mission, Iris is OSIRIS-REx.",
+      "revisitWhen": "A star this project ships is observed by the VLBA, or calibrated maser products are served rather than raw correlator output.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/1b5a8f855348f47a922686ac1c5aabe8eb76be2d/docs/archive-screen.md",
-        "https://data.nrao.edu/",
-        "https://github.com/layoutit/css.earth/pull/293"
+        "https://data.nrao.edu/portal/",
+        "https://science.nrao.edu/facilities/vlba/docs/manuals/oss/bands-perf"
       ],
       "checked": [
         {
-          "date": "2026-09-17",
-          "commit": "1b5a8f855348f47a922686ac1c5aabe8eb76be2d",
-          "pr": 293
+          "date": "2026-09-18",
+          "commit": "fc74554fc2862c774b5ad4d02b6a499f6dc884a8"
         }
       ]
     }

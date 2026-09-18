@@ -1,0 +1,17 @@
+flagdata(vis='uid___A002_X10ed869_X1ec34.ms', mode='list',
+         inpfile='uid___A002_X10ed869_X1ec34.flagcmds.txt', tbuff=[0.96, 1.008],
+         action='apply', flagbackup=True, savepars=False)
+
+flagdata(vis='uid___A002_X10ed869_X1ec34.ms', mode='list',
+         inpfile=["mode='summary' name='before'"], reason='any', action='apply',
+         flagbackup=False, savepars=False)
+
+flagdata(vis='uid___A002_X10ed869_X1ec34.ms', mode='list',
+         inpfile=["mode='summary' name='before'", "spw='25' antenna='DV03'
+         reason='nmedian'", "spw='27' antenna='DV03' reason='nmedian'",
+         "spw='29' antenna='DV03' reason='nmedian'", "spw='31' antenna='DV03'
+         reason='nmedian'"], reason='any', action='apply', flagbackup=False,
+         savepars=False)
+
+flagmanager(vis='uid___A002_X10ed869_X1ec34.ms', mode='save',
+            versionname='Pipeline_Final')
