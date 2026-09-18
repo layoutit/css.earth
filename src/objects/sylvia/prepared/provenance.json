@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "37a44e7e107f861ba766aee74232af64050978c14936d9455454316cc18c7d66"
+    "sha256": "d45caf1b324874ca7441c049268ddc8a86357c82b98dc8343776bb4022b0e850"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1581,7 +1581,7 @@
           {
             "catalogueId": "source-sylvia-sylvia-sphere-20181112055728",
             "role": "material",
-            "evidence": "src/objects/sylvia/source/manifest.json@0000000000000000000000000000000000000000#/inputs/38"
+            "evidence": "src/objects/sylvia/source/manifest.json@6fa224e68ff78fa54b05683db739399cbfb9f0a5#/inputs/38"
           }
         ]
       },
