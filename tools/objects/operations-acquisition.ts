@@ -11,6 +11,7 @@ import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import { containedPath, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
 import type { SourceManifest } from './operations.js';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../source-mirror.mts';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
 import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
@@ -60,7 +61,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  return plan as unknown as AcquisitionPlan;
 }
 
-export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch}}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport}) {
+export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=RUNTIME_ASSET_ORIGIN}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());
@@ -75,8 +76,21 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   if(step.kind==='download'){
    if(!step.encoding){
     const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
-    const response=await request(step.url,{headers:step.headers});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
-    await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.fromWeb(response.body as never)});continue;
+    // Try our own content-addressed mirror first: it is reliable storage, sha-verified before use. A miss, a mismatch
+    // or any mirror error falls back to the publisher URL, which stays the recorded provenance either way.
+    let stream:Readable|undefined;
+    if(mirrorOrigin){
+     const filename=step.path.split('/').at(-1)!;
+     const mirrored=await fetchWithRetry(sourceCacheUrl(mirrorOrigin,entry.expectedSha256,filename),{timeoutMs:8000,attempts:1})
+      .then(candidate=>(candidate.length===entry.expectedBytes&&sha256(candidate)===entry.expectedSha256)?candidate:null)
+      .catch(()=>null);
+     if(mirrored)stream=Readable.from(mirrored);
+    }
+    if(!stream){
+     const response=await request(step.url,{headers:step.headers});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
+     stream=Readable.fromWeb(response.body as never);
+    }
+    await publishPinnedSourceStream({sourceRoot,entry,stream});continue;
    }
    let data=new Uint8Array(await(await request(step.url,{headers:step.headers})).arrayBuffer());
    if(step.encoding==='gzip')data=gzipSync(data,{level:9});

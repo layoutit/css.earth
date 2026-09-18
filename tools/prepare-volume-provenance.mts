@@ -15,27 +15,7 @@ import { hasErrorCode } from './source-values.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 import { manifestSources } from './context-source-records.mts';
 import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from './objects/observation/sky-band-composite.mts';
-import { RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
-
-/** A once-downloaded copy of every pinned publisher preview lives in R2, content-addressed exactly like a runtime asset.
- * The publisher stays the provenance URL; the mirror only saves a slow or unreliable third party from blocking a build. */
-export function sourceCacheUrl(origin: string, sha256Digest: string, filename: string): string {
-  return `${origin}/source-cache/${sha256Digest}/${filename}`;
-}
-
-/** Fetch with a generous timeout and a couple of retries: publisher archives (ESO/NASA/CDS originals) are large and occasionally
- * slow, and a single timed-out attempt should not fail a build that a retry would have survived. */
-export async function fetchWithRetry(url: string, { timeoutMs = 600000, attempts = 3 }: { timeoutMs?: number; attempts?: number } = {}): Promise<Buffer<ArrayBuffer>> {
-  let lastError: unknown;
-  for (let attempt = 0; attempt < attempts; attempt++) {
-    try {
-      const response = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return Buffer.from(await response.arrayBuffer());
-    } catch (error) { lastError = error; }
-  }
-  throw lastError instanceof Error ? lastError : new Error(String(lastError));
-}
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from './source-mirror.mts';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/context-source-records.mts',
   'tools/objects/observation/sky-band-composite.mts', 'tools/objects/observation/wise-atlas-mosaic.mts', 'tools/objects/color-transfer.mts', 'tools/fits.mts'] as const;

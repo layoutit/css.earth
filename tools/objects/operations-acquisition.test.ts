@@ -59,6 +59,52 @@ function chunkedResponse(chunks: Uint8Array[]): Response {
   return response;
 }
 
+test('a plain download tries the content-addressed mirror first and falls back to the publisher',()=>temporary(async directory=>{
+  const { createServer } = await import('node:http');
+  const data=Buffer.from('mirrored source bytes, tried before the publisher'),manifest=rawManifest(data);
+  const digest=manifest.inputs[0]!.expectedSha256;
+  let mirrorHits=0, mirrorBehavior:'serve'|'miss'|'wrong'='serve';
+  const server=createServer((req,res)=>{
+    mirrorHits++;
+    if(req.url===`/source-cache/${digest}/source.img`){
+      if(mirrorBehavior==='miss'){res.writeHead(404);res.end();return;}
+      if(mirrorBehavior==='wrong'){res.writeHead(200);res.end('not the pinned bytes');return;}
+      res.writeHead(200);res.end(data);return;
+    }
+    res.writeHead(404);res.end();
+  });
+  await new Promise<void>(accept=>server.listen(0,'127.0.0.1',accept));
+  try {
+    const address=server.address();assert.ok(address&&typeof address!=='string');
+    const mirrorOrigin=`http://127.0.0.1:${address.port}`;
+
+    mirrorBehavior='serve';
+    await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,
+      transport:{fetch:async()=>{throw new Error('The publisher must not be contacted on a mirror hit.');}}});
+    assert.deepEqual(await readFile(join(directory,'source.img')),data);
+    assert.equal(mirrorHits,1);
+
+    for(const behavior of ['miss','wrong'] as const){
+      await rm(join(directory,'source.img'));
+      mirrorBehavior=behavior;
+      let publisherCalled=false;
+      await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,
+        transport:{fetch:async(url)=>{publisherCalled=true;assert.equal(url,manifest.inputs[0]!.origin);return new Response(data);}}});
+      assert.ok(publisherCalled,`publisher must be contacted when the mirror ${behavior}es`);
+      assert.deepEqual(await readFile(join(directory,'source.img')),data);
+    }
+
+    // mirrorOrigin: null disables the lookup outright (used by tests that must never touch the network for it).
+    await rm(join(directory,'source.img'));
+    mirrorBehavior='serve';
+    let publisherCalled=false;
+    await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin:null,
+      transport:{fetch:async(url)=>{publisherCalled=true;assert.equal(url,manifest.inputs[0]!.origin);return new Response(data);}}});
+    assert.ok(publisherCalled);
+    assert.equal(mirrorHits,3);
+  } finally { await new Promise<void>(accept=>server.close(()=>accept())); }
+}));
+
 test('raw downloads install exact streamed bytes and verify source closure',()=>temporary(async directory=>{
   const data=Buffer.from('eight separate source chunks'),manifest=rawManifest(data),old=Buffer.from('previous pin');
   await writeFile(join(directory,'source.img'),old);

@@ -185,13 +185,13 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  throw new TypeError(`Unknown object operation: ${mode}.`);
 }
 /** Default acquisition restores missing pins only. Existing bytes are verified afterwards, so a stale pin never blocks a download. */
-export async function restoreMissingSources({sourceRoot,manifest,plan,missing,transport}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;missing:string[];transport?:AcquisitionTransport}) {
+export async function restoreMissingSources({sourceRoot,manifest,plan,missing,transport,mirrorOrigin}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;missing:string[];transport?:AcquisitionTransport;mirrorOrigin?:string|null}) {
  const wanted=new Set(missing);
  const operations=plan.operations.filter(step=>'path' in step&&wanted.has(step.path));
  const covered=new Set(operations.map(step=>'path' in step?step.path:''));
  if([...wanted].some(path=>!covered.has(path)))throw new Error(`No authored acquisition restores: ${[...wanted].filter(path=>!covered.has(path)).join(', ')}.`);
  if(!operations.length)return {operationCount:0};
- return executeAcquisition({sourceRoot,manifest,plan:{...plan,operations:operations.map(step=>({...step,groups:['restore-missing']}))},group:'restore-missing',transport});
+ return executeAcquisition({sourceRoot,manifest,plan:{...plan,operations:operations.map(step=>({...step,groups:['restore-missing']}))},group:'restore-missing',transport,mirrorOrigin});
 }
 if(process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url) && basename(process.argv[1])==='operations.js') {
  const [mode,id,...args]=process.argv.slice(2);if(!mode||!id)throw new TypeError('Usage: operations.js <acquire|verify|manifest|assemble> <id>');
