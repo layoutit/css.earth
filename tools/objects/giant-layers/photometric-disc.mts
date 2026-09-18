@@ -9,7 +9,7 @@ const minnaertSource = object({photometricLaw:object({name:string}),mapComposite
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {verifyObservationSources} from './observations.mts';
+import {verifyObservationSources} from '../observed-surfaces/index.mts';
 
 const clamp=(value: number)=>Math.max(0,Math.min(1,value));
 const round=(value: number,digits=6)=>Number(value.toFixed(digits));

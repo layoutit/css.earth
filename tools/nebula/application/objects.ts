@@ -18,6 +18,7 @@ import { prepareVolumeAtlases } from '../../../src/preparation/volume/atlas.js';
 import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/volume-impostors.js';
 import type { PreparedVolumeLens } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
+import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
@@ -25,7 +26,7 @@ const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v
 // Prepared pixels and their contract must invalidate a previously installed handoff together.
 const implementationFiles = [
   'tools/nebula/application/package-identity.ts', 'tools/nebula/application/objects.ts', 'tools/nebula/application/backend.ts',
-  'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts',
+  'tools/nebula/application/references.ts', 'tools/nebula/application/nebula-frame.ts', 'tools/nebula/application/volume-provenance.ts',
   'tools/nebula/application/star-sprites.ts', 'tools/nebula/application/fits.ts',
   'src/preparation/volume/atlas.ts', 'src/renderers/css/preparation/volume.ts',
   'src/renderers/css/preparation/volume-order.ts', 'src/renderers/css/preparation/volume-impostors.ts',
@@ -108,7 +109,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     const add = async (id: string,label: string,sourceUrl: string,volumePath: string,volumeSha: string,
       frame: ReturnType<typeof embedNebulaFrame>,stars: PreparedVolumeLens['stars'],anchorPoints?: PreparedVolumeLens['stars']['points']) => {
       const raw = record(JSON.parse((await pinned(root,{path:volumePath,sha256:volumeSha})).toString()));
-      const volume = validatePreparedCssVolume(raw.data ?? raw);
+      const volume = sanitizeVolumeProvenance(validatePreparedCssVolume(raw.data ?? raw));
       for (const resource of volume.resources) {
         const bytes = await pinned(dirname(local(root,volumePath)),{path:resource.path,sha256:resource.sha256});
         await put(local(staging,`${id}/${resource.path}`),bytes);

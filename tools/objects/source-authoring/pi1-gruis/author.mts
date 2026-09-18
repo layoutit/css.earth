@@ -12,7 +12,7 @@ import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '../../interferometry/beam-convolve.mts';
 import { readChannelRows } from '../../interferometry/oifits-rows.mts';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../source-values.mts';
-import { contextMarker, uniformDiscTable } from '../betelgeuse/author.mts';
+import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/pi1-gruis/source');
 
@@ -26,11 +26,7 @@ export const SPHERE_PATH = 'shape/uniform-disc.tab';
 export const CONTEXT_PATH = 'presentation/context.png';
 
 export async function authorPi1Gruis({ check = false } = {}) {
-  const measurements = requireRecord(JSON.parse(await readFile(resolve(root, 'measurements.json'), 'utf8')), 'measurements');
-  if (measurements.schema !== 'cssearth-uniform-disc-star@1') throw new TypeError('Unexpected π¹ Gruis measurements schema.');
-  const shape = requireRecord(measurements.shape, 'shape');
-  if (requireString(shape.path) !== SPHERE_PATH) throw new TypeError('π¹ Gruis sphere path differs from the authoring tool.');
-  const table = uniformDiscTable(requireFiniteNumber(measurements.radiusKm), requireFiniteNumber(shape.stepDegrees));
+  await authorUniformDiscSphere(root, 'π¹ Gruis', { check });
   const rows = readChannelRows(await readFile(resolve(root, VISIBILITIES_PATH)));
   let longest = 0;
   for (const row of rows.vis2) longest = Math.max(longest, Math.hypot(row.u, row.v));
@@ -45,7 +41,7 @@ export async function authorPi1Gruis({ check = false } = {}) {
   const display = requireRecord(lens.display, 'display'), frame = requireRecord(requireArray(lens.frames)[0], 'frame');
   const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
   const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
-  const outputs: [string, Buffer][] = [[SPHERE_PATH, Buffer.from(table, 'latin1')], [BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
+  const outputs: [string, Buffer][] = [[BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
   for (const [path, bytes] of outputs) {
     const target = resolve(root, path);
     if (check) {

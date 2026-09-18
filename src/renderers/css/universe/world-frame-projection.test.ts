@@ -30,6 +30,7 @@ test('one view shares body eyes and parent shadow bounds without retaining anoth
   expect(first.eye(focus)).toEqual([0, 0, -100]);
 });
 
+// 180 views x 3 scales of ring projection is CPU-heavy; measured 1-3.6s, close enough to vitest's 5s default to flake on a loaded runner.
 test('shared occlusion preserves point visibility, clipped chords and saturated extents', () => {
   let seed = 987654321;
   const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 2 ** 32; };
@@ -75,4 +76,4 @@ test('shared occlusion preserves point visibility, clipped chords and saturated 
         .toBe(before.measureExtent(vertices, trail, saturation));
     }
   }
-});
+}, 20000);

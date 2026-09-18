@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eac0b6b590112e902327a43daa64aa6ed90ac065b42b2e681014ec7584c08d9a"
+    "sha256": "74a570558d7ed8e5d0dc2944e1682e51fc4b6b6780cf0e94f4f59c47b5cdeabe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -712,7 +712,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "c017ad68493fbe0daab1f8ad6820b2a1ecfb6b293cbde675702327e5df555c94",
+      "sha256": "f1be26d2e941aba923bf156af9702c84581142e891c53fa3d9e26bf113e67ca4",
       "bytes": 1303,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -729,8 +729,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Bennu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Bennu on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (36 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Bennu centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/BENNU/target",
@@ -738,7 +738,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "baad704dc0b3e070b5781d68205e145339df3eabacf48ba33ad3aa019928c7fa",
+      "sha256": "6ba31d54a588018b6931db6af5d9ab27ced8f9c9ae91b65715fc736aad729aaf",
       "bytes": 95757,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1140,8 +1140,8 @@
       "outputs": [
         {
           "url": "/scenes/bennu/bennu-features.json",
-          "bytes": 36758,
-          "sha256": "b87d254983f0c75e428d10d5fe7915a171b853578b0bd03db3b90b2c8cf0fdf1",
+          "bytes": 36759,
+          "sha256": "30a79b44f12fb46bcf1ff6b3ff19e414376dd5dc6686da0ad7104f4a9e621202",
           "verification": "bytes-verified"
         }
       ],
@@ -1254,7 +1254,7 @@
   },
   "lastPreparation": {
     "objectId": "bennu",
-    "materialSha256": "33b4a32f1e07c9cc1e74063ba9566115e1c7e3b34a3fedd5bf3a1f0f3c193588",
+    "materialSha256": "bdbeef73868b82062cacf80872541120c6647c43ea80f508819061d59ff9415b",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

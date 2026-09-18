@@ -63,8 +63,7 @@ and verify/recreate the checked derivative from a clean checkout:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:packages
-pnpm build:preparation
+pnpm build:tools
 pnpm prepare:volume src/objects/milky-way --acquire-source .local/volume-source-cache
 ```
 

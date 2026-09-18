@@ -26,6 +26,14 @@ For a body's sources, processing, evidence and known problems, read its
 | Measured renderer and navigation performance work | [Performance notes](performance/README.md) |
 | TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
+| What the open archives hold for our catalogued bodies | [Archive screen](archive-screen.md) |
+| Facility model thumbnails: sources and appearance | [Facility thumbnails](facility-thumbnails.md) |
+| Moon sidebar listing, labels and orbit registration | [Moon catalogues](moon-catalogues.md) |
+| Scroll-driven camera distance experiment | [Native scroll zoom experiment](native-scroll-zoom.md) |
+| Choosing which destinations get featured or captioned | [Choosing destinations to explore](object-discovery.md) |
+| The shared neutral shape-only display material | [Shape-only material](shape-only-material.md) |
+| Sidebar row thumbnails for galaxies, nebulae and datasets | [Sidebar thumbnails](sidebar-thumbnails.md) |
+| Scene caption policy for the universe view | [Universe labels](universe-labels.md) |
 
 For contribution steps, use the [body contributor guide](../src/objects/README.md).
 [AGENTS.md](../AGENTS.md) sets application rules; the

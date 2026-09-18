@@ -78,6 +78,17 @@ test('capture attribution follows the selected dataset, including derived maps',
   for (const lens of ['surface', 'monochrome', 'topography']) assert.deepEqual(ids(pluto, lens), ['new-horizons']);
 });
 
+test('Didymos LUKE frames keep their DART mission credit; stripping capture removes it', async () => {
+  const didymos = await graphFor('didymos');
+  assert.deepEqual(ids(didymos, 'luke'), ['dart'], 'the LUKE lens must credit the DART mission LICIACube flew with');
+  // Mutation check: a provenance document with every LUKE source's capture stripped must lose the credit,
+  // proving this assertion actually depends on the capture data rather than passing unconditionally.
+  const original = await provenance('didymos');
+  const stripped: ProvenanceDocument = { ...original,
+    sources: original.sources.map(source => { const { capture, ...rest } = source; return capture ? rest : source; }) };
+  assert.deepEqual(ids(await graphFor('didymos', stripped), 'luke'), [], 'the mutation check must actually remove the credit');
+});
+
 test('multi-mission composites preserve every evidenced contributor without repeating dataset destinations', async () => {
   const jupiter = await graphFor('jupiter');
   assert.deepEqual(ids(jupiter, 'normal'), ['hubble', 'juno']);

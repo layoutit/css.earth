@@ -73,7 +73,8 @@ test('shared navigation reaches the selected release and source, context and nav
   assert.equal(JSON.parse(sourceBytes.toString()).camera.maximumDistanceM, context.camera.maximumDistanceM);
   assert.equal(presentation.maximumDistanceM, context.camera.maximumDistanceM);
   for (const row of catalogue.objects) assert.ok(context.camera.maximumDistanceM > Math.hypot(...row.positionM) + row.aperture.comovingRadiusM * 10);
-  assert.equal(descriptor.properties.recipe.sources.find((source: { id: string }) => source.id === 'world-context').sha256, hash);
+  // #242 moved pin ownership to the manifest; the recipe source only declares the id/path binding now.
+  assert.equal(descriptor.properties.recipe.sources.find((source: { id: string }) => source.id === 'world-context').path, 'source/navigation/universe.json');
   assert.equal(navigation.sources.find((source: { id: string }) => source.id === 'world-context').sha256, hash);
   assert.equal(manifest.inputs.find((source: { path: string }) => source.path === 'navigation/universe.json').expectedSha256, hash);
 });

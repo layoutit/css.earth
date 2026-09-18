@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2411f451c668ba06a0567d8b5c7b49451e42ce8818c29c66515a7f0dfb3f97c6"
+    "sha256": "993331b093fe2567256d06398680627128b291be275e47d5da8624bb7ad8fd1f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1014,6 +1014,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "d840ec3e3f6ff328a5de3ec899f2855543bdd47d278d91dfee6e9b1ed8f9c378",
       "bytes": 26749440,
       "dependencies": [],
@@ -1050,6 +1059,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234231-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/11"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
@@ -1092,6 +1110,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "e8a8f9da7ab7dc03642b7651ae6de01f93cca7a6268e9b1fdb295396ecceec99",
       "bytes": 26749440,
       "dependencies": [],
@@ -1128,6 +1155,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234235-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/15"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
@@ -1170,6 +1206,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "f8889481ab8b3d0304c34b1c299dec6bc041cae8c8165a1d24eac505dce6e249",
       "bytes": 26749440,
       "dependencies": [],
@@ -1206,6 +1251,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234239-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/19"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
@@ -1248,6 +1302,15 @@
           }
         ]
       },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
+          }
+        ]
+      },
       "sha256": "2cc1724ca485205a636e3c61951b8f8c3483c1e550e0035c6337b60b7c68fdea",
       "bytes": 26749440,
       "dependencies": [],
@@ -1284,6 +1347,15 @@
             "catalogueId": "source-didymos-didymos-luke-1664234243-fits",
             "role": "material",
             "evidence": "src/objects/didymos/source/manifest.json@4581907fedd050203139e9d99a16e0c6987fe011#/inputs/23"
+          }
+        ]
+      },
+      "capture": {
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "dart",
+            "evidence": "The preserved credit for this input reads: ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node. LICIACube flew as part of DART and its products are archived in the DART bundles."
           }
         ]
       },
@@ -1337,7 +1409,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "8ed3c280d5b3adb81f765b4b6363aee811b80e47958a17f5b0a1ce74193f90a5",
+      "sha256": "5de49baa402ac4419a34536b7dbdeb3a5f0bc372e0c31c7b2f406b4b3b18feca",
       "bytes": 1310,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1354,8 +1426,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Didymos centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIDYMOS/target",
@@ -1363,7 +1435,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "b72760080705582e68464923dbcd079b49a49f4894ca2214b1b53baa1be93be9",
+      "sha256": "b08088b26cf9046da402987a7659c9e339b870ce948feb06d3f2678671af3e5a",
       "bytes": 6693,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1729,7 +1801,7 @@
         {
           "url": "/scenes/didymos/didymos-features.json",
           "bytes": 2800,
-          "sha256": "ee9e99967f0c679ac737bc5c350087575e67eb138478807b6d2f2c9a6f250a73",
+          "sha256": "04b7d61f418a9285280af81f61aa1ddbacde295a4b841f0f06c77aeeb9f2c289",
           "verification": "bytes-verified"
         }
       ],
@@ -1867,7 +1939,7 @@
   },
   "lastPreparation": {
     "objectId": "didymos",
-    "materialSha256": "75c98ded555527ef0fac9ab9b89e77f9ab0fe06e207c2f06dd222ab1a2ca8826",
+    "materialSha256": "c573dffe4272eed63ef2d57954902f1a957af40ade0edac779310fae5356c2a6",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

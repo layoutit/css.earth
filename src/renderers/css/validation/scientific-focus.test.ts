@@ -50,8 +50,9 @@ test('scientific focus emits the complete navigation contract for every lens tog
 test('Agenor navigation centres the actual emitted PolyCSS XY-swapped carrier at its established pose', () => {
   const navigation = prepareScientificNavigation('europa', focus, scene.camera);
   const camera = navigation.camera, r = Math.PI/180;
-  assert.ok(Math.abs(camera.controlPitch - 31.96379863908021) < 1e-10);
-  assert.ok(Math.abs(camera.controlYaw - (-174.39749135400893)) < 1e-10);
+  // Europa's systemTransform is solved into the corrected frame (#294); re-pinned to the new pose.
+  assert.ok(Math.abs(camera.controlPitch - 26.308446037891912) < 1e-10);
+  assert.ok(Math.abs(camera.controlYaw - 160.7082952064801) < 1e-10);
   const longitude = focus.longitudeDegrees*r, latitude = focus.latitudeDegrees*r;
   const source = [Math.cos(latitude)*Math.cos(longitude), Math.cos(latitude)*Math.sin(longitude), Math.sin(latitude)];
   const local = [source[1],source[0],source[2]];

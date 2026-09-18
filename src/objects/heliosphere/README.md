@@ -73,8 +73,7 @@ From a clean checkout, run from the repository root (Python 3 is required):
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 python3 src/objects/heliosphere/source/ibex/extract.py --check
-pnpm build:packages
-pnpm build:preparation
+pnpm build:tools
 pnpm prepare:surface-shell src/objects/heliosphere
 node tools/test-preparation.mts --universe
 ```

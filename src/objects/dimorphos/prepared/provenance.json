@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "33355d52befa39e44100a50b49952d9856cb8b4932b9ca09895beadac5244f1d"
+    "sha256": "46f51c798bc37f565c59b798763146fd2f0f8bf6b44776f9df1cc39c6c6cd42d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1188,7 +1188,7 @@
       "kind": "source-document",
       "title": "features/manifest.json",
       "upstreamLineage": "not-recorded",
-      "sha256": "0ced0dce2347e266e2393a9e20df4efb6355a7f6749092ba6f08a3080faa8d29",
+      "sha256": "8e8e9b5e10eba9b6e1645ffd6ac6e6cb95aac0a08513367c570649b69f52c0a7",
       "bytes": 1319,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1205,8 +1205,8 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dimorphos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (11 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "title": "Gazetteer of Planetary Nomenclature: Dimorphos centre points",
       "displayCredit": "IAU/USGS Gazetteer of Planetary Nomenclature",
       "sourceUrl": "https://planetarynames.wr.usgs.gov/Page/DIMORPHOS/target",
@@ -1214,7 +1214,7 @@
         "kind": "local",
         "reason": "Catalogued once the shared source record cites this manifest revision."
       },
-      "sha256": "665b495e7b2841e18d8c362f41ec6775c4399a94d473e975ec936cec99684963",
+      "sha256": "c7770000681f11b73deffc7aaad881e0028c3b75d61553a1c52bf786511368cb",
       "bytes": 30289,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -1610,7 +1610,7 @@
         {
           "url": "/scenes/dimorphos/dimorphos-features.json",
           "bytes": 9936,
-          "sha256": "69bbc98c9d3b60e0b26b201e2ef9ee2820909a485d171d2e4d31533497cb2d83",
+          "sha256": "1210c10d888f85d0d9cf668dde368a155f62485cd5f17125a229da4a960e9bf8",
           "verification": "bytes-verified"
         }
       ],
@@ -1748,7 +1748,7 @@
   },
   "lastPreparation": {
     "objectId": "dimorphos",
-    "materialSha256": "241b67302289bb415b194210ff17d51af292ec36df3c5a93012982597d014359",
+    "materialSha256": "d5e97001478c53dc76d29d1887fc028802ceb39dc029ee179fde5178a128a482",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -11,7 +11,7 @@ import {photometricRecipe} from './photometric-contract.mts';
 import {layeredPresentationRecipe} from './presentation-contract.mts';
 import {normalizedPresentationRecipe} from './normalized-presentation-contract.mts';
 import {parseRadialLayerRecipe} from './index.mts';
-import {parseObservedSurfaceRecipe} from './observations.mts';
+import {parseObservedSurfaceRecipe} from '../observed-surfaces/index.mts';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
 const read = async (body: string, file: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/objects/${body}/source/preparation/${file}.json`, import.meta.url), 'utf8'));
 

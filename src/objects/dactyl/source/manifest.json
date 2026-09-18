@@ -58,15 +58,15 @@
       "id": "usgs-gazetteer-dactyl-nomenclature-center-pts",
       "path": "features/DACTYL_nomenclature_center_pts.zip",
       "expectedBytes": 42071,
-      "expectedSha256": "f9b0a51bbadab614072090fdb2269015d52d79fac1afda5b2fa7ca5781d657a8",
+      "expectedSha256": "3767bbd27912607abf5ac0496988a6ac7bd79cfbb8d4f550045524717e2bc941",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DACTYL_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dactyl on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members and the FGDC metadata record.",
-      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Dactyl on 2026-09-11 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members and the FGDC metadata record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-11 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-11 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "consumers": [
         "features"
       ],
@@ -180,7 +180,7 @@
       "id": "dactyl-surface-features-source",
       "path": "features/manifest.json",
       "expectedBytes": 1066,
-      "expectedSha256": "09a690c808c7cd7ed7e96f104de757c163d78ccbb632f89d9de4e36f3dbc29b9",
+      "expectedSha256": "54771134f201aecfa71d4fb946c3447cc52c048a0db2b40f237c20ba68d1d948",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",

@@ -51,6 +51,30 @@ src/objects/*/source/**/*.bds
 !src/objects/saturn/source/approved/saturn-fixed-material.webp
 !src/objects/saturn/source/saturn-weather-static.webp
 
+# IAU/USGS Gazetteer of Planetary Nomenclature centre-point archives: the
+# upstream feed regenerates weekly, so the committed snapshot identifies the
+# exact pinned bytes; re-downloading later would not reproduce them.
+!src/objects/*/source/features/*_nomenclature_center_pts.zip
+# Mercury's global tectonic map: a Mendeley Data deposit (DOI 10.17632/p43b9wttpj.2), not the USGS gazetteer above.
+!src/objects/mercury/source/features/tectonic/global-tectonic-map.zip
+
+# Offline-authored galaxy overview crops with no acquisition plan to restore them.
+!src/objects/lmc/source/source.jpg
+!src/objects/m31/source/source.jpg
+!src/objects/m33/source/source.jpg
+!src/objects/smc/source/source.jpg
+!src/objects/milky-way/source/sky/nasa-preview.jpg
+
+# Retained upstream catalogue bytes with no acquisition plan to restore them.
+!src/objects/local-group/source/lvdb/comb_all.csv
+!src/objects/local-group/source/mcconnachie/NearbyGalaxies_Jan2021_PUBLIC.fits
+
+# WASP-43b JWST reductions written by this repository's own pipeline
+# (tools/objects/jwst/reduce-tso.mts); repinned when the reduction reruns.
+!src/objects/wasp-43b/source/science/jwst-1366-miri/white-5.0-10.5um.csv
+!src/objects/wasp-43b/source/science/jwst-1366-miri/stellar-counts.csv
+!src/objects/wasp-43b/source/science/bell-2024/eureka-v1-white-5.0-10.5um.csv
+
 src/objects/*/.prepared/
 
 # Prepared JSON transport rebuilt from checked-in object preparation output.
@@ -91,6 +115,10 @@ src/objects/*/source/**/*.bpc
 !src/objects/*/source/material/*.png
 !src/objects/*/source/shape/*ellipsoid.tab
 !src/objects/*/source/shape/model.tab
+# Small uniform-disc reference spheres for unresolved stars: a deterministic
+# function of each body's checked-in measurements.json, kept as a committed
+# snapshot rather than an acquisition step.
+!src/objects/*/source/shape/uniform-disc.tab
 
 # Retained, physically scaled meshes used as preparation inputs.
 !src/objects/*/source/shape/model.obj
@@ -130,6 +158,19 @@ src/objects/*/source/**/*.bpc
 # Original GIS releases and registration images kept with their derived maps.
 !src/objects/*/source/science/geology-*/*.gdb.zip
 !src/objects/*/source/science/geology-*/Screenshot *.png
+
+# SMC compact replay inputs: small PNGs prepare:nebulae needs to rebuild the lens bank and the neutral emission volume.
+!src/objects/smc/source/compact/lenses/*/*.png
+!src/objects/smc/source/compact/neutral/slices/*/*.png
+
+# USGS Gazetteer nomenclature archives re-pinned this phase: named explicitly (not a glob) so tracking stays limited
+# to the bodies actually verified here; each manifest documents these as a committed public-domain snapshot.
+!src/objects/didymos/source/features/DIDYMOS_nomenclature_center_pts.zip
+!src/objects/bennu/source/features/BENNU_nomenclature_center_pts.zip
+!src/objects/dimorphos/source/features/DIMORPHOS_nomenclature_center_pts.zip
+!src/objects/donaldjohanson/source/features/DONALDJOHANSON_nomenclature_center_pts.zip
+!src/objects/dactyl/source/features/DACTYL_nomenclature_center_pts.zip
+!src/objects/hyperion/source/features/HYPERION_nomenclature_center_pts.zip
 
 # Native Mathilde map retained as orientation evidence.
 !src/objects/mathilde/source/maps/253mathm.fit
