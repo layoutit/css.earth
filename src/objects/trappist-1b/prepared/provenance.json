@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5a27cd97e4746c72c7ffecc07c87efd2a90fbf46a1fa5c6d78920fede61cdc37"
+    "sha256": "71b32c299c6e4628f55388b9f38750b3019b11ecc75fcd0029fb91025f83cd2c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -377,7 +377,7 @@
         "kind": "local",
         "reason": "Written by this repository's JWST reduction and joint fit; repinned when they are rerun."
       },
-      "sha256": "6f8610cc9e7e164ef9fcf71be639d16154e4b6a749a3ef295f2da8d111b93987",
+      "sha256": "44c8ae2d1dabf92cc7e3a811e5676df1c75bb2beca69414d0a2d891331f4c105",
       "bytes": 437333,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -506,20 +506,20 @@
       "outputs": [
         {
           "url": "/scenes/trappist-1b/trappist-1b-surface-temperature@2x.webp",
-          "bytes": 36302,
-          "sha256": "36e807ba97d9cfa8132464dcf78cd39685988c207a36479f23ba8a4a1e79c867",
+          "bytes": 36218,
+          "sha256": "fef1ee5276022f3fba9199b13fef670829bf1dc0232fe23df4eb65e473e90435",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/trappist-1b/trappist-1b-lens-temperature.webp",
-          "bytes": 240,
-          "sha256": "4eaa2cb5e2d3a98174aa8285057813e8bf6503d30d9856335e5a76cc359d5388",
+          "bytes": 236,
+          "sha256": "642da90c7c820bae12a83264510c6d5babb9e886914317ab67e9b7257dc84a5c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/trappist-1b/trappist-1b-poles-temperature@2x.webp",
-          "bytes": 33128,
-          "sha256": "b42c95e9eed8361904a56ae54f4eac429d2d092998ad9fc25a7a158c2fd18550",
+          "bytes": 33066,
+          "sha256": "4a7e95c3eb2fe933fecb67be32387da276a35818b52d62896e632386f44a6d54",
           "verification": "bytes-verified"
         },
         {
@@ -589,8 +589,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/temperature.webp",
-          "bytes": 4492,
-          "sha256": "a7f1abf97a323758afb122f5d6a1e0d8096c2753c1c0293aaf98f050be488bb0",
+          "bytes": 4446,
+          "sha256": "265dc2adecd86e4313e6202da193af4bf4f6a3c38eb144cc6eb81342cfa7df7d",
           "verification": "bytes-verified"
         }
       ]
@@ -602,7 +602,7 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1b",
-    "materialSha256": "c2116edc448c5f8fea0986659387f4a4a2a846949abf109109705c36debb8ab0",
+    "materialSha256": "4f033a19dabfa9b60d00d86a58f3d27eac17f370b338a078376efff45aaa4287",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

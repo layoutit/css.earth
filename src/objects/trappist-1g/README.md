@@ -33,7 +33,7 @@ surface, lit by its own star at the measured orbit, and the page says so.
 ## Known problems
 
 **No observation of the planet itself is shown.** Size, mass and orbit are measured; the surface is not. JWST has measured the
-dayside brightness of TRAPPIST-1b and c in the mid-infrared, which this package does not yet carry.
+mid-infrared dayside brightness of TRAPPIST-1b and c (shown with those planets); this project has reduced no JWST observation of this planet.
 
 **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations the masses come
 from are not drawn.

@@ -3,14 +3,14 @@
   "objectId": "trappist-1e",
   "entries": [
     {
-      "id": "surface-imagery",
-      "subject": "Imagery or colour of TRAPPIST-1e",
-      "finding": "No image, resolved colour or surface map of this planet exists or is expected: at 12.47 pc the planet's disc is microarcseconds across, and it is detected only in the light of its star. JWST has measured the mid-infrared dayside brightness of TRAPPIST-1b and c (Ducrot et al. 2024; Zieba et al. 2023) and phase curves of both (Gillon, Ducrot et al. 2025), which are thermal measurements rather than a colour; the raw observations are public in MAST and this project's JWST pipeline can reduce them.",
-      "verdict": "shape-only",
-      "checked": "2026-09-17",
-      "evidence": [
-        "https://doi.org/10.3847/PSJ/abd022",
-        "https://mast.stsci.edu/"
+      "id": "unresolved-disc",
+      "survey": "exoplanet-unresolved-disc",
+      "status": "excluded",
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "228bc900512a64a6ddbe420316d4d2c3964cb64c"
+        }
       ]
     }
   ]

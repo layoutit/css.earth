@@ -18,7 +18,14 @@ angle on the sky is not measured, so the ascending node is drawn at celestial no
 **Rotation.** Assumed synchronous: this close to its star the planet is expected to be tidally locked, and no rotation period of
 TRAPPIST-1c is measured. Longitude 0 faces the star.
 
-**What is not here.** No image, colour or map of this planet exists. The sphere is the shared neutral gray of an unresolved
+**Dayside temperature.** This project reduced ten JWST MIRI visits at 15 µm from raw and fitted them together with Bell's model
+(see [TRAPPIST-1b](../trappist-1b/README.md), whose map comes from the same fit). For TRAPPIST-1c they measure the dayside: an eclipse
+depth of 318 to 389 ppm depending on the phase-curve shape the fit assumes, a brightness temperature of 353 to 379 K through the
+F1500W response and a model of the star. Its four eclipse visits alone give 331 to 463 ppm.
+
+**What is not here.** No image, colour or map of this planet exists. The phase curve does not constrain c's day-night pattern: with
+its offset free the fit runs to the edge of what it allows, and held symmetric its day-night amplitude fits to zero. A map would
+draw an assumed shape, so none is shown ([ledger](investigations.json)). The sphere is the shared neutral gray of an unresolved
 surface, lit by its own star at the measured orbit, and the page says so.
 
 ## Evidence
@@ -32,8 +39,8 @@ surface, lit by its own star at the measured orbit, and the page says so.
 
 ## Known problems
 
-**No observation of the planet itself is shown.** Size, mass and orbit are measured; the surface is not. JWST has measured the
-dayside brightness of TRAPPIST-1b and c in the mid-infrared, which this package does not yet carry.
+**No observation of the planet itself is shown.** Size, mass, orbit and the dayside brightness above are measured; the surface
+and its day-night pattern are not.
 
 **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations the masses come
 from are not drawn.

@@ -3,14 +3,31 @@
   "objectId": "trappist-1b",
   "entries": [
     {
-      "id": "surface-imagery",
-      "subject": "Imagery or colour of TRAPPIST-1b",
-      "finding": "No image, resolved colour or surface map of this planet exists or is expected: at 12.47 pc the planet's disc is microarcseconds across, and it is detected only in the light of its star. JWST has measured the mid-infrared dayside brightness of TRAPPIST-1b and c (Ducrot et al. 2024; Zieba et al. 2023) and phase curves of both (Gillon, Ducrot et al. 2025), which are thermal measurements rather than a colour; the raw observations are public in MAST and this project's JWST pipeline can reduce them.",
-      "verdict": "shape-only",
-      "checked": "2026-09-17",
+      "id": "unresolved-disc",
+      "survey": "exoplanet-unresolved-disc",
+      "status": "excluded",
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "228bc900512a64a6ddbe420316d4d2c3964cb64c"
+        }
+      ]
+    },
+    {
+      "id": "jwst-miri-15um-map",
+      "subject": "Temperature map at 15 um from ten JWST MIRI visits",
+      "status": "included",
+      "finding": "The lens. Ten MIRI/F1500W visits (program 3077's phase curve, 1177 observations 7-11, 2304 observations 1-4) reduced from raw on Bell's settings with a fractional-pixel aperture, fitted jointly with his model, and b's emission mapped with the repository's eigenmap fit. The joint fit gives a dayside of 859 ppm against Bell's 797 +/- 77. The hot-spot offset is not measured: free it goes to 28 deg west, but a centred map is 1 in log-likelihood worse and the offset trades against the Gaussian process for the star, so the map is symmetric about the star-facing point (degree 2, one eigencurve by BIC): 519 K there, 463 K and 243 K day and night hemisphere averages. North-south structure is not measured.",
       "evidence": [
-        "https://doi.org/10.3847/PSJ/abd022",
-        "https://mast.stsci.edu/"
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
+        "https://zenodo.org/records/17710453",
+        "https://github.com/layoutit/css.earth/blob/cd06eda64580b25d4c60e7bd6cd5cd1b07732976/tests/objects/unit/trappist-1b/lens-fits.test.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "cd06eda64580b25d4c60e7bd6cd5cd1b07732976"
+        }
       ]
     }
   ]

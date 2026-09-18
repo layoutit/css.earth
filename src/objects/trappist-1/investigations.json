@@ -5,34 +5,66 @@
     {
       "id": "gaia-xp-sampled",
       "subject": "A sampled Gaia spectrum for the colour lens",
+      "status": "included",
       "finding": "Gaia DR3 releases externally calibrated sampled spectra only for the brighter sources; TRAPPIST-1 at G = 15.62 carries only the continuous basis-function coefficients (has_xp_sampled false, has_xp_continuous true). The coefficients are pinned and sampled here with GaiaXPy onto the archive's own grid, which is the same calibration the sampled product uses.",
-      "verdict": "resolved",
-      "checked": "2026-09-17",
       "evidence": [
         "https://gea.esac.esa.int/archive/",
         "https://doi.org/10.5281/zenodo.6674521"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "228bc900512a64a6ddbe420316d4d2c3964cb64c"
+        }
       ]
     },
     {
       "id": "surface-imagery",
       "subject": "Imagery of the photosphere",
+      "status": "excluded",
       "finding": "No image of this star's disc exists or is expected: at 12.47 pc it is about 0.07 milliarcseconds across, far below any interferometer's reach. The colour lens is its own measured spectrum.",
-      "verdict": "shape-only",
-      "checked": "2026-09-17",
       "evidence": [
         "https://gea.esac.esa.int/archive/"
+      ],
+      "revisitWhen": "A resolved image of TRAPPIST-1's disc in a public archive.",
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "228bc900512a64a6ddbe420316d4d2c3964cb64c"
+        }
       ]
     },
     {
       "id": "jwst-thermal",
       "subject": "JWST measurements of the planets",
-      "finding": "393 public JWST observations of this system are in MAST, including MIRI imaging time series of the planets' eclipses (programs 1177, 1279, 2304) and thermal phase curves of b and c (program 3077). Six segments of program 3077 were reduced from raw with this project's pipeline and Bell's deposited control files: correlation 0.9953 with his published light curve over the same 300 integrations, difference 223 ppm against a per-point scatter of 862 ppm (ours) and 891 ppm (his). The thermal lens itself is not in this package yet.",
-      "verdict": "in-progress",
-      "checked": "2026-09-17",
+      "status": "included",
+      "finding": "The ten MIRI/F1500W visits of Gillon, Ducrot et al. (2025)'s joint fit are reduced from raw here: program 3077's 59-hour phase curve (both exposures, 108 segments), five eclipses of b (program 1177, observations 7-11) and four of c (program 2304, observations 1-4). They give TRAPPIST-1b's temperature map and TRAPPIST-1c's measured dayside (see those packages). Program 1279 and the remaining archive observations are not used.",
       "evidence": [
-        "https://mast.stsci.edu/",
-        "https://doi.org/10.5281/zenodo.17710453",
-        "https://doi.org/10.5281/zenodo.13385020"
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
+        "https://zenodo.org/records/17710453"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "cd06eda64580b25d4c60e7bd6cd5cd1b07732976"
+        }
+      ]
+    },
+    {
+      "id": "jwst-15um-transits",
+      "subject": "Planet sizes and transit times at 15 um from the joint fit",
+      "status": "excluded",
+      "finding": "The joint least-squares fit also measures the transits in the phase curve: radius ratios 0.0824 (b), 0.0839 (c) and 0.0875 (g), against Agol et al. (2021)'s 0.08590, 0.08440 and 0.08590 that seed it, and transit times 60271.25436 (b), 60273.23314 (c) and 60271.47930 (g) BMJD. They are not used for the packages' facts: the least-squares fit gives no uncertainties, and the 6,000-step MCMC of the same model did not converge (123 free parameters, acceptance 0.12).",
+      "evidence": [
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
+        "https://doi.org/10.3847/PSJ/abd022"
+      ],
+      "revisitWhen": "A converged posterior of the joint fit, giving the radii and transit times their uncertainties.",
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "cd06eda64580b25d4c60e7bd6cd5cd1b07732976"
+        }
       ]
     }
   ]
