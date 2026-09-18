@@ -9,7 +9,9 @@
  * 1. Takes each segment from --raw when a file of the pinned size is there, and otherwise downloads it from MAST with resume,
  *    three at a time: MAST throttles one connection to a fraction of what three reach together.
  * 2. Runs Stage 1 (ramp fitting) and Stage 2 (calibration) on batches of segments, one Python process and one worker at a time,
- *    and refuses to start a batch with less than half the memory free: one MIRI segment's Stage 1 peaks near 17 GB.
+ *    and refuses to start a batch with less than half the memory free: one MIRI segment's Stage 1 peaks near 17 GB. The next
+ *    batch downloads while one reduces; a calibrated batch's downloaded raw files and Stage 1 ramps are then removed, so a
+ *    programme larger than the free disk still reduces.
  * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 twice: the white light curve and the channels.
  * 4. Exports both light curves to CSV (time, flux, err, mask, centroid_y, psf_width_y; flux and err divided by the median flux),
  *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text. A deposit is either a zip holding
@@ -19,7 +21,7 @@
  *
  * Finished batches and stages are recorded in the work directory and skipped on a rerun. */
 import { spawn, spawnSync } from 'node:child_process';
-import { access, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
+import { access, lstat, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
 import { resolve } from 'node:path';
@@ -126,7 +128,7 @@ async function segmentFile(segment: Segment, raw: string, rawSources: readonly s
   return target;
 }
 
-/** Every segment in place before Stage 1 starts, three downloads at a time. */
+/** A batch's segments in place, three downloads at a time. */
 async function segmentFiles(segments: readonly Segment[], raw: string, rawSources: readonly string[]) {
   const queue = [...segments];
   await Promise.all(Array.from({ length: 3 }, async () => { for (let segment = queue.shift(); segment; segment = queue.shift()) await segmentFile(segment, raw, rawSources); }));
@@ -252,11 +254,22 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     return directory;
   };
 
-  // Stages 1 and 2, in batches.
+  // Stages 1 and 2, in batches. A whole programme's raw segments can outgrow the disk, so each batch is downloaded while
+  // the previous one reduces, and once a batch is calibrated its downloaded raw files and Stage 1 ramps are removed.
+  // Raw files linked from --raw belong to their source directory and are kept.
   const pending = program.segments.filter(segment => !progress.segments.includes(segment.name));
-  await segmentFiles(pending, raw, rawSources);
-  for (let start = 0; start < pending.length; start += program.batchSegments) {
-    const batch = pending.slice(start, start + program.batchSegments), name = `batch${String(Object.keys(progress.steps).filter(key => key.startsWith('batch')).length + 1).padStart(2, '0')}`;
+  const batches = Array.from({ length: Math.ceil(pending.length / program.batchSegments) }, (_, index) => pending.slice(index * program.batchSegments, (index + 1) * program.batchSegments));
+  if (batches.length > 0) {
+    // New segments change the time series: the later stages run again over all of them.
+    for (const step of ['S3', 'S4', 'S4channels']) delete progress.steps[step];
+    for (const directory of ['Stage3', 'Stage4', 'Stage4_channels']) await rm(resolve(work, directory), { recursive: true, force: true });
+    await save();
+  }
+  let fetching = batches[0] ? segmentFiles(batches[0], raw, rawSources) : Promise.resolve();
+  for (const [index, batch] of batches.entries()) {
+    await fetching;
+    fetching = batches[index + 1] ? segmentFiles(batches[index + 1]!, raw, rawSources) : Promise.resolve();
+    const name = `batch${String(Object.keys(progress.steps).filter(key => key.startsWith('batch')).length + 1).padStart(2, '0')}`;
     const input = resolve(work, `Uncalibrated_${name}`);
     await mkdir(input, { recursive: true });
     for (const segment of batch) {
@@ -280,7 +293,13 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     await walk(resolve(work, `Stage2_${name}`));
     progress.segments.push(...batch.map(segment => segment.name));
     await save();
+    await rm(resolve(work, `Stage1_${name}`), { recursive: true, force: true });
+    for (const segment of batch) {
+      const target = resolve(raw, segment.name);
+      if (!(await lstat(target)).isSymbolicLink()) await rm(target);
+    }
   }
+  await fetching;
 
   // Stage 3 on every calibrated segment, then Stage 4 for the white light curve and, for a dispersed spectrum, the channels.
   const channelStage = program.stages.S4channels;
