@@ -131,6 +131,17 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
+          # this cache) under output/tsbuildinfo/; tsc's own file-hash bookkeeping recompiles only what changed
+          # since the restored state, so a stale entry only costs a slower, still-correct run, never a wrong one.
+          # This step runs before `pnpm install` so the hash below never matches a vendored tsconfig.json.
+          path: output/tsbuildinfo
+          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -265,11 +276,6 @@ jobs:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download.
-          path: .local/galaxy-field/sources
-          key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: prepared-assets
         with:
@@ -290,7 +296,9 @@ jobs:
           pnpm setup:assets
           pnpm prepare:object-json
       - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        # Main only: a 2.3 GB save costs a minute or more, and PR-scoped entries would crowd the 10 GB cache.
+        # Main only: a 2.3 GB save costs a minute or more, and PR-scoped entries would crowd the 10 GB cache. This
+        # is the only one of the two prepared-universe jobs that saves; the other only restores (same pattern as
+        # the Typecheck job), so the two parallel jobs never race to write the same cache key.
         if: github.event_name == 'push' && steps.prepared-assets.outputs.cache-hit != 'true'
         with:
           path: |
@@ -303,28 +311,12 @@ jobs:
           node --test tools/prepare-context-availability.test.mts
           site/test/prepared-context-navigation.test.mts
           site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
-      - name: Test authored preparation publication and cache
-        # Finalization renders through headless Chromium, so the browser stays installed here.
-        run: |
-          pnpm exec playwright install --with-deps chromium
-          node --test --test-concurrency=1 \
-            tests/objects/prepared-finalization.test.mts \
-            tests/objects/publication.test.mts \
-            tools/write-prepared-set.test.mts \
-            tools/preparation-cache.test.mts \
-            tools/prepare-planets.test.mts
       - name: Restore environment images and prepare minimap
         run: |
           pnpm prepare:environment-images
           pnpm prepare:minimap
-      - name: Bake and test the scientific galaxy field
-        run: pnpm test:galaxy-field
       - name: Test source records, provenance and scientific credits
         run: pnpm test:sources
-      - name: Test prepared source, materials and world context
-        run: |
-          pnpm test:preparation --universe
-          node --test tools/objects/material-composition/coplanar-raster.test.mts
       - name: Test pinned JSON transport restoration
         run: node --test tools/restore-object-json.test.mts
       - name: Test FITS decoding and offline reference comparisons
@@ -360,6 +352,82 @@ jobs:
       - name: Test complete shared renderer and camera
         # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
         run: pnpm test:renderer
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
+
+  universe-preparation:
+    name: Prepared universe preparation and galaxy field
+    needs: lint
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing. Split out of the `universe` job so the
+    # two halves of "Prepared universe and shared renderer" run in parallel at roughly equal length; see
+    # output/CI_OPTIMIZATION.md section 6, item 3.
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
+    steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
+          path: src/objects/earth/source/presentation/InterVariable.ttf
+          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download.
+          path: .local/galaxy-field/sources
+          key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # setup:assets sha-verifies every restored file and downloads only what is missing or changed. This job
+          # only restores (like Typecheck); the `universe` job above owns the conditional save.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Restore prepared assets and object JSON
+        run: |
+          pnpm setup:assets
+          pnpm prepare:object-json
+      - name: Test authored preparation publication and cache
+        # Finalization renders through headless Chromium, so the browser stays installed here.
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          node --test --test-concurrency=1 \
+            tests/objects/prepared-finalization.test.mts \
+            tests/objects/publication.test.mts \
+            tools/write-prepared-set.test.mts \
+            tools/preparation-cache.test.mts \
+            tools/prepare-planets.test.mts
+      - name: Bake and test the scientific galaxy field
+        run: pnpm test:galaxy-field
+      - name: Test prepared source, materials and world context
+        run: |
+          pnpm test:preparation --universe
+          node --test tools/objects/material-composition/coplanar-raster.test.mts
       - name: Cancel the rest of the run
         if: failure()
         env:
