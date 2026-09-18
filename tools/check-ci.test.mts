@@ -13,7 +13,9 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  const gate=lint.find(step=>step.run.includes('check:assets-published'));
  assert.equal(gate?.env.GH_TOKEN,undefined,'the workflow token is dropped locally');
  assert.match(gate?.run??'',/--added-since-last-green --report-only/,'a push to main never fails on assets');
- assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:shared')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
+ assert.ok(typecheck.some(step=>step.run.includes('pnpm typecheck:pr')&&step.env.NODE_OPTIONS==='--max-old-space-size=4096'));
+ assert.ok(!typecheck.some(step=>step.run.includes('typecheck:tests')),'PRs skip the test-file typecheck');
+ assert.ok(readCiSteps(workflow,'typecheck-tests').some(step=>step.run.trim()==='pnpm typecheck:tests'));
  assert.ok(universe.length>10);
  assert.equal(universe.at(-1)?.run.trim(),'pnpm test:renderer');
 });
@@ -58,7 +60,7 @@ test('a selected job uses its own steps and inherited environment',()=>{
 });
 test('the lint prerequisite and run-cancel steps are CI-only; any other condition still refuses a local run',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
- for(const job of ['typecheck','universe','nebula']){
+ for(const job of ['typecheck','typecheck-tests','universe','nebula']){
   const names=readCiSteps(workflow,job).map(step=>step.name);
   assert.ok(!names.includes('Stop when Contract lint did not pass')&&!names.includes('Cancel the rest of the run'),job);
  }

@@ -159,13 +159,75 @@ jobs:
           pnpm prepare:minimap
           pnpm prepare:sources
       - name: Typecheck shared code and enforce TypeScript ownership
-        # typecheck:shared is `pnpm typecheck` without typecheck:nebula, which the nebula job runs.
+        # typecheck:pr is `pnpm typecheck` without typecheck:tests (main-only: the "Typecheck test files" job and the
+        # nightly workflow; it is most of the typecheck time) and typecheck:nebula (the nebula job runs it).
         env:
           NODE_OPTIONS: --max-old-space-size=4096
         run: |
-          pnpm typecheck:shared
+          pnpm typecheck:pr
           pnpm check:typescript-ownership
           pnpm test:typescript-ownership
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
+
+  typecheck-tests:
+    name: Typecheck test files
+    needs: lint
+    # Main-only: type-checking test files is most of the typecheck time, so PRs skip it; the nightly workflow
+    # runs it too. Not a required check.
+    if: ${{ !cancelled() && github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
+    steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
+          path: src/objects/earth/source/presentation/InterVariable.ttf
+          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Restore prepared assets and object JSON
+        run: |
+          pnpm setup:assets
+          pnpm prepare:object-json
+      - name: Prepare the minimap and source records the shell imports
+        run: |
+          pnpm prepare:environment-images
+          pnpm prepare:minimap
+          pnpm prepare:sources
+      - name: Typecheck test, fixture and capture files
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm typecheck:tests
       - name: Cancel the rest of the run
         if: failure()
         env:

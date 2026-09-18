@@ -54,7 +54,8 @@ your branch adds, documentation links) in about a minute and stops at the first
 failure. `pnpm check:ci` runs the lint, typecheck and prepared-universe jobs'
 command steps in order and takes far longer; `--job=<id>` picks one job and
 `--list` shows the exact commands. Choose checks by what changed, and say in the
-PR which ones you ran and which you did not.
+PR which ones you ran and which you did not. Test files are type-checked nightly
+and on main; run `pnpm typecheck` locally for the full check.
 
 To run the fast subset before every push, opt in with `pnpm hooks:install`: the
 pre-push hook runs `pnpm check:pr --quick`, which skips the network check and the

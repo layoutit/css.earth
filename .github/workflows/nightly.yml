@@ -29,3 +29,42 @@ jobs:
         # inventory line did not change; concurrency 8 matches the shared agent's connection cap. A real 404 fails
         # the job and is listed in its summary; unverified (network) keys only warn.
         run: pnpm check:assets-published --concurrency=8
+
+  typecheck-tests:
+    # PRs skip typecheck:tests (most of the typecheck time); it runs here and on every push to main.
+    name: Typecheck test files
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # The same paths and key as universe.yml, which saves this cache on main pushes.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Restore prepared assets and object JSON
+        run: |
+          pnpm setup:assets
+          pnpm prepare:object-json
+      - name: Prepare the minimap and source records the tests import
+        run: |
+          pnpm prepare:environment-images
+          pnpm prepare:minimap
+          pnpm prepare:sources
+      - name: Typecheck test, fixture and capture files
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm typecheck:tests
