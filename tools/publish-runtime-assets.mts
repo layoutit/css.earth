@@ -26,7 +26,7 @@ function run(command: string, args: readonly string[]): Promise<void> {
 // (observed live: a single "fetch failed" mid-batch aborts wrangler's whole bulk-put run, having uploaded only
 // a handful of the batch). Re-running the same batch is safe (`--force`, content-addressed keys) and cheap
 // relative to giving up, so retry the whole batch a few times before surfacing the failure.
-async function bulkPut(batch: readonly PublishAsset[], type: string, attempts = 4): Promise<void> {
+async function bulkPut(batch: readonly PublishAsset[], type: string, attempts = 8): Promise<void> {
   if (!batch.length) return;
   const directory = await mkdtemp(join(tmpdir(), "cssearth-publish-assets-"));
   try {
@@ -34,8 +34,11 @@ async function bulkPut(batch: readonly PublishAsset[], type: string, attempts = 
     await writeFile(filename, JSON.stringify(batch.map(({ key, file }) => ({ key, file }))));
     for (let attempt = 1; ; attempt++) {
       try {
+        // A lower concurrency than wrangler's own default cuts how often the R2 API returns a transient
+        // "fetch failed" / 500 under load (observed live: repeated failures at --concurrency 16, none once
+        // reduced), at the cost of a slower first pass; --force + content-addressed keys keep every retry safe.
         await run("npx", ["--yes", "wrangler@4.129.0", "r2", "bulk", "put", BUCKET,
-          "--filename", filename, "--concurrency", "16", "--remote", "--force",
+          "--filename", filename, "--concurrency", "6", "--remote", "--force",
           "--content-type", type, "--cache-control", CACHE_CONTROL]);
         return;
       } catch (error) {
