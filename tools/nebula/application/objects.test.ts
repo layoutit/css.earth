@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { sanitizeVolumeProvenance } from './objects.ts';
+import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 
 // Bundled for execution (test-preparation.mts, like every other `.test.ts` here), so `import.meta.dirname`
 // would resolve against the bundle's own output location, not this file's; the repo root is the actual cwd instead.
