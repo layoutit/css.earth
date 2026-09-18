@@ -24,12 +24,13 @@ content-addressed by `runtime-assets/<sha256>/<filename>`. Neither inventory is 
 only the small JSON inventory file is tracked; git no longer carries `prepared/runtime.json` or
 `prepared/scene.json` for any object. `node tools/publish-runtime-assets.mts [--object=<id> ...]` publishes every
 file either inventory kind describes for the given ids (omit `--object` to publish everything discovered under
-`src/objects/`). It is incremental: it HEADs every key first and uploads only the misses (one `wrangler r2 object
-put` per miss), then HEAD-verifies every key again, retries any miss the upload step somehow still left missing,
-and byte-verifies every JSON key plus a sample of the rest — a publish that reports success has actually confirmed
-the files are live, not just that the upload command exited 0. JSON keys upload as `application/json`; everything
-else as `application/octet-stream`. `node tools/check-assets-published.mts [--object=<id> ...]` HEADs every key
-from both inventories without uploading anything, and exits non-zero listing whatever is missing.
+`src/objects/`). It is incremental: it HEADs every key first and bulk-uploads only the misses (`wrangler r2 bulk
+put`, batched by content type and retried on a transient failure), then HEAD-verifies every key again, retries
+any miss that bulk upload silently dropped one at a time, and byte-verifies every JSON key plus a sample of the
+rest — a publish that reports success has actually confirmed the files are live, not just that the upload command
+exited 0. JSON keys upload as `application/json`; everything else as `application/octet-stream`. `node
+tools/check-assets-published.mts [--object=<id> ...]` HEADs every key from both inventories without uploading
+anything, and exits non-zero listing whatever is missing.
 
 A second, smaller cache lives beside it at `source-cache/<sha256>/<filename>`: pinned publisher inputs (a facility
 volume preview, a fragile-upstream archive such as a USGS Gazetteer nomenclature export) mirrored so a build never
