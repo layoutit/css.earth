@@ -45,6 +45,8 @@ jobs:
           pnpm build:packages
           pnpm build:renderer
           pnpm prepare:catalog
+          node tools/prepare-solar-geometry.mts
+          node tools/prepare-navigation.mts --catalog-only
           pnpm build:preparation
           pnpm prepare:object-json
       - name: Test unavailable prepared packages and focus controls
