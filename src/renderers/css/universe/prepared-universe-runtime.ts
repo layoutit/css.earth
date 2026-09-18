@@ -343,8 +343,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const contextOpacity = volumeLenses[index]!.payload.contextVisibility === 'independent' ? 1 : volumeOpacity;
               const opacity = lensEnabled[index] ? contextOpacity * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility) : 0;
               if (opacity !== publishedLensOpacity[index]) {
-                bank.root.style.opacity = String(opacity);
-                bank.root.style.display = opacity > 0 ? 'block' : 'none';
+                // A lens that composites in front of the body sits in the bank's second root, so both carry the
+                // bank's visibility; gating only the first leaves a disabled cloud drawing over the star.
+                for (const target of [bank.root, bank.frontRoot]) {
+                  if (!target) continue;
+                  target.style.opacity = String(opacity);
+                  target.style.display = opacity > 0 ? 'block' : 'none';
+                }
                 publishedLensOpacity[index] = opacity;
               }
               bank.publish({ world, viewport }, opacity > 0);

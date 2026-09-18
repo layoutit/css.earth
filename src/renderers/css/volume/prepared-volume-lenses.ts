@@ -244,7 +244,9 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         root.dataset.selectedLens = selected; host.insertBefore(root, before);
         if (frontRoot) frontHost!.insertBefore(frontRoot, frontBefore!);
         dom.finish();
-        return Object.freeze({ root, publish, state, destroy,
+        // The bank's visibility is written on its roots from outside. A lens that composites in front of the body
+        // lives in the second root, so both must be gated or a disabled cloud keeps drawing over the star.
+        return Object.freeze({ root, frontRoot, publish, state, destroy,
           subscribe(listener: (state: PreparedVolumeLensState) => void) {
             if (!destroyed) listeners.add(listener);
             return () => { listeners.delete(listener); };
