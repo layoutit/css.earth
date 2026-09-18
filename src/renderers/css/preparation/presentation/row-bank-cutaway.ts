@@ -3,7 +3,6 @@ import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
 import type { PreparedNode, PresentationAdapters } from './adapters.js';
-import { prepareSurfaceTextureLevels } from './surface-texture-levels.js';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/seam-outset.js';
 const PREPARED_PRESENTATION_SCHEMA = 'cssearth-prepared-presentation@3';
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard';
@@ -26,26 +25,17 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   }
   for (const lens of lenses.controls) if (!/^#[0-9a-f]{6}$/u.test(lens.billboardColor ?? "")) throw new Error(`Object lens ${lens.id} has no prepared billboard colour.`);
   const interiorKeys = ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"];
-  // Optional prepared surface levels: mount and startup use level 0; the
-  // shared selection refines by projected silhouette after first paint.
-  const levels = input.textureLevels ? prepareSurfaceTextureLevels(input.textureLevels, lenses.controls, assets.surfaceDimensions?.width) : null;
-  const initialResource = (key: string) => levels?.textureLevels.levels[0].resources[key] ?? key;
   const entries = [
     { key: "poles", url: canonicalPreparedAsset(assets.poles), pool: "warm" },
     { key: "shadowless", url: bank.presentations[bank.presentations.length - 1].url, pool: "warm" },
     { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "warm" },
     ...lenses.controls.filter(lens => lens.view === "exterior").flatMap(lens => {
       const pool = lens.id === lenses.defaultLens ? "warm" : "lenses";
-      return levels ? levels.entries(lens, pool) : [{ key: `surface:${lens.id}`, url: canonicalPreparedAsset(lens.surfaceUrl, lens.surface2xUrl), pool }];
+      return [{ key: `surface:${lens.id}`, url: canonicalPreparedAsset(lens.surfaceUrl, lens.surface2xUrl), pool }];
     }),
     ...interiorKeys.map(name => ({ key: `interior:${name}`, pool: "lenses", url: canonicalPreparedAsset(assets.interior[`${name}Url`], assets.interior[`${name}2xUrl`]) })),
     ...bank.rows.map((row, index) => ({ key: `lighting:${index}`, url: row.url, pool: "lighting" })),
   ];
-  const initialUrl = (key: string) => {
-    const entry = entries.find(entry => entry.key === initialResource(key));
-    if (!entry) throw new TypeError(`Missing initial prepared resource: ${key}.`);
-    return entry.url;
-  };
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([
     ...plan.bodyLeaves, ...plan.interior.outerBodyLeaves, ...plan.interior.coreLeaves, ...plan.interior.sectionLeaves].map(leaf => leaf.style)) });
   // A true perspective camera (the shared orbit writes its perspective and
@@ -58,9 +48,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const seamOutset = plan.preparedSurface?.seamRepair?.outset;
   if (seamOutset) system.style.setProperty(seamOutset.property, seamOutsetInitialValue(seamOutset, plan.camera.logicalBodyDiameter));
   const body = b.mesh(`${ns}-body`); body.style.transform = plan.bodyTransform;
-  // The retained tree names the level-0 surface, so mount never fetches a
-  // refined level before the selection asks for it.
-  const surfaceUrl = levels ? initialUrl(`surface:${normal.id}`) : canonicalPreparedAsset(normal.surfaceUrl, normal.surface2xUrl), polesUrl = canonicalPreparedAsset(assets.poles.url, assets.poles.url2x);
+  const surfaceUrl = canonicalPreparedAsset(normal.surfaceUrl, normal.surface2xUrl), polesUrl = canonicalPreparedAsset(assets.poles.url, assets.poles.url2x);
   const texture = (node: PreparedNode, name: string, url: string) => node.style.setProperty(name, `url("${url}")`);
   texture(body, `--${ns}-surface-image`, surfaceUrl); texture(body, `--${ns}-poles-image`, polesUrl);
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
@@ -123,9 +111,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
       }] };
   }));
   const pose = plan.interior.presentationOrbit;
-  const startup = entries.filter(entry => entry.pool === "warm" && initialResource(entry.key) === entry.key).map(entry => entry.key);
+  const startup = entries.filter(entry => entry.pool === "warm").map(entry => entry.key);
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun,
-    ...(levels ? { textureLevels: levels.textureLevels } : {}),
     assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,

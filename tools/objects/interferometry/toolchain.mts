@@ -106,7 +106,13 @@ export async function installToolchain(id: string, caches: readonly string[] = [
     if (entry.openmp !== undefined && process.platform === 'darwin') await threadMatisse(requireRecord(entry.openmp, `${id} openmp`), files, kit, resolve(root, 'pipeline'), build);
     // The kit's build tree is not needed at run time; Yorick's relocatable install is.
     await rm(kit, { recursive: true, force: true });
-  } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit".`);
+  } else if (entry.build === 'python-venv') {
+    // A Python package set in its own interpreter: nothing is built, and the wheels stay out of the repository.
+    const python = requireString(entry.python), venv = resolve(root, 'venv');
+    if (!await exists(venv)) run(python, ['-m', 'venv', venv], { cwd: root });
+    const requirements = requireArray(entry.requirements).map(value => requireString(value));
+    run(resolve(venv, 'bin/pip'), ['install', '--quiet', '--disable-pip-version-check', ...requirements], { cwd: root });
+  } else throw new TypeError(`No installer for toolchain ${id}: it states neither a known id nor build "eso-kit" or "python-venv".`);
   // The archives were verified and unpacked; the disk is kept for data. A reinstall fetches or links them again.
   await rm(downloads, { recursive: true, force: true });
   await writeFile(resolve(root, 'installed.json'), `${JSON.stringify({ id, descriptorSha256: digest }, null, 2)}\n`);

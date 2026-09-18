@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
-import { prepareObservedSurfaces } from './observations.mts';
+import { prepareObservedSurfaces } from '../observed-surfaces/index.mts';
 const projectRoot=fileURLToPath(new URL('../../../',import.meta.url));
 export async function assertObservationPreparationParity(id: string) {
   if(!/^[a-z][a-z0-9-]*$/u.test(id))throw new TypeError('Unsafe object identity.');

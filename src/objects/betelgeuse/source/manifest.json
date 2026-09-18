@@ -1124,8 +1124,8 @@
     {
       "id": "betelgeuse-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6437,
-      "expectedSha256": "4c616efcf98db7e0dab88ba663556d9c49a794103394be0b0efac782ce21e39f",
+      "expectedBytes": 6402,
+      "expectedSha256": "58f2e1b26e240607c0c278858c85a76dde7c7156214b069e1ab7a3716adb4a31",
       "origin": "Repository-authored raster recipe: the MATISSE reconstruction cast onto the reference sphere by the surface-observation route, polar bands, transparent off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1143,8 +1143,8 @@
     {
       "id": "betelgeuse-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1834,
-      "expectedSha256": "c014648178cbc136c5965b832f67925fa278c9b74756d342fb407614a6c270d5",
+      "expectedBytes": 1840,
+      "expectedSha256": "59f7cb18034cd74455733bdf8bf3f82476e70c0b9559b30f44b70521819923a2",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -1308,8 +1308,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9076,
-      "expectedSha256": "5e329c7fa5d29396f39566707b3802f978e7ed3b9f25dc2785c8b702ff1ceeb3",
+      "expectedBytes": 9082,
+      "expectedSha256": "0ec863440539e810f1cc01626215a31fe99fe996127bd6a2a5f6724c4cc9af03",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

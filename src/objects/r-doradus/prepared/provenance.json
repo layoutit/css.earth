@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b3b45f6e52c39a96dbe81fda1cf2c910caf211079fc05640e0a447ca4c6c8bb"
+    "sha256": "ce6800c59fbde59c73c6d36d32fd7d5d9c00be5259c8a67242f1af148c78eb15"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "f0c8c7af24c6351b6d043d4ee580ba47fdcb1596a9f530e19e46cdcc69482f62"
+    "bindingsSha256": "5753bc67246cc194085ce117f463936191f5b95aaa6c3cb52f64220d70dfe49c"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "9c2107f6db473126cc0780764c78c6530e55458b3371b055dcbf8c05f3d7d479",
+      "sha256": "b6a1e71358b52920f7133b5634a865d680abc1cc217803d83fef8f4ea7a9d0f9",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/r-doradus/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "missingCoverage": "dark",
@@ -175,7 +171,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f5b316836e3a4f63c8fb916760e85de8535edfd7c3f1c4c97af4d85cb2ea9339",
+      "sha256": "3d1c859899590960b5e45595fbc0da2571db71c44fec7ea66bad488169e25d59",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -233,8 +229,8 @@
               "id": "alma",
               "label": "ALMA continuum",
               "thumbnail": "r-doradus-lens-alma.webp",
-              "surface": "r-doradus-surface-alma.webp",
-              "poles": "r-doradus-poles-alma.webp",
+              "surface": "r-doradus-surface-alma@2x.webp",
+              "poles": "r-doradus-poles-alma@2x.webp",
               "source": {
                 "id": "r-doradus-alma-338ghz",
                 "path": "../manifest.json",
@@ -297,8 +293,8 @@
               "label": "Shape",
               "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
               "thumbnail": "r-doradus-lens-shape.webp",
-              "surface": "r-doradus-surface-shape.webp",
-              "poles": "r-doradus-poles-shape.webp",
+              "surface": "r-doradus-surface-shape@2x.webp",
+              "poles": "r-doradus-poles-shape@2x.webp",
               "source": {
                 "id": "r-doradus-observational-measurements",
                 "path": "../manifest.json",
@@ -456,8 +452,14 @@
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-r-doradus-r-doradus-observational-measurements",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/manifest.json@71348fe882075b91e3ea041e52ff94e4f4cbc01c#/inputs/3"
+          }
+        ]
       },
       "sha256": "21cdbf09a05a185bfc5278ef838e85031a4be5c41309b4c1b60a236bf28549bb",
       "bytes": 1693,
@@ -479,8 +481,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f5b316836e3a4f63c8fb916760e85de8535edfd7c3f1c4c97af4d85cb2ea9339",
-      "bytes": 5580,
+      "sha256": "3d1c859899590960b5e45595fbc0da2571db71c44fec7ea66bad488169e25d59",
+      "bytes": 5592,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -561,12 +563,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/r-doradus/r-doradus-surface-alma.webp",
-          "bytes": 32898,
-          "sha256": "b1e9194518c2f0eafd84b23050f59a0d690a559780df3f0709c677150cb24bfc",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/r-doradus/r-doradus-surface-alma@2x.webp",
           "bytes": 69108,
           "sha256": "e8fb07515840409934b301caa77b34b99abba9f9e9f4b5d98420604219d1fe3a",
@@ -579,27 +575,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/r-doradus/r-doradus-poles-alma.webp",
-          "bytes": 18300,
-          "sha256": "c0b4113246d3520a810a2798bdec2daa075f326767f434caea884ac5fe056b8d",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/r-doradus/r-doradus-poles-alma@2x.webp",
           "bytes": 42818,
           "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/r-doradus/r-doradus-context-alma.webp",
-          "bytes": 37752,
-          "sha256": "1e807bd7d08a842dda96b9c96614505c2d6c7c76ed124772fdf8e051cab99a35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/r-doradus/r-doradus-limb-alma.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -649,12 +627,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/r-doradus/r-doradus-surface-shape.webp",
-          "bytes": 78,
-          "sha256": "2ec4d1bb2d266fdbb9283cb47781b2b34b4ff694f799a903f01db856ed2b22fc",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/r-doradus/r-doradus-surface-shape@2x.webp",
           "bytes": 178,
           "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
@@ -667,27 +639,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/r-doradus/r-doradus-poles-shape.webp",
-          "bytes": 680,
-          "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/r-doradus/r-doradus-poles-shape@2x.webp",
           "bytes": 1340,
           "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/r-doradus/r-doradus-context-shape.webp",
-          "bytes": 84,
-          "sha256": "9ae299bd6d349be53e10e778e5476d28650bc64fae05cd7cf6cb7d4ed36dc1ba",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/r-doradus/r-doradus-limb-shape.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -795,11 +749,11 @@
   },
   "lastPreparation": {
     "objectId": "r-doradus",
-    "materialSha256": "d4d91d2f7728f077d66bee878d26c4d0dd9e023e0ab30af27dd4b5de08f1022e",
+    "materialSha256": "b0cc45c9271fdcf722729159a758e9e023be166f5c23c8deee004f10ba42e2ad",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "f0c8c7af24c6351b6d043d4ee580ba47fdcb1596a9f530e19e46cdcc69482f62"
+      "bindingsSha256": "5753bc67246cc194085ce117f463936191f5b95aaa6c3cb52f64220d70dfe49c"
     }
   }
 }

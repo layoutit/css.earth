@@ -220,8 +220,8 @@
     {
       "id": "oberon-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 3001,
-      "expectedSha256": "2e122c859659be0fd19466cbc6839146f1f9aaecadbc66ab825d0d5050416438",
+      "expectedBytes": 2966,
+      "expectedSha256": "aa5028aeca588f0d169a67fdd3ebf1ed308b11d78e444629f4df1fb740124f02",
       "origin": "Repository-authored Oberon raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -239,8 +239,8 @@
     {
       "id": "oberon-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1594,
-      "expectedSha256": "c4793db1465f5867951c85c1f830eefbec1741b6eca2706a03964434b8a96784",
+      "expectedBytes": 1600,
+      "expectedSha256": "01df77bb58fa26fef37f9f840da1e31372a5a24870bd07638b2f5d75722e28c9",
       "origin": "Repository-authored Oberon geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -333,8 +333,8 @@
     {
       "id": "oberon-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7976,
-      "expectedSha256": "b0bc66dbb8ea9da730fd6897409400ae3880383366177fa7abba4a815211ba23",
+      "expectedBytes": 7982,
+      "expectedSha256": "21e555bb90dd6d8bb008be0c1127a53572c606e9622ccc9f218ed4f5fe29c97c",
       "origin": "Repository-authored Oberon object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "547cf633a1b2cb4334bdc32113292db9be7eb51dabbdf9d223f4fe9ca8ee6bdf"
+    "sha256": "ca8d2b1c534d6c257ed5da4dccb2cc210a859d0fcd604d13d996cbf4ad2b88c5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "a7e63cd78005e90cee3f3ef3a4c5994dc812d0d886ba7bd67fb7d6be8afe841f"
+    "bindingsSha256": "90cc05fbe309b82296f4127df0f1063c4bda781ec455c3149ec09c0d09331418"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "7725965ada011228099956849262ea2b6059787e578f6bf6c0b296883fa4dc64",
+      "sha256": "63038330488fec4ba41fa9890a0c19f463ad0186b45c5f10e5b580216d5c0529",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/charon/",
@@ -25,10 +25,6 @@
         "height": 3200,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -366,7 +362,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3acd0748cd93b5175123b489ad027e2aa4ebd58f9e8d508302200e86516ba75f",
+      "sha256": "9cc8a4efc0f2a82b02031af680a473c4f4e42dfcaff223ef07c90045ab05c01f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -472,8 +468,8 @@
               "id": "normal",
               "label": "Monochrome",
               "thumbnail": "charon-lens-normal.webp",
-              "surface": "charon-normal.webp",
-              "poles": "charon-poles-normal.webp",
+              "surface": "charon-normal@2x.webp",
+              "poles": "charon-poles-normal@2x.webp",
               "source": {
                 "id": "new-horizons-charon-monochrome",
                 "path": "../manifest.json",
@@ -485,8 +481,8 @@
               "id": "enhanced-color",
               "label": "False color",
               "thumbnail": "charon-lens-enhanced-color.webp",
-              "surface": "charon-enhanced-color.webp",
-              "poles": "charon-poles-enhanced-color.webp",
+              "surface": "charon-enhanced-color@2x.webp",
+              "poles": "charon-poles-enhanced-color@2x.webp",
               "source": {
                 "id": "new-horizons-charon-mvic-color",
                 "path": "../manifest.json",
@@ -500,8 +496,8 @@
               "id": "elevation",
               "label": "Elevation",
               "thumbnail": "charon-lens-elevation.webp",
-              "surface": "charon-elevation.webp",
-              "poles": "charon-poles-elevation.webp",
+              "surface": "charon-elevation@2x.webp",
+              "poles": "charon-poles-elevation@2x.webp",
               "source": {
                 "id": "new-horizons-charon-dem",
                 "path": "../manifest.json",
@@ -549,8 +545,8 @@
               "id": "albedo",
               "label": "Bond albedo",
               "thumbnail": "charon-lens-albedo.webp",
-              "surface": "charon-albedo.webp",
-              "poles": "charon-poles-albedo.webp",
+              "surface": "charon-albedo@2x.webp",
+              "poles": "charon-poles-albedo@2x.webp",
               "source": {
                 "id": "new-horizons-charon-bond-albedo-grid",
                 "path": "../manifest.json",
@@ -604,8 +600,8 @@
               "id": "water-ice",
               "label": "Water ice",
               "thumbnail": "charon-lens-water-ice.webp",
-              "surface": "charon-water-ice.webp",
-              "poles": "charon-poles-water-ice.webp",
+              "surface": "charon-water-ice@2x.webp",
+              "poles": "charon-poles-water-ice@2x.webp",
               "source": {
                 "id": "charon-leisa-water-ice",
                 "path": "../manifest.json",
@@ -659,8 +655,8 @@
               "id": "ammonia",
               "label": "Ammonia",
               "thumbnail": "charon-lens-ammonia.webp",
-              "surface": "charon-ammonia.webp",
-              "poles": "charon-poles-ammonia.webp",
+              "surface": "charon-ammonia@2x.webp",
+              "poles": "charon-poles-ammonia@2x.webp",
               "source": {
                 "id": "charon-leisa-ammonia",
                 "path": "../manifest.json",
@@ -1247,8 +1243,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "3acd0748cd93b5175123b489ad027e2aa4ebd58f9e8d508302200e86516ba75f",
-      "bytes": 16719,
+      "sha256": "9cc8a4efc0f2a82b02031af680a473c4f4e42dfcaff223ef07c90045ab05c01f",
+      "bytes": 16755,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1406,12 +1402,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/charon/charon-normal.webp",
-          "bytes": 2154474,
-          "sha256": "d904032c4e2fd8dda96d45ad58dd779816acd82da741d7262f688a77f6970808",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/charon/charon-normal@2x.webp",
           "bytes": 5759254,
           "sha256": "63257c2d55bbd2aaec3720e7d3ce56cf1a2d84fa51625d4d9c51d3f65bf4a136",
@@ -1421,12 +1411,6 @@
           "url": "/scenes/charon/charon-lens-normal.webp",
           "bytes": 918,
           "sha256": "4d879b196a8a41ec92fb6607d02e8a9e70a8b788ce349566ef869fea164526d8",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-poles-normal.webp",
-          "bytes": 41860,
-          "sha256": "6c0ba923b5d663449f172249df04d7e9a50b0842c956ff8624b8712e713d88a7",
           "verification": "bytes-verified"
         },
         {
@@ -1469,12 +1453,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/charon/charon-enhanced-color.webp",
-          "bytes": 552444,
-          "sha256": "3d8bae625694b85de3207e0ad74cf49ff296d7b3c590ba19198fe42c1a4617f4",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/charon/charon-enhanced-color@2x.webp",
           "bytes": 1589082,
           "sha256": "df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620",
@@ -1484,12 +1462,6 @@
           "url": "/scenes/charon/charon-lens-enhanced-color.webp",
           "bytes": 380,
           "sha256": "e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-poles-enhanced-color.webp",
-          "bytes": 46738,
-          "sha256": "ec91937f2398ce61111f265e5a653b3607874d2321486ef9411b52bc4114e914",
           "verification": "bytes-verified"
         },
         {
@@ -1531,12 +1503,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/charon/charon-elevation.webp",
-          "bytes": 753412,
-          "sha256": "c8892e3e045357db12cc790c816b7e8634a7b900a446a984b2f8ded10b5e4362",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/charon/charon-elevation@2x.webp",
           "bytes": 2364048,
           "sha256": "37304b9513340545aadb6a44af74ccc644790bed1d188faa74b8a23ef353079c",
@@ -1546,12 +1512,6 @@
           "url": "/scenes/charon/charon-lens-elevation.webp",
           "bytes": 168,
           "sha256": "c3464c3a2b828b0d9b29a1813fe263b99075860a656e22d6d6d8c09bbbf70fa9",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-poles-elevation.webp",
-          "bytes": 50262,
-          "sha256": "ed35e6ab255802e3f9812151bd583de5a63cc629a16a24d63cbd03e63c21701f",
           "verification": "bytes-verified"
         },
         {
@@ -1593,12 +1553,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/charon/charon-albedo.webp",
-          "bytes": 212330,
-          "sha256": "62b306c90bd57b4faf531ed54978a23d1d38605a09694264ad271f5f9d1a1b0f",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/charon/charon-albedo@2x.webp",
           "bytes": 295890,
           "sha256": "b6f320ab2309a6a73ca130f731daacd77aaf2ae66da10075b4e256dbd19502e2",
@@ -1608,12 +1562,6 @@
           "url": "/scenes/charon/charon-lens-albedo.webp",
           "bytes": 1154,
           "sha256": "ec6d5dbec3849608cee76f972d0bd894037504eeed1abb2cf7da99a1c6631c32",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-poles-albedo.webp",
-          "bytes": 6540,
-          "sha256": "d58f250d556d796b46bd8882da70503e8f14359c16ef997f5828087f68d2ab6b",
           "verification": "bytes-verified"
         },
         {
@@ -1655,12 +1603,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/charon/charon-water-ice.webp",
-          "bytes": 495484,
-          "sha256": "b85f81927fe554e93ecedc77c949661a54b6f36e08ff53c8e381e20b2cdb1de6",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/charon/charon-water-ice@2x.webp",
           "bytes": 1783736,
           "sha256": "f038a5e9d7bb8e24b4d80ee887e7590cc4df646d5b7c68b7c5eed124d82aff16",
@@ -1670,12 +1612,6 @@
           "url": "/scenes/charon/charon-lens-water-ice.webp",
           "bytes": 178,
           "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-poles-water-ice.webp",
-          "bytes": 38118,
-          "sha256": "1df493f6d7863c23180a3eecccd40b7bbf1e2227ae50f32e79d17b6094025429",
           "verification": "bytes-verified"
         },
         {
@@ -1717,12 +1653,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/charon/charon-ammonia.webp",
-          "bytes": 284676,
-          "sha256": "89f6181c3fbdfdaefe0895e64d17e92c86b425a7b1cde76354067456327a9492",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/charon/charon-ammonia@2x.webp",
           "bytes": 921744,
           "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40",
@@ -1732,12 +1662,6 @@
           "url": "/scenes/charon/charon-lens-ammonia.webp",
           "bytes": 178,
           "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-poles-ammonia.webp",
-          "bytes": 27966,
-          "sha256": "d3933bc6c9417a9377e3edf1e3629ca664341bf2fe151741bc20d29b205b7d55",
           "verification": "bytes-verified"
         },
         {
@@ -1774,204 +1698,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/charon/charon-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/charon/charon-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/charon/charon-lighting-2x-billboard.webp",
           "bytes": 115740,
@@ -2392,11 +2118,11 @@
   },
   "lastPreparation": {
     "objectId": "charon",
-    "materialSha256": "4a443893d4f80240f66735312ce87209e2fad50cb002911c769bb18eede2ff86",
+    "materialSha256": "b303bacbc941eb6e7a084a428ffa737f122ced77886a09568a27a9c2cf004e56",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "a7e63cd78005e90cee3f3ef3a4c5994dc812d0d886ba7bd67fb7d6be8afe841f"
+      "bindingsSha256": "90cc05fbe309b82296f4127df0f1063c4bda781ec455c3149ec09c0d09331418"
     }
   }
 }

@@ -34,9 +34,8 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
         throw new TypeError('polesCombined must be boolean.');
     if (recipe.polesCombined !== (recipe.polarProjection === 'angular-nearest'))
         throw new TypeError('The authored pole storage and projection combination is unsupported.');
-    numbers(recipe.densities, 'densities');
-    if (JSON.stringify(recipe.densities) !== '[1,2]')
-        throw new TypeError('The prepared responsive raster operator requires densities 1 and 2.');
+    if (recipe.densities !== undefined)
+        throw new TypeError('The raster lane prepares one canonical density; remove densities.');
     text(recipe.publicBase, 'publicBase');
     if (!recipe.publicBase.startsWith('/') || !recipe.publicBase.endsWith('/') || recipe.publicBase.includes('..'))
         throw new TypeError('publicBase must be an absolute asset URL prefix.');
@@ -110,7 +109,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
                 throw new TypeError('Measured band composites must declare falseColor; display encoding does not establish natural color.');
         }
         if (surface.sharpen !== undefined)
-            numbers(surface.sharpen, 'surface.sharpen', 2);
+            finite(surface.sharpen, 'surface.sharpen', true);
         if (surface.nativeSourcePoles && surface.sharpen !== undefined)
             throw new TypeError('Native source poles cannot reproduce a resized-map sharpen pass.');
         if (surface.coverage !== undefined) {

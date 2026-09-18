@@ -59,13 +59,15 @@ test('default acquisition restores only missing declared pins',()=>temporary(asy
  assert.deepEqual(calls,['https://example.org/two']);assert.deepEqual(await readFile(join(root,'one.txt')),existing);
  await assert.rejects(restoreMissingSources({sourceRoot:root,manifest,plan,missing:['unknown.txt']}),/No authored acquisition restores/);
 }));
-test('missing-source restoration verifies existing pins before starting any transfer',()=>temporary(async root=>{
+test('missing-source restoration transfers only the missing pin; a stale existing pin surfaces on verification instead',()=>temporary(async root=>{
+ // Existing bytes are verified afterwards (verifySources), so a stale pin never blocks a download: restoreMissingSources itself restores only `missing`.
  const existing=Buffer.from('existing'),missing=Buffer.from('missing');await writeFile(join(root,'one.txt'),Buffer.from('modified'));
  const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[entry('one.txt',existing),entry('two.txt',missing)],documents:[],generatedIntermediates:[]};
  const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{kind:'download',path:'two.txt',url:'https://example.org/two',groups:['refresh']}]});
  let transfers=0;
- await assert.rejects(restoreMissingSources({sourceRoot:root,manifest,plan,missing:['two.txt'],transport:{fetch:async()=>{transfers++;return new Response(missing);}}}),/hash drifted/);
- assert.equal(transfers,0);assert.deepEqual(await readFile(join(root,'one.txt')),Buffer.from('modified'));assert.deepEqual(await readdir(root),['one.txt']);
+ assert.equal((await restoreMissingSources({sourceRoot:root,manifest,plan,missing:['two.txt'],transport:{fetch:async()=>{transfers++;return new Response(missing);}}})).operationCount,1);
+ assert.equal(transfers,1);assert.deepEqual(await readFile(join(root,'two.txt')),missing);assert.deepEqual(await readFile(join(root,'one.txt')),Buffer.from('modified'));
+ await assert.rejects(verifySources({sourceRoot:root,manifest}),/hash drifted/);
 }));
 test('image inventory separates valid range-addressed geometry and rejects malformed references',()=>{
  const reference={encoding:'gzip-cssearth-prepared-columns@1',url:'/scenes/open-body/wmts-0123456789abcdef/5-7-1.pack',offset:0,bytes:128,decodedBytes:256,sha256:'a'.repeat(64),decodedSha256:'b'.repeat(64)};

@@ -1250,6 +1250,14 @@
   background-image: url("/scenes/eris/eris-poles-color@2x.webp") !important;
 }
 
+.planet-stage[data-object-id="eris"][data-lens="illustration"] .polycss-scene s:not(.eris-polar) {
+  background-image: url("/scenes/eris/eris-illustration@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="eris"][data-lens="illustration"] .polycss-scene s.eris-polar {
+  background-image: url("/scenes/eris/eris-poles-illustration@2x.webp") !important;
+}
+
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
@@ -1816,6 +1824,14 @@
 
 .planet-stage[data-object-id="makemake"] .polycss-scene s.makemake-polar {
   background-image: url("/scenes/makemake/makemake-poles-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="makemake"][data-lens="illustration"] .polycss-scene s:not(.makemake-polar) {
+  background-image: url("/scenes/makemake/makemake-illustration@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="makemake"][data-lens="illustration"] .polycss-scene s.makemake-polar {
+  background-image: url("/scenes/makemake/makemake-poles-illustration@2x.webp") !important;
 }
 
 

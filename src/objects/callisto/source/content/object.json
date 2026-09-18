@@ -86,8 +86,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "callisto-lens-normal.webp",
-        "surface": "callisto-normal.webp",
-        "poles": "callisto-poles-normal.webp",
+        "surface": "callisto-normal@2x.webp",
+        "poles": "callisto-poles-normal@2x.webp",
         "source": {
           "id": "usgs-voyager-galileo-global-1km",
           "path": "../manifest.json"
@@ -99,8 +99,8 @@
         "id": "enhanced",
         "label": "Galileo color",
         "thumbnail": "callisto-lens-enhanced.webp",
-        "surface": "callisto-enhanced.webp",
-        "poles": "callisto-poles-enhanced.webp",
+        "surface": "callisto-enhanced@2x.webp",
+        "poles": "callisto-poles-enhanced@2x.webp",
         "source": {
           "id": "galileo-pia03456-registered-color",
           "path": "../manifest.json"
@@ -147,8 +147,8 @@
         "id": "infrared",
         "label": "Infrared",
         "thumbnail": "callisto-lens-infrared.webp",
-        "surface": "callisto-infrared.webp",
-        "poles": "callisto-poles-infrared.webp",
+        "surface": "callisto-infrared@2x.webp",
+        "poles": "callisto-poles-infrared@2x.webp",
         "source": {
           "id": "callisto-registered-nims-composite",
           "path": "../manifest.json",

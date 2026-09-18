@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2f2e72dc5bc55f5f93814639a94d8bd676681ed1ccdd042f93cb31530ad71e17"
+    "sha256": "a38b17fd97e756c0f60f5b971089179a1408a34a909297440df92f8e04efe989"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "3344d56a871caaba8c91b4ad74cb92f520712f2a523c7c0f9659a1ef5707ff75"
+    "bindingsSha256": "a4420d3a5d47d692f98ee9739137f94c339fe00fe6a8d280e5153bd249d71d4e"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "7669ee40d0878607904f715d4177947fad9aa3093f744f4cbd2f2d8d86a4802e",
+      "sha256": "705525ebc5b314155b354c8fc4460ad77627199a16e65ad871d29f5ae1e9a3b8",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pi1-gruis/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "missingCoverage": "dark",
@@ -164,7 +160,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "594c5d60b483fbba2ae7aa90b0a56c8cde7018527b752bb455e8c6a304ffd4cd",
+      "sha256": "cdf02e6d556f2d4e153081d4d5e593f2c4c87f135886549e3f5de17d8dd8e1f3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,8 +218,8 @@
               "id": "pionier",
               "label": "PIONIER reconstruction",
               "thumbnail": "pi1-gruis-lens-pionier.webp",
-              "surface": "pi1-gruis-surface-pionier.webp",
-              "poles": "pi1-gruis-poles-pionier.webp",
+              "surface": "pi1-gruis-surface-pionier@2x.webp",
+              "poles": "pi1-gruis-poles-pionier@2x.webp",
               "source": {
                 "id": "pi1-gruis-pionier-2014-09",
                 "path": "../manifest.json"
@@ -472,8 +468,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "594c5d60b483fbba2ae7aa90b0a56c8cde7018527b752bb455e8c6a304ffd4cd",
-      "bytes": 5369,
+      "sha256": "cdf02e6d556f2d4e153081d4d5e593f2c4c87f135886549e3f5de17d8dd8e1f3",
+      "bytes": 5375,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -554,12 +550,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/pi1-gruis/pi1-gruis-surface-pionier.webp",
-          "bytes": 35436,
-          "sha256": "de48c08d2a07a0f947bcf8df732856a97355b91915e24347b66146176a9868be",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pi1-gruis/pi1-gruis-surface-pionier@2x.webp",
           "bytes": 73556,
           "sha256": "5a66443942adc8cac1f98ba806d098c2ac353c96c7ce78e8546733c401723913",
@@ -572,27 +562,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/pi1-gruis/pi1-gruis-poles-pionier.webp",
-          "bytes": 18300,
-          "sha256": "c0b4113246d3520a810a2798bdec2daa075f326767f434caea884ac5fe056b8d",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pi1-gruis/pi1-gruis-poles-pionier@2x.webp",
           "bytes": 42818,
           "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pi1-gruis/pi1-gruis-context-pionier.webp",
-          "bytes": 43624,
-          "sha256": "af3e3cc34b7849db168c0c96670f64b4fe3a22955d1ea42f5f83aef39f2f2351",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pi1-gruis/pi1-gruis-limb-pionier.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -675,11 +647,11 @@
   },
   "lastPreparation": {
     "objectId": "pi1-gruis",
-    "materialSha256": "096a3f9890e78ef3f5397aa2fa219db4007d59bd6a73e7145972a2a5030c68ae",
+    "materialSha256": "6e3035c480f16a31398eff3e42ac86e299f4c489c46fdf7cd653dcff1bfd0aa7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "3344d56a871caaba8c91b4ad74cb92f520712f2a523c7c0f9659a1ef5707ff75"
+      "bindingsSha256": "a4420d3a5d47d692f98ee9739137f94c339fe00fe6a8d280e5153bd249d71d4e"
     }
   }
 }

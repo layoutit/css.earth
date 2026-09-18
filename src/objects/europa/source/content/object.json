@@ -99,8 +99,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "europa-lens-normal.webp",
-        "surface": "europa-normal.webp",
-        "poles": "europa-poles-normal.webp",
+        "surface": "europa-normal@2x.webp",
+        "poles": "europa-poles-normal@2x.webp",
         "source": {
           "id": "usgs-voyager-galileo-global-500m",
           "path": "../manifest.json"
@@ -112,8 +112,8 @@
         "id": "enhanced",
         "label": "False color",
         "thumbnail": "europa-lens-enhanced.webp",
-        "surface": "europa-enhanced.webp",
-        "poles": "europa-poles-enhanced.webp",
+        "surface": "europa-enhanced@2x.webp",
+        "poles": "europa-poles-enhanced@2x.webp",
         "source": {
           "id": "observed-color",
           "path": "../manifest.json"
@@ -126,8 +126,8 @@
         "id": "elevation",
         "label": "Elevation",
         "thumbnail": "europa-lens-elevation.webp",
-        "surface": "europa-elevation.webp",
-        "poles": "europa-poles-elevation.webp",
+        "surface": "europa-elevation@2x.webp",
+        "poles": "europa-poles-elevation@2x.webp",
         "falseColor": true,
         "source": {
           "id": "usgs-agenor-controlled-dtm",
@@ -208,8 +208,8 @@
         "id": "geology",
         "label": "Geology",
         "thumbnail": "europa-lens-geology.webp",
-        "surface": "europa-geology.webp",
-        "poles": "europa-poles-geology.webp",
+        "surface": "europa-geology@2x.webp",
+        "poles": "europa-poles-geology@2x.webp",
         "source": {
           "id": "usgs-europa-geologic-units-grid",
           "path": "../manifest.json",
@@ -280,8 +280,8 @@
         "id": "infrared",
         "label": "Infrared",
         "thumbnail": "europa-lens-infrared.webp",
-        "surface": "europa-infrared.webp",
-        "poles": "europa-poles-infrared.webp",
+        "surface": "europa-infrared@2x.webp",
+        "poles": "europa-poles-infrared@2x.webp",
         "source": {
           "id": "europa-registered-nims-composite",
           "path": "../manifest.json",
@@ -295,8 +295,8 @@
         "id": "ice-signature",
         "label": "Ice signature",
         "thumbnail": "europa-lens-ice-signature.webp",
-        "surface": "europa-ice-signature.webp",
-        "poles": "europa-poles-ice-signature.webp",
+        "surface": "europa-ice-signature@2x.webp",
+        "poles": "europa-poles-ice-signature@2x.webp",
         "source": {
           "id": "europa-composition-ice-signature",
           "path": "../manifest.json",
@@ -355,8 +355,8 @@
         "id": "fine-ice",
         "label": "Fine ice",
         "thumbnail": "europa-lens-fine-ice.webp",
-        "surface": "europa-fine-ice.webp",
-        "poles": "europa-poles-fine-ice.webp",
+        "surface": "europa-fine-ice@2x.webp",
+        "poles": "europa-poles-fine-ice@2x.webp",
         "source": {
           "id": "europa-composition-fine-ice",
           "path": "../manifest.json",
@@ -415,8 +415,8 @@
         "id": "coarse-ice",
         "label": "Coarse ice",
         "thumbnail": "europa-lens-coarse-ice.webp",
-        "surface": "europa-coarse-ice.webp",
-        "poles": "europa-poles-coarse-ice.webp",
+        "surface": "europa-coarse-ice@2x.webp",
+        "poles": "europa-poles-coarse-ice@2x.webp",
         "source": {
           "id": "europa-composition-coarse-ice",
           "path": "../manifest.json",

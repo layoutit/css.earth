@@ -87,8 +87,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "miranda-lens-normal.webp",
-        "surface": "miranda-normal.webp",
-        "poles": "miranda-poles-normal.webp",
+        "surface": "miranda-normal@2x.webp",
+        "poles": "miranda-poles-normal@2x.webp",
         "source": {
           "id": "schenk-2020-miranda-normal",
           "path": "../manifest.json",
@@ -101,8 +101,8 @@
         "id": "elevation",
         "label": "Elevation",
         "thumbnail": "miranda-lens-elevation.webp",
-        "surface": "miranda-elevation.webp",
-        "poles": "miranda-poles-elevation.webp",
+        "surface": "miranda-elevation@2x.webp",
+        "poles": "miranda-poles-elevation@2x.webp",
         "source": {
           "id": "schenk-2020-miranda-elevation",
           "path": "../manifest.json",
@@ -150,8 +150,8 @@
         "id": "geology",
         "label": "Geology",
         "thumbnail": "miranda-lens-geology.webp",
-        "surface": "miranda-geology.webp",
-        "poles": "miranda-poles-geology.webp",
+        "surface": "miranda-geology@2x.webp",
+        "poles": "miranda-poles-geology@2x.webp",
         "falseColor": true,
         "source": {
           "id": "geology-2026-categories",

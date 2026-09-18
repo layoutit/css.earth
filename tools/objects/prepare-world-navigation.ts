@@ -99,10 +99,15 @@ function poseDefaultCamera(definition: Input, camera: Input, angles: { initialSc
     ...(camera.state ? { state: { ...camera.state, rotX: control, rotY: yaw } } : {}),
     ...(camera.materialReferenceControlPitchDegrees !== undefined ? { materialReferenceControlPitchDegrees: control, materialReferenceControlYawDegrees: yaw } : {}),
     ...(typeof camera.defaultTransform === 'string' ? { defaultTransform: camera.defaultTransform.replace(SCENE_ROTATION, rotation) } : {}) };
-  // The retained scene node carries the same transform the camera starts from.
-  const nodes = definition.tree.nodes.map((node: Input) => String(node.className ?? '').split(/\s+/u).includes('polycss-scene') && SCENE_ROTATION.test(String(node.style ?? ''))
-    ? { ...node, style: String(node.style).replace(SCENE_ROTATION, rotation) } : node);
-  return { camera: next, transform: { pitch, yaw, control, rotation }, definition: { ...definition, tree: { ...definition.tree, nodes } } };
+  // The retained scene node carries the same transform the camera starts from. Reuse the
+  // original node, and the original tree, when the pose changes nothing (idempotency).
+  const nodes = definition.tree.nodes.map((node: Input) => {
+    if (!(String(node.className ?? '').split(/\s+/u).includes('polycss-scene') && SCENE_ROTATION.test(String(node.style ?? '')))) return node;
+    const style = String(node.style).replace(SCENE_ROTATION, rotation);
+    return style === node.style ? node : { ...node, style };
+  });
+  const changed = nodes.some((node: Input, index: number) => node !== definition.tree.nodes[index]);
+  return { camera: next, transform: { pitch, yaw, control, rotation }, definition: changed ? { ...definition, tree: { ...definition.tree, nodes } } : definition };
 }
 
 /** Apply the derived default camera to a prepared scene document the lanes wrote alongside the runtime. */

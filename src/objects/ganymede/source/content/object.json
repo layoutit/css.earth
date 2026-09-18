@@ -86,8 +86,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "ganymede-lens-normal.webp",
-        "surface": "ganymede-normal.webp",
-        "poles": "ganymede-poles-normal.webp",
+        "surface": "ganymede-normal@2x.webp",
+        "poles": "ganymede-poles-normal@2x.webp",
         "source": {
           "id": "usgs-voyager-galileo-mono",
           "path": "../manifest.json"
@@ -99,8 +99,8 @@
         "id": "enhanced",
         "label": "Enhanced color",
         "thumbnail": "ganymede-lens-enhanced.webp",
-        "surface": "ganymede-enhanced.webp",
-        "poles": "ganymede-poles-enhanced.webp",
+        "surface": "ganymede-enhanced@2x.webp",
+        "poles": "ganymede-poles-enhanced@2x.webp",
         "source": {
           "id": "usgs-voyager-galileo-color",
           "path": "../manifest.json"
@@ -111,8 +111,8 @@
         "id": "geology",
         "label": "Geology",
         "thumbnail": "ganymede-lens-geology.webp",
-        "surface": "ganymede-geology.webp",
-        "poles": "ganymede-poles-geology.webp",
+        "surface": "ganymede-geology@2x.webp",
+        "poles": "ganymede-poles-geology@2x.webp",
         "falseColor": true,
         "source": {
           "id": "usgs-sim3237-geologic-units",
@@ -271,8 +271,8 @@
         "id": "oxygen-signature",
         "label": "Oxygen signature",
         "thumbnail": "ganymede-lens-oxygen-signature.webp",
-        "surface": "ganymede-oxygen-signature.webp",
-        "poles": "ganymede-poles-oxygen-signature.webp",
+        "surface": "ganymede-oxygen-signature@2x.webp",
+        "poles": "ganymede-poles-oxygen-signature@2x.webp",
         "source": {
           "id": "ganymede-muse-oxygen-signature-night-1",
           "path": "../manifest.json",
@@ -331,8 +331,8 @@
         "id": "ice-fraction",
         "label": "Ice fraction",
         "thumbnail": "ganymede-lens-ice-fraction.webp",
-        "surface": "ganymede-ice-fraction.webp",
-        "poles": "ganymede-poles-ice-fraction.webp",
+        "surface": "ganymede-ice-fraction@2x.webp",
+        "poles": "ganymede-poles-ice-fraction@2x.webp",
         "source": {
           "id": "ganymede-composition-ice-fraction",
           "path": "../manifest.json",
@@ -391,8 +391,8 @@
         "id": "dark-material",
         "label": "Dark material",
         "thumbnail": "ganymede-lens-dark-material.webp",
-        "surface": "ganymede-dark-material.webp",
-        "poles": "ganymede-poles-dark-material.webp",
+        "surface": "ganymede-dark-material@2x.webp",
+        "poles": "ganymede-poles-dark-material@2x.webp",
         "source": {
           "id": "ganymede-composition-dark-material",
           "path": "../manifest.json",

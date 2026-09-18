@@ -4,16 +4,10 @@ import objectControls from "../../../../src/objects/neptune/prepared/controls.js
 export const browserProfile = createObjectBrowserProfile({
   id: "neptune", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({
-        one: "/scenes/neptune/neptune-rings.webp",
-        two: "/scenes/neptune/neptune-rings@2x.webp",
-      }),
-      Object.freeze({
-        one: "/scenes/neptune/neptune-surface-normal.webp",
-        two: "/scenes/neptune/neptune-surface-normal@2x.webp",
-      }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/neptune/neptune-rings@2x.webp",
+      "/scenes/neptune/neptune-surface-normal@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "methane",

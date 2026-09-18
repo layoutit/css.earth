@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "72af39201db90473ccd5bd08d203b17775b744629aade71a6905993588edc309"
+    "sha256": "72b7bd09cf933bf119f9764cd02283c834e1fe97e45434ac4a8cf259d6e09a9e"
   },
   "properties": {
     "preparation": {
@@ -84,6 +84,11 @@
               "id": "color",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -129,11 +134,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "183efa09ac14e8557664724141f301e0e9640dec5bde9b95df9cfdc8f02c3658"
+        "sha256": "e2bd0b58a69a522a9952e24e96a0955142ad322abb25523b814a627b28e10b9f"
       }
     },
     "catalog": {
-      "illustrationLenses": [],
+      "illustrationLenses": [
+        "illustration"
+      ],
       "name": "Eris",
       "classification": "dwarf-planet",
       "color": "#fffaea",

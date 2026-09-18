@@ -134,8 +134,8 @@
         "id": "surface",
         "label": "Visible color",
         "thumbnail": "pluto-lens-surface.webp",
-        "surface": "pluto-surface.webp",
-        "poles": "pluto-poles-surface.webp",
+        "surface": "pluto-surface@2x.webp",
+        "poles": "pluto-poles-surface@2x.webp",
         "source": {
           "id": "surface-pluto-color-mosaic-jpg",
           "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
@@ -149,8 +149,8 @@
         "id": "topography",
         "label": "Elevation",
         "thumbnail": "pluto-lens-topography.webp",
-        "surface": "pluto-topography.webp",
-        "poles": "pluto-poles-topography.webp",
+        "surface": "pluto-topography@2x.webp",
+        "poles": "pluto-poles-topography@2x.webp",
         "source": {
           "id": "lenses-pluto-dem-tif",
           "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
@@ -199,8 +199,8 @@
         "id": "monochrome",
         "label": "Monochrome",
         "thumbnail": "pluto-lens-monochrome.webp",
-        "surface": "pluto-monochrome.webp",
-        "poles": "pluto-poles-monochrome.webp",
+        "surface": "pluto-monochrome@2x.webp",
+        "poles": "pluto-poles-monochrome@2x.webp",
         "source": {
           "id": "lenses-pluto-monochrome-tif",
           "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
@@ -214,8 +214,8 @@
         "id": "methane-ice",
         "label": "Methane ice",
         "thumbnail": "pluto-lens-methane-ice.webp",
-        "surface": "pluto-methane-ice.webp",
-        "poles": "pluto-poles-methane-ice.webp",
+        "surface": "pluto-methane-ice@2x.webp",
+        "poles": "pluto-poles-methane-ice@2x.webp",
         "source": {
           "id": "pluto-leisa-ice-fractions",
           "url": "https://zenodo.org/records/18825240"
@@ -274,8 +274,8 @@
         "id": "nitrogen-ice",
         "label": "Nitrogen ice",
         "thumbnail": "pluto-lens-nitrogen-ice.webp",
-        "surface": "pluto-nitrogen-ice.webp",
-        "poles": "pluto-poles-nitrogen-ice.webp",
+        "surface": "pluto-nitrogen-ice@2x.webp",
+        "poles": "pluto-poles-nitrogen-ice@2x.webp",
         "source": {
           "id": "pluto-leisa-ice-fractions",
           "url": "https://zenodo.org/records/18825240"
@@ -334,8 +334,8 @@
         "id": "water-ice",
         "label": "Water ice",
         "thumbnail": "pluto-lens-water-ice.webp",
-        "surface": "pluto-water-ice.webp",
-        "poles": "pluto-poles-water-ice.webp",
+        "surface": "pluto-water-ice@2x.webp",
+        "poles": "pluto-poles-water-ice@2x.webp",
         "source": {
           "id": "pluto-leisa-ice-fractions",
           "url": "https://zenodo.org/records/18825240"

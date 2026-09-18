@@ -5,10 +5,10 @@ const objectControls = await readPreparedFixture("ceres", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "ceres", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/ceres/ceres-normal.webp", two: "/scenes/ceres/ceres-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/ceres/ceres-poles-normal.webp", two: "/scenes/ceres/ceres-poles-normal@2x.webp" }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/ceres/ceres-normal@2x.webp",
+      "/scenes/ceres/ceres-poles-normal@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "enhanced",

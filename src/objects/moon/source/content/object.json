@@ -124,8 +124,8 @@
         "id": "surface",
         "label": "Monochrome",
         "thumbnail": "moon-lens-surface.webp",
-        "surface": "moon-surface.webp",
-        "poles": "moon-poles-surface.webp",
+        "surface": "moon-surface@2x.webp",
+        "poles": "moon-poles-surface@2x.webp",
         "source": {
           "id": "lroc-wac-global-032p",
           "url": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P"
@@ -139,8 +139,8 @@
         "id": "midnight-temperature",
         "label": "Midnight temperature",
         "thumbnail": "moon-lens-midnight-temperature.webp",
-        "surface": "moon-midnight-temperature.webp",
-        "poles": "moon-poles-midnight-temperature.webp",
+        "surface": "moon-midnight-temperature@2x.webp",
+        "poles": "moon-poles-midnight-temperature@2x.webp",
         "source": {
           "id": "diviner-ghrm-tbol_m-compact",
           "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img"
@@ -209,8 +209,8 @@
         "id": "heat-anomalies",
         "label": "Heat anomalies",
         "thumbnail": "moon-lens-heat-anomalies.webp",
-        "surface": "moon-heat-anomalies.webp",
-        "poles": "moon-poles-heat-anomalies.webp",
+        "surface": "moon-heat-anomalies@2x.webp",
+        "poles": "moon-poles-heat-anomalies@2x.webp",
         "source": {
           "id": "diviner-ghrm-tbol_anom-compact",
           "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img"
@@ -279,8 +279,8 @@
         "id": "rock-abundance",
         "label": "Rock abundance",
         "thumbnail": "moon-lens-rock-abundance.webp",
-        "surface": "moon-rock-abundance.webp",
-        "poles": "moon-poles-rock-abundance.webp",
+        "surface": "moon-rock-abundance@2x.webp",
+        "poles": "moon-poles-rock-abundance@2x.webp",
         "source": {
           "id": "diviner-ghrm-ra_sam-compact",
           "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img"
@@ -339,8 +339,8 @@
         "id": "topography",
         "label": "Elevation",
         "thumbnail": "moon-lens-topography.webp",
-        "surface": "moon-topography.webp",
-        "poles": "moon-poles-topography.webp",
+        "surface": "moon-topography@2x.webp",
+        "poles": "moon-poles-topography@2x.webp",
         "source": {
           "id": "lro-lola-ldem16-numeric",
           "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img"
@@ -398,8 +398,8 @@
         "id": "crust",
         "label": "Crust",
         "thumbnail": "moon-lens-crust.webp",
-        "surface": "moon-crust.webp",
-        "poles": "moon-poles-crust.webp",
+        "surface": "moon-crust@2x.webp",
+        "poles": "moon-poles-crust@2x.webp",
         "source": {
           "id": "nasa-grail-crustal-thickness",
           "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
@@ -749,8 +749,8 @@
         "id": "silicate-signature",
         "label": "Silicate signature",
         "thumbnail": "moon-lens-silicate-signature.webp",
-        "surface": "moon-silicate-signature.webp",
-        "poles": "moon-poles-silicate-signature.webp",
+        "surface": "moon-silicate-signature@2x.webp",
+        "poles": "moon-poles-silicate-signature@2x.webp",
         "source": {
           "id": "lro-diviner-christiansen-feature",
           "url": "https://zenodo.org/records/4558194"
@@ -809,8 +809,8 @@
         "id": "geology",
         "label": "Geology",
         "thumbnail": "moon-lens-geology.webp",
-        "surface": "moon-geology.webp",
-        "poles": "moon-poles-geology.webp",
+        "surface": "moon-geology@2x.webp",
+        "poles": "moon-poles-geology@2x.webp",
         "source": {
           "id": "usgs-moon-geologic-units-grid",
           "url": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"

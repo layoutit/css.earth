@@ -55,8 +55,8 @@
     {
       "id": "polaris-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1971,
-      "expectedSha256": "c2eb3388846336c3301c5950c686d766d0adc389b9874e6f69ba67471e616bb4",
+      "expectedBytes": 1936,
+      "expectedSha256": "8318dc67fe9ea99282feb60835007b959c540c5955324e0d1b89df50dff67d9d",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -74,8 +74,8 @@
     {
       "id": "polaris-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1684,
-      "expectedSha256": "034882a4c1c7da205964bf7632e504043a99c6a456b41b131dcdccdf7626694b",
+      "expectedBytes": 1690,
+      "expectedSha256": "ccac51c56187824f1d2e1e345bbf888fc8a582a9e81f88b10d832256db175cef",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -173,8 +173,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2950,
-      "expectedSha256": "bee2f60ecd117c800bc58d5172ec55c29e0bdf00f06681e97745ba4435d9980e",
+      "expectedBytes": 2956,
+      "expectedSha256": "36b5ec4f1c2a31d891fcd6fc53894278219b12af16b0a75deb635141d61946aa",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

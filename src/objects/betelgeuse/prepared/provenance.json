@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "501921740144c4a0b4d47bad20899e74d45c2d52523be2af4ebf79ad242fef12"
+    "sha256": "be5cfc2cc99324d4776ccf41e38fa8f9122da78f207072643b726e47983029f2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5861dcd36a5e0ac47b4dd76e4d154737ef1c7c52c9c1b4f6a12ef7b52bd11957"
+    "bindingsSha256": "8f3b1e1596a71800394530913eb352ab5a6f206e9451a1d6e3fea362466d7d3d"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "4c616efcf98db7e0dab88ba663556d9c49a794103394be0b0efac782ce21e39f",
+      "sha256": "58f2e1b26e240607c0c278858c85a76dde7c7156214b069e1ab7a3716adb4a31",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
@@ -25,10 +25,6 @@
         "height": 512,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "missingCoverage": "dark",
@@ -164,7 +160,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5e329c7fa5d29396f39566707b3802f978e7ed3b9f25dc2785c8b702ff1ceeb3",
+      "sha256": "0ec863440539e810f1cc01626215a31fe99fe996127bd6a2a5f6724c4cc9af03",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,8 +218,8 @@
               "id": "matisse",
               "label": "MATISSE reconstruction",
               "thumbnail": "betelgeuse-lens-matisse.webp",
-              "surface": "betelgeuse-surface-matisse.webp",
-              "poles": "betelgeuse-poles-matisse.webp",
+              "surface": "betelgeuse-surface-matisse@2x.webp",
+              "poles": "betelgeuse-poles-matisse@2x.webp",
               "source": {
                 "id": "betelgeuse-matisse-2020-02-continuum",
                 "path": "../manifest.json"
@@ -570,8 +566,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5e329c7fa5d29396f39566707b3802f978e7ed3b9f25dc2785c8b702ff1ceeb3",
-      "bytes": 9076,
+      "sha256": "0ec863440539e810f1cc01626215a31fe99fe996127bd6a2a5f6724c4cc9af03",
+      "bytes": 9082,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -652,12 +648,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/betelgeuse/betelgeuse-surface-matisse.webp",
-          "bytes": 38884,
-          "sha256": "be515e74de6579374d141242388d5ba2c61db52f5f74fd87e6ff96ef1f97b3a0",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/betelgeuse/betelgeuse-surface-matisse@2x.webp",
           "bytes": 78948,
           "sha256": "02fa83f854b5ed8ad7b19419a1d6dd18e56fb2b99bf17ad64959d6702b2bf7d9",
@@ -670,27 +660,9 @@
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/betelgeuse/betelgeuse-poles-matisse.webp",
-          "bytes": 18300,
-          "sha256": "c0b4113246d3520a810a2798bdec2daa075f326767f434caea884ac5fe056b8d",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/betelgeuse/betelgeuse-poles-matisse@2x.webp",
           "bytes": 42818,
           "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/betelgeuse/betelgeuse-context-matisse.webp",
-          "bytes": 63290,
-          "sha256": "c166478f07e510c688e197d22f19dc0a775eb5a90c57c4f4e762a870fc2c90dc",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/betelgeuse/betelgeuse-limb-matisse.webp",
-          "bytes": 52,
-          "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af",
           "verification": "bytes-verified"
         },
         {
@@ -841,11 +813,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "766f94eb02f477e4c7d58758e3b8463375b703ca4c5c7bfeb4702df2f83363cf",
+    "materialSha256": "21d0d2f22b1a629934e1ecedd9f68e1d3935f9f29332fda67c34a5dc7a5fd77e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5861dcd36a5e0ac47b4dd76e4d154737ef1c7c52c9c1b4f6a12ef7b52bd11957"
+      "bindingsSha256": "8f3b1e1596a71800394530913eb352ab5a6f206e9451a1d6e3fea362466d7d3d"
     }
   }
 }

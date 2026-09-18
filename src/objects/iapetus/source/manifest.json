@@ -637,8 +637,8 @@
     {
       "id": "iapetus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 5681,
-      "expectedSha256": "b28387b868c46db8deb7f9ef863e2047258940f02a6d51fa87766903c73925e2",
+      "expectedBytes": 5646,
+      "expectedSha256": "eadf0f987f777fd7599092cf79a660eaaacac3e690500b299b2352ed53fb4aef",
       "origin": "Repository-authored Iapetus raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -656,8 +656,8 @@
     {
       "id": "iapetus-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1421,
-      "expectedSha256": "1e23728baafd0cb2f075e5d7ee38ec044caed389c754c379262a4f9fd35ac80b",
+      "expectedBytes": 1427,
+      "expectedSha256": "009f286058b6b90b89d913b4a6fbcb6f02f0ce3cc7697775f59cd484f69a625f",
       "origin": "Repository-authored Iapetus geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -750,8 +750,8 @@
     {
       "id": "iapetus-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12882,
-      "expectedSha256": "64800464bfa30a2aa9542aea6fc31b58f93cfd586f6c560ffeece411676b6d8d",
+      "expectedBytes": 12906,
+      "expectedSha256": "525a8be1ad12fb0efcd7ca2ac9ef4444de4b710ae53411a9f6efaab3cd9a4173",
       "origin": "Repository-authored Iapetus object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

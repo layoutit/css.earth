@@ -26,6 +26,30 @@
       }
     },
     {
+      "id": "nasa-vtad-haumea-model",
+      "path": "nasa-haumea.glb",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/h/Haumea_1_1000.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/haumea-3d-model/",
+      "redistribution": "NASA media; an illustrative model, not photographed terrain or a measured map",
+      "consumers": [
+        "shape-model"
+      ],
+      "expectedBytes": 11335060,
+      "expectedSha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-haumea-nasa-vtad-haumea-model",
+            "role": "material",
+            "evidence": "pending"
+          }
+        ]
+      }
+    },
+    {
       "id": "haumea-disc-color",
       "path": "photometry/disc-color.json",
       "expectedBytes": 2084,
@@ -122,8 +146,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4145,
-      "expectedSha256": "cab94a7d374eb7c261f252206014b2bd97f08bf6b2685dc8b9da7ba078affe53",
+      "expectedBytes": 5067,
+      "expectedSha256": "dad19322afd0d496139bcb4f54f098407d3a65502a1e201f1186c394c770c8c0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -131,8 +155,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 66,
-      "expectedSha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7"
+      "expectedBytes": 290,
+      "expectedSha256": "670fb018d42bfb523f2631528c61b31ff92fc1792a93e048349620ac204f1725"
     },
     {
       "path": "preparation/rotation.json",
@@ -141,8 +165,8 @@
     },
     {
       "path": "preparation/shape-model.json",
-      "expectedBytes": 1059,
-      "expectedSha256": "bd4d886e4c01566739caafa6a48023aac64f735abb223f104200a0dcb80981ee"
+      "expectedBytes": 1433,
+      "expectedSha256": "ffb01ca8a6488d4f1d0b60e7b0f8b32a1c76051bb1b3ede8ac67e8e8ee57e50d"
     },
     {
       "path": "presentation/title-mark.json",

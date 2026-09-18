@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f30a1406f4f3f3ff4cf350209b6e6e7f37a1d026222fc73110fc1a28a1add678"
+    "sha256": "4cb263f1ee9ad48f570f69b370e4c46c07bdf935d186fd01d1bf4feb875dbeae"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "ae8e1149a92a04820dd11ace381d817c67602fab316933f7e2ff126c4cde0b1e"
+    "bindingsSha256": "483594afeb4784ecdb18f739d618f5cc2547142fb909427e810dbe30cb4fc752"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "d42cb9dde57e8d5fe359499f88e0db03db4d8e0c2d72072ed25d4e6da37e2faf",
+      "sha256": "26d513a6a1e78783eb3f8c5891f34f493ea4b735d3947464527b966d84b6d34f",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pluto/",
@@ -25,10 +25,6 @@
         "height": 1024,
         "latitudeBands": 16,
         "polarTile": 256,
-        "densities": [
-          1,
-          2
-        ],
         "resample": "density-before-pack",
         "polarProjection": "orthographic-bilinear",
         "polesCombined": false,
@@ -548,7 +544,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "98b33e99f5bf700cb308059c67d1c77f4e7c3aafd7d9617dc1c3bfce4172a94b",
+      "sha256": "3185975cf2058f46d3407ddebece117d125f8cadd839cb051376d17c763aca9a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -685,8 +681,8 @@
               "id": "surface",
               "label": "Visible color",
               "thumbnail": "pluto-lens-surface.webp",
-              "surface": "pluto-surface.webp",
-              "poles": "pluto-poles-surface.webp",
+              "surface": "pluto-surface@2x.webp",
+              "poles": "pluto-poles-surface@2x.webp",
               "source": {
                 "id": "surface-pluto-color-mosaic-jpg",
                 "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
@@ -700,8 +696,8 @@
               "id": "topography",
               "label": "Elevation",
               "thumbnail": "pluto-lens-topography.webp",
-              "surface": "pluto-topography.webp",
-              "poles": "pluto-poles-topography.webp",
+              "surface": "pluto-topography@2x.webp",
+              "poles": "pluto-poles-topography@2x.webp",
               "source": {
                 "id": "lenses-pluto-dem-tif",
                 "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
@@ -750,8 +746,8 @@
               "id": "monochrome",
               "label": "Monochrome",
               "thumbnail": "pluto-lens-monochrome.webp",
-              "surface": "pluto-monochrome.webp",
-              "poles": "pluto-poles-monochrome.webp",
+              "surface": "pluto-monochrome@2x.webp",
+              "poles": "pluto-poles-monochrome@2x.webp",
               "source": {
                 "id": "lenses-pluto-monochrome-tif",
                 "url": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
@@ -765,8 +761,8 @@
               "id": "methane-ice",
               "label": "Methane ice",
               "thumbnail": "pluto-lens-methane-ice.webp",
-              "surface": "pluto-methane-ice.webp",
-              "poles": "pluto-poles-methane-ice.webp",
+              "surface": "pluto-methane-ice@2x.webp",
+              "poles": "pluto-poles-methane-ice@2x.webp",
               "source": {
                 "id": "pluto-leisa-ice-fractions",
                 "url": "https://zenodo.org/records/18825240"
@@ -825,8 +821,8 @@
               "id": "nitrogen-ice",
               "label": "Nitrogen ice",
               "thumbnail": "pluto-lens-nitrogen-ice.webp",
-              "surface": "pluto-nitrogen-ice.webp",
-              "poles": "pluto-poles-nitrogen-ice.webp",
+              "surface": "pluto-nitrogen-ice@2x.webp",
+              "poles": "pluto-poles-nitrogen-ice@2x.webp",
               "source": {
                 "id": "pluto-leisa-ice-fractions",
                 "url": "https://zenodo.org/records/18825240"
@@ -885,8 +881,8 @@
               "id": "water-ice",
               "label": "Water ice",
               "thumbnail": "pluto-lens-water-ice.webp",
-              "surface": "pluto-water-ice.webp",
-              "poles": "pluto-poles-water-ice.webp",
+              "surface": "pluto-water-ice@2x.webp",
+              "poles": "pluto-poles-water-ice@2x.webp",
               "source": {
                 "id": "pluto-leisa-ice-fractions",
                 "url": "https://zenodo.org/records/18825240"
@@ -1337,8 +1333,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "98b33e99f5bf700cb308059c67d1c77f4e7c3aafd7d9617dc1c3bfce4172a94b",
-      "bytes": 15307,
+      "sha256": "3185975cf2058f46d3407ddebece117d125f8cadd839cb051376d17c763aca9a",
+      "bytes": 15343,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1472,12 +1468,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/pluto/pluto-surface.webp",
-          "bytes": 315774,
-          "sha256": "c1bff1f2b2a6d402be1fc895a707d20ee70e982a1d4e5c4a7ce87ce766412fe9",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pluto/pluto-surface@2x.webp",
           "bytes": 722442,
           "sha256": "4c1d5b7d5c88c1a8a5d8debb11f34c4acaa7d1005a6b895a152ccbcce08aafdf",
@@ -1487,12 +1477,6 @@
           "url": "/scenes/pluto/pluto-lens-surface.webp",
           "bytes": 1284,
           "sha256": "6210cde2731f0e25bec7576babf1530a4648da6fb6fb09b3fe0d3072d9a95dbc",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-poles-surface.webp",
-          "bytes": 58470,
-          "sha256": "701247cd4934354ee4bb623df9bf63138e994797fd36eb9fb1f1bca7e1fa0a17",
           "verification": "bytes-verified"
         },
         {
@@ -1536,12 +1520,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/pluto/pluto-topography.webp",
-          "bytes": 298136,
-          "sha256": "5e737cba138126a59f4fa8db81b471565367468511c4e1e7636ec6ab21667c7c",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pluto/pluto-topography@2x.webp",
           "bytes": 1075340,
           "sha256": "d20650af3cc0412cb5f15a11accf576dfd4c200a3ff0e0b5d4763bb2674d069d",
@@ -1551,12 +1529,6 @@
           "url": "/scenes/pluto/pluto-lens-topography.webp",
           "bytes": 860,
           "sha256": "c0d790fb2cb070923bd91c5f94285299a6962ee914c633bd863c9b35c885ba7d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-poles-topography.webp",
-          "bytes": 72510,
-          "sha256": "1070576301bd426c9f9abf0bf346382bdb2d71b92fd8a4fc711b9774d639fa0f",
           "verification": "bytes-verified"
         },
         {
@@ -1601,12 +1573,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/pluto/pluto-monochrome.webp",
-          "bytes": 424386,
-          "sha256": "c6f69bac68f7c7096f9002729dc309a1a7c2b39475a9d274b35c8100023746a6",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pluto/pluto-monochrome@2x.webp",
           "bytes": 1415406,
           "sha256": "4769668f34ae810e02858cb56caa81cd1e30cb773ccadea59e9904e7bcb98649",
@@ -1616,12 +1582,6 @@
           "url": "/scenes/pluto/pluto-lens-monochrome.webp",
           "bytes": 1360,
           "sha256": "a58cca9a9d844db71a2fad9662708bf097d839bfce9c297613d4c9ea5a20f79b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-poles-monochrome.webp",
-          "bytes": 44610,
-          "sha256": "7a1aced5c8fb670c4b1bf9694039a24318ac518c19f9d0c40059a793ca9eae7a",
           "verification": "bytes-verified"
         },
         {
@@ -1666,12 +1626,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/pluto/pluto-methane-ice.webp",
-          "bytes": 424336,
-          "sha256": "9a9cd2dbc9bdde34c034ca643e849ed268d35316b21e4e30582bdf15ec2a8270",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pluto/pluto-methane-ice@2x.webp",
           "bytes": 703068,
           "sha256": "cf4f7ffc67d2ae64b27a6ca9d0f9a916d19a0ee303b13c439e22dfd808786766",
@@ -1681,12 +1635,6 @@
           "url": "/scenes/pluto/pluto-lens-methane-ice.webp",
           "bytes": 3640,
           "sha256": "4459b4dda1838f8906a95bcfafca121b7c595df5c31496d73603b3ca47a4e233",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-poles-methane-ice.webp",
-          "bytes": 60694,
-          "sha256": "12bf621211568ec5eebf8cfa74d1ebb0e8ba112c031dc47654c5a55273474178",
           "verification": "bytes-verified"
         },
         {
@@ -1731,12 +1679,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/pluto/pluto-nitrogen-ice.webp",
-          "bytes": 384690,
-          "sha256": "d14681bcb8ddbe28e1572d147d202a9d60e08e5aacfa4cba4ab84649899d688f",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pluto/pluto-nitrogen-ice@2x.webp",
           "bytes": 664218,
           "sha256": "22bb9322697be7d45e5e734768e1aac3b870132a75396190f5e9d607f42e823f",
@@ -1746,12 +1688,6 @@
           "url": "/scenes/pluto/pluto-lens-nitrogen-ice.webp",
           "bytes": 3884,
           "sha256": "dd959cba6e36bf8cec85b63319f1c3050ca3c001228b3e20f186b83033ee7e1c",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-poles-nitrogen-ice.webp",
-          "bytes": 36032,
-          "sha256": "9c195ffd2e8e0d823bd47f523b6070a59d88d972d0585332dd33dbd5b5dbb0fb",
           "verification": "bytes-verified"
         },
         {
@@ -1796,12 +1732,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/pluto/pluto-water-ice.webp",
-          "bytes": 333292,
-          "sha256": "063295a67d11ef0b821ac5e626edb6af196443c6c603cc79ec9c12d32e71ee70",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/pluto/pluto-water-ice@2x.webp",
           "bytes": 587092,
           "sha256": "272c673066082897c86d7f26cddd81f1afa63ff39162ac5495065e17874c1bb6",
@@ -1811,12 +1741,6 @@
           "url": "/scenes/pluto/pluto-lens-water-ice.webp",
           "bytes": 2334,
           "sha256": "60650628bfac1a411f31077f66ce3aba30ac864a2a35618613d4e508152d58f0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-poles-water-ice.webp",
-          "bytes": 28752,
-          "sha256": "22f2d9b3e7538c12c58bcf960181f0056ec47fea46507ad19b311d01ca7e118e",
           "verification": "bytes-verified"
         },
         {
@@ -1853,204 +1777,6 @@
       },
       "inputs": [],
       "outputs": [
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-billboard.webp",
-          "bytes": 40826,
-          "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-00.webp",
-          "bytes": 14922,
-          "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-01.webp",
-          "bytes": 27532,
-          "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-02.webp",
-          "bytes": 34558,
-          "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-03.webp",
-          "bytes": 40648,
-          "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-04.webp",
-          "bytes": 45092,
-          "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-05.webp",
-          "bytes": 49044,
-          "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-06.webp",
-          "bytes": 52968,
-          "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-07.webp",
-          "bytes": 56198,
-          "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-08.webp",
-          "bytes": 59392,
-          "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-09.webp",
-          "bytes": 61906,
-          "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-10.webp",
-          "bytes": 62672,
-          "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-11.webp",
-          "bytes": 61062,
-          "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-12.webp",
-          "bytes": 59454,
-          "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-13.webp",
-          "bytes": 52762,
-          "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-14.webp",
-          "bytes": 42196,
-          "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-15.webp",
-          "bytes": 23242,
-          "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-16.webp",
-          "bytes": 28714,
-          "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-17.webp",
-          "bytes": 52870,
-          "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-18.webp",
-          "bytes": 65644,
-          "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-19.webp",
-          "bytes": 76630,
-          "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-20.webp",
-          "bytes": 85368,
-          "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-21.webp",
-          "bytes": 93744,
-          "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-22.webp",
-          "bytes": 99970,
-          "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-23.webp",
-          "bytes": 107422,
-          "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-24.webp",
-          "bytes": 112788,
-          "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-25.webp",
-          "bytes": 122328,
-          "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-26.webp",
-          "bytes": 130124,
-          "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-27.webp",
-          "bytes": 137048,
-          "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-28.webp",
-          "bytes": 148122,
-          "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-29.webp",
-          "bytes": 157328,
-          "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-30.webp",
-          "bytes": 167218,
-          "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/pluto/pluto-lighting-1x-row-31.webp",
-          "bytes": 182238,
-          "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e",
-          "verification": "bytes-verified"
-        },
         {
           "url": "/scenes/pluto/pluto-lighting-2x-billboard.webp",
           "bytes": 115740,
@@ -2470,11 +2196,11 @@
   },
   "lastPreparation": {
     "objectId": "pluto",
-    "materialSha256": "61d17ba4c037494c628f2deeb8b9c2fbf930dcf44b7a57d049e51134e2413e12",
+    "materialSha256": "628cb30289f355f84950a975add5592aee5264253f510d026ac63795ec6476cb",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "ae8e1149a92a04820dd11ace381d817c67602fab316933f7e2ff126c4cde0b1e"
+      "bindingsSha256": "483594afeb4784ecdb18f739d618f5cc2547142fb909427e810dbe30cb4fc752"
     }
   }
 }

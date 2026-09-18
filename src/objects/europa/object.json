@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d3cdf4aeea5f33a05038658cab04e80a2807d6646071ad604505a4405884de02"
+    "sha256": "1808f0ca0a5d7cd9a834b06785bc5490427c3dc1b5336c67e13031549c24f525"
   },
   "id": "europa",
   "properties": {
@@ -164,11 +164,11 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/planet-surfaces.css",
-        "src/objects/europa/composition.css"
+        "src/renderers/css/styles/europa-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e0e12c62aafce972639f87ac1b283d6eda6a5c6b04ae29047573ad4cdb1bf304"
+        "sha256": "bc5d5f2412b92d33c6695bb790d4e7a4fd3249270dccc6ef22b6a609005ac2f8"
       }
     },
     "catalog": {

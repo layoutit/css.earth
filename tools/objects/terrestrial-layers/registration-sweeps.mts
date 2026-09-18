@@ -106,7 +106,11 @@ export function outline(width: number, height: number, admits: (x: number, y: nu
   return radii;
 }
 
-export interface LimbCentre { center: [number, number]; iterations: number; movedPixels: number; limbBins: number }
+export interface LimbCentre {
+  center: [number, number]; iterations: number; movedPixels: number; limbBins: number;
+  /** The radial residual left between the photographed and projected outlines once the centre is fitted, root mean square over the limb bins, in pixels: the contour residual the survey papers report. */
+  residualPixels: number;
+}
 
 /**
  * The disc centre from the limb. The brightness centroid sits toward the lit limb at any phase angle, so the mesh's
@@ -126,7 +130,7 @@ export function limbCentre(source: CameraImage | RegistrationImage, sighting: Si
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) if (lit(x, y)) { cx += x; cy += y; count++; }
   if (count < bins) throw new Error('The frame shows too little disc to place a limb on.');
   cx /= count; cy /= count;
-  let moved = 0, done = 0, limbBins = 0;
+  let moved = 0, done = 0, limbBins = 0, residualPixels = NaN;
   for (let iteration = 0; iteration < iterations; iteration++) {
     const camera = controlledShapeCamera(observerCamera({ ...sighting, center: [cx, cy] }, orientation));
     const model = new Float64Array(bins);
@@ -137,19 +141,20 @@ export function limbCentre(source: CameraImage | RegistrationImage, sighting: Si
       if (distance > model[bin]) model[bin] = distance;
     }
     const observed = outline(width, height, lit, cx, cy, bins);
-    let scc = 0, scs = 0, sss = 0, rc = 0, rs = 0; limbBins = 0;
+    let scc = 0, scs = 0, sss = 0, rc = 0, rs = 0, squared = 0; limbBins = 0;
     for (let bin = 0; bin < bins; bin++) {
       if (!(model[bin] > 0) || !(observed[bin] > 0)) continue;
       const theta = bin * 2 * Math.PI / bins, residual = observed[bin] - model[bin], c = Math.cos(theta), s = Math.sin(theta);
-      scc += c * c; scs += c * s; sss += s * s; rc += residual * c; rs += residual * s; limbBins++;
+      scc += c * c; scs += c * s; sss += s * s; rc += residual * c; rs += residual * s; squared += residual * residual; limbBins++;
     }
+    residualPixels = Math.sqrt(squared / limbBins);
     const determinant = scc * sss - scs * scs;
     if (limbBins < bins / 2 || !(Math.abs(determinant) > 1e-9)) throw new Error('The frame shows too little limb to place a centre on.');
     const dx = (rc * sss - rs * scs) / determinant, dy = (rs * scc - rc * scs) / determinant;
     cx += dx; cy += dy; moved = Math.hypot(dx, dy); done = iteration + 1;
     if (moved < 0.05) break;
   }
-  return { center: [cx, cy], iterations: done, movedPixels: moved, limbBins };
+  return { center: [cx, cy], iterations: done, movedPixels: moved, limbBins, residualPixels };
 }
 
 /** One frame cast once: the body-fixed point, both shadings and the disc interior under every lit pixel. */

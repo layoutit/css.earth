@@ -108,8 +108,14 @@
         "shape-model"
       ],
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-r-doradus-r-doradus-observational-measurements",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/manifest.json@71348fe882075b91e3ea041e52ff94e4f4cbc01c#/inputs/3"
+          }
+        ]
       }
     },
     {
@@ -142,8 +148,8 @@
     {
       "id": "r-doradus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6228,
-      "expectedSha256": "9c2107f6db473126cc0780764c78c6530e55458b3371b055dcbf8c05f3d7d479",
+      "expectedBytes": 6193,
+      "expectedSha256": "b6a1e71358b52920f7133b5634a865d680abc1cc217803d83fef8f4ea7a9d0f9",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -161,8 +167,8 @@
     {
       "id": "r-doradus-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1698,
-      "expectedSha256": "711c86cdd00b89db8b736983d48a5f2ba4bb4037ca55fd24710e042620ad1c7d",
+      "expectedBytes": 1704,
+      "expectedSha256": "ba9ea69c012d28f1e3587deef8e23c0b4cedae87fb59d17df17c96e31bf20bd6",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -260,8 +266,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5580,
-      "expectedSha256": "f5b316836e3a4f63c8fb916760e85de8535edfd7c3f1c4c97af4d85cb2ea9339",
+      "expectedBytes": 5592,
+      "expectedSha256": "3d1c859899590960b5e45595fbc0da2571db71c44fec7ea66bad488169e25d59",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -291,6 +297,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 5091,
       "expectedSha256": "f23a0e7cfd21b71ffbaa037cb993d9c825faec0ad7a2d4222384377bbd6adbdb"
+    },
+    {
+      "path": "reference/alma-band8-restored-vs-archive.png",
+      "expectedBytes": 33899,
+      "expectedSha256": "51dd498b6ee46fbb027f1c46f899dd713dd8b351174a8753564279ea5f7fcc49",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the band 8 image this package restored from the raw ASDM beside the archive delivery, from the ALMA reduction route (pull request 302). The image arrived with that route; this entry declares it so the package passes its own source coverage."
+      }
     }
   ]
 }

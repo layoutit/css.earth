@@ -1,4 +1,13 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": []
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "nasa-eris.glb",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb"
+    }
+  ]
 }

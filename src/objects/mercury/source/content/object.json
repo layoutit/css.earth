@@ -138,12 +138,12 @@
         "id": "normal",
         "label": "750 nm",
         "thumbnail": "mercury-lens-normal.webp",
-        "surface": "mercury-surface-normal.jpg",
+        "surface": "mercury-surface-normal@2x.jpg",
         "source": {
           "id": "messenger-bdr",
           "url": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
         },
-        "poles": "mercury-poles.webp",
+        "poles": "mercury-poles@2x.webp",
         "falseColor": false,
         "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
         "view": "exterior",
@@ -153,12 +153,12 @@
         "id": "enhanced",
         "label": "Enhanced",
         "thumbnail": "mercury-lens-enhanced.webp",
-        "surface": "mercury-surface-enhanced.jpg",
+        "surface": "mercury-surface-enhanced@2x.jpg",
         "source": {
           "id": "messenger-enhanced",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
         },
-        "poles": "mercury-poles.webp",
+        "poles": "mercury-poles@2x.webp",
         "falseColor": true,
         "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
         "view": "exterior",
@@ -190,12 +190,12 @@
         "id": "topography",
         "label": "Topography",
         "thumbnail": "mercury-lens-topography.webp",
-        "surface": "mercury-surface-topography.jpg",
+        "surface": "mercury-surface-topography@2x.jpg",
         "source": {
           "id": "messenger-topography",
           "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
         },
-        "poles": "mercury-poles.webp",
+        "poles": "mercury-poles@2x.webp",
         "legend": {
           "kind": "scale",
           "title": "Elevation",
@@ -235,13 +235,13 @@
         "id": "interior",
         "label": "Interior",
         "thumbnail": "mercury-lens-interior.webp",
-        "surface": "mercury-interior-section.webp",
+        "surface": "mercury-interior-section@2x.webp",
         "source": {
           "id": "mercury-structure",
           "path": "../interior/mercury-structure.json",
           "url": "https://science.nasa.gov/mercury/facts/"
         },
-        "poles": "mercury-interior-core-poles.webp",
+        "poles": "mercury-interior-core-poles@2x.webp",
         "legend": {
           "kind": "categories",
           "title": "Structure",

@@ -33,3 +33,37 @@ test('real Mimas finalization stays staged and reproduces its finalized runtime'
     assert.equal(payload.includes(Buffer.from('"$shared"')), false);
   } finally { await rm(stage, { recursive: true, force: true }); }
 });
+
+test('--keep-bindings refuses a copy of Mimas whose system node text was hand-edited', async () => {
+  const root = resolve(import.meta.dirname, '../..'), objectDirectory = resolve(root, 'src/objects/mimas');
+  const runtime = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8')));
+  const nodes = requireRecord(runtime.tree).nodes as Record<string, unknown>[];
+  const systemNode = nodes.findIndex(node => String(node.className ?? '').split(/\s+/u).includes('mimas-system'));
+  assert.notEqual(systemNode, -1, 'fixture must still carry a mimas-system node');
+  const original = String(nodes[systemNode]!.style ?? '');
+  assert.match(original, /transform:matrix3d\(/u);
+  // A 90-degree rotation is still a valid matrix3d, so only the drawn orientation
+  // changes; the fixture stays otherwise well-formed, as a hand edit would leave it.
+  const edited = { ...runtime, tree: { ...requireRecord(runtime.tree), nodes: nodes.map((node, index) => index === systemNode
+    ? { ...node, style: original.replace(/transform:matrix3d\([^)]*\)/u, 'transform:matrix3d(0,1,0,0,-1,0,0,0,0,0,1,0,0,0,0,1)') } : node) } };
+  const stage = await mkdtemp(resolve(tmpdir(), 'cssearth-finalization-stale-'));
+  try {
+    const preparedDirectory = resolve(stage, 'prepared'); await mkdir(preparedDirectory);
+    await copyFile(resolve(objectDirectory, 'prepared/scene.json'), resolve(preparedDirectory, 'scene.json'));
+    await assert.rejects(finalizeObjectJson('mimas', edited, { projectRoot: root, objectDirectory, preparedDirectory,
+      descriptorPath: resolve(stage, 'object.json') }, { keepBindings: true }), /--keep-bindings refused/);
+  } finally { await rm(stage, { recursive: true, force: true }); }
+});
+
+test('--keep-bindings finalizes an unedited copy of Mimas normally', async () => {
+  const root = resolve(import.meta.dirname, '../..'), objectDirectory = resolve(root, 'src/objects/mimas');
+  const runtime: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8'));
+  const stage = await mkdtemp(resolve(tmpdir(), 'cssearth-finalization-keep-'));
+  try {
+    const preparedDirectory = resolve(stage, 'prepared'); await mkdir(preparedDirectory);
+    await copyFile(resolve(objectDirectory, 'prepared/scene.json'), resolve(preparedDirectory, 'scene.json'));
+    const finalized = await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
+      descriptorPath: resolve(stage, 'object.json') }, { keepBindings: true });
+    assert.deepEqual(finalized.definition, runtime);
+  } finally { await rm(stage, { recursive: true, force: true }); }
+});

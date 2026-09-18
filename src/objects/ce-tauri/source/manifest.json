@@ -780,8 +780,8 @@
       }
     },
     {
-      "expectedBytes": 9706,
-      "expectedSha256": "52ef277a97bccc149f7d652cdbd2d134d0d7cba556487de293c811642a0d793a",
+      "expectedBytes": 9671,
+      "expectedSha256": "cb59097d4933c33aeab0bcaf8cf689d39e5e31fa8f18e0144fc2ca0d2d2de707",
       "id": "ce-tauri-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: two published PIONIER reconstructions cast onto the reference sphere by the surface-observation route, polar bands, off-limb plates",
@@ -799,8 +799,8 @@
       ]
     },
     {
-      "expectedBytes": 1899,
-      "expectedSha256": "be55ae4d6a0db0b8a247f7545a54d568910cd70c1b67258f567e354dbc7f5550",
+      "expectedBytes": 1905,
+      "expectedSha256": "b33cf56f247b68bfbab967e5d76aca48682d92828569af0182024f7101594608",
       "id": "ce-tauri-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -899,8 +899,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 7522,
-      "expectedSha256": "a5d71d9cae1d813d1edbd79f102e874d2fa261b677b2ec1535394fc53b2b5cee",
+      "expectedBytes": 7534,
+      "expectedSha256": "d99a1d036458da0d7b1cc8ae17a47b0430f3e497649c1732e647d4c92356aefb",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",

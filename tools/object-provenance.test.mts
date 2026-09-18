@@ -37,20 +37,20 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
   const source = resolve(root, 'source'), outputDirectory = resolve(root, 'prepared'), publicDirectory = resolve(root, 'public');
   await Promise.all([mkdir(resolve(source, 'preparation'), { recursive: true }), mkdir(outputDirectory), mkdir(publicDirectory)]);
   const input = Buffer.from('original observation bytes'), output = Buffer.from('prepared texture bytes');
-  const recipe = JSON.stringify({ schema: 'cssearth-raster-recipe@1', densities: [1], polesCombined: true, polesOutput: 'poles.webp',
+  const recipe = JSON.stringify({ schema: 'cssearth-raster-recipe@1', polesCombined: true, polesOutput: 'poles.webp',
     surfaces: [{ id: 'surface', source: 'observation.dat', output: 'surface{suffix}.webp', thumbnail: 'surface-thumbnail.webp', falseColor: false, science: { coverage: { kind: 'black-fill', southConnected: false } } }] });
   const pin = (id: string, path: string, bytes: Uint8Array): FixturePin => ({ id, path, expectedSha256: hash(bytes), expectedBytes: bytes.length,
     origin: `https://example.org/${path}`, sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, credit: 'Fixture archive', license: 'CC0', acquisition: 'Exact fixture input', consumers: ['surfaces'] });
   await Promise.all([
     writeFile(resolve(source, 'observation.dat'), input), writeFile(resolve(source, 'unused.dat'), 'unused'),
-    writeFile(resolve(publicDirectory, 'surface.webp'), output),
+    writeFile(resolve(publicDirectory, 'surface@2x.webp'), output),
     writeFile(resolve(source, 'preparation/raster.json'), recipe),
     writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssfixture-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [{ path: 'preparation/raster.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) }], generatedIntermediates: [] })),
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [
       { id: 'raster', path: 'source/preparation/raster.json' },
     ] } } })),
-    writeFile(resolve(root, 'runtime-assets.json'), JSON.stringify({ assets: [{ filename: 'surface.webp', sha256: hash(output), bytes: output.length }] })),
-    writeFile(resolve(outputDirectory, 'lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface.webp' }] })),
+    writeFile(resolve(root, 'runtime-assets.json'), JSON.stringify({ assets: [{ filename: 'surface@2x.webp', sha256: hash(output), bytes: output.length }] })),
+    writeFile(resolve(outputDirectory, 'lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface@2x.webp' }] })),
   ]);
   return { objectDirectory: root, source, outputDirectory, publicDirectory, basis: 'prepared', write: false };
 }
@@ -189,8 +189,8 @@ test('authored records and generated intermediates retain their declared ownersh
 
 test('changed output bytes invalidate a prepared record', async t => {
   const context = await fixture(t);
-  await writeFile(resolve(context.publicDirectory, 'surface.webp'), 'different output');
-  await assert.rejects(prepareObjectProvenance(context), /identity mismatch.*surface.webp/u);
+  await writeFile(resolve(context.publicDirectory, 'surface@2x.webp'), 'different output');
+  await assert.rejects(prepareObjectProvenance(context), /identity mismatch.*surface@2x\.webp/u);
 });
 
 test('changed recipe bytes cannot retain the old lineage identity', async t => {
@@ -380,10 +380,10 @@ test('reconciliation verifies a changed body, keeps an unchanged record, and nev
   const upgraded = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
   assert.equal(upgraded.outcome, 'verified'); assert.equal(upgraded.document.basis, 'prepared');
   // Output bytes that differ from their pin are a local problem for a recovered record and a refusal for a prepared one.
-  await writeFile(resolve(publicDirectory, 'surface.webp'), 'a stale local copy');
+  await writeFile(resolve(publicDirectory, 'surface@2x.webp'), 'a stale local copy');
   await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(forced.document, null, 2) + '\n');
   const stale = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
-  assert.equal(stale.outcome, 'recovered'); assert.match(stale.reason ?? '', /^bytes differ at .*surface\.webp/u);
+  assert.equal(stale.outcome, 'recovered'); assert.match(stale.reason ?? '', /^bytes differ at .*surface@2x\.webp/u);
   await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(upgraded.document, null, 2) + '\n');
   assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'retained', 'an unchanged prepared record is not re-verified');
 });

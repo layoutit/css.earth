@@ -220,8 +220,8 @@
     {
       "id": "umbriel-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 3012,
-      "expectedSha256": "ff1fe18bde6efe17b5e820a7a7f8969965fc853d59e8bc8b019c9be5c7f425ad",
+      "expectedBytes": 2977,
+      "expectedSha256": "81abd35778d5dccd71ebeb6c0639c15d1349fa472521284b1c76b8a0c73f521f",
       "origin": "Repository-authored Umbriel raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -239,8 +239,8 @@
     {
       "id": "umbriel-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1600,
-      "expectedSha256": "4850b31fd34e1f8167f90d8a42839803280ca8059e8874644c4a42c1001fb4e4",
+      "expectedBytes": 1606,
+      "expectedSha256": "8f09760a76d080642fb125add62228ab605ac3a16447776d44d032354cb1e467",
       "origin": "Repository-authored Umbriel geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -333,8 +333,8 @@
     {
       "id": "umbriel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7744,
-      "expectedSha256": "caa7c939cf033c1deba5d8acee3a12c670e0ba7032ba7c79a1dff3b583ce2a72",
+      "expectedBytes": 7750,
+      "expectedSha256": "e258c8604ca17918bf58da007f077f78236d50741bc9a2ca4fc36d1e5bf5a371",
       "origin": "Repository-authored Umbriel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

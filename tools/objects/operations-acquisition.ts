@@ -11,6 +11,7 @@ import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import { containedPath, publishPinnedSource, publishPinnedSourceStream } from './operations.js';
 import type { SourceManifest } from './operations.js';
+import { sourceCacheUrl, withIdleTimeout } from '../source-mirror.mts';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
 import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
@@ -32,7 +33,9 @@ export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operation
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
 export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
- const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations)||!plan.operations.length)throw new TypeError('Invalid acquisition plan.');
+ // An empty plan is legal: a body whose every declared source input is already
+ // tracked needs no reacquisition operation at all (e.g. eris, haumea, makemake).
+ const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations))throw new TypeError('Invalid acquisition plan.');
  for(const value of plan.operations){const step=record(value);if(!['json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
   if(!['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
@@ -58,7 +61,10 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  return plan as unknown as AcquisitionPlan;
 }
 
-export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch}}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport}) {
+// The mirror is opt-in (default null): a caller must name RUNTIME_ASSET_ORIGIN explicitly to use it. Defaulting to
+// it here would make every caller — including a test that only wired up its own `transport` — silently also try a
+// real request to the production mirror URL, which a narrowly-scoped mock's URL assertion then rejects.
+export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=null}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());
@@ -73,8 +79,28 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   if(step.kind==='download'){
    if(!step.encoding){
     const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
-    const response=await request(step.url,{headers:step.headers});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
-    await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.fromWeb(response.body as never)});continue;
+    // Try our own content-addressed mirror first, through the same injected transport as the publisher (so tests
+    // never reach the real network): reliable storage, streamed straight into the pinned-write path, which verifies
+    // size and hash before ever touching the real destination. A miss, a non-OK response, an idle stall or a hash
+    // mismatch there all surface as a rejected publishPinnedSourceStream and fall back to the publisher URL, which
+    // stays the recorded provenance either way. Streaming (not buffering) means a >20 MB input costs no more memory
+    // here than the publisher path already does.
+    let usedMirror=false;
+    if(mirrorOrigin){
+     const filename=step.path.split('/').at(-1)!;
+     try{
+      const response=await transport.fetch(sourceCacheUrl(mirrorOrigin,entry.expectedSha256,filename));
+      if(response.ok&&response.body){
+       await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),8000)});
+       usedMirror=true;
+      }
+     }catch{/* fall through to the publisher below */}
+    }
+    if(!usedMirror){
+     const response=await request(step.url,{headers:step.headers});if(!response.body)throw new Error(`Source download has no body: ${step.url}.`);
+     await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),120000)});
+    }
+    continue;
    }
    let data=new Uint8Array(await(await request(step.url,{headers:step.headers})).arrayBuffer());
    if(step.encoding==='gzip')data=gzipSync(data,{level:9});

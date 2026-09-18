@@ -5,10 +5,10 @@ const objectControls = await readPreparedFixture("ariel", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "ariel", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/ariel/ariel-normal.webp", two: "/scenes/ariel/ariel-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/ariel/ariel-poles-normal.webp", two: "/scenes/ariel/ariel-poles-normal@2x.webp" }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/ariel/ariel-normal@2x.webp",
+      "/scenes/ariel/ariel-poles-normal@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "elevation",

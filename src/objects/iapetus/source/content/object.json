@@ -105,8 +105,8 @@
         "id": "normal",
         "label": "Monochrome",
         "thumbnail": "iapetus-lens-normal.webp",
-        "surface": "iapetus-normal.webp",
-        "poles": "iapetus-poles-normal.webp",
+        "surface": "iapetus-normal@2x.webp",
+        "poles": "iapetus-poles-normal@2x.webp",
         "source": {
           "id": "cassini-voyager-2008-iapetus",
           "path": "../manifest.json"
@@ -118,8 +118,8 @@
         "id": "enhanced",
         "label": "Enhanced color",
         "thumbnail": "iapetus-lens-enhanced.webp",
-        "surface": "iapetus-enhanced.webp",
-        "poles": "iapetus-poles-enhanced.webp",
+        "surface": "iapetus-enhanced@2x.webp",
+        "poles": "iapetus-poles-enhanced@2x.webp",
         "source": {
           "id": "cassini-iss-2014-iapetus-color",
           "path": "../manifest.json"
@@ -130,8 +130,8 @@
         "id": "infrared",
         "label": "Infrared",
         "thumbnail": "iapetus-lens-infrared.webp",
-        "surface": "iapetus-infrared.webp",
-        "poles": "iapetus-poles-infrared.webp",
+        "surface": "iapetus-infrared@2x.webp",
+        "poles": "iapetus-poles-infrared@2x.webp",
         "source": {
           "id": "iapetus-cassini-infrared",
           "path": "../manifest.json",
@@ -145,8 +145,8 @@
         "id": "ice-absorption",
         "label": "Ice absorption",
         "thumbnail": "iapetus-lens-ice-absorption.webp",
-        "surface": "iapetus-ice-absorption.webp",
-        "poles": "iapetus-poles-ice-absorption.webp",
+        "surface": "iapetus-ice-absorption@2x.webp",
+        "poles": "iapetus-poles-ice-absorption@2x.webp",
         "source": {
           "id": "iapetus-cassini-ice-absorption",
           "path": "../manifest.json",

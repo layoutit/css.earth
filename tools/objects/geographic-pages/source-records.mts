@@ -50,12 +50,12 @@ export const presentationFields = { rasterScale: number, poolSize: number, decod
 export const parsePageRecipe = shape({ schema: text, initialAddress: shape({ longitude: number, latitude: number, zoom: number }), presentation: shape(presentationFields) });
 export const parsePreparationRecipe = shape({ geographic: shape({ pages: parsePageRecipe }) });
 export const parsePlacesConfig = shape({ namespace: text, publicBase: text, sceneBodyKey: text,
-  camera: shape({ defaultControlPitchDegrees: number, initialScenePitchDegrees: number, maximumControlPitchDegrees: number }),
+  camera: shape({ maximumControlPitchDegrees: number, maximumScenePitchDegrees: number }),
   geographic: shape({ places: shape({ directory: text, coverageDirectory: text, detailZoom: number, overviewZoom: number }) }) });
 export const parsePlacesManifest = shape({ inputs: array(shape({ path: text, bytes: number, sha256: text })), source: text,
   snapshotDate: text, qualification: text, sourcePage: text, license: text });
 export const parseOverlayConfig = shape({ namespace: text, publicBase: text, sceneBodyKey: text,
-  camera: shape({ defaultControlPitchDegrees: number, initialScenePitchDegrees: number, maximumControlPitchDegrees: number }),
+  camera: shape({ maximumControlPitchDegrees: number, maximumScenePitchDegrees: number }),
   geographic: shape({ noise: shape({ directory: text, period: text, bounds: parseBounds, size: number, side: number, columns: number,
     opacity: number, coarse: parseAddress, dataset: text, assetOrigin: text, credit: text, poolSize: number,
     camera: shape({ longitude: number, latitude: number, zoom: number }) }) }) });

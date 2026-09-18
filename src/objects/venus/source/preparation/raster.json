@@ -7,10 +7,6 @@
   "height": 512,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
@@ -47,10 +43,7 @@
         2.2,
         0.9
       ],
-      "sharpen": [
-        0.45,
-        0.65
-      ]
+      "sharpen": 0.65
     },
     {
       "id": "elevation",
@@ -63,10 +56,7 @@
         2.2,
         0.9
       ],
-      "sharpen": [
-        0.45,
-        0.65
-      ]
+      "sharpen": 0.65
     }
   ],
   "atmosphere": {

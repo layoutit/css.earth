@@ -26,6 +26,31 @@
       }
     },
     {
+      "id": "nasa-vtad-eris-model",
+      "path": "nasa-eris.glb",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/eris-3d-model/",
+      "redistribution": "NASA media; an illustrative model, not photographed terrain or a measured map",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "expectedBytes": 4398964,
+      "expectedSha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eris-nasa-vtad-eris-model",
+            "role": "material",
+            "evidence": "pending"
+          }
+        ]
+      }
+    },
+    {
       "id": "eris-disc-color",
       "path": "photometry/disc-color.json",
       "expectedBytes": 2009,
@@ -172,8 +197,8 @@
     {
       "id": "eris-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2418,
-      "expectedSha256": "4c2ac39813e385bfdbc4d0be3fc642790915bc29830c054787907be69003d4e2",
+      "expectedBytes": 2662,
+      "expectedSha256": "e4bda82d3cfb976e7e8f907eab50e5366265a3ed84507e62d11f7404aa153bbf",
       "origin": "Repository-authored Eris raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -191,8 +216,8 @@
     {
       "id": "eris-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1575,
-      "expectedSha256": "9ddaf728ecc4194c45880bc2bd1895864884bedf75f2f270b872631e6083e674",
+      "expectedBytes": 1581,
+      "expectedSha256": "ce127dc143a7fd7334fe1ceee6ac1b29f4dc0bde69a0a7a630939a1c1cd7b8fb",
       "origin": "Repository-authored Eris geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -266,8 +291,8 @@
     {
       "id": "eris-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 66,
-      "expectedSha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7",
+      "expectedBytes": 286,
+      "expectedSha256": "d39ca3e764b19adcccc1b5a3dc31c902542cb972ac957c0239a1df5bd2e63d30",
       "origin": "Repository-authored Eris acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -303,8 +328,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 4943,
-      "expectedSha256": "94c13db8f5c921218f09e74d525c958f7ae7807be590bf86d88bf6f07182e7d7",
+      "expectedBytes": 5855,
+      "expectedSha256": "b3c9673f4b8054affebed85e42ea78b1478b9be6fbc3eadf9026de3e627f31c3",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
