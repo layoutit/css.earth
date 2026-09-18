@@ -1,0 +1,171 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/trappist-1b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "trappist-1b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csstrappist-1b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "temperature",
+      "output": "trappist-1b-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1b-lens-{id}.webp",
+      "source": "science/jwst-trappist-1/b-emission-15um.csv",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "MIRI 15 µm",
+        "format": "eclipse-map-fit",
+        "path": "science/jwst-trappist-1/b-emission-15um.csv",
+        "consumer": "trappist-1b-miri-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "planet": "trappist-1b",
+        "host": "trappist-1",
+        "lightCurve": {
+          "encoding": "csv",
+          "time": "time",
+          "flux": "flux",
+          "error": "error",
+          "mask": "mask",
+          "skipLeading": 0,
+          "columns": [
+            "visit1",
+            "visit2",
+            "visit3",
+            "visit4",
+            "visit5",
+            "visit6",
+            "visit7",
+            "visit8",
+            "visit9"
+          ]
+        },
+        "fit": {
+          "degrees": [
+            1,
+            2
+          ],
+          "eigencurves": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "positive": true,
+          "transitExclusionPhase": 0.02,
+          "gridHeight": 45,
+          "systematics": [
+            {
+              "kind": "column",
+              "column": "visit1"
+            },
+            {
+              "kind": "column",
+              "column": "visit2"
+            },
+            {
+              "kind": "column",
+              "column": "visit3"
+            },
+            {
+              "kind": "column",
+              "column": "visit4"
+            },
+            {
+              "kind": "column",
+              "column": "visit5"
+            },
+            {
+              "kind": "column",
+              "column": "visit6"
+            },
+            {
+              "kind": "column",
+              "column": "visit7"
+            },
+            {
+              "kind": "column",
+              "column": "visit8"
+            },
+            {
+              "kind": "column",
+              "column": "visit9"
+            }
+          ],
+          "transitFromLightCurve": false,
+          "longitudeSymmetric": true
+        },
+        "band": {
+          "encoding": "svo-filter",
+          "path": "science/svo/JWST_MIRI.F1500W.xml"
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml"
+        },
+        "minimum": 50,
+        "maximum": 550,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "50",
+          "300",
+          "550"
+        ],
+        "description": "Brightness temperature at 15 µm, fitted in this project to ten JWST MIRI visits it reduced from raw exposures. Only the day-to-night pattern is measured.",
+        "title": "JWST MIRI · our map from raw data",
+        "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "trappist-1b-context-{id}{suffix}.webp",
+    "limbOutput": "trappist-1b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csstrappist-1b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

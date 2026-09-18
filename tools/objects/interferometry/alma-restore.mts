@@ -20,7 +20,9 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseCalibrationRecord, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
-import { pipelineImaging, type PipelineImaging } from './alma-imaging.mts';
+import { readFitsHeader } from '../../fits.mts';
+import { agentFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
+import { pipelineImaging, precisePhaseCentre, type PipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration, type SelfCalibration } from './alma-selfcal.mts';
 import { toolchainPath } from './toolchain.mts';
 
@@ -30,6 +32,18 @@ export interface ImagingPlan {
   /** The science spectral windows to split, by id. Which channels of them are imaged is the pipeline's own selection, applied
    * at imaging time: splitting on it would renumber nothing but would discard the channels a later comparison may want. */
   readonly scienceWindows: string;
+}
+
+/** tclean arguments the route sets itself: the measurement set and image it works on, the pipeline's instructions to continue
+ * the iteration before this one instead of starting afresh, and `parallel`, which asks for the MPI cluster the pipeline ran
+ * under. That changes how the work is spread, not the image, and a plain casatasks install has no cluster to give it. */
+const REPLACED_TCLEAN_ARGUMENTS = new Set(['vis', 'imagename', 'calcres', 'calcpsf', 'restart', 'parallel']);
+
+/** The pipeline's tclean arguments this route passes on unchanged, as the Python literals the log wrote. */
+export function pipelineTcleanArguments(imaging: PipelineImaging, phaseCentre?: string) {
+  const passed = new Map([...imaging.arguments].filter(([name]) => !REPLACED_TCLEAN_ARGUMENTS.has(name)));
+  if (phaseCentre !== undefined) passed.set('phasecenter', python(phaseCentre));
+  return passed;
 }
 
 const python = (value: string) => `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
@@ -49,11 +63,11 @@ export function applycalStatement(application: CalibrationApplication, visibilit
  * run can be read against the pipeline's own casa_commands log. */
 export function restoreScript(options: {
   readonly asdm: string; readonly visibilities: string; readonly applications: readonly CalibrationApplication[];
-  readonly flagVersion: string | null; readonly plan: ImagingPlan; readonly imageBase: string;
+  readonly flags: ReplayedFlags; readonly plan: ImagingPlan; readonly imageBase: string;
   readonly imaging: PipelineImaging; readonly selfcal: SelfCalibration | null; readonly tableDirectory?: string;
-  readonly flagStage?: string; readonly scratch?: string;
+  readonly scratch?: string; readonly phaseCentre?: string;
 }) {
-  const { asdm, applications, flagVersion, plan, imageBase, imaging, selfcal } = options;
+  const { asdm, applications, flags, plan, imageBase, imaging, selfcal } = options;
   // Both measurement sets live on the scratch disk: the import and the corrected column are random writes that an external
   // drive serves at a tenth of its sequential rate. The calibration tables stay where they were unpacked.
   const onScratch = (name: string) => (options.scratch ? `${options.scratch}/${name}` : name);
@@ -63,8 +77,8 @@ export function restoreScript(options: {
   const imaged = options.scratch ? `${options.scratch}/${imageBase.split('/').at(-1)}` : imageBase;
   const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
-    'import os, sys, json, shutil, glob',
-    'from casatasks import importasdm, flagmanager, applycal, mstransform, tclean, exportfits, casalog',
+    'import os, sys, json, shutil, glob, ast',
+    'from casatasks import importasdm, flagdata, applycal, mstransform, tclean, exportfits, casalog',
     `casalog.setlogfile(${python(`${imageBase}.casa.log`)})`,
     // The calapply record names intents the pipeline's way; the measurement set names them as the observatory scheduled them.
     // The pipeline translates one into the other before it calls applycal, and so does this route, reading the set's own
@@ -105,17 +119,28 @@ export function restoreScript(options: {
       `    importasdm(asdm=${python(asdm)}, vis=${python(visibilities)}, ocorr_mode='ca', asis='SBSummary ExecBlock Antenna Annotation Station Receiver Source CalAtmosphere CalWVR CalPointing', bdfflags=True, lazy=True)`,
       "    open(imported, 'w').close()",
       "    steps.append('importasdm')",
-      // Restoring flags and applying the calibration are one step: restoring the flags again would undo what calflagstrict
-      // flagged. A marker records that both finished, so a later failure does not repeat an hour of applycal.
+      // Flagging and applying the calibration are one step: flagging again from scratch would undo what calflagstrict flagged.
+      // A marker records that both finished, so a later failure does not repeat an hour of applycal.
       `calibrated = ${python(`${visibilities}.calibrated`)}`,
       'if not os.path.exists(calibrated):',
-      ...[...(flagVersion === null ? ["steps.append('no flag version restored')"] : [
-        // Replace the filler's empty flag versions with the pipeline's before restoring from them.
-        `shutil.rmtree(${python(`${visibilities}.flagversions`)}, ignore_errors=True)`,
-        `shutil.copytree(os.path.join(${python(options.flagStage ?? '.')}, ${python(`${options.visibilities}.flagversions`)}), ${python(`${visibilities}.flagversions`)})`,
-        `flagmanager(vis=${python(visibilities)}, mode='restore', versionname=${python(flagVersion)})`,
-        "steps.append('flags restored')",
-      ]),
+      ...[
+        // The pipeline's flags, replayed by selection: its hifa_flagdata command file with the logged time buffer, then the
+        // inline commands later stages applied. A flag version would be restored by row, and rows differ between CASA versions.
+        `flagdata(vis=${python(visibilities)}, mode='list', inpfile=${python(flags.commandFile)}, tbuff=[${flags.tbuff.join(', ')}], action='apply', flagbackup=False)`,
+        ...(flags.inline.length ? [`flagdata(vis=${python(visibilities)}, mode='list', inpfile=${pythonList(flags.inline)}, action='apply', flagbackup=False)`] : []),
+        // Checked against the pipeline's own per-antenna count before anything is calibrated: a replay that flags other data
+        // than the pipeline did stops here, not after an hour of applycal and an image that is only slightly worse.
+        `expected = json.loads(${python(JSON.stringify(flags.expected))})`,
+        'report, worst = {}, (0.0, None)',
+        'for spw, antennas in expected.items():',
+        `    counts = flagdata(vis=${python(visibilities)}, mode='summary', field=${python(plan.target)}, spw=spw)['antenna']`,
+        '    for name, theirs in antennas.items():',
+        "        ours = counts[name]['flagged'] / counts[name]['total']",
+        '        report[spw + " " + name] = [round(ours, 6), round(theirs, 6)]',
+        "        if abs(ours - theirs) >= worst[0]: worst = (abs(ours - theirs), f'spw {spw} {name}: {100 * ours:.2f}% here, {100 * theirs:.2f}% in the pipeline')",
+        `open(${python(`${imageBase}.flags.json`)}, 'w').write(json.dumps(report, indent=1))`,
+        `if worst[0] > ${FLAG_TOLERANCE}: sys.exit("The replayed flags differ from the pipeline's count: " + worst[1])`,
+        "steps.append(f'flags replayed; largest per-antenna difference from the pipeline {100 * worst[0]:.2f} points')",
       ...applications.flatMap(application => [applycalStatement(application, visibilities), `steps.append('applycal ' + ${python(application.intent)})`]),
       "open(calibrated, 'w').close()"].map(line => `    ${line}`),
       // Every science channel, science target only, and the spectral windows keep their numbers: the self-calibration maps are
@@ -136,15 +161,13 @@ export function restoreScript(options: {
     // tclean continues from any model it finds under its image name, so the previous run's images are removed first.
     `for product in glob.glob(${python(`${imaged}.*`)}):`,
     '    if os.path.isdir(product): shutil.rmtree(product)',
-    // The imaging the pipeline itself performed, from the command log it shipped.
-    `tclean(vis=${python(targets)}, imagename=${python(imaged)}, field=${python(plan.target)}, spw=${python(imaging.spw)}, ` +
-      // Without the pipeline's antenna selection the auto-correlations enter the Briggs weights as zero-spacing samples: on the
-      // R Doradus band 8 execution that widened the beam from 45.2 x 28.3 to 56.5 x 39.5 mas.
-      `${imaging.antenna === null ? '' : `antenna=${python(imaging.antenna)}, `}${imaging.scan === null ? '' : `scan=${python(imaging.scan)}, `}${imaging.intent === null ? '' : `intent=${python(imaging.intent)}, `}` +
-      `datacolumn='corrected', specmode='mfs', deconvolver=${python(imaging.deconvolver)}${imaging.terms > 1 ? `, nterms=${imaging.terms}` : ''}, ` +
-      `gridder='standard', imsize=[${imaging.imageSize[0]}, ${imaging.imageSize[1]}], cell=${python(imaging.cell)}, ` +
-      `weighting=${python(imaging.weighting)}, robust=${imaging.robust}, niter=100000, threshold=${python(imaging.threshold)}, ` +
-      "restoringbeam='common', pbcor=True, interactive=False)",
+    // The imaging the pipeline itself performed: its final tclean call, argument for argument, from the command log it shipped.
+    // Leaving any out changes the image. Without the antenna selection's trailing &, the auto-correlations entered the Briggs
+    // weights and widened the beam; without phasecenter the grid moved 0.37 mas; without the auto-multithresh mask, CLEAN
+    // worked on noise peaks everywhere and the noise fell 40% below the archive's. Each value is a Python literal read with
+    // ast.literal_eval, so nothing in the log is executed. REPLACED_TCLEAN_ARGUMENTS lists the few this route sets itself.
+    `PIPELINE_TCLEAN = {${[...pipelineTcleanArguments(imaging, options.phaseCentre)].map(([name, value]) => `${python(name)}: ${python(value)}`).join(', ')}}`,
+    `tclean(vis=[${python(targets)}], imagename=${python(imaged)}, **{name: ast.literal_eval(value) for name, value in PIPELINE_TCLEAN.items()})`,
     "steps.append('tclean')",
     // mtmfs writes one image per Taylor term; the zeroth is the continuum intensity.
     `exportfits(imagename=${python(`${imaged}.image${imaging.terms > 1 ? '.tt0' : ''}.pbcor`)}, fitsimage=${python(`${imageBase}.fits`)}, overwrite=True, dropdeg=False)`,
@@ -152,14 +175,6 @@ export function restoreScript(options: {
     `open(${python(`${imageBase}.steps.json`)}, 'w').write(json.dumps(steps, indent=1))`,
     "print('restore complete:', ', '.join(steps))",
   ].join('\n') + '\n';
-}
-
-/** The flag version the pipeline left behind, from the names its flagversions archive carries. */
-export function pipelineFlagVersion(names: readonly string[]) {
-  // The pipeline's last save before imaging; its own restore uses this name.
-  const wanted = ['Pipeline_Final', 'statwt_1', 'Applycal'];
-  for (const name of wanted) if (names.includes(name)) return name;
-  return null;
 }
 
 /** A macOS volume that is not HFS+ carries an AppleDouble twin beside every file, and those twins are not the data. */
@@ -172,13 +187,41 @@ async function findOne(directory: string, matches: (name: string) => boolean, wh
   return resolve(directory, found[0]!);
 }
 
-/** The flag versions the pipeline saved: each is a directory `flags.<name>` inside `<measurement set>.flagversions`. */
-export async function savedFlagVersions(calibration: string) {
-  const names = (await readdir(calibration, { withFileTypes: true })).filter(entry => real(entry.name));
-  const archive = names.find(entry => entry.isDirectory() && entry.name.endsWith('.ms.flagversions'));
-  if (!archive) return [];
-  const versions = (await readdir(resolve(calibration, archive.name), { withFileTypes: true })).filter(entry => real(entry.name));
-  return versions.filter(entry => entry.isDirectory() && entry.name.startsWith('flags.')).map(entry => entry.name.slice('flags.'.length));
+/** The largest per-antenna difference from the pipeline's flag count the replay may leave, as a fraction. */
+const FLAG_TOLERANCE = 0.005;
+
+export interface ReplayedFlags {
+  /** hifa_flagdata's commands, written where CASA can read them. */
+  readonly commandFile: string;
+  readonly tbuff: readonly [number, number];
+  readonly inline: readonly string[];
+  /** The pipeline's flagged fraction for the target, by spectral window and antenna. */
+  readonly expected: Readonly<Record<string, Readonly<Record<string, number>>>>;
+}
+
+/** The pipeline's flags as selections, from the weblog the delivery ships and its command log. */
+async function replayedFlags(work: string, unpacked: string, commands: string, visibilities: string, target: string,
+  run: (command: string, args: readonly string[], cwd: string) => void): Promise<ReplayedFlags> {
+  const weblog = await findOne(unpacked, name => name.endsWith('.weblog.tgz'), 'pipeline weblog');
+  const out = resolve(work, 'weblog');
+  await mkdir(out, { recursive: true });
+  run('tar', ['xzf', weblog, '-C', out, `*/stage*/${visibilities}-agent_flagcmds.txt`, '*/stage*/casapy.log'], work);
+  const agent = await findOne(out, name => name === `${visibilities}-agent_flagcmds.txt`, 'hifa_flagdata command file');
+  const commandFile = resolve(work, 'weblog', `${visibilities}.flagcmds.txt`);
+  await writeFile(commandFile, agentFlagCommands(await readFile(agent, 'utf8')).join('\n') + '\n');
+  const { tbuff, inline } = loggedFlagging(commands, visibilities);
+  // The count hif_applycal logged; the last stage that logged one for this set is the state the calibration left.
+  const logs = (await readdir(out, { recursive: true })).filter(name => real(name) && name.endsWith('/casapy.log'))
+    .sort((a, b) => Number(/stage(\d+)/u.exec(a)?.[1] ?? 0) - Number(/stage(\d+)/u.exec(b)?.[1] ?? 0));
+  let expected: Record<string, Record<string, number>> | null = null;
+  for (const name of logs) {
+    const text = await readFile(resolve(out, name), 'utf8');
+    if (!text.includes(`Executing flagdata(vis='${visibilities}'`) || !text.includes("name='AntSpw")) continue;
+    const summary = pipelineFlagSummary(text, visibilities, target);
+    expected = Object.fromEntries([...summary].map(([spw, antennas]) => [String(spw), Object.fromEntries(antennas)]));
+  }
+  if (!expected) throw new Error(`The weblog logs no per-antenna flag count for ${target}, so a replay could not be checked.`);
+  return { commandFile, tbuff, inline, expected };
 }
 
 export async function restoreExecution(directory: string, plan: ImagingPlan, options: { readonly scratch?: string } = {}) {
@@ -199,12 +242,6 @@ export async function restoreExecution(directory: string, plan: ImagingPlan, opt
   await mkdir(calibration, { recursive: true });
   const caltables = await findOne(unpacked, name => name.endsWith('.caltables.tgz'), 'calibration table archive');
   run('tar', ['xzf', caltables, '-C', calibration], work);
-  // importasdm writes its own <vis>.flagversions and refuses to start if that name is taken, so the pipeline's copy is staged
-  // elsewhere and moved in afterwards. hifa_restoredata does the same: remove the filler's version, restore the delivered one.
-  const flagStage = resolve(work, 'flagversions');
-  await mkdir(flagStage, { recursive: true });
-  const flags = await findOne(unpacked, name => name.endsWith('.ms.flagversions.tgz'), 'flag version archive');
-  run('tar', ['xzf', flags, '-C', flagStage], work);
   // The auxiliary products carry the self-calibration solutions and the record that says how to apply them.
   const products = resolve(work, 'auxproducts');
   await mkdir(products, { recursive: true });
@@ -213,10 +250,6 @@ export async function restoreExecution(directory: string, plan: ImagingPlan, opt
   const staged = (await readdir(calibration)).filter(real);
   const missing = requiredTables(applications).filter(table => !staged.includes(table));
   if (missing.length) throw new Error(`The calibration archive is missing ${missing.length} table(s) the record applies: ${missing[0]}`);
-  const versions = await savedFlagVersions(flagStage);
-  const flagVersion = pipelineFlagVersion(versions);
-  // The pipeline's flags are half of what restoring means; running without them would calibrate data it had thrown away.
-  if (flagVersion === null) throw new Error(`The delivery saved no flag version this route recognises (found ${versions.join(', ') || 'none'}).`);
   // The delivery nests the ASDM under its project, science goal, group and member, and names it with the suffix the archive
   // gives the tarball. importasdm takes the directory; the measurement set is named for the execution, without the suffix.
   const asdm = await findOne(unpacked, name => /^uid___A002_[0-9A-Za-z_]+\.asdm\.sdm$/u.test(name), 'raw ASDM directory');
@@ -224,7 +257,9 @@ export async function restoreExecution(directory: string, plan: ImagingPlan, opt
   const visibilities = `${execution}.ms`;
 
   const log = await findOne(unpacked, name => name.endsWith('.casa_commands.log'), 'pipeline command log');
-  const imaging = pipelineImaging(await readFile(log, 'utf8'), plan.target);
+  const commands = await readFile(log, 'utf8');
+  const imaging = pipelineImaging(commands, plan.target);
+  const flags = await replayedFlags(work, unpacked, commands, visibilities, plan.target, run);
   const selfcalRecord = await readdir(products, { withFileTypes: true })
     .then(entries => entries.find(entry => real(entry.name) && entry.isFile() && entry.name.endsWith('.selfcal.json'))?.name ?? null);
   const selfcal = selfcalRecord ? parseSelfCalibration(JSON.parse(await readFile(resolve(products, selfcalRecord), 'utf8'))) : null;
@@ -238,14 +273,18 @@ export async function restoreExecution(directory: string, plan: ImagingPlan, opt
 
   const scratch = resolve(options.scratch ?? calibration);
   await mkdir(scratch, { recursive: true });
-  const script = restoreScript({ asdm, visibilities, applications, flagVersion, plan, imaging, selfcal, scratch,
-    flagStage, tableDirectory: workdir ? resolve(products, workdir.name) : undefined, imageBase: resolve(work, `${plan.target}.restored`) });
+  // The log rounds the phase centre; the archive image, when it is here as the oracle, records it unrounded.
+  const archive = resolve(work, 'archive.fits');
+  const phaseCentre = imaging.phaseCentre !== null && await readFile(archive).then(() => true, () => false)
+    ? precisePhaseCentre(imaging.phaseCentre, readFitsHeader(await readFile(archive)).header, imaging.imageSize).phaseCentre : undefined;
+  const script = restoreScript({ asdm, visibilities, applications, flags, plan, imaging, selfcal, scratch, phaseCentre,
+    tableDirectory: workdir ? resolve(products, workdir.name) : undefined, imageBase: resolve(work, `${plan.target}.restored`) });
   const scriptPath = resolve(work, 'restore.py');
   await writeFile(scriptPath, script);
   const casa = await toolchainPath('casa');
   run(resolve(casa, 'venv/bin/python'), [scriptPath], calibration);
   return { script: scriptPath, image: resolve(work, `${plan.target}.restored.fits`), applications: applications.length,
-    imaging, selfcal, flagVersion };
+    imaging, selfcal, flaggedAntennas: Object.values(flags.expected)[0] ? Object.keys(Object.values(flags.expected)[0]!).length : 0 };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -258,7 +297,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const scratch = argument('scratch', '');
   const result = await restoreExecution(directory, { target: argument('target', 'R_Dor'), scienceWindows: argument('spw', '25,27,29,31') },
     scratch ? { scratch } : {});
-  console.log(`Restored flags ${result.flagVersion} and applied ${result.applications} calibration steps.`);
+  console.log(`Replayed the pipeline's flags, checked on ${result.flaggedAntennas} antennas, and applied ${result.applications} calibration steps.`);
   console.log(result.selfcal?.succeeded
     ? `Self-calibrated at ${result.selfcal.solutionInterval} with ${result.selfcal.tables.length} table(s), ${result.selfcal.applyMode}.`
     : 'No self-calibration in this delivery.');

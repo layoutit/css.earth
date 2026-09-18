@@ -69,6 +69,8 @@ export interface LensControl {
   texture?: { url: string; width: number; height: number; minimap?: unknown; attribution?: { label: string; url?: string } };
   /** The surface marks missing observations with the shared no-data grid. */
   noData?: boolean;
+  /** A dataset that draws a companion cloud and keeps the named dataset's prepared surface for the body itself. */
+  volume?: { objectId: string; lensId: string; surface: string };
   facts?: Fact[];
   legend?: {
     kind: "scale" | "categories";

@@ -1,0 +1,42 @@
+# From Bell's Eureka! control file for these observations, deposited with Gillon, Ducrot et al. (2025) at
+# doi:10.5281/zenodo.17710453. Changed here: one worker and one file at a time (this machine runs one heavy job),
+# no plots, and the directories the pipeline templates.
+
+# Eureka! Control File for Stage 4: Generate Lightcurves
+
+# Stage 4 Documentation: https://eurekadocs.readthedocs.io/en/latest/ecf.html#stage-4
+
+# Number of spectroscopic channels spread evenly over given wavelength range
+nspecchan       1
+compute_white   False
+wave_min        None
+wave_max        None
+allapers        True
+
+# Parameters for drift correction of 1D spectra
+recordDrift     False
+correctDrift    False
+
+# Parameters for sigma clipping
+clip_unbinned   False   # Whether or not sigma clipping should be performed on the unbinned 1D time series
+clip_binned     True    # Whether or not sigma clipping should be performed on the binned 1D time series
+sigma           3.5     # The number of sigmas a point must be from the rolling median to be considered an outlier
+box_width       20      # The width of the box-car filter (used to calculated the rolling median) in units of number of data points
+maxiters        20      # The number of iterations of sigma clipping that should be performed.
+boundary        fill    # Use 'fill' to extend the boundary values by the median of all data points (recommended), 'wrap' to use a periodic boundary, or 'extend' to use the first/last data points
+fill_value      boxcar  # Either the string 'mask' to mask the outlier values (recommended), 'boxcar' to replace data with the mean from the box-car filter, or a constant float-type fill value.
+
+# Limb-darkening parameters needed to compute exotic-ld
+compute_ld      False
+
+# Diagnostics
+isplots_S4      3
+hide_plots      True
+verbose         True
+
+# Project directory
+topdir          {topdir}
+
+# Directories relative to topdir
+inputdir        {inputdir}
+outputdir       {outputdir}

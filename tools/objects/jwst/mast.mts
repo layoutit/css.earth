@@ -17,7 +17,8 @@ export const exists = (path: string) => access(path).then(() => true, () => fals
 const run = (command: string, args: readonly string[]) => new Promise<number>(done => { spawn(command, args, { stdio: 'inherit' }).on('close', code => done(code ?? 1)); });
 
 /** The file at its pinned size (and digest, when pinned) in `directory`: linked from a source directory that already has it,
- * or downloaded. MAST drops slow transfers; a stalled transfer is abandoned and resumed, five times at most. */
+ * or downloaded. MAST drops slow transfers, and one connection can crawl while others run at full speed: a transfer under
+ * 500 kB/s for a minute is abandoned and resumed on a fresh connection from where the partial file ends, twenty times at most. */
 export async function mastFile(file: MastFile, directory: string, sources: readonly string[] = []): Promise<string> {
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name)) throw new TypeError(`Invalid MAST file name: ${file.name}`);
   await mkdir(directory, { recursive: true });
@@ -26,9 +27,9 @@ export async function mastFile(file: MastFile, directory: string, sources: reado
     const candidate = resolve(source, file.name);
     if (await sizeOf(candidate) === file.bytes) { await rm(target, { force: true }); await symlink(candidate, target); break; }
   }
-  for (let attempt = 1; attempt <= 5 && await sizeOf(target) !== file.bytes; attempt++) {
+  for (let attempt = 1; attempt <= 20 && await sizeOf(target) !== file.bytes; attempt++) {
     if (await sizeOf(target) > file.bytes) await rm(target);
-    await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '10000', '--speed-time', '120', '-o', target, mastDownloadUrl(file.uri)]);
+    await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '500000', '--speed-time', '60', '-o', target, mastDownloadUrl(file.uri)]);
   }
   if (await sizeOf(target) !== file.bytes) throw new Error(`${file.name} did not download to its pinned ${file.bytes} bytes.`);
   if (file.sha256 !== undefined && (await sha256File(target)).sha256 !== file.sha256) throw new Error(`${file.name} differs from its pinned sha256.`);

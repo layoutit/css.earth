@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "trappist-1",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TRAPPIST-1",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 82927.44
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/trappist-1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "063caa15471ed641876f06bfec5967d455f16233998bb516b8a9191c770e525f"
+      }
+    },
+    "catalog": {
+      "name": "TRAPPIST-1",
+      "classification": "star",
+      "color": "#ffcd6a",
+      "distanceAu": 2571368.4,
+      "description": "Ultracool red dwarf in Aquarius with seven Earth-sized planets.",
+      "systemName": "TRAPPIST-1 system",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        372794614150033150,
+        -88610827847518910,
+        -33826922007004276
+      ],
+      "presentationToReference": [
+        0.969127373513411,
+        -0.08552861895209767,
+        -0.23125092269468742,
+        -0.23035520267069431,
+        0.02033395848352065,
+        -0.972894141587323,
+        -0.08791253897789993,
+        -0.9961281973082267,
+        -0.0000042334254100688244
+      ],
+      "orbitUpReference": [
+        0.08552861895209767,
+        -0.02033395848352065,
+        0.9961281973082267
+      ],
+      "metersPerUnit": 267507.87096774194,
+      "bodyRadiusM": 82927440
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "4c3307a55773e994e748b9eaddcf843d2bfe3c77f8ef82f3fab1fdcb2f5bcb14"
+  }
+}

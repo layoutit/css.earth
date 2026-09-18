@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 346.62652162764437,
+  "declinationDegrees": 84.95647168057044,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No rotation axis of TRAPPIST-1 is measured. Its rotation period is known from spot modulation, 3.295 days (Luger et al. 2017, Nature Astronomy 1, 0129), but the axis direction on the sky is not, and the planets' orbits constrain only the inclination of their own plane. The display axis is celestial north at the catalogue position, placed in the plane of the sky: a convention, not a measurement.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of TRAPPIST-1 are unmeasured; the axis shown is where celestial north lies on the sky."
+}

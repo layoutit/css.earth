@@ -82,6 +82,8 @@ export function prepareLenses(
         ...(control.qualification ? { qualification: control.qualification } : {}),
         ...(control.view ? { view: control.view } : {}),
         thumbnailUrl: assetUrl(objectId, control.thumbnail),
+        // A dataset that names a companion cloud borrows another lens's prepared surface; the shell drives the cloud.
+        ...(control.volume ? { volume: control.volume } : {}),
         ...(control.noData ? { noData: true } : {}),
         ...(facts?.length ? { facts } : {}),
         ...(legend ? { legend } : {}),

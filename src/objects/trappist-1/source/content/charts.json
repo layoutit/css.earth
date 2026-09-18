@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/trappist-1/",
+  "charts": [
+    {
+      "kind": "light-curve",
+      "id": "trappist-1",
+      "source": "science/jwst-3077/white-15um.csv",
+      "timeField": "time",
+      "fluxField": "flux",
+      "maskField": "mask",
+      "binMinutes": 20,
+      "axisLabel": "hours at 15 µm",
+      "output": "trappist-1-light-curve-15um.svg",
+      "title": "TRAPPIST-1 at 15 µm over 59 hours",
+      "description": "TRAPPIST-1's brightness at 15 µm over JWST program 3077's 59-hour visit, reduced from raw in this project, in 20-minute averages: transits of b, g and c, the eclipse of b and c, and the star's own flares.",
+      "metadata": {
+        "source": "JWST program 3077, MIRI/F1500W, reduced with Eureka! 1.4 in this project",
+        "eventTimes": "transit and eclipse mid-times from this project's joint fit of the ten visits"
+      },
+      "events": [
+        {
+          "time": 60271.25436,
+          "label": "b"
+        },
+        {
+          "time": 60271.4793,
+          "label": "g"
+        },
+        {
+          "time": 60272.016,
+          "label": "b+c"
+        },
+        {
+          "time": 60272.766,
+          "label": "b"
+        },
+        {
+          "time": 60273.23314,
+          "label": "c"
+        }
+      ]
+    }
+  ]
+}

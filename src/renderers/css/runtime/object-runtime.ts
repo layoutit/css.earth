@@ -22,7 +22,7 @@ import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import { mountRetainedCubicSky } from "../solar-system/cubic-sky-runtime.js";
 import { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
-import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-contract.js";
+import { initialObjectSelection, requireObjectRuntimeDefinition, selectedLensVolume } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
@@ -192,6 +192,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const datasets: ObjectDatasets | undefined = definition.controls.lenses && definition.controls.lenses.controls.length ? Object.freeze({
       ids: Object.freeze(definition.controls.lenses.controls.map(item => item.id)),
       defaultId: definition.controls.lenses.defaultLens,
+      volumes: Object.freeze(definition.controls.lenses.controls.flatMap(item => item.volume ? [item.volume] : [])),
+      volumeOf: (id: string) => selectedLensVolume(definition.controls, id),
       current: () => lifetime.disposed ? null : selection?.state().committed?.lensId ?? null,
       async select(id: string, options: { signal?: AbortSignal } = {}) {
         if (!readyPublished || lifetime.disposed || options.signal?.aborted) return false;

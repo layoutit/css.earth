@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-jwst-tso-program@1",
+  "id": "trappist-1c-miri-2304-001",
+  "title": "TRAPPIST-1c MIRI/F1500W secondary eclipse, JWST program 2304 observation 1 (eclipse near MJD 59879.69)",
+  "planet": "trappist-1c",
+  "eventName": "trappist1c",
+  "instrument": "MIRI/IMAGE",
+  "mode": "photometry",
+  "credit": "JWST program 2304; raw exposures from MAST; published in Zieba et al. (2023, Nature 620, 746)",
+  "crdsContext": "jwst_1535.pmap",
+  "batchSegments": 1,
+  "stages": {
+    "S1": "S1_trappist1c.ecf",
+    "S2": "S2_trappist1c.ecf",
+    "S3": "S3_trappist1c.ecf",
+    "S4": "S4_trappist1c.ecf"
+  },
+  "settingsSource": "The TRAPPIST-1b program 3077 control files (Bell's, deposited at doi:10.5281/zenodo.17710453, with this pipeline's fractional-pixel aperture), because Bell fitted these eclipses jointly with that phase curve. This visit reads the full detector, so Stage 3's window and centroid guess are set on the star's position in this frame. One segment per batch: a full-frame segment holds four times the pixels of the phase curve's subarray.",
+  "segments": [
+    {
+      "name": "jw02304001001_03101_00001-seg001_mirimage_uncal.fits",
+      "bytes": 1305190080,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg001_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02304001001_03101_00001-seg002_mirimage_uncal.fits",
+      "bytes": 1305190080,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg002_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02304001001_03101_00001-seg003_mirimage_uncal.fits",
+      "bytes": 1305190080,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg003_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02304001001_03101_00001-seg004_mirimage_uncal.fits",
+      "bytes": 1305190080,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg004_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02304001001_03101_00001-seg005_mirimage_uncal.fits",
+      "bytes": 1305190080,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg005_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02304001001_03101_00001-seg006_mirimage_uncal.fits",
+      "bytes": 1236499200,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg006_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02304001001_03101_00001-seg007_mirimage_uncal.fits",
+      "bytes": 1236499200,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg007_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw02304001001_03101_00001-seg008_mirimage_uncal.fits",
+      "bytes": 1236499200,
+      "uri": "mast:JWST/product/jw02304001001_03101_00001-seg008_mirimage_uncal.fits"
+    }
+  ]
+}

@@ -1,7 +1,10 @@
 ---
 import type { Props as ShellProps } from '../planet-shell-types';
-interface Props { objectId: string; lens: NonNullable<ShellProps['lenses']>['controls'][number]; }
-const { objectId, lens } = Astro.props;
+interface Props { objectId: string; lens: NonNullable<ShellProps['lenses']>['controls'][number];
+  /** The dataset this legend is shown under, when it is borrowed from another one; it keeps the element ids unique. */
+  owner?: string; }
+const { objectId, lens, owner } = Astro.props;
+const slot = owner === undefined || owner === lens.id ? lens.id : `${owner}-${lens.id}`;
 // Only render the dataset's declared meaning and scale.
 const legend = lens.legend;
 const categories = legend?.kind === 'categories' ? legend.items : undefined;
@@ -14,8 +17,8 @@ const labels = categories?.map(item => ({ text: item.label, detail: item.descrip
 // The shell explains the shared no-data grid once, so dataset text never repeats it.
 const noData = lens.noData === true;
 ---
-{(legend || noData) && <section id={`${objectId}-${lens.id}-legend`} class="planet-lens-legend-panel"
-  data-lens-legend={lens.id} aria-label={`${lens.label} legend`}>
+{(legend || noData) && <section id={`${objectId}-${slot}-legend`} class="planet-lens-legend-panel"
+  data-lens-legend={slot} aria-label={`${lens.label} legend`}>
   {legend && <div class="planet-lens-legend-scale-row">
     {legend?.src
       ? <img class="planet-lens-legend-scale" src={legend.src}

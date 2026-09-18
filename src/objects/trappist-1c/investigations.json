@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "trappist-1c",
+  "entries": [
+    {
+      "id": "unresolved-disc",
+      "survey": "exoplanet-unresolved-disc",
+      "status": "excluded",
+      "checked": [
+        {
+          "date": "2026-09-17",
+          "commit": "228bc900512a64a6ddbe420316d4d2c3964cb64c"
+        }
+      ]
+    },
+    {
+      "id": "jwst-miri-15um-dayside",
+      "subject": "Thermal map at 15 um from the same ten JWST MIRI visits",
+      "status": "excluded",
+      "finding": "c's dayside is measured and its day-night pattern is not. Its eclipse depth in the joint fit is 318 to 389 ppm (Bell's shape, a symmetric sinusoid, a free one), a 15 um brightness temperature of 353 to 379 K through the F1500W response and a BT-Settl 2600 K star; its four eclipse visits alone give 331 to 463 ppm. The phase curve does not constrain c: freed, the sinusoid runs to its bound (a pure sine, the peak 90 deg from noon); held symmetric, its amplitude fits to zero. A map would draw the assumed shape, so none is shown.",
+      "evidence": [
+        "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304",
+        "https://zenodo.org/records/17710453"
+      ],
+      "revisitWhen": "A phase curve of c that constrains its day-night contrast (a second visit, or a joint fit whose uncertainties converge), or a published map of c.",
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "cd06eda64580b25d4c60e7bd6cd5cd1b07732976"
+        }
+      ]
+    }
+  ]
+}

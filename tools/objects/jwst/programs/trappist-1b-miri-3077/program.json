@@ -1,0 +1,572 @@
+{
+  "schema": "cssearth-jwst-tso-program@1",
+  "id": "trappist-1b-miri-3077",
+  "title": "TRAPPIST-1b MIRI/F1500W thermal phase curve, JWST program 3077 (visit 1, both exposures)",
+  "planet": "trappist-1b",
+  "eventName": "trappist1b",
+  "instrument": "MIRI/IMAGE",
+  "mode": "photometry",
+  "credit": "JWST program 3077 (PI Gillon); raw exposures from MAST",
+  "crdsContext": "jwst_1535.pmap",
+  "batchSegments": 2,
+  "stages": {
+    "S1": "S1_trappist1b.ecf",
+    "S2": "S2_trappist1b.ecf",
+    "S3": "S3_trappist1b.ecf",
+    "S4": "S4_trappist1b.ecf"
+  },
+  "settingsSource": "Bell's Eureka! control files for these exact observations, deposited with Gillon, Ducrot et al. (2025, Nature Astronomy) at doi:10.5281/zenodo.17710453, carried over to this pipeline's one-worker batching: photometry with gain 3.57, a 100 by 100 pixel window, fgc centroiding from [255, 255], a 5-pixel aperture and a 16 to 46 pixel sky annulus. One setting departs from his: the aperture weights its edge pixels by their area inside the circle (photutils, aperture_edge exact), because his whole-pixel aperture includes 78 or 79 pixels depending on a 0.01-pixel centroid shift, which puts steps of about 650 ppm into the light curve.",
+  "segments": [
+    {
+      "name": "jw03077001001_03101_00001-seg001_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg001_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg002_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg002_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg003_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg003_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg004_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg004_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg005_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg005_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg006_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg006_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg007_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg007_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg008_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg008_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg009_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg009_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg010_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg010_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg011_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg011_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg012_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg012_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg013_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg013_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg014_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg014_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg015_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg015_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg016_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg016_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg017_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg017_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg018_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg018_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg019_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg019_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg020_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg020_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg021_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg021_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg022_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg022_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg023_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg023_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg024_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg024_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg025_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg025_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg026_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg026_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg027_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg027_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg028_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg028_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg029_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg029_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg030_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg030_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg031_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg031_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg032_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg032_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg033_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg033_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg034_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg034_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg035_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg035_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg036_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg036_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg037_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg037_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg038_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg038_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg039_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg039_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg040_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg040_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg041_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg041_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg042_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg042_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg043_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg043_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg044_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg044_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg045_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg045_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg046_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg046_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg047_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg047_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg048_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg048_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg049_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg049_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg050_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg050_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg051_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg051_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg052_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg052_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg053_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg053_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg054_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg054_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg055_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg055_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg056_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg056_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg057_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg057_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg058_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg058_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg059_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg059_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg060_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg060_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg061_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg061_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg062_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg062_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg063_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg063_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg064_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg064_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg065_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg065_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg066_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg066_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg067_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg067_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg068_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg068_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg069_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg069_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077001001_03101_00001-seg070_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077001001_03101_00001-seg070_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg001_mirimage_uncal.fits",
+      "bytes": 1474637760,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg001_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg002_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg002_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg003_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg003_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg004_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg004_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg005_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg005_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg006_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg006_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg007_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg007_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg008_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg008_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg009_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg009_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg010_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg010_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg011_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg011_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg012_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg012_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg013_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg013_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg014_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg014_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg015_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg015_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg016_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg016_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg017_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg017_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg018_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg018_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg019_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg019_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg020_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg020_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg021_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg021_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg022_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg022_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg023_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg023_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg024_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg024_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg025_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg025_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg026_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg026_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg027_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg027_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg028_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg028_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg029_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg029_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg030_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg030_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg031_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg031_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg032_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg032_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg033_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg033_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg034_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg034_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg035_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg035_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg036_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg036_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg037_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg037_mirimage_uncal.fits"
+    },
+    {
+      "name": "jw03077002001_02101_00001-seg038_mirimage_uncal.fits",
+      "bytes": 1445146560,
+      "uri": "mast:JWST/product/jw03077002001_02101_00001-seg038_mirimage_uncal.fits"
+    }
+  ],
+  "oracle": {
+    "kind": "eureka-light-curve-zip",
+    "title": "Eureka Control Files; First JWST thermal phase curves of temperate terrestrial exoplanets reveal no thick atmosphere around TRAPPIST-1 b and c (Bell 2025)",
+    "url": "https://zenodo.org/api/records/17710453/files/FinalResults.zip/content",
+    "record": "https://zenodo.org/records/17710453",
+    "license": "CC BY 4.0",
+    "path": "FinalResults.zip",
+    "bytes": 414760337,
+    "sha256": "c45ed0159956055edc51317215aa671c65ed2bd43124967f3a6341d7a51344b0",
+    "lightCurve": "FinalResults/Bell_IntermediateResults/S4_trappist1b_phasecurve_ap5_bg16_46_LCData.h5"
+  }
+}

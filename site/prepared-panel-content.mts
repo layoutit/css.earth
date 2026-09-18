@@ -77,8 +77,12 @@ function lensControl(value: unknown): LensControl {
   const prose = ['title', 'detail', 'summary', 'description'].filter(key => Object.hasOwn(lens, key));
   if (prose.length) throw new TypeError(`Prepared lens controls carry reader text (${prose.join(', ')}); it belongs in prepared content.`);
   const noData = optionalBoolean(lens.noData, 'lens no-data grid');
+  // A dataset that draws a companion cloud borrows another dataset's prepared surface for the body. The panel needs
+  // the marker to publish that dataset's legend beside this one's; without it the body is drawn in an unexplained scale.
+  const volume = lens.volume === undefined ? undefined : object(lens.volume, 'lens volume');
   return { id: text(lens.id, 'lens id'), label, thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
     ...(noData === undefined ? {} : { noData }),
+    ...(volume === undefined ? {} : { volume: { objectId: text(volume.objectId, 'volume object'), lensId: text(volume.lensId, 'volume lens'), surface: text(volume.surface, 'volume surface') } }),
     facts: lens.facts === undefined ? undefined : facts(lens.facts), legend: legend(lens.legend, label) };
 }
 
