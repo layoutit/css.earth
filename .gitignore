@@ -154,6 +154,10 @@ src/objects/*/source/**/*.bpc
 !src/objects/*/source/science/geology-*/*.gdb.zip
 !src/objects/*/source/science/geology-*/Screenshot *.png
 
+# SMC compact replay inputs: small PNGs prepare:nebulae needs to rebuild the lens bank and the neutral emission volume.
+!src/objects/smc/source/compact/lenses/*/*.png
+!src/objects/smc/source/compact/neutral/slices/*/*.png
+
 # Native Mathilde map retained as orientation evidence.
 !src/objects/mathilde/source/maps/253mathm.fit
 
