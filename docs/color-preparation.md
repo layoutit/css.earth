@@ -151,6 +151,15 @@ the extended light of the object on it.
 
 Two routes extend this. Two bands display as red and blue, with their mean as green, following the [CDS DSS2 colour survey](https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json). Bands without a documented flux calibration, the DSS2 photographic plates and the ESASky Herschel HiPS, keep `toMJyPerSr: null` and record their levels in relative source units. Dividing by each band's range means the image looks the same either way. The missing calibration only limits what the recorded levels can claim.
 
+JWST bands come from MAST's level-3 mosaics (the pipeline's `i2d` products). They are already in MJy/sr, so the route applies no
+factor, and it checks that the product's instrument, filter and pupil match the band it is pinned for. NIRCam records its
+long-wavelength narrow filters as filter F444W with the narrow filter in the pupil wheel, so F405N and F470N are matched
+that way. A mosaic is usually rotated against north, so it is resampled rather than flipped: each grid pixel is the mean
+of a few bilinear samples of the mosaic, enough to cover the grid pixel, and a grid pixel any of whose samples falls
+outside the exposures is missing. Only the mosaic rows the grid covers are read, and the pin is checked by streaming, so a
+674 MB product costs about 0.6 GB of memory and a few seconds. The draft recipe names the product; the
+[author](../tools/objects/observation/author-sky-bands.mts) downloads and pins it.
+
 ## Evidence must match the claim
 
 Check native band identities, units and registration separately from display

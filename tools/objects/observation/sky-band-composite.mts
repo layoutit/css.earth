@@ -3,12 +3,15 @@
  * bands, a grid, one background and one peak percentile for every band, and one common display.
  * Each band is divided by its own measured range, the usual survey false-colour practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
-import { sha256 } from '../../../src/platform/sha256.mts';
-import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { createWriteStream } from 'node:fs';
+import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
-import { readFitsImage } from '../../fits.mts';
-import { skyDisplayRaster, skyImageAxes } from '../../fits-sky.mts';
+import { readFitsFileHdus, readFitsFileRegion, readFitsImage } from '../../fits.mts';
+import { skyDisplayRaster, skyImageAxes, skyProjection } from '../../fits-sky.mts';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '../color-transfer.mts';
 import { maskSaturatedStars } from './plate-saturation.mts';
@@ -21,11 +24,14 @@ const WISE = 'https://wise2.ipac.caltech.edu/docs/release/allsky/expsup/sec2_3f.
 const IRAC = 'https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/46/';
 const DSS = 'https://archive.stsci.edu/dss/';
 const HERSCHEL_HIPS = 'https://alasky.cds.unistra.fr/MocServer/query?ID=ESAVO%2FP%2FHERSCHEL%2F';
+const JWST_UNITS = 'https://jwst-pipeline.readthedocs.io/en/latest/jwst/photom/main.html';
+export const MAST_PRODUCT_URL = 'https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/';
 
 interface SkyBand {
   readonly label: string;
   /** WISE HiPS carry a separate level per atlas tile (measured), so WISE is mosaicked from the atlas tiles. */
-  readonly acquisition: { readonly kind: 'hips2fits'; readonly hips: string } | { readonly kind: 'wise-atlas'; readonly band: WiseBand };
+  readonly acquisition: { readonly kind: 'hips2fits'; readonly hips: string } | { readonly kind: 'wise-atlas'; readonly band: WiseBand } |
+    { readonly kind: 'mast-product'; readonly instrument: 'NIRCAM' | 'MIRI'; readonly filter: string; readonly pupil?: string };
   /** Multiply a source value (DN or MJy/sr) to get diffuse surface brightness in MJy/sr; null when the
    * published product has no documented flux calibration, so values stay in relative source units. */
   readonly toMJyPerSr: number | null;
@@ -51,7 +57,24 @@ export const SKY_BANDS: Readonly<Record<string, SkyBand>> = Object.freeze({
   PACS100: herschel('Herschel PACS 100 µm', 'PACS100'),
   PACS160: herschel('Herschel PACS 160 µm', 'PACS160'),
   SPIRE250: herschel('Herschel SPIRE 250 µm', 'SPIRE-250'),
+  'NIRCAM-F090W': jwst('JWST NIRCam F090W 0.90 µm', 'NIRCAM', 'F090W', 'CLEAR'),
+  'NIRCAM-F187N': jwst('JWST NIRCam F187N 1.87 µm (Paschen α)', 'NIRCAM', 'F187N', 'CLEAR'),
+  'NIRCAM-F212N': jwst('JWST NIRCam F212N 2.12 µm (H₂ 1-0 S(1))', 'NIRCAM', 'F212N', 'CLEAR'),
+  'NIRCAM-F356W': jwst('JWST NIRCam F356W 3.56 µm', 'NIRCAM', 'F356W', 'CLEAR'),
+  'NIRCAM-F405N': jwst('JWST NIRCam F405N 4.05 µm (Brackett α)', 'NIRCAM', 'F444W', 'F405N'),
+  'NIRCAM-F444W': jwst('JWST NIRCam F444W 4.44 µm', 'NIRCAM', 'F444W', 'CLEAR'),
+  'NIRCAM-F470N': jwst('JWST NIRCam F470N 4.71 µm', 'NIRCAM', 'F444W', 'F470N'),
+  'MIRI-F770W': jwst('JWST MIRI F770W 7.7 µm', 'MIRI', 'F770W'),
+  'MIRI-F1130W': jwst('JWST MIRI F1130W 11.3 µm', 'MIRI', 'F1130W'),
+  'MIRI-F1280W': jwst('JWST MIRI F1280W 12.8 µm', 'MIRI', 'F1280W'),
+  'MIRI-F1800W': jwst('JWST MIRI F1800W 18 µm', 'MIRI', 'F1800W'),
 });
+/** JWST level-3 mosaics as MAST serves them: the pipeline's resampled i2d product, already surface brightness in MJy/sr.
+ * NIRCam's narrow filters in the long-wave pupil wheel are recorded as FILTER F444W with the narrow filter as PUPIL. */
+function jwst(label: string, instrument: 'NIRCAM' | 'MIRI', filter: string, pupil?: string): SkyBand {
+  return { label, acquisition: { kind: 'mast-product', instrument, filter, ...(pupil ? { pupil } : {}) }, toMJyPerSr: 1, reference: JWST_UNITS,
+    calibration: 'JWST pipeline level-3 i2d SCI extension in MJy/sr, calibrated by the pipeline\u2019s photom step; used as delivered.' };
+}
 function wise(label: string, band: WiseBand, janskyPerDn: number): SkyBand {
   return { label, acquisition: { kind: 'wise-atlas', band }, toMJyPerSr: janskyPerDn / WISE_ATLAS_PIXEL_SR / 1e6, reference: WISE,
     calibration: `AllWISE atlas DN x ${janskyPerDn} Jy/DN / 1.375 arcsec atlas pixel. No colour correction: it depends on the unknown spectrum.` };
@@ -75,7 +98,8 @@ function herschel(label: string, hips: string): SkyBand {
 }
 
 type Pin = { readonly path: string; readonly sha256: string };
-export type SkyBandInput = { readonly band: string; readonly sha256: string; readonly bytes: number } | { readonly band: string; readonly tiles: Pin };
+export type SkyBandInput = { readonly band: string; readonly sha256: string; readonly bytes: number } | { readonly band: string; readonly tiles: Pin } |
+  { readonly band: string; readonly product: string; readonly sha256: string; readonly bytes: number };
 export interface SkyBandComposite {
   readonly schema: 'cssearth-sky-band-composite@1';
   readonly grid: SkyGrid;
@@ -114,6 +138,12 @@ export function parseSkyBandComposite(value: unknown): SkyBandComposite {
       const bytes = requireFiniteNumber(band.bytes, 'Band bytes');
       if (!Number.isSafeInteger(bytes) || bytes < 2880) throw new TypeError(`Invalid ${id} byte count.`);
       return { band: id, sha256: digest(band.sha256, `${id} sha256`), bytes };
+    }
+    if (route?.acquisition.kind === 'mast-product' && Object.keys(band).sort().join() === 'band,bytes,product,sha256') {
+      const product = requireString(band.product, `${id} product`), bytes = requireFiniteNumber(band.bytes, 'Band bytes');
+      if (!/^jw\d{5}-[a-z0-9]+_t\d{3}_(?:nircam|miri)_[a-z0-9-]+_i2d\.fits$/u.test(product)) throw new TypeError(`${id}: not a JWST level-3 i2d product name.`);
+      if (!Number.isSafeInteger(bytes) || bytes < 2880) throw new TypeError(`Invalid ${id} byte count.`);
+      return { band: id, product, sha256: digest(band.sha256, `${id} sha256`), bytes };
     }
     if (route?.acquisition.kind === 'wise-atlas' && Object.keys(band).sort().join() === 'band,tiles') {
       const tiles = requireRecord(band.tiles, 'Tile list pin');
@@ -173,15 +203,93 @@ function checkHips2fits(header: Record<string, unknown>, cards: readonly string[
     throw new Error(`${hips}: FITS history does not name this HiPS.`);
 }
 
+/** Download a MAST product into the cache by streaming, never holding it whole, and return its pin; the file is stored under
+ * its own digest. `expected` refuses bytes that differ from an existing pin. */
+export async function acquireMastProduct(product: string, cache: string, expected?: { sha256: string; bytes: number }) {
+  const url = `${MAST_PRODUCT_URL}${product}`, response = await fetch(url, { signal: AbortSignal.timeout(3_600_000) });
+  if (!response.ok || !response.body) throw new Error(`MAST download failed: ${response.status} ${url}`);
+  const part = resolve(cache, 'mast', `${product}.part`);
+  await mkdir(dirname(part), { recursive: true });
+  await pipeline(Readable.fromWeb(response.body as import('node:stream/web').ReadableStream), createWriteStream(part));
+  const pin = await sha256File(part);
+  if (expected && (pin.bytes !== expected.bytes || pin.sha256 !== expected.sha256)) { await rm(part, { force: true }); throw new Error(`Changed MAST product: ${url}`); }
+  await rename(part, resolve(cache, 'mast', `${pin.sha256}.fits`));
+  return pin;
+}
+
+/** A pinned MAST product in the cache, downloaded when missing; hashed by streaming either way. */
+async function mastProductPath(input: { band: string; product: string; sha256: string; bytes: number }, cache: string) {
+  const path = resolve(cache, 'mast', `${input.sha256}.fits`);
+  let pin = await sha256File(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+  if (pin === null) pin = await acquireMastProduct(input.product, cache, input);
+  if (pin.bytes !== input.bytes || pin.sha256 !== input.sha256) throw new Error(`Changed sky band input: ${path}`);
+  return path;
+}
+
+/** A JWST level-3 mosaic resampled onto the grid: each grid pixel is the mean of k x k bilinear samples of the mosaic, k the
+ * ratio of the grid pixel to the mosaic pixel (at least 1, at most 8), so the grid averages rather than aliases. Only the
+ * mosaic rows the grid covers are read. NaN, which the pipeline writes where no exposure contributed, stays missing. */
+async function mastProductPlane(grid: SkyGrid, input: { band: string; product: string; sha256: string; bytes: number },
+  acquisition: { instrument: string; filter: string; pupil?: string }, cache: string) {
+  const path = await mastProductPath(input, cache), hdus = await readFitsFileHdus(path), primary = hdus[0]!.header;
+  if (primary.TELESCOP !== 'JWST' || primary.INSTRUME !== acquisition.instrument || primary.FILTER !== acquisition.filter ||
+      (acquisition.pupil !== undefined && primary.PUPIL !== acquisition.pupil))
+    throw new Error(`${input.product}: not a ${acquisition.instrument} ${acquisition.filter}${acquisition.pupil ? `/${acquisition.pupil}` : ''} product.`);
+  const sci = hdus.find(hdu => hdu.header.EXTNAME === 'SCI');
+  if (!sci || sci.header.BUNIT !== 'MJy/sr') throw new Error(`${input.product}: no SCI extension in MJy/sr.`);
+  const mosaic = skyProjection(sci.header), wcs = gridWcs(grid);
+  const onGrid = skyProjection({ CTYPE1: 'RA---TAN', CTYPE2: 'DEC--TAN', CRPIX1: wcs.referencePixel[0], CRPIX2: wcs.referencePixel[1],
+    CRVAL1: wcs.referenceValueDeg[0], CRVAL2: wcs.referenceValueDeg[1], CDELT1: wcs.scaleDeg[0], CDELT2: wcs.scaleDeg[1] });
+  const { width, height } = grid, [fullWidth, fullHeight] = sci.dimensions as [number, number];
+  const k = Math.min(8, Math.max(1, Math.ceil(onGrid.scaleArcsec / mosaic.scaleArcsec)));
+  // The mosaic pixels the grid's edge reaches bound the rows and columns to read.
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (let t = 0; t <= 1; t += 1 / 256) for (const [gx, gy] of [[t * width, 0], [t * width, height], [0, t * height], [width, t * height]] as const) {
+    const at = mosaic.pixelOf(...onGrid.skyOf(gx - 0.5, gy - 0.5));
+    if (at) { minX = Math.min(minX, at[0]); maxX = Math.max(maxX, at[0]); minY = Math.min(minY, at[1]); maxY = Math.max(maxY, at[1]); }
+  }
+  const plane = new Float32Array(width * height).fill(NaN);
+  const x0 = Math.max(0, Math.floor(minX) - 1), y0 = Math.max(0, Math.floor(minY) - 1);
+  const x1 = Math.min(fullWidth, Math.ceil(maxX) + 2), y1 = Math.min(fullHeight, Math.ceil(maxY) + 2);
+  if (x1 <= x0 || y1 <= y0) return { plane, k, region: null };
+  const region = await readFitsFileRegion(path, sci, { x0, y0, width: x1 - x0, height: y1 - y0 }), rw = region.width, rv = region.values;
+  const sample = (px: number, py: number) => {
+    const fx = px - x0, fy = py - y0, ix = Math.floor(fx), iy = Math.floor(fy);
+    if (ix < 0 || iy < 0 || ix + 1 >= rw || iy + 1 >= region.height) return NaN;
+    const a = fx - ix, b = fy - iy, o = iy * rw + ix;
+    return (1 - a) * (1 - b) * rv[o]! + a * (1 - b) * rv[o + 1]! + (1 - a) * b * rv[o + rw]! + a * b * rv[o + rw + 1]!;
+  };
+  for (let row = 0; row < height; row++) for (let column = 0; column < width; column++) {
+    // Top raster row first: FITS grid row height - 1 - row.
+    const fitsRow = height - 1 - row;
+    let sum = 0, count = 0;
+    for (let v = 0; v < k; v++) for (let u = 0; u < k; u++) {
+      const at = mosaic.pixelOf(...onGrid.skyOf(column - 0.5 + (u + 0.5) / k, fitsRow - 0.5 + (v + 0.5) / k));
+      const value = at ? sample(at[0], at[1]) : NaN;
+      if (Number.isFinite(value)) { sum += value; count++; }
+    }
+    if (count === k * k) plane[row * width + column] = sum / count;
+  }
+  return { plane, k, region: { x0, y0, width: x1 - x0, height: y1 - y0 }, header: primary, mosaicScaleArcsec: mosaic.scaleArcsec };
+}
+
 /** One band on the grid, in its source unit, top raster row first; NaN where nothing was observed. */
 async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyBandIo) {
   const route = SKY_BANDS[input.band]!, { width, height } = recipe.grid;
-  if ('sha256' in input && route.acquisition.kind === 'hips2fits') {
+  if ('sha256' in input && !('product' in input) && route.acquisition.kind === 'hips2fits') {
     const hips = route.acquisition.hips, image = readFitsImage(await hips2fitsBytes(recipe.grid, input, hips, io.cache), { maxDecodedBytes: 1024 ** 3 });
     checkHips2fits(image.header, image.cards, hips, recipe.grid);
     const plane = skyDisplayRaster(Float32Array.from(image.values), width, height, skyImageAxes(image.header));
     return { plane, acquisition: { kind: 'hips2fits', hips, url: skyBandUrl(recipe.grid, hips), sha256: input.sha256, bytes: input.bytes,
       limits: 'CDS hips2fits interpolates HiPS pixels by an undocumented method.' } };
+  }
+  if ('product' in input && route.acquisition.kind === 'mast-product') {
+    const { plane, k, region, header, mosaicScaleArcsec } = await mastProductPlane(recipe.grid, input, route.acquisition, io.cache);
+    return { plane, acquisition: { kind: 'mast-product', product: input.product, url: `${MAST_PRODUCT_URL}${input.product}`, sha256: input.sha256, bytes: input.bytes,
+      instrument: route.acquisition.instrument, filter: route.acquisition.filter, ...(route.acquisition.pupil ? { pupil: route.acquisition.pupil } : {}),
+      ...(header ? { program: header.PROGRAM, observed: header['DATE-BEG'], pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX } : {}),
+      mosaicPixelArcsec: mosaicScaleArcsec ?? null, samplesPerAxis: k, mosaicRegion: region,
+      limits: 'Each grid pixel is the mean of k x k bilinear samples of the mosaic; a grid pixel any of whose samples falls outside the exposures is missing. The mosaic is used as the JWST pipeline calibrated it, including its astrometry.' } };
   }
   if ('tiles' in input && route.acquisition.kind === 'wise-atlas') {
     const listBytes = await io.input(input.tiles.path);

@@ -15,7 +15,7 @@ const run = (args: string[]) => {
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 };
-const unit = ['tools/fits.test.mts', 'tools/fits.oracle.test.mts', 'tools/fits-sky.test.mts', 'tools/fits-sky.oracle.test.mts', 'tools/fits-rice.oracle.test.mts',
+const unit = ['tools/fits.test.mts', 'tools/fits.oracle.test.mts', 'tools/fits-sky.test.mts', 'tools/fits-sky.oracle.test.mts', 'tools/fits-sky-projection.oracle.test.mts', 'tools/fits-rice.oracle.test.mts',
   'tools/objects/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tools/objects/observation/wise-atlas-mosaic.oracle.test.mts',
   'tools/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'tools/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
