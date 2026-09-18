@@ -1,0 +1,319 @@
+{
+  "schema": "cssspice-liciacube-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "liciacube-naif0012-tls",
+      "path": "lsk/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/lsk/naif0012.tls",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-licia-sclk-0002-tsc",
+      "path": "sclk/licia_sclk_0002.tsc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/sclk/licia_sclk_0002.tsc",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 1561,
+      "expectedSha256": "9237587c12beeb140881d6c79d274af7b29f81935d6a9b25a06602e03d8eeab7",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-pck00010-tpc",
+      "path": "pck/pck00010.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/pck00010.tpc",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 126143,
+      "expectedSha256": "59468328349aa730d18bf1f8d7e86efe6e40b75dfb921908f99321b3a7a701d2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-didymos-system-15-tpc",
+      "path": "pck/didymos_system_15.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/pck/didymos_system_15.tpc",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 7968,
+      "expectedSha256": "c36bf56a5f93cb1f4ddc1eb09623a628b82ac225bb08e86c8a34c03cf7355600",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-licia-006-tf",
+      "path": "fk/licia_006.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/fk/licia_006.tf",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 17002,
+      "expectedSha256": "c8567f2b936a11301a6efe08f62afa2a1fce535ea85e832053a0629f97200a11",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-didymos-system-007-tf",
+      "path": "fk/didymos_system_007.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/fk/didymos_system_007.tf",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 17325,
+      "expectedSha256": "3bd7214663c830018d1db80587976fc03b149b206a585f146146f0f612c30d57",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-licia-pl-005-ti",
+      "path": "ik/licia_pl_005.ti",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/ik/licia_pl_005.ti",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 13466,
+      "expectedSha256": "41e64433d0cdd8fda0138657958cea4179b0d4bda95f271783f75af599cae8a6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-de430-bsp",
+      "path": "spk/de430.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/de430.bsp",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 119741440,
+      "expectedSha256": "6e1b277c5f07135a84950604b83e56b736be696a7f3560bcddb1d4aeb944fca1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-didymos-barycenter-s205-v01-bsp",
+      "path": "spk/didymos_barycenter_s205_v01.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/didymos_barycenter_s205_v01.bsp",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 236544,
+      "expectedSha256": "e627aa63662e4700ae3590d6be2e740fcbc9b4b8fd11de9aa53ae8ee111ce69a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-didymos-system-s542-v01-bsp",
+      "path": "spk/didymos_system_s542_v01.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/didymos_system_s542_v01.bsp",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 51214336,
+      "expectedSha256": "6a5d9fe10131d43a941fc6c71424e8a3207e4d5ade8f0a57be3d974118bb6ae6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-dart-2022-231-2022-269-rec-v03-bsp",
+      "path": "spk/dart_2022_231_2022_269_rec_v03.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/dart_2022_231_2022_269_rec_v03.bsp",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 11256832,
+      "expectedSha256": "0014277e927ffe6191b1404497d3ad5011eb67121ef248f5959a25c1b3ac632f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-licia-2022-254-2023-091-rec-v04-bsp",
+      "path": "spk/licia_2022_254_2023_091_rec_v04.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/spk/licia_2022_254_2023_091_rec_v04.bsp",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 98760704,
+      "expectedSha256": "a52f8c5525044c940217f9ef86d19ca6756173fb9317d92a7323fdd44202aa29",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "liciacube-licia-2022-254-2022-276-rec-v02-bc",
+      "path": "ck/licia_2022_254_2022_276_rec_v02.bc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/dart/dart_spice/spice_kernels/ck/licia_2022_254_2022_276_rec_v02.bc",
+      "credit": "NASA/JPL NAIF; DART project SPICE kernels, including LICIACube",
+      "license": "Public NASA mission data; retain the NAIF and DART project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire liciacube; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 13279232,
+      "expectedSha256": "03d92605d9f6625c28121ee70c5c3c61f7fa069a8e62212dd059be0cbb1babb1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dimorphos-dart-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/liciacube/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": []
+}

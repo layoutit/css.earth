@@ -1,0 +1,37 @@
+{
+  "id": "source-didymos-didymos-luke-1664234235-xml",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Didymos · didymos luke 1664234235 xml",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-liciacube:luke_calibrated-v1.0/final/liciacube_luke_l2_1664234235_00005_01.xml",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/didymos/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/16"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ASI/LICIACube team; NASA/JPL-Caltech DART; PDS Small Bodies Node",
+      "scope": "The didymos luke 1664234235 xml input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA/ASI mission data released through the PDS Small Bodies Node; retain the credit.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
