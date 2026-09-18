@@ -54,3 +54,16 @@ test('--keep-bindings refuses a copy of Mimas whose system node text was hand-ed
       descriptorPath: resolve(stage, 'object.json') }, { keepBindings: true }), /--keep-bindings refused/);
   } finally { await rm(stage, { recursive: true, force: true }); }
 });
+
+test('--keep-bindings finalizes an unedited copy of Mimas normally', async () => {
+  const root = resolve(import.meta.dirname, '../..'), objectDirectory = resolve(root, 'src/objects/mimas');
+  const runtime: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8'));
+  const stage = await mkdtemp(resolve(tmpdir(), 'cssearth-finalization-keep-'));
+  try {
+    const preparedDirectory = resolve(stage, 'prepared'); await mkdir(preparedDirectory);
+    await copyFile(resolve(objectDirectory, 'prepared/scene.json'), resolve(preparedDirectory, 'scene.json'));
+    const finalized = await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
+      descriptorPath: resolve(stage, 'object.json') }, { keepBindings: true });
+    assert.deepEqual(finalized.definition, runtime);
+  } finally { await rm(stage, { recursive: true, force: true }); }
+});
