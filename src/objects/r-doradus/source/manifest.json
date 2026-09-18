@@ -300,8 +300,8 @@
     },
     {
       "path": "reference/alma-band8-restored-vs-archive.png",
-      "expectedBytes": 26923,
-      "expectedSha256": "64cd11cd124bccadf54679a053535c2a1d5d4bfd31e14629593d309f531428c2",
+      "expectedBytes": 33899,
+      "expectedSha256": "51dd498b6ee46fbb027f1c46f899dd713dd8b351174a8753564279ea5f7fcc49",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the band 8 image this package restored from the raw ASDM beside the archive delivery, from the ALMA reduction route (pull request 302). The image arrived with that route; this entry declares it so the package passes its own source coverage."
