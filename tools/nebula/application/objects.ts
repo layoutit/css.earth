@@ -19,6 +19,22 @@ import { prepareVolumeImpostors } from '../../../src/renderers/css/preparation/v
 import type { PreparedVolumeLens } from '../../../src/renderers/css/volume/prepared-volume-lenses.js';
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
+// The staged bake directory embeds this process's pid so two concurrent bakes
+// never collide on disk; that name must never leak into recorded provenance,
+// or every bake of the same object would produce a different `lenses.json`
+// hash. Recorded paths substitute a fixed, reproducible placeholder instead.
+const STAGING_DIRECTORY_NAME = /\.prepared-\d+(?=[\\/])/;
+export function sanitizeVolumeProvenance<T extends { provenance: unknown }>(volume: T): T {
+  const provenance = volume.provenance;
+  if (!provenance || typeof provenance !== 'object' || Array.isArray(provenance)) return volume;
+  const sourceVolume = (provenance as Record<string, unknown>).sourceVolume;
+  if (!sourceVolume || typeof sourceVolume !== 'object' || Array.isArray(sourceVolume)) return volume;
+  const path = (sourceVolume as Record<string, unknown>).path;
+  if (typeof path !== 'string') return volume;
+  const stable = path.replace(STAGING_DIRECTORY_NAME, '.prepared-compact');
+  if (stable === path) return volume;
+  return { ...volume, provenance: { ...provenance, sourceVolume: { ...sourceVolume, path: stable } } };
+}
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
 const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v)) throw new TypeError('Expected finite nebula delivery value.'); return v; };
@@ -108,7 +124,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     const add = async (id: string,label: string,sourceUrl: string,volumePath: string,volumeSha: string,
       frame: ReturnType<typeof embedNebulaFrame>,stars: PreparedVolumeLens['stars'],anchorPoints?: PreparedVolumeLens['stars']['points']) => {
       const raw = record(JSON.parse((await pinned(root,{path:volumePath,sha256:volumeSha})).toString()));
-      const volume = validatePreparedCssVolume(raw.data ?? raw);
+      const volume = sanitizeVolumeProvenance(validatePreparedCssVolume(raw.data ?? raw));
       for (const resource of volume.resources) {
         const bytes = await pinned(dirname(local(root,volumePath)),{path:resource.path,sha256:resource.sha256});
         await put(local(staging,`${id}/${resource.path}`),bytes);
