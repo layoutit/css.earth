@@ -30,11 +30,57 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
       <ul><li hidden><a class="planet-destination-result"><span class="planet-destination-result-name"></span><span class="planet-destination-result-context"></span></a></li></ul></details></div></div>
   </nav><section class="planet-information-panel">Saturn</section><!--search-shell:end-->
   <main class="planet-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
+// The one shared, content-addressed catalogue fragment (`dist/catalogue/<sha>.html`):
+// the same rows a page used to inline, minus the div they lived in.
+const catalogueRowsHtml = `<ul class="planet-object-list"><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li>` +
+  `<li class="planet-object-chunk"><ul class="planet-object-chunk-list">${row('Saturn', 'planet')}${row('Titan', 'satellite')}${row('M42', 'nebula', ['orion nebula', 'm42'])}</ul></li></ul>`;
+const cataloguePin = { url: `/catalogue/${createHash('sha256').update(catalogueRowsHtml).digest('hex')}.html`,
+  sha256: createHash('sha256').update(catalogueRowsHtml).digest('hex'), bytes: Buffer.byteLength(catalogueRowsHtml) };
+// A production page: the rows ship empty, referencing the fragment above instead of inlining it.
+const htmlNoCatalogue = html
+  .replace('<div id="object-category-results">',
+    `<div id="object-category-results" data-catalogue-src="${cataloguePin.url}" data-catalogue-sha256="${cataloguePin.sha256}" data-catalogue-bytes="${cataloguePin.bytes}">`)
+  .replace(/<ul>.*?<\/ul>(?=<p class="planet-object-empty")/su,
+    '<ul class="planet-object-list" data-catalogue-list></ul><p class="planet-object-loading" data-catalogue-loading>Loading celestial objects…</p>');
+assert.ok(htmlNoCatalogue.includes('data-catalogue-list'), 'fixture setup must strip the inline rows');
+assert.ok(!htmlNoCatalogue.includes('planet-object-item'), 'fixture setup must strip every inline row');
 const fetchIndex: typeof fetch = async input => {
   assert.equal(String(input), `${origin}/features/index.json`);
   return new Response(index);
 };
 const visibleNames = (document: Document) => [...document.querySelectorAll('.planet-object-item:not([hidden]) a')].map(element => element.textContent);
+const fetchIndexAndCatalogue: typeof fetch = async input => {
+  const url = String(input);
+  if (url === `${origin}${cataloguePin.url}`) return new Response(catalogueRowsHtml);
+  return fetchIndex(input);
+};
+
+test('a page that ships its catalogue empty has it fetched and merged before matching', async () => {
+  const seen: string[] = [];
+  const fetcher: typeof fetch = async input => { seen.push(String(input)); return fetchIndexAndCatalogue(input); };
+  const document = parseHTML(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), fetcher)).document;
+  assert.deepEqual(visibleNames(document), ['Saturn']);
+  assert.equal(document.querySelectorAll('.planet-object-item').length, 3);
+  assert.equal(document.querySelector<HTMLElement>('[data-catalogue-loading]')?.hidden, true);
+  assert.ok(seen.includes(`${origin}${cataloguePin.url}`), 'the catalogue fragment was fetched');
+  // Re-rendering the merged document needs no second fetch: the rows are already there.
+  const again = await renderSearchResponse(await renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=titan', origin), fetcher), new URL('/saturn/?q=titan', origin), fetchIndex);
+  assert.deepEqual(visibleNames(parseHTML(again).document), ['Titan']);
+});
+
+test('a merged catalogue fragment is rejected on a byte or hash drift, like every other pinned index', async () => {
+  const wrongBytes: typeof fetch = async input => String(input) === `${origin}${cataloguePin.url}` ? new Response(`${catalogueRowsHtml}<!-- extra -->`) : fetchIndex(input);
+  await assert.rejects(renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongBytes), /size drifted/u);
+  const wrongHash: typeof fetch = async input => String(input) === `${origin}${cataloguePin.url}` ? new Response('x'.repeat(catalogueRowsHtml.length)) : fetchIndex(input);
+  await assert.rejects(renderSearchResponse(htmlNoCatalogue, new URL('/saturn/?q=saturn', origin), wrongHash), /identity drifted/u);
+});
+
+test('a page that already inlines its catalogue never fetches the fragment', async () => {
+  const seen: string[] = [];
+  const fetcher: typeof fetch = async input => { seen.push(String(input)); return fetchIndex(input); };
+  await renderSearchResponse(html, new URL('/saturn/?q=saturn', origin), fetcher);
+  assert.deepEqual(seen, [`${origin}/features/index.json`]);
+});
 
 test('native search uses shared matching, retains every row, and preserves the scene/head bytes', async () => {
   for (const [query, names] of [['saturn', ['Saturn']], ['orion', ['M42']], ['planets', ['Saturn']], ['unknown', []]] as const) {

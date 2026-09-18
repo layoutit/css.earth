@@ -74,7 +74,7 @@ export async function assertRenderedObjectControls(page: BrowserPage, profile: O
     { name: "motion", kind: "toggle" },
     ...(speed ? [{ name: speed.name, kind: speed.kind }] : []),
     ...(shadows ? [{ name: shadows.name, kind: shadows.kind }] : []),
-    { name: "skyContrast", kind: "toggle" },
+    { name: "skyContrast", kind: "toggle" }, { name: "minimap", kind: "toggle" },
     { name: "heliosphere", kind: "toggle" }, { name: "illustrationModels", kind: "toggle" }, { name: "asteroidBodies", kind: "toggle" }, { name: "asteroidOrbits", kind: "toggle" }, { name: "asteroidLabels", kind: "toggle" },
     ...remainingSettings.map(({ name, kind }) => ({ name, kind })),
   ];
@@ -82,7 +82,8 @@ export async function assertRenderedObjectControls(page: BrowserPage, profile: O
     lensPanelCount: document.querySelectorAll('.planet-lenses nav[aria-label="Datasets"]:has(button[name="dataset"])').length,
     settingsPanelCount: document.querySelectorAll(".planet-settings").length,
     lenses: [...document.querySelectorAll<HTMLButtonElement>('.planet-lenses button[name="dataset"]')].map((button) => button.value),
-    settings: [...document.querySelectorAll(".planet-settings input, .planet-settings button")]
+    // Named controls only, as the object control binding selects them: "Apply settings" submits the form and has no name.
+    settings: [...document.querySelectorAll(".planet-settings input[name], .planet-settings button[name]")]
       .map((input) => {
         if (input instanceof HTMLButtonElement) return { name: input.name, kind: input.type === "button" ? "cycle" : "unsupported" };
         if (input instanceof HTMLInputElement) return { name: input.name, kind: input.type === "range" ? "cycle" : input.type === "checkbox" ? "toggle" : "unsupported" };

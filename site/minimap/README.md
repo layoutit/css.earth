@@ -1,6 +1,14 @@
 # Spatial minimap
 
-Mounted by the shared world context on normal URLs and in production builds.
+A setting, off by default: **Settings → Minimap**. The shared world context owns
+it through [`minimap-setting.mts`](minimap-setting.mts). While the setting is off
+the page downloads no minimap code or prepared points, builds no markers and
+projects nothing. The first switch on imports this module, builds the markers
+and draws the current view. Switching it off again keeps the retained markers,
+hides them in CSS and stops projection. The preference lasts for the visit and
+carries across body changes; it is not stored. Phones never draw the minimap, so
+they do not offer the setting. With the minimap hidden, the dataset context
+cards may use its corner.
 Prepared assets are refreshed after object JSON preparation in `predev` and `prebuild`.
 
 Bottom-right above the status bar: 190px on desktop, 140px on narrow screens.
@@ -13,7 +21,7 @@ neighborhood, inset to keep each full marker inside the minimap. The grid is
 the middle plane: dots retain their height above and below it, including when
 the plane is edge-on. The overlay passes input
 through to the main scene. No atmospheric circle, camera marker, card, visible
-labels, separate camera or settings.
+labels or separate camera. Its one setting is the switch above.
 
 Registered bodies from the prepared world context retain their physical positions; no distance
 compression or artificial separation is applied. Rings have fixed physical
