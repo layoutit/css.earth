@@ -8,6 +8,9 @@ export const INDEX_URL = '/__cssearth-runtime-index__';
 export const RUNTIME_BUDGET_BYTES = 512 * 1024 * 1024;
 // Leave room for other origins' storage on devices with small quotas.
 export const QUOTA_SHARE = 0.5;
+export const STORE_CONCURRENCY = 4;
+export const STORE_MESSAGE = 'cssearth-store';
+const STORE_BATCH_LIMIT = 2000;
 
 // Query parameters that route a page through the search function. Offline, the
 // same page without them is the best available answer.
@@ -35,9 +38,14 @@ export function routeRequest({ url, method, scope }: RouteInput): RequestRoute {
     return { kind: 'bypass' };
   }
   // Search answers are computed per request; only the plain page is kept.
-  if (SEARCH_PARAMETERS.some(name => target.searchParams.has(name))) return { kind: 'network-only' };
+  if (isPagePath(path) && SEARCH_PARAMETERS.some(name => target.searchParams.has(name))) return { kind: 'network-only' };
   if (isImmutablePath(path) && !target.search) return { kind: 'immutable' };
   return { kind: 'network-first' };
+}
+
+// The page routes netlify/edge-functions/search-route.ts sends to search.
+export function isPagePath(path: string): boolean {
+  return path === '/' || /^\/[a-z][a-z0-9-]*\/?$/u.test(path);
 }
 
 // Bundler output and prepared transports carry their content hash in the name,
@@ -59,6 +67,17 @@ export interface IndexEntry {
   url: string;
   bytes: number;
   used: number;
+  validator?: string;
+}
+
+// The entity tag, or failing that the modification time, identifies the bytes
+// already stored, so an unchanged response is never read or written again.
+export function responseValidator(headers: { get(name: string): string | null }): string | undefined {
+  const etag = headers.get('etag');
+  if (etag) return `etag:${etag}`;
+  const modified = headers.get('last-modified');
+  const length = headers.get('content-length');
+  return modified && length ? `modified:${modified}:${length}` : undefined;
 }
 
 export function runtimeBudget(quota: number | undefined): number {
@@ -84,5 +103,14 @@ export function parseIndex(value: unknown): IndexEntry[] {
   return value.filter((entry): entry is IndexEntry => typeof entry === 'object' && entry !== null
     && typeof entry.url === 'string'
     && Number.isSafeInteger(entry.bytes) && entry.bytes >= 0
-    && Number.isFinite(entry.used));
+    && Number.isFinite(entry.used)
+    && (entry.validator === undefined || typeof entry.validator === 'string'));
+}
+
+// Pages send the same-origin files they loaded; anything else is ignored.
+export function parseStoreMessage(value: unknown): string[] | null {
+  if (typeof value !== 'object' || value === null || !('type' in value) || value.type !== STORE_MESSAGE) return null;
+  if (!('urls' in value) || !Array.isArray(value.urls) || value.urls.length > STORE_BATCH_LIMIT) return null;
+  const urls = value.urls.filter((url): url is string => typeof url === 'string');
+  return urls.length === value.urls.length ? urls : null;
 }

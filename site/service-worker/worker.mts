@@ -1,7 +1,7 @@
 /// <reference lib="webworker" />
 import {
-  evictionPlan, INDEX_CACHE, INDEX_URL, offlinePageFallback, parseIndex, routeRequest,
-  RUNTIME_CACHE, runtimeBudget, type IndexEntry,
+  evictionPlan, INDEX_CACHE, INDEX_URL, offlinePageFallback, parseIndex, parseStoreMessage, responseValidator,
+  routeRequest, RUNTIME_CACHE, runtimeBudget, STORE_CONCURRENCY, type IndexEntry,
 } from './policy.mts';
 
 declare const self: ServiceWorkerGlobalScope;
@@ -64,13 +64,22 @@ function requestTrim(): Promise<void> {
   return trimming;
 }
 
-async function store(request: Request, response: Response) {
+async function store(url: string, response: Response) {
   // Partial, redirected and error responses would replay the wrong bytes offline.
   if (response.status !== 200 || response.type !== 'basic' || response.redirected) return;
+  const entries = await loadIndex();
+  const validator = responseValidator(response.headers);
+  const known = entries.get(url);
+  if (validator && known?.validator === validator) {
+    await response.body?.cancel();
+    known.used = Date.now();
+    scheduleIndexWrite();
+    return;
+  }
   const body = await response.arrayBuffer();
   const copy = new Response(body, { status: response.status, statusText: response.statusText, headers: response.headers });
-  await (await caches.open(RUNTIME_CACHE)).put(request.url, copy);
-  (await loadIndex()).set(request.url, { url: request.url, bytes: body.byteLength, used: Date.now() });
+  await (await caches.open(RUNTIME_CACHE)).put(url, copy);
+  entries.set(url, { url, bytes: body.byteLength, used: Date.now(), validator });
   scheduleIndexWrite();
   await requestTrim();
 }
@@ -89,20 +98,24 @@ async function offlineAnswer(request: Request): Promise<Response> {
   return page ?? Response.error();
 }
 
-async function networkFirst(event: FetchEvent, keep: boolean): Promise<Response> {
+// Copies what the page has just loaded. The browser's HTTP cache usually
+// answers, so this rarely touches the network.
+async function keep(url: string) {
+  const route = routeRequest({ url, method: 'GET', scope: self.registration.scope });
+  if (route.kind !== 'immutable' && route.kind !== 'network-first') return;
+  if (route.kind === 'immutable' && await cached(url)) return;
   try {
-    const response = await fetch(event.request);
-    if (keep) event.waitUntil(store(event.request, response.clone()));
-    return response;
+    await store(url, await fetch(url, { cache: 'force-cache', credentials: 'same-origin' }));
   } catch {
-    return offlineAnswer(event.request);
+    // The copy is best effort; the next visit tries again.
   }
 }
 
-async function cacheFirst(event: FetchEvent): Promise<Response> {
-  const hit = await cached(event.request.url);
-  if (hit) return hit;
-  return networkFirst(event, true);
+async function keepAll(urls: readonly string[]) {
+  const queue = [...urls];
+  await Promise.all(Array.from({ length: STORE_CONCURRENCY }, async () => {
+    for (let url = queue.shift(); url !== undefined; url = queue.shift()) await keep(url);
+  }));
 }
 
 self.addEventListener('install', () => { void self.skipWaiting(); });
@@ -115,11 +128,35 @@ self.addEventListener('activate', event => {
   })());
 });
 
+self.addEventListener('message', event => {
+  const urls = parseStoreMessage(event.data);
+  if (urls) event.waitUntil(keepAll(urls));
+});
+
+// Streaming responses through the worker costs about half a second per scene
+// load, even without copying them. So online subresources skip it entirely;
+// only page loads, one request each, always get the stored fallback. A page
+// load that falls back marks the network as down, because navigator.onLine can
+// still report a connection that no longer answers.
+let networkDown = false;
+
+async function page(request: Request): Promise<Response> {
+  try {
+    const response = await fetch(request);
+    networkDown = false;
+    return response;
+  } catch {
+    networkDown = true;
+    return offlineAnswer(request);
+  }
+}
+
 self.addEventListener('fetch', event => {
-  // Range requests and background fetches keep their native behaviour.
   if (event.request.headers.has('range')) return;
-  const route = routeRequest({ url: event.request.url, method: event.request.method, scope: self.registration.scope });
+  const { request } = event;
+  const navigation = request.mode === 'navigate';
+  if (!navigation && !networkDown && self.navigator.onLine) return;
+  const route = routeRequest({ url: request.url, method: request.method, scope: self.registration.scope });
   if (route.kind === 'bypass') return;
-  if (route.kind === 'immutable') event.respondWith(cacheFirst(event));
-  else event.respondWith(networkFirst(event, route.kind === 'network-first'));
+  event.respondWith(navigation ? page(request) : fetch(request).catch(() => offlineAnswer(request)));
 });

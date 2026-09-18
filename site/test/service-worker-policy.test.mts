@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { evictionPlan, offlinePageFallback, parseIndex, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
+import { evictionPlan, offlinePageFallback, parseIndex, parseStoreMessage, responseValidator, STORE_MESSAGE, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
 
 const scope = 'https://css.earth/';
 const route = (url: string, method = 'GET') => routeRequest({ url, method, scope }).kind;
@@ -26,6 +26,8 @@ test('search answers, other origins, writes and function calls are not kept', ()
   assert.equal(route('https://www.googletagmanager.com/gtag/js?id=G'), 'bypass');
   assert.equal(route('https://css.earth/moon/', 'POST'), 'bypass');
   assert.equal(route('https://css.earth/.netlify/functions/search?object=moon'), 'bypass');
+  // Only page routes go to search; the same names elsewhere are ordinary queries.
+  assert.equal(route('https://css.earth/_astro/chunk.js?v=4a1b'), 'network-first');
   assert.equal(route('https://css.earth/sw.js'), 'bypass');
 });
 
@@ -43,6 +45,19 @@ test('eviction removes the least recently used responses until the rest fit', ()
   assert.deepEqual(evictionPlan(entries, 120), []);
   assert.deepEqual(evictionPlan(entries, 80), ['b']);
   assert.deepEqual(evictionPlan(entries, 10), ['b', 'c', 'a']);
+});
+
+test('stored bytes are identified by entity tag, else by modification time and length', () => {
+  assert.equal(responseValidator(new Headers({ etag: 'W/"1-2"', 'last-modified': 'x', 'content-length': '1' })), 'etag:W/"1-2"');
+  assert.equal(responseValidator(new Headers({ 'last-modified': 'Fri', 'content-length': '9' })), 'modified:Fri:9');
+  assert.equal(responseValidator(new Headers({ 'last-modified': 'Fri' })), undefined);
+});
+
+test('the worker only accepts a list of URLs from the page', () => {
+  assert.deepEqual(parseStoreMessage({ type: STORE_MESSAGE, urls: ['https://css.earth/moon/'] }), ['https://css.earth/moon/']);
+  assert.equal(parseStoreMessage({ type: STORE_MESSAGE, urls: ['a', 1] }), null);
+  assert.equal(parseStoreMessage({ type: 'other', urls: [] }), null);
+  assert.equal(parseStoreMessage('store'), null);
 });
 
 test('the budget never exceeds half the storage quota', () => {
