@@ -1639,8 +1639,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 31082,
-      "expectedSha256": "8a48e63a66cbb78df843495463ed604f4c9224e0a4d1add1a49bda360eeb4612",
+      "expectedBytes": 31331,
+      "expectedSha256": "3677ced95d3166a4585b80bb94a18726aed54e03b7cb3889b8554f1e0a8378e9",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
     },
     {

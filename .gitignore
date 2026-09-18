@@ -115,6 +115,10 @@ src/objects/*/source/**/*.bpc
 !src/objects/*/source/material/*.png
 !src/objects/*/source/shape/*ellipsoid.tab
 !src/objects/*/source/shape/model.tab
+# Small uniform-disc reference spheres for unresolved stars: a deterministic
+# function of each body's checked-in measurements.json, kept as a committed
+# snapshot rather than an acquisition step.
+!src/objects/*/source/shape/uniform-disc.tab
 
 # Retained, physically scaled meshes used as preparation inputs.
 !src/objects/*/source/shape/model.obj
