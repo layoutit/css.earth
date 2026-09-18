@@ -108,8 +108,14 @@
         "shape-model"
       ],
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-r-doradus-r-doradus-observational-measurements",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/manifest.json@9ad342267dd0513ba6cae28ca66f5ceb2956483e#/inputs/3"
+          }
+        ]
       }
     },
     {
