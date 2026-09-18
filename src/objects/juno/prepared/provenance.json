@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "59568511aa524c7069f1635eba016479c81963671aaaa72772f025f28ce673be"
+    "sha256": "d2c6d1fb8eefdcf25a918f61c4fa05ea6bb455d8e9f576ec561a4f582049c9a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2487,7 +2487,7 @@
           {
             "catalogueId": "source-juno-juno-adam-shape",
             "role": "material",
-            "evidence": "src/objects/juno/source/manifest.json@0000000000000000000000000000000000000000#/inputs/35"
+            "evidence": "src/objects/juno/source/manifest.json@d9021e76689aa4945b17b9e34007568b17fd707f#/inputs/35"
           }
         ]
       },

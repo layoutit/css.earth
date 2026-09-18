@@ -62,11 +62,11 @@ the paper's model must be at our phase, one step from it, or better by less
 than the same-shape loss, which happens on nearly round outlines. Otherwise it
 refuses and names the column.
 
-![The weakest figure column of each body installed on 2026-09-18](sphere-survey-photographs.webp)
+![The weakest figure column of every survey lens](sphere-survey-photographs.webp)
 
-Above, each body installed on 2026-09-18 appears once, at the column where our
-outline overlaps the paper's model least, beside that column's same-shape
-ceiling. Read each overlap against its same-shape score. The numbers are
+Above, every survey lens appears once, at the column where our outline
+overlaps the paper's model least, with that column's overlap and its
+same-shape ceiling below it. Read each overlap against its same-shape score. The numbers are
 reported, not a gate, and the registration stage's verdict is reported beside
 them.
 
