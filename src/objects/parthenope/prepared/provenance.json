@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c703e4a1861bf482312e0bbe314819ff248513bc950d640334ac97d9e9260bf3"
+    "sha256": "0e3223e8f1f6a5a5929b6bad0481cfbb78e6d90970e2b2d23613ded48bf2f248"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -829,7 +829,7 @@
           {
             "catalogueId": "source-parthenope-parthenope-sphere-20180206022657",
             "role": "material",
-            "evidence": "src/objects/parthenope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/25"
+            "evidence": "src/objects/parthenope/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/25"
           }
         ]
       },
@@ -881,7 +881,7 @@
           {
             "catalogueId": "source-parthenope-parthenope-sphere-20180206023106",
             "role": "material",
-            "evidence": "src/objects/parthenope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/26"
+            "evidence": "src/objects/parthenope/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/26"
           }
         ]
       },
@@ -933,7 +933,7 @@
           {
             "catalogueId": "source-parthenope-parthenope-sphere-20180206023517",
             "role": "material",
-            "evidence": "src/objects/parthenope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/27"
+            "evidence": "src/objects/parthenope/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/27"
           }
         ]
       },
@@ -985,7 +985,7 @@
           {
             "catalogueId": "source-parthenope-parthenope-sphere-20180206023926",
             "role": "material",
-            "evidence": "src/objects/parthenope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/28"
+            "evidence": "src/objects/parthenope/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/28"
           }
         ]
       },
@@ -1037,7 +1037,7 @@
           {
             "catalogueId": "source-parthenope-parthenope-sphere-20180206024337",
             "role": "material",
-            "evidence": "src/objects/parthenope/source/manifest.json@0000000000000000000000000000000000000000#/inputs/29"
+            "evidence": "src/objects/parthenope/source/manifest.json@e40a119993c352411670e9be5722e069c2785ba8#/inputs/29"
           }
         ]
       },
