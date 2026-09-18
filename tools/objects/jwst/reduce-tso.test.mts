@@ -15,8 +15,8 @@ test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its cont
   // Three exposures of the visit, each split into ten segments.
   assert.deepEqual(pinned.segments.map(segment => /_(\d{5})-seg(\d{3})_/u.exec(segment.name)!.slice(1).join('/')), ['00001', '00002', '00003'].flatMap(exposure => Array.from({ length: 10 }, (_, i) => `${exposure}/${String(i + 1).padStart(3, '0')}`)));
   assert.equal(pinned.crdsContext, 'jwst_1535.pmap');
-  assert.equal(pinned.oracle.kind, 'eureka-light-curve-zip');
-  if (pinned.oracle.kind === 'eureka-light-curve-zip') assert.match(pinned.oracle.sha256, /^[0-9a-f]{64}$/u);
+  assert.equal(pinned.oracle?.kind, 'eureka-light-curve-zip');
+  if (pinned.oracle?.kind === 'eureka-light-curve-zip') assert.match(pinned.oracle.sha256, /^[0-9a-f]{64}$/u);
   for (const template of Object.values(pinned.stages)) {
     const text = await readFile(resolve(program, template), 'utf8');
     assert.doesNotMatch(text, /\/Users\//u, `${template} carries no local path`);
@@ -32,8 +32,8 @@ test('the HD 189733b MIRI eclipses pin their segments, Lally et al.\'s extractio
     assert.equal(pinned.segments.length, 7);
     assert.ok(pinned.segments.every(segment => segment.name.startsWith(`jw02021${observation}001_04103_00001-seg`)));
     assert.equal(pinned.segments.reduce((sum, segment) => sum + segment.bytes, 0), 6_379_456_320);
-    assert.equal(pinned.oracle.kind, 'deposit-files');
-    if (pinned.oracle.kind !== 'deposit-files') return;
+    assert.equal(pinned.oracle?.kind, 'deposit-files');
+    if (pinned.oracle?.kind !== 'deposit-files') return;
     assert.equal(pinned.oracle.files.length, files);
     assert.match(pinned.oracle.time, new RegExp(`^Eureka_eclipse${eclipse}_8mu_clipped-time\\.txt$`, 'u'));
     assert.equal(pinned.oracle.map, 'output_E.npy');
@@ -118,12 +118,13 @@ test('the HD 189733b MIRI eclipses reduced from raw reproduce Lally et al. (2025
 test('the TRAPPIST-1b phase-curve program pins the whole visit as MIRI photometry, with the authors\' control files', async () => {
   const pinned = await readProgram(resolve(import.meta.dirname, 'programs/trappist-1b-miri-3077'));
   assert.equal(pinned.mode, 'photometry');
-  assert.equal(pinned.segments.length, 70);
-  assert.equal(pinned.segments.reduce((sum, segment) => sum + segment.bytes, 0), 102_428_380_800);
+  // Both exposures of the visit: 70 segments of observation 1 and 38 of observation 2, 59 hours.
+  assert.equal(pinned.segments.length, 108);
+  assert.equal(pinned.segments.reduce((sum, segment) => sum + segment.bytes, 0), 157_373_441_280);
   // Photometry has one band: no channel light curves, so no Stage 4 channels file.
   assert.equal(pinned.stages.S4channels, undefined);
   assert.equal(pinned.crdsContext, 'jwst_1535.pmap');
-  assert.equal(pinned.oracle.kind, 'eureka-light-curve-zip');
+  assert.equal(pinned.oracle?.kind, 'eureka-light-curve-zip');
   for (const template of Object.values(pinned.stages)) {
     await access(resolve(import.meta.dirname, 'programs/trappist-1b-miri-3077', template));
   }

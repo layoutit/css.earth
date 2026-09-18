@@ -37,7 +37,9 @@ export interface TsoProgram {
   readonly mode: 'spectroscopy' | 'photometry';
   readonly stages: { readonly S1: string; readonly S2: string; readonly S3: string; readonly S4: string; readonly S4channels?: string };
   readonly segments: readonly Segment[];
-  readonly oracle: EurekaZipOracle | DepositFilesOracle;
+  /** The author's deposited light curve, when one exists. A visit whose authors deposited none is checked against published
+   * values instead, outside this reduction. */
+  readonly oracle?: EurekaZipOracle | DepositFilesOracle;
 }
 export interface EurekaZipOracle { readonly kind: 'eureka-light-curve-zip'; readonly url: string; readonly path: string; readonly bytes: number; readonly sha256: string; readonly lightCurve: string }
 export interface DepositFile { readonly path: string; readonly url: string; readonly bytes: number; readonly md5: string }
@@ -52,7 +54,7 @@ export interface DepositFilesOracle {
 export async function readProgram(directory: string): Promise<TsoProgram> {
   const record = requireRecord(JSON.parse(await readFile(resolve(directory, 'program.json'), 'utf8')) as unknown, 'program.json');
   if (record.schema !== 'cssearth-jwst-tso-program@1') throw new TypeError(`${directory}: unexpected program schema.`);
-  const stages = requireRecord(record.stages, 'stages'), oracle = requireRecord(record.oracle, 'oracle');
+  const stages = requireRecord(record.stages, 'stages');
   const segments = requireArray(record.segments).map(value => {
     const segment = requireRecord(value, 'segment');
     const name = requireString(segment.name);
@@ -68,7 +70,7 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
     stages: { S1: requireString(stages.S1), S2: requireString(stages.S2), S3: requireString(stages.S3), S4: requireString(stages.S4),
       ...(stages.S4channels === undefined ? {} : { S4channels: requireString(stages.S4channels) }) },
     segments,
-    oracle: parseOracle(oracle),
+    ...(record.oracle === undefined ? {} : { oracle: parseOracle(requireRecord(record.oracle, 'oracle')) }),
   };
 }
 
@@ -100,6 +102,9 @@ export function renderSettings(template: string, directories: { readonly topdir:
   return text;
 }
 
+/** Segments downloaded ahead of the batch being reduced. */
+const DOWNLOAD_AHEAD = 6;
+
 const exists = (path: string) => access(path).then(() => true, () => false);
 const sizeOf = (path: string) => stat(path).then(info => info.size, () => -1);
 
@@ -126,12 +131,6 @@ async function segmentFile(segment: Segment, raw: string, rawSources: readonly s
   }
   if (await sizeOf(target) !== segment.bytes) throw new Error(`${segment.name} did not download to its pinned ${segment.bytes} bytes.`);
   return target;
-}
-
-/** A batch's segments in place, three downloads at a time. */
-async function segmentFiles(segments: readonly Segment[], raw: string, rawSources: readonly string[]) {
-  const queue = [...segments];
-  await Promise.all(Array.from({ length: 3 }, async () => { for (let segment = queue.shift(); segment; segment = queue.shift()) await segmentFile(segment, raw, rawSources); }));
 }
 
 const md5File = (path: string) => new Promise<string>((done, fail) => {
@@ -265,10 +264,29 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     for (const directory of ['Stage3', 'Stage4', 'Stage4_channels']) await rm(resolve(work, directory), { recursive: true, force: true });
     await save();
   }
-  let fetching = batches[0] ? segmentFiles(batches[0], raw, rawSources) : Promise.resolve();
-  for (const [index, batch] of batches.entries()) {
-    await fetching;
-    fetching = batches[index + 1] ? segmentFiles(batches[index + 1]!, raw, rawSources) : Promise.resolve();
+  // Downloads run ahead of the reduction, three connections at a time, at most DOWNLOAD_AHEAD segments beyond the batch
+  // being reduced: MAST throttles each connection, and a one-segment batch would otherwise download on one.
+  const downloads = new Map(pending.map(segment => {
+    let settle!: { resolve: (path: string) => void; reject: (error: unknown) => void };
+    const promise = new Promise<string>((resolve, reject) => { settle = { resolve, reject }; });
+    promise.catch(() => {});
+    return [segment.name, { promise, ...settle }] as const;
+  }));
+  let reduced = 0, wake = () => {};
+  const downloader = (async () => {
+    const active = new Set<Promise<void>>();
+    for (const [index, segment] of pending.entries()) {
+      while (index - reduced >= DOWNLOAD_AHEAD + program.batchSegments || active.size >= 3) {
+        await (active.size >= 3 ? Promise.race(active) : new Promise<void>(done => { wake = done; }));
+      }
+      const slot = downloads.get(segment.name)!;
+      const tracked: Promise<void> = segmentFile(segment, raw, rawSources).then(slot.resolve, slot.reject).finally(() => active.delete(tracked));
+      active.add(tracked);
+    }
+    await Promise.all(active);
+  })();
+  for (const batch of batches) {
+    await Promise.all(batch.map(segment => downloads.get(segment.name)!.promise));
     const name = `batch${String(Object.keys(progress.steps).filter(key => key.startsWith('batch')).length + 1).padStart(2, '0')}`;
     const input = resolve(work, `Uncalibrated_${name}`);
     await mkdir(input, { recursive: true });
@@ -298,8 +316,10 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
       const target = resolve(raw, segment.name);
       if (!(await lstat(target)).isSymbolicLink()) await rm(target);
     }
+    reduced += batch.length;
+    wake();
   }
-  await fetching;
+  await downloader;
 
   // Stage 3 on every calibrated segment, then Stage 4 for the white light curve and, for a dispersed spectrum, the channels.
   const channelStage = program.stages.S4channels;
@@ -326,6 +346,7 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
     await python(toolchain, curves, COUNTS, [await findOne(resolve(work, 'Stage3'), /^S3_.*_SpecData\.h5$/u), 'ours-stellar-counts.csv'], resolve(work, 'export-counts.log'));
   }
   const oracle = program.oracle, oracleDirectory = resolve(work, 'oracle');
+  if (!oracle) return curves;
   await mkdir(oracleDirectory, { recursive: true });
   if (oracle.kind === 'eureka-light-curve-zip') {
     const deposit = resolve(oracleDirectory, oracle.path);
