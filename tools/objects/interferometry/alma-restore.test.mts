@@ -59,7 +59,8 @@ test('both measurement sets are written to the scratch disk, the calibration tab
     flagVersion: 'Pipeline_Final', plan, imaging: await imaging(), selfcal: null, imageBase: '/work/x', scratch: '/fast' });
   assert.ok(script.includes("importasdm(asdm='/raw/x', vis='/fast/x.ms'"));
   assert.ok(script.includes("mstransform(vis='/fast/x.ms', outputvis='/fast/R_Dor.targets.ms'"));
-  assert.ok(script.includes("tclean(vis='/fast/R_Dor.targets.ms'"));
+  assert.ok(script.includes("tclean(vis='/fast/R_Dor.targets.ms', imagename='/fast/x'"), 'CASA images are made on the scratch disk');
+  assert.ok(script.includes("fitsimage='/work/x.fits'"), 'only the FITS goes beside the delivery');
   assert.ok(!script.includes("gaintable=['/fast/"), 'caltables are resolved from the working directory, not the scratch disk');
   // The delivered flag versions are staged under the bare name, whatever disk the measurement set is on.
   assert.ok(script.includes("os.path.join('.', 'x.ms.flagversions'), '/fast/x.ms.flagversions')"));
@@ -74,8 +75,8 @@ test('both measurement sets are written to the scratch disk, the calibration tab
   assert.ok(calibrations.length > 0 && calibrations.every(line => line.startsWith('        applycal(')), 'every applycal sits inside the calibration guard');
   // A finished target split is imaged again without importing; the previous images go first, or tclean resumes from their model.
   assert.ok(script.indexOf('if not os.path.exists(ready):') < script.indexOf('importasdm('));
-  assert.ok(script.indexOf("open(ready, 'w')") < script.indexOf("for product in glob.glob('/work/x.*')"));
-  assert.ok(script.indexOf("for product in glob.glob('/work/x.*')") < script.indexOf('tclean('));
+  assert.ok(script.indexOf("open(ready, 'w')") < script.indexOf("for product in glob.glob('/fast/x.*')"));
+  assert.ok(script.indexOf("for product in glob.glob('/fast/x.*')") < script.indexOf('tclean('));
 });
 
 test('imaging follows the pipeline\u2019s own call rather than a plausible guess', async () => {

@@ -58,6 +58,9 @@ export function restoreScript(options: {
   // drive serves at a tenth of its sequential rate. The calibration tables stay where they were unpacked.
   const onScratch = (name: string) => (options.scratch ? `${options.scratch}/${name}` : name);
   const visibilities = onScratch(options.visibilities), targets = onScratch(`${plan.target}.targets.ms`);
+  // CASA's images are directories of tables; on an external exFAT drive every file gains an AppleDouble twin that vanishes
+  // mid-delete, so they are made on the scratch disk and only the exported FITS goes beside the delivery.
+  const imaged = options.scratch ? `${options.scratch}/${imageBase.split('/').at(-1)}` : imageBase;
   const resolveTable = (table: string) => (options.tableDirectory ? `${options.tableDirectory}/${table}` : table);
   return [
     'import os, sys, json, shutil, glob',
@@ -131,10 +134,10 @@ export function restoreScript(options: {
       "open(ready, 'w').close()",
     ].map(line => `    ${line}`),
     // tclean continues from any model it finds under its image name, so the previous run's images are removed first.
-    `for product in glob.glob(${python(`${imageBase}.*`)}):`,
+    `for product in glob.glob(${python(`${imaged}.*`)}):`,
     '    if os.path.isdir(product): shutil.rmtree(product)',
     // The imaging the pipeline itself performed, from the command log it shipped.
-    `tclean(vis=${python(targets)}, imagename=${python(imageBase)}, field=${python(plan.target)}, spw=${python(imaging.spw)}, ` +
+    `tclean(vis=${python(targets)}, imagename=${python(imaged)}, field=${python(plan.target)}, spw=${python(imaging.spw)}, ` +
       // Without the pipeline's antenna selection the auto-correlations enter the Briggs weights as zero-spacing samples: on the
       // R Doradus band 8 execution that widened the beam from 45.2 x 28.3 to 56.5 x 39.5 mas.
       `${imaging.antenna === null ? '' : `antenna=${python(imaging.antenna)}, `}${imaging.scan === null ? '' : `scan=${python(imaging.scan)}, `}${imaging.intent === null ? '' : `intent=${python(imaging.intent)}, `}` +
@@ -144,7 +147,7 @@ export function restoreScript(options: {
       "restoringbeam='common', pbcor=True, interactive=False)",
     "steps.append('tclean')",
     // mtmfs writes one image per Taylor term; the zeroth is the continuum intensity.
-    `exportfits(imagename=${python(`${imageBase}.image${imaging.terms > 1 ? '.tt0' : ''}.pbcor`)}, fitsimage=${python(`${imageBase}.fits`)}, overwrite=True, dropdeg=False)`,
+    `exportfits(imagename=${python(`${imaged}.image${imaging.terms > 1 ? '.tt0' : ''}.pbcor`)}, fitsimage=${python(`${imageBase}.fits`)}, overwrite=True, dropdeg=False)`,
     "steps.append('exportfits')",
     `open(${python(`${imageBase}.steps.json`)}, 'w').write(json.dumps(steps, indent=1))`,
     "print('restore complete:', ', '.join(steps))",
