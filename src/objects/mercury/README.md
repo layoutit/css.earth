@@ -78,3 +78,4 @@ Feature notes: 486 of the labelled names carry a caption note, the lead summary 
 </details>
 
 CI proof: one-body change for timing (safe to delete).
+CI proof: retrigger after retargeting base to ci/affected-only.
