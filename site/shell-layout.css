@@ -434,9 +434,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   touch-action: manipulation;
 }
 .planet-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
-/* Shown only after the browser offers to install the app (Chrome and Edge). */
-.planet-install-action { display: none; }
-:root[data-installable="true"] .planet-install-action { display: inline-grid; }
 .planet-header-action[aria-pressed="true"],
 .planet-facility-action:has(:checked),
 .planet-ui-layer:has(.planet-settings-panel:popover-open) .planet-settings-action {
@@ -696,8 +693,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
      link below already leads to GitHub. */
   .planet-header-actions { display: contents; }
   .planet-header-link { display: none; }
-  /* Every header slot is taken on phones; Android offers its own install banner. */
-  :root[data-installable="true"] .planet-install-action { display: none; }
   /* Settings ends the header row, matching the search field's height. */
   .planet-settings-action {
     grid-row: 1;

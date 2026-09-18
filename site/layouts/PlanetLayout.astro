@@ -54,8 +54,6 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     <meta name="twitter:image:alt" content={seo.imageAlt} />
     <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="/app-icons/apple-touch-icon.png" />
     {!navigation && <script is:inline set:html={googleAnalyticsBootstrap}></script>}
     <slot name="planet-head" />
     <title>{seo.title}</title>
@@ -92,11 +90,7 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
     </div>
     {!navigation && <script>
       import { bindNativeViewForms } from '../native-view-forms.mts';
-      import { registerServiceWorker } from '../service-worker-registration.mts';
-      import { bindInstallPrompt } from '../install-prompt.mts';
       bindNativeViewForms(document, window);
-      registerServiceWorker(window, import.meta.env.PROD);
-      bindInstallPrompt(window);
       import("../scene-router.mts").catch(error => {
         document.documentElement.dataset.ready = 'error';
         delete document.documentElement.dataset.shellContext;
