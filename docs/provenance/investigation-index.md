@@ -243,7 +243,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `lower-phase-voyager-observation-c2676439` | 1 | ophelia | A Ophelia observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits. |
 | `lpi-radar-images` | 1 | asteroid-1998-ml14 | An accessible authoritative copy establishes the product contents and any numerical model or calibrated camera/map data it actually supplies. |
 | `lucy-photographs` | 1 | dinkinesh | New mesh-frame or camera/control-network evidence, a finer compatible source mesh, or a specifically demonstrated defect in the existing projection/matching code. Import support alone is now verified and does not justify repeating unchanged registration trials. |
-| `luke-photography` | 1 | didymos | Bind the actual LUKE products and source-frame cameras and pass independent registration and quality checks before adding coverage. |
+| `luke-photography` | 1 | didymos | An attitude solution that places Didymos where the frames show it, within the pixel budget a limb fit can absorb, or LUKE frames of a body whose limb separates from the ejecta well enough to refine against. |
 | `map-shape-registration` | 1 | dione | A source-to-shape registration review with independent feature and silhouette evidence is completed. |
 | `mapped-model-product-search` | 1 | styx | A numerical target-specific model or mapped field with usable coordinates and uncertainty is located. |
 | `mapped-product-search` | 1 | himalia | A primary release supplies downloadable Himalia mapped data with coordinates, quantity and coverage. |

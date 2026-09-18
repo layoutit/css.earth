@@ -108,8 +108,8 @@
       "id": "luke-photography",
       "subject": "LICIACube LUKE photographs",
       "status": "deferred",
-      "finding": "The shape archive links LUKE inputs, but their own camera registration has not been qualified here. The accepted DRACO mosaic does not establish LUKE projection, RGB composition or unseen terrain.",
-      "revisitWhen": "Bind the actual LUKE products and source-frame cameras and pass independent registration and quality checks before adding coverage.",
+      "finding": "Measured. The LUKE calibrated collection holds 270 products; all 228 encounter frames fall between 29 and 321 seconds after impact, so every one looks through the ejecta. Short exposures do resolve Didymos: at closest approach, 60.4 km, its disc spans about 166 pixels at the instrument kernel's 78.0 microradians per pixel, and measured disc widths match the kernel prediction to within two pixels at two epochs. A LICIACube kernel bank was built from the thirteen reconstructed kernels the products' own PDS4 labels name, and it reproduces the archive's stated ranges to under a kilometre. Two things stop a lens. The kernels place the body about 0.5 degrees, roughly 110 pixels, from where it appears in the frames, which at this range is about one body radius, so the transfer samples beside the disc as much as on it; the archive's own stated boresight differs from the same kernels by 0.16 to 0.88 degrees per frame, and the header's spacecraft quaternion agrees with it no better. Limb refinement cannot absorb that offset: it leaves 0 of 23 holdout points within 6 pixels, because the body's limb against the ejecta does not match the projected mesh. A prepared lens reached 20% coverage and no verdict, with the outline, cross-frame and relief sweeps all undecided on a round body.",
+      "revisitWhen": "An attitude solution that places Didymos where the frames show it, within the pixel budget a limb fit can absorb, or LUKE frames of a body whose limb separates from the ejecta well enough to refine against.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/didymos/README.md"
       ],
@@ -117,6 +117,10 @@
         {
           "date": "2026-09-13",
           "commit": "d1374f2b47d1e24d7cc08368644c1a5c9444f8f0"
+        },
+        {
+          "date": "2026-09-17",
+          "commit": "05669215858362f9833b16696dc6df530fc7206a"
         }
       ]
     }
