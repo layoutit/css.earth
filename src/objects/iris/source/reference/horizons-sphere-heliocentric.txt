@@ -1,0 +1,173 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  7 Iris (A847 PA)             2026-Sep-18 04:44:58
+Rec #:       7 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 5954 (1848-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457701.5 ! 2016-Nov-09.00 (TDB)         Residual RMS= .20279
+   EC= .2314038302359487   QR= 1.833346969212803   TP= 2458075.9324631989
+   OM= 259.5702297985244   W=  145.351701854154    IN= 5.523471273169206
+   A= 2.385318898708038    MA= 259.8253358195066   ADIST= 2.937290828203273
+   PER= 3.68407            N= .267537337           ANGMOM= .025846636
+   DAN= 2.78841            DDN= 1.89655            L= 45.0465451
+   B= 3.1370053            MOID= .84558302         TP= 2017-Nov-18.4324631989
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 99.915             ROTPER= 7.139
+   H= 5.7                  G= .150                 B-V= .855
+                           ALBEDO= .2766           STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#144, OCC=0           radar( 2 delay, 0 Dop.)
+2: source=ORB
+*******************************************************************************
+
+
+*******************************************************************************
+Ephemeris / API_USER Fri Sep 18 04:44:58 2026 Pasadena, USA      / Horizons
+*******************************************************************************
+Target body name: 7 Iris (A847 PA)                {source: JPL#144}
+Center body name: Sun (10)                        {source: DE441}
+Center-site name: BODY CENTER
+*******************************************************************************
+Start time      : A.D. 2017-Oct-10 03:48:45.9344 TDB
+Stop  time      : A.D. 2017-Oct-11 06:25:53.7188 TDB
+Step-size       : DISCRETE TIME-LIST
+*******************************************************************************
+Center geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
+Center radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}
+Small perturbers: Yes                             {source: SB441-N16}
+Output units    : AU-D
+Calendar mode   : Mixed Julian/Gregorian
+Output type     : GEOMETRIC cartesian states
+Output format   : 1 (position only)
+Reference frame : ICRF
+*******************************************************************************
+Initial IAU76/J2000 heliocentric ecliptic osculating elements (au, days, deg.):
+  EPOCH=  2457701.5 ! 2016-Nov-09.00 (TDB)         Residual RMS= .20279        
+   EC= .2314038302359487   QR= 1.833346969212803   TP= 2458075.9324631989      
+   OM= 259.5702297985244   W=  145.351701854154    IN= 5.523471273169206       
+  Equivalent ICRF heliocentric cartesian coordinates (au, au/d):
+   X= 4.751534080243047E-01  Y=-2.375763634622184E+00  Z=-9.321011750785065E-01
+  VX= 9.342229438104468E-03 VY= 3.341945394558988E-03 VZ= 2.341039109003152E-03
+Asteroid physical parameters (km, seconds, rotational period in hours):        
+   GM= n.a.                RAD= 99.915             ROTPER= 7.139               
+   H= 5.7                  G= .150                 B-V= .855                   
+                           ALBEDO= .2766           STYP= S                     
+*******************************************************************************
+JDTDB
+   X     Y     Z
+*******************************************************************************
+$$SOE
+2458036.658864981 = A.D. 2017-Oct-10 03:48:45.9344 TDB 
+ X = 1.630292157034432E+00 Y = 7.344829025493211E-01 Z = 4.709774264887426E-01
+2458036.659675790 = A.D. 2017-Oct-10 03:49:55.9883 TDB 
+ X = 1.630286358556265E+00 Y = 7.344921194497747E-01 Z = 4.709806356669371E-01
+2458036.660488091 = A.D. 2017-Oct-10 03:51:06.1711 TDB 
+ X = 1.630280549354721E+00 Y = 7.345013532928270E-01 Z = 4.709838507376337E-01
+2458036.661305218 = A.D. 2017-Oct-10 03:52:16.7708 TDB 
+ X = 1.630274705588233E+00 Y = 7.345106419739266E-01 Z = 4.709870848953199E-01
+2458036.662131779 = A.D. 2017-Oct-10 03:53:28.1857 TDB 
+ X = 1.630268794302918E+00 Y = 7.345200378706269E-01 Z = 4.709903563767752E-01
+2458036.666937829 = A.D. 2017-Oct-10 04:00:23.4284 TDB 
+ X = 1.630234422017364E+00 Y = 7.345746699807058E-01 Z = 4.710093781539820E-01
+2458036.667756879 = A.D. 2017-Oct-10 04:01:34.1943 TDB 
+ X = 1.630228564097257E+00 Y = 7.345839803365990E-01 Z = 4.710126198052253E-01
+2458036.668581067 = A.D. 2017-Oct-10 04:02:45.4042 TDB 
+ X = 1.630222669373930E+00 Y = 7.345933490807317E-01 Z = 4.710158817790845E-01
+2458037.689782249 = A.D. 2017-Oct-11 04:33:17.1863 TDB 
+ X = 1.622879105347720E+00 Y = 7.461835405516893E-01 Z = 4.750460508240005E-01
+2458037.690611609 = A.D. 2017-Oct-11 04:34:28.8430 TDB 
+ X = 1.622873109066117E+00 Y = 7.461929386909809E-01 Z = 4.750493144871156E-01
+2458037.691447197 = A.D. 2017-Oct-11 04:35:41.0378 TDB 
+ X = 1.622867067701521E+00 Y = 7.462024073828636E-01 Z = 4.750526026437742E-01
+2458037.692263652 = A.D. 2017-Oct-11 04:36:51.5795 TDB 
+ X = 1.622861164619299E+00 Y = 7.462116592394089E-01 Z = 4.750558154940241E-01
+2458037.693078950 = A.D. 2017-Oct-11 04:38:02.0213 TDB 
+ X = 1.622855269852978E+00 Y = 7.462208979599552E-01 Z = 4.750590237758638E-01
+2458037.727276218 = A.D. 2017-Oct-11 05:27:16.6652 TDB 
+ X = 1.622607971272876E+00 Y = 7.466083905743701E-01 Z = 4.751935802373712E-01
+2458037.728102477 = A.D. 2017-Oct-11 05:28:28.0540 TDB 
+ X = 1.622601995057879E+00 Y = 7.466177524866683E-01 Z = 4.751968310065514E-01
+2458037.728936502 = A.D. 2017-Oct-11 05:29:40.1138 TDB 
+ X = 1.622595962617654E+00 Y = 7.466272023706964E-01 Z = 4.752001123154518E-01
+2458037.729757656 = A.D. 2017-Oct-11 05:30:51.0615 TDB 
+ X = 1.622590023219848E+00 Y = 7.466365063980175E-01 Z = 4.752033429712535E-01
+2458037.730561819 = A.D. 2017-Oct-11 05:32:00.5412 TDB 
+ X = 1.622584206668412E+00 Y = 7.466456178865990E-01 Z = 4.752065067648336E-01
+2458037.764691307 = A.D. 2017-Oct-11 06:21:09.3289 TDB 
+ X = 1.622337301047380E+00 Y = 7.470322977583298E-01 Z = 4.753407680667063E-01
+2458037.765522137 = A.D. 2017-Oct-11 06:22:21.1126 TDB 
+ X = 1.622331289407597E+00 Y = 7.470417103733900E-01 Z = 4.753440361269296E-01
+2458037.766349888 = A.D. 2017-Oct-11 06:23:32.6303 TDB 
+ X = 1.622325299990633E+00 Y = 7.470510880877198E-01 Z = 4.753472920626695E-01
+2458037.767166621 = A.D. 2017-Oct-11 06:24:43.1961 TDB 
+ X = 1.622319390246424E+00 Y = 7.470603409538367E-01 Z = 4.753505046444008E-01
+2458037.767982856 = A.D. 2017-Oct-11 06:25:53.7188 TDB 
+ X = 1.622313484052679E+00 Y = 7.470695881583340E-01 Z = 4.753537152536794E-01
+$$EOE
+*******************************************************************************
+ 
+TIME
+
+  Barycentric Dynamical Time ("TDB" or T_eph) output was requested. This
+continuous coordinate time is equivalent to the relativistic proper time
+of a clock at rest in a reference frame co-moving with the solar system
+barycenter but outside the system's gravity well. It is the independent
+variable in the solar system relativistic equations of motion.
+
+  TDB runs at a uniform rate of one SI second per second and is independent
+of irregularities in Earth's rotation.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+REFERENCE FRAME AND COORDINATES
+
+  International Celestial Reference Frame (ICRF)
+
+    The ICRF is an adopted reference frame whose axes are defined relative to 
+    fixed extragalactic radio sources distributed across the sky.
+
+    The ICRF was aligned with the prior FK5/J2000 dynamical system at the ~0.02 
+    arcsecond level but is not identical and has no associated standard epoch.
+
+  Symbol meaning [1 au= 149597870.700 km, 1 day= 86400.0 s]:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+      X      X-component of position vector (au)
+      Y      Y-component of position vector (au)
+      Z      Z-component of position vector (au)
+
+ABERRATIONS AND CORRECTIONS
+
+ Geometric state vectors have NO corrections or aberrations applied.
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+*******************************************************************************

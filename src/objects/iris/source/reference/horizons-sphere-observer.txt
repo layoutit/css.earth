@@ -1,0 +1,212 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  7 Iris (A847 PA)             2026-Sep-18 04:44:57
+Rec #:       7 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 5954 (1848-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457701.5 ! 2016-Nov-09.00 (TDB)         Residual RMS= .20279
+   EC= .2314038302359487   QR= 1.833346969212803   TP= 2458075.9324631989
+   OM= 259.5702297985244   W=  145.351701854154    IN= 5.523471273169206
+   A= 2.385318898708038    MA= 259.8253358195066   ADIST= 2.937290828203273
+   PER= 3.68407            N= .267537337           ANGMOM= .025846636
+   DAN= 2.78841            DDN= 1.89655            L= 45.0465451
+   B= 3.1370053            MOID= .84558302         TP= 2017-Nov-18.4324631989
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 99.915             ROTPER= 7.139
+   H= 5.7                  G= .150                 B-V= .855
+                           ALBEDO= .2766           STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#144, OCC=0           radar( 2 delay, 0 Dop.)
+2: source=ORB
+*******************************************************************************
+
+
+*******************************************************************************
+Ephemeris / API_USER Fri Sep 18 04:44:57 2026 Pasadena, USA      / Horizons    
+*******************************************************************************
+Target body name: 7 Iris (A847 PA)                {source: JPL#144}
+Center body name: Earth (399)                     {source: DE441}
+Center-site name: Cerro Paranal
+*******************************************************************************
+Start time      : A.D. 2017-Oct-10 03:56:12.8590 UT      
+Stop  time      : A.D. 2017-Oct-11 06:33:18.2720 UT      
+Step-size       : 0 steps
+*******************************************************************************
+Target pole/equ : undefined
+Target radii    : 99.915 km                                                    
+Center geodetic : 289.5957, -24.6272128, 2.63514  {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 289.5957,5803.73915,-2642.69127 {E-lon(deg),Dxy(km),Dz(km)}
+Center pole/equ : ITRF93                          {East-longitude positive}
+Center radii    : 6378.137, 6378.137, 6356.752 km {Equator_a, b, pole_c}       
+Target primary  : Sun
+Vis. interferer : MOON (R_eq= 1737.400) km        {source: DE441}
+Rel. light bend : Sun                             {source: DE441}
+Rel. lght bnd GM: 1.3271E+11 km^3/s^2                                          
+Small-body perts: Yes                             {source: SB441-N16}
+Atmos refraction: NO (AIRLESS)
+RA format       : DEG
+Time format     : CAL 
+Calendar mode   : Mixed Julian/Gregorian
+EOP file        : eop.260917.p261214                                           
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-17. PREDICTS-> 2026-DEC-13
+Units conversion: 1 au= 149597870.700 km, c= 299792.458 km/s, 1 day= 86400.0 s 
+Table cut-offs 1: Elevation (-90.0deg=NO ),Airmass (>38.000=NO), Daylight (NO )
+Table cut-offs 2: Solar elongation (  0.0,180.0=NO ),Local Hour Angle( 0.0=NO )
+Table cut-offs 3: RA/DEC angular rate (     0.0=NO )                           
+*******************************************************************************
+Initial IAU76/J2000 heliocentric ecliptic osculating elements (au, days, deg.):
+  EPOCH=  2457701.5 ! 2016-Nov-09.00 (TDB)         Residual RMS= .20279        
+   EC= .2314038302359487   QR= 1.833346969212803   TP= 2458075.9324631989      
+   OM= 259.5702297985244   W=  145.351701854154    IN= 5.523471273169206       
+  Equivalent ICRF heliocentric cartesian coordinates (au, au/d):
+   X= 4.751534080243047E-01  Y=-2.375763634622184E+00  Z=-9.321011750785065E-01
+  VX= 9.342229438104468E-03 VY= 3.341945394558988E-03 VZ= 2.341039109003152E-03
+Asteroid physical parameters (km, seconds, rotational period in hours):        
+   GM= n.a.                RAD= 99.915             ROTPER= 7.139               
+   H= 5.7                  G= .150                 B-V= .855                   
+                           ALBEDO= .2766           STYP= S                     
+*******************************************************************************************************************************
+ Date__(UT)__HR:MN:SC.fff     R.A.___(ICRF)___DEC  Ang-diam             delta      deldot     S-T-O       phi  PAB-LON  PAB-LAT
+*******************************************************************************************************************************
+$$SOE
+ 2017-Oct-10 03:56:12.859  m   34.85884  23.43527  0.307632  0.89563185365921  -7.7749626   13.2559   13.2510  34.0598   6.7060
+ 2017-Oct-10 03:57:22.911  m   34.85872  23.43523  0.307633  0.89562821340712  -7.7729366   13.2554   13.2505  34.0599   6.7059
+ 2017-Oct-10 03:58:33.092  m   34.85860  23.43518  0.307634  0.89562456740427  -7.7709023   13.2550   13.2501  34.0600   6.7059
+ 2017-Oct-10 03:59:43.690  m   34.85847  23.43514  0.307635  0.89562090070287  -7.7688512   13.2546   13.2497  34.0602   6.7059
+ 2017-Oct-10 04:00:55.103  m   34.85835  23.43510  0.307637  0.89561719265373  -7.7667718   13.2541   13.2492  34.0603   6.7059
+ 2017-Oct-10 04:07:50.335  m   34.85763  23.43483  0.307644  0.89559565191604  -7.7545897   13.2515   13.2467  34.0610   6.7058
+ 2017-Oct-10 04:09:01.099  m   34.85751  23.43479  0.307645  0.89559198431647  -7.7524986   13.2511   13.2462  34.0611   6.7058
+ 2017-Oct-10 04:10:12.307  m   34.85738  23.43474  0.307647  0.89558829470800  -7.7503900   13.2507   13.2458  34.0612   6.7058
+ 2017-Oct-11 04:40:41.903  m   34.71569  23.37367  0.309159  0.89120727441719  -7.3590964   12.7108   12.7059  34.2118   6.6814
+ 2017-Oct-11 04:41:53.558  m   34.71556  23.37362  0.309160  0.89120375010492  -7.3568614   12.7103   12.7054  34.2119   6.6814
+ 2017-Oct-11 04:43:05.751  m   34.71543  23.37357  0.309161  0.89120020041482  -7.3546068   12.7099   12.7050  34.2120   6.6814
+ 2017-Oct-11 04:44:16.291  m   34.71530  23.37352  0.309163  0.89119673305234  -7.3524012   12.7094   12.7045  34.2121   6.6814
+ 2017-Oct-11 04:45:26.731  m   34.71517  23.37347  0.309164  0.89119327164268  -7.3501962   12.7090   12.7041  34.2122   6.6814
+ 2017-Oct-11 05:34:41.303  m   34.70973  23.37136  0.309214  0.89104903142357  -7.2560972   12.6905   12.6856  34.2170   6.6806
+ 2017-Oct-11 05:35:52.690  m   34.70960  23.37131  0.309215  0.89104556945289  -7.2538013   12.6900   12.6851  34.2171   6.6806
+ 2017-Oct-11 05:37:04.748  m   34.70947  23.37126  0.309216  0.89104207605811  -7.2514836   12.6896   12.6847  34.2172   6.6806
+ 2017-Oct-11 05:38:15.694  m   34.70934  23.37121  0.309217  0.89103863765853  -7.2492015   12.6891   12.6842  34.2173   6.6806
+ 2017-Oct-11 05:39:25.172  m   34.70921  23.37116  0.309219  0.89103527145969  -7.2469664   12.6887   12.6838  34.2174   6.6806
+ 2017-Oct-11 06:28:33.889  m   34.70378  23.36900  0.309268  0.89089336076467  -7.1526646   12.6701   12.6652  34.2221   6.6798
+ 2017-Oct-11 06:29:45.671  m   34.70364  23.36894  0.309269  0.89088992926409  -7.1503993   12.6697   12.6648  34.2223   6.6798
+ 2017-Oct-11 06:30:57.187  m   34.70351  23.36889  0.309270  0.89088651155901  -7.1481446   12.6692   12.6643  34.2224   6.6798
+ 2017-Oct-11 06:32:07.751  m   34.70338  23.36884  0.309271  0.89088314040516  -7.1459221   12.6688   12.6639  34.2225   6.6797
+ 2017-Oct-11 06:33:18.272  m   34.70325  23.36879  0.309273  0.89087977235286  -7.1437032   12.6684   12.6634  34.2226   6.6797
+$$EOE
+*******************************************************************************************************************************
+Column meaning:
+ 
+TIME
+
+  Times PRIOR to 1962 are UT1, a mean-solar time closely related to the
+prior but now-deprecated GMT. Times AFTER 1962 are in UTC, the current
+civil or "wall-clock" time-scale. UTC is kept within 0.9 seconds of UT1
+using integer leap-seconds for 1972 and later years.
+
+  Conversion from the internal Barycentric Dynamical Time (TDB) of solar
+system dynamics to the non-uniform civil UT time-scale requested for output
+has not been determined for UTC times after the next July or January 1st.
+Therefore, the last known leap-second is used as a constant over future
+intervals.
+
+  Time tags refer to the UT time-scale conversion from TDB on Earth
+regardless of observer location within the solar system, although clock
+rates may differ due to the local gravity field and no analog to "UT"
+may be defined for that location.
+
+  Any 'b' symbol in the 1st-column denotes a B.C. date. First-column blank
+(" ") denotes an A.D. date.
+ 
+CALENDAR SYSTEM
+
+  Mixed calendar mode was active such that calendar dates after AD 1582-Oct-15
+(if any) are in the modern Gregorian system. Dates prior to 1582-Oct-5 (if any)
+are in the Julian calendar system, which is automatically extended for dates
+prior to its adoption on 45-Jan-1 BC.  The Julian calendar is useful for
+matching historical dates. The Gregorian calendar more accurately corresponds
+to the Earth's orbital motion and seasons. A "Gregorian-only" calendar mode is
+available if such physical events are the primary interest.
+
+  NOTE: "n.a." in output means quantity "not available" at the print-time.
+ 
+SOLAR PRESENCE (OBSERVING SITE)
+  Time tag is followed by a blank, then a solar-presence symbol:
+
+       '*'  Daylight (refracted solar upper-limb on or above apparent horizon)
+       'C'  Civil twilight/dawn
+       'N'  Nautical twilight/dawn
+       'A'  Astronomical twilight/dawn
+       ' '  Night OR geocentric ephemeris
+
+LUNAR PRESENCE (OBSERVING SITE)
+  The solar-presence symbol is immediately followed by a lunar-presence symbol:
+
+       'm'  Refracted upper-limb of Moon on or above apparent horizon
+       ' '  Refracted upper-limb of Moon below apparent horizon OR geocentric
+            ephemeris
+ 
+ 'R.A.___(ICRF)___DEC' =
+  Astrometric right ascension and declination of the target center with
+respect to the observing site (coordinate origin) in the reference frame of
+the planetary ephemeris (ICRF). Compensated for down-leg light-time delay
+aberration.
+
+  Units: RA  in decimal degrees,  ddd.fffff{ffff}
+         DEC in decimal degrees,  sdd.fffff{ffff}
+ 
+ 'Ang-diam' =
+   The equatorial angular width of the target body full disk, if it were fully
+illuminated and visible to the observer. If the target body diameter is unknown
+"n.a." is output.
+
+   Units: ARCSECONDS
+ 
+ 'delta      deldot' =
+   Apparent range ("delta", light-time aberrated) and range-rate ("delta-dot")
+of the target center relative to the observer. A positive "deldot" means the
+target center is moving away from the observer, negative indicates movement
+toward the observer.  Units: AU and KM/S
+ 
+ 'S-T-O' =
+   The Sun-Target-Observer angle; the interior vertex angle at target center
+formed by a vector from the target to the apparent center of the Sun (at
+reflection time on the target) and the apparent vector from target to the
+observer at print-time. Slightly different from true PHASE ANGLE (requestable
+separately) at the few arcsecond level in that it includes stellar aberration
+on the down-leg from target to observer.  Units: DEGREES
+ 
+ 'phi  PAB-LON  PAB-LAT' =
+   "phi" is the true PHASE ANGLE at the observers' location at print time.
+"PAB-LON" and "PAB-LAT" are the J2000 ecliptic longitude and latitude of the
+phase angle bisector direction; the outward directed angle bisecting the arc
+created by the apparent vector from Sun to target center and the astrometric
+vector from observer to target center. For an otherwise uniform ellipsoid, the
+time when its long-axis is perpendicular to the PAB direction approximately
+corresponds to lightcurve maximum (or maximum brightness) of the body. PAB is
+discussed in Harris et al., Icarus 57, 251-258 (1984).
+
+   Units: DEGREES, DEGREES, DEGREES
+
+Computations by ...
+
+    Solar System Dynamics Group, Horizons On-Line Ephemeris System
+    4800 Oak Grove Drive, Jet Propulsion Laboratory
+    Pasadena, CA  91109   USA
+
+    General site: https://ssd.jpl.nasa.gov/
+    Mailing list: https://ssd.jpl.nasa.gov/email_list.html
+    System news : https://ssd.jpl.nasa.gov/horizons/news.html
+    User Guide  : https://ssd.jpl.nasa.gov/horizons/manual.html
+    Connect     : browser        https://ssd.jpl.nasa.gov/horizons/app.html#/x
+                  API            https://ssd-api.jpl.nasa.gov/doc/horizons.html
+                  command-line   telnet ssd.jpl.nasa.gov 6775
+                  e-mail/batch   https://ssd.jpl.nasa.gov/ftp/ssd/horizons_batch.txt
+                  scripts        https://ssd.jpl.nasa.gov/ftp/ssd/SCRIPTS
+    Inquiries   : Jon.D.Giorgini@jpl.nasa.gov
+
+*******************************************************************************************************************************

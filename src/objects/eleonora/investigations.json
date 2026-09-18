@@ -30,7 +30,7 @@
       "id": "selected-size-and-pole",
       "subject": "Size and pole",
       "status": "included",
-      "finding": "The retained Table 1 and Table A.1 extract records diameter 165 km, ecliptic J2000 pole (154\u00b0, 24\u00b0), period 4.277185 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 81.87205994336064 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
+      "finding": "The retained Table 1 and Table A.1 extract records diameter 165 km, ecliptic J2000 pole (154°, 24°), period 4.277185 h. Published survey diameter averages ADAM and MPCD; the released MPCD coordinates are not rescaled to that average. The measured source volume-equivalent radius is 81.87205994336064 km. These source interpretations were checked against the recipe; the paper table was not freshly re-transcribed in this pass.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d1374f2b47d1e24d7cc08368644c1a5c9444f8f0/src/objects/eleonora/README.md",
         "https://doi.org/10.1051/0004-6361/202141781",
@@ -75,7 +75,7 @@
       "id": "lam-adam-alternative",
       "subject": "Released ADAM companion model",
       "status": "excluded",
-      "finding": "The live directory also lists 354_Eleonora_adam.obj. The body\u2019s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
+      "finding": "The live directory also lists 354_Eleonora_adam.obj. The body’s retained model comparison already distinguishes this ADAM reconstruction from the selected MPCD mesh. It is not adopted as a duplicate view of the same measured shape; the original comparison remains linked.",
       "revisitWhen": "An observation or scientific comparison specifically requires this alternative mesh and its matching source frame.",
       "evidence": [
         "https://observations.lam.fr/astero/3Dshape/354_Eleonora_adam.obj",
@@ -110,6 +110,24 @@
         {
           "date": "2026-09-17",
           "commit": "0eb4da968e3a167e9db6d68232b67f0676837c0c"
+        }
+      ]
+    },
+    {
+      "id": "survey-table-pole",
+      "subject": "Vernazza et al. (2021) Table A.1 pole against the release rotation record",
+      "status": "unresolved",
+      "finding": "Table A.1 lists the pole (154°, 24°) with a matching 71° obliquity; the release rotation record read latitude-first gives (153.65°, 50.85°), and DAMIT model 5919 of 2021-11-12 gives (154°, 51°). The survey’s table disagrees with its own released model by 27° in latitude. The camera route uses the release record, which is the one tied to the released mesh.",
+      "revisitWhen": "An erratum, or the survey’s model page, states which pole the released mesh uses.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141781",
+        "https://observations.lam.fr/astero/3Dshape/",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "b4f63b812af6e1ed402362c32586ced327e5bf8e"
         }
       ]
     }
