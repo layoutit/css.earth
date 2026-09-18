@@ -92,6 +92,8 @@ requires its referenced bank to be present.
 - Lead with the problem and what now happens. Link the body README or guide you changed.
 - Keep prepared outputs reproducible from checked-in inputs, and keep evidence beside the body it belongs to. Do not commit scratch output.
 - Every added file must support a named claim, explanation or test. Explain unusually large additions.
+- A PR touching more than 12 `src/objects/<id>/` directories fails the object-scope CI gate unless it carries the
+  `pipeline-change` label; keep ordinary body work scoped to a few bodies instead of asking for the label.
 
 ## Licence
 

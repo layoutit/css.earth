@@ -46,6 +46,11 @@ miss, so an ordinary clean build never depends on VizieR's uptime.
 
 Both scripts require `wrangler` to already be authenticated. Neither ever deletes a key.
 
+`node tools/prune-runtime-assets.mts --dry-run` reports (never deletes) which `runtime-assets/<sha256>/...` keys are
+live in R2 but referenced by no current inventory; it never lists or reports on `scenes/` or `source-cache/`. It
+needs a separate, read-only R2 API token (`wrangler` itself has no way to list a bucket's objects) — see the
+comment at the top of that file for how to obtain and set one.
+
 ## Contributing scientific data and evidence
 
 Start with [adding a body](src/objects/README.md), the
