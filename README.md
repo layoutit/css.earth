@@ -4,6 +4,8 @@ A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders cel
 
 Explore the live version: [css.earth](https://css.earth) 🔭
 
+Join [chat.polycss.com](https://chat.polycss.com) for support and community discussions.
+
 <img src=".github/assets/planets-contact-sheet.webp" alt="The eight planets, Mercury to Neptune, each rendered as DOM and CSS markup" width="960">
 
 ## How It Works
@@ -31,7 +33,7 @@ The key difference is that css.earth does not need WebGL: it runs in any modern 
 
 ## Datasets
 
-Each object shows has datasets assigned: the 495 bodies carry 1,035 views between them. A view can be a true-colour or single-filter photograph, an enhanced- or false-colour mosaic, a thermal, infrared, ultraviolet or radar map, topography, or an interior model.
+Each object has datasets assigned: the 495 bodies carry 1,035 views between them. A view can be a true-colour or single-filter photograph, an enhanced- or false-colour mosaic, a thermal, infrared, ultraviolet or radar map, topography, or an interior model.
 
 The data comes from 63 spacecraft, landers and telescopes, including:
 
