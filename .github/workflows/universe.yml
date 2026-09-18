@@ -41,11 +41,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Check published assets
+        # Phase 3 gate (feat/gh-pages-r2-assets): HEAD every key in both inventory kinds (runtime-assets.json and
+        # prepared-assets.json) and fail with the list of misses before anything is restored, so a contributor who
+        # bakes locally but forgets to publish gets a red PR instead of a silent local pass. Runs as early as the
+        # job allows: it needs SCENE_OBJECTS (site/objects.mts), which build:tools just generated.
+        run: pnpm check:assets-published
+      - name: Restore prepared assets and object JSON
         # setup:assets restores public/scenes AND (Phase 2, feat/gh-pages-r2-assets) each object's
         # prepared-assets.json inventory (prepared/runtime.json + prepared/scene.json, or a context/nebula
         # object's whole prepared/ output) — git no longer tracks those files, and prepare:object-json reads them.
         run: |
-          pnpm build:tools
           pnpm setup:assets
           pnpm prepare:object-json
       - name: Test unavailable prepared packages and focus controls
