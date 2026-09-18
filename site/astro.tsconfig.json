@@ -1,6 +1,15 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": { "jsx": "preserve" },
-  "include": ["**/*.astro", "**/*.mts", "**/*.ts"],
-  "exclude": ["test"]
+  "compilerOptions": {
+    "jsx": "preserve",
+    "incremental": false,
+    "tsBuildInfoFile": null
+  },
+  "include": ["**/*.astro", "**/*.mts", "**/*.ts", "../netlify/**/*.ts"],
+  "exclude": ["test"],
+  "files": [
+    "test/dataset-navigation-browser.mts",
+    "test/typescript-owners-browser.mts",
+    "../src/renderers/css/paging/__fixtures__/prepared-page.mts"
+  ]
 }

@@ -89,7 +89,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting", ".planet-orbit-renderer-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-asteroid-bodies-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting", ".planet-minimap-setting", ".planet-orbit-renderer-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -254,6 +254,28 @@ test('Asteroid Labels starts off and retains its independent preference across b
   }
   assert.deepEqual(changes, [true, false]);
   shell.destroy();
+  toggle.dispatchEvent(new Event('change'));
+  assert.deepEqual(changes, [true, false]);
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
+});
+
+test('Minimap starts off, mirrors its state for the stylesheet and keeps the preference across body navigation', () => {
+  const changes: boolean[] = [], f = fixture({ onMinimapChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.element('.planet-minimap-setting');
+  assert.equal(toggle.checked, false); assert.equal(toggle.disabled, false);
+  assert.equal(f.documentTarget.body.dataset.minimap, 'off');
+  for (const enabled of [true, false]) {
+    toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
+    for (const id of ['itokawa', 'sun', 'saturn']) {
+      shell.setObject({ id, name: id, apply() {}, dispose() {} });
+      assert.equal(toggle.checked, enabled);
+      assert.equal(f.documentTarget.body.dataset.minimap, enabled ? 'on' : 'off');
+      assert.equal(f.selectors.element('.planet-asteroid-labels-setting').checked, false);
+    }
+  }
+  assert.deepEqual(changes, [true, false]);
+  shell.destroy();
+  assert.equal(toggle.disabled, true);
   toggle.dispatchEvent(new Event('change'));
   assert.deepEqual(changes, [true, false]);
   assert.ok(f.elements.every(element => element.listeners.size === 0));
