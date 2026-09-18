@@ -13,6 +13,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  object-scope:
+    name: Object-scope gate
+    # PR-only: it reads github.event.pull_request.labels, which only exists on a pull_request event, and there is
+    # nothing to gate on a push to main (a merge is already reviewed).
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Full history: needs a merge base with the PR's base branch to know what the PR actually touched.
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Fail a PR that touches more than 12 object directories without the pipeline-change label
+        # Labels come straight from the triggering pull_request event payload (no extra API call, no token scope
+        # beyond the workflow's default contents:read) — see tools/object-scope-gate.mts.
+        env:
+          PR_LABELS: ${{ toJson(github.event.pull_request.labels) }}
+        run: node tools/object-scope-gate.mts "origin/${{ github.base_ref }}" "$PR_LABELS"
+
   universe:
     name: Prepared universe and shared renderer
     runs-on: ubuntu-latest
