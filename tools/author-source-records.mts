@@ -138,7 +138,16 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   console.log(JSON.stringify(result, null, 1));
   if (result.records.length && !evidence) console.log(`Commit the manifest, then rerun with --evidence <revision> to pin ${result.records.length} record(s).`);
   if (!before.equals(await readFile(manifestPath))) {
-    const { recoverObjectProvenance } = await import('./prepare-provenance.mts');
-    for (const outcome of await recoverObjectProvenance([ids[0]], { root })) console.log(`Provenance recorded again for the changed manifest: ${JSON.stringify(outcome)}`);
+    // A volume package's provenance is the volume compiler's, not a body's.
+    const presentation = await readFile(resolve(root, 'src/objects', ids[0], 'source/presentation.json'), 'utf8').then(text => JSON.parse(text) as { schema?: unknown }, () => null);
+    if (presentation?.schema === 'cssearth-volume-presentation-source@1') {
+      const { writeVolumeProvenance } = await import('./prepare-volume-provenance.mts');
+      const { RUNTIME_ASSET_ORIGIN } = await import('./runtime-assets.mts');
+      const results = await writeVolumeProvenance({ root, mirrorOrigin: RUNTIME_ASSET_ORIGIN });
+      console.log(`Volume provenance recorded again for the changed manifest: ${results.length} volume packages.`);
+    } else {
+      const { recoverObjectProvenance } = await import('./prepare-provenance.mts');
+      for (const outcome of await recoverObjectProvenance([ids[0]], { root })) console.log(`Provenance recorded again for the changed manifest: ${JSON.stringify(outcome)}`);
+    }
   }
 }

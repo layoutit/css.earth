@@ -302,11 +302,17 @@ export async function prepareVolumeProvenance({ root = process.cwd(), input = pa
   return results;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
-  const results = await prepareVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
+/** Prepare every volume's presentation and provenance and write them as one set. Real callers opt into the mirror. */
+export async function writeVolumeProvenance(options: Options = {}) {
+  const results = await prepareVolumeProvenance(options);
   const outputs = results.flatMap(result => result.outputs);
   for (const output of outputs) await mkdir(dirname(output.path), { recursive: true });
   await writePreparedSet(outputs);
+  return results;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
+  const results = await writeVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
   console.log(`Prepared volume presentation and provenance: ${results.length} objects, ${results.reduce((sum, result) => sum + result.controls.length, 0)} lenses.`);
 }
