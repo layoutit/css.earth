@@ -148,8 +148,8 @@
     {
       "id": "r-doradus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6164,
-      "expectedSha256": "618dd3d1b78e7585ad7bc617c6b2c532e7f7666efce4a209c8433427ad9c5273",
+      "expectedBytes": 6193,
+      "expectedSha256": "b6a1e71358b52920f7133b5634a865d680abc1cc217803d83fef8f4ea7a9d0f9",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -297,6 +297,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 5091,
       "expectedSha256": "f23a0e7cfd21b71ffbaa037cb993d9c825faec0ad7a2d4222384377bbd6adbdb"
+    },
+    {
+      "path": "reference/alma-band8-restored-vs-archive.png",
+      "expectedBytes": 33899,
+      "expectedSha256": "51dd498b6ee46fbb027f1c46f899dd713dd8b351174a8753564279ea5f7fcc49",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the band 8 image this package restored from the raw ASDM beside the archive delivery, from the ALMA reduction route (pull request 302). The image arrived with that route; this entry declares it so the package passes its own source coverage."
+      }
     }
   ]
 }

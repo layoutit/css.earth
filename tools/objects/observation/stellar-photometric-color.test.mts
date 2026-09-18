@@ -74,3 +74,25 @@ test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 1
     assert.ok(blue.linear[2]! / blue.linear[0]! > flat.linear[2]! / flat.linear[0]!);
   }
 });
+
+test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectrum, with samples consistent with zero read as no emission', async () => {
+  const { readXpSampledSpectrum, xpSampledColor, NOISE_FLOOR_SIGMA } = await import('./stellar-photometric-color.mts');
+  const system = new URL('../../../src/objects/trappist-1/source/', import.meta.url);
+  const { color, range, temperature, spectrum } = await loadStellarPhotometricColor(
+    async path => readFile(new URL(path, system)), { colorMatching: 'reference/CIE_xyz_1931_2deg.csv' }, 'photometry/stellar-color.json');
+  assert.equal(temperature, null);
+  assert.equal(spectrum?.samples, 343);
+  assert.deepEqual(color.srgb, [255, 205, 106]);
+  // The blue end is noise, so the one-sigma range is wide there and narrow in red.
+  assert.equal(range[0].srgb[0], 255);
+  assert.ok(range[1].srgb[2]! - range[0].srgb[2]! > 50, 'the blue channel is poorly constrained');
+  const flux = readXpSampledSpectrum((await readFile(new URL('photometry/gaia-dr3-xp-sampled.csv', system))).toString('utf8'), '2635476908753563008');
+  const visible = (wavelength: number) => (wavelength - 336) / 2;
+  // Sixteen visible samples are at or below zero; none is below zero by more than the floor allows.
+  const nonPositive = flux.flux.filter((value, index) => value <= 0 && index >= visible(380) && index <= visible(780));
+  assert.equal(nonPositive.length, 16);
+  assert.ok(flux.flux.every((value, index) => value > 0 || Math.abs(value) <= NOISE_FLOOR_SIGMA * flux.fluxError[index]!));
+  // A sample below zero by more than the floor is a spectrum no colour is taken from.
+  const broken = [...flux.flux]; broken[visible(500)] = -1e6 * flux.fluxError[visible(500)]!;
+  assert.throws(() => xpSampledColor(broken, colorMatching, flux.fluxError), /consistent with zero/u);
+});

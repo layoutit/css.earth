@@ -41,8 +41,19 @@ export function sampleCoverage(missing: Uint8Array, source: Pick<CoverageRaster,
   return output;
 }
 
-export function missingCoverageColor(longitude: number, latitude: number, pixelDegrees: number) {
-  const base = [82, 84, 82], line = [112, 115, 111];
+/** Named fills for a data gap. `gray` is the shared cartographic default every mapped body uses. `dark` keeps the same
+ * graticule on a black ground, for a body whose observed side is a self-luminous image on the sky rather than a lit map:
+ * grey there reads as a second, dimmer surface, and black reads as the absence the gap is. */
+export const MISSING_COVERAGE_STYLES = Object.freeze({
+  gray: Object.freeze({ base: Object.freeze([82, 84, 82]), line: Object.freeze([112, 115, 111]) }),
+  dark: Object.freeze({ base: Object.freeze([0, 0, 0]), line: Object.freeze([130, 48, 40]) }),
+});
+export type MissingCoverageStyle = keyof typeof MISSING_COVERAGE_STYLES;
+export const isMissingCoverageStyle = (value: unknown): value is MissingCoverageStyle =>
+  typeof value === 'string' && Object.hasOwn(MISSING_COVERAGE_STYLES, value);
+
+export function missingCoverageColor(longitude: number, latitude: number, pixelDegrees: number, style: MissingCoverageStyle = 'gray') {
+  const { base, line } = MISSING_COVERAGE_STYLES[style];
   const distance = (angle: number, step: number) => Math.abs(angle - Math.round(angle / step) * step);
   const parallel = distance(latitude, 10);
   const meridian = distance(longitude, 30) * Math.cos(latitude * Math.PI / 180);
@@ -54,14 +65,14 @@ export function missingCoverageColor(longitude: number, latitude: number, pixelD
   return base.map((value, c) => Math.round(value + (line[c] - value) * amount));
 }
 
-export function paintMissingCoverage(data: Uint8Array, { width, height, channels }: CoverageRaster, missing: Uint8Array) {
+export function paintMissingCoverage(data: Uint8Array, { width, height, channels }: CoverageRaster, missing: Uint8Array, style: MissingCoverageStyle = 'gray') {
   if (missing.length !== width * height || data.length !== width * height * channels || channels !== 3) {
     throw new Error("Coverage and RGB raster dimensions must match.");
   }
   const output = Buffer.from(data), pixelDegrees = 180 / height;
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     if (!missing[y * width + x]) continue;
-    const color = missingCoverageColor((x + 0.5) * 360 / width, 90 - (y + 0.5) * pixelDegrees, pixelDegrees);
+    const color = missingCoverageColor((x + 0.5) * 360 / width, 90 - (y + 0.5) * pixelDegrees, pixelDegrees, style);
     const i = (y * width + x) * channels;
     for (let c = 0; c < channels; c++) output[i + c] = color[c];
   }

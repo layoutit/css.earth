@@ -39,7 +39,7 @@ import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
-export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; }
+export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; readonly missingCoverage?: RasterRecipe['missingCoverage']; }
 interface Options { readonly objectId: string; readonly displayName: string; readonly sourceDirectory: string; readonly recipe: InterpreterRecipe;
   /** Partial restores verify selected source pins and decoder groups; photographs additionally forbid scientific/model changes.
    * Full preparation (and solar synoptic preparation) verifies the entire package. */
@@ -49,8 +49,9 @@ const plainRecord = (v: unknown): v is Record<string, unknown> => typeof v === '
 const emissionSchema = object({ offLimbSize: number, limbSize: number, bodyDiameter: number, offLimbOutput: string, limbOutput: string, metadata: plainRecord });
 /** Validate a raw raster recipe down to the facts the interpreter needs; the lane validates the rest when it packs. */
 export function parseInterpreterRecipe(value: unknown): InterpreterRecipe {
-  const input = parse(value, object({ surfaces: array(object({ id: string, source: string, science: optional(plainRecord), nativeSourcePoles: optional((value): value is boolean => typeof value === 'boolean') })), emission: optional(emissionSchema) }), 'raster recipe');
-  return { surfaces: input.surfaces, ...(input.emission ? { emission: input.emission } : {}) };
+  const missingCoverageSchema = (value: unknown): value is 'gray' | 'dark' => value === 'gray' || value === 'dark';
+  const input = parse(value, object({ surfaces: array(object({ id: string, source: string, science: optional(plainRecord), nativeSourcePoles: optional((value): value is boolean => typeof value === 'boolean') })), emission: optional(emissionSchema), missingCoverage: optional(missingCoverageSchema) }), 'raster recipe');
+  return { surfaces: input.surfaces, ...(input.emission ? { emission: input.emission } : {}), ...(input.missingCoverage ? { missingCoverage: input.missingCoverage } : {}) };
 }
 /** Include declared decode dependencies without adding them to the surfaces a partial run packs. */
 export function selectSurfaceDependencies(recipe: InterpreterRecipe, ids: readonly string[]): InterpreterRecipe {
@@ -96,8 +97,9 @@ function parseSurfaceObservationScience(value: Record<string, unknown>): Surface
 const transparentPlates = (offLimb: number, limb: number) => ({
   offLimb: { data: new Uint8Array(offLimb * offLimb * 4), size: offLimb, lossless: true }, limb: { data: new Uint8Array(limb * limb * 4), size: limb, lossless: true } });
 
-const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height: number, nearest: boolean): InterpretedSurface =>
-  ({ data: missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing) : rgb, channels: 3, nearest });
+const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height: number, nearest: boolean,
+  style: RasterRecipe['missingCoverage'] = 'gray'): InterpretedSurface =>
+  ({ data: missing ? paintMissingCoverage(rgb, { width, height, channels: 3 }, missing, style) : rgb, channels: 3, nearest });
 
 /** Build the lane's `interpret` adapter once per prepared object. Decoded grids are cached per surface so the
  * two prepared densities decode each source once (the terrestrial lane painted a single @2x atlas). */
@@ -156,6 +158,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
   });
   // Surface-only runs must surface a pin failure even when a plain image needs no interpreter callback.
   await manifest;
+  // Bound once: a branch below shadows `recipe` with its own science block.
+  const missingCoverage = recipe.missingCoverage;
   const surfaces = new Map(recipe.surfaces.map(surface => [surface.id, surface]));
   const observations = new Map<string, Promise<Rgb>>();
   const science = new Map<string, ReturnType<typeof loadScienceSurface>>();
@@ -175,7 +179,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const faces = sampleRadialTriangles(grid.sample, plan.shape.rows, plan.shape.columns, scale).map(face => ({ ...face, vertexNormals: [face.normal, face.normal, face.normal] }));
         const radialTerrain = { path: plan.shape.path, format: plan.shape.format, simplification: { method: 'source-mesh', maximumErrorMeters: plan.shape.flatFaceErrorMeters } };
         return loadSurfaceObservation({ sourceDirectory, source, recipe: { id: surface.id, ...plan.lens }, radial: { grid, faces },
-          config: { geometry: { radius: 1, radiusKm: plan.shape.radiusKm, radialTerrain }, raster: { height } } });
+          config: { geometry: { radius: 1, radiusKm: plan.shape.radiusKm, radialTerrain }, raster: { height, missingCoverage: recipe.missingCoverage } } });
       })();
       surfaceObservations.set(surface.id, pending);
     }
@@ -247,7 +251,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const profile = parsePdsFloatProfile(surface.science);
         await (await manifest).validatePath(surface.source);
         const { rgb, missing } = await preparePdsFloatMap(resolve(sourceDirectory, surface.source), profile, width, height);
-        return rgb3(rgb, missing, width, height, false);
+        return rgb3(rgb, missing, width, height, false, recipe.missingCoverage);
       }
       case 'static-observation': {
         // Unchanged: the Moon/Pluto path (coverage grid, signed DEM, tonal presentation, GHRM science).
@@ -271,10 +275,10 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           const matching=matchControlledMapLevels(result,{rgb,missing},width,height,detail.levelMatching);
           const poles=await loadControlledMapPoles(sourceDirectory,tiles,profile,new Map(matching.levels.map(level=>[level.id,level.gain])));
           const base=await nativePhotograph(surface,plan);
-          return {...rgb3(result.rgb,result.missing,width,height,false),report:{...result.report,levelMatching:matching,baseObservation:surface.science.input,baseMeaning:'Published global display mosaic outside controlled photographic coverage.'},
+          return {...rgb3(result.rgb,result.missing,width,height,false, recipe.missingCoverage),report:{...result.report,levelMatching:matching,baseObservation:surface.science.input,baseMeaning:'Published global display mosaic outside controlled photographic coverage.'},
             nativePhotograph:{width:base.width,height:base.height,sample(longitude:number,latitude:number,color:number[]){return poles.sample(longitude,latitude,color)||base.sample(longitude,latitude,color);}}};
         }
-        const interpreted = {...rgb3(rgb, missing, width, height, resampling === 'source-georeferenced-nearest'),...(report?{report}:{})};
+        const interpreted = {...rgb3(rgb, missing, width, height, resampling === 'source-georeferenced-nearest', recipe.missingCoverage),...(report?{report}:{})};
         if (plan.nativePhotographicSampling && interpreted.nearest) {
           throw new TypeError(`${objectId}/${surface.id}: native photographic polar sampling does not apply to nearest-sampled data.`);
         }
@@ -294,7 +298,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         let raster = science.get(surface.id);
         if (!raster) { raster = loadScienceSurface(sourceDirectory, parsed); science.set(surface.id, raster); }
         const { rgb, missing } = paintScienceSurface(await raster, parsed, width, height);
-        const painted = rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest');
+        const painted = rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest', recipe.missingCoverage);
         // A self-luminous body (a thermal emission map) owes the emissive presentation its plates; nothing lies beyond its limb.
         return recipe.emission ? { ...painted, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : painted;
       }
@@ -308,7 +312,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, surface.science, width, height)
           : plan.format === 'pds3-byte-equirectangular' ? await preparePdsByteMosaic(sourceDirectory, tiles, width, height)
           : (() => { throw new TypeError(`${objectId}/${surface.id}: mosaic format ${plan.format} is a radial-terrain format.`); })();
-        return rgb3(rgb, missing, width, height, false);
+        return rgb3(rgb, missing, width, height, false, recipe.missingCoverage);
       }
       case 'terrestrial-observed-color': {
         const plan = shape({ consumer: text, monochromeBase: text })(surface.science);
@@ -324,7 +328,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const levels = photometryRecipe && 'owners' in color ? matchObservedColorLevels(color, base, { width, height, ...photometryRecipe.levels }) : undefined;
         const rgb = color.rgb instanceof Uint8Array ? color.rgb : encodeBandColor(color.rgb,color.missing,color.display);
         for (let i = 0; i < color.missing.length; i++) if (color.missing[i] && !base.missing[i]) { rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); color.missing[i] = 0; }
-        return {...rgb3(rgb, color.missing, width, height, false),report:{colorDisplay:color.colorDisplay,sourceIds:color.sourceIds,
+        return {...rgb3(rgb, color.missing, width, height, false, missingCoverage),report:{colorDisplay:color.colorDisplay,sourceIds:color.sourceIds,
           ...('photometry' in color ? {photometry:color.photometry} : {}),...(levels?{levelMatching:levels}:{}),
           monochromeBase:plan.monochromeBase,monochromeMeaning:'Existing display brightness and missing-color fallback; no inferred surface color.'}};
       }
@@ -334,9 +338,9 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const observation = await surfaceObservation(surface, plan, height);
         // East longitude grows with the column from 0 at the left edge, as the mesh places a planet atlas.
         const { rgb, missing } = observation.preview(width, height);
-        if (!recipe.emission) return { ...rgb3(rgb, missing, width, height, false), report: observation.report };
+        if (!recipe.emission) return { ...rgb3(rgb, missing, width, height, false, recipe.missingCoverage), report: observation.report };
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
-        if (!plan.offLimb) return { ...rgb3(rgb, missing, width, height, false), report: observation.report, plates };
+        if (!plan.offLimb) return { ...rgb3(rgb, missing, width, height, false, recipe.missingCoverage), report: observation.report, plates };
         // The off-limb plate is the same frame's light beyond the silhouette, on the lens's stretch and palette; the sphere hides its disc.
         if (plan.lens.frames.length !== 1) throw new TypeError(`${objectId}/${surface.id}: an off-limb plate needs a single-frame lens.`);
         const frame = requireRecord(plan.lens.frames[0]);
@@ -357,7 +361,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           plateSize, recipe.emission.bodyDiameter * density);
         let outside = 0, total = 0;
         for (let i = 0; i < topDown.length; i++) { const v = topDown[i]!; total += v; if (Math.hypot(i % image.width - center[0], Math.floor(i / image.width) - center[1]) > discRadiusPx) outside += v; }
-        return { ...rgb3(rgb, missing, width, height, false), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
+        return { ...rgb3(rgb, missing, width, height, false, recipe.missingCoverage), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
           report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees, fluxFractionOutsideDisc: outside / total,
             meaning: 'The frame\'s light outside the silhouette on the lens display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
       }

@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-jwst-image3-reproduction@1",
+  "program": "ngc-3132-2733",
+  "band": "NIRCAM-F470N",
+  "observation": "jw02733-o001_t001_nircam_f444w-f470n",
+  "toolchain": "tools/objects/jwst/toolchain.json",
+  "crdsContext": "jwst_1535.pmap",
+  "mast": {
+    "name": "jw02733-o001_t001_nircam_f444w-f470n_i2d.fits",
+    "uri": "mast:JWST/product/jw02733-o001_t001_nircam_f444w-f470n_i2d.fits",
+    "bytes": 155134080,
+    "sha256": "eff8fb673998887e4be8154c0a740ae6204451b9287013fcddb6f7e48313c025",
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "local": {
+    "calVer": "2.0.1",
+    "crdsContext": "jwst_1535.pmap"
+  },
+  "wcs": {
+    "NAXIS1": {
+      "ours": 2356,
+      "mast": 2356
+    },
+    "NAXIS2": {
+      "ours": 2348,
+      "mast": 2348
+    },
+    "CTYPE1": {
+      "ours": "RA---TAN",
+      "mast": "RA---TAN"
+    },
+    "CTYPE2": {
+      "ours": "DEC--TAN",
+      "mast": "DEC--TAN"
+    },
+    "CRPIX1": {
+      "ours": 1177.1969851261158,
+      "mast": 1177.4106913574542
+    },
+    "CRPIX2": {
+      "ours": 1167.6536505024358,
+      "mast": 1167.7479853102627
+    },
+    "CRVAL1": {
+      "ours": 151.75718364899873,
+      "mast": 151.7571875046681
+    },
+    "CRVAL2": {
+      "ours": -40.436492402301496,
+      "mast": -40.43648955414598
+    },
+    "CDELT1": {
+      "ours": 0.0000175078864238265,
+      "mast": 0.0000175078864250165
+    },
+    "CDELT2": {
+      "ours": 0.0000175078864238265,
+      "mast": 0.0000175078864250165
+    },
+    "PC1_1": {
+      "ours": 0.3750358761924449,
+      "mast": 0.3750358761924449
+    },
+    "PC1_2": {
+      "ours": 0.9270102974447291,
+      "mast": 0.9270102974447291
+    },
+    "PC2_1": {
+      "ours": 0.9270102974447291,
+      "mast": 0.9270102974447291
+    },
+    "PC2_2": {
+      "ours": -0.3750358761924449,
+      "mast": -0.3750358761924449
+    },
+    "BUNIT": {
+      "ours": "MJy/sr",
+      "mast": "MJy/sr"
+    }
+  },
+  "differentWcs": [
+    "CRPIX1",
+    "CRPIX2",
+    "CRVAL1",
+    "CRVAL2"
+  ],
+  "pixels": {
+    "both": 5411268,
+    "onlyOurs": 0,
+    "onlyMast": 6527,
+    "identicalShare": null,
+    "comparedOn": "sky positions",
+    "medianAbsoluteDifferenceOverMedian": 0.026669036714785502,
+    "aboveMedian": {
+      "pixels": 2705634,
+      "rmsDifferenceOverRms": 0.062146861481171156,
+      "correlation": 0.9982291436373258
+    },
+    "ratioBins": [
+      {
+        "mastMJyPerSr": [
+          0.6476947665214539,
+          7.619784355163574
+        ],
+        "pixels": 2164507,
+        "medianRatio": 0.9998115184901891
+      },
+      {
+        "mastMJyPerSr": [
+          7.619784355163574,
+          29.58172035217285
+        ],
+        "pixels": 487014,
+        "medianRatio": 0.9993609280403265
+      },
+      {
+        "mastMJyPerSr": [
+          29.58172035217285,
+          54.52899169921875
+        ],
+        "pixels": 48701,
+        "medianRatio": 0.9990041965955668
+      },
+      {
+        "mastMJyPerSr": [
+          54.52899169921875,
+          79.16276550292969
+        ],
+        "pixels": 4870,
+        "medianRatio": 0.998470096388216
+      },
+      {
+        "mastMJyPerSr": [
+          79.16276550292969,
+          14268.505859375
+        ],
+        "pixels": 543,
+        "medianRatio": 0.9956411524915144
+      }
+    ]
+  }
+}

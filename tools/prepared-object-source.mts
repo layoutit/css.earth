@@ -232,7 +232,11 @@ function authoredRecipe(descriptor: Record<string, unknown>) {
   return { ...recipe, sources: sources.map(reference => ({ id: requireString(reference.id), path: requireString(reference.path) })) };
 }
 
-async function readAuthoredDefinition({ objectId, descriptor, root, source, closure }: {objectId: string; descriptor: Record<string, unknown>; root: string; source: RuntimeSourceReader; closure: Set<string>}) {
+/**
+ * Every authored recipe source must be pinned by the object's manifest and still match that pin. Returns the recipe,
+ * or null for a descriptor without an authored recipe. Reads tracked files only.
+ */
+export async function requireAuthoredSourcePins({ objectId, descriptor, root, source, closure }: {objectId: string; descriptor: Record<string, unknown>; root: string; source: RuntimeSourceReader; closure: Set<string>}) {
   const recipe = authoredRecipe(descriptor);
   if (!recipe) return null;
   const directory = resolve(root, `src/objects/${objectId}`), manifestPath = resolve(directory, 'source/manifest.json');
@@ -248,6 +252,12 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
     if (sha256(bytes) !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
     closure.add(path);
   }
+  return recipe;
+}
+
+async function readAuthoredDefinition({ objectId, descriptor, root, source, closure }: {objectId: string; descriptor: Record<string, unknown>; root: string; source: RuntimeSourceReader; closure: Set<string>}) {
+  if (!await requireAuthoredSourcePins({ objectId, descriptor, root, source, closure })) return null;
+  const directory = resolve(root, `src/objects/${objectId}`);
   const preparation = resolve(directory, 'prepared');
   const runtimePath = resolve(preparation, 'runtime.json');
   const scenePath = resolve(preparation, 'scene.json');

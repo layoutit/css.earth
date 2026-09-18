@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "trappist-1",
+  "angularDiameterMas": 0.09,
+  "angularDiameterSource": "Computed here from the radius and distance: 2 x 82,927.44 km at 12.467 pc = 0.0704 mas. No diameter of TRAPPIST-1 is measured; the star is far too small and distant to resolve.",
+  "distanceParsecs": 12.46691341544997,
+  "distanceSource": "Gaia DR3 parallax 80.2123 +/- 0.0716 mas for source 2635476908753563008 (photometry/gaia-dr3-source.csv): 1000/80.2123 = 12.467 pc, no zero-point correction.",
+  "radiusKm": 82927.44,
+  "radiusSource": "0.1192 solar radii (82,927.44 km at 695,700 km per solar radius) from Agol et al. (2021, PSJ 2, 1), who combine the photodynamic stellar density with the Mann et al. (2019) mass. About 1.16 Jupiter radii.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the catalogue radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."
+  },
+  "planetCount": 7,
+  "planetCountSource": "Seven transiting planets, b to h, with periods 1.51 to 18.77 days and semi-major axes 0.0115 to 0.0619 au (Agol et al. 2021, Tables 2 and 6; discovered by Gillon et al. 2016, Nature 533, 221 and Gillon et al. 2017, Nature 542, 456)."
+}

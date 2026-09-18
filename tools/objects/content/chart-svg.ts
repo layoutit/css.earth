@@ -2,6 +2,8 @@ export interface ChartIdentity { id:string;title:string;description:string;metad
 export interface ReflectancePoint { wavelength:number;total:number; }
 export interface PressureLayer { pressure:number;temperature:number; }
 export interface PhasePoint { phaseAngle:number;dimmingMagnitude:number; }
+export interface LightCurvePoint { hours:number;flux:number; }
+export interface LightCurveEvent { hours:number;label:string; }
 const FONT =
   "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif";
 const GRID_COLOR = "#fff";
@@ -187,6 +189,45 @@ export function renderPhotometricPhaseChart({
     <text x="0" y="141">phase angle (°)</text>
     <text x="${PLOT_RIGHT / 2}" y="141" text-anchor="middle">${midpoint}</text>
     <text x="${PLOT_RIGHT}" y="141" text-anchor="end">${lastAngle}</text>
+  </g>
+  <path class="planet-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
+  </g>
+</svg>
+`;
+}
+
+/** A time series of relative brightness: hours from the first sample across, the change from the median in parts per million up,
+ * with a short label over each named event (a transit or an eclipse). */
+export function renderLightCurveChart({ id, title, description, metadata, points, events, axisLabel }:
+  ChartIdentity & { points:readonly LightCurvePoint[];events:readonly LightCurveEvent[];axisLabel:string }) {
+  validateChartIdentity({ id, title, description, metadata });
+  if (!Array.isArray(points) || points.length < 3 || typeof axisLabel !== "string" || !axisLabel ||
+      points.some(({ hours, flux }, index) => !Number.isFinite(hours) || !Number.isFinite(flux) || index > 0 && hours <= points[index - 1]!.hours) ||
+      points[0]!.hours !== 0 || !Array.isArray(events) || events.some(({ hours, label }) => !Number.isFinite(hours) || typeof label !== "string" || !label)) {
+    throw new TypeError("Light curve chart data is incompatible.");
+  }
+  const last = points.at(-1)!.hours;
+  const fluxes = points.map(({ flux }) => flux), minimum = Math.min(...fluxes), maximum = Math.max(...fluxes);
+  if (maximum - minimum <= 0) throw new RangeError("Light curve chart has no brightness range.");
+  const x = (hours:number) => hours / last * PLOT_RIGHT, y = (flux:number) => 18 + (maximum - flux) / (maximum - minimum) * 88;
+  const pointPath = points.map(({ hours, flux }, index) => `${index === 0 ? "M" : "L"}${x(hours).toFixed(2)} ${y(flux).toFixed(2)}`).join(" ");
+  const eventLabels = events.filter(({ hours }) => hours >= 0 && hours <= last)
+    .map(({ hours, label }) => `<text x="${x(hours).toFixed(2)}" y="11" text-anchor="middle">${escapeXmlText(label)}</text>`).join("\n    ");
+  const midpoint = Math.round(last / 2);
+  return `<svg xmlns="http://www.w3.org/2000/svg" class="planet-light-curve-chart" viewBox="0 0 ${CHART_WIDTH} ${CHART_HEIGHT}" role="img" aria-labelledby="${id}-light-curve-title ${id}-light-curve-description" font-family="${FONT}" font-size="${CHART_FONT_SIZE}">
+  <title id="${id}-light-curve-title">${escapeXmlText(title)}</title>
+  <desc id="${id}-light-curve-description">${escapeXmlText(description)}</desc>
+  <metadata>${serializeMetadata(metadata)}</metadata>
+  <g fill="${GRID_COLOR}" fill-opacity="${GRID_OPACITY}" shape-rendering="crispEdges">
+    <rect x="0" y="${axisY(18)}" width="${CHART_WIDTH}" height="1"/>
+    <rect x="0" y="${axisY(106)}" width="${CHART_WIDTH}" height="1"/>
+  </g>
+  <g transform="${CHART_CONTENT_TRANSFORM}">
+  <g fill="${LABEL_COLOR}" opacity=".65">
+    <text x="0" y="141">${escapeXmlText(axisLabel)}</text>
+    <text x="${x(midpoint).toFixed(2)}" y="141" text-anchor="middle">${midpoint}</text>
+    <text x="${PLOT_RIGHT}" y="141" text-anchor="end">${Math.round(last)}</text>
+    ${eventLabels}
   </g>
   <path class="planet-chart-line" d="${pointPath}" fill="none" stroke="${SERIES_COLOR}" stroke-width="1.25" stroke-opacity=".9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" shape-rendering="geometricPrecision"/>
   </g>

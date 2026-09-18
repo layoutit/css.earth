@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "trappist-1d",
+  "radiusKm": 5026,
+  "radiusSource": "Radius 5.026e8 cm and mass 2.316e27 g from Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 6, which combines their transit-timing masses with the photodynamic radius ratios and the Mann et al. (2019) stellar mass. GM from that mass and the CODATA gravitational constant 6.67430e-20 km^3 kg^-1 s^-2. A sphere: no oblateness of these planets is measured.",
+  "orbitalPeriodDays": 4.049219,
+  "orbitalPeriodSource": "Agol et al. (2021, PSJ 2, 1; doi:10.3847/PSJ/abd022), Table 2 (transit-timing analysis): 4.049219 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TRAPPIST-1d is measured; only its size, mass and orbit are."
+  },
+  "massEarths": 0.388,
+  "massSource": "0.388 +/- Earth masses from E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1, Table 6: the transit-timing mass ratio times the Mann et al. (2019) stellar mass.",
+  "insolationEarths": 1.115,
+  "insolationSource": "1.115 times Earth's insolation, E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1, Table 6.",
+  "semiMajorAxisAu": 0.022269999999999998,
+  "semiMajorAxisSource": "0.02227 au, E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1, Table 6."
+}

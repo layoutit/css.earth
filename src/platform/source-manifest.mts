@@ -24,7 +24,12 @@ export async function createSourceManifest({ planetId, planetName, sourceRoot }:
     planetId,
     JSON.parse(await readFile(resolve(sourceRoot, "manifest.json"), "utf8")),
   );
-  const inputsByPath = new Map(manifest.inputs.map((entry) => [entry.path, entry]));
+  // A lens may read an acquired input or a file this repository generates from one, such as a spectrum sampled here from the
+  // archive's coefficients. Both are pinned the same way, and both are verified by their bytes before they are read.
+  const inputsByPath = new Map<string, SourceEntry>([
+    ...manifest.generatedIntermediates.map((entry) => [entry.path, entry] as const),
+    ...manifest.inputs.map((entry) => [entry.path, entry] as const),
+  ]);
 
   return Object.freeze({
     manifest,

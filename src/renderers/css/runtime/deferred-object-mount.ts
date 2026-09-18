@@ -3,6 +3,7 @@ import type { SharedView } from '../navigation/view-url.js';
 import type { SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
 import type { PreparedDestinationRuntime } from './object-runtime-types.js';
 import type { ObjectWorldNavigation } from './world-navigation-types.js';
+import type { LensVolume } from './object-contract.js';
 
 export interface ObjectSharedView {
   capture(motionRequested?: boolean): SharedView | null;
@@ -13,6 +14,10 @@ export interface ObjectSharedView {
 export interface ObjectDatasets {
   readonly ids: readonly string[];
   readonly defaultId: string;
+  /** Every companion cloud this body's datasets can ask for, so a caller can turn the others off. */
+  readonly volumes: readonly LensVolume[];
+  /** The cloud this dataset asks for, if it asks for one. */
+  volumeOf(id: string): LensVolume | null;
   current(): string | null;
   select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>;
   subscribe(listener: (id: string) => void): () => void;

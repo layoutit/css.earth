@@ -1,0 +1,50 @@
+{
+  "id": "doi-10-3847-psj-abd022",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Refining the Transit-timing and Photometric Analysis of TRAPPIST-1: Masses, Radii, Densities, Dynamics, and Ephemerides",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/PSJ/abd022"
+    },
+    {
+      "type": "arxiv",
+      "value": "2010.01074"
+    },
+    {
+      "type": "bibcode",
+      "value": "2021PSJ.....2....1A"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/abd022",
+      "label": "The Planetary Science Journal"
+    },
+    {
+      "role": "original",
+      "url": "https://arxiv.org/abs/2010.01074",
+      "label": "arXiv:2010.01074"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "E. Agol, C. Dorn, S. L. Grimm et al. (2021), PSJ 2, 1",
+      "scope": "citation",
+      "evidence": "src/objects/trappist-1/text.json#/introduction/sources/0"
+    }
+  ],
+  "publisher": "American Astronomical Society"
+}

@@ -1,0 +1,98 @@
+# Eureka! Control File for Stage 5: Lightcurve Fitting
+
+# Stage 5 Documentation: https://eurekadocs.readthedocs.io/en/latest/ecf.html#stage-5
+
+ncpu		1
+multwhite       	True
+
+allapers        	False
+rescale_err     	False
+verbose         	True
+
+##### Starry Fit #####
+# fit_method      	[exoplanet,nuts]
+# run_myfuncs     	[starry1, sinusoid_pc, polynomial, xpos, ypos, xwidth, ywidth, GP]
+# fit_par         	./S5_trappist1b_phasecurve_starry_bcEclipses_fitpar.epf
+# force_positivity	False
+# compute_ltt			False
+# maxOrder			1
+# old_chain			None
+
+##### Double Quasi-Lambertian Fit #####
+fit_method		[lsq]
+run_myfuncs     	[batman_tr, batman_ecl, quasilambert_pc, sinusoid_pc, polynomial, xpos, ypos, xwidth, ywidth, GP]
+fit_par		./joint.epf
+old_chain		None
+lsq_first		True
+
+##### Quasi-Lambertian Fit #####
+# fit_method      	[emcee]
+# run_myfuncs     	[batman_tr, batman_ecl, quasilambert_pc, sinusoid_pc, polynomial, xpos, ypos, xwidth, ywidth, GP]
+# fit_par         	./S5_trappist1b_phasecurve_batman_bcEclipses_quasilambertB_fitpar.epf
+# old_chain			TRAPPIST-1b_Phasecurve/Stage5/shared_withPhysicalityPrior_updatedT1bData_quasilambertB/S5_2024-04-05_trappist1b_phasecurve_run1/ap5_bg16_46
+# lsq_first			False   # Initialize with an initial lsq call (can help shorten burn-in, but turn off if lsq fails). Only used if old_chain is None
+
+##### Sinusoidal Fit #####
+# fit_method      	[dynesty]
+# run_myfuncs     	[batman_tr, batman_ecl, sinusoid_pc, polynomial, xpos, ypos, xwidth, ywidth, GP]
+# fit_par         	./S5_trappist1b_phasecurve_batman_bcEclipses_fitpar.epf
+# old_chain			TRAPPIST-1b_Phasecurve/Stage5/shared_bc_withPhysicalityPrior_updatedT1bData_noGP/S5_2024-03-25_trappist1b_phasecurve_run1/ap5_bg16_46/
+# old_chain			TRAPPIST-1b_Phasecurve/Stage5/shared_withPhysicalityPrior_updatedT1bData/S5_2024-03-25_trappist1b_phasecurve_run1/ap5_bg16_46/
+# lsq_first			False   # Initialize with an initial lsq call (can help shorten burn-in, but turn off if lsq fails). Only used if old_chain is None
+
+force_positivity	True
+compute_ltt			False
+num_planets			3
+maxOrder			1
+
+# GP inputs
+kernel_inputs		['time'] #options: time
+kernel_class		['Matern32'] #options: ExpSquared, Matern32, Exp, RationalQuadratic for george, Matern32 for celerite (sums of kernels possible for george separated by commas)
+GP_package			'celerite' #options: george, celerite
+
+# Manual clipping in time
+manual_clip			[[None,100]]
+
+# Limb darkening controls
+use_generate_ld		None
+ld_file				None
+ld_file_white		None
+
+# General fitter
+old_fitparams		None
+
+#mcmc
+run_nsteps			20000
+run_nwalkers		500
+run_nburn			10000   # How many of run_nsteps should be discarded as burn-in steps
+
+#lsq
+lsq_method			Powell  # The scipy.optimize.minimize optimization method to use
+lsq_tol				1e-6    # The tolerance for the scipy.optimize.minimize optimization method
+lsq_maxiter			None    # Maximum number of iterations to perform. Depending on the method each iteration may use several function evaluations. Set to None to use the default value
+
+# PyMC3 NUTS sampler settings
+tune				100000
+draws				5000
+chains				3
+target_accept		0.85
+
+# Plotting controls
+interp				False
+
+# Diagnostics
+isplots_S5		0
+nbin_plot			None
+testing_S5			False
+testing_model		False
+hide_plots			True
+
+# Project directory
+topdir		{topdir}
+
+# Directories relative to topdir
+inputdir		{inputdir}
+
+inputdirlist		{inputdirlist}
+
+outputdir		{outputdir}

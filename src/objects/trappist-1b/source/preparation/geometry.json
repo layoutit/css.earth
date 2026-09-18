@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "trappist-1b",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/trappist-1b/trappist-1b-surface-temperature@2x.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/trappist-1b/trappist-1b-poles-temperature@2x.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#9a9a9a"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 1
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csstrappist-1b-prepared-runtime-scene@1",
+    "materialSchema": "csstrappist-1b-prepared-emission@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 1.510826,
+      "sourceProjection": "This project's brightness-temperature map of TRAPPIST-1b at 15 µm, fitted to ten JWST MIRI visits it reduced from raw exposures, sampled bilinearly onto the reference sphere",
+      "polarPreparation": "the same map sampled on the polar tiles",
+      "axialTiltNote": "the object's synchronous rotation record puts the pole on the orbit normal and longitude 0 toward the host star at the scene epoch; no spin is animated"
+    }
+  }
+}

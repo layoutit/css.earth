@@ -16,6 +16,7 @@ const universeEntries = [
   'src/preparation/cluster-catalog/cluster-catalog.test.ts',
   'src/preparation/image-layers/image-layers.test.ts',
   'src/preparation/volume/volume.test.ts',
+  'src/preparation/volume/column-depth.test.ts',
   'src/preparation/sky/sky.test.ts',
   'src/renderers/css/preparation/volume.test.ts',
   'src/renderers/css/preparation/volume-impostors.test.ts',

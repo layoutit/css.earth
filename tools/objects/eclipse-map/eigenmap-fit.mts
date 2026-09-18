@@ -72,13 +72,17 @@ export function symmetricEigen(matrix: Float64Array, n: number) {
 }
 
 /** Harmonic light curves, their eigencurves and eigenmaps for one observation. */
+/** `longitudeSymmetric` keeps only harmonics even in longitude about the substellar meridian (m >= 0): a map whose hot spot
+ * sits on the substellar point, for data that measure the dayside and nightside but not an offset. */
 export function eigenBasis(lmax: number, grid: MapGrid, orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number },
-  planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>, lightTravel: LightTravel = {}): EigenBasis {
+  planetRadiusStellarRadii: number, timesBmjd: ArrayLike<number>, lightTravel: LightTravel = {}, { longitudeSymmetric = false } = {}): EigenBasis {
   const order = harmonicOrder(lmax), harmonics = realSphericalHarmonics(lmax, grid.latitudes, grid.longitudes);
   const cells = grid.width * grid.height, uniformMap = new Float64Array(cells).fill(1 / Math.PI), visible = new Uint8Array(cells);
   // Intensity of a map with coefficient 1 on Y_lm is Y_lm / pi, the convention in which a uniform map with Y_00 = 1 gives flux 1.
   const intensity = harmonics.map(row => row.map(value => value / Math.PI));
   const [uniform, ...harmonicCurves] = mapBasisCurves([uniformMap, ...intensity], grid, orbit, host, planetRadiusStellarRadii, timesBmjd, visible, lightTravel);
+  // A harmonic odd in longitude (m < 0, sin m*lon) contributes no curve, so no eigencurve carries it and its coefficient is 0.
+  if (longitudeSymmetric) order.forEach(([, m], index) => { if (m < 0) harmonicCurves[index]!.fill(0); });
   // ThERESA stacks each curve with its negative (2 per harmonic) and takes the right singular vectors of that matrix. The Gram
   // matrix of [+L, -L] is [[G, -G], [-G, G]]; its eigenvectors are exactly those singular vectors.
   const h = order.length, n = 2 * h, gram = new Float64Array(n * n);

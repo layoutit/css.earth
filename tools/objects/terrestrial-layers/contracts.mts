@@ -1,3 +1,4 @@
+import type { MissingCoverageStyle } from '../../../src/platform/prepare-missing-coverage.mts';
 import type { SourceInput, SourceEntry, SourceManifest } from '../../../src/platform/source-manifest.mts';
 /** Source-space geometry and numeric fields shared by preparation algorithms. */
 export interface MeshDimensions { metersPerUnit:number; expectedVertices:number; expectedFaces:number }
@@ -41,7 +42,7 @@ export interface SipCamera {matrix:number[][];sip:{referencePixel:number[];a:num
 export interface ObservationSample {maximumIncidenceDegrees?:number;reason?:string; radiance?:number; maximumEmissionDegrees?:number}
 export interface ObservationLevelPolicy {maximumAngleDegrees?:number;minimumPairs:number;maximumGain:number;samplesPerTriangle?:number}
 export interface SourceAccess {manifest?:SourceManifest;validateGroup(consumer:string):Promise<readonly SourceInput[]>;validatePath(path:string):Promise<SourceEntry>}
-export interface SurfaceConfig {geometry:{radius:number;radiusKm:number;radialTerrain:{path:string;format?:string;sourceTopology?:string;simplification:{method:string;maximumErrorMeters:number}}};raster:{height:number}}
+export interface SurfaceConfig {geometry:{radius:number;radiusKm:number;radialTerrain:{path:string;format?:string;sourceTopology?:string;simplification:{method:string;maximumErrorMeters:number}}};raster:{height:number;missingCoverage?:MissingCoverageStyle}}
 export interface RadialSurface {grid:SourceMesh;faces:PreparedTriangle[]}
 export interface SurfaceOptions {sourceDirectory:string;source:SourceAccess;recipe:unknown;radial:RadialSurface;config:SurfaceConfig}
 export type SurfaceColorSample = {reason:string;color:number[];radiance?:never;maximumEmissionDegrees?:never;maximumIncidenceDegrees?:never} |

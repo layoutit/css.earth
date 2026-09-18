@@ -304,10 +304,14 @@ export function createSceneRouter({
         if (mount.features && /^[0-9]+$/u.test(featureId)) { shell.setMotionEnabled?.(false); session.lifetime.wait(mount.features.select(featureId)).catch(error => { if (active === session) report(error); }); }
       }
       sceneState = "ready";
-      if (mount.datasets) session.lifetime.onDispose(mount.datasets.subscribe(() => {
-        if (active !== session || pending || sceneState !== 'ready') return;
-        syncDatasetUrl(session);
-      }));
+      if (mount.datasets) {
+        syncCompanionClouds(mount.datasets);
+        session.lifetime.onDispose(mount.datasets.subscribe(() => {
+          if (active !== session || pending || sceneState !== 'ready') return;
+          syncCompanionClouds(mount.datasets!);
+          syncDatasetUrl(session);
+        }));
+      }
       hasPresented = true;
       initialScene?.commit();
       if (pending === request) pending = null;
@@ -327,6 +331,19 @@ export function createSceneRouter({
     const saved = active?.mount?.sharedView?.capture(motionEnabled);
     if (saved) url.searchParams.set('v', new URLSearchParams(formatSharedView(saved)).get('v')!);
     return url.pathname + url.search + url.hash;
+  }
+
+  /** A dataset of this body may ask for a cloud that accompanies it. Only the selected one is drawn. */
+  function syncCompanionClouds(datasets: NonNullable<ObjectSceneLifecycle['datasets']>) {
+    if (!datasets.volumes.length) return;
+    const selected = datasets.volumeOf(datasets.current() ?? datasets.defaultId);
+    // One bank carries every cloud of its object and draws one lens at a time, so each bank is
+    // answered once: the selected dataset names the lens, and a bank no dataset asks for stays dark.
+    for (const objectId of new Set(datasets.volumes.map(volume => volume.objectId))) {
+      const enabled = selected?.objectId === objectId;
+      if (enabled) worldContextMount?.selectVolumeLens?.(objectId, selected!.lensId);
+      worldContextMount?.setVolumeLensEnabled?.(objectId, enabled);
+    }
   }
 
   function syncDatasetUrl(session: Session) {
@@ -669,6 +686,8 @@ export function createSceneRouter({
           throw new TypeError('Persistent world context mount must publish and destroy.');
         }
         worldContextMount = value;
+        // The world mounts after the scene is ready, so a dataset that asks for a companion cloud asks again here.
+        if (active?.mount?.datasets) syncCompanionClouds(active.mount.datasets);
         value.setHighContrastSky?.(highContrastSky);
         value.setHeliosphereEnabled?.(heliosphereEnabled);
         value.setIllustrationModelsEnabled?.(illustrationModelsEnabled);

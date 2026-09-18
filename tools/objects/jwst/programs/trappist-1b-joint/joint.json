@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-jwst-joint-fit@1",
+  "id": "trappist-1b-joint",
+  "title": "TRAPPIST-1b and c at 15 µm: the ten MIRI/F1500W visits of Bell's joint fit, with b's phase curve held symmetric",
+  "eventName": "trappist1b",
+  "crdsContext": "jwst_1535.pmap",
+  "control": "S5_trappist1b.ecf",
+  "parameters": "joint.epf",
+  "planet": "trappist-1b",
+  "settingsSource": "Bell's Stage 5 control and parameter files, deposited with Gillon, Ducrot et al. (2025) at doi:10.5281/zenodo.17710453 (Bell_FinalECFs), translated to Eureka! 1.4's parameter names (planet suffixes _pl1/_pl2, visit suffixes _chN, quasi_gamma). b's phase curve is Eureka!'s sinusoid with its sine amplitude held at 0; c keeps Bell's quasi-Lambertian curve. Least squares only.",
+  "visits": [
+    { "program": "trappist-1b-miri-3077", "work": "trappist-1b-3077" },
+    { "program": "trappist-1b-miri-1177-007", "work": "trappist-1b-1177-007" },
+    { "program": "trappist-1b-miri-1177-011", "work": "trappist-1b-1177-011" },
+    { "program": "trappist-1b-miri-1177-008", "work": "trappist-1b-1177-008" },
+    { "program": "trappist-1b-miri-1177-009", "work": "trappist-1b-1177-009" },
+    { "program": "trappist-1b-miri-1177-010", "work": "trappist-1b-1177-010" },
+    { "program": "trappist-1c-miri-2304-001", "work": "trappist-1c-2304-001" },
+    { "program": "trappist-1c-miri-2304-002", "work": "trappist-1c-2304-002" },
+    { "program": "trappist-1c-miri-2304-003", "work": "trappist-1c-2304-003" },
+    { "program": "trappist-1c-miri-2304-004", "work": "trappist-1c-2304-004" }
+  ]
+}
