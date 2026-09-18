@@ -4,11 +4,8 @@
       "allowed": {
         "origins": [
           "https://css.earth",
-          "https://www.css.earth",
           "http://127.0.0.1:4210",
-          "http://127.0.0.1:4211",
-          "http://127.0.0.1:4228",
-          "http://127.0.0.1:4430"
+          "http://127.0.0.1:4228"
         ],
         "methods": [
           "GET",
