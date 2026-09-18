@@ -3,9 +3,9 @@ import { pathToFileURL } from "node:url";
 import { installRuntimeAssets } from "./setup.mts";
 import { preparedAssetObjectIds, preparedAssets } from "./runtime-assets.mts";
 
-/** `pnpm setup:prepared`: restore Phase 2's `prepared-assets.json` inventories (baked `prepared/*` output that
- * git no longer tracks — see FABLE_REVIEW.md section D). `setup:assets` runs this too, so a plain `pnpm
- * setup:assets` remains the one command a clean checkout needs. */
+/** `pnpm setup:prepared`: restore each object's `prepared-assets.json` inventory (baked `prepared/*` output that
+ * git no longer tracks). `setup:assets` runs this too, so a plain `pnpm setup:assets` remains the one command a
+ * clean checkout needs. */
 export async function setupPrepared(args: readonly string[], root = resolve(import.meta.dirname, "..")) {
   const ids = preparedAssetObjectIds(args, root);
   const assets = await preparedAssets(root, ids);

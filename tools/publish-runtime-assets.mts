@@ -79,7 +79,7 @@ async function findMisses(assets: readonly PublishAsset[], concurrency = 32): Pr
 }
 
 // Maintainer command: publish only the files in the checked-in inventories — both `runtime-assets.json` (public
-// scene textures) and Phase 2's `prepared-assets.json` (baked `prepared/*` output git no longer tracks). Each
+// scene textures) and `prepared-assets.json` (baked `prepared/*` output git no longer tracks). Each
 // URL contains its content hash, so existing releases remain usable and re-running this command is cheap: HEAD
 // every key first (concurrently) and bulk-upload only the misses (`wrangler r2 bulk put`, batched by content
 // type since one invocation takes one content type), then run the existing HEAD + byte verification pass, whose

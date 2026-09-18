@@ -21,9 +21,9 @@ for (const entry of (await readdir(objects,{withFileTypes:true})).filter(entry=>
   else if (await exists(resolve(directory,'source/delivery.json'))) result = await prepareNebulaObject(root,directory,args.includes('--if-missing'));
   else continue;
   results.push(result);
-  // Phase 2 (feat/gh-pages-r2-assets): this object has no runtime-assets.json, so its whole `prepared/`
-  // bake (this loop's only output) is the R2 inventory — a full nested closure, no exclusions needed
-  // since `object.json` and the `.prepared-<pid>` staging directory both live outside `prepared/`.
+  // This object has no runtime-assets.json, so its whole `prepared/` bake (this loop's only output) is the R2
+  // inventory — a full nested closure, no exclusions needed since `object.json` and the `.prepared-<pid>`
+  // staging directory both live outside `prepared/`.
   await preparePreparedAssetManifest({ planetId: entry.name, preparedRoot: resolve(directory,'prepared'),
     manifestPath: resolve(directory,'prepared-assets.json') });
 }

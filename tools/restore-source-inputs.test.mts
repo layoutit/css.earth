@@ -50,9 +50,9 @@ test('every registered body has its package files and tracked or restorable sour
   }).split('\0'));
   const missing = [];
   for (const id of setupObjectIds([])) {
-    // Phase 2 (feat/gh-pages-r2-assets): prepared/runtime.json is no longer git-tracked for any body; a clean
-    // checkout restores it from R2 via the object's prepared-assets.json inventory instead. Every other
-    // required file keeps the original "must be tracked" proof.
+    // prepared/runtime.json is no longer git-tracked for any body; a clean checkout restores it from R2 via
+    // the object's prepared-assets.json inventory instead. Every other required file keeps the original
+    // "must be tracked" proof.
     const preparedRuntimePath = relative(project, resolve(project, 'src/objects', id, 'prepared/runtime.json'));
     await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
       accessFile: async path => {

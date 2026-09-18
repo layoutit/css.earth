@@ -131,8 +131,8 @@ export async function preparePlanets({ projectRoot = process.cwd(), force = fals
     const navigation = await runObjectCommand({ command: process.execPath,
       argumentsList: [resolve(root, "tools/prepare-navigation.mts"), ...objectIds], cwd: root });
     assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);
-    // Phase 2 (feat/gh-pages-r2-assets): refresh the prepared/runtime.json + prepared/scene.json inventory for
-    // every prepared body, even when `prepare:object-json` does not run afterward (e.g. `prepare:checkout`).
+    // Refresh the prepared/runtime.json + prepared/scene.json inventory for every prepared body, even when
+    // `prepare:object-json` does not run afterward (e.g. `prepare:checkout`).
     for (const id of objectIds) {
       const preparedDirectory = resolve(root, "src/objects", id, "prepared");
       const inventoried: string[] = [];

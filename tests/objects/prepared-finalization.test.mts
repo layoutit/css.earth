@@ -76,7 +76,7 @@ test('finalization writes a prepared-assets.json inventory covering only runtime
   try {
     const preparedDirectory = resolve(stage, 'prepared'); await mkdir(preparedDirectory);
     await copyFile(resolve(objectDirectory, 'prepared/scene.json'), resolve(preparedDirectory, 'scene.json'));
-    // A tracked contract file that must stay out of the inventory (FABLE_REVIEW.md section D).
+    // A tracked contract file that must stay out of the inventory.
     await copyFile(resolve(objectDirectory, 'prepared/provenance.json'), resolve(preparedDirectory, 'provenance.json'));
     await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
       descriptorPath: resolve(stage, 'object.json') });

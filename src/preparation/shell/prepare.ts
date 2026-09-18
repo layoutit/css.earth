@@ -45,7 +45,7 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     await writeFile(descriptorPath, JSON.stringify({ ...descriptor, prepared: { format: envelope.format,
       url: relative(objectDirectory, outputPath).split('\\').join('/'), sha256: sha256(bytes) } }, null, 2) + '\n');
-    // Phase 2 (feat/gh-pages-r2-assets): heliosphere has no runtime-assets.json, so the whole bake is the R2 inventory.
+    // heliosphere has no runtime-assets.json, so the whole bake is the R2 inventory.
     await preparePreparedAssetManifest({ planetId: descriptor.id, preparedRoot: outputDirectory,
       manifestPath: resolve(objectDirectory, 'prepared-assets.json') });
   }

@@ -48,7 +48,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   }
   await retireVolumeTextures(outputDirectory, previousTextures, slices.quads.map(quad => quad.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
-    // Phase 2 (feat/gh-pages-r2-assets): milky-way has no runtime-assets.json, so the whole bake is the R2 inventory.
+    // milky-way has no runtime-assets.json, so the whole bake is the R2 inventory.
     await preparePreparedAssetManifest({ planetId: descriptor.id, preparedRoot: outputDirectory,
       manifestPath: resolve(objectDirectory, 'prepared-assets.json') });
   }

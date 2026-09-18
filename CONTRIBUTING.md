@@ -14,11 +14,11 @@ pnpm dev
 ```
 
 `pnpm install` builds the shared packages, the renderer and the preparation
-tools; `pnpm setup:assets` downloads the prepared browser images and, since
-Phase 2 of the R2 migration, each object's baked `prepared/runtime.json` and
-`prepared/scene.json` (or, for milky-way/heliosphere/stellar-neighbourhood/lmc
-and the nebulae, its whole baked `prepared/` output) — git no longer tracks
-those files; `pnpm dev` re-derives the prepared JSON transport beside each
+tools; `pnpm setup:assets` downloads the prepared browser images and each
+object's baked `prepared/runtime.json` and `prepared/scene.json` (or, for
+milky-way/heliosphere/stellar-neighbourhood/lmc and the nebulae, its whole
+baked `prepared/` output) — git no longer tracks those files; `pnpm dev`
+re-derives the prepared JSON transport beside each
 body from what `setup:assets` just downloaded, and serves the site on port
 4210. For a single body, use `pnpm setup:assets --object=<id>` and open
 `/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the

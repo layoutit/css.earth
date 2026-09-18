@@ -94,8 +94,8 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
     properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
-  // Phase 2 (feat/gh-pages-r2-assets): only runtime.json/scene.json move to R2; every other prepared/* file
-  // (provenance.json, content.json, page.json, …) stays a tracked contract file — FABLE_REVIEW.md section D.
+  // Only runtime.json/scene.json move to R2; every other prepared/* file (provenance.json, content.json,
+  // page.json, …) stays a tracked contract file, not part of this inventory.
   const inventoried: string[] = [];
   for (const filename of ['runtime.json', 'scene.json']) {
     if (await access(resolve(preparedDirectory, filename)).then(() => true, () => false)) inventoried.push(filename);

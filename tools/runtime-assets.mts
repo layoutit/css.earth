@@ -27,8 +27,8 @@ export function setupObjectIds(args: readonly string[], root = resolve(import.me
 }
 
 /**
- * `prepared-assets.json` (Phase 2, feat/gh-pages-r2-assets) inventories baked `prepared/*` output: either a
- * body's `runtime.json`/`scene.json` subset, or a context/nebula object's whole nested `prepared/` closure.
+ * `prepared-assets.json` inventories baked `prepared/*` output: either a body's `runtime.json`/`scene.json`
+ * subset, or a context/nebula object's whole nested `prepared/` closure.
  * Unlike `setupObjectIds`, the default set is discovered by scanning `src/objects/*` (an open-ended registry,
  * not a second hardcoded list), so a newly inventoried object needs no change here.
  */
@@ -80,7 +80,7 @@ export async function runtimeAssets(root: string, objectIds: readonly string[]):
   return assets;
 }
 
-/** Phase 2 counterpart of `runtimeAssets` for `prepared-assets.json`: always resourceRoot `prepared`, never public. */
+/** Counterpart of `runtimeAssets` for `prepared-assets.json`: always resourceRoot `prepared`, never public. */
 export async function preparedAssets(root: string, objectIds: readonly string[]): Promise<RuntimeAssetLocation[]> {
   const assets: RuntimeAssetLocation[] = [];
   for (const id of objectIds) {
@@ -99,7 +99,7 @@ function hasPreparedAssets(root: string, id: string) { return existsSync(resolve
 /**
  * Maintainer surface (publish, `check:assets-published`): every object id inventoried by either manifest kind,
  * without hardcoding which ids belong to which kind — an id may have `runtime-assets.json`, `prepared-assets.json`,
- * or (most bodies, after Phase 2) both.
+ * or (most bodies) both.
  */
 export function inventoriedObjectIds(args: readonly string[], root = resolve(import.meta.dirname, "..")): string[] {
   const ids = parseObjectArgs(args);
