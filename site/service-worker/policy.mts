@@ -2,6 +2,7 @@
 // already loaded, never downloads ahead of them, and forgets the least recently
 // used responses once the byte budget is spent.
 
+export const CACHE_PREFIX = 'cssearth-';
 export const RUNTIME_CACHE = 'cssearth-runtime-v1';
 export const INDEX_CACHE = 'cssearth-runtime-index-v1';
 export const INDEX_URL = '/__cssearth-runtime-index__';
@@ -10,6 +11,8 @@ export const RUNTIME_BUDGET_BYTES = 512 * 1024 * 1024;
 export const QUOTA_SHARE = 0.5;
 export const STORE_CONCURRENCY = 4;
 export const STORE_MESSAGE = 'cssearth-store';
+export const PUT_MESSAGE = 'cssearth-put';
+export const TOUCH_MESSAGE = 'cssearth-touch';
 const STORE_BATCH_LIMIT = 2000;
 
 // Query parameters that route a page through the search function. Offline, the
@@ -107,10 +110,42 @@ export function parseIndex(value: unknown): IndexEntry[] {
     && (entry.validator === undefined || typeof entry.validator === 'string'));
 }
 
-// Pages send the same-origin files they loaded; anything else is ignored.
-export function parseStoreMessage(value: unknown): string[] | null {
-  if (typeof value !== 'object' || value === null || !('type' in value) || value.type !== STORE_MESSAGE) return null;
+// Pages send the same-origin files they loaded (to ask which the worker
+// already holds, or to mark them used); anything else is ignored.
+export function parseUrlsMessage(value: unknown, type: string): string[] | null {
+  if (typeof value !== 'object' || value === null || !('type' in value) || value.type !== type) return null;
   if (!('urls' in value) || !Array.isArray(value.urls) || value.urls.length > STORE_BATCH_LIMIT) return null;
   const urls = value.urls.filter((url): url is string => typeof url === 'string');
   return urls.length === value.urls.length ? urls : null;
+}
+
+export interface PutMessage {
+  url: string;
+  body: ArrayBuffer;
+  headers: [string, string][];
+}
+
+// The page hands over the bytes it read from its own HTTP cache.
+export function parsePutMessage(value: unknown): PutMessage | null {
+  if (typeof value !== 'object' || value === null || !('type' in value) || value.type !== PUT_MESSAGE) return null;
+  if (!('url' in value) || typeof value.url !== 'string') return null;
+  if (!('body' in value) || !(value.body instanceof ArrayBuffer)) return null;
+  if (!('headers' in value) || !Array.isArray(value.headers)) return null;
+  const headers = value.headers.filter((pair): pair is [string, string] => Array.isArray(pair) && pair.length === 2
+    && typeof pair[0] === 'string' && typeof pair[1] === 'string');
+  if (headers.length !== value.headers.length) return null;
+  return { url: value.url, body: value.body, headers };
+}
+
+export function isStorableRoute(route: RequestRoute): boolean {
+  return route.kind === 'immutable' || route.kind === 'network-first';
+}
+
+// Firefox sends every request of a controlled page to the worker, even one
+// whose fetch handler does nothing; on a Moon load (about 600 requests) that
+// delayed data-ready by 0.9 s in Firefox 155, while Chrome and Safari paid under
+// 0.1 s. Firefox browser tabs therefore stay uncontrolled; an installed app
+// still gets offline copies.
+export function shouldRegisterServiceWorker(userAgent: string, standalone: boolean): boolean {
+  return standalone || !/\bFirefox\//u.test(userAgent);
 }

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { evictionPlan, offlinePageFallback, parseIndex, parseStoreMessage, responseValidator, STORE_MESSAGE, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
+import { shouldRegisterServiceWorker, evictionPlan, offlinePageFallback, parseIndex, parsePutMessage, parseUrlsMessage, PUT_MESSAGE, responseValidator, STORE_MESSAGE, routeRequest, runtimeBudget, RUNTIME_BUDGET_BYTES } from '../service-worker/policy.mts';
 
 const scope = 'https://css.earth/';
 const route = (url: string, method = 'GET') => routeRequest({ url, method, scope }).kind;
@@ -53,11 +53,16 @@ test('stored bytes are identified by entity tag, else by modification time and l
   assert.equal(responseValidator(new Headers({ 'last-modified': 'Fri' })), undefined);
 });
 
-test('the worker only accepts a list of URLs from the page', () => {
-  assert.deepEqual(parseStoreMessage({ type: STORE_MESSAGE, urls: ['https://css.earth/moon/'] }), ['https://css.earth/moon/']);
-  assert.equal(parseStoreMessage({ type: STORE_MESSAGE, urls: ['a', 1] }), null);
-  assert.equal(parseStoreMessage({ type: 'other', urls: [] }), null);
-  assert.equal(parseStoreMessage('store'), null);
+test('the worker only accepts URL lists and byte hand-overs of the expected shape', () => {
+  assert.deepEqual(parseUrlsMessage({ type: STORE_MESSAGE, urls: ['https://css.earth/moon/'] }, STORE_MESSAGE), ['https://css.earth/moon/']);
+  assert.equal(parseUrlsMessage({ type: STORE_MESSAGE, urls: ['a', 1] }, STORE_MESSAGE), null);
+  assert.equal(parseUrlsMessage({ type: 'other', urls: [] }, STORE_MESSAGE), null);
+  assert.equal(parseUrlsMessage('store', STORE_MESSAGE), null);
+  const body = new ArrayBuffer(4);
+  assert.deepEqual(parsePutMessage({ type: PUT_MESSAGE, url: 'https://css.earth/moon/', body, headers: [['etag', 'x']] }),
+    { url: 'https://css.earth/moon/', body, headers: [['etag', 'x']] });
+  assert.equal(parsePutMessage({ type: PUT_MESSAGE, url: 'https://css.earth/moon/', body: 'text', headers: [] }), null);
+  assert.equal(parsePutMessage({ type: PUT_MESSAGE, url: 'https://css.earth/moon/', body, headers: [['etag']] }), null);
 });
 
 test('the budget never exceeds half the storage quota', () => {
@@ -84,4 +89,14 @@ test('the manifest names icons that exist and the layout links it', async () => 
   const layout = await readFile('site/layouts/PlanetLayout.astro', 'utf8');
   assert.match(layout, /rel="manifest" href="\/manifest\.webmanifest"/u);
   assert.match(layout, /rel="apple-touch-icon" href="\/app-icons\/apple-touch-icon\.png"/u);
+});
+
+test('Firefox tabs stay uncontrolled; installed apps and other browsers register', () => {
+  const firefox = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:155.0) Gecko/20100101 Firefox/155.0';
+  const safari = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Safari/605.1.15';
+  const chrome = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36';
+  assert.equal(shouldRegisterServiceWorker(firefox, false), false);
+  assert.equal(shouldRegisterServiceWorker(firefox, true), true);
+  assert.equal(shouldRegisterServiceWorker(safari, false), true);
+  assert.equal(shouldRegisterServiceWorker(chrome, false), true);
 });

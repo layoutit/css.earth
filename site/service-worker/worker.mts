@@ -1,7 +1,8 @@
 /// <reference lib="webworker" />
 import {
-  evictionPlan, INDEX_CACHE, INDEX_URL, offlinePageFallback, parseIndex, parseStoreMessage, responseValidator,
-  routeRequest, RUNTIME_CACHE, runtimeBudget, STORE_CONCURRENCY, type IndexEntry,
+  CACHE_PREFIX, evictionPlan, INDEX_CACHE, INDEX_URL, isStorableRoute, offlinePageFallback, parseIndex, parsePutMessage,
+  parseUrlsMessage, responseValidator, routeRequest, RUNTIME_CACHE, runtimeBudget, STORE_MESSAGE, TOUCH_MESSAGE,
+  type IndexEntry, type PutMessage,
 } from './policy.mts';
 
 declare const self: ServiceWorkerGlobalScope;
@@ -64,24 +65,40 @@ function requestTrim(): Promise<void> {
   return trimming;
 }
 
-async function store(url: string, response: Response) {
-  // Partial, redirected and error responses would replay the wrong bytes offline.
-  if (response.status !== 200 || response.type !== 'basic' || response.redirected) return;
-  const entries = await loadIndex();
-  const validator = responseValidator(response.headers);
-  const known = entries.get(url);
-  if (validator && known?.validator === validator) {
-    await response.body?.cancel();
-    known.used = Date.now();
-    scheduleIndexWrite();
+async function put({ url, body, headers }: PutMessage) {
+  if (!isStorableRoute(routeRequest({ url, method: 'GET', scope: self.registration.scope }))) return;
+  const responseHeaders = new Headers(headers);
+  try {
+    await (await caches.open(RUNTIME_CACHE)).put(url, new Response(body, { status: 200, headers: responseHeaders }));
+  } catch {
+    // Storage is full or refused: drop the copies rather than keep a partial
+    // set that would fail offline anyway. The next visit starts again.
+    await Promise.all([caches.delete(RUNTIME_CACHE), caches.delete(INDEX_CACHE)]);
+    index = new Map();
     return;
   }
-  const body = await response.arrayBuffer();
-  const copy = new Response(body, { status: response.status, statusText: response.statusText, headers: response.headers });
-  await (await caches.open(RUNTIME_CACHE)).put(url, copy);
-  entries.set(url, { url, bytes: body.byteLength, used: Date.now(), validator });
+  (await loadIndex()).set(url, { url, bytes: body.byteLength, used: Date.now(), validator: responseValidator(responseHeaders) });
   scheduleIndexWrite();
   await requestTrim();
+}
+
+async function markUsed(urls: readonly string[]) {
+  const entries = await loadIndex();
+  const now = Date.now();
+  for (const url of urls) { const entry = entries.get(url); if (entry) entry.used = now; }
+  scheduleIndexWrite();
+}
+
+// Answers which of the page's files are worth sending and what version of
+// each is already stored, so the page only reads and sends changed files.
+async function known(urls: readonly string[]): Promise<Record<string, string | null>> {
+  const entries = await loadIndex();
+  const answer: Record<string, string | null> = {};
+  for (const url of urls) {
+    if (!isStorableRoute(routeRequest({ url, method: 'GET', scope: self.registration.scope }))) continue;
+    answer[url] = entries.get(url)?.validator ?? null;
+  }
+  return answer;
 }
 
 async function cached(url: string): Promise<Response | undefined> {
@@ -98,39 +115,24 @@ async function offlineAnswer(request: Request): Promise<Response> {
   return page ?? Response.error();
 }
 
-// Copies what the page has just loaded. The browser's HTTP cache usually
-// answers, so this rarely touches the network.
-async function keep(url: string) {
-  const route = routeRequest({ url, method: 'GET', scope: self.registration.scope });
-  if (route.kind !== 'immutable' && route.kind !== 'network-first') return;
-  if (route.kind === 'immutable' && await cached(url)) return;
-  try {
-    await store(url, await fetch(url, { cache: 'force-cache', credentials: 'same-origin' }));
-  } catch {
-    // The copy is best effort; the next visit tries again.
-  }
-}
-
-async function keepAll(urls: readonly string[]) {
-  const queue = [...urls];
-  await Promise.all(Array.from({ length: STORE_CONCURRENCY }, async () => {
-    for (let url = queue.shift(); url !== undefined; url = queue.shift()) await keep(url);
-  }));
-}
-
 self.addEventListener('install', () => { void self.skipWaiting(); });
 
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
     const names = await caches.keys();
-    await Promise.all(names.filter(name => name.startsWith('cssearth-') && !OWNED_CACHES.has(name)).map(name => caches.delete(name)));
+    await Promise.all(names.filter(name => name.startsWith(CACHE_PREFIX) && !OWNED_CACHES.has(name)).map(name => caches.delete(name)));
     await self.clients.claim();
   })());
 });
 
 self.addEventListener('message', event => {
-  const urls = parseStoreMessage(event.data);
-  if (urls) event.waitUntil(keepAll(urls));
+  const [port] = event.ports;
+  const ask = parseUrlsMessage(event.data, STORE_MESSAGE);
+  if (ask && port) { event.waitUntil(known(ask).then(answer => port.postMessage(answer))); return; }
+  const used = parseUrlsMessage(event.data, TOUCH_MESSAGE);
+  if (used) { event.waitUntil(markUsed(used)); return; }
+  const message = parsePutMessage(event.data);
+  if (message) event.waitUntil(put(message));
 });
 
 // Streaming responses through the worker costs about half a second per scene
@@ -151,6 +153,20 @@ async function page(request: Request): Promise<Response> {
   }
 }
 
+// Once a page load has failed, its files come straight from storage; only
+// files never stored still try the network.
+async function stored(request: Request): Promise<Response> {
+  const hit = await cached(request.url);
+  if (hit) return hit;
+  try {
+    const response = await fetch(request);
+    networkDown = false;
+    return response;
+  } catch {
+    return Response.error();
+  }
+}
+
 self.addEventListener('fetch', event => {
   if (event.request.headers.has('range')) return;
   const { request } = event;
@@ -158,5 +174,5 @@ self.addEventListener('fetch', event => {
   if (!navigation && !networkDown && self.navigator.onLine) return;
   const route = routeRequest({ url: request.url, method: request.method, scope: self.registration.scope });
   if (route.kind === 'bypass') return;
-  event.respondWith(navigation ? page(request) : fetch(request).catch(() => offlineAnswer(request)));
+  event.respondWith(navigation ? page(request) : stored(request));
 });
