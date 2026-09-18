@@ -36,6 +36,22 @@
       ]
     },
     {
+      "id": "emission-2020",
+      "subject": "The 4 micrometre light outside the photosphere as a third dataset",
+      "status": "included",
+      "finding": "The VLTI/MATISSE reconstruction that paints this star's sphere carries a fifth of its flux outside the published 42.45 milliarcsecond disc. On the sphere that light is a flat plate drawn behind the body, which is a billboard, so it was tested for a shape the same way the polarisation was. Measured on the released reconstruction: the light falls by a factor of 2.3 across the first beam beyond the limb, 3.0 across the second and 3.2 across the next two, where a gaussian of the 4 milliarcsecond beam would fall by orders of magnitude, and it flattens into a shoulder between 42 and 50 milliarcseconds, which a beam skirt cannot produce. It is therefore resolved emission and not the instrument. The disc and the first beam beyond it are excluded, because inside the disc the sphere is drawn and within one beam of it the light is the star's own edge smeared by that beam. Over the 1.19 to 2.36 stellar radii that remain, the envelope that best projects to the measured profile is a steeply falling one, density as r to the minus 7.95, leaving 2.99e-6 against 1.50e-5 for the constant depth an extrusion assumes and a profile whose own rms is 2.09e-5. Colour is the reconstruction's own heat scale, the one the sphere already carries, because this is the same quantity.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202347719",
+        "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
       "id": "product-registration",
       "subject": "Where the star sits inside the 2024 polarisation map",
       "status": "included",
