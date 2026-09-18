@@ -18,7 +18,8 @@ tools; `pnpm setup:assets` downloads the prepared browser images; `pnpm dev`
 restores the prepared JSON beside each body (it needs the images `setup:assets`
 just downloaded) and serves the site on port 4210. For a single body, use
 `pnpm setup:assets --object=<id>` and open `/<id>/`. For a production build,
-run `pnpm setup:assets`, `pnpm build`, then `pnpm preview`.
+run `pnpm build`, then `pnpm preview`; the build first runs `setup:assets`
+itself, which only downloads files that are missing or changed.
 
 Development startup checks installed volume packages without preparing every
 nebula. A missing or invalid package leaves its catalogue facts accessible and

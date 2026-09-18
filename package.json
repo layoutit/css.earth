@@ -54,7 +54,7 @@
     "perf:trace": "node tools/performance/trace-brief.mts",
     "pin:documents": "node tools/pin-object-documents.mts",
     "postinstall": "pnpm build:tools",
-    "prebuild": "pnpm build:tools && pnpm prepare:object-json && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:minimap && pnpm prepare:galaxy-field",
+    "prebuild": "pnpm build:tools && pnpm setup:assets && pnpm prepare:object-json && pnpm prepare:environment-images && pnpm prepare:nebulae && pnpm prepare:minimap && pnpm prepare:galaxy-field",
     "predev": "pnpm build:tools && pnpm prepare:object-json && pnpm prepare:environment-images && pnpm prepare:minimap && pnpm prepare:galaxy-field",
     "prepare:catalog": "node tools/prepare-catalog.mts",
     "prepare:checkout": "node tools/restore-source-inputs.mts && pnpm prepare:planets",
