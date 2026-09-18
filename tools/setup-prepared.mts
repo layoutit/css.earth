@@ -1,0 +1,23 @@
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import { installRuntimeAssets } from "./setup.mts";
+import { preparedAssetObjectIds, preparedAssets } from "./runtime-assets.mts";
+
+/** `pnpm setup:prepared`: restore Phase 2's `prepared-assets.json` inventories (baked `prepared/*` output that
+ * git no longer tracks — see FABLE_REVIEW.md section D). `setup:assets` runs this too, so a plain `pnpm
+ * setup:assets` remains the one command a clean checkout needs. */
+export async function setupPrepared(args: readonly string[], root = resolve(import.meta.dirname, "..")) {
+  const ids = preparedAssetObjectIds(args, root);
+  const assets = await preparedAssets(root, ids);
+  return { ids, assets };
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const root = resolve(import.meta.dirname, "..");
+  const { ids, assets } = await setupPrepared(process.argv.slice(2), root);
+  console.log(`Setting up prepared assets for ${ids.join(", ")}: ${assets.length} file(s). No source preparation or geometry mirror required.`);
+  const result = await installRuntimeAssets(assets, { onProgress: ({ completed, total }) => {
+    if (completed % 100 === 0) console.log(`Prepared assets: ${completed}/${total}`);
+  } });
+  console.log(`Prepared setup complete: ${result.installed} downloaded, ${result.reused} reused.`);
+}
