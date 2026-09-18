@@ -71,8 +71,10 @@ try {
           viewport: box(".planet-viewport"), input: box(".planet-input-surface"),
           overlays: box(".planet-scene-overlays"), status: box(".planet-view-readout"),
           sourcesShown: shown(".planet-attribution-footer"),
+          minimapMounted: document.querySelectorAll(".space-minimap").length > 0,
           minimapShown: document.querySelectorAll(".space-minimap").length > 0
             && getComputedStyle(test.required(test.element(".space-minimap"), "minimap style")).display !== "none",
+          minimapSettingShown: getComputedStyle(test.required(test.element(".planet-minimap-setting-control"), "minimap setting style")).display !== "none",
           isolated: getComputedStyle(test.required(test.element('.planet-viewport'), 'computed style element')).isolation === 'isolate',
           // The world presentation wraps the detail stage; the stage still has to live inside the viewport.
           sceneInViewport: test.element('.planet-stage').closest('.planet-viewport') !== null,
@@ -128,6 +130,7 @@ try {
           assert.equal(result.categoriesShown, false, "phones carry no filter row: search reaches every classification");
           assert.ok(result.status.bottom <= result.sidebar.top + .1, "the readout rides above the sheet");
           assert.equal(result.minimapShown, false, "phones leave the scene uncovered");
+          assert.equal(result.minimapSettingShown, false, "phones offer no minimap setting");
           assert.equal(result.sourcesShown, true, "phones carry the shared Sources card in the sheet");
           assert.equal(result.githubShown, false, "the version link carries GitHub on phones");
           assert.ok(result.settings.left >= result.search.right,
@@ -146,7 +149,8 @@ try {
           near(result.card.top, result.sidebar.top, "content starts without an empty search row");
           assert.ok(result.sidebar.top >= result.header.bottom, "the panel starts below the header");
           assert.ok(result.sidebar.bottom <= config.height, "the panel stays inside the window");
-          assert.equal(result.minimapShown, true, "wider layouts keep the minimap");
+          assert.equal(result.minimapShown, false, "the minimap setting starts off");
+          assert.equal(result.minimapMounted, false, "the minimap is not built until it is asked for");
           assert.equal(result.sourcesShown, true, "wider layouts print the source credits");
           assert.equal(result.githubShown, true, "wider layouts show the GitHub link");
           assert.ok(result.categories.left >= result.search.right,
@@ -156,6 +160,20 @@ try {
         }
       };
       check(await measure());
+      if (!sheetLayout) {
+        // Settings switches the minimap on, draws the current view, and off again.
+        const minimapSetting = page.locator('.planet-settings label').filter({ hasText: 'Minimap' });
+        await page.locator('.planet-settings-action').click();
+        await minimapSetting.click();
+        await page.waitForFunction(() => Number(document.querySelector<HTMLElement>('.space-minimap')?.dataset.visibleBodies) > 0);
+        assert.equal((await measure()).minimapShown, true, `${config.name}: the setting shows the minimap`);
+        await page.screenshot({ path: `${output}/${config.name}-minimap.png` });
+        await minimapSetting.click();
+        const off = await measure();
+        assert.equal(off.minimapShown, false, `${config.name}: the setting hides the minimap again`);
+        assert.equal(off.minimapMounted, true, `${config.name}: a hidden minimap keeps its retained markers`);
+        await page.locator('.planet-settings-action').click();
+      }
       assert.equal(await page.locator('.planet-sidebar-frame .explorer-shell-header').count(), 0, 'header is outside the panel');
       const camera = required(await page.locator('.planet-stage > .polycss-camera').elementHandle());
       const sheetTop = () => page.evaluate(() => Math.round(document.querySelector('.planet-sidebar')!.getBoundingClientRect().top));

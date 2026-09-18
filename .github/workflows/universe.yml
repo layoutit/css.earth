@@ -15,8 +15,46 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 # Contract lint needs no build or restored asset and answers within about two minutes; `pnpm check:pr` runs its
-# steps locally. The three heavy jobs start after it, in parallel, and any of them failing cancels the run.
+# steps locally. The heavy jobs start after it, in parallel, and any of them failing cancels the run. A docs-only
+# pull request (tools/classify-changes.mts) skips the heavy jobs entirely; Contract lint alone (doc links and
+# placement) still runs, and a push to main always runs everything.
 jobs:
+  changes:
+    name: Classify changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      docs_only: ${{ steps.classify.outputs.docs_only }}
+      runtime_ownership_args: ${{ steps.ownership-scope.outputs.args }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # History without blobs: a PR needs a merge base with its base branch, and a push needs the previous tip;
+          # `git diff --name-only` reads only commits and trees either way.
+          fetch-depth: 0
+          filter: blob:none
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Classify what this change touched
+        id: classify
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            node tools/classify-changes.mts pr "origin/$GITHUB_BASE_REF"
+          else
+            node tools/classify-changes.mts push "${{ github.event.before }}"
+          fi
+      - name: Scope the runtime ownership check
+        id: ownership-scope
+        # Computed here (this checkout already has the full history a merge-base diff needs) so the "Prepared
+        # universe and shared renderer" job's own checkout can stay shallow. A push to main always keeps --all.
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            echo "args=$(node tools/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=--all" >> "$GITHUB_OUTPUT"
+          fi
+
   lint:
     name: Contract lint
     runs-on: ubuntu-latest
@@ -83,14 +121,19 @@ jobs:
       - name: Test asset inventory, publish verification, closure and local CI tooling
         # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
-        # workflow, object-scope.yml), the prune dry-run report, and the runner behind `pnpm check:pr`. Deliberately
-        # not the wider `pnpm test:platform`, which this workflow does not run and which has known unrelated failures.
+        # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
+        # path (tools/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
+        # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
+        # which this workflow does not run and which has known unrelated failures.
         run: >-
           node --test tools/runtime-assets.test.mts
           tools/publish-verification.test.mts
           tools/check-assets-published.test.mts
           src/platform/runtime-asset-closure.test.mts
           tools/object-scope-gate.test.mts
+          tools/classify-changes.test.mts
+          tools/scope-runtime-ownership-check.test.mts
+          tools/setup.test.mts
           tools/prune-runtime-assets.test.mts
           tools/check-ci.test.mts
       - name: Check published assets this change adds
@@ -109,10 +152,12 @@ jobs:
 
   typecheck:
     name: Typecheck
-    needs: lint
+    needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing.
-    if: ${{ !cancelled() }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
+    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
+    # still run and fail here, never skip. A push to main never skips, docs-only or not.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -131,6 +176,17 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
+          # this cache) under output/tsbuildinfo/; tsc's own file-hash bookkeeping recompiles only what changed
+          # since the restored state, so a stale entry only costs a slower, still-correct run, never a wrong one.
+          # This step runs before `pnpm install` so the hash below never matches a vendored tsconfig.json.
+          path: output/tsbuildinfo
+          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -197,6 +253,15 @@ jobs:
         with:
           node-version: '22'
           cache: pnpm
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # See the Typecheck job: one .tsbuildinfo per tsc program, keyed the same way, so a warm cache here
+          # recompiles only the test/fixture/capture files that changed since the last run on this branch.
+          path: output/tsbuildinfo
+          key: tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-${{ github.head_ref || github.ref_name }}-
+            tsbuildinfo-${{ hashFiles('pnpm-lock.yaml', '**/tsconfig*.json') }}-main-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -225,8 +290,10 @@ jobs:
           pnpm prepare:minimap
           pnpm prepare:sources
       - name: Typecheck test, fixture and capture files
+        # One unbatched program over the whole tests/tsconfig.json closure (tools/typecheck-tests.mts); a 6 GB heap
+        # covers the 3.9 GB the audit measured, well inside the runner's 16 GB.
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          NODE_OPTIONS: --max-old-space-size=6144
         run: pnpm typecheck:tests
       - name: Cancel the rest of the run
         if: failure()
@@ -236,10 +303,135 @@ jobs:
 
   universe:
     name: Prepared universe and shared renderer
-    needs: lint
+    needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing.
-    if: ${{ !cancelled() }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
+    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
+    # still run and fail here, never skip. A push to main never skips, docs-only or not.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      # The last step cancels the rest of the run when this job fails.
+      actions: write
+    steps:
+      - name: Stop when Contract lint did not pass
+        if: needs.lint.result != 'success'
+        run: |
+          echo "::error::Contract lint did not pass, so this job stops here."
+          exit 1
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
+          path: src/objects/earth/source/presentation/InterVariable.ttf
+          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: prepared-assets
+        with:
+          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-assets-v1-
+      - name: Build shared packages and affected entry points
+        run: pnpm build:tools
+      - name: Restore prepared assets and object JSON
+        # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
+        # + prepared/scene.json, or a context/nebula object's whole prepared/ output) — git no longer tracks those
+        # files, and prepare:object-json reads them.
+        run: |
+          pnpm setup:assets
+          pnpm prepare:object-json
+      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        # Main only: a 2.3 GB save costs a minute or more, and PR-scoped entries would crowd the 10 GB cache. This
+        # is the only one of the two prepared-universe jobs that saves; the other only restores (same pattern as
+        # the Typecheck job), so the two parallel jobs never race to write the same cache key.
+        if: github.event_name == 'push' && steps.prepared-assets.outputs.cache-hit != 'true'
+        with:
+          path: |
+            public/scenes
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
+      - name: Test unavailable prepared packages and focus controls
+        run: >-
+          node --test tools/prepare-context-availability.test.mts
+          site/test/prepared-context-navigation.test.mts
+          site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
+      - name: Restore environment images and prepare minimap
+        run: |
+          pnpm prepare:environment-images
+          pnpm prepare:minimap
+      - name: Test source records, provenance and scientific credits
+        run: pnpm test:sources
+      - name: Test pinned JSON transport restoration
+        run: node --test tools/restore-object-json.test.mts
+      - name: Test FITS decoding and offline reference comparisons
+        # Small independent FITS inputs are checked in; no archive downloads or Python needed.
+        run: pnpm test:fits --unit
+      - name: Test SBMT oracle contract and offline projection cases
+        # Native SBMT and real-body archive restoration are opt-in local checks.
+        run: |
+          pnpm typecheck:oracles
+          pnpm test:sbmt --unit
+      - name: Test selected dataset textures and bounded residency
+        run: |
+          node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
+      - name: Test the minimap setting and prepared minimap point ownership, range and coverage
+        run: node --test site/test/minimap-setting.test.mts site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
+      - name: Test shared shell and search ownership
+        run: >-
+          node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts
+          --test site/test/shell-lifetime.test.mts
+          site/test/navigation-router.test.mts site/test/planet-shell.test.mts
+          site/test/router-runtime.test.mts
+          site/test/object-page-data.test.mts
+          site/test/search-response.test.mts
+          site/test/dataset-response.test.mts
+          site/test/dataset-url.test.mts
+          site/test/browser-node-imports.test.mts
+          tools/serialize-prepared-scene.test.mts
+      - name: Enforce activation preparation for every registered object
+        # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
+        run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
+      - name: Check every object's runtime ownership and physical frame receipt
+        # Scoped to the objects this PR touched (tools/scope-runtime-ownership-check.mts, computed in the `changes`
+        # job above); --receipts in Contract lint already covers a scoped run's only real failure mode, and --all
+        # still runs whenever this PR also touched shared code, or on every push to main.
+        env:
+          RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
+        run: |
+          # shellcheck disable=SC2086 # intentional word-splitting: one or more "--object <id>" pairs, or "--all"
+          node tools/check-object-runtime-ownership.mts $RUNTIME_OWNERSHIP_ARGS
+      - name: Test complete shared renderer and camera
+        # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
+        run: pnpm test:renderer
+      - name: Cancel the rest of the run
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel "$GITHUB_RUN_ID" -R "$GITHUB_REPOSITORY"
+
+  universe-preparation:
+    name: Prepared universe preparation and galaxy field
+    needs: [lint, changes]
+    # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
+    # failed `needs` reports "skipped", which a ruleset counts as passing. Split out of the `universe` job so the
+    # two halves of "Prepared universe and shared renderer" run in parallel at roughly equal length; see
+    # output/CI_OPTIMIZATION.md section 6, item 3. A docs-only pull request skips this job (see the `changes` job
+    # and tools/classify-changes.mts); a push to main never skips, and a failed lint still fails here, not skip.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -271,9 +463,9 @@ jobs:
           path: .local/galaxy-field/sources
           key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        id: prepared-assets
         with:
-          # setup:assets sha-verifies every restored file and downloads only what is missing or changed.
+          # setup:assets sha-verifies every restored file and downloads only what is missing or changed. This job
+          # only restores (like Typecheck); the `universe` job above owns the conditional save.
           path: |
             public/scenes
             src/objects/*/prepared/runtime.json
@@ -283,26 +475,9 @@ jobs:
       - name: Build shared packages and affected entry points
         run: pnpm build:tools
       - name: Restore prepared assets and object JSON
-        # setup:assets restores public/scenes AND each object's prepared-assets.json inventory (prepared/runtime.json
-        # + prepared/scene.json, or a context/nebula object's whole prepared/ output) — git no longer tracks those
-        # files, and prepare:object-json reads them.
         run: |
           pnpm setup:assets
           pnpm prepare:object-json
-      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        # Main only: a 2.3 GB save costs a minute or more, and PR-scoped entries would crowd the 10 GB cache.
-        if: github.event_name == 'push' && steps.prepared-assets.outputs.cache-hit != 'true'
-        with:
-          path: |
-            public/scenes
-            src/objects/*/prepared/runtime.json
-            src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-      - name: Test unavailable prepared packages and focus controls
-        run: >-
-          node --test tools/prepare-context-availability.test.mts
-          site/test/prepared-context-navigation.test.mts
-          site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts
       - name: Test authored preparation publication and cache
         # Finalization renders through headless Chromium, so the browser stays installed here.
         run: |
@@ -313,53 +488,12 @@ jobs:
             tools/write-prepared-set.test.mts \
             tools/preparation-cache.test.mts \
             tools/prepare-planets.test.mts
-      - name: Restore environment images and prepare minimap
-        run: |
-          pnpm prepare:environment-images
-          pnpm prepare:minimap
       - name: Bake and test the scientific galaxy field
         run: pnpm test:galaxy-field
-      - name: Test source records, provenance and scientific credits
-        run: pnpm test:sources
       - name: Test prepared source, materials and world context
         run: |
           pnpm test:preparation --universe
           node --test tools/objects/material-composition/coplanar-raster.test.mts
-      - name: Test pinned JSON transport restoration
-        run: node --test tools/restore-object-json.test.mts
-      - name: Test FITS decoding and offline reference comparisons
-        # Small independent FITS inputs are checked in; no archive downloads or Python needed.
-        run: pnpm test:fits --unit
-      - name: Test SBMT oracle contract and offline projection cases
-        # Native SBMT and real-body archive restoration are opt-in local checks.
-        run: |
-          pnpm typecheck:oracles
-          pnpm test:sbmt --unit
-      - name: Test selected dataset textures and bounded residency
-        run: |
-          node --test src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts tests/objects/unit/earth/dataset-selection.test.mts tests/objects/unit/earth/surface-image-banks.test.mts
-      - name: Test prepared minimap point ownership, range and coverage
-        run: node --test site/test/minimap-point-range.test.mts site/test/minimap-point-coverage.test.mts
-      - name: Test shared shell and search ownership
-        run: >-
-          node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts
-          --test site/test/shell-lifetime.test.mts
-          site/test/navigation-router.test.mts site/test/planet-shell.test.mts
-          site/test/router-runtime.test.mts
-          site/test/object-page-data.test.mts
-          site/test/search-response.test.mts
-          site/test/dataset-response.test.mts
-          site/test/dataset-url.test.mts
-          site/test/browser-node-imports.test.mts
-          tools/serialize-prepared-scene.test.mts
-      - name: Enforce activation preparation for every registered object
-        # Reads every object's restored prepared/runtime.json, so it stays after the restore, not in Contract lint.
-        run: node --test tools/prepared-activation-groups.test.mts tools/prepared-activation-registry.test.mts
-      - name: Check every object's runtime ownership and physical frame receipt
-        run: node tools/check-object-runtime-ownership.mts --all
-      - name: Test complete shared renderer and camera
-        # Reads restored prepared volumes and the generated world context and catalog, so it stays after the restore.
-        run: pnpm test:renderer
       - name: Cancel the rest of the run
         if: failure()
         env:
@@ -368,10 +502,12 @@ jobs:
 
   nebula:
     name: Internal nebula packages and isolated controls
-    needs: lint
+    needs: [lint, changes]
     # Start only after Contract lint, and still start when it failed, only to fail at once: a job skipped by a
-    # failed `needs` reports "skipped", which a ruleset counts as passing.
-    if: ${{ !cancelled() }}
+    # failed `needs` reports "skipped", which a ruleset counts as passing. A docs-only pull request skips this job
+    # (reporting success, not failure, to the required check) unless lint itself did not pass — that case must
+    # still run and fail here, never skip. A push to main never skips, docs-only or not.
+    if: ${{ !cancelled() && (needs.lint.result != 'success' || github.event_name != 'pull_request' || needs.changes.outputs.docs_only != 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -394,6 +530,10 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared TypeScript dependencies
         run: pnpm -r --filter "./packages/**" build
+      - name: Test the object registry and adapter packages
+        # 802 tests, ~6 s local; never ran in CI before (output/TEST_AUDIT.md section 1.5). Needs only the build
+        # above, so it runs here rather than adding another checkout+install in Contract lint.
+        run: pnpm test:packages
       - name: Install the browser used by isolated control tests
         run: pnpm exec playwright install --with-deps chromium
       - name: Check all nebula packages, tests and dependency boundaries

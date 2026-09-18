@@ -9,7 +9,9 @@
     "skipLibCheck": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "types": []
+    "types": [],
+    "incremental": true,
+    "tsBuildInfoFile": "../../../output/tsbuildinfo/renderer.tsbuildinfo"
   },
   "include": ["**/*.ts"],
   "exclude": ["**/*.test.ts", "tsup.config.ts", "dist", "preparation"]

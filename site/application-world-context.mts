@@ -6,7 +6,7 @@ import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-res
 import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { mountSpaceMinimap } from './minimap/minimap.mts';
+import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_CONTEXT_URL } from './world-context-plan.mts';
@@ -146,7 +146,7 @@ export function createApplicationWorldContext() {
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector<HTMLElement>('.planet-sidebar'));
-        const minimap = mountSpaceMinimap(stage.ownerDocument);
+        const minimap = createSpaceMinimapSetting(stage.ownerDocument, error => target.reportError(error));
         const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
         let selectedObjectId = applicationContext.focus.id, asteroidOrbitsEnabled = false;
@@ -277,6 +277,9 @@ export function createApplicationWorldContext() {
             if (destroyed) return;
             asteroidLabelsEnabled = enabled === true;
             updateDiscoveryVisibility();
+          },
+          setMinimapEnabled(enabled: boolean) {
+            if (!destroyed) minimap.setEnabled(enabled);
           },
           setHighlightedClassification(classification: string | null) {
             if (destroyed) return;

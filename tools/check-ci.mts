@@ -9,6 +9,11 @@ import {requireArray, requireRecord, requireString} from './source-values.mts';
 interface CiStep {name:string;run:string;env:Record<string,string>;}
 /** The workflow's own token; a local run uses the contributor's `gh` login instead. */
 const WORKFLOW_TOKEN='${{ github.token }}';
+/** Expressions only a real GitHub run can evaluate (a cross-job `needs` output, computed from the PR's diff): a
+ * local run has no such diff, so it substitutes the most thorough, always-correct value instead of failing. */
+const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
+ '${{ needs.changes.outputs.runtime_ownership_args }}':'--all',
+};
 /** Step conditions that only mean something inside a GitHub run: skip the step when Contract lint failed, or cancel
  * the rest of the run after a failure. */
 export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
@@ -18,7 +23,9 @@ export function readCiSteps(source:string,jobName='universe'):CiStep[] {
  if(!Object.hasOwn(jobs,jobName))throw new Error(`Unknown CI job: ${jobName}`);
  const job=requireRecord(jobs[jobName]);
  const decodeEnvironment=(value:unknown)=>Object.fromEntries(Object.entries(value===undefined?{}:requireRecord(value))
-   .map(([key,value])=>[key,requireString(value,`CI environment ${key}`)]).filter(([,value])=>value!==WORKFLOW_TOKEN));
+   .map(([key,value])=>[key,requireString(value,`CI environment ${key}`)])
+   .filter(([,value])=>value!==WORKFLOW_TOKEN)
+   .map(([key,value])=>[key,Object.hasOwn(LOCAL_EXPRESSION_SUBSTITUTIONS,value)?LOCAL_EXPRESSION_SUBSTITUTIONS[value]:value]));
  const inherited={...decodeEnvironment(workflow.env),...decodeEnvironment(job.env)};
  return requireArray(job.steps).flatMap(value=>{
   const step=requireRecord(value);
@@ -71,9 +78,10 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
  const root=resolve(import.meta.dirname,'..'),args=process.argv.slice(2);
  const flags=['--list','--quick','--typecheck'];
  if(args.some(arg=>!flags.includes(arg)&&!/^--job=[a-z][a-z0-9-]*$/.test(arg))||new Set(args.map(arg=>arg.split('=')[0])).size!==args.length)
-  throw new Error('Usage: pnpm check:ci [--job=lint|typecheck|typecheck-tests|universe|nebula] [--quick] [--typecheck] [--list]');
+  throw new Error('Usage: pnpm check:ci [--job=lint|typecheck|typecheck-tests|universe|universe-preparation|nebula] [--quick] [--typecheck] [--list]');
  // Without --job, run every job the shared-universe checks need, in the order that fails fastest.
- const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6),jobNames=jobName?[jobName]:['lint','typecheck','typecheck-tests','universe'];
+ const jobName=args.find(arg=>arg.startsWith('--job='))?.slice(6),
+  jobNames=jobName?[jobName]:['lint','typecheck','typecheck-tests','universe','universe-preparation'];
  const workflow=await readFile(resolve(root,'.github/workflows/universe.yml'),'utf8');
  let steps=jobNames.flatMap(jobName=>readCiSteps(workflow,jobName));
  if(args.includes('--quick'))steps=quickSteps(steps);

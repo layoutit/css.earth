@@ -18,6 +18,13 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  assert.ok(readCiSteps(workflow,'typecheck-tests').some(step=>step.run.trim()==='pnpm typecheck:tests'));
  assert.ok(universe.length>10);
  assert.equal(universe.at(-1)?.run.trim(),'pnpm test:renderer');
+ const universePreparation=readCiSteps(workflow,'universe-preparation');
+ assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:galaxy-field')));
+ assert.ok(universePreparation.some(step=>step.run.includes('pnpm test:preparation --universe')));
+ // A local run has no PR diff to scope the ownership check to, so it substitutes the always-correct --all rather
+ // than failing on an expression only a real GitHub run (the `changes` job's output) can evaluate.
+ const ownership=universe.find(step=>step.name.includes('runtime ownership'));
+ assert.equal(ownership?.env.RUNTIME_OWNERSHIP_ARGS,'--all');
 });
 test('--quick skips only the network and documentation steps, and refuses a job without them',async()=>{
  const lint=readCiSteps(await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8'),'lint');
@@ -60,7 +67,7 @@ test('a selected job uses its own steps and inherited environment',()=>{
 });
 test('the lint prerequisite and run-cancel steps are CI-only; any other condition still refuses a local run',async()=>{
  const workflow=await readFile(new URL('../.github/workflows/universe.yml',import.meta.url),'utf8');
- for(const job of ['typecheck','typecheck-tests','universe','nebula']){
+ for(const job of ['typecheck','typecheck-tests','universe','universe-preparation','nebula']){
   const names=readCiSteps(workflow,job).map(step=>step.name);
   assert.ok(!names.includes('Stop when Contract lint did not pass')&&!names.includes('Cancel the rest of the run'),job);
  }
