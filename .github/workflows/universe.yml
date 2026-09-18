@@ -43,6 +43,7 @@ jobs:
       - name: Build shared packages and affected entry points
         run: |
           pnpm build:tools
+          pnpm setup:assets
           pnpm prepare:object-json
       - name: Test unavailable prepared packages and focus controls
         run: >-
