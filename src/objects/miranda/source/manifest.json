@@ -1516,8 +1516,8 @@
     {
       "id": "miranda-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 9122,
-      "expectedSha256": "d36b58fb00854c3228dbb9e56a26b17d9d366e42d38357ddb1a6eeb4fe7e8c9a",
+      "expectedBytes": 9087,
+      "expectedSha256": "81a4eeba04c867da89212276482e3ab6dc54f292cd493df53fd8b7e71959542f",
       "origin": "Repository-authored Miranda raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1535,8 +1535,8 @@
     {
       "id": "miranda-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1596,
-      "expectedSha256": "d5606d5b83b0254a95a2999b09844c20b70d7261b5119ca24bedbf5d73e7a94b",
+      "expectedBytes": 1602,
+      "expectedSha256": "e23f4276ff5e665b5e4fb813619fe09a97f39c45aa0eb8fdf204c8e24d1bbf13",
       "origin": "Repository-authored Miranda geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1629,8 +1629,8 @@
     {
       "id": "miranda-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14780,
-      "expectedSha256": "66426cbd8bfe0ad85a822e56875006e80477442e028a91ba2a7359af88c383d5",
+      "expectedBytes": 14798,
+      "expectedSha256": "8a80f5ba1aa9478bd9af6cb97bf4cfe830d05a6da2cedf822963579f69024d31",
       "origin": "Repository-authored Miranda object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

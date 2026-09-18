@@ -87,8 +87,8 @@
     {
       "id": "hd-189733b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2871,
-      "expectedSha256": "d449a3bab08d4743399b5412c25ec72525be9fcc7c996e180a1652b949b48896",
+      "expectedBytes": 2836,
+      "expectedSha256": "ac7b7ecefd155407b309e9538f265ab93d1e7bd4596a68da0c08544301591907",
       "origin": "Repository-authored raster recipe: the deposited MIRI temperature map on the reference sphere, false colour, observed longitudes only, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -106,8 +106,8 @@
     {
       "id": "hd-189733b-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1786,
-      "expectedSha256": "ec7ddcce636a27f706e04e1338a9ea3fc0352c93fa040841e55be6b530f80fa5",
+      "expectedBytes": 1792,
+      "expectedSha256": "d836dae77e960fc76cd9e5b1767efbf8f76f54d2790a3d0c1b95b51ef531603a",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -206,8 +206,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4680,
-      "expectedSha256": "338f4add862a9ca2decdf87f200d4394f9982040727a5e5faceb0ff5b2f13532",
+      "expectedBytes": 4686,
+      "expectedSha256": "97ac7455dcebc7186e67222735cf89dbe1d612aa13ca223e8de4f91eb6c6234b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

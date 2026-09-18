@@ -143,8 +143,8 @@
       }
     },
     {
-      "expectedBytes": 5874,
-      "expectedSha256": "5f9bd655f787133135f53c9d18eddeebe4de8887a631d04c08b115241d491b73",
+      "expectedBytes": 5839,
+      "expectedSha256": "bfe2312484bc73068f1599d0394de0f6a0998d08495fde5b51811fb573b3907f",
       "id": "pi1-gruis-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the PIONIER reconstruction cast onto the reference sphere by the surface-observation route, polar bands, off-limb plate",
@@ -162,8 +162,8 @@
       ]
     },
     {
-      "expectedBytes": 1868,
-      "expectedSha256": "66f6a50610c9d64b10a99a43a9661c7dbe696eb24aa9e5760f72182c64a30517",
+      "expectedBytes": 1874,
+      "expectedSha256": "2f4961a22bca3aedd6a648505bfe6fe7e33e032fbcc69c89ae4e58948fc8dc7a",
       "id": "pi1-gruis-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -262,8 +262,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 5369,
-      "expectedSha256": "594c5d60b483fbba2ae7aa90b0a56c8cde7018527b752bb455e8c6a304ffd4cd",
+      "expectedBytes": 5375,
+      "expectedSha256": "cdf02e6d556f2d4e153081d4d5e593f2c4c87f135886549e3f5de17d8dd8e1f3",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",

@@ -692,8 +692,8 @@
     {
       "id": "ganymede-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 14038,
-      "expectedSha256": "ab831101edf4f77f21ca809f7a2800c505e8acf95d268a51ba05c77c9960e2a2",
+      "expectedBytes": 14003,
+      "expectedSha256": "078b431d900f4e56696bdef15001c93a96c8b35f5d5ff0faa38287c6c4195962",
       "origin": "Repository-authored Ganymede raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -711,8 +711,8 @@
     {
       "id": "ganymede-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1608,
-      "expectedSha256": "2a5a991762ca904e9d486077a7e37eda1d0458270af27f1706339546ca9e65ec",
+      "expectedBytes": 1614,
+      "expectedSha256": "e8ba45ad028229c1c1c4cedbf7b21895f3d1367bcb3e675c5620c075f5295929",
       "origin": "Repository-authored Ganymede geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -805,8 +805,8 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 21377,
-      "expectedSha256": "75ee8a4a1d19c8aebd84ad7a645cc628c39c11cdb8559c16c8b7a8f30c213e38",
+      "expectedBytes": 21413,
+      "expectedSha256": "baf635c08383909e568fa7829ea06967b05300aed4a8755cd243c11f2afb63e8",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

@@ -1914,8 +1914,8 @@
     {
       "id": "europa-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 15075,
-      "expectedSha256": "c1fd90d5c68c04e5ff9d901db7442057143ba4c4c12ee2213521fba056decede",
+      "expectedBytes": 15040,
+      "expectedSha256": "6d992ff91e83327d1502c9344849b24e8cd447bbc9f0dbefbcd04ca5fe65eb67",
       "origin": "Repository-authored Europa raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1933,8 +1933,8 @@
     {
       "id": "europa-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1593,
-      "expectedSha256": "11a90c294d1f32eeea638b3c90ce5b3a91b3e9cfbd21847275528fd96cc788cf",
+      "expectedBytes": 1599,
+      "expectedSha256": "4f1777df630ee20c73507fbd3f7be61f302421a46fcb7755841904193bde4812",
       "origin": "Repository-authored Europa geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2027,8 +2027,8 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 20352,
-      "expectedSha256": "8f4898752aed967d3e2a8d496d7484f085f8bb43c9d15d413425f0302c558be7",
+      "expectedBytes": 20400,
+      "expectedSha256": "ac5fab975fe53569cd2f647746b4aafe4f945934eb59bdcf361a9b9410d9284f",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

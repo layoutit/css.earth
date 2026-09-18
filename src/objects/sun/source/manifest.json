@@ -1467,8 +1467,8 @@
     {
       "id": "sun-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12120,
-      "expectedSha256": "83b7e9748a4f8541343092f96a1369c12f612658c2c05ef64d06c9c553f1cc37",
+      "expectedBytes": 12085,
+      "expectedSha256": "2904dfb230976feb20f902ef8325c209011f622e5fa7ae92ee8f1b3f49ef99ff",
       "origin": "Repository-authored raster recipe: four CR2311 synoptic surfaces interpreted by the shared observation adapter (continuum mosaic, HMI and AIA FITS maps), polar bands, off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1486,8 +1486,8 @@
     {
       "id": "sun-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1972,
-      "expectedSha256": "10ac1e75449db66f2a21d32d790e9d4b5126e73395fcab8c6d7b86e49a40f6ba",
+      "expectedBytes": 1978,
+      "expectedSha256": "054204b5ae9d97e5bfc7828b738f483ec25791e56f832803b3fd0ccfdbc69a90",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, 32-segment polar bands with a centre cap, carried from the retired static-surface geometry",
       "sourceBinding": {
         "kind": "local",
@@ -1562,8 +1562,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10898,
-      "expectedSha256": "c1d8210cd8a902c10d3d0c4bfff1a5446aa2b0e323b73b319687896900b395ce",
+      "expectedBytes": 10922,
+      "expectedSha256": "41a9918afb9b3c8e35be8e99bb2bddc8759e1c5940cbdc0fb2c6d1322dbfae65",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",

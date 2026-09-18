@@ -2,11 +2,6 @@
   "schema": "cssantares-runtime-assets@1",
   "assets": [
     {
-      "filename": "antares-context-shape.webp",
-      "bytes": 54,
-      "sha256": "2785aad210eb05422d442eb62492f9d7c020f6486a780b80b9c02ca93d4bb0b3"
-    },
-    {
       "filename": "antares-context-shape@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
@@ -17,29 +12,14 @@
       "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
     },
     {
-      "filename": "antares-limb-shape.webp",
-      "bytes": 52,
-      "sha256": "e11263e01a109975ae10bdc4a3a8d28c162d07eecb327b442f278f66562ee9af"
-    },
-    {
       "filename": "antares-limb-shape@2x.webp",
       "bytes": 84,
       "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
     },
     {
-      "filename": "antares-poles-shape.webp",
-      "bytes": 680,
-      "sha256": "66d5e1ae76729e12f7e4e0f99f23039a8ef77d9ef9d3410fd0181e29bc0ee5f4"
-    },
-    {
       "filename": "antares-poles-shape@2x.webp",
       "bytes": 1340,
       "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
-    },
-    {
-      "filename": "antares-surface-shape.webp",
-      "bytes": 78,
-      "sha256": "2ec4d1bb2d266fdbb9283cb47781b2b34b4ff694f799a903f01db856ed2b22fc"
     },
     {
       "filename": "antares-surface-shape@2x.webp",

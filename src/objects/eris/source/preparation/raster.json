@@ -7,10 +7,6 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,
@@ -34,6 +30,17 @@
         "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
         "illuminant": "reference/CIE_std_illum_D65.csv",
         "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
+      }
+    },
+    {
+      "id": "illustration",
+      "output": "eris-{id}{suffix}.webp",
+      "thumbnail": "eris-lens-{id}.webp",
+      "source": "nasa-eris.glb",
+      "falseColor": false,
+      "science": {
+        "kind": "glb-base-color",
+        "model": "nasa-eris.glb"
       }
     }
   ],

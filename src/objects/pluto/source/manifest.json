@@ -326,8 +326,8 @@
     {
       "id": "pluto-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "d42cb9dde57e8d5fe359499f88e0db03db4d8e0c2d72072ed25d4e6da37e2faf",
-      "expectedBytes": 14717,
+      "expectedSha256": "26d513a6a1e78783eb3f8c5891f34f493ea4b735d3947464527b966d84b6d34f",
+      "expectedBytes": 14682,
       "origin": "Repository-authored Pluto raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -345,8 +345,8 @@
     {
       "id": "pluto-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "ee6d3634659c6b14ef8e49e4d50bf22de65e973f7b2c8bfd0b150cb07d316c4c",
-      "expectedBytes": 1599,
+      "expectedSha256": "c47d90754003634cfdb94a3f5a00fc375dcb060cc577e1b25e746e35b92b5b75",
+      "expectedBytes": 1605,
       "origin": "Repository-authored Pluto CSS geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -439,8 +439,8 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "98b33e99f5bf700cb308059c67d1c77f4e7c3aafd7d9617dc1c3bfce4172a94b",
-      "expectedBytes": 15307,
+      "expectedSha256": "3185975cf2058f46d3407ddebece117d125f8cadd839cb051376d17c763aca9a",
+      "expectedBytes": 15343,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

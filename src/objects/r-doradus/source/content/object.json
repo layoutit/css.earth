@@ -55,8 +55,8 @@
         "id": "alma",
         "label": "ALMA continuum",
         "thumbnail": "r-doradus-lens-alma.webp",
-        "surface": "r-doradus-surface-alma.webp",
-        "poles": "r-doradus-poles-alma.webp",
+        "surface": "r-doradus-surface-alma@2x.webp",
+        "poles": "r-doradus-poles-alma@2x.webp",
         "source": {
           "id": "r-doradus-alma-338ghz",
           "path": "../manifest.json",
@@ -119,8 +119,8 @@
         "label": "Shape",
         "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
         "thumbnail": "r-doradus-lens-shape.webp",
-        "surface": "r-doradus-surface-shape.webp",
-        "poles": "r-doradus-poles-shape.webp",
+        "surface": "r-doradus-surface-shape@2x.webp",
+        "poles": "r-doradus-poles-shape@2x.webp",
         "source": {
           "id": "r-doradus-observational-measurements",
           "path": "../manifest.json",

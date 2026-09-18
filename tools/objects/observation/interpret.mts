@@ -33,6 +33,7 @@ import { observationRaster, parseObservationLens, loadNativeObservationPoleSampl
 import { loadNativePhotograph, type NativePhotograph } from '../terrestrial-layers/native-photograph-source.mts';
 import { preparePdsFloatMap, parsePdsFloatProfile } from './pds-float-map.mts';
 import { loadDiscIntegratedColor } from './disc-integrated-color.mts';
+import { prepareGlbSurface } from '../shape-model/glb-surface.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor } from './stellar-photometric-color.mts';
 import { encodeBandColor } from '../color-transfer.mts';
 import { prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from './controlled-map-mosaic.mts';
@@ -359,6 +360,14 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         return { ...rgb3(rgb, missing, width, height, false), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
           report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees, fluxFractionOutsideDisc: outside / total,
             meaning: 'The frame\'s light outside the silhouette on the lens display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
+      }
+      case 'glb-base-color': {
+        // An illustration: the published model's base-color texture, carried through its own UVs onto the displayed shape.
+        // Nothing here is observed; the lens is listed in the object's illustration lenses and never counts as imagery.
+        const model = requireString(surface.science.model);
+        if (model !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.model must equal the surface source.`);
+        const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, model), width, height);
+        return { data: pixels, channels: 4, nearest: false };
       }
       case 'neutral-shape': {
         // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.

@@ -5,10 +5,10 @@ const objectControls = await readPreparedFixture("titan", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "titan", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/titan/titan-normal.webp", two: "/scenes/titan/titan-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/titan/titan-poles-normal.webp", two: "/scenes/titan/titan-poles-normal@2x.webp" }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/titan/titan-normal@2x.webp",
+      "/scenes/titan/titan-poles-normal@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "radar",

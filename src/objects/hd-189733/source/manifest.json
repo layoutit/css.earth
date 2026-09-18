@@ -49,8 +49,8 @@
     {
       "id": "hd-189733-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2637,
-      "expectedSha256": "bbfc1d00c5ffe7630fecd2d6fa7fa0b5b1771570bf6791281e33c9de281dd073",
+      "expectedBytes": 2602,
+      "expectedSha256": "d5e706d1e357cb9a06d0d814197f172573c34bd866f091ca2b9642d36d7f52ee",
       "origin": "Repository-authored raster recipe: the star's measured colour on the reference sphere, transparent off-limb plate, limb plate from its fitted limb darkening",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +68,8 @@
     {
       "id": "hd-189733-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1698,
-      "expectedSha256": "4b821adc2811fbe082e5c495ef1976ed794bf3400e3910352c6bc7b53af92f3a",
+      "expectedBytes": 1704,
+      "expectedSha256": "979ba57f593c4cb49605e887b5820d73a7cdbe5f31beaf5c842b2828dcf9bd4f",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -382,8 +382,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3787,
-      "expectedSha256": "c501afb3c25d889bc3f1b1844a1339480466329a8368a5621d1b8d1d072acb7d",
+      "expectedBytes": 3793,
+      "expectedSha256": "43fdcc61dc88080e6143ba51d2eee23b2eef48926a408948e0fae24b390cf956",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

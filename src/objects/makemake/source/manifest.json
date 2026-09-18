@@ -26,6 +26,31 @@
       }
     },
     {
+      "id": "nasa-vtad-makemake-model",
+      "path": "nasa-makemake.glb",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/m/Makemake_1_1430.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA images and media usage guidelines (https://www.nasa.gov/nasa-brand-center/images-and-media/); NASA acknowledged as the source",
+      "acquisition": "Original GLB from the NASA Science resource page https://science.nasa.gov/resource/makemake-3d-model/",
+      "redistribution": "NASA media; an illustrative model, not photographed terrain or a measured map",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "expectedBytes": 4441844,
+      "expectedSha256": "e7d5fa27f50afae10f0e7290cdf7a14ca856c0b9e99b2db02f25b75441fbdbef",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-makemake-nasa-vtad-makemake-model",
+            "role": "material",
+            "evidence": "pending"
+          }
+        ]
+      }
+    },
+    {
       "id": "makemake-disc-color",
       "path": "photometry/disc-color.json",
       "expectedBytes": 1728,
@@ -167,8 +192,8 @@
     {
       "id": "makemake-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2458,
-      "expectedSha256": "43aafdfab4285db482e3399a1e0d4f5eae9cd1b540090e9f4a4faa25a67fd8df",
+      "expectedBytes": 2718,
+      "expectedSha256": "33da6a34827806221b45783bf74b8a1f4ffdde5076ceae7e706ce12484b24582",
       "origin": "Repository-authored Makemake raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -186,8 +211,8 @@
     {
       "id": "makemake-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1603,
-      "expectedSha256": "a9bfe4f00fe5325b8c8cb77d46e7ad3a0a6d861019676d80270a7732425cb2a8",
+      "expectedBytes": 1609,
+      "expectedSha256": "523a92dbc0e89c24022aff1bd6cb5a6cb85bb9cbd5643546be5c99e5c4ef8152",
       "origin": "Repository-authored Makemake geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -261,8 +286,8 @@
     {
       "id": "makemake-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 66,
-      "expectedSha256": "2040ed2044c04bb7f5abde3b0d12b880148baa5f6f02b0826b2465825bbc98f7",
+      "expectedBytes": 294,
+      "expectedSha256": "2c63113739abbfb89e513b065c3f25fca9a31a79471b0f74922764fa69f93f2e",
       "origin": "Repository-authored Makemake acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -298,8 +323,8 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 9506,
-      "expectedSha256": "73199d9cc328992a03616b9c686c6934b03fd720d76defb77d6160e4f6618920",
+      "expectedBytes": 10454,
+      "expectedSha256": "0859ffeca6e2458fd1fecb8a80998e2c0fb06666f217be9a6b53fa069e547c82",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

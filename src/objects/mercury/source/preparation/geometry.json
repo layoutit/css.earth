@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/mercury/mercury-surface-normal.jpg",
+      "url": "/scenes/mercury/mercury-surface-normal@2x.jpg",
       "width": 2048,
       "height": 1024
     },
     "surfaceLatitudeHeight": 1024,
     "packedBandGutter": 0,
     "poles": {
-      "url": "/scenes/mercury/mercury-poles.webp",
+      "url": "/scenes/mercury/mercury-poles@2x.webp",
       "width": 1536,
       "height": 256
     },

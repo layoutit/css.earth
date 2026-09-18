@@ -56,8 +56,8 @@
         "label": "Shape",
         "qualification": "A sphere of the published angular diameter; the neutral gray is a display convention, not a measured colour or brightness.",
         "thumbnail": "antares-lens-shape.webp",
-        "surface": "antares-surface-shape.webp",
-        "poles": "antares-poles-shape.webp",
+        "surface": "antares-surface-shape@2x.webp",
+        "poles": "antares-poles-shape@2x.webp",
         "source": {
           "id": "antares-observational-measurements",
           "path": "../manifest.json",

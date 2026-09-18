@@ -35,8 +35,8 @@ test("binds the exact Sun source and runtime closures", async () => {
   assert.deepEqual(await source.verify(), { inputCount: 48, generatedIntermediateCount: 0, documentCount: 3 });
   const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
   assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
-  // 4 lenses x (surface, poles, corona, limb) x 2 densities + 4 thumbnails.
-  assert.equal(runtime.assets.length, 36);
+  // 4 lenses x (surface, poles, corona, limb) at the one prepared density + 4 thumbnails.
+  assert.equal(runtime.assets.length, 20);
 });
 
 test("Sun's actual import closure has only shared runtime owners", async () => {
@@ -134,7 +134,7 @@ test("FITS decoding rejects incomplete data and preserves signed floating observ
 });
 
 test("preserves both HMI magnetic polarities in the prepared magnetic lens", async () => {
-  const source = await readFile(new URL("../../../../public/scenes/sun/sun-surface-magnetic.webp", import.meta.url));
+  const source = await readFile(new URL("../../../../public/scenes/sun/sun-surface-magnetic@2x.webp", import.meta.url));
   const { data } = await sharp(source).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   let negative = 0, positive = 0;
   for (let offset = 0; offset < data.length; offset += 3) {

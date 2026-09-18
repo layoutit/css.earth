@@ -2,11 +2,6 @@
   "schema": "csscallisto-runtime-assets@1",
   "assets": [
     {
-      "filename": "callisto-enhanced.webp",
-      "bytes": 339638,
-      "sha256": "beacc975b076fb3390d0f87b70be078c8f19e7374a2e0c4a286c67fe7d16a9dd"
-    },
-    {
       "filename": "callisto-enhanced@2x.webp",
       "bytes": 794002,
       "sha256": "3d61782d53f67fbfa3b69c2c3cae770cb9d3e59407e73718e8f3dfc14a33f6bd"
@@ -15,11 +10,6 @@
       "filename": "callisto-features.json",
       "bytes": 191301,
       "sha256": "702e444e9fdf4ccabaeaa2f0698528dce1cf0411b3de843e01c35ddaf29f7074"
-    },
-    {
-      "filename": "callisto-infrared.webp",
-      "bytes": 130786,
-      "sha256": "a14b27c9612a4cd77fa84a9efb4046e1ce16ccd5cc44aafab52b7dce1168d7f4"
     },
     {
       "filename": "callisto-infrared@2x.webp",
@@ -40,171 +30,6 @@
       "filename": "callisto-lens-normal.webp",
       "bytes": 1074,
       "sha256": "e52822ed3b2d874c08097905250a258a09beeb090b0c5607edf3975bd062a019"
-    },
-    {
-      "filename": "callisto-lighting-1x-billboard.webp",
-      "bytes": 40826,
-      "sha256": "d5afd022eccb5ca3f7d03aecaf43d97bac06b3cf4378ee32bcabde5736ce8608"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-00.webp",
-      "bytes": 14922,
-      "sha256": "4ca06eb5cb7ee649c468604e7a6ad66127b7ae7d53d4b687c293fd277e932874"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-01.webp",
-      "bytes": 27532,
-      "sha256": "a4f51f9ffa31e80bb651eeeeb102f0dfe8e06db2811393260ca739f6c97c88d7"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-02.webp",
-      "bytes": 34558,
-      "sha256": "8a64a7ab3f92017dcc3beb3642c20331131234e5147af2df79e0a1c59015802e"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-03.webp",
-      "bytes": 40648,
-      "sha256": "cb30a655aec4439c256b4233b9310b5b2437a5072d5381b7452a1799552d22b7"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-04.webp",
-      "bytes": 45092,
-      "sha256": "72e02f2f08b9bc290d6afbd06237fa8f7d3287a7aa7fa41d4871862aa2dc28ef"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-05.webp",
-      "bytes": 49044,
-      "sha256": "2c1a6e8c58b6d490313fd050a1b59c8545b06765082a6df44b153c7b7852b87b"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-06.webp",
-      "bytes": 52968,
-      "sha256": "3a63e0850d915ff4b2af1c642ff659f2f22cba88e14886135e2a15b06e6b7911"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-07.webp",
-      "bytes": 56198,
-      "sha256": "fa55950da032cece57a101406113fdc9ee7c83adc47feecf6011d1d817412193"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-08.webp",
-      "bytes": 59392,
-      "sha256": "a771538491ff5738da4841937108fccaeb197784ed9fbd45c261a229711b357d"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-09.webp",
-      "bytes": 61906,
-      "sha256": "982edea82c81c59427fec1e33b93c5e446c2164e5173c119e99f1cf2d3214653"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-10.webp",
-      "bytes": 62672,
-      "sha256": "03a295b2c895d7582cc31b79b85cfcb91c7d31f049124f9d21bb09bbeb8599f6"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-11.webp",
-      "bytes": 61062,
-      "sha256": "9c13ab791a488f4d1b7d8089410ecb5a53872a484cb0bba6245b4aaf9abc52b2"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-12.webp",
-      "bytes": 59454,
-      "sha256": "337dde459f14ccd5878aed9313c0c2cda7892a5679ca8cf44b262c66e28f1a46"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-13.webp",
-      "bytes": 52762,
-      "sha256": "820c4e14882c9942374378fa77135553a541806dd0ca93a73b5fd96dbb47b2dd"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-14.webp",
-      "bytes": 42196,
-      "sha256": "975b1c3c1809afb9e91b7dbd251ef16be5444d373d9e97643df3df992da15957"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-15.webp",
-      "bytes": 23242,
-      "sha256": "225fc2a90a34aafe74bc343c605f65e3e419da8bd70d9e309bbd2a9a27030009"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-16.webp",
-      "bytes": 28714,
-      "sha256": "a963ed733360af10da40ba94a81dd0b0cbf5bf620fe927aa0b130e5dde546b85"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-17.webp",
-      "bytes": 52870,
-      "sha256": "1dc0304a2c686f0fa0b221f5a619de5f780346ad7964df05e6bb77b6970f7b35"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-18.webp",
-      "bytes": 65644,
-      "sha256": "bfb746fa624b9994c78a28696f82cf9466e9245611208a3329bb4cbd6e782520"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-19.webp",
-      "bytes": 76630,
-      "sha256": "a13a9a62b069b3d0c6df11b6a581b48bfb59b81209a60f6932e04021aa15dc3d"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-20.webp",
-      "bytes": 85368,
-      "sha256": "098f39e8feaf5730286970b145a26c4d14f8572f56ea4147654ae5e6c47449ef"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-21.webp",
-      "bytes": 93744,
-      "sha256": "481146af42921688b6b7df4abc9a8c26bf3025ff66445e04e14ac639bdaa898a"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-22.webp",
-      "bytes": 99970,
-      "sha256": "380e210d04989c5dd12aa61dd2840e4ddc5953ca5477a6310112d1105a4929d1"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-23.webp",
-      "bytes": 107422,
-      "sha256": "ff0e1dd7c3ccc79b5711ac6798ea4f3544f662957886741d7f7483a05c5ed05f"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-24.webp",
-      "bytes": 112788,
-      "sha256": "2a32c4146a4ac3a59ee0a9a4dced1e65294f3927b9f44f51a07ba54d607939e1"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-25.webp",
-      "bytes": 122328,
-      "sha256": "de08da9f53565707dab0aba3b62eb85bc4f1ff8fdb35b864fea7de2364034a75"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-26.webp",
-      "bytes": 130124,
-      "sha256": "21932a1e7a096edadcc1e2db43a72830533febb4e3ad6736c13c3ff21cb40346"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-27.webp",
-      "bytes": 137048,
-      "sha256": "3e4f6148e58885b0a2a1c9698bddb6e3ddbbaf2e21d36dcfaea6535d810a260e"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-28.webp",
-      "bytes": 148122,
-      "sha256": "c076ee045f18ce285c00b62466a3b3d69a58401c774b6da41d278f7fd0fa30ae"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-29.webp",
-      "bytes": 157328,
-      "sha256": "b71a7728343b3787367084c545db3c75ace893d03c2de5573f94d4c5b3c9de66"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-30.webp",
-      "bytes": 167218,
-      "sha256": "a4fd0b6e52d657614777c5af19586e279afda7de3d6afe578811e84afe615be4"
-    },
-    {
-      "filename": "callisto-lighting-1x-row-31.webp",
-      "bytes": 182238,
-      "sha256": "4dc4d8bcf1832f28af5af706a5f48427b104cf4aef23f56a7f181420ca60db0e"
     },
     {
       "filename": "callisto-lighting-2x-billboard.webp",
@@ -372,19 +197,9 @@
       "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
     },
     {
-      "filename": "callisto-normal.webp",
-      "bytes": 1938234,
-      "sha256": "ae731afe7aba7a7d33f8713a0682a7683d961ec0799521af5fba4a139d95c487"
-    },
-    {
       "filename": "callisto-normal@2x.webp",
       "bytes": 6156298,
       "sha256": "5d283c04e481223c872d021cb971efac1cc6c0f22b37272a0da893b2010636a0"
-    },
-    {
-      "filename": "callisto-poles-enhanced.webp",
-      "bytes": 7144,
-      "sha256": "9466e742acb8ae1ca53c934b3f689686c21238f61a19359f6bc6de92b221d53a"
     },
     {
       "filename": "callisto-poles-enhanced@2x.webp",
@@ -392,19 +207,9 @@
       "sha256": "7a1fc2bf2c067a42f9edf2a3c92b36ac2fd370d3412c31ca56aea86ce3bc1add"
     },
     {
-      "filename": "callisto-poles-infrared.webp",
-      "bytes": 16306,
-      "sha256": "8a20c822e5ac2b335d64e405786139930f01ff428e42d94a628fc77525e61692"
-    },
-    {
       "filename": "callisto-poles-infrared@2x.webp",
       "bytes": 36274,
       "sha256": "9c61cb4a4dfd59ce644acb32026a2015dc6ef3e661197cd9319c5d37486319cf"
-    },
-    {
-      "filename": "callisto-poles-normal.webp",
-      "bytes": 53652,
-      "sha256": "f773d7cdbadeb6dc54ef7118a251aac4425459cf030a68b6cc25534b77e5f67b"
     },
     {
       "filename": "callisto-poles-normal@2x.webp",

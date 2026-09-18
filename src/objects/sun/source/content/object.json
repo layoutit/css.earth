@@ -74,8 +74,8 @@
         "label": "Photosphere",
         "shortLabel": "Continuum",
         "thumbnail": "sun-lens-photosphere.webp",
-        "surface": "sun-surface-photosphere.webp",
-        "poles": "sun-poles-photosphere.webp",
+        "surface": "sun-surface-photosphere@2x.webp",
+        "poles": "sun-poles-photosphere@2x.webp",
         "source": {
           "id": "jsoc-hmi-continuum-cr2311-keywords",
           "url": "http://jsoc.stanford.edu/ajax/lookdata.html?ds=hmi.Ic_noLimbDark_720s"
@@ -89,8 +89,8 @@
         "label": "Magnetic field",
         "shortLabel": "HMI Bᵣ",
         "thumbnail": "sun-lens-magnetic.webp",
-        "surface": "sun-surface-magnetic.webp",
-        "poles": "sun-poles-magnetic.webp",
+        "surface": "sun-surface-magnetic@2x.webp",
+        "poles": "sun-poles-magnetic@2x.webp",
         "source": {
           "id": "jsoc-hmi-cr2311-radial-field-synoptic-map",
           "url": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
@@ -139,8 +139,8 @@
         "label": "Chromosphere",
         "shortLabel": "304 Å",
         "thumbnail": "sun-lens-chromosphere.webp",
-        "surface": "sun-surface-chromosphere.webp",
-        "poles": "sun-poles-chromosphere.webp",
+        "surface": "sun-surface-chromosphere@2x.webp",
+        "poles": "sun-poles-chromosphere@2x.webp",
         "source": {
           "id": "sdo-aia-304-cr2311-synoptic-map",
           "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"
@@ -187,8 +187,8 @@
         "label": "Corona",
         "shortLabel": "171 Å",
         "thumbnail": "sun-lens-corona.webp",
-        "surface": "sun-surface-corona.webp",
-        "poles": "sun-poles-corona.webp",
+        "surface": "sun-surface-corona@2x.webp",
+        "poles": "sun-poles-corona@2x.webp",
         "source": {
           "id": "sdo-aia-171-cr2311-synoptic-map",
           "url": "https://sdo.gsfc.nasa.gov/data/synoptic/"

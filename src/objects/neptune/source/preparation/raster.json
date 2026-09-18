@@ -7,10 +7,6 @@
   "height": 1440,
   "latitudeBands": 20,
   "polarTile": 128,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "density-before-pack",
   "polarProjection": "orthographic-bilinear",
   "polesCombined": false,

@@ -536,8 +536,8 @@
     {
       "id": "titania-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 7932,
-      "expectedSha256": "c74f37a13717642ff1d2d66464ddc5e904776c5822053dc0e0201baf993c5a30",
+      "expectedBytes": 7897,
+      "expectedSha256": "a31dda2482ad180cb4ba3c762e03ecb413e6e094d3cbb65d4d5ccbd35427061c",
       "origin": "Repository-authored Titania raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -555,8 +555,8 @@
     {
       "id": "titania-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1600,
-      "expectedSha256": "71b4d72de6dca38210eaa0cb0470da45fbee583db63dd174047682ba97066dbc",
+      "expectedBytes": 1606,
+      "expectedSha256": "f5b825a908f454b69608f1fd089f7a753d189e8d32d814b3f6102c3c4babc117",
       "origin": "Repository-authored Titania geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -649,8 +649,8 @@
     {
       "id": "titania-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12648,
-      "expectedSha256": "bc1cd75e01d6f1d454d4036c41348fa312e965246288e0620d2d6bef0d5f870b",
+      "expectedBytes": 12666,
+      "expectedSha256": "791442d812ccc27a0813d56d4a7ef201092e0afad856b4a999e649fe44ef3cbd",
       "origin": "Repository-authored Titania object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

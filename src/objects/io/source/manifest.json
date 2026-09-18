@@ -982,8 +982,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12629,
-      "expectedSha256": "ec71f6539debbf0d1be915b0389f449830111e6b251529bb15b7b62d7844b5e3",
+      "expectedBytes": 12594,
+      "expectedSha256": "827d36dbc224e8ac71ddf5b84d1a6275289a9715b63c7e0286df6332089ad0b4",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1001,8 +1001,8 @@
     {
       "id": "io-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1565,
-      "expectedSha256": "dceeee30200302786d9dcc7663cdbff615adade8073eea994f7c9c61c661364a",
+      "expectedBytes": 1571,
+      "expectedSha256": "517e264e379e75562bf3d7bfb8f3086ff85c6d8ecfef9c2a25ed5cab7221ce0e",
       "origin": "Repository-authored Io geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1095,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 13972,
-      "expectedSha256": "9e2e3c63ce14cfee74b348c910dc8b7cd4901c1bd75d77633093ea091722edff",
+      "expectedBytes": 14002,
+      "expectedSha256": "6b6fe98a7f64556d6375b34b68d0e30a86619dc0020d304ebd674fb22f9c7812",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

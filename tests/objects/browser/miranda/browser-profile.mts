@@ -5,10 +5,10 @@ const objectControls = await readPreparedFixture("miranda", "controls");
 export const browserProfile = createObjectBrowserProfile({
   id: "miranda", controls: objectControls,
   audit: Object.freeze({
-    preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/miranda/miranda-normal.webp", two: "/scenes/miranda/miranda-normal@2x.webp" }),
-      Object.freeze({ one: "/scenes/miranda/miranda-poles-normal.webp", two: "/scenes/miranda/miranda-poles-normal@2x.webp" }),
-      ]),
+    canonicalPreparedAssets: Object.freeze([
+      "/scenes/miranda/miranda-normal@2x.webp",
+      "/scenes/miranda/miranda-poles-normal@2x.webp",
+    ]),
     lensRace: Object.freeze({
       defaultId: "normal",
       slowId: "elevation",

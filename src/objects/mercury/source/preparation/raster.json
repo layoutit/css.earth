@@ -6,10 +6,6 @@
   "height": 1024,
   "latitudeBands": 16,
   "polarTile": 256,
-  "densities": [
-    1,
-    2
-  ],
   "resample": "source-packed",
   "unpackedResizeBeforePack": true,
   "polarProjection": "angular-nearest",
@@ -23,10 +19,10 @@
   "thumbnail": {
     "size": 28,
     "crop": {
-      "left": 875,
-      "top": 363,
-      "width": 298,
-      "height": 298
+      "left": 1750,
+      "top": 726,
+      "width": 596,
+      "height": 596
     },
     "quality": 90
   },

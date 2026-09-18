@@ -19,15 +19,27 @@
     "displayOpacity": 0.5,
     "qualification": "Ring dimensions from the 2017 occultation. Gray appearance and constant display opacity are schematic; the measured 0.5 occultation opacity is not a view-independent optical model."
   },
-  "surface": {
-    "source": "photometry/disc-color.json",
-    "science": {
-      "kind": "disc-integrated-color",
-      "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
-      "illuminant": "reference/CIE_std_illum_D65.csv",
-      "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
+  "surfaces": [
+    {
+      "lens": "color",
+      "source": "photometry/disc-color.json",
+      "science": {
+        "kind": "disc-integrated-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "illuminant": "reference/CIE_std_illum_D65.csv",
+        "qualification": "Uniform whole-disc colour and V geometric albedo from published photometry; the surface is unresolved and no map is implied."
+      }
+    },
+    {
+      "lens": "illustration",
+      "source": "nasa-haumea.glb",
+      "science": {
+        "kind": "glb-base-color",
+        "model": "nasa-haumea.glb",
+        "qualification": "An artist's surface from NASA's Haumea 3D model, carried through the model's own texture coordinates; not an observation."
+      }
     }
-  },
+  ],
   "camera": {
     "maximumHeightShare": 0.4
   }

@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { interiorLayer, interiorCorePoleAtlas, interiorSection, shadeInteriorOuter, orientLatitudeBands, polarTile } from '@cssearth/objects';
-import type { RasterRecipe, InteriorRecipe, StructureSource } from './config.js';
+import { RASTER_DENSITY, type RasterRecipe, type InteriorRecipe, type StructureSource } from './config.js';
 import { raster, readRgba, assetPath, outputName } from './io.js';
 function structureSource(value: unknown): StructureSource {
     if (typeof value !== 'object' || value === null)
@@ -22,11 +22,11 @@ export async function prepareInterior(config: RasterRecipe, recipe: InteriorReci
     const material = { palette: source.presentation.palette, worldLightDirection: recipe.worldLightDirection, ambientIntensity: recipe.ambientIntensity, coreNoiseSeed: recipe.coreNoiseSeed };
     const input = await readRgba(resolve(sourceDirectory, recipe.surface), config.sourceWidth, config.sourceHeight);
     const outer = shadeInteriorOuter(input, { width: config.sourceWidth, height: config.sourceHeight }, material);
-    for (const density of config.densities) {
-      for (const [pixels,surfaceOutput,poleOutput] of [
+    const density = RASTER_DENSITY;
+    for (const [pixels,surfaceOutput,poleOutput] of [
         [outer,recipe.outerOutput,recipe.outerPolesOutput],
         [input,recipe.outerUnlitOutput,recipe.outerUnlitPolesOutput],
-      ] as const) {
+    ] as const) {
         const oriented=orientLatitudeBands(pixels,config.latitudeBands,config.sourceWidth,config.sourceHeight);
         await raster(oriented, config.sourceWidth, config.sourceHeight).resize(config.width * density, config.height * density, { kernel: 'lanczos3' }).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, surfaceOutput, density));
         const tileSize = recipe.poleTile * density, polar = new Uint8Array(tileSize * tileSize * 2 * 4);
@@ -36,15 +36,15 @@ export async function prepareInterior(config: RasterRecipe, recipe: InteriorReci
                 polar.set(tile.subarray(y * tileSize * 4, (y + 1) * tileSize * 4), (y * tileSize * 2 + pole * tileSize) * 4);
         }
         await raster(polar, tileSize * 2, tileSize).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, poleOutput, density));
-      }
-        const tileSize=recipe.poleTile*density;
-        const width = recipe.width * density, height = recipe.height * density;
-        await raster(interiorLayer(width, height, material), width, height).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.coreOutput, density));
-        await raster(interiorCorePoleAtlas(tileSize, source.presentation.cutaway, material), tileSize * 2, tileSize).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.corePolesOutput, density));
-        const sectionWidth = recipe.sectionWidth * density, sectionHeight = recipe.sectionHeight * density;
-        await raster(interiorSection(sectionWidth, sectionHeight, source, material), sectionWidth, sectionHeight).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.sectionOutput, density));
     }
-    await sharp(assetPath(publicDirectory, recipe.sectionOutput)).extract({ left: 0, top: 0, width: recipe.sectionWidth / 2, height: recipe.sectionHeight }).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.thumbnail));
-    const url = (template: string, density = 1) => config.publicBase + outputName(template, density);
-    return { ...recipe.metadata, outerSurfaceUnlitUrl: url(recipe.outerUnlitOutput), outerSurfaceUnlit2xUrl: url(recipe.outerUnlitOutput, 2), outerPolesUnlitUrl: url(recipe.outerUnlitPolesOutput), outerPolesUnlit2xUrl: url(recipe.outerUnlitPolesOutput, 2), coreUrl: url(recipe.coreOutput), core2xUrl: url(recipe.coreOutput, 2), corePolesUrl: url(recipe.corePolesOutput), corePoles2xUrl: url(recipe.corePolesOutput, 2), sectionUrl: url(recipe.sectionOutput), section2xUrl: url(recipe.sectionOutput, 2), outerSurfaceUrl: url(recipe.outerOutput), outerSurface2xUrl: url(recipe.outerOutput, 2), outerPolesUrl: url(recipe.outerPolesOutput), outerPoles2xUrl: url(recipe.outerPolesOutput, 2), poleDimensions: { width: recipe.poleTile * 2, height: recipe.poleTile }, textureDimensions: { width: recipe.width, height: recipe.height }, sectionDimensions: { width: recipe.sectionWidth, height: recipe.sectionHeight }, cutaway: source.presentation.cutaway, metallicCoreRadiusFraction: source.metallicCoreRadiusFraction, outerShellThicknessKm: source.outerShellThicknessKm, publishedApproximateOuterShellThicknessKm: source.publishedApproximateOuterShellThicknessKm, qualification: source.structureQualification, presentationQualification: source.presentation.qualification, presentationPalette: source.presentation.palette, runtimeGeometry: false, runtimeRasterization: false };
+    const tileSize=recipe.poleTile*density;
+    const width = recipe.width * density, height = recipe.height * density;
+    await raster(interiorLayer(width, height, material), width, height).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.coreOutput, density));
+    await raster(interiorCorePoleAtlas(tileSize, source.presentation.cutaway, material), tileSize * 2, tileSize).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.corePolesOutput, density));
+    const sectionWidth = recipe.sectionWidth * density, sectionHeight = recipe.sectionHeight * density;
+    await raster(interiorSection(sectionWidth, sectionHeight, source, material), sectionWidth, sectionHeight).webp({ lossless: true, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.sectionOutput, density));
+    // The thumbnail shows the section's left half, read from the canonical-density section image.
+    await sharp(assetPath(publicDirectory, recipe.sectionOutput, density)).extract({ left: 0, top: 0, width: recipe.sectionWidth * density / 2, height: recipe.sectionHeight * density }).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }).webp({ quality: config.thumbnail.quality, alphaQuality: 100 }).toFile(assetPath(publicDirectory, recipe.thumbnail, 1));
+    const url = (template: string) => config.publicBase + outputName(template, RASTER_DENSITY);
+    return { ...recipe.metadata, outerSurfaceUnlitUrl: url(recipe.outerUnlitOutput), outerSurfaceUnlit2xUrl: url(recipe.outerUnlitOutput), outerPolesUnlitUrl: url(recipe.outerUnlitPolesOutput), outerPolesUnlit2xUrl: url(recipe.outerUnlitPolesOutput), coreUrl: url(recipe.coreOutput), core2xUrl: url(recipe.coreOutput), corePolesUrl: url(recipe.corePolesOutput), corePoles2xUrl: url(recipe.corePolesOutput), sectionUrl: url(recipe.sectionOutput), section2xUrl: url(recipe.sectionOutput), outerSurfaceUrl: url(recipe.outerOutput), outerSurface2xUrl: url(recipe.outerOutput), outerPolesUrl: url(recipe.outerPolesOutput), outerPoles2xUrl: url(recipe.outerPolesOutput), poleDimensions: { width: recipe.poleTile * 2, height: recipe.poleTile }, textureDimensions: { width: recipe.width, height: recipe.height }, sectionDimensions: { width: recipe.sectionWidth, height: recipe.sectionHeight }, cutaway: source.presentation.cutaway, metallicCoreRadiusFraction: source.metallicCoreRadiusFraction, outerShellThicknessKm: source.outerShellThicknessKm, publishedApproximateOuterShellThicknessKm: source.publishedApproximateOuterShellThicknessKm, qualification: source.structureQualification, presentationQualification: source.presentation.qualification, presentationPalette: source.presentation.palette, runtimeGeometry: false, runtimeRasterization: false };
 }

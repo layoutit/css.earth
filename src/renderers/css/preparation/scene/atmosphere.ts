@@ -1,13 +1,13 @@
 import type { AtmosphereSource, AtmosphereMaterial } from '@cssearth/objects';
-import type { RasterRecipe } from '../../../../preparation/raster/config.js';
+import { RASTER_DENSITY, type RasterRecipe } from '../../../../preparation/raster/config.js';
 import { outputName } from '../../../../preparation/raster/io.js';
 import type { GeometryProfile } from './profile.js';
 export function prepareAtmosphericMaterial(profile:GeometryProfile,raster:RasterRecipe,source:AtmosphereSource,model:AtmosphereMaterial,sunDirection:readonly number[]) {
  const material=raster.atmosphere;
  if(!material)throw new TypeError('Atmospheric scene material needs a raster recipe.');
- const url=(template:string,density=1)=>raster.publicBase+outputName(template,density);
+ const url=(template:string)=>raster.publicBase+outputName(template,RASTER_DENSITY);
  return {schema:profile.output.materialSchema,model:'source-parameter-bound-light-terminator-and-atmosphere-phase-bank',
-  materialUrl:url(material.materialOutput),material2xUrl:url(material.materialOutput,2),observationMaterialUrl:url(material.observationOutput),observationMaterial2xUrl:url(material.observationOutput,2),lightingUrl:url(material.lightingOutput),lighting2xUrl:url(material.lightingOutput,2),
+  materialUrl:url(material.materialOutput),material2xUrl:url(material.materialOutput),observationMaterialUrl:url(material.observationOutput),observationMaterial2xUrl:url(material.observationOutput),lightingUrl:url(material.lightingOutput),lighting2xUrl:url(material.lightingOutput),
   logicalSize:material.logicalSize,tileSize:material.tileSize,directionalFrameCount:material.directionalFrameCount,frameCount:material.frameCount,frameColumns:material.columns,frameRows:material.rows,
   minimumLightViewZ:material.minimumLightViewZ,maximumLightViewZ:material.maximumLightViewZ,baseLightAzimuthDegrees:180,defaultFrame:material.frameCount-1,
   backgroundSize:`${material.columns*material.logicalSize}px ${material.rows*material.logicalSize}px`,backgroundPositions:Array.from({length:material.frameCount},(_,frame)=>`${-(frame%material.columns)*material.logicalSize}px ${-Math.floor(frame/material.columns)*material.logicalSize}px`),
