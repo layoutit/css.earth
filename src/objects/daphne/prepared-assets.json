@@ -1,0 +1,16 @@
+{
+  "schema": "cssdaphne-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 762065,
+      "sha256": "9280945cb5939029778b2fb0c696ac00d39c9a14133746f8a38017fc16dd78db"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620002,
+      "sha256": "4dabba19c2018084dda26a04d9365686d54aa61973ce626fa97c7b4259503a92"
+    }
+  ]
+}

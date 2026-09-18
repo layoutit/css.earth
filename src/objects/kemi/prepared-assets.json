@@ -1,0 +1,16 @@
+{
+  "schema": "csskemi-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 748532,
+      "sha256": "13dcdf42e40906486961221827d218d55f89de7d7d9c6bfe5483008a29162221"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 618588,
+      "sha256": "2fa0019bb379c69f3502ec08233a9d33d2d4580b0b5e339fe8772af7da95c913"
+    }
+  ]
+}

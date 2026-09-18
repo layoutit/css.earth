@@ -1,0 +1,16 @@
+{
+  "schema": "cssambrosia-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 752608,
+      "sha256": "7ecf62468f4fa7d3bf11c825ebf31a2be6f47dfce40e9bc5ebd6ddff2ef2b770"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 622557,
+      "sha256": "798f97eeffc7d9020ce56a1e5da65d00cb8d764a83701a145ff17f63321fb431"
+    }
+  ]
+}

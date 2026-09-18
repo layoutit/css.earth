@@ -1,0 +1,16 @@
+{
+  "schema": "cssromulus-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 458629,
+      "sha256": "29ef3c64437d84b3ac9b6f584dca7f59981de9fc2be9cfb467c04b641b32126d"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 370338,
+      "sha256": "3487bc8e1c7567a4e2cf874bf31096e8beb45eda26f098c3779cf49df4b823d5"
+    }
+  ]
+}

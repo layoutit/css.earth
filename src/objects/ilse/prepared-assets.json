@@ -1,0 +1,16 @@
+{
+  "schema": "cssilse-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 748852,
+      "sha256": "adfcf795eb13b7dd2b649ae9b55fe74cc0fbda4f7797087e144f4e127c63b056"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 618871,
+      "sha256": "aecebe388c4af3a64e39a5d7f1ea39e74581e58fdeda4a1f97618d110b0aebdb"
+    }
+  ]
+}

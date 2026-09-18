@@ -1,0 +1,16 @@
+{
+  "schema": "cssnix-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 745812,
+      "sha256": "5527d52baf57ea4e47c5567dca7622e858915106bde6afbaf5c3956661c89199"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 616675,
+      "sha256": "2c1e3dc801d9cc932f35e4cadab13538716d4fd1868877ae798baa0a49c89f3b"
+    }
+  ]
+}

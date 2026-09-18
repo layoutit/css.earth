@@ -1,0 +1,16 @@
+{
+  "schema": "cssunitas-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 750429,
+      "sha256": "878e666cb0d349cf549d09dfd85837dd69a788ac7204ad03cf50a276126c4a52"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 620041,
+      "sha256": "2b5825085bdfd97a697b3040d45f8763615e20dae27afdecc190f58739b7a1a5"
+    }
+  ]
+}

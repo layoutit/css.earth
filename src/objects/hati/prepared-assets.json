@@ -1,0 +1,16 @@
+{
+  "schema": "csshati-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 457927,
+      "sha256": "27a66387aa6d56b9c1c3bbcdac77e84d13c2ef476ff40f555c9a3c3271f3e4e0"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 369654,
+      "sha256": "4412ade336e91ddfec66d6b67590b73843cb35b8e05a4a543dcf0e0275dfacaa"
+    }
+  ]
+}
