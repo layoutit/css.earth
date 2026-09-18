@@ -58,6 +58,19 @@
           "checked": "2026-09-18"
         }
       ]
+    },
+    "sio-2023": {
+      "title": "A clump of silicon monoxide",
+      "detail": "2 August 2023, ALMA",
+      "summary": "Silicon monoxide around the star, the only dataset here whose depth is measured, not inferred.",
+      "sources": [
+        {
+          "catalogueId": "source-betelgeuse-shell-alma-sio-v0-5-4-2023-08",
+          "url": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+          "label": "ALMA 2022.A.00026.S, SiO v=0 J=5-4 cube of Betelgeuse",
+          "checked": "2026-09-18"
+        }
+      ]
     }
   }
 }

@@ -3,6 +3,31 @@
   "pathBase": "repository",
   "inputs": [
     {
+      "id": "alma-sio-v0-5-4-2023-08",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-shell-alma-sio-v0-5-4-2023-08",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse-shell/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "path": "src/objects/betelgeuse-shell/source/observations/betelgeuse-alma-sio-v0-5-4-2023-08.fits",
+      "origin": "https://almascience.eso.org/soda/sync?ID=member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits",
+      "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+      "title": "ALMA 2022.A.00026.S · SiO v=0 J=5-4 cube of Betelgeuse, 2 August 2023",
+      "credit": "ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member uid://A001/X360d/Xae",
+      "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+      "acquisition": "Cut out of the archive's own pipeline cube member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits through its SODA service, on a circle of 0.00025 degrees about the observation's phase centre, then continuum-subtracted against the 1738 line-free channels of the spectral window and windowed to 32 kilometres a second either side of the star's velocity. The archive product is 72 GB; this is the part of it that carries the line around this star.",
+      "license": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line.",
+      "lensId": "sio-2023",
+      "expectedSha256": "daefd07d5e8ed872474df2b8d618b9b632b898faaae7146784e224e7897d4657",
+      "expectedBytes": 616320
+    },
+    {
       "id": "matisse-2020-02-continuum-4mas",
       "dependencies": [],
       "sourceBinding": {
@@ -202,8 +227,8 @@
     {
       "id": "delivery-json",
       "path": "src/objects/betelgeuse-shell/source/delivery.json",
-      "expectedSha256": "fbc8d5cd441f40424b843ef44b648cbfc778501e673b9b96f0360892c008c680",
-      "expectedBytes": 3187,
+      "expectedSha256": "6f3a1768e4b67a74db6da51c8e5e2ae883f04c25d56385781ebd54eb99f4f077",
+      "expectedBytes": 3731,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -222,8 +247,8 @@
     {
       "id": "presentation-json",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "expectedSha256": "edad4f7d95cc2c461628a8d0e9670fbc13c13fc38e1d794321ca9956d561cf7e",
-      "expectedBytes": 7646,
+      "expectedSha256": "f565112667e4401be815879a1d48a98031b3045c36d96eb1ecc29302fd11c6b4",
+      "expectedBytes": 10318,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -240,10 +265,20 @@
       }
     },
     {
+      "id": "previews-sio-2023-integrated-line-png",
+      "path": "src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png",
+      "expectedSha256": "22feab63780a8108c0a06bc6ed14dcfb35117446dcbc9bd69068a875905b5935",
+      "expectedBytes": 8798,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    },
+    {
       "id": "provenance-json",
       "path": "src/objects/betelgeuse-shell/source/provenance.json",
-      "expectedSha256": "07034cb167af2db54b156e93f20f2f5fdcf5c399b48aed999afe3adf7bd92fb6",
-      "expectedBytes": 9681,
+      "expectedSha256": "41f3528396b76c3f75febe33d4a1451d5a5879947efb384fbdce711bbef92811",
+      "expectedBytes": 11051,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -256,6 +291,16 @@
       "path": "src/objects/betelgeuse-shell/source/density-emission-2020.ktx2",
       "expectedSha256": "96262bd61a961228837703d6c0b2491748b61fde062afe871e636d50c3645f2f",
       "expectedBytes": 50653,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    },
+    {
+      "id": "density-sio-2023-ktx2",
+      "path": "src/objects/betelgeuse-shell/source/density-sio-2023.ktx2",
+      "expectedSha256": "654c1e848a2343cefcfbb2487b832786a3f240fb0ed865c1eb1ba5354d954bdb",
+      "expectedBytes": 20154,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -284,8 +329,18 @@
     {
       "id": "volume-emission-2020-json",
       "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
-      "expectedSha256": "cc6cbba32670ba1ece58a2aafcc08ad355ded17b9f62f4a5600eaf2b9aeaf923",
+      "expectedSha256": "99b55e178f552c845b78fa8839b84572871eef80443a0fe8159de6efd6bf34da",
       "expectedBytes": 1830,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
+      }
+    },
+    {
+      "id": "volume-sio-2023-json",
+      "path": "src/objects/betelgeuse-shell/source/volume-sio-2023.json",
+      "expectedSha256": "4839894ee61b5189e6e0d08d9aa7335034fca6b7caf8aa2f6dc59ae0e3898215",
+      "expectedBytes": 1839,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -294,7 +349,7 @@
     {
       "id": "volume-veil-2019-12-json",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "expectedSha256": "77ef7f6300121b6e2bf5dc69dc0b3d40b118c13de698fc7db471713dea0a5dec",
+      "expectedSha256": "1bebc87f26aa243bcc9a058101a54633717ef15a9839961e4b181f81f2c74893",
       "expectedBytes": 1523,
       "sourceBinding": {
         "kind": "local",
@@ -304,7 +359,7 @@
     {
       "id": "volume-zimpol-v-json",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "expectedSha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225",
+      "expectedSha256": "db0b1170836bd9ee0b41ad09efebbd125588f5284cdaf0044dda26b3b82cc7e2",
       "expectedBytes": 1838,
       "sourceBinding": {
         "kind": "local",

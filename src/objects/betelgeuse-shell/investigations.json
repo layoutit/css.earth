@@ -52,6 +52,39 @@
       ]
     },
     {
+      "id": "lens-sio-2023",
+      "subject": "Measured depth from an ALMA line cube, instead of a shape fitted to a projection",
+      "status": "included",
+      "finding": "Every other dataset in this package is a sky image given a shape, which is an extrusion however the depth is weighted. This one is not. ALMA project 2022.A.00026.S observed this star on 2 August 2023 and its band 6 spectral window 27 carries SiO v=0 J=5-4 at 217.10498 GHz, the line of the molecule silicate dust condenses from. The archive's pipeline cube is 72 GB; its SODA service returned a 522 MB cutout on a circle of 0.00025 degrees about the observation's phase centre, so no raw visibilities were needed. Subtracting a per-pixel continuum measured on the 1738 line-free channels and smoothing to the beam takes the map noise from 0.90 to 0.536 mJy per beam and the line is then detected hard, up to 135 voxels above five sigma in a single channel across +23 to -8 km/s about a systemic +8. Integrated over the line, 51 beams clear five sigma and they are not a shell: they form one clump 3.32 stellar radii out at position angle 225 degrees, south-west. A spherical envelope would put that centroid on the star. Depth then comes from each parcel's own Doppler shift under a radial flow, whose speed combines 7.7 km/s across the sky, measured here as the growth in projected separation against Montarges et al. 2021's December 2019 clump over the 3.63 years between the epochs, with the clump's own mean line-of-sight velocity of -2.4 km/s, giving 8.1 km/s. 41 parcels are placed, the furthest 3.86 stellar radii along the line of sight, each spread over the beam it was measured with, and no line of sight is deprojected past 0.85 of the flow speed.",
+      "evidence": [
+        "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+        "https://doi.org/10.1038/s41586-021-03546-8"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "sio-clump-identity",
+      "subject": "Whether the 2023 SiO clump is the 2019 Great Dimming clump, moved",
+      "status": "unresolved",
+      "finding": "The two lie in the same quarter of the sky: the December 2019 clump of Montarges et al. 2021 is at projected 1.00 stellar radii, position angle 212 degrees, and the 2023 SiO clump is at 3.32 radii, position angle 225 degrees. Over the 3.63 years between them the projected separation grew 2.3 radii, which is an ordinary ejecta speed, and the position angle moved 13 degrees. That is suggestive and it is why this package uses that growth to set the flow speed. It is not an identification. The 2019 solution also placed its clump 3.52 stellar radii toward Earth, and a purely radial continuation of that vector at a constant speed would show about 27 km/s of blue shift in 2023, well outside the plus or minus 16 km/s over which the line is detected. So the 2023 clump is either a different structure, or the same one decelerated, or the published line-of-sight distance does not carry forward. Nothing in this package asserts they are the same object.",
+      "evidence": [
+        "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+        "https://arxiv.org/abs/2201.10551"
+      ],
+      "revisitWhen": "A second ALMA epoch of the same line, which would give the clump's own proper motion without any assumption about the 2019 solution.",
+      "checked": [
+        {
+          "date": "2026-09-18",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
       "id": "product-registration",
       "subject": "Where the star sits inside the 2024 polarisation map",
       "status": "included",

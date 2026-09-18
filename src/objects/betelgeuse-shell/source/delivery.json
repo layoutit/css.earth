@@ -4,12 +4,12 @@
   "method": "density-grid",
   "request": {
     "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-    "sha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225"
+    "sha256": "db0b1170836bd9ee0b41ad09efebbd125588f5284cdaf0044dda26b3b82cc7e2"
   },
   "inputPins": [
     {
       "path": "src/objects/betelgeuse-shell/source/provenance.json",
-      "sha256": "07034cb167af2db54b156e93f20f2f5fdcf5c399b48aed999afe3adf7bd92fb6"
+      "sha256": "41f3528396b76c3f75febe33d4a1451d5a5879947efb384fbdce711bbef92811"
     },
     {
       "path": "src/objects/betelgeuse-shell/source/density-zimpol-v.ktx2",
@@ -22,6 +22,10 @@
     {
       "path": "src/objects/betelgeuse-shell/source/density-emission-2020.ktx2",
       "sha256": "96262bd61a961228837703d6c0b2491748b61fde062afe871e636d50c3645f2f"
+    },
+    {
+      "path": "src/objects/betelgeuse-shell/source/density-sio-2023.ktx2",
+      "sha256": "654c1e848a2343cefcfbb2487b832786a3f240fb0ed865c1eb1ba5354d954bdb"
     }
   ],
   "sky": {
@@ -38,10 +42,10 @@
   "defaultLens": "zimpol-v",
   "framingRadiusUnits": 6,
   "attachedTo": "betelgeuse",
-  "acceptedLabResult": "betelgeuse-shell-three-grids",
+  "acceptedLabResult": "betelgeuse-shell-four-grids",
   "compactInputs": {
     "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-    "sha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225"
+    "sha256": "db0b1170836bd9ee0b41ad09efebbd125588f5284cdaf0044dda26b3b82cc7e2"
   },
   "compactMethod": "density-grid",
   "grids": [
@@ -51,7 +55,7 @@
       "sourceUrl": "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
       "recipe": {
         "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-        "sha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225"
+        "sha256": "db0b1170836bd9ee0b41ad09efebbd125588f5284cdaf0044dda26b3b82cc7e2"
       }
     },
     {
@@ -60,7 +64,7 @@
       "sourceUrl": "https://arxiv.org/abs/2201.10551",
       "recipe": {
         "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-        "sha256": "77ef7f6300121b6e2bf5dc69dc0b3d40b118c13de698fc7db471713dea0a5dec"
+        "sha256": "1bebc87f26aa243bcc9a058101a54633717ef15a9839961e4b181f81f2c74893"
       },
       "occultingCentreUnits": [
         0.5347658321649745,
@@ -74,7 +78,16 @@
       "sourceUrl": "https://doi.org/10.1051/0004-6361/202347719",
       "recipe": {
         "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
-        "sha256": "cc6cbba32670ba1ece58a2aafcc08ad355ded17b9f62f4a5600eaf2b9aeaf923"
+        "sha256": "99b55e178f552c845b78fa8839b84572871eef80443a0fe8159de6efd6bf34da"
+      }
+    },
+    {
+      "id": "sio-2023",
+      "label": "ALMA · SiO clump, August 2023",
+      "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S",
+      "recipe": {
+        "path": "src/objects/betelgeuse-shell/source/volume-sio-2023.json",
+        "sha256": "4839894ee61b5189e6e0d08d9aa7335034fca6b7caf8aa2f6dc59ae0e3898215"
       }
     }
   ]

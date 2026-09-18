@@ -192,6 +192,18 @@
           "surface": "matisse"
         },
         "notes": "The same photosphere, with the dust clump Montargès et al. (2021) fitted to the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as they report for the southern hemisphere, and the light it scatters back is drawn faintly over that. A model fitted to images, not an image."
+      },
+      {
+        "id": "sio-2023",
+        "label": "SiO clump · August 2023",
+        "thumbnail": "betelgeuse-lens-matisse.webp",
+        "falseColor": true,
+        "volume": {
+          "objectId": "betelgeuse-shell",
+          "lensId": "sio-2023",
+          "surface": "matisse"
+        },
+        "notes": "The same photosphere, with a clump of silicon monoxide ALMA saw around it on 2 August 2023. This is the only dataset here whose depth is measured rather than inferred. The archive's own pipeline cube was cut out around the star, its continuum removed against 1738 line-free channels and the line integrated; 51 beams clear five times the map noise. What they show is not a shell but a single clump about three stellar radii out to the south-west, in the same quarter of the sky as the clump that dimmed the star in 2019 and about as far out as that one would have drifted in the intervening years at an ordinary ejecta speed. Each parcel is then placed in depth by its own Doppler shift, under a radial flow of eight kilometres a second that combines its motion across the sky with its motion along the line of sight. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colours are a false-colour ramp for line brightness, not colour or temperature. The flow speed is the one assumption; the two sky axes and the velocity are measured."
       }
     ]
   },

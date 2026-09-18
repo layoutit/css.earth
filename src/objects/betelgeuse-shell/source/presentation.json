@@ -5,27 +5,33 @@
   "defaultLens": "zimpol-v",
   "bank": {
     "path": "src/objects/betelgeuse-shell/prepared/lenses.json",
-    "sha256": "caaa1308bd8b567e7549ee5712fd517a0d5139319a9c4ac18ed244c3503e4741",
-    "bytes": 248253
+    "sha256": "7a0ea7025a38fbedd6cdbc81eb2a3ab7743508f6c401a1895789ad317a7c5123",
+    "bytes": 325593
   },
   "recipes": [
     {
       "id": "zimpol-v",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "sha256": "8471370a80ef0b0810253fbaac3297983f40e004d752d3922590256af0352225",
+      "sha256": "db0b1170836bd9ee0b41ad09efebbd125588f5284cdaf0044dda26b3b82cc7e2",
       "bytes": 1838
     },
     {
       "id": "veil-2019-12",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "sha256": "77ef7f6300121b6e2bf5dc69dc0b3d40b118c13de698fc7db471713dea0a5dec",
+      "sha256": "1bebc87f26aa243bcc9a058101a54633717ef15a9839961e4b181f81f2c74893",
       "bytes": 1523
     },
     {
       "id": "emission-2020",
       "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
-      "sha256": "cc6cbba32670ba1ece58a2aafcc08ad355ded17b9f62f4a5600eaf2b9aeaf923",
+      "sha256": "99b55e178f552c845b78fa8839b84572871eef80443a0fe8159de6efd6bf34da",
       "bytes": 1830
+    },
+    {
+      "id": "sio-2023",
+      "path": "src/objects/betelgeuse-shell/source/volume-sio-2023.json",
+      "sha256": "4839894ee61b5189e6e0d08d9aa7335034fca6b7caf8aa2f6dc59ae0e3898215",
+      "bytes": 1839
     }
   ],
   "sharedInputs": [],
@@ -161,6 +167,48 @@
         "sha256": "250e938fdd00b7867332e7348ae0805b3cacf6d07d60ca9918d75a3f3856356a",
         "bytes": 5621,
         "authoredFrom": "matisse-2020-02-continuum-4mas"
+      }
+    },
+    {
+      "id": "sio-2023",
+      "label": "ALMA · SiO clump, August 2023",
+      "title": "A clump of silicon monoxide, placed by its own velocity",
+      "description": "ALMA saw silicon monoxide around this star on 2 August 2023, and this is the one dataset here whose depth is measured rather than inferred. The archive's own pipeline cube was cut out around the star, its continuum removed against 1738 line-free channels, and the line integrated: 51 beams clear 5 times the map noise. What they show is not a shell but a single clump 3.32 stellar radii out at position angle 225 degrees, the same quarter of the sky as the clump that dimmed the star in 2019, and about as far out as that one would have drifted at an ordinary ejecta speed. Each parcel is then placed in depth by its own Doppler shift, under a radial flow at 8.1 kilometres a second. Silicon monoxide is what silicate dust condenses from, so this is the material of the other two datasets caught before it became dust. The colours are a false-colour ramp for line brightness.",
+      "summary": "Silicon monoxide around the star, the only dataset here whose depth is measured rather than inferred.",
+      "detail": "57 × 57 px at 6.90 mas, 47 channels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "ALMA band 6, SiO v=0 J=5–4 at 217.105 GHz, 2 August 2023, beam 30 × 22 mas"
+        },
+        {
+          "id": "detection",
+          "label": "Detection",
+          "value": "51 beams above 5 sigma in the integrated line"
+        },
+        {
+          "id": "clump",
+          "label": "Where it is",
+          "value": "3.32 stellar radii from the star on the sky, position angle 225 degrees"
+        },
+        {
+          "id": "flow",
+          "label": "Flow speed",
+          "value": "8.1 km/s: 7.7 across the sky, measured against the 2019 clump, and -2.4 along the line of sight"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Measured: the Doppler shift of each parcel, under a radial flow at that speed"
+        }
+      ],
+      "input": "alma-sio-v0-5-4-2023-08",
+      "preview": {
+        "path": "src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png",
+        "sha256": "22feab63780a8108c0a06bc6ed14dcfb35117446dcbc9bd69068a875905b5935",
+        "bytes": 8798,
+        "authoredFrom": "alma-sio-v0-5-4-2023-08"
       }
     }
   ]

@@ -48,7 +48,58 @@ export const PRODUCTS = Object.freeze({
   dolp: { path: 'observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits', dpId: 'ADP.2026-08-19T13:19:07.656',
     sha256: '0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687', bytes: 8455680 },
 });
+/** The ALMA SiO v=0 J=5-4 cube of 2 August 2023, cut out of the archive's own pipeline product around this star,
+ * continuum-subtracted against its 1738 line-free channels and windowed to the line. This is the one dataset here whose
+ * depth is measured rather than inferred from a projection: the line-of-sight velocity of each parcel places it. */
+export const ALMA_SIO = Object.freeze({
+  path: 'observations/betelgeuse-alma-sio-v0-5-4-2023-08.fits',
+  sha256: 'daefd07d5e8ed872474df2b8d618b9b632b898faaae7146784e224e7897d4657', bytes: 616320,
+  proposal: '2022.A.00026.S', member: 'uid://A001/X360d/Xae',
+  product: 'member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits',
+  /** The star's own velocity, read off the brightest channel of the envelope. */
+  systemicKmS: 8,
+  /** Measured here: the projected separation of this clump against Montarges et al. 2021's December 2019 clump, over
+   * the 3.63 years between the two epochs. It is the only thing that sets the scale of the depth. */
+  skySpeedKmS: 7.7,
+  /** A parcel counts when its integrated line emission clears this many times the map noise. */
+  detectionSigma: 5,
+  /** A line of sight cannot be deprojected past the flow speed; this caps it so a parcel never runs to infinity. */
+  maximumProjection: 0.85,
+});
+/** ALMA line maps have no publisher's palette the way the two optical datasets do, so this one carries the perceptual
+ * ramp such maps are conventionally printed in, sampled at the quarters of its bar, and is marked false colour. */
+export const SIO_MAP = Object.freeze({
+  name: 'viridis',
+  stops: Object.freeze([
+    Object.freeze([0.231, 0.322, 0.545] as const), Object.freeze([0.129, 0.569, 0.549] as const),
+    Object.freeze([0.369, 0.788, 0.384] as const), Object.freeze([0.992, 0.906, 0.145] as const),
+  ]),
+});
+export function sioMapWeights(value: number): readonly [number, number, number, number] {
+  const p = Math.max(0, Math.min(1, value)) * SIO_MAP.stops.length;
+  return [0, 1, 2, 3].map(k => Math.max(0, 1 - Math.abs(p - (k + 1)))) as unknown as readonly [number, number, number, number];
+}
+
+/** Read a small 3-axis FITS cube: the header cards this needs, then big-endian float32 data. */
+function readCube(bytes: Buffer) {
+  const cards: string[] = []; let offset = 0;
+  outer: for (; offset < bytes.length; offset += 2880) for (let i = 0; i < 2880; i += 80) {
+    const card = bytes.toString('latin1', offset + i, offset + i + 80); cards.push(card);
+    if (/^END\s*$/.test(card)) { offset += 2880; break outer; }
+  }
+  const number = (key: string) => {
+    const card = cards.find(card => card.startsWith(key.padEnd(8)));
+    if (!card) throw new Error(`The SiO cube declares no ${key}.`);
+    return Number(card.slice(10, 30));
+  };
+  const width = number('NAXIS1'), height = number('NAXIS2'), channels = number('NAXIS3');
+  const data = bytes.subarray(offset);
+  return { width, height, channels, cards, number,
+    at: (x: number, y: number, c: number) => data.readFloatBE(((c * height + y) * width + x) * 4) };
+}
+
 export const EMISSION_PREVIEW_PATH = 'previews/emission-2020-off-limb.png';
+export const SIO_PREVIEW_PATH = 'previews/sio-2023-integrated-line.png';
 export const PIXEL_SCALE_MAS = 3.6;
 /** The 4 micrometre reconstruction this package's third dataset reads, the same bytes Betelgeuse's own package ships.
  * Only its light outside the photosphere is used; the disc itself is already the star's drawn sphere. */
@@ -386,6 +437,92 @@ export async function author(defaultLens = 'zimpol-v') {
   const emissionPreview = await sharp(previewPixels, { raw: { width: previewSize, height: previewSize, channels: 3 } })
     .png({ compressionLevel: 9 }).toBuffer();
 
+  // --- the measured lens: the SiO clump, placed in depth by its own line-of-sight velocity ---
+  // Every other dataset here is a projection given a shape. This one is a cube: two sky axes measured, and the third
+  // from the Doppler shift of each parcel. That is how the Crab's ejecta are placed, and it is the only depth in this
+  // package that is not an inference from a projection.
+  const sioBytes = await readFile(resolve(root, ALMA_SIO.path));
+  if (sioBytes.length !== ALMA_SIO.bytes || sha256(sioBytes) !== ALMA_SIO.sha256) throw new Error('The SiO cube differs from its pin.');
+  const sio = readCube(sioBytes);
+  const sioMasPerPx = Math.abs(sio.number('CDELT1')) * 3.6e6, sioPxPerStar = radiusArcsec * 1000 / sioMasPerPx;
+  const sioCx = sio.number('CRPIX1') - 1, sioCy = sio.number('CRPIX2') - 1;
+  const restHz = sio.number('RESTFRQ'), crval3 = sio.number('CRVAL3'), cdelt3 = sio.number('CDELT3');
+  const kmsOf = (channel: number) => 299792.458 * (restHz - (crval3 + channel * cdelt3)) / restHz - ALMA_SIO.systemicKmS;
+  // The map noise, from the corners of the integrated map where the envelope is not.
+  const sioPlane = sio.width * sio.height, moment0 = new Float64Array(sioPlane), moment1 = new Float64Array(sioPlane);
+  for (let y = 0; y < sio.height; y++) for (let x = 0; x < sio.width; x++) {
+    let sum = 0, weighted = 0;
+    for (let c = 0; c < sio.channels; c++) { const value = sio.at(x, y, c); if (!(value > 0)) continue; sum += value; weighted += value * kmsOf(c); }
+    moment0[y * sio.width + x] = sum; moment1[y * sio.width + x] = sum > 0 ? weighted / sum : 0;
+  }
+  let cornerSum = 0, cornerCount = 0;
+  for (let y = 0; y < sio.height; y++) for (let x = 0; x < sio.width; x++) {
+    if (Math.hypot(x - sioCx, y - sioCy) / sioPxPerStar < 7) continue;
+    cornerSum += moment0[y * sio.width + x]! ** 2; cornerCount++;
+  }
+  const sioNoise = Math.sqrt(cornerSum / Math.max(1, cornerCount)), sioFloor = ALMA_SIO.detectionSigma * sioNoise;
+  // What the detection is, measured: where it sits on the sky and how fast it is moving toward or away from us.
+  let clumpEast = 0, clumpNorth = 0, clumpVelocity = 0, clumpFlux = 0, detected = 0, brightest = 0;
+  for (let y = 0; y < sio.height; y++) for (let x = 0; x < sio.width; x++) {
+    const flux = moment0[y * sio.width + x]!; if (!(flux > sioFloor)) continue;
+    const r = Math.hypot(x - sioCx, y - sioCy) / sioPxPerStar; if (r < STRETCH.innerMaskUnits || r > halfUnits) continue;
+    detected++; brightest = Math.max(brightest, flux);
+    clumpEast += flux * -(x - sioCx) / sioPxPerStar; clumpNorth += flux * (y - sioCy) / sioPxPerStar;
+    clumpVelocity += flux * moment1[y * sio.width + x]!; clumpFlux += flux;
+  }
+  if (!detected) throw new Error('The SiO cube carries no detection above its own noise.');
+  clumpEast /= clumpFlux; clumpNorth /= clumpFlux; clumpVelocity /= clumpFlux;
+  // The flow speed. The clump's motion across the sky is measured against the published 2019 clump; its motion along
+  // the line of sight is its own mean Doppler shift. A radial flow at their combination carries both.
+  const sioOutflowKmS = Math.hypot(ALMA_SIO.skySpeedKmS, clumpVelocity);
+  const sioProjected = Math.hypot(clumpEast, clumpNorth);
+  // Each detected parcel: its sky position is measured, and its depth follows from v_los = v_out * z / r.
+  const sioGrid = new Float64Array(size * size * size);
+  let placed = 0, deepest = 0;
+  for (let y = 0; y < sio.height; y++) for (let x = 0; x < sio.width; x++) {
+    const flux = moment0[y * sio.width + x]!; if (!(flux > sioFloor)) continue;
+    const east = -(x - sioCx) / sioPxPerStar, north = (y - sioCy) / sioPxPerStar;
+    const sky = Math.hypot(east, north); if (sky < STRETCH.innerMaskUnits || sky > halfUnits) continue;
+    const ratio = Math.max(-ALMA_SIO.maximumProjection, Math.min(ALMA_SIO.maximumProjection, moment1[y * sio.width + x]! / sioOutflowKmS));
+    // A redshift is motion away from us, which this grid's z axis points along.
+    const radius = sky / Math.sqrt(1 - ratio * ratio), away = radius * ratio;
+    if (!Number.isFinite(radius) || radius > halfUnits) continue;
+    // This grid's x is west, so an eastward offset is negative x.
+    const gx = -east, gy = north, gz = away;
+    const i = Math.round((gx + halfUnits) / step - 0.5), j = Math.round((gy + halfUnits) / step - 0.5), k = Math.round((gz + halfUnits) / step - 0.5);
+    if (i < 0 || j < 0 || k < 0 || i >= size || j >= size || k >= size) continue;
+    // Spread each parcel over the beam it was measured with, so the grid carries no structure finer than the data.
+    const spread = Math.max(1, Math.round((sio.number('BMIN') * 3.6e6 / (radiusArcsec * 1000)) / step / 2));
+    for (let dk = -spread; dk <= spread; dk++) for (let dj = -spread; dj <= spread; dj++) for (let di = -spread; di <= spread; di++) {
+      const a = i + di, b = j + dj, c = k + dk;
+      if (a < 0 || b < 0 || c < 0 || a >= size || b >= size || c >= size) continue;
+      const d2 = di * di + dj * dj + dk * dk;
+      sioGrid[(c * size + b) * size + a]! += flux * Math.exp(-d2 / (2 * spread * spread / 4));
+    }
+    placed++; deepest = Math.max(deepest, Math.abs(away));
+  }
+  let sioPeak = 0; for (const value of sioGrid) sioPeak = Math.max(sioPeak, value);
+  const sioEmission = encodeGrid((x, y, z) => {
+    const i = Math.round((x + halfUnits) / step - 0.5), j = Math.round((y + halfUnits) / step - 0.5), k = Math.round((z + halfUnits) / step - 0.5);
+    const value = sioGrid[(k * size + j) * size + i] ?? 0; if (!(value > 0)) return 0;
+    return sioMapWeights(value / sioPeak).map(weight => weight * (value / sioPeak));
+  });
+  const sioGain = -Math.log(1 - COLOUR_MAP.topAlpha) / Math.max(...SIO_MAP.stops.at(-1)!);
+  // The integrated line map this dataset is built from, drawn in its own ramp. There is no publisher's figure of it:
+  // it is a cutout of an archive product that this package reduced itself.
+  const sioPreviewSize = 512, sioPixels = Buffer.alloc(sioPreviewSize * sioPreviewSize * 3);
+  for (let y = 0; y < sioPreviewSize; y++) for (let x = 0; x < sioPreviewSize; x++) {
+    const u = (x + 0.5) / sioPreviewSize * 2 - 1, v = (y + 0.5) / sioPreviewSize * 2 - 1;
+    const i = Math.round(sioCx + u * halfUnits * sioPxPerStar), j = Math.round(sioCy - v * halfUnits * sioPxPerStar);
+    const flux = i >= 0 && j >= 0 && i < sio.width && j < sio.height ? moment0[j * sio.width + i]! : 0;
+    const weights = sioMapWeights(Math.max(0, Math.min(1, flux / brightest))), out = [0, 0, 0];
+    for (const [k, weight] of weights.entries()) for (let c = 0; c < 3; c++) out[c]! += weight * SIO_MAP.stops[k]![c]!;
+    const o = (y * sioPreviewSize + x) * 3;
+    for (let c = 0; c < 3; c++) sioPixels[o + c] = Math.round(255 * Math.max(0, Math.min(1, out[c]!)));
+  }
+  const sioPreview = await sharp(sioPixels, { raw: { width: sioPreviewSize, height: sioPreviewSize, channels: 3 } })
+    .png({ compressionLevel: 9 }).toBuffer();
+
   // --- the published lens: the December 2019 RADMC-3D clump, drawn as scattered starlight ---
   // Their axes are x along right ascension (east), y along declination (north), z positive toward Earth. This grid's are
   // west, north and away, so east and toward-Earth both change sign.
@@ -437,6 +574,11 @@ export async function author(defaultLens = 'zimpol-v') {
     ],
     paper: { doi: '10.1051/0004-6361/202661023', citation: 'Montargès et al. 2026, A&A 711, L12 (the 2024 polarimetry)' },
     measured: { starCentrePixel: [cx, cy], polarisationCentrePixel: [px, py], polarisationMaskRadiusUnits: maskedRadiusUnits,
+      sioClump: { detectedBeams: detected, placedParcels: placed, noiseJyBeamKmS: sioNoise,
+        skyOffsetUnits: [clumpEast, clumpNorth], projectedUnits: sioProjected,
+        positionAngleDegrees: ((Math.atan2(clumpEast, clumpNorth) * 180 / Math.PI) + 360) % 360,
+        meanLineOfSightKmS: clumpVelocity, skySpeedKmS: ALMA_SIO.skySpeedKmS, outflowKmS: sioOutflowKmS,
+        deepestPlacedUnits: deepest },
       emissionEnvelope: { shape: emissionFit.shape, radiusUnits: emissionFit.shell.radiusUnits, gaussianWidthUnits: emissionFit.shell.widthUnits,
         outflowExponent: emissionFit.outflow.exponent, residualRms: Math.min(emissionFit.shell.residual, emissionFit.outflow.residual),
         constantDepthResidualRms: emissionFit.flatResidual, signalRms: emissionFit.signalRms,
@@ -449,6 +591,7 @@ export async function author(defaultLens = 'zimpol-v') {
       veilCentreUnits: [...centre], veilRadiusUnits: veilRadius },
     models: {
       'zimpol-v': `Fitted envelope, drawn in the published figure's own colour map. The degree map is floor-subtracted and carried on the same scale as that figure's colourbar, zero to ${STRETCH.topDegree.toFixed(2)}. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius ${shell.radiusUnits.toFixed(2)} stellar radii and gaussian thickness ${shell.widthUnits.toFixed(2)}, which leaves a residual of ${shell.residual.toExponential(2)} against a profile of ${signalRms.toExponential(2)}. A steady outflow r^-${outflow.exponent.toFixed(2)} leaves ${outflow.residual.toExponential(2)} and a constant depth, which is what pushing the image backwards assumes, leaves ${flatResidual.toExponential(2)}. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Colour is matplotlib ${COLOUR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar colour of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
+      'sio-2023': `Measured depth, not inferred. The archive's pipeline cube of SiO v=0 J=5-4 was cut out around the star, its continuum removed against 1738 line-free channels and the line integrated. ${detected} beams clear ${ALMA_SIO.detectionSigma} times the map noise, and they form one clump ${sioProjected.toFixed(2)} stellar radii out at position angle ${(((Math.atan2(clumpEast, clumpNorth) * 180 / Math.PI) + 360) % 360).toFixed(0)} degrees, not a shell. Each parcel's depth is its own Doppler shift under a radial flow of ${sioOutflowKmS.toFixed(1)} km/s, which combines ${ALMA_SIO.skySpeedKmS} km/s across the sky, measured against the published December 2019 clump over the 3.63 years between the epochs, with the clump's own mean line-of-sight velocity of ${clumpVelocity.toFixed(1)} km/s. A parcel is spread over the beam it was measured with, and a line of sight is never deprojected past ${ALMA_SIO.maximumProjection} of the flow speed. ${placed} parcels are placed, the furthest ${deepest.toFixed(2)} stellar radii along the line of sight. The flow speed is the one stated assumption; the two sky axes and the velocity are measured.`,
       'emission-2020': `The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a ${emissionFit.shape} (${emissionFit.shape === 'spherical-shell' ? `radius ${emissionFit.shell.radiusUnits.toFixed(2)} stellar radii, gaussian thickness ${emissionFit.shell.widthUnits.toFixed(2)}` : `r^-${emissionFit.outflow.exponent.toFixed(2)}`}) leaving ${Math.min(emissionFit.shell.residual, emissionFit.outflow.residual).toExponential(2)}, against ${emissionFit.flatResidual.toExponential(2)} for the constant depth an extrusion assumes and a profile of ${emissionFit.signalRms.toExponential(2)}. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Colour is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.`,
       'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
     },
@@ -493,8 +636,13 @@ export async function author(defaultLens = 'zimpol-v') {
       // scale, shared opacity, and the light outside the disc continues the light on it.
       material: { emission: HEAT_MAP.stops.map((color, channel) => ({ channel, color: [...color], strength: 1 })),
         absorption: [], emissionTransfer: 'shared-opacity', exposureGain: emissionGain } },
+    { id: 'sio-2023', label: 'ALMA \u00b7 SiO clump, August 2023', file: 'density-sio-2023.ktx2', built: sioEmission,
+      sourceUrl: 'https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S',
+      // The one grid here whose third axis is measured. Four channels over a perceptual ramp, shared opacity.
+      material: { emission: SIO_MAP.stops.map((color, channel) => ({ channel, color: [...color], strength: 1 })),
+        absorption: [], emissionTransfer: 'shared-opacity', exposureGain: sioGain } },
   ];
-  const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes], [EMISSION_PREVIEW_PATH, emissionPreview]];
+  const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes], [EMISSION_PREVIEW_PATH, emissionPreview], [SIO_PREVIEW_PATH, sioPreview]];
   const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string; sha256: string }; occultingCentreUnits?: [number, number, number] }[] = [];
   for (const grid of grids) {
     const recipeBytes = Buffer.from(JSON.stringify(volumeRecipe(grid.file, sha256(grid.built.ktx2), sha256(grid.built.rgba), provenanceSha, grid.material), null, 2) + '\n');
@@ -515,7 +663,7 @@ export async function author(defaultLens = 'zimpol-v') {
     // This cloud belongs to Betelgeuse. It is not a place of its own, so it has no catalogue entry and never appears
     // as a marker, a search result or a destination; its datasets are listed by the star.
     attachedTo: 'betelgeuse',
-    acceptedLabResult: 'betelgeuse-shell-three-grids',
+    acceptedLabResult: 'betelgeuse-shell-four-grids',
     compactInputs: deliveryGrids.find(grid => grid.id === defaultLens)!.recipe, compactMethod: 'density-grid',
     grids: deliveryGrids,
   };
@@ -524,7 +672,13 @@ export async function author(defaultLens = 'zimpol-v') {
   outputs.push(['delivery.json', Buffer.from(JSON.stringify(delivery, null, 2) + '\n')]);
 
   // The presentation the application reads, and the manifest that accounts for every retained source byte.
-  const facts = (grid: typeof grids[number]) => grid.id === 'emission-2020'
+  const facts = (grid: typeof grids[number]) => grid.id === 'sio-2023'
+    ? [{ id: 'instrument', label: 'Instrument', value: `ALMA band 6, SiO v=0 J=5\u20134 at 217.105 GHz, 2 August 2023, beam ${(sio.number('BMAJ') * 3.6e6).toFixed(0)} \u00d7 ${(sio.number('BMIN') * 3.6e6).toFixed(0)} mas` },
+       { id: 'detection', label: 'Detection', value: `${detected} beams above ${ALMA_SIO.detectionSigma} sigma in the integrated line` },
+       { id: 'clump', label: 'Where it is', value: `${sioProjected.toFixed(2)} stellar radii from the star on the sky, position angle ${(((Math.atan2(clumpEast, clumpNorth) * 180 / Math.PI) + 360) % 360).toFixed(0)} degrees` },
+       { id: 'flow', label: 'Flow speed', value: `${sioOutflowKmS.toFixed(1)} km/s: ${ALMA_SIO.skySpeedKmS} across the sky, measured against the 2019 clump, and ${clumpVelocity.toFixed(1)} along the line of sight` },
+       { id: 'depth', label: 'Depth', value: 'Measured: the Doppler shift of each parcel, under a radial flow at that speed' }]
+    : grid.id === 'emission-2020'
     ? [{ id: 'instrument', label: 'Instrument', value: 'VLTI/MATISSE, 3.94\u20134.00 \u00b5m, February 2020, 4 mas beam' },
        { id: 'extent', label: 'Drawn extent', value: `${emissionInnerUnits.toFixed(2)} to ${emissionFieldUnits.toFixed(2)} stellar radii: outside the disc and its first beam, to the edge of the 100 mas field` },
        { id: 'share', label: 'Share of the flux', value: 'A fifth of the reconstruction lies outside the disc' },
@@ -550,20 +704,29 @@ export async function author(defaultLens = 'zimpol-v') {
     inputEvidence: [],
     lenses: grids.map(grid => ({
       id: grid.id, label: grid.label,
-      title: grid.id === 'emission-2020' ? 'The light outside Betelgeuse\u2019s disc at 4 micrometres'
+      title: grid.id === 'sio-2023' ? 'A clump of silicon monoxide, placed by its own velocity'
+        : grid.id === 'emission-2020' ? 'The light outside Betelgeuse\u2019s disc at 4 micrometres'
         : grid.id === 'zimpol-v' ? 'Polarised dust around Betelgeuse in 2024' : 'The dust clump of the Great Dimming',
-      description: grid.id === 'emission-2020'
+      description: grid.id === 'sio-2023'
+        ? `ALMA saw silicon monoxide around this star on 2 August 2023, and this is the one dataset here whose depth is measured rather than inferred. The archive's own pipeline cube was cut out around the star, its continuum removed against 1738 line-free channels, and the line integrated: ${detected} beams clear ${ALMA_SIO.detectionSigma} times the map noise. What they show is not a shell but a single clump ${sioProjected.toFixed(2)} stellar radii out at position angle ${(((Math.atan2(clumpEast, clumpNorth) * 180 / Math.PI) + 360) % 360).toFixed(0)} degrees, the same quarter of the sky as the clump that dimmed the star in 2019, and about as far out as that one would have drifted at an ordinary ejecta speed. Each parcel is then placed in depth by its own Doppler shift, under a radial flow at ${sioOutflowKmS.toFixed(1)} kilometres a second. Silicon monoxide is what silicate dust condenses from, so this is the material of the other two datasets caught before it became dust. The colours are a false-colour ramp for line brightness.`
+        : grid.id === 'emission-2020'
         ? `The same reconstruction that paints this star\u2019s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star\u2019s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^\u2212${emissionFit.outflow.exponent.toFixed(1)}, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colours are the reconstruction\u2019s own heat scale, because this is the same quantity as the sphere.`
         : grid.id === 'zimpol-v'
         ? `The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the colour map and on the zero-to-${STRETCH.topDegree.toFixed(2)} scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colours are the publisher's legend for a ratio, not the colour of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.`
         : 'The dust clump Montarg\u00e8s et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.',
-      summary: grid.id === 'emission-2020' ? 'The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.'
+      summary: grid.id === 'sio-2023' ? 'Silicon monoxide around the star, the only dataset here whose depth is measured rather than inferred.'
+        : grid.id === 'emission-2020' ? 'The fifth of the reconstruction that lies outside the disc, given the shape that best projects to it.'
         : grid.id === 'zimpol-v' ? 'Measured polarised light from dust one to 4.5 stellar radii out; its depth is a convention.' : 'The published model of the dust that dimmed the star ten times in December 2019, drawn as the extinction it causes.',
-      detail: grid.id === 'emission-2020' ? '128 \u00d7 128 px at 0.78 mas'
+      detail: grid.id === 'sio-2023' ? `${sio.width} \u00d7 ${sio.height} px at ${sioMasPerPx.toFixed(2)} mas, ${sio.channels} channels`
+        : grid.id === 'emission-2020' ? '128 \u00d7 128 px at 0.78 mas'
         : grid.id === 'zimpol-v' ? '1024 \u00d7 1024 px at 3.6 mas' : 'Sphere of 6.5 au at 13.0 au',
-      facts: facts(grid), input: grid.id === 'emission-2020' ? 'matisse-2020-02-continuum-4mas'
+      facts: facts(grid), input: grid.id === 'sio-2023' ? 'alma-sio-v0-5-4-2023-08'
+        : grid.id === 'emission-2020' ? 'matisse-2020-02-continuum-4mas'
         : grid.id === 'zimpol-v' ? 'sphere-zimpol-betelgeuse-p1-v-dolp' : 'veil-2019-12-parameters',
-      preview: grid.id === 'emission-2020'
+      preview: grid.id === 'sio-2023'
+        ? { path: `${packageBase}/${SIO_PREVIEW_PATH}`, sha256: sha256(sioPreview), bytes: sioPreview.length,
+            authoredFrom: 'alma-sio-v0-5-4-2023-08' }
+        : grid.id === 'emission-2020'
         ? { path: `${packageBase}/${EMISSION_PREVIEW_PATH}`, sha256: sha256(emissionPreview), bytes: emissionPreview.length,
             authoredFrom: 'matisse-2020-02-continuum-4mas' }
         : { path: `${packageBase}/${PREVIEWS[grid.id as keyof typeof PREVIEWS].path}`,
@@ -646,6 +809,16 @@ export async function author(defaultLens = 'zimpol-v') {
         credit: preview.credit, displayCredit: preview.credit,
         acquisition: `Publisher figure downloaded unchanged from ${preview.url}; preparation resizes it into this object's dataset preview.`,
         license: preview.license, ...pin });
+    } else if (name === ALMA_SIO.path) {
+      inputs.push({ id: 'alma-sio-v0-5-4-2023-08', ...binding('alma-sio-v0-5-4-2023-08'), path,
+        origin: `https://almascience.eso.org/soda/sync?ID=${ALMA_SIO.product}`,
+        sourceUrl: 'https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S',
+        title: `ALMA ${ALMA_SIO.proposal} \u00b7 SiO v=0 J=5-4 cube of Betelgeuse, 2 August 2023`,
+        credit: 'ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member ' + ALMA_SIO.member,
+        displayCredit: 'ALMA (ESO/NAOJ/NRAO)',
+        acquisition: `Cut out of the archive's own pipeline cube ${ALMA_SIO.product} through its SODA service, on a circle of 0.00025 degrees about the observation's phase centre, then continuum-subtracted against the 1738 line-free channels of the spectral window and windowed to 32 kilometres a second either side of the star's velocity. The archive product is 72 GB; this is the part of it that carries the line around this star.`,
+        license: 'ALMA data are public under the ALMA data access policy; retain the ALMA credit line.',
+        lensId: 'sio-2023', ...pin });
     } else if (name === EMISSION_2020.path) {
       inputs.push({ id: 'matisse-2020-02-continuum-4mas', ...binding('matisse-2020-02-continuum-4mas'), path,
         origin: 'https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455',

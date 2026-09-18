@@ -1,9 +1,9 @@
 {
   "schema": "cssearth-volume-recipe@1",
   "grid": {
-    "path": "density-zimpol-v.ktx2",
-    "sha256": "f1351b9a29e0f29b4ec1a9f2a7e7b0ababce2370ec9426733cc53f2ea5cbf462",
-    "decodedSha256": "69177a21ef3ee8558eb0082dfbc336317886494e12c911df04553179497317be",
+    "path": "density-sio-2023.ktx2",
+    "sha256": "654c1e848a2343cefcfbb2487b832786a3f240fb0ed865c1eb1ba5354d954bdb",
+    "decodedSha256": "29a40571f2985b3a8d4b8c48a1fc017458a33e5a6121142a21b44b45e9c49648",
     "dimensions": [
       96,
       96,
@@ -31,43 +31,43 @@
       {
         "channel": 0,
         "color": [
-          0.258,
-          0.039,
-          0.406
+          0.231,
+          0.322,
+          0.545
         ],
         "strength": 1
       },
       {
         "channel": 1,
         "color": [
-          0.578,
-          0.148,
-          0.404
+          0.129,
+          0.569,
+          0.549
         ],
         "strength": 1
       },
       {
         "channel": 2,
         "color": [
-          0.865,
-          0.317,
-          0.226
+          0.369,
+          0.788,
+          0.384
         ],
         "strength": 1
       },
       {
         "channel": 3,
         "color": [
-          0.988,
-          0.998,
-          0.645
+          0.992,
+          0.906,
+          0.145
         ],
         "strength": 1
       }
     ],
     "absorption": [],
     "emissionTransfer": "shared-opacity",
-    "exposureGain": 2.307199491978002
+    "exposureGain": 2.3211543276149658
   },
   "bake": {
     "sliceCounts": {
