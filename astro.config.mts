@@ -1,4 +1,5 @@
 import { execSync } from "node:child_process";
+import { rm } from "node:fs/promises";
 
 import { defineConfig } from "astro/config";
 import { SITE_ORIGIN } from "./site/seo.mts";
@@ -6,6 +7,7 @@ import { wmtsLocalMirror } from "./tools/objects/geographic-pages/operations/wmt
 import { performanceSourceMaps } from "./tools/performance/source-maps.mts";
 import { searchServer } from './tools/search-server.mts';
 import { prepareContextAvailability } from "./tools/prepare-context-availability.mts";
+import { assetOrigin } from "./site/asset-origin.mts";
 
 function cssEarthVersion() {
   try {
@@ -36,6 +38,15 @@ export default defineConfig({
       const { availability, failures } = await prepareContextAvailability({ strict: command === 'build' && !allowMissing });
       updateConfig({ vite: { define: { __CSSEARTH_CONTEXT_AVAILABILITY__: JSON.stringify(availability) } } });
       if (failures.length) logger.warn(`Some 3D views are unavailable in this installation:\n${failures.join('\n')}\nPrepare their packages and restart the server to enable them.`);
+    },
+  } }, { name: 'asset-origin-scenes', hooks: {
+    // `public/scenes` (1.44 GB) is copied into `dist/scenes` by Astro's publicDir copy regardless
+    // of ASSET_ORIGIN; when textures and scene JSON resolve to the published bucket instead, that
+    // copy is dead weight the deploy should not ship. `assemble:planets` tolerates its absence.
+    'astro:build:done': async ({ dir, logger }) => {
+      if (!assetOrigin()) return;
+      await rm(new URL('scenes', dir), { recursive: true, force: true });
+      logger.info('ASSET_ORIGIN is set: removed dist/scenes (textures and scene JSON resolve to the published bucket).');
     },
   } }],
   vite: {
