@@ -126,6 +126,9 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+      undici:
+        specifier: 7.29.1
+        version: 7.29.1
       vite:
         specifier: 7.3.1
         version: 7.3.1(@types/node@26.4.0)(jiti@2.6.1)(lightningcss@1.33.0)(yaml@2.9.0)
@@ -4130,6 +4133,10 @@ packages:
 
   undici-types@8.3.0:
     resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
+
+  undici@7.29.1:
+    resolution: {integrity: sha512-RYONW2MeafgYlkVOKYKkA/Ag7BmXqgIWCa8t1m0JcxrQg9pI9lEqRhAOruOBCbAohOa/gkCF+iPi9hrgvTzu6Q==}
+    engines: {node: '>=20.18.1'}
 
   undici@8.10.0:
     resolution: {integrity: sha512-HvltHd7avK13QIw/oLe4qoOLyoVSoafqJ2jYOrtMRBkbYT31eiBQ8O0ehRKZiEZCMEyLFQNIADpgCWC5fALvYQ==}
@@ -8632,6 +8639,8 @@ snapshots:
   undici-types@7.18.2: {}
 
   undici-types@8.3.0: {}
+
+  undici@7.29.1: {}
 
   undici@8.10.0: {}
 

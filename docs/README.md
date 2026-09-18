@@ -16,6 +16,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
 | Interferometric data to star surfaces: calibration, reconstruction and the checks | [Interferometric imaging](interferometric-imaging.md) |
 | Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
+| JWST images to sky band composites: MAST programs, the re-run level-3 stage, its oracle and depth from a model | [JWST imaging](jwst-imaging.md) |
 | Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
 | Published source identities, input bindings and usage links | [Sources catalogue](sources-catalogue.md) |
 | Missions, spacecraft and dataset attribution | [Exploration catalogue](architecture/exploration-catalog.md) |
