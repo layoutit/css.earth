@@ -20,7 +20,7 @@ interface FlightPace {speed: number;}
 interface WorldFlightRequest {owner: Pick<ObjectWorldNavigation, 'apply'>; from: WorldCamera; flight: Flight; anchors: FlightAnchors; signal: AbortSignal; reducedMotion?: boolean; startElapsedS?: number; endElapsedS?: number; startTime?: number | null; limitElapsedS?: () => number; windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame' | 'performance'>; documentTarget: Pick<Document, 'addEventListener' | 'removeEventListener'>; onPaint?: (world: WorldCamera) => void; stopWhen?: (elapsedS: number) => boolean; pace?: FlightPace;}
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP } from './runtime-policy.mts';
-import { SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, GALACTIC_VOLUME, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyCardViewAtCamera } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createWorldSelectionTarget, worldCameraFromCenteredPresentation, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
@@ -30,7 +30,7 @@ const AIMED_AT_CENTER_PIXELS = 2;
 
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
 export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document,
-  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, systemCenters = SYSTEM_CENTERS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS; systemCenters?: typeof SYSTEM_CENTERS}) {
+  systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, systemCenters = SYSTEM_CENTERS, stellarSystems = STELLAR_SYSTEMS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[]; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: typeof SYSTEM_VIEWS; systemCenters?: typeof SYSTEM_CENTERS; stellarSystems?: ReadonlySet<string>}) {
   const frames = new Map(objects.map(object => [object.id, object.worldFrame]));
   const arrivals = new Map(objects.map(object => [object.id, object.discovery?.arrival]));
   function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {
@@ -104,7 +104,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const view = systemViews.get(objectId);
       const systemRadius = systemRadii.get(objectId);
       if (view) return systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget),
-        systemOverviewDistance(frame.bodyRadiusM, systemRadius ?? frame.bodyRadiusM, optics));
+        systemOverviewDistance(frame.bodyRadiusM, systemRadius ?? frame.bodyRadiusM, optics), stellarSystems.has(objectId));
       return systemRadius || force ? createWorldSelectionTarget(from, { ...frame,
         bodyRadiusM: systemRadius ?? frame.bodyRadiusM,
       }, optics) : selectionTarget(from, frame, optics, objectId);
