@@ -89,6 +89,20 @@ test('a sampled non-JSON asset with the right length but wrong bytes is caught',
   assert.deepEqual(result.sampleFailures, ['asset.webp']);
 });
 
+test('a live HEAD response with no content-length (e.g. a compressed JSON response) still counts as published', async () => {
+  // Observed live: once JSON publishes as application/json, Cloudflare can serve it brotli-encoded with no
+  // content-length header at all. The HEAD check must not treat that as "missing" forever; the byte check below
+  // (always run for JSON) still confirms the exact content.
+  const bytes = Buffer.from('{"ok":1}');
+  const assets = [asset('a.json', bytes)];
+  const fetcher = async (url: string, init?: RequestInit) => {
+    if (init?.method === 'HEAD') return new Response(null, { status: 200 }); // no content-length header
+    return new Response(bytes, { status: 200 });
+  };
+  const result = await verifyPublished(assets, { origin: 'https://origin.test', fetcher: fetcher as typeof fetch, uploadOne: async () => { throw new Error('must not re-upload a live file'); } });
+  assert.deepEqual(result, { retried: [], misses: [], sampleFailures: [] });
+});
+
 test('a JSON key with drifted bytes is caught even with sampleSize: 0 (JSON is always fully verified, never sampled)', async () => {
   const bytes = Buffer.from('{"ok":1}'), wrong = Buffer.from(bytes); wrong[Math.floor(wrong.length / 2)] = wrong[Math.floor(wrong.length / 2)]! ^ 0xff;
   const assets = [asset('a.json', bytes)];
