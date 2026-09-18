@@ -1,0 +1,100 @@
+#!/usr/bin/env node
+/** Compare a local image3 mosaic with MAST's level-3 product of the same observation: the oracle for image3.mts.
+ *
+ *   node tools/objects/jwst/imaging/compare.mts <program id> <band> <local i2d> [--raw <dir>]...
+ *
+ * Both are read with this repository's FITS reader. The two grids' WCS cards are recorded; brightness is compared at the same
+ * sky positions: every MAST pixel centre is projected into the local mosaic through both WCSs (fits-sky skyProjection) and
+ * sampled bilinearly, where both are finite. Identical pixels are counted only when the grids coincide. Reported: the share of identical pixels, the median absolute difference relative to the
+ * median brightness, and, over pixels above the median, the RMS difference relative to the RMS brightness and the correlation.
+ * The receipt is written beside the program as <program id>.<band>.reproduction.json, naming the toolchain and digests. */
+import { writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { sha256File } from '../../../../src/platform/sha256.mts';
+import { readFitsFileHdus, readFitsFileRegion } from '../../../fits.mts';
+import { skyProjection } from '../../../fits-sky.mts';
+import { mastFile } from '../mast.mts';
+import { PROGRAMS } from './archive.mts';
+import { readImagingProgram } from './image3.mts';
+
+const WCS_CARDS = ['NAXIS1', 'NAXIS2', 'CTYPE1', 'CTYPE2', 'CRPIX1', 'CRPIX2', 'CRVAL1', 'CRVAL2', 'CDELT1', 'CDELT2', 'PC1_1', 'PC1_2', 'PC2_1', 'PC2_2', 'BUNIT'];
+
+async function science(path: string) {
+  const hdus = await readFitsFileHdus(path), primary = hdus[0]!.header, sci = hdus.find(hdu => hdu.header.EXTNAME === 'SCI');
+  if (!sci) throw new Error(`${path} has no SCI extension.`);
+  const [width, height] = sci.dimensions as [number, number];
+  return { primary, header: sci.header, width, height, values: (await readFitsFileRegion(path, sci, { x0: 0, y0: 0, width, height }, 1024 ** 3)).values };
+}
+const quantile = (sorted: Float32Array, q: number) => sorted[Math.min(sorted.length - 1, Math.floor(q * (sorted.length - 1)))]!;
+
+export async function compareWithMast(id: string, band: string, local: string, sources: readonly string[] = []) {
+  const { program } = await readImagingProgram(id), entry = program.bands.find(other => other.band === band);
+  if (!entry) throw new Error(`${id} has no ${band} band.`);
+  const mastPath = await mastFile(entry.level3, resolve(local, '..', '..', 'mast'), sources);
+  const ours = await science(local), theirs = await science(mastPath);
+  const wcs = Object.fromEntries(WCS_CARDS.map(key => [key, { ours: ours.header[key], mast: theirs.header[key] }]));
+  const differentWcs = WCS_CARDS.filter(key => ours.header[key] !== theirs.header[key] &&
+    !(typeof ours.header[key] === 'number' && typeof theirs.header[key] === 'number' && Math.abs((ours.header[key] as number) - (theirs.header[key] as number)) <= 1e-9 * Math.max(1, Math.abs(theirs.header[key] as number))));
+  const sameGrid = !differentWcs.length, ourProjection = skyProjection(ours.header), theirProjection = skyProjection(theirs.header);
+  const sampleOurs = (x: number, y: number) => {
+    const ix = Math.floor(x), iy = Math.floor(y);
+    if (ix < 0 || iy < 0 || ix + 1 >= ours.width || iy + 1 >= ours.height) return NaN;
+    const a = x - ix, b = y - iy, o = iy * ours.width + ix, v = ours.values;
+    return (1 - a) * (1 - b) * v[o]! + a * (1 - b) * v[o + 1]! + (1 - a) * b * v[o + ours.width]! + a * b * v[o + ours.width + 1]!;
+  };
+  const count = theirs.values.length;
+  const oursAt = (i: number) => {
+    if (sameGrid) return ours.values[i]!;
+    const at = ourProjection.pixelOf(...theirProjection.skyOf(i % theirs.width, Math.floor(i / theirs.width)));
+    return at ? sampleOurs(at[0], at[1]) : NaN;
+  };
+  let both = 0, identical = 0, onlyOurs = 0, onlyTheirs = 0;
+  // Preallocated and sorted in place: a NIRCam short-wave mosaic has about 24 million pixels.
+  const differences = new Float32Array(count), levels = new Float32Array(count), pairs = new Float32Array(count * 2);
+  for (let i = 0; i < count; i++) {
+    const a = oursAt(i), b = theirs.values[i]!, fa = Number.isFinite(a), fb = Number.isFinite(b);
+    if (fa && fb) { if (a === b) identical++; differences[both] = Math.abs(a - b); levels[both] = Math.abs(b); pairs[2 * both] = a; pairs[2 * both + 1] = b; both++; }
+    else if (fa) onlyOurs++; else if (fb) onlyTheirs++;
+  }
+  // Median ratio of local to MAST brightness within MAST brightness percentile bins: a calibration or sky difference shows in
+  // every bin; alignment and outlier-flag differences show as scatter and in the star cores of the top bin.
+  const mastSorted = new Float32Array(both);
+  for (let k = 0; k < both; k++) mastSorted[k] = pairs[2 * k + 1]!;
+  mastSorted.sort();
+  const edges = [0.5, 0.9, 0.99, 0.999, 0.9999, 1].map(q => quantile(mastSorted, q));
+  const ratioBins = edges.slice(0, -1).map((low, i) => {
+    const high = edges[i + 1]!, ratios: number[] = [];
+    for (let k = 0; k < both; k++) { const b = pairs[2 * k + 1]!; if (b >= low && (b < high || i === edges.length - 2) && b > 0) ratios.push(pairs[2 * k]! / b); }
+    ratios.sort((x, y) => x - y);
+    return { mastMJyPerSr: [low, high], pixels: ratios.length, medianRatio: ratios[ratios.length >> 1] ?? null };
+  });
+  const median = quantile(levels.subarray(0, both).sort(), 0.5), medianDifference = quantile(differences.subarray(0, both).sort(), 0.5);
+  let sa = 0, sb = 0, saa = 0, sbb = 0, sab = 0, sdd = 0, n = 0;
+  for (let i = 0; i < count; i++) {
+    const a = oursAt(i), b = theirs.values[i]!;
+    if (!Number.isFinite(a) || !Number.isFinite(b) || Math.abs(b) <= median) continue;
+    sa += a; sb += b; saa += a * a; sbb += b * b; sab += a * b; sdd += (a - b) ** 2; n++;
+  }
+  const receipt = {
+    schema: 'cssearth-jwst-image3-reproduction@1', program: id, band, observation: entry.observation,
+    toolchain: 'tools/objects/jwst/toolchain.json', crdsContext: program.crdsContext,
+    mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX },
+    local: { calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX },
+    wcs, differentWcs,
+    pixels: { both, onlyOurs, onlyMast: onlyTheirs, identicalShare: sameGrid ? identical / both : null, comparedOn: sameGrid ? 'pixels' : 'sky positions', medianAbsoluteDifferenceOverMedian: medianDifference / median,
+      aboveMedian: { pixels: n, rmsDifferenceOverRms: Math.sqrt(sdd / n) / Math.sqrt(sbb / n),
+        correlation: (n * sab - sa * sb) / Math.sqrt((n * saa - sa * sa) * (n * sbb - sb * sb)) }, ratioBins },
+  };
+  const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);
+  await writeFile(path, `${JSON.stringify(receipt, null, 2)}\n`);
+  return { path, receipt };
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const args = process.argv.slice(2), [id, band, local] = args;
+  if (!id || !band || !local) throw new TypeError('Usage: compare <program id> <band> <local i2d> [--raw <dir>]...');
+  const sources = args.flatMap((arg, i) => arg === '--raw' ? [resolve(args[i + 1]!)] : []);
+  const { path, receipt } = await compareWithMast(id, band, resolve(local), sources);
+  console.log(`REPRODUCTION ${path} ${JSON.stringify({ differentWcs: receipt.differentWcs, pixels: receipt.pixels })}`);
+}

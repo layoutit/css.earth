@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { open } from 'node:fs/promises';
 
 /** Preparation-only FITS subset. No projection, calibration, display orientation,
@@ -284,4 +285,18 @@ export async function readFitsFileRegion(path: string, hdu: FitsFileHdu,
     }
   } finally { await file.close(); }
   return { ...region, values };
+}
+
+/** sha256 of one HDU's data block as stored (big-endian, before scaling), read in chunks: a pin for products whose headers
+ * carry run dates and paths, so the file digest changes while the measurement does not. */
+export async function sha256FitsData(path: string, hdu: FitsFileHdu): Promise<string> {
+  const hash = createHash('sha256'), file = await open(path, 'r'), chunk = Buffer.alloc(8 << 20);
+  try {
+    for (let offset = 0; offset < hdu.dataBytes; offset += chunk.length) {
+      const length = Math.min(chunk.length, hdu.dataBytes - offset);
+      await file.read(chunk, 0, length, hdu.dataStart + offset);
+      hash.update(chunk.subarray(0, length));
+    }
+  } finally { await file.close(); }
+  return hash.digest('hex');
 }

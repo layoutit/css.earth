@@ -106,7 +106,7 @@ if (import.meta.main) {
       console.log(`SKY_BAND ${id} hips2fits pinned`);
       continue;
     }
-    if (route.acquisition.kind === 'mast-product') {
+    if (route.acquisition.kind === 'jwst') {
       const product = requireString(band.product, `${id} product`);
       if (typeof band.sha256 === 'string') {
         const expected = { sha256: band.sha256, bytes: Number(band.bytes) };
