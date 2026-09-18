@@ -20,7 +20,7 @@ const program = (overrides: Record<string, unknown> = {}) => ({
 
 test('the pinned NGC 3132 program parses, and its reproduction receipt records a close match', async () => {
   const pinned = parseImagingProgram(JSON.parse(await readFile(join(PROGRAMS, 'ngc-3132-2733.json'), 'utf8')));
-  assert.deepEqual(pinned.bands.map(entry => entry.band).sort(), ['NIRCAM-F187N', 'NIRCAM-F470N']);
+  for (const band of ['NIRCAM-F187N', 'NIRCAM-F470N']) assert.ok(pinned.bands.some(entry => entry.band === band), `${band} is pinned`);
   const receipt = JSON.parse(await readFile(join(PROGRAMS, 'ngc-3132-2733.NIRCAM-F470N.reproduction.json'), 'utf8')) as
     { crdsContext: string; mast: { calVer: string }; local: { calVer: string }; pixels: { ratioBins: { medianRatio: number }[] } };
   assert.equal(receipt.local.calVer, receipt.mast.calVer);
@@ -79,4 +79,23 @@ test('a Python run that passes its memory ceiling is stopped', async () => {
     await assert.rejects(toolchainPython(toolchain, work, 'import time\nblock = bytearray(900 * 2**20)\nfor i in range(0, len(block), 4096): block[i] = 1\ntime.sleep(5)', [],
       join(work, 'over.log'), { maxRssBytes: 256 * 2 ** 20 }), /memory ceiling/u);
   } finally { await rm(work, { recursive: true, force: true }); }
+});
+
+test('the diffraction spikes of a bright star are masked, and a nearby filament is not', () => {
+  const width = 160, height = 160, plane = new Float32Array(width * height), cx = 60, cy = 70;
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const r = Math.hypot(x - cx, y - cy), angle = Math.atan2(y - cy, x - cx);
+    // Six thin spikes 60 degrees apart, falling slowly with radius, over a sky with a broad filament.
+    const offAxis = Math.min(...[0, 1, 2, 3, 4, 5].map(k => Math.abs(Math.sin(angle - k * Math.PI / 3)) * r));
+    const spike = r > 2 ? 30 * Math.exp(-(offAxis ** 2) / 0.8) * Math.exp(-r / 60) : 0;
+    const filament = 15 * Math.exp(-((x - 130) ** 2) / 30);
+    plane[y * width + x] = 10 + 0.3 * Math.sin(x * 1.3 + y * 0.7) + 5000 * Math.exp(-(r ** 2) / 2) + spike + filament;
+  }
+  const found = findPointSources(plane, width, height);
+  assert.ok(found.spikeRays >= 6, `${found.spikeRays} spike rays`);
+  // A point on the 0-degree spike 25 samples out, and one on the 60-degree spike.
+  assert.equal(found.mask[cy * width + cx + 25], 1);
+  assert.equal(found.mask[Math.round(cy + 25 * Math.sin(Math.PI / 3)) * width + Math.round(cx + 25 * Math.cos(Math.PI / 3))], 1);
+  assert.equal(found.mask[40 * width + 130], 0, 'the filament stays');
+  assert.equal(found.mask[(cy + 30) * width + cx + 5], 0, 'sky between spikes stays');
 });

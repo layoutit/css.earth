@@ -383,7 +383,7 @@ export async function composeSkyBandPlanes(recipe: SkyBandComposite, io: SkyBand
       values[pixel * bandCount + b] = Number.isFinite(plane[pixel]!) ? (plane[pixel]! - background) / (peak - background) : 0;
     const levels = route.toMJyPerSr === null ? { backgroundSourceUnits: background, peakSourceUnits: peak } : { backgroundMJyPerSr: background, peakMJyPerSr: peak };
     bands.push({ band: input.band, label: route.label, acquisition, toMJyPerSr: route.toMJyPerSr, calibration: route.calibration, reference: route.reference,
-      ...levels, missingPixels, ...(points ? { pointSources: { cores: points.cores, maskedPixels: points.maskedPixels, robustDeviation: points.robustDeviation, settings: points.settings } } : {}), ...(saturation ? { saturation: { ...saturation, stars: saturation.stars.length,
+      ...levels, missingPixels, ...(points ? { pointSources: { cores: points.cores, spikeRays: points.spikeRays, spikePixels: points.spikePixels, maskedPixels: points.maskedPixels, robustDeviation: points.robustDeviation, settings: points.settings } } : {}), ...(saturation ? { saturation: { ...saturation, stars: saturation.stars.length,
         maskedRadiusPixels: [Math.min(...saturation.stars.map(star => star.maskedRadius), Infinity), Math.max(...saturation.stars.map(star => star.maskedRadius), 0)],
         brightestStars: saturation.stars.slice(0, 8) } } : {}) });
     io.progress?.(`${input.band}: ${route.toMJyPerSr === null ? 'relative units' : 'calibrated'}; background ${background.toFixed(3)} and peak ${peak.toFixed(3)} ${route.toMJyPerSr === null ? 'source units' : 'MJy/sr'}`);
