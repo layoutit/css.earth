@@ -7,6 +7,11 @@ on:
         description: Serve textures and scene JSON from R2 (ASSET_ORIGIN) instead of bundling them
         type: boolean
         default: false
+  # Every green "Shared universe" run on main deploys itself; a red main never reaches production.
+  workflow_run:
+    workflows: ["Shared universe"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -17,6 +22,8 @@ concurrency:
 
 jobs:
   deploy:
+    # A dispatch always deploys; an automatic run only when main's checks passed.
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
@@ -25,6 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          # An automatic run checks out the exact main commit whose checks passed.
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || '' }}
           # __CSSEARTH_VERSION__ (astro.config.mts) counts commits with `git rev-list --count HEAD`;
           # a shallow checkout would undercount it.
           fetch-depth: 0
