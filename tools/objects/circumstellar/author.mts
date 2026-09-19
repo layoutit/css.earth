@@ -106,7 +106,11 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
 
 const compass = (positionAngleDeg: number) => ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'][Math.round(((positionAngleDeg % 360) + 360) % 360 / 45) % 8]!;
 const smoothstep = (a: number, b: number, t: number) => { const u = Math.max(0, Math.min(1, (t - a) / (b - a))); return u * u * (3 - 2 * u); };
-const filterOf = (band: string) => JWST_BANDS[band]!.filter;
+const filterOf = (band: string): string => {
+  const filter = JWST_BANDS[band]?.filter;
+  if (!filter) throw new TypeError(`${band} has no imaging filter.`);
+  return filter;
+};
 /** One manifest input per band a lens reads. */
 const inputIdOf = (lens: CircumstellarLens, band: string) => `${lens.id}-${filterOf(band).toLowerCase()}`;
 

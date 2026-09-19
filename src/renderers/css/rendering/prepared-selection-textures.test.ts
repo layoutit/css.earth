@@ -73,7 +73,10 @@ test('an alternative surface profile is hidden before its shared atlas changes',
   const presentation = mountPreparedPresentation(stage as unknown as HTMLElement,
     { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
     { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
-  presentation.commitSelection({ selection: { lensId: 'b' }, resources: { url: () => '/b.webp' } as PreparedResources });
+  const resources: PreparedResources = {
+    has: key => key === 'b', read: () => null, url: key => key === 'b' ? '/b.webp' : null, readyKeys: () => ['b'],
+  };
+  presentation.commitSelection({ selection: { lensId: 'b' }, resources });
   expect(invalid).toEqual([]);
   expect(Object.fromEntries(values)).toMatchObject({
     '--fixture-surface-image': 'url("/b.webp")',

@@ -103,7 +103,8 @@ export const bandOfFilters = (instrument: string, filters: string, observation =
     return found;
   }
   if (instrument === 'NIRSPEC') {
-    const found = Object.values(JWST_BANDS).find(entry => entry.grating !== undefined && parts.length === 2 && parts.includes(entry.grating) && parts.includes(entry.filter));
+    const found = Object.values(JWST_BANDS).find(entry => entry.grating !== undefined && entry.filter !== undefined &&
+      parts.length === 2 && parts.includes(entry.grating) && parts.includes(entry.filter));
     if (!found) throw new Error(`No JWST cube band for ${instrument} ${filters}.`);
     return found;
   }
@@ -117,7 +118,7 @@ export const bandOfFilters = (instrument: string, filters: string, observation =
     if (!found) throw new Error(`No JWST band for ${instrument} ${filters} behind MASK${occulter}.`);
     return found;
   }
-  const found = Object.values(JWST_BANDS).filter(entry => !entry.coronagraph && entry.instrument === instrument &&
+  const found = Object.values(JWST_BANDS).filter(entry => !entry.coronagraph && entry.filter !== undefined && entry.instrument === instrument &&
     (entry.instrument === 'MIRI' ? parts.length === 1 && parts[0] === entry.filter
       : parts.includes(entry.filter) && parts.includes(entry.pupil ?? 'CLEAR') || entry.pupil === 'CLEAR' && parts.length === 1 && parts[0] === entry.filter));
   if (found.length !== 1) throw new Error(`${found.length ? 'More than one' : 'No'} JWST band for ${instrument} ${filters}.`);
