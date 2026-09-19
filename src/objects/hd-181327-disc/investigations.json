@@ -3,13 +3,13 @@
   "objectId": "hd-181327-disc",
   "entries": [
     {
-      "id": "lens-nircam-six-filters",
-      "subject": "JWST/NIRCam F182M, F210M, F250M, F300M, F335M and F444W behind MASK335R, 11 October 2023 (programme 2780, observation c1014): MAST's level-3 coronagraph mosaics as one colour composite",
+      "id": "lens-nircam-f182m",
+      "subject": "JWST/NIRCam F182M behind MASK335R, 11 October 2023 (programme 2780, observation c1014): MAST's level-3 coronagraph mosaic, in the colours and scale of Gáspár et al. (2026) Figure 26",
       "status": "included",
-      "finding": "Each of the six mosaics was re-run here from the archived exposures on the pinned toolchain and lands on MAST's grid with every PSF alignment fit converged. Against MAST's products, above the median brightness, the correlations are F182M 0.961, F210M 0.965, F250M 0.996, F300M 0.994, F335M 0.993, F444W 0.978; from 1 to 2 arcsec, where the ring is, 0.89 to 0.99. MAST's products are drawn, as one composite: red F335M + F444W, green F250M + F300M, blue F182M + F210M, each band on its own range and through the shared Lupton asinh display. On the mean of the six bands the ring's ridge is an ellipse of 80.9 au at inclination 29.0 degrees and position angle 100.6 degrees; the inclined ring leaves 0.104 of a signal of 0.485 (band-normalised), a spherical shell 0.127 and constant depth 0.218. Each band measured alone gives 80.3 to 81.1 au, 28.1 to 30.1 degrees and 98.8 to 102.3 degrees.",
+      "finding": "Re-run here from the archived exposures on the pinned toolchain: on MAST's grid, every PSF alignment fit converged, correlation 0.961 with MAST above the median brightness (0.979 at 1 to 2 arcsec, where the ring is). MAST's product is drawn. Measured on it, the ring's ridge is an ellipse of 81.1 au at inclination 28.6 degrees and position angle 101.3 degrees; the inclined ring leaves 2.26 MJy/sr against a signal of 10, a spherical shell 2.9 and constant depth 5.07. It is drawn in the paper's own colour bar and logarithmic stretch for F182M, read by tools/objects/circumstellar/colourbar.mts (every printed tick within 0.5 pixel). Converted back to position on that bar and registered at the figure's scale (24 pixels per arcsecond, from its scale bar), this project's image of the ring matches the published panel with a correlation of 0.950, centred within one figure pixel, with a median difference of 4 percent of the bar; mirrored it reaches 0.939. Rendered in the application from Earth, the ring's long axis lies 78.9 degrees clockwise from up with axis ratio 0.881, against 80.0 degrees and 0.877 in the published panel (a mirror would give 100.4). Opacity is the one setting the source cannot give: the top of the bar reaches an alpha of 0.5, the value whose rendered brightness profile matches the panel best (RMS 0.051 of the ring's peak from 60 to 180 au, against 0.095 at 0.9 and 0.063 at 0.3); the render is darker overall than the printed, opaque figure (evidence/rendered.json).",
       "evidence": [
         "https://arxiv.org/abs/2608.27437",
-        "https://www.stsci.edu/jwst/phase2-public/2780.pdf"
+        "https://arxiv.org/html/2608.27437v1/HD181327_allfilts-eps-converted-to.png"
       ],
       "checked": [
         {
@@ -55,7 +55,7 @@
       "id": "ring-geometry-and-depth",
       "subject": "How the coronagraph images are given depth",
       "status": "included",
-      "finding": "The ring's ridge, the radius of peak brightness in each azimuth under nine binnings on the mean of the six bands, traces an ellipse of 80.9 au and axis ratio 0.875: inclination 29.0 degrees, line of nodes at position angle 100.6 degrees. Gáspár et al. (2026) publish 80 au, 28.54 +/- 0.31 and 100.39 +/- 0.63 degrees; the author refuses a ring more than five degrees or a tenth of the radius from them. A mirrored reading of the mosaics would put the nodes near 80 degrees, so east is where the paper has it. Projected through the cube and scored between 1 arcsec and 120 au, the inclined ring beats a spherical shell and constant depth, what an extrusion assumes. The ring is drawn; each sky column is spread along it and keeps its measured colour. The residual stays above the noise because the real ring is brighter on one side and carries a halo of small grains; those are kept as measured.",
+      "finding": "The ring's ridge, the radius of peak brightness in each azimuth under nine binnings on the F182M image, traces an ellipse of 81.2 au and axis ratio 0.878: inclination 28.6 degrees, line of nodes at position angle 101.9 degrees (binning scatter 0.16 au, 0.23 and 0.46 degrees). Gáspár et al. (2026) publish 80 au, 28.54 +/- 0.31 and 100.39 +/- 0.63 degrees; the author refuses a ring more than five degrees or a tenth of the radius from them. A mirrored reading of the mosaic would put the nodes near 80 degrees. Projected through the cube and scored between 1 arcsec and 120 au, the inclined ring with gaussian radial width 19.5 au leaves 2.27 MJy/sr against a signal of 10.0, a spherical shell 2.90 and constant depth, what an extrusion assumes, 5.07. The ring is drawn; each sky column is spread along it and keeps its measured brightness. The drawn extent is measured too: in rings of the disc plane the median falls to the per-pixel noise (0.39 MJy/sr) at 186 au, the taper starts there, and the grid reaches 240 au.",
       "evidence": [
         "https://arxiv.org/abs/2608.27437"
       ],
@@ -67,10 +67,10 @@
       ]
     },
     {
-      "id": "one-composite-not-six-lenses",
-      "subject": "Six filters as one dataset",
+      "id": "one-filter-in-the-papers-scale",
+      "subject": "Which of the six filters is drawn, and how",
       "status": "included",
-      "finding": "The six filters were first drawn as six lenses, each in the paper's own Figure 26 colour scale. They show one ring, so they are one dataset: a composite by wavelength, the display this repository uses for multi-band surveys, which also keeps the filters' relative brightness across the ring visible in one image. Water ice absorbs near 3 micrometres (the green channel), which is the measurement Gáspár et al. make across these filters; the composite shows band-relative brightness and does not measure ice.",
+      "finding": "The six filters were first drawn as six lenses in the paper's colour scales, then as one wavelength composite on the repository's sky-band display. The composite's colours and stretch were choices made here rather than read from a source, and its asinh stretch flattened the ring's profile (drawn at 70 to 100 percent of peak from 48 to 120 au where the data fall from 25 to 21 percent through 100). What is drawn now is one filter exactly as the paper prints it: F182M, the filter Gáspár et al. fit the ring on (their Figure 27) and the sharpest of the six, 31 mas pixels against 63 for the long-wave filters, in their Figure 26 colours and logarithmic scale. The other five are re-run and compared with MAST (receipts beside programs/hd-181327-2780.json) and not drawn.",
       "evidence": [
         "https://arxiv.org/abs/2608.27437"
       ],

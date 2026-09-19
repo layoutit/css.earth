@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-volume-provenance@1",
   "title": "HD 181327 debris ring: JWST coronagraph imaging given the depth of the fitted ring",
-  "kind": "observed-sky-images-on-fitted-envelope",
+  "kind": "observed-sky-image-on-fitted-envelope",
   "authors": [],
   "organizations": [
     "NASA/ESA/CSA JWST; MAST (STScI)"
@@ -13,57 +13,17 @@
   },
   "sources": [
     {
-      "id": "nircam-six-filters-f335m",
-      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
-      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
-      "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F335M band of the nircam-six-filters leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F335M-MASK335R.reproduction.json"
-    },
-    {
-      "id": "nircam-six-filters-f444w",
-      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
-      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
-      "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F444W band of the nircam-six-filters leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F444W-MASK335R.reproduction.json"
-    },
-    {
-      "id": "nircam-six-filters-f250m",
-      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
-      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
-      "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F250M band of the nircam-six-filters leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F250M-MASK335R.reproduction.json"
-    },
-    {
-      "id": "nircam-six-filters-f300m",
-      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
-      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
-      "bytes": 3084480,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F300M band of the nircam-six-filters leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F300M-MASK335R.reproduction.json"
-    },
-    {
-      "id": "nircam-six-filters-f182m",
+      "id": "nircam-f182m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "sha256": "1475883875640febac23487f0e171900cb6a5a37352945f74bec6b8e42e728f3",
       "bytes": 3101760,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F182M band of the nircam-six-filters leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F182M-MASK335R.reproduction.json"
-    },
-    {
-      "id": "nircam-six-filters-f210m",
-      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
-      "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
-      "bytes": 3101760,
-      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the nircam-six-filters leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F210M-MASK335R.reproduction.json"
+      "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F182M band of the nircam-f182m leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F182M-MASK335R.reproduction.json"
     }
   ],
   "paper": [
     {
-      "lens": "nircam-six-filters",
+      "lens": "nircam-f182m",
       "citation": "Gáspár et al. (2026), arXiv:2608.27437",
       "url": "https://arxiv.org/abs/2608.27437"
     }
@@ -76,93 +36,13 @@
     "distancePc": 47.776869019736694,
     "arcsecPerUnit": 0.020930630669558914,
     "grid": {
-      "size": 96,
-      "halfUnits": 140,
-      "slabs": 48
+      "size": 168,
+      "halfUnits": 240,
+      "slabs": 84
     },
     "lenses": {
-      "nircam-six-filters": {
+      "nircam-f182m": {
         "bands": [
-          {
-            "band": "NIRCAM-F335M-MASK335R",
-            "mosaic": "jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
-            "observed": "2023-10-11",
-            "starRaDecDeg": [
-              290.74587654529444,
-              -54.53859278635284
-            ],
-            "starPixel": [
-              148.7757342894394,
-              175.70953356918773
-            ],
-            "mosaicArcsecPerPixel": 0.06241785718091004,
-            "background": -0.13064010441303253,
-            "noise": 0.09801079774796963,
-            "backgroundPixels": 31441,
-            "peak": 6.619112491607666,
-            "unit": "MJy/sr"
-          },
-          {
-            "band": "NIRCAM-F444W-MASK335R",
-            "mosaic": "jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
-            "observed": "2023-10-11",
-            "starRaDecDeg": [
-              290.74587654733455,
-              -54.53859279033894
-            ],
-            "starPixel": [
-              148.77512047703374,
-              175.71200762513314
-            ],
-            "mosaicArcsecPerPixel": 0.06241785765110028,
-            "background": -0.06094726175069809,
-            "noise": 0.05945903528518975,
-            "backgroundPixels": 31441,
-            "peak": 3.502138137817383,
-            "unit": "MJy/sr"
-          },
-          {
-            "band": "NIRCAM-F250M-MASK335R",
-            "mosaic": "jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
-            "observed": "2023-10-11",
-            "starRaDecDeg": [
-              290.74587654597315,
-              -54.53859278767888
-            ],
-            "starPixel": [
-              148.77560399633478,
-              175.7118489308471
-            ],
-            "mosaicArcsecPerPixel": 0.0624178573515576,
-            "background": -0.21344515681266785,
-            "noise": 0.14250640720725058,
-            "backgroundPixels": 31440,
-            "peak": 11.97557544708252,
-            "unit": "MJy/sr"
-          },
-          {
-            "band": "NIRCAM-F300M-MASK335R",
-            "mosaic": "jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
-            "observed": "2023-10-11",
-            "starRaDecDeg": [
-              290.74587654665544,
-              -54.53859278901206
-            ],
-            "starPixel": [
-              148.77526355034988,
-              175.71198537662139
-            ],
-            "mosaicArcsecPerPixel": 0.062417857541170685,
-            "background": -0.10738680511713028,
-            "noise": 0.12013943573981523,
-            "backgroundPixels": 31440,
-            "peak": 7.022117614746094,
-            "unit": "MJy/sr"
-          },
           {
             "band": "NIRCAM-F182M-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
@@ -180,76 +60,269 @@
             "background": -1.8204232454299927,
             "noise": 0.39287749071121214,
             "backgroundPixels": 19901,
-            "peak": 21.37885856628418,
-            "unit": "MJy/sr"
-          },
-          {
-            "band": "NIRCAM-F210M-MASK335R",
-            "mosaic": "jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
-            "observed": "2023-10-11",
-            "starRaDecDeg": [
-              290.7458765466557,
-              -54.53859278901262
-            ],
-            "starPixel": [
-              158.44773075053914,
-              159.39529614665975
-            ],
-            "mosaicArcsecPerPixel": 0.030678778973881906,
-            "background": -1.4768096208572388,
-            "noise": 0.3213357374668121,
-            "backgroundPixels": 19901,
-            "peak": 17.074234008789062,
             "unit": "MJy/sr"
           }
         ],
-        "channels": {
-          "red": [
-            "NIRCAM-F335M-MASK335R",
-            "NIRCAM-F444W-MASK335R"
+        "colourMap": {
+          "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M colour bar",
+          "url": "https://arxiv.org/html/2608.27437v1/HD181327_allfilts-eps-converted-to.png",
+          "bar": {
+            "vmin": -0.787,
+            "vmax": 50,
+            "a": 50.455
+          },
+          "stops": [
+            [
+              65,
+              55,
+              95
+            ],
+            [
+              115,
+              98,
+              164
+            ],
+            [
+              218,
+              211,
+              242
+            ],
+            [
+              255,
+              255,
+              255
+            ]
           ],
-          "green": [
-            "NIRCAM-F250M-MASK335R",
-            "NIRCAM-F300M-MASK335R"
-          ],
-          "blue": [
-            "NIRCAM-F182M-MASK335R",
-            "NIRCAM-F210M-MASK335R"
-          ]
-        },
-        "peakPercentile": 99.9,
-        "display": {
-          "kind": "band-asinh",
-          "inputQuantity": "band-normalized-surface-brightness",
-          "bands": [
-            "red",
-            "green",
-            "blue"
-          ],
-          "minimum": 0,
-          "stretch": 0.1,
-          "softening": 8,
-          "outputEncoding": "lupton-asinh",
-          "interpretation": "false-color",
-          "transferReference": "https://doi.org/10.1086/382245",
-          "processing": "Each band is calibrated to MJy/sr and divided by its own measured range, so hue shows where a band is bright relative to itself, not physical band ratios. One common minimum is subtracted; one asinh curve maps the mean of the bands and scales every band by the same factor. Pixels brighter than the display are scaled down as a whole, then quantized once to 8 bits. This does not reconstruct natural color."
+          "tickErrorPixels": 0.5
         },
         "innerMaskUnits": 47.776869019736694,
+        "lightEndsUnits": 185.71428571428572,
+        "radialProfile": [
+          {
+            "radiusUnits": 2.857142857142857,
+            "median": -2.813534736633301,
+            "samples": 10
+          },
+          {
+            "radiusUnits": 8.571428571428571,
+            "median": -1.8924400806427002,
+            "samples": 34
+          },
+          {
+            "radiusUnits": 14.285714285714286,
+            "median": -2.457900047302246,
+            "samples": 55
+          },
+          {
+            "radiusUnits": 20,
+            "median": -0.523306131362915,
+            "samples": 80
+          },
+          {
+            "radiusUnits": 25.714285714285715,
+            "median": 0.3871617317199707,
+            "samples": 95
+          },
+          {
+            "radiusUnits": 31.42857142857143,
+            "median": -0.3070751130580902,
+            "samples": 126
+          },
+          {
+            "radiusUnits": 37.142857142857146,
+            "median": 1.2389652729034424,
+            "samples": 143
+          },
+          {
+            "radiusUnits": 42.85714285714286,
+            "median": 2.8645238876342773,
+            "samples": 164
+          },
+          {
+            "radiusUnits": 48.57142857142857,
+            "median": 4.0668864250183105,
+            "samples": 185
+          },
+          {
+            "radiusUnits": 54.285714285714285,
+            "median": 5.534386157989502,
+            "samples": 214
+          },
+          {
+            "radiusUnits": 60,
+            "median": 7.871499061584473,
+            "samples": 235
+          },
+          {
+            "radiusUnits": 65.71428571428572,
+            "median": 9.735621452331543,
+            "samples": 251
+          },
+          {
+            "radiusUnits": 71.42857142857143,
+            "median": 11.924915313720703,
+            "samples": 273
+          },
+          {
+            "radiusUnits": 77.14285714285714,
+            "median": 15.764755249023438,
+            "samples": 298
+          },
+          {
+            "radiusUnits": 82.85714285714286,
+            "median": 17.18757438659668,
+            "samples": 324
+          },
+          {
+            "radiusUnits": 88.57142857142857,
+            "median": 13.923151016235352,
+            "samples": 339
+          },
+          {
+            "radiusUnits": 94.28571428571429,
+            "median": 11.0821533203125,
+            "samples": 366
+          },
+          {
+            "radiusUnits": 100,
+            "median": 8.525136947631836,
+            "samples": 384
+          },
+          {
+            "radiusUnits": 105.71428571428572,
+            "median": 6.266146183013916,
+            "samples": 412
+          },
+          {
+            "radiusUnits": 111.42857142857143,
+            "median": 4.559154987335205,
+            "samples": 431
+          },
+          {
+            "radiusUnits": 117.14285714285714,
+            "median": 3.375983238220215,
+            "samples": 450
+          },
+          {
+            "radiusUnits": 122.85714285714286,
+            "median": 2.6593005657196045,
+            "samples": 469
+          },
+          {
+            "radiusUnits": 128.57142857142858,
+            "median": 2.1189463138580322,
+            "samples": 501
+          },
+          {
+            "radiusUnits": 134.28571428571428,
+            "median": 1.6887824535369873,
+            "samples": 516
+          },
+          {
+            "radiusUnits": 140,
+            "median": 1.449494481086731,
+            "samples": 544
+          },
+          {
+            "radiusUnits": 145.71428571428572,
+            "median": 1.1969202756881714,
+            "samples": 552
+          },
+          {
+            "radiusUnits": 151.42857142857144,
+            "median": 0.9614797234535217,
+            "samples": 590
+          },
+          {
+            "radiusUnits": 157.14285714285714,
+            "median": 0.8437255620956421,
+            "samples": 608
+          },
+          {
+            "radiusUnits": 162.85714285714286,
+            "median": 0.7543913125991821,
+            "samples": 634
+          },
+          {
+            "radiusUnits": 168.57142857142858,
+            "median": 0.6222547292709351,
+            "samples": 644
+          },
+          {
+            "radiusUnits": 174.28571428571428,
+            "median": 0.5385000109672546,
+            "samples": 674
+          },
+          {
+            "radiusUnits": 180,
+            "median": 0.43319636583328247,
+            "samples": 699
+          },
+          {
+            "radiusUnits": 185.71428571428572,
+            "median": 0.3789288401603699,
+            "samples": 724
+          },
+          {
+            "radiusUnits": 191.42857142857144,
+            "median": 0.3336617946624756,
+            "samples": 737
+          },
+          {
+            "radiusUnits": 197.14285714285714,
+            "median": 0.30493882298469543,
+            "samples": 748
+          },
+          {
+            "radiusUnits": 202.85714285714286,
+            "median": 0.2482420802116394,
+            "samples": 794
+          },
+          {
+            "radiusUnits": 208.57142857142858,
+            "median": 0.24300704896450043,
+            "samples": 812
+          },
+          {
+            "radiusUnits": 214.28571428571428,
+            "median": 0.2114502191543579,
+            "samples": 828
+          },
+          {
+            "radiusUnits": 220,
+            "median": 0.17503300309181213,
+            "samples": 836
+          },
+          {
+            "radiusUnits": 225.71428571428572,
+            "median": 0.1269761621952057,
+            "samples": 878
+          },
+          {
+            "radiusUnits": 231.42857142857144,
+            "median": 0.09176994115114212,
+            "samples": 902
+          },
+          {
+            "radiusUnits": 237.14285714285714,
+            "median": 0.07847294211387634,
+            "samples": 870
+          }
+        ],
         "ridgeSamples": 324,
         "ringCentreUnits": [
-          0.2347901912915131,
-          1.3781221475822258
+          0.7008883094669173,
+          1.3422296452493447
         ],
-        "semiMajorUnits": 80.91389763033757,
-        "semiMinorUnits": 70.79217527278351,
-        "inclinationDeg": 28.96597072921494,
-        "positionAngleDeg": 100.56989431672946,
-        "ridgeResidualUnits": 0.8689166884401994,
+        "semiMajorUnits": 81.23498523469563,
+        "semiMinorUnits": 71.34735211736033,
+        "inclinationDeg": 28.56400143460945,
+        "positionAngleDeg": 101.85238366775195,
+        "ridgeResidualUnits": 0.9196389751437032,
         "binningSpread": {
-          "semiMajorUnits": 0.06980493220993435,
-          "inclinationDeg": 0.1419178361461005,
-          "positionAngleDeg": 0.4228511132814584
+          "semiMajorUnits": 0.16354540137632945,
+          "inclinationDeg": 0.23215820063888204,
+          "positionAngleDeg": 0.46065083640956267
         },
         "published": {
           "citation": "Gáspár et al. (2026), arXiv:2608.27437",
@@ -261,41 +334,41 @@
           "radiusTolerance": 0.1
         },
         "differences": {
-          "radius": 0.01142372037921957,
-          "inclinationDeg": 0.42597072921494217,
-          "positionAngleDeg": 0.17989431672947376
+          "radius": 0.015437315433695309,
+          "inclinationDeg": 0.024001434609452588,
+          "positionAngleDeg": 1.4623836677519648
         },
         "envelope": {
           "shape": "inclined-ring",
-          "gaussianWidthUnits": 22.65589133649452,
-          "gaussianHeightUnits": 4.045694881516879,
-          "residualRms": 0.10376552821806734,
-          "signalRms": 0.48470560907022964,
-          "scoredPixels": 4484,
+          "gaussianWidthUnits": 19.496396456326952,
+          "gaussianHeightUnits": 4.061749261734781,
+          "residualRms": 2.270368968769698,
+          "signalRms": 10.035727976115682,
+          "scoredPixels": 4664,
           "alternatives": {
             "sphericalShell": {
-              "radiusUnits": 90.71538063481292,
-              "gaussianWidthUnits": 18.143076126962583,
-              "residualRms": 0.12682275065124773
+              "radiusUnits": 91.25550769215552,
+              "gaussianWidthUnits": 13.68832615382333,
+              "residualRms": 2.901454234834622
             },
-            "constantDepthResidualRms": 0.2178331744682231
+            "constantDepthResidualRms": 5.0660241246796724
           },
           "heightResiduals": [
             {
               "heightOfRadius": 0.02,
-              "residualRms": 0.10380212087817026
+              "residualRms": 2.270634650617475
             },
             {
               "heightOfRadius": 0.05,
-              "residualRms": 0.10376552821806734
+              "residualRms": 2.270368968769698
             },
             {
               "heightOfRadius": 0.1,
-              "residualRms": 0.10368723282794386
+              "residualRms": 2.2711077277789173
             },
             {
               "heightOfRadius": 0.2,
-              "residualRms": 0.10405982918011326
+              "residualRms": 2.2959576798709276
             }
           ],
           "search": {
@@ -322,29 +395,35 @@
             ]
           }
         },
-        "exposureGain": 0.19669291287210294,
+        "exposureGain": 0.060123139383260346,
+        "topAlpha": 0.5,
+        "faceOnOpacity": {
+          "drawnColumns": 20625,
+          "median": 0.1895349683365144,
+          "p90": 0.4110316849629423,
+          "max": 0.48603549679074176
+        },
         "droppedShare": [
+          0,
           0,
           0,
           0
         ],
-        "filledVoxels": 96954
+        "filledVoxels": 324407
       }
     }
   },
   "models": {
-    "nircam-six-filters": "Fitted ring, in colour from 6 bands. Each mosaic is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Each band's background, the median in the 5–8″ annulus, is subtracted, and the band is divided by the 99.9th percentile of its own drawn samples, the sky-band composite's rule. The ring is measured on the mean of the bands: its ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis 80.9 au, axis ratio 0.875 (inclination 29.0°), line of nodes at position angle 100.6°, centre 1.4 au from the star; the single binnings scatter by 0.1 au, 0.1° and 0.4°. This stands against Gáspár et al. (2026), arXiv:2608.27437's 80 au, 28.54° and 100.39°. Depth is not the image pushed backwards: an inclined ring of that geometry with gaussian radial width 22.7 au projects to the mean image with a residual of 1.04e-1 against a signal of 4.85e-1, where a spherical shell leaves 1.27e-1 and constant depth, what an extrusion assumes, leaves 2.18e-1. The ring's vertical height is a stated 0.05 of its radius (the projection changes by 0.4% across the heights tried), and which side is nearer is a convention: the south-south-west end of the minor axis is drawn nearer; this image does not say which end is. Colour: red F335M + F444W, green F250M + F300M, blue F182M + F210M, each channel the mean of its normalised bands, through the shared Lupton et al. (2004) asinh display (minimum 0, stretch 0.1, softening 8), which scales every channel of a pixel by the same factor so its hue survives. Each sky column's three channels are spread along the ring with one depth profile and normalised so the column reproduces its displayed colour. The image is drawn from 48 au, outside the coronagraph mask, to the grid edge with a taper from 120 au."
-  },
-  "references": {
-    "display": "https://doi.org/10.1086/382245"
+    "nircam-f182m": "Fitted ring, drawn in the publisher's own colours and scale. The F182M mosaic is read about the star through its own WCS onto a sky plane in astronomical units; the star's position is the observation's target position (TARG_RA, TARG_DEC). Its background, the median in the 5–8″ annulus (-1.820 MJy/sr), is subtracted so that zero is empty sky, as on the published scale. The ring's ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse of semi-major axis 81.2 au, axis ratio 0.878 (inclination 28.6°), line of nodes at position angle 101.9°, centre 1.5 au from the star; the single binnings scatter by 0.2 au, 0.2° and 0.5°. This stands against Gáspár et al. (2026), arXiv:2608.27437's 80 au, 28.54° and 100.39°. Depth is not the image pushed backwards: an inclined ring of that geometry with gaussian radial width 19.5 au projects to the image with a residual of 2.27e+0 against a signal of 1.00e+1, where a spherical shell leaves 2.90e+0 and constant depth, what an extrusion assumes, leaves 5.07e+0. The ring's vertical height is a stated 0.05 of its radius (the projection changes by 1.1% across the heights tried), and which side is nearer is a convention: the south-south-west end of the minor axis is drawn nearer; this image does not say which end is. Colour and scale are the publisher's: Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M colour bar, whose printed ticks follow log(1 + a u) / log(1 + a) with a = 50.455, from -0.787 to 50 MJy/sr (every tick within 0.5 figure pixel), in the bar's colours at its quarters, carried as four emission channels whose tent weights interpolate the bar. Every channel shares one depth profile, so each column is spread along the ring and emits the bar colour of its own brightness. The top of the bar reaches an alpha of 0.5, the renderer's convention for a volume; the median drawn line of sight reaches 0.19. The image is drawn from 48 au to the grid edge at 240 au, tapering from 186 au, where the median brightness in the disc plane falls to the per-pixel noise (0.39 MJy/sr)."
   },
   "limitations": [
-    "One epoch: no third axis was observed. The depth is the ring that best projects to the images, an inference from that projection, not a measurement.",
-    "Which side of the inclined ring is nearer the observer is a stated convention; the images alone cannot tell.",
+    "One image, one epoch, one filter: no third axis was observed. The depth is the ring that best projects to the image, an inference from that projection, not a measurement.",
+    "Which side of the inclined ring is nearer the observer is a stated convention; the image alone cannot tell.",
     "The ring’s vertical thickness is a stated convention; at this inclination the projection barely changes with it.",
-    "Azimuthal brightness differences in the images, from forward scattering and from real structure, are kept as measured; the ring model supplies only the depth.",
+    "Azimuthal brightness differences in the image, from forward scattering and from real structure, are kept as measured; the ring model supplies only the depth.",
     "Inside the coronagraph mask the star and its immediate surroundings are not data and are not drawn; the star is the host body’s own sphere.",
-    "Hue shows where each group of bands is bright relative to its own range, not physical band ratios: every band is divided by its own peak, as sky-band composites are. Colour differences across the ring are real differences in how the bands vary with position, not a measured colour of the dust.",
-    "Nothing finer than the mosaics’ pixels or the grid’s cells is in the drawn volume."
+    "The colours are the publisher’s legend for surface brightness in this filter, on their logarithmic scale; they are not the colour of the dust. Their scale was printed for their own reduction of the same exposures; this is MAST’s pipeline product drawn on it.",
+    "Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model, and the real ring blocks a small fraction of a percent of what is behind it.",
+    "Nothing finer than the mosaic’s pixels or the grid’s cells is in the drawn volume."
   ]
 }

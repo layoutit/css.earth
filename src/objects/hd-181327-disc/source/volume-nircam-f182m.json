@@ -1,25 +1,25 @@
 {
   "schema": "cssearth-volume-recipe@1",
   "grid": {
-    "path": "density-nircam-six-filters.ktx2",
-    "sha256": "863b47558e19e53502acd0b64617aca8a514dfb76edf1b3731fbe6748eabafa8",
-    "decodedSha256": "bc7f79821757706b4e1f5689bd97f17bc9cec46eba434c6bb5691c4ba02bb320",
+    "path": "density-nircam-f182m.ktx2",
+    "sha256": "379f2384db4bb7d8c09ae0c0fe75389c1ccbc552ed09d78b862e781ca0805825",
+    "decodedSha256": "a9ca0940df42bda52c5e7b14fa7587a587e11450c3afc51c02d83d308709b809",
     "dimensions": [
-      96,
-      96,
-      96
+      168,
+      168,
+      168
     ],
     "encoding": "sqrt-density-unorm8",
     "bounds": {
       "min": [
-        -140,
-        -140,
-        -140
+        -240,
+        -240,
+        -240
       ],
       "max": [
-        140,
-        140,
-        140
+        240,
+        240,
+        240
       ]
     }
   },
@@ -31,26 +31,35 @@
       {
         "channel": 0,
         "color": [
-          1,
-          0,
-          0
+          0.2549,
+          0.2157,
+          0.3725
         ],
         "strength": 1
       },
       {
         "channel": 1,
         "color": [
-          0,
-          1,
-          0
+          0.451,
+          0.3843,
+          0.6431
         ],
         "strength": 1
       },
       {
         "channel": 2,
         "color": [
-          0,
-          0,
+          0.8549,
+          0.8275,
+          0.949
+        ],
+        "strength": 1
+      },
+      {
+        "channel": 3,
+        "color": [
+          1,
+          1,
           1
         ],
         "strength": 1
@@ -58,13 +67,13 @@
     ],
     "absorption": [],
     "emissionTransfer": "shared-opacity",
-    "exposureGain": 0.19669291287210294
+    "exposureGain": 0.060123139383260346
   },
   "bake": {
     "sliceCounts": {
-      "x": 48,
-      "y": 48,
-      "z": 48
+      "x": 84,
+      "y": 84,
+      "z": 84
     },
     "unitsPerSourceUnit": 1,
     "imageWidth": 320,
@@ -88,6 +97,6 @@
   ],
   "provenance": {
     "path": "provenance.json",
-    "sha256": "238a63fb9faf2b49f3c6f7db9947f88eb76a94aa5f7519c09e9b5f11af76d344"
+    "sha256": "4be8da324b211cc470e9c31b708ed17631b61b5b81b6fa0f48882f50d2ebc3a9"
   }
 }

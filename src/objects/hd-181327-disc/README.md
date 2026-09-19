@@ -2,61 +2,57 @@
 
 ## Sources
 
-This package draws the ring of debris around [HD 181327](../hd-181327/README.md) as a prepared volume attached to the star, the way [Betelgeuse's circumstellar volumes](../betelgeuse-shell/README.md) are: it has no catalogue entry of its own, shares the star's frame, and is listed among the star's datasets as "Debris ring · JWST 1.8–4.4 µm".
+This package draws the ring of debris around [HD 181327](../hd-181327/README.md) as a prepared volume attached to the star, the way [Betelgeuse's circumstellar volumes](../betelgeuse-shell/README.md) are: it has no catalogue entry of its own, shares the star's frame, and is listed among the star's datasets as "Debris ring · JWST 1.8 µm".
 
-- **Images:** MAST's six level-3 coronagraph mosaics of observation c1014 in GTO programme 2780 (Gáspár et al. 2026, [arXiv:2608.27437](https://arxiv.org/abs/2608.27437)): JWST/NIRCam F182M, F210M, F250M, F300M, F335M and F444W behind the MASK335R coronagraph, 11 October 2023. They are pinned, with the coron3 associations and exposures they were built from, in [`hd-181327-2780.json`](../../../tools/objects/jwst/imaging/programs/hd-181327-2780.json). The files are downloaded into `.local/hd-181327-disc/observations/` and pinned by digest in the [manifest](source/manifest.json).
-- **Recipe:** [`source/circumstellar.json`](source/circumstellar.json) names the program, which bands feed which colour, the display, the drawn inner edge and its source, the stated conventions and the published geometry the measurement is checked against. [`tools/objects/circumstellar/author.mts`](../../../tools/objects/circumstellar/author.mts) writes everything else in `source/` from it; `--check` reproduces it byte for byte.
+- **Image:** MAST's level-3 coronagraph mosaic of JWST/NIRCam F182M behind the MASK335R coronagraph, 11 October 2023, observation c1014 of GTO programme 2780 (Gáspár et al. 2026, [arXiv:2608.27437](https://arxiv.org/abs/2608.27437)). It is pinned with the coron3 association and exposures it was built from in [`hd-181327-2780.json`](../../../tools/objects/jwst/imaging/programs/hd-181327-2780.json), downloaded into `.local/hd-181327-disc/observations/`, and pinned by digest in the [manifest](source/manifest.json).
+- **Colours and scale:** the paper's own, from its Figure 26: the F182M colour bar, logarithmic from −0.79 to 50 MJy/sr. [`colourbar.mts`](../../../tools/objects/circumstellar/colourbar.mts) reads it off the figure (every printed tick within 0.5 pixel of the fitted stretch), and the recipe keeps the numbers with the bar's pixel box and ticks, so the reading can be repeated.
+- **Recipe:** [`source/circumstellar.json`](source/circumstellar.json) names the band, the colour bar, the drawn inner edge and its source, the stated conventions and the published geometry the measurement is checked against. [`author.mts`](../../../tools/objects/circumstellar/author.mts) writes everything else in `source/` from it; `--check` reproduces it byte for byte.
 
-**Reproduced here.** [`coron3.mts`](../../../tools/objects/jwst/imaging/coron3.mts) re-ran the pipeline's coronagraphy stage for each band from the archived exposures on the pinned toolchain; every PSF alignment fit converged and every result is on MAST's grid. Against MAST's mosaics (the `hd-181327-2780.NIRCAM-*-MASK335R.reproduction.json` receipts beside the [program](../../../tools/objects/jwst/imaging/programs/hd-181327-2780.json)):
+**Why F182M.** It is the filter Gáspár et al. fit the ring on (their Figure 27) and the sharpest of the six, 31 mas pixels against 63 for the long-wave filters. The other five filters are re-run and compared the same way (receipts beside the [program](../../../tools/objects/jwst/imaging/programs/hd-181327-2780.json)) and not drawn: they show the same ring.
 
-| band | correlation above the median | 0.5–1″ | 1–2″ (the ring) | 2–5″ | 5–20″ |
-|---|---|---|---|---|---|
-| F182M | 0.961 | 0.46 | 0.979 | 0.976 | 0.870 |
-| F210M | 0.965 | 0.48 | 0.970 | 0.979 | 0.737 |
-| F250M | 0.996 | 0.76 | 0.987 | 0.999 | 0.999 |
-| F300M | 0.994 | 0.73 | 0.969 | 0.996 | 0.999 |
-| F335M | 0.993 | 0.82 | 0.968 | 0.998 | 0.998 |
-| F444W | 0.978 | 0.86 | 0.887 | 0.989 | 0.994 |
+**Reproduced here.** [`coron3.mts`](../../../tools/objects/jwst/imaging/coron3.mts) re-ran the pipeline's coronagraphy stage from the archived exposures on the pinned toolchain: on MAST's grid, every PSF alignment fit converged, correlation 0.961 with MAST's mosaic above the median brightness and 0.979 at 1–2″, where the ring is. At 0.5–1″ only 0.46: the two independent subtractions of the same exposures disagree there, so nothing is drawn inside 1″ (47.8 au). MAST's product is the one drawn.
 
-MAST's products are the ones drawn. Inside 1″ the two independent subtractions of the same exposures disagree, so the light there is starlight left over after subtraction, which differs from band to band; nothing is drawn inside 1″ (47.8 au).
+**Placement.** One volume unit is one astronomical unit at the star's prepared distance (47.78 pc), and the cube is anchored on the star's scene origin, so the star's sphere sits at its centre by construction. The mosaic is rotated against north, so it is read about the star through its own WCS, not flipped; the star's position in it is the observation's target position (`TARG_RA`, `TARG_DEC`). Its measured background, −1.82 MJy/sr in the 5–8″ annulus, is subtracted so that zero is empty sky, as on the published scale.
 
-**Placement.** One volume unit is one astronomical unit at the star's prepared distance (47.78 pc), and the cube (±140 au) is anchored on the star's scene origin, so the star's sphere sits at its centre by construction. The mosaics are rotated against north, so each is read about the star through its own WCS, not flipped; the star's position in them is the observation's target position (`TARG_RA`, `TARG_DEC`), which carries the proper motion to the epoch of the images.
-
-**Colour.** The six bands are combined the way the repository's sky-band composites are ([colour preparation](../../../docs/color-preparation.md#sky-survey-bands)): red is F335M + F444W, green F250M + F300M, blue F182M + F210M. Each band has its measured background (the median 5–8″ from the star) subtracted and is divided by the 99.9th percentile of its own drawn samples, and the three channels go through the shared Lupton et al. (2004) asinh display with M8's settings (stretch 0.1, softening 8). Hue therefore shows where each group of bands is bright relative to its own range, not a colour of the dust: the warmer outer edge is the halo of small grains being relatively brighter at the longer wavelengths.
-
-**The ring, measured on the mean of the six bands.** The ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse. A circular ring seen at inclination *i* projects to an ellipse of axis ratio cos *i* whose major axis is the line of nodes:
+**The ring, measured on the image.** The ridge, the radius of peak brightness in each azimuth under nine binnings, traces an ellipse. A circular ring seen at inclination *i* projects to an ellipse of axis ratio cos *i* whose major axis is the line of nodes:
 
 | | measured here | Gáspár et al. (2026) |
 |---|---|---|
-| radius | 80.9 au | 80 au (ring 75–85 au) |
-| inclination | 29.0° | 28.54° ± 0.31° |
-| position angle of the nodes | 100.6° | 100.39° ± 0.63° |
+| radius | 81.2 au | 80 au (ring 75–85 au) |
+| inclination | 28.6° | 28.54° ± 0.31° |
+| position angle of the nodes | 101.9° | 100.39° ± 0.63° |
 
-The nine binnings scatter by 0.07 au, 0.14° and 0.42°, and each band measured alone gives 80.3–81.1 au, 28.1–30.1° and 98.8–102.3°. A mirrored reading of the mosaics would put the nodes near 80°, so east is where the paper has it. The author refuses a ring more than 5° or a tenth of the radius from the published one.
+The nine binnings scatter by 0.16 au, 0.23° and 0.46°. A mirrored reading would put the nodes near 80°. The author refuses a ring more than 5° or a tenth of the radius from the published one.
 
-**Depth: a shape fitted to the images, not the images pushed backwards.** Candidate envelopes are projected through the cube and scored against the mean image, each at its own best gain, between 1″ and 120 au:
+**How far the light reaches.** In rings of the disc plane, deprojected with that geometry, the median brightness falls to the per-pixel noise (0.39 MJy/sr) at 186 au. The drawn image tapers from there to the grid edge at 240 au, and the author refuses a grid that would cut light above the noise.
 
-| envelope | residual against a signal of 0.485 (band-normalised) |
+**Depth: a shape fitted to the image, not the image pushed backwards.** Candidate envelopes are projected through the cube and scored against the image, each at its own best gain, between 1″ and 120 au:
+
+| envelope | residual against a signal of 10.0 MJy/sr |
 |---|---|
-| inclined ring of the measured geometry, gaussian radial width 22.7 au | 0.104 |
-| spherical shell, radius 91 au | 0.127 |
-| constant depth, what an extrusion assumes | 0.218 |
+| inclined ring of the measured geometry, gaussian radial width 19.5 au | 2.27 |
+| spherical shell, radius 91 au | 2.90 |
+| constant depth, what an extrusion assumes | 5.07 |
 
-The ring wins and is drawn: each sky column's three colours are spread along it with one depth profile and normalised so the column keeps its displayed colour, so the view from Earth reproduces the images and every other direction shows a ring. The residual stays well above the noise because the real ring is brighter on one side and carries a halo; those are kept as measured, and the model supplies only the depth. The volume is baked as 48 slices an axis: with 24, a tilted view showed the gaps between slices through the thin ring as stripes, which 48 reduced about fivefold in a rendered capture.
+The ring wins and is drawn: each sky column's four colour channels are spread along it with one depth profile and normalised so the column emits the bar colour of its own brightness, so the view from Earth reproduces the image and every other direction shows a ring.
+
+**Checked against the published figure.** Seen from Earth in the application, the rendered ring's long axis lies 78.9° clockwise from up and its axis ratio is 0.881; the paper's F182M panel gives 80.0° and 0.877, and its published position angle predicts 79.6° (a mirror would give 100.4°). Before any 3D, the sky image in the paper's colours matches their panel with a correlation of 0.950, centred within one figure pixel (mirrored: 0.939). [Evidence](evidence/rendered.json).
+
+**Opacity is the one setting the source cannot give.** In the renderer's emission model a column's brightness and how much it hides are one number, and the real ring blocks a small fraction of a percent of the light behind it. The top of the colour bar is set to reach an alpha of 0.5, the value whose rendered brightness profile matches the paper's panel best: an RMS difference of 0.051 of the ring's peak from 60 to 180 au, against 0.095 at 0.9 and 0.063 at 0.3. The median drawn line of sight then hides 19% of what is behind it. The price is that the render is darker overall than the printed figure, which is an opaque picture.
 
 ## Evidence
 
+- [`evidence/rendered.json`](evidence/rendered.json) and [its image](evidence/rendered-from-earth.webp): the ring rendered from Earth and measured against the published panel.
 - [`disc-envelope.test.mts`](../../../tools/objects/circumstellar/disc-envelope.test.mts): a synthetic inclined ring is recovered from its own projection (radius, inclination, position angle, centre, width), the stated near side lies toward the observer, a spherical shell is refused as a ring, and a ridge of noise is refused.
 - [`imaging.test.mts`](../../../tools/objects/jwst/imaging/imaging.test.mts): coron3 programs parse, and the occulter is read from the observation's name.
 - `node tools/objects/circumstellar/author.mts hd-181327-disc --check` reproduces the grid, recipe, delivery, presentation, preview and manifest.
-- Rendered in the application (headless Chrome, 1440 × 900) face-on and tilted, with no console errors: [`evidence/rendered.json`](evidence/rendered.json) and its two images.
 
 ## Known problems
 
 - **Which side is nearer is a convention.** One image cannot say which end of the minor axis tilts toward us; the south-south-west side is drawn nearer. A scattering phase function fitted to the brightness asymmetry would decide it ([ledger](investigations.json)).
-- **The ring's thickness is a convention** (0.05 of its radius): the mean image changes by 0.4% across heights from 0.02 to 0.2.
-- **The composite does not measure ice.** Water ice absorbs near 3 µm, in the green channel, and Gáspár et al. measure it across these filters; hue here is each band's brightness relative to its own range.
-- **Nothing is drawn inside 1″**, where the subtraction leaves more starlight than there is dust.
+- **The ring's thickness is a convention** (0.05 of its radius): the image changes by 1% across heights from 0.02 to 0.2.
+- **Darker than the printed figure,** for the reason above.
+- **Nothing is drawn inside 1″**, where the subtraction leaves more starlight than there is dust; the paper's panel shows that region with its residuals.
 - MIRI coronagraphy of this disc is excluded: the pipeline's alignment does not converge on it ([JWST imaging](../../../docs/jwst-imaging.md#measured)).
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](source/circumstellar.json) · [Provenance](source/provenance.json)

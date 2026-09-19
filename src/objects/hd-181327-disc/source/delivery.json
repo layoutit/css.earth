@@ -3,17 +3,17 @@
   "id": "hd-181327-disc",
   "method": "density-grid",
   "request": {
-    "path": "src/objects/hd-181327-disc/source/volume-nircam-six-filters.json",
-    "sha256": "db1773f20b02967a4f02de8f6cc66220d2b5f4af599333b41b246abe01295524"
+    "path": "src/objects/hd-181327-disc/source/volume-nircam-f182m.json",
+    "sha256": "7e55f85f2d95ac3fadb479945edde5851f3757b5211d7eb1b322f0b9eb2111a3"
   },
   "inputPins": [
     {
       "path": "src/objects/hd-181327-disc/source/provenance.json",
-      "sha256": "238a63fb9faf2b49f3c6f7db9947f88eb76a94aa5f7519c09e9b5f11af76d344"
+      "sha256": "4be8da324b211cc470e9c31b708ed17631b61b5b81b6fa0f48882f50d2ebc3a9"
     },
     {
-      "path": "src/objects/hd-181327-disc/source/density-nircam-six-filters.ktx2",
-      "sha256": "863b47558e19e53502acd0b64617aca8a514dfb76edf1b3731fbe6748eabafa8"
+      "path": "src/objects/hd-181327-disc/source/density-nircam-f182m.ktx2",
+      "sha256": "379f2384db4bb7d8c09ae0c0fe75389c1ccbc552ed09d78b862e781ca0805825"
     }
   ],
   "sky": {
@@ -26,24 +26,24 @@
     "arcsecPerUnit": 0.020930630669558914
   },
   "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it in six filters from 1.8 to 4.4 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), each in the paper's own colour scale. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to each image, not a measurement.",
-  "defaultLens": "nircam-six-filters",
-  "framingRadiusUnits": 140,
+  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it at 1.8 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), in the colours and scale Gáspár et al. (2026) print it in. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, not a measurement.",
+  "defaultLens": "nircam-f182m",
+  "framingRadiusUnits": 240,
   "attachedTo": "hd-181327",
   "acceptedLabResult": "hd-181327-disc-density-grids",
   "compactInputs": {
-    "path": "src/objects/hd-181327-disc/source/volume-nircam-six-filters.json",
-    "sha256": "db1773f20b02967a4f02de8f6cc66220d2b5f4af599333b41b246abe01295524"
+    "path": "src/objects/hd-181327-disc/source/volume-nircam-f182m.json",
+    "sha256": "7e55f85f2d95ac3fadb479945edde5851f3757b5211d7eb1b322f0b9eb2111a3"
   },
   "compactMethod": "density-grid",
   "grids": [
     {
-      "id": "nircam-six-filters",
-      "label": "JWST/NIRCam · debris ring, 1.8–4.4 µm",
+      "id": "nircam-f182m",
+      "label": "JWST/NIRCam F182M · debris ring, 1.8 µm",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "recipe": {
-        "path": "src/objects/hd-181327-disc/source/volume-nircam-six-filters.json",
-        "sha256": "db1773f20b02967a4f02de8f6cc66220d2b5f4af599333b41b246abe01295524"
+        "path": "src/objects/hd-181327-disc/source/volume-nircam-f182m.json",
+        "sha256": "7e55f85f2d95ac3fadb479945edde5851f3757b5211d7eb1b322f0b9eb2111a3"
       }
     }
   ]

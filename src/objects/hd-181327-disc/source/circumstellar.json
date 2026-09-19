@@ -3,7 +3,7 @@
   "id": "hd-181327-disc",
   "host": "hd-181327",
   "name": "HD 181327 debris ring",
-  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it in six filters from 1.8 to 4.4 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), each in the paper's own colour scale. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to each image, not a measurement.",
+  "description": "The debris ring around HD 181327 as JWST/NIRCam imaged it at 1.8 micrometres behind the MASK335R coronagraph on 11 October 2023 (programme 2780), in the colours and scale Gáspár et al. (2026) print it in. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, not a measurement.",
   "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
   "credit": "NASA/ESA/CSA JWST, NIRCam GTO programme 2780 (PI A. Gáspár); MAST (STScI); Gáspár et al. 2026, arXiv:2608.27437",
   "license": {
@@ -12,23 +12,22 @@
     "note": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited."
   },
   "grid": {
-    "size": 96,
-    "halfUnits": 140,
-    "slabs": 48
+    "size": 168,
+    "halfUnits": 240,
+    "slabs": 84
   },
-  "defaultLens": "nircam-six-filters",
+  "defaultLens": "nircam-f182m",
   "lenses": [
     {
-      "id": "nircam-six-filters",
-      "label": "JWST/NIRCam · debris ring, 1.8–4.4 µm",
-      "title": "The debris ring around HD 181327 in six infrared filters",
-      "summary": "Starlight scattered by a ring of debris about 80 au from the star, in six JWST filters as one colour image; its depth is the tilted ring that best fits them.",
-      "description": "JWST/NIRCam imaged this star on 11 October 2023 in six filters from 1.8 to 4.4 micrometres, behind the MASK335R coronagraph, which blocks the star so the faint ring of colliding debris around it shows. These are MAST's own coronagraphy products, which this project also re-ran from the archived exposures and compared. The ring is starlight scattered by dust about 80 au out, tilted about 30° from face-on. The colours are the filters: the two shortest in blue, the middle two in green, the two longest in red, each on its own brightness range. So hue shows where each group is bright compared with the others, not the colour of the dust. Water ice in the grains absorbs near 3 micrometres, in the green filters, which is what Gáspár et al. (2026) measure across these images. The images have no third axis, so the depth is inferred: a tilted ring of the geometry measured on them projects to them better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Which side is nearer to us, and how thick the ring is, are stated conventions. The middle is empty because the coronagraph mask hides it; the star itself is the sphere at the centre.",
+      "id": "nircam-f182m",
+      "label": "JWST/NIRCam F182M · debris ring, 1.8 µm",
+      "title": "The debris ring around HD 181327 at 1.8 micrometres",
+      "summary": "Starlight scattered by a ring of debris about 80 au from the star, in the paper's own colours and scale; its depth is the tilted ring that fits the image.",
+      "description": "JWST/NIRCam imaged this star on 11 October 2023 with the F182M filter, 1.8 micrometres, behind the MASK335R coronagraph, which blocks the star so the faint ring of colliding debris around it shows. This is MAST's own coronagraphy product, which this project also re-ran from the archived exposures and compared. It is drawn in the colours and on the logarithmic scale Gáspár et al. (2026) print it in (their Figure 26), so seen from Earth it should look like their panel. The ring is starlight scattered by dust about 80 au out, tilted about 30° from face-on, with a fainter halo of small grains outside it. The image has no third axis, so its depth is inferred: a tilted ring of the geometry measured on it projects to the image better than a spherical shell or a constant depth, and each line of sight is placed on that ring. Which side is nearer to us, and how thick the ring is, are stated conventions. Nothing is drawn within 1 arcsecond of the star, where the starlight left after subtraction outweighs the dust; the star itself is the sphere at the centre.",
       "program": "hd-181327-2780",
       "innerMaskArcsec": 1.0,
       "innerMaskSource": "Where this project's re-run of the pipeline and MAST's own product agree. Between 0.5 and 1 arcsec the two independent PSF subtractions of the same exposures correlate at only 0.46 to 0.86 across the six bands, so the light there is residual starlight that differs from band to band; from 1 to 2 arcsec they correlate at 0.89 to 0.99 (compare.mts receipts beside programs/hd-181327-2780.json). The MASK335R occulter itself reaches half transmission at 0.63 arcsec (CRDS jwst_nircam_psfmask_0211.fits).",
       "outerUnits": 120,
-      "taperFromUnits": 120,
       "backgroundAnnulusArcsec": [
         5,
         8
@@ -36,7 +35,7 @@
       "nearSidePositionAngleDeg": 190,
       "nearSideSource": "the south-south-west end of the minor axis is drawn nearer; this image does not say which end is",
       "heightOfRadius": 0.05,
-      "topAlpha": 0.9,
+      "topAlpha": 0.5,
       "published": {
         "citation": "Gáspár et al. (2026), arXiv:2608.27437",
         "url": "https://arxiv.org/abs/2608.27437",
@@ -46,25 +45,55 @@
         "toleranceDeg": 5,
         "radiusTolerance": 0.1
       },
-      "channels": {
-        "red": [
-          "NIRCAM-F335M-MASK335R",
-          "NIRCAM-F444W-MASK335R"
+      "band": "NIRCAM-F182M-MASK335R",
+      "colourMap": {
+        "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M colour bar",
+        "url": "https://arxiv.org/html/2608.27437v1/HD181327_allfilts-eps-converted-to.png",
+        "bar": {
+          "vmin": -0.787,
+          "vmax": 50,
+          "a": 50.455
+        },
+        "stops": [
+          [
+            65,
+            55,
+            95
+          ],
+          [
+            115,
+            98,
+            164
+          ],
+          [
+            218,
+            211,
+            242
+          ],
+          [
+            255,
+            255,
+            255
+          ]
         ],
-        "green": [
-          "NIRCAM-F250M-MASK335R",
-          "NIRCAM-F300M-MASK335R"
-        ],
-        "blue": [
-          "NIRCAM-F182M-MASK335R",
-          "NIRCAM-F210M-MASK335R"
-        ]
-      },
-      "peakPercentile": 99.9,
-      "display": {
-        "minimum": 0,
-        "stretch": 0.1,
-        "softening": 8
+        "tickErrorPixels": 0.5,
+        "measurement": {
+          "tool": "tools/objects/circumstellar/colourbar.mts",
+          "box": {
+            "x0": 7,
+            "x1": 256,
+            "y0": 66,
+            "y1": 76
+          },
+          "ticks": [
+            "0@44",
+            "1@71",
+            "5@128",
+            "10@163",
+            "20@201.5",
+            "50@255.5"
+          ]
+        }
       }
     }
   ]

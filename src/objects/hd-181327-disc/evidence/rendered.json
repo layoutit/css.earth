@@ -1,18 +1,37 @@
 {
-  "check": "The HD 181327 debris ring rendered in the application, face-on and tilted",
-  "revision": "6a3bcdec72f24a701b853dc06dd87488b9c662d7",
+  "check": "The HD 181327 debris ring rendered in the application from Earth's direction, against the published F182M panel",
   "date": "2026-09-18",
-  "method": "Headless Chromium, 1440 x 900 px at device scale 1, the local dev server, /hd-181327/?dataset=debris-ring, 4 s after load, then ten wheel steps out to about 350 au (face-on) and one more step and a 150 px upward drag (tilted). No console errors on either page.",
-  "images": {
-    "rendered-face-on.webp": "Altitude 349 au, the default viewing direction from Earth",
-    "rendered-tilted.webp": "Altitude 562 au after the drag; baked at 48 slices an axis"
+  "reference": {
+    "figure": "Gáspár et al. (2026), arXiv:2608.27437v1, Figure 26, F182M panel",
+    "url": "https://arxiv.org/html/2608.27437v1/HD181327_allfilts-eps-converted-to.png",
+    "scale": "24 figure pixels per arcsecond, from the panel's 1-arcsecond bar",
+    "note": "The figure is read, not retained here."
   },
+  "method": "Headless Chromium, 1440 x 900 px at device scale 1, the local dev server, /hd-181327/?dataset=debris-ring: the star's default view, which looks from Earth with celestial north up, zoomed out until the altitude passes 700 au, the shell hidden. Both images are deprojected with the ring geometry measured here (inclination 28.6 degrees, nodes at 101.9 degrees), and their median pixel brightness in 10 au rings of the disc plane is compared from 60 to 180 au, each over its own ring peak; the render's scale is fitted. The long axis and axis ratio come from an ellipse fitted to the ridge, the radius of peak brightness in 72 azimuths, on each image with no rotation or mirror allowed.",
+  "image": "rendered-from-earth.webp",
   "result": {
-    "stripeAmplitude": {
-      "method": "rms of a detrended pixel column through the ring at x = 1000 px, tilted view",
-      "slices24": 0.0396,
-      "slices48": 0.0078,
-      "note": "the two tilted captures were taken at 349 and 562 au, so the comparison is indicative, not like for like"
+    "orientation": {
+      "paperLongAxisDegClockwiseFromUp": 80.0,
+      "renderLongAxisDegClockwiseFromUp": 78.9,
+      "predictedFromPublishedPositionAngle": 79.6,
+      "mirroredWouldBe": 100.4,
+      "paperAxisRatio": 0.877,
+      "renderAxisRatio": 0.881
+    },
+    "brightnessProfileRmsDifference": {
+      "topAlpha0.9": 0.095,
+      "topAlpha0.5": 0.051,
+      "topAlpha0.3": 0.063,
+      "chosen": 0.5,
+      "note": "top alpha is the one setting not read from the source; the value that reproduces the published profile best is used"
+    },
+    "skyImageAgainstPanel": {
+      "correlation": 0.95,
+      "mirroredCorrelation": 0.939,
+      "offsetFigurePixels": 1,
+      "medianBarPositionDifference": 0.041,
+      "note": "the authored sky image, before any 3D, converted back to position on the published colour bar"
     }
-  }
+  },
+  "known": "The render is darker than the printed figure overall: in the renderer's emission model brightness and see-through are one number, and a printed figure is a fully opaque picture."
 }

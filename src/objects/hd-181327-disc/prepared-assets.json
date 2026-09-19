@@ -4,168 +4,168 @@
   "assets": [
     {
       "filename": "delivery.json",
-      "bytes": 440,
-      "sha256": "db627f2aa32fcf67459d559835662b06ccf7ae612d6f464433a3d1c59d2a41e3"
+      "bytes": 434,
+      "sha256": "32340d5ec7d119abf83934ceff8fadaa2a69613725db00405d6faa653a4e558d"
     },
     {
       "filename": "lenses.json",
-      "bytes": 182544,
-      "sha256": "b0e224bcba1b38a397ae8d59a79cb40008e995de7bbf1dd8d147c6fda4e54323"
+      "bytes": 269777,
+      "sha256": "3c62fda1394266545e955711ee4895e6c3bbe5734a1aaf558089e9e1f5450c63"
     },
     {
-      "filename": "nircam-six-filters/atlases/x.webp",
-      "bytes": 181046,
-      "sha256": "d64d4aaefce6030e3c06409a7266bd4c18b0d168224877139946deb99b1041b2"
+      "filename": "nircam-f182m/atlases/x.webp",
+      "bytes": 148668,
+      "sha256": "8c471f993f0651ddcdcb0f976df27360cbb91ce742f1d2f4813c8426ed00a341"
     },
     {
-      "filename": "nircam-six-filters/atlases/y.webp",
-      "bytes": 151212,
-      "sha256": "b6131d10121ab572d5d864784707ef22273e4a8f3f7ed88aec2f99d829b6bca8"
+      "filename": "nircam-f182m/atlases/y.webp",
+      "bytes": 107612,
+      "sha256": "3ea90b4da95f190d41719c027d4d14a96a077f8da963e09ee5a69329db2afc4b"
     },
     {
-      "filename": "nircam-six-filters/atlases/z.webp",
-      "bytes": 168598,
-      "sha256": "e55b627617aab24da9f0bfa16419678df56a76a8dff8097d88d6712e1ed1cec5"
+      "filename": "nircam-f182m/atlases/z.webp",
+      "bytes": 116940,
+      "sha256": "d93eda73ab6482d0245e3cd16f84525b8a8206495b2661c7302f220018992370"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-00n.png",
-      "bytes": 52601,
-      "sha256": "fffd49b827533d554b2b3c3e6426d6b74087ee9bdf278da61dbc55d7183b995e"
+      "filename": "nircam-f182m/impostors/view-00n.png",
+      "bytes": 26118,
+      "sha256": "e4d7896f7efb747622ef9e04fd558c3cbead3bedf3586b79826f9c04ff481a0b"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-00p.png",
-      "bytes": 52599,
-      "sha256": "188d9468663ad6d9405947576e3a714361783846e5b35810fa5aec9312abb091"
+      "filename": "nircam-f182m/impostors/view-00p.png",
+      "bytes": 26194,
+      "sha256": "fa4b3f8e114f010c30e2e116828d399fcc12c0ba313457607cc8040e857d0359"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-0n0.png",
-      "bytes": 35674,
-      "sha256": "589916b6e1efc168f35a934b8641b30eabd7ce0e1ddc397816d2d0cfdc5ade25"
+      "filename": "nircam-f182m/impostors/view-0n0.png",
+      "bytes": 16780,
+      "sha256": "5fcf1cad70aecb5d210c39cc80a3e0aba61a917b56edcd2a46039a68e56d1f1a"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-0nn.png",
-      "bytes": 60041,
-      "sha256": "8c807b0719caee84de527f57d7990c692c67d36acd8d155d3200fb881de57571"
+      "filename": "nircam-f182m/impostors/view-0nn.png",
+      "bytes": 29279,
+      "sha256": "afdf7c4bdf4f5b496f62b2e071cbdfabc6b45d8ea14b5300ad656309d50da98d"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-0np.png",
-      "bytes": 23291,
-      "sha256": "5e1bf3178c451193175fc17ea04811557c71b8d23449d80529c93a0a5b4d80c1"
+      "filename": "nircam-f182m/impostors/view-0np.png",
+      "bytes": 12316,
+      "sha256": "cb5ee150369aca315ad7f12f9d32005694ac84ccd5ac4bda0106eba86eb4f752"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-0p0.png",
-      "bytes": 35447,
-      "sha256": "1fd7fc68feb58cb2608a86c6b254fc63269d82b3934e2c8b9e2ae566ce3f18bc"
+      "filename": "nircam-f182m/impostors/view-0p0.png",
+      "bytes": 17044,
+      "sha256": "472d53861e2a67299444dc352742002ad6dc9212d95c0953a3745bfd5c69c19d"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-0pn.png",
-      "bytes": 23258,
-      "sha256": "5e690d0a25adaaf47108e3fa57b6d14e923ff6db781e6ea9067595c063a3efc5"
+      "filename": "nircam-f182m/impostors/view-0pn.png",
+      "bytes": 12116,
+      "sha256": "1bc590f38e9c9e145c1fa155360a91a87deaf6505628337c9df1f7325604b3c3"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-0pp.png",
-      "bytes": 60052,
-      "sha256": "b10c26fb95fca74b7c6c642669f977bc4438082e0d6a5a097635a7823ae5feb0"
+      "filename": "nircam-f182m/impostors/view-0pp.png",
+      "bytes": 29583,
+      "sha256": "5bd8338d408790531688b2851e4ff72a82445091d7ae87b766421c28a8d23b24"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-n00.png",
-      "bytes": 14195,
-      "sha256": "2fe550cdb8d0c99cd5dd2fec44eca72bb80ff16c6afdba09857bd8db95aa62a5"
+      "filename": "nircam-f182m/impostors/view-n00.png",
+      "bytes": 7495,
+      "sha256": "7d30cc7dedfb3edf5f419f1210978eb21b701f48bb5f56313222fcc0971d96c4"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-n0n.png",
-      "bytes": 45518,
-      "sha256": "44bc048845ea1ab94b805e04cab75da0ab25335f586cda99a219e63f9ed139af"
+      "filename": "nircam-f182m/impostors/view-n0n.png",
+      "bytes": 22790,
+      "sha256": "b56834a72beebc3301b20f83cdd0b7dec26e3e35a731a14a93064d3fb33067a0"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-n0p.png",
-      "bytes": 38747,
-      "sha256": "fb27cf9a370f284be1269009ae3f92cbd6f4d4eba6a4dd2cd68226f9a2b68dd1"
+      "filename": "nircam-f182m/impostors/view-n0p.png",
+      "bytes": 19726,
+      "sha256": "d7ee7c7ffaeeaf5400ca1cdf6e8618bc996ad34ee922d82bce63995af39448fc"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-nn0.png",
-      "bytes": 31850,
-      "sha256": "3b3e0cf0a8dc847ec56085576c5c25a54a9498134050e74e21d23aea4430122d"
+      "filename": "nircam-f182m/impostors/view-nn0.png",
+      "bytes": 15940,
+      "sha256": "774fd2a6dcc53d93bdc77678dfc44a317e84836d6bdb11cc40aa7e1ab3e2e807"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-nnn.png",
-      "bytes": 54167,
-      "sha256": "c17630c930b7615309dc04324091a0a416eaf0ef7e8cba45f175e3fbe5a20d58"
+      "filename": "nircam-f182m/impostors/view-nnn.png",
+      "bytes": 26993,
+      "sha256": "f430e32a87e7a76f83fbe826996e5afd5916ae278d324c8694332f3b45d7df49"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-nnp.png",
-      "bytes": 18289,
-      "sha256": "2c42750b3cd18af19bccc5d14b02306a95e57d2c5e5e2906aa5e7e7061c91567"
+      "filename": "nircam-f182m/impostors/view-nnp.png",
+      "bytes": 9833,
+      "sha256": "a8e5d061f42ede6aa06634b34e8acf2fbac8bf405098274630a9687647f2c901"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-np0.png",
-      "bytes": 24727,
-      "sha256": "bd18f2e86d24b9231e572d45428ce2e851cb3887c57f2df7a506fcc937d96a55"
+      "filename": "nircam-f182m/impostors/view-np0.png",
+      "bytes": 12347,
+      "sha256": "7858874e4a554dc8fa0eede19abaa99a10b35c33291a172be96df22d3ee7f364"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-npn.png",
-      "bytes": 23955,
-      "sha256": "6c1243d682f4df4db4116903ffd7235f106a65ee92f997037d0a7a6f5af54931"
+      "filename": "nircam-f182m/impostors/view-npn.png",
+      "bytes": 13058,
+      "sha256": "b6f1931809ce09211a913558fb4d1488664c6b404cbf6d2b010b362a3570c663"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-npp.png",
-      "bytes": 48335,
-      "sha256": "c43aa18d6f6dab9017a77f1bf028ae4c7ae090c8ef690579fba6a3fac8fa72db"
+      "filename": "nircam-f182m/impostors/view-npp.png",
+      "bytes": 24572,
+      "sha256": "e1e4fda2ae0877559eee8f1512641cc323bb8a6790ac4dfc7b57ba60a8953ed0"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-p00.png",
-      "bytes": 14007,
-      "sha256": "45bfd434805251a523d734fd6d36a750ac433a1271924969b223e3c2117b4877"
+      "filename": "nircam-f182m/impostors/view-p00.png",
+      "bytes": 7515,
+      "sha256": "4203b9c2566a65bc324cdaeeff0ad59a6a624bc0162dd12c8f2979378565a859"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-p0n.png",
-      "bytes": 38765,
-      "sha256": "41a3aff9af46284154ddc3a3708bf392a853718f7f9e38bc0420a0a7834da92c"
+      "filename": "nircam-f182m/impostors/view-p0n.png",
+      "bytes": 19655,
+      "sha256": "82a70beac963c6eb1565b46bb72abafd02cfedb392b2bdff747d87e5417e4717"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-p0p.png",
-      "bytes": 45559,
-      "sha256": "1f5432dc80dc47dba88d719f8fe7bba9c40dc702d60686331fb25b48fb839f09"
+      "filename": "nircam-f182m/impostors/view-p0p.png",
+      "bytes": 22928,
+      "sha256": "5c1320247f048431942ddd916ed124654252aed4bd1a02c7f555468797ba906f"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-pn0.png",
-      "bytes": 24797,
-      "sha256": "501984c6f79e0b0e9f5577b73b1cb9b404bd22fbd0d3d9c8996b7e6357354717"
+      "filename": "nircam-f182m/impostors/view-pn0.png",
+      "bytes": 12397,
+      "sha256": "ea925f6c55d29cb66f98341fa3e02bafbf773977f31a8a7e68612c4b413e58a8"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-pnn.png",
-      "bytes": 48367,
-      "sha256": "1c81958f7ed4371d5f6cf1f44acea295ca6614fa183ba5859c8dc728c91b6c8f"
+      "filename": "nircam-f182m/impostors/view-pnn.png",
+      "bytes": 24482,
+      "sha256": "6e240e6c9771e6d91aa89f7f599548d3cc0c73ab6cf364290887d30d8591a5bc"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-pnp.png",
-      "bytes": 24025,
-      "sha256": "d8a5e8152b6c3172d1b64199ca0a81159be94da28f6357f7c50b06de7918b142"
+      "filename": "nircam-f182m/impostors/view-pnp.png",
+      "bytes": 13058,
+      "sha256": "e7f71b6387dc2f072a60d338d9f8d40b0f2c339ec5df07f8f927a1f8fa23609e"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-pp0.png",
-      "bytes": 31806,
-      "sha256": "4287e702962a01626e1104d19bb771f2463d604c857efa067b21a9f2c882a2e2"
+      "filename": "nircam-f182m/impostors/view-pp0.png",
+      "bytes": 16078,
+      "sha256": "c3a6e769651fa595f715a45e363d0d53a6ea985842426e2d49d57d8e0eea8fd4"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-ppn.png",
-      "bytes": 18135,
-      "sha256": "57d34e97a36af890fee0288b04e3600dd7bb400ebe1ae099211826d672b34db5"
+      "filename": "nircam-f182m/impostors/view-ppn.png",
+      "bytes": 9678,
+      "sha256": "80b2fe4f24c7451a9acf36af6d1960366cf6d13b3a99177f37f2bcf7955571a2"
     },
     {
-      "filename": "nircam-six-filters/impostors/view-ppp.png",
-      "bytes": 54214,
-      "sha256": "776e4104d3f404522f0dbf71b3557fb776619a0fe5f362e889558342a8bb4cbe"
+      "filename": "nircam-f182m/impostors/view-ppp.png",
+      "bytes": 27063,
+      "sha256": "6f48b1e5e0d2da5f08fe112c8fe702bbb8c04221f62a308aa0cc9f21735375d5"
     },
     {
       "filename": "presentation.json",
-      "bytes": 3227,
-      "sha256": "639dbd215216027a3b7810dcc8f3a663b8f9e86ab9a048bc64b1ffecdb90381e"
+      "bytes": 3076,
+      "sha256": "3d4294ab96ff429c985141f445f5cc9785ee2d696fe91e03d60f57a39092a253"
     },
     {
       "filename": "provenance.json",
-      "bytes": 21741,
-      "sha256": "eb6670b4ece4578016b01fc19de9adf186b65d46a66a386879c306d0acc92034"
+      "bytes": 11997,
+      "sha256": "07e78b1dc799755a9233ef49649ab7c4d08a66a5f3a53b79f57ac1ffb1f1cb03"
     }
   ]
 }

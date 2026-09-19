@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d4f87a2cc5d456432f45418597f8fff1273731c334eb83162f2fb2590e68b7c"
+    "sha256": "779c8c140183c0e99d32fea905928e5503ddfede4012607d737b5da0ba845cc6"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "719652be1cbb954dc1a70b8776c8ab30d5678aead253997a667c491b6628bf4f"
+    "bindingsSha256": "d2c506dd7f8b7fc9d6f8990333dbdc0a6fbb8351ecb3beaa12cff37e39062491"
   },
   "recipes": [
     {
@@ -83,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "633a362fe84fd47abef590a8a64befd7b561fbc290e72e2d53fa54f6842809de",
+      "sha256": "d432ec95f274ca8e519b1cbba74385a7617478a6db877c82bb4260786c09ddd6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -141,35 +141,59 @@
             },
             {
               "id": "debris-ring",
-              "label": "Debris ring · JWST 1.8–4.4 µm",
+              "label": "Debris ring · JWST 1.8 µm",
               "thumbnail": "hd-181327-lens-color.webp",
               "volume": {
                 "objectId": "hd-181327-disc",
-                "lensId": "nircam-six-filters",
+                "lensId": "nircam-f182m",
                 "surface": "color"
               },
-              "notes": "The star in its Gaia colour, with the ring of debris around it as JWST/NIRCam imaged it behind a coronagraph on 11 October 2023, in six filters from 1.8 to 4.4 micrometres (programme 2780; Gáspár et al. 2026). The ring is starlight scattered by dust. Measured on these images, its ridge is an ellipse 81 au in radius, tilted 29° from face-on with its long axis at position angle 101°; the paper publishes 80 au, 28.5° and 100.4°. The colours are the filters: the two shortest in blue, the middle two in green, the two longest in red, each on its own brightness range, so hue shows where each group is relatively bright, not the colour of the dust. The images have no third axis, so the depth is inferred: a tilted ring of that geometry projects to them better than a spherical shell or the constant depth an extrusion assumes, and each line of sight is placed on it. Which side is nearer to us and how thick the ring is are stated conventions. Nothing is drawn within 1″ of the star, where the starlight left over after subtraction outweighs the dust.",
+              "notes": "The star in its Gaia colour, with the ring of debris around it as JWST/NIRCam imaged it at 1.8 micrometres (F182M) behind a coronagraph on 11 October 2023 (programme 2780). It is drawn in the colours and on the logarithmic scale Gáspár et al. (2026) print it in, their Figure 26, and seen from Earth it matches their panel: the ring's long axis within about a degree of theirs, the same axis ratio, and the same fall of brightness from the ring into its halo. The ring is starlight scattered by dust, about 81 au in radius and tilted 29° from face-on. The image has no third axis, so the depth is inferred: a tilted ring of the measured geometry projects to it better than a spherical shell or the constant depth an extrusion assumes, and each line of sight is placed on it. Which side is nearer to us and how thick the ring is are stated conventions. The colours are a legend for brightness, not the colour of the dust, and the ring is drawn darker than the printed figure so that it stays see-through. Nothing is drawn within 1″ of the star, where the starlight left after subtraction outweighs the dust.",
               "falseColor": true,
               "legend": {
-                "kind": "categories",
-                "title": "Filters",
-                "items": [
-                  {
-                    "label": "F335M + F444W",
-                    "description": "3.4 and 4.4 µm, each on its own brightness range",
-                    "color": "#ff0000"
-                  },
-                  {
-                    "label": "F250M + F300M",
-                    "description": "2.5 and 3.0 µm, each on its own brightness range",
-                    "color": "#00ff00"
-                  },
-                  {
-                    "label": "F182M + F210M",
-                    "description": "1.8 and 2.1 µm, each on its own brightness range",
-                    "color": "#0000ff"
-                  }
-                ]
+                "kind": "scale",
+                "title": "Surface brightness, F182M (MJy/sr)",
+                "labels": [
+                  "0",
+                  "5",
+                  "50"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      0,
+                      0,
+                      0
+                    ],
+                    [
+                      65,
+                      55,
+                      95
+                    ],
+                    [
+                      115,
+                      98,
+                      164
+                    ],
+                    [
+                      218,
+                      211,
+                      242
+                    ],
+                    [
+                      255,
+                      255,
+                      255
+                    ]
+                  ],
+                  "labels": [
+                    "0",
+                    "5",
+                    "50"
+                  ]
+                },
+                "meta": "JWST/NIRCam F182M, 11 October 2023 · logarithmic, Gáspár et al. (2026) Figure 26",
+                "sourceUrl": "https://arxiv.org/abs/2608.27437"
               }
             }
           ]
@@ -272,8 +296,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "633a362fe84fd47abef590a8a64befd7b561fbc290e72e2d53fa54f6842809de",
-      "bytes": 4891,
+      "sha256": "d432ec95f274ca8e519b1cbba74385a7617478a6db877c82bb4260786c09ddd6",
+      "bytes": 5252,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -348,7 +372,7 @@
     },
     {
       "id": "debris-ring",
-      "label": "Debris ring · JWST 1.8–4.4 µm",
+      "label": "Debris ring · JWST 1.8 µm",
       "recipe": "content",
       "selector": "",
       "observationAttribution": "source-lineage",
@@ -366,7 +390,7 @@
       "interpretation": {
         "kind": "companion-volume",
         "objectId": "hd-181327-disc",
-        "lensId": "nircam-six-filters",
+        "lensId": "nircam-f182m",
         "surface": "color"
       },
       "inputs": [],
@@ -438,11 +462,11 @@
   },
   "lastPreparation": {
     "objectId": "hd-181327",
-    "materialSha256": "f00ca93265c72b09cdb2ef45801bb919782f625f10949fdb60f5a3eaa88e2da3",
+    "materialSha256": "0cc537c4ff2849ff2a08bb4c2d427d0aae913971a0511a6a92b44f8492c3937f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "719652be1cbb954dc1a70b8776c8ab30d5678aead253997a667c491b6628bf4f"
+      "bindingsSha256": "d2c506dd7f8b7fc9d6f8990333dbdc0a6fbb8351ecb3beaa12cff37e39062491"
     }
   }
 }
