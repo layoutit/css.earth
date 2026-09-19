@@ -30,6 +30,8 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { ALMA, horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
 import { observerCamera } from '../terrestrial-layers/observer-camera.mts';
+import { formatBodyMapProduct, type BodyMapObservation } from '../body-map-product.mts';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { bodyMapFits, combineBodyMaps, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from '../jwst/cubes/body-map.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
@@ -60,10 +62,10 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
   const round = (value: number, digits = 4) => +value.toFixed(digits), quantile = (values: number[], q: number) => [...values].sort((a, b) => a - b)[Math.floor(q * (values.length - 1))]!;
   for (const raw of requireArray(record.maps, 'maps')) {
     const entry = requireRecord(raw, 'map'), mapId = requireString(entry.id, 'map id'), grid = requireRecord(entry.grid, 'grid'), limit = requireFiniteNumber(entry.maximumEmissionDegrees, 'maximumEmissionDegrees');
-    const margin = requireFiniteNumber(entry.cutoutRadii, 'cutoutRadii'), placed: BodyMap[] = [], sessions: Record<string, unknown>[] = [];
+    const margin = requireFiniteNumber(entry.cutoutRadii, 'cutoutRadii'), placed: BodyMap[] = [], sessions: Record<string, unknown>[] = [], observations: BodyMapObservation[] = [], frequencies: number[] = [];
     for (const rawSession of requireArray(entry.sessions, 'sessions')) {
       const stated = requireRecord(rawSession, 'session'), sessionId = requireString(stated.id, 'session id'), ephemeris = requireRecord(stated.ephemeris, 'ephemeris'), cutoutPath = resolve(source, requireString(stated.image, 'session image'));
-      let bytes = await readFile(cutoutPath).catch(() => null);
+      let bytes: Buffer | null = await readFile(cutoutPath).catch(() => null);
       if (!bytes) {
         if (options.check) throw new Error(`${id} ${mapId}: the cutout of ${sessionId} is not written yet.`);
         const full = requireRecord(stated.selfcal, 'selfcal'), find = async (name: string) => { for (const root of options.sources ?? []) { const found = await readFile(resolve(root, name)).catch(() => null); if (found) return found; } throw new Error(`${name} is in none of the --raw directories.`); };
@@ -79,6 +81,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
           RMSK: String(rmsKelvin), FLUXSCAL: String(requireFiniteNumber(requireRecord(receipt.fluxScale, 'fluxScale').factor, 'flux scale')), ORIGIN: 'cssEarth tools/objects/interferometry/alma-disc-selfcal.mts' }, [{ name: 'BRIGHTNESS TEMPERATURE', units: 'K', values: cut.values }]);
         written.set(cutoutPath, bytes);
       }
+      if (!bytes) throw new Error(`${id} ${mapId}: no cutout for ${sessionId}.`);
       const primary = readFitsHeader(bytes).header as Record<string, unknown>, plane = readFitsImage(bytes, { start: 2880 });
       const cutout: ThermalCutout = { size: plane.width, arcsecPerPixel: cardNumber(primary, 'PIXSCALE'), midJd: cardNumber(primary, 'MJD-MID') + MJD_EPOCH_JD, rmsKelvin: cardNumber(primary, 'RMSK'), kelvin: plane.values };
       const paths = { observer: requireString(ephemeris.observer), heliocentric: requireString(ephemeris.heliocentric) };
@@ -99,15 +102,27 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         sunRightAscensionDegrees: (Math.atan2(-sunY!, -sunX!) / DEGREE + 360) % 360, sunDeclinationDegrees: Math.asin(-sunZ! / sunRange) / DEGREE,
         pixelAngleMicroradians: cutout.arcsecPerPixel / ARCSEC_PER_RADIAN * 1e6, center: centre.center }, orientation);
       const map = projectBandMap({ width: size, height: size, depth: cutout.kelvin, error: new Float64Array(size * size).fill(cutout.rmsKelvin), continuum: cutout.kelvin }, camera, radiusKm, { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, limit), seen = [...map.depth].filter(Number.isFinite);
-      placed.push(map);
+      placed.push(map); frequencies.push(cardNumber(primary, 'FREQHZ'));
+      observations.push({ id: sessionId, telescope: 'ALMA', instrument: requireString(entry.instrument ?? 'band 6 continuum', 'instrument'), midTimeJd: cutout.midJd, rangeKm: camera.rangeKm,
+        subObserver: { latitudeDegrees: camera.observerLatitude, westLongitudeDegrees: ((camera.observerWestLongitude % 360) + 360) % 360 }, subSolar: { latitudeDegrees: camera.sunLatitude, westLongitudeDegrees: ((camera.sunWestLongitude % 360) + 360) % 360 },
+        angularResolution: { majorArcsec: cardNumber(primary, 'BMAJMAS') / 1000, minorArcsec: cardNumber(primary, 'BMINMAS') / 1000, positionAngleDegrees: cardNumber(primary, 'BPADEG'), basis: 'restoring beam of the self-calibrated image' } });
       sessions.push({ session: sessionId, midJd: round(cutout.midJd, 5), rmsKelvin: round(cutout.rmsKelvin, 2),
         disc: { diameterPixels: round(2 * radiusPixels, 2), centrePixels: centre.center.map(value => round(value, 2)), centreFromCutoutMiddlePixels: centre.center.map(value => round(value - (size - 1) / 2, 2)), blurPixels: centre.blurPixels, fitResidualOverPeak: round(centre.residualOverPeak) },
         camera: { observerLatitude: round(camera.observerLatitude), observerWestLongitude: round(camera.observerWestLongitude), sunLatitude: round(camera.sunLatitude), sunWestLongitude: round(camera.sunWestLongitude), northAzimuthDegrees: round(camera.northAzimuthDegrees), rangeKm: round(camera.rangeKm, 0) },
         map: { areaShare: round(map.areaShare), kelvin: { minimum: round(quantile(seen, 0), 1), median: round(quantile(seen, 0.5), 1), maximum: round(quantile(seen, 1), 1) } } });
     }
     const { map, overlaps } = combineBodyMaps(placed, limit), quantity = requireString(entry.quantity, 'quantity'), units = requireString(entry.units, 'units');
-    written.set(resolve(source, requireString(entry.output, 'output')), bodyMapFits(map, { TELESCOP: 'ALMA', OBJECT: requireString(entry.target), QUANTITY: quantity, NSESSION: String(placed.length) },
-      [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]));
+    const output = requireString(entry.output, 'output'), fits = bodyMapFits(map, { TELESCOP: 'ALMA', OBJECT: requireString(entry.target), QUANTITY: quantity, NSESSION: String(placed.length) },
+      [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
+    written.set(resolve(source, output), fits);
+    // What the map means, beside it. A temperature is the state of the ground at one moment, so several sessions are a mosaic
+    // of snapshots and the record says so; sessions at different frequencies would be different measurements and are refused.
+    if (new Set(frequencies.map(frequency => frequency.toFixed(0))).size > 1) throw new Error(`${id} ${mapId}: the sessions were imaged at different frequencies (${frequencies.join(', ')} Hz); their brightness temperatures are not one measurement.`);
+    written.set(resolve(source, `${output}.body-map.json`), Buffer.from(formatBodyMapProduct({ schema: 'cssearth-body-map@1',
+      definition: { quantity, units, timeDependence: 'instantaneous-state', source: requireString(entry.source, 'source'), method: { kind: 'brightness-temperature', frequencyHz: frequencies[0]!, convention: 'Planck', background: 'none added', from: 'self-calibrated continuum image in Jy per beam over the restoring beam solid angle' } },
+      frame: { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } },
+      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
+      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: { time: { rule: 'mosaic-of-snapshots' as const }, resolution: { rule: 'as-observed' as const } } } : {}) })));
     const seen = [...map.depth].filter(Number.isFinite);
     evidence.push({ id: mapId, sessions, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: sessions[pair.first]!.session, second: sessions[pair.second]!.session, cells: pair.cells, rmsDifferenceKelvin: round(pair.rmsDifference, 2), correlation: round(pair.correlation, 3) })),
       map: { cells: map.seenCells, areaShare: round(map.areaShare), kelvin: { minimum: round(quantile(seen, 0), 1), median: round(quantile(seen, 0.5), 1), maximum: round(quantile(seen, 1), 1) } } });

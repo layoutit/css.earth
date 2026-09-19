@@ -27,6 +27,8 @@ import { observerCamera } from '../../terrestrial-layers/observer-camera.mts';
 import { mastFile } from '../mast.mts';
 import { readImagingProgram } from '../imaging/image3.mts';
 import { bandDepth, openSpectralCube, type Window } from './spectral-cube.mts';
+import { formatBodyMapProduct, type BodyMapObservation } from '../../body-map-product.mts';
+import { sha256 } from '../../../../src/platform/sha256.mts';
 import { bodyMapFits, combineBodyMaps, fitDiscCentre, projectBandMap, topRowFirst, type BodyMap } from './body-map.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../../..');
@@ -56,7 +58,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     const entry = requireRecord(raw, 'map'), mapId = requireString(entry.id, 'map id'), measure = requireRecord(entry.measure, 'measure'), grid = requireRecord(entry.grid, 'grid');
     const recipe = { band: window(measure.band, 'band'), continuum: [window(requireArray(measure.continuum)[0], 'continuum'), window(requireArray(measure.continuum)[1], 'continuum')] as const };
     const limit = requireFiniteNumber(entry.maximumEmissionDegrees, 'maximumEmissionDegrees'), minimum = requireFiniteNumber(entry.minimumDiscPixels, 'minimumDiscPixels');
-    const placed: BodyMap[] = [], cubes: Record<string, unknown>[] = [];
+    const placed: BodyMap[] = [], cubes: Record<string, unknown>[] = [], observations: BodyMapObservation[] = [];
     for (const rawCube of requireArray(entry.cubes, 'cubes')) {
       const stated = requireRecord(rawCube, 'cube'), ephemeris = requireRecord(stated.ephemeris, 'ephemeris');
       const { program } = await readImagingProgram(requireString(stated.program)), band = program.bands.find(other => other.band === stated.band);
@@ -85,14 +87,27 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
         pixelAngleMicroradians: cube.arcsecPerPixel / ARCSEC_PER_RADIAN * 1e6, center: centre.center }, orientation);
       const map = projectBandMap(depth, camera, radiusKm, { width: requireFiniteNumber(grid.width), height: requireFiniteNumber(grid.height) }, limit), seen = [...map.depth].filter(Number.isFinite);
       placed.push(map);
+      // The blur fitted to the disc's edge is the resolution this cube actually had: a Gaussian sigma in pixels, stated as a full width.
+      const blurArcsec = centre.blurPixels * 2.354_82 * cube.arcsecPerPixel;
+      observations.push({ id: band.observation, telescope: 'JWST', instrument: band.band, midTimeJd: (startJd + endJd) / 2, exposureSeconds: (endJd - startJd) * 86_400, rangeKm: camera.rangeKm,
+        subObserver: { latitudeDegrees: camera.observerLatitude, westLongitudeDegrees: ((camera.observerWestLongitude % 360) + 360) % 360 }, subSolar: { latitudeDegrees: camera.sunLatitude, westLongitudeDegrees: ((camera.sunWestLongitude % 360) + 360) % 360 },
+        angularResolution: { majorArcsec: blurArcsec, minorArcsec: blurArcsec, basis: 'full width at half maximum of the Gaussian blur fitted to the disc edge in the continuum image' } });
       cubes.push({ observation: band.observation, program: stated.program, cube: band.level3.name, exposure: { start: cube.primary['DATE-BEG'], end: cube.primary['DATE-END'] },
         disc: { diameterPixels: round(2 * radiusPixels, 2), centrePixels: centre.center.map(value => round(value, 2)), blurPixels: centre.blurPixels, fitResidualOverPeak: round(centre.residualOverPeak) },
         camera: { observerLatitude: round(camera.observerLatitude), observerWestLongitude: round(camera.observerWestLongitude), sunLatitude: round(camera.sunLatitude), sunWestLongitude: round(camera.sunWestLongitude), northAzimuthDegrees: round(camera.northAzimuthDegrees), rangeKm: round(camera.rangeKm, 0) },
         map: { areaShare: round(map.areaShare), depth: { minimum: round(quantile(seen, 0)), median: round(quantile(seen, 0.5)), maximum: round(quantile(seen, 1)) } } });
     }
     const { map, overlaps } = combineBodyMaps(placed, limit), output = requireString(entry.output, 'output'), quantity = requireString(entry.quantity, 'quantity'), units = requireString(entry.units, 'units');
-    written.set(resolve(source, output), bodyMapFits(map, { TELESCOP: 'JWST', OBJECT: requireString(entry.target), QUANTITY: quantity, NCUBES: String(placed.length) },
-      [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]));
+    const fits = bodyMapFits(map, { TELESCOP: 'JWST', OBJECT: requireString(entry.target), QUANTITY: quantity, NCUBES: String(placed.length) },
+      [{ name: quantity, units, values: map.depth }, { name: `${quantity} ERROR`, units, values: map.error }]);
+    // What the map means, beside it: the band and continuum that define the number, the frame, and every cube that went in.
+    written.set(resolve(source, `${output}.body-map.json`), Buffer.from(formatBodyMapProduct({ schema: 'cssearth-body-map@1',
+      definition: { quantity, units, timeDependence: 'surface-property', source: requireString(measure.source, 'measure.source'),
+        method: { kind: 'band-depth', bandMicrometres: recipe.band, continuumMicrometres: recipe.continuum, continuum: 'straight line through the two window means, each at the mean wavelength of its retained samples', depth: '1 - band mean / continuum at the band' } },
+      frame: { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(await readFile(resolve(source, requireString(rotation.path)))), bodyCode: requireFiniteNumber(rotation.body) } },
+      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
+      mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: { time: { rule: 'time-invariant' as const }, resolution: { rule: 'as-observed' as const } } } : {}) })));
+    written.set(resolve(source, output), fits);
     let peak = { value: -Infinity, cell: 0 }; const seen: number[] = [], errors: number[] = [];
     map.depth.forEach((value, cell) => { if (Number.isFinite(value)) { seen.push(value); errors.push(map.error[cell]!); if (value > peak.value) peak = { value, cell }; } });
     evidence.push({ id: mapId, cubes, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: cubes[pair.first]!.observation, second: cubes[pair.second]!.observation, cells: pair.cells, rmsDifference: round(pair.rmsDifference), correlation: round(pair.correlation, 3) })),
