@@ -14,8 +14,8 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { createEmissionField } from '@cssearth/volume-core/fields/emission';
 import { createEmissionMaterial } from '@cssearth/volume-core/materials/component-material';
-import { compilerSlabMaterial, alphaLimitedSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
-import { createEnvelopeSampler, envelopeChromaticity, validateEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
+import { compilerSlabMaterial, lensChannelGainMaterial, validateChannelGain } from '@cssearth/volume-core/materials/slab-material';
+import { createEnvelopeSampler, envelopeChromaticity, envelopeChromaSettings, validateEnvelopeSettings } from '@cssearth/volume-core/fields/simulation-envelope';
 import { physicalToField, angularScale } from '@cssearth/volume-core/coordinates/observer-tangent';
 import { parseCloudAppearance } from '@cssearth/volume-core/materials/cloud-appearance';
 import { record } from '@cssearth/volume-core/contracts/volume-recipe';
@@ -96,7 +96,7 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
   // the sampler still refuses a prior the accepted envelope was not fitted against.
   const envelopeRecord = record(await json(root, parsePin(input.envelope, 'envelope')), 'envelope record');
   assert.equal(envelopeRecord.schema, 'cssearth-simulation-envelope@1');
-  const settings = validateEnvelopeSettings(envelopeRecord.settings);
+  const settings = validateEnvelopeSettings(envelopeRecord.settings), chroma = envelopeChromaSettings(settings);
   const gw = envelopeRecord.width, gh = envelopeRecord.height;
   assert.ok(Number.isInteger(gw) && Number.isInteger(gh), 'Envelope grid must be integral.');
   const gain = envelopeRecord.gain;
@@ -153,7 +153,7 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
     const lensRgb = await sharp(registered).resize(envelopeGrid.width, envelopeGrid.height, { fit: 'fill' }).removeAlpha().raw().toBuffer();
     const lensAlpha = await sharp(maskBytes).resize(envelopeGrid.width, envelopeGrid.height, { fit: 'fill' }).ensureAlpha().raw().toBuffer();
     const lensCoverage = Uint8Array.from({ length: envelopeGrid.width * envelopeGrid.height }, (_, p) => lensAlpha[p * 4 + 3]! >= 250 ? 1 : 0);
-    const envelopeColor = envelopeChromaticity(lensRgb, lensCoverage, envelopeGrid.width, envelopeGrid.height, envelopeGrid.bounds, settings.scalePixels);
+    const envelopeColor = envelopeChromaticity(lensRgb, lensCoverage, envelopeGrid.width, envelopeGrid.height, envelopeGrid.bounds, settings.scalePixels, chroma.halfSaturationQuantile, chroma.skyQuantile, chroma.coverageTaper);
 
     const sampleEmission = (x: number, y: number, z: number, out: Vector3) => {
       const p = physicalToField([x, y, z], distance);
@@ -173,7 +173,10 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
       for (let c = 0; c < 3; c++) out[c] = Math.min(255, Math.max(0, (cw * componentColor[c]! + ew * envelopeRgb[c]!) / (cw + ew)));
       return true;
     };
-    const slabMaterial = alphaLimitedSlabMaterial(compilerSlabMaterial(sampleEmission, sampleMaterial), sampleEmission, exposureGain, fullChromaAlphaByte);
+    // A delivered lens may carry its own per-channel display correction against its own source image; it
+    // straddles the alpha chroma limit exactly as the accepted bake applies it.
+    const slabMaterial = lensChannelGainMaterial(compilerSlabMaterial(sampleEmission, sampleMaterial), sampleEmission,
+      exposureGain, fullChromaAlphaByte, lens.channelGain === undefined ? null : validateChannelGain(lens.channelGain));
 
     const directory = resolve(destination, imageId);
     await mkdir(directory, { recursive: true });

@@ -19,6 +19,7 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { readPreparedReconstruction } from '../../server/services/density-reconstruction.ts';
 import { finiteModelStarsPath } from '../../server/services/finite-lens-bundles.ts';
 import { parseVolumeLensPromotion } from '../../server/workflows/density/volume-lens-promotion.ts';
+import { validateChannelGain } from '@cssearth/volume-core/materials/slab-material';
 
 const sha256 = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const text = (value: unknown, at: string): string => { assert.ok(typeof value === 'string' && value, `Expected text: ${at}`); return value; };
@@ -108,6 +109,7 @@ for (const { lens, result, finite } of lensInputs) {
   assert.equal(baseline.method, 'alignment-density-material-v1');
   const work = record(baseline.request, 'baseline request');
   assert.equal(work.imageId, lens.imageId);
+  const channelGain = record(result.finiteMaterial ?? {}, 'accepted lens material').channelGain;
   const registeredBytes = await readFile(resolve(root, sourceDirectory, 'source/registered-image.png'));
   const registered = await put(`${compact}/lenses/${lens.imageId}/registered.png`, registeredBytes);
   // Only alpha is read from the registered original, so deliver alpha alone, losslessly and at full size.
@@ -125,6 +127,8 @@ for (const { lens, result, finite } of lensInputs) {
     registered, coverage, densityFilter: lens.density, enabledIds: lens.enabledIds,
     provenance: await pinOf(`${objectDirectory}/source/lenses/${lens.imageId}/provenance.json`),
     presentation: { label: lens.label, description: lens.description, sourceUrl: result.subject.sourcePageUrl },
+    // Only when the accepted lens carries one, so a delivery without per-lens correction keeps its exact bytes.
+    ...(channelGain === undefined ? {} : { channelGain: validateChannelGain(channelGain) }),
     brightness: lens.brightness, stars: lens.stars });
 }
 

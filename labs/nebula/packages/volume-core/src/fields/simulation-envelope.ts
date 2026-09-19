@@ -18,6 +18,28 @@ export interface SimulationEnvelopeSettings {
   depthSamples: number;
   /** Image-weighted simulation mass trimmed from each end of the depth range (0.005 keeps 99%). */
   depthTrim: number;
+  /**
+   * Quantile of the smoothed envelope signal at which its chromaticity reaches half trust, so fainter
+   * light keeps proportionally less of its measured colour and the rest is neutral. Lower keeps colour
+   * further out into the halo; higher neutralises more of it. Omitted means the long-standing 0.9.
+   */
+  chromaHalfSaturationQuantile?: number;
+  /**
+   * Quantile of each observed channel taken as this image's sky before its chromaticity is measured.
+   * The long-standing 0.5 is the median of every covered pixel, which for a body that fills much of its
+   * own footprint subtracts real body light, unevenly per channel, and so shifts the hue it reports. A low
+   * quantile is the sky of a footprint the body fills. Omitted means the long-standing 0.5.
+   */
+  chromaSkyQuantile?: number;
+  /**
+   * Blurred-coverage fraction below which a pixel's chromaticity is fully neutral, ramping to its measured
+   * colour at twice that fraction. `fitSimulationEnvelope` already tapers its GAIN across the observed
+   * footprint edge on exactly this fraction, so unobserved sky does not end in a hard cut; the chromaticity
+   * had no such taper and therefore reported a full-strength colour from however few covered pixels a
+   * boundary pixel has, which the outer annulus displays as false saturated patches. Setting this to the
+   * gain's own 0.5 trusts colour exactly where the gain carries light. Omitted means no taper.
+   */
+  chromaCoverageTaper?: number;
 }
 export interface SimulationEnvelopeGrid {
   width: number; height: number; bounds: SkyBounds; zRange: [number, number];
@@ -28,15 +50,47 @@ export interface SimulationEnvelopeGrid {
 export function validateEnvelopeSettings(value: unknown): SimulationEnvelopeSettings {
   if (!value || typeof value !== 'object') throw new TypeError('Envelope settings must be an object.');
   const s = value as Record<string, unknown>;
-  const { scalePixels, fraction, floor, depthSamples, depthTrim } = s;
+  const { scalePixels, fraction, floor, depthSamples, depthTrim, chromaHalfSaturationQuantile, chromaSkyQuantile, chromaCoverageTaper } = s;
   if (typeof scalePixels !== 'number' || !Number.isFinite(scalePixels) || scalePixels < .5 || scalePixels > 128 ||
     typeof fraction !== 'number' || !Number.isFinite(fraction) || fraction < 0 || fraction > 1 ||
     typeof floor !== 'number' || !Number.isFinite(floor) || floor < 0 || floor > 1 ||
     typeof depthSamples !== 'number' || !Number.isInteger(depthSamples) || depthSamples < 8 || depthSamples > 4096 ||
     typeof depthTrim !== 'number' || !Number.isFinite(depthTrim) || depthTrim < 0 || depthTrim >= .25)
     throw new TypeError('Invalid simulation envelope settings.');
-  return { scalePixels, fraction, floor, depthSamples, depthTrim };
+  const bounded = (value: unknown, name: string) => {
+    if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0 || value > 1)
+      throw new TypeError(`Envelope ${name} must be in (0,1].`);
+    return value;
+  };
+  const taper = (value: unknown) => {
+    if (typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value >= 1)
+      throw new TypeError('Envelope chroma coverage taper must be in [0,1).');
+    return value;
+  };
+  // Each key is appended only when authored, so an accepted record without them keeps its exact stored bytes.
+  return {
+    scalePixels, fraction, floor, depthSamples, depthTrim,
+    ...(chromaHalfSaturationQuantile === undefined ? {}
+      : { chromaHalfSaturationQuantile: bounded(chromaHalfSaturationQuantile, 'chroma half-saturation quantile') }),
+    ...(chromaSkyQuantile === undefined ? {} : { chromaSkyQuantile: bounded(chromaSkyQuantile, 'chroma sky quantile') }),
+    // A taper of zero means no taper, so unlike the quantiles its range is closed below and open above.
+    ...(chromaCoverageTaper === undefined ? {} : { chromaCoverageTaper: taper(chromaCoverageTaper) }),
+  };
 }
+
+/** The trust ramp's half-saturation quantile: an authored envelope setting, else the long-standing 0.9. */
+export const DEFAULT_CHROMA_HALF_SATURATION_QUANTILE = .9;
+/** The sky quantile removed before chromaticity is measured: an authored setting, else the median. */
+export const DEFAULT_CHROMA_SKY_QUANTILE = .5;
+/** No footprint-edge taper on chromaticity unless one is authored. */
+export const DEFAULT_CHROMA_COVERAGE_TAPER = 0;
+export interface EnvelopeChromaSettings { halfSaturationQuantile: number; skyQuantile: number; coverageTaper: number }
+/** The authored chroma settings of one envelope, with the long-standing defaults filled in. */
+export const envelopeChromaSettings = (settings: SimulationEnvelopeSettings): EnvelopeChromaSettings => ({
+  halfSaturationQuantile: settings.chromaHalfSaturationQuantile ?? DEFAULT_CHROMA_HALF_SATURATION_QUANTILE,
+  skyQuantile: settings.chromaSkyQuantile ?? DEFAULT_CHROMA_SKY_QUANTILE,
+  coverageTaper: settings.chromaCoverageTaper ?? DEFAULT_CHROMA_COVERAGE_TAPER,
+});
 
 function gaussianKernel(sigma: number): Float64Array {
   const radius = Math.ceil(3 * sigma), kernel = new Float64Array(2 * radius + 1);
@@ -86,19 +140,50 @@ export function createEnvelopeSampler(grid: SimulationEnvelopeGrid, prior: Simul
   };
 }
 
-/** Smoothed, peak-normalized chromaticity of one registered image at envelope scale; neutral where unobserved or black. */
-export function envelopeChromaticity(rgb: ArrayLike<number>, coverage: Uint8Array, width: number, height: number, bounds: SkyBounds, scalePixels: number) {
+/**
+ * Smoothed, peak-normalized chromaticity of one registered image at envelope scale; neutral where
+ * unobserved or black.
+ *
+ * Three authored settings shape what colour this reports; each default is the long-standing behaviour and
+ * `SimulationEnvelopeSettings` documents why each one is authored rather than fixed.
+ *  - `halfSaturationQuantile` places the trust ramp: the smoothed signal at that quantile is where a pixel
+ *    keeps half its measured colour. At the default 0.9 the whole faint halo of a body whose light spans a
+ *    wide dynamic range is neutralised, which reads as a grey halo around a coloured core.
+ *  - `skyQuantile` is the per-channel level removed as this image's sky before any colour is measured.
+ *  - `coverageTaper` fades colour to neutral across the observed footprint edge, the way the gain already
+ *    fades light there.
+ * None of them can invent colour where the image has none, and none of them changes alpha or level.
+ */
+export function envelopeChromaticity(rgb: ArrayLike<number>, coverage: Uint8Array, width: number, height: number, bounds: SkyBounds, scalePixels: number,
+  halfSaturationQuantile: number = DEFAULT_CHROMA_HALF_SATURATION_QUANTILE, skyQuantile: number = DEFAULT_CHROMA_SKY_QUANTILE,
+  coverageTaper: number = DEFAULT_CHROMA_COVERAGE_TAPER) {
+  if (!Number.isFinite(halfSaturationQuantile) || halfSaturationQuantile <= 0 || halfSaturationQuantile > 1)
+    throw new TypeError('Envelope chroma half-saturation quantile must be in (0,1].');
+  if (!Number.isFinite(skyQuantile) || skyQuantile <= 0 || skyQuantile > 1)
+    throw new TypeError('Envelope chroma sky quantile must be in (0,1].');
+  if (!Number.isFinite(coverageTaper) || coverageTaper < 0 || coverageTaper >= 1)
+    throw new TypeError('Envelope chroma coverage taper must be in [0,1).');
   const n = width * height, chroma = new Float32Array(n * 3), weight = blurWeighted(new Float32Array(n).fill(1), coverage, width, height, scalePixels);
-  // Per-channel sky level (median of observed pixels) is removed first; otherwise faint regions take the sky's tint.
-  const sky = [0, 1, 2].map(c => { const v: number[] = []; for (let p = 0; p < n; p++) if (coverage[p]) v.push(rgb[p * 3 + c]!); v.sort((a, b) => a - b); return v.length ? v[v.length >> 1]! : 0; });
+  // The authored per-channel sky level of the observed pixels is removed first (the median by default);
+  // otherwise faint regions take the sky's tint.
+  const sky = [0, 1, 2].map(c => { const v: number[] = []; for (let p = 0; p < n; p++) if (coverage[p]) v.push(rgb[p * 3 + c]!); v.sort((a, b) => a - b);
+    return v.length ? v[Math.min(v.length - 1, Math.floor(v.length * skyQuantile))]! : 0; });
   const channels = [0, 1, 2].map(c => blurWeighted(Float32Array.from({ length: n }, (_, p) => Math.max(0, rgb[p * 3 + c]! - sky[c]!)), coverage, width, height, scalePixels));
   const signal = new Float64Array(n);
   for (let p = 0; p < n; p++) signal[p] = weight[p]! > 1e-6 ? Math.max(channels[0]![p]!, channels[1]![p]!, channels[2]![p]!) / weight[p]! : 0;
-  const observed = Array.from(signal).filter((_, p) => coverage[p] && signal[p]! > 0).sort((a, b) => a - b), halfSaturation = observed.length ? observed[Math.floor(observed.length * .9)]! : 1;
+  const observed = Array.from(signal).filter((_, p) => coverage[p] && signal[p]! > 0).sort((a, b) => a - b);
+  const halfSaturation = observed.length ? observed[Math.min(observed.length - 1, Math.floor(observed.length * halfSaturationQuantile))]! : 1;
+  // The footprint-edge taper reads the same blurred coverage fraction the gain tapers on, so colour and
+  // light fade out together instead of a tapered gain carrying a full-strength extrapolated colour.
+  const blurredOnes = coverageTaper > 0 ? blurWeighted(new Float32Array(n).fill(1), new Float32Array(n).fill(1), width, height, scalePixels) : null;
   for (let p = 0; p < n; p++) {
     const values = channels.map(channel => weight[p]! > 1e-6 ? channel[p]! / weight[p]! : 0), peak = Math.max(...values);
     // Faint light is increasingly neutral: its colour is dominated by noise and residual sky, not the galaxy.
-    const trust = signal[p]! / (signal[p]! + halfSaturation);
+    let trust = signal[p]! / (signal[p]! + halfSaturation);
+    if (blurredOnes) {
+      const inside = blurredOnes[p]! > 0 ? weight[p]! / blurredOnes[p]! : 0;
+      trust *= Math.min(1, Math.max(0, (inside - coverageTaper) / coverageTaper));
+    }
     for (let c = 0; c < 3; c++) chroma[p * 3 + c] = peak > 0 ? 255 * (1 - trust) + trust * 255 * values[c]! / peak : 255;
   }
   const grid = { width, height, bounds }, scratch = [0, 0, 0];
